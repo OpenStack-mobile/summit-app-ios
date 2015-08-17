@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		19B8BE738E1BC99F4F346406 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3664E55F357B389187B1E46C /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CA13BE5E1B78EEE9007BFD34 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13BE5D1B78EEE9007BFD34 /* EventDetailViewController.swift */; };
-		CA13BE601B78EF09007BFD34 /* EventDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13BE5F1B78EF09007BFD34 /* EventDetailPresenter.swift */; };
-		CA13BE621B78EF21007BFD34 /* EventDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13BE611B78EF21007BFD34 /* EventDetailInteractor.swift */; };
-		CA13BE641B78EF41007BFD34 /* EventDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13BE631B78EF41007BFD34 /* EventDetailWireframe.swift */; };
 		CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */; };
 		CA9E42501B7B9667005FDD22 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42401B7B9667005FDD22 /* Company.swift */; };
 		CA9E42521B7B9667005FDD22 /* PresentationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42421B7B9667005FDD22 /* PresentationCategory.swift */; };
@@ -65,6 +61,10 @@
 		CAF2AA481B8271C100D8E595 /* SummitTypeDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA381B8271C100D8E595 /* SummitTypeDeserializer.swift */; };
 		CAF2AA491B8271C100D8E595 /* VenueDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA391B8271C100D8E595 /* VenueDeserializer.swift */; };
 		CAF2AA4A1B8271C100D8E595 /* VenueRoomDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA3A1B8271C100D8E595 /* VenueRoomDeserializer.swift */; };
+		CAF2AA521B828E7C00D8E595 /* EventDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA4D1B828E7C00D8E595 /* EventDetailInteractor.swift */; };
+		CAF2AA531B828E7C00D8E595 /* EventDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */; };
+		CAF2AA541B828E7C00D8E595 /* EventDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA501B828E7C00D8E595 /* EventDetailPresenter.swift */; };
+		CAF2AA551B828E7C00D8E595 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,10 +90,6 @@
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA13BE5D1B78EEE9007BFD34 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
-		CA13BE5F1B78EF09007BFD34 /* EventDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailPresenter.swift; sourceTree = "<group>"; };
-		CA13BE611B78EF21007BFD34 /* EventDetailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailInteractor.swift; sourceTree = "<group>"; };
-		CA13BE631B78EF41007BFD34 /* EventDetailWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailWireframe.swift; sourceTree = "<group>"; };
 		CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailAssembly.swift; sourceTree = "<group>"; };
 		CA9E42401B7B9667005FDD22 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		CA9E42421B7B9667005FDD22 /* PresentationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationCategory.swift; sourceTree = "<group>"; };
@@ -152,6 +148,10 @@
 		CAF2AA381B8271C100D8E595 /* SummitTypeDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTypeDeserializer.swift; sourceTree = "<group>"; };
 		CAF2AA391B8271C100D8E595 /* VenueDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDeserializer.swift; sourceTree = "<group>"; };
 		CAF2AA3A1B8271C100D8E595 /* VenueRoomDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDeserializer.swift; sourceTree = "<group>"; };
+		CAF2AA4D1B828E7C00D8E595 /* EventDetailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailInteractor.swift; sourceTree = "<group>"; };
+		CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailWireframe.swift; sourceTree = "<group>"; };
+		CAF2AA501B828E7C00D8E595 /* EventDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailPresenter.swift; sourceTree = "<group>"; };
+		CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		D69C9CE108E852E2F1F57A45 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,34 +202,6 @@
 				A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		CA13BE5A1B78EE68007BFD34 /* Event Detail */ = {
-			isa = PBXGroup;
-			children = (
-				CA13BE5C1B78EE9D007BFD34 /* Business Logic */,
-				CA13BE5B1B78EE88007BFD34 /* User Interface */,
-				CA13BE631B78EF41007BFD34 /* EventDetailWireframe.swift */,
-			);
-			name = "Event Detail";
-			path = "../../../TestTyphoon/TestTyphoon/Modules/Event Detail";
-			sourceTree = "<group>";
-		};
-		CA13BE5B1B78EE88007BFD34 /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-				CA13BE5D1B78EEE9007BFD34 /* EventDetailViewController.swift */,
-				CA13BE5F1B78EF09007BFD34 /* EventDetailPresenter.swift */,
-			);
-			path = "User Interface";
-			sourceTree = "<group>";
-		};
-		CA13BE5C1B78EE9D007BFD34 /* Business Logic */ = {
-			isa = PBXGroup;
-			children = (
-				CA13BE611B78EF21007BFD34 /* EventDetailInteractor.swift */,
-			);
-			path = "Business Logic";
 			sourceTree = "<group>";
 		};
 		CA90C3DB1B73912200136CC5 /* Assembly */ = {
@@ -340,7 +312,7 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CA13BE5A1B78EE68007BFD34 /* Event Detail */,
+				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
 				CADDDBB11B73D1CA008F742E /* Menu */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
 			);
@@ -451,6 +423,33 @@
 				CAF2AA3A1B8271C100D8E595 /* VenueRoomDeserializer.swift */,
 			);
 			path = Deserialization;
+			sourceTree = "<group>";
+		};
+		CAF2AA4B1B828E7C00D8E595 /* Event Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CAF2AA4C1B828E7C00D8E595 /* Business Logic */,
+				CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */,
+				CAF2AA4F1B828E7C00D8E595 /* User Interface */,
+			);
+			path = "Event Detail";
+			sourceTree = "<group>";
+		};
+		CAF2AA4C1B828E7C00D8E595 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CAF2AA4D1B828E7C00D8E595 /* EventDetailInteractor.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		CAF2AA4F1B828E7C00D8E595 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CAF2AA501B828E7C00D8E595 /* EventDetailPresenter.swift */,
+				CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */,
+			);
+			path = "User Interface";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,7 +699,6 @@
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
 				CAD9060F1B72B34F00BA5647 /* AppDelegate.swift in Sources */,
 				CAD6B3341B7E2B0300D62023 /* BaseEntity.swift in Sources */,
-				CA13BE5E1B78EEE9007BFD34 /* EventDetailViewController.swift in Sources */,
 				CA9E42561B7B9667005FDD22 /* SummitGeoLocatedLocation.swift in Sources */,
 				CADDDBA71B73D1BB008F742E /* Presentation.swift in Sources */,
 				CAF2AA451B8271C100D8E595 /* PresentationSpeakerDeserializer.swift in Sources */,
@@ -711,13 +709,12 @@
 				CAF2AA471B8271C100D8E595 /* SummitLocationDeserializer.swift in Sources */,
 				CAF2AA491B8271C100D8E595 /* VenueDeserializer.swift in Sources */,
 				CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */,
-				CA13BE601B78EF09007BFD34 /* EventDetailPresenter.swift in Sources */,
 				CADDDBA51B73D1BB008F742E /* Member.swift in Sources */,
 				CAF2AA461B8271C100D8E595 /* SummitDeserializer.swift in Sources */,
 				CADDDBC21B74F193008F742E /* GeneralSchedulePresenter.swift in Sources */,
 				CADDDBA91B73D1BB008F742E /* PresentationSpeaker.swift in Sources */,
-				CA13BE641B78EF41007BFD34 /* EventDetailWireframe.swift in Sources */,
 				CA9E42521B7B9667005FDD22 /* PresentationCategory.swift in Sources */,
+				CAF2AA531B828E7C00D8E595 /* EventDetailWireframe.swift in Sources */,
 				CADDDBAF1B73D1BB008F742E /* SummitLocation.swift in Sources */,
 				CAF2AA431B8271C100D8E595 /* PresentationCategoryDeserializer.swift in Sources */,
 				CADDDBBA1B73D94F008F742E /* GeneralScheduleWireframe.swift in Sources */,
@@ -726,8 +723,10 @@
 				CA9E42611B7BAF8A005FDD22 /* RealmAssembly.swift in Sources */,
 				CAF2AA441B8271C100D8E595 /* PresentationDeserializer.swift in Sources */,
 				CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */,
+				CAF2AA541B828E7C00D8E595 /* EventDetailPresenter.swift in Sources */,
 				CAF2AA421B8271C100D8E595 /* KeyValueDeserializer.swift in Sources */,
 				CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */,
+				CAF2AA551B828E7C00D8E595 /* EventDetailViewController.swift in Sources */,
 				CA9E425E1B7B9667005FDD22 /* VenueRoom.swift in Sources */,
 				CAF2AA3B1B8271C100D8E595 /* DatabaseInitProcess.swift in Sources */,
 				CADDDBB61B73D1CA008F742E /* MenuViewController.swift in Sources */,
@@ -743,8 +742,8 @@
 				CA9E42581B7B9667005FDD22 /* SummitType.swift in Sources */,
 				CAD6B3361B7E2BC100D62023 /* KeyValueEntity.swift in Sources */,
 				CADDDBBE1B74E614008F742E /* GeneralScheduleAssembly.swift in Sources */,
-				CA13BE621B78EF21007BFD34 /* EventDetailInteractor.swift in Sources */,
 				CAF2AA3D1B8271C100D8E595 /* DeserializerFactory.swift in Sources */,
+				CAF2AA521B828E7C00D8E595 /* EventDetailInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,17 +8,25 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 public class DatabaseInitProcess {
     var deserializerFactory = DeserializerFactory()
+    var realm = try! Realm()
     
-    public func runAsync(data: NSData) -> Summit{
+    public func runAsync(data: NSData){
         let json = JSON(data: data)
         let summit : Summit
         var deserializer : DeserializerProtocol!
         
+        realm.deleteAll()
+        
         deserializer = deserializerFactory.create(DeserializerFactories.Summit)
         summit = deserializer.deserialize(json["summit"]) as! Summit
-        return summit
+        
+        realm.write { () -> Void in
+            self.realm.add(summit)
+        }
+        
     }
 }
