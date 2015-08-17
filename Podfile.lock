@@ -1,0 +1,60 @@
+PODS:
+  - Crashlytics (3.1.0)
+  - Fabric (1.2.8):
+    - Fabric/Base (= 1.2.8)
+  - Fabric/Base (1.2.8)
+  - OCMock (2.0.1)
+  - Realm (0.94.1):
+    - Realm/Headers (= 0.94.1)
+  - Realm/Headers (0.94.1)
+  - RealmSwift (0.94.1):
+    - Realm (= 0.94.1)
+  - SwiftyJSON (2.2.1)
+  - SWRevealViewController (2.3.0)
+  - Typhoon (3.2.5):
+    - Typhoon/no-arc (= 3.2.5)
+  - Typhoon/no-arc (3.2.5)
+
+DEPENDENCIES:
+  - Crashlytics
+  - Fabric
+  - OCMock (~> 2.0.1)
+  - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
+  - SWRevealViewController
+  - Typhoon
+
+EXTERNAL SOURCES:
+  Realm:
+    :branch: swift-2.0
+    :git: https://github.com/realm/realm-cocoa.git
+  RealmSwift:
+    :branch: swift-2.0
+    :git: https://github.com/realm/realm-cocoa.git
+  SwiftyJSON:
+    :branch: xcode7
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  Realm:
+    :commit: 59d2e849a063fd5150ef93465714db72bf9c4dad
+    :git: https://github.com/realm/realm-cocoa.git
+  RealmSwift:
+    :commit: 59d2e849a063fd5150ef93465714db72bf9c4dad
+    :git: https://github.com/realm/realm-cocoa.git
+  SwiftyJSON:
+    :commit: a0fe1be5251916982475b12d7d699a1d943ae88b
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+SPEC CHECKSUMS:
+  Crashlytics: 93e2f86363d53c002c6366a9d87e41f2eaee87c3
+  Fabric: a9eabe53915e9f1db55a84dd2838737928675878
+  OCMock: 7a839b55abfb78e8ec3bf6eaa3cdcc567ac71d2a
+  Realm: 567b454e3c452c0c59af719c4a8c2a17fd11fae1
+  RealmSwift: 1cfcf6f9bd4de8674797d000de346d9588ca2028
+  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
+  Typhoon: 6f39c3ede688d1ca9734087a938b101e193096a4
+
+COCOAPODS: 0.38.2
