@@ -8,12 +8,13 @@
 
 import UIKit
 import Typhoon
+import RealmSwift
 
-public class DatabaseInitProcessAssembly: TyphoonAssembly {
+public class SummitDataStoreAssembly: TyphoonAssembly {
 
-    public dynamic func databaseInitProcess() -> AnyObject {
+    public dynamic func summitDataStore() -> AnyObject {
 
-        return TyphoonDefinition.withClass(DatabaseInitProcess.self) {
+        return TyphoonDefinition.withClass(SummitDataStore.self) {
             (definition) in
             definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
         }
@@ -43,6 +44,7 @@ public class DatabaseInitProcessAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(DeserializerStorage.self) {
             (definition) in
             
+            definition.scope = TyphoonScope.Singleton
         }
     }
     
@@ -127,6 +129,7 @@ public class DatabaseInitProcessAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(PresentationCategoryDeserializer.self) {
             (definition) in
             
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
         }
     }
     

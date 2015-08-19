@@ -11,26 +11,35 @@ import SwiftyJSON
 
 public class VenueDeserializer: NSObject, DeserializerProtocol {
 
-    var deserializerStorage = DeserializerStorage()
-    var deserializerFactory = DeserializerFactory()
+    var deserializerStorage: DeserializerStorage!
+    var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json: JSON) -> BaseEntity {
-        var deserializer = deserializerFactory.create(DeserializerFactories.SummitLocation)
-        let summitLocation = deserializer.deserialize(json) as! SummitLocation
-        let venue = Venue()
-        venue.id = json["id"].intValue
-        venue.locationDescription = summitLocation.locationDescription
-        venue.lat = json["lat"].stringValue
-        venue.long = json["long"].stringValue
-        venue.long = json["address"].stringValue
+        let venue : Venue
         
-        var venueRoom: VenueRoom
-        deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
-        for (_, venueRoomJSON) in json["rooms"] {
-            venueRoom = deserializer.deserialize(venueRoomJSON) as! VenueRoom
-            venue.venueRooms.append(venueRoom)
+        if let venueId = json.int {
+            venue = deserializerStorage.get(venueId)
+        }
+        else {
+            var deserializer = deserializerFactory.create(DeserializerFactories.SummitLocation)
+            let summitLocation = deserializer.deserialize(json) as! SummitLocation
+            venue = Venue()
+            venue.id = json["id"].intValue
+            venue.locationDescription = summitLocation.locationDescription
+            venue.lat = json["lat"].stringValue
+            venue.long = json["long"].stringValue
+            venue.long = json["address"].stringValue
             
-            deserializerStorage.add(venueRoom)
+            var venueRoom: VenueRoom
+            deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
+            for (_, venueRoomJSON) in json["rooms"] {
+                venueRoom = deserializer.deserialize(venueRoomJSON) as! VenueRoom
+                venue.venueRooms.append(venueRoom)
+                
+                deserializerStorage.add(venueRoom)
+            }
+            
+            deserializerStorage.add(venue)
         }
         
         return venue

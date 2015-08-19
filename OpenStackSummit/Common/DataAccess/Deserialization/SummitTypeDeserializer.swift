@@ -11,7 +11,7 @@ import SwiftyJSON
 
 public class SummitTypeDeserializer: KeyValueDeserializer, DeserializerProtocol {
     
-    var deserializerStorage = DeserializerStorage()
+    var deserializerStorage: DeserializerStorage!
     
     public func deserialize(json : JSON) -> BaseEntity {
         let summitType : SummitType

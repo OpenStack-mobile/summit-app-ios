@@ -9,8 +9,8 @@ import UIKit
 import SwiftyJSON
 
 public class SummitDeserializer: NSObject, DeserializerProtocol {
-    var deserializerStorage = DeserializerStorage()
-    var deserializerFactory = DeserializerFactory()
+    var deserializerStorage: DeserializerStorage!
+    var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json : JSON) -> BaseEntity {
         let summit = Summit()

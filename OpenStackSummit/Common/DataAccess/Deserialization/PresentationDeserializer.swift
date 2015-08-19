@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 public class PresentationDeserializer: NSObject, DeserializerProtocol {
-    var deserializerFactory = DeserializerFactory()
+    var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json: JSON) -> BaseEntity {
         let presentation = Presentation()

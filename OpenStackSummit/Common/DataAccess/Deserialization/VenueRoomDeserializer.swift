@@ -10,8 +10,8 @@ import UIKit
 import SwiftyJSON
 
 public class VenueRoomDeserializer: NSObject, DeserializerProtocol {
-    var deserializerFactory = DeserializerFactory()
-    var deserializerStorage = DeserializerStorage()
+    var deserializerFactory: DeserializerFactory!
+    var deserializerStorage: DeserializerStorage!
     
     public func deserialize(json: JSON) -> BaseEntity {
         let venueRoom : VenueRoom
