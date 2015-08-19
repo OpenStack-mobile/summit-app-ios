@@ -11,10 +11,20 @@ import UIKit
 class GeneralScheduleInteractor: NSObject {
     var delegate : GeneralSchedulePresenter?
     
+    var summitDataStore : SummitDataStore
+    let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
+    
+    override init() {
+        summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
+    }
+    
     func getScheduleEventsAsync(){
         if (delegate != nil) {
-            let events = ["Event1", "Event2", "Event3"]
-            delegate?.reloadSchedule(events)
+            summitDataStore.getAll(){
+                (result) in
+                let summit = result.first!
+                self.delegate?.reloadSchedule(summit.events.map{$0})
+            }
         }
     }
 }

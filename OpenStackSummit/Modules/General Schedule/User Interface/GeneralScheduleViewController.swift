@@ -18,7 +18,7 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     
     var presenter : GeneralSchedulePresenter?
-    var events : [String]?
+    var events : [SummitEvent]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,9 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
         self.tableView.dataSource = self
         
         menuButton.target = self.revealViewController()
-        menuButton.action = Selector("rightRevealToggle:")
+        menuButton.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         self.presenter?.reloadScheduleAsync()
     }
     
@@ -51,7 +52,7 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let eventText = events![indexPath.row]
+        let eventText = events![indexPath.row].eventDescription
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
         

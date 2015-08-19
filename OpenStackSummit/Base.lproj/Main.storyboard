@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
     </dependencies>
     <scenes>
         <!--Reveal View Controller-->
@@ -21,7 +21,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="fDG-vB-m6J" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="Unt-Zf-XNU"/>
-                        <segue destination="oPA-Xe-cXw" kind="custom" identifier="sw_right" customClass="SWRevealViewControllerSegueSetController" id="5ak-Yc-8sh"/>
+                        <segue destination="oPA-Xe-cXw" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="5ak-Yc-8sh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTH-wm-hoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -119,7 +119,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="Bp1-tr-mae">
-                        <barButtonItem key="rightBarButtonItem" image="menu" id="yy8-1D-Wb1"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="yy8-1D-Wb1"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

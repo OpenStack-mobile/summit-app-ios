@@ -18,7 +18,7 @@ class GeneralSchedulePresenter: NSObject {
         self.interactor?.getScheduleEventsAsync()
     }
     
-    func reloadSchedule(events: [String]) {
+    func reloadSchedule(events: [SummitEvent]) {
         self.viewController?.events = events;
         self.viewController?.reloadSchedule()
     }
