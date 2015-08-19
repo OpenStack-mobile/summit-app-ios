@@ -10,7 +10,22 @@ import UIKit
 import SwiftyJSON
 
 public class SummitTypeDeserializer: KeyValueDeserializer, DeserializerProtocol {
+    
+    var deserializerStorage = DeserializerStorage()
+    
     public func deserialize(json : JSON) -> BaseEntity {
-        return super.deserialize(json) as SummitType
+        let summitType : SummitType
+        
+        if let summitTypeId = json.int {
+            summitType = deserializerStorage.get(summitTypeId)
+        }
+        else {
+            summitType = super.deserialize(json) as SummitType
+            if(!deserializerStorage.exist(summitType)) {
+                deserializerStorage.add(summitType)
+            }
+        }
+        
+        return summitType
     }
 }

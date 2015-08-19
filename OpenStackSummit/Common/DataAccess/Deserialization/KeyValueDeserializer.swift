@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class KeyValueDeserializer  {
+public class KeyValueDeserializer : NSObject {
     
     public func deserialize<T : KeyValueEntity>(element: JSON) -> T {
         let entity = T()

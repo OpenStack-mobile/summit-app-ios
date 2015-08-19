@@ -10,8 +10,21 @@ import UIKit
 import SwiftyJSON
 
 public class CompanyDeserializer: KeyValueDeserializer, DeserializerProtocol {
-
+    var deserializerStorage = DeserializerStorage()
+    
     public func deserialize(json : JSON) -> BaseEntity {
-        return super.deserialize(json) as Company
+        let company : Company
+        
+        if let companyId = json.int {
+            company = deserializerStorage.get(companyId)
+        }
+        else {
+            company = super.deserialize(json) as Company
+            if(!deserializerStorage.exist(company)) {
+                deserializerStorage.add(company)
+            }
+        }
+        
+        return company
     }
 }

@@ -9,27 +9,26 @@
 import UIKit
 import SwiftyJSON
 
-public class VenueDeserializer: DeserializerProtocol {
+public class VenueDeserializer: NSObject, DeserializerProtocol {
 
     var deserializerStorage = DeserializerStorage()
     var deserializerFactory = DeserializerFactory()
     
     public func deserialize(json: JSON) -> BaseEntity {
         var deserializer = deserializerFactory.create(DeserializerFactories.SummitLocation)
+        let summitLocation = deserializer.deserialize(json) as! SummitLocation
         let venue = Venue()
         venue.id = json["id"].intValue
-        venue.summitLocation = deserializer.deserialize(json) as! SummitLocation
+        venue.locationDescription = summitLocation.locationDescription
         venue.lat = json["lat"].stringValue
         venue.long = json["long"].stringValue
         venue.long = json["address"].stringValue
         
         var venueRoom: VenueRoom
         deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
-        for (key, venueRoomJSON) in json["rooms"] {
+        for (_, venueRoomJSON) in json["rooms"] {
             venueRoom = deserializer.deserialize(venueRoomJSON) as! VenueRoom
-            if(!self.deserializerStorage.exist(venueRoom)) {
-                venue.venueRooms.append(venueRoom)
-            }
+            venue.venueRooms.append(venueRoom)
             
             deserializerStorage.add(venueRoom)
         }

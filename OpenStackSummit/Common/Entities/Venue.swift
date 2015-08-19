@@ -9,9 +9,8 @@
 import Foundation
 import RealmSwift
 
-public class Venue: BaseEntity {
+public class Venue: SummitLocation {
 
-    public dynamic var summitLocation = SummitLocation()
     public dynamic var address = ""
     public dynamic var lat = ""
     public dynamic var long = ""

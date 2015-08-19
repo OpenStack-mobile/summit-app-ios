@@ -10,9 +10,8 @@ import Foundation
 import RealmSwift
 
 public class Presentation: BaseEntity {
-
-    public dynamic var summitEvent : SummitEvent!
-    public let speakers = List<PresentationSpeaker>()
+    
+    public let speakers = List<Member>()
     public dynamic var category: PresentationCategory!
     public let tags = List<Tag>()
 }

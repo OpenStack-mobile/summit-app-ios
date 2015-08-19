@@ -9,8 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class PresentationCategory: BaseEntity {
-
-    public dynamic var name = ""
+public class PresentationCategory: KeyValueEntity {
 
 }

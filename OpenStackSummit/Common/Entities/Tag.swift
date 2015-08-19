@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class Tag: BaseEntity {
+public class Tag: KeyValueEntity {
 
-    public dynamic var name = ""
 }

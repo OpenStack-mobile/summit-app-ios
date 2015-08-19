@@ -18,5 +18,7 @@ public class SummitEvent: BaseEntity {
     public dynamic var eventType = EventType()
     public let summitTypes = List<SummitType>()
     public let sponsors = List<Company>()
-
+    public dynamic var presentation : Presentation?
+    public dynamic var venue : Venue?
+    public dynamic var venueRoom : VenueRoom?
 }

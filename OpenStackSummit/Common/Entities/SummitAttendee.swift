@@ -11,7 +11,6 @@ import RealmSwift
 
 public class SummitAttendee: BaseEntity {
 
-    public dynamic var member : Member!
     let summitTypes = List<SummitType>()
 
 }

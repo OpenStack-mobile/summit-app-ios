@@ -9,9 +9,22 @@
 import UIKit
 import SwiftyJSON
 
-public class PresentationCategoryDeserializer: DeserializerProtocol {
-    public func deserialize(json: JSON) -> BaseEntity {
-        let presentationCategory = PresentationCategory()
+public class PresentationCategoryDeserializer: KeyValueDeserializer, DeserializerProtocol {
+    var deserializerStorage = DeserializerStorage()
+    
+    public func deserialize(json : JSON) -> BaseEntity {
+        
+        let presentationCategory : PresentationCategory
+        
+        if let presentationCategoryId = json.int {
+            presentationCategory = deserializerStorage.get(presentationCategoryId)
+        }
+        else {
+            presentationCategory = super.deserialize(json) as PresentationCategory
+            if(!deserializerStorage.exist(presentationCategory)) {
+                deserializerStorage.add(presentationCategory)
+            }
+        }
         
         return presentationCategory
     }

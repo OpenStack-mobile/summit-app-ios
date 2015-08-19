@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class PresentationSpeakerDeserializer: DeserializerProtocol {
+public class PresentationSpeakerDeserializer: NSObject, DeserializerProtocol {
     
     public func deserialize(json: JSON) -> BaseEntity {
         let presentationSpeaker = PresentationSpeaker()

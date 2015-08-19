@@ -11,7 +11,6 @@ import RealmSwift
 
 public class VenueRoom: SummitLocation {
 
-    public dynamic var summitLocation = SummitLocation()
     public dynamic var capacity = 0
     
 }

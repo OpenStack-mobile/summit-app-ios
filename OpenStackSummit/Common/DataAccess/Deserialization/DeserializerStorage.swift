@@ -17,13 +17,14 @@ public class DeserializerStorage: NSObject {
             deserializedEntityDictionary[className] = Dictionary<Int, T>()
         }
         
+        NSLog("className = \(className)")
         deserializedEntityDictionary[className]![entity.id] = entity
     }
     
     public func get<T : BaseEntity>(id: Int) -> T {
         let entity = T()
         let className = _stdlib_getDemangledTypeName(entity)
-        
+        NSLog("className = \(className)")
         return deserializedEntityDictionary[className]![id] as! T
     }
     
@@ -36,8 +37,6 @@ public class DeserializerStorage: NSObject {
     
     public func exist<T : BaseEntity>(entity: T) -> Bool {
         let className = _stdlib_getDemangledTypeName(entity)
-        //NSLog("\(deserializedEntityDictionary[entity.className])")
-        NSLog("class name: \(className)")
         return deserializedEntityDictionary[className]?[entity.id] != nil
     }
 }

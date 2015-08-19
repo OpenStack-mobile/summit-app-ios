@@ -10,7 +10,21 @@ import UIKit
 import SwiftyJSON
 
 public class EventTypeDeserializer: KeyValueDeserializer, DeserializerProtocol {
+    var deserializerStorage = DeserializerStorage()
+    
     public func deserialize(json : JSON) -> BaseEntity {
-        return super.deserialize(json) as EventType
+        let eventType : EventType
+        
+        if let eventTypeId = json.int {
+            eventType = deserializerStorage.get(eventTypeId)
+        }
+        else {
+            eventType = super.deserialize(json) as EventType
+            if(!self.deserializerStorage.exist(eventType)) {
+                deserializerStorage.add(eventType)
+            }
+        }
+        
+        return eventType
     }
 }
