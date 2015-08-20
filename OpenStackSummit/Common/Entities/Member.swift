@@ -10,6 +10,9 @@ import Foundation
 import RealmSwift
 
 public class Member: BaseEntity {
+    public dynamic var firstName = ""
+    public dynamic var lastName = ""
+    public dynamic var email = ""
     public let scheduledEvents = List<SummitEvent>()
     public let bookmarkedEvents = List<SummitEvent>()
     public dynamic var speakerRole : PresentationSpeaker?
