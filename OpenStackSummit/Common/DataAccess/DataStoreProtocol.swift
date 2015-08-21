@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol SummitDataStoreProtocol {
+public protocol DataStoreProtocol {
     typealias EntityType
     
     func get(id: Int, completitionBlock : (EntityType) -> Void)

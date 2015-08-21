@@ -9,16 +9,21 @@
 import UIKit
 import XCTest
 import OpenStackSummit
+import RealmSwift
 
 class DeserializerStorageTests: XCTestCase {
     
+    var realm = try! Realm()
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        realm.write {
+            self.realm.deleteAll()
+        }
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
@@ -64,6 +69,7 @@ class DeserializerStorageTests: XCTestCase {
     
     func test_Add_TwoTimesSameCompany_StorageContainsSingleCompany() {
         //Arrange
+        
         let deserializerStorage = DeserializerStorage()
         let companyId = 1
         let company = Company()
@@ -81,6 +87,7 @@ class DeserializerStorageTests: XCTestCase {
     
     func test_Add_TwoDifferentCompanies_StorageContainsBothCompanies() {
         //Arrange
+        
         let deserializerStorage = DeserializerStorage()
         let companyId1 = 1
         let company1 = Company()
@@ -103,6 +110,7 @@ class DeserializerStorageTests: XCTestCase {
     
     func test_Exist_CompanyNotPresentOnStorage_ReturnsFalse() {
         //Arrange
+        
         let deserializerStorage = DeserializerStorage()
         let companyId = 1
         let company = Company()
@@ -116,8 +124,9 @@ class DeserializerStorageTests: XCTestCase {
         XCTAssertFalse(exist)
     }
     
-    func test_Exist_CompanyPresentOnStorage_ReturnsTrue() {
+    func test_Exist_CompanyPresentOnMemoryStorage_ReturnsTrue() {
         //Arrange
+        
         let deserializerStorage = DeserializerStorage()
         let companyId = 1
         let company = Company()
@@ -131,5 +140,37 @@ class DeserializerStorageTests: XCTestCase {
         //Assert
         XCTAssertTrue(exist)
     }
-    
+
+    func test_Exist_CompanyPresentOnDatabaseStorage_ReturnsTrue() {
+        //Arrange
+        let deserializerStorage = DeserializerStorage()
+        let companyId = 1
+        let company = Company()
+        company.id = companyId
+        realm.write {
+            self.realm.add(company)
+        }
+        
+        //Act
+        let exist = deserializerStorage.exist(company)
+        
+        //Assert
+        XCTAssertTrue(exist)
+    }
+
+    func test_Clear_InMemoryStorageContainsOneCompany_InMemoryStorageIsEmpty() {
+        //Arrange
+        let deserializerStorage = DeserializerStorage()
+        let companyId = 1
+        let company = Company()
+        company.id = companyId
+        
+        //Act
+        deserializerStorage.add(company)
+        deserializerStorage.clear()
+        
+        //Assert
+        let companies : [Company] = deserializerStorage.getAll()
+        XCTAssertEqual(0, companies.count)
+    }
 }
