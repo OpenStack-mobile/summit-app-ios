@@ -31,7 +31,7 @@ class MemberDataStoreTests: XCTestCase {
         // Arrange
         let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
         let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
-        summitDataStore.getAll(){
+        summitDataStore.getActive(){
             (result) in
         }
         
@@ -50,6 +50,10 @@ class MemberDataStoreTests: XCTestCase {
             XCTAssertEqual(email, member?.email)
             XCTAssertEqual(1, member?.bookmarkedEvents.count)
             XCTAssertEqual(1, member?.scheduledEvents.count)
+            XCTAssertEqual(1, member?.scheduledEvents.first!.id)
+            XCTAssertEqual(2, member?.scheduledEvents.first!.summitTypes.count)
+            XCTAssertEqual(2, member?.bookmarkedEvents.first!.id)
+            XCTAssertEqual(1, member?.bookmarkedEvents.first!.summitTypes.count)
             expectation.fulfill()
         }
         

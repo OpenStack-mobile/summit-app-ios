@@ -13,5 +13,4 @@ public protocol DataStoreProtocol {
     
     func get(id: Int, completitionBlock : (EntityType) -> Void)
     func saveOrUpdate(entity: EntityType, completitionBlock : (EntityType) -> Void)
-    func delete(entity: EntityType, completitionBlock : () -> Void)
 }

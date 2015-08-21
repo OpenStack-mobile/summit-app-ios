@@ -27,14 +27,14 @@ class SummitDataStoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_getAll_thereIsNoSummitOnLocalDatabase_returnsCorrectInstanceAfterLoadingFromRemote() {
+    func test_getActive_thereIsNoSummitOnLocalDatabase_returnsCorrectInstanceAfterLoadingFromRemote() {
         // Arrange
         let expectation = expectationWithDescription("async load")
         let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
         let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
         			
         // Act
-        summitDataStore.getAll(){
+        summitDataStore.getActive(){
             (result) in
             
             // Assert
@@ -62,7 +62,7 @@ class SummitDataStoreTests: XCTestCase {
         self.waitForExpectationsWithTimeout(5.0, handler: nil)
     }
     
-    func test_getAll_thereIsOneSummitOnLocalDatabase_returnsCorrectInstanceFromLocalDatabase() {
+    func test_getActive_thereIsOneSummitOnLocalDatabase_returnsCorrectInstanceFromLocalDatabase() {
         // Arrange
         let dummySummit = Summit()
         dummySummit.id = 2
@@ -75,7 +75,7 @@ class SummitDataStoreTests: XCTestCase {
         let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
         
         // Act
-        summitDataStore.getAll(){
+        summitDataStore.getActive(){
             (result) in
 
             // Assert

@@ -38,7 +38,7 @@ public class MemberDataStore: NSObject	 {
     }
     
     private func getByEmailAsync(email: NSString, completitionBlock : (Member) -> Void) {
-        let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[1]}"
+        let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[2]}"
         
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         
