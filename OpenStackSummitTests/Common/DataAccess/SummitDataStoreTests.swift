@@ -12,11 +12,13 @@ import RealmSwift
 
 class SummitDataStoreTests: XCTestCase {
     
+    var realm = try! Realm()
+    
     override func setUp() {
         super.setUp()
-        let realm = try! Realm()
+        
         realm.write {
-            realm.deleteAll()
+            self.realm.deleteAll()
         }
     }
     
@@ -30,18 +32,17 @@ class SummitDataStoreTests: XCTestCase {
         let expectation = expectationWithDescription("async load")
         let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
         let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
-        let realm = try! Realm()
         			
         // Act
         summitDataStore.getAll(){
             (result) in
             
             // Assert
-            XCTAssertEqual(1, realm.objects(Summit.self).count)
-            XCTAssertEqual(1, realm.objects(Summit.self).first!.id)
-            XCTAssertEqual(2, realm.objects(SummitType.self).count)
-            XCTAssertEqual(2, realm.objects(SummitEvent.self).count)
-            var summitEvent = realm.objects(SummitEvent.self).first!
+            XCTAssertEqual(1, self.realm.objects(Summit.self).count)
+            XCTAssertEqual(1, self.realm.objects(Summit.self).first!.id)
+            XCTAssertEqual(2, self.realm.objects(SummitType.self).count)
+            XCTAssertEqual(2, self.realm.objects(SummitEvent.self).count)
+            var summitEvent = self.realm.objects(SummitEvent.self).first!
             XCTAssertEqual(1, summitEvent.id)
             XCTAssertEqual(1, summitEvent.presentation?.id)
             XCTAssertEqual(3, summitEvent.presentation?.category.id)
@@ -49,7 +50,7 @@ class SummitDataStoreTests: XCTestCase {
             XCTAssertEqual(2, summitEvent.summitTypes.count)
             XCTAssertEqual(2, summitEvent.venueRoom!.id)
             
-            summitEvent = realm.objects(SummitEvent.self).last!
+            summitEvent = self.realm.objects(SummitEvent.self).last!
             XCTAssertEqual(2, summitEvent.id)
             XCTAssertNil(summitEvent.presentation)
             XCTAssertNil(summitEvent.venueRoom)
@@ -65,9 +66,8 @@ class SummitDataStoreTests: XCTestCase {
         // Arrange
         let dummySummit = Summit()
         dummySummit.id = 2
-        let realm = try! Realm()
         realm.write {
-            realm.add(dummySummit)
+            self.realm.add(dummySummit)
         }
         
         let expectation = expectationWithDescription("async load")
@@ -79,7 +79,7 @@ class SummitDataStoreTests: XCTestCase {
             (result) in
 
             // Assert
-            XCTAssertEqual(2, realm.objects(Summit.self).first!.id)
+            XCTAssertEqual(2, self.realm.objects(Summit.self).first!.id)
             
             expectation.fulfill()
         }

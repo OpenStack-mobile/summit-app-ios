@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import SwiftyJSON
+import RealmSwift
+
+protocol MemberDataStoreProtocol {
+    func getByEmail(email: NSString, completitionBlock : (Member?) -> Void)
+}
 
 public class MemberDataStore: NSObject	 {
-
-    /*public typealias EntityType = Summit
     
     var realm = try! Realm()
     var deserializerFactory: DeserializerFactory!
@@ -23,19 +27,33 @@ public class MemberDataStore: NSObject	 {
         self.deserializerFactory = deserializerFactory
     }
     
-    public func get(id: Int, completitionBlock : (EntityType) -> Void) {
-        
+    public func getByEmail(email: NSString, completitionBlock : (Member?) -> Void) {
+        let member = realm.objects(Member.self).filter("email = '\(email)'").first
+        if (member != nil) {
+            completitionBlock(member)
+        }
+        else {
+            getByEmailAsync(email, completitionBlock: completitionBlock)
+        }
     }
     
-    public func getAll(completitionBlock : (Results<EntityType>) -> Void) {
-    }
-    
-    public func saveOrUpdate(entity: EntityType, completitionBlock : (EntityType) -> Void) {
+    private func getByEmailAsync(email: NSString, completitionBlock : (Member) -> Void) {
+        let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[1]}"
         
-    }
-    
-    public func delete(entity: EntityType, completitionBlock : () -> Void) {
+        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         
-    }*/
-
+        let jsonObject = JSON(data: data!)
+        let member : Member
+        var deserializer : DeserializerProtocol!
+        
+        let realm = try! Realm()
+        deserializer = deserializerFactory.create(DeserializerFactories.Member)
+        member = deserializer.deserialize(jsonObject) as! Member
+        
+        realm.write { () -> Void in
+            realm.add(member)
+        }
+        
+        completitionBlock(member)
+    }
 }

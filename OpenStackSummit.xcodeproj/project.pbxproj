@@ -22,6 +22,8 @@
 		CAD4809C1B862C5E004DBB4F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4809B1B862C5E004DBB4F /* Database.swift */; };
 		CAD480A01B864452004DBB4F /* DataStoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4809F1B864452004DBB4F /* DataStoreAssembly.swift */; };
 		CAD480A21B868439004DBB4F /* MemberDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD480A11B868439004DBB4F /* MemberDataStore.swift */; };
+		CAD480A41B8691B9004DBB4F /* MemberDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD480A31B8691B9004DBB4F /* MemberDataStoreTests.swift */; };
+		CAD480A61B869280004DBB4F /* MemberDataStoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD480A51B869280004DBB4F /* MemberDataStoreAssembly.swift */; };
 		CAD5FA161B82DB9E00654B0F /* SummitEventDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5FA151B82DB9E00654B0F /* SummitEventDeserializer.swift */; };
 		CAD6B3341B7E2B0300D62023 /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD6B3331B7E2B0300D62023 /* BaseEntity.swift */; };
 		CAD6B3361B7E2BC100D62023 /* KeyValueEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD6B3351B7E2BC100D62023 /* KeyValueEntity.swift */; };
@@ -71,7 +73,7 @@
 		CAF2AA551B828E7C00D8E595 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */; };
 		CAF2AA5A1B82914B00D8E595 /* DeserializerStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA581B82914B00D8E595 /* DeserializerStorageTests.swift */; };
 		CAF2AA5B1B82914B00D8E595 /* DeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA591B82914B00D8E595 /* DeserializerTests.swift */; };
-		CAF2AA5D1B82917300D8E595 /* SummitDataStoreAssemblyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA5C1B82917300D8E595 /* SummitDataStoreAssemblyTests.swift */; };
+		CAF2AA5D1B82917300D8E595 /* SummitDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA5C1B82917300D8E595 /* SummitDataStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +112,8 @@
 		CAD4809B1B862C5E004DBB4F /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		CAD4809F1B864452004DBB4F /* DataStoreAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreAssembly.swift; sourceTree = "<group>"; };
 		CAD480A11B868439004DBB4F /* MemberDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDataStore.swift; sourceTree = "<group>"; };
+		CAD480A31B8691B9004DBB4F /* MemberDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDataStoreTests.swift; sourceTree = "<group>"; };
+		CAD480A51B869280004DBB4F /* MemberDataStoreAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDataStoreAssembly.swift; sourceTree = "<group>"; };
 		CAD5FA151B82DB9E00654B0F /* SummitEventDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SummitEventDeserializer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CAD6B3331B7E2B0300D62023 /* BaseEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
 		CAD6B3351B7E2BC100D62023 /* KeyValueEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueEntity.swift; sourceTree = "<group>"; };
@@ -165,7 +169,7 @@
 		CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		CAF2AA581B82914B00D8E595 /* DeserializerStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerStorageTests.swift; sourceTree = "<group>"; };
 		CAF2AA591B82914B00D8E595 /* DeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerTests.swift; sourceTree = "<group>"; };
-		CAF2AA5C1B82917300D8E595 /* SummitDataStoreAssemblyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataStoreAssemblyTests.swift; sourceTree = "<group>"; };
+		CAF2AA5C1B82917300D8E595 /* SummitDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataStoreTests.swift; sourceTree = "<group>"; };
 		D69C9CE108E852E2F1F57A45 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,6 +230,7 @@
 				CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */,
 				CAE5EC2B1B83CD350032AD31 /* SummitDataStoreAssembly.swift */,
 				CAD4809F1B864452004DBB4F /* DataStoreAssembly.swift */,
+				CAD480A51B869280004DBB4F /* MemberDataStoreAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -475,7 +480,8 @@
 			isa = PBXGroup;
 			children = (
 				CAF2AA571B82914B00D8E595 /* Deserialization */,
-				CAF2AA5C1B82917300D8E595 /* SummitDataStoreAssemblyTests.swift */,
+				CAF2AA5C1B82917300D8E595 /* SummitDataStoreTests.swift */,
+				CAD480A31B8691B9004DBB4F /* MemberDataStoreTests.swift */,
 			);
 			name = DataAccess;
 			path = OpenStackSummitTests/Common/DataAccess;
@@ -735,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
+				CAD480A61B869280004DBB4F /* MemberDataStoreAssembly.swift in Sources */,
 				CAD9060F1B72B34F00BA5647 /* AppDelegate.swift in Sources */,
 				CAD6B3341B7E2B0300D62023 /* BaseEntity.swift in Sources */,
 				CADDDBA71B73D1BB008F742E /* Presentation.swift in Sources */,
@@ -794,7 +801,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAF2AA5D1B82917300D8E595 /* SummitDataStoreAssemblyTests.swift in Sources */,
+				CAF2AA5D1B82917300D8E595 /* SummitDataStoreTests.swift in Sources */,
+				CAD480A41B8691B9004DBB4F /* MemberDataStoreTests.swift in Sources */,
 				CAF2AA5B1B82914B00D8E595 /* DeserializerTests.swift in Sources */,
 				CAF2AA5A1B82914B00D8E595 /* DeserializerStorageTests.swift in Sources */,
 				CAD906271B72B34F00BA5647 /* OpenStackSummitTests.swift in Sources */,

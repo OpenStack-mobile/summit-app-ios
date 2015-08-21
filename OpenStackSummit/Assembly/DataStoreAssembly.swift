@@ -99,6 +99,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(SummitEventDeserializer.self) {
             (definition) in
             
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
             definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
         }
     }
@@ -122,7 +123,8 @@ public class DataStoreAssembly: TyphoonAssembly {
     dynamic func memberDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(MemberDeserializer.self) {
             (definition) in
-            
+        
+            definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
         }
     }
     
