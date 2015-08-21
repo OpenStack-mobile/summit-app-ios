@@ -20,9 +20,8 @@ class GeneralScheduleInteractor: NSObject {
     
     func getScheduleEventsAsync(){
         if (delegate != nil) {
-            summitDataStore.getAll(){
-                (result) in
-                let summit = result.first!
+            summitDataStore.getActive(){
+                (summit) in
                 self.delegate?.reloadSchedule(summit.events.map{$0})
             }
         }
