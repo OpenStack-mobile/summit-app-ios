@@ -72,6 +72,8 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter?.showEventDetail(1)
+        let event = events![indexPath.row]
+        
+        self.presenter?.showEventDetail(event.id)
     }
 }
