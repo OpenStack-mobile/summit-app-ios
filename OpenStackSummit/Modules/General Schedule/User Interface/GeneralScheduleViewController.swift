@@ -11,7 +11,7 @@ import SWRevealViewController
 
 class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    let cellIdentifier = "scheduleCellIdentifier"
+    let cellIdentifier = "GeneralScheduleTableViewCell"
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -57,15 +57,10 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
         formatter.dateStyle = NSDateFormatterStyle.NoStyle
         formatter.timeStyle = .ShortStyle
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleTableViewCell
         
-        if let eventTitle = cell.viewWithTag(100) as? UILabel {
-            eventTitle.text = event.eventDescription;
-        }
-        
-        if let timeAndPlace = cell.viewWithTag(101) as? UILabel {
-            timeAndPlace.text = formatter.stringFromDate(event.start) + " - " + formatter.stringFromDate(event.end)
-        }
+        cell.eventTitleLabel.text = event.eventDescription;
+        cell.timeAndPlaceLabel.text = formatter.stringFromDate(event.start) + " - " + formatter.stringFromDate(event.end)
         
         return cell
     }
