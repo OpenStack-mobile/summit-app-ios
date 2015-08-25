@@ -8,7 +8,6 @@
 
 import UIKit
 import SWRevealViewController
-import Crashlytics
 
 class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,18 +22,18 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
         menuButton.target = self.revealViewController()
         menuButton.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-        self.presenter?.reloadScheduleAsync()
+        presenter?.reloadScheduleAsync()
     }
     
     func reloadSchedule() {
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +61,6 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter?.showEventDetail(1)
+        presenter?.showEventDetail(1)
     }
 }

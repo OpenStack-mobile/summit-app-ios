@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import Crashlytics
 
 class MenuViewController: UITableViewController {
 
+    var presenter: MenuPresenterProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -21,7 +22,22 @@ class MenuViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let cell : UITableViewCell = super.tableView(tableView, cellForRowAtIndexPath:indexPath)
+        
+        let hidden = !presenter.hasAccessToMenuItem(indexPath.section, row: indexPath.row)
+        cell.hidden = hidden
+        
+        if (cell.hidden) {
+            return 0;
+        } else {
+            return super.tableView(tableView, heightForRowAtIndexPath:indexPath)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        presenter?.handleMenuItemSelected(indexPath.section, row: indexPath.row)
+    }
     /*
     // MARK: - Navigation
 
