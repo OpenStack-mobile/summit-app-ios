@@ -157,5 +157,4 @@ class MenuPresenterTests: XCTestCase {
         XCTAssertEqual(false, resSection3Row6)
         XCTAssertEqual(true, resSection3Row7)
     }
-    
 }
