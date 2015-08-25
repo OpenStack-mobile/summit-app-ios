@@ -9,6 +9,10 @@
 import Foundation
 import RealmSwift
 
+@objc public enum MemberRoles: Int {
+    case Anonymous, Attendee, Speaker
+}
+
 public class Member: BaseEntity {
     public dynamic var firstName = ""
     public dynamic var lastName = ""

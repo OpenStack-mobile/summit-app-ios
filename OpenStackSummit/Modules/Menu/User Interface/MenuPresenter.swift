@@ -1,0 +1,51 @@
+//
+//  MenuPresenter.swift
+//  OpenStackSummit
+//
+//  Created by Claudio on 8/23/15.
+//  Copyright © 2015 OpenStack. All rights reserved.
+//
+
+import UIKit
+
+@objc
+public protocol MenuPresenterProtocol {
+    func hasAccessToMenuItem(section: Int, row: Int) -> Bool
+    func handleMenuItemSelected(section: Int, row: Int)
+}
+
+public class MenuPresenter: NSObject, MenuPresenterProtocol {
+    var interactor: MenuInteractorProtocol!
+    var menuWireframe: MenuWireframeProtocol!
+    
+    public override init() {
+        super.init()
+    }
+    
+    public init(interactor: MenuInteractorProtocol, menuWireframe: MenuWireframeProtocol) {
+        self.interactor = interactor
+        self.menuWireframe = menuWireframe
+    }
+    
+    public func hasAccessToMenuItem(section: Int, row: Int) -> Bool {
+        
+        let currentMemberRole = interactor.getCurrentMemberRole()
+        var show = true
+        if (section == 3) {
+            if ((row == 0 || row == 1 || row == 3 || row == 5 || row == 7)) {
+                show = currentMemberRole != MemberRoles.Anonymous
+            }
+            else if (row == 2 || row == 4) {
+                show = currentMemberRole == MemberRoles.Speaker
+            }
+            else if (row == 6) {
+                show = currentMemberRole == MemberRoles.Anonymous
+            }
+        }
+        return show
+    }
+    
+    public func handleMenuItemSelected(section: Int, row: Int) {
+        
+    }
+}

@@ -10,7 +10,6 @@ import UIKit
 import Typhoon
 
 class ApplicationAssembly: TyphoonAssembly {
-    var generalScheduleAssembly: GeneralScheduleAssembly!
     
     dynamic func appDelegate() -> AnyObject {
         return TyphoonDefinition.withClass(AppDelegate.self)
