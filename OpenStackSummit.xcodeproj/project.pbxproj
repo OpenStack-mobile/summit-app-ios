@@ -176,7 +176,7 @@
 		CAF2AA391B8271C100D8E595 /* VenueDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VenueDeserializer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CAF2AA3A1B8271C100D8E595 /* VenueRoomDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VenueRoomDeserializer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CAF2AA4D1B828E7C00D8E595 /* EventDetailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailInteractor.swift; sourceTree = "<group>"; };
-		CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventDetailWireframe.swift; path = "Event Detail/EventDetailWireframe.swift"; sourceTree = "<group>"; };
+		CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailWireframe.swift; sourceTree = "<group>"; };
 		CAF2AA501B828E7C00D8E595 /* EventDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailPresenter.swift; sourceTree = "<group>"; };
 		CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		CAF2AA581B82914B00D8E595 /* DeserializerStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerStorageTests.swift; sourceTree = "<group>"; };
@@ -364,7 +364,6 @@
 			children = (
 				CAD47A171B85142D007741E7 /* LaunchScreen */,
 				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
-				CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */,
 				CADDDBB11B73D1CA008F742E /* Menu */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
 			);
@@ -489,6 +488,7 @@
 			children = (
 				CAF2AA4C1B828E7C00D8E595 /* Business Logic */,
 				CAF2AA4F1B828E7C00D8E595 /* User Interface */,
+				CAF2AA4E1B828E7C00D8E595 /* EventDetailWireframe.swift */,
 			);
 			path = "Event Detail";
 			sourceTree = "<group>";
