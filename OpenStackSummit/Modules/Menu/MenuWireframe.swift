@@ -9,10 +9,10 @@
 import UIKit
 
 @objc
-public protocol MenuWireframeProtocol {
+public protocol IMenuWireframe {
     
 }
 
-public class MenuWireframe: NSObject, MenuWireframeProtocol {
+public class MenuWireframe: NSObject, IMenuWireframe {
     var menuViewController : MenuViewController!
 }

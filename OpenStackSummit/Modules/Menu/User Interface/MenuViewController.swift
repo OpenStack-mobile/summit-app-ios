@@ -10,7 +10,7 @@ import UIKit
 
 class MenuViewController: UITableViewController {
 
-    var presenter: MenuPresenterProtocol!
+    var presenter: IMenuPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()

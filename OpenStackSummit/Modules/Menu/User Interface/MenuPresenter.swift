@@ -9,20 +9,20 @@
 import UIKit
 
 @objc
-public protocol MenuPresenterProtocol {
+public protocol IMenuPresenter {
     func hasAccessToMenuItem(section: Int, row: Int) -> Bool
     func handleMenuItemSelected(section: Int, row: Int)
 }
 
-public class MenuPresenter: NSObject, MenuPresenterProtocol {
-    var interactor: MenuInteractorProtocol!
-    var menuWireframe: MenuWireframeProtocol!
+public class MenuPresenter: NSObject, IMenuPresenter {
+    var interactor: IMenuInteractor!
+    var menuWireframe: IMenuWireframe!
     
     public override init() {
         super.init()
     }
     
-    public init(interactor: MenuInteractorProtocol, menuWireframe: MenuWireframeProtocol) {
+    public init(interactor: IMenuInteractor, menuWireframe: IMenuWireframe) {
         self.interactor = interactor
         self.menuWireframe = menuWireframe
     }

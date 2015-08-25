@@ -10,11 +10,11 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-protocol MemberDataStoreProtocol {
+protocol IMemberDataStore {
     func getByEmail(email: NSString, completitionBlock : (Member?) -> Void)
 }
 
-public class MemberDataStore: NSObject	 {
+public class MemberDataStore: NSObject, IMemberDataStore {
     
     var realm = try! Realm()
     var deserializerFactory: DeserializerFactory!

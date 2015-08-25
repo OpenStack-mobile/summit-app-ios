@@ -9,13 +9,13 @@
 import UIKit
 
 @objc
-public protocol SessionProtocol{
+public protocol ISession{
     func get(key: String) -> AnyObject?
     func set(key: String, value: AnyObject)
 }
 
 
-public class Session: NSObject, SessionProtocol {
+public class Session: NSObject, ISession {
     public func get(key: String) -> AnyObject? {
         return NSUserDefaults.standardUserDefaults().objectForKey(key)
     }

@@ -9,18 +9,18 @@
 import UIKit
 
 @objc
-public protocol MenuInteractorProtocol {
+public protocol IMenuInteractor {
     func getCurrentMemberRole() -> MemberRoles
 }
 
-public class MenuInteractor: NSObject, MenuInteractorProtocol {
-    var session : SessionProtocol!
+public class MenuInteractor: NSObject, IMenuInteractor {
+    var session : ISession!
     
     public override init() {
         super.init()
     }
 
-    public init(session: SessionProtocol) {
+    public init(session: ISession) {
         self.session = session
     }
     

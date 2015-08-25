@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol DataStoreProtocol {
+public protocol IDataStore {
     typealias EntityType
     
     func get(id: Int, completitionBlock : (EntityType) -> Void)

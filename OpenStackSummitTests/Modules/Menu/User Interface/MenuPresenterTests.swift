@@ -11,7 +11,7 @@ import OpenStackSummit
 
 class MenuPresenterTests: XCTestCase {
     
-    class MenuInteractorMock : NSObject, MenuInteractorProtocol {
+    class MenuInteractorMock : NSObject, IMenuInteractor {
 
         var role : MemberRoles!
         
@@ -36,11 +36,11 @@ class MenuPresenterTests: XCTestCase {
     }
     
     func test_hasAccessToMenuItem_anonymousUser_returnCorrectValueForEachMenuItem() {
-        //Arrange
+        // Arrange
         let menuInteractorMock = MenuInteractorMock(role: MemberRoles.Anonymous)
         let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe())
         
-        //Act
+        // Act
         let resSection0Row0 = menuPresenter.hasAccessToMenuItem(0, row: 0)
         let resSection0Row1 = menuPresenter.hasAccessToMenuItem(0, row: 1)
         let resSection1Row0 = menuPresenter.hasAccessToMenuItem(1, row: 0)
@@ -58,7 +58,7 @@ class MenuPresenterTests: XCTestCase {
         let resSection3Row7 = menuPresenter.hasAccessToMenuItem(3, row: 7)
         
         
-        //Assert
+        // Assert
         XCTAssertEqual(true, resSection0Row0)
         XCTAssertEqual(true, resSection0Row1)
         XCTAssertEqual(true, resSection1Row0)
