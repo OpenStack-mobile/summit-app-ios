@@ -19,7 +19,7 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("companyDeserializer", with: self.companyDeserializer())
             definition.injectProperty("eventTypeDeserializer", with: self.eventTypeDeserializer())
             definition.injectProperty("summitTypeDeserializer", with: self.summitTypeDeserializer())
-            definition.injectProperty("summitLocationDeserializer", with: self.summitLocationDeserializer())
+            definition.injectProperty("locationDeserializer", with: self.locationDeserializer())
             definition.injectProperty("venueDeserializer", with: self.venueDeserializer())
             definition.injectProperty("venueRoomDeserializer", with: self.venueRoomDeserializer())
             definition.injectProperty("summitEventDeserializer", with: self.summitEventDeserializer())
@@ -75,8 +75,8 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func summitLocationDeserializer() -> AnyObject {
-        return TyphoonDefinition.withClass(SummitLocationDeserializer.self) {
+    dynamic func locationDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(LocationDeserializer.self) {
             (definition) in
             
         }

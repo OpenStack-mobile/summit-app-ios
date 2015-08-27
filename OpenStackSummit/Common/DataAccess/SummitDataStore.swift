@@ -11,7 +11,10 @@ import SwiftyJSON
 import RealmSwift
 
 public protocol ISummitDataStore: IDataStore {
+    typealias EntityType = Summit
+    
     func getActive(completitionBlock : (Summit) -> Void)
+    func getSummitTypes(completitionBlock : (Results<SummitType>) -> Void)
 }
 
 public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
@@ -46,5 +49,10 @@ public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
         summit = deserializer.deserialize(jsonObject) as! Summit
         
         saveOrUpdate(summit, completitionBlock: completitionBlock)
+    }
+    
+    public func getSummitTypes(completitionBlock : (Results<SummitType>) -> Void) {
+        let summitTypes = realm.objects(SummitType.self)
+        completitionBlock(summitTypes)
     }
 }

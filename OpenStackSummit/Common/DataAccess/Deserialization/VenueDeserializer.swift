@@ -21,11 +21,11 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue = deserializerStorage.get(venueId)
         }
         else {
-            var deserializer = deserializerFactory.create(DeserializerFactories.SummitLocation)
-            let summitLocation = deserializer.deserialize(json) as! SummitLocation
+            var deserializer = deserializerFactory.create(DeserializerFactories.Location)
+            let location = deserializer.deserialize(json) as! Location
             venue = Venue()
             venue.id = json["id"].intValue
-            venue.locationDescription = summitLocation.locationDescription
+            venue.locationDescription = location.locationDescription
             venue.lat = json["lat"].stringValue
             venue.long = json["long"].stringValue
             venue.address = json["address"].stringValue

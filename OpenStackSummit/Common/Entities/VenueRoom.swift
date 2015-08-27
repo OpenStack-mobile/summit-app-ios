@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class VenueRoom: SummitLocation {
+public class VenueRoom: Location {
 
     public dynamic var capacity = 0
     

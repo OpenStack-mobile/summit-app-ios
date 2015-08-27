@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class Venue: SummitLocation {
+public class Venue: Location {
 
     public dynamic var address = ""
     public dynamic var lat = ""
