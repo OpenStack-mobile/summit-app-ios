@@ -25,6 +25,7 @@ public class VenueDeserializer: NSObject, IDeserializer {
             let location = deserializer.deserialize(json) as! Location
             venue = Venue()
             venue.id = json["id"].intValue
+            venue.name = location.name
             venue.locationDescription = location.locationDescription
             venue.lat = json["lat"].stringValue
             venue.long = json["long"].stringValue
