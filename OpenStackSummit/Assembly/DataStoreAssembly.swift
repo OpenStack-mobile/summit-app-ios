@@ -28,7 +28,12 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("memberDeserializer", with: self.memberDeserializer())
             definition.injectProperty("presentationSpeakerDeserializer", with: self.presentationSpeakerDeserializer())
             definition.injectProperty("tagDeserializer", with: self.tagDeserializer())
+            definition.injectProperty("imageDeserializer", with: self.imageDeserializer())
         }
+    }
+   
+    dynamic func imageDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(ImageDeserializer.self)
     }
     
     dynamic func deserializerStorage() -> AnyObject {

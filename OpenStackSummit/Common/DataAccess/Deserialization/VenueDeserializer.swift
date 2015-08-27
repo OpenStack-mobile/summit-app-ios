@@ -29,15 +29,19 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue.lat = json["lat"].stringValue
             venue.long = json["long"].stringValue
             venue.address = json["address"].stringValue
-            venue.map = json["map"].stringValue
+
+            var map: Image
+            deserializer = deserializerFactory.create(DeserializerFactories.Image)
+            for (_, mapJSON) in json["maps"] {
+                map = deserializer.deserialize(mapJSON) as! Image
+                venue.maps.append(map)
+            }
             
             var venueRoom: VenueRoom
             deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
             for (_, venueRoomJSON) in json["rooms"] {
                 venueRoom = deserializer.deserialize(venueRoomJSON) as! VenueRoom
                 venue.venueRooms.append(venueRoom)
-                
-                deserializerStorage.add(venueRoom)
             }
             
             deserializerStorage.add(venue)

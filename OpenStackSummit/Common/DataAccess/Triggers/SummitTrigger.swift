@@ -23,10 +23,9 @@ public class SummitTrigger: NSObject, ITrigger {
     private func run(entity: Summit, type: TriggerTypes, operation: TriggerOperations, completitionBlock : ((Void) -> Void)!) {
         if (entity.venues.count > 0) {
 
-            for venue in entity.venues {	
-             
-                if (!venue.map.isEmpty) {
-                    Shared.imageCache.fetch(URL: NSURL(string: venue.map)!)
+            for venue in entity.venues {
+                for map in venue.maps {
+                    Shared.imageCache.fetch(URL: NSURL(string: map.url)!)
                 }
             }
         }

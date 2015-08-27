@@ -20,8 +20,8 @@ public class VenueTrigger: NSObject, ITrigger {
     }
     
     private func run(entity: Venue, type: TriggerTypes, operation: TriggerOperations, completitionBlock : ((Void) -> Void)!) {
-        if (!entity.map.isEmpty) {
-            Shared.imageCache.fetch(URL: NSURL(string: entity.map)!)
+        for map in entity.maps {
+            Shared.imageCache.fetch(URL: NSURL(string: map.url)!)
         }
     }
 }

@@ -21,7 +21,7 @@ class EventDetailViewController: UIViewController {
         super.viewDidLoad()
         presenter?.showEventDetailAsync()
         
-        imageView.hnk_setImageFromURL(NSURL(string:"http://www.openstack.org/assets/paris-summit/_resampled/resizedimage464600-meridien-map-level01.png")!)
+        //imageView.hnk_setImageFromURL(NSURL(string:"http://www.openstack.org/assets/paris-summit/_resampled/resizedimage464600-meridien-map-level01.png")!)
     }
     
     override func didReceiveMemoryWarning() {
