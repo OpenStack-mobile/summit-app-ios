@@ -10,9 +10,7 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-public protocol ISummitDataStore: IDataStore {
-    typealias EntityType = Summit
-    
+public protocol ISummitDataStore {
     func getActive(completitionBlock : (Summit) -> Void)
     func getSummitTypes(completitionBlock : (Results<SummitType>) -> Void)
 }

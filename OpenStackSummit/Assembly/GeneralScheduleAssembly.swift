@@ -37,7 +37,12 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("delegate", with: self.generalSchedulePresenter())
+            definition.injectProperty("summitDataStore", with: self.summitDataStore())
         }
+    }
+    
+    dynamic func summitDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitDataStore.self)
     }
     
     dynamic func generalScheduleViewController() -> AnyObject {

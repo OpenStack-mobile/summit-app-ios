@@ -8,15 +8,14 @@
 
 import UIKit
 
-class GeneralScheduleInteractor: NSObject {
+public protocol IGeneralScheduleInteractor {
+    func getScheduleEventsAsync()
+}
+
+public class GeneralScheduleInteractor: NSObject {
     var delegate : GeneralSchedulePresenter?
     
-    var summitDataStore : SummitDataStore
-    let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
-    
-    override init() {
-        summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
-    }
+    var summitDataStore : ISummitDataStore!
     
     func getScheduleEventsAsync(){
         if (delegate != nil) {

@@ -9,6 +9,7 @@
 import UIKit
 
 public class FilterSectionItem: NSObject {
+    public var id = 0
     public var name = ""
     public var selected = false
 }
