@@ -16,6 +16,7 @@ public class LocationDeserializer: NSObject, IDeserializer {
         
         location.id = json["id"].intValue
         location.locationDescription = json["description"].stringValue
+        location.name = json["name"].stringValue
         
         return location
     }
