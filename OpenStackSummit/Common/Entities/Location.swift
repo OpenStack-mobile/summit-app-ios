@@ -1,5 +1,5 @@
 //
-//  SummitLocation.swift
+//  Location.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/6/15.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class SummitLocation: BaseEntity {
+public class Location: BaseEntity {
 
     public dynamic var locationDescription = ""
 }

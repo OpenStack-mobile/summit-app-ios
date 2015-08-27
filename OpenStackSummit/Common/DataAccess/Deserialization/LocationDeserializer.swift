@@ -9,14 +9,14 @@
 import UIKit
 import SwiftyJSON
 
-public class SummitLocationDeserializer: NSObject, IDeserializer {
+public class LocationDeserializer: NSObject, IDeserializer {
     
     public func deserialize(json: JSON) -> BaseEntity {
-        let summitLocation = SummitLocation()
+        let location = Location()
         
-        summitLocation.id = json["id"].intValue
-        summitLocation.locationDescription = json["description"].stringValue
+        location.id = json["id"].intValue
+        location.locationDescription = json["description"].stringValue
         
-        return summitLocation
+        return location
     }
 }

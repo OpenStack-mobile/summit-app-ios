@@ -9,7 +9,7 @@
 import UIKit
 
 public enum DeserializerFactories {
-    case Member, Company, EventType, SummitType, Summit, SummitLocation, Venue, VenueRoom, SummitEvent, Presentation, PresentationCategory, Tag, PresentationSpeaker, Image
+    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, PresentationCategory, Tag, PresentationSpeaker, Image
 }
 
 public class DeserializerFactory : NSObject {
@@ -17,7 +17,7 @@ public class DeserializerFactory : NSObject {
     var companyDeserializer: CompanyDeserializer!
     var eventTypeDeserializer: EventTypeDeserializer!
     var summitTypeDeserializer: SummitTypeDeserializer!
-    var summitLocationDeserializer: SummitLocationDeserializer!
+    var locationDeserializer: LocationDeserializer!
     var venueDeserializer: VenueDeserializer!
     var venueRoomDeserializer: VenueRoomDeserializer!
     var summitEventDeserializer: SummitEventDeserializer!
@@ -40,8 +40,8 @@ public class DeserializerFactory : NSObject {
             deserializer = eventTypeDeserializer
         case DeserializerFactories.SummitType:
             deserializer = summitTypeDeserializer
-        case DeserializerFactories.SummitLocation:
-            deserializer = summitLocationDeserializer
+        case DeserializerFactories.Location:
+            deserializer = locationDeserializer
         case DeserializerFactories.Venue:
             deserializer = venueDeserializer
         case DeserializerFactories.VenueRoom:
