@@ -10,9 +10,10 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
+@objc
 public protocol ISummitDataStore {
     func getActive(completitionBlock : (Summit) -> Void)
-    func getSummitTypes(completitionBlock : (Results<SummitType>) -> Void)
+    func getSummitTypes() -> [SummitType]
 }
 
 public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
@@ -49,8 +50,8 @@ public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
         saveOrUpdate(summit, completitionBlock: completitionBlock)
     }
     
-    public func getSummitTypes(completitionBlock : (Results<SummitType>) -> Void) {
+    public func getSummitTypes() -> [SummitType] {
         let summitTypes = realm.objects(SummitType.self)
-        completitionBlock(summitTypes)
+        return summitTypes.map { $0 }
     }
 }

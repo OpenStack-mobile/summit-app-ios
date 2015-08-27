@@ -32,12 +32,22 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("delegate", with: self.generalScheduleFilterPresenter())
-            definition.injectProperty("summitDataStore", with: self.summitDataStore())
+            definition.injectProperty("summitTypeDataStore", with: self.summitTypeDataStore())
+            definition.injectProperty("eventTypeDataStore", with: self.eventTypeDataStore())
+            definition.injectProperty("trackDataStore", with: self.trackDataStore())
         }
     }
     
-    dynamic func summitDataStore() -> AnyObject {
-        return TyphoonDefinition.withClass(SummitDataStore.self)
+    dynamic func summitTypeDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitTypeDataStore.self)
+    }
+    
+    dynamic func eventTypeDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(EventTypeDataStore.self)
+    }
+
+    dynamic func trackDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(TrackDataStore.self)
     }
     
     dynamic func generalScheduleFilterViewController() -> AnyObject {

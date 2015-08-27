@@ -24,6 +24,9 @@
 		CA416F981B8F5C6200F177F5 /* FilterSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F971B8F5C6200F177F5 /* FilterSectionItem.swift */; };
 		CA416F9A1B8F63E800F177F5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F991B8F63E700F177F5 /* Track.swift */; };
 		CA416F9C1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */; };
+		CA416F9E1B8FC44B00F177F5 /* EventTypeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */; };
+		CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */; };
+		CA416FA21B8FC46E00F177F5 /* TrackDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */; };
 		CA9E42501B7B9667005FDD22 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42401B7B9667005FDD22 /* Company.swift */; };
 		CA9E42521B7B9667005FDD22 /* PresentationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42421B7B9667005FDD22 /* PresentationCategory.swift */; };
 		CA9E42541B7B9667005FDD22 /* SummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42441B7B9667005FDD22 /* SummitAttendee.swift */; };
@@ -133,6 +136,9 @@
 		CA416F971B8F5C6200F177F5 /* FilterSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSectionItem.swift; sourceTree = "<group>"; };
 		CA416F991B8F63E700F177F5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterAssembly.swift; sourceTree = "<group>"; };
+		CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTypeDataStore.swift; sourceTree = "<group>"; };
+		CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTypeDataStore.swift; sourceTree = "<group>"; };
+		CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackDataStore.swift; sourceTree = "<group>"; };
 		CA9E42401B7B9667005FDD22 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		CA9E42421B7B9667005FDD22 /* PresentationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationCategory.swift; sourceTree = "<group>"; };
 		CA9E42441B7B9667005FDD22 /* SummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendee.swift; sourceTree = "<group>"; };
@@ -542,6 +548,9 @@
 				CAD47A151B84D559007741E7 /* DataStoreProtocol.swift */,
 				CAD480A11B868439004DBB4F /* MemberDataStore.swift */,
 				CA01190E1B8D1C2C0091E00F /* BaseDataStore.swift */,
+				CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */,
+				CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */,
+				CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */,
 			);
 			path = DataAccess;
 			sourceTree = "<group>";
@@ -862,6 +871,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */,
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
 				CAD480A61B869280004DBB4F /* MemberDataStoreAssembly.swift in Sources */,
 				CAD9060F1B72B34F00BA5647 /* AppDelegate.swift in Sources */,
@@ -892,6 +902,7 @@
 				CA416F961B8F5C4A00F177F5 /* FilterSection.swift in Sources */,
 				CA416F8E1B8F58AC00F177F5 /* GeneralScheduleFilterViewController.swift in Sources */,
 				CA9E42521B7B9667005FDD22 /* PresentationCategory.swift in Sources */,
+				CA416F9E1B8FC44B00F177F5 /* EventTypeDataStore.swift in Sources */,
 				CAF2AA531B828E7C00D8E595 /* EventDetailWireframe.swift in Sources */,
 				CAD47A141B84D45C007741E7 /* SummitDataStore.swift in Sources */,
 				CADDDBAF1B73D1BB008F742E /* Location.swift in Sources */,
@@ -935,6 +946,7 @@
 				CADDDBBE1B74E614008F742E /* GeneralScheduleAssembly.swift in Sources */,
 				CAF2AA3D1B8271C100D8E595 /* DeserializerFactory.swift in Sources */,
 				CAF2AA521B828E7C00D8E595 /* EventDetailInteractor.swift in Sources */,
+				CA416FA21B8FC46E00F177F5 /* TrackDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,11 +17,16 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         super.init()
     }
     
-    public func get(id: Int, completitionBlock: (T?) -> Void) {
-        let entity = realm.objects(T.self).first
-        completitionBlock(entity)
+    public func get(id: Int) -> T? {
+        let entity = realm.objects(T.self).filter("id = \(id)").first
+        return entity
     }
-        
+
+    public func getAll() -> [T] {
+        let entities = realm.objects(T.self)
+        return entities.map { $0 }
+    }
+    
     public func saveOrUpdate(entity: T, completitionBlock: ((T) -> Void)!) {
         realm.write {
             self.realm.add(entity, update: true)
