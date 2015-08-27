@@ -8,15 +8,18 @@
 
 import UIKit
 import SWRevealViewController
+import AFHorizontalDayPicker
 
-class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate {
 
     let cellIdentifier = "GeneralScheduleTableViewCell"
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
     var presenter : GeneralSchedulePresenter?
+    var dayEvents : [SummitEvent]?
     var events : [SummitEvent]?
     
     override func viewDidLoad() {
@@ -28,6 +31,8 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
         menuButton.target = self.revealViewController()
         menuButton.action = Selector("revealToggle:")
         view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+        dayPicker.delegate = self
         
         presenter?.reloadScheduleAsync()
     }
@@ -47,11 +52,11 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events!.count;
+        return dayEvents!.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let event = events![indexPath.row]
+        let event = dayEvents![indexPath.row]
         
         let formatter = NSDateFormatter()
         formatter.dateStyle = NSDateFormatterStyle.NoStyle
@@ -68,5 +73,14 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         let event = events![indexPath.row]
         self.presenter?.showEventDetail(event.id)
+    }
+    
+    func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
+        let width: CGFloat = 50
+        return width
+    }
+    
+    func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
+        self.presenter?.reloadSchedule(byDate: date)
     }
 }
