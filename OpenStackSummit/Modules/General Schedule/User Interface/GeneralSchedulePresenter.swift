@@ -9,17 +9,19 @@
 import UIKit
 import MTDates
 
+extension Array where Element: SummitEvent {
+    func filter(byDate date: NSDate) -> [SummitEvent] {
+        return self.filter { (event) -> Bool in
+            event.start.mt_isWithinSameDay(date)
+        }
+    }
+}
+
 class GeneralSchedulePresenter: NSObject {
     
     weak var viewController : GeneralScheduleViewController?
     var interactor : GeneralScheduleInteractor?
     var generalScheduleWireframe : GeneralScheduleWireframe?
-    
-    func filterEvents(events: [SummitEvent], byDate date: NSDate) -> [SummitEvent] {
-        return events.filter { (event) -> Bool in
-            event.start.mt_isWithinSameDay(date)
-        }
-    }
     
     func reloadScheduleAsync() {
         self.interactor?.getScheduleEventsAsync()
@@ -39,7 +41,7 @@ class GeneralSchedulePresenter: NSObject {
         }
         
         self.viewController?.events = events
-        self.viewController?.dayEvents = filterEvents(events, byDate: startDate)
+        self.viewController?.dayEvents = events.filter(byDate: startDate)
         
         self.viewController?.dayPicker.startDate = startDate
         self.viewController?.dayPicker.endDate = endDate
@@ -50,7 +52,7 @@ class GeneralSchedulePresenter: NSObject {
     }
     
     func reloadSchedule(byDate date: NSDate) {
-        self.viewController?.dayEvents = filterEvents((self.viewController?.events)!, byDate: date)
+        self.viewController?.dayEvents = (self.viewController?.events)!.filter(byDate: date)
         self.viewController?.reloadSchedule()
     }
     
