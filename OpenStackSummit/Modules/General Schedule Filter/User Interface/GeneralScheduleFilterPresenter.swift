@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol IGeneralScheduleFilterPresenter {
-    func getFilterItems() -> [FilterSection]    
+    func getFilters() -> [FilterSection]
 }
 
 public class GeneralScheduleFilterPresenter: NSObject {
@@ -17,13 +17,22 @@ public class GeneralScheduleFilterPresenter: NSObject {
     var genereralScheduleFilterInteractor: IGeneralScheduleFilterInteractor!
     var session: ISession!
     var filterSelections: Dictionary<FilterSectionTypes, [Int]>?
+    let kGeneralScheduleFilterSelections = "generalScheduleFilterSelections"
+    
+    public init(session: ISession, genereralScheduleFilterInteractor: IGeneralScheduleFilterInteractor) {
+        self.session = session
+        self.genereralScheduleFilterInteractor = genereralScheduleFilterInteractor
+    }
     
     public override init() {
         super.init()
-        filterSelections = session.get("generalScheduleFilterSelections") as? Dictionary<FilterSectionTypes, [Int]>
+        filterSelections = session.get(kGeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
+        if (filterSelections == nil) {
+            filterSelections = Dictionary<FilterSectionTypes, [Int]>()
+        }
     }
     
-    public func getFilterItems() -> [FilterSection] {
+    public func getFilters() -> [FilterSection] {
         let summitTypes = genereralScheduleFilterInteractor.getSummitTypes()
         let eventTypes = genereralScheduleFilterInteractor.getEventTypes()
         let summitTracks = genereralScheduleFilterInteractor.getSummitTracks()
@@ -61,7 +70,7 @@ public class GeneralScheduleFilterPresenter: NSObject {
         return filterSections
     }
   
-    func createSectionItem(id: Int, name: String, type: FilterSectionTypes) -> FilterSectionItem {
+    private func createSectionItem(id: Int, name: String, type: FilterSectionTypes) -> FilterSectionItem {
         let filterSectionItem = FilterSectionItem()
         filterSectionItem.id = id
         filterSectionItem.name = name
@@ -78,5 +87,19 @@ public class GeneralScheduleFilterPresenter: NSObject {
             }
         }
         return false
+    }
+    
+    public func applyFilter(filterSections: [FilterSection]) {
+        var filterSelectionsForType: [Int]
+        for filterSection in filterSections {
+            filterSelectionsForType = [Int]()
+            for filterSectionItem in filterSection.items {
+                if (filterSectionItem.selected) {
+                    filterSelectionsForType.append(filterSectionItem.id)
+                }
+            }
+            filterSelections![filterSection.type] = filterSelectionsForType
+        }
+        session.set(kGeneralScheduleFilterSelections, value: filterSelections as! AnyObject)
     }
 }

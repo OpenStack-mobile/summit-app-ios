@@ -17,18 +17,20 @@ public protocol IGeneralScheduleFilterInteractor {
 
 public class GeneralScheduleFilterInteractor: NSObject {
     
-    var summitDataStore: ISummitDataStore!
+    var summitTypeDataStore: ISummitTypeDataStore!
+    var eventTypeDataStore: IEventTypeDataStore!
+    var trackDataStore: ITrackDataStore!
     var delegate: IGeneralScheduleFilterPresenter!
     
     public func getSummitTypes() -> [SummitType] {
-        return [SummitType]()
+        return summitTypeDataStore.getAll()
     }
    
     public func getEventTypes() -> [EventType] {
-        return [EventType]()
+        return eventTypeDataStore.getAll()
     }
     
     public func getSummitTracks() -> [Track] {
-        return [Track]()
+        return trackDataStore.getAll()
     }
 }
