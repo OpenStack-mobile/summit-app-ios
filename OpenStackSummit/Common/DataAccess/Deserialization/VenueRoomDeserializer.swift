@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class VenueRoomDeserializer: NSObject, DeserializerProtocol {
+public class VenueRoomDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     var deserializerStorage: DeserializerStorage!
     

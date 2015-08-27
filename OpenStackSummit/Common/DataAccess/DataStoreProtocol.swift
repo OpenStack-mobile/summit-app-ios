@@ -11,6 +11,7 @@ import UIKit
 public protocol IDataStore {
     typealias EntityType
     
-    func get(id: Int, completitionBlock : (EntityType) -> Void)
-    func saveOrUpdate(entity: EntityType, completitionBlock : (EntityType) -> Void)
+    func get(id: Int, completitionBlock : (EntityType?) -> Void)
+    func saveOrUpdate(entity: EntityType, completitionBlock : ((EntityType) -> Void)!)
+    func delete(entity: EntityType, completitionBlock : ((Void) -> Void)!)
 }

@@ -8,13 +8,13 @@
 import UIKit
 import SwiftyJSON
 
-public class SummitDeserializer: NSObject, DeserializerProtocol {
+public class SummitDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json : JSON) -> BaseEntity {
         let summit = Summit()
-        var deserializer : DeserializerProtocol!
+        var deserializer : IDeserializer!
         
         deserializer = deserializerFactory.create(DeserializerFactories.Company)
         for (_, companyJSON) in json["companies"] {
@@ -39,8 +39,10 @@ public class SummitDeserializer: NSObject, DeserializerProtocol {
         }
 
         deserializer = deserializerFactory.create(DeserializerFactories.Venue)
+        var venue: Venue
         for (_, venueJSON) in json["locations"] {
-            deserializer.deserialize(venueJSON)
+            venue = deserializer.deserialize(venueJSON) as! Venue
+            summit.venues.append(venue)
         }
         
         var event : SummitEvent

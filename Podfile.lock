@@ -1,6 +1,7 @@
 PODS:
   - AFHorizontalDayPicker (0.2.0):
     - MTDates (= 1.0.0)
+  - HanekeSwift (0.9.1)
   - MTDates (1.0.0)
   - OCMock (2.0.1)
   - Realm (0.94.1):
@@ -16,6 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - AFHorizontalDayPicker (from `https://github.com/alexfedosov/AFHorizontalDayPicker.git`)
+  - HanekeSwift (from `https://github.com/meteochu/HanekeSwift.git`, branch `swift-2.0`)
   - OCMock (~> 2.0.1)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
@@ -26,6 +28,9 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   AFHorizontalDayPicker:
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
+  HanekeSwift:
+    :branch: swift-2.0
+    :git: https://github.com/meteochu/HanekeSwift.git
   Realm:
     :branch: swift-2.0
     :git: https://github.com/realm/realm-cocoa.git
@@ -40,6 +45,9 @@ CHECKOUT OPTIONS:
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
+  HanekeSwift:
+    :commit: 58d7e2e5590b8767a76c6b2131e1fa28b72ff894
+    :git: https://github.com/meteochu/HanekeSwift.git
   Realm:
     :commit: 59d2e849a063fd5150ef93465714db72bf9c4dad
     :git: https://github.com/realm/realm-cocoa.git
@@ -52,6 +60,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
+  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
   OCMock: 7a839b55abfb78e8ec3bf6eaa3cdcc567ac71d2a
   Realm: 567b454e3c452c0c59af719c4a8c2a17fd11fae1
