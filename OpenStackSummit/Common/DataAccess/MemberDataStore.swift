@@ -10,13 +10,12 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-protocol IMemberDataStore {
+protocol IMemberDataStore : IDataStore {
     func getByEmail(email: NSString, completitionBlock : (Member?) -> Void)
 }
 
-public class MemberDataStore: NSObject, IMemberDataStore {
+public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
     
-    var realm = try! Realm()
     var deserializerFactory: DeserializerFactory!
     
     override init() {
@@ -44,11 +43,13 @@ public class MemberDataStore: NSObject, IMemberDataStore {
         
         let jsonObject = JSON(data: data!)
         let member : Member
-        var deserializer : DeserializerProtocol!
+        var deserializer : IDeserializer!
         
         let realm = try! Realm()
         deserializer = deserializerFactory.create(DeserializerFactories.Member)
         member = deserializer.deserialize(jsonObject) as! Member
+        
+        
         
         realm.write { () -> Void in
             realm.add(member)

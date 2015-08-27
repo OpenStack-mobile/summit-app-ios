@@ -300,12 +300,17 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zlR-OA-0QQ">
+                                <rect key="frame" x="36" y="56" width="517" height="391"/>
+                                <color key="backgroundColor" red="1" green="0.17170516299999999" blue="0.041808197460000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="eventDetailLabel" destination="EUp-9I-ebt" id="B4e-tK-YUL"/>
+                        <outlet property="imageView" destination="zlR-OA-0QQ" id="L2I-jJ-bhn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kw6-Pc-OG1" userLabel="First Responder" sceneMemberID="firstResponder"/>

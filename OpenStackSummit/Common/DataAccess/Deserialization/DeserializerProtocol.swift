@@ -1,5 +1,5 @@
 //
-//  DeserializerProtocol.swift
+//  IDeserializer.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/15/15.
@@ -9,6 +9,6 @@
 import UIKit
 import SwiftyJSON
 
-public protocol DeserializerProtocol {
+public protocol IDeserializer {
     func deserialize(json : JSON) -> BaseEntity
 }

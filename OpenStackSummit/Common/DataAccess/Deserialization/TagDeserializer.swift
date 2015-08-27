@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class TagDeserializer: KeyValueDeserializer, DeserializerProtocol {
+public class TagDeserializer: KeyValueDeserializer, IDeserializer {
     public func deserialize(json : JSON) -> BaseEntity {
         return super.deserialize(json) as Tag
     }

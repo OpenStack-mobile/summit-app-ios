@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class SummitLocationDeserializer: NSObject, DeserializerProtocol {
+public class SummitLocationDeserializer: NSObject, IDeserializer {
     
     public func deserialize(json: JSON) -> BaseEntity {
         let summitLocation = SummitLocation()

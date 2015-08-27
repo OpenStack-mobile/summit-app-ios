@@ -14,6 +14,6 @@ public class Venue: SummitLocation {
     public dynamic var address = ""
     public dynamic var lat = ""
     public dynamic var long = ""
-    public dynamic var map = ""
+    public let maps = List<Image>()
     public let venueRooms = List<VenueRoom>()
 }

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class SummitEventDeserializer: NSObject, DeserializerProtocol {
+public class SummitEventDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     var deserializerStorage: DeserializerStorage!
     
