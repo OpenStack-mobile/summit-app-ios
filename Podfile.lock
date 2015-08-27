@@ -1,4 +1,5 @@
 PODS:
+  - HanekeSwift (0.9.1)
   - OCMock (2.0.1)
   - Realm (0.94.1):
     - Realm/Headers (= 0.94.1)
@@ -12,6 +13,7 @@ PODS:
   - Typhoon/no-arc (3.2.5)
 
 DEPENDENCIES:
+  - HanekeSwift (from `https://github.com/meteochu/HanekeSwift.git`, branch `swift-2.0`)
   - OCMock (~> 2.0.1)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
@@ -20,6 +22,9 @@ DEPENDENCIES:
   - Typhoon
 
 EXTERNAL SOURCES:
+  HanekeSwift:
+    :branch: swift-2.0
+    :git: https://github.com/meteochu/HanekeSwift.git
   Realm:
     :branch: swift-2.0
     :git: https://github.com/realm/realm-cocoa.git
@@ -31,6 +36,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  HanekeSwift:
+    :commit: 58d7e2e5590b8767a76c6b2131e1fa28b72ff894
+    :git: https://github.com/meteochu/HanekeSwift.git
   Realm:
     :commit: 59d2e849a063fd5150ef93465714db72bf9c4dad
     :git: https://github.com/realm/realm-cocoa.git
@@ -42,6 +50,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
+  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   OCMock: 7a839b55abfb78e8ec3bf6eaa3cdcc567ac71d2a
   Realm: 567b454e3c452c0c59af719c4a8c2a17fd11fae1
   RealmSwift: 1cfcf6f9bd4de8674797d000de346d9588ca2028

@@ -39,7 +39,10 @@ class SummitDataStoreTests: XCTestCase {
             
             // Assert
             XCTAssertEqual(1, self.realm.objects(Summit.self).count)
-            XCTAssertEqual(1, self.realm.objects(Summit.self).first!.id)
+            let summit = self.realm.objects(Summit.self).first!
+            XCTAssertEqual(1, summit.id)
+            XCTAssertEqual(1, summit.venues.count)
+            XCTAssertEqual("http://www.openstack.org/assets/paris-summit/_resampled/resizedimage464600-meridien-map-level01.png", summit.venues.first!.map)
             XCTAssertEqual(2, self.realm.objects(SummitType.self).count)
             XCTAssertEqual(2, self.realm.objects(SummitEvent.self).count)
             var summitEvent = self.realm.objects(SummitEvent.self).first!

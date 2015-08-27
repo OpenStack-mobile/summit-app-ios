@@ -12,6 +12,6 @@ import RealmSwift
 public class Summit: BaseEntity {
     public dynamic var name = ""
     public let types = List<SummitType>()
-    public let venues = List<SummitLocation>()
+    public let venues = List<Venue>()
     public let events = List<SummitEvent>()
 }

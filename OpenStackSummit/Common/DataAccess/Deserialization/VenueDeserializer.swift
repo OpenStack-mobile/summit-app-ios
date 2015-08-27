@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class VenueDeserializer: NSObject, DeserializerProtocol {
+public class VenueDeserializer: NSObject, IDeserializer {
 
     var deserializerStorage: DeserializerStorage!
     var deserializerFactory: DeserializerFactory!
@@ -28,7 +28,8 @@ public class VenueDeserializer: NSObject, DeserializerProtocol {
             venue.locationDescription = summitLocation.locationDescription
             venue.lat = json["lat"].stringValue
             venue.long = json["long"].stringValue
-            venue.long = json["address"].stringValue
+            venue.address = json["address"].stringValue
+            venue.map = json["map"].stringValue
             
             var venueRoom: VenueRoom
             deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)

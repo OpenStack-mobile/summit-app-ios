@@ -27,8 +27,8 @@ public class DeserializerFactory : NSObject {
     var presentationCategoryDeserializer: PresentationCategoryDeserializer!
     var tagDeserializer: TagDeserializer!
     
-    public func create(type: DeserializerFactories) -> DeserializerProtocol {
-        var deserializer : DeserializerProtocol!
+    public func create(type: DeserializerFactories) -> IDeserializer {
+        var deserializer : IDeserializer!
         
         switch type {
         case DeserializerFactories.Summit:
