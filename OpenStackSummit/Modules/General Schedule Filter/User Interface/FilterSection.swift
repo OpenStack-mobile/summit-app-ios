@@ -14,5 +14,6 @@ public enum FilterSectionTypes {
 
 public class FilterSection: NSObject {
     public var type : FilterSectionTypes!
+    public var name = ""
     public var items = [FilterSectionItem]()
 }

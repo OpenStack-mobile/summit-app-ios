@@ -1,0 +1,51 @@
+//
+//  GeneralScheduleFilterAssembly.swift
+//  OpenStackSummit
+//
+//  Created by Claudio on 8/27/15.
+//  Copyright © 2015 OpenStack. All rights reserved.
+//
+
+import UIKit
+import Typhoon
+
+public class GeneralScheduleFilterAssembly: TyphoonAssembly {
+    dynamic func generalScheduleWireframe() -> AnyObject {
+        return TyphoonDefinition.withClass(GeneralScheduleWireframe.self) {
+            (definition) in
+            
+        }
+    }
+    
+    dynamic func generalScheduleFilterPresenter() -> AnyObject {
+        return TyphoonDefinition.withClass(GeneralScheduleFilterPresenter.self) {
+            (definition) in
+            
+            definition.injectProperty("interactor", with: self.generailScheduleFilterInteractor())
+            definition.injectProperty("generalScheduleWireframe", with: self.generalScheduleWireframe())
+            
+        }
+    }
+    
+    dynamic func generailScheduleFilterInteractor() -> AnyObject {
+        return TyphoonDefinition.withClass(GeneralScheduleFilterInteractor.self) {
+            (definition) in
+            
+            definition.injectProperty("delegate", with: self.generalScheduleFilterPresenter())
+            definition.injectProperty("summitDataStore", with: self.summitDataStore())
+        }
+    }
+    
+    dynamic func summitDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitDataStore.self)
+    }
+    
+    dynamic func generalScheduleFilterViewController() -> AnyObject {
+        return TyphoonDefinition.withClass(GeneralScheduleFilterViewController.self) {
+            (definition) in
+            
+            definition.injectProperty("presenter", with: self.generalScheduleFilterPresenter())
+        }
+    }
+
+}

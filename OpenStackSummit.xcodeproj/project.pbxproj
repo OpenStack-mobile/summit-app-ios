@@ -23,6 +23,7 @@
 		CA416F961B8F5C4A00F177F5 /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F951B8F5C4A00F177F5 /* FilterSection.swift */; };
 		CA416F981B8F5C6200F177F5 /* FilterSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F971B8F5C6200F177F5 /* FilterSectionItem.swift */; };
 		CA416F9A1B8F63E800F177F5 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F991B8F63E700F177F5 /* Track.swift */; };
+		CA416F9C1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */; };
 		CA9E42501B7B9667005FDD22 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42401B7B9667005FDD22 /* Company.swift */; };
 		CA9E42521B7B9667005FDD22 /* PresentationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42421B7B9667005FDD22 /* PresentationCategory.swift */; };
 		CA9E42541B7B9667005FDD22 /* SummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E42441B7B9667005FDD22 /* SummitAttendee.swift */; };
@@ -131,6 +132,7 @@
 		CA416F951B8F5C4A00F177F5 /* FilterSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		CA416F971B8F5C6200F177F5 /* FilterSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSectionItem.swift; sourceTree = "<group>"; };
 		CA416F991B8F63E700F177F5 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterAssembly.swift; sourceTree = "<group>"; };
 		CA9E42401B7B9667005FDD22 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		CA9E42421B7B9667005FDD22 /* PresentationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationCategory.swift; sourceTree = "<group>"; };
 		CA9E42441B7B9667005FDD22 /* SummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendee.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				CAD4809F1B864452004DBB4F /* DataStoreAssembly.swift */,
 				CAD480A51B869280004DBB4F /* MemberDataStoreAssembly.swift */,
 				CAD542371B8B9B1500A9791A /* MenuAssembly.swift */,
+				CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */,
 				CAF2AA541B828E7C00D8E595 /* EventDetailPresenter.swift in Sources */,
 				CAF2AA421B8271C100D8E595 /* KeyValueDeserializer.swift in Sources */,
+				CA416F9C1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift in Sources */,
 				CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */,
 				CAF2AA551B828E7C00D8E595 /* EventDetailViewController.swift in Sources */,
 				CA9E425E1B7B9667005FDD22 /* VenueRoom.swift in Sources */,

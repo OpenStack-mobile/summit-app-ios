@@ -17,7 +17,8 @@ public protocol IGeneralScheduleFilterInteractor {
 
 public class GeneralScheduleFilterInteractor: NSObject {
     
-    //var summitDataStore: ISummitDataStore!
+    var summitDataStore: ISummitDataStore!
+    var delegate: IGeneralScheduleFilterPresenter!
     
     public func getSummitTypes() -> [SummitType] {
         return [SummitType]()

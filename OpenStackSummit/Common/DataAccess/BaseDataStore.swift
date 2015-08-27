@@ -9,8 +9,7 @@
 import UIKit
 import RealmSwift
 
-public class BaseDataStore<T : BaseEntity>: NSObject, IDataStore {
-    public typealias EntityType = T
+public class BaseDataStore<T : BaseEntity>: NSObject {
     var realm = try! Realm()
     var trigger: ITrigger!
     
@@ -18,12 +17,12 @@ public class BaseDataStore<T : BaseEntity>: NSObject, IDataStore {
         super.init()
     }
     
-    public func get(id: Int, completitionBlock: (EntityType?) -> Void) {
-        let entity = realm.objects(EntityType.self).first
+    public func get(id: Int, completitionBlock: (T?) -> Void) {
+        let entity = realm.objects(T.self).first
         completitionBlock(entity)
     }
         
-    public func saveOrUpdate(entity: EntityType, completitionBlock: ((EntityType) -> Void)!) {
+    public func saveOrUpdate(entity: T, completitionBlock: ((T) -> Void)!) {
         realm.write {
             self.realm.add(entity, update: true)
         }
@@ -43,7 +42,7 @@ public class BaseDataStore<T : BaseEntity>: NSObject, IDataStore {
         }
     }
     
-    public func delete(entity: EntityType, completitionBlock : ((Void) -> Void)!) {
+    public func delete(entity: T, completitionBlock : ((Void) -> Void)!) {
         realm.write {
             self.realm.delete(entity)
         }
