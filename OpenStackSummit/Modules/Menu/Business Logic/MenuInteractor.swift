@@ -15,6 +15,7 @@ public protocol IMenuInteractor {
 
 public class MenuInteractor: NSObject, IMenuInteractor {
     var session : ISession!
+    let kCurrentMember = "currentMember"
     
     public override init() {
         super.init()
@@ -26,7 +27,7 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     
     public func getCurrentMemberRole() -> MemberRoles{
         var role = MemberRoles.Anonymous
-        if let member = session.get("currentMember") {
+        if let member = session.get(kCurrentMember) {
             if ((member as! Member).speakerRole != nil) {
                 role = MemberRoles.Speaker
             }

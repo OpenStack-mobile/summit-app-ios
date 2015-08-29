@@ -10,7 +10,8 @@ import UIKit
 import Typhoon
 
 class EventDetailAssembly: TyphoonAssembly {
-    var applicationAssembly: ApplicationAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
+    var memberDataStoreAssembly: MemberDataStoreAssembly!
     
     dynamic func eventDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(EventDetailWireframe.self) {
@@ -33,17 +34,25 @@ class EventDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventDetailInteractor.self) {
             (definition) in
             
-            definition.injectProperty("delegate", with: self.eventDetailPresenter())
+            definition.injectProperty("session", with: self.eventDetailSession())
+            definition.injectProperty("eventDataStore", with: self.eventDataStore())
+            definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
     }
+
+    dynamic func eventDetailSession() -> AnyObject {
+        return TyphoonDefinition.withClass(Session.self)
+    }
     
+    dynamic func eventDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(EventDataStore.self)
+    }
+        
     dynamic func eventDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
-            (factoryMethod) in
+        return TyphoonDefinition.withClass(EventDataStore.self) {
+            (definition) in
             
-            factoryMethod.injectParameterWith("EventDetailViewController")
-            }, configuration: {
-                (definition) in
-        })
+            definition.injectProperty("presenter", with: self.eventDetailPresenter())
+        }
     }
 }

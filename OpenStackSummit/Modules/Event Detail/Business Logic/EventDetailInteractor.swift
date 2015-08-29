@@ -8,13 +8,28 @@
 
 import UIKit
 
-class EventDetailInteractor: NSObject {
-    var delegate : EventDetailPresenter?
+public protocol IEventDetailInteractor {
+    func getEventDetail(eventId: Int) -> SummitEvent
+}
+
+public class EventDetailInteractor: NSObject {
+    var eventDataStore: IEventDataStore!
+    var memberDataStore: IMemberDataStore!
+    var session: ISession!
+    let kCurrentMember = "currentMember"
     
-    func getEventDetailAsync(eventId: Int){
-        if (delegate != nil) {
-            let eventDetail = "testing event detail"
-            delegate?.showEventDetail(eventDetail)
+    func getEventDetail(eventId: Int) -> SummitEvent {
+        let event = eventDataStore.get(eventId)
+        return event!
+    }
+    
+    func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
+        let currentMember = session.get(kCurrentMember) as! Member
+        let event = eventDataStore.get(eventId)
+        memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { (member, error) in
+            if (error != nil) {
+                self.session.set(self.kCurrentMember, value: member!)
+            }
         }
     }
 }

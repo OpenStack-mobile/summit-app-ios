@@ -8,16 +8,32 @@
 
 import UIKit
 
-class EventDetailPresenter: NSObject {
-    weak var viewController : EventDetailViewController?
-    var interactor : EventDetailInteractor?
-    var eventId: Int?
+public protocol IEventDetailPresenter {
+    func showEventDetail() -> SummitEvent
+    var eventId: Int { get set }
+}
+
+public class EventDetailPresenter: NSObject {
+    weak var viewController : EventDetailViewController!
+    var interactor : EventDetailInteractor!
+    var eventId: Int!
     
-    func showEventDetailAsync() {
-        self.interactor?.getEventDetailAsync(self.eventId!)
+    public func showEventDetail() -> SummitEvent {
+        return self.interactor.getEventDetail(eventId)
     }
     
-    func showEventDetail(eventDetail: String) {
-        viewController!.showEventDetail(eventDetail)
+    public func addEventToMyScheduleAsync() {
+        interactor.addEventToMyScheduleAsync(eventId) { (event, error) in
+            self.addEventToMyScheduleCallback(event, error: error)
+        }
+    }
+    
+    private func addEventToMyScheduleCallback(event: SummitEvent?, error: NSError?) {
+        if (error == nil) {
+            viewController.didFinishAddingEventToMySchedule(event!)
+        }
+        else {
+            viewController.handleError(error!)
+        }
     }
 }

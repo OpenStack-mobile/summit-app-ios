@@ -32,11 +32,11 @@ public class MenuAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MenuInteractor.self) {
             (definition) in
             
-            definition.injectProperty("session", with: self.session())
+            definition.injectProperty("session", with: self.menuSession())
         }
     }
     
-    dynamic func session() -> AnyObject {
+    dynamic func menuSession() -> AnyObject {
         return TyphoonDefinition.withClass(Session.self)
     }
     

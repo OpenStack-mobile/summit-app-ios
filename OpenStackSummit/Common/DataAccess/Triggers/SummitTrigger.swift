@@ -11,16 +11,16 @@ import Haneke
 
 public class SummitTrigger: NSObject, ITrigger {
 
-    public func run(entity: BaseEntity, type: TriggerTypes, operation: TriggerOperations, completitionBlock : ((Void) -> Void)!) {
+    public func run(entity: BaseEntity, type: TriggerTypes, operation: TriggerOperations, completionBlock : ((Void) -> Void)!) {
         if (entity is Summit) {
-            run(entity as! Summit, type: type, operation: operation, completitionBlock : completitionBlock)
+            run(entity as! Summit, type: type, operation: operation, completionBlock : completionBlock)
         }
         else {
             NSException(name: "InvalidArgument",reason: "entity is not of type Summit", userInfo: nil).raise()
         }
     }
     
-    private func run(entity: Summit, type: TriggerTypes, operation: TriggerOperations, completitionBlock : ((Void) -> Void)!) {
+    private func run(entity: Summit, type: TriggerTypes, operation: TriggerOperations, completionBlock : ((Void) -> Void)!) {
         if (entity.venues.count > 0) {
 
             for venue in entity.venues {
@@ -30,8 +30,8 @@ public class SummitTrigger: NSObject, ITrigger {
             }
         }
         
-        if (completitionBlock != nil) {
-            completitionBlock()
+        if (completionBlock != nil) {
+            completionBlock()
         }
         
     }

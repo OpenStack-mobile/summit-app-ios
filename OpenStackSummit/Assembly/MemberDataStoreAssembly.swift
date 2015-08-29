@@ -18,6 +18,11 @@ public class MemberDataStoreAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MemberDataStore.self) {
             (definition) in
             definition.injectProperty("deserializerFactory", with: self.dataStoreAssembly.deserializerFactory())
+            definition.injectProperty("remoteStorage", with: self.remoteStorage())
         }
+    }
+    
+    dynamic func remoteStorage() -> AnyObject {
+        return TyphoonDefinition.withClass(MemberRemoteDataStore.self)
     }
 }

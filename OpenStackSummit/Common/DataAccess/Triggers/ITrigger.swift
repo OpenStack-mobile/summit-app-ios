@@ -19,5 +19,5 @@ import UIKit
 @objc
 public protocol ITrigger {
 
-    func run(entity: BaseEntity, type: TriggerTypes, operation: TriggerOperations, completitionBlock : (() -> Void)!)
+    func run(entity: BaseEntity, type: TriggerTypes, operation: TriggerOperations, completionBlock : (() -> Void)!)
 }

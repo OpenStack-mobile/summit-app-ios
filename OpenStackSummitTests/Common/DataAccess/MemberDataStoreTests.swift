@@ -59,4 +59,32 @@ class MemberDataStoreTests: XCTestCase {
         
         self.waitForExpectationsWithTimeout(5.0, handler: nil)
     }
+    
+    func test_addEventToMemberShedule_succeedAddingEvent_ReturnsAddedEventAndNoError() {
+        // Arrange
+        let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
+        let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
+        summitDataStore.getActive(){
+            (result) in
+        }
+        
+        let expectation = expectationWithDescription("async load")
+        let memberDataStoreAssembly = MemberDataStoreAssembly().activate();
+        let memberDataStore = memberDataStoreAssembly.memberDataStore() as! MemberDataStore
+        let memberId = 1
+        let member = Member()
+        member.id = 1
+        realm.write {
+            self.realm.add(member)
+        }
+        let event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!
+        
+        // Act
+        memberDataStore.addEventToMemberShedule(1, event: event) { member, error in
+            // Assert
+            XCTAssertEqual(1, self.realm.objects(Member.self).filter("id = \(memberId)").first!.scheduledEvents.first!.id)
+            expectation.fulfill()
+        }
+        
+        self.waitForExpectationsWithTimeout(5.0, handler: nil)    }
 }
