@@ -10,7 +10,7 @@ import UIKit
 
 public protocol IDataStore {
     
-    func get(id: Int, completitionBlock : (BaseEntity?) -> Void)
-    func saveOrUpdate(entity: BaseEntity, completitionBlock : ((BaseEntity) -> Void)!)
-    func delete(entity: BaseEntity, completitionBlock : ((Void) -> Void)!)
+    func get(id: Int, completionBlock : (BaseEntity?) -> Void)
+    func saveOrUpdate(entity: BaseEntity, completionBlock : ((BaseEntity) -> Void)!)
+    func delete(entity: BaseEntity, completionBlock : ((Void) -> Void)!)
 }

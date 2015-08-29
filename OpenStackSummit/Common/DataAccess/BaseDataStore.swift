@@ -27,7 +27,7 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         return entities.map { $0 }
     }
     
-    public func saveOrUpdate(entity: T, completitionBlock: ((T) -> Void)!) {
+    public func saveOrUpdate(entity: T, completionBlock: ((T) -> Void)!) {
         realm.write {
             self.realm.add(entity, update: true)
         }
@@ -35,19 +35,19 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Save) {
                 () in
                 
-                if (completitionBlock != nil) {
-                    completitionBlock(entity)
+                if (completionBlock != nil) {
+                    completionBlock(entity)
                 }
             }
         }
         else {
-            if (completitionBlock != nil) {
-                completitionBlock(entity)
+            if (completionBlock != nil) {
+                completionBlock(entity)
             }
         }
     }
     
-    public func delete(entity: T, completitionBlock : ((Void) -> Void)!) {
+    public func delete(entity: T, completionBlock : ((Void) -> Void)!) {
         realm.write {
             self.realm.delete(entity)
         }
@@ -55,14 +55,14 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Delete) {
                 () in
                 
-                if (completitionBlock != nil) {
-                    completitionBlock()
+                if (completionBlock != nil) {
+                    completionBlock()
                 }
             }
         }
         else {
-            if (completitionBlock != nil) {
-                completitionBlock()
+            if (completionBlock != nil) {
+                completionBlock()
             }
         }
     }

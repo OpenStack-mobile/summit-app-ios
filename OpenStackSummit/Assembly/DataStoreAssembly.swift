@@ -140,7 +140,6 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    
     dynamic func tagDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(TagDeserializer.self) {
             (definition) in

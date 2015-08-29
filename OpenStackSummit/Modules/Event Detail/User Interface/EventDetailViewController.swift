@@ -12,14 +12,13 @@ import Haneke
 class EventDetailViewController: UIViewController {
     
     @IBOutlet weak var eventDetailLabel: UILabel!
-    
-    var presenter : EventDetailPresenter?
+    var presenter : IEventDetailPresenter!
     
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.showEventDetailAsync()
+        presenter.showEventDetail()
         
         //imageView.hnk_setImageFromURL(NSURL(string:"http://www.openstack.org/assets/paris-summit/_resampled/resizedimage464600-meridien-map-level01.png")!)
     }
@@ -31,6 +30,14 @@ class EventDetailViewController: UIViewController {
     
     func showEventDetail(eventDetail: String) {
         eventDetailLabel.text = eventDetail
+    }
+    
+    func didFinishAddingEventToMySchedule(event: SummitEvent) {
+        
+    }
+    
+    func handleError(error: NSError) {
+        
     }
     
     /*
