@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import SWRevealViewController
 import AFHorizontalDayPicker
 
-class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate {
+class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate {
 
     let cellIdentifier = "GeneralScheduleTableViewCell"
     
-    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
@@ -27,10 +25,6 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        menuButton.target = self.revealViewController()
-        menuButton.action = Selector("revealToggle:")
-        view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         dayPicker.delegate = self
         
@@ -83,4 +77,5 @@ class GeneralScheduleViewController: UIViewController, UITableViewDelegate, UITa
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
         self.presenter?.reloadSchedule(byDate: date)
     }
+
 }
