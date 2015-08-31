@@ -13,8 +13,7 @@ public protocol IGeneralScheduleInteractor {
 }
 
 public class GeneralScheduleInteractor: NSObject {
-    var delegate : GeneralSchedulePresenter?
-    
+    var delegate : GeneralSchedulePresenter!
     var summitDataStore : ISummitDataStore!
     
     func getScheduleEventsAsync(){

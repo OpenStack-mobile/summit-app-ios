@@ -17,7 +17,7 @@ public protocol IEventDetailPresenter {
 public class EventDetailPresenter: NSObject {
     weak var viewController : EventDetailViewController!
     var interactor : EventDetailInteractor!
-    var eventId: Int!
+    var eventId = 0
     
     public func showEventDetail() -> SummitEvent {
         return self.interactor.getEventDetail(eventId)

@@ -33,7 +33,7 @@ class EventDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventDetailInteractor.self) {
             (definition) in
             
-            definition.injectProperty("session", with: self.eventDetailSession())
+            //definition.injectProperty("session", with: self.eventDetailSession())
             definition.injectProperty("eventDataStore", with: self.eventDataStore())
             //definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
