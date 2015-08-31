@@ -9,10 +9,10 @@
 import UIKit
 
 class GeneralScheduleWireframe: NSObject {
-    var eventDetailWireframe : EventDetailWireframe?
-    var generalScheduleViewController: GeneralScheduleViewController?
+    var eventDetailWireframe : IEventDetailWireframe!
+    var generalScheduleViewController: GeneralScheduleViewController!
     
     func showEventDetail(eventId: Int) {
-        eventDetailWireframe?.presentEventDetailView(eventId, viewController: generalScheduleViewController!.navigationController!)
+        eventDetailWireframe.presentEventDetailView(eventId, viewController: generalScheduleViewController.navigationController!)
     }
 }

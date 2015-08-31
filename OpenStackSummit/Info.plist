@@ -44,6 +44,7 @@
 		<string>MenuAssembly</string>
 		<string>SummitDataStoreAssembly</string>
 		<string>DataStoreAssembly</string>
+		<string>MemberDataStoreAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
