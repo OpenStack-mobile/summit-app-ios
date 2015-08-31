@@ -10,8 +10,8 @@ import UIKit
 import Typhoon
 
 public class GeneralScheduleFilterAssembly: TyphoonAssembly {
-    dynamic func generalScheduleWireframe() -> AnyObject {
-        return TyphoonDefinition.withClass(GeneralScheduleWireframe.self) {
+    dynamic func generalScheduleFilterWireframe() -> AnyObject {
+        return TyphoonDefinition.withClass(GeneralScheduleFilterWireframe.self) {
             (definition) in
             
         }
@@ -22,7 +22,7 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("interactor", with: self.generailScheduleFilterInteractor())
-            definition.injectProperty("generalScheduleWireframe", with: self.generalScheduleWireframe())
+            definition.injectProperty("generalScheduleFilterWireframe", with: self.generalScheduleFilterWireframe())
             
         }
     }
