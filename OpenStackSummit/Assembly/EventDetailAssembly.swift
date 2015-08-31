@@ -33,9 +33,9 @@ class EventDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventDetailInteractor.self) {
             (definition) in
             
-            //definition.injectProperty("session", with: self.eventDetailSession())
+            definition.injectProperty("session", with: self.eventDetailSession())
             definition.injectProperty("eventDataStore", with: self.eventDataStore())
-            //definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
+            definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
     }
 
@@ -46,12 +46,20 @@ class EventDetailAssembly: TyphoonAssembly {
     dynamic func eventDataStore() -> AnyObject {
         return TyphoonDefinition.withClass(EventDataStore.self)
     }
-        
+    
     dynamic func eventDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(EventDetailViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.eventDetailPresenter())
-        }
+            factoryMethod.injectParameterWith("EventDetailViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.eventDetailPresenter())
+        })
     }
+    
+    var applicationAssembly: ApplicationAssembly!
+    
 }
+
+

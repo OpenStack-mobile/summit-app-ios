@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IEventDetailInteractor {
     func getEventDetail(eventId: Int) -> SummitEvent
+    func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void)
 }
 
 public class EventDetailInteractor: NSObject {
@@ -19,12 +20,12 @@ public class EventDetailInteractor: NSObject {
     var session: ISession!
     let kCurrentMember = "currentMember"
     
-    func getEventDetail(eventId: Int) -> SummitEvent {
+    public func getEventDetail(eventId: Int) -> SummitEvent {
         let event = eventDataStore.get(eventId)
         return event!
     }
     
-    func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
+    public func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
         let currentMember = session.get(kCurrentMember) as! Member
         let event = eventDataStore.get(eventId)
         memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { (member, error) in

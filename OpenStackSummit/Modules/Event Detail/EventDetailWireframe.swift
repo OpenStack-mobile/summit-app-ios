@@ -8,10 +8,15 @@
 
 import UIKit
 
-class EventDetailWireframe: NSObject {
+@objc
+public protocol IEventDetailWireframe {
+    func presentEventDetailView(eventId: Int, viewController: UINavigationController)
+}
+
+public class EventDetailWireframe: NSObject {
     var eventDetailViewController : EventDetailViewController!
     
-    func presentEventDetailView(eventId: Int, viewController: UINavigationController) {
+    public func presentEventDetailView(eventId: Int, viewController: UINavigationController) {
         let newViewController = eventDetailViewController!
         eventDetailViewController.presenter.eventId = eventId
         viewController.pushViewController(newViewController, animated: true)
