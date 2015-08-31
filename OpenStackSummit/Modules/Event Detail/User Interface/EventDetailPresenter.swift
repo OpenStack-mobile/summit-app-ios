@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 public protocol IEventDetailPresenter {
     func showEventDetail() -> SummitEvent
     var eventId: Int { get set }

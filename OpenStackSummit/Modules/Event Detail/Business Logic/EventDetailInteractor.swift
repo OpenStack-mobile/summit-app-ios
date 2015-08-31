@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 public protocol IEventDetailInteractor {
     func getEventDetail(eventId: Int) -> SummitEvent
 }

@@ -10,7 +10,6 @@ import UIKit
 import Typhoon
 
 class EventDetailAssembly: TyphoonAssembly {
-    var dataStoreAssembly: DataStoreAssembly!
     var memberDataStoreAssembly: MemberDataStoreAssembly!
     
     dynamic func eventDetailWireframe() -> AnyObject {
@@ -36,7 +35,7 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("session", with: self.eventDetailSession())
             definition.injectProperty("eventDataStore", with: self.eventDataStore())
-            definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
+            //definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
     }
 
@@ -49,7 +48,7 @@ class EventDetailAssembly: TyphoonAssembly {
     }
         
     dynamic func eventDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(EventDataStore.self) {
+        return TyphoonDefinition.withClass(EventDetailViewController.self) {
             (definition) in
             
             definition.injectProperty("presenter", with: self.eventDetailPresenter())
