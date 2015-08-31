@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
+@objc
 protocol IMemberDataStore {
     func getByEmail(email: NSString, completionBlock : (Member?) -> Void)
     func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void)
