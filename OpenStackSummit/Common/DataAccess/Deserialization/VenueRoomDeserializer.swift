@@ -25,6 +25,7 @@ public class VenueRoomDeserializer: NSObject, IDeserializer {
             venueRoom = VenueRoom()
             venueRoom.id = json["id"].intValue
             venueRoom.capacity = json["capacity"].intValue
+            venueRoom.name = location.name
             venueRoom.locationDescription = location.locationDescription
             
             if(!deserializerStorage.exist(venueRoom)) {

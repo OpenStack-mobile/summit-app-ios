@@ -16,7 +16,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
-    var presenter : GeneralSchedulePresenter?
+    var presenter : IGeneralSchedulePresenter!
     var dayEvents : [SummitEvent]?
     var events : [SummitEvent]?
     
@@ -28,7 +28,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         
         dayPicker.delegate = self
         
-        presenter?.reloadScheduleAsync()
+        presenter.reloadScheduleAsync()
     }
     
     func reloadSchedule() {
@@ -65,8 +65,8 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        let event = events![indexPath.row]
-        self.presenter?.showEventDetail(event.id)
+        let event = dayEvents![indexPath.row]
+        self.presenter.showEventDetail(event.id)
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
@@ -75,7 +75,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
-        self.presenter?.reloadSchedule(byDate: date)
+        self.presenter.reloadSchedule(byDate: date)
     }
 
 }

@@ -70,9 +70,12 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
     }
     
     public func getLocation(event: SummitEvent) -> String{
-        var location = event.venue!.name
+        var location = ""
         if (event.venueRoom != nil) {
-            location += " - " + event.venueRoom!.name
+            location = event.venueRoom!.venue.name + " - " + event.venueRoom!.name
+        }
+        else if (event.venue != nil){
+            location = event.venue!.name
         }
         return location
     }

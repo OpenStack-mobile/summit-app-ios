@@ -9,12 +9,22 @@
 import UIKit
 import Haneke
 
-class EventDetailViewController: UIViewController {
+@objc
+public protocol IEventDetailViewController {
+    func showEventDetail(eventDetail: EventDetailDTO)
+    func didAddEventToMySchedule(event: EventDetailDTO)
+    func handleError(error: NSError)
+}
+
+class EventDetailViewController: UIViewController, IEventDetailViewController {
     
     @IBOutlet weak var eventDetailLabel: UILabel!
-    var presenter : IEventDetailPresenter!
-    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    
+    var presenter : IEventDetailPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +38,14 @@ class EventDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func showEventDetail(eventDetail: String) {
-        eventDetailLabel.text = eventDetail
+    func showEventDetail(eventDetail: EventDetailDTO) {
+        titleLabel.text = eventDetail.title
+        timeLabel.text = eventDetail.date
+        locationLabel.text = eventDetail.location
+        eventDetailLabel.text = eventDetail.eventDescription
     }
     
-    func didFinishAddingEventToMySchedule(event: EventDetailDTO) {
+    func didAddEventToMySchedule(event: EventDetailDTO) {
         
     }
     

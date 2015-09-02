@@ -10,18 +10,20 @@ import UIKit
 
 @objc
 public protocol IEventDetailPresenter {
-    func showEventDetail() -> SummitEvent
+    func showEventDetail()
     var eventId: Int { get set }
 }
 
 public class EventDetailPresenter: NSObject {
-    weak var viewController : EventDetailViewController!
+    weak var viewController : IEventDetailViewController!
     var interactor : IEventDetailInteractor!
     var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     var eventId = 0
     
-    public func showEventDetail() -> SummitEvent {
-        return self.interactor.getEventDetail(eventId)
+    public func showEventDetail() {
+        let event = self.interactor.getEventDetail(eventId)
+        let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
+        viewController.showEventDetail(eventDetailDTO)
     }
     
     public func addEventToMyScheduleAsync() {
@@ -33,7 +35,7 @@ public class EventDetailPresenter: NSObject {
     private func addEventToMyScheduleCallback(event: SummitEvent?, error: NSError?) {
         if (error == nil) {
             let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
-            viewController.didFinishAddingEventToMySchedule(eventDetailDTO)
+            viewController.didAddEventToMySchedule(eventDetailDTO)
         }
         else {
             viewController.handleError(error!)

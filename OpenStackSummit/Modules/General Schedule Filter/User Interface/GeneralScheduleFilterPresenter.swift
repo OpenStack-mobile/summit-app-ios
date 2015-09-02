@@ -9,12 +9,13 @@
 import UIKit
 
 public protocol IGeneralScheduleFilterPresenter {
-    func getFilters() -> [FilterSection]
+    func showFilters()
 }
 
-public class GeneralScheduleFilterPresenter: NSObject {
+public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPresenter {
     
     var genereralScheduleFilterInteractor: IGeneralScheduleFilterInteractor!
+    var viewController: IGeneralScheduleFilterViewController!
     var session: ISession!
     var filterSelections: Dictionary<FilterSectionTypes, [Int]>?
     let kGeneralScheduleFilterSelections = "generalScheduleFilterSelections"
@@ -32,7 +33,7 @@ public class GeneralScheduleFilterPresenter: NSObject {
         }
     }
     
-    public func getFilters() -> [FilterSection] {
+    public func showFilters() {
         let summitTypes = genereralScheduleFilterInteractor.getSummitTypes()
         let eventTypes = genereralScheduleFilterInteractor.getEventTypes()
         let summitTracks = genereralScheduleFilterInteractor.getSummitTracks()
@@ -66,8 +67,8 @@ public class GeneralScheduleFilterPresenter: NSObject {
             filterSection.items.append(filterSectionItem)
         }
         filterSections.append(filterSection)
-        
-        return filterSections
+
+        viewController.showFilters(filterSections)
     }
   
     private func createSectionItem(id: Int, name: String, type: FilterSectionTypes) -> FilterSectionItem {
