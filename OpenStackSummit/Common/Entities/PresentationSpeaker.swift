@@ -10,5 +10,5 @@ import Foundation
 import RealmSwift
 
 public class PresentationSpeaker: BaseEntity {
-    
+    public dynamic var isPresentationOwner = false
 }

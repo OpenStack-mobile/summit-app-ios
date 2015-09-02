@@ -32,7 +32,7 @@ class EventDetailViewController: UIViewController {
         eventDetailLabel.text = eventDetail
     }
     
-    func didFinishAddingEventToMySchedule(event: SummitEvent) {
+    func didFinishAddingEventToMySchedule(event: EventDetailDTO) {
         
     }
     
