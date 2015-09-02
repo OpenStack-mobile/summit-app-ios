@@ -8,11 +8,16 @@
 
 import UIKit
 
-class GeneralScheduleWireframe: NSObject {
+@objc
+public protocol IGeneralScheduleWireframe {
+    func showEventDetail(eventId: Int)
+}
+
+public class GeneralScheduleWireframe: NSObject {
     var eventDetailWireframe : IEventDetailWireframe!
     var generalScheduleViewController: GeneralScheduleViewController!
     
-    func showEventDetail(eventId: Int) {
+    public func showEventDetail(eventId: Int) {
         eventDetailWireframe.presentEventDetailView(eventId, viewController: generalScheduleViewController.navigationController!)
     }
 }

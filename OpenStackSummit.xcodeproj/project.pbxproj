@@ -610,9 +610,10 @@
 		CAF2AA291B8271C100D8E595 /* DataAccess */ = {
 			isa = PBXGroup;
 			children = (
+				CAD261661B8D6B8C00E6382F /* Triggers */,
+				CAF2AA2B1B8271C100D8E595 /* Deserialization */,
 				CA01190E1B8D1C2C0091E00F /* BaseDataStore.swift */,
 				CAD47A151B84D559007741E7 /* DataStoreProtocol.swift */,
-				CAF2AA2B1B8271C100D8E595 /* Deserialization */,
 				CA3DA3E21B90EECD00201496 /* EventDataStore.swift */,
 				CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */,
 				CAD480A11B868439004DBB4F /* MemberDataStore.swift */,
@@ -621,7 +622,6 @@
 				CAD47A131B84D45C007741E7 /* SummitDataStore.swift */,
 				CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */,
 				CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */,
-				CAD261661B8D6B8C00E6382F /* Triggers */,
 			);
 			path = DataAccess;
 			sourceTree = "<group>";

@@ -8,12 +8,17 @@
 
 import UIKit
 
-class GeneralScheduleFilterViewController: UIViewController {
+public protocol IGeneralScheduleFilterViewController {
+    func showFilters(filterSections: [FilterSection])
+}
 
-    var presenter : GeneralScheduleFilterPresenter!
+class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFilterViewController {
+
+    var presenter : IGeneralScheduleFilterPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.showFilters()
 
         // Do any additional setup after loading the view.
     }
@@ -23,6 +28,9 @@ class GeneralScheduleFilterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func showFilters(filterSections: [FilterSection]) {
+        
+    }
 
     /*
     // MARK: - Navigation
