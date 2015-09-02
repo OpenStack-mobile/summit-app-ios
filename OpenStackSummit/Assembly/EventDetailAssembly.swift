@@ -26,7 +26,20 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("viewController", with: self.eventDetailViewController())
             definition.injectProperty("interactor", with: self.eventDetailInteractor())
+            definition.injectProperty("eventDetailDTOAssembler", with: self.eventDetailDTOAssembler())
         }
+    }
+    
+    dynamic func eventDetailDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(EventDetailDTOAssembler.self) {
+            (definition) in
+            
+            definition.injectProperty("speakerDTOAssembler", with: self.speakerDTOAssembler())
+        }
+    }
+    
+    dynamic func speakerDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(SpeakerDTOAssembler.self)
     }
     
     dynamic func eventDetailInteractor() -> AnyObject {

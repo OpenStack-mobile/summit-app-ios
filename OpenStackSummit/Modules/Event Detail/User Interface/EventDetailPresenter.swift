@@ -17,6 +17,7 @@ public protocol IEventDetailPresenter {
 public class EventDetailPresenter: NSObject {
     weak var viewController : EventDetailViewController!
     var interactor : IEventDetailInteractor!
+    var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     var eventId = 0
     
     public func showEventDetail() -> SummitEvent {
@@ -31,7 +32,8 @@ public class EventDetailPresenter: NSObject {
     
     private func addEventToMyScheduleCallback(event: SummitEvent?, error: NSError?) {
         if (error == nil) {
-            viewController.didFinishAddingEventToMySchedule(event!)
+            let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
+            viewController.didFinishAddingEventToMySchedule(eventDetailDTO)
         }
         else {
             viewController.handleError(error!)
