@@ -15,24 +15,22 @@ public protocol IEventDetailDTOAssembler {
 
 public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
     var speakerDTOAssembler: ISpeakerDTOAssembler!
+    var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
     
     public override init() {
         super.init()
     }
 
-    public init(speakerDTOAssembler: ISpeakerDTOAssembler) {
+    public init(speakerDTOAssembler: ISpeakerDTOAssembler, scheduleItemDTOAssembler: IScheduleItemDTOAssembler) {
         self.speakerDTOAssembler = speakerDTOAssembler
+        self.scheduleItemDTOAssembler = scheduleItemDTOAssembler
     }
     
     public func createDTO(event: SummitEvent) -> EventDetailDTO {
-        let eventDetailDTO = EventDetailDTO()
-        
-        eventDetailDTO.title = event.title
-        eventDetailDTO.eventDescription = event.eventDescription
-        eventDetailDTO.location = getLocation(event)
+        let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+        let eventDetailDTO = EventDetailDTO(scheduleItemDTO: scheduleItemDTO)
         eventDetailDTO.finished = getFinished(event)
-        eventDetailDTO.date = getDate(event)
-        
+        eventDetailDTO.eventDescription = event.eventDescription
         if let presentation = event.presentation {
             eventDetailDTO.category = event.presentation!.category.name
             eventDetailDTO.tags = getTags(presentation)
@@ -55,34 +53,8 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         }
         return tags
     }
-    
-    public func getDate(event: SummitEvent) -> String{
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC");
-        dateFormatter.dateFormat = "EEEE dd MMMM HH:mm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start)
-        
-        dateFormatter.dateFormat = "HH:mm"
-        let stringDateTo = dateFormatter.stringFromDate(event.end)
-        
-        return "\(stringDateFrom) - \(stringDateTo)"
-    }
-    
-    public func getLocation(event: SummitEvent) -> String{
-        var location = ""
-        if (event.venueRoom != nil) {
-            location = event.venueRoom!.venue.name + " - " + event.venueRoom!.name
-        }
-        else if (event.venue != nil){
-            location = event.venue!.name
-        }
-        return location
-    }
-    
     public func getFinished(event: SummitEvent) -> Bool{
         return event.end.compare(NSDate()) == NSComparisonResult.OrderedAscending
     }
-    
-    
 }

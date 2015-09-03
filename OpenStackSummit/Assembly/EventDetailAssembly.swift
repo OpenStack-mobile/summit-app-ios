@@ -35,11 +35,16 @@ class EventDetailAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("speakerDTOAssembler", with: self.speakerDTOAssembler())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.scheduleItemDTOAssembler())
         }
     }
     
     dynamic func speakerDTOAssembler() -> AnyObject {
         return TyphoonDefinition.withClass(SpeakerDTOAssembler.self)
+    }
+    
+    dynamic func scheduleItemDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
     }
     
     dynamic func eventDetailInteractor() -> AnyObject {

@@ -16,7 +16,13 @@ import RealmSwift
 public class Member: BaseEntity {
     public dynamic var firstName = ""
     public dynamic var lastName = ""
+    public dynamic var jobTitle = ""
+    public dynamic var pictureUrl = ""
+    public dynamic var bio = ""
+    public dynamic var twitter = ""
+    public dynamic var IRC = ""
     public dynamic var email = ""
+    public dynamic var location = ""
     public let scheduledEvents = List<SummitEvent>()
     public let bookmarkedEvents = List<SummitEvent>()
     public dynamic var speakerRole : PresentationSpeaker?

@@ -45,6 +45,8 @@
 		<string>SummitDataStoreAssembly</string>
 		<string>DataStoreAssembly</string>
 		<string>MemberDataStoreAssembly</string>
+		<string>MemberProfileAssembly</string>
+		<string>MemberRemoteDataStoreAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

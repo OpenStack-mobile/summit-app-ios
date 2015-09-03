@@ -27,13 +27,13 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("viewController", with: self.generalScheduleViewController())
-            definition.injectProperty("interactor", with: self.generailScheduleInteractor())
+            definition.injectProperty("interactor", with: self.generalScheduleInteractor())
             definition.injectProperty("generalScheduleWireframe", with: self.generalScheduleWireframe())
             
         }
     }
     
-    dynamic func generailScheduleInteractor() -> AnyObject {
+    dynamic func generalScheduleInteractor() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleInteractor.self) {
             (definition) in
             

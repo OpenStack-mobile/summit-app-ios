@@ -21,13 +21,13 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(GeneralScheduleFilterPresenter.self) {
             (definition) in
             
-            definition.injectProperty("interactor", with: self.generailScheduleFilterInteractor())
+            definition.injectProperty("interactor", with: self.generalScheduleFilterInteractor())
             definition.injectProperty("generalScheduleFilterWireframe", with: self.generalScheduleFilterWireframe())
             
         }
     }
     
-    dynamic func generailScheduleFilterInteractor() -> AnyObject {
+    dynamic func generalScheduleFilterInteractor() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleFilterInteractor.self) {
             (definition) in
             
