@@ -12,7 +12,7 @@ import RealmSwift
 public class VenueRoom: Location {
 
     public dynamic var capacity = 0
-    var venue: Venue {
+    public var venue: Venue {
         return linkingObjects(Venue.self, forProperty: "venueRooms").first!
     }
     

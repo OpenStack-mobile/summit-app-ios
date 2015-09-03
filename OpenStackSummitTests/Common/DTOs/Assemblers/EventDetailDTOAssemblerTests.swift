@@ -8,6 +8,7 @@
 
 import XCTest
 import OpenStackSummit
+import RealmSwift
 
 class EventDetailDTOAssemblerTests: XCTestCase {
     
@@ -24,9 +25,27 @@ class EventDetailDTOAssemblerTests: XCTestCase {
         }
     }
     
+    class ScheduleItemDTOAssemblerMock : IScheduleItemDTOAssembler {
+        
+        var scheduleItemDTO: ScheduleItemDTO
+        
+        init(scheduleItemDTO: ScheduleItemDTO) {
+            self.scheduleItemDTO = scheduleItemDTO
+        }
+        
+        @objc func createDTO(event: SummitEvent) -> ScheduleItemDTO {
+            return scheduleItemDTO
+        }
+    }
+    
+    var realm = try! Realm()
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        realm.write {
+            self.realm.deleteAll()
+        }
     }
     
     override func tearDown() {
@@ -43,41 +62,52 @@ class EventDetailDTOAssemblerTests: XCTestCase {
         venue.name = "Test Venue"
         let venueRoom = VenueRoom()
         venueRoom.name = "Test Venue Room"
+        venue.venueRooms.append(venueRoom)
+        realm.write {
+            self.realm.add(venue)
+        }
         let presentationCategory = PresentationCategory()
         presentationCategory.name = "Keynote"
         let tag1 = Tag()
         tag1.name = "Infraestructure"
         let tag2 = Tag()
         tag2.name = "Cloud Services"
+        let sponsor1 = Company()
+        sponsor1.name = "sponsor1"
+        let sponsor2 = Company()
+        sponsor2.name = "sponsor2"
         let event = SummitEvent()
         event.title = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
+        event.sponsors.append(sponsor1)
+        event.sponsors.append(sponsor2)
         event.presentation = Presentation()
         event.presentation?.speakers.append(speaker)
         event.presentation?.category = presentationCategory
         event.presentation?.tags.append(tag1)
         event.presentation?.tags.append(tag2)
-        event.venue = venue
         event.venueRoom = venueRoom
         
         let speakerDTO = SpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
-        
-        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock)
+        let scheduleItemDTO = ScheduleItemDTO()
+        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
+        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
         
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(event.title, eventDetailDTO.title)
+        XCTAssertEqual(scheduleItemDTO.title, eventDetailDTO.title)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
-        XCTAssertEqual(event.venue!.name + " - " + event.venueRoom!.name, eventDetailDTO.location)
+        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
+        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
         XCTAssertEqual(event.presentation!.speakers.count, eventDetailDTO.speakers.count)
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
-        XCTAssertEqual("Tuesday 01 September 20:00 - 21:00", eventDetailDTO.date)
         XCTAssertEqual(event.presentation!.category.name, eventDetailDTO.category)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
     }
@@ -95,19 +125,21 @@ class EventDetailDTOAssemblerTests: XCTestCase {
         
         let speakerDTO = SpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
-        
-        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock)
+        let scheduleItemDTO = ScheduleItemDTO()
+        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
+        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
         
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(event.title, eventDetailDTO.title)
+        XCTAssertEqual(scheduleItemDTO.title, eventDetailDTO.title)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
-        XCTAssertEqual(event.venue!.name, eventDetailDTO.location)
+        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(0, eventDetailDTO.speakers.count)
         XCTAssertFalse(eventDetailDTO.finished)
-        XCTAssertEqual("Friday 01 September 20:00 - 21:00", eventDetailDTO.date)
+        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
         XCTAssertEqual("", eventDetailDTO.category)
         XCTAssertEqual("", eventDetailDTO.tags)
     }

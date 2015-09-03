@@ -7,55 +7,77 @@
 //
 
 import UIKit
-import SwiftyJSON
 import RealmSwift
 
 @objc
 protocol IMemberDataStore {
-    func getByEmail(email: NSString, completionBlock : (Member?) -> Void)
+    func getById(id: Int, completionBlock : (Member?, NSError?) -> Void)
+    func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void)
     func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void)
 }
 
 public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
     
-    var deserializerFactory: DeserializerFactory!
-    var remoteStorage: IMemberRemoteStorage!
+    var memberRemoteStorage: IMemberRemoteDataStore!
     
     override init() {
         super.init()
     }
     
-    init(deserializerFactory: DeserializerFactory ) {
-        self.deserializerFactory = deserializerFactory
+    init(memberRemoteStorage: IMemberRemoteDataStore) {
+        self.memberRemoteStorage = memberRemoteStorage
+    }
+
+    public func getById(id: Int, completionBlock : (Member?, NSError?) -> Void) {
+        let member = realm.objects(Member.self).filter("id = '\(id)'").first
+        if (member != nil) {
+            completionBlock(member, nil)
+        }
+        else {
+            getByIdAsync(id, completionBlock: completionBlock)
+        }
+    }
+
+    private func getByIdAsync(id: Int, completionBlock : (Member?, NSError?) -> Void) {
+        memberRemoteStorage.getById(id) { member, error in
+
+            if (member != nil) {
+                self.saveOrUpdate(member!)  { member in
+                    completionBlock(member, nil)
+                }
+            }
+            else {
+                completionBlock(member, error)
+            }
+        }
     }
     
-    public func getByEmail(email: NSString, completionBlock : (Member?) -> Void) {
+    public func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void) {
         let member = realm.objects(Member.self).filter("email = '\(email)'").first
         if (member != nil) {
-            completionBlock(member)
+            completionBlock(member, nil)
         }
         else {
             getByEmailAsync(email, completionBlock: completionBlock)
         }
     }
     
-    private func getByEmailAsync(email: NSString, completionBlock : (Member) -> Void) {
-        let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[2]}"
-        
-        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let jsonObject = JSON(data: data!)
-        let member : Member
-        var deserializer : IDeserializer!
-        
-        deserializer = deserializerFactory.create(DeserializerFactories.Member)
-        member = deserializer.deserialize(jsonObject) as! Member
-        
-        saveOrUpdate(member, completionBlock: completionBlock)
+    private func getByEmailAsync(email: String, completionBlock : (Member?, NSError?) -> Void) {
+        memberRemoteStorage.getByEmail(email) { member, error in
+            
+            if (member != nil) {
+                self.saveOrUpdate(member!)  { member in
+                    completionBlock(member, nil)
+                }
+            }
+            else {
+                completionBlock(member, error)
+            }
+        }
     }
     
     public func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {
-        remoteStorage.addEventToShedule(memberId, eventId: event.id) { error in
+        memberRemoteStorage.addEventToShedule(memberId, eventId: event.id) { error in
             var member: Member?
             if (error == nil) {
                 member = self.realm.objects(Member.self).filter("id = \(memberId)").first!

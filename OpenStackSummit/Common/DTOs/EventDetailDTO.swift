@@ -8,14 +8,24 @@
 
 import UIKit
 
-public class EventDetailDTO: NSObject {
-    public var title = ""
+public class EventDetailDTO: ScheduleItemDTO {
+    
+    public override init() {
+        super.init()
+    }
+    
+    public init(scheduleItemDTO: ScheduleItemDTO) {
+        super.init()
+        title = scheduleItemDTO.title
+        location = scheduleItemDTO.location
+        date = scheduleItemDTO.date
+        sponsors = scheduleItemDTO.sponsors
+        eventType = scheduleItemDTO.eventType
+        credentials = scheduleItemDTO.credentials
+    }
+    
     public var eventDescription = ""
-    public var date = ""
-    public var location = ""
-    public var finished = false
-    public var category = ""
-    public var credentials = ""
     public var tags = ""
     public var speakers = [SpeakerDTO]()
+    public var finished = false
 }
