@@ -24,6 +24,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             definition.injectProperty("interactor", with: self.memberProfileInteractor())
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileWireframe())
             definition.injectProperty("memberProfileDTOAssembler", with: self.memberProfileDTOAssembler())
+            definition.injectProperty("viewController", with: self.memberProfileViewController())
         }
     }
     

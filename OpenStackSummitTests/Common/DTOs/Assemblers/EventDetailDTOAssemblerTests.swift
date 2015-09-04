@@ -10,7 +10,7 @@ import XCTest
 import OpenStackSummit
 import RealmSwift
 
-class EventDetailDTOAssemblerTests: XCTestCase {
+class EventDetailDTOAssemblerTests: BaseTests {
     
     class SpeakerDTOAssemblerMock : ISpeakerDTOAssembler {
         
@@ -23,34 +23,6 @@ class EventDetailDTOAssemblerTests: XCTestCase {
         @objc func createDTO(member: Member) -> SpeakerDTO {
             return speakerDTO
         }
-    }
-    
-    class ScheduleItemDTOAssemblerMock : IScheduleItemDTOAssembler {
-        
-        var scheduleItemDTO: ScheduleItemDTO
-        
-        init(scheduleItemDTO: ScheduleItemDTO) {
-            self.scheduleItemDTO = scheduleItemDTO
-        }
-        
-        @objc func createDTO(event: SummitEvent) -> ScheduleItemDTO {
-            return scheduleItemDTO
-        }
-    }
-    
-    var realm = try! Realm()
-    
-    override func setUp() {
-        super.setUp()
-        
-        realm.write {
-            self.realm.deleteAll()
-        }
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
     
     func test_createDTO_eventWithPresentationAndSpeakersThatNotFinished_returnsDTOWithCorrectData() {

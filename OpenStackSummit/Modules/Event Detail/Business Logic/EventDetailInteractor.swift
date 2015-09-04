@@ -28,7 +28,7 @@ public class EventDetailInteractor: NSObject {
     public func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
         let currentMember = session.get(kCurrentMember) as! Member
         let event = eventDataStore.get(eventId)
-        memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { (member, error) in
+        memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { member, error in
             if (error != nil) {
                 self.session.set(self.kCurrentMember, value: member!)
             }

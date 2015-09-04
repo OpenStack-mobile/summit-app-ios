@@ -27,4 +27,13 @@ public class Member: BaseEntity {
     public let bookmarkedEvents = List<SummitEvent>()
     public dynamic var speakerRole : PresentationSpeaker?
     public dynamic var attendeeRole : SummitAttendee?
+    public let friends = List<Member>()
+    public var presentations: [Presentation] {
+        return linkingObjects(Presentation.self, forProperty: "speakers")
+    }
+
+    public func isFriend(member: Member) -> Bool {
+        let isFriend = friends.filter({ friend in friend.id == member.id }).count > 0
+        return isFriend
+    }
 }

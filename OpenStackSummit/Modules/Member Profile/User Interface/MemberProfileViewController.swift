@@ -10,6 +10,9 @@ import UIKit
 
 @objc
 public protocol IMemberProfileViewController {
+    func showProfile(profile: MemberProfileDTO)
+    func didFinishFriendshipRequest()
+    func handlerError(error: NSError)
 }
 
 class MemberProfileViewController: UIViewController, IMemberProfileViewController {
@@ -25,5 +28,17 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func showProfile(profile: MemberProfileDTO) {
+        
+    }
+    
+    func didFinishFriendshipRequest() {
+        
+    }
+    
+    func handlerError(error: NSError) {
+        
     }
 }

@@ -46,6 +46,6 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func handleMenuItemSelected(section: Int, row: Int) {
-        
+        menuWireframe.showVenueListOrVenueDetail()
     }
 }
