@@ -13,18 +13,39 @@ public protocol IMemberProfilePresenter {
     var memberId: Int { get set }
     
     func showMemberProfile()
+    func requestFriendship()
 }
 
 public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     var memberProfileWireframe: IMemberProfileWireframe!
     var interactor: IMemberProfileInteractor!
     var memberProfileDTOAssembler: IMemberProfileDTOAssembler!
+    var viewController: IMemberProfileViewController!
     public var memberId = 0
     
     public func showMemberProfile() {
-        let member = interactor.getMember(memberId) { member, error in
+        interactor.getMember(memberId) { member, error in
             
-            let canShowFullProfile = self.interactor.isFullProfileAllowed(member!)
+            if (error != nil) {
+                let showFullProfile = self.interactor.isFullProfileAllowed(member!)
+                let memberProfileDTO = self.memberProfileDTOAssembler.createDTO(member!, full: showFullProfile)
+                self.viewController.showProfile(memberProfileDTO)
+            }
+            else {
+                self.viewController.handlerError(error!)
+            }
+        }
+    }
+    
+    public func requestFriendship() {
+        interactor.requestFriendship(memberId) { error in
+            if (error != nil) {
+                self.viewController.didFinishFriendshipRequest()
+            }
+            else {
+                self.viewController.handlerError(error!)
+            }
+            
         }
     }
 }

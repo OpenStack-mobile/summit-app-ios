@@ -36,7 +36,7 @@ class MenuViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        presenter?.handleMenuItemSelected(indexPath.section, row: indexPath.row)
+        presenter.handleMenuItemSelected(indexPath.section, row: indexPath.row)
     }
     /*
     // MARK: - Navigation

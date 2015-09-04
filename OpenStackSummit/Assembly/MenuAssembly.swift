@@ -10,11 +10,15 @@ import UIKit
 import Typhoon
 
 public class MenuAssembly: TyphoonAssembly {
+    
+    var venueListAssembly: VenueListAssembly!
+    
     dynamic func menuWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MenuWireframe.self) {
             (definition) in
             
             definition.injectProperty("menuViewController", with: self.menuViewController())
+            definition.injectProperty("venueListWireframe", with: self.venueListAssembly.venueListWireframe())
         }
     }
     

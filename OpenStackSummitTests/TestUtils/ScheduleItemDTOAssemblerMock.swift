@@ -7,7 +7,17 @@
 //
 
 import UIKit
+import OpenStackSummit
 
-class ScheduleItemDTOAssemblerMock: NSObject {
-
+public class ScheduleItemDTOAssemblerMock : IScheduleItemDTOAssembler {
+    
+    var scheduleItemDTO: ScheduleItemDTO!
+    
+    public init(scheduleItemDTO: ScheduleItemDTO) {
+        self.scheduleItemDTO = scheduleItemDTO
+    }
+    
+    @objc public func createDTO(event: SummitEvent) -> ScheduleItemDTO {
+        return scheduleItemDTO
+    }
 }

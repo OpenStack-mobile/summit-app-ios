@@ -13,6 +13,7 @@ public protocol IMemberProfileInteractor {
     func getCurrentMember() -> Member?
     func getMember(memberId: Int, completionBlock : (Member?, NSError?) -> Void)
     func isFullProfileAllowed(member: Member) -> Bool
+    func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void)
 }
 
 public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
@@ -21,6 +22,15 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
 
     let kCurrentMember = "currentMember"
 
+    public override init() {
+        super.init()
+    }
+    
+    public init(session: ISession, memberDataStore: IMemberDataStore) {
+        self.session = session
+        self.memberDataStore = memberDataStore
+    }
+    
     public func getMember(memberId: Int, completionBlock : (Member?, NSError?) -> Void) {
         memberDataStore.getById(memberId, completionBlock: completionBlock)
     }
@@ -31,6 +41,19 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
     }
     
     public func isFullProfileAllowed(member: Member) -> Bool {
-        return true
+        var allow = false
+        if let currentMember = getCurrentMember() as Member? {
+            if (currentMember.id == member.id) {
+                allow = true
+            }
+            else if (currentMember.isFriend(member)) {
+                allow = true
+            }
+        }
+        return allow
+    }
+    
+    public func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void) {
+        completionBlock(nil)
     }
 }

@@ -14,9 +14,17 @@ public protocol IMemberProfileDTOAssembler {
 }
 
 public class MemberProfileDTOAssembler: NSObject {
-    var scheduleItemDTOAssembler: ScheduleItemDTOAssembler!
+    var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
+
+    public override init() {
+        super.init()
+    }
     
-    func createDTO(member: Member, full: Bool) -> MemberProfileDTO {
+    public init(scheduleItemDTOAssembler: IScheduleItemDTOAssembler) {
+        self.scheduleItemDTOAssembler = scheduleItemDTOAssembler
+    }
+    
+    public func createDTO(member: Member, full: Bool) -> MemberProfileDTO {
         let memberProfileDTO = MemberProfileDTO()
         memberProfileDTO.name = member.firstName + " " + member.lastName
         memberProfileDTO.jobTitle = member.jobTitle
@@ -31,9 +39,16 @@ public class MemberProfileDTOAssembler: NSObject {
             var scheduleItemDTO: ScheduleItemDTO
             for event in member.scheduledEvents {
                 scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
-                memberProfileDTO.events.append(scheduleItemDTO)
+                memberProfileDTO.scheduledEvents.append(scheduleItemDTO)
             }
-         }
+        }
+        
+        var scheduleItemDTO: ScheduleItemDTO
+        for presentation in member.presentations {
+            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(presentation.event)
+            memberProfileDTO.presentations.append(scheduleItemDTO)
+        }
+        
         return memberProfileDTO
     }
 }

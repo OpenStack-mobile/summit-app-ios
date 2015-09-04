@@ -17,5 +17,6 @@ public class MemberProfileDTO: NSObject {
     public var IRC = ""
     public var email = ""
     public var location = ""
-    public var events = [ScheduleItemDTO]()
+    public var scheduledEvents = [ScheduleItemDTO]()
+    public var presentations = [ScheduleItemDTO]()
 }

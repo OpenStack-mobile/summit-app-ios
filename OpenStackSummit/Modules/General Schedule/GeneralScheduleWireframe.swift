@@ -21,3 +21,4 @@ public class GeneralScheduleWireframe: NSObject {
         eventDetailWireframe.presentEventDetailView(eventId, viewController: generalScheduleViewController.navigationController!)
     }
 }
+		

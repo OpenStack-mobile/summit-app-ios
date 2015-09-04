@@ -7,7 +7,28 @@
 //
 
 import UIKit
+import OpenStackSummit
 
-class SessionMock: NSObject {
-
+class SessionMock: NSObject, ISession {
+    var member: Member?
+    
+    override init() {
+        super.init()
+    }
+    
+    init (member: Member?) {
+        self.member = member
+    }
+    
+    func get(key: String) -> AnyObject? {
+        
+        if (key == "currentMember") {
+            return member
+        }
+        return nil
+    }
+    
+    func set(key: String, value: AnyObject) {
+        
+    }
 }

@@ -10,22 +10,7 @@ import XCTest
 import OpenStackSummit
 import RealmSwift
 
-class MemberProfileDTOAssembler: XCTestCase {
-    
-    var realm = try! Realm()
-    
-    override func setUp() {
-        super.setUp()
-        
-        realm.write {
-            self.realm.deleteAll()
-        }
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+class MemberProfileDTOAssemblerTests: BaseTests {
     
     func test_createDTO_speakerMemberFull_returnsDTOWithCorrectData() {
         // Arrange
@@ -39,9 +24,6 @@ class MemberProfileDTOAssembler: XCTestCase {
         member.twitter = "@el_enzo"
         member.IRC = "irc"
         member.speakerRole = PresentationSpeaker()
-        realm.write {
-            self.realm.add(member)
-        }
 
         let event = SummitEvent()
         event.title = "Test Title"
@@ -50,13 +32,123 @@ class MemberProfileDTOAssembler: XCTestCase {
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
         event.presentation = Presentation()
         event.presentation?.speakers.append(member)
+
+        member.scheduledEvents.append(event)
         
-        let memberProfileDTOAssembler = MemberProfileDTOAssembler()
+        realm.write {
+            self.realm.add(member)
+            self.realm.add(event)
+        }
+
+        let scheduleItemDTO = ScheduleItemDTO()
+        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
+        let memberProfileDTOAssembler = MemberProfileDTOAssembler(scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
         
         // Act
-        let memberProfileDTO = memberProfileDTOAssembler.createDTO(member)
+        let memberProfileDTO = memberProfileDTOAssembler.createDTO(member, full: true)
         
         // Assert
-        XCTAssertEqual(, memberProfileDTO.name)
+        XCTAssertEqual(member.firstName + " " + member.lastName, memberProfileDTO.name)
+        XCTAssertEqual(member.jobTitle, memberProfileDTO.jobTitle)
+        XCTAssertEqual(member.pictureUrl, memberProfileDTO.pictureUrl)
+        XCTAssertEqual(member.bio, memberProfileDTO.bio)
+        XCTAssertEqual(member.location, memberProfileDTO.location)
+        XCTAssertEqual(member.twitter, memberProfileDTO.twitter)
+        XCTAssertEqual(member.IRC, memberProfileDTO.IRC)
+        XCTAssertEqual(1, memberProfileDTO.presentations.count)
+        XCTAssertEqual(1, memberProfileDTO.scheduledEvents.count)
     }
+
+    func test_createDTO_speakerMemberNotFull_returnsDTOWithCorrectData() {
+        // Arrange
+        let member = Member()
+        member.firstName = "Enzo"
+        member.lastName = "Francescoli"
+        member.jobTitle = "Developer at River Plate"
+        member.pictureUrl = "http://picture.com.ar"
+        member.bio = "This is the bio"
+        member.location = "Buenos Aires, Argentina"
+        member.twitter = "@el_enzo"
+        member.IRC = "irc"
+        member.speakerRole = PresentationSpeaker()
+        
+        let event = SummitEvent()
+        event.title = "Test Title"
+        event.eventDescription = "Test Description"
+        event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
+        event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
+        event.presentation = Presentation()
+        event.presentation?.speakers.append(member)
+        
+        member.scheduledEvents.append(event)
+        
+        realm.write {
+            self.realm.add(member)
+            self.realm.add(event)
+        }
+        
+        let scheduleItemDTO = ScheduleItemDTO()
+        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
+        let memberProfileDTOAssembler = MemberProfileDTOAssembler(scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        
+        // Act
+        let memberProfileDTO = memberProfileDTOAssembler.createDTO(member, full: false)
+        
+        // Assert
+        XCTAssertEqual(member.firstName + " " + member.lastName, memberProfileDTO.name)
+        XCTAssertEqual(member.jobTitle, memberProfileDTO.jobTitle)
+        XCTAssertEqual(member.pictureUrl, memberProfileDTO.pictureUrl)
+        XCTAssertEqual(member.bio, memberProfileDTO.bio)
+        XCTAssertEqual("", memberProfileDTO.location)
+        XCTAssertEqual("", memberProfileDTO.twitter)
+        XCTAssertEqual("", memberProfileDTO.IRC)
+        XCTAssertEqual(1, memberProfileDTO.presentations.count)
+        XCTAssertEqual(0, memberProfileDTO.scheduledEvents.count)
+    }
+
+    func test_createDTO_attendeeMemberNotFull_returnsDTOWithCorrectData() {
+        // Arrange
+        let member = Member()
+        member.firstName = "Enzo"
+        member.lastName = "Francescoli"
+        member.jobTitle = "Developer at River Plate"
+        member.pictureUrl = "http://picture.com.ar"
+        member.bio = "This is the bio"
+        member.location = "Buenos Aires, Argentina"
+        member.twitter = "@el_enzo"
+        member.IRC = "irc"
+        member.attendeeRole = SummitAttendee()
+        
+        let event = SummitEvent()
+        event.title = "Test Title"
+        event.eventDescription = "Test Description"
+        event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
+        event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
+        
+        member.scheduledEvents.append(event)
+        
+        realm.write {
+            self.realm.add(member)
+            self.realm.add(event)
+        }
+        
+        let scheduleItemDTO = ScheduleItemDTO()
+        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
+        let memberProfileDTOAssembler = MemberProfileDTOAssembler(scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        
+        // Act
+        let memberProfileDTO = memberProfileDTOAssembler.createDTO(member, full: false)
+        
+        // Assert
+        XCTAssertEqual(member.firstName + " " + member.lastName, memberProfileDTO.name)
+        XCTAssertEqual(member.jobTitle, memberProfileDTO.jobTitle)
+        XCTAssertEqual(member.pictureUrl, memberProfileDTO.pictureUrl)
+        XCTAssertEqual(member.bio, memberProfileDTO.bio)
+        XCTAssertEqual("", memberProfileDTO.location)
+        XCTAssertEqual("", memberProfileDTO.twitter)
+        XCTAssertEqual("", memberProfileDTO.IRC)
+        XCTAssertEqual(0, memberProfileDTO.presentations.count)
+        XCTAssertEqual(0, memberProfileDTO.scheduledEvents.count)
+    }
+
 }

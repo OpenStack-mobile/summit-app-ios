@@ -10,9 +10,14 @@ import UIKit
 
 @objc
 public protocol IMenuWireframe {
-    
+    func showVenueListOrVenueDetail()
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
-    var menuViewController : MenuViewController!
+    var menuViewController: MenuViewController!
+    var venueListWireframe: IVenueListWireframe!
+    
+    public func showVenueListOrVenueDetail() {
+        venueListWireframe.presentVenueListView(menuViewController.navigationController!)
+    }
 }
