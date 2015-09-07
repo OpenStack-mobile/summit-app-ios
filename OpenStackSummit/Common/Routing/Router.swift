@@ -16,18 +16,16 @@ import Typhoon
 @objc
 public protocol IRouter {
     func navigateTo(view: View, params: [String:AnyObject]?)
-    func navigateToRoot(view: View, params: [String:AnyObject]?)
 }
 
 public class Router: NSObject, IRouter {
     
     var storyboard: UIStoryboard!
     var currentViewParams: [String: AnyObject]!
+    var navigationViewController: UINavigationController!
     
     public func navigateTo(view: View, params: [String:AnyObject]?) {
         
-        let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
-        let navigationController = appDelegate.window!.rootViewController as! UINavigationController
         var identifier = ""
         
         switch view {
@@ -41,27 +39,7 @@ public class Router: NSObject, IRouter {
             identifier = ""
         }
         let viewController = storyboard.instantiateViewControllerWithIdentifier(identifier);
-        navigationController.pushViewController(viewController, animated: true)
-    }
-    
-    public func navigateToRoot(view: View, params: [String:AnyObject]?) {
-        
-        let appDelegate  = UIApplication.sharedApplication().delegate as! AppDelegate
-        let navigationController = appDelegate.window!.rootViewController as! UINavigationController
-        var identifier = ""
-        
-        switch view {
-        case View.EventDetail:
-            identifier = "EventDetailViewController"
-        case View.VenueList:
-            identifier = "VenueListViewController"
-        case View.GeneralSchedule:
-            identifier = "GeneralScheduleViewController"
-        default:
-            identifier = ""
-        }
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(identifier);
-        navigationController.setViewControllers([viewController], animated: true)
+        viewController.navigationController!.pushViewController(viewController, animated: true)
     }
     
 }

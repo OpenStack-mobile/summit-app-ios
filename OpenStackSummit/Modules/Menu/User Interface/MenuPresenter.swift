@@ -11,7 +11,6 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func hasAccessToMenuItem(section: Int, row: Int) -> Bool
-    func handleMenuItemSelected(section: Int, row: Int)
 }
 
 public class MenuPresenter: NSObject, IMenuPresenter {
@@ -44,9 +43,5 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             }
         }
         return show
-    }
-    
-    public func handleMenuItemSelected(section: Int, row: Int) {
-        router.navigateToRoot(View.GeneralSchedule, params: nil)
     }
 }

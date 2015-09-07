@@ -13,7 +13,7 @@ public protocol IVenueListViewController {
 
 }
 
-class VenueListViewController: UIViewController, IVenueListViewController {
+class VenueListViewController: RevealViewController, IVenueListViewController {
 
     var presenter: IVenueListPresenter!
     
@@ -38,5 +38,7 @@ class VenueListViewController: UIViewController, IVenueListViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func navigateToDetail(sender: AnyObject) {
+        presenter.showVenueDetail(1)
+    }
 }

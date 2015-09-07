@@ -1,21 +1,21 @@
 //
-//  VenueDetailViewController.swift
+//  VenueRoomDetailViewController.swift
 //  OpenStackSummit
 //
-//  Created by Claudio on 9/4/15.
+//  Created by Claudio on 9/7/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
 import UIKit
 
 @objc
-public protocol IVenueDetailViewController {
-    var presenter: IVenueDetailPresenter! { get set }
+public protocol IVenueRoomDetailViewController {
+    var presenter: IVenueRoomDetailPresenter! { get set }
 }
 
-class VenueDetailViewController: UIViewController, IVenueDetailViewController {
+class VenueRoomDetailViewController: UIViewController, IVenueRoomDetailViewController {
 
-    var presenter: IVenueDetailPresenter!
+    var presenter: IVenueRoomDetailPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +38,5 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func navigateToVenueRoomDetail(sender: AnyObject) {
-        presenter.showVenueRoomDetail(1)
-    }
 
 }

@@ -30,7 +30,6 @@ public class GeneralSchedulePresenter: NSObject {
     weak var viewController : GeneralScheduleViewController!
     var interactor : IGeneralScheduleInteractor!
     var generalScheduleWireframe : IGeneralScheduleWireframe!
-    var router: IRouter!
     
     public func reloadScheduleAsync() {
         self.interactor.getScheduleEventsAsync()
@@ -66,6 +65,6 @@ public class GeneralSchedulePresenter: NSObject {
     }
     
     func showEventDetail(eventId: Int) {
-        self.router.navigateTo(View.EventDetail, params: nil)
+        self.generalScheduleWireframe.showEventDetail(eventId)
     }
 }

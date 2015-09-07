@@ -72,9 +72,6 @@ class EventDetailAssembly: TyphoonAssembly {
             definition.injectProperty("presenter", with: self.eventDetailPresenter())
         }
     }
-    
-    var applicationAssembly: ApplicationAssembly!
-    
 }
 
 
