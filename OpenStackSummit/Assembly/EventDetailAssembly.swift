@@ -66,14 +66,11 @@ class EventDetailAssembly: TyphoonAssembly {
     }
     
     dynamic func eventDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
-            (factoryMethod) in
+        return TyphoonDefinition.withClass(EventDetailViewController.self) {
+            (definition) in
             
-            factoryMethod.injectParameterWith("EventDetailViewController")
-            }, configuration: {
-                (definition) in
-                definition.injectProperty("presenter", with: self.eventDetailPresenter())
-        })
+            definition.injectProperty("presenter", with: self.eventDetailPresenter())
+        }
     }
     
     var applicationAssembly: ApplicationAssembly!

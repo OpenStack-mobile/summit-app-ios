@@ -59,6 +59,7 @@
 		CA9E425A1B7B9667005FDD22 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E424A1B7B9667005FDD22 /* Tag.swift */; };
 		CA9E425C1B7B9667005FDD22 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E424C1B7B9667005FDD22 /* Venue.swift */; };
 		CA9E425E1B7B9667005FDD22 /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E424E1B7B9667005FDD22 /* VenueRoom.swift */; };
+		CAADCBAA1B9A3F3100181BBB /* RouterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAADCBA91B9A3F3100181BBB /* RouterAssembly.swift */; };
 		CAC7F3001B993D8100BAE2C6 /* MemberProfileInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC7F2FF1B993D8100BAE2C6 /* MemberProfileInteractorTests.swift */; };
 		CAC7F3031B993E3600BAE2C6 /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC7F3021B993E3600BAE2C6 /* SessionMock.swift */; };
 		CAC7F3051B99414D00BAE2C6 /* MemberDataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC7F3041B99414D00BAE2C6 /* MemberDataStoreMock.swift */; };
@@ -209,6 +210,7 @@
 		CA9E424A1B7B9667005FDD22 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		CA9E424C1B7B9667005FDD22 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		CA9E424E1B7B9667005FDD22 /* VenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoom.swift; sourceTree = "<group>"; };
+		CAADCBA91B9A3F3100181BBB /* RouterAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterAssembly.swift; sourceTree = "<group>"; };
 		CAC7F2FF1B993D8100BAE2C6 /* MemberProfileInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileInteractorTests.swift; sourceTree = "<group>"; };
 		CAC7F3021B993E3600BAE2C6 /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		CAC7F3041B99414D00BAE2C6 /* MemberDataStoreMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDataStoreMock.swift; sourceTree = "<group>"; };
@@ -337,7 +339,6 @@
 				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 			);
 			name = "User Interfaces";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		AA58718A926F2751A4081893 /* Pods */ = {
@@ -518,6 +519,7 @@
 				CA8913151B979A0B002E9A95 /* MemberProfileAssembly.swift */,
 				CA337F981B98E79700503232 /* MemberRemoteDataStoreAssembly.swift */,
 				CA8E98E81B9A0C4700CEBD2F /* VenueListAssembly.swift */,
+				CAADCBA91B9A3F3100181BBB /* RouterAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -681,6 +683,7 @@
 		CADDDB881B73CD0C008F742E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9D5A99CB1B948D5C002FFAA4 /* User Interfaces */,
 				CA8E98EB1B9A1EEC00CEBD2F /* Routing */,
 				CACF7C3F1B9664E700A9EB16 /* DTOs */,
 				CAF2AA291B8271C100D8E595 /* DataAccess */,
@@ -789,7 +792,6 @@
 		CAF2AA291B8271C100D8E595 /* DataAccess */ = {
 			isa = PBXGroup;
 			children = (
-				9D5A99CB1B948D5C002FFAA4 /* User Interfaces */,
 				CAD261661B8D6B8C00E6382F /* Triggers */,
 				CAF2AA2B1B8271C100D8E595 /* Deserialization */,
 				CA01190E1B8D1C2C0091E00F /* BaseDataStore.swift */,
@@ -1193,6 +1195,7 @@
 				CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */,
 				CAF2AA551B828E7C00D8E595 /* EventDetailViewController.swift in Sources */,
 				CA9E425E1B7B9667005FDD22 /* VenueRoom.swift in Sources */,
+				CAADCBAA1B9A3F3100181BBB /* RouterAssembly.swift in Sources */,
 				CA8E98D41B99D8C000CEBD2F /* VenueListWireframe.swift in Sources */,
 				CADDDBB61B73D1CA008F742E /* MenuViewController.swift in Sources */,
 				CAD47A161B84D559007741E7 /* DataStoreProtocol.swift in Sources */,
