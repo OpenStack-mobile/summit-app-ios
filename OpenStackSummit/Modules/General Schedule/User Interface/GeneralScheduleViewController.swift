@@ -23,6 +23,8 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.topItem?.title = "Schedule"
+        
         tableView.delegate = self
         tableView.dataSource = self
         

@@ -17,6 +17,7 @@ public protocol IMenuPresenter {
 public class MenuPresenter: NSObject, IMenuPresenter {
     var interactor: IMenuInteractor!
     var menuWireframe: IMenuWireframe!
+    var router: IRouter!
     
     public override init() {
         super.init()
@@ -46,6 +47,6 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func handleMenuItemSelected(section: Int, row: Int) {
-        menuWireframe.showVenueListOrVenueDetail()
+        router.navigateToRoot(View.GeneralSchedule, params: nil)
     }
 }

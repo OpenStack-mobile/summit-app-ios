@@ -18,7 +18,7 @@ public class EventDetailPresenter: NSObject {
     weak var viewController : IEventDetailViewController!
     var interactor : IEventDetailInteractor!
     var eventDetailDTOAssembler: IEventDetailDTOAssembler!
-    var eventId = 0
+    var eventId = 1
     
     public func showEventDetail() {
         let event = self.interactor.getEventDetail(eventId)
