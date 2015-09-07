@@ -9,10 +9,10 @@
 import UIKit
 
 @objc
-public protocol IVenueListPresenter : IPresenter{
-    
+public protocol IVenueListPresenter {
+    func showVenueList()
+    func showVenueDetail(venueId: Int)
 }
-
 
 public class VenueListPresenter: NSObject, IVenueListPresenter {
     var venueListWireframe: IVenueListWireframe!
@@ -21,5 +21,9 @@ public class VenueListPresenter: NSObject, IVenueListPresenter {
     
     public func showVenueList() {
         
+    }
+    
+    public func showVenueDetail(venueId: Int) {
+        venueListWireframe.showVenueDetail(venueId)
     }
 }

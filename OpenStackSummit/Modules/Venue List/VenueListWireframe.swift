@@ -10,16 +10,15 @@ import UIKit
 
 @objc
 public protocol IVenueListWireframe {
-    func presentVenueListView(viewController: UINavigationController)
+    func showVenueDetail(venueId: Int)
 }
 
 
 public class VenueListWireframe: NSObject, IVenueListWireframe {
-    
+    var venueDetailWireframe : IVenueDetailWireframe!
     var venueListViewController: VenueListViewController!
     
-    public func presentVenueListView(viewController: UINavigationController) {
-        let newViewController = venueListViewController!
-        viewController.pushViewController(newViewController, animated: true)
+    public func showVenueDetail(venueId: Int) {
+        venueDetailWireframe.presentVenueDetailView(venueId, viewController: venueListViewController.navigationController!)
     }
 }

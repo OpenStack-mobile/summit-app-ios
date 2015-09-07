@@ -12,7 +12,6 @@ import Typhoon
 class GeneralScheduleAssembly: TyphoonAssembly {
     var eventDetailAssembly: EventDetailAssembly!
     var summitDataStoreAssembly: SummitDataStoreAssembly!
-    var routerAssembly: RouterAssembly!
     
     dynamic func generalScheduleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleWireframe.self) {
@@ -30,7 +29,6 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.generalScheduleViewController())
             definition.injectProperty("interactor", with: self.generalScheduleInteractor())
             definition.injectProperty("generalScheduleWireframe", with: self.generalScheduleWireframe())
-            definition.injectProperty("router", with: self.routerAssembly.router())
         }
     }
     

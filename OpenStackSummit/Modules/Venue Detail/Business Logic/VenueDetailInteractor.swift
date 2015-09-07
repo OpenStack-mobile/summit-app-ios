@@ -8,10 +8,11 @@
 
 import UIKit
 
+@objc
 public protocol IVenueDetailInteractor {
 
 }
 
-public class VenueDetailInteractor: IVenueDetailInteractor {
+public class VenueDetailInteractor: NSObject, IVenueDetailInteractor {
 
 }

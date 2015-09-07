@@ -10,11 +10,14 @@ import UIKit
 import Typhoon
 
 public class VenueListAssembly: TyphoonAssembly {
+    var venueDetailAssembly: VenueDetailAssembly!
+    
     dynamic func venueListWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(VenueListWireframe.self) {
             (definition) in
             
             definition.injectProperty("venueListViewController", with: self.venueListViewController())
+            definition.injectProperty("venueDetailWireframe", with: self.venueDetailAssembly.venueDetailWireframe())
         }
     }
     

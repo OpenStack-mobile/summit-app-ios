@@ -14,6 +14,8 @@ public protocol IEventDetailViewController {
     func showEventDetail(eventDetail: EventDetailDTO)
     func didAddEventToMySchedule(event: EventDetailDTO)
     func handleError(error: NSError)
+    
+    var presenter: IEventDetailPresenter! { get set }
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController {
@@ -24,7 +26,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var presenter : IEventDetailPresenter!
+    var presenter: IEventDetailPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
