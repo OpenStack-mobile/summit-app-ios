@@ -16,4 +16,7 @@ public class VenueRoom: Location {
         return linkingObjects(Venue.self, forProperty: "venueRooms").first!
     }
     
+    public var events: [SummitEvent] {
+        return linkingObjects(SummitEvent.self, forProperty: "venueRoom")
+    }
 }

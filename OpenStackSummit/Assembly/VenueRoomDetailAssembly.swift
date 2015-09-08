@@ -28,10 +28,23 @@ public class VenueRoomDetailAssembly: TyphoonAssembly {
             definition.injectProperty("interactor", with: self.venueRoomDetailInteractor())
             definition.injectProperty("viewController", with: self.venueRoomDetailViewController())
             definition.injectProperty("wireframe", with: self.venueRoomDetailWireframe())
+            definition.injectProperty("venueRoomDetailDTOAssembler", with: self.venueRoomDetailDTOAssembler())
         }
     }
     
+    dynamic func venueRoomDetailDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(VenueRoomDetailDTOAssembler.self) {
+            (definition) in
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.venueRoomsSheduleItemDTOAssembler())
+        }
+    }
+
+    dynamic func venueRoomsSheduleItemDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
+    }
+    
     dynamic func venueRoomDetailInteractor() -> AnyObject {
+        
         return TyphoonDefinition.withClass(VenueRoomDetailInteractor.self) {
             (definition) in
             

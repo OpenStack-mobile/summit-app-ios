@@ -10,6 +10,8 @@ import UIKit
 
 @objc
 public protocol IVenueRoomDetailViewController {
+    func showVenueRoomDetail(venueRoomDetailDTO: VenueRoomDetailDTO)
+    
     var presenter: IVenueRoomDetailPresenter! { get set }
 }
 
@@ -28,6 +30,9 @@ class VenueRoomDetailViewController: UIViewController, IVenueRoomDetailViewContr
         // Dispose of any resources that can be recreated.
     }
     
+    func showVenueRoomDetail(venueRoomDetailDTO: VenueRoomDetailDTO) {
+        
+    }
 
     /*
     // MARK: - Navigation
