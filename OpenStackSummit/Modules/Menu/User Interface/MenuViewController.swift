@@ -35,6 +35,15 @@ class MenuViewController: UITableViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "loginSegue") {
+            self.revealViewController().revealToggle(sender)
+        }
+        else if (segue.identifier == "logoutSegue") {
+            
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

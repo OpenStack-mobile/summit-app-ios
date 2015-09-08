@@ -10,10 +10,13 @@ import UIKit
 import Typhoon
 
 public class MemberProfileAssembly: TyphoonAssembly {
+    var baseInteractorAssembly: BaseInteractorAssembly!
+    var loginAssembly: LoginAssembly!
+    
     dynamic func memberProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileWireframe.self) {
             (definition) in
-            
+            definition.injectProperty("loginWireframe", with: self.loginAssembly.loginWireframe())
         }
     }
     
@@ -45,6 +48,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("memberDataStore", with: self.memberProfileDataStore())
+            definition.injectProperty("session", with: self.baseInteractorAssembly.baseInteractorSession())
         }
     }
     

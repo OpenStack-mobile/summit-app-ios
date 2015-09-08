@@ -38,6 +38,9 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     }
     
     public func requestFriendship() {
+        if (!interactor.isLoggedIn()) {
+            memberProfileWireframe.showLoginView()
+        }
         interactor.requestFriendship(memberId) { error in
             if (error != nil) {
                 self.viewController.didFinishFriendshipRequest()

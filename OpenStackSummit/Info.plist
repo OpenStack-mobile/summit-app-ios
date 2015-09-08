@@ -50,6 +50,7 @@
 		<string>VenueListAssembly</string>
 		<string>VenueDetailAssembly</string>
 		<string>VenueRoomDetailAssembly</string>
+		<string>LoginAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
