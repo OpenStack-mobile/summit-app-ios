@@ -9,35 +9,27 @@
 import UIKit
 
 @objc
-public protocol IMemberProfileInteractor {
+public protocol IMemberProfileInteractor: IBaseInteractor {
     func getCurrentMember() -> Member?
     func getMember(memberId: Int, completionBlock : (Member?, NSError?) -> Void)
     func isFullProfileAllowed(member: Member) -> Bool
     func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void)
 }
 
-public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
+public class MemberProfileInteractor: BaseInteractor, IMemberProfileInteractor {
     var memberDataStore: IMemberDataStore!
-    var session: ISession!
-
-    let kCurrentMember = "currentMember"
 
     public override init() {
         super.init()
     }
     
     public init(session: ISession, memberDataStore: IMemberDataStore) {
-        self.session = session
+        super.init(session: session)
         self.memberDataStore = memberDataStore
     }
     
     public func getMember(memberId: Int, completionBlock : (Member?, NSError?) -> Void) {
         memberDataStore.getById(memberId, completionBlock: completionBlock)
-    }
-
-    public func getCurrentMember() -> Member?{
-        let member = session.get(kCurrentMember) as? Member
-        return member
     }
     
     public func isFullProfileAllowed(member: Member) -> Bool {

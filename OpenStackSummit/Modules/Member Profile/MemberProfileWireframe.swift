@@ -10,9 +10,14 @@ import UIKit
 
 @objc
 public protocol IMemberProfileWireframe {
-    
+    func showLoginView()
 }
 
-class MemberProfileWireframe: NSObject, IMemberProfileWireframe {
-
+public class MemberProfileWireframe: NSObject, IMemberProfileWireframe {
+    var memberProfileViewController: MemberProfileViewController!
+    var loginWireframe: ILoginWireframe!
+    
+    public func showLoginView() {
+        loginWireframe.presentLoginView(memberProfileViewController)
+    }
 }

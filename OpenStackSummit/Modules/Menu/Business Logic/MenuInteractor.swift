@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IMenuInteractor {
     func getCurrentMemberRole() -> MemberRoles
+    func logout()
 }
 
 public class MenuInteractor: NSObject, IMenuInteractor {
@@ -36,5 +37,9 @@ public class MenuInteractor: NSObject, IMenuInteractor {
             }
         }
         return role
+    }
+    
+    public func logout() {
+        session.set(kCurrentMember, value: nil)
     }
 }

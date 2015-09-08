@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol ISession{
     func get(key: String) -> AnyObject?
-    func set(key: String, value: AnyObject)
+    func set(key: String, value: AnyObject?)
 }
 
 
@@ -20,7 +20,7 @@ public class Session: NSObject, ISession {
         return NSUserDefaults.standardUserDefaults().objectForKey(key)
     }
     
-    public func set(key: String, value: AnyObject) {
+    public func set(key: String, value: AnyObject?) {
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: key)
     }
 }

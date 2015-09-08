@@ -88,6 +88,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="kkI-UC-Grm" kind="presentation" identifier="loginSegue" id="G8R-3I-pp5"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="avp-8v-mNf">
                                         <rect key="frame" x="0.0" y="154" width="600" height="44"/>
@@ -259,6 +262,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="fDG-vB-m6J" kind="custom" identifier="logoutSegue" customClass="SWRevealViewControllerSeguePushController" id="JVY-fT-yVw"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="yol-VB-ciT">
                                         <rect key="frame" x="0.0" y="638" width="600" height="44"/>
@@ -512,6 +518,39 @@
             </objects>
             <point key="canvasLocation" x="159" y="1142"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="1YY-au-Bj1">
+            <objects>
+                <viewController id="kkI-UC-Grm" customClass="LoginViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ooh-br-eG1"/>
+                        <viewControllerLayoutGuide type="bottom" id="jn3-pd-1ri"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pty-pK-hOH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCb-HA-N9c">
+                                <rect key="frame" x="159" y="162" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grk-Sr-Rsd">
+                                <rect key="frame" x="86" y="223" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="dismissLogin:" destination="kkI-UC-Grm" eventType="touchUpInside" id="CuO-ta-hc1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eqR-Wy-sdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1007" y="-362"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="FnV-aG-TDc">
             <objects>
@@ -534,4 +573,7 @@
     <resources>
         <image name="menu" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JVY-fT-yVw"/>
+    </inferredMetricsTieBreakers>
 </document>

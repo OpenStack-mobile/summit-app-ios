@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func hasAccessToMenuItem(section: Int, row: Int) -> Bool
+    func logout()
 }
 
 public class MenuPresenter: NSObject, IMenuPresenter {
@@ -43,5 +44,9 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             }
         }
         return show
+    }
+    
+    public func logout() {
+        interactor.logout()
     }
 }
