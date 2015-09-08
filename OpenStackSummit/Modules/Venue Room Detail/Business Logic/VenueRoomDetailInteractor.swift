@@ -10,9 +10,13 @@ import UIKit
 
 @objc
 public protocol IVenueRoomDetailInteractor {
-    
+    func getVenueRoom(venueRoomId: Int) -> VenueRoom
 }
 
-class VenueRoomDetailInteractor: NSObject, IVenueRoomDetailInteractor {
+public class VenueRoomDetailInteractor: NSObject, IVenueRoomDetailInteractor {
+    var venueRoomDataStore: IVenueRoomDataStore!
 
+    public func getVenueRoom(venueRoomId: Int) -> VenueRoom {
+        return venueRoomDataStore.get(venueRoomId)
+    }
 }

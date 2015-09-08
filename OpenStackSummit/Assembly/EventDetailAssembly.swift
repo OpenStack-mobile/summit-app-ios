@@ -11,6 +11,7 @@ import Typhoon
 
 class EventDetailAssembly: TyphoonAssembly {
     var memberDataStoreAssembly: MemberDataStoreAssembly!
+    var applicationAssembly: ApplicationAssembly!
     
     dynamic func eventDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(EventDetailWireframe.self) {
@@ -66,11 +67,14 @@ class EventDetailAssembly: TyphoonAssembly {
     }
     
     dynamic func eventDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(EventDetailViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.eventDetailPresenter())
-        }
+            factoryMethod.injectParameterWith("EventDetailViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.eventDetailPresenter())
+        })
     }
 }
 

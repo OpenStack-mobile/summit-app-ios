@@ -303,12 +303,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRm-Xr-3hF">
-                                <rect key="frame" x="20" y="61" width="533" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uH-Az-r37">
                                 <rect key="frame" x="20" y="133" width="330" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -321,15 +315,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRm-Xr-3hF">
+                                <rect key="frame" x="20" y="61" width="533" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="eventDetailLabel" destination="EUp-9I-ebt" id="B4e-tK-YUL"/>
-                        <outlet property="locationLabel" destination="6uH-Az-r37" id="Efv-bi-Q0z"/>
-                        <outlet property="timeLabel" destination="FCA-G1-1Sm" id="kyv-Rl-vBr"/>
-                        <outlet property="titleLabel" destination="YRm-Xr-3hF" id="58M-Mb-d9x"/>
+                        <outlet property="eventDetailLabel" destination="EUp-9I-ebt" id="GPg-0I-8hE"/>
+                        <outlet property="locationLabel" destination="6uH-Az-r37" id="AYk-Hk-7MR"/>
+                        <outlet property="timeLabel" destination="FCA-G1-1Sm" id="x5r-1D-j7Y"/>
+                        <outlet property="titleLabel" destination="YRm-Xr-3hF" id="6FT-bb-Q6r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kw6-Pc-OG1" userLabel="First Responder" sceneMemberID="firstResponder"/>
