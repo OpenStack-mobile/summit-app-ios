@@ -42,8 +42,8 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
         memberRemoteStorage.getById(id) { member, error in
 
             if (member != nil) {
-                self.saveOrUpdate(member!)  { member in
-                    completionBlock(member, nil)
+                self.saveOrUpdate(member!)  { member, error in
+                    completionBlock(member, error)
                 }
             }
             else {
@@ -66,8 +66,8 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
         memberRemoteStorage.getByEmail(email) { member, error in
             
             if (member != nil) {
-                self.saveOrUpdate(member!)  { member in
-                    completionBlock(member, nil)
+                self.saveOrUpdate(member!)  { member, error in
+                    completionBlock(member, error)
                 }
             }
             else {

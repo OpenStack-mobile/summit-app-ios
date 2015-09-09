@@ -21,13 +21,13 @@ public class EventDetailInteractor: NSObject {
     let kCurrentMember = "currentMember"
     
     public func getEventDetail(eventId: Int) -> SummitEvent {
-        let event = eventDataStore.get(eventId)
+        let event = eventDataStore.getById(eventId)
         return event!
     }
     
     public func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
         let currentMember = session.get(kCurrentMember) as! Member
-        let event = eventDataStore.get(eventId)
+        let event = eventDataStore.getById(eventId)
         memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { member, error in
             if (error != nil) {
                 self.session.set(self.kCurrentMember, value: member!)

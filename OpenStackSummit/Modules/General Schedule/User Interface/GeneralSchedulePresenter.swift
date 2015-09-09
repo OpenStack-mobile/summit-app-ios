@@ -19,7 +19,7 @@ extension Array where Element: SummitEvent {
 
 @objc
 public protocol IGeneralSchedulePresenter {
-    func reloadScheduleAsync()
+    func reloadSchedule()
     func reloadSchedule(events: [SummitEvent])
     func reloadSchedule(byDate date: NSDate)
     func showEventDetail(eventId: Int)
@@ -31,8 +31,10 @@ public class GeneralSchedulePresenter: NSObject {
     var interactor : IGeneralScheduleInteractor!
     var generalScheduleWireframe : IGeneralScheduleWireframe!
     
-    public func reloadScheduleAsync() {
-        self.interactor.getScheduleEventsAsync()
+    public func reloadSchedule() {
+        self.interactor.getScheduleEvents() { events, error in
+            self.reloadSchedule(events!)
+        }
     }
     
     public func reloadSchedule(events: [SummitEvent]) {

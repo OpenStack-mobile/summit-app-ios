@@ -10,11 +10,11 @@ import UIKit
 
 @objc
 public protocol IEventDataStore {
-    func get(id: Int) -> SummitEvent?
+    func getById(id: Int) -> SummitEvent?
 }
 
 public class EventDataStore: BaseDataStore<SummitEvent>, IEventDataStore {
-    public override func get(id: Int) -> SummitEvent? {
-        return super.get(id)
+    public override func getById(id: Int) -> SummitEvent? {
+        return super.getById(id)
     }
 }
