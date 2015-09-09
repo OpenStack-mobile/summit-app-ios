@@ -17,7 +17,7 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         super.init()
     }
     
-    public func get(id: Int) -> T? {
+    public func getById(id: Int) -> T? {
         let entity = realm.objects(T.self).filter("id = \(id)").first
         return entity
     }
@@ -27,7 +27,7 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         return entities.map { $0 }
     }
     
-    public func saveOrUpdate(entity: T, completionBlock: ((T) -> Void)!) {
+    public func saveOrUpdate(entity: T, completionBlock: ((T?, NSError?) -> Void)!) {
         realm.write {
             self.realm.add(entity, update: true)
         }
@@ -36,13 +36,13 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
                 () in
                 
                 if (completionBlock != nil) {
-                    completionBlock(entity)
+                    completionBlock(entity, nil)
                 }
             }
         }
         else {
             if (completionBlock != nil) {
-                completionBlock(entity)
+                completionBlock(entity, nil)
             }
         }
     }

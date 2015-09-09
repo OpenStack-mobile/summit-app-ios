@@ -36,7 +36,6 @@ class GeneralScheduleAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(GeneralScheduleInteractor.self) {
             (definition) in
             
-            definition.injectProperty("delegate", with: self.generalSchedulePresenter())
             definition.injectProperty("summitDataStore", with: self.summitDataStoreAssembly.summitDataStore())
         }
     }

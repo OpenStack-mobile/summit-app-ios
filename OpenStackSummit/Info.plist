@@ -51,6 +51,7 @@
 		<string>VenueDetailAssembly</string>
 		<string>VenueRoomDetailAssembly</string>
 		<string>LoginAssembly</string>
+		<string>FeedbackEditAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

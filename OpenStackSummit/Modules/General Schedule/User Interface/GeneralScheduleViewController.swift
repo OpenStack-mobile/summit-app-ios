@@ -30,7 +30,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         
         dayPicker.delegate = self
         
-        presenter.reloadScheduleAsync()
+        presenter.reloadSchedule()
     }
     
     func reloadSchedule() {

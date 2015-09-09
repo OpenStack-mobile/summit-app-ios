@@ -10,19 +10,15 @@ import UIKit
 
 @objc
 public protocol IGeneralScheduleInteractor {
-    func getScheduleEventsAsync()
+    func getScheduleEvents(completionBlock: ([SummitEvent]?, NSError?) -> Void)
 }
 
 public class GeneralScheduleInteractor: NSObject, IGeneralScheduleInteractor {
-    var delegate : GeneralSchedulePresenter!
     var summitDataStore : ISummitDataStore!
     
-    public func getScheduleEventsAsync(){
-        if (delegate != nil) {
-            summitDataStore.getActive(){
-                (summit) in
-                self.delegate?.reloadSchedule(summit.events.map{$0})
-            }
+    public func getScheduleEvents(completionBlock: ([SummitEvent]?, NSError?) -> Void){
+        summitDataStore.getActive() { summit, error in
+            completionBlock(summit!.events.map{$0}, nil)
         }
     }
 }

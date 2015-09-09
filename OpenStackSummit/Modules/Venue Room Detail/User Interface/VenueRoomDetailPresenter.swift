@@ -23,7 +23,7 @@ public class VenueRoomDetailPresenter: NSObject, IVenueRoomDetailPresenter {
     
     public func showVenueRoomDetail() {
         let venueRoom = interactor.getVenueRoom(venueRoomId)
-        let venueRoomDetailDTO = venueRoomDetailDTOAssembler.createDTO(venueRoom)
+        let venueRoomDetailDTO = venueRoomDetailDTOAssembler.createDTO(venueRoom!)
         viewController.showVenueRoomDetail(venueRoomDetailDTO)
     }
 }

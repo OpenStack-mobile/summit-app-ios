@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import Typhoon
 
 public class VenueRoomDetailAssembly: TyphoonAssembly {
