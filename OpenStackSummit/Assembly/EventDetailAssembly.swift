@@ -27,7 +27,6 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("viewController", with: self.eventDetailViewController())
             definition.injectProperty("interactor", with: self.eventDetailInteractor())
-            definition.injectProperty("eventDetailDTOAssembler", with: self.eventDetailDTOAssembler())
         }
     }
     
@@ -54,6 +53,7 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("session", with: self.eventDetailSession())
             definition.injectProperty("eventDataStore", with: self.eventDataStore())
+            definition.injectProperty("eventDetailDTOAssembler", with: self.eventDetailDTOAssembler())
             definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
     }

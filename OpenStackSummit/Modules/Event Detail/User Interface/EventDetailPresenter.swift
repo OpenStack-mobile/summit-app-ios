@@ -17,26 +17,23 @@ public protocol IEventDetailPresenter {
 public class EventDetailPresenter: NSObject {
     weak var viewController : IEventDetailViewController!
     var interactor : IEventDetailInteractor!
-    var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     var eventId = 0
     
     public func prepareEventDetail(eventId: Int) {
         self.eventId = eventId
         let event = self.interactor.getEventDetail(eventId)
-        let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
-        viewController.showEventDetail(eventDetailDTO)
+        viewController.showEventDetail(event)
     }
     
-    public func addEventToMyScheduleAsync() {
-        interactor.addEventToMyScheduleAsync(eventId) { (event, error) in
+    public func addEventToMySchedule() {
+        interactor.addEventToMySchedule(eventId) { (event, error) in
             self.addEventToMyScheduleCallback(event, error: error)
         }
     }
     
-    private func addEventToMyScheduleCallback(event: SummitEvent?, error: NSError?) {
+    private func addEventToMyScheduleCallback(event: EventDetailDTO?, error: NSError?) {
         if (error == nil) {
-            let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
-            viewController.didAddEventToMySchedule(eventDetailDTO)
+            viewController.didAddEventToMySchedule(event!)
         }
         else {
             viewController.handleError(error!)

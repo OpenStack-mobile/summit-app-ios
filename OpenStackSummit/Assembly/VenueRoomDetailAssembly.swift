@@ -27,7 +27,6 @@ public class VenueRoomDetailAssembly: TyphoonAssembly {
             definition.injectProperty("interactor", with: self.venueRoomDetailInteractor())
             definition.injectProperty("viewController", with: self.venueRoomDetailViewController())
             definition.injectProperty("wireframe", with: self.venueRoomDetailWireframe())
-            definition.injectProperty("venueRoomDetailDTOAssembler", with: self.venueRoomDetailDTOAssembler())
         }
     }
     
@@ -46,7 +45,7 @@ public class VenueRoomDetailAssembly: TyphoonAssembly {
         
         return TyphoonDefinition.withClass(VenueRoomDetailInteractor.self) {
             (definition) in
-            
+            definition.injectProperty("venueRoomDetailDTOAssembler", with: self.venueRoomDetailDTOAssembler())            
         }
     }
     

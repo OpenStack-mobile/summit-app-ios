@@ -11,13 +11,13 @@ import UIKit
 @objc
 public protocol IMemberProfileInteractor: IBaseInteractor {
     func getCurrentMember() -> Member?
-    func getMember(memberId: Int, completionBlock : (Member?, NSError?) -> Void)
-    func isFullProfileAllowed(member: Member) -> Bool
+    func getMember(memberId: Int, completionBlock : (MemberProfileDTO?, NSError?) -> Void)
     func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void)
 }
 
 public class MemberProfileInteractor: BaseInteractor, IMemberProfileInteractor {
     var memberDataStore: IMemberDataStore!
+    var memberProfileDTOAssembler: IMemberProfileDTOAssembler!
 
     public override init() {
         super.init()
@@ -28,8 +28,14 @@ public class MemberProfileInteractor: BaseInteractor, IMemberProfileInteractor {
         self.memberDataStore = memberDataStore
     }
     
-    public func getMember(memberId: Int, completionBlock : (Member?, NSError?) -> Void) {
-        memberDataStore.getById(memberId, completionBlock: completionBlock)
+    public func getMember(memberId: Int, completionBlock : (MemberProfileDTO?, NSError?) -> Void) {
+        memberDataStore.getById(memberId) { member, error in
+            if (error == nil) {
+                let showFullProfile = self.isFullProfileAllowed(member!)
+                let memberProfileDTO = self.memberProfileDTOAssembler.createDTO(member!, full: showFullProfile)
+                completionBlock(memberProfileDTO, error)
+            }
+        }
     }
     
     public func isFullProfileAllowed(member: Member) -> Bool {
