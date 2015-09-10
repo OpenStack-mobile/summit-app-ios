@@ -26,7 +26,6 @@ public class MemberProfileAssembly: TyphoonAssembly {
             
             definition.injectProperty("interactor", with: self.memberProfileInteractor())
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileWireframe())
-            definition.injectProperty("memberProfileDTOAssembler", with: self.memberProfileDTOAssembler())
             definition.injectProperty("viewController", with: self.memberProfileViewController())
         }
     }
@@ -49,6 +48,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             
             definition.injectProperty("memberDataStore", with: self.memberProfileDataStore())
             definition.injectProperty("session", with: self.baseInteractorAssembly.baseInteractorSession())
+            definition.injectProperty("memberProfileDTOAssembler", with: self.memberProfileDTOAssembler())
         }
     }
     

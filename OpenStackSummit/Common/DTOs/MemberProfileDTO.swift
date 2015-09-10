@@ -9,6 +9,7 @@
 import UIKit
 
 public class MemberProfileDTO: NSObject {
+    public var id = 0
     public var name = ""
     public var jobTitle = ""
     public var pictureUrl = ""

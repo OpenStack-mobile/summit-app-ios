@@ -10,27 +10,31 @@ import UIKit
 
 @objc
 public protocol IEventDetailInteractor {
-    func getEventDetail(eventId: Int) -> SummitEvent
-    func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void)
+    func getEventDetail(eventId: Int) -> EventDetailDTO
+    func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void)
 }
 
 public class EventDetailInteractor: NSObject {
     var eventDataStore: IEventDataStore!
     var memberDataStore: IMemberDataStore!
     var session: ISession!
+    var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     let kCurrentMember = "currentMember"
     
-    public func getEventDetail(eventId: Int) -> SummitEvent {
+    public func getEventDetail(eventId: Int) -> EventDetailDTO {
         let event = eventDataStore.getById(eventId)
-        return event!
+        let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
+        return eventDetailDTO
     }
     
-    public func addEventToMyScheduleAsync(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
+    public func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void) {
         let currentMember = session.get(kCurrentMember) as! Member
         let event = eventDataStore.getById(eventId)
+        let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { member, error in
-            if (error != nil) {
+            if (error == nil) {
                 self.session.set(self.kCurrentMember, value: member!)
+                completionBlock(eventDetailDTO, nil)
             }
         }
     }

@@ -9,12 +9,15 @@
 import UIKit
 import AFHorizontalDayPicker
 
+@objc
 public protocol IGeneralScheduleViewController {
     var startDate: NSDate! { get set }
     var endDate: NSDate! { get set }
     var dayEvents: [ScheduleItemDTO]! { get set }
+    var selectedDate: NSDate! { get set }
     
     func handleError(error: NSError)
+    func reloadSchedule()
 }
 
 class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IGeneralScheduleViewController {

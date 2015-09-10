@@ -21,7 +21,6 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
     public var feedbackId = 0
     public var eventId = 0
     var viewController: IFeedbackEditViewController!
-    var feedbackDTOAssembler: IFeedbackDTOAssembler!
     var interactor: IFeedbackEditInteractor!
     var wireframe: IFeedbackEditWireframe!
     
@@ -31,8 +30,7 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
         }
         else {
             let feedback = interactor.getFeedback(feedbackId)
-            let feedbackDTO = feedbackDTOAssembler.createDTO(feedback!)
-            viewController.showEditFeedback(feedbackDTO)
+            viewController.showEditFeedback(feedback!)
         }
     }
     

@@ -19,11 +19,9 @@ public class VenueRoomDetailPresenter: NSObject, IVenueRoomDetailPresenter {
     var interactor: IVenueRoomDetailInteractor!
     var viewController: IVenueRoomDetailViewController!
     var wireframe: IVenueRoomDetailWireframe!
-    var venueRoomDetailDTOAssembler: IVenueRoomDetailDTOAssembler!
     
     public func showVenueRoomDetail() {
         let venueRoom = interactor.getVenueRoom(venueRoomId)
-        let venueRoomDetailDTO = venueRoomDetailDTOAssembler.createDTO(venueRoom!)
-        viewController.showVenueRoomDetail(venueRoomDetailDTO)
+        viewController.showVenueRoomDetail(venueRoom!)
     }
 }

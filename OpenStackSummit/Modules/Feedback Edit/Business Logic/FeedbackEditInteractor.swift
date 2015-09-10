@@ -10,13 +10,16 @@ import UIKit
 
 @objc
 public protocol IFeedbackEditInteractor {
-    func getFeedback(feedbackId: Int) -> Feedback?
+    func getFeedback(feedbackId: Int) -> FeedbackDTO?
 }
 
 public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
     var feedbackDataStore: IFeedbackDataStore!
-    
-    public func getFeedback(feedbackId: Int) -> Feedback? {
-        return feedbackDataStore.getById(feedbackId)
+    var feedbackDTOAssembler: IFeedbackDTOAssembler!
+
+    public func getFeedback(feedbackId: Int) -> FeedbackDTO? {
+        let feedback = feedbackDataStore.getById(feedbackId)
+        let feedbackDTO = feedbackDTOAssembler.createDTO(feedback!)
+        return feedbackDTO
     }
 }

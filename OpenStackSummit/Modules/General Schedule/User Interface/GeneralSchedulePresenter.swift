@@ -26,7 +26,7 @@ public protocol IGeneralSchedulePresenter {
 
 public class GeneralSchedulePresenter: NSObject {
     
-    weak var viewController : GeneralScheduleViewController!
+    weak var viewController : IGeneralScheduleViewController!
     var interactor : IGeneralScheduleInteractor!
     var generalScheduleWireframe : IGeneralScheduleWireframe!
     

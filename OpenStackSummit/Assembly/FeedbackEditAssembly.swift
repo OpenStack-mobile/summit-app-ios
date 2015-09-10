@@ -26,7 +26,6 @@ public class FeedbackEditAssembly: TyphoonAssembly {
             definition.injectProperty("interactor", with: self.feedbackEditInteractor())
             definition.injectProperty("viewController", with: self.feedbackEditViewController())
             definition.injectProperty("wireframe", with: self.feedbackEditWireframe())
-            definition.injectProperty("feedbackDTOAssembler", with: self.feedbackDTOAssembler())
         }
     }
     
@@ -40,6 +39,7 @@ public class FeedbackEditAssembly: TyphoonAssembly {
             (definition) in
 
             definition.injectProperty("feedbackDataStore", with: self.feedbackDataStoreAssembly.feedbackDataStore())
+            definition.injectProperty("feedbackDTOAssembler", with: self.feedbackDTOAssembler())
         }
     }
     
