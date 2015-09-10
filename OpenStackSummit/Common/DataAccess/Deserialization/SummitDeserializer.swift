@@ -56,6 +56,8 @@ public class SummitDeserializer: NSObject, IDeserializer {
         
         summit.name = json["name"].stringValue
         summit.id = json["id"].intValue
+        summit.startDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["startDate"].intValue))
+        summit.endDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["endDate"].intValue))
         return summit
 
     }

@@ -22,6 +22,10 @@ class MenuPresenterTests: XCTestCase {
         func getCurrentMemberRole() -> MemberRoles {
             return role
         }
+        
+        func logout() {
+            
+        }
     }
     
     

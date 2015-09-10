@@ -18,7 +18,6 @@ public class DeserializerStorage: NSObject {
         if (deserializedEntityDictionary[className] == nil) {
             deserializedEntityDictionary[className] = Dictionary<Int, T>()
         }
-        NSLog("\(className)")
         deserializedEntityDictionary[className]![entity.id] = entity
     }
     
@@ -35,7 +34,6 @@ public class DeserializerStorage: NSObject {
     public func getAll<T : BaseEntity>() -> [T] {
         let entity = T()
         let className = _stdlib_getDemangledTypeName(entity)
-        NSLog("\(className)")
         
         var array = deserializedEntityDictionary[className]?.values.array as? [T]
         if (array == nil) {

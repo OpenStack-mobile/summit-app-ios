@@ -9,6 +9,7 @@
 import UIKit
 
 public class ScheduleItemDTO: NSObject {
+    public var id = 0
     public var title = ""
     public var date = ""
     public var location = ""

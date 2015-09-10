@@ -30,8 +30,6 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.showEventDetail()
-        
         //imageView.hnk_setImageFromURL(NSURL(string:"http://www.openstack.org/assets/paris-summit/_resampled/resizedimage464600-meridien-map-level01.png")!)
     }
     
