@@ -28,7 +28,7 @@ class SessionMock: NSObject, ISession {
         return nil
     }
     
-    func set(key: String, value: AnyObject) {
+    func set(key: String, value: AnyObject?) {
         
     }
 }

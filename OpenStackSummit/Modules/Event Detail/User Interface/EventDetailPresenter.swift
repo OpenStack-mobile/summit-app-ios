@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol IEventDetailPresenter {
-    func showEventDetail()
+    func prepareEventDetail(eventId: Int)
     var eventId: Int { get set }
 }
 
@@ -20,7 +20,8 @@ public class EventDetailPresenter: NSObject {
     var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     var eventId = 0
     
-    public func showEventDetail() {
+    public func prepareEventDetail(eventId: Int) {
+        self.eventId = eventId
         let event = self.interactor.getEventDetail(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         viewController.showEventDetail(eventDetailDTO)

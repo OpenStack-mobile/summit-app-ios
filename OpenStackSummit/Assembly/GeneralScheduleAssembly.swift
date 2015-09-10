@@ -37,7 +37,22 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("summitDataStore", with: self.summitDataStoreAssembly.summitDataStore())
+            definition.injectProperty("summitDTOAssembler", with: self.summitDTOAssembler())
+            definition.injectProperty("eventDataStore", with: self.generalScheduleEventDataStore())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.generalScheduleScheduleItemDTOAssembler())
         }
+    }
+    
+    dynamic func generalScheduleScheduleItemDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
+    }
+    
+    dynamic func generalScheduleEventDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(EventDataStore.self)
+    }
+    
+    dynamic func summitDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitDTOAssembler.self)
     }
     
     dynamic func generalScheduleViewController() -> AnyObject {

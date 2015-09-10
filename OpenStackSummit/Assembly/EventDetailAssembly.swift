@@ -74,6 +74,7 @@ class EventDetailAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.eventDetailPresenter())
+                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

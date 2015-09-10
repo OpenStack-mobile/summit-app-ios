@@ -9,7 +9,15 @@
 import UIKit
 import AFHorizontalDayPicker
 
-class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate {
+public protocol IGeneralScheduleViewController {
+    var startDate: NSDate! { get set }
+    var endDate: NSDate! { get set }
+    var dayEvents: [ScheduleItemDTO]! { get set }
+    
+    func handleError(error: NSError)
+}
+
+class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IGeneralScheduleViewController {
 
     let cellIdentifier = "GeneralScheduleTableViewCell"
     
@@ -17,26 +25,57 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
     var presenter : IGeneralSchedulePresenter!
-    var dayEvents : [SummitEvent]?
-    var events : [SummitEvent]?
+    var dayEvents : [ScheduleItemDTO]!
+    var startDate: NSDate! {
+        get {
+            return dayPicker.startDate
+        }
+        set {
+            dayPicker.startDate = newValue
+            dayPicker.firstActiveDate = newValue
+        }
+    }
+
+    var endDate: NSDate! {
+        get {
+            return dayPicker.endDate
+        }
+        set {
+            dayPicker.endDate = newValue
+            dayPicker.lastActiveDate = newValue
+        }
+    }
+
+    var selectedDate: NSDate! {
+        get {
+            return dayPicker.selectedDate
+        }
+        set {
+            dayPicker.selectDate(newValue, animated: false)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.topItem?.title = "Schedule"
         
         tableView.delegate = self
         tableView.dataSource = self
         
         dayPicker.delegate = self
         
-        presenter.reloadSchedule()
+        presenter.viewLoad()
     }
+
     
     func reloadSchedule() {
         tableView.reloadData()
     }
 
+    func handleError(error: NSError) {
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,15 +92,10 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let event = dayEvents![indexPath.row]
-        
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.NoStyle
-        formatter.timeStyle = .ShortStyle
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleTableViewCell
         
-        cell.eventTitleLabel.text = event.eventDescription;
-        cell.timeAndPlaceLabel.text = formatter.stringFromDate(event.start) + " - " + formatter.stringFromDate(event.end)
+        cell.eventTitleLabel.text = event.title;
+        cell.timeAndPlaceLabel.text = event.date
         
         return cell
     }
@@ -77,7 +111,6 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
-        self.presenter.reloadSchedule(byDate: date)
+        self.presenter.reloadSchedule()
     }
-
 }

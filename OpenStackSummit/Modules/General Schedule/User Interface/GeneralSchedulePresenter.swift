@@ -20,9 +20,8 @@ extension Array where Element: SummitEvent {
 @objc
 public protocol IGeneralSchedulePresenter {
     func reloadSchedule()
-    func reloadSchedule(events: [SummitEvent])
-    func reloadSchedule(byDate date: NSDate)
     func showEventDetail(eventId: Int)
+    func viewLoad()
 }
 
 public class GeneralSchedulePresenter: NSObject {
@@ -31,38 +30,26 @@ public class GeneralSchedulePresenter: NSObject {
     var interactor : IGeneralScheduleInteractor!
     var generalScheduleWireframe : IGeneralScheduleWireframe!
     
+    public func viewLoad() {
+        
+        interactor.getActiveSummit() { summit, error in
+            if (error == nil) {
+                self.viewController.startDate = summit!.startDate.mt_startOfCurrentDay()
+                self.viewController.endDate = summit!.endDate.mt_startOfCurrentDay()
+                self.viewController.selectedDate = self.viewController.startDate
+
+                self.reloadSchedule()
+            }
+            else {
+                self.viewController.handleError(error!)
+            }
+        }
+    }
+    
     public func reloadSchedule() {
-        self.interactor.getScheduleEvents() { events, error in
-            self.reloadSchedule(events!)
-        }
-    }
-    
-    public func reloadSchedule(events: [SummitEvent]) {
-        var startDate = NSDate.distantFuture()
-        var endDate = NSDate.distantPast()
         
-        for event in events {
-            if event.start.mt_isBefore(startDate) {
-                startDate = event.start.mt_startOfCurrentDay()
-            }
-            if event.end.mt_isAfter(endDate) {
-                endDate = event.end.mt_startOfCurrentDay().mt_dateDaysAfter(1)
-            }
-        }
-        
-        self.viewController.events = events
-        self.viewController.dayEvents = events.filter(byDate: startDate)
-        
-        self.viewController.dayPicker.startDate = startDate
-        self.viewController.dayPicker.endDate = endDate
-        self.viewController.dayPicker.firstActiveDate = startDate
-        self.viewController.dayPicker.lastActiveDate = endDate
-        
-        self.viewController.dayPicker.selectDate(startDate, animated: false)
-    }
-    
-    func reloadSchedule(byDate date: NSDate) {
-        self.viewController.dayEvents = (self.viewController?.events)!.filter(byDate: date)
+        let events = self.interactor.getScheduleEventsForDate(viewController.selectedDate.mt_startOfCurrentDay(), endDate: viewController.selectedDate.mt_startOfCurrentDay().mt_startOfCurrentDay().mt_dateDaysAfter(1))
+        self.viewController.dayEvents = events
         self.viewController.reloadSchedule()
     }
     

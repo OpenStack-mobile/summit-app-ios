@@ -17,6 +17,7 @@ public class ScheduleItemDTOAssembler: NSObject, IScheduleItemDTOAssembler {
 
     public func createDTO(event: SummitEvent) -> ScheduleItemDTO {
         let scheduleItemDTO = ScheduleItemDTO()
+        scheduleItemDTO.id = event.id
         scheduleItemDTO.title = event.title
         scheduleItemDTO.location = getLocation(event)
         scheduleItemDTO.date = getDate(event)
