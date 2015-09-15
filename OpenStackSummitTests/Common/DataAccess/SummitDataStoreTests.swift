@@ -50,7 +50,7 @@ class SummitDataStoreTests: XCTestCase {
             var summitEvent = self.realm.objects(SummitEvent.self).first!
             XCTAssertEqual(1, summitEvent.id)
             XCTAssertEqual(1, summitEvent.presentation?.id)
-            XCTAssertEqual(3, summitEvent.presentation?.category.id)
+            XCTAssertEqual(3, summitEvent.presentation?.track.id)
             XCTAssertEqual(2, summitEvent.summitTypes.count)
             XCTAssertEqual(2, summitEvent.summitTypes.count)
             XCTAssertEqual(2, summitEvent.venueRoom!.id)

@@ -61,9 +61,6 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         dayPicker.delegate = self
         
         presenter.viewLoad()
@@ -71,6 +68,9 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
 
     
     func reloadSchedule() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         tableView.reloadData()
     }
 

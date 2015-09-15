@@ -9,7 +9,8 @@ pod 'Realm', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'swi
 pod 'RealmSwift', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'swift-2.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
 pod 'HanekeSwift', :git => 'https://github.com/meteochu/HanekeSwift.git', :branch => 'swift-2.0'
+pod 'AeroGearHttp', :git => 'https://github.com/aerogear/aerogear-ios-http.git', :branch => 'swift-2.0'
+pod 'AeroGearOAuth2', :git => 'https://github.com/aerogear/aerogear-ios-oauth2.git', :branch => 'swift-2.0'
 
 target 'OpenStackSummitTests' do
-    pod 'OCMock', '~> 2.0.1'
 end
