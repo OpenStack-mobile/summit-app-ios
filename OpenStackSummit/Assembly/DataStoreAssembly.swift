@@ -11,7 +11,7 @@ import Typhoon
 import RealmSwift
 
 public class DataStoreAssembly: TyphoonAssembly {
-    dynamic func deserializerFactory() -> AnyObject {
+    public dynamic func deserializerFactory() -> AnyObject {
         return TyphoonDefinition.withClass(DeserializerFactory.self) {
             (definition) in
             
@@ -24,7 +24,7 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("venueRoomDeserializer", with: self.venueRoomDeserializer())
             definition.injectProperty("summitEventDeserializer", with: self.summitEventDeserializer())
             definition.injectProperty("presentationDeserializer", with: self.presentationDeserializer())
-            definition.injectProperty("presentationCategoryDeserializer", with: self.presentationCategoryDeserializer())
+            definition.injectProperty("trackDeserializer", with: self.trackDeserializer())
             definition.injectProperty("memberDeserializer", with: self.memberDeserializer())
             definition.injectProperty("presentationSpeakerDeserializer", with: self.presentationSpeakerDeserializer())
             definition.injectProperty("tagDeserializer", with: self.tagDeserializer())
@@ -32,15 +32,19 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
    
-    dynamic func imageDeserializer() -> AnyObject {
+    public dynamic func imageDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(ImageDeserializer.self)
     }
     
-    dynamic func deserializerStorage() -> AnyObject {
-        return TyphoonDefinition.withClass(DeserializerStorage.self)
+    public dynamic func deserializerStorage() -> AnyObject {
+        return TyphoonDefinition.withClass(DeserializerStorage.self){
+            (definition) in
+            
+            definition.scope = TyphoonScope.Singleton
+        }
     }
     
-    dynamic func summitDeserializer() -> AnyObject {
+    public dynamic func summitDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(SummitDeserializer.self) {
             (definition) in
             
@@ -49,7 +53,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func companyDeserializer() -> AnyObject {
+    public dynamic func companyDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(CompanyDeserializer.self) {
             (definition) in
             
@@ -57,7 +61,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func eventTypeDeserializer() -> AnyObject {
+    public dynamic func eventTypeDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(EventTypeDeserializer.self) {
             (definition) in
             
@@ -66,7 +70,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func summitTypeDeserializer() -> AnyObject {
+    public dynamic func summitTypeDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(SummitTypeDeserializer.self) {
             (definition) in
             
@@ -75,14 +79,14 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func locationDeserializer() -> AnyObject {
+    public dynamic func locationDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(LocationDeserializer.self) {
             (definition) in
             
         }
     }
     
-    dynamic func venueDeserializer() -> AnyObject {
+    public dynamic func venueDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(VenueDeserializer.self) {
             (definition) in
             
@@ -91,7 +95,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func venueRoomDeserializer() -> AnyObject {
+    public dynamic func venueRoomDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(VenueRoomDeserializer.self) {
             (definition) in
             
@@ -100,7 +104,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func summitEventDeserializer() -> AnyObject {
+    public dynamic func summitEventDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(SummitEventDeserializer.self) {
             (definition) in
             
@@ -109,7 +113,7 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func presentationDeserializer() -> AnyObject {
+    public dynamic func presentationDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(PresentationDeserializer.self) {
             (definition) in
             
@@ -117,15 +121,15 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func presentationCategoryDeserializer() -> AnyObject {
-        return TyphoonDefinition.withClass(PresentationCategoryDeserializer.self) {
+    public dynamic func trackDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(TrackDeserializer.self) {
             (definition) in
             
             definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
         }
     }
     
-    dynamic func memberDeserializer() -> AnyObject {
+    public dynamic func memberDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(MemberDeserializer.self) {
             (definition) in
         
@@ -133,14 +137,14 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func presentationSpeakerDeserializer() -> AnyObject {
+    public dynamic func presentationSpeakerDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(PresentationSpeakerDeserializer.self) {
             (definition) in
             
         }
     }
     
-    dynamic func tagDeserializer() -> AnyObject {
+    public dynamic func tagDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(TagDeserializer.self) {
             (definition) in
             

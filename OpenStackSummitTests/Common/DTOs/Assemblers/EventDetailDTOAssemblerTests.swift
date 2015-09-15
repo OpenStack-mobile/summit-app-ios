@@ -38,8 +38,8 @@ class EventDetailDTOAssemblerTests: BaseTests {
         realm.write {
             self.realm.add(venue)
         }
-        let presentationCategory = PresentationCategory()
-        presentationCategory.name = "Keynote"
+        let track = Track()
+        track.name = "Keynote"
         let tag1 = Tag()
         tag1.name = "Infraestructure"
         let tag2 = Tag()
@@ -57,7 +57,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.sponsors.append(sponsor2)
         event.presentation = Presentation()
         event.presentation?.speakers.append(speaker)
-        event.presentation?.category = presentationCategory
+        event.presentation?.track = track
         event.presentation?.tags.append(tag1)
         event.presentation?.tags.append(tag2)
         event.venueRoom = venueRoom
@@ -80,7 +80,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(event.presentation!.speakers.count, eventDetailDTO.speakers.count)
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
-        XCTAssertEqual(event.presentation!.category.name, eventDetailDTO.category)
+        XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
     }
     
@@ -112,7 +112,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertFalse(eventDetailDTO.finished)
         XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
         XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
-        XCTAssertEqual("", eventDetailDTO.category)
+        XCTAssertEqual("", eventDetailDTO.track)
         XCTAssertEqual("", eventDetailDTO.tags)
     }
 }

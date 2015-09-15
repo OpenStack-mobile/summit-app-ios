@@ -17,7 +17,6 @@ public protocol IMenuPresenter {
 public class MenuPresenter: NSObject, IMenuPresenter {
     var interactor: IMenuInteractor!
     var menuWireframe: IMenuWireframe!
-    var router: IRouter!
     
     public override init() {
         super.init()

@@ -16,4 +16,5 @@ public class Venue: Location {
     public dynamic var long = ""
     public let maps = List<Image>()
     public let venueRooms = List<VenueRoom>()
+    public let isInternal = true
 }
