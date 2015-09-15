@@ -13,7 +13,7 @@ public class ScheduleItemDTO: NSObject {
     public var title = ""
     public var date = ""
     public var location = ""
-    public var category = ""
+    public var track = ""
     public var credentials = ""
     public var sponsors = ""
     public var eventType = ""

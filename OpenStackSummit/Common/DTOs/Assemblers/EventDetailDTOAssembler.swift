@@ -32,7 +32,7 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         eventDetailDTO.finished = getFinished(event)
         eventDetailDTO.eventDescription = event.eventDescription
         if let presentation = event.presentation {
-            eventDetailDTO.category = event.presentation!.category.name
+            eventDetailDTO.track = event.presentation!.track.name
             eventDetailDTO.tags = getTags(presentation)
             
             var speakerDTO: SpeakerDTO

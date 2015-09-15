@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol ILoginPresenter {
-    func login(userName: String, password: String)
+    func login()
 }
 
 public class LoginPresenter: NSObject, ILoginPresenter {
@@ -18,8 +18,8 @@ public class LoginPresenter: NSObject, ILoginPresenter {
     var loginWireframe: ILoginWireframe!
     var viewController: ILoginViewController!
     
-    public func login(userName: String, password: String) {
-        interactor.login(userName, password: password) { member, error in
+    public func login() {
+        interactor.login { error in
             if (error == nil) {
                 self.loginWireframe.dismissLoginView()
             }

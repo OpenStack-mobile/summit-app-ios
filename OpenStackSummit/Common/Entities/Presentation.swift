@@ -11,8 +11,9 @@ import RealmSwift
 
 public class Presentation: BaseEntity {
     
+    public let level = ""
     public let speakers = List<Member>()
-    public dynamic var category: PresentationCategory!
+    public dynamic var track: Track!
     public let tags = List<Tag>()
     public var event: SummitEvent {
         return linkingObjects(SummitEvent.self, forProperty: "presentation").first!

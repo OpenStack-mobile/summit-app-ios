@@ -29,16 +29,18 @@ class MemberDataStoreTests: XCTestCase {
     
     func test_getByUserName_userExistOnLocalDatabase_ReturnsCorrectMember() {
         // Arrange
-        let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
-        let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
-        summitDataStore.getActive(){
-            (result) in
+        let memberId = 1
+        let email = "enzo@riverplate.com"
+        let member = Member()
+        member.id = memberId
+        member.email = email
+        realm.write {
+            self.realm.add(member)
         }
         
         let expectation = expectationWithDescription("async load")
         let memberDataStoreAssembly = MemberDataStoreAssembly().activate();
         let memberDataStore = memberDataStoreAssembly.memberDataStore() as! MemberDataStore
-        let email = "enzo@riverplate.com"
         
         // Act
         memberDataStore.getByEmail(email){
@@ -48,12 +50,6 @@ class MemberDataStoreTests: XCTestCase {
             XCTAssertEqual(1, self.realm.objects(Member.self).count)
             let member = self.realm.objects(Member.self).first
             XCTAssertEqual(email, member?.email)
-            XCTAssertEqual(1, member?.bookmarkedEvents.count)
-            XCTAssertEqual(1, member?.scheduledEvents.count)
-            XCTAssertEqual(1, member?.scheduledEvents.first!.id)
-            XCTAssertEqual(2, member?.scheduledEvents.first!.summitTypes.count)
-            XCTAssertEqual(2, member?.bookmarkedEvents.first!.id)
-            XCTAssertEqual(1, member?.bookmarkedEvents.first!.summitTypes.count)
             expectation.fulfill()
         }
         
@@ -62,10 +58,10 @@ class MemberDataStoreTests: XCTestCase {
     
     func test_addEventToMemberShedule_succeedAddingEvent_ReturnsAddedEventAndNoError() {
         // Arrange
-        let summitDataStoreAssembly = SummitDataStoreAssembly().activate();
-        let summitDataStore = summitDataStoreAssembly.summitDataStore() as! SummitDataStore
-        summitDataStore.getActive(){
-            (result) in
+        var event = SummitEvent()
+        event.id = 1
+        realm.write {
+            self.realm.add(event)
         }
         
         let expectation = expectationWithDescription("async load")
@@ -77,7 +73,7 @@ class MemberDataStoreTests: XCTestCase {
         realm.write {
             self.realm.add(member)
         }
-        let event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!
+        event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!
         
         // Act
         memberDataStore.addEventToMemberShedule(1, event: event) { member, error in

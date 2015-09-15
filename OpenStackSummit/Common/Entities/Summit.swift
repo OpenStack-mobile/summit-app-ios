@@ -16,4 +16,5 @@ public class Summit: BaseEntity {
     public let types = List<SummitType>()
     public let venues = List<Venue>()
     public let events = List<SummitEvent>()
+    public let track = List<Track>()
 }
