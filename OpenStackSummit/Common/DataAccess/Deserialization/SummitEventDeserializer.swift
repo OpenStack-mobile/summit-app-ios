@@ -58,9 +58,12 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
                 let presentation = deserializer.deserialize(json) as! Presentation
                 
                 summitEvent.presentation = presentation
+
+                deserializer = deserializerFactory.create(DeserializerFactories.Venue)
+                summitEvent.venue = deserializer.deserialize(json["location_id"]) as? Venue
                 
-                deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
-                summitEvent.venueRoom = deserializer.deserialize(json["location_id"]) as? VenueRoom
+                /*deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
+                summitEvent.venueRoom = deserializer.deserialize(json["location_id"]) as? VenueRoom*/
             }
             else {
                 deserializer = deserializerFactory.create(DeserializerFactories.Venue)

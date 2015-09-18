@@ -88,9 +88,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="kkI-UC-Grm" kind="presentation" identifier="loginSegue" id="G8R-3I-pp5"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="avp-8v-mNf">
                                         <rect key="frame" x="0.0" y="154" width="600" height="44"/>
@@ -127,6 +124,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="fDG-vB-m6J" kind="custom" identifier="generalScheduleSegue" customClass="SWRevealViewControllerSeguePushController" id="jJj-gR-pwF"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="IvL-vk-3Sd">
                                         <rect key="frame" x="0.0" y="264" width="600" height="44"/>
@@ -262,9 +262,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="fDG-vB-m6J" kind="custom" identifier="logoutSegue" customClass="SWRevealViewControllerSeguePushController" id="JVY-fT-yVw"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="yol-VB-ciT">
                                         <rect key="frame" x="0.0" y="638" width="600" height="44"/>
@@ -574,6 +571,6 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JVY-fT-yVw"/>
+        <segue reference="jJj-gR-pwF"/>
     </inferredMetricsTieBreakers>
 </document>

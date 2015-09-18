@@ -7,15 +7,15 @@
 //
 
 import UIKit
+import AeroGearOAuth2
 
 @objc
 public protocol IMenuInteractor {
-    func getCurrentMemberRole() -> MemberRoles
-    func logout()
 }
 
 public class MenuInteractor: NSObject, IMenuInteractor {
     var session : ISession!
+    let kAccessToken = "access_token"
     let kCurrentMember = "currentMember"
     
     public override init() {
@@ -24,22 +24,5 @@ public class MenuInteractor: NSObject, IMenuInteractor {
 
     public init(session: ISession) {
         self.session = session
-    }
-    
-    public func getCurrentMemberRole() -> MemberRoles{
-        var role = MemberRoles.Anonymous
-        if let member = session.get(kCurrentMember) {
-            if ((member as! Member).speakerRole != nil) {
-                role = MemberRoles.Speaker
-            }
-            else if ((member as! Member).attendeeRole != nil) {
-                role = MemberRoles.Attendee
-            }
-        }
-        return role
-    }
-    
-    public func logout() {
-        session.set(kCurrentMember, value: nil)
     }
 }

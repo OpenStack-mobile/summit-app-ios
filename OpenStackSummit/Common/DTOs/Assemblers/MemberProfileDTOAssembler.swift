@@ -26,15 +26,15 @@ public class MemberProfileDTOAssembler: NSObject {
     
     public func createDTO(member: Member, full: Bool) -> MemberProfileDTO {
         let memberProfileDTO = MemberProfileDTO()
-        memberProfileDTO.name = member.firstName + " " + member.lastName
-        memberProfileDTO.jobTitle = member.jobTitle
+        /*memberProfileDTO.name = member.firstName + " " + member.lastName
+        memberProfileDTO.title = member.jobTitle
         memberProfileDTO.pictureUrl = member.pictureUrl
         memberProfileDTO.bio = member.bio
         if (full) {
             memberProfileDTO.email = member.email
             memberProfileDTO.location = member.location
             memberProfileDTO.twitter = member.twitter
-            memberProfileDTO.IRC = member.IRC
+            memberProfileDTO.irc = member.IRC
             
             var scheduleItemDTO: ScheduleItemDTO
             for event in member.scheduledEvents {
@@ -47,7 +47,7 @@ public class MemberProfileDTOAssembler: NSObject {
         for presentation in member.presentations {
             scheduleItemDTO = scheduleItemDTOAssembler.createDTO(presentation.event)
             memberProfileDTO.presentations.append(scheduleItemDTO)
-        }
+        }*/
         
         return memberProfileDTO
     }

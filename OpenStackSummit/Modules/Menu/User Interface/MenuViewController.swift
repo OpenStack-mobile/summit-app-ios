@@ -8,7 +8,14 @@
 
 import UIKit
 
-class MenuViewController: UITableViewController {
+@objc
+public protocol IMenuViewController {
+    func reloadMenu()
+    func hideMenu()
+    func navigateToHome()
+}
+
+class MenuViewController: UITableViewController, IMenuViewController {
 
     var presenter: IMenuPresenter!
     
@@ -20,6 +27,19 @@ class MenuViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+    }
+
+    func hideMenu() {
+        revealViewController().revealToggle(self)
+    }
+    
+    func reloadMenu() {
+        tableView.reloadData()
+    }
+    
+    func navigateToHome() {
+        performSegueWithIdentifier("generalScheduleSegue", sender: self)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -35,12 +55,12 @@ class MenuViewController: UITableViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "loginSegue") {
-            self.revealViewController().revealToggle(sender)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        if (indexPath.section == 3 && indexPath.row == 5) {
+            presenter.logout()
         }
-        else if (segue.identifier == "logoutSegue") {
-            
+        else if (indexPath.section == 3 && indexPath.row == 6) {
+            presenter.login()
         }
     }
     

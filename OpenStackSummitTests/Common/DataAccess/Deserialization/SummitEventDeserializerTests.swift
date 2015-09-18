@@ -38,10 +38,10 @@ class SummitEventDeserializerTests: XCTestCase {
         let summitType = SummitType()
         summitType.id = 1
         deserializerStorage.add(summitType)
-        let speaker1 = Member()
+        let speaker1 = PresentationSpeaker()
         speaker1.id = 1761
         deserializerStorage.add(speaker1)
-        let speaker2 = Member()
+        let speaker2 = PresentationSpeaker()
         speaker2.id = 1861
         deserializerStorage.add(speaker2)
         

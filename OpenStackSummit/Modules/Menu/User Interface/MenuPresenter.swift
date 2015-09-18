@@ -11,25 +11,29 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func hasAccessToMenuItem(section: Int, row: Int) -> Bool
+    func login()
     func logout()
 }
 
 public class MenuPresenter: NSObject, IMenuPresenter {
     var interactor: IMenuInteractor!
-    var menuWireframe: IMenuWireframe!
+    var wireframe: IMenuWireframe!
+    var viewController: IMenuViewController!
+    var securityManager: SecurityManager!
     
     public override init() {
         super.init()
     }
     
-    public init(interactor: IMenuInteractor, menuWireframe: IMenuWireframe) {
+    public init(interactor: IMenuInteractor, menuWireframe: IMenuWireframe, viewController: IMenuViewController) {
         self.interactor = interactor
-        self.menuWireframe = menuWireframe
+        self.wireframe = menuWireframe
+        self.viewController = viewController
     }
     
     public func hasAccessToMenuItem(section: Int, row: Int) -> Bool {
         
-        let currentMemberRole = interactor.getCurrentMemberRole()
+        let currentMemberRole = securityManager.getCurrentMemberRole()
         var show = true
         if (section == 3) {
             if ((row == 0 || row == 1 || row == 3 || row == 5 || row == 7)) {
@@ -45,7 +49,19 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         return show
     }
     
+    public func login() {
+        viewController.hideMenu()
+        
+        securityManager.login { error in
+            self.viewController.reloadMenu()
+        }
+    }
+    
     public func logout() {
-        interactor.logout()
+        securityManager.logout() {error in
+            self.viewController.hideMenu()
+            self.viewController.reloadMenu()
+            self.viewController.navigateToHome()
+        }
     }
 }

@@ -28,4 +28,15 @@ public class LoginPresenter: NSObject, ILoginPresenter {
             }
         }
     }
+    
+    public func logout() {
+        interactor.logout { error in
+            if (error == nil) {
+                self.loginWireframe.dismissLoginView()
+            }
+            else {
+                self.viewController.handleError(error!)
+            }
+        }
+    }
 }

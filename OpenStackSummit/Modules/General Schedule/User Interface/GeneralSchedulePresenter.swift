@@ -34,8 +34,8 @@ public class GeneralSchedulePresenter: NSObject {
         
         interactor.getActiveSummit() { summit, error in
             if (error == nil) {
-                self.viewController.startDate = summit!.startDate.mt_startOfCurrentDay()
-                self.viewController.endDate = summit!.endDate.mt_startOfCurrentDay()
+                self.viewController.startDate = summit!.startDate
+                self.viewController.endDate = summit!.endDate
                 self.viewController.selectedDate = self.viewController.startDate
 
                 self.reloadSchedule()
@@ -48,7 +48,7 @@ public class GeneralSchedulePresenter: NSObject {
     
     public func reloadSchedule() {
         
-        let events = self.interactor.getScheduleEventsForDate(viewController.selectedDate.mt_startOfCurrentDay(), endDate: viewController.selectedDate.mt_startOfCurrentDay().mt_startOfCurrentDay().mt_dateDaysAfter(1))
+        let events = self.interactor.getScheduleEventsForDate(viewController.selectedDate, endDate: viewController.selectedDate.mt_dateDaysAfter(1))
         self.viewController.dayEvents = events
         self.viewController.reloadSchedule()
     }

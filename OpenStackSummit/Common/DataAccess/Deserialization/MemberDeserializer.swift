@@ -14,22 +14,24 @@ public class MemberDeserializer: NSObject, IDeserializer {
     
     public func deserialize(json: JSON) -> BaseEntity {
         let member = Member()
-        member.id = json["id"].intValue
+        member.id = json["member_id"].intValue
         member.firstName = json["first_name"].stringValue
         member.lastName = json["last_name"].stringValue
         member.email = json["email"].stringValue
-        
-        let deserializer = deserializerFactory.create(DeserializerFactories.SummitEvent)
-        var event : SummitEvent
-        
-        for (_, eventJSON) in json["bookmarked_events"] {
-            event = deserializer.deserialize(eventJSON) as! SummitEvent
-            member.bookmarkedEvents.append(event)
+        member.irc = json["irc"].string ?? ""
+        member.twitter = json["twitter"].string ?? ""
+        member.bio = json["bio"].stringValue
+                
+        if let _ = json["schedule"].array {
+            let deserializer = deserializerFactory.create(DeserializerFactories.SummitAttendee)
+            member.attendeeRole = deserializer.deserialize(json) as! SummitAttendee
         }
         
-        for (_, eventJSON) in json["scheduled_events"] {
-            event = deserializer.deserialize(eventJSON) as! SummitEvent
-            member.scheduledEvents.append(event)
+        let speakerId = json["speaker_id"]
+        if (speakerId.int != nil) {
+            let deserializer = deserializerFactory.create(DeserializerFactories.PresentationSpeaker)
+            member.speakerRole = deserializer.deserialize(json) as! PresentationSpeaker
+            
         }
         
         return member

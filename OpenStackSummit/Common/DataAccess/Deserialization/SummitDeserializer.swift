@@ -37,13 +37,20 @@ public class SummitDeserializer: NSObject, IDeserializer {
             summit.types.append(summitType)
         }
         
+        deserializer = deserializerFactory.create(DeserializerFactories.TicketType)
+        var ticketType : TicketType
+        for (_, ticketTypeJSON) in json["ticket_types"] {
+            ticketType = deserializer.deserialize(ticketTypeJSON) as! TicketType
+            summit.ticketTypes.append(ticketType)
+        }
+        
         deserializer = deserializerFactory.create(DeserializerFactories.EventType)
         for (_, eventTypeJSON) in json["event_types"] {
             deserializer.deserialize(eventTypeJSON)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactories.Track)
-        for (_, presentationCategoryJSON) in json["presentation_categories"] {
+        for (_, presentationCategoryJSON) in json["tracks"] {
             deserializer.deserialize(presentationCategoryJSON)
         }
 
@@ -53,13 +60,17 @@ public class SummitDeserializer: NSObject, IDeserializer {
             venue = deserializer.deserialize(venueJSON) as! Venue
             summit.venues.append(venue)
         }
+
+        deserializer = deserializerFactory.create(DeserializerFactories.PresentationSpeaker)
+        for (_, presentationSpeakerJSON) in json["speakers"] {
+            deserializer.deserialize(presentationSpeakerJSON) as! PresentationSpeaker
+        }
         
         var event : SummitEvent
         for (_, eventJSON) in json["schedule"] {
 
             deserializer = deserializerFactory.create(DeserializerFactories.SummitEvent)
             event = deserializer.deserialize(eventJSON) as! SummitEvent
-            
             summit.events.append(event)
         }
         
@@ -68,6 +79,5 @@ public class SummitDeserializer: NSObject, IDeserializer {
         summit.startDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
         summit.endDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
         return summit
-
     }
 }

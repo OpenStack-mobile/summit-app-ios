@@ -63,6 +63,7 @@
 		<string>VenueRoomDetailAssembly</string>
 		<string>LoginAssembly</string>
 		<string>FeedbackEditAssembly</string>
+		<string>SecurityManagerAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -28,10 +28,10 @@ public class EventDetailInteractor: NSObject {
     }
     
     public func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void) {
-        let currentMember = session.get(kCurrentMember) as! Member
+        let member = session.get(kCurrentMember) as! MemberDTO
         let event = eventDataStore.getById(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
-        memberDataStore.addEventToMemberShedule(currentMember.id, event: event!) { member, error in
+        memberDataStore.addEventToMemberShedule(member.id, event: event!) { member, error in
             if (error == nil) {
                 self.session.set(self.kCurrentMember, value: member!)
                 completionBlock(eventDetailDTO, nil)

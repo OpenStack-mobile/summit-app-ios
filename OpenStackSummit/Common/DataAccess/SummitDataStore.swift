@@ -19,10 +19,10 @@ public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
     var summitRemoteDataStore: ISummitRemoteDataStore!
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
-        realm.write { () -> Void in
+        /*realm.write { () -> Void in
             self.realm.deleteAll()
-        }
-        var summit = realm.objects(Summit.self).first
+        }*/
+        let summit = realm.objects(Summit.self).first
         if (summit != nil) {
             completionBlock(summit!, nil)
         }

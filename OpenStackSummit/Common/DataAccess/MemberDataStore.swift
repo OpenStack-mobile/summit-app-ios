@@ -82,7 +82,7 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
             if (error == nil) {
                 member = self.realm.objects(Member.self).filter("id = \(memberId)").first!
                 self.realm.write {
-                    member!.scheduledEvents.append(event)
+                    member!.attendeeRole!.scheduledEvents.append(event)
                     self.realm.add(member!, update: true)
                 }
             }
