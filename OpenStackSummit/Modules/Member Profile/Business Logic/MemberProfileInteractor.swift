@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol IMemberProfileInteractor: IBaseInteractor {
-    func getCurrentMember() -> Member?
+    func getCurrentMember() -> MemberDTO?
     func getMember(memberId: Int, completionBlock : (MemberProfileDTO?, NSError?) -> Void)
     func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void)
 }
@@ -40,13 +40,13 @@ public class MemberProfileInteractor: BaseInteractor, IMemberProfileInteractor {
     
     public func isFullProfileAllowed(member: Member) -> Bool {
         var allow = false
-        if let currentMember = getCurrentMember() as Member? {
+        if let currentMember = getCurrentMember() as MemberDTO? {
             if (currentMember.id == member.id) {
                 allow = true
             }
-            else if (currentMember.isFriend(member)) {
+/*            else if (currentMember.isFriend(member)) {
                 allow = true
-            }
+            }*/
         }
         return allow
     }

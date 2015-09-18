@@ -13,11 +13,10 @@ class SpeakerDTOAssemblerTests: BaseTests {
 
     func test_createDTO_speakerThatIsNotPresentationOwner_returnsDTOWithCorrectData() {
         // Arrange
-        let speaker = Member()
+        let speaker = PresentationSpeaker()
         speaker.firstName = "Enzo"
         speaker.lastName = "Francescoli"
-        speaker.speakerRole = PresentationSpeaker()
-        speaker.speakerRole!.isPresentationOwner = false
+        speaker.isPresentationOwner = false
         
         let speakerDTOAssembler = SpeakerDTOAssembler()
         
@@ -26,16 +25,15 @@ class SpeakerDTOAssemblerTests: BaseTests {
         
         // Assert
         XCTAssertEqual(speaker.firstName + " " + speaker.lastName, speakerDTO.name)
-        XCTAssertEqual(speaker.speakerRole!.isPresentationOwner, speakerDTO.isPresentationOwner)
+        XCTAssertEqual(speaker.isPresentationOwner, speakerDTO.isPresentationOwner)
     }
     
     func test_createDTO_speakerThatIsPresentationOwner_returnsDTOWithCorrectData() {
         // Arrange
-        let speaker = Member()
+        let speaker = PresentationSpeaker()
         speaker.firstName = "Enzo"
         speaker.lastName = "Francescoli"
-        speaker.speakerRole = PresentationSpeaker()
-        speaker.speakerRole!.isPresentationOwner = true
+        speaker.isPresentationOwner = true
         
         let speakerDTOAssembler = SpeakerDTOAssembler()
         
@@ -44,6 +42,6 @@ class SpeakerDTOAssemblerTests: BaseTests {
         
         // Assert
         XCTAssertEqual(speaker.firstName + " " + speaker.lastName, speakerDTO.name)
-        XCTAssertEqual(speaker.speakerRole!.isPresentationOwner, speakerDTO.isPresentationOwner)
+        XCTAssertEqual(speaker.isPresentationOwner, speakerDTO.isPresentationOwner)
     }
 }

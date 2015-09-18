@@ -29,9 +29,29 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("presentationSpeakerDeserializer", with: self.presentationSpeakerDeserializer())
             definition.injectProperty("tagDeserializer", with: self.tagDeserializer())
             definition.injectProperty("imageDeserializer", with: self.imageDeserializer())
+            definition.injectProperty("ticketTypeDeserializer", with: self.ticketTypeDeserializer())
+            definition.injectProperty("summitAttendeeDeserializer", with: self.summitAttendeeDeserializer())
         }
     }
-   
+
+    public dynamic func summitAttendeeDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitAttendeeDeserializer.self) {
+            (definition) in
+            
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
+            definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
+        }
+    }
+    
+    public dynamic func ticketTypeDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(TicketTypeDeserializer.self) {
+            (definition) in
+            
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
+            definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
+        }
+    }
+    
     public dynamic func imageDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(ImageDeserializer.self)
     }

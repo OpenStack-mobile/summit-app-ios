@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.login()
         // Do any additional setup after loading the view.
     }
 

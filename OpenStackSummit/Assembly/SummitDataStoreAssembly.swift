@@ -26,6 +26,15 @@ public class SummitDataStoreAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(SummitRemoteDataStore.self) {
             (definition) in
             definition.injectProperty("deserializerFactory", with: self.dataStoreAssembly.deserializerFactory())
+            definition.injectProperty("securityManager", with: self.summitDataStoreSecurityManager())
+        }
+    }
+    
+    dynamic func summitDataStoreSecurityManager() -> AnyObject {
+        return TyphoonDefinition.withClass(SecurityManager.self) {
+            (definition) in
+            
+            definition.scope = TyphoonScope.Singleton
         }
     }
 }

@@ -12,6 +12,7 @@ import Typhoon
 public class MenuAssembly: TyphoonAssembly {
     
     var venueListAssembly: VenueListAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
     
     dynamic func menuWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MenuWireframe.self) {
@@ -27,7 +28,9 @@ public class MenuAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("interactor", with: self.menuInteractor())
-            definition.injectProperty("menuWireframe", with: self.menuWireframe())
+            definition.injectProperty("wireframe", with: self.menuWireframe())
+            definition.injectProperty("viewController", with: self.menuViewController())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     

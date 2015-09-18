@@ -9,7 +9,7 @@
 import UIKit
 
 public enum DeserializerFactories {
-    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, Tag, PresentationSpeaker, Image
+    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee
 }
 
 public class DeserializerFactory : NSObject {
@@ -27,6 +27,8 @@ public class DeserializerFactory : NSObject {
     var trackDeserializer: TrackDeserializer!
     var tagDeserializer: TagDeserializer!
     var imageDeserializer: ImageDeserializer!
+    var ticketTypeDeserializer: TicketTypeDeserializer!
+    var summitAttendeeDeserializer: SummitAttendeeDeserializer!
     
     public func create(type: DeserializerFactories) -> IDeserializer {
         var deserializer : IDeserializer!
@@ -60,6 +62,10 @@ public class DeserializerFactory : NSObject {
             deserializer = tagDeserializer
         case DeserializerFactories.Image:
             deserializer = imageDeserializer
+        case DeserializerFactories.TicketType:
+            deserializer = ticketTypeDeserializer
+        case DeserializerFactories.SummitAttendee:
+            deserializer = summitAttendeeDeserializer
         default:
             NSException(name: "InvalidArgument",reason: "Type \(type) is an unexpected deserializer type", userInfo: nil).raise()
         }

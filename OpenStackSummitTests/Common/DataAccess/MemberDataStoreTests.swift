@@ -70,6 +70,7 @@ class MemberDataStoreTests: XCTestCase {
         let memberId = 1
         let member = Member()
         member.id = 1
+        member.attendeeRole = SummitAttendee()
         realm.write {
             self.realm.add(member)
         }
@@ -78,7 +79,7 @@ class MemberDataStoreTests: XCTestCase {
         // Act
         memberDataStore.addEventToMemberShedule(1, event: event) { member, error in
             // Assert
-            XCTAssertEqual(1, self.realm.objects(Member.self).filter("id = \(memberId)").first!.scheduledEvents.first!.id)
+            XCTAssertEqual(1, self.realm.objects(Member.self).filter("id = \(memberId)").first!.attendeeRole!.scheduledEvents.first!.id)
             expectation.fulfill()
         }
         

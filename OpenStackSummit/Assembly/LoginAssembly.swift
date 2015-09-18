@@ -34,17 +34,29 @@ public class LoginAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(LoginInteractor.self) {
             (definition) in
             
+            definition.injectProperty("session", with: self.loginInteractorSession())
+            definition.injectProperty("securityManager", with: self.loginInteractorSecurityManager())
+
         }
     }
     
-    dynamic func loginViewController() -> AnyObject {
-        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
-            (factoryMethod) in
+    dynamic func loginInteractorSecurityManager() -> AnyObject {
+        return TyphoonDefinition.withClass(SecurityManager.self) {
+            (definition) in
             
-            factoryMethod.injectParameterWith("LoginViewController")
-            }, configuration: {
-                (definition) in
-                definition.injectProperty("presenter", with: self.loginPresenter())
-        })
+            definition.scope = TyphoonScope.Singleton
+        }
+    }
+
+    dynamic func loginInteractorSession() -> AnyObject {
+        return TyphoonDefinition.withClass(Session.self)
+    }
+    
+    dynamic func loginViewController() -> AnyObject {
+        return TyphoonDefinition.withClass(LoginViewController.self) {
+            (definition) in
+            
+            definition.injectProperty("presenter", with: self.loginPresenter())
+        }
     }
 }
