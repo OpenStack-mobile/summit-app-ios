@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IBaseInteractor {
     func isLoggedIn() -> Bool
-    func getCurrentMember() -> Member?
+    func getCurrentMember() -> MemberDTO?
 }
 
 public class BaseInteractor: NSObject, IBaseInteractor {
@@ -31,8 +31,8 @@ public class BaseInteractor: NSObject, IBaseInteractor {
         return session.get(kCurrentMember) != nil
     }
     
-    public func getCurrentMember() -> Member? {
-        let member = session.get(kCurrentMember) as? Member
+    public func getCurrentMember() -> MemberDTO? {
+        let member = session.get(kCurrentMember) as? MemberDTO
         return member
     }    
 }

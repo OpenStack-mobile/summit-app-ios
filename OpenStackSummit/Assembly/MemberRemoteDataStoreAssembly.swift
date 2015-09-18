@@ -11,12 +11,14 @@ import Typhoon
 
 public class MemberRemoteDataStoreAssembly: TyphoonAssembly {
     var dataStoreAssembly : DataStoreAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
     
     public dynamic func memberRemoteDataStore() -> AnyObject {
         
         return TyphoonDefinition.withClass(MemberRemoteDataStore.self) {
             (definition) in
              definition.injectProperty("deserializerFactory", with: self.dataStoreAssembly.deserializerFactory())
+             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }    
 }

@@ -20,8 +20,8 @@ PODS:
 DEPENDENCIES:
   - AeroGearHttp (from `https://github.com/aerogear/aerogear-ios-http.git`, branch
     `swift-2.0`)
-  - AeroGearOAuth2 (from `https://github.com/aerogear/aerogear-ios-oauth2.git`, branch
-    `swift-2.0`)
+  - AeroGearOAuth2 (from `https://github.com/claudioredi/aerogear-ios-oauth2.git`,
+    branch `openstack`)
   - AFHorizontalDayPicker (from `https://github.com/alexfedosov/AFHorizontalDayPicker.git`)
   - HanekeSwift (from `https://github.com/meteochu/HanekeSwift.git`, branch `swift-2.0`)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
@@ -35,8 +35,8 @@ EXTERNAL SOURCES:
     :branch: swift-2.0
     :git: https://github.com/aerogear/aerogear-ios-http.git
   AeroGearOAuth2:
-    :branch: swift-2.0
-    :git: https://github.com/aerogear/aerogear-ios-oauth2.git
+    :branch: openstack
+    :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
   HanekeSwift:
@@ -57,8 +57,8 @@ CHECKOUT OPTIONS:
     :commit: cc609e4debfd9db9543b05d59a2909a843536e48
     :git: https://github.com/aerogear/aerogear-ios-http.git
   AeroGearOAuth2:
-    :commit: f2685feb4b5fef1734725d9419ebd3b546208213
-    :git: https://github.com/aerogear/aerogear-ios-oauth2.git
+    :commit: 9fdcc420e6ef559a965a838193a368c03d2fdb67
+    :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git

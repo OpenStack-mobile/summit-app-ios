@@ -12,7 +12,7 @@ import RealmSwift
 public class Presentation: BaseEntity {
     
     public let level = ""
-    public let speakers = List<Member>()
+    public let speakers = List<PresentationSpeaker>()
     public dynamic var track: Track!
     public let tags = List<Tag>()
     public var event: SummitEvent {

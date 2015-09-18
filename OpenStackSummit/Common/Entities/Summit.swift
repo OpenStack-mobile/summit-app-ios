@@ -14,6 +14,7 @@ public class Summit: BaseEntity {
     public dynamic var startDate = NSDate(timeIntervalSince1970: 1)
     public dynamic var endDate = NSDate(timeIntervalSince1970: 1)
     public let types = List<SummitType>()
+    public let ticketTypes = List<TicketType>()
     public let venues = List<Venue>()
     public let events = List<SummitEvent>()
     public let track = List<Track>()

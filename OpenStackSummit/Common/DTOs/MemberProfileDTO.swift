@@ -11,13 +11,15 @@ import UIKit
 public class MemberProfileDTO: NSObject {
     public var id = 0
     public var name = ""
-    public var jobTitle = ""
+    public var title = ""
     public var pictureUrl = ""
     public var bio = ""
     public var twitter = ""
-    public var IRC = ""
+    public var irc = ""
     public var email = ""
     public var location = ""
+    public var isAttendee = false
+    public var isSpeaker = false
     public var scheduledEvents = [ScheduleItemDTO]()
     public var presentations = [ScheduleItemDTO]()
 }

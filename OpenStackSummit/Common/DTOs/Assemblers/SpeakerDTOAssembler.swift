@@ -10,15 +10,15 @@ import UIKit
 
 @objc
 public protocol ISpeakerDTOAssembler {
-    func createDTO(member: Member) -> SpeakerDTO
+    func createDTO(member: PresentationSpeaker) -> SpeakerDTO
 }
 
 public class SpeakerDTOAssembler: NSObject, ISpeakerDTOAssembler {
-    public func createDTO(member: Member) -> SpeakerDTO {
+    public func createDTO(speaker: PresentationSpeaker) -> SpeakerDTO {
         let speakerDTO = SpeakerDTO()
-        speakerDTO.id = member.id
-        speakerDTO.name = member.firstName + " " + member.lastName
-        speakerDTO.isPresentationOwner = member.speakerRole!.isPresentationOwner
+        speakerDTO.id = speaker.id
+        speakerDTO.name = speaker.firstName + " " + speaker.lastName
+        speakerDTO.isPresentationOwner = speaker.isPresentationOwner
         return speakerDTO
     }
 }

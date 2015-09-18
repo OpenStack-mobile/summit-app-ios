@@ -8,17 +8,21 @@
 
 import UIKit
 import SwiftyJSON
+import AeroGearHttp
+import AeroGearOAuth2
 
 @objc
 public protocol IMemberRemoteDataStore {
     func addEventToShedule(memberId: Int, eventId: Int, completionBlock : (NSError?) -> Void)
     func getById(memberId: Int, completionBlock : (Member?, NSError?) -> Void)
     func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void)
+    func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)
 }
 
 public class MemberRemoteDataStore: NSObject {
     var deserializerFactory: DeserializerFactory!
-
+    var securityManager: SecurityManager!
+    
     override init() {
         super.init()
     }
@@ -60,5 +64,25 @@ public class MemberRemoteDataStore: NSObject {
         member = deserializer.deserialize(jsonObject) as! Member
         
         completionBlock(member, nil)
+    }
+    
+    func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
+        let attendeeEndpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/me?expand=schedule,ticket_type,speaker"
+        let http = Http(responseSerializer: StringResponseSerializer())
+        http.authzModule = securityManager.oauthModuleOpenID
+        http.GET(attendeeEndpoint, parameters: nil, completionHandler: {(responseObject, error) in
+            if (error != nil) {
+                completionBlock(nil, error)
+                return
+            }
+            if let json = responseObject as! NSString? {
+                let data = json.dataUsingEncoding(NSUTF8StringEncoding)
+                let jsonObject = JSON(data: data!)
+                
+                let deserializer = self.deserializerFactory.create(DeserializerFactories.Member)
+                let member = deserializer.deserialize(jsonObject) as! Member
+                completionBlock(member, error)
+            }
+        })
     }
 }

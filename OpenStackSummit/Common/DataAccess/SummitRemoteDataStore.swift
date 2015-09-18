@@ -19,24 +19,11 @@ public protocol ISummitRemoteDataStore {
 
 public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
     var deserializerFactory: DeserializerFactory!
-
+    var securityManager: SecurityManager!
+    
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
         let http = Http(responseSerializer: StringResponseSerializer())
-        let config = Config(
-            base: "https://testopenstackid.openstack.org",
-            authzEndpoint: "oauth2/auth",
-            redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
-            accessTokenEndpoint: "oauth2/token",
-            clientId: "ugSc.5IJB7MOpVHOs4anxyZi~PJsIfJJ.openstack.client",
-            revokeTokenEndpoint: "oauth2/token/revoke",
-            isOpenIDConnect: true,
-            userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "https://testresource-server.openstack.org/summits/read"],
-            clientSecret: "NvEAT3ScN5c5p9yPS67GeoBo2M_8YLFezeAdALF~dsD-pxXmBU6JRL0ZOyNpGEhM"
-        )
-        
-        let oauth2Module = AccountManager.addAccount(config, moduleClass: KeycloakOAuth2Module.self)
-        http.authzModule = oauth2Module
+        http.authzModule = securityManager.oauthModuleServiceAccount
         
         http.GET("https://testresource-server.openstack.org/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule") {(responseObject, error) in
             if (error != nil) {

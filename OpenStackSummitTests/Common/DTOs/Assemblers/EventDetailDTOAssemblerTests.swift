@@ -20,14 +20,14 @@ class EventDetailDTOAssemblerTests: BaseTests {
             self.speakerDTO = speakerDTO
         }
         
-        @objc func createDTO(member: Member) -> SpeakerDTO {
+        @objc func createDTO(member: PresentationSpeaker) -> SpeakerDTO {
             return speakerDTO
         }
     }
     
     func test_createDTO_eventWithPresentationAndSpeakersThatNotFinished_returnsDTOWithCorrectData() {
         // Arrange
-        let speaker = Member()
+        let speaker = PresentationSpeaker()
         speaker.firstName = "Enzo"
         speaker.lastName = "Francescoli"
         let venue = Venue()
