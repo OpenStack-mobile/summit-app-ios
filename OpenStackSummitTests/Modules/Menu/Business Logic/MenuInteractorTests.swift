@@ -11,7 +11,7 @@ import OpenStackSummit
 
 class MenuInteractorTests: XCTestCase {
     
-    override func setUp() {
+/*    override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -62,7 +62,7 @@ class MenuInteractorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(MemberRoles.Speaker, role)
-    }
+    }*/
 }
 
 

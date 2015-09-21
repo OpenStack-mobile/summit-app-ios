@@ -53,7 +53,7 @@ class MemberDeserializerTests: XCTestCase {
         let jsonObject = JSON(data: data!)
         
         //Act
-        let event = deserializer.deserialize(jsonObject) as! SummitEvent
+        let event = try! deserializer.deserialize(jsonObject) as! SummitEvent
         
         //Assert
         XCTAssertEqual(5290,event.id)

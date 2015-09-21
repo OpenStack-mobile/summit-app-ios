@@ -21,56 +21,56 @@ public class SummitDeserializer: NSObject, IDeserializer {
         super.init()
     }
     
-    public func deserialize(json : JSON) -> BaseEntity {
+    public func deserialize(json : JSON) throws -> BaseEntity {
         let summit = Summit()
         var deserializer : IDeserializer!
         
         deserializer = deserializerFactory.create(DeserializerFactories.Company)
         for (_, companyJSON) in json["sponsors"] {
-            deserializer.deserialize(companyJSON)
+            try deserializer.deserialize(companyJSON)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactories.SummitType)
         var summitType : SummitType
         for (_, summitTypeJSON) in json["summit_types"] {
-            summitType = deserializer.deserialize(summitTypeJSON) as! SummitType
+            summitType = try deserializer.deserialize(summitTypeJSON) as! SummitType
             summit.types.append(summitType)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactories.TicketType)
         var ticketType : TicketType
         for (_, ticketTypeJSON) in json["ticket_types"] {
-            ticketType = deserializer.deserialize(ticketTypeJSON) as! TicketType
+            ticketType = try deserializer.deserialize(ticketTypeJSON) as! TicketType
             summit.ticketTypes.append(ticketType)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactories.EventType)
         for (_, eventTypeJSON) in json["event_types"] {
-            deserializer.deserialize(eventTypeJSON)
+            try deserializer.deserialize(eventTypeJSON)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactories.Track)
         for (_, presentationCategoryJSON) in json["tracks"] {
-            deserializer.deserialize(presentationCategoryJSON)
+            try deserializer.deserialize(presentationCategoryJSON)
         }
 
         deserializer = deserializerFactory.create(DeserializerFactories.Venue)
         var venue: Venue
         for (_, venueJSON) in json["locations"] {
-            venue = deserializer.deserialize(venueJSON) as! Venue
+            venue = try deserializer.deserialize(venueJSON) as! Venue
             summit.venues.append(venue)
         }
 
         deserializer = deserializerFactory.create(DeserializerFactories.PresentationSpeaker)
         for (_, presentationSpeakerJSON) in json["speakers"] {
-            deserializer.deserialize(presentationSpeakerJSON) as! PresentationSpeaker
+            try deserializer.deserialize(presentationSpeakerJSON) as! PresentationSpeaker
         }
         
         var event : SummitEvent
         for (_, eventJSON) in json["schedule"] {
 
             deserializer = deserializerFactory.create(DeserializerFactories.SummitEvent)
-            event = deserializer.deserialize(eventJSON) as! SummitEvent
+            event = try deserializer.deserialize(eventJSON) as! SummitEvent
             summit.events.append(event)
         }
         
@@ -78,6 +78,7 @@ public class SummitDeserializer: NSObject, IDeserializer {
         summit.id = json["id"].intValue
         summit.startDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
         summit.endDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
+        summit.timeZone = json["timeZone"]["name"].stringValue
         return summit
     }
 }

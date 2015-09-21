@@ -13,7 +13,7 @@ public class TicketTypeDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json : JSON) -> BaseEntity {
+    public func deserialize(json : JSON) throws -> BaseEntity {
         
         let ticketType: TicketType
         
@@ -29,7 +29,7 @@ public class TicketTypeDeserializer: NSObject, IDeserializer {
             var summitType: SummitType
             let deserializer = deserializerFactory.create(DeserializerFactories.SummitType)
             for (_, summitTypeJSON) in json["allowed_summit_types"] {
-                summitType = deserializer.deserialize(summitTypeJSON) as! SummitType
+                summitType = try deserializer.deserialize(summitTypeJSON) as! SummitType
                 ticketType.allowedSummitTypes.append(summitType)
             }
             

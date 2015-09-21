@@ -12,25 +12,25 @@ import SwiftyJSON
 public class PresentationDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json: JSON) -> BaseEntity {
+    public func deserialize(json: JSON) throws -> BaseEntity {
         let presentation = Presentation()
         presentation.id = json["id"].intValue
         
         var deserializer = deserializerFactory.create(DeserializerFactories.Track)
-        let track = deserializer.deserialize(json["track_id"]) as! Track
+        let track = try deserializer.deserialize(json["track_id"]) as! Track
         presentation.track = track
         
         deserializer = deserializerFactory.create(DeserializerFactories.PresentationSpeaker)
         var presentationSpeaker : PresentationSpeaker
         for (_, speakerJSON) in json["speakers"] {
-            presentationSpeaker = deserializer.deserialize(speakerJSON) as! PresentationSpeaker
+            presentationSpeaker = try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
             presentation.speakers.append(presentationSpeaker)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactories.Tag)
         var tag : Tag
         for (_, tagsJSON) in json["tags"] {
-            tag = deserializer.deserialize(tagsJSON) as! Tag
+            tag = try deserializer.deserialize(tagsJSON) as! Tag
             presentation.tags.append(tag)
         }
         

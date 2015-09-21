@@ -22,7 +22,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
         super.init()
     }
     
-    public func deserialize(json: JSON) -> BaseEntity {
+    public func deserialize(json: JSON) throws -> BaseEntity {
         var summitEvent = SummitEvent()
         
         if let eventId = json.int {
@@ -36,38 +36,46 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             summitEvent.eventDescription = json["description"].stringValue
             
             var deserializer = deserializerFactory.create(DeserializerFactories.EventType)
-            summitEvent.eventType = deserializer.deserialize(json["type_id"]) as! EventType
+            summitEvent.eventType = try deserializer.deserialize(json["type_id"]) as! EventType
             
             deserializer = deserializerFactory.create(DeserializerFactories.SummitType)
             var summitType : SummitType
             for (_, summitTypeJSON) in json["summit_types"] {
-                summitType = deserializer.deserialize(summitTypeJSON) as! SummitType
+                summitType = try deserializer.deserialize(summitTypeJSON) as! SummitType
                 summitEvent.summitTypes.append(summitType)
             }
             
             deserializer = deserializerFactory.create(DeserializerFactories.Company)
             var company : Company
             for (_, companyJSON) in json["sponsors"] {
-                company = deserializer.deserialize(companyJSON) as! Company
+                company = try deserializer.deserialize(companyJSON) as! Company
                 summitEvent.sponsors.append(company)
             }
             
             let trackId = json["track_id"]
             if (trackId.int != nil) {
                 deserializer = deserializerFactory.create(DeserializerFactories.Presentation)
-                let presentation = deserializer.deserialize(json) as! Presentation
+                let presentation = try deserializer.deserialize(json) as! Presentation
                 
                 summitEvent.presentation = presentation
 
-                deserializer = deserializerFactory.create(DeserializerFactories.Venue)
-                summitEvent.venue = deserializer.deserialize(json["location_id"]) as? Venue
-                
-                /*deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
-                summitEvent.venueRoom = deserializer.deserialize(json["location_id"]) as? VenueRoom*/
+                let venue = Venue()
+                venue.id = json["location_id"].intValue
+                let venueRoom = VenueRoom()
+                venueRoom.id = json["location_id"].intValue
+
+                if (deserializerStorage.exist(venue)){
+                    deserializer = deserializerFactory.create(DeserializerFactories.Venue)
+                    summitEvent.venue = try deserializer.deserialize(json["location_id"]) as? Venue
+                }
+                else if (deserializerStorage.exist(venueRoom)) {
+                    deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
+                    summitEvent.venueRoom = try deserializer.deserialize(json["location_id"]) as? VenueRoom
+                }                
             }
             else {
                 deserializer = deserializerFactory.create(DeserializerFactories.Venue)
-                summitEvent.venue = deserializer.deserialize(json["location_id"]) as? Venue
+                summitEvent.venue = try deserializer.deserialize(json["location_id"]) as? Venue
             }
             deserializerStorage.add(summitEvent)
         }

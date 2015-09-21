@@ -28,6 +28,20 @@ class MenuPresenterTests: XCTestCase {
         }
     }
     
+    class MenuViewControllerMock: NSObject, IMenuViewController {
+        func reloadMenu() {
+            
+        }
+        
+        func hideMenu() {
+            
+        }
+        
+        func navigateToHome() {
+            
+        }
+    }
+    
     
     override func setUp() {
         super.setUp()
@@ -42,7 +56,9 @@ class MenuPresenterTests: XCTestCase {
     func test_hasAccessToMenuItem_anonymousUser_returnCorrectValueForEachMenuItem() {
         // Arrange
         let menuInteractorMock = MenuInteractorMock(role: MemberRoles.Anonymous)
-        let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe())
+        let menuViewControllerMock = MenuViewControllerMock()
+        let securityManagerMock = SecurityManagerMock(member: nil)
+        let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe(), viewController: menuViewControllerMock, securityManager: securityManagerMock)
         
         // Act
         let resSection0Row0 = menuPresenter.hasAccessToMenuItem(0, row: 0)
@@ -83,7 +99,11 @@ class MenuPresenterTests: XCTestCase {
     func test_hasAccessToMenuItem_attendeeUser_returnCorrectValueForEachMenuItem() {
         //Arrange
         let menuInteractorMock = MenuInteractorMock(role: MemberRoles.Attendee)
-        let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe())
+        let menuViewControllerMock = MenuViewControllerMock()
+        let member = Member()
+        member.attendeeRole = SummitAttendee()
+        let securityManagerMock = SecurityManagerMock(member: member)
+        let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe(), viewController: menuViewControllerMock, securityManager: securityManagerMock)
         
         //Act
         let resSection0Row0 = menuPresenter.hasAccessToMenuItem(0, row: 0)
@@ -124,7 +144,11 @@ class MenuPresenterTests: XCTestCase {
     func test_hasAccessToMenuItem_speakerUser_returnCorrectValueForEachMenuItem() {
         //Arrange
         let menuInteractorMock = MenuInteractorMock(role: MemberRoles.Speaker)
-        let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe())
+        let menuViewControllerMock = MenuViewControllerMock()
+        let member = Member()
+        member.speakerRole = PresentationSpeaker()
+        let securityManagerMock = SecurityManagerMock(member: member)
+        let menuPresenter = MenuPresenter(interactor: menuInteractorMock, menuWireframe: MenuWireframe(), viewController: menuViewControllerMock, securityManager: securityManagerMock)
         
         //Act
         let resSection0Row0 = menuPresenter.hasAccessToMenuItem(0, row: 0)

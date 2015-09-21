@@ -12,7 +12,7 @@ import SwiftyJSON
 public class MemberDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json: JSON) -> BaseEntity {
+    public func deserialize(json: JSON) throws -> BaseEntity {
         let member = Member()
         member.id = json["member_id"].intValue
         member.firstName = json["first_name"].stringValue
@@ -24,13 +24,13 @@ public class MemberDeserializer: NSObject, IDeserializer {
                 
         if let _ = json["schedule"].array {
             let deserializer = deserializerFactory.create(DeserializerFactories.SummitAttendee)
-            member.attendeeRole = deserializer.deserialize(json) as! SummitAttendee
+            member.attendeeRole = try deserializer.deserialize(json) as! SummitAttendee
         }
         
         let speakerId = json["speaker_id"]
         if (speakerId.int != nil) {
             let deserializer = deserializerFactory.create(DeserializerFactories.PresentationSpeaker)
-            member.speakerRole = deserializer.deserialize(json) as! PresentationSpeaker
+            member.speakerRole = try deserializer.deserialize(json) as! PresentationSpeaker
             
         }
         

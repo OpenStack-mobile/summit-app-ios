@@ -34,7 +34,7 @@ class SummitDeserializerTests: XCTestCase {
         let jsonObject = JSON(data: data!)
         
         //Act
-        let summit = deserializer.deserialize(jsonObject) as! Summit
+        let summit = try! deserializer.deserialize(jsonObject) as! Summit
         
         //Assert
         XCTAssertEqual(5,summit.id)
