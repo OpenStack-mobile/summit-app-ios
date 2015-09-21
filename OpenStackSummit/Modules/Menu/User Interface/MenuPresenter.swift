@@ -25,10 +25,11 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         super.init()
     }
     
-    public init(interactor: IMenuInteractor, menuWireframe: IMenuWireframe, viewController: IMenuViewController) {
+    public init(interactor: IMenuInteractor, menuWireframe: IMenuWireframe, viewController: IMenuViewController, securityManager: SecurityManager) {
         self.interactor = interactor
         self.wireframe = menuWireframe
         self.viewController = viewController
+        self.securityManager = securityManager
     }
     
     public func hasAccessToMenuItem(section: Int, row: Int) -> Bool {

@@ -134,6 +134,7 @@
 		CAD906191B72B34F00BA5647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAD906181B72B34F00BA5647 /* Assets.xcassets */; };
 		CAD9061C1B72B34F00BA5647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAD9061A1B72B34F00BA5647 /* LaunchScreen.storyboard */; };
 		CAD906321B72B34F00BA5647 /* OpenStackSummitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD906311B72B34F00BA5647 /* OpenStackSummitUITests.swift */; };
+		CAD992D71BB05B2F0051CC5B /* SecurityManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD992D61BB05B2F0051CC5B /* SecurityManagerMock.swift */; };
 		CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB8F1B73CFE5008F742E /* ApplicationAssembly.swift */; };
 		CADDDBA31B73D1BB008F742E /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB931B73D1BB008F742E /* EventType.swift */; };
 		CADDDBA51B73D1BB008F742E /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB951B73D1BB008F742E /* Member.swift */; };
@@ -332,6 +333,7 @@
 		CAD9062D1B72B34F00BA5647 /* OpenStackSummitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenStackSummitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD906311B72B34F00BA5647 /* OpenStackSummitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStackSummitUITests.swift; sourceTree = "<group>"; };
 		CAD906331B72B34F00BA5647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAD992D61BB05B2F0051CC5B /* SecurityManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManagerMock.swift; sourceTree = "<group>"; };
 		CADDDB8F1B73CFE5008F742E /* ApplicationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		CADDDB931B73D1BB008F742E /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		CADDDB951B73D1BB008F742E /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				CAC7F3041B99414D00BAE2C6 /* MemberDataStoreMock.swift */,
 				CAD49EFF1B99C77A00D8D412 /* ScheduleItemDTOAssemblerMock.swift */,
 				CAD49F011B99C7C200D8D412 /* BaseTests.swift */,
+				CAD992D61BB05B2F0051CC5B /* SecurityManagerMock.swift */,
 			);
 			path = TestUtils;
 			sourceTree = "<group>";
@@ -883,17 +886,17 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
-				CACECD6A1B9E829400AF0706 /* Login */,
-				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
-				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
-				CA8E98D01B99D8A900CEBD2F /* Venue List */,
-				CA89130A1B9794D7002E9A95 /* Member Profile */,
 				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
+				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
 				CA416F8A1B8F588700F177F5 /* General Schedule Filter */,
 				CAD47A171B85142D007741E7 /* LaunchScreen */,
+				CACECD6A1B9E829400AF0706 /* Login */,
+				CA89130A1B9794D7002E9A95 /* Member Profile */,
 				CADDDBB11B73D1CA008F742E /* Menu */,
+				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
+				CA8E98D01B99D8A900CEBD2F /* Venue List */,
+				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1486,6 +1489,7 @@
 				CACF7C4D1B96650200A9EB16 /* EventDetailDTOAssemblerTests.swift in Sources */,
 				CAD480A41B8691B9004DBB4F /* MemberDataStoreTests.swift in Sources */,
 				CAD49F021B99C7C200D8D412 /* BaseTests.swift in Sources */,
+				CAD992D71BB05B2F0051CC5B /* SecurityManagerMock.swift in Sources */,
 				CAF2AA5A1B82914B00D8E595 /* DeserializerStorageTests.swift in Sources */,
 				CAD78BCD1B98C64800D37B7C /* ScheduleItemDTOAssemblerTests.swift in Sources */,
 				CA01190B1B8CE9920091E00F /* MenuInteractorTests.swift in Sources */,

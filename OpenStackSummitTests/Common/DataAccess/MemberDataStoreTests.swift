@@ -27,13 +27,11 @@ class MemberDataStoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_getByUserName_userExistOnLocalDatabase_ReturnsCorrectMember() {
+    func test_getById_userExistOnLocalDatabase_ReturnsCorrectMember() {
         // Arrange
         let memberId = 1
-        let email = "enzo@riverplate.com"
         let member = Member()
         member.id = memberId
-        member.email = email
         realm.write {
             self.realm.add(member)
         }
@@ -43,13 +41,13 @@ class MemberDataStoreTests: XCTestCase {
         let memberDataStore = memberDataStoreAssembly.memberDataStore() as! MemberDataStore
         
         // Act
-        memberDataStore.getByEmail(email){
+        memberDataStore.getById(memberId){
             (result) in
             
             // Assert
             XCTAssertEqual(1, self.realm.objects(Member.self).count)
             let member = self.realm.objects(Member.self).first
-            XCTAssertEqual(email, member?.email)
+            XCTAssertEqual(memberId, member?.id)
             expectation.fulfill()
         }
         

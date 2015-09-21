@@ -13,7 +13,7 @@ public class VenueRoomDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json: JSON) -> BaseEntity {
+    public func deserialize(json: JSON) throws -> BaseEntity {
         let venueRoom : VenueRoom
         
         if let venueRoomId = json.int {
@@ -21,7 +21,7 @@ public class VenueRoomDeserializer: NSObject, IDeserializer {
         }
         else {
             let deserializer = deserializerFactory.create(DeserializerFactories.Location)
-            let location = deserializer.deserialize(json) as! Location
+            let location = try deserializer.deserialize(json) as! Location
             venueRoom = VenueRoom()
             venueRoom.id = json["id"].intValue
             venueRoom.capacity = json["capacity"].intValue

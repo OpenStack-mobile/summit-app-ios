@@ -13,7 +13,7 @@ public class SummitTypeDeserializer: KeyValueDeserializer, IDeserializer {
     
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) -> BaseEntity {
+    public func deserialize(json : JSON) throws -> BaseEntity {
         let summitType : SummitType
         
         if let summitTypeId = json.int {

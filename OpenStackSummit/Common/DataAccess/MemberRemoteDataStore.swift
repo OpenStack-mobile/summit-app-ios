@@ -46,7 +46,7 @@ public class MemberRemoteDataStore: NSObject {
         var deserializer : IDeserializer!
         
         deserializer = deserializerFactory.create(DeserializerFactories.Member)
-        member = deserializer.deserialize(jsonObject) as! Member
+        member = try! deserializer.deserialize(jsonObject) as! Member
         
         completionBlock(member, nil)
     }
@@ -61,7 +61,7 @@ public class MemberRemoteDataStore: NSObject {
         var deserializer : IDeserializer!
         
         deserializer = deserializerFactory.create(DeserializerFactories.Member)
-        member = deserializer.deserialize(jsonObject) as! Member
+        member = try! deserializer.deserialize(jsonObject) as! Member
         
         completionBlock(member, nil)
     }
@@ -80,7 +80,7 @@ public class MemberRemoteDataStore: NSObject {
                 let jsonObject = JSON(data: data!)
                 
                 let deserializer = self.deserializerFactory.create(DeserializerFactories.Member)
-                let member = deserializer.deserialize(jsonObject) as! Member
+                let member = try! deserializer.deserialize(jsonObject) as! Member
                 completionBlock(member, error)
             }
         })

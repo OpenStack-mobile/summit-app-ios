@@ -12,8 +12,9 @@ import RealmSwift
 @objc
 public protocol IMemberDataStore {
     func getById(id: Int, completionBlock : (Member?, NSError?) -> Void)
-    func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void)
+    func getByIdFromLocal(id: Int) -> Member?
     func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void)
+    func getLoggedInMemberFromOrigin(completionBlock : (Member?, NSError?) -> Void)
 }
 
 public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
@@ -29,7 +30,7 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
     }
 
     public func getById(id: Int, completionBlock : (Member?, NSError?) -> Void) {
-        let member = realm.objects(Member.self).filter("id = '\(id)'").first
+        let member = realm.objects(Member.self).filter("id = \(id)").first
         if (member != nil) {
             completionBlock(member, nil)
         }
@@ -41,30 +42,6 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
     private func getByIdAsync(id: Int, completionBlock : (Member?, NSError?) -> Void) {
         memberRemoteStorage.getById(id) { member, error in
 
-            if (member != nil) {
-                self.saveOrUpdate(member!)  { member, error in
-                    completionBlock(member, error)
-                }
-            }
-            else {
-                completionBlock(member, error)
-            }
-        }
-    }
-    
-    public func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void) {
-        let member = realm.objects(Member.self).filter("email = '\(email)'").first
-        if (member != nil) {
-            completionBlock(member, nil)
-        }
-        else {
-            getByEmailAsync(email, completionBlock: completionBlock)
-        }
-    }
-    
-    private func getByEmailAsync(email: String, completionBlock : (Member?, NSError?) -> Void) {
-        memberRemoteStorage.getByEmail(email) { member, error in
-            
             if (member != nil) {
                 self.saveOrUpdate(member!)  { member, error in
                     completionBlock(member, error)
@@ -89,5 +66,24 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
             
             completionBlock(member, error)
         }
+    }
+    
+    public func getLoggedInMemberFromOrigin(completionBlock : (Member?, NSError?) -> Void)  {
+        memberRemoteStorage.getLoggedInMember { member, error in
+            
+            if (member != nil) {
+                self.saveOrUpdate(member!)  { member, error in
+                    completionBlock(member, error)
+                }
+            }
+            else {
+                completionBlock(member, error)
+            }
+        }
+    }
+    
+    public func getByIdFromLocal(id: Int) -> Member? {
+        let member = realm.objects(Member.self).filter("id = \(id)").first
+        return member
     }
 }

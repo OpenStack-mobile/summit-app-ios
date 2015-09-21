@@ -10,5 +10,5 @@ import UIKit
 import SwiftyJSON
 
 public protocol IDeserializer {
-    func deserialize(json : JSON) -> BaseEntity
+    func deserialize(json : JSON) throws -> BaseEntity
 }
