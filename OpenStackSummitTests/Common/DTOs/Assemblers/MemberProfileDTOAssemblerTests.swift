@@ -12,9 +12,9 @@ import RealmSwift
 
 class MemberProfileDTOAssemblerTests: BaseTests {
     
-/*    func test_createDTO_speakerMemberFull_returnsDTOWithCorrectData() {
+    func test_createDTO_speakerMemberFull_returnsDTOWithCorrectData() {
         // Arrange
-        let member = PresentationSpeaker()
+        let member = Member()
         member.firstName = "Enzo"
         member.lastName = "Francescoli"
         member.title = "Developer at River Plate"
@@ -32,9 +32,9 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
         event.presentation = Presentation()
-        event.presentation?.speakers.append(member)
+        event.presentation?.speakers.append(member.speakerRole!)
 
-        member.attendeeRole.scheduledEvents.append(event)
+        member.attendeeRole!.scheduledEvents.append(event)
         
         realm.write {
             self.realm.add(member)
@@ -62,7 +62,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
 
     func test_createDTO_speakerMemberNotFull_returnsDTOWithCorrectData() {
         // Arrange
-        let member = PresentationSpeaker()
+        let member = Member()
         member.firstName = "Enzo"
         member.lastName = "Francescoli"
         member.title = "Developer at River Plate"
@@ -72,6 +72,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.twitter = "@el_enzo"
         member.irc = "irc"
         member.speakerRole = PresentationSpeaker()
+        member.attendeeRole = SummitAttendee()
         
         let event = SummitEvent()
         event.title = "Test Title"
@@ -79,9 +80,9 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
         event.presentation = Presentation()
-        event.presentation?.speakers.append(member)
+        event.presentation?.speakers.append(member.speakerRole!)
         
-        member.scheduledEvents.append(event)
+        member.attendeeRole!.scheduledEvents.append(event)
         
         realm.write {
             self.realm.add(member)
@@ -126,7 +127,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
         
-        member.scheduledEvents.append(event)
+        member.attendeeRole!.scheduledEvents.append(event)
         
         realm.write {
             self.realm.add(member)
@@ -150,6 +151,5 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         XCTAssertEqual("", memberProfileDTO.irc)
         XCTAssertEqual(0, memberProfileDTO.presentations.count)
         XCTAssertEqual(0, memberProfileDTO.scheduledEvents.count)
-    }*/
-
+    }
 }

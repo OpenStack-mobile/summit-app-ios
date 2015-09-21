@@ -26,28 +26,32 @@ public class MemberProfileDTOAssembler: NSObject {
     
     public func createDTO(member: Member, full: Bool) -> MemberProfileDTO {
         let memberProfileDTO = MemberProfileDTO()
-        /*memberProfileDTO.name = member.firstName + " " + member.lastName
-        memberProfileDTO.title = member.jobTitle
+        memberProfileDTO.name = member.firstName + " " + member.lastName
+        memberProfileDTO.title = member.title
         memberProfileDTO.pictureUrl = member.pictureUrl
         memberProfileDTO.bio = member.bio
         if (full) {
             memberProfileDTO.email = member.email
             memberProfileDTO.location = member.location
             memberProfileDTO.twitter = member.twitter
-            memberProfileDTO.irc = member.IRC
+            memberProfileDTO.irc = member.irc
             
             var scheduleItemDTO: ScheduleItemDTO
-            for event in member.scheduledEvents {
-                scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
-                memberProfileDTO.scheduledEvents.append(scheduleItemDTO)
+            if let attendeeRole = member.attendeeRole {
+                for event in attendeeRole.scheduledEvents {
+                    scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+                    memberProfileDTO.scheduledEvents.append(scheduleItemDTO)
+                }
             }
         }
         
         var scheduleItemDTO: ScheduleItemDTO
-        for presentation in member.presentations {
-            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(presentation.event)
-            memberProfileDTO.presentations.append(scheduleItemDTO)
-        }*/
+        if let speakerRole = member.speakerRole {
+            for presentation in speakerRole.presentations {
+                scheduleItemDTO = scheduleItemDTOAssembler.createDTO(presentation.event)
+                memberProfileDTO.presentations.append(scheduleItemDTO)
+            }
+        }
         
         return memberProfileDTO
     }

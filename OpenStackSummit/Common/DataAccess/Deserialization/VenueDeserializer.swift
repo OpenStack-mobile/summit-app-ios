@@ -14,7 +14,7 @@ public class VenueDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json: JSON) -> BaseEntity {
+    public func deserialize(json: JSON) throws -> BaseEntity {
         let venue : Venue
         
         if let venueId = json.int {
@@ -22,7 +22,7 @@ public class VenueDeserializer: NSObject, IDeserializer {
         }
         else {
             var deserializer = deserializerFactory.create(DeserializerFactories.Location)
-            let location = deserializer.deserialize(json) as! Location
+            let location = try deserializer.deserialize(json) as! Location
             venue = Venue()
             venue.id = json["id"].intValue
             venue.name = location.name
@@ -34,14 +34,14 @@ public class VenueDeserializer: NSObject, IDeserializer {
             var map: Image
             deserializer = deserializerFactory.create(DeserializerFactories.Image)
             for (_, mapJSON) in json["maps"] {
-                map = deserializer.deserialize(mapJSON) as! Image
+                map = try deserializer.deserialize(mapJSON) as! Image
                 venue.maps.append(map)
             }
             
             var venueRoom: VenueRoom
             deserializer = deserializerFactory.create(DeserializerFactories.VenueRoom)
             for (_, venueRoomJSON) in json["rooms"] {
-                venueRoom = deserializer.deserialize(venueRoomJSON) as! VenueRoom
+                venueRoom = try deserializer.deserialize(venueRoomJSON) as! VenueRoom
                 venue.venueRooms.append(venueRoom)
             }
             

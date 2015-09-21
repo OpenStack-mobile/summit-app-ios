@@ -10,7 +10,7 @@ import UIKit
 import Typhoon
 
 public class SecurityManagerAssembly: TyphoonAssembly {
-    var memberRemoteDataStoreAssembly: MemberRemoteDataStoreAssembly!
+    var membeDataStoreAssembly: MemberDataStoreAssembly!
     
     public dynamic func securityManager() -> AnyObject {
         
@@ -18,7 +18,7 @@ public class SecurityManagerAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("session", with: self.securityManagerSession())
-            definition.injectProperty("memberRemoteDataStore", with: self.memberRemoteDataStoreAssembly.memberRemoteDataStore())
+            definition.injectProperty("memberDataStore", with: self.membeDataStoreAssembly.memberDataStore())
             definition.scope = TyphoonScope.Singleton
         }
     }

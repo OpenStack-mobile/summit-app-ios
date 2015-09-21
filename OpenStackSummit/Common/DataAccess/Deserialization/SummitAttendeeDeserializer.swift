@@ -13,7 +13,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json : JSON) -> BaseEntity {
+    public func deserialize(json : JSON) throws -> BaseEntity {
         
         let summitAttendee: SummitAttendee
         
@@ -28,7 +28,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             var event : SummitEvent
             
             for (_, eventJSON) in json["schedule"] {
-                event = deserializer.deserialize(eventJSON) as! SummitEvent
+                event = try deserializer.deserialize(eventJSON) as! SummitEvent
                 summitAttendee.scheduledEvents.append(event)
             }
 

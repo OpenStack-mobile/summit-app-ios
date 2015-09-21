@@ -14,10 +14,8 @@ public class SecurityManager: NSObject {
     var session : ISession!
     var oauthModuleOpenID: OAuth2Module!
     var oauthModuleServiceAccount: OAuth2Module!
-    var currentMember: Member?
-    var memberRemoteDataStore: IMemberRemoteDataStore! // TODO: this should be weak to avoid retain loop
-    let kCurrentMember = "currentMember"
-    
+    var memberDataStore: IMemberDataStore! 
+    private let kCurrentMemberId = "currentMemberId"
     
     public override init() {
         var config = Config(
@@ -63,8 +61,13 @@ public class SecurityManager: NSObject {
                 return
             }
             
-            self.memberRemoteDataStore.getLoggedInMember() { (member, error) in
-                self.currentMember = member
+            self.memberDataStore.getLoggedInMemberFromOrigin() { (member, error) in
+                if (error != nil) {
+                    completionBlock(error)
+                    return
+                }
+                
+                self.session.set(self.kCurrentMemberId, value: member!.id)
                 completionBlock(error)
             }
         }
@@ -72,7 +75,7 @@ public class SecurityManager: NSObject {
     
     public func logout(completionBlock: (NSError?) -> Void) {
         oauthModuleOpenID.revokeAccess() { (response, error) in // [1]
-            self.currentMember = nil
+            self.session.set(self.kCurrentMemberId, value: nil)
             completionBlock(error)
         }
     }
@@ -80,6 +83,7 @@ public class SecurityManager: NSObject {
     public func getCurrentMemberRole() -> MemberRoles{
         
         var role = MemberRoles.Anonymous
+        let currentMember = getCurrentMember()
         if (currentMember != nil) {
             if (currentMember?.speakerRole != nil) {
                 role = MemberRoles.Speaker
@@ -89,5 +93,17 @@ public class SecurityManager: NSObject {
             }
         }
         return role
+    }
+    
+    public func getCurrentMember() -> Member? {
+        var currentMember: Member?
+        if (oauthModuleOpenID.isAuthorized() && session.get(kCurrentMemberId) != nil) {
+            currentMember = memberDataStore.getByIdFromLocal(session.get(kCurrentMemberId) as! Int)
+        }
+        return currentMember;
+    }
+    
+    public func isLoggedIn() -> Bool {
+        return oauthModuleOpenID.isAuthorized() && session.get(kCurrentMemberId) != nil
     }
 }

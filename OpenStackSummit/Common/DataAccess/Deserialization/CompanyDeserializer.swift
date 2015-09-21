@@ -12,7 +12,7 @@ import SwiftyJSON
 public class CompanyDeserializer: KeyValueDeserializer, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) -> BaseEntity {
+    public func deserialize(json : JSON) throws -> BaseEntity {
         let company : Company
         
         if let companyId = json.int {
