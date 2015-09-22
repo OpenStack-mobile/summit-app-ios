@@ -31,7 +31,7 @@ public class GeneralSchedulePresenter: NSObject {
     var generalScheduleWireframe : IGeneralScheduleWireframe!
     
     public func viewLoad() {
-        
+        viewController.showActivityIndicator()
         interactor.getActiveSummit() { summit, error in
             if (error == nil) {
                 self.viewController.startDate = summit!.startDate
@@ -39,6 +39,7 @@ public class GeneralSchedulePresenter: NSObject {
                 self.viewController.selectedDate = self.viewController.startDate
 
                 self.reloadSchedule()
+                self.viewController.hideActivityIndicator()
             }
             else {
                 self.viewController.handleError(error!)

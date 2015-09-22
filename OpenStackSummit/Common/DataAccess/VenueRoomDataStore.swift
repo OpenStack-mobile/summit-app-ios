@@ -10,11 +10,11 @@ import UIKit
 
 @objc
 public protocol IVenueRoomDataStore {
-    func getById(id: Int) -> VenueRoom?
+    func getByIdFromLocal(id: Int) -> VenueRoom?
 }
 
 public class VenueRoomDataStore: BaseDataStore<VenueRoom>, IVenueRoomDataStore {
-    public override func getById(id: Int) -> VenueRoom? {
+    public func getByIdFromLocal(id: Int) -> VenueRoom? {
         return super.getById(id)
     }
 }

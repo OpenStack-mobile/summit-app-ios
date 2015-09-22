@@ -51,18 +51,23 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func login() {
+        viewController.showActivityIndicator()
         viewController.hideMenu()
         
         securityManager.login { error in
+            self.viewController.hideActivityIndicator()
             self.viewController.reloadMenu()
         }
     }
     
     public func logout() {
+        viewController.showActivityIndicator()
+
         securityManager.logout() {error in
             self.viewController.hideMenu()
             self.viewController.reloadMenu()
             self.viewController.navigateToHome()
+            self.viewController.hideActivityIndicator()
         }
     }
 }

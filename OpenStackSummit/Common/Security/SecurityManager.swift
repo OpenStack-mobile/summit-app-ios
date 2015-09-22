@@ -14,7 +14,7 @@ public class SecurityManager: NSObject {
     var session : ISession!
     var oauthModuleOpenID: OAuth2Module!
     var oauthModuleServiceAccount: OAuth2Module!
-    var memberDataStore: IMemberDataStore! 
+    var memberDataStore: IMemberDataStore!
     private let kCurrentMemberId = "currentMemberId"
     
     public override init() {
@@ -49,8 +49,7 @@ public class SecurityManager: NSObject {
         oauthModuleServiceAccount = AccountManager.addAccount(config, moduleClass: OpenStackOAuth2Module.self)
     }
     
-    public func login(completionBlock: (NSError?) -> Void) {
-        
+    public func login(completionBlock: (NSError?) -> Void) {       
         oauthModuleOpenID.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             if (error != nil) {
                 completionBlock(error)
@@ -62,6 +61,7 @@ public class SecurityManager: NSObject {
             }
             
             self.memberDataStore.getLoggedInMemberFromOrigin() { (member, error) in
+                
                 if (error != nil) {
                     completionBlock(error)
                     return
@@ -74,7 +74,7 @@ public class SecurityManager: NSObject {
     }
     
     public func logout(completionBlock: (NSError?) -> Void) {
-        oauthModuleOpenID.revokeAccess() { (response, error) in // [1]
+        oauthModuleOpenID.revokeAccess() { (response, error) in
             self.session.set(self.kCurrentMemberId, value: nil)
             completionBlock(error)
         }
