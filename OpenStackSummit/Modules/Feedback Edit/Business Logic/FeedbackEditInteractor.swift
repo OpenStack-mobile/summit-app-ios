@@ -18,7 +18,7 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
     var feedbackDTOAssembler: IFeedbackDTOAssembler!
 
     public func getFeedback(feedbackId: Int) -> FeedbackDTO? {
-        let feedback = feedbackDataStore.getById(feedbackId)
+        let feedback = feedbackDataStore.getByIdFromLocal(feedbackId)
         let feedbackDTO = feedbackDTOAssembler.createDTO(feedback!)
         return feedbackDTO
     }

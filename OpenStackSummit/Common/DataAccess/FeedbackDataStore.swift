@@ -10,14 +10,14 @@ import UIKit
 
 @objc
 public protocol IFeedbackDataStore {
-    func getById(id: Int) -> Feedback?
+    func getByIdFromLocal(id: Int) -> Feedback?
     func saveOrUpdate(entity: Feedback, completionBlock: ((Feedback?, NSError?) -> Void)!)
 }
 
 public class FeedbackDataStore: BaseDataStore<Feedback>, IFeedbackDataStore {
     var feedbackRemoteDataStore: IFeedbackRemoteDataStore!
     
-    public override func getById(id: Int) -> Feedback? {
+    public func getByIdFromLocal(id: Int) -> Feedback? {
         return super.getById(id)
     }
     
