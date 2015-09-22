@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 @objc
 public protocol IMenuViewController {
     func reloadMenu()
     func hideMenu()
     func navigateToHome()
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 class MenuViewController: UITableViewController, IMenuViewController {
@@ -35,11 +38,20 @@ class MenuViewController: UITableViewController, IMenuViewController {
     }
     
     func reloadMenu() {
+        SwiftSpinner.hide()
         tableView.reloadData()
     }
     
     func navigateToHome() {
         performSegueWithIdentifier("generalScheduleSegue", sender: self)
+    }
+    
+    func showActivityIndicator() {
+        SwiftSpinner.show("Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -60,6 +72,7 @@ class MenuViewController: UITableViewController, IMenuViewController {
             presenter.logout()
         }
         else if (indexPath.section == 3 && indexPath.row == 6) {
+            SwiftSpinner.show("Please wait...")
             presenter.login()
         }
     }

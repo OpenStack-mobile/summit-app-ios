@@ -38,7 +38,7 @@ public class GeneralScheduleInteractor: NSObject, IGeneralScheduleInteractor {
     }
     
     public func getScheduleEventsForDate(startDate: NSDate, endDate: NSDate) -> [ScheduleItemDTO] {
-        let events = eventDataStore.getByDateRange(startDate, endDate: endDate)
+        let events = eventDataStore.getByDateRangeFromLocal(startDate, endDate: endDate)
         var scheduleItemDTO: ScheduleItemDTO
         var dtos: [ScheduleItemDTO] = []
         for event in events {

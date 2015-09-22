@@ -8,6 +8,7 @@
 
 import UIKit
 import AFHorizontalDayPicker
+import SwiftSpinner
 
 @objc
 public protocol IGeneralScheduleViewController {
@@ -18,6 +19,8 @@ public protocol IGeneralScheduleViewController {
     
     func handleError(error: NSError)
     func reloadSchedule()
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IGeneralScheduleViewController {
@@ -77,6 +80,14 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     func handleError(error: NSError) {
         
         
+    }
+    
+    func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
     }
     
     override func didReceiveMemoryWarning() {

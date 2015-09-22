@@ -32,7 +32,6 @@
 		CA337F991B98E79700503232 /* MemberRemoteDataStoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA337F981B98E79700503232 /* MemberRemoteDataStoreAssembly.swift */; };
 		CA3DA3E31B90EECD00201496 /* EventDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DA3E21B90EECD00201496 /* EventDataStore.swift */; };
 		CA3DA3E61B90F81400201496 /* MemberRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DA3E51B90F81400201496 /* MemberRemoteDataStore.swift */; };
-		CA3DA3E81B90FB4700201496 /* RemoteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DA3E71B90FB4700201496 /* RemoteResult.swift */; };
 		CA416F871B8F444200F177F5 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F861B8F444200F177F5 /* Image.swift */; };
 		CA416F891B8F451D00F177F5 /* ImageDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F881B8F451D00F177F5 /* ImageDeserializer.swift */; };
 		CA416F8E1B8F58AC00F177F5 /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F8D1B8F58AC00F177F5 /* GeneralScheduleFilterViewController.swift */; };
@@ -111,6 +110,8 @@
 		CAD27E361BAB076000EE9583 /* MemberDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E351BAB076000EE9583 /* MemberDTO.swift */; };
 		CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E371BAB07F800EE9583 /* MemberDTOAssembler.swift */; };
 		CAD27E3A1BAB0F2300EE9583 /* SecurityManagerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */; };
+		CAD337161BB1906A005B2953 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD337151BB1906A005B2953 /* Constants.swift */; };
+		CAD337181BB19329005B2953 /* BackgroundActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD337171BB19329005B2953 /* BackgroundActivityManager.swift */; };
 		CAD3ABAC1BA847C500F2186B /* SummitDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3ABAB1BA847C500F2186B /* SummitDeserializerTests.swift */; };
 		CAD3BCA01BA9F05E0092616D /* SecurityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3BC9F1BA9F05E0092616D /* SecurityManager.swift */; };
 		CAD47A141B84D45C007741E7 /* SummitDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD47A131B84D45C007741E7 /* SummitDataStore.swift */; };
@@ -224,7 +225,6 @@
 		CA337F981B98E79700503232 /* MemberRemoteDataStoreAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRemoteDataStoreAssembly.swift; sourceTree = "<group>"; };
 		CA3DA3E21B90EECD00201496 /* EventDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStore.swift; sourceTree = "<group>"; };
 		CA3DA3E51B90F81400201496 /* MemberRemoteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRemoteDataStore.swift; sourceTree = "<group>"; };
-		CA3DA3E71B90FB4700201496 /* RemoteResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteResult.swift; sourceTree = "<group>"; };
 		CA416F861B8F444200F177F5 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CA416F881B8F451D00F177F5 /* ImageDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDeserializer.swift; sourceTree = "<group>"; };
 		CA416F8D1B8F58AC00F177F5 /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +303,8 @@
 		CAD27E351BAB076000EE9583 /* MemberDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDTO.swift; sourceTree = "<group>"; };
 		CAD27E371BAB07F800EE9583 /* MemberDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDTOAssembler.swift; sourceTree = "<group>"; };
 		CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManagerAssembly.swift; sourceTree = "<group>"; };
+		CAD337151BB1906A005B2953 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CAD337171BB19329005B2953 /* BackgroundActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundActivityManager.swift; sourceTree = "<group>"; };
 		CAD3ABAB1BA847C500F2186B /* SummitDeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDeserializerTests.swift; sourceTree = "<group>"; };
 		CAD3BC9F1BA9F05E0092616D /* SecurityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManager.swift; sourceTree = "<group>"; };
 		CAD47A131B84D45C007741E7 /* SummitDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataStore.swift; sourceTree = "<group>"; };
@@ -879,6 +881,8 @@
 				CAF2AA291B8271C100D8E595 /* DataAccess */,
 				CADDDB911B73D1BB008F742E /* Entities */,
 				CAD542331B8B890A00A9791A /* Session.swift */,
+				CAD337151BB1906A005B2953 /* Constants.swift */,
+				CAD337171BB19329005B2953 /* BackgroundActivityManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -993,7 +997,6 @@
 				CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */,
 				CAD480A11B868439004DBB4F /* MemberDataStore.swift */,
 				CA3DA3E51B90F81400201496 /* MemberRemoteDataStore.swift */,
-				CA3DA3E71B90FB4700201496 /* RemoteResult.swift */,
 				CAD47A131B84D45C007741E7 /* SummitDataStore.swift */,
 				CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */,
 				CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */,
@@ -1357,6 +1360,7 @@
 				CAD480A21B868439004DBB4F /* MemberDataStore.swift in Sources */,
 				CAF2AA3F1B8271C100D8E595 /* DeserializerStorage.swift in Sources */,
 				CAD542341B8B890A00A9791A /* Session.swift in Sources */,
+				CAD337181BB19329005B2953 /* BackgroundActivityManager.swift in Sources */,
 				CACEEE691B8E3822007DD936 /* VenueTrigger.swift in Sources */,
 				CAF2AA471B8271C100D8E595 /* LocationDeserializer.swift in Sources */,
 				CA3DA3E61B90F81400201496 /* MemberRemoteDataStore.swift in Sources */,
@@ -1399,6 +1403,7 @@
 				CA89130E1B9794FA002E9A95 /* MemberProfileWireframe.swift in Sources */,
 				CADDDBAD1B73D1BB008F742E /* SummitEvent.swift in Sources */,
 				CACF7C481B9664E700A9EB16 /* SpeakerDTO.swift in Sources */,
+				CAD337161BB1906A005B2953 /* Constants.swift in Sources */,
 				CADDDBB81B73D910008F742E /* GeneralScheduleViewController.swift in Sources */,
 				CAF2AA441B8271C100D8E595 /* PresentationDeserializer.swift in Sources */,
 				CA416F941B8F5B6800F177F5 /* GeneralScheduleFilterWireframe.swift in Sources */,
@@ -1408,7 +1413,6 @@
 				CA8913161B979A0B002E9A95 /* MemberProfileAssembly.swift in Sources */,
 				CACFBC371B9F8D3300095E44 /* Feedback.swift in Sources */,
 				CACFBC3E1B9F903D00095E44 /* FeedbackEditPresenter.swift in Sources */,
-				CA3DA3E81B90FB4700201496 /* RemoteResult.swift in Sources */,
 				CAF2AA541B828E7C00D8E595 /* EventDetailPresenter.swift in Sources */,
 				CACF7C451B9664E700A9EB16 /* EventDetailDTOAssembler.swift in Sources */,
 				CA8913141B97955D002E9A95 /* MemberProfileInteractor.swift in Sources */,

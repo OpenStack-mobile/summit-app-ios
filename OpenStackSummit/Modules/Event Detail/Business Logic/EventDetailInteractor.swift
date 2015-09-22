@@ -22,14 +22,14 @@ public class EventDetailInteractor: NSObject {
     let kCurrentMember = "currentMember"
     
     public func getEventDetail(eventId: Int) -> EventDetailDTO {
-        let event = eventDataStore.getById(eventId)
+        let event = eventDataStore.getByIdFromLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         return eventDetailDTO
     }
     
     public func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void) {
         let member = session.get(kCurrentMember) as! MemberDTO
-        let event = eventDataStore.getById(eventId)
+        let event = eventDataStore.getByIdFromLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         memberDataStore.addEventToMemberShedule(member.id, event: event!) { member, error in
             if (error == nil) {

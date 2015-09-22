@@ -11,6 +11,7 @@ PODS:
   - Realm/Headers (0.94.1)
   - RealmSwift (0.94.1):
     - Realm (= 0.94.1)
+  - SwiftSpinner (0.8.0)
   - SwiftyJSON (2.2.1)
   - SWRevealViewController (2.3.0)
   - Typhoon (3.2.5):
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - HanekeSwift (from `https://github.com/meteochu/HanekeSwift.git`, branch `swift-2.0`)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `swift-2.0`)
+  - SwiftSpinner
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
   - SWRevealViewController
   - Typhoon
@@ -83,6 +85,7 @@ SPEC CHECKSUMS:
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
   Realm: 567b454e3c452c0c59af719c4a8c2a17fd11fae1
   RealmSwift: 1cfcf6f9bd4de8674797d000de346d9588ca2028
+  SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   Typhoon: 6f39c3ede688d1ca9734087a938b101e193096a4
