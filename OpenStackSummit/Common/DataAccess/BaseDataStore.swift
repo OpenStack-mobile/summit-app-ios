@@ -28,9 +28,17 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
     }
     
     public func saveOrUpdate(entity: T, completionBlock: ((T?, NSError?) -> Void)!) {
-        realm.write {
-            self.realm.add(entity, update: true)
+
+        do {
+            try realm.write {
+                self.realm.add(entity, update: true)
+            }
         }
+        catch {
+            let error: NSError? = NSError(domain: "There was an error saving entity", code: 2000, userInfo: nil)
+            completionBlock(nil, error)
+        }
+        
         if (trigger != nil) {
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Save) {
                 () in
@@ -47,22 +55,29 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         }
     }
     
-    public func delete(entity: T, completionBlock : ((Void) -> Void)!) {
-        realm.write {
-            self.realm.delete(entity)
+    public func delete(entity: T, completionBlock : (NSError? -> Void)!) {
+        do {
+            try realm.write {
+                self.realm.delete(entity)
+            }
         }
+        catch {
+            let error: NSError? = NSError(domain: "There was an error saving entity", code: 2000, userInfo: nil)
+            completionBlock(error)
+        }
+
         if (trigger != nil) {
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Delete) {
                 () in
                 
                 if (completionBlock != nil) {
-                    completionBlock()
+                    completionBlock(nil)
                 }
             }
         }
         else {
             if (completionBlock != nil) {
-                completionBlock()
+                completionBlock(nil)
             }
         }
     }

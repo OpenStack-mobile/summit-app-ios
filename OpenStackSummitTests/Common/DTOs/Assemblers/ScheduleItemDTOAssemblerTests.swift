@@ -19,7 +19,7 @@ class ScheduleItemDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.name = "Test Venue Room"
         venue.venueRooms.append(venueRoom)
-        realm.write {
+        try! realm.write {
             self.realm.add(venue)
         }
         let sponsor1 = Company()
@@ -36,7 +36,8 @@ class ScheduleItemDTOAssemblerTests: BaseTests {
         event.sponsors.append(sponsor1)
         event.sponsors.append(sponsor2)
         event.venueRoom = venueRoom
-        
+        event.eventType = eventType
+        event.timeZone = "Asia/Tokyo"
         let scheduleItemDTOAssembler = ScheduleItemDTOAssembler()
         
         // Act
@@ -46,7 +47,7 @@ class ScheduleItemDTOAssemblerTests: BaseTests {
         XCTAssertEqual(event.title, scheduleItemDTO.title)
         XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
         XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
-        XCTAssertEqual("Tuesday 01 September 20:00 - 21:00", scheduleItemDTO.date)
+        XCTAssertEqual("Wednesday 02 September 05:00 - 06:00", scheduleItemDTO.date)
         XCTAssertEqual(event.eventType.name, scheduleItemDTO.eventType)
     }
 }

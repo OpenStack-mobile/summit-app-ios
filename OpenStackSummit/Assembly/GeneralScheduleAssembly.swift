@@ -29,6 +29,8 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.generalScheduleViewController())
             definition.injectProperty("interactor", with: self.generalScheduleInteractor())
             definition.injectProperty("generalScheduleWireframe", with: self.generalScheduleWireframe())
+            definition.injectProperty("session", with: self.generalScheduleSession())
+
         }
     }
     
@@ -41,6 +43,11 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("eventDataStore", with: self.generalScheduleEventDataStore())
             definition.injectProperty("scheduleItemDTOAssembler", with: self.generalScheduleScheduleItemDTOAssembler())
         }
+    }
+    
+    dynamic func generalScheduleSession() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(Session.self)
     }
     
     dynamic func generalScheduleScheduleItemDTOAssembler() -> AnyObject {

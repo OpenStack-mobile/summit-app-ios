@@ -25,9 +25,8 @@ class MemberProfileInteractorTests: XCTestCase {
         // Arrange
         let member = Member()
         member.id = 1
-        
-        let sessionMock = SessionMock(member: member)
-        let interactor = MemberProfileInteractor(session: sessionMock, memberDataStore: MemberDataStoreMock())
+        let securityManagerMock = SecurityManagerMock(member: member)
+        let interactor = MemberProfileInteractor(memberDataStore: MemberDataStoreMock(), securityManager: securityManagerMock)
         
         // Act
         let allowFull = interactor.isFullProfileAllowed(member)
@@ -45,8 +44,8 @@ class MemberProfileInteractorTests: XCTestCase {
         currentMember.id = 2
         currentMember.friends.append(member)
         
-        let sessionMock = SessionMock(member: currentMember)
-        let interactor = MemberProfileInteractor(session: sessionMock, memberDataStore: MemberDataStoreMock())
+        let securityManagerMock = SecurityManagerMock(member: currentMember)
+        let interactor = MemberProfileInteractor(memberDataStore: MemberDataStoreMock(), securityManager: securityManagerMock)
         
         // Act
         let allowFull = interactor.isFullProfileAllowed(member)
@@ -61,8 +60,8 @@ class MemberProfileInteractorTests: XCTestCase {
         member.id = 1
         member.attendeeRole = SummitAttendee()
         
-        let sessionMock = SessionMock(member: nil)
-        let interactor = MemberProfileInteractor(session: sessionMock, memberDataStore: MemberDataStoreMock())
+        let securityManagerMock = SecurityManagerMock(member: nil)
+        let interactor = MemberProfileInteractor(memberDataStore: MemberDataStoreMock(), securityManager: securityManagerMock)
         
         // Act
         let allowFull = interactor.isFullProfileAllowed(member)

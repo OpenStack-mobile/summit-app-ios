@@ -17,9 +17,8 @@ public protocol IEventDetailInteractor {
 public class EventDetailInteractor: NSObject {
     var eventDataStore: IEventDataStore!
     var memberDataStore: IMemberDataStore!
-    var session: ISession!
     var eventDetailDTOAssembler: IEventDetailDTOAssembler!
-    let kCurrentMember = "currentMember"
+    var securityManager: SecurityManager!
     
     public func getEventDetail(eventId: Int) -> EventDetailDTO {
         let event = eventDataStore.getByIdFromLocal(eventId)
@@ -28,14 +27,18 @@ public class EventDetailInteractor: NSObject {
     }
     
     public func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void) {
-        let member = session.get(kCurrentMember) as! MemberDTO
+        guard let member = securityManager.getCurrentMember() else {
+            let error: NSError? = NSError(domain: "There is no logged user", code: 1, userInfo: nil)
+            completionBlock(nil, error)
+            return
+        }
         let event = eventDataStore.getByIdFromLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         memberDataStore.addEventToMemberShedule(member.id, event: event!) { member, error in
-            if (error == nil) {
-                self.session.set(self.kCurrentMember, value: member!)
-                completionBlock(eventDetailDTO, nil)
+            if (error != nil) {
+                completionBlock(nil, error)
             }
+            completionBlock(eventDetailDTO, error)
         }
     }
 }
