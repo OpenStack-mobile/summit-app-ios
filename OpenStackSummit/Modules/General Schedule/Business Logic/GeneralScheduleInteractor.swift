@@ -12,7 +12,7 @@ import UIKit
 public protocol IGeneralScheduleInteractor {
     func getScheduleEvents(completionBlock: ([SummitEvent]?, NSError?) -> Void)
     func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void)
-    func getScheduleEventsForDate(startDate: NSDate, endDate: NSDate) -> [ScheduleItemDTO]
+    func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?) -> [ScheduleItemDTO]
 }
 
 public class GeneralScheduleInteractor: NSObject, IGeneralScheduleInteractor {
@@ -37,8 +37,8 @@ public class GeneralScheduleInteractor: NSObject, IGeneralScheduleInteractor {
         }
     }
     
-    public func getScheduleEventsForDate(startDate: NSDate, endDate: NSDate) -> [ScheduleItemDTO] {
-        let events = eventDataStore.getByDateRangeFromLocal(startDate, endDate: endDate)
+    public func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?) -> [ScheduleItemDTO] {
+        let events = eventDataStore.getByFilterFromLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
         var scheduleItemDTO: ScheduleItemDTO
         var dtos: [ScheduleItemDTO] = []
         for event in events {

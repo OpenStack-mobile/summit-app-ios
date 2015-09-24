@@ -13,4 +13,8 @@ struct Constants {
         static let BackgroundActivityStarted = "kBackgroundActivityStarted"
         static let BackgroundActivityEnded = "kBackgroundActivityEnded"
     }
+    struct SessionKeys {
+        static let ActiveSummitTimeZone = "kActiveSummitTimeZone"
+        static let GeneralScheduleFilterSelections = "kGeneralScheduleFilterSelections"
+    }
 }

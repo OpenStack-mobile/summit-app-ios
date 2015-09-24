@@ -56,16 +56,25 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
     public func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {
         memberRemoteStorage.addEventToShedule(memberId, eventId: event.id) { error in
             var member: Member?
-            if (error == nil) {
-                member = self.realm.objects(Member.self).filter("id = \(memberId)").first!
-                self.realm.write {
+            var addEventError = error
+            
+            defer { completionBlock(member, addEventError) }
+            
+            if error != nil {
+                return
+            }
+            
+            member = self.realm.objects(Member.self).filter("id = \(memberId)").first!
+            do {
+                try self.realm.write {
                     member!.attendeeRole!.scheduledEvents.append(event)
                     self.realm.add(member!, update: true)
                 }
             }
-            
-            completionBlock(member, error)
-        }
+            catch {
+                addEventError = NSError(domain: "There was an error adding event to member schedule", code: 1001, userInfo: nil)
+            }
+       }
     }
     
     public func getLoggedInMemberFromOrigin(completionBlock : (Member?, NSError?) -> Void)  {

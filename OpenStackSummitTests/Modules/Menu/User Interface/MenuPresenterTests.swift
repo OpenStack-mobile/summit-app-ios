@@ -40,6 +40,14 @@ class MenuPresenterTests: XCTestCase {
         func navigateToHome() {
             
         }
+        
+        func showActivityIndicator() {
+            
+        }
+        
+        func hideActivityIndicator() {
+            
+        }
     }
     
     
