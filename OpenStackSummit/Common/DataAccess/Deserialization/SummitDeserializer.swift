@@ -23,6 +23,12 @@ public class SummitDeserializer: NSObject, IDeserializer {
     
     public func deserialize(json : JSON) throws -> BaseEntity {
         let summit = Summit()
+        summit.name = json["name"].stringValue
+        summit.id = json["id"].intValue
+        summit.startDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
+        summit.endDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
+        summit.timeZone = json["time_zone"]["name"].stringValue
+
         var deserializer : IDeserializer!
         
         deserializer = deserializerFactory.create(DeserializerFactories.Company)
@@ -71,14 +77,10 @@ public class SummitDeserializer: NSObject, IDeserializer {
 
             deserializer = deserializerFactory.create(DeserializerFactories.SummitEvent)
             event = try deserializer.deserialize(eventJSON) as! SummitEvent
+            event.timeZone = summit.timeZone
             summit.events.append(event)
         }
         
-        summit.name = json["name"].stringValue
-        summit.id = json["id"].intValue
-        summit.startDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
-        summit.endDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
-        summit.timeZone = json["timeZone"]["name"].stringValue
         return summit
     }
 }

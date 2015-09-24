@@ -17,7 +17,7 @@ class MemberDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        realm.write {
+        try! realm.write {
             self.realm.deleteAll()
         }
     }
@@ -32,7 +32,7 @@ class MemberDataStoreTests: XCTestCase {
         let memberId = 1
         let member = Member()
         member.id = memberId
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
         }
         
@@ -58,7 +58,7 @@ class MemberDataStoreTests: XCTestCase {
         // Arrange
         var event = SummitEvent()
         event.id = 1
-        realm.write {
+        try! realm.write {
             self.realm.add(event)
         }
         
@@ -69,7 +69,7 @@ class MemberDataStoreTests: XCTestCase {
         let member = Member()
         member.id = 1
         member.attendeeRole = SummitAttendee()
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
         }
         event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!
@@ -81,5 +81,6 @@ class MemberDataStoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        self.waitForExpectationsWithTimeout(5.0, handler: nil)    }
+        self.waitForExpectationsWithTimeout(5.0, handler: nil)
+    }
 }

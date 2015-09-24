@@ -11,17 +11,38 @@ import UIKit
 @objc
 public protocol IEventDataStore {
     func getByIdFromLocal(id: Int) -> SummitEvent?
-    func getByDateRangeFromLocal(startDate: NSDate, endDate: NSDate)->[SummitEvent]
+    func getByFilterFromLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]
 }
 
 public class EventDataStore: BaseDataStore<SummitEvent>, IEventDataStore {
+    public override init() {
+        super.init()
+    }
+    
     public func getByIdFromLocal(id: Int) -> SummitEvent? {
         return super.getById(id)
     }
     
-    public func getByDateRangeFromLocal(startDate: NSDate, endDate: NSDate)->[SummitEvent]{
-        let predicate = NSPredicate(format: "start > %@ and end < %@", startDate, endDate)
-        let events = realm.objects(SummitEvent.self).filter(predicate)
-        return events.map{$0}
+    public func getByFilterFromLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]{
+        var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate)
+        if (eventTypes != nil) {
+            events = events.filter("eventType.id in %@", eventTypes!)
+        }
+
+        var eventArray = events.map{$0}
+        print(eventArray)
+        if (summitTypes != nil) {
+            eventArray = eventArray.filter() {
+                for summitTypeId in summitTypes! {
+                    print($0.summitTypes.map{$0.id})
+                    guard ($0.summitTypes.map{$0.id}.contains(summitTypeId)) else {
+                        return false
+                    }
+                }
+                return true
+            }
+        }
+        
+        return eventArray
     }
 }

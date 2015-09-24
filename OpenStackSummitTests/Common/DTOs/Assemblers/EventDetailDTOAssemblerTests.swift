@@ -35,7 +35,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.name = "Test Venue Room"
         venue.venueRooms.append(venueRoom)
-        realm.write {
+        try! realm.write {
             self.realm.add(venue)
         }
         let track = Track()
@@ -67,6 +67,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let scheduleItemDTO = ScheduleItemDTO()
         let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
         let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let timezone = "Asia/Tokyo"
         
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
@@ -100,7 +101,8 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let scheduleItemDTO = ScheduleItemDTO()
         let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
         let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
-        
+        let timezone = "Asia/Tokyo"
+
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         

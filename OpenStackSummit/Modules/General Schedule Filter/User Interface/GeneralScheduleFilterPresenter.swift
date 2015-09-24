@@ -18,7 +18,6 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     var viewController: IGeneralScheduleFilterViewController!
     var session: ISession!
     var filterSelections: Dictionary<FilterSectionTypes, [Int]>?
-    let kGeneralScheduleFilterSelections = "generalScheduleFilterSelections"
     
     public init(session: ISession, genereralScheduleFilterInteractor: IGeneralScheduleFilterInteractor) {
         self.session = session
@@ -27,7 +26,7 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     
     public override init() {
         super.init()
-        filterSelections = session.get(kGeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
+        filterSelections = session.get(Constants.SessionKeys.GeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
         if (filterSelections == nil) {
             filterSelections = Dictionary<FilterSectionTypes, [Int]>()
         }
@@ -101,6 +100,6 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
             }
             filterSelections![filterSection.type] = filterSelectionsForType
         }
-        session.set(kGeneralScheduleFilterSelections, value: filterSelections as! AnyObject)
+        session.set(Constants.SessionKeys.GeneralScheduleFilterSelections, value: filterSelections as? AnyObject)
     }
 }

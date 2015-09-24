@@ -29,27 +29,35 @@ public class GeneralSchedulePresenter: NSObject {
     weak var viewController : IGeneralScheduleViewController!
     var interactor : IGeneralScheduleInteractor!
     var generalScheduleWireframe : IGeneralScheduleWireframe!
+    var session: ISession!
     
     public func viewLoad() {
         viewController.showActivityIndicator()
         interactor.getActiveSummit() { summit, error in
-            if (error == nil) {
-                self.viewController.startDate = summit!.startDate
-                self.viewController.endDate = summit!.endDate
-                self.viewController.selectedDate = self.viewController.startDate
-
-                self.reloadSchedule()
-                self.viewController.hideActivityIndicator()
-            }
-            else {
+            defer { self.viewController.hideActivityIndicator() }
+            
+            if (error != nil) {
                 self.viewController.handleError(error!)
+                return
             }
+
+            let offset = -NSTimeZone.localTimeZone().secondsFromGMT
+            self.viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offset)
+            self.viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offset).mt_dateDaysAfter(1)
+            self.viewController.selectedDate = self.viewController.startDate
+
+            self.reloadSchedule()
         }
     }
     
     public func reloadSchedule() {
-        
-        let events = self.interactor.getScheduleEventsForDate(viewController.selectedDate, endDate: viewController.selectedDate.mt_dateDaysAfter(1))
+        let filterSelections = session.get(Constants.SessionKeys.GeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
+        let events = self.interactor.getScheduleEvents(
+            viewController.selectedDate,
+            endDate: viewController.selectedDate.mt_dateDaysAfter(1),
+            eventTypes: filterSelections?[FilterSectionTypes.EventType],
+            summitTypes: filterSelections?[FilterSectionTypes.SummitType]
+        )
         self.viewController.dayEvents = events
         self.viewController.reloadSchedule()
     }

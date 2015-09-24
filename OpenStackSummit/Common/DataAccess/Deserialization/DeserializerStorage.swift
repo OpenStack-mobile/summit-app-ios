@@ -35,11 +35,14 @@ public class DeserializerStorage: NSObject {
         let entity = T()
         let className = _stdlib_getDemangledTypeName(entity)
         
-        var array = deserializedEntityDictionary[className]?.values.array as? [T]
-        if (array == nil) {
-            array = [T]()
+        var array = [T]()
+        if let values = deserializedEntityDictionary[className]?.values {
+            for element in values {
+                array.append(element as! T)
+            }
         }
-        return array!
+
+        return array
     }
     
     public func exist<T : BaseEntity>(entity: T) -> Bool {

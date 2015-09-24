@@ -51,15 +51,10 @@ class EventDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventDetailInteractor.self) {
             (definition) in
             
-            definition.injectProperty("session", with: self.eventDetailSession())
             definition.injectProperty("eventDataStore", with: self.eventDataStore())
             definition.injectProperty("eventDetailDTOAssembler", with: self.eventDetailDTOAssembler())
             definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
-    }
-
-    dynamic func eventDetailSession() -> AnyObject {
-        return TyphoonDefinition.withClass(Session.self)
     }
     
     dynamic func eventDataStore() -> AnyObject {
