@@ -1,5 +1,5 @@
 //
-//  BaseDataStore.swift
+//  GenericDataStore.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/25/15.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-public class BaseDataStore<T : BaseEntity>: NSObject {
+public class GenericDataStore: NSObject {
     var realm = try! Realm()
     var trigger: ITrigger!
     
@@ -17,17 +17,17 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         super.init()
     }
     
-    public func getById(id: Int) -> T? {
+    public func getByIdFromLocal<T: BaseEntity>(id: Int) -> T? {
         let entity = realm.objects(T.self).filter("id = \(id)").first
         return entity
     }
 
-    public func getAll() -> [T] {
+    public func getAllFromLocal<T: BaseEntity>() -> [T] {
         let entities = realm.objects(T.self)
         return entities.map { $0 }
     }
     
-    public func saveOrUpdate(entity: T, completionBlock: ((T?, NSError?) -> Void)!) {
+    public func saveOrUpdateToLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)!) {
 
         do {
             try realm.write {
@@ -55,7 +55,7 @@ public class BaseDataStore<T : BaseEntity>: NSObject {
         }
     }
     
-    public func delete(entity: T, completionBlock : (NSError? -> Void)!) {
+    public func deleteFromLocal<T: BaseEntity>(entity: T, completionBlock : (NSError? -> Void)!) {
         do {
             try realm.write {
                 self.realm.delete(entity)

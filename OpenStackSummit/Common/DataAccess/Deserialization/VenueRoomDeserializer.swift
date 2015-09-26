@@ -20,7 +20,7 @@ public class VenueRoomDeserializer: NSObject, IDeserializer {
             venueRoom = deserializerStorage.get(venueRoomId)
         }
         else {
-            let deserializer = deserializerFactory.create(DeserializerFactories.Location)
+            let deserializer = deserializerFactory.create(DeserializerFactoryType.Location)
             let location = try deserializer.deserialize(json) as! Location
             venueRoom = VenueRoom()
             venueRoom.id = json["id"].intValue
