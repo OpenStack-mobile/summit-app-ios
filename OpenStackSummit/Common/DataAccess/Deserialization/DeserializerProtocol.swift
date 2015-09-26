@@ -9,6 +9,34 @@
 import UIKit
 import SwiftyJSON
 
+public enum DeserializerError: ErrorType {
+    case BadFormat
+}
+
 public protocol IDeserializer {
     func deserialize(json : JSON) throws -> BaseEntity
+}
+
+public extension IDeserializer {
+    func deserialize(json: String)  throws -> BaseEntity {
+        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
+        let jsonObject = JSON(data: data!)
+        return try deserialize(jsonObject)
+    }
+}
+
+public extension IDeserializer {
+    func deserializeArray(json: String)  throws -> [BaseEntity] {
+        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
+        let jsonObject = JSON(data: data!)
+        var array = [BaseEntity]()
+        var entity: BaseEntity
+       
+        for (_, jsonElem) in jsonObject {
+            entity = try deserialize(jsonElem)
+            array.append(entity)
+        }
+        
+        return array
+    }
 }

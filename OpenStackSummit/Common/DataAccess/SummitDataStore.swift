@@ -15,7 +15,7 @@ public protocol ISummitDataStore {
     func getSummitTypesFromLocal() -> [SummitType]
 }
 
-public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
+public class SummitDataStore: GenericDataStore, ISummitDataStore {
     var summitRemoteDataStore: ISummitRemoteDataStore!
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
@@ -38,7 +38,7 @@ public class SummitDataStore: BaseDataStore<Summit>, ISummitDataStore {
                 return
             }
             
-            self.saveOrUpdate(summit!, completionBlock: completionBlock)
+            self.saveOrUpdateToLocal(summit!, completionBlock: completionBlock)
         }
     }
     

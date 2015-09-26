@@ -14,13 +14,13 @@ public protocol IEventDataStore {
     func getByFilterFromLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]
 }
 
-public class EventDataStore: BaseDataStore<SummitEvent>, IEventDataStore {
+public class EventDataStore: GenericDataStore, IEventDataStore {
     public override init() {
         super.init()
     }
     
     public func getByIdFromLocal(id: Int) -> SummitEvent? {
-        return super.getById(id)
+        return super.getByIdFromLocal(id)
     }
     
     public func getByFilterFromLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]{

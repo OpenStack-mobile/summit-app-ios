@@ -9,8 +9,6 @@
 import UIKit
 import AeroGearHttp
 import AeroGearOAuth2
-import SwiftyJSON
-import RealmSwift
 
 @objc
 public protocol ISummitRemoteDataStore {
@@ -31,14 +29,12 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
                 return
             }
                         
-            let json = responseObject as! NSString
-            let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-            let jsonObject = JSON(data: data!)
+            let json = responseObject as! String
             let summit : Summit
             var deserializer : IDeserializer!
             
-            deserializer = self.deserializerFactory.create(DeserializerFactories.Summit)
-            summit = try! deserializer.deserialize(jsonObject) as! Summit
+            deserializer = self.deserializerFactory.create(DeserializerFactoryType.Summit)
+            summit = try! deserializer.deserialize(json) as! Summit
 
             completionBlock(summit, error)
         }

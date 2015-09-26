@@ -17,7 +17,7 @@ public protocol IMemberDataStore {
     func getLoggedInMemberFromOrigin(completionBlock : (Member?, NSError?) -> Void)
 }
 
-public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
+public class MemberDataStore: GenericDataStore, IMemberDataStore {
     
     var memberRemoteStorage: IMemberRemoteDataStore!
     
@@ -43,7 +43,7 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
         memberRemoteStorage.getById(id) { member, error in
 
             if (member != nil) {
-                self.saveOrUpdate(member!)  { member, error in
+                self.saveOrUpdateToLocal(member!)  { member, error in
                     completionBlock(member, error)
                 }
             }
@@ -81,7 +81,7 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
         memberRemoteStorage.getLoggedInMember { member, error in
             
             if (member != nil) {
-                self.saveOrUpdate(member!)  { member, error in
+                self.saveOrUpdateToLocal(member!)  { member, error in
                     completionBlock(member, error)
                 }
             }
@@ -92,7 +92,6 @@ public class MemberDataStore: BaseDataStore<Member>, IMemberDataStore {
     }
     
     public func getByIdFromLocal(id: Int) -> Member? {
-        let member = realm.objects(Member.self).filter("id = \(id)").first
-        return member
+        return super.getByIdFromLocal(id)
     }
 }

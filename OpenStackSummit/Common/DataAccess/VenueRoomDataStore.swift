@@ -13,8 +13,8 @@ public protocol IVenueRoomDataStore {
     func getByIdFromLocal(id: Int) -> VenueRoom?
 }
 
-public class VenueRoomDataStore: BaseDataStore<VenueRoom>, IVenueRoomDataStore {
+public class VenueRoomDataStore: GenericDataStore, IVenueRoomDataStore {
     public func getByIdFromLocal(id: Int) -> VenueRoom? {
-        return super.getById(id)
+        return super.getByIdFromLocal(id)
     }
 }
