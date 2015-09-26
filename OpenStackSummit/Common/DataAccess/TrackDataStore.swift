@@ -9,8 +9,8 @@
 import UIKit
 
 public protocol ITrackDataStore {
-    func getAll() -> [Track]
+    func getAllFromLocal() -> [Track]
 }
 
-public class TrackDataStore: BaseDataStore<Track>, ITrackDataStore {
+public class TrackDataStore: GenericDataStore, ITrackDataStore {
 }

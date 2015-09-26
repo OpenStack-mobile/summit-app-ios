@@ -16,18 +16,18 @@ public class PresentationDeserializer: NSObject, IDeserializer {
         let presentation = Presentation()
         presentation.id = json["id"].intValue
         
-        var deserializer = deserializerFactory.create(DeserializerFactories.Track)
+        var deserializer = deserializerFactory.create(DeserializerFactoryType.Track)
         let track = try deserializer.deserialize(json["track_id"]) as! Track
         presentation.track = track
         
-        deserializer = deserializerFactory.create(DeserializerFactories.PresentationSpeaker)
+        deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
         var presentationSpeaker : PresentationSpeaker
         for (_, speakerJSON) in json["speakers"] {
             presentationSpeaker = try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
             presentation.speakers.append(presentationSpeaker)
         }
         
-        deserializer = deserializerFactory.create(DeserializerFactories.Tag)
+        deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
         var tag : Tag
         for (_, tagsJSON) in json["tags"] {
             tag = try deserializer.deserialize(tagsJSON) as! Tag

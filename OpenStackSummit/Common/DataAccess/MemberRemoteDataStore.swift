@@ -39,14 +39,11 @@ public class MemberRemoteDataStore: NSObject {
     public func getById(memberId: Int, completionBlock : (Member?, NSError?) -> Void) {
         let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[2]}"
         
-        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let jsonObject = JSON(data: data!)
         let member : Member
         var deserializer : IDeserializer!
         
-        deserializer = deserializerFactory.create(DeserializerFactories.Member)
-        member = try! deserializer.deserialize(jsonObject) as! Member
+        deserializer = deserializerFactory.create(DeserializerFactoryType.Member)
+        member = try! deserializer.deserialize(json) as! Member
         
         completionBlock(member, nil)
     }
@@ -54,14 +51,11 @@ public class MemberRemoteDataStore: NSObject {
     public func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void) {
         let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[2]}"
         
-        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let jsonObject = JSON(data: data!)
         let member : Member
         var deserializer : IDeserializer!
         
-        deserializer = deserializerFactory.create(DeserializerFactories.Member)
-        member = try! deserializer.deserialize(jsonObject) as! Member
+        deserializer = deserializerFactory.create(DeserializerFactoryType.Member)
+        member = try! deserializer.deserialize(json) as! Member
         
         completionBlock(member, nil)
     }
@@ -75,12 +69,9 @@ public class MemberRemoteDataStore: NSObject {
                 completionBlock(nil, error)
                 return
             }
-            if let json = responseObject as! NSString? {
-                let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-                let jsonObject = JSON(data: data!)
-                
-                let deserializer = self.deserializerFactory.create(DeserializerFactories.Member)
-                let member = try! deserializer.deserialize(jsonObject) as! Member
+            if let json = responseObject as? String {
+                let deserializer = self.deserializerFactory.create(DeserializerFactoryType.Member)
+                let member = try! deserializer.deserialize(json) as! Member
                 completionBlock(member, error)
             }
         })

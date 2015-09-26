@@ -8,8 +8,12 @@
 
 import UIKit
 
-public enum DeserializerFactories {
-    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee
+public enum DeserializerFactoryError: ErrorType {
+    case InvalidClassName
+}
+
+public enum DeserializerFactoryType {
+    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee, DataUpdate
 }
 
 public class DeserializerFactory : NSObject {
@@ -29,47 +33,61 @@ public class DeserializerFactory : NSObject {
     var imageDeserializer: ImageDeserializer!
     var ticketTypeDeserializer: TicketTypeDeserializer!
     var summitAttendeeDeserializer: SummitAttendeeDeserializer!
+    var dataUpdateDeserializer: DataUpdateDeserializer!
     
-    public func create(type: DeserializerFactories) -> IDeserializer {
+    public func create(type: DeserializerFactoryType) -> IDeserializer {
         var deserializer : IDeserializer!
         
         switch type {
-        case DeserializerFactories.Summit:
+        case DeserializerFactoryType.Summit:
             deserializer = summitDeserializer
-        case DeserializerFactories.Company:
+        case DeserializerFactoryType.Company:
             deserializer = companyDeserializer
-        case DeserializerFactories.EventType:
+        case DeserializerFactoryType.EventType:
             deserializer = eventTypeDeserializer
-        case DeserializerFactories.SummitType:
+        case DeserializerFactoryType.SummitType:
             deserializer = summitTypeDeserializer
-        case DeserializerFactories.Location:
+        case DeserializerFactoryType.Location:
             deserializer = locationDeserializer
-        case DeserializerFactories.Venue:
+        case DeserializerFactoryType.Venue:
             deserializer = venueDeserializer
-        case DeserializerFactories.VenueRoom:
+        case DeserializerFactoryType.VenueRoom:
             deserializer = venueRoomDeserializer
-        case DeserializerFactories.SummitEvent:
+        case DeserializerFactoryType.SummitEvent:
             deserializer = summitEventDeserializer
-        case DeserializerFactories.Presentation:
+        case DeserializerFactoryType.Presentation:
             deserializer = presentationDeserializer
-        case DeserializerFactories.Member:
+        case DeserializerFactoryType.Member:
             deserializer = memberDeserializer
-        case DeserializerFactories.PresentationSpeaker:
+        case DeserializerFactoryType.PresentationSpeaker:
             deserializer = presentationSpeakerDeserializer
-        case DeserializerFactories.Track:
+        case DeserializerFactoryType.Track:
             deserializer = trackDeserializer
-        case DeserializerFactories.Tag:
+        case DeserializerFactoryType.Tag:
             deserializer = tagDeserializer
-        case DeserializerFactories.Image:
+        case DeserializerFactoryType.Image:
             deserializer = imageDeserializer
-        case DeserializerFactories.TicketType:
+        case DeserializerFactoryType.TicketType:
             deserializer = ticketTypeDeserializer
-        case DeserializerFactories.SummitAttendee:
+        case DeserializerFactoryType.SummitAttendee:
             deserializer = summitAttendeeDeserializer
-        default:
-            NSException(name: "InvalidArgument",reason: "Type \(type) is an unexpected deserializer type", userInfo: nil).raise()
+        case DeserializerFactoryType.DataUpdate:
+            deserializer = dataUpdateDeserializer
         }
         
         return deserializer!
+    }
+    
+    public func create(className: String) throws -> IDeserializer {
+        var deserializer : IDeserializer!
+        
+        switch className {
+        case "MySchedule":
+            deserializer = summitEventDeserializer
+        default:
+            throw DeserializerFactoryError.InvalidClassName
+        }
+        
+        return deserializer
     }
 }

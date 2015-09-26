@@ -27,7 +27,7 @@ public class TicketTypeDeserializer: NSObject, IDeserializer {
             ticketType.ticketTypeDescription = json["description"].stringValue
 
             var summitType: SummitType
-            let deserializer = deserializerFactory.create(DeserializerFactories.SummitType)
+            let deserializer = deserializerFactory.create(DeserializerFactoryType.SummitType)
             for (_, summitTypeJSON) in json["allowed_summit_types"] {
                 summitType = try deserializer.deserialize(summitTypeJSON) as! SummitType
                 ticketType.allowedSummitTypes.append(summitType)

@@ -24,7 +24,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             summitAttendee = SummitAttendee()
             summitAttendee.id = json["id"].intValue
 
-            let deserializer = deserializerFactory.create(DeserializerFactories.SummitEvent)
+            let deserializer = deserializerFactory.create(DeserializerFactoryType.SummitEvent)
             var event : SummitEvent
             
             for (_, eventJSON) in json["schedule"] {
