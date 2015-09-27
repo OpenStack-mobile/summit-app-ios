@@ -22,6 +22,6 @@ public class FeedbackDataStore: GenericDataStore, IFeedbackDataStore {
     }
     
     public func saveOrUpdateToLocal(entity: Feedback, completionBlock: ((Feedback?, NSError?) -> Void)!) {
-        feedbackRemoteDataStore.saveOrUpdateToLocal(entity, completionBlock: completionBlock)
+        feedbackRemoteDataStore.saveOrUpdate(entity, completionBlock: completionBlock)
     }
 }

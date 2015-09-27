@@ -27,7 +27,7 @@ public class GenericDataStore: NSObject {
         return entities.map { $0 }
     }
     
-    public func saveOrUpdateToLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)!) {
+    public func saveOrUpdateToLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)?) {
 
         do {
             try realm.write {
@@ -36,22 +36,18 @@ public class GenericDataStore: NSObject {
         }
         catch {
             let error: NSError? = NSError(domain: "There was an error saving entity", code: 2000, userInfo: nil)
-            completionBlock(nil, error)
+            completionBlock?(entity, error)
         }
         
         if (trigger != nil) {
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Save) {
                 () in
                 
-                if (completionBlock != nil) {
-                    completionBlock(entity, nil)
-                }
+                completionBlock?(entity, nil)
             }
         }
         else {
-            if (completionBlock != nil) {
-                completionBlock(entity, nil)
-            }
+            completionBlock?(entity, nil)
         }
     }
     
