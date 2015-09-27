@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MyScheduleDataUpdateStrategy: NSObject {
+public class MyScheduleDataUpdateStrategy: NSObject, IDataUpdateStrategy {
     var genericDataStore: GenericDataStore!
     var securityManager: SecurityManager!
     
