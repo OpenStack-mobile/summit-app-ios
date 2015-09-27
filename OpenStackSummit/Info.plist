@@ -64,6 +64,7 @@
 		<string>LoginAssembly</string>
 		<string>FeedbackEditAssembly</string>
 		<string>SecurityManagerAssembly</string>
+		<string>HttpFactoryAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

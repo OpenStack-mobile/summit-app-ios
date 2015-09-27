@@ -17,11 +17,10 @@ public protocol ISummitRemoteDataStore {
 
 public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
     var deserializerFactory: DeserializerFactory!
-    var securityManager: SecurityManager!
+    var httpFactory: HttpFactory!
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
-        let http = Http(responseSerializer: StringResponseSerializer())
-        http.authzModule = securityManager.oauthModuleServiceAccount
+        let http = httpFactory.create(HttpType.ServiceAccount)
         
         http.GET("https://testresource-server.openstack.org/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule") {(responseObject, error) in
             if (error != nil) {

@@ -15,13 +15,12 @@ import AeroGearOAuth2
 public protocol IMemberRemoteDataStore {
     func addEventToShedule(memberId: Int, eventId: Int, completionBlock : (NSError?) -> Void)
     func getById(memberId: Int, completionBlock : (Member?, NSError?) -> Void)
-    func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void)
     func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)
 }
 
 public class MemberRemoteDataStore: NSObject {
     var deserializerFactory: DeserializerFactory!
-    var securityManager: SecurityManager!
+    var httpFactory: HttpFactory!
     
     override init() {
         super.init()
@@ -48,22 +47,9 @@ public class MemberRemoteDataStore: NSObject {
         completionBlock(member, nil)
     }
     
-    public func getByEmail(email: String, completionBlock : (Member?, NSError?) -> Void) {
-        let json = "{\"id\":1,\"name\":\"Enzo\",\"lastName\":\"Francescoli\",\"email\":\"enzo@riverplate.com\",\"scheduledEvents\":[1],\"bookmarkedEvents\":[2]}"
-        
-        let member : Member
-        var deserializer : IDeserializer!
-        
-        deserializer = deserializerFactory.create(DeserializerFactoryType.Member)
-        member = try! deserializer.deserialize(json) as! Member
-        
-        completionBlock(member, nil)
-    }
-    
     func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
         let attendeeEndpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/me?expand=schedule,ticket_type,speaker"
-        let http = Http(responseSerializer: StringResponseSerializer())
-        http.authzModule = securityManager.oauthModuleOpenID
+        let http = httpFactory.create(HttpType.OpenID)
         http.GET(attendeeEndpoint, parameters: nil, completionHandler: {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)

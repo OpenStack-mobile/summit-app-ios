@@ -11,10 +11,11 @@ import OpenStackSummit
 
 class DataUpdateDeserializerMock: DataUpdateDeserializer {
 
-    let dataUpdateArray: [DataUpdate]!
-    let dataUpdate: DataUpdate!
+    var dataUpdateArray: [DataUpdate]!
+    var dataUpdate: DataUpdate!
     
     init(dataUpdateArray: [DataUpdate]) {
+        super.init()
         self.dataUpdateArray = dataUpdateArray
     }
     

@@ -13,7 +13,7 @@ public class DataUpdateStrategyFactory: NSObject {
         var dataUpdateProcessStrategy: IDataUpdateStrategy
         switch className {
         case "MySchdedule":
-            dataUpdateProcessStrategy = DataUpdateStrategy()
+            dataUpdateProcessStrategy = MyScheduleDataUpdateStrategy()
         default:
             dataUpdateProcessStrategy = DataUpdateStrategy()
         }

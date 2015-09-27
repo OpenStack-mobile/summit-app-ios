@@ -11,15 +11,18 @@ import SwiftyJSON
 import AeroGearHttp
 import AeroGearOAuth2
 
-public class DataUpdateRemoteStore: NSObject {
+public protocol IDataUpdateRemoteDataStore {
+    func getGeneralUpdatesAfterId(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)
+}
 
-    var securityManager: SecurityManager!
+public class DataUpdateRemoteDataStore: NSObject {
+
+    var httpFactory: HttpFactory!
     var deserializerFactory: DeserializerFactory!
     
     func getGeneralUpdatesAfterId(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)  {
         let attendeeEndpoint = "https://testresource-server.openstack.org//api/v1/summits/current/entity-events"
-        let http = Http(responseSerializer: StringResponseSerializer())
-        http.authzModule = securityManager.oauthModuleOpenID
+        let http = httpFactory.create(HttpType.ServiceAccount)
         http.GET(attendeeEndpoint, parameters: nil) { (responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
