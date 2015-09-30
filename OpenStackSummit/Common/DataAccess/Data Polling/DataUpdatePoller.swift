@@ -15,20 +15,21 @@ public protocol IDataUpdatePoller {
     func startPolling()
 }
 
-public class DataUpdatePoller: NSObject {
+public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     public var pollingInterval: Double = 120
     var timer: NSTimer?
     var httpFactory: HttpFactory!
-    var dataUpdateProcessor: IDataUpdateProcessor!
+    var dataUpdateProcessor: DataUpdateProcessor!
     var dataUpdateDataStore: IDataUpdateDataStore!
     
     public override init() {
         super.init()
     }
 
-    public init(httpFactory: HttpFactory, dataUpdateProcessor: IDataUpdateProcessor) {
+    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore) {
         self.httpFactory = httpFactory
         self.dataUpdateProcessor = dataUpdateProcessor
+        self.dataUpdateDataStore = dataUpdateDataStore
     }
     
     public func startPolling() {
@@ -43,13 +44,18 @@ public class DataUpdatePoller: NSObject {
             latestDataUpdateId = latestDataUpdate.id
         }
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current?entity-events?last_event_id=\(latestDataUpdateId)") {(responseObject, error) in
+        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/entity-events?last_event_id=\(latestDataUpdateId)") {(responseObject, error) in
             if (error != nil) {
                 return
             }
             
             let json = responseObject as! String
-            self.dataUpdateProcessor.process(json)
+            do {
+                try self.dataUpdateProcessor.process(json)
+            }
+            catch {
+                print("There was an error processing updates from server")
+            }
         }
     }
     

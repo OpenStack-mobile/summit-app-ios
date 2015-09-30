@@ -18,6 +18,7 @@ public protocol ISummitRemoteDataStore {
 public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
     var deserializerFactory: DeserializerFactory!
     var httpFactory: HttpFactory!
+    var dataUpdatePoller: DataUpdatePoller!
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
@@ -36,6 +37,8 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
             summit = try! deserializer.deserialize(json) as! Summit
 
             completionBlock(summit, error)
+            
+            self.dataUpdatePoller.startPolling()
         }
     }
 }

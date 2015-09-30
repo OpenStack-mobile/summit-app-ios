@@ -11,6 +11,7 @@ import SwiftyJSON
 import AeroGearHttp
 import AeroGearOAuth2
 
+@objc
 public protocol IDataUpdateRemoteDataStore {
     func getGeneralUpdatesAfterId(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)
 }

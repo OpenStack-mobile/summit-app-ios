@@ -9,13 +9,16 @@
 import UIKit
 
 public class DataUpdateStrategyFactory: NSObject {
-    public func create(className: String) -> IDataUpdateStrategy {
-        var dataUpdateProcessStrategy: IDataUpdateStrategy
+    var genericDataUpdateProcessStrategy: DataUpdateStrategy!
+    var myScheduleDataUpdateStrategy: MyScheduleDataUpdateStrategy!
+    
+    public func create(className: String) -> DataUpdateStrategy {
+        var dataUpdateProcessStrategy: DataUpdateStrategy
         switch className {
         case "MySchdedule":
-            dataUpdateProcessStrategy = MyScheduleDataUpdateStrategy()
+            dataUpdateProcessStrategy = myScheduleDataUpdateStrategy
         default:
-            dataUpdateProcessStrategy = DataUpdateStrategy()
+            dataUpdateProcessStrategy = genericDataUpdateProcessStrategy
         }
         return dataUpdateProcessStrategy
     }
