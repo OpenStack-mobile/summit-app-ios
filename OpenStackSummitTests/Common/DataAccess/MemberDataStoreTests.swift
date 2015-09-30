@@ -75,7 +75,7 @@ class MemberDataStoreTests: XCTestCase {
         event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!
         
         // Act
-        memberDataStore.addEventToMemberShedule(1, event: event) { member, error in
+        memberDataStore.addEventToMemberShedule(member, event: event) { member, error in
             // Assert
             XCTAssertEqual(1, self.realm.objects(Member.self).filter("id = \(memberId)").first!.attendeeRole!.scheduledEvents.first!.id)
             expectation.fulfill()

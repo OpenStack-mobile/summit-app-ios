@@ -13,7 +13,7 @@ import RealmSwift
 public protocol IMemberDataStore {
     func getById(id: Int, completionBlock : (Member?, NSError?) -> Void)
     func getByIdFromLocal(id: Int) -> Member?
-    func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void)
+    func addEventToMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void)
     func getLoggedInMemberFromOrigin(completionBlock : (Member?, NSError?) -> Void)
 }
 
@@ -21,11 +21,11 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
     
     var memberRemoteStorage: IMemberRemoteDataStore!
     
-    override init() {
+    public override init() {
         super.init()
     }
     
-    init(memberRemoteStorage: IMemberRemoteDataStore) {
+    public init(memberRemoteStorage: IMemberRemoteDataStore) {
         self.memberRemoteStorage = memberRemoteStorage
     }
 
@@ -52,10 +52,26 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
             }
         }
     }
+
+    public func addEventToMemberSheduleToLocal(member: Member, event: SummitEvent) throws {
+        
+        try self.realm.write {
+            member.attendeeRole!.scheduledEvents.append(event)
+        }
+    }
     
-    public func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {
-        memberRemoteStorage.addEventToShedule(memberId, eventId: event.id) { error in
-            var member: Member?
+    public func removeEventToMemberSheduleToLocal(member: Member, event: SummitEvent) throws {
+        
+        try self.realm.write {
+            let index = member.attendeeRole!.scheduledEvents.indexOf("id = %@", event.id)
+            if (index != nil) {
+                member.attendeeRole?.scheduledEvents.removeAtIndex(index!)
+            }
+        }
+    }
+    
+    public func addEventToMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {
+        memberRemoteStorage.addEventToShedule(member.id, eventId: event.id) { error in
             var addEventError = error
             
             defer { completionBlock(member, addEventError) }
@@ -64,11 +80,10 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
                 return
             }
             
-            member = self.realm.objects(Member.self).filter("id = \(memberId)").first!
             do {
                 try self.realm.write {
-                    member!.attendeeRole!.scheduledEvents.append(event)
-                    self.realm.add(member!, update: true)
+                    member.attendeeRole!.scheduledEvents.append(event)
+                    self.realm.add(member, update: true)
                 }
             }
             catch {

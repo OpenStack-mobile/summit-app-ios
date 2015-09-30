@@ -179,4 +179,11 @@ public class DataStoreAssembly: TyphoonAssembly {
             
         }
     }
+    
+    public dynamic func genericDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(GenericDataStore.self) {
+            (definition) in
+            
+        }
+    }
 }

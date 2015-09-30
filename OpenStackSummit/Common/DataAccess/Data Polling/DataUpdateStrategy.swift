@@ -8,15 +8,18 @@
 
 import UIKit
 
-@objc
-public protocol IDataUpdateStrategy {
-    func process(dataUpdate: DataUpdate)
-}
-
-public class DataUpdateStrategy: NSObject, IDataUpdateStrategy {
+public class DataUpdateStrategy: NSObject {
     var genericDataStore: GenericDataStore!
     
-    public func process(dataUpdate: DataUpdate) {
+    public override init() {
+        super.init()
+    }
+    
+    public init(genericDataStore: GenericDataStore) {
+        self.genericDataStore = genericDataStore
+    }
+    
+    public func process(dataUpdate: DataUpdate) throws {
         switch dataUpdate.operation! {
         case .Insert, .Update:
             genericDataStore.saveOrUpdateToLocal(dataUpdate.entity, completionBlock: nil)

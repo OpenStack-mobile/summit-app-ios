@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 public protocol IDataUpdateDataStore {
     func getGeneralUpdatesAfterIdFromOrigin(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)
     func saveOrUpdateToLocal(entity: DataUpdate, completionBlock: ((DataUpdate?, NSError?) -> Void)?)
@@ -30,6 +31,9 @@ public class DataUpdateDataStore: GenericDataStore, IDataUpdateDataStore {
     }
     
     public func getLatestDataUpdate() -> DataUpdate? {
-        return realm.objects(DataUpdate).filter("@max.id").first
+        let dataUpdates = realm.objects(DataUpdate)
+        let id = dataUpdates.max("id") as Int?
+        let dataUpdate = id != nil ? dataUpdates.filter("id == %@", id!).first : nil
+        return dataUpdate
     }
 }
