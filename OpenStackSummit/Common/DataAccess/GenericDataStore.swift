@@ -13,7 +13,7 @@ public class GenericDataStore: NSObject {
     var realm = try! Realm()
     var trigger: ITrigger!
     
-    override init() {
+    public override init() {
         super.init()
     }
     

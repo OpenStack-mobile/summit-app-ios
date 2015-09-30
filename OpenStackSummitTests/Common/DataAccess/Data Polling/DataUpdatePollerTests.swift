@@ -29,7 +29,8 @@ class DataUpdatePollerTests: XCTestCase {
         let httpFactoryMock = HttpFactoryMock(http: httpMock)
         let thresholdProcessCount = 2
         let dataUpdateProcessorMock = DataUpdateProcessorMock(expectation: expectation, thresholdProcessCount: thresholdProcessCount)
-        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock)
+        let dataUpdateDataStoreMock = DataUpdateDataStoreMock()
+        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock, dataUpdateDataStore: dataUpdateDataStoreMock)
         dataUpdatePoller.pollingInterval = 0.2
         
         // Act
@@ -47,7 +48,8 @@ class DataUpdatePollerTests: XCTestCase {
         let httpFactoryMock = HttpFactoryMock(http: httpMock)
         let thresholdProcessCount = 0
         let dataUpdateProcessorMock = DataUpdateProcessorMock(expectation: nil, thresholdProcessCount: thresholdProcessCount)
-        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock)
+        let dataUpdateDataStoreMock = DataUpdateDataStoreMock()
+        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock, dataUpdateDataStore: dataUpdateDataStoreMock)
         dataUpdatePoller.pollingInterval = 0.2
         
         // Act

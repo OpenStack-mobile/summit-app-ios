@@ -42,7 +42,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
                 return true
             }
         }
-        
+    
         return eventArray
     }
 }

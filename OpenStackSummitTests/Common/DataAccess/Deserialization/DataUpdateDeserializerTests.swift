@@ -141,4 +141,5 @@ class DataUpdateDeserializerTests: XCTestCase {
         XCTAssertEqual(10, dataUpdateArray[0].id)
         XCTAssertEqual(11, dataUpdateArray[1].id)
     }
-}
+    
+ }

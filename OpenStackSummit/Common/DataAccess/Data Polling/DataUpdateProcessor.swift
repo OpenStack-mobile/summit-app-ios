@@ -8,15 +8,14 @@
 
 import UIKit
 
-@objc
-public protocol IDataUpdateProcessor {
-    func process(data: String)
-}
-
 public class DataUpdateProcessor: NSObject {
     var dataUpdateDeserializer: DataUpdateDeserializer!
     var dataUpdateStrategyFactory: DataUpdateStrategyFactory!
     var dataUpdateDataStore: IDataUpdateDataStore!
+    
+    public override init() {
+        super.init()
+    }
     
     public init(dataUpdateDeserializer: DataUpdateDeserializer, dataUpdateStrategyFactory: DataUpdateStrategyFactory, dataUpdateDataStore: IDataUpdateDataStore) {
         self.dataUpdateDeserializer = dataUpdateDeserializer
@@ -24,12 +23,12 @@ public class DataUpdateProcessor: NSObject {
         self.dataUpdateDataStore = dataUpdateDataStore
     }
     
-    public func process(data: String) {
-        let dataUpdateArray = try! dataUpdateDeserializer.deserializeArray(data) as! [DataUpdate]
-        var dataUpdateStrategy: IDataUpdateStrategy
+    public func process(data: String) throws {
+        let dataUpdateArray = try dataUpdateDeserializer.deserializeArray(data) as! [DataUpdate]
+        var dataUpdateStrategy: DataUpdateStrategy
         for dataUpdate in dataUpdateArray {
             dataUpdateStrategy = dataUpdateStrategyFactory.create(dataUpdate.entityClassName)
-            dataUpdateStrategy.process(dataUpdate)
+            try dataUpdateStrategy.process(dataUpdate)
             dataUpdateDataStore.saveOrUpdateToLocal(dataUpdate, completionBlock: nil)
         }
     }

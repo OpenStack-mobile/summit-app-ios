@@ -12,6 +12,6 @@ import OpenStackSummit
 class MemberDataStoreMock: NSObject, IMemberDataStore {
     func getById(id: Int, completionBlock : (Member?, NSError?) -> Void) {}
     func getByIdFromLocal(id: Int) -> Member? { return nil }
-    func addEventToMemberShedule(memberId: Int, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {}
+    func addEventToMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {}
     func getLoggedInMemberFromOrigin(completionBlock : (Member?, NSError?) -> Void) {}
 }

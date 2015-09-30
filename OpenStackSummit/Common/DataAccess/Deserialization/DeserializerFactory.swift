@@ -84,6 +84,10 @@ public class DeserializerFactory : NSObject {
         switch className {
         case "MySchedule":
             deserializer = summitEventDeserializer
+        case "Presentation":
+            deserializer = presentationDeserializer
+        case "SummitEvent":
+            deserializer = summitEventDeserializer
         default:
             throw DeserializerFactoryError.InvalidClassName
         }

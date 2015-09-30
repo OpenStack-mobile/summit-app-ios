@@ -33,6 +33,12 @@ class DataUpdateDataStoreTests: XCTestCase {
         try! realm.write {
             self.realm.add(dataUpdate)
         }
+        
+        dataUpdate = DataUpdate()
+        dataUpdate.id = 3
+        try! realm.write {
+            self.realm.add(dataUpdate)
+        }
 
         dataUpdate = DataUpdate()
         dataUpdate.id = 2
@@ -46,7 +52,18 @@ class DataUpdateDataStoreTests: XCTestCase {
         let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate()
         
         // Assert
-        XCTAssertEqual(2, latestDataUpdate!.id)
+        XCTAssertEqual(3, latestDataUpdate!.id)
+    }
+
+    func test_getLatestDataUpdate_thereAreNoDataUpdatesOnDatabase_returnsNil() {
+        // Arrange
+        let dataUpdateDataStore = DataUpdateDataStore()
+        
+        // Act
+        let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate()
+        
+        // Assert
+        XCTAssertNil(latestDataUpdate)
     }
     
 }

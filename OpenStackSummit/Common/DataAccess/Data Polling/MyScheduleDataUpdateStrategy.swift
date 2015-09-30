@@ -8,22 +8,28 @@
 
 import UIKit
 
-public class MyScheduleDataUpdateStrategy: NSObject, IDataUpdateStrategy {
-    var genericDataStore: GenericDataStore!
+public class MyScheduleDataUpdateStrategy: DataUpdateStrategy {
+    var memberDataStore: MemberDataStore!
     var securityManager: SecurityManager!
     
-    public func process(dataUpdate: DataUpdate) {
+    public override init() {
+        super.init()
+    }
+    
+    public init(memberDataStore: MemberDataStore, securityManager: SecurityManager) {
+        super.init()
+        self.memberDataStore = memberDataStore
+        self.securityManager = securityManager
+    }
+    
+    public override func process(dataUpdate: DataUpdate) throws {
         let currentMember = securityManager.getCurrentMember()
 
         switch dataUpdate.operation! {
         case .Insert, .Update:
-            currentMember?.attendeeRole?.scheduledEvents.append(dataUpdate.entity as! SummitEvent)
+            try memberDataStore.addEventToMemberSheduleToLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
         case .Delete:
-            let index = currentMember?.attendeeRole?.scheduledEvents.indexOf("id = %@", dataUpdate.entity.id)
-            if (index != nil) {
-                currentMember?.attendeeRole?.scheduledEvents.removeAtIndex(index!)
-            }
+            try memberDataStore.removeEventToMemberSheduleToLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
         }
-        genericDataStore.saveOrUpdateToLocal(currentMember as Member!, completionBlock: nil)
     }
 }

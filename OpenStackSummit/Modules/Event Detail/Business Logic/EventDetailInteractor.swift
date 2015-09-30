@@ -34,7 +34,7 @@ public class EventDetailInteractor: NSObject {
         }
         let event = eventDataStore.getByIdFromLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
-        memberDataStore.addEventToMemberShedule(member.id, event: event!) { member, error in
+        memberDataStore.addEventToMemberShedule(member, event: event!) { member, error in
             if (error != nil) {
                 completionBlock(nil, error)
             }
