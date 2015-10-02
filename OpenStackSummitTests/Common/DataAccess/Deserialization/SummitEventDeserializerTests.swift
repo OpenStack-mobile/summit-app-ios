@@ -92,11 +92,8 @@ class SummitEventDeserializerTests: XCTestCase {
         let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
         let json = "{\"id\":5290,\"title\":\"Windows in OpenStack\",\"description\":\"test description\", \"start_date\":1446026400,\"end_date\":1446029100,\"location_id\":19,\"type_id\":3,\"class_name\":\"Presentation\",\"track_id\":2,\"level\":\"Beginner\",\"summit_types\":[1],\"sponsors\":[],\"speakers\":[1761,1861]}"
         
-        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-        let jsonObject = JSON(data: data!)
-        
         //Act
-        let event = try! deserializer.deserialize(jsonObject) as! SummitEvent
+        let event = try! deserializer.deserialize(json) as! SummitEvent
         
         //Assert
         XCTAssertEqual(5290,event.id)
@@ -120,11 +117,8 @@ class SummitEventDeserializerTests: XCTestCase {
         let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
         let json = "5290"
         
-        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
-        let jsonObject = JSON(data: data!)
-        
         //Act
-        event = try! deserializer.deserialize(jsonObject) as! SummitEvent
+        event = try! deserializer.deserialize(json) as! SummitEvent
         
         //Assert
         XCTAssertEqual(5290,event.id)

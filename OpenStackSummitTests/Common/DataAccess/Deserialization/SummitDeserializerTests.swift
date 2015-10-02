@@ -47,8 +47,5 @@ class SummitDeserializerTests: XCTestCase {
         XCTAssertEqual(7,summit.venues.count)
         XCTAssertEqual(3,summit.events.count)
         XCTAssertEqual(2,summit.ticketTypes.count)
-        XCTAssertEqual("Asia/Tokyo",summit.events[0].timeZone)
-        XCTAssertEqual("Asia/Tokyo",summit.events[1].timeZone)
-        XCTAssertEqual("Asia/Tokyo",summit.events[2].timeZone)
     }
 }
