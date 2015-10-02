@@ -50,11 +50,11 @@ public class ScheduleItemDTOAssembler: NSObject, IScheduleItemDTOAssembler {
     public func getDate(event: SummitEvent) -> String{
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: event.timeZone);
-        dateFormatter.dateFormat = "EEEE dd MMMM HH:mm"
+        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
+        dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
         let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "hh:mm a"
         let stringDateTo = dateFormatter.stringFromDate(event.end)
         
         return "\(stringDateFrom) - \(stringDateTo)"

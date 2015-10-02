@@ -98,6 +98,7 @@
 		CACF20731BBA094C001868AF /* DataUpdateDataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF20721BBA094B001868AF /* DataUpdateDataStoreMock.swift */; settings = {ASSET_TAGS = (); }; };
 		CACF20751BBAC5EB001868AF /* DataUpdateStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF20741BBAC5EB001868AF /* DataUpdateStrategyTests.swift */; settings = {ASSET_TAGS = (); }; };
 		CACF20781BBC15BB001868AF /* DataUpdateAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF20771BBC15BB001868AF /* DataUpdateAssembly.swift */; settings = {ASSET_TAGS = (); }; };
+		CACF207A1BBC89DD001868AF /* PresentationSpeakerDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF20791BBC89DD001868AF /* PresentationSpeakerDeserializerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		CACF7C451B9664E700A9EB16 /* EventDetailDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF7C411B9664E700A9EB16 /* EventDetailDTOAssembler.swift */; };
 		CACF7C461B9664E700A9EB16 /* SpeakerDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF7C421B9664E700A9EB16 /* SpeakerDTOAssembler.swift */; };
 		CACF7C471B9664E700A9EB16 /* EventDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACF7C431B9664E700A9EB16 /* EventDetailDTO.swift */; };
@@ -312,6 +313,7 @@
 		CACF20721BBA094B001868AF /* DataUpdateDataStoreMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateDataStoreMock.swift; sourceTree = "<group>"; };
 		CACF20741BBAC5EB001868AF /* DataUpdateStrategyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateStrategyTests.swift; sourceTree = "<group>"; };
 		CACF20771BBC15BB001868AF /* DataUpdateAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateAssembly.swift; sourceTree = "<group>"; };
+		CACF20791BBC89DD001868AF /* PresentationSpeakerDeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationSpeakerDeserializerTests.swift; sourceTree = "<group>"; };
 		CACF7C411B9664E700A9EB16 /* EventDetailDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailDTOAssembler.swift; sourceTree = "<group>"; };
 		CACF7C421B9664E700A9EB16 /* SpeakerDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDTOAssembler.swift; sourceTree = "<group>"; };
 		CACF7C431B9664E700A9EB16 /* EventDetailDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailDTO.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 				CA5F3B271BA8729300B97C54 /* SummitEventDeserializerTests.swift */,
 				CAA9A88A1BA89B9E00C3725D /* MemberDeserializerTests.swift */,
 				CA5B6D1F1BB5A16A00D28499 /* DataUpdateDeserializerTests.swift */,
+				CACF20791BBC89DD001868AF /* PresentationSpeakerDeserializerTests.swift */,
 			);
 			path = Deserialization;
 			sourceTree = "<group>";
@@ -1565,6 +1568,7 @@
 			files = (
 				CAC7F3001B993D8100BAE2C6 /* MemberProfileInteractorTests.swift in Sources */,
 				CA1CBA8C1BB5EE3000E65D2B /* DataUpdateProcessorTests.swift in Sources */,
+				CACF207A1BBC89DD001868AF /* PresentationSpeakerDeserializerTests.swift in Sources */,
 				CAD6C3D51BB7579200F8C2D6 /* DataUpdatePollerTests.swift in Sources */,
 				CAD6C3D31BB755B100F8C2D6 /* HttpMock.swift in Sources */,
 				CAD6C3D11BB7556500F8C2D6 /* HttpFactoryMock.swift in Sources */,

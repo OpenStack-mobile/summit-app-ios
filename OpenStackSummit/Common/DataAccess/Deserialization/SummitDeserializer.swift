@@ -77,7 +77,6 @@ public class SummitDeserializer: NSObject, IDeserializer {
 
             deserializer = deserializerFactory.create(DeserializerFactoryType.SummitEvent)
             event = try deserializer.deserialize(eventJSON) as! SummitEvent
-            event.timeZone = summit.timeZone
             summit.events.append(event)
         }
         

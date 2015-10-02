@@ -24,7 +24,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
     }
     
     public func getByFilterFromLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]{
-        var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate)
+        var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
         if (eventTypes != nil) {
             events = events.filter("eventType.id in %@", eventTypes!)
         }

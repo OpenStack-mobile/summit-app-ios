@@ -21,5 +21,8 @@ public class SummitEvent: BaseEntity {
     public dynamic var presentation : Presentation?
     public dynamic var venue : Venue?
     public dynamic var venueRoom : VenueRoom?
-    public dynamic var timeZone = ""
+    
+    public var summit: Summit {
+        return linkingObjects(Summit.self, forProperty: "events").first!
+    }
 }

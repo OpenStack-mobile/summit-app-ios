@@ -29,7 +29,7 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue.locationDescription = location.locationDescription
             venue.lat = json["lat"].stringValue
             venue.long = json["long"].stringValue
-            venue.address = json["address"].stringValue
+            venue.address = json["address_1"].stringValue
 
             var map: Image
             deserializer = deserializerFactory.create(DeserializerFactoryType.Image)
