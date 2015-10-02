@@ -30,6 +30,7 @@ public class GeneralSchedulePresenter: NSObject {
     var interactor : IGeneralScheduleInteractor!
     var generalScheduleWireframe : IGeneralScheduleWireframe!
     var session: ISession!
+    var summitTimeZoneOffsetToLocalTimeZone: Int!
     
     public func viewLoad() {
         viewController.showActivityIndicator()
@@ -40,21 +41,23 @@ public class GeneralSchedulePresenter: NSObject {
                 self.viewController.handleError(error!)
                 return
             }
-
-            let offset = -NSTimeZone.localTimeZone().secondsFromGMT
-            self.viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offset)
-            self.viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offset).mt_dateDaysAfter(1)
+            
+            let offsetLocalTimeZone = -NSTimeZone.localTimeZone().secondsFromGMT
+            self.summitTimeZoneOffsetToLocalTimeZone = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT + offsetLocalTimeZone
+            self.viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offsetLocalTimeZone)
+            self.viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offsetLocalTimeZone).mt_dateDaysAfter(1)
             self.viewController.selectedDate = self.viewController.startDate
-
-            self.reloadSchedule()
         }
     }
     
     public func reloadSchedule() {
         let filterSelections = session.get(Constants.SessionKeys.GeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
+        let startDate = viewController.selectedDate.mt_dateSecondsAfter(-summitTimeZoneOffsetToLocalTimeZone)
+        let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-summitTimeZoneOffsetToLocalTimeZone)
+        
         let events = self.interactor.getScheduleEvents(
-            viewController.selectedDate,
-            endDate: viewController.selectedDate.mt_dateDaysAfter(1),
+            startDate,
+            endDate: endDate,
             eventTypes: filterSelections?[FilterSectionTypes.EventType],
             summitTypes: filterSelections?[FilterSectionTypes.SummitType]
         )

@@ -19,6 +19,7 @@ public class SummitDTOAssembler: NSObject {
         summitDTO.name = summit.name
         summitDTO.startDate = summit.startDate
         summitDTO.endDate = summit.endDate
+        summitDTO.timeZone = summit.timeZone
         
         return summitDTO
     }

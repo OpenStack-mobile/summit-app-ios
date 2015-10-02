@@ -52,6 +52,11 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
                 summitEvent.sponsors.append(company)
             }
             
+            deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
+            for (_, speakerJSON) in json["speakers"] {
+                try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
+            }
+            
             let trackId = json["track_id"]
             if (trackId.int != nil) {
                 deserializer = deserializerFactory.create(DeserializerFactoryType.Presentation)

@@ -169,7 +169,8 @@ public class DataStoreAssembly: TyphoonAssembly {
     public dynamic func presentationSpeakerDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(PresentationSpeakerDeserializer.self) {
             (definition) in
-            
+
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
         }
     }
     

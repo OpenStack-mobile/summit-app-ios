@@ -15,6 +15,7 @@ public class PresentationDeserializer: NSObject, IDeserializer {
     public func deserialize(json: JSON) throws -> BaseEntity {
         let presentation = Presentation()
         presentation.id = json["id"].intValue
+        presentation.level = json["level"].stringValue
         
         var deserializer = deserializerFactory.create(DeserializerFactoryType.Track)
         let track = try deserializer.deserialize(json["track_id"]) as! Track

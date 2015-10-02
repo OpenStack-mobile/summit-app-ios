@@ -11,17 +11,36 @@ import SwiftyJSON
 
 public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
     
+    var deserializerStorage: DeserializerStorage!
+    
+    public init(deserializerStorage: DeserializerStorage) {
+        self.deserializerStorage = deserializerStorage
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    
     public func deserialize(json: JSON) -> BaseEntity {
-        let presentationSpeaker = PresentationSpeaker()
-        presentationSpeaker.id = json["id"].intValue
-        presentationSpeaker.firstName = json["first_name"].stringValue
-        presentationSpeaker.lastName = json["last_name"].stringValue
-        presentationSpeaker.email = json["email"].stringValue
-        presentationSpeaker.title = json["title"].stringValue
-        presentationSpeaker.bio = json["bio"].stringValue
-        presentationSpeaker.irc = json["irc"].stringValue
-        presentationSpeaker.twitter = json["twitter"].stringValue
-        presentationSpeaker.memberId = json["member_id"].intValue
+        var presentationSpeaker: PresentationSpeaker
+        
+        if let eventId = json.int {
+            presentationSpeaker = deserializerStorage.get(eventId)
+        }
+        else {
+            presentationSpeaker = PresentationSpeaker()
+            presentationSpeaker.id = json["id"].intValue
+            presentationSpeaker.firstName = json["first_name"].stringValue
+            presentationSpeaker.lastName = json["last_name"].stringValue
+            presentationSpeaker.email = json["email"].stringValue
+            presentationSpeaker.title = json["title"].stringValue
+            presentationSpeaker.bio = json["bio"].stringValue
+            presentationSpeaker.irc = json["irc"].stringValue
+            presentationSpeaker.twitter = json["twitter"].stringValue
+            presentationSpeaker.memberId = json["member_id"].intValue
+            deserializerStorage.add(presentationSpeaker)
+        }
         return presentationSpeaker
     }
 }
