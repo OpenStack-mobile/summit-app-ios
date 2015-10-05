@@ -32,7 +32,6 @@ public class MemberProfileDTOAssembler: NSObject {
         memberProfileDTO.bio = member.bio
         if (full) {
             memberProfileDTO.email = member.email
-            memberProfileDTO.location = member.location
             memberProfileDTO.twitter = member.twitter
             memberProfileDTO.irc = member.irc
             

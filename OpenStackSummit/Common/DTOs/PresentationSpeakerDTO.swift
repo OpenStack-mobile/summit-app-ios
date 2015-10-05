@@ -8,8 +8,7 @@
 
 import UIKit
 
-public class SpeakerDTO: NSObject {
+public class PresentationSpeakerDTO: NSObject {
     public var id = 0
     public var name = ""
-    public var isPresentationOwner = false
 }

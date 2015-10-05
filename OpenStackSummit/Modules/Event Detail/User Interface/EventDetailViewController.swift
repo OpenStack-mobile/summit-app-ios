@@ -13,7 +13,7 @@ import Haneke
 public protocol IEventDetailViewController {
     func showEventDetail(eventDetail: EventDetailDTO)
     func didAddEventToMySchedule(event: EventDetailDTO)
-    func handleError(error: NSError)
+    func showErrorMessage(error: NSError)
     
     var presenter: IEventDetailPresenter! { get set }
 }
@@ -49,7 +49,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
         
     }
     
-    func handleError(error: NSError) {
+    func showErrorMessage(error: NSError) {
         
     }
     

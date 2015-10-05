@@ -20,7 +20,6 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.title = "Developer at River Plate"
         member.pictureUrl = "http://picture.com.ar"
         member.bio = "This is the bio"
-        member.location = "Buenos Aires, Argentina"
         member.twitter = "@el_enzo"
         member.irc = "irc"
         member.speakerRole = PresentationSpeaker()
@@ -53,7 +52,6 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         XCTAssertEqual(member.title, memberProfileDTO.title)
         XCTAssertEqual(member.pictureUrl, memberProfileDTO.pictureUrl)
         XCTAssertEqual(member.bio, memberProfileDTO.bio)
-        XCTAssertEqual(member.location, memberProfileDTO.location)
         XCTAssertEqual(member.twitter, memberProfileDTO.twitter)
         XCTAssertEqual(member.irc, memberProfileDTO.irc)
         XCTAssertEqual(1, memberProfileDTO.presentations.count)
@@ -68,7 +66,6 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.title = "Developer at River Plate"
         member.pictureUrl = "http://picture.com.ar"
         member.bio = "This is the bio"
-        member.location = "Buenos Aires, Argentina"
         member.twitter = "@el_enzo"
         member.irc = "irc"
         member.speakerRole = PresentationSpeaker()
@@ -116,7 +113,6 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.title = "Developer at River Plate"
         member.pictureUrl = "http://picture.com.ar"
         member.bio = "This is the bio"
-        member.location = "Buenos Aires, Argentina"
         member.twitter = "@el_enzo"
         member.irc = "irc"
         member.attendeeRole = SummitAttendee()
@@ -146,7 +142,6 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         XCTAssertEqual(member.title, memberProfileDTO.title)
         XCTAssertEqual(member.pictureUrl, memberProfileDTO.pictureUrl)
         XCTAssertEqual(member.bio, memberProfileDTO.bio)
-        XCTAssertEqual("", memberProfileDTO.location)
         XCTAssertEqual("", memberProfileDTO.twitter)
         XCTAssertEqual("", memberProfileDTO.irc)
         XCTAssertEqual(0, memberProfileDTO.presentations.count)

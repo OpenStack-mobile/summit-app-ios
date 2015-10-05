@@ -17,7 +17,7 @@ public protocol IGeneralScheduleViewController {
     var dayEvents: [ScheduleItemDTO]! { get set }
     var selectedDate: NSDate! { get set }
     
-    func handleError(error: NSError)
+    func showErrorMessage(error: NSError)
     func reloadSchedule()
     func showActivityIndicator()
     func hideActivityIndicator()
@@ -77,7 +77,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         tableView.reloadData()
     }
 
-    func handleError(error: NSError) {
+    func showErrorMessage(error: NSError) {
         
         
     }

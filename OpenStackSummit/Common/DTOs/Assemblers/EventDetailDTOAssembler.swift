@@ -35,7 +35,7 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
             eventDetailDTO.track = event.presentation!.track.name
             eventDetailDTO.tags = getTags(presentation)
             
-            var speakerDTO: SpeakerDTO
+            var speakerDTO: PresentationSpeakerDTO
             for speaker in presentation.speakers {
                 speakerDTO = speakerDTOAssembler.createDTO(speaker)
                 eventDetailDTO.speakers.append(speakerDTO)
