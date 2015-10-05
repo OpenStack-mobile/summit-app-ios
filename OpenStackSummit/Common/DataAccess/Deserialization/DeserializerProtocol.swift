@@ -29,14 +29,26 @@ public extension IDeserializer {
     func deserializeArray(json: String)  throws -> [BaseEntity] {
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         let jsonObject = JSON(data: data!)
+        let array = try deserializeArray(jsonObject)
+        return array
+    }
+
+    func deserializeArray(jsonObject : JSON)  throws -> [BaseEntity] {
         var array = [BaseEntity]()
         var entity: BaseEntity
-       
+        
         for (_, jsonElem) in jsonObject {
             entity = try deserialize(jsonElem)
             array.append(entity)
         }
         
+        return array
+    }
+    
+    func deserializePage(json: String)  throws -> [BaseEntity] {
+        let data = json.dataUsingEncoding(NSUTF8StringEncoding)
+        let jsonObject = JSON(data: data!)
+        let array = try deserializeArray(jsonObject["data"])
         return array
     }
 }

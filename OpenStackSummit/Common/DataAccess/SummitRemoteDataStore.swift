@@ -29,7 +29,7 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
                 return
             }
             
-            let json = responseObject as! String
+            let json = responseObject as! String		
             let summit : Summit
             var deserializer : IDeserializer!
             

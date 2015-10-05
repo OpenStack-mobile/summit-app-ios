@@ -26,6 +26,6 @@ public class EventDetailDTO: ScheduleItemDTO {
     
     public var eventDescription = ""
     public var tags = ""
-    public var speakers = [SpeakerDTO]()
+    public var speakers = [PresentationSpeakerDTO]()
     public var finished = false
 }

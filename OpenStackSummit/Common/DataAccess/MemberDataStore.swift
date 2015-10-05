@@ -72,9 +72,9 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
     
     public func addEventToMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {
         memberRemoteStorage.addEventToShedule(member.id, eventId: event.id) { error in
-            var addEventError = error
+            var innerError = error
             
-            defer { completionBlock(member, addEventError) }
+            defer { completionBlock(member, innerError) }
             
             if error != nil {
                 return
@@ -87,7 +87,7 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
                 }
             }
             catch {
-                addEventError = NSError(domain: "There was an error adding event to member schedule", code: 1001, userInfo: nil)
+                innerError = NSError(domain: "There was an error adding event to member schedule", code: 1001, userInfo: nil)
             }
        }
     }

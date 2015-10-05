@@ -33,7 +33,7 @@ public class EventDetailPresenter: NSObject {
     
     private func addEventToMyScheduleCallback(event: EventDetailDTO?, error: NSError?) {
         if (error != nil) {
-            viewController.handleError(error!)
+            viewController.showErrorMessage(error!)
         }
         viewController.didAddEventToMySchedule(event!)
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 public protocol ISummitAttendeeDataStore {
     
 }
