@@ -38,7 +38,7 @@ public class GeneralSchedulePresenter: NSObject {
             defer { self.viewController.hideActivityIndicator() }
             
             if (error != nil) {
-                self.viewController.handleError(error!)
+                self.viewController.showErrorMessage(error!)
                 return
             }
             

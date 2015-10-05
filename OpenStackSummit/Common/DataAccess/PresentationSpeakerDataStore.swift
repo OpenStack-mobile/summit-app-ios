@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+@objc
 public protocol IPresentationSpeakerDataStore {
     
 }

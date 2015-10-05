@@ -24,7 +24,7 @@ public class LoginPresenter: NSObject, ILoginPresenter {
                 self.loginWireframe.dismissLoginView()
             }
             else {
-                self.viewController.handleError(error!)
+                self.viewController.showErrorMessage(error!)
             }
         }
     }
@@ -35,7 +35,7 @@ public class LoginPresenter: NSObject, ILoginPresenter {
                 self.loginWireframe.dismissLoginView()
             }
             else {
-                self.viewController.handleError(error!)
+                self.viewController.showErrorMessage(error!)
             }
         }
     }

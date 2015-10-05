@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol ILoginViewController {
-    func handleError(error: NSError)
+    func showErrorMessage(error: NSError)
 }
 
 class LoginViewController: UIViewController {
@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func handleError(error: NSError) {
+    func showErrorMessage(error: NSError) {
         
     }
     

@@ -14,13 +14,13 @@ class EventDetailDTOAssemblerTests: BaseTests {
     
     class SpeakerDTOAssemblerMock : ISpeakerDTOAssembler {
         
-        var speakerDTO: SpeakerDTO
+        var speakerDTO: PresentationSpeakerDTO
         
-        init(speakerDTO: SpeakerDTO) {
+        init(speakerDTO: PresentationSpeakerDTO) {
             self.speakerDTO = speakerDTO
         }
         
-        @objc func createDTO(member: PresentationSpeaker) -> SpeakerDTO {
+        @objc func createDTO(member: PresentationSpeaker) -> PresentationSpeakerDTO {
             return speakerDTO
         }
     }
@@ -62,12 +62,11 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.presentation?.tags.append(tag2)
         event.venueRoom = venueRoom
         
-        let speakerDTO = SpeakerDTO()
+        let speakerDTO = PresentationSpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
         let scheduleItemDTO = ScheduleItemDTO()
         let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
         let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
-        let timezone = "Asia/Tokyo"
         
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
@@ -96,12 +95,11 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(32998050000))
         event.venue = venue
         
-        let speakerDTO = SpeakerDTO()
+        let speakerDTO = PresentationSpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
         let scheduleItemDTO = ScheduleItemDTO()
         let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
         let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
-        let timezone = "Asia/Tokyo"
 
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
