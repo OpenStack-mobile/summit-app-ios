@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IPresentationSpeakerRemoteDataStore {
     func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void)
+    func getById(id: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void)
 }
 
 public class PresentationSpeakerRemoteDataStore: NSObject {
@@ -43,4 +44,32 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
             completionBlock(speakers, innerError)
         }
     }
+    
+    public func getById(id: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void) {
+        let http = httpFactory.create(HttpType.ServiceAccount)
+        
+        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/speakers/\(id)") {(responseObject, error) in
+            if (error != nil) {
+                completionBlock(nil, error)
+                return
+            }
+            
+            let json = responseObject as! String
+            let deserializer : IDeserializer!
+            var innerError: NSError?
+            var speaker: PresentationSpeaker?
+            
+            deserializer = self.deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
+            
+            do {
+                speaker = try deserializer.deserialize(json) as? PresentationSpeaker
+            }
+            catch {
+                innerError = NSError(domain: "There was an error deserializing presentation speaker", code: 3002, userInfo: nil)
+            }
+            
+            completionBlock(speaker, innerError)
+        }
+    }
+    
 }

@@ -10,50 +10,41 @@ import UIKit
 
 @objc
 public protocol IMemberProfileInteractor {
-    func getMember(memberId: Int, completionBlock : (MemberProfileDTO?, NSError?) -> Void)
-    func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void)
+    func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void)
+    func getAttendeeProfile(speakerId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void)
     func isLoggedIn() -> Bool
 }
 
 public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
-    var memberDataStore: IMemberDataStore!
-    var memberProfileDTOAssembler: IMemberProfileDTOAssembler!
+    
+    var presentationSpeakerRemoteDataStore: IPresentationSpeakerRemoteDataStore!
+    var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
+    var summitAttendeeDTOAssembler: ISummitAttendeeDTOAssembler!
+    var presentationSpeakerDTOAssembler: IPresentationSpeakerDTOAssembler!
     var securityManager: SecurityManager!
     
-    public override init() {
-        super.init()
-    }
-    
-    public init(memberDataStore: IMemberDataStore, securityManager: SecurityManager) {
-        self.memberDataStore = memberDataStore
-        self.securityManager = securityManager
-    }
-    
-    public func getMember(memberId: Int, completionBlock : (MemberProfileDTO?, NSError?) -> Void) {
-        memberDataStore.getById(memberId) { member, error in
-            if (error == nil) {
-                let showFullProfile = self.isFullProfileAllowed(member!)
-                let memberProfileDTO = self.memberProfileDTOAssembler.createDTO(member!, full: showFullProfile)
-                completionBlock(memberProfileDTO, error)
+    public func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void) {
+        presentationSpeakerRemoteDataStore.getById(speakerId) { speaker, error in
+            
+            if (error != nil) {
+                completionBlock(nil, error)
             }
+            
+            let speakerDTO = self.presentationSpeakerDTOAssembler.createDTO(speaker!)
+            completionBlock(speakerDTO, error)
         }
     }
     
-    public func isFullProfileAllowed(member: Member) -> Bool {
-        var allow = false
-        if let currentMember = securityManager.getCurrentMember() {
-            if (currentMember.id == member.id) {
-                allow = true
+    public func getAttendeeProfile(attendeeId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void) {
+        summitAttendeeRemoteDataStore.getById(attendeeId) { attendee, error in
+            
+            if (error != nil) {
+                completionBlock(nil, error)
             }
-            else if (currentMember.isFriend(member)) {
-                allow = true
-            }
+            
+            let attendeeDTO = self.summitAttendeeDTOAssembler.createDTO(attendee!)
+            completionBlock(attendeeDTO, error)
         }
-        return allow
-    }
-    
-    public func requestFriendship(memberId: Int, completionBlock: (NSError?) -> Void) {
-        completionBlock(nil)
     }
     
     public func isLoggedIn() -> Bool {

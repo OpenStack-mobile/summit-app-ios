@@ -12,11 +12,15 @@ import Typhoon
 public class MemberProfileAssembly: TyphoonAssembly {
     var loginAssembly: LoginAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
-
+    var remoteDataStoresAssembly: RemoteDataStoresAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
+    var applicationAssembly: ApplicationAssembly!
+    
     dynamic func memberProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileWireframe.self) {
             (definition) in
             definition.injectProperty("loginWireframe", with: self.loginAssembly.loginWireframe())
+            definition.injectProperty("memberProfileViewController", with: self.memberProfileViewController())
         }
     }
     
@@ -46,8 +50,10 @@ public class MemberProfileAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MemberProfileInteractor.self) {
             (definition) in
             
-            definition.injectProperty("memberDataStore", with: self.memberProfileDataStore())
-            definition.injectProperty("memberProfileDTOAssembler", with: self.memberProfileDTOAssembler())
+            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.remoteDataStoresAssembly.presentationSpeakerRemoteDataStore())
+            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.remoteDataStoresAssembly.summitAttendeeRemoteDataStore())
+            definition.injectProperty("summitAttendeeDTOAssembler", with: self.dtoAssemblersAssembly.summitAttendeeDTOAssembler())
+            definition.injectProperty("presentationSpeakerDTOAssembler", with: self.dtoAssemblersAssembly.presentationSpeakerDTOAssembler())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
@@ -57,10 +63,13 @@ public class MemberProfileAssembly: TyphoonAssembly {
     }
     
     dynamic func memberProfileViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(MemberProfileViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.memberProfilePresenter())
-        }
+            factoryMethod.injectParameterWith("MemberProfileViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.memberProfilePresenter())
+        })
     }
 }

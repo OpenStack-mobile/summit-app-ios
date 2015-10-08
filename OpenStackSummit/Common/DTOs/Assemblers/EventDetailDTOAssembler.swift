@@ -14,14 +14,14 @@ public protocol IEventDetailDTOAssembler {
 }
 
 public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
-    var speakerDTOAssembler: ISpeakerDTOAssembler!
+    var speakerDTOAssembler: IPresentationSpeakerDTOAssembler!
     var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
     
     public override init() {
         super.init()
     }
 
-    public init(speakerDTOAssembler: ISpeakerDTOAssembler, scheduleItemDTOAssembler: IScheduleItemDTOAssembler) {
+    public init(speakerDTOAssembler: IPresentationSpeakerDTOAssembler, scheduleItemDTOAssembler: IScheduleItemDTOAssembler) {
         self.speakerDTOAssembler = speakerDTOAssembler
         self.scheduleItemDTOAssembler = scheduleItemDTOAssembler
     }

@@ -10,9 +10,6 @@ import Foundation
 import RealmSwift
 
 public class PresentationSpeaker: Person {
-
-    public dynamic var isPresentationOwner = false
-    public dynamic var memberId = 0
     
     public var presentations: [Presentation] {
         return linkingObjects(Presentation.self, forProperty: "speakers")

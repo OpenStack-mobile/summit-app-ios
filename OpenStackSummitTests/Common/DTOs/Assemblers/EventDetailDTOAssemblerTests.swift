@@ -12,7 +12,7 @@ import RealmSwift
 
 class EventDetailDTOAssemblerTests: BaseTests {
     
-    class SpeakerDTOAssemblerMock : ISpeakerDTOAssembler {
+    class SpeakerDTOAssemblerMock : IPresentationSpeakerDTOAssembler {
         
         var speakerDTO: PresentationSpeakerDTO
         

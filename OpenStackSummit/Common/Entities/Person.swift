@@ -18,4 +18,5 @@ public class Person: BaseEntity {
     public dynamic var twitter = ""
     public dynamic var irc = ""
     public dynamic var email = ""
+    public dynamic var memberId = 0
 }

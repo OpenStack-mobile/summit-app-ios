@@ -11,14 +11,15 @@ import Typhoon
 
 class PeopleAssembly: TyphoonAssembly {
     var remoteDataStoresAssembly: RemoteDataStoresAssembly!
+    var dtoAssemblersAsembly: DTOAssemblersAssembly!
+    var memberProfileAssembly: MemberProfileAssembly!
     
     dynamic func peopleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(PeopleWireframe.self) {
             (definition) in
-            
-            //definition.injectProperty("peopleViewController", with: self.peopleViewController())
-            //definition.injectProperty("eventDetailWireframe", with: self.eventDetailAssembly.eventDetailWireframe())
-        }
+            definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
+            definition.injectProperty("peopleViewController", with: self.peopleViewController())
+       }
     }
     
     dynamic func peoplePresenter() -> AnyObject {
@@ -38,12 +39,8 @@ class PeopleAssembly: TyphoonAssembly {
             
             definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.remoteDataStoresAssembly.presentationSpeakerRemoteDataStore())
             definition.injectProperty("summitAttendeeRemoteDataStore", with: self.remoteDataStoresAssembly.summitAttendeeRemoteDataStore())
-            definition.injectProperty("personDTOAssembler", with: self.personListItemDTOAssembler())
+            definition.injectProperty("personDTOAssembler", with: self.dtoAssemblersAsembly.personListItemDTOAssembler())
         }
-    }
-        
-    dynamic func personListItemDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(PersonListItemDTOAssembler.self)
     }
     
     dynamic func peopleEventDataStore() -> AnyObject {

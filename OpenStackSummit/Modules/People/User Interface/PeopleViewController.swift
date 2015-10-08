@@ -14,6 +14,7 @@ public protocol IPeopleViewController {
     var presenter: IPeoplePresenter! { get set }
     var searchTerm: String! { get set }
     var people: [PersonListItemDTO]! { get set }
+    var navigationController: UINavigationController? { get }
     
     func reloadData()
     func showErrorMessage(error: NSError)
@@ -38,7 +39,7 @@ class PeopleViewController: RevealViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
         
         tableView.reloadData()
-    }
+   }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -57,7 +57,6 @@
 		<string>DataStoreAssembly</string>
 		<string>MemberDataStoreAssembly</string>
 		<string>MemberProfileAssembly</string>
-		<string>MemberRemoteDataStoreAssembly</string>
 		<string>VenueListAssembly</string>
 		<string>VenueDetailAssembly</string>
 		<string>VenueRoomDetailAssembly</string>
@@ -68,6 +67,7 @@
 		<string>DataUpdateAssembly</string>
 		<string>PeopleAssembly</string>
 		<string>RemoteDataStoresAssembly</string>
+		<string>DTOAssemblersAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
