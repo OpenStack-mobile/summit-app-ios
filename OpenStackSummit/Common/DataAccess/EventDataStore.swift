@@ -30,7 +30,6 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         }
 
         var eventArray = events.map{$0}
-        print(eventArray)
         if (summitTypes != nil) {
             eventArray = eventArray.filter() {
                 for summitTypeId in summitTypes! {

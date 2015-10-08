@@ -22,6 +22,8 @@ public protocol IGeneralSchedulePresenter {
     func reloadSchedule()
     func showEventDetail(eventId: Int)
     func viewLoad()
+    func buildCell(cell: IGeneralScheduleTableViewCell, index: Int)
+    func getDayEventsCount() -> Int
 }
 
 public class GeneralSchedulePresenter: NSObject {
@@ -31,6 +33,7 @@ public class GeneralSchedulePresenter: NSObject {
     var generalScheduleWireframe : IGeneralScheduleWireframe!
     var session: ISession!
     var summitTimeZoneOffsetToLocalTimeZone: Int!
+    var dayEvents: [ScheduleItemDTO]!
     
     public func viewLoad() {
         viewController.showActivityIndicator()
@@ -55,17 +58,27 @@ public class GeneralSchedulePresenter: NSObject {
         let startDate = viewController.selectedDate.mt_dateSecondsAfter(-summitTimeZoneOffsetToLocalTimeZone)
         let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-summitTimeZoneOffsetToLocalTimeZone)
         
-        let events = self.interactor.getScheduleEvents(
+        dayEvents = self.interactor.getScheduleEvents(
             startDate,
             endDate: endDate,
             eventTypes: filterSelections?[FilterSectionTypes.EventType],
             summitTypes: filterSelections?[FilterSectionTypes.SummitType]
         )
-        self.viewController.dayEvents = events
         self.viewController.reloadSchedule()
     }
     
-    func showEventDetail(eventId: Int) {
-        self.generalScheduleWireframe.showEventDetail(eventId)
+    public func buildCell(cell: IGeneralScheduleTableViewCell, index: Int){
+        let event = dayEvents[index]
+        cell.eventTitle = event.title
+        cell.timeAndPlace = event.date
+    }
+    
+    func getDayEventsCount() -> Int {
+        return dayEvents.count
+    }
+    
+    func showEventDetail(index: Int) {
+        let event = dayEvents[index]
+        self.generalScheduleWireframe.showEventDetail(event.id)
     }
 }

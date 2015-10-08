@@ -10,24 +10,24 @@ import UIKit
 
 @objc
 public protocol IPeopleInteractor {
-    func getSpeakersByFilter(saerchTerm: String, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
-    func getAttendeesByFilter(saerchTerm: String, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
+    func getSpeakersByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
+    func getAttendeesByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
 }
 
 public class PeopleInteractor: NSObject, IPeopleInteractor {
     var presentationSpeakerRemoteDataStore: IPresentationSpeakerRemoteDataStore!
-    var summitAttendeeRemoteDataStore: ISummitAttendeeDataStore!
+    var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
     var personDTOAssembler: PersonListItemDTOAssembler!
     
-    public func getSpeakersByFilter(saerchTerm: String, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
+    public func getSpeakersByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
         presentationSpeakerRemoteDataStore.getByFilter(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in
             
             self.getByFilterCallback(speakers, error: error, completionBlock: completionBlock)
         }
     }
     
-    public func getAttendeesByFilter(saerchTerm: String, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
-        presentationSpeakerRemoteDataStore.getByFilter(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (attendees, error) in
+    public func getAttendeesByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
+        summitAttendeeRemoteDataStore.getByFilter(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (attendees, error) in
 
             self.getByFilterCallback(attendees, error: error, completionBlock: completionBlock)
         }
