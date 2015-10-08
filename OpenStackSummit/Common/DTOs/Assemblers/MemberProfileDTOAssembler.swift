@@ -13,7 +13,7 @@ public protocol IMemberProfileDTOAssembler {
     func createDTO(member: Member, full: Bool) -> MemberProfileDTO
 }
 
-public class MemberProfileDTOAssembler: NSObject {
+public class MemberProfileDTOAssembler: NSObject, IMemberProfileDTOAssembler {
     var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
 
     public override init() {

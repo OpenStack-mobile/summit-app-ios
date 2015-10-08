@@ -31,4 +31,20 @@ class RemoteDataStoresAssembly: TyphoonAssembly {
             definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
         }
     }
+    
+    dynamic func memberRemoteDataStore() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(MemberRemoteDataStore.self) {
+            (definition) in
+            definition.injectProperty("deserializerFactory", with: self.dataStoreAssembly.deserializerFactory())
+            definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
+        }
+    }
+    
+    dynamic func feedbackRemoteDataStore() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(FeedbackRemoteDataStore.self) {
+            (definition) in
+        }
+    }
 }

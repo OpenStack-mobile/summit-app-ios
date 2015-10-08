@@ -40,7 +40,7 @@ class EventDetailAssembly: TyphoonAssembly {
     }
     
     dynamic func speakerDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(SpeakerDTOAssembler.self)
+        return TyphoonDefinition.withClass(PresentationSpeakerDTOAssembler.self)
     }
     
     dynamic func scheduleItemDTOAssembler() -> AnyObject {

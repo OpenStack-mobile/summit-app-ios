@@ -10,6 +10,9 @@ import UIKit
 
 @objc
 public protocol IMemberProfileViewController {
+    var name: String! { get set }
+    var personTitle: String! { get set }
+    
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()
     func handlerError(error: NSError)
@@ -17,12 +20,31 @@ public protocol IMemberProfileViewController {
 
 class MemberProfileViewController: UIViewController, IMemberProfileViewController {
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var name: String!{
+        get {
+            return nameLabel.text
+        }
+        set {
+            nameLabel.text = newValue
+        }
+    }
+    
+    var personTitle: String!{
+        get {
+            return titleLabel.text
+        }
+        set {
+            titleLabel.text = newValue
+        }
+    }
+    
     var presenter: IMemberProfilePresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        presenter.showMemberProfile()
     }
     
     override func didReceiveMemoryWarning() {
