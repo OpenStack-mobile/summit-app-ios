@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 @objc
 public protocol IPeopleViewController {
@@ -16,6 +17,8 @@ public protocol IPeopleViewController {
     
     func reloadData()
     func showErrorMessage(error: NSError)
+    func showActivityIndicator()
+    func hideActivityIndicator()    
 }
 
 class PeopleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, IPeopleViewController {
@@ -46,21 +49,25 @@ class PeopleViewController: RevealViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return people!.count;
+        return presenter.getPeopleCount();
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let person = people![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
-        
-        cell.nameLabel.text = person.name
-        cell.titleLabel.text = person.title;
-        
+        presenter.buildCell(cell, index: indexPath.row)
         return cell
     }
     

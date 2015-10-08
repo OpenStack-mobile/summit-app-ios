@@ -8,26 +8,39 @@
 
 import UIKit
 
-public class SummitAttendeeRemoteDataStore: NSObject {
+@objc
+public protocol ISummitAttendeeRemoteDataStore {
+    func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([SummitAttendee]?, NSError?) -> Void)
+}
+
+public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataStore {
     var deserializerFactory: DeserializerFactory!
     var httpFactory: HttpFactory!
     
-    public func getByFilter(searchTerm: String, page: Int, recordsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void) {
+    public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([SummitAttendee]?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/speakers") {(responseObject, error) in
+        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/attendees") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
             }
             
             let json = responseObject as! String
-            var deserializer : IDeserializer!
+            let deserializer : IDeserializer!
+            var innerError: NSError?
+            var attendees: [SummitAttendee]?
             
-            deserializer = self.deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
-            let speakers = try! deserializer.deserializePage(json) as! [PresentationSpeaker]
+            deserializer = self.deserializerFactory.create(DeserializerFactoryType.SummitAttendee)
             
-            completionBlock(speakers, error)
+            do {
+                attendees = try deserializer.deserializePage(json) as? [SummitAttendee]
+            }
+            catch {
+                innerError = NSError(domain: "There was an error deserializing summit attendees", code: 3001, userInfo: nil)
+            }
+            
+            completionBlock(attendees, innerError)
         }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class SummitAttendee: BaseEntity {
+public class SummitAttendee: Person {
     public var ticketType: TicketType!
     public let scheduledEvents = List<SummitEvent>()
     public let bookmarkedEvents = List<SummitEvent>()

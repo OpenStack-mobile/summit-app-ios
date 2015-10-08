@@ -7,9 +7,31 @@
 //
 
 import UIKit
+@objc
+public protocol IGeneralScheduleTableViewCell : class {
+    var eventTitle: String! { get set }
+    var timeAndPlace: String! { get set }
+}
 
-class GeneralScheduleTableViewCell: UITableViewCell {
-
+class GeneralScheduleTableViewCell: UITableViewCell, IGeneralScheduleTableViewCell {
+    var eventTitle: String!{
+        get {
+            return eventTitleLabel.text
+        }
+        set {
+            eventTitleLabel.text = newValue
+        }
+    }
+    
+    var timeAndPlace: String!{
+        get {
+            return timeAndPlaceLabel.text
+        }
+        set {
+            timeAndPlaceLabel.text = newValue
+        }
+    }
+    
     @IBOutlet weak var eventTitleLabel : UILabel!
     @IBOutlet weak var timeAndPlaceLabel : UILabel!
     
