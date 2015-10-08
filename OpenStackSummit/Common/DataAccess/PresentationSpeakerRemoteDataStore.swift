@@ -10,14 +10,14 @@ import UIKit
 
 @objc
 public protocol IPresentationSpeakerRemoteDataStore {
-    func getByFilter(searchTerm: String, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void)
+    func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void)
 }
 
 public class PresentationSpeakerRemoteDataStore: NSObject {
     var deserializerFactory: DeserializerFactory!
     var httpFactory: HttpFactory!
     
-    public func getByFilter(searchTerm: String, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void) {
+    public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
         http.GET("https://dev-resource-server/api/v1/summits/current/speakers") {(responseObject, error) in

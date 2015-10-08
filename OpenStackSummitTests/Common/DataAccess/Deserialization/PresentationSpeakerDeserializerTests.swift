@@ -25,9 +25,8 @@ class PresentationSpeakerDeserializerTests: XCTestCase {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
-        
         let deserializer = PresentationSpeakerDeserializer(deserializerStorage: deserializerStorage)
-        let json = "{\"id\":173,\"first_name\":\"Michael\",\"last_name\":\"Johnson\",\"title\":\"Software Engineer\",\"bio\":\"test bio\",\"irc\":\"test irc\",\"twitter\":\"test twitter\",\"member_id\":1}"
+        let json = "{\"id\":173,\"first_name\":\"Michael\",\"last_name\":\"Johnson\",\"title\":\"Software Engineer\",\"bio\":\"test bio\",\"irc\":\"test irc\",\"twitter\":\"test twitter\",\"member_id\":1,\"presentations\":[3591]}"
         
         
         //Act

@@ -14,7 +14,6 @@ import SwiftSpinner
 public protocol IGeneralScheduleViewController {
     var startDate: NSDate! { get set }
     var endDate: NSDate! { get set }
-    var dayEvents: [ScheduleItemDTO]! { get set }
     var selectedDate: NSDate! { get set }
     
     func showErrorMessage(error: NSError)
@@ -31,7 +30,6 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
     var presenter : IGeneralSchedulePresenter!
-    var dayEvents : [ScheduleItemDTO]!
     var startDate: NSDate! {
         get {
             return dayPicker.startDate
@@ -101,22 +99,17 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dayEvents!.count;
+        return presenter.getDayEventsCount();
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let event = dayEvents![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleTableViewCell
-        
-        cell.eventTitleLabel.text = event.title;
-        cell.timeAndPlaceLabel.text = event.date
-        
+        presenter.buildCell(cell, index: indexPath.row)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        let event = dayEvents![indexPath.row]
-        self.presenter.showEventDetail(event.id)
+        self.presenter.showEventDetail(indexPath.row)
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
