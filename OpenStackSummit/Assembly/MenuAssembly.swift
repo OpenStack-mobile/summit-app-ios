@@ -25,6 +25,7 @@ public class MenuAssembly: TyphoonAssembly {
     
     dynamic func menuPresenter() -> AnyObject {
         return TyphoonDefinition.withClass(MenuPresenter.self) {
+  
             (definition) in
             
             definition.injectProperty("interactor", with: self.menuInteractor())

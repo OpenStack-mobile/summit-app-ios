@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class PresentationSpeakerDTO: NSObject {
-    public var id = 0
-    public var name = ""
+public class PresentationSpeakerDTO: PersonListItemDTO {
+    public var bio = ""
+    public var presentations: [ScheduleItemDTO]?
 }

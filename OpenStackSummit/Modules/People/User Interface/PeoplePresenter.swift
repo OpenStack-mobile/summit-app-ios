@@ -74,6 +74,7 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
     }
     
     public func showPersonProfile(index: Int) {
-        
+        let person = attendees[index]
+        wireframe.showAttendeeProfile(person.id)
     }
 }

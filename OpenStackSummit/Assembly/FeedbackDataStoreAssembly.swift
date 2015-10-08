@@ -11,13 +11,13 @@ import Typhoon
 
 public class FeedbackDataStoreAssembly: TyphoonAssembly {
     
-    var feedbackRemoteDataStoreAssembly: FeedbackRemoteDataStoreAssembly!
+    var remoteDataStoresAssembly: RemoteDataStoresAssembly!
     
     public dynamic func feedbackDataStore() -> AnyObject {
         
         return TyphoonDefinition.withClass(FeedbackDataStore.self) {
             (definition) in
-            definition.injectProperty("feedbackRemoteDataStore", with: self.feedbackRemoteDataStoreAssembly.feedbackRemoteDataStore())
+            definition.injectProperty("feedbackRemoteDataStore", with: self.remoteDataStoresAssembly.feedbackRemoteDataStore())
         }
     }
 }
