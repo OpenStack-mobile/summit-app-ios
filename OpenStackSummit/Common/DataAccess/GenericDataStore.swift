@@ -17,17 +17,17 @@ public class GenericDataStore: NSObject {
         super.init()
     }
     
-    public func getByIdFromLocal<T: BaseEntity>(id: Int) -> T? {
+    public func getByIdLocal<T: BaseEntity>(id: Int) -> T? {
         let entity = realm.objects(T.self).filter("id = \(id)").first
         return entity
     }
 
-    public func getAllFromLocal<T: BaseEntity>() -> [T] {
+    public func getAllLocal<T: BaseEntity>() -> [T] {
         let entities = realm.objects(T.self)
         return entities.map { $0 }
     }
     
-    public func saveOrUpdateToLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)?) {
+    public func saveOrUpdateLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)?) {
 
         do {
             try realm.write {
@@ -51,7 +51,7 @@ public class GenericDataStore: NSObject {
         }
     }
     
-    public func deleteFromLocal<T: BaseEntity>(entity: T, completionBlock : (NSError? -> Void)!) {
+    public func deleteLocal<T: BaseEntity>(entity: T, completionBlock : (NSError? -> Void)!) {
         do {
             try realm.write {
                 self.realm.delete(entity)

@@ -120,4 +120,12 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
         self.presenter.reloadSchedule()
     }
+        
+    @IBAction func toggleSchedule(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview as! GeneralScheduleTableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+        presenter.toggleEventFromSchedule(indexPath!.row, cell: cell)
+    }
 }

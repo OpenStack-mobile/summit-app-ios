@@ -67,7 +67,7 @@ class SummitDataStoreTests: XCTestCase {
         self.waitForExpectationsWithTimeout(5.0, handler: nil)
     }
     
-    func test_getActive_thereIsOneSummitOnLocalDatabase_returnsCorrectInstanceFromLocalDatabase() {
+    func test_getActive_thereIsOneSummitOnLocalDatabase_returnsCorrectInstanceLocalDatabase() {
         // Arrange
         let dummySummit = Summit()
         dummySummit.id = 2

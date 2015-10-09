@@ -18,7 +18,7 @@ public class VenueRoomDetailInteractor: NSObject, IVenueRoomDetailInteractor {
     var venueRoomDetailDTOAssembler: IVenueRoomDetailDTOAssembler!
 
     public func getVenueRoom(venueRoomId: Int) -> VenueRoomDetailDTO? {
-        let venueRoom = venueRoomDataStore.getByIdFromLocal(venueRoomId)
+        let venueRoom = venueRoomDataStore.getByIdLocal(venueRoomId)
         let venueRoomDetailDTO = venueRoomDetailDTOAssembler.createDTO(venueRoom!)
 
         return venueRoomDetailDTO

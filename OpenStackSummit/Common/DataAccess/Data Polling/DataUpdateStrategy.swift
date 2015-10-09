@@ -22,9 +22,9 @@ public class DataUpdateStrategy: NSObject {
     public func process(dataUpdate: DataUpdate) throws {
         switch dataUpdate.operation! {
         case .Insert, .Update:
-            genericDataStore.saveOrUpdateToLocal(dataUpdate.entity, completionBlock: nil)
+            genericDataStore.saveOrUpdateLocal(dataUpdate.entity, completionBlock: nil)
         case .Delete:
-            genericDataStore.deleteFromLocal(dataUpdate.entity, completionBlock: nil)
+            genericDataStore.deleteLocal(dataUpdate.entity, completionBlock: nil)
         }
     }
 }

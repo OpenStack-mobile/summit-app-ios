@@ -10,8 +10,8 @@ import UIKit
 
 @objc
 public protocol IDataUpdateDataStore {
-    func getGeneralUpdatesAfterIdFromOrigin(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)
-    func saveOrUpdateToLocal(entity: DataUpdate, completionBlock: ((DataUpdate?, NSError?) -> Void)?)
+    func getGeneralUpdatesAfterIdOrigin(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)
+    func saveOrUpdateLocal(entity: DataUpdate, completionBlock: ((DataUpdate?, NSError?) -> Void)?)
     func getLatestDataUpdate() -> DataUpdate?
 }
 
@@ -22,12 +22,12 @@ public class DataUpdateDataStore: GenericDataStore, IDataUpdateDataStore {
         super.init()
     }
     
-    public func getGeneralUpdatesAfterIdFromOrigin(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void) {
+    public func getGeneralUpdatesAfterIdOrigin(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void) {
         dataUpdateRemoteDataStore.getGeneralUpdatesAfterId(id, completionBlock: completionBlock)
     }
     
-    public func saveOrUpdateToLocal(entity: DataUpdate, completionBlock: ((DataUpdate?, NSError?) -> Void)?) {
-        super.saveOrUpdateToLocal(entity, completionBlock: completionBlock)
+    public func saveOrUpdateLocal(entity: DataUpdate, completionBlock: ((DataUpdate?, NSError?) -> Void)?) {
+        super.saveOrUpdateLocal(entity, completionBlock: completionBlock)
     }
     
     public func getLatestDataUpdate() -> DataUpdate? {
