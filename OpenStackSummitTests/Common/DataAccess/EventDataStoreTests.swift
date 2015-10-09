@@ -27,7 +27,7 @@ class EventDataStoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_getByFilterFromLocal_validDateRangeAndEventTypesIsNilAndSummitTypesIsNilAndTwoEventsMatch_ReturnsEventListWithTwoElements() {
+    func test_getByFilterLocal_validDateRangeAndEventTypesIsNilAndSummitTypesIsNilAndTwoEventsMatch_ReturnsEventListWithTwoElements() {
         // Arrange
         var event = SummitEvent()
         
@@ -53,13 +53,13 @@ class EventDataStoreTests: XCTestCase {
         let endDate =  NSDate(timeIntervalSince1970: 1443018930)
         
         // Act
-        let events = eventDataStore.getByFilterFromLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil)
         
         // Assert
         XCTAssertEqual(2, events.count)
     }
 
-    func test_getByFilterFromLocal_validDateRangeAndEventTypesIsNilAndSummitTypesIsNilAndNoEventsMatch_ReturnsEmptyEventList() {
+    func test_getByFilterLocal_validDateRangeAndEventTypesIsNilAndSummitTypesIsNilAndNoEventsMatch_ReturnsEmptyEventList() {
         // Arrange
         var event = SummitEvent()
         
@@ -85,13 +85,13 @@ class EventDataStoreTests: XCTestCase {
         let endDate =  NSDate(timeIntervalSince1970: 1543018930)
         
         // Act
-        let events = eventDataStore.getByFilterFromLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil)
         
         // Assert
         XCTAssertEqual(0, events.count)
     }
     
-    func test_getByFilterFromLocal_validDateRangeAndEventTypesContainsOneElementAndSummitTypesContainsOneElementAndOneEventMatch_ReturnsEventListWithOneElement() {
+    func test_getByFilterLocal_validDateRangeAndEventTypesContainsOneElementAndSummitTypesContainsOneElementAndOneEventMatch_ReturnsEventListWithOneElement() {
         // Arrange
         let summitType1 = SummitType()
         summitType1.id = 1
@@ -130,13 +130,13 @@ class EventDataStoreTests: XCTestCase {
         let summitTypes = [2]
         
         // Act
-        let events = eventDataStore.getByFilterFromLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
         
         // Assert
         XCTAssertEqual(1, events.count)
     }
     
-    func test_getByFilterFromLocal_validDateRangeAndEventTypesContainsOneElementAndSummitTypesContainsOneElementAndNoEventMatch_ReturnsEmptyList() {
+    func test_getByFilterLocal_validDateRangeAndEventTypesContainsOneElementAndSummitTypesContainsOneElementAndNoEventMatch_ReturnsEmptyList() {
         // Arrange
         let summitType1 = SummitType()
         summitType1.id = 1
@@ -175,7 +175,7 @@ class EventDataStoreTests: XCTestCase {
         let summitTypes = [2]
         
         // Act
-        let events = eventDataStore.getByFilterFromLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
         
         // Assert
         XCTAssertEqual(0, events.count)

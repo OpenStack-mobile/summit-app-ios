@@ -12,6 +12,8 @@ import Typhoon
 class GeneralScheduleAssembly: TyphoonAssembly {
     var eventDetailAssembly: EventDetailAssembly!
     var summitDataStoreAssembly: SummitDataStoreAssembly!
+    var memberDataStore: MemberDataStoreAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
     
     dynamic func generalScheduleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleWireframe.self) {
@@ -42,6 +44,8 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("summitDTOAssembler", with: self.summitDTOAssembler())
             definition.injectProperty("eventDataStore", with: self.generalScheduleEventDataStore())
             definition.injectProperty("scheduleItemDTOAssembler", with: self.generalScheduleScheduleItemDTOAssembler())
+            definition.injectProperty("memberDataStore", with: self.memberDataStore.memberDataStore())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     

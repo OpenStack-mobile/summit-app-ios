@@ -35,6 +35,6 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
     }
     
     public func saveFeedback(rate: Int, review: String) {
-       
+
     }
 }

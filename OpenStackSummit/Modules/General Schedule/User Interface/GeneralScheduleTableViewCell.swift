@@ -11,6 +11,7 @@ import UIKit
 public protocol IGeneralScheduleTableViewCell : class {
     var eventTitle: String! { get set }
     var timeAndPlace: String! { get set }
+    var scheduledButtonText: String! { get set }
 }
 
 class GeneralScheduleTableViewCell: UITableViewCell, IGeneralScheduleTableViewCell {
@@ -32,8 +33,18 @@ class GeneralScheduleTableViewCell: UITableViewCell, IGeneralScheduleTableViewCe
         }
     }
     
+    var scheduledButtonText: String! {
+        get {
+            return scheduleButton.titleForState(.Normal)
+        }
+        set {
+            scheduleButton.setTitle(newValue, forState: .Normal)
+        }
+    }
+    
     @IBOutlet weak var eventTitleLabel : UILabel!
     @IBOutlet weak var timeAndPlaceLabel : UILabel!
+    @IBOutlet weak var scheduleButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,5 +56,4 @@ class GeneralScheduleTableViewCell: UITableViewCell, IGeneralScheduleTableViewCe
 
         // Configure the view for the selected state
     }
-
 }

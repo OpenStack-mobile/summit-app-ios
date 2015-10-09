@@ -11,6 +11,6 @@ import UIKit
 public protocol IDataStore {
     
     func get(id: Int, completionBlock : (BaseEntity?) -> Void)
-    func saveOrUpdateToLocal(entity: BaseEntity, completionBlock : ((BaseEntity) -> Void)!)
+    func saveOrUpdateLocal(entity: BaseEntity, completionBlock : ((BaseEntity) -> Void)!)
     func delete(entity: BaseEntity, completionBlock : ((Void) -> Void)!)
 }
