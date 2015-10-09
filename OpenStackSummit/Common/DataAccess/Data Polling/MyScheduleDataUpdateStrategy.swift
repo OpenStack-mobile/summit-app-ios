@@ -27,9 +27,9 @@ public class MyScheduleDataUpdateStrategy: DataUpdateStrategy {
 
         switch dataUpdate.operation! {
         case .Insert, .Update:
-            try memberDataStore.addEventToMemberSheduleToLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
+            try memberDataStore.addEventToMemberSheduleLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
         case .Delete:
-            try memberDataStore.removeEventToMemberSheduleToLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
+            try memberDataStore.removeEventFromMemberSheduleLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
         }
     }
 }

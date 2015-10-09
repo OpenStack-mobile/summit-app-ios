@@ -12,7 +12,7 @@ import RealmSwift
 @objc
 public protocol ISummitDataStore {
     func getActive(completionBlock : (Summit?, NSError?) -> Void)
-    func getSummitTypesFromLocal() -> [SummitType]
+    func getSummitTypesLocal() -> [SummitType]
 }
 
 public class SummitDataStore: GenericDataStore, ISummitDataStore {
@@ -38,11 +38,11 @@ public class SummitDataStore: GenericDataStore, ISummitDataStore {
                 return
             }
             
-            self.saveOrUpdateToLocal(summit!, completionBlock: completionBlock)
+            self.saveOrUpdateLocal(summit!, completionBlock: completionBlock)
         }
     }
     
-    public func getSummitTypesFromLocal() -> [SummitType] {
+    public func getSummitTypesLocal() -> [SummitType] {
         let summitTypes = realm.objects(SummitType.self)
         return summitTypes.map { $0 }
     }

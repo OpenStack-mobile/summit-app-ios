@@ -60,7 +60,7 @@ public class SecurityManager: NSObject {
                 return
             }
             
-            self.memberDataStore.getLoggedInMemberFromOrigin() { (member, error) in
+            self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
                 
                 if (error != nil) {
                     completionBlock(error)
@@ -98,7 +98,7 @@ public class SecurityManager: NSObject {
     public func getCurrentMember() -> Member? {
         var currentMember: Member?
         if (oauthModuleOpenID.isAuthorized() && session.get(kCurrentMemberId) != nil) {
-            currentMember = memberDataStore.getByIdFromLocal(session.get(kCurrentMemberId) as! Int)
+            currentMember = memberDataStore.getByIdLocal(session.get(kCurrentMemberId) as! Int)
         }
         return currentMember;
     }

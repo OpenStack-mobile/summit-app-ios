@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol ISummitTypeDataStore {
-    func getAllFromLocal() -> [SummitType]
+    func getAllLocal() -> [SummitType]
 }
 
 public class SummitTypeDataStore: GenericDataStore, ISummitTypeDataStore {

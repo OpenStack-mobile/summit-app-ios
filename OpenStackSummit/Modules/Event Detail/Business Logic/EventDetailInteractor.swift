@@ -21,7 +21,7 @@ public class EventDetailInteractor: NSObject {
     var securityManager: SecurityManager!
     
     public func getEventDetail(eventId: Int) -> EventDetailDTO {
-        let event = eventDataStore.getByIdFromLocal(eventId)
+        let event = eventDataStore.getByIdLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         return eventDetailDTO
     }
@@ -32,7 +32,7 @@ public class EventDetailInteractor: NSObject {
             completionBlock(nil, error)
             return
         }
-        let event = eventDataStore.getByIdFromLocal(eventId)
+        let event = eventDataStore.getByIdLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         memberDataStore.addEventToMemberShedule(member, event: event!) { member, error in
             if (error != nil) {

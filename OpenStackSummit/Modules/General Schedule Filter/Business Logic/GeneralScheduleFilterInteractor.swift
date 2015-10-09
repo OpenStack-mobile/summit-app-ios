@@ -23,14 +23,14 @@ public class GeneralScheduleFilterInteractor: NSObject {
     var delegate: IGeneralScheduleFilterPresenter!
     
     public func getSummitTypes() -> [SummitType] {
-        return summitTypeDataStore.getAllFromLocal()
+        return summitTypeDataStore.getAllLocal()
     }
    
     public func getEventTypes() -> [EventType] {
-        return eventTypeDataStore.getAllFromLocal()
+        return eventTypeDataStore.getAllLocal()
     }
     
     public func getSummitTracks() -> [Track] {
-        return trackDataStore.getAllFromLocal()
+        return trackDataStore.getAllLocal()
     }
 }

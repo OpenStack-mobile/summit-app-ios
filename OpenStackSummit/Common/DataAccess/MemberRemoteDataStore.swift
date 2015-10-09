@@ -13,7 +13,8 @@ import AeroGearOAuth2
 
 @objc
 public protocol IMemberRemoteDataStore {
-    func addEventToShedule(memberId: Int, eventId: Int, completionBlock : (NSError?) -> Void)
+    func addEventToShedule(attendeeId: Int, eventId: Int, completionBlock : (NSError?) -> Void)
+    func removeEventFromShedule(attendeeId: Int, eventId: Int, completionBlock : (NSError?) -> Void)
     func getById(memberId: Int, completionBlock : (Member?, NSError?) -> Void)
     func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)
 }
@@ -30,9 +31,28 @@ public class MemberRemoteDataStore: NSObject {
         self.deserializerFactory = deserializerFactory
     }
 
-    public func addEventToShedule(memberId: Int, eventId: Int, completionBlock : (NSError?) -> Void) {
+    public func addEventToShedule(attendeeId: Int, eventId: Int, completionBlock : (NSError?) -> Void) {
+        let endpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/\(attendeeId)/schedule/\(eventId)"
+        let http = httpFactory.create(HttpType.OpenID)
+        http.POST(endpoint, parameters: nil, completionHandler: {(responseObject, error) in
+            if (error != nil) {
+                completionBlock(error)
+                return
+            }
+            completionBlock(error)
+        })
+    }
 
-        completionBlock(nil)
+    public func removeEventFromShedule(attendeeId: Int, eventId: Int, completionBlock : (NSError?) -> Void) {
+        let endpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/\(attendeeId)/schedule/\(eventId)"
+        let http = httpFactory.create(HttpType.OpenID)
+        http.DELETE(endpoint, parameters: nil, completionHandler: {(responseObject, error) in
+            if (error != nil) {
+                completionBlock(error)
+                return
+            }
+            completionBlock(error)
+        })
     }
     
     public func getById(memberId: Int, completionBlock : (Member?, NSError?) -> Void) {

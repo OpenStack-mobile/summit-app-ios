@@ -29,7 +29,7 @@ public class DataUpdateProcessor: NSObject {
         for dataUpdate in dataUpdateArray {
             dataUpdateStrategy = dataUpdateStrategyFactory.create(dataUpdate.entityClassName)
             try dataUpdateStrategy.process(dataUpdate)
-            dataUpdateDataStore.saveOrUpdateToLocal(dataUpdate, completionBlock: nil)
+            dataUpdateDataStore.saveOrUpdateLocal(dataUpdate, completionBlock: nil)
         }
     }
 }
