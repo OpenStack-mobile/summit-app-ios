@@ -128,4 +128,5 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         let indexPath = tableView.indexPathForCell(cell)
         presenter.toggleEventFromSchedule(indexPath!.row, cell: cell)
     }
+    
 }

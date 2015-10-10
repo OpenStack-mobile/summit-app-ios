@@ -43,7 +43,7 @@ class MenuViewController: UITableViewController, IMenuViewController {
     }
     
     func navigateToHome() {
-        performSegueWithIdentifier("generalScheduleSegue", sender: self)
+        //performSegueWithIdentifier("generalScheduleSegue", sender: self)
     }
     
     func showActivityIndicator() {
