@@ -36,6 +36,20 @@ public class GeneralSchedulePresenter: NSObject, IGeneralSchedulePresenter {
     var summitTimeZoneOffsetLocalTimeZone: Int!
     var dayEvents: [ScheduleItemDTO]!
     
+    public override init() {
+        super.init()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "loggedIn:",
+            name: Constants.Notifications.LoggedInNotification,
+            object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "loggedOut:",
+            name: Constants.Notifications.LoggedOutNotification,
+            object: nil)
+    }
+    
     public func viewLoad() {
         viewController.showActivityIndicator()
         interactor.getActiveSummit() { summit, error in
@@ -113,4 +127,15 @@ public class GeneralSchedulePresenter: NSObject, IGeneralSchedulePresenter {
         }
     }
     
+    func loggedIn(notification: NSNotification) {
+        viewController.reloadSchedule()
+    }
+
+    func loggedOut(notification: NSNotification) {
+        viewController.reloadSchedule()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }

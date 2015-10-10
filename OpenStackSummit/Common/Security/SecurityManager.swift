@@ -69,6 +69,9 @@ public class SecurityManager: NSObject {
                 
                 self.session.set(self.kCurrentMemberId, value: member!.id)
                 completionBlock(error)
+                
+                let notification = NSNotification(name: Constants.Notifications.LoggedInNotification, object:nil, userInfo:nil)
+                NSNotificationCenter.defaultCenter().postNotification(notification)
             }
         }
     }
@@ -77,6 +80,9 @@ public class SecurityManager: NSObject {
         oauthModuleOpenID.revokeAccess() { (response, error) in
             self.session.set(self.kCurrentMemberId, value: nil)
             completionBlock(error)
+
+            let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
+            NSNotificationCenter.defaultCenter().postNotification(notification)
         }
     }
     
