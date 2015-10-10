@@ -10,8 +10,8 @@ import UIKit
 
 struct Constants {
     struct Notifications {
-        static let BackgroundActivityStarted = "kBackgroundActivityStarted"
-        static let BackgroundActivityEnded = "kBackgroundActivityEnded"
+        static let LoggedInNotification = "kLoggedInNotification"
+        static let LoggedOutNotification = "kLoggedOutNotification"
     }
     struct SessionKeys {
         static let ActiveSummitTimeZone = "kActiveSummitTimeZone"

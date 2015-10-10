@@ -16,7 +16,7 @@ public protocol IGeneralScheduleWireframe {
 
 public class GeneralScheduleWireframe: NSObject {
     var eventDetailWireframe : IEventDetailWireframe!
-    var generalScheduleViewController: GeneralScheduleViewController!
+    weak var generalScheduleViewController: GeneralScheduleViewController!
     
     public func showEventDetail(eventId: Int) {
         eventDetailWireframe.presentEventDetailView(eventId, viewController: generalScheduleViewController.navigationController!)
