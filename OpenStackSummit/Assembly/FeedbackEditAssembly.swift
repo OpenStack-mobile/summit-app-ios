@@ -11,11 +11,14 @@ import Typhoon
 
 public class FeedbackEditAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
-    var feedbackDataStoreAssembly: FeedbackDataStoreAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
     
     dynamic func feedbackEditWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(FeedbackEditWireframe.self) {
             (definition) in
+            
+            definition.injectProperty("feedbackEditViewController", with: self.feedbackEditViewController())
         }
     }
     
@@ -29,17 +32,14 @@ public class FeedbackEditAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func feedbackDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(FeedbackDTOAssembler.self)
-    }
-    
     dynamic func feedbackEditInteractor() -> AnyObject {
         
         return TyphoonDefinition.withClass(FeedbackEditInteractor.self) {
             (definition) in
 
-            definition.injectProperty("feedbackDataStore", with: self.feedbackDataStoreAssembly.feedbackDataStore())
-            definition.injectProperty("feedbackDTOAssembler", with: self.feedbackDTOAssembler())
+            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
+            definition.injectProperty("feedbackDataStore", with: self.dataStoreAssembly.feedbackDataStore())
+            definition.injectProperty("feedbackDTOAssembler", with: self.dtoAssemblersAssembly.feedbackDTOAssembler())
         }
     }
     

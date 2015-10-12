@@ -33,19 +33,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.memberProfileViewController())
         }
     }
-    
-    dynamic func memberProfileDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(MemberProfileDTOAssembler.self){
-            (definition) in
-            
-            definition.injectProperty("scheduleItemDTOAssembler", with: self.memberSheduleItemDTOAssembler())
-        }
-    }
-    
-    dynamic func memberSheduleItemDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
-    }
-    
+        
     dynamic func memberProfileInteractor() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileInteractor.self) {
             (definition) in

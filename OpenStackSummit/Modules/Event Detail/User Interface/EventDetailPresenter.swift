@@ -12,11 +12,15 @@ import UIKit
 public protocol IEventDetailPresenter {
     func prepareEventDetail(eventId: Int)
     var eventId: Int { get set }
+    
+    func leaveFeedback()
+    func addEventToMySchedule()
 }
 
 public class EventDetailPresenter: NSObject {
     weak var viewController : IEventDetailViewController!
     var interactor : IEventDetailInteractor!
+    var wireframe: IEventDetailWireframe!
     var eventId = 0
     
     public func prepareEventDetail(eventId: Int) {
@@ -27,14 +31,14 @@ public class EventDetailPresenter: NSObject {
     
     public func addEventToMySchedule() {
         interactor.addEventToMySchedule(eventId) { (event, error) in
-            self.addEventToMyScheduleCallback(event, error: error)
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
+            }
+            self.viewController.didAddEventToMySchedule(event!)
         }
     }
     
-    private func addEventToMyScheduleCallback(event: EventDetailDTO?, error: NSError?) {
-        if (error != nil) {
-            viewController.showErrorMessage(error!)
-        }
-        viewController.didAddEventToMySchedule(event!)
+    public func leaveFeedback() {
+        wireframe.showFeedbackEdit(eventId)
     }
 }
