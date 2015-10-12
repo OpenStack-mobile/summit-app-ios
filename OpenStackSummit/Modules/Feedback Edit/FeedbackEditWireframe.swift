@@ -10,9 +10,16 @@ import UIKit
 
 @objc
 public protocol IFeedbackEditWireframe {
-    
+    func presentFeedbackEditView(eventId: Int, viewController: UINavigationController)
 }
 
-public class FeedbackEditWireframe: NSObject {
-
+public class FeedbackEditWireframe: NSObject, IFeedbackEditWireframe {
+    var feedbackEditViewController: FeedbackEditViewController!
+    
+    public func presentFeedbackEditView(eventId: Int, viewController: UINavigationController) {
+        let newViewController = feedbackEditViewController!
+        let _ = feedbackEditViewController.view! // this is only to force viewLoad to trigger
+        feedbackEditViewController.presenter.prepareFeedbackEdit(eventId)
+        viewController.pushViewController(newViewController, animated: true)
+    }
 }

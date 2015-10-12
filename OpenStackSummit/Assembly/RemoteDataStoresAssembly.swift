@@ -45,6 +45,8 @@ class RemoteDataStoresAssembly: TyphoonAssembly {
         
         return TyphoonDefinition.withClass(FeedbackRemoteDataStore.self) {
             (definition) in
+        
+            definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
         }
     }
 }
