@@ -11,6 +11,8 @@ import Typhoon
 import RealmSwift
 
 public class DataStoreAssembly: TyphoonAssembly {
+    var remoteDataStoresAssembly: RemoteDataStoresAssembly!
+    
     public dynamic func deserializerFactory() -> AnyObject {
         return TyphoonDefinition.withClass(DeserializerFactory.self) {
             (definition) in
@@ -187,4 +189,12 @@ public class DataStoreAssembly: TyphoonAssembly {
             
         }
     }
+    
+    public dynamic func feedbackDataStore() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(FeedbackDataStore.self) {
+            (definition) in
+            definition.injectProperty("feedbackRemoteDataStore", with: self.remoteDataStoresAssembly.feedbackRemoteDataStore())
+        }
+    }    
 }

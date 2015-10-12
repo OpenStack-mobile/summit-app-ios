@@ -11,7 +11,8 @@ import UIKit
 @objc
 public protocol IFeedbackEditPresenter {
     func viewLoad()
-    func saveFeedback(rate: Int, review: String)
+    func saveFeedback()
+    func prepareFeedbackEdit(eventId: Int)
     
     var feedbackId: Int { get set }
     var eventId: Int { get set }
@@ -24,6 +25,10 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
     var interactor: IFeedbackEditInteractor!
     var wireframe: IFeedbackEditWireframe!
     
+    public func prepareFeedbackEdit(eventId: Int) {
+        self.eventId = eventId
+    }
+    
     public func viewLoad() {
         if (feedbackId == 0) {
             viewController.showCreateFeedback()
@@ -34,7 +39,11 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
         }
     }
     
-    public func saveFeedback(rate: Int, review: String) {
-
+    public func saveFeedback() {
+        interactor.saveFeedback(0, rate: viewController.rate, review: viewController.review, eventId: eventId) {(feedback, error) in
+            if (error != nil) {
+                
+            }
+        }
     }
 }

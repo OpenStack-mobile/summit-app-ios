@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 public protocol IFeedbackDTOAssembler {
     func createDTO(feedback: Feedback) -> FeedbackDTO
 }

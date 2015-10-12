@@ -12,12 +12,15 @@ import Typhoon
 class EventDetailAssembly: TyphoonAssembly {
     var memberDataStoreAssembly: MemberDataStoreAssembly!
     var applicationAssembly: ApplicationAssembly!
+    var feedbackEditWireframe: FeedbackEditAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
     
     dynamic func eventDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(EventDetailWireframe.self) {
             (definition) in
             
             definition.injectProperty("eventDetailViewController", with: self.eventDetailViewController())
+            definition.injectProperty("feedbackEditWireframe", with: self.feedbackEditWireframe.feedbackEditWireframe())
         }
     }
     
@@ -27,32 +30,16 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("viewController", with: self.eventDetailViewController())
             definition.injectProperty("interactor", with: self.eventDetailInteractor())
+            definition.injectProperty("wireframe", with: self.eventDetailWireframe())
         }
     }
-    
-    dynamic func eventDetailDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(EventDetailDTOAssembler.self) {
-            (definition) in
-            
-            definition.injectProperty("speakerDTOAssembler", with: self.speakerDTOAssembler())
-            definition.injectProperty("scheduleItemDTOAssembler", with: self.scheduleItemDTOAssembler())
-        }
-    }
-    
-    dynamic func speakerDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(PresentationSpeakerDTOAssembler.self)
-    }
-    
-    dynamic func scheduleItemDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
-    }
-    
+        
     dynamic func eventDetailInteractor() -> AnyObject {
         return TyphoonDefinition.withClass(EventDetailInteractor.self) {
             (definition) in
             
             definition.injectProperty("eventDataStore", with: self.eventDataStore())
-            definition.injectProperty("eventDetailDTOAssembler", with: self.eventDetailDTOAssembler())
+            definition.injectProperty("eventDetailDTOAssembler", with: self.dtoAssemblersAssembly.eventDetailDTOAssembler())
             definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
         }
     }

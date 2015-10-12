@@ -53,6 +53,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
         
     }
     
+    @IBAction func leaveFeedback(sender: AnyObject) {
+        presenter.leaveFeedback()
+    }
+    
     /*
     // MARK: - Navigation
     
