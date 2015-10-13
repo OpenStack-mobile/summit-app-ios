@@ -11,11 +11,14 @@ import Haneke
 
 @objc
 public protocol IEventDetailViewController {
-    func showEventDetail(eventDetail: EventDetailDTO)
     func didAddEventToMySchedule(event: EventDetailDTO)
     func showErrorMessage(error: NSError)
     
     var presenter: IEventDetailPresenter! { get set }
+    var eventTitle: String! { get set }
+    var eventDescription: String! { get set }
+    var date: String! { get set }
+    var location: String! { get set }
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController {
@@ -25,6 +28,44 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    
+    private var eventDescriptionHTML = ""
+    
+    var eventTitle: String! {
+        get {
+            return titleLabel.text
+        }
+        set {
+            titleLabel.text = newValue
+        }
+    }
+    var eventDescription: String! {
+        get {
+            return eventDescriptionHTML
+        }
+        set {
+            eventDescriptionHTML = newValue.stringByReplacingOccurrencesOfString("\\", withString: "")
+            let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            eventDetailLabel.attributedText = attrStr
+        }
+    }
+    var date: String! {
+        get {
+            return timeLabel.text
+        }
+        set {
+            timeLabel.text = newValue
+        }
+    }
+    
+    var location: String! {
+        get {
+            return locationLabel.text
+        }
+        set {
+            locationLabel.text = newValue
+        }
+    }
     
     var presenter: IEventDetailPresenter!
     
@@ -36,13 +77,6 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func showEventDetail(eventDetail: EventDetailDTO) {
-        titleLabel.text = eventDetail.title
-        timeLabel.text = eventDetail.date
-        locationLabel.text = eventDetail.location
-        eventDetailLabel.text = eventDetail.eventDescription
     }
     
     func didAddEventToMySchedule(event: EventDetailDTO) {
