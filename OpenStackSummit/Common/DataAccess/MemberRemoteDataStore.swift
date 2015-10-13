@@ -19,15 +19,15 @@ public protocol IMemberRemoteDataStore {
     func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)
 }
 
-public class MemberRemoteDataStore: NSObject {
+public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
     var deserializerFactory: DeserializerFactory!
     var httpFactory: HttpFactory!
     
-    override init() {
+    public override init() {
         super.init()
     }
     
-    init(deserializerFactory: DeserializerFactory ) {
+    public init(deserializerFactory: DeserializerFactory ) {
         self.deserializerFactory = deserializerFactory
     }
 
@@ -67,7 +67,7 @@ public class MemberRemoteDataStore: NSObject {
         completionBlock(member, nil)
     }
     
-    func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
+    public func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
         let attendeeEndpoint = "https://dev-resource-server/api/v1/summits/current/attendees/me?expand=schedule,ticket_type,speaker"
         let http = httpFactory.create(HttpType.OpenID)
         http.GET(attendeeEndpoint, parameters: nil, completionHandler: {(responseObject, error) in

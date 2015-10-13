@@ -16,7 +16,7 @@ class SpeakerDTOAssemblerTests: BaseTests {
         let speaker = PresentationSpeaker()
         speaker.bio = "test bio"
         let personListDTOAssemblerMock = PersonListItemDTOAssemblerMock(personListItemDTO: PersonListItemDTO())
-        let speakerDTOAssembler = PresentationSpeakerDTOAssembler(personListDTOAssembler: personListDTOAssemblerMock)
+        let speakerDTOAssembler = PresentationSpeakerDTOAssembler(personListItemDTOAssembler: personListDTOAssemblerMock)
         
         // Act
         let speakerDTO = speakerDTOAssembler.createDTO(speaker)

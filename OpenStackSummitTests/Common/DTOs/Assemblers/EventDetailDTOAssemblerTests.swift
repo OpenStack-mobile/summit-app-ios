@@ -35,7 +35,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.name = "Test Venue Room"
         venue.venueRooms.append(venueRoom)
-        try! realm.write {
+        realm.write {
             self.realm.add(venue)
         }
         let track = Track()
@@ -53,6 +53,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
+        event.allowFeedback = true
         event.sponsors.append(sponsor1)
         event.sponsors.append(sponsor2)
         event.presentation = Presentation()
@@ -80,6 +81,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(event.presentation!.speakers.count, eventDetailDTO.speakers.count)
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
+        XCTAssertTrue(eventDetailDTO.allowFeedback)
         XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
     }
@@ -93,6 +95,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(32998046400))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(32998050000))
+        event.allowFeedback = true
         event.venue = venue
         
         let speakerDTO = PresentationSpeakerDTO()
@@ -110,6 +113,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(0, eventDetailDTO.speakers.count)
         XCTAssertFalse(eventDetailDTO.finished)
+        XCTAssertTrue(eventDetailDTO.allowFeedback)        
         XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
         XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
         XCTAssertEqual("", eventDetailDTO.track)

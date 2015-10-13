@@ -9,6 +9,7 @@
 import XCTest
 import OpenStackSummit
 import RealmSwift
+import Mockingjay
 
 class MemberDataStoreTests: XCTestCase {
     
@@ -17,7 +18,7 @@ class MemberDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        try! realm.write {
+        realm.write {
             self.realm.deleteAll()
         }
     }
@@ -32,7 +33,7 @@ class MemberDataStoreTests: XCTestCase {
         let memberId = 1
         let member = Member()
         member.id = memberId
-        try! realm.write {
+        realm.write {
             self.realm.add(member)
         }
         
@@ -58,18 +59,18 @@ class MemberDataStoreTests: XCTestCase {
         // Arrange
         var event = SummitEvent()
         event.id = 1
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
         let expectation = expectationWithDescription("async load")
-        let memberDataStoreAssembly = MemberDataStoreAssembly().activate();
-        let memberDataStore = memberDataStoreAssembly.memberDataStore() as! MemberDataStore
+        let memberRemoteDataStoreMock = MemberRemoteDataStoreMock()
+        let memberDataStore = MemberDataStore(memberRemoteStorage: memberRemoteDataStoreMock)
         let memberId = 1
         let member = Member()
-        member.id = 1
+        member.id = memberId
         member.attendeeRole = SummitAttendee()
-        try! realm.write {
+        realm.write {
             self.realm.add(member)
         }
         event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!

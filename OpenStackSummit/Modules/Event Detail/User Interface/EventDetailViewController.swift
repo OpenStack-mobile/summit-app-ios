@@ -19,6 +19,7 @@ public protocol IEventDetailViewController {
     var eventDescription: String! { get set }
     var date: String! { get set }
     var location: String! { get set }
+    var allowFeedback: Bool { get set }
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController {
@@ -28,6 +29,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var feedbackButton: UIButton!
     
     private var eventDescriptionHTML = ""
     
@@ -64,6 +66,15 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
         }
         set {
             locationLabel.text = newValue
+        }
+    }
+    
+    var allowFeedback: Bool {
+        get {
+            return !feedbackButton.hidden
+        }
+        set {
+            feedbackButton.hidden = !newValue
         }
     }
     

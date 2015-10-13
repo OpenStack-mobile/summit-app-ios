@@ -16,7 +16,7 @@ class DataUpdateProcessorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        try! realm.write {
+        realm.write {
             self.realm.deleteAll()
         }
     }
