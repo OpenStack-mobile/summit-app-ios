@@ -31,6 +31,7 @@ public class EventDetailPresenter: NSObject {
         viewController.eventDescription = event.eventDescription
         viewController.location = event.location
         viewController.date = event.date
+        viewController.allowFeedback = event.allowFeedback
     }
     
     public func addEventToMySchedule() {

@@ -18,7 +18,7 @@ class DeserializerStorageTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        try! realm.write {
+        realm.write {
             self.realm.deleteAll()
         }
     }
@@ -147,7 +147,7 @@ class DeserializerStorageTests: XCTestCase {
         let companyId = 1
         let company = Company()
         company.id = companyId
-        try! realm.write {
+        realm.write {
             self.realm.add(company)
         }
         

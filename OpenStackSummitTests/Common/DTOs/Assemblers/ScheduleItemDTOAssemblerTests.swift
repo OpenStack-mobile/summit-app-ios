@@ -16,7 +16,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        try! realm.write {
+        realm.write {
             self.realm.deleteAll()
         }
     }
@@ -60,7 +60,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         summit.events.append(event)
         summit.timeZone = "Asia/Tokyo"
 
-        try! realm.write {
+        realm.write {
             self.realm.add(venue)
             self.realm.add(summit)
         }
@@ -112,7 +112,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         summit.events.append(event)
         summit.timeZone = "Asia/Tokyo"
         
-        try! realm.write {
+        realm.write {
             self.realm.add(venue)
             self.realm.add(summit)
         }
