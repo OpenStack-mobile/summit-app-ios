@@ -26,7 +26,11 @@ public class EventDetailPresenter: NSObject {
     public func prepareEventDetail(eventId: Int) {
         self.eventId = eventId
         let event = self.interactor.getEventDetail(eventId)
-        viewController.showEventDetail(event)
+       
+        viewController.eventTitle = event.title
+        viewController.eventDescription = event.eventDescription
+        viewController.location = event.location
+        viewController.date = event.date
     }
     
     public func addEventToMySchedule() {
@@ -40,5 +44,5 @@ public class EventDetailPresenter: NSObject {
     
     public func leaveFeedback() {
         wireframe.showFeedbackEdit(eventId)
-    }
+    }    
 }
