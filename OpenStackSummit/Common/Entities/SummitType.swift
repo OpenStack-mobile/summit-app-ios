@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class SummitType: KeyValueEntity {
+public class SummitType: NamedEntity {
 
 
 }

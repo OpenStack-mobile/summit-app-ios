@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-public class EventTypeDeserializer: KeyValueDeserializer, IDeserializer {
+public class EventTypeDeserializer: NamedEntityDeserializer, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
     public func deserialize(json : JSON) throws -> BaseEntity {

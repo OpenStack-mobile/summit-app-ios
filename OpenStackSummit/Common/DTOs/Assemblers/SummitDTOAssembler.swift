@@ -13,10 +13,9 @@ public protocol ISummitDTOAssembler {
     func createDTO(summit: Summit)->SummitDTO
 }
 
-public class SummitDTOAssembler: NSObject {
+public class SummitDTOAssembler: NamedDTOAssembler {
     public func createDTO(summit: Summit)->SummitDTO{
-        let summitDTO = SummitDTO()
-        summitDTO.name = summit.name
+        let summitDTO: SummitDTO = super.createDTO(summit)
         summitDTO.startDate = summit.startDate
         summitDTO.endDate = summit.endDate
         summitDTO.timeZone = summit.timeZone

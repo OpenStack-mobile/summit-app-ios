@@ -8,7 +8,6 @@
 
 import UIKit
 
-public class VenueListItemDTO: NSObject {
-    public var name = ""
+public class VenueListItemDTO: NamedDTO {
     public var address = ""
 }

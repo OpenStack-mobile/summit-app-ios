@@ -9,8 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class Location: BaseEntity {
-
-    public dynamic var name = ""
+public class Location: NamedEntity {
     public dynamic var locationDescription = ""
 }
