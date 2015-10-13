@@ -84,7 +84,7 @@ public class GeneralSchedulePresenter: NSObject, IGeneralSchedulePresenter {
     
     public func buildCell(cell: IGeneralScheduleTableViewCell, index: Int){
         let event = dayEvents[index]
-        cell.eventTitle = event.title
+        cell.eventTitle = event.name
         cell.timeAndPlace = event.date
         cell.scheduledButtonText = interactor.isEventScheduledByLoggedUser(event.id) ? "remove" : "schedule"
     }

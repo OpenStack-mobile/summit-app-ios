@@ -67,6 +67,7 @@
 		<string>DataUpdateAssembly</string>
 		<string>PeopleAssembly</string>
 		<string>RemoteDataStoresAssembly</string>
+		<string>TrackListAssembly</string>
 		<string>DTOAssemblersAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

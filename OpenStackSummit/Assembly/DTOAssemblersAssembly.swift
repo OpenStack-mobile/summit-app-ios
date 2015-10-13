@@ -59,4 +59,8 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
             definition.injectProperty("scheduleItemDTOAssembler", with: self.scheduleItemDTOAssembler())
         }
     }
+    
+    dynamic func namedDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(NamedDTOAssembler.self)
+    }
 }

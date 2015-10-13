@@ -13,12 +13,10 @@ public protocol IScheduleItemDTOAssembler {
     func createDTO(event: SummitEvent) -> ScheduleItemDTO
 }
 
-public class ScheduleItemDTOAssembler: NSObject, IScheduleItemDTOAssembler {
+public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssembler {
 
     public func createDTO(event: SummitEvent) -> ScheduleItemDTO {
-        let scheduleItemDTO = ScheduleItemDTO()
-        scheduleItemDTO.id = event.id
-        scheduleItemDTO.title = event.title
+        let scheduleItemDTO: ScheduleItemDTO = super.createDTO(event)
         scheduleItemDTO.location = getLocation(event)
         scheduleItemDTO.date = getDate(event)
         scheduleItemDTO.sponsors = getSponsors(event)

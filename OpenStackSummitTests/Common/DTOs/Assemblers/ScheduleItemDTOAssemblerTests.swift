@@ -46,7 +46,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         eventType.name = "Keynote"
         let event = SummitEvent()
         event.id = 1
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
@@ -71,7 +71,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(event.title, scheduleItemDTO.title)
+        XCTAssertEqual(event.name, scheduleItemDTO.name)
         XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
         XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
         XCTAssertEqual("Wednesday 02 September 05:00 AM - 06:00 AM", scheduleItemDTO.date)
@@ -98,7 +98,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         eventType.name = "Keynote"
         let event = SummitEvent()
         event.id = 1
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1446026400))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1446044400))
@@ -122,7 +122,7 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(event.title, scheduleItemDTO.title)
+        XCTAssertEqual(event.name, scheduleItemDTO.name)
         XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
         XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
         XCTAssertEqual("Wednesday 28 October 07:00 PM - 12:00 AM", scheduleItemDTO.date)

@@ -8,8 +8,7 @@
 
 import UIKit
 
-public class SummitDTO: NSObject {
-    public var name = ""
+public class SummitDTO: NamedDTO {
     public var startDate = NSDate(timeIntervalSince1970: 1)
     public var endDate = NSDate(timeIntervalSince1970: 1)
     public var timeZone = ""
