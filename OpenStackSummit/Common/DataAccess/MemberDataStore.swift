@@ -54,16 +54,16 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
         }
     }
 
-    public func addEventToMemberSheduleLocal(member: Member, event: SummitEvent) throws {
+    public func addEventToMemberSheduleLocal(member: Member, event: SummitEvent) {
         
-        try self.realm.write {
+        self.realm.write {
             member.attendeeRole!.scheduledEvents.append(event)
         }
     }
     
     public func removeEventFromMemberSheduleLocal(member: Member, event: SummitEvent) throws {
         
-        try self.realm.write {
+        self.realm.write {
             let index = member.attendeeRole!.scheduledEvents.indexOf("id = %@", event.id)
             if (index != nil) {
                 member.attendeeRole?.scheduledEvents.removeAtIndex(index!)
@@ -73,21 +73,15 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
     
     public func addEventToMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {
         memberRemoteStorage.addEventToShedule(member.attendeeRole!.id, eventId: event.id) { error in
-            var innerError = error
-            
-            defer { completionBlock(member, innerError) }
-            
+           
             if error != nil {
                 return
             }
             
-            do {
-                try self.addEventToMemberSheduleLocal(member, event: event)
-            }
-            catch {
-                innerError = NSError(domain: "There was an error adding event to member schedule", code: 1001, userInfo: nil)
-            }
-       }
+            self.addEventToMemberSheduleLocal(member, event: event)
+            
+            completionBlock(member, error)
+        }
     }
     
     public func removeEventFromMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {

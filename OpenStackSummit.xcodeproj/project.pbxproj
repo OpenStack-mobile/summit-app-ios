@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
 		9D2988081B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2988071B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
-		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
 		CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */; };
 		CA0029F71B9E1E84001A9EDA /* VenueRoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F61B9E1E84001A9EDA /* VenueRoomDetailViewController.swift */; };
@@ -89,6 +89,7 @@
 		CAA9A88B1BA89B9E00C3725D /* MemberDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9A88A1BA89B9E00C3725D /* MemberDeserializerTests.swift */; };
 		CAA9A8901BA8C19D00C3725D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9A88F1BA8C19D00C3725D /* Person.swift */; };
 		CAA9A8921BA8C76000C3725D /* SummitAttendeeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9A8911BA8C76000C3725D /* SummitAttendeeDataStore.swift */; };
+		CABD0E011BCD4A8200488472 /* MemberRemoteDataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABD0E001BCD4A8200488472 /* MemberRemoteDataStoreMock.swift */; settings = {ASSET_TAGS = (); }; };
 		CAC7F3031B993E3600BAE2C6 /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC7F3021B993E3600BAE2C6 /* SessionMock.swift */; };
 		CAC7F3051B99414D00BAE2C6 /* MemberDataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC7F3041B99414D00BAE2C6 /* MemberDataStoreMock.swift */; };
 		CAC7F3071B9943E600BAE2C6 /* MemberProfileDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC7F3061B9943E600BAE2C6 /* MemberProfileDTOAssemblerTests.swift */; };
@@ -317,6 +318,7 @@
 		CAA9A88A1BA89B9E00C3725D /* MemberDeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDeserializerTests.swift; sourceTree = "<group>"; };
 		CAA9A88F1BA8C19D00C3725D /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		CAA9A8911BA8C76000C3725D /* SummitAttendeeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeDataStore.swift; sourceTree = "<group>"; };
+		CABD0E001BCD4A8200488472 /* MemberRemoteDataStoreMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRemoteDataStoreMock.swift; sourceTree = "<group>"; };
 		CAC7F3021B993E3600BAE2C6 /* SessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		CAC7F3041B99414D00BAE2C6 /* MemberDataStoreMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDataStoreMock.swift; sourceTree = "<group>"; };
 		CAC7F3061B9943E600BAE2C6 /* MemberProfileDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDTOAssemblerTests.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 				CAD6C3D61BB759D800F8C2D6 /* DataUpdateProcessorMock.swift */,
 				CACF20721BBA094B001868AF /* DataUpdateDataStoreMock.swift */,
 				CA583AD81BC6CD1E00632ECF /* PersonListDTOAssemblerMock.swift */,
+				CABD0E001BCD4A8200488472 /* MemberRemoteDataStoreMock.swift */,
 			);
 			path = TestUtils;
 			sourceTree = "<group>";
@@ -1660,6 +1663,7 @@
 				CACF7C4D1B96650200A9EB16 /* EventDetailDTOAssemblerTests.swift in Sources */,
 				CAD480A41B8691B9004DBB4F /* MemberDataStoreTests.swift in Sources */,
 				CAD49F021B99C7C200D8D412 /* BaseTests.swift in Sources */,
+				CABD0E011BCD4A8200488472 /* MemberRemoteDataStoreMock.swift in Sources */,
 				CAD992D71BB05B2F0051CC5B /* SecurityManagerMock.swift in Sources */,
 				CAF2AA5A1B82914B00D8E595 /* DeserializerStorageTests.swift in Sources */,
 				CAE0C9741BB2EE3400154246 /* EventDataStoreTests.swift in Sources */,

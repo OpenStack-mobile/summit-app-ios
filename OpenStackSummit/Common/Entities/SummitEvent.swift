@@ -15,6 +15,7 @@ public class SummitEvent: BaseEntity {
     public dynamic var start = NSDate(timeIntervalSince1970: 1)
     public dynamic var eventDescription = ""
     public dynamic var title = ""
+    public dynamic var allowFeedback = false
     public dynamic var eventType: EventType!
     public let summitTypes = List<SummitType>()
     public let sponsors = List<Company>()

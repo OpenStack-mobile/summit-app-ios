@@ -13,5 +13,6 @@ class MemberDataStoreMock: NSObject, IMemberDataStore {
     func getById(id: Int, completionBlock : (Member?, NSError?) -> Void) {}
     func getByIdLocal(id: Int) -> Member? { return nil }
     func addEventToMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {}
+    func removeEventFromMemberShedule(member: Member, event: SummitEvent, completionBlock : (Member?, NSError?) -> Void) {}
     func getLoggedInMemberOrigin(completionBlock : (Member?, NSError?) -> Void) {}
 }

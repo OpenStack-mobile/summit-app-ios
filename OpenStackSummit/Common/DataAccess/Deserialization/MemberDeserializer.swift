@@ -24,13 +24,13 @@ public class MemberDeserializer: NSObject, IDeserializer {
                 
         if let _ = json["schedule"].array {
             let deserializer = deserializerFactory.create(DeserializerFactoryType.SummitAttendee)
-            member.attendeeRole = try deserializer.deserialize(json) as! SummitAttendee
+            member.attendeeRole = try deserializer.deserialize(json) as? SummitAttendee
         }
         
         let speakerId = json["speaker_id"]
         if (speakerId.int != nil) {
             let deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
-            member.speakerRole = try deserializer.deserialize(json) as! PresentationSpeaker
+            member.speakerRole = try deserializer.deserialize(json) as? PresentationSpeaker
             
         }
         

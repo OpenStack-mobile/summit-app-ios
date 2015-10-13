@@ -16,7 +16,7 @@ class DataUpdateDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        try! realm.write {
+        realm.write {
             self.realm.deleteAll()
         }
     }
@@ -30,19 +30,19 @@ class DataUpdateDataStoreTests: XCTestCase {
         // Arrange
         var dataUpdate = DataUpdate()
         dataUpdate.id = 1
-        try! realm.write {
+        realm.write {
             self.realm.add(dataUpdate)
         }
         
         dataUpdate = DataUpdate()
         dataUpdate.id = 3
-        try! realm.write {
+        realm.write {
             self.realm.add(dataUpdate)
         }
 
         dataUpdate = DataUpdate()
         dataUpdate.id = 2
-        try! realm.write {
+        realm.write {
             self.realm.add(dataUpdate)
         }
         

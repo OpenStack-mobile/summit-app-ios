@@ -17,7 +17,7 @@ class EventDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        try! realm.write {
+        realm.write {
             self.realm.deleteAll()
         }
     }
@@ -35,7 +35,7 @@ class EventDataStoreTests: XCTestCase {
         event.start = NSDate(timeIntervalSince1970: 1443015330)
         event.end = NSDate(timeIntervalSince1970: 1443018930)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
 
@@ -44,7 +44,7 @@ class EventDataStoreTests: XCTestCase {
         event.start = NSDate(timeIntervalSince1970: 1443010330)
         event.end = NSDate(timeIntervalSince1970: 1443014930)
 
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
@@ -67,7 +67,7 @@ class EventDataStoreTests: XCTestCase {
         event.start = NSDate(timeIntervalSince1970: 1443015330)
         event.end = NSDate(timeIntervalSince1970: 1443018930)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
@@ -76,7 +76,7 @@ class EventDataStoreTests: XCTestCase {
         event.start = NSDate(timeIntervalSince1970: 1443010330)
         event.end = NSDate(timeIntervalSince1970: 1443014930)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
@@ -107,7 +107,7 @@ class EventDataStoreTests: XCTestCase {
         event.eventType!.id = 1
         event.summitTypes.append(summitType1)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
@@ -119,7 +119,7 @@ class EventDataStoreTests: XCTestCase {
         event.eventType!.id = 2
         event.summitTypes.append(summitType2)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
@@ -152,7 +152,7 @@ class EventDataStoreTests: XCTestCase {
         event.eventType!.id = 1
         event.summitTypes.append(summitType1)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         
@@ -164,7 +164,7 @@ class EventDataStoreTests: XCTestCase {
         event.eventType!.id = 2
         event.summitTypes.append(summitType2)
         
-        try! realm.write {
+        realm.write {
             self.realm.add(event)
         }
         

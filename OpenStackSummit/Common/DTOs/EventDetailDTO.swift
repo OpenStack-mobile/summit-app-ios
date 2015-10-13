@@ -28,4 +28,5 @@ public class EventDetailDTO: ScheduleItemDTO {
     public var tags = ""
     public var speakers = [PresentationSpeakerDTO]()
     public var finished = false
+    public var allowFeedback = false
 }

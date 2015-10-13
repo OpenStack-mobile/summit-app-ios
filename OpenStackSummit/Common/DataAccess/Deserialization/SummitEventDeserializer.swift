@@ -34,6 +34,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             summitEvent.end = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
             summitEvent.title = json["title"].stringValue
             summitEvent.eventDescription = json["description"].stringValue
+            summitEvent.allowFeedback = json["allow_feedback"].boolValue
             
             var deserializer = deserializerFactory.create(DeserializerFactoryType.EventType)
             summitEvent.eventType = try deserializer.deserialize(json["type_id"]) as! EventType

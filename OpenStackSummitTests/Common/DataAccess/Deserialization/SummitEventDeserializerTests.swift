@@ -90,7 +90,7 @@ class SummitEventDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"id\":5290,\"title\":\"Windows in OpenStack\",\"description\":\"test description\", \"start_date\":1446026400,\"end_date\":1446029100,\"location_id\":19,\"type_id\":3,\"class_name\":\"Presentation\",\"track_id\":2,\"level\":\"Beginner\",\"summit_types\":[1],\"sponsors\":[],\"speakers\":[1761,1861]}"
+        let json = "{\"id\":5290,\"title\":\"Windows in OpenStack\",\"description\":\"test description\", \"start_date\":1446026400,\"end_date\":1446029100,\"location_id\":19,\"type_id\":3,\"class_name\":\"Presentation\",\"track_id\":2,\"level\":\"Beginner\",\"allow_feedback\": true,\"summit_types\":[1],\"sponsors\":[],\"speakers\":[1761,1861]}"
         
         //Act
         let event = try! deserializer.deserialize(json) as! SummitEvent
@@ -103,6 +103,7 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(venue.id,event.venue!.id)
         XCTAssertEqual(2,event.presentation?.speakers.count)
         XCTAssertEqual(track.id, event.presentation!.track.id)
+        XCTAssertTrue(event.allowFeedback)
     }
     
     func test_Deserialize_OnlyID_ReturnsCorrectInstance() {
