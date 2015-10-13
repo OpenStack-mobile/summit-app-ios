@@ -8,9 +8,7 @@
 
 import UIKit
 
-public class PersonListItemDTO: NSObject {
-    public var id = 0
-    public var name = ""
+public class PersonListItemDTO: NamedDTO {
     public var title = ""
     public var pictureUrl = ""
     public var isAttendee = false

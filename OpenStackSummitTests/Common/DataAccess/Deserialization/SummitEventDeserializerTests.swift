@@ -57,7 +57,7 @@ class SummitEventDeserializerTests: XCTestCase {
         
         //Assert
         XCTAssertEqual(5290,event.id)
-        XCTAssertEqual("Windows in OpenStack",event.title)
+        XCTAssertEqual("Windows in OpenStack",event.name)
         XCTAssertEqual("test description",event.eventDescription)
         XCTAssertEqual(eventType.id,event.eventType.id)
         XCTAssertEqual(venueRoom.id,event.venueRoom!.id)
@@ -97,7 +97,7 @@ class SummitEventDeserializerTests: XCTestCase {
         
         //Assert
         XCTAssertEqual(5290,event.id)
-        XCTAssertEqual("Windows in OpenStack",event.title)
+        XCTAssertEqual("Windows in OpenStack",event.name)
         XCTAssertEqual("test description",event.eventDescription)
         XCTAssertEqual(eventType.id,event.eventType.id)
         XCTAssertEqual(venue.id,event.venue!.id)

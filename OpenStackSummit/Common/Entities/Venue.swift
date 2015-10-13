@@ -14,7 +14,7 @@ public class Venue: Location {
     public dynamic var address = ""
     public dynamic var lat = ""
     public dynamic var long = ""
+    public dynamic var isInternal = true
     public let maps = List<Image>()
     public let venueRooms = List<VenueRoom>()
-    public let isInternal = true
 }

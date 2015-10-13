@@ -49,7 +49,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let sponsor2 = Company()
         sponsor2.name = "sponsor2"
         let event = SummitEvent()
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
@@ -73,7 +73,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.title, eventDetailDTO.title)
+        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
         XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
@@ -91,7 +91,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venue = Venue()
         venue.name = "Test Venue"
         let event = SummitEvent()
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(32998046400))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(32998050000))
@@ -108,7 +108,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.title, eventDetailDTO.title)
+        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
         XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(0, eventDetailDTO.speakers.count)

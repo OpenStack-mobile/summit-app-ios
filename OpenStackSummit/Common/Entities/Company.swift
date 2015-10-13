@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class Company: KeyValueEntity {
+public class Company: NamedEntity {
 
 }

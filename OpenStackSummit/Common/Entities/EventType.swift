@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class EventType: KeyValueEntity {
+public class EventType: NamedEntity {
 
 }

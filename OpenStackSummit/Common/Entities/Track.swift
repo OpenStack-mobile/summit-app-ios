@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class Track: KeyValueEntity {
+public class Track: NamedEntity {
 
 }

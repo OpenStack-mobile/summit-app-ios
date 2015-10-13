@@ -26,7 +26,7 @@ class EventDetailDTOTests: XCTestCase {
         let scheduleItemDTO = ScheduleItemDTO()
         scheduleItemDTO.sponsors = "Sponsored bu sponsor1,sponsor1"
         scheduleItemDTO.date = "Tuesday 01 September 20:00 - 21:00"
-        scheduleItemDTO.title = "test title"
+        scheduleItemDTO.name = "test title"
         scheduleItemDTO.location = "venue"
         scheduleItemDTO.eventType = "Test Event Type"
         
@@ -34,7 +34,7 @@ class EventDetailDTOTests: XCTestCase {
         let eventDetailDTO = EventDetailDTO(scheduleItemDTO: scheduleItemDTO)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.title, eventDetailDTO.title)
+        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
         XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
         XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)

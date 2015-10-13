@@ -8,9 +8,7 @@
 
 import UIKit
 
-public class ScheduleItemDTO: NSObject {
-    public var id = 0
-    public var title = ""
+public class ScheduleItemDTO: NamedDTO {
     public var date = ""
     public var location = ""
     public var track = ""

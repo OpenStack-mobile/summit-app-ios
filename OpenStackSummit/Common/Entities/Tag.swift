@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 
-public class Tag: KeyValueEntity {
+public class Tag: NamedEntity {
 
 }

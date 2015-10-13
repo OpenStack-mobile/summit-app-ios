@@ -1,5 +1,5 @@
 //
-//  KeyValueDeserializer.swift
+//  NamedEntityDeserializer.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/14/15.
@@ -9,9 +9,9 @@
 import UIKit
 import SwiftyJSON
 
-public class KeyValueDeserializer : NSObject {
+public class NamedEntityDeserializer : NSObject {
     
-    public func deserialize<T : KeyValueEntity>(element: JSON) -> T {
+    public func deserialize<T : NamedEntity>(element: JSON) -> T {
         let entity = T()
         
         entity.id = element["id"].intValue

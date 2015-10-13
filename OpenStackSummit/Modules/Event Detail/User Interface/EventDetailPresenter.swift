@@ -27,7 +27,7 @@ public class EventDetailPresenter: NSObject {
         self.eventId = eventId
         let event = self.interactor.getEventDetail(eventId)
        
-        viewController.eventTitle = event.title
+        viewController.eventTitle = event.name
         viewController.eventDescription = event.eventDescription
         viewController.location = event.location
         viewController.date = event.date

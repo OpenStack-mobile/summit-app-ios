@@ -10,13 +10,13 @@ import UIKit
 
 public class EventDetailDTO: ScheduleItemDTO {
     
-    public override init() {
+    public required init() {
         super.init()
     }
     
     public init(scheduleItemDTO: ScheduleItemDTO) {
         super.init()
-        title = scheduleItemDTO.title
+        name = scheduleItemDTO.name
         location = scheduleItemDTO.location
         date = scheduleItemDTO.date
         sponsors = scheduleItemDTO.sponsors

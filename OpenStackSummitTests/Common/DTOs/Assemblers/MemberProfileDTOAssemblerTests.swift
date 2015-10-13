@@ -26,7 +26,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.attendeeRole = SummitAttendee()
         
         let event = SummitEvent()
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
@@ -72,7 +72,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.attendeeRole = SummitAttendee()
         
         let event = SummitEvent()
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
@@ -118,7 +118,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         member.attendeeRole = SummitAttendee()
         
         let event = SummitEvent()
-        event.title = "Test Title"
+        event.name = "Test Title"
         event.eventDescription = "Test Description"
         event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
         event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))

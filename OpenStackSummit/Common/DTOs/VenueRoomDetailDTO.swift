@@ -8,8 +8,7 @@
 
 import UIKit
 
-public class VenueRoomDetailDTO: NSObject {
-    public var name = ""
+public class VenueRoomDetailDTO: NamedDTO {
     public var capacity = 0
     public var events = [ScheduleItemDTO]()
     

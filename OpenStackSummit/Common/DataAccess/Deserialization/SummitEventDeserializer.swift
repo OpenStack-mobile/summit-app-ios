@@ -32,7 +32,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             summitEvent.id = json["id"].intValue
             summitEvent.start = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
             summitEvent.end = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
-            summitEvent.title = json["title"].stringValue
+            summitEvent.name = json["title"].stringValue
             summitEvent.eventDescription = json["description"].stringValue
             summitEvent.allowFeedback = json["allow_feedback"].boolValue
             

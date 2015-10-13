@@ -1,5 +1,5 @@
 //
-//  KeyValueEntity.swift
+//  NamedEntity.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/14/15.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class KeyValueEntity: BaseEntity {
+public class NamedEntity: BaseEntity {
     public dynamic var name = ""
 }
