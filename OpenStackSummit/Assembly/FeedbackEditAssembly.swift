@@ -13,7 +13,8 @@ public class FeedbackEditAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
-    
+    var securityManagerAssembly: SecurityManagerAssembly!
+
     dynamic func feedbackEditWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(FeedbackEditWireframe.self) {
             (definition) in
@@ -40,6 +41,7 @@ public class FeedbackEditAssembly: TyphoonAssembly {
             definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
             definition.injectProperty("feedbackDataStore", with: self.dataStoreAssembly.feedbackDataStore())
             definition.injectProperty("feedbackDTOAssembler", with: self.dtoAssemblersAssembly.feedbackDTOAssembler())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     

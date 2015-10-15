@@ -18,7 +18,8 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
     var feedbackDataStore: IFeedbackDataStore!
     var genericDataStore: GenericDataStore!
     var feedbackDTOAssembler: IFeedbackDTOAssembler!
-
+    var securityManager: SecurityManager!
+    
     public func getFeedback(feedbackId: Int) -> FeedbackDTO? {
         let feedback = genericDataStore.getByIdLocal(feedbackId) as! Feedback
         let feedbackDTO = feedbackDTOAssembler.createDTO(feedback)
@@ -31,9 +32,11 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
             feedback = genericDataStore.getByIdLocal(feedbackId) as! Feedback
         }
         else {
+            let member = securityManager.getCurrentMember()
             feedback = Feedback()
             let event: SummitEvent? = genericDataStore.getByIdLocal(eventId)
             feedback.event = event!
+            feedback.owner = member?.attendeeRole!
         }
         feedback.rate = rate
         feedback.review = review ?? ""

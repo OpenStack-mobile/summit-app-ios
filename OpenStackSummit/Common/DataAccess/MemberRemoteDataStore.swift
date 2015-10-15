@@ -33,7 +33,8 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
 
     public func addEventToShedule(attendeeId: Int, eventId: Int, completionBlock : (NSError?) -> Void) {
         let endpoint = "https://dev-resource-server/api/v1/summits/current/attendees/\(attendeeId)/schedule/\(eventId)"
-        let http = httpFactory.create(HttpType.OpenID)
+        let http = httpFactory.create(HttpType.OpenIDGetFormUrlEncoded)
+        //json[""]
         http.POST(endpoint, parameters: nil, completionHandler: {(responseObject, error) in
             if (error != nil) {
                 completionBlock(error)
@@ -45,7 +46,7 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
 
     public func removeEventFromShedule(attendeeId: Int, eventId: Int, completionBlock : (NSError?) -> Void) {
         let endpoint = "https://dev-resource-server/api/v1/summits/current/attendees/\(attendeeId)/schedule/\(eventId)"
-        let http = httpFactory.create(HttpType.OpenID)
+        let http = httpFactory.create(HttpType.OpenIDGetFormUrlEncoded)
         http.DELETE(endpoint, parameters: nil, completionHandler: {(responseObject, error) in
             if (error != nil) {
                 completionBlock(error)
@@ -68,8 +69,8 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
     }
     
     public func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
-        let attendeeEndpoint = "https://dev-resource-server/api/v1/summits/current/attendees/me?expand=schedule,ticket_type,speaker"
-        let http = httpFactory.create(HttpType.OpenID)
+        let attendeeEndpoint = "https://dev-resource-server/api/v1/summits/current/attendees/me?expand=ticket_type,speaker,feedback"
+        let http = httpFactory.create(HttpType.OpenIDGetFormUrlEncoded)
         http.GET(attendeeEndpoint, parameters: nil, completionHandler: {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
