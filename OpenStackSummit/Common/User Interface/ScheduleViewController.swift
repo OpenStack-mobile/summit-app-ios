@@ -1,79 +1,83 @@
 //
 //  ScheduleViewController.swift
-//  OpenStackSched
+//  OpenStackSummit
 //
-//  Created by Claudio on 8/3/15.
+//  Created by Claudio on 10/14/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
 import UIKit
 import AFHorizontalDayPicker
-import SwiftSpinner
 
-class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
+@objc
+public protocol IScheduleViewController: class {
+    var startDate: NSDate! { get set }
+    var endDate: NSDate! { get set }
+    var selectedDate: NSDate! { get set }
+    
+    func reloadSchedule()
+    func showErrorMessage(error: NSError)
+    func showActivityIndicator()
+    func hideActivityIndicator()
+}
 
-    let cellIdentifier = "GeneralScheduleTableViewCell"
+class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate {
+    
+    @IBOutlet weak var scheduleView: ScheduleView!
+    var presenter: ITrackSchedulePresenter!
+    let cellIdentifier = "scheduleTableViewCell"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
-    var presenter : ISchedulePresenter!
     var startDate: NSDate! {
         get {
-            return dayPicker.startDate
+            return scheduleView.dayPicker.startDate
         }
         set {
-            dayPicker.startDate = newValue
-            dayPicker.firstActiveDate = newValue
+            scheduleView.dayPicker.startDate = newValue
+            scheduleView.dayPicker.firstActiveDate = newValue
         }
     }
-
+    
     var endDate: NSDate! {
         get {
-            return dayPicker.endDate
+            return scheduleView.dayPicker.endDate
         }
         set {
-            dayPicker.endDate = newValue
-            dayPicker.lastActiveDate = newValue
+            scheduleView.dayPicker.endDate = newValue
+            scheduleView.dayPicker.lastActiveDate = newValue
         }
     }
-
+    
     var selectedDate: NSDate! {
         get {
-            return dayPicker.selectedDate
+            return scheduleView.dayPicker.selectedDate
         }
         set {
-            dayPicker.selectDate(newValue, animated: false)
+            scheduleView.dayPicker.selectDate(newValue, animated: false)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dayPicker.delegate = self
-        
+        scheduleView.tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        scheduleView.dayPicker.delegate = self
         presenter.viewLoad()
+        self.presenter.reloadSchedule()
     }
-
+    
     
     func reloadSchedule() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        scheduleView.tableView.delegate = self
+        scheduleView.tableView.dataSource = self
         
-        tableView.reloadData()
+        scheduleView.tableView.reloadData()
     }
-
+    
     func showErrorMessage(error: NSError) {
         
         
-    }
-    
-    func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
-    }
-    
-    func hideActivityIndicator() {
-        SwiftSpinner.hide()
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,7 +85,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -89,9 +93,9 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getDayEventsCount();
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
         presenter.buildCell(cell, index: indexPath.row)
         return cell
     }
@@ -108,13 +112,4 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
         self.presenter.reloadSchedule()
     }
-        
-    @IBAction func toggleSchedule(sender: AnyObject) {
-        let button = sender as! UIButton
-        let view = button.superview!
-        let cell = view.superview as! GeneralScheduleTableViewCell
-        let indexPath = tableView.indexPathForCell(cell)
-        presenter.toggleScheduledStatus(indexPath!.row, cell: cell)
-    }
-    
 }
