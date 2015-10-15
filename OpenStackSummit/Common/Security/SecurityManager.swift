@@ -27,7 +27,7 @@ public class SecurityManager: NSObject {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "https://testresource-server.openstack.org/summits/read"],
+            scopes: ["openid", "https://testresource-server.openstack.org/summits/read", "https://testresource-server.openstack.org/summits/write"],
             clientSecret: "NvEAT3ScN5c5p9yPS67GeoBo2M_8YLFezeAdALF~dsD-pxXmBU6JRL0ZOyNpGEhM"
         )
         

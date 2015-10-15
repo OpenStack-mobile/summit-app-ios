@@ -14,5 +14,5 @@ public class Feedback: BaseEntity {
     dynamic var review = ""
     dynamic var date = NSDate(timeIntervalSince1970: 1)
     dynamic var event: SummitEvent!
-    dynamic var owner = ""
+    dynamic var owner: SummitAttendee!
 }
