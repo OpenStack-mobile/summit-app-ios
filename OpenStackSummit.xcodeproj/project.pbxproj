@@ -26,6 +26,8 @@
 		CA02F8B71BA0BF7B005CD514 /* FeedbackEditAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA02F8B61BA0BF7B005CD514 /* FeedbackEditAssembly.swift */; };
 		CA02F8BD1BA0CFCB005CD514 /* SummitDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA02F8BC1BA0CFCB005CD514 /* SummitDTO.swift */; };
 		CA02F8BF1BA0D096005CD514 /* SummitDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA02F8BE1BA0D096005CD514 /* SummitDTOAssembler.swift */; };
+		CA0873F81BCE98FE00633591 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0873F61BCE98FE00633591 /* ScheduleTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		CA0873F91BCE98FE00633591 /* ScheduleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0873F71BCE98FE00633591 /* ScheduleTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */; };
 		CA1CBA881BB5EDF300E65D2B /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CBA861BB5EDF300E65D2B /* DataUpdatePoller.swift */; settings = {ASSET_TAGS = (); }; };
 		CA1CBA891BB5EDF300E65D2B /* DataUpdateProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CBA871BB5EDF300E65D2B /* DataUpdateProcessor.swift */; settings = {ASSET_TAGS = (); }; };
@@ -189,6 +191,9 @@
 		CADEE6EB1BACA017005152E1 /* TicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEE6EA1BACA017005152E1 /* TicketType.swift */; };
 		CADEE6ED1BACA0B4005152E1 /* TicketTypeDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEE6EC1BACA0B4005152E1 /* TicketTypeDeserializer.swift */; };
 		CADEE6EF1BACA934005152E1 /* SummitAttendeeDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEE6EE1BACA934005152E1 /* SummitAttendeeDeserializer.swift */; };
+		CADF03241BCEEE7500358DCD /* SchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF03231BCEEE7500358DCD /* SchedulePresenter.swift */; settings = {ASSET_TAGS = (); }; };
+		CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */; settings = {ASSET_TAGS = (); }; };
+		CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE0C9741BB2EE3400154246 /* EventDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE1D9041BA760C3004AA88C /* SummitRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */; };
 		CAE5EC2A1B83B85F0032AD31 /* MemberDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE5EC291B83B85F0032AD31 /* MemberDeserializer.swift */; };
@@ -203,6 +208,13 @@
 		CAE643501BCDA174005E530B /* NamedDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE6434F1BCDA174005E530B /* NamedDTOAssembler.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE643521BCDA32F005E530B /* NamedDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE643511BCDA32F005E530B /* NamedDTO.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE643541BCDAB1D005E530B /* TrackListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE643531BCDAB1D005E530B /* TrackListAssembly.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE643591BCDB648005E530B /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE643581BCDB648005E530B /* TrackScheduleViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE6435B1BCDB65F005E530B /* TrackSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE6435A1BCDB65F005E530B /* TrackSchedulePresenter.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE6435D1BCDB6AD005E530B /* TrackScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE6435C1BCDB6AD005E530B /* TrackScheduleInteractor.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE6435F1BCDB73B005E530B /* TrackScheduleWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE6435E1BCDB73B005E530B /* TrackScheduleWireframe.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE643611BCDC1DF005E530B /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE643601BCDC1DF005E530B /* ScheduleView.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE643631BCDC1FE005E530B /* ScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAE643621BCDC1FE005E530B /* ScheduleView.xib */; settings = {ASSET_TAGS = (); }; };
+		CAE643651BCE02C0005E530B /* TrackScheduleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE643641BCE02C0005E530B /* TrackScheduleAssembly.swift */; settings = {ASSET_TAGS = (); }; };
 		CAF2AA3C1B8271C100D8E595 /* CompanyDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA2C1B8271C100D8E595 /* CompanyDeserializer.swift */; };
 		CAF2AA3D1B8271C100D8E595 /* DeserializerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA2D1B8271C100D8E595 /* DeserializerFactory.swift */; };
 		CAF2AA3E1B8271C100D8E595 /* DeserializerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2AA2E1B8271C100D8E595 /* DeserializerProtocol.swift */; };
@@ -265,6 +277,8 @@
 		CA02F8B61BA0BF7B005CD514 /* FeedbackEditAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditAssembly.swift; sourceTree = "<group>"; };
 		CA02F8BC1BA0CFCB005CD514 /* SummitDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDTO.swift; sourceTree = "<group>"; };
 		CA02F8BE1BA0D096005CD514 /* SummitDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDTOAssembler.swift; sourceTree = "<group>"; };
+		CA0873F61BCE98FE00633591 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleTableViewCell.swift; path = "User Interface/ScheduleTableViewCell.swift"; sourceTree = "<group>"; };
+		CA0873F71BCE98FE00633591 /* ScheduleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ScheduleTableViewCell.xib; path = "User Interface/ScheduleTableViewCell.xib"; sourceTree = "<group>"; };
 		CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailAssembly.swift; sourceTree = "<group>"; };
 		CA1CBA861BB5EDF300E65D2B /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		CA1CBA871BB5EDF300E65D2B /* DataUpdateProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateProcessor.swift; sourceTree = "<group>"; };
@@ -435,6 +449,9 @@
 		CADEE6EA1BACA017005152E1 /* TicketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketType.swift; sourceTree = "<group>"; };
 		CADEE6EC1BACA0B4005152E1 /* TicketTypeDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketTypeDeserializer.swift; sourceTree = "<group>"; };
 		CADEE6EE1BACA934005152E1 /* SummitAttendeeDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeDeserializer.swift; sourceTree = "<group>"; };
+		CADF03231BCEEE7500358DCD /* SchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchedulePresenter.swift; path = "User Interface/SchedulePresenter.swift"; sourceTree = "<group>"; };
+		CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInteractor.swift; sourceTree = "<group>"; };
+		CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleViewController.swift; path = "User Interface/ScheduleViewController.swift"; sourceTree = "<group>"; };
 		CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStoreTests.swift; sourceTree = "<group>"; };
 		CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRemoteDataStore.swift; sourceTree = "<group>"; };
 		CAE5EC291B83B85F0032AD31 /* MemberDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MemberDeserializer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -449,6 +466,13 @@
 		CAE6434F1BCDA174005E530B /* NamedDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedDTOAssembler.swift; sourceTree = "<group>"; };
 		CAE643511BCDA32F005E530B /* NamedDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedDTO.swift; sourceTree = "<group>"; };
 		CAE643531BCDAB1D005E530B /* TrackListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListAssembly.swift; sourceTree = "<group>"; };
+		CAE643581BCDB648005E530B /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
+		CAE6435A1BCDB65F005E530B /* TrackSchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackSchedulePresenter.swift; sourceTree = "<group>"; };
+		CAE6435C1BCDB6AD005E530B /* TrackScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleInteractor.swift; sourceTree = "<group>"; };
+		CAE6435E1BCDB73B005E530B /* TrackScheduleWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleWireframe.swift; sourceTree = "<group>"; };
+		CAE643601BCDC1DF005E530B /* ScheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleView.swift; path = "User Interface/ScheduleView.swift"; sourceTree = "<group>"; };
+		CAE643621BCDC1FE005E530B /* ScheduleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ScheduleView.xib; path = "User Interface/ScheduleView.xib"; sourceTree = "<group>"; };
+		CAE643641BCE02C0005E530B /* TrackScheduleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleAssembly.swift; sourceTree = "<group>"; };
 		CAF2AA2C1B8271C100D8E595 /* CompanyDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyDeserializer.swift; sourceTree = "<group>"; };
 		CAF2AA2D1B8271C100D8E595 /* DeserializerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerFactory.swift; sourceTree = "<group>"; };
 		CAF2AA2E1B8271C100D8E595 /* DeserializerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerProtocol.swift; sourceTree = "<group>"; };
@@ -513,6 +537,12 @@
 			isa = PBXGroup;
 			children = (
 				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
+				CAE643601BCDC1DF005E530B /* ScheduleView.swift */,
+				CAE643621BCDC1FE005E530B /* ScheduleView.xib */,
+				CA0873F61BCE98FE00633591 /* ScheduleTableViewCell.swift */,
+				CA0873F71BCE98FE00633591 /* ScheduleTableViewCell.xib */,
+				CADF03231BCEEE7500358DCD /* SchedulePresenter.swift */,
+				CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -747,6 +777,7 @@
 				CA583ACC1BC46B4700632ECF /* RemoteDataStoresAssembly.swift */,
 				CA583ADA1BC707FB00632ECF /* DTOAssemblersAssembly.swift */,
 				CAE643531BCDAB1D005E530B /* TrackListAssembly.swift */,
+				CAE643641BCE02C0005E530B /* TrackScheduleAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1024,6 +1055,7 @@
 		CADDDB881B73CD0C008F742E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CADF03251BCEEEFE00358DCD /* Business Logic */,
 				CAA9A88C1BA89F2700C3725D /* Security */,
 				9D5A99CB1B948D5C002FFAA4 /* User Interfaces */,
 				CACF7C3F1B9664E700A9EB16 /* DTOs */,
@@ -1040,6 +1072,7 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CAE643551BCDB625005E530B /* Track Schedule */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CACB39F91BC2A35E00B1363F /* People */,
 				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
@@ -1140,6 +1173,14 @@
 			path = "User Interface";
 			sourceTree = "<group>";
 		};
+		CADF03251BCEEEFE00358DCD /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
 		CAE643401BCD6039005E530B /* Track List */ = {
 			isa = PBXGroup;
 			children = (
@@ -1165,6 +1206,33 @@
 				CAE643431BCD605C005E530B /* TrackListViewController.swift */,
 				CAE643451BCD607C005E530B /* TrackListPresenter.swift */,
 				CAE643491BCD8B5F005E530B /* TrackTableViewCell.swift */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		CAE643551BCDB625005E530B /* Track Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				CAE643561BCDB625005E530B /* Business Logic */,
+				CAE643571BCDB625005E530B /* User Interface */,
+				CAE6435E1BCDB73B005E530B /* TrackScheduleWireframe.swift */,
+			);
+			path = "Track Schedule";
+			sourceTree = "<group>";
+		};
+		CAE643561BCDB625005E530B /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CAE6435C1BCDB6AD005E530B /* TrackScheduleInteractor.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		CAE643571BCDB625005E530B /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CAE643581BCDB648005E530B /* TrackScheduleViewController.swift */,
+				CAE6435A1BCDB65F005E530B /* TrackSchedulePresenter.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1393,7 +1461,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0873F91BCE98FE00633591 /* ScheduleTableViewCell.xib in Resources */,
 				CAD9061C1B72B34F00BA5647 /* LaunchScreen.storyboard in Resources */,
+				CAE643631BCDC1FE005E530B /* ScheduleView.xib in Resources */,
 				CAD906191B72B34F00BA5647 /* Assets.xcassets in Resources */,
 				CAD906141B72B34F00BA5647 /* Main.storyboard in Resources */,
 			);
@@ -1530,6 +1600,8 @@
 				CA0029F71B9E1E84001A9EDA /* VenueRoomDetailViewController.swift in Sources */,
 				CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */,
 				CACB3A131BC3100200B1363F /* PersonListItemDTOAssembler.swift in Sources */,
+				CAE6435B1BCDB65F005E530B /* TrackSchedulePresenter.swift in Sources */,
+				CAE643611BCDC1DF005E530B /* ScheduleView.swift in Sources */,
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
 				CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */,
 				CAE6434E1BCD951A005E530B /* TrackListWireframe.swift in Sources */,
@@ -1552,6 +1624,7 @@
 				CADEE6ED1BACA0B4005152E1 /* TicketTypeDeserializer.swift in Sources */,
 				CA416F921B8F58EE00F177F5 /* GeneralScheduleFilterInteractor.swift in Sources */,
 				CA89131C1B97A769002E9A95 /* ScheduleItemDTO.swift in Sources */,
+				CAE643651BCE02C0005E530B /* TrackScheduleAssembly.swift in Sources */,
 				CAE643441BCD605C005E530B /* TrackListViewController.swift in Sources */,
 				CA002A011B9E30EE001A9EDA /* VenueRoomDetailDTOAssembler.swift in Sources */,
 				CAF2AA3C1B8271C100D8E595 /* CompanyDeserializer.swift in Sources */,
@@ -1583,6 +1656,7 @@
 				CAE643501BCDA174005E530B /* NamedDTOAssembler.swift in Sources */,
 				CADDDBC21B74F193008F742E /* GeneralSchedulePresenter.swift in Sources */,
 				CADDDBA91B73D1BB008F742E /* PresentationSpeaker.swift in Sources */,
+				CAE6435F1BCDB73B005E530B /* TrackScheduleWireframe.swift in Sources */,
 				CACFBC4A1BA0A23900095E44 /* FeedbackDataStore.swift in Sources */,
 				CAE5EC2E1B83D3890032AD31 /* TagDeserializer.swift in Sources */,
 				CACB3A0B1BC2BCD900B1363F /* SummitAttendeeDTO.swift in Sources */,
@@ -1597,6 +1671,7 @@
 				CAE6434A1BCD8B5F005E530B /* TrackTableViewCell.swift in Sources */,
 				CA1CBA881BB5EDF300E65D2B /* DataUpdatePoller.swift in Sources */,
 				CA1CBA891BB5EDF300E65D2B /* DataUpdateProcessor.swift in Sources */,
+				CAE643591BCDB648005E530B /* TrackScheduleViewController.swift in Sources */,
 				CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */,
 				CA416F901B8F58D900F177F5 /* GeneralScheduleFilterPresenter.swift in Sources */,
 				CA8E98E71B9A042D00CEBD2F /* VenueDetailInteractor.swift in Sources */,
@@ -1620,13 +1695,17 @@
 				CAD6C3CD1BB71EA800F8C2D6 /* HttpFactory.swift in Sources */,
 				CA416F941B8F5B6800F177F5 /* GeneralScheduleFilterWireframe.swift in Sources */,
 				CAE6434C1BCD8E9D005E530B /* TrackDTO.swift in Sources */,
+				CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */,
+				CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */,
 				CACECD721B9E841D00AF0706 /* LoginInteractor.swift in Sources */,
 				CA8E98DC1B99DAD400CEBD2F /* VenueListItemDTO.swift in Sources */,
 				CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */,
 				CA8913161B979A0B002E9A95 /* MemberProfileAssembly.swift in Sources */,
+				CADF03241BCEEE7500358DCD /* SchedulePresenter.swift in Sources */,
 				CA1CBA901BB6415300E65D2B /* DataUpdateStrategy.swift in Sources */,
 				CACFBC371B9F8D3300095E44 /* Feedback.swift in Sources */,
 				CACB3A091BC2B7DE00B1363F /* PeopleWireframe.swift in Sources */,
+				CAE6435D1BCDB6AD005E530B /* TrackScheduleInteractor.swift in Sources */,
 				CACFBC3E1B9F903D00095E44 /* FeedbackEditPresenter.swift in Sources */,
 				CAF2AA541B828E7C00D8E595 /* EventDetailPresenter.swift in Sources */,
 				CACF7C451B9664E700A9EB16 /* EventDetailDTOAssembler.swift in Sources */,
@@ -1687,6 +1766,7 @@
 				CAD5FA161B82DB9E00654B0F /* SummitEventDeserializer.swift in Sources */,
 				CA89131A1B97A083002E9A95 /* MemberProfileDTOAssembler.swift in Sources */,
 				CA8913181B97A056002E9A95 /* MemberProfileDTO.swift in Sources */,
+				CA0873F81BCE98FE00633591 /* ScheduleTableViewCell.swift in Sources */,
 				CA9E42581B7B9667005FDD22 /* SummitType.swift in Sources */,
 				CA7DC6281BB437C800D4636F /* DataUpdateRemoteDataStore.swift in Sources */,
 				CAD480A01B864452004DBB4F /* DataStoreAssembly.swift in Sources */,
