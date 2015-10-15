@@ -66,7 +66,7 @@ class PeopleViewController: RevealViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
-        presenter.buildCell(cell, index: indexPath.row)
+        presenter.buildScheduleCell(cell, index: indexPath.row)
         return cell
     }
     

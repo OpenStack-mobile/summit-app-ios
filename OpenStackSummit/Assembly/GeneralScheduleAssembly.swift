@@ -10,10 +10,11 @@ import UIKit
 import Typhoon
 
 class GeneralScheduleAssembly: TyphoonAssembly {
+    var applicationAssembly: ApplicationAssembly!
     var eventDetailAssembly: EventDetailAssembly!
-    var summitDataStoreAssembly: SummitDataStoreAssembly!
-    var memberDataStore: MemberDataStoreAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
     
     dynamic func generalScheduleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleWireframe.self) {
@@ -30,9 +31,9 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             
             definition.injectProperty("viewController", with: self.generalScheduleViewController())
             definition.injectProperty("interactor", with: self.generalScheduleInteractor())
-            definition.injectProperty("generalScheduleWireframe", with: self.generalScheduleWireframe())
-            definition.injectProperty("session", with: self.generalScheduleSession())
-
+            definition.injectProperty("wireframe", with: self.generalScheduleWireframe())
+            definition.injectProperty("session", with: self.applicationAssembly.session())
+            definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
         }
     }
     
@@ -40,32 +41,15 @@ class GeneralScheduleAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(GeneralScheduleInteractor.self) {
             (definition) in
             
-            definition.injectProperty("summitDataStore", with: self.summitDataStoreAssembly.summitDataStore())
-            definition.injectProperty("summitDTOAssembler", with: self.summitDTOAssembler())
-            definition.injectProperty("eventDataStore", with: self.generalScheduleEventDataStore())
-            definition.injectProperty("scheduleItemDTOAssembler", with: self.generalScheduleScheduleItemDTOAssembler())
-            definition.injectProperty("memberDataStore", with: self.memberDataStore.memberDataStore())
+            definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
+            definition.injectProperty("summitDTOAssembler", with: self.dtoAssemblersAssembly.summitDTOAssembler())
+            definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.dtoAssemblersAssembly.scheduleItemDTOAssembler())
+            definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
-    
-    dynamic func generalScheduleSession() -> AnyObject {
         
-        return TyphoonDefinition.withClass(Session.self)
-    }
-    
-    dynamic func generalScheduleScheduleItemDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
-    }
-    
-    dynamic func generalScheduleEventDataStore() -> AnyObject {
-        return TyphoonDefinition.withClass(EventDataStore.self)
-    }
-    
-    dynamic func summitDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(SummitDTOAssembler.self)
-    }
-    
     dynamic func generalScheduleViewController() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleViewController.self) {
             (definition) in

@@ -53,9 +53,7 @@
 		<string>GeneralScheduleAssembly</string>
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>
-		<string>SummitDataStoreAssembly</string>
 		<string>DataStoreAssembly</string>
-		<string>MemberDataStoreAssembly</string>
 		<string>MemberProfileAssembly</string>
 		<string>VenueListAssembly</string>
 		<string>VenueDetailAssembly</string>
@@ -66,7 +64,6 @@
 		<string>HttpFactoryAssembly</string>
 		<string>DataUpdateAssembly</string>
 		<string>PeopleAssembly</string>
-		<string>RemoteDataStoresAssembly</string>
 		<string>TrackListAssembly</string>
 		<string>DTOAssemblersAssembly</string>
 		<string>TrackScheduleAssembly</string>

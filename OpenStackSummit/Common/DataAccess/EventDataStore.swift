@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IEventDataStore {
     func getByIdLocal(id: Int) -> SummitEvent?
-    func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]
+    func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?)->[SummitEvent]
 }
 
 public class EventDataStore: GenericDataStore, IEventDataStore {
@@ -23,10 +23,13 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         return super.getByIdLocal(id)
     }
     
-    public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?)->[SummitEvent]{
+    public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?)->[SummitEvent]{
         var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
-        if (eventTypes != nil) {
+        if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
+        }
+        if (tracks != nil && tracks!.count > 0) {
+            events = events.filter("presentation.track.id in %@", tracks!)
         }
 
         var eventArray = events.map{$0}

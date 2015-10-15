@@ -12,7 +12,7 @@ import UIKit
 public protocol ITrackListPresenter {
     func viewLoad()
     func showTrackEvents(index: Int)
-    func buildCell(cell: ITrackTableViewCell, index: Int)
+    func buildScheduleCell(cell: ITrackTableViewCell, index: Int)
     func getTrackCount() -> Int
 }
 
@@ -27,7 +27,7 @@ public class TrackListPresenter: NSObject, ITrackListPresenter {
         viewController.reloadData()
     }
     
-    public func buildCell(cell: ITrackTableViewCell, index: Int) {
+    public func buildScheduleCell(cell: ITrackTableViewCell, index: Int) {
         let track = tracks[index]
         cell.name = track.name
     }

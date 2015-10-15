@@ -12,7 +12,7 @@ import UIKit
 public protocol IPeoplePresenter {
     func viewLoad()
     func showPersonProfile(index: Int)
-    func buildCell(cell: IPeopleTableViewCell, index: Int)
+    func buildScheduleCell(cell: IPeopleTableViewCell, index: Int)
     func getPeopleCount() -> Int
 }
 
@@ -63,7 +63,7 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
         }
     }
     
-    public func buildCell(cell: IPeopleTableViewCell, index: Int){
+    public func buildScheduleCell(cell: IPeopleTableViewCell, index: Int){
         let person = attendees[index]
         cell.name = person.name
         cell.title = person.title
