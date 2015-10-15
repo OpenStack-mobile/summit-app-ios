@@ -21,7 +21,7 @@ public class GeneralSchedulePresenter: SchedulePresenter {
     
     weak var viewController : IScheduleViewController!
     var interactor : IScheduleInteractor!
-    var generalScheduleWireframe : IGeneralScheduleWireframe!
+    var wireframe : IGeneralScheduleWireframe!
     
     public override func viewLoad() {
         viewLoad(interactor, viewController: viewController)
@@ -31,8 +31,8 @@ public class GeneralSchedulePresenter: SchedulePresenter {
         reloadSchedule(interactor, viewController: viewController)
     }
     
-    public override func buildCell(cell: IScheduleTableViewCell, index: Int){
-        buildCell(cell, index: index, interactor: interactor)
+    public override func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
+        buildScheduleCell(cell, index: index, interactor: interactor)
     }
     
     public override func getDayEventsCount() -> Int {
@@ -41,7 +41,7 @@ public class GeneralSchedulePresenter: SchedulePresenter {
     
     public override func showEventDetail(index: Int) {
         let event = dayEvents[index]
-        self.generalScheduleWireframe.showEventDetail(event.id)
+        self.wireframe.showEventDetail(event.id)
     }
     
     public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
@@ -49,14 +49,10 @@ public class GeneralSchedulePresenter: SchedulePresenter {
     }
     
     func loggedIn(notification: NSNotification) {
-        viewController.reloadSchedule()
+        loggedIn(notification, viewController: viewController)
     }
 
     func loggedOut(notification: NSNotification) {
-        viewController.reloadSchedule()
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        loggedOut(notification, viewController: viewController)
     }
 }

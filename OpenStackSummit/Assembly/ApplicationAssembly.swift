@@ -30,4 +30,20 @@ class ApplicationAssembly: TyphoonAssembly {
             definition.scope = TyphoonScope.Singleton
         }
     }
+    
+    dynamic func session() -> AnyObject {
+        return TyphoonDefinition.withClass(Session.self) {
+            (definition) in
+
+            definition.scope = TyphoonScope.Singleton
+        }
+    }
+
+    dynamic func scheduleFilter() -> AnyObject {
+        return TyphoonDefinition.withClass(ScheduleFilter.self) {
+            (definition) in
+            
+            definition.scope = TyphoonScope.Singleton
+        }
+    }
 }

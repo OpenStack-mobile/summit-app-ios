@@ -38,7 +38,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             
             var deserializer = deserializerFactory.create(DeserializerFactoryType.EventType)
             summitEvent.eventType = try deserializer.deserialize(json["type_id"]) as! EventType
-            
+
             deserializer = deserializerFactory.create(DeserializerFactoryType.SummitType)
             var summitType : SummitType
             for (_, summitTypeJSON) in json["summit_types"] {

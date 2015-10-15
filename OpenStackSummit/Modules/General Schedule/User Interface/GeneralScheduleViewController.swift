@@ -49,9 +49,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         dayPicker.delegate = self
-        
         presenter.viewLoad()
     }
 
@@ -59,12 +57,10 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     func reloadSchedule() {
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.reloadData()
     }
 
     func showErrorMessage(error: NSError) {
-        
         
     }
     
@@ -92,7 +88,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleTableViewCell
-        presenter.buildCell(cell, index: indexPath.row)
+        presenter.buildScheduleCell(cell, index: indexPath.row)
         return cell
     }
     

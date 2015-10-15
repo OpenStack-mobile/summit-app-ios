@@ -63,4 +63,9 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
     dynamic func namedDTOAssembler() -> AnyObject {
         return TyphoonDefinition.withClass(NamedDTOAssembler.self)
     }
+    
+    dynamic func summitDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitDTOAssembler.self)
+    }
+    
 }

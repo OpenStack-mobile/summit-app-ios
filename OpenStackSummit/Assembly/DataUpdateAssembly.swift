@@ -12,7 +12,6 @@ import Typhoon
 public class DataUpdateAssembly: TyphoonAssembly {
     var httpFactoryAssembly: HttpFactoryAssembly!
     var dataStoreAssembly: DataStoreAssembly!
-    var memberDataStoreAssembly: MemberDataStoreAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     
     public dynamic func dataUpdatePoller() -> AnyObject {
@@ -77,7 +76,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MyScheduleDataUpdateStrategy.self) {
             (definition) in
             
-            definition.injectProperty("memberDataStore", with: self.memberDataStoreAssembly.memberDataStore())
+            definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
