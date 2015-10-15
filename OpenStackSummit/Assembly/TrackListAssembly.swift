@@ -12,10 +12,14 @@ import Typhoon
 class TrackListAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAsembly: DTOAssemblersAssembly!
+    var trackScheduleAssembly: TrackScheduleAssembly!
     
     dynamic func trackListWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(TrackListWireframe.self) {
             (definition) in
+            
+            definition.injectProperty("trackScheduleWireframe", with: self.trackScheduleAssembly.trackScheduleWireframe())
+            definition.injectProperty("trackListViewController", with: self.trackListViewController())
         }
     }
     

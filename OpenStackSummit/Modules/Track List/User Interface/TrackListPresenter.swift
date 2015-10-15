@@ -29,7 +29,7 @@ public class TrackListPresenter: NSObject, ITrackListPresenter {
     
     public func buildCell(cell: ITrackTableViewCell, index: Int) {
         let track = tracks[index]
-        cell.name = "test"//track.name
+        cell.name = track.name
     }
     
     public func getTrackCount() -> Int {
@@ -37,6 +37,7 @@ public class TrackListPresenter: NSObject, ITrackListPresenter {
     }
     
     public func showTrackEvents(index: Int) {
-        
+        let track = tracks[index]
+        wireframe.showTrackSchedule(track.id)
     }
 }

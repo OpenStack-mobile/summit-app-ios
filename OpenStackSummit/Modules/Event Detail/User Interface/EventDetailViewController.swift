@@ -46,8 +46,8 @@ class EventDetailViewController: UIViewController, IEventDetailViewController {
             return eventDescriptionHTML
         }
         set {
-            eventDescriptionHTML = newValue.stringByReplacingOccurrencesOfString("\\", withString: "")
-            let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            //eventDescriptionHTML = newValue.stringByReplacingOccurrencesOfString("\\", withString: "")
+            let attrStr = try! NSAttributedString(data: newValue.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
             eventDetailLabel.attributedText = attrStr
         }
     }
