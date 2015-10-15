@@ -13,7 +13,7 @@ public protocol ISchedulePresenter {
     func reloadSchedule()
     func showEventDetail(index: Int)
     func viewLoad()
-    func buildCell(cell: IScheduleTableViewCell, index: Int)
+    func buildScheduleCell(cell: IScheduleTableViewCell, index: Int)
     func getDayEventsCount() -> Int
     func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell)
 }
@@ -22,11 +22,12 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     var summitTimeZoneOffsetLocalTimeZone: Int!
     var session: ISession!
     var dayEvents: [ScheduleItemDTO]!
+    var scheduleFilter: ScheduleFilter!
 
     public func reloadSchedule() { preconditionFailure("This method must be overridden")  }
     public func showEventDetail(index: Int) { preconditionFailure("This method must be overridden")  }
     public func viewLoad() { preconditionFailure("This method must be overridden")  }
-    public func buildCell(cell: IScheduleTableViewCell, index: Int) { preconditionFailure("This method must be overridden")  }
+    public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int) { preconditionFailure("This method must be overridden")  }
     public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) { preconditionFailure("This method must be overridden")  }
     
     public override init() {
@@ -62,15 +63,15 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     }
     
     func reloadSchedule(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
-        let filterSelections = session.get(Constants.SessionKeys.GeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
         let startDate = viewController.selectedDate.mt_dateSecondsAfter(-summitTimeZoneOffsetLocalTimeZone)
         let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-summitTimeZoneOffsetLocalTimeZone)
         
         dayEvents = interactor.getScheduleEvents(
             startDate,
             endDate: endDate,
-            eventTypes: filterSelections?[FilterSectionTypes.EventType],
-            summitTypes: filterSelections?[FilterSectionTypes.SummitType]
+            eventTypes: scheduleFilter.selections[FilterSectionTypes.EventType],
+            summitTypes: scheduleFilter.selections[FilterSectionTypes.SummitType],
+            tracks: scheduleFilter.selections[FilterSectionTypes.Track]
         )
         viewController.reloadSchedule()
     }
@@ -79,7 +80,7 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
         return dayEvents.count
     }
     
-    public func buildCell(cell: IScheduleTableViewCell, index: Int, interactor: IScheduleInteractor) {
+    public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int, interactor: IScheduleInteractor) {
         let event = dayEvents[index]
         cell.eventTitle = event.name
         cell.timeAndPlace = event.date
@@ -115,4 +116,15 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
         }
     }
     
+    func loggedIn(notification: NSNotification, viewController: IScheduleViewController) {
+        viewController.reloadSchedule()
+    }
+    
+    func loggedOut(notification: NSNotification, viewController: IScheduleViewController) {
+        viewController.reloadSchedule()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }

@@ -12,7 +12,7 @@ import Typhoon
 public class MemberProfileAssembly: TyphoonAssembly {
     var loginAssembly: LoginAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
-    var remoteDataStoresAssembly: RemoteDataStoresAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var applicationAssembly: ApplicationAssembly!
     
@@ -38,8 +38,8 @@ public class MemberProfileAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MemberProfileInteractor.self) {
             (definition) in
             
-            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.remoteDataStoresAssembly.presentationSpeakerRemoteDataStore())
-            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.remoteDataStoresAssembly.summitAttendeeRemoteDataStore())
+            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.dataStoreAssembly.presentationSpeakerRemoteDataStore())
+            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
             definition.injectProperty("summitAttendeeDTOAssembler", with: self.dtoAssemblersAssembly.summitAttendeeDTOAssembler())
             definition.injectProperty("presentationSpeakerDTOAssembler", with: self.dtoAssemblersAssembly.presentationSpeakerDTOAssembler())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())

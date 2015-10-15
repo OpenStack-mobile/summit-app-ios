@@ -10,127 +10,59 @@ import UIKit
 
 @objc
 public protocol ITrackSchedulePresenter {
-    func prepareTrackSchedule(trackId: Int)
     func reloadSchedule()
     func showEventDetail(index: Int)
+    func viewLoad(trackId: Int)
     func viewLoad()
-    func buildCell(cell: IScheduleTableViewCell, index: Int)
+    func buildScheduleCell(cell: IScheduleTableViewCell, index: Int)
     func getDayEventsCount() -> Int
     func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell)
 }
 
-public class TrackSchedulePresenter: NSObject, ITrackSchedulePresenter {
+public class TrackSchedulePresenter: SchedulePresenter {
     var trackId = 0
     weak var viewController : IScheduleViewController!
-    var interactor : GeneralScheduleInteractor!
-    var generalScheduleWireframe : IGeneralScheduleWireframe!
-    var session: ISession!
-    var summitTimeZoneOffsetLocalTimeZone: Int!
-    var dayEvents: [ScheduleItemDTO]!
+    var interactor : IScheduleInteractor!
+    var wireframe : ITrackScheduleWireframe!
+    var isLoaded = false
     
-    public override init() {
-        super.init()
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "loggedIn:",
-            name: Constants.Notifications.LoggedInNotification,
-            object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "loggedOut:",
-            name: Constants.Notifications.LoggedOutNotification,
-            object: nil)
-    }
-    
-    public func viewLoad() {
-        interactor.getActiveSummit() { summit, error in
-            
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-                return
-            }
-            
-            let offsetLocalTimeZone = -NSTimeZone.localTimeZone().secondsFromGMT
-            self.summitTimeZoneOffsetLocalTimeZone = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT + offsetLocalTimeZone
-            self.viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offsetLocalTimeZone)
-            self.viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offsetLocalTimeZone).mt_dateDaysAfter(1)
-            self.viewController.selectedDate = self.viewController.startDate
-        }
-    }
-    
-    public func prepareTrackSchedule(trackId: Int) {
+    public func viewLoad(trackId: Int) {
         self.trackId = trackId
-    }
-        
-    public func reloadSchedule() {
-        let filterSelections = session.get(Constants.SessionKeys.GeneralScheduleFilterSelections) as? Dictionary<FilterSectionTypes, [Int]>
-        let startDate = viewController.selectedDate.mt_dateSecondsAfter(-summitTimeZoneOffsetLocalTimeZone)
-        let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-summitTimeZoneOffsetLocalTimeZone)
-        
-        dayEvents = self.interactor.getScheduleEvents(
-            startDate,
-            endDate: endDate,
-            eventTypes: filterSelections?[FilterSectionTypes.EventType],
-            summitTypes: filterSelections?[FilterSectionTypes.SummitType]
-        )
-        self.viewController.reloadSchedule()
+        viewLoad()
     }
     
-    public func buildCell(cell: IScheduleTableViewCell, index: Int){
-        let event = dayEvents[index]
-        cell.eventTitle = event.name
-        cell.timeAndPlace = event.date
-        cell.scheduledButtonText = interactor.isEventScheduledByLoggedUser(event.id) ? "remove" : "schedule"
+    public override func viewLoad() {
+        viewLoad(interactor, viewController: viewController)
     }
     
-    public func getDayEventsCount() -> Int {
+    public override func reloadSchedule() {
+        scheduleFilter.selections[FilterSectionTypes.Track] = [Int]()
+        scheduleFilter.selections[FilterSectionTypes.Track]!.append(trackId)
+        reloadSchedule(interactor, viewController: viewController)
+    }
+    
+    public override func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
+        buildScheduleCell(cell, index: index, interactor: interactor)
+    }
+    
+    public override func getDayEventsCount() -> Int {
         return dayEvents.count
     }
     
-    public func showEventDetail(index: Int) {
+    public override func showEventDetail(index: Int) {
         let event = dayEvents[index]
-        self.generalScheduleWireframe.showEventDetail(event.id)
+        self.wireframe.showEventDetail(event.id)
     }
     
-    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
-        let event = dayEvents[index]
-        let isScheduled = interactor.isEventScheduledByLoggedUser(event.id)
-        if (isScheduled) {
-            removeEventFromSchedule(event, cell: cell)
-        }
-        else {
-            addEventToSchedule(event, cell: cell)
-        }
-    }
-    
-    func addEventToSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell) {
-        cell.scheduledButtonText = "remove"
-        interactor.addEventToLoggedInMemberSchedule(event.id) { error in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-            }
-        }
-    }
-    
-    func removeEventFromSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell) {
-        cell.scheduledButtonText = "schedule"
-        interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-            }
-        }
+    public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
+        toggleScheduledStatus(index, cell: cell, interactor: interactor, viewController: viewController)
     }
     
     func loggedIn(notification: NSNotification) {
-        viewController.reloadSchedule()
+        loggedIn(notification, viewController: viewController)
     }
     
     func loggedOut(notification: NSNotification) {
-        viewController.reloadSchedule()
+        loggedOut(notification, viewController: viewController)
     }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
 }

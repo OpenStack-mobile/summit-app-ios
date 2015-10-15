@@ -21,7 +21,7 @@ public protocol IScheduleViewController: class {
     func hideActivityIndicator()
 }
 
-class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate {
+class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
     
     @IBOutlet weak var scheduleView: ScheduleView!
     var presenter: ITrackSchedulePresenter!
@@ -63,8 +63,6 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         scheduleView.tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         scheduleView.dayPicker.delegate = self
-        presenter.viewLoad()
-        self.presenter.reloadSchedule()
     }
     
     
@@ -79,6 +77,10 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         
         
     }
+    
+    func showActivityIndicator() {}
+    func hideActivityIndicator() {}
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -96,7 +98,7 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
-        presenter.buildCell(cell, index: indexPath.row)
+        presenter.buildScheduleCell(cell, index: indexPath.row)
         return cell
     }
     
