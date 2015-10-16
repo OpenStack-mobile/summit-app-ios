@@ -38,8 +38,8 @@ class MemberDataStoreTests: XCTestCase {
         }
         
         let expectation = expectationWithDescription("async load")
-        let memberDataStoreAssembly = MemberDataStoreAssembly().activate();
-        let memberDataStore = memberDataStoreAssembly.memberDataStore() as! MemberDataStore
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let memberDataStore = dataStoreAssembly.memberDataStore() as! MemberDataStore
         
         // Act
         memberDataStore.getById(memberId){

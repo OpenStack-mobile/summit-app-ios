@@ -14,6 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="376" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-JC-3Iz">
+                        <rect key="frame" x="246" y="29" width="75" height="30"/>
+                        <state key="normal" title="Schedule"/>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goI-ed-esB">
                         <rect key="frame" x="8" y="14" width="295" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -26,10 +30,6 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-JC-3Iz">
-                        <rect key="frame" x="246" y="29" width="75" height="30"/>
-                        <state key="normal" title="Schedule"/>
-                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>

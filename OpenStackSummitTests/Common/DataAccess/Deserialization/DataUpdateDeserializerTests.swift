@@ -41,7 +41,7 @@ class DataUpdateDeserializerTests: XCTestCase {
         XCTAssertEqual(10,dataUpdate.id)
         XCTAssertEqual(DataOperation.Insert,dataUpdate.operation)
         XCTAssertEqual("MySchedule",dataUpdate.entityClassName)
-        XCTAssertEqual(event,dataUpdate.entity as! SummitEvent)
+        XCTAssertEqual(event,dataUpdate.entity as? SummitEvent)
     }
 
     func test_deserialize_validJSONWithUpdateOperation_returnsCorrectDataUpdateInstance() {
@@ -63,7 +63,7 @@ class DataUpdateDeserializerTests: XCTestCase {
         XCTAssertEqual(10,dataUpdate.id)
         XCTAssertEqual(DataOperation.Update,dataUpdate.operation)
         XCTAssertEqual("MySchedule",dataUpdate.entityClassName)
-        XCTAssertEqual(event,dataUpdate.entity as! SummitEvent)
+        XCTAssertEqual(event,dataUpdate.entity as? SummitEvent)
     }
 
     func test_deserialize_validJSONWithDeleteOperation_returnsCorrectDataUpdateInstance() {
@@ -85,7 +85,7 @@ class DataUpdateDeserializerTests: XCTestCase {
         XCTAssertEqual(10,dataUpdate.id)
         XCTAssertEqual(DataOperation.Delete,dataUpdate.operation)
         XCTAssertEqual("MySchedule",dataUpdate.entityClassName)
-        XCTAssertEqual(event,dataUpdate.entity as! SummitEvent)
+        XCTAssertEqual(event,dataUpdate.entity as? SummitEvent)
     }
     
     func test_deserialize_validJSONWithInvalidOperation_throwsBadFormatException() {

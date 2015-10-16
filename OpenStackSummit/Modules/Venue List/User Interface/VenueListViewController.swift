@@ -10,35 +10,51 @@ import UIKit
 
 @objc
 public protocol IVenueListViewController {
-
+    func releoadList()
 }
 
-class VenueListViewController: RevealViewController, IVenueListViewController {
-
-    var presenter: IVenueListPresenter!
+class VenueListViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, IVenueListViewController {
+    
+    let cellIdentifier = "venueListTableViewCell"
+    @IBOutlet weak var tableView: UITableView!
+    var presenter : IVenueListPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        presenter.viewLoad()
     }
-
+    
+    func releoadList() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
+    }
+    
+    func showErrorMessage(error: NSError) {
+    
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
-    */
-    @IBAction func navigateToDetail(sender: AnyObject) {
-        presenter.showVenueDetail(1)
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.getVenuesCount();
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! VenueListTableViewCell
+        presenter.buildVenueCell(cell, index: indexPath.row)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        self.presenter.showVenueDetail(indexPath.row)
     }
 }

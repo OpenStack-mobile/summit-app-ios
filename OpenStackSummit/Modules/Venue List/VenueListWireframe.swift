@@ -13,7 +13,6 @@ public protocol IVenueListWireframe {
     func showVenueDetail(venueId: Int)
 }
 
-
 public class VenueListWireframe: NSObject, IVenueListWireframe {
     var venueDetailWireframe : IVenueDetailWireframe!
     var venueListViewController: VenueListViewController!

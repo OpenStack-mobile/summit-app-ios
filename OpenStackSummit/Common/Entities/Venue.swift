@@ -12,6 +12,10 @@ import RealmSwift
 public class Venue: Location {
 
     public dynamic var address = ""
+    public dynamic var city = ""
+    public dynamic var zipCode = ""
+    public dynamic var state = ""
+    public dynamic var country = ""
     public dynamic var lat = ""
     public dynamic var long = ""
     public dynamic var isInternal = true
