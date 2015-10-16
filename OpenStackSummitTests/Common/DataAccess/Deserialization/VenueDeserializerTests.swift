@@ -29,7 +29,7 @@ class VenueDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = VenueDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"id\":19,\"name\":\"Grand Prince International Convention Center & Hotels\",\"description\":\"Convention Center\",\"class_name\":\"SummitVenue\",\"location_type\":\"Internal\",\"address_1\":\"3-13-1 Takanawa Minato, Tokyo 108-8612, Japan\",\"address_2\":null,\"zip_code\":null,\"city\":null,\"state\":null,\"country\":null,\"lng\":\"139.73\",\"lat\":\"35.63\"}"
+        let json = "{\"id\":19,\"name\":\"Grand Prince International Convention Center & Hotels\",\"description\":\"Convention Center\",\"class_name\":\"SummitVenue\",\"location_type\":\"Internal\",\"address_1\":\"3-13-1 Takanawa Minato, Tokyo 108-8612, Japan\",\"address_2\":null,\"zip_code\":\"12345\",\"city\":\"test city\",\"state\":\"Tokio\",\"country\":\"Japan\",\"lng\":\"139.73\",\"lat\":\"35.63\"}"
         
         //Act
         let venue = try! deserializer.deserialize(json) as! Venue
@@ -39,6 +39,10 @@ class VenueDeserializerTests: XCTestCase {
         XCTAssertEqual("Grand Prince International Convention Center & Hotels",venue.name)
         XCTAssertEqual("Convention Center",venue.locationDescription)
         XCTAssertEqual("3-13-1 Takanawa Minato, Tokyo 108-8612, Japan",venue.address)
+        XCTAssertEqual("test city",venue.city)
+        XCTAssertEqual("Tokio",venue.state)
+        XCTAssertEqual("Japan",venue.country)
+        XCTAssertEqual("12345",venue.zipCode)
         XCTAssertEqual("35.63",venue.lat)
         XCTAssertEqual("139.73",venue.long)
         XCTAssertTrue(venue.isInternal)

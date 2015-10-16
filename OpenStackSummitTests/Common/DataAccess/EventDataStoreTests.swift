@@ -53,7 +53,7 @@ class EventDataStoreTests: XCTestCase {
         let endDate =  NSDate(timeIntervalSince1970: 1443018930)
         
         // Act
-        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil, tracks: nil)
         
         // Assert
         XCTAssertEqual(2, events.count)
@@ -85,7 +85,7 @@ class EventDataStoreTests: XCTestCase {
         let endDate =  NSDate(timeIntervalSince1970: 1543018930)
         
         // Act
-        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: nil, summitTypes: nil, tracks:nil)
         
         // Assert
         XCTAssertEqual(0, events.count)
@@ -130,7 +130,7 @@ class EventDataStoreTests: XCTestCase {
         let summitTypes = [2]
         
         // Act
-        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks:nil)
         
         // Assert
         XCTAssertEqual(1, events.count)
@@ -175,7 +175,7 @@ class EventDataStoreTests: XCTestCase {
         let summitTypes = [2]
         
         // Act
-        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes)
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks:nil)
         
         // Assert
         XCTAssertEqual(0, events.count)

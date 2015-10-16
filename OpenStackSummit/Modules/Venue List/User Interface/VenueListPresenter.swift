@@ -10,20 +10,34 @@ import UIKit
 
 @objc
 public protocol IVenueListPresenter {
-    func showVenueList()
+    func viewLoad()
+    func getVenuesCount() -> Int
+    func buildVenueCell(cell: IVenueListTableViewCell, index: Int)
     func showVenueDetail(venueId: Int)
 }
 
 public class VenueListPresenter: NSObject, IVenueListPresenter {
-    var venueListWireframe: IVenueListWireframe!
+    var wireframe: IVenueListWireframe!
     var viewController: IVenueListViewController!
-    var venueListInteractor: IVenueListInteractor!
+    var interactor: IVenueListInteractor!
+    var venueList: [VenueListItemDTO]!
     
-    public func showVenueList() {
-        
+    public func viewLoad() {
+        venueList = interactor.getVenues()
+        viewController.releoadList()
+    }
+    
+    public func getVenuesCount() -> Int {
+        return venueList.count
+    }
+    
+    public func buildVenueCell(cell: IVenueListTableViewCell, index: Int){
+        let venue = venueList[index]
+        cell.name = venue.name
+        cell.address = venue.address
     }
     
     public func showVenueDetail(venueId: Int) {
-        venueListWireframe.showVenueDetail(venueId)
+        wireframe.showVenueDetail(venueId)
     }
 }
