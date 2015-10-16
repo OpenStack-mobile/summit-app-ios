@@ -22,7 +22,7 @@ class SummitEventDeserializerTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_Deserialize_CompleteJSONAndVenueIsRoom_ReturnsCorrectInstance() {
+    func test_Deserialize_completeJSONForPresentationAndVenueIsRoom_returnsCorrectInstance() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
@@ -65,7 +65,7 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(track.id, event.presentation!.track.id)
     }
 
-    func test_Deserialize_CompleteJSONAndVenueIsNotRoom_ReturnsCorrectInstance() {
+    func test_Deserialize_CompleteJSONForPresentationAndVenueIsNotRoom_ReturnsCorrectInstance() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
@@ -105,8 +105,46 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(track.id, event.presentation!.track.id)
         XCTAssertTrue(event.allowFeedback)
     }
+
+    func test_deserialize_completeJSONForNonPresentationEventAndVenueIsRoom_returnsCorrectInstance() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        let venueRoom = VenueRoom()
+        venueRoom.id = 31
+        deserializerStorage.add(venueRoom)
+        let eventType = EventType()
+        eventType.id = 6
+        deserializerStorage.add(eventType)
+        let summitType = SummitType()
+        summitType.id = 1
+        deserializerStorage.add(summitType)
+        let sponsor = Company()
+        sponsor.id = 59
+        deserializerStorage.add(sponsor)
+        
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "{\"id\":6792,\"title\":\"Cisco Sponsor Session 1\",\"description\":null,\"start_date\":1445912100,\"end_date\":1445914500,\"location_id\":31,\"type_id\":6,\"class_name\":\"SummitEvent\",\"allow_feedback\":false,\"summit_types\":[1],\"sponsors\":[59]}"
+        
+        //Act
+        let event = try! deserializer.deserialize(json) as! SummitEvent
+        
+        //Assert
+        XCTAssertEqual(6792,event.id)
+        XCTAssertEqual("Cisco Sponsor Session 1",event.name)
+        XCTAssertEqual("",event.eventDescription)
+        XCTAssertEqual(eventType.id,event.eventType.id)
+        XCTAssertEqual(venueRoom.id,event.venueRoom!.id)
+        XCTAssertNil(event.presentation)
+        XCTAssertEqual(1, event.summitTypes.count)
+        XCTAssertEqual(1, event.summitTypes.first!.id)
+        XCTAssertEqual(1, event.sponsors.count)
+        XCTAssertEqual(59, event.sponsors.first!.id)
+        XCTAssertFalse(event.allowFeedback)
+    }
     
-    func test_Deserialize_OnlyID_ReturnsCorrectInstance() {
+    func test_deserialize_onlyID_returnsCorrectInstance() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
