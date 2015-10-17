@@ -12,6 +12,7 @@ import UIKit
 public protocol ISummitAttendeeRemoteDataStore {
     func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([SummitAttendee]?, NSError?) -> Void)
     func getById(id: Int, completionBlock : (SummitAttendee?, NSError?) -> Void)
+    func addFeedback(attendee: SummitAttendee, feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void)
 }
 
 public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataStore {
@@ -71,4 +72,25 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
             completionBlock(attendee, innerError)
         }
     }
+    
+    public func addFeedback(attendee: SummitAttendee, feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void) {
+        let endpoint = "https://testresource-server.openstack.org/api/v1/summits/current/events/\(feedback.event.id)/feedback"
+        let http = httpFactory.create(HttpType.OpenIDJson)
+        var jsonDictionary = [String:AnyObject]()
+        jsonDictionary["rate"] = feedback.rate
+        jsonDictionary["note"] = feedback.review
+        jsonDictionary["owner_id"] = attendee.id
+        
+        http.POST(endpoint, parameters: jsonDictionary, completionHandler: {(responseObject, error) in
+            if (error != nil) {
+                completionBlock(nil, error)
+                return
+            }
+            
+            let id = Int(responseObject as! String)!
+            feedback.id = id
+            completionBlock(feedback, error)
+        })
+    }
+    
 }

@@ -9,8 +9,11 @@
 import UIKit
 
 public class FeedbackDTO: NSObject {
+    public var id = 0
     public var rate = 0
     public var review = ""
     public var date = ""
     public var owner = ""
+    public var eventName = ""
+    public var eventId = 0
 }

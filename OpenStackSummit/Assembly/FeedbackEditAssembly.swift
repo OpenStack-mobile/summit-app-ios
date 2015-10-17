@@ -39,7 +39,7 @@ public class FeedbackEditAssembly: TyphoonAssembly {
             (definition) in
 
             definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
-            definition.injectProperty("feedbackDataStore", with: self.dataStoreAssembly.feedbackDataStore())
+            definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("feedbackDTOAssembler", with: self.dtoAssemblersAssembly.feedbackDTOAssembler())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }

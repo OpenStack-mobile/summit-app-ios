@@ -51,6 +51,13 @@
 		CA416F9E1B8FC44B00F177F5 /* EventTypeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */; };
 		CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */; };
 		CA416FA21B8FC46E00F177F5 /* TrackDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */; };
+		CA43998B1BD156C0008F378D /* FeedbackGivenListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399861BD156C0008F378D /* FeedbackGivenListInteractor.swift */; settings = {ASSET_TAGS = (); }; };
+		CA43998C1BD156C0008F378D /* FeedbackGivenListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */; settings = {ASSET_TAGS = (); }; };
+		CA43998D1BD156C0008F378D /* FeedbackGivenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399891BD156C0008F378D /* FeedbackGivenTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		CA43998E1BD156C0008F378D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA43998A1BD156C0008F378D /* FeedbackGivenListViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CA4399901BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA43998F1BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift */; settings = {ASSET_TAGS = (); }; };
+		CA4399921BD18062008F378D /* FeedbackDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399911BD18062008F378D /* FeedbackDeserializer.swift */; settings = {ASSET_TAGS = (); }; };
+		CA4399941BD19778008F378D /* GivenFeedbackAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399931BD19778008F378D /* GivenFeedbackAssembly.swift */; settings = {ASSET_TAGS = (); }; };
 		CA583ACB1BC45CF700632ECF /* PeopleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA583ACA1BC45CF700632ECF /* PeopleAssembly.swift */; settings = {ASSET_TAGS = (); }; };
 		CA583AD11BC485C200632ECF /* SummitAttendeeDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA583AD01BC485C200632ECF /* SummitAttendeeDeserializerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		CA583AD31BC6BB4500632ECF /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA583AD21BC6BB4500632ECF /* PersonDTO.swift */; settings = {ASSET_TAGS = (); }; };
@@ -303,6 +310,13 @@
 		CA416F9D1B8FC44B00F177F5 /* EventTypeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTypeDataStore.swift; sourceTree = "<group>"; };
 		CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTypeDataStore.swift; sourceTree = "<group>"; };
 		CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackDataStore.swift; sourceTree = "<group>"; };
+		CA4399861BD156C0008F378D /* FeedbackGivenListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListInteractor.swift; sourceTree = "<group>"; };
+		CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListPresenter.swift; sourceTree = "<group>"; };
+		CA4399891BD156C0008F378D /* FeedbackGivenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenTableViewCell.swift; sourceTree = "<group>"; };
+		CA43998A1BD156C0008F378D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
+		CA43998F1BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDTOAssemblerTests.swift; sourceTree = "<group>"; };
+		CA4399911BD18062008F378D /* FeedbackDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDeserializer.swift; sourceTree = "<group>"; };
+		CA4399931BD19778008F378D /* GivenFeedbackAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivenFeedbackAssembly.swift; sourceTree = "<group>"; };
 		CA583ACA1BC45CF700632ECF /* PeopleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleAssembly.swift; sourceTree = "<group>"; };
 		CA583AD01BC485C200632ECF /* SummitAttendeeDeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeDeserializerTests.swift; sourceTree = "<group>"; };
 		CA583AD21BC6BB4500632ECF /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
@@ -674,6 +688,33 @@
 			path = "User Interface";
 			sourceTree = "<group>";
 		};
+		CA4399841BD156C0008F378D /* Feedback Given List */ = {
+			isa = PBXGroup;
+			children = (
+				CA4399851BD156C0008F378D /* Business Logic */,
+				CA4399871BD156C0008F378D /* User Interface */,
+			);
+			path = "Feedback Given List";
+			sourceTree = "<group>";
+		};
+		CA4399851BD156C0008F378D /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CA4399861BD156C0008F378D /* FeedbackGivenListInteractor.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		CA4399871BD156C0008F378D /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */,
+				CA4399891BD156C0008F378D /* FeedbackGivenTableViewCell.swift */,
+				CA43998A1BD156C0008F378D /* FeedbackGivenListViewController.swift */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
 		CA89130A1B9794D7002E9A95 /* Member Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,6 +819,7 @@
 				CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */,
 				CA8E98E81B9A0C4700CEBD2F /* VenueListAssembly.swift */,
 				CA0029FC1B9E205A001A9EDA /* VenueRoomDetailAssembly.swift */,
+				CA4399931BD19778008F378D /* GivenFeedbackAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -938,6 +980,7 @@
 				CAD78BCC1B98C64800D37B7C /* ScheduleItemDTOAssemblerTests.swift */,
 				CAC7F3061B9943E600BAE2C6 /* MemberProfileDTOAssemblerTests.swift */,
 				CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */,
+				CA43998F1BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift */,
 			);
 			path = Assemblers;
 			sourceTree = "<group>";
@@ -1075,6 +1118,7 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CA4399841BD156C0008F378D /* Feedback Given List */,
 				CAE643551BCDB625005E530B /* Track Schedule */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CACB39F91BC2A35E00B1363F /* People */,
@@ -1293,6 +1337,7 @@
 				CAF2AA331B8271C100D8E595 /* TrackDeserializer.swift */,
 				CAF2AA391B8271C100D8E595 /* VenueDeserializer.swift */,
 				CAF2AA3A1B8271C100D8E595 /* VenueRoomDeserializer.swift */,
+				CA4399911BD18062008F378D /* FeedbackDeserializer.swift */,
 			);
 			path = Deserialization;
 			sourceTree = "<group>";
@@ -1601,11 +1646,13 @@
 			files = (
 				CA02F8B71BA0BF7B005CD514 /* FeedbackEditAssembly.swift in Sources */,
 				CA0029F71B9E1E84001A9EDA /* VenueRoomDetailViewController.swift in Sources */,
+				CA43998D1BD156C0008F378D /* FeedbackGivenTableViewCell.swift in Sources */,
 				CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */,
 				CACB3A131BC3100200B1363F /* PersonListItemDTOAssembler.swift in Sources */,
 				CAE6435B1BCDB65F005E530B /* TrackSchedulePresenter.swift in Sources */,
 				CAE643611BCDC1DF005E530B /* ScheduleView.swift in Sources */,
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
+				CA43998E1BD156C0008F378D /* FeedbackGivenListViewController.swift in Sources */,
 				CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */,
 				CAE6434E1BCD951A005E530B /* TrackListWireframe.swift in Sources */,
 				CAD6C3CF1BB74ADE00F8C2D6 /* HttpFactoryAssembly.swift in Sources */,
@@ -1614,10 +1661,12 @@
 				CA02F8BF1BA0D096005CD514 /* SummitDTOAssembler.swift in Sources */,
 				CAD9060F1B72B34F00BA5647 /* AppDelegate.swift in Sources */,
 				CAE643461BCD607C005E530B /* TrackListPresenter.swift in Sources */,
+				CA43998B1BD156C0008F378D /* FeedbackGivenListInteractor.swift in Sources */,
 				CAD6B3341B7E2B0300D62023 /* BaseEntity.swift in Sources */,
 				CADDDBA71B73D1BB008F742E /* Presentation.swift in Sources */,
 				CAD3BCA01BA9F05E0092616D /* SecurityManager.swift in Sources */,
 				CA8913101B97951D002E9A95 /* MemberProfileViewController.swift in Sources */,
+				CA4399941BD19778008F378D /* GivenFeedbackAssembly.swift in Sources */,
 				CACFBC441B9F90C700095E44 /* FeedbackEditViewController.swift in Sources */,
 				CAF2AA451B8271C100D8E595 /* PresentationSpeakerDeserializer.swift in Sources */,
 				CAF2AA481B8271C100D8E595 /* SummitTypeDeserializer.swift in Sources */,
@@ -1696,6 +1745,7 @@
 				CAE643481BCD6095005E530B /* TrackListInteractor.swift in Sources */,
 				CAD6C3CD1BB71EA800F8C2D6 /* HttpFactory.swift in Sources */,
 				CA416F941B8F5B6800F177F5 /* GeneralScheduleFilterWireframe.swift in Sources */,
+				CA43998C1BD156C0008F378D /* FeedbackGivenListPresenter.swift in Sources */,
 				CAE6434C1BCD8E9D005E530B /* TrackDTO.swift in Sources */,
 				CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */,
 				CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */,
@@ -1766,6 +1816,7 @@
 				CA8E98D81B99D92600CEBD2F /* VenueListPresenter.swift in Sources */,
 				CA01190F1B8D1C2C0091E00F /* GenericDataStore.swift in Sources */,
 				CAD6C3CB1BB71A4D00F8C2D6 /* DataUpdateDataStore.swift in Sources */,
+				CA4399921BD18062008F378D /* FeedbackDeserializer.swift in Sources */,
 				CAD5FA161B82DB9E00654B0F /* SummitEventDeserializer.swift in Sources */,
 				CA89131A1B97A083002E9A95 /* MemberProfileDTOAssembler.swift in Sources */,
 				CA8913181B97A056002E9A95 /* MemberProfileDTO.swift in Sources */,
@@ -1794,6 +1845,7 @@
 				CA1CBA8C1BB5EE3000E65D2B /* DataUpdateProcessorTests.swift in Sources */,
 				CACF207A1BBC89DD001868AF /* PresentationSpeakerDeserializerTests.swift in Sources */,
 				CAD6C3D51BB7579200F8C2D6 /* DataUpdatePollerTests.swift in Sources */,
+				CA4399901BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift in Sources */,
 				CAD6C3D31BB755B100F8C2D6 /* HttpMock.swift in Sources */,
 				CAD6C3D11BB7556500F8C2D6 /* HttpFactoryMock.swift in Sources */,
 				CACF7C4E1B96650200A9EB16 /* SpeakerDTOAssemblerTests.swift in Sources */,

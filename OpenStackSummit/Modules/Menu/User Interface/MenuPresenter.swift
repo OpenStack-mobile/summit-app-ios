@@ -46,6 +46,9 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             else if (row == 6) {
                 show = currentMemberRole == MemberRoles.Anonymous
             }
+            else if (row == 8) {
+                show = currentMemberRole == MemberRoles.Attendee
+            }
         }
         return show
     }
