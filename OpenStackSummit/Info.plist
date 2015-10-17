@@ -67,6 +67,7 @@
 		<string>TrackListAssembly</string>
 		<string>DTOAssemblersAssembly</string>
 		<string>TrackScheduleAssembly</string>
+		<string>FeedbackGivenListAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

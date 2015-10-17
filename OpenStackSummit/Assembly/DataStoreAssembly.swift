@@ -36,9 +36,19 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("ticketTypeDeserializer", with: self.ticketTypeDeserializer())
             definition.injectProperty("summitAttendeeDeserializer", with: self.summitAttendeeDeserializer())
             definition.injectProperty("dataUpdateDeserializer", with: self.dataUpdateDeserializer())
+            definition.injectProperty("feedbackDeserializer", with: self.feedbackDeserializer())
         }
     }
-
+    
+    public dynamic func feedbackDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(FeedbackDeserializer.self) {
+            (definition) in
+            
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
+            definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
+        }
+    }
+    
     public dynamic func dataUpdateDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(DataUpdateDeserializer.self) {
             (definition) in
@@ -233,6 +243,13 @@ public class DataStoreAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(TrackDataStore.self)
     }
     
+    public dynamic func summitAttendeeDataStore() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(SummitAttendeeDataStore.self) {
+            (definition) in
+            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.summitAttendeeRemoteDataStore())
+        }
+    }
     
     // MARK: Remote data stores
     public dynamic func summitRemoteDataStore() -> AnyObject {

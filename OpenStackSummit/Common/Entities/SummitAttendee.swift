@@ -14,5 +14,5 @@ public class SummitAttendee: Person {
     public let scheduledEvents = List<SummitEvent>()
     public let bookmarkedEvents = List<SummitEvent>()
     public let friends = List<Member>()
-    
+    public let feedback = List<Feedback>()
 }
