@@ -45,11 +45,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
-    
-    dynamic func memberProfileDataStore() -> AnyObject {
-        return TyphoonDefinition.withClass(MemberDataStore.self)
-    }
-    
+        
     dynamic func memberProfileViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in

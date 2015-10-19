@@ -25,7 +25,7 @@ class PeopleViewController: RevealViewController, UITableViewDelegate, UITableVi
     var presenter: IPeoplePresenter!
     var searchTerm: String!
     @IBOutlet weak var tableView: UITableView!
-    let cellIdentifier = "trackTableViewCell"
+    let cellIdentifier = "peopleTableViewCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
