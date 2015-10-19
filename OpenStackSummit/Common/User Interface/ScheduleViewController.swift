@@ -24,11 +24,8 @@ public protocol IScheduleViewController: class {
 class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
     
     @IBOutlet weak var scheduleView: ScheduleView!
-    var presenter: ITrackSchedulePresenter!
-    let cellIdentifier = "scheduleTableViewCell"
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
+    let cellIdentifier = "scheduleTableViewCell"
     
     var startDate: NSDate! {
         get {
@@ -59,6 +56,8 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    var internalPresenter: ISchedulePresenter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scheduleView.tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -87,31 +86,40 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getDayEventsCount();
-    }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
-        presenter.buildScheduleCell(cell, index: indexPath.row)
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showEventDetail(indexPath.row)
-    }
-    
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
         let width: CGFloat = 50
         return width
     }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
+        internalPresenter.buildScheduleCell(cell, index: indexPath.row)
+        cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus", forControlEvents: UIControlEvents.TouchDragInside)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        internalPresenter.showEventDetail(indexPath.row)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return internalPresenter.getDayEventsCount();
+    }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
-        self.presenter.reloadSchedule()
+        internalPresenter.reloadSchedule()
+    }
+    
+    func toggleSchedule(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview as! UITableViewCell
+        let indexPath = scheduleView.tableView.indexPathForCell(cell)
+        
+        //super.toggleScheduledStatus(indexPath!, cell: cell as! IScheduleTableViewCell, presenter: presenter)
     }
 }

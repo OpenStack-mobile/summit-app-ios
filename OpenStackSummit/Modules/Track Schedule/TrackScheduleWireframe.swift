@@ -9,14 +9,12 @@
 import UIKit
 
 @objc
-public protocol ITrackScheduleWireframe {
+public protocol ITrackScheduleWireframe: IScheduleWireframe {
     func presentTrackScheduleView(trackId: Int, viewController: UINavigationController)
-    func showEventDetail(eventId: Int)
 }
 
-public class TrackScheduleWireframe: NSObject, ITrackScheduleWireframe {
-    var trackScheduleViewController : TrackScheduleViewController!
-    var eventDetailWireframe : IEventDetailWireframe!
+public class TrackScheduleWireframe: ScheduleWireframe, ITrackScheduleWireframe {
+    var trackScheduleViewController: TrackScheduleViewController!
     
     public func presentTrackScheduleView(trackId: Int, viewController: UINavigationController) {
         let newViewController = trackScheduleViewController!
@@ -25,7 +23,7 @@ public class TrackScheduleWireframe: NSObject, ITrackScheduleWireframe {
         viewController.pushViewController(newViewController, animated: true)
     }
     
-    public func showEventDetail(eventId: Int) {
-        eventDetailWireframe.presentEventDetailView(eventId, viewController: trackScheduleViewController.navigationController!)
+    public override func showEventDetail(eventId: Int) {
+        super.showEventDetail(eventId, viewController: trackScheduleViewController)
     }    
 }

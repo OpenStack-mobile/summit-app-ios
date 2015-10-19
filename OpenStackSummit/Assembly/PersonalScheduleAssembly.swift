@@ -1,32 +1,32 @@
 //
-//  TrackScheduleAssembly.swift
+//  PersonalScheduleAssembly.swift
 //  OpenStackSummit
 //
-//  Created by Claudio on 10/14/15.
+//  Created by Claudio on 10/19/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
 import UIKit
 import Typhoon
 
-class TrackScheduleAssembly: TyphoonAssembly {
+class PersonalScheduleAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var eventDetailAssembly: EventDetailAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     
-    dynamic func trackScheduleWireframe() -> AnyObject {
-        return TyphoonDefinition.withClass(TrackScheduleWireframe.self) {
+    dynamic func personalScheduleWireframe() -> AnyObject {
+        return TyphoonDefinition.withClass(PersonalScheduleWireframe.self) {
             (definition) in
             
-            definition.injectProperty("trackScheduleViewController", with: self.trackScheduleViewController())
+            definition.injectProperty("personalScheduleViewController", with: self.personalScheduleViewController())
             definition.injectProperty("eventDetailWireframe", with: self.eventDetailAssembly.eventDetailWireframe())
         }
     }
     
-    dynamic func trackScheduleInteractor() -> AnyObject {
-        return TyphoonDefinition.withClass(TrackScheduleInteractor.self) {
+    dynamic func personalScheduleInteractor() -> AnyObject {
+        return TyphoonDefinition.withClass(PersonalScheduleInteractor.self) {
             (definition) in
             definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
             definition.injectProperty("summitDTOAssembler", with: self.dtoAssemblersAssembly.summitDTOAssembler())
@@ -37,26 +37,35 @@ class TrackScheduleAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func trackSchedulePresenter() -> AnyObject {
-        return TyphoonDefinition.withClass(TrackSchedulePresenter.self) {
+    dynamic func personalSchedulePresenter() -> AnyObject {
+        return TyphoonDefinition.withClass(PersonalSchedulePresenter.self) {
             (definition) in
             
-            definition.injectProperty("viewController", with: self.trackScheduleViewController())
-            definition.injectProperty("interactor", with: self.trackScheduleInteractor())
-            definition.injectProperty("wireframe", with: self.trackScheduleWireframe())
+            definition.injectProperty("viewController", with: self.personalScheduleViewController())
+            definition.injectProperty("interactor", with: self.personalScheduleInteractor())
+            definition.injectProperty("wireframe", with: self.personalScheduleWireframe())
             definition.injectProperty("session", with: self.applicationAssembly.session())
             definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
         }
     }
     
-    dynamic func trackScheduleViewController() -> AnyObject {
+    dynamic func personalScheduleViewController() -> AnyObject {
+        return TyphoonDefinition.withClass(PersonalScheduleViewController.self) {
+            (definition) in
+            
+            definition.injectProperty("presenter", with: self.personalSchedulePresenter())
+        }
+    }
+
+    
+    /*dynamic func personalScheduleViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
             
-            factoryMethod.injectParameterWith("TrackScheduleViewController")
+            factoryMethod.injectParameterWith("PersonalScheduleViewController")
             }, configuration: {
                 (definition) in
-                definition.injectProperty("presenter", with: self.trackSchedulePresenter())
+                definition.injectProperty("presenter", with: self.personalSchedulePresenter())
         })
-    }    
+    }*/
 }

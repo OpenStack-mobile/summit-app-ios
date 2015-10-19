@@ -23,12 +23,9 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     var session: ISession!
     var dayEvents: [ScheduleItemDTO]!
     var scheduleFilter: ScheduleFilter!
-
-    public func reloadSchedule() { preconditionFailure("This method must be overridden")  }
-    public func showEventDetail(index: Int) { preconditionFailure("This method must be overridden")  }
-    public func viewLoad() { preconditionFailure("This method must be overridden")  }
-    public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int) { preconditionFailure("This method must be overridden")  }
-    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) { preconditionFailure("This method must be overridden")  }
+    var internalInteractor: IScheduleInteractor!
+    var internalViewController: IScheduleViewController!
+    var internalWireframe: IScheduleWireframe!
     
     public override init() {
         super.init()
@@ -43,8 +40,42 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
             name: Constants.Notifications.LoggedOutNotification,
             object: nil)
     }
+    
+    public func viewLoad() {
+        viewLoad(internalInteractor, viewController: internalViewController)
+    }
+    
+    public func reloadSchedule() {
+        reloadSchedule(internalInteractor, viewController: internalViewController)
+    }
+    
+    public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
+        buildScheduleCell(cell, index: index, interactor: internalInteractor)
+    }
+    
+    public func getDayEventsCount() -> Int {
+        return dayEvents.count
+    }
+    
+    public func showEventDetail(index: Int) {
+        let event = dayEvents[index]
+        internalWireframe.showEventDetail(event.id)
+    }
+    
+    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
+        toggleScheduledStatus(index, cell: cell, interactor: internalInteractor, viewController: internalViewController)
+    }
+    
+    func loggedIn(notification: NSNotification) {
+        loggedIn(notification, viewController: internalViewController)
+    }
+    
+    func loggedOut(notification: NSNotification) {
+        loggedOut(notification, viewController: internalViewController)
+    }
+    
     func viewLoad(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
-        viewController.showActivityIndicator()
+        internalViewController.showActivityIndicator()
         
         interactor.getActiveSummit() { summit, error in
             defer { viewController.hideActivityIndicator() }
@@ -74,10 +105,6 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
             tracks: scheduleFilter.selections[FilterSectionTypes.Track]
         )
         viewController.reloadSchedule()
-    }
-
-    public func getDayEventsCount() -> Int {
-        return dayEvents.count
     }
     
     public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int, interactor: IScheduleInteractor) {

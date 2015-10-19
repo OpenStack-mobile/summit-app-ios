@@ -19,40 +19,31 @@ extension Array where Element: SummitEvent {
 
 public class GeneralSchedulePresenter: SchedulePresenter {
     
-    weak var viewController : IScheduleViewController!
-    var interactor : IScheduleInteractor!
-    var wireframe : IGeneralScheduleWireframe!
-    
-    public override func viewLoad() {
-        viewLoad(interactor, viewController: viewController)
+    weak var viewController : IScheduleViewController! {
+        get {
+            return internalViewController
+        }
+        set {
+            internalViewController = newValue
+        }
     }
     
-    public override func reloadSchedule() {
-        reloadSchedule(interactor, viewController: viewController)
+    var interactor : IScheduleInteractor! {
+        get {
+            return internalInteractor
+        }
+        set {
+            internalInteractor = newValue
+        }
     }
     
-    public override func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
-        buildScheduleCell(cell, index: index, interactor: interactor)
+    var wireframe : IGeneralScheduleWireframe! {
+        get {
+            return internalWireframe as! IGeneralScheduleWireframe
+        }
+        set {
+            internalWireframe = newValue
+        }
     }
     
-    public override func getDayEventsCount() -> Int {
-        return dayEvents.count
-    }
-    
-    public override func showEventDetail(index: Int) {
-        let event = dayEvents[index]
-        self.wireframe.showEventDetail(event.id)
-    }
-    
-    public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
-        toggleScheduledStatus(index, cell: cell, interactor: interactor, viewController: viewController)
-    }
-    
-    func loggedIn(notification: NSNotification) {
-        loggedIn(notification, viewController: viewController)
-    }
-
-    func loggedOut(notification: NSNotification) {
-        loggedOut(notification, viewController: viewController)
-    }
 }
