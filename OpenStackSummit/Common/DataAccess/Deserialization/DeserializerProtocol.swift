@@ -23,9 +23,7 @@ public extension IDeserializer {
         let jsonObject = JSON(data: data!)
         return try deserialize(jsonObject)
     }
-}
 
-public extension IDeserializer {
     func deserializeArray(json: String)  throws -> [BaseEntity] {
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         let jsonObject = JSON(data: data!)
@@ -50,5 +48,17 @@ public extension IDeserializer {
         let jsonObject = JSON(data: data!)
         let array = try deserializeArray(jsonObject["data"])
         return array
+    }
+    
+    func validateRequiredFields(fieldNames:[String], inJson json: JSON) -> [String] {
+        var missedFields = [String]()
+        
+        for fieldName in fieldNames {
+            if (json[fieldName] == nil) {
+                missedFields.append(fieldName)
+            }
+        }
+        
+        return missedFields
     }
 }
