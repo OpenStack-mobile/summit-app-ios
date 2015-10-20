@@ -38,7 +38,7 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
         case "DELETE":
             dataUpdate.operation = DataOperation.Delete
         default:
-            throw DeserializerError.BadFormat
+            throw DeserializerError.BadFormat("Operation is not valid")
         }
         
         return dataUpdate

@@ -55,4 +55,10 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         dayEvents = interactor.getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
         viewController.reloadSchedule()
     }
+    
+    public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
+        toggleScheduledStatus(index, cell: cell, interactor: internalInteractor, viewController: internalViewController) { error in
+            self.reloadSchedule()
+        }
+    }
 }

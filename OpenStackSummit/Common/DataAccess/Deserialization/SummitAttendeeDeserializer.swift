@@ -30,6 +30,8 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             summitAttendee = deserializerStorage.get(summitAttendeeId)
         }
         else {
+            try validateRequiredFields(["id", "first_name", "last_name", "schedule"], inJson: json)
+            
             summitAttendee = SummitAttendee()
             summitAttendee.id = json["id"].intValue
             summitAttendee.firstName = json["first_name"].stringValue

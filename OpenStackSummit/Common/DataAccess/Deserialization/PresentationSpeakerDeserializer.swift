@@ -22,13 +22,15 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
     }
     
     
-    public func deserialize(json: JSON) -> BaseEntity {
+    public func deserialize(json: JSON) throws -> BaseEntity {
         var presentationSpeaker: PresentationSpeaker
         
-        if let eventId = json.int {
-            presentationSpeaker = deserializerStorage.get(eventId)
+        if let presentationSpeakerId = json.int {
+            presentationSpeaker = deserializerStorage.get(presentationSpeakerId)
         }
         else {
+            try validateRequiredFields(["id", "first_name", "last_name"], inJson: json)
+            
             presentationSpeaker = PresentationSpeaker()
             presentationSpeaker.id = json["id"].intValue
             presentationSpeaker.firstName = json["first_name"].stringValue

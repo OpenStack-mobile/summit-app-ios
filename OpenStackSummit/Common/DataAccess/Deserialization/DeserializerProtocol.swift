@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 public enum DeserializerError: ErrorType {
-    case BadFormat
+    case BadFormat(String)
 }
 
 public protocol IDeserializer {
@@ -50,7 +50,7 @@ public extension IDeserializer {
         return array
     }
     
-    func validateRequiredFields(fieldNames:[String], inJson json: JSON) -> [String] {
+    func validateRequiredFields(fieldNames:[String], inJson json: JSON) throws {
         var missedFields = [String]()
         
         for fieldName in fieldNames {
@@ -58,7 +58,10 @@ public extension IDeserializer {
                 missedFields.append(fieldName)
             }
         }
-        
-        return missedFields
+
+        if (missedFields.count > 0) {
+            let missedFieldsString = missedFields.joinWithSeparator(", ")
+            throw DeserializerError.BadFormat("\(self) Following fields are missed: \(missedFieldsString)")
+        }
     }
 }

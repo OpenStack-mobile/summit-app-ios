@@ -29,11 +29,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             summitEvent = deserializerStorage.get(eventId)
         }
         else {
-            
-            let missedFields = validateRequiredFields(["id", "start_date", "end_date", "title", "description", "allow_feedback", "type_id"], inJson: json)
-            if (missedFields.count > 0) {
-                throw DeserializerError.BadFormat
-            }
+            try validateRequiredFields(["id", "start_date", "end_date", "title", "allow_feedback", "type_id"], inJson: json)
             
             summitEvent.id = json["id"].intValue
             summitEvent.start = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))

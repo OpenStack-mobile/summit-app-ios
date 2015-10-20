@@ -12,7 +12,8 @@ import SwiftyJSON
 public class ImageDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> BaseEntity {        
+        try validateRequiredFields(["id", "url"], inJson: json)
         
         let image = Image()
         

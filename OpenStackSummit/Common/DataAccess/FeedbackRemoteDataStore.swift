@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IFeedbackRemoteDataStore {
     func saveOrUpdate(feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void)
+    
 }
 
 public class FeedbackRemoteDataStore: NSObject {

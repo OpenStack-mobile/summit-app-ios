@@ -39,7 +39,7 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitAttendeeDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444168328,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\"],\"first_name\":\"TestFName\",\"last_name\":\"TestLName\",\"gender\":\"Male\",\"email\":\"test@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":\"irc_test\",\"twitter\":\"twitter_test\",\"bio\":\"test bio\",\"title\":\"test title\"}"
+        let json = "{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444168328,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[6770,4982],\"first_name\":\"TestFName\",\"last_name\":\"TestLName\",\"gender\":\"Male\",\"email\":\"test@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":\"irc_test\",\"twitter\":\"twitter_test\",\"bio\":\"test bio\",\"title\":\"test title\",\"feedback\":[]}"
         
         //Act
         let summitAttendee = try! deserializer.deserialize(json) as! SummitAttendee
@@ -82,13 +82,43 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
         
-        let deserializer = PresentationSpeakerDeserializer(deserializerStorage: deserializerStorage)
-        let json = "{\"total\":1,\"per_page\":10,\"current_page\":1,\"last_page\":1,\"next_page_url\":null,\"prev_page_url\":null,\"from\":1,\"to\":1,\"data\":[{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\",\"6763\",\"6813\",\"6799\",\"6056\",\"6792\",\"6816\",\"5879\"],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},{\"id\":2,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\",\"6763\",\"6813\",\"6799\",\"6056\",\"6792\",\"6816\",\"5879\"],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null}]}"
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = SummitAttendeeDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "{\"total\":1,\"per_page\":10,\"current_page\":1,\"last_page\":1,\"next_page_url\":null,\"prev_page_url\":null,\"from\":1,\"to\":1,\"data\":[{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\",\"6763\",\"6813\",\"6799\",\"6056\",\"6792\",\"6816\",\"5879\"],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},{\"id\":2,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\",\"6763\",\"6813\",\"6799\",\"6056\",\"6792\",\"6816\",\"5879\"],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},\"feedback\":[]]}"
         
         //Act
-        let presentationSpeakers = try! deserializer.deserializePage(json) as! [PresentationSpeaker]
+        let attendees = try! deserializer.deserializePage(json) as! [SummitAttendee]
         
         //Assert
-        XCTAssertEqual(2, presentationSpeakers.count)
+        XCTAssertEqual(2, attendees.count)
+    }
+    
+    func test_deserialize_jsonWithAllManfatoryFieldsMissed_throwsBadFormatException() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = SummitAttendeeDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "{}"
+        let expectedExceptionCount = 1
+        var exceptionCount = 0
+        var errorMessage = ""
+        
+        //Act
+        do {
+            try deserializer.deserialize(json) as! SummitAttendee
+        }
+        catch DeserializerError.BadFormat(let em) {
+            exceptionCount++
+            errorMessage = em
+        }
+        catch {
+            
+        }
+        
+        //Assert
+        XCTAssertEqual(expectedExceptionCount, exceptionCount)
+        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, first_name, last_name, schedule, feedback"))
     }
 }

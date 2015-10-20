@@ -66,10 +66,11 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func reloadSchedule() {
-        scheduleView.tableView.delegate = self
-        scheduleView.tableView.dataSource = self
-        
-        scheduleView.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue(),{
+            self.scheduleView.tableView.delegate = self
+            self.scheduleView.tableView.dataSource = self            
+            self.scheduleView.tableView.reloadData()
+        })
     }
     
     func showErrorMessage(error: NSError) {
@@ -98,7 +99,7 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
         internalPresenter.buildScheduleCell(cell, index: indexPath.row)
-        cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus", forControlEvents: UIControlEvents.TouchDragInside)
+        cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)
         return cell
     }
     
@@ -114,12 +115,12 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         internalPresenter.reloadSchedule()
     }
     
-    func toggleSchedule(sender: AnyObject) {
+    func toggleScheduledStatus(sender: AnyObject) {
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview as! UITableViewCell
         let indexPath = scheduleView.tableView.indexPathForCell(cell)
         
-        //super.toggleScheduledStatus(indexPath!, cell: cell as! IScheduleTableViewCell, presenter: presenter)
+        internalPresenter.toggleScheduledStatus(indexPath!.row, cell: view.superview as! IScheduleTableViewCell)
     }
 }

@@ -11,6 +11,8 @@ import SwiftyJSON
 
 public class TagDeserializer: NamedEntityDeserializer, IDeserializer {
     public func deserialize(json : JSON) throws -> BaseEntity {
+        try validateRequiredFields(["id", "name"], inJson: json)
+
         return super.deserialize(json) as Tag
     }
 }

@@ -220,7 +220,10 @@ public class DataStoreAssembly: TyphoonAssembly {
     }
     
     public dynamic func eventDataStore() -> AnyObject {
-        return TyphoonDefinition.withClass(EventDataStore.self)
+        return TyphoonDefinition.withClass(EventDataStore.self){
+            (definition) in
+            definition.injectProperty("eventRemoteDataStore", with: self.eventRemoteDataStore())
+        }
     }
     
     public dynamic func memberDataStore() -> AnyObject {
@@ -298,4 +301,12 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
+    public dynamic func eventRemoteDataStore() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(EventRemoteDataStore.self) {
+            (definition) in
+            definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
+            definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
+        }
+    }
 }

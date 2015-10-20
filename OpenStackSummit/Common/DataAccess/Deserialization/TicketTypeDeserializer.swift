@@ -21,6 +21,8 @@ public class TicketTypeDeserializer: NSObject, IDeserializer {
             ticketType = deserializerStorage.get(ticketTypeId)
         }
         else {
+            try validateRequiredFields(["id", "name", "allowed_summit_types"], inJson: json)
+
             ticketType = TicketType()
             ticketType.id = json["id"].intValue
             ticketType.name = json["name"].stringValue
