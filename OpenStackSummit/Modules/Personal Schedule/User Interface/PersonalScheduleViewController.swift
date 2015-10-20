@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AFHorizontalDayPicker
+import SwiftSpinner
 
 class PersonalScheduleViewController: ScheduleViewController {
     var presenter: ISchedulePresenter! {
@@ -22,5 +22,13 @@ class PersonalScheduleViewController: ScheduleViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewLoad()
-    }    
+    }
+    
+    override func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    override func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }
 }

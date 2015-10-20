@@ -12,20 +12,26 @@ import UIKit
 public protocol IEventDetailWireframe {
     func presentEventDetailView(eventId: Int, viewController: UINavigationController)
     func showFeedbackEdit(eventId: Int)
+    func showSpeakerProfile(speakerId: Int)
 }
 
 public class EventDetailWireframe: NSObject {
     var eventDetailViewController : EventDetailViewController!
     var feedbackEditWireframe: IFeedbackEditWireframe!
+    var memberProfileWireframe: IMemberProfileWireframe!
     
     public func presentEventDetailView(eventId: Int, viewController: UINavigationController) {
         let newViewController = eventDetailViewController!
         let _ = eventDetailViewController.view! // this is only to force viewLoad to trigger
-        eventDetailViewController.presenter.prepareEventDetail(eventId)
+        eventDetailViewController.presenter.viewLoad(eventId)
         viewController.pushViewController(newViewController, animated: true)
     }
     
     public func showFeedbackEdit(eventId: Int) {
         feedbackEditWireframe.presentFeedbackEditView(eventId, viewController: eventDetailViewController.navigationController!)
+    }
+    
+    public func showSpeakerProfile(speakerId: Int) {
+        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: eventDetailViewController.navigationController!)
     }
 }

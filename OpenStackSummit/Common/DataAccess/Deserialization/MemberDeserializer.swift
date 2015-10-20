@@ -13,6 +13,8 @@ public class MemberDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json: JSON) throws -> BaseEntity {
+        try validateRequiredFields(["id", "first_name", "last_name"], inJson: json)
+
         let member = Member()
         member.id = json["member_id"].intValue
         member.firstName = json["first_name"].stringValue

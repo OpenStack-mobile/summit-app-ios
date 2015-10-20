@@ -37,16 +37,16 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         let currentMemberRole = securityManager.getCurrentMemberRole()
         var show = true
         if (section == 3) {
-            if ((row == 0 || row == 1 || row == 3 || row == 5 || row == 7)) {
+            if ((row == 0 || row == 1 || row == 3 || row == 5 || row == 6)) {
                 show = currentMemberRole != MemberRoles.Anonymous
             }
             else if (row == 2 || row == 4) {
                 show = currentMemberRole == MemberRoles.Speaker
             }
-            else if (row == 6) {
+            else if (row == 7) {
                 show = currentMemberRole == MemberRoles.Anonymous
             }
-            else if (row == 8) {
+            else if (row == 5) {
                 show = currentMemberRole == MemberRoles.Attendee
             }
         }

@@ -16,8 +16,10 @@ class RevealViewController: UIViewController, SWRevealViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //menuButton.target = self.revealViewController()
-        //menuButton.action = Selector("revealToggle:")
+        /*if (menuButton != nil) {
+            menuButton.target = self.revealViewController()
+            menuButton.action = Selector("revealToggle:")
+        }*/
         
         self.revealViewController().delegate = self
         self.revealViewController().view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())

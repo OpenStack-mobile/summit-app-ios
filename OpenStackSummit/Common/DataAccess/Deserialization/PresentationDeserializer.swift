@@ -13,6 +13,8 @@ public class PresentationDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json: JSON) throws -> BaseEntity {
+        try validateRequiredFields(["id", "level", "track_id", "speakers"], inJson: json)
+
         let presentation = Presentation()
         presentation.id = json["id"].intValue
         presentation.level = json["level"].stringValue
@@ -28,12 +30,12 @@ public class PresentationDeserializer: NSObject, IDeserializer {
             presentation.speakers.append(presentationSpeaker)
         }
         
-        deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
+       /* deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
         var tag : Tag
         for (_, tagsJSON) in json["tags"] {
             tag = try deserializer.deserialize(tagsJSON) as! Tag
             presentation.tags.append(tag)
-        }
+        }*/
         
         return presentation
     }

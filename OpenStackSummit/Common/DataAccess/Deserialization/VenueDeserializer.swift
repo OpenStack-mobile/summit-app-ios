@@ -30,6 +30,8 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue = deserializerStorage.get(venueId)
         }
         else {
+            try validateRequiredFields(["id", "lat", "lng", "address_1", "location_type"], inJson: json)
+
             var deserializer = deserializerFactory.create(DeserializerFactoryType.Location)
             let location = try deserializer.deserialize(json) as! Location
             venue = Venue()

@@ -19,6 +19,8 @@ public class EventTypeDeserializer: NamedEntityDeserializer, IDeserializer {
             eventType = deserializerStorage.get(eventTypeId)
         }
         else {
+            try validateRequiredFields(["id", "name"], inJson: json)
+
             eventType = super.deserialize(json) as EventType
             if(!self.deserializerStorage.exist(eventType)) {
                 deserializerStorage.add(eventType)

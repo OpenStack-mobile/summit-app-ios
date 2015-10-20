@@ -47,7 +47,7 @@ class SummitEventDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"id\":5290,\"title\":\"Windows in OpenStack\",\"description\":\"test description\", \"start_date\":1446026400,\"end_date\":1446029100,\"location_id\":19,\"type_id\":3,\"class_name\":\"Presentation\",\"track_id\":2,\"level\":\"Beginner\",\"summit_types\":[1],\"sponsors\":[],\"speakers\":[1761,1861]}"
+        let json = "{\"id\":5290,\"title\":\"Windows in OpenStack\",\"description\":\"test description\", \"start_date\":1446026400,\"end_date\":1446029100,\"location_id\":19,\"type_id\":3,\"class_name\":\"Presentation\",\"track_id\":2,\"level\":\"Beginner\",\"summit_types\":[1],\"sponsors\":[],\"speakers\":[1761,1861], \"allow_feedback\": true}"
         
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         let jsonObject = JSON(data: data!)
@@ -143,23 +143,34 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(59, event.sponsors.first!.id)
         XCTAssertFalse(event.allowFeedback)
     }
-    
-    func test_deserialize_onlyID_returnsCorrectInstance() {
+        
+    func test_deserialize_jsonWithAllManfatoryFieldsMissed_throwsBadFormatException() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
-        var event = SummitEvent()
-        event.id = 5290
-        deserializerStorage.add(event)
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "5290"
+        let json = "{}"
+        let expectedExceptionCount = 1
+        var exceptionCount = 0
+        var errorMessage = ""
         
         //Act
-        event = try! deserializer.deserialize(json) as! SummitEvent
+        do {
+            try deserializer.deserialize(json) as! SummitEvent
+        }
+        catch DeserializerError.BadFormat(let em) {
+            exceptionCount++
+            errorMessage = em
+        }
+        catch {
+            
+        }
         
         //Assert
-        XCTAssertEqual(5290,event.id)
+        XCTAssertEqual(expectedExceptionCount, exceptionCount)
+        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, start_date, end_date, title, allow_feedback, type_id"))
+        
     }
 }

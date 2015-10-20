@@ -22,7 +22,7 @@ public protocol IFeedbackEditViewController {
 class FeedbackEditViewController: UIViewController, IFeedbackEditViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var presenter: IFeedbackEditPresenter!
-    var rates = ["1", "2", "3", "4", "5"]
+    var rates = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     @IBOutlet weak var ratePicker: UIPickerView!
     @IBOutlet weak var reviewTextArea: UITextView!
     

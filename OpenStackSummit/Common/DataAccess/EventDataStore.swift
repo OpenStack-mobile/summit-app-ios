@@ -12,9 +12,12 @@ import UIKit
 public protocol IEventDataStore {
     func getByIdLocal(id: Int) -> SummitEvent?
     func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?)->[SummitEvent]
+    func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void)
 }
 
 public class EventDataStore: GenericDataStore, IEventDataStore {
+    var eventRemoteDataStore: IEventRemoteDataStore!
+    
     public override init() {
         super.init()
     }
@@ -46,5 +49,9 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         }
     
         return eventArray
+    }
+    
+    public func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void) {
+        eventRemoteDataStore.getFeedbackForEvent(eventId, page: page, objectsPerPage: objectsPerPage, completionBlock: completionBlock)
     }
 }

@@ -30,13 +30,20 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
             }
             
             let json = responseObject as! String		
-            let summit : Summit
+            var summit : Summit?
+            var innerError: NSError?
             var deserializer : IDeserializer!
             
             deserializer = self.deserializerFactory.create(DeserializerFactoryType.Summit)
-            summit = try! deserializer.deserialize(json) as! Summit
 
-            completionBlock(summit, error)
+            do {
+                summit = try deserializer.deserialize(json) as? Summit
+            }
+            catch {
+                innerError = NSError(domain: "There was an error deserializing current summit", code: 6001, userInfo: nil)
+            }
+            
+            completionBlock(summit, innerError)
             
             self.dataUpdatePoller.startPolling()
         }

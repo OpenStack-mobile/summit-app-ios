@@ -15,6 +15,7 @@ public protocol IMemberProfilePresenter {
     
     func showMemberProfile()
     func prepareAttendeeProfile(attendeeId: Int)
+    func prepareSpeakerProfile(speakerId: Int)
 }
 
 public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
@@ -27,6 +28,11 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     
     public func prepareAttendeeProfile(attendeeId: Int) {
         self.attendeeId = attendeeId
+        showMemberProfile()
+    }
+    
+    public func prepareSpeakerProfile(speakerId: Int) {
+        self.speakerId = speakerId
         showMemberProfile()
     }
     
@@ -45,6 +51,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     }
     
     func showSpeakerProfile() {
+        viewController.showActivityIndicator()        
         interactor.getSpeakerProfile(speakerId) { speaker, error in
             if (error != nil) {
                 self.viewController.handlerError(error!)
@@ -53,10 +60,12 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
 
             self.viewController.name = speaker!.name
             self.viewController.personTitle = speaker!.title
+            self.viewController.hideActivityIndicator()
         }
     }
     
     func showAttendeeProfile() {
+        viewController.showActivityIndicator()
         interactor.getAttendeeProfile(attendeeId) { attendee, error in
             if (error != nil) {
                 self.viewController.handlerError(error!)
@@ -65,6 +74,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
 
             self.viewController.name = attendee!.name
             self.viewController.personTitle = attendee!.title
+            self.viewController.hideActivityIndicator()
         }
     }
     
