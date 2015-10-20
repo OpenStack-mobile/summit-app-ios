@@ -14,6 +14,7 @@ class EventDetailAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var feedbackEditWireframe: FeedbackEditAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
+    var memberProfileAssembly: MemberProfileAssembly!
     
     dynamic func eventDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(EventDetailWireframe.self) {
@@ -21,6 +22,7 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("eventDetailViewController", with: self.eventDetailViewController())
             definition.injectProperty("feedbackEditWireframe", with: self.feedbackEditWireframe.feedbackEditWireframe())
+            definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
         }
     }
     
@@ -41,6 +43,7 @@ class EventDetailAssembly: TyphoonAssembly {
             definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
             definition.injectProperty("eventDetailDTOAssembler", with: self.dtoAssemblersAssembly.eventDetailDTOAssembler())
             definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
+            definition.injectProperty("feedbackDTOAssembler", with: self.dtoAssemblersAssembly.feedbackDTOAssembler())            
         }
     }
     

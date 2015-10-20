@@ -63,7 +63,7 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     }
     
     public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
-        toggleScheduledStatus(index, cell: cell, interactor: internalInteractor, viewController: internalViewController)
+        toggleScheduledStatus(index, cell: cell, interactor: internalInteractor, viewController: internalViewController, completionBlock: nil)
     }
     
     func loggedIn(notification: NSNotification) {
@@ -114,31 +114,38 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
         cell.scheduledButtonText = interactor.isEventScheduledByLoggedUser(event.id) ? "remove" : "schedule"
     }
     
-    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController) {
+    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
         let event = dayEvents[index]
         let isScheduled = interactor.isEventScheduledByLoggedUser(event.id)
         if (isScheduled) {
-            removeEventFromSchedule(event, cell: cell, interactor: interactor, viewController: viewController)
+            removeEventFromSchedule(event, cell: cell, interactor: interactor, viewController: viewController, completionBlock: completionBlock)
         }
         else {
-            addEventToSchedule(event, cell: cell, interactor: interactor, viewController: viewController)
+            addEventToSchedule(event, cell: cell, interactor: interactor, viewController: viewController, completionBlock: completionBlock)
         }
     }
     
-    func addEventToSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController) {
-        cell.scheduledButtonText = "remove"
+    func addEventToSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
         interactor.addEventToLoggedInMemberSchedule(event.id) { error in
             if (error != nil) {
                 viewController.showErrorMessage(error!)
             }
+
+            cell.scheduledButtonText = "remove"
+            if (completionBlock != nil) {
+                completionBlock!(error)
+            }
         }
     }
     
-    func removeEventFromSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController) {
-        cell.scheduledButtonText = "schedule"
+    func removeEventFromSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
         interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
             if (error != nil) {
                 viewController.showErrorMessage(error!)
+            }
+            cell.scheduledButtonText = "schedule"
+            if (completionBlock != nil) {
+                completionBlock!(error)
             }
         }
     }

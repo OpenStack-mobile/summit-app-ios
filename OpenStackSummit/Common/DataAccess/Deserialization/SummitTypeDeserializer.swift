@@ -20,6 +20,8 @@ public class SummitTypeDeserializer: NamedEntityDeserializer, IDeserializer {
             summitType = deserializerStorage.get(summitTypeId)
         }
         else {
+            try validateRequiredFields(["id", "name"], inJson: json)
+            
             summitType = super.deserialize(json) as SummitType
             if(!deserializerStorage.exist(summitType)) {
                 deserializerStorage.add(summitType)

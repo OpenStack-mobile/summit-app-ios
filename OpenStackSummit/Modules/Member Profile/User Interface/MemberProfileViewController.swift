@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 @objc
 public protocol IMemberProfileViewController {
@@ -16,6 +17,8 @@ public protocol IMemberProfileViewController {
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()
     func handlerError(error: NSError)
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 class MemberProfileViewController: UIViewController, IMemberProfileViewController {
@@ -63,4 +66,13 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     func handlerError(error: NSError) {
         
     }
+    
+    func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }
+    
 }

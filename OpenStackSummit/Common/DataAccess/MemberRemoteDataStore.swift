@@ -69,7 +69,7 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
     }
     
     public func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
-        let attendeeEndpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/me?expand=ticket_type,speaker,feedback"
+        let attendeeEndpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/me?expand=speaker,feedback"
         let http = httpFactory.create(HttpType.OpenIDGetFormUrlEncoded)
         http.GET(attendeeEndpoint, parameters: nil, completionHandler: {(responseObject, error) in
             if (error != nil) {

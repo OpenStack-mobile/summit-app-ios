@@ -20,6 +20,8 @@ public class VenueRoomDeserializer: NSObject, IDeserializer {
             venueRoom = deserializerStorage.get(venueRoomId)
         }
         else {
+            //try validateRequiredFields(["id", "capacity"], inJson: json)
+            
             let deserializer = deserializerFactory.create(DeserializerFactoryType.Location)
             let location = try deserializer.deserialize(json) as! Location
             venueRoom = VenueRoom()

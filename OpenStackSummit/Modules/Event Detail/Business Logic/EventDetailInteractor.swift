@@ -12,6 +12,7 @@ import UIKit
 public protocol IEventDetailInteractor {
     func getEventDetail(eventId: Int) -> EventDetailDTO
     func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void)
+    func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
 }
 
 public class EventDetailInteractor: NSObject {
@@ -19,6 +20,7 @@ public class EventDetailInteractor: NSObject {
     var memberDataStore: IMemberDataStore!
     var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     var securityManager: SecurityManager!
+    var feedbackDTOAssembler: IFeedbackDTOAssembler!
     
     public func getEventDetail(eventId: Int) -> EventDetailDTO {
         let event = eventDataStore.getByIdLocal(eventId)
@@ -41,4 +43,22 @@ public class EventDetailInteractor: NSObject {
             completionBlock(eventDetailDTO, error)
         }
     }
+    
+    public func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void) {
+        eventDataStore.getFeedback(eventId, page: page, objectsPerPage: objectsPerPage) { (feedbackList, error) in
+            if (error != nil) {
+                completionBlock(nil, error)
+            }
+
+            var feedbackDTO: FeedbackDTO
+            var dtos: [FeedbackDTO] = []
+            for feedback in feedbackList! {
+                feedbackDTO = self.feedbackDTOAssembler.createDTO(feedback)
+                dtos.append(feedbackDTO)
+            }
+            
+            completionBlock(dtos, error)
+        }
+    }
+
 }
