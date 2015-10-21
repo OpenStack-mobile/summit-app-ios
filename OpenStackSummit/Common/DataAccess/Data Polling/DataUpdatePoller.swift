@@ -21,6 +21,14 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     var httpFactory: HttpFactory!
     var dataUpdateProcessor: DataUpdateProcessor!
     var dataUpdateDataStore: IDataUpdateDataStore!
+    var fromDate: Int {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("fromDateDataPoller") as? Int ?? 0
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "fromDateDataPoller")
+        }
+    }
     
     public override init() {
         super.init()
@@ -39,12 +47,18 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     
     func pollServer() {
         let http = httpFactory.create(HttpType.ServiceAccount)
-        var latestDataUpdateId = 0
+        var url: String!
         if let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate() {
-            latestDataUpdateId = latestDataUpdate.id
+            url = "https://dev-resource-server/api/v1/summits/current/entity-events?last_event_id=\(latestDataUpdate.id)"
+        }
+        else {
+            if fromDate == 0 {
+                fromDate = Int(NSDate().timeIntervalSince1970)  - 60
+            }
+            url = "https://dev-resource-server/api/v1/summits/current/entity-events?from_date=\(fromDate)"
         }
         
-        http.GET("https://dev-resource-server/api/v1/summits/current/entity-events?last_event_id=\(latestDataUpdateId)") {(responseObject, error) in
+        http.GET(url) {(responseObject, error) in
             if (error != nil) {
                 return
             }

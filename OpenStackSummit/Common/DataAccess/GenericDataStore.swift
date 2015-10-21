@@ -28,8 +28,7 @@ public class GenericDataStore: NSObject {
     }
     
     public func saveOrUpdateLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)?) {
-
-        realm.write {
+        try! realm.write {
             self.realm.add(entity, update: true)
         }
         
@@ -46,7 +45,7 @@ public class GenericDataStore: NSObject {
     }
     
     public func deleteLocal<T: BaseEntity>(entity: T, completionBlock : (NSError? -> Void)!) {
-        realm.write {
+        try! realm.write {
             self.realm.delete(entity)
         }
 

@@ -34,7 +34,7 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
                 return
             }
             
-            self.realm.write{
+            try! self.realm.write{
                 attendee.feedback.append(feedback!)
             }
             completionBlock(feedback, error)
@@ -75,14 +75,14 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
     
     public func addEventToMemberSheduleLocal(attendee: SummitAttendee, event: SummitEvent) {
         
-        self.realm.write {
+        try! self.realm.write {
             attendee.scheduledEvents.append(event)
         }
     }
     
     public func removeEventFromMemberSheduleLocal(attendee: SummitAttendee, event: SummitEvent) throws {
         
-        self.realm.write {
+        try! self.realm.write {
             let index = attendee.scheduledEvents.indexOf("id = %@", event.id)
             if (index != nil) {
                 attendee.scheduledEvents.removeAtIndex(index!)

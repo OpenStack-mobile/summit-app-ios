@@ -17,7 +17,7 @@ class MemberDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        realm.write {
+        try! realm.write {
             self.realm.deleteAll()
         }
     }
@@ -32,7 +32,7 @@ class MemberDataStoreTests: XCTestCase {
         let memberId = 1
         let memberStored = Member()
         memberStored.id = memberId
-        realm.write {
+        try! realm.write {
             self.realm.add(memberStored)
         }
         
