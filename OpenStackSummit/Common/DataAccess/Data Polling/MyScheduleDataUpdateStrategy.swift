@@ -9,16 +9,16 @@
 import UIKit
 
 public class MyScheduleDataUpdateStrategy: DataUpdateStrategy {
-    var memberDataStore: MemberDataStore!
+    var summitAttendeeDataStore: SummitAttendeeDataStore!
     var securityManager: SecurityManager!
     
     public override init() {
         super.init()
     }
     
-    public init(memberDataStore: MemberDataStore, securityManager: SecurityManager) {
+    public init(summitAttendeeDataStore: SummitAttendeeDataStore, securityManager: SecurityManager) {
         super.init()
-        self.memberDataStore = memberDataStore
+        self.summitAttendeeDataStore = summitAttendeeDataStore
         self.securityManager = securityManager
     }
     
@@ -27,9 +27,9 @@ public class MyScheduleDataUpdateStrategy: DataUpdateStrategy {
 
         switch dataUpdate.operation! {
         case .Insert, .Update:
-            memberDataStore.addEventToMemberSheduleLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
+            summitAttendeeDataStore.addEventToMemberSheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
         case .Delete:
-            try memberDataStore.removeEventFromMemberSheduleLocal(currentMember as Member!, event: dataUpdate.entity as! SummitEvent)
+            try summitAttendeeDataStore.removeEventFromMemberSheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
         }
     }
 }

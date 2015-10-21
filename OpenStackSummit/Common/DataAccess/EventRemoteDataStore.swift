@@ -20,7 +20,7 @@ public class EventRemoteDataStore: NSObject {
     public func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/events/\(eventId)/feedback") {(responseObject, error) in
+        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/events/\(eventId)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return

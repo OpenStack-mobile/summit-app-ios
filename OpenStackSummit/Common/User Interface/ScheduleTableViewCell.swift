@@ -12,9 +12,13 @@ import UIKit
 public protocol IScheduleTableViewCell : class {
     var eventTitle: String! { get set }
     var timeAndPlace: String! { get set }
-    var scheduledButtonText: String! { get set }
+    var scheduledStatus: ScheduledStatus { get set }
+    var isScheduledStatusVisible: Bool { get set }
 }
 
+@objc public enum ScheduledStatus: Int {
+    case Scheduled, NotScheduled
+}
 
 class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     var eventTitle: String!{
@@ -35,12 +39,26 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
-    var scheduledButtonText: String! {
+    var scheduledStatus: ScheduledStatus {
         get {
-            return scheduleButton.titleForState(.Normal)
+            return scheduleButton.titleForState(.Normal) == "remove" ? .Scheduled : .NotScheduled
         }
         set {
-            scheduleButton.setTitle(newValue, forState: .Normal)
+            if (newValue == .Scheduled) {
+                scheduleButton.setTitle("remove", forState: .Normal)
+            }
+            else {
+                scheduleButton.setTitle("schedule", forState: .Normal)
+            }
+        }
+    }
+    
+    var isScheduledStatusVisible: Bool {
+        get {
+            return !scheduleButton.hidden
+        }
+        set {
+            scheduleButton.hidden = !newValue
         }
     }
 

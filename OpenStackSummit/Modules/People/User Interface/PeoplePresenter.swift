@@ -24,9 +24,10 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
     var attendees = [PersonListItemDTO]()
     var page = 1
     let objectsPerPage = 10
+    var loadedAll = false
     
     public func viewLoad() {
-        getAttendees()
+        getSpeakers()
     }
 
     func getAttendees() {
@@ -41,8 +42,9 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
             }
             
             self.attendees.appendContentsOf(attendeesPage!)
-            
             self.viewController.reloadData()
+            self.loadedAll = attendeesPage!.count < self.objectsPerPage
+            self.page++
         }
     }
     
@@ -58,23 +60,29 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
             }
             
             self.speakers.appendContentsOf(speakersPage!)
-            
             self.viewController.reloadData()
+            self.loadedAll = speakersPage!.count < self.objectsPerPage
+            self.page++            
         }
     }
     
     public func buildScheduleCell(cell: IPeopleTableViewCell, index: Int){
-        let person = attendees[index]
-        cell.name = person.name
-        cell.title = person.title
+        dispatch_async(dispatch_get_main_queue(),{
+            let person = self.speakers[index]
+            cell.name = person.name
+            cell.title = person.title
+            if (index == (self.speakers.count-1) && !self.loadedAll) {
+                self.getSpeakers()
+            }
+        })
     }
     
     public func getPeopleCount() -> Int {
-        return attendees.count
+        return speakers.count
     }
     
     public func showPersonProfile(index: Int) {
-        let person = attendees[index]
-        wireframe.showAttendeeProfile(person.id)
+        let person = speakers[index]
+        wireframe.showSpeakerProfile(person.id)
     }
 }

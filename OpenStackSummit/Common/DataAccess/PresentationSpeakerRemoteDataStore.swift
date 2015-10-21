@@ -21,7 +21,7 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
     public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/speakers") {(responseObject, error) in
+        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/speakers?page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return

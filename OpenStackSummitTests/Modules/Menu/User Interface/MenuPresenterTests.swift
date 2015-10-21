@@ -100,8 +100,8 @@ class MenuPresenterTests: XCTestCase {
         XCTAssertEqual(false, resSection3Row3)
         XCTAssertEqual(false, resSection3Row4)
         XCTAssertEqual(false, resSection3Row5)
-        XCTAssertEqual(true, resSection3Row6)
-        XCTAssertEqual(false, resSection3Row7)
+        XCTAssertEqual(false, resSection3Row6)
+        XCTAssertEqual(true, resSection3Row7)
     }
     
     func test_hasAccessToMenuItem_attendeeUser_returnCorrectValueForEachMenuItem() {
@@ -145,8 +145,8 @@ class MenuPresenterTests: XCTestCase {
         XCTAssertEqual(true, resSection3Row3)
         XCTAssertEqual(false, resSection3Row4)
         XCTAssertEqual(true, resSection3Row5)
-        XCTAssertEqual(false, resSection3Row6)
-        XCTAssertEqual(true, resSection3Row7)
+        XCTAssertEqual(true, resSection3Row6)
+        XCTAssertEqual(false, resSection3Row7)
     }
     
     func test_hasAccessToMenuItem_speakerUser_returnCorrectValueForEachMenuItem() {
@@ -190,7 +190,7 @@ class MenuPresenterTests: XCTestCase {
         XCTAssertEqual(true, resSection3Row3)
         XCTAssertEqual(true, resSection3Row4)
         XCTAssertEqual(true, resSection3Row5)
-        XCTAssertEqual(false, resSection3Row6)
-        XCTAssertEqual(true, resSection3Row7)
+        XCTAssertEqual(true, resSection3Row6)
+        XCTAssertEqual(false, resSection3Row7)
     }
 }

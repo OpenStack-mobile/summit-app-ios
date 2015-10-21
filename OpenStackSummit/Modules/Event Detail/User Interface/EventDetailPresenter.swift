@@ -30,7 +30,7 @@ public class EventDetailPresenter: NSObject {
     var eventId = 0
     private var event: EventDetailDTO!
     private var feedbackPage = 1
-    private var feedbackObjectsPerPage = 5
+    private var feedbackObjectsPerPage = 10
     private var feedbackList = [FeedbackDTO]()
     private var loadedAllFeedback: Bool!
     
@@ -50,24 +50,28 @@ public class EventDetailPresenter: NSObject {
     
     public func loadFeedback() {
         interactor.getFeedbackForEvent(eventId, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { (feedbackList, error) in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-                return
-            }
-            
-            self.feedbackList.appendContentsOf(feedbackList!)
-            self.viewController.reloadFeedbackData()
-            self.feedbackPage++
-            self.viewController.loadedAllFeedback = feedbackList!.count < self.feedbackObjectsPerPage
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                    return
+                }
+                
+                self.feedbackList.appendContentsOf(feedbackList!)
+                self.viewController.reloadFeedbackData()
+                self.feedbackPage++
+                self.viewController.loadedAllFeedback = feedbackList!.count < self.feedbackObjectsPerPage
+            })
         }
     }
     
     public func addEventToMySchedule() {
         interactor.addEventToMySchedule(eventId) { (event, error) in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-            }
-            self.viewController.didAddEventToMySchedule(event!)
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                }
+                self.viewController.didAddEventToMySchedule(event!)
+            })
         }
     }
     

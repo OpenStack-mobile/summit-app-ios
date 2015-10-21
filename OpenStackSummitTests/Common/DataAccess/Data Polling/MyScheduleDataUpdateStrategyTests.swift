@@ -28,7 +28,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
     
     func test_process_dataUpdateWithScheduleItemInsert_scheduleItemIsAddedToMemberSchedule() {
         // Arrange
-        let memberDataStore = MemberDataStore()
+        let summitAttendeeDataStore = SummitAttendeeDataStore()
         let member = Member()
         member.id = 1
         member.attendeeRole = SummitAttendee()
@@ -42,7 +42,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
         }
         
         let securityManagerMock = SecurityManagerMock(member: member)
-        let myScheduleDataUpdateStrategy = MyScheduleDataUpdateStrategy(memberDataStore: memberDataStore, securityManager: securityManagerMock)
+        let myScheduleDataUpdateStrategy = MyScheduleDataUpdateStrategy(summitAttendeeDataStore: summitAttendeeDataStore, securityManager: securityManagerMock)
         
         let dataUpdate = DataUpdate()
         dataUpdate.id = 1
@@ -58,7 +58,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
     
     func test_process_dataUpdateWithScheduleItemDelete_scheduleItemIsDeletedFromMemberSchedule() {
         // Arrange
-        let memberDataStore = MemberDataStore()
+        let summitAttendeeDataStore = SummitAttendeeDataStore()
         let member = Member()
         member.id = 1
         member.attendeeRole = SummitAttendee()
@@ -79,7 +79,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
         }
 
         let securityManagerMock = SecurityManagerMock(member: member)
-        let myScheduleDataUpdateStrategy = MyScheduleDataUpdateStrategy(memberDataStore: memberDataStore, securityManager: securityManagerMock)
+        let myScheduleDataUpdateStrategy = MyScheduleDataUpdateStrategy(summitAttendeeDataStore: summitAttendeeDataStore, securityManager: securityManagerMock)
         
         let dataUpdate = DataUpdate()
         dataUpdate.id = 100
