@@ -7,11 +7,12 @@ pod 'SWRevealViewController'
 pod 'AFHorizontalDayPicker', :git => 'https://github.com/alexfedosov/AFHorizontalDayPicker.git'
 pod 'Realm'
 pod 'RealmSwift'
-pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'SwiftyJSON'
 pod 'HanekeSwift'
 pod 'AeroGearHttp'
 pod 'AeroGearOAuth2', :git => 'https://github.com/claudioredi/aerogear-ios-oauth2.git', :branch => 'openstack'
 pod 'SwiftSpinner' 
+pod 'GoogleMaps'
 
 target 'OpenStackSummitTests' do
     pod 'Mockingjay'

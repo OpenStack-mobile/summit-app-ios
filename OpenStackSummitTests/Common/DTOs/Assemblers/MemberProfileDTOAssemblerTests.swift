@@ -35,7 +35,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
 
         member.attendeeRole!.scheduledEvents.append(event)
         
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
             self.realm.add(event)
         }
@@ -81,7 +81,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         
         member.attendeeRole!.scheduledEvents.append(event)
         
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
             self.realm.add(event)
         }
@@ -125,7 +125,7 @@ class MemberProfileDTOAssemblerTests: BaseTests {
         
         member.attendeeRole!.scheduledEvents.append(event)
         
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
             self.realm.add(event)
         }

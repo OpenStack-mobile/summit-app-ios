@@ -17,7 +17,7 @@ class SummitAttendeeDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        realm.write {
+        try! realm.write {
             self.realm.deleteAll()
         }
     }
@@ -31,7 +31,7 @@ class SummitAttendeeDataStoreTests: XCTestCase {
         // Arrange
         var event = SummitEvent()
         event.id = 1
-        realm.write {
+        try! realm.write {
             self.realm.add(event)
         }
         
@@ -41,7 +41,7 @@ class SummitAttendeeDataStoreTests: XCTestCase {
         let attendeeId = 1
         let attendee = SummitAttendee()
         attendee.id = attendeeId
-        realm.write {
+        try! realm.write {
             self.realm.add(attendee)
         }
         event = self.realm.objects(SummitEvent.self).filter("id = \(1)").first!

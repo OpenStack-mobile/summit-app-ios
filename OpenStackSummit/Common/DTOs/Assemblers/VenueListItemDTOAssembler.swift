@@ -39,6 +39,8 @@ public class VenueListItemDTOAssembler: NamedDTOAssembler, IVenueListItemDTOAsse
         
         let venueListItemDTO: VenueListItemDTO = super.createDTO(venue)
         venueListItemDTO.address = fullAddress
+        venueListItemDTO.lat = Double(venue.lat)
+        venueListItemDTO.long = Double(venue.long)
         
         return venueListItemDTO
     }

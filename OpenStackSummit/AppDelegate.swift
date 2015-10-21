@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Fabric.with([Crashlytics()])
 
         // Override point for customization after application launch.
+        GMSServices.provideAPIKey("AIzaSyBnBFBj9ixFjw1OJhAT3FC87JOOS-FuE0Q")
         return true
     }
 
