@@ -50,7 +50,11 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     }
     
     public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
-        buildScheduleCell(cell, index: index, interactor: internalInteractor)
+        let event = dayEvents[index]
+        cell.eventTitle = event.name
+        cell.timeAndPlace = event.date
+        cell.scheduledStatus = internalInteractor.isEventScheduledByLoggedMember(event.id) ? ScheduledStatus.Scheduled : ScheduledStatus.NotScheduled
+        cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
     }
     
     public func getDayEventsCount() -> Int {
@@ -67,11 +71,11 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     }
     
     func loggedIn(notification: NSNotification) {
-        loggedIn(notification, viewController: internalViewController)
+        internalViewController.reloadSchedule()
     }
     
     func loggedOut(notification: NSNotification) {
-        loggedOut(notification, viewController: internalViewController)
+        internalViewController.reloadSchedule()
     }
     
     func viewLoad(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
@@ -107,16 +111,9 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
         viewController.reloadSchedule()
     }
     
-    public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int, interactor: IScheduleInteractor) {
-        let event = dayEvents[index]
-        cell.eventTitle = event.name
-        cell.timeAndPlace = event.date
-        cell.scheduledButtonText = interactor.isEventScheduledByLoggedUser(event.id) ? "remove" : "schedule"
-    }
-    
     public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
         let event = dayEvents[index]
-        let isScheduled = interactor.isEventScheduledByLoggedUser(event.id)
+        let isScheduled = interactor.isEventScheduledByLoggedMember(event.id)
         if (isScheduled) {
             removeEventFromSchedule(event, cell: cell, interactor: interactor, viewController: viewController, completionBlock: completionBlock)
         }
@@ -131,7 +128,7 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
                 viewController.showErrorMessage(error!)
             }
 
-            cell.scheduledButtonText = "remove"
+            cell.scheduledStatus = .Scheduled
             if (completionBlock != nil) {
                 completionBlock!(error)
             }
@@ -143,19 +140,11 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
             if (error != nil) {
                 viewController.showErrorMessage(error!)
             }
-            cell.scheduledButtonText = "schedule"
+            cell.scheduledStatus = .NotScheduled
             if (completionBlock != nil) {
                 completionBlock!(error)
             }
         }
-    }
-    
-    func loggedIn(notification: NSNotification, viewController: IScheduleViewController) {
-        viewController.reloadSchedule()
-    }
-    
-    func loggedOut(notification: NSNotification, viewController: IScheduleViewController) {
-        viewController.reloadSchedule()
     }
     
     deinit {

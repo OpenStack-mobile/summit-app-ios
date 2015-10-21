@@ -17,7 +17,7 @@ public protocol IEventDetailInteractor {
 
 public class EventDetailInteractor: NSObject {
     var eventDataStore: IEventDataStore!
-    var memberDataStore: IMemberDataStore!
+    var summitAttendeeDataStore: ISummitAttendeeDataStore!
     var eventDetailDTOAssembler: IEventDetailDTOAssembler!
     var securityManager: SecurityManager!
     var feedbackDTOAssembler: IFeedbackDTOAssembler!
@@ -36,7 +36,7 @@ public class EventDetailInteractor: NSObject {
         }
         let event = eventDataStore.getByIdLocal(eventId)
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
-        memberDataStore.addEventToMemberShedule(member, event: event!) { member, error in
+        summitAttendeeDataStore.addEventToMemberShedule(member.attendeeRole!, event: event!) { attendee, error in
             if (error != nil) {
                 completionBlock(nil, error)
             }
@@ -48,6 +48,7 @@ public class EventDetailInteractor: NSObject {
         eventDataStore.getFeedback(eventId, page: page, objectsPerPage: objectsPerPage) { (feedbackList, error) in
             if (error != nil) {
                 completionBlock(nil, error)
+                return
             }
 
             var feedbackDTO: FeedbackDTO

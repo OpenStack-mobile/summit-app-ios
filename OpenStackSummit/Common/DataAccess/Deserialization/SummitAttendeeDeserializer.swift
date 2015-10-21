@@ -30,7 +30,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             summitAttendee = deserializerStorage.get(summitAttendeeId)
         }
         else {
-            try validateRequiredFields(["id", "first_name", "last_name", "schedule"], inJson: json)
+            try validateRequiredFields(["id", "first_name", "last_name"], inJson: json)
             
             summitAttendee = SummitAttendee()
             summitAttendee.id = json["id"].intValue
@@ -49,8 +49,11 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
                 summitAttendee.scheduledEvents.append(event)
             }
             
-            deserializer = deserializerFactory.create(DeserializerFactoryType.TicketType)
-            summitAttendee.ticketType = try deserializer.deserialize(json["ticket_type_id"]) as! TicketType
+            let jsonTicketType = json["ticket_type_id"]
+            if jsonTicketType.int != nil {
+                deserializer = deserializerFactory.create(DeserializerFactoryType.TicketType)
+                summitAttendee.ticketType = try deserializer.deserialize(jsonTicketType) as! TicketType
+            }
             
             if(!deserializerStorage.exist(summitAttendee)) {
                 deserializerStorage.add(summitAttendee)

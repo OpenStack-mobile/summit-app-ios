@@ -76,7 +76,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MyScheduleDataUpdateStrategy.self) {
             (definition) in
             
-            definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
+            definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }

@@ -190,6 +190,8 @@
 		CADD51081BD66B8500400AF4 /* SpeakerPresentationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD51071BD66B8500400AF4 /* SpeakerPresentationsInteractor.swift */; settings = {ASSET_TAGS = (); }; };
 		CADD510A1BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD51091BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift */; settings = {ASSET_TAGS = (); }; };
 		CADD510C1BD6C1FA00400AF4 /* EventRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD510B1BD6C1FA00400AF4 /* EventRemoteDataStore.swift */; settings = {ASSET_TAGS = (); }; };
+		CADD510E1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD510D1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift */; settings = {ASSET_TAGS = (); }; };
+		CADD51101BD7CF5B00400AF4 /* SummitAttendeeDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD510F1BD7CF5B00400AF4 /* SummitAttendeeDataStoreTests.swift */; settings = {ASSET_TAGS = (); }; };
 		CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB8F1B73CFE5008F742E /* ApplicationAssembly.swift */; };
 		CADDDBA31B73D1BB008F742E /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB931B73D1BB008F742E /* EventType.swift */; };
 		CADDDBA51B73D1BB008F742E /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB951B73D1BB008F742E /* Member.swift */; };
@@ -467,6 +469,8 @@
 		CADD51071BD66B8500400AF4 /* SpeakerPresentationsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsInteractor.swift; sourceTree = "<group>"; };
 		CADD51091BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsPresenter.swift; sourceTree = "<group>"; };
 		CADD510B1BD6C1FA00400AF4 /* EventRemoteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRemoteDataStore.swift; sourceTree = "<group>"; };
+		CADD510D1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeRemoteDataStoreMock.swift; sourceTree = "<group>"; };
+		CADD510F1BD7CF5B00400AF4 /* SummitAttendeeDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeDataStoreTests.swift; sourceTree = "<group>"; };
 		CADDDB8F1B73CFE5008F742E /* ApplicationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		CADDDB931B73D1BB008F742E /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		CADDDB951B73D1BB008F742E /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -885,6 +889,7 @@
 				CACF20721BBA094B001868AF /* DataUpdateDataStoreMock.swift */,
 				CA583AD81BC6CD1E00632ECF /* PersonListDTOAssemblerMock.swift */,
 				CABD0E001BCD4A8200488472 /* MemberRemoteDataStoreMock.swift */,
+				CADD510D1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift */,
 			);
 			path = TestUtils;
 			sourceTree = "<group>";
@@ -1459,6 +1464,7 @@
 				CAD480A31B8691B9004DBB4F /* MemberDataStoreTests.swift */,
 				CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */,
 				CAD3620E1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift */,
+				CADD510F1BD7CF5B00400AF4 /* SummitAttendeeDataStoreTests.swift */,
 			);
 			name = DataAccess;
 			path = OpenStackSummitTests/Common/DataAccess;
@@ -1961,6 +1967,7 @@
 				CAF2AA5A1B82914B00D8E595 /* DeserializerStorageTests.swift in Sources */,
 				CAE0C9741BB2EE3400154246 /* EventDataStoreTests.swift in Sources */,
 				CAD78BCD1B98C64800D37B7C /* ScheduleItemDTOAssemblerTests.swift in Sources */,
+				CADD51101BD7CF5B00400AF4 /* SummitAttendeeDataStoreTests.swift in Sources */,
 				CA583AD91BC6CD1E00632ECF /* PersonListDTOAssemblerMock.swift in Sources */,
 				CA01190B1B8CE9920091E00F /* MenuInteractorTests.swift in Sources */,
 				CAC7F3051B99414D00BAE2C6 /* MemberDataStoreMock.swift in Sources */,
@@ -1970,6 +1977,7 @@
 				CA5B6D201BB5A16A00D28499 /* DataUpdateDeserializerTests.swift in Sources */,
 				CA5F3B281BA8729300B97C54 /* SummitEventDeserializerTests.swift in Sources */,
 				CAD6C3D71BB759D800F8C2D6 /* DataUpdateProcessorMock.swift in Sources */,
+				CADD510E1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift in Sources */,
 				CAD3ABAC1BA847C500F2186B /* SummitDeserializerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
