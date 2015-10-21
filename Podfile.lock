@@ -4,6 +4,7 @@ PODS:
     - AeroGearHttp
   - AFHorizontalDayPicker (0.2.0):
     - MTDates (= 1.0.0)
+  - GoogleMaps (1.10.4)
   - HanekeSwift (0.10.0)
   - Mockingjay (1.1.0):
     - Mockingjay/Core (= 1.1.0)
@@ -16,11 +17,11 @@ PODS:
   - Mockingjay/XCTest (1.1.0):
     - Mockingjay/Core
   - MTDates (1.0.0)
-  - Realm (0.95.3):
-    - Realm/Headers (= 0.95.3)
-  - Realm/Headers (0.95.3)
-  - RealmSwift (0.95.3):
-    - Realm (= 0.95.3)
+  - Realm (0.96.1):
+    - Realm/Headers (= 0.96.1)
+  - Realm/Headers (0.96.1)
+  - RealmSwift (0.96.1):
+    - Realm (= 0.96.1)
   - SwiftSpinner (0.8.0)
   - SwiftyJSON (2.3.0)
   - SWRevealViewController (2.3.0)
@@ -34,12 +35,13 @@ DEPENDENCIES:
   - AeroGearOAuth2 (from `https://github.com/claudioredi/aerogear-ios-oauth2.git`,
     branch `openstack`)
   - AFHorizontalDayPicker (from `https://github.com/alexfedosov/AFHorizontalDayPicker.git`)
+  - GoogleMaps
   - HanekeSwift
   - Mockingjay
   - Realm
   - RealmSwift
   - SwiftSpinner
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - SwiftyJSON
   - SWRevealViewController
   - Typhoon
 
@@ -49,8 +51,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
   AeroGearOAuth2:
@@ -59,19 +59,17 @@ CHECKOUT OPTIONS:
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
-  SwiftyJSON:
-    :commit: 3b5d0d4e0c19173b1bf0dc823bde25ad870f70c0
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   AeroGearHttp: 4c0fe1065817199bc4b64b17deec68e9d7c341fe
   AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
+  GoogleMaps: 134bcf57e8d489efbc0c29d532ed421554fabdb2
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   Mockingjay: 5782cb22c9e99dece7aad5bdf738bfa187cfcdcc
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
-  Realm: 55885fa05865344994ad8b56da96669ffa39fbf1
-  RealmSwift: 586df4b5a6d01473d2653b16e9fe7debce4a87ed
+  Realm: d05e4621f67fb1c36acd4e573ac5b52a407fc2cc
+  RealmSwift: 6c96a72b385027d9593b69f6821c697fe843eb68
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a

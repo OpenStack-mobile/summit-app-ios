@@ -17,7 +17,7 @@ class SummitDataStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        realm.write {
+        try! realm.write {
             self.realm.deleteAll()
         }
     }
@@ -71,7 +71,7 @@ class SummitDataStoreTests: XCTestCase {
         // Arrange
         let dummySummit = Summit()
         dummySummit.id = 2
-        realm.write {
+        try! realm.write {
             self.realm.add(dummySummit)
         }
         

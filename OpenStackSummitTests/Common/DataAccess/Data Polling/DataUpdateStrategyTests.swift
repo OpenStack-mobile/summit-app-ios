@@ -17,7 +17,7 @@ class DataUpdateStrategyTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        realm.write {
+        try! realm.write {
             self.realm.deleteAll()
         }
     }
@@ -52,7 +52,7 @@ class DataUpdateStrategyTests: XCTestCase {
         let genericDataStore = GenericDataStore()
         let event = SummitEvent()
         event.id = 1
-        realm.write {
+        try! realm.write {
             self.realm.add(event)
         }
         
@@ -83,12 +83,12 @@ class DataUpdateStrategyTests: XCTestCase {
         let genericDataStore = GenericDataStore()
         let event1 = SummitEvent()
         event1.id = 1
-        realm.write {
+        try! realm.write {
             self.realm.add(event1)
         }
         let event2 = SummitEvent()
         event2.id = 2
-        realm.write {
+        try! realm.write {
             self.realm.add(event2)
         }
         

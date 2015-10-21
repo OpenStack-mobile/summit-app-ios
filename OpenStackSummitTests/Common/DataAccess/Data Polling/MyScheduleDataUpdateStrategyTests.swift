@@ -16,7 +16,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        realm.write {
+        try! realm.write {
             self.realm.deleteAll()
         }
     }
@@ -32,12 +32,12 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
         let member = Member()
         member.id = 1
         member.attendeeRole = SummitAttendee()
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
         }
         let event = SummitEvent()
         event.id = 1
-        realm.write {
+        try! realm.write {
             self.realm.add(event)
         }
         
@@ -62,18 +62,18 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
         let member = Member()
         member.id = 1
         member.attendeeRole = SummitAttendee()
-        realm.write {
+        try! realm.write {
             self.realm.add(member)
         }
         let event1 = SummitEvent()
         event1.id = 1
-        realm.write {
+        try! realm.write {
             self.realm.add(event1)
             member.attendeeRole?.scheduledEvents.append(event1)
         }
         let event2 = SummitEvent()
         event2.id = 2
-        realm.write {
+        try! realm.write {
             self.realm.add(event2)
             member.attendeeRole?.scheduledEvents.append(event2)
         }

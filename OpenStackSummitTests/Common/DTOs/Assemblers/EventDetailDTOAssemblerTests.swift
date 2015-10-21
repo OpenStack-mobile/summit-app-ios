@@ -35,7 +35,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.name = "Test Venue Room"
         venue.venueRooms.append(venueRoom)
-        realm.write {
+        try! realm.write {
             self.realm.add(venue)
         }
         let track = Track()

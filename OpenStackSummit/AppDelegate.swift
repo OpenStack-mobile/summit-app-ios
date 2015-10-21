@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Fabric.with([Crashlytics()])
 
         // Override point for customization after application launch.
+        GMSServices.provideAPIKey("Google Maps API Key")
         return true
     }
 
