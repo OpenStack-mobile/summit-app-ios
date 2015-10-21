@@ -61,7 +61,9 @@ public extension IDeserializer {
 
         if (missedFields.count > 0) {
             let missedFieldsString = missedFields.joinWithSeparator(", ")
-            throw DeserializerError.BadFormat("\(self) Following fields are missed: \(missedFieldsString)")
+            let errorMessage = "\(self) Following fields are missed: \(missedFieldsString)"
+            print(errorMessage)
+            throw DeserializerError.BadFormat(errorMessage)
         }
     }
 }

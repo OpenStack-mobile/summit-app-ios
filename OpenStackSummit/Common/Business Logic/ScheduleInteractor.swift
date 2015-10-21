@@ -14,7 +14,8 @@ public protocol IScheduleInteractor {
     func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?) -> [ScheduleItemDTO]
     func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
-    func isEventScheduledByLoggedUser(eventId: Int) -> Bool
+    func isEventScheduledByLoggedMember(eventId: Int) -> Bool
+    func isMemberLoggedIn() -> Bool
 }
 
 public class ScheduleInteractor: NSObject {
@@ -23,7 +24,7 @@ public class ScheduleInteractor: NSObject {
     var eventDataStore: IEventDataStore!
     var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
     var securityManager: SecurityManager!
-    var memberDataStore: IMemberDataStore!
+    var summitAttendeeDataStore: ISummitAttendeeDataStore!
     
     public func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void) {
         summitDataStore.getActive() { summit, error in
@@ -50,7 +51,7 @@ public class ScheduleInteractor: NSObject {
         let loggedInMember = securityManager.getCurrentMember()
         let event = eventDataStore.getByIdLocal(eventId)
         
-        memberDataStore.addEventToMemberShedule(loggedInMember!, event: event!) {(member, error) in
+        summitAttendeeDataStore.addEventToMemberShedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
             completionBlock(error)
         }
     }
@@ -59,16 +60,20 @@ public class ScheduleInteractor: NSObject {
         let loggedInMember = securityManager.getCurrentMember()
         let event = eventDataStore.getByIdLocal(eventId)
         
-        memberDataStore.removeEventFromMemberShedule(loggedInMember!, event: event!) {(member, error) in
+        summitAttendeeDataStore.removeEventFromMemberShedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
             completionBlock(error)
         }
     }
     
-    public func isEventScheduledByLoggedUser(eventId: Int) -> Bool {
+    public func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
         guard let loggedInMember = securityManager.getCurrentMember() else {
             return false
         }
         
         return loggedInMember.attendeeRole!.scheduledEvents.filter("id = \(eventId)").count > 0
+    }
+    
+    public func isMemberLoggedIn() -> Bool {
+        return securityManager.isLoggedIn()
     }
 }

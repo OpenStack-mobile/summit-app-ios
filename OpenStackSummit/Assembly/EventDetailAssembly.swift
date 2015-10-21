@@ -42,7 +42,7 @@ class EventDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
             definition.injectProperty("eventDetailDTOAssembler", with: self.dtoAssemblersAssembly.eventDetailDTOAssembler())
-            definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
+            definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("feedbackDTOAssembler", with: self.dtoAssemblersAssembly.feedbackDTOAssembler())            
         }
     }

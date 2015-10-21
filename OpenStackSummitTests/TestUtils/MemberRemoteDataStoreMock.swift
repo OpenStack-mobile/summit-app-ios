@@ -15,9 +15,5 @@ class MemberRemoteDataStoreMock: MemberRemoteDataStore {
     init(error: NSError? = nil) {
         super.init()
         self.error = error
-    }
-    
-    override func addEventToShedule(attendeeId: Int, eventId: Int, completionBlock: (NSError?) -> Void) {
-        completionBlock(error)
-    }
+    }    
 }

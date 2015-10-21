@@ -82,9 +82,13 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
         
+        let ticketType = TicketType()
+        ticketType.id = 1
+        deserializerStorage.add(ticketType)
+        
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitAttendeeDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"total\":1,\"per_page\":10,\"current_page\":1,\"last_page\":1,\"next_page_url\":null,\"prev_page_url\":null,\"from\":1,\"to\":1,\"data\":[{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\",\"6763\",\"6813\",\"6799\",\"6056\",\"6792\",\"6816\",\"5879\"],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},{\"id\":2,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[\"6770\",\"4982\",\"6763\",\"6813\",\"6799\",\"6056\",\"6792\",\"6816\",\"5879\"],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},\"feedback\":[]]}"
+        let json = "{\"total\":1,\"per_page\":10,\"current_page\":1,\"last_page\":1,\"next_page_url\":null,\"prev_page_url\":null,\"from\":1,\"to\":1,\"data\":[{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},{\"id\":2,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null,\"feedback\":[]}]}"
         
         //Act
         let attendees = try! deserializer.deserializePage(json) as! [SummitAttendee]
@@ -119,6 +123,6 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         
         //Assert
         XCTAssertEqual(expectedExceptionCount, exceptionCount)
-        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, first_name, last_name, schedule, feedback"))
+        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, first_name, last_name"))
     }
 }

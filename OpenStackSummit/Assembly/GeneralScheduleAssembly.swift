@@ -45,7 +45,7 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("summitDTOAssembler", with: self.dtoAssemblersAssembly.summitDTOAssembler())
             definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
             definition.injectProperty("scheduleItemDTOAssembler", with: self.dtoAssemblersAssembly.scheduleItemDTOAssembler())
-            definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
+            definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
