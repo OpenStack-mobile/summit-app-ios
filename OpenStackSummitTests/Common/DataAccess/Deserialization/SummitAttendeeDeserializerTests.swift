@@ -39,7 +39,7 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitAttendeeDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444168328,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[6770,4982],\"first_name\":\"TestFName\",\"last_name\":\"TestLName\",\"gender\":\"Male\",\"email\":\"test@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":\"irc_test\",\"twitter\":\"twitter_test\",\"bio\":\"test bio\",\"title\":\"test title\",\"feedback\":[]}"
+        let json = "{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444168328,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[6770,4982],\"first_name\":\"TestFName\",\"last_name\":\"TestLName\",\"gender\":\"Male\",\"email\":\"test@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":\"irc_test\",\"twitter\":\"twitter_test\",\"bio\":\"test bio\",\"title\":\"test title\",\"feedback\":[],\"pic\":\"http://www.openstack.org/assets/profilepic.jpg\"}"
         
         //Act
         let summitAttendee = try! deserializer.deserialize(json) as! SummitAttendee
@@ -53,6 +53,7 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         XCTAssertEqual("twitter_test",summitAttendee.twitter)
         XCTAssertEqual("test@tipit.net",summitAttendee.email)
         XCTAssertEqual("irc_test",summitAttendee.irc)
+        XCTAssertEqual("http://www.openstack.org/assets/profilepic.jpg",summitAttendee.pictureUrl)
         XCTAssertEqual(tickerType.id,summitAttendee.ticketType.id)
         XCTAssertEqual(2,summitAttendee.scheduledEvents.count)
     }
@@ -88,7 +89,7 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitAttendeeDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
-        let json = "{\"total\":1,\"per_page\":10,\"current_page\":1,\"last_page\":1,\"next_page_url\":null,\"prev_page_url\":null,\"from\":1,\"to\":1,\"data\":[{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null},{\"id\":2,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null,\"feedback\":[]}]}"
+        let json = "{\"total\":1,\"per_page\":10,\"current_page\":1,\"last_page\":1,\"next_page_url\":null,\"prev_page_url\":null,\"from\":1,\"to\":1,\"data\":[{\"id\":1,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null,\"pic\":\"http://www.openstack.org/assets/profilepic.jpg\"},{\"id\":2,\"summit_hall_checked_in\":false,\"summit_hall_checked_in_date\":1444231541,\"shared_contact_info\":true,\"ticket_type_id\":1,\"member_id\":11624,\"schedule\":[],\"first_name\":\"TestFN\",\"last_name\":\"TestLN\",\"gender\":\"Male\",\"email\":\"TestFN@tipit.net\",\"second_email\":null,\"third_email\":null,\"linked_in\":null,\"irc\":null,\"twitter\":null,\"feedback\":[],\"pic\":\"http://www.openstack.org/assets/profilepic.jpg\"}]}"
         
         //Act
         let attendees = try! deserializer.deserializePage(json) as! [SummitAttendee]

@@ -41,6 +41,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             summitAttendee.irc = json["irc"].string ?? ""
             summitAttendee.twitter = json["twitter"].string ?? ""
             summitAttendee.bio = json["bio"].stringValue
+            summitAttendee.pictureUrl = json["pic"].stringValue
             
             var deserializer = deserializerFactory.create(DeserializerFactoryType.SummitEvent)
             var event : SummitEvent

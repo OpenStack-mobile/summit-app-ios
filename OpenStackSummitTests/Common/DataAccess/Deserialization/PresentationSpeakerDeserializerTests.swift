@@ -26,7 +26,7 @@ class PresentationSpeakerDeserializerTests: XCTestCase {
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
         let deserializer = PresentationSpeakerDeserializer(deserializerStorage: deserializerStorage)
-        let json = "{\"id\":173,\"first_name\":\"Michael\",\"last_name\":\"Johnson\",\"title\":\"Software Engineer\",\"bio\":\"test bio\",\"irc\":\"test irc\",\"twitter\":\"test twitter\",\"member_id\":1,\"presentations\":[3591]}"
+        let json = "{\"id\":173,\"first_name\":\"Michael\",\"last_name\":\"Johnson\",\"title\":\"Software Engineer\",\"bio\":\"test bio\",\"irc\":\"test irc\",\"twitter\":\"test twitter\",\"member_id\":1,\"presentations\":[3591],\"pic\":\"http://www.openstack.org/assets/profilepic.jpg\"}"
         
         
         //Act
@@ -40,6 +40,7 @@ class PresentationSpeakerDeserializerTests: XCTestCase {
         XCTAssertEqual("test bio",presentationSpeaker.bio)
         XCTAssertEqual("test irc",presentationSpeaker.irc)
         XCTAssertEqual("test twitter",presentationSpeaker.twitter)
+        XCTAssertEqual("http://www.openstack.org/assets/profilepic.jpg",presentationSpeaker.pictureUrl)
         XCTAssertEqual(1,presentationSpeaker.memberId)
         XCTAssertTrue(deserializerStorage.exist(presentationSpeaker))
     }

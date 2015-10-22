@@ -71,6 +71,8 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
             let person = self.speakers[index]
             cell.name = person.name
             cell.title = person.title
+            cell.picUrl = person.pictureUrl
+            
             if (index == (self.speakers.count-1) && !self.loadedAll) {
                 self.getSpeakers()
             }

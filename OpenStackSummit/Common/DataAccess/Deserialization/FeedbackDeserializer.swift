@@ -20,7 +20,7 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
             feedback = deserializerStorage.get(feedbackId)
         }
         else {
-            try validateRequiredFields(["id", "rate", "created_date", "event_id", "owner_id"], inJson: json)
+            try validateRequiredFields(["id", "rate", "created_date", "event_id"], inJson: json)
 
             feedback = Feedback()
             feedback.id = json["id"].intValue
