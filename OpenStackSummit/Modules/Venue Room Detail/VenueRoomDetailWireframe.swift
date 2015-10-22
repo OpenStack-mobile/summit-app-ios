@@ -18,7 +18,8 @@ public class VenueRoomDetailWireframe: NSObject, IVenueRoomDetailWireframe {
     
     public func presentVenueRoomDetailView(venueRoomId: Int, viewController: UINavigationController) {
         let newViewController = venueRoomDetailViewController!
-        venueRoomDetailViewController.presenter.venueRoomId = venueRoomId
+        let _ = venueRoomDetailViewController.view!
+        venueRoomDetailViewController.presenter.viewLoad(venueRoomId)
         viewController.pushViewController(newViewController, animated: true)
     }
 }
