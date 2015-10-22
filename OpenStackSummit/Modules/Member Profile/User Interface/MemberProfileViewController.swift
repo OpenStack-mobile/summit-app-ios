@@ -14,6 +14,7 @@ public protocol IMemberProfileViewController {
     var name: String! { get set }
     var personTitle: String! { get set }
     var picUrl: String! { get set }
+    var bio: String! { get set }
     
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()
@@ -41,6 +42,17 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
             titleLabel.text = newValue
         }
     }
+
+    var bio: String! {
+        get {
+            return bioHTML
+        }
+        set {
+            bioHTML = newValue
+            let attrStr = try! NSAttributedString(data: bioHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            bioLabel.attributedText = attrStr
+        }
+    }
     
     var picUrl: String! {
         get {
@@ -65,9 +77,11 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet weak var bioLabel: UILabel!
     
     var presenter: IMemberProfilePresenter!
     private var picUrlInternal: String!
+    private var bioHTML: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()

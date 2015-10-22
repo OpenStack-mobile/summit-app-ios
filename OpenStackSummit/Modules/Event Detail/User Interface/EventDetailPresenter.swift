@@ -17,7 +17,7 @@ public protocol IEventDetailPresenter {
     func addEventToMySchedule()
     func getSpeakersCount()->Int
     func getFeedbackCount()->Int
-    func buildSpeakerCell(cell: ISpeakerTableViewCell, index: Int)
+    func buildSpeakerCell(cell: IPersonTableViewCell, index: Int)
     func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int)
     func showSpeakerProfile(index: Int)
     func loadFeedback()
@@ -44,6 +44,7 @@ public class EventDetailPresenter: NSObject {
         viewController.location = event.location
         viewController.date = event.date
         viewController.allowFeedback = event.allowFeedback
+        viewController.reloadSpeakersData()
         
         loadFeedback()
     }
@@ -83,10 +84,11 @@ public class EventDetailPresenter: NSObject {
         return feedbackList.count
     }
     
-    public func buildSpeakerCell(cell: ISpeakerTableViewCell, index: Int) {
+    public func buildSpeakerCell(cell: IPersonTableViewCell, index: Int) {
         let speaker = event.speakers[index]
         cell.name = speaker.name
         cell.title = speaker.title
+        cell.picUrl = speaker.pictureUrl
     }
     
     public func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int) {

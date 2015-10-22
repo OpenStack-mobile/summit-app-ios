@@ -8,7 +8,6 @@
 
 import UIKit
 
-public class PresentationSpeakerDTO: PersonListItemDTO {
-    public var bio = ""
+public class PresentationSpeakerDTO: PersonDTO {
     public var presentations: [ScheduleItemDTO]?
 }

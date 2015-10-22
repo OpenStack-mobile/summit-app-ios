@@ -8,6 +8,5 @@
 
 import UIKit
 
-public class SummitAttendeeDTO: PersonListItemDTO {
-    public var bio = ""
+public class SummitAttendeeDTO: PersonDTO {
 }

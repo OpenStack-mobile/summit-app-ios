@@ -1,22 +1,21 @@
 //
-//  PeopleTableViewCell.swift
+//  PersonTableViewCell.swift
 //  OpenStackSummit
 //
-//  Created by Claudio on 10/5/15.
+//  Created by Claudio on 10/22/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
 import UIKit
 
 @objc
-public protocol IPeopleTableViewCell : class {
+public protocol IPersonTableViewCell : class {
     var name: String! { get set }
     var title: String! { get set }
     var picUrl: String! { get set }
 }
 
-class PeopleTableViewCell: UITableViewCell, IPeopleTableViewCell {
-    
+class PersonTableViewCell: UITableViewCell, IPersonTableViewCell {
     var name: String!{
         get {
             return nameLabel.text
@@ -42,7 +41,7 @@ class PeopleTableViewCell: UITableViewCell, IPeopleTableViewCell {
         set {
             picUrlInternal = newValue
             if (!picUrlInternal.isEmpty) {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)                
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
             }
             else {
                 pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
@@ -69,5 +68,4 @@ class PeopleTableViewCell: UITableViewCell, IPeopleTableViewCell {
         
         // Configure the view for the selected state
     }
-    
 }
