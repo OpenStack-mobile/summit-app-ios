@@ -31,8 +31,9 @@ public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
         viewController.reloadRoomsData()
     }
     
-    public func showVenueRoomDetail(venueRoomId: Int) {
-        wireframe.showVenueRoomDetail(venueRoomId)
+    public func showVenueRoomDetail(index: Int) {
+        let venueRoom = venue.rooms[index]
+        wireframe.showVenueRoomDetail(venueRoom.id)
     }
     
     public func getVenueRoomsCount() -> Int {
