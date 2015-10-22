@@ -53,31 +53,28 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     func showSpeakerProfile() {
         viewController.showActivityIndicator()        
         interactor.getSpeakerProfile(speakerId) { speaker, error in
-            if (error != nil) {
-                self.viewController.handlerError(error!)
-                return
-            }
-
-            self.viewController.name = speaker!.name
-            self.viewController.personTitle = speaker!.title
-            self.viewController.picUrl = speaker!.pictureUrl
-            self.viewController.hideActivityIndicator()
+            self.showPersonProfile(speaker, error: error)
         }
     }
     
     func showAttendeeProfile() {
         viewController.showActivityIndicator()
         interactor.getAttendeeProfile(attendeeId) { attendee, error in
-            if (error != nil) {
-                self.viewController.handlerError(error!)
-                return
-            }
-
-            self.viewController.name = attendee!.name
-            self.viewController.personTitle = attendee!.title
-            self.viewController.picUrl = attendee!.pictureUrl
-            self.viewController.hideActivityIndicator()
+            self.showPersonProfile(attendee, error: error)
         }
+    }
+    
+    func showPersonProfile(person: PersonDTO?, error: NSError?) {
+        if (error != nil) {
+            self.viewController.handlerError(error!)
+            return
+        }
+        
+        self.viewController.name = person!.name
+        self.viewController.personTitle = person!.title
+        self.viewController.picUrl = person!.pictureUrl
+        self.viewController.bio = person!.bio
+        self.viewController.hideActivityIndicator()
     }
     
     /*public func requestFriendship() {
