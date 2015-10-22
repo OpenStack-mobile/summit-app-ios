@@ -12,6 +12,7 @@ import UIKit
 public protocol IPeopleTableViewCell : class {
     var name: String! { get set }
     var title: String! { get set }
+    var picUrl: String! { get set }
 }
 
 class PeopleTableViewCell: UITableViewCell, IPeopleTableViewCell {
@@ -34,8 +35,29 @@ class PeopleTableViewCell: UITableViewCell, IPeopleTableViewCell {
         }
     }
     
+    var picUrl: String! {
+        get {
+            return picUrlInternal
+        }
+        set {
+            picUrlInternal = newValue
+            if (!picUrlInternal.isEmpty) {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)                
+            }
+            else {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
+            }
+            pictureImageView.layer.borderWidth = 3.0;
+            pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
+            pictureImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            pictureImageView.clipsToBounds = true;
+        }
+    }
+    
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var titleLabel : UILabel!
+    @IBOutlet weak var pictureImageView: UIImageView!
+    private var picUrlInternal: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()

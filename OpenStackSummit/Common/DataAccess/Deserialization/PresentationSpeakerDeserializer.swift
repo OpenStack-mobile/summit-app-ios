@@ -41,6 +41,8 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
             presentationSpeaker.irc = json["irc"].stringValue
             presentationSpeaker.twitter = json["twitter"].stringValue
             presentationSpeaker.memberId = json["member_id"].intValue
+            presentationSpeaker.pictureUrl = json["pic"].stringValue
+
             deserializerStorage.add(presentationSpeaker)
         }
         return presentationSpeaker

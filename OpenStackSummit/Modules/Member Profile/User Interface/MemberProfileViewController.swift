@@ -13,6 +13,7 @@ import SwiftSpinner
 public protocol IMemberProfileViewController {
     var name: String! { get set }
     var personTitle: String! { get set }
+    var picUrl: String! { get set }
     
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()
@@ -22,9 +23,6 @@ public protocol IMemberProfileViewController {
 }
 
 class MemberProfileViewController: UIViewController, IMemberProfileViewController {
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
     
     var name: String!{
         get {
@@ -44,8 +42,33 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
         }
     }
     
-    var presenter: IMemberProfilePresenter!
+    var picUrl: String! {
+        get {
+            return picUrlInternal
+        }
+        set {
+            picUrlInternal = newValue
+            if (!picUrlInternal.isEmpty) {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
+            }
+            else {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
+            }
+            
+            pictureImageView.layer.borderWidth = 3.0;
+            pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
+            pictureImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            pictureImageView.clipsToBounds = true;
+        }
+    }
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var pictureImageView: UIImageView!
+    
+    var presenter: IMemberProfilePresenter!
+    private var picUrlInternal: String!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
