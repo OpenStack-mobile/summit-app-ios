@@ -55,9 +55,6 @@
 		<string>MenuAssembly</string>
 		<string>DataStoreAssembly</string>
 		<string>MemberProfileAssembly</string>
-		<string>VenueListAssembly</string>
-		<string>VenueDetailAssembly</string>
-		<string>VenueRoomDetailAssembly</string>
 		<string>LoginAssembly</string>
 		<string>FeedbackEditAssembly</string>
 		<string>SecurityManagerAssembly</string>
@@ -70,6 +67,9 @@
 		<string>FeedbackGivenListAssembly</string>
 		<string>PersonalScheduleAssembly</string>
 		<string>VenuesMapsAssembly</string>
+		<string>VenueListAssembly</string>
+		<string>VenueDetailAssembly</string>
+		<string>VenueRoomDetailAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

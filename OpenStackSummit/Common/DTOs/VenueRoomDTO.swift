@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class VenueRoomDetailDTO: NamedDTO {
+public class VenueRoomDTO: NamedDTO {
     public var capacity = 0
     public var events = [ScheduleItemDTO]()
     

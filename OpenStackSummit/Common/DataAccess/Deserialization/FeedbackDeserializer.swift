@@ -33,12 +33,7 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
 
             deserializer = deserializerFactory.create(DeserializerFactoryType.SummitAttendee)
 
-            if (json["owner"] == nil){
-                feedback.owner = try deserializer.deserialize(json["owner_id"]) as! SummitAttendee
-            }
-            else {
-                feedback.owner = try deserializer.deserialize(json["owner"]) as! SummitAttendee
-            }
+            feedback.owner = try deserializer.deserialize(json["owner"]) as! SummitAttendee
             
             if(!deserializerStorage.exist(feedback)) {
                 deserializerStorage.add(feedback)

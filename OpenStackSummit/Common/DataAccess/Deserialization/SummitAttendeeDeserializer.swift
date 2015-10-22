@@ -65,7 +65,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             for (_, feedbackJSON) in json["feedback"] {
                 feedback = try deserializer.deserialize(feedbackJSON) as! Feedback
                 summitAttendee.feedback.append(feedback)
-            }            
+            }
         }
         
         return summitAttendee
