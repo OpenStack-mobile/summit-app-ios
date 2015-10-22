@@ -12,7 +12,8 @@ import Typhoon
 public class VenueRoomDetailAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
-    
+    var dataStoreAssembly: DataStoreAssembly!
+
     dynamic func venueRoomDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(VenueRoomDetailWireframe.self) {
             (definition) in
@@ -35,6 +36,7 @@ public class VenueRoomDetailAssembly: TyphoonAssembly {
         
         return TyphoonDefinition.withClass(VenueRoomDetailInteractor.self) {
             (definition) in
+            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
             definition.injectProperty("venueRoomDTOAssembler", with: self.dtoAssemblersAssembly.venueRoomDTOAssembler())
         }
     }

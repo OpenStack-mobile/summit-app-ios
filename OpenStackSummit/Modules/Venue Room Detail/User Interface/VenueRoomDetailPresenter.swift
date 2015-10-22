@@ -9,19 +9,20 @@
 import UIKit
 
 @objc
-public protocol IVenueRoomDetailPresenter {
-    func showVenueRoomDetail()
-    var venueRoomId: Int { get set }
+public protocol IVenueRoomDetailPresenter {    
+    func viewLoad(venueRoomId: Int)
 }
 
 public class VenueRoomDetailPresenter: NSObject, IVenueRoomDetailPresenter {
-    public var venueRoomId = 0
+    var venueRoomId = 0
     var interactor: IVenueRoomDetailInteractor!
     var viewController: IVenueRoomDetailViewController!
     var wireframe: IVenueRoomDetailWireframe!
     
-    public func showVenueRoomDetail() {
+    public func viewLoad(venueRoomId: Int) {
         let venueRoom = interactor.getVenueRoom(venueRoomId)
-        viewController.showVenueRoomDetail(venueRoom!)
+        viewController.name = venueRoom!.name
+        viewController.capacity = venueRoom!.capacity
+        //viewController.picUrl = venueRoom.pictu
     }
 }

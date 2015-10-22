@@ -10,15 +10,53 @@ import UIKit
 
 @objc
 public protocol IVenueRoomDetailViewController {
-    func showVenueRoomDetail(venueRoomDTO: VenueRoomDTO)
-    
-    var presenter: IVenueRoomDetailPresenter! { get set }
+    var name: String! { get set }
+    var capacity: Int { get set }
+    var picUrl: String! { get set }
 }
 
 class VenueRoomDetailViewController: UIViewController, IVenueRoomDetailViewController {
-
-    var presenter: IVenueRoomDetailPresenter!
+    var name: String! {
+        get {
+            return nameLabel.text
+        }
+        set {
+            nameLabel.text = newValue
+        }
+    }
     
+    var capacity: Int {
+        get {
+            return Int(capacityLabel.text!) ?? 0
+        }
+        set {
+            capacityLabel.text = String(newValue)
+        }
+    }
+    
+    var picUrl: String! {
+        get {
+            return picUrlInternal
+        }
+        set {
+            picUrlInternal = newValue
+            if (!picUrlInternal.isEmpty) {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
+            }
+            else {
+                pictureImageView.image = nil
+            }
+        }
+    }
+    
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var capacityLabel: UILabel!
+    @IBOutlet weak var pictureImageView: UIImageView!
+    
+    var presenter: IVenueRoomDetailPresenter!
+    private var picUrlInternal: String!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,19 +67,4 @@ class VenueRoomDetailViewController: UIViewController, IVenueRoomDetailViewContr
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func showVenueRoomDetail(venueRoomDTO: VenueRoomDTO) {
-        
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
