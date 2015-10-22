@@ -14,10 +14,11 @@ public protocol IVenueDetailViewController {
     var address: String! { get set }
 
     func addMarker(venue:VenueDTO)
+    func reloadRoomsData()
 }
 
-class VenueDetailViewController: UIViewController, IVenueDetailViewController, GMSMapViewDelegate {
-
+class VenueDetailViewController: UIViewController, IVenueDetailViewController, GMSMapViewDelegate , UITableViewDelegate, UITableViewDataSource {
+    
     var name: String! {
         get {
             return nameLabel.text
@@ -38,23 +39,19 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var venueMap: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var roomsTableView: UITableView!
     
     var presenter: IVenueDetailPresenter!
-    var mapView: GMSMapView!
+    let cellIdentifier = "venueRoomListTableViewCell"
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        mapView = GMSMapView()
-        mapView.myLocationEnabled = true
-        mapView.delegate = self
-        venueMap = mapView
-        // Do any additional setup after loading the view.
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //mapView = GMSMapView()
+        mapView.myLocationEnabled = true
+        mapView.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -74,17 +71,31 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func reloadRoomsData() {
+        roomsTableView.delegate = self
+        roomsTableView.dataSource = self
+        roomsTableView.reloadData()
     }
-    */
+    
     @IBAction func navigateToVenueRoomDetail(sender: AnyObject) {
         presenter.showVenueRoomDetail(1)
     }
 
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.getVenueRoomsCount();
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! VenueListTableViewCell
+        presenter.buildVenueRoomCell(cell, index: indexPath.row)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        self.presenter.showVenueRoomDetail(indexPath.row)
+    }
 }
