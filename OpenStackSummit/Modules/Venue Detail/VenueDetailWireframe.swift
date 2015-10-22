@@ -20,7 +20,8 @@ public class VenueDetailWireframe: NSObject, IVenueDetailWireframe {
     
     public func presentVenueDetailView(venueId: Int, viewController: UINavigationController) {
         let newViewController = venueDetailViewController!
-        venueDetailViewController.presenter.venueId = venueId
+        let _ = venueDetailViewController.view!
+        venueDetailViewController.presenter.viewLoad(venueId)
         viewController.pushViewController(newViewController, animated: true)
     }
     

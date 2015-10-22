@@ -10,14 +10,14 @@ import UIKit
 
 @objc
 public protocol IVenueRoomDetailInteractor {
-    func getVenueRoom(venueRoomId: Int) -> VenueRoomDetailDTO?
+    func getVenueRoom(venueRoomId: Int) -> VenueRoomDTO?
 }
 
 public class VenueRoomDetailInteractor: NSObject, IVenueRoomDetailInteractor {
     var venueRoomDataStore: IVenueRoomDataStore!
-    var venueRoomDetailDTOAssembler: IVenueRoomDetailDTOAssembler!
+    var venueRoomDetailDTOAssembler: IVenueRoomDTOAssembler!
 
-    public func getVenueRoom(venueRoomId: Int) -> VenueRoomDetailDTO? {
+    public func getVenueRoom(venueRoomId: Int) -> VenueRoomDTO? {
         let venueRoom = venueRoomDataStore.getByIdLocal(venueRoomId)
         let venueRoomDetailDTO = venueRoomDetailDTOAssembler.createDTO(venueRoom!)
 

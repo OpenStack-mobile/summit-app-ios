@@ -1,4 +1,3 @@
-//
 //  VenueDetailAssembly.swift
 //  OpenStackSummit
 //
@@ -12,7 +11,9 @@ import Typhoon
 public class VenueDetailAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var venueRoomDetailAssembly: VenueRoomDetailAssembly!
-
+    var dataStoreAssembly: DataStoreAssembly!
+    var dtosAssemblersAssembly: DTOAssemblersAssembly!
+    
     dynamic func venueDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(VenueDetailWireframe.self) {
             (definition) in
@@ -28,7 +29,7 @@ public class VenueDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("interactor", with: self.venueDetailInteractor())
             definition.injectProperty("viewController", with: self.venueDetailViewController())
-            definition.injectProperty("venueDetailWireframe", with: self.venueDetailWireframe())
+            definition.injectProperty("wireframe", with: self.venueDetailWireframe())
         }
     }
     
@@ -36,17 +37,16 @@ public class VenueDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(VenueDetailInteractor.self) {
             (definition) in
             
+            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
+            definition.injectProperty("venueDTOAssembler", with: self.dtosAssemblersAssembly.venueDTOAssembler())
         }
     }
-        
+    
     dynamic func venueDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
-            (factoryMethod) in
+        return TyphoonDefinition.withClass(VenueDetailViewController.self) {
+            (definition) in
             
-            factoryMethod.injectParameterWith("VenueDetailViewController")
-        }, configuration: {
-                (definition) in
-                definition.injectProperty("presenter", with: self.venueDetailPresenter())
-        })
+            definition.injectProperty("presenter", with: self.venueDetailPresenter())
+        }
     }
 }

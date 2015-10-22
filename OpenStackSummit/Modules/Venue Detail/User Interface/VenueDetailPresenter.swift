@@ -10,23 +10,24 @@ import UIKit
 
 @objc
 public protocol IVenueDetailPresenter {
-    func showVenueDetail()
+    func viewLoad(venueId: Int)
     func showVenueRoomDetail(venueRoomId: Int)
-    
-    var venueId: Int { get set }
 }
 
 public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
-    public var venueId = 0
+    var venueId = 0
     var interactor: IVenueDetailInteractor!
-    var viewController: IVenueDetailViewController!
-    var venueDetailWireframe: IVenueDetailWireframe!
+    weak var viewController: IVenueDetailViewController!
+    var wireframe: IVenueDetailWireframe!
     
-    public func showVenueDetail() {
-        
+    public func viewLoad(venueId: Int) {
+        let venue = interactor.getVenue(venueId)
+        viewController.name = venue.name
+        viewController.address = venue.address
+        viewController.addMarker(venue)
     }
     
     public func showVenueRoomDetail(venueRoomId: Int) {
-        venueDetailWireframe.showVenueRoomDetail(venueRoomId)
+        wireframe.showVenueRoomDetail(venueRoomId)
     }
 }

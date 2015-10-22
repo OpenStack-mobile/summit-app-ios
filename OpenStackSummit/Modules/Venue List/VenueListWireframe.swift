@@ -14,8 +14,8 @@ public protocol IVenueListWireframe {
 }
 
 public class VenueListWireframe: NSObject, IVenueListWireframe {
-    var venueDetailWireframe : IVenueDetailWireframe!
-    var venueListViewController: UIViewController!
+    var venueDetailWireframe: IVenueDetailWireframe!
+    var venueListViewController: VenueListViewController!
     
     public func showVenueDetail(venueId: Int) {
         venueDetailWireframe.presentVenueDetailView(venueId, viewController: venueListViewController.navigationController!)

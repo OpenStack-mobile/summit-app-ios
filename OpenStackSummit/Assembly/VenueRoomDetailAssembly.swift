@@ -11,6 +11,7 @@ import Typhoon
 
 public class VenueRoomDetailAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
     
     dynamic func venueRoomDetailWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(VenueRoomDetailWireframe.self) {
@@ -30,22 +31,11 @@ public class VenueRoomDetailAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func venueRoomDetailDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(VenueRoomDetailDTOAssembler.self) {
-            (definition) in
-            definition.injectProperty("scheduleItemDTOAssembler", with: self.venueRoomsSheduleItemDTOAssembler())
-        }
-    }
-
-    dynamic func venueRoomsSheduleItemDTOAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
-    }
-    
     dynamic func venueRoomDetailInteractor() -> AnyObject {
         
         return TyphoonDefinition.withClass(VenueRoomDetailInteractor.self) {
             (definition) in
-            definition.injectProperty("venueRoomDetailDTOAssembler", with: self.venueRoomDetailDTOAssembler())            
+            definition.injectProperty("venueRoomDTOAssembler", with: self.dtoAssemblersAssembly.venueRoomDTOAssembler())
         }
     }
     
