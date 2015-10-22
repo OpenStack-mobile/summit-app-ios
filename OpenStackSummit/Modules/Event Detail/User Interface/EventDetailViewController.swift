@@ -14,6 +14,7 @@ public protocol IEventDetailViewController {
     func didAddEventToMySchedule(event: EventDetailDTO)
     func showErrorMessage(error: NSError)
     func reloadFeedbackData()
+    func reloadSpeakersData()
     
     var presenter: IEventDetailPresenter! { get set }
     var eventTitle: String! { get set }
@@ -53,8 +54,8 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
             return eventDescriptionHTML
         }
         set {
-            //eventDescriptionHTML = newValue.stringByReplacingOccurrencesOfString("\\", withString: "")
-            let attrStr = try! NSAttributedString(data: newValue.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            eventDescriptionHTML = newValue
+            let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
             eventDetailLabel.attributedText = attrStr
         }
     }
@@ -100,9 +101,6 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        speakersTableView.delegate = self
-        speakersTableView.dataSource = self
-        //imageView.hnk_setImageFromURL(NSURL(string:"http://www.openstack.org/assets/paris-summit/_resampled/resizedimage464600-meridien-map-level01.png")!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,7 +135,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (tableView == speakersTableView) {
-            let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! SpeakerTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
             presenter.buildSpeakerCell(cell, index: indexPath.row)
             return cell
         }
@@ -150,6 +148,12 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         self.presenter.showSpeakerProfile(indexPath.row)
+    }
+    
+    func reloadSpeakersData() {
+        speakersTableView.delegate = self
+        speakersTableView.dataSource = self
+        speakersTableView.reloadData()
     }
     
     func reloadFeedbackData() {
