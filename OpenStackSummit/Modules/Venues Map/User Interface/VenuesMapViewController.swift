@@ -13,7 +13,7 @@ protocol IVenuesMapViewController {
     func addMarkers(venues:[VenueListItemDTO])
 }
 
-class VenuesMapViewController: RevealViewController, GMSMapViewDelegate {
+class VenuesMapViewController: RevealViewController, GMSMapViewDelegate, IVenuesMapViewController {
     var presenter: IVenuesMapPresenter!
     var mapView: GMSMapView!
     var dictionary = Dictionary<GMSMarker, Int>()

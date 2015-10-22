@@ -9,15 +9,15 @@
 import UIKit
 
 @objc
-public protocol IVenueRoomDetailDTOAssembler {
-    func createDTO(venueRoom: VenueRoom) -> VenueRoomDetailDTO
+public protocol IVenueRoomDTOAssembler {
+    func createDTO(venueRoom: VenueRoom) -> VenueRoomDTO
 }
 
-public class VenueRoomDetailDTOAssembler: NamedDTOAssembler {
+public class VenueRoomDTOAssembler: NamedDTOAssembler, IVenueRoomDTOAssembler {
     var scheduleItemDTOAssembler: ScheduleItemDTOAssembler!
     
-    public func createDTO(venueRoom: VenueRoom) -> VenueRoomDetailDTO {
-        let venueRoomDetailDTO: VenueRoomDetailDTO = super.createDTO(venueRoom)
+    public func createDTO(venueRoom: VenueRoom) -> VenueRoomDTO {
+        let venueRoomDetailDTO: VenueRoomDTO = super.createDTO(venueRoom)
         venueRoomDetailDTO.capacity = venueRoom.capacity
         
         var scheduleItemDTO: ScheduleItemDTO

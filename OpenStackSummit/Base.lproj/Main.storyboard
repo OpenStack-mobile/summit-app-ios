@@ -493,7 +493,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kw6-Pc-OG1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2509" y="1048"/>
+            <point key="canvasLocation" x="2509" y="1148"/>
         </scene>
         <!--Feedback Edit View Controller-->
         <scene sceneID="9aZ-LC-uOd">
@@ -626,9 +626,39 @@
                                     <navigationItem title="Venue Detail" id="qMD-sK-KjI"/>
                                 </items>
                             </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sS-ey-PKM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ueA-eT-ztR">
+                                        <rect key="frame" x="16" y="50" width="543" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDx-SG-YRd">
+                                        <rect key="frame" x="16" y="81" width="543" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fNH-WI-hfz">
+                                        <rect key="frame" x="16" y="121" width="477" height="288"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4sS-ey-PKM" firstAttribute="width" secondItem="PDx-Wn-BBy" secondAttribute="width" id="DjM-mD-qUz"/>
+                            <constraint firstItem="4sS-ey-PKM" firstAttribute="height" secondItem="PDx-Wn-BBy" secondAttribute="height" id="Ujz-VL-7co"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="oDx-SG-YRd" id="oHB-6Q-afn"/>
+                        <outlet property="nameLabel" destination="ueA-eT-ztR" id="yys-cA-lPE"/>
+                        <outlet property="venueMap" destination="fNH-WI-hfz" id="YEJ-hW-jNw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bch-y4-MfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

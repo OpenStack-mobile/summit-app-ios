@@ -10,12 +10,47 @@ import UIKit
 
 @objc
 public protocol IVenueDetailViewController {
-    var presenter: IVenueDetailPresenter! { get set }
+    var name: String! { get set }
+    var address: String! { get set }
+
+    func addMarker(venue:VenueDTO)
 }
 
-class VenueDetailViewController: UIViewController, IVenueDetailViewController {
+class VenueDetailViewController: UIViewController, IVenueDetailViewController, GMSMapViewDelegate {
 
+    var name: String! {
+        get {
+            return nameLabel.text
+        }
+        set {
+            nameLabel.text = newValue
+        }
+    }
+
+    var address: String! {
+        get {
+            return addressLabel.text
+        }
+        set {
+            addressLabel.text = newValue
+        }
+    }
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var venueMap: UIView!
+    
     var presenter: IVenueDetailPresenter!
+    var mapView: GMSMapView!
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        mapView = GMSMapView()
+        mapView.myLocationEnabled = true
+        mapView.delegate = self
+        venueMap = mapView
+        // Do any additional setup after loading the view.
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +63,17 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func addMarker(venue:VenueDTO) {
+        var marker: GMSMarker
+        var bounds = GMSCoordinateBounds()
+        marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
+        marker.map = mapView
+        marker.title = venue.name
+        bounds = bounds.includingCoordinate(marker.position)
+        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+    }
+    
     /*
     // MARK: - Navigation
 
