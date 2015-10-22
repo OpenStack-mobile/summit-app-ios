@@ -15,12 +15,12 @@ public protocol IVenueRoomDetailInteractor {
 
 public class VenueRoomDetailInteractor: NSObject, IVenueRoomDetailInteractor {
     var venueRoomDataStore: IVenueRoomDataStore!
-    var venueRoomDetailDTOAssembler: IVenueRoomDTOAssembler!
+    var venueRoomDTOAssembler: IVenueRoomDTOAssembler!
 
     public func getVenueRoom(venueRoomId: Int) -> VenueRoomDTO? {
         let venueRoom = venueRoomDataStore.getByIdLocal(venueRoomId)
-        let venueRoomDetailDTO = venueRoomDetailDTOAssembler.createDTO(venueRoom!)
+        let venueRoomDTO = venueRoomDTOAssembler.createDTO(venueRoom!)
 
-        return venueRoomDetailDTO
+        return venueRoomDTO
     }
 }

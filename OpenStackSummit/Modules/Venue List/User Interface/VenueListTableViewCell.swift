@@ -11,7 +11,6 @@ import UIKit
 @objc
 public protocol IVenueListTableViewCell : class {
     var name: String! { get set }
-    var address: String! { get set }
 }
 
 class VenueListTableViewCell: UITableViewCell, IVenueListTableViewCell {
@@ -24,17 +23,7 @@ class VenueListTableViewCell: UITableViewCell, IVenueListTableViewCell {
         }
     }
     
-    var address: String!{
-        get {
-            return addressLabel.text
-        }
-        set {
-            addressLabel.text = newValue
-        }
-    }
-
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
