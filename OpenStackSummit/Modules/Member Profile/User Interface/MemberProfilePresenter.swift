@@ -60,6 +60,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
 
             self.viewController.name = speaker!.name
             self.viewController.personTitle = speaker!.title
+            self.viewController.picUrl = speaker!.pictureUrl
             self.viewController.hideActivityIndicator()
         }
     }
@@ -74,6 +75,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
 
             self.viewController.name = attendee!.name
             self.viewController.personTitle = attendee!.title
+            self.viewController.picUrl = attendee!.pictureUrl
             self.viewController.hideActivityIndicator()
         }
     }
