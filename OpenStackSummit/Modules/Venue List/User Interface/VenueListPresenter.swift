@@ -13,7 +13,7 @@ public protocol IVenueListPresenter {
     func viewLoad()
     func getVenuesCount() -> Int
     func buildVenueCell(cell: IVenueListTableViewCell, index: Int)
-    func showVenueDetail(venueId: Int)
+    func showVenueDetail(index: Int)
 }
 
 public class VenueListPresenter: NSObject, IVenueListPresenter {
@@ -34,10 +34,11 @@ public class VenueListPresenter: NSObject, IVenueListPresenter {
     public func buildVenueCell(cell: IVenueListTableViewCell, index: Int){
         let venue = venueList[index]
         cell.name = venue.name
-        cell.address = venue.address
     }
     
-    public func showVenueDetail(venueId: Int) {
-        wireframe.showVenueDetail(venueId)
+    public func showVenueDetail(index: Int) {
+        let venue = venueList[index]
+        wireframe.showVenueDetail(venue.id)
     }
+    
 }

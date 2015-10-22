@@ -9,5 +9,6 @@
 import UIKit
 
 public class VenueDTO: VenueListItemDTO {
+    public var address = ""
     public var rooms = [VenueRoomDTO]()
 }

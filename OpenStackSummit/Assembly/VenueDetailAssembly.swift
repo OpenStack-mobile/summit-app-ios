@@ -43,10 +43,21 @@ public class VenueDetailAssembly: TyphoonAssembly {
     }
     
     dynamic func venueDetailViewController() -> AnyObject {
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
+            
+            factoryMethod.injectParameterWith("VenueDetailViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.venueDetailPresenter())
+        })
+    }
+    
+/*    dynamic func venueDetailViewController() -> AnyObject {
         return TyphoonDefinition.withClass(VenueDetailViewController.self) {
             (definition) in
             
             definition.injectProperty("presenter", with: self.venueDetailPresenter())
         }
-    }
+    }*/
 }
