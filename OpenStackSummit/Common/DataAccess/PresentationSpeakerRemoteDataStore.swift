@@ -21,7 +21,12 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
     public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://dev-resource-server/api/v1/summits/current/speakers?page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
+        var filter = ""
+        if (searchTerm != nil && !searchTerm!.isEmpty) {
+            filter = "filter=first_name==\(searchTerm!),last_name==\(searchTerm!)&"
+        }
+        
+        http.GET("https://dev-resource-server/api/v1/summits/current/speakers?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return

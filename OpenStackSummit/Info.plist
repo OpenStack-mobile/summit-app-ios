@@ -70,6 +70,7 @@
 		<string>VenueListAssembly</string>
 		<string>VenueDetailAssembly</string>
 		<string>VenueRoomDetailAssembly</string>
+		<string>SearchAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

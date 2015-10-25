@@ -82,33 +82,37 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
         internalViewController.showActivityIndicator()
         
         interactor.getActiveSummit() { summit, error in
-            defer { viewController.hideActivityIndicator() }
+            dispatch_async(dispatch_get_main_queue(),{
+                defer { viewController.hideActivityIndicator() }
 
-            if (error != nil) {
-                viewController.showErrorMessage(error!)
-                return
-            }
-            
-            let offsetLocalTimeZone = -NSTimeZone.localTimeZone().secondsFromGMT
-            self.summitTimeZoneOffsetLocalTimeZone = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT + offsetLocalTimeZone
-            viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offsetLocalTimeZone)
-            viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offsetLocalTimeZone).mt_dateDaysAfter(1)
-            viewController.selectedDate = viewController.startDate
+                if (error != nil) {
+                    viewController.showErrorMessage(error!)
+                    return
+                }
+                
+                let offsetLocalTimeZone = -NSTimeZone.localTimeZone().secondsFromGMT
+                self.summitTimeZoneOffsetLocalTimeZone = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT + offsetLocalTimeZone
+                viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offsetLocalTimeZone)
+                viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offsetLocalTimeZone).mt_dateDaysAfter(1)
+                viewController.selectedDate = viewController.startDate
+            })
         }
     }
     
     func reloadSchedule(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
-        let startDate = viewController.selectedDate.mt_dateSecondsAfter(-summitTimeZoneOffsetLocalTimeZone)
-        let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-summitTimeZoneOffsetLocalTimeZone)
-        
-        dayEvents = interactor.getScheduleEvents(
-            startDate,
-            endDate: endDate,
-            eventTypes: scheduleFilter.selections[FilterSectionTypes.EventType],
-            summitTypes: scheduleFilter.selections[FilterSectionTypes.SummitType],
-            tracks: scheduleFilter.selections[FilterSectionTypes.Track]
-        )
-        viewController.reloadSchedule()
+        dispatch_async(dispatch_get_main_queue(),{
+            let startDate = viewController.selectedDate.mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
+            let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
+            
+            self.dayEvents = interactor.getScheduleEvents(
+                startDate,
+                endDate: endDate,
+                eventTypes: self.scheduleFilter.selections[FilterSectionTypes.EventType],
+                summitTypes: self.scheduleFilter.selections[FilterSectionTypes.SummitType],
+                tracks: self.scheduleFilter.selections[FilterSectionTypes.Track]
+            )
+            viewController.reloadSchedule()
+        })
     }
     
     public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
@@ -124,26 +128,30 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     
     func addEventToSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
         interactor.addEventToLoggedInMemberSchedule(event.id) { error in
-            if (error != nil) {
-                viewController.showErrorMessage(error!)
-            }
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    viewController.showErrorMessage(error!)
+                }
 
-            cell.scheduledStatus = .Scheduled
-            if (completionBlock != nil) {
-                completionBlock!(error)
-            }
+                cell.scheduledStatus = .Scheduled
+                if (completionBlock != nil) {
+                    completionBlock!(error)
+                }
+            })
         }
     }
     
     func removeEventFromSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
         interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
-            if (error != nil) {
-                viewController.showErrorMessage(error!)
-            }
-            cell.scheduledStatus = .NotScheduled
-            if (completionBlock != nil) {
-                completionBlock!(error)
-            }
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    viewController.showErrorMessage(error!)
+                }
+                cell.scheduledStatus = .NotScheduled
+                if (completionBlock != nil) {
+                    completionBlock!(error)
+                }
+            })
         }
     }
     

@@ -143,7 +143,38 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(59, event.sponsors.first!.id)
         XCTAssertFalse(event.allowFeedback)
     }
+
+    func test_deserialize_completeJSONAndLocationIsNotPresent_returnsCorrectInstanceWithoutAnyLocation() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        let venueRoom = VenueRoom()
+        venueRoom.id = 31
+        deserializerStorage.add(venueRoom)
+        let eventType = EventType()
+        eventType.id = 6
+        deserializerStorage.add(eventType)
+        let summitType = SummitType()
+        summitType.id = 1
+        deserializerStorage.add(summitType)
+        let sponsor = Company()
+        sponsor.id = 59
+        deserializerStorage.add(sponsor)
         
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "{\"id\":6792,\"title\":\"Cisco Sponsor Session 1\",\"description\":null,\"start_date\":1445912100,\"end_date\":1445914500,\"location_id\":null,\"type_id\":6,\"class_name\":\"SummitEvent\",\"allow_feedback\":false,\"summit_types\":[1],\"sponsors\":[59]}"
+        
+        //Act
+        let event = try! deserializer.deserialize(json) as! SummitEvent
+        
+        //Assert
+        XCTAssertEqual(6792,event.id)
+        XCTAssertEqual("Cisco Sponsor Session 1",event.name)
+        XCTAssertNil(event.venue)
+        XCTAssertNil(event.venueRoom)
+    }
+    
     func test_deserialize_jsonWithAllManfatoryFieldsMissed_throwsBadFormatException() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();

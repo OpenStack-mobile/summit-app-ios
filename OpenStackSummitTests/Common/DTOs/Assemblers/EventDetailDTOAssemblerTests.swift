@@ -33,6 +33,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venue = Venue()
         venue.name = "Test Venue"
         let venueRoom = VenueRoom()
+        venueRoom.id = 1
         venueRoom.name = "Test Venue Room"
         venue.venueRooms.append(venueRoom)
         try! realm.write {
@@ -84,11 +85,14 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertTrue(eventDetailDTO.allowFeedback)
         XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
+        XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
+        XCTAssertNil(eventDetailDTO.venueId)
     }
     
     func test_createDTO_eventWithoutPresentationAndSpeakersFinished_returnsDTOWithCorrectData() {
         // Arrange
         let venue = Venue()
+        venue.id = 1
         venue.name = "Test Venue"
         let event = SummitEvent()
         event.name = "Test Title"
@@ -118,5 +122,8 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
         XCTAssertEqual("", eventDetailDTO.track)
         XCTAssertEqual("", eventDetailDTO.tags)
+        XCTAssertEqual(venue.id, eventDetailDTO.venueId)
+        XCTAssertNil(eventDetailDTO.venueRoomId)
+        
     }
 }

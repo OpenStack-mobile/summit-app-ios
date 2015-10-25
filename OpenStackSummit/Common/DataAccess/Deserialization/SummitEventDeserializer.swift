@@ -60,18 +60,21 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
                 try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
             }
 
-            let venue = Venue()
-            venue.id = json["location_id"].intValue
-            let venueRoom = VenueRoom()
-            venueRoom.id = json["location_id"].intValue
-
-            if (deserializerStorage.exist(venue)){
-                deserializer = deserializerFactory.create(DeserializerFactoryType.Venue)
-                summitEvent.venue = try deserializer.deserialize(json["location_id"]) as? Venue
-            }
-            else if (deserializerStorage.exist(venueRoom)) {
-                deserializer = deserializerFactory.create(DeserializerFactoryType.VenueRoom)
-                summitEvent.venueRoom = try deserializer.deserialize(json["location_id"]) as? VenueRoom
+            let locationId = json["location_id"]
+            if (locationId.int != nil) {
+                let venue = Venue()
+                venue.id = locationId.intValue
+                let venueRoom = VenueRoom()
+                venueRoom.id = locationId.intValue
+                
+                if (deserializerStorage.exist(venue)){
+                    deserializer = deserializerFactory.create(DeserializerFactoryType.Venue)
+                    summitEvent.venue = try deserializer.deserialize(locationId) as? Venue
+                }
+                else if (deserializerStorage.exist(venueRoom)) {
+                    deserializer = deserializerFactory.create(DeserializerFactoryType.VenueRoom)
+                    summitEvent.venueRoom = try deserializer.deserialize(locationId) as? VenueRoom
+                }
             }
             
             let trackId = json["track_id"]
