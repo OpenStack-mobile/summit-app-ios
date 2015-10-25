@@ -147,7 +147,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showSpeakerProfile(indexPath.row)
+        presenter.showSpeakerProfile(indexPath.row)
     }
     
     func reloadSpeakersData() {
@@ -160,6 +160,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         feedbackTableView.delegate = self
         feedbackTableView.dataSource = self
         feedbackTableView.reloadData()
+    }
+    
+    @IBAction func showLocation(sender: UITapGestureRecognizer) {
+        presenter.showVenueDetail()
     }
     
     @IBAction func loadMoreFeedback(sender: AnyObject) {

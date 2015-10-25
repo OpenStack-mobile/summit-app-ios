@@ -55,6 +55,6 @@ class VenueListViewController: RevealViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showVenueDetail(indexPath.row)
+        presenter.showVenueDetail(indexPath.row)
     }
 }
