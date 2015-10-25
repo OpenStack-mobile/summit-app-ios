@@ -10,8 +10,8 @@ import UIKit
 import Typhoon
 
 class PeopleAssembly: TyphoonAssembly {
-    var dataStoresAssembly: DataStoreAssembly!
-    var dtoAssemblersAsembly: DTOAssemblersAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var memberProfileAssembly: MemberProfileAssembly!
     
     dynamic func peopleWireframe() -> AnyObject {
@@ -37,9 +37,9 @@ class PeopleAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(PeopleInteractor.self) {
             (definition) in
             
-            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.dataStoresAssembly.presentationSpeakerRemoteDataStore())
-            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoresAssembly.summitAttendeeRemoteDataStore())
-            definition.injectProperty("personDTOAssembler", with: self.dtoAssemblersAsembly.personListItemDTOAssembler())
+            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.dataStoreAssembly.presentationSpeakerRemoteDataStore())
+            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
+            definition.injectProperty("personDTOAssembler", with: self.dtoAssemblersAssembly.personListItemDTOAssembler())
         }
     }
     

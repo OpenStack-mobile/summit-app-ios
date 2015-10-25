@@ -66,11 +66,9 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func reloadSchedule() {
-        dispatch_async(dispatch_get_main_queue(),{
-            self.scheduleView.tableView.delegate = self
-            self.scheduleView.tableView.dataSource = self            
-            self.scheduleView.tableView.reloadData()
-        })
+        self.scheduleView.tableView.delegate = self
+        self.scheduleView.tableView.dataSource = self            
+        self.scheduleView.tableView.reloadData()
     }
     
     func showErrorMessage(error: NSError) {

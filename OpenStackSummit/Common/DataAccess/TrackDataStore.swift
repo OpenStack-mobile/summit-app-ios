@@ -8,9 +8,19 @@
 
 import UIKit
 
+@objc
 public protocol ITrackDataStore {
     func getAllLocal() -> [Track]
+    func getBySearchTerm(searchTerm: String)->[Track]
 }
 
 public class TrackDataStore: GenericDataStore, ITrackDataStore {
+    public func getAllLocal() -> [Track] {
+        return super.getAllLocal()
+    }
+    
+    public func getBySearchTerm(searchTerm: String)->[Track] {
+        let tracks = realm.objects(Track).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name")
+        return tracks.map { $0 }
+    }
 }

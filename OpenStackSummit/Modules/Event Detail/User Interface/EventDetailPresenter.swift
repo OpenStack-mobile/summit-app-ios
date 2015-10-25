@@ -21,6 +21,7 @@ public protocol IEventDetailPresenter {
     func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int)
     func showSpeakerProfile(index: Int)
     func loadFeedback()
+    func showVenueDetail()
 }
 
 public class EventDetailPresenter: NSObject {
@@ -107,5 +108,14 @@ public class EventDetailPresenter: NSObject {
     public func showSpeakerProfile(index: Int) {
         let speaker = event.speakers[index]
         wireframe.showSpeakerProfile(speaker.id)
+    }
+    
+    public func showVenueDetail() {
+        if event.venueRoomId != nil {
+            wireframe.showVenueRoomDetail(event.venueRoomId!)
+        }
+        else if event.venueId != nil {
+            wireframe.showVenueDetail(event.venueId!)
+        }
     }
 }

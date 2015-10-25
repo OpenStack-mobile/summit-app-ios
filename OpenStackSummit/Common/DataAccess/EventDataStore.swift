@@ -13,6 +13,7 @@ public protocol IEventDataStore {
     func getByIdLocal(id: Int) -> SummitEvent?
     func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?)->[SummitEvent]
     func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void)
+    func getBySearchTerm(searchTerm: String!)->[SummitEvent]
 }
 
 public class EventDataStore: GenericDataStore, IEventDataStore {
@@ -49,6 +50,11 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         }
     
         return eventArray
+    }
+    
+    public func getBySearchTerm(searchTerm: String!)->[SummitEvent] {
+        let events = realm.objects(SummitEvent).filter("name CONTAINS [c]%@ or eventDescription CONTAINS [c]%@", searchTerm, searchTerm).sorted("start")
+        return events.map { $0 }
     }
     
     public func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void) {
