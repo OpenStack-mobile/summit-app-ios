@@ -21,6 +21,9 @@ public protocol IMenuViewController {
 class MenuViewController: UITableViewController, IMenuViewController {
 
     var presenter: IMenuPresenter!
+    var session: ISession!
+    
+    @IBOutlet weak var searchTermTextView: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,14 +80,9 @@ class MenuViewController: UITableViewController, IMenuViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "searchSegue") {
+            session.set(Constants.SessionKeys.SearchTerm, value: searchTermTextView.text)
+        }
     }
-    */
-
 }

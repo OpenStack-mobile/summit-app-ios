@@ -37,6 +37,7 @@ public class EventDetailPresenter: NSObject {
     
     public func viewLoad(eventId: Int) {
         self.eventId = eventId
+        feedbackPage = 1
         feedbackList.removeAll()
         event = interactor.getEventDetail(eventId)
        
@@ -44,7 +45,7 @@ public class EventDetailPresenter: NSObject {
         viewController.eventDescription = event.eventDescription
         viewController.location = event.location
         viewController.date = event.date
-        viewController.allowFeedback = event.allowFeedback
+        viewController.allowFeedback = event.allowFeedback && interactor.isMemberLoggedIn()
         viewController.reloadSpeakersData()
         
         loadFeedback()

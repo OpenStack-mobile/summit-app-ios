@@ -84,7 +84,6 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         set {
             feedbackButton.hidden = !newValue
             feedbackTableView.hidden = !newValue
-            moreFeedbackButton.hidden = !newValue
         }
     }
     

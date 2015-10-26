@@ -10,7 +10,7 @@ import UIKit
 import Typhoon
 
 public class MenuAssembly: TyphoonAssembly {
-    
+    var applicationAssembly: ApplicationAssembly!
     var venueListAssembly: VenueListAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     
@@ -39,12 +39,8 @@ public class MenuAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MenuInteractor.self) {
             (definition) in
             
-            definition.injectProperty("session", with: self.menuSession())
+            definition.injectProperty("session", with: self.applicationAssembly.session())
         }
-    }
-    
-    dynamic func menuSession() -> AnyObject {
-        return TyphoonDefinition.withClass(Session.self)
     }
     
     dynamic func menuViewController() -> AnyObject {
@@ -52,6 +48,7 @@ public class MenuAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("presenter", with: self.menuPresenter())
+            definition.injectProperty("session", with: self.applicationAssembly.session())
         }
     }
 }
