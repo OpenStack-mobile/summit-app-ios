@@ -36,6 +36,7 @@ class SearchAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.searchViewController())
             definition.injectProperty("interactor", with: self.searchInteractor())
             definition.injectProperty("wireframe", with: self.searchWireframe())
+            definition.injectProperty("session", with: self.applicationAssembly.session())
         }
     }
     
