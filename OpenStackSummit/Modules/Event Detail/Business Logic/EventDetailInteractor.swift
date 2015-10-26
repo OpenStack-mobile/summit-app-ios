@@ -13,6 +13,7 @@ public protocol IEventDetailInteractor {
     func getEventDetail(eventId: Int) -> EventDetailDTO
     func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void)
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
+    func isMemberLoggedIn() -> Bool
 }
 
 public class EventDetailInteractor: NSObject {
@@ -62,4 +63,7 @@ public class EventDetailInteractor: NSObject {
         }
     }
 
+    public func isMemberLoggedIn() -> Bool {
+        return securityManager.isLoggedIn()
+    }    
 }

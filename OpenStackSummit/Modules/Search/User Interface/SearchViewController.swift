@@ -12,7 +12,7 @@ import UIKit
 protocol ISearchViewController {
     var navigationController: UINavigationController? { get }
     var presenter: ISearchPresenter! { get set }
-    
+    var searchTerm: String! { get set }
     func reloadEvents()
     func reloadTracks()
     func reloadSpeakers()
@@ -32,12 +32,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     private let eventsTableViewCellIdentifier = "scheduleTableViewCell"
     private let tracksTableViewCellIdentifier = "tracksTableViewCell"
     private let speakersTableViewCellIdentifier = "speakersTableViewCell"
-    private let attendeeTableViewCellIdentifier = "attendeeTableViewCell"
+    private let attendeesTableViewCellIdentifier = "attendeesTableViewCell"
     var presenter: ISearchPresenter!
+
+    var searchTerm: String? {
+        get {
+            return searchTermTextView.text
+        }
+        set {
+            searchTermTextView.text = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         eventsTableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: eventsTableViewCellIdentifier)
+        presenter.viewLoad()
     }
 
     func showErrorMessage(error: NSError) {
@@ -85,7 +95,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         }
         else if (tableView == attendeesTableView)  {
-            let cell = tableView.dequeueReusableCellWithIdentifier(attendeeTableViewCellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(attendeesTableViewCellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
             presenter.buildAttendeeCell(cell, index: indexPath.row)
             return cell
         }

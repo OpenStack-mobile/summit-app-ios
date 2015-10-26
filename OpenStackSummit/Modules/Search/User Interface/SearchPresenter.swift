@@ -39,9 +39,14 @@ public class SearchPresenter: NSObject {
     var loadedAllSpeakers = false
     var pageAttendees = 1
     var loadedAllAttendees = false
+    var session: ISession!
     
     public func viewLoad() {
-        //interactor.getEventsBySearchTerm()
+        let searchTerm = session.get(Constants.SessionKeys.SearchTerm) as? String
+        if (searchTerm != nil && !searchTerm!.isEmpty) {
+            viewController.searchTerm = searchTerm
+            search(searchTerm)
+        }
     }
 
     public func search(searchTerm: String!) {
@@ -50,27 +55,31 @@ public class SearchPresenter: NSObject {
         tracks = interactor.getTracksBySearchTerm(searchTerm)
         viewController.reloadTracks()
         interactor.getSpeakersBySearchTerm(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage) { (speakersPage, error) in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-                return
-            }
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                    return
+                }
             
-            self.speakers.appendContentsOf(speakersPage!)
-            self.viewController.reloadSpeakers()
-            self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
-            self.pageSpeakers++
+                self.speakers.appendContentsOf(speakersPage!)
+                self.viewController.reloadSpeakers()
+                self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
+                self.pageSpeakers++
+            })
         }
         
         interactor.getAttendeesBySearchTerm(searchTerm, page: pageAttendees, objectsPerPage: objectsPerPage) { (attendeesPage, error) in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-                return
-            }
-            
-            self.attendees.appendContentsOf(attendeesPage!)
-            self.viewController.reloadAttendees()
-            self.loadedAllAttendees = attendeesPage!.count < self.objectsPerPage
-            self.pageAttendees++
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                    return
+                }
+                
+                self.attendees.appendContentsOf(attendeesPage!)
+                self.viewController.reloadAttendees()
+                self.loadedAllAttendees = attendeesPage!.count < self.objectsPerPage
+                self.pageAttendees++
+            })
         }
     }
     
