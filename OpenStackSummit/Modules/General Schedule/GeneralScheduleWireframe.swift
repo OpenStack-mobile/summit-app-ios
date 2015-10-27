@@ -10,18 +10,19 @@ import UIKit
 
 @objc
 public protocol IGeneralScheduleWireframe: IScheduleWireframe {
-    func presentGeneralScheduleView(viewController: UINavigationController)
+    func showFilters()
 }
 
-public class GeneralScheduleWireframe: ScheduleWireframe {
+public class GeneralScheduleWireframe: ScheduleWireframe, IGeneralScheduleWireframe {
     weak var generalScheduleViewController: GeneralScheduleViewController!
+    var generalScheduleFilterWireframe: IGeneralScheduleFilterWireframe!
     
     public override func showEventDetail(eventId: Int) {
         super.showEventDetail(eventId, viewController: generalScheduleViewController)
     }
     
-    public func presentGeneralScheduleView(viewController: UINavigationController) {
-        
+    public func showFilters() {
+        generalScheduleFilterWireframe.presentFiltersView(generalScheduleViewController.navigationController!)
     }
 }
 		

@@ -17,7 +17,12 @@ extension Array where Element: SummitEvent {
     }
 }
 
-public class GeneralSchedulePresenter: SchedulePresenter {
+@objc
+public protocol IGeneralSchedulePresenter: ISchedulePresenter {
+    func showFilters()
+}
+
+public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresenter {
     
     weak var viewController : IScheduleViewController! {
         get {
@@ -46,4 +51,7 @@ public class GeneralSchedulePresenter: SchedulePresenter {
         }
     }
     
+    public func showFilters() {
+        wireframe.showFilters()
+    }
 }

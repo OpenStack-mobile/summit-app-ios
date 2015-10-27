@@ -8,9 +8,13 @@
 
 import UIKit
 
+@objc
 public protocol IEventTypeDataStore {
     func getAllLocal() -> [EventType]
 }
 
 public class EventTypeDataStore: GenericDataStore, IEventTypeDataStore {
+    public func getAllLocal() -> [EventType] {
+        return super.getAllLocal()
+    }
 }

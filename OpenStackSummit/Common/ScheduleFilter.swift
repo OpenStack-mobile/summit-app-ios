@@ -9,5 +9,14 @@
 import UIKit
 
 public class ScheduleFilter: NSObject {
-    var selections = Dictionary<FilterSectionTypes, [Int]>()
+    var selections = Dictionary<FilterSectionType, [Int]>()
+    var filterSections = [FilterSection]()
+
+    func areAllSelectedForType(type: FilterSectionType) -> Bool {
+        if (filterSections.count == 0) {
+            return false
+        }
+        let filterSection = filterSections.filter() { $0.type == type }.first!
+        return filterSection.items.count == selections[type]?.count
+    }
 }

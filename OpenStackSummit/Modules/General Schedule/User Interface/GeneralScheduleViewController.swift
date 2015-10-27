@@ -16,8 +16,9 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
-    var presenter : ISchedulePresenter!
+    var presenter : IGeneralSchedulePresenter!
     var startDate: NSDate! {
         get {
             return dayPicker.startDate
@@ -47,12 +48,20 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
         dayPicker.delegate = self
         presenter.viewLoad()
+        filterButton.target = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        filterButton.action = Selector("showFilters:")
     }
 
+    @IBAction func showFilters(sender: UIBarButtonItem) {
+        presenter.showFilters()
+    }
     
     func reloadSchedule() {
         tableView.delegate = self
@@ -77,7 +86,6 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
-
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

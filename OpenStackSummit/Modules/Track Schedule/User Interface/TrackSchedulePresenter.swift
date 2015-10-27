@@ -51,8 +51,8 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
     }
     
     public override func reloadSchedule() {
-        scheduleFilter.selections[FilterSectionTypes.Track] = [Int]()
-        scheduleFilter.selections[FilterSectionTypes.Track]!.append(trackId)
+        scheduleFilter.selections[FilterSectionType.Track] = [Int]()
+        scheduleFilter.selections[FilterSectionType.Track]!.append(trackId)
         reloadSchedule(interactor, viewController: viewController)
     }
 }

@@ -98,6 +98,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     var presenter: IEventDetailPresenter!
     
+    override func viewWillAppear(animated: Bool) {
+        presenter.viewLoad()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
