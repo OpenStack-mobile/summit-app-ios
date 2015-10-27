@@ -8,17 +8,21 @@
 
 import UIKit
 
+@objc
 public protocol IGeneralScheduleFilterViewController {
-    func showFilters(filterSections: [FilterSection])
+    var presenter: IGeneralScheduleFilterPresenter! { get set }
+    var navigationController: UINavigationController? { get }
+
+    func reloadFilters()
 }
 
-class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFilterViewController {
-
+class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFilterViewController, UITableViewDelegate, UITableViewDataSource {
     var presenter : IGeneralScheduleFilterPresenter!
-
+    var cellIdentifier = "generalScheduleFilterTableViewCell"
+    @IBOutlet weak var filterTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.showFilters()
 
         // Do any additional setup after loading the view.
     }
@@ -28,8 +32,33 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         // Dispose of any resources that can be recreated.
     }
     
-    func showFilters(filterSections: [FilterSection]) {
-        
+    func reloadFilters() {
+        filterTable.delegate = self
+        filterTable.dataSource = self
+        filterTable.reloadData()
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return presenter.getSectionCount();
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.getSectionItemCount(section);
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleFilterTableViewCell
+        presenter.buildFilterCell(cell, section: indexPath.section, index: indexPath.row)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! GeneralScheduleFilterTableViewCell
+        self.presenter.toggleSelection(cell, section: indexPath.section, index: indexPath.row)
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return presenter.getSectionTitle(section);
     }
 
     /*

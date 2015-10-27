@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol IEventDetailPresenter {
-    func viewLoad(eventId: Int)
+    func viewLoad()
     var eventId: Int { get set }
     
     func leaveFeedback()
@@ -35,8 +35,7 @@ public class EventDetailPresenter: NSObject {
     private var feedbackList = [FeedbackDTO]()
     private var loadedAllFeedback: Bool!
     
-    public func viewLoad(eventId: Int) {
-        self.eventId = eventId
+    public func viewLoad() {
         feedbackPage = 1
         feedbackList.removeAll()
         event = interactor.getEventDetail(eventId)

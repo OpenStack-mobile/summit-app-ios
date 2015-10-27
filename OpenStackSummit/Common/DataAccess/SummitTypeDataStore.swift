@@ -8,10 +8,14 @@
 
 import UIKit
 
+@objc
 public protocol ISummitTypeDataStore {
     func getAllLocal() -> [SummitType]
 }
 
 public class SummitTypeDataStore: GenericDataStore, ISummitTypeDataStore {
+    public func getAllLocal() -> [SummitType] {
+        return super.getAllLocal()
+    }
 }
 

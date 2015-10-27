@@ -104,12 +104,16 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
             let startDate = viewController.selectedDate.mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
             let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
             
+            let eventTypeSelections: [Int]? = self.scheduleFilter.areAllSelectedForType(FilterSectionType.EventType) ? nil : self.scheduleFilter.selections[FilterSectionType.EventType]
+            let summitTypeSelections = self.scheduleFilter.areAllSelectedForType(FilterSectionType.SummitType) ? nil : self.scheduleFilter.selections[FilterSectionType.SummitType]
+            let trackSelections = self.scheduleFilter.areAllSelectedForType(FilterSectionType.Track) ? nil : self.scheduleFilter.selections[FilterSectionType.Track]
+            
             self.dayEvents = interactor.getScheduleEvents(
                 startDate,
                 endDate: endDate,
-                eventTypes: self.scheduleFilter.selections[FilterSectionTypes.EventType],
-                summitTypes: self.scheduleFilter.selections[FilterSectionTypes.SummitType],
-                tracks: self.scheduleFilter.selections[FilterSectionTypes.Track]
+                eventTypes: eventTypeSelections,
+                summitTypes: summitTypeSelections,
+                tracks: trackSelections
             )
             viewController.reloadSchedule()
         })

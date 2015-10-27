@@ -36,6 +36,7 @@
 		CA1CBA901BB6415300E65D2B /* DataUpdateStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CBA8F1BB6415300E65D2B /* DataUpdateStrategy.swift */; settings = {ASSET_TAGS = (); }; };
 		CA1CBA921BB6436C00E65D2B /* DataUpdateStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CBA911BB6436C00E65D2B /* DataUpdateStrategyFactory.swift */; settings = {ASSET_TAGS = (); }; };
 		CA1CBA941BB6495D00E65D2B /* MyScheduleDataUpdateStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CBA931BB6495D00E65D2B /* MyScheduleDataUpdateStrategy.swift */; settings = {ASSET_TAGS = (); }; };
+		CA231B7D1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA231B7C1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CA3DA3E31B90EECD00201496 /* EventDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DA3E21B90EECD00201496 /* EventDataStore.swift */; };
 		CA3DA3E61B90F81400201496 /* MemberRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DA3E51B90F81400201496 /* MemberRemoteDataStore.swift */; };
 		CA416F871B8F444200F177F5 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416F861B8F444200F177F5 /* Image.swift */; };
@@ -319,6 +320,7 @@
 		CA1CBA8F1BB6415300E65D2B /* DataUpdateStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateStrategy.swift; sourceTree = "<group>"; };
 		CA1CBA911BB6436C00E65D2B /* DataUpdateStrategyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateStrategyFactory.swift; sourceTree = "<group>"; };
 		CA1CBA931BB6495D00E65D2B /* MyScheduleDataUpdateStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScheduleDataUpdateStrategy.swift; sourceTree = "<group>"; };
+		CA231B7C1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		CA3DA3E21B90EECD00201496 /* EventDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStore.swift; sourceTree = "<group>"; };
 		CA3DA3E51B90F81400201496 /* MemberRemoteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRemoteDataStore.swift; sourceTree = "<group>"; };
 		CA416F861B8F444200F177F5 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 				CA416F8F1B8F58D900F177F5 /* GeneralScheduleFilterPresenter.swift */,
 				CA416F951B8F5C4A00F177F5 /* FilterSection.swift */,
 				CA416F971B8F5C6200F177F5 /* FilterSectionItem.swift */,
+				CA231B7C1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1953,6 +1956,7 @@
 				CA8E98E51B9A03A700CEBD2F /* VenueDetailPresenter.swift in Sources */,
 				CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */,
 				CA1CBA921BB6436C00E65D2B /* DataUpdateStrategyFactory.swift in Sources */,
+				CA231B7D1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
 				CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */,
 				CADD510A1BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift in Sources */,
 				CAF2AA551B828E7C00D8E595 /* EventDetailViewController.swift in Sources */,

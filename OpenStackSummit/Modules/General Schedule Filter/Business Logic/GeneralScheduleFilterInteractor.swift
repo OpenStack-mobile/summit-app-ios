@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+@objc
 public protocol IGeneralScheduleFilterInteractor {
     func getSummitTypes() -> [SummitType]
     func getEventTypes() -> [EventType]
@@ -20,7 +21,6 @@ public class GeneralScheduleFilterInteractor: NSObject {
     var summitTypeDataStore: ISummitTypeDataStore!
     var eventTypeDataStore: IEventTypeDataStore!
     var trackDataStore: ITrackDataStore!
-    var delegate: IGeneralScheduleFilterPresenter!
     
     public func getSummitTypes() -> [SummitType] {
         return summitTypeDataStore.getAllLocal()
