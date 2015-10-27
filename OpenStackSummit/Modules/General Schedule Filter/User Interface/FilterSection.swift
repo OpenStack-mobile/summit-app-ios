@@ -8,12 +8,12 @@
 
 import UIKit
 
-public enum FilterSectionTypes {
+public enum FilterSectionType {
     case SummitType, EventType, Track
 }
 
 public class FilterSection: NSObject {
-    public var type : FilterSectionTypes!
+    public var type : FilterSectionType!
     public var name = ""
     public var items = [FilterSectionItem]()
 }

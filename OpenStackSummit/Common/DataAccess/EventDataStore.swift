@@ -36,20 +36,13 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
             events = events.filter("presentation.track.id in %@", tracks!)
         }
 
-        var eventArray = events.map{$0}
-        if (summitTypes != nil) {
-            eventArray = eventArray.filter() {
-                for summitTypeId in summitTypes! {
-                    print($0.summitTypes.map{$0.id})
-                    guard ($0.summitTypes.map{$0.id}.contains(summitTypeId)) else {
-                        return false
-                    }
-                }
-                return true
+        if (summitTypes != nil && summitTypes!.count > 0) {
+            for summitTypeId in summitTypes! {
+                events = events.filter("ANY summitTypes.id = %@", summitTypeId)
             }
         }
     
-        return eventArray
+        return events.map{$0}
     }
     
     public func getBySearchTerm(searchTerm: String!)->[SummitEvent] {

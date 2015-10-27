@@ -35,7 +35,7 @@ public class EventDetailWireframe: NSObject {
     public func presentEventDetailView(eventId: Int, viewController: UINavigationController) {
         let newViewController = eventDetailViewController!
         let _ = eventDetailViewController.view! // this is only to force viewLoad to trigger
-        eventDetailViewController.presenter.viewLoad(eventId)
+        eventDetailViewController.presenter.eventId = eventId
         viewController.pushViewController(newViewController, animated: true)
     }
     
