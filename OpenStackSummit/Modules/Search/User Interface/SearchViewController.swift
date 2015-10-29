@@ -138,4 +138,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func search(sender: AnyObject) {
         presenter.search(searchTermTextView.text)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        presenter.viewUnload()
+    }
 }

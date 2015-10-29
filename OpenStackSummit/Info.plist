@@ -54,7 +54,6 @@
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>
 		<string>DataStoreAssembly</string>
-		<string>MemberProfileAssembly</string>
 		<string>LoginAssembly</string>
 		<string>FeedbackEditAssembly</string>
 		<string>SecurityManagerAssembly</string>
@@ -70,6 +69,7 @@
 		<string>VenueListAssembly</string>
 		<string>VenueDetailAssembly</string>
 		<string>VenueRoomDetailAssembly</string>
+		<string>MemberProfileAssembly</string>
 		<string>SearchAssembly</string>
 		<string>GeneralScheduleFilterAssembly</string>
 	</array>

@@ -23,6 +23,8 @@ public protocol IEventDetailViewController {
     var location: String! { get set }
     var allowFeedback: Bool { get set }
     var loadedAllFeedback: Bool { get set }
+    var hasSpeakers: Bool { get set }
+    var hasAnyFeedback: Bool { get set }
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -95,6 +97,24 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
             moreFeedbackButton.hidden = newValue
         }
     }
+    
+    var hasSpeakers: Bool {
+        get {
+            return !speakersTableView.hidden
+        }
+        set {
+            speakersTableView.hidden = !newValue
+        }
+    }
+    var hasAnyFeedback: Bool  {
+        get {
+            return !feedbackTableView.hidden
+        }
+        set {
+            feedbackTableView.hidden = !newValue
+        }
+    }
+    
     
     var presenter: IEventDetailPresenter!
     
@@ -171,5 +191,9 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     @IBAction func loadMoreFeedback(sender: AnyObject) {
         presenter.loadFeedback()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        presenter.viewUnload()
     }
 }

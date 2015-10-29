@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IFeedbackEditWireframe {
     func presentFeedbackEditView(eventId: Int, viewController: UINavigationController)
+    func backToPreviousView()
 }
 
 public class FeedbackEditWireframe: NSObject, IFeedbackEditWireframe {
@@ -19,7 +20,11 @@ public class FeedbackEditWireframe: NSObject, IFeedbackEditWireframe {
     public func presentFeedbackEditView(eventId: Int, viewController: UINavigationController) {
         let newViewController = feedbackEditViewController!
         let _ = feedbackEditViewController.view! // this is only to force viewLoad to trigger
-        feedbackEditViewController.presenter.prepareFeedbackEdit(eventId)
+        feedbackEditViewController.presenter.eventId = eventId
         viewController.pushViewController(newViewController, animated: true)
+    }
+    
+    public func backToPreviousView() {
+        feedbackEditViewController.navigationController?.popViewControllerAnimated(true)
     }
 }

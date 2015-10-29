@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 @objc
 public protocol IFeedbackEditViewController {
     
-    var rate: Int { get }
-    var review: String! { get }
+    var rate: Int { get set }
+    var review: String! { get set }
     
     func showCreateFeedback()
     func showEditFeedback(feedback: FeedbackDTO)
     func showErrorMessage(error: NSError)
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 class FeedbackEditViewController: UIViewController, IFeedbackEditViewController, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -31,11 +34,21 @@ class FeedbackEditViewController: UIViewController, IFeedbackEditViewController,
             let selectedValue = rates[ratePicker.selectedRowInComponent(0)]
             return Int(selectedValue)!
         }
+        set {
+            let index = rates.indexOf(String(newValue));
+            if (index != nil) {
+                ratePicker.selectRow(index!, inComponent: 0, animated: false)
+            }
+        }
+        
     }
     
     var review: String {
         get {
             return reviewTextArea.text
+        }
+        set {
+            reviewTextArea.text = newValue
         }
     }
     
@@ -78,16 +91,15 @@ class FeedbackEditViewController: UIViewController, IFeedbackEditViewController,
         
     }
     
+    func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }
+    
     @IBAction func sendFeedback(sender: AnyObject) {
         presenter.saveFeedback()
     }
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
 }
