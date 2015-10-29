@@ -40,7 +40,6 @@ class FeedbackEditViewController: UIViewController, IFeedbackEditViewController,
                 ratePicker.selectRow(index!, inComponent: 0, animated: false)
             }
         }
-        
     }
     
     var review: String {
@@ -52,14 +51,12 @@ class FeedbackEditViewController: UIViewController, IFeedbackEditViewController,
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         ratePicker.dataSource = self
         ratePicker.delegate = self
         
         presenter.viewLoad()
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,7 +89,7 @@ class FeedbackEditViewController: UIViewController, IFeedbackEditViewController,
     }
     
     func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+        SwiftSpinner.show("Please wait...")
     }
     
     func hideActivityIndicator() {
