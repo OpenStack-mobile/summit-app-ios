@@ -14,6 +14,7 @@ public protocol IEventDetailInteractor {
     func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void)
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
     func isMemberLoggedIn() -> Bool
+    func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO?
 }
 
 public class EventDetailInteractor: NSObject {
@@ -65,5 +66,16 @@ public class EventDetailInteractor: NSObject {
 
     public func isMemberLoggedIn() -> Bool {
         return securityManager.isLoggedIn()
-    }    
+    }
+    
+    public func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO? {
+        var feedbackDTO: FeedbackDTO?
+        if let currentMember = securityManager.getCurrentMember() {
+            let feedback = currentMember.attendeeRole?.feedback.filter("event.id = %@", eventId).first
+            if (feedback != nil) {
+                feedbackDTO = feedbackDTOAssembler.createDTO(feedback!)
+            }
+        }
+        return feedbackDTO
+    }
 }

@@ -32,7 +32,7 @@ public class MemberDeserializer: NSObject, IDeserializer {
         let speakerId = json["speaker_id"]
         if (speakerId.int != nil) {
             let deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
-            member.speakerRole = try deserializer.deserialize(json) as? PresentationSpeaker
+            //member.speakerRole = try deserializer.deserialize(speakerId) as? PresentationSpeaker
             
         }
         

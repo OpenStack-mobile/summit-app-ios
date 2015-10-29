@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol IEventDetailPresenter {
+public protocol IEventDetailPresenter: IBasePresenter {
     func viewLoad()
     var eventId: Int { get set }
     
@@ -22,14 +22,16 @@ public protocol IEventDetailPresenter {
     func showSpeakerProfile(index: Int)
     func loadFeedback()
     func showVenueDetail()
+    func viewUnload()
 }
 
-public class EventDetailPresenter: NSObject {
+public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
     weak var viewController : IEventDetailViewController!
     var interactor : IEventDetailInteractor!
     var wireframe: IEventDetailWireframe!
-    var eventId = 0
+    public var eventId = 0
     private var event: EventDetailDTO!
+    private var myFeedbackForEvent: FeedbackDTO?
     private var feedbackPage = 1
     private var feedbackObjectsPerPage = 10
     private var feedbackList = [FeedbackDTO]()
@@ -39,31 +41,43 @@ public class EventDetailPresenter: NSObject {
         feedbackPage = 1
         feedbackList.removeAll()
         event = interactor.getEventDetail(eventId)
-       
+        myFeedbackForEvent = interactor.getMyFeedbackForEvent(eventId)
+            
         viewController.eventTitle = event.name
         viewController.eventDescription = event.eventDescription
         viewController.location = event.location
         viewController.date = event.date
         viewController.allowFeedback = event.allowFeedback && interactor.isMemberLoggedIn()
+        viewController.hasSpeakers = event.speakers.count > 0
+        viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()
-        
+
         loadFeedback()
     }
     
     public func loadFeedback() {
-        interactor.getFeedbackForEvent(eventId, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { (feedbackList, error) in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
+        let operation = NSBlockOperation()
+        operation.addExecutionBlock({
+            self.interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
+                if operation.cancelled {
                     return
                 }
-                
-                self.feedbackList.appendContentsOf(feedbackList!)
-                self.viewController.reloadFeedbackData()
-                self.feedbackPage++
-                self.viewController.loadedAllFeedback = feedbackList!.count < self.feedbackObjectsPerPage
-            })
-        }
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    if (error != nil) {
+                        self.viewController.showErrorMessage(error!)
+                        return
+                    }
+                    
+                    self.feedbackList.appendContentsOf(feedbackPage!)
+                    self.viewController.reloadFeedbackData()
+                    self.viewController.hasAnyFeedback = self.feedbackList.count > 0
+                    self.feedbackPage++
+                    self.viewController.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
+                })
+            }
+        })
+        operationQueue.addOperation(operation)
     }
     
     public func addEventToMySchedule() {

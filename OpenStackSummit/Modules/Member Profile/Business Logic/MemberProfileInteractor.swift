@@ -13,6 +13,7 @@ public protocol IMemberProfileInteractor {
     func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void)
     func getAttendeeProfile(speakerId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void)
     func isLoggedIn() -> Bool
+    func getCurrentMember() -> MemberDTO?
 }
 
 public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
@@ -21,6 +22,7 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
     var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
     var summitAttendeeDTOAssembler: ISummitAttendeeDTOAssembler!
     var presentationSpeakerDTOAssembler: IPresentationSpeakerDTOAssembler!
+    var memberDTOAssembler: IMemberDTOAssembler!
     var securityManager: SecurityManager!
     
     public func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void) {
@@ -50,4 +52,13 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
     public func isLoggedIn() -> Bool {
         return securityManager.isLoggedIn()
     }
+    
+    public func getCurrentMember() -> MemberDTO? {
+        var memberDTO: MemberDTO?
+        if let member = securityManager.getCurrentMember() {
+            memberDTO = memberDTOAssembler.createDTO(member)
+        }
+        return memberDTO
+    }
+    
 }

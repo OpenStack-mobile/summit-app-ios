@@ -87,4 +87,15 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
             definition.injectProperty("venueRoomDTOAssembler", with: self.venueRoomDTOAssembler())
         }
     }
+    
+    dynamic func memberDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(MemberDTOAssembler.self) {
+            (definition) in
+            
+            definition.injectProperty("presentationSpeakerDTOAssembler", with: self.presentationSpeakerDTOAssembler())
+            definition.injectProperty("summitAttendeeDTOAssembler", with: self.summitAttendeeDTOAssembler())
+        }
+
+    }
+    
 }

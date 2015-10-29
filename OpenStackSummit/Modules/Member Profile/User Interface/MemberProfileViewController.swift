@@ -15,6 +15,7 @@ public protocol IMemberProfileViewController {
     var personTitle: String! { get set }
     var picUrl: String! { get set }
     var bio: String! { get set }
+    var isLoggedMemberProfile: Bool { get set }
     
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()
@@ -74,6 +75,8 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
         }
     }
     
+    var isLoggedMemberProfile: Bool = false
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
@@ -83,6 +86,10 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     private var picUrlInternal: String!
     private var bioHTML: String!
 
+    override func viewWillAppear(animated: Bool) {
+        presenter.viewLoad()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -112,4 +119,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
         SwiftSpinner.hide()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        presenter.viewUnload()
+    }
 }

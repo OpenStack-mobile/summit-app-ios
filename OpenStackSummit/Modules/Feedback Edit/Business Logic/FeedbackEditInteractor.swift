@@ -45,6 +45,9 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
             if (error != nil) {
                 completionBlock(nil, error)
             }
+            
+            let feedbackDTO = self.feedbackDTOAssembler.createDTO(feedback!)
+            completionBlock(feedbackDTO, error)
         }
     }
 }
