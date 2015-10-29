@@ -42,6 +42,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
             definition.injectProperty("summitAttendeeDTOAssembler", with: self.dtoAssemblersAssembly.summitAttendeeDTOAssembler())
             definition.injectProperty("presentationSpeakerDTOAssembler", with: self.dtoAssemblersAssembly.presentationSpeakerDTOAssembler())
+            definition.injectProperty("memberDTOAssembler", with: self.dtoAssemblersAssembly.memberDTOAssembler())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
@@ -54,6 +55,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.memberProfilePresenter())
+                definition.classOrProtocolForAutoInjection = MemberProfileViewController.self
         })
     }
 }

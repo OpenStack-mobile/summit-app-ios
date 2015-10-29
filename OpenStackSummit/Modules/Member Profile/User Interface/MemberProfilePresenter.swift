@@ -9,35 +9,26 @@
 import UIKit
 
 @objc
-public protocol IMemberProfilePresenter {
+public protocol IMemberProfilePresenter: IBasePresenter {
     var speakerId: Int { get set }
     var attendeeId: Int { get set }
     
-    func showMemberProfile()
-    func prepareAttendeeProfile(attendeeId: Int)
-    func prepareSpeakerProfile(speakerId: Int)
+    func viewLoad()
 }
 
-public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
+public class MemberProfilePresenter: BasePresenter, IMemberProfilePresenter {
     
     var memberProfileWireframe: IMemberProfileWireframe!
     var interactor: IMemberProfileInteractor!
     var viewController: IMemberProfileViewController!
+    var isLoggedMemberProfile = false
     public var speakerId = 0
     public var attendeeId = 0
     
-    public func prepareAttendeeProfile(attendeeId: Int) {
-        self.attendeeId = attendeeId
-        showMemberProfile()
-    }
-    
-    public func prepareSpeakerProfile(speakerId: Int) {
-        self.speakerId = speakerId
-        showMemberProfile()
-    }
-    
-    public func showMemberProfile() {
+    public func viewLoad() {
+        showPersonProfile(PersonDTO())
         
+        isLoggedMemberProfile = false
         if (speakerId > 0) {
             showSpeakerProfile()
         }
@@ -46,25 +37,55 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
             showAttendeeProfile()
         }
         else {
-            //TODO: handle error
+            if let currentMember = interactor.getCurrentMember() {
+                isLoggedMemberProfile = true
+                if currentMember.speakerRole != nil {
+                    speakerId = currentMember.speakerRole!.id
+                    showPersonProfile(currentMember.speakerRole!, error: nil)
+                }
+                else {
+                    attendeeId = currentMember.attendeeRole!.id
+                    showPersonProfile(currentMember.attendeeRole!, error: nil)
+                }
+            }
         }
     }
     
     func showSpeakerProfile() {
-        viewController.showActivityIndicator()        
-        interactor.getSpeakerProfile(speakerId) { speaker, error in
-            self.showPersonProfile(speaker, error: error)
-        }
+        let operation = NSBlockOperation()
+        operation.addExecutionBlock({
+            dispatch_async(dispatch_get_main_queue(),{
+                if operation.cancelled {
+                    return
+                }
+                
+                self.viewController.showActivityIndicator()
+                self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
+                    self.showPersonProfile(speaker, error: error)
+                }
+            })
+        })
+        operationQueue.addOperation(operation)
     }
     
     func showAttendeeProfile() {
-        viewController.showActivityIndicator()
-        interactor.getAttendeeProfile(attendeeId) { attendee, error in
-            self.showPersonProfile(attendee, error: error)
-        }
+        let operation = NSBlockOperation()
+        operation.addExecutionBlock({
+            dispatch_async(dispatch_get_main_queue(),{
+                if operation.cancelled {
+                    return
+                }
+                
+                self.viewController.showActivityIndicator()
+                self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
+                    self.showPersonProfile(attendee, error: error)
+                }
+            })
+        })
+        operationQueue.addOperation(operation)
     }
     
-    func showPersonProfile(person: PersonDTO?, error: NSError?) {
+    func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
         if (error != nil) {
             self.viewController.handlerError(error!)
             return

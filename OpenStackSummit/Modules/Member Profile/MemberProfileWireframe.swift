@@ -26,14 +26,14 @@ public class MemberProfileWireframe: NSObject, IMemberProfileWireframe {
     public func presentAttendeeProfileView(attendeeId: Int, viewController: UINavigationController) {
         let newViewController = memberProfileViewController!
         let _ = memberProfileViewController.view! // this is only to force viewLoad to trigger
-        memberProfileViewController.presenter.prepareAttendeeProfile(attendeeId)
+        memberProfileViewController.presenter.attendeeId = attendeeId
         viewController.pushViewController(newViewController, animated: true)
     }
     
     public func presentSpeakerProfileView(speakerId: Int, viewController: UINavigationController) {
         let newViewController = memberProfileViewController!
         let _ = memberProfileViewController.view! // this is only to force viewLoad to trigger
-        memberProfileViewController.presenter.prepareSpeakerProfile(speakerId)
+        memberProfileViewController.presenter.speakerId = speakerId
         viewController.pushViewController(newViewController, animated: true)
     }
 }

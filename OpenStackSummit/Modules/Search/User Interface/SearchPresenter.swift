@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol ISearchPresenter {
+public protocol ISearchPresenter: IBasePresenter {
     func showEventDetail(index: Int)
     func showTrackEvents(index: Int)
     func showSpeakerProfile(index: Int)
@@ -26,7 +26,7 @@ public protocol ISearchPresenter {
     func search(searchTerm: String!)
 }
 
-public class SearchPresenter: NSObject {
+public class SearchPresenter: BasePresenter {
     var interactor: ISearchInteractor!
     var viewController: ISearchViewController!
     var wireframe: ISearchWireframe!
@@ -54,33 +54,50 @@ public class SearchPresenter: NSObject {
         viewController.reloadEvents()
         tracks = interactor.getTracksBySearchTerm(searchTerm)
         viewController.reloadTracks()
-        interactor.getSpeakersBySearchTerm(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage) { (speakersPage, error) in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
-                    return
-                }
-            
-                self.speakers.appendContentsOf(speakersPage!)
-                self.viewController.reloadSpeakers()
-                self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
-                self.pageSpeakers++
-            })
-        }
-        
-        interactor.getAttendeesBySearchTerm(searchTerm, page: pageAttendees, objectsPerPage: objectsPerPage) { (attendeesPage, error) in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
-                    return
-                }
+
+        let operationSpeakers = NSBlockOperation()
+        operationSpeakers.addExecutionBlock({
+            self.interactor.getSpeakersBySearchTerm(searchTerm, page: self.pageSpeakers, objectsPerPage: self.objectsPerPage) { (speakersPage, error) in
+                dispatch_async(dispatch_get_main_queue(),{
+                    if operationSpeakers.cancelled {
+                        return
+                    }
+
+                    if (error != nil) {
+                        self.viewController.showErrorMessage(error!)
+                        return
+                    }
                 
-                self.attendees.appendContentsOf(attendeesPage!)
-                self.viewController.reloadAttendees()
-                self.loadedAllAttendees = attendeesPage!.count < self.objectsPerPage
-                self.pageAttendees++
-            })
-        }
+                    self.speakers.appendContentsOf(speakersPage!)
+                    self.viewController.reloadSpeakers()
+                    self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
+                    self.pageSpeakers++
+                })
+            }
+        })
+        operationQueue.addOperation(operationSpeakers)
+        
+        let operationAttendees = NSBlockOperation()
+        operationAttendees.addExecutionBlock({
+            self.interactor.getAttendeesBySearchTerm(searchTerm, page: self.pageAttendees, objectsPerPage: self.objectsPerPage) { (attendeesPage, error) in
+                dispatch_async(dispatch_get_main_queue(),{
+                    if operationAttendees.cancelled {
+                        return
+                    }
+                    
+                    if (error != nil) {
+                        self.viewController.showErrorMessage(error!)
+                        return
+                    }
+                    
+                    self.attendees.appendContentsOf(attendeesPage!)
+                    self.viewController.reloadAttendees()
+                    self.loadedAllAttendees = attendeesPage!.count < self.objectsPerPage
+                    self.pageAttendees++
+                })
+            }
+        })
+        operationQueue.addOperation(operationAttendees)
     }
     
     public func buildEventCell(cell: IScheduleTableViewCell, index: Int){
