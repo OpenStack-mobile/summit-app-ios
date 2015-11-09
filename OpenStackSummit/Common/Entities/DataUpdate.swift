@@ -19,6 +19,6 @@ public class DataUpdate: BaseEntity {
     public var entityClassName = ""
     
     public override static func ignoredProperties() -> [String] {
-        return ["data"]
+        return ["entity"]
     }
 }

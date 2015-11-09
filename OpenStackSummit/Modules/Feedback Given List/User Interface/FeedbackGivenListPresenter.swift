@@ -33,7 +33,7 @@ public class FeedbackGivenListPresenter: NSObject, IFeedbackGivenListPresenter {
         let feedback = feedbackList[index]
         cell.eventName = feedback.eventName
         cell.owner = feedback.owner
-        cell.rate = String(feedback.rate)
+        cell.rate = Double(feedback.rate)
         cell.review = feedback.review
         cell.date = feedback.date
     }

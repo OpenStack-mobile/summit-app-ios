@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Cosmos
 
 @objc
 public protocol IFeedbackGivenTableViewCell : class {
     var eventName: String! { get set }
     var owner: String! { get set }
-    var rate: String! { get set }
+    var rate: Double { get set }
     var review: String! { get set }
     var date: String! { get set }
 }
@@ -36,12 +37,12 @@ class FeedbackGivenTableViewCell: UITableViewCell, IFeedbackGivenTableViewCell {
         }
     }
 
-    var rate: String!{
+    var rate: Double{
         get {
-            return rateLabel.text
+            return rateView.rating
         }
         set {
-            rateLabel.text = newValue
+            rateView.rating = newValue
         }
     }
 
@@ -65,13 +66,22 @@ class FeedbackGivenTableViewCell: UITableViewCell, IFeedbackGivenTableViewCell {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var ownerLabel: UILabel!
-    @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var rateView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        rateView.settings.updateOnTouch = false
+        rateView.settings.fillMode = .Half
         // Initialization code
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+     
+        
+        // Set up UI
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
