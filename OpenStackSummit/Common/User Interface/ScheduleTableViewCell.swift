@@ -11,7 +11,8 @@ import UIKit
 @objc
 public protocol IScheduleTableViewCell : class {
     var eventTitle: String! { get set }
-    var timeAndPlace: String! { get set }
+    var time: String! { get set }
+    var place: String! { get set }
     var scheduledStatus: ScheduledStatus { get set }
     var isScheduledStatusVisible: Bool { get set }
 }
@@ -30,12 +31,21 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
-    var timeAndPlace: String!{
+    var time: String!{
         get {
-            return timeAndPlaceLabel.text
+            return timeLabel.text
         }
         set {
-            timeAndPlaceLabel.text = newValue
+            timeLabel.text = newValue
+        }
+    }
+    
+    var place: String!{
+        get {
+            return placeLabel.text
+        }
+        set {
+            placeLabel.text = newValue
         }
     }
     
@@ -63,7 +73,8 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     }
 
     @IBOutlet weak var eventTitleLabel: UILabel!
-    @IBOutlet weak var timeAndPlaceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var scheduleButton: UIButton!
     
     override func awakeFromNib() {
