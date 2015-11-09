@@ -32,7 +32,7 @@ public protocol IEventDetailViewController {
     var myFeedbackRate: Double { get set }
     var myFeedbackReview: String! { get set }
     var myFeedbackDate: String! { get set }
-    
+    var hasMyFeedback: Bool { get set}
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -56,10 +56,11 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     @IBOutlet weak var scheduledButton: UIBarButtonItem!
     @IBOutlet weak var speakersHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var myFeedbackView: UIView!
-    @IBOutlet weak var myFeedbackHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var myFeedbackDateLabel: UILabel!
     @IBOutlet weak var myFeedbackReviewLabel: UILabel!
     @IBOutlet weak var myFeedbackRateView: CosmosView!
+    @IBOutlet weak var feedbackButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myFeedbackViewHeightConstraint: NSLayoutConstraint!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -210,6 +211,17 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         }
     }
     
+    var hasMyFeedback: Bool {
+        get {
+            return feedbackButtonHeightConstraint.constant > 0
+        }
+        set {
+            feedbackButtonHeightConstraint.constant = newValue ? 0 : 30
+            myFeedbackViewHeightConstraint.constant = newValue ? 83 : 0
+            feedbackButton.updateConstraints()
+            myFeedbackView.updateConstraints()
+        }
+    }
     
     var presenter: IEventDetailPresenter!
     
