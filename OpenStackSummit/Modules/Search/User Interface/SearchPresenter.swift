@@ -103,7 +103,8 @@ public class SearchPresenter: BasePresenter {
     public func buildEventCell(cell: IScheduleTableViewCell, index: Int){
         let event = events[index]
         cell.eventTitle = event.name
-        cell.timeAndPlace = event.date
+        cell.time = event.date
+        cell.place = event.location
         //cell.scheduledStatus = internalInteractor.isEventScheduledByLoggedMember(event.id) ? ScheduledStatus.Scheduled : ScheduledStatus.NotScheduled
         //cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
     }
