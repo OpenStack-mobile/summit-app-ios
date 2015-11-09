@@ -15,6 +15,9 @@ public protocol IEventDetailInteractor {
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
     func isMemberLoggedIn() -> Bool
     func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO?
+    func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
+    func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
+    func isEventScheduledByLoggedMember(eventId: Int) -> Bool
 }
 
 public class EventDetailInteractor: NSObject {
@@ -77,5 +80,31 @@ public class EventDetailInteractor: NSObject {
             }
         }
         return feedbackDTO
+    }
+    
+    public func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void) {
+        let loggedInMember = securityManager.getCurrentMember()
+        let event = eventDataStore.getByIdLocal(eventId)
+        
+        summitAttendeeDataStore.addEventToMemberShedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
+            completionBlock(error)
+        }
+    }
+    
+    public func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void) {
+        let loggedInMember = securityManager.getCurrentMember()
+        let event = eventDataStore.getByIdLocal(eventId)
+        
+        summitAttendeeDataStore.removeEventFromMemberShedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
+            completionBlock(error)
+        }
+    }
+    
+    public func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+        guard let loggedInMember = securityManager.getCurrentMember() else {
+            return false
+        }
+        
+        return loggedInMember.attendeeRole!.scheduledEvents.filter("id = \(eventId)").count > 0
     }
 }

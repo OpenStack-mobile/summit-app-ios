@@ -36,6 +36,10 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
     }
     
     public func getSponsors(event: SummitEvent) -> String{
+        if (event.sponsors.count == 0) {
+            return ""
+        }
+        
         var sponsors = "Sponsored by "
         var separator = ""
         for sponsor in event.sponsors {

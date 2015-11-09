@@ -46,9 +46,7 @@ class PersonTableViewCell: UITableViewCell, IPersonTableViewCell {
             else {
                 pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
             }
-            pictureImageView.layer.borderWidth = 3.0;
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
-            pictureImageView.layer.borderColor = UIColor.whiteColor().CGColor
             pictureImageView.clipsToBounds = true;
         }
     }

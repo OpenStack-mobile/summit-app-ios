@@ -23,6 +23,7 @@ public protocol IEventDetailPresenter: IBasePresenter {
     func loadFeedback()
     func showVenueDetail()
     func viewUnload()
+    func toggleScheduledStatus()
 }
 
 public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
@@ -47,11 +48,13 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
         viewController.eventDescription = event.eventDescription
         viewController.location = event.location
         viewController.date = event.date
+        viewController.sponsors = event.sponsors
+        viewController.summitTypes = event.credentials
         viewController.allowFeedback = event.allowFeedback && interactor.isMemberLoggedIn()
         viewController.hasSpeakers = event.speakers.count > 0
         viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()
-
+        viewController.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
         loadFeedback()
     }
     
@@ -110,7 +113,7 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
         let feedback = feedbackList[index]
         cell.eventName = feedback.eventName
         cell.owner = feedback.owner
-        cell.rate = String(feedback.rate)
+        cell.rate = Double(feedback.rate)
         cell.review = feedback.review
         cell.date = feedback.date
     }
@@ -132,4 +135,53 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
             wireframe.showVenueDetail(event.venueId!)
         }
     }
+    
+    public func toggleScheduledStatus() {
+        let isScheduled = interactor.isEventScheduledByLoggedMember(event.id)
+        if (isScheduled) {
+            removeEventFromSchedule(event) { error in
+                if (error != nil) {
+                    self.viewController.scheduled = true
+                }
+            }
+        }
+        else {
+            addEventToSchedule(event) { error in
+                if (error != nil) {
+                    self.viewController.scheduled = false
+                }
+            }
+        }
+        
+    }
+    
+    func addEventToSchedule(event: ScheduleItemDTO, completionBlock: ((NSError?) -> Void)?) {
+        interactor.addEventToLoggedInMemberSchedule(event.id) { error in
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                }
+                
+                self.viewController.scheduled = true
+                if (completionBlock != nil) {
+                    completionBlock!(error)
+                }
+            })
+        }
+    }
+    
+    func removeEventFromSchedule(event: ScheduleItemDTO, completionBlock: ((NSError?) -> Void)?) {
+        interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
+            dispatch_async(dispatch_get_main_queue(),{
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                }
+                self.viewController.scheduled = true
+                if (completionBlock != nil) {
+                    completionBlock!(error)
+                }
+            })
+        }
+    }
+    
 }
