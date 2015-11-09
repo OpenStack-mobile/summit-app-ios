@@ -5,6 +5,7 @@ PODS:
   - AFHorizontalDayPicker (0.2.0):
     - MTDates (= 1.0.0)
   - Cosmos (1.1.3)
+  - DKScrollingTabController (1.2.1)
   - GoogleMaps (1.10.4)
   - HanekeSwift (0.10.0)
   - Mockingjay (1.1.0):
@@ -37,6 +38,7 @@ DEPENDENCIES:
     branch `openstack`)
   - AFHorizontalDayPicker (from `https://github.com/alexfedosov/AFHorizontalDayPicker.git`)
   - Cosmos (~> 1.1)
+  - DKScrollingTabController
   - GoogleMaps
   - HanekeSwift
   - Mockingjay
@@ -67,6 +69,7 @@ SPEC CHECKSUMS:
   AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
   Cosmos: 9baaa9b1fa63fb503ae496ecdd6535801e916f1a
+  DKScrollingTabController: 9c9e96af25887eea782f907bb7fb2c0a8d942a7d
   GoogleMaps: 134bcf57e8d489efbc0c29d532ed421554fabdb2
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   Mockingjay: 5782cb22c9e99dece7aad5bdf738bfa187cfcdcc
