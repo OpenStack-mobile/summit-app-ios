@@ -4,6 +4,7 @@ use_frameworks!
 # framework dependencies
 pod 'Typhoon'
 pod 'SWRevealViewController'
+pod 'DKScrollingTabController'
 pod 'AFHorizontalDayPicker', :git => 'https://github.com/alexfedosov/AFHorizontalDayPicker.git'
 pod 'Realm'
 pod 'RealmSwift'
