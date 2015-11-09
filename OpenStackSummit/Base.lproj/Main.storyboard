@@ -1190,8 +1190,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time &amp; Place" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO8-Co-u6q">
-                                                    <rect key="frame" x="8" y="35" width="295" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO8-Co-u6q" userLabel="Time Label">
+                                                    <rect key="frame" x="8" y="0.0" width="295" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1205,14 +1205,22 @@
                                                         <action selector="toggleSchedule:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EVD-cd-RNJ"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5J4-qJ-Zm9" userLabel="Location Label">
+                                                    <rect key="frame" x="8" y="36" width="295" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
                                             <outlet property="eventTitleLabel" destination="vlG-vn-ICK" id="7YX-Ci-EtU"/>
+                                            <outlet property="placeLabel" destination="5J4-qJ-Zm9" id="uJv-s7-QZh"/>
                                             <outlet property="scheduleButton" destination="IUX-j9-xgN" id="azW-p7-QzR"/>
-                                            <outlet property="timeAndPlaceLabel" destination="ZO8-Co-u6q" id="Z4I-lv-jSF"/>
+                                            <outlet property="timeLabel" destination="ZO8-Co-u6q" id="3zK-Tw-ubi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
