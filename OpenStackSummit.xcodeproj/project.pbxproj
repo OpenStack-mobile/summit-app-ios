@@ -232,6 +232,7 @@
 		CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */; settings = {ASSET_TAGS = (); }; };
 		CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE0C9741BB2EE3400154246 /* EventDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */; settings = {ASSET_TAGS = (); }; };
+		CAE0EFA01BECF36000550C91 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE1D9041BA760C3004AA88C /* SummitRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */; };
 		CAE42A531BE2466200980315 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE42A521BE2466200980315 /* BasePresenter.swift */; settings = {ASSET_TAGS = (); }; };
 		CAE5EC2A1B83B85F0032AD31 /* MemberDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE5EC291B83B85F0032AD31 /* MemberDeserializer.swift */; };
@@ -528,6 +529,7 @@
 		CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInteractor.swift; sourceTree = "<group>"; };
 		CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleViewController.swift; path = "User Interface/ScheduleViewController.swift"; sourceTree = "<group>"; };
 		CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStoreTests.swift; sourceTree = "<group>"; };
+		CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Border.swift"; path = "User Interface/UIView+Border.swift"; sourceTree = "<group>"; };
 		CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRemoteDataStore.swift; sourceTree = "<group>"; };
 		CAE42A521BE2466200980315 /* BasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		CAE5EC291B83B85F0032AD31 /* MemberDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MemberDeserializer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -620,6 +622,7 @@
 				CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */,
 				CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */,
 				CAE42A521BE2466200980315 /* BasePresenter.swift */,
+				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -1353,12 +1356,13 @@
 			children = (
 				CAD6B3331B7E2B0300D62023 /* BaseEntity.swift */,
 				CA9E42401B7B9667005FDD22 /* Company.swift */,
-				CAD6B3351B7E2BC100D62023 /* NamedEntity.swift */,
+				CA7DC6251BB4351000D4636F /* DataUpdate.swift */,
 				CADDDB931B73D1BB008F742E /* EventType.swift */,
 				CACFBC361B9F8D3300095E44 /* Feedback.swift */,
 				CA416F861B8F444200F177F5 /* Image.swift */,
 				CADDDB9F1B73D1BB008F742E /* Location.swift */,
 				CADDDB951B73D1BB008F742E /* Member.swift */,
+				CAD6B3351B7E2BC100D62023 /* NamedEntity.swift */,
 				CAA9A88F1BA8C19D00C3725D /* Person.swift */,
 				CADDDB971B73D1BB008F742E /* Presentation.swift */,
 				CADDDB991B73D1BB008F742E /* PresentationSpeaker.swift */,
@@ -1367,11 +1371,10 @@
 				CADDDB9D1B73D1BB008F742E /* SummitEvent.swift */,
 				CA9E42481B7B9667005FDD22 /* SummitType.swift */,
 				CA9E424A1B7B9667005FDD22 /* Tag.swift */,
+				CADEE6EA1BACA017005152E1 /* TicketType.swift */,
 				CA416F991B8F63E700F177F5 /* Track.swift */,
 				CA9E424C1B7B9667005FDD22 /* Venue.swift */,
 				CA9E424E1B7B9667005FDD22 /* VenueRoom.swift */,
-				CADEE6EA1BACA017005152E1 /* TicketType.swift */,
-				CA7DC6251BB4351000D4636F /* DataUpdate.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1887,6 +1890,7 @@
 				CADD51061BD66B5300400AF4 /* SpeakerPresentationsViewController.swift in Sources */,
 				CAD2616A1B8D6C9500E6382F /* SummitTrigger.swift in Sources */,
 				CA8E98DA1B99D94F00CEBD2F /* VenueListInteractor.swift in Sources */,
+				CAE0EFA01BECF36000550C91 /* UIView+Border.swift in Sources */,
 				CA5B6D1E1BB58DDC00D28499 /* DataUpdateDeserializer.swift in Sources */,
 				CA8E98D61B99D90B00CEBD2F /* VenueListViewController.swift in Sources */,
 				CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */,
