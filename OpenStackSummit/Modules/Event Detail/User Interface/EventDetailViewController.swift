@@ -8,6 +8,7 @@
 
 import UIKit
 import Haneke
+import Cosmos
 
 @objc
 public protocol IEventDetailViewController {
@@ -28,6 +29,10 @@ public protocol IEventDetailViewController {
     var hasSpeakers: Bool { get set }
     var hasAnyFeedback: Bool { get set }
     var scheduled: Bool { get set }
+    var myFeedbackRate: Double { get set }
+    var myFeedbackReview: String! { get set }
+    var myFeedbackDate: String! { get set }
+    
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -51,6 +56,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     @IBOutlet weak var scheduledButton: UIBarButtonItem!
     @IBOutlet weak var speakersHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var myFeedbackView: UIView!
+    @IBOutlet weak var myFeedbackHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myFeedbackDateLabel: UILabel!
+    @IBOutlet weak var myFeedbackReviewLabel: UILabel!
+    @IBOutlet weak var myFeedbackRateView: CosmosView!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -173,6 +182,34 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
             }
         }
     }
+    
+    var myFeedbackRate: Double{
+        get {
+            return myFeedbackRateView.rating
+        }
+        set {
+            myFeedbackRateView.rating = newValue
+        }
+    }
+    
+    var myFeedbackReview: String!{
+        get {
+            return myFeedbackReviewLabel.text
+        }
+        set {
+            myFeedbackReviewLabel.text = newValue
+        }
+    }
+    
+    var myFeedbackDate: String!{
+        get {
+            return myFeedbackDateLabel.text
+        }
+        set {
+            myFeedbackDateLabel.text = newValue
+        }
+    }
+    
     
     var presenter: IEventDetailPresenter!
     
