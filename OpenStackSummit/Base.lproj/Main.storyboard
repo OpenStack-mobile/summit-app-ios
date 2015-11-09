@@ -631,22 +631,23 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdC-c5-kFR">
-                                                <rect key="frame" x="231" y="715" width="138" height="30"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="Create Feedback">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="leaveFeedback:" destination="xso-DC-v1V" eventType="touchUpInside" id="evg-s3-p33"/>
-                                                </connections>
-                                            </button>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-sU-8Sx" userLabel="MyFeedback">
-                                                <rect key="frame" x="0.0" y="582" width="600" height="119"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-sU-8Sx" userLabel="MyFeedback">
+                                                <rect key="frame" x="0.0" y="582" width="600" height="83"/>
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia8-YE-Lpd">
+                                                        <rect key="frame" x="18" y="13" width="314" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-bt-dc3" userLabel="Review">
+                                                        <rect key="frame" x="18" y="42" width="568" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8P-iS-qfl" customClass="CosmosView" customModule="Cosmos">
-                                                        <rect key="frame" x="364" y="0.0" width="222" height="46"/>
+                                                        <rect key="frame" x="364" y="1" width="222" height="46"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="accurateHalfStars" value="YES"/>
@@ -662,25 +663,27 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-bt-dc3">
-                                                        <rect key="frame" x="31" y="49" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia8-YE-Lpd">
-                                                        <rect key="frame" x="18" y="8" width="314" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="KiN-bt-dc3" firstAttribute="leading" secondItem="Is1-sU-8Sx" secondAttribute="leading" constant="18" id="1UK-nD-qFt"/>
                                                     <constraint firstItem="Ia8-YE-Lpd" firstAttribute="leading" secondItem="Is1-sU-8Sx" secondAttribute="leading" constant="18" id="IDm-Q2-2uJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="q8P-iS-qfl" secondAttribute="trailing" constant="14" id="bNZ-bm-Aol"/>
+                                                    <constraint firstAttribute="trailing" secondItem="KiN-bt-dc3" secondAttribute="trailing" constant="14" id="joW-t1-mur"/>
+                                                    <constraint firstAttribute="height" constant="83" id="wxi-Km-0An"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdC-c5-kFR">
+                                                <rect key="frame" x="231" y="673" width="138" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <state key="normal" title="Create Feedback">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="leaveFeedback:" destination="xso-DC-v1V" eventType="touchUpInside" id="evg-s3-p33"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -689,7 +692,7 @@
                                             <constraint firstItem="YRm-Xr-3hF" firstAttribute="top" secondItem="dCz-Ew-COB" secondAttribute="top" constant="17" id="1Z5-Te-4yd"/>
                                             <constraint firstItem="WLF-Hv-LGa" firstAttribute="top" secondItem="EUp-9I-ebt" secondAttribute="bottom" constant="2" id="1v1-B6-Axx"/>
                                             <constraint firstItem="tr5-Zf-oUl" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="9Qe-0s-La0"/>
-                                            <constraint firstItem="tdC-c5-kFR" firstAttribute="top" secondItem="Is1-sU-8Sx" secondAttribute="bottom" constant="18" id="B9G-4e-NC3"/>
+                                            <constraint firstItem="tdC-c5-kFR" firstAttribute="top" secondItem="Is1-sU-8Sx" secondAttribute="bottom" id="B9G-4e-NC3"/>
                                             <constraint firstAttribute="trailing" secondItem="tr5-Zf-oUl" secondAttribute="trailing" id="EoO-zD-eu8"/>
                                             <constraint firstAttribute="trailing" secondItem="EUp-9I-ebt" secondAttribute="trailing" constant="21" id="EzL-5X-AwX"/>
                                             <constraint firstItem="EUp-9I-ebt" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" constant="22" id="Hh4-II-HHs"/>
@@ -748,6 +751,10 @@
                         <outlet property="locationLabel" destination="6uH-Az-r37" id="AYk-Hk-7MR"/>
                         <outlet property="locationView" destination="hXL-fU-uBQ" id="BJf-S0-gY6"/>
                         <outlet property="moreFeedbackButton" destination="8DD-F2-av8" id="Ic1-eC-FZy"/>
+                        <outlet property="myFeedbackDateLabel" destination="Ia8-YE-Lpd" id="2hH-tZ-HWz"/>
+                        <outlet property="myFeedbackHeightConstraint" destination="wxi-Km-0An" id="Ouk-DM-v7L"/>
+                        <outlet property="myFeedbackRateView" destination="q8P-iS-qfl" id="zy7-8B-RmN"/>
+                        <outlet property="myFeedbackReviewLabel" destination="KiN-bt-dc3" id="U0L-N2-Ahe"/>
                         <outlet property="myFeedbackView" destination="Is1-sU-8Sx" id="65p-gN-cAC"/>
                         <outlet property="scheduledButton" destination="P8z-ji-7eE" id="bAa-sK-VF5"/>
                         <outlet property="speakersHeightConstraint" destination="rFg-K9-nsW" id="dLc-zX-Jck"/>
