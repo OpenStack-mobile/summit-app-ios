@@ -52,7 +52,8 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
         let event = dayEvents[index]
         cell.eventTitle = event.name
-        cell.timeAndPlace = event.date
+        cell.time = event.date
+        cell.place = event.location
         cell.scheduledStatus = internalInteractor.isEventScheduledByLoggedMember(event.id) ? ScheduledStatus.Scheduled : ScheduledStatus.NotScheduled
         cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
     }
