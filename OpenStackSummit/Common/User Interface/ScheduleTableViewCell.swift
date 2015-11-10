@@ -22,6 +22,9 @@ public protocol IScheduleTableViewCell : IScheduleableView {
 }
 
 class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
+    
+    private var scheduledInternal = false
+
     var eventTitle: String!{
         get {
             return eventTitleLabel.text
@@ -58,16 +61,17 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
-    var scheduled: Bool {
+    var scheduled: Bool  {
         get {
-            return scheduleButton.titleForState(.Normal) == "remove"
+            return scheduledInternal
         }
         set {
-            if (newValue) {
-                scheduleButton.setTitle("remove", forState: .Normal)
+            scheduledInternal = newValue
+            if (scheduledInternal) {
+                scheduleButton.setImage(UIImage(named:"checked_active")!, forState: .Normal)
             }
             else {
-                scheduleButton.setTitle("schedule", forState: .Normal)
+                scheduleButton.setImage(UIImage(named:"unchecked")!, forState: .Normal)
             }
         }
     }
