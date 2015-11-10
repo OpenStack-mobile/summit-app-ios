@@ -56,6 +56,8 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.reloadSpeakersData()
         viewController.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
         viewController.hasMyFeedback = myFeedbackForEvent != nil
+        viewController.isScheduledStatusVisible = interactor.isMemberLoggedIn()
+        viewController.tags = event.tags
         
         if (myFeedbackForEvent != nil) {
             viewController.myFeedbackDate = myFeedbackForEvent!.date

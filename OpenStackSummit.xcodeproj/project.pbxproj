@@ -201,6 +201,7 @@
 		CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */; settings = {ASSET_TAGS = (); }; };
 		CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */; settings = {ASSET_TAGS = (); }; };
 		CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */; settings = {ASSET_TAGS = (); }; };
+		CADB47AA1BF29C2C00CE0629 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CADC794C1BD1198D005AA306 /* VenueListItemDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */; };
 		CADC794E1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */; };
 		CADCE2841BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */; };
@@ -502,6 +503,7 @@
 		CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleableInteractor.swift; sourceTree = "<group>"; };
 		CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleablePresenter.swift; path = "User Interface/ScheduleablePresenter.swift"; sourceTree = "<group>"; };
 		CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IScheduleableView.swift; path = "User Interface/IScheduleableView.swift"; sourceTree = "<group>"; };
+		CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "User Interface/BaseViewController.swift"; sourceTree = "<group>"; };
 		CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItemDTOAssembler.swift; sourceTree = "<group>"; };
 		CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItemDTOAssemblerTests.swift; sourceTree = "<group>"; };
 		CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScheduleDataUpdateStrategyTests.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
 				CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */,
 				CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */,
+				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -2008,6 +2011,7 @@
 				CA8E98E51B9A03A700CEBD2F /* VenueDetailPresenter.swift in Sources */,
 				CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */,
 				CA1CBA921BB6436C00E65D2B /* DataUpdateStrategyFactory.swift in Sources */,
+				CADB47AA1BF29C2C00CE0629 /* BaseViewController.swift in Sources */,
 				CA231B7D1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
 				CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */,
 				CADD510A1BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift in Sources */,
