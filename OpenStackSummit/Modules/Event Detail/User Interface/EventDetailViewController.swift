@@ -12,7 +12,7 @@ import Cosmos
 import AHKActionSheet
 
 @objc
-public protocol IEventDetailViewController {
+public protocol IEventDetailViewController : IScheduleableView {
     func didAddEventToMySchedule(event: EventDetailDTO)
     func showErrorMessage(error: NSError)
     func reloadFeedbackData()
@@ -29,7 +29,6 @@ public protocol IEventDetailViewController {
     var loadedAllFeedback: Bool { get set }
     var hasSpeakers: Bool { get set }
     var hasAnyFeedback: Bool { get set }
-    var scheduled: Bool { get set }
     var myFeedbackRate: Double { get set }
     var myFeedbackReview: String! { get set }
     var myFeedbackDate: String! { get set }
@@ -190,7 +189,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
                 scheduledButton.image = UIImage(named:"checked_active")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
             }
             else {
-                scheduledButton.image = UIImage(named:"checked_active")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+                scheduledButton.image = UIImage(named:"unchecked")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
             }
         }
     }
@@ -258,8 +257,16 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         myFeedbackView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         
         actionSheet = AHKActionSheet()
-        actionSheet.addButtonWithTitle("Feedback", image: nil, type: .Default, handler: nil)
+        actionSheet.addButtonWithTitle("Feedback", image: nil, type: .Default) { actsheet in
+            self.presenter.leaveFeedback()
+        }
         actionSheet.addButtonWithTitle("Share", image: nil, type: .Default, handler: nil)
+        actionSheet.blurTintColor = UIColor(white: 0.0, alpha: 0.75)
+        actionSheet.separatorColor = UIColor(white: 1.0, alpha: 0.3)
+        actionSheet.blurRadius = 8.0;
+        actionSheet.buttonHeight = 50.0;
+        actionSheet.buttonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
+        actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
     }
     
     override func didReceiveMemoryWarning() {

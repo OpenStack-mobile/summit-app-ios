@@ -16,6 +16,7 @@ public class EventDetailDTO: ScheduleItemDTO {
     
     public init(scheduleItemDTO: ScheduleItemDTO) {
         super.init()
+        id = scheduleItemDTO.id
         name = scheduleItemDTO.name
         location = scheduleItemDTO.location
         date = scheduleItemDTO.date

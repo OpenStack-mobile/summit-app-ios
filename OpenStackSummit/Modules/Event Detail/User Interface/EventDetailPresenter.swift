@@ -26,7 +26,7 @@ public protocol IEventDetailPresenter: IBasePresenter {
     func toggleScheduledStatus()
 }
 
-public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
+public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter {
     weak var viewController : IEventDetailViewController!
     var interactor : IEventDetailInteractor!
     var wireframe: IEventDetailWireframe!
@@ -67,28 +67,21 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
     }
     
     public func loadFeedback() {
-        let operation = NSBlockOperation()
-        operation.addExecutionBlock({
-            self.interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
-                if operation.cancelled {
+        interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
                     return
                 }
-                dispatch_async(dispatch_get_main_queue(),{
-                    
-                    if (error != nil) {
-                        self.viewController.showErrorMessage(error!)
-                        return
-                    }
-                    
-                    self.feedbackList.appendContentsOf(feedbackPage!)
-                    self.viewController.reloadFeedbackData()
-                    self.viewController.hasAnyFeedback = self.feedbackList.count > 0
-                    self.feedbackPage++
-                    self.viewController.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
-                })
-            }
-        })
-        operationQueue.addOperation(operation)
+                
+                self.feedbackList.appendContentsOf(feedbackPage!)
+                self.viewController.reloadFeedbackData()
+                self.viewController.hasAnyFeedback = self.feedbackList.count > 0
+                self.feedbackPage++
+                self.viewController.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
+            })
+        }
     }
     
     public func addEventToMySchedule() {
@@ -145,32 +138,23 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
     }
     
     public func toggleScheduledStatus() {
-        let isScheduled = interactor.isEventScheduledByLoggedMember(event.id)
-        if (isScheduled) {
-            removeEventFromSchedule(event) { error in
-                if (error != nil) {
-                    self.viewController.scheduled = true
-                }
+        toggleScheduledStatusForEvent(event, scheduleableView: viewController, interactor: interactor) { error in
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
             }
         }
-        else {
-            addEventToSchedule(event) { error in
-                if (error != nil) {
-                    self.viewController.scheduled = false
-                }
-            }
-        }
-        
     }
     
     func addEventToSchedule(event: ScheduleItemDTO, completionBlock: ((NSError?) -> Void)?) {
+        self.viewController.scheduled = true
+
         interactor.addEventToLoggedInMemberSchedule(event.id) { error in
             dispatch_async(dispatch_get_main_queue(),{
                 if (error != nil) {
+                    self.viewController.scheduled = !self.viewController.scheduled
                     self.viewController.showErrorMessage(error!)
                 }
                 
-                self.viewController.scheduled = true
                 if (completionBlock != nil) {
                     completionBlock!(error)
                 }
@@ -179,12 +163,14 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
     }
     
     func removeEventFromSchedule(event: ScheduleItemDTO, completionBlock: ((NSError?) -> Void)?) {
+        self.viewController.scheduled = false
+
         interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
             dispatch_async(dispatch_get_main_queue(),{
                 if (error != nil) {
+                    self.viewController.scheduled = !self.viewController.scheduled
                     self.viewController.showErrorMessage(error!)
                 }
-                self.viewController.scheduled = true
                 if (completionBlock != nil) {
                     completionBlock!(error)
                 }
@@ -192,4 +178,6 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
         }
     }
     
+    public func viewUnload() {
+    }
 }
