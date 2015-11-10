@@ -12,7 +12,7 @@ import SwiftSpinner
 
 class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
 
-    let cellIdentifier = "GeneralScheduleTableViewCell"
+    let cellIdentifier = "scheduleTableViewCell"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
@@ -144,7 +144,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
         presenter.buildScheduleCell(cell, index: indexPath.row)
         return cell
     }
