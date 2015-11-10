@@ -25,6 +25,7 @@ public protocol IEventDetailViewController : IScheduleableView {
     var location: String! { get set }
     var sponsors: String! { get set }
     var summitTypes: String! { get set }
+    var tags: String! { get set }
     var allowFeedback: Bool { get set }
     var loadedAllFeedback: Bool { get set }
     var hasSpeakers: Bool { get set }
@@ -33,6 +34,7 @@ public protocol IEventDetailViewController : IScheduleableView {
     var myFeedbackReview: String! { get set }
     var myFeedbackDate: String! { get set }
     var hasMyFeedback: Bool { get set}
+    var isScheduledStatusVisible: Bool { get set }
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -64,6 +66,8 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var moreFeedbackButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var submenuButton: UIBarButtonItem!
+    @IBOutlet weak var tagsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagsLabel: UILabel!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -132,6 +136,16 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         }
         set {
             summitTypesLabel.text = newValue
+        }
+    }
+    
+    var tags: String! {
+        get {
+            return tagsLabel.text
+        }
+        set {
+            tagsLabel.text = newValue
+            tagsLabelHeightConstraint.constant = newValue == nil || newValue.isEmpty ? 0 : 40
         }
     }
     
@@ -230,6 +244,23 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
             myFeedbackViewHeightConstraint.constant = newValue ? 83 : 0
             feedbackButton.updateConstraints()
             myFeedbackView.updateConstraints()
+        }
+    }
+    
+    var isScheduledStatusVisible: Bool {
+        get {
+            
+            return navigationItem.rightBarButtonItems![0].enabled
+        }
+        set {
+            
+            navigationItem.rightBarButtonItems![0].tintColor = newValue ? UIColor.whiteColor() : UIColor.clearColor()
+            navigationItem.rightBarButtonItems![0].enabled = newValue
+
+            if (!newValue) {
+                navigationItem.rightBarButtonItems![1].image = nil
+            }
+            navigationItem.rightBarButtonItems![1].enabled = newValue
         }
     }
     
