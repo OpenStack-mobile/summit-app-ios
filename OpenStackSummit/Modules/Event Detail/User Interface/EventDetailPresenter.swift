@@ -145,39 +145,6 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         }
     }
     
-    func addEventToSchedule(event: ScheduleItemDTO, completionBlock: ((NSError?) -> Void)?) {
-        self.viewController.scheduled = true
-
-        interactor.addEventToLoggedInMemberSchedule(event.id) { error in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    self.viewController.scheduled = !self.viewController.scheduled
-                    self.viewController.showErrorMessage(error!)
-                }
-                
-                if (completionBlock != nil) {
-                    completionBlock!(error)
-                }
-            })
-        }
-    }
-    
-    func removeEventFromSchedule(event: ScheduleItemDTO, completionBlock: ((NSError?) -> Void)?) {
-        self.viewController.scheduled = false
-
-        interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    self.viewController.scheduled = !self.viewController.scheduled
-                    self.viewController.showErrorMessage(error!)
-                }
-                if (completionBlock != nil) {
-                    completionBlock!(error)
-                }
-            })
-        }
-    }
-    
     public func viewUnload() {
     }
 }

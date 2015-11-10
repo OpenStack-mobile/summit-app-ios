@@ -57,7 +57,11 @@ public class PersonalSchedulePresenter: SchedulePresenter {
     }
     
     public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
-        toggleScheduledStatus(index, cell: cell, interactor: internalInteractor, viewController: internalViewController) { error in
+        let event = dayEvents[index]
+        toggleScheduledStatusForEvent(event, scheduleableView: cell, interactor: internalInteractor) { error in
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
+            }
             self.reloadSchedule()
         }
     }
