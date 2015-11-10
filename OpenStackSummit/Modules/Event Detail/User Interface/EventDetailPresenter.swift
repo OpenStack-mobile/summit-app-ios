@@ -55,6 +55,14 @@ public class EventDetailPresenter: BasePresenter, IEventDetailPresenter {
         viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()
         viewController.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
+        viewController.hasMyFeedback = myFeedbackForEvent != nil
+        
+        if (myFeedbackForEvent != nil) {
+            viewController.myFeedbackDate = myFeedbackForEvent!.date
+            viewController.myFeedbackRate = Double(myFeedbackForEvent!.rate)
+            viewController.myFeedbackReview = myFeedbackForEvent!.review
+        }
+        
         loadFeedback()
     }
     
