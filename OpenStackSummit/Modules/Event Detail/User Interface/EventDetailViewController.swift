@@ -9,6 +9,7 @@
 import UIKit
 import Haneke
 import Cosmos
+import AHKActionSheet
 
 @objc
 public protocol IEventDetailViewController {
@@ -63,6 +64,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     @IBOutlet weak var myFeedbackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var moreFeedbackButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var submenuButton: UIBarButtonItem!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -70,6 +72,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     private let borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
     private let borderWidth = 1
     private var scheduledInternal = false
+    private var actionSheet: AHKActionSheet!
     
     var eventTitle: String! {
         get {
@@ -239,8 +242,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scheduledButton.width = 10
+        scheduledButton.target = self
         scheduledButton.action = Selector("toggleSchedule:")
+        submenuButton.target = self
+        submenuButton.action = Selector("showSubmenu:")
         
         feedbackButton.layer.cornerRadius = 10
         moreFeedbackButton.layer.cornerRadius = 10
@@ -251,6 +256,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         summitTypesView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         myFeedbackView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
         myFeedbackView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
+        
+        actionSheet = AHKActionSheet()
+        actionSheet.addButtonWithTitle("Feedback", image: nil, type: .Default, handler: nil)
+        actionSheet.addButtonWithTitle("Share", image: nil, type: .Default, handler: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -322,6 +331,10 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     @IBAction func toggleSchedule(sender: UIBarButtonItem) {
         presenter.toggleScheduledStatus()
+    }
+
+    @IBAction func showSubmenu(sender: UIBarButtonItem) {
+        actionSheet.show()
     }
     
     override func viewWillDisappear(animated: Bool) {

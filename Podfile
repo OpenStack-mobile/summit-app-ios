@@ -15,6 +15,7 @@ pod 'AeroGearOAuth2', :git => 'https://github.com/claudioredi/aerogear-ios-oauth
 pod 'SwiftSpinner' 
 pod 'GoogleMaps'
 pod 'Cosmos', '~> 1.1'
+pod 'AHKActionSheet'
 
 target 'OpenStackSummitTests' do
     pod 'Mockingjay'
