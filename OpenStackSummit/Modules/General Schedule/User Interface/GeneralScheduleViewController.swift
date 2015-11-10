@@ -11,7 +11,10 @@ import AFHorizontalDayPicker
 import SwiftSpinner
 
 class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
-
+    
+    private let borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+    private let borderWidth = 0.1
+    
     let cellIdentifier = "scheduleTableViewCell"
     
     @IBOutlet weak var tableView: UITableView!
@@ -102,10 +105,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         
         @property (nonatomic, strong) UIColor *topAndBottomSeparatorsColor;*/
 
-        let border = CALayer()
-        border.backgroundColor = UIColorFromRGB(0x9B9B9B).CGColor
-        border.frame = CGRectMake(0, dayPicker.frame.size.height - 0.1, dayPicker.frame.size.width, 0.1)
-        dayPicker.layer.addSublayer(border)
+        dayPicker.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         
         filterButton.action = Selector("showFilters:")
     }
