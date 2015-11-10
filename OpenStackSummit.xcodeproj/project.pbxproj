@@ -2267,6 +2267,7 @@
 			baseConfigurationReference = D69C9CE108E852E2F1F57A45 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OpenStackSummit/Info.plist;
@@ -2283,6 +2284,7 @@
 			baseConfigurationReference = 9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OpenStackSummit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
