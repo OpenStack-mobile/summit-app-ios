@@ -51,7 +51,7 @@ class FeedbackGivenTableViewCell: UITableViewCell, IFeedbackGivenTableViewCell {
             return reviewLabel.text
         }
         set {
-            reviewLabel.text = newValue
+            reviewLabel.text = "test test test test tetstsf s dsf df sdfsdflsñd kñsd sd kdsñ ksdl klsdñ ksdñl klsñdkñsdk ñsld ksñd lsdfkñsdlk sdkf lsñ kfsñlk sdñl ksdñl kdsl" //newValue
         }
     }
 
