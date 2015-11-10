@@ -66,6 +66,8 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
         dayPicker.backgroundColor = UIColorFromRGB(0xE5E5E5)
         
         dayPicker.dayNumberActiveColor = UIColorFromRGB(0x4A4A4A)
