@@ -9,12 +9,11 @@
 import UIKit
 
 @objc
-public protocol IScheduleTableViewCell : class {
+public protocol IScheduleTableViewCell : IScheduleableView {
     var eventTitle: String! { get set }
     var eventType: String! { get set }
     var time: String! { get set }
     var place: String! { get set }
-    var scheduledStatus: ScheduledStatus { get set }
     var isScheduledStatusVisible: Bool { get set }
 }
 
@@ -59,12 +58,12 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
-    var scheduledStatus: ScheduledStatus {
+    var scheduled: Bool {
         get {
-            return scheduleButton.titleForState(.Normal) == "remove" ? .Scheduled : .NotScheduled
+            return scheduleButton.titleForState(.Normal) == "remove"
         }
         set {
-            if (newValue == .Scheduled) {
+            if (newValue) {
                 scheduleButton.setTitle("remove", forState: .Normal)
             }
             else {

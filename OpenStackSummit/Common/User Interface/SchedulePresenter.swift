@@ -18,7 +18,7 @@ public protocol ISchedulePresenter {
     func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell)
 }
 
-public class SchedulePresenter: NSObject, ISchedulePresenter {
+public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     var summitTimeZoneOffsetLocalTimeZone: Int!
     var session: ISession!
     var dayEvents: [ScheduleItemDTO]!
@@ -55,7 +55,7 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
         cell.eventType = event.eventType
         cell.time = event.date
         cell.place = event.location
-        cell.scheduledStatus = internalInteractor.isEventScheduledByLoggedMember(event.id) ? ScheduledStatus.Scheduled : ScheduledStatus.NotScheduled
+        cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
     }
     
@@ -69,7 +69,12 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
     }
     
     public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
-        toggleScheduledStatus(index, cell: cell, interactor: internalInteractor, viewController: internalViewController, completionBlock: nil)
+        let event = dayEvents[index]
+        toggleScheduledStatusForEvent(event, scheduleableView: cell, interactor: internalInteractor) { error in
+            if (error != nil) {
+                self.internalViewController.showErrorMessage(error!)
+            }
+        }
     }
     
     func loggedIn(notification: NSNotification) {
@@ -119,46 +124,6 @@ public class SchedulePresenter: NSObject, ISchedulePresenter {
             )
             viewController.reloadSchedule()
         })
-    }
-    
-    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
-        let event = dayEvents[index]
-        let isScheduled = interactor.isEventScheduledByLoggedMember(event.id)
-        if (isScheduled) {
-            removeEventFromSchedule(event, cell: cell, interactor: interactor, viewController: viewController, completionBlock: completionBlock)
-        }
-        else {
-            addEventToSchedule(event, cell: cell, interactor: interactor, viewController: viewController, completionBlock: completionBlock)
-        }
-    }
-    
-    func addEventToSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
-        interactor.addEventToLoggedInMemberSchedule(event.id) { error in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    viewController.showErrorMessage(error!)
-                }
-
-                cell.scheduledStatus = .Scheduled
-                if (completionBlock != nil) {
-                    completionBlock!(error)
-                }
-            })
-        }
-    }
-    
-    func removeEventFromSchedule(event: ScheduleItemDTO, cell: IScheduleTableViewCell, interactor: IScheduleInteractor, viewController: IScheduleViewController, completionBlock: ((NSError?) -> Void)?) {
-        interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    viewController.showErrorMessage(error!)
-                }
-                cell.scheduledStatus = .NotScheduled
-                if (completionBlock != nil) {
-                    completionBlock!(error)
-                }
-            })
-        }
     }
     
     deinit {
