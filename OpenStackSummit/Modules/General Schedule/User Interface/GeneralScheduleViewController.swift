@@ -54,8 +54,57 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         filterButton.target = self
     }
     
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        dayPicker.backgroundColor = UIColorFromRGB(0xE5E5E5)
+        
+        dayPicker.dayNumberActiveColor = UIColorFromRGB(0x4A4A4A)
+        dayPicker.dayNumberInactiveColor = UIColorFromRGB(0x4A4A4A)
+        dayPicker.dayNumberSelectedColor = UIColorFromRGB(0xFFFFFF)
+        
+        /*
+        dayPicker.dayNumberActiveFont = UIFont.systemFontOfSize(16)
+        dayPicker.dayNumberInactiveFont = UIFont.systemFontOfSize(16)
+        dayPicker.dayNumberSelectedFont = UIFont.systemFontOfSize(16)*/
+        
+        dayPicker.dayNameActiveColor = UIColorFromRGB(0x4A4A4A)
+        dayPicker.dayNameInactiveColor = UIColorFromRGB(0x4A4A4A)
+        dayPicker.dayNameSelectedColor = UIColorFromRGB(0xFFFFFF)
+        
+        /*
+        dayPicker.dayNameActiveFont = UIFont.systemFontOfSize(16)
+        dayPicker.dayNameInactiveFont = UIFont.systemFontOfSize(16)
+        dayPicker.dayNameSelectedFont = UIFont.systemFontOfSize(16)*/
+
+        dayPicker.backgroundActiveColor = UIColorFromRGB(0xE5E5E5)
+        dayPicker.backgroundInactiveColor = UIColorFromRGB(0xE5E5E5)
+        dayPicker.backgroundSelectedColor = UIColorFromRGB(0xF5A623)
+        /*
+        @property (nonatomic, assign) BOOL showSeparatorsBetweenCells;
+        @property (nonatomic, assign) BOOL showTopSeparator;
+        @property (nonatomic, assign) BOOL showBottomSeparator;
+        
+        @property (nonatomic, strong) UIColor *separatorActiveColor;
+        @property (nonatomic, strong) UIColor *separatorInactiveColor;
+        @property (nonatomic, strong) UIColor *separatorSelectedColor;
+        
+        @property (nonatomic, strong) UIColor *topAndBottomSeparatorsColor;*/
+
+        let border = CALayer()
+        border.backgroundColor = UIColorFromRGB(0x9B9B9B).CGColor
+        border.frame = CGRectMake(0, dayPicker.frame.size.height - 0.1, dayPicker.frame.size.width, 0.1)
+        dayPicker.layer.addSublayer(border)
+        
         filterButton.action = Selector("showFilters:")
     }
 
@@ -105,7 +154,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
-        let width: CGFloat = 50
+        let width: CGFloat = 60
         return width
     }
     
