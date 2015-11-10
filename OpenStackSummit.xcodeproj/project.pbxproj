@@ -198,6 +198,9 @@
 		CAD9A2B21BD1F10D009269B5 /* PersonalScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B11BD1F10D009269B5 /* PersonalScheduleViewController.swift */; };
 		CAD9A2B41BD1F11E009269B5 /* PersonalSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */; };
 		CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */; };
+		CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */; settings = {ASSET_TAGS = (); }; };
+		CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */; settings = {ASSET_TAGS = (); }; };
+		CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */; settings = {ASSET_TAGS = (); }; };
 		CADC794C1BD1198D005AA306 /* VenueListItemDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */; };
 		CADC794E1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */; };
 		CADCE2841BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */; };
@@ -496,6 +499,9 @@
 		CAD9A2B11BD1F10D009269B5 /* PersonalScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleViewController.swift; sourceTree = "<group>"; };
 		CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedulePresenter.swift; sourceTree = "<group>"; };
 		CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleInteractor.swift; sourceTree = "<group>"; };
+		CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleableInteractor.swift; sourceTree = "<group>"; };
+		CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleablePresenter.swift; path = "User Interface/ScheduleablePresenter.swift"; sourceTree = "<group>"; };
+		CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IScheduleableView.swift; path = "User Interface/IScheduleableView.swift"; sourceTree = "<group>"; };
 		CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItemDTOAssembler.swift; sourceTree = "<group>"; };
 		CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItemDTOAssemblerTests.swift; sourceTree = "<group>"; };
 		CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScheduleDataUpdateStrategyTests.swift; sourceTree = "<group>"; };
@@ -627,6 +633,8 @@
 				CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */,
 				CAE42A521BE2466200980315 /* BasePresenter.swift */,
 				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
+				CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */,
+				CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -1432,6 +1440,7 @@
 			isa = PBXGroup;
 			children = (
 				CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */,
+				CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */,
 			);
 			path = "Business Logic";
 			sourceTree = "<group>";
@@ -1879,6 +1888,7 @@
 				CAD6B3341B7E2B0300D62023 /* BaseEntity.swift in Sources */,
 				CADDDBA71B73D1BB008F742E /* Presentation.swift in Sources */,
 				CAD3BCA01BA9F05E0092616D /* SecurityManager.swift in Sources */,
+				CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */,
 				CA8913101B97951D002E9A95 /* MemberProfileViewController.swift in Sources */,
 				CA4399941BD19778008F378D /* GivenFeedbackAssembly.swift in Sources */,
 				CACFBC441B9F90C700095E44 /* FeedbackEditViewController.swift in Sources */,
@@ -1930,6 +1940,7 @@
 				CACFBC4A1BA0A23900095E44 /* FeedbackDataStore.swift in Sources */,
 				CAE5EC2E1B83D3890032AD31 /* TagDeserializer.swift in Sources */,
 				CACB3A0B1BC2BCD900B1363F /* SummitAttendeeDTO.swift in Sources */,
+				CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */,
 				CACFB8151B8AA8CC00DB663E /* MenuInteractor.swift in Sources */,
 				CA416F961B8F5C4A00F177F5 /* FilterSection.swift in Sources */,
 				CA8913121B97953E002E9A95 /* MemberProfilePresenter.swift in Sources */,
@@ -1965,6 +1976,7 @@
 				CADDDBAD1B73D1BB008F742E /* SummitEvent.swift in Sources */,
 				CACF7C481B9664E700A9EB16 /* PresentationSpeakerDTO.swift in Sources */,
 				CAD337161BB1906A005B2953 /* Constants.swift in Sources */,
+				CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */,
 				CADDDBB81B73D910008F742E /* GeneralScheduleViewController.swift in Sources */,
 				CAF2AA441B8271C100D8E595 /* PresentationDeserializer.swift in Sources */,
 				CAE643481BCD6095005E530B /* TrackListInteractor.swift in Sources */,
