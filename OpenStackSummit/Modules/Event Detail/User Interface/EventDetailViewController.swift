@@ -266,7 +266,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         actionSheet.blurRadius = 8.0;
         actionSheet.buttonHeight = 50.0;
         actionSheet.buttonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
-        actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
+        actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]        
     }
     
     override func didReceiveMemoryWarning() {
