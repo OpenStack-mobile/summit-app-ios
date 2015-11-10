@@ -32,7 +32,7 @@ public protocol IEventDetailViewController {
     var myFeedbackRate: Double { get set }
     var myFeedbackReview: String! { get set }
     var myFeedbackDate: String! { get set }
-    
+    var hasMyFeedback: Bool { get set}
 }
 
 class EventDetailViewController: UIViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -56,10 +56,13 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     @IBOutlet weak var scheduledButton: UIBarButtonItem!
     @IBOutlet weak var speakersHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var myFeedbackView: UIView!
-    @IBOutlet weak var myFeedbackHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var myFeedbackDateLabel: UILabel!
     @IBOutlet weak var myFeedbackReviewLabel: UILabel!
     @IBOutlet weak var myFeedbackRateView: CosmosView!
+    @IBOutlet weak var feedbackButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myFeedbackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var moreFeedbackButtonHeightConstraint: NSLayoutConstraint!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -132,20 +135,23 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     var allowFeedback: Bool {
         get {
-            return !feedbackButton.hidden
+            return feedbackButtonHeightConstraint.constant > 0
         }
         set {
-            feedbackButton.hidden = !newValue
-            feedbackTableView.hidden = !newValue
+            feedbackButtonHeightConstraint.constant = newValue ? 30 : 0
+            feedbackTableHeightConstraint.constant =  newValue ? 30 : 0
+            feedbackButton.updateConstraints()
+            feedbackTableView.updateConstraints()
         }
     }
     
     var loadedAllFeedback: Bool {
         get {
-            return moreFeedbackButton.hidden
+            return moreFeedbackButtonHeightConstraint.constant == 0
         }
         set {
-            moreFeedbackButton.hidden = newValue
+            moreFeedbackButtonHeightConstraint.constant = newValue ? 0 : 30
+            moreFeedbackButton.updateConstraints()
         }
     }
     
@@ -161,10 +167,13 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     var hasAnyFeedback: Bool  {
         get {
-            return !feedbackTableView.hidden
+            return moreFeedbackButtonHeightConstraint.constant > 0
         }
         set {
-            feedbackTableView.hidden = !newValue
+            moreFeedbackButtonHeightConstraint.constant = newValue ? 30 : 0
+            feedbackTableHeightConstraint.constant =  newValue ? 200 : 0
+            moreFeedbackButton.updateConstraints()
+            feedbackTableView.updateConstraints()
         }
     }
     
@@ -210,6 +219,17 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         }
     }
     
+    var hasMyFeedback: Bool {
+        get {
+            return feedbackButtonHeightConstraint.constant > 0
+        }
+        set {
+            feedbackButtonHeightConstraint.constant = newValue ? 0 : 30
+            myFeedbackViewHeightConstraint.constant = newValue ? 83 : 0
+            feedbackButton.updateConstraints()
+            myFeedbackView.updateConstraints()
+        }
+    }
     
     var presenter: IEventDetailPresenter!
     
@@ -222,7 +242,8 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
         scheduledButton.width = 10
         scheduledButton.action = Selector("toggleSchedule:")
         
-        feedbackButton.layer.cornerRadius = 5
+        feedbackButton.layer.cornerRadius = 10
+        moreFeedbackButton.layer.cornerRadius = 10
 
         timeView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         locationView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
