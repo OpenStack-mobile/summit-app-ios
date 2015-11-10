@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
@@ -916,6 +916,7 @@
                         <outlet property="speakersTableView" destination="zi0-2e-FtU" id="7AM-1J-viO"/>
                         <outlet property="sponsorsLabel" destination="WLF-Hv-LGa" id="kWo-F8-OQO"/>
                         <outlet property="sponsorsLabelHeightConstraint" destination="x8Y-9X-ths" id="kyP-RZ-YNE"/>
+                        <outlet property="submenuButton" destination="EuL-uU-8oN" id="cjy-zl-5l0"/>
                         <outlet property="summitTypesHeightConstraint" destination="sa4-c9-kxK" id="GRT-jU-AwB"/>
                         <outlet property="summitTypesLabel" destination="2lV-iZ-mwy" id="5e8-W5-sY2"/>
                         <outlet property="summitTypesView" destination="tr5-Zf-oUl" id="8F5-68-hrz"/>
