@@ -16,6 +16,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="376" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT TYPE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-Ud-uhT">
+                        <rect key="frame" x="180" y="97" width="188" height="14"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="highlightedColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Place" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSW-vu-WCr">
+                        <rect key="frame" x="29" y="75" width="188" height="36"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goI-ed-esB">
+                        <rect key="frame" x="8" y="38" width="360" height="22"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-JC-3Iz">
                         <rect key="frame" x="345" y="8" width="23" height="23"/>
                         <animations/>
@@ -25,50 +46,51 @@
                         </constraints>
                         <state key="normal" title="Schedule" image="unchecked"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT TYPE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-Ud-uhT">
-                        <rect key="frame" x="180" y="97" width="188" height="14"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="highlightedColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Place" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSW-vu-WCr">
-                        <rect key="frame" x="8" y="54" width="188" height="57"/>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9L-wg-JoF">
+                        <rect key="frame" x="31" y="8" width="314" height="15"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goI-ed-esB">
-                        <rect key="frame" x="8" y="28" width="360" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="VIq-ls-j2J" userLabel="Clock Image">
+                        <rect key="frame" x="8" y="7" width="18" height="18"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9L-wg-JoF">
-                        <rect key="frame" x="8" y="8" width="337" height="15"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="nX9-1B-B21"/>
+                            <constraint firstAttribute="width" constant="18" id="wfc-Fr-LtJ"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="eZN-Yh-Czz" userLabel="Pin Image">
+                        <rect key="frame" x="8" y="82" width="16" height="22"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="c7I-TC-WFp"/>
+                            <constraint firstAttribute="width" constant="16" id="xee-7Y-Dau"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="eSW-vu-WCr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="3mC-jU-l4N"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="7FB-6g-TfM"/>
-                    <constraint firstItem="goI-ed-esB" firstAttribute="bottom" secondItem="eSW-vu-WCr" secondAttribute="top" constant="-5" id="CBb-wf-TKb"/>
+                    <constraint firstItem="goI-ed-esB" firstAttribute="bottom" secondItem="eSW-vu-WCr" secondAttribute="top" constant="-15" id="CBb-wf-TKb"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ioa-TV-HIm"/>
+                    <constraint firstItem="eSW-vu-WCr" firstAttribute="leading" secondItem="eZN-Yh-Czz" secondAttribute="trailing" constant="5" id="Q4S-aT-hW5"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="trailing" secondItem="HfP-JC-3Iz" secondAttribute="leading" id="SKb-hb-F5E"/>
-                    <constraint firstItem="goI-ed-esB" firstAttribute="top" secondItem="s9L-wg-JoF" secondAttribute="bottom" constant="5" id="TtS-6R-hJc"/>
-                    <constraint firstItem="s9L-wg-JoF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="aCv-aC-xCv"/>
+                    <constraint firstItem="goI-ed-esB" firstAttribute="top" secondItem="s9L-wg-JoF" secondAttribute="bottom" constant="15" id="TtS-6R-hJc"/>
+                    <constraint firstItem="VIq-ls-j2J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Zg2-Nf-rOL"/>
+                    <constraint firstItem="eZN-Yh-Czz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ZuA-x1-iAn"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bQW-Ym-XyS"/>
+                    <constraint firstItem="s9L-wg-JoF" firstAttribute="leading" secondItem="VIq-ls-j2J" secondAttribute="trailing" constant="5" id="bvX-5d-Daj"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="db6-zY-bKh"/>
+                    <constraint firstItem="VIq-ls-j2J" firstAttribute="centerY" secondItem="s9L-wg-JoF" secondAttribute="centerY" id="j3n-Ta-qIg"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="jjL-zd-Ng1"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="kia-nd-YVJ"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/2" id="le3-f0-msJ"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/2" id="nJZ-nf-Mjx"/>
+                    <constraint firstItem="eZN-Yh-Czz" firstAttribute="centerY" secondItem="eSW-vu-WCr" secondAttribute="centerY" id="pki-3d-OUb"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="qsm-Fv-UxN"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zha-g1-Kmh"/>
                 </constraints>
@@ -85,6 +107,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="map_pin" width="26" height="33"/>
+        <image name="time" width="30" height="30"/>
         <image name="unchecked" width="23" height="23"/>
     </resources>
 </document>
