@@ -16,22 +16,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="376" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT TYPE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-Ud-uhT">
-                        <rect key="frame" x="180" y="97" width="188" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT TYPE" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-Ud-uhT">
+                        <rect key="frame" x="261" y="97" width="107" height="14"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Place" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSW-vu-WCr">
-                        <rect key="frame" x="29" y="75" width="188" height="36"/>
+                        <rect key="frame" x="31" y="75" width="215" height="36"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goI-ed-esB">
-                        <rect key="frame" x="8" y="38" width="360" height="22"/>
+                        <rect key="frame" x="9" y="38" width="359" height="22"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,7 +63,7 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="eZN-Yh-Czz" userLabel="Pin Image">
-                        <rect key="frame" x="8" y="82" width="16" height="22"/>
+                        <rect key="frame" x="9" y="81" width="16" height="22"/>
                         <animations/>
                         <gestureRecognizers/>
                         <constraints>
@@ -77,20 +77,20 @@
                     <constraint firstItem="goI-ed-esB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="7FB-6g-TfM"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="bottom" secondItem="eSW-vu-WCr" secondAttribute="top" constant="-15" id="CBb-wf-TKb"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ioa-TV-HIm"/>
-                    <constraint firstItem="eSW-vu-WCr" firstAttribute="leading" secondItem="eZN-Yh-Czz" secondAttribute="trailing" constant="5" id="Q4S-aT-hW5"/>
+                    <constraint firstItem="eSW-vu-WCr" firstAttribute="leading" secondItem="eZN-Yh-Czz" secondAttribute="trailing" constant="6" id="Q4S-aT-hW5"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="trailing" secondItem="HfP-JC-3Iz" secondAttribute="leading" id="SKb-hb-F5E"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="top" secondItem="s9L-wg-JoF" secondAttribute="bottom" constant="15" id="TtS-6R-hJc"/>
                     <constraint firstItem="VIq-ls-j2J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Zg2-Nf-rOL"/>
-                    <constraint firstItem="eZN-Yh-Czz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ZuA-x1-iAn"/>
+                    <constraint firstItem="eZN-Yh-Czz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="ZuA-x1-iAn"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bQW-Ym-XyS"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="leading" secondItem="VIq-ls-j2J" secondAttribute="trailing" constant="5" id="bvX-5d-Daj"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="db6-zY-bKh"/>
                     <constraint firstItem="VIq-ls-j2J" firstAttribute="centerY" secondItem="s9L-wg-JoF" secondAttribute="centerY" id="j3n-Ta-qIg"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="jjL-zd-Ng1"/>
-                    <constraint firstItem="goI-ed-esB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="kia-nd-YVJ"/>
-                    <constraint firstItem="eSW-vu-WCr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/2" id="le3-f0-msJ"/>
-                    <constraint firstItem="HH5-Ud-uhT" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/2" id="nJZ-nf-Mjx"/>
-                    <constraint firstItem="eZN-Yh-Czz" firstAttribute="centerY" secondItem="eSW-vu-WCr" secondAttribute="centerY" id="pki-3d-OUb"/>
+                    <constraint firstItem="goI-ed-esB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="kia-nd-YVJ"/>
+                    <constraint firstItem="eSW-vu-WCr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="4/7" id="le3-f0-msJ"/>
+                    <constraint firstItem="HH5-Ud-uhT" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="2/7" id="nJZ-nf-Mjx"/>
+                    <constraint firstItem="eZN-Yh-Czz" firstAttribute="centerY" secondItem="eSW-vu-WCr" secondAttribute="centerY" constant="-1" id="pki-3d-OUb"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="qsm-Fv-UxN"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zha-g1-Kmh"/>
                 </constraints>
