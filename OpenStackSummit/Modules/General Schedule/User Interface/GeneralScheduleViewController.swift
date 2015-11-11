@@ -70,6 +70,8 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         super.viewDidLoad()
 
         tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         dayPicker.backgroundColor = UIColorFromRGB(0xE5E5E5)
         
