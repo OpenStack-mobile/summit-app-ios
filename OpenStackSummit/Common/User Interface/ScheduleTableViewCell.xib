@@ -28,7 +28,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="EVENT TYPE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH5-Ud-uhT">
                         <rect key="frame" x="293" y="89" width="75" height="22"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
@@ -64,8 +64,8 @@
                     <constraint firstItem="goI-ed-esB" firstAttribute="top" secondItem="s9L-wg-JoF" secondAttribute="bottom" constant="5" id="TtS-6R-hJc"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="aCv-aC-xCv"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bQW-Ym-XyS"/>
-                    <constraint firstItem="eSW-vu-WCr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="db6-zY-bKh"/>
-                    <constraint firstItem="HH5-Ud-uhT" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="jjL-zd-Ng1"/>
+                    <constraint firstItem="eSW-vu-WCr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="db6-zY-bKh"/>
+                    <constraint firstItem="HH5-Ud-uhT" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="jjL-zd-Ng1"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="kia-nd-YVJ"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/2" id="le3-f0-msJ"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/2" id="nJZ-nf-Mjx"/>
