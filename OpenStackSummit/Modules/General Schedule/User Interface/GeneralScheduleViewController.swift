@@ -158,7 +158,7 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
-        let width: CGFloat = 60
+        let width: CGFloat = 56
         return width
     }
     
