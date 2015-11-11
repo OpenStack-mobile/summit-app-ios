@@ -1271,7 +1271,7 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="yy8-1D-Wb1">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="v8X-Vl-pKb"/>
+                        <barButtonItem key="rightBarButtonItem" image="filter" id="v8X-Vl-pKb"/>
                     </navigationItem>
                     <connections>
                         <outlet property="dayPicker" destination="PbG-JX-SiK" id="JlH-dn-cD2"/>
@@ -2245,6 +2245,7 @@
         <image name="arrow" width="19" height="29"/>
         <image name="checked_active" width="22" height="22"/>
         <image name="credential" width="46" height="31"/>
+        <image name="filter" width="23" height="23"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="menu" width="22" height="22"/>
         <image name="submenu" width="4" height="18"/>
