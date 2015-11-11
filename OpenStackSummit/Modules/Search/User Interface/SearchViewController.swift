@@ -47,6 +47,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         eventsTableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: eventsTableViewCellIdentifier)
+        eventsTableView.estimatedRowHeight = 100
+        eventsTableView.rowHeight = UITableViewAutomaticDimension
+        
         presenter.viewLoad()
     }
 
