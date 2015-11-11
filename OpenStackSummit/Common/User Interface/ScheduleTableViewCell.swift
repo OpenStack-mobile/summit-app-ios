@@ -36,10 +36,10 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     
     var eventType: String!{
         get {
-            return eventTypeLabel.text?.uppercaseString
+            return eventTypeLabel.text
         }
         set {
-            eventTypeLabel.text = newValue
+            eventTypeLabel.text = newValue?.uppercaseString
         }
     }
     
