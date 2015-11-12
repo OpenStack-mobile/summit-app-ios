@@ -11,16 +11,16 @@ import AFHorizontalDayPicker
 import SwiftSpinner
 
 class ScheduleView: UIView {
+    
     @IBOutlet var view: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NSBundle.mainBundle().loadNibNamed("ScheduleView", owner: self, options: nil)
         addSubview(self.view)
     }
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     
     /*
     // Only override drawRect: if you perform custom drawing.
