@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
-		9D2988081B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2988071B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
 		9D90AE911BF127EA004A230E /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D90AE901BF127EA004A230E /* EventsPresenter.swift */; };
 		9D90AE931BF12899004A230E /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D90AE921BF12899004A230E /* EventsViewController.swift */; };
@@ -198,10 +197,10 @@
 		CAD9A2B21BD1F10D009269B5 /* PersonalScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B11BD1F10D009269B5 /* PersonalScheduleViewController.swift */; };
 		CAD9A2B41BD1F11E009269B5 /* PersonalSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */; };
 		CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */; };
-		CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */; settings = {ASSET_TAGS = (); }; };
-		CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */; settings = {ASSET_TAGS = (); }; };
-		CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */; settings = {ASSET_TAGS = (); }; };
-		CADB47AA1BF29C2C00CE0629 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */; };
+		CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */; };
+		CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */; };
+		CADB47AA1BF29C2C00CE0629 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */; };
 		CADC794C1BD1198D005AA306 /* VenueListItemDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */; };
 		CADC794E1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */; };
 		CADCE2841BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */; };
@@ -302,7 +301,6 @@
 		6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenStackSummitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		9D2988071B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
 		9D90AE901BF127EA004A230E /* EventsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsPresenter.swift; path = Events/EventsPresenter.swift; sourceTree = "<group>"; };
 		9D90AE921BF12899004A230E /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = Events/EventsViewController.swift; sourceTree = "<group>"; };
@@ -1369,7 +1367,6 @@
 		CADDDB8C1B73CDF2008F742E /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				9D2988071B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift */,
 				CADDDBB71B73D910008F742E /* GeneralScheduleViewController.swift */,
 				CADDDBC11B74F193008F742E /* GeneralSchedulePresenter.swift */,
 			);
@@ -1934,7 +1931,6 @@
 				CAF2AA461B8271C100D8E595 /* SummitDeserializer.swift in Sources */,
 				CA0029FF1B9E2F95001A9EDA /* VenueRoomDTO.swift in Sources */,
 				CAE1D9041BA760C3004AA88C /* SummitRemoteDataStore.swift in Sources */,
-				9D2988081B8CDD3900C212D1 /* GeneralScheduleTableViewCell.swift in Sources */,
 				CAE5EC2A1B83B85F0032AD31 /* MemberDeserializer.swift in Sources */,
 				CAE643501BCDA174005E530B /* NamedDTOAssembler.swift in Sources */,
 				CADDDBC21B74F193008F742E /* GeneralSchedulePresenter.swift in Sources */,
