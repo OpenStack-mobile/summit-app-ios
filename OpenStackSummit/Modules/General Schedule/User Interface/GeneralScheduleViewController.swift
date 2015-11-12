@@ -1,137 +1,50 @@
 //
 //  ScheduleViewController.swift
-//  OpenStackSched
+//  OpenStackSummit
 //
 //  Created by Claudio on 8/3/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
-import AFHorizontalDayPicker
-import SwiftSpinner
 
-class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
+import UIKit
+import SWRevealViewController
+
+class GeneralScheduleViewController: ScheduleViewController, SWRevealViewControllerDelegate {
     
-    private let borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
-    private let borderWidth = 0.1
-    
-    let cellIdentifier = "scheduleTableViewCell"
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
-    var presenter : IGeneralSchedulePresenter!
-    var startDate: NSDate! {
+    var presenter: IGeneralSchedulePresenter! {
         get {
-            return dayPicker.startDate
+            return internalPresenter as! IGeneralSchedulePresenter
         }
         set {
-            dayPicker.startDate = newValue
-            dayPicker.firstActiveDate = newValue
-        }
-    }
-
-    var endDate: NSDate! {
-        get {
-            return dayPicker.endDate
-        }
-        set {
-            dayPicker.endDate = newValue
-            dayPicker.lastActiveDate = newValue
-        }
-    }
-
-    var selectedDate: NSDate! {
-        get {
-            return dayPicker.selectedDate
-        }
-        set {
-            dayPicker.selectDate(newValue, animated: false)
+            internalPresenter = newValue
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        dayPicker.delegate = self
-        presenter.viewLoad()
-        filterButton.target = self
-    }
-    
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
-        dayPicker.backgroundColor = UIColorFromRGB(0xE5E5E5)
-        
-        dayPicker.dayNumberActiveColor = UIColorFromRGB(0x4A4A4A)
-        dayPicker.dayNumberInactiveColor = UIColorFromRGB(0x4A4A4A)
-        dayPicker.dayNumberSelectedColor = UIColorFromRGB(0xFFFFFF)
-        
-        /*
-        dayPicker.dayNumberActiveFont = UIFont.systemFontOfSize(16)
-        dayPicker.dayNumberInactiveFont = UIFont.systemFontOfSize(16)
-        dayPicker.dayNumberSelectedFont = UIFont.systemFontOfSize(16)*/
-        
-        dayPicker.dayNameActiveColor = UIColorFromRGB(0x4A4A4A)
-        dayPicker.dayNameInactiveColor = UIColorFromRGB(0x4A4A4A)
-        dayPicker.dayNameSelectedColor = UIColorFromRGB(0xFFFFFF)
-        
-        /*
-        dayPicker.dayNameActiveFont = UIFont.systemFontOfSize(16)
-        dayPicker.dayNameInactiveFont = UIFont.systemFontOfSize(16)
-        dayPicker.dayNameSelectedFont = UIFont.systemFontOfSize(16)*/
-
-        dayPicker.backgroundActiveColor = UIColorFromRGB(0xE5E5E5)
-        dayPicker.backgroundInactiveColor = UIColorFromRGB(0xE5E5E5)
-        dayPicker.backgroundSelectedColor = UIColorFromRGB(0xF5A623)
-        /*
-        @property (nonatomic, assign) BOOL showSeparatorsBetweenCells;
-        @property (nonatomic, assign) BOOL showTopSeparator;
-        @property (nonatomic, assign) BOOL showBottomSeparator;
-        
-        @property (nonatomic, strong) UIColor *separatorActiveColor;
-        @property (nonatomic, strong) UIColor *separatorInactiveColor;
-        @property (nonatomic, strong) UIColor *separatorSelectedColor;
-        
-        @property (nonatomic, strong) UIColor *topAndBottomSeparatorsColor;*/
-
-        dayPicker.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
-        
-        filterButton.action = Selector("showFilters:")
-    }
-
     @IBAction func showFilters(sender: UIBarButtonItem) {
         presenter.showFilters()
     }
     
-    func reloadSchedule() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
-    }
-
-    func showErrorMessage(error: NSError) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-    }
-    
-    func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
-    }
-    
-    func hideActivityIndicator() {
-        SwiftSpinner.hide()
+        if (menuButton != nil) {
+            menuButton.target = self.revealViewController()
+            menuButton.action = Selector("revealToggle:")
+        }
+        
+        if (filterButton != nil) {
+            filterButton.target = self
+            filterButton.action = Selector("showFilters:")
+        }
+        
+        self.revealViewController().delegate = self
+        self.revealViewController().view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+        self.presenter.viewLoad()
     }
     
     override func didReceiveMemoryWarning() {
@@ -139,44 +52,8 @@ class GeneralScheduleViewController: RevealViewController, UITableViewDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getDayEventsCount();
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
-        presenter.buildScheduleCell(cell, index: indexPath.row)
-        
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showEventDetail(indexPath.row)
-    }
-    
-    func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
-        let width: CGFloat = 56
-        return width
-    }
-    
-    func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
-        self.presenter.reloadSchedule()
-    }
-        
-    @IBAction func toggleSchedule(sender: AnyObject) {
-        let button = sender as! UIButton
-        let view = button.superview!
-        let cell = view.superview as! GeneralScheduleTableViewCell
-        let indexPath = tableView.indexPathForCell(cell)
-        presenter.toggleScheduledStatus(indexPath!.row, cell: cell)
+    func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
+        self.view.userInteractionEnabled = position == FrontViewPosition.Left
     }
     
 }
