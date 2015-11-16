@@ -1253,8 +1253,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="filterButton" destination="v8X-Vl-pKb" id="ZCq-zA-b7L"/>
-                        <outlet property="menuButton" destination="yy8-1D-Wb1" id="U5X-Hc-M74"/>
                         <outlet property="scheduleView" destination="iO9-3E-K1N" id="v0C-Kh-oDy"/>
                     </connections>
                 </viewController>
@@ -1422,7 +1420,6 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="b9W-Qj-lfd"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="menuButton" destination="b9W-Qj-lfd" id="Wdj-Jq-M45"/>
                         <outlet property="tableView" destination="t7f-Ro-Kzm" id="DCv-wr-gLf"/>
                     </connections>
                 </viewController>
@@ -2025,29 +2022,29 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mcH-Mu-QaT" customClass="XLButtonBarView">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WOl-bw-Wuz" customClass="XLButtonBarView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="B3v-Uk-wEQ"/>
+                                    <constraint firstAttribute="height" constant="43" id="sRg-j6-70d"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GKr-Ip-dTC">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hG7-e2-ZZY">
                                     <size key="itemSize" width="79" height="42"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="q7E-yo-Xpv" customClass="XLButtonBarViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ptW-Sr-a2K" customClass="XLButtonBarViewCell">
                                         <rect key="frame" x="35" y="1" width="79" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="79" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cq-a2-CFw">
-                                                    <rect key="frame" x="17" y="10" width="44" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkW-9N-NTb">
+                                                    <rect key="frame" x="17" y="10" width="45" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2059,29 +2056,30 @@
                                         </view>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="3cq-a2-CFw" secondAttribute="centerX" constant="0.5" id="CUf-gy-c1U"/>
-                                            <constraint firstAttribute="centerY" secondItem="3cq-a2-CFw" secondAttribute="centerY" constant="0.5" id="QJr-KR-9aB"/>
+                                            <constraint firstAttribute="centerY" secondItem="UkW-9N-NTb" secondAttribute="centerY" constant="0.5" id="jlB-rk-gAs"/>
+                                            <constraint firstAttribute="centerX" secondItem="UkW-9N-NTb" secondAttribute="centerX" constant="0.5" id="x7e-FK-nlD"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="label" destination="3cq-a2-CFw" id="4I4-oe-gks"/>
+                                            <outlet property="label" destination="UkW-9N-NTb" id="Nfp-bw-mpi"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYG-iD-QQk" customClass="UIScrollView">
-                                <rect key="frame" x="-5" y="43" width="610" height="444"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xa0-ro-MQb" customClass="UIScrollView">
+                                <rect key="frame" x="0.0" y="43" width="600" height="493"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VYG-iD-QQk" firstAttribute="leading" secondItem="qk8-Ng-jw8" secondAttribute="leading" constant="-5" id="8Qn-ql-PkQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mcH-Mu-QaT" secondAttribute="trailing" constant="-16" id="BLQ-gL-zDJ"/>
-                            <constraint firstItem="VYG-iD-QQk" firstAttribute="top" secondItem="mcH-Mu-QaT" secondAttribute="bottom" id="BoI-BB-LxQ"/>
-                            <constraint firstAttribute="trailing" secondItem="VYG-iD-QQk" secondAttribute="trailing" constant="-5" id="DqX-6p-eUv"/>
-                            <constraint firstItem="mcH-Mu-QaT" firstAttribute="leading" secondItem="qk8-Ng-jw8" secondAttribute="leadingMargin" constant="-16" id="EY1-tb-6oG"/>
+                            <constraint firstItem="WOl-bw-Wuz" firstAttribute="width" secondItem="qk8-Ng-jw8" secondAttribute="width" id="3Gg-1R-cv5"/>
+                            <constraint firstItem="Xa0-ro-MQb" firstAttribute="bottom" secondItem="9Db-wT-sAZ" secondAttribute="top" id="6tU-RY-txv"/>
+                            <constraint firstItem="Xa0-ro-MQb" firstAttribute="leading" secondItem="qk8-Ng-jw8" secondAttribute="leading" id="IAq-xF-uHU"/>
+                            <constraint firstItem="Xa0-ro-MQb" firstAttribute="width" secondItem="qk8-Ng-jw8" secondAttribute="width" id="Lie-VQ-eCm"/>
+                            <constraint firstItem="WOl-bw-Wuz" firstAttribute="leading" secondItem="qk8-Ng-jw8" secondAttribute="leading" id="RR7-SE-QPN"/>
+                            <constraint firstItem="Xa0-ro-MQb" firstAttribute="top" secondItem="WOl-bw-Wuz" secondAttribute="bottom" id="mP3-9t-ees"/>
+                            <constraint firstItem="WOl-bw-Wuz" firstAttribute="top" secondItem="yrp-mr-stf" secondAttribute="bottom" id="pT5-Ig-tTk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="06y-Sd-cBG">
@@ -2090,6 +2088,11 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="Ybx-VW-nQc" userLabel="Filter Button"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="buttonBarView" destination="WOl-bw-Wuz" id="pS9-s4-Mcc"/>
+                        <outlet property="containerView" destination="Xa0-ro-MQb" id="2xI-B4-Dmr"/>
+                        <outlet property="menuButton" destination="w6t-jN-74P" id="TH5-IA-UZC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T0j-MQ-6dA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
