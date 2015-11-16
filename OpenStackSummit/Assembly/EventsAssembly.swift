@@ -19,13 +19,6 @@ class EventsAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("generalScheduleViewController", with: self.generalScheduleAssembly.generalScheduleViewController())
-        }
-    }
-    
-    dynamic func eventsTrackListViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(TrackListViewController.self) {
-            (definition) in
-            
             definition.injectProperty("trackListViewController", with: self.trackListAssembly.trackListViewController())
         }
     }
