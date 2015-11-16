@@ -8,6 +8,7 @@
 
 
 import UIKit
+import XLPagerTabStrip
 import SWRevealViewController
 
 class GeneralScheduleViewController: ScheduleViewController, SWRevealViewControllerDelegate {
@@ -41,8 +42,8 @@ class GeneralScheduleViewController: ScheduleViewController, SWRevealViewControl
             filterButton.action = Selector("showFilters:")
         }
         
-        self.revealViewController().delegate = self
-        self.revealViewController().view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        /*self.revealViewController().delegate = self
+        self.revealViewController().view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())*/
         
         self.presenter.viewLoad()
     }
@@ -56,4 +57,7 @@ class GeneralScheduleViewController: ScheduleViewController, SWRevealViewControl
         self.view.userInteractionEnabled = position == FrontViewPosition.Left
     }
     
+    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
+        return "General Schedule"
+    }
 }

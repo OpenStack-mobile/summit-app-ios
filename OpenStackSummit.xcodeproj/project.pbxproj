@@ -11,6 +11,10 @@
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
 		9D90AE911BF127EA004A230E /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D90AE901BF127EA004A230E /* EventsPresenter.swift */; };
 		9D90AE931BF12899004A230E /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D90AE921BF12899004A230E /* EventsViewController.swift */; };
+		9DAC06E11BFA47C600C1208F /* EventsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E01BFA47C600C1208F /* EventsWireframe.swift */; };
+		9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */; };
+		9DD88C191BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD88C181BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift */; };
+		9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */; };
 		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
 		CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */; };
@@ -304,6 +308,10 @@
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
 		9D90AE901BF127EA004A230E /* EventsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsPresenter.swift; path = Events/EventsPresenter.swift; sourceTree = "<group>"; };
 		9D90AE921BF12899004A230E /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = Events/EventsViewController.swift; sourceTree = "<group>"; };
+		9DAC06E01BFA47C600C1208F /* EventsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsWireframe.swift; path = Events/EventsWireframe.swift; sourceTree = "<group>"; };
+		9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAssembly.swift; sourceTree = "<group>"; };
+		9DD88C181BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealButtonBarTabStripViewController.swift; path = "User Interface/RevealButtonBarTabStripViewController.swift"; sourceTree = "<group>"; };
+		9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailAssembly.swift; sourceTree = "<group>"; };
@@ -623,6 +631,8 @@
 		9D5A99CB1B948D5C002FFAA4 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				9DD88C181BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift */,
+				9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */,
 				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 				CAE643601BCDC1DF005E530B /* ScheduleView.swift */,
 				CAE643621BCDC1FE005E530B /* ScheduleView.xib */,
@@ -644,6 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				9D646AEB1BF120FB00644FD0 /* User Interface */,
+				9DAC06E01BFA47C600C1208F /* EventsWireframe.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -928,6 +939,7 @@
 				CA583ADA1BC707FB00632ECF /* DTOAssemblersAssembly.swift */,
 				CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */,
 				CA02F8B61BA0BF7B005CD514 /* FeedbackEditAssembly.swift */,
+				9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */,
 				CADDDBBD1B74E614008F742E /* GeneralScheduleAssembly.swift */,
 				CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */,
 				CA4399931BD19778008F378D /* GivenFeedbackAssembly.swift */,
@@ -1731,6 +1743,7 @@
 				CA0873F91BCE98FE00633591 /* ScheduleTableViewCell.xib in Resources */,
 				CAD9061C1B72B34F00BA5647 /* LaunchScreen.storyboard in Resources */,
 				CAE643631BCDC1FE005E530B /* ScheduleView.xib in Resources */,
+				9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */,
 				CAD906191B72B34F00BA5647 /* Assets.xcassets in Resources */,
 				CAD906141B72B34F00BA5647 /* Main.storyboard in Resources */,
 			);
@@ -1925,6 +1938,7 @@
 				CAE0EFA01BECF36000550C91 /* UIView+Border.swift in Sources */,
 				CA5B6D1E1BB58DDC00D28499 /* DataUpdateDeserializer.swift in Sources */,
 				CA8E98D61B99D90B00CEBD2F /* VenueListViewController.swift in Sources */,
+				9DD88C191BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift in Sources */,
 				CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */,
 				CABAB9BE1BD0A3E600CB867E /* VenueListTableViewCell.swift in Sources */,
 				CADDDBA51B73D1BB008F742E /* Member.swift in Sources */,
@@ -1986,6 +2000,7 @@
 				CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */,
 				CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */,
 				CACECD721B9E841D00AF0706 /* LoginInteractor.swift in Sources */,
+				9DAC06E11BFA47C600C1208F /* EventsWireframe.swift in Sources */,
 				CADD511E1BD8270800400AF4 /* VenuesMapsAssembly.swift in Sources */,
 				CA8E98DC1B99DAD400CEBD2F /* VenueListItemDTO.swift in Sources */,
 				CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */,
@@ -2025,6 +2040,7 @@
 				CA894AC31BDAB312005DE469 /* SearchAssembly.swift in Sources */,
 				CA3DA3E31B90EECD00201496 /* EventDataStore.swift in Sources */,
 				CAA9A8921BA8C76000C3725D /* SummitAttendeeDataStore.swift in Sources */,
+				9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */,
 				CAD261681B8D6BAB00E6382F /* ITrigger.swift in Sources */,
 				CA416F981B8F5C6200F177F5 /* FilterSectionItem.swift in Sources */,
 				CACF20781BBC15BB001868AF /* DataUpdateAssembly.swift in Sources */,
