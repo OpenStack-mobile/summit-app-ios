@@ -10,6 +10,7 @@ import UIKit
 import Typhoon
 
 class TrackListAssembly: TyphoonAssembly {
+    var applicationAssembly: ApplicationAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAsembly: DTOAssemblersAssembly!
     var trackScheduleAssembly: TrackScheduleAssembly!
@@ -43,11 +44,23 @@ class TrackListAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func trackListViewController() -> AnyObject {
+    /*dynamic func trackListViewController() -> AnyObject {
         return TyphoonDefinition.withClass(TrackListViewController.self) {
             (definition) in
             
             definition.injectProperty("presenter", with: self.trackListPresenter())
         }
+    }*/
+    
+    dynamic func trackListViewController() -> AnyObject {
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
+            
+            factoryMethod.injectParameterWith("TrackListViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.trackListPresenter())
+                definition.scope = TyphoonScope.WeakSingleton
+        })
     }
 }

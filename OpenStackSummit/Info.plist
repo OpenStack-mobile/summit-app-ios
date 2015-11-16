@@ -50,6 +50,7 @@
 	<key>TyphoonInitialAssemblies</key>
 	<array>
 		<string>ApplicationAssembly</string>
+		<string>EventsAssembly</string>
 		<string>GeneralScheduleAssembly</string>
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>

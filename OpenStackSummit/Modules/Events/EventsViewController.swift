@@ -6,26 +6,31 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import DKScrollingTabController
+import XLPagerTabStrip
 
-class EventsViewController: RevealViewController, DKScrollingTabControllerDelegate {
+class EventsViewController: RevealButtonBarTabStripViewController {
+
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
-    let tabController = DKScrollingTabController()
+    var isReload: Bool = false
+    //var generalScheduleViewController: GeneralScheduleViewController!
+    var trackListViewController: TrackListViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.addChildViewController(tabController)
-        tabController.didMoveToParentViewController(self)
-        self.view.addSubview(tabController.view)
-        tabController.view.frame = CGRectMake(0, 40, 320, 80)
-        tabController.buttonPadding = 25
-        tabController.selection = ["Schedule", "Tracks"]
-        tabController.delegate = self
+        self.isProgressiveIndicator = false
+        buttonBarView.selectedBar.backgroundColor = UIColor.orangeColor()
+        buttonBarView.registerNib(UINib(nibName: "ButtonCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
     }
     
-    func ScrollingTabController(controller: DKScrollingTabController!, selection: UInt) {
-        print("tapped \(selection) \n")
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+        return [trackListViewController]
     }
     
+    override func reloadPagerTabStripView() {
+        self.isReload = true
+        self.isProgressiveIndicator = (rand() % 2 == 0)
+        self.isElasticIndicatorLimit = (rand() % 2 == 0)
+        super.reloadPagerTabStripView()
+    }
 }
