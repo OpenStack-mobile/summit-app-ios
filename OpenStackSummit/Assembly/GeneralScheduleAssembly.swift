@@ -52,11 +52,23 @@ class GeneralScheduleAssembly: TyphoonAssembly {
         }
     }
         
-    dynamic func generalScheduleViewController() -> AnyObject {
+    /*dynamic func generalScheduleViewController() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleViewController.self) {
             (definition) in
             
             definition.injectProperty("presenter", with: self.generalSchedulePresenter())
         }
-    }    
+    }*/
+    
+    dynamic func generalScheduleViewController() -> AnyObject {
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
+            
+            factoryMethod.injectParameterWith("GeneralScheduleViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.generalSchedulePresenter())
+                definition.scope = TyphoonScope.WeakSingleton
+        })
+    }
 }
