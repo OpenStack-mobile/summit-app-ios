@@ -1,8 +1,8 @@
 //
-//  RevealButtonBarTabStripViewController.swift
+//  RevealTabStripViewController.swift
 //  OpenStackSummit
 //
-//  Created by Gabriel Horacio Cutrini on 11/12/15.
+//  Created by Gabriel Horacio Cutrini on 11/17/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
@@ -10,16 +10,11 @@ import UIKit
 import XLPagerTabStrip
 import SWRevealViewController
 
-class RevealButtonBarTabStripViewController: XLButtonBarPagerTabStripViewController, SWRevealViewControllerDelegate {
+class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRevealViewControllerDelegate {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
-        navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.barTintColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
-        navigationController?.navigationBar.translucent = false
-        
         super.viewDidLoad()
         
         if (menuButton != nil) {
@@ -39,5 +34,4 @@ class RevealButtonBarTabStripViewController: XLButtonBarPagerTabStripViewControl
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
         self.view.userInteractionEnabled = position == FrontViewPosition.Left
     }
-    
 }
