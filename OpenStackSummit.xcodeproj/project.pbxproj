@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
-		9D90AE911BF127EA004A230E /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D90AE901BF127EA004A230E /* EventsPresenter.swift */; };
-		9D90AE931BF12899004A230E /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D90AE921BF12899004A230E /* EventsViewController.swift */; };
-		9DAC06E11BFA47C600C1208F /* EventsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E01BFA47C600C1208F /* EventsWireframe.swift */; };
 		9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */; };
-		9DD88C191BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD88C181BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift */; };
+		9DAC06E51BFB776700C1208F /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */; };
+		9DAC06E71BFB78CA00C1208F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */; };
+		9DAC06E91BFB78CA00C1208F /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */; };
+		9DAC06EB1BFB78CA00C1208F /* EventsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */; };
 		9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */; };
 		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
@@ -306,11 +306,11 @@
 		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
-		9D90AE901BF127EA004A230E /* EventsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsPresenter.swift; path = Events/EventsPresenter.swift; sourceTree = "<group>"; };
-		9D90AE921BF12899004A230E /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = Events/EventsViewController.swift; sourceTree = "<group>"; };
-		9DAC06E01BFA47C600C1208F /* EventsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsWireframe.swift; path = Events/EventsWireframe.swift; sourceTree = "<group>"; };
 		9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAssembly.swift; sourceTree = "<group>"; };
-		9DD88C181BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealButtonBarTabStripViewController.swift; path = "User Interface/RevealButtonBarTabStripViewController.swift"; sourceTree = "<group>"; };
+		9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealTabStripViewController.swift; path = "User Interface/RevealTabStripViewController.swift"; sourceTree = "<group>"; };
+		9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = "Events/User Interfaces/EventsViewController.swift"; sourceTree = "<group>"; };
+		9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsPresenter.swift; path = "Events/User Interface/EventsPresenter.swift"; sourceTree = "<group>"; };
+		9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsWireframe.swift; path = Events/EventsWireframe.swift; sourceTree = "<group>"; };
 		9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -631,8 +631,8 @@
 		9D5A99CB1B948D5C002FFAA4 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				9DD88C181BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift */,
 				9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */,
+				9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */,
 				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 				CAE643601BCDC1DF005E530B /* ScheduleView.swift */,
 				CAE643621BCDC1FE005E530B /* ScheduleView.xib */,
@@ -654,7 +654,7 @@
 			isa = PBXGroup;
 			children = (
 				9D646AEB1BF120FB00644FD0 /* User Interface */,
-				9DAC06E01BFA47C600C1208F /* EventsWireframe.swift */,
+				9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -662,8 +662,8 @@
 		9D646AEB1BF120FB00644FD0 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				9D90AE921BF12899004A230E /* EventsViewController.swift */,
-				9D90AE901BF127EA004A230E /* EventsPresenter.swift */,
+				9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */,
+				9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -1010,8 +1010,8 @@
 		CACB39F91BC2A35E00B1363F /* People */ = {
 			isa = PBXGroup;
 			children = (
-				CACB39FB1BC2A38200B1363F /* User Interface */,
 				CACB39FA1BC2A35E00B1363F /* Business Logic */,
+				CACB39FB1BC2A38200B1363F /* User Interface */,
 				CACB3A081BC2B7DE00B1363F /* PeopleWireframe.swift */,
 			);
 			path = People;
@@ -1342,26 +1342,26 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CA894AB91BD9B2B8005DE469 /* Search */,
-				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
-				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
-				CA4399841BD156C0008F378D /* Feedback Given List */,
 				9D646AEA1BF120D300644FD0 /* Events */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
 				CA416F8A1B8F588700F177F5 /* General Schedule Filter */,
-				CAD47A171B85142D007741E7 /* LaunchScreen */,
-				CACECD6A1B9E829400AF0706 /* Login */,
-				CA89130A1B9794D7002E9A95 /* Member Profile */,
-				CADDDBB11B73D1CA008F742E /* Menu */,
-				CACB39F91BC2A35E00B1363F /* People */,
-				CAD9A2AE1BD1EEC0009269B5 /* Personal Schedule */,
-				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CAE643551BCDB625005E530B /* Track Schedule */,
+				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
+				CA89130A1B9794D7002E9A95 /* Member Profile */,
+				CAD9A2AE1BD1EEC0009269B5 /* Personal Schedule */,
+				CACB39F91BC2A35E00B1363F /* People */,
+				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
+				CA4399841BD156C0008F378D /* Feedback Given List */,
+				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
 				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
 				CA8E98D01B99D8A900CEBD2F /* Venue List */,
 				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 				CADD51111BD80E8B00400AF4 /* Venues Map */,
+				CADDDBB11B73D1CA008F742E /* Menu */,
+				CACECD6A1B9E829400AF0706 /* Login */,
+				CA894AB91BD9B2B8005DE469 /* Search */,
+				CAD47A171B85142D007741E7 /* LaunchScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1915,11 +1915,13 @@
 				CAE643441BCD605C005E530B /* TrackListViewController.swift in Sources */,
 				CA002A011B9E30EE001A9EDA /* VenueRoomDTOAssembler.swift in Sources */,
 				CAF2AA3C1B8271C100D8E595 /* CompanyDeserializer.swift in Sources */,
+				9DAC06EB1BFB78CA00C1208F /* EventsWireframe.swift in Sources */,
 				CACFBC3C1B9F900E00095E44 /* FeedbackEditWireframe.swift in Sources */,
 				CA8E98E11B9A037400CEBD2F /* VenueDetailWireframe.swift in Sources */,
 				CA894AC11BDA9000005DE469 /* SearchInteractor.swift in Sources */,
 				CA894AC51BDAB384005DE469 /* SearchWireframe.swift in Sources */,
 				CA416F871B8F444200F177F5 /* Image.swift in Sources */,
+				9DAC06E91BFB78CA00C1208F /* EventsPresenter.swift in Sources */,
 				CAD480A21B868439004DBB4F /* MemberDataStore.swift in Sources */,
 				CAF2AA3F1B8271C100D8E595 /* DeserializerStorage.swift in Sources */,
 				CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */,
@@ -1938,7 +1940,6 @@
 				CAE0EFA01BECF36000550C91 /* UIView+Border.swift in Sources */,
 				CA5B6D1E1BB58DDC00D28499 /* DataUpdateDeserializer.swift in Sources */,
 				CA8E98D61B99D90B00CEBD2F /* VenueListViewController.swift in Sources */,
-				9DD88C191BFA2B3200C8A86D /* RevealButtonBarTabStripViewController.swift in Sources */,
 				CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */,
 				CABAB9BE1BD0A3E600CB867E /* VenueListTableViewCell.swift in Sources */,
 				CADDDBA51B73D1BB008F742E /* Member.swift in Sources */,
@@ -1967,7 +1968,6 @@
 				CAE6434A1BCD8B5F005E530B /* TrackTableViewCell.swift in Sources */,
 				CA1CBA881BB5EDF300E65D2B /* DataUpdatePoller.swift in Sources */,
 				CA1CBA891BB5EDF300E65D2B /* DataUpdateProcessor.swift in Sources */,
-				9D90AE931BF12899004A230E /* EventsViewController.swift in Sources */,
 				CADD511A1BD813BB00400AF4 /* VenuesMapViewController.swift in Sources */,
 				CAE643591BCDB648005E530B /* TrackScheduleViewController.swift in Sources */,
 				CA894AAA1BD92EFE005DE469 /* VenueDTO.swift in Sources */,
@@ -1980,7 +1980,6 @@
 				CA583ACB1BC45CF700632ECF /* PeopleAssembly.swift in Sources */,
 				CACB39FF1BC2A4C700B1363F /* PeoplePresenter.swift in Sources */,
 				CA89131E1B97A784002E9A95 /* ScheduleItemDTOAssembler.swift in Sources */,
-				9D90AE911BF127EA004A230E /* EventsPresenter.swift in Sources */,
 				CACB3A111BC30F8600B1363F /* PersonListItemDTO.swift in Sources */,
 				CA8E98E91B9A0C4700CEBD2F /* VenueListAssembly.swift in Sources */,
 				CACB3A011BC2A4E200B1363F /* PeopleInteractor.swift in Sources */,
@@ -1990,6 +1989,7 @@
 				CACF7C481B9664E700A9EB16 /* PresentationSpeakerDTO.swift in Sources */,
 				CAD337161BB1906A005B2953 /* Constants.swift in Sources */,
 				CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */,
+				9DAC06E51BFB776700C1208F /* RevealTabStripViewController.swift in Sources */,
 				CADDDBB81B73D910008F742E /* GeneralScheduleViewController.swift in Sources */,
 				CAF2AA441B8271C100D8E595 /* PresentationDeserializer.swift in Sources */,
 				CAE643481BCD6095005E530B /* TrackListInteractor.swift in Sources */,
@@ -2000,7 +2000,6 @@
 				CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */,
 				CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */,
 				CACECD721B9E841D00AF0706 /* LoginInteractor.swift in Sources */,
-				9DAC06E11BFA47C600C1208F /* EventsWireframe.swift in Sources */,
 				CADD511E1BD8270800400AF4 /* VenuesMapsAssembly.swift in Sources */,
 				CA8E98DC1B99DAD400CEBD2F /* VenueListItemDTO.swift in Sources */,
 				CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */,
@@ -2088,6 +2087,7 @@
 				CAD6B3361B7E2BC100D62023 /* NamedEntity.swift in Sources */,
 				CADDDBBE1B74E614008F742E /* GeneralScheduleAssembly.swift in Sources */,
 				CACFBC461B9F951100095E44 /* FeedbackDTO.swift in Sources */,
+				9DAC06E71BFB78CA00C1208F /* EventsViewController.swift in Sources */,
 				CACF7C461B9664E700A9EB16 /* PresentationSpeakerDTOAssembler.swift in Sources */,
 				CADD510C1BD6C1FA00400AF4 /* EventRemoteDataStore.swift in Sources */,
 				CAE42A531BE2466200980315 /* BasePresenter.swift in Sources */,

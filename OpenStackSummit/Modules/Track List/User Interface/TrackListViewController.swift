@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
 @objc
 public protocol ITrackListViewController {
@@ -18,7 +19,7 @@ public protocol ITrackListViewController {
 }
 
 
-class TrackListViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, ITrackListViewController {
+class TrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ITrackListViewController, XLPagerTabStripChildItem {
     var presenter: ITrackListPresenter!
     var searchTerm: String!
     @IBOutlet weak var tableView: UITableView!
@@ -63,5 +64,8 @@ class TrackListViewController: RevealViewController, UITableViewDelegate, UITabl
         self.presenter.showTrackEvents(indexPath.row)
     }
 
+    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
+        return "Tracks"
+    }
 
 }
