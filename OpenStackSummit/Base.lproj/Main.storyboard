@@ -400,7 +400,7 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-sU-8Sx" userLabel="MyFeedback">
                                                 <rect key="frame" x="0.0" y="582" width="600" height="77"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8P-iS-qfl" customClass="CosmosView" customModule="Cosmos">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8P-iS-qfl" customClass="CosmosView" customModule="Cosmos">
                                                         <rect key="frame" x="18" y="22" width="129" height="24"/>
                                                         <animations/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,14 +425,14 @@
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R7-NN-AR0">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="My Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R7-NN-AR0">
                                                         <rect key="frame" x="155" y="23" width="431" height="21"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-bt-dc3" userLabel="Review">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-bt-dc3" userLabel="Review">
                                                         <rect key="frame" x="18" y="48" width="568" height="21"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1996,11 +1996,14 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="w6t-jN-74P" userLabel="Menu Button">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="Ybx-VW-nQc" userLabel="Filter Button"/>
+                        <barButtonItem key="rightBarButtonItem" image="filter" id="Ybx-VW-nQc" userLabel="Filter Button">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="WOl-bw-Wuz" id="pS9-s4-Mcc"/>
                         <outlet property="containerView" destination="Xa0-ro-MQb" id="2xI-B4-Dmr"/>
+                        <outlet property="filterButton" destination="Ybx-VW-nQc" id="Cev-8Z-Lfg"/>
                         <outlet property="menuButton" destination="w6t-jN-74P" id="TH5-IA-UZC"/>
                     </connections>
                 </viewController>
@@ -2196,6 +2199,7 @@
         <image name="arrow" width="19" height="29"/>
         <image name="checked_active" width="22" height="22"/>
         <image name="credential" width="46" height="31"/>
+        <image name="filter" width="19" height="18"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="menu" width="20" height="17"/>
         <image name="submenu" width="4" height="18"/>
