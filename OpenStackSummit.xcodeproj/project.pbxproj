@@ -1336,26 +1336,26 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CA894AB91BD9B2B8005DE469 /* Search */,
-				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
-				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
-				CA4399841BD156C0008F378D /* Feedback Given List */,
 				9D646AEA1BF120D300644FD0 /* Events */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
 				CA416F8A1B8F588700F177F5 /* General Schedule Filter */,
-				CAD47A171B85142D007741E7 /* LaunchScreen */,
-				CACECD6A1B9E829400AF0706 /* Login */,
-				CA89130A1B9794D7002E9A95 /* Member Profile */,
-				CADDDBB11B73D1CA008F742E /* Menu */,
-				CACB39F91BC2A35E00B1363F /* People */,
-				CAD9A2AE1BD1EEC0009269B5 /* Personal Schedule */,
-				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CAE643551BCDB625005E530B /* Track Schedule */,
+				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
+				CA89130A1B9794D7002E9A95 /* Member Profile */,
+				CAD9A2AE1BD1EEC0009269B5 /* Personal Schedule */,
+				CACB39F91BC2A35E00B1363F /* People */,
+				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
+				CA4399841BD156C0008F378D /* Feedback Given List */,
+				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
 				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
 				CA8E98D01B99D8A900CEBD2F /* Venue List */,
 				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 				CADD51111BD80E8B00400AF4 /* Venues Map */,
+				CADDDBB11B73D1CA008F742E /* Menu */,
+				CACECD6A1B9E829400AF0706 /* Login */,
+				CA894AB91BD9B2B8005DE469 /* Search */,
+				CAD47A171B85142D007741E7 /* LaunchScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
