@@ -36,8 +36,21 @@ class EventsViewController: RevealTabStripViewController {
         
         buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0)
         buttonBarView.registerNib(UINib(nibName: "ButtonCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        
+        self.changeCurrentIndexBlock = {
+            (oldCell: XLButtonBarViewCell!, newCell: XLButtonBarViewCell!, animated: Bool) -> Void in
+            
+            if (newCell == nil && oldCell != nil) {
+                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
+            }
+
+            if animated {
+                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
+                newCell.label.textColor = UIColor.whiteColor()
+            }
+        }
     }
-    
+
     func showFilters(sender: UIBarButtonItem) {
         presenter.showFilters()
     }
