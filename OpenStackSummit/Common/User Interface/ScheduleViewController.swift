@@ -21,7 +21,7 @@ public protocol IScheduleViewController: class {
     func hideActivityIndicator()
 }
 
-class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
+class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AFHorizontalDayPickerDelegate, IScheduleViewController {
     
     @IBOutlet weak var scheduleView: ScheduleView!
     
