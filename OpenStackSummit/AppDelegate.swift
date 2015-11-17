@@ -8,6 +8,7 @@
 
 import UIKit
 import AeroGearOAuth2
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

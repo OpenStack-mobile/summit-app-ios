@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @objc
 protocol IVenuesMapViewController {
