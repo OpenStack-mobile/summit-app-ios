@@ -34,6 +34,7 @@ class EventsViewController: RevealTabStripViewController {
             filterButton.action = Selector("showFilters:")
         }
         
+        buttonBarView.selectedBar.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0)
         buttonBarView.registerNib(UINib(nibName: "ButtonCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
     }
     
