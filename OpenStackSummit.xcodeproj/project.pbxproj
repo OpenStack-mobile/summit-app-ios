@@ -2291,7 +2291,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.openstack-summit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = OpenStackSummit/Common/BridgingHeader.h;
 			};
 			name = Debug;
 		};
@@ -2307,7 +2306,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.openstack-summit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = OpenStackSummit/Common/BridgingHeader.h;
 			};
 			name = Release;
 		};
