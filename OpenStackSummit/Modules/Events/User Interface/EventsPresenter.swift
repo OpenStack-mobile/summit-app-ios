@@ -6,6 +6,8 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
+import Foundation
+
 @objc
 public protocol IEventsPresenter {
     func showFilters()
