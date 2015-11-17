@@ -631,8 +631,8 @@
 		9D5A99CB1B948D5C002FFAA4 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */,
 				9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */,
+				9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */,
 				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 				CAE643601BCDC1DF005E530B /* ScheduleView.swift */,
 				CAE643621BCDC1FE005E530B /* ScheduleView.xib */,
