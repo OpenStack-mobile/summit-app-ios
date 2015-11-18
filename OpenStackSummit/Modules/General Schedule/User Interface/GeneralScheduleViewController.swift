@@ -32,6 +32,6 @@ class GeneralScheduleViewController: ScheduleViewController, XLPagerTabStripChil
     }
     
     func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "General Schedule"
+        return "Schedule"
     }
 }
