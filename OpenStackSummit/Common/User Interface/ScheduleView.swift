@@ -8,7 +8,6 @@
 
 import UIKit
 import AFHorizontalDayPicker
-import SwiftSpinner
 
 class ScheduleView: UIView {
     

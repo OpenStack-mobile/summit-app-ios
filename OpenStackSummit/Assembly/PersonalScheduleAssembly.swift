@@ -49,16 +49,16 @@ class PersonalScheduleAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func personalScheduleViewController() -> AnyObject {
+    /*dynamic func personalScheduleViewController() -> AnyObject {
         return TyphoonDefinition.withClass(PersonalScheduleViewController.self) {
             (definition) in
             
             definition.injectProperty("presenter", with: self.personalSchedulePresenter())
         }
-    }
+    }*/
 
     
-    /*dynamic func personalScheduleViewController() -> AnyObject {
+    dynamic func personalScheduleViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
             
@@ -67,5 +67,5 @@ class PersonalScheduleAssembly: TyphoonAssembly {
                 (definition) in
                 definition.injectProperty("presenter", with: self.personalSchedulePresenter())
         })
-    }*/
+    }
 }

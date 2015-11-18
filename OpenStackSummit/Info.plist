@@ -52,6 +52,7 @@
 		<string>ApplicationAssembly</string>
 		<string>EventsAssembly</string>
 		<string>VenuesAssembly</string>
+		<string>MyProfileAssembly</string>
 		<string>GeneralScheduleAssembly</string>
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>
