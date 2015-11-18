@@ -10,6 +10,7 @@ import UIKit
 import Typhoon
 
 public class VenueListAssembly: TyphoonAssembly {
+    var applicationAssembly: ApplicationAssembly!
     var venueDetailAssembly: VenueDetailAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var dataStoreAssembly: DataStoreAssembly!
@@ -42,10 +43,13 @@ public class VenueListAssembly: TyphoonAssembly {
     }
         
     dynamic func venueListViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(VenueListViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.venueListPresenter())
-        }
+            factoryMethod.injectParameterWith("VenueListViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.venueListPresenter())
+        })
     }
 }

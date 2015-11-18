@@ -15,6 +15,8 @@
 		9DAC06E91BFB78CA00C1208F /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */; };
 		9DAC06EB1BFB78CA00C1208F /* EventsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */; };
 		9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */; };
+		9DEA0FB71BFD0D490035B130 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */; };
+		9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */; };
 		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
 		CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */; };
@@ -312,6 +314,8 @@
 		9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsPresenter.swift; path = "Events/User Interface/EventsPresenter.swift"; sourceTree = "<group>"; };
 		9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsWireframe.swift; path = Events/EventsWireframe.swift; sourceTree = "<group>"; };
 		9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VenuesViewController.swift; path = "Venues/User Interface/VenuesViewController.swift"; sourceTree = "<group>"; };
+		9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesAssembly.swift; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailAssembly.swift; sourceTree = "<group>"; };
@@ -668,6 +672,22 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
+		9DEA0FB41BFD0CDD0035B130 /* Venues */ = {
+			isa = PBXGroup;
+			children = (
+				9DEA0FB51BFD0CF90035B130 /* User Interface */,
+			);
+			name = Venues;
+			sourceTree = "<group>";
+		};
+		9DEA0FB51BFD0CF90035B130 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
 		AA58718A926F2751A4081893 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,9 +957,9 @@
 				CAD4809F1B864452004DBB4F /* DataStoreAssembly.swift */,
 				CACF20771BBC15BB001868AF /* DataUpdateAssembly.swift */,
 				CA583ADA1BC707FB00632ECF /* DTOAssemblersAssembly.swift */,
+				9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */,
 				CA13BE651B78EF60007BFD34 /* EventDetailAssembly.swift */,
 				CA02F8B61BA0BF7B005CD514 /* FeedbackEditAssembly.swift */,
-				9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */,
 				CADDDBBD1B74E614008F742E /* GeneralScheduleAssembly.swift */,
 				CA416F9B1B8F935500F177F5 /* GeneralScheduleFilterAssembly.swift */,
 				CA4399931BD19778008F378D /* GivenFeedbackAssembly.swift */,
@@ -950,13 +970,14 @@
 				CA583ACA1BC45CF700632ECF /* PeopleAssembly.swift */,
 				CADE71251BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift */,
 				CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */,
+				CA894AC21BDAB311005DE469 /* SearchAssembly.swift */,
 				CAE643531BCDAB1D005E530B /* TrackListAssembly.swift */,
 				CAE643641BCE02C0005E530B /* TrackScheduleAssembly.swift */,
+				9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */,
 				CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */,
 				CA8E98E81B9A0C4700CEBD2F /* VenueListAssembly.swift */,
 				CA0029FC1B9E205A001A9EDA /* VenueRoomDetailAssembly.swift */,
 				CADD511D1BD8270800400AF4 /* VenuesMapsAssembly.swift */,
-				CA894AC21BDAB311005DE469 /* SearchAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1354,8 +1375,9 @@
 				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
 				CA4399841BD156C0008F378D /* Feedback Given List */,
 				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
-				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
+				9DEA0FB41BFD0CDD0035B130 /* Venues */,
 				CA8E98D01B99D8A900CEBD2F /* Venue List */,
+				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
 				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 				CADD51111BD80E8B00400AF4 /* Venues Map */,
 				CADDDBB11B73D1CA008F742E /* Menu */,
@@ -1895,6 +1917,7 @@
 				CA002A031B9E38B4001A9EDA /* VenueRoomDataStore.swift in Sources */,
 				CACFBC421B9F909800095E44 /* FeedbackRemoteDataStore.swift in Sources */,
 				CA02F8BF1BA0D096005CD514 /* SummitDTOAssembler.swift in Sources */,
+				9DEA0FB71BFD0D490035B130 /* VenuesViewController.swift in Sources */,
 				CAD9060F1B72B34F00BA5647 /* AppDelegate.swift in Sources */,
 				CAE643461BCD607C005E530B /* TrackListPresenter.swift in Sources */,
 				CA43998B1BD156C0008F378D /* FeedbackGivenListInteractor.swift in Sources */,
@@ -2040,6 +2063,7 @@
 				CA3DA3E31B90EECD00201496 /* EventDataStore.swift in Sources */,
 				CAA9A8921BA8C76000C3725D /* SummitAttendeeDataStore.swift in Sources */,
 				9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */,
+				9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */,
 				CAD261681B8D6BAB00E6382F /* ITrigger.swift in Sources */,
 				CA416F981B8F5C6200F177F5 /* FilterSectionItem.swift in Sources */,
 				CACF20781BBC15BB001868AF /* DataUpdateAssembly.swift in Sources */,

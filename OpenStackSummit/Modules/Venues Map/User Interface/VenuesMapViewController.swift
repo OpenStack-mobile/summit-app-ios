@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 import GoogleMaps
 
 @objc
@@ -14,7 +15,8 @@ protocol IVenuesMapViewController {
     func addMarkers(venues:[VenueListItemDTO])
 }
 
-class VenuesMapViewController: RevealViewController, GMSMapViewDelegate, IVenuesMapViewController {
+class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IVenuesMapViewController, XLPagerTabStripChildItem {
+    
     var presenter: IVenuesMapPresenter!
     var mapView: GMSMapView!
     var dictionary = Dictionary<GMSMarker, Int>()
@@ -63,5 +65,9 @@ class VenuesMapViewController: RevealViewController, GMSMapViewDelegate, IVenues
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
+        return "Map"
+    }
 
 }
