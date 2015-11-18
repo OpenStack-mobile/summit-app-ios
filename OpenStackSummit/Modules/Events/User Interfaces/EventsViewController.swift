@@ -26,6 +26,10 @@ class EventsViewController: RevealTabStripViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = "EVENTS"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
