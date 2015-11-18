@@ -78,11 +78,11 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     func loggedIn(notification: NSNotification) {
-        internalViewController.reloadSchedule()
+        //internalViewController.reloadSchedule()
     }
     
     func loggedOut(notification: NSNotification) {
-        internalViewController.reloadSchedule()
+        //internalViewController.reloadSchedule()
     }
     
     func viewLoad(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
