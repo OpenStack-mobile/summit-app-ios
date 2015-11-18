@@ -51,6 +51,7 @@
 	<array>
 		<string>ApplicationAssembly</string>
 		<string>EventsAssembly</string>
+		<string>VenuesAssembly</string>
 		<string>GeneralScheduleAssembly</string>
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>

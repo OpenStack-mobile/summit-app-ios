@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
 @objc
 public protocol IVenueListViewController {
     func releoadList()
 }
 
-class VenueListViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, IVenueListViewController {
+class VenueListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IVenueListViewController, XLPagerTabStripChildItem {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let cellIdentifier = "venueListTableViewCell"
-    @IBOutlet weak var tableView: UITableView!
+    
     var presenter : IVenueListPresenter!
     
     override func viewDidLoad() {
@@ -27,6 +30,7 @@ class VenueListViewController: RevealViewController, UITableViewDelegate, UITabl
     func releoadList() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 120
         tableView.reloadData()
     }
     
@@ -56,5 +60,9 @@ class VenueListViewController: RevealViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         presenter.showVenueDetail(indexPath.row)
+    }
+    
+    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
+        return "Directory"
     }
 }
