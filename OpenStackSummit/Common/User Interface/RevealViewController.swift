@@ -9,7 +9,7 @@
 import UIKit
 import SWRevealViewController
 
-class RevealViewController: UIViewController, SWRevealViewControllerDelegate {
+class RevealViewController: BaseViewController, SWRevealViewControllerDelegate {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -17,12 +17,12 @@ class RevealViewController: UIViewController, SWRevealViewControllerDelegate {
         super.viewDidLoad()
         
         if (menuButton != nil) {
-            menuButton.target = self.revealViewController()
+            menuButton.target = revealViewController()
             menuButton.action = Selector("revealToggle:")
         }
         
-        self.revealViewController().delegate = self
-        self.revealViewController().view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        revealViewController().delegate = self
+        revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +31,7 @@ class RevealViewController: UIViewController, SWRevealViewControllerDelegate {
     }
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        self.view.userInteractionEnabled = position == FrontViewPosition.Left
+        view.userInteractionEnabled = position == FrontViewPosition.Left
     }
 
 }

@@ -640,12 +640,12 @@
 				CA0873F71BCE98FE00633591 /* ScheduleTableViewCell.xib */,
 				CADF03231BCEEE7500358DCD /* SchedulePresenter.swift */,
 				CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */,
-				CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */,
-				CAE42A521BE2466200980315 /* BasePresenter.swift */,
-				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
 				CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */,
 				CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */,
+				CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */,
+				CAE42A521BE2466200980315 /* BasePresenter.swift */,
 				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
+				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";

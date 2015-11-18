@@ -10,12 +10,11 @@ import UIKit
 
 class BaseViewController: UIViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         navigationController?.navigationBar.barTintColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
         navigationController?.navigationBar.translucent = false
-
-        
-        super.viewDidLoad()
     }
 }

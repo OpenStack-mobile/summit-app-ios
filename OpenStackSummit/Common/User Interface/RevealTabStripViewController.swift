@@ -18,12 +18,29 @@ class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRe
         super.viewDidLoad()
         
         if (menuButton != nil) {
-            menuButton.target = self.revealViewController()
+            menuButton.target = revealViewController()
             menuButton.action = Selector("revealToggle:")
         }
         
-        self.revealViewController().delegate = self
-        self.revealViewController().view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        revealViewController().delegate = self
+        revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        
+        buttonBarView.selectedBar.alpha = 0
+        
+        changeCurrentIndexBlock = {
+            (oldCell: XLButtonBarViewCell!, newCell: XLButtonBarViewCell!, animated: Bool) -> Void in
+            
+            if newCell == nil && oldCell != nil {
+                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
+            }
+            
+            if animated {
+                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
+                newCell.label.textColor = UIColor.whiteColor()
+            }
+        }
+        
+        reloadPagerTabStripView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,6 +49,6 @@ class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRe
     }
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        self.view.userInteractionEnabled = position == FrontViewPosition.Left
+        view.userInteractionEnabled = position == FrontViewPosition.Left
     }
 }
