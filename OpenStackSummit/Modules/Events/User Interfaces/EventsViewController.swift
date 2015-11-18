@@ -49,6 +49,8 @@ class EventsViewController: RevealTabStripViewController {
                 newCell.label.textColor = UIColor.whiteColor()
             }
         }
+        
+        self.reloadPagerTabStripView()
     }
 
     func showFilters(sender: UIBarButtonItem) {
