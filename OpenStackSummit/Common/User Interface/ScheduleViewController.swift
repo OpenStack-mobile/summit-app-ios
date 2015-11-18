@@ -69,11 +69,12 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         scheduleView.tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         scheduleView.tableView.estimatedRowHeight = 120
         scheduleView.tableView.rowHeight = UITableViewAutomaticDimension
-        scheduleView.dayPicker.delegate = self
         
+        scheduleView.dayPicker.delegate = self
         scheduleView.dayPicker.backgroundColor = UIColorFromRGB(0xE5E5E5)
         
         scheduleView.dayPicker.dayNumberActiveColor = UIColorFromRGB(0x4A4A4A)
@@ -101,9 +102,9 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func reloadSchedule() {
-        self.scheduleView.tableView.delegate = self
-        self.scheduleView.tableView.dataSource = self            
-        self.scheduleView.tableView.reloadData()
+        scheduleView.tableView.delegate = self
+        scheduleView.tableView.dataSource = self
+        scheduleView.tableView.reloadData()
     }
     
     func showErrorMessage(error: NSError) {
