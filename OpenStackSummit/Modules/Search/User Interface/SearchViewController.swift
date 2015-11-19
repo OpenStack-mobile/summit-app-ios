@@ -93,12 +93,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         }
         else if (tableView == speakersTableView)  {
-            let cell = tableView.dequeueReusableCellWithIdentifier(speakersTableViewCellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(speakersTableViewCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
             presenter.buildSpeakerCell(cell, index: indexPath.row)
             return cell
         }
         else if (tableView == attendeesTableView)  {
-            let cell = tableView.dequeueReusableCellWithIdentifier(attendeesTableViewCellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(attendeesTableViewCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
             presenter.buildAttendeeCell(cell, index: indexPath.row)
             return cell
         }

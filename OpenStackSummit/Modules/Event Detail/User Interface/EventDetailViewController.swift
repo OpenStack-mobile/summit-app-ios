@@ -332,7 +332,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (tableView == speakersTableView) {
-            let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
             presenter.buildSpeakerCell(cell, index: indexPath.row)
             return cell
         }

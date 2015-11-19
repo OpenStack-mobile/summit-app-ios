@@ -17,7 +17,7 @@ public protocol IEventDetailPresenter: IBasePresenter {
     func addEventToMySchedule()
     func getSpeakersCount()->Int
     func getFeedbackCount()->Int
-    func buildSpeakerCell(cell: IPersonTableViewCell, index: Int)
+    func buildSpeakerCell(cell: IPeopleTableViewCell, index: Int)
     func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int)
     func showSpeakerProfile(index: Int)
     func loadFeedback()
@@ -105,7 +105,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         return feedbackList.count
     }
     
-    public func buildSpeakerCell(cell: IPersonTableViewCell, index: Int) {
+    public func buildSpeakerCell(cell: IPeopleTableViewCell, index: Int) {
         let speaker = event.speakers[index]
         cell.name = speaker.name
         cell.title = speaker.title
