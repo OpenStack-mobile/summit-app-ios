@@ -89,7 +89,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertNil(eventDetailDTO.venueId)
     }
     
-    func test_createDTO_eventWithoutPresentationAndSpeakersFinished_returnsDTOWithCorrectData() {
+    func test_createDTO_eventWithoutPresentationAndSpeakersThatFinished_returnsDTOWithCorrectData() {
         // Arrange
         let venue = Venue()
         venue.id = 1
@@ -97,8 +97,8 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let event = SummitEvent()
         event.name = "Test Title"
         event.eventDescription = "Test Description"
-        event.start = NSDate(timeIntervalSince1970: NSTimeInterval(32998046400))
-        event.end = NSDate(timeIntervalSince1970: NSTimeInterval(32998050000))
+        event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1211137600))
+        event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1211141200))
         event.allowFeedback = true
         event.venue = venue
         
@@ -116,7 +116,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
         XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(0, eventDetailDTO.speakers.count)
-        XCTAssertFalse(eventDetailDTO.finished)
+        XCTAssertTrue(eventDetailDTO.finished)
         XCTAssertTrue(eventDetailDTO.allowFeedback)        
         XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
         XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
