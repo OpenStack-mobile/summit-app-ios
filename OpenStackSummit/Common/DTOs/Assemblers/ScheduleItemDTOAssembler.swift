@@ -53,7 +53,7 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
-        dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
+        dateFormatter.dateFormat = "hh:mm a"
         let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
