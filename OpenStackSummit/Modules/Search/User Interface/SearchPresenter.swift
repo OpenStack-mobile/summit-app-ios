@@ -17,8 +17,8 @@ public protocol ISearchPresenter: IBasePresenter {
     func viewLoad()
     func buildEventCell(cell: IScheduleTableViewCell, index: Int)
     func buildTrackCell(cell: ITrackTableViewCell, index: Int)
-    func buildSpeakerCell(cell: IPersonTableViewCell, index: Int)
-    func buildAttendeeCell(cell: IPersonTableViewCell, index: Int)
+    func buildSpeakerCell(cell: IPeopleTableViewCell, index: Int)
+    func buildAttendeeCell(cell: IPeopleTableViewCell, index: Int)
     func getEventsCount() -> Int
     func getTracksCount() -> Int
     func getSpeakersCount() -> Int
@@ -115,13 +115,13 @@ public class SearchPresenter: BasePresenter {
         cell.name = track.name
     }
     
-    func buildSpeakerCell(cell: IPersonTableViewCell, index: Int) {
+    func buildSpeakerCell(cell: IPeopleTableViewCell, index: Int) {
         let speaker = speakers[index]
         cell.name = speaker.name
     }
     
     
-    func buildAttendeeCell(cell: IPersonTableViewCell, index: Int) {
+    func buildAttendeeCell(cell: IPeopleTableViewCell, index: Int) {
         let speaker = attendees[index]
         cell.name = speaker.name
     }

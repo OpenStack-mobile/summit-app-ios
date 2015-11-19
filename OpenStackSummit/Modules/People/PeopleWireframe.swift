@@ -16,13 +16,14 @@ public protocol IPeopleWireframe {
 
 public class PeopleWireframe: NSObject, IPeopleWireframe {
     var memberProfileWireframe : IMemberProfileWireframe!
-    var peopleViewController: IPeopleViewController!
+    var attendeesListViewController: IPeopleListViewController!
+    var speakersListViewController: IPeopleListViewController!
     
     public func showAttendeeProfile(attendeeId: Int) {
-        memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: peopleViewController.navigationController!)
+        memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: attendeesListViewController.navigationController!)
     }
     
     public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: peopleViewController.navigationController!)
+        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: speakersListViewController.navigationController!)
     }
 }

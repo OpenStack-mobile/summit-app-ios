@@ -10,14 +10,16 @@ import UIKit
 
 @objc
 public protocol IPeoplePresenter {
-    func viewLoad()
+    func attendeesListViewLoad()
+    func speakersListViewLoad()
     func showPersonProfile(index: Int)
-    func buildScheduleCell(cell: IPersonTableViewCell, index: Int)
+    func buildScheduleCell(cell: IPeopleTableViewCell, index: Int)
     func getPeopleCount() -> Int
 }
 
 public class PeoplePresenter: NSObject, IPeoplePresenter {
-    var viewController: IPeopleViewController!
+    var attendeesListViewController: IPeopleListViewController!
+    var speakersListViewController: IPeopleListViewController!
     var interactor: IPeopleInteractor!
     var wireframe: IPeopleWireframe!
     var speakers = [PersonListItemDTO]()
@@ -25,50 +27,60 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
     var page = 1
     let objectsPerPage = 10
     var loadedAll = false
+    var isAttendeesView = false;
+    var isSpeakerView = false;
     
-    public func viewLoad() {
-        getSpeakers()
+    public func attendeesListViewLoad() {
+        isAttendeesView = true
+        isSpeakerView = false;
+        getAttendees()
     }
 
+    public func speakersListViewLoad() {
+        isAttendeesView = false
+        isSpeakerView = true;
+        getSpeakers()
+    }
+    
     func getAttendees() {
-        viewController.showActivityIndicator()
+        attendeesListViewController.showActivityIndicator()
 
-        interactor.getAttendeesByFilter(viewController.searchTerm, page: page, objectsPerPage: objectsPerPage) { attendeesPage, error in
-            defer { self.viewController.hideActivityIndicator() }
+        interactor.getAttendeesByFilter(attendeesListViewController.searchTerm, page: page, objectsPerPage: objectsPerPage) { attendeesPage, error in
+            defer { self.attendeesListViewController.hideActivityIndicator() }
 
             if (error != nil) {
-                self.viewController.showErrorMessage(error!)
+                self.attendeesListViewController.showErrorMessage(error!)
                 return
             }
             
             self.attendees.appendContentsOf(attendeesPage!)
-            self.viewController.reloadData()
+            self.attendeesListViewController.reloadData()
             self.loadedAll = attendeesPage!.count < self.objectsPerPage
             self.page++
         }
     }
     
     func getSpeakers() {
-        viewController.showActivityIndicator()
+        speakersListViewController.showActivityIndicator()
 
-        interactor.getSpeakersByFilter(viewController.searchTerm, page: page, objectsPerPage: objectsPerPage) { speakersPage, error in
-            defer { self.viewController.hideActivityIndicator() }
+        interactor.getSpeakersByFilter(speakersListViewController.searchTerm, page: page, objectsPerPage: objectsPerPage) { speakersPage, error in
+            defer { self.speakersListViewController.hideActivityIndicator() }
 
             if (error != nil) {
-                self.viewController.showErrorMessage(error!)
+                self.speakersListViewController.showErrorMessage(error!)
                 return
             }
             
             self.speakers.appendContentsOf(speakersPage!)
-            self.viewController.reloadData()
+            self.speakersListViewController.reloadData()
             self.loadedAll = speakersPage!.count < self.objectsPerPage
             self.page++            
         }
     }
     
-    public func buildScheduleCell(cell: IPersonTableViewCell, index: Int){
+    public func buildScheduleCell(cell: IPeopleTableViewCell, index: Int){
         dispatch_async(dispatch_get_main_queue(),{
-            let person = self.speakers[index]
+            let person = self.isAttendeesView ? self.attendees[index] : self.speakers[index]
             cell.name = person.name
             cell.title = person.title
             cell.picUrl = person.pictureUrl
@@ -80,11 +92,16 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
     }
     
     public func getPeopleCount() -> Int {
-        return speakers.count
+        return self.isAttendeesView ? self.attendees.count: self.speakers.count
     }
     
     public func showPersonProfile(index: Int) {
-        let person = speakers[index]
-        wireframe.showSpeakerProfile(person.id)
+        let person = self.isAttendeesView ? self.attendees[index] : self.speakers[index]
+        if (isAttendeesView) {
+            wireframe.showAttendeeProfile(person.id)
+        }
+        else {
+            wireframe.showSpeakerProfile(person.id)
+        }
     }
 }

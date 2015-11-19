@@ -7,70 +7,23 @@
 //
 
 import UIKit
-import SwiftSpinner
+import XLPagerTabStrip
 
-@objc
-public protocol IPeopleViewController {
-    var presenter: IPeoplePresenter! { get set }
-    var searchTerm: String! { get set }
-    var navigationController: UINavigationController? { get }
+class PeopleViewController: RevealTabStripViewController {
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
-    func reloadData()
-    func showErrorMessage(error: NSError)
-    func showActivityIndicator()
-    func hideActivityIndicator()    
-}
-
-class PeopleViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, IPeopleViewController {
-    var presenter: IPeoplePresenter!
-    var searchTerm: String!
-    @IBOutlet weak var tableView: UITableView!
-    let cellIdentifier = "peopleTableViewCell"
-
+    var attendeesListViewController: AttendeesListViewController!
+    var speakersListViewController: SpeakerListViewController!
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = "PEOPLE"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewLoad()
     }
     
-    func reloadData() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.reloadData()
-   }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func showErrorMessage(error: NSError) {
-        
-    }
-    
-    func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
-    }
-    
-    func hideActivityIndicator() {
-        SwiftSpinner.hide()
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getPeopleCount();
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! PersonTableViewCell
-        presenter.buildScheduleCell(cell, index: indexPath.row)
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showPersonProfile(indexPath.row)
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+        return [speakersListViewController, attendeesListViewController]
     }
 }
