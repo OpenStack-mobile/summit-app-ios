@@ -244,6 +244,13 @@
 		CADF03241BCEEE7500358DCD /* SchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF03231BCEEE7500358DCD /* SchedulePresenter.swift */; };
 		CADF03271BCEEF0F00358DCD /* ScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */; };
 		CADF032B1BCEFC4D00358DCD /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */; };
+		CADF6CA31BFE1D3B007998BF /* PeopleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CADF6CA21BFE1D3B007998BF /* PeopleListView.xib */; };
+		CADF6CA51BFE1D60007998BF /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF6CA41BFE1D60007998BF /* PeopleListView.swift */; };
+		CADF6CAC1BFE23E2007998BF /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF6CAA1BFE23E2007998BF /* PeopleTableViewCell.swift */; };
+		CADF6CAD1BFE23E2007998BF /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CADF6CAB1BFE23E2007998BF /* PeopleTableViewCell.xib */; };
+		CADF6CAF1BFE2707007998BF /* AttendeesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF6CAE1BFE2707007998BF /* AttendeesListViewController.swift */; };
+		CADF6CB11BFE272F007998BF /* SpeakerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF6CB01BFE272F007998BF /* SpeakerListViewController.swift */; };
+		CADF6CB31BFE2851007998BF /* PeopleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF6CB21BFE2851007998BF /* PeopleListViewController.swift */; };
 		CAE0C9741BB2EE3400154246 /* EventDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */; };
 		CAE0EFA01BECF36000550C91 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */; };
 		CAE1D9041BA760C3004AA88C /* SummitRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */; };
@@ -530,7 +537,6 @@
 		CADD51191BD813BB00400AF4 /* VenuesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapViewController.swift; sourceTree = "<group>"; };
 		CADD511B1BD813DD00400AF4 /* VenuesMapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapPresenter.swift; sourceTree = "<group>"; };
 		CADD511D1BD8270800400AF4 /* VenuesMapsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapsAssembly.swift; sourceTree = "<group>"; };
-		CADD511F1BD82FE000400AF4 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		CADDDB8F1B73CFE5008F742E /* ApplicationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		CADDDB931B73D1BB008F742E /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		CADDDB951B73D1BB008F742E /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -554,6 +560,13 @@
 		CADF03231BCEEE7500358DCD /* SchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchedulePresenter.swift; path = "User Interface/SchedulePresenter.swift"; sourceTree = "<group>"; };
 		CADF03261BCEEF0F00358DCD /* ScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleInteractor.swift; sourceTree = "<group>"; };
 		CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleViewController.swift; path = "User Interface/ScheduleViewController.swift"; sourceTree = "<group>"; };
+		CADF6CA21BFE1D3B007998BF /* PeopleListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PeopleListView.xib; path = "User Interface/PeopleListView.xib"; sourceTree = "<group>"; };
+		CADF6CA41BFE1D60007998BF /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeopleListView.swift; path = "User Interface/PeopleListView.swift"; sourceTree = "<group>"; };
+		CADF6CAA1BFE23E2007998BF /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeopleTableViewCell.swift; path = "User Interface/PeopleTableViewCell.swift"; sourceTree = "<group>"; };
+		CADF6CAB1BFE23E2007998BF /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PeopleTableViewCell.xib; path = "User Interface/PeopleTableViewCell.xib"; sourceTree = "<group>"; };
+		CADF6CAE1BFE2707007998BF /* AttendeesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeesListViewController.swift; sourceTree = "<group>"; };
+		CADF6CB01BFE272F007998BF /* SpeakerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerListViewController.swift; sourceTree = "<group>"; };
+		CADF6CB21BFE2851007998BF /* PeopleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListViewController.swift; sourceTree = "<group>"; };
 		CAE0C9731BB2EE3400154246 /* EventDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStoreTests.swift; sourceTree = "<group>"; };
 		CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Border.swift"; path = "User Interface/UIView+Border.swift"; sourceTree = "<group>"; };
 		CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRemoteDataStore.swift; sourceTree = "<group>"; };
@@ -654,6 +667,10 @@
 				CAE42A521BE2466200980315 /* BasePresenter.swift */,
 				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
 				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
+				CADF6CA21BFE1D3B007998BF /* PeopleListView.xib */,
+				CADF6CA41BFE1D60007998BF /* PeopleListView.swift */,
+				CADF6CAA1BFE23E2007998BF /* PeopleTableViewCell.swift */,
+				CADF6CAB1BFE23E2007998BF /* PeopleTableViewCell.xib */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -1072,6 +1089,9 @@
 			children = (
 				CACB39FC1BC2A3A400B1363F /* PeopleViewController.swift */,
 				CACB39FE1BC2A4C700B1363F /* PeoplePresenter.swift */,
+				CADF6CAE1BFE2707007998BF /* AttendeesListViewController.swift */,
+				CADF6CB01BFE272F007998BF /* SpeakerListViewController.swift */,
+				CADF6CB21BFE2851007998BF /* PeopleListViewController.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1376,7 +1396,6 @@
 				CAD6C3CC1BB71EA800F8C2D6 /* HttpFactory.swift */,
 				CABAB9B71BCFEA1300CB867E /* ScheduleFilter.swift */,
 				CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */,
-				CADD511F1BD82FE000400AF4 /* BridgingHeader.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1784,9 +1803,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADF6CAD1BFE23E2007998BF /* PeopleTableViewCell.xib in Resources */,
 				CA0873F91BCE98FE00633591 /* ScheduleTableViewCell.xib in Resources */,
 				CAD9061C1B72B34F00BA5647 /* LaunchScreen.storyboard in Resources */,
 				CAE643631BCDC1FE005E530B /* ScheduleView.xib in Resources */,
+				CADF6CA31BFE1D3B007998BF /* PeopleListView.xib in Resources */,
 				9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */,
 				CAD906191B72B34F00BA5647 /* Assets.xcassets in Resources */,
 				CAD906141B72B34F00BA5647 /* Main.storyboard in Resources */,
@@ -2000,6 +2021,7 @@
 				CAE5EC2E1B83D3890032AD31 /* TagDeserializer.swift in Sources */,
 				CACB3A0B1BC2BCD900B1363F /* SummitAttendeeDTO.swift in Sources */,
 				CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */,
+				CADF6CB11BFE272F007998BF /* SpeakerListViewController.swift in Sources */,
 				CACFB8151B8AA8CC00DB663E /* MenuInteractor.swift in Sources */,
 				CA416F961B8F5C4A00F177F5 /* FilterSection.swift in Sources */,
 				CA8913121B97953E002E9A95 /* MemberProfilePresenter.swift in Sources */,
@@ -2022,6 +2044,7 @@
 				CAF2AA431B8271C100D8E595 /* TrackDeserializer.swift in Sources */,
 				CADDDBBA1B73D94F008F742E /* GeneralScheduleWireframe.swift in Sources */,
 				CACFB8171B8AA91900DB663E /* MenuPresenter.swift in Sources */,
+				CADF6CA51BFE1D60007998BF /* PeopleListView.swift in Sources */,
 				CA583ACB1BC45CF700632ECF /* PeopleAssembly.swift in Sources */,
 				CACB39FF1BC2A4C700B1363F /* PeoplePresenter.swift in Sources */,
 				CA89131E1B97A784002E9A95 /* ScheduleItemDTOAssembler.swift in Sources */,
@@ -2033,6 +2056,7 @@
 				CADDDBAD1B73D1BB008F742E /* SummitEvent.swift in Sources */,
 				CACF7C481B9664E700A9EB16 /* PresentationSpeakerDTO.swift in Sources */,
 				CAD337161BB1906A005B2953 /* Constants.swift in Sources */,
+				CADF6CAC1BFE23E2007998BF /* PeopleTableViewCell.swift in Sources */,
 				CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */,
 				9DAC06E51BFB776700C1208F /* RevealTabStripViewController.swift in Sources */,
 				CADDDBB81B73D910008F742E /* GeneralScheduleViewController.swift in Sources */,
@@ -2056,6 +2080,7 @@
 				CACFBC371B9F8D3300095E44 /* Feedback.swift in Sources */,
 				CACB3A091BC2B7DE00B1363F /* PeopleWireframe.swift in Sources */,
 				CAE6435D1BCDB6AD005E530B /* TrackScheduleInteractor.swift in Sources */,
+				CADF6CAF1BFE2707007998BF /* AttendeesListViewController.swift in Sources */,
 				CA894ABF1BDA8E5B005DE469 /* SearchPresenter.swift in Sources */,
 				CACFBC3E1B9F903D00095E44 /* FeedbackEditPresenter.swift in Sources */,
 				CAF2AA541B828E7C00D8E595 /* EventDetailPresenter.swift in Sources */,
@@ -2067,6 +2092,7 @@
 				CA8E98E51B9A03A700CEBD2F /* VenueDetailPresenter.swift in Sources */,
 				CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */,
 				CA1CBA921BB6436C00E65D2B /* DataUpdateStrategyFactory.swift in Sources */,
+				CADF6CB31BFE2851007998BF /* PeopleListViewController.swift in Sources */,
 				CADB47AA1BF29C2C00CE0629 /* BaseViewController.swift in Sources */,
 				CA231B7D1BDECD8D00DE9E83 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
 				CADDDB901B73CFE5008F742E /* ApplicationAssembly.swift in Sources */,
