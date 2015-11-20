@@ -40,7 +40,7 @@ class PeopleAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(PeopleInteractor.self) {
             (definition) in
             
-            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.dataStoreAssembly.presentationSpeakerRemoteDataStore())
+            definition.injectProperty("presentationSpeakerDataStore", with: self.dataStoreAssembly.presentationSpeakerDataStore())
             definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
             definition.injectProperty("personDTOAssembler", with: self.dtoAssemblersAssembly.personListItemDTOAssembler())
         }
@@ -55,22 +55,6 @@ class PeopleAssembly: TyphoonAssembly {
         }
     }
     
-    /*dynamic func attendeesListViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(AttendeesListViewController.self) {
-            (definition) in
-            
-            definition.injectProperty("presenter", with: self.peoplePresenter())
-        }
-    }
-
-    dynamic func speakersListViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(SpeakerListViewController.self) {
-            (definition) in
-            
-            definition.injectProperty("presenter", with: self.peoplePresenter())
-        }
-    }*/
-
     dynamic func attendeesListViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
