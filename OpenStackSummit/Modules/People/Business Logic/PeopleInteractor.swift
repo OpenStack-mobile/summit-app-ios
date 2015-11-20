@@ -15,12 +15,12 @@ public protocol IPeopleInteractor {
 }
 
 public class PeopleInteractor: NSObject, IPeopleInteractor {
-    var presentationSpeakerRemoteDataStore: IPresentationSpeakerRemoteDataStore!
+    var presentationSpeakerDataStore: IPresentationSpeakerDataStore!
     var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
     var personDTOAssembler: PersonListItemDTOAssembler!
     
     public func getSpeakersByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
-        presentationSpeakerRemoteDataStore.getByFilter(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in            
+        presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in
             self.getByFilterCallback(speakers, error: error, completionBlock: completionBlock)
         }
     }
