@@ -16,6 +16,11 @@ class SpeakerListViewController: PeopleListViewController, XLPagerTabStripChildI
         presenter.speakersListViewLoad()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.speakersListViewWillAppear();
+    }
+    
     func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
         return "Speakers"
     }
