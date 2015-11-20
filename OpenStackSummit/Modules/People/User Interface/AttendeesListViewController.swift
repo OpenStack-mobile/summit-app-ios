@@ -11,8 +11,8 @@ import XLPagerTabStrip
 
 class AttendeesListViewController: PeopleListViewController, XLPagerTabStripChildItem {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.attendeesListViewLoad()
     }
     

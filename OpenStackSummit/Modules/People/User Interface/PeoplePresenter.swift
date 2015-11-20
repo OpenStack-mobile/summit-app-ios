@@ -12,6 +12,8 @@ import UIKit
 public protocol IPeoplePresenter {
     func attendeesListViewLoad()
     func speakersListViewLoad()
+    func attendeesListViewWillAppear()
+    func speakersListViewWillAppear()
     func showPersonProfile(index: Int)
     func buildScheduleCell(cell: IPeopleTableViewCell, index: Int)
     func getPeopleCount() -> Int
@@ -24,28 +26,44 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
     var wireframe: IPeopleWireframe!
     var speakers = [PersonListItemDTO]()
     var attendees = [PersonListItemDTO]()
-    var page = 1
+    var pageSpeakers = 1
+    var pageAttendees = 1
     let objectsPerPage = 10
-    var loadedAll = false
+    var loadedAllSpeakers = false
+    var loadedAllAttendees = false
     var isAttendeesView = false;
     var isSpeakerView = false;
     
     public func attendeesListViewLoad() {
         isAttendeesView = true
         isSpeakerView = false;
-        getAttendees()
+        if (pageAttendees == 1) {
+            getAttendees()
+        }
     }
 
     public func speakersListViewLoad() {
         isAttendeesView = false
         isSpeakerView = true;
-        getSpeakers()
+        if (pageSpeakers == 1) {
+            getSpeakers()
+        }
+    }
+
+    public func attendeesListViewWillAppear() {
+        isAttendeesView = true
+        isSpeakerView = false;
+    }
+
+    public func speakersListViewWillAppear() {
+        isAttendeesView = false
+        isSpeakerView = true;
     }
     
     func getAttendees() {
         attendeesListViewController.showActivityIndicator()
 
-        interactor.getAttendeesByFilter(attendeesListViewController.searchTerm, page: page, objectsPerPage: objectsPerPage) { attendeesPage, error in
+        interactor.getAttendeesByFilter(attendeesListViewController.searchTerm, page: pageAttendees, objectsPerPage: objectsPerPage) { attendeesPage, error in
             defer { self.attendeesListViewController.hideActivityIndicator() }
 
             if (error != nil) {
@@ -55,15 +73,15 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
             
             self.attendees.appendContentsOf(attendeesPage!)
             self.attendeesListViewController.reloadData()
-            self.loadedAll = attendeesPage!.count < self.objectsPerPage
-            self.page++
+            self.loadedAllAttendees = attendeesPage!.count < self.objectsPerPage
+            self.pageAttendees++
         }
     }
     
     func getSpeakers() {
         speakersListViewController.showActivityIndicator()
 
-        interactor.getSpeakersByFilter(speakersListViewController.searchTerm, page: page, objectsPerPage: objectsPerPage) { speakersPage, error in
+        interactor.getSpeakersByFilter(speakersListViewController.searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage) { speakersPage, error in
             defer { self.speakersListViewController.hideActivityIndicator() }
 
             if (error != nil) {
@@ -73,8 +91,8 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
             
             self.speakers.appendContentsOf(speakersPage!)
             self.speakersListViewController.reloadData()
-            self.loadedAll = speakersPage!.count < self.objectsPerPage
-            self.page++            
+            self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
+            self.pageSpeakers++
         }
     }
     
@@ -85,7 +103,7 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
             cell.title = person.title
             cell.picUrl = person.pictureUrl
             
-            if (index == (self.speakers.count-1) && !self.loadedAll) {
+            if (index == (self.speakers.count-1) && !self.loadedAll()) {
                 self.getSpeakers()
             }
         })
@@ -103,5 +121,9 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
         else {
             wireframe.showSpeakerProfile(person.id)
         }
+    }
+    
+    func loadedAll() -> Bool {
+        return self.isAttendeesView ? loadedAllAttendees : loadedAllSpeakers
     }
 }

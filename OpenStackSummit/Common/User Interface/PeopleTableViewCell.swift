@@ -39,7 +39,6 @@ class PeopleTableViewCell: UITableViewCell , IPeopleTableViewCell {
             return picUrlInternal
         }
         set {
-            //picUrlInternal = newValue
             picUrlInternal = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
             if (!picUrlInternal.isEmpty) {
                 pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
