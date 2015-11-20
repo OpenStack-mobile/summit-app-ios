@@ -27,6 +27,11 @@ class PeopleListViewController: UIViewController, UITableViewDelegate, UITableVi
     let cellIdentifier = "peopleTableViewCell"
     @IBOutlet weak var peopleListView: PeopleListView!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        peopleListView.tableView.setContentOffset(CGPointZero, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleListView.tableView.registerNib(UINib(nibName: "PeopleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)

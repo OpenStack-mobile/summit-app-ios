@@ -91,7 +91,6 @@
 		CA89131A1B97A083002E9A95 /* MemberProfileDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8913191B97A083002E9A95 /* MemberProfileDTOAssembler.swift */; };
 		CA89131C1B97A769002E9A95 /* ScheduleItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89131B1B97A769002E9A95 /* ScheduleItemDTO.swift */; };
 		CA89131E1B97A784002E9A95 /* ScheduleItemDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89131D1B97A784002E9A95 /* ScheduleItemDTOAssembler.swift */; };
-		CA894AA81BD91CC6005DE469 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */; };
 		CA894AAA1BD92EFE005DE469 /* VenueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA894AA91BD92EFE005DE469 /* VenueDTO.swift */; };
 		CA894AAC1BD931BE005DE469 /* VenueDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA894AAB1BD931BE005DE469 /* VenueDTOAssembler.swift */; };
 		CA894AAE1BD937AB005DE469 /* VenueRoomDTOAssemblerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA894AAD1BD937AB005DE469 /* VenueRoomDTOAssemblerMock.swift */; };
@@ -400,7 +399,6 @@
 		CA8913191B97A083002E9A95 /* MemberProfileDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDTOAssembler.swift; sourceTree = "<group>"; };
 		CA89131B1B97A769002E9A95 /* ScheduleItemDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleItemDTO.swift; sourceTree = "<group>"; };
 		CA89131D1B97A784002E9A95 /* ScheduleItemDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleItemDTOAssembler.swift; sourceTree = "<group>"; };
-		CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonTableViewCell.swift; path = "User Interface/PersonTableViewCell.swift"; sourceTree = "<group>"; };
 		CA894AA91BD92EFE005DE469 /* VenueDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDTO.swift; sourceTree = "<group>"; };
 		CA894AAB1BD931BE005DE469 /* VenueDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDTOAssembler.swift; sourceTree = "<group>"; };
 		CA894AAD1BD937AB005DE469 /* VenueRoomDTOAssemblerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDTOAssemblerMock.swift; sourceTree = "<group>"; };
@@ -663,7 +661,6 @@
 				CADF032A1BCEFC4D00358DCD /* ScheduleViewController.swift */,
 				CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */,
 				CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */,
-				CA894AA71BD91CC6005DE469 /* PersonTableViewCell.swift */,
 				CAE42A521BE2466200980315 /* BasePresenter.swift */,
 				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
 				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
@@ -1994,7 +1991,6 @@
 				CAD542341B8B890A00A9791A /* Session.swift in Sources */,
 				CAD337181BB19329005B2953 /* BackgroundActivityManager.swift in Sources */,
 				CACEEE691B8E3822007DD936 /* VenueTrigger.swift in Sources */,
-				CA894AA81BD91CC6005DE469 /* PersonTableViewCell.swift in Sources */,
 				CAE643521BCDA32F005E530B /* NamedDTO.swift in Sources */,
 				CAF2AA471B8271C100D8E595 /* LocationDeserializer.swift in Sources */,
 				CA3DA3E61B90F81400201496 /* MemberRemoteDataStore.swift in Sources */,
