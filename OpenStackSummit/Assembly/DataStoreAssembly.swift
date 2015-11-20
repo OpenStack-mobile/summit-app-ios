@@ -253,7 +253,11 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("summitAttendeeRemoteDataStore", with: self.summitAttendeeRemoteDataStore())
         }
     }
-    
+
+    public dynamic func presentationSpeakerDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(PresentationSpeakerDataStore.self)
+    }
+
     // MARK: Remote data stores
     public dynamic func summitRemoteDataStore() -> AnyObject {
         
