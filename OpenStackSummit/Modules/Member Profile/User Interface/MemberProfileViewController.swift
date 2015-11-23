@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import XLPagerTabStrip
 
 @objc
 public protocol IMemberProfileViewController {
@@ -24,7 +25,7 @@ public protocol IMemberProfileViewController {
     func hideActivityIndicator()
 }
 
-class MemberProfileViewController: UIViewController, IMemberProfileViewController {
+class MemberProfileViewController: UIViewController, IMemberProfileViewController, XLPagerTabStripChildItem {
     
     var name: String!{
         get {
@@ -121,5 +122,9 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     
     override func viewWillDisappear(animated: Bool) {
         presenter.viewUnload()
+    }
+    
+    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
+        return "Profile"
     }
 }

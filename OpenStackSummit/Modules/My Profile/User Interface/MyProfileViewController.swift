@@ -13,13 +13,15 @@ class MyProfileViewController: RevealTabStripViewController {
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
     var personalScheduleViewController: PersonalScheduleViewController!
+    var memberProfileViewController: MemberProfileViewController!
+    var feedbackGivenListViewController: FeedbackGivenListViewController!
     
     override func viewWillAppear(animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "My Profile"
+        navigationController?.navigationBar.topItem?.title = "MY PROFILE"
     }
     
     override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
-        return [personalScheduleViewController]
+        return [personalScheduleViewController, memberProfileViewController, feedbackGivenListViewController]
     }
     
 }
