@@ -12,10 +12,17 @@ import UIKit
 public protocol IGeneralScheduleFilterPresenter {
     func viewLoad()
     func getSectionCount() -> Int
+    func getSummitTypeItemCount() -> Int
+    func getEventTypeItemCount() -> Int
     func getSectionItemCount(section: Int) -> Int
-    func buildFilterCell(cell: IGeneralScheduleFilterTableViewCell, section: Int, index: Int)
-    func getSectionTitle(section: Int) -> String
-    func toggleSelection(cell: IGeneralScheduleFilterTableViewCell, section: Int, index: Int)
+    func toggleSelectionSummitType(cell: IGeneralScheduleFilterTableViewCell, index: Int)
+    func toggleSelectionEventType(cell: IGeneralScheduleFilterTableViewCell, index: Int)
+    func buildSummitTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int)
+    func buildEventTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int)
+    func getTagsBySearchTerm(searchTerm: String) -> [String]
+    func addTag(tag: String) -> Bool
+    func removeTag(tag: String)
+    func removeAllTags()
 }
 
 public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPresenter {
@@ -24,6 +31,7 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     var viewController: IGeneralScheduleFilterViewController!
     var session: ISession!
     var scheduleFilter: ScheduleFilter!
+    var filteredTags = [String]()
     
     public init(session: ISession, genereralScheduleFilterInteractor: IGeneralScheduleFilterInteractor) {
         self.session = session
@@ -48,7 +56,6 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
             for summitType in summitTypes {
                 filterSectionItem = createSectionItem(summitType.id, name: summitType.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
-                scheduleFilter.selections[filterSection.type]!.append(filterSectionItem.id)
 
             }
             scheduleFilter.filterSections.append(filterSection)
@@ -60,7 +67,6 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
             for eventType in eventTypes {
                 filterSectionItem = createSectionItem(eventType.id, name: eventType.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
-                scheduleFilter.selections[filterSection.type]!.append(filterSectionItem.id)
             }
             scheduleFilter.filterSections.append(filterSection)
             
@@ -71,12 +77,19 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
             for track in summitTracks {
                 filterSectionItem = createSectionItem(track.id, name: track.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
-                scheduleFilter.selections[filterSection.type]!.append(filterSectionItem.id)
             }
             scheduleFilter.filterSections.append(filterSection)
+
+            scheduleFilter.selections[FilterSectionType.Tag] = [Int]()
         }
 
         viewController.reloadFilters()
+        
+        viewController.removeAllTags()
+        for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
+            viewController.addTag(tag as! String)
+        }
+        
     }
   
     private func createSectionItem(id: Int, name: String, type: FilterSectionType) -> FilterSectionItem {
@@ -89,7 +102,7 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
         if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
             for selectedId in filterSelectionsForType {
-                if (id == selectedId) {
+                if (id == selectedId as! Int) {
                     return true
                 }
             }
@@ -101,34 +114,91 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
         return scheduleFilter.filterSections[section].items.count
     }
     
+    public func getSummitTypeItemCount() -> Int {
+        return scheduleFilter.filterSections[0].items.count
+    }
+    
+    public func getEventTypeItemCount() -> Int {
+        return scheduleFilter.filterSections[1].items.count
+    }
+    
     public func getSectionCount() -> Int {
         return scheduleFilter.filterSections.count
     }
-    
-    public func buildFilterCell(cell: IGeneralScheduleFilterTableViewCell, section: Int, index: Int) {
-        let filterSection = scheduleFilter.filterSections[section]
+
+    public func buildFilterCell(cell: IGeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {
         let filterItem = filterSection.items[index]
         
         cell.name = filterItem.name
         cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.id)
     }
-    
-    public func getSectionTitle(section: Int) -> String {
-        return scheduleFilter.filterSections[section].name
+
+    public func buildSummitTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
+        let filterSection = scheduleFilter.filterSections[0]
+        buildFilterCell(cell, filterSection: filterSection, index: index)
+    }
+
+    public func buildEventTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
+        let filterSection = scheduleFilter.filterSections[1]
+        buildFilterCell(cell, filterSection: filterSection, index: index)
     }
     
-    public func toggleSelection(cell: IGeneralScheduleFilterTableViewCell, section: Int, index: Int) {
-        let filterSection = scheduleFilter.filterSections[section]
+    public func toggleSelectionSummitType(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
+        let filterSection = scheduleFilter.filterSections[0]
+        toggleSelection(cell, filterSection: filterSection, index: index)
+    }
+    
+    public func toggleSelectionEventType(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
+        let filterSection = scheduleFilter.filterSections[1]
+        toggleSelection(cell, filterSection: filterSection, index: index)
+    }
+    
+    func toggleSelection(cell: IGeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {
         let filterItem = filterSection.items[index]
-
+        
         if (isItemSelected(filterSection.type, id: filterItem.id)) {
-            let index = scheduleFilter.selections[filterSection.type]!.indexOf(filterItem.id)
+            let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.id }
             scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
             cell.isOptionSelected = false
         }
         else {
             scheduleFilter.selections[filterSection.type]!.append(filterItem.id)
             cell.isOptionSelected = true
-        }        
+        }
+    }
+    
+    public func getTagsBySearchTerm(searchTerm: String) -> [String] {
+        if searchTerm.isEmpty {
+            return []
+        }
+        
+        dispatch_sync(dispatch_get_main_queue(),{
+            self.filteredTags = self.interactor.getTagsBySearchTerm(searchTerm)
+        })
+        return self.filteredTags
+    }
+    
+    public func addTag(tag: String) -> Bool {
+        let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        if (escapedTag == "" || scheduleFilter.selections[FilterSectionType.Tag]?.indexOf{ $0 as! String == escapedTag } != nil) {
+            return false
+        }
+
+        scheduleFilter.selections[FilterSectionType.Tag]!.append(escapedTag)
+        return true
+    }
+    
+    public func removeAllTags() {
+        scheduleFilter.selections[FilterSectionType.Tag]!.removeAll()
+    }
+
+    public func removeTag(tag: String) {
+        let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        if (escapedTag == "") {
+            return
+        }
+        
+        let index = scheduleFilter.selections[FilterSectionType.Tag]!.indexOf { $0 as! String == escapedTag }
+        scheduleFilter.selections[FilterSectionType.Tag]!.removeAtIndex(index!)
     }
 }

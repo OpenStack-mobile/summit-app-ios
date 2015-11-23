@@ -9,6 +9,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import SwiftSpinner
 
 class GeneralScheduleViewController: ScheduleViewController, XLPagerTabStripChildItem {
     
@@ -21,8 +22,8 @@ class GeneralScheduleViewController: ScheduleViewController, XLPagerTabStripChil
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.viewLoad()
     }
     
@@ -30,6 +31,14 @@ class GeneralScheduleViewController: ScheduleViewController, XLPagerTabStripChil
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    override func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }    
     
     func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
         return "Schedule"

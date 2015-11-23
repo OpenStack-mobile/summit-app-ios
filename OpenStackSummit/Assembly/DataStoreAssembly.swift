@@ -258,6 +258,10 @@ public class DataStoreAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(PresentationSpeakerDataStore.self)
     }
 
+    public dynamic func tagDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(TagDataStore.self)
+    }
+    
     // MARK: Remote data stores
     public dynamic func summitRemoteDataStore() -> AnyObject {
         

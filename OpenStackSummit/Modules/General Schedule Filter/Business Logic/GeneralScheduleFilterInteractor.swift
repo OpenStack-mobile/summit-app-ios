@@ -11,9 +11,10 @@ import RealmSwift
 
 @objc
 public protocol IGeneralScheduleFilterInteractor {
-    func getSummitTypes() -> [SummitType]
-    func getEventTypes() -> [EventType]
-    func getSummitTracks() -> [Track]
+    func getSummitTypes() -> [NamedDTO]
+    func getEventTypes() -> [NamedDTO]
+    func getSummitTracks() -> [NamedDTO]
+    func getTagsBySearchTerm(searchTerm: String) -> [String]
 }
 
 public class GeneralScheduleFilterInteractor: NSObject {
@@ -21,16 +22,43 @@ public class GeneralScheduleFilterInteractor: NSObject {
     var summitTypeDataStore: ISummitTypeDataStore!
     var eventTypeDataStore: IEventTypeDataStore!
     var trackDataStore: ITrackDataStore!
+    var tagDataStore: ITagDataStore!
+    var namedDTOAssembler: NamedDTOAssembler!
     
-    public func getSummitTypes() -> [SummitType] {
-        return summitTypeDataStore.getAllLocal()
+    public func getSummitTypes() -> [NamedDTO] {
+        let entities = summitTypeDataStore.getAllLocal()
+        return createDTOs(entities)
     }
    
-    public func getEventTypes() -> [EventType] {
-        return eventTypeDataStore.getAllLocal()
+    public func getEventTypes() -> [NamedDTO] {
+        let entities = eventTypeDataStore.getAllLocal()
+        return createDTOs(entities)
     }
     
-    public func getSummitTracks() -> [Track] {
-        return trackDataStore.getAllLocal()
+    public func getSummitTracks() -> [NamedDTO] {
+        let entities = trackDataStore.getAllLocal()
+        return createDTOs(entities)
+    }
+
+    public func getTags() -> [NamedDTO] {
+        let entities = tagDataStore.getAllLocal()
+        return createDTOs(entities)
+    }
+    
+    public func getTagsBySearchTerm(searchTerm: String) -> [String] {
+        let entities = tagDataStore.getTagsBySearchTerm(searchTerm)
+        return Array(
+            Set(entities.map { $0.name.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) }) // unique values trimming tags
+        ).sort()
+    }
+    
+    public func createDTOs(entities: [NamedEntity]) -> [NamedDTO]{
+        var dtos: [NamedDTO] = []
+        var dto: NamedDTO
+        for entity in entities {
+            dto = namedDTOAssembler.createDTO(entity)
+            dtos.append(dto)
+        }
+        return dtos
     }
 }

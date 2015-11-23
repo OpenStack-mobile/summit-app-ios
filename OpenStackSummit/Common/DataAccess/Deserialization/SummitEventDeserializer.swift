@@ -77,6 +77,13 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
                 }
             }
             
+            deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
+            var tag : Tag
+            for (_, tagsJSON) in json["tags"] {
+                tag = try deserializer.deserialize(tagsJSON) as! Tag
+                summitEvent.tags.append(tag)
+            }
+            
             let trackId = json["track_id"]
             if (trackId.int != nil) {
                 deserializer = deserializerFactory.create(DeserializerFactoryType.Presentation)

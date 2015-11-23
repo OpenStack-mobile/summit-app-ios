@@ -26,6 +26,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     var internalInteractor: IScheduleInteractor!
     var internalViewController: IScheduleViewController!
     var internalWireframe: IScheduleWireframe!
+    var useFilter = false
     
     public override init() {
         super.init()
@@ -113,16 +114,18 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
             let startDate = viewController.selectedDate.mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
             let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
             
-            let eventTypeSelections: [Int]? = self.scheduleFilter.areAllSelectedForType(FilterSectionType.EventType) ? nil : self.scheduleFilter.selections[FilterSectionType.EventType]
-            let summitTypeSelections = self.scheduleFilter.areAllSelectedForType(FilterSectionType.SummitType) ? nil : self.scheduleFilter.selections[FilterSectionType.SummitType]
-            let trackSelections = self.scheduleFilter.areAllSelectedForType(FilterSectionType.Track) ? nil : self.scheduleFilter.selections[FilterSectionType.Track]
+            let eventTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int] : nil
+            let summitTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int] : nil
+            let trackSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Track] as? [Int] : nil
+            let tagSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Tag] as? [String] : nil
             
             self.dayEvents = interactor.getScheduleEvents(
                 startDate,
                 endDate: endDate,
                 eventTypes: eventTypeSelections,
                 summitTypes: summitTypeSelections,
-                tracks: trackSelections
+                tracks: trackSelections,
+                tags: tagSelections
             )
             viewController.reloadSchedule()
         })

@@ -60,8 +60,8 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.presentation = Presentation()
         event.presentation?.speakers.append(speaker)
         event.presentation?.track = track
-        event.presentation?.tags.append(tag1)
-        event.presentation?.tags.append(tag2)
+        event.tags.append(tag1)
+        event.tags.append(tag2)
         event.venueRoom = venueRoom
         
         let speakerDTO = PresentationSpeakerDTO()

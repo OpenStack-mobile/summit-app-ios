@@ -7,68 +7,154 @@
 //
 
 import UIKit
+import MLPAutoCompleteTextField
+import AMTagListView
 
 @objc
 public protocol IGeneralScheduleFilterViewController {
     var presenter: IGeneralScheduleFilterPresenter! { get set }
     var navigationController: UINavigationController? { get }
-
+    var tags: NSMutableArray! { get }
     func reloadFilters()
+    func addTag(tag: String)
+    func removeAllTags()
 }
 
-class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFilterViewController, UITableViewDelegate, UITableViewDataSource {
+class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFilterViewController, UITableViewDelegate, UITableViewDataSource, MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource {
     var presenter : IGeneralScheduleFilterPresenter!
+    
+    var tags: NSMutableArray {
+        get {
+            return tagListView.tags
+        }
+    }
+    
     var cellIdentifier = "generalScheduleFilterTableViewCell"
     @IBOutlet weak var filterTable: UITableView!
+    @IBOutlet weak var summitTypeTableView: UITableView!
+    @IBOutlet weak var eventTypeTableView: UITableView!
+    @IBOutlet weak var summitTypeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventTypeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagTextView: MLPAutoCompleteTextField!
+    @IBOutlet weak var tagListView: AMTagListView!
+    @IBOutlet weak var clearTagsButton: UIButton!
+    @IBOutlet weak var tagListViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        summitTypeTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        eventTypeTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        clearTagsButton.layer.cornerRadius = 10
+        tagListView.delegate = self
+        AMTagView.appearance().tagColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
+        AMTagView.appearance().innerTagColor = UIColor(red: 53/255, green: 84/255, blue: 121/255, alpha: 1.0)
+        tagTextView.autoCompleteDelegate = self
+        tagTextView.autoCompleteDataSource = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "removeTag:",
+            name: AMTagViewNotification,
+            object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func reloadFilters() {
-        filterTable.delegate = self
-        filterTable.dataSource = self
-        filterTable.reloadData()
+        summitTypeTableView.delegate = self
+        summitTypeTableView.dataSource = self
+        summitTypeTableView.reloadData()
+        eventTypeTableView.delegate = self
+        eventTypeTableView.dataSource = self
+        eventTypeTableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return presenter.getSectionCount();
+        return 1;
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getSectionItemCount(section);
+        var count = 0
+        if tableView == summitTypeTableView {
+            count = presenter.getSummitTypeItemCount()
+            summitTypeHeightConstraint.constant = CGFloat(45 * count)
+        }
+        else if tableView == eventTypeTableView {
+            count = presenter.getEventTypeItemCount();
+            eventTypeHeightConstraint.constant = CGFloat(45 * count)
+        }
+        tableView.updateConstraints()
+        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GeneralScheduleFilterTableViewCell
-        presenter.buildFilterCell(cell, section: indexPath.section, index: indexPath.row)
+
+        if tableView == summitTypeTableView {
+            presenter.buildSummitTypeFilterCell(cell, index: indexPath.row)
+        }
+        else if tableView == eventTypeTableView {
+            presenter.buildEventTypeFilterCell(cell, index: indexPath.row)
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! GeneralScheduleFilterTableViewCell
-        self.presenter.toggleSelection(cell, section: indexPath.section, index: indexPath.row)
+        
+        if tableView == summitTypeTableView {
+            presenter.toggleSelectionSummitType(cell, index: indexPath.row)
+        }
+        else if tableView == eventTypeTableView {
+            presenter.toggleSelectionEventType(cell, index: indexPath.row)
+        }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return presenter.getSectionTitle(section);
+    func autoCompleteTextField(textField: MLPAutoCompleteTextField!, possibleCompletionsForString string: String!) -> [AnyObject]!  {
+        return presenter.getTagsBySearchTerm(string)
     }
+    
+    func autoCompleteTextField(textField: MLPAutoCompleteTextField!, didSelectAutoCompleteString selectedString: String!, withAutoCompleteObject selectedObject: MLPAutoCompletionObject!, forRowAtIndexPath indexPath: NSIndexPath!) {
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if presenter.addTag(selectedString) {
+            tagListView.addTag(selectedString)
+            tagTextView.text = ""
+            resizeTagList(tagListView.contentSize.height)
+        }
     }
-    */
-
+    
+    func addTag(tag: String) {
+        tagListView.addTag(tag)
+        resizeTagList(tagListView.contentSize.height)
+    }
+    
+    func removeTag(notification: NSNotification) {
+        let tagView = notification.object as! AMTagView
+        presenter.removeTag(tagView.tagText!)
+        tagListView.removeTag(tagView)
+        resizeTagList(tagListView.contentSize.height)
+    }
+    
+    func removeAllTags() {
+        tagListView.removeAllTags()
+    }
+    
+    @IBAction func willClearAllTags(sender: AnyObject) {
+        presenter.removeAllTags();
+        tagListView.removeAllTags()
+        resizeTagList(tagListView.contentSize.height)
+        tagTextView.text = ""
+    }
+    
+    func resizeTagList(height: CGFloat) {
+        tagListViewHeightConstraint.constant = height
+        tagListView.updateConstraints()
+    }
 }

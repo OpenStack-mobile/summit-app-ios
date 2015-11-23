@@ -16,6 +16,8 @@ pod 'SwiftSpinner'
 pod 'GoogleMaps'
 pod 'Cosmos', '~> 1.1'
 pod 'AHKActionSheet'
+pod 'MLPAutoCompleteTextField'
+pod 'AMTagListView'
 
 target 'OpenStackSummitTests' do
     pod 'Mockingjay'
