@@ -2,7 +2,7 @@
 //  GeneralScheduleFilterTableViewCell.swift
 //  OpenStackSummit
 //
-//  Created by Claudio on 10/26/15.
+//  Created by Claudio on 11/20/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
@@ -26,18 +26,24 @@ class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilte
     
     var isOptionSelected: Bool {
         get {
-            return !selectedLabel.hidden
+            return !optionSelectedImage.hidden
         }
         set {
-            selectedLabel.hidden = !newValue
+            optionSelectedImage.hidden = !newValue
+            nameLabel.font = newValue ? UIFont.boldSystemFontOfSize(15) : UIFont.systemFontOfSize(15)
+            nameLabel.textColor = newValue ? UIColor.whiteColor() : UIColor.lightGrayColor()
         }
     }
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var selectedLabel: UILabel!
+    @IBOutlet weak var optionSelectedImage: UIImageView!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = contentView.backgroundColor
+        selectedBackgroundView = bgColorView
         // Initialization code
     }
     
@@ -46,4 +52,4 @@ class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilte
         
         // Configure the view for the selected state
     }
-}    
+}

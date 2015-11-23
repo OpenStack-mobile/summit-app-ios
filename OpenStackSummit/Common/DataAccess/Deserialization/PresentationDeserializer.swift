@@ -29,14 +29,7 @@ public class PresentationDeserializer: NSObject, IDeserializer {
             presentationSpeaker = try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
             presentation.speakers.append(presentationSpeaker)
         }
-        
-        deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
-        var tag : Tag
-        for (_, tagsJSON) in json["tags"] {
-            tag = try deserializer.deserialize(tagsJSON) as! Tag
-            presentation.tags.append(tag)
-        }
-        
+                
         return presentation
     }
 }

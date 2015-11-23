@@ -34,10 +34,10 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         eventDetailDTO.allowFeedback = event.allowFeedback
         eventDetailDTO.venueId = event.venue?.id
         eventDetailDTO.venueRoomId = event.venueRoom?.id
+        eventDetailDTO.tags = getTags(event)
         
         if let presentation = event.presentation {
             eventDetailDTO.track = event.presentation!.track.name
-            eventDetailDTO.tags = getTags(presentation)
             
             var speakerDTO: PresentationSpeakerDTO
             for speaker in presentation.speakers {
@@ -48,10 +48,10 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         return eventDetailDTO
     }
     
-    public func getTags(presentation: Presentation) -> String {
+    public func getTags(event: SummitEvent) -> String {
         var tags = ""
         var separator = ""
-        for tag in presentation.tags {
+        for tag in event.tags {
             tags += separator + tag.name
             separator = ", "
         }

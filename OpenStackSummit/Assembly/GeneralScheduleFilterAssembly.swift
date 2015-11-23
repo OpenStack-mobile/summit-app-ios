@@ -12,6 +12,7 @@ import Typhoon
 public class GeneralScheduleFilterAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var dataStoreAssembly: DataStoreAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
 
     dynamic func generalScheduleFilterWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleFilterWireframe.self) {
@@ -39,6 +40,8 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
             definition.injectProperty("summitTypeDataStore", with: self.dataStoreAssembly.summitTypeDataStore())
             definition.injectProperty("eventTypeDataStore", with: self.dataStoreAssembly.eventTypeDataStore())
             definition.injectProperty("trackDataStore", with: self.dataStoreAssembly.trackDataStore())
+            definition.injectProperty("tagDataStore", with: self.dataStoreAssembly.tagDataStore())
+            definition.injectProperty("namedDTOAssembler", with: self.dtoAssemblersAssembly.namedDTOAssembler())
         }
     }
         
