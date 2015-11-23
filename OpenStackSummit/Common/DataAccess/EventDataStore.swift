@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IEventDataStore {
     func getByIdLocal(id: Int) -> SummitEvent?
-    func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?)->[SummitEvent]
+    func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?)->[SummitEvent]
     func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void)
     func getBySearchTerm(searchTerm: String!)->[SummitEvent]
 }
@@ -27,7 +27,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         return super.getByIdLocal(id)
     }
     
-    public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?)->[SummitEvent]{
+    public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?)->[SummitEvent]{
         var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
         if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
@@ -41,7 +41,17 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
                 events = events.filter("ANY summitTypes.id = %@", summitTypeId)
             }
         }
-    
+
+        if (tags != nil && tags!.count > 0) {
+            var tagsFilter = ""
+            var separator = ""
+            for tag in tags! {
+                tagsFilter += "\(separator)ANY tags.name = '\(tag)'"
+                separator = " OR "
+            }
+            events = events.filter(tagsFilter)
+        }
+        
         return events.map{$0}
     }
     

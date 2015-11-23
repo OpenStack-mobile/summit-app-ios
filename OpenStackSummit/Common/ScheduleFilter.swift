@@ -9,7 +9,7 @@
 import UIKit
 
 public class ScheduleFilter: NSObject {
-    var selections = Dictionary<FilterSectionType, [Int]>()
+    var selections = Dictionary<FilterSectionType, [AnyObject]>()
     var filterSections = [FilterSection]()
 
     func areAllSelectedForType(type: FilterSectionType) -> Bool {
