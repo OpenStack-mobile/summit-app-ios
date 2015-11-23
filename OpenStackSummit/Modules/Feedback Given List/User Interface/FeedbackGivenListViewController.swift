@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
 @objc
 public protocol IFeedbackGivenListViewController {
     func releoadList()
 }
 
-class FeedbackGivenListViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, IFeedbackGivenListViewController {
+class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFeedbackGivenListViewController, XLPagerTabStripChildItem {
     
     let cellIdentifier = "feedbackGivenTableViewCell"
     @IBOutlet weak var tableView: UITableView!
@@ -52,5 +53,9 @@ class FeedbackGivenListViewController: RevealViewController, UITableViewDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FeedbackGivenTableViewCell
         presenter.buildFeedbackCell(cell, index: indexPath.row)
         return cell
+    }
+    
+    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
+        return "Feedback"
     }
 }
