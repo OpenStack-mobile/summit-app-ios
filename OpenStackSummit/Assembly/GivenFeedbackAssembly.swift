@@ -33,11 +33,14 @@ public class FeedbackGivenListAssembly: TyphoonAssembly {
     }
     
     dynamic func feedbackGivenListViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(FeedbackGivenListViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.feedbackGivenListPresenter())
-        }
+            factoryMethod.injectParameterWith("FeedbackGivenListViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.feedbackGivenListPresenter())
+                definition.scope = TyphoonScope.WeakSingleton
+        })
     }
-
 }
