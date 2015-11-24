@@ -51,8 +51,13 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
         }
         set {
             bioHTML = newValue
-            let attrStr = try! NSAttributedString(data: bioHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            bioLabel.attributedText = attrStr
+            let attrStr = try! NSMutableAttributedString(data: bioHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+
+            let range = NSMakeRange(0, attrStr.length)
+            
+            attrStr.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: range)
+            
+            bioTextView.attributedText = attrStr
         }
     }
     
@@ -81,7 +86,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
-    @IBOutlet weak var bioLabel: UILabel!
+    @IBOutlet weak var bioTextView: UITextView!
     
     var presenter: IMemberProfilePresenter!
     private var picUrlInternal: String!
