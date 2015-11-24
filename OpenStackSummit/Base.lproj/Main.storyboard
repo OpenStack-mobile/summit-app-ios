@@ -1468,37 +1468,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msb-Tm-9ov">
-                                <rect key="frame" x="108" y="102" width="292" height="26"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvz-dB-IZd">
+                                <rect key="frame" x="20" y="40" width="100" height="100"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cex-1A-6DJ">
-                                <rect key="frame" x="108" y="78" width="196" height="29"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zvz-dB-IZd">
-                                <rect key="frame" x="20" y="70" width="70" height="70"/>
-                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="4J2-ca-cYq"/>
+                                    <constraint firstAttribute="height" constant="100" id="N8k-DJ-KMJ"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piQ-yL-UJX">
-                                <rect key="frame" x="20" y="146" width="370" height="272"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPJ-c8-wd4">
+                                <rect key="frame" x="136" y="55" width="444" height="71"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cex-1A-6DJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="444" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msb-Tm-9ov">
+                                        <rect key="frame" x="0.0" y="26" width="444" height="18"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="71" id="0Y7-aD-kYb"/>
+                                    <constraint firstItem="Msb-Tm-9ov" firstAttribute="leading" secondItem="lPJ-c8-wd4" secondAttribute="leading" id="6pn-3s-Oe5"/>
+                                    <constraint firstItem="cex-1A-6DJ" firstAttribute="top" secondItem="lPJ-c8-wd4" secondAttribute="top" id="72n-iJ-ktT"/>
+                                    <constraint firstItem="cex-1A-6DJ" firstAttribute="leading" secondItem="lPJ-c8-wd4" secondAttribute="leading" id="LQW-tf-AmB"/>
+                                    <constraint firstItem="cex-1A-6DJ" firstAttribute="width" secondItem="lPJ-c8-wd4" secondAttribute="width" id="OE7-F2-pIk"/>
+                                    <constraint firstItem="Msb-Tm-9ov" firstAttribute="top" secondItem="cex-1A-6DJ" secondAttribute="bottom" constant="5" id="ZZi-n9-Jul"/>
+                                    <constraint firstItem="Msb-Tm-9ov" firstAttribute="width" secondItem="lPJ-c8-wd4" secondAttribute="width" id="bRO-Wx-C9X"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1ac-im-3Wc">
+                                <rect key="frame" x="20" y="160" width="560" height="440"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lPJ-c8-wd4" firstAttribute="leading" secondItem="zvz-dB-IZd" secondAttribute="trailing" constant="16" id="1f8-6k-ZbV"/>
+                            <constraint firstItem="lPJ-c8-wd4" firstAttribute="centerY" secondItem="zvz-dB-IZd" secondAttribute="centerY" id="D7U-iQ-itb"/>
+                            <constraint firstItem="1ac-im-3Wc" firstAttribute="top" secondItem="zvz-dB-IZd" secondAttribute="bottom" constant="20" id="Ffn-K4-O8B"/>
+                            <constraint firstItem="zvz-dB-IZd" firstAttribute="leading" secondItem="Yzi-7r-4mG" secondAttribute="leadingMargin" id="UBE-SB-nRw"/>
+                            <constraint firstItem="lPJ-c8-wd4" firstAttribute="trailing" secondItem="Yzi-7r-4mG" secondAttribute="trailingMargin" id="cZw-Ij-aYm"/>
+                            <constraint firstItem="zvz-dB-IZd" firstAttribute="top" secondItem="GRa-j9-2r1" secondAttribute="bottom" constant="20" id="fg1-s5-5Ll"/>
+                            <constraint firstItem="1ac-im-3Wc" firstAttribute="trailing" secondItem="Yzi-7r-4mG" secondAttribute="trailingMargin" id="h2L-xB-nu6"/>
+                            <constraint firstItem="1ac-im-3Wc" firstAttribute="bottom" secondItem="3co-0c-0wh" secondAttribute="top" id="pd9-tb-PBV"/>
+                            <constraint firstItem="1ac-im-3Wc" firstAttribute="leading" secondItem="Yzi-7r-4mG" secondAttribute="leadingMargin" id="w5e-RF-YWy"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="bioLabel" destination="piQ-yL-UJX" id="jz7-IY-gka"/>
+                        <outlet property="bioTextView" destination="1ac-im-3Wc" id="YAs-lF-Dw6"/>
                         <outlet property="nameLabel" destination="cex-1A-6DJ" id="cTH-08-XaM"/>
                         <outlet property="pictureImageView" destination="zvz-dB-IZd" id="Zf4-hX-qFW"/>
                         <outlet property="titleLabel" destination="Msb-Tm-9ov" id="2Aq-IP-sAP"/>
