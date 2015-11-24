@@ -9,14 +9,14 @@
 import UIKit
 
 @objc
-public protocol IMemberProfilePresenter: IBasePresenter {
+public protocol IMemberProfilePresenter {
     var speakerId: Int { get set }
     var attendeeId: Int { get set }
     
     func viewLoad()
 }
 
-public class MemberProfilePresenter: BasePresenter, IMemberProfilePresenter {
+public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     
     var memberProfileWireframe: IMemberProfileWireframe!
     var interactor: IMemberProfileInteractor!
@@ -52,50 +52,32 @@ public class MemberProfilePresenter: BasePresenter, IMemberProfilePresenter {
     }
     
     func showSpeakerProfile() {
-        let operation = NSBlockOperation()
-        operation.addExecutionBlock({
-            dispatch_async(dispatch_get_main_queue(),{
-                if operation.cancelled {
-                    return
-                }
-                
-                self.viewController.showActivityIndicator()
-                self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
-                    self.showPersonProfile(speaker, error: error)
-                }
-            })
-        })
-        operationQueue.addOperation(operation)
+        self.viewController.showActivityIndicator()
+        self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
+            self.showPersonProfile(speaker, error: error)
+        }
     }
     
     func showAttendeeProfile() {
-        let operation = NSBlockOperation()
-        operation.addExecutionBlock({
-            dispatch_async(dispatch_get_main_queue(),{
-                if operation.cancelled {
-                    return
-                }
-                
-                self.viewController.showActivityIndicator()
-                self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
-                    self.showPersonProfile(attendee, error: error)
-                }
-            })
-        })
-        operationQueue.addOperation(operation)
+        self.viewController.showActivityIndicator()
+        self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
+            self.showPersonProfile(attendee, error: error)
+        }
     }
     
     func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
-        if (error != nil) {
-            self.viewController.handlerError(error!)
-            return
-        }
-        
-        self.viewController.name = person!.name
-        self.viewController.personTitle = person!.title
-        self.viewController.picUrl = person!.pictureUrl
-        self.viewController.bio = person!.bio
-        self.viewController.hideActivityIndicator()
+        dispatch_async(dispatch_get_main_queue(),{
+            if (error != nil) {
+                self.viewController.handlerError(error!)
+                return
+            }
+            
+            self.viewController.name = person!.name
+            self.viewController.personTitle = person!.title
+            self.viewController.picUrl = person!.pictureUrl
+            self.viewController.bio = person!.bio
+            self.viewController.hideActivityIndicator()
+        })
     }
     
     /*public func requestFriendship() {

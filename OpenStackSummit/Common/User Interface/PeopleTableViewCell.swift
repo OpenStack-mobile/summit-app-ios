@@ -58,7 +58,10 @@ class PeopleTableViewCell: UITableViewCell , IPeopleTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = contentView.backgroundColor
+        selectedBackgroundView = bgColorView
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
