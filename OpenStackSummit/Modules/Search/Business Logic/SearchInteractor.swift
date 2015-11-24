@@ -9,24 +9,23 @@
 import UIKit
 
 @objc
-public protocol ISearchInteractor {
+public protocol ISearchInteractor: IScheduleableInteractor {
     func getEventsBySearchTerm(searchTerm: String) -> [ScheduleItemDTO]
     func getTracksBySearchTerm(searchTerm: String) -> [TrackDTO]
     func getSpeakersBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
     func getAttendeesBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
 }
 
-public class SearchInteractor: NSObject, ISearchInteractor {
-    var eventDataStore: IEventDataStore!
+public class SearchInteractor: ScheduleableInteractor, ISearchInteractor {
     var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
     var trackDataStore: ITrackDataStore!
     var trackDTOAssembler: NamedDTOAssembler!
-    var presentationSpeakerRemoteDataStore: IPresentationSpeakerRemoteDataStore!
+    var presentationSpeakerDataStore: IPresentationSpeakerDataStore!
     var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
     var personDTOAssembler: PersonListItemDTOAssembler!
     
     public func getSpeakersBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
-        presentationSpeakerRemoteDataStore.getByFilter(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in
+        presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in
             self.getByFilterCallback(speakers, error: error, completionBlock: completionBlock)
         }
     }

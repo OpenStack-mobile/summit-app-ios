@@ -13,7 +13,6 @@ public protocol IEventDetailInteractor : IScheduleableInteractor {
     func getEventDetail(eventId: Int) -> EventDetailDTO
     func addEventToMySchedule(eventId: Int, completionBlock : (EventDetailDTO?, NSError?) -> Void)
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
-    func isMemberLoggedIn() -> Bool
     func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO?
 }
 
@@ -59,10 +58,6 @@ public class EventDetailInteractor: ScheduleableInteractor {
             
             completionBlock(dtos, error)
         }
-    }
-
-    public func isMemberLoggedIn() -> Bool {
-        return securityManager.isLoggedIn()
     }
     
     public func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO? {

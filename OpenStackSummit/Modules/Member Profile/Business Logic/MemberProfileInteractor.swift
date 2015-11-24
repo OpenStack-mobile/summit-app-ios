@@ -30,6 +30,7 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
             
             if (error != nil) {
                 completionBlock(nil, error)
+                return
             }
             
             let speakerDTO = self.presentationSpeakerDTOAssembler.createDTO(speaker!)
@@ -42,6 +43,7 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
             
             if (error != nil) {
                 completionBlock(nil, error)
+                return
             }
             
             let attendeeDTO = self.summitAttendeeDTOAssembler.createDTO(attendee!)

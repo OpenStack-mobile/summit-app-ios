@@ -121,7 +121,6 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     }
     
     override func viewWillDisappear(animated: Bool) {
-        presenter.viewUnload()
     }
     
     func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {

@@ -15,7 +15,6 @@ public protocol IScheduleInteractor : IScheduleableInteractor {
     func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
-    func isMemberLoggedIn() -> Bool
 }
 
 public class ScheduleInteractor: ScheduleableInteractor {
@@ -42,9 +41,5 @@ public class ScheduleInteractor: ScheduleableInteractor {
             dtos.append(scheduleItemDTO)
         }
         return dtos
-    }
-    
-    public func isMemberLoggedIn() -> Bool {
-        return securityManager.isLoggedIn()
     }
 }

@@ -15,9 +15,4 @@ public protocol IBasePresenter {
 
 public class BasePresenter: NSObject {
 
-    var operationQueue = NSOperationQueue() 
-    
-    public func viewUnload() {
-        operationQueue.cancelAllOperations()
-    }
 }
