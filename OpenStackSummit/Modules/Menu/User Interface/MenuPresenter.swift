@@ -41,14 +41,11 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 show = currentMemberRole != MemberRoles.Anonymous
             }
         }
-        if (section == 3) {
-            if ((row == 0 || row == 3)) {
+        if (section == 2) {
+            if (row == 0 || row == 2) {
                 show = currentMemberRole != MemberRoles.Anonymous
             }
-            else if (row == 1) {
-                show = currentMemberRole == MemberRoles.Speaker || currentMemberRole == MemberRoles.Attendee
-            }
-            else if (row == 2) {
+            else {
                 show = currentMemberRole == MemberRoles.Anonymous
             }
         }

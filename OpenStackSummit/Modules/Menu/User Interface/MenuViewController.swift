@@ -71,10 +71,10 @@ class MenuViewController: UITableViewController, IMenuViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        if (indexPath.section == 3 && indexPath.row == 5) {
+        if (indexPath.section == 2 && indexPath.row == 2) {
             presenter.logout()
         }
-        else if (indexPath.section == 3 && indexPath.row == 4) {
+        else if (indexPath.section == 2 && indexPath.row == 1) {
             SwiftSpinner.show("Please wait...")
             presenter.login()
         }
