@@ -20,7 +20,7 @@ protocol ISearchViewController {
     func showErrorMessage(error: NSError)
 }
 
-class SearchViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ISearchViewController, UITextFieldDelegate {
+class SearchViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, ISearchViewController, UITextFieldDelegate {
 
     @IBOutlet weak var attendeesTableView: PeopleListView!
     @IBOutlet weak var speakersTableView: PeopleListView!
@@ -95,14 +95,13 @@ class SearchViewController: BaseViewController, UITableViewDelegate, UITableView
         speakersTableView.tableView.reloadData()
         setupTable(speakersTableView.tableView, forSize: speakersTableView.tableView.numberOfRowsInSection(0), withConstraint: speakersTableViewHeightConstraint)
         speakersTableView.updateConstraintsIfNeeded()
-        speakersTableView.tableView.updateConstraintsIfNeeded()
     }
     
     func reloadAttendees() {
         attendeesTableView.tableView.delegate = self
         attendeesTableView.tableView.dataSource = self
         attendeesTableView.tableView.reloadData()
-        setupTable(tracksTableView, forSize: attendeesTableView.tableView.numberOfRowsInSection(0), withConstraint: attendeesTableViewHeightConstraint)
+        setupTable(attendeesTableView.tableView, forSize: attendeesTableView.tableView.numberOfRowsInSection(0), withConstraint: attendeesTableViewHeightConstraint)
         attendeesTableView.updateConstraintsIfNeeded()
     }
     
@@ -165,7 +164,7 @@ class SearchViewController: BaseViewController, UITableViewDelegate, UITableView
     
     func setupTable(tableView: UITableView, forSize size: Int, withConstraint constraint: NSLayoutConstraint) {
         if size > 0 {
-            constraint.constant = size <= 4 ? tableView.contentSize.height : 250
+            constraint.constant = size <= 4 ? tableView.contentSize.height : 290
             tableView.backgroundView = nil
         }
         else {
@@ -175,6 +174,7 @@ class SearchViewController: BaseViewController, UITableViewDelegate, UITableView
             label.sizeToFit()
             tableView.backgroundView = label
         }
+        tableView.frame.size.height = constraint.constant
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
