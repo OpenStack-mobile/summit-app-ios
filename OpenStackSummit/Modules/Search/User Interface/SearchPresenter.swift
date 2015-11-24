@@ -56,6 +56,7 @@ public class SearchPresenter: BasePresenter {
         speakers.removeAll()
         attendees.removeAll()
         self.searchTerm = searchTerm
+        session.set(Constants.SessionKeys.SearchTerm, value: searchTerm)
         
         events = interactor.getEventsBySearchTerm(searchTerm)
         viewController.reloadEvents()
