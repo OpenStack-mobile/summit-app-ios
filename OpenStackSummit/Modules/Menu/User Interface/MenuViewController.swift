@@ -18,7 +18,7 @@ public protocol IMenuViewController {
     func hideActivityIndicator()
 }
 
-class MenuViewController: UITableViewController, IMenuViewController {
+class MenuViewController: UITableViewController, IMenuViewController, UITextFieldDelegate {
 
     var presenter: IMenuPresenter!
     var session: ISession!
@@ -27,7 +27,7 @@ class MenuViewController: UITableViewController, IMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        searchTermTextView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,5 +84,11 @@ class MenuViewController: UITableViewController, IMenuViewController {
         if (segue.identifier == "searchSegue") {
             session.set(Constants.SessionKeys.SearchTerm, value: searchTermTextView.text)
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        searchTermTextView.resignFirstResponder()
+        performSegueWithIdentifier("searchSegue", sender: self)
+        return true
     }
 }
