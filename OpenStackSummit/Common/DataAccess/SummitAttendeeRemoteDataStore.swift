@@ -23,8 +23,13 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
     
     public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([SummitAttendee]?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
+    
+        var filter = ""
+        if (searchTerm != nil && !(searchTerm!.isEmpty)) {
+            filter = "filter=first_name=@\(searchTerm!),last_name=@\(searchTerm!)&"
+        }
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/attendees?page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
+        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/attendees?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
