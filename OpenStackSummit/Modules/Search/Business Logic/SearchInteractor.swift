@@ -25,9 +25,8 @@ public class SearchInteractor: ScheduleableInteractor, ISearchInteractor {
     var personDTOAssembler: PersonListItemDTOAssembler!
     
     public func getSpeakersBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
-        presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in
-            self.getByFilterCallback(speakers, error: error, completionBlock: completionBlock)
-        }
+        let speakers = presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage)
+        getByFilterCallback(speakers, error: nil, completionBlock: completionBlock)
     }
     
     public func getAttendeesBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {

@@ -34,7 +34,7 @@ public class SearchPresenter: BasePresenter {
     var tracks: [TrackDTO]!
     var speakers = [PersonListItemDTO]()
     var attendees = [PersonListItemDTO]()
-    let objectsPerPage = 10
+    let objectsPerPage = 1000
     var pageSpeakers = 1
     var loadedAllSpeakers = false
     var pageAttendees = 1
@@ -124,7 +124,6 @@ public class SearchPresenter: BasePresenter {
         cell.name = attendee.name
         cell.title = attendee.title
         cell.picUrl = attendee.pictureUrl
-        
     }
  
     public func getEventsCount() -> Int {
