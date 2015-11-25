@@ -9,11 +9,11 @@
 import UIKit
 @objc
 public protocol IPresentationSpeakerDataStore {
-    func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void)
+    func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker]
 }
 
 public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeakerDataStore {
-    public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PresentationSpeaker]?, NSError?) -> Void) {
+    public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
         
         var result = realm.objects(PresentationSpeaker.self)
         
@@ -33,7 +33,7 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
             }            
         }
         
-        completionBlock(speakers, nil)
+        return speakers
     }
 
 }

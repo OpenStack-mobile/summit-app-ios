@@ -783,51 +783,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPO-DS-Y7n">
-                                <rect key="frame" x="17" y="62" width="42" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bo-PQ-Tez">
-                                <rect key="frame" x="17" y="229" width="76" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CHP-nL-fSF">
-                                <rect key="frame" x="0.0" y="69" width="600" height="155"/>
-                                <animations/>
-                            </pickerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-EB-BFE">
-                                <rect key="frame" x="13" y="258" width="573" height="166"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kb-vw-qNo">
-                                <rect key="frame" x="13" y="445" width="99" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="sendFeedback:" destination="PJO-89-0I7" eventType="touchUpInside" id="UNi-Dd-89T"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cM-xI-bb3">
+                                <rect key="frame" x="0.0" y="95" width="600" height="270"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kb-vw-qNo">
+                                        <rect key="frame" x="242" y="232" width="116" height="30"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.94185914855072461" green="0.63802083333333337" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendFeedback:" destination="PJO-89-0I7" eventType="touchUpInside" id="UNi-Dd-89T"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-EB-BFE">
+                                        <rect key="frame" x="14" y="20" width="573" height="195"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lj2-bp-5ml" customClass="CosmosView" customModule="Cosmos">
+                                <rect key="frame" x="179" y="27" width="243" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="49"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CHP-nL-fSF" secondAttribute="trailing" id="0XB-8z-sIx"/>
-                            <constraint firstItem="CHP-nL-fSF" firstAttribute="leading" secondItem="Gcw-cq-iJl" secondAttribute="leading" id="9K8-np-Emd"/>
-                            <constraint firstItem="b6p-EB-BFE" firstAttribute="leading" secondItem="Gcw-cq-iJl" secondAttribute="leading" constant="13" id="U35-95-yl0"/>
-                            <constraint firstAttribute="trailing" secondItem="b6p-EB-BFE" secondAttribute="trailing" constant="14" id="YTt-ml-8qR"/>
+                            <constraint firstItem="lj2-bp-5ml" firstAttribute="centerX" secondItem="Gcw-cq-iJl" secondAttribute="centerX" id="tB7-Q4-4le"/>
+                            <constraint firstItem="8cM-xI-bb3" firstAttribute="width" secondItem="Gcw-cq-iJl" secondAttribute="width" id="z94-B9-bzD"/>
+                            <constraint firstItem="lj2-bp-5ml" firstAttribute="top" secondItem="Q6g-al-yaT" secondAttribute="bottom" constant="7" id="zb6-uS-Xhr"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ratePicker" destination="CHP-nL-fSF" id="tJD-2v-9Fg"/>
                         <outlet property="reviewTextArea" destination="b6p-EB-BFE" id="pAY-pS-yqR"/>
                     </connections>
                 </viewController>
@@ -2141,6 +2142,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

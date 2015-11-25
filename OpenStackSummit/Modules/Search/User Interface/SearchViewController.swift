@@ -60,9 +60,13 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
 
         searchTermTextView.delegate = self
         
-        //hack: if I don't add this constraint, width for table goes out of margins
+        //hack: if I don't add this constraint, width for table goes out of margins and height doesn't work well
         let tableWidthConstraint = NSLayoutConstraint(item: speakersTableView.tableView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
         speakersTableView.addConstraint(tableWidthConstraint)
+        let tableHeightConstraint = NSLayoutConstraint(item: speakersTableView.tableView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+        speakersTableView.addConstraint(tableHeightConstraint)
+        
+        navigationItem.title = "SEARCH"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -77,7 +81,8 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
         eventsTableView.reloadData()
-        setupTable(eventsTableView, forSize: eventsTableView.numberOfRowsInSection(0), withConstraint: eventsTableViewHeightConstraint)
+        eventsTableView.layoutIfNeeded()
+        setupTable(eventsTableView, withRowCount: eventsTableView.numberOfRowsInSection(0), withMinSize: 130, withConstraint: eventsTableViewHeightConstraint)
         eventsTableView.updateConstraintsIfNeeded()
     }
 
@@ -85,7 +90,8 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         tracksTableView.delegate = self
         tracksTableView.dataSource = self
         tracksTableView.reloadData()
-        setupTable(tracksTableView, forSize: tracksTableView.numberOfRowsInSection(0), withConstraint: tracksTableViewHeightConstraint)
+        tracksTableView.layoutIfNeeded()
+        setupTable(tracksTableView, withRowCount: tracksTableView.numberOfRowsInSection(0), withMinSize: 50, withConstraint: tracksTableViewHeightConstraint)
         tracksTableView.updateConstraintsIfNeeded()
     }
 
@@ -93,7 +99,8 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         speakersTableView.tableView.delegate = self
         speakersTableView.tableView.dataSource = self
         speakersTableView.tableView.reloadData()
-        setupTable(speakersTableView.tableView, forSize: speakersTableView.tableView.numberOfRowsInSection(0), withConstraint: speakersTableViewHeightConstraint)
+        speakersTableView.layoutIfNeeded()
+        setupTable(speakersTableView.tableView, withRowCount: speakersTableView.tableView.numberOfRowsInSection(0), withMinSize: 60, withConstraint: speakersTableViewHeightConstraint)
         speakersTableView.updateConstraintsIfNeeded()
     }
     
@@ -101,7 +108,8 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         attendeesTableView.tableView.delegate = self
         attendeesTableView.tableView.dataSource = self
         attendeesTableView.tableView.reloadData()
-        setupTable(attendeesTableView.tableView, forSize: attendeesTableView.tableView.numberOfRowsInSection(0), withConstraint: attendeesTableViewHeightConstraint)
+        attendeesTableView.layoutIfNeeded()
+        setupTable(attendeesTableView.tableView, withRowCount: attendeesTableView.tableView.numberOfRowsInSection(0), withMinSize: 0, withConstraint: attendeesTableViewHeightConstraint)
         attendeesTableView.updateConstraintsIfNeeded()
     }
     
@@ -162,9 +170,9 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         return count
     }
     
-    func setupTable(tableView: UITableView, forSize size: Int, withConstraint constraint: NSLayoutConstraint) {
-        if size > 0 {
-            constraint.constant = size <= 4 ? tableView.contentSize.height : 290
+    func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
+        if count > 0 {
+            constraint.constant = count <= 4 ? max(CGFloat(minSize), tableView.contentSize.height) : 290
             tableView.backgroundView = nil
         }
         else {
