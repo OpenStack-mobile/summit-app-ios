@@ -56,7 +56,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
     }
     
     public func getBySearchTerm(searchTerm: String!)->[SummitEvent] {
-        let events = realm.objects(SummitEvent).filter("name CONTAINS [c]%@ or eventDescription CONTAINS [c]%@", searchTerm, searchTerm).sorted("start")
+        let events = realm.objects(SummitEvent).filter("name CONTAINS [c]%@ or eventDescription CONTAINS [c]%@ or ANY tags.name CONTAINS [c]%@ or eventType.name CONTAINS [c]%@", searchTerm, searchTerm, searchTerm, searchTerm).sorted("start")
         return events.map { $0 }
     }
     
