@@ -20,9 +20,8 @@ public class PeopleInteractor: NSObject, IPeopleInteractor {
     var personDTOAssembler: PersonListItemDTOAssembler!
     
     public func getSpeakersByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
-        presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (speakers, error) in
-            self.getByFilterCallback(speakers, error: error, completionBlock: completionBlock)
-        }
+        let speakers = presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage)
+        getByFilterCallback(speakers, error: nil, completionBlock: completionBlock)
     }
     
     public func getAttendeesByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
