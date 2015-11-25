@@ -57,7 +57,13 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         viewController.hideMenu()
         
         securityManager.login { error in
-            self.viewController.hideActivityIndicator()
+            defer { self.viewController.hideActivityIndicator() }
+            
+            if error != nil {
+                self.viewController.showErrorMessage(error!)
+                return
+            }
+            
             self.viewController.reloadMenu()
         }
     }

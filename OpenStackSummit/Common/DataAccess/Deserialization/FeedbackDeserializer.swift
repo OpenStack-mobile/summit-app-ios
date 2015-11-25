@@ -36,9 +36,15 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
             if json["atendee_id"] != nil {
                 feedback.owner = try deserializer.deserialize(json["attendee_id"]) as! SummitAttendee
             }
-            else {
-                feedback.owner = try deserializer.deserialize(json["owner"]) as! SummitAttendee
+            else if json["owner_id"] != nil {
+                feedback.owner = try deserializer.deserialize(json["owner_id"]) as! SummitAttendee
 
+            }
+            else if json["owner"] != nil {
+                feedback.owner = try deserializer.deserialize(json["owner"]) as! SummitAttendee
+            }
+            else {
+                throw DeserializerError.BadFormat("Can't deserialize feedback owner")
             }
             
             if(!deserializerStorage.exist(feedback)) {

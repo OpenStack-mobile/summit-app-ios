@@ -10,13 +10,12 @@ import UIKit
 import SwiftSpinner
 
 @objc
-public protocol IPeopleListViewController {
+public protocol IPeopleListViewController: IMessageEnabledViewController {
     var presenter: IPeoplePresenter! { get set }
     var searchTerm: String! { get set }
     var navigationController: UINavigationController? { get }
     
     func reloadData()
-    func showErrorMessage(error: NSError)
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -48,11 +47,7 @@ class PeopleListViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func showErrorMessage(error: NSError) {
         
-    }
-    
     func showActivityIndicator() {
         SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
     }

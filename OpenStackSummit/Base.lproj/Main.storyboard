@@ -245,7 +245,7 @@
             </objects>
             <point key="canvasLocation" x="159" y="325"/>
         </scene>
-        <!--Event-->
+        <!--EVENTS-->
         <scene sceneID="t2r-Ay-5sh">
             <objects>
                 <viewController storyboardIdentifier="EventDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xso-DC-v1V" customClass="EventDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
@@ -266,7 +266,7 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-sU-8Sx" userLabel="MyFeedback">
                                                 <rect key="frame" x="0.0" y="582" width="600" height="77"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8P-iS-qfl" customClass="CosmosView" customModule="Cosmos">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8P-iS-qfl" customClass="CosmosView" customModule="Cosmos">
                                                         <rect key="frame" x="18" y="22" width="129" height="24"/>
                                                         <animations/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -291,14 +291,14 @@
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R7-NN-AR0">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="My Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3R7-NN-AR0">
                                                         <rect key="frame" x="155" y="23" width="431" height="21"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-bt-dc3" userLabel="Review">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-bt-dc3" userLabel="Review">
                                                         <rect key="frame" x="18" y="48" width="568" height="21"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -720,7 +720,7 @@
                             <constraint firstItem="dCz-Ew-COB" firstAttribute="width" secondItem="vwb-eu-d9g" secondAttribute="width" id="wLc-Ag-8Pg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Event" id="h9p-KO-Na4">
+                    <navigationItem key="navigationItem" title="EVENTS" id="h9p-KO-Na4">
                         <rightBarButtonItems>
                             <barButtonItem image="submenu" id="EuL-uU-8oN">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -783,10 +783,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="center" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lj2-bp-5ml" customClass="CosmosView" customModule="Cosmos">
+                                <rect key="frame" x="185" y="29" width="230" height="46"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="46"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="colorEmpty">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorEmpty">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cM-xI-bb3">
-                                <rect key="frame" x="0.0" y="95" width="600" height="270"/>
+                                <rect key="frame" x="0.0" y="91" width="600" height="280"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kb-vw-qNo">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-EB-BFE">
+                                        <rect key="frame" x="14" y="20" width="573" height="195"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kb-vw-qNo">
                                         <rect key="frame" x="242" y="232" width="116" height="30"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.94185914855072461" green="0.63802083333333337" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -797,39 +825,29 @@
                                             <action selector="sendFeedback:" destination="PJO-89-0I7" eventType="touchUpInside" id="UNi-Dd-89T"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-EB-BFE">
-                                        <rect key="frame" x="14" y="20" width="573" height="195"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lj2-bp-5ml" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="179" y="27" width="243" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                        <real key="value" value="49"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <constraints>
+                                    <constraint firstItem="9Kb-vw-qNo" firstAttribute="centerX" secondItem="8cM-xI-bb3" secondAttribute="centerX" id="EPS-1b-NpB"/>
+                                    <constraint firstItem="b6p-EB-BFE" firstAttribute="leading" secondItem="8cM-xI-bb3" secondAttribute="leading" constant="14" id="SPY-Pa-UOC"/>
+                                    <constraint firstAttribute="trailing" secondItem="b6p-EB-BFE" secondAttribute="trailing" constant="13" id="wfm-gw-g0t"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="8cM-xI-bb3" firstAttribute="leading" secondItem="Gcw-cq-iJl" secondAttribute="leading" id="Dhu-YH-cgM"/>
+                            <constraint firstAttribute="trailing" secondItem="8cM-xI-bb3" secondAttribute="trailing" id="Tgj-jc-luq"/>
+                            <constraint firstItem="8cM-xI-bb3" firstAttribute="top" secondItem="lj2-bp-5ml" secondAttribute="bottom" constant="15" id="scV-mI-rzZ"/>
                             <constraint firstItem="lj2-bp-5ml" firstAttribute="centerX" secondItem="Gcw-cq-iJl" secondAttribute="centerX" id="tB7-Q4-4le"/>
-                            <constraint firstItem="8cM-xI-bb3" firstAttribute="width" secondItem="Gcw-cq-iJl" secondAttribute="width" id="z94-B9-bzD"/>
-                            <constraint firstItem="lj2-bp-5ml" firstAttribute="top" secondItem="Q6g-al-yaT" secondAttribute="bottom" constant="7" id="zb6-uS-Xhr"/>
+                            <constraint firstItem="lj2-bp-5ml" firstAttribute="top" secondItem="Q6g-al-yaT" secondAttribute="bottom" constant="14" id="zb6-uS-Xhr"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="rateView" destination="lj2-bp-5ml" id="urK-Pf-XUp"/>
                         <outlet property="reviewTextArea" destination="b6p-EB-BFE" id="pAY-pS-yqR"/>
+                        <outlet property="sendButton" destination="9Kb-vw-qNo" id="gqb-qi-MGG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TiH-eJ-vpT" userLabel="First Responder" sceneMemberID="firstResponder"/>
