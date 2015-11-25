@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IFeedbackEditInteractor {
     func getFeedback(feedbackId: Int) -> FeedbackDTO?
-    func saveFeedback(feedbackId: Int, rate: Int, review: String?, eventId: Int, completionBlock: (FeedbackDTO?, NSError?) -> Void )
+    func saveFeedback(feedbackId: Int, rate: Int, review: String, eventId: Int, completionBlock: (FeedbackDTO?, NSError?) -> Void )
 }
 
 public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
@@ -26,7 +26,13 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
         return feedbackDTO
     }
     
-    public func saveFeedback(feedbackId: Int, rate: Int, review: String?, eventId: Int, completionBlock: (FeedbackDTO?, NSError?) -> Void) {
+    public func saveFeedback(feedbackId: Int, rate: Int, review: String, eventId: Int, completionBlock: (FeedbackDTO?, NSError?) -> Void) {
+        if let errorMessage = validateFeedback(rate, review: review) {
+            let error = NSError(domain: errorMessage, code: 7001, userInfo: nil)
+            completionBlock(nil, error)
+            return
+        }
+        
         let member = securityManager.getCurrentMember()
         var feedback: Feedback
         if (feedbackId > 0) {
@@ -44,10 +50,25 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
         summitAttendeeDataStore.addFeedback(member!.attendeeRole!, feedback: feedback) {(feedback, error) in
             if (error != nil) {
                 completionBlock(nil, error)
+                return
             }
             
             let feedbackDTO = self.feedbackDTOAssembler.createDTO(feedback!)
             completionBlock(feedbackDTO, error)
         }
+    }
+    
+    func validateFeedback(rate: Int, review: String) -> String? {
+        var errorMessage: String?
+        if rate == 0 {
+            errorMessage = "You must provide a rate using stars at the top"
+        }
+        else if review.isEmpty {
+            errorMessage = "You must provide a review"
+        }
+        else if review.characters.count > 500 {
+            errorMessage = "Review exceeded 500 characters limit"
+        }
+        return errorMessage;
     }
 }

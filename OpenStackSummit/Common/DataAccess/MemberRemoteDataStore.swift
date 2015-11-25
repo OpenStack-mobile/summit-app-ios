@@ -38,8 +38,14 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
             }
             if let json = responseObject as? String {
                 let deserializer = self.deserializerFactory.create(DeserializerFactoryType.Member)
-                let member = try! deserializer.deserialize(json) as! Member
-                completionBlock(member, error)
+                do {
+                    let member = try deserializer.deserialize(json) as! Member                    
+                    completionBlock(member, nil)
+                }
+                catch {
+                    let innerError = NSError(domain: "There was an error deserializing my profile", code: 8001, userInfo: nil)
+                    completionBlock(nil, innerError)
+                }
             }
         })
     }

@@ -19,6 +19,7 @@ pod 'Cosmos', '~> 1.1'
 pod 'AHKActionSheet'
 pod 'MLPAutoCompleteTextField'
 pod 'AMTagListView'
+pod 'MBProgressHUD', '~> 0.9.1'
 
 target 'OpenStackSummitTests' do
     pod 'Mockingjay'

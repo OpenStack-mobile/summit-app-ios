@@ -50,7 +50,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.date = event.date
         viewController.sponsors = event.sponsors
         viewController.summitTypes = event.credentials
-        viewController.allowFeedback = event.allowFeedback && interactor.isMemberLoggedIn()
+        viewController.allowFeedback = event.allowFeedback && event.finished && interactor.isMemberLoggedIn() && myFeedbackForEvent == nil
         viewController.hasSpeakers = event.speakers.count > 0
         viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()

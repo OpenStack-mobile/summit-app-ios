@@ -10,7 +10,7 @@ import UIKit
 import SwiftSpinner
 
 @objc
-public protocol IMenuViewController {
+public protocol IMenuViewController: IMessageEnabledViewController {
     func reloadMenu()
     func hideMenu()
     func navigateToHome()
@@ -88,7 +88,9 @@ class MenuViewController: UITableViewController, IMenuViewController, UITextFiel
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         searchTermTextView.resignFirstResponder()
-        performSegueWithIdentifier("searchSegue", sender: self)
+        if !searchTermTextView.text!.isEmpty {
+            performSegueWithIdentifier("searchSegue", sender: self)
+        }
         return true
     }
 }

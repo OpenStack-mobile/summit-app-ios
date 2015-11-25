@@ -10,12 +10,11 @@ import UIKit
 import XLPagerTabStrip
 
 @objc
-public protocol ITrackListViewController {
+public protocol ITrackListViewController: IMessageEnabledViewController {
     var searchTerm: String! { get set }
     var navigationController: UINavigationController? { get }
     
     func reloadData()
-    func showErrorMessage(error: NSError)
 }
 
 
@@ -41,11 +40,7 @@ class TrackListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func showErrorMessage(error: NSError) {
         
-    }
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

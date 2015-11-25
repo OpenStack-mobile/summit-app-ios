@@ -12,9 +12,8 @@ import Cosmos
 import AHKActionSheet
 
 @objc
-public protocol IEventDetailViewController : IScheduleableView {
+public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledViewController {
     func didAddEventToMySchedule(event: EventDetailDTO)
-    func showErrorMessage(error: NSError)
     func reloadFeedbackData()
     func reloadSpeakersData()
     
@@ -37,7 +36,7 @@ public protocol IEventDetailViewController : IScheduleableView {
     var isScheduledStatusVisible: Bool { get set }
 }
 
-class EventDetailViewController: UIViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
+class EventDetailViewController: BaseViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var eventDetailLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -240,9 +239,7 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
             return feedbackButtonHeightConstraint.constant > 0
         }
         set {
-            feedbackButtonHeightConstraint.constant = newValue ? 0 : 30
             myFeedbackViewHeightConstraint.constant = newValue ? 83 : 0
-            feedbackButton.updateConstraints()
             myFeedbackView.updateConstraints()
         }
     }
@@ -306,10 +303,6 @@ class EventDetailViewController: UIViewController, IEventDetailViewController, U
     }
     
     func didAddEventToMySchedule(event: EventDetailDTO) {
-        
-    }
-    
-    func showErrorMessage(error: NSError) {
         
     }
     

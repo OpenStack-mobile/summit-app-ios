@@ -86,7 +86,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
         var jsonDictionary = [String:AnyObject]()
         jsonDictionary["rate"] = feedback.rate
         jsonDictionary["note"] = feedback.review
-        jsonDictionary["owner_id"] = attendee.id
+        jsonDictionary["attendee_id"] = attendee.id
         
         http.POST(endpoint, parameters: jsonDictionary, completionHandler: {(responseObject, error) in
             if (error != nil) {
