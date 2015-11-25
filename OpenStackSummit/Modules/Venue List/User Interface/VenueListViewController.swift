@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 @objc
-public protocol IVenueListViewController {
+public protocol IVenueListViewController: IMessageEnabledViewController {
     func releoadList()
 }
 
@@ -32,10 +32,6 @@ class VenueListViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         tableView.rowHeight = 120
         tableView.reloadData()
-    }
-    
-    func showErrorMessage(error: NSError) {
-    
     }
     
     override func didReceiveMemoryWarning() {

@@ -10,13 +10,12 @@ import UIKit
 import AFHorizontalDayPicker
 
 @objc
-public protocol IScheduleViewController: class {
+public protocol IScheduleViewController: class, IMessageEnabledViewController {
     var startDate: NSDate! { get set }
     var endDate: NSDate! { get set }
     var selectedDate: NSDate! { get set }
     
     func reloadSchedule()
-    func showErrorMessage(error: NSError)
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -106,11 +105,6 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         scheduleView.tableView.delegate = self
         scheduleView.tableView.dataSource = self
         scheduleView.tableView.reloadData()
-    }
-    
-    func showErrorMessage(error: NSError) {
-        
-        
     }
     
     func showActivityIndicator() {}

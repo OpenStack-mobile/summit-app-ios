@@ -25,7 +25,7 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
     var wireframe: IFeedbackEditWireframe!
     
     public func viewLoad() {
-        viewController.rate = 5
+        viewController.rate = 0
         viewController.review = ""
         
         if (feedbackId == 0) {
@@ -40,11 +40,13 @@ public class FeedbackEditPresenter: NSObject, IFeedbackEditPresenter {
     public func saveFeedback() {
         viewController.showActivityIndicator()
         interactor.saveFeedback(0, rate: viewController.rate, review: viewController.review, eventId: eventId) {(feedback, error) in
+            defer { self.viewController.hideActivityIndicator() }
+            
             if (error != nil) {
                 self.viewController.showErrorMessage(error!)
+                return
             }
             self.wireframe.backToPreviousView()
-            self.viewController.hideActivityIndicator()
         }
     }
 }

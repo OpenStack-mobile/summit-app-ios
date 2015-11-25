@@ -233,6 +233,8 @@
 		CADDDBBE1B74E614008F742E /* GeneralScheduleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDBBD1B74E614008F742E /* GeneralScheduleAssembly.swift */; };
 		CADDDBC21B74F193008F742E /* GeneralSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDBC11B74F193008F742E /* GeneralSchedulePresenter.swift */; };
 		CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDBC31B74F1AB008F742E /* GeneralScheduleInteractor.swift */; };
+		CADE48BD1C060C2000A858DA /* IMessageEnabledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE48BC1C060C2000A858DA /* IMessageEnabledViewController.swift */; };
+		CADE48BF1C06306E00A858DA /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE48BE1C06306E00A858DA /* SweetAlert.swift */; };
 		CADE71241BD5369800EAC8EF /* ScheduleWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */; };
 		CADE71261BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE71251BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift */; };
 		CADE71281BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE71271BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift */; };
@@ -550,6 +552,8 @@
 		CADDDBBD1B74E614008F742E /* GeneralScheduleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleAssembly.swift; sourceTree = "<group>"; };
 		CADDDBC11B74F193008F742E /* GeneralSchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSchedulePresenter.swift; sourceTree = "<group>"; };
 		CADDDBC31B74F1AB008F742E /* GeneralScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleInteractor.swift; sourceTree = "<group>"; };
+		CADE48BC1C060C2000A858DA /* IMessageEnabledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMessageEnabledViewController.swift; path = "User Interface/IMessageEnabledViewController.swift"; sourceTree = "<group>"; };
+		CADE48BE1C06306E00A858DA /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = "User Interface/SweetAlert.swift"; sourceTree = "<group>"; };
 		CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWireframe.swift; sourceTree = "<group>"; };
 		CADE71251BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleAssembly.swift; sourceTree = "<group>"; };
 		CADE71271BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleWireframe.swift; sourceTree = "<group>"; };
@@ -672,6 +676,8 @@
 				CADF6CA41BFE1D60007998BF /* PeopleListView.swift */,
 				CADF6CAA1BFE23E2007998BF /* PeopleTableViewCell.swift */,
 				CADF6CAB1BFE23E2007998BF /* PeopleTableViewCell.xib */,
+				CADE48BC1C060C2000A858DA /* IMessageEnabledViewController.swift */,
+				CADE48BE1C06306E00A858DA /* SweetAlert.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -2151,8 +2157,10 @@
 				CA583AD71BC6C0BC00632ECF /* SummitAttendeeDTOAssembler.swift in Sources */,
 				CAF2AA4A1B8271C100D8E595 /* VenueRoomDeserializer.swift in Sources */,
 				CAF2AA3E1B8271C100D8E595 /* DeserializerProtocol.swift in Sources */,
+				CADE48BD1C060C2000A858DA /* IMessageEnabledViewController.swift in Sources */,
 				CA8E98D81B99D92600CEBD2F /* VenueListPresenter.swift in Sources */,
 				CA01190F1B8D1C2C0091E00F /* GenericDataStore.swift in Sources */,
+				CADE48BF1C06306E00A858DA /* SweetAlert.swift in Sources */,
 				CAD6C3CB1BB71A4D00F8C2D6 /* DataUpdateDataStore.swift in Sources */,
 				CA4399921BD18062008F378D /* FeedbackDeserializer.swift in Sources */,
 				CAD5FA161B82DB9E00654B0F /* SummitEventDeserializer.swift in Sources */,

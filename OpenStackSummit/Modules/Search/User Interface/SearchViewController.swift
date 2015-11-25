@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-protocol ISearchViewController {
+protocol ISearchViewController : IMessageEnabledViewController {
     var navigationController: UINavigationController? { get }
     var presenter: ISearchPresenter! { get set }
     var searchTerm: String! { get set }
@@ -17,7 +17,6 @@ protocol ISearchViewController {
     func reloadTracks()
     func reloadSpeakers()
     func reloadAttendees()
-    func showErrorMessage(error: NSError)
 }
 
 class SearchViewController: RevealViewController, UITableViewDelegate, UITableViewDataSource, ISearchViewController, UITextFieldDelegate {
@@ -71,10 +70,6 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         presenter.viewLoad()
-    }
-
-    func showErrorMessage(error: NSError) {
-        
     }
     
     func reloadEvents() {
@@ -187,6 +182,9 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         searchTermTextView.resignFirstResponder()
+        if !searchTermTextView.text!.isEmpty {
+            presenter.search(searchTermTextView.text)
+        }
         presenter.search(searchTermTextView.text)
         return true
     }

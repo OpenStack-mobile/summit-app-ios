@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 @objc
-public protocol IFeedbackGivenListViewController {
+public protocol IFeedbackGivenListViewController: IMessageEnabledViewController {
     func releoadList()
 }
 
@@ -30,11 +30,7 @@ class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UI
         tableView.dataSource = self
         tableView.reloadData()
     }
-    
-    func showErrorMessage(error: NSError) {
         
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
