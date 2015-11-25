@@ -28,6 +28,7 @@ class FeedbackEditViewController: BaseViewController, IFeedbackEditViewControlle
     @IBOutlet weak var reviewTextArea: UITextView!
     @IBOutlet weak var rateView: CosmosView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var rate: Int {
         get {
@@ -53,7 +54,9 @@ class FeedbackEditViewController: BaseViewController, IFeedbackEditViewControlle
         navigationItem.title = "FEEDBACK"
         super.viewDidLoad()
         reviewTextArea.delegate = self
+        
         sendButton.layer.cornerRadius = 10
+        reviewTextArea.returnKeyType = UIReturnKeyType.Done
     }
     
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
@@ -100,20 +103,30 @@ class FeedbackEditViewController: BaseViewController, IFeedbackEditViewControlle
         let userInfo: NSDictionary = notification.userInfo!
         let keyboardSize = userInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue.size
         let contentInsets = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0)
-        reviewTextArea.contentInset = contentInsets
-        reviewTextArea.scrollIndicatorInsets = contentInsets
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
         
         var viewRect = view.frame
         viewRect.size.height -= keyboardSize.height
         if CGRectContainsPoint(viewRect, reviewTextArea.frame.origin) {
             let scrollPoint = CGPointMake(0, reviewTextArea.frame.origin.y - keyboardSize.height)
-            reviewTextArea.setContentOffset(scrollPoint, animated: true)
+            scrollView.setContentOffset(scrollPoint, animated: true)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        reviewTextArea.contentInset = UIEdgeInsetsZero
-        reviewTextArea.scrollIndicatorInsets = UIEdgeInsetsZero
+        scrollView.contentInset = UIEdgeInsetsZero
+        scrollView.scrollIndicatorInsets = UIEdgeInsetsZero
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text.characters.count == 1 {
+            if let _ = text.rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet(), options: NSStringCompareOptions.BackwardsSearch) {
+                textView.resignFirstResponder()
+                return false
+            }
+        }
+        return true
     }
     
     override func didReceiveMemoryWarning() {
