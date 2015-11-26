@@ -21,24 +21,39 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     var memberProfileWireframe: IMemberProfileWireframe!
     var interactor: IMemberProfileInteractor!
     var viewController: IMemberProfileViewController!
-    var isLoggedMemberProfile = false
-    public var speakerId = 0
-    public var attendeeId = 0
+    
+    var internalSpeakerId = 0
+    var internalAttendeeId = 0
+    
+    public var speakerId: Int {
+        get {
+            return self.internalSpeakerId
+        }
+        set {
+            self.internalSpeakerId = newValue
+            self.internalAttendeeId = 0        }
+    }
+    
+    public var attendeeId: Int {
+        get {
+            return self.internalAttendeeId
+        }
+        set {
+            self.internalAttendeeId = newValue
+            self.internalSpeakerId = 0
+        }
+    }
     
     public func viewLoad() {
-        showPersonProfile(PersonDTO())
-        
-        isLoggedMemberProfile = false
         if (speakerId > 0) {
             showSpeakerProfile()
         }
-            
-        else if (attendeeId > 0){
+        else if (attendeeId > 0) {
             showAttendeeProfile()
         }
         else {
             if let currentMember = interactor.getCurrentMember() {
-                isLoggedMemberProfile = true
+                self.viewController.showActivityIndicator()
                 if currentMember.speakerRole != nil {
                     speakerId = currentMember.speakerRole!.id
                     showPersonProfile(currentMember.speakerRole!, error: nil)
@@ -75,11 +90,14 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
             self.viewController.name = person!.name
             self.viewController.personTitle = person!.title
             self.viewController.picUrl = person!.pictureUrl
-            self.viewController.location = ""
-            self.viewController.email = ""
+            self.viewController.location = person!.location
+            self.viewController.email = person!.email
             self.viewController.twitter = person!.twitter
-            self.viewController.irc = ""
+            self.viewController.irc = person!.irc
             self.viewController.bio = person!.bio
+            
+            self.speakerId = 0
+            self.attendeeId = 0
             self.viewController.hideActivityIndicator()
         })
     }
