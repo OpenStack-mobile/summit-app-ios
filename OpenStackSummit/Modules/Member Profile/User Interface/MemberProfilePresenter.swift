@@ -21,24 +21,44 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     var memberProfileWireframe: IMemberProfileWireframe!
     var interactor: IMemberProfileInteractor!
     var viewController: IMemberProfileViewController!
-    var isLoggedMemberProfile = false
-    public var speakerId = 0
-    public var attendeeId = 0
+    
+    var internalSpeakerId = 0
+    var internalAttendeeId = 0
+    
+    public var speakerId: Int {
+        get {
+            return self.internalSpeakerId
+        }
+        set {
+            self.internalSpeakerId = newValue
+            self.internalAttendeeId = 0        }
+    }
+    
+    public var attendeeId: Int {
+        get {
+            return self.internalAttendeeId
+        }
+        set {
+            self.internalAttendeeId = newValue
+            self.internalSpeakerId = 0
+        }
+    }
     
     public func viewLoad() {
+        self.viewController.showActivityIndicator()
+
         showPersonProfile(PersonDTO())
         
-        isLoggedMemberProfile = false
         if (speakerId > 0) {
             showSpeakerProfile()
+            speakerId = 0
         }
-            
-        else if (attendeeId > 0){
+        else if (attendeeId > 0) {
             showAttendeeProfile()
+            attendeeId = 0
         }
         else {
             if let currentMember = interactor.getCurrentMember() {
-                isLoggedMemberProfile = true
                 if currentMember.speakerRole != nil {
                     speakerId = currentMember.speakerRole!.id
                     showPersonProfile(currentMember.speakerRole!, error: nil)
