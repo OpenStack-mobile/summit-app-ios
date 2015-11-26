@@ -63,7 +63,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 locationViewLayoutConstraint.constant = 40
             }
             
-            if (newValue.isEmpty && email.isEmpty && email.isEmpty && irc.isEmpty) {
+            if (newValue.isEmpty && email.isEmpty && twitter == "@" && irc.isEmpty) {
                 ircViewBottomLayoutConstraint.constant = 0
                 bioTextViewLayoutConstraint.constant = -9
             }
@@ -89,7 +89,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 emailViewLayoutConstraint.constant = 40
             }
             
-            if (newValue.isEmpty && location.isEmpty && twitter.isEmpty && irc.isEmpty) {
+            if (newValue.isEmpty && location.isEmpty && twitter == "@" && irc.isEmpty) {
                 ircViewBottomLayoutConstraint.constant = 0
                 bioTextViewLayoutConstraint.constant = -9
             }
@@ -142,7 +142,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 ircViewHeightLayoutConstraint.constant = 40
             }
             
-            if (newValue.isEmpty && location.isEmpty && email.isEmpty && twitter.isEmpty) {
+            if (newValue.isEmpty && location.isEmpty && email.isEmpty && twitter == "@") {
                 ircViewBottomLayoutConstraint.constant = 0
                 bioTextViewLayoutConstraint.constant = -9
             }
