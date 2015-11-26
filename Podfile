@@ -20,6 +20,7 @@ pod 'AHKActionSheet'
 pod 'MLPAutoCompleteTextField'
 pod 'AMTagListView'
 pod 'MBProgressHUD', '~> 0.9.1'
+pod 'Parse'
 
 target 'OpenStackSummitTests' do
     pod 'Mockingjay'

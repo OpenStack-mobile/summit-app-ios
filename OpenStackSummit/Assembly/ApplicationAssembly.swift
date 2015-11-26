@@ -11,6 +11,8 @@ import Typhoon
 
 class ApplicationAssembly: TyphoonAssembly {
     
+    var securityManagerAssembly: SecurityManagerAssembly!
+    
     dynamic func appDelegate() -> AnyObject {
         return TyphoonDefinition.withClass(AppDelegate.self)
     }
@@ -31,14 +33,22 @@ class ApplicationAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func session() -> AnyObject {
-        return TyphoonDefinition.withClass(Session.self) {
+    dynamic func pushNotificationsManager() -> AnyObject {
+        return TyphoonDefinition.withClass(PushNotificationsManager.self) {
             (definition) in
-
-            definition.scope = TyphoonScope.Singleton
+            
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
 
+    dynamic func session() -> AnyObject {
+        return TyphoonDefinition.withClass(Session.self) {
+            (definition) in
+            
+            definition.scope = TyphoonScope.Singleton
+        }
+    }
+    
     dynamic func scheduleFilter() -> AnyObject {
         return TyphoonDefinition.withClass(ScheduleFilter.self) {
             (definition) in

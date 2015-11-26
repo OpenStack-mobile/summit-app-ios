@@ -6,6 +6,7 @@ PODS:
     - MTDates (= 1.0.0)
   - AHKActionSheet (0.5.3)
   - AMTagListView (1.0.0)
+  - Bolts/Tasks (1.5.0)
   - Cosmos (1.1.3)
   - GoogleMaps (1.10.5)
   - HanekeSwift (0.10.0)
@@ -23,6 +24,8 @@ PODS:
   - Mockingjay/XCTest (1.1.0):
     - Mockingjay/Core
   - MTDates (1.0.0)
+  - Parse (1.10.0):
+    - Bolts/Tasks (~> 1.5)
   - Realm (0.96.2):
     - Realm/Headers (= 0.96.2)
   - Realm/Headers (0.96.2)
@@ -51,6 +54,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.1)
   - MLPAutoCompleteTextField
   - Mockingjay
+  - Parse
   - Realm
   - RealmSwift
   - SwiftSpinner
@@ -80,6 +84,7 @@ SPEC CHECKSUMS:
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
   AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
   AMTagListView: e1341c9362b49c15ded10f489b7210eb7c7b503a
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   Cosmos: 9baaa9b1fa63fb503ae496ecdd6535801e916f1a
   GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
@@ -88,6 +93,7 @@ SPEC CHECKSUMS:
   MLPAutoCompleteTextField: ba4d507bbff2bd4f139d4197814fc8dd39caf77e
   Mockingjay: 5782cb22c9e99dece7aad5bdf738bfa187cfcdcc
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
+  Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
   Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
   RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f

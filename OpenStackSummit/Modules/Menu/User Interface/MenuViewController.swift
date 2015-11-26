@@ -28,6 +28,7 @@ class MenuViewController: UITableViewController, IMenuViewController, UITextFiel
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTermTextView.delegate = self
+        presenter.viewLoad()
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +78,10 @@ class MenuViewController: UITableViewController, IMenuViewController, UITextFiel
         else if (indexPath.section == 2 && indexPath.row == 1) {
             SwiftSpinner.show("Please wait...")
             presenter.login()
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.hideActivityIndicator()
+            }
         }
     }
     
