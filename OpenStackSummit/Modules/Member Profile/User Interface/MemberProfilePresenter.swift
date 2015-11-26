@@ -45,10 +45,6 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     }
     
     public func viewLoad() {
-        self.viewController.showActivityIndicator()
-
-        showPersonProfile(PersonDTO())
-        
         if (speakerId > 0) {
             showSpeakerProfile()
         }
@@ -57,6 +53,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         }
         else {
             if let currentMember = interactor.getCurrentMember() {
+                self.viewController.showActivityIndicator()
                 if currentMember.speakerRole != nil {
                     speakerId = currentMember.speakerRole!.id
                     showPersonProfile(currentMember.speakerRole!, error: nil)
@@ -74,7 +71,6 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
             self.showPersonProfile(speaker, error: error)
         }
-        speakerId = 0
     }
     
     func showAttendeeProfile() {
@@ -82,7 +78,6 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
             self.showPersonProfile(attendee, error: error)
         }
-        attendeeId = 0
     }
     
     func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
@@ -101,6 +96,8 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
             self.viewController.irc = person!.irc
             self.viewController.bio = person!.bio
             
+            self.speakerId = 0
+            self.attendeeId = 0
             self.viewController.hideActivityIndicator()
         })
     }
