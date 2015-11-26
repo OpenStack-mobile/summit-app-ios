@@ -9,6 +9,9 @@
 import UIKit
 
 public class PersonDTO: PersonListItemDTO {
-    public var bio = ""
+    public var location = ""
+    public var email = ""
     public var twitter = ""
+    public var irc = ""
+    public var bio = ""
 }

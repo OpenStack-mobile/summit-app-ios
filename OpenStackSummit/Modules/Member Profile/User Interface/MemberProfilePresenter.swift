@@ -100,6 +100,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
             self.viewController.twitter = person!.twitter
             self.viewController.irc = ""
             self.viewController.bio = person!.bio
+            
             self.viewController.hideActivityIndicator()
         })
     }
