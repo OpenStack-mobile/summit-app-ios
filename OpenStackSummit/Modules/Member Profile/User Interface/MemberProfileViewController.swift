@@ -15,7 +15,10 @@ public protocol IMemberProfileViewController {
     var name: String! { get set }
     var personTitle: String! { get set }
     var picUrl: String! { get set }
+    var location: String! { get set }
+    var email: String! { get set }
     var twitter: String! { get set }
+    var irc: String! { get set }
     var bio: String! { get set }
     var isLoggedMemberProfile: Bool { get set }
     
@@ -222,6 +225,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
         location = ""
         email = ""
         twitter = ""
+        bio = ""
     }
     
     override func didReceiveMemoryWarning() {
