@@ -20,7 +20,6 @@ public protocol IMemberProfileViewController {
     var twitter: String! { get set }
     var irc: String! { get set }
     var bio: String! { get set }
-    var isLoggedMemberProfile: Bool { get set }
     
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()
@@ -64,12 +63,12 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 locationViewLayoutConstraint.constant = 40
             }
             
-            if (newValue.isEmpty && email.isEmpty && email.isEmpty && irc.isEmpty) {
+            if (newValue.isEmpty && email.isEmpty && twitter == "@" && irc.isEmpty) {
                 ircViewBottomLayoutConstraint.constant = 0
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -90,12 +89,12 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 emailViewLayoutConstraint.constant = 40
             }
             
-            if (newValue.isEmpty && location.isEmpty && twitter.isEmpty && irc.isEmpty) {
+            if (newValue.isEmpty && location.isEmpty && twitter == "@" && irc.isEmpty) {
                 ircViewBottomLayoutConstraint.constant = 0
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -106,7 +105,8 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
             return twitterLabel.text
         }
         set {
-            twitterLabel.text = newValue
+            twitterLabel.text = newValue.hasPrefix("@") ? newValue : "@" + newValue
+            
             if (newValue.isEmpty) {
                 twitterView.hidden = true
                 twitterViewLayoutConstraint.constant = 0
@@ -121,7 +121,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -138,16 +138,16 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 ircViewHeightLayoutConstraint.constant = 0
             }
             else {
-                ircView.hidden = true
+                ircView.hidden = false
                 ircViewHeightLayoutConstraint.constant = 40
             }
             
-            if (newValue.isEmpty && location.isEmpty && email.isEmpty && twitter.isEmpty) {
+            if (newValue.isEmpty && location.isEmpty && email.isEmpty && twitter == "@") {
                 ircViewBottomLayoutConstraint.constant = 0
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -189,8 +189,6 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
         }
     }
     
-    var isLoggedMemberProfile: Bool = false
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
@@ -212,6 +210,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     @IBOutlet weak var bioTextViewLayoutConstraint: NSLayoutConstraint!
     
     var presenter: IMemberProfilePresenter!
+    
     private var picUrlInternal: String!
     private var bioHTML: String!
 
@@ -221,11 +220,6 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        irc = ""
-        location = ""
-        email = ""
-        twitter = ""
-        bio = ""
     }
     
     override func didReceiveMemoryWarning() {
@@ -246,7 +240,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     }
     
     func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+        SwiftSpinner.show("Please wait...")
     }
     
     func hideActivityIndicator() {
