@@ -68,7 +68,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -94,7 +94,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -105,7 +105,8 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
             return twitterLabel.text
         }
         set {
-            twitterLabel.text = newValue
+            twitterLabel.text = newValue.hasPrefix("@") ? newValue : "@" + newValue
+            
             if (newValue.isEmpty) {
                 twitterView.hidden = true
                 twitterViewLayoutConstraint.constant = 0
@@ -120,7 +121,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
@@ -146,7 +147,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 bioTextViewLayoutConstraint.constant = -9
             }
             else {
-                ircViewBottomLayoutConstraint.constant = -22
+                ircViewBottomLayoutConstraint.constant = -20
                 bioTextViewLayoutConstraint.constant = 20
             }
         }
