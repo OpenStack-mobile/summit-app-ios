@@ -26,6 +26,10 @@ public class SummitAttendeeDTOAssembler: NSObject, ISummitAttendeeDTOAssembler {
         attendeeDTO.pictureUrl = personListDTO.pictureUrl
         attendeeDTO.isAttendee = personListDTO.isAttendee
         attendeeDTO.isSpeaker = personListDTO.isSpeaker
+        attendeeDTO.location = attendee.location
+        attendeeDTO.email = attendee.email
+        attendeeDTO.twitter = attendee.twitter
+        attendeeDTO.irc = attendee.irc
         attendeeDTO.bio = attendee.bio
         return attendeeDTO
     }

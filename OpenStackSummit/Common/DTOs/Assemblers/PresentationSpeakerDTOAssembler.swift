@@ -33,6 +33,10 @@ public class PresentationSpeakerDTOAssembler: NSObject, IPresentationSpeakerDTOA
         speakerDTO.pictureUrl = personListDTO.pictureUrl
         speakerDTO.isAttendee = personListDTO.isAttendee
         speakerDTO.isSpeaker = personListDTO.isSpeaker
+        speakerDTO.location = attendee.location
+        speakerDTO.email = attendee.email
+        speakerDTO.twitter = attendee.twitter
+        speakerDTO.irc = attendee.irc
         speakerDTO.bio = attendee.bio
         return speakerDTO
     }
