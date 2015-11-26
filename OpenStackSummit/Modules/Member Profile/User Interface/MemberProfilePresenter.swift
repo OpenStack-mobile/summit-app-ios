@@ -51,11 +51,9 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         
         if (speakerId > 0) {
             showSpeakerProfile()
-            speakerId = 0
         }
         else if (attendeeId > 0) {
             showAttendeeProfile()
-            attendeeId = 0
         }
         else {
             if let currentMember = interactor.getCurrentMember() {
@@ -76,6 +74,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
             self.showPersonProfile(speaker, error: error)
         }
+        speakerId = 0
     }
     
     func showAttendeeProfile() {
@@ -83,6 +82,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
             self.showPersonProfile(attendee, error: error)
         }
+        attendeeId = 0
     }
     
     func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
