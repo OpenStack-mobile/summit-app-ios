@@ -235,6 +235,7 @@
 		CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDBC31B74F1AB008F742E /* GeneralScheduleInteractor.swift */; };
 		CADE48BD1C060C2000A858DA /* IMessageEnabledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE48BC1C060C2000A858DA /* IMessageEnabledViewController.swift */; };
 		CADE48BF1C06306E00A858DA /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE48BE1C06306E00A858DA /* SweetAlert.swift */; };
+		CADE48C11C07BECB00A858DA /* PushNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE48C01C07BECB00A858DA /* PushNotificationsManager.swift */; };
 		CADE71241BD5369800EAC8EF /* ScheduleWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */; };
 		CADE71261BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE71251BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift */; };
 		CADE71281BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE71271BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift */; };
@@ -507,7 +508,7 @@
 		CAD6C3D61BB759D800F8C2D6 /* DataUpdateProcessorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateProcessorMock.swift; sourceTree = "<group>"; };
 		CAD78BCC1B98C64800D37B7C /* ScheduleItemDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleItemDTOAssemblerTests.swift; sourceTree = "<group>"; };
 		CAD78BCE1B98CD9000D37B7C /* EventDetailDTOTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailDTOTests.swift; sourceTree = "<group>"; };
-		CAD9060B1B72B34F00BA5647 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAD9060B1B72B34F00BA5647 /* OpenStack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD9060E1B72B34F00BA5647 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAD906131B72B34F00BA5647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CAD906181B72B34F00BA5647 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -554,6 +555,7 @@
 		CADDDBC31B74F1AB008F742E /* GeneralScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleInteractor.swift; sourceTree = "<group>"; };
 		CADE48BC1C060C2000A858DA /* IMessageEnabledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMessageEnabledViewController.swift; path = "User Interface/IMessageEnabledViewController.swift"; sourceTree = "<group>"; };
 		CADE48BE1C06306E00A858DA /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SweetAlert.swift; path = "User Interface/SweetAlert.swift"; sourceTree = "<group>"; };
+		CADE48C01C07BECB00A858DA /* PushNotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsManager.swift; sourceTree = "<group>"; };
 		CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWireframe.swift; sourceTree = "<group>"; };
 		CADE71251BD54AFA00EAC8EF /* PersonalScheduleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleAssembly.swift; sourceTree = "<group>"; };
 		CADE71271BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleWireframe.swift; sourceTree = "<group>"; };
@@ -1269,7 +1271,7 @@
 		CAD9060C1B72B34F00BA5647 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CAD9060B1B72B34F00BA5647 /* OpenStackSummit.app */,
+				CAD9060B1B72B34F00BA5647 /* OpenStack.app */,
 				CAD906221B72B34F00BA5647 /* OpenStackSummitTests.xctest */,
 				CAD9062D1B72B34F00BA5647 /* OpenStackSummitUITests.xctest */,
 			);
@@ -1404,6 +1406,7 @@
 				CAD6C3CC1BB71EA800F8C2D6 /* HttpFactory.swift */,
 				CABAB9B71BCFEA1300CB867E /* ScheduleFilter.swift */,
 				CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */,
+				CADE48C01C07BECB00A858DA /* PushNotificationsManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1722,7 +1725,7 @@
 			);
 			name = OpenStackSummit;
 			productName = OpenStackSummit;
-			productReference = CAD9060B1B72B34F00BA5647 /* OpenStackSummit.app */;
+			productReference = CAD9060B1B72B34F00BA5647 /* OpenStack.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CAD906211B72B34F00BA5647 /* OpenStackSummitTests */ = {
@@ -1776,6 +1779,7 @@
 				TargetAttributes = {
 					CAD9060A1B72B34F00BA5647 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 775U6X6R5M;
 					};
 					CAD906211B72B34F00BA5647 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2133,6 +2137,7 @@
 				CACFBC291B9F1CDD00095E44 /* LoginAssembly.swift in Sources */,
 				CADDDBAB1B73D1BB008F742E /* Summit.swift in Sources */,
 				CA8E98E31B9A038D00CEBD2F /* VenueDetailViewController.swift in Sources */,
+				CADE48C11C07BECB00A858DA /* PushNotificationsManager.swift in Sources */,
 				CA02F8BD1BA0CFCB005CD514 /* SummitDTO.swift in Sources */,
 				CACF7C471B9664E700A9EB16 /* EventDetailDTO.swift in Sources */,
 				CAD542361B8B9ACE00A9791A /* MenuWireframe.swift in Sources */,
@@ -2375,8 +2380,8 @@
 				INFOPLIST_FILE = OpenStackSummit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.openstack-summit";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
+				PRODUCT_NAME = OpenStack;
 			};
 			name = Debug;
 		};
@@ -2390,8 +2395,8 @@
 				INFOPLIST_FILE = OpenStackSummit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.openstack-summit";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
+				PRODUCT_NAME = OpenStack;
 			};
 			name = Release;
 		};

@@ -14,7 +14,7 @@ import XLPagerTabStrip
 public protocol IMemberProfileViewController {
     var name: String! { get set }
     var personTitle: String! { get set }
-    var picUrl: String! { get set }
+    var picUrl: String! { get set }	
     var location: String! { get set }
     var email: String! { get set }
     var twitter: String! { get set }

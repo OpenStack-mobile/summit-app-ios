@@ -10,6 +10,7 @@ import UIKit
 
 @objc
 public protocol IMenuPresenter {
+    func viewLoad()
     func hasAccessToMenuItem(section: Int, row: Int) -> Bool
     func login()
     func logout()
@@ -30,6 +31,17 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         self.wireframe = menuWireframe
         self.viewController = viewController
         self.securityManager = securityManager
+    }
+    
+    public func viewLoad() {
+        // TODO: move this to launch screen or landing page
+        if securityManager.getCurrentMember() == nil {
+            interactor.unsubscribeFromPushChannels() { (succeeded: Bool, error: NSError?) in
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                }
+            }
+        }
     }
     
     public func hasAccessToMenuItem(section: Int, row: Int) -> Bool {
@@ -56,11 +68,17 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         viewController.showActivityIndicator()
         viewController.hideMenu()
         
-        securityManager.login { error in
+        interactor.login { error in
             defer { self.viewController.hideActivityIndicator() }
             
             if error != nil {
-                self.viewController.showErrorMessage(error!)
+                if error!.code == 404 {
+                    let notAttendeeError = NSError(domain: "You're not a summit attendee. You have to be registered as summit attendee in order to login", code: 2001, userInfo: nil)
+                    self.viewController.showErrorMessage(notAttendeeError)
+                }
+                else {
+                    self.viewController.showErrorMessage(error!)
+                }
                 return
             }
             
@@ -71,7 +89,11 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     public func logout() {
         viewController.showActivityIndicator()
 
-        securityManager.logout() {error in
+        interactor.logout() {error in
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
+                return
+            }
             self.viewController.hideMenu()
             self.viewController.reloadMenu()
             self.viewController.navigateToHome()
