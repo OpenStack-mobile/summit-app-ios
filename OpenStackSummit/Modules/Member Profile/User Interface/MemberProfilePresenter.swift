@@ -75,6 +75,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
             self.viewController.name = person!.name
             self.viewController.personTitle = person!.title
             self.viewController.picUrl = person!.pictureUrl
+            self.viewController.twitter = person!.twitter
             self.viewController.bio = person!.bio
             self.viewController.hideActivityIndicator()
         })
