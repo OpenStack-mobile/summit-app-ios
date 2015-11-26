@@ -137,7 +137,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 ircViewHeightLayoutConstraint.constant = 0
             }
             else {
-                ircView.hidden = true
+                ircView.hidden = false
                 ircViewHeightLayoutConstraint.constant = 40
             }
             
