@@ -1567,13 +1567,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jcu-VU-0sC" userLabel="Accounts View">
-                                <rect key="frame" x="0.0" y="160" width="600" height="182"/>
+                                <rect key="frame" x="0.0" y="160" width="600" height="180"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eE4-vU-inm" userLabel="Location View">
                                         <rect key="frame" x="20" y="0.0" width="560" height="40"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="1Pn-0d-nGp" userLabel="Location Icon">
+                                                <rect key="frame" x="0.0" y="18" width="17" height="22"/>
+                                                <animations/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="auV-J8-JMM"/>
+                                                    <constraint firstAttribute="width" constant="17" id="mxo-ES-lDx"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cb-RC-Qib" userLabel="Location Label">
-                                                <rect key="frame" x="0.0" y="22" width="560" height="18"/>
+                                                <rect key="frame" x="27" y="21" width="533" height="18"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -1582,8 +1591,10 @@
                                         </subviews>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstItem="1cb-RC-Qib" firstAttribute="bottom" secondItem="eE4-vU-inm" secondAttribute="bottom" id="0eV-cB-pl6"/>
-                                            <constraint firstItem="1cb-RC-Qib" firstAttribute="leading" secondItem="eE4-vU-inm" secondAttribute="leading" id="M2A-c0-A16"/>
+                                            <constraint firstItem="1cb-RC-Qib" firstAttribute="bottom" secondItem="eE4-vU-inm" secondAttribute="bottom" constant="-1" id="0eV-cB-pl6"/>
+                                            <constraint firstItem="1Pn-0d-nGp" firstAttribute="bottom" secondItem="eE4-vU-inm" secondAttribute="bottom" id="BQt-lU-aOS"/>
+                                            <constraint firstItem="1Pn-0d-nGp" firstAttribute="leading" secondItem="eE4-vU-inm" secondAttribute="leading" id="IxJ-D3-BYr"/>
+                                            <constraint firstItem="1cb-RC-Qib" firstAttribute="leading" secondItem="1Pn-0d-nGp" secondAttribute="trailing" constant="10" id="Nz1-Mr-PjT"/>
                                             <constraint firstItem="1cb-RC-Qib" firstAttribute="trailing" secondItem="eE4-vU-inm" secondAttribute="trailing" id="WSP-yi-CMM"/>
                                             <constraint firstAttribute="height" constant="40" id="lCX-8Z-ZSX"/>
                                         </constraints>
@@ -1591,8 +1602,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifa-3J-xhJ" userLabel="Email View">
                                         <rect key="frame" x="20" y="40" width="560" height="40"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email" translatesAutoresizingMaskIntoConstraints="NO" id="rdO-Zc-Izw" userLabel="Email Icon">
+                                                <rect key="frame" x="0.0" y="23" width="19" height="17"/>
+                                                <animations/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="17" id="Ueb-tc-ggP"/>
+                                                    <constraint firstAttribute="width" constant="19" id="qze-Yn-T44"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="me@domain.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VP-gI-aL2" userLabel="Email Label">
-                                                <rect key="frame" x="0.0" y="22" width="560" height="18"/>
+                                                <rect key="frame" x="29" y="22" width="531" height="18"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -1601,17 +1621,28 @@
                                         </subviews>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstItem="8VP-gI-aL2" firstAttribute="leading" secondItem="Ifa-3J-xhJ" secondAttribute="leading" id="ddk-6d-xo1"/>
+                                            <constraint firstItem="rdO-Zc-Izw" firstAttribute="bottom" secondItem="Ifa-3J-xhJ" secondAttribute="bottom" id="8S3-3Y-Bpy"/>
+                                            <constraint firstItem="rdO-Zc-Izw" firstAttribute="leading" secondItem="Ifa-3J-xhJ" secondAttribute="leading" id="VvX-f9-zbi"/>
                                             <constraint firstItem="8VP-gI-aL2" firstAttribute="trailing" secondItem="Ifa-3J-xhJ" secondAttribute="trailing" id="lnY-YW-Dc9"/>
                                             <constraint firstItem="8VP-gI-aL2" firstAttribute="bottom" secondItem="Ifa-3J-xhJ" secondAttribute="bottom" id="tCp-yr-QXb"/>
                                             <constraint firstAttribute="height" constant="40" id="yTR-ai-R9a"/>
+                                            <constraint firstItem="8VP-gI-aL2" firstAttribute="leading" secondItem="rdO-Zc-Izw" secondAttribute="trailing" constant="10" id="zoF-8A-pRw"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICy-s5-AvV" userLabel="Twitter View">
                                         <rect key="frame" x="20" y="80" width="560" height="40"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter" translatesAutoresizingMaskIntoConstraints="NO" id="O3O-K5-RbJ" userLabel="Twitter Icon">
+                                                <rect key="frame" x="0.0" y="24" width="19" height="16"/>
+                                                <animations/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="19" id="adi-ad-qhD"/>
+                                                    <constraint firstAttribute="height" constant="16" id="uf6-Sh-0rb"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@twitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bO5-gy-vuL" userLabel="Twitter Label">
-                                                <rect key="frame" x="0.0" y="22" width="560" height="18"/>
+                                                <rect key="frame" x="29" y="22" width="531" height="18"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -1620,8 +1651,10 @@
                                         </subviews>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstItem="bO5-gy-vuL" firstAttribute="leading" secondItem="ICy-s5-AvV" secondAttribute="leading" id="22p-HO-MLi"/>
-                                            <constraint firstItem="bO5-gy-vuL" firstAttribute="trailing" secondItem="ICy-s5-AvV" secondAttribute="trailing" id="Uh6-Zg-Rc5"/>
+                                            <constraint firstItem="O3O-K5-RbJ" firstAttribute="leading" secondItem="ICy-s5-AvV" secondAttribute="leading" id="CNT-Wo-g48"/>
+                                            <constraint firstItem="O3O-K5-RbJ" firstAttribute="bottom" secondItem="ICy-s5-AvV" secondAttribute="bottom" id="Rn2-93-QnG"/>
+                                            <constraint firstItem="bO5-gy-vuL" firstAttribute="leading" secondItem="O3O-K5-RbJ" secondAttribute="trailing" constant="10" id="cAo-BC-e6A"/>
+                                            <constraint firstItem="bO5-gy-vuL" firstAttribute="trailing" secondItem="ICy-s5-AvV" secondAttribute="trailing" id="kIk-07-MYJ"/>
                                             <constraint firstItem="bO5-gy-vuL" firstAttribute="bottom" secondItem="ICy-s5-AvV" secondAttribute="bottom" id="x8V-B4-xeO"/>
                                             <constraint firstAttribute="height" constant="40" id="z6E-Xs-mUg"/>
                                         </constraints>
@@ -1629,8 +1662,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zrz-YR-SqU" userLabel="IRC View">
                                         <rect key="frame" x="20" y="120" width="560" height="40"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="irc" translatesAutoresizingMaskIntoConstraints="NO" id="d9q-6O-aLS" userLabel="IRC Icon">
+                                                <rect key="frame" x="0.0" y="20" width="20" height="20"/>
+                                                <animations/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="aDj-Nm-Amo"/>
+                                                    <constraint firstAttribute="height" constant="20" id="dXP-st-cxD"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IRC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AG3-iy-RCE" userLabel="IRC Label">
-                                                <rect key="frame" x="0.0" y="22" width="560" height="18"/>
+                                                <rect key="frame" x="30" y="22" width="530" height="18"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -1639,9 +1681,11 @@
                                         </subviews>
                                         <animations/>
                                         <constraints>
+                                            <constraint firstItem="AG3-iy-RCE" firstAttribute="leading" secondItem="d9q-6O-aLS" secondAttribute="trailing" constant="10" id="P4Y-fb-bW8"/>
                                             <constraint firstAttribute="height" constant="40" id="QM5-dD-qmp"/>
                                             <constraint firstItem="AG3-iy-RCE" firstAttribute="trailing" secondItem="Zrz-YR-SqU" secondAttribute="trailing" id="VOn-iU-37s"/>
-                                            <constraint firstItem="AG3-iy-RCE" firstAttribute="leading" secondItem="Zrz-YR-SqU" secondAttribute="leading" id="gzg-WB-cNb"/>
+                                            <constraint firstItem="d9q-6O-aLS" firstAttribute="bottom" secondItem="Zrz-YR-SqU" secondAttribute="bottom" id="cE1-H4-Jjy"/>
+                                            <constraint firstItem="d9q-6O-aLS" firstAttribute="leading" secondItem="Zrz-YR-SqU" secondAttribute="leading" id="gMm-cY-lam"/>
                                             <constraint firstItem="AG3-iy-RCE" firstAttribute="bottom" secondItem="Zrz-YR-SqU" secondAttribute="bottom" id="zpL-Gc-4Zh"/>
                                         </constraints>
                                     </view>
@@ -1660,12 +1704,12 @@
                                     <constraint firstItem="eE4-vU-inm" firstAttribute="trailing" secondItem="Jcu-VU-0sC" secondAttribute="trailing" constant="-20" id="ZtR-oS-71G"/>
                                     <constraint firstItem="Zrz-YR-SqU" firstAttribute="trailing" secondItem="Jcu-VU-0sC" secondAttribute="trailing" constant="-20" id="cFa-2C-UN2"/>
                                     <constraint firstItem="Zrz-YR-SqU" firstAttribute="leading" secondItem="Jcu-VU-0sC" secondAttribute="leading" constant="20" id="gfp-1x-JrQ"/>
-                                    <constraint firstItem="Zrz-YR-SqU" firstAttribute="bottom" secondItem="Jcu-VU-0sC" secondAttribute="bottom" constant="-22" id="tal-Gy-LTT"/>
+                                    <constraint firstItem="Zrz-YR-SqU" firstAttribute="bottom" secondItem="Jcu-VU-0sC" secondAttribute="bottom" constant="-20" id="tal-Gy-LTT"/>
                                     <constraint firstItem="Ifa-3J-xhJ" firstAttribute="top" secondItem="eE4-vU-inm" secondAttribute="bottom" id="yta-Ll-F9M"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1ac-im-3Wc">
-                                <rect key="frame" x="20" y="362" width="560" height="238"/>
+                                <rect key="frame" x="20" y="360" width="560" height="240"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -2575,11 +2619,14 @@
         <image name="arrow" width="19" height="29"/>
         <image name="checked_active" width="22" height="22"/>
         <image name="credential" width="46" height="31"/>
+        <image name="email" width="29" height="25"/>
         <image name="filter" width="19" height="18"/>
+        <image name="irc" width="30" height="30"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="menu" width="20" height="17"/>
         <image name="submenu" width="4" height="18"/>
         <image name="time" width="30" height="30"/>
+        <image name="twitter" width="29" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SXm-8j-zCe"/>
