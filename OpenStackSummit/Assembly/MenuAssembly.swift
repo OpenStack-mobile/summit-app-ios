@@ -40,6 +40,8 @@ public class MenuAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("session", with: self.applicationAssembly.session())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+            definition.injectProperty("pushNotificationsManager", with: self.applicationAssembly.pushNotificationsManager())
         }
     }
     

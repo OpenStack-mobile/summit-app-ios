@@ -29,10 +29,9 @@ public class MemberDeserializer: NSObject, IDeserializer {
             member.attendeeRole = try deserializer.deserialize(json) as? SummitAttendee
         }
         
-        let speakerId = json["speaker_id"]
-        if (speakerId.int != nil) {
+        if (json["speaker"] != nil) {
             let deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
-            //member.speakerRole = try deserializer.deserialize(speakerId) as? PresentationSpeaker
+            member.speakerRole = try deserializer.deserialize(json["speaker"]) as? PresentationSpeaker
             
         }
         
