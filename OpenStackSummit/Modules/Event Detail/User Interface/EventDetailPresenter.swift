@@ -110,6 +110,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         cell.name = speaker.name
         cell.title = speaker.title
         cell.picUrl = speaker.pictureUrl
+        cell.isModerator = event.moderator != nil && speaker.id == event.moderator?.id
     }
     
     public func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int) {

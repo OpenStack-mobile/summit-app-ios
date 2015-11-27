@@ -87,7 +87,75 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
         XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
         XCTAssertNil(eventDetailDTO.venueId)
+        XCTAssertNil(eventDetailDTO.moderator)
     }
+    
+    func test_createDTO_eventWithPresentationModerator_returnsDTOWithCorrectData() {
+        // Arrange
+        let speaker = PresentationSpeaker()
+        speaker.firstName = "Enzo"
+        speaker.lastName = "Francescoli"
+        let venue = Venue()
+        venue.name = "Test Venue"
+        let venueRoom = VenueRoom()
+        venueRoom.id = 1
+        venueRoom.name = "Test Venue Room"
+        venue.venueRooms.append(venueRoom)
+        try! realm.write {
+            self.realm.add(venue)
+        }
+        let track = Track()
+        track.name = "Keynote"
+        let tag1 = Tag()
+        tag1.name = "Infraestructure"
+        let tag2 = Tag()
+        tag2.name = "Cloud Services"
+        let sponsor1 = Company()
+        sponsor1.name = "sponsor1"
+        let sponsor2 = Company()
+        sponsor2.name = "sponsor2"
+        let event = SummitEvent()
+        event.name = "Test Title"
+        event.eventDescription = "Test Description"
+        event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1441137600))
+        event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1441141200))
+        event.allowFeedback = true
+        event.sponsors.append(sponsor1)
+        event.sponsors.append(sponsor2)
+        event.presentation = Presentation()
+        event.presentation?.speakers.append(speaker)
+        event.presentation?.moderator = speaker
+        event.presentation?.track = track
+        event.tags.append(tag1)
+        event.tags.append(tag2)
+        event.venueRoom = venueRoom
+        
+        let speakerDTO = PresentationSpeakerDTO()
+        let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
+        let scheduleItemDTO = ScheduleItemDTO()
+        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
+        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        
+        // Act
+        let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
+        
+        // Assert
+        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
+        XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
+        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
+        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
+        XCTAssertEqual(event.presentation!.speakers.count, eventDetailDTO.speakers.count)
+        XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
+        XCTAssertTrue(eventDetailDTO.finished)
+        XCTAssertTrue(eventDetailDTO.allowFeedback)
+        XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
+        XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
+        XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
+        XCTAssertNil(eventDetailDTO.venueId)
+        XCTAssertEqual(speaker.id, eventDetailDTO.moderator?.id)
+    }
+    
     
     func test_createDTO_eventWithoutPresentationAndSpeakersThatFinished_returnsDTOWithCorrectData() {
         // Arrange
@@ -124,6 +192,6 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual("", eventDetailDTO.tags)
         XCTAssertEqual(venue.id, eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.venueRoomId)
-        
+        XCTAssertNil(eventDetailDTO.moderator)
     }
 }

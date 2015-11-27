@@ -10,18 +10,12 @@ import UIKit
 
 @objc
 public protocol IMemberProfileWireframe {
-    func showLoginView()
     func presentAttendeeProfileView(attendeeId: Int, viewController: UINavigationController)
     func presentSpeakerProfileView(attendeeId: Int, viewController: UINavigationController)
 }
 
 public class MemberProfileWireframe: NSObject, IMemberProfileWireframe {
     var memberProfileViewController: MemberProfileViewController!
-    var loginWireframe: ILoginWireframe!
-    
-    public func showLoginView() {
-        loginWireframe.presentLoginView(memberProfileViewController)
-    }
     
     public func presentAttendeeProfileView(attendeeId: Int, viewController: UINavigationController) {
         let newViewController = memberProfileViewController!
