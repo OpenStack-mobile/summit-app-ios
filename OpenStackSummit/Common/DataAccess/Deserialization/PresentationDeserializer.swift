@@ -29,7 +29,12 @@ public class PresentationDeserializer: NSObject, IDeserializer {
             presentationSpeaker = try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
             presentation.speakers.append(presentationSpeaker)
         }
-                
+        
+        let presentationModeratorId = json["moderator_speaker_id"]
+        if (presentationModeratorId.int != nil) {
+            presentation.moderator = try deserializer.deserialize(presentationModeratorId) as? PresentationSpeaker
+        }
+        
         return presentation
     }
 }

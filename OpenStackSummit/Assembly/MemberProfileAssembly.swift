@@ -10,7 +10,6 @@ import UIKit
 import Typhoon
 
 public class MemberProfileAssembly: TyphoonAssembly {
-    var loginAssembly: LoginAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
@@ -19,7 +18,6 @@ public class MemberProfileAssembly: TyphoonAssembly {
     dynamic func memberProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileWireframe.self) {
             (definition) in
-            definition.injectProperty("loginWireframe", with: self.loginAssembly.loginWireframe())
             definition.injectProperty("memberProfileViewController", with: self.memberProfileViewController())
         }
     }

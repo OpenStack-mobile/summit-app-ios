@@ -10,12 +10,22 @@ import UIKit
 
 @objc
 public protocol IPeopleTableViewCell : class {
+    var isModerator: Bool { get set }
     var name: String! { get set }
     var title: String! { get set }
     var picUrl: String! { get set }
 }
 
 class PeopleTableViewCell: UITableViewCell , IPeopleTableViewCell {
+    var isModerator: Bool {
+        get {
+            return !moderatorLabel.hidden
+        }
+        set {
+            moderatorLabel.hidden = !newValue
+        }
+    }
+    
     var name: String!{
         get {
             return nameLabel.text
@@ -51,6 +61,7 @@ class PeopleTableViewCell: UITableViewCell , IPeopleTableViewCell {
         }
     }
     
+    @IBOutlet weak var moderatorLabel: UILabel!
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
