@@ -13,6 +13,7 @@ public class Presentation: BaseEntity {
     
     public dynamic var level = ""
     public dynamic var track: Track!
+    public dynamic var  moderator: PresentationSpeaker?
     public let speakers = List<PresentationSpeaker>()
     public var event: SummitEvent {
         return linkingObjects(SummitEvent.self, forProperty: "presentation").first!

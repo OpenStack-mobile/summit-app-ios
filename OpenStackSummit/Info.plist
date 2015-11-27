@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>OpenStack</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -11,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -62,7 +64,6 @@
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>
 		<string>DataStoreAssembly</string>
-		<string>LoginAssembly</string>
 		<string>FeedbackEditAssembly</string>
 		<string>SecurityManagerAssembly</string>
 		<string>HttpFactoryAssembly</string>

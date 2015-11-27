@@ -44,7 +44,12 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
                 speakerDTO = speakerDTOAssembler.createDTO(speaker)
                 eventDetailDTO.speakers.append(speakerDTO)
             }
+            
+            if let moderator = event.presentation?.moderator {
+                eventDetailDTO.moderator = speakerDTOAssembler.createDTO(moderator)
+            }
         }
+        
         return eventDetailDTO
     }
     
