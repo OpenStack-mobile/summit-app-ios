@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
-		9D8CDA511C0CEAF9007342DB /* MainWithMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8CDA4F1C0CEAF9007342DB /* MainWithMenu.storyboard */; };
 		9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */; };
 		9DAC06E51BFB776700C1208F /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */; };
 		9DAC06E71BFB78CA00C1208F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */; };
@@ -319,7 +318,6 @@
 		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
-		9D8CDA501C0CEAF9007342DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainWithMenu.storyboard; sourceTree = "<group>"; };
 		9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAssembly.swift; sourceTree = "<group>"; };
 		9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealTabStripViewController.swift; path = "User Interface/RevealTabStripViewController.swift"; sourceTree = "<group>"; };
 		9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = "Events/User Interfaces/EventsViewController.swift"; sourceTree = "<group>"; };
@@ -1258,7 +1256,6 @@
 				CAD906181B72B34F00BA5647 /* Assets.xcassets */,
 				CAD9061D1B72B34F00BA5647 /* Info.plist */,
 				CAD906121B72B34F00BA5647 /* Main.storyboard */,
-				9D8CDA4F1C0CEAF9007342DB /* MainWithMenu.storyboard */,
 				CAD9061A1B72B34F00BA5647 /* LaunchScreen.storyboard */,
 			);
 			path = OpenStackSummit;
@@ -1786,7 +1783,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D8CDA511C0CEAF9007342DB /* MainWithMenu.storyboard in Resources */,
+				CADE09981C08CB77002B21BA /* FeedbackTableViewCell.xib in Resources */,
 				CAE0ED671BFF577600333EA7 /* GeneralScheduleFilterTableViewCell.xib in Resources */,
 				CADF6CAD1BFE23E2007998BF /* PeopleTableViewCell.xib in Resources */,
 				CA0873F91BCE98FE00633591 /* ScheduleTableViewCell.xib in Resources */,
@@ -2234,14 +2231,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9D8CDA4F1C0CEAF9007342DB /* MainWithMenu.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9D8CDA501C0CEAF9007342DB /* Base */,
-			);
-			name = MainWithMenu.storyboard;
-			sourceTree = "<group>";
-		};
 		CAD906121B72B34F00BA5647 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
