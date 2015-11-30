@@ -20,12 +20,13 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
         scheduleItemDTO.location = getLocation(event)
         scheduleItemDTO.date = getDate(event)
         scheduleItemDTO.sponsors = getSponsors(event)
-        scheduleItemDTO.credentials = getCredentials(event);
+        scheduleItemDTO.summitTypes = getSummitTypes(event);
         scheduleItemDTO.eventType = event.eventType.name
+        scheduleItemDTO.summitTypeColor = event.summitTypes.count == 1 ? event.summitTypes.first!.color : ""
         return scheduleItemDTO
     }
     
-    public func getCredentials(event: SummitEvent) -> String {
+    public func getSummitTypes(event: SummitEvent) -> String {
         var credentials = ""
         var separator = ""
         for summitType in event.summitTypes {
