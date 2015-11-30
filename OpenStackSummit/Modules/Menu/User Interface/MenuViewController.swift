@@ -23,8 +23,6 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     var presenter: IMenuPresenter!
     var session: ISession!
     
-    var buttons: Array<UIButton> = []
-    
     @IBOutlet weak var eventsButton: UIButton!
     @IBOutlet weak var venuesButton: UIButton!
     @IBOutlet weak var peopleButton: UIButton!
@@ -33,18 +31,17 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     //@IBOutlet weak var searchTermTextView: UITextField!
     
     @IBAction func buttonPressed(sender: UIButton) {
+        eventsButton.alpha = 0.5
+        venuesButton.alpha = 0.5
+        peopleButton.alpha = 0.5
+        myProfileButton.alpha = 0.5
         sender.alpha = 1
-        for button in buttons {
-            if button != sender {
-                button.alpha = 0.5
-            }
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttons = [eventsButton, venuesButton, peopleButton, myProfileButton]
+        myProfileButton.hidden = !presenter.hasAccessToMenuItem(myProfileButton.currentTitle!)
         
         //searchTermTextView.delegate = self
         presenter.viewLoad()
