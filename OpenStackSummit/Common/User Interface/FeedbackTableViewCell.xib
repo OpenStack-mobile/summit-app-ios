@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedbackTableViewCell" rowHeight="130" id="KGk-i7-Jjw" userLabel="feedbackTableViewCell" customClass="FeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="604" height="130"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="604" height="129"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCX-rR-iTN">
+                        <rect key="frame" x="15" y="43" width="575" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="SHV-bL-Fiw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbt-Ch-HcK">
+                        <rect key="frame" x="15" y="89" width="575" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gGI-rW-oT0" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="15" y="67" width="90" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="fnD-cb-G6o"/>
+                            <constraint firstAttribute="width" constant="90" id="gaq-3c-Gum"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="accurateHalfStars" value="YES"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowsHalfStars" value="YES"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="colorEmpty">
+                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColorEmpty">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="colorFilled">
+                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                <real key="value" value="18"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vic-xG-lF6">
+                        <rect key="frame" x="15" y="8" width="575" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="575" id="OtW-vO-DZX"/>
+                            <constraint firstAttribute="height" constant="33" id="Tbn-8Y-vHd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Owner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOX-Iv-yiq">
+                        <rect key="frame" x="111" y="65" width="479" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pCX-rR-iTN" firstAttribute="top" secondItem="vic-xG-lF6" secondAttribute="bottom" constant="2" id="DP6-6z-T2a"/>
+                    <constraint firstItem="gGI-rW-oT0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="KIk-Vb-SmA"/>
+                    <constraint firstAttribute="topMargin" secondItem="vic-xG-lF6" secondAttribute="top" id="Lmf-hr-xPr"/>
+                    <constraint firstItem="GOX-Iv-yiq" firstAttribute="top" secondItem="pCX-rR-iTN" secondAttribute="bottom" constant="1" id="Mbr-p7-Xzq"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hbt-Ch-HcK" secondAttribute="bottom" constant="7" id="MwX-Jf-ZGw"/>
+                    <constraint firstItem="pCX-rR-iTN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="Qpa-yr-AKY"/>
+                    <constraint firstItem="hbt-Ch-HcK" firstAttribute="top" secondItem="GOX-Iv-yiq" secondAttribute="bottom" constant="3" id="UyZ-Kd-qkA"/>
+                    <constraint firstItem="gGI-rW-oT0" firstAttribute="top" secondItem="pCX-rR-iTN" secondAttribute="bottom" constant="2" id="XRe-Le-HLX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pCX-rR-iTN" secondAttribute="trailing" constant="6" id="aS4-M9-42A"/>
+                    <constraint firstItem="hbt-Ch-HcK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="evF-Mw-giJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="GOX-Iv-yiq" secondAttribute="trailing" constant="6" id="mJm-cN-OSo"/>
+                    <constraint firstItem="GOX-Iv-yiq" firstAttribute="leading" secondItem="gGI-rW-oT0" secondAttribute="trailing" constant="6" id="q6w-K0-Fda"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="hbt-Ch-HcK" secondAttribute="trailing" constant="6" id="tbt-gx-fYS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="pCX-rR-iTN" id="TcF-d2-r5L"/>
+                <outlet property="eventNameLabel" destination="vic-xG-lF6" id="oaw-NJ-edy"/>
+                <outlet property="eventNameLabelHeightConstraint" destination="Tbn-8Y-vHd" id="eKG-ZQ-NEe"/>
+                <outlet property="ownerLabel" destination="GOX-Iv-yiq" id="VKJ-zW-sfr"/>
+                <outlet property="rateView" destination="gGI-rW-oT0" id="I6m-hS-Vc4"/>
+                <outlet property="rateViewWidthConstraint" destination="gaq-3c-Gum" id="iMd-ZK-S9j"/>
+                <outlet property="reviewLabel" destination="hbt-Ch-HcK" id="yZD-ZG-aCc"/>
+            </connections>
+            <point key="canvasLocation" x="647" y="366"/>
+        </tableViewCell>
+    </objects>
+</document>
