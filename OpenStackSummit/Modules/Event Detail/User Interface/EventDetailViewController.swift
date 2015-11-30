@@ -10,6 +10,7 @@ import UIKit
 import Haneke
 import Cosmos
 import AHKActionSheet
+import SwiftSpinner
 
 @objc
 public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledViewController {
@@ -18,6 +19,8 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     func reloadSpeakersData()
     func showFeedbackListActivityIndicator()
     func hideFeedbackListActivityIndicator()
+    func showActivityIndicator()
+    func hideActivityIndicator()
     
     var presenter: IEventDetailPresenter! { get set }
     var eventTitle: String! { get set }
@@ -221,6 +224,9 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
         set {
             myFeedbackReviewLabel.text = newValue
+            myFeedbackReviewLabel.sizeToFit()
+            myFeedbackViewHeightConstraint.constant = myFeedbackReviewLabel.frame.height + myFeedbackNameLabel.frame.height + myFeedbackDateLabel.frame.height + 15
+            myFeedbackView.updateConstraints()
         }
     }
     
@@ -414,5 +420,13 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     
     func hideFeedbackListActivityIndicator() {
         feedbackListActivityIndicator.hidden = true
+    }
+    
+    func showActivityIndicator() {
+        SwiftSpinner.show("Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
     }
 }

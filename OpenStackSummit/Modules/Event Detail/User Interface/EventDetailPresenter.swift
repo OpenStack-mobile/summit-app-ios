@@ -52,7 +52,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.location = event.location
         viewController.date = event.date
         viewController.sponsors = event.sponsors
-        viewController.summitTypes = event.credentials
+        viewController.summitTypes = event.summitTypes
         viewController.allowFeedback = event.allowFeedback && event.finished && interactor.isMemberLoggedIn() && myFeedbackForEvent == nil
         viewController.hasSpeakers = event.speakers.count > 0
         viewController.hasAnyFeedback = false
@@ -69,7 +69,9 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
             viewController.myFeedbackName = myFeedbackForEvent!.owner
         }
         
-        loadFeedback()
+        if event.allowFeedback && event.finished {
+            loadFeedback()
+        }
     }
     
     public func loadFeedback() {
@@ -79,7 +81,6 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         
         loadingFeedback = true
         viewController.showFeedbackListActivityIndicator()
-        
         interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
             dispatch_async(dispatch_get_main_queue(),{
                 defer {
@@ -94,7 +95,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 
                 var feedbackPageWithoutMe = [FeedbackDTO]()
                 for feedbackDTO in feedbackPage! {
-                    //if self.myFeedbackForEvent != nil && feedbackDTO.owner != self.myFeedbackForEvent!.owner {
+                    //if self.myFeedbackForEvent !  = nil && feedbackDTO.owner != self.myFeedbackForEvent!.owner {
                         feedbackPageWithoutMe.append(feedbackDTO)
                     //}
                 }

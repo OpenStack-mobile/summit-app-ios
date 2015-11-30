@@ -29,7 +29,7 @@ class GeneralScheduleViewController: ScheduleViewController, XLPagerTabStripChil
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources t	hat can be recreated.
     }
     
     override func showActivityIndicator() {
