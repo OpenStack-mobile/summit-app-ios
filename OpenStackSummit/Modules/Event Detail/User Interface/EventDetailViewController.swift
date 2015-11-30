@@ -16,6 +16,8 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     func didAddEventToMySchedule(event: EventDetailDTO)
     func reloadFeedbackData()
     func reloadSpeakersData()
+    func showFeedbackListActivityIndicator()
+    func hideFeedbackListActivityIndicator()
     
     var presenter: IEventDetailPresenter! { get set }
     var eventTitle: String! { get set }
@@ -26,18 +28,20 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     var summitTypes: String! { get set }
     var tags: String! { get set }
     var allowFeedback: Bool { get set }
-    var loadedAllFeedback: Bool { get set }
     var hasSpeakers: Bool { get set }
     var hasAnyFeedback: Bool { get set }
     var myFeedbackRate: Double { get set }
     var myFeedbackReview: String! { get set }
     var myFeedbackDate: String! { get set }
+    var myFeedbackName: String! { get set }
     var hasMyFeedback: Bool { get set}
     var isScheduledStatusVisible: Bool { get set }
 }
 
 class EventDetailViewController: BaseViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var feedbackListActivityIndicator: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var eventDetailLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -46,7 +50,6 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     @IBOutlet weak var feedbackButton: UIButton!
     @IBOutlet weak var speakersTableView: UITableView!
     @IBOutlet weak var feedbackTableView: UITableView!
-    @IBOutlet weak var moreFeedbackButton: UIButton!
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var sponsorsLabel: UILabel!
@@ -60,13 +63,15 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     @IBOutlet weak var myFeedbackDateLabel: UILabel!
     @IBOutlet weak var myFeedbackReviewLabel: UILabel!
     @IBOutlet weak var myFeedbackRateView: CosmosView!
+    @IBOutlet weak var myFeedbackNameLabel: UILabel!
     @IBOutlet weak var feedbackButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var myFeedbackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var moreFeedbackButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var submenuButton: UIBarButtonItem!
     @IBOutlet weak var tagsLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var eventDetailLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var locationLabelHeightConstraint: NSLayoutConstraint!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -110,6 +115,12 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
         set {
             locationLabel.text = newValue
+            if (newValue == nil || newValue.isEmpty) {
+                locationLabelHeightConstraint.constant = 0
+            }
+            else {
+                locationLabelHeightConstraint.constant = 60
+            }
         }
     }
 
@@ -160,16 +171,6 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
     }
     
-    var loadedAllFeedback: Bool {
-        get {
-            return moreFeedbackButtonHeightConstraint.constant == 0
-        }
-        set {
-            moreFeedbackButtonHeightConstraint.constant = newValue ? 0 : 30
-            moreFeedbackButton.updateConstraints()
-        }
-    }
-    
     var hasSpeakers: Bool {
         get {
             return speakersHeightConstraint.constant > 0
@@ -182,12 +183,10 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     
     var hasAnyFeedback: Bool  {
         get {
-            return moreFeedbackButtonHeightConstraint.constant > 0
+            return feedbackTableHeightConstraint.constant > 0
         }
         set {
-            moreFeedbackButtonHeightConstraint.constant = newValue ? 30 : 0
-            feedbackTableHeightConstraint.constant =  newValue ? 200 : 0
-            moreFeedbackButton.updateConstraints()
+            feedbackTableHeightConstraint.constant = newValue ? 200 : 0
             feedbackTableView.updateConstraints()
         }
     }
@@ -233,6 +232,15 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
             myFeedbackDateLabel.text = newValue
         }
     }
+
+    var myFeedbackName: String!{
+        get {
+            return myFeedbackNameLabel.text
+        }
+        set {
+            myFeedbackNameLabel.text = newValue
+        }
+    }
     
     var hasMyFeedback: Bool {
         get {
@@ -275,13 +283,11 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         submenuButton.action = Selector("showSubmenu:")
         
         feedbackButton.layer.cornerRadius = 10
-        moreFeedbackButton.layer.cornerRadius = 10
 
         timeView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         locationView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         summitTypesView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
         summitTypesView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
-        myFeedbackView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
         myFeedbackView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         
         actionSheet = AHKActionSheet()
@@ -294,7 +300,9 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         actionSheet.blurRadius = 8.0;
         actionSheet.buttonHeight = 50.0;
         actionSheet.buttonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
-        actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]        
+        actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
+        
+        feedbackTableView.registerNib(UINib(nibName: "FeedbackTableViewCell", bundle: nil), forCellReuseIdentifier: feedbackCellIdentifier)
     }
     
     override func didReceiveMemoryWarning() {
@@ -324,20 +332,41 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (tableView == speakersTableView) {
+        if tableView == speakersTableView {
             let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
             presenter.buildSpeakerCell(cell, index: indexPath.row)
             return cell
         }
-        else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(feedbackCellIdentifier, forIndexPath: indexPath) as! FeedbackGivenTableViewCell
+        else if tableView == feedbackTableView {
+            let cell = tableView.dequeueReusableCellWithIdentifier(feedbackCellIdentifier, forIndexPath: indexPath) as! FeedbackTableViewCell
             presenter.buildFeedbackCell(cell, index: indexPath.row)
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.separatorInset = UIEdgeInsetsZero
             return cell
         }
+        return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         presenter.showSpeakerProfile(indexPath.row)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView == feedbackTableView {
+            return UITableViewAutomaticDimension
+        }
+        else {
+            return tableView.rowHeight
+        }
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView == feedbackTableView {
+            return UITableViewAutomaticDimension
+        }
+        else {
+            return tableView.rowHeight
+        }
     }
     
     func reloadSpeakersData() {
@@ -370,5 +399,20 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     
     override func viewWillDisappear(animated: Bool) {
         presenter.viewUnload()
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+            presenter.loadFeedback()
+        }
+    }
+    
+    func showFeedbackListActivityIndicator() {
+        feedbackListActivityIndicator.hidden = false
+    }
+    
+    func hideFeedbackListActivityIndicator() {
+        feedbackListActivityIndicator.hidden = true
     }
 }
