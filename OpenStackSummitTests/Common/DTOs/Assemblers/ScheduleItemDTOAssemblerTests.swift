@@ -128,4 +128,48 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         XCTAssertEqual("07:00 PM - 12:00 AM", scheduleItemDTO.date)
         XCTAssertEqual(event.eventType.name, scheduleItemDTO.eventType)
     }
+    
+    func test_createDTO_eventWithSingleSummitType_returnsDTOWithCorrectColorAssigned() {
+        // Arrange
+        let venue = Venue()
+        venue.id = 1
+        venue.name = "Test Venue"
+        let venueRoom = VenueRoom()
+        venueRoom.id = 1;
+        venueRoom.name = "Test Venue Room"
+        venue.venueRooms.append(venueRoom)
+        let eventType = EventType()
+        eventType.id = 1
+        eventType.name = "Keynote"
+
+        let summitType = SummitType()
+        summitType.id = 1
+        summitType.color = "#ff4455"
+        let event = SummitEvent()
+        event.id = 1
+        event.name = "Test Title"
+        event.eventDescription = "Test Description"
+        event.start = NSDate(timeIntervalSince1970: NSTimeInterval(1446026400))
+        event.end = NSDate(timeIntervalSince1970: NSTimeInterval(1446044400))
+        event.venueRoom = venueRoom
+        event.eventType = eventType
+        event.summitTypes.append(summitType)
+        
+        let summit = Summit()
+        summit.id = 1
+        summit.events.append(event)
+        summit.timeZone = "Asia/Tokyo"
+        
+        try! realm.write {
+            self.realm.add(venue)
+            self.realm.add(summit)
+        }
+        let scheduleItemDTOAssembler = ScheduleItemDTOAssembler()
+        
+        // Act
+        let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+        
+        // Assert
+        XCTAssertEqual(summitType.color, scheduleItemDTO.summitTypeColor)
+    }
 }
