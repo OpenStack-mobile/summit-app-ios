@@ -205,6 +205,7 @@
 		CADC794C1BD1198D005AA306 /* VenueListItemDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */; };
 		CADC794E1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */; };
 		CADCE2841BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */; };
+		CADD442B1C0CECA600EE49E8 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD442A1C0CECA600EE49E8 /* UIColor+HexString.swift */; };
 		CADD51061BD66B5300400AF4 /* SpeakerPresentationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD51051BD66B5300400AF4 /* SpeakerPresentationsViewController.swift */; };
 		CADD51081BD66B8500400AF4 /* SpeakerPresentationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD51071BD66B8500400AF4 /* SpeakerPresentationsInteractor.swift */; };
 		CADD510A1BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD51091BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift */; };
@@ -522,6 +523,7 @@
 		CADC794B1BD1198D005AA306 /* VenueListItemDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItemDTOAssembler.swift; sourceTree = "<group>"; };
 		CADC794D1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItemDTOAssemblerTests.swift; sourceTree = "<group>"; };
 		CADCE2831BB9EEAF007DBDF0 /* MyScheduleDataUpdateStrategyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScheduleDataUpdateStrategyTests.swift; sourceTree = "<group>"; };
+		CADD442A1C0CECA600EE49E8 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+HexString.swift"; path = "User Interface/UIColor+HexString.swift"; sourceTree = "<group>"; };
 		CADD51051BD66B5300400AF4 /* SpeakerPresentationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsViewController.swift; sourceTree = "<group>"; };
 		CADD51071BD66B8500400AF4 /* SpeakerPresentationsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsInteractor.swift; sourceTree = "<group>"; };
 		CADD51091BD66B9800400AF4 /* SpeakerPresentationsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsPresenter.swift; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 				CADE48BE1C06306E00A858DA /* SweetAlert.swift */,
 				CADE09951C08CB77002B21BA /* FeedbackTableViewCell.swift */,
 				CADE09961C08CB77002B21BA /* FeedbackTableViewCell.xib */,
+				CADD442A1C0CECA600EE49E8 /* UIColor+HexString.swift */,
 			);
 			name = "User Interfaces";
 			sourceTree = "<group>";
@@ -1950,6 +1953,7 @@
 				CADDDBA71B73D1BB008F742E /* Presentation.swift in Sources */,
 				CAD3BCA01BA9F05E0092616D /* SecurityManager.swift in Sources */,
 				CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */,
+				CADD442B1C0CECA600EE49E8 /* UIColor+HexString.swift in Sources */,
 				CA8913101B97951D002E9A95 /* MemberProfileViewController.swift in Sources */,
 				CA4399941BD19778008F378D /* GivenFeedbackAssembly.swift in Sources */,
 				CACFBC441B9F90C700095E44 /* FeedbackEditViewController.swift in Sources */,

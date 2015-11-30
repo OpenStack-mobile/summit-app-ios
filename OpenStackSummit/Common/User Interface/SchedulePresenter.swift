@@ -60,6 +60,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         cell.place = event.location
         cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
+        cell.summitTypeColor = event.summitTypeColor != "" ? UIColor(hexaString: event.summitTypeColor) : nil
     }
     
     public func getDayEventsCount() -> Int {
