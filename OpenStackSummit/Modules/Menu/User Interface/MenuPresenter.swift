@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func viewLoad()
-    func hasAccessToMenuItem(section: Int, row: Int) -> Bool
+    func hasAccessToMenuItem(withTitle: String) -> Bool
     func login()
     func logout()
 }
@@ -44,24 +44,19 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         }
     }
     
-    public func hasAccessToMenuItem(section: Int, row: Int) -> Bool {
+    public func hasAccessToMenuItem(withTitle: String) -> Bool {
         
         let currentMemberRole = securityManager.getCurrentMemberRole()
-        var show = true
-        if (section == 1) {
-            if (row == 2) {
+        
+        var show: Bool
+        switch (withTitle) {
+            case "my profile".uppercaseString:
                 show = currentMemberRole != MemberRoles.Anonymous
-            }
-        }
-        if (section == 2) {
-            if (row == 0 || row == 2) {
-                show = currentMemberRole != MemberRoles.Anonymous
-            }
-            else {
-                show = currentMemberRole == MemberRoles.Anonymous
-            }
+            default:
+                show = true
         }
         return show
+        
     }
     
     public func login() {
