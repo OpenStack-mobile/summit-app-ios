@@ -15,6 +15,7 @@ public protocol IGeneralScheduleFilterInteractor {
     func getEventTypes() -> [NamedDTO]
     func getSummitTracks() -> [NamedDTO]
     func getTagsBySearchTerm(searchTerm: String) -> [String]
+    func getSummitType(id: Int) -> SummitType?
 }
 
 public class GeneralScheduleFilterInteractor: NSObject {
@@ -60,5 +61,9 @@ public class GeneralScheduleFilterInteractor: NSObject {
             dtos.append(dto)
         }
         return dtos
+    }
+    
+    public func getSummitType(id: Int) -> SummitType? {
+        return summitTypeDataStore.getByIdLocal(id)
     }
 }
