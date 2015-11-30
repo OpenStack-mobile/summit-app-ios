@@ -15,6 +15,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
     var time: String! { get set }
     var place: String! { get set }
     var isScheduledStatusVisible: Bool { get set }
+    var summitTypeColor: UIColor? { get set }
 }
 
 @objc public enum ScheduledStatus: Int {
@@ -72,6 +73,17 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
             }
             else {
                 scheduleButton.setImage(UIImage(named:"unchecked")!, forState: .Normal)
+            }
+        }
+    }
+    
+    var summitTypeColor: UIColor? {
+        get {
+            return eventTitleLabel.textColor
+        }
+        set {
+            if newValue != nil {
+                eventTitleLabel.textColor = newValue
             }
         }
     }
