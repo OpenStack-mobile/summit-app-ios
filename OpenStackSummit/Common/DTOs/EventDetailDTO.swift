@@ -22,7 +22,7 @@ public class EventDetailDTO: ScheduleItemDTO {
         date = scheduleItemDTO.date
         sponsors = scheduleItemDTO.sponsors
         eventType = scheduleItemDTO.eventType
-        credentials = scheduleItemDTO.credentials
+        summitTypes = scheduleItemDTO.summitTypes
     }
     
     public var venueId: Int?

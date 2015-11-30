@@ -10,6 +10,6 @@ import Foundation
 import RealmSwift
 
 public class SummitType: NamedEntity {
-
+    public dynamic var color = ""
 
 }
