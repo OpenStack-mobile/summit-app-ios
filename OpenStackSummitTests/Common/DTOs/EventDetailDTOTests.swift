@@ -38,7 +38,7 @@ class EventDetailDTOTests: XCTestCase {
         XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
         XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
         XCTAssertEqual(scheduleItemDTO.date, eventDetailDTO.date)
-        XCTAssertEqual(scheduleItemDTO.credentials, eventDetailDTO.credentials)
+        XCTAssertEqual(scheduleItemDTO.summitTypes, eventDetailDTO.summitTypes)
         XCTAssertEqual(scheduleItemDTO.eventType, eventDetailDTO.eventType)
     }
 }

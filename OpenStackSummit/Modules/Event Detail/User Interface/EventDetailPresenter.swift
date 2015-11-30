@@ -18,7 +18,7 @@ public protocol IEventDetailPresenter: IBasePresenter {
     func getSpeakersCount()->Int
     func getFeedbackCount()->Int
     func buildSpeakerCell(cell: IPeopleTableViewCell, index: Int)
-    func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int)
+    func buildFeedbackCell(cell: IFeedbackTableViewCell, index: Int)
     func showSpeakerProfile(index: Int)
     func loadFeedback()
     func showVenueDetail()
@@ -34,11 +34,14 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
     private var event: EventDetailDTO!
     private var myFeedbackForEvent: FeedbackDTO?
     private var feedbackPage = 1
-    private var feedbackObjectsPerPage = 10
+    private var feedbackObjectsPerPage = 5
     private var feedbackList = [FeedbackDTO]()
-    private var loadedAllFeedback: Bool!
+    private var loadedAllFeedback = false
+    private var loadingFeedback = false
     
     public func viewLoad() {
+        loadedAllFeedback = false
+        loadingFeedback = false
         feedbackPage = 1
         feedbackList.removeAll()
         event = interactor.getEventDetail(eventId)
@@ -49,7 +52,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.location = event.location
         viewController.date = event.date
         viewController.sponsors = event.sponsors
-        viewController.summitTypes = event.credentials
+        viewController.summitTypes = event.summitTypes
         viewController.allowFeedback = event.allowFeedback && event.finished && interactor.isMemberLoggedIn() && myFeedbackForEvent == nil
         viewController.hasSpeakers = event.speakers.count > 0
         viewController.hasAnyFeedback = false
@@ -63,25 +66,46 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
             viewController.myFeedbackDate = myFeedbackForEvent!.date
             viewController.myFeedbackRate = Double(myFeedbackForEvent!.rate)
             viewController.myFeedbackReview = myFeedbackForEvent!.review
+            viewController.myFeedbackName = myFeedbackForEvent!.owner
         }
         
-        loadFeedback()
+        if event.allowFeedback && event.finished {
+            loadFeedback()
+        }
     }
     
     public func loadFeedback() {
+        if (loadingFeedback || loadedAllFeedback) {
+            return
+        }
+        
+        loadingFeedback = true
+        viewController.showFeedbackListActivityIndicator()
         interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
             dispatch_async(dispatch_get_main_queue(),{
+                defer {
+                    self.loadingFeedback = false
+                    self.viewController.hideFeedbackListActivityIndicator()
+                }
                 
                 if (error != nil) {
                     self.viewController.showErrorMessage(error!)
                     return
                 }
                 
-                self.feedbackList.appendContentsOf(feedbackPage!)
+                var feedbackPageWithoutMe = [FeedbackDTO]()
+                for feedbackDTO in feedbackPage! {
+                    //if self.myFeedbackForEvent !  = nil && feedbackDTO.owner != self.myFeedbackForEvent!.owner {
+                        feedbackPageWithoutMe.append(feedbackDTO)
+                    //}
+                }
+                
+                
+                self.feedbackList.appendContentsOf(feedbackPageWithoutMe)
                 self.viewController.reloadFeedbackData()
                 self.viewController.hasAnyFeedback = self.feedbackList.count > 0
                 self.feedbackPage++
-                self.viewController.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
+                self.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
             })
         }
     }
@@ -113,9 +137,9 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         cell.isModerator = event.moderator != nil && speaker.id == event.moderator?.id
     }
     
-    public func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int) {
+    public func buildFeedbackCell(cell: IFeedbackTableViewCell, index: Int) {
         let feedback = feedbackList[index]
-        cell.eventName = feedback.eventName
+        cell.eventName = ""
         cell.owner = feedback.owner
         cell.rate = Double(feedback.rate)
         cell.review = feedback.review
