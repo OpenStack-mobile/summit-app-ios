@@ -18,7 +18,8 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
     public func createDTO(event: SummitEvent) -> ScheduleItemDTO {
         let scheduleItemDTO: ScheduleItemDTO = super.createDTO(event)
         scheduleItemDTO.location = getLocation(event)
-        scheduleItemDTO.date = getDate(event)
+        scheduleItemDTO.time = getTime(event)
+        scheduleItemDTO.dateTime = getDateTime(event)
         scheduleItemDTO.sponsors = getSponsors(event)
         scheduleItemDTO.summitTypes = getSummitTypes(event);
         scheduleItemDTO.eventType = event.eventType.name
@@ -50,11 +51,22 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
         return sponsors
     }
 
-    public func getDate(event: SummitEvent) -> String{
-        
+    public func getTime(event: SummitEvent) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
+        let stringDateFrom = dateFormatter.stringFromDate(event.start)
+        
+        dateFormatter.dateFormat = "hh:mm a"
+        let stringDateTo = dateFormatter.stringFromDate(event.end)
+        
+        return "\(stringDateFrom) - \(stringDateTo)"
+    }
+
+    public func getDateTime(event: SummitEvent) -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
+        dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
         let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
         dateFormatter.dateFormat = "hh:mm a"

@@ -98,7 +98,7 @@ public class SearchPresenter: BasePresenter {
         let event = events[index]
         cell.eventTitle = event.name
         cell.eventType = event.eventType
-        cell.time = event.date
+        cell.time = event.dateTime
         cell.place = event.location
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = interactor.isMemberLoggedIn()

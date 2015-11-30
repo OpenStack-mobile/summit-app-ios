@@ -9,7 +9,8 @@
 import UIKit
 
 public class ScheduleItemDTO: NamedDTO {
-    public var date = ""
+    public var dateTime = ""
+    public var time = ""
     public var location = ""
     public var track = ""
     public var summitTypes = ""
