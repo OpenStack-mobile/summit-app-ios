@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -22,13 +22,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="oPA-Xe-cXw" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="5ak-Yc-8sh"/>
                         <segue destination="gyU-iO-mn8" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="jw3-AU-vcp"/>
+                        <segue destination="WC9-XC-aZZ" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="mO7-xB-2Ii"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTH-wm-hoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-664.5" y="325.5"/>
+            <point key="canvasLocation" x="-731" y="472"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="Jfq-aZ-aeA">
@@ -101,9 +101,6 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <connections>
-                                            <segue destination="gyU-iO-mn8" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="SXm-8j-zCe"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="37z-Ub-2vc">
                                         <rect key="frame" x="0.0" y="154" width="600" height="44"/>
@@ -123,9 +120,6 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <connections>
-                                            <segue destination="Qo7-4W-6Ab" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="R6b-sV-3cO"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Cv6-Wk-ZHS">
                                         <rect key="frame" x="0.0" y="198" width="600" height="44"/>
@@ -145,9 +139,6 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <connections>
-                                            <segue destination="Z8E-JH-CXt" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="mav-vL-PNr"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vvS-wV-JjH">
                                         <rect key="frame" x="0.0" y="242" width="600" height="44"/>
@@ -167,9 +158,6 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <connections>
-                                            <segue destination="KgQ-pt-kqb" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="pbj-6g-Sim"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -243,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECJ-ir-zDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="159" y="325"/>
+            <point key="canvasLocation" x="194" y="1486"/>
         </scene>
         <!--EVENTS-->
         <scene sceneID="t2r-Ay-5sh">
@@ -451,6 +439,7 @@
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="MODERATOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKN-MR-Jok">
                                                                     <rect key="frame" x="83" y="5" width="120" height="21"/>
+                                                                    <animations/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -496,9 +485,11 @@
                                                     <subviews>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-nd-Hzl">
                                                             <rect key="frame" x="290" y="12" width="20" height="20"/>
+                                                            <animations/>
                                                             <color key="color" cocoaTouchSystemColor="darkTextColor"/>
                                                         </activityIndicatorView>
                                                     </subviews>
+                                                    <animations/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="jxf-nd-Hzl" firstAttribute="centerX" secondItem="se2-52-2dN" secondAttribute="centerX" id="x45-qt-cmS"/>
@@ -530,6 +521,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Unj-wl-4Ar">
                                                 <rect key="frame" x="180" y="960" width="240" height="10"/>
+                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="vSN-R6-OE4"/>
@@ -2531,23 +2523,93 @@
             </objects>
             <point key="canvasLocation" x="1869" y="-984"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="DmD-10-VF4">
             <objects>
-                <viewController id="WC9-XC-aZZ" sceneMemberID="viewController">
+                <viewController id="WC9-XC-aZZ" customClass="MenuViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kic-IL-EkI"/>
                         <viewControllerLayoutGuide type="bottom" id="eT2-4h-nYo"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="U4Y-zk-b2q">
+                    <view key="view" contentMode="scaleToFill" id="2dh-RC-ieT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KX8-bb-2LT">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jO-Sc-915" userLabel="Events Button">
+                                <rect key="frame" x="26" y="168" width="400" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="EVENTS" image="events"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="hd7-EM-Ndr"/>
+                                    <segue destination="gyU-iO-mn8" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="nxb-M5-kz0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L63-Y8-65B" userLabel="Venues Button">
+                                <rect key="frame" x="28" y="218" width="400" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="21" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="VENUES" image="venues"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="1x3-LM-LOG"/>
+                                    <segue destination="Qo7-4W-6Ab" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="WgJ-tp-dRV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People Button">
+                                <rect key="frame" x="24" y="268" width="400" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="PEOPLE" image="people"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="VSz-aY-mdg"/>
+                                    <segue destination="KgQ-pt-kqb" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="rbo-x9-MVq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">
+                                <rect key="frame" x="26" y="318" width="400" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="MY PROFILE" image="my-profile"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="gEs-Gj-RYx"/>
+                                    <segue destination="Z8E-JH-CXt" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="LqL-3p-fGg"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="pyp-Az-pay" userLabel="Summit Logo Image View">
+                                <rect key="frame" x="30" y="512" width="168" height="68"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="RL8-BT-AyV"/>
+                                    <constraint firstAttribute="height" constant="68" id="tyt-Fx-HXq"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="pyp-Az-pay" firstAttribute="bottom" secondItem="eT2-4h-nYo" secondAttribute="top" constant="-20" id="WiK-HM-Lhg"/>
+                            <constraint firstItem="pyp-Az-pay" firstAttribute="leading" secondItem="2dh-RC-ieT" secondAttribute="leading" constant="30" id="jHM-2s-eKM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="eventsButton" destination="1jO-Sc-915" id="eOV-wn-2jC"/>
+                        <outlet property="myProfileButton" destination="rA9-p9-JRk" id="bij-dO-4Jl"/>
+                        <outlet property="peopleButton" destination="6CC-Hc-iyc" id="IpV-IN-8W3"/>
+                        <outlet property="venuesButton" destination="L63-Y8-65B" id="UW1-UR-Jtq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7T-YR-PEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="194" y="472"/>
         </scene>
     </scenes>
     <resources>
@@ -2555,15 +2617,20 @@
         <image name="checked_active" width="22" height="22"/>
         <image name="credential" width="46" height="31"/>
         <image name="email" width="29" height="25"/>
+        <image name="events" width="26" height="26"/>
         <image name="filter" width="19" height="18"/>
         <image name="irc" width="30" height="30"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="menu" width="20" height="17"/>
+        <image name="my-profile" width="26" height="26"/>
+        <image name="people" width="29" height="29"/>
         <image name="submenu" width="4" height="18"/>
+        <image name="summit-logo" width="335" height="135"/>
         <image name="time" width="30" height="30"/>
         <image name="twitter" width="29" height="24"/>
+        <image name="venues" width="21" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SXm-8j-zCe"/>
+        <segue reference="nxb-M5-kz0"/>
     </inferredMetricsTieBreakers>
 </document>
