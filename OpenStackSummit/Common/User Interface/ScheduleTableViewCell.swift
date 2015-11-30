@@ -82,9 +82,8 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
             return eventTitleLabel.textColor
         }
         set {
-            if newValue != nil {
-                eventTitleLabel.textColor = newValue
-            }
+            eventTitleLabel.textColor = newValue != nil ? newValue : UIColor.blackColor()
+            summitTypeColorBar.backgroundColor = newValue != nil ? newValue : UIColor.lightGrayColor()
         }
     }
     
@@ -102,6 +101,7 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var scheduleButton: UIButton!
+    @IBOutlet weak var summitTypeColorBar: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

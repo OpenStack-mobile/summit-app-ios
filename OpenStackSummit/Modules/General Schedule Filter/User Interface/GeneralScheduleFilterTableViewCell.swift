@@ -12,6 +12,8 @@ import UIKit
 public protocol IGeneralScheduleFilterTableViewCell {
     var name: String! { get set }
     var isOptionSelected: Bool { get set }
+    var unselectedColor: UIColor? { get set }
+    var selectedColor: UIColor? { get set }
 }
 
 class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilterTableViewCell {
@@ -31,13 +33,33 @@ class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilte
         set {
             optionSelectedImage.hidden = !newValue
             nameLabel.font = newValue ? UIFont.boldSystemFontOfSize(15) : UIFont.systemFontOfSize(15)
-            nameLabel.textColor = newValue ? UIColor.whiteColor() : UIColor.lightGrayColor()
+            nameLabel.textColor = newValue ? getSelectedColor() : getUnselectedColor() // UIColor.whiteColor() : UIColor.lightGrayColor()
+        }
+    }
+    
+    var unselectedColor: UIColor? {
+        get {
+            return unselectedColorInternal
+        }
+        set {
+            unselectedColorInternal = newValue
+        }
+    }
+
+    var selectedColor: UIColor? {
+        get {
+            return selectedColorInternal
+        }
+        set {
+            selectedColorInternal = newValue
         }
     }
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var optionSelectedImage: UIImageView!
 
+    var unselectedColorInternal:UIColor?
+    var selectedColorInternal:UIColor?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,4 +74,13 @@ class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilte
         
         // Configure the view for the selected state
     }
+    
+    func getSelectedColor() -> UIColor? {
+        return (selectedColorInternal != nil) ? selectedColorInternal : UIColor.whiteColor()
+    }
+    
+    func getUnselectedColor() -> UIColor? {
+        return (unselectedColorInternal != nil) ? unselectedColorInternal : UIColor.lightGrayColor()
+    }
+    
 }
