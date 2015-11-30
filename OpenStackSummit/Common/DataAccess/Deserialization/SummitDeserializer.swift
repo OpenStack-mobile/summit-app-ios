@@ -26,12 +26,6 @@ public class SummitDeserializer: NSObject, IDeserializer {
         
         try validateRequiredFields(["id", "name", "start_date", "end_date", "time_zone", "sponsors", "summit_types", "ticket_types", "event_types", "tracks", "locations", "speakers", "schedule"], inJson: json)
         
-        summit.id = json["id"].intValue
-        summit.name = json["name"].stringValue
-        summit.startDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
-        summit.endDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
-        summit.timeZone = json["time_zone"]["name"].stringValue
-
         var deserializer : IDeserializer!
         
         deserializer = deserializerFactory.create(DeserializerFactoryType.Company)
@@ -94,6 +88,12 @@ public class SummitDeserializer: NSObject, IDeserializer {
             event = try deserializer.deserialize(eventJSON) as! SummitEvent
             summit.events.append(event)
         }
+        
+        summit.id = json["id"].intValue
+        summit.name = json["name"].stringValue
+        summit.startDate = summit.events.first!.start
+        summit.endDate = summit.events.last!.end
+        summit.timeZone = json["time_zone"]["name"].stringValue
         
         return summit
     }

@@ -56,7 +56,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         let event = dayEvents[index]
         cell.eventTitle = event.name
         cell.eventType = event.eventType
-        cell.time = event.date
+        cell.time = event.time
         cell.place = event.location
         cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()

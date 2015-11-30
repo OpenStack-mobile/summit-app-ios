@@ -19,7 +19,8 @@ public class EventDetailDTO: ScheduleItemDTO {
         id = scheduleItemDTO.id
         name = scheduleItemDTO.name
         location = scheduleItemDTO.location
-        date = scheduleItemDTO.date
+        time = scheduleItemDTO.time
+        dateTime = scheduleItemDTO.dateTime
         sponsors = scheduleItemDTO.sponsors
         eventType = scheduleItemDTO.eventType
         summitTypes = scheduleItemDTO.summitTypes
