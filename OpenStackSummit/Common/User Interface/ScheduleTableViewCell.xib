@@ -71,11 +71,20 @@
                             <constraint firstAttribute="width" constant="16" id="xee-7Y-Dau"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMe-ih-9ol">
+                        <rect key="frame" x="0.0" y="0.0" width="4" height="119"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="4" id="b9m-VZ-bHn"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <animations/>
                 <constraints>
                     <constraint firstItem="goI-ed-esB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="7FB-6g-TfM"/>
+                    <constraint firstItem="JMe-ih-9ol" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8uZ-5X-yNb"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="bottom" secondItem="eSW-vu-WCr" secondAttribute="top" constant="-15" id="CBb-wf-TKb"/>
+                    <constraint firstAttribute="bottom" secondItem="JMe-ih-9ol" secondAttribute="bottom" id="FNU-Ou-GWj"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ioa-TV-HIm"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="leading" secondItem="eZN-Yh-Czz" secondAttribute="trailing" constant="6" id="Q4S-aT-hW5"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="trailing" secondItem="HfP-JC-3Iz" secondAttribute="leading" id="SKb-hb-F5E"/>
@@ -92,6 +101,7 @@
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="2/7" id="nJZ-nf-Mjx"/>
                     <constraint firstItem="eZN-Yh-Czz" firstAttribute="centerY" secondItem="eSW-vu-WCr" secondAttribute="centerY" constant="-1" id="pki-3d-OUb"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="qsm-Fv-UxN"/>
+                    <constraint firstItem="JMe-ih-9ol" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xb9-Sy-VPE"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="zha-g1-Kmh"/>
                 </constraints>
             </tableViewCellContentView>
@@ -101,6 +111,7 @@
                 <outlet property="eventTypeLabel" destination="HH5-Ud-uhT" id="wXS-ZV-7Hr"/>
                 <outlet property="placeLabel" destination="eSW-vu-WCr" id="ajx-vR-x58"/>
                 <outlet property="scheduleButton" destination="HfP-JC-3Iz" id="CoP-qm-fg0"/>
+                <outlet property="summitTypeColorBar" destination="JMe-ih-9ol" id="8RR-aV-oB4"/>
                 <outlet property="timeLabel" destination="s9L-wg-JoF" id="QK2-yO-aKO"/>
             </connections>
             <point key="canvasLocation" x="578" y="331"/>

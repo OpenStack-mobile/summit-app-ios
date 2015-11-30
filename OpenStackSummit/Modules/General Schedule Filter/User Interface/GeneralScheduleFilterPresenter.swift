@@ -135,6 +135,9 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
 
     public func buildSummitTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
         let filterSection = scheduleFilter.filterSections[0]
+        let summitType = interactor.getSummitType(filterSection.items[index].id)
+        cell.selectedColor = UIColor(hexaString: summitType!.color)
+        cell.unselectedColor = UIColor(hexaString: summitType!.color)
         buildFilterCell(cell, filterSection: filterSection, index: index)
     }
 
