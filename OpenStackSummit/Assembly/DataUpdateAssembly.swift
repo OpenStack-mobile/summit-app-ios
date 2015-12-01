@@ -21,6 +21,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
             definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
             definition.injectProperty("dataUpdateProcessor", with: self.dataUpdateProcessor())
             definition.injectProperty("dataUpdateDataStore", with: self.dataUpdateDataStore())
+            definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
         }
     }
     

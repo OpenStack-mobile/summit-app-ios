@@ -16,6 +16,7 @@ class GeneralScheduleAssembly: TyphoonAssembly {
     var securityManagerAssembly: SecurityManagerAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var generalScheduleFilterAssembly: GeneralScheduleFilterAssembly!
+    var dataUpdateAssembly: DataUpdateAssembly!
     
     dynamic func generalScheduleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(GeneralScheduleWireframe.self) {
@@ -49,16 +50,10 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("scheduleItemDTOAssembler", with: self.dtoAssemblersAssembly.scheduleItemDTOAssembler())
             definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+            definition.injectProperty("dataUpdatePoller", with: self.dataUpdateAssembly.dataUpdatePoller())
+
         }
     }
-        
-    /*dynamic func generalScheduleViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(GeneralScheduleViewController.self) {
-            (definition) in
-            
-            definition.injectProperty("presenter", with: self.generalSchedulePresenter())
-        }
-    }*/
     
     dynamic func generalScheduleViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {

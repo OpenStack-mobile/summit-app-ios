@@ -18,7 +18,6 @@ public protocol ISummitRemoteDataStore {
 public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
     var deserializerFactory: DeserializerFactory!
     var httpFactory: HttpFactory!
-    var dataUpdatePoller: DataUpdatePoller!
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
@@ -43,9 +42,7 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
                 innerError = NSError(domain: "There was an error deserializing current summit", code: 6001, userInfo: nil)
             }
             
-            completionBlock(summit, innerError)
-            
-            self.dataUpdatePoller.startPolling()
+            completionBlock(summit, innerError)            
         }
     }
 }

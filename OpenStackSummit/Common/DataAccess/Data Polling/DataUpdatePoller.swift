@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 @objc
 public protocol IDataUpdatePoller {
-    func startPolling()
+    func startPollingIfNotPollingAlready()
 }
 
 public class DataUpdatePoller: NSObject, IDataUpdatePoller {
@@ -21,6 +21,8 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     var httpFactory: HttpFactory!
     var dataUpdateProcessor: DataUpdateProcessor!
     var dataUpdateDataStore: IDataUpdateDataStore!
+    var summitDataStore: ISummitDataStore!
+    
     var fromDate: Int {
         get {
             return NSUserDefaults.standardUserDefaults().objectForKey("fromDateDataPoller") as? Int ?? 0
@@ -33,14 +35,18 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     public override init() {
         super.init()
     }
-
-    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore) {
+    
+    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore, summitDataStore: ISummitDataStore) {
         self.httpFactory = httpFactory
         self.dataUpdateProcessor = dataUpdateProcessor
         self.dataUpdateDataStore = dataUpdateDataStore
+        self.summitDataStore = summitDataStore
     }
     
-    public func startPolling() {
+    public func startPollingIfNotPollingAlready() {
+        if timer != nil {
+            return
+        }
         timer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: "pollServer", userInfo: nil, repeats: true)
         pollServer()
     }
@@ -53,8 +59,15 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         }
         else {
             if fromDate == 0 {
-                fromDate = Int(NSDate().timeIntervalSince1970)  - 60
+                if let summit = summitDataStore.getActiveLocal() {
+                    fromDate = Int(summit.initialDataLoadDate.timeIntervalSince1970)
+                }
             }
+            
+            if (fromDate == 0) {
+                return
+            }
+            
             url = "https://testresource-server.openstack.org/api/v1/summits/current/entity-events?from_date=\(fromDate)"
         }
         
