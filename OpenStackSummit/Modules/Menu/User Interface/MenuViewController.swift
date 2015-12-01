@@ -11,6 +11,8 @@ import SwiftSpinner
 
 @objc
 public protocol IMenuViewController: IMessageEnabledViewController {
+    var picUrl: String! { get set }
+
     func reloadMenu()
     func hideMenu()
     func navigateToHome()
@@ -22,6 +24,29 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
 
     var presenter: IMenuPresenter!
     var session: ISession!
+    
+    private var picUrlInternal: String!
+    
+    var picUrl: String! {
+        get {
+            return picUrlInternal
+        }
+        set {
+            picUrlInternal = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            if (!picUrlInternal.isEmpty) {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
+            }
+            else {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
+            }
+            
+            pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
+            pictureImageView.clipsToBounds = true;
+        }
+    }
+    
+    @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet weak var eventsButton: UIButton!
     @IBOutlet weak var venuesButton: UIButton!
@@ -38,11 +63,21 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         sender.alpha = 1
     }
     
+    @IBAction func login(sender: UIButton) {
+        if (loginButton.currentTitle == "LOGIN") {
+            SwiftSpinner.show("Please wait...")
+            presenter.login()
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.hideActivityIndicator()
+            }
+        } else {
+            presenter.logout()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        myProfileButton.hidden = !presenter.hasAccessToMenuItem(myProfileButton.currentTitle!)
-        
         //searchTermTextView.delegate = self
         presenter.viewLoad()
     }
@@ -57,9 +92,13 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         revealViewController().revealToggle(self)
     }
     
-    func reloadMenu() {
-        SwiftSpinner.hide()
-        //tableView.reloadData()
+    func reloadMenu() {        
+        myProfileButton.hidden = !presenter.hasAccessToMenuItem(myProfileButton.currentTitle!)
+        if presenter.hasAccessToMenuItem("login") {
+            loginButton.setTitle("LOGIN", forState: UIControlState.Normal)
+        } else {
+            loginButton.setTitle("LOGOUT", forState: UIControlState.Normal)
+        }
     }
     
     func navigateToHome() {

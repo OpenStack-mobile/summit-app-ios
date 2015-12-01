@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -2535,10 +2535,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KX8-bb-2LT">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KX8-bb-2LT" userLabel="Header">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yPN-0G-jRH">
+                                        <rect key="frame" x="25" y="35" width="75" height="75"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="BaD-xe-Vgv"/>
+                                            <constraint firstAttribute="width" constant="75" id="v5I-Qu-Bih"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcQ-2M-vBU" userLabel="Name &amp; Login View">
+                                        <rect key="frame" x="120" y="37" width="480" height="71"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62J-Cf-Xx4" userLabel="Name Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="480" height="0.0"/>
+                                                <animations/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5m-sW-mWg" userLabel="Login Button">
+                                                <rect key="frame" x="0.0" y="5" width="45" height="30"/>
+                                                <animations/>
+                                                <state key="normal" title="LOGIN">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="login:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="NHP-jD-uJ2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstItem="62J-Cf-Xx4" firstAttribute="width" secondItem="DcQ-2M-vBU" secondAttribute="width" id="4l1-Qn-zRJ"/>
+                                            <constraint firstItem="w5m-sW-mWg" firstAttribute="top" secondItem="62J-Cf-Xx4" secondAttribute="bottom" constant="5" id="N8z-V0-68z"/>
+                                            <constraint firstItem="w5m-sW-mWg" firstAttribute="leading" secondItem="DcQ-2M-vBU" secondAttribute="leading" id="Roc-0Q-NxY"/>
+                                            <constraint firstAttribute="height" constant="71" id="sa1-Dr-lzq"/>
+                                            <constraint firstItem="62J-Cf-Xx4" firstAttribute="top" secondItem="DcQ-2M-vBU" secondAttribute="top" id="uXI-92-N2e"/>
+                                            <constraint firstItem="62J-Cf-Xx4" firstAttribute="leading" secondItem="DcQ-2M-vBU" secondAttribute="leading" id="zRv-xf-i4C"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="leading" secondItem="yPN-0G-jRH" secondAttribute="trailing" constant="20" id="40I-cm-lHk"/>
+                                    <constraint firstItem="yPN-0G-jRH" firstAttribute="top" secondItem="KX8-bb-2LT" secondAttribute="top" constant="35" id="7CV-Qh-Idg"/>
+                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="centerY" secondItem="yPN-0G-jRH" secondAttribute="centerY" id="7lW-Ip-gAE"/>
+                                    <constraint firstItem="yPN-0G-jRH" firstAttribute="leading" secondItem="KX8-bb-2LT" secondAttribute="leading" constant="25" id="Zal-t5-Y29"/>
+                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="trailing" secondItem="KX8-bb-2LT" secondAttribute="trailing" id="clT-h8-pUU"/>
+                                    <constraint firstAttribute="height" constant="150" id="yVN-33-q9a"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jO-Sc-915" userLabel="Events Button">
                                 <rect key="frame" x="26" y="168" width="400" height="40"/>
@@ -2596,14 +2645,19 @@
                         <animations/>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="KX8-bb-2LT" firstAttribute="width" secondItem="2dh-RC-ieT" secondAttribute="width" id="105-QZ-riE"/>
+                            <constraint firstItem="KX8-bb-2LT" firstAttribute="leading" secondItem="2dh-RC-ieT" secondAttribute="leading" id="5TW-Mj-XDp"/>
                             <constraint firstItem="pyp-Az-pay" firstAttribute="bottom" secondItem="eT2-4h-nYo" secondAttribute="top" constant="-20" id="WiK-HM-Lhg"/>
                             <constraint firstItem="pyp-Az-pay" firstAttribute="leading" secondItem="2dh-RC-ieT" secondAttribute="leading" constant="30" id="jHM-2s-eKM"/>
+                            <constraint firstItem="KX8-bb-2LT" firstAttribute="top" secondItem="kic-IL-EkI" secondAttribute="bottom" constant="-20" id="vZu-RN-tSz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="eventsButton" destination="1jO-Sc-915" id="eOV-wn-2jC"/>
+                        <outlet property="loginButton" destination="w5m-sW-mWg" id="1jK-XI-goU"/>
                         <outlet property="myProfileButton" destination="rA9-p9-JRk" id="bij-dO-4Jl"/>
                         <outlet property="peopleButton" destination="6CC-Hc-iyc" id="IpV-IN-8W3"/>
+                        <outlet property="pictureImageView" destination="yPN-0G-jRH" id="9Cm-up-YPB"/>
                         <outlet property="venuesButton" destination="L63-Y8-65B" id="UW1-UR-Jtq"/>
                     </connections>
                 </viewController>

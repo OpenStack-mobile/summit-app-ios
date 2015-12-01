@@ -34,14 +34,18 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func viewLoad() {
-        // TODO: move this to launch screen or landing page
+        self.viewController.picUrl = ""
+        
         if securityManager.getCurrentMember() == nil {
+            // TODO: move this to launch screen or landing page
             interactor.unsubscribeFromPushChannels() { (succeeded: Bool, error: NSError?) in
                 if (error != nil) {
                     self.viewController.showErrorMessage(error!)
                 }
             }
         }
+        
+        self.viewController.reloadMenu()
     }
     
     public func hasAccessToMenuItem(withTitle: String) -> Bool {
@@ -50,8 +54,10 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         
         var show: Bool
         switch (withTitle) {
-            case "my profile".uppercaseString:
+            case "MY PROFILE":
                 show = currentMemberRole != MemberRoles.Anonymous
+            case "login":
+                show = currentMemberRole == MemberRoles.Anonymous
             default:
                 show = true
         }
@@ -77,6 +83,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 return
             }
             
+            self.viewController.hideActivityIndicator()
             self.viewController.reloadMenu()
         }
     }
@@ -94,5 +101,12 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             self.viewController.navigateToHome()
             self.viewController.hideActivityIndicator()
         }
+    }
+    
+    func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
+        dispatch_async(dispatch_get_main_queue(),{
+            self.viewController.picUrl = person!.pictureUrl
+            self.viewController.hideActivityIndicator()
+        })
     }
 }
