@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func viewLoad()
-    func hasAccessToMenuItem(withTitle: String) -> Bool
+    func hasAccessToMenuItem(item: MenuItem) -> Bool
     func login()
     func logout()
 }
@@ -34,8 +34,6 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func viewLoad() {
-        self.viewController.picUrl = ""
-        
         if securityManager.getCurrentMember() == nil {
             // TODO: move this to launch screen or landing page
             interactor.unsubscribeFromPushChannels() { (succeeded: Bool, error: NSError?) in
@@ -45,18 +43,19 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             }
         }
         
+        self.showUserProfile()
         self.viewController.reloadMenu()
     }
     
-    public func hasAccessToMenuItem(withTitle: String) -> Bool {
+    public func hasAccessToMenuItem(item: MenuItem) -> Bool {
         
         let currentMemberRole = securityManager.getCurrentMemberRole()
         
         var show: Bool
-        switch (withTitle) {
-            case "MY PROFILE":
+        switch (item) {
+            case .MyProfile:
                 show = currentMemberRole != MemberRoles.Anonymous
-            case "login":
+            case .Login:
                 show = currentMemberRole == MemberRoles.Anonymous
             default:
                 show = true
@@ -67,10 +66,9 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func login() {
         viewController.showActivityIndicator()
-        viewController.hideMenu()
         
         interactor.login { error in
-            defer { self.viewController.hideActivityIndicator() }
+            //defer { self.viewController.hideActivityIndicator() }
             
             if error != nil {
                 if error!.code == 404 {
@@ -83,8 +81,9 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 return
             }
             
-            self.viewController.hideActivityIndicator()
+            self.showUserProfile()
             self.viewController.reloadMenu()
+            self.viewController.hideActivityIndicator()
         }
     }
     
@@ -96,17 +95,33 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 self.viewController.showErrorMessage(error!)
                 return
             }
-            self.viewController.hideMenu()
-            self.viewController.reloadMenu()
+            self.showPersonProfile(PersonDTO(), error: nil)
+            
             self.viewController.navigateToHome()
+            self.viewController.reloadMenu()
+            self.viewController.hideMenu()
             self.viewController.hideActivityIndicator()
+        }
+    }
+    
+    func showUserProfile() {
+        if let currentMember = interactor.getCurrentMember() {
+            if currentMember.speakerRole != nil {
+                showPersonProfile(currentMember.speakerRole!, error: nil)
+            }
+            else {
+                showPersonProfile(currentMember.attendeeRole!, error: nil)
+            }
+        }
+        else {
+            showPersonProfile(PersonDTO(), error: nil)
         }
     }
     
     func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
         dispatch_async(dispatch_get_main_queue(),{
+            self.viewController.name = person!.name
             self.viewController.picUrl = person!.pictureUrl
-            self.viewController.hideActivityIndicator()
         })
     }
 }

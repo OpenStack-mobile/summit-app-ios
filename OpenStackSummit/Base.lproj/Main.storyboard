@@ -486,7 +486,7 @@
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-nd-Hzl">
                                                             <rect key="frame" x="290" y="12" width="20" height="20"/>
                                                             <animations/>
-                                                            <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         </activityIndicatorView>
                                                     </subviews>
                                                     <animations/>
@@ -2129,7 +2129,7 @@
                                                         <rect key="frame" x="16" y="11" width="94" height="20"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -2148,7 +2148,7 @@
                                                         <rect key="frame" x="16" y="11" width="94" height="20"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -2203,7 +2203,7 @@
                                                         <rect key="frame" x="16" y="8" width="140" height="23"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -2536,10 +2536,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KX8-bb-2LT" userLabel="Header">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="150"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yPN-0G-jRH">
-                                        <rect key="frame" x="25" y="35" width="75" height="75"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="yPN-0G-jRH">
+                                        <rect key="frame" x="20" y="35" width="75" height="75"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="BaD-xe-Vgv"/>
@@ -2547,19 +2547,19 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DcQ-2M-vBU" userLabel="Name &amp; Login View">
-                                        <rect key="frame" x="120" y="37" width="480" height="71"/>
+                                        <rect key="frame" x="110" y="35" width="135" height="75"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62J-Cf-Xx4" userLabel="Name Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="480" height="0.0"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62J-Cf-Xx4" userLabel="Name Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="135" height="21"/>
                                                 <animations/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5m-sW-mWg" userLabel="Login Button">
-                                                <rect key="frame" x="0.0" y="5" width="45" height="30"/>
+                                                <rect key="frame" x="0.0" y="24" width="49" height="30"/>
                                                 <animations/>
-                                                <state key="normal" title="LOGIN">
+                                                <state key="normal" title="LOG IN">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2570,9 +2570,9 @@
                                         <animations/>
                                         <constraints>
                                             <constraint firstItem="62J-Cf-Xx4" firstAttribute="width" secondItem="DcQ-2M-vBU" secondAttribute="width" id="4l1-Qn-zRJ"/>
-                                            <constraint firstItem="w5m-sW-mWg" firstAttribute="top" secondItem="62J-Cf-Xx4" secondAttribute="bottom" constant="5" id="N8z-V0-68z"/>
+                                            <constraint firstItem="w5m-sW-mWg" firstAttribute="top" secondItem="62J-Cf-Xx4" secondAttribute="bottom" constant="3" id="N8z-V0-68z"/>
+                                            <constraint firstAttribute="width" constant="135" id="RcN-PN-giY"/>
                                             <constraint firstItem="w5m-sW-mWg" firstAttribute="leading" secondItem="DcQ-2M-vBU" secondAttribute="leading" id="Roc-0Q-NxY"/>
-                                            <constraint firstAttribute="height" constant="71" id="sa1-Dr-lzq"/>
                                             <constraint firstItem="62J-Cf-Xx4" firstAttribute="top" secondItem="DcQ-2M-vBU" secondAttribute="top" id="uXI-92-N2e"/>
                                             <constraint firstItem="62J-Cf-Xx4" firstAttribute="leading" secondItem="DcQ-2M-vBU" secondAttribute="leading" id="zRv-xf-i4C"/>
                                         </constraints>
@@ -2581,58 +2581,67 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="leading" secondItem="yPN-0G-jRH" secondAttribute="trailing" constant="20" id="40I-cm-lHk"/>
+                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="leading" secondItem="yPN-0G-jRH" secondAttribute="trailing" constant="15" id="40I-cm-lHk"/>
                                     <constraint firstItem="yPN-0G-jRH" firstAttribute="top" secondItem="KX8-bb-2LT" secondAttribute="top" constant="35" id="7CV-Qh-Idg"/>
                                     <constraint firstItem="DcQ-2M-vBU" firstAttribute="centerY" secondItem="yPN-0G-jRH" secondAttribute="centerY" id="7lW-Ip-gAE"/>
-                                    <constraint firstItem="yPN-0G-jRH" firstAttribute="leading" secondItem="KX8-bb-2LT" secondAttribute="leading" constant="25" id="Zal-t5-Y29"/>
-                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="trailing" secondItem="KX8-bb-2LT" secondAttribute="trailing" id="clT-h8-pUU"/>
+                                    <constraint firstItem="yPN-0G-jRH" firstAttribute="leading" secondItem="KX8-bb-2LT" secondAttribute="leading" constant="20" id="Zal-t5-Y29"/>
+                                    <constraint firstItem="DcQ-2M-vBU" firstAttribute="height" secondItem="yPN-0G-jRH" secondAttribute="height" id="m83-0i-NHr"/>
                                     <constraint firstAttribute="height" constant="150" id="yVN-33-q9a"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jO-Sc-915" userLabel="Events Button">
-                                <rect key="frame" x="26" y="168" width="400" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rd-fH-KDU" userLabel="Buttons">
+                                <rect key="frame" x="0.0" y="169" width="600" height="230"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jO-Sc-915" userLabel="Events Button">
+                                        <rect key="frame" x="22" y="20" width="400" height="40"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="EVENTS" image="events"/>
+                                        <connections>
+                                            <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="LWf-AY-4HS"/>
+                                            <segue destination="gyU-iO-mn8" kind="custom" identifier="eventsSegue" customClass="SWRevealViewControllerSeguePushController" id="nxb-M5-kz0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L63-Y8-65B" userLabel="Venues Button">
+                                        <rect key="frame" x="24" y="70" width="400" height="40"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <inset key="titleEdgeInsets" minX="21" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="VENUES" image="venues"/>
+                                        <connections>
+                                            <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="Mlp-Qi-cRs"/>
+                                            <segue destination="Qo7-4W-6Ab" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="WgJ-tp-dRV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People Button">
+                                        <rect key="frame" x="20" y="120" width="400" height="40"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="PEOPLE" image="people"/>
+                                        <connections>
+                                            <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="AVS-uD-tYc"/>
+                                            <segue destination="KgQ-pt-kqb" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="rbo-x9-MVq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">
+                                        <rect key="frame" x="22" y="170" width="400" height="40"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="MY PROFILE" image="my-profile"/>
+                                        <connections>
+                                            <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="jaI-rV-9Po"/>
+                                            <segue destination="Z8E-JH-CXt" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="LqL-3p-fGg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="EVENTS" image="events"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="hd7-EM-Ndr"/>
-                                    <segue destination="gyU-iO-mn8" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="nxb-M5-kz0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L63-Y8-65B" userLabel="Venues Button">
-                                <rect key="frame" x="28" y="218" width="400" height="40"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="21" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="VENUES" image="venues"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="1x3-LM-LOG"/>
-                                    <segue destination="Qo7-4W-6Ab" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="WgJ-tp-dRV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People Button">
-                                <rect key="frame" x="24" y="268" width="400" height="40"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="PEOPLE" image="people"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="VSz-aY-mdg"/>
-                                    <segue destination="KgQ-pt-kqb" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="rbo-x9-MVq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">
-                                <rect key="frame" x="26" y="318" width="400" height="40"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="MY PROFILE" image="my-profile"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="gEs-Gj-RYx"/>
-                                    <segue destination="Z8E-JH-CXt" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="LqL-3p-fGg"/>
-                                </connections>
-                            </button>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="qcf-8E-cYV"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="pyp-Az-pay" userLabel="Summit Logo Image View">
                                 <rect key="frame" x="30" y="512" width="168" height="68"/>
                                 <animations/>
@@ -2647,15 +2656,19 @@
                         <constraints>
                             <constraint firstItem="KX8-bb-2LT" firstAttribute="width" secondItem="2dh-RC-ieT" secondAttribute="width" id="105-QZ-riE"/>
                             <constraint firstItem="KX8-bb-2LT" firstAttribute="leading" secondItem="2dh-RC-ieT" secondAttribute="leading" id="5TW-Mj-XDp"/>
+                            <constraint firstItem="9rd-fH-KDU" firstAttribute="top" secondItem="KX8-bb-2LT" secondAttribute="bottom" constant="-1" id="97y-dO-lTe"/>
+                            <constraint firstItem="9rd-fH-KDU" firstAttribute="leading" secondItem="2dh-RC-ieT" secondAttribute="leading" id="LIP-TX-T7u"/>
                             <constraint firstItem="pyp-Az-pay" firstAttribute="bottom" secondItem="eT2-4h-nYo" secondAttribute="top" constant="-20" id="WiK-HM-Lhg"/>
+                            <constraint firstItem="9rd-fH-KDU" firstAttribute="trailing" secondItem="2dh-RC-ieT" secondAttribute="trailing" id="cce-6x-qD6"/>
                             <constraint firstItem="pyp-Az-pay" firstAttribute="leading" secondItem="2dh-RC-ieT" secondAttribute="leading" constant="30" id="jHM-2s-eKM"/>
-                            <constraint firstItem="KX8-bb-2LT" firstAttribute="top" secondItem="kic-IL-EkI" secondAttribute="bottom" constant="-20" id="vZu-RN-tSz"/>
+                            <constraint firstItem="KX8-bb-2LT" firstAttribute="top" secondItem="kic-IL-EkI" secondAttribute="bottom" id="vZu-RN-tSz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="eventsButton" destination="1jO-Sc-915" id="eOV-wn-2jC"/>
                         <outlet property="loginButton" destination="w5m-sW-mWg" id="1jK-XI-goU"/>
                         <outlet property="myProfileButton" destination="rA9-p9-JRk" id="bij-dO-4Jl"/>
+                        <outlet property="nameLabel" destination="62J-Cf-Xx4" id="dXl-qd-8p1"/>
                         <outlet property="peopleButton" destination="6CC-Hc-iyc" id="IpV-IN-8W3"/>
                         <outlet property="pictureImageView" destination="yPN-0G-jRH" id="9Cm-up-YPB"/>
                         <outlet property="venuesButton" destination="L63-Y8-65B" id="UW1-UR-Jtq"/>
@@ -2673,6 +2686,7 @@
         <image name="email" width="29" height="25"/>
         <image name="events" width="26" height="26"/>
         <image name="filter" width="19" height="18"/>
+        <image name="generic-user-avatar" width="122" height="122"/>
         <image name="irc" width="30" height="30"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="menu" width="20" height="17"/>
