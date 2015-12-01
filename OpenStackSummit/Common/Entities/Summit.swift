@@ -13,6 +13,7 @@ public class Summit: NamedEntity {
     public dynamic var startDate = NSDate(timeIntervalSince1970: 1)
     public dynamic var endDate = NSDate(timeIntervalSince1970: 1)
     public dynamic var timeZone = ""
+    public dynamic var initialDataLoadDate = NSDate(timeIntervalSince1970: 1)
     public let types = List<SummitType>()
     public let ticketTypes = List<TicketType>()
     public let venues = List<Venue>()

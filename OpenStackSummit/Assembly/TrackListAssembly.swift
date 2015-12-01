@@ -43,15 +43,7 @@ class TrackListAssembly: TyphoonAssembly {
             definition.injectProperty("namedDTOAssembler", with: self.dtoAssemblersAsembly.namedDTOAssembler())
         }
     }
-    
-    /*dynamic func trackListViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(TrackListViewController.self) {
-            (definition) in
-            
-            definition.injectProperty("presenter", with: self.trackListPresenter())
-        }
-    }*/
-    
+        
     dynamic func trackListViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in

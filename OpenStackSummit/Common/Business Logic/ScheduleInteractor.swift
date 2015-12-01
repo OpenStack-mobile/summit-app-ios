@@ -21,9 +21,12 @@ public class ScheduleInteractor: ScheduleableInteractor {
     var summitDataStore: ISummitDataStore!
     var summitDTOAssembler: ISummitDTOAssembler!
     var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
+    var dataUpdatePoller: DataUpdatePoller!
     
     public func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void) {
         summitDataStore.getActive() { summit, error in
+            self.dataUpdatePoller.startPollingIfNotPollingAlready()
+
             var summitDTO: SummitDTO?
             if (error == nil) {
                 summitDTO = self.summitDTOAssembler.createDTO(summit!)

@@ -94,6 +94,7 @@ public class SummitDeserializer: NSObject, IDeserializer {
         summit.startDate = summit.events.first!.start
         summit.endDate = summit.events.last!.end
         summit.timeZone = json["time_zone"]["name"].stringValue
+        summit.initialDataLoadDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["timestamp"].intValue))
         
         return summit
     }

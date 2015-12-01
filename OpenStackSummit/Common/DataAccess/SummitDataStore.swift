@@ -12,6 +12,7 @@ import RealmSwift
 @objc
 public protocol ISummitDataStore {
     func getActive(completionBlock : (Summit?, NSError?) -> Void)
+    func getActiveLocal() -> Summit?
     func getSummitTypesLocal() -> [SummitType]
 }
 
@@ -19,9 +20,6 @@ public class SummitDataStore: GenericDataStore, ISummitDataStore {
     var summitRemoteDataStore: ISummitRemoteDataStore!
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
-        /*realm.write { () -> Void in
-            self.realm.deleteAll()
-        }*/
         let summit = realm.objects(Summit.self).first
         if (summit != nil) {
             completionBlock(summit!, nil)
@@ -29,6 +27,11 @@ public class SummitDataStore: GenericDataStore, ISummitDataStore {
         else {
             getActiveAsync(completionBlock)
         }
+    }
+
+    public func getActiveLocal() -> Summit? {
+        let summit = realm.objects(Summit.self).first
+        return summit
     }
     
     func getActiveAsync(completionBlock : (Summit?, NSError?) -> Void) {
