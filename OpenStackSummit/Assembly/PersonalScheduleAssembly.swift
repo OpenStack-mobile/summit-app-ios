@@ -15,6 +15,7 @@ class PersonalScheduleAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
+    var dataUpdateAssembly: DataUpdateAssembly!
     
     dynamic func personalScheduleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(PersonalScheduleWireframe.self) {
@@ -34,6 +35,7 @@ class PersonalScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("scheduleItemDTOAssembler", with: self.dtoAssemblersAssembly.scheduleItemDTOAssembler())
             definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+            definition.injectProperty("dataUpdatePoller", with: self.dataUpdateAssembly.dataUpdatePoller())
         }
     }
     

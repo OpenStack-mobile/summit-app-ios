@@ -12,7 +12,6 @@ import RealmSwift
 
 public class DataStoreAssembly: TyphoonAssembly {
     var httpFactoryAssembly: HttpFactoryAssembly!
-    var dataUpdateAssembly: DataUpdateAssembly!
 
     // MARK: Deserialization
     public dynamic func deserializerFactory() -> AnyObject {
@@ -269,7 +268,6 @@ public class DataStoreAssembly: TyphoonAssembly {
             (definition) in
             definition.injectProperty("deserializerFactory", with: self.deserializerFactory())
             definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
-            definition.injectProperty("dataUpdatePoller", with: self.dataUpdateAssembly.dataUpdatePoller())
         }
     }
  
