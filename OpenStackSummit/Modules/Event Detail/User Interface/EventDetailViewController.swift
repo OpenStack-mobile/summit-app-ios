@@ -224,9 +224,6 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
         set {
             myFeedbackReviewLabel.text = newValue
-            myFeedbackReviewLabel.sizeToFit()
-            myFeedbackViewHeightConstraint.constant = myFeedbackReviewLabel.frame.height + myFeedbackNameLabel.frame.height + myFeedbackDateLabel.frame.height + 15
-            myFeedbackView.updateConstraints()
         }
     }
     
@@ -252,8 +249,14 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         get {
             return feedbackButtonHeightConstraint.constant > 0
         }
+        
         set {
-            myFeedbackViewHeightConstraint.constant = newValue ? 83 : 0
+            if newValue {
+                NSLayoutConstraint.deactivateConstraints([myFeedbackViewHeightConstraint])
+            }
+            else {
+                NSLayoutConstraint.activateConstraints([myFeedbackViewHeightConstraint])
+            }
             myFeedbackView.updateConstraints()
         }
     }
@@ -294,8 +297,7 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         locationView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         summitTypesView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
         summitTypesView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
-        myFeedbackView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
-        
+        feedbackTableView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
         actionSheet = AHKActionSheet()
         actionSheet.addButtonWithTitle("Feedback", image: nil, type: .Default) { actsheet in
             self.presenter.leaveFeedback()

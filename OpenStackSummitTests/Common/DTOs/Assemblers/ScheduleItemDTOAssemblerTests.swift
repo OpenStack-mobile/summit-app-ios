@@ -74,7 +74,8 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         XCTAssertEqual(event.name, scheduleItemDTO.name)
         XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
         XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
-        XCTAssertEqual("05:00 AM - 06:00 AM", scheduleItemDTO.date)
+        XCTAssertEqual("05:00 AM - 06:00 AM", scheduleItemDTO.time)
+        XCTAssertEqual("Wednesday 02 September 05:00 AM - 06:00 AM", scheduleItemDTO.dateTime)
         XCTAssertEqual(event.eventType.name, scheduleItemDTO.eventType)
     }
     
@@ -125,7 +126,8 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         XCTAssertEqual(event.name, scheduleItemDTO.name)
         XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
         XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
-        XCTAssertEqual("07:00 PM - 12:00 AM", scheduleItemDTO.date)
+        XCTAssertEqual("07:00 PM - 12:00 AM", scheduleItemDTO.time)
+        XCTAssertEqual("Wednesday 28 October 07:00 PM - 12:00 AM", scheduleItemDTO.dateTime)
         XCTAssertEqual(event.eventType.name, scheduleItemDTO.eventType)
     }
     

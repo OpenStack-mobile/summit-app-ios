@@ -27,6 +27,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     var internalViewController: IScheduleViewController!
     var internalWireframe: IScheduleWireframe!
     var useFilter = false
+    var selectedDate: NSDate?
     
     public override init() {
         super.init()
@@ -105,13 +106,14 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                 self.summitTimeZoneOffsetLocalTimeZone = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT + offsetLocalTimeZone
                 viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offsetLocalTimeZone)
                 viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offsetLocalTimeZone).mt_dateDaysAfter(1)
-                viewController.selectedDate = viewController.startDate
+                viewController.selectedDate = self.selectedDate != nil ? self.selectedDate : viewController.startDate
             })
         }
     }
     
     func reloadSchedule(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
         dispatch_async(dispatch_get_main_queue(),{
+            self.selectedDate = viewController.selectedDate
             let startDate = viewController.selectedDate.mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
             let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
             
