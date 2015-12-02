@@ -30,11 +30,12 @@ class DataUpdatePollerTests: XCTestCase {
         let thresholdProcessCount = 2
         let dataUpdateProcessorMock = DataUpdateProcessorMock(expectation: expectation, thresholdProcessCount: thresholdProcessCount)
         let dataUpdateDataStoreMock = DataUpdateDataStoreMock()
-        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock, dataUpdateDataStore: dataUpdateDataStoreMock)
+        let summitDataStoreMock = SummitDataStoreMock(summit: Summit())
+        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock, dataUpdateDataStore: dataUpdateDataStoreMock, summitDataStore: summitDataStoreMock)
         dataUpdatePoller.pollingInterval = 0.2
         
         // Act
-        dataUpdatePoller.startPolling()
+        dataUpdatePoller.startPollingIfNotPollingAlready()
         
         
         // Assert
@@ -49,12 +50,12 @@ class DataUpdatePollerTests: XCTestCase {
         let thresholdProcessCount = 0
         let dataUpdateProcessorMock = DataUpdateProcessorMock(expectation: nil, thresholdProcessCount: thresholdProcessCount)
         let dataUpdateDataStoreMock = DataUpdateDataStoreMock()
-        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock, dataUpdateDataStore: dataUpdateDataStoreMock)
+        let summitDataStoreMock = SummitDataStoreMock(summit: Summit())
+        let dataUpdatePoller = DataUpdatePoller(httpFactory: httpFactoryMock, dataUpdateProcessor: dataUpdateProcessorMock, dataUpdateDataStore: dataUpdateDataStoreMock, summitDataStore: summitDataStoreMock)
         dataUpdatePoller.pollingInterval = 0.2
         
         // Act
-        dataUpdatePoller.startPolling()
-        
+        dataUpdatePoller.startPollingIfNotPollingAlready()
         
         // Assert
         XCTAssertEqual(dataUpdateProcessorMock.processCount, 0)
