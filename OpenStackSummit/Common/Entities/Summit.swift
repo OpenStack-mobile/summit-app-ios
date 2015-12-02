@@ -19,4 +19,5 @@ public class Summit: NamedEntity {
     public let venues = List<Venue>()
     public let events = List<SummitEvent>()
     public let track = List<Track>()
+    public let eventTypes = List<EventType>()
 }

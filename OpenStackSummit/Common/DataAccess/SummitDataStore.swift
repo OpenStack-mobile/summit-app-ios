@@ -21,6 +21,7 @@ public class SummitDataStore: GenericDataStore, ISummitDataStore {
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
         let summit = realm.objects(Summit.self).first
+
         if (summit != nil) {
             completionBlock(summit!, nil)
         }

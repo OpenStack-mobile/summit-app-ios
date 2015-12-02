@@ -48,8 +48,10 @@ public class SummitDeserializer: NSObject, IDeserializer {
         }
         
         deserializer = deserializerFactory.create(DeserializerFactoryType.EventType)
+        var eventType: EventType
         for (_, eventTypeJSON) in json["event_types"] {
-            try deserializer.deserialize(eventTypeJSON)
+            eventType = try deserializer.deserialize(eventTypeJSON) as! EventType
+            summit.eventTypes.append(eventType)
         }
         
         deserializer = deserializerFactory.create(DeserializerFactoryType.Track)
@@ -91,13 +93,19 @@ public class SummitDeserializer: NSObject, IDeserializer {
         
         summit.id = json["id"].intValue
         summit.name = json["name"].stringValue
+        summit.timeZone = json["time_zone"]["name"].stringValue
         summit.startDate = summit.events.first!.start
         summit.endDate = summit.events.last!.end
-        summit.timeZone = json["time_zone"]["name"].stringValue
         summit.initialDataLoadDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["timestamp"].intValue))
         
         return summit
     }
+    
+    /*func getDateInTimeZone(date: NSDate, timezone: String) -> NSDate {
+        let timeZoneSeconds = NSTimeZone(name: timezone)!.secondsFromGMT;
+        let dateInTimezone = date.dateByAddingTimeInterval(NSTimeInterval(timeZoneSeconds));
+        return dateInTimezone
+    }*/
     
     func isVenue(venueJSON: JSON) -> Bool {
         return venueJSON["class_name"].stringValue == "SummitVenue"
