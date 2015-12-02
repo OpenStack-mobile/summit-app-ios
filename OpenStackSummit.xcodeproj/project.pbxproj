@@ -658,9 +658,10 @@
 		9D5A99CB1B948D5C002FFAA4 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
+				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 				9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */,
 				9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */,
-				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 				CAE643601BCDC1DF005E530B /* ScheduleView.swift */,
 				CAE643621BCDC1FE005E530B /* ScheduleView.xib */,
 				CA0873F61BCE98FE00633591 /* ScheduleTableViewCell.swift */,
@@ -670,7 +671,6 @@
 				CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */,
 				CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */,
 				CAE42A521BE2466200980315 /* BasePresenter.swift */,
-				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
 				CAE0EF9F1BECF36000550C91 /* UIView+Border.swift */,
 				CADF6CA21BFE1D3B007998BF /* PeopleListView.xib */,
 				CADF6CA41BFE1D60007998BF /* PeopleListView.swift */,

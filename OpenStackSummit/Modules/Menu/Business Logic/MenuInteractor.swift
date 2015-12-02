@@ -15,6 +15,7 @@ public protocol IMenuInteractor {
     func login(completionBlock: (error: NSError?) -> Void)
     func logout(completionBlock: (error: NSError?) -> Void)
     func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void)
+    func getCurrentMember() -> MemberDTO?
 }
 
 public class MenuInteractor: NSObject, IMenuInteractor {
@@ -22,6 +23,7 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     let kAccessToken = "access_token"
     let kCurrentMember = "currentMember"
     var securityManager: SecurityManager!
+    var memberDTOAssembler: IMemberDTOAssembler!
     var pushNotificationsManager: IPushNotificationsManager!
     
     public override init() {
@@ -61,5 +63,12 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     public func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
         pushNotificationsManager.unsubscribeFromPushChannels(completionBlock)
     }
-
+    
+    public func getCurrentMember() -> MemberDTO? {
+        var memberDTO: MemberDTO?
+        if let member = securityManager.getCurrentMember() {
+            memberDTO = memberDTOAssembler.createDTO(member)
+        }
+        return memberDTO
+    }
 }

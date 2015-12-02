@@ -179,12 +179,12 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
                 pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
             }
             else {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
+                pictureImageView.image = UIImage(named: "generic-user-avatar")
             }
             
-            pictureImageView.layer.borderWidth = 3.0;
+            pictureImageView.layer.borderWidth = 0.88;
+            pictureImageView.layer.borderColor = UIColor(red: 215/255, green: 226/255, blue: 235/255, alpha: 1.0).CGColor
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
-            pictureImageView.layer.borderColor = UIColor.whiteColor().CGColor
             pictureImageView.clipsToBounds = true;
         }
     }

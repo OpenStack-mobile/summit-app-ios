@@ -22,6 +22,7 @@ class RevealViewController: BaseViewController, SWRevealViewControllerDelegate {
         }
         
         revealViewController().delegate = self
+        revealViewController().rearViewRevealWidth = 264
         revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
     }
 
