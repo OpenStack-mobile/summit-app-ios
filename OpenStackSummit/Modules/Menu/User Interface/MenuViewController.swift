@@ -74,7 +74,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
     
-    //@IBOutlet weak var searchTermTextView: UITextField!
+    @IBOutlet weak var searchTextView: UITextField!
     
     @IBAction func toggleMenuSelection(sender: UIButton) {
         eventsButton.alpha = 0.5
@@ -104,7 +104,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //searchTermTextView.delegate = self
+        searchTextView.delegate = self
         
         presenter.viewLoad()
     }
@@ -144,16 +144,15 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "searchSegue") {
-            //session.set(Constants.SessionKeys.SearchTerm, value: searchTermTextView.text)
+            session.set(Constants.SessionKeys.SearchTerm, value: searchTextView.text)
         }
     }
     
-    /*
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        searchTermTextView.resignFirstResponder()
-        if !searchTermTextView.text!.isEmpty {
+        searchTextView.resignFirstResponder()
+        if !searchTextView.text!.isEmpty {
             performSegueWithIdentifier("searchSegue", sender: self)
         }
         return true
-    }*/
+    }
 }
