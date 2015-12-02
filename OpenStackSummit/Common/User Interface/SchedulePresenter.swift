@@ -19,7 +19,7 @@ public protocol ISchedulePresenter {
 }
 
 public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
-    var summitTimeZoneOffsetLocalTimeZone: Int!
+    var summitTimeZoneOffset: Int!
     var session: ISession!
     var dayEvents: [ScheduleItemDTO]!
     var scheduleFilter: ScheduleFilter!
@@ -102,10 +102,9 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                     return
                 }
                 
-                let offsetLocalTimeZone = -NSTimeZone.localTimeZone().secondsFromGMT
-                self.summitTimeZoneOffsetLocalTimeZone = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT + offsetLocalTimeZone
-                viewController.startDate = summit!.startDate.mt_dateSecondsAfter(offsetLocalTimeZone)
-                viewController.endDate = summit!.endDate.mt_dateSecondsAfter(offsetLocalTimeZone).mt_dateDaysAfter(1)
+                self.summitTimeZoneOffset = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT
+                viewController.startDate = summit!.startDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
+                viewController.endDate = summit!.endDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
                 viewController.selectedDate = self.selectedDate != nil ? self.selectedDate : viewController.startDate
             })
         }
@@ -114,8 +113,11 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     func reloadSchedule(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
         dispatch_async(dispatch_get_main_queue(),{
             self.selectedDate = viewController.selectedDate
-            let startDate = viewController.selectedDate.mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
-            let endDate = viewController.selectedDate.mt_dateDaysAfter(1).mt_dateSecondsAfter(-self.summitTimeZoneOffsetLocalTimeZone)
+            
+            let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
+            
+            let startDate = viewController.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+            let endDate = viewController.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
             
             let eventTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int] : nil
             let summitTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int] : nil
