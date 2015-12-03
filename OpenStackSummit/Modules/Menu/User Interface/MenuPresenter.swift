@@ -57,6 +57,8 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 show = currentMemberRole != MemberRoles.Anonymous
             case .Login:
                 show = currentMemberRole == MemberRoles.Anonymous
+            case .Attendees:
+                show = false
             default:
                 show = true
         }

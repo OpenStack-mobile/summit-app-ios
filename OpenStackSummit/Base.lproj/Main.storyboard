@@ -493,7 +493,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1869" y="1736"/>
+            <point key="canvasLocation" x="1889" y="2408"/>
         </scene>
         <!--Feedback Edit View Controller-->
         <scene sceneID="9aZ-LC-uOd">
@@ -617,7 +617,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TiH-eJ-vpT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2693" y="1486"/>
+            <point key="canvasLocation" x="2713" y="2158"/>
         </scene>
         <!--Venue List View Controller-->
         <scene sceneID="V0c-pb-YYi">
@@ -1135,6 +1135,48 @@
             </objects>
             <point key="canvasLocation" x="1869" y="472"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n3T-Pu-mxo">
+            <objects>
+                <navigationController storyboardIdentifier="SpeakersNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HJT-Nr-cRU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iUd-l2-es8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8pE-hA-fJT" kind="relationship" relationship="rootViewController" id="r2J-xC-6Qq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Shx-q4-Ve6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1041" y="1228"/>
+        </scene>
+        <!--Speakers View Controller-->
+        <scene sceneID="i8t-X0-Pt4">
+            <objects>
+                <viewController id="8pE-hA-fJT" customClass="SpeakersViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DhV-fU-7Yl"/>
+                        <viewControllerLayoutGuide type="bottom" id="KEd-tw-DrV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ljL-Xs-YZE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5LR-t4-YPC">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="gCs-lQ-ki2"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="gCs-lQ-ki2" id="i4H-PV-e1V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eKw-R6-wTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1869" y="1228"/>
+        </scene>
         <!--Attendees List View Controller-->
         <scene sceneID="E7F-NH-IRV">
             <objects>
@@ -1487,7 +1529,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rg1-h9-qQM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KgQ-pt-kqb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PeopleNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KgQ-pt-kqb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wic-Ex-epH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2423,15 +2465,15 @@
                                             <segue destination="Qo7-4W-6Ab" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="WgJ-tp-dRV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People Button">
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People or Speakers Button">
                                         <rect key="frame" x="20" y="120" width="400" height="40"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="PEOPLE" image="people"/>
+                                        <state key="normal" title="PEOPLE OR SPEAKERS" image="people"/>
                                         <connections>
+                                            <action selector="peopleOrSpeakersPressed:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="U0e-Cz-CNP"/>
                                             <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="AVS-uD-tYc"/>
-                                            <segue destination="KgQ-pt-kqb" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="rbo-x9-MVq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">

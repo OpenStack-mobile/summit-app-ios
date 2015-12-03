@@ -55,6 +55,14 @@ class PeopleAssembly: TyphoonAssembly {
         }
     }
     
+    dynamic func speakersViewController() -> AnyObject {
+        return TyphoonDefinition.withClass(SpeakersViewController.self) {
+            (definition) in
+            
+            definition.injectProperty("speakersListViewController", with: self.speakerListViewController())
+        }
+    }
+    
     dynamic func attendeesListViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
@@ -78,5 +86,4 @@ class PeopleAssembly: TyphoonAssembly {
                 definition.scope = TyphoonScope.WeakSingleton
         })
     }
-    
 }
