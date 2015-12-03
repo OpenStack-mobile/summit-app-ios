@@ -12,7 +12,7 @@ import UIKit
 public protocol IFeedbackGivenListPresenter {
     func viewLoad()
     func getFeedbackCount() -> Int
-    func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int)
+    func buildFeedbackCell(cell: IFeedbackTableViewCell, index: Int)
 }
 
 public class FeedbackGivenListPresenter: NSObject, IFeedbackGivenListPresenter {
@@ -29,7 +29,7 @@ public class FeedbackGivenListPresenter: NSObject, IFeedbackGivenListPresenter {
         return feedbackList.count
     }
     
-    public func buildFeedbackCell(cell: IFeedbackGivenTableViewCell, index: Int){
+    public func buildFeedbackCell(cell: IFeedbackTableViewCell, index: Int){
         let feedback = feedbackList[index]
         cell.eventName = feedback.eventName
         cell.owner = feedback.owner
