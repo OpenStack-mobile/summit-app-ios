@@ -66,7 +66,6 @@
 		CA416FA21B8FC46E00F177F5 /* TrackDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */; };
 		CA43998B1BD156C0008F378D /* FeedbackGivenListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399861BD156C0008F378D /* FeedbackGivenListInteractor.swift */; };
 		CA43998C1BD156C0008F378D /* FeedbackGivenListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */; };
-		CA43998D1BD156C0008F378D /* FeedbackGivenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399891BD156C0008F378D /* FeedbackGivenTableViewCell.swift */; };
 		CA43998E1BD156C0008F378D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA43998A1BD156C0008F378D /* FeedbackGivenListViewController.swift */; };
 		CA4399901BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA43998F1BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift */; };
 		CA4399921BD18062008F378D /* FeedbackDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4399911BD18062008F378D /* FeedbackDeserializer.swift */; };
@@ -379,7 +378,6 @@
 		CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackDataStore.swift; sourceTree = "<group>"; };
 		CA4399861BD156C0008F378D /* FeedbackGivenListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListInteractor.swift; sourceTree = "<group>"; };
 		CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListPresenter.swift; sourceTree = "<group>"; };
-		CA4399891BD156C0008F378D /* FeedbackGivenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenTableViewCell.swift; sourceTree = "<group>"; };
 		CA43998A1BD156C0008F378D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
 		CA43998F1BD16EDA008F378D /* FeedbackDTOAssemblerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDTOAssemblerTests.swift; sourceTree = "<group>"; };
 		CA4399911BD18062008F378D /* FeedbackDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDeserializer.swift; sourceTree = "<group>"; };
@@ -884,9 +882,8 @@
 		CA4399871BD156C0008F378D /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */,
-				CA4399891BD156C0008F378D /* FeedbackGivenTableViewCell.swift */,
 				CA43998A1BD156C0008F378D /* FeedbackGivenListViewController.swift */,
+				CA4399881BD156C0008F378D /* FeedbackGivenListPresenter.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1935,7 +1932,6 @@
 				CAD9A2B41BD1F11E009269B5 /* PersonalSchedulePresenter.swift in Sources */,
 				CA02F8B71BA0BF7B005CD514 /* FeedbackEditAssembly.swift in Sources */,
 				CA0029F71B9E1E84001A9EDA /* VenueRoomDetailViewController.swift in Sources */,
-				CA43998D1BD156C0008F378D /* FeedbackGivenTableViewCell.swift in Sources */,
 				CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */,
 				CACB3A131BC3100200B1363F /* PersonListItemDTOAssembler.swift in Sources */,
 				CAE6435B1BCDB65F005E530B /* TrackSchedulePresenter.swift in Sources */,
