@@ -16,12 +16,15 @@ public protocol IFeedbackGivenListViewController: IMessageEnabledViewController 
 
 class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFeedbackGivenListViewController, XLPagerTabStripChildItem {
     
-    let cellIdentifier = "feedbackGivenTableViewCell"
+    let cellIdentifier = "feedbackTableViewCell"
     @IBOutlet weak var tableView: UITableView!
     var presenter : IFeedbackGivenListPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.registerNib(UINib(nibName: "FeedbackTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
         presenter.viewLoad()
     }
     
@@ -46,7 +49,7 @@ class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FeedbackGivenTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FeedbackTableViewCell
         presenter.buildFeedbackCell(cell, index: indexPath.row)
         return cell
     }
