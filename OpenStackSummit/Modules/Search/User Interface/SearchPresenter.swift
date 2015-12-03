@@ -42,6 +42,7 @@ public class SearchPresenter: ScheduleablePresenter {
     var loadedAllAttendees = false
     var session: ISession!
     var searchTerm: String!
+    var loadingSpeakers = false
     
     public func viewLoad() {
         let searchTerm = session.get(Constants.SessionKeys.SearchTerm) as? String
@@ -52,6 +53,7 @@ public class SearchPresenter: ScheduleablePresenter {
     }
 
     public func search(searchTerm: String!) {
+        loadedAllSpeakers = false
         pageSpeakers = 1
         pageAttendees = 1
         speakers.removeAll()
@@ -82,7 +84,12 @@ public class SearchPresenter: ScheduleablePresenter {
     }
     
     func getSpeakers() {
+        if loadingSpeakers || loadedAllSpeakers {
+            return
+        }
+        loadingSpeakers = true
         interactor.getSpeakersBySearchTerm(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage) { (speakersPage, error) in
+            defer { self.loadingSpeakers = false }
             if (error != nil) {
                 self.viewController.showErrorMessage(error!)
                 return

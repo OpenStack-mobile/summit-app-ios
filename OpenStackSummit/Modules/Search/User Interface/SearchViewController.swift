@@ -186,7 +186,6 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         if !searchTermTextView.text!.isEmpty {
             presenter.search(searchTermTextView.text)
         }
-        presenter.search(searchTermTextView.text)
         return true
     }
     

@@ -26,7 +26,7 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
         let startRecord = (page - 1) * objectsPerPage;
         let endRecord = (startRecord + (objectsPerPage - 1)) <= result.count ? startRecord + (objectsPerPage - 1) : result.count - 1;
 
-        if (startRecord < endRecord) {
+        if (startRecord <= endRecord) {
             
             for index in (startRecord...endRecord) {
                 speakers.append(result[index])
