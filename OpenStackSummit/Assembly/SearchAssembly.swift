@@ -50,6 +50,7 @@ class SearchAssembly: TyphoonAssembly {
             definition.injectProperty("trackDTOAssembler", with: self.dtoAssemblersAssembly.namedDTOAssembler())
             definition.injectProperty("presentationSpeakerDataStore", with: self.dataStoreAssembly.presentationSpeakerDataStore())
             definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
+            definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("personDTOAssembler", with: self.dtoAssemblersAssembly.personListItemDTOAssembler())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }

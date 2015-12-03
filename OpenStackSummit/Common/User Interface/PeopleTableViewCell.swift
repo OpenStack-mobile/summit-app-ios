@@ -54,7 +54,7 @@ class PeopleTableViewCell: UITableViewCell , IPeopleTableViewCell {
                 pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
             }
             else {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsKM4aXdIlZmlLHSonqBq9UsESy4WQidH3Dqa3NeeL4qgPzAq70w")!)
+                pictureImageView.image = UIImage(named: "generic-user-avatar")
             }
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
             pictureImageView.clipsToBounds = true;
