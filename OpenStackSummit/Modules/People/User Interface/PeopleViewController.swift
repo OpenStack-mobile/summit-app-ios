@@ -10,7 +10,6 @@ import UIKit
 import XLPagerTabStrip
 
 class PeopleViewController: RevealTabStripViewController {
-    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     var attendeesListViewController: AttendeesListViewController!
     var speakersListViewController: SpeakerListViewController!

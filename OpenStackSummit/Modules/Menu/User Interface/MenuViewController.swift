@@ -26,6 +26,7 @@ public protocol IMenuViewController: IMessageEnabledViewController {
     case Events
     case Venues
     case People
+    case Attendees
     case MyProfile
 }
 
@@ -84,6 +85,13 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         sender.alpha = 1
     }
     
+    @IBAction func peopleOrSpeakersPressed(sender: UIButton) {
+        let identifier = presenter.hasAccessToMenuItem(MenuItem.Attendees) ? "PeopleNavigationController" : "SpeakersNavigationController"
+        let navigationController = storyboard?.instantiateViewControllerWithIdentifier(identifier) as! UINavigationController
+        revealViewController().setFrontViewController(navigationController, animated: true)
+        revealViewController().revealToggle(self)
+    }
+    
     @IBAction func login(sender: UIButton) {
         if (presenter.hasAccessToMenuItem(MenuItem.Login)) {
             SwiftSpinner.show("Please wait...")
@@ -119,14 +127,16 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         revealViewController().revealToggle(self)
     }
     
-    func reloadMenu() {        
-        myProfileButton.hidden = !presenter.hasAccessToMenuItem(MenuItem.MyProfile)
+    func reloadMenu() {
+        var title: String
         
-        if presenter.hasAccessToMenuItem(MenuItem.Login) {
-            loginButton.setTitle("LOG IN", forState: UIControlState.Normal)
-        } else {
-            loginButton.setTitle("LOG OUT", forState: UIControlState.Normal)
-        }
+        title = presenter.hasAccessToMenuItem(MenuItem.Login) ? "LOG IN" : "LOG OUT"
+        loginButton.setTitle(title, forState: UIControlState.Normal)
+        
+        title = presenter.hasAccessToMenuItem(MenuItem.Attendees) ? "PEOPLE" : "SPEAKERS"
+        peopleButton.setTitle(title, forState: UIControlState.Normal)
+        
+        myProfileButton.hidden = !presenter.hasAccessToMenuItem(MenuItem.MyProfile)
     }
     
     func navigateToHome() {
