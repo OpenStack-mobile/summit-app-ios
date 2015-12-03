@@ -28,8 +28,8 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
         
         dataUpdate.id = json["id"].intValue
         dataUpdate.entityClassName = className
-        dataUpdate.entity = try deserializer.deserialize(json["entity"])
-        
+        dataUpdate.entity = operationType.stringValue != "DELETE" ? try deserializer.deserialize(json["entity"]) : try deserializer.deserialize(json["entity_id"])
+    
         switch (operationType) {
         case "INSERT":
             dataUpdate.operation = DataOperation.Insert
