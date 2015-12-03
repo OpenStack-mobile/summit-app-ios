@@ -37,15 +37,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-JC-3Iz">
-                        <rect key="frame" x="345" y="8" width="23" height="23"/>
-                        <animations/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="23" id="6ms-yB-OVx"/>
-                            <constraint firstAttribute="width" constant="23" id="fV9-Wk-sMd"/>
-                        </constraints>
-                        <state key="normal" title="Schedule" image="unchecked"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9L-wg-JoF">
                         <rect key="frame" x="31" y="8" width="314" height="15"/>
                         <animations/>
@@ -78,6 +69,15 @@
                             <constraint firstAttribute="width" constant="4" id="b9m-VZ-bHn"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-JC-3Iz">
+                        <rect key="frame" x="345" y="8" width="23" height="23"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="6ms-yB-OVx"/>
+                            <constraint firstAttribute="width" constant="23" id="fV9-Wk-sMd"/>
+                        </constraints>
+                        <state key="normal" title="Schedule" image="unchecked"/>
+                    </button>
                 </subviews>
                 <animations/>
                 <constraints>
