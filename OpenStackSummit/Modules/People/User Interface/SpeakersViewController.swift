@@ -20,6 +20,7 @@ class SpeakersViewController: RevealViewController {
         super.viewDidLoad()
         
         addChildViewController(speakersListViewController)
+        speakersListViewController.view.frame = view.bounds
         view.addSubview(speakersListViewController.view)
         speakersListViewController.didMoveToParentViewController(self)
     }
