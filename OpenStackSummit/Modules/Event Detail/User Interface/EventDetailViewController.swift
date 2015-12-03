@@ -252,10 +252,16 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         
         set {
             if newValue {
-                NSLayoutConstraint.deactivateConstraints([myFeedbackViewHeightConstraint])
+                if myFeedbackViewHeightConstraint != nil {
+                    myFeedbackView.removeConstraint(myFeedbackViewHeightConstraint)
+                    myFeedbackViewHeightConstraint = nil                    
+                }
             }
             else {
-                NSLayoutConstraint.activateConstraints([myFeedbackViewHeightConstraint])
+                if myFeedbackViewHeightConstraint == nil {
+                    myFeedbackViewHeightConstraint = NSLayoutConstraint(item: myFeedbackView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 0)
+                    myFeedbackView.addConstraint(myFeedbackViewHeightConstraint)
+                }
             }
             myFeedbackView.updateConstraints()
         }
