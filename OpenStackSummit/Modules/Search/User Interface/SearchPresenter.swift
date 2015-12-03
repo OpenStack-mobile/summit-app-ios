@@ -24,9 +24,10 @@ public protocol ISearchPresenter: IBasePresenter {
     func getSpeakersCount() -> Int
     func getAttendeesCount() -> Int
     func search(searchTerm: String!)
+    func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell)
 }
 
-public class SearchPresenter: BasePresenter {
+public class SearchPresenter: ScheduleablePresenter {
     var interactor: ISearchInteractor!
     var viewController: ISearchViewController!
     var wireframe: ISearchWireframe!
@@ -102,6 +103,7 @@ public class SearchPresenter: BasePresenter {
         cell.place = event.location
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = interactor.isMemberLoggedIn()
+        cell.summitTypeColor = event.summitTypeColor != "" ? UIColor(hexaString: event.summitTypeColor) : nil
     }
     
     func buildTrackCell(cell: ITrackTableViewCell, index: Int) {
@@ -160,5 +162,14 @@ public class SearchPresenter: BasePresenter {
     public func showAttendeeProfile(index: Int) {
         let person = speakers[index]
         wireframe.showAttendeeProfile(person.id)
+    }
+    
+    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
+        let event = events[index]
+        toggleScheduledStatusForEvent(event, scheduleableView: cell, interactor: interactor) { error in
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
+            }
+        }
     }
 }

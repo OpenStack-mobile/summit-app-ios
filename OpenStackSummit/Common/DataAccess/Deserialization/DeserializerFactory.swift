@@ -88,7 +88,7 @@ public class DeserializerFactory : NSObject {
         case "MySchedule":
             deserializer = summitEventDeserializer
         case "Presentation":
-            deserializer = presentationDeserializer
+            deserializer = summitEventDeserializer
         case "SummitEvent":
             deserializer = summitEventDeserializer
         default:

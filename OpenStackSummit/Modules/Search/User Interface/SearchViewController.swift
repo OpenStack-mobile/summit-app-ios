@@ -111,6 +111,7 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (tableView == eventsTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier(eventsTableViewCellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
+            cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)            
             presenter.buildEventCell(cell, index: indexPath.row)
             return cell
         }
@@ -187,5 +188,14 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         }
         presenter.search(searchTermTextView.text)
         return true
+    }
+    
+    func toggleScheduledStatus(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview as! UITableViewCell
+        let indexPath = eventsTableView.indexPathForCell(cell)
+        
+        presenter.toggleScheduledStatus(indexPath!.row, cell: view.superview as! IScheduleTableViewCell)
     }
 }
