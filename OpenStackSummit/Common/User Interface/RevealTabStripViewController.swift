@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import SWRevealViewController
 
-class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRevealViewControllerDelegate {
+class RevealTabStripViewController: TabStripViewController, SWRevealViewControllerDelegate {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
