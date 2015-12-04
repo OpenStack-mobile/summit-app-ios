@@ -64,7 +64,7 @@ class TabStripViewController: XLPagerTabStripViewController, UICollectionViewDel
         
         if isViewLoaded() {
             buttonBarView.reloadData()
-            buttonBarView.moveToIndex(currentIndex, animated: false, swipeDirection: XLPagerTabStripDirection.None, pagerScroll: XLPagerScroll.YES)
+            buttonBarView.moveToIndex(currentIndex, animated: false, swipeDirection: XLPagerTabStripDirection.None, pagerScroll: XLPagerScroll.OnlyIfOutOfScreen)
         }
     }
     
@@ -76,7 +76,7 @@ class TabStripViewController: XLPagerTabStripViewController, UICollectionViewDel
                 direction = XLPagerTabStripDirection.Right
             }
             
-            buttonBarView.moveToIndex(UInt(toIndex), animated: true, swipeDirection: direction, pagerScroll: XLPagerScroll.YES)
+            buttonBarView.moveToIndex(UInt(toIndex), animated: true, swipeDirection: direction, pagerScroll: XLPagerScroll.OnlyIfOutOfScreen)
             
             if changeCurrentIndexBlock != nil {
                 let oldCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: Int(currentIndex) != fromIndex ? fromIndex : toIndex, inSection: 0)) as! XLButtonBarViewCell
