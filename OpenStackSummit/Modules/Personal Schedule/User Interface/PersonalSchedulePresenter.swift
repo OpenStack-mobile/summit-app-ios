@@ -51,8 +51,8 @@ public class PersonalSchedulePresenter: SchedulePresenter {
     public override func reloadSchedule() {        
         let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
         
-        let startDate = viewController.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone + self.summitTimeZoneOffset)
-        let endDate = viewController.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone + self.summitTimeZoneOffset)
+        let startDate = viewController.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        let endDate = viewController.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
         
         dayEvents = interactor.getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
         viewController.reloadSchedule()
