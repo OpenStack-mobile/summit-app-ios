@@ -1644,8 +1644,8 @@
 		CAF2AA4F1B828E7C00D8E595 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CAF2AA501B828E7C00D8E595 /* EventDetailPresenter.swift */,
 				CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */,
+				CAF2AA501B828E7C00D8E595 /* EventDetailPresenter.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
