@@ -10,10 +10,17 @@ import UIKit
 
 @objc
 public protocol IMenuWireframe {
-    
+    func showMyProfile(memberId: Int)
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
+    
     var menuViewController: MenuViewController!
-    var venueListWireframe: IVenueListWireframe!
+    
+    var myProfileWireframe: IMyProfileWireframe!
+    
+    public func showMyProfile(memberId: Int) {
+        myProfileWireframe.showMemberProfile(memberId, revealViewController: menuViewController.revealViewController())
+    }
+    
 }
