@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func viewLoad()
+    func showMyProfile()
     func hasAccessToMenuItem(item: MenuItem) -> Bool
     func login()
     func logout()
@@ -103,6 +104,12 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             self.viewController.reloadMenu()
             self.viewController.hideMenu()
             self.viewController.hideActivityIndicator()
+        }
+    }
+    
+    public func showMyProfile() {
+        if let currentMember = interactor.getCurrentMember() {
+            wireframe.showMyProfile(currentMember.id)
         }
     }
     
