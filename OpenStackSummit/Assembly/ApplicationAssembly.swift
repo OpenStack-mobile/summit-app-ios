@@ -12,6 +12,7 @@ import Typhoon
 class ApplicationAssembly: TyphoonAssembly {
     
     var securityManagerAssembly: SecurityManagerAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
     
     dynamic func appDelegate() -> AnyObject {
         return TyphoonDefinition.withClass(AppDelegate.self)
@@ -38,6 +39,7 @@ class ApplicationAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+            definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
         }
     }
 
