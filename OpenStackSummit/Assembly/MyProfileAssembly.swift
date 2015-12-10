@@ -12,6 +12,9 @@ import Typhoon
 class MyProfileAssembly: TyphoonAssembly {
     
     var applicationAssembly: ApplicationAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
     
     var personalScheduleAssembly: PersonalScheduleAssembly!
     var memberProfileAssembly: MemberProfileAssembly!
@@ -34,6 +37,20 @@ class MyProfileAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("viewController", with: self.myProfileViewController())
+            definition.injectProperty("interactor", with: self.myProfileInteractor())
+        }
+    }
+    
+    dynamic func myProfileInteractor() -> AnyObject {
+        return TyphoonDefinition.withClass(MyProfileInteractor.self) {
+            (definition) in
+            
+            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.dataStoreAssembly.presentationSpeakerRemoteDataStore())
+            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
+            definition.injectProperty("summitAttendeeDTOAssembler", with: self.dtoAssemblersAssembly.summitAttendeeDTOAssembler())
+            definition.injectProperty("presentationSpeakerDTOAssembler", with: self.dtoAssemblersAssembly.presentationSpeakerDTOAssembler())
+            definition.injectProperty("memberDTOAssembler", with: self.dtoAssemblersAssembly.memberDTOAssembler())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     

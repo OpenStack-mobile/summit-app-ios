@@ -2324,10 +2324,10 @@
             </objects>
             <point key="canvasLocation" x="1041" y="-984"/>
         </scene>
-        <!--My Profile-->
+        <!--MY PROFILE-->
         <scene sceneID="XI8-9A-qDt">
             <objects>
-                <viewController storyboardIdentifier="MyProfileViewController" title="My Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rjc-Ea-Rre" customClass="MyProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyProfileViewController" title="MY PROFILE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rjc-Ea-Rre" customClass="MyProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IyN-lw-XDW"/>
                         <viewControllerLayoutGuide type="bottom" id="WgP-LF-9Hb"/>

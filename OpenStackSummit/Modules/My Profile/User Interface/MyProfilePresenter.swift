@@ -16,6 +16,7 @@ public protocol IMyProfilePresenter {
 public class MyProfilePresenter: NSObject, IMyProfilePresenter {
     
     var viewController: IMyProfileViewController!
+    var interactor: IMyProfileInteractor!
     
     var internalMemberId: Int = 0
     public var memberId: Int {
@@ -24,7 +25,12 @@ public class MyProfilePresenter: NSObject, IMyProfilePresenter {
         }
         set {
             internalMemberId = newValue
-            viewController.title = "MY PROFILE"
+            
+            self.interactor.getSpeakerProfile(newValue) { speaker, error in
+                if speaker != nil {
+                    self.viewController.title = speaker!.name.uppercaseString
+                }
+            }
         }
     }
     
