@@ -8,9 +8,14 @@
 
 import XLPagerTabStrip
 
-class MyProfileViewController: RevealTabStripViewController {
+@objc
+public protocol IMyProfileViewController {
+    var presenter: IMyProfilePresenter! { get set }
+}
+
+class MyProfileViewController: RevealTabStripViewController, IMyProfileViewController {
     
-    @IBOutlet weak var filterButton: UIBarButtonItem!
+    var presenter : IMyProfilePresenter!
     
     var personalScheduleViewController: PersonalScheduleViewController!
     var memberProfileViewController: MemberProfileViewController!

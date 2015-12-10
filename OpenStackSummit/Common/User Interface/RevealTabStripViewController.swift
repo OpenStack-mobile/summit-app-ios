@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import SWRevealViewController
 
-class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRevealViewControllerDelegate {
+class RevealTabStripViewController: TabStripViewController, SWRevealViewControllerDelegate {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
@@ -52,6 +52,12 @@ class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRe
         reloadPagerTabStripView()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        revealViewController().delegate = self
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,4 +66,5 @@ class RevealTabStripViewController: XLButtonBarPagerTabStripViewController, SWRe
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
         view.userInteractionEnabled = position == FrontViewPosition.Left
     }
+    
 }

@@ -21,7 +21,8 @@ public protocol IMenuViewController: IMessageEnabledViewController {
     func hideActivityIndicator()
 }
 
-@objc public enum MenuItem: Int {
+@objc
+public enum MenuItem: Int {
     case Login
     case Events
     case Venues
@@ -83,13 +84,16 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
         sender.alpha = 1
+        
+        if (sender == myProfileButton) {
+            presenter.showMyProfile()
+        }
     }
     
     @IBAction func peopleOrSpeakersPressed(sender: UIButton) {
         let identifier = presenter.hasAccessToMenuItem(MenuItem.Attendees) ? "PeopleNavigationController" : "SpeakersNavigationController"
         let navigationController = storyboard?.instantiateViewControllerWithIdentifier(identifier) as! UINavigationController
-        revealViewController().setFrontViewController(navigationController, animated: true)
-        revealViewController().revealToggle(self)
+        revealViewController().pushFrontViewController(navigationController, animated: true)
     }
     
     @IBAction func login(sender: UIButton) {
