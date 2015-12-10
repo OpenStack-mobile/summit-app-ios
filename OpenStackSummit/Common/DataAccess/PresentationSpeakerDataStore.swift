@@ -10,9 +10,14 @@ import UIKit
 @objc
 public protocol IPresentationSpeakerDataStore {
     func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker]
+    func getByIdLocal(id: Int) -> PresentationSpeaker?
 }
 
 public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeakerDataStore {
+    public func getByIdLocal(id: Int) -> PresentationSpeaker? {
+        return super.getByIdLocal(id)
+    }
+    
     public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
         
         var result = realm.objects(PresentationSpeaker.self)
@@ -25,15 +30,15 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
         
         let startRecord = (page - 1) * objectsPerPage;
         let endRecord = (startRecord + (objectsPerPage - 1)) <= result.count ? startRecord + (objectsPerPage - 1) : result.count - 1;
-
+        
         if (startRecord <= endRecord) {
             
             for index in (startRecord...endRecord) {
                 speakers.append(result[index])
-            }            
+            }
         }
         
         return speakers
     }
-
+    
 }

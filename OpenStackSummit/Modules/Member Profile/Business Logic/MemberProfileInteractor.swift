@@ -18,7 +18,7 @@ public protocol IMemberProfileInteractor {
 
 public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
     
-    var presentationSpeakerRemoteDataStore: IPresentationSpeakerRemoteDataStore!
+    var presentationSpeakerDataStore: IPresentationSpeakerDataStore!
     var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
     var summitAttendeeDTOAssembler: ISummitAttendeeDTOAssembler!
     var presentationSpeakerDTOAssembler: IPresentationSpeakerDTOAssembler!
@@ -26,16 +26,15 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
     var securityManager: SecurityManager!
     
     public func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void) {
-        presentationSpeakerRemoteDataStore.getById(speakerId) { speaker, error in
-            
-            if (error != nil) {
-                completionBlock(nil, error)
-                return
-            }
-            
-            let speakerDTO = self.presentationSpeakerDTOAssembler.createDTO(speaker!)
-            completionBlock(speakerDTO, error)
+        var error: NSError?
+        var speakerDTO: PresentationSpeakerDTO? = nil
+        if let speaker = presentationSpeakerDataStore.getByIdLocal(speakerId) {
+            speakerDTO = self.presentationSpeakerDTOAssembler.createDTO(speaker)
         }
+        else {
+            error = NSError(domain: "There was an error getting speaker data", code: 9001, userInfo: nil)
+        }
+        completionBlock(speakerDTO, error)
     }
     
     public func getAttendeeProfile(attendeeId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void) {
