@@ -77,6 +77,7 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         eventTypeTableView.delegate = self
         eventTypeTableView.dataSource = self
         eventTypeTableView.reloadData()
+        levelTableView.delegate = self
         levelTableView.dataSource = self
         levelTableView.reloadData()
     }

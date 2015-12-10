@@ -47,6 +47,7 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
     
     public func viewLoad(level: String) {
         self.level = level
+        viewController.title = level.uppercaseString
         viewLoad()
     }
     

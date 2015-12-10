@@ -14,6 +14,7 @@ public protocol IScheduleViewController: class, IMessageEnabledViewController {
     var startDate: NSDate! { get set }
     var endDate: NSDate! { get set }
     var selectedDate: NSDate! { get set }
+    var title: String! { get set }
     
     func reloadSchedule()
     func showActivityIndicator()
