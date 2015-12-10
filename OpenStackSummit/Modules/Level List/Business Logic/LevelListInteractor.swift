@@ -17,6 +17,6 @@ public class LevelListInteractor: NSObject, ILevelListInteractor {
     var eventDataStore: IEventDataStore!
     
     public func getLevels() -> [String] {
-        return eventDataStore.getPresentationLevels().sort()
+        return eventDataStore.getPresentationLevels()
     }
 }
