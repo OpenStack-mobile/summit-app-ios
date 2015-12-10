@@ -15,7 +15,8 @@ public protocol IPeopleWireframe {
 }
 
 public class PeopleWireframe: NSObject, IPeopleWireframe {
-    var memberProfileWireframe : IMemberProfileWireframe!
+    var memberProfileWireframe: IMemberProfileWireframe!
+    var myProfileWireframe: IMyProfileWireframe!
     var attendeesListViewController: IPeopleListViewController!
     var speakersListViewController: IPeopleListViewController!
     
@@ -24,6 +25,5 @@ public class PeopleWireframe: NSObject, IPeopleWireframe {
     }
     
     public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: speakersListViewController.navigationController!)
-    }
+        myProfileWireframe.presentMyProfileInterfaceFromRevealViewController(speakerId, revealViewController: speakersListViewController.navigationController!.revealViewController())    }
 }

@@ -30,9 +30,9 @@ class RevealTabStripViewController: TabStripViewController, SWRevealViewControll
             menuButton.action = Selector("revealToggle:")
         }
         
-        revealViewController().delegate = self
-        revealViewController().rearViewRevealWidth = 264
-        revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        revealViewController()?.delegate = self
+        revealViewController()?.rearViewRevealWidth = 264
+        revealViewController()?.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         buttonBarView.selectedBar.alpha = 0
         
@@ -50,12 +50,6 @@ class RevealTabStripViewController: TabStripViewController, SWRevealViewControll
         }
         
         reloadPagerTabStripView()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        revealViewController().delegate = self
     }
     
     override func didReceiveMemoryWarning() {

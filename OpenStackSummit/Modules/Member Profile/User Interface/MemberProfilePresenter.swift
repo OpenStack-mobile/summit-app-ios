@@ -31,7 +31,8 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         }
         set {
             self.internalSpeakerId = newValue
-            self.internalAttendeeId = 0        }
+            self.internalAttendeeId = 0
+        }
     }
     
     public var attendeeId: Int {
@@ -96,8 +97,6 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
             self.viewController.irc = person!.irc
             self.viewController.bio = person!.bio
             
-            self.speakerId = 0
-            self.attendeeId = 0
             self.viewController.hideActivityIndicator()
         })
     }

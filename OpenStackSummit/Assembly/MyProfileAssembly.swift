@@ -12,6 +12,9 @@ import Typhoon
 class MyProfileAssembly: TyphoonAssembly {
     
     var applicationAssembly: ApplicationAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
+    var dtoAssemblersAssembly: DTOAssemblersAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
     
     var personalScheduleAssembly: PersonalScheduleAssembly!
     var memberProfileAssembly: MemberProfileAssembly!
@@ -23,6 +26,9 @@ class MyProfileAssembly: TyphoonAssembly {
             
             definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("myProfileViewController", with: self.myProfileViewController())
+            definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
+            definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
+            definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
         }
     }
     
@@ -31,6 +37,20 @@ class MyProfileAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("viewController", with: self.myProfileViewController())
+            definition.injectProperty("interactor", with: self.myProfileInteractor())
+        }
+    }
+    
+    dynamic func myProfileInteractor() -> AnyObject {
+        return TyphoonDefinition.withClass(MyProfileInteractor.self) {
+            (definition) in
+            
+            definition.injectProperty("presentationSpeakerRemoteDataStore", with: self.dataStoreAssembly.presentationSpeakerRemoteDataStore())
+            definition.injectProperty("summitAttendeeRemoteDataStore", with: self.dataStoreAssembly.summitAttendeeRemoteDataStore())
+            definition.injectProperty("summitAttendeeDTOAssembler", with: self.dtoAssemblersAssembly.summitAttendeeDTOAssembler())
+            definition.injectProperty("presentationSpeakerDTOAssembler", with: self.dtoAssemblersAssembly.presentationSpeakerDTOAssembler())
+            definition.injectProperty("memberDTOAssembler", with: self.dtoAssemblersAssembly.memberDTOAssembler())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     
@@ -43,10 +63,6 @@ class MyProfileAssembly: TyphoonAssembly {
                 (definition) in
                 
                 definition.injectProperty("presenter", with: self.myProfilePresenter())
-                
-                definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
-                definition.injectProperty("memberProfileViewController", with: self.memberProfileAssembly.memberProfileViewController())
-                definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
         })
     }
 }

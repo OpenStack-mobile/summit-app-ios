@@ -11,7 +11,7 @@ import SwiftSpinner
 import XLPagerTabStrip
 
 @objc
-public protocol IMemberProfileViewController {
+protocol IMemberProfileViewController {
     var name: String! { get set }
     var personTitle: String! { get set }
     var picUrl: String! { get set }	
@@ -215,11 +215,11 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     private var bioHTML: String!
 
     override func viewWillAppear(animated: Bool) {
-        presenter.viewLoad()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewLoad()
     }
     
     override func didReceiveMemoryWarning() {
