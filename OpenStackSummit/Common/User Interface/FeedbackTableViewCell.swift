@@ -25,7 +25,6 @@ class FeedbackTableViewCell: UITableViewCell, IFeedbackTableViewCell {
         }
         set {
             eventNameLabel.text = newValue
-            eventNameLabelHeightConstraint.constant = newValue == nil || newValue.isEmpty ? 0 : 33
         }
     }
     
@@ -44,7 +43,7 @@ class FeedbackTableViewCell: UITableViewCell, IFeedbackTableViewCell {
         }
         set {
             rateView.rating = newValue
-            rateViewWidthConstraint.constant = CGFloat(18*newValue)
+            rateViewWidthConstraint.constant = CGFloat(17*newValue) + 5.0
         }
     }
     
@@ -72,14 +71,12 @@ class FeedbackTableViewCell: UITableViewCell, IFeedbackTableViewCell {
     @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var rateView: CosmosView!
-    @IBOutlet weak var eventNameLabelHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var rateViewWidthConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         rateView.settings.updateOnTouch = false
-        rateView.settings.fillMode = .Full
         // Initialization code
     }
     
