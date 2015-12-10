@@ -20,18 +20,26 @@ public class PushNotificationsManager: NSObject, IPushNotificationsManager {
     var summitDataStore: ISummitDataStore!
     
     public func subscribeToPushChannelsUsingContext(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
-        //TODO: add summit12
+        let summit = summitDataStore.getActiveLocal()
+        var channels = [String]()
+        
         if let member = self.securityManager.getCurrentMember() {
-            var channels = ["m_\(member.id)", "attendees"]
+            channels = ["me_\(member.id)", "attendees"]
             if member.speakerRole != nil {
                 channels.append("speakers")
             }
+            
+            channels.append("su_\(summit!.id)")
+            
             PFInstallation.currentInstallation().channels = channels
             PFInstallation.currentInstallation().saveEventually(completionBlock)        }
     }
     
     public func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
-        PFInstallation.currentInstallation().channels = []
+        var channels = [String]()
+        let summit = summitDataStore.getActiveLocal()
+        channels.append("su_\(summit!.id)")
+        PFInstallation.currentInstallation().channels = channels
         PFInstallation.currentInstallation().saveEventually(completionBlock)
     }
 }
