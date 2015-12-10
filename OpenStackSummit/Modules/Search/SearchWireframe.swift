@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol ISearchWireframe {
     func showEventDetail(eventId: Int)
-    func showTrackSchedule(trackId: Int)
+    func showTrackSchedule(track: TrackDTO)
     func showAttendeeProfile(attendeeId: Int)
     func showSpeakerProfile(speakerId: Int)
 }
@@ -26,8 +26,8 @@ public class SearchWireframe: NSObject, ISearchWireframe {
         eventDetailWireframe.presentEventDetailView(eventId, viewController: searchViewController.navigationController!)
     }
     
-    public func showTrackSchedule(trackId: Int) {
-        trackScheduleWireframe.presentTrackScheduleView(trackId, viewController: searchViewController.navigationController!)
+    public func showTrackSchedule(track: TrackDTO) {
+        trackScheduleWireframe.presentTrackScheduleView(track, viewController: searchViewController.navigationController!)
     }
     public func showAttendeeProfile(attendeeId: Int) {
         memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: searchViewController.navigationController!)

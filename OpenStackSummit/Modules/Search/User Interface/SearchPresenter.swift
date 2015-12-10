@@ -158,7 +158,7 @@ public class SearchPresenter: ScheduleablePresenter {
     
     public func showTrackEvents(index: Int) {
         let track = tracks[index]
-        wireframe.showTrackSchedule(track.id)
+        wireframe.showTrackSchedule(track)
     }
    
     public func showSpeakerProfile(index: Int) {

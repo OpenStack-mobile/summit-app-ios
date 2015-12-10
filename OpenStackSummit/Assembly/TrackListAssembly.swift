@@ -52,7 +52,6 @@ class TrackListAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.trackListPresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

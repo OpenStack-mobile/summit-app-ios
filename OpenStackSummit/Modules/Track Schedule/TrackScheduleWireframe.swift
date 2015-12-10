@@ -10,16 +10,16 @@ import UIKit
 
 @objc
 public protocol ITrackScheduleWireframe: IScheduleWireframe {
-    func presentTrackScheduleView(trackId: Int, viewController: UINavigationController)
+    func presentTrackScheduleView(track: TrackDTO, viewController: UINavigationController)
 }
 
 public class TrackScheduleWireframe: ScheduleWireframe, ITrackScheduleWireframe {
     var trackScheduleViewController: TrackScheduleViewController!
     
-    public func presentTrackScheduleView(trackId: Int, viewController: UINavigationController) {
+    public func presentTrackScheduleView(track: TrackDTO, viewController: UINavigationController) {
         let newViewController = trackScheduleViewController!
         let _ = trackScheduleViewController.view! // this is only to force viewLoad to trigger
-        trackScheduleViewController.presenter.viewLoad(trackId)
+        trackScheduleViewController.presenter.viewLoad(track)
         viewController.pushViewController(newViewController, animated: true)
     }
     
