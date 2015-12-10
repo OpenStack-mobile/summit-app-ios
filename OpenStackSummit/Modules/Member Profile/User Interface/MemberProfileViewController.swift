@@ -215,11 +215,11 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     private var bioHTML: String!
 
     override func viewWillAppear(animated: Bool) {
+        presenter.viewLoad()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewLoad()
     }
     
     override func didReceiveMemoryWarning() {
@@ -240,7 +240,7 @@ class MemberProfileViewController: UIViewController, IMemberProfileViewControlle
     }
     
     func showActivityIndicator() {
-        SwiftSpinner.show("Please wait...")
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
     }
     
     func hideActivityIndicator() {
