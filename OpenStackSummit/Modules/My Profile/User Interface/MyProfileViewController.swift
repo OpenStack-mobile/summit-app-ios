@@ -16,6 +16,10 @@ public protocol IMyProfileViewController {
 
 class MyProfileViewController: RevealTabStripViewController, IMyProfileViewController {
     
-    var presenter : IMyProfilePresenter!
+    var presenter: IMyProfilePresenter!
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = title
+    }
     
 }
