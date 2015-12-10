@@ -14,11 +14,13 @@ class PeopleAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var memberProfileAssembly: MemberProfileAssembly!
+    var myProfileAssembly: MyProfileAssembly!
     
     dynamic func peopleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(PeopleWireframe.self) {
             (definition) in
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
+            definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
             definition.injectProperty("attendeesListViewController", with: self.attendeesListViewController())
             definition.injectProperty("speakersListViewController", with: self.speakerListViewController())
        }
@@ -83,7 +85,6 @@ class PeopleAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.peoplePresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }
