@@ -8,6 +8,61 @@
 
 import UIKit
 
-class LevelSchedulePresenter: NSObject {
+@objc
+public protocol ILevelSchedulePresenter: ISchedulePresenter{
+    func viewLoad(level: String)
+}
 
+public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter {
+    var level = ""
+    
+    weak var viewController : IScheduleViewController! {
+        get {
+            return internalViewController
+        }
+        set {
+            internalViewController = newValue
+        }
+    }
+    
+    var interactor : IScheduleInteractor! {
+        get {
+            return internalInteractor
+        }
+        set {
+            internalInteractor = newValue
+        }
+    }
+    
+    var wireframe : IScheduleWireframe! {
+        get {
+            return internalWireframe
+        }
+        set {
+            internalWireframe = newValue
+        }
+    }
+    
+    var isLoaded = false
+    
+    public func viewLoad(level: String) {
+        self.level = level
+        viewLoad()
+    }
+    
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+        let levelSelections = [level]
+        
+        let events = interactor.getScheduleEvents(
+            startDate,
+            endDate: endDate,
+            eventTypes: nil,
+            summitTypes: nil,
+            tracks: nil,
+            tags: nil,
+            levels: levelSelections
+        )
+        
+        return events
+    }
 }

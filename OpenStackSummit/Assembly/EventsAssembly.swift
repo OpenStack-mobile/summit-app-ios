@@ -14,6 +14,7 @@ class EventsAssembly: TyphoonAssembly {
     var generalScheduleAssembly: GeneralScheduleAssembly!
     var generalScheduleFilterAssembly: GeneralScheduleFilterAssembly!
     var trackListAssembly: TrackListAssembly!
+    var levelListAssembly: LevelListAssembly!
     
     dynamic func eventsWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(EventsWireframe.self) {
@@ -38,6 +39,7 @@ class EventsAssembly: TyphoonAssembly {
             
             definition.injectProperty("generalScheduleViewController", with: self.generalScheduleAssembly.generalScheduleViewController())
             definition.injectProperty("trackListViewController", with: self.trackListAssembly.trackListViewController())
+            definition.injectProperty("levelListViewController", with: self.levelListAssembly.levelListViewController())
             definition.injectProperty("presenter", with: self.eventsPresenter())
         }
     }

@@ -85,6 +85,8 @@
 		<string>MemberProfileAssembly</string>
 		<string>SearchAssembly</string>
 		<string>GeneralScheduleFilterAssembly</string>
+		<string>LevelListAssembly</string>
+		<string>LevelScheduleAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

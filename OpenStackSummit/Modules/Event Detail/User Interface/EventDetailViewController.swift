@@ -1,4 +1,4 @@
-//
+	//
 //  EventDetailViewController.swift
 //  OpenStackSummit
 //
@@ -39,6 +39,7 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     var myFeedbackName: String! { get set }
     var hasMyFeedback: Bool { get set}
     var isScheduledStatusVisible: Bool { get set }
+    var level: String! { get set }
 }
 
 class EventDetailViewController: BaseViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -75,6 +76,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     @IBOutlet weak var tagsLabel: UILabel!
     @IBOutlet weak var eventDetailLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var locationLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var levelLabelHeightConstraint: NSLayoutConstraint!    
+    @IBOutlet weak var levelLabel: UILabel!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -281,6 +284,17 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
                 navigationItem.rightBarButtonItems![1].image = nil
             }
             navigationItem.rightBarButtonItems![1].enabled = newValue
+        }
+    }
+    
+    var level: String! {
+        get {
+            return levelLabel.text
+        }
+        set {
+            levelLabel.text = newValue
+            levelLabelHeightConstraint.constant = newValue == nil || newValue.isEmpty ? 0 : 60
+            levelLabel.updateConstraints()
         }
     }
     

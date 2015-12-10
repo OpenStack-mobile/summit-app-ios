@@ -35,6 +35,7 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
             presentationSpeaker.id = json["id"].intValue
             presentationSpeaker.firstName = json["first_name"].stringValue
             presentationSpeaker.lastName = json["last_name"].stringValue
+            presentationSpeaker.fullName = presentationSpeaker.firstName + " " + presentationSpeaker.lastName
             presentationSpeaker.email = json["email"].stringValue
             presentationSpeaker.title = json["title"].stringValue
             presentationSpeaker.bio = json["bio"].stringValue

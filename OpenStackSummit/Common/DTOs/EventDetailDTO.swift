@@ -34,4 +34,5 @@ public class EventDetailDTO: ScheduleItemDTO {
     public var finished = false
     public var allowFeedback = false
     public var moderator: PresentationSpeakerDTO?
+    public var level = ""
 }

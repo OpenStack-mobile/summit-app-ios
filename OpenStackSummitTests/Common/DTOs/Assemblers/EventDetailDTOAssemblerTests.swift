@@ -60,6 +60,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.presentation = Presentation()
         event.presentation?.speakers.append(speaker)
         event.presentation?.track = track
+        event.presentation?.level = "Intermediate"
         event.tags.append(tag1)
         event.tags.append(tag2)
         event.venueRoom = venueRoom
@@ -89,6 +90,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
         XCTAssertNil(eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.moderator)
+        XCTAssertEqual(event.presentation!.level, eventDetailDTO.level)
     }
     
     func test_createDTO_eventWithPresentationModerator_returnsDTOWithCorrectData() {
@@ -127,6 +129,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         event.presentation?.speakers.append(speaker)
         event.presentation?.moderator = speaker
         event.presentation?.track = track
+        event.presentation?.level = "Intermediate"
         event.tags.append(tag1)
         event.tags.append(tag2)
         event.venueRoom = venueRoom
@@ -156,6 +159,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
         XCTAssertNil(eventDetailDTO.venueId)
         XCTAssertEqual(speaker.id, eventDetailDTO.moderator?.id)
+        XCTAssertEqual(event.presentation!.level, eventDetailDTO.level)
     }
     
     
@@ -196,5 +200,6 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(venue.id, eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.venueRoomId)
         XCTAssertNil(eventDetailDTO.moderator)
+        XCTAssertEqual("", eventDetailDTO.level)
     }
 }

@@ -42,16 +42,9 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
             definition.injectProperty("trackDataStore", with: self.dataStoreAssembly.trackDataStore())
             definition.injectProperty("tagDataStore", with: self.dataStoreAssembly.tagDataStore())
             definition.injectProperty("namedDTOAssembler", with: self.dtoAssemblersAssembly.namedDTOAssembler())
+            definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
         }
     }
-        
-    /*dynamic func generalScheduleFilterViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(GeneralScheduleFilterViewController.self) {
-            (definition) in
-            
-            definition.injectProperty("presenter", with: self.generalScheduleFilterPresenter())
-        }
-    }*/
     
     dynamic func generalScheduleFilterViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
