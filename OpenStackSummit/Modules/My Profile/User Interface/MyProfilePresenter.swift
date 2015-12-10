@@ -10,14 +10,28 @@ import Foundation
 
 @objc
 public protocol IMyProfilePresenter {
-    func viewLoad(memberId: Int)
+    var memberId: Int { get set }
 }
 
-class MyProfilePresenter: NSObject, IMyProfilePresenter {
+public class MyProfilePresenter: NSObject, IMyProfilePresenter {
     
-    weak var viewController: IMyProfileViewController!
+    var viewController: IMyProfileViewController!
+    var interactor: IMyProfileInteractor!
     
-    func viewLoad(memberId: Int) {
+    var internalMemberId: Int = 0
+    public var memberId: Int {
+        get {
+            return internalMemberId
+        }
+        set {
+            internalMemberId = newValue
+            
+            self.interactor.getSpeakerProfile(newValue) { speaker, error in
+                if speaker != nil {
+                    self.viewController.title = speaker!.name.uppercaseString
+                }
+            }
+        }
     }
     
 }
