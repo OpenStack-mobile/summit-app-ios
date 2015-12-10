@@ -161,6 +161,13 @@
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="83H-NX-4z4" userLabel="Header">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRm-Xr-3hF">
+                                                        <rect key="frame" x="40" y="17" width="520" height="29"/>
+                                                        <animations/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWG-Yk-uzY" userLabel="Tags">
                                                         <rect key="frame" x="62" y="46" width="477" height="40"/>
                                                         <animations/>
@@ -169,13 +176,6 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRm-Xr-3hF">
-                                                        <rect key="frame" x="40" y="17" width="520" height="29"/>
-                                                        <animations/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -1266,10 +1266,10 @@
             </objects>
             <point key="canvasLocation" x="3549" y="472"/>
         </scene>
-        <!--Track-->
+        <!--TRACK-->
         <scene sceneID="E1W-ng-imS">
             <objects>
-                <viewController storyboardIdentifier="TrackScheduleViewController" title="Track" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IUl-9X-zik" customClass="TrackScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrackScheduleViewController" title="TRACK" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IUl-9X-zik" customClass="TrackScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lTp-2e-ZEf"/>
                         <viewControllerLayoutGuide type="bottom" id="sif-6T-4hR"/>
@@ -1278,23 +1278,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFh-RW-BcX" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CFh-RW-BcX" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="86" width="600" height="514"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8yY-rn-3ka" userLabel="Header">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W69-sl-JNP">
+                                        <rect key="frame" x="40" y="28" width="520" height="29"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="W69-sl-JNP" firstAttribute="leading" secondItem="8yY-rn-3ka" secondAttribute="leading" constant="40" id="LVS-Vd-5fG"/>
+                                    <constraint firstItem="W69-sl-JNP" firstAttribute="centerY" secondItem="8yY-rn-3ka" secondAttribute="centerY" id="SJS-Op-lGk"/>
+                                    <constraint firstAttribute="trailing" secondItem="W69-sl-JNP" secondAttribute="trailing" constant="40" id="ax7-hX-BlN"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CFh-RW-BcX" firstAttribute="top" secondItem="G5W-kF-1qo" secondAttribute="top" id="JTo-6f-xch"/>
+                            <constraint firstItem="CFh-RW-BcX" firstAttribute="top" secondItem="8yY-rn-3ka" secondAttribute="bottom" id="1sQ-0m-qeC"/>
                             <constraint firstItem="CFh-RW-BcX" firstAttribute="leading" secondItem="G5W-kF-1qo" secondAttribute="leading" id="aZe-hD-DdD"/>
                             <constraint firstItem="CFh-RW-BcX" firstAttribute="height" secondItem="G5W-kF-1qo" secondAttribute="height" id="bgj-nn-eoz"/>
+                            <constraint firstItem="8yY-rn-3ka" firstAttribute="top" secondItem="G5W-kF-1qo" secondAttribute="top" id="bzi-s4-4Zo"/>
+                            <constraint firstItem="8yY-rn-3ka" firstAttribute="leading" secondItem="G5W-kF-1qo" secondAttribute="leading" id="d3R-f7-VcB"/>
+                            <constraint firstAttribute="trailing" secondItem="8yY-rn-3ka" secondAttribute="trailing" id="mlD-If-zJT"/>
                             <constraint firstItem="CFh-RW-BcX" firstAttribute="width" secondItem="G5W-kF-1qo" secondAttribute="width" id="wHs-iv-TTu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="scheduleView" destination="CFh-RW-BcX" id="CCi-Vp-UbQ"/>
+                        <outlet property="trackLabel" destination="W69-sl-JNP" id="a2A-qn-cUP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gRj-39-SDL" userLabel="First Responder" sceneMemberID="firstResponder"/>

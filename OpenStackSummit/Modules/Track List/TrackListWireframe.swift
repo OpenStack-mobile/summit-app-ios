@@ -10,14 +10,14 @@ import UIKit
 
 @objc
 public protocol ITrackListWireframe {
-    func showTrackSchedule(trackId: Int)
+    func showTrackSchedule(track: TrackDTO)
 }
 
 public class TrackListWireframe: NSObject, ITrackListWireframe {
     var trackScheduleWireframe: ITrackScheduleWireframe!
     var trackListViewController: ITrackListViewController!
     
-    public func showTrackSchedule(trackId: Int) {
-        trackScheduleWireframe.presentTrackScheduleView(trackId, viewController: trackListViewController.navigationController!)
+    public func showTrackSchedule(track: TrackDTO) {
+        trackScheduleWireframe.presentTrackScheduleView(track, viewController: trackListViewController.navigationController!)
     }
 }

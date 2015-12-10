@@ -8,8 +8,23 @@
 import UIKit
 import AFHorizontalDayPicker
 
-class TrackScheduleViewController: ScheduleViewController {
-   
+@objc
+protocol ITrackScheduleViewController : IScheduleViewController {
+    var track: String! { get set }
+}
+
+class TrackScheduleViewController: ScheduleViewController, ITrackScheduleViewController {
+    var track: String! {
+        get {
+            return trackLabel.text
+        }
+        set {
+            trackLabel.text = newValue
+        }
+    }
+    
+    @IBOutlet weak var trackLabel: UILabel!
+    
     var presenter: ITrackSchedulePresenter! {
         get {
             return internalPresenter as! ITrackSchedulePresenter

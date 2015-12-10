@@ -38,6 +38,6 @@ public class TrackListPresenter: NSObject, ITrackListPresenter {
     
     public func showTrackEvents(index: Int) {
         let track = tracks[index]
-        wireframe.showTrackSchedule(track.id)
+        wireframe.showTrackSchedule(track)
     }
 }
