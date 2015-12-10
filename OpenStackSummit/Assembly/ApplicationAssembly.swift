@@ -56,4 +56,18 @@ class ApplicationAssembly: TyphoonAssembly {
             definition.scope = TyphoonScope.Singleton
         }
     }
+    
+    dynamic func navigationController() -> AnyObject {
+        return TyphoonDefinition.withFactory(self.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
+            
+            factoryMethod.injectParameterWith("NavigationController")
+            }, configuration: {
+                (definition) in
+                
+                definition.scope = TyphoonScope.WeakSingleton
+                
+        })
+    }
+    
 }

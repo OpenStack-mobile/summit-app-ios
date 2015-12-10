@@ -25,6 +25,12 @@ class RevealViewController: BaseViewController, SWRevealViewControllerDelegate {
         revealViewController().rearViewRevealWidth = 264
         revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        revealViewController().delegate = self
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
