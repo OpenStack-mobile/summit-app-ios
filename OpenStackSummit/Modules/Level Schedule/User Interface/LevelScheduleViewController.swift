@@ -9,7 +9,7 @@
 import UIKit
 
 class LevelScheduleViewController: ScheduleViewController {
-
+    
     var presenter: ILevelSchedulePresenter! {
         get {
             return internalPresenter as! ILevelSchedulePresenter

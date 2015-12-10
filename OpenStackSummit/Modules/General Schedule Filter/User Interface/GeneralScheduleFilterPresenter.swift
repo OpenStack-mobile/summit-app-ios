@@ -167,7 +167,10 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
 
     public func buildLevelFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
         let filterSection = scheduleFilter.filterSections[2]
-        buildFilterCell(cell, filterSection: filterSection, index: index)
+        let filterItem = filterSection.items[index]
+        
+        cell.name = filterItem.name
+        cell.isOptionSelected = isItemSelected(filterSection.type, name: filterItem.name)
     }
     
     public func toggleSelectionSummitType(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
