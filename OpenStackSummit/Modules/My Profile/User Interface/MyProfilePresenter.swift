@@ -10,14 +10,22 @@ import Foundation
 
 @objc
 public protocol IMyProfilePresenter {
-    func viewLoad(memberId: Int)
+    var memberId: Int { get set }
 }
 
-class MyProfilePresenter: NSObject, IMyProfilePresenter {
+public class MyProfilePresenter: NSObject, IMyProfilePresenter {
     
-    weak var viewController: IMyProfileViewController!
+    var viewController: IMyProfileViewController!
     
-    func viewLoad(memberId: Int) {
+    var internalMemberId: Int = 0
+    public var memberId: Int {
+        get {
+            return internalMemberId
+        }
+        set {
+            internalMemberId = newValue
+            viewController.title = "MY PROFILE"
+        }
     }
     
 }

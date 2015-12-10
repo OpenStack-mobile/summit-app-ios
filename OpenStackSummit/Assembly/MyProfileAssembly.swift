@@ -23,6 +23,9 @@ class MyProfileAssembly: TyphoonAssembly {
             
             definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("myProfileViewController", with: self.myProfileViewController())
+            definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
+            definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
+            definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
         }
     }
     
@@ -43,10 +46,6 @@ class MyProfileAssembly: TyphoonAssembly {
                 (definition) in
                 
                 definition.injectProperty("presenter", with: self.myProfilePresenter())
-                
-                definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
-                definition.injectProperty("memberProfileViewController", with: self.memberProfileAssembly.memberProfileViewController())
-                definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
         })
     }
 }
