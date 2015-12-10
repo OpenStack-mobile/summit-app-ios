@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IScheduleInteractor : IScheduleableInteractor {
     func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void)
-    func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?) -> [ScheduleItemDTO]
+    func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?, levels: [String]?) -> [ScheduleItemDTO]
     func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
@@ -35,8 +35,8 @@ public class ScheduleInteractor: ScheduleableInteractor {
         }
     }
     
-    public func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?) -> [ScheduleItemDTO] {
-        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, tags: tags)
+    public func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?, levels: [String]?) -> [ScheduleItemDTO] {
+        let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, tags: tags, levels: levels)
         var scheduleItemDTO: ScheduleItemDTO
         var dtos: [ScheduleItemDTO] = []
         for event in events {

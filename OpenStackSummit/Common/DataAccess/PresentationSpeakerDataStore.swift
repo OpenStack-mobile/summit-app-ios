@@ -18,7 +18,7 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
         var result = realm.objects(PresentationSpeaker.self)
         
         if searchTerm != nil && !(searchTerm!.isEmpty) {
-            result = result.filter("firstName CONTAINS [c]%@ or lastName CONTAINS [c]%@ ", searchTerm!, searchTerm!)
+            result = result.filter("fullName CONTAINS [c]%@ or bio CONTAINS [c]%@ ", searchTerm!, searchTerm!)
         }
         
         var speakers = [PresentationSpeaker]()

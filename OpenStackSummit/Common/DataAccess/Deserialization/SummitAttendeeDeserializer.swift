@@ -36,6 +36,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             summitAttendee.id = json["id"].intValue
             summitAttendee.firstName = json["first_name"].stringValue
             summitAttendee.lastName = json["last_name"].stringValue
+            summitAttendee.fullName = summitAttendee.firstName + " " + summitAttendee.lastName
             summitAttendee.title = json["title"].stringValue
             summitAttendee.email = json["email"].stringValue
             summitAttendee.irc = json["irc"].string ?? ""

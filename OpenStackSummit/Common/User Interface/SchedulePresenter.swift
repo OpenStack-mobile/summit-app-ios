@@ -119,21 +119,30 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
             let startDate = viewController.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
             let endDate = viewController.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
             
-            let eventTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int] : nil
-            let summitTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int] : nil
-            let trackSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Track] as? [Int] : nil
-            let tagSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Tag] as? [String] : nil
+            self.dayEvents = self.getScheduledEventsFrom(startDate, to: endDate, withInteractor: interactor)
             
-            self.dayEvents = interactor.getScheduleEvents(
-                startDate,
-                endDate: endDate,
-                eventTypes: eventTypeSelections,
-                summitTypes: summitTypeSelections,
-                tracks: trackSelections,
-                tags: tagSelections
-            )
             viewController.reloadSchedule()
         })
+    }
+    
+    func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+        let eventTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int] : nil
+        let summitTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int] : nil
+        let trackSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Track] as? [Int] : nil
+        let tagSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Tag] as? [String] : nil
+        let levelSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Level] as? [String] : nil
+        
+        let events = interactor.getScheduleEvents(
+            startDate,
+            endDate: endDate,
+            eventTypes: eventTypeSelections,
+            summitTypes: summitTypeSelections,
+            tracks: trackSelections,
+            tags: tagSelections,
+            levels: levelSelections
+        )
+        
+        return events
     }
     
     deinit {

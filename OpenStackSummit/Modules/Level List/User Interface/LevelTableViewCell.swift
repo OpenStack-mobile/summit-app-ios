@@ -8,7 +8,22 @@
 
 import UIKit
 
-class LevelTableViewCell: UITableViewCell {
+@objc
+public protocol ILevelTableViewCell : class {
+    var name: String! { get set }
+}
+
+class LevelTableViewCell: UITableViewCell, ILevelTableViewCell {
+    var name: String!{
+        get {
+            return nameLabel.text
+        }
+        set {
+            nameLabel.text = newValue
+        }
+    }
+    
+    @IBOutlet weak var nameLabel : UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +35,4 @@ class LevelTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

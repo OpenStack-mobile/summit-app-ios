@@ -8,6 +8,6 @@
 
 import UIKit
 
-class LevelScheduleInteractor: NSObject {
-
+class LevelScheduleInteractor: ScheduleInteractor {
+    
 }

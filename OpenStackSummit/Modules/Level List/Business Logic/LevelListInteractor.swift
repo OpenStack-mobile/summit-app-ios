@@ -8,6 +8,15 @@
 
 import UIKit
 
-class LevelListInteractor: NSObject {
+@objc
+public protocol ILevelListInteractor {
+    func getLevels() -> [String]
+}
 
+public class LevelListInteractor: NSObject, ILevelListInteractor {
+    var eventDataStore: IEventDataStore!
+    
+    public func getLevels() -> [String] {
+        return eventDataStore.getPresentationLevels().sort()
+    }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 public enum FilterSectionType {
-    case SummitType, EventType, Track, Tag
+    case SummitType, EventType, Track, Tag, Level
 }
 
 public class FilterSection: NSObject {
