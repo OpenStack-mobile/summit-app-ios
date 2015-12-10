@@ -14,6 +14,7 @@ class EventsViewController: RevealTabStripViewController {
     
     var generalScheduleViewController: GeneralScheduleViewController!
     var trackListViewController: TrackListViewController!
+    var levelListViewController: LevelListViewController!
 
     var internalPresenter: IEventsPresenter!
     
@@ -44,7 +45,7 @@ class EventsViewController: RevealTabStripViewController {
     }
     
     override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
-        return [generalScheduleViewController, trackListViewController]
+        return [generalScheduleViewController, trackListViewController, levelListViewController]
     }
     
 }

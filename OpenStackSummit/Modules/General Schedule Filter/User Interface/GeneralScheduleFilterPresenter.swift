@@ -11,14 +11,15 @@ import UIKit
 @objc
 public protocol IGeneralScheduleFilterPresenter {
     func viewLoad()
-    func getSectionCount() -> Int
     func getSummitTypeItemCount() -> Int
     func getEventTypeItemCount() -> Int
-    func getSectionItemCount(section: Int) -> Int
+    func getLevelItemCount() -> Int
     func toggleSelectionSummitType(cell: IGeneralScheduleFilterTableViewCell, index: Int)
     func toggleSelectionEventType(cell: IGeneralScheduleFilterTableViewCell, index: Int)
+    func toggleSelectionLevel(cell: IGeneralScheduleFilterTableViewCell, index: Int)
     func buildSummitTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int)
     func buildEventTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int)
+    func buildLevelFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int)
     func getTagsBySearchTerm(searchTerm: String) -> [String]
     func addTag(tag: String) -> Bool
     func removeTag(tag: String)
@@ -47,6 +48,7 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
             let summitTypes = interactor.getSummitTypes()
             let eventTypes = interactor.getEventTypes()
             let summitTracks = interactor.getSummitTracks()
+            let levels = interactor.getLevels()
             
             scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
             var filterSection = FilterSection()
@@ -66,6 +68,16 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
             filterSection.name = "Event Type"
             for eventType in eventTypes {
                 filterSectionItem = createSectionItem(eventType.id, name: eventType.name, type: filterSection.type)
+                filterSection.items.append(filterSectionItem)
+            }
+            scheduleFilter.filterSections.append(filterSection)
+            
+            scheduleFilter.selections[FilterSectionType.Level] = [String]()
+            filterSection = FilterSection()
+            filterSection.type = FilterSectionType.Level
+            filterSection.name = "Levels"
+            for level in levels {
+                filterSectionItem = createSectionItem(0, name: level, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
             }
             scheduleFilter.filterSections.append(filterSection)
@@ -109,9 +121,16 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
         }
         return false
     }
-    
-    public func getSectionItemCount(section: Int) -> Int {
-        return scheduleFilter.filterSections[section].items.count
+
+    private func isItemSelected(filterSectionType: FilterSectionType, name: String) -> Bool {
+        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
+            for selectedName in filterSelectionsForType {
+                if (name == selectedName as! String) {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     public func getSummitTypeItemCount() -> Int {
@@ -121,11 +140,11 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     public func getEventTypeItemCount() -> Int {
         return scheduleFilter.filterSections[1].items.count
     }
-    
-    public func getSectionCount() -> Int {
-        return scheduleFilter.filterSections.count
-    }
 
+    public func getLevelItemCount() -> Int {
+        return scheduleFilter.filterSections[2].items.count
+    }
+    
     public func buildFilterCell(cell: IGeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {
         let filterItem = filterSection.items[index]
         
@@ -145,6 +164,11 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
         let filterSection = scheduleFilter.filterSections[1]
         buildFilterCell(cell, filterSection: filterSection, index: index)
     }
+
+    public func buildLevelFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
+        let filterSection = scheduleFilter.filterSections[2]
+        buildFilterCell(cell, filterSection: filterSection, index: index)
+    }
     
     public func toggleSelectionSummitType(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
         let filterSection = scheduleFilter.filterSections[0]
@@ -154,6 +178,21 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     public func toggleSelectionEventType(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
         let filterSection = scheduleFilter.filterSections[1]
         toggleSelection(cell, filterSection: filterSection, index: index)
+    }
+
+    public func toggleSelectionLevel(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
+        let filterSection = scheduleFilter.filterSections[2]
+        let filterItem = filterSection.items[index]
+        
+        if (isItemSelected(filterSection.type, name: filterItem.name)) {
+            let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! String == filterItem.name }
+            scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+            cell.isOptionSelected = false
+        }
+        else {
+            scheduleFilter.selections[filterSection.type]!.append(filterItem.name)
+            cell.isOptionSelected = true
+        }
     }
     
     func toggleSelection(cell: IGeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {

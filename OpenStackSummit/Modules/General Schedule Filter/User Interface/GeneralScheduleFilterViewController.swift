@@ -39,12 +39,15 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
     @IBOutlet weak var tagListView: AMTagListView!
     @IBOutlet weak var clearTagsButton: UIButton!
     @IBOutlet weak var tagListViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var levelTableView: UITableView!
+    @IBOutlet weak var levelHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         summitTypeTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         eventTypeTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        levelTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         clearTagsButton.layer.cornerRadius = 10
         tagListView.delegate = self
         AMTagView.appearance().tagColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
@@ -74,6 +77,8 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         eventTypeTableView.delegate = self
         eventTypeTableView.dataSource = self
         eventTypeTableView.reloadData()
+        levelTableView.dataSource = self
+        levelTableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -90,6 +95,10 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
             count = presenter.getEventTypeItemCount();
             eventTypeHeightConstraint.constant = CGFloat(45 * count)
         }
+        else  if tableView == levelTableView {
+            count = presenter.getLevelItemCount();
+            levelHeightConstraint.constant = CGFloat(45 * count)
+        }
         tableView.updateConstraints()
         return count
     }
@@ -103,6 +112,9 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         else if tableView == eventTypeTableView {
             presenter.buildEventTypeFilterCell(cell, index: indexPath.row)
         }
+        else if tableView == levelTableView {
+            presenter.buildLevelFilterCell(cell, index: indexPath.row)
+        }
         return cell
     }
     
@@ -114,6 +126,9 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         }
         else if tableView == eventTypeTableView {
             presenter.toggleSelectionEventType(cell, index: indexPath.row)
+        }
+        else if tableView == levelTableView {
+            presenter.toggleSelectionLevel(cell, index: indexPath.row)
         }
     }
     

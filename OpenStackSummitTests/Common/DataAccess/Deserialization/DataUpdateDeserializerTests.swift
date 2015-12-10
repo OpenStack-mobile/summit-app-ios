@@ -76,7 +76,7 @@ class DataUpdateDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = DataUpdateDeserializer(deserializerFactory: deserializerFactory)
-        let json = "{\"id\":10,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity\":1 }"
+        let json = "{\"id\":10,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity_id\":1 }"
         
         //Act
         let dataUpdate = try! deserializer.deserialize(json) as! DataUpdate
@@ -117,7 +117,7 @@ class DataUpdateDeserializerTests: XCTestCase {
         XCTAssertEqual(expectedExceptionCount,exceptionCount)
     }
     
-    func test_deserializeArray_validJSON_returnsCorrectDataUpdateInstance() {
+    func test_deserializeArray_validJSONWithTwoDeleteOperations_returnsArrayWithTwoElements() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
@@ -131,7 +131,7 @@ class DataUpdateDeserializerTests: XCTestCase {
         
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = DataUpdateDeserializer(deserializerFactory: deserializerFactory)
-        let json = "[{\"id\":10,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity\":1 }, {\"id\":11,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity\":2 }]"
+        let json = "[{\"id\":10,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity_id\":1 }, {\"id\":11,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity_id\":2 }]"
         
         //Act
         let dataUpdateArray = try! deserializer.deserializeArray(json) as! [DataUpdate]
