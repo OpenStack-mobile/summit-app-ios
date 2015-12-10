@@ -10,15 +10,15 @@ import UIKit
 
 @objc
 public protocol ITrackSchedulePresenter: ISchedulePresenter{
-    func viewLoad(trackId: Int)
+    func viewLoad(track: TrackDTO)
 }
 
 public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter {
-    var trackId = 0
+    var track: TrackDTO!
     
-    weak var viewController : IScheduleViewController! {
+    weak var viewController : ITrackScheduleViewController! {
         get {
-            return internalViewController
+            return internalViewController as! ITrackScheduleViewController
         }
         set {
             internalViewController = newValue
@@ -45,14 +45,25 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
     
     var isLoaded = false
     
-    public func viewLoad(trackId: Int) {
-        self.trackId = trackId
+    public func viewLoad(track: TrackDTO) {
+        self.track = track
+        viewController.track = track.name
         viewLoad()
     }
     
-    public override func reloadSchedule() {
-        scheduleFilter.selections[FilterSectionType.Track] = [Int]()
-        scheduleFilter.selections[FilterSectionType.Track]!.append(trackId)
-        reloadSchedule(interactor, viewController: viewController)
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+        let trackSelections = [track.id]
+        
+        let events = interactor.getScheduleEvents(
+            startDate,
+            endDate: endDate,
+            eventTypes: nil,
+            summitTypes: nil,
+            tracks: trackSelections,
+            tags: nil,
+            levels: nil
+        )
+        
+        return events
     }
 }
