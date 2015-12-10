@@ -44,7 +44,7 @@ public class GeneralScheduleFilterInteractor: NSObject {
     }
     
     public func getLevels() -> [String] {
-        return eventDataStore.getPresentationLevels().sort()
+        return eventDataStore.getPresentationLevels()
     }
 
     public func getTags() -> [NamedDTO] {

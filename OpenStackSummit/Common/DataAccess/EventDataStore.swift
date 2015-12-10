@@ -71,6 +71,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
     public func getPresentationLevels()->[String] {
         let levels = realm.objects(Presentation).map { $0.level }
         let levelsSet = Set(levels)
-        return Array(levelsSet)
+        let filteredArray = Array(levelsSet).sort()
+        return [filteredArray[1], filteredArray[2], filteredArray[0]]
     }
 }
