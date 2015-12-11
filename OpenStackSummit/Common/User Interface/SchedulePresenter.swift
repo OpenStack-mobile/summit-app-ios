@@ -34,7 +34,6 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     public func viewLoad() {
-        internalInteractor.subscribeToPushChannelsUsingContextIfNotDoneAlready()
         NSNotificationCenter.defaultCenter().removeObserver(self)
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -97,6 +96,8 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         interactor.getActiveSummit() { summit, error in
             dispatch_async(dispatch_get_main_queue(),{
                 defer { viewController.hideActivityIndicator() }
+
+                self.internalInteractor.subscribeToPushChannelsUsingContextIfNotDoneAlready()
 
                 if (error != nil) {
                     viewController.showErrorMessage(error!)
