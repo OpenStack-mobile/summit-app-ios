@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
         application.registerForRemoteNotifications()
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        
         return true
     }
     
@@ -55,6 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(application: UIApplication) {
         // yeah, this code is correct. It should delete notification badge when entering app
-        UIApplication.sharedApplication().scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
 }
