@@ -6,13 +6,11 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 @objc
 public protocol IMemberProfileInteractor {
     func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void)
-    func getAttendeeProfile(speakerId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void)
-    func isLoggedIn() -> Bool
     func getCurrentMember() -> MemberDTO?
 }
 
@@ -35,23 +33,6 @@ public class MemberProfileInteractor: NSObject, IMemberProfileInteractor {
             error = NSError(domain: "There was an error getting speaker data", code: 9001, userInfo: nil)
         }
         completionBlock(speakerDTO, error)
-    }
-    
-    public func getAttendeeProfile(attendeeId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void) {
-        summitAttendeeRemoteDataStore.getById(attendeeId) { attendee, error in
-            
-            if (error != nil) {
-                completionBlock(nil, error)
-                return
-            }
-            
-            let attendeeDTO = self.summitAttendeeDTOAssembler.createDTO(attendee!)
-            completionBlock(attendeeDTO, error)
-        }
-    }
-    
-    public func isLoggedIn() -> Bool {
-        return securityManager.isLoggedIn()
     }
     
     public func getCurrentMember() -> MemberDTO? {

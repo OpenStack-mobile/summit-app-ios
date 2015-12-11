@@ -17,10 +17,10 @@ public class MenuWireframe: NSObject, IMenuWireframe {
     
     var menuViewController: MenuViewController!
     
-    var myProfileWireframe: IMyProfileWireframe!
+    var memberProfileWireframe: IMemberProfileWireframe!
     
     public func showMyProfile(memberId: Int) {
-        myProfileWireframe.presentMyProfileInterfaceFromRevealViewController(memberId, revealViewController: menuViewController.revealViewController())
+        memberProfileWireframe.presentMemberProfileInterfaceFromRevealViewController(memberId, revealViewController: menuViewController.revealViewController())
     }
     
 }

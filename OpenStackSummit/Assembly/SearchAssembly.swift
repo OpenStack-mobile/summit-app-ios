@@ -16,7 +16,7 @@ class SearchAssembly: TyphoonAssembly {
     var securityManagerAssembly: SecurityManagerAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var trackScheduleAssembly: TrackScheduleAssembly!
-    var memberProfileAssembly: MemberProfileAssembly!
+    var memberProfileDetailAssembly: MemberProfileDetailAssembly!
     
     dynamic func searchWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(SearchWireframe.self) {
@@ -24,7 +24,7 @@ class SearchAssembly: TyphoonAssembly {
             
             definition.injectProperty("searchViewController", with: self.searchViewController())
             definition.injectProperty("eventDetailWireframe", with: self.eventDetailAssembly.eventDetailWireframe())
-            definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
+            definition.injectProperty("memberProfileDetailWireframe", with: self.memberProfileDetailAssembly.memberProfileDetailWireframe())
             definition.injectProperty("trackScheduleWireframe", with: self.trackScheduleAssembly.trackScheduleWireframe())
         }
     }

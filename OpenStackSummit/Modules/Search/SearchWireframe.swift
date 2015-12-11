@@ -17,7 +17,7 @@ public protocol ISearchWireframe {
 }
 
 public class SearchWireframe: NSObject, ISearchWireframe {
-    var memberProfileWireframe : IMemberProfileWireframe!
+    var memberProfileDetailWireframe : IMemberProfileDetailWireframe!
     var searchViewController: ISearchViewController!
     var trackScheduleWireframe: ITrackScheduleWireframe!
     var eventDetailWireframe : IEventDetailWireframe!
@@ -30,11 +30,11 @@ public class SearchWireframe: NSObject, ISearchWireframe {
         trackScheduleWireframe.presentTrackScheduleView(track, viewController: searchViewController.navigationController!)
     }
     public func showAttendeeProfile(attendeeId: Int) {
-        memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: searchViewController.navigationController!)
+        memberProfileDetailWireframe.presentAttendeeProfileView(attendeeId, viewController: searchViewController.navigationController!)
     }
     
     public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: searchViewController.navigationController!)
+        memberProfileDetailWireframe.presentSpeakerProfileView(speakerId, viewController: searchViewController.navigationController!)
     }
 
 }
