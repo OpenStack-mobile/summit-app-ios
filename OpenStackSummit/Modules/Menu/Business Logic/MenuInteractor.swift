@@ -28,6 +28,7 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     
     public override init() {
         super.init()
+        // TODO: this should be on the splash page in the future (if any)
     }
 
     public init(session: ISession) {

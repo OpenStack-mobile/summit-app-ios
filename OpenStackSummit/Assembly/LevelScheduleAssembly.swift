@@ -36,6 +36,7 @@ class LevelScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
             definition.injectProperty("dataUpdatePoller", with: self.dataUpdateAssembly.dataUpdatePoller())
+            definition.injectProperty("pushNotificationsManager", with: self.applicationAssembly.pushNotificationsManager())
         }
     }
     

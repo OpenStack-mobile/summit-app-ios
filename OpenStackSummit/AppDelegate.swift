@@ -52,4 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().postNotification(notification)
         return true
     }
+    
+    func applicationWillEnterForeground(application: UIApplication) {
+        // yeah, this code is correct. It should delete notification badge when entering app
+        UIApplication.sharedApplication().scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
+    }
 }

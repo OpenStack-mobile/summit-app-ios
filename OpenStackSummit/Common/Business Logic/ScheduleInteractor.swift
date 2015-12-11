@@ -15,6 +15,7 @@ public protocol IScheduleInteractor : IScheduleableInteractor {
     func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
+    func subscribeToPushChannelsUsingContextIfNotDoneAlready()
 }
 
 public class ScheduleInteractor: ScheduleableInteractor {
@@ -22,6 +23,25 @@ public class ScheduleInteractor: ScheduleableInteractor {
     var summitDTOAssembler: ISummitDTOAssembler!
     var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
     var dataUpdatePoller: DataUpdatePoller!
+    var pushNotificationsManager: IPushNotificationsManager!
+    var pushRegisterInProgress = false
+    
+    public func subscribeToPushChannelsUsingContextIfNotDoneAlready() {        
+        if pushRegisterInProgress {
+            return
+        }
+        
+        pushRegisterInProgress = true
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("registeredPushNotificationChannels") == nil {
+            self.pushNotificationsManager.subscribeToPushChannelsUsingContext(){ (succeeded: Bool, error: NSError?) in
+                if succeeded {
+                    NSUserDefaults.standardUserDefaults().setObject("true", forKey: "registeredPushNotificationChannels")
+                }
+                self.pushRegisterInProgress = false
+            }
+        }
+    }
     
     public func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void) {
         summitDataStore.getActive() { summit, error in

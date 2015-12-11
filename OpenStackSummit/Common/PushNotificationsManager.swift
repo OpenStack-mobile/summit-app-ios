@@ -12,7 +12,7 @@ import Parse
 @objc
 public protocol IPushNotificationsManager {
     func subscribeToPushChannelsUsingContext(completionBlock: (succeeded: Bool, error: NSError?) -> Void)
-    func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void)    
+    func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: 	NSError?) -> Void)    
 }
 
 public class PushNotificationsManager: NSObject, IPushNotificationsManager {
@@ -23,16 +23,22 @@ public class PushNotificationsManager: NSObject, IPushNotificationsManager {
         let summit = summitDataStore.getActiveLocal()
         var channels = [String]()
         
+        channels.append("su_\(summit!.id)")
+        
         if let member = self.securityManager.getCurrentMember() {
-            channels = ["me_\(member.id)", "attendees"]
+            channels.append("me_\(member.id)")
+            channels.append("attendees")
             if member.speakerRole != nil {
                 channels.append("speakers")
             }
             
-            channels.append("su_\(summit!.id)")
-            
             PFInstallation.currentInstallation().channels = channels
-            PFInstallation.currentInstallation().saveEventually(completionBlock)        }
+            PFInstallation.currentInstallation().saveEventually(completionBlock)
+        }
+        
+        PFInstallation.currentInstallation().channels = channels
+        PFInstallation.currentInstallation().saveEventually(completionBlock)
+        
     }
     
     public func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
