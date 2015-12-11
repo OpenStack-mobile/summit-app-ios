@@ -14,13 +14,13 @@ class PeopleAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var memberProfileAssembly: MemberProfileAssembly!
-    var myProfileAssembly: MyProfileAssembly!
+    var memberProfileDetailAssembly: MemberProfileDetailAssembly!
     
     dynamic func peopleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(PeopleWireframe.self) {
             (definition) in
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
-            definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
+            definition.injectProperty("memberProfileDetailWireframe", with: self.memberProfileDetailAssembly.memberProfileDetailWireframe())
             definition.injectProperty("attendeesListViewController", with: self.attendeesListViewController())
             definition.injectProperty("speakersListViewController", with: self.speakerListViewController())
        }

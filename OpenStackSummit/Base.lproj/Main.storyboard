@@ -1001,8 +1001,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t7f-Ro-Kzm">
-                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t7f-Ro-Kzm">
+                                <rect key="frame" x="0.0" y="55" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1325,10 +1325,10 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-4034"/>
         </scene>
-        <!--Profile-->
+        <!--PROFILE-->
         <scene sceneID="zLm-Y7-gos">
             <objects>
-                <viewController storyboardIdentifier="MemberProfileViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kP4-95-NVD" customClass="MemberProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemberProfileDetailViewController" title="PROFILE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kP4-95-NVD" customClass="MemberProfileDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GRa-j9-2r1"/>
                         <viewControllerLayoutGuide type="bottom" id="3co-0c-0wh"/>
@@ -2350,7 +2350,7 @@
         <!--MY PROFILE-->
         <scene sceneID="XI8-9A-qDt">
             <objects>
-                <viewController storyboardIdentifier="MyProfileViewController" title="MY PROFILE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rjc-Ea-Rre" customClass="MyProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemberProfileViewController" title="MY PROFILE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rjc-Ea-Rre" customClass="MemberProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IyN-lw-XDW"/>
                         <viewControllerLayoutGuide type="bottom" id="WgP-LF-9Hb"/>
@@ -2402,8 +2402,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iv4-e7-YMp" customClass="UIScrollView">
-                                <rect key="frame" x="0.0" y="106" width="600" height="494"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iv4-e7-YMp" customClass="UIScrollView">
+                                <rect key="frame" x="20" y="106" width="600" height="494"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>

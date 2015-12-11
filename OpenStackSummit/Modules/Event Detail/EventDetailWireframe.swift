@@ -20,7 +20,7 @@ public protocol IEventDetailWireframe {
 public class EventDetailWireframe: NSObject {
     var eventDetailViewController : EventDetailViewController!
     var feedbackEditWireframe: IFeedbackEditWireframe!
-    var memberProfileWireframe: IMemberProfileWireframe!
+    var memberProfileDetailWireframe: IMemberProfileDetailWireframe!
     var venueRoomDetailWireframe: IVenueRoomDetailWireframe!
     var venueDetailWireframe: IVenueDetailWireframe!
     
@@ -44,6 +44,6 @@ public class EventDetailWireframe: NSObject {
     }
     
     public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: eventDetailViewController.navigationController!)
+        memberProfileDetailWireframe.presentSpeakerProfileView(speakerId, viewController: eventDetailViewController.navigationController!)
     }
 }
