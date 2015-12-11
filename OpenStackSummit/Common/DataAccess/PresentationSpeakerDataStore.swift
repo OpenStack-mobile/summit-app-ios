@@ -20,7 +20,7 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
     
     public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
         
-        var result = realm.objects(PresentationSpeaker.self)
+        var result = realm.objects(PresentationSpeaker.self).sorted("firstName")
         
         if searchTerm != nil && !(searchTerm!.isEmpty) {
             result = result.filter("fullName CONTAINS [c]%@ or bio CONTAINS [c]%@ ", searchTerm!, searchTerm!)

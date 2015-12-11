@@ -9,16 +9,26 @@
 import UIKit
 import Typhoon
 
-public class MemberProfileAssembly: TyphoonAssembly {
-    var securityManagerAssembly: SecurityManagerAssembly!
+class MemberProfileAssembly: TyphoonAssembly {
+    
+    var applicationAssembly: ApplicationAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
-    var applicationAssembly: ApplicationAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
+    
+    var personalScheduleAssembly: PersonalScheduleAssembly!
+    var memberProfileDetailAssembly: MemberProfileDetailAssembly!
+    var feedbackGivenListAssembly: FeedbackGivenListAssembly!
     
     dynamic func memberProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileWireframe.self) {
             (definition) in
+            
+            definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("memberProfileViewController", with: self.memberProfileViewController())
+            definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
+            definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
+            definition.injectProperty("memberProfileDetailWireframe", with: self.memberProfileDetailAssembly.memberProfileDetailWireframe())
         }
     }
     
@@ -26,12 +36,11 @@ public class MemberProfileAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MemberProfilePresenter.self) {
             (definition) in
             
-            definition.injectProperty("interactor", with: self.memberProfileInteractor())
-            definition.injectProperty("memberProfileWireframe", with: self.memberProfileWireframe())
             definition.injectProperty("viewController", with: self.memberProfileViewController())
+            definition.injectProperty("interactor", with: self.memberProfileInteractor())
         }
     }
-        
+    
     dynamic func memberProfileInteractor() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileInteractor.self) {
             (definition) in
@@ -52,6 +61,7 @@ public class MemberProfileAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("MemberProfileViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.memberProfilePresenter())
         })
     }
