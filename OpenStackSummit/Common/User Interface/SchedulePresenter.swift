@@ -34,6 +34,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     public func viewLoad() {
+        internalInteractor.subscribeToPushChannelsUsingContextIfNotDoneAlready()
         NSNotificationCenter.defaultCenter().removeObserver(self)
         NSNotificationCenter.defaultCenter().addObserver(
             self,
