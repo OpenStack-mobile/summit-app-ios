@@ -14,7 +14,8 @@ class ScheduleView: UIView {
     @IBOutlet var view: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
-
+    @IBOutlet weak var noEventsLabel: UILabel!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NSBundle.mainBundle().loadNibNamed("ScheduleView", owner: self, options: nil)

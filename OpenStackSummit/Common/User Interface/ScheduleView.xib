@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
             <connections>
                 <outlet property="dayPicker" destination="BrO-92-FB5" id="QeQ-r1-tpo"/>
+                <outlet property="noEventsLabel" destination="7UD-xN-OK6" id="zSz-7o-ugC"/>
                 <outlet property="tableView" destination="GXx-g3-Qpp" id="piT-40-yBW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jBk-DV-KBV"/>
             </connections>
@@ -19,7 +20,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrO-92-FB5" customClass="AFHorizontalDayPicker">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="1nl-Dj-Xfi"/>
@@ -27,11 +27,15 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GXx-g3-Qpp">
                     <rect key="frame" x="0.0" y="52" width="600" height="548"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No events for current day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UD-xN-OK6">
+                    <rect key="frame" x="203" y="289" width="195" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="BrO-92-FB5" secondAttribute="bottom" id="0ud-k0-dfZ"/>
@@ -39,6 +43,8 @@
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8xh-VM-201"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="Lnr-dn-VRU"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kcz-XP-jhS"/>
+                <constraint firstItem="7UD-xN-OK6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tqu-8p-qMd"/>
+                <constraint firstItem="7UD-xN-OK6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uFw-47-oSA"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="umo-ga-8OA"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="zzU-YO-hNf"/>
             </constraints>
