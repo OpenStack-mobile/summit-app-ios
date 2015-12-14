@@ -6,8 +6,9 @@ public class MyProfileAssembly: TyphoonAssembly {
     var personalScheduleAssembly: PersonalScheduleAssembly!
     var memberProfileDetailAssembly: MemberProfileDetailAssembly!
     var feedbackGivenListAssembly: FeedbackGivenListAssembly!
+    var speakerPresentationsAssembly: SpeakerPresentationsAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
 
-    
     dynamic func myProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MyProfileWireframe.self) {
             (definition) in
@@ -23,6 +24,8 @@ public class MyProfileAssembly: TyphoonAssembly {
             definition.injectProperty("memberProfileDetailViewController", with: self.memberProfileDetailAssembly.memberProfileDetailViewController())
             definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
             definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
+            definition.injectProperty("speakerPresentationsViewController", with: self.speakerPresentationsAssembly.speakerPresentationsViewController())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     
