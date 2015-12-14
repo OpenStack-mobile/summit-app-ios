@@ -54,15 +54,15 @@ class MemberProfileAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func memberProfileViewController() -> AnyObject {
+    /*dynamic func memberProfileViewController() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileViewController.self) {
             (definition) in
             
             definition.injectProperty("presenter", with: self.memberProfilePresenter())
         }
-    }
+    }*/
     
-    /*dynamic func memberProfileViewController() -> AnyObject {
+    dynamic func memberProfileViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
             
@@ -72,5 +72,5 @@ class MemberProfileAssembly: TyphoonAssembly {
                 
                definition.injectProperty("presenter", with: self.memberProfilePresenter())
         })
-    }*/
+    }
 }
