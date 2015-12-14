@@ -22,6 +22,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     var dataUpdateProcessor: DataUpdateProcessor!
     var dataUpdateDataStore: IDataUpdateDataStore!
     var summitDataStore: ISummitDataStore!
+    var reachability: IReachability!
     
     var fromDate: Int {
         get {
@@ -52,6 +53,10 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     }
     
     func pollServer() {
+        if !reachability.isConnectedToNetwork() {
+            return
+        }
+        
         let http = httpFactory.create(HttpType.ServiceAccount)
         var url: String!
         if let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate() {

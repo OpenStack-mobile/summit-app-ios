@@ -10,6 +10,7 @@ import UIKit
 import Typhoon
 
 public class DataUpdateAssembly: TyphoonAssembly {
+    var applicationAssembly: ApplicationAssembly!
     var httpFactoryAssembly: HttpFactoryAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
@@ -22,6 +23,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
             definition.injectProperty("dataUpdateProcessor", with: self.dataUpdateProcessor())
             definition.injectProperty("dataUpdateDataStore", with: self.dataUpdateDataStore())
             definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
+            definition.injectProperty("reachability", with: self.applicationAssembly.reachability())
         }
     }
     

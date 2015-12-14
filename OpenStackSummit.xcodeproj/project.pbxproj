@@ -168,7 +168,6 @@
 		CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E371BAB07F800EE9583 /* MemberDTOAssembler.swift */; };
 		CAD27E3A1BAB0F2300EE9583 /* SecurityManagerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */; };
 		CAD337161BB1906A005B2953 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD337151BB1906A005B2953 /* Constants.swift */; };
-		CAD337181BB19329005B2953 /* BackgroundActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD337171BB19329005B2953 /* BackgroundActivityManager.swift */; };
 		CAD3620F1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3620E1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift */; };
 		CAD3ABAC1BA847C500F2186B /* SummitDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3ABAB1BA847C500F2186B /* SummitDeserializerTests.swift */; };
 		CAD3BCA01BA9F05E0092616D /* SecurityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3BC9F1BA9F05E0092616D /* SecurityManager.swift */; };
@@ -203,6 +202,7 @@
 		CAD9A2B21BD1F10D009269B5 /* PersonalScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B11BD1F10D009269B5 /* PersonalScheduleViewController.swift */; };
 		CAD9A2B41BD1F11E009269B5 /* PersonalSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */; };
 		CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */; };
+		CADB079A1C1F1D43007876C2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB07991C1F1D43007876C2 /* Reachability.swift */; };
 		CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */; };
 		CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */; };
 		CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */; };
@@ -502,7 +502,6 @@
 		CAD27E371BAB07F800EE9583 /* MemberDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDTOAssembler.swift; sourceTree = "<group>"; };
 		CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManagerAssembly.swift; sourceTree = "<group>"; };
 		CAD337151BB1906A005B2953 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		CAD337171BB19329005B2953 /* BackgroundActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundActivityManager.swift; sourceTree = "<group>"; };
 		CAD3620E1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateDataStoreTests.swift; sourceTree = "<group>"; };
 		CAD3ABAB1BA847C500F2186B /* SummitDeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDeserializerTests.swift; sourceTree = "<group>"; };
 		CAD3BC9F1BA9F05E0092616D /* SecurityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManager.swift; sourceTree = "<group>"; };
@@ -544,6 +543,7 @@
 		CAD9A2B11BD1F10D009269B5 /* PersonalScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleViewController.swift; sourceTree = "<group>"; };
 		CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedulePresenter.swift; sourceTree = "<group>"; };
 		CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleInteractor.swift; sourceTree = "<group>"; };
+		CADB07991C1F1D43007876C2 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleableInteractor.swift; sourceTree = "<group>"; };
 		CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleablePresenter.swift; path = "User Interface/ScheduleablePresenter.swift"; sourceTree = "<group>"; };
 		CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IScheduleableView.swift; path = "User Interface/IScheduleableView.swift"; sourceTree = "<group>"; };
@@ -1374,6 +1374,14 @@
 			path = "User Interface";
 			sourceTree = "<group>";
 		};
+		CADB07981C1F1CBE007876C2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CADB07991C1F1D43007876C2 /* Reachability.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		CADD51021BD66B0900400AF4 /* Speaker Presentations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1430,18 +1438,18 @@
 			isa = PBXGroup;
 			children = (
 				CADF03251BCEEEFE00358DCD /* Business Logic */,
+				CAF2AA291B8271C100D8E595 /* DataAccess */,
+				CACF7C3F1B9664E700A9EB16 /* DTOs */,
+				CADDDB911B73D1BB008F742E /* Entities */,
+				CADB07981C1F1CBE007876C2 /* Network */,
 				CAA9A88C1BA89F2700C3725D /* Security */,
 				9D5A99CB1B948D5C002FFAA4 /* User Interfaces */,
-				CACF7C3F1B9664E700A9EB16 /* DTOs */,
-				CAF2AA291B8271C100D8E595 /* DataAccess */,
-				CADDDB911B73D1BB008F742E /* Entities */,
-				CAD542331B8B890A00A9791A /* Session.swift */,
-				CAD337171BB19329005B2953 /* BackgroundActivityManager.swift */,
 				CAD337151BB1906A005B2953 /* Constants.swift */,
 				CAD6C3CC1BB71EA800F8C2D6 /* HttpFactory.swift */,
+				CADE48C01C07BECB00A858DA /* PushNotificationsManager.swift */,
+				CAD542331B8B890A00A9791A /* Session.swift */,
 				CABAB9B71BCFEA1300CB867E /* ScheduleFilter.swift */,
 				CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */,
-				CADE48C01C07BECB00A858DA /* PushNotificationsManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2129,7 +2137,6 @@
 				CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */,
 				CAD542341B8B890A00A9791A /* Session.swift in Sources */,
 				9DBB65451C10B55200F70B4E /* SpeakersViewController.swift in Sources */,
-				CAD337181BB19329005B2953 /* BackgroundActivityManager.swift in Sources */,
 				CACEEE691B8E3822007DD936 /* VenueTrigger.swift in Sources */,
 				CAE643521BCDA32F005E530B /* NamedDTO.swift in Sources */,
 				CAF2AA471B8271C100D8E595 /* LocationDeserializer.swift in Sources */,
@@ -2160,6 +2167,7 @@
 				CAE5EC2E1B83D3890032AD31 /* TagDeserializer.swift in Sources */,
 				CACB3A0B1BC2BCD900B1363F /* SummitAttendeeDTO.swift in Sources */,
 				CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */,
+				CADB079A1C1F1D43007876C2 /* Reachability.swift in Sources */,
 				CADF6CB11BFE272F007998BF /* SpeakerListViewController.swift in Sources */,
 				CACFB8151B8AA8CC00DB663E /* MenuInteractor.swift in Sources */,
 				CA416F961B8F5C4A00F177F5 /* FilterSection.swift in Sources */,

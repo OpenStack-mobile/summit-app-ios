@@ -11,11 +11,11 @@ import XLPagerTabStrip
 import SwiftSpinner
 
 @objc
-protocol ISpeakerPresentationsViewController {
+protocol ISpeakerPresentationsViewController: IScheduleViewController {
     var presenter: ISpeakerPresentationsPresenter! { get set }
 }
 
-class SpeakerPresentationsViewController: ScheduleViewController, XLPagerTabStripChildItem {
+class SpeakerPresentationsViewController: ScheduleViewController, XLPagerTabStripChildItem, ISpeakerPresentationsViewController {
     var presenter: ISpeakerPresentationsPresenter! {
         get {
             return internalPresenter as! ISpeakerPresentationsPresenter

@@ -72,4 +72,7 @@ class ApplicationAssembly: TyphoonAssembly {
         })
     }
     
+    dynamic func reachability() -> AnyObject {
+        return TyphoonDefinition.withClass(Reachability.self)
+    }
 }
