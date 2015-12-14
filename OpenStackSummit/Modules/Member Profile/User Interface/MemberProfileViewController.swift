@@ -39,7 +39,6 @@ class MemberProfileViewController: TabStripViewController, IMemberProfileViewCon
     
     override func viewWillAppear(animated: Bool) {
         presenter.viewLoad()
-        navigationController?.navigationBar.topItem?.title = title
         if !isFirstTime {
             reloadPagerTabStripView()
         }
