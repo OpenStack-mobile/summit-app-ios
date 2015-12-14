@@ -25,8 +25,7 @@ class SpeakerPresentationsViewController: ScheduleViewController, XLPagerTabStri
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
         presenter.viewLoad()
     }
     
