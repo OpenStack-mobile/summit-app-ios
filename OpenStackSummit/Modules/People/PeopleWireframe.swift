@@ -21,10 +21,10 @@ public class PeopleWireframe: NSObject, IPeopleWireframe {
     var speakersListViewController: IPeopleListViewController!
     
     public func showAttendeeProfile(attendeeId: Int) {
-        memberProfileDetailWireframe.presentAttendeeProfileView(attendeeId, viewController: attendeesListViewController.navigationController!)
+        //memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: attendeesListViewController.navigationController!)
     }
     
     public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentMemberProfileInterfaceFromRevealViewController(speakerId, revealViewController: speakersListViewController.navigationController!.revealViewController())
+        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: speakersListViewController.navigationController!)
     }
 }

@@ -20,6 +20,7 @@ protocol IMemberProfileDetailViewController {
     var twitter: String! { get set }
     var irc: String! { get set }
     var bio: String! { get set }
+    var presenter: IMemberProfileDetailPresenter! { get set }
     
     func showProfile(profile: MemberProfileDTO)
     func didFinishFriendshipRequest()

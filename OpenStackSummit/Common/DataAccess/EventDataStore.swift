@@ -15,6 +15,7 @@ public protocol IEventDataStore {
     func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void)
     func getBySearchTerm(searchTerm: String!)->[SummitEvent]
     func getPresentationLevels()->[String]
+    func getSpeakerPresentationsLocal(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [SummitEvent]
 }
 
 public class EventDataStore: GenericDataStore, IEventDataStore {
@@ -74,4 +75,10 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         let filteredArray = Array(levelsSet).sort()
         return [filteredArray[1], filteredArray[2], filteredArray[0]]
     }
+    
+    public func getSpeakerPresentationsLocal(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [SummitEvent] {
+        let events = realm.objects(SummitEvent).filter("presentation.speakers.id = %@ && start >= %@ and end <= %@", speakerId, startDate, endDate).sorted("start")
+        return events.map { $0 }
+    }
+    
 }

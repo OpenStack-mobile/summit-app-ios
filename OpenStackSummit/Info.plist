@@ -87,6 +87,8 @@
 		<string>LevelListAssembly</string>
 		<string>LevelScheduleAssembly</string>
 		<string>MemberProfileDetailAssembly</string>
+		<string>SpeakerPresentationsAssembly</string>
+		<string>MyProfileAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

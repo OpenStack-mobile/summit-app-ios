@@ -15,10 +15,10 @@ class MemberProfileAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
-    
     var personalScheduleAssembly: PersonalScheduleAssembly!
     var memberProfileDetailAssembly: MemberProfileDetailAssembly!
     var feedbackGivenListAssembly: FeedbackGivenListAssembly!
+    var speakerPresentationsAssembly: SpeakerPresentationsAssembly!
     
     dynamic func memberProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileWireframe.self) {
@@ -26,9 +26,6 @@ class MemberProfileAssembly: TyphoonAssembly {
             
             definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("memberProfileViewController", with: self.memberProfileViewController())
-            definition.injectProperty("personalScheduleViewController", with: self.personalScheduleAssembly.personalScheduleViewController())
-            definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
-            definition.injectProperty("memberProfileDetailWireframe", with: self.memberProfileDetailAssembly.memberProfileDetailWireframe())
         }
     }
     
@@ -38,6 +35,9 @@ class MemberProfileAssembly: TyphoonAssembly {
             
             definition.injectProperty("viewController", with: self.memberProfileViewController())
             definition.injectProperty("interactor", with: self.memberProfileInteractor())
+            definition.injectProperty("memberProfileDetailViewController", with: self.memberProfileDetailAssembly.memberProfileDetailViewController())
+            definition.injectProperty("feedbackGivenListViewController", with: self.feedbackGivenListAssembly.feedbackGivenListViewController())
+            definition.injectProperty("speakerPresentationsViewController", with: self.speakerPresentationsAssembly.speakerPresentationsViewController())
         }
     }
     
@@ -55,6 +55,14 @@ class MemberProfileAssembly: TyphoonAssembly {
     }
     
     dynamic func memberProfileViewController() -> AnyObject {
+        return TyphoonDefinition.withClass(MemberProfileViewController.self) {
+            (definition) in
+            
+            definition.injectProperty("presenter", with: self.memberProfilePresenter())
+        }
+    }
+    
+    /*dynamic func memberProfileViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
             
@@ -62,7 +70,7 @@ class MemberProfileAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 
-                definition.injectProperty("presenter", with: self.memberProfilePresenter())
+               definition.injectProperty("presenter", with: self.memberProfilePresenter())
         })
-    }
+    }*/
 }

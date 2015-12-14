@@ -11,7 +11,7 @@ import Typhoon
 
 public class MenuAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
-    var memberProfileAssembly: MemberProfileAssembly!
+    var myProfileAssembly: MyProfileAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     
@@ -20,7 +20,7 @@ public class MenuAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("menuViewController", with: self.menuViewController())
-            definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
+            definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
         }
     }
     

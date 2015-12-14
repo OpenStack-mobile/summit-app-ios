@@ -14,12 +14,39 @@ public protocol IMemberProfileViewController {
     var title: String? { get set }
 }
 
-class MemberProfileViewController: RevealTabStripViewController, IMemberProfileViewController {
+class MemberProfileViewController: TabStripViewController, IMemberProfileViewController {
     
     var presenter: IMemberProfilePresenter!
+    var isFirstTime = true
     
-    override func viewWillAppear(animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = title
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        buttonBarView.selectedBar.alpha = 0
+        
+        changeCurrentIndexBlock = {
+            (oldCell: XLButtonBarViewCell!, newCell: XLButtonBarViewCell!, animated: Bool) -> Void in
+            
+            if newCell == nil && oldCell != nil {
+                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
+            }
+            
+            if animated {
+                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
+                newCell.label.textColor = UIColor.whiteColor()
+            }
+        }        
     }
     
+    override func viewWillAppear(animated: Bool) {
+        presenter.viewLoad()
+        navigationController?.navigationBar.topItem?.title = title
+        if !isFirstTime {
+            reloadPagerTabStripView()
+        }
+        isFirstTime = false
+    }
+    
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+        return presenter.getChildViews()
+    }
 }
