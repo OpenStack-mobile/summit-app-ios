@@ -140,7 +140,10 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return internalPresenter.getDayEventsCount();
+        let eventCount = internalPresenter.getDayEventsCount();
+        scheduleView.tableView.hidden = eventCount == 0
+        scheduleView.noEventsLabel.hidden = eventCount > 0
+        return eventCount
     }
     
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, didSelectDate date: NSDate) -> Void {
