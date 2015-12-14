@@ -12,38 +12,25 @@ import XLPagerTabStrip
 
 @objc
 public protocol IMemberProfileWireframe {
-    var memberId: Int { get set }
-    func presentMemberProfileInterfaceFromRevealViewController(memberId: Int, revealViewController: SWRevealViewController)
+    func presentSpeakerProfileView(speakerId: Int, viewController: UINavigationController)
+    func presentSpeakerProfileViewFromRevealViewController(speakerId: Int, revealViewController: SWRevealViewController)
 }
 
-class MemberProfileWireframe: NSObject, IMemberProfileWireframe, XLPagerTabStripViewControllerDataSource {
-    var memberId: Int = 0
-    
+public class MemberProfileWireframe: NSObject, IMemberProfileWireframe {
     var navigationController: UINavigationController!
-    
-    var memberProfileDetailWireframe: MemberProfileDetailWireframe!
-    
     var memberProfileViewController: MemberProfileViewController!
-    var personalScheduleViewController: PersonalScheduleViewController!
-    var feedbackGivenListViewController: FeedbackGivenListViewController!
     
-    func presentMemberProfileInterfaceFromRevealViewController(memberId: Int, revealViewController: SWRevealViewController) {
-        self.memberId = memberId
-        memberProfileViewController.dataSource = self
-        memberProfileViewController.presenter.memberId = memberId
+    public func presentSpeakerProfileView(speakerId: Int, viewController: UINavigationController) {
+        let newViewController = memberProfileViewController!
+        memberProfileViewController.presenter.prepareForSpeakerProfile(speakerId)
+        navigationController.setViewControllers([memberProfileViewController], animated: false)
+        viewController.pushViewController(newViewController, animated: true)
+    }
+
+    public func presentSpeakerProfileViewFromRevealViewController(speakerId: Int, revealViewController: SWRevealViewController) {
+        let _ = memberProfileViewController.view! // this is only to force viewLoad to trigger
+        memberProfileViewController.presenter.prepareForSpeakerProfile(speakerId)
         navigationController.setViewControllers([memberProfileViewController], animated: false)
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }
-    
-    func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
-        var childViewController: [AnyObject] = []
-        // member == 0 means "Member profile"
-        if memberId == 0 {
-            childViewController.append(personalScheduleViewController)
-        }
-        childViewController.append(memberProfileDetailWireframe.speakerProfileViewController(memberId))
-        childViewController.append(feedbackGivenListViewController)
-        return childViewController
-    }
-    
 }
