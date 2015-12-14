@@ -14,7 +14,6 @@ public protocol IEventDetailPresenter: IBasePresenter {
     var eventId: Int { get set }
     
     func leaveFeedback()
-    func addEventToMySchedule()
     func getSpeakersCount()->Int
     func getFeedbackCount()->Int
     func buildSpeakerCell(cell: IPeopleTableViewCell, index: Int)
@@ -107,17 +106,6 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 self.viewController.hasAnyFeedback = self.feedbackList.count > 0
                 self.feedbackPage++
                 self.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
-            })
-        }
-    }
-    
-    public func addEventToMySchedule() {
-        interactor.addEventToMySchedule(eventId) { (event, error) in
-            dispatch_async(dispatch_get_main_queue(),{
-                if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
-                }
-                self.viewController.didAddEventToMySchedule(event!)
             })
         }
     }

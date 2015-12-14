@@ -14,7 +14,6 @@ import SwiftSpinner
 
 @objc
 public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledViewController {
-    func didAddEventToMySchedule(event: EventDetailDTO)
     func reloadFeedbackData()
     func reloadSpeakersData()
     func showFeedbackListActivityIndicator()
@@ -337,11 +336,7 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func didAddEventToMySchedule(event: EventDetailDTO) {
         
-    }
-    
     @IBAction func leaveFeedback(sender: AnyObject) {
         presenter.leaveFeedback()
     }

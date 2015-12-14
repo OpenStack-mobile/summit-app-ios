@@ -25,10 +25,10 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     var securityManager: SecurityManager!
     var memberDTOAssembler: IMemberDTOAssembler!
     var pushNotificationsManager: IPushNotificationsManager!
+    var reachability: IReachability!
     
     public override init() {
         super.init()
-        // TODO: this should be on the splash page in the future (if any)
     }
 
     public init(session: ISession) {
@@ -36,6 +36,12 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     }
     
     public func login(completionBlock: (error: NSError?) -> Void) {
+        if !reachability.isConnectedToNetwork() {
+            let error = NSError(domain: "There is no network connectivity. Operation cancelled", code: 10001, userInfo: nil)
+            completionBlock(error: error)
+            return
+        }
+        
         securityManager.login() { error in
             if (error != nil) {
                 completionBlock(error: error)

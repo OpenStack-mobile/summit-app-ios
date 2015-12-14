@@ -20,8 +20,15 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
     var summitAttendeeDataStore: ISummitAttendeeDataStore!
     var securityManager: SecurityManager!
     var eventDataStore: IEventDataStore!
+    var reachability: IReachability!
 
     public func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void) {
+        if !reachability.isConnectedToNetwork() {
+            let error = NSError(domain: "There is no network connectivity. Operation cancelled", code: 12002, userInfo: nil)
+            completionBlock(error)
+            return
+        }
+
         let loggedInMember = securityManager.getCurrentMember()
         let event = eventDataStore.getByIdLocal(eventId)
         
@@ -31,6 +38,12 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
     }
     
     public func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void) {
+        if !reachability.isConnectedToNetwork() {
+            let error = NSError(domain: "There is no network connectivity. Operation cancelled", code: 12001, userInfo: nil)
+            completionBlock(error)
+            return
+        }
+
         let loggedInMember = securityManager.getCurrentMember()
         let event = eventDataStore.getByIdLocal(eventId)
         
