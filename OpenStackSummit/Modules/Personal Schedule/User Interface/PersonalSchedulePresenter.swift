@@ -8,13 +8,7 @@
 
 import UIKit
 
-public protocol IPersonalSchedulePresenter: ISchedulePresenter {
-    func viewLoad(attendeeId: Int)
-}
-
 public class PersonalSchedulePresenter: SchedulePresenter {
-    var attendeeId = 0
-    var isLoaded = false
     
     weak var viewController : IScheduleViewController! {
         get {
@@ -43,19 +37,9 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         }
     }
     
-    public func viewLoad(attendeeId: Int) {
-        self.attendeeId = attendeeId
-        viewLoad()
-    }
-    
-    public override func reloadSchedule() {        
-        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
-        
-        let startDate = viewController.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-        let endDate = viewController.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-        
-        dayEvents = interactor.getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
-        viewController.reloadSchedule()
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+        let events = (interactor as! IPersonalScheduleInteractor).getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
+        return events
     }
     
     public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {

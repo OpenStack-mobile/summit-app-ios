@@ -40,5 +40,4 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
         
         return speakers
     }
-    
 }

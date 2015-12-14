@@ -53,6 +53,7 @@ public class MemberProfileDetailAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.memberProfileDetailPresenter())
+                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

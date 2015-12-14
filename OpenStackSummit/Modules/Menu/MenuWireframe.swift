@@ -14,13 +14,11 @@ public protocol IMenuWireframe {
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
-    
     var menuViewController: MenuViewController!
-    
-    var memberProfileWireframe: IMemberProfileWireframe!
+    var myProfileWireframe: IMyProfileWireframe!
     
     public func showMyProfile(memberId: Int) {
-        memberProfileWireframe.presentMemberProfileInterfaceFromRevealViewController(memberId, revealViewController: menuViewController.revealViewController())
+        myProfileWireframe.presentMyProfileViewFromRevealViewController(menuViewController.revealViewController())
     }
     
 }
