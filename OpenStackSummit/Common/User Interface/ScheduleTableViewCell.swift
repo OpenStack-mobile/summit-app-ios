@@ -13,7 +13,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
     var eventTitle: String! { get set }
     var eventType: String! { get set }
     var time: String! { get set }
-    var place: String! { get set }
+    var track: String! { get set }
     var isScheduledStatusVisible: Bool { get set }
     var summitTypeColor: UIColor? { get set }
 }
@@ -53,12 +53,12 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
-    var place: String!{
+    var track: String!{
         get {
-            return placeLabel.text
+            return trackLabel.text
         }
         set {
-            placeLabel.text = newValue
+            trackLabel.text = newValue
         }
     }
     
@@ -99,7 +99,7 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var trackLabel: UILabel!
     @IBOutlet weak var scheduleButton: UIButton!
     @IBOutlet weak var summitTypeColorBar: UIView!
     
