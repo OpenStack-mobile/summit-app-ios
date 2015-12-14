@@ -107,7 +107,7 @@ public class SearchPresenter: ScheduleablePresenter {
         cell.eventTitle = event.name
         cell.eventType = event.eventType
         cell.time = event.dateTime
-        cell.place = event.location
+        cell.track = event.track
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = interactor.isMemberLoggedIn()
         cell.summitTypeColor = event.summitTypeColor != "" ? UIColor(hexaString: event.summitTypeColor) : nil
