@@ -17,6 +17,8 @@ public class MyProfilePresenter: NSObject, IMyProfilePresenter {
     var memberProfileDetailViewController: IMemberProfileDetailViewController!
     var personalScheduleViewController: IScheduleViewController!
     var feedbackGivenListViewController: IFeedbackGivenListViewController!
+    var speakerPresentationsViewController: ISpeakerPresentationsViewController!
+    var securityManager: SecurityManager!
 
     public func getChildViews() -> [AnyObject] {
         var childViewController: [AnyObject] = []
@@ -26,6 +28,10 @@ public class MyProfilePresenter: NSObject, IMyProfilePresenter {
         
         memberProfileDetailViewController.presenter.attendeeId = 0
         memberProfileDetailViewController.presenter.speakerId = 0
+        
+        if securityManager.getCurrentMemberRole() == MemberRoles.Speaker {
+            childViewController.append(speakerPresentationsViewController)
+        }
 
         return childViewController
     }
