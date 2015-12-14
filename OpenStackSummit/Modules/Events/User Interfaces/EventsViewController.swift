@@ -38,6 +38,8 @@ class EventsViewController: RevealTabStripViewController {
             filterButton.target = self
             filterButton.action = Selector("showFilters:")
         }
+        
+        reloadPagerTabStripView()
     }
 
     func showFilters(sender: UIBarButtonItem) {

@@ -48,8 +48,6 @@ class RevealTabStripViewController: TabStripViewController, SWRevealViewControll
                 newCell.label.textColor = UIColor.whiteColor()
             }
         }
-        
-        //reloadPagerTabStripView()
     }
     
     override func didReceiveMemoryWarning() {
