@@ -58,7 +58,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         cell.eventTitle = event.name
         cell.eventType = event.eventType
         cell.time = event.time
-        cell.place = event.location
+        cell.track = event.track
         cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
         cell.summitTypeColor = event.summitTypeColor != "" ? UIColor(hexaString: event.summitTypeColor) : nil
