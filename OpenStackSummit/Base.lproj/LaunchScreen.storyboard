@@ -20,7 +20,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTK-x9-Hws">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ykr-u6-xme">
+                                        <rect key="frame" x="117" y="23" width="140" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="10A-BR-EcZ"/>
+                                            <constraint firstAttribute="height" constant="36" id="bBI-5u-RLR"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ykr-u6-xme" secondAttribute="bottom" constant="8" id="1OE-bA-MA5"/>
+                                    <constraint firstItem="Ykr-u6-xme" firstAttribute="centerX" secondItem="qTK-x9-Hws" secondAttribute="centerX" id="v9w-uQ-xfI"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jj4-Qe-K2o">
                                 <rect key="frame" x="0.0" y="151" width="375" height="53"/>
@@ -28,20 +41,7 @@
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bga-O0-5Zp">
                                 <rect key="frame" x="0.0" y="67" width="375" height="85"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ykr-u6-xme">
-                                        <rect key="frame" x="113" y="17" width="149" height="51"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="51" id="eo7-1V-7Zx"/>
-                                            <constraint firstAttribute="width" constant="149" id="ggC-kD-Gju"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="Ykr-u6-xme" firstAttribute="centerX" secondItem="bga-O0-5Zp" secondAttribute="centerX" id="2HT-df-ttw"/>
-                                    <constraint firstItem="Ykr-u6-xme" firstAttribute="centerY" secondItem="bga-O0-5Zp" secondAttribute="centerY" id="6Tm-cv-tuh"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gNO-jA-PSS">
                                 <rect key="frame" x="0.0" y="204" width="375" height="1"/>

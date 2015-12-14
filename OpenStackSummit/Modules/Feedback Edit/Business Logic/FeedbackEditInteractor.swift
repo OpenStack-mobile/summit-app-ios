@@ -19,6 +19,7 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
     var genericDataStore: GenericDataStore!
     var feedbackDTOAssembler: IFeedbackDTOAssembler!
     var securityManager: SecurityManager!
+    var reachability: IReachability!
     
     public func getFeedback(feedbackId: Int) -> FeedbackDTO? {
         let feedback = genericDataStore.getByIdLocal(feedbackId) as! Feedback
@@ -27,6 +28,12 @@ public class FeedbackEditInteractor: NSObject, IFeedbackEditInteractor {
     }
     
     public func saveFeedback(feedbackId: Int, rate: Int, review: String, eventId: Int, completionBlock: (FeedbackDTO?, NSError?) -> Void) {
+        if !reachability.isConnectedToNetwork() {
+            let error = NSError(domain: "There is no network connectivity. Can't create feedback", code: 13002, userInfo: nil)
+            completionBlock(nil, error)
+            return
+        }
+
         if let errorMessage = validateFeedback(rate, review: review) {
             let error = NSError(domain: errorMessage, code: 7001, userInfo: nil)
             completionBlock(nil, error)

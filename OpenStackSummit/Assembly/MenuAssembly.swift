@@ -44,6 +44,7 @@ public class MenuAssembly: TyphoonAssembly {
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
             definition.injectProperty("memberDTOAssembler", with: self.dtoAssemblersAssembly.memberDTOAssembler())
             definition.injectProperty("pushNotificationsManager", with: self.applicationAssembly.pushNotificationsManager())
+            definition.injectProperty("reachability", with: self.applicationAssembly.reachability())
         }
     }
     
