@@ -127,8 +127,8 @@ class TabStripViewController: XLPagerTabStripViewController, UICollectionViewDel
         
         shouldUpdateButtonBarView = false
         
-        let oldCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: Int(currentIndex), inSection: 0)) as! XLButtonBarViewCell
-        let newCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: indexPath.item, inSection: 0)) as! XLButtonBarViewCell
+        let oldCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: Int(currentIndex), inSection: 0)) as? XLButtonBarViewCell
+        let newCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: indexPath.item, inSection: 0)) as? XLButtonBarViewCell
         
         if isProgressiveIndicator {
             if changeCurrentIndexProgressiveBlock != nil {

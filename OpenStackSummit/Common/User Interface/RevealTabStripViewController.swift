@@ -44,8 +44,8 @@ class RevealTabStripViewController: TabStripViewController, SWRevealViewControll
             }
             
             if animated {
-                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
-                newCell.label.textColor = UIColor.whiteColor()
+                oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
+                newCell?.label.textColor = UIColor.whiteColor()
             }
         }
     }
