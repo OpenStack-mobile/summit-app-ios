@@ -20,6 +20,7 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
         scheduleItemDTO.location = getLocation(event)
         scheduleItemDTO.time = getTime(event)
         scheduleItemDTO.dateTime = getDateTime(event)
+        scheduleItemDTO.track = getTrack(event)
         scheduleItemDTO.sponsors = getSponsors(event)
         scheduleItemDTO.summitTypes = getSummitTypes(event);
         scheduleItemDTO.eventType = event.eventType.name
@@ -84,6 +85,14 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
             location = event.venue!.name
         }
         return location
+    }
+    
+    public func getTrack(event: SummitEvent) -> String{
+        var track = ""
+        if event.presentation != nil {
+            track = event.presentation!.track.name
+        }
+        return track
     }
     
 }
