@@ -24,6 +24,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
             definition.injectProperty("dataUpdateDataStore", with: self.dataUpdateDataStore())
             definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
             definition.injectProperty("reachability", with: self.applicationAssembly.reachability())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
         }
     }
     
