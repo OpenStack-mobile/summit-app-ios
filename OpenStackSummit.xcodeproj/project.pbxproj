@@ -203,6 +203,7 @@
 		CAD9A2B41BD1F11E009269B5 /* PersonalSchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */; };
 		CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */; };
 		CADB079A1C1F1D43007876C2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB07991C1F1D43007876C2 /* Reachability.swift */; };
+		CADB079C1C1F7C9E007876C2 /* ReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB079B1C1F7C9E007876C2 /* ReachabilityMock.swift */; };
 		CADB47A41BF2737E00CE0629 /* ScheduleableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */; };
 		CADB47A61BF27C8A00CE0629 /* ScheduleablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */; };
 		CADB47A81BF27D2300CE0629 /* IScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */; };
@@ -544,6 +545,7 @@
 		CAD9A2B31BD1F11E009269B5 /* PersonalSchedulePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalSchedulePresenter.swift; sourceTree = "<group>"; };
 		CAD9A2B71BD1F163009269B5 /* PersonalScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalScheduleInteractor.swift; sourceTree = "<group>"; };
 		CADB07991C1F1D43007876C2 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		CADB079B1C1F7C9E007876C2 /* ReachabilityMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityMock.swift; sourceTree = "<group>"; };
 		CADB47A31BF2737E00CE0629 /* ScheduleableInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleableInteractor.swift; sourceTree = "<group>"; };
 		CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleablePresenter.swift; path = "User Interface/ScheduleablePresenter.swift"; sourceTree = "<group>"; };
 		CADB47A71BF27D2300CE0629 /* IScheduleableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IScheduleableView.swift; path = "User Interface/IScheduleableView.swift"; sourceTree = "<group>"; };
@@ -1132,6 +1134,7 @@
 				CADD510D1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift */,
 				CAE19FB51C0E5E6000B35CE5 /* SummitDataStoreMock.swift */,
 				CA894AAD1BD937AB005DE469 /* VenueRoomDTOAssemblerMock.swift */,
+				CADB079B1C1F7C9E007876C2 /* ReachabilityMock.swift */,
 			);
 			path = TestUtils;
 			sourceTree = "<group>";
@@ -2367,6 +2370,7 @@
 				CA0119091B8CE96E0091E00F /* MenuPresenterTests.swift in Sources */,
 				CADC794E1BD12A4C005AA306 /* VenueListItemDTOAssemblerTests.swift in Sources */,
 				CACF7C4D1B96650200A9EB16 /* EventDetailDTOAssemblerTests.swift in Sources */,
+				CADB079C1C1F7C9E007876C2 /* ReachabilityMock.swift in Sources */,
 				CAD480A41B8691B9004DBB4F /* MemberDataStoreTests.swift in Sources */,
 				CAD49F021B99C7C200D8D412 /* BaseTests.swift in Sources */,
 				CABD0E011BCD4A8200488472 /* MemberRemoteDataStoreMock.swift in Sources */,

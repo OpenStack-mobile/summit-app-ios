@@ -19,4 +19,8 @@ class SecurityManagerMock: SecurityManager {
     override func getCurrentMember() -> Member? {
         return member
     }
+    
+    override func isLoggedIn() -> Bool {
+        return member != nil
+    }
 }

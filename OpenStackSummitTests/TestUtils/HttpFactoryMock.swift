@@ -12,13 +12,15 @@ import AeroGearHttp
 
 public class HttpFactoryMock: HttpFactory {
     
-    var http: Http
+    var httpServiceAccount: Http?
+    var httpOIDC: Http?
     
-    public init(http: Http) {
-        self.http = http
+    public init(httpServiceAccount: Http?, httpOIDC: Http?) {
+        self.httpServiceAccount = httpServiceAccount
+        self.httpOIDC = httpOIDC
     }
     
     public override func create(type: HttpType) -> Http {
-        return http
+        return type == HttpType.ServiceAccount ? httpServiceAccount! : httpOIDC!
     }
 }

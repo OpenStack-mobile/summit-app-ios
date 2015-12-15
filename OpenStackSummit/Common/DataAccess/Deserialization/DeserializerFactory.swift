@@ -81,7 +81,7 @@ public class DeserializerFactory : NSObject {
         return deserializer!
     }
     
-    public func create(className: String) throws -> IDeserializer {
+    public func create(className: String) throws -> IDeserializer? {
         var deserializer : IDeserializer!
         
         switch className {
@@ -91,8 +91,22 @@ public class DeserializerFactory : NSObject {
             deserializer = summitEventDeserializer
         case "SummitEvent":
             deserializer = summitEventDeserializer
+        case "SummitType":
+            deserializer = summitTypeDeserializer
+        case "SummitEventType":
+            deserializer = eventTypeDeserializer
+        case "PresentationSpeaker":
+            deserializer = presentationSpeakerDeserializer
+        case "SummitTicketType":
+            deserializer = ticketTypeDeserializer
+        case "SummitVenue":
+            deserializer = venueDeserializer
+        case "SummitVenueRoom":
+            deserializer = venueRoomDeserializer
+        case "PresentationCategory":
+            deserializer = trackDeserializer
         default:
-            throw DeserializerFactoryError.InvalidClassName
+            print("There is no deserializer for class \(className)")
         }
         
         return deserializer

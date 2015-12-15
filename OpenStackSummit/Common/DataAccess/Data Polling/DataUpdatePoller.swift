@@ -23,6 +23,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     var dataUpdateDataStore: IDataUpdateDataStore!
     var summitDataStore: ISummitDataStore!
     var reachability: IReachability!
+    var securityManager: SecurityManager!
     
     var fromDate: Int {
         get {
@@ -37,11 +38,14 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         super.init()
     }
     
-    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore, summitDataStore: ISummitDataStore) {
+    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore, summitDataStore: ISummitDataStore, reachability: IReachability, securityManager: SecurityManager) {
         self.httpFactory = httpFactory
         self.dataUpdateProcessor = dataUpdateProcessor
         self.dataUpdateDataStore = dataUpdateDataStore
         self.summitDataStore = summitDataStore
+        self.reachability = reachability
+        self.securityManager = securityManager
+        
     }
     
     public func startPollingIfNotPollingAlready() {
@@ -57,7 +61,9 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
             return
         }
         
-        let http = httpFactory.create(HttpType.ServiceAccount)
+        print("Polling server for data updates")
+        
+        let http = securityManager.isLoggedIn() ? httpFactory.create(HttpType.OpenIDJson) : httpFactory.create(HttpType.ServiceAccount)
         var url: String!
         if let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate() {
             url = "https://dev-resource-server/api/v1/summits/current/entity-events?last_event_id=\(latestDataUpdate.id)"
@@ -78,10 +84,13 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         
         http.GET(url) {(responseObject, error) in
             if (error != nil) {
+                print("Error polling server for data updates: \(error?.domain)")
                 return
             }
             
             let json = responseObject as! String
+            print("Data updates: \(json)")
+
             do {
                 try self.dataUpdateProcessor.process(json)
             }
