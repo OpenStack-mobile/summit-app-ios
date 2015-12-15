@@ -13,6 +13,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
     var eventTitle: String! { get set }
     var eventType: String! { get set }
     var time: String! { get set }
+    var sponsors: String! { get set }
     var track: String! { get set }
     var isScheduledStatusVisible: Bool { get set }
     var summitTypeColor: UIColor? { get set }
@@ -28,10 +29,10 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
 
     var eventTitle: String!{
         get {
-            return eventTitleLabel.text
+            return eventNameLabel.text
         }
         set {
-            eventTitleLabel.text = newValue
+            eventNameLabel.text = newValue
         }
     }
     
@@ -53,12 +54,24 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
+    var sponsors: String!{
+        get {
+            return sponsorsLabel.text
+        }
+        set {
+            let spacing = 3
+            let attributedString = NSAttributedString(string: newValue, attributes: [NSKernAttributeName: spacing])
+            sponsorsLabel.attributedText = attributedString
+        }
+    }
+    
     var track: String!{
         get {
             return trackLabel.text
         }
         set {
             trackLabel.text = newValue
+            trackLabel.sizeToFit()
         }
     }
     
@@ -69,20 +82,20 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         set {
             scheduledInternal = newValue
             if (scheduledInternal) {
-                scheduleButton.setImage(UIImage(named:"checked_active")!, forState: .Normal)
+                scheduleButton.setImage(UIImage(named:"schedule_checked_active")!, forState: .Normal)
             }
             else {
-                scheduleButton.setImage(UIImage(named:"unchecked")!, forState: .Normal)
+                scheduleButton.setImage(UIImage(named:"schedule_unchecked")!, forState: .Normal)
             }
         }
     }
     
     var summitTypeColor: UIColor? {
         get {
-            return eventTitleLabel.textColor
+            return eventNameLabel.textColor
         }
         set {
-            eventTitleLabel.textColor = newValue != nil ? newValue : UIColor.blackColor()
+            sponsorsLabel.textColor = newValue != nil ? newValue : UIColor(hexaString: "#4A4A4A")
             summitTypeColorBar.backgroundColor = newValue != nil ? newValue : UIColor.lightGrayColor()
         }
     }
@@ -96,9 +109,11 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
 
-    @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventTypeLabel: UILabel!
+    @IBOutlet weak var eventTypeVerticalConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var trackLabel: UILabel!
     @IBOutlet weak var scheduleButton: UIButton!
     @IBOutlet weak var summitTypeColorBar: UIView!
@@ -114,5 +129,52 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }    
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if trackLabel.text == "" && sponsorsLabel.text != "" {
+            contentView.removeConstraint(eventTypeVerticalConstraint)
+            eventTypeVerticalConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.FirstBaseline, relatedBy: NSLayoutRelation.Equal, toItem:
+                sponsorsLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
+            contentView.addConstraint(eventTypeVerticalConstraint)
+
+            for constraint in contentView.constraints {
+                if constraint.firstItem as? UIView == eventTypeLabel && constraint.secondItem as? UIView == contentView && constraint.secondAttribute == NSLayoutAttribute.BottomMargin {
+                    contentView.removeConstraint(constraint)
+                }
+            }
+        }
+        else if trackLabel.text != "" {
+            contentView.removeConstraint(eventTypeVerticalConstraint)
+            eventTypeVerticalConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.FirstBaseline, relatedBy: NSLayoutRelation.Equal, toItem:
+                trackLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
+            contentView.addConstraint(eventTypeVerticalConstraint)
+            
+            for constraint in contentView.constraints {
+                if constraint.firstItem as? UIView == eventTypeLabel && constraint.secondItem as? UIView == contentView && constraint.secondAttribute == NSLayoutAttribute.BottomMargin {
+                    contentView.removeConstraint(constraint)
+                }
+            }
+        }
+        else if trackLabel.text == "" && sponsorsLabel.text == "" {
+            contentView.removeConstraint(eventTypeVerticalConstraint)
+            eventTypeVerticalConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem:
+                eventNameLabel, attribute: NSLayoutAttribute.Bottom, multiplier: CGFloat(1), constant: CGFloat(0))
+            contentView.addConstraint(eventTypeVerticalConstraint)
+            
+            for constraint in contentView.constraints {
+                if constraint.firstItem as? UIView == eventTypeLabel && constraint.secondItem as? UIView == contentView && constraint.secondAttribute == NSLayoutAttribute.BottomMargin {
+                    contentView.removeConstraint(constraint)
+                }
+            }
+            let eventTypeBottomConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem:
+                contentView, attribute: NSLayoutAttribute.BottomMargin, multiplier: CGFloat(1), constant: CGFloat(-10))
+            contentView.addConstraint(eventTypeBottomConstraint)
+            
+        }
+        
+        contentView.updateConstraintsIfNeeded()
+    }
 }
