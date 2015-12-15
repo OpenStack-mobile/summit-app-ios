@@ -56,24 +56,28 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.AMSymbol = "am"
+        dateFormatter.PMSymbol = "pm"
         let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
         let stringDateTo = dateFormatter.stringFromDate(event.end)
         
-        return "\(stringDateFrom) - \(stringDateTo)"
+        return "\(stringDateFrom) / \(stringDateTo)"
     }
 
     public func getDateTime(event: SummitEvent) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
+        dateFormatter.AMSymbol = "am"
+        dateFormatter.PMSymbol = "pm"
         let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
         let stringDateTo = dateFormatter.stringFromDate(event.end)
         
-        return "\(stringDateFrom) - \(stringDateTo)"
+        return "\(stringDateFrom) / \(stringDateTo)"
     }
     
     public func getLocation(event: SummitEvent) -> String{
