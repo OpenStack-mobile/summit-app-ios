@@ -58,47 +58,37 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     var internalPresenter: ISchedulePresenter!
     
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scheduleView.tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        scheduleView.tableView.estimatedRowHeight = 120
+        scheduleView.tableView.estimatedRowHeight = 142
         scheduleView.tableView.rowHeight = UITableViewAutomaticDimension
         
         scheduleView.dayPicker.delegate = self
-        scheduleView.dayPicker.backgroundColor = UIColorFromRGB(0xE5E5E5)
+        scheduleView.dayPicker.backgroundColor = UIColor(hexaString: "#E5E5E5")
         
-        scheduleView.dayPicker.dayNumberActiveColor = UIColorFromRGB(0x4A4A4A)
-        scheduleView.dayPicker.dayNumberInactiveColor = UIColorFromRGB(0x4A4A4A)
-        scheduleView.dayPicker.dayNumberSelectedColor = UIColorFromRGB(0xFFFFFF)
+        scheduleView.dayPicker.dayNumberActiveColor = UIColor(hexaString: "#4A4A4A")
+        scheduleView.dayPicker.dayNumberInactiveColor = UIColor(hexaString: "#4A4A4A")
+        scheduleView.dayPicker.dayNumberSelectedColor = UIColor(hexaString: "#FFFFFF")
         
         /*
         scheduleView.dayPicker.dayNumberActiveFont = UIFont.systemFontOfSize(16)
         scheduleView.dayPicker.dayNumberInactiveFont = UIFont.systemFontOfSize(16)
         scheduleView.dayPicker.dayNumberSelectedFont = UIFont.systemFontOfSize(16)*/
         
-        scheduleView.dayPicker.dayNameActiveColor = UIColorFromRGB(0x4A4A4A)
-        scheduleView.dayPicker.dayNameInactiveColor = UIColorFromRGB(0x4A4A4A)
-        scheduleView.dayPicker.dayNameSelectedColor = UIColorFromRGB(0xFFFFFF)
+        scheduleView.dayPicker.dayNameActiveColor = UIColor(hexaString: "#4A4A4A")
+        scheduleView.dayPicker.dayNameInactiveColor = UIColor(hexaString: "#4A4A4A")
+        scheduleView.dayPicker.dayNameSelectedColor = UIColor(hexaString: "#FFFFFF")
         
         /*
         scheduleView.dayPicker.dayNameActiveFont = UIFont.systemFontOfSize(16)
         scheduleView.dayPicker.dayNameInactiveFont = UIFont.systemFontOfSize(16)
         scheduleView.dayPicker.dayNameSelectedFont = UIFont.systemFontOfSize(16)*/
         
-        scheduleView.dayPicker.backgroundActiveColor = UIColorFromRGB(0xE5E5E5)
-        scheduleView.dayPicker.backgroundInactiveColor = UIColorFromRGB(0xE5E5E5)
-        scheduleView.dayPicker.backgroundSelectedColor = UIColorFromRGB(0xF5A623)
+        scheduleView.dayPicker.backgroundActiveColor = UIColor(hexaString: "#E5E5E5")
+        scheduleView.dayPicker.backgroundInactiveColor = UIColor(hexaString: "#E5E5E5")
+        scheduleView.dayPicker.backgroundSelectedColor = UIColor(hexaString: "#F5A623")
     }
     
     
