@@ -39,6 +39,7 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     var hasMyFeedback: Bool { get set}
     var isScheduledStatusVisible: Bool { get set }
     var level: String! { get set }
+    var track: String! { get set }
 }
 
 class EventDetailViewController: BaseViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -71,12 +72,15 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     @IBOutlet weak var myFeedbackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var submenuButton: UIBarButtonItem!
-    @IBOutlet weak var tagsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagsViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var tagsView: UIView!
     @IBOutlet weak var eventDetailLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var locationLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var locationViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var levelLabelHeightConstraint: NSLayoutConstraint!    
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet weak var trackLabelHeightConstraint: NSLayoutConstraint!
     
     private var eventDescriptionHTML = ""
     private var speakerCellIdentifier = "speakerTableViewCell"
@@ -121,10 +125,10 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         set {
             locationLabel.text = newValue
             if (newValue == nil || newValue.isEmpty) {
-                locationLabelHeightConstraint.constant = 0
+                locationViewHeightConstraint.constant = 0
             }
             else {
-                locationLabelHeightConstraint.constant = 60
+                locationViewHeightConstraint.constant = 60
             }
         }
     }
@@ -160,7 +164,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
         set {
             tagsLabel.text = newValue
-            tagsLabelHeightConstraint.constant = newValue == nil || newValue.isEmpty ? 0 : 40
+            tagsViewHeightConstraint.constant = newValue == nil || newValue.isEmpty ? 0 : 60
+            tagsView.updateConstraints()
         }
     }
     
@@ -297,6 +302,22 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
     }
     
+    var track: String! {
+        get {
+            return trackLabel.text
+        }
+        set {
+            if (newValue == nil || newValue.isEmpty) {
+                trackLabelHeightConstraint.constant = 0
+            }
+            else {
+                trackLabelHeightConstraint.constant = 30
+            }
+            trackLabel.updateConstraints()
+            trackLabel.text = newValue
+        }
+    }
+    
     var presenter: IEventDetailPresenter!
     
     override func viewWillAppear(animated: Bool) {
@@ -317,6 +338,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         summitTypesView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
         summitTypesView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
         feedbackTableView.addTopBorderWithColor(borderColor, width: CGFloat(borderWidth))
+        tagsView.addBottomBorderWithColor(borderColor, width: CGFloat(borderWidth))
+        
         actionSheet = AHKActionSheet()
         actionSheet.addButtonWithTitle("Feedback", image: nil, type: .Default) { actsheet in
             self.presenter.leaveFeedback()
