@@ -21,15 +21,12 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
     }
     
     public func deserialize(json: JSON) throws -> BaseEntity {
-        let dataUpdate = DataUpdate()
         let className = json["class_name"].stringValue
-        let deserializer = try deserializerFactory.create(className)
-        let operationType = json["type"]
-        
+        let dataUpdate = DataUpdate()
         dataUpdate.id = json["id"].intValue
         dataUpdate.entityClassName = className
-        dataUpdate.entity = operationType.stringValue != "DELETE" ? try deserializer.deserialize(json["entity"]) : try deserializer.deserialize(json["entity_id"])
-    
+        let operationType = json["type"]
+
         switch (operationType) {
         case "INSERT":
             dataUpdate.operation = DataOperation.Insert
@@ -39,6 +36,10 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
             dataUpdate.operation = DataOperation.Delete
         default:
             throw DeserializerError.BadFormat("Operation is not valid")
+        }
+        
+        if let deserializer = try deserializerFactory.create(className) {
+            dataUpdate.entity = operationType.stringValue != "DELETE" ? try deserializer.deserialize(json["entity"]) : try deserializer.deserialize(json["entity_id"])
         }
         
         return dataUpdate

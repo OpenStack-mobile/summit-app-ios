@@ -29,17 +29,17 @@ public class GeneralScheduleFilterInteractor: NSObject {
     var eventDataStore: IEventDataStore!
 
     public func getSummitTypes() -> [NamedDTO] {
-        let entities = summitTypeDataStore.getAllLocal()
+        let entities = summitTypeDataStore.getAllLocal().sort({ $0.name < $1.name })
         return createDTOs(entities)
     }
    
     public func getEventTypes() -> [NamedDTO] {
-        let entities = eventTypeDataStore.getAllLocal()
+        let entities = eventTypeDataStore.getAllLocal().sort({ $0.name < $1.name })
         return createDTOs(entities)
     }
     
     public func getSummitTracks() -> [NamedDTO] {
-        let entities = trackDataStore.getAllLocal()
+        let entities = trackDataStore.getAllLocal().sort({ $0.name < $1.name })
         return createDTOs(entities)
     }
     

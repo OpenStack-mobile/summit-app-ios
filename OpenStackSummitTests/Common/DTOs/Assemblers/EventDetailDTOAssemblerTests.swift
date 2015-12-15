@@ -90,7 +90,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
         XCTAssertNil(eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.moderator)
-        XCTAssertEqual(event.presentation!.level, eventDetailDTO.level)
+        XCTAssertEqual(event.presentation!.level + " Level", eventDetailDTO.level)
     }
     
     func test_createDTO_eventWithPresentationModerator_returnsDTOWithCorrectData() {
@@ -159,7 +159,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
         XCTAssertNil(eventDetailDTO.venueId)
         XCTAssertEqual(speaker.id, eventDetailDTO.moderator?.id)
-        XCTAssertEqual(event.presentation!.level, eventDetailDTO.level)
+        XCTAssertEqual(event.presentation!.level + " Level", eventDetailDTO.level)
     }
     
     

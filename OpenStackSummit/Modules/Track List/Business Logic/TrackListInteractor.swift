@@ -18,7 +18,7 @@ public class TrackListInteractor: NSObject, ITrackListInteractor {
     var namedDTOAssembler: NamedDTOAssembler!
     
     public func getTracks() -> [TrackDTO] {
-        let tracks: [Track] = genericDataStore.getAllLocal()
+        let tracks: [Track] = genericDataStore.getAllLocal().sort({ $0.name < $1.name })
         
         var trackDTO: TrackDTO
         var dtos: [TrackDTO] = []

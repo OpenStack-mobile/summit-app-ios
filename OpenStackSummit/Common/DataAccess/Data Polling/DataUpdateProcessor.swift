@@ -27,8 +27,10 @@ public class DataUpdateProcessor: NSObject {
         let dataUpdateArray = try dataUpdateDeserializer.deserializeArray(data) as! [DataUpdate]
         var dataUpdateStrategy: DataUpdateStrategy
         for dataUpdate in dataUpdateArray {
-            dataUpdateStrategy = dataUpdateStrategyFactory.create(dataUpdate.entityClassName)
-            try dataUpdateStrategy.process(dataUpdate)
+            if dataUpdate.entity != nil {
+                dataUpdateStrategy = dataUpdateStrategyFactory.create(dataUpdate.entityClassName)
+                try dataUpdateStrategy.process(dataUpdate)
+            }
             dataUpdateDataStore.saveOrUpdateLocal(dataUpdate, completionBlock: nil)
         }
     }
