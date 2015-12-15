@@ -85,12 +85,6 @@
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tr5-Zf-oUl" userLabel="Summit Types">
                                                 <rect key="frame" x="0.0" y="395" width="600" height="60"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Credentials" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lV-iZ-mwy">
-                                                        <rect key="frame" x="72" y="12" width="509" height="36"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="credential" translatesAutoresizingMaskIntoConstraints="NO" id="sVL-sh-TXc">
                                                         <rect key="frame" x="21" y="17" width="40" height="25"/>
                                                         <constraints>
@@ -98,6 +92,12 @@
                                                             <constraint firstAttribute="width" constant="40" id="YtU-E6-URy"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Credentials" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lV-iZ-mwy">
+                                                        <rect key="frame" x="69" y="12" width="509" height="36"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -314,7 +314,7 @@
                                                     <action selector="leaveFeedback:" destination="xso-DC-v1V" eventType="touchUpInside" id="evg-s3-p33"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Unj-wl-4Ar">
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Unj-wl-4Ar">
                                                 <rect key="frame" x="180" y="960" width="240" height="10"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -424,6 +424,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Unj-wl-4Ar" secondAttribute="trailing" constant="180" id="0Sw-9s-FEE"/>
                                             <constraint firstAttribute="trailing" secondItem="WLF-Hv-LGa" secondAttribute="trailing" constant="21" id="1Cq-kB-7mh"/>
                                             <constraint firstAttribute="trailing" secondItem="hXL-fU-uBQ" secondAttribute="trailing" id="1Ht-uP-yhV"/>
                                             <constraint firstItem="YRm-Xr-3hF" firstAttribute="top" secondItem="dCz-Ew-COB" secondAttribute="top" constant="17" id="1Z5-Te-4yd"/>
@@ -438,6 +439,7 @@
                                             <constraint firstAttribute="trailing" secondItem="tr5-Zf-oUl" secondAttribute="trailing" id="EoO-zD-eu8"/>
                                             <constraint firstAttribute="trailing" secondItem="EUp-9I-ebt" secondAttribute="trailing" constant="21" id="EzL-5X-AwX"/>
                                             <constraint firstAttribute="trailing" secondItem="C64-dv-dbM" secondAttribute="trailing" id="FNU-9G-VVO"/>
+                                            <constraint firstItem="Unj-wl-4Ar" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="Fvj-U5-2Pm"/>
                                             <constraint firstItem="EUp-9I-ebt" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" constant="22" id="Hh4-II-HHs"/>
                                             <constraint firstItem="zi0-2e-FtU" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="HxG-dH-FYL"/>
                                             <constraint firstAttribute="trailing" secondItem="83H-NX-4z4" secondAttribute="trailing" id="Ibx-Kp-0sd"/>
