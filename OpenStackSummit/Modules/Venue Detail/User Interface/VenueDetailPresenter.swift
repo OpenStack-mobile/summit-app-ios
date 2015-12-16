@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IVenueDetailPresenter {
     func viewLoad(venueId: Int)
-    func showVenueRoomDetail(venueRoomId: Int)
+    func showVenueLocationDetail()
     func getVenueRoomsCount() -> Int
     func buildVenueRoomCell(cell: IVenueListTableViewCell, index: Int)
 }
@@ -19,21 +19,20 @@ public protocol IVenueDetailPresenter {
 public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
     var venueId = 0
     var interactor: IVenueDetailInteractor!
-    weak var viewController: IVenueDetailViewController!
+    var viewController: IVenueDetailViewController!
     var wireframe: IVenueDetailWireframe!
     var venue: VenueDTO!
     
     public func viewLoad(venueId: Int) {
+        self.venueId = venueId
         venue = interactor.getVenue(venueId)
         viewController.name = venue.name
         viewController.address = venue.address
-        viewController.addMarker(venue)
         viewController.reloadRoomsData()
     }
     
-    public func showVenueRoomDetail(index: Int) {
-        let venueRoom = venue.rooms[index]
-        wireframe.showVenueRoomDetail(venueRoom.id)
+    public func showVenueLocationDetail() {
+        wireframe.presentVenueLocationDetailView(venueId, viewController: viewController.navigationController!)
     }
     
     public func getVenueRoomsCount() -> Int {

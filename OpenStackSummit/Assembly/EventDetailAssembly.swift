@@ -15,7 +15,6 @@ class EventDetailAssembly: TyphoonAssembly {
     var feedbackEditWireframe: FeedbackEditAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var memberProfileAssembly: MemberProfileAssembly!
-    var venueRoomDetailAssembly: VenueRoomDetailAssembly!
     var venueDetailAssembly: VenueDetailAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
 
@@ -26,7 +25,6 @@ class EventDetailAssembly: TyphoonAssembly {
             definition.injectProperty("eventDetailViewController", with: self.eventDetailViewController())
             definition.injectProperty("feedbackEditWireframe", with: self.feedbackEditWireframe.feedbackEditWireframe())
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
-            definition.injectProperty("venueRoomDetailWireframe", with: self.venueRoomDetailAssembly.venueRoomDetailWireframe())
             definition.injectProperty("venueDetailWireframe", with: self.venueDetailAssembly.venueDetailWireframe())   
         }
     }

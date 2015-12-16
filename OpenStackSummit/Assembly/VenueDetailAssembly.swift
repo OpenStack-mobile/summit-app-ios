@@ -10,7 +10,6 @@ import Typhoon
 
 public class VenueDetailAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
-    var venueRoomDetailAssembly: VenueRoomDetailAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var dtosAssemblersAssembly: DTOAssemblersAssembly!
     
@@ -19,7 +18,7 @@ public class VenueDetailAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("venueDetailViewController", with: self.venueDetailViewController())
-            definition.injectProperty("venueRoomDetailWireframe", with: self.venueRoomDetailAssembly.venueRoomDetailWireframe())
+            definition.injectProperty("venueLocationDetailViewController", with: self.venueLocationDetailViewController())
         }
     }
     
@@ -53,11 +52,24 @@ public class VenueDetailAssembly: TyphoonAssembly {
         })
     }
     
-/*    dynamic func venueDetailViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(VenueDetailViewController.self) {
+    dynamic func venueLocationDetailPresenter() -> AnyObject {
+        return TyphoonDefinition.withClass(VenueLocationDetailPresenter.self) {
             (definition) in
             
-            definition.injectProperty("presenter", with: self.venueDetailPresenter())
+            definition.injectProperty("interactor", with: self.venueDetailInteractor())
+            definition.injectProperty("viewController", with: self.venueLocationDetailViewController())
+            definition.injectProperty("wireframe", with: self.venueDetailWireframe())
         }
-    }*/
+    }
+    
+    dynamic func venueLocationDetailViewController() -> AnyObject {
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
+            
+            factoryMethod.injectParameterWith("VenueLocationDetailViewController")
+            }, configuration: {
+                (definition) in
+                definition.injectProperty("presenter", with: self.venueLocationDetailPresenter())
+        })
+    }
 }

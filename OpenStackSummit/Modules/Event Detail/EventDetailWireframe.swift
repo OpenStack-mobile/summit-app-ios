@@ -14,22 +14,21 @@ public protocol IEventDetailWireframe {
     func showFeedbackEdit(eventId: Int)
     func showSpeakerProfile(speakerId: Int)
     func showVenueDetail(venueId: Int)
-    func showVenueRoomDetail(venueRoomId: Int)
+    func showVenueLocationDetail(venueId: Int)
 }
 
 public class EventDetailWireframe: NSObject {
     var eventDetailViewController : EventDetailViewController!
     var feedbackEditWireframe: IFeedbackEditWireframe!
     var memberProfileWireframe: IMemberProfileWireframe!
-    var venueRoomDetailWireframe: IVenueRoomDetailWireframe!
     var venueDetailWireframe: IVenueDetailWireframe!
     
     public func showVenueDetail(venueId: Int) {
         venueDetailWireframe.presentVenueDetailView(venueId, viewController: eventDetailViewController.navigationController!)
     }
     
-    public func showVenueRoomDetail(venueRoomId: Int) {
-        venueRoomDetailWireframe.presentVenueRoomDetailView(venueRoomId, viewController: eventDetailViewController.navigationController!)
+    public func showVenueLocationDetail(venueId: Int) {
+        venueDetailWireframe.presentVenueLocationDetailView(venueId, viewController: eventDetailViewController.navigationController!)
     }
     
     public func presentEventDetailView(eventId: Int, viewController: UINavigationController) {
