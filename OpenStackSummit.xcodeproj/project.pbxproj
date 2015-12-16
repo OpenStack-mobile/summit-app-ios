@@ -17,6 +17,8 @@
 		9DAC06EB1BFB78CA00C1208F /* EventsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */; };
 		9DBB65451C10B55200F70B4E /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBB65441C10B55200F70B4E /* SpeakersViewController.swift */; };
 		9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */; };
+		9DDBE76E1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBE76C1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift */; };
+		9DDBE76F1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBE76D1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift */; };
 		9DEA0FB71BFD0D490035B130 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */; };
 		9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */; };
 		9DEF61B41C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */; };
@@ -351,6 +353,8 @@
 		9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsWireframe.swift; path = Events/EventsWireframe.swift; sourceTree = "<group>"; };
 		9DBB65441C10B55200F70B4E /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
 		9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		9DDBE76C1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueLocationDetailPresenter.swift; sourceTree = "<group>"; };
+		9DDBE76D1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueLocationDetailViewController.swift; sourceTree = "<group>"; };
 		9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VenuesViewController.swift; path = "Venues/User Interface/VenuesViewController.swift"; sourceTree = "<group>"; };
 		9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesAssembly.swift; sourceTree = "<group>"; };
 		9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsWireframe.swift; sourceTree = "<group>"; };
@@ -1023,8 +1027,10 @@
 		CA8E98DF1B9A035700CEBD2F /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CA8E98E41B9A03A700CEBD2F /* VenueDetailPresenter.swift */,
 				CA8E98E21B9A038D00CEBD2F /* VenueDetailViewController.swift */,
+				CA8E98E41B9A03A700CEBD2F /* VenueDetailPresenter.swift */,
+				9DDBE76D1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift */,
+				9DDBE76C1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -1479,8 +1485,8 @@
 				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CAE643551BCDB625005E530B /* Track Schedule */,
-				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
 				CA8E98D01B99D8A900CEBD2F /* Venue List */,
+				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
 				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 				9DEA0FB41BFD0CDD0035B130 /* Venues */,
 				CADD51111BD80E8B00400AF4 /* Venues Map */,
@@ -2190,6 +2196,7 @@
 				CADD511A1BD813BB00400AF4 /* VenuesMapViewController.swift in Sources */,
 				CAE643591BCDB648005E530B /* TrackScheduleViewController.swift in Sources */,
 				CA894AAA1BD92EFE005DE469 /* VenueDTO.swift in Sources */,
+				9DDBE76F1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift in Sources */,
 				9DEF61B61C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift in Sources */,
 				CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */,
 				CA416F901B8F58D900F177F5 /* GeneralScheduleFilterPresenter.swift in Sources */,
@@ -2326,6 +2333,7 @@
 				CAD6B3361B7E2BC100D62023 /* NamedEntity.swift in Sources */,
 				CADDDBBE1B74E614008F742E /* GeneralScheduleAssembly.swift in Sources */,
 				CACFBC461B9F951100095E44 /* FeedbackDTO.swift in Sources */,
+				9DDBE76E1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift in Sources */,
 				9DAC06E71BFB78CA00C1208F /* EventsViewController.swift in Sources */,
 				CAE2A3C51C18B36A0097857E /* LevelScheduleInteractor.swift in Sources */,
 				CACF7C461B9664E700A9EB16 /* PresentationSpeakerDTOAssembler.swift in Sources */,
