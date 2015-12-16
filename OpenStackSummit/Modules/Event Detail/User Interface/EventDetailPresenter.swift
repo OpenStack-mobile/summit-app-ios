@@ -146,10 +146,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
     }
     
     public func showVenueDetail() {
-        if event.venueRoomId != nil {
-            wireframe.showVenueRoomDetail(event.venueRoomId!)
-        }
-        else if event.venueId != nil {
+        if event.venueId != nil {
             wireframe.showVenueDetail(event.venueId!)
         }
     }

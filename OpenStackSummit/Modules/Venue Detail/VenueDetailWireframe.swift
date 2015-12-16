@@ -11,12 +11,12 @@ import UIKit
 @objc
 public protocol IVenueDetailWireframe {
     func presentVenueDetailView(venueId: Int, viewController: UINavigationController)
-    func showVenueRoomDetail(venueRoomId: Int)
+    func presentVenueLocationDetailView(venueId: Int, viewController: UINavigationController)
 }
 
 public class VenueDetailWireframe: NSObject, IVenueDetailWireframe {
     var venueDetailViewController: VenueDetailViewController!
-    var venueRoomDetailWireframe: IVenueRoomDetailWireframe!
+    var venueLocationDetailViewController: VenueLocationDetailViewController!
     
     public func presentVenueDetailView(venueId: Int, viewController: UINavigationController) {
         let newViewController = venueDetailViewController!
@@ -25,7 +25,10 @@ public class VenueDetailWireframe: NSObject, IVenueDetailWireframe {
         viewController.pushViewController(newViewController, animated: true)
     }
     
-    public func showVenueRoomDetail(venueRoomId: Int) {
-        venueRoomDetailWireframe.presentVenueRoomDetailView(venueRoomId, viewController: venueDetailViewController.navigationController!)
+    public func presentVenueLocationDetailView(venueId: Int, viewController: UINavigationController) {
+        let newViewController = venueLocationDetailViewController!
+        let _ = venueLocationDetailViewController.view!
+        venueLocationDetailViewController.presenter.viewLoad(venueId)
+        viewController.pushViewController(newViewController, animated: true)
     }
 }

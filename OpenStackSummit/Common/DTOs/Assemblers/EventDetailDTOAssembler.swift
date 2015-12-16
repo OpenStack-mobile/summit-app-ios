@@ -32,8 +32,13 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         eventDetailDTO.finished = getFinished(event)
         eventDetailDTO.eventDescription = event.eventDescription
         eventDetailDTO.allowFeedback = event.allowFeedback
+        
         eventDetailDTO.venueId = event.venue?.id
-        eventDetailDTO.venueRoomId = event.venueRoom?.id
+        if let venueRoom = event.venueRoom {
+            eventDetailDTO.venueRoomId = venueRoom.id
+            eventDetailDTO.venueId = venueRoom.venue.id
+        }
+        
         eventDetailDTO.tags = getTags(event)
         eventDetailDTO.level = event.presentation != nil ? event.presentation!.level + " Level" : ""
         

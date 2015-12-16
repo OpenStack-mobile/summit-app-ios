@@ -7,18 +7,21 @@
 //
 
 import UIKit
-import GoogleMaps
 
 @objc
 public protocol IVenueDetailViewController {
+    var navigationController: UINavigationController? { get }
+    
     var name: String! { get set }
     var address: String! { get set }
-
-    func addMarker(venue:VenueDTO)
+    var picUrl: String! { get set }
+    
     func reloadRoomsData()
 }
 
-class VenueDetailViewController: UIViewController, IVenueDetailViewController, GMSMapViewDelegate , UITableViewDelegate, UITableViewDataSource {
+class VenueDetailViewController: UIViewController, IVenueDetailViewController , UITableViewDelegate, UITableViewDataSource {
+    
+    private var picUrlInternal: String!
     
     var name: String! {
         get {
@@ -38,10 +41,25 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         }
     }
     
+    var picUrl: String! {
+        get {
+            return picUrlInternal
+        }
+        set {
+            picUrlInternal = newValue
+            if (!picUrlInternal.isEmpty) {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
+            }
+            else {
+                pictureImageView.image = nil
+            }
+        }
+    }
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var roomsTableView: UITableView!
     
     var presenter: IVenueDetailPresenter!
@@ -50,9 +68,6 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //mapView = GMSMapView()
-        mapView.myLocationEnabled = true
-        mapView.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -61,25 +76,14 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         // Dispose of any resources that can be recreated.
     }
     
-    func addMarker(venue:VenueDTO) {
-        var marker: GMSMarker
-        var bounds = GMSCoordinateBounds()
-        marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
-        marker.map = mapView
-        marker.title = venue.name
-        bounds = bounds.includingCoordinate(marker.position)
-        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
-    }
-    
     func reloadRoomsData() {
         roomsTableView.delegate = self
         roomsTableView.dataSource = self
         roomsTableView.reloadData()
     }
     
-    @IBAction func navigateToVenueRoomDetail(sender: AnyObject) {
-        presenter.showVenueRoomDetail(1)
+    @IBAction func navigateToVenueLocationDetail(sender: AnyObject) {
+        presenter.showVenueLocationDetail()
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -97,6 +101,6 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showVenueRoomDetail(indexPath.row)
+        self.presenter.showVenueLocationDetail()
     }
 }
