@@ -52,6 +52,10 @@ public class VenueDTOAssembler: NamedDTOAssembler, IVenueDTOAssembler {
         venueDTO.lat = Double(venue.lat)
         venueDTO.long = Double(venue.long)
         
+        for map in venue.maps {
+            venueDTO.maps.append(map.url)
+        }
+        
         var venueRoomDTO: VenueRoomDTO
         for venueRoom in venue.venueRooms {
             venueRoomDTO = venueRoomDTOAssembler.createDTO(venueRoom)

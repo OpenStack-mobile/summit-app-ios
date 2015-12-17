@@ -14,14 +14,11 @@ public protocol IVenueLocationDetailPresenter {
 }
 
 public class VenueLocationDetailPresenter: NSObject, IVenueLocationDetailPresenter {
-    var venueRoomId = 0
     var interactor: IVenueDetailInteractor!
     var viewController: IVenueLocationDetailViewController!
-    var wireframe: IVenueDetailWireframe!
     
     public func viewLoad(venueId: Int) {
         let venue = interactor.getVenue(venueId)
-        viewController.name = venue.name
         viewController.addMarker(venue)
     }
 }

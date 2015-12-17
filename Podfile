@@ -15,6 +15,8 @@ pod 'AeroGearHttp'
 pod 'AeroGearOAuth2', :git => 'https://github.com/claudioredi/aerogear-ios-oauth2.git', :branch => 'openstack'
 pod 'SwiftSpinner' 
 pod 'GoogleMaps'
+pod 'ImageSlideshow', '~> 0.2.2'
+pod "ImageSlideshow/AFURL"
 pod 'Cosmos', '~> 1.1'
 pod 'AHKActionSheet'
 pod 'MLPAutoCompleteTextField'

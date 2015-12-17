@@ -10,5 +10,6 @@ import UIKit
 
 public class VenueDTO: VenueListItemDTO {
     public var address = ""
+    public var maps = [String]()
     public var rooms = [VenueRoomDTO]()
 }

@@ -7,21 +7,22 @@
 //
 
 import UIKit
+import ImageSlideshow
 
 @objc
 public protocol IVenueDetailViewController {
     var navigationController: UINavigationController? { get }
     
     var name: String! { get set }
-    var address: String! { get set }
-    var picUrl: String! { get set }
+    var location: String! { get set }
+    var maps: [String]! { get set }
     
     func reloadRoomsData()
 }
 
 class VenueDetailViewController: UIViewController, IVenueDetailViewController , UITableViewDelegate, UITableViewDataSource {
     
-    private var picUrlInternal: String!
+    private var mapsInternal: [String]!
     
     var name: String! {
         get {
@@ -32,48 +33,67 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         }
     }
 
-    var address: String! {
+    var location: String! {
         get {
-            return addressLabel.text
+            return locationLabel.text
         }
         set {
-            addressLabel.text = newValue
+            locationLabel.text = newValue
         }
     }
     
-    var picUrl: String! {
+    var maps: [String]! {
         get {
-            return picUrlInternal
+            return mapsInternal
         }
         set {
-            picUrlInternal = newValue
-            if (!picUrlInternal.isEmpty) {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
-            }
-            else {
-                pictureImageView.image = nil
+            if mapsInternal == nil {
+                mapsInternal = newValue
+                var imageInputs:[HanekeInputSource] = []
+                
+                for map in mapsInternal {
+                    imageInputs.append(HanekeInputSource(urlString: map, frame: slideshow.bounds)!)
+                }
+                
+                slideshow.setImageInputs(imageInputs)
             }
         }
     }
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var pictureImageView: UIImageView!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var slideshow: ImageSlideshow!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var roomsTableView: UITableView!
     
     var presenter: IVenueDetailPresenter!
     let cellIdentifier = "venueRoomListTableViewCell"
-
+    
+    var transitionDelegate: ZoomAnimatedTransitioningDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let recognizer = UITapGestureRecognizer(target: self, action: "click")
+        slideshow.addGestureRecognizer(recognizer)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func click() {
+        let ctr = FullScreenSlideshowViewController()
+        ctr.pageSelected = {(page: Int) in
+            self.slideshow.setScrollViewPage(page, animated: false)
+        }
+        
+        ctr.initialPage = slideshow.scrollViewPage
+        ctr.inputs = slideshow.images
+        self.transitionDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: slideshow);
+        ctr.transitioningDelegate = self.transitionDelegate!
+        self.presentViewController(ctr, animated: true, completion: nil)
     }
     
     func reloadRoomsData() {
@@ -82,7 +102,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         roomsTableView.reloadData()
     }
     
-    @IBAction func navigateToVenueLocationDetail(sender: AnyObject) {
+    @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
         presenter.showVenueLocationDetail()
     }
 
