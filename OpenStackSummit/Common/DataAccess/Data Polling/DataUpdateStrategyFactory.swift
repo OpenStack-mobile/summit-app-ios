@@ -15,7 +15,7 @@ public class DataUpdateStrategyFactory: NSObject {
     public func create(className: String) -> DataUpdateStrategy {
         var dataUpdateProcessStrategy: DataUpdateStrategy
         switch className {
-        case "MySchdedule":
+        case "MySchedule":
             dataUpdateProcessStrategy = myScheduleDataUpdateStrategy
         default:
             dataUpdateProcessStrategy = genericDataUpdateProcessStrategy

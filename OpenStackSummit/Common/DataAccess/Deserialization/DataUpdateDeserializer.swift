@@ -39,7 +39,9 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
         }
         
         if let deserializer = try deserializerFactory.create(className) {
-            dataUpdate.entity = operationType.stringValue != "DELETE" ? try deserializer.deserialize(json["entity"]) : try deserializer.deserialize(json["entity_id"])
+            dataUpdate.entity = operationType.stringValue != "DELETE" && className != "MySchedule"
+                ? try deserializer.deserialize(json["entity"])
+                : try deserializer.deserialize(json["entity_id"])
         }
         
         return dataUpdate

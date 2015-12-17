@@ -54,6 +54,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(1, realm.objects(Member).first!.attendeeRole?.scheduledEvents.count)
+        XCTAssertEqual(1, realm.objects(SummitEvent).count)
     }
     
     func test_process_dataUpdateWithScheduleItemDelete_scheduleItemIsDeletedFromMemberSchedule() {
@@ -92,5 +93,7 @@ class MyScheduleDataUpdateStrategyTests: XCTestCase {
         // Assert
         XCTAssertEqual(1, realm.objects(Member).first!.attendeeRole?.scheduledEvents.count)
         XCTAssertEqual(0, realm.objects(Member).first!.attendeeRole?.scheduledEvents.filter("id = %@", event1.id).count)
-    }    
+        XCTAssertEqual(2, realm.objects(SummitEvent).count)
+
+    }
 }

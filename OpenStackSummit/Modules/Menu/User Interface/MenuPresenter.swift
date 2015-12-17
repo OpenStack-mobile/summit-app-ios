@@ -69,6 +69,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func login() {
         viewController.showActivityIndicator()
+        viewController.hideMenu()
         
         interactor.login { error in
             //defer { self.viewController.hideActivityIndicator() }

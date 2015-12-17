@@ -329,7 +329,7 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         scheduledButton.target = self
         scheduledButton.action = Selector("toggleSchedule:")
         submenuButton.target = self
-        submenuButton.action = Selector("showSubmenu:")
+        submenuButton.action = Selector("leaveFeedback:")
         
         feedbackButton.layer.cornerRadius = 10
 
@@ -439,9 +439,9 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         presenter.toggleScheduledStatus()
     }
 
-    @IBAction func showSubmenu(sender: UIBarButtonItem) {
+/*    @IBAction func showSubmenu(sender: UIBarButtonItem) {
         actionSheet.show()
-    }
+    }*/
     
     override func viewWillDisappear(animated: Bool) {
         presenter.viewUnload()
