@@ -11,22 +11,11 @@ import GoogleMaps
 
 @objc
 public protocol IVenueLocationDetailViewController {
-    var name: String! { get set }
     func addMarker(venue:VenueDTO)
 }
 
 class VenueLocationDetailViewController: UIViewController, IVenueLocationDetailViewController, GMSMapViewDelegate {
-    
-    var name: String! {
-        get {
-            return nameLabel.text
-        }
-        set {
-            nameLabel.text = newValue
-        }
-    }
-    
-    @IBOutlet weak var nameLabel: UILabel!
+
     @IBOutlet weak var mapView: GMSMapView!
     
     var presenter: IVenueLocationDetailPresenter!
@@ -44,7 +33,7 @@ class VenueLocationDetailViewController: UIViewController, IVenueLocationDetailV
         // Dispose of any resources that can be recreated.
     }
     
-    func addMarker(venue:VenueDTO) {
+    func addMarker(venue: VenueDTO) {
         var marker: GMSMarker
         var bounds = GMSCoordinateBounds()
         marker = GMSMarker()
@@ -54,4 +43,5 @@ class VenueLocationDetailViewController: UIViewController, IVenueLocationDetailV
         bounds = bounds.includingCoordinate(marker.position)
         mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
     }
+    
 }

@@ -27,7 +27,9 @@ public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
         self.venueId = venueId
         venue = interactor.getVenue(venueId)
         viewController.name = venue.name
-        viewController.address = venue.address
+        viewController.location = venue.address
+        viewController.maps = venue.maps
+        
         viewController.reloadRoomsData()
     }
     
