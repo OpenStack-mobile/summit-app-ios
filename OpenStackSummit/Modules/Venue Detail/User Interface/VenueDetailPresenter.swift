@@ -28,7 +28,14 @@ public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
         venue = interactor.getVenue(venueId)
         viewController.name = venue.name
         viewController.location = venue.address
-        viewController.maps = venue.maps
+
+        if venue.maps.count > 0 {
+            viewController.maps = venue.maps
+            viewController.slideshowEnabled = true
+        } else {
+            viewController.addMarker(venue)
+            viewController.slideshowEnabled = false
+        }
         
         viewController.reloadRoomsData()
     }
