@@ -178,6 +178,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
             feedbackTableHeightConstraint.constant =  newValue ? 30 : 0
             feedbackButton.updateConstraints()
             feedbackTableView.updateConstraints()
+            navigationItem.rightBarButtonItems![0].image = newValue ? UIImage(named:"Submenu_Feedback") : nil
+            navigationItem.rightBarButtonItems![0].enabled = newValue
         }
     }
     
@@ -281,9 +283,6 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
         set {
             
-            navigationItem.rightBarButtonItems![0].tintColor = newValue ? UIColor.whiteColor() : UIColor.clearColor()
-            navigationItem.rightBarButtonItems![0].enabled = newValue
-
             if (!newValue) {
                 navigationItem.rightBarButtonItems![1].image = nil
             }
