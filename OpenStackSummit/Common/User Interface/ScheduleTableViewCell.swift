@@ -121,14 +121,8 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         let bgColorView = UIView()
-        bgColorView.backgroundColor = contentView.backgroundColor
+        bgColorView.backgroundColor = UIColor.clearColor()
         selectedBackgroundView = bgColorView
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     override func layoutSubviews() {
@@ -176,5 +170,25 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
         
         contentView.updateConstraintsIfNeeded()
+    }
+    
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        // On cell selected, internal views lose background color http://stackoverflow.com/questions/6745919/uitableviewcell-subview-disappears-when-cell-is-selected
+        let color = summitTypeColorBar.backgroundColor
+        super.setSelected(selected, animated: animated)
+        
+        if(selected) {
+            summitTypeColorBar.backgroundColor = color
+        }
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        let color = summitTypeColorBar.backgroundColor
+        super.setHighlighted(highlighted, animated: animated)
+        
+        if(highlighted) {
+            summitTypeColorBar.backgroundColor = color
+        }
     }
 }
