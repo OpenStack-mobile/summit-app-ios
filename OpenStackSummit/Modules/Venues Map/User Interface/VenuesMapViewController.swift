@@ -50,6 +50,7 @@ class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IVenuesMapV
             marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
             marker.map = mapView
             marker.title = venue.name
+            marker.icon = UIImage(named: "marker")
             dictionary[marker] = venue.id
             bounds = bounds.includingCoordinate(marker.position)
         }
