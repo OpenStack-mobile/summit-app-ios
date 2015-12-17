@@ -8,6 +8,7 @@
 
 import UIKit
 import ImageSlideshow
+import GoogleMaps
 
 @objc
 public protocol IVenueDetailViewController {
@@ -16,13 +17,16 @@ public protocol IVenueDetailViewController {
     var name: String! { get set }
     var location: String! { get set }
     var maps: [String]! { get set }
+    var slideshowEnabled: Bool { @objc(isSlideshowEnabled) get set }
     
+    func addMarker(venue:VenueDTO)
     func reloadRoomsData()
 }
 
-class VenueDetailViewController: UIViewController, IVenueDetailViewController , UITableViewDelegate, UITableViewDataSource {
+class VenueDetailViewController: UIViewController, IVenueDetailViewController , UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     
     private var mapsInternal: [String]!
+    private var isSlideshowEnableInternal: Bool = false
     
     var name: String! {
         get {
@@ -60,10 +64,24 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         }
     }
     
+    var slideshowEnabled: Bool {
+        @objc(isSlideshowEnabled) get {
+            return isSlideshowEnableInternal
+        }
+        set(slideshowEnabled) {
+            isSlideshowEnableInternal = slideshowEnabled
+            mapView.hidden = slideshowEnabled
+            slideshow.hidden = !slideshowEnabled
+            arrowImageView.hidden = !slideshowEnabled
+        }
+    }
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var slideshow: ImageSlideshow!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var roomsTableView: UITableView!
     
     var presenter: IVenueDetailPresenter!
@@ -73,7 +91,10 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        mapView.myLocationEnabled = true
+        mapView.delegate = self
+        
         let recognizer = UITapGestureRecognizer(target: self, action: "click")
         slideshow.addGestureRecognizer(recognizer)
     }
@@ -96,6 +117,17 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         self.presentViewController(ctr, animated: true, completion: nil)
     }
     
+    func addMarker(venue: VenueDTO) {
+        var marker: GMSMarker
+        var bounds = GMSCoordinateBounds()
+        marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
+        marker.map = mapView
+        marker.title = venue.name
+        bounds = bounds.includingCoordinate(marker.position)
+        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+    }
+    
     func reloadRoomsData() {
         roomsTableView.delegate = self
         roomsTableView.dataSource = self
@@ -103,7 +135,9 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
     }
     
     @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
-        presenter.showVenueLocationDetail()
+        if slideshowEnabled {
+            presenter.showVenueLocationDetail()
+        }
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -120,7 +154,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         self.presenter.showVenueLocationDetail()
-    }
+    }*/
 }
