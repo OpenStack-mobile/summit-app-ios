@@ -124,6 +124,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
         marker.map = mapView
         marker.title = venue.name
+        marker.icon = UIImage(named: "marker")
         bounds = bounds.includingCoordinate(marker.position)
         mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
     }
