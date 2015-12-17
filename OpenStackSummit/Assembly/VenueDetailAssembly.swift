@@ -58,7 +58,6 @@ public class VenueDetailAssembly: TyphoonAssembly {
             
             definition.injectProperty("interactor", with: self.venueDetailInteractor())
             definition.injectProperty("viewController", with: self.venueLocationDetailViewController())
-            definition.injectProperty("wireframe", with: self.venueDetailWireframe())
         }
     }
     
