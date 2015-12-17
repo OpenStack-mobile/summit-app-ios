@@ -67,7 +67,7 @@ PODS:
   - XLPagerTabStrip (2.0.0)
 
 DEPENDENCIES:
-  - AeroGearHttp
+  - AeroGearHttp (from `https://github.com/claudioredi/aerogear-ios-http.git`)
   - AeroGearOAuth2 (from `https://github.com/claudioredi/aerogear-ios-oauth2.git`,
     branch `openstack`)
   - AFHorizontalDayPicker (from `https://github.com/alexfedosov/AFHorizontalDayPicker.git`)
@@ -91,6 +91,8 @@ DEPENDENCIES:
   - XLPagerTabStrip (~> 2.0)
 
 EXTERNAL SOURCES:
+  AeroGearHttp:
+    :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
     :branch: openstack
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
@@ -98,6 +100,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
 
 CHECKOUT OPTIONS:
+  AeroGearHttp:
+    :commit: 76dae3175eb62c815e1a46eec6159d0cb973a0ee
+    :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
     :commit: 9fdcc420e6ef559a965a838193a368c03d2fdb67
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
@@ -106,7 +111,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
 
 SPEC CHECKSUMS:
-  AeroGearHttp: 4c0fe1065817199bc4b64b17deec68e9d7c341fe
+  AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
   AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
