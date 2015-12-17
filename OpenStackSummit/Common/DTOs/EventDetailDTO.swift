@@ -27,7 +27,6 @@ public class EventDetailDTO: ScheduleItemDTO {
     }
     
     public var venueId: Int?
-    public var venueRoomId: Int?
     public var eventDescription = ""
     public var tags = ""
     public var speakers = [PresentationSpeakerDTO]()
