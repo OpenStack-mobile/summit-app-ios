@@ -16,7 +16,7 @@ public protocol IDataUpdatePoller {
 }
 
 public class DataUpdatePoller: NSObject, IDataUpdatePoller {
-    public var pollingInterval: Double = 120
+    public var pollingInterval: Double = 30
     var timer: NSTimer?
     var httpFactory: HttpFactory!
     var dataUpdateProcessor: DataUpdateProcessor!

@@ -31,6 +31,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         speaker.firstName = "Enzo"
         speaker.lastName = "Francescoli"
         let venue = Venue()
+        venue.id = 2
         venue.name = "Test Venue"
         let venueRoom = VenueRoom()
         venueRoom.id = 1
@@ -87,8 +88,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertTrue(eventDetailDTO.allowFeedback)
         XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
-        XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
-        XCTAssertNil(eventDetailDTO.venueId)
+        XCTAssertEqual(2, eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.moderator)
         XCTAssertEqual(event.presentation!.level + " Level", eventDetailDTO.level)
     }
@@ -99,6 +99,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         speaker.firstName = "Enzo"
         speaker.lastName = "Francescoli"
         let venue = Venue()
+        venue.id = 2
         venue.name = "Test Venue"
         let venueRoom = VenueRoom()
         venueRoom.id = 1
@@ -156,8 +157,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertTrue(eventDetailDTO.allowFeedback)
         XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
-        XCTAssertEqual(venueRoom.id, eventDetailDTO.venueRoomId)
-        XCTAssertNil(eventDetailDTO.venueId)
+        XCTAssertEqual(2, eventDetailDTO.venueId)
         XCTAssertEqual(speaker.id, eventDetailDTO.moderator?.id)
         XCTAssertEqual(event.presentation!.level + " Level", eventDetailDTO.level)
     }
@@ -198,7 +198,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual("", eventDetailDTO.track)
         XCTAssertEqual("", eventDetailDTO.tags)
         XCTAssertEqual(venue.id, eventDetailDTO.venueId)
-        XCTAssertNil(eventDetailDTO.venueRoomId)
+        XCTAssertEqual(1, eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.moderator)
         XCTAssertEqual("", eventDetailDTO.level)
     }

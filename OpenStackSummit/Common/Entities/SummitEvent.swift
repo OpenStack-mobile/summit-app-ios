@@ -24,6 +24,6 @@ public class SummitEvent: NamedEntity {
     public dynamic var venueRoom : VenueRoom?
     
     public var summit: Summit {
-        return linkingObjects(Summit.self, forProperty: "events").first!
+        return try! Realm().objects(Summit).first!
     }
 }

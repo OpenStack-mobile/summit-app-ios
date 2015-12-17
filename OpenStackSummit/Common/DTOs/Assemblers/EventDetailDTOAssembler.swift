@@ -35,7 +35,6 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         
         eventDetailDTO.venueId = event.venue?.id
         if let venueRoom = event.venueRoom {
-            eventDetailDTO.venueRoomId = venueRoom.id
             eventDetailDTO.venueId = venueRoom.venue.id
         }
         
