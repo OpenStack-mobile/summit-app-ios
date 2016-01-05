@@ -18,7 +18,7 @@ public class ImageDeserializer: NSObject, IDeserializer {
         let image = Image()
         
         image.id = json["id"].intValue
-        image.url = json["url"].stringValue
+        image.url = json["image_url"].stringValue
         
         return image
     }
