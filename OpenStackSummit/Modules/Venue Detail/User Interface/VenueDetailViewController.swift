@@ -56,7 +56,8 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
                 var imageInputs:[HanekeInputSource] = []
                 
                 for map in mapsInternal {
-                    imageInputs.append(HanekeInputSource(urlString: map, frame: slideshow.bounds)!)
+                    let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    imageInputs.append(HanekeInputSource(urlString: url, frame: slideshow.bounds)!)
                 }
                 
                 slideshow.setImageInputs(imageInputs)
