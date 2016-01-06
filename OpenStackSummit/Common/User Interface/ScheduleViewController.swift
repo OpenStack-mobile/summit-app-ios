@@ -72,19 +72,17 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
         scheduleView.dayPicker.dayNumberInactiveColor = UIColor(hexaString: "#4A4A4A")
         scheduleView.dayPicker.dayNumberSelectedColor = UIColor(hexaString: "#FFFFFF")
         
-        /*
-        scheduleView.dayPicker.dayNumberActiveFont = UIFont.systemFontOfSize(16)
-        scheduleView.dayPicker.dayNumberInactiveFont = UIFont.systemFontOfSize(16)
-        scheduleView.dayPicker.dayNumberSelectedFont = UIFont.systemFontOfSize(16)*/
+        scheduleView.dayPicker.dayNumberActiveFont = UIFont.systemFontOfSize(13)
+        scheduleView.dayPicker.dayNumberInactiveFont = UIFont.systemFontOfSize(13)
+        scheduleView.dayPicker.dayNumberSelectedFont = UIFont.systemFontOfSize(13)
         
         scheduleView.dayPicker.dayNameActiveColor = UIColor(hexaString: "#4A4A4A")
         scheduleView.dayPicker.dayNameInactiveColor = UIColor(hexaString: "#4A4A4A")
         scheduleView.dayPicker.dayNameSelectedColor = UIColor(hexaString: "#FFFFFF")
         
-        /*
-        scheduleView.dayPicker.dayNameActiveFont = UIFont.systemFontOfSize(16)
-        scheduleView.dayPicker.dayNameInactiveFont = UIFont.systemFontOfSize(16)
-        scheduleView.dayPicker.dayNameSelectedFont = UIFont.systemFontOfSize(16)*/
+        scheduleView.dayPicker.dayNameActiveFont = UIFont.systemFontOfSize(13)
+        scheduleView.dayPicker.dayNameInactiveFont = UIFont.systemFontOfSize(13)
+        scheduleView.dayPicker.dayNameSelectedFont = UIFont.systemFontOfSize(13)
         
         scheduleView.dayPicker.backgroundActiveColor = UIColor(hexaString: "#E5E5E5")
         scheduleView.dayPicker.backgroundInactiveColor = UIColor(hexaString: "#E5E5E5")
@@ -109,6 +107,64 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func setInactiveAppearanceWithCell(cell: AFDayCell) {
+        cell.dayNumber.font = UIFont.systemFontOfSize(13)
+        cell.dayNumber.textColor = scheduleView.dayPicker.dayNameActiveColor
+        cell.dayName.font = UIFont.systemFontOfSize(13)
+        cell.dayName.textColor = scheduleView.dayPicker.dayNameActiveColor
+        cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundColor
+    }
+    
+    func setSelectedAppearanceWithCell(cell: AFDayCell) {
+        cell.dayNumber.font = UIFont.systemFontOfSize(13)
+        cell.dayNumber.textColor = scheduleView.dayPicker.dayNameSelectedColor
+        cell.dayName.font = UIFont.systemFontOfSize(13)
+        cell.dayName.textColor = scheduleView.dayPicker.dayNameSelectedColor
+        cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundSelectedColor
+    }
+    
+    func setActiveAppearanceWithCell(cell: AFDayCell) {
+        cell.dayNumber.font = UIFont.systemFontOfSize(13)
+        cell.dayNumber.textColor = scheduleView.dayPicker.dayNameActiveColor
+        cell.dayName.font = UIFont.systemFontOfSize(13)
+        cell.dayName.textColor = scheduleView.dayPicker.dayNameActiveColor
+        cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundActiveColor
+    }
+
+    func horizontalDayPicker(picker: AFHorizontalDayPicker!, requestCustomizedCellFromCell cell: AFDayCell!) -> AFDayCell! {
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // configure day number (example: 23 or 1 or 45)
+        let dayNumber = UILabel(frame: CGRectMake(0.0, cell.contentView.frame.size.height / 3 * 2 - cell.contentView.frame.size.height / 6, cell.contentView.frame.size.width, cell.contentView.frame.size.height / 3))
+        dayNumber.textAlignment = .Center
+        dayNumber.text = "\(cell.date.mt_dayOfMonth())"
+        cell.dayNumber = dayNumber
+        cell.dayNumber.font = UIFont.systemFontOfSize(13)
+        cell.contentView.addSubview(dayNumber)
+        
+        // configure day name  (example: Thu, Чт)
+        let dayName = UILabel(frame: CGRectMake(0.0, 0.0, cell.contentView.frame.size.width, cell.contentView.frame.size.height / 3 * 2))
+        dayName.textAlignment = .Center
+        dayName.text = cell.date.mt_stringFromDateWithFormat("EEE", localized: true).uppercaseString
+        cell.dayName = dayName
+        cell.dayName.font = UIFont.systemFontOfSize(13)
+        cell.contentView.addSubview(dayName)
+
+        if !cell.active {
+            self.setInactiveAppearanceWithCell(cell)
+        }
+        else {
+            if cell.wasSelected {
+                self.setSelectedAppearanceWithCell(cell)
+            }
+            else {
+                self.setActiveAppearanceWithCell(cell)
+            }
+        }
+        
+        return cell
     }
 
     func horizontalDayPicker(horizontalDayPicker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
