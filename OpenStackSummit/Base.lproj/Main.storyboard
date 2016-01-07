@@ -512,7 +512,6 @@
                         <outlet property="myFeedbackRateView" destination="q8P-iS-qfl" id="zy7-8B-RmN"/>
                         <outlet property="myFeedbackReviewLabel" destination="KiN-bt-dc3" id="U0L-N2-Ahe"/>
                         <outlet property="myFeedbackView" destination="Is1-sU-8Sx" id="65p-gN-cAC"/>
-                        <outlet property="myFeedbackViewHeightConstraint" destination="wxi-Km-0An" id="zpc-77-IE4"/>
                         <outlet property="scheduledButton" destination="P8z-ji-7eE" id="bAa-sK-VF5"/>
                         <outlet property="speakersHeightConstraint" destination="rFg-K9-nsW" id="dLc-zX-Jck"/>
                         <outlet property="speakersTableView" destination="zi0-2e-FtU" id="7AM-1J-viO"/>

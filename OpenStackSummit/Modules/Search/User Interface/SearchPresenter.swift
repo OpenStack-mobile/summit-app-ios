@@ -106,7 +106,8 @@ public class SearchPresenter: ScheduleablePresenter {
         let event = events[index]
         cell.eventTitle = event.name
         cell.eventType = event.eventType
-        cell.time = event.dateTime
+        cell.time = event.time
+        cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = interactor.isMemberLoggedIn()
