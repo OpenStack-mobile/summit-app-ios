@@ -96,7 +96,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 
                 var feedbackPageWithoutMe = [FeedbackDTO]()
                 for feedbackDTO in feedbackPage! {
-                    if self.myFeedbackForEvent != nil && feedbackDTO.owner != self.myFeedbackForEvent!.owner {
+                    if self.myFeedbackForEvent == nil || (feedbackDTO.owner != self.myFeedbackForEvent!.owner) {
                         feedbackPageWithoutMe.append(feedbackDTO)
                     }
                 }
