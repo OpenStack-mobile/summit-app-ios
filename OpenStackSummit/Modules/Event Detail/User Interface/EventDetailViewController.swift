@@ -21,6 +21,7 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     func showActivityIndicator()
     func hideActivityIndicator()
     
+    var navigationController: UINavigationController? { get }
     var presenter: IEventDetailPresenter! { get set }
     var eventTitle: String! { get set }
     var eventDescription: String! { get set }
