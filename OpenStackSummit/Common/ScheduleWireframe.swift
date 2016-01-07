@@ -19,6 +19,6 @@ public class ScheduleWireframe: NSObject, IScheduleWireframe {
     public func showEventDetail(eventId: Int) { preconditionFailure("This method must be overridden")  }
     
     public func showEventDetail(eventId: Int, viewController: UIViewController) {
-        eventDetailWireframe.presentEventDetailView(eventId, viewController: viewController.navigationController!)
+        eventDetailWireframe.presentEventDetailView(eventId, onNavigationViewController: viewController.navigationController!)
     }
 }

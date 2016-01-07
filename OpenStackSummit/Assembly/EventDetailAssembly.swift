@@ -22,10 +22,11 @@ class EventDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventDetailWireframe.self) {
             (definition) in
             
-            definition.injectProperty("eventDetailViewController", with: self.eventDetailViewController())
+            //definition.injectProperty("eventDetailViewController", with: self.eventDetailViewController())
             definition.injectProperty("feedbackEditWireframe", with: self.feedbackEditWireframe.feedbackEditWireframe())
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
-            definition.injectProperty("venueDetailWireframe", with: self.venueDetailAssembly.venueDetailWireframe())   
+            definition.injectProperty("venueDetailWireframe", with: self.venueDetailAssembly.venueDetailWireframe())
+            definition.scope = TyphoonScope.Singleton
         }
     }
     

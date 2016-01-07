@@ -137,17 +137,17 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
     }
     
     public func leaveFeedback() {
-        wireframe.showFeedbackEdit(eventId)
+        wireframe.showFeedbackEdit(eventId, onViewController: viewController)
     }
     
     public func showSpeakerProfile(index: Int) {
         let speaker = event.speakers[index]
-        wireframe.showSpeakerProfile(speaker.id)
+        wireframe.showSpeakerProfile(speaker.id, onViewController: viewController)
     }
     
     public func showVenueDetail() {
         if event.venueId != nil {
-            wireframe.showVenueDetail(event.venueId!)
+            wireframe.showVenueDetail(event.venueId!, onViewController: viewController)
         }
     }
     

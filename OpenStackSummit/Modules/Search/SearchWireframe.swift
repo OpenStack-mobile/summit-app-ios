@@ -23,7 +23,7 @@ public class SearchWireframe: NSObject, ISearchWireframe {
     var eventDetailWireframe : IEventDetailWireframe!
     
     public func showEventDetail(eventId: Int) {
-        eventDetailWireframe.presentEventDetailView(eventId, viewController: searchViewController.navigationController!)
+        eventDetailWireframe.presentEventDetailView(eventId, onNavigationViewController: searchViewController.navigationController!)
     }
     
     public func showTrackSchedule(track: TrackDTO) {
