@@ -26,3 +26,6 @@ pod 'Parse'
 target 'OpenStackSummitTests' do
     pod 'Mockingjay'
 end
+
+# ux testing sdk
+pod 'UXTesting'

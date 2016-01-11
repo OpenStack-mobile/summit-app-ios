@@ -7,6 +7,7 @@
 //
 
 import UIKit
+    import UXTesting
 import AeroGearOAuth2
 import GoogleMaps
 import Parse
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Crashlytics.sharedInstance().debugMode = true
         //Fabric.with([Crashlytics()])
 
+        UXTestingManager.sharedInstance().appKey = "lUMy9RUlm4cQqQeG_1oc_g"
+        
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBnBFBj9ixFjw1OJhAT3FC87JOOS-FuE0Q")
         
