@@ -24,10 +24,11 @@ public class SecurityManager: NSObject {
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
             clientId: "ugSc.5IJB7MOpVHOs4anxyZi~PJsIfJJ.openstack.client",
+            refreshTokenEndpoint: "oauth2/token",
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "https://testresource-server.openstack.org/summits/read", "https://testresource-server.openstack.org/summits/write"],
+            scopes: ["openid", "https://testresource-server.openstack.org/summits/read", "https://testresource-server.openstack.org/summits/write", "offline_access"],
             clientSecret: "NvEAT3ScN5c5p9yPS67GeoBo2M_8YLFezeAdALF~dsD-pxXmBU6JRL0ZOyNpGEhM"
         )
         
