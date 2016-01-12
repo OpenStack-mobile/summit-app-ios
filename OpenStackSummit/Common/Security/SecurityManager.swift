@@ -1,4 +1,4 @@
-    //
+//
 //  SecurityManager.swift
 //  OpenStackSummit
 //
@@ -104,13 +104,13 @@ public class SecurityManager: NSObject {
     
     public func getCurrentMember() -> Member? {
         var currentMember: Member?
-        if (oauthModuleOpenID.isAuthorized() && session.get(kCurrentMemberId) != nil) {
+        if isLoggedIn() {
             currentMember = memberDataStore.getByIdLocal(session.get(kCurrentMemberId) as! Int)
         }
         return currentMember;
     }
     
     public func isLoggedIn() -> Bool {
-        return oauthModuleOpenID.isAuthorized() && session.get(kCurrentMemberId) != nil
+        return session.get(kCurrentMemberId) != nil
     }
 }
