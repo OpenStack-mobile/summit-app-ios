@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 import UXTesting
 import AeroGearOAuth2
 import GoogleMaps
@@ -19,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //Crashlytics.sharedInstance().debugMode = true
-        //Fabric.with([Crashlytics()])
+        Fabric.with([Crashlytics.self])
 
         UXTestingManager.sharedInstance().appKey = "lUMy9RUlm4cQqQeG_1oc_g"
         
