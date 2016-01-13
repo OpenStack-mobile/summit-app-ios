@@ -27,5 +27,9 @@ target 'OpenStackSummitTests' do
     pod 'Mockingjay'
 end
 
+# analytics sdk
+pod 'Fabric'
+pod 'Crashlytics'
+
 # ux testing sdk
 pod 'UXTesting'
