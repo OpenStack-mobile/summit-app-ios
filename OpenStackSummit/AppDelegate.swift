@@ -1,4 +1,4 @@
-	//
+//
 //  AppDelegate.swift
 //  OpenStackSummit
 //
@@ -7,7 +7,7 @@
 //
 
 import UIKit
-    import UXTesting
+import UXTesting
 import AeroGearOAuth2
 import GoogleMaps
 import Parse

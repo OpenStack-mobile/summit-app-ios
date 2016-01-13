@@ -50,7 +50,7 @@ public class SecurityManager: NSObject {
         oauthModuleServiceAccount = AccountManager.addAccount(config, moduleClass: OpenStackOAuth2Module.self)
     }
     
-    public func login(completionBlock: (NSError?) -> Void) {       
+    public func login(completionBlock: (NSError?) -> Void) {
         oauthModuleOpenID.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             if (error != nil) {
                 completionBlock(error)
