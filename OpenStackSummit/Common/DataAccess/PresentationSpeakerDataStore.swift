@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RealmSwift
+
 @objc
 public protocol IPresentationSpeakerDataStore {
     func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker]
@@ -20,7 +22,8 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
     
     public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
         
-        var result = realm.objects(PresentationSpeaker.self).sorted("firstName")
+        let sortProperties = [SortDescriptor(property: "firstName", ascending: true), SortDescriptor(property: "lastName", ascending: true)]
+        var result = realm.objects(PresentationSpeaker.self).sorted(sortProperties)
         
         if searchTerm != nil && !(searchTerm!.isEmpty) {
             result = result.filter("fullName CONTAINS [c]%@ or bio CONTAINS [c]%@ ", searchTerm!, searchTerm!)
