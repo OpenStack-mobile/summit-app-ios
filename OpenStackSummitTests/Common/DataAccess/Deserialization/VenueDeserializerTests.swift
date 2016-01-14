@@ -90,10 +90,6 @@ class VenueDeserializerTests: XCTestCase {
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
         
-        let venueStored = Venue()
-        venueStored.id = 1
-        deserializerStorage.add(venueStored)
-        
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = VenueDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
         let json = "{}"
@@ -116,5 +112,51 @@ class VenueDeserializerTests: XCTestCase {
         //Assert
         XCTAssertEqual(expectedExceptionCount, exceptionCount)
         XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, lat, lng, address_1, location_type"))
+    }
+
+    func test_deserialize_jsonWithVenueIdAndVenueExistOnDeserializerStorage_returnsCorrectInstance() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+    
+        let venueStored = Venue()
+        venueStored.id = 1
+        deserializerStorage.add(venueStored)
+        
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = VenueDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "1"
+        
+        //Act
+        let venue = try! deserializer.deserialize(json) as! Venue
+        
+        //Assert
+        XCTAssertEqual(venueStored.id, venue.id)
+    }
+    
+    func test_deserialize_jsonWithVenueIdAndVenueNotExistOnDeserializerStorage_throwsEntityNotFound() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = VenueDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "1"
+        let expectedExceptionCount = 1
+        var exceptionCount = 0
+        
+        //Act
+        do {
+            try deserializer.deserialize(json) as! Venue
+        }
+        catch DeserializerError.EntityNotFound {
+            exceptionCount++
+        }
+        catch {
+            
+        }
+        
+        //Assert
+        XCTAssertEqual(expectedExceptionCount, exceptionCount)
     }
 }

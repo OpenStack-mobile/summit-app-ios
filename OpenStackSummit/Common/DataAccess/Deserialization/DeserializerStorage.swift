@@ -21,14 +21,14 @@ public class DeserializerStorage: NSObject {
         deserializedEntityDictionary[className]![entity.id] = entity
     }
     
-    public func get<T : BaseEntity>(id: Int) -> T {
+    public func get<T : BaseEntity>(id: Int) -> T? {
         var entity: T?
         let className = _stdlib_getDemangledTypeName(T())
         entity = deserializedEntityDictionary[className]?[id] as? T
         if (entity == nil) {
             entity = realm.objects(T.self).filter("id = \(id)").first
         }
-        return entity!
+        return entity
     }
     
     public func getAll<T : BaseEntity>() -> [T] {

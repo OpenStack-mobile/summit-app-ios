@@ -18,7 +18,10 @@ public class TicketTypeDeserializer: NSObject, IDeserializer {
         let ticketType: TicketType
         
         if let ticketTypeId = json.int {
-            ticketType = deserializerStorage.get(ticketTypeId)
+            guard let check: TicketType = deserializerStorage.get(ticketTypeId) else {
+                throw DeserializerError.EntityNotFound("Ticket type with id \(ticketTypeId) not found on deserializer storage")
+            }
+            ticketType = check
         }
         else {
             try validateRequiredFields(["id", "name", "allowed_summit_types"], inJson: json)

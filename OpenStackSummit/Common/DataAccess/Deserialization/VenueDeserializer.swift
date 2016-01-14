@@ -27,7 +27,10 @@ public class VenueDeserializer: NSObject, IDeserializer {
         let venue : Venue
         
         if let venueId = json.int {
-            venue = deserializerStorage.get(venueId)
+            guard let check: Venue = deserializerStorage.get(venueId) else {
+                throw DeserializerError.EntityNotFound("Venue with id \(venueId) not found on deserializer storage")
+            }
+            venue = check
         }
         else {
             try validateRequiredFields(["id", "lat", "lng", "address_1", "location_type"], inJson: json)

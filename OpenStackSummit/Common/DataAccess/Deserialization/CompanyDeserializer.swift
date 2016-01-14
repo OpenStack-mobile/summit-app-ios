@@ -16,7 +16,10 @@ public class CompanyDeserializer: NamedEntityDeserializer, IDeserializer {
         let company : Company
         
         if let companyId = json.int {
-            company = deserializerStorage.get(companyId)
+            guard let check: Company = deserializerStorage.get(companyId) else {
+                throw DeserializerError.EntityNotFound("Company with id \(companyId) not found on deserializer storage")
+            }
+            company = check
         }
         else {
             company = super.deserialize(json) as Company

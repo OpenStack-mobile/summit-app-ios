@@ -18,4 +18,6 @@ struct Constants {
         static let GeneralScheduleFilterSelections = "kGeneralScheduleFilterSelections"
         static let SearchTerm = "kSearchTerm"
     }
+    
+    static let ErrorDomain = "org.openstack.ios.summit"
 }

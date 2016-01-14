@@ -26,7 +26,10 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
         var summitEvent = SummitEvent()
         
         if let eventId = json.int {
-            summitEvent = deserializerStorage.get(eventId)
+            guard let check: SummitEvent = deserializerStorage.get(eventId) else {
+                throw DeserializerError.EntityNotFound("Event with id \(eventId) not found on deserializer storage")
+            }
+            summitEvent = check
         }
         else {
             try validateRequiredFields(["id", "start_date", "end_date", "title", "allow_feedback", "type_id"], inJson: json)
