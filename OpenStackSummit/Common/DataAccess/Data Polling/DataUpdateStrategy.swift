@@ -24,7 +24,9 @@ public class DataUpdateStrategy: NSObject {
         case .Insert, .Update:
             genericDataStore.saveOrUpdateLocal(dataUpdate.entity, completionBlock: nil)
         case .Delete:
-            genericDataStore.deleteLocal(dataUpdate.entity, completionBlock: nil)
+            if dataUpdate.entity != nil {
+                genericDataStore.deleteLocal(dataUpdate.entity, completionBlock: nil)                
+            }
         }
     }
 }

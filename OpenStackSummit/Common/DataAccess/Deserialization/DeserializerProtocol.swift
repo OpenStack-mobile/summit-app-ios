@@ -11,6 +11,7 @@ import SwiftyJSON
 
 public enum DeserializerError: ErrorType {
     case BadFormat(String)
+    case EntityNotFound(String)
 }
 
 public protocol IDeserializer {

@@ -73,7 +73,12 @@ public class SummitDeserializer: NSObject, IDeserializer {
         for (_, venueJSON) in json["locations"] {
             if (isVenueRoom(venueJSON)) {
                 venueRoom = try deserializer.deserialize(venueJSON) as! VenueRoom
-                venue = deserializerStorage.get(venueJSON["venue_id"].intValue)
+                
+                let venueId = venueJSON["venue_id"].intValue
+                guard let check: Venue = deserializerStorage.get(venueId) else {
+                    throw DeserializerError.EntityNotFound("Venue with id \(venueId) not found on deserializer storage")
+                }
+                venue = check
                 venue.venueRooms.append(venueRoom)
             }
         }

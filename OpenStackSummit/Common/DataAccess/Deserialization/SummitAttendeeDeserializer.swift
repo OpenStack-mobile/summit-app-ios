@@ -27,7 +27,10 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
         let summitAttendee: SummitAttendee
         
         if let summitAttendeeId = json.int {
-            summitAttendee = deserializerStorage.get(summitAttendeeId)
+            guard let check: SummitAttendee = deserializerStorage.get(summitAttendeeId) else {
+                throw DeserializerError.EntityNotFound("Summit attendee with id \(summitAttendeeId) not found on deserializer storage")
+            }
+            summitAttendee = check
         }
         else {
             try validateRequiredFields(["id", "first_name", "last_name"], inJson: json)

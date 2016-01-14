@@ -17,7 +17,10 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
         let feedback : Feedback
         
         if let feedbackId = json.int {
-            feedback = deserializerStorage.get(feedbackId)
+            guard let check: Feedback = deserializerStorage.get(feedbackId) else {
+                throw DeserializerError.EntityNotFound("feedback with id \(feedbackId) not found on deserializer storage")
+            }
+            feedback = check
         }
         else {
             try validateRequiredFields(["id", "rate", "created_date", "event_id"], inJson: json)

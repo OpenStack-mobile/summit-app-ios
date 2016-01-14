@@ -165,6 +165,7 @@
 		CACFBC461B9F951100095E44 /* FeedbackDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACFBC451B9F951100095E44 /* FeedbackDTO.swift */; };
 		CACFBC481BA0A0E200095E44 /* FeedbackDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACFBC471BA0A0E200095E44 /* FeedbackDTOAssembler.swift */; };
 		CACFBC4A1BA0A23900095E44 /* FeedbackDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACFBC491BA0A23900095E44 /* FeedbackDataStore.swift */; };
+		CAD254971C47D11F00C2001C /* DeserializerStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD254961C47D11F00C2001C /* DeserializerStorageMock.swift */; };
 		CAD261681B8D6BAB00E6382F /* ITrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD261671B8D6BAB00E6382F /* ITrigger.swift */; };
 		CAD2616A1B8D6C9500E6382F /* SummitTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD261691B8D6C9500E6382F /* SummitTrigger.swift */; };
 		CAD27E361BAB076000EE9583 /* MemberDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E351BAB076000EE9583 /* MemberDTO.swift */; };
@@ -503,6 +504,7 @@
 		CACFBC451B9F951100095E44 /* FeedbackDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDTO.swift; sourceTree = "<group>"; };
 		CACFBC471BA0A0E200095E44 /* FeedbackDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDTOAssembler.swift; sourceTree = "<group>"; };
 		CACFBC491BA0A23900095E44 /* FeedbackDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDataStore.swift; sourceTree = "<group>"; };
+		CAD254961C47D11F00C2001C /* DeserializerStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerStorageMock.swift; sourceTree = "<group>"; };
 		CAD261671B8D6BAB00E6382F /* ITrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITrigger.swift; sourceTree = "<group>"; };
 		CAD261691B8D6C9500E6382F /* SummitTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTrigger.swift; sourceTree = "<group>"; };
 		CAD27E351BAB076000EE9583 /* MemberDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDTO.swift; sourceTree = "<group>"; };
@@ -1144,6 +1146,7 @@
 				CAE19FB51C0E5E6000B35CE5 /* SummitDataStoreMock.swift */,
 				CA894AAD1BD937AB005DE469 /* VenueRoomDTOAssemblerMock.swift */,
 				CADB079B1C1F7C9E007876C2 /* ReachabilityMock.swift */,
+				CAD254961C47D11F00C2001C /* DeserializerStorageMock.swift */,
 			);
 			path = TestUtils;
 			sourceTree = "<group>";
@@ -1922,6 +1925,7 @@
 					};
 					CAD906211B72B34F00BA5647 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 775U6X6R5M;
 						TestTargetID = CAD9060A1B72B34F00BA5647;
 					};
 					CAD9062C1B72B34F00BA5647 = {
@@ -2404,6 +2408,7 @@
 				CAD6C3D71BB759D800F8C2D6 /* DataUpdateProcessorMock.swift in Sources */,
 				CADD510E1BD7CDF800400AF4 /* SummitAttendeeRemoteDataStoreMock.swift in Sources */,
 				CAD3ABAC1BA847C500F2186B /* SummitDeserializerTests.swift in Sources */,
+				CAD254971C47D11F00C2001C /* DeserializerStorageMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2575,6 +2580,8 @@
 			baseConfigurationReference = 974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -2583,6 +2590,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.OpenStackSummitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStackSummit.app/OpenStackSummit";
 			};
 			name = Debug;
@@ -2592,6 +2600,8 @@
 			baseConfigurationReference = A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -2600,6 +2610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.OpenStackSummitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStackSummit.app/OpenStackSummit";
 			};
 			name = Release;

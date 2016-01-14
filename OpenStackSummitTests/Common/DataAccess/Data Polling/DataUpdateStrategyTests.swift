@@ -106,5 +106,28 @@ class DataUpdateStrategyTests: XCTestCase {
         XCTAssertEqual(1, realm.objects(SummitEvent).count)
         XCTAssertEqual(0, realm.objects(SummitEvent).filter("id = %@", 1).count)
     }
+
+    func test_process_dataUpdateWithEventDeleteAndEntityIsNull_noActionIsDoneAndThereIsNoCrash() {
+        // Arrange
+        let genericDataStore = GenericDataStore()
+        let event2 = SummitEvent()
+        event2.id = 2
+        try! realm.write {
+            self.realm.add(event2)
+        }
+        
+        let dataUpdateStrategy = DataUpdateStrategy(genericDataStore: genericDataStore)
+        
+        let dataUpdate = DataUpdate()
+        dataUpdate.id = 1
+        dataUpdate.operation = DataOperation.Delete
+        dataUpdate.entity = nil
+        
+        // Act
+        try! dataUpdateStrategy.process(dataUpdate)
+        
+        // Assert
+        XCTAssertEqual(1, realm.objects(SummitEvent).count)
+    }
     
 }

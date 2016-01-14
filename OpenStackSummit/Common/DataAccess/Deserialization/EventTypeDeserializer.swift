@@ -16,7 +16,10 @@ public class EventTypeDeserializer: NamedEntityDeserializer, IDeserializer {
         let eventType : EventType
         
         if let eventTypeId = json.int {
-            eventType = deserializerStorage.get(eventTypeId)
+            guard let check: EventType = deserializerStorage.get(eventTypeId) else {
+                throw DeserializerError.EntityNotFound("Event type with id \(eventTypeId) not found on deserializer storage")
+            }
+            eventType = check
         }
         else {
             try validateRequiredFields(["id", "name"], inJson: json)

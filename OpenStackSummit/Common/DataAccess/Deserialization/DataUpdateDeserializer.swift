@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Crashlytics
 
 public class DataUpdateDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
@@ -38,10 +39,18 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
             throw DeserializerError.BadFormat("Operation is not valid")
         }
         
-        if let deserializer = try deserializerFactory.create(className) {
-            dataUpdate.entity = operationType.stringValue != "DELETE" && className != "MySchedule"
-                ? try deserializer.deserialize(json["entity"])
-                : try deserializer.deserialize(json["entity_id"])
+        do {
+            if let deserializer = try deserializerFactory.create(className) {
+                dataUpdate.entity = operationType.stringValue != "DELETE" && className != "MySchedule"
+                    ? try deserializer.deserialize(json["entity"])
+                    : try deserializer.deserialize(json["entity_id"])
+            }
+        }
+        catch DeserializerError.EntityNotFound(let em) {
+            let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("Entity not found", value: em, comment: "")]
+            let err = NSError(domain: Constants.ErrorDomain, code: 13001, userInfo: userInfo)
+            Crashlytics.sharedInstance().recordError(err)
+            print(em)
         }
         
         return dataUpdate

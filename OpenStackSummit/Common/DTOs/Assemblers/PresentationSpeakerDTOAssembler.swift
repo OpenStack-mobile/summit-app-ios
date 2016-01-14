@@ -24,8 +24,8 @@ public class PresentationSpeakerDTOAssembler: NSObject, IPresentationSpeakerDTOA
         self.personListItemDTOAssembler = personListItemDTOAssembler
     }
     
-    public func createDTO(attendee: PresentationSpeaker) -> PresentationSpeakerDTO {
-        let personListDTO = personListItemDTOAssembler.createDTO(attendee)
+    public func createDTO(speaker: PresentationSpeaker) -> PresentationSpeakerDTO {
+        let personListDTO = personListItemDTOAssembler.createDTO(speaker)
         let speakerDTO = PresentationSpeakerDTO()
         speakerDTO.id = personListDTO.id
         speakerDTO.name = personListDTO.name
@@ -33,11 +33,11 @@ public class PresentationSpeakerDTOAssembler: NSObject, IPresentationSpeakerDTOA
         speakerDTO.pictureUrl = personListDTO.pictureUrl
         speakerDTO.isAttendee = personListDTO.isAttendee
         speakerDTO.isSpeaker = personListDTO.isSpeaker
-        speakerDTO.location = attendee.location
-        speakerDTO.email = attendee.email
-        speakerDTO.twitter = attendee.twitter
-        speakerDTO.irc = attendee.irc
-        speakerDTO.bio = attendee.bio
+        speakerDTO.location = speaker.location
+        speakerDTO.email = speaker.email
+        speakerDTO.twitter = speaker.twitter
+        speakerDTO.irc = speaker.irc
+        speakerDTO.bio = speaker.bio
         return speakerDTO
     }
 }

@@ -17,7 +17,10 @@ public class SummitTypeDeserializer: NamedEntityDeserializer, IDeserializer {
         let summitType : SummitType
         
         if let summitTypeId = json.int {
-            summitType = deserializerStorage.get(summitTypeId)
+            guard let check: SummitType = deserializerStorage.get(summitTypeId) else {
+                throw DeserializerError.EntityNotFound("Summit type with id \(summitTypeId) not found on deserializer storage")
+            }
+            summitType = check
         }
         else {
             try validateRequiredFields(["id", "name"], inJson: json)
