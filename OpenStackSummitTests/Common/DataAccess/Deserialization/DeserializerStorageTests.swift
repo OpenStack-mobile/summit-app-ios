@@ -14,7 +14,7 @@ import RealmSwift
 class DeserializerStorageTests: XCTestCase {
     
     var realm = try! Realm()
-
+    
     override func setUp() {
         super.setUp()
         
@@ -33,14 +33,13 @@ class DeserializerStorageTests: XCTestCase {
         let companyId = 1
         let company = Company()
         company.id = companyId
-        let companyFromStorage : Company
         
         //Act
         deserializerStorage.add(company)
-        companyFromStorage = deserializerStorage.get(companyId)
-
+        let companyFromStorage: Company? = deserializerStorage.get(companyId)
+        
         //Assert
-        XCTAssertEqual(company.id, companyFromStorage.id)
+        XCTAssertEqual(company.id, companyFromStorage!.id)
     }
     
     func test_Add_CompanyAndEventType_StorageContainsBothAddedEntities() {
@@ -49,22 +48,20 @@ class DeserializerStorageTests: XCTestCase {
         let companyId = 1
         let company = Company()
         company.id = companyId
-        let companyFromStorage : Company
-
+        
         let eventTypeId = 2
         let eventType = EventType()
         eventType.id = eventTypeId
-        let eventTypeFromStorage : EventType
         
         //Act
         deserializerStorage.add(company)
         deserializerStorage.add(eventType)
-        companyFromStorage = deserializerStorage.get(companyId)
-        eventTypeFromStorage = deserializerStorage.get(eventTypeId)
+        let companyFromStorage: Company? = deserializerStorage.get(companyId)
+        let eventTypeFromStorage: EventType?  = deserializerStorage.get(eventTypeId)
         
         //Assert
-        XCTAssertEqual(company.id, companyFromStorage.id)
-        XCTAssertEqual(eventType.id, eventTypeFromStorage.id)
+        XCTAssertEqual(company.id, companyFromStorage!.id)
+        XCTAssertEqual(eventType.id, eventTypeFromStorage!.id)
     }
     
     func test_Add_TwoTimesSameCompany_StorageContainsSingleCompany() {
@@ -140,7 +137,7 @@ class DeserializerStorageTests: XCTestCase {
         //Assert
         XCTAssertTrue(exist)
     }
-
+    
     func test_Exist_CompanyPresentOnDatabaseStorage_ReturnsTrue() {
         //Arrange
         let deserializerStorage = DeserializerStorage()
@@ -157,7 +154,7 @@ class DeserializerStorageTests: XCTestCase {
         //Assert
         XCTAssertTrue(exist)
     }
-
+    
     func test_Clear_InMemoryStorageContainsOneCompany_InMemoryStorageIsEmpty() {
         //Arrange
         let deserializerStorage = DeserializerStorage()

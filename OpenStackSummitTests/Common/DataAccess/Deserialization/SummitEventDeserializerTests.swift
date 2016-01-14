@@ -26,6 +26,7 @@ class SummitEventDeserializerTests: XCTestCase {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        deserializerStorage.clear()
         let track = Track();
         track.id = 2
         deserializerStorage.add(track)
@@ -69,6 +70,7 @@ class SummitEventDeserializerTests: XCTestCase {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        deserializerStorage.clear()
         let track = Track();
         track.id = 2
         deserializerStorage.add(track)
@@ -110,6 +112,7 @@ class SummitEventDeserializerTests: XCTestCase {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        deserializerStorage.clear()
         let venueRoom = VenueRoom()
         venueRoom.id = 31
         deserializerStorage.add(venueRoom)
@@ -148,6 +151,7 @@ class SummitEventDeserializerTests: XCTestCase {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        deserializerStorage.clear()
         let venueRoom = VenueRoom()
         venueRoom.id = 31
         deserializerStorage.add(venueRoom)
@@ -179,7 +183,7 @@ class SummitEventDeserializerTests: XCTestCase {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
-        
+        deserializerStorage.clear()
         let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
         let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
         let json = "{}"
@@ -203,5 +207,51 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(expectedExceptionCount, exceptionCount)
         XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, start_date, end_date, title, allow_feedback, type_id"))
         
+    }
+    
+    func test_deserialize_jsonWithEventIdAndEventNotExistOnDeserializerStorage_throwsEntityNotFound() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        deserializerStorage.clear()
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "5"
+        let expectedExceptionCount = 1
+        var exceptionCount = 0
+        
+        //Act
+        do {
+            try deserializer.deserialize(json) as! SummitEvent
+        }
+        catch DeserializerError.EntityNotFound {
+            exceptionCount++
+        }
+        catch {
+            
+        }
+        
+        //Assert
+        XCTAssertEqual(expectedExceptionCount, exceptionCount)
+    }
+
+    func test_deserialize_jsonWithEventIdAndEventExistOnDeserializerStorage_returnsCorrectInstance() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        deserializerStorage.clear()
+        let summitEventStorage = SummitEvent()
+        summitEventStorage.id = 1
+        deserializerStorage.add(summitEventStorage)
+        
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = SummitEventDeserializer(deserializerStorage: deserializerStorage, deserializerFactory: deserializerFactory)
+        let json = "1"
+        
+        //Act
+        let summitEvent = try! deserializer.deserialize(json) as! SummitEvent
+        
+        //Assert
+        XCTAssertEqual(summitEventStorage.id, summitEvent.id)
     }
 }

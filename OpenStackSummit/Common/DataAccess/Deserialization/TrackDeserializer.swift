@@ -17,7 +17,10 @@ public class TrackDeserializer: NamedEntityDeserializer, IDeserializer {
         let track: Track
         
         if let trackId = json.int {
-            track = deserializerStorage.get(trackId)
+            guard let check: Track = deserializerStorage.get(trackId) else {
+                throw DeserializerError.EntityNotFound("Track with id \(trackId) not found on deserializer storage")
+            }
+            track = check
         }
         else {
             try validateRequiredFields(["id", "name"], inJson: json)

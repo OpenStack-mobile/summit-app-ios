@@ -95,7 +95,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
                 try self.dataUpdateProcessor.process(json)
             }
             catch {
-                print("There was an error processing updates from server")
+                print("There was an error processing updates from server: \(error)")
             }
         }
     }

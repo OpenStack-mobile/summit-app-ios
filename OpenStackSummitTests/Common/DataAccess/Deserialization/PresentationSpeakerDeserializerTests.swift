@@ -92,4 +92,48 @@ class PresentationSpeakerDeserializerTests: XCTestCase {
         XCTAssertEqual(expectedExceptionCount, exceptionCount)
         XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, first_name, last_name"))
     }
+    
+    func test_deserialize_jsonPresentationSpeakerIdAndPresentationSpeakerExistOnDeserializerStorage_returnsCorrectInstance() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        
+        let presentationSpeakerStorage = PresentationSpeaker()
+        presentationSpeakerStorage.id = 1
+        deserializerStorage.add(presentationSpeakerStorage)
+        
+        let deserializer = PresentationSpeakerDeserializer(deserializerStorage: deserializerStorage)
+        let json = "1"
+        
+        //Act
+        let presentationSpeaker = try! deserializer.deserialize(json) as! PresentationSpeaker
+        
+        //Assert
+        XCTAssertEqual(presentationSpeakerStorage.id, presentationSpeaker.id)
+    }
+    
+    func test_deserialize_jsonPresentationSpeakerIdAndPresentationSpeakerNotExistOnDeserializerStorage_throwsEntityNotFound() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        
+        let deserializer = PresentationSpeakerDeserializer(deserializerStorage: deserializerStorage)
+        let json = "1"
+        let expectedExceptionCount = 1
+        var exceptionCount = 0
+        
+        //Act
+        do {
+            try deserializer.deserialize(json) as! PresentationSpeaker
+        }
+        catch DeserializerError.EntityNotFound {
+            exceptionCount++
+        }
+        catch {
+            
+        }
+        
+        //Assert
+        XCTAssertEqual(expectedExceptionCount, exceptionCount)
+    }
 }
