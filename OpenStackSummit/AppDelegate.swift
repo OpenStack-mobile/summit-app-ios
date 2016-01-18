@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
 
         UXTestingManager.sharedInstance().appKey = "lUMy9RUlm4cQqQeG_1oc_g"
+        UXTestingManager.sharedInstance().isFrontCameraRecording = true
         
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBnBFBj9ixFjw1OJhAT3FC87JOOS-FuE0Q")
