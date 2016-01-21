@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
+		9D1D92031C4E06B200C1BB6C /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */; };
+		9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */; };
+		9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */; };
+		9D1D920C1C4FF12E00C1BB6C /* SchemaMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
 		9D63D8D71C12104E00F53843 /* TabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D63D8D61C12104E00F53843 /* TabStripViewController.swift */; };
 		9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */; };
@@ -24,6 +28,7 @@
 		9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */; };
 		9DEF61B41C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */; };
 		9DEF61B61C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B51C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift */; };
+		9DF1B8BC1C50215E00945E47 /* RealmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */; };
 		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
 		CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */; };
@@ -346,6 +351,10 @@
 		6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenStackSummitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
+		9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDeserializer.swift; sourceTree = "<group>"; };
+		9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataStore.swift; sourceTree = "<group>"; };
+		9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchemaMigration.swift; path = ../DataAccess/SchemaMigration.swift; sourceTree = "<group>"; };
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
 		9D63D8D61C12104E00F53843 /* TabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabStripViewController.swift; path = "User Interface/TabStripViewController.swift"; sourceTree = "<group>"; };
 		9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAssembly.swift; sourceTree = "<group>"; };
@@ -362,6 +371,7 @@
 		9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesAssembly.swift; sourceTree = "<group>"; };
 		9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsWireframe.swift; sourceTree = "<group>"; };
 		9DEF61B51C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListWireframe.swift; sourceTree = "<group>"; };
+		9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmFactory.swift; path = DataAccess/RealmFactory.swift; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailAssembly.swift; sourceTree = "<group>"; };
@@ -772,6 +782,14 @@
 				9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */,
 			);
 			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		9DF1B8BD1C50329700945E47 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */,
+			);
+			name = Migration;
 			sourceTree = "<group>";
 		};
 		AA58718A926F2751A4081893 /* Pods */ = {
@@ -1461,6 +1479,7 @@
 				9D5A99CB1B948D5C002FFAA4 /* User Interfaces */,
 				CAD337151BB1906A005B2953 /* Constants.swift */,
 				CAD6C3CC1BB71EA800F8C2D6 /* HttpFactory.swift */,
+				9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */,
 				CADE48C01C07BECB00A858DA /* PushNotificationsManager.swift */,
 				CAD542331B8B890A00A9791A /* Session.swift */,
 				CABAB9B71BCFEA1300CB867E /* ScheduleFilter.swift */,
@@ -1530,6 +1549,7 @@
 		CADDDB911B73D1BB008F742E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				9DF1B8BD1C50329700945E47 /* Migration */,
 				CAD6B3331B7E2B0300D62023 /* BaseEntity.swift */,
 				CA9E42401B7B9667005FDD22 /* Company.swift */,
 				CA7DC6251BB4351000D4636F /* DataUpdate.swift */,
@@ -1549,6 +1569,7 @@
 				CA9E424A1B7B9667005FDD22 /* Tag.swift */,
 				CADEE6EA1BACA017005152E1 /* TicketType.swift */,
 				CA416F991B8F63E700F177F5 /* Track.swift */,
+				9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */,
 				CA9E424C1B7B9667005FDD22 /* Venue.swift */,
 				CA9E424E1B7B9667005FDD22 /* VenueRoom.swift */,
 			);
@@ -1752,6 +1773,7 @@
 				CAE1D9031BA760C3004AA88C /* SummitRemoteDataStore.swift */,
 				CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */,
 				CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */,
+				9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */,
 				CA002A021B9E38B4001A9EDA /* VenueRoomDataStore.swift */,
 				CACB3A041BC2A84100B1363F /* PresentationSpeakerDataStore.swift */,
 				CACB3A061BC2A87700B1363F /* PresentationSpeakerRemoteDataStore.swift */,
@@ -1782,6 +1804,7 @@
 				CAF2AA381B8271C100D8E595 /* SummitTypeDeserializer.swift */,
 				CAE5EC2D1B83D3890032AD31 /* TagDeserializer.swift */,
 				CAF2AA331B8271C100D8E595 /* TrackDeserializer.swift */,
+				9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */,
 				CAF2AA391B8271C100D8E595 /* VenueDeserializer.swift */,
 				CAF2AA3A1B8271C100D8E595 /* VenueRoomDeserializer.swift */,
 				CADEE6EC1BACA0B4005152E1 /* TicketTypeDeserializer.swift */,
@@ -2131,6 +2154,7 @@
 				CA8913101B97951D002E9A95 /* MemberProfileViewController.swift in Sources */,
 				CA4399941BD19778008F378D /* GivenFeedbackAssembly.swift in Sources */,
 				CACFBC441B9F90C700095E44 /* FeedbackEditViewController.swift in Sources */,
+				9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */,
 				CAF2AA451B8271C100D8E595 /* PresentationSpeakerDeserializer.swift in Sources */,
 				CAF2AA481B8271C100D8E595 /* SummitTypeDeserializer.swift in Sources */,
 				CAA9A8901BA8C19D00C3725D /* Person.swift in Sources */,
@@ -2178,6 +2202,7 @@
 				CAE5EC2A1B83B85F0032AD31 /* MemberDeserializer.swift in Sources */,
 				CAE643501BCDA174005E530B /* NamedDTOAssembler.swift in Sources */,
 				CADDDBC21B74F193008F742E /* GeneralSchedulePresenter.swift in Sources */,
+				9DF1B8BC1C50215E00945E47 /* RealmFactory.swift in Sources */,
 				CADDDBA91B73D1BB008F742E /* PresentationSpeaker.swift in Sources */,
 				CAE6435F1BCDB73B005E530B /* TrackScheduleWireframe.swift in Sources */,
 				CACFBC4A1BA0A23900095E44 /* FeedbackDataStore.swift in Sources */,
@@ -2199,6 +2224,7 @@
 				CAE6434A1BCD8B5F005E530B /* TrackTableViewCell.swift in Sources */,
 				CAE2A3CB1C18B5B50097857E /* LevelScheduleWireframe.swift in Sources */,
 				CA1CBA881BB5EDF300E65D2B /* DataUpdatePoller.swift in Sources */,
+				9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */,
 				CAA3C3E11C1E01FC0088EC22 /* MyProfileWireframe.swift in Sources */,
 				CA1CBA891BB5EDF300E65D2B /* DataUpdateProcessor.swift in Sources */,
 				CADD511A1BD813BB00400AF4 /* VenuesMapViewController.swift in Sources */,
@@ -2209,6 +2235,7 @@
 				CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */,
 				CA416F901B8F58D900F177F5 /* GeneralScheduleFilterPresenter.swift in Sources */,
 				CA8E98E71B9A042D00CEBD2F /* VenueDetailInteractor.swift in Sources */,
+				9D1D920C1C4FF12E00C1BB6C /* SchemaMigration.swift in Sources */,
 				CAF2AA431B8271C100D8E595 /* TrackDeserializer.swift in Sources */,
 				CADDDBBA1B73D94F008F742E /* GeneralScheduleWireframe.swift in Sources */,
 				CACFB8171B8AA91900DB663E /* MenuPresenter.swift in Sources */,
@@ -2290,6 +2317,7 @@
 				9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */,
 				9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */,
 				CAA3C3E71C1E056A0088EC22 /* MyProfileAssembly.swift in Sources */,
+				9D1D92031C4E06B200C1BB6C /* TrackGroup.swift in Sources */,
 				CAD261681B8D6BAB00E6382F /* ITrigger.swift in Sources */,
 				CA416F981B8F5C6200F177F5 /* FilterSectionItem.swift in Sources */,
 				CACF20781BBC15BB001868AF /* DataUpdateAssembly.swift in Sources */,

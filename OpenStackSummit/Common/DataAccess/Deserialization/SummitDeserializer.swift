@@ -24,7 +24,7 @@ public class SummitDeserializer: NSObject, IDeserializer {
     public func deserialize(json : JSON) throws -> BaseEntity {
         let summit = Summit()
         
-        try validateRequiredFields(["id", "name", "start_date", "end_date", "time_zone", "sponsors", "summit_types", "ticket_types", "event_types", "tracks", "locations", "speakers", "schedule"], inJson: json)
+        try validateRequiredFields(["id", "name", "start_date", "end_date", "time_zone", "sponsors", "summit_types", "ticket_types", "event_types", "tracks", "track_groups", "locations", "speakers", "schedule"], inJson: json)
         
         var deserializer : IDeserializer!
         
@@ -55,10 +55,17 @@ public class SummitDeserializer: NSObject, IDeserializer {
         }
         
         deserializer = deserializerFactory.create(DeserializerFactoryType.Track)
-        for (_, presentationCategoryJSON) in json["tracks"] {
-            try deserializer.deserialize(presentationCategoryJSON)
+        for (_, trackJSON) in json["tracks"] {
+            try deserializer.deserialize(trackJSON)
         }
 
+        deserializer = deserializerFactory.create(DeserializerFactoryType.TrackGroup)
+        var trackGroup: TrackGroup
+        for (_, trackGroupJSON) in json["track_groups"] {
+            trackGroup = try deserializer.deserialize(trackGroupJSON) as! TrackGroup
+            summit.trackGroups.append(trackGroup)
+        }
+        
         deserializer = deserializerFactory.create(DeserializerFactoryType.Venue)
         var venue: Venue
         for (_, venueJSON) in json["locations"] {

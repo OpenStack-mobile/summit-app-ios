@@ -13,7 +13,7 @@ public enum DeserializerFactoryError: ErrorType {
 }
 
 public enum DeserializerFactoryType {
-    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee, DataUpdate, Feedback
+    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, TrackGroup, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee, DataUpdate, Feedback
 }
 
 public class DeserializerFactory : NSObject {
@@ -29,6 +29,7 @@ public class DeserializerFactory : NSObject {
     var memberDeserializer: MemberDeserializer!
     var presentationSpeakerDeserializer: PresentationSpeakerDeserializer!
     var trackDeserializer: TrackDeserializer!
+    var trackGroupDeserializer: TrackGroupDeserializer!
     var tagDeserializer: TagDeserializer!
     var imageDeserializer: ImageDeserializer!
     var ticketTypeDeserializer: TicketTypeDeserializer!
@@ -64,6 +65,8 @@ public class DeserializerFactory : NSObject {
             deserializer = presentationSpeakerDeserializer
         case DeserializerFactoryType.Track:
             deserializer = trackDeserializer
+        case DeserializerFactoryType.TrackGroup:
+            deserializer = trackGroupDeserializer
         case DeserializerFactoryType.Tag:
             deserializer = tagDeserializer
         case DeserializerFactoryType.Image:
