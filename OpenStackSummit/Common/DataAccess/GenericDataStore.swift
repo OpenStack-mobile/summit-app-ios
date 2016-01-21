@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 public class GenericDataStore: NSObject {
-    var realm = try! Realm()
+    var realm = try! RealmFactory().create()
     var trigger: ITrigger!
     
     public override init() {

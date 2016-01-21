@@ -11,4 +11,7 @@ import RealmSwift
 
 public class Track: NamedEntity {
 
+    public var trackGroup: TrackGroup? {
+        return linkingObjects(TrackGroup.self, forProperty: "track").first!
+    }
 }

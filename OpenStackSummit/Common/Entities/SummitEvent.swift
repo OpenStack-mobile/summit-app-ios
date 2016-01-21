@@ -24,6 +24,6 @@ public class SummitEvent: NamedEntity {
     public dynamic var venueRoom : VenueRoom?
     
     public var summit: Summit {
-        return try! Realm().objects(Summit).first!
+        return try! RealmFactory().create().objects(Summit).first!
     }
 }
