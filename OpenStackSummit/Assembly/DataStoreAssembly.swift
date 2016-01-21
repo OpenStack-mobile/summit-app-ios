@@ -28,6 +28,7 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("summitEventDeserializer", with: self.summitEventDeserializer())
             definition.injectProperty("presentationDeserializer", with: self.presentationDeserializer())
             definition.injectProperty("trackDeserializer", with: self.trackDeserializer())
+            definition.injectProperty("trackGroupDeserializer", with: self.trackGroupDeserializer())
             definition.injectProperty("memberDeserializer", with: self.memberDeserializer())
             definition.injectProperty("presentationSpeakerDeserializer", with: self.presentationSpeakerDeserializer())
             definition.injectProperty("tagDeserializer", with: self.tagDeserializer())
@@ -171,6 +172,14 @@ public class DataStoreAssembly: TyphoonAssembly {
         }
     }
     
+    public dynamic func trackGroupDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(TrackGroupDeserializer.self) {
+            (definition) in
+            
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
+        }
+    }
+    
     public dynamic func memberDeserializer() -> AnyObject {
         return TyphoonDefinition.withClass(MemberDeserializer.self) {
             (definition) in
@@ -243,6 +252,10 @@ public class DataStoreAssembly: TyphoonAssembly {
     
     public dynamic func trackDataStore() -> AnyObject {
         return TyphoonDefinition.withClass(TrackDataStore.self)
+    }
+    
+    public dynamic func trackGroupDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(TrackGroupDataStore.self)
     }
     
     public dynamic func summitAttendeeDataStore() -> AnyObject {
