@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JGE-4o-x7p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -86,10 +86,10 @@
                                                 <rect key="frame" x="0.0" y="395" width="600" height="60"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="credential" translatesAutoresizingMaskIntoConstraints="NO" id="sVL-sh-TXc">
-                                                        <rect key="frame" x="21" y="17" width="40" height="25"/>
+                                                        <rect key="frame" x="17" y="19" width="40" height="25"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="DFg-Kz-aN7"/>
-                                                            <constraint firstAttribute="width" constant="40" id="YtU-E6-URy"/>
+                                                            <constraint firstAttribute="height" constant="20" id="DFg-Kz-aN7"/>
+                                                            <constraint firstAttribute="width" constant="30" id="YtU-E6-URy"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Credentials" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lV-iZ-mwy">
@@ -102,7 +102,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="2lV-iZ-mwy" secondAttribute="trailing" constant="19" id="7JY-Pa-t4L"/>
-                                                    <constraint firstItem="2lV-iZ-mwy" firstAttribute="leading" secondItem="sVL-sh-TXc" secondAttribute="trailing" constant="11" id="KP8-lS-U76"/>
+                                                    <constraint firstItem="2lV-iZ-mwy" firstAttribute="leading" secondItem="sVL-sh-TXc" secondAttribute="trailing" constant="10" id="KP8-lS-U76"/>
                                                     <constraint firstAttribute="height" constant="60" id="sa4-c9-kxK"/>
                                                     <constraint firstItem="sVL-sh-TXc" firstAttribute="leading" secondItem="tr5-Zf-oUl" secondAttribute="leading" constant="21" id="tjd-Ep-Snq"/>
                                                 </constraints>
@@ -110,12 +110,12 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C64-dv-dbM" userLabel="Tags">
                                                 <rect key="frame" x="0.0" y="200" width="600" height="60"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="ibh-1l-v40">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="ibh-1l-v40">
                                                         <rect key="frame" x="22" y="19" width="16" height="22"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="16" id="7Cf-Eb-040"/>
-                                                            <constraint firstAttribute="height" constant="22" id="QQx-4v-dpA"/>
+                                                            <constraint firstAttribute="width" constant="20" id="7Cf-Eb-040"/>
+                                                            <constraint firstAttribute="height" constant="20" id="QQx-4v-dpA"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="tags" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMf-zY-1eh">
@@ -131,7 +131,7 @@
                                                 <constraints>
                                                     <constraint firstItem="ibh-1l-v40" firstAttribute="leading" secondItem="C64-dv-dbM" secondAttribute="leading" constant="22" id="7tC-S6-6bd"/>
                                                     <constraint firstAttribute="height" constant="60" id="PVl-gF-fno"/>
-                                                    <constraint firstItem="rMf-zY-1eh" firstAttribute="leading" secondItem="ibh-1l-v40" secondAttribute="trailing" constant="10" id="QSE-Tq-Yjl"/>
+                                                    <constraint firstItem="rMf-zY-1eh" firstAttribute="leading" secondItem="ibh-1l-v40" secondAttribute="trailing" constant="3" id="QSE-Tq-Yjl"/>
                                                     <constraint firstAttribute="trailing" secondItem="rMf-zY-1eh" secondAttribute="trailing" constant="15" id="bq3-ca-2bp"/>
                                                 </constraints>
                                             </view>
@@ -392,7 +392,7 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mwg-iY-boO" userLabel="Level">
                                                 <rect key="frame" x="0.0" y="456" width="600" height="60"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-51-rua">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="level" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-51-rua">
                                                         <rect key="frame" x="22" y="21" width="18" height="18"/>
                                                         <gestureRecognizers/>
                                                         <constraints>
@@ -2731,11 +2731,13 @@
         <image name="filter" width="19" height="18"/>
         <image name="generic-user-avatar" width="122" height="122"/>
         <image name="irc" width="30" height="30"/>
+        <image name="level" width="30" height="32"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="menu" width="20" height="17"/>
         <image name="my-profile" width="26" height="26"/>
         <image name="people" width="29" height="29"/>
         <image name="summit-logo" width="335" height="135"/>
+        <image name="tag" width="35" height="35"/>
         <image name="time" width="30" height="30"/>
         <image name="twitter" width="29" height="24"/>
         <image name="venues" width="21" height="27"/>

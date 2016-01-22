@@ -13,10 +13,6 @@ class MyProfileViewController: RevealTabStripViewController {
     var presenter: IMyProfilePresenter!
     var isFirstTime = true
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         navigationController?.navigationBar.topItem?.title = "MY PROFILE"
         if !isFirstTime {
