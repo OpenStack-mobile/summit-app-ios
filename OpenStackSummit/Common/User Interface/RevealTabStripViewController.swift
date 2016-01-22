@@ -35,7 +35,7 @@ class RevealTabStripViewController: TabStripViewController, SWRevealViewControll
         revealViewController()?.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         buttonBarView.selectedBar.alpha = 0
-        buttonBarView.selectedBar
+        
         changeCurrentIndexBlock = {
             (oldCell: XLButtonBarViewCell!, newCell: XLButtonBarViewCell!, animated: Bool) -> Void in
             
