@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -26,7 +26,10 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9L-wg-JoF">
-                        <rect key="frame" x="47" y="20" width="276" height="15"/>
+                        <rect key="frame" x="51" y="20" width="29" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="199" id="bnD-9s-jC7"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12.25"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -70,22 +73,29 @@
                             <constraint firstAttribute="width" constant="6" id="b9m-VZ-bHn"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="qP7-zP-C23" userLabel="Location Pin">
+                        <rect key="frame" x="90" y="18" width="16" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="9df-3S-l3n"/>
+                            <constraint firstAttribute="width" constant="16" id="qQF-j4-gJQ"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="goI-ed-esB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-45" id="7FB-6g-TfM"/>
                     <constraint firstItem="JMe-ih-9ol" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8uZ-5X-yNb"/>
                     <constraint firstItem="JMe-ih-9ol" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="FNU-Ou-GWj"/>
+                    <constraint firstItem="qP7-zP-C23" firstAttribute="centerY" secondItem="s9L-wg-JoF" secondAttribute="centerY" id="GCz-oF-ek7"/>
                     <constraint firstItem="ml1-5Q-lRd" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="-37" id="HY8-xL-PxV"/>
                     <constraint firstItem="s9L-wg-JoF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="Ioa-TV-HIm"/>
                     <constraint firstItem="ml1-5Q-lRd" firstAttribute="top" secondItem="goI-ed-esB" secondAttribute="bottom" constant="10" id="Nqr-xg-K74"/>
                     <constraint firstItem="ml1-5Q-lRd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="PSX-23-s4I"/>
-                    <constraint firstItem="s9L-wg-JoF" firstAttribute="trailing" secondItem="HfP-JC-3Iz" secondAttribute="leading" id="SKb-hb-F5E"/>
                     <constraint firstItem="goI-ed-esB" firstAttribute="top" secondItem="s9L-wg-JoF" secondAttribute="bottom" constant="14" id="TtS-6R-hJc"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="WDz-YZ-Yeb"/>
                     <constraint firstItem="VIq-ls-j2J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="Zg2-Nf-rOL"/>
                     <constraint firstItem="ml1-5Q-lRd" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="6/11" id="bPF-Io-P8W"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="bQW-Ym-XyS"/>
-                    <constraint firstItem="s9L-wg-JoF" firstAttribute="leading" secondItem="VIq-ls-j2J" secondAttribute="trailing" constant="6" id="bvX-5d-Daj"/>
+                    <constraint firstItem="s9L-wg-JoF" firstAttribute="leading" secondItem="VIq-ls-j2J" secondAttribute="trailing" constant="10" id="bvX-5d-Daj"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="-10" id="db6-zY-bKh"/>
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="fVG-oI-TBC"/>
                     <constraint firstItem="VIq-ls-j2J" firstAttribute="centerY" secondItem="s9L-wg-JoF" secondAttribute="centerY" id="j3n-Ta-qIg"/>
@@ -96,6 +106,7 @@
                     <constraint firstItem="HH5-Ud-uhT" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-10" id="qsm-Fv-UxN"/>
                     <constraint firstItem="eSW-vu-WCr" firstAttribute="top" secondItem="ml1-5Q-lRd" secondAttribute="bottom" constant="10" id="tqw-rA-0hQ"/>
                     <constraint firstItem="JMe-ih-9ol" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xb9-Sy-VPE"/>
+                    <constraint firstItem="qP7-zP-C23" firstAttribute="leading" secondItem="s9L-wg-JoF" secondAttribute="trailing" constant="10" id="xci-SQ-VZ0"/>
                     <constraint firstItem="HfP-JC-3Iz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-9" id="zha-g1-Kmh"/>
                 </constraints>
             </tableViewCellContentView>
@@ -103,6 +114,7 @@
                 <outlet property="eventNameLabel" destination="goI-ed-esB" id="PVz-IE-DoY"/>
                 <outlet property="eventTypeLabel" destination="HH5-Ud-uhT" id="wXS-ZV-7Hr"/>
                 <outlet property="eventTypeVerticalConstraint" destination="ovY-qV-7QV" id="git-VC-FHM"/>
+                <outlet property="locationPinImage" destination="qP7-zP-C23" id="hl2-MK-ahm"/>
                 <outlet property="scheduleButton" destination="HfP-JC-3Iz" id="CoP-qm-fg0"/>
                 <outlet property="sponsorsLabel" destination="ml1-5Q-lRd" id="E2V-wj-sbc"/>
                 <outlet property="summitTypeColorBar" destination="JMe-ih-9ol" id="8RR-aV-oB4"/>
@@ -113,6 +125,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="map_pin" width="26" height="33"/>
         <image name="schedule_unchecked" width="45" height="45"/>
         <image name="time" width="30" height="30"/>
     </resources>
