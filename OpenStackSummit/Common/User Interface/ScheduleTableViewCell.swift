@@ -13,6 +13,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
     var eventTitle: String! { get set }
     var eventType: String! { get set }
     var time: String! { get set }
+    var location: String! { get set }
     var sponsors: String! { get set }
     var track: String! { get set }
     var isScheduledStatusVisible: Bool { get set }
@@ -25,6 +26,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
 
 class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     
+    private var locationInternal = ""
     private var scheduledInternal = false
 
     var eventTitle: String!{
@@ -51,6 +53,16 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
         set {
             timeLabel.text = newValue
+        }
+    }
+    
+    var location: String!{
+        get {
+            return locationInternal
+        }
+        set {
+            locationInternal = newValue
+            locationPinImage.hidden = newValue.isEmpty
         }
     }
     
@@ -115,6 +127,7 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet weak var locationPinImage: UIImageView!
     @IBOutlet weak var scheduleButton: UIButton!
     @IBOutlet weak var summitTypeColorBar: UIView!
     
