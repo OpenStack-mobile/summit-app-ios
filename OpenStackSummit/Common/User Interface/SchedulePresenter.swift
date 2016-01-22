@@ -58,6 +58,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         cell.eventTitle = event.name
         cell.eventType = event.eventType
         cell.time = event.time
+        cell.location = event.location
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
