@@ -878,6 +878,7 @@
                         <outlet property="mapView" destination="EQH-MB-9sm" id="4wu-bc-5ZF"/>
                         <outlet property="nameLabel" destination="axR-CV-imw" id="KOd-l0-WhJ"/>
                         <outlet property="roomsTableView" destination="wJC-XL-E7V" id="zD1-0L-8ZC"/>
+                        <outlet property="roomsTableViewHeightConstraint" destination="cu3-fF-ia1" id="YI2-wS-UBO"/>
                         <outlet property="scrollView" destination="4sS-ey-PKM" id="fZ1-0p-2Jw"/>
                         <outlet property="slideshow" destination="Aep-pw-hCq" id="hUg-bL-g1Y"/>
                     </connections>

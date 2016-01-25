@@ -84,6 +84,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
     @IBOutlet weak var slideshow: ImageSlideshow!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var roomsTableView: UITableView!
+    @IBOutlet weak var roomsTableViewHeightConstraint: NSLayoutConstraint!
     
     var presenter: IVenueDetailPresenter!
     let cellIdentifier = "venueRoomListTableViewCell"
@@ -103,6 +104,11 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        roomsTableViewHeightConstraint?.constant = roomsTableView.contentSize.height
     }
     
     func click() {
@@ -134,6 +140,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         roomsTableView.delegate = self
         roomsTableView.dataSource = self
         roomsTableView.reloadData()
+        roomsTableView.updateConstraints()
     }
     
     @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
