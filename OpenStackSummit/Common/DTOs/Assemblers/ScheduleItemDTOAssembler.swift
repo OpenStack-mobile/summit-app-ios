@@ -20,11 +20,11 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
         scheduleItemDTO.location = getLocation(event)
         scheduleItemDTO.time = getTime(event)
         scheduleItemDTO.dateTime = getDateTime(event)
-        scheduleItemDTO.track = getTrack(event)
         scheduleItemDTO.sponsors = getSponsors(event)
         scheduleItemDTO.summitTypes = getSummitTypes(event);
         scheduleItemDTO.eventType = event.eventType.name
-        scheduleItemDTO.summitTypeColor = event.summitTypes.count == 1 ? event.summitTypes.first!.color : ""
+        scheduleItemDTO.track = getTrack(event)
+        scheduleItemDTO.trackGroupColor = getTrackGroupColor(event)
         return scheduleItemDTO
     }
     
@@ -97,6 +97,16 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
             track = event.presentation!.track.name
         }
         return track
+    }
+    
+    public func getTrackGroupColor(event: SummitEvent) -> String {
+        var color = ""
+        if event.presentation != nil {
+            if let trackGroup = event.presentation!.track.trackGroup {
+                color = trackGroup.color
+            }
+        }
+        return color
     }
     
 }
