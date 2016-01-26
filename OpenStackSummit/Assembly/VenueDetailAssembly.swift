@@ -36,7 +36,7 @@ public class VenueDetailAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(VenueDetailInteractor.self) {
             (definition) in
             
-            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
+            definition.injectProperty("venueDataStore", with: self.dataStoreAssembly.venueDataStore())
             definition.injectProperty("venueDTOAssembler", with: self.dtosAssemblersAssembly.venueDTOAssembler())
         }
     }
