@@ -16,5 +16,5 @@ public class ScheduleItemDTO: NamedDTO {
     public var summitTypes = ""
     public var sponsors = ""
     public var eventType = ""
-    public var summitTypeColor = ""
+    public var trackGroupColor = ""
 }

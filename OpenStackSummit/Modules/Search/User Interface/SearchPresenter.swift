@@ -111,7 +111,7 @@ public class SearchPresenter: ScheduleablePresenter {
         cell.track = event.track
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
         cell.isScheduledStatusVisible = interactor.isMemberLoggedIn()
-        cell.summitTypeColor = event.summitTypeColor != "" ? UIColor(hexaString: event.summitTypeColor) : nil
+        cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
     }
     
     func buildTrackCell(cell: ITrackTableViewCell, index: Int) {

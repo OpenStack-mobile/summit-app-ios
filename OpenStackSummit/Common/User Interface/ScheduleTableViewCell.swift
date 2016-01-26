@@ -17,7 +17,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
     var sponsors: String! { get set }
     var track: String! { get set }
     var isScheduledStatusVisible: Bool { get set }
-    var summitTypeColor: UIColor? { get set }
+    var trackGroupColor: UIColor? { get set }
 }
 
 @objc public enum ScheduledStatus: Int {
@@ -102,13 +102,18 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
-    var summitTypeColor: UIColor? {
+    var trackGroupColor: UIColor? {
         get {
-            return eventNameLabel.textColor
+            return trackGroupColorBar.backgroundColor
         }
         set {
+            if newValue != nil {
+                trackGroupColorBar.hidden = false
+                trackGroupColorBar.backgroundColor = newValue != nil ? newValue : UIColor.lightGrayColor()
+            } else {
+                trackGroupColorBar.hidden = true
+            }
             sponsorsLabel.textColor = newValue != nil ? newValue : UIColor(hexaString: "#4A4A4A")
-            summitTypeColorBar.backgroundColor = newValue != nil ? newValue : UIColor.lightGrayColor()
         }
     }
     
@@ -129,7 +134,7 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     @IBOutlet weak var trackLabel: UILabel!
     @IBOutlet weak var locationPinImage: UIImageView!
     @IBOutlet weak var scheduleButton: UIButton!
-    @IBOutlet weak var summitTypeColorBar: UIView!
+    @IBOutlet weak var trackGroupColorBar: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -188,20 +193,20 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         // On cell selected, internal views lose background color http://stackoverflow.com/questions/6745919/uitableviewcell-subview-disappears-when-cell-is-selected
-        let color = summitTypeColorBar.backgroundColor
+        let color = trackGroupColorBar.backgroundColor
         super.setSelected(selected, animated: animated)
         
-        if(selected) {
-            summitTypeColorBar.backgroundColor = color
+        if selected {
+            trackGroupColorBar.backgroundColor = color
         }
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
-        let color = summitTypeColorBar.backgroundColor
+        let color = trackGroupColorBar.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         
-        if(highlighted) {
-            summitTypeColorBar.backgroundColor = color
+        if highlighted {
+            trackGroupColorBar.backgroundColor = color
         }
     }
 }

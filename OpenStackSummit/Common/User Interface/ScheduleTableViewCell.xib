@@ -117,8 +117,8 @@
                 <outlet property="locationPinImage" destination="qP7-zP-C23" id="hl2-MK-ahm"/>
                 <outlet property="scheduleButton" destination="HfP-JC-3Iz" id="CoP-qm-fg0"/>
                 <outlet property="sponsorsLabel" destination="ml1-5Q-lRd" id="E2V-wj-sbc"/>
-                <outlet property="summitTypeColorBar" destination="JMe-ih-9ol" id="8RR-aV-oB4"/>
                 <outlet property="timeLabel" destination="s9L-wg-JoF" id="QK2-yO-aKO"/>
+                <outlet property="trackGroupColorBar" destination="JMe-ih-9ol" id="5KF-tc-d11"/>
                 <outlet property="trackLabel" destination="eSW-vu-WCr" id="W5N-Oh-tx0"/>
             </connections>
             <point key="canvasLocation" x="578" y="331"/>
