@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
+		9D15F9831C57D99800FCAFCD /* VenueDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15F9821C57D99800FCAFCD /* VenueDataStore.swift */; };
 		9D1D92031C4E06B200C1BB6C /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */; };
 		9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */; };
 		9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */; };
@@ -353,6 +354,7 @@
 		6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenStackSummitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9D15F9821C57D99800FCAFCD /* VenueDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDataStore.swift; sourceTree = "<group>"; };
 		9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
 		9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDeserializer.swift; sourceTree = "<group>"; };
 		9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataStore.swift; sourceTree = "<group>"; };
@@ -1780,6 +1782,7 @@
 				CA416F9F1B8FC45E00F177F5 /* SummitTypeDataStore.swift */,
 				CA416FA11B8FC46E00F177F5 /* TrackDataStore.swift */,
 				9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */,
+				9D15F9821C57D99800FCAFCD /* VenueDataStore.swift */,
 				CA002A021B9E38B4001A9EDA /* VenueRoomDataStore.swift */,
 				CACB3A041BC2A84100B1363F /* PresentationSpeakerDataStore.swift */,
 				CACB3A061BC2A87700B1363F /* PresentationSpeakerRemoteDataStore.swift */,
@@ -2164,6 +2167,7 @@
 				9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */,
 				CAF2AA451B8271C100D8E595 /* PresentationSpeakerDeserializer.swift in Sources */,
 				CAF2AA481B8271C100D8E595 /* SummitTypeDeserializer.swift in Sources */,
+				9D15F9831C57D99800FCAFCD /* VenueDataStore.swift in Sources */,
 				CAA9A8901BA8C19D00C3725D /* Person.swift in Sources */,
 				CADEE6ED1BACA0B4005152E1 /* TicketTypeDeserializer.swift in Sources */,
 				CA416F921B8F58EE00F177F5 /* GeneralScheduleFilterInteractor.swift in Sources */,
