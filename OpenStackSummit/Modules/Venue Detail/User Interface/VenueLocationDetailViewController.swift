@@ -34,14 +34,14 @@ class VenueLocationDetailViewController: UIViewController, IVenueLocationDetailV
     }
     
     func addMarker(venue: VenueDTO) {
-        var marker: GMSMarker
+        let marker = GMSMarker()
         var bounds = GMSCoordinateBounds()
-        marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
         marker.map = mapView
         marker.title = venue.name
-        marker.icon = UIImage(named: "marker")
+        marker.icon = UIImage(named: "map_pin")
         bounds = bounds.includingCoordinate(marker.position)
+        mapView.selectedMarker = marker
         mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
     }
     
