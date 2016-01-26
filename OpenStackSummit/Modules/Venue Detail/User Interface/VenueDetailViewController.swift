@@ -99,6 +99,8 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         
         let recognizer = UITapGestureRecognizer(target: self, action: "click")
         slideshow.addGestureRecognizer(recognizer)
+        
+        roomsTableView.registerNib(UINib(nibName: "TableViewSectionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "TableViewSectionHeader")
     }
 
     override func didReceiveMemoryWarning() {
@@ -140,7 +142,6 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         roomsTableView.delegate = self
         roomsTableView.dataSource = self
         roomsTableView.reloadData()
-        roomsTableView.updateConstraints()
     }
     
     @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
@@ -151,6 +152,16 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = roomsTableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewSectionHeader") as! TableViewSectionHeader
+        header.titleLabel.text = "At this location".uppercaseString
+        return header
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
