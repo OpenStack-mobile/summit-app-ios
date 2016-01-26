@@ -50,11 +50,7 @@ public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
     
     public func buildVenueRoomCell(cell: IVenueListTableViewCell, index: Int) {
         let venueRoom = venue.rooms[index]
-        var label = venueRoom.name
-        if venueRoom.capacity > 0 {
-            label += " - Capacity: \(venueRoom.capacity)"
-        }
-        cell.name = label
+        cell.name = venueRoom.name
     }
     
 }

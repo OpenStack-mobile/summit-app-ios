@@ -18,7 +18,10 @@ public class VenueRoomDTOAssembler: NamedDTOAssembler, IVenueRoomDTOAssembler {
     
     public func createDTO(venueRoom: VenueRoom) -> VenueRoomDTO {
         let venueRoomDetailDTO: VenueRoomDTO = super.createDTO(venueRoom)
-        venueRoomDetailDTO.capacity = venueRoom.capacity
+
+        if venueRoom.capacity > 0 {
+            venueRoomDetailDTO.name += " - Capacity: \(venueRoom.capacity)"
+        }
         
         var scheduleItemDTO: ScheduleItemDTO
         for event in venueRoom.events {
