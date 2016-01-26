@@ -14,11 +14,11 @@ public protocol IVenueDetailInteractor {
 }
 
 public class VenueDetailInteractor: NSObject, IVenueDetailInteractor {
-    var genericDataStore: GenericDataStore!
+    var venueDataStore: IVenueDataStore!
     var venueDTOAssembler: IVenueDTOAssembler!
     
     public func getVenue(venueId: Int) -> VenueDTO {
-        let venue: Venue? = genericDataStore.getByIdLocal(venueId)
+        let venue: Venue? = venueDataStore.getByIdLocal(venueId)
         let venueDTO = venueDTOAssembler.createDTO(venue!)
         return venueDTO
     }
