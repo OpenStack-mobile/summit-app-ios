@@ -160,7 +160,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = roomsTableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewSectionHeader") as! TableViewSectionHeader
-        header.titleLabel.text = "At this location".uppercaseString
+        header.titleLabel.text = "Rooms".uppercaseString
         return header
     }
     
