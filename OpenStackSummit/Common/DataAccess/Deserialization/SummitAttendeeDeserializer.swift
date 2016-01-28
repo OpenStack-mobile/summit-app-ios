@@ -54,10 +54,11 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
                 summitAttendee.scheduledEvents.append(event)
             }
             
-            let jsonTicketType = json["ticket_type_id"]
-            if jsonTicketType.int != nil {
-                deserializer = deserializerFactory.create(DeserializerFactoryType.TicketType)
-                summitAttendee.ticketType = try deserializer.deserialize(jsonTicketType) as! TicketType
+            deserializer = deserializerFactory.create(DeserializerFactoryType.TicketType)
+            var ticketType: TicketType
+            for (_, ticketJSON) in json["tickets"] {
+                ticketType = try deserializer.deserialize(ticketJSON) as! TicketType
+                summitAttendee.tickets.append(ticketType)
             }
             
             if(!deserializerStorage.exist(summitAttendee)) {
