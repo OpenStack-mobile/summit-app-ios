@@ -14,14 +14,19 @@ class MyProfileViewController: RevealTabStripViewController {
     var isFirstTime = true
     
     override func viewWillAppear(animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "MY PROFILE"
+        super.viewWillAppear(animated)
         if !isFirstTime {
             reloadPagerTabStripView()
         }
         isFirstTime = false
     }
-
-    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.topItem?.title = "MY PROFILE"
+    }
+    
+    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return presenter.getChildViews()
     }
 }

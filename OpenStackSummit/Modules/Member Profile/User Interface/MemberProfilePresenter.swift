@@ -6,7 +6,7 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 @objc
 public protocol IMemberProfilePresenter {
@@ -14,7 +14,7 @@ public protocol IMemberProfilePresenter {
     var speakerId: Int { get set }
     
     func viewLoad()
-    func getChildViews() -> [AnyObject]
+    func getChildViews() -> [UIViewController]
     func prepareForSpeakerProfile(speakerId: Int)
     func prepareForAttendeeProfile(attendeeId: Int)
     func prepareForMyProfile()
@@ -25,9 +25,9 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     var viewController: IMemberProfileViewController!
     var interactor: IMemberProfileInteractor!
 
-    var memberProfileDetailViewController: IMemberProfileDetailViewController!
-    var feedbackGivenListViewController: IFeedbackGivenListViewController!
-    var speakerPresentationsViewController: ISpeakerPresentationsViewController!
+    var memberProfileDetailViewController: MemberProfileDetailViewController!
+    var feedbackGivenListViewController: FeedbackGivenListViewController!
+    var speakerPresentationsViewController: SpeakerPresentationsViewController!
     
     public var attendeeId = 0
     public var speakerId = 0
@@ -57,8 +57,8 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
         }
     }
     
-    public func getChildViews() -> [AnyObject] {
-        var childViewController: [AnyObject] = []
+    public func getChildViews() -> [UIViewController] {
+        var childViewController: [UIViewController] = []
 
         childViewController.append(memberProfileDetailViewController)
         

@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class SpeakerListViewController: PeopleListViewController, XLPagerTabStripChildItem {
+class SpeakerListViewController: PeopleListViewController, IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class SpeakerListViewController: PeopleListViewController, XLPagerTabStripChildI
         presenter.speakersListViewWillAppear();
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Speakers"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Speakers")
     }
 }

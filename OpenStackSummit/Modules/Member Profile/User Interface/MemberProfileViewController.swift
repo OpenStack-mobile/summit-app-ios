@@ -7,6 +7,7 @@
 //
 
 import XLPagerTabStrip
+import KTCenterFlowLayout
 
 @objc
 public protocol IMemberProfileViewController {
@@ -14,30 +15,14 @@ public protocol IMemberProfileViewController {
     var title: String? { get set }
 }
 
-class MemberProfileViewController: TabStripViewController, IMemberProfileViewController {
+class MemberProfileViewController: ButtonBarPagerTabStripViewController, IMemberProfileViewController {
     
     var presenter: IMemberProfilePresenter!
     var isFirstTime = true
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        buttonBarView.selectedBar.alpha = 0
-        
-        changeCurrentIndexBlock = {
-            (oldCell: XLButtonBarViewCell!, newCell: XLButtonBarViewCell!, animated: Bool) -> Void in
-            
-            if newCell == nil && oldCell != nil {
-                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
-            }
-            
-            if animated {
-                oldCell.label.textColor = UIColor(white: 1, alpha: 0.6)
-                newCell.label.textColor = UIColor.whiteColor()
-            }
-        }        
-    }
-    
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         presenter.viewLoad()
         if !isFirstTime {
             reloadPagerTabStripView()
@@ -45,7 +30,24 @@ class MemberProfileViewController: TabStripViewController, IMemberProfileViewCon
         isFirstTime = false
     }
     
-    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        settings.style.buttonBarItemFont = UIFont.systemFontOfSize(17)
+        settings.style.buttonBarItemBackgroundColor = UIColor(hexaString: "#14273D")
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = false
+        buttonBarView.selectedBar.alpha = 0
+        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        
+        changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
+            guard changeCurrentIndex == true else { return }
+            
+            oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
+            newCell?.label.textColor = .whiteColor()
+        }
+    }
+    
+    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return presenter.getChildViews()
     }
 }

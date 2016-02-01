@@ -9,14 +9,14 @@
 import UIKit
 import XLPagerTabStrip
 
-class AttendeesListViewController: PeopleListViewController, XLPagerTabStripChildItem {
+class AttendeesListViewController: PeopleListViewController, IndicatorInfoProvider {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         presenter.attendeesListViewLoad()
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Attendees"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Attendees")
     }
 }

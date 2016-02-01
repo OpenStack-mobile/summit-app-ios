@@ -18,7 +18,7 @@ public protocol ITrackListViewController: IMessageEnabledViewController {
 }
 
 
-class TrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ITrackListViewController, XLPagerTabStripChildItem {
+class TrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ITrackListViewController, IndicatorInfoProvider {
     var presenter: ITrackListPresenter!
     var searchTerm: String!
     @IBOutlet weak var tableView: UITableView!
@@ -62,8 +62,8 @@ class TrackListViewController: UIViewController, UITableViewDelegate, UITableVie
         self.presenter.showTrackEvents(indexPath.row)
     }
 
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Tracks"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Tracks")
     }
 
 }

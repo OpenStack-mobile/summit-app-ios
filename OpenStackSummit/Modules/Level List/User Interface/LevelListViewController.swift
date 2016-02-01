@@ -17,7 +17,7 @@ public protocol ILevelListViewController: IMessageEnabledViewController {
     func reloadData()
 }
 
-class LevelListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ILevelListViewController, XLPagerTabStripChildItem {
+class LevelListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ILevelListViewController, IndicatorInfoProvider {
     var presenter: ILevelListPresenter!
     var searchTerm: String!
     @IBOutlet weak var tableView: UITableView!
@@ -61,7 +61,7 @@ class LevelListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.presenter.showLevelEvents(indexPath.row)
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Levels"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Levels")
     }
 }

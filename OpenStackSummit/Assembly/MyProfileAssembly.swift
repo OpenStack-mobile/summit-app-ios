@@ -37,7 +37,6 @@ public class MyProfileAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.myProfilePresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

@@ -1,5 +1,5 @@
 //
-//  feedbackGivenListAssembly.swift
+//  FeedbackGivenListAssembly.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 10/16/15.
@@ -39,8 +39,8 @@ public class FeedbackGivenListAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("FeedbackGivenListViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.feedbackGivenListPresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

@@ -20,7 +20,6 @@ public class MyProfileWireframe: NSObject, IMyProfileWireframe {
     var myProfileViewController: MyProfileViewController!
     
     public func presentMyProfileViewFromRevealViewController(revealViewController: SWRevealViewController) {
-        let _ = myProfileViewController.view! // this is only to force viewLoad to trigger
         navigationController.setViewControllers([myProfileViewController], animated: false)
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }

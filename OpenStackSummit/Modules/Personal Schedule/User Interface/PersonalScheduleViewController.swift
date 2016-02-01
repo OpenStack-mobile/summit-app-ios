@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
 
-class PersonalScheduleViewController: ScheduleViewController, XLPagerTabStripChildItem {
+class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     var presenter: ISchedulePresenter! {
         get {
             return internalPresenter
@@ -33,7 +33,7 @@ class PersonalScheduleViewController: ScheduleViewController, XLPagerTabStripChi
         SwiftSpinner.hide()
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Schedule"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Schedule")
     }
 }

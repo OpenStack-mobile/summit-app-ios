@@ -14,15 +14,12 @@ class PeopleViewController: RevealTabStripViewController {
     var attendeesListViewController: AttendeesListViewController!
     var speakersListViewController: SpeakerListViewController!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "PEOPLE"
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return [speakersListViewController, attendeesListViewController]
     }
 }

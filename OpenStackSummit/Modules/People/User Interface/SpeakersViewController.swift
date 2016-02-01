@@ -13,6 +13,7 @@ class SpeakersViewController: RevealViewController {
     var speakersListViewController: SpeakerListViewController!
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.topItem?.title = "SPEAKERS"
     }
     

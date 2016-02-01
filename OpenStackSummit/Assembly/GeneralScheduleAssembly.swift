@@ -64,7 +64,6 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.generalSchedulePresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }
