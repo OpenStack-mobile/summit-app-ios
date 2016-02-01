@@ -86,7 +86,7 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         scheduleView.dayPicker.backgroundActiveColor = UIColor(hexaString: "#E5E5E5")
         scheduleView.dayPicker.backgroundInactiveColor = UIColor(hexaString: "#E5E5E5")
-        scheduleView.dayPicker.backgroundSelectedColor = UIColor(hexaString: "#F5A623")
+        scheduleView.dayPicker.backgroundSelectedColor = UIColor(hexaString: "#4A4A4A")
     }
     
     
@@ -110,25 +110,25 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func setInactiveAppearanceWithCell(cell: AFDayCell) {
-        cell.dayNumber.font = UIFont.systemFontOfSize(13)
-        cell.dayNumber.textColor = scheduleView.dayPicker.dayNameActiveColor
-        cell.dayName.font = UIFont.systemFontOfSize(13)
-        cell.dayName.textColor = scheduleView.dayPicker.dayNameActiveColor
-        cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundColor
+        cell.dayNumber.font = scheduleView.dayPicker.dayNumberInactiveFont
+        cell.dayNumber.textColor = scheduleView.dayPicker.dayNumberInactiveColor
+        cell.dayName.font = scheduleView.dayPicker.dayNameInactiveFont
+        cell.dayName.textColor = scheduleView.dayPicker.dayNameInactiveColor
+        cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundInactiveColor
     }
     
     func setSelectedAppearanceWithCell(cell: AFDayCell) {
-        cell.dayNumber.font = UIFont.systemFontOfSize(13)
-        cell.dayNumber.textColor = scheduleView.dayPicker.dayNameSelectedColor
-        cell.dayName.font = UIFont.systemFontOfSize(13)
+        cell.dayNumber.font = scheduleView.dayPicker.dayNumberSelectedFont
+        cell.dayNumber.textColor = scheduleView.dayPicker.dayNumberSelectedColor
+        cell.dayName.font = scheduleView.dayPicker.dayNameSelectedFont
         cell.dayName.textColor = scheduleView.dayPicker.dayNameSelectedColor
         cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundSelectedColor
     }
     
     func setActiveAppearanceWithCell(cell: AFDayCell) {
-        cell.dayNumber.font = UIFont.systemFontOfSize(13)
-        cell.dayNumber.textColor = scheduleView.dayPicker.dayNameActiveColor
-        cell.dayName.font = UIFont.systemFontOfSize(13)
+        cell.dayNumber.font = scheduleView.dayPicker.dayNumberActiveFont
+        cell.dayNumber.textColor = scheduleView.dayPicker.dayNumberActiveColor
+        cell.dayName.font = scheduleView.dayPicker.dayNameActiveFont
         cell.dayName.textColor = scheduleView.dayPicker.dayNameActiveColor
         cell.contentView.backgroundColor = scheduleView.dayPicker.backgroundActiveColor
     }
@@ -141,7 +141,6 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
         dayNumber.textAlignment = .Center
         dayNumber.text = "\(cell.date.mt_dayOfMonth())"
         cell.dayNumber = dayNumber
-        cell.dayNumber.font = UIFont.systemFontOfSize(13)
         cell.contentView.addSubview(dayNumber)
         
         // configure day name  (example: Thu, Чт)
@@ -149,7 +148,6 @@ class ScheduleViewController: BaseViewController, UITableViewDelegate, UITableVi
         dayName.textAlignment = .Center
         dayName.text = cell.date.mt_stringFromDateWithFormat("EEE", localized: true).uppercaseString
         cell.dayName = dayName
-        cell.dayName.font = UIFont.systemFontOfSize(13)
         cell.contentView.addSubview(dayName)
 
         if !cell.active {
