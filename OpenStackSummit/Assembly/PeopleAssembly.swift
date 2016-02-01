@@ -6,7 +6,6 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 import Typhoon
 
 class PeopleAssembly: TyphoonAssembly {
@@ -73,7 +72,6 @@ class PeopleAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 definition.injectProperty("presenter", with: self.peoplePresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
     

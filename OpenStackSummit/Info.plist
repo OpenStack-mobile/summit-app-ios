@@ -63,6 +63,7 @@
 		<string>EventDetailAssembly</string>
 		<string>MenuAssembly</string>
 		<string>DataStoreAssembly</string>
+		<string>FeedbackGivenListAssembly</string>
 		<string>FeedbackEditAssembly</string>
 		<string>SecurityManagerAssembly</string>
 		<string>HttpFactoryAssembly</string>
@@ -71,7 +72,6 @@
 		<string>TrackListAssembly</string>
 		<string>DTOAssemblersAssembly</string>
 		<string>TrackScheduleAssembly</string>
-		<string>FeedbackGivenListAssembly</string>
 		<string>PersonalScheduleAssembly</string>
 		<string>VenuesMapsAssembly</string>
 		<string>VenueListAssembly</string>

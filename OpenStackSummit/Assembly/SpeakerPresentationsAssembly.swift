@@ -53,15 +53,6 @@ class SpeakerPresentationsAssembly: TyphoonAssembly {
         }
     }
     
-    /*dynamic func speakerPresentationsViewController() -> AnyObject {
-    return TyphoonDefinition.withClass(SpeakerPresentationsViewController.self) {
-    (definition) in
-    
-    definition.injectProperty("presenter", with: self.speakerPresentationsPresenter())
-    }
-    }*/
-    
-    
     dynamic func speakerPresentationsViewController() -> AnyObject {
         return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
             (factoryMethod) in
@@ -69,8 +60,8 @@ class SpeakerPresentationsAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("SpeakerPresentationsViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.speakerPresentationsPresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

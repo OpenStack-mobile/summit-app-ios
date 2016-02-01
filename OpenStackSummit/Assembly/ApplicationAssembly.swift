@@ -67,8 +67,7 @@ class ApplicationAssembly: TyphoonAssembly {
             }, configuration: {
                 (definition) in
                 
-                definition.scope = TyphoonScope.WeakSingleton
-                
+                definition.scope = TyphoonScope.Singleton
         })
     }
     

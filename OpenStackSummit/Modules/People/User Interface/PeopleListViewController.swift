@@ -39,7 +39,6 @@ class PeopleListViewController: UIViewController, UITableViewDelegate, UITableVi
     func reloadData() {
         peopleListView.tableView.delegate = self
         peopleListView.tableView.dataSource = self
-        
         peopleListView.tableView.reloadData()
     }
     

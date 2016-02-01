@@ -15,7 +15,7 @@ protocol ISpeakerPresentationsViewController: IScheduleViewController {
     var presenter: ISpeakerPresentationsPresenter! { get set }
 }
 
-class SpeakerPresentationsViewController: ScheduleViewController, XLPagerTabStripChildItem, ISpeakerPresentationsViewController {
+class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider, ISpeakerPresentationsViewController {
     var presenter: ISpeakerPresentationsPresenter! {
         get {
             return internalPresenter as! ISpeakerPresentationsPresenter
@@ -37,7 +37,7 @@ class SpeakerPresentationsViewController: ScheduleViewController, XLPagerTabStri
         SwiftSpinner.hide()
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Sessions"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Sessions")
     }
 }
