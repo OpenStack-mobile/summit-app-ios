@@ -15,7 +15,7 @@ protocol IVenuesMapViewController {
     func addMarkers(venues:[VenueListItemDTO])
 }
 
-class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IVenuesMapViewController, XLPagerTabStripChildItem {
+class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IVenuesMapViewController, IndicatorInfoProvider {
     
     var presenter: IVenuesMapPresenter!
     var mapView: GMSMapView!
@@ -68,8 +68,8 @@ class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IVenuesMapV
     }
     */
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Map"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Map")
     }
 
 }

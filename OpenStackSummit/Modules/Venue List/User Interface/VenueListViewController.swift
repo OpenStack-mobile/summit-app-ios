@@ -14,7 +14,7 @@ public protocol IVenueListViewController: IMessageEnabledViewController {
     func releoadList()
 }
 
-class VenueListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IVenueListViewController, XLPagerTabStripChildItem {
+class VenueListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IVenueListViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -58,7 +58,7 @@ class VenueListViewController: UIViewController, UITableViewDelegate, UITableVie
         presenter.showVenueDetail(indexPath.row)
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Directory"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Directory")
     }
 }

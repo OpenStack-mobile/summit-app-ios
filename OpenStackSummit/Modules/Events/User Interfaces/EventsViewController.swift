@@ -27,26 +27,21 @@ class EventsViewController: RevealTabStripViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "EVENTS"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.topItem?.title = "EVENTS"
         
         if (filterButton != nil) {
             filterButton.target = self
             filterButton.action = Selector("showFilters:")
         }
-        
-        reloadPagerTabStripView()
     }
 
     func showFilters(sender: UIBarButtonItem) {
         presenter.showFilters()
     }
     
-    override func childViewControllersForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> [AnyObject] {
+    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         return [generalScheduleViewController, trackListViewController, levelListViewController]
     }
     

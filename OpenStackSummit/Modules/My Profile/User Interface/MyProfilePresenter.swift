@@ -10,18 +10,19 @@ import UIKit
 
 @objc
 public protocol IMyProfilePresenter {
-    func getChildViews() -> [AnyObject]
+    func getChildViews() -> [UIViewController]
 }
 
 public class MyProfilePresenter: NSObject, IMyProfilePresenter {
-    var memberProfileDetailViewController: IMemberProfileDetailViewController!
-    var personalScheduleViewController: IScheduleViewController!
-    var feedbackGivenListViewController: IFeedbackGivenListViewController!
-    var speakerPresentationsViewController: ISpeakerPresentationsViewController!
     var securityManager: SecurityManager!
-
-    public func getChildViews() -> [AnyObject] {
-        var childViewController: [AnyObject] = []
+    var memberProfileDetailViewController: MemberProfileDetailViewController!
+    var personalScheduleViewController: ScheduleViewController!
+    var feedbackGivenListViewController: FeedbackGivenListViewController!
+    var speakerPresentationsViewController: SpeakerPresentationsViewController!
+    
+    public func getChildViews() -> [UIViewController] {
+        var childViewController: [UIViewController] = []
+        
         childViewController.append(personalScheduleViewController)
         childViewController.append(memberProfileDetailViewController)
         childViewController.append(feedbackGivenListViewController)

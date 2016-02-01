@@ -14,7 +14,7 @@ public protocol IFeedbackGivenListViewController: IMessageEnabledViewController 
     func releoadList()
 }
 
-class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFeedbackGivenListViewController, XLPagerTabStripChildItem {
+class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFeedbackGivenListViewController, IndicatorInfoProvider {
     
     let cellIdentifier = "feedbackTableViewCell"
     @IBOutlet weak var tableView: UITableView!
@@ -58,7 +58,7 @@ class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UI
         return cell
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Feedback"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Feedback")
     }
 }

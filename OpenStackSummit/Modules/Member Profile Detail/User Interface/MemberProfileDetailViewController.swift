@@ -29,7 +29,7 @@ protocol IMemberProfileDetailViewController {
     func hideActivityIndicator()
 }
 
-class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailViewController, XLPagerTabStripChildItem {
+class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailViewController, IndicatorInfoProvider {
     
     var name: String!{
         get {
@@ -251,7 +251,7 @@ class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailV
     override func viewWillDisappear(animated: Bool) {
     }
     
-    func titleForPagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController) -> String {
-        return "Profile"
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Profile")
     }
 }
