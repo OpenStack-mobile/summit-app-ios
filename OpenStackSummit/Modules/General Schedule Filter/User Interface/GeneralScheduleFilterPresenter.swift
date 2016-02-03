@@ -50,8 +50,8 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
         if (scheduleFilter.filterSections.count == 0) {
             let summitTypes = interactor.getSummitTypes()
             let eventTypes = interactor.getEventTypes()
-            let summitTracks = interactor.getSummitTracks()
-            let summitTrackGroups = interactor.getSummitTrackGroups()
+            let summitTracks = interactor.getTracks()
+            let summitTrackGroups = interactor.getTrackGroups()
             let levels = interactor.getLevels()
             
             scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
@@ -168,18 +168,24 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
         
         cell.name = filterItem.name
         cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.id)
+        
+        if index == 0 {
+            cell.addTopExtraPadding()
+        }
+        else if index == filterSection.items.count - 1 {
+            cell.addBottomExtraPadding()
+        }
     }
 
     public func buildSummitTypeFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
         let filterSection = scheduleFilter.filterSections[0]
-        let summitType = interactor.getSummitType(filterSection.items[index].id)
-        cell.selectedColor = UIColor(hexaString: summitType!.color)
-        cell.unselectedColor = UIColor(hexaString: summitType!.color)
         buildFilterCell(cell, filterSection: filterSection, index: index)
     }
     
     public func buildTrackGroupFilterCell(cell: IGeneralScheduleFilterTableViewCell, index: Int) {
         let filterSection = scheduleFilter.filterSections[1]
+        let trackGroup = interactor.getTrackGroup(filterSection.items[index].id)
+        cell.circleColor = UIColor(hexaString: trackGroup!.color)
         buildFilterCell(cell, filterSection: filterSection, index: index)
     }
 
@@ -194,6 +200,13 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
         
         cell.name = filterItem.name
         cell.isOptionSelected = isItemSelected(filterSection.type, name: filterItem.name)
+        
+        if index == 0 {
+            cell.addTopExtraPadding()
+        }
+        else if index == filterSection.items.count - 1 {
+            cell.addBottomExtraPadding()
+        }
     }
     
     public func toggleSelectionSummitType(cell: IGeneralScheduleFilterTableViewCell, index: Int) {

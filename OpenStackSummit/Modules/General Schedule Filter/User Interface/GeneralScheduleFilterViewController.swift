@@ -21,6 +21,7 @@ public protocol IGeneralScheduleFilterViewController {
 }
 
 class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFilterViewController, UITableViewDelegate, UITableViewDataSource, MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource {
+    
     var presenter : IGeneralScheduleFilterPresenter!
     
     var tags: NSMutableArray {
@@ -29,7 +30,10 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         }
     }
     
-    var cellIdentifier = "generalScheduleFilterTableViewCell"
+    let cellHeight: CGFloat = 50
+    let extraPadding: CGFloat = 12
+    let cellIdentifier = "generalScheduleFilterTableViewCell"
+    
     @IBOutlet weak var filterTable: UITableView!
     @IBOutlet weak var summitTypeTableView: UITableView!
     @IBOutlet weak var trackGroupTableView: UITableView!
@@ -43,6 +47,7 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
     @IBOutlet weak var tagTextView: MLPAutoCompleteTextField!
     @IBOutlet weak var tagListView: AMTagListView!
     @IBOutlet weak var clearTagsButton: UIButton!
+    @IBOutlet weak var nameLabelVerticalConstrain: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,25 +97,43 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         return 1;
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return cellHeight + extraPadding
+        }
+        else if tableView == summitTypeTableView && indexPath.row == presenter.getSummitTypeItemCount() - 1 {
+            return cellHeight + extraPadding
+        }
+        else if tableView == trackGroupTableView && indexPath.row == presenter.getTrackGroupItemCount() - 1 {
+            return cellHeight + extraPadding
+        }
+        else if tableView == eventTypeTableView && indexPath.row == presenter.getEventTypeItemCount() - 1 {
+            return cellHeight + extraPadding
+        }
+        else if tableView == levelTableView && indexPath.row == presenter.getLevelItemCount() - 1 {
+            return cellHeight + extraPadding
+        }
+        return cellHeight
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         if tableView == summitTypeTableView {
             count = presenter.getSummitTypeItemCount()
-            summitTypeHeightConstraint.constant = CGFloat(45 * count)
+            summitTypeHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
         }
         else if tableView == trackGroupTableView {
             count = presenter.getTrackGroupItemCount();
-            trackGroupHeightConstraint.constant = CGFloat(45 * count)
+            trackGroupHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
         }
         else if tableView == eventTypeTableView {
             count = presenter.getEventTypeItemCount();
-            eventTypeHeightConstraint.constant = CGFloat(45 * count)
+            eventTypeHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
         }
-        else  if tableView == levelTableView {
+        else if tableView == levelTableView {
             count = presenter.getLevelItemCount();
-            levelHeightConstraint.constant = CGFloat(45 * count)
+            levelHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
         }
-        tableView.updateConstraints()
         return count
     }
     
