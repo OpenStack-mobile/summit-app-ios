@@ -14,6 +14,7 @@ public protocol IGeneralScheduleFilterInteractor {
     func getSummitTypes() -> [NamedDTO]
     func getEventTypes() -> [NamedDTO]
     func getSummitTracks() -> [NamedDTO]
+    func getSummitTrackGroups() -> [NamedDTO]
     func getLevels() -> [String]
     func getTagsBySearchTerm(searchTerm: String) -> [String]
     func getSummitType(id: Int) -> SummitType?
@@ -24,6 +25,7 @@ public class GeneralScheduleFilterInteractor: NSObject {
     var summitTypeDataStore: ISummitTypeDataStore!
     var eventTypeDataStore: IEventTypeDataStore!
     var trackDataStore: ITrackDataStore!
+    var trackGroupDataStore: ITrackGroupDataStore!
     var tagDataStore: ITagDataStore!
     var namedDTOAssembler: NamedDTOAssembler!
     var eventDataStore: IEventDataStore!
@@ -40,6 +42,11 @@ public class GeneralScheduleFilterInteractor: NSObject {
     
     public func getSummitTracks() -> [NamedDTO] {
         let entities = trackDataStore.getAllLocal().sort({ $0.name < $1.name })
+        return createDTOs(entities)
+    }
+    
+    public func getSummitTrackGroups() -> [NamedDTO] {
+        let entities = trackGroupDataStore.getAllLocal().sort({ $0.name < $1.name })
         return createDTOs(entities)
     }
     

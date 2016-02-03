@@ -32,20 +32,23 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
     var cellIdentifier = "generalScheduleFilterTableViewCell"
     @IBOutlet weak var filterTable: UITableView!
     @IBOutlet weak var summitTypeTableView: UITableView!
+    @IBOutlet weak var trackGroupTableView: UITableView!
     @IBOutlet weak var eventTypeTableView: UITableView!
+    @IBOutlet weak var levelTableView: UITableView!
     @IBOutlet weak var summitTypeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trackGroupHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventTypeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var levelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagListViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagTextView: MLPAutoCompleteTextField!
     @IBOutlet weak var tagListView: AMTagListView!
     @IBOutlet weak var clearTagsButton: UIButton!
-    @IBOutlet weak var tagListViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var levelTableView: UITableView!
-    @IBOutlet weak var levelHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         summitTypeTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        trackGroupTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         eventTypeTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         levelTableView.registerNib(UINib(nibName: "GeneralScheduleFilterTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         clearTagsButton.layer.cornerRadius = 10
@@ -74,6 +77,9 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         summitTypeTableView.delegate = self
         summitTypeTableView.dataSource = self
         summitTypeTableView.reloadData()
+        trackGroupTableView.delegate = self
+        trackGroupTableView.dataSource = self
+        trackGroupTableView.reloadData()
         eventTypeTableView.delegate = self
         eventTypeTableView.dataSource = self
         eventTypeTableView.reloadData()
@@ -91,6 +97,10 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         if tableView == summitTypeTableView {
             count = presenter.getSummitTypeItemCount()
             summitTypeHeightConstraint.constant = CGFloat(45 * count)
+        }
+        else if tableView == trackGroupTableView {
+            count = presenter.getTrackGroupItemCount();
+            trackGroupHeightConstraint.constant = CGFloat(45 * count)
         }
         else if tableView == eventTypeTableView {
             count = presenter.getEventTypeItemCount();
@@ -110,6 +120,9 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         if tableView == summitTypeTableView {
             presenter.buildSummitTypeFilterCell(cell, index: indexPath.row)
         }
+        else if tableView == trackGroupTableView {
+            presenter.buildTrackGroupFilterCell(cell, index: indexPath.row)
+        }
         else if tableView == eventTypeTableView {
             presenter.buildEventTypeFilterCell(cell, index: indexPath.row)
         }
@@ -124,6 +137,9 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         
         if tableView == summitTypeTableView {
             presenter.toggleSelectionSummitType(cell, index: indexPath.row)
+        }
+        else if tableView == trackGroupTableView {
+            presenter.toggleSelectionTrackGroup(cell, index: indexPath.row)
         }
         else if tableView == eventTypeTableView {
             presenter.toggleSelectionEventType(cell, index: indexPath.row)

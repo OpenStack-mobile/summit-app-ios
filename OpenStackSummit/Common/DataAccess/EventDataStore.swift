@@ -11,7 +11,7 @@ import UIKit
 @objc
 public protocol IEventDataStore {
     func getByIdLocal(id: Int) -> SummitEvent?
-    func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?, levels:[String]?)->[SummitEvent]
+    func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels:[String]?)->[SummitEvent]
     func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void)
     func getBySearchTerm(searchTerm: String!)->[SummitEvent]
     func getPresentationLevels()->[String]
@@ -29,10 +29,13 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         return super.getByIdLocal(id)
     }
     
-    public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, tags: [String]?, levels: [String]?)->[SummitEvent]{
+    public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?)->[SummitEvent]{
         var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
         if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
+        }
+        if (trackGroups != nil && trackGroups!.count > 0) {
+            events = events.filter("presentation.track.trackGroup.id in %@", trackGroups!)
         }
         if (tracks != nil && tracks!.count > 0) {
             events = events.filter("presentation.track.id in %@", tracks!)
