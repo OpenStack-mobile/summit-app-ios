@@ -60,6 +60,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
             eventTypes: nil,
             summitTypes: nil,
             tracks: trackSelections,
+            trackGroups:  nil,
             tags: nil,
             levels: nil
         )

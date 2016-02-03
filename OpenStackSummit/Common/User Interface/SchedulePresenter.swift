@@ -133,6 +133,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         let eventTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int] : nil
         let summitTypeSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int] : nil
         let trackSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Track] as? [Int] : nil
+        let trackGroupSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int] : nil
         let tagSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Tag] as? [String] : nil
         let levelSelections = self.useFilter ? self.scheduleFilter.selections[FilterSectionType.Level] as? [String] : nil
         
@@ -142,6 +143,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
             eventTypes: eventTypeSelections,
             summitTypes: summitTypeSelections,
             tracks: trackSelections,
+            trackGroups: trackGroupSelections,
             tags: tagSelections,
             levels: levelSelections
         )

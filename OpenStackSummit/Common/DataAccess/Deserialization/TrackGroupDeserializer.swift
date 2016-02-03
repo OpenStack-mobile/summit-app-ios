@@ -37,6 +37,7 @@ public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
                 }
                 track = check
                 trackGroup.tracks.append(track)
+                track.trackGroup = trackGroup
             }
             
             if(!deserializerStorage.exist(trackGroup)) {
