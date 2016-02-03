@@ -13,11 +13,11 @@ import RealmSwift
 public protocol IGeneralScheduleFilterInteractor {
     func getSummitTypes() -> [NamedDTO]
     func getEventTypes() -> [NamedDTO]
-    func getSummitTracks() -> [NamedDTO]
-    func getSummitTrackGroups() -> [NamedDTO]
+    func getTracks() -> [NamedDTO]
+    func getTrackGroups() -> [NamedDTO]
     func getLevels() -> [String]
     func getTagsBySearchTerm(searchTerm: String) -> [String]
-    func getSummitType(id: Int) -> SummitType?
+    func getTrackGroup(id: Int) -> TrackGroup?
 }
 
 public class GeneralScheduleFilterInteractor: NSObject {
@@ -40,12 +40,12 @@ public class GeneralScheduleFilterInteractor: NSObject {
         return createDTOs(entities)
     }
     
-    public func getSummitTracks() -> [NamedDTO] {
+    public func getTracks() -> [NamedDTO] {
         let entities = trackDataStore.getAllLocal().sort({ $0.name < $1.name })
         return createDTOs(entities)
     }
     
-    public func getSummitTrackGroups() -> [NamedDTO] {
+    public func getTrackGroups() -> [NamedDTO] {
         let entities = trackGroupDataStore.getAllLocal().sort({ $0.name < $1.name })
         return createDTOs(entities)
     }
@@ -76,7 +76,7 @@ public class GeneralScheduleFilterInteractor: NSObject {
         return dtos
     }
     
-    public func getSummitType(id: Int) -> SummitType? {
-        return summitTypeDataStore.getByIdLocal(id)
+    public func getTrackGroup(id: Int) -> TrackGroup? {
+        return trackGroupDataStore.getByIdLocal(id)
     }
 }

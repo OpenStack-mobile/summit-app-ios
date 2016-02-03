@@ -11,12 +11,16 @@ import UIKit
 @objc
 public protocol IGeneralScheduleFilterTableViewCell {
     var name: String! { get set }
+    var circleColor: UIColor? { get set }
     var isOptionSelected: Bool { get set }
-    var unselectedColor: UIColor? { get set }
-    var selectedColor: UIColor? { get set }
+    func addTopExtraPadding()
+    func addBottomExtraPadding()
 }
 
 class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilterTableViewCell {
+    
+    let halfExtraPadding: CGFloat = 6
+    
     var name: String! {
         get {
             return nameLabel.text
@@ -32,55 +36,47 @@ class GeneralScheduleFilterTableViewCell: UITableViewCell, IGeneralScheduleFilte
         }
         set {
             optionSelectedImage.hidden = !newValue
-            nameLabel.font = newValue ? UIFont.boldSystemFontOfSize(15) : UIFont.systemFontOfSize(15)
-            nameLabel.textColor = newValue ? getSelectedColor() : getUnselectedColor() // UIColor.whiteColor() : UIColor.lightGrayColor()
-        }
-    }
-    
-    var unselectedColor: UIColor? {
-        get {
-            return unselectedColorInternal
-        }
-        set {
-            unselectedColorInternal = newValue
+            
+            if newValue {
+                 nameLabel.alpha = 1
+            }
+            else {
+                nameLabel.alpha = 0.5
+            }
         }
     }
 
-    var selectedColor: UIColor? {
-        get {
-            return selectedColorInternal
-        }
-        set {
-            selectedColorInternal = newValue
+    var circleColor: UIColor? {
+        didSet {
+            circleView.hidden = false
+            circleView.backgroundColor = circleColor
+            nameLabelLeadingToCircleConstrain.active = true
+            nameLabelLeadingToContainerConstrain.active = false
         }
     }
     
+    @IBOutlet weak var circleView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var optionSelectedImage: UIImageView!
-
-    var unselectedColorInternal:UIColor?
-    var selectedColorInternal:UIColor?
+    @IBOutlet weak var nameLabelVerticalConstrain: NSLayoutConstraint!
+    @IBOutlet weak var nameLabelLeadingToCircleConstrain: NSLayoutConstraint!
+    @IBOutlet weak var nameLabelLeadingToContainerConstrain: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = contentView.backgroundColor
-        selectedBackgroundView = bgColorView
-        // Initialization code
+        circleView.hidden = true
+        selectionStyle = UITableViewCellSelectionStyle.None
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
-    func getSelectedColor() -> UIColor? {
-        return (selectedColorInternal != nil) ? selectedColorInternal : UIColor.whiteColor()
+    func addTopExtraPadding() {
+        nameLabelVerticalConstrain.constant = halfExtraPadding
     }
     
-    func getUnselectedColor() -> UIColor? {
-        return (unselectedColorInternal != nil) ? unselectedColorInternal : UIColor.lightGrayColor()
+    func addBottomExtraPadding() {
+        nameLabelVerticalConstrain.constant = -halfExtraPadding
     }
-    
 }
