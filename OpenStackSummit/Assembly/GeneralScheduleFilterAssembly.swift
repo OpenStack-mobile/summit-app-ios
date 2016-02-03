@@ -40,6 +40,7 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
             definition.injectProperty("summitTypeDataStore", with: self.dataStoreAssembly.summitTypeDataStore())
             definition.injectProperty("eventTypeDataStore", with: self.dataStoreAssembly.eventTypeDataStore())
             definition.injectProperty("trackDataStore", with: self.dataStoreAssembly.trackDataStore())
+            definition.injectProperty("trackGroupDataStore", with: self.dataStoreAssembly.trackGroupDataStore())
             definition.injectProperty("tagDataStore", with: self.dataStoreAssembly.tagDataStore())
             definition.injectProperty("namedDTOAssembler", with: self.dtoAssemblersAssembly.namedDTOAssembler())
             definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
