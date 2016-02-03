@@ -10,11 +10,17 @@ import Foundation
 
 @objc
 public protocol ITrackGroupDataStore {
+    func getByIdLocal(id: Int) -> TrackGroup?
     func getAllLocal() -> [TrackGroup]
     func getBySearchTerm(searchTerm: String)->[TrackGroup]
 }
 
 public class TrackGroupDataStore: GenericDataStore, ITrackGroupDataStore {
+    
+    public func getByIdLocal(id: Int) -> TrackGroup? {
+        return super.getByIdLocal(id)
+    }
+    
     public func getAllLocal() -> [TrackGroup] {
         return super.getAllLocal()
     }
