@@ -11,5 +11,5 @@ import Foundation
 import RealmSwift
 
 public class Track: NamedEntity {
-    public var trackGroup: TrackGroup?
+    public dynamic var trackGroup: TrackGroup?
 }
