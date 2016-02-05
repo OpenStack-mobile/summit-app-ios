@@ -24,11 +24,6 @@ public protocol IGeneralSchedulePresenter: ISchedulePresenter {
 
 public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresenter {
     
-    public override init() {
-        super.init()
-        useFilter = true
-    }
-    
     weak var viewController : IScheduleViewController! {
         get {
             return internalViewController

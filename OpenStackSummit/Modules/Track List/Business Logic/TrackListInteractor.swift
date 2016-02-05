@@ -10,15 +10,24 @@ import UIKit
 
 @objc
 public protocol ITrackListInteractor {
-    func getTracks() -> [TrackDTO]
+    func getTracks(trackGroups: [Int]?) -> [TrackDTO]
 }
 
 public class TrackListInteractor: NSObject, ITrackListInteractor {
-    var genericDataStore: GenericDataStore!
+    var trackDataStore: ITrackDataStore!
     var namedDTOAssembler: NamedDTOAssembler!
     
-    public func getTracks() -> [TrackDTO] {
-        let tracks: [Track] = genericDataStore.getAllLocal().sort({ $0.name < $1.name })
+    public func getTracks(trackGroups: [Int]?) -> [TrackDTO] {
+        var tracks: [Track] = trackDataStore.getAllLocal().sort({ $0.name < $1.name })
+        
+        if (trackGroups != nil && trackGroups!.count > 0) {
+            tracks = tracks.filter({ (track) -> Bool in
+                if let trackGroup = track.trackGroup {
+                    return trackGroups!.contains(trackGroup.id)
+                }
+                return false
+            })
+        }
         
         var trackDTO: TrackDTO
         var dtos: [TrackDTO] = []

@@ -31,7 +31,7 @@ class LevelListAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.levelListViewController())
             definition.injectProperty("interactor", with: self.levelListInteractor())
             definition.injectProperty("wireframe", with: self.levelListWireframe())
-            
+            definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
         }
     }
     

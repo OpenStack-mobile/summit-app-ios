@@ -31,7 +31,7 @@ class TrackListAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.trackListViewController())
             definition.injectProperty("interactor", with: self.trackListInteractor())
             definition.injectProperty("wireframe", with: self.trackListWireframe())
-            
+            definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())            
         }
     }
     
@@ -39,7 +39,7 @@ class TrackListAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(TrackListInteractor.self) {
             (definition) in
             
-            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
+            definition.injectProperty("trackDataStore", with: self.dataStoreAssembly.trackDataStore())
             definition.injectProperty("namedDTOAssembler", with: self.dtoAssemblersAsembly.namedDTOAssembler())
         }
     }
