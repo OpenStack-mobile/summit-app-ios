@@ -23,15 +23,14 @@ class LevelListViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     let cellIdentifier = "levelTableViewCell"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.viewLoad()
     }
     
     func reloadData() {
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.reloadData()
     }
     

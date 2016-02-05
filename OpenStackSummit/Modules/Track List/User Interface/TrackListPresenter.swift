@@ -20,10 +20,13 @@ public class TrackListPresenter: NSObject, ITrackListPresenter {
     var viewController: ITrackListViewController!
     var interactor: ITrackListInteractor!
     var wireframe: ITrackListWireframe!
+    
+    var scheduleFilter: ScheduleFilter!
     var tracks = [TrackDTO]()
     
     public func viewLoad() {
-        tracks = interactor.getTracks()
+        let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        tracks = interactor.getTracks(trackGroupSelections)
         viewController.reloadData()
     }
     

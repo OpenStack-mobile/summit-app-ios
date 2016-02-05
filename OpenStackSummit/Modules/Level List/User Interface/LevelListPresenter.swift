@@ -20,24 +20,31 @@ public class LevelListPresenter: NSObject, ILevelListPresenter {
     var viewController: ILevelListViewController!
     var interactor: ILevelListInteractor!
     var wireframe: ILevelListWireframe!
-    var Levels = [String]()
+    
+    var scheduleFilter: ScheduleFilter!
+    var levels = [String]()
     
     public func viewLoad() {
-        Levels = interactor.getLevels()
+        levels = interactor.getLevels()
+        if let levelSelections = scheduleFilter.selections[FilterSectionType.Level] as? [String] {
+            if levelSelections.count > 0 {
+                levels = levels.filter { levelSelections.contains($0) }
+            }
+        }
         viewController.reloadData()
     }
     
     public func buildScheduleCell(cell: ILevelTableViewCell, index: Int) {
-        let level = Levels[index]
+        let level = levels[index]
         cell.name = level
     }
     
     public func getLevelCount() -> Int {
-        return Levels.count
+        return levels.count
     }
     
     public func showLevelEvents(index: Int) {
-        let level = Levels[index]
+        let level = levels[index]
         wireframe.showLevelSchedule(level)
     }
 }
