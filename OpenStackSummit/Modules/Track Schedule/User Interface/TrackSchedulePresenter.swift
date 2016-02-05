@@ -43,26 +43,30 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         }
     }
     
-    var isLoaded = false
-    
     public func viewLoad(track: TrackDTO) {
         self.track = track
         viewController.track = track.name
         viewLoad()
     }
     
-    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO]
+    {
         let trackSelections = [track.id]
+        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
+        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
+        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
         
         let events = interactor.getScheduleEvents(
             startDate,
             endDate: endDate,
-            eventTypes: nil,
-            summitTypes: nil,
+            eventTypes: eventTypeSelections,
+            summitTypes: summitTypeSelections,
             tracks: trackSelections,
-            trackGroups:  nil,
-            tags: nil,
-            levels: nil
+            trackGroups: trackGroupSelections,
+            tags: tagSelections,
+            levels: levelSelections
         )
         
         return events

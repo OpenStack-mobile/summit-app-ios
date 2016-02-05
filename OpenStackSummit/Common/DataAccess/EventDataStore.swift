@@ -21,16 +21,14 @@ public protocol IEventDataStore {
 public class EventDataStore: GenericDataStore, IEventDataStore {
     var eventRemoteDataStore: IEventRemoteDataStore!
     
-    public override init() {
-        super.init()
-    }
-    
     public func getByIdLocal(id: Int) -> SummitEvent? {
         return super.getByIdLocal(id)
     }
     
     public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?)->[SummitEvent]{
+        
         var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        
         if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
         }
