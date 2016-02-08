@@ -18,6 +18,7 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(GeneralScheduleFilterWireframe.self) {
             (definition) in
             
+            definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("generalScheduleFilterViewController", with: self.generalScheduleFilterViewController())
         }
     }
@@ -30,6 +31,7 @@ public class GeneralScheduleFilterAssembly: TyphoonAssembly {
             definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
             definition.injectProperty("session", with: self.applicationAssembly.session())
             definition.injectProperty("viewController", with: self.generalScheduleFilterViewController())
+            definition.injectProperty("wireframe", with: self.generalScheduleFilterWireframe())
         }
     }
     

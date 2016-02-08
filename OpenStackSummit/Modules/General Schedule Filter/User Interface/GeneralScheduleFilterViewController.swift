@@ -13,7 +13,6 @@ import AMTagListView
 @objc
 public protocol IGeneralScheduleFilterViewController {
     var presenter: IGeneralScheduleFilterPresenter! { get set }
-    var navigationController: UINavigationController? { get }
     var tags: NSMutableArray! { get }
     func reloadFilters()
     func addTag(tag: String)
@@ -34,7 +33,7 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
     let extraPadding: CGFloat = 12
     let cellIdentifier = "generalScheduleFilterTableViewCell"
     
-    @IBOutlet weak var filterTable: UITableView!
+    @IBOutlet weak var dismissButton: UIBarButtonItem!
     @IBOutlet weak var summitTypeTableView: UITableView!
     @IBOutlet weak var trackGroupTableView: UITableView!
     @IBOutlet weak var eventTypeTableView: UITableView!
@@ -47,7 +46,11 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
     @IBOutlet weak var tagTextView: MLPAutoCompleteTextField!
     @IBOutlet weak var tagListView: AMTagListView!
     @IBOutlet weak var clearTagsButton: UIButton!
-    @IBOutlet weak var nameLabelVerticalConstrain: NSLayoutConstraint!
+    
+    
+    @IBAction func dissmisButtonPressed(sender: AnyObject) {
+        presenter.dismissViewController()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

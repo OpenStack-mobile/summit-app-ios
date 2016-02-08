@@ -22,7 +22,7 @@ public class GeneralScheduleWireframe: ScheduleWireframe, IGeneralScheduleWirefr
     }
     
     public func showFilters() {
-        generalScheduleFilterWireframe.presentFiltersView(generalScheduleViewController.navigationController!)
+        generalScheduleFilterWireframe.presentFiltersView(generalScheduleViewController)
     }
 }
 		
