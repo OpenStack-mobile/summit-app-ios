@@ -11,6 +11,7 @@ import UIKit
 import Typhoon
 
 class EventsAssembly: TyphoonAssembly {
+    var applicationAssembly: ApplicationAssembly!
     var generalScheduleAssembly: GeneralScheduleAssembly!
     var generalScheduleFilterAssembly: GeneralScheduleFilterAssembly!
     var trackListAssembly: TrackListAssembly!
@@ -29,7 +30,9 @@ class EventsAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventsPresenter.self) {
             (definition) in
             
+            definition.injectProperty("viewController", with: self.eventsViewController())
             definition.injectProperty("wireframe", with: self.eventsWireframe())
+            definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
         }
     }
     
