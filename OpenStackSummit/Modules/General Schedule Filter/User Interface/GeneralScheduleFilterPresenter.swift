@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IGeneralScheduleFilterPresenter {
     func viewLoad()
+    func dismissViewController()
     func getSummitTypeItemCount() -> Int
     func getEventTypeItemCount() -> Int
     func getTrackGroupItemCount() -> Int
@@ -33,6 +34,7 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     
     var interactor: IGeneralScheduleFilterInteractor!
     var viewController: IGeneralScheduleFilterViewController!
+    var wireframe: IGeneralScheduleFilterWireframe!
     var session: ISession!
     var scheduleFilter: ScheduleFilter!
     var filteredTags = [String]()
@@ -44,6 +46,10 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     
     public override init() {
         super.init()
+    }
+    
+    public func dismissViewController() {
+        wireframe.dismissFilterView()
     }
     
     public func viewLoad() {
