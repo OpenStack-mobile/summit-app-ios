@@ -27,18 +27,13 @@ class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvid
         presenter.viewLoad()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources t	hat can be recreated.
-    }
-    
     override func showActivityIndicator() {
         SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
     }
     
     override func hideActivityIndicator() {
         SwiftSpinner.hide()
-    }    
+    }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Schedule")
