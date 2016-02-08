@@ -2135,11 +2135,19 @@
                             <constraint firstItem="4Sv-6R-eFA" firstAttribute="leading" secondItem="UeV-vG-yh8" secondAttribute="leading" id="uea-uY-Ecm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FILTER" id="T5g-m3-oY4"/>
+                    <navigationItem key="navigationItem" title="FILTER" id="T5g-m3-oY4">
+                        <barButtonItem key="leftBarButtonItem" image="close" id="eQH-KS-mvL">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="dissmisButtonPressed:" destination="Wfw-Bg-W3Q" id="EAC-YG-KM6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1149"/>
                     <connections>
                         <outlet property="clearTagsButton" destination="DKJ-f5-LEp" id="xdk-uc-yGs"/>
+                        <outlet property="dismissButton" destination="eQH-KS-mvL" id="X4I-D4-HcY"/>
                         <outlet property="eventTypeHeightConstraint" destination="AMX-dk-fhL" id="1Ux-d7-nhW"/>
                         <outlet property="eventTypeTableView" destination="ZqD-L6-kPc" id="yTR-IT-coe"/>
                         <outlet property="levelHeightConstraint" destination="egj-rE-fT5" id="RLI-qM-2eI"/>
@@ -2756,6 +2764,7 @@
         <image name="Submenu_Feedback" width="23" height="22"/>
         <image name="arrow" width="19" height="29"/>
         <image name="checked_active" width="22" height="22"/>
+        <image name="close" width="18" height="18"/>
         <image name="credential" width="46" height="31"/>
         <image name="email" width="29" height="25"/>
         <image name="events" width="26" height="26"/>
