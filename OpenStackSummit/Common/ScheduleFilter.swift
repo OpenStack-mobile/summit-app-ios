@@ -8,6 +8,13 @@
 
 import UIKit
 
+/*protocol IScheduleFilter {
+    var selections: Dictionary<FilterSectionType, [AnyObject]> { get set }
+    var filterSections: [FilterSection] { get set }
+    func hasActiveFilters() -> Bool
+    func clearActiveFilters()
+}*/
+
 public class ScheduleFilter: NSObject {
     var selections = Dictionary<FilterSectionType, [AnyObject]>()
     var filterSections = [FilterSection]()
@@ -18,5 +25,22 @@ public class ScheduleFilter: NSObject {
         }
         let filterSection = filterSections.filter() { $0.type == type }.first!
         return filterSection.items.count == selections[type]?.count
+    }
+    
+    func hasActiveFilters() -> Bool {
+        var hasActiveFilters = false
+        for values in selections.values {
+            if values.count > 0 {
+                hasActiveFilters = true
+                break
+            }
+        }
+        return hasActiveFilters
+    }
+    
+    func clearActiveFilters() {
+        for var values in selections.values {
+            values.removeAll()
+        }
     }
 }

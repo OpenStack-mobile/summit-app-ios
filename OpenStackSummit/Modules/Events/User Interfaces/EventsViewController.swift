@@ -8,9 +8,20 @@
 
 import XLPagerTabStrip
 
-class EventsViewController: RevealTabStripViewController {
+@objc
+protocol IEventsViewController {
+    var activeFilterIndicator: Bool { get set }
+}
+
+class EventsViewController: RevealTabStripViewController, IEventsViewController {
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    
+    var activeFilterIndicator = false {
+        didSet {
+            filterButton.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
+        }
+    }
     
     var generalScheduleViewController: GeneralScheduleViewController!
     var trackListViewController: TrackListViewController!
@@ -36,7 +47,12 @@ class EventsViewController: RevealTabStripViewController {
             filterButton.action = Selector("showFilters:")
         }
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewLoad()
+    }
+    
     func showFilters(sender: UIBarButtonItem) {
         presenter.showFilters()
     }

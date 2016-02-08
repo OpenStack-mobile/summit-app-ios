@@ -10,11 +10,15 @@ import Foundation
 
 @objc
 public protocol IEventsPresenter {
+    func viewLoad()
     func showFilters()
 }
 
 public class EventsPresenter: NSObject, IEventsPresenter {
 
+    var scheduleFilter: ScheduleFilter!
+    
+    var viewController: IEventsViewController!
     var internalWireframe: IEventsWireframe!
     
     var wireframe : IEventsWireframe! {
@@ -24,6 +28,10 @@ public class EventsPresenter: NSObject, IEventsPresenter {
         set {
             internalWireframe = newValue
         }
+    }
+    
+    public func viewLoad() {
+        viewController.activeFilterIndicator = scheduleFilter.hasActiveFilters()
     }
     
     public func showFilters() {
