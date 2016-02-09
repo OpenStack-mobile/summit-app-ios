@@ -5,7 +5,7 @@ use_frameworks!
 pod 'Typhoon'
 pod 'SWRevealViewController'
 pod 'XLPagerTabStrip', '~> 4.0'
-pod 'KTCenterFlowLayoutSwift'
+pod 'KTCenterFlowLayout'
 pod 'AFHorizontalDayPicker', :git => 'https://github.com/alexfedosov/AFHorizontalDayPicker.git'
 pod 'Realm'
 pod 'RealmSwift'

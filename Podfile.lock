@@ -40,7 +40,7 @@ PODS:
     - AFNetworking (~> 2.3)
     - ImageSlideshow/Core
   - ImageSlideshow/Core (0.2.3)
-  - KTCenterFlowLayoutSwift (0.0.2)
+  - KTCenterFlowLayout (1.1.1)
   - MLPAutoCompleteTextField (1.5)
   - Mockingjay (1.1.0):
     - Mockingjay/Core (= 1.1.0)
@@ -84,7 +84,7 @@ DEPENDENCIES:
   - HanekeSwift
   - ImageSlideshow (~> 0.2.2)
   - ImageSlideshow/AFURL
-  - KTCenterFlowLayoutSwift
+  - KTCenterFlowLayout
   - MLPAutoCompleteTextField
   - Mockingjay
   - Parse
@@ -131,7 +131,7 @@ SPEC CHECKSUMS:
   GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   ImageSlideshow: 2895e62777c2ea36f56d948723b3586a12a89756
-  KTCenterFlowLayoutSwift: 09d596aff9511c3d0e9af96f3d25da40609f74f3
+  KTCenterFlowLayout: eded079c349450dea12f7cf94b424d1bc3205519
   MLPAutoCompleteTextField: ba4d507bbff2bd4f139d4197814fc8dd39caf77e
   Mockingjay: 5782cb22c9e99dece7aad5bdf738bfa187cfcdcc
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
