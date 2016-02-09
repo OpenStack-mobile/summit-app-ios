@@ -1837,7 +1837,7 @@
         <!--Events-->
         <scene sceneID="gXn-oi-vlh">
             <objects>
-                <viewController title="Events" id="pO0-Bd-G3e" customClass="EventsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Events" automaticallyAdjustsScrollViewInsets="NO" id="pO0-Bd-G3e" customClass="EventsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yrp-mr-stf"/>
                         <viewControllerLayoutGuide type="bottom" id="9Db-wT-sAZ"/>
@@ -1852,7 +1852,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="sRg-j6-70d"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hG7-e2-ZZY">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hG7-e2-ZZY" customClass="KTCenterFlowLayout">
                                     <size key="itemSize" width="79" height="42"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
