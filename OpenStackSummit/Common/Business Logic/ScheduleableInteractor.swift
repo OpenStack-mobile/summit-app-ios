@@ -32,7 +32,7 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
         let loggedInMember = securityManager.getCurrentMember()
         let event = eventDataStore.getByIdLocal(eventId)
         
-        summitAttendeeDataStore.addEventToMemberShedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
+        summitAttendeeDataStore.addEventToMemberSchedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
             completionBlock(error)
         }
     }
@@ -47,7 +47,7 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
         let loggedInMember = securityManager.getCurrentMember()
         let event = eventDataStore.getByIdLocal(eventId)
         
-        summitAttendeeDataStore.removeEventFromMemberShedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
+        summitAttendeeDataStore.removeEventFromMemberSchedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
             completionBlock(error)
         }
     }

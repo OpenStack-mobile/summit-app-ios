@@ -44,11 +44,11 @@ public class ScheduleablePresenter: NSObject {
                 if (error != nil) {
                     scheduleableView.scheduled = !scheduleableView.scheduled
                 }
+                
+                if (completionBlock != nil) {
+                    completionBlock!(error)
+                }
             })
-            
-            if (completionBlock != nil) {
-                completionBlock!(error)
-            }
         }
     }
 
