@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @objc
 public protocol IEventDataStore {
@@ -20,14 +21,15 @@ public protocol IEventDataStore {
 
 public class EventDataStore: GenericDataStore, IEventDataStore {
     var eventRemoteDataStore: IEventRemoteDataStore!
+    let sortProperties = [SortDescriptor(property: "start", ascending: true), SortDescriptor(property: "end", ascending: true)]
     
     public func getByIdLocal(id: Int) -> SummitEvent? {
         return super.getByIdLocal(id)
     }
     
     public func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?)->[SummitEvent]{
-        
-        var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+
+        var events = realm.objects(SummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted(self.sortProperties)
         
         if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
@@ -58,11 +60,11 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
             events = events.filter(tagsFilter)
         }
         
-        return events.map{$0}
+        return events.map { $0 }
     }
     
     public func getBySearchTerm(searchTerm: String!)->[SummitEvent] {
-        let events = realm.objects(SummitEvent).filter("name CONTAINS [c]%@ or eventDescription CONTAINS [c]%@ or ANY tags.name CONTAINS [c]%@ or eventType.name CONTAINS [c]%@ or presentation.speakers.fullName CONTAINS [c]%@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted("start")
+        let events = realm.objects(SummitEvent).filter("name CONTAINS [c]%@ or eventDescription CONTAINS [c]%@ or ANY tags.name CONTAINS [c]%@ or eventType.name CONTAINS [c]%@ or presentation.speakers.fullName CONTAINS [c]%@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(self.sortProperties)
         return events.map { $0 }
     }
     
@@ -78,7 +80,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
     }
     
     public func getSpeakerPresentationsLocal(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [SummitEvent] {
-        let events = realm.objects(SummitEvent).filter("presentation.speakers.id = %@ && start >= %@ and end <= %@", speakerId, startDate, endDate).sorted("start")
+        let events = realm.objects(SummitEvent).filter("presentation.speakers.id = %@ && start >= %@ and end <= %@", speakerId, startDate, endDate).sorted(self.sortProperties)
         return events.map { $0 }
     }
     
