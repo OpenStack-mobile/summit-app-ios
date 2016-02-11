@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -16,14 +16,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Isx-af-7bj">
-                        <rect key="frame" x="466" y="44" width="15" height="20"/>
+                        <rect key="frame" x="471" y="46" width="10" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Udk-UV-Gl1"/>
-                            <constraint firstAttribute="width" constant="15" id="uQG-c6-eha"/>
+                            <constraint firstAttribute="height" constant="15" id="Udk-UV-Gl1"/>
+                            <constraint firstAttribute="width" constant="10" id="uQG-c6-eha"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-Eb-6HK">
-                        <rect key="frame" x="99" y="59" width="344" height="15"/>
+                        <rect key="frame" x="99" y="59" width="349" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="g9f-Dt-0Qc"/>
                         </constraints>
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Om7-MJ-DoN">
-                        <rect key="frame" x="99" y="34" width="344" height="22"/>
+                        <rect key="frame" x="99" y="34" width="349" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="UF7-Vg-y3C"/>
                         </constraints>
@@ -70,7 +70,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrow" width="19" height="29"/>
+        <image name="arrow" width="10" height="15"/>
         <image name="generic-user-avatar" width="122" height="122"/>
     </resources>
 </document>
