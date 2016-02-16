@@ -1951,6 +1951,11 @@
 					CAD9060A1B72B34F00BA5647 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 775U6X6R5M;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					CAD906211B72B34F00BA5647 = {
 						CreatedOnToolsVersion = 7.0;
