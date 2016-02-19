@@ -18,6 +18,7 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var securityManager: SecurityManager!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //Crashlytics.sharedInstance().debugMode = true
@@ -65,5 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(application: UIApplication) {
         // yeah, this code is correct. It should delete notification badge when entering app
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        securityManager.checkPasscodeSettingChange()
     }
 }

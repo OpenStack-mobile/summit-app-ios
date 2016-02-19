@@ -11,13 +11,73 @@ import AeroGearHttp
 import AeroGearOAuth2
 
 public class SecurityManager: NSObject {
-    var session : ISession!
-    var oauthModuleOpenID: OAuth2Module!
-    var oauthModuleServiceAccount: OAuth2Module!
-    var memberDataStore: IMemberDataStore!
-    private let kCurrentMemberId = "currentMemberId"
     
-    public override init() {
+    var session : ISession!
+    
+    var internalOAuthModuleOpenID: OAuth2Module!
+    var internalOAuthModuleServiceAccount: OAuth2Module!
+    
+    var memberDataStore: IMemberDataStore!
+    
+    private let kCurrentMemberId = "currentMemberId"
+    private let kDeviceHadPasscode = "deviceHadPasscode"
+    
+    private var deviceHadPasscode: Bool? {
+        get {
+            return session.get(kDeviceHadPasscode) as? Bool
+        }
+        set {
+            session.set(kDeviceHadPasscode, value: newValue)
+        }
+    }
+    
+    public func deviceHasPasscode() -> Bool {
+        let secret = "Device has passcode set?".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        let attributes = [kSecClass as String:kSecClassGenericPassword, kSecAttrService as String:"LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String:secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly]
+        
+        let status = SecItemAdd(attributes, nil)
+        if status == 0 {
+            SecItemDelete(attributes)
+            return true
+        }
+        return false
+    }
+    
+    public func checkPasscodeSettingChange() {
+        if let hadPasscode = deviceHadPasscode {
+            if hadPasscode != deviceHasPasscode() {
+                configOAuthAccounts()
+            }
+        }
+    }
+    
+    public var oauthModuleOpenID: OAuth2Module! {
+        get {
+            if internalOAuthModuleOpenID == nil {
+                configOAuthAccounts()
+            }
+            return internalOAuthModuleOpenID
+        }
+        set {
+            internalOAuthModuleOpenID = newValue
+        }
+    }
+    
+    public var oauthModuleServiceAccount: OAuth2Module! {
+        get {
+            if internalOAuthModuleServiceAccount == nil {
+                configOAuthAccounts()
+            }
+            return internalOAuthModuleServiceAccount
+        }
+        set {
+            internalOAuthModuleServiceAccount = newValue
+        }
+    }
+    
+    public func configOAuthAccounts() {
+        let hasPasscode = deviceHasPasscode()
+        
         var config = Config(
             base: "https://dev-identity-provider",
             authzEndpoint: "oauth2/auth",
@@ -31,9 +91,8 @@ public class SecurityManager: NSObject {
             scopes: ["openid", "https://dev-resource-server/summits/read", "https://dev-resource-server/summits/write", "offline_access"],
             clientSecret: "OpenID Secret"
         )
+        oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
-        oauthModuleOpenID = AccountManager.addAccount(config, moduleClass: OpenStackOAuth2Module.self)
-
         config = Config(
             base: "https://dev-identity-provider",
             authzEndpoint: "oauth2/auth",
@@ -46,8 +105,26 @@ public class SecurityManager: NSObject {
             scopes: ["https://dev-resource-server/summits/read"],
             clientSecret: "Service Account Secret"
         )
+        oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
         
-        oauthModuleServiceAccount = AccountManager.addAccount(config, moduleClass: OpenStackOAuth2Module.self)
+        deviceHadPasscode = hasPasscode
+    }
+    
+    public func createOAuthModule(config: Config, hasPasscode: Bool) -> OAuth2Module {
+        var session: OAuth2Session
+        
+        config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
+        
+        if let hadPasscode = deviceHadPasscode {
+            if hadPasscode && !hasPasscode {
+                session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
+                session.clearTokens()
+            }
+        }
+        
+        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session(accountId: config.accountId!)
+        
+        return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
     
     public func login(completionBlock: (NSError?) -> Void) {
@@ -113,4 +190,5 @@ public class SecurityManager: NSObject {
     public func isLoggedIn() -> Bool {
         return session.get(kCurrentMemberId) != nil
     }
+    
 }
