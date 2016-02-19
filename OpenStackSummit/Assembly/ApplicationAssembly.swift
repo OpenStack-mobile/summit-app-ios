@@ -15,7 +15,11 @@ class ApplicationAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     
     dynamic func appDelegate() -> AnyObject {
-        return TyphoonDefinition.withClass(AppDelegate.self)
+        return TyphoonDefinition.withClass(AppDelegate.self) {
+            (definition) in
+            
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+        }
     }
         
     dynamic func mainStoryboard() -> AnyObject {
