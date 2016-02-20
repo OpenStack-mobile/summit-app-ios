@@ -1693,8 +1693,8 @@
 		CAE2A3C31C18B34E0097857E /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CAE2A3C61C18B3850097857E /* LevelSchedulePresenter.swift */,
 				CAE2A3C81C18B39C0097857E /* LevelScheduleViewController.swift */,
+				CAE2A3C61C18B3850097857E /* LevelSchedulePresenter.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
