@@ -49,9 +49,30 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
         viewLoad()
     }
     
+    override func getActiveSummitDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+        let levelSelections = [level]
+        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
+        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
+        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
+        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        
+        let activeDates = interactor.getActiveSummitDates(
+            startDate,
+            endDate: endDate,
+            eventTypes: eventTypeSelections,
+            summitTypes: summitTypeSelections,
+            tracks: trackSelections,
+            trackGroups: trackGroupSelections,
+            tags: tagSelections,
+            levels: levelSelections
+        )
+        
+        return activeDates
+    }
+    
     override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
         let levelSelections = [level]
-        
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
         let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
