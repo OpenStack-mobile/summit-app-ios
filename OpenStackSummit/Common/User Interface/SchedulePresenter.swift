@@ -106,9 +106,15 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                 }
                 
                 self.summitTimeZoneOffset = NSTimeZone(name: summit!.timeZone)!.secondsFromGMT
+                
                 viewController.startDate = summit!.startDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
                 viewController.endDate = summit!.endDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
-                viewController.selectedDate = self.selectedDate != nil ? self.selectedDate : viewController.startDate
+                viewController.activeDates = self.getActiveSummitDatesFrom(
+                    viewController.startDate,
+                    to: viewController.endDate,
+                    withInteractor: interactor
+                )
+                viewController.selectedDate = viewController.activeDates.count > 0 ? viewController.activeDates.first : self.selectedDate != nil ? self.selectedDate : viewController.startDate
             })
         }
     }
@@ -128,6 +134,28 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         })
     }
     
+    func getActiveSummitDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
+        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
+        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
+        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
+        
+        let activeDates = interactor.getActiveSummitDates(
+            startDate,
+            endDate: endDate,
+            eventTypes: eventTypeSelections,
+            summitTypes: summitTypeSelections,
+            tracks: trackSelections,
+            trackGroups: trackGroupSelections,
+            tags: tagSelections,
+            levels: levelSelections
+        )
+        
+        return activeDates
+    }
+
     func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
