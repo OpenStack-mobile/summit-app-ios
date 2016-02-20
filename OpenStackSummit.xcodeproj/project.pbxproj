@@ -2597,7 +2597,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = OpenStackSummit;
-				PROVISIONING_PROFILE = "bb66fbca-1c9b-4a6a-9766-99115df22688";
+				PROVISIONING_PROFILE = "6b0f8b14-0b43-4806-9d88-1afa2a5b1e75";
 			};
 			name = Debug;
 		};
@@ -2614,7 +2614,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = OpenStackSummit;
-				PROVISIONING_PROFILE = "bb66fbca-1c9b-4a6a-9766-99115df22688";
+				PROVISIONING_PROFILE = "6b0f8b14-0b43-4806-9d88-1afa2a5b1e75";
 			};
 			name = Release;
 		};
