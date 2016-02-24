@@ -18,6 +18,6 @@ public class TrackListWireframe: NSObject, ITrackListWireframe {
     var trackListViewController: ITrackListViewController!
     
     public func showTrackSchedule(track: TrackDTO) {
-        trackScheduleWireframe.presentTrackScheduleView(track, viewController: trackListViewController.navigationController!)
+        trackScheduleWireframe.presentTrackScheduleView(track, toNavigationController: trackListViewController.navigationController!)
     }
 }

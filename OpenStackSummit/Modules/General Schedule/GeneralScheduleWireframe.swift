@@ -14,11 +14,11 @@ public protocol IGeneralScheduleWireframe: IScheduleWireframe {
 }
 
 public class GeneralScheduleWireframe: ScheduleWireframe, IGeneralScheduleWireframe {
-    weak var generalScheduleViewController: GeneralScheduleViewController!
+    var generalScheduleViewController: GeneralScheduleViewController!
     var generalScheduleFilterWireframe: IGeneralScheduleFilterWireframe!
     
     public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, viewController: generalScheduleViewController)
+        super.showEventDetail(eventId, fromViewController: generalScheduleViewController)
     }
     
     public func showFilters() {

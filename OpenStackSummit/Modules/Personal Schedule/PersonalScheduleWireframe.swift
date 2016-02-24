@@ -12,6 +12,6 @@ public class PersonalScheduleWireframe: ScheduleWireframe {
     var personalScheduleViewController: PersonalScheduleViewController!
 
     public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, viewController: personalScheduleViewController)
+        super.showEventDetail(eventId, fromViewController: personalScheduleViewController)
     }
 }

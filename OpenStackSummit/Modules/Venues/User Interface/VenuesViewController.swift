@@ -7,19 +7,18 @@
 //
 
 import XLPagerTabStrip
+import KTCenterFlowLayout
 
 class VenuesViewController: RevealTabStripViewController {
-    
-    var venuesMapViewController: VenuesMapViewController!
-    var venueListViewController: VenueListViewController!
+    var presenter: IVenuesPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "VENUES"
+        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
     }
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        return [venuesMapViewController, venueListViewController]
+        return presenter.getChildViews()
     }
-    
 }

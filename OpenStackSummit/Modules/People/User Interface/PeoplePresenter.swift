@@ -116,10 +116,10 @@ public class PeoplePresenter: NSObject, IPeoplePresenter {
     public func showPersonProfile(index: Int) {
         let person = self.isAttendeesView ? self.attendees[index] : self.speakers[index]
         if (isAttendeesView) {
-            wireframe.showAttendeeProfile(person.id)
+            wireframe.showAttendeeProfile(person.id, fromViewController: attendeesListViewController as! AttendeesListViewController)
         }
         else {
-            wireframe.showSpeakerProfile(person.id)
+            wireframe.showSpeakerProfile(person.id, fromViewController: speakersListViewController as! SpeakerListViewController)
         }
     }
     

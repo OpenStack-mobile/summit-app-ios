@@ -22,6 +22,8 @@ class SearchAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(SearchWireframe.self) {
             (definition) in
             
+            definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
+            definition.injectProperty("revealViewController", with: self.applicationAssembly.revealViewController())
             definition.injectProperty("searchViewController", with: self.searchViewController())
             definition.injectProperty("eventDetailWireframe", with: self.eventDetailAssembly.eventDetailWireframe())
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
@@ -58,10 +60,14 @@ class SearchAssembly: TyphoonAssembly {
     }
     
     dynamic func searchViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(SearchViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.searchPresenter())
-        }
+            factoryMethod.injectParameterWith("SearchViewController")
+            }, configuration: {
+                (definition) in
+                
+                definition.injectProperty("presenter", with: self.searchPresenter())
+        })
     }
 }

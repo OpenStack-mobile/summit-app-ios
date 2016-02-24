@@ -52,8 +52,10 @@ public class MemberProfileDetailAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("MemberProfileDetailViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.memberProfileDetailPresenter())
-                definition.scope = TyphoonScope.WeakSingleton
-        })
+                definition.scope = TyphoonScope.Singleton
+            }
+        )
     }
 }

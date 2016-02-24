@@ -443,10 +443,6 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         actionSheet.show()
     }*/
     
-    override func viewWillDisappear(animated: Bool) {
-        presenter.viewUnload()
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
