@@ -16,7 +16,7 @@ protocol IEventsViewController {
 
 class EventsViewController: RevealTabStripViewController, IEventsViewController {
     
-    var filterButton: UIBarButtonItem?
+    var filterButton: UIBarButtonItem!
     
     var activeFilterIndicator = false {
         didSet {
@@ -39,8 +39,11 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "EVENTS"
         
-        filterButton = UIBarButtonItem(title:"Filter", style: .Plain, target: self, action: Selector("showFilters:"))
-        filterButton!.image = UIImage(named: "filter")
+        filterButton = UIBarButtonItem()
+        filterButton.target = self
+        filterButton.action = Selector("showFilters:")
+        filterButton.image = UIImage(named: "filter")
+        navigationItem.rightBarButtonItem = filterButton
         
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
     }

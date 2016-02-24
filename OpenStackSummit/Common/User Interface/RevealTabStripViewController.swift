@@ -35,7 +35,6 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController, SWReve
         menuButton.target = revealViewController()
         menuButton.action = Selector("revealToggle:")
         menuButton.image = UIImage(named: "menu")
-        
         navigationItem.leftBarButtonItem = menuButton
         
         revealViewController()?.delegate = self
