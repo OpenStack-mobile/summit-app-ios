@@ -11,6 +11,10 @@ import Typhoon
 
 public class MenuAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
+    var searchAssembly: SearchAssembly!
+    var eventsAssembly: EventsAssembly!
+    var venuesAssembly: VenuesAssembly!
+    var peopleAssembly: PeopleAssembly!
     var myProfileAssembly: MyProfileAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
@@ -19,7 +23,10 @@ public class MenuAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MenuWireframe.self) {
             (definition) in
             
-            definition.injectProperty("menuViewController", with: self.menuViewController())
+            definition.injectProperty("searchWireframe", with: self.searchAssembly.searchWireframe())
+            definition.injectProperty("eventsWireframe", with: self.eventsAssembly.eventsWireframe())
+            definition.injectProperty("venuesWireframe", with: self.venuesAssembly.venuesWireframe())
+            definition.injectProperty("peopleWireframe", with: self.peopleAssembly.peopleWireframe())
             definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
         }
     }
@@ -49,11 +56,15 @@ public class MenuAssembly: TyphoonAssembly {
     }
     
     dynamic func menuViewController() -> AnyObject {
-        return TyphoonDefinition.withClass(MenuViewController.self) {
-            (definition) in
+        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
+            (factoryMethod) in
             
-            definition.injectProperty("presenter", with: self.menuPresenter())
-            definition.injectProperty("session", with: self.applicationAssembly.session())
-        }
+            factoryMethod.injectParameterWith("MenuViewController")
+            }, configuration: {
+                (definition) in
+                
+                definition.injectProperty("presenter", with: self.menuPresenter())
+                definition.injectProperty("session", with: self.applicationAssembly.session())
+        })
     }
 }

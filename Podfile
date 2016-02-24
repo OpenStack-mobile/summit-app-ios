@@ -4,7 +4,7 @@ use_frameworks!
 # framework dependencies
 pod 'Typhoon'
 pod 'SWRevealViewController'
-pod 'XLPagerTabStrip', '~> 4.0'
+pod 'XLPagerTabStrip', :git => 'https://github.com/gcutrini/XLPagerTabStrip.git'
 pod 'KTCenterFlowLayout'
 pod 'AFHorizontalDayPicker', :git => 'https://github.com/alexfedosov/AFHorizontalDayPicker.git'
 pod 'Realm'

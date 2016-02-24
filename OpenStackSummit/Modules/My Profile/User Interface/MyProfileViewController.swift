@@ -23,6 +23,7 @@ class MyProfileViewController: RevealTabStripViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         navigationController?.navigationBar.topItem?.title = "MY PROFILE"
     }
     

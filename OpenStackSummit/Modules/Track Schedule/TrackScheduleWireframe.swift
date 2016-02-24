@@ -10,20 +10,20 @@ import UIKit
 
 @objc
 public protocol ITrackScheduleWireframe: IScheduleWireframe {
-    func presentTrackScheduleView(track: TrackDTO, viewController: UINavigationController)
+    func presentTrackScheduleView(track: TrackDTO, toNavigationController navigationController: UINavigationController)
 }
 
 public class TrackScheduleWireframe: ScheduleWireframe, ITrackScheduleWireframe {
     var trackScheduleViewController: TrackScheduleViewController!
     
-    public func presentTrackScheduleView(track: TrackDTO, viewController: UINavigationController) {
+    public func presentTrackScheduleView(track: TrackDTO, toNavigationController navigationController: UINavigationController) {
         let newViewController = trackScheduleViewController!
         let _ = trackScheduleViewController.view! // this is only to force viewLoad to trigger
         trackScheduleViewController.presenter.viewLoad(track)
-        viewController.pushViewController(newViewController, animated: true)
+        navigationController.pushViewController(newViewController, animated: true)
     }
     
     public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, viewController: trackScheduleViewController)
+        super.showEventDetail(eventId, fromViewController: trackScheduleViewController)
     }    
 }

@@ -21,6 +21,8 @@ class EventsAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventsWireframe.self) {
             (definition) in
             
+            definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
+            definition.injectProperty("revealViewController", with: self.applicationAssembly.revealViewController())
             definition.injectProperty("eventsViewController", with: self.eventsViewController())
             definition.injectProperty("generalScheduleFilterWireframe", with: self.generalScheduleFilterAssembly.generalScheduleFilterWireframe())
         }
@@ -33,6 +35,9 @@ class EventsAssembly: TyphoonAssembly {
             definition.injectProperty("viewController", with: self.eventsViewController())
             definition.injectProperty("wireframe", with: self.eventsWireframe())
             definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
+            definition.injectProperty("generalScheduleViewController", with: self.generalScheduleAssembly.generalScheduleViewController())
+            definition.injectProperty("trackListViewController", with: self.trackListAssembly.trackListViewController())
+            definition.injectProperty("levelListViewController", with: self.levelListAssembly.levelListViewController())
         }
     }
     
@@ -40,9 +45,6 @@ class EventsAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(EventsViewController.self) {
             (definition) in
             
-            definition.injectProperty("generalScheduleViewController", with: self.generalScheduleAssembly.generalScheduleViewController())
-            definition.injectProperty("trackListViewController", with: self.trackListAssembly.trackListViewController())
-            definition.injectProperty("levelListViewController", with: self.levelListAssembly.levelListViewController())
             definition.injectProperty("presenter", with: self.eventsPresenter())
         }
     }

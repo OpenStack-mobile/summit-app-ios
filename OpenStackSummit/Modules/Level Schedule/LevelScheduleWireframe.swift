@@ -24,6 +24,6 @@ public class LevelScheduleWireframe: ScheduleWireframe, ILevelScheduleWireframe 
     }
     
     public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, viewController: levelScheduleViewController)
+        super.showEventDetail(eventId, fromViewController: levelScheduleViewController)
     }
 }

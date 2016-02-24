@@ -10,15 +10,42 @@ import UIKit
 
 @objc
 public protocol IMenuWireframe {
+    func showSearchResults()
+    func showEvents()
+    func showVenues()
+    func showPeople()
+    func showSpeakers()
     func showMyProfile(memberId: Int)
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
-    var menuViewController: MenuViewController!
+    var searchWireframe: ISearchWireframe!
+    var eventsWireframe: IEventsWireframe!
+    var venuesWireframe: IVenuesWireframe!
+    var peopleWireframe: IPeopleWireframe!
     var myProfileWireframe: IMyProfileWireframe!
     
-    public func showMyProfile(memberId: Int) {
-        myProfileWireframe.presentMyProfileViewFromRevealViewController(menuViewController.revealViewController())
+    public func showSearchResults() {
+        searchWireframe.pushSearchResultsView()
     }
     
+    public func showEvents() {
+        eventsWireframe.pushEventsView()
+    }
+    
+    public func showVenues() {
+        venuesWireframe.pushVenuesView()
+    }
+    
+    public func showPeople() {
+        // TODO: Implement people segue
+    }
+    
+    public func showSpeakers() {
+        peopleWireframe.pushSpeakersView()
+    }
+    
+    public func showMyProfile(memberId: Int) {
+        myProfileWireframe.pushMyProfileView()
+    }
 }

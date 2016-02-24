@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol IEventDetailPresenter: IBasePresenter {
+public protocol IEventDetailPresenter {
     func viewLoad()
     var eventId: Int { get set }
     
@@ -21,7 +21,6 @@ public protocol IEventDetailPresenter: IBasePresenter {
     func showSpeakerProfile(index: Int)
     func loadFeedback()
     func showVenueDetail()
-    func viewUnload()
     func toggleScheduledStatus()
 }
 
@@ -137,17 +136,17 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
     }
     
     public func leaveFeedback() {
-        wireframe.showFeedbackEdit(eventId, onViewController: viewController)
+        wireframe.showFeedbackEdit(eventId, fromViewController: viewController)
     }
     
     public func showSpeakerProfile(index: Int) {
         let speaker = event.speakers[index]
-        wireframe.showSpeakerProfile(speaker.id, onViewController: viewController)
+        wireframe.showSpeakerProfile(speaker.id, fromViewController: viewController)
     }
     
     public func showVenueDetail() {
         if event.venueId != nil {
-            wireframe.showVenueDetail(event.venueId!, onViewController: viewController)
+            wireframe.showVenueDetail(event.venueId!, fromViewController: viewController)
         }
     }
     
@@ -157,8 +156,5 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 self.viewController.showErrorMessage(error!)
             }
         }
-    }
-    
-    public func viewUnload() {
     }
 }

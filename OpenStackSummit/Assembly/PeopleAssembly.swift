@@ -18,10 +18,11 @@ class PeopleAssembly: TyphoonAssembly {
     dynamic func peopleWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(PeopleWireframe.self) {
             (definition) in
+            
+            definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
+            definition.injectProperty("revealViewController", with: self.applicationAssembly.revealViewController())
+            definition.injectProperty("speakersViewController", with: self.speakersViewController())
             definition.injectProperty("memberProfileWireframe", with: self.memberProfileAssembly.memberProfileWireframe())
-            definition.injectProperty("memberProfileDetailWireframe", with: self.memberProfileDetailAssembly.memberProfileDetailWireframe())
-            definition.injectProperty("attendeesListViewController", with: self.attendeesListViewController())
-            definition.injectProperty("speakersListViewController", with: self.speakerListViewController())
        }
     }
     
@@ -33,7 +34,6 @@ class PeopleAssembly: TyphoonAssembly {
             definition.injectProperty("speakersListViewController", with: self.speakerListViewController())
             definition.injectProperty("interactor", with: self.peopleInteractor())
             definition.injectProperty("wireframe", with: self.peopleWireframe())
-            
         }
     }
     
@@ -71,6 +71,7 @@ class PeopleAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("AttendeesListViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.peoplePresenter())
         })
     }
@@ -82,6 +83,7 @@ class PeopleAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("SpeakerListViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.peoplePresenter())
         })
     }

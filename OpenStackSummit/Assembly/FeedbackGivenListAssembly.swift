@@ -41,6 +41,7 @@ public class FeedbackGivenListAssembly: TyphoonAssembly {
                 (definition) in
                 
                 definition.injectProperty("presenter", with: self.feedbackGivenListPresenter())
+                definition.scope = TyphoonScope.Singleton
         })
     }
 }

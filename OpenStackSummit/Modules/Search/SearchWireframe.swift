@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import SWRevealViewController
 
 @objc
 public protocol ISearchWireframe {
+    func pushSearchResultsView()
     func showEventDetail(eventId: Int)
     func showTrackSchedule(track: TrackDTO)
     func showAttendeeProfile(attendeeId: Int)
@@ -17,24 +19,31 @@ public protocol ISearchWireframe {
 }
 
 public class SearchWireframe: NSObject, ISearchWireframe {
-    var memberProfileWireframe : IMemberProfileWireframe!
-    var searchViewController: ISearchViewController!
-    var trackScheduleWireframe: ITrackScheduleWireframe!
+    var navigationController: NavigationController!
+    var revealViewController: SWRevealViewController!
+    var searchViewController: SearchViewController!
     var eventDetailWireframe : IEventDetailWireframe!
+    var trackScheduleWireframe: ITrackScheduleWireframe!
+    var memberProfileWireframe : IMemberProfileWireframe!
+    
+    public func pushSearchResultsView() {
+        navigationController.setViewControllers([searchViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
     
     public func showEventDetail(eventId: Int) {
-        eventDetailWireframe.presentEventDetailView(eventId, onNavigationViewController: searchViewController.navigationController!)
+        eventDetailWireframe.pushEventDetailView(eventId, toNavigationViewController: searchViewController.navigationController!)
     }
     
     public func showTrackSchedule(track: TrackDTO) {
-        trackScheduleWireframe.presentTrackScheduleView(track, viewController: searchViewController.navigationController!)
+        trackScheduleWireframe.presentTrackScheduleView(track, toNavigationController: searchViewController.navigationController!)
     }
+    
     public func showAttendeeProfile(attendeeId: Int) {
-        //memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: searchViewController.navigationController!)
+        //memberProfileWireframe.pushAttendeeProfileView(attendeeId, toNavigationController: searchViewController.navigationController!)
     }
     
     public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: searchViewController.navigationController!)
+        memberProfileWireframe.pushSpeakerProfileView(speakerId, toNavigationController: searchViewController.navigationController!)
     }
-
 }

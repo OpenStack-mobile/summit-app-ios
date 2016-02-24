@@ -79,21 +79,26 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     @IBOutlet weak var searchTextView: UITextField!
     
     @IBAction func toggleMenuSelection(sender: UIButton) {
+        
         eventsButton.alpha = 0.5
         venuesButton.alpha = 0.5
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
+        
         sender.alpha = 1
         
-        if (sender == myProfileButton) {
+        switch sender {
+        case eventsButton:
+            presenter.showEvents()
+        case venuesButton:
+            presenter.showVenues()
+        case peopleButton:
+            presenter.showPeopleOrSpeakers()
+        case myProfileButton:
             presenter.showMyProfile()
+        default:
+            break
         }
-    }
-    
-    @IBAction func peopleOrSpeakersPressed(sender: UIButton) {
-        let identifier = presenter.hasAccessToMenuItem(MenuItem.Attendees) ? "PeopleNavigationController" : "SpeakersNavigationController"
-        let navigationController = storyboard?.instantiateViewControllerWithIdentifier(identifier) as! UINavigationController
-        revealViewController().pushFrontViewController(navigationController, animated: true)
     }
     
     @IBAction func login(sender: UIButton) {
@@ -145,7 +150,6 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     func navigateToHome() {
         toggleMenuSelection(eventsButton)
-        performSegueWithIdentifier("eventsSegue", sender: self)
     }
     
     func showActivityIndicator() {
@@ -156,16 +160,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         SwiftSpinner.hide()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "searchSegue") {
-            session.set(Constants.SessionKeys.SearchTerm, value: searchTextView.text)
-        }
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         searchTextView.resignFirstResponder()
         if !searchTextView.text!.isEmpty {
-            performSegueWithIdentifier("searchSegue", sender: self)
+            presenter.showSearchResults()
         }
         return true
     }

@@ -11,10 +11,14 @@ import UIKit
 @objc
 public protocol IMenuPresenter {
     func viewLoad()
-    func showMyProfile()
     func hasAccessToMenuItem(item: MenuItem) -> Bool
     func login()
     func logout()
+    func showSearchResults()
+    func showEvents()
+    func showVenues()
+    func showPeopleOrSpeakers()
+    func showMyProfile()
 }
 
 public class MenuPresenter: NSObject, IMenuPresenter {
@@ -64,7 +68,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 show = true
         }
         return show
-        
+
     }
     
     public func login() {
@@ -105,6 +109,27 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             self.viewController.reloadMenu()
             self.viewController.hideMenu()
             self.viewController.hideActivityIndicator()
+        }
+    }
+    
+    public func showSearchResults() {
+        wireframe.showSearchResults()
+    }
+    
+    public func showEvents() {
+        wireframe.showEvents()
+    }
+    
+    public func showVenues() {
+        wireframe.showVenues()
+    }
+    
+    public func showPeopleOrSpeakers() {
+        if hasAccessToMenuItem(MenuItem.Attendees) {
+            wireframe.showPeople()
+        }
+        else {
+            wireframe.showSpeakers()
         }
     }
     

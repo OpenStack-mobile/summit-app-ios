@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
 		9D15F9831C57D99800FCAFCD /* VenueDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15F9821C57D99800FCAFCD /* VenueDataStore.swift */; };
+		9D1947DB1C7AC68900409CEF /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1947DA1C7AC68900409CEF /* NavigationController.swift */; };
 		9D1D92031C4E06B200C1BB6C /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */; };
 		9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */; };
 		9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */; };
@@ -18,18 +19,18 @@
 		9D858BC61C56C5E100DBAA9E /* TableViewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D858BC51C56C5E100DBAA9E /* TableViewSectionHeader.xib */; };
 		9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */; };
 		9DAC06E51BFB776700C1208F /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */; };
-		9DAC06E71BFB78CA00C1208F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */; };
 		9DAC06E91BFB78CA00C1208F /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */; };
 		9DAC06EB1BFB78CA00C1208F /* EventsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */; };
+		9DAD9D1D1C7D50D700CD1503 /* VenuesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD9D1C1C7D50D700CD1503 /* VenuesPresenter.swift */; };
+		9DAD9D1F1C7D811A00CD1503 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAD9D1E1C7D811A00CD1503 /* EventsViewController.swift */; };
 		9DB64DEE1C224304003D5158 /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB64DED1C224304003D5158 /* HanekeInputSource.swift */; };
 		9DBB65451C10B55200F70B4E /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBB65441C10B55200F70B4E /* SpeakersViewController.swift */; };
-		9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */; };
+		9DCCD2641C7CB69B00D0909D /* VenuesWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCD2631C7CB69B00D0909D /* VenuesWireframe.swift */; };
 		9DDBE76E1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBE76C1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift */; };
 		9DDBE76F1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBE76D1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift */; };
 		9DEA0FB71BFD0D490035B130 /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */; };
 		9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */; };
 		9DEF61B41C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */; };
-		9DEF61B61C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B51C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift */; };
 		9DF1B8BC1C50215E00945E47 /* RealmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */; };
 		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
@@ -291,7 +292,6 @@
 		CAE2A3CB1C18B5B50097857E /* LevelScheduleWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE2A3CA1C18B5B50097857E /* LevelScheduleWireframe.swift */; };
 		CAE2A3CD1C18BD180097857E /* LevelListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE2A3CC1C18BD180097857E /* LevelListAssembly.swift */; };
 		CAE2A3CF1C18BDF90097857E /* LevelScheduleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE2A3CE1C18BDF90097857E /* LevelScheduleAssembly.swift */; };
-		CAE42A531BE2466200980315 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE42A521BE2466200980315 /* BasePresenter.swift */; };
 		CAE5EC2A1B83B85F0032AD31 /* MemberDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE5EC291B83B85F0032AD31 /* MemberDeserializer.swift */; };
 		CAE5EC2E1B83D3890032AD31 /* TagDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE5EC2D1B83D3890032AD31 /* TagDeserializer.swift */; };
 		CAE643441BCD605C005E530B /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE643431BCD605C005E530B /* TrackListViewController.swift */; };
@@ -354,6 +354,7 @@
 		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9D15F9821C57D99800FCAFCD /* VenueDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDataStore.swift; sourceTree = "<group>"; };
+		9D1947DA1C7AC68900409CEF /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = "User Interface/NavigationController.swift"; sourceTree = "<group>"; };
 		9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
 		9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDeserializer.swift; sourceTree = "<group>"; };
 		9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataStore.swift; sourceTree = "<group>"; };
@@ -363,18 +364,18 @@
 		9D858BC51C56C5E100DBAA9E /* TableViewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewSectionHeader.xib; path = "User Interface/TableViewSectionHeader.xib"; sourceTree = "<group>"; };
 		9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAssembly.swift; sourceTree = "<group>"; };
 		9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealTabStripViewController.swift; path = "User Interface/RevealTabStripViewController.swift"; sourceTree = "<group>"; };
-		9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = "Events/User Interfaces/EventsViewController.swift"; sourceTree = "<group>"; };
 		9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsPresenter.swift; path = "Events/User Interface/EventsPresenter.swift"; sourceTree = "<group>"; };
 		9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsWireframe.swift; path = Events/EventsWireframe.swift; sourceTree = "<group>"; };
+		9DAD9D1C1C7D50D700CD1503 /* VenuesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VenuesPresenter.swift; path = "Venues/User Interface/VenuesPresenter.swift"; sourceTree = "<group>"; };
+		9DAD9D1E1C7D811A00CD1503 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsViewController.swift; path = "Events/User Interface/EventsViewController.swift"; sourceTree = "<group>"; };
 		9DB64DED1C224304003D5158 /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
 		9DBB65441C10B55200F70B4E /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
-		9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		9DCCD2631C7CB69B00D0909D /* VenuesWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VenuesWireframe.swift; path = Venues/VenuesWireframe.swift; sourceTree = "<group>"; };
 		9DDBE76C1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueLocationDetailPresenter.swift; sourceTree = "<group>"; };
 		9DDBE76D1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueLocationDetailViewController.swift; sourceTree = "<group>"; };
 		9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VenuesViewController.swift; path = "Venues/User Interface/VenuesViewController.swift"; sourceTree = "<group>"; };
 		9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesAssembly.swift; sourceTree = "<group>"; };
 		9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsWireframe.swift; sourceTree = "<group>"; };
-		9DEF61B51C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListWireframe.swift; sourceTree = "<group>"; };
 		9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmFactory.swift; path = DataAccess/RealmFactory.swift; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -644,7 +645,6 @@
 		CAE2A3CA1C18B5B50097857E /* LevelScheduleWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleWireframe.swift; sourceTree = "<group>"; };
 		CAE2A3CC1C18BD180097857E /* LevelListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelListAssembly.swift; sourceTree = "<group>"; };
 		CAE2A3CE1C18BDF90097857E /* LevelScheduleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleAssembly.swift; sourceTree = "<group>"; };
-		CAE42A521BE2466200980315 /* BasePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		CAE5EC291B83B85F0032AD31 /* MemberDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MemberDeserializer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CAE5EC2D1B83D3890032AD31 /* TagDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDeserializer.swift; sourceTree = "<group>"; };
 		CAE643431BCD605C005E530B /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
@@ -726,9 +726,7 @@
 		9D5A99CB1B948D5C002FFAA4 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				CAE42A521BE2466200980315 /* BasePresenter.swift */,
 				CADB47A91BF29C2C00CE0629 /* BaseViewController.swift */,
-				9DD88C1C1BFA35C300C8A86D /* ButtonCell.xib */,
 				9D858BC31C56C55C00DBAA9E /* TableViewSectionHeader.swift */,
 				9D858BC51C56C5E100DBAA9E /* TableViewSectionHeader.xib */,
 				CADE09951C08CB77002B21BA /* FeedbackTableViewCell.swift */,
@@ -739,6 +737,7 @@
 				CADF6CA21BFE1D3B007998BF /* PeopleListView.xib */,
 				CADF6CAA1BFE23E2007998BF /* PeopleTableViewCell.swift */,
 				CADF6CAB1BFE23E2007998BF /* PeopleTableViewCell.xib */,
+				9D1947DA1C7AC68900409CEF /* NavigationController.swift */,
 				9DAC06E41BFB776700C1208F /* RevealTabStripViewController.swift */,
 				9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */,
 				CADB47A51BF27C8A00CE0629 /* ScheduleablePresenter.swift */,
@@ -767,7 +766,7 @@
 		9D646AEB1BF120FB00644FD0 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				9DAC06E61BFB78CA00C1208F /* EventsViewController.swift */,
+				9DAD9D1E1C7D811A00CD1503 /* EventsViewController.swift */,
 				9DAC06E81BFB78CA00C1208F /* EventsPresenter.swift */,
 			);
 			name = "User Interface";
@@ -777,6 +776,7 @@
 			isa = PBXGroup;
 			children = (
 				9DEA0FB51BFD0CF90035B130 /* User Interface */,
+				9DCCD2631C7CB69B00D0909D /* VenuesWireframe.swift */,
 			);
 			name = Venues;
 			sourceTree = "<group>";
@@ -785,6 +785,7 @@
 			isa = PBXGroup;
 			children = (
 				9DEA0FB61BFD0D490035B130 /* VenuesViewController.swift */,
+				9DAD9D1C1C7D50D700CD1503 /* VenuesPresenter.swift */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -929,7 +930,6 @@
 			children = (
 				CA4399851BD156C0008F378D /* Business Logic */,
 				CA4399871BD156C0008F378D /* User Interface */,
-				9DEF61B51C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift */,
 			);
 			path = "Feedback Given List";
 			sourceTree = "<group>";
@@ -1102,18 +1102,10 @@
 		CAA3C3DD1C1E01DB0088EC22 /* My Profile */ = {
 			isa = PBXGroup;
 			children = (
-				CAA3C3DE1C1E01DB0088EC22 /* Business Logic */,
 				CAA3C3DF1C1E01DB0088EC22 /* User Interface */,
 				CAA3C3E01C1E01FC0088EC22 /* MyProfileWireframe.swift */,
 			);
 			path = "My Profile";
-			sourceTree = "<group>";
-		};
-		CAA3C3DE1C1E01DB0088EC22 /* Business Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Business Logic";
 			sourceTree = "<group>";
 		};
 		CAA3C3DF1C1E01DB0088EC22 /* User Interface */ = {
@@ -1195,12 +1187,12 @@
 		CACB39FB1BC2A38200B1363F /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				9DBB65441C10B55200F70B4E /* SpeakersViewController.swift */,
 				CACB39FC1BC2A3A400B1363F /* PeopleViewController.swift */,
 				CACB39FE1BC2A4C700B1363F /* PeoplePresenter.swift */,
 				CADF6CB21BFE2851007998BF /* PeopleListViewController.swift */,
 				CADF6CAE1BFE2707007998BF /* AttendeesListViewController.swift */,
 				CADF6CB01BFE272F007998BF /* SpeakerListViewController.swift */,
-				9DBB65441C10B55200F70B4E /* SpeakersViewController.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -2001,7 +1993,6 @@
 				CAE643631BCDC1FE005E530B /* ScheduleView.xib in Resources */,
 				9D858BC61C56C5E100DBAA9E /* TableViewSectionHeader.xib in Resources */,
 				CADF6CA31BFE1D3B007998BF /* PeopleListView.xib in Resources */,
-				9DD88C1D1BFA35C300C8A86D /* ButtonCell.xib in Resources */,
 				CAD906191B72B34F00BA5647 /* Assets.xcassets in Resources */,
 				CAD906141B72B34F00BA5647 /* Main.storyboard in Resources */,
 			);
@@ -2144,6 +2135,7 @@
 				CAE6435B1BCDB65F005E530B /* TrackSchedulePresenter.swift in Sources */,
 				CAE643611BCDC1DF005E530B /* ScheduleView.swift in Sources */,
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
+				9DAD9D1D1C7D50D700CD1503 /* VenuesPresenter.swift in Sources */,
 				CA43998E1BD156C0008F378D /* FeedbackGivenListViewController.swift in Sources */,
 				CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */,
 				CAE6434E1BCD951A005E530B /* TrackListWireframe.swift in Sources */,
@@ -2245,7 +2237,6 @@
 				CAE643591BCDB648005E530B /* TrackScheduleViewController.swift in Sources */,
 				CA894AAA1BD92EFE005DE469 /* VenueDTO.swift in Sources */,
 				9DDBE76F1C21DB4700FCF0B0 /* VenueLocationDetailViewController.swift in Sources */,
-				9DEF61B61C197E5900D9F9B5 /* FeedbackGivenListWireframe.swift in Sources */,
 				CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */,
 				CA416F901B8F58D900F177F5 /* GeneralScheduleFilterPresenter.swift in Sources */,
 				CA8E98E71B9A042D00CEBD2F /* VenueDetailInteractor.swift in Sources */,
@@ -2327,6 +2318,7 @@
 				CADE46371C1AFAFF00B76E84 /* MemberProfileDetailInteractor.swift in Sources */,
 				CA3DA3E31B90EECD00201496 /* EventDataStore.swift in Sources */,
 				CAA9A8921BA8C76000C3725D /* SummitAttendeeDataStore.swift in Sources */,
+				9DCCD2641C7CB69B00D0909D /* VenuesWireframe.swift in Sources */,
 				9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */,
 				9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */,
 				CAA3C3E71C1E056A0088EC22 /* MyProfileAssembly.swift in Sources */,
@@ -2341,6 +2333,7 @@
 				CA8E98E31B9A038D00CEBD2F /* VenueDetailViewController.swift in Sources */,
 				CADE48C11C07BECB00A858DA /* PushNotificationsManager.swift in Sources */,
 				CA02F8BD1BA0CFCB005CD514 /* SummitDTO.swift in Sources */,
+				9DAD9D1F1C7D811A00CD1503 /* EventsViewController.swift in Sources */,
 				CACF7C471B9664E700A9EB16 /* EventDetailDTO.swift in Sources */,
 				CAD542361B8B9ACE00A9791A /* MenuWireframe.swift in Sources */,
 				CACFBC401B9F907800095E44 /* FeedbackEditInteractor.swift in Sources */,
@@ -2381,13 +2374,12 @@
 				CAD480A01B864452004DBB4F /* DataStoreAssembly.swift in Sources */,
 				CAD6B3361B7E2BC100D62023 /* NamedEntity.swift in Sources */,
 				CADDDBBE1B74E614008F742E /* GeneralScheduleAssembly.swift in Sources */,
+				9D1947DB1C7AC68900409CEF /* NavigationController.swift in Sources */,
 				CACFBC461B9F951100095E44 /* FeedbackDTO.swift in Sources */,
 				9DDBE76E1C21DB4700FCF0B0 /* VenueLocationDetailPresenter.swift in Sources */,
-				9DAC06E71BFB78CA00C1208F /* EventsViewController.swift in Sources */,
 				CAE2A3C51C18B36A0097857E /* LevelScheduleInteractor.swift in Sources */,
 				CACF7C461B9664E700A9EB16 /* PresentationSpeakerDTOAssembler.swift in Sources */,
 				CADD510C1BD6C1FA00400AF4 /* EventRemoteDataStore.swift in Sources */,
-				CAE42A531BE2466200980315 /* BasePresenter.swift in Sources */,
 				CACB39FD1BC2A3A400B1363F /* PeopleViewController.swift in Sources */,
 				CADE46311C1AFAC100B76E84 /* MemberProfileDetailWireframe.swift in Sources */,
 				CAF2AA3D1B8271C100D8E595 /* DeserializerFactory.swift in Sources */,

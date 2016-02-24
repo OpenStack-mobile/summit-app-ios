@@ -12,7 +12,9 @@ public class MyProfileAssembly: TyphoonAssembly {
     dynamic func myProfileWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MyProfileWireframe.self) {
             (definition) in
+            
             definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
+            definition.injectProperty("revealViewController", with: self.applicationAssembly.revealViewController())
             definition.injectProperty("myProfileViewController", with: self.myProfileViewController())
         }
     }
@@ -30,13 +32,10 @@ public class MyProfileAssembly: TyphoonAssembly {
     }
     
     dynamic func myProfileViewController() -> AnyObject {
-        return TyphoonDefinition.withFactory(self.applicationAssembly.mainStoryboard(), selector: "instantiateViewControllerWithIdentifier:", parameters: {
-            (factoryMethod) in
-            
-            factoryMethod.injectParameterWith("MyProfileViewController")
-            }, configuration: {
-                (definition) in
-                definition.injectProperty("presenter", with: self.myProfilePresenter())
-        })
+        return TyphoonDefinition.withClass(MyProfileViewController.self) {
+            (definition) in
+
+            definition.injectProperty("presenter", with: self.myProfilePresenter())
+        }
     }
 }

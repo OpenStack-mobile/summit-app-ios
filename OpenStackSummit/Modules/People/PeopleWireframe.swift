@@ -7,24 +7,38 @@
 //
 
 import UIKit
+import SWRevealViewController
 
 @objc
 public protocol IPeopleWireframe {
-    func showAttendeeProfile(attendeeId: Int)
-    func showSpeakerProfile(speakerId: Int)
+    func pushPeopleView()
+    func pushSpeakersView()
+    func showAttendeeProfile(attendeeId: Int, fromViewController viewController: UIViewController)
+    func showSpeakerProfile(speakerId: Int, fromViewController viewController: UIViewController)
 }
 
 public class PeopleWireframe: NSObject, IPeopleWireframe {
-    var memberProfileDetailWireframe: IMemberProfileDetailWireframe!
+    var revealViewController: SWRevealViewController!
+    var navigationController: NavigationController!
+    var speakersViewController: SpeakersViewController!
     var memberProfileWireframe: IMemberProfileWireframe!
-    var attendeesListViewController: IPeopleListViewController!
-    var speakersListViewController: IPeopleListViewController!
+    //var attendeesListViewController: IPeopleListViewController!
+    //var speakersListViewController: IPeopleListViewController!
     
-    public func showAttendeeProfile(attendeeId: Int) {
-        //memberProfileWireframe.presentAttendeeProfileView(attendeeId, viewController: attendeesListViewController.navigationController!)
+    public func pushPeopleView() {
+        // TODO: Push people view
     }
     
-    public func showSpeakerProfile(speakerId: Int) {
-        memberProfileWireframe.presentSpeakerProfileView(speakerId, viewController: speakersListViewController.navigationController!)
+    public func pushSpeakersView() {
+        navigationController.setViewControllers([speakersViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
+    
+    public func showAttendeeProfile(attendeeId: Int, fromViewController viewController: UIViewController) {
+        //memberProfileWireframe.pushAttendeeProfileView(attendeeId, toNavigationController: viewController.navigationController!)
+    }
+    
+    public func showSpeakerProfile(speakerId: Int, fromViewController viewController: UIViewController) {
+        memberProfileWireframe.pushSpeakerProfileView(speakerId, toNavigationController: viewController.navigationController!)
     }
 }

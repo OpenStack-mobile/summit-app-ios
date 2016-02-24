@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import SWRevealViewController
 
 @objc
 public protocol IEventsWireframe {
+    func pushEventsView()
     func showFilters()
 }
 
 public class EventsWireframe: NSObject, IEventsWireframe {
-    weak var eventsViewController: EventsViewController!
+    var navigationController: NavigationController!
+    var revealViewController: SWRevealViewController!
+    var eventsViewController: EventsViewController!
     var generalScheduleFilterWireframe: IGeneralScheduleFilterWireframe!
+    
+    public func pushEventsView() {
+        navigationController.setViewControllers([eventsViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
     
     public func showFilters() {
         generalScheduleFilterWireframe.presentFiltersView(eventsViewController.navigationController!)
     }
+    
 }
