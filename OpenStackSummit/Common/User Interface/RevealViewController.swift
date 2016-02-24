@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SWRevealViewController
 
-class RevealViewController: BaseViewController, SWRevealViewControllerDelegate {
+class RevealViewController: BaseViewController {
     
     var menuButton: UIBarButtonItem!
     
@@ -22,20 +21,5 @@ class RevealViewController: BaseViewController, SWRevealViewControllerDelegate {
         menuButton.image = UIImage(named: "menu")
         
         navigationItem.leftBarButtonItem = menuButton
-        
-        revealViewController().delegate = self
-        revealViewController().rearViewRevealWidth = 264
-        revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        revealViewController().delegate = self
-    }
-    
-    func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        view.userInteractionEnabled = position == FrontViewPosition.Left
-    }
-
 }

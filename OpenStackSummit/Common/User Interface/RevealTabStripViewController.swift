@@ -8,10 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
-import SWRevealViewController
 
-class RevealTabStripViewController: ButtonBarPagerTabStripViewController, SWRevealViewControllerDelegate {
-    
+class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -36,14 +34,5 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController, SWReve
         menuButton.action = Selector("revealToggle:")
         menuButton.image = UIImage(named: "menu")
         navigationItem.leftBarButtonItem = menuButton
-        
-        revealViewController()?.delegate = self
-        revealViewController()?.rearViewRevealWidth = 264
-        revealViewController()?.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
     }
-    
-    func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        view.userInteractionEnabled = position == FrontViewPosition.Left
-    }
-    
 }
