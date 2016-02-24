@@ -28,8 +28,8 @@ public class VenuesMapsAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("interactor", with: self.venueListAssembly.venueListInteractor())
-            definition.injectProperty("viewController", with: self.venuesMapViewController())
             definition.injectProperty("wireframe", with: self.venueMapWireframe())
+            definition.injectProperty("viewController", with: self.venuesMapViewController())
         }
     }
         
