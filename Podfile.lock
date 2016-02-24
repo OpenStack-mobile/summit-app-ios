@@ -32,7 +32,7 @@ PODS:
   - Crashlytics (3.5.0):
     - Fabric (~> 1.6.0)
   - Fabric (1.6.2)
-  - GoogleMaps (1.10.5)
+  - GoogleMaps (1.12.2)
   - HanekeSwift (0.10.0)
   - ImageSlideshow (0.2.3):
     - ImageSlideshow/Core (= 0.2.3)
@@ -133,7 +133,7 @@ SPEC CHECKSUMS:
   Cosmos: 9baaa9b1fa63fb503ae496ecdd6535801e916f1a
   Crashlytics: fabfd45d0e8b8dc936c682b97e302b9a49a1c827
   Fabric: e8296d4a1abb3c5eed770cc86b311c862f51d340
-  GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
+  GoogleMaps: cc76edaa94a4284e80ecd7089ed319d1cca5f37e
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   ImageSlideshow: 2895e62777c2ea36f56d948723b3586a12a89756
   KTCenterFlowLayout: eded079c349450dea12f7cf94b424d1bc3205519
