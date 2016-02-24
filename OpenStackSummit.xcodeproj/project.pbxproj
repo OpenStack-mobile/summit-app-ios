@@ -1090,11 +1090,11 @@
 				CADE46471C1BCEE400B76E84 /* SpeakerPresentationsAssembly.swift */,
 				CAE643531BCDAB1D005E530B /* TrackListAssembly.swift */,
 				CAE643641BCE02C0005E530B /* TrackScheduleAssembly.swift */,
-				CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */,
-				CA8E98E81B9A0C4700CEBD2F /* VenueListAssembly.swift */,
-				CA0029FC1B9E205A001A9EDA /* VenueRoomDetailAssembly.swift */,
 				9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */,
 				CADD511D1BD8270800400AF4 /* VenuesMapsAssembly.swift */,
+				CA8E98E81B9A0C4700CEBD2F /* VenueListAssembly.swift */,
+				CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */,
+				CA0029FC1B9E205A001A9EDA /* VenueRoomDetailAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1488,8 +1488,8 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
 				9D646AEA1BF120D300644FD0 /* Events */,
+				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
 				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
 				CA4399841BD156C0008F378D /* Feedback Given List */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
@@ -1507,11 +1507,11 @@
 				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CAE643551BCDB625005E530B /* Track Schedule */,
-				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
-				CA8E98D01B99D8A900CEBD2F /* Venue List */,
-				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 				9DEA0FB41BFD0CDD0035B130 /* Venues */,
 				CADD51111BD80E8B00400AF4 /* Venues Map */,
+				CA8E98D01B99D8A900CEBD2F /* Venue List */,
+				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
+				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

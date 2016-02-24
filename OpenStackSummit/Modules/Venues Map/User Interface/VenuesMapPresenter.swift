@@ -15,9 +15,9 @@ public protocol IVenuesMapPresenter {
 }
 
 public class VenuesMapPresenter: NSObject {
+    var interactor: IVenueListInteractor!
     var wireframe: IVenueListWireframe!
     var viewController: IVenuesMapViewController!
-    var interactor: IVenueListInteractor!
     var venueList: [VenueListItemDTO]!
     
     public func viewLoad() {
