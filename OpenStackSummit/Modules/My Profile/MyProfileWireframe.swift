@@ -8,18 +8,18 @@
 
 import UIKit
 import SWRevealViewController
-import XLPagerTabStrip
 
 @objc
 public protocol IMyProfileWireframe {
-    func presentMyProfileViewFromRevealViewController(revealViewController: SWRevealViewController)
+    func pushMyProfileView()
 }
 
 public class MyProfileWireframe: NSObject, IMyProfileWireframe {
-    var navigationController: UINavigationController!
+    var navigationController: NavigationController!
+    var revealViewController: SWRevealViewController!
     var myProfileViewController: MyProfileViewController!
     
-    public func presentMyProfileViewFromRevealViewController(revealViewController: SWRevealViewController) {
+    public func pushMyProfileView() {
         navigationController.setViewControllers([myProfileViewController], animated: false)
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }

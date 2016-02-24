@@ -15,20 +15,20 @@ public protocol IMyProfilePresenter {
 
 public class MyProfilePresenter: NSObject, IMyProfilePresenter {
     var securityManager: SecurityManager!
-    var memberProfileDetailViewController: MemberProfileDetailViewController!
     var personalScheduleViewController: ScheduleViewController!
+    var memberProfileDetailViewController: MemberProfileDetailViewController!
     var feedbackGivenListViewController: FeedbackGivenListViewController!
     var speakerPresentationsViewController: SpeakerPresentationsViewController!
     
     public func getChildViews() -> [UIViewController] {
         var childViewController: [UIViewController] = []
         
+        memberProfileDetailViewController.presenter.attendeeId = 0
+        memberProfileDetailViewController.presenter.speakerId = 0
+        
         childViewController.append(personalScheduleViewController)
         childViewController.append(memberProfileDetailViewController)
         childViewController.append(feedbackGivenListViewController)
-        
-        memberProfileDetailViewController.presenter.attendeeId = 0
-        memberProfileDetailViewController.presenter.speakerId = 0
         
         if securityManager.getCurrentMemberRole() == MemberRoles.Speaker {
             childViewController.append(speakerPresentationsViewController)

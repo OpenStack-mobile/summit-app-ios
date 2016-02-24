@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol ISearchPresenter: IBasePresenter {
+public protocol ISearchPresenter {
     func showEventDetail(index: Int)
     func showTrackEvents(index: Int)
     func showSpeakerProfile(index: Int)

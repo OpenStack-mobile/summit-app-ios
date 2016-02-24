@@ -12,7 +12,7 @@ public class SpeakerPresentationsWireframe: ScheduleWireframe {
     var speakerPresentationsViewController: SpeakerPresentationsViewController!
     
     public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, viewController: speakerPresentationsViewController)
+        super.showEventDetail(eventId, fromViewController: speakerPresentationsViewController)
     }
 }
 

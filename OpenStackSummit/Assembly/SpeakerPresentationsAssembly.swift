@@ -62,6 +62,7 @@ class SpeakerPresentationsAssembly: TyphoonAssembly {
                 (definition) in
                 
                 definition.injectProperty("presenter", with: self.speakerPresentationsPresenter())
+                definition.scope = TyphoonScope.Singleton
         })
     }
 }

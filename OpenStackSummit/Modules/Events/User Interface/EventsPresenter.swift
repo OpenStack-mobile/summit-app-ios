@@ -6,12 +6,13 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 @objc
 public protocol IEventsPresenter {
     func viewLoad()
     func showFilters()
+    func getChildViews() -> [UIViewController]
 }
 
 public class EventsPresenter: NSObject, IEventsPresenter {
@@ -20,6 +21,10 @@ public class EventsPresenter: NSObject, IEventsPresenter {
     
     var viewController: IEventsViewController!
     var internalWireframe: IEventsWireframe!
+    
+    var generalScheduleViewController: GeneralScheduleViewController!
+    var trackListViewController: TrackListViewController!
+    var levelListViewController: LevelListViewController!
     
     var wireframe : IEventsWireframe! {
         get {
@@ -37,4 +42,15 @@ public class EventsPresenter: NSObject, IEventsPresenter {
     public func showFilters() {
         wireframe.showFilters()
     }
+    
+    public func getChildViews() -> [UIViewController] {
+        var childViewController: [UIViewController] = []
+        
+        childViewController.append(generalScheduleViewController)
+        childViewController.append(trackListViewController)
+        childViewController.append(levelListViewController)
+        
+        return childViewController
+    }
+    
 }

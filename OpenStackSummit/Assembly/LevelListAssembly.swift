@@ -50,8 +50,8 @@ class LevelListAssembly: TyphoonAssembly {
             factoryMethod.injectParameterWith("LevelListViewController")
             }, configuration: {
                 (definition) in
+                
                 definition.injectProperty("presenter", with: self.levelListPresenter())
-                definition.scope = TyphoonScope.WeakSingleton
         })
     }
 }

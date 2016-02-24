@@ -7,6 +7,7 @@
 //
 
 import XLPagerTabStrip
+import KTCenterFlowLayout
 
 @objc
 protocol IEventsViewController {
@@ -15,17 +16,13 @@ protocol IEventsViewController {
 
 class EventsViewController: RevealTabStripViewController, IEventsViewController {
     
-    @IBOutlet weak var filterButton: UIBarButtonItem!
+    var filterButton: UIBarButtonItem?
     
     var activeFilterIndicator = false {
         didSet {
-            filterButton.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
+            filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
         }
     }
-    
-    var generalScheduleViewController: GeneralScheduleViewController!
-    var trackListViewController: TrackListViewController!
-    var levelListViewController: LevelListViewController!
 
     var internalPresenter: IEventsPresenter!
     
@@ -42,10 +39,10 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "EVENTS"
         
-        if (filterButton != nil) {
-            filterButton.target = self
-            filterButton.action = Selector("showFilters:")
-        }
+        filterButton = UIBarButtonItem(title:"Filter", style: .Plain, target: self, action: Selector("showFilters:"))
+        filterButton!.image = UIImage(named: "filter")
+        
+        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -58,7 +55,7 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
     }
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        return [generalScheduleViewController, trackListViewController, levelListViewController]
+        return presenter.getChildViews()
     }
     
 }

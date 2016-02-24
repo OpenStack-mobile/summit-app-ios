@@ -13,12 +13,14 @@ import UXTesting
 import AeroGearOAuth2
 import GoogleMaps
 import Parse
+import SWRevealViewController
     
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var securityManager: SecurityManager!
+    var revealViewController: SWRevealViewController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //Crashlytics.sharedInstance().debugMode = true
@@ -37,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        
+        window?.rootViewController = revealViewController
         
         return true
     }

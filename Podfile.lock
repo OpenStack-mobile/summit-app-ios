@@ -68,7 +68,7 @@ PODS:
   - Typhoon/no-arc (3.4.3)
   - URITemplate (1.3.0)
   - UXTesting (1.0.19)
-  - XLPagerTabStrip (4.0.0)
+  - XLPagerTabStrip (4.0.1)
 
 DEPENDENCIES:
   - AeroGearHttp (from `https://github.com/claudioredi/aerogear-ios-http.git`)
@@ -95,7 +95,7 @@ DEPENDENCIES:
   - SWRevealViewController
   - Typhoon
   - UXTesting
-  - XLPagerTabStrip (~> 4.0)
+  - XLPagerTabStrip (from `https://github.com/gcutrini/XLPagerTabStrip.git`)
 
 EXTERNAL SOURCES:
   AeroGearHttp:
@@ -105,6 +105,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
+  XLPagerTabStrip:
+    :git: https://github.com/gcutrini/XLPagerTabStrip.git
 
 CHECKOUT OPTIONS:
   AeroGearHttp:
@@ -116,6 +118,9 @@ CHECKOUT OPTIONS:
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
     :git: https://github.com/alexfedosov/AFHorizontalDayPicker.git
+  XLPagerTabStrip:
+    :commit: 3d589a0a76a82af44503a6374d3f1517be89d2a2
+    :git: https://github.com/gcutrini/XLPagerTabStrip.git
 
 SPEC CHECKSUMS:
   AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
@@ -144,6 +149,6 @@ SPEC CHECKSUMS:
   Typhoon: 382b918b31d5d19a82922448af65f01f08102dc6
   URITemplate: 0ebbec80d1eb59a89e29db9b14c99d5908d3e574
   UXTesting: 47e8068acc645f0c0e0a2d2c06239795a7402bc0
-  XLPagerTabStrip: 52944e7ff6aae4e4e2e3d073467bd29f5f5f4123
+  XLPagerTabStrip: a39467a6e71017d2be92807ed9308b4d06557c80
 
 COCOAPODS: 0.39.0
