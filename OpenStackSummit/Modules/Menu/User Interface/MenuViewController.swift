@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import SWRevealViewController
 
 @objc
 public protocol IMenuViewController: IMessageEnabledViewController {
@@ -31,7 +32,7 @@ public enum MenuItem: Int {
     case MyProfile
 }
 
-class MenuViewController: UIViewController, IMenuViewController, UITextFieldDelegate {
+class MenuViewController: UIViewController, IMenuViewController, UITextFieldDelegate, SWRevealViewControllerDelegate {
 
     var presenter: IMenuPresenter!
     var session: ISession!
@@ -121,15 +122,19 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        revealViewController()?.delegate = self
+        revealViewController()?.rearViewRevealWidth = 264
+        revealViewController()?.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        
         searchTextView.delegate = self
         
         presenter.viewLoad()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        
+    
+    func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
+        if let frontViewController = revealController.frontViewController{
+            frontViewController.view.userInteractionEnabled = position == FrontViewPosition.Left
+        }
     }
 
     func hideMenu() {
