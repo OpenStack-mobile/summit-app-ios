@@ -39,8 +39,8 @@ public class ScheduleFilter: NSObject {
     }
     
     func clearActiveFilters() {
-        for var values in selections.values {
-            values.removeAll()
+        for key in selections.keys {
+            selections[key] = []
         }
     }
 }

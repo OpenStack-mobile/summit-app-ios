@@ -18,5 +18,7 @@ class NavigationController: UINavigationController {
         navigationBar.translucent = false
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        
+        toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
     }
 }

@@ -21,6 +21,8 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
     var activeFilterIndicator = false {
         didSet {
             filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
+            navigationController?.setToolbarHidden(!activeFilterIndicator, animated: true)
+            reloadPagerTabStripView()
         }
     }
 
@@ -43,7 +45,26 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         filterButton.target = self
         filterButton.action = Selector("showFilters:")
         filterButton.image = UIImage(named: "filter")
+        
         navigationItem.rightBarButtonItem = filterButton
+        
+        let message = UIBarButtonItem()
+        message.title = "CLEAR ACTIVE FILTERS"
+        message.style = .Plain
+        message.target = self
+        message.action = Selector("clearFilters:")
+        message.tintColor = UIColor(hexaString: "#4A4A4A")
+        message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(15)], forState: UIControlState.Normal)
+
+        let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: Selector("clearFilters:"))
+        
+        let clear = UIBarButtonItem()
+        clear.target = self
+        clear.action = Selector("clearFilters:")
+        clear.image = UIImage(named: "cancel")
+        clear.tintColor = UIColor.blackColor()
+        
+        toolbarItems = [message, spacer, clear]
         
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
     }
@@ -55,6 +76,10 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
     
     func showFilters(sender: UIBarButtonItem) {
         presenter.showFilters()
+    }
+    
+    func clearFilters(sender: UIBarButtonItem) {
+        presenter.clearFilters()
     }
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
