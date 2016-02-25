@@ -48,6 +48,8 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         
         navigationItem.rightBarButtonItem = filterButton
         
+        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        
         let message = UIBarButtonItem()
         message.title = "CLEAR ACTIVE FILTERS"
         message.style = .Plain
@@ -65,13 +67,17 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         clear.tintColor = UIColor.blackColor()
         
         toolbarItems = [message, spacer, clear]
-        
-        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        navigationController?.toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewLoad()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.toolbarHidden = true
     }
     
     func showFilters(sender: UIBarButtonItem) {

@@ -39,5 +39,8 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         }
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        
+        edgesForExtendedLayout = UIRectEdge.Top
+        
     }
 }

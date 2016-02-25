@@ -16,7 +16,5 @@ class NavigationController: UINavigationController {
         navigationBar.barStyle = UIBarStyle.Black
         navigationBar.barTintColor = UIColor(hexaString: "#214065")
         navigationBar.tintColor = UIColor.whiteColor()
-                
-        toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
     }
 }
