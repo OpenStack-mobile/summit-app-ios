@@ -13,6 +13,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
+        
         settings.style.buttonBarItemFont = UIFont.systemFontOfSize(17)
         settings.style.buttonBarItemBackgroundColor = UIColor(hexaString: "#14273D")
         settings.style.buttonBarItemsShouldFillAvailiableWidth = false
@@ -29,10 +30,14 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         
         super.viewDidLoad()
         
-        menuButton = UIBarButtonItem()
-        menuButton.target = revealViewController()
-        menuButton.action = Selector("revealToggle:")
-        menuButton.image = UIImage(named: "menu")
-        navigationItem.leftBarButtonItem = menuButton
+        if navigationController?.childViewControllers.count == 1 {
+            menuButton = UIBarButtonItem()
+            menuButton.target = revealViewController()
+            menuButton.action = Selector("revealToggle:")
+            menuButton.image = UIImage(named: "menu")
+            navigationItem.leftBarButtonItem = menuButton
+        }
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
     }
 }
