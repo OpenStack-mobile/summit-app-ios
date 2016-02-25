@@ -9,7 +9,6 @@
 import UIKit
 
 class RevealViewController: BaseViewController {
-    
     var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {

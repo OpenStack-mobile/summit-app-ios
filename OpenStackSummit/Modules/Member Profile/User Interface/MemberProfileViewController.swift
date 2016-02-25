@@ -15,7 +15,7 @@ public protocol IMemberProfileViewController {
     var title: String? { get set }
 }
 
-class MemberProfileViewController: ButtonBarPagerTabStripViewController, IMemberProfileViewController {
+class MemberProfileViewController: RevealTabStripViewController, IMemberProfileViewController {
     
     var presenter: IMemberProfilePresenter!
     var isFirstTime = true
@@ -31,20 +31,6 @@ class MemberProfileViewController: ButtonBarPagerTabStripViewController, IMember
     }
     
     override func viewDidLoad() {
-        settings.style.buttonBarItemFont = UIFont.systemFontOfSize(17)
-        settings.style.buttonBarItemBackgroundColor = UIColor(hexaString: "#14273D")
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = false
-        settings.style.buttonBarBackgroundColor = UIColor(hexaString: "#14273D")
-        settings.style.selectedBarBackgroundColor = UIColor(hexaString: "#14273D")
-        settings.style.buttonBarHeight = 88
-        
-        changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
-            guard changeCurrentIndex == true else { return }
-            
-            oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
-            newCell?.label.textColor = .whiteColor()
-        }
-        
         super.viewDidLoad()
         
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
