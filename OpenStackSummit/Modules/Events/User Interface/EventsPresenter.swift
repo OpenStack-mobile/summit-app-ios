@@ -12,7 +12,7 @@ import UIKit
 public protocol IEventsPresenter {
     func viewLoad()
     func showFilters()
-    func clearFilters()
+    func clearFilters(completionBlock: (NSError? -> Void)!)
     func getChildViews() -> [UIViewController]
 }
 
@@ -44,9 +44,13 @@ public class EventsPresenter: NSObject, IEventsPresenter {
         wireframe.showFilters()
     }
     
-    public func clearFilters() {
+    public func clearFilters(completionBlock: (NSError? -> Void)!) {
         scheduleFilter.clearActiveFilters()
         viewController.activeFilterIndicator = false
+        
+        if (completionBlock != nil) {
+            completionBlock(nil)
+        }
     }
     
     public func getChildViews() -> [UIViewController] {
