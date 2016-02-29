@@ -65,9 +65,13 @@ public class GenericDataStore: NSObject {
         }
     }
     
-    public func clearDataLocal() {
+    public func clearDataLocal(completionBlock: (NSError? -> Void)!) {
         try! realm.write {
             self.realm.deleteAll()
+        }
+        
+        if (completionBlock != nil) {
+            completionBlock(nil)
         }
     }
 }
