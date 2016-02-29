@@ -20,7 +20,7 @@ public class DataUpdateStrategy: NSObject {
     }
     
     public func process(dataUpdate: DataUpdate) throws {
-        switch dataUpdate.opertation! {
+        switch dataUpdate.operation! {
         case .Insert, .Update:
             genericDataStore.saveOrUpdateLocal(dataUpdate.entity, completionBlock: nil)
         case .Delete:
