@@ -21,6 +21,7 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
     var activeFilterIndicator = false {
         didSet {
             filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
+            navigationController?.toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
             navigationController?.setToolbarHidden(!activeFilterIndicator, animated: true)
         }
     }
@@ -66,7 +67,6 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         clear.tintColor = UIColor.blackColor()
         
         toolbarItems = [message, spacer, clear]
-        navigationController?.toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
     }
     
     override func viewWillAppear(animated: Bool) {
