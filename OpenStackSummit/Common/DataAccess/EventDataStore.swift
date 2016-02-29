@@ -76,7 +76,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         let levels = realm.objects(Presentation).map { $0.level }
         let levelsSet = Set(levels)
         let filteredArray = Array(levelsSet).sort()
-        return [filteredArray[1], filteredArray[2], filteredArray[0]]
+        return filteredArray
     }
     
     public func getSpeakerPresentationsLocal(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [SummitEvent] {
