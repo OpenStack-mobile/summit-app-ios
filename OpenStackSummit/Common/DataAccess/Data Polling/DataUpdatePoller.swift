@@ -108,12 +108,13 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     
     public func clearDataIfTruncateEventExist() {
         if let _ = dataUpdateDataStore.getTruncateDataUpdate() {
-            genericDataStore.clearDataLocal()
-            fromDate = 0
-            if securityManager.isLoggedIn() {
-                securityManager.logout({ (error) -> Void in
-                })
-            }
+            genericDataStore.clearDataLocal({ (error) -> Void in
+                self.fromDate = 0
+                if self.securityManager.isLoggedIn() {
+                    self.securityManager.logout({ (error) -> Void in
+                    })
+                }
+            })
         }
     }
 }

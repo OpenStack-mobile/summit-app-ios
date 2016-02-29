@@ -39,7 +39,7 @@ public class DataUpdateDataStore: GenericDataStore, IDataUpdateDataStore {
     }
     
     public func getTruncateDataUpdate() -> DataUpdate? {
-        let dataUpdates = realm.objects(DataUpdate).filter("rawOperation == %@", DataOperation.Truncate.rawValue)
+        let dataUpdates = realm.objects(DataUpdate).filter("operation == %@", DataOperation.Truncate.rawValue)
         return dataUpdates.first
     }
 }
