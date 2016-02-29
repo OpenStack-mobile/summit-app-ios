@@ -13,12 +13,14 @@ import AeroGearOAuth2
 @objc
 public protocol IDataUpdatePoller {
     func startPollingIfNotPollingAlready()
+    func clearDataIfTruncateEventExist()
 }
 
 public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     public var pollingInterval: Double = 30
     var timer: NSTimer?
     var httpFactory: HttpFactory!
+    var genericDataStore: GenericDataStore!
     var dataUpdateProcessor: DataUpdateProcessor!
     var dataUpdateDataStore: IDataUpdateDataStore!
     var summitDataStore: ISummitDataStore!
@@ -102,5 +104,16 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
     
     deinit {
         timer?.invalidate()
+    }
+    
+    public func clearDataIfTruncateEventExist() {
+        if let _ = dataUpdateDataStore.getTruncateDataUpdate() {
+            genericDataStore.clearDataLocal()
+            fromDate = 0
+            if securityManager.isLoggedIn() {
+                securityManager.logout({ (error) -> Void in
+                })
+            }
+        }
     }
 }

@@ -25,11 +25,13 @@ public class MyScheduleDataUpdateStrategy: DataUpdateStrategy {
     public override func process(dataUpdate: DataUpdate) throws {
         let currentMember = securityManager.getCurrentMember()
 
-        switch dataUpdate.operation! {
+        switch dataUpdate.opertation! {
         case .Insert, .Update:
             summitAttendeeDataStore.addEventToMemberScheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
         case .Delete:
             try summitAttendeeDataStore.removeEventFromMemberScheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
+        case .Truncate:
+            break
         }
     }
 }

@@ -33,9 +33,9 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
         }
     }
     
-    var interactor : IScheduleInteractor! {
+    var interactor : IGeneralScheduleInteractor! {
         get {
-            return internalInteractor			
+            return internalInteractor as! IGeneralScheduleInteractor
         }
         set {
             internalInteractor = newValue
@@ -49,6 +49,11 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
         set {
             internalWireframe = newValue
         }
+    }
+    
+    override public func viewLoad() {
+        interactor.checkForClearDataEvents()
+        super.viewLoad()
     }
     
     public func showFilters() {
