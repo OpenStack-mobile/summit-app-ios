@@ -14,7 +14,7 @@ public enum DataOperation: Int {
 
 public class DataUpdate: BaseEntity {
     private dynamic var rawOperation = -1
-    public var opertation: DataOperation! {
+    public var operation: DataOperation! {
         get {
             return DataOperation(rawValue: rawOperation)!
         }
@@ -22,9 +22,9 @@ public class DataUpdate: BaseEntity {
             rawOperation = newValue.rawValue
         } 
     }
-    public var date = NSDate(timeIntervalSince1970: 1)
-    public var entity: BaseEntity!
-    public var entityClassName = ""
+    public dynamic var date = NSDate(timeIntervalSince1970: 1)
+    public dynamic var entityClassName = ""
+    public dynamic var entity: BaseEntity!
     
     public override static func ignoredProperties() -> [String] {
         return ["entity"]
