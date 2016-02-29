@@ -11,8 +11,8 @@ import RealmSwift
 
 @objc
 public protocol IPresentationSpeakerDataStore {
-    func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker]
     func getByIdLocal(id: Int) -> PresentationSpeaker?
+    func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker]
 }
 
 public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeakerDataStore {

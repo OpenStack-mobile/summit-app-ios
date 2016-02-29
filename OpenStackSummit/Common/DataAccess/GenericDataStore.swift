@@ -64,4 +64,10 @@ public class GenericDataStore: NSObject {
             }
         }
     }
+    
+    public func clearDataLocal() {
+        try! realm.write {
+            self.realm.deleteAll()
+        }
+    }
 }

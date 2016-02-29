@@ -16,13 +16,18 @@ protocol IEventsViewController {
 
 class EventsViewController: RevealTabStripViewController, IEventsViewController {
     
+    var isFirstTime = true
     var filterButton: UIBarButtonItem!
     
     var activeFilterIndicator = false {
         didSet {
             filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
             navigationController?.setToolbarHidden(!activeFilterIndicator, animated: true)
-            reloadPagerTabStripView()
+            
+            if !isFirstTime {
+                reloadPagerTabStripView()
+            }
+            isFirstTime = false
         }
     }
 

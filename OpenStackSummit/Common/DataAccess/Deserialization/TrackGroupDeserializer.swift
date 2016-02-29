@@ -23,7 +23,7 @@ public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
             trackGroup = check
         }
         else {
-            try validateRequiredFields(["id", "name", "description"], inJson: json)
+            try validateRequiredFields(["id", "name"], inJson: json)
             
             trackGroup = super.deserialize(json) as TrackGroup
             trackGroup.trackGroupDescription = json["description"].stringValue
