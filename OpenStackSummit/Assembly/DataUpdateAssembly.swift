@@ -20,6 +20,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(DataUpdatePoller.self) {
             (definition) in
             definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
+            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
             definition.injectProperty("dataUpdateProcessor", with: self.dataUpdateProcessor())
             definition.injectProperty("dataUpdateDataStore", with: self.dataUpdateDataStore())
             definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())

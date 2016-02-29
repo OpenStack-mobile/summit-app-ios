@@ -53,6 +53,7 @@ class GeneralScheduleAssembly: TyphoonAssembly {
             definition.injectProperty("dataUpdatePoller", with: self.dataUpdateAssembly.dataUpdatePoller())
             definition.injectProperty("pushNotificationsManager", with: self.applicationAssembly.pushNotificationsManager())
             definition.injectProperty("reachability", with: self.applicationAssembly.reachability())
+            definition.injectProperty("dataUpdatePoller", with: self.dataUpdateAssembly.dataUpdatePoller())
         }
     }
     

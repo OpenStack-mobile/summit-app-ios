@@ -29,6 +29,7 @@ public class GeneralScheduleFilterInteractor: NSObject {
     var tagDataStore: ITagDataStore!
     var namedDTOAssembler: NamedDTOAssembler!
     var eventDataStore: IEventDataStore!
+    var dataUpdatePoller: IDataUpdatePoller!
 
     public func getSummitTypes() -> [NamedDTO] {
         let entities = summitTypeDataStore.getAllLocal().sort({ $0.name < $1.name })

@@ -30,27 +30,31 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
 
         switch (operationType) {
         case "INSERT":
-            dataUpdate.operation = DataOperation.Insert
+            dataUpdate.opertation = DataOperation.Insert
         case "UPDATE":
-            dataUpdate.operation = DataOperation.Update
+            dataUpdate.opertation = DataOperation.Update
         case "DELETE":
-            dataUpdate.operation = DataOperation.Delete
+            dataUpdate.opertation = DataOperation.Delete
+        case "TRUNCATE":
+            dataUpdate.opertation = DataOperation.Truncate
         default:
             throw DeserializerError.BadFormat("Operation is not valid")
         }
         
-        do {
-            if let deserializer = try deserializerFactory.create(className) {
-                dataUpdate.entity = operationType.stringValue != "DELETE" && className != "MySchedule"
-                    ? try deserializer.deserialize(json["entity"])
-                    : try deserializer.deserialize(json["entity_id"])
+        if dataUpdate.opertation != DataOperation.Truncate {
+            do {
+                if let deserializer = try deserializerFactory.create(className) {
+                    dataUpdate.entity = operationType.stringValue != "DELETE" && className != "MySchedule"
+                        ? try deserializer.deserialize(json["entity"])
+                        : try deserializer.deserialize(json["entity_id"])
+                }
             }
-        }
-        catch DeserializerError.EntityNotFound(let em) {
-            let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("Entity not found", value: em, comment: "")]
-            let err = NSError(domain: Constants.ErrorDomain, code: 13001, userInfo: userInfo)
-            Crashlytics.sharedInstance().recordError(err)
-            print(em)
+            catch DeserializerError.EntityNotFound(let em) {
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("Entity not found", value: em, comment: "")]
+                let err = NSError(domain: Constants.ErrorDomain, code: 13001, userInfo: userInfo)
+                Crashlytics.sharedInstance().recordError(err)
+                print(em)
+            }
         }
         
         return dataUpdate

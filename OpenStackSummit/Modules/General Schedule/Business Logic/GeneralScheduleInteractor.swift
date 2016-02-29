@@ -8,6 +8,13 @@
 
 import UIKit
 
-public class GeneralScheduleInteractor: ScheduleInteractor {
+@objc
+public protocol IGeneralScheduleInteractor: IScheduleInteractor {
+    func checkForClearDataEvents()
+}
 
+public class GeneralScheduleInteractor: ScheduleInteractor, IGeneralScheduleInteractor {
+    public func checkForClearDataEvents() {
+        dataUpdatePoller.clearDataIfTruncateEventExist()
+    }
 }

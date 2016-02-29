@@ -13,6 +13,7 @@ public protocol IDataUpdateDataStore {
     func getGeneralUpdatesAfterIdOrigin(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)
     func saveOrUpdateLocal(entity: DataUpdate, completionBlock: ((DataUpdate?, NSError?) -> Void)?)
     func getLatestDataUpdate() -> DataUpdate?
+    func getTruncateDataUpdate() -> DataUpdate?
 }
 
 public class DataUpdateDataStore: GenericDataStore, IDataUpdateDataStore {
@@ -35,5 +36,10 @@ public class DataUpdateDataStore: GenericDataStore, IDataUpdateDataStore {
         let id = dataUpdates.max("id") as Int?
         let dataUpdate = id != nil ? dataUpdates.filter("id == %@", id!).first : nil
         return dataUpdate
+    }
+    
+    public func getTruncateDataUpdate() -> DataUpdate? {
+        let dataUpdates = realm.objects(DataUpdate).filter("rawOperation == %@", DataOperation.Truncate.rawValue)
+        return dataUpdates.first
     }
 }

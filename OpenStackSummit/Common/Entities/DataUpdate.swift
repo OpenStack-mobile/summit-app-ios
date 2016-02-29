@@ -8,12 +8,20 @@
 
 import UIKit
 
-public enum DataOperation {
-    case Insert, Update, Delete
+public enum DataOperation: Int {
+    case Insert, Update, Delete, Truncate
 }
 
 public class DataUpdate: BaseEntity {
-    public var operation: DataOperation!
+    private dynamic var rawOperation = -1
+    public var opertation: DataOperation! {
+        get {
+            return DataOperation(rawValue: rawOperation)!
+        }
+        set {
+            rawOperation = newValue.rawValue
+        } 
+    }
     public var date = NSDate(timeIntervalSince1970: 1)
     public var entity: BaseEntity!
     public var entityClassName = ""
