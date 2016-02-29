@@ -15,7 +15,7 @@ protocol ISchemaMigration {
 }
 
 public class SchemaMigration: NSObject, ISchemaMigration {
-    let schemaVersion:UInt64 = 4
+    let schemaVersion:UInt64 = 3
     
     func getSchemaVersion() -> UInt64 {
         return schemaVersion
@@ -45,11 +45,6 @@ public class SchemaMigration: NSObject, ISchemaMigration {
                             track["trackGroup"] = newObject
                         }
                     }
-                }
-            }
-            if (oldSchemaVersion < 4) {
-                migration.enumerate(DataUpdate.className()) { oldObject, newObject in
-                    newObject!["rawOperation"] = -1
                 }
             }
         }

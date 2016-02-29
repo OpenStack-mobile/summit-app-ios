@@ -20,14 +20,14 @@ public class DataUpdateStrategy: NSObject {
     }
     
     public func process(dataUpdate: DataUpdate) throws {
-        switch dataUpdate.operation! {
+        switch dataUpdate.operation {
         case .Insert, .Update:
             genericDataStore.saveOrUpdateLocal(dataUpdate.entity, completionBlock: nil)
         case .Delete:
             if dataUpdate.entity != nil {
                 genericDataStore.deleteLocal(dataUpdate.entity, completionBlock: nil)                
             }
-        case .Truncate:
+        default:
             break
         }
     }
