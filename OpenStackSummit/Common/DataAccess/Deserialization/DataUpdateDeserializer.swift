@@ -30,18 +30,18 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
 
         switch (operationType) {
         case "INSERT":
-            dataUpdate.opertation = DataOperation.Insert
+            dataUpdate.operation = DataOperation.Insert
         case "UPDATE":
-            dataUpdate.opertation = DataOperation.Update
+            dataUpdate.operation = DataOperation.Update
         case "DELETE":
-            dataUpdate.opertation = DataOperation.Delete
+            dataUpdate.operation = DataOperation.Delete
         case "TRUNCATE":
-            dataUpdate.opertation = DataOperation.Truncate
+            dataUpdate.operation = DataOperation.Truncate
         default:
             throw DeserializerError.BadFormat("Operation is not valid")
         }
         
-        if dataUpdate.opertation != DataOperation.Truncate {
+        if dataUpdate.operation != DataOperation.Truncate {
             do {
                 if let deserializer = try deserializerFactory.create(className) {
                     dataUpdate.entity = operationType.stringValue != "DELETE" && className != "MySchedule"
