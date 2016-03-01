@@ -14,7 +14,7 @@ public protocol IMenuPresenter {
     func hasAccessToMenuItem(item: MenuItem) -> Bool
     func login()
     func logout()
-    func showSearchResults()
+    func searchFor(term: String)
     func showEvents()
     func showVenues()
     func showPeopleOrSpeakers()
@@ -26,6 +26,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     var wireframe: IMenuWireframe!
     var viewController: IMenuViewController!
     var securityManager: SecurityManager!
+    var session: ISession!
     
     public override init() {
         super.init()
@@ -112,8 +113,9 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         }
     }
     
-    public func showSearchResults() {
-        wireframe.showSearchResults()
+    public func searchFor(term: String) {
+        session.set(Constants.SessionKeys.SearchTerm, value: term)
+        wireframe.showSearch()
     }
     
     public func showEvents() {

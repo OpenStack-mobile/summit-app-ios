@@ -19,21 +19,13 @@ public protocol IMenuInteractor {
 }
 
 public class MenuInteractor: NSObject, IMenuInteractor {
-    var session : ISession!
     let kAccessToken = "access_token"
     let kCurrentMember = "currentMember"
+    
     var securityManager: SecurityManager!
     var memberDTOAssembler: IMemberDTOAssembler!
     var pushNotificationsManager: IPushNotificationsManager!
     var reachability: IReachability!
-    
-    public override init() {
-        super.init()
-    }
-
-    public init(session: ISession) {
-        self.session = session
-    }
     
     public func login(completionBlock: (error: NSError?) -> Void) {
         if !reachability.isConnectedToNetwork() {
