@@ -35,7 +35,6 @@ public enum MenuItem: Int {
 class MenuViewController: UIViewController, IMenuViewController, UITextFieldDelegate, SWRevealViewControllerDelegate {
 
     var presenter: IMenuPresenter!
-    var session: ISession!
     
     private var picUrlInternal: String!
     
@@ -168,7 +167,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         searchTextView.resignFirstResponder()
         if !searchTextView.text!.isEmpty {
-            presenter.showSearchResults()
+            presenter.searchFor(searchTextView.text!)
         }
         return true
     }
