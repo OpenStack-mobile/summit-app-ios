@@ -44,6 +44,11 @@ public class SpeakerPresentationsPresenter: SchedulePresenter, ISpeakerPresentat
     
     public var speakerId = 0
     
+    override func getScheduledEventsActiveDatesSince(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+        let activeDates = (interactor as! ISpeakerPresentationsInteractor).getSpeakerPresentationsDates(speakerId, startDate: startDate, endDate: endDate)
+        return activeDates
+    }
+    
     override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
         let events = (interactor as! ISpeakerPresentationsInteractor).getSpeakerPresentations(speakerId, startDate: startDate, endDate: endDate)
         return events
