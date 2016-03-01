@@ -49,7 +49,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         viewLoad()
     }
     
-    override func getActiveSummitDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    override func getScheduledEventsActiveDatesSince(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
         let trackSelections = [track.id]
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
