@@ -109,7 +109,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                 
                 viewController.startDate = summit!.startDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
                 viewController.endDate = summit!.endDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
-                viewController.activeDates = self.getActiveSummitDatesFrom(
+                viewController.activeDates = self.getScheduledEventsActiveDatesSince(
                     viewController.startDate,
                     to: viewController.endDate,
                     withInteractor: interactor
@@ -134,7 +134,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         })
     }
     
-    func getActiveSummitDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    func getScheduledEventsActiveDatesSince(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
         let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
