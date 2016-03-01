@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol IMenuWireframe {
-    func showSearchResults()
+    func showSearch()
     func showEvents()
     func showVenues()
     func showPeople()
@@ -25,7 +25,7 @@ public class MenuWireframe: NSObject, IMenuWireframe {
     var peopleWireframe: IPeopleWireframe!
     var myProfileWireframe: IMyProfileWireframe!
     
-    public func showSearchResults() {
+    public func showSearch() {
         searchWireframe.pushSearchResultsView()
     }
     

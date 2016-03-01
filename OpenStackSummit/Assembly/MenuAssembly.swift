@@ -40,6 +40,7 @@ public class MenuAssembly: TyphoonAssembly {
             definition.injectProperty("wireframe", with: self.menuWireframe())
             definition.injectProperty("viewController", with: self.menuViewController())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+            definition.injectProperty("session", with: self.applicationAssembly.session())
         }
     }
     
@@ -47,7 +48,6 @@ public class MenuAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MenuInteractor.self) {
             (definition) in
             
-            definition.injectProperty("session", with: self.applicationAssembly.session())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
             definition.injectProperty("memberDTOAssembler", with: self.dtoAssemblersAssembly.memberDTOAssembler())
             definition.injectProperty("pushNotificationsManager", with: self.applicationAssembly.pushNotificationsManager())
@@ -64,7 +64,6 @@ public class MenuAssembly: TyphoonAssembly {
                 (definition) in
                 
                 definition.injectProperty("presenter", with: self.menuPresenter())
-                definition.injectProperty("session", with: self.applicationAssembly.session())
         })
     }
 }
