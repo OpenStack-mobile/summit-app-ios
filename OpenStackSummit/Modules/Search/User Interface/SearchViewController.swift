@@ -69,6 +69,7 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.viewLoad()
     }
     
