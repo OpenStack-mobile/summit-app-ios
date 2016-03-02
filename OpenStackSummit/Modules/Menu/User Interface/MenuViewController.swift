@@ -78,12 +78,16 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     @IBOutlet weak var searchTextView: UITextField!
     
-    @IBAction func toggleMenuSelection(sender: UIButton) {
-        
+    private func unselectMenuItems() {
         eventsButton.alpha = 0.5
         venuesButton.alpha = 0.5
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
+    }
+    
+    @IBAction func toggleMenuSelection(sender: UIButton) {
+        
+        unselectMenuItems()
         
         sender.alpha = 1
         
@@ -121,9 +125,9 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        revealViewController()?.delegate = self
-        revealViewController()?.rearViewRevealWidth = 264
-        revealViewController()?.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        revealViewController().delegate = self
+        revealViewController().rearViewRevealWidth = 264
+        revealViewController().view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         
         searchTextView.delegate = self
         
@@ -131,7 +135,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     }
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        if let frontViewController = revealController.frontViewController{
+        if let frontViewController = revealController.frontViewController {
             frontViewController.view.userInteractionEnabled = position == FrontViewPosition.Left
         }
     }
@@ -167,6 +171,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         searchTextView.resignFirstResponder()
         if !searchTextView.text!.isEmpty {
+            unselectMenuItems()
             presenter.searchFor(searchTextView.text!)
         }
         return true
