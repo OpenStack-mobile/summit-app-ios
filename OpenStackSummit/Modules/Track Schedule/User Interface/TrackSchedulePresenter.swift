@@ -49,7 +49,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         viewLoad()
     }
     
-    override func getScheduledEventsActiveDatesSince(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
         let trackSelections = [track.id]
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
@@ -57,7 +57,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
         let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
         
-        let activeDates = interactor.getActiveSummitDates(
+        let availableDates = interactor.getScheduleAvailableDates(
             startDate,
             endDate: endDate,
             eventTypes: eventTypeSelections,
@@ -68,7 +68,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
             levels: levelSelections
         )
         
-        return activeDates
+        return availableDates
     }
     
     override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
