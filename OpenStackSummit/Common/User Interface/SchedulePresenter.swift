@@ -10,12 +10,12 @@ import UIKit
 
 @objc
 public protocol ISchedulePresenter {
-    func reloadSchedule()
-    func showEventDetail(index: Int)
     func viewLoad()
-    func buildScheduleCell(cell: IScheduleTableViewCell, index: Int)
+    func reloadSchedule()
     func getDayEventsCount() -> Int
+    func buildScheduleCell(cell: IScheduleTableViewCell, index: Int)
     func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell)
+    func showEventDetail(index: Int)
 }
 
 public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
@@ -109,12 +109,18 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                 
                 viewController.startDate = summit!.startDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
                 viewController.endDate = summit!.endDate.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
-                viewController.activeDates = self.getScheduledEventsActiveDatesSince(
+                viewController.availableDates = self.getScheduleAvailableDatesFrom(
                     viewController.startDate,
                     to: viewController.endDate,
                     withInteractor: interactor
                 )
-                viewController.selectedDate = viewController.activeDates.count > 0 ? viewController.activeDates.first : self.selectedDate != nil ? self.selectedDate : viewController.startDate
+                
+                if viewController.availableDates.count > 0 {
+                    viewController.selectedDate = viewController.availableDates.first
+                }
+                else {
+                    viewController.selectedDate = self.selectedDate != nil ? self.selectedDate : viewController.startDate
+                }
             })
         }
     }
@@ -134,48 +140,12 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         })
     }
     
-    func getScheduledEventsActiveDatesSince(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
-        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
-        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
-        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
-        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
-        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
-        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
-        
-        let activeDates = interactor.getActiveSummitDates(
-            startDate,
-            endDate: endDate,
-            eventTypes: eventTypeSelections,
-            summitTypes: summitTypeSelections,
-            tracks: trackSelections,
-            trackGroups: trackGroupSelections,
-            tags: tagSelections,
-            levels: levelSelections
-        )
-        
-        return activeDates
+    func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+        fatalError("You must override this method")
     }
 
     func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
-        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
-        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
-        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
-        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
-        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
-        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
-        
-        let events = interactor.getScheduleEvents(
-            startDate,
-            endDate: endDate,
-            eventTypes: eventTypeSelections,
-            summitTypes: summitTypeSelections,
-            tracks: trackSelections,
-            trackGroups: trackGroupSelections,
-            tags: tagSelections,
-            levels: levelSelections
-        )
-        
-        return events
+        fatalError("You must override this method")
     }
     
     deinit {

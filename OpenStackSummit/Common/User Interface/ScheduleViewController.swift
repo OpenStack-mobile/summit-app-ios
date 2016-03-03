@@ -14,7 +14,7 @@ public protocol IScheduleViewController: class, IMessageEnabledViewController {
     var startDate: NSDate! { get set }
     var endDate: NSDate! { get set }
     var selectedDate: NSDate! { get set }
-    var activeDates: [NSDate]! { get set }
+    var availableDates: [NSDate]! { get set }
     var title: String! { get set }
     
     func reloadSchedule()
@@ -58,7 +58,7 @@ class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate,
         }
     }
     
-    var activeDates: [NSDate]! {
+    var availableDates: [NSDate]! {
         get {
             return scheduleView.activeDates
         }

@@ -59,4 +59,48 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
     public func showFilters() {
         wireframe.showFilters()
     }
+    
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
+        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
+        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
+        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
+        
+        let availableDates = interactor.getScheduleAvailableDates(
+            startDate,
+            endDate: endDate,
+            eventTypes: eventTypeSelections,
+            summitTypes: summitTypeSelections,
+            tracks: trackSelections,
+            trackGroups: trackGroupSelections,
+            tags: tagSelections,
+            levels: levelSelections
+        )
+        
+        return availableDates
+    }
+    
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
+        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
+        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
+        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
+        
+        let events = interactor.getScheduleEvents(
+            startDate,
+            endDate: endDate,
+            eventTypes: eventTypeSelections,
+            summitTypes: summitTypeSelections,
+            tracks: trackSelections,
+            trackGroups: trackGroupSelections,
+            tags: tagSelections,
+            levels: levelSelections
+        )
+        
+        return events
+    }
 }
