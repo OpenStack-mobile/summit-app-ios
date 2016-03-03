@@ -19,14 +19,13 @@ public class PeopleInteractor: NSObject, IPeopleInteractor {
     var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
     var personDTOAssembler: PersonListItemDTOAssembler!
     
-    public func getSpeakersByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
-        let speakers = presentationSpeakerDataStore.getByFilterLocal(saerchTerm, page: page, objectsPerPage: objectsPerPage)
+    public func getSpeakersByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
+        let speakers = presentationSpeakerDataStore.getByFilterLocal(searchTerm, page: page, objectsPerPage: objectsPerPage)
         getByFilterCallback(speakers, error: nil, completionBlock: completionBlock)
     }
     
     public func getAttendeesByFilter(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void) {
         summitAttendeeRemoteDataStore.getByFilter(saerchTerm, page: page, objectsPerPage: objectsPerPage) { (attendees, error) in
-
             self.getByFilterCallback(attendees, error: error, completionBlock: completionBlock)
         }
     }

@@ -32,13 +32,24 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
             presentationSpeaker = check
         }
         else {
-            try validateRequiredFields(["id", "first_name", "last_name"], inJson: json)
+            try validateRequiredFields(["id"], inJson: json)
             
             presentationSpeaker = PresentationSpeaker()
             presentationSpeaker.id = json["id"].intValue
             presentationSpeaker.firstName = json["first_name"].stringValue
             presentationSpeaker.lastName = json["last_name"].stringValue
-            presentationSpeaker.fullName = presentationSpeaker.firstName + " " + presentationSpeaker.lastName
+            
+            if !presentationSpeaker.firstName.isEmpty {
+                presentationSpeaker.fullName = presentationSpeaker.firstName
+            }
+            
+            if !presentationSpeaker.lastName.isEmpty {
+                if !presentationSpeaker.fullName.isEmpty {
+                   presentationSpeaker.fullName += " "
+                }
+                presentationSpeaker.fullName += presentationSpeaker.lastName
+            }
+            
             presentationSpeaker.email = json["email"].stringValue
             presentationSpeaker.title = json["title"].stringValue
             presentationSpeaker.bio = json["bio"].stringValue

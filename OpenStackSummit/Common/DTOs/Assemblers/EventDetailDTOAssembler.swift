@@ -46,6 +46,10 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
             
             var speakerDTO: PresentationSpeakerDTO
             for speaker in presentation.speakers {
+                // HACK: dismiss speakers with empty name
+                if speaker.fullName.isEmpty {
+                    continue
+                }
                 speakerDTO = speakerDTOAssembler.createDTO(speaker)
                 eventDetailDTO.speakers.append(speakerDTO)
             }

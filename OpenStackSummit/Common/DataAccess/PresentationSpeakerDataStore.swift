@@ -25,6 +25,9 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
         let sortProperties = [SortDescriptor(property: "firstName", ascending: true), SortDescriptor(property: "lastName", ascending: true)]
         var result = realm.objects(PresentationSpeaker.self).sorted(sortProperties)
         
+        // HACK: filter speakers with empty name
+        result = result.filter("fullName != ''")
+        
         if searchTerm != nil && !(searchTerm!.isEmpty) {
             result = result.filter("fullName CONTAINS [c]%@ or bio CONTAINS [c]%@ ", searchTerm!, searchTerm!)
         }
