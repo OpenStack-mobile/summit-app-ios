@@ -18,7 +18,7 @@ public class FeedbackRemoteDataStore: NSObject {
     var httpFactory: HttpFactory!
     
     func saveOrUpdate(feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void) {
-        let endpoint = "https://dev-resource-server/api/v1/summits/current/events/\(feedback.event.id)/feedback"
+        let endpoint = "https://resource-server/api/v1/summits/current/events/\(feedback.event.id)/feedback"
         let http = httpFactory.create(HttpType.OpenIDJson)
         var jsonDictionary = [String:AnyObject]()
         jsonDictionary["rate"] = feedback.rate

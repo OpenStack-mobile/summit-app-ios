@@ -79,7 +79,7 @@ public class SecurityManager: NSObject {
         let hasPasscode = deviceHasPasscode()
         
         var config = Config(
-            base: "https://dev-identity-provider",
+            base: "https://identity-provider",
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
@@ -88,13 +88,13 @@ public class SecurityManager: NSObject {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "https://dev-resource-server/summits/read", "https://dev-resource-server/summits/write", "offline_access"],
+            scopes: ["openid", "https://resource-server/summits/read", "https://resource-server/summits/write", "offline_access"],
             clientSecret: "OpenID Secret"
         )
         oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
         config = Config(
-            base: "https://dev-identity-provider",
+            base: "https://identity-provider",
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
@@ -102,7 +102,7 @@ public class SecurityManager: NSObject {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["https://dev-resource-server/summits/read"],
+            scopes: ["https://resource-server/summits/read"],
             clientSecret: "Service Account Secret"
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)

@@ -22,7 +22,7 @@ public class DataUpdateRemoteDataStore: NSObject {
     var deserializerFactory: DeserializerFactory!
     
     func getGeneralUpdatesAfterId(id: Int, completionBlock : ([DataUpdate]?, NSError?) -> Void)  {
-        let attendeeEndpoint = "https://dev-resource-server//api/v1/summits/current/entity-events"
+        let attendeeEndpoint = "https://resource-server/api/v1/summits/current/entity-events"
         let http = httpFactory.create(HttpType.ServiceAccount)
         http.GET(attendeeEndpoint, parameters: nil) { (responseObject, error) in
             if (error != nil) {

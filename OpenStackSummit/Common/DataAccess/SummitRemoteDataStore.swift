@@ -22,7 +22,7 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://dev-resource-server/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule") {(responseObject, error) in
+        http.GET("https://resource-server/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
