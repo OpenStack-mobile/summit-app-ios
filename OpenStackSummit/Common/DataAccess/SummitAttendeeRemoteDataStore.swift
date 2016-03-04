@@ -29,7 +29,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
             filter = "filter=first_name=@\(searchTerm!),last_name=@\(searchTerm!)&"
         }
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/attendees?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
+        http.GET("https://openstackid-resources.openstack.org/api/v1/summits/current/attendees?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
@@ -56,7 +56,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
     public func getById(id: Int, completionBlock : (SummitAttendee?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://testresource-server.openstack.org/api/v1/summits/current/attendees/\(id)") {(responseObject, error) in
+        http.GET("https://openstackid-resources.openstack.org/api/v1/summits/current/attendees/\(id)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
@@ -81,7 +81,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
     }
     
     public func addFeedback(attendee: SummitAttendee, feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void) {
-        let endpoint = "https://testresource-server.openstack.org/api/v1/summits/current/events/\(feedback.event.id)/feedback"
+        let endpoint = "https://openstackid-resources.openstack.org/api/v1/summits/current/events/\(feedback.event.id)/feedback"
         let http = httpFactory.create(HttpType.OpenIDJson)
         var jsonDictionary = [String:AnyObject]()
         jsonDictionary["rate"] = feedback.rate
@@ -101,7 +101,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
     }
     
     public func addEventToShedule(attendee: SummitAttendee, event: SummitEvent, completionBlock : (NSError?) -> Void) {
-        let endpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/\(attendee.id)/schedule/\(event.id)"
+        let endpoint = "https://openstackid-resources.openstack.org/api/v1/summits/current/attendees/\(attendee.id)/schedule/\(event.id)"
         let http = httpFactory.create(HttpType.OpenIDGetFormUrlEncoded)
         //json[""]
         http.POST(endpoint, parameters: nil, completionHandler: {(responseObject, error) in
@@ -114,7 +114,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
     }
     
     public func removeEventFromShedule(attendee: SummitAttendee, event: SummitEvent, completionBlock : (NSError?) -> Void) {
-        let endpoint = "https://testresource-server.openstack.org/api/v1/summits/current/attendees/\(attendee.id)/schedule/\(event.id)"
+        let endpoint = "https://openstackid-resources.openstack.org/api/v1/summits/current/attendees/\(attendee.id)/schedule/\(event.id)"
         let http = httpFactory.create(HttpType.OpenIDGetFormUrlEncoded)
         http.DELETE(endpoint, parameters: nil, completionHandler: {(responseObject, error) in
             if (error != nil) {

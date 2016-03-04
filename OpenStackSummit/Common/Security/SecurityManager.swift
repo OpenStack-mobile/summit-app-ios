@@ -79,31 +79,31 @@ public class SecurityManager: NSObject {
         let hasPasscode = deviceHasPasscode()
         
         var config = Config(
-            base: "https://testopenstackid.openstack.org",
+            base: "https://openstackid.org",
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: "ugSc.5IJB7MOpVHOs4anxyZi~PJsIfJJ.openstack.client",
+            clientId: "KaRO.TUwmVDL3uAislT2.BeLgRjnKtri.openstack.client",
             refreshTokenEndpoint: "oauth2/token",
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "https://testresource-server.openstack.org/summits/read", "https://testresource-server.openstack.org/summits/write", "offline_access"],
-            clientSecret: "NvEAT3ScN5c5p9yPS67GeoBo2M_8YLFezeAdALF~dsD-pxXmBU6JRL0ZOyNpGEhM"
+            scopes: ["openid", "https://openstackid-resources.openstack.org/summits/read", "https://openstackid-resources.openstack.org/summits/write", "offline_access"],
+            clientSecret: "b-p0jKvn.ZgxmLtv1VYMP-QGI~OgOfSmvfX-MY2wtu5AWmnvvIekVENZcTmEvidf"
         )
         oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
         config = Config(
-            base: "https://testopenstackid.openstack.org",
+            base: "https://openstackid.org",
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: "m22i15-mlfb9pa7_xE9awfGchL0emthA.openstack.client",
+            clientId: "wgRvPleVDbKUN3HSetZtcIenRACAMnkA.openstack.client",
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["https://testresource-server.openstack.org/summits/read"],
-            clientSecret: "NWqDnFMdQrR.KNUfjPu-4SZUrABnHsM1SbwSsvOV4uk0jGI7X7DPC~WCsMSVH4Ci"
+            scopes: ["https://openstackid-resources.openstack.org/summits/read"],
+            clientSecret: "0x.9MK7kw0cTzFKltDgrC.TJhSLVqXimstQGl21XhKcbGgxSpD~e7fHr1QeVck2l"
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
         
