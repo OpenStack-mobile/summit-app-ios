@@ -108,6 +108,8 @@ public class DeserializerFactory : NSObject {
             deserializer = venueRoomDeserializer
         case "PresentationCategory":
             deserializer = trackDeserializer
+        case "PresentationCategoryGroup":
+            deserializer = trackGroupDeserializer
         default:
             print("There is no deserializer for class \(className)")
         }
