@@ -29,7 +29,7 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
         result = result.filter("fullName != ''")
         
         if searchTerm != nil && !(searchTerm!.isEmpty) {
-            result = result.filter("fullName CONTAINS [c]%@ or bio CONTAINS [c]%@ ", searchTerm!, searchTerm!)
+            result = result.filter("fullName CONTAINS [c]%@", searchTerm!)
         }
         
         var speakers = [PresentationSpeaker]()
