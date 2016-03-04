@@ -177,6 +177,7 @@ public class DataStoreAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
+            definition.injectProperty("trackDeserializer", with: self.trackDeserializer())
         }
     }
     

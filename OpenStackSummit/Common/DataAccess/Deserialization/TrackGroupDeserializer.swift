@@ -11,6 +11,7 @@ import SwiftyJSON
 
 public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
     var deserializerStorage: DeserializerStorage!
+    var trackDeserializer: TrackDeserializer!
     
     public func deserialize(json : JSON) throws -> BaseEntity {
         
@@ -31,11 +32,16 @@ public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
             
             var track: Track
             for (_, category) in json["tracks"] {
-                let trackId = category.intValue
-                guard let check: Track = deserializerStorage.get(trackId) else {
-                    throw DeserializerError.EntityNotFound("Track with id \(trackId) not found on deserializer storage")
+                if category.type == .Number {
+                    let trackId = category.intValue
+                    guard let check: Track = deserializerStorage.get(trackId) else {
+                        throw DeserializerError.EntityNotFound("Track with id \(trackId) not found on deserializer storage")
+                    }
+                    track = check
                 }
-                track = check
+                else {
+                    track = trackDeserializer.deserialize(category)
+                }
                 trackGroup.tracks.append(track)
                 track.trackGroup = trackGroup
             }
