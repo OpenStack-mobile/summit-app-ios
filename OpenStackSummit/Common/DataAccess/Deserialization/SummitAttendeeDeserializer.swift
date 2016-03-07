@@ -50,8 +50,12 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             var deserializer = deserializerFactory.create(DeserializerFactoryType.SummitEvent)
             var event : SummitEvent
             for (_, eventJSON) in json["schedule"] {
-                event = try deserializer.deserialize(eventJSON) as! SummitEvent
-                summitAttendee.scheduledEvents.append(event)
+                do {
+                    event = try deserializer.deserialize(eventJSON) as! SummitEvent
+                    summitAttendee.scheduledEvents.append(event)
+                } catch let error {
+                    print(error)
+                }
             }
             
             deserializer = deserializerFactory.create(DeserializerFactoryType.TicketType)
