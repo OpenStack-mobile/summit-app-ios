@@ -82,10 +82,13 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
     
     public func getLocation(event: SummitEvent) -> String{
         var location = ""
-        if (event.venueRoom != nil) {
-            location = event.venueRoom!.venue.name + " - " + event.venueRoom!.name
+        if event.venueRoom != nil {
+            location = event.venueRoom!.venue.name
+            if event.summit.startShowingVenuesDate.timeIntervalSinceNow.isSignMinus {
+                location += " - " + event.venueRoom!.name
+            }
         }
-        else if (event.venue != nil){
+        else if event.venue != nil {
             location = event.venue!.name
         }
         return location
