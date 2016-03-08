@@ -58,10 +58,10 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     
     var location: String!{
         get {
-            return locationInternal
+            return locationLabel.text
         }
         set {
-            locationInternal = newValue
+            locationLabel.text = newValue
             locationPinImage.hidden = newValue.isEmpty
         }
     }
@@ -128,8 +128,10 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
 
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventTypeLabel: UILabel!
-    @IBOutlet weak var eventTypeVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventTypeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventTypeLabelBaselineConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var trackLabel: UILabel!
     @IBOutlet weak var locationPinImage: UIImageView!
@@ -146,47 +148,27 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if trackLabel.text == "" && sponsorsLabel.text != "" {
-            contentView.removeConstraint(eventTypeVerticalConstraint)
-            eventTypeVerticalConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.FirstBaseline, relatedBy: NSLayoutRelation.Equal, toItem:
-                sponsorsLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
-            contentView.addConstraint(eventTypeVerticalConstraint)
-
-            for constraint in contentView.constraints {
-                if constraint.firstItem as? UIView == eventTypeLabel && constraint.secondItem as? UIView == contentView && constraint.secondAttribute == NSLayoutAttribute.BottomMargin {
-                    contentView.removeConstraint(constraint)
-                }
-            }
-        }
-        else if trackLabel.text != "" {
-            contentView.removeConstraint(eventTypeVerticalConstraint)
-            eventTypeVerticalConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.FirstBaseline, relatedBy: NSLayoutRelation.Equal, toItem:
-                trackLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
-            contentView.addConstraint(eventTypeVerticalConstraint)
-            
-            for constraint in contentView.constraints {
-                if constraint.firstItem as? UIView == eventTypeLabel && constraint.secondItem as? UIView == contentView && constraint.secondAttribute == NSLayoutAttribute.BottomMargin {
-                    contentView.removeConstraint(constraint)
-                }
-            }
-        }
-        else if trackLabel.text == "" && sponsorsLabel.text == "" {
-            contentView.removeConstraint(eventTypeVerticalConstraint)
-            eventTypeVerticalConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem:
-                eventNameLabel, attribute: NSLayoutAttribute.Bottom, multiplier: CGFloat(1), constant: CGFloat(0))
-            contentView.addConstraint(eventTypeVerticalConstraint)
-            
-            for constraint in contentView.constraints {
-                if constraint.firstItem as? UIView == eventTypeLabel && constraint.secondItem as? UIView == contentView && constraint.secondAttribute == NSLayoutAttribute.BottomMargin {
-                    contentView.removeConstraint(constraint)
-                }
-            }
-            let eventTypeBottomConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem:
-                contentView, attribute: NSLayoutAttribute.BottomMargin, multiplier: CGFloat(1), constant: CGFloat(-10))
-            contentView.addConstraint(eventTypeBottomConstraint)
-            
+        contentView.removeConstraint(eventTypeLabelBaselineConstraint)
+        if eventTypeLabelTopConstraint != nil {
+            contentView.removeConstraint(eventTypeLabelTopConstraint)
         }
         
+        if sponsorsLabel.text != "" && trackLabel.text == "" {
+            eventTypeLabelBaselineConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.FirstBaseline, relatedBy: NSLayoutRelation.Equal, toItem:
+                sponsorsLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
+        }
+        else {
+            let toItem = locationLabel.text == "" ? eventNameLabel : locationLabel
+            eventTypeLabelTopConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem:
+                toItem, attribute: NSLayoutAttribute.Bottom, multiplier: CGFloat(1), constant: CGFloat(12))
+            
+            contentView.addConstraint(eventTypeLabelTopConstraint)
+            
+            eventTypeLabelBaselineConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Baseline, relatedBy: NSLayoutRelation.Equal, toItem:
+                trackLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
+        }
+        
+        contentView.addConstraint(eventTypeLabelBaselineConstraint)
         contentView.updateConstraintsIfNeeded()
     }
     
