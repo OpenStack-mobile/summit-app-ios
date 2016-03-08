@@ -113,6 +113,7 @@ public class SummitDeserializer: NSObject, IDeserializer {
         summit.startDate =  NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
         summit.endDate =  NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
         summit.initialDataLoadDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["timestamp"].intValue))
+        summit.startShowingVenuesDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_showing_venues_date"].intValue))
         
         deserializerStorage.clear()
         
