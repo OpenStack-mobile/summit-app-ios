@@ -24,7 +24,7 @@ public class SummitDeserializer: NSObject, IDeserializer {
     public func deserialize(json : JSON) throws -> BaseEntity {
         let summit = Summit()
         
-        try validateRequiredFields(["id", "name", "start_date", "end_date", "time_zone", "sponsors", "summit_types", "ticket_types", "event_types", "tracks", "track_groups", "locations", "speakers", "schedule"], inJson: json)
+        try validateRequiredFields(["id", "name", "start_date", "end_date", "time_zone", "start_showing_venues_date", /*"sponsors", "summit_types", "ticket_types", "event_types", "tracks", "track_groups", "locations", "speakers", "schedule"*/], inJson: json)
         
         var deserializer : IDeserializer!
         
