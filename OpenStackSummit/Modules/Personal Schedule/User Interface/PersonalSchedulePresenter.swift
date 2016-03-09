@@ -37,6 +37,11 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         }
     }
     
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+        let availableDates = (interactor as! IPersonalScheduleInteractor).getLoggedInMemberScheduledEventsDatesFrom(startDate, to: endDate)
+        return availableDates
+    }
+    
     override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
         let events = (interactor as! IPersonalScheduleInteractor).getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
         return events
