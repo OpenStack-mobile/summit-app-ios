@@ -88,6 +88,8 @@ public class DeserializerFactory : NSObject {
         var deserializer : IDeserializer!
         
         switch className {
+        case "Summit":
+            deserializer = summitDeserializer
         case "MySchedule":
             deserializer = summitEventDeserializer
         case "Presentation":
