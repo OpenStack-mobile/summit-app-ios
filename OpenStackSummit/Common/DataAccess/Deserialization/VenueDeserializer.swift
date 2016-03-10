@@ -33,7 +33,7 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue = check
         }
         else {
-            try validateRequiredFields(["id", "lat", "lng", "address_1", "location_type"], inJson: json)
+            try validateRequiredFields(["id", "location_type"], inJson: json)
 
             var deserializer = deserializerFactory.create(DeserializerFactoryType.Location)
             let location = try deserializer.deserialize(json) as! Location
@@ -50,11 +50,15 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue.country = json["country"].stringValue
             venue.isInternal = json["location_type"].stringValue == "Internal"
             
-            var map: Image
+            var image: Image
             deserializer = deserializerFactory.create(DeserializerFactoryType.Image)
+            for (_, imageJSON) in json["images"] {
+                image = try deserializer.deserialize(imageJSON) as! Image
+                venue.images.append(image)
+            }
             for (_, mapJSON) in json["maps"] {
-                map = try deserializer.deserialize(mapJSON) as! Image
-                venue.maps.append(map)
+                image = try deserializer.deserialize(mapJSON) as! Image
+                venue.maps.append(image)
             }
                         
             deserializerStorage.add(venue)

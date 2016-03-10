@@ -12,8 +12,6 @@ import UIKit
 public protocol IVenueDetailPresenter {
     func viewLoad(venueId: Int)
     func showVenueLocationDetail()
-    func getVenueRoomsCount() -> Int
-    func buildVenueRoomCell(cell: IVenueListTableViewCell, index: Int)
 }
 
 public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
@@ -28,29 +26,30 @@ public class VenueDetailPresenter: NSObject, IVenueDetailPresenter {
         venue = interactor.getVenue(venueId)
         viewController.name = venue.name
         viewController.location = venue.address
-
-        if venue.maps.count > 0 {
-            viewController.maps = venue.maps
-            viewController.slideshowEnabled = true
-        } else {
-            viewController.addMarker(venue)
-            viewController.slideshowEnabled = false
+        
+        
+        viewController.toggleImagesGallery(venue.images.count > 0)
+        if venue.images.count > 0 {
+            viewController.images = venue.images
         }
         
-        viewController.reloadRoomsData()
+        viewController.toggleMapNavigation(venue.maps.count > 0)
+        viewController.toggleMapsGallery(venue.maps.count > 0)
+        viewController.toggleMap(venue.maps.count == 0 && isVenueGeoLocated(venue))
+        
+        if venue.maps.count > 0 {
+            viewController.maps = venue.maps
+        }
+        else if isVenueGeoLocated(venue) {
+            viewController.addMarker(venue)
+        }
+    }
+    
+    private func isVenueGeoLocated(venue: VenueDTO) -> Bool {
+        return venue.lat != nil && venue.long != nil
     }
     
     public func showVenueLocationDetail() {
         wireframe.presentVenueLocationDetailView(venueId, viewController: viewController.navigationController!)
     }
-    
-    public func getVenueRoomsCount() -> Int {
-        return venue.rooms.count
-    }
-    
-    public func buildVenueRoomCell(cell: IVenueListTableViewCell, index: Int) {
-        let venueRoom = venue.rooms[index]
-        cell.name = venueRoom.name
-    }
-    
 }

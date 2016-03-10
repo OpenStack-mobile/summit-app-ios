@@ -27,7 +27,30 @@ public class VenueDTOAssembler: NamedDTOAssembler, IVenueDTOAssembler {
     
     public func createDTO(venue: Venue) -> VenueDTO {
         let venueDTO: VenueDTO = super.createDTO(venue)
+        
+        venueDTO.address = getAddress(venue)
+        venueDTO.lat = Double(venue.lat)
+        venueDTO.long = Double(venue.long)
+        
+        for map in venue.maps {
+            venueDTO.maps.append(map.url)
+        }
+        
+        for image in venue.images {
+            venueDTO.images.append(image.url)
+        }
+        
+        var venueRoomDTO: VenueRoomDTO
+        for venueRoom in venue.venueRooms {
+            venueRoomDTO = venueRoomDTOAssembler.createDTO(venueRoom)
+            venueDTO.rooms.append(venueRoomDTO)
+        }
+        return venueDTO
+    }
+    
+    public func getAddress(venue: Venue) -> String {
         var fullAddress = venue.address
+        
         var separator = ", "
         if (!venue.city.isEmpty) {
             fullAddress += "\(separator)\(venue.city)"
@@ -48,20 +71,7 @@ public class VenueDTOAssembler: NamedDTOAssembler, IVenueDTOAssembler {
             fullAddress += ", \(venue.country)"
         }
         
-        venueDTO.address = fullAddress
-        venueDTO.lat = Double(venue.lat)
-        venueDTO.long = Double(venue.long)
-        
-        for map in venue.maps {
-            venueDTO.maps.append(map.url)
-        }
-        
-        var venueRoomDTO: VenueRoomDTO
-        for venueRoom in venue.venueRooms {
-            venueRoomDTO = venueRoomDTOAssembler.createDTO(venueRoom)
-            venueDTO.rooms.append(venueRoomDTO)
-        }
-        return venueDTO
+        return fullAddress
     }
 }
 

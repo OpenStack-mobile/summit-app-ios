@@ -32,6 +32,7 @@
 		9DEA0FB91BFD528D0035B130 /* VenuesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */; };
 		9DEF61B41C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */; };
 		9DF1B8BC1C50215E00945E47 /* RealmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */; };
+		9DF44C081C907300002BBFF4 /* VenuesMapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF44C071C907300002BBFF4 /* VenuesMapInteractor.swift */; };
 		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
 		CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */; };
@@ -377,6 +378,7 @@
 		9DEA0FB81BFD528D0035B130 /* VenuesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesAssembly.swift; sourceTree = "<group>"; };
 		9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsWireframe.swift; sourceTree = "<group>"; };
 		9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmFactory.swift; path = DataAccess/RealmFactory.swift; sourceTree = "<group>"; };
+		9DF44C071C907300002BBFF4 /* VenuesMapInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapInteractor.swift; sourceTree = "<group>"; };
 		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailAssembly.swift; sourceTree = "<group>"; };
@@ -1451,6 +1453,7 @@
 		CADD51121BD80E8B00400AF4 /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				9DF44C071C907300002BBFF4 /* VenuesMapInteractor.swift */,
 			);
 			path = "Business Logic";
 			sourceTree = "<group>";
@@ -2136,6 +2139,7 @@
 				CAE643611BCDC1DF005E530B /* ScheduleView.swift in Sources */,
 				CAF2AA411B8271C100D8E595 /* EventTypeDeserializer.swift in Sources */,
 				9DAD9D1D1C7D50D700CD1503 /* VenuesPresenter.swift in Sources */,
+				9DF44C081C907300002BBFF4 /* VenuesMapInteractor.swift in Sources */,
 				CA43998E1BD156C0008F378D /* FeedbackGivenListViewController.swift in Sources */,
 				CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */,
 				CAE6434E1BCD951A005E530B /* TrackListWireframe.swift in Sources */,
@@ -2589,7 +2593,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = OpenStackSummit;
-				PROVISIONING_PROFILE = "6b0f8b14-0b43-4806-9d88-1afa2a5b1e75";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2606,7 +2610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = OpenStackSummit;
-				PROVISIONING_PROFILE = "6b0f8b14-0b43-4806-9d88-1afa2a5b1e75";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

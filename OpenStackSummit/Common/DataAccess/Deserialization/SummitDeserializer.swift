@@ -70,12 +70,8 @@ public class SummitDeserializer: NSObject, IDeserializer {
         var venue: Venue
         for (_, venueJSON) in json["locations"] {
             if (isVenue(venueJSON)) {
-                do {
-                    venue = try deserializer.deserialize(venueJSON) as! Venue
-                    summit.venues.append(venue)
-                } catch let error {
-                    print(error)
-                }
+                venue = try deserializer.deserialize(venueJSON) as! Venue
+                summit.venues.append(venue)
             }
         }
 
