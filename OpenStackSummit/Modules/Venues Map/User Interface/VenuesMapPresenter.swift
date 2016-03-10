@@ -15,13 +15,13 @@ public protocol IVenuesMapPresenter {
 }
 
 public class VenuesMapPresenter: NSObject {
-    var interactor: IVenueListInteractor!
+    var interactor: IVenuesMapInteractor!
     var wireframe: IVenueListWireframe!
     var viewController: IVenuesMapViewController!
     var venueList: [VenueListItemDTO]!
     
     public func viewLoad() {
-        venueList = interactor.getVenues()
+        venueList = interactor.getInternalVenuesWithCoordinates()
         viewController.addMarkers(venueList)
     }
     

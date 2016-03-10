@@ -27,9 +27,17 @@ public class VenuesMapsAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(VenuesMapPresenter.self) {
             (definition) in
             
-            definition.injectProperty("interactor", with: self.venueListAssembly.venueListInteractor())
+            definition.injectProperty("interactor", with: self.venuesMapInteractor())
             definition.injectProperty("wireframe", with: self.venueMapWireframe())
             definition.injectProperty("viewController", with: self.venuesMapViewController())
+        }
+    }
+    
+    dynamic func venuesMapInteractor() -> AnyObject {
+        return TyphoonDefinition.withClass(VenuesMapInteractor.self) {
+            (definition) in
+            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
+            definition.injectProperty("venueListItemDTOAssembler", with: self.dtoAssemblersAssembly.venueListItemDTOAssembler())
         }
     }
         

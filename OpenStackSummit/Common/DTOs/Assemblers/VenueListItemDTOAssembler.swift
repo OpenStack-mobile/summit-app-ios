@@ -16,7 +16,7 @@ public protocol IVenueListItemDTOAssembler {
 public class VenueListItemDTOAssembler: NamedDTOAssembler, IVenueListItemDTOAssembler {
     
     public func createDTO(venue: Venue) -> VenueListItemDTO {
-                let venueListItemDTO: VenueListItemDTO = super.createDTO(venue)
+        let venueListItemDTO: VenueListItemDTO = super.createDTO(venue)
         venueListItemDTO.lat = Double(venue.lat)
         venueListItemDTO.long = Double(venue.long)
         
