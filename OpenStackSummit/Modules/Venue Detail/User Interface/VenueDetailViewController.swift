@@ -16,17 +16,21 @@ public protocol IVenueDetailViewController {
     
     var name: String! { get set }
     var location: String! { get set }
+    var images: [String]! { get set }
     var maps: [String]! { get set }
-    var slideshowEnabled: Bool { @objc(isSlideshowEnabled) get set }
     
-    func addMarker(venue:VenueDTO)
-    func reloadRoomsData()
+    func toggleMap(visible: Bool)
+    func toggleMapsGallery(visible: Bool)
+    func toggleImagesGallery(visible: Bool)
+    func toggleMapNavigation(visible: Bool)
+    
+    func addMarker(venue: VenueDTO)
 }
 
-class VenueDetailViewController: UIViewController, IVenueDetailViewController , UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
+class VenueDetailViewController: UIViewController, IVenueDetailViewController, GMSMapViewDelegate {
     
+    private var imagesInternal: [String]!
     private var mapsInternal: [String]!
-    private var isSlideshowEnableInternal: Bool = false
     
     var name: String! {
         get {
@@ -46,6 +50,25 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         }
     }
     
+    var images: [String]! {
+        get {
+            return imagesInternal
+        }
+        set {
+            if imagesInternal == nil {
+                imagesInternal = newValue
+                var imageInputs:[HanekeInputSource] = []
+                
+                for image in imagesInternal {
+                    let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    imageInputs.append(HanekeInputSource(urlString: url, frame: imagesSlideshow.bounds)!)
+                }
+                
+                imagesSlideshow.setImageInputs(imageInputs)
+            }
+        }
+    }
+    
     var maps: [String]! {
         get {
             return mapsInternal
@@ -57,23 +80,11 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
                 
                 for map in mapsInternal {
                     let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    imageInputs.append(HanekeInputSource(urlString: url, frame: slideshow.bounds)!)
+                    imageInputs.append(HanekeInputSource(urlString: url, frame: mapsSlideshow.bounds)!)
                 }
                 
-                slideshow.setImageInputs(imageInputs)
+                mapsSlideshow.setImageInputs(imageInputs)
             }
-        }
-    }
-    
-    var slideshowEnabled: Bool {
-        @objc(isSlideshowEnabled) get {
-            return isSlideshowEnableInternal
-        }
-        set(slideshowEnabled) {
-            isSlideshowEnableInternal = slideshowEnabled
-            mapView.hidden = slideshowEnabled
-            slideshow.hidden = !slideshowEnabled
-            arrowImageView.hidden = !slideshowEnabled
         }
     }
     
@@ -81,14 +92,12 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var arrowImageView: UIImageView!
-    @IBOutlet weak var slideshow: ImageSlideshow!
+    @IBOutlet weak var imagesSlideshow: ImageSlideshow!
+    @IBOutlet weak var imagesSlideshowHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapsSlideshow: ImageSlideshow!
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var roomsTableView: UITableView!
-    @IBOutlet weak var roomsTableViewHeightConstraint: NSLayoutConstraint!
     
     var presenter: IVenueDetailPresenter!
-    let cellIdentifier = "venueRoomListTableViewCell"
-    
     var transitionDelegate: ZoomAnimatedTransitioningDelegate?
     
     override func viewDidLoad() {
@@ -96,27 +105,13 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         
         mapView.myLocationEnabled = true
         mapView.delegate = self
-        
-        let recognizer = UITapGestureRecognizer(target: self, action: "click")
-        slideshow.addGestureRecognizer(recognizer)
-        
-        roomsTableView.registerNib(UINib(nibName: "TableViewSectionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "TableViewSectionHeader")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        roomsTableViewHeightConstraint?.constant = roomsTableView.contentSize.height
-    }
-    
-    func click() {
+    @IBAction func openInFullScreen(sender: UITapGestureRecognizer) {
+        let slideshow = sender.view as! ImageSlideshow
         let ctr = FullScreenSlideshowViewController()
         ctr.pageSelected = {(page: Int) in
-            self.slideshow.setScrollViewPage(page, animated: false)
+            slideshow.setScrollViewPage(page, animated: false)
         }
         
         ctr.initialPage = slideshow.scrollViewPage
@@ -124,6 +119,12 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         self.transitionDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: slideshow);
         ctr.transitioningDelegate = self.transitionDelegate!
         self.presentViewController(ctr, animated: true, completion: nil)
+    }
+    
+    @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
+        if !arrowImageView.hidden {
+            presenter.showVenueLocationDetail()
+        }
     }
     
     func addMarker(venue: VenueDTO) {
@@ -135,46 +136,27 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController , 
         marker.icon = UIImage(named: "map_pin")
         bounds = bounds.includingCoordinate(marker.position)
         mapView.selectedMarker = marker
-        mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+        
+        let update = GMSCameraUpdate.fitBounds(bounds)
+        mapView.moveCamera(update)
+        mapView.animateToZoom(mapView.camera.zoom - 6)
     }
     
-    func reloadRoomsData() {
-        roomsTableView.delegate = self
-        roomsTableView.dataSource = self
-        roomsTableView.reloadData()
+    func toggleMap(visible: Bool) {
+        mapView.hidden = !visible
     }
     
-    @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
-        if slideshowEnabled {
-            presenter.showVenueLocationDetail()
-        }
-    }
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    func toggleMapsGallery(visible: Bool) {
+        mapsSlideshow.hidden = !visible
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+    func toggleImagesGallery(visible: Bool) {
+        imagesSlideshow.hidden = !visible
+        imagesSlideshowHeightConstraint.constant = visible ? 220 : 0
+        imagesSlideshow.updateConstraints()
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = roomsTableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewSectionHeader") as! TableViewSectionHeader
-        header.titleLabel.text = "Rooms".uppercaseString
-        return header
+    func toggleMapNavigation(visible: Bool) {
+        arrowImageView.hidden = !visible
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getVenueRoomsCount();
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! VenueListTableViewCell
-        presenter.buildVenueRoomCell(cell, index: indexPath.row)
-        return cell
-    }
-    
-    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showVenueLocationDetail()
-    }*/
 }

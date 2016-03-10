@@ -785,72 +785,55 @@
                                             <constraint firstItem="js5-8r-g2E" firstAttribute="leading" secondItem="dac-ah-3Jw" secondAttribute="leading" constant="22" id="wdc-Vp-cWe"/>
                                         </constraints>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="HxY-lX-wjI" appends="YES" id="tEc-Q0-1fI"/>
+                                            <outletCollection property="gestureRecognizers" destination="7rX-pe-8Fs" appends="YES" id="gxT-FM-63Z"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aep-pw-hCq" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVb-AQ-4eW" userLabel="Images Slideshow" customClass="ImageSlideshow" customModule="ImageSlideshow">
                                         <rect key="frame" x="0.0" y="146" width="600" height="220"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="220" id="xnF-xO-bKK"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="7wY-AI-i0w" appends="YES" id="o8S-ml-ABZ"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aep-pw-hCq" userLabel="Maps Slideshow" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                        <rect key="frame" x="0.0" y="366" width="600" height="220"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="Tqy-HT-yRh"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="zma-01-eeD" appends="YES" id="8HV-Kk-NpO"/>
+                                        </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQH-MB-9sm" customClass="GMSMapView">
-                                        <rect key="frame" x="0.0" y="146" width="600" height="220"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wJC-XL-E7V">
-                                        <rect key="frame" x="0.0" y="366" width="600" height="190"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQH-MB-9sm" userLabel="Map" customClass="GMSMapView">
+                                        <rect key="frame" x="0.0" y="366" width="600" height="220"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="190" id="cu3-fF-ia1"/>
+                                            <constraint firstAttribute="height" constant="220" id="lHv-v1-21T"/>
                                         </constraints>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="venueRoomListTableViewCell" id="nbg-tt-wgo" customClass="VenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nbg-tt-wgo" id="YJ0-b9-nL9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yc-ag-oUm">
-                                                            <rect key="frame" x="23" y="19" width="554" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="2yc-ag-oUm" firstAttribute="leading" secondItem="YJ0-b9-nL9" secondAttribute="leadingMargin" constant="15" id="PTZ-8v-WcM"/>
-                                                        <constraint firstItem="2yc-ag-oUm" firstAttribute="centerY" secondItem="YJ0-b9-nL9" secondAttribute="centerY" id="W8e-Hg-ysq"/>
-                                                        <constraint firstItem="2yc-ag-oUm" firstAttribute="trailing" secondItem="YJ0-b9-nL9" secondAttribute="trailingMargin" constant="-15" id="v0f-06-9tM"/>
-                                                    </constraints>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="nameLabel" destination="2yc-ag-oUm" id="dW3-HL-Utx"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="0Qz-th-YeX"/>
-                                    <constraint firstItem="wJC-XL-E7V" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="1Ci-bY-7bc"/>
-                                    <constraint firstItem="wJC-XL-E7V" firstAttribute="top" secondItem="Aep-pw-hCq" secondAttribute="bottom" id="1TD-tJ-ahR"/>
-                                    <constraint firstItem="wJC-XL-E7V" firstAttribute="top" secondItem="EQH-MB-9sm" secondAttribute="bottom" id="1iV-Zo-tXO"/>
-                                    <constraint firstItem="wJC-XL-E7V" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="1oR-R0-N91"/>
                                     <constraint firstItem="gyv-yJ-KBl" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="3wh-IS-GZy"/>
                                     <constraint firstItem="dac-ah-3Jw" firstAttribute="top" secondItem="gyv-yJ-KBl" secondAttribute="bottom" id="8rQ-4m-1yn"/>
-                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="Baf-ed-blq"/>
+                                    <constraint firstItem="mVb-AQ-4eW" firstAttribute="top" secondItem="dac-ah-3Jw" secondAttribute="bottom" id="B6j-Am-pHe"/>
                                     <constraint firstItem="dac-ah-3Jw" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="Bsp-kd-tLK"/>
-                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="top" secondItem="dac-ah-3Jw" secondAttribute="bottom" id="Ddc-El-Cmx"/>
-                                    <constraint firstItem="wJC-XL-E7V" firstAttribute="bottom" secondItem="4sS-ey-PKM" secondAttribute="bottom" id="EjI-2z-sIh"/>
                                     <constraint firstItem="dac-ah-3Jw" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="HSg-s1-vMR"/>
+                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="top" secondItem="mVb-AQ-4eW" secondAttribute="bottom" id="Q4T-uX-ilz"/>
+                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="SHV-qX-tzL"/>
                                     <constraint firstItem="gyv-yJ-KBl" firstAttribute="top" secondItem="4sS-ey-PKM" secondAttribute="top" id="SyY-j4-UVy"/>
+                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="bottom" secondItem="4sS-ey-PKM" secondAttribute="bottom" id="Xad-tv-nLC"/>
                                     <constraint firstItem="gyv-yJ-KBl" firstAttribute="width" secondItem="4sS-ey-PKM" secondAttribute="width" id="Z1o-lP-gF0"/>
-                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="top" secondItem="dac-ah-3Jw" secondAttribute="bottom" id="efz-4X-3tb"/>
-                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="lPf-hI-7tl"/>
-                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="trailing" secondItem="dac-ah-3Jw" secondAttribute="trailing" id="yWw-qz-375"/>
+                                    <constraint firstItem="mVb-AQ-4eW" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="aET-Bc-y8o"/>
+                                    <constraint firstItem="mVb-AQ-4eW" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="ayl-VC-AoN"/>
+                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="byd-ao-Gga"/>
+                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="trailing" secondItem="4sS-ey-PKM" secondAttribute="trailing" id="hjk-f3-SJ5"/>
+                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="bottom" secondItem="4sS-ey-PKM" secondAttribute="bottom" id="ipk-rj-26d"/>
+                                    <constraint firstItem="Aep-pw-hCq" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="kBw-5K-Cu8"/>
+                                    <constraint firstItem="EQH-MB-9sm" firstAttribute="top" secondItem="mVb-AQ-4eW" secondAttribute="bottom" id="oI5-gz-g6M"/>
                                     <constraint firstItem="gyv-yJ-KBl" firstAttribute="leading" secondItem="4sS-ey-PKM" secondAttribute="leading" id="ycY-sw-WuS"/>
                                 </constraints>
                             </scrollView>
@@ -867,19 +850,29 @@
                     <size key="freeformSize" width="600" height="1100"/>
                     <connections>
                         <outlet property="arrowImageView" destination="psb-Hk-aeG" id="j5a-Ih-MH3"/>
+                        <outlet property="imagesSlideshow" destination="mVb-AQ-4eW" id="N6k-oN-Nog"/>
+                        <outlet property="imagesSlideshowHeightConstraint" destination="xnF-xO-bKK" id="8OB-N7-gom"/>
                         <outlet property="locationLabel" destination="GPq-ks-iKL" id="N5d-PI-CyX"/>
-                        <outlet property="mapView" destination="EQH-MB-9sm" id="4wu-bc-5ZF"/>
+                        <outlet property="mapView" destination="EQH-MB-9sm" id="a5b-Z6-Pc4"/>
+                        <outlet property="mapsSlideshow" destination="Aep-pw-hCq" id="z3B-NC-wbk"/>
                         <outlet property="nameLabel" destination="axR-CV-imw" id="KOd-l0-WhJ"/>
-                        <outlet property="roomsTableView" destination="wJC-XL-E7V" id="zD1-0L-8ZC"/>
-                        <outlet property="roomsTableViewHeightConstraint" destination="cu3-fF-ia1" id="YI2-wS-UBO"/>
                         <outlet property="scrollView" destination="4sS-ey-PKM" id="fZ1-0p-2Jw"/>
-                        <outlet property="slideshow" destination="Aep-pw-hCq" id="hUg-bL-g1Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bch-y4-MfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="HxY-lX-wjI">
+                <tapGestureRecognizer id="7rX-pe-8Fs">
                     <connections>
-                        <action selector="navigateToVenueLocationDetail:" destination="CzJ-At-ntC" id="KE6-0c-eHY"/>
+                        <action selector="navigateToVenueLocationDetail:" destination="CzJ-At-ntC" id="xdD-ps-8ai"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="7wY-AI-i0w">
+                    <connections>
+                        <action selector="openInFullScreen:" destination="CzJ-At-ntC" id="XdB-3p-KCs"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="zma-01-eeD">
+                    <connections>
+                        <action selector="openInFullScreen:" destination="CzJ-At-ntC" id="VAo-TX-SKF"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

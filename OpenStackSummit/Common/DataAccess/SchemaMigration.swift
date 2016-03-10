@@ -15,7 +15,7 @@ protocol ISchemaMigration {
 }
 
 public class SchemaMigration: NSObject, ISchemaMigration {
-    let schemaVersion:UInt64 = 5
+    let schemaVersion:UInt64 = 6
     
     func getSchemaVersion() -> UInt64 {
         return schemaVersion
@@ -55,6 +55,11 @@ public class SchemaMigration: NSObject, ISchemaMigration {
             if (oldSchemaVersion < 5) {
                 migration.enumerate(Summit.className()) { oldObject, newObject in
                     newObject!["startShowingVenuesDate"] = NSDate(timeIntervalSince1970: 1)
+                }
+            }
+            if (oldSchemaVersion < 6) {
+                migration.enumerate(Venue.className()) { oldObject, newObject in
+                    newObject!["images"] = List<Image>()
                 }
             }
         }
