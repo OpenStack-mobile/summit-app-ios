@@ -7,28 +7,10 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--Reveal View Controller-->
-        <scene sceneID="Yvm-us-FQq">
-            <objects>
-                <viewController id="JGE-4o-x7p" customClass="SWRevealViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="znt-Cf-uZd"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Va-zI-G9r"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JMo-x2-3Pu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wTH-wm-hoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-731" y="472"/>
-        </scene>
-        <!--EVENTS-->
+        <!--Event Detail View Controller-->
         <scene sceneID="t2r-Ay-5sh">
             <objects>
-                <viewController storyboardIdentifier="EventDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xso-DC-v1V" customClass="EventDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventDetailViewController" id="xso-DC-v1V" customClass="EventDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8EI-yd-2IW"/>
                         <viewControllerLayoutGuide type="bottom" id="VLh-sV-H5n"/>
@@ -478,7 +460,7 @@
                             <constraint firstItem="dCz-Ew-COB" firstAttribute="width" secondItem="vwb-eu-d9g" secondAttribute="width" id="wLc-Ag-8Pg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="EVENTS" id="h9p-KO-Na4">
+                    <navigationItem key="navigationItem" id="h9p-KO-Na4">
                         <rightBarButtonItems>
                             <barButtonItem image="Submenu_Feedback" id="EuL-uU-8oN">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -538,7 +520,7 @@
         <!--Feedback Edit View Controller-->
         <scene sceneID="9aZ-LC-uOd">
             <objects>
-                <viewController storyboardIdentifier="FeedbackEditViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PJO-89-0I7" customClass="FeedbackEditViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedbackEditViewController" id="PJO-89-0I7" customClass="FeedbackEditViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q6g-al-yaT"/>
                         <viewControllerLayoutGuide type="bottom" id="x20-zN-8h2"/>
@@ -655,7 +637,7 @@
         <!--Venue List View Controller-->
         <scene sceneID="V0c-pb-YYi">
             <objects>
-                <viewController storyboardIdentifier="VenueListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wN0-Jt-c1s" customClass="VenueListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VenueListViewController" automaticallyAdjustsScrollViewInsets="NO" id="wN0-Jt-c1s" customClass="VenueListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sNC-Zx-BAx"/>
                         <viewControllerLayoutGuide type="bottom" id="ZtB-v2-Wqm"/>
@@ -713,10 +695,10 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-2230"/>
         </scene>
-        <!--Venue-->
+        <!--Venue Detail View Controller-->
         <scene sceneID="4BX-6e-hgl">
             <objects>
-                <viewController storyboardIdentifier="VenueDetailViewController" title="Venue" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CzJ-At-ntC" customClass="VenueDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VenueDetailViewController" id="CzJ-At-ntC" customClass="VenueDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="odJ-1C-hh9"/>
                         <viewControllerLayoutGuide type="bottom" id="fx1-Ih-bBT"/>
@@ -878,10 +860,10 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-3123"/>
         </scene>
-        <!--Location-->
+        <!--Venue Location Detail View Controller-->
         <scene sceneID="tsx-wP-EYF">
             <objects>
-                <viewController storyboardIdentifier="VenueLocationDetailViewController" title="Location" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TSe-xC-g0o" customClass="VenueLocationDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VenueLocationDetailViewController" id="TSe-xC-g0o" customClass="VenueLocationDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Suf-bY-LLM"/>
                         <viewControllerLayoutGuide type="bottom" id="Gxr-Gy-CIF"/>
@@ -911,10 +893,10 @@
             </objects>
             <point key="canvasLocation" x="4384" y="-2873"/>
         </scene>
-        <!--General Schedule-->
+        <!--General Schedule View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="GeneralScheduleViewController" title="General Schedule" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GeneralScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GeneralScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="GeneralScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eSn-Ao-bTM"/>
                         <viewControllerLayoutGuide type="bottom" id="nVg-oC-8ha"/>
@@ -945,10 +927,10 @@
             </objects>
             <point key="canvasLocation" x="2693" y="-4798"/>
         </scene>
-        <!--Feedback-->
+        <!--Feedback Given List View Controller-->
         <scene sceneID="xYn-zV-Hp7">
             <objects>
-                <viewController storyboardIdentifier="FeedbackGivenListViewController" title="Feedback" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Br-6T-8cG" customClass="FeedbackGivenListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedbackGivenListViewController" automaticallyAdjustsScrollViewInsets="NO" id="7Br-6T-8cG" customClass="FeedbackGivenListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UYM-3p-JwF"/>
                         <viewControllerLayoutGuide type="bottom" id="inA-d3-ixa"/>
@@ -988,10 +970,10 @@
             </objects>
             <point key="canvasLocation" x="2693" y="-294"/>
         </scene>
-        <!--Tracks-->
+        <!--Track List View Controller-->
         <scene sceneID="d2K-kB-e8A">
             <objects>
-                <viewController storyboardIdentifier="TrackListViewController" title="Tracks" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uXE-o4-ZKi" customClass="TrackListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrackListViewController" automaticallyAdjustsScrollViewInsets="NO" id="uXE-o4-ZKi" customClass="TrackListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HCK-TW-hKN"/>
                         <viewControllerLayoutGuide type="bottom" id="OEa-NL-6EB"/>
@@ -1060,7 +1042,7 @@
         <!--Attendees List View Controller-->
         <scene sceneID="E7F-NH-IRV">
             <objects>
-                <viewController storyboardIdentifier="AttendeesListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eeJ-xY-SoK" customClass="AttendeesListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttendeesListViewController" id="eeJ-xY-SoK" customClass="AttendeesListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g0R-St-sMz"/>
                         <viewControllerLayoutGuide type="bottom" id="o0j-6m-pzP"/>
@@ -1093,7 +1075,7 @@
         <!--Speaker List View Controller-->
         <scene sceneID="uDR-ke-w97">
             <objects>
-                <viewController storyboardIdentifier="SpeakerListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7F8-os-vcs" customClass="SpeakerListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpeakerListViewController" id="7F8-os-vcs" customClass="SpeakerListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2nP-2q-5lo"/>
                         <viewControllerLayoutGuide type="bottom" id="EK1-Qy-OL6"/>
@@ -1123,10 +1105,10 @@
             </objects>
             <point key="canvasLocation" x="3549" y="472"/>
         </scene>
-        <!--TRACK-->
+        <!--Track Schedule View Controller-->
         <scene sceneID="E1W-ng-imS">
             <objects>
-                <viewController storyboardIdentifier="TrackScheduleViewController" title="TRACK" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IUl-9X-zik" customClass="TrackScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrackScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="IUl-9X-zik" customClass="TrackScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lTp-2e-ZEf"/>
                         <viewControllerLayoutGuide type="bottom" id="sif-6T-4hR"/>
@@ -1177,10 +1159,10 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-4034"/>
         </scene>
-        <!--PROFILE DETAIL-->
+        <!--Member Profile Detail View Controller-->
         <scene sceneID="zLm-Y7-gos">
             <objects>
-                <viewController storyboardIdentifier="MemberProfileDetailViewController" title="PROFILE DETAIL" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kP4-95-NVD" customClass="MemberProfileDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemberProfileDetailViewController" id="kP4-95-NVD" customClass="MemberProfileDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GRa-j9-2r1"/>
                         <viewControllerLayoutGuide type="bottom" id="3co-0c-0wh"/>
@@ -1402,10 +1384,10 @@
             </objects>
             <point key="canvasLocation" x="2693" y="-984"/>
         </scene>
-        <!--Schedule-->
+        <!--Personal Schedule View Controller-->
         <scene sceneID="Spk-WX-dNx">
             <objects>
-                <viewController storyboardIdentifier="PersonalScheduleViewController" title="Schedule" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rpk-cn-Y0B" customClass="PersonalScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonalScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="rpk-cn-Y0B" customClass="PersonalScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xn6-dc-8PZ"/>
                         <viewControllerLayoutGuide type="bottom" id="wTW-ce-GLs"/>
@@ -1435,10 +1417,10 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-1579"/>
         </scene>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="MwD-Ca-3v5">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" title="Search" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tbP-eF-VTB" customClass="SearchViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" automaticallyAdjustsScrollViewInsets="NO" id="tbP-eF-VTB" customClass="SearchViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="69X-T8-vMk"/>
                         <viewControllerLayoutGuide type="bottom" id="hrq-wh-b15"/>
@@ -1615,7 +1597,7 @@
                             <constraint firstItem="dgo-Wq-ud0" firstAttribute="top" secondItem="69X-T8-vMk" secondAttribute="bottom" id="aCS-4t-hBQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="OY4-xS-D6r">
+                    <navigationItem key="navigationItem" id="OY4-xS-D6r">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="mut-aX-JQr"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1636,10 +1618,10 @@
             </objects>
             <point key="canvasLocation" x="1889" y="3803"/>
         </scene>
-        <!--FILTER-->
+        <!--General Schedule Filter View Controller-->
         <scene sceneID="Xmq-AN-zfE">
             <objects>
-                <viewController storyboardIdentifier="GeneralScheduleFilterViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wfw-Bg-W3Q" customClass="GeneralScheduleFilterViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GeneralScheduleFilterViewController" automaticallyAdjustsScrollViewInsets="NO" id="Wfw-Bg-W3Q" customClass="GeneralScheduleFilterViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="seS-eO-a4r"/>
                         <viewControllerLayoutGuide type="bottom" id="PB4-T3-BWP"/>
@@ -1852,7 +1834,7 @@
                             <constraint firstItem="4Sv-6R-eFA" firstAttribute="leading" secondItem="UeV-vG-yh8" secondAttribute="leading" id="uea-uY-Ecm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FILTER" id="T5g-m3-oY4">
+                    <navigationItem key="navigationItem" id="T5g-m3-oY4">
                         <barButtonItem key="leftBarButtonItem" image="close" id="eQH-KS-mvL">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -1885,7 +1867,7 @@
         <!--Menu View Controller-->
         <scene sceneID="DmD-10-VF4">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WC9-XC-aZZ" customClass="MenuViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="WC9-XC-aZZ" customClass="MenuViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kic-IL-EkI"/>
                         <viewControllerLayoutGuide type="bottom" id="eT2-4h-nYo"/>
@@ -2033,10 +2015,10 @@
             </objects>
             <point key="canvasLocation" x="194" y="472"/>
         </scene>
-        <!--LEVELS-->
+        <!--Level List View Controller-->
         <scene sceneID="Lcj-65-9Zy">
             <objects>
-                <viewController storyboardIdentifier="LevelListViewController" title="LEVELS" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dp0-VN-meu" customClass="LevelListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelListViewController" automaticallyAdjustsScrollViewInsets="NO" id="Dp0-VN-meu" customClass="LevelListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UzQ-cu-Lli"/>
                         <viewControllerLayoutGuide type="bottom" id="fC0-Rc-kOy"/>
@@ -2102,10 +2084,10 @@
             </objects>
             <point key="canvasLocation" x="2713" y="-5724"/>
         </scene>
-        <!--LEVEL-->
+        <!--Level Schedule View Controller-->
         <scene sceneID="qrP-YL-Dib">
             <objects>
-                <viewController storyboardIdentifier="LevelScheduleViewController" title="LEVEL" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pe2-U8-6Z9" customClass="LevelScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="Pe2-U8-6Z9" customClass="LevelScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zts-mi-l0a"/>
                         <viewControllerLayoutGuide type="bottom" id="4BV-av-O8e"/>
@@ -2138,7 +2120,7 @@
         <!--Speaker Presentations View Controller-->
         <scene sceneID="6MN-oP-BbZ">
             <objects>
-                <viewController storyboardIdentifier="SpeakerPresentationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yvl-Jn-hBo" customClass="SpeakerPresentationsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpeakerPresentationsViewController" id="Yvl-Jn-hBo" customClass="SpeakerPresentationsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p6l-NY-wO1"/>
                         <viewControllerLayoutGuide type="bottom" id="Sby-uf-mwq"/>

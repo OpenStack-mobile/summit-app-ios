@@ -33,4 +33,9 @@ class TrackScheduleViewController: ScheduleViewController, ITrackScheduleViewCon
             internalPresenter = newValue
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "TRACK"
+    }
 }
