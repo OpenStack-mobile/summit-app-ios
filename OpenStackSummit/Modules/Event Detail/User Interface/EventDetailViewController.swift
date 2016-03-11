@@ -353,6 +353,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
         
         feedbackTableView.registerNib(UINib(nibName: "FeedbackTableViewCell", bundle: nil), forCellReuseIdentifier: feedbackCellIdentifier)
+        
+        navigationItem.title = "EVENTS"
     }
     
     override func didReceiveMemoryWarning() {
