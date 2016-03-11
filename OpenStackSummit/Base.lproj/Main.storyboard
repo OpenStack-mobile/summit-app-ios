@@ -994,26 +994,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="B6j-AF-zcx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pv9-Fg-ELa">
+                                                    <rect key="frame" x="12" y="14" width="543" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="B6j-AF-zcx" userLabel="Arrow Image">
                                                     <rect key="frame" x="574" y="17" width="10" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="10" id="XPf-1m-USF"/>
                                                         <constraint firstAttribute="height" constant="15" id="p6d-2H-hLo"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pv9-Fg-ELa">
-                                                    <rect key="frame" x="12" y="14" width="543" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="B6j-AF-zcx" secondAttribute="trailing" constant="8" id="4i3-SK-klf"/>
+                                                <constraint firstItem="B6j-AF-zcx" firstAttribute="trailing" secondItem="I9I-sB-e26" secondAttribute="trailingMargin" constant="-8" id="4i3-SK-klf"/>
                                                 <constraint firstItem="B6j-AF-zcx" firstAttribute="leading" secondItem="Pv9-Fg-ELa" secondAttribute="trailing" constant="19" id="5jC-kD-0Gg"/>
                                                 <constraint firstItem="Pv9-Fg-ELa" firstAttribute="centerY" secondItem="I9I-sB-e26" secondAttribute="centerY" id="GWf-z1-wT7"/>
-                                                <constraint firstItem="B6j-AF-zcx" firstAttribute="centerY" secondItem="I9I-sB-e26" secondAttribute="centerY" id="XO1-6g-Gue"/>
+                                                <constraint firstItem="Pv9-Fg-ELa" firstAttribute="top" secondItem="I9I-sB-e26" secondAttribute="topMargin" constant="6" id="WiP-n6-KQw"/>
                                                 <constraint firstItem="Pv9-Fg-ELa" firstAttribute="leading" secondItem="I9I-sB-e26" secondAttribute="leadingMargin" constant="4" id="fRJ-NN-R7w"/>
+                                                <constraint firstItem="B6j-AF-zcx" firstAttribute="centerY" secondItem="Pv9-Fg-ELa" secondAttribute="centerY" id="h6B-Hy-m2o"/>
+                                                <constraint firstItem="Pv9-Fg-ELa" firstAttribute="bottom" secondItem="I9I-sB-e26" secondAttribute="bottomMargin" constant="-6" id="sYc-h5-xtL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
