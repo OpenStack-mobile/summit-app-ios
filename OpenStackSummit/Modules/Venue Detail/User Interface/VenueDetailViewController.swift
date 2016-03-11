@@ -108,6 +108,8 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         
         mapView.myLocationEnabled = true
         mapView.delegate = self
+        
+        navigationItem.title = "VENUE"
     }
     
     @IBAction func openInFullScreen(sender: UITapGestureRecognizer) {
