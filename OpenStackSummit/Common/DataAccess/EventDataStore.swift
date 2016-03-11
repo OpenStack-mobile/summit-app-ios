@@ -54,7 +54,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
             var tagsFilter = ""
             var separator = ""
             for tag in tags! {
-                tagsFilter += "\(separator)ANY tags.name = '\(tag)'"
+                tagsFilter += "\(separator)ANY tags.name = [c] '\(tag)'"
                 separator = " OR "
             }
             events = events.filter(tagsFilter)
