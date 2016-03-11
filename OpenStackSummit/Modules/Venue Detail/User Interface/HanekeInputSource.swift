@@ -33,7 +33,6 @@ public class HanekeInputSource: NSObject, InputSource {
     
     @objc public func setToImageView(imageView: UIImageView) {
         imageView.frame = frame
-        imageView.contentMode = .ScaleAspectFit
         imageView.hnk_setImageFromURL(url)
     }
 }

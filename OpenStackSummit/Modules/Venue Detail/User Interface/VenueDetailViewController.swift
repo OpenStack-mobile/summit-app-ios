@@ -103,6 +103,9 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imagesSlideshow.contentScaleMode = .ScaleAspectFill
+        mapsSlideshow.contentScaleMode = .ScaleAspectFill
+        
         mapView.myLocationEnabled = true
         mapView.delegate = self
     }
