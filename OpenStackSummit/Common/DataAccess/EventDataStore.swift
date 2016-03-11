@@ -21,7 +21,7 @@ public protocol IEventDataStore {
 
 public class EventDataStore: GenericDataStore, IEventDataStore {
     var eventRemoteDataStore: IEventRemoteDataStore!
-    let sortProperties = [SortDescriptor(property: "start", ascending: true), SortDescriptor(property: "end", ascending: true)]
+    let sortProperties = [SortDescriptor(property: "start", ascending: true), SortDescriptor(property: "end", ascending: true), SortDescriptor(property: "name", ascending: true)]
     
     public func getByIdLocal(id: Int) -> SummitEvent? {
         return super.getByIdLocal(id)
