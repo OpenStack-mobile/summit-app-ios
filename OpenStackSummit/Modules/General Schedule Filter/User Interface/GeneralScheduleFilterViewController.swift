@@ -65,6 +65,8 @@ class GeneralScheduleFilterViewController: UIViewController, IGeneralScheduleFil
         AMTagView.appearance().innerTagColor = UIColor(red: 53/255, green: 84/255, blue: 121/255, alpha: 1.0)
         tagTextView.autoCompleteDelegate = self
         tagTextView.autoCompleteDataSource = self
+        
+        navigationItem.title = "FILTER"
     }
 
     override func viewWillAppear(animated: Bool) {
