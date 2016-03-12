@@ -1,5 +1,5 @@
 //
-//  TableViewSectionHeader.swift
+//  TableViewHeaderView.swift
 //  OpenStackSummit
 //
 //  Created by Gabriel Horacio Cutrini on 1/25/16.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class TableViewSectionHeader: UITableViewHeaderFooterView {
+public class TableViewHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var titleLabel: UILabel!
 }
