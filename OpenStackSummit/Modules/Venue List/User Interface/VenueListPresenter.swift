@@ -11,34 +11,53 @@ import UIKit
 @objc
 public protocol IVenueListPresenter {
     func viewLoad()
-    func getVenuesCount() -> Int
-    func buildVenueCell(cell: IVenueListTableViewCell, index: Int)
-    func showVenueDetail(index: Int)
+    func getInternalVenuesCount() -> Int
+    func getExternalVenuesCount() -> Int
+    func buildInternalVenueCell(cell: IVenueListTableViewCell, index: Int)
+    func buildExternalVenueCell(cell: IVenueListTableViewCell, index: Int)
+    func showInternalVenueDetail(index: Int)
+    func showExternalVenueDetail(index: Int)
 }
 
 public class VenueListPresenter: NSObject, IVenueListPresenter {
     var wireframe: IVenueListWireframe!
     var viewController: IVenueListViewController!
     var interactor: IVenueListInteractor!
-    var venueList: [VenueListItemDTO]!
+    
+    var internalVenueList: [VenueListItemDTO]!
+    var externalVenueList: [VenueListItemDTO]!
     
     public func viewLoad() {
-        venueList = interactor.getVenues()
-        viewController.releoadList()
+        internalVenueList = interactor.getInternalVenues()
+        externalVenueList = interactor.getExternalVenues()
+        viewController.reloadList()
     }
     
-    public func getVenuesCount() -> Int {
-        return venueList.count
+    public func getInternalVenuesCount() -> Int {
+        return internalVenueList.count
     }
     
-    public func buildVenueCell(cell: IVenueListTableViewCell, index: Int){
-        let venue = venueList[index]
+    public func getExternalVenuesCount() -> Int {
+        return externalVenueList.count
+    }
+    
+    public func buildInternalVenueCell(cell: IVenueListTableViewCell, index: Int){
+        let venue = internalVenueList[index]
         cell.name = venue.name
     }
     
-    public func showVenueDetail(index: Int) {
-        let venue = venueList[index]
+    public func buildExternalVenueCell(cell: IVenueListTableViewCell, index: Int){
+        let venue = externalVenueList[index]
+        cell.name = venue.name
+    }
+    
+    public func showInternalVenueDetail(index: Int) {
+        let venue = internalVenueList[index]
         wireframe.showVenueDetail(venue.id)
     }
     
+    public func showExternalVenueDetail(index: Int) {
+        let venue = externalVenueList[index]
+        wireframe.showVenueDetail(venue.id)
+    }
 }
