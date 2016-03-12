@@ -115,11 +115,21 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                     withInteractor: interactor
                 )
                 
-                if viewController.availableDates.count > 0 {
-                    viewController.selectedDate = viewController.availableDates.first
+                if self.selectedDate != nil {
+                    if viewController.availableDates.count > 0 && !viewController.availableDates.contains(self.selectedDate!) {
+                        viewController.selectedDate = viewController.availableDates.first
+                    }
+                    else {
+                        viewController.selectedDate = self.selectedDate
+                    }
                 }
                 else {
-                    viewController.selectedDate = self.selectedDate != nil ? self.selectedDate : viewController.startDate
+                    if viewController.availableDates.count > 0 {
+                        viewController.selectedDate = viewController.availableDates.first
+                    }
+                    else {
+                        viewController.selectedDate = viewController.startDate
+                    }
                 }
             })
         }
