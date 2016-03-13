@@ -45,14 +45,13 @@ public class VenueListPresenter: NSObject, IVenueListPresenter {
         let venue = internalVenueList[index]
         cell.name = venue.name
         cell.address = venue.address
-        if venue.backgroundImageUrl != nil {
-            cell.backgroundImageUrl = venue.backgroundImageUrl
-        }
+        cell.backgroundImageUrl = venue.backgroundImageUrl
     }
     
     public func buildExternalVenueCell(cell: IVenueListTableViewCell, index: Int){
         let venue = externalVenueList[index]
         cell.name = venue.name
+        cell.address = venue.address
     }
     
     public func showInternalVenueDetail(index: Int) {

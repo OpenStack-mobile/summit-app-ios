@@ -702,21 +702,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSP-yB-dyi">
-                                                    <rect key="frame" x="28" y="31" width="544" height="25"/>
+                                                    <rect key="frame" x="28" y="10" width="544" height="25"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBs-1T-DPW">
+                                                    <rect key="frame" x="48" y="37" width="504" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.078431372549019607" green="0.15294117647058825" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="TSP-yB-dyi" firstAttribute="centerY" secondItem="8P3-mT-f6b" secondAttribute="centerY" id="J0M-cZ-c6y"/>
+                                                <constraint firstItem="eBs-1T-DPW" firstAttribute="top" secondItem="TSP-yB-dyi" secondAttribute="bottom" constant="2" id="3QC-lY-7Ag"/>
+                                                <constraint firstItem="TSP-yB-dyi" firstAttribute="centerY" secondItem="8P3-mT-f6b" secondAttribute="centerY" constant="-21" id="J0M-cZ-c6y"/>
+                                                <constraint firstItem="eBs-1T-DPW" firstAttribute="leading" secondItem="8P3-mT-f6b" secondAttribute="leadingMargin" constant="40" id="LnS-2G-dUS"/>
                                                 <constraint firstItem="TSP-yB-dyi" firstAttribute="trailing" secondItem="8P3-mT-f6b" secondAttribute="trailingMargin" constant="-20" id="eUx-PC-P07"/>
+                                                <constraint firstItem="eBs-1T-DPW" firstAttribute="trailing" secondItem="8P3-mT-f6b" secondAttribute="trailingMargin" constant="-40" id="jWG-8p-RHc"/>
                                                 <constraint firstItem="TSP-yB-dyi" firstAttribute="leading" secondItem="8P3-mT-f6b" secondAttribute="leadingMargin" constant="20" id="y3q-lP-SOs"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addressLabel" destination="eBs-1T-DPW" id="i4X-8U-GQF"/>
                                             <outlet property="nameLabel" destination="TSP-yB-dyi" id="qPR-TM-1mu"/>
                                         </connections>
                                     </tableViewCell>

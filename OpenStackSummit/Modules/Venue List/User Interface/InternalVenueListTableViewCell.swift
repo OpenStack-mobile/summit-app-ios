@@ -11,31 +11,27 @@ import UIKit
 @objc
 public protocol IInternalVenueListTableViewCell: IVenueListTableViewCell {
     var backgroundImageUrl: String! { get set }
-    var address: String! { get set }
 }
 
 class InternalVenueListTableViewCell: VenueListTableViewCell, IInternalVenueListTableViewCell {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var addressLabel: UILabel!
     
     var backgroundImageUrl: String! {
         didSet {
-            let picUrl = backgroundImageUrl.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            backgroundImageView.hnk_setImageFromURL(NSURL(string: picUrl)!)
-        }
-    }
-    
-    var address: String! {
-        didSet {
-            addressLabel.text = address
+            if backgroundImageUrl.isEmpty {
+                backgroundImageView.image = nil
+            }
+            else {
+                let picUrl = backgroundImageUrl.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                backgroundImageView.hnk_setImageFromURL(NSURL(string: picUrl)!)
+            }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.hnk_setImageFromURL(NSURL(string: "http://devbranch.openstack.org/assets/summits/locations/images/im-1.jpg")!)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

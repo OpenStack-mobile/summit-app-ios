@@ -11,11 +11,13 @@ import UIKit
 @objc
 public protocol IVenueListTableViewCell {
     var name: String! { get set }
+    var address: String! { get set }
 }
 
 class VenueListTableViewCell: UITableViewCell, IVenueListTableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     
     var name: String! {
         get {
@@ -23,6 +25,12 @@ class VenueListTableViewCell: UITableViewCell, IVenueListTableViewCell {
         }
         set {
             nameLabel.text = newValue
+        }
+    }
+    
+    var address: String! {
+        didSet {
+            addressLabel.text = address
         }
     }
     
