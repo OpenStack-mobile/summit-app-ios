@@ -33,24 +33,24 @@ public class VenueListItemDTOAssembler: NamedDTOAssembler, IVenueListItemDTOAsse
     public func getAddress(venue: Venue) -> String {
         var fullAddress = venue.address
         
-        var separator = ", "
+        var separator = fullAddress.isEmpty ? "" : ", "
         if (!venue.city.isEmpty) {
             fullAddress += "\(separator)\(venue.city)"
-            separator = " "
+            separator = fullAddress.isEmpty ? "" : " "
         }
         
         if (!venue.state.isEmpty) {
             fullAddress += "\(separator)\(venue.state)"
-            separator = " "
+            separator = fullAddress.isEmpty ? "" : " "
         }
         
         if (!venue.zipCode.isEmpty) {
             fullAddress += "\(separator)(\(venue.zipCode))"
-            separator = " "
+            separator = fullAddress.isEmpty ? "" : ", "
         }
         
         if (!venue.country.isEmpty) {
-            fullAddress += ", \(venue.country)"
+            fullAddress += "\(separator)\(venue.country)"
         }
         
         return fullAddress

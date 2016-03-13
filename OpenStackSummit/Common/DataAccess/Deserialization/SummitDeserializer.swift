@@ -116,14 +116,8 @@ public class SummitDeserializer: NSObject, IDeserializer {
         return summit
     }
     
-    /*func getDateInTimeZone(date: NSDate, timezone: String) -> NSDate {
-        let timeZoneSeconds = NSTimeZone(name: timezone)!.secondsFromGMT;
-        let dateInTimezone = date.dateByAddingTimeInterval(NSTimeInterval(timeZoneSeconds));
-        return dateInTimezone
-    }*/
-    
     func isVenue(venueJSON: JSON) -> Bool {
-        return venueJSON["class_name"].stringValue == "SummitVenue"
+        return venueJSON["class_name"].stringValue == "SummitVenue" || venueJSON["class_name"].stringValue == "SummitExternalLocation"
     }
     
     func isVenueRoom(venueJSON: JSON) -> Bool {

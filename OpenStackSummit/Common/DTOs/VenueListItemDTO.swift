@@ -9,8 +9,8 @@
 import UIKit
 
 public class VenueListItemDTO: NamedDTO {
+    public var backgroundImageUrl = ""
     public var address = ""
     public var lat: Double!
     public var long: Double!
-    public var backgroundImageUrl: String?
 }

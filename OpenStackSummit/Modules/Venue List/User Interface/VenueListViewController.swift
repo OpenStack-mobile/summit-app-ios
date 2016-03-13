@@ -88,11 +88,15 @@ class VenueListViewController: UIViewController, UITableViewDelegate, UITableVie
         if indexPath.section == VenueListSectionType.Internal.rawValue {
             let cell = tableView.dequeueReusableCellWithIdentifier(internalVenuesTableViewCellIdentifier, forIndexPath: indexPath) as! InternalVenueListTableViewCell
             presenter.buildInternalVenueCell(cell, index: indexPath.row)
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
             return cell
         }
         else if indexPath.section == VenueListSectionType.External.rawValue {
             let cell = tableView.dequeueReusableCellWithIdentifier(externalVenuesTableViewCellIdentifier, forIndexPath: indexPath) as! VenueListTableViewCell
             presenter.buildExternalVenueCell(cell, index: indexPath.row)
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
             return cell
         }
 
