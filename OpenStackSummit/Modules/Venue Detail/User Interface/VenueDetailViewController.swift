@@ -57,7 +57,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         set {
             if imagesInternal == nil {
                 imagesInternal = newValue
-                var imageInputs:[HanekeInputSource] = []
+                var imageInputs: [HanekeInputSource] = []
                 
                 for image in imagesInternal {
                     let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -76,7 +76,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         set {
             if mapsInternal == nil {
                 mapsInternal = newValue
-                var imageInputs:[HanekeInputSource] = []
+                var imageInputs: [HanekeInputSource] = []
                 
                 for map in mapsInternal {
                     let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
