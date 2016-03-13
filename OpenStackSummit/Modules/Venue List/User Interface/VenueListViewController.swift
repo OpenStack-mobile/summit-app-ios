@@ -39,7 +39,6 @@ class VenueListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func reloadList() {
-        tableView.rowHeight = 120
         tableView.reloadData()
     }
     
@@ -87,7 +86,7 @@ class VenueListViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == VenueListSectionType.Internal.rawValue {
-            let cell = tableView.dequeueReusableCellWithIdentifier(internalVenuesTableViewCellIdentifier, forIndexPath: indexPath) as! VenueListTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(internalVenuesTableViewCellIdentifier, forIndexPath: indexPath) as! InternalVenueListTableViewCell
             presenter.buildInternalVenueCell(cell, index: indexPath.row)
             return cell
         }
@@ -98,6 +97,14 @@ class VenueListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
 
         return UITableViewCell()
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var height = 88
+        if indexPath.section == VenueListSectionType.Internal.rawValue {
+            height *= 2
+        }
+        return CGFloat(height)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {

@@ -650,44 +650,66 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="internalVenuesTableViewCell" id="G8c-Iw-aTp" customClass="VenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="600" height="120"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="internalVenuesTableViewCell" rowHeight="176" id="G8c-Iw-aTp" customClass="InternalVenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="600" height="176"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G8c-Iw-aTp" id="hJA-mP-jAd">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="175"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kAs-ld-Oop">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="175"/>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBG-IL-PG9">
-                                                    <rect key="frame" x="28" y="49" width="544" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="28" y="55" width="544" height="25"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-dN-j4F">
+                                                    <rect key="frame" x="48" y="88" width="504" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="RBG-IL-PG9" firstAttribute="centerY" secondItem="hJA-mP-jAd" secondAttribute="centerY" id="GzW-Ul-lkb"/>
+                                                <constraint firstItem="eGM-dN-j4F" firstAttribute="trailing" secondItem="hJA-mP-jAd" secondAttribute="trailingMargin" constant="-40" id="72N-LI-U0w"/>
+                                                <constraint firstItem="kAs-ld-Oop" firstAttribute="trailing" secondItem="hJA-mP-jAd" secondAttribute="trailing" id="Grj-tg-nxR"/>
+                                                <constraint firstItem="RBG-IL-PG9" firstAttribute="centerY" secondItem="hJA-mP-jAd" secondAttribute="centerY" constant="-20" id="GzW-Ul-lkb"/>
+                                                <constraint firstItem="eGM-dN-j4F" firstAttribute="leading" secondItem="hJA-mP-jAd" secondAttribute="leadingMargin" constant="40" id="IVN-5e-g8g"/>
+                                                <constraint firstItem="kAs-ld-Oop" firstAttribute="leading" secondItem="hJA-mP-jAd" secondAttribute="leading" id="Siy-tf-eg0"/>
+                                                <constraint firstItem="kAs-ld-Oop" firstAttribute="bottom" secondItem="hJA-mP-jAd" secondAttribute="bottom" id="VPa-zD-TQP"/>
+                                                <constraint firstItem="eGM-dN-j4F" firstAttribute="top" secondItem="RBG-IL-PG9" secondAttribute="bottom" constant="8" id="Wqw-NE-46u"/>
+                                                <constraint firstItem="kAs-ld-Oop" firstAttribute="top" secondItem="hJA-mP-jAd" secondAttribute="top" id="dct-cr-cpY"/>
                                                 <constraint firstItem="RBG-IL-PG9" firstAttribute="trailing" secondItem="hJA-mP-jAd" secondAttribute="trailingMargin" constant="-20" id="h4F-6I-x4t"/>
                                                 <constraint firstItem="RBG-IL-PG9" firstAttribute="leading" secondItem="hJA-mP-jAd" secondAttribute="leadingMargin" constant="20" id="zaN-9q-SXb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addressLabel" destination="eGM-dN-j4F" id="kxB-4z-adf"/>
+                                            <outlet property="backgroundImageView" destination="kAs-ld-Oop" id="xNz-np-1dU"/>
                                             <outlet property="nameLabel" destination="RBG-IL-PG9" id="wso-2n-uTj"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="externalVenuesTableViewCell" id="c8e-ec-cke" customClass="VenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="170" width="600" height="120"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="externalVenuesTableViewCell" rowHeight="88" id="c8e-ec-cke" customClass="VenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="226" width="600" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c8e-ec-cke" id="8P3-mT-f6b">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSP-yB-dyi">
-                                                    <rect key="frame" x="28" y="49" width="544" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="28" y="31" width="544" height="25"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.078431372549019607" green="0.15294117647058825" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="TSP-yB-dyi" firstAttribute="centerY" secondItem="8P3-mT-f6b" secondAttribute="centerY" id="J0M-cZ-c6y"/>
                                                 <constraint firstItem="TSP-yB-dyi" firstAttribute="trailing" secondItem="8P3-mT-f6b" secondAttribute="trailingMargin" constant="-20" id="eUx-PC-P07"/>
