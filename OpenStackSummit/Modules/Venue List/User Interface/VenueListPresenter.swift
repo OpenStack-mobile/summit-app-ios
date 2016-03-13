@@ -13,7 +13,7 @@ public protocol IVenueListPresenter {
     func viewLoad()
     func getInternalVenuesCount() -> Int
     func getExternalVenuesCount() -> Int
-    func buildInternalVenueCell(cell: IVenueListTableViewCell, index: Int)
+    func buildInternalVenueCell(cell: IInternalVenueListTableViewCell, index: Int)
     func buildExternalVenueCell(cell: IVenueListTableViewCell, index: Int)
     func showInternalVenueDetail(index: Int)
     func showExternalVenueDetail(index: Int)
@@ -41,9 +41,13 @@ public class VenueListPresenter: NSObject, IVenueListPresenter {
         return externalVenueList.count
     }
     
-    public func buildInternalVenueCell(cell: IVenueListTableViewCell, index: Int){
+    public func buildInternalVenueCell(cell: IInternalVenueListTableViewCell, index: Int){
         let venue = internalVenueList[index]
         cell.name = venue.name
+        cell.address = venue.address
+        if venue.backgroundImageUrl != nil {
+            cell.backgroundImageUrl = venue.backgroundImageUrl
+        }
     }
     
     public func buildExternalVenueCell(cell: IVenueListTableViewCell, index: Int){

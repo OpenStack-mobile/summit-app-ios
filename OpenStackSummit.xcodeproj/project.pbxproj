@@ -15,6 +15,7 @@
 		9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */; };
 		9D1D920C1C4FF12E00C1BB6C /* SchemaMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
+		9D6DE6C31C94DDDD004011F2 /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6DE6C21C94DDDD004011F2 /* InternalVenueListTableViewCell.swift */; };
 		9D858BC41C56C55C00DBAA9E /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D858BC31C56C55C00DBAA9E /* TableViewHeaderView.swift */; };
 		9D858BC61C56C5E100DBAA9E /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D858BC51C56C5E100DBAA9E /* TableViewHeaderView.xib */; };
 		9DAC06E31BFA4E3400C1208F /* EventsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */; };
@@ -361,6 +362,7 @@
 		9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataStore.swift; sourceTree = "<group>"; };
 		9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchemaMigration.swift; path = ../DataAccess/SchemaMigration.swift; sourceTree = "<group>"; };
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
+		9D6DE6C21C94DDDD004011F2 /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
 		9D858BC31C56C55C00DBAA9E /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewHeaderView.swift; path = "User Interface/TableViewHeaderView.swift"; sourceTree = "<group>"; };
 		9D858BC51C56C5E100DBAA9E /* TableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewHeaderView.xib; path = "User Interface/TableViewHeaderView.xib"; sourceTree = "<group>"; };
 		9DAC06E21BFA4E3400C1208F /* EventsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsAssembly.swift; sourceTree = "<group>"; };
@@ -1031,6 +1033,7 @@
 				CA8E98D51B99D90B00CEBD2F /* VenueListViewController.swift */,
 				CA8E98D71B99D92600CEBD2F /* VenueListPresenter.swift */,
 				CABAB9BD1BD0A3E600CB867E /* VenueListTableViewCell.swift */,
+				9D6DE6C21C94DDDD004011F2 /* InternalVenueListTableViewCell.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -2146,6 +2149,7 @@
 				CA894AAC1BD931BE005DE469 /* VenueDTOAssembler.swift in Sources */,
 				CAD6C3CF1BB74ADE00F8C2D6 /* HttpFactoryAssembly.swift in Sources */,
 				CADE71241BD5369800EAC8EF /* ScheduleWireframe.swift in Sources */,
+				9D6DE6C31C94DDDD004011F2 /* InternalVenueListTableViewCell.swift in Sources */,
 				CADD511C1BD813DD00400AF4 /* VenuesMapPresenter.swift in Sources */,
 				CA002A031B9E38B4001A9EDA /* VenueRoomDataStore.swift in Sources */,
 				CACFBC421B9F909800095E44 /* FeedbackRemoteDataStore.swift in Sources */,

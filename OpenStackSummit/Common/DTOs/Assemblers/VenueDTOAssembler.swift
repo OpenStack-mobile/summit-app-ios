@@ -13,7 +13,7 @@ public protocol IVenueDTOAssembler {
     func createDTO(venue: Venue) -> VenueDTO
 }
 
-public class VenueDTOAssembler: NamedDTOAssembler, IVenueDTOAssembler {
+public class VenueDTOAssembler: VenueListItemDTOAssembler, IVenueDTOAssembler {
     public override init() {
         super.init()
     }
@@ -23,9 +23,8 @@ public class VenueDTOAssembler: NamedDTOAssembler, IVenueDTOAssembler {
     }
     
     var venueRoomDTOAssembler: IVenueRoomDTOAssembler!
-    var venueListItemDTOAssembler = VenueListItemDTOAssembler()
     
-    public func createDTO(venue: Venue) -> VenueDTO {
+    override public func createDTO(venue: Venue) -> VenueDTO {
         let venueDTO: VenueDTO = super.createDTO(venue)
         
         venueDTO.address = getAddress(venue)
@@ -46,32 +45,6 @@ public class VenueDTOAssembler: NamedDTOAssembler, IVenueDTOAssembler {
             venueDTO.rooms.append(venueRoomDTO)
         }
         return venueDTO
-    }
-    
-    public func getAddress(venue: Venue) -> String {
-        var fullAddress = venue.address
-        
-        var separator = ", "
-        if (!venue.city.isEmpty) {
-            fullAddress += "\(separator)\(venue.city)"
-            separator = " "
-        }
-        
-        if (!venue.state.isEmpty) {
-            fullAddress += "\(separator)\(venue.state)"
-            separator = " "
-        }
-        
-        if (!venue.zipCode.isEmpty) {
-            fullAddress += "\(separator)(\(venue.zipCode))"
-            separator = " "
-        }
-        
-        if (!venue.country.isEmpty) {
-            fullAddress += ", \(venue.country)"
-        }
-        
-        return fullAddress
     }
 }
 
