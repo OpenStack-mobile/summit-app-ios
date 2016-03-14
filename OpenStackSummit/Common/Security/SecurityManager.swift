@@ -79,31 +79,31 @@ public class SecurityManager: NSObject {
         let hasPasscode = deviceHasPasscode()
         
         var config = Config(
-            base: "https://identity-provider",
+            base: Constants.Urls.AuthServerBaseUrl,
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: "OpenID Client ID",
+            clientId: Constants.Auth.ClientIdOpenID,
             refreshTokenEndpoint: "oauth2/token",
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "https://resource-server/summits/read", "https://resource-server/summits/write", "offline_access"],
-            clientSecret: "OpenID Secret"
+            scopes: ["openid", "\(Constants.Urls.ResourceServerBaseUrl)/summits/read", "\(Constants.Urls.ResourceServerBaseUrl)/summits/write", "offline_access"],
+            clientSecret: Constants.Auth.SecretOpenID
         )
         oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
         config = Config(
-            base: "https://identity-provider",
+            base: Constants.Urls.AuthServerBaseUrl,
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: "Service Account Client ID",
+            clientId: Constants.Auth.ClientIdServiceAccount,
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["https://resource-server/summits/read"],
-            clientSecret: "Service Account Secret"
+            scopes: ["\(Constants.Urls.ResourceServerBaseUrl)/summits/read"],
+            clientSecret: Constants.Auth.SecretServiceAccount
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
         
@@ -123,7 +123,7 @@ public class SecurityManager: NSObject {
         }
         
         session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session(accountId: config.accountId!)
-        
+
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
     
