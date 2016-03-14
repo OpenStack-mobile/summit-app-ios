@@ -26,7 +26,7 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
             filter = "filter=first_name==\(searchTerm!),last_name==\(searchTerm!)&"
         }
         
-        http.GET("https://resource-server/api/v1/summits/current/speakers?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
+        http.GET("\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/speakers?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
@@ -53,7 +53,7 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
     public func getById(id: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
         
-        http.GET("https://resource-server/api/v1/summits/current/speakers/\(id)") {(responseObject, error) in
+        http.GET("\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/speakers/\(id)") {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
