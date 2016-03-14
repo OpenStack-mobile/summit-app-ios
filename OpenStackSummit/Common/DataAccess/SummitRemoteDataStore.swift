@@ -21,8 +21,9 @@ public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
     
     public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
         let http = httpFactory.create(HttpType.ServiceAccount)
+        let url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule"
         
-        http.GET("https://openstackid-resources.openstack.org/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule") {(responseObject, error) in
+        http.GET(url) {(responseObject, error) in
             if (error != nil) {
                 completionBlock(nil, error)
                 return
