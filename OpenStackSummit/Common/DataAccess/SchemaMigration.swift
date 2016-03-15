@@ -15,7 +15,7 @@ protocol ISchemaMigration {
 }
 
 public class SchemaMigration: NSObject, ISchemaMigration {
-    let schemaVersion:UInt64 = 7
+    let schemaVersion:UInt64 = 8
     
     func getSchemaVersion() -> UInt64 {
         return schemaVersion
@@ -74,8 +74,12 @@ public class SchemaMigration: NSObject, ISchemaMigration {
                                 }
                             }
                         }
-                        
                     }
+                }
+            }
+            if (oldSchemaVersion < 8) {
+                migration.enumerate(Summit.className()) { oldObject, newObject in
+                    newObject!["venueRooms"] = List<VenueRoom>()
                 }
             }
         }

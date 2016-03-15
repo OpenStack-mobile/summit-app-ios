@@ -76,9 +76,11 @@ public class SummitDeserializer: NSObject, IDeserializer {
         }
 
         deserializer = deserializerFactory.create(DeserializerFactoryType.VenueRoom)
+        var venueRoom: VenueRoom
         for (_, venueJSON) in json["locations"] {
             if (isVenueRoom(venueJSON)) {
-                try deserializer.deserialize(venueJSON) as! VenueRoom
+                venueRoom = try deserializer.deserialize(venueJSON) as! VenueRoom
+                summit.venuesRooms.append(venueRoom)
             }
         }
         
@@ -89,7 +91,6 @@ public class SummitDeserializer: NSObject, IDeserializer {
         
         var event : SummitEvent
         for (_, eventJSON) in json["schedule"] {
-
             deserializer = deserializerFactory.create(DeserializerFactoryType.SummitEvent)
             event = try deserializer.deserialize(eventJSON) as! SummitEvent
             summit.events.append(event)
