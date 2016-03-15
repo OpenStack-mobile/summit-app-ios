@@ -39,11 +39,6 @@ public class VenueDTOAssembler: VenueListItemDTOAssembler, IVenueDTOAssembler {
             venueDTO.images.append(image.url)
         }
         
-        var venueRoomDTO: VenueRoomDTO
-        for venueRoom in venue.venueRooms {
-            venueRoomDTO = venueRoomDTOAssembler.createDTO(venueRoom)
-            venueDTO.rooms.append(venueRoomDTO)
-        }
         return venueDTO
     }
 }
