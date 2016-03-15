@@ -33,6 +33,12 @@ public class VenueRoomDeserializer: NSObject, IDeserializer {
             venueRoom.name = location.name
             venueRoom.locationDescription = location.locationDescription
             
+            let venueId = json["venue_id"].intValue
+            guard let venue: Venue = deserializerStorage.get(venueId) else {
+                throw DeserializerError.EntityNotFound("Venue with id \(venueId) not found on deserializer storage")
+            }
+            venueRoom.venue = venue
+
             if(!deserializerStorage.exist(venueRoom)) {
                 deserializerStorage.add(venueRoom)
             }
