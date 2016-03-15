@@ -329,8 +329,4 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("httpFactory", with: self.httpFactoryAssembly.httpFactory())
         }
     }
-    
-    public dynamic func venueDataStore() -> AnyObject {
-        return TyphoonDefinition.withClass(VenueDataStore.self)
-    }
 }
