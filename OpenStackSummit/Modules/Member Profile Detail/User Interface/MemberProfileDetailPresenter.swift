@@ -97,6 +97,8 @@ public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresent
             self.viewController.irc = person!.irc
             self.viewController.bio = person!.bio
             
+            self.speakerId = 0
+            self.attendeeId = 0
             self.viewController.hideActivityIndicator()
         })
     }
