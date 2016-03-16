@@ -85,7 +85,10 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         }
         
         http.GET(url) {(responseObject, error) in
-            if (error != nil) {
+            if error != nil {
+                if error?.domain == Constants.Auth.Module.ErrorDomain && error?.code == Constants.Auth.Module.SessionLost {
+                    self.securityManager.logout({ (error) -> Void in })
+                }
                 print("Error polling server for data updates: \(error?.domain)")
                 return
             }
@@ -111,8 +114,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
             genericDataStore.clearDataLocal({ (error) -> Void in
                 self.fromDate = 0
                 if self.securityManager.isLoggedIn() {
-                    self.securityManager.logout({ (error) -> Void in
-                    })
+                    self.securityManager.logout({ (error) -> Void in })
                 }
             })
         }
