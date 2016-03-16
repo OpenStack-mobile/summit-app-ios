@@ -139,6 +139,7 @@ public class SecurityManager: NSObject {
             }
             
             self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
+                
                 if (error != nil) {
                     completionBlock(error)
                     return
@@ -154,22 +155,17 @@ public class SecurityManager: NSObject {
     }
     
     public func logout(completionBlock: (NSError?) -> Void) {
-        if isAuthorized() {
-            oauthModuleOpenID.revokeAccess() { (response, error) in
-                self.session.set(self.kCurrentMemberId, value: nil)
-                completionBlock(error)
-                
-                let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
-                NSNotificationCenter.defaultCenter().postNotification(notification)
-            }
-        }
-        else {
-            // session lost
+        oauthModuleOpenID.revokeAccess() { (response, error) in
             self.session.set(self.kCurrentMemberId, value: nil)
+            completionBlock(error)
+
+            let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
+            NSNotificationCenter.defaultCenter().postNotification(notification)
         }
     }
     
     public func getCurrentMemberRole() -> MemberRoles{
+        
         var role = MemberRoles.Anonymous
         let currentMember = getCurrentMember()
         if (currentMember != nil) {
@@ -188,15 +184,11 @@ public class SecurityManager: NSObject {
         if isLoggedIn() {
             currentMember = memberDataStore.getByIdLocal(session.get(kCurrentMemberId) as! Int)
         }
-        return currentMember
+        return currentMember;
     }
     
     public func isLoggedIn() -> Bool {
         return session.get(kCurrentMemberId) != nil
-    }
-    
-    public func isAuthorized() -> Bool {
-        return oauthModuleOpenID.isAuthorized()
     }
     
 }
