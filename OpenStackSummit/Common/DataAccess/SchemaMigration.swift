@@ -79,7 +79,7 @@ public class SchemaMigration: NSObject, ISchemaMigration {
             }
             if (oldSchemaVersion < 8) {
                 migration.enumerate(Summit.className()) { oldObject, newObject in
-                    newObject!["venueRooms"] = List<VenueRoom>()
+                    newObject!["venuesRooms"] = List<VenueRoom>()
                 }
             }
         }
