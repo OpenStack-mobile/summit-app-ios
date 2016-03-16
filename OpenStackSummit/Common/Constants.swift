@@ -28,11 +28,6 @@ struct Constants {
         #endif
     }
     struct Auth {
-        struct Module {
-            static let ErrorDomain = "OpenStackOAuth2Module"
-            static let SessionLost = 8
-        }
-        
         #if DEBUG
         static let ClientIdOpenID = "ugSc.5IJB7MOpVHOs4anxyZi~PJsIfJJ.openstack.client"
         static let SecretOpenID = "NvEAT3ScN5c5p9yPS67GeoBo2M_8YLFezeAdALF~dsD-pxXmBU6JRL0ZOyNpGEhM"
