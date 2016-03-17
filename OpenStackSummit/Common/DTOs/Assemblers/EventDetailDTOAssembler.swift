@@ -42,7 +42,7 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
         eventDetailDTO.level = event.presentation != nil ? event.presentation!.level + " Level" : ""
         
         if let presentation = event.presentation {
-            eventDetailDTO.track = event.presentation!.track.name
+            eventDetailDTO.track = event.presentation!.track != nil ? event.presentation!.track!.name : ""
             
             var speakerDTO: PresentationSpeakerDTO
             for speaker in presentation.speakers {

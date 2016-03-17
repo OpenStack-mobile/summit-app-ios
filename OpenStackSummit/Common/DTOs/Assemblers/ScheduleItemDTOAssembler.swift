@@ -96,18 +96,16 @@ public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssemb
     
     public func getTrack(event: SummitEvent) -> String{
         var track = ""
-        if event.presentation != nil {
-            track = event.presentation!.track.name
+        if event.presentation != nil && event.presentation!.track != nil {
+            track = event.presentation!.track!.name
         }
         return track
     }
     
     public func getTrackGroupColor(event: SummitEvent) -> String {
         var color = ""
-        if event.presentation != nil {
-            if let trackGroup = event.presentation!.track.trackGroup {
-                color = trackGroup.color
-            }
+        if event.presentation != nil &&  event.presentation!.track != nil && event.presentation!.track!.trackGroup != nil {
+            color = event.presentation!.track!.trackGroup!.color
         }
         return color
     }
