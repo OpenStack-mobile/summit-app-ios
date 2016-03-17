@@ -129,18 +129,18 @@ public class SecurityManager: NSObject {
     
     public func login(completionBlock: (NSError?) -> Void) {
         oauthModuleOpenID.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
-            if (error != nil) {
-                completionBlock(error)
+            if error != nil {
+                print(error)
                 return
             }
             
-            if (accessToken == nil) {
+            if accessToken == nil {
                 return
             }
             
             self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
                 
-                if (error != nil) {
+                if error != nil {
                     completionBlock(error)
                     return
                 }
