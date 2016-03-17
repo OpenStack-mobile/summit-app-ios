@@ -5,9 +5,8 @@
 //  Created by Claudio on 10/13/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
-import UIKit
-import AFHorizontalDayPicker
 
+import UIKit
 @objc
 protocol ITrackScheduleViewController : IScheduleViewController {
     var track: String! { get set }

@@ -73,7 +73,7 @@ class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate,
         scheduleView.dayPicker.delegate = self
         
         scheduleView.tableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        scheduleView.tableView.estimatedRowHeight = 142
+        scheduleView.tableView.estimatedRowHeight = 188
         scheduleView.tableView.rowHeight = UITableViewAutomaticDimension
     }
     
@@ -108,6 +108,7 @@ class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate,
         cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutIfNeeded()
         return cell
     }
     
