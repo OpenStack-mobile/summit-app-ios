@@ -65,7 +65,7 @@ class PresentationSpeakerDeserializerTests: XCTestCase {
         XCTAssertEqual("test",presentationSpeaker.firstName)
     }
     
-    func test_deserialize_jsonWithAllManfatoryFieldsMissed_throwsBadFormatException() {
+    func test_deserialize_jsonWithIdMissed_throwsBadFormatException() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
@@ -90,7 +90,7 @@ class PresentationSpeakerDeserializerTests: XCTestCase {
         
         //Assert
         XCTAssertEqual(expectedExceptionCount, exceptionCount)
-        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, first_name, last_name"))
+        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id"))
     }
     
     func test_deserialize_jsonPresentationSpeakerIdAndPresentationSpeakerExistOnDeserializerStorage_returnsCorrectInstance() {
