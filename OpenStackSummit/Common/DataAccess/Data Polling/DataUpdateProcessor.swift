@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 public class DataUpdateProcessor: NSObject {
     var dataUpdateDeserializer: DataUpdateDeserializer!
@@ -29,7 +30,14 @@ public class DataUpdateProcessor: NSObject {
         for dataUpdate in dataUpdateArray {
             if dataUpdate.entity != nil {
                 dataUpdateStrategy = dataUpdateStrategyFactory.create(dataUpdate.entityClassName)
-                try dataUpdateStrategy.process(dataUpdate)
+                do {
+                    try dataUpdateStrategy.process(dataUpdate)                    
+                }
+                catch {
+                    let nsError = error as NSError
+                    Crashlytics.sharedInstance().recordError(nsError)
+                    print(nsError.localizedDescription)                    
+                }
             }
             dataUpdateDataStore.saveOrUpdateLocal(dataUpdate, completionBlock: nil)
         }
