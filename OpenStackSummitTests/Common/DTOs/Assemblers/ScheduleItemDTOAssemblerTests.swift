@@ -34,7 +34,6 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         let venueRoom = VenueRoom()
         venueRoom.id = 1;
         venueRoom.name = "Test Venue Room"
-        venue.venueRooms.append(venueRoom)
         let sponsor1 = Company()
         sponsor1.id = 1
         sponsor1.name = "sponsor1"
@@ -87,7 +86,6 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         let venueRoom = VenueRoom()
         venueRoom.id = 1;
         venueRoom.name = "Test Venue Room"
-        venue.venueRooms.append(venueRoom)
         let sponsor1 = Company()
         sponsor1.id = 1
         sponsor1.name = "sponsor1"
@@ -139,7 +137,6 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         let venueRoom = VenueRoom()
         venueRoom.id = 1;
         venueRoom.name = "Test Venue Room"
-        venue.venueRooms.append(venueRoom)
         let eventType = EventType()
         eventType.id = 1
         eventType.name = "Keynote"
@@ -172,6 +169,6 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
         let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(summitType.color, scheduleItemDTO.summitTypeColor)
+        XCTAssertEqual(summitType.color, scheduleItemDTO.trackGroupColor)
     }
 }
