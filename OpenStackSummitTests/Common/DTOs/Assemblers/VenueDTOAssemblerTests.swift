@@ -30,9 +30,6 @@ class VenueDTOAssemblerTests: XCTestCase {
         let venue = Venue()
         venue.id = 1
         venue.name = "test venue"
-        let venueRoom = VenueRoom()
-        venue.venueRooms.append(venueRoom)
-        venue.venueRooms.append(venueRoom)
         
         // Act
         let venueDTO = venueDTOAssembler.createDTO(venue)
@@ -40,7 +37,6 @@ class VenueDTOAssemblerTests: XCTestCase {
         // Assert
         XCTAssertEqual(venue.id, venueDTO.id)
         XCTAssertEqual(venue.name, venueDTO.name)
-        XCTAssertEqual(venue.venueRooms.count, venueDTO.rooms.count)
     }
     
     func test_createDTO_validVenueWithNoRooms_returnCorrectDTOWithNoRooms() {
@@ -56,7 +52,6 @@ class VenueDTOAssemblerTests: XCTestCase {
         // Assert
         XCTAssertEqual(venue.id, venueDTO.id)
         XCTAssertEqual(venue.name, venueDTO.name)
-        XCTAssertEqual(venue.venueRooms.count, venueDTO.rooms.count)
     }
 
     func test_create_addressFieldIsNotEmpty_returnsCorrectInstanceWithCorrectAddress() {

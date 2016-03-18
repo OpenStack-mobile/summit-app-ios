@@ -23,7 +23,7 @@ public class TrackDeserializer: NamedEntityDeserializer, IDeserializer {
             track = check
         }
         else {
-            try validateRequiredFields(["id", "name"], inJson: json)
+            try validateRequiredFields(["id"], inJson: json)
             
             track = super.deserialize(json) as Track
             if(!deserializerStorage.exist(track)) {

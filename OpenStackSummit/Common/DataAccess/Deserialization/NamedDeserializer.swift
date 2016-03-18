@@ -15,7 +15,7 @@ public class NamedEntityDeserializer : NSObject {
         let entity = T()
         
         entity.id = element["id"].intValue
-        entity.name = element["name"].stringValue
+        entity.name = element["name"].string ?? ""
         
         return entity
     }

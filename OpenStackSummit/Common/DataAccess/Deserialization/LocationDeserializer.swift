@@ -12,13 +12,15 @@ import SwiftyJSON
 public class LocationDeserializer: NSObject, IDeserializer {
     
     public func deserialize(json: JSON) throws -> BaseEntity {
-        try validateRequiredFields(["id", "name"], inJson: json)
+        try validateRequiredFields(["id"], inJson: json)
         
         let location = Location()
         
         location.id = json["id"].intValue
-        location.locationDescription = json["description"].stringValue
-        location.name = json["name"].stringValue
+        location.locationDescription = json["description"].string ?? ""
+        location.name = json["name"].string ?? ""
+        
+        assert(!location.name.isEmpty)
         
         return location
     }

@@ -33,7 +33,7 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue = check
         }
         else {
-            try validateRequiredFields(["id", "location_type"], inJson: json)
+            try validateRequiredFields(["id"], inJson: json)
 
             var deserializer = deserializerFactory.create(DeserializerFactoryType.Location)
             let location = try deserializer.deserialize(json) as! Location
@@ -41,24 +41,28 @@ public class VenueDeserializer: NSObject, IDeserializer {
             venue.id = json["id"].intValue
             venue.name = location.name
             venue.locationDescription = location.locationDescription
-            venue.lat = json["lat"].stringValue
-            venue.long = json["lng"].stringValue
-            venue.address = json["address_1"].stringValue
-            venue.city = json["city"].stringValue
-            venue.state = json["state"].stringValue
-            venue.zipCode = json["zip_code"].stringValue
-            venue.country = json["country"].stringValue
-            venue.isInternal = json["location_type"].stringValue == "Internal"
+            venue.lat = json["lat"].string ?? ""
+            venue.long = json["lng"].string ?? ""
+            venue.address = json["address_1"].string ?? ""
+            venue.city = json["city"].string ?? ""
+            venue.state = json["state"].string ?? ""
+            venue.zipCode = json["zip_code"].string ?? ""
+            venue.country = json["country"].string ?? ""
+            venue.isInternal = (json["location_type"].string ?? "") == "Internal"
             
             var image: Image
             deserializer = deserializerFactory.create(DeserializerFactoryType.Image)
             for (_, imageJSON) in json["images"] {
                 image = try deserializer.deserialize(imageJSON) as! Image
-                venue.images.append(image)
+                if !image.url.isEmpty {
+                    venue.images.append(image)
+                }
             }
             for (_, mapJSON) in json["maps"] {
                 image = try deserializer.deserialize(mapJSON) as! Image
-                venue.maps.append(image)
+                if !image.url.isEmpty {
+                    venue.maps.append(image)
+                }
             }
                         
             deserializerStorage.add(venue)
