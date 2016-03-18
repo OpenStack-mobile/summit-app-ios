@@ -54,7 +54,7 @@ class SummitAttendeeDeserializerTests: XCTestCase {
         XCTAssertEqual("test@tipit.net",summitAttendee.email)
         XCTAssertEqual("irc_test",summitAttendee.irc)
         XCTAssertEqual("http://www.openstack.org/assets/profilepic.jpg",summitAttendee.pictureUrl)
-        XCTAssertEqual(tickerType.id,summitAttendee.ticketType.id)
+        XCTAssertEqual(tickerType.id,summitAttendee.tickets[0].id)
         XCTAssertEqual(2,summitAttendee.scheduledEvents.count)
     }
     

@@ -36,7 +36,6 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.id = 1
         venueRoom.name = "Test Venue Room"
-        venue.venueRooms.append(venueRoom)
         try! realm.write {
             self.realm.add(venue)
         }
@@ -86,7 +85,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
         XCTAssertTrue(eventDetailDTO.allowFeedback)
-        XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
+        XCTAssertEqual(event.presentation!.track!.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
         XCTAssertEqual(2, eventDetailDTO.venueId)
         XCTAssertNil(eventDetailDTO.moderator)
@@ -104,7 +103,6 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.id = 1
         venueRoom.name = "Test Venue Room"
-        venue.venueRooms.append(venueRoom)
         try! realm.write {
             self.realm.add(venue)
         }
@@ -155,7 +153,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
         XCTAssertTrue(eventDetailDTO.allowFeedback)
-        XCTAssertEqual(event.presentation!.track.name, eventDetailDTO.track)
+        XCTAssertEqual(event.presentation!.track!.name, eventDetailDTO.track)
         XCTAssertEqual(tag1.name + ", " + tag2.name, eventDetailDTO.tags)
         XCTAssertEqual(2, eventDetailDTO.venueId)
         XCTAssertEqual(speaker.id, eventDetailDTO.moderator?.id)

@@ -12,6 +12,15 @@ import SwiftyJSON
 public class FeedbackDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     var deserializerStorage: DeserializerStorage!
+
+    public init(deserializerStorage: DeserializerStorage, deserializerFactory: DeserializerFactory) {
+        self.deserializerStorage = deserializerStorage
+        self.deserializerFactory = deserializerFactory
+    }
+    
+    public override init() {
+        super.init()
+    }
     
     public func deserialize(json: JSON) throws -> BaseEntity {
         let feedback : Feedback
@@ -23,13 +32,15 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
             feedback = check
         }
         else {
-            try validateRequiredFields(["id", "rate", "created_date", "event_id"], inJson: json)
+            try validateRequiredFields(["id", "event_id"], inJson: json)
 
             feedback = Feedback()
             feedback.id = json["id"].intValue
-            feedback.rate = json["rate"].intValue
-            feedback.review = json["note"].stringValue
-            feedback.date = NSDate(timeIntervalSince1970: NSTimeInterval(json["created_date"].intValue))
+            feedback.rate =  json["rate"].int ?? 0
+            feedback.review = json["note"].string ?? ""
+            if (json["created_date"] != nil) {
+                feedback.date = NSDate(timeIntervalSince1970: NSTimeInterval(json["created_date"].intValue))
+            }
             
             var deserializer = deserializerFactory.create(DeserializerFactoryType.SummitEvent)
             feedback.event = try deserializer.deserialize(json["event_id"]) as! SummitEvent
@@ -53,6 +64,10 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
             if(!deserializerStorage.exist(feedback)) {
                 deserializerStorage.add(feedback)
             }
+            
+            assert(feedback.date.timeIntervalSince1970 != NSDate(timeIntervalSince1970: 1).timeIntervalSince1970)
+            assert(feedback.rate != 0)
+
         }
         
         return feedback
