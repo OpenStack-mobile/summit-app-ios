@@ -85,7 +85,7 @@ class VenueDeserializerTests: XCTestCase {
         XCTAssertEqual(venueStored.id,venue.id)
     }
     
-    func test_deserialize_jsonWithAllManfatoryFieldsMissed_throwsBadFormatException() {
+    func test_deserialize_jsonWithIdMissed_throwsBadFormatException() {
         //Arrange
         let dataStoreAssembly = DataStoreAssembly().activate();
         let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
@@ -111,7 +111,7 @@ class VenueDeserializerTests: XCTestCase {
         
         //Assert
         XCTAssertEqual(expectedExceptionCount, exceptionCount)
-        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id, lat, lng, address_1, location_type"))
+        XCTAssertNotNil(errorMessage.rangeOfString("Following fields are missed: id"))
     }
 
     func test_deserialize_jsonWithVenueIdAndVenueExistOnDeserializerStorage_returnsCorrectInstance() {
