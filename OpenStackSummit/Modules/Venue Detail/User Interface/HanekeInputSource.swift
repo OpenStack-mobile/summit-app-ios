@@ -11,20 +11,17 @@ import ImageSlideshow
 
 public class HanekeInputSource: NSObject, InputSource {
     let url: NSURL!
-    let frame: CGRect!
     
-    public init(url: NSURL, frame: CGRect) {
+    public init(url: NSURL) {
         self.url = url
-        self.frame = frame
     }
     
-    public init?(urlString: String, frame: CGRect) {
-        self.frame = frame
+    public init?(urlString: String) {
         if let validUrl = NSURL(string: urlString) {
             self.url = validUrl
             super.init()
         } else {
-            // working around Swift 1.2 failure initializer bug
+            // this may be simplified in Swift 2.2, which fixes the failable initializer compiler issues
             self.url = NSURL(string: "")!
             super.init()
             return nil
@@ -32,7 +29,6 @@ public class HanekeInputSource: NSObject, InputSource {
     }
     
     @objc public func setToImageView(imageView: UIImageView) {
-        imageView.frame = frame
-        imageView.hnk_setImageFromURL(url)
+        imageView.hnk_setImageFromURL(url, format: Format<UIImage>(name: "original"))
     }
 }
