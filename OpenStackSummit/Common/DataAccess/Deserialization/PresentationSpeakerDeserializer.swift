@@ -36,8 +36,8 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
             
             presentationSpeaker = PresentationSpeaker()
             presentationSpeaker.id = json["id"].intValue
-            presentationSpeaker.firstName = json["first_name"].stringValue
-            presentationSpeaker.lastName = json["last_name"].stringValue
+            presentationSpeaker.firstName = json["first_name"].string ?? ""
+            presentationSpeaker.lastName = json["last_name"].string ?? ""
             
             if !presentationSpeaker.firstName.isEmpty {
                 presentationSpeaker.fullName = presentationSpeaker.firstName
@@ -50,13 +50,13 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
                 presentationSpeaker.fullName += presentationSpeaker.lastName
             }
             
-            presentationSpeaker.email = json["email"].stringValue
-            presentationSpeaker.title = json["title"].stringValue
-            presentationSpeaker.bio = json["bio"].stringValue
-            presentationSpeaker.irc = json["irc"].stringValue
-            presentationSpeaker.twitter = json["twitter"].stringValue
-            presentationSpeaker.memberId = json["member_id"].intValue
-            presentationSpeaker.pictureUrl = json["pic"].stringValue
+            presentationSpeaker.email = json["email"].string ?? ""
+            presentationSpeaker.title = json["title"].string ?? ""
+            presentationSpeaker.bio = json["bio"].string ?? ""
+            presentationSpeaker.irc = json["irc"].string ?? ""
+            presentationSpeaker.twitter = json["twitter"].string ?? ""
+            presentationSpeaker.memberId = json["member_id"].int ?? 0
+            presentationSpeaker.pictureUrl = json["pic"].string ?? ""
 
             deserializerStorage.add(presentationSpeaker)
         }

@@ -97,14 +97,30 @@ public class SummitDeserializer: NSObject, IDeserializer {
         }
         
         summit.id = json["id"].intValue
-        summit.name = json["name"].stringValue
-        summit.timeZone = json["time_zone"]["name"].stringValue
-        summit.startDate =  NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
-        summit.endDate =  NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
-        summit.initialDataLoadDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["timestamp"].intValue))
-        summit.startShowingVenuesDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_showing_venues_date"].intValue))
+        summit.name = json["name"].string ?? ""
+        summit.timeZone = json["time_zone"]["name"].string ?? ""
+        if (json["start_date"].int != nil) {
+            summit.startDate =  NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
+        }
+        
+        if (json["end_date"].int != nil) {
+            summit.endDate =  NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
+        }
+        
+        if (json["timestamp"].int != nil) {
+            summit.initialDataLoadDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["timestamp"].intValue))
+        }
+
+        if (json["start_showing_venues_date"].int != nil) {
+            summit.startShowingVenuesDate = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_showing_venues_date"].intValue))
+        }
         
         deserializerStorage.clear()
+        
+        assert(!summit.name.isEmpty)
+        assert(!summit.timeZone.isEmpty)
+        assert(summit.startDate.timeIntervalSince1970 != NSDate(timeIntervalSince1970: 1).timeIntervalSince1970)
+        assert(summit.endDate.timeIntervalSince1970 != NSDate(timeIntervalSince1970: 1).timeIntervalSince1970)
         
         return summit
     }

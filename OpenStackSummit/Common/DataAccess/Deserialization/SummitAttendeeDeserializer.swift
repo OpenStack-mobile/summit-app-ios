@@ -33,7 +33,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             summitAttendee = check
         }
         else {
-            try validateRequiredFields(["id", "first_name", "last_name"], inJson: json)
+            try validateRequiredFields(["id"], inJson: json)
             
             summitAttendee = SummitAttendee()
             summitAttendee.id = json["id"].intValue

@@ -66,7 +66,7 @@ class SummitDeserializerTests: XCTestCase {
         
         //Assert
         XCTAssertEqual(1,summit.venues.count)
-        XCTAssertEqual(18,summit.venues.first?.venueRooms.count)
+        XCTAssertEqual(18,summit.venuesRooms.count)
     }
     
     func test_deserialize_jsonWithAllManfatoryFieldsMissed_throwsBadFormatException() {

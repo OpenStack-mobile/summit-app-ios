@@ -13,12 +13,14 @@ public class ImageDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
     public func deserialize(json : JSON) throws -> BaseEntity {        
-        try validateRequiredFields(["id", "image_url"], inJson: json)
+        try validateRequiredFields(["id"], inJson: json)
         
         let image = Image()
         
         image.id = json["id"].intValue
-        image.url = json["image_url"].stringValue
+        image.url = json["image_url"].string ?? ""
+        
+        //assert(!image.url.isEmpty)
         
         return image
     }
