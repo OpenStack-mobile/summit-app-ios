@@ -61,7 +61,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
                 
                 for image in imagesInternal {
                     let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    imageInputs.append(HanekeInputSource(urlString: url, frame: imagesSlideshow.bounds)!)
+                    imageInputs.append(HanekeInputSource(urlString: url)!)
                 }
                 
                 imagesSlideshow.setImageInputs(imageInputs)
@@ -80,7 +80,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
                 
                 for map in mapsInternal {
                     let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    imageInputs.append(HanekeInputSource(urlString: url, frame: mapsSlideshow.bounds)!)
+                    imageInputs.append(HanekeInputSource(urlString: url)!)
                 }
                 
                 mapsSlideshow.setImageInputs(imageInputs)
@@ -114,6 +114,7 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     
     @IBAction func openInFullScreen(sender: UITapGestureRecognizer) {
         let slideshow = sender.view as! ImageSlideshow
+        
         let ctr = FullScreenSlideshowViewController()
         ctr.pageSelected = {(page: Int) in
             slideshow.setScrollViewPage(page, animated: false)
@@ -121,9 +122,11 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
         
         ctr.initialPage = slideshow.scrollViewPage
         ctr.inputs = slideshow.images
-        self.transitionDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: slideshow);
+        self.transitionDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: slideshow)
         ctr.transitioningDelegate = self.transitionDelegate!
         self.presentViewController(ctr, animated: true, completion: nil)
+        
+        ctr.closeButton.setImage(UIImage(named: "close"), forState: .Normal)
     }
     
     @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
