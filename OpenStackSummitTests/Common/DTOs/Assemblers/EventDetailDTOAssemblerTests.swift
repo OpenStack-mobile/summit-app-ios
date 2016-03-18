@@ -36,6 +36,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.id = 1
         venueRoom.name = "Test Venue Room"
+        venueRoom.venue = venue
         try! realm.write {
             self.realm.add(venue)
         }
@@ -103,6 +104,7 @@ class EventDetailDTOAssemblerTests: BaseTests {
         let venueRoom = VenueRoom()
         venueRoom.id = 1
         venueRoom.name = "Test Venue Room"
+        venueRoom.venue = venue
         try! realm.write {
             self.realm.add(venue)
         }
