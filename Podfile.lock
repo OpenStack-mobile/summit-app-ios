@@ -4,27 +4,6 @@ PODS:
     - AeroGearHttp
   - AFHorizontalDayPicker (0.2.0):
     - MTDates (= 1.0.0)
-  - AFNetworking (2.6.3):
-    - AFNetworking/NSURLConnection (= 2.6.3)
-    - AFNetworking/NSURLSession (= 2.6.3)
-    - AFNetworking/Reachability (= 2.6.3)
-    - AFNetworking/Security (= 2.6.3)
-    - AFNetworking/Serialization (= 2.6.3)
-    - AFNetworking/UIKit (= 2.6.3)
-  - AFNetworking/NSURLConnection (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.3)
-  - AFNetworking/Security (2.6.3)
-  - AFNetworking/Serialization (2.6.3)
-  - AFNetworking/UIKit (2.6.3):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
   - AHKActionSheet (0.5.3)
   - AMTagListView (1.0.0)
   - Bolts/Tasks (1.5.0)
@@ -34,12 +13,9 @@ PODS:
   - Fabric (1.6.2)
   - GoogleMaps (1.12.2)
   - HanekeSwift (0.10.0)
-  - ImageSlideshow (0.2.3):
-    - ImageSlideshow/Core (= 0.2.3)
-  - ImageSlideshow/AFURL (0.2.3):
-    - AFNetworking (~> 2.3)
-    - ImageSlideshow/Core
-  - ImageSlideshow/Core (0.2.3)
+  - ImageSlideshow (0.3.1):
+    - ImageSlideshow/Core (= 0.3.1)
+  - ImageSlideshow/Core (0.3.1)
   - KTCenterFlowLayout (1.1.1)
   - MLPAutoCompleteTextField (1.5)
   - Mockingjay (1.1.0):
@@ -82,8 +58,7 @@ DEPENDENCIES:
   - Fabric
   - GoogleMaps
   - HanekeSwift
-  - ImageSlideshow (~> 0.2.2)
-  - ImageSlideshow/AFURL
+  - ImageSlideshow (~> 0.3)
   - KTCenterFlowLayout
   - MLPAutoCompleteTextField
   - Mockingjay
@@ -126,7 +101,6 @@ SPEC CHECKSUMS:
   AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
   AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
-  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
   AMTagListView: e1341c9362b49c15ded10f489b7210eb7c7b503a
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
@@ -135,7 +109,7 @@ SPEC CHECKSUMS:
   Fabric: e8296d4a1abb3c5eed770cc86b311c862f51d340
   GoogleMaps: cc76edaa94a4284e80ecd7089ed319d1cca5f37e
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
-  ImageSlideshow: 2895e62777c2ea36f56d948723b3586a12a89756
+  ImageSlideshow: 821ef30d14aa80bd87482f5828249db7524d9419
   KTCenterFlowLayout: eded079c349450dea12f7cf94b424d1bc3205519
   MLPAutoCompleteTextField: ba4d507bbff2bd4f139d4197814fc8dd39caf77e
   Mockingjay: 5782cb22c9e99dece7aad5bdf738bfa187cfcdcc
