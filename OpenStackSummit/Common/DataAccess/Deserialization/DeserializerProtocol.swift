@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftyJSON
+import Crashlytics
+
 
 public enum DeserializerError: ErrorType {
     case BadFormat(String)
@@ -37,8 +39,15 @@ public extension IDeserializer {
         var entity: BaseEntity
         
         for (_, jsonElem) in jsonObject {
-            entity = try deserialize(jsonElem)
-            array.append(entity)
+            do {
+                entity = try deserialize(jsonElem)
+                array.append(entity)
+            }
+            catch{
+                let nsError = error as NSError
+                Crashlytics.sharedInstance().recordError(nsError)
+                print(nsError.localizedDescription)
+            }
         }
         
         return array

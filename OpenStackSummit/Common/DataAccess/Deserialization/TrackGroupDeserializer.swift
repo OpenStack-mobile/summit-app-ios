@@ -27,8 +27,8 @@ public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
             try validateRequiredFields(["id", "name"], inJson: json)
             
             trackGroup = super.deserialize(json) as TrackGroup
-            trackGroup.trackGroupDescription = json["description"].stringValue
-            trackGroup.color = json["color"].stringValue
+            trackGroup.trackGroupDescription = json["description"].string ?? ""
+            trackGroup.color = json["color"].string ?? ""
             
             var track: Track
             for (_, category) in json["tracks"] {

@@ -22,6 +22,8 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
     }
     
     public func deserialize(json: JSON) throws -> BaseEntity {
+        try validateRequiredFields(["id", "class_name", "type"], inJson: json)
+
         let className = json["class_name"].stringValue
         let dataUpdate = DataUpdate()
         dataUpdate.id = json["id"].intValue

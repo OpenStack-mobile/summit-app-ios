@@ -63,7 +63,7 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(eventType.id,event.eventType.id)
         XCTAssertEqual(venueRoom.id,event.venueRoom!.id)
         XCTAssertEqual(2,event.presentation!.speakers.count)
-        XCTAssertEqual(track.id, event.presentation!.track.id)
+        XCTAssertEqual(track.id, event.presentation!.track!.id)
     }
 
     func test_Deserialize_CompleteJSONForPresentationAndVenueIsNotRoom_ReturnsCorrectInstance() {
@@ -104,7 +104,7 @@ class SummitEventDeserializerTests: XCTestCase {
         XCTAssertEqual(eventType.id,event.eventType.id)
         XCTAssertEqual(venue.id,event.venue!.id)
         XCTAssertEqual(2,event.presentation?.speakers.count)
-        XCTAssertEqual(track.id, event.presentation!.track.id)
+        XCTAssertEqual(track.id, event.presentation!.track!.id)
         XCTAssertTrue(event.allowFeedback)
     }
 

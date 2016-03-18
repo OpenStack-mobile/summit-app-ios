@@ -144,4 +144,26 @@ class DataUpdateDeserializerTests: XCTestCase {
         XCTAssertEqual(11, dataUpdateArray[1].id)
     }
     
+    func test_deserializeArray_jsonWithTwoDataUpdatesAndFirstIsInvalid_returnsArrayWithOneElement() {
+        //Arrange
+        let dataStoreAssembly = DataStoreAssembly().activate();
+        let deserializerStorage = dataStoreAssembly.deserializerStorage() as! DeserializerStorage
+        var event = SummitEvent()
+        event.id = 1
+        deserializerStorage.add(event)
+        
+        event = SummitEvent()
+        event.id = 2
+        deserializerStorage.add(event)
+        
+        let deserializerFactory = dataStoreAssembly.deserializerFactory() as! DeserializerFactory
+        let deserializer = DataUpdateDeserializer(deserializerFactory: deserializerFactory)
+        let json = "[{\"id\":10,\"created\":1442920889,\"class_name\":\"MySchedule\",\"entity_id\":1 }, {\"id\":11,\"created\":1442920889,\"type\":\"DELETE\",\"class_name\":\"MySchedule\",\"entity_id\":2 }]"
+        
+        //Act
+        let dataUpdateArray = try! deserializer.deserializeArray(json) as! [DataUpdate]
+        
+        //Assert
+        XCTAssertEqual(1, dataUpdateArray.count)
+    }
  }
