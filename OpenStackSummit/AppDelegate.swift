@@ -23,8 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var revealViewController: SWRevealViewController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //Crashlytics.sharedInstance().debugMode = true
-        Fabric.with([Crashlytics.self])
+        
+        #if !DEBUG
+            Fabric.with([Crashlytics.self])
+        #endif
 
         UXTestingManager.sharedInstance().appKey = "lUMy9RUlm4cQqQeG_1oc_g"
         UXTestingManager.sharedInstance().isFrontCameraRecording = true
