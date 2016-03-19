@@ -1627,8 +1627,8 @@
 		CADE462F1C1AFA9B00B76E84 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CADE46321C1AFAD500B76E84 /* MemberProfileDetailPresenter.swift */,
 				CADE46341C1AFAE900B76E84 /* MemberProfileDetailViewController.swift */,
+				CADE46321C1AFAD500B76E84 /* MemberProfileDetailPresenter.swift */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";

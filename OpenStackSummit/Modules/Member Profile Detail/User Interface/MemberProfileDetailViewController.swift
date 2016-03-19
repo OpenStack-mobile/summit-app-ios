@@ -216,16 +216,8 @@ class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailV
     private var bioHTML: String!
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.viewLoad()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func showProfile(profile: MemberProfileDTO) {
@@ -246,9 +238,6 @@ class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailV
     
     func hideActivityIndicator() {
         SwiftSpinner.hide()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
     }
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

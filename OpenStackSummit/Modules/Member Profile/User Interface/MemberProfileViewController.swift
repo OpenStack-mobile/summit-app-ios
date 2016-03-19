@@ -11,23 +11,18 @@ import KTCenterFlowLayout
 
 @objc
 public protocol IMemberProfileViewController {
-    var presenter: IMemberProfilePresenter! { get set }
     var title: String? { get set }
+    var presenter: IMemberProfilePresenter! { get set }
 }
 
 class MemberProfileViewController: RevealTabStripViewController, IMemberProfileViewController {
     
     var presenter: IMemberProfilePresenter!
-    var isFirstTime = true
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         presenter.viewLoad()
-        if !isFirstTime {
-            reloadPagerTabStripView()
-        }
-        isFirstTime = false
+        reloadPagerTabStripView()
     }
     
     override func viewDidLoad() {
