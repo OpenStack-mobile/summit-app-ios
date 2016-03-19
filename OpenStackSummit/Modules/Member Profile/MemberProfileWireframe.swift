@@ -19,7 +19,6 @@ public class MemberProfileWireframe: NSObject, IMemberProfileWireframe {
     
     public func pushSpeakerProfileView(speakerId: Int, toNavigationController navigationController: UINavigationController) {
         memberProfileViewController.presenter.prepareForSpeakerProfile(speakerId)
-        let _ = memberProfileViewController.view! // this is only to force viewLoad to trigger
         navigationController.pushViewController(memberProfileViewController, animated: true)
     }
 }

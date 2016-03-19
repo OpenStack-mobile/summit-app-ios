@@ -15,7 +15,7 @@ public protocol IMenuWireframe {
     func showVenues()
     func showPeople()
     func showSpeakers()
-    func showMyProfile(memberId: Int)
+    func showMyProfile()
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
@@ -45,7 +45,7 @@ public class MenuWireframe: NSObject, IMenuWireframe {
         peopleWireframe.pushSpeakersView()
     }
     
-    public func showMyProfile(memberId: Int) {
+    public func showMyProfile() {
         myProfileWireframe.pushMyProfileView()
     }
 }

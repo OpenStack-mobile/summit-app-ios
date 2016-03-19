@@ -138,7 +138,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func showMyProfile() {
         if let _ = interactor.getCurrentMember() {
-            wireframe.showMyProfile(0)
+            wireframe.showMyProfile()
         }
     }
     
