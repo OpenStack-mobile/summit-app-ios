@@ -18,7 +18,6 @@ public protocol IMemberProfileDetailPresenter {
 
 public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresenter {
     
-    var memberProfileDetailWireframe: IMemberProfileDetailWireframe!
     var interactor: IMemberProfileDetailInteractor!
     var viewController: IMemberProfileDetailViewController!
     
@@ -46,21 +45,20 @@ public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresent
     }
     
     public func viewLoad() {
-        if (speakerId > 0) {
+        self.viewController.showActivityIndicator()
+        
+        if speakerId > 0 {
             showSpeakerProfile()
         }
-        else if (attendeeId > 0) {
+        else if attendeeId > 0 {
             showAttendeeProfile()
         }
         else {
             if let currentMember = interactor.getCurrentMember() {
-                self.viewController.showActivityIndicator()
                 if currentMember.speakerRole != nil {
-                    speakerId = currentMember.speakerRole!.id
                     showPersonProfile(currentMember.speakerRole!, error: nil)
                 }
                 else {
-                    attendeeId = currentMember.attendeeRole!.id
                     showPersonProfile(currentMember.attendeeRole!, error: nil)
                 }
             }
@@ -68,23 +66,22 @@ public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresent
     }
     
     func showSpeakerProfile() {
-        self.viewController.showActivityIndicator()
         self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
             self.showPersonProfile(speaker, error: error)
         }
     }
     
     func showAttendeeProfile() {
-        self.viewController.showActivityIndicator()
         self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
             self.showPersonProfile(attendee, error: error)
         }
     }
     
     func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
-        dispatch_async(dispatch_get_main_queue(),{
-            if (error != nil) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if error != nil {
                 self.viewController.handlerError(error!)
+                self.viewController.hideActivityIndicator()
                 return
             }
             
@@ -96,24 +93,18 @@ public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresent
             self.viewController.twitter = person!.twitter
             self.viewController.irc = person!.irc
             self.viewController.bio = person!.bio
-            
-            self.speakerId = 0
-            self.attendeeId = 0
+
             self.viewController.hideActivityIndicator()
         })
     }
     
     /*public func requestFriendship() {
-    if (!interactor.isLoggedIn()) {
-    memberProfileDetailWireframe.showLoginView()
-    }
-    
-    interactor.requestFriendship(memberId) { error in
-    if (error != nil) {
-    self.viewController.handlerError(error!)
-    return
-    }
-    self.viewController.didFinishFriendshipRequest()
-    }
+        interactor.requestFriendship(memberId) { error in
+            if error != nil {
+                self.viewController.handlerError(error!)
+                return
+            }
+            self.viewController.didFinishFriendshipRequest()
+        }
     }*/
 }

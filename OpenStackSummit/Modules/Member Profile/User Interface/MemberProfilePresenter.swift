@@ -22,8 +22,8 @@ public protocol IMemberProfilePresenter {
 
 public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     
-    var viewController: IMemberProfileViewController!
     var interactor: IMemberProfileInteractor!
+    var viewController: IMemberProfileViewController!
 
     var memberProfileDetailViewController: MemberProfileDetailViewController!
     var feedbackGivenListViewController: FeedbackGivenListViewController!
@@ -39,7 +39,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
 
     public func prepareForAttendeeProfile(attendeeId: Int) {
         self.speakerId = 0
-        self.attendeeId = 1
+        self.attendeeId = attendeeId
     }
 
     public func prepareForMyProfile() {
@@ -48,7 +48,7 @@ public class MemberProfilePresenter: NSObject, IMemberProfilePresenter {
     }
     
     public func viewLoad() {
-        if (speakerId > 0) {
+        if speakerId > 0 {
             interactor.getSpeakerProfile(speakerId) { speaker, error in
                 if speaker != nil {
                     self.viewController.title = speaker!.name.uppercaseString
