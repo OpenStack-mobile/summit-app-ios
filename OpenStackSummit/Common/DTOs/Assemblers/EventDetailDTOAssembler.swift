@@ -29,15 +29,16 @@ public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
     public func createDTO(event: SummitEvent) -> EventDetailDTO {
         let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
         let eventDetailDTO = EventDetailDTO(scheduleItemDTO: scheduleItemDTO)
-        eventDetailDTO.finished = getFinished(event)
-        eventDetailDTO.eventDescription = event.eventDescription
-        eventDetailDTO.allowFeedback = event.allowFeedback
         
         eventDetailDTO.venueId = event.venue?.id
         if let venueRoom = event.venueRoom {
             eventDetailDTO.venueId = venueRoom.venue.id
         }
         
+        eventDetailDTO.finished = getFinished(event)
+        eventDetailDTO.eventDescription = event.eventDescription
+        eventDetailDTO.allowFeedback = event.allowFeedback
+        eventDetailDTO.averageFeedback = event.averageFeedback
         eventDetailDTO.tags = getTags(event)
         eventDetailDTO.level = event.presentation != nil ? event.presentation!.level + " Level" : ""
         
