@@ -9,7 +9,6 @@
 import UIKit
 import Fabric
 import Crashlytics
-import UXTesting
 import AeroGearOAuth2
 import GoogleMaps
 import Parse
@@ -27,9 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if !DEBUG
             Fabric.with([Crashlytics.self])
         #endif
-
-        UXTestingManager.sharedInstance().appKey = "lUMy9RUlm4cQqQeG_1oc_g"
-        UXTestingManager.sharedInstance().isFrontCameraRecording = true
         
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("Google Maps API Key")
