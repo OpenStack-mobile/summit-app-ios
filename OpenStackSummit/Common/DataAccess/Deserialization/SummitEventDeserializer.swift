@@ -40,6 +40,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             summitEvent.name = json["title"].stringValue
             summitEvent.eventDescription = json["description"].stringValue
             summitEvent.allowFeedback = json["allow_feedback"].boolValue
+            summitEvent.averageFeedback = json["avg_feedback_rate"].doubleValue
             
             var deserializer = deserializerFactory.create(DeserializerFactoryType.EventType)
             summitEvent.eventType = try deserializer.deserialize(json["type_id"]) as! EventType
