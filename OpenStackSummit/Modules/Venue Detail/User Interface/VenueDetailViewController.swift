@@ -60,7 +60,13 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
                 var imageInputs: [HanekeInputSource] = []
                 
                 for image in imagesInternal {
-                    let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    
+                    #if DEBUG
+                        let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    #else
+                        let url = image
+                    #endif
+                    
                     imageInputs.append(HanekeInputSource(urlString: url)!)
                 }
                 
@@ -79,7 +85,13 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
                 var imageInputs: [HanekeInputSource] = []
                 
                 for map in mapsInternal {
-                    let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    
+                    #if DEBUG
+                        let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                    #else
+                        let url = map
+                    #endif
+                    
                     imageInputs.append(HanekeInputSource(urlString: url)!)
                 }
                 
