@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Crashlytics
 
 public class SummitAttendeeDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
@@ -53,8 +54,10 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
                 do {
                     event = try deserializer.deserialize(eventJSON) as! SummitEvent
                     summitAttendee.scheduledEvents.append(event)
-                } catch let error {
-                    print(error)
+                } catch {
+                    let nsError = error as NSError
+                    print(nsError)
+                    Crashlytics.sharedInstance().recordError(nsError)
                 }
             }
             

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 @objc
 public protocol IPresentationSpeakerRemoteDataStore {
@@ -34,7 +35,7 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
             
             let json = responseObject as! String
             let deserializer : IDeserializer!
-            var innerError: NSError?
+            var friendlyError: NSError?
             var speakers: [PresentationSpeaker]?
             
             deserializer = self.deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
@@ -43,10 +44,15 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
                 speakers = try deserializer.deserializePage(json) as? [PresentationSpeaker]
             }
             catch {
-                innerError = NSError(domain: "There was an error deserializing presentation speakers", code: 3001, userInfo: nil)
+                let nsError = error as NSError
+                print(nsError)
+                Crashlytics.sharedInstance().recordError(nsError)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error deserializing presentation speakers", value: nsError.localizedDescription, comment: "")]
+                friendlyError = NSError(domain: Constants.ErrorDomain, code: 3001, userInfo: userInfo)
+                
             }
             
-            completionBlock(speakers, innerError)
+            completionBlock(speakers, friendlyError)
         }
     }
     
