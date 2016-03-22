@@ -34,12 +34,21 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
         }
+        
         if (trackGroups != nil && trackGroups!.count > 0) {
-            events = events.filter("presentation.track.trackGroup.id in %@", trackGroups!)
+            var trackGroupsFilter = ""
+            var separator = ""
+            for trackGroup in trackGroups! {
+                trackGroupsFilter += "\(separator)ANY presentation.track.trackGroups.id = \(trackGroup)"
+                separator = " OR "
+            }
+            events = events.filter(trackGroupsFilter)
         }
+        
         if (tracks != nil && tracks!.count > 0) {
             events = events.filter("presentation.track.id in %@", tracks!)
         }
+        
         if (levels != nil && levels!.count > 0) {
             events = events.filter("presentation.level in %@", levels!)
         }
