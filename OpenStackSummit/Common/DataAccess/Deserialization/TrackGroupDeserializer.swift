@@ -43,7 +43,7 @@ public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
                     track = trackDeserializer.deserialize(category)
                 }
                 trackGroup.tracks.append(track)
-                track.trackGroup = trackGroup
+                track.trackGroups.append(trackGroup)
             }
             
             if(!deserializerStorage.exist(trackGroup)) {
