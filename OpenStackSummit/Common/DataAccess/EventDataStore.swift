@@ -80,7 +80,7 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
     }
     
     public func getSpeakerPresentationsLocal(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [SummitEvent] {
-        let events = realm.objects(SummitEvent).filter("presentation.speakers.id = %@ && start >= %@ and end <= %@", speakerId, startDate, endDate).sorted(self.sortProperties)
+        let events = realm.objects(SummitEvent).filter("ANY presentation.speakers.id = %@ && start >= %@ and end <= %@", speakerId, startDate, endDate).sorted(self.sortProperties)
         return events.map { $0 }
     }
     

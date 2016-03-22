@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import AeroGearHttp
 import AeroGearOAuth2
+import Crashlytics
 
 @objc
 public protocol IMemberRemoteDataStore {
@@ -43,8 +44,12 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
                     completionBlock(member, nil)
                 }
                 catch {
-                    let innerError = NSError(domain: "There was an error deserializing my profile", code: 8001, userInfo: nil)
-                    completionBlock(nil, innerError)
+                    let nsError = error as NSError
+                    print(nsError)
+                    Crashlytics.sharedInstance().recordError(nsError)
+                    let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error performing operation", value: nsError.localizedDescription, comment: "")]
+                    let friendlyError = NSError(domain: Constants.ErrorDomain, code: 8001, userInfo: userInfo)
+                    completionBlock(nil, friendlyError)
                 }
             }
         })
