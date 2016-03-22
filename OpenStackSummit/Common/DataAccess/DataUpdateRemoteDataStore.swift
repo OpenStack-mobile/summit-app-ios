@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import AeroGearHttp
 import AeroGearOAuth2
+import Crashlytics
 
 @objc
 public protocol IDataUpdateRemoteDataStore {
@@ -39,17 +40,19 @@ public class DataUpdateRemoteDataStore: NSObject {
                 for (_, dataUpdateJSON) in jsonObject {
                     do {
                         dataUpdate = try deserializer.deserialize(dataUpdateJSON) as! DataUpdate
+                        dataUpdates.append(dataUpdate)
                     }
                     catch {
-                        let error: NSError? = NSError(domain: "There was an error parsing data updates", code: 2000, userInfo: nil)
-                        completionBlock(nil, error)
+                        let nsError = error as NSError
+                        Crashlytics.sharedInstance().recordError(nsError)
+                        print(nsError.localizedDescription)
                     }
-                    dataUpdates.append(dataUpdate)
                 }
                 completionBlock(dataUpdates, error)
             }
             else {
-                let error: NSError? = NSError(domain: "There was an error parsing data updates API response", code: 2001, userInfo: nil)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error parsing data updates API response", value: "", comment: "")]
+                let error = NSError(domain: Constants.ErrorDomain, code: 2001, userInfo: userInfo)
                 completionBlock(nil, error)
             }
         }

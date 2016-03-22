@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 @objc
 public protocol ISummitAttendeeRemoteDataStore {
@@ -37,7 +38,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
             
             let json = responseObject as! String
             let deserializer : IDeserializer!
-            var innerError: NSError?
+            var friendlyError: NSError?
             var attendees: [SummitAttendee]?
             
             deserializer = self.deserializerFactory.create(DeserializerFactoryType.SummitAttendee)
@@ -46,10 +47,14 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
                 attendees = try deserializer.deserializePage(json) as? [SummitAttendee]
             }
             catch {
-                innerError = NSError(domain: "There was an error deserializing summit attendees", code: 4001, userInfo: nil)
-            }
+                let nsError = error as NSError
+                print(nsError)
+                Crashlytics.sharedInstance().recordError(nsError)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error deserializing summit attendees", value: nsError.localizedDescription, comment: "")]
+                friendlyError = NSError(domain: Constants.ErrorDomain, code: 4001, userInfo: userInfo)
+           }
             
-            completionBlock(attendees, innerError)
+            completionBlock(attendees, friendlyError)
         }
     }
     
@@ -73,6 +78,9 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
                 attendee = try deserializer.deserialize(json) as? SummitAttendee
             }
             catch {
+                let nsError = error as NSError
+                Crashlytics.sharedInstance().recordError(nsError)
+                print(nsError.localizedDescription)
                 innerError = NSError(domain: "There was an error deserializing summit attendee", code: 4002, userInfo: nil)
             }
             

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 @objc
 public protocol ISummitAttendeeDataStore {
@@ -56,9 +57,9 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
     
     public func removeEventFromMemberSchedule(attendee: SummitAttendee, event: SummitEvent, completionBlock : (SummitAttendee?, NSError?) -> Void) {
         summitAttendeeRemoteDataStore.removeEventFromShedule(attendee, event: event) { error in
-            var innerError = error
+            var friendlyError = error
             
-            defer { completionBlock(attendee, innerError) }
+            defer { completionBlock(attendee, friendlyError) }
             
             if error != nil {
                 return
@@ -68,7 +69,11 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
                 try self.removeEventFromMemberScheduleLocal(attendee, event: event)
             }
             catch {
-                innerError = NSError(domain: "There was an error removing event from member schedule", code: 1001, userInfo: nil)
+                let nsError = error as NSError
+                print(nsError)
+                Crashlytics.sharedInstance().recordError(nsError)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error removing event with id \(event.id) from member schedule", value: nsError.localizedDescription, comment: "")]
+                friendlyError = NSError(domain: Constants.ErrorDomain, code: 1001, userInfo: userInfo)
             }
         }
     }

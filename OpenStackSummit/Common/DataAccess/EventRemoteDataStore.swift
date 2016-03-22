@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 @objc
 public protocol IEventRemoteDataStore {
@@ -28,7 +29,7 @@ public class EventRemoteDataStore: NSObject {
             
             let json = responseObject as! String
             let deserializer : IDeserializer!
-            var innerError: NSError?
+            var friendlyError: NSError?
             var feedbackList: [Feedback]?
             
             deserializer = self.deserializerFactory.create(DeserializerFactoryType.Feedback)
@@ -37,10 +38,14 @@ public class EventRemoteDataStore: NSObject {
                 feedbackList = try deserializer.deserializePage(json) as? [Feedback]
             }
             catch {
-                innerError = NSError(domain: "There was an error deserializing feedback for event with id \(eventId)", code: 5001, userInfo: nil)
+                let nsError = error as NSError
+                print(nsError)
+                Crashlytics.sharedInstance().recordError(nsError)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error getting feedback for event with id \(eventId)", value: nsError.localizedDescription, comment: "")]
+                friendlyError = NSError(domain: Constants.ErrorDomain, code: 5001, userInfo: userInfo)
             }
             
-            completionBlock(feedbackList, innerError)
+            completionBlock(feedbackList, friendlyError)
         }
         
     }
