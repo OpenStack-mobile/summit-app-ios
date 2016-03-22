@@ -88,6 +88,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         http.GET(url) {(responseObject, error) in
             if (error != nil) {
                 print("Error polling server for data updates: \(error)")
+                Crashlytics.sharedInstance().recordError(error!)
                 return
             }
             
