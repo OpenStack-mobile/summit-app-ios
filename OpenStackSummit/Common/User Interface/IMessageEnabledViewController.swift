@@ -15,6 +15,8 @@ public protocol IMessageEnabledViewController {
 
 extension IMessageEnabledViewController {
     func showErrorMessage(error: NSError) {
-        SweetAlert().showAlert("Something failed", subTitle: error.domain, style: AlertStyle.Error)
+        var message = error.localizedDescription
+        message += "\n\nDomain: \(error.domain)\nCode: \(error.code)"
+        SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Warning)
     }
 }
