@@ -23,7 +23,13 @@ class InternalVenueListTableViewCell: VenueListTableViewCell, IInternalVenueList
                 backgroundImageView.image = nil
             }
             else {
-                let picUrl = backgroundImageUrl.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+
+                #if DEBUG
+                    let picUrl = backgroundImageUrl.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                #else
+                    let picUrl = backgroundImageUrl
+                #endif
+                
                 backgroundImageView.hnk_setImageFromURL(NSURL(string: picUrl)!)
             }
         }

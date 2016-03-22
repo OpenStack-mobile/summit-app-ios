@@ -175,7 +175,13 @@ class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailV
             return picUrlInternal
         }
         set {
-            picUrlInternal = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            
+            #if DEBUG
+                picUrlInternal = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            #else
+                picUrlInternal = newValue
+            #endif
+
             if (!picUrlInternal.isEmpty) {
                 pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
             }
