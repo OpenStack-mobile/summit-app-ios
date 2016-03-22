@@ -4,45 +4,42 @@ PODS:
     - AeroGearHttp
   - AFHorizontalDayPicker (0.2.0):
     - MTDates (= 1.0.0)
-  - AHKActionSheet (0.5.3)
-  - AMTagListView (1.0.0)
-  - Bolts/Tasks (1.5.0)
-  - Cosmos (1.1.3)
-  - Crashlytics (3.5.0):
-    - Fabric (~> 1.6.0)
-  - Fabric (1.6.2)
-  - GoogleMaps (1.12.2)
-  - HanekeSwift (0.10.0)
+  - AHKActionSheet (0.5.4)
+  - AMTagListView (1.1.0)
+  - Bolts/Tasks (1.6.0)
+  - Cosmos (1.2.1)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
+  - GoogleMaps (1.12.3)
+  - HanekeSwift (0.10.1)
   - ImageSlideshow (0.3.1):
     - ImageSlideshow/Core (= 0.3.1)
   - ImageSlideshow/Core (0.3.1)
   - KTCenterFlowLayout (1.1.1)
   - MLPAutoCompleteTextField (1.5)
-  - Mockingjay (1.1.0):
-    - Mockingjay/Core (= 1.1.0)
-    - Mockingjay/Session (= 1.1.0)
-    - Mockingjay/XCTest (= 1.1.0)
-  - Mockingjay/Core (1.1.0):
+  - Mockingjay (1.1.1):
+    - Mockingjay/Core (= 1.1.1)
+    - Mockingjay/XCTest (= 1.1.1)
+  - Mockingjay/Core (1.1.1):
     - URITemplate (~> 1.3)
-  - Mockingjay/Session (1.1.0):
-    - Mockingjay/Core
-  - Mockingjay/XCTest (1.1.0):
+  - Mockingjay/XCTest (1.1.1):
     - Mockingjay/Core
   - MTDates (1.0.0)
-  - Parse (1.10.0):
-    - Bolts/Tasks (~> 1.5)
-  - Realm (0.96.2):
-    - Realm/Headers (= 0.96.2)
-  - Realm/Headers (0.96.2)
-  - RealmSwift (0.96.2):
-    - Realm (= 0.96.2)
+  - Parse (1.13.0):
+    - Bolts/Tasks (~> 1.6)
+  - Realm (0.98.5):
+    - Realm/Headers (= 0.98.5)
+  - Realm/Headers (0.98.5)
+  - RealmSwift (0.98.5):
+    - Realm (= 0.98.5)
   - SwiftSpinner (0.8.0)
-  - SwiftyJSON (2.3.1)
+  - SwiftyJSON (2.3.2)
   - SWRevealViewController (2.3.0)
-  - Typhoon (3.4.3):
-    - Typhoon/no-arc (= 3.4.3)
-  - Typhoon/no-arc (3.4.3)
-  - URITemplate (1.3.0)
+  - Typhoon (3.4.5):
+    - Typhoon/no-arc (= 3.4.5)
+  - Typhoon/no-arc (3.4.5)
+  - URITemplate (1.3.1)
   - XLPagerTabStrip (4.0.1)
 
 DEPENDENCIES:
@@ -86,7 +83,7 @@ CHECKOUT OPTIONS:
     :commit: 76dae3175eb62c815e1a46eec6159d0cb973a0ee
     :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
-    :commit: f1a60b6171313ffd20d396e194cc3d4be9be3e96
+    :commit: 10f06782952ab7d10b7279f31377056d81bf8535
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
@@ -99,27 +96,27 @@ SPEC CHECKSUMS:
   AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
   AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
-  AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
-  AMTagListView: e1341c9362b49c15ded10f489b7210eb7c7b503a
-  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
-  Cosmos: 9baaa9b1fa63fb503ae496ecdd6535801e916f1a
-  Crashlytics: fabfd45d0e8b8dc936c682b97e302b9a49a1c827
-  Fabric: e8296d4a1abb3c5eed770cc86b311c862f51d340
-  GoogleMaps: cc76edaa94a4284e80ecd7089ed319d1cca5f37e
-  HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
+  AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
+  AMTagListView: 27073f013fe1f5687dbc936e63f94b73e210ed7a
+  Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Cosmos: 27ddd077ef5859659a4bbbbd84137ae717f020e8
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  GoogleMaps: a4ac67918d0b5ba5f6b9893ac80487e357779e6c
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   ImageSlideshow: 821ef30d14aa80bd87482f5828249db7524d9419
   KTCenterFlowLayout: eded079c349450dea12f7cf94b424d1bc3205519
   MLPAutoCompleteTextField: ba4d507bbff2bd4f139d4197814fc8dd39caf77e
-  Mockingjay: 5782cb22c9e99dece7aad5bdf738bfa187cfcdcc
+  Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
-  Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
-  Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
-  RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
+  Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
+  Realm: db08379969e45cea2edd1c3c0a090fe9e22d2d2f
+  RealmSwift: cb11ad1c35e15dc982f2dbf5afe2a3124193a358
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
-  Typhoon: 382b918b31d5d19a82922448af65f01f08102dc6
-  URITemplate: 0ebbec80d1eb59a89e29db9b14c99d5908d3e574
+  Typhoon: 200100687af3233ec5ed019064df3c9ffe350475
+  URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
   XLPagerTabStrip: a39467a6e71017d2be92807ed9308b4d06557c80
 
 COCOAPODS: 0.39.0
