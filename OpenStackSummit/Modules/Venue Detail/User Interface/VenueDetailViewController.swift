@@ -29,9 +29,6 @@ public protocol IVenueDetailViewController {
 
 class VenueDetailViewController: UIViewController, IVenueDetailViewController, GMSMapViewDelegate {
     
-    private var imagesInternal: [String]!
-    private var mapsInternal: [String]!
-    
     var name: String! {
         get {
             return nameLabel.text
@@ -51,14 +48,10 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     }
     
     var images: [String]! {
-        get {
-            return imagesInternal
-        }
-        set {
-            imagesInternal = newValue
+        didSet {
             var imageInputs: [HanekeInputSource] = []		
             
-            for image in imagesInternal {
+            for image in images {
                 
                 #if DEBUG
                     let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -74,14 +67,10 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
     }
     
     var maps: [String]! {
-        get {
-            return mapsInternal
-        }
-        set {
-            mapsInternal = newValue
+       didSet {
             var imageInputs: [HanekeInputSource] = []
-            
-            for map in mapsInternal {
+        
+            for map in maps {
                 
                 #if DEBUG
                     let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
