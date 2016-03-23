@@ -55,23 +55,21 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
             return imagesInternal
         }
         set {
-            if imagesInternal == nil {
-                imagesInternal = newValue
-                var imageInputs: [HanekeInputSource] = []
+            imagesInternal = newValue
+            var imageInputs: [HanekeInputSource] = []		
+            
+            for image in imagesInternal {
                 
-                for image in imagesInternal {
-                    
-                    #if DEBUG
-                        let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    #else
-                        let url = image
-                    #endif
-                    
-                    imageInputs.append(HanekeInputSource(urlString: url)!)
-                }
+                #if DEBUG
+                    let url = image.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                #else
+                    let url = image
+                #endif
                 
-                imagesSlideshow.setImageInputs(imageInputs)
+                imageInputs.append(HanekeInputSource(urlString: url)!)
             }
+            
+            imagesSlideshow.setImageInputs(imageInputs)
         }
     }
     
@@ -80,23 +78,21 @@ class VenueDetailViewController: UIViewController, IVenueDetailViewController, G
             return mapsInternal
         }
         set {
-            if mapsInternal == nil {
-                mapsInternal = newValue
-                var imageInputs: [HanekeInputSource] = []
+            mapsInternal = newValue
+            var imageInputs: [HanekeInputSource] = []
+            
+            for map in mapsInternal {
                 
-                for map in mapsInternal {
-                    
-                    #if DEBUG
-                        let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                    #else
-                        let url = map
-                    #endif
-                    
-                    imageInputs.append(HanekeInputSource(urlString: url)!)
-                }
+                #if DEBUG
+                    let url = map.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                #else
+                    let url = map
+                #endif
                 
-                mapsSlideshow.setImageInputs(imageInputs)
+                imageInputs.append(HanekeInputSource(urlString: url)!)
             }
+            
+            mapsSlideshow.setImageInputs(imageInputs)
         }
     }
     
