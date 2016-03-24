@@ -27,7 +27,7 @@ public class MyScheduleDataUpdateStrategy: DataUpdateStrategy {
 
         switch dataUpdate.operation {
         case .Insert, .Update:
-            summitAttendeeDataStore.addEventToMemberScheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
+            try summitAttendeeDataStore.addEventToMemberScheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
         case .Delete:
             try summitAttendeeDataStore.removeEventFromMemberScheduleLocal(currentMember!.attendeeRole!, event: dataUpdate.entity as! SummitEvent)
         default:

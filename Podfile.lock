@@ -93,7 +93,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/gcutrini/XLPagerTabStrip.git
 
 SPEC CHECKSUMS:
-  AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
+  AeroGearHttp: dbb62520f6a9bfb5988054fb51811166a46fc1a4
   AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
