@@ -155,13 +155,13 @@ public class SecurityManager: NSObject {
     }
     
     public func logout(completionBlock: (NSError?) -> Void) {
-        oauthModuleOpenID.revokeAccess() { (response, error) in
-            self.session.set(self.kCurrentMemberId, value: nil)
-            completionBlock(error)
-
-            let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
-            NSNotificationCenter.defaultCenter().postNotification(notification)
-        }
+        oauthModuleOpenID.revokeLocalAccess()
+        self.session.set(self.kCurrentMemberId, value: nil)
+        let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+        
+        // TODO: logout is no longer async, delete completition block
+        completionBlock(nil)
     }
     
     public func getCurrentMemberRole() -> MemberRoles{
