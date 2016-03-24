@@ -7,7 +7,7 @@ PODS:
   - AHKActionSheet (0.5.4)
   - AMTagListView (1.1.0)
   - Bolts/Tasks (1.6.0)
-  - Cosmos (1.2.1)
+  - Cosmos (1.2.2)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
@@ -80,7 +80,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AeroGearHttp:
-    :commit: dbb62520f6a9bfb5988054fb51811166a46fc1a4
+    :commit: 3b5c18b32194ff94b76c0d7969d398958bcff18c
     :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
     :commit: 272e2dcbac02889efc59f81dc9e38199c36b2530
@@ -99,7 +99,7 @@ SPEC CHECKSUMS:
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
   AMTagListView: 27073f013fe1f5687dbc936e63f94b73e210ed7a
   Bolts: f52a250053bb517ca874523c3913776359ab3def
-  Cosmos: 27ddd077ef5859659a4bbbbd84137ae717f020e8
+  Cosmos: 87c49100c69d2cb2eebfa4eb8d1e801fe29ff774
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   GoogleMaps: a4ac67918d0b5ba5f6b9893ac80487e357779e6c
