@@ -112,6 +112,10 @@ public class DeserializerFactory : NSObject {
             deserializer = trackDeserializer
         case "PresentationCategoryGroup":
             deserializer = trackGroupDeserializer
+        case "SummitLocationMap":
+            deserializer = imageDeserializer
+        case "SummitLocationImage":
+            deserializer = imageDeserializer
         default:
             print("There is no deserializer for class \(className)")
         }
