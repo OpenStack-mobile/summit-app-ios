@@ -8,6 +8,10 @@
 
 import UIKit
 
+public enum DataUpdateError: ErrorType {
+    case InvalidOperationError(String)
+}
+
 public class DataUpdateStrategy: NSObject {
     var genericDataStore: GenericDataStore!
     
