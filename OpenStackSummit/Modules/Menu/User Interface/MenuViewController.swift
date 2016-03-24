@@ -193,7 +193,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     func revokedAccess(notification: NSNotification) {
         presenter.revokedAccess()
-        showInfoMessage("Session expired", message: "Your session expired, please log in again using your openstack credentials")
+        showInfoMessage("Session expired", message: "Your session expired, please log in again using your credentials")
     }
     
     deinit {
