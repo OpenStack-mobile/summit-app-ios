@@ -33,7 +33,8 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     public func viewLoad() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.Notifications.LoggedInNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.Notifications.LoggedOutNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "loggedIn:",
@@ -159,6 +160,8 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.Notifications.LoggedInNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.Notifications.LoggedOutNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

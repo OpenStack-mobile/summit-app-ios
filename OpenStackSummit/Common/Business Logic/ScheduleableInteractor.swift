@@ -29,11 +29,12 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
             return
         }
 
-        let loggedInMember = securityManager.getCurrentMember()
-        let event = eventDataStore.getByIdLocal(eventId)
-        
-        summitAttendeeDataStore.addEventToMemberSchedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
-            completionBlock(error)
+        if let loggedInMember = securityManager.getCurrentMember() {
+            let event = eventDataStore.getByIdLocal(eventId)
+            
+            summitAttendeeDataStore.addEventToMemberSchedule(loggedInMember.attendeeRole!, event: event!) {(attendee, error) in
+                completionBlock(error)
+            }
         }
     }
     
@@ -44,11 +45,12 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
             return
         }
 
-        let loggedInMember = securityManager.getCurrentMember()
-        let event = eventDataStore.getByIdLocal(eventId)
-        
-        summitAttendeeDataStore.removeEventFromMemberSchedule(loggedInMember!.attendeeRole!, event: event!) {(attendee, error) in
-            completionBlock(error)
+        if let loggedInMember = securityManager.getCurrentMember() {
+            let event = eventDataStore.getByIdLocal(eventId)
+            
+            summitAttendeeDataStore.removeEventFromMemberSchedule(loggedInMember.attendeeRole!, event: event!) {(attendee, error) in
+                completionBlock(error)
+            }
         }
     }
     
