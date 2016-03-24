@@ -76,7 +76,11 @@ public class DataStoreAssembly: TyphoonAssembly {
     }
     
     public dynamic func imageDeserializer() -> AnyObject {
-        return TyphoonDefinition.withClass(ImageDeserializer.self)
+        return TyphoonDefinition.withClass(ImageDeserializer.self) {
+            (definition) in
+            
+            definition.injectProperty("deserializerStorage", with: self.deserializerStorage())
+        }
     }
     
     public dynamic func deserializerStorage() -> AnyObject {
@@ -257,6 +261,10 @@ public class DataStoreAssembly: TyphoonAssembly {
     
     public dynamic func trackGroupDataStore() -> AnyObject {
         return TyphoonDefinition.withClass(TrackGroupDataStore.self)
+    }
+
+    public dynamic func venueDataStore() -> AnyObject {
+        return TyphoonDefinition.withClass(VenueDataStore.self)
     }
     
     public dynamic func summitAttendeeDataStore() -> AnyObject {
