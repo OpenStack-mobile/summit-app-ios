@@ -80,10 +80,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AeroGearHttp:
-    :commit: 3b5c18b32194ff94b76c0d7969d398958bcff18c
+    :commit: 3a756f6ea438e704ae3c9fb570e64cd3df7628bd
     :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
-    :commit: 272e2dcbac02889efc59f81dc9e38199c36b2530
+    :commit: 28433a4fef08d3abf0bc9601b4bc6cbdc969e88d
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
