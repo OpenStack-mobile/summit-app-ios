@@ -19,6 +19,7 @@ public protocol IMenuPresenter {
     func showVenues()
     func showPeopleOrSpeakers()
     func showMyProfile()
+    func revokedAccess()
 }
 
 public class MenuPresenter: NSObject, IMenuPresenter {
@@ -111,6 +112,15 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             self.viewController.hideMenu()
             self.viewController.hideActivityIndicator()
         }
+    }
+    
+    public func revokedAccess() {
+        self.showPersonProfile(PersonDTO(), error: nil)
+        
+        self.viewController.navigateToHome()
+        self.viewController.reloadMenu()
+        self.viewController.hideMenu()
+        self.viewController.hideActivityIndicator()
     }
     
     public func searchFor(term: String) {

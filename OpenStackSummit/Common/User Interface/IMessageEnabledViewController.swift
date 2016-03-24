@@ -19,4 +19,8 @@ extension IMessageEnabledViewController {
         message += "\n\nDomain: \(error.domain)\nCode: \(error.code)"
         SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Warning)
     }
+    
+    func showInfoMessage(title: String, message: String) {
+        SweetAlert().showAlert(title, subTitle: message, style: AlertStyle.Warning)
+    }
 }
