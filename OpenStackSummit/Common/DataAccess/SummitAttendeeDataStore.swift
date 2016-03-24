@@ -45,13 +45,24 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
     public func addEventToMemberSchedule(attendee: SummitAttendee, event: SummitEvent, completionBlock : (SummitAttendee?, NSError?) -> Void) {
         summitAttendeeRemoteDataStore.addEventToShedule(attendee, event: event) { error in
             
+            var friendlyError = error
+            
+            defer { completionBlock(attendee, friendlyError) }
+
             if error != nil {
                 return
             }
-            
-            self.addEventToMemberScheduleLocal(attendee, event: event)
-            
-            completionBlock(attendee, error)
+
+            do {
+                try self.addEventToMemberScheduleLocal(attendee, event: event)
+            }
+            catch {
+                let nsError = error as NSError
+                print(nsError)
+                Crashlytics.sharedInstance().recordError(nsError)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error adding event with id \(event.id) to member schedule", value: nsError.localizedDescription, comment: "")]
+                friendlyError = NSError(domain: Constants.ErrorDomain, code: 1001, userInfo: userInfo)
+            }
         }
     }
     
@@ -78,9 +89,9 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
         }
     }
     
-    public func addEventToMemberScheduleLocal(attendee: SummitAttendee, event: SummitEvent) {
+    public func addEventToMemberScheduleLocal(attendee: SummitAttendee, event: SummitEvent) throws {
         
-        try! self.realm.write {
+        try self.realm.write {
             let index = attendee.scheduledEvents.indexOf("id = %@", event.id)
             if (index == nil) {
                 attendee.scheduledEvents.append(event)
@@ -90,7 +101,7 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
     
     public func removeEventFromMemberScheduleLocal(attendee: SummitAttendee, event: SummitEvent) throws {
         
-        try! self.realm.write {
+        try self.realm.write {
             let index = attendee.scheduledEvents.indexOf("id = %@", event.id)
             if (index != nil) {
                 attendee.scheduledEvents.removeAtIndex(index!)
