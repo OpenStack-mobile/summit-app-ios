@@ -64,6 +64,7 @@ public class DataUpdateAssembly: TyphoonAssembly {
             
             definition.injectProperty("genericDataUpdateProcessStrategy", with: self.genericDataUpdateProcessStrategy())
             definition.injectProperty("myScheduleDataUpdateStrategy", with: self.myScheduleDataUpdateStrategy())
+            definition.injectProperty("summitVenueImageDataUpdateStrategy", with: self.summitVenueImageDataUpdateStrategy())
         }
     }
 
@@ -83,6 +84,16 @@ public class DataUpdateAssembly: TyphoonAssembly {
             
             definition.injectProperty("summitAttendeeDataStore", with: self.dataStoreAssembly.summitAttendeeDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+        }
+    }
+
+    public dynamic func summitVenueImageDataUpdateStrategy() -> AnyObject {
+        
+        return TyphoonDefinition.withClass(SummitVenueImageDataUpdateStrategy.self) {
+            (definition) in
+            
+            definition.injectProperty("genericDataStore", with: self.dataStoreAssembly.genericDataStore())
+            definition.injectProperty("venueDataStore", with: self.dataStoreAssembly.venueDataStore())
         }
     }
     

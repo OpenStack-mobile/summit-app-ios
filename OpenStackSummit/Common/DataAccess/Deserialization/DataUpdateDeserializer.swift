@@ -28,6 +28,7 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
         let dataUpdate = DataUpdate()
         dataUpdate.id = json["id"].intValue
         dataUpdate.entityClassName = className
+        dataUpdate.originalJSON = json
         let operationType = json["type"]
 
         switch (operationType) {
