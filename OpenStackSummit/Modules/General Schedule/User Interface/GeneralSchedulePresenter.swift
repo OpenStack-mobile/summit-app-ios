@@ -19,14 +19,13 @@ extension Array where Element: SummitEvent {
 
 @objc
 public protocol IGeneralSchedulePresenter: ISchedulePresenter {
-    func showFilters()
 }
 
 public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresenter {
     
-    weak var viewController : IScheduleViewController! {
+    weak var viewController : IGeneralScheduleViewController! {
         get {
-            return internalViewController
+            return internalViewController as! IGeneralScheduleViewController
         }
         set {
             internalViewController = newValue
@@ -52,12 +51,18 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
     }
     
     override public func viewLoad() {
+        if !interactor.isDataLoaded() && !interactor.isNetworkAvailable() {
+            viewController.toggleNoConnectivityMessage(true)
+            viewController.toggleEventList(false)
+            return
+        }
+        
+        viewController.toggleNoConnectivityMessage(false)
+        viewController.toggleEventList(true)
+        
         interactor.checkForClearDataEvents()
+        
         super.viewLoad()
-    }
-    
-    public func showFilters() {
-        wireframe.showFilters()
     }
     
     override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {

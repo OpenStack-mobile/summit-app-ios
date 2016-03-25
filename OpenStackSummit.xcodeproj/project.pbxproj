@@ -13,6 +13,7 @@
 		9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */; };
 		9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */; };
 		9D1D920C1C4FF12E00C1BB6C /* SchemaMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */; };
+		9D2372E61CA4AD5000008E33 /* EventsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2372E51CA4AD5000008E33 /* EventsInteractor.swift */; };
 		9D5A99CD1B948DC8002FFAA4 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */; };
 		9D6DE6C31C94DDDD004011F2 /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6DE6C21C94DDDD004011F2 /* InternalVenueListTableViewCell.swift */; };
 		9D858BC41C56C55C00DBAA9E /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D858BC31C56C55C00DBAA9E /* TableViewHeaderView.swift */; };
@@ -360,6 +361,7 @@
 		9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDeserializer.swift; sourceTree = "<group>"; };
 		9D1D92071C4E117B00C1BB6C /* TrackGroupDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataStore.swift; sourceTree = "<group>"; };
 		9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchemaMigration.swift; path = ../DataAccess/SchemaMigration.swift; sourceTree = "<group>"; };
+		9D2372E51CA4AD5000008E33 /* EventsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsInteractor.swift; path = "Events/Business Logic/EventsInteractor.swift"; sourceTree = "<group>"; };
 		9D5A99CC1B948DC8002FFAA4 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RevealViewController.swift; path = "User Interface/RevealViewController.swift"; sourceTree = "<group>"; };
 		9D6DE6C21C94DDDD004011F2 /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
 		9D858BC31C56C55C00DBAA9E /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewHeaderView.swift; path = "User Interface/TableViewHeaderView.swift"; sourceTree = "<group>"; };
@@ -727,6 +729,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D2372E41CA4AD2600008E33 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				9D2372E51CA4AD5000008E33 /* EventsInteractor.swift */,
+			);
+			name = "Business Logic";
+			sourceTree = "<group>";
+		};
 		9D5A99CB1B948D5C002FFAA4 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -761,6 +771,7 @@
 		9D646AEA1BF120D300644FD0 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				9D2372E41CA4AD2600008E33 /* Business Logic */,
 				9D646AEB1BF120FB00644FD0 /* User Interface */,
 				9DAC06EA1BFB78CA00C1208F /* EventsWireframe.swift */,
 			);
@@ -2313,6 +2324,7 @@
 				CA9E425E1B7B9667005FDD22 /* VenueRoom.swift in Sources */,
 				CADE46351C1AFAE900B76E84 /* MemberProfileDetailViewController.swift in Sources */,
 				CA8E98D41B99D8C000CEBD2F /* VenueListWireframe.swift in Sources */,
+				9D2372E61CA4AD5000008E33 /* EventsInteractor.swift in Sources */,
 				CADDDBB61B73D1CA008F742E /* MenuViewController.swift in Sources */,
 				CADEE6EF1BACA934005152E1 /* SummitAttendeeDeserializer.swift in Sources */,
 				CAD47A161B84D559007741E7 /* DataStoreProtocol.swift in Sources */,

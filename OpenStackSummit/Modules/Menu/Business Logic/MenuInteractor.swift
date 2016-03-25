@@ -16,11 +16,15 @@ public protocol IMenuInteractor {
     func logout(completionBlock: (error: NSError?) -> Void)
     func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void)
     func getCurrentMember() -> MemberDTO?
+    func isDataLoaded() -> Bool
+    func isNetworkAvailable() -> Bool
 }
 
 public class MenuInteractor: NSObject, IMenuInteractor {
     let kAccessToken = "access_token"
     let kCurrentMember = "currentMember"
+    
+    var summitDataStore: ISummitDataStore!
     
     var securityManager: SecurityManager!
     var memberDTOAssembler: IMemberDTOAssembler!
@@ -69,5 +73,13 @@ public class MenuInteractor: NSObject, IMenuInteractor {
             memberDTO = memberDTOAssembler.createDTO(member)
         }
         return memberDTO
+    }
+    
+    public func isDataLoaded() -> Bool {
+        return summitDataStore.getActiveLocal() != nil
+    }
+    
+    public func isNetworkAvailable() -> Bool {
+        return reachability.isConnectedToNetwork()
     }
 }
