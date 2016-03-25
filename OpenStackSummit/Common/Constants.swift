@@ -12,6 +12,7 @@ struct Constants {
     struct Notifications {
         static let LoggedInNotification = "kLoggedInNotification"
         static let LoggedOutNotification = "kLoggedOutNotification"
+        static let ForcedLoggedOutNotification = "kForcedLoggedOutNotification"
     }
     struct SessionKeys {
         static let ActiveSummitTimeZone = "kActiveSummitTimeZone"
