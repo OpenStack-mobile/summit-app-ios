@@ -9,6 +9,7 @@
 import UIKit
 import SwiftSpinner
 import SWRevealViewController
+import AeroGearOAuth2
 
 @objc
 public protocol IMenuViewController: IMessageEnabledViewController {
@@ -137,6 +138,13 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         
         searchTextView.delegate = self
         
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "revokedAccess:",
+            name: OAuth2Module.revokeNotification,
+            object: nil)
+        
         presenter.viewLoad()
     }
     
@@ -181,5 +189,14 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
             presenter.searchFor(searchTextView.text!)
         }
         return true
+    }
+    
+    func revokedAccess(notification: NSNotification) {
+        presenter.revokedAccess()
+        showInfoMessage("Session expired", message: "Your session expired, please log in again using your credentials")
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
     }
 }
