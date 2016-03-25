@@ -75,11 +75,15 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func login() {
         if !interactor.isDataLoaded() {
-            viewController.showInfoMessage("Info", message: "Summit data is required to log in")
+            viewController.showInfoMessage("Info", message: "Summit data is required to log in  ")
             return
         }
         
         viewController.showActivityIndicator()
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.viewController.hideActivityIndicator()
+        }
         viewController.hideMenu()
         
         interactor.login { error in
