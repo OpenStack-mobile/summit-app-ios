@@ -114,7 +114,6 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     @IBAction func login(sender: UIButton) {
         if (presenter.hasAccessToMenuItem(MenuItem.Login)) {
-            SwiftSpinner.show("Please wait...")
             presenter.login()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
