@@ -1679,8 +1679,8 @@
 		CAE2A3B61C18ADBE0097857E /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CAE2A3B91C18AE460097857E /* LevelListPresenter.swift */,
 				CAE2A3BB1C18AE670097857E /* LevelListViewController.swift */,
+				CAE2A3B91C18AE460097857E /* LevelListPresenter.swift */,
 				CAE2A3BD1C18AF680097857E /* LevelTableViewCell.swift */,
 			);
 			path = "User Interface";
