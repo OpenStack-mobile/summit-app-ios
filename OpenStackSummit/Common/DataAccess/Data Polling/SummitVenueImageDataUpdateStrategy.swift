@@ -20,40 +20,36 @@ public class SummitVenueImageDataUpdateStrategy: DataUpdateStrategy {
     }
     
     public override func process(dataUpdate: DataUpdate) throws {
-        if let venueId = dataUpdate.originalJSON["entity"]["location_id"].int {
-            if let venue: Venue = genericDataStore.getByIdLocal(venueId) {
-                if let image = dataUpdate.entity as? Image {
-                    switch dataUpdate.operation {
-                    case .Insert:
-                        if (dataUpdate.className == "SummitLocationImage") {
+        switch dataUpdate.operation {
+        case .Insert:
+            if let venueId = dataUpdate.originalJSON["entity"]["location_id"].int {
+                if let venue: Venue = genericDataStore.getByIdLocal(venueId) {
+                    if let image = dataUpdate.entity as? Image {
+                        if (dataUpdate.entityClassName == "SummitLocationImage") {
                             try venueDataStore.addImage(image, toVenue: venue)
                         }
-                        if (dataUpdate.className == "SummitLocationMap") {
+                        if (dataUpdate.entityClassName == "SummitLocationMap") {
                             try venueDataStore.addMap(image, toVenue: venue)
                         }
-                    case .Update:
-                        genericDataStore.saveOrUpdateLocal(dataUpdate.entity, completionBlock: nil)
-                    case .Delete:
-                        if (dataUpdate.className == "SummitLocationImage") {
-                            try venueDataStore.removeImage(image, fromVenue: venue)
-                        }
-                        if (dataUpdate.className == "SummitLocationMap") {
-                            try venueDataStore.removeMap(image, fromVenue: venue)
-                        }
-                    default:
-                        break
+                    }
+                    else {
+                        throw DataUpdateError.InvalidOperationError("Entity is not an image")
                     }
                 }
                 else {
-                    throw DataUpdateError.InvalidOperationError("Entity is not an image")
+                    throw DataUpdateError.InvalidOperationError("Venue with id \(venueId) not found")
                 }
             }
             else {
-                throw DataUpdateError.InvalidOperationError("Venue with id \(venueId) not found")
+                throw DataUpdateError.InvalidOperationError("It wasn't possible to find location_id on data update json")
             }
+        case .Update:
+            genericDataStore.saveOrUpdateLocal(dataUpdate.entity, completionBlock: nil)
+        case .Delete:
+            genericDataStore.deleteLocal(dataUpdate.entity, completionBlock: nil)
+        default:
+            break
         }
-        else {
-            throw DataUpdateError.InvalidOperationError("It wasn't possible to find location_id on data update json")
-        }
+
     }
 }
