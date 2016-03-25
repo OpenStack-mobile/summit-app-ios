@@ -36,5 +36,6 @@ class TrackScheduleViewController: ScheduleViewController, ITrackScheduleViewCon
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "TRACK"
+        self.scheduleView.tableView.contentInset = UIEdgeInsetsMake(0, 0, 88, 0);
     }
 }
