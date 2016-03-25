@@ -28,11 +28,11 @@ PODS:
   - MTDates (1.0.0)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
-  - Realm (0.98.5):
-    - Realm/Headers (= 0.98.5)
-  - Realm/Headers (0.98.5)
-  - RealmSwift (0.98.5):
-    - Realm (= 0.98.5)
+  - Realm (0.98.6):
+    - Realm/Headers (= 0.98.6)
+  - Realm/Headers (0.98.6)
+  - RealmSwift (0.98.6):
+    - Realm (= 0.98.6)
   - SwiftSpinner (0.8.0)
   - SwiftyJSON (2.3.2)
   - SWRevealViewController (2.3.0)
@@ -83,7 +83,7 @@ CHECKOUT OPTIONS:
     :commit: 70679afadc0edf12761cf291925800a44a2a33c6
     :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
-    :commit: 5ab10410a6b8f81ed899ce287b6a9715698922f9
+    :commit: 41c0070cc7f4697733737c28502f8d985415d1d7
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
@@ -94,7 +94,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
-  AeroGearOAuth2: 005950319836e39e0ab13574ac6a2c7c2600c2f0
+  AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
   AMTagListView: 27073f013fe1f5687dbc936e63f94b73e210ed7a
@@ -110,8 +110,8 @@ SPEC CHECKSUMS:
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   MTDates: 1dbf92ecda49c0fc42bfd692bda3c471069b57ba
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
-  Realm: db08379969e45cea2edd1c3c0a090fe9e22d2d2f
-  RealmSwift: cb11ad1c35e15dc982f2dbf5afe2a3124193a358
+  Realm: 44803f35418c5d89b27825a564247fcd190de37e
+  RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
