@@ -16,6 +16,7 @@ public class MenuAssembly: TyphoonAssembly {
     var venuesAssembly: VenuesAssembly!
     var peopleAssembly: PeopleAssembly!
     var myProfileAssembly: MyProfileAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
     
@@ -48,6 +49,7 @@ public class MenuAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MenuInteractor.self) {
             (definition) in
             
+            definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
             definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
             definition.injectProperty("memberDTOAssembler", with: self.dtoAssemblersAssembly.memberDTOAssembler())
             definition.injectProperty("pushNotificationsManager", with: self.applicationAssembly.pushNotificationsManager())
