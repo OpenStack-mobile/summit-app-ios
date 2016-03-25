@@ -23,11 +23,11 @@ public protocol IMenuPresenter {
 }
 
 public class MenuPresenter: NSObject, IMenuPresenter {
-    var interactor: IMenuInteractor!
-    var wireframe: IMenuWireframe!
-    var viewController: IMenuViewController!
     var securityManager: SecurityManager!
     var session: ISession!
+    var viewController: IMenuViewController!
+    var interactor: IMenuInteractor!
+    var wireframe: IMenuWireframe!
     
     public override init() {
         super.init()
@@ -124,6 +124,10 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func searchFor(term: String) {
+        if !interactor.isDataLoaded() {
+            viewController.showInfoMessage("Info", message: "No summit data available")
+            return
+        }
         let sanitizedTerm = term.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
         session.set(Constants.SessionKeys.SearchTerm, value: sanitizedTerm)
         wireframe.showSearch()
@@ -134,10 +138,18 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func showVenues() {
+        if !interactor.isDataLoaded() {
+            viewController.showInfoMessage("Info", message: "No summit data available")
+            return
+        }
         wireframe.showVenues()
     }
     
     public func showPeopleOrSpeakers() {
+        if !interactor.isDataLoaded() {
+            viewController.showInfoMessage("Info", message: "No summit data available")
+            return
+        }
         if hasAccessToMenuItem(MenuItem.Attendees) {
             wireframe.showPeople()
         }
@@ -147,6 +159,10 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func showMyProfile() {
+        if !interactor.isDataLoaded() {
+            viewController.showInfoMessage("Info", message: "No summit data available")
+            return
+        }
         if let _ = interactor.getCurrentMember() {
             wireframe.showMyProfile()
         }
