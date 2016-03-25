@@ -14,13 +14,12 @@ public protocol IMessageEnabledViewController {
 }
 
 extension IMessageEnabledViewController {
+    func showInfoMessage(title: String, message: String) {
+        SweetAlert().showAlert(title, subTitle: message, style: AlertStyle.Warning)
+    }
     func showErrorMessage(error: NSError) {
         var message = error.localizedDescription
         message += "\n\nDomain: \(error.domain)\nCode: \(error.code)"
-        SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Warning)
-    }
-    
-    func showInfoMessage(title: String, message: String) {
-        SweetAlert().showAlert(title, subTitle: message, style: AlertStyle.Warning)
+        SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Error)
     }
 }

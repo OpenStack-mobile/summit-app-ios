@@ -10,10 +10,21 @@ import UIKit
 
 @objc
 public protocol IGeneralScheduleInteractor: IScheduleInteractor {
+    func isDataLoaded() -> Bool
+    func isNetworkAvailable() -> Bool
     func checkForClearDataEvents()
 }
 
 public class GeneralScheduleInteractor: ScheduleInteractor, IGeneralScheduleInteractor {
+    
+    public func isDataLoaded() -> Bool {
+        return summitDataStore.getActiveLocal() != nil
+    }
+    
+    public func isNetworkAvailable() -> Bool {
+        return reachability.isConnectedToNetwork()
+    }
+    
     public func checkForClearDataEvents() {
         dataUpdatePoller.clearDataIfTruncateEventExist()
     }
