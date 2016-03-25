@@ -22,6 +22,7 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         didSet {
             filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
             navigationController?.toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
+            navigationController?.toolbar.translucent = false
             navigationController?.setToolbarHidden(!activeFilterIndicator, animated: true)
         }
     }
