@@ -125,7 +125,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func searchFor(term: String) {
         if !interactor.isDataLoaded() {
-            viewController.showWarningMessage("No summit data available")
+            viewController.showInfoMessage("Info", message: "No summit data available")
             return
         }
         let sanitizedTerm = term.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
@@ -139,7 +139,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func showVenues() {
         if !interactor.isDataLoaded() {
-            viewController.showWarningMessage("No summit data available")
+            viewController.showInfoMessage("Info", message: "No summit data available")
             return
         }
         wireframe.showVenues()
@@ -147,7 +147,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func showPeopleOrSpeakers() {
         if !interactor.isDataLoaded() {
-            viewController.showWarningMessage("No summit data available")
+            viewController.showInfoMessage("Info", message: "No summit data available")
             return
         }
         if hasAccessToMenuItem(MenuItem.Attendees) {
@@ -160,7 +160,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     
     public func showMyProfile() {
         if !interactor.isDataLoaded() {
-            viewController.showWarningMessage("No summit data available")
+            viewController.showInfoMessage("Info", message: "No summit data available")
             return
         }
         if let _ = interactor.getCurrentMember() {
