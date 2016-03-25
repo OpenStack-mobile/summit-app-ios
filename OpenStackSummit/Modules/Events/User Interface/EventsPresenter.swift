@@ -20,6 +20,7 @@ public class EventsPresenter: NSObject, IEventsPresenter {
 
     var scheduleFilter: ScheduleFilter!
     
+    var interactor: IEventsInteractor!
     var viewController: IEventsViewController!
     var internalWireframe: IEventsWireframe!
     
@@ -41,6 +42,10 @@ public class EventsPresenter: NSObject, IEventsPresenter {
     }
     
     public func showFilters() {
+        if !interactor.isDataLoaded() {
+            viewController.showWarningMessage("No summit data available")
+            return
+        }
         wireframe.showFilters()
     }
     

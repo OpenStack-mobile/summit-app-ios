@@ -12,10 +12,20 @@ import Typhoon
 
 class EventsAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
+    var dataStoreAssembly: DataStoreAssembly!
     var generalScheduleAssembly: GeneralScheduleAssembly!
     var generalScheduleFilterAssembly: GeneralScheduleFilterAssembly!
     var trackListAssembly: TrackListAssembly!
     var levelListAssembly: LevelListAssembly!
+    
+    dynamic func eventsInteractor() -> AnyObject {
+        return TyphoonDefinition.withClass(EventsInteractor.self) {
+            (definition) in
+            
+            definition.injectProperty("reachability", with: self.applicationAssembly.reachability())
+            definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
+        }
+    }
     
     dynamic func eventsWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(EventsWireframe.self) {
@@ -33,6 +43,7 @@ class EventsAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("viewController", with: self.eventsViewController())
+            definition.injectProperty("interactor", with: self.eventsInteractor())
             definition.injectProperty("wireframe", with: self.eventsWireframe())
             definition.injectProperty("scheduleFilter", with: self.applicationAssembly.scheduleFilter())
             definition.injectProperty("generalScheduleViewController", with: self.generalScheduleAssembly.generalScheduleViewController())

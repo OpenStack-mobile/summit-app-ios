@@ -10,7 +10,7 @@ import XLPagerTabStrip
 import KTCenterFlowLayout
 
 @objc
-protocol IEventsViewController {
+protocol IEventsViewController: IMessageEnabledViewController {
     var activeFilterIndicator: Bool { get set }
 }
 
