@@ -19,6 +19,17 @@ public class SecurityManager: NSObject {
     
     var memberDataStore: IMemberDataStore!
     
+    public override init() {
+        super.init()
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "revokedAccess:",
+            name: OAuth2Module.revokeNotification,
+            object: nil)
+
+    }
+    
     private let kCurrentMemberId = "currentMemberId"
     private let kDeviceHadPasscode = "deviceHadPasscode"
     
@@ -154,14 +165,16 @@ public class SecurityManager: NSObject {
         }
     }
     
-    public func logout(completionBlock: (NSError?) -> Void) {
-        oauthModuleOpenID.revokeLocalAccess()
+    public func logout(completionBlock: ((NSError?) -> Void)?) {
+        oauthModuleOpenID.revokeLocalAccess(false)
         self.session.set(self.kCurrentMemberId, value: nil)
         let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
         
         // TODO: logout is no longer async, delete completition block
-        completionBlock(nil)
+        if completionBlock != nil {
+            completionBlock!(nil)
+        }
     }
     
     public func getCurrentMemberRole() -> MemberRoles{
@@ -191,4 +204,13 @@ public class SecurityManager: NSObject {
         return session.get(kCurrentMemberId) != nil
     }
     
+    func revokedAccess(notification: NSNotification) {
+        self.session.set(self.kCurrentMemberId, value: nil)
+        let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
