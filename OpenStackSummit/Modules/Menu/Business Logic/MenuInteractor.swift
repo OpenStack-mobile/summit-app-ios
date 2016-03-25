@@ -26,10 +26,10 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     
     var summitDataStore: ISummitDataStore!
     
+    var reachability: IReachability!
     var securityManager: SecurityManager!
     var memberDTOAssembler: IMemberDTOAssembler!
     var pushNotificationsManager: IPushNotificationsManager!
-    var reachability: IReachability!
     
     public func login(completionBlock: (error: NSError?) -> Void) {
         if !reachability.isConnectedToNetwork() {

@@ -74,6 +74,11 @@ public class MenuPresenter: NSObject, IMenuPresenter {
     }
     
     public func login() {
+        if !interactor.isDataLoaded() {
+            viewController.showInfoMessage("Info", message: "Summit data is required to log in")
+            return
+        }
+        
         viewController.showActivityIndicator()
         viewController.hideMenu()
         
