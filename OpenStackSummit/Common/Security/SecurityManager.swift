@@ -133,7 +133,7 @@ public class SecurityManager: NSObject {
             }
         }
         
-        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session(accountId: config.accountId!)
+        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
 
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
