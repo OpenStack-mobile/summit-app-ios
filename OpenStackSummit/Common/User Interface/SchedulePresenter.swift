@@ -89,7 +89,9 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     func loggedOut(notification: NSNotification) {
-        internalViewController.reloadSchedule()
+        if dayEvents != nil {
+            internalViewController.reloadSchedule()
+        }
     }
     
     func viewLoad(interactor: IScheduleInteractor, viewController: IScheduleViewController) {

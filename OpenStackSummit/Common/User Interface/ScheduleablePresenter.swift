@@ -10,6 +10,9 @@ import UIKit
 
 public class ScheduleablePresenter: NSObject {
     
+    var isOperationOngoing = false
+    
+    
     func toggleScheduledStatusForEvent(event: ScheduleItemDTO, scheduleableView: IScheduleableView, interactor: IScheduleableInteractor, completionBlock: ((NSError?) -> Void)?) {
         let isScheduled = interactor.isEventScheduledByLoggedMember(event.id)
         if (isScheduled) {
@@ -21,13 +24,21 @@ public class ScheduleablePresenter: NSObject {
     }
     
     func addEventToSchedule(event: ScheduleItemDTO, scheduleableView: IScheduleableView, interactor: IScheduleableInteractor, completionBlock: ((NSError?) -> Void)?) {
+        if isOperationOngoing {
+            return
+        }
+        
         scheduleableView.scheduled = true
+        
+        isOperationOngoing = true
         
         interactor.addEventToLoggedInMemberSchedule(event.id) { error in
             dispatch_async(dispatch_get_main_queue(),{
                 if (error != nil) {
                     scheduleableView.scheduled = !scheduleableView.scheduled
                 }
+                
+                self.isOperationOngoing = false
                 
                 if (completionBlock != nil) {
                     completionBlock!(error)
@@ -37,14 +48,22 @@ public class ScheduleablePresenter: NSObject {
     }
     
     func removeEventFromSchedule(event: ScheduleItemDTO, scheduleableView: IScheduleableView, interactor: IScheduleableInteractor, completionBlock: ((NSError?) -> Void)?) {
+        if isOperationOngoing {
+            return
+        }
+
         scheduleableView.scheduled = false
-        
+
+        isOperationOngoing = true
+       
         interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
             dispatch_async(dispatch_get_main_queue(),{
                 if (error != nil) {
                     scheduleableView.scheduled = !scheduleableView.scheduled
                 }
                 
+                self.isOperationOngoing = false
+
                 if (completionBlock != nil) {
                     completionBlock!(error)
                 }
