@@ -83,7 +83,7 @@ CHECKOUT OPTIONS:
     :commit: 70679afadc0edf12761cf291925800a44a2a33c6
     :git: https://github.com/claudioredi/aerogear-ios-http.git
   AeroGearOAuth2:
-    :commit: 41c0070cc7f4697733737c28502f8d985415d1d7
+    :commit: a078d1f67669101bb67647935e4026b7d3ed7568
     :git: https://github.com/claudioredi/aerogear-ios-oauth2.git
   AFHorizontalDayPicker:
     :commit: 56779f3fa763e7ba3e830c051f39e5238b4ac243
