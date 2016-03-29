@@ -108,7 +108,7 @@ class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate,
         cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
-        cell.layoutIfNeeded()
+        cell.layoutSubviews()
         return cell
     }
     
