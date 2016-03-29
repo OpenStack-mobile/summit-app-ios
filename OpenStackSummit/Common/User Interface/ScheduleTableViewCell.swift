@@ -28,7 +28,7 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     
     private var locationInternal = ""
     private var scheduledInternal = false
-
+    
     var eventTitle: String!{
         get {
             return eventNameLabel.text
@@ -125,10 +125,11 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
             scheduleButton.hidden = !newValue
         }
     }
-
+    
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var eventTypeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventTypeLabelWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventTypeLabelBaselineConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -146,7 +147,8 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     }
     
     override func layoutSubviews() {
-        super.layoutSubviews()
+        
+        eventTypeLabelWidthConstraint.constant = 0
         
         contentView.removeConstraint(eventTypeLabelBaselineConstraint)
         if eventTypeLabelTopConstraint != nil {
@@ -158,9 +160,19 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
                 sponsorsLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
         }
         else {
-            let toItem = locationLabel.text == "" ? eventNameLabel : locationLabel
+            var toItem = locationLabel.text == "" ? eventNameLabel : locationLabel
+            if sponsorsLabel.text != "" {
+                toItem = sponsorsLabel
+            }
+            
+            var toItemDistance = 15
+            if toItem == locationLabel && sponsorsLabel.text == "" && trackLabel.text == "" {
+                toItemDistance = 13
+                eventTypeLabelWidthConstraint.constant = 50
+            }
+            
             eventTypeLabelTopConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem:
-                toItem, attribute: NSLayoutAttribute.Bottom, multiplier: CGFloat(1), constant: CGFloat(12))
+                toItem, attribute: NSLayoutAttribute.Bottom, multiplier: CGFloat(1), constant: CGFloat(toItemDistance))
             
             contentView.addConstraint(eventTypeLabelTopConstraint)
             
@@ -169,10 +181,11 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
         
         contentView.addConstraint(eventTypeLabelBaselineConstraint)
-        contentView.updateConstraintsIfNeeded()
+        
+        super.layoutSubviews()
     }
     
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         // On cell selected, internal views lose background color http://stackoverflow.com/questions/6745919/uitableviewcell-subview-disappears-when-cell-is-selected
         let color = trackGroupColorBar.backgroundColor
