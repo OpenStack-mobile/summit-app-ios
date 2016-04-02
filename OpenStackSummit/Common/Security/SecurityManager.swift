@@ -100,7 +100,8 @@ public class SecurityManager: NSObject {
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
             scopes: ["openid", "\(Constants.Urls.ResourceServerBaseUrl)/summits/read", "\(Constants.Urls.ResourceServerBaseUrl)/summits/write", "offline_access"],
-            clientSecret: Constants.Auth.SecretOpenID
+            clientSecret: Constants.Auth.SecretOpenID,
+            isWebView: true
         )
         oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
