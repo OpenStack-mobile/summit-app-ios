@@ -68,11 +68,6 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
         navigationItem.title = "SEARCH"
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.viewLoad()
-    }
-    
     func reloadEvents() {
         eventsTableView.delegate = self
         eventsTableView.dataSource = self

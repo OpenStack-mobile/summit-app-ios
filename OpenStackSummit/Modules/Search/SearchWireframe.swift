@@ -11,7 +11,7 @@ import SWRevealViewController
 
 @objc
 public protocol ISearchWireframe {
-    func pushSearchResultsView()
+    func pushSearchResultsView(term: String)
     func showEventDetail(eventId: Int)
     func showTrackSchedule(track: TrackDTO)
     func showAttendeeProfile(attendeeId: Int)
@@ -26,7 +26,10 @@ public class SearchWireframe: NSObject, ISearchWireframe {
     var trackScheduleWireframe: ITrackScheduleWireframe!
     var memberProfileWireframe : IMemberProfileWireframe!
     
-    public func pushSearchResultsView() {
+    public func pushSearchResultsView(term: String) {
+        let _ = searchViewController.view! // this is only to force viewLoad to trigger
+        searchViewController.presenter.searchTerm = term
+        searchViewController.presenter.viewLoad()
         navigationController.setViewControllers([searchViewController], animated: false)
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }
