@@ -138,8 +138,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             return
         }
         let sanitizedTerm = term.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
-        session.set(Constants.SessionKeys.SearchTerm, value: sanitizedTerm)
-        wireframe.showSearch()
+        wireframe.showSearchFor(sanitizedTerm)
     }
     
     public func showEvents() {
