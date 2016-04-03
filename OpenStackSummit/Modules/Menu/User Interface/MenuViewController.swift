@@ -186,6 +186,11 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         if !searchTextView.text!.isEmpty {
             unselectMenuItems()
             presenter.searchFor(searchTextView.text!)
+            
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.searchTextView.text = ""
+            }
         }
         return true
     }
