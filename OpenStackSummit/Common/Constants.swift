@@ -17,7 +17,6 @@ struct Constants {
     struct SessionKeys {
         static let ActiveSummitTimeZone = "kActiveSummitTimeZone"
         static let GeneralScheduleFilterSelections = "kGeneralScheduleFilterSelections"
-        static let SearchTerm = "kSearchTerm"
     }
     struct Urls {
         #if DEBUG
