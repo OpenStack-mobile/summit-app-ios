@@ -10,6 +10,7 @@ import UIKit
 
 @objc
 public protocol ISearchPresenter {
+    var searchTerm: String! { get set }
     func showEventDetail(index: Int)
     func showTrackEvents(index: Int)
     func showSpeakerProfile(index: Int)
@@ -45,8 +46,7 @@ public class SearchPresenter: ScheduleablePresenter {
     var loadingSpeakers = false
     
     public func viewLoad() {
-        let searchTerm = session.get(Constants.SessionKeys.SearchTerm) as? String
-        if (searchTerm != nil && !searchTerm!.isEmpty) {
+        if searchTerm != nil && !searchTerm!.isEmpty {
             viewController.searchTerm = searchTerm
             search(searchTerm)
         }
@@ -58,8 +58,6 @@ public class SearchPresenter: ScheduleablePresenter {
         pageAttendees = 1
         speakers.removeAll()
         attendees.removeAll()
-        self.searchTerm = searchTerm
-        session.set(Constants.SessionKeys.SearchTerm, value: searchTerm)
         
         events = interactor.getEventsBySearchTerm(searchTerm)
         viewController.reloadEvents()
@@ -107,6 +105,7 @@ public class SearchPresenter: ScheduleablePresenter {
         cell.eventTitle = event.name
         cell.eventType = event.eventType
         cell.time = event.time
+        cell.location = event.location
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
