@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MemberOrderConfirmViewController: ViewController {
+class MemberOrderConfirmViewController: UIViewController {
 
 }
