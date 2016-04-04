@@ -181,6 +181,10 @@
 		CAD27E361BAB076000EE9583 /* MemberDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E351BAB076000EE9583 /* MemberDTO.swift */; };
 		CAD27E381BAB07F800EE9583 /* MemberDTOAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E371BAB07F800EE9583 /* MemberDTOAssembler.swift */; };
 		CAD27E3A1BAB0F2300EE9583 /* SecurityManagerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */; };
+		CAD2FBCD1CB0D13A0025E842 /* MemberOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2FBCC1CB0D13A0025E842 /* MemberOrderConfirmViewController.swift */; };
+		CAD2FBCF1CB0D1660025E842 /* MemberOrderConfirmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2FBCE1CB0D1660025E842 /* MemberOrderConfirmPresenter.swift */; };
+		CAD2FBD11CB0D1790025E842 /* MemberOrderConfirmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2FBD01CB0D1790025E842 /* MemberOrderConfirmInteractor.swift */; };
+		CAD2FBD31CB0D1900025E842 /* MemberOrderConfirmWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2FBD21CB0D1900025E842 /* MemberOrderConfirmWireframe.swift */; };
 		CAD337161BB1906A005B2953 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD337151BB1906A005B2953 /* Constants.swift */; };
 		CAD3620F1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3620E1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift */; };
 		CAD3ABAC1BA847C500F2186B /* SummitDeserializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD3ABAB1BA847C500F2186B /* SummitDeserializerTests.swift */; };
@@ -532,6 +536,10 @@
 		CAD27E351BAB076000EE9583 /* MemberDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDTO.swift; sourceTree = "<group>"; };
 		CAD27E371BAB07F800EE9583 /* MemberDTOAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberDTOAssembler.swift; sourceTree = "<group>"; };
 		CAD27E391BAB0F2300EE9583 /* SecurityManagerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityManagerAssembly.swift; sourceTree = "<group>"; };
+		CAD2FBCC1CB0D13A0025E842 /* MemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
+		CAD2FBCE1CB0D1660025E842 /* MemberOrderConfirmPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmPresenter.swift; sourceTree = "<group>"; };
+		CAD2FBD01CB0D1790025E842 /* MemberOrderConfirmInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmInteractor.swift; sourceTree = "<group>"; };
+		CAD2FBD21CB0D1900025E842 /* MemberOrderConfirmWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmWireframe.swift; sourceTree = "<group>"; };
 		CAD337151BB1906A005B2953 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CAD3620E1BB7946F0099AFA1 /* DataUpdateDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateDataStoreTests.swift; sourceTree = "<group>"; };
 		CAD3ABAB1BA847C500F2186B /* SummitDeserializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDeserializerTests.swift; sourceTree = "<group>"; };
@@ -1323,6 +1331,33 @@
 			path = Triggers;
 			sourceTree = "<group>";
 		};
+		CAD2FBC91CB0D0690025E842 /* Member Order Confirm */ = {
+			isa = PBXGroup;
+			children = (
+				CAD2FBCA1CB0D0690025E842 /* Business Logic */,
+				CAD2FBCB1CB0D0690025E842 /* User Interface */,
+				CAD2FBD21CB0D1900025E842 /* MemberOrderConfirmWireframe.swift */,
+			);
+			path = "Member Order Confirm";
+			sourceTree = "<group>";
+		};
+		CAD2FBCA1CB0D0690025E842 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CAD2FBD01CB0D1790025E842 /* MemberOrderConfirmInteractor.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		CAD2FBCB1CB0D0690025E842 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CAD2FBCC1CB0D13A0025E842 /* MemberOrderConfirmViewController.swift */,
+				CAD2FBCE1CB0D1660025E842 /* MemberOrderConfirmPresenter.swift */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
 		CAD47A171B85142D007741E7 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1510,8 +1545,8 @@
 		CADDDB8A1B73CDCA008F742E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				9D646AEA1BF120D300644FD0 /* Events */,
 				CAF2AA4B1B828E7C00D8E595 /* Event Detail */,
+				9D646AEA1BF120D300644FD0 /* Events */,
 				CACFBC381B9F8FF400095E44 /* Feedback Edit */,
 				CA4399841BD156C0008F378D /* Feedback Given List */,
 				CADDDB8B1B73CDDD008F742E /* General Schedule */,
@@ -1519,6 +1554,7 @@
 				CAD47A171B85142D007741E7 /* LaunchScreen */,
 				CAE2A3B41C18ADBE0097857E /* Level List */,
 				CAE2A3C11C18B34E0097857E /* Level Schedule */,
+				CAD2FBC91CB0D0690025E842 /* Member Order Confirm */,
 				CA89130A1B9794D7002E9A95 /* Member Profile */,
 				CADE462D1C1AFA9B00B76E84 /* Member Profile Detail */,
 				CADDDBB11B73D1CA008F742E /* Menu */,
@@ -1529,11 +1565,11 @@
 				CADD51021BD66B0900400AF4 /* Speaker Presentations */,
 				CAE643401BCD6039005E530B /* Track List */,
 				CAE643551BCDB625005E530B /* Track Schedule */,
+				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
+				CA8E98D01B99D8A900CEBD2F /* Venue List */,
+				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 				9DEA0FB41BFD0CDD0035B130 /* Venues */,
 				CADD51111BD80E8B00400AF4 /* Venues Map */,
-				CA8E98D01B99D8A900CEBD2F /* Venue List */,
-				CA8E98DD1B9A035700CEBD2F /* Venue Detail */,
-				CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -2150,6 +2186,7 @@
 			files = (
 				CAD9A2B41BD1F11E009269B5 /* PersonalSchedulePresenter.swift in Sources */,
 				CA02F8B71BA0BF7B005CD514 /* FeedbackEditAssembly.swift in Sources */,
+				CAD2FBD31CB0D1900025E842 /* MemberOrderConfirmWireframe.swift in Sources */,
 				CA0029F71B9E1E84001A9EDA /* VenueRoomDetailViewController.swift in Sources */,
 				CADE46331C1AFAD500B76E84 /* MemberProfileDetailPresenter.swift in Sources */,
 				CA416FA01B8FC45E00F177F5 /* SummitTypeDataStore.swift in Sources */,
@@ -2207,6 +2244,7 @@
 				CAF2AA3F1B8271C100D8E595 /* DeserializerStorage.swift in Sources */,
 				CAD9A2B81BD1F163009269B5 /* PersonalScheduleInteractor.swift in Sources */,
 				CAD542341B8B890A00A9791A /* Session.swift in Sources */,
+				CAD2FBCF1CB0D1660025E842 /* MemberOrderConfirmPresenter.swift in Sources */,
 				9DBB65451C10B55200F70B4E /* SpeakersViewController.swift in Sources */,
 				CACEEE691B8E3822007DD936 /* VenueTrigger.swift in Sources */,
 				CAE643521BCDA32F005E530B /* NamedDTO.swift in Sources */,
@@ -2257,6 +2295,7 @@
 				9D1D92081C4E117B00C1BB6C /* TrackGroupDataStore.swift in Sources */,
 				CAA3C3E11C1E01FC0088EC22 /* MyProfileWireframe.swift in Sources */,
 				CA1CBA891BB5EDF300E65D2B /* DataUpdateProcessor.swift in Sources */,
+				CAD2FBD11CB0D1790025E842 /* MemberOrderConfirmInteractor.swift in Sources */,
 				CADD511A1BD813BB00400AF4 /* VenuesMapViewController.swift in Sources */,
 				CAE643591BCDB648005E530B /* TrackScheduleViewController.swift in Sources */,
 				CA894AAA1BD92EFE005DE469 /* VenueDTO.swift in Sources */,
@@ -2318,6 +2357,7 @@
 				CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */,
 				CA1CBA921BB6436C00E65D2B /* DataUpdateStrategyFactory.swift in Sources */,
 				CAE2A3BC1C18AE670097857E /* LevelListViewController.swift in Sources */,
+				CAD2FBCD1CB0D13A0025E842 /* MemberOrderConfirmViewController.swift in Sources */,
 				CAE2A3C01C18B2280097857E /* LevelListWireframe.swift in Sources */,
 				CADF6CB31BFE2851007998BF /* PeopleListViewController.swift in Sources */,
 				CADB47AA1BF29C2C00CE0629 /* BaseViewController.swift in Sources */,
