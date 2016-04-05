@@ -47,7 +47,7 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     
     @IBOutlet weak var feedbackListActivityIndicator: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var eventDetailLabel: UILabel!
+    @IBOutlet weak var eventDetailTextView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -106,8 +106,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         set {
             eventDescriptionHTML = String(format:"<span style=\"font-family: Arial; font-size: 13\">%@</span>",newValue)
             let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            eventDetailLabel.attributedText = attrStr
-            eventDetailLabel.sizeToFit()
+            eventDetailTextView.attributedText = attrStr
+            eventDetailTextView.sizeToFit()
         }
     }
     var date: String! {
