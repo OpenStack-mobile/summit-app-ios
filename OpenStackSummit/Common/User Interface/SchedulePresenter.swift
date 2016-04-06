@@ -62,7 +62,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
-        cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
+        cell.isScheduledStatusVisible = internalInteractor.isLoggedInAndConfirmedAttendee()
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
     }
     

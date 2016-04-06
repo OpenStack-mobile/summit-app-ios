@@ -15,6 +15,7 @@ public class MenuAssembly: TyphoonAssembly {
     var eventsAssembly: EventsAssembly!
     var venuesAssembly: VenuesAssembly!
     var peopleAssembly: PeopleAssembly!
+    var memberOrderConfirmAssembly: MemberOrderConfirmAssembly!
     var myProfileAssembly: MyProfileAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
@@ -29,6 +30,7 @@ public class MenuAssembly: TyphoonAssembly {
             definition.injectProperty("venuesWireframe", with: self.venuesAssembly.venuesWireframe())
             definition.injectProperty("peopleWireframe", with: self.peopleAssembly.peopleWireframe())
             definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
+            definition.injectProperty("memberOrderConfirmWireframe", with: self.memberOrderConfirmAssembly.memberOrderConfirmWireframe())
         }
     }
     

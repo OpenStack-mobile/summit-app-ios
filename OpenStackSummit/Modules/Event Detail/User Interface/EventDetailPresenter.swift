@@ -51,13 +51,13 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.date = event.dateTime
         viewController.sponsors = event.sponsors
         viewController.summitTypes = event.summitTypes
-        viewController.allowFeedback = event.allowFeedback && event.finished && interactor.isMemberLoggedIn() && myFeedbackForEvent == nil
+        viewController.allowFeedback = event.allowFeedback && event.finished && interactor.isLoggedInAndConfirmedAttendee() && myFeedbackForEvent == nil
         viewController.hasSpeakers = event.speakers.count > 0
         viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()
         viewController.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
         viewController.hasMyFeedback = myFeedbackForEvent != nil
-        viewController.isScheduledStatusVisible = interactor.isMemberLoggedIn()
+        viewController.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
         viewController.tags = event.tags
         viewController.level = event.level
         viewController.track = event.track

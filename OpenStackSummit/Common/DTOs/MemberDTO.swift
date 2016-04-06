@@ -8,8 +8,7 @@
 
 import UIKit
 
-public class MemberDTO: NSObject {
-    public var id = 0
+public class MemberDTO: PersonDTO {
     public var speakerRole: PresentationSpeakerDTO?
     public var attendeeRole: SummitAttendeeDTO?
 }
