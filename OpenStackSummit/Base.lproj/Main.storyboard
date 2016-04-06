@@ -390,36 +390,36 @@
                                                     <constraint firstItem="6RS-51-rua" firstAttribute="leading" secondItem="mwg-iY-boO" secondAttribute="leading" constant="22" id="tr4-hk-rao"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" misplaced="YES" text="detail" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUp-9I-ebt">
-                                                <rect key="frame" x="22" y="273" width="557" height="77"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="detail" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="3WY-El-f2b" userLabel="Event Detail Text View">
+                                                <rect key="frame" x="22" y="289" width="557" height="37"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="WLF-Hv-LGa" secondAttribute="trailing" constant="21" id="1Cq-kB-7mh"/>
                                             <constraint firstAttribute="trailing" secondItem="hXL-fU-uBQ" secondAttribute="trailing" id="1Ht-uP-yhV"/>
                                             <constraint firstItem="YRm-Xr-3hF" firstAttribute="top" secondItem="dCz-Ew-COB" secondAttribute="top" constant="17" id="1Z5-Te-4yd"/>
-                                            <constraint firstItem="WLF-Hv-LGa" firstAttribute="top" secondItem="EUp-9I-ebt" secondAttribute="bottom" constant="8" id="1v1-B6-Axx"/>
                                             <constraint firstItem="C64-dv-dbM" firstAttribute="top" secondItem="hXL-fU-uBQ" secondAttribute="bottom" id="5Lz-KC-syI"/>
                                             <constraint firstItem="mwg-iY-boO" firstAttribute="top" secondItem="tr5-Zf-oUl" secondAttribute="bottom" constant="1" id="8qm-rT-Jhk"/>
                                             <constraint firstItem="tdC-c5-kFR" firstAttribute="top" secondItem="zi0-2e-FtU" secondAttribute="bottom" constant="8" id="998-DH-lUZ"/>
+                                            <constraint firstItem="WLF-Hv-LGa" firstAttribute="top" secondItem="3WY-El-f2b" secondAttribute="bottom" constant="8" id="9Kh-ev-Xdh"/>
                                             <constraint firstItem="tr5-Zf-oUl" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="9Qe-0s-La0"/>
                                             <constraint firstItem="Is1-sU-8Sx" firstAttribute="top" secondItem="tdC-c5-kFR" secondAttribute="bottom" id="9XB-fk-dOi"/>
                                             <constraint firstItem="tdC-c5-kFR" firstAttribute="centerX" secondItem="dCz-Ew-COB" secondAttribute="centerX" id="9aK-JU-Zd8"/>
+                                            <constraint firstItem="3WY-El-f2b" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" constant="22" id="Dk2-4B-EGd"/>
                                             <constraint firstItem="zi0-2e-FtU" firstAttribute="top" secondItem="mwg-iY-boO" secondAttribute="bottom" constant="1" id="EJp-v0-agO"/>
                                             <constraint firstAttribute="trailing" secondItem="tr5-Zf-oUl" secondAttribute="trailing" id="EoO-zD-eu8"/>
-                                            <constraint firstAttribute="trailing" secondItem="EUp-9I-ebt" secondAttribute="trailing" constant="21" id="EzL-5X-AwX"/>
                                             <constraint firstAttribute="trailing" secondItem="C64-dv-dbM" secondAttribute="trailing" id="FNU-9G-VVO"/>
                                             <constraint firstItem="Unj-wl-4Ar" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="Fvj-U5-2Pm"/>
-                                            <constraint firstItem="EUp-9I-ebt" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" constant="22" id="Hh4-II-HHs"/>
                                             <constraint firstItem="zi0-2e-FtU" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="HxG-dH-FYL"/>
                                             <constraint firstAttribute="trailing" secondItem="83H-NX-4z4" secondAttribute="trailing" id="Ibx-Kp-0sd"/>
-                                            <constraint firstItem="EUp-9I-ebt" firstAttribute="top" secondItem="C64-dv-dbM" secondAttribute="bottom" constant="20" id="JY4-f0-jVr"/>
                                             <constraint firstItem="McD-nP-sLs" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="Jbl-dE-Npf"/>
                                             <constraint firstItem="WLF-Hv-LGa" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" constant="22" id="NNM-7a-Xhl"/>
+                                            <constraint firstItem="3WY-El-f2b" firstAttribute="top" secondItem="C64-dv-dbM" secondAttribute="bottom" constant="20" id="OLy-Pg-Jac"/>
                                             <constraint firstAttribute="trailing" secondItem="McD-nP-sLs" secondAttribute="trailing" id="OsE-12-NvZ"/>
                                             <constraint firstAttribute="trailing" secondItem="l7v-6R-e83" secondAttribute="trailing" id="Rig-81-woe"/>
                                             <constraint firstItem="tr5-Zf-oUl" firstAttribute="top" secondItem="WLF-Hv-LGa" secondAttribute="bottom" constant="8" id="U5n-nK-qAR"/>
@@ -430,6 +430,7 @@
                                             <constraint firstItem="hXL-fU-uBQ" firstAttribute="top" secondItem="McD-nP-sLs" secondAttribute="bottom" id="lSa-yg-4uu"/>
                                             <constraint firstAttribute="trailing" secondItem="zi0-2e-FtU" secondAttribute="trailing" id="lt0-Hz-HTr"/>
                                             <constraint firstItem="l7v-6R-e83" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="pX1-sm-Ccd"/>
+                                            <constraint firstAttribute="trailing" secondItem="3WY-El-f2b" secondAttribute="trailing" constant="21" id="pwb-Xy-y5d"/>
                                             <constraint firstItem="Unj-wl-4Ar" firstAttribute="top" secondItem="l7v-6R-e83" secondAttribute="bottom" id="q8g-iR-0pD"/>
                                             <constraint firstItem="Is1-sU-8Sx" firstAttribute="leading" secondItem="dCz-Ew-COB" secondAttribute="leading" id="sfJ-Lw-5hQ"/>
                                             <constraint firstItem="l7v-6R-e83" firstAttribute="top" secondItem="Is1-sU-8Sx" secondAttribute="bottom" constant="8" id="tHw-81-T5v"/>
@@ -470,7 +471,7 @@
                     <size key="freeformSize" width="600" height="1100"/>
                     <connections>
                         <outlet property="activityIndicator" destination="jxf-nd-Hzl" id="b0d-OS-PSn"/>
-                        <outlet property="eventDetailLabel" destination="EUp-9I-ebt" id="GPg-0I-8hE"/>
+                        <outlet property="eventDetailTextView" destination="3WY-El-f2b" id="eTj-oh-YEW"/>
                         <outlet property="feedbackButton" destination="tdC-c5-kFR" id="mIs-Aw-JPa"/>
                         <outlet property="feedbackButtonHeightConstraint" destination="w2A-jz-E7G" id="zzI-Em-14s"/>
                         <outlet property="feedbackListActivityIndicator" destination="se2-52-2dN" id="Fnx-Al-WNT"/>
