@@ -7,7 +7,40 @@
 //
 
 import UIKit
+import SwiftSpinner
 
-class MemberOrderConfirmViewController: UIViewController {
+@objc
+protocol IMemberOrderConfirmViewController: IMessageEnabledViewController{
+    func showActivityIndicator()
+    func hideActivityIndicator()
+}
 
+class MemberOrderConfirmViewController: BaseViewController, IMemberOrderConfirmViewController, UITextFieldDelegate {
+    
+    @IBOutlet weak var orderNumberText: UITextField!
+    @IBOutlet weak var personPicker: UIPickerView!
+    var presenter : IMemberOrderConfirmPresenter!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        presenter.viewLoad()
+        orderNumberText.delegate = self
+    }
+    
+    func showActivityIndicator() {
+        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        orderNumberText.resignFirstResponder()
+        if !orderNumberText.text!.isEmpty {
+            presenter.orderConfirm(orderNumberText.text!)            
+        }
+        return true
+    }
 }

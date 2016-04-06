@@ -86,24 +86,30 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         }
         viewController.hideMenu()
         
-        interactor.login { error in
+        let completitionBlock: (error: NSError?) -> Void = { error in
             //defer { self.viewController.hideActivityIndicator() }
             
             if error != nil {
-                if error!.code == 404 {
-                    let notAttendeeError = NSError(domain: "You're not a summit attendee. You have to be registered as summit attendee in order to login", code: 2001, userInfo: nil)
-                    self.viewController.showErrorMessage(notAttendeeError)
-                }
-                else {
-                    self.viewController.showErrorMessage(error!)
-                }
+                self.viewController.showErrorMessage(error!)
                 return
             }
             
             self.showUserProfile()
             self.viewController.reloadMenu()
             self.viewController.hideActivityIndicator()
+            
+            if !self.interactor.isLoggedInAndConfirmedAttendee() {
+                self.wireframe.showMemberOrderConfirm()
+            }
         }
+        
+        let partialCompletitionBlock: (Void) -> Void = {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.viewController.showActivityIndicator()
+            })
+        }
+        
+        interactor.login(completitionBlock, partialCompletitionBlock: partialCompletitionBlock)
     }
     
     public func logout() {
@@ -171,8 +177,14 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             viewController.showInfoMessage("Info", message: "No summit data available")
             return
         }
+        
         if let _ = interactor.getCurrentMember() {
-            wireframe.showMyProfile()
+            if interactor.isLoggedInAndConfirmedAttendee() {
+                wireframe.showMyProfile()
+            }
+            else {
+                wireframe.showMemberOrderConfirm()
+            }
         }
     }
     
@@ -181,8 +193,11 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             if currentMember.speakerRole != nil {
                 showPersonProfile(currentMember.speakerRole!, error: nil)
             }
-            else {
+            else if currentMember.attendeeRole != nil {
                 showPersonProfile(currentMember.attendeeRole!, error: nil)
+            }
+            else {
+                showPersonProfile(currentMember, error: nil)
             }
         }
         else {

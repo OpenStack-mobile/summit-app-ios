@@ -13,6 +13,8 @@ import RealmSwift
 public protocol IMemberDataStore {
     func getByIdLocal(id: Int) -> Member?
     func getLoggedInMemberOrigin(completionBlock : (Member?, NSError?) -> Void)
+    func getLoggedInMemberBasicInfoOrigin(completionBlock : (Member?, NSError?) -> Void)
+    func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NamedEntity]?, NSError?) -> Void)
 }
 
 public class MemberDataStore: GenericDataStore, IMemberDataStore {
@@ -41,7 +43,21 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
         }
     }
     
+    public func getLoggedInMemberBasicInfoOrigin(completionBlock : (Member?, NSError?) -> Void)  {
+        memberRemoteStorage.getLoggedInMemberBasicInfo { member, error in
+                completionBlock(member, error)
+        }
+    }
+    
+    
     public func getByIdLocal(id: Int) -> Member? {
         return super.getByIdLocal(id)
     }
+    
+    public func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NamedEntity]?, NSError?) -> Void) {
+        memberRemoteStorage.getAttendeesForTicketOrder(orderNumber) { nonConfirmedAttendees, error in
+            completionBlock(nonConfirmedAttendees, error)
+        }
+    }
+
 }

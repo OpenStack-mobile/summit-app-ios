@@ -143,6 +143,7 @@
 		<string>MemberProfileDetailAssembly</string>
 		<string>SpeakerPresentationsAssembly</string>
 		<string>MyProfileAssembly</string>
+		<string>MemberOrderConfirmAssembly</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
