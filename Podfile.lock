@@ -36,7 +36,6 @@ PODS:
   - SwiftSpinner (0.8.0)
   - SwiftyJSON (2.3.2)
   - SWRevealViewController (2.3.0)
-  - TTTAttributedLabel (1.13.4)
   - Typhoon (3.4.5):
     - Typhoon/no-arc (= 3.4.5)
   - Typhoon/no-arc (3.4.5)
@@ -65,7 +64,6 @@ DEPENDENCIES:
   - SwiftSpinner
   - SwiftyJSON
   - SWRevealViewController
-  - TTTAttributedLabel
   - Typhoon
   - XLPagerTabStrip (from `https://github.com/gcutrini/XLPagerTabStrip.git`)
 
@@ -117,7 +115,6 @@ SPEC CHECKSUMS:
   SwiftSpinner: 11c2c5ec7443d92f3026d3067ca8a91d4adef13f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
-  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   Typhoon: 200100687af3233ec5ed019064df3c9ffe350475
   URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
   XLPagerTabStrip: a39467a6e71017d2be92807ed9308b4d06557c80

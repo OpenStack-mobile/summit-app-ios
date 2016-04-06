@@ -174,26 +174,31 @@ public class SecurityManager: NSObject {
                 return
             }
             
-            self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
-                
-                if error != nil {
-                    if error?.code == 404 {
-                        
-                        self.getLoggedInMemberBasicInfoOrigin(completionBlock)
-                    }
-                    else {
-                        completionBlock(error)
-                    }
+            
+            self.linkAttendeeIfExist(completionBlock);
+        }
+    }
+    
+    public func linkAttendeeIfExist(completionBlock: (NSError?) -> Void) {
+        self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
+            
+            if error != nil {
+                if error?.code == 404 {
+                    
+                    self.getLoggedInMemberBasicInfoOrigin(completionBlock)
                 }
                 else {
-                    self.session.set(self.kCurrentMemberId, value: member!.id)
-                    self.session.set(self.kCurrentMemberFullName, value: member!.fullName)
-                    
                     completionBlock(error)
-                    
-                    let notification = NSNotification(name: Constants.Notifications.LoggedInNotification, object:nil, userInfo:nil)
-                    NSNotificationCenter.defaultCenter().postNotification(notification)                    
                 }
+            }
+            else {
+                self.session.set(self.kCurrentMemberId, value: member!.id)
+                self.session.set(self.kCurrentMemberFullName, value: member!.fullName)
+                
+                completionBlock(error)
+                
+                let notification = NSNotification(name: Constants.Notifications.LoggedInNotification, object:nil, userInfo:nil)
+                NSNotificationCenter.defaultCenter().postNotification(notification)
             }
         }
     }

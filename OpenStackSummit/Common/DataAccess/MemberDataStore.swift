@@ -14,7 +14,8 @@ public protocol IMemberDataStore {
     func getByIdLocal(id: Int) -> Member?
     func getLoggedInMemberOrigin(completionBlock : (Member?, NSError?) -> Void)
     func getLoggedInMemberBasicInfoOrigin(completionBlock : (Member?, NSError?) -> Void)
-    func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NamedEntity]?, NSError?) -> Void)
+    func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NonConfirmedSummitAttendee]?, NSError?) -> Void)
+    func selectAttendeeFromOrderListOrigin(orderNumber: String, externalAttendeeId: Int, completionBlock : (NSError?) -> Void)
 }
 
 public class MemberDataStore: GenericDataStore, IMemberDataStore {
@@ -54,10 +55,15 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
         return super.getByIdLocal(id)
     }
     
-    public func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NamedEntity]?, NSError?) -> Void) {
+    public func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NonConfirmedSummitAttendee]?, NSError?) -> Void) {
         memberRemoteStorage.getAttendeesForTicketOrder(orderNumber) { nonConfirmedAttendees, error in
             completionBlock(nonConfirmedAttendees, error)
         }
     }
 
+    public func selectAttendeeFromOrderListOrigin(orderNumber: String, externalAttendeeId: Int, completionBlock : (NSError?) -> Void) {
+        memberRemoteStorage.selectAttendeeFromOrderList(orderNumber, externalAttendeeId: externalAttendeeId) { error in
+            completionBlock(error)
+        }
+    }
 }

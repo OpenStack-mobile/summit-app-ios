@@ -13,6 +13,9 @@ class MemberOrderConfirmAssembly: TyphoonAssembly {
     var applicationAssembly: ApplicationAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var dataStoreAssembly: DataStoreAssembly!
+    var securityManagerAssembly: SecurityManagerAssembly!
+    var eventsAssembly: EventsAssembly!
+
     
     dynamic func memberOrderConfirmWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MemberOrderConfirmWireframe.self) {
@@ -21,6 +24,7 @@ class MemberOrderConfirmAssembly: TyphoonAssembly {
             definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("revealViewController", with: self.applicationAssembly.revealViewController())
             definition.injectProperty("memberOrderConfirmViewController", with: self.memberOrderConfirmViewController())
+            definition.injectProperty("eventsWireframe", with: self.eventsAssembly.eventsWireframe())
         }
     }
     
@@ -38,6 +42,10 @@ class MemberOrderConfirmAssembly: TyphoonAssembly {
         
         return TyphoonDefinition.withClass(MemberOrderConfirmInteractor.self) {
             (definition) in
+            definition.injectProperty("memberDataStore", with: self.dataStoreAssembly.memberDataStore())
+            definition.injectProperty("reachability", with: self.applicationAssembly.reachability())
+            definition.injectProperty("securityManager", with: self.securityManagerAssembly.securityManager())
+            definition.injectProperty("namedDTOAssembler", with: self.dtoAssemblersAssembly.namedDTOAssembler())
         }
     }
     
