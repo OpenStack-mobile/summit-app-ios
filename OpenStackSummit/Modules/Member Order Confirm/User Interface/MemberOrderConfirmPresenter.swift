@@ -12,6 +12,7 @@ import UIKit
 protocol IMemberOrderConfirmPresenter {
     func viewLoad()
     func orderConfirm(orderNumber: String)
+    func selectAttendeeFromOrderList(index: Int)
 }
 
 class MemberOrderConfirmPresenter: NSObject, IMemberOrderConfirmPresenter {
@@ -20,6 +21,9 @@ class MemberOrderConfirmPresenter: NSObject, IMemberOrderConfirmPresenter {
     var wireframe: IMemberOrderConfirmWireframe!
     var viewController: IMemberOrderConfirmViewController!
     var orderNumber: String!
+    var nonConfirmedAttendees: [NamedDTO]?
+    let kOrderAlreadyInUse = "This Order# has already been associated with another user. If you feel this is an error, please contact summitsupport@openstack.org or enter a different Order #."
+    let kOrderNotFound = "Order wasn\'t found. Please verify that you provided correct order # and try again."
     
     func viewLoad() {
     
@@ -31,35 +35,65 @@ class MemberOrderConfirmPresenter: NSObject, IMemberOrderConfirmPresenter {
         self.orderNumber = orderNumber;
         
         interactor.getAttendeesForTicketOrder(orderNumber) { nonConfirmedAttendees, error in
-/*            if error != nil {
-                String friendlyMessage = message;
-                if (message.startsWith("412")) {
-                    friendlyMessage = view.getResources().getString(R.string.eventbrite_order_already_in_use);
+            defer { self.viewController.hideActivityIndicator(); }
+            
+            if error != nil {
+                if (error?.code == 412) {
+                    self.viewController.showInfoMessage("Info", message: self.kOrderAlreadyInUse)
                 }
-                else if (message.startsWith("404")) {
-                    friendlyMessage = view.getResources().getString(R.string.order_not_found);
+                else if (error?.code == 404) {
+                    self.viewController.showInfoMessage("Info", message: self.kOrderNotFound)
+
+                }
+                else {
+                    self.viewController.showErrorMessage(error!)
                 }
                 
-                self.viewController.showErrorMessage(error!)
                 return
             }
             
-            nonConfirmedSummitAttendeeDTOs = data;
+            self.nonConfirmedAttendees = nonConfirmedAttendees
             
-            if (nonConfirmedSummitAttendeeDTOs.size() == 0) {
-                view.showInfoMessage(view.getResources().getString(R.string.order_not_found));
+            if (nonConfirmedAttendees?.count == 0) {
+                self.viewController.showInfoMessage("Info", message: "Order wasn\'t found. Please verify that you provided correct order # and try again.");
             }
-            else if (nonConfirmedSummitAttendeeDTOs.size() == 1) {
-                selectAttendeeFromOrderList(0);
+            else if (nonConfirmedAttendees?.count == 1) {
+                self.selectAttendeeFromOrderList(0);
             }
-            else if (nonConfirmedSummitAttendeeDTOs.size() > 1) {
-                view.setAttendees(data);
+            else if (nonConfirmedAttendees?.count > 1) {
+                self.viewController.setSummitAttendees(nonConfirmedAttendees!);
             }
-            
-            view.hideActivityIndicator();*/
-            
-            
-            
+        
+            self.viewController.showAttendeesSelector(nonConfirmedAttendees?.count > 0)
+        }
+    }
+    
+    func selectAttendeeFromOrderList(index: Int) {
+
+        viewController.showActivityIndicator();
+        
+        if let nonConfirmedSummitAttendee =  nonConfirmedAttendees?[index] {
+            interactor.selectAttendeeFromOrderList(orderNumber,externalAttendeeId: nonConfirmedSummitAttendee.id) { error in
+                defer { self.viewController.hideActivityIndicator() }
+                
+                if error != nil {
+                    if (error?.code == 412) {
+                        self.viewController.showInfoMessage("Info", message: self.kOrderAlreadyInUse)
+                    }
+                    else if (error?.code == 404) {
+                        self.viewController.showInfoMessage("Info", message: self.kOrderNotFound)
+                        
+                    }
+                    else {
+                        self.viewController.showErrorMessage(error!)
+                    }
+                    
+                    return
+                }
+                
+                self.viewController.hideActivityIndicator()
+                self.wireframe.showEvents()
+            };
         }
     }
 }
