@@ -7,7 +7,20 @@
 //
 
 import UIKit
+import SWRevealViewController
 
-class MemberOrderConfirmWireframe: NSObject {
+@objc
+protocol IMemberOrderConfirmWireframe {
+    func pushMemberOrderConfirmView()
+}
 
+class MemberOrderConfirmWireframe: NSObject, IMemberOrderConfirmWireframe {
+    var navigationController: NavigationController!
+    var revealViewController: SWRevealViewController!
+    var memberOrderConfirmViewController: MemberOrderConfirmViewController!
+    
+    func pushMemberOrderConfirmView() {
+        navigationController.setViewControllers([memberOrderConfirmViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
 }

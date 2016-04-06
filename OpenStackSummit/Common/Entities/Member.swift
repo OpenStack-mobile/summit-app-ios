@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 @objc public enum MemberRoles: Int {
-    case Anonymous, Attendee, Speaker
+    case Anonymous, Attendee, Speaker, Member
 }
 
 public class Member: Person {
