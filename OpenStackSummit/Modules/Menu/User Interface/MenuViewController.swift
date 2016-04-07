@@ -19,6 +19,7 @@ public protocol IMenuViewController: IMessageEnabledViewController {
     func reloadMenu()
     func hideMenu()
     func navigateToHome()
+    func navigateToMyProfile()
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -173,6 +174,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     func navigateToHome() {
         toggleMenuSelection(eventsButton)
+    }
+    
+    func navigateToMyProfile() {
+        toggleMenuSelection(myProfileButton)
     }
     
     func showActivityIndicator() {
