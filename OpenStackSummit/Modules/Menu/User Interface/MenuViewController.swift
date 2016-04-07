@@ -148,8 +148,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     }
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        if let frontViewController = revealController.frontViewController {
-            frontViewController.view.userInteractionEnabled = position == FrontViewPosition.Left
+        if let navigationController = revealController.frontViewController {
+            if let viewController = navigationController.childViewControllers.first {
+                viewController.view.userInteractionEnabled = position != FrontViewPosition.Right
+            }
         }
     }
 
