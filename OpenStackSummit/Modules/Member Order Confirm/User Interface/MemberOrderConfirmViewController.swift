@@ -28,9 +28,26 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.viewLoad()
         orderNumberText.delegate = self
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: "resignOnTap:")
+        singleTap.numberOfTapsRequired = 1
+        singleTap.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(singleTap)
+        
+        menuButton.target = self
+        menuButton.action = Selector("menuButtonPressed:")
+        
         navigationController?.navigationBar.topItem?.title = "MY PROFILE"
+    }
+    
+    func menuButtonPressed(sender: UIBarButtonItem) {
+        orderNumberText.resignFirstResponder()
+        revealViewController().revealToggle(sender)
+    }
+    
+    func resignOnTap(sender: AnyObject) {
+        orderNumberText.resignFirstResponder()
     }
     
     func showActivityIndicator() {
