@@ -19,6 +19,7 @@ public protocol IMenuViewController: IMessageEnabledViewController {
     func reloadMenu()
     func hideMenu()
     func navigateToHome()
+    func navigateToMyProfile()
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -152,8 +153,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     }
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        if let frontViewController = revealController.frontViewController {
-            frontViewController.view.userInteractionEnabled = position == FrontViewPosition.Left
+        if let navigationController = revealController.frontViewController {
+            if let viewController = navigationController.childViewControllers.first {
+                viewController.view.userInteractionEnabled = position != FrontViewPosition.Right
+            }
         }
     }
 
@@ -175,6 +178,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     func navigateToHome() {
         toggleMenuSelection(eventsButton)
+    }
+    
+    func navigateToMyProfile() {
+        toggleMenuSelection(myProfileButton)
     }
     
     func showActivityIndicator() {
