@@ -40,11 +40,11 @@ public class AboutPresenter: NSObject, IAboutPresenter {
         dateFormatter.dateFormat = "dd, yyyy"
         let stringDateTo = dateFormatter.stringFromDate(summit.endDate)
         
-        return "\(stringDateFrom)\(stringDateTo)"
+        return "\(summit.name) - \(stringDateFrom)\(stringDateTo)"
     }
     
     func buildVersion() -> String? {
-        let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"]
+        let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey as String]
         
         return nsObject as? String
     }
