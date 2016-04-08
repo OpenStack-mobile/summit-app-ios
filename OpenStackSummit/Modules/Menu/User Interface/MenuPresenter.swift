@@ -100,7 +100,7 @@ public class MenuPresenter: NSObject, IMenuPresenter {
             self.viewController.hideActivityIndicator()
             
             if !self.interactor.isLoggedInAndConfirmedAttendee() {
-                self.wireframe.showMemberOrderConfirm()
+                self.viewController.navigateToMyProfile()
             }
         }
         
