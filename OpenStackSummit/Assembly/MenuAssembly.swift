@@ -20,6 +20,7 @@ public class MenuAssembly: TyphoonAssembly {
     var dataStoreAssembly: DataStoreAssembly!
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
+    var aboutAssembly: AboutAssembly!
     
     dynamic func menuWireframe() -> AnyObject {
         return TyphoonDefinition.withClass(MenuWireframe.self) {
@@ -30,7 +31,7 @@ public class MenuAssembly: TyphoonAssembly {
             definition.injectProperty("venuesWireframe", with: self.venuesAssembly.venuesWireframe())
             definition.injectProperty("peopleWireframe", with: self.peopleAssembly.peopleWireframe())
             definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
-            definition.injectProperty("memberOrderConfirmWireframe", with: self.memberOrderConfirmAssembly.memberOrderConfirmWireframe())
+            definition.injectProperty("aboutWireframe", with: self.aboutAssembly.aboutWireframe())
         }
     }
     

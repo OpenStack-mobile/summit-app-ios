@@ -144,6 +144,7 @@
 		<string>SpeakerPresentationsAssembly</string>
 		<string>MyProfileAssembly</string>
 		<string>MemberOrderConfirmAssembly</string>
+		<string>AboutAssembly</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
