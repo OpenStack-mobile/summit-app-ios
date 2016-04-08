@@ -1153,6 +1153,7 @@
 				CAE2A3CE1C18BDF90097857E /* LevelScheduleAssembly.swift */,
 				CA8913151B979A0B002E9A95 /* MemberProfileAssembly.swift */,
 				CADE46381C1AFC4500B76E84 /* MemberProfileDetailAssembly.swift */,
+				CADDB35F1CB2F0DD00A1A03A /* MemberOrderConfirmAssembly.swift */,
 				CAD542371B8B9B1500A9791A /* MenuAssembly.swift */,
 				CAA3C3E61C1E056A0088EC22 /* MyProfileAssembly.swift */,
 				CA583ACA1BC45CF700632ECF /* PeopleAssembly.swift */,
