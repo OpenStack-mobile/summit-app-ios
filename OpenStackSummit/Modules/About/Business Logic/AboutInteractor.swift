@@ -8,28 +8,18 @@
 
 import UIKit
 
-class AboutInteractor: UIViewController {
+@objc
+public protocol IAboutInteractor {
+    func getActiveSummit() -> SummitDTO
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+public class AboutInteractor: NSObject, IAboutInteractor {
+    var summitDataStore: ISummitDataStore!
+    var summitDTOAssembler: ISummitDTOAssembler!
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    public func getActiveSummit() -> SummitDTO {
+        let summit = summitDataStore.getActiveLocal()
+        let summitDTO = summitDTOAssembler.createDTO(summit!)
+        return summitDTO
     }
-    */
-
 }

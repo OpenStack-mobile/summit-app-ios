@@ -19,6 +19,7 @@ public protocol IMenuPresenter {
     func showVenues()
     func showPeopleOrSpeakers()
     func showMyProfile()
+    func showAbout()
     func revokedAccess()
 }
 
@@ -186,6 +187,15 @@ public class MenuPresenter: NSObject, IMenuPresenter {
                 wireframe.showMemberOrderConfirm()
             }
         }
+    }
+    
+    public func showAbout() {
+        if !interactor.isDataLoaded() {
+            viewController.showInfoMessage("Info", message: "No summit data available")
+            return
+        }
+        
+        wireframe.showAbout()
     }
     
     func showUserProfile() {

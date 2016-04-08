@@ -7,29 +7,21 @@
 //
 
 import UIKit
+import SWRevealViewController
 
-class AboutWireframe: UIViewController {
+@objc
+public protocol IAboutWireframe {
+    func pushAboutView()
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+public class AboutWireframe: NSObject, IAboutWireframe {
+    var navigationController: NavigationController!
+    var revealViewController: SWRevealViewController!
+    var aboutViewController: AboutViewController!
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    public func pushAboutView() {
+        navigationController.setViewControllers([aboutViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
     }
-    */
-
 }

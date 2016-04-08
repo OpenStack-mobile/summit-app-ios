@@ -8,28 +8,44 @@
 
 import UIKit
 
-class AboutPresenter: UIViewController {
+@objc
+public protocol IAboutPresenter {
+    func viewLoad()
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+public class AboutPresenter: NSObject, IAboutPresenter {
+    var interactor: IAboutInteractor!
+    var wireframe: IAboutWireframe!
+    var viewController: IAboutViewController!
+    
+    public func viewLoad() {
+        let summit = interactor.getActiveSummit()
+        let nameAndDate = buildNameDate(summit)
+        viewController.setNameAndDate(nameAndDate)
+        let version = buildVersion()
+        if let version = version {
+            viewController.setVersion("Version \(version)")
+        }
+        else {
+            viewController.setVersion("")
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func buildNameDate(summit: SummitDTO) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
+        dateFormatter.dateFormat = "MMMM dd-"
+        let stringDateFrom = dateFormatter.stringFromDate(summit.startDate)
+        
+        dateFormatter.dateFormat = "dd, yyyy"
+        let stringDateTo = dateFormatter.stringFromDate(summit.endDate)
+        
+        return "\(stringDateFrom)\(stringDateTo)"
     }
-    */
-
+    
+    func buildVersion() -> String? {
+        let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"]
+        
+        return nsObject as? String
+    }
 }
