@@ -31,6 +31,7 @@ public class MenuAssembly: TyphoonAssembly {
             definition.injectProperty("venuesWireframe", with: self.venuesAssembly.venuesWireframe())
             definition.injectProperty("peopleWireframe", with: self.peopleAssembly.peopleWireframe())
             definition.injectProperty("myProfileWireframe", with: self.myProfileAssembly.myProfileWireframe())
+            definition.injectProperty("memberOrderConfirmWireframe", with: self.memberOrderConfirmAssembly.memberOrderConfirmWireframe())
             definition.injectProperty("aboutWireframe", with: self.aboutAssembly.aboutWireframe())
         }
     }
