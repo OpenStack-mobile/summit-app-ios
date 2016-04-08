@@ -17,6 +17,7 @@ public protocol IMenuWireframe {
     func showSpeakers()
     func showMyProfile()
     func showMemberOrderConfirm()
+    func showAbout()
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
@@ -26,6 +27,7 @@ public class MenuWireframe: NSObject, IMenuWireframe {
     var peopleWireframe: IPeopleWireframe!
     var myProfileWireframe: IMyProfileWireframe!
     var memberOrderConfirmWireframe: IMemberOrderConfirmWireframe!
+    var aboutWireframe: IAboutWireframe!
     
     public func showSearchFor(term: String) {
         searchWireframe.pushSearchResultsView(term)
@@ -53,5 +55,9 @@ public class MenuWireframe: NSObject, IMenuWireframe {
     
     public func showMemberOrderConfirm() {
         memberOrderConfirmWireframe.pushMemberOrderConfirmView()
+    }
+    
+    public func showAbout() {
+        aboutWireframe.pushAboutView()
     }
 }

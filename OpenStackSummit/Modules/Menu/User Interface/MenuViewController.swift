@@ -31,6 +31,7 @@ public enum MenuItem: Int {
     case People
     case Attendees
     case MyProfile
+    case About
 }
 
 class MenuViewController: UIViewController, IMenuViewController, UITextFieldDelegate, SWRevealViewControllerDelegate {
@@ -82,6 +83,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     @IBOutlet weak var venuesButton: UIButton!
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
     
@@ -107,6 +109,8 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
             presenter.showPeopleOrSpeakers()
         case myProfileButton:
             presenter.showMyProfile()
+        case aboutButton:
+            presenter.showAbout()
         default:
             break
         }
