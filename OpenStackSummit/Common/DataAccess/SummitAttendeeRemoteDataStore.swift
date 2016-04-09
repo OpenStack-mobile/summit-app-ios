@@ -48,7 +48,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
             }
             catch {
                 let nsError = error as NSError
-                print(nsError)
+                printerr(nsError)
                 Crashlytics.sharedInstance().recordError(nsError)
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error deserializing summit attendees", value: nsError.localizedDescription, comment: "")]
                 friendlyError = NSError(domain: Constants.ErrorDomain, code: 4001, userInfo: userInfo)
@@ -80,7 +80,7 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
             catch {
                 let nsError = error as NSError
                 Crashlytics.sharedInstance().recordError(nsError)
-                print(nsError.localizedDescription)
+                printerr(nsError.localizedDescription)
                 innerError = NSError(domain: "There was an error deserializing summit attendee", code: 4002, userInfo: nil)
             }
             

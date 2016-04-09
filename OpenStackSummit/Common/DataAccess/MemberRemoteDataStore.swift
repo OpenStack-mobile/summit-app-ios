@@ -48,7 +48,7 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
                 }
                 catch {
                     let nsError = error as NSError
-                    print(nsError)
+                    printerr(nsError)
                     Crashlytics.sharedInstance().recordError(nsError)
                     let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error performing operation", value: nsError.localizedDescription, comment: "")]
                     let friendlyError = NSError(domain: Constants.ErrorDomain, code: 8001, userInfo: userInfo)
@@ -74,7 +74,7 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
                 }
                 catch {
                     let nsError = error as NSError
-                    print(nsError)
+                    printerr(nsError)
                     Crashlytics.sharedInstance().recordError(nsError)
                     let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error performing operation", value: nsError.localizedDescription, comment: "")]
                     let friendlyError = NSError(domain: Constants.ErrorDomain, code: 18001, userInfo: userInfo)
@@ -111,7 +111,7 @@ public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
                 }
                 catch {
                     let nsError = error as NSError
-                    print(nsError)
+                    printerr(nsError)
                     Crashlytics.sharedInstance().recordError(nsError)
                     let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error performing operation", value: nsError.localizedDescription, comment: "")]
                     let friendlyError = NSError(domain: Constants.ErrorDomain, code: 18002, userInfo: userInfo)

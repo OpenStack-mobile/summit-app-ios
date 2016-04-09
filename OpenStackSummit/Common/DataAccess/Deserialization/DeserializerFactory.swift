@@ -120,7 +120,7 @@ public class DeserializerFactory : NSObject {
         case "SummitLocationImage":
             deserializer = imageDeserializer
         default:
-            print("There is no deserializer for class \(className)")
+            printerr("There is no deserializer for class \(className)")
         }
         
         return deserializer
