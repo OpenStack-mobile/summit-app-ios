@@ -46,7 +46,7 @@ public extension IDeserializer {
             catch{
                 let nsError = error as NSError
                 Crashlytics.sharedInstance().recordError(nsError)
-                print(nsError.localizedDescription)
+                printerr(nsError.localizedDescription)
             }
         }
         
@@ -72,7 +72,7 @@ public extension IDeserializer {
         if (missedFields.count > 0) {
             let missedFieldsString = missedFields.joinWithSeparator(", ")
             let errorMessage = "\(self) Following fields are missed: \(missedFieldsString)"
-            print(errorMessage)
+            printerr(errorMessage)
             throw DeserializerError.BadFormat(errorMessage)
         }
     }

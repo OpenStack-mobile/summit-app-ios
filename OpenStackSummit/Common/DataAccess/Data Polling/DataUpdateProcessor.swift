@@ -36,7 +36,7 @@ public class DataUpdateProcessor: NSObject {
                 catch {
                     let nsError = error as NSError
                     Crashlytics.sharedInstance().recordError(nsError)
-                    print(nsError.localizedDescription)                    
+                    printerr(nsError.localizedDescription)
                 }
             }
             dataUpdateDataStore.saveOrUpdateLocal(dataUpdate, completionBlock: nil)

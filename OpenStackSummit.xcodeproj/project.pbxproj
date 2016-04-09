@@ -264,6 +264,7 @@
 		CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDBC31B74F1AB008F742E /* GeneralScheduleInteractor.swift */; };
 		CADE09971C08CB77002B21BA /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE09951C08CB77002B21BA /* FeedbackTableViewCell.swift */; };
 		CADE09981C08CB77002B21BA /* FeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CADE09961C08CB77002B21BA /* FeedbackTableViewCell.xib */; };
+		CADE1AB91CB8549E00B50905 /* UtilFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE1AB81CB8549E00B50905 /* UtilFunctions.swift */; };
 		CADE46311C1AFAC100B76E84 /* MemberProfileDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE46301C1AFAC100B76E84 /* MemberProfileDetailWireframe.swift */; };
 		CADE46331C1AFAD500B76E84 /* MemberProfileDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE46321C1AFAD500B76E84 /* MemberProfileDetailPresenter.swift */; };
 		CADE46351C1AFAE900B76E84 /* MemberProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADE46341C1AFAE900B76E84 /* MemberProfileDetailViewController.swift */; };
@@ -634,6 +635,7 @@
 		CADDDBC31B74F1AB008F742E /* GeneralScheduleInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleInteractor.swift; sourceTree = "<group>"; };
 		CADE09951C08CB77002B21BA /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackTableViewCell.swift; path = "User Interface/FeedbackTableViewCell.swift"; sourceTree = "<group>"; };
 		CADE09961C08CB77002B21BA /* FeedbackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedbackTableViewCell.xib; path = "User Interface/FeedbackTableViewCell.xib"; sourceTree = "<group>"; };
+		CADE1AB81CB8549E00B50905 /* UtilFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilFunctions.swift; sourceTree = "<group>"; };
 		CADE46301C1AFAC100B76E84 /* MemberProfileDetailWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailWireframe.swift; sourceTree = "<group>"; };
 		CADE46321C1AFAD500B76E84 /* MemberProfileDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailPresenter.swift; sourceTree = "<group>"; };
 		CADE46341C1AFAE900B76E84 /* MemberProfileDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailViewController.swift; sourceTree = "<group>"; };
@@ -1153,7 +1155,6 @@
 				CAE2A3CE1C18BDF90097857E /* LevelScheduleAssembly.swift */,
 				CA8913151B979A0B002E9A95 /* MemberProfileAssembly.swift */,
 				CADE46381C1AFC4500B76E84 /* MemberProfileDetailAssembly.swift */,
-				CADDB35F1CB2F0DD00A1A03A /* MemberOrderConfirmAssembly.swift */,
 				CAD542371B8B9B1500A9791A /* MenuAssembly.swift */,
 				CAA3C3E61C1E056A0088EC22 /* MyProfileAssembly.swift */,
 				CA583ACA1BC45CF700632ECF /* PeopleAssembly.swift */,
@@ -1584,6 +1585,7 @@
 				CAD542331B8B890A00A9791A /* Session.swift */,
 				CABAB9B71BCFEA1300CB867E /* ScheduleFilter.swift */,
 				CADE71231BD5369800EAC8EF /* ScheduleWireframe.swift */,
+				CADE1AB81CB8549E00B50905 /* UtilFunctions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2310,6 +2312,7 @@
 				CAD2616A1B8D6C9500E6382F /* SummitTrigger.swift in Sources */,
 				CA8E98DA1B99D94F00CEBD2F /* VenueListInteractor.swift in Sources */,
 				CAE0EFA01BECF36000550C91 /* UIView+Border.swift in Sources */,
+				CADE1AB91CB8549E00B50905 /* UtilFunctions.swift in Sources */,
 				CA5B6D1E1BB58DDC00D28499 /* DataUpdateDeserializer.swift in Sources */,
 				CA8E98D61B99D90B00CEBD2F /* VenueListViewController.swift in Sources */,
 				CA13BE661B78EF60007BFD34 /* EventDetailAssembly.swift in Sources */,
