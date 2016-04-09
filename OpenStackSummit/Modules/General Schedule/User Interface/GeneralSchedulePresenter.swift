@@ -55,6 +55,8 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
             return
         }
         
+        viewController.showActivityIndicator()
+        
         scheduleFilter.hasToRefreshSchedule = false
         
         if !interactor.isDataLoaded() && !interactor.isNetworkAvailable() {
