@@ -16,11 +16,7 @@ public protocol IGeneralScheduleInteractor: IScheduleInteractor {
 }
 
 public class GeneralScheduleInteractor: ScheduleInteractor, IGeneralScheduleInteractor {
-    
-    public func isDataLoaded() -> Bool {
-        return summitDataStore.getActiveLocal() != nil
-    }
-    
+        
     public func isNetworkAvailable() -> Bool {
         return reachability.isConnectedToNetwork()
     }
