@@ -93,6 +93,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         venuesButton.alpha = 0.5
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
+        aboutButton.alpha = 0.5
     }
     
     @IBAction func toggleMenuSelection(sender: UIButton) {

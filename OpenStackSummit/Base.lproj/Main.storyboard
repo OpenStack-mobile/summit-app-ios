@@ -1559,12 +1559,24 @@
                                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ijg-Sd-evh">
                                                 <rect key="frame" x="18" y="19" width="563" height="325"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Austin -April 24,29 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOf-FF-lCr">
-                                                        <rect key="frame" x="20" y="25" width="527" height="26"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                        <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t8d-Rp-OMp">
+                                                        <rect key="frame" x="105" y="69" width="357" height="185"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-2I-o6b">
+                                                                <rect key="frame" x="28" y="25" width="300" height="135"/>
+                                                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.08235294118" green="0.15686274510000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="centerY" secondItem="t8d-Rp-OMp" secondAttribute="centerY" id="CqJ-hR-FKO"/>
+                                                            <constraint firstAttribute="bottom" secondItem="IZi-2I-o6b" secondAttribute="bottom" constant="20" id="GVv-cZ-BBM"/>
+                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="leading" secondItem="t8d-Rp-OMp" secondAttribute="leading" constant="28" id="PhZ-mA-Q3c"/>
+                                                            <constraint firstAttribute="trailing" secondItem="IZi-2I-o6b" secondAttribute="trailing" constant="28" id="bag-ZY-qqU"/>
+                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="centerX" secondItem="t8d-Rp-OMp" secondAttribute="centerX" id="mF1-4A-bVw"/>
+                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="top" secondItem="t8d-Rp-OMp" secondAttribute="top" constant="20" id="oBX-ms-Eev"/>
+                                                        </constraints>
+                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUY-ka-gDf">
                                                         <rect key="frame" x="220" y="262" width="128" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1578,29 +1590,17 @@
                                                             <action selector="websiteTouch:" destination="nlY-lO-yVV" eventType="touchUpInside" id="5CM-gi-0Iu"/>
                                                         </connections>
                                                     </button>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t8d-Rp-OMp">
-                                                        <rect key="frame" x="105" y="69" width="357" height="185"/>
-                                                        <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-2I-o6b">
-                                                                <rect key="frame" x="28" y="25" width="300" height="135"/>
-                                                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </imageView>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.08235294118" green="0.15686274510000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="centerY" secondItem="t8d-Rp-OMp" secondAttribute="centerY" id="CqJ-hR-FKO"/>
-                                                            <constraint firstAttribute="bottom" secondItem="IZi-2I-o6b" secondAttribute="bottom" constant="25" id="GVv-cZ-BBM"/>
-                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="leading" secondItem="t8d-Rp-OMp" secondAttribute="leading" constant="28" id="PhZ-mA-Q3c"/>
-                                                            <constraint firstAttribute="trailing" secondItem="IZi-2I-o6b" secondAttribute="trailing" constant="28" id="bag-ZY-qqU"/>
-                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="centerX" secondItem="t8d-Rp-OMp" secondAttribute="centerX" id="mF1-4A-bVw"/>
-                                                            <constraint firstItem="IZi-2I-o6b" firstAttribute="top" secondItem="t8d-Rp-OMp" secondAttribute="top" constant="25" id="oBX-ms-Eev"/>
-                                                        </constraints>
-                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Austin -April 24,29 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOf-FF-lCr">
+                                                        <rect key="frame" x="20" y="23" width="527" height="26"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                        <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="JUY-ka-gDf" firstAttribute="centerX" secondItem="Ijg-Sd-evh" secondAttribute="centerX" constant="2.5" id="8bE-vV-8Ok"/>
-                                                    <constraint firstItem="YOf-FF-lCr" firstAttribute="top" secondItem="Ijg-Sd-evh" secondAttribute="top" constant="25" id="NJ1-YE-p7Y"/>
+                                                    <constraint firstItem="YOf-FF-lCr" firstAttribute="top" secondItem="Ijg-Sd-evh" secondAttribute="top" constant="23" id="NJ1-YE-p7Y"/>
                                                     <constraint firstItem="JUY-ka-gDf" firstAttribute="top" secondItem="t8d-Rp-OMp" secondAttribute="bottom" constant="8" id="Oy4-oD-c5E"/>
                                                     <constraint firstItem="t8d-Rp-OMp" firstAttribute="leading" secondItem="Ijg-Sd-evh" secondAttribute="leading" constant="18" id="RcK-9a-q46"/>
                                                     <constraint firstAttribute="trailing" secondItem="YOf-FF-lCr" secondAttribute="trailing" constant="16" id="XlC-FS-2Bd"/>
@@ -1613,15 +1613,15 @@
                                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wzh-ev-hoe">
                                                 <rect key="frame" x="18" y="361" width="563" height="220"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ts-ci-j3U">
-                                                        <rect key="frame" x="17" y="8" width="529" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNN-gn-gYG">
                                                         <rect key="frame" x="17" y="43" width="529" height="169"/>
                                                         <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ts-ci-j3U">
+                                                        <rect key="frame" x="17" y="14" width="529" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -1634,9 +1634,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="3ts-ci-j3U" secondAttribute="trailing" constant="17" id="55F-vW-x58"/>
                                                     <constraint firstItem="GNN-gn-gYG" firstAttribute="leading" secondItem="Wzh-ev-hoe" secondAttribute="leading" constant="17" id="DUS-AA-7zW"/>
                                                     <constraint firstAttribute="trailing" secondItem="GNN-gn-gYG" secondAttribute="trailing" constant="17" id="POm-DJ-W14"/>
-                                                    <constraint firstItem="3ts-ci-j3U" firstAttribute="top" secondItem="Wzh-ev-hoe" secondAttribute="top" constant="8" id="Vy4-E5-qlM"/>
-                                                    <constraint firstItem="GNN-gn-gYG" firstAttribute="top" secondItem="3ts-ci-j3U" secondAttribute="bottom" constant="14" id="eoN-BO-251"/>
-                                                    <constraint firstAttribute="bottom" secondItem="GNN-gn-gYG" secondAttribute="bottom" constant="8" id="fsh-Zy-q3x"/>
+                                                    <constraint firstItem="3ts-ci-j3U" firstAttribute="top" secondItem="Wzh-ev-hoe" secondAttribute="top" constant="17" id="Vy4-E5-qlM"/>
+                                                    <constraint firstItem="GNN-gn-gYG" firstAttribute="top" secondItem="3ts-ci-j3U" secondAttribute="bottom" constant="10" id="eoN-BO-251"/>
+                                                    <constraint firstAttribute="bottom" secondItem="GNN-gn-gYG" secondAttribute="bottom" constant="15" id="fsh-Zy-q3x"/>
                                                     <constraint firstItem="3ts-ci-j3U" firstAttribute="centerX" secondItem="Wzh-ev-hoe" secondAttribute="centerX" id="xBc-qn-FtA"/>
                                                 </constraints>
                                             </view>
@@ -2329,15 +2329,6 @@
                                                     <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="Mlp-Qi-cRs"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People or Speakers Button">
-                                                <rect key="frame" x="20" y="117" width="400" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="PEOPLE OR SPEAKERS" image="people"/>
-                                                <connections>
-                                                    <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="AVS-uD-tYc"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">
                                                 <rect key="frame" x="20" y="213" width="400" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -2351,9 +2342,18 @@
                                                 <rect key="frame" x="20" y="165" width="400" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="ABOUT" image="people"/>
+                                                <state key="normal" title="ABOUT" image="ABOUT"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="hHx-er-Clo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People or Speakers Button">
+                                                <rect key="frame" x="20" y="117" width="400" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="PEOPLE OR SPEAKERS" image="people"/>
+                                                <connections>
+                                                    <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="AVS-uD-tYc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -2547,6 +2547,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ABOUT" width="29" height="29"/>
         <image name="Submenu_Feedback" width="23" height="22"/>
         <image name="alert" width="167" height="150"/>
         <image name="arrow" width="10" height="15"/>
