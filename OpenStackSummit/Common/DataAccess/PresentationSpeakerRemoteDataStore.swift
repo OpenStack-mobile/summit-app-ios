@@ -45,7 +45,7 @@ public class PresentationSpeakerRemoteDataStore: NSObject {
             }
             catch {
                 let nsError = error as NSError
-                print(nsError)
+                printerr(nsError)
                 Crashlytics.sharedInstance().recordError(nsError)
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error deserializing presentation speakers", value: nsError.localizedDescription, comment: "")]
                 friendlyError = NSError(domain: Constants.ErrorDomain, code: 3001, userInfo: userInfo)

@@ -64,7 +64,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
             return
         }
         
-        print("Polling server for data updates")
+        printdeb("Polling server for data updates")
         
         let http = securityManager.isLoggedIn() ? httpFactory.create(HttpType.OpenIDJson) : httpFactory.create(HttpType.ServiceAccount)
         var url: String!
@@ -87,20 +87,20 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         
         http.GET(url) {(responseObject, error) in
             if (error != nil) {
-                print("Error polling server for data updates: \(error)")
+                printerr("Error polling server for data updates: \(error)")
                 Crashlytics.sharedInstance().recordError(error!)
                 return
             }
             
             let json = responseObject as! String
-            print("Data updates: \(json)")
+            printdeb("Data updates: \(json)")
 
             do {
                 try self.dataUpdateProcessor.process(json)
             }
             catch {
                 let nsError = error as NSError
-                print("There was an error processing updates from server: \(error)")
+                printerr("There was an error processing updates from server: \(error)")
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error processing updates from server: \(error)", value: nsError.localizedDescription, comment: "")]
                 let friendlyError = NSError(domain: Constants.ErrorDomain, code: 1, userInfo: userInfo)
                 Crashlytics.sharedInstance().recordError(friendlyError)

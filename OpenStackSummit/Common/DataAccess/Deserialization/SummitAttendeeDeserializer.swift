@@ -56,7 +56,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
                     summitAttendee.scheduledEvents.append(event)
                 } catch {
                     let nsError = error as NSError
-                    print(nsError)
+                    printerr(nsError)
                     Crashlytics.sharedInstance().recordError(nsError)
                 }
             }
@@ -81,7 +81,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
                 }
                 catch {
                     let nsError = error as NSError
-                    print(nsError)
+                    printerr(nsError)
                     Crashlytics.sharedInstance().recordError(nsError)                    
                 }
             }
