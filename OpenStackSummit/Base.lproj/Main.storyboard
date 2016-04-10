@@ -1769,6 +1769,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="confirmButtonPressed:" destination="toq-tU-0nx" eventType="touchDown" id="eTT-ll-fos"/>
                                             <action selector="leaveFeedback:" destination="xso-DC-v1V" eventType="touchUpInside" id="eBb-B5-2Er"/>
                                         </connections>
                                     </button>
