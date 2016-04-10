@@ -14,7 +14,7 @@ class MemberOrderConfirmAssembly: TyphoonAssembly {
     var dtoAssemblersAssembly: DTOAssemblersAssembly!
     var dataStoreAssembly: DataStoreAssembly!
     var securityManagerAssembly: SecurityManagerAssembly!
-    var eventsAssembly: EventsAssembly!
+    var menuAssembly: MenuAssembly!
 
     
     dynamic func memberOrderConfirmWireframe() -> AnyObject {
@@ -24,7 +24,7 @@ class MemberOrderConfirmAssembly: TyphoonAssembly {
             definition.injectProperty("navigationController", with: self.applicationAssembly.navigationController())
             definition.injectProperty("revealViewController", with: self.applicationAssembly.revealViewController())
             definition.injectProperty("memberOrderConfirmViewController", with: self.memberOrderConfirmViewController())
-            definition.injectProperty("eventsWireframe", with: self.eventsAssembly.eventsWireframe())
+            definition.injectProperty("menuWireframe", with: self.menuAssembly.menuWireframe())
         }
     }
     

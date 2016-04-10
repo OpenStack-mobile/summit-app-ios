@@ -21,6 +21,7 @@ public protocol IMenuWireframe {
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
+    var menuPresenter: IMenuPresenter!
     var searchWireframe: ISearchWireframe!
     var eventsWireframe: IEventsWireframe!
     var venuesWireframe: IVenuesWireframe!
@@ -34,6 +35,7 @@ public class MenuWireframe: NSObject, IMenuWireframe {
     }
     
     public func showEvents() {
+        menuPresenter.highlight(MenuItem.Events)
         eventsWireframe.pushEventsView()
     }
     

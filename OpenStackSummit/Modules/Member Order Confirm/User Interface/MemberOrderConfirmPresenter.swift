@@ -88,6 +88,8 @@ class MemberOrderConfirmPresenter: NSObject, IMemberOrderConfirmPresenter {
                         self.viewController.showErrorMessage(error!)
                     }
                     
+                    self.viewController.showAttendeesSelector(false)
+                    
                     return
                 }
                 
