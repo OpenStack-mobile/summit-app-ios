@@ -18,6 +18,7 @@ public protocol IMenuViewController: IMessageEnabledViewController {
 
     func reloadMenu()
     func hideMenu()
+    func highlight(item: MenuItem)
     func navigateToHome()
     func navigateToMyProfile()
     func showActivityIndicator()
@@ -26,6 +27,7 @@ public protocol IMenuViewController: IMessageEnabledViewController {
 
 @objc
 public enum MenuItem: Int {
+    case None
     case Login
     case Events
     case Venues
@@ -87,7 +89,7 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     @IBOutlet weak var aboutButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
-    
+
     private func unselectMenuItems() {
         eventsButton.alpha = 0.5
         venuesButton.alpha = 0.5
@@ -96,26 +98,51 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
         aboutButton.alpha = 0.5
     }
     
-    @IBAction func toggleMenuSelection(sender: UIButton) {
+    func highlight(item: MenuItem) {
         
         unselectMenuItems()
         
-        sender.alpha = 1
+        switch item {
+        case .Events:
+            eventsButton.alpha = 1
+        case .Venues:
+            venuesButton.alpha = 1
+        case .People:
+            peopleButton.alpha = 1
+        case .MyProfile:
+            myProfileButton.alpha = 1
+        case .About:
+            aboutButton.alpha = 1
+        default:
+            break
+        }
+    }
+    
+    @IBAction func toggleMenuSelection(sender: UIButton) {
+        
+        var item: MenuItem = .None
         
         switch sender {
         case eventsButton:
             presenter.showEvents()
+            item = .Events
         case venuesButton:
             presenter.showVenues()
+            item = .Venues
         case peopleButton:
             presenter.showPeopleOrSpeakers()
+            item = .People
         case myProfileButton:
             presenter.showMyProfile()
+            item = .MyProfile
         case aboutButton:
             presenter.showAbout()
+            item = .About
         default:
             break
         }
+        
+        highlight(item)
     }
     
     @IBAction func login(sender: UIButton) {

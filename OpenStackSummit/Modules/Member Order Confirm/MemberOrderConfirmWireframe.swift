@@ -19,7 +19,7 @@ class MemberOrderConfirmWireframe: NSObject, IMemberOrderConfirmWireframe {
     var navigationController: NavigationController!
     var revealViewController: SWRevealViewController!
     var memberOrderConfirmViewController: MemberOrderConfirmViewController!
-    var eventsWireframe: IEventsWireframe!
+    var menuWireframe: IMenuWireframe!
     
     func pushMemberOrderConfirmView() {
         navigationController.setViewControllers([memberOrderConfirmViewController], animated: false)
@@ -27,7 +27,7 @@ class MemberOrderConfirmWireframe: NSObject, IMemberOrderConfirmWireframe {
     }
     
     func showEvents() {
-        eventsWireframe.pushEventsView()
+        menuWireframe.showEvents()
     }
     
 }
