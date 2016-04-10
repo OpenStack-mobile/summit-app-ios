@@ -14,7 +14,8 @@ public class DeserializerStorage: NSObject {
     var realm = try! Realm()
     
     public func add<T : BaseEntity>(entity: T) {
-        let className = _stdlib_getDemangledTypeName(entity)
+        let mirror = Mirror(reflecting: entity)
+        let className = String(reflecting: mirror.subjectType)
         if (deserializedEntityDictionary[className] == nil) {
             deserializedEntityDictionary[className] = Dictionary<Int, T>()
         }
@@ -23,7 +24,8 @@ public class DeserializerStorage: NSObject {
     
     public func get<T : BaseEntity>(id: Int) -> T? {
         var entity: T?
-        let className = _stdlib_getDemangledTypeName(T())
+        let mirror = Mirror(reflecting: T())
+        let className = String(reflecting: mirror.subjectType)
         entity = deserializedEntityDictionary[className]?[id] as? T
         if (entity == nil) {
             entity = realm.objects(T.self).filter("id = \(id)").first
@@ -33,7 +35,8 @@ public class DeserializerStorage: NSObject {
     
     public func getAll<T : BaseEntity>() -> [T] {
         let entity = T()
-        let className = _stdlib_getDemangledTypeName(entity)
+        let mirror = Mirror(reflecting: entity)
+        let className = String(reflecting: mirror.subjectType)
         
         var array = [T]()
         if let values = deserializedEntityDictionary[className]?.values {
@@ -46,7 +49,8 @@ public class DeserializerStorage: NSObject {
     }
     
     public func exist<T : BaseEntity>(entity: T) -> Bool {
-        let className = _stdlib_getDemangledTypeName(entity)
+        let mirror = Mirror(reflecting: entity)
+        let className = String(reflecting: mirror.subjectType)
         return deserializedEntityDictionary[className]?[entity.id] != nil || realm.objects(T.self).filter("id = \(entity.id)").first != nil
     }
 
