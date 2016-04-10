@@ -149,7 +149,8 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
         return attendees[row].name
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    @IBAction func confirmButtonPressed(sender: UIButton) {
+        let row = personPicker.selectedRowInComponent(0)
         if row > 0 {
             presenter.selectAttendeeFromOrderList(row - 1)
         }
