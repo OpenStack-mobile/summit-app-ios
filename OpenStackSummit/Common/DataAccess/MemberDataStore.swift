@@ -46,7 +46,7 @@ public class MemberDataStore: GenericDataStore, IMemberDataStore {
     
     public func getLoggedInMemberBasicInfoOrigin(completionBlock : (Member?, NSError?) -> Void)  {
         memberRemoteStorage.getLoggedInMemberBasicInfo { member, error in
-                completionBlock(member, error)
+            completionBlock(member, error)
         }
     }
     
