@@ -118,6 +118,9 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
             personPicker.hidden = false
             personPicker.delegate = self
             personPicker.dataSource = self
+            
+            let scrollPoint = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+            scrollView.setContentOffset(scrollPoint, animated: true)
         }
     }
     
