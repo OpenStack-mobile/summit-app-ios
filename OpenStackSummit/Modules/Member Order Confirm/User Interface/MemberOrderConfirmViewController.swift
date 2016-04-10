@@ -23,6 +23,7 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
     @IBOutlet weak var orderNumberText: UITextField!
     @IBOutlet weak var personPicker: UIPickerView!
     @IBOutlet weak var multipleAttendeesMatchingLabel: UILabel!
+    @IBOutlet weak var confirmButton: UIButton!
     
     var presenter : IMemberOrderConfirmPresenter!
     var attendees: [NamedDTO]!
@@ -45,7 +46,10 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        let scrollPoint = CGPointMake(0, 0)
+        scrollView.setContentOffset(scrollPoint, animated: false)
         registerKeyboardNotifications()
+        showAttendeesSelector(false)
         orderNumberText.text = ""
     }
     
@@ -119,14 +123,18 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
             personPicker.delegate = self
             personPicker.dataSource = self
             
-            let scrollPoint = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+            let fixedContentInset = UIEdgeInsetsMake(0, 0, 40, 0)
+            let scrollPoint = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height + fixedContentInset.bottom)
+            scrollView.contentInset = fixedContentInset
             scrollView.setContentOffset(scrollPoint, animated: true)
         }
     }
     
     func showAttendeesSelector(show: Bool) {
+        scrollView.scrollEnabled = show
         personPicker.hidden = !show
         multipleAttendeesMatchingLabel.hidden = !show
+        confirmButton.hidden = !show
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
