@@ -1662,6 +1662,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="e9u-uZ-4oj" secondAttribute="bottom" constant="5" id="EZ2-SX-s5f"/>
                             <constraint firstItem="e9u-uZ-4oj" firstAttribute="width" secondItem="Wbh-JF-JUK" secondAttribute="width" id="TBB-yv-l8E"/>
@@ -2326,7 +2327,7 @@
                                 <rect key="frame" x="0.0" y="172" width="600" height="448"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rd-fH-KDU" userLabel="Buttons">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="360"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="355"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jO-Sc-915" userLabel="Events Button">
                                                 <rect key="frame" x="22" y="17" width="400" height="40"/>
@@ -2346,24 +2347,6 @@
                                                     <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="Mlp-Qi-cRs"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">
-                                                <rect key="frame" x="20" y="213" width="400" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="MY PROFILE" image="my-profile"/>
-                                                <connections>
-                                                    <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="jaI-rV-9Po"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOz-sj-28e" userLabel="My Profile Button">
-                                                <rect key="frame" x="20" y="165" width="400" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="ABOUT" image="ABOUT"/>
-                                                <connections>
-                                                    <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="hHx-er-Clo"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-Hc-iyc" userLabel="People or Speakers Button">
                                                 <rect key="frame" x="20" y="117" width="400" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -2373,13 +2356,31 @@
                                                     <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="AVS-uD-tYc"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOz-sj-28e" userLabel="About Button">
+                                                <rect key="frame" x="20" y="165" width="400" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="ABOUT" image="about"/>
+                                                <connections>
+                                                    <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="hHx-er-Clo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-p9-JRk" userLabel="My Profile Button">
+                                                <rect key="frame" x="22" y="214" width="400" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="MY PROFILE" image="my-profile"/>
+                                                <connections>
+                                                    <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="jaI-rV-9Po"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="225" id="Pmd-LC-5M1"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="Pmd-LC-5M1"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="pyp-Az-pay" userLabel="Summit Logo Image View">
-                                        <rect key="frame" x="30" y="360" width="168" height="68"/>
+                                        <rect key="frame" x="30" y="355" width="168" height="68"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="168" id="RL8-BT-AyV"/>
                                             <constraint firstAttribute="height" constant="68" id="tyt-Fx-HXq"/>
@@ -2406,7 +2407,7 @@
                             <constraint firstItem="JXX-au-axZ" firstAttribute="width" secondItem="2dh-RC-ieT" secondAttribute="width" id="nbw-hQ-lak"/>
                             <constraint firstItem="KX8-bb-2LT" firstAttribute="top" secondItem="kic-IL-EkI" secondAttribute="bottom" id="vZu-RN-tSz"/>
                             <constraint firstItem="JXX-au-axZ" firstAttribute="height" secondItem="2dh-RC-ieT" secondAttribute="height" constant="-152" id="wE1-nq-xhd"/>
-                            <constraint firstItem="9rd-fH-KDU" firstAttribute="height" secondItem="2dh-RC-ieT" secondAttribute="height" priority="750" constant="-240" id="xkl-FS-Jry"/>
+                            <constraint firstItem="9rd-fH-KDU" firstAttribute="height" secondItem="2dh-RC-ieT" secondAttribute="height" priority="750" constant="-245" id="xkl-FS-Jry"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2564,8 +2565,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ABOUT" width="29" height="29"/>
         <image name="Submenu_Feedback" width="23" height="22"/>
+        <image name="about" width="29" height="29"/>
         <image name="alert" width="167" height="150"/>
         <image name="arrow" width="10" height="15"/>
         <image name="checked_active" width="22" height="22"/>
