@@ -12,6 +12,7 @@ import UIKit
 public protocol IMenuPresenter {
     func viewLoad()
     func hasAccessToMenuItem(item: MenuItem) -> Bool
+    func highlight(item: MenuItem)
     func login()
     func logout()
     func searchFor(term: String)
@@ -72,6 +73,10 @@ public class MenuPresenter: NSObject, IMenuPresenter {
         }
         return show
 
+    }
+    
+    public func highlight(item: MenuItem) {
+        viewController.highlight(item)
     }
     
     public func login() {

@@ -26,6 +26,7 @@ public class MenuAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(MenuWireframe.self) {
             (definition) in
             
+            definition.injectProperty("menuPresenter", with: self.menuPresenter())
             definition.injectProperty("searchWireframe", with: self.searchAssembly.searchWireframe())
             definition.injectProperty("eventsWireframe", with: self.eventsAssembly.eventsWireframe())
             definition.injectProperty("venuesWireframe", with: self.venuesAssembly.venuesWireframe())
