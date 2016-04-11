@@ -12,12 +12,13 @@ import Parse
 
 @objc
 public protocol IMenuInteractor {
-    func login(completionBlock: (error: NSError?) -> Void)
+    func login(completionBlock: (error: NSError?) -> Void, partialCompletitionBlock: (Void) -> Void)
     func logout(completionBlock: (error: NSError?) -> Void)
     func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void)
     func getCurrentMember() -> MemberDTO?
     func isDataLoaded() -> Bool
     func isNetworkAvailable() -> Bool
+    func isLoggedInAndConfirmedAttendee() -> Bool
 }
 
 public class MenuInteractor: NSObject, IMenuInteractor {
@@ -31,14 +32,14 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     var memberDTOAssembler: IMemberDTOAssembler!
     var pushNotificationsManager: IPushNotificationsManager!
     
-    public func login(completionBlock: (error: NSError?) -> Void) {
+    public func login(completionBlock: (error: NSError?) -> Void, partialCompletitionBlock: (Void) -> Void) {
         if !reachability.isConnectedToNetwork() {
             let error = NSError(domain: "There is no network connectivity. Operation cancelled", code: 10001, userInfo: nil)
             completionBlock(error: error)
             return
         }
         
-        securityManager.login() { error in
+        let completionBlock: (NSError?) -> Void = { error in
             if (error != nil) {
                 completionBlock(error: error)
                 return
@@ -48,6 +49,8 @@ public class MenuInteractor: NSObject, IMenuInteractor {
                 completionBlock(error: error)
             }
         }
+        
+        securityManager.login(completionBlock, partialCompletionBlock: partialCompletitionBlock)
     }
 
     public func logout(completionBlock: (error: NSError?) -> Void) {
@@ -81,5 +84,9 @@ public class MenuInteractor: NSObject, IMenuInteractor {
     
     public func isNetworkAvailable() -> Bool {
         return reachability.isConnectedToNetwork()
+    }
+    
+    public func isLoggedInAndConfirmedAttendee() -> Bool {
+        return securityManager.isLoggedInAndConfirmedAttendee()
     }
 }

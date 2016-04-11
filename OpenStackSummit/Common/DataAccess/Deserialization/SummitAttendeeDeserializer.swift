@@ -56,7 +56,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
                     summitAttendee.scheduledEvents.append(event)
                 } catch {
                     let nsError = error as NSError
-                    print(nsError)
+                    printerr(nsError)
                     Crashlytics.sharedInstance().recordError(nsError)
                 }
             }
@@ -75,8 +75,15 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
             deserializer = deserializerFactory.create(DeserializerFactoryType.Feedback)
             var feedback : Feedback
             for (_, feedbackJSON) in json["feedback"] {
-                feedback = try deserializer.deserialize(feedbackJSON) as! Feedback
-                summitAttendee.feedback.append(feedback)
+                do {
+                    feedback = try deserializer.deserialize(feedbackJSON) as! Feedback
+                    summitAttendee.feedback.append(feedback)
+                }
+                catch {
+                    let nsError = error as NSError
+                    printerr(nsError)
+                    Crashlytics.sharedInstance().recordError(nsError)                    
+                }
             }
         }
         

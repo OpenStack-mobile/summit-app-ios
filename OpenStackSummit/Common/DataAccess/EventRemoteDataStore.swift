@@ -39,7 +39,7 @@ public class EventRemoteDataStore: NSObject {
             }
             catch {
                 let nsError = error as NSError
-                print(nsError)
+                printerr(nsError)
                 Crashlytics.sharedInstance().recordError(nsError)
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error getting feedback for event with id \(eventId)", value: nsError.localizedDescription, comment: "")]
                 friendlyError = NSError(domain: Constants.ErrorDomain, code: 5001, userInfo: userInfo)

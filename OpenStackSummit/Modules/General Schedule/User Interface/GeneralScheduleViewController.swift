@@ -31,13 +31,17 @@ class GeneralScheduleViewController: ScheduleViewController, IGeneralScheduleVie
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewLoad()
     }
     
     override func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
+        SwiftSpinner.show("Please wait...")
     }
     
     override func hideActivityIndicator() {

@@ -51,6 +51,14 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
     }
     
     override public func viewLoad() {
+        if !scheduleFilter.hasToRefreshSchedule {
+            return
+        }
+        
+        viewController.showActivityIndicator()
+        
+        scheduleFilter.hasToRefreshSchedule = false
+        
         if !interactor.isDataLoaded() && !interactor.isNetworkAvailable() {
             viewController.toggleNoConnectivityMessage(true)
             viewController.toggleEventList(false)

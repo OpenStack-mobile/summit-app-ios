@@ -29,6 +29,7 @@ public class MemberDTOAssembler: NSObject, IMemberDTOAssembler {
     public func createDTO(member: Member)->MemberDTO {
         let memberDTO = MemberDTO()
         memberDTO.id = member.id
+        memberDTO.name = member.fullName
         memberDTO.attendeeRole = member.attendeeRole != nil ? summitAttendeeDTOAssembler.createDTO(member.attendeeRole!) : nil
         memberDTO.speakerRole = member.speakerRole != nil ? presentationSpeakerDTOAssembler.createDTO(member.speakerRole!) : nil
         return memberDTO

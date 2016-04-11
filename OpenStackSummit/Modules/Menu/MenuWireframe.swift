@@ -16,20 +16,26 @@ public protocol IMenuWireframe {
     func showPeople()
     func showSpeakers()
     func showMyProfile()
+    func showMemberOrderConfirm()
+    func showAbout()
 }
 
 public class MenuWireframe: NSObject, IMenuWireframe {
+    var menuPresenter: IMenuPresenter!
     var searchWireframe: ISearchWireframe!
     var eventsWireframe: IEventsWireframe!
     var venuesWireframe: IVenuesWireframe!
     var peopleWireframe: IPeopleWireframe!
     var myProfileWireframe: IMyProfileWireframe!
+    var memberOrderConfirmWireframe: IMemberOrderConfirmWireframe!
+    var aboutWireframe: IAboutWireframe!
     
     public func showSearchFor(term: String) {
         searchWireframe.pushSearchResultsView(term)
     }
     
     public func showEvents() {
+        menuPresenter.highlight(MenuItem.Events)
         eventsWireframe.pushEventsView()
     }
     
@@ -47,5 +53,13 @@ public class MenuWireframe: NSObject, IMenuWireframe {
     
     public func showMyProfile() {
         myProfileWireframe.pushMyProfileView()
+    }
+    
+    public func showMemberOrderConfirm() {
+        memberOrderConfirmWireframe.pushMemberOrderConfirmView()
+    }
+    
+    public func showAbout() {
+        aboutWireframe.pushAboutView()
     }
 }

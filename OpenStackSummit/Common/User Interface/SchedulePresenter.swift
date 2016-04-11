@@ -62,7 +62,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = internalInteractor.isEventScheduledByLoggedMember(event.id)
-        cell.isScheduledStatusVisible = internalInteractor.isMemberLoggedIn()
+        cell.isScheduledStatusVisible = internalInteractor.isLoggedInAndConfirmedAttendee()
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
     }
     
@@ -95,7 +95,9 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     }
     
     func viewLoad(interactor: IScheduleInteractor, viewController: IScheduleViewController) {
-        internalViewController.showActivityIndicator()
+        if !interactor.isDataLoaded() {
+            internalViewController.showActivityIndicator()
+        }
         
         interactor.getActiveSummit() { summit, error in
             dispatch_async(dispatch_get_main_queue(),{

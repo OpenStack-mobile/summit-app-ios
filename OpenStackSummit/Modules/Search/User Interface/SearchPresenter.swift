@@ -109,7 +109,7 @@ public class SearchPresenter: ScheduleablePresenter {
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
-        cell.isScheduledStatusVisible = interactor.isMemberLoggedIn()
+        cell.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
     }
     
