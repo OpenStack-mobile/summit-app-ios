@@ -29,7 +29,7 @@ public class PresentationDeserializer: NSObject, IDeserializer {
             catch {
                 let nsError = error as NSError
                 Crashlytics.sharedInstance().recordError(nsError)
-                print(nsError)
+                printerr(nsError)
             }
         }
         

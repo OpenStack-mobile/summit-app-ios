@@ -14,6 +14,7 @@ public protocol IScheduleableInteractor {
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
     func isMemberLoggedIn() -> Bool
+    func isLoggedInAndConfirmedAttendee() -> Bool
 }
 
 public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
@@ -55,6 +56,10 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
     }
     
     public func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+        if !securityManager.isLoggedInAndConfirmedAttendee() {
+            return false;
+        }
+            
         guard let loggedInMember = securityManager.getCurrentMember() else {
             return false
         }
@@ -64,5 +69,9 @@ public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
     
     public func isMemberLoggedIn() -> Bool {
         return securityManager.isLoggedIn()
+    }
+    
+    public func isLoggedInAndConfirmedAttendee() -> Bool {
+        return securityManager.isLoggedInAndConfirmedAttendee()
     }
 }

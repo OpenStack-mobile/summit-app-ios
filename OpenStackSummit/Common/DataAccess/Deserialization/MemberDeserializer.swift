@@ -13,12 +13,15 @@ public class MemberDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
     public func deserialize(json: JSON) throws -> BaseEntity {
-        try validateRequiredFields(["id"], inJson: json)
-
         let member = Member()
-        member.id = json["member_id"].intValue
+        member.id = json["member_id"].int ?? 0
         member.firstName = json["first_name"].string ?? ""
         member.lastName = json["last_name"].string ?? ""
+        
+        member.fullName = json["name"] != nil
+            ? json["name"].string ?? ""
+            : member.firstName + " " + member.lastName
+        
         member.email = json["email"].string ?? ""
         member.irc = json["irc"].string ?? ""
         member.twitter = json["twitter"].string ?? ""
@@ -34,9 +37,6 @@ public class MemberDeserializer: NSObject, IDeserializer {
             member.speakerRole = try deserializer.deserialize(json["speaker"]) as? PresentationSpeaker
             
         }
-        
-        assert(!member.firstName.isEmpty)
-        assert(!member.lastName.isEmpty)
         
         return member
     }

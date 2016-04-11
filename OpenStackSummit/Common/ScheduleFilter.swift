@@ -18,7 +18,8 @@ import UIKit
 public class ScheduleFilter: NSObject {
     var selections = Dictionary<FilterSectionType, [AnyObject]>()
     var filterSections = [FilterSection]()
-
+    var hasToRefreshSchedule = true
+    
     func areAllSelectedForType(type: FilterSectionType) -> Bool {
         if (filterSections.count == 0) {
             return false

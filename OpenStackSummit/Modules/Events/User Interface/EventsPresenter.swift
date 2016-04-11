@@ -51,7 +51,10 @@ public class EventsPresenter: NSObject, IEventsPresenter {
     
     public func clearFilters(completionBlock: (NSError? -> Void)!) {
         scheduleFilter.clearActiveFilters()
+        scheduleFilter.hasToRefreshSchedule = true
         viewController.activeFilterIndicator = false
+        
+        viewController.showActivityIndicator()
         
         if (completionBlock != nil) {
             completionBlock(nil)

@@ -18,19 +18,23 @@ public protocol IMenuViewController: IMessageEnabledViewController {
 
     func reloadMenu()
     func hideMenu()
+    func highlight(item: MenuItem)
     func navigateToHome()
+    func navigateToMyProfile()
     func showActivityIndicator()
     func hideActivityIndicator()
 }
 
 @objc
 public enum MenuItem: Int {
+    case None
     case Login
     case Events
     case Venues
     case People
     case Attendees
     case MyProfile
+    case About
 }
 
 class MenuViewController: UIViewController, IMenuViewController, UITextFieldDelegate, SWRevealViewControllerDelegate {
@@ -82,34 +86,63 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     @IBOutlet weak var venuesButton: UIButton!
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
-    
+
     private func unselectMenuItems() {
         eventsButton.alpha = 0.5
         venuesButton.alpha = 0.5
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
+        aboutButton.alpha = 0.5
+    }
+    
+    func highlight(item: MenuItem) {
+        
+        unselectMenuItems()
+        
+        switch item {
+        case .Events:
+            eventsButton.alpha = 1
+        case .Venues:
+            venuesButton.alpha = 1
+        case .People:
+            peopleButton.alpha = 1
+        case .MyProfile:
+            myProfileButton.alpha = 1
+        case .About:
+            aboutButton.alpha = 1
+        default:
+            break
+        }
     }
     
     @IBAction func toggleMenuSelection(sender: UIButton) {
         
-        unselectMenuItems()
-        
-        sender.alpha = 1
+        var item: MenuItem = .None
         
         switch sender {
         case eventsButton:
             presenter.showEvents()
+            item = .Events
         case venuesButton:
             presenter.showVenues()
+            item = .Venues
         case peopleButton:
             presenter.showPeopleOrSpeakers()
+            item = .People
         case myProfileButton:
             presenter.showMyProfile()
+            item = .MyProfile
+        case aboutButton:
+            presenter.showAbout()
+            item = .About
         default:
             break
         }
+        
+        highlight(item)
     }
     
     @IBAction func login(sender: UIButton) {
@@ -148,8 +181,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     }
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position:FrontViewPosition) {
-        if let frontViewController = revealController.frontViewController {
-            frontViewController.view.userInteractionEnabled = position == FrontViewPosition.Left
+        if let navigationController = revealController.frontViewController {
+            if let viewController = navigationController.childViewControllers.first {
+                viewController.view.userInteractionEnabled = position != FrontViewPosition.Right
+            }
         }
     }
 
@@ -171,6 +206,10 @@ class MenuViewController: UIViewController, IMenuViewController, UITextFieldDele
     
     func navigateToHome() {
         toggleMenuSelection(eventsButton)
+    }
+    
+    func navigateToMyProfile() {
+        toggleMenuSelection(myProfileButton)
     }
     
     func showActivityIndicator() {

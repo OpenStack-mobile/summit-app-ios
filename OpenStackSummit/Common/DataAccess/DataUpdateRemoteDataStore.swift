@@ -45,7 +45,7 @@ public class DataUpdateRemoteDataStore: NSObject {
                     catch {
                         let nsError = error as NSError
                         Crashlytics.sharedInstance().recordError(nsError)
-                        print(nsError.localizedDescription)
+                        printerr(nsError.localizedDescription)
                     }
                 }
                 completionBlock(dataUpdates, error)

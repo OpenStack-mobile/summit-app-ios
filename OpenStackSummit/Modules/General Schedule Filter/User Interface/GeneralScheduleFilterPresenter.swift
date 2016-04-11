@@ -53,6 +53,8 @@ public class GeneralScheduleFilterPresenter: NSObject, IGeneralScheduleFilterPre
     }
     
     public func viewLoad() {
+        scheduleFilter.hasToRefreshSchedule = true
+        
         if (scheduleFilter.filterSections.count == 0) {
             let summitTypes = interactor.getSummitTypes()
             let eventTypes = interactor.getEventTypes()
