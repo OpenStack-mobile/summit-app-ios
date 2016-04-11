@@ -2388,7 +2388,7 @@
                                                 <rect key="frame" x="22" y="214" width="400" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="MY PROFILE" image="my-profile"/>
+                                                <state key="normal" title="MY SUMMIT" image="my-profile"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="WC9-XC-aZZ" eventType="touchUpInside" id="jaI-rV-9Po"/>
                                                 </connections>
@@ -2585,7 +2585,7 @@
     </scenes>
     <resources>
         <image name="Submenu_Feedback" width="23" height="22"/>
-        <image name="about" width="29" height="29"/>
+        <image name="about" width="58" height="58"/>
         <image name="alert" width="167" height="150"/>
         <image name="arrow" width="10" height="15"/>
         <image name="checked_active" width="22" height="22"/>
