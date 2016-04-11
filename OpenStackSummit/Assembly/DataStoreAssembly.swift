@@ -37,6 +37,7 @@ public class DataStoreAssembly: TyphoonAssembly {
             definition.injectProperty("summitAttendeeDeserializer", with: self.summitAttendeeDeserializer())
             definition.injectProperty("dataUpdateDeserializer", with: self.dataUpdateDeserializer())
             definition.injectProperty("feedbackDeserializer", with: self.feedbackDeserializer())
+            definition.injectProperty("nonConfirmedSummitAttendeeDeserializer", with: self.nonConfirmedSummitAttendeeDeserializer())
         }
     }
     
@@ -207,7 +208,14 @@ public class DataStoreAssembly: TyphoonAssembly {
             
         }
     }
-    
+
+    public dynamic func nonConfirmedSummitAttendeeDeserializer() -> AnyObject {
+        return TyphoonDefinition.withClass(NonConfirmedSummitAttendeeDeserializer.self) {
+            (definition) in
+            
+        }
+    }
+        
     // MARK: Data stores
     public dynamic func genericDataStore() -> AnyObject {
         return TyphoonDefinition.withClass(GenericDataStore.self) {

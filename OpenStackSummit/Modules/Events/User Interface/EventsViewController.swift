@@ -8,10 +8,14 @@
 
 import XLPagerTabStrip
 import KTCenterFlowLayout
+import SwiftSpinner
 
 @objc
 protocol IEventsViewController: IMessageEnabledViewController {
     var activeFilterIndicator: Bool { get set }
+    
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 class EventsViewController: RevealTabStripViewController, IEventsViewController {
@@ -94,4 +98,11 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         return presenter.getChildViews()
     }
     
+    func showActivityIndicator() {
+        SwiftSpinner.show("Please wait...")
+    }
+    
+    func hideActivityIndicator() {
+        SwiftSpinner.hide()
+    }
 }

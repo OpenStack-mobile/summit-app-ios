@@ -64,12 +64,12 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
             return
         }
         
-        print("Polling server for data updates")
+        printdeb("Polling server for data updates")
         
         let http = securityManager.isLoggedIn() ? httpFactory.create(HttpType.OpenIDJson) : httpFactory.create(HttpType.ServiceAccount)
         var url: String!
         if let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate() {
-            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?last_event_id=\(latestDataUpdate.id)"
+            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?limit=50&last_event_id=\(latestDataUpdate.id)"
         }
         else {
             if fromDate == 0 {
@@ -82,25 +82,25 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
                 return
             }
             
-            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?from_date=\(fromDate)"
+            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?limit=50&from_date=\(fromDate)"
         }
         
         http.GET(url) {(responseObject, error) in
             if (error != nil) {
-                print("Error polling server for data updates: \(error)")
+                printerr("Error polling server for data updates: \(error)")
                 Crashlytics.sharedInstance().recordError(error!)
                 return
             }
             
             let json = responseObject as! String
-            print("Data updates: \(json)")
+            printdeb("Data updates: \(json)")
 
             do {
                 try self.dataUpdateProcessor.process(json)
             }
             catch {
                 let nsError = error as NSError
-                print("There was an error processing updates from server: \(error)")
+                printerr("There was an error processing updates from server: \(error)")
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error processing updates from server: \(error)", value: nsError.localizedDescription, comment: "")]
                 let friendlyError = NSError(domain: Constants.ErrorDomain, code: 1, userInfo: userInfo)
                 Crashlytics.sharedInstance().recordError(friendlyError)

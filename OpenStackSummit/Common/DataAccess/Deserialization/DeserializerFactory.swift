@@ -13,7 +13,7 @@ public enum DeserializerFactoryError: ErrorType {
 }
 
 public enum DeserializerFactoryType {
-    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, TrackGroup, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee, DataUpdate, Feedback
+    case Member, Company, EventType, SummitType, Summit, Location, Venue, VenueRoom, SummitEvent, Presentation, Track, TrackGroup, Tag, PresentationSpeaker, Image, TicketType, SummitAttendee, DataUpdate, Feedback, NonConfirmedSummitAttendee
 }
 
 public class DeserializerFactory : NSObject {
@@ -36,6 +36,7 @@ public class DeserializerFactory : NSObject {
     var summitAttendeeDeserializer: SummitAttendeeDeserializer!
     var dataUpdateDeserializer: DataUpdateDeserializer!
     var feedbackDeserializer: FeedbackDeserializer!
+    var nonConfirmedSummitAttendeeDeserializer: NonConfirmedSummitAttendeeDeserializer!
     
     public func create(type: DeserializerFactoryType) -> IDeserializer {
         var deserializer : IDeserializer!
@@ -79,6 +80,8 @@ public class DeserializerFactory : NSObject {
             deserializer = dataUpdateDeserializer
         case DeserializerFactoryType.Feedback:
             deserializer = feedbackDeserializer
+        case DeserializerFactoryType.NonConfirmedSummitAttendee:
+            deserializer = nonConfirmedSummitAttendeeDeserializer
         }
         
         return deserializer!
@@ -117,7 +120,7 @@ public class DeserializerFactory : NSObject {
         case "SummitLocationImage":
             deserializer = imageDeserializer
         default:
-            print("There is no deserializer for class \(className)")
+            printerr("There is no deserializer for class \(className)")
         }
         
         return deserializer

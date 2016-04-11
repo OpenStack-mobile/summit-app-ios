@@ -17,6 +17,7 @@ public protocol IScheduleInteractor : IScheduleableInteractor {
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
     func subscribeToPushChannelsUsingContextIfNotDoneAlready()
+    func isDataLoaded() -> Bool
 }
 
 public class ScheduleInteractor: ScheduleableInteractor {
@@ -79,5 +80,10 @@ public class ScheduleInteractor: ScheduleableInteractor {
             dtos.append(scheduleItemDTO)
         }
         return dtos
+    }
+    
+    public func isDataLoaded() -> Bool {
+        let summit = summitDataStore.getActiveLocal()
+        return summit != nil
     }
 }

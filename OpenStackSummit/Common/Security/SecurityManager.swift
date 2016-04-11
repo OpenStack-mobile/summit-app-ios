@@ -18,6 +18,13 @@ public class SecurityManager: NSObject {
     var internalOAuthModuleServiceAccount: OAuth2Module!
     
     var memberDataStore: IMemberDataStore!
+    var member: Member!
+    
+    private let kCurrentMemberId = "currentMemberId"
+    private let kCurrentMemberFullName = "currentMemberFullName"
+    private let kDeviceHadPasscode = "deviceHadPasscode"
+    private let kLoggedInNotConfirmedAttendee = -1
+    
     
     public override init() {
         super.init()
@@ -27,11 +34,7 @@ public class SecurityManager: NSObject {
             selector: "revokedAccess:",
             name: OAuth2Module.revokeNotification,
             object: nil)
-
     }
-    
-    private let kCurrentMemberId = "currentMemberId"
-    private let kDeviceHadPasscode = "deviceHadPasscode"
     
     private var deviceHadPasscode: Bool? {
         get {
@@ -39,6 +42,18 @@ public class SecurityManager: NSObject {
         }
         set {
             session.set(kDeviceHadPasscode, value: newValue)
+        }
+    }
+    
+    private func checkState() {
+        if let currentMemberId = session.get(kCurrentMemberId) as? Int {
+            if (currentMemberId == kLoggedInNotConfirmedAttendee && member == nil) {
+                member = Member()
+                member.id = currentMemberId
+                if let fullName = session.get(kCurrentMemberFullName) as? String {
+                    member.fullName = fullName;
+                }
+            }
         }
     }
     
@@ -99,7 +114,14 @@ public class SecurityManager: NSObject {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid", "\(Constants.Urls.ResourceServerBaseUrl)/summits/read", "\(Constants.Urls.ResourceServerBaseUrl)/summits/write", "offline_access"],
+            scopes: ["openid",
+                "profile",
+                "offline_access",
+                "\(Constants.Urls.ResourceServerBaseUrl)/summits/read",
+                "\(Constants.Urls.ResourceServerBaseUrl)/summits/write",
+                "\(Constants.Urls.ResourceServerBaseUrl)/summits/read-external-orders",
+                "\(Constants.Urls.ResourceServerBaseUrl)/summits/confirm-external-orders"
+            ],
             clientSecret: Constants.Auth.SecretOpenID,
             isWebView: true
         )
@@ -139,25 +161,40 @@ public class SecurityManager: NSObject {
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
     
-    public func login(completionBlock: (NSError?) -> Void) {
+    public func login(completionBlock: (NSError?) -> Void, partialCompletionBlock: (Void) -> Void) {
         oauthModuleOpenID.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             if error != nil {
-                print(error)
+                printerr(error)
                 return
             }
+            
+            partialCompletionBlock()
             
             if accessToken == nil {
                 return
             }
             
-            self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
-                
-                if error != nil {
-                    completionBlock(error)
-                    return
+            
+            self.linkAttendeeIfExist(completionBlock);
+        }
+    }
+    
+    public func linkAttendeeIfExist(completionBlock: (NSError?) -> Void) {
+        self.memberDataStore.getLoggedInMemberOrigin() { (member, error) in
+            
+            if error != nil {
+                if error?.code == 404 {
+                    
+                    self.getLoggedInMemberBasicInfoOrigin(completionBlock)
                 }
-                
+                else {
+                    completionBlock(error)
+                }
+            }
+            else {
                 self.session.set(self.kCurrentMemberId, value: member!.id)
+                self.session.set(self.kCurrentMemberFullName, value: member!.fullName)
+                
                 completionBlock(error)
                 
                 let notification = NSNotification(name: Constants.Notifications.LoggedInNotification, object:nil, userInfo:nil)
@@ -166,9 +203,37 @@ public class SecurityManager: NSObject {
         }
     }
     
+    private func getLoggedInMemberBasicInfoOrigin(completionBlock: (NSError?) -> Void) {
+        self.memberDataStore.getLoggedInMemberBasicInfoOrigin() { (member, error) in
+            if error != nil {
+                completionBlock(error)
+                return
+            }
+            
+            self.member = member
+            if member != nil && member!.id > 0 {
+                self.session.set(self.kCurrentMemberId, value: member!.id)
+            }
+            else {
+                self.session.set(self.kCurrentMemberId, value: self.kLoggedInNotConfirmedAttendee)
+            }
+            
+            self.session.set(self.kCurrentMemberFullName, value: member!.fullName)
+            
+            completionBlock(error)
+            
+            let notification = NSNotification(name: Constants.Notifications.LoggedInNotification, object:nil, userInfo:nil)
+            NSNotificationCenter.defaultCenter().postNotification(notification)
+        }
+    }
+    
     public func logout(completionBlock: ((NSError?) -> Void)?) {
         oauthModuleOpenID.revokeLocalAccess(false)
         self.session.set(self.kCurrentMemberId, value: nil)
+        self.session.set(self.kCurrentMemberFullName, value: nil)
+        
+        member = nil
+        
         let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
         
@@ -189,21 +254,34 @@ public class SecurityManager: NSObject {
             else if (currentMember?.attendeeRole != nil) {
                 role = MemberRoles.Attendee
             }
+            else {
+                role = MemberRoles.Member
+            }
         }
         return role
     }
     
     public func getCurrentMember() -> Member? {
-        var currentMember: Member?
         if isLoggedIn() {
-            currentMember = memberDataStore.getByIdLocal(session.get(kCurrentMemberId) as! Int)
+            let currentMemberId = session.get(kCurrentMemberId) as! Int
+            if currentMemberId > 0 {
+                let currentMember = memberDataStore.getByIdLocal(currentMemberId)
+                member = currentMember
+            }
         }
-        return currentMember;
+        return member;
     }
     
     public func isLoggedIn() -> Bool {
+        checkState()
         return session.get(kCurrentMemberId) != nil
     }
+    
+    public func isLoggedInAndConfirmedAttendee() -> Bool {
+        let currentMemberId = session.get(kCurrentMemberId) as? Int
+        return isLoggedIn() && currentMemberId != kLoggedInNotConfirmedAttendee;
+    }
+    
     
     func revokedAccess(notification: NSNotification) {
         self.session.set(self.kCurrentMemberId, value: nil)

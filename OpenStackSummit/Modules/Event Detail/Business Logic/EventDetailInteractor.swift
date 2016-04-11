@@ -27,8 +27,9 @@ public class EventDetailInteractor: ScheduleableInteractor {
         
     public func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void) {
         if !reachability.isConnectedToNetwork() {
-            let error = NSError(domain: "There is no network connectivity. Can't load event feedback", code: 11001, userInfo: nil)
-            completionBlock(nil, error)
+            // for now we don't want to show this annoying pop up since during summit they could be under hard connectivity situation
+            /*let error = NSError(domain: "There is no network connectivity. Can't load event feedback", code: 11001, userInfo: nil)*/
+            completionBlock(nil, nil)
             return
         }
         

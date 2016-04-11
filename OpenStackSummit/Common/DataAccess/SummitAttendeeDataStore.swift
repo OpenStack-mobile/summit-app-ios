@@ -58,7 +58,7 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
             }
             catch {
                 let nsError = error as NSError
-                print(nsError)
+                printerr(nsError)
                 Crashlytics.sharedInstance().recordError(nsError)
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error adding event with id \(event.id) to member schedule", value: nsError.localizedDescription, comment: "")]
                 friendlyError = NSError(domain: Constants.ErrorDomain, code: 1001, userInfo: userInfo)
@@ -81,7 +81,7 @@ public class SummitAttendeeDataStore: GenericDataStore, ISummitAttendeeDataStore
             }
             catch {
                 let nsError = error as NSError
-                print(nsError)
+                printerr(nsError)
                 Crashlytics.sharedInstance().recordError(nsError)
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error removing event with id \(event.id) from member schedule", value: nsError.localizedDescription, comment: "")]
                 friendlyError = NSError(domain: Constants.ErrorDomain, code: 1001, userInfo: userInfo)
