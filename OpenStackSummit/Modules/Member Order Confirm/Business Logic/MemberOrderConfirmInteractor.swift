@@ -36,7 +36,8 @@ public class MemberOrderConfirmInteractor: NSObject, IMemberOrderConfirmInteract
                     return
                 }
                 
-                var a = NonConfirmedSummitAttendee()
+                // this is for testing purposes only!!!
+                /*var a = NonConfirmedSummitAttendee()
                 a.id = 1
                 a.name = "test name 1"
                 nonConfirmedAttendees?.append(a)
@@ -44,7 +45,7 @@ public class MemberOrderConfirmInteractor: NSObject, IMemberOrderConfirmInteract
                 a = NonConfirmedSummitAttendee()
                 a.id = 2
                 a.name = "test name 2"
-                nonConfirmedAttendees?.append(a)
+                nonConfirmedAttendees?.append(a)*/
 
                 
                 if let nonConfirmedAttendees = nonConfirmedAttendees {
