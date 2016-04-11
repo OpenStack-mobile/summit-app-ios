@@ -93,19 +93,21 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                     return
                 }
                 
-                var feedbackPageWithoutMe = [FeedbackDTO]()
-                for feedbackDTO in feedbackPage! {
-                    if self.myFeedbackForEvent == nil || (feedbackDTO.owner != self.myFeedbackForEvent!.owner) {
-                        feedbackPageWithoutMe.append(feedbackDTO)
+                if let feedbackPage = feedbackPage {
+                    var feedbackPageWithoutMe = [FeedbackDTO]()
+                    for feedbackDTO in feedbackPage {
+                        if self.myFeedbackForEvent == nil || (feedbackDTO.owner != self.myFeedbackForEvent!.owner) {
+                            feedbackPageWithoutMe.append(feedbackDTO)
+                        }
                     }
+                    
+                    
+                    self.feedbackList.appendContentsOf(feedbackPageWithoutMe)
+                    self.viewController.reloadFeedbackData()
+                    self.viewController.hasAnyFeedback = self.feedbackList.count > 0
+                    self.feedbackPage++
+                    self.loadedAllFeedback = feedbackPage.count < self.feedbackObjectsPerPage
                 }
-                
-                
-                self.feedbackList.appendContentsOf(feedbackPageWithoutMe)
-                self.viewController.reloadFeedbackData()
-                self.viewController.hasAnyFeedback = self.feedbackList.count > 0
-                self.feedbackPage++
-                self.loadedAllFeedback = feedbackPage!.count < self.feedbackObjectsPerPage
             })
         }
     }
