@@ -72,7 +72,14 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
     
     public func showEventDetail(index: Int) {
         let event = dayEvents[index]
-        internalWireframe.showEventDetail(event.id)
+        if internalInteractor.eventExist(event.id) {
+            internalWireframe.showEventDetail(event.id)
+        }
+        else {
+            internalViewController.showInfoMessage("Info", message: "This event was removed from schedule.")
+            reloadSchedule()
+            
+        }
     }
     
     public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
