@@ -21,13 +21,23 @@ public class AboutPresenter: NSObject, IAboutPresenter {
     public func viewLoad() {
         let summit = interactor.getActiveSummit()
         let nameAndDate = buildNameDate(summit)
-        viewController.setNameAndDate(nameAndDate)
+        
+        viewController.nameAndDate = nameAndDate
+        
         let version = buildVersion()
         if let version = version {
-            viewController.setVersion("Version \(version)")
+            viewController.version = "Version \(version)"
         }
         else {
-            viewController.setVersion("")
+            viewController.version = ""
+        }
+        
+        let buildNumber = buildBuildNumber()
+        if let buildNumber = buildNumber {
+            viewController.buildNumber = "Build Number \(buildNumber)"
+        }
+        else {
+            viewController.buildNumber = ""
         }
     }
     
@@ -44,8 +54,12 @@ public class AboutPresenter: NSObject, IAboutPresenter {
     }
     
     func buildVersion() -> String? {
+        let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"]
+        return nsObject as? String
+    }
+    
+    func buildBuildNumber() -> String? {
         let nsObject: AnyObject? = NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey as String]
-        
         return nsObject as? String
     }
 }
