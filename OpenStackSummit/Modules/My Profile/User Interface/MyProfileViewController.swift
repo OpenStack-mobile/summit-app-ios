@@ -24,7 +24,7 @@ class MyProfileViewController: RevealTabStripViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        navigationController?.navigationBar.topItem?.title = "MY PROFILE"
+        navigationController?.navigationBar.topItem?.title = "MY SUMMIT"
     }
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
