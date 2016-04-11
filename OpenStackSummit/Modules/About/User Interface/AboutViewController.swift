@@ -10,8 +10,9 @@ import UIKit
 
 @objc
 protocol IAboutViewController {
-    func setNameAndDate(nameAndDate: String)
-    func setVersion(version: String)
+    var version: String { get set }
+    var buildNumber: String { get set }
+    var nameAndDate: String { get set }
 }
 
 class AboutViewController: RevealViewController, IAboutViewController {
@@ -19,7 +20,27 @@ class AboutViewController: RevealViewController, IAboutViewController {
     
     @IBOutlet weak var summitTextLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var buildNumberLabel: UILabel!
     @IBOutlet weak var nameAndDateLabel: UILabel!
+    
+    var version: String = "" {
+        didSet {
+            versionLabel.text = version
+        }
+    }
+    
+    var buildNumber: String = "" {
+        didSet {
+            buildNumberLabel.text = buildNumber
+        }
+    }
+    
+    var nameAndDate: String = "" {
+        didSet {
+            nameAndDateLabel.text = nameAndDate
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewLoad()
@@ -30,14 +51,6 @@ class AboutViewController: RevealViewController, IAboutViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setNameAndDate(nameAndDate: String) {
-        nameAndDateLabel.text = nameAndDate
-    }
-    
-    func setVersion(version: String) {
-        versionLabel.text = version
     }
     
     @IBAction func websiteTouch(sender: AnyObject) {
