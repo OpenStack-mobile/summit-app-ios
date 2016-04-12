@@ -12,7 +12,6 @@ import UIKit
 public protocol IEventDetailInteractor : IScheduleableInteractor {
     func getEventDetail(eventId: Int) -> EventDetailDTO
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
-    func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO?
 }
 
 public class EventDetailInteractor: ScheduleableInteractor {
@@ -48,16 +47,5 @@ public class EventDetailInteractor: ScheduleableInteractor {
             
             completionBlock(dtos, error)
         }
-    }
-    
-    public func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO? {
-        var feedbackDTO: FeedbackDTO?
-        if let currentMember = securityManager.getCurrentMember() {
-            let feedback = currentMember.attendeeRole?.feedback.filter("event.id = %@", eventId).first
-            if (feedback != nil) {
-                feedbackDTO = feedbackDTOAssembler.createDTO(feedback!)
-            }
-        }
-        return feedbackDTO
     }
 }
