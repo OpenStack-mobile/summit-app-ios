@@ -33,14 +33,11 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     var allowFeedback: Bool { get set }
     var hasSpeakers: Bool { get set }
     var hasAnyFeedback: Bool { get set }
-    var myFeedbackRate: Double { get set }
-    var myFeedbackReview: String! { get set }
-    var myFeedbackDate: String! { get set }
-    var myFeedbackName: String! { get set }
-    var hasMyFeedback: Bool { get set}
+    var hasAverageFeedback: Bool { get set}
     var isScheduledStatusVisible: Bool { get set }
     var level: String! { get set }
     var track: String! { get set }
+    var averageFeedback: Double { get set }
 }
 
 class EventDetailViewController: BaseViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
@@ -64,13 +61,10 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
     @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scheduledButton: UIBarButtonItem!
     @IBOutlet weak var speakersHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var myFeedbackView: UIView!
-    @IBOutlet weak var myFeedbackDateLabel: UILabel!
-    @IBOutlet weak var myFeedbackReviewLabel: UILabel!
-    @IBOutlet weak var myFeedbackRateView: CosmosView!
-    @IBOutlet weak var myFeedbackNameLabel: UILabel!
+    @IBOutlet weak var averageFeedbackView: UIView!
+    @IBOutlet weak var averageFeedbackRatingView: CosmosView!
     @IBOutlet weak var feedbackButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var myFeedbackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var averageFeedbackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var submenuButton: UIBarButtonItem!
     @IBOutlet weak var tagsViewHeightConstraint: NSLayoutConstraint!
@@ -219,61 +213,34 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         }
     }
     
-    var myFeedbackRate: Double{
+    var averageFeedback: Double {
         get {
-            return myFeedbackRateView.rating
+            return averageFeedbackRatingView.rating
         }
         set {
-            myFeedbackRateView.rating = newValue
+            averageFeedbackRatingView.rating = newValue
         }
     }
     
-    var myFeedbackReview: String!{
-        get {
-            return myFeedbackReviewLabel.text
-        }
-        set {
-            myFeedbackReviewLabel.text = newValue
-        }
-    }
-    
-    var myFeedbackDate: String!{
-        get {
-            return myFeedbackDateLabel.text
-        }
-        set {
-            myFeedbackDateLabel.text = newValue
-        }
-    }
-
-    var myFeedbackName: String!{
-        get {
-            return myFeedbackNameLabel.text
-        }
-        set {
-            myFeedbackNameLabel.text = newValue
-        }
-    }
-    
-    var hasMyFeedback: Bool {
+    var hasAverageFeedback: Bool {
         get {
             return feedbackButtonHeightConstraint.constant > 0
         }
         
         set {
             if newValue {
-                if myFeedbackViewHeightConstraint != nil {
-                    myFeedbackView.removeConstraint(myFeedbackViewHeightConstraint)
-                    myFeedbackViewHeightConstraint = nil                    
+                if averageFeedbackViewHeightConstraint != nil {
+                    averageFeedbackView.removeConstraint(averageFeedbackViewHeightConstraint)
+                    averageFeedbackViewHeightConstraint = nil                    
                 }
             }
             else {
-                if myFeedbackViewHeightConstraint == nil {
-                    myFeedbackViewHeightConstraint = NSLayoutConstraint(item: myFeedbackView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 0)
-                    myFeedbackView.addConstraint(myFeedbackViewHeightConstraint)
+                if averageFeedbackViewHeightConstraint == nil {
+                    averageFeedbackViewHeightConstraint = NSLayoutConstraint(item: averageFeedbackView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 0)
+                    averageFeedbackView.addConstraint(averageFeedbackViewHeightConstraint)
                 }
             }
-            myFeedbackView.updateConstraints()
+            averageFeedbackView.updateConstraints()
         }
     }
     
@@ -441,9 +408,11 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         presenter.toggleScheduledStatus()
     }
 
-/*    @IBAction func showSubmenu(sender: UIBarButtonItem) {
+    /*
+    @IBAction func showSubmenu(sender: UIBarButtonItem) {
         actionSheet.show()
-    }*/
+    }
+    */
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
