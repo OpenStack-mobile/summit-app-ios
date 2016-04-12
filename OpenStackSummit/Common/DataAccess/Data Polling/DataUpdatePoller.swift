@@ -100,8 +100,9 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
             }
             catch {
                 let nsError = error as NSError
-                printerr("There was an error processing updates from server: \(error)")
-                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error processing updates from server: \(error)", value: nsError.localizedDescription, comment: "")]
+                let message = "There was an error processing updates from server: \(error)"
+                printerr(message)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString(message, value: nsError.localizedDescription, comment: "")]
                 let friendlyError = NSError(domain: Constants.ErrorDomain, code: 1, userInfo: userInfo)
                 Crashlytics.sharedInstance().recordError(friendlyError)
             }
