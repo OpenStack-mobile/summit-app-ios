@@ -46,7 +46,7 @@ public extension IDeserializer {
             catch{
                 let message = NSLocalizedString("error_processing_uptate", value: "\((error as NSError).localizedDescription) processing this update: \(jsonElem.rawString())", comment: "")
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey:  message]
-                let err = NSError(domain: Constants.ErrorDomain, code: 13001, userInfo: userInfo)
+                let err = NSError(domain: Constants.ErrorDomain, code: 20001, userInfo: userInfo)
                 Crashlytics.sharedInstance().recordError(err)
                 printerr(err.localizedDescription)
             }
