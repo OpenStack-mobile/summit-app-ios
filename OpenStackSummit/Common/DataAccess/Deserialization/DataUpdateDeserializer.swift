@@ -53,7 +53,7 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
                 }
             }
             catch DeserializerError.EntityNotFound(let em) {
-                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("Entity not found", value: em, comment: "")]
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("Entity not found", value: "", comment: "")]
                 let err = NSError(domain: Constants.ErrorDomain, code: 13001, userInfo: userInfo)
                 Crashlytics.sharedInstance().recordError(err)
                 print(em)
