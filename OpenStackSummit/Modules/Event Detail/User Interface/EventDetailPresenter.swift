@@ -43,7 +43,6 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         feedbackPage = 1
         feedbackList.removeAll()
         event = interactor.getEventDetail(eventId)
-        myFeedbackForEvent = interactor.getMyFeedbackForEvent(eventId)
             
         viewController.eventTitle = event.name
         viewController.eventDescription = event.eventDescription
@@ -56,18 +55,12 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()
         viewController.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
-        viewController.hasMyFeedback = myFeedbackForEvent != nil
         viewController.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
         viewController.tags = event.tags
         viewController.level = event.level
         viewController.track = event.track
-        
-        if (myFeedbackForEvent != nil) {
-            viewController.myFeedbackDate = myFeedbackForEvent!.date
-            viewController.myFeedbackRate = Double(myFeedbackForEvent!.rate)
-            viewController.myFeedbackReview = myFeedbackForEvent!.review
-            viewController.myFeedbackName = myFeedbackForEvent!.owner
-        }
+        viewController.hasAverageFeedback = event.averageFeedback != 0
+        viewController.averageFeedback = event.averageFeedback
         
         if event.allowFeedback && event.finished {
             loadFeedback()
@@ -105,7 +98,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                     self.feedbackList.appendContentsOf(feedbackPageWithoutMe)
                     self.viewController.reloadFeedbackData()
                     self.viewController.hasAnyFeedback = self.feedbackList.count > 0
-                    self.feedbackPage++
+                    self.feedbackPage += 1
                     self.loadedAllFeedback = feedbackPage.count < self.feedbackObjectsPerPage
                 }
             })
