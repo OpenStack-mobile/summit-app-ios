@@ -77,7 +77,7 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
         var viewRect = view.frame
         viewRect.size.height -= keyboardSize.height
         if CGRectContainsPoint(viewRect, orderNumberText.frame.origin) {
-            let scrollPoint = CGPointMake(0, orderNumberText.frame.origin.y - keyboardSize.height)
+            let scrollPoint = CGPointMake(0, orderNumberText.frame.origin.y - keyboardSize.height + 40)
             scrollView.setContentOffset(scrollPoint, animated: true)
         }
     }
@@ -123,9 +123,8 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
             personPicker.delegate = self
             personPicker.dataSource = self
             
-            let fixedContentInset = UIEdgeInsetsMake(0, 0, 40, 0)
-            let scrollPoint = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height + fixedContentInset.bottom)
-            scrollView.contentInset = fixedContentInset
+            let scrollPoint = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height + 40)
+            scrollView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
             scrollView.setContentOffset(scrollPoint, animated: true)
         }
     }
