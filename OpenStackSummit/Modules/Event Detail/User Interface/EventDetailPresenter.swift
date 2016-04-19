@@ -59,11 +59,27 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.tags = event.tags
         viewController.level = event.level
         viewController.track = event.track
-        viewController.hasAverageFeedback = event.averageFeedback != 0
-        viewController.averageFeedback = event.averageFeedback
+        viewController.hasAverageFeedback = false
         
         if event.allowFeedback && event.finished {
+            loadAverageFeedback()
             loadFeedback()
+        }
+    }
+    
+    public func loadAverageFeedback() {
+        interactor.getAverageRating(self.eventId) { (event, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if (error != nil) {
+                    self.viewController.showErrorMessage(error!)
+                    return
+                }
+                
+                if let event = event {
+                    self.viewController.hasAverageFeedback = event.averageFeedback != 0
+                    self.viewController.averageFeedback = event.averageFeedback
+                }
+            })
         }
     }
     
