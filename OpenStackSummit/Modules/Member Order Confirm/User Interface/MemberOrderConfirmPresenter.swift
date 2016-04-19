@@ -22,7 +22,7 @@ class MemberOrderConfirmPresenter: NSObject, IMemberOrderConfirmPresenter {
     var viewController: IMemberOrderConfirmViewController!
     var orderNumber: String!
     var nonConfirmedAttendees: [NamedDTO]?
-    let kOrderAlreadyInUse = "This Order# has already been associated with another user. If you feel this is an error, please contact summitsupport@openstack.org or enter a different Order #."
+    let kOrderAlreadyInUse = "This Order# has already been associated with another user. If you feel this is an error, please contact summitapp@openstack.org or enter a different Order #."
     let kOrderNotFound = "Order wasn\'t found. Please verify that you provided correct order # and try again."
     
     func viewLoad() {
