@@ -32,40 +32,55 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
             summitEvent = check
         }
         else {
-            try validateRequiredFields(["id", "start_date", "end_date", "title", "allow_feedback", "type_id"], inJson: json)
+            try validateRequiredFields(["id"], inJson: json)
             
             summitEvent.id = json["id"].intValue
-            summitEvent.start = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
-            summitEvent.end = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
-            summitEvent.name = json["title"].stringValue
-            summitEvent.eventDescription = json["description"].stringValue
-            summitEvent.allowFeedback = json["allow_feedback"].boolValue
-            summitEvent.averageFeedback = json["avg_feedback_rate"].doubleValue
             
-            var deserializer = deserializerFactory.create(DeserializerFactoryType.EventType)
-            summitEvent.eventType = try deserializer.deserialize(json["type_id"]) as! EventType
-
-            deserializer = deserializerFactory.create(DeserializerFactoryType.SummitType)
-            var summitType : SummitType
-            for (_, summitTypeJSON) in json["summit_types"] {
-                summitType = try deserializer.deserialize(summitTypeJSON) as! SummitType
-                summitEvent.summitTypes.append(summitType)
+            if (json["start_date"].int != nil) {
+                summitEvent.start = NSDate(timeIntervalSince1970: NSTimeInterval(json["start_date"].intValue))
+            }
+            if (json["end_date"].int != nil) {
+                summitEvent.end = NSDate(timeIntervalSince1970: NSTimeInterval(json["end_date"].intValue))
+            }
+            summitEvent.name = json["title"].string ?? ""
+            summitEvent.eventDescription = json["description"].string ?? ""
+            summitEvent.allowFeedback = json["allow_feedback"].bool ?? false
+            summitEvent.averageFeedback = json["avg_feedback_rate"].double ?? 0.0
+            
+            var deserializer: IDeserializer
+            
+            if json["type_id"] != nil {
+                deserializer = deserializerFactory.create(DeserializerFactoryType.EventType)
+                summitEvent.eventType = try deserializer.deserialize(json["type_id"]) as! EventType
             }
             
-            deserializer = deserializerFactory.create(DeserializerFactoryType.Company)
-            var company : Company
-            for (_, companyJSON) in json["sponsors"] {
-                company = try deserializer.deserialize(companyJSON) as! Company
-                summitEvent.sponsors.append(company)
+            if json["summit_types"] != nil {
+                deserializer = deserializerFactory.create(DeserializerFactoryType.SummitType)
+                var summitType : SummitType
+                for (_, summitTypeJSON) in json["summit_types"] {
+                    summitType = try deserializer.deserialize(summitTypeJSON) as! SummitType
+                    summitEvent.summitTypes.append(summitType)
+                }
             }
             
-            deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
-            for (_, speakerJSON) in json["speakers"] {
-                try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
+            if json["sponsors"] != nil {
+                deserializer = deserializerFactory.create(DeserializerFactoryType.Company)
+                var company : Company
+                for (_, companyJSON) in json["sponsors"] {
+                    company = try deserializer.deserialize(companyJSON) as! Company
+                    summitEvent.sponsors.append(company)
+                }
+            }
+            
+            if json["speakers"] != nil {
+                deserializer = deserializerFactory.create(DeserializerFactoryType.PresentationSpeaker)
+                for (_, speakerJSON) in json["speakers"] {
+                    try deserializer.deserialize(speakerJSON) as! PresentationSpeaker
+                }
             }
 
             let locationId = json["location_id"]
-            if (locationId.int != nil) {
+            if locationId.int != nil {
                 let venue = Venue()
                 venue.id = locationId.intValue
                 let venueRoom = VenueRoom()
@@ -81,15 +96,17 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
                 }
             }
             
-            deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
-            var tag : Tag
-            for (_, tagsJSON) in json["tags"] {
-                tag = try deserializer.deserialize(tagsJSON) as! Tag
-                summitEvent.tags.append(tag)
+            if json["speatagskers"] != nil {
+                deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
+                var tag : Tag
+                for (_, tagsJSON) in json["tags"] {
+                    tag = try deserializer.deserialize(tagsJSON) as! Tag
+                    summitEvent.tags.append(tag)
+                }
             }
             
             let trackId = json["track_id"]
-            if (trackId.int != nil) {
+            if trackId.int != nil {
                 deserializer = deserializerFactory.create(DeserializerFactoryType.Presentation)
                 let presentation = try deserializer.deserialize(json) as! Presentation
                 
