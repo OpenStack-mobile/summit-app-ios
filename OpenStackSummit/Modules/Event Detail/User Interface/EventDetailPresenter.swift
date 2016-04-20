@@ -43,6 +43,7 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         feedbackPage = 1
         feedbackList.removeAll()
         event = interactor.getEventDetail(eventId)
+        myFeedbackForEvent = interactor.getMyFeedbackForEvent(eventId)
             
         viewController.eventTitle = event.name
         viewController.eventDescription = event.eventDescription
@@ -101,15 +102,24 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 }
                 
                 if let feedbackPage = feedbackPage {
-                    var feedbackPageWithoutMe = [FeedbackDTO]()
-                    for feedbackDTO in feedbackPage {
-                        if self.myFeedbackForEvent == nil || (feedbackDTO.owner != self.myFeedbackForEvent!.owner) {
-                            feedbackPageWithoutMe.append(feedbackDTO)
+                    var feedbacks = [FeedbackDTO]()
+                    
+                    if let myFeedback = self.myFeedbackForEvent {
+                        for feedbackDTO in feedbackPage {
+                            if feedbackDTO.owner != myFeedback.owner {
+                                feedbacks.append(feedbackDTO)
+                            }
                         }
+                        if !self.feedbackList.contains(myFeedback) {
+                            feedbacks.insert(myFeedback, atIndex: 0)
+                        }
+                    }
+                    else {
+                        feedbacks = feedbackPage
                     }
                     
                     
-                    self.feedbackList.appendContentsOf(feedbackPageWithoutMe)
+                    self.feedbackList.appendContentsOf(feedbacks)
                     self.viewController.reloadFeedbackData()
                     self.viewController.hasAnyFeedback = self.feedbackList.count > 0
                     self.feedbackPage += 1
