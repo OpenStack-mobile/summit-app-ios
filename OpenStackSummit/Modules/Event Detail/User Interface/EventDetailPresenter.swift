@@ -71,7 +71,6 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         interactor.getAverageRating(self.eventId) { (event, error) in
             dispatch_async(dispatch_get_main_queue(), {
                 if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
                     return
                 }
                 
@@ -98,7 +97,6 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 }
                 
                 if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
                     return
                 }
                 
