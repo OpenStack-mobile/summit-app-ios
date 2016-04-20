@@ -90,7 +90,7 @@
                                                         <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="16" id="T2x-YQ-Ypq"/>
-                                                            <constraint firstAttribute="height" constant="22" id="qRu-dK-kTT"/>
+                                                            <constraint firstAttribute="height" constant="20" id="qRu-dK-kTT"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="TmL-sg-TZa">
