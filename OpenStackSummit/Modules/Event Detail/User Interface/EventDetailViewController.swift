@@ -350,6 +350,8 @@ class EventDetailViewController: BaseViewController, IEventDetailViewController,
         if tableView == speakersTableView {
             let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
             presenter.buildSpeakerCell(cell, index: indexPath.row)
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.separatorInset = UIEdgeInsetsZero
             return cell
         }
         else if tableView == feedbackTableView {
