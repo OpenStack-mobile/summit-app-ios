@@ -69,7 +69,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         let http = securityManager.isLoggedIn() ? httpFactory.create(HttpType.OpenIDJson) : httpFactory.create(HttpType.ServiceAccount)
         var url: String!
         if let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate() {
-            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?limit=50&last_event_id=\(latestDataUpdate.id)"
+            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?limit=100&last_event_id=\(latestDataUpdate.id)"
         }
         else {
             if fromDate == 0 {
