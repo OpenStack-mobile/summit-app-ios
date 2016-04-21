@@ -109,6 +109,9 @@ class SearchViewController: RevealViewController, UITableViewDelegate, UITableVi
             let cell = tableView.dequeueReusableCellWithIdentifier(eventsTableViewCellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
             cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)            
             presenter.buildEventCell(cell, index: indexPath.row)
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.layoutSubviews()
             return cell
         }
         else if (tableView == tracksTableView) {

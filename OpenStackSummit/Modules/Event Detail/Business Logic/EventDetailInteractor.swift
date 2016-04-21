@@ -11,6 +11,7 @@ import UIKit
 @objc
 public protocol IEventDetailInteractor : IScheduleableInteractor {
     func getEventDetail(eventId: Int) -> EventDetailDTO
+    func getAverageRating(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void)
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)
     func getMyFeedbackForEvent(eventId: Int) -> FeedbackDTO?
 }
@@ -24,7 +25,25 @@ public class EventDetailInteractor: ScheduleableInteractor {
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event!)
         return eventDetailDTO
     }
+    
+    public func getAverageRating(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
+        if !reachability.isConnectedToNetwork() {
+            // for now we don't want to show this annoying pop up since during summit they could be under hard connectivity situation
+            /*let error = NSError(domain: "There is no network connectivity. Can't load event feedback", code: 11001, userInfo: nil)*/
+            completionBlock(nil, nil)
+            return
+        }
         
+        eventDataStore.getAverageRating(eventId) { (event, error) in
+            if (error != nil) {
+                completionBlock(nil, error)
+                return
+            }
+            
+            completionBlock(event, error)
+        }
+    }
+    
     public func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void) {
         if !reachability.isConnectedToNetwork() {
             // for now we don't want to show this annoying pop up since during summit they could be under hard connectivity situation
