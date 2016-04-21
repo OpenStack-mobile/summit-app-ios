@@ -13,6 +13,7 @@ import RealmSwift
 public protocol IEventDataStore {
     func getByIdLocal(id: Int) -> SummitEvent?
     func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels:[String]?)->[SummitEvent]
+    func getAverageRating(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void)
     func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void)
     func getBySearchTerm(searchTerm: String!)->[SummitEvent]
     func getPresentationLevels()->[String]
@@ -75,6 +76,10 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
     public func getBySearchTerm(searchTerm: String!)->[SummitEvent] {
         let events = realm.objects(SummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.fullName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(self.sortProperties)
         return events.map { $0 }
+    }
+    
+    public func getAverageRating(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void) {
+        eventRemoteDataStore.getAverageRating(eventId, completionBlock: completionBlock)
     }
     
     public func getFeedback(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([Feedback]?, NSError?) -> Void) {

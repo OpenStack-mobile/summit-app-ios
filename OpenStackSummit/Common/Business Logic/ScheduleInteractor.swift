@@ -18,6 +18,7 @@ public protocol IScheduleInteractor : IScheduleableInteractor {
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
     func subscribeToPushChannelsUsingContextIfNotDoneAlready()
     func isDataLoaded() -> Bool
+    func eventExist(id: Int) -> Bool
 }
 
 public class ScheduleInteractor: ScheduleableInteractor {
@@ -85,5 +86,10 @@ public class ScheduleInteractor: ScheduleableInteractor {
     public func isDataLoaded() -> Bool {
         let summit = summitDataStore.getActiveLocal()
         return summit != nil
+    }
+    
+    public func eventExist(id: Int) -> Bool {
+        let event = eventDataStore.getByIdLocal(id)
+        return event != nil
     }
 }
