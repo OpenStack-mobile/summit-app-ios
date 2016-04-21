@@ -56,21 +56,30 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
         viewController.hasAnyFeedback = false
         viewController.reloadSpeakersData()
         viewController.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
-        viewController.hasMyFeedback = myFeedbackForEvent != nil
         viewController.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
         viewController.tags = event.tags
         viewController.level = event.level
         viewController.track = event.track
-        
-        if (myFeedbackForEvent != nil) {
-            viewController.myFeedbackDate = myFeedbackForEvent!.date
-            viewController.myFeedbackRate = Double(myFeedbackForEvent!.rate)
-            viewController.myFeedbackReview = myFeedbackForEvent!.review
-            viewController.myFeedbackName = myFeedbackForEvent!.owner
-        }
+        viewController.hasAverageFeedback = false
         
         if event.allowFeedback && event.finished {
+            loadAverageFeedback()
             loadFeedback()
+        }
+    }
+    
+    public func loadAverageFeedback() {
+        interactor.getAverageRating(self.eventId) { (event, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if (error != nil) {
+                    return
+                }
+                
+                if let event = event {
+                    self.viewController.hasAverageFeedback = event.averageFeedback != 0
+                    self.viewController.averageFeedback = event.averageFeedback
+                }
+            })
         }
     }
     
@@ -89,23 +98,31 @@ public class EventDetailPresenter: ScheduleablePresenter, IEventDetailPresenter 
                 }
                 
                 if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
                     return
                 }
                 
                 if let feedbackPage = feedbackPage {
-                    var feedbackPageWithoutMe = [FeedbackDTO]()
-                    for feedbackDTO in feedbackPage {
-                        if self.myFeedbackForEvent == nil || (feedbackDTO.owner != self.myFeedbackForEvent!.owner) {
-                            feedbackPageWithoutMe.append(feedbackDTO)
+                    var feedbacks = [FeedbackDTO]()
+                    
+                    if let myFeedback = self.myFeedbackForEvent {
+                        for feedbackDTO in feedbackPage {
+                            if feedbackDTO.owner != myFeedback.owner {
+                                feedbacks.append(feedbackDTO)
+                            }
                         }
+                        if !self.feedbackList.contains(myFeedback) {
+                            feedbacks.insert(myFeedback, atIndex: 0)
+                        }
+                    }
+                    else {
+                        feedbacks = feedbackPage
                     }
                     
                     
-                    self.feedbackList.appendContentsOf(feedbackPageWithoutMe)
+                    self.feedbackList.appendContentsOf(feedbacks)
                     self.viewController.reloadFeedbackData()
                     self.viewController.hasAnyFeedback = self.feedbackList.count > 0
-                    self.feedbackPage++
+                    self.feedbackPage += 1
                     self.loadedAllFeedback = feedbackPage.count < self.feedbackObjectsPerPage
                 }
             })

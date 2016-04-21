@@ -69,7 +69,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         let http = securityManager.isLoggedIn() ? httpFactory.create(HttpType.OpenIDJson) : httpFactory.create(HttpType.ServiceAccount)
         var url: String!
         if let latestDataUpdate = dataUpdateDataStore.getLatestDataUpdate() {
-            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?limit=50&last_event_id=\(latestDataUpdate.id)"
+            url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/entity-events?limit=100&last_event_id=\(latestDataUpdate.id)"
         }
         else {
             if fromDate == 0 {
@@ -100,8 +100,9 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
             }
             catch {
                 let nsError = error as NSError
-                printerr("There was an error processing updates from server: \(error)")
-                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error processing updates from server: \(error)", value: nsError.localizedDescription, comment: "")]
+                let message = "There was an error processing updates from server: \(error)"
+                printerr(message)
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString(message, value: nsError.localizedDescription, comment: "")]
                 let friendlyError = NSError(domain: Constants.ErrorDomain, code: 1, userInfo: userInfo)
                 Crashlytics.sharedInstance().recordError(friendlyError)
             }

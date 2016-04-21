@@ -9,6 +9,7 @@
 import UIKit
 import AeroGearHttp
 import AeroGearOAuth2
+import Crashlytics
 
 public class SecurityManager: NSObject {
     
@@ -165,6 +166,7 @@ public class SecurityManager: NSObject {
         oauthModuleOpenID.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             if error != nil {
                 printerr(error)
+                Crashlytics.sharedInstance().recordError(error!)
                 return
             }
             
