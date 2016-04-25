@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Crashlytics
 
 public class GenericDataStore: NSObject {
     var realm = try! RealmFactory().create()
@@ -46,7 +47,15 @@ public class GenericDataStore: NSObject {
     
     public func deleteLocal<T: BaseEntity>(entity: T, completionBlock : (NSError? -> Void)!) {
         try! realm.write {
-            self.realm.delete(entity)
+            if entity.realm == realm {
+                realm.delete(entity)
+            } else {
+                let message = NSLocalizedString("error_deleting_entity", value: "Entity \(entity.debugDescription) does not belongs to current Realm.", comment: "")
+                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey:  message]
+                let err = NSError(domain: Constants.ErrorDomain, code: 20022, userInfo: userInfo)
+                Crashlytics.sharedInstance().recordError(err)
+                printdeb(err.localizedDescription)
+            }
         }
 
         if (trigger != nil) {
