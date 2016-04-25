@@ -139,6 +139,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                         for availableDate in viewController.availableDates {
                             if availableDate.mt_isWithinSameDay(today) {
                                 selected = availableDate
+                                break
                             }
                         }
                         viewController.selectedDate = selected
@@ -154,6 +155,7 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                         for availableDate in viewController.availableDates {
                             if availableDate.mt_isWithinSameDay(today) {
                                 selected = availableDate
+                                break
                             }
                         }
                         viewController.selectedDate = selected
