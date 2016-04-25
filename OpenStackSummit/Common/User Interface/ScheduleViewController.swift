@@ -20,6 +20,8 @@ public protocol IScheduleViewController: class, IMessageEnabledViewController {
     func reloadSchedule()
     func showActivityIndicator()
     func hideActivityIndicator()
+    func toggleEventList(show: Bool)
+    func toggleNoConnectivityMessage(show: Bool)
 }
 
 class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource, IScheduleViewController {
@@ -85,6 +87,9 @@ class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate,
     
     func showActivityIndicator() {}
     func hideActivityIndicator() {}
+    
+    func toggleEventList(show: Bool) {}
+    func toggleNoConnectivityMessage(show: Bool) {}
     
     func horizontalDayPicker(picker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
         return scheduleView.horizontalDayPicker(picker, widthForItemWithDate: date)
