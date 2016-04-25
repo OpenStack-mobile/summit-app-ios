@@ -114,6 +114,10 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
 
                 if (error != nil) {
                     viewController.showErrorMessage(error!)
+                    
+                    self.scheduleFilter.hasToRefreshSchedule = true
+                    viewController.toggleNoConnectivityMessage(true)
+                    viewController.toggleEventList(false)
                     return
                 }
                 
