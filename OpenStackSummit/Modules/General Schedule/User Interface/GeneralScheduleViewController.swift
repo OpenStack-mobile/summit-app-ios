@@ -1,5 +1,5 @@
 //
-//  ScheduleViewController.swift
+//  GeneralScheduleViewController.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/3/15.
@@ -11,13 +11,7 @@ import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
 
-@objc
-public protocol IGeneralScheduleViewController: IScheduleViewController {
-    func toggleEventList(show: Bool)
-    func toggleNoConnectivityMessage(show: Bool)
-}
-
-class GeneralScheduleViewController: ScheduleViewController, IGeneralScheduleViewController,IndicatorInfoProvider {
+class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var noConnectivityView: UIView!
     @IBOutlet weak var retryButton: UIButton!
@@ -52,11 +46,11 @@ class GeneralScheduleViewController: ScheduleViewController, IGeneralScheduleVie
         presenter.viewLoad()
     }
     
-    func toggleEventList(show: Bool) {
+    override func toggleEventList(show: Bool) {
         scheduleView.hidden = !show
     }
     
-    func toggleNoConnectivityMessage(show: Bool) {
+    override func toggleNoConnectivityMessage(show: Bool) {
         noConnectivityView.hidden = !show
     }
     
