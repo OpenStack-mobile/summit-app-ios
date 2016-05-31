@@ -6,9 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public typealias SummitAttendee = Person
-
-public struct Person: PersonListItemProtocol {
+public struct Person: Named {
     
     public let identifier: Identifier
     
