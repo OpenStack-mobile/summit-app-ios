@@ -29,5 +29,7 @@ public protocol RealmDecodable {
 
 public protocol RealmEncodable {
     
-    //associatedtype RealmType: RealmEntityProtocol
+    associatedtype RealmType: RealmEntityProtocol
+    
+    func save(realm: Realm) throws -> RealmType
 }

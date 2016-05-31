@@ -6,21 +6,24 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import struct SwiftFoundation.Date
 
 public struct Summit: Named {
     
-    public let identifier: Int
+    public let identifier: Identifier
     
     public var name: String
     
-    public var startDate: Date
-    
-    public var endDate: Date
-    
-    public var initialDataLoadDate: Date
-    
     public var timeZone: String
+    
+    public var start: Date
+    
+    public var end: Date
+    
+    public var startShowingVenues: Date
+    
+    /// Realm only value, not returned from JSON.
+    public var initialDataLoad: Date? = nil
 }
 
 
