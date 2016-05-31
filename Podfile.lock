@@ -44,8 +44,7 @@ PODS:
 
 DEPENDENCIES:
   - AeroGearHttp (from `https://github.com/claudioredi/aerogear-ios-http.git`)
-  - AeroGearOAuth2 (from `https://github.com/claudioredi/aerogear-ios-oauth2.git`,
-    branch `openstack`)
+  - AeroGearOAuth2 (from `https://github.com/claudioredi/aerogear-ios-oauth2.git`, branch `openstack`)
   - AFHorizontalDayPicker (from `https://github.com/alexfedosov/AFHorizontalDayPicker.git`)
   - AHKActionSheet
   - AMTagListView
@@ -93,8 +92,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/gcutrini/XLPagerTabStrip.git
 
 SPEC CHECKSUMS:
-  AeroGearHttp: 36a4a2b6dd0d8a07c82674f8bcb6ed5b0a2d8a14
-  AeroGearOAuth2: 14567284fdd476e1d11056dc3ab10cd1d9ad4804
+  AeroGearHttp: c734ae3393276101535715e09d33b60ee754135f
+  AeroGearOAuth2: 1360aa7495bb5aacd1507c5fb6a01422531f5a5c
   AFHorizontalDayPicker: 289d3f6dbb10accd2eeef3d08b452ce811a747cf
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
   AMTagListView: 27073f013fe1f5687dbc936e63f94b73e210ed7a
@@ -119,4 +118,6 @@ SPEC CHECKSUMS:
   URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
   XLPagerTabStrip: a39467a6e71017d2be92807ed9308b4d06557c80
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 956b96fe92379593d122a45ce652eb39f477878d
+
+COCOAPODS: 1.0.0
