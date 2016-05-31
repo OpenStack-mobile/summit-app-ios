@@ -7,7 +7,6 @@
 //
 
 import SwiftFoundation
-
 import RealmSwift
 
 public class RealmSummit: RealmNamed {
@@ -26,3 +25,26 @@ public class RealmSummit: RealmNamed {
     public let eventTypes = List<RealmEventType>()
 }
 
+// MARK: - Realm Encoding
+
+extension Summit: RealmEncodable {
+    
+    public init(realm: RealmSummit) {
+        
+        self.identifier = realm.id
+        self.name = realm.name
+        self.start = Date(foundation: realm.startDate)
+        self.end = Date(foundation: realm.endDate)
+        self.timeZone = realm.timeZone
+        self.initialDataLoad = Date(foundation: realm.initialDataLoadDate)
+        self.startShowingVenues = Date(foundation: realm.startShowingVenuesDate)
+    }
+}
+
+extension Summit: RealmDecodable {
+    
+    public func save(realm: Realm) throws -> RealmSummit {
+        
+        
+    }
+}

@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-public final class RealmPerson: RealmEntity {
+public class RealmPerson: RealmEntity {
     
     public dynamic var firstName = ""
     public dynamic var lastName = ""
@@ -25,10 +25,7 @@ public final class RealmPerson: RealmEntity {
 
 // MARK: - Encoding
 
-extension Person: RealmEncodable {
-    
-    
-}
+//extension Person: RealmEncodable { }
 
 extension Person: RealmDecodable {
     
