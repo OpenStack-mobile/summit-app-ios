@@ -16,7 +16,7 @@ public protocol PersonListItemProtocol: Named {
 
 public struct PersonListItem: PersonListItemProtocol {
     
-    public let identifier: String
+    public let identifier: Int
     public var name: String
     
     public var title: String

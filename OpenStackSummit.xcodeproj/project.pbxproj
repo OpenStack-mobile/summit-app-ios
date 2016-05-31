@@ -18,8 +18,13 @@
 		6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8B1CFE1CE20010A5C4 /* Person.swift */; };
 		6EE66C8E1CFE1F810010A5C4 /* PersonListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8D1CFE1F810010A5C4 /* PersonListItem.swift */; };
 		6EE66C901CFE20980010A5C4 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8F1CFE20980010A5C4 /* Realm.swift */; };
-		6EE66C921CFE24C20010A5C4 /* RealmPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */; };
-		6EE66C941CFE2B0A0010A5C4 /* RealmPersonListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C931CFE2B0A0010A5C4 /* RealmPersonListItem.swift */; };
+		6EE66C921CFE24C20010A5C4 /* PersonRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C911CFE24C20010A5C4 /* PersonRealm.swift */; };
+		6EE66C941CFE2B0A0010A5C4 /* PersonListItemRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C931CFE2B0A0010A5C4 /* PersonListItemRealm.swift */; };
+		6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C951CFE382B0010A5C4 /* Summit.swift */; };
+		6EE66C981CFE394F0010A5C4 /* SummitRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C971CFE394F0010A5C4 /* SummitRealm.swift */; };
+		6EE66C9A1CFE39F90010A5C4 /* NamedRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C991CFE39F90010A5C4 /* NamedRealm.swift */; };
+		6EE66C9D1CFE3BAF0010A5C4 /* SummitJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C9C1CFE3BAF0010A5C4 /* SummitJSON.swift */; };
+		6EE66C9F1CFE3BD50010A5C4 /* SummitTypeRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C9E1CFE3BD50010A5C4 /* SummitTypeRealm.swift */; };
 		879E5AF2339F181571BBEEB1 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA5746BC470BCEE1A3C1870 /* Pods_OpenStackSummitTests.framework */; };
 		9D1947DB1C7AC68900409CEF /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1947DA1C7AC68900409CEF /* NavigationController.swift */; };
 		9D1D92031C4E06B200C1BB6C /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */; };
@@ -427,8 +432,13 @@
 		6EE66C8B1CFE1CE20010A5C4 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		6EE66C8D1CFE1F810010A5C4 /* PersonListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonListItem.swift; sourceTree = "<group>"; };
 		6EE66C8F1CFE20980010A5C4 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
-		6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPerson.swift; sourceTree = "<group>"; };
-		6EE66C931CFE2B0A0010A5C4 /* RealmPersonListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPersonListItem.swift; sourceTree = "<group>"; };
+		6EE66C911CFE24C20010A5C4 /* PersonRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonRealm.swift; sourceTree = "<group>"; };
+		6EE66C931CFE2B0A0010A5C4 /* PersonListItemRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonListItemRealm.swift; sourceTree = "<group>"; };
+		6EE66C951CFE382B0010A5C4 /* Summit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Summit.swift; sourceTree = "<group>"; };
+		6EE66C971CFE394F0010A5C4 /* SummitRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRealm.swift; sourceTree = "<group>"; };
+		6EE66C991CFE39F90010A5C4 /* NamedRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedRealm.swift; sourceTree = "<group>"; };
+		6EE66C9C1CFE3BAF0010A5C4 /* SummitJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitJSON.swift; sourceTree = "<group>"; };
+		6EE66C9E1CFE3BD50010A5C4 /* SummitTypeRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTypeRealm.swift; sourceTree = "<group>"; };
 		9D1947DA1C7AC68900409CEF /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = "User Interface/NavigationController.swift"; sourceTree = "<group>"; };
 		9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
 		9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDeserializer.swift; sourceTree = "<group>"; };
@@ -829,6 +839,7 @@
 		6EE66C681CFE1A920010A5C4 /* CoreSummit */ = {
 			isa = PBXGroup;
 			children = (
+				6EE66C9B1CFE3B9F0010A5C4 /* JSON */,
 				6EE66C861CFE1B0A0010A5C4 /* Model */,
 				6EE66C851CFE1ACC0010A5C4 /* Realm */,
 				6EE66C691CFE1A920010A5C4 /* CoreSummit.h */,
@@ -850,8 +861,11 @@
 			isa = PBXGroup;
 			children = (
 				6EE66C8F1CFE20980010A5C4 /* Realm.swift */,
-				6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */,
-				6EE66C931CFE2B0A0010A5C4 /* RealmPersonListItem.swift */,
+				6EE66C991CFE39F90010A5C4 /* NamedRealm.swift */,
+				6EE66C911CFE24C20010A5C4 /* PersonRealm.swift */,
+				6EE66C931CFE2B0A0010A5C4 /* PersonListItemRealm.swift */,
+				6EE66C971CFE394F0010A5C4 /* SummitRealm.swift */,
+				6EE66C9E1CFE3BD50010A5C4 /* SummitTypeRealm.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -863,8 +877,17 @@
 				6EE66C871CFE1B5F0010A5C4 /* Named.swift */,
 				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
 				6EE66C8D1CFE1F810010A5C4 /* PersonListItem.swift */,
+				6EE66C951CFE382B0010A5C4 /* Summit.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		6EE66C9B1CFE3B9F0010A5C4 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				6EE66C9C1CFE3BAF0010A5C4 /* SummitJSON.swift */,
+			);
+			name = JSON;
 			sourceTree = "<group>";
 		};
 		82D4CE281B647E1B264746D5 /* Frameworks */ = {
@@ -2432,12 +2455,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EE66C921CFE24C20010A5C4 /* RealmPerson.swift in Sources */,
+				6EE66C981CFE394F0010A5C4 /* SummitRealm.swift in Sources */,
+				6EE66C9A1CFE39F90010A5C4 /* NamedRealm.swift in Sources */,
+				6EE66C921CFE24C20010A5C4 /* PersonRealm.swift in Sources */,
+				6EE66C9D1CFE3BAF0010A5C4 /* SummitJSON.swift in Sources */,
 				6EE66C901CFE20980010A5C4 /* Realm.swift in Sources */,
 				6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */,
 				6EE66C8E1CFE1F810010A5C4 /* PersonListItem.swift in Sources */,
-				6EE66C941CFE2B0A0010A5C4 /* RealmPersonListItem.swift in Sources */,
+				6EE66C941CFE2B0A0010A5C4 /* PersonListItemRealm.swift in Sources */,
 				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
+				6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */,
+				6EE66C9F1CFE3BD50010A5C4 /* SummitTypeRealm.swift in Sources */,
 				6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

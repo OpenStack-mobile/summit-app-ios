@@ -9,5 +9,7 @@
 /// A data type that can be uniquely identified.
 public protocol Unique {
     
-    var identifier: String { get }
+    var identifier: Identifier { get }
 }
+
+public typealias Identifier = Int
