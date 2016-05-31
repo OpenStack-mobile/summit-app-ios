@@ -35,5 +35,7 @@ extension Summit: JSONDecodable {
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone
         self.startShowingVenues = Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
+        
+        self.initialDataLoad = nil
     }
 }
