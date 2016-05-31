@@ -7,7 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */; };
+		05B22B06396300093B488780 /* Pods_OpenStackSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB00E2A87EF1AF3C29C29823 /* Pods_OpenStackSummit.framework */; };
+		6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE66C691CFE1A920010A5C4 /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
+		6EE66C781CFE1A930010A5C4 /* CoreSummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C771CFE1A930010A5C4 /* CoreSummitTests.swift */; };
+		6EE66C7C1CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
+		6EE66C7D1CFE1A930010A5C4 /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C871CFE1B5F0010A5C4 /* Named.swift */; };
+		6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C891CFE1C670010A5C4 /* Unique.swift */; };
+		6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8B1CFE1CE20010A5C4 /* Person.swift */; };
+		6EE66C8E1CFE1F810010A5C4 /* PersonListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8D1CFE1F810010A5C4 /* PersonListItem.swift */; };
+		6EE66C901CFE20980010A5C4 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8F1CFE20980010A5C4 /* Realm.swift */; };
+		6EE66C921CFE24C20010A5C4 /* RealmPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */; };
+		6EE66C941CFE2B0A0010A5C4 /* RealmPersonListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C931CFE2B0A0010A5C4 /* RealmPersonListItem.swift */; };
+		879E5AF2339F181571BBEEB1 /* Pods_OpenStackSummitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA5746BC470BCEE1A3C1870 /* Pods_OpenStackSummitTests.framework */; };
 		9D1947DB1C7AC68900409CEF /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1947DA1C7AC68900409CEF /* NavigationController.swift */; };
 		9D1D92031C4E06B200C1BB6C /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */; };
 		9D1D92051C4E09A000C1BB6C /* TrackGroupDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */; };
@@ -34,7 +47,6 @@
 		9DEF61B41C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */; };
 		9DF1B8BC1C50215E00945E47 /* RealmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */; };
 		9DF44C081C907300002BBFF4 /* VenuesMapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF44C071C907300002BBFF4 /* VenuesMapInteractor.swift */; };
-		AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */; };
 		CA0029F01B9DFE6C001A9EDA /* VenueDetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */; };
 		CA0029F51B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */; };
 		CA0029F71B9E1E84001A9EDA /* VenueRoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029F61B9E1E84001A9EDA /* VenueRoomDetailViewController.swift */; };
@@ -351,6 +363,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6EE66C721CFE1A930010A5C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD906031B72B34F00BA5647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EE66C661CFE1A920010A5C4;
+			remoteInfo = CoreSummit;
+		};
+		6EE66C741CFE1A930010A5C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD906031B72B34F00BA5647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAD9060A1B72B34F00BA5647;
+			remoteInfo = OpenStackSummit;
+		};
+		6EE66C7A1CFE1A930010A5C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD906031B72B34F00BA5647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EE66C661CFE1A920010A5C4;
+			remoteInfo = CoreSummit;
+		};
 		CAD906231B72B34F00BA5647 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAD906031B72B34F00BA5647 /* Project object */;
@@ -367,10 +400,35 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6EE66C831CFE1A930010A5C4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6EE66C7D1CFE1A930010A5C4 /* CoreSummit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenStackSummitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5358BB0570F657798F096506 /* Pods-OpenStackSummitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EE66C691CFE1A920010A5C4 /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
+		6EE66C6B1CFE1A920010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EE66C701CFE1A930010A5C4 /* CoreSummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreSummitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EE66C771CFE1A930010A5C4 /* CoreSummitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreSummitTests.swift; sourceTree = "<group>"; };
+		6EE66C791CFE1A930010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EE66C871CFE1B5F0010A5C4 /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
+		6EE66C891CFE1C670010A5C4 /* Unique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unique.swift; sourceTree = "<group>"; };
+		6EE66C8B1CFE1CE20010A5C4 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		6EE66C8D1CFE1F810010A5C4 /* PersonListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonListItem.swift; sourceTree = "<group>"; };
+		6EE66C8F1CFE20980010A5C4 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPerson.swift; sourceTree = "<group>"; };
+		6EE66C931CFE2B0A0010A5C4 /* RealmPersonListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPersonListItem.swift; sourceTree = "<group>"; };
 		9D1947DA1C7AC68900409CEF /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = "User Interface/NavigationController.swift"; sourceTree = "<group>"; };
 		9D1D92021C4E06B200C1BB6C /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
 		9D1D92041C4E09A000C1BB6C /* TrackGroupDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDeserializer.swift; sourceTree = "<group>"; };
@@ -397,7 +455,9 @@
 		9DEF61B31C197C2E00D9F9B5 /* SpeakerPresentationsWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsWireframe.swift; sourceTree = "<group>"; };
 		9DF1B8BB1C50215E00945E47 /* RealmFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmFactory.swift; path = DataAccess/RealmFactory.swift; sourceTree = "<group>"; };
 		9DF44C071C907300002BBFF4 /* VenuesMapInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapInteractor.swift; sourceTree = "<group>"; };
-		A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
+		9FA5746BC470BCEE1A3C1870 /* Pods_OpenStackSummitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenStackSummitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A43C3B08EB8CCDB44BB9467D /* Pods-OpenStackSummit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummit.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummit/Pods-OpenStackSummit.release.xcconfig"; sourceTree = "<group>"; };
+		A754717D1F40E2E1460EBC37 /* Pods-OpenStackSummit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummit/Pods-OpenStackSummit.debug.xcconfig"; sourceTree = "<group>"; };
 		A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0029EF1B9DFE6C001A9EDA /* VenueDetailAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailAssembly.swift; sourceTree = "<group>"; };
 		CA0029F41B9E1E43001A9EDA /* VenueRoomDetailWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDetailWireframe.swift; sourceTree = "<group>"; };
@@ -719,15 +779,32 @@
 		CAF2AA511B828E7C00D8E595 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		CAF2AA581B82914B00D8E595 /* DeserializerStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeserializerStorageTests.swift; sourceTree = "<group>"; };
 		CAF2AA5C1B82917300D8E595 /* SummitDataStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataStoreTests.swift; sourceTree = "<group>"; };
-		D69C9CE108E852E2F1F57A45 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EE4933CD44F9ABBBA133144A /* Pods-OpenStackSummitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenStackSummitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB00E2A87EF1AF3C29C29823 /* Pods_OpenStackSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenStackSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6EE66C631CFE1A920010A5C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EE66C6D1CFE1A930010A5C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAD906081B72B34F00BA5647 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB8205D78DAC0BB6DCEEE16F /* Pods.framework in Frameworks */,
+				6EE66C7C1CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */,
+				05B22B06396300093B488780 /* Pods_OpenStackSummit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,7 +812,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C5A7E7C485E13380C57A226 /* Pods_OpenStackSummitTests.framework in Frameworks */,
+				879E5AF2339F181571BBEEB1 /* Pods_OpenStackSummitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,12 +826,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6EE66C681CFE1A920010A5C4 /* CoreSummit */ = {
+			isa = PBXGroup;
+			children = (
+				6EE66C861CFE1B0A0010A5C4 /* Model */,
+				6EE66C851CFE1ACC0010A5C4 /* Realm */,
+				6EE66C691CFE1A920010A5C4 /* CoreSummit.h */,
+				6EE66C6B1CFE1A920010A5C4 /* Info.plist */,
+			);
+			path = CoreSummit;
+			sourceTree = "<group>";
+		};
+		6EE66C761CFE1A930010A5C4 /* CoreSummitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EE66C771CFE1A930010A5C4 /* CoreSummitTests.swift */,
+				6EE66C791CFE1A930010A5C4 /* Info.plist */,
+			);
+			path = CoreSummitTests;
+			sourceTree = "<group>";
+		};
+		6EE66C851CFE1ACC0010A5C4 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				6EE66C8F1CFE20980010A5C4 /* Realm.swift */,
+				6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */,
+				6EE66C931CFE2B0A0010A5C4 /* RealmPersonListItem.swift */,
+			);
+			name = Realm;
+			sourceTree = "<group>";
+		};
+		6EE66C861CFE1B0A0010A5C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6EE66C891CFE1C670010A5C4 /* Unique.swift */,
+				6EE66C871CFE1B5F0010A5C4 /* Named.swift */,
+				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
+				6EE66C8D1CFE1F810010A5C4 /* PersonListItem.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		82D4CE281B647E1B264746D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				CAD6B3521B7E865E00D62023 /* Pods.framework */,
 				A8DBEC5532C4E320DE3EC4B7 /* Pods.framework */,
-				6A6FD253CE7A8230E302C51D /* Pods_OpenStackSummitTests.framework */,
+				FB00E2A87EF1AF3C29C29823 /* Pods_OpenStackSummit.framework */,
+				9FA5746BC470BCEE1A3C1870 /* Pods_OpenStackSummitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -817,6 +936,17 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
+		9DAE903014C6825E6130B945 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A754717D1F40E2E1460EBC37 /* Pods-OpenStackSummit.debug.xcconfig */,
+				A43C3B08EB8CCDB44BB9467D /* Pods-OpenStackSummit.release.xcconfig */,
+				5358BB0570F657798F096506 /* Pods-OpenStackSummitTests.debug.xcconfig */,
+				EE4933CD44F9ABBBA133144A /* Pods-OpenStackSummitTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9DEA0FB41BFD0CDD0035B130 /* Venues */ = {
 			isa = PBXGroup;
 			children = (
@@ -841,17 +971,6 @@
 				9D1D920B1C4FF12E00C1BB6C /* SchemaMigration.swift */,
 			);
 			name = Migration;
-			sourceTree = "<group>";
-		};
-		AA58718A926F2751A4081893 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D69C9CE108E852E2F1F57A45 /* Pods.debug.xcconfig */,
-				9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */,
-				974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */,
-				A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		CA0029F11B9E1E2C001A9EDA /* Venue Room Detail */ = {
@@ -1429,9 +1548,11 @@
 				CAD9060D1B72B34F00BA5647 /* OpenStackSummit */,
 				CAD906251B72B34F00BA5647 /* OpenStackSummitTests */,
 				CAD906301B72B34F00BA5647 /* OpenStackSummitUITests */,
+				6EE66C681CFE1A920010A5C4 /* CoreSummit */,
+				6EE66C761CFE1A930010A5C4 /* CoreSummitTests */,
 				CAD9060C1B72B34F00BA5647 /* Products */,
-				AA58718A926F2751A4081893 /* Pods */,
 				82D4CE281B647E1B264746D5 /* Frameworks */,
+				9DAE903014C6825E6130B945 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1441,6 +1562,8 @@
 				CAD9060B1B72B34F00BA5647 /* OpenStackSummit.app */,
 				CAD906221B72B34F00BA5647 /* OpenStackSummitTests.xctest */,
 				CAD9062D1B72B34F00BA5647 /* OpenStackSummitUITests.xctest */,
+				6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */,
+				6EE66C701CFE1A930010A5C4 /* CoreSummitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1979,22 +2102,72 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		6EE66C641CFE1A920010A5C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		CAD9060A1B72B34F00BA5647 /* OpenStackSummit */ = {
+		6EE66C661CFE1A920010A5C4 /* CoreSummit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CAD906361B72B34F00BA5647 /* Build configuration list for PBXNativeTarget "OpenStackSummit" */;
+			buildConfigurationList = 6EE66C821CFE1A930010A5C4 /* Build configuration list for PBXNativeTarget "CoreSummit" */;
 			buildPhases = (
-				172B868DB85634C027549BAB /* Check Pods Manifest.lock */,
-				CAD906071B72B34F00BA5647 /* Sources */,
-				CAD906081B72B34F00BA5647 /* Frameworks */,
-				CAD906091B72B34F00BA5647 /* Resources */,
-				A935F7EC4756200E0FDD647F /* Embed Pods Frameworks */,
-				FDBB6DD1644BA68BBD9831C5 /* Copy Pods Resources */,
-				CA4155681B8E4E7100F177F5 /* ShellScript */,
+				6EE66C621CFE1A920010A5C4 /* Sources */,
+				6EE66C631CFE1A920010A5C4 /* Frameworks */,
+				6EE66C641CFE1A920010A5C4 /* Headers */,
+				6EE66C651CFE1A920010A5C4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			name = CoreSummit;
+			productName = CoreSummit;
+			productReference = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6EE66C6F1CFE1A930010A5C4 /* CoreSummitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EE66C841CFE1A930010A5C4 /* Build configuration list for PBXNativeTarget "CoreSummitTests" */;
+			buildPhases = (
+				6EE66C6C1CFE1A930010A5C4 /* Sources */,
+				6EE66C6D1CFE1A930010A5C4 /* Frameworks */,
+				6EE66C6E1CFE1A930010A5C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6EE66C731CFE1A930010A5C4 /* PBXTargetDependency */,
+				6EE66C751CFE1A930010A5C4 /* PBXTargetDependency */,
+			);
+			name = CoreSummitTests;
+			productName = CoreSummitTests;
+			productReference = 6EE66C701CFE1A930010A5C4 /* CoreSummitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CAD9060A1B72B34F00BA5647 /* OpenStackSummit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAD906361B72B34F00BA5647 /* Build configuration list for PBXNativeTarget "OpenStackSummit" */;
+			buildPhases = (
+				7BB7CEF4ACB14C93C870AAF9 /* 📦 Check Pods Manifest.lock */,
+				CAD906071B72B34F00BA5647 /* Sources */,
+				CAD906081B72B34F00BA5647 /* Frameworks */,
+				CAD906091B72B34F00BA5647 /* Resources */,
+				CA4155681B8E4E7100F177F5 /* ShellScript */,
+				90DE467E60F7B3158AD34B7E /* 📦 Embed Pods Frameworks */,
+				65BE684B4CC459FE2458C792 /* 📦 Copy Pods Resources */,
+				6EE66C831CFE1A930010A5C4 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6EE66C7B1CFE1A930010A5C4 /* PBXTargetDependency */,
 			);
 			name = OpenStackSummit;
 			productName = OpenStackSummit;
@@ -2005,12 +2178,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAD906391B72B34F00BA5647 /* Build configuration list for PBXNativeTarget "OpenStackSummitTests" */;
 			buildPhases = (
-				B1E7921BA53EDF3856F123BF /* Check Pods Manifest.lock */,
+				A148F5BF668831E7753F2F36 /* 📦 Check Pods Manifest.lock */,
 				CAD9061E1B72B34F00BA5647 /* Sources */,
 				CAD9061F1B72B34F00BA5647 /* Frameworks */,
 				CAD906201B72B34F00BA5647 /* Resources */,
-				7C4A6F69D2688014A0B7A170 /* Embed Pods Frameworks */,
-				9A43191FC78085AF290BBCB3 /* Copy Pods Resources */,
+				CB494C8A00693EFAC5828776 /* 📦 Embed Pods Frameworks */,
+				7E3B8C5178A747D1CBD7BE7D /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2046,10 +2219,18 @@
 		CAD906031B72B34F00BA5647 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = OpenStack;
 				TargetAttributes = {
+					6EE66C661CFE1A920010A5C4 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 775U6X6R5M;
+					};
+					6EE66C6F1CFE1A930010A5C4 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = CAD9060A1B72B34F00BA5647;
+					};
 					CAD9060A1B72B34F00BA5647 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 775U6X6R5M;
@@ -2086,11 +2267,27 @@
 				CAD9060A1B72B34F00BA5647 /* OpenStackSummit */,
 				CAD906211B72B34F00BA5647 /* OpenStackSummitTests */,
 				CAD9062C1B72B34F00BA5647 /* OpenStackSummitUITests */,
+				6EE66C661CFE1A920010A5C4 /* CoreSummit */,
+				6EE66C6F1CFE1A930010A5C4 /* CoreSummitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6EE66C651CFE1A920010A5C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EE66C6E1CFE1A930010A5C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAD906091B72B34F00BA5647 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2125,14 +2322,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		172B868DB85634C027549BAB /* Check Pods Manifest.lock */ = {
+		65BE684B4CC459FE2458C792 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenStackSummit/Pods-OpenStackSummit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BB7CEF4ACB14C93C870AAF9 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2140,29 +2352,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		7C4A6F69D2688014A0B7A170 /* Embed Pods Frameworks */ = {
+		7E3B8C5178A747D1CBD7BE7D /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9A43191FC78085AF290BBCB3 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2170,29 +2367,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A935F7EC4756200E0FDD647F /* Embed Pods Frameworks */ = {
+		90DE467E60F7B3158AD34B7E /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenStackSummit/Pods-OpenStackSummit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B1E7921BA53EDF3856F123BF /* Check Pods Manifest.lock */ = {
+		A148F5BF668831E7753F2F36 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2213,24 +2410,46 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" aa21b5677127f3ec5529afb84617d6230eb863ab c1f2e4937b6e264126eff0fff3d2bb09e16bab8c064040888314a0dd3517976a";
 		};
-		FDBB6DD1644BA68BBD9831C5 /* Copy Pods Resources */ = {
+		CB494C8A00693EFAC5828776 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenStackSummitTests/Pods-OpenStackSummitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6EE66C621CFE1A920010A5C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EE66C921CFE24C20010A5C4 /* RealmPerson.swift in Sources */,
+				6EE66C901CFE20980010A5C4 /* Realm.swift in Sources */,
+				6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */,
+				6EE66C8E1CFE1F810010A5C4 /* PersonListItem.swift in Sources */,
+				6EE66C941CFE2B0A0010A5C4 /* RealmPersonListItem.swift in Sources */,
+				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
+				6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EE66C6C1CFE1A930010A5C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EE66C781CFE1A930010A5C4 /* CoreSummitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAD906071B72B34F00BA5647 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2584,6 +2803,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6EE66C731CFE1A930010A5C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EE66C661CFE1A920010A5C4 /* CoreSummit */;
+			targetProxy = 6EE66C721CFE1A930010A5C4 /* PBXContainerItemProxy */;
+		};
+		6EE66C751CFE1A930010A5C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAD9060A1B72B34F00BA5647 /* OpenStackSummit */;
+			targetProxy = 6EE66C741CFE1A930010A5C4 /* PBXContainerItemProxy */;
+		};
+		6EE66C7B1CFE1A930010A5C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EE66C661CFE1A920010A5C4 /* CoreSummit */;
+			targetProxy = 6EE66C7A1CFE1A930010A5C4 /* PBXContainerItemProxy */;
+		};
 		CAD906241B72B34F00BA5647 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAD9060A1B72B34F00BA5647 /* OpenStackSummit */;
@@ -2616,6 +2850,77 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6EE66C7E1CFE1A930010A5C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6EE66C7F1CFE1A930010A5C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6EE66C801CFE1A930010A5C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStackSummit.app/OpenStackSummit";
+			};
+			name = Debug;
+		};
+		6EE66C811CFE1A930010A5C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStackSummit.app/OpenStackSummit";
+			};
+			name = Release;
+		};
 		CAD906341B72B34F00BA5647 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2639,6 +2944,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/Carthage/Build/iOS;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2686,6 +2992,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/Carthage/Build/iOS;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2705,12 +3012,13 @@
 		};
 		CAD906371B72B34F00BA5647 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D69C9CE108E852E2F1F57A45 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = A754717D1F40E2E1460EBC37 /* Pods-OpenStackSummit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OpenStackSummit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2724,11 +3032,12 @@
 		};
 		CAD906381B72B34F00BA5647 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B2D6FC671CD9A0E17CEC06B /* Pods.release.xcconfig */;
+			baseConfigurationReference = A43C3B08EB8CCDB44BB9467D /* Pods-OpenStackSummit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OpenStackSummit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2741,7 +3050,7 @@
 		};
 		CAD9063A1B72B34F00BA5647 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 974A3B88A089966984212627 /* Pods-OpenStackSummitTests.debug.xcconfig */;
+			baseConfigurationReference = 5358BB0570F657798F096506 /* Pods-OpenStackSummitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2761,7 +3070,7 @@
 		};
 		CAD9063B1B72B34F00BA5647 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A308EB6FB96ED9A67A3B875C /* Pods-OpenStackSummitTests.release.xcconfig */;
+			baseConfigurationReference = EE4933CD44F9ABBBA133144A /* Pods-OpenStackSummitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2806,6 +3115,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6EE66C821CFE1A930010A5C4 /* Build configuration list for PBXNativeTarget "CoreSummit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EE66C7E1CFE1A930010A5C4 /* Debug */,
+				6EE66C7F1CFE1A930010A5C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6EE66C841CFE1A930010A5C4 /* Build configuration list for PBXNativeTarget "CoreSummitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EE66C801CFE1A930010A5C4 /* Debug */,
+				6EE66C811CFE1A930010A5C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CAD906061B72B34F00BA5647 /* Build configuration list for PBXProject "OpenStackSummit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
