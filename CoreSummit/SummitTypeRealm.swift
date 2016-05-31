@@ -1,13 +1,14 @@
 //
-//  Named.swift
+//  SummitTypeRealm.swift
 //  OpenStackSummit
 //
 //  Created by Alsey Coleman Miller on 5/31/16.
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-/// A named data type.
-public protocol Named: Unique {
+import RealmSwift
+
+public class RealmSummitType: RealmNamed {
     
-    var name: String { get }
+    public dynamic var color = ""
 }

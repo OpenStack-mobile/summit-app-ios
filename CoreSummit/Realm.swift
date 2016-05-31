@@ -22,10 +22,12 @@ public class RealmEntity: Object, RealmEntityProtocol {
 
 public protocol RealmDecodable {
     
-    init(realm: RealmEntity)
+    associatedtype RealmType: RealmEntityProtocol
+    
+    init(realm: RealmType)
 }
 
 public protocol RealmEncodable {
     
-    
+    //associatedtype RealmType: RealmEntityProtocol
 }

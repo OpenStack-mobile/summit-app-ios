@@ -10,8 +10,11 @@ public typealias SummitAttendee = Person
 
 public struct Person: PersonListItemProtocol {
     
-    public let identifier: String
-    public var name: String
+    public let identifier: Identifier
+    
+    public var firstName: String
+    public var lastName: String
+    public var name: String { return firstName + " " + lastName }
     
     public var title: String
     public var pictureURL: String
