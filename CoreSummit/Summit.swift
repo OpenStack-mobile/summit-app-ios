@@ -23,7 +23,7 @@ public struct Summit: Named {
     public var startShowingVenues: Date
     
     /// Realm only value, not returned from JSON.
-    public var initialDataLoad: Date? = nil
+    public var initialDataLoad: Date?
 }
 
 
