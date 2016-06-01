@@ -28,9 +28,14 @@ extension Summit: JSONDecodable {
             let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
             let timeZone = TimeZone(JSONValue: timeZoneJSON),
             let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool,
+            let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
+            let sponsors = Company.fromJSON(sponsorsJSONArray),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
             let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
-            let 
+            let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
+            let ticketTypes = TicketType.fromJSON(ticketTypeJSONArray),
+            let locationsJSON = JSONObject[JSONKey.locations.rawValue]?.arrayValue,
+            let locations = Location.fromJSON(locationsJSON)
             else { return nil }
         
         self.identifier = identifier
@@ -39,18 +44,29 @@ extension Summit: JSONDecodable {
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone
         self.active = active
+        self.sponsors = sponsors
         self.summitTypes = summitTypes
+        self.ticketTypes = ticketTypes
+        self.locations = locations
         
-        self.initialDataLoad = nil
+        // optional values
         
-        if let startShowingVenuesDate = jsonObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
+        if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
             
             self.startShowingVenues = Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
+            
+        } else {
+            
+            self.startShowingVenues = nil
         }
         
-        if let logo = jsonObject[JSONKey.logo.rawValue]?.rawValue as? String {
+        if let logo = JSONObject[JSONKey.logo.rawValue]?.rawValue as? String {
             
             self.logo = logo
+            
+        } else {
+            
+            self.logo = nil
         }
     }
 }

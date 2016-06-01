@@ -13,6 +13,11 @@
 		6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485191CFF33CC001E475E /* SummitType.swift */; };
 		6E44851C1CFF343E001E475E /* SummitTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44851B1CFF343E001E475E /* SummitTypeJSON.swift */; };
 		6E44851E1CFF3626001E475E /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44851D1CFF3626001E475E /* Company.swift */; };
+		6E4485201CFF382F001E475E /* TicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44851F1CFF382F001E475E /* TicketType.swift */; };
+		6E4485221CFF383B001E475E /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485211CFF383B001E475E /* CompanyJSON.swift */; };
+		6E4485241CFF3EBA001E475E /* TicketTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */; };
+		6E4485261CFF467D001E475E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485251CFF467D001E475E /* Location.swift */; };
+		6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485271CFF472D001E475E /* LocationJSON.swift */; };
 		6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE66C691CFE1A920010A5C4 /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
 		6EE66C781CFE1A930010A5C4 /* CoreSummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C771CFE1A930010A5C4 /* CoreSummitTests.swift */; };
@@ -424,6 +429,11 @@
 		6E4485191CFF33CC001E475E /* SummitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitType.swift; sourceTree = "<group>"; };
 		6E44851B1CFF343E001E475E /* SummitTypeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTypeJSON.swift; sourceTree = "<group>"; };
 		6E44851D1CFF3626001E475E /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		6E44851F1CFF382F001E475E /* TicketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketType.swift; sourceTree = "<group>"; };
+		6E4485211CFF383B001E475E /* CompanyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyJSON.swift; sourceTree = "<group>"; };
+		6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketTypeJSON.swift; sourceTree = "<group>"; };
+		6E4485251CFF467D001E475E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		6E4485271CFF472D001E475E /* LocationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE66C691CFE1A920010A5C4 /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
 		6EE66C6B1CFE1A920010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -842,8 +852,8 @@
 		6EE66C681CFE1A920010A5C4 /* CoreSummit */ = {
 			isa = PBXGroup;
 			children = (
-				6EE66C9B1CFE3B9F0010A5C4 /* JSON */,
 				6EE66C861CFE1B0A0010A5C4 /* Model */,
+				6EE66C9B1CFE3B9F0010A5C4 /* JSON */,
 				6EE66C851CFE1ACC0010A5C4 /* Realm */,
 				6EE66C691CFE1A920010A5C4 /* CoreSummit.h */,
 				6EE66C6B1CFE1A920010A5C4 /* Info.plist */,
@@ -884,6 +894,8 @@
 				6E4485151CFF2FEB001E475E /* TimeZone.swift */,
 				6E4485191CFF33CC001E475E /* SummitType.swift */,
 				6E44851D1CFF3626001E475E /* Company.swift */,
+				6E44851F1CFF382F001E475E /* TicketType.swift */,
+				6E4485251CFF467D001E475E /* Location.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -894,6 +906,9 @@
 				6EE66C9C1CFE3BAF0010A5C4 /* SummitJSON.swift */,
 				6E4485171CFF3140001E475E /* TimeZoneJSON.swift */,
 				6E44851B1CFF343E001E475E /* SummitTypeJSON.swift */,
+				6E4485211CFF383B001E475E /* CompanyJSON.swift */,
+				6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */,
+				6E4485271CFF472D001E475E /* LocationJSON.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -2464,14 +2479,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */,
+				6E4485221CFF383B001E475E /* CompanyJSON.swift in Sources */,
 				6EE66C9D1CFE3BAF0010A5C4 /* SummitJSON.swift in Sources */,
 				6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */,
 				6E44851E1CFF3626001E475E /* Company.swift in Sources */,
 				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
+				6E4485261CFF467D001E475E /* Location.swift in Sources */,
 				6E44851C1CFF343E001E475E /* SummitTypeJSON.swift in Sources */,
+				6E4485241CFF3EBA001E475E /* TicketTypeJSON.swift in Sources */,
 				6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */,
+				6E4485201CFF382F001E475E /* TicketType.swift in Sources */,
 				6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */,
 				6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */,
+				6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */,
 				6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
