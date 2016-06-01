@@ -14,16 +14,22 @@ public struct Summit: Named {
     
     public var name: String
     
-    public var timeZone: String
+    public var timeZone: TimeZone
     
     public var start: Date
     
     public var end: Date
     
-    public var startShowingVenues: Date
+    public var active: Bool
+    
+    public var startShowingVenues: Date?
     
     /// Realm only value, not returned from JSON.
     public var initialDataLoad: Date?
+    
+    public var logo: String?
+    
+    
 }
 
 
