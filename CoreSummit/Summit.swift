@@ -36,6 +36,8 @@ public struct Summit: Named {
     public var ticketTypes: [TicketType]
     
     public var locations: [Location]
+    
+    public var speakers: [Person]
 }
 
 
