@@ -20,12 +20,11 @@ public struct Summit: Named {
     
     public var end: Date
     
+    public var timestamp: Date
+    
     public var active: Bool
     
     public var startShowingVenues: Date?
-    
-    /// Realm only value, not returned from JSON.
-    //public var initialDataLoad: Date?
     
     public var logo: String?
     
@@ -35,11 +34,51 @@ public struct Summit: Named {
     
     public var ticketTypes: [TicketType]
     
-    public var locations: [Location]
+    // Venue and Venue Rooms
+    public var locations: Locations
     
     public var speakers: [PresentationSpeaker]
     
     public var tracks: [Track]
+    
+    public var schedule: [SummitEvent]
+}
+
+// MARK: - Supporting Types
+
+public extension Summit {
+    
+    public enum Locations {
+        
+        case venues([Venue])
+        case rooms([VenueRoom])
+        
+        public init?(rawValue: [Location]) {
+            
+            if let venues = rawValue as? [Venue] {
+                
+                self = .venues(venues)
+                return
+            }
+            
+            if let rooms = rawValue as? [VenueRoom] {
+                
+                self = .rooms(rooms)
+                return
+            }
+            
+            return nil
+        }
+        
+        /*
+        public var rawValue: [Location] {
+            
+            switch self {
+            case let .venues(values): return values as! [Location]
+            case let .rooms(values): return values as! [Location]
+            }
+        }*/
+    }
 }
 
 
