@@ -6,16 +6,16 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public protocol PersonProtocol: Named {
+public protocol Person: Named {
+    
+    var firstName: String { get }
     
     var lastName: String { get }
     
     var title: String { get }
     
     var pictureURL: String { get }
-    
-    var location: String { get }
-    
+        
     var email: String { get }
     
     var twitter: String { get }
@@ -25,7 +25,12 @@ public protocol PersonProtocol: Named {
     var biography: String { get }
 }
 
-public struct Person: Named {
+public extension Person {
+    
+    var name: String { return firstName + " " + lastName }
+}
+
+public struct GenericPerson {
     
     public let identifier: Identifier
     
@@ -37,8 +42,6 @@ public struct Person: Named {
     
     public var pictureURL: String
     
-    public var location: String
-    
     public var email: String
     
     public var twitter: String
@@ -46,17 +49,4 @@ public struct Person: Named {
     public var irc: String
     
     public var biography: String
-    
-    // Not JSON
-    
-    public var name: String { return firstName + " " + lastName }
-    
-    public var type: PersonType = PersonType()
-}
-
-public enum PersonType {
-    
-    case generic, speaker, attendee
-    
-    public init() { self = .generic }
 }
