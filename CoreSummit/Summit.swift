@@ -38,6 +38,8 @@ public struct Summit: Named {
     public var locations: [Location]
     
     public var speakers: [PresentationSpeaker]
+    
+    public var tracks: [Track]
 }
 
 
