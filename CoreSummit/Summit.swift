@@ -37,7 +37,7 @@ public struct Summit: Named {
     
     public var locations: [Location]
     
-    public var speakers: [Person]
+    public var speakers: [PresentationSpeaker]
 }
 
 
