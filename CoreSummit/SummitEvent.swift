@@ -23,4 +23,18 @@ public struct SummitEvent: Named {
     public var allowFeedback: Bool
     
     public var averageFeedback: Double
+    
+    public var type: EventType
+    
+    public var summitTypes: [SummitType]
+    
+    public var sponsors: [Company]
+    
+    public var speakers: [PresentationSpeaker]
+    
+    public var location: Location
+    
+    public var tags: [Tag]
+    
+    public var trackIdentifier: Identifier
 }
