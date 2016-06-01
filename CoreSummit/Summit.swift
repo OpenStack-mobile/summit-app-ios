@@ -25,11 +25,17 @@ public struct Summit: Named {
     public var startShowingVenues: Date?
     
     /// Realm only value, not returned from JSON.
-    public var initialDataLoad: Date?
+    //public var initialDataLoad: Date?
     
     public var logo: String?
     
+    public var summitTypes: [SummitType]
     
+    public var sponsors: [Company]
+    
+    public var ticketTypes: [TicketType]
+    
+    public var locations: [Location]
 }
 
 
