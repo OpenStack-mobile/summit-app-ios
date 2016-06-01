@@ -10,26 +10,30 @@ import Foundation
 
 import SwiftFoundation
 
-public extension Location {
+public enum LocationJSONKey: String {
     
-    enum JSONKey: String {
-        
-        case id, name, description
-    }
+    case id, name, description, class_name
 }
 
-extension Location: JSONDecodable {
+extension Summit.Locations: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
-        guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let description = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        guard let JSONArray = JSONValue.arrayValue
             else { return nil }
         
-        self.identifier = identifier
-        self.name = name
-        self.descriptionText = description
+        if let venues = Venue.fromJSON(JSONArray) {
+            
+            self = .venues(venues)
+            return
+        }
+        
+        if let rooms = VenueRoom.fromJSON(JSONArray) {
+            
+            self = .rooms(rooms)
+            return
+        }
+        
+        return nil
     }
 }

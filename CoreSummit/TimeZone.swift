@@ -8,6 +8,8 @@
 
 public struct TimeZone {
     
+    public var name: String
+    
     public var countryCode: String
     
     public var latitude: Double
@@ -15,8 +17,6 @@ public struct TimeZone {
     public var longitude: Double
     
     public var comments: String
-    
-    public var name: String
-    
+        
     public var offset: Int
 }
