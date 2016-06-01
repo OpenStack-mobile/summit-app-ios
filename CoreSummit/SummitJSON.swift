@@ -12,7 +12,7 @@ public extension Summit {
     
     enum JSONKey: String {
         
-        case id, name, start_date, end_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule
+        case id, name, start_date, end_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp
     }
 }
 
@@ -25,6 +25,7 @@ extension Summit: JSONDecodable {
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
+            let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int,
             let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
             let timeZone = TimeZone(JSONValue: timeZoneJSON),
             let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool,
@@ -34,18 +35,19 @@ extension Summit: JSONDecodable {
             let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
             let ticketTypes = TicketType.fromJSON(ticketTypeJSONArray),
-            let locationsJSONArray = JSONObject[JSONKey.locations.rawValue]?.arrayValue,
-            let locations = Location.fromJSON(locationsJSONArray),
+            let locationsJSON = JSONObject[JSONKey.locations.rawValue],
+            let locations = Locations(JSONValue: locationsJSON),
             let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
             let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
-            let tracksJSON = JSONObject[JSONKey.tracks.rawValue]?.arrayValue,
-            let tracks = Track.fromJSON(tracksJSON)
+            let tracksJSONArray = JSONObject[JSONKey.tracks.rawValue]?.arrayValue,
+            let tracks = Track.fromJSON(tracksJSONArray)
             else { return nil }
         
         self.identifier = identifier
         self.name = name
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
         self.timeZone = timeZone
         self.active = active
         self.sponsors = sponsors

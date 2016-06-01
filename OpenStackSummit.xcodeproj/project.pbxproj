@@ -26,6 +26,14 @@
 		6E4485341CFF56CB001E475E /* TrackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485331CFF56CB001E475E /* TrackJSON.swift */; };
 		6E4485361CFF5813001E475E /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485351CFF5813001E475E /* TrackGroup.swift */; };
 		6E4485381CFF581C001E475E /* TrackGroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485371CFF581C001E475E /* TrackGroupJSON.swift */; };
+		6E44853A1CFF5D10001E475E /* SummitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485391CFF5D10001E475E /* SummitEvent.swift */; };
+		6E44853C1CFF5D1E001E475E /* SummitEventJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */; };
+		6E44853E1CFF7502001E475E /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853D1CFF7502001E475E /* Venue.swift */; };
+		6E4485401CFF750D001E475E /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853F1CFF750D001E475E /* VenueRoom.swift */; };
+		6E4485421CFF752C001E475E /* VenueJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485411CFF752C001E475E /* VenueJSON.swift */; };
+		6E4485441CFF7537001E475E /* VenueRoomJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485431CFF7537001E475E /* VenueRoomJSON.swift */; };
+		6E4485461CFF809F001E475E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485451CFF809F001E475E /* Image.swift */; };
+		6E4485481CFF811F001E475E /* ImageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485471CFF811F001E475E /* ImageJSON.swift */; };
 		6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE66C691CFE1A920010A5C4 /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
 		6EE66C781CFE1A930010A5C4 /* CoreSummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C771CFE1A930010A5C4 /* CoreSummitTests.swift */; };
@@ -450,6 +458,14 @@
 		6E4485331CFF56CB001E475E /* TrackJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackJSON.swift; sourceTree = "<group>"; };
 		6E4485351CFF5813001E475E /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
 		6E4485371CFF581C001E475E /* TrackGroupJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupJSON.swift; sourceTree = "<group>"; };
+		6E4485391CFF5D10001E475E /* SummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEvent.swift; sourceTree = "<group>"; };
+		6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEventJSON.swift; sourceTree = "<group>"; };
+		6E44853D1CFF7502001E475E /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		6E44853F1CFF750D001E475E /* VenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoom.swift; sourceTree = "<group>"; };
+		6E4485411CFF752C001E475E /* VenueJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueJSON.swift; sourceTree = "<group>"; };
+		6E4485431CFF7537001E475E /* VenueRoomJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomJSON.swift; sourceTree = "<group>"; };
+		6E4485451CFF809F001E475E /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		6E4485471CFF811F001E475E /* ImageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageJSON.swift; sourceTree = "<group>"; };
 		6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE66C691CFE1A920010A5C4 /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
 		6EE66C6B1CFE1A920010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -906,16 +922,20 @@
 				6EE66C891CFE1C670010A5C4 /* Unique.swift */,
 				6EE66C871CFE1B5F0010A5C4 /* Named.swift */,
 				6EE66C951CFE382B0010A5C4 /* Summit.swift */,
+				6E4485391CFF5D10001E475E /* SummitEvent.swift */,
 				6E4485151CFF2FEB001E475E /* TimeZone.swift */,
 				6E4485191CFF33CC001E475E /* SummitType.swift */,
 				6E44851D1CFF3626001E475E /* Company.swift */,
 				6E44851F1CFF382F001E475E /* TicketType.swift */,
 				6E4485251CFF467D001E475E /* Location.swift */,
+				6E44853D1CFF7502001E475E /* Venue.swift */,
+				6E44853F1CFF750D001E475E /* VenueRoom.swift */,
 				6E4485291CFF482F001E475E /* EventType.swift */,
 				6E4485311CFF5675001E475E /* Track.swift */,
 				6E4485351CFF5813001E475E /* TrackGroup.swift */,
 				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
 				6E44852D1CFF4E75001E475E /* PresentationSpeaker.swift */,
+				6E4485451CFF809F001E475E /* Image.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -929,10 +949,14 @@
 				6E4485211CFF383B001E475E /* CompanyJSON.swift */,
 				6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */,
 				6E4485271CFF472D001E475E /* LocationJSON.swift */,
+				6E4485411CFF752C001E475E /* VenueJSON.swift */,
+				6E4485431CFF7537001E475E /* VenueRoomJSON.swift */,
 				6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */,
 				6E4485331CFF56CB001E475E /* TrackJSON.swift */,
 				6E4485371CFF581C001E475E /* TrackGroupJSON.swift */,
+				6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */,
 				6E44852F1CFF5248001E475E /* PresentationSpeakerJSON.swift */,
+				6E4485471CFF811F001E475E /* ImageJSON.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -2505,26 +2529,34 @@
 				6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */,
 				6E4485301CFF5248001E475E /* PresentationSpeakerJSON.swift in Sources */,
 				6E4485221CFF383B001E475E /* CompanyJSON.swift in Sources */,
+				6E44853C1CFF5D1E001E475E /* SummitEventJSON.swift in Sources */,
 				6EE66C9D1CFE3BAF0010A5C4 /* SummitJSON.swift in Sources */,
 				6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */,
+				6E44853A1CFF5D10001E475E /* SummitEvent.swift in Sources */,
+				6E4485421CFF752C001E475E /* VenueJSON.swift in Sources */,
 				6E44851E1CFF3626001E475E /* Company.swift in Sources */,
 				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
 				6E4485261CFF467D001E475E /* Location.swift in Sources */,
 				6E44851C1CFF343E001E475E /* SummitTypeJSON.swift in Sources */,
+				6E44853E1CFF7502001E475E /* Venue.swift in Sources */,
 				6E44852C1CFF48AF001E475E /* EventTypeJSON.swift in Sources */,
 				6E4485241CFF3EBA001E475E /* TicketTypeJSON.swift in Sources */,
 				6E4485381CFF581C001E475E /* TrackGroupJSON.swift in Sources */,
 				6E4485321CFF5675001E475E /* Track.swift in Sources */,
+				6E4485441CFF7537001E475E /* VenueRoomJSON.swift in Sources */,
 				6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */,
+				6E4485461CFF809F001E475E /* Image.swift in Sources */,
 				6E4485201CFF382F001E475E /* TicketType.swift in Sources */,
 				6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */,
 				6E44852E1CFF4E75001E475E /* PresentationSpeaker.swift in Sources */,
 				6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */,
+				6E4485481CFF811F001E475E /* ImageJSON.swift in Sources */,
 				6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */,
 				6E4485341CFF56CB001E475E /* TrackJSON.swift in Sources */,
 				6E4485361CFF5813001E475E /* TrackGroup.swift in Sources */,
 				6E44852A1CFF482F001E475E /* EventType.swift in Sources */,
 				6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */,
+				6E4485401CFF750D001E475E /* VenueRoom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
