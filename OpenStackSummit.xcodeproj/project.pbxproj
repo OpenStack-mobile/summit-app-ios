@@ -20,6 +20,7 @@
 		6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485271CFF472D001E475E /* LocationJSON.swift */; };
 		6E44852A1CFF482F001E475E /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485291CFF482F001E475E /* EventType.swift */; };
 		6E44852C1CFF48AF001E475E /* EventTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */; };
+		6E44852E1CFF4E75001E475E /* PresentationSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44852D1CFF4E75001E475E /* PresentationSpeaker.swift */; };
 		6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE66C691CFE1A920010A5C4 /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
 		6EE66C781CFE1A930010A5C4 /* CoreSummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C771CFE1A930010A5C4 /* CoreSummitTests.swift */; };
@@ -438,6 +439,7 @@
 		6E4485271CFF472D001E475E /* LocationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		6E4485291CFF482F001E475E /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTypeJSON.swift; sourceTree = "<group>"; };
+		6E44852D1CFF4E75001E475E /* PresentationSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationSpeaker.swift; sourceTree = "<group>"; };
 		6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE66C691CFE1A920010A5C4 /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
 		6EE66C6B1CFE1A920010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -893,7 +895,6 @@
 			children = (
 				6EE66C891CFE1C670010A5C4 /* Unique.swift */,
 				6EE66C871CFE1B5F0010A5C4 /* Named.swift */,
-				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
 				6EE66C951CFE382B0010A5C4 /* Summit.swift */,
 				6E4485151CFF2FEB001E475E /* TimeZone.swift */,
 				6E4485191CFF33CC001E475E /* SummitType.swift */,
@@ -901,6 +902,8 @@
 				6E44851F1CFF382F001E475E /* TicketType.swift */,
 				6E4485251CFF467D001E475E /* Location.swift */,
 				6E4485291CFF482F001E475E /* EventType.swift */,
+				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
+				6E44852D1CFF4E75001E475E /* PresentationSpeaker.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2497,6 +2500,7 @@
 				6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */,
 				6E4485201CFF382F001E475E /* TicketType.swift in Sources */,
 				6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */,
+				6E44852E1CFF4E75001E475E /* PresentationSpeaker.swift in Sources */,
 				6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */,
 				6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */,
 				6E44852A1CFF482F001E475E /* EventType.swift in Sources */,
