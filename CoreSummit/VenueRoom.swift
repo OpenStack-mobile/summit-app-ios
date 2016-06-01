@@ -13,4 +13,8 @@ public struct VenueRoom: Location {
     public var name: String
     
     public var descriptionText: String
+    
+    public var capacity: Int
+    
+    public var venueIdentifier: Identifier
 }
