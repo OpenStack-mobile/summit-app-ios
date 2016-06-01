@@ -40,7 +40,9 @@ extension Summit: JSONDecodable {
             let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
             let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
             let tracksJSONArray = JSONObject[JSONKey.tracks.rawValue]?.arrayValue,
-            let tracks = Track.fromJSON(tracksJSONArray)
+            let tracks = Track.fromJSON(tracksJSONArray),
+            let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
+            let events = SummitEvent.fromJSON(eventsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -56,6 +58,7 @@ extension Summit: JSONDecodable {
         self.locations = locations
         self.speakers = speakers
         self.tracks = tracks
+        self.schedule = events
         
         // optional values
         

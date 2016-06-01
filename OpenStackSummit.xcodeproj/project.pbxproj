@@ -923,8 +923,8 @@
 				6EE66C871CFE1B5F0010A5C4 /* Named.swift */,
 				6EE66C951CFE382B0010A5C4 /* Summit.swift */,
 				6E4485391CFF5D10001E475E /* SummitEvent.swift */,
-				6E4485151CFF2FEB001E475E /* TimeZone.swift */,
 				6E4485191CFF33CC001E475E /* SummitType.swift */,
+				6E4485151CFF2FEB001E475E /* TimeZone.swift */,
 				6E44851D1CFF3626001E475E /* Company.swift */,
 				6E44851F1CFF382F001E475E /* TicketType.swift */,
 				6E4485251CFF467D001E475E /* Location.swift */,
@@ -944,8 +944,9 @@
 			isa = PBXGroup;
 			children = (
 				6EE66C9C1CFE3BAF0010A5C4 /* SummitJSON.swift */,
-				6E4485171CFF3140001E475E /* TimeZoneJSON.swift */,
+				6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */,
 				6E44851B1CFF343E001E475E /* SummitTypeJSON.swift */,
+				6E4485171CFF3140001E475E /* TimeZoneJSON.swift */,
 				6E4485211CFF383B001E475E /* CompanyJSON.swift */,
 				6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */,
 				6E4485271CFF472D001E475E /* LocationJSON.swift */,
@@ -954,7 +955,6 @@
 				6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */,
 				6E4485331CFF56CB001E475E /* TrackJSON.swift */,
 				6E4485371CFF581C001E475E /* TrackGroupJSON.swift */,
-				6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */,
 				6E44852F1CFF5248001E475E /* PresentationSpeakerJSON.swift */,
 				6E4485471CFF811F001E475E /* ImageJSON.swift */,
 			);
