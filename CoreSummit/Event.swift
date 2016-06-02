@@ -32,11 +32,20 @@ public struct Event: Named {
     
     public var sponsors: [Company]
     
-    public var speakers: [PresentationSpeaker]
-    
-    public var locationIdentifier: Identifier
-    
     public var tags: [Tag]
     
-    public var trackIdentifier: Identifier
+    public var speakers: [PresentationSpeaker]
+    
+    public var location: Event.Location
+    
+    //public var trackIdentifier: Identifier
+}
+
+public extension Event {
+    
+    public enum Location {
+        
+        case venue(Identifier)
+        case room(Identifier)
+    }
 }
