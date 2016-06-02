@@ -12,3 +12,15 @@ public class RealmSummitType: RealmNamed {
     
     public dynamic var color = ""
 }
+
+// MARK: - Realm Encoding
+
+extension SummitType: RealmDecodable {
+    
+    public init(realmEntity: RealmSummitType) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+        self.color = realmEntity.color
+    }
+}

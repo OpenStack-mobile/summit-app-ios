@@ -8,10 +8,7 @@
 
 import RealmSwift
 
-/// To use as a type contraint
-public protocol RealmEntityProtocol: class { }
-
-public class RealmEntity: Object, RealmEntityProtocol {
+public class RealmEntity: Object {
     
     public dynamic var id = 0
     
@@ -22,14 +19,27 @@ public class RealmEntity: Object, RealmEntityProtocol {
 
 public protocol RealmDecodable {
     
-    associatedtype RealmType: RealmEntityProtocol
+    associatedtype RealmType: RealmEntity
     
     init(realmEntity: RealmType)
 }
 
+public extension RealmDecodable {
+    
+    static func from(realm realmEntities: [RealmType]) -> [Self] {
+        
+        return realmEntities.map { self.init(realmEntity: $0) }
+    }
+    
+    static func from(realm realmEntities: List<RealmType>) -> [Self] {
+        
+        return realmEntities.map { self.init(realmEntity: $0) }
+    }
+}
+
 public protocol RealmEncodable {
     
-    associatedtype RealmType: RealmEntityProtocol
+    associatedtype RealmType: RealmEntity
     
     func save(realm: Realm) throws -> RealmType
 }

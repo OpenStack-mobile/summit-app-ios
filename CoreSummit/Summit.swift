@@ -14,20 +14,18 @@ public struct Summit: Named {
     
     public var name: String
     
-    public var timeZone: String // should be TimeZone but would require Realm Schema migration
+    public var timeZone: String // should be `TimeZone` but would require Realm Schema migration
     
     public var start: Date
     
     public var end: Date
     
-    public var timestamp: Date
+    //public var timestamp: Date
     
-    public var active: Bool
+    //public var active: Bool
     
     public var startShowingVenues: Date?
-    
-    public var logo: String?
-    
+        
     public var summitTypes: [SummitType]
     
     public var sponsors: [Company]
@@ -40,6 +38,10 @@ public struct Summit: Named {
     public var speakers: [PresentationSpeaker]
     
     public var tracks: [Track]
+    
+    public var trackGroups: [TrackGroup]
+    
+    public var eventTypes: [EventType]
     
     public var schedule: [SummitEvent]
 }
