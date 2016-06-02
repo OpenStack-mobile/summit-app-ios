@@ -25,12 +25,12 @@ extension Summit: JSONDecodable {
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-            /* let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int, */
-            /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
             let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
             let timeZone = TimeZone(JSONValue: timeZoneJSON),
-            let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Company.fromJSON(sponsorsJSONArray),
+            /* let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int, */
+            /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
+            /* let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue, */
+            /* let sponsors = Company.fromJSON(sponsorsJSONArray), */
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
             let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
@@ -54,7 +54,6 @@ extension Summit: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
-        self.sponsors = sponsors
         self.summitTypes = summitTypes
         self.ticketTypes = ticketTypes
         self.locations = locations
@@ -67,6 +66,7 @@ extension Summit: JSONDecodable {
         // in JSON but not in Realm
         //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
         //self.active = active
+        //self.sponsors = sponsors
         
         // optional values
         
