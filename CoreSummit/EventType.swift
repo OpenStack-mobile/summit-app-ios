@@ -12,7 +12,7 @@ public struct EventType: Named {
     
     public var name: String
     
-    public var color: String
+    //public var color: String
     
-    public var blackOutTimes: Bool
+    //public var blackOutTimes: Bool
 }

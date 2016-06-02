@@ -8,7 +8,9 @@
 
 import struct SwiftFoundation.Date
 
-public struct SummitEvent: Named {
+public typealias SummitEvent = Event
+
+public struct Event: Named {
     
     public let identifier: Identifier
     
