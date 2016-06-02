@@ -22,6 +22,9 @@ extension Summit.Locations: JSONDecodable {
         guard let JSONArray = JSONValue.arrayValue
             else { return nil }
         
+        guard JSONArray.isEmpty == false
+            else { self = .none; return }
+        
         if let venues = Venue.fromJSON(JSONArray) {
             
             self = .venues(venues)
