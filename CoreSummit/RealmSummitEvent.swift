@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import struct SwiftFoundation.Date
 
 public class RealmSummitEvent: RealmNamed {
     
@@ -27,5 +28,25 @@ public class RealmSummitEvent: RealmNamed {
     public var summit: Summit {
         return try! RealmFactory().create().objects(Summit).first!
     }*/
+}
+
+// MARK: - Encoding
+
+extension SummitEvent: RealmDecodable {
+    
+    public init(realmEntity: RealmSummitEvent) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+        self.start = Date(foundation: realmEntity.start)
+        self.end = Date(foundation: realmEntity.end)
+        self.descriptionText = realmEntity.eventDescription
+        self.allowFeedback = realmEntity.allowFeedback
+        self.averageFeedback = realmEntity.averageFeedback
+        self.type = EventType(realmEntity: realmEntity.eventType)
+        self.summitTypes = SummitType.from(realm: realmEntity.summitTypes)
+        self.sponsors = Company.from(realm: realmEntity.sponsors)
+        self.tags = Tag.from(realm: realmEntity.tags)
+    }
 }
 
