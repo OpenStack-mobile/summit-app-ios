@@ -23,13 +23,13 @@ extension SummitType: JSONDecodable {
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let color = JSONObject[JSONKey.color.rawValue]?.rawValue as? String,
-            let type = JSONObject[JSONKey.type.rawValue]?.rawValue as? String
+            let color = JSONObject[JSONKey.color.rawValue]?.rawValue as? String
+            /* let type = JSONObject[JSONKey.type.rawValue]?.rawValue as? String */
             else { return nil }
         
         self.identifier = identifier
         self.name = name
         self.color = color
-        self.type = type
+        //self.type = type
     }
 }

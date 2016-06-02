@@ -37,6 +37,29 @@ extension Summit: RealmEncodable {
         self.end = Date(foundation: realmEntity.endDate)
         self.timeZone = realmEntity.timeZone
         
+        // relationships
+        self.summitTypes = SummitType.from(realm: realmEntity.types)
+        self.ticketTypes = TicketType.from(realm: realmEntity.ticketTypes)
+        self.event = EventType.from(realm. realmEntity.eventTypes)
+        self.tracks = Track.from(realm: realmEntity.track)
+        self.trackGroups = TrackGroup.from(realm: realmEntity.trackGroups)
+        self.schedule = SummitEvent.from(realm: realmEntity.events)
+        
+        // locations
+        /*
+        if realmEntity.venues.isEmpty == false {
+            
+            self.locations = .venues(Venue.from(realm: realmEntity.venues))
+            
+        } else if realmEntity.venuesRooms.isEmpty == false {
+            
+            self.locations = .rooms(VenueRoom.from(realm: realmEntity.venues))
+            
+        } else {
+            
+            self.locations = .none
+        }*/
+        
         // optional values
         if realmEntity.startShowingVenuesDate != NSDate(timeIntervalSince1970: 1) {
             
@@ -46,15 +69,14 @@ extension Summit: RealmEncodable {
             
             self.startShowingVenues = nil
         }
-        
-        realmEntity.realm
     }
 }
 
+/*
 extension Summit: RealmDecodable {
     
     public func save(realm: Realm) throws -> RealmSummit {
         
         
     }
-}
+}*/
