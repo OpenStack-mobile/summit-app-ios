@@ -111,6 +111,10 @@
 		6E155FC51D00B18C00563B0A /* RealmVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC41D00B18C00563B0A /* RealmVenue.swift */; };
 		6E155FC71D00B19300563B0A /* RealmVenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC61D00B19300563B0A /* RealmVenueRoom.swift */; };
 		6E155FC91D00B24C00563B0A /* RealmTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC81D00B24C00563B0A /* RealmTag.swift */; };
+		6E155FCB1D00B63100563B0A /* SummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FCA1D00B63100563B0A /* SummitAttendee.swift */; };
+		6E155FCD1D00B6BB00563B0A /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FCC1D00B6BB00563B0A /* Member.swift */; };
+		6E155FCF1D00B73100563B0A /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FCE1D00B73100563B0A /* Feedback.swift */; };
+		6E155FD11D00B7D200563B0A /* FeedbackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FD01D00B7D200563B0A /* FeedbackJSON.swift */; };
 		6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485151CFF2FEB001E475E /* TimeZone.swift */; };
 		6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485171CFF3140001E475E /* TimeZoneJSON.swift */; };
 		6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485191CFF33CC001E475E /* SummitType.swift */; };
@@ -458,6 +462,10 @@
 		6E155FC41D00B18C00563B0A /* RealmVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenue.swift; sourceTree = "<group>"; };
 		6E155FC61D00B19300563B0A /* RealmVenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenueRoom.swift; sourceTree = "<group>"; };
 		6E155FC81D00B24C00563B0A /* RealmTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTag.swift; sourceTree = "<group>"; };
+		6E155FCA1D00B63100563B0A /* SummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendee.swift; sourceTree = "<group>"; };
+		6E155FCC1D00B6BB00563B0A /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		6E155FCE1D00B73100563B0A /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		6E155FD01D00B7D200563B0A /* FeedbackJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackJSON.swift; sourceTree = "<group>"; };
 		6E4485151CFF2FEB001E475E /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		6E4485171CFF3140001E475E /* TimeZoneJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneJSON.swift; sourceTree = "<group>"; };
 		6E4485191CFF33CC001E475E /* SummitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitType.swift; sourceTree = "<group>"; };
@@ -976,8 +984,11 @@
 				6E4485351CFF5813001E475E /* TrackGroup.swift */,
 				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
 				6E44852D1CFF4E75001E475E /* PresentationSpeaker.swift */,
-				6E4485451CFF809F001E475E /* Image.swift */,
+				6E155FCA1D00B63100563B0A /* SummitAttendee.swift */,
+				6E155FCC1D00B6BB00563B0A /* Member.swift */,
 				6E155FA91D009D7200563B0A /* NonConfirmedSummitAttendee.swift */,
+				6E4485451CFF809F001E475E /* Image.swift */,
+				6E155FCE1D00B73100563B0A /* Feedback.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1001,6 +1012,7 @@
 				6E44852F1CFF5248001E475E /* PresentationSpeakerJSON.swift */,
 				6E4485471CFF811F001E475E /* ImageJSON.swift */,
 				6E155FAB1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift */,
+				6E155FD01D00B7D200563B0A /* FeedbackJSON.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -2569,6 +2581,7 @@
 			files = (
 				6E155FA21D009BB700563B0A /* RealmSummit.swift in Sources */,
 				6E155FA81D009D4000563B0A /* RealmSummitEvent.swift in Sources */,
+				6E155FCF1D00B73100563B0A /* Feedback.swift in Sources */,
 				6E155FB91D00A6DF00563B0A /* RealmEventType.swift in Sources */,
 				6E155F4B1D008D8900563B0A /* Tag.swift in Sources */,
 				6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */,
@@ -2587,11 +2600,13 @@
 				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
 				6E4485261CFF467D001E475E /* Location.swift in Sources */,
 				6E44851C1CFF343E001E475E /* SummitTypeJSON.swift in Sources */,
+				6E155FCB1D00B63100563B0A /* SummitAttendee.swift in Sources */,
 				6E44853E1CFF7502001E475E /* Venue.swift in Sources */,
 				6E44852C1CFF48AF001E475E /* EventTypeJSON.swift in Sources */,
 				6E155FB71D00A67800563B0A /* RealmCompany.swift in Sources */,
 				6E4485241CFF3EBA001E475E /* TicketTypeJSON.swift in Sources */,
 				6E155FA11D009BB700563B0A /* RealmNamed.swift in Sources */,
+				6E155FCD1D00B6BB00563B0A /* Member.swift in Sources */,
 				6E4485381CFF581C001E475E /* TrackGroupJSON.swift in Sources */,
 				6E4485321CFF5675001E475E /* Track.swift in Sources */,
 				6E155F4D1D008EDD00563B0A /* TagJSON.swift in Sources */,
@@ -2605,6 +2620,7 @@
 				6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */,
 				6E155FAF1D00A13F00563B0A /* RealmTicketType.swift in Sources */,
 				6E44852E1CFF4E75001E475E /* PresentationSpeaker.swift in Sources */,
+				6E155FD11D00B7D200563B0A /* FeedbackJSON.swift in Sources */,
 				6E155FB51D00A2FE00563B0A /* RealmTrack.swift in Sources */,
 				6E155FA01D009BB700563B0A /* Realm.swift in Sources */,
 				6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */,
@@ -3117,7 +3133,12 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/Carthage/Build/iOS;
+				FRAMEWORK_SEARCH_PATHS = (
+					$SRCROOT/Carthage/Build/iOS,
+					$PODS_CONFIGURATION_BUILD_DIR/Typhoon,
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -3135,6 +3156,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
+				PODS_BUILD_DIR = build;
+				PODS_CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3165,7 +3190,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/Carthage/Build/iOS;
+				FRAMEWORK_SEARCH_PATHS = (
+					$SRCROOT/Carthage/Build/iOS,
+					$PODS_CONFIGURATION_BUILD_DIR/Typhoon,
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3176,6 +3204,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PODS_BUILD_DIR = build;
+				PODS_CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				PODS_ROOT = "${SRCROOT}/Pods";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
