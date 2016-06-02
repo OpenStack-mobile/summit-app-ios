@@ -50,7 +50,7 @@ extension Summit: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
-        self.timeZone = timeZone
+        self.timeZone = timeZone.name
         self.active = active
         self.sponsors = sponsors
         self.summitTypes = summitTypes

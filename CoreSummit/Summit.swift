@@ -14,7 +14,7 @@ public struct Summit: Named {
     
     public var name: String
     
-    public var timeZone: TimeZone
+    public var timeZone: String // should be TimeZone but would require Realm Schema migration
     
     public var start: Date
     
@@ -50,10 +50,14 @@ public extension Summit {
     
     public enum Locations {
         
+        case none
         case venues([Venue])
         case rooms([VenueRoom])
         
         public init?(rawValue: [Location]) {
+            
+            guard rawValue.isEmpty == false
+                else { self = .none; return }
             
             if let venues = rawValue as? [Venue] {
                 
