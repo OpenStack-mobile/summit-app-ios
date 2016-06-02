@@ -8,9 +8,7 @@
 
 import RealmSwift
 
-public class RealmEventType: RealmNamed {
-    
-}
+public class RealmEventType: RealmNamed { }
 
 // MARK: - Encoding
 

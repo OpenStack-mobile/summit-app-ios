@@ -8,7 +8,15 @@
 
 import RealmSwift
 
-public class RealmTag: RealmNamed {
+public class RealmTag: RealmNamed { }
+
+// MARK: - Encoding
+
+extension Tag: RealmDecodable {
     
-    
+    public init(realmEntity: RealmTag) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+    }
 }
