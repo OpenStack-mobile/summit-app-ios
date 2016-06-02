@@ -11,7 +11,32 @@ import RealmSwift
 public class RealmPresentationSpeaker: RealmPerson {
     
     public var presentations: [RealmPresentation] {
-        return linkingObjects(Presentation.self, forProperty: "speakers")
+        
+        return self.linkingObjects(RealmPresentation.self, forProperty: "speakers")
     }
     
+}
+
+// MARK: - Encoding
+
+//extension Person: RealmEncodable { }
+
+extension PresentationSpeaker: RealmDecodable {
+    
+    public init(realm: RealmPerson) {
+        
+        // person
+        self.identifier = realm.id
+        self.firstName = realm.firstName
+        self.lastName = realm.lastName
+        self.title = realm.title
+        self.pictureURL = realm.pictureUrl
+        self.email = realm.email
+        self.twitter = realm.twitter
+        self.irc = realm.irc
+        self.biography = realm.bio
+        
+        // speaker
+        self.memberIdentifier = realm.memberId
+    }
 }

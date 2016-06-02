@@ -30,7 +30,7 @@ extension PresentationSpeaker: JSONDecodable {
             let biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String,
             let irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String,
             let twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String,
-            let memberID = JSONObject[JSONKey.title.rawValue]?.rawValue as? Int
+            let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier

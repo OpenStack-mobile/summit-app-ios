@@ -36,7 +36,6 @@ extension Summit: RealmEncodable {
         self.start = Date(foundation: realm.startDate)
         self.end = Date(foundation: realm.endDate)
         self.timeZone = realm.timeZone
-        self.initialDataLoad = Date(foundation: realm.initialDataLoadDate)
         self.startShowingVenues = Date(foundation: realm.startShowingVenuesDate)
     }
 }

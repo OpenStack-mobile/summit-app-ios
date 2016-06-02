@@ -87,6 +87,30 @@
 		6E155F9D1D00992600563B0A /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E424C1B7B9667005FDD22 /* Venue.swift */; };
 		6E155F9E1D00992600563B0A /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9E424E1B7B9667005FDD22 /* VenueRoom.swift */; };
 		6E155F9F1D00992600563B0A /* NonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9CDC41CB4B27B0028A6F4 /* NonConfirmedSummitAttendee.swift */; };
+		6E155FA01D009BB700563B0A /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C8F1CFE20980010A5C4 /* Realm.swift */; };
+		6E155FA11D009BB700563B0A /* RealmNamed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C991CFE39F90010A5C4 /* RealmNamed.swift */; };
+		6E155FA21D009BB700563B0A /* RealmSummit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C971CFE394F0010A5C4 /* RealmSummit.swift */; };
+		6E155FA31D009BB700563B0A /* RealmSummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C9E1CFE3BD50010A5C4 /* RealmSummitType.swift */; };
+		6E155FA51D009BB700563B0A /* RealmSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66CA01CFE40A10010A5C4 /* RealmSummitAttendee.swift */; };
+		6E155FA61D009BB700563B0A /* RealmPresentationSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66CA21CFE41090010A5C4 /* RealmPresentationSpeaker.swift */; };
+		6E155FA81D009D4000563B0A /* RealmSummitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FA71D009D4000563B0A /* RealmSummitEvent.swift */; };
+		6E155FAA1D009D7200563B0A /* NonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FA91D009D7200563B0A /* NonConfirmedSummitAttendee.swift */; };
+		6E155FAC1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FAB1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift */; };
+		6E155FAD1D00A03D00563B0A /* RealmPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */; };
+		6E155FAF1D00A13F00563B0A /* RealmTicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FAE1D00A13F00563B0A /* RealmTicketType.swift */; };
+		6E155FB11D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FB01D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift */; };
+		6E155FB31D00A1CD00563B0A /* RealmPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FB21D00A1CD00563B0A /* RealmPresentation.swift */; };
+		6E155FB51D00A2FE00563B0A /* RealmTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FB41D00A2FE00563B0A /* RealmTrack.swift */; };
+		6E155FB71D00A67800563B0A /* RealmCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FB61D00A67800563B0A /* RealmCompany.swift */; };
+		6E155FB91D00A6DF00563B0A /* RealmEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FB81D00A6DF00563B0A /* RealmEventType.swift */; };
+		6E155FBB1D00A76100563B0A /* RealmFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FBA1D00A76100563B0A /* RealmFeedback.swift */; };
+		6E155FBD1D00A79F00563B0A /* RealmImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FBC1D00A79F00563B0A /* RealmImage.swift */; };
+		6E155FBF1D00A7E600563B0A /* RealmLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FBE1D00A7E600563B0A /* RealmLocation.swift */; };
+		6E155FC11D00A82000563B0A /* RealmMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC01D00A82000563B0A /* RealmMember.swift */; };
+		6E155FC31D00AAA400563B0A /* RealmTrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC21D00AAA400563B0A /* RealmTrackGroup.swift */; };
+		6E155FC51D00B18C00563B0A /* RealmVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC41D00B18C00563B0A /* RealmVenue.swift */; };
+		6E155FC71D00B19300563B0A /* RealmVenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC61D00B19300563B0A /* RealmVenueRoom.swift */; };
+		6E155FC91D00B24C00563B0A /* RealmTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E155FC81D00B24C00563B0A /* RealmTag.swift */; };
 		6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485151CFF2FEB001E475E /* TimeZone.swift */; };
 		6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485171CFF3140001E475E /* TimeZoneJSON.swift */; };
 		6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485191CFF33CC001E475E /* SummitType.swift */; };
@@ -417,6 +441,23 @@
 		6E155F4C1D008EDD00563B0A /* TagJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagJSON.swift; sourceTree = "<group>"; };
 		6E155F4E1D00929A00563B0A /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		6E155F511D00937200563B0A /* Summit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit.json; sourceTree = "<group>"; };
+		6E155FA71D009D4000563B0A /* RealmSummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitEvent.swift; sourceTree = "<group>"; };
+		6E155FA91D009D7200563B0A /* NonConfirmedSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendee.swift; sourceTree = "<group>"; };
+		6E155FAB1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendeeJSON.swift; sourceTree = "<group>"; };
+		6E155FAE1D00A13F00563B0A /* RealmTicketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTicketType.swift; sourceTree = "<group>"; };
+		6E155FB01D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmNonConfirmedSummitAttendee.swift; sourceTree = "<group>"; };
+		6E155FB21D00A1CD00563B0A /* RealmPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentation.swift; sourceTree = "<group>"; };
+		6E155FB41D00A2FE00563B0A /* RealmTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrack.swift; sourceTree = "<group>"; };
+		6E155FB61D00A67800563B0A /* RealmCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCompany.swift; sourceTree = "<group>"; };
+		6E155FB81D00A6DF00563B0A /* RealmEventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventType.swift; sourceTree = "<group>"; };
+		6E155FBA1D00A76100563B0A /* RealmFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmFeedback.swift; sourceTree = "<group>"; };
+		6E155FBC1D00A79F00563B0A /* RealmImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmImage.swift; sourceTree = "<group>"; };
+		6E155FBE1D00A7E600563B0A /* RealmLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmLocation.swift; sourceTree = "<group>"; };
+		6E155FC01D00A82000563B0A /* RealmMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMember.swift; sourceTree = "<group>"; };
+		6E155FC21D00AAA400563B0A /* RealmTrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrackGroup.swift; sourceTree = "<group>"; };
+		6E155FC41D00B18C00563B0A /* RealmVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenue.swift; sourceTree = "<group>"; };
+		6E155FC61D00B19300563B0A /* RealmVenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenueRoom.swift; sourceTree = "<group>"; };
+		6E155FC81D00B24C00563B0A /* RealmTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTag.swift; sourceTree = "<group>"; };
 		6E4485151CFF2FEB001E475E /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
 		6E4485171CFF3140001E475E /* TimeZoneJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneJSON.swift; sourceTree = "<group>"; };
 		6E4485191CFF33CC001E475E /* SummitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitType.swift; sourceTree = "<group>"; };
@@ -891,11 +932,26 @@
 			children = (
 				6EE66C8F1CFE20980010A5C4 /* Realm.swift */,
 				6EE66C991CFE39F90010A5C4 /* RealmNamed.swift */,
+				6E155FB61D00A67800563B0A /* RealmCompany.swift */,
+				6E155FB81D00A6DF00563B0A /* RealmEventType.swift */,
 				6EE66C971CFE394F0010A5C4 /* RealmSummit.swift */,
+				6E155FA71D009D4000563B0A /* RealmSummitEvent.swift */,
 				6EE66C9E1CFE3BD50010A5C4 /* RealmSummitType.swift */,
 				6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */,
 				6EE66CA01CFE40A10010A5C4 /* RealmSummitAttendee.swift */,
 				6EE66CA21CFE41090010A5C4 /* RealmPresentationSpeaker.swift */,
+				6E155FAE1D00A13F00563B0A /* RealmTicketType.swift */,
+				6E155FB01D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift */,
+				6E155FB21D00A1CD00563B0A /* RealmPresentation.swift */,
+				6E155FB41D00A2FE00563B0A /* RealmTrack.swift */,
+				6E155FC21D00AAA400563B0A /* RealmTrackGroup.swift */,
+				6E155FBA1D00A76100563B0A /* RealmFeedback.swift */,
+				6E155FBC1D00A79F00563B0A /* RealmImage.swift */,
+				6E155FBE1D00A7E600563B0A /* RealmLocation.swift */,
+				6E155FC01D00A82000563B0A /* RealmMember.swift */,
+				6E155FC41D00B18C00563B0A /* RealmVenue.swift */,
+				6E155FC61D00B19300563B0A /* RealmVenueRoom.swift */,
+				6E155FC81D00B24C00563B0A /* RealmTag.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -921,6 +977,7 @@
 				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
 				6E44852D1CFF4E75001E475E /* PresentationSpeaker.swift */,
 				6E4485451CFF809F001E475E /* Image.swift */,
+				6E155FA91D009D7200563B0A /* NonConfirmedSummitAttendee.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -943,6 +1000,7 @@
 				6E4485371CFF581C001E475E /* TrackGroupJSON.swift */,
 				6E44852F1CFF5248001E475E /* PresentationSpeakerJSON.swift */,
 				6E4485471CFF811F001E475E /* ImageJSON.swift */,
+				6E155FAB1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -2509,14 +2567,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E155FA21D009BB700563B0A /* RealmSummit.swift in Sources */,
+				6E155FA81D009D4000563B0A /* RealmSummitEvent.swift in Sources */,
+				6E155FB91D00A6DF00563B0A /* RealmEventType.swift in Sources */,
 				6E155F4B1D008D8900563B0A /* Tag.swift in Sources */,
 				6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */,
 				6E4485301CFF5248001E475E /* PresentationSpeakerJSON.swift in Sources */,
 				6E4485221CFF383B001E475E /* CompanyJSON.swift in Sources */,
 				6E44853C1CFF5D1E001E475E /* SummitEventJSON.swift in Sources */,
 				6EE66C9D1CFE3BAF0010A5C4 /* SummitJSON.swift in Sources */,
+				6E155FB11D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift in Sources */,
 				6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */,
 				6E44853A1CFF5D10001E475E /* SummitEvent.swift in Sources */,
+				6E155FAA1D009D7200563B0A /* NonConfirmedSummitAttendee.swift in Sources */,
+				6E155FA61D009BB700563B0A /* RealmPresentationSpeaker.swift in Sources */,
+				6E155FAC1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift in Sources */,
 				6E4485421CFF752C001E475E /* VenueJSON.swift in Sources */,
 				6E44851E1CFF3626001E475E /* Company.swift in Sources */,
 				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
@@ -2524,23 +2589,40 @@
 				6E44851C1CFF343E001E475E /* SummitTypeJSON.swift in Sources */,
 				6E44853E1CFF7502001E475E /* Venue.swift in Sources */,
 				6E44852C1CFF48AF001E475E /* EventTypeJSON.swift in Sources */,
+				6E155FB71D00A67800563B0A /* RealmCompany.swift in Sources */,
 				6E4485241CFF3EBA001E475E /* TicketTypeJSON.swift in Sources */,
+				6E155FA11D009BB700563B0A /* RealmNamed.swift in Sources */,
 				6E4485381CFF581C001E475E /* TrackGroupJSON.swift in Sources */,
 				6E4485321CFF5675001E475E /* Track.swift in Sources */,
 				6E155F4D1D008EDD00563B0A /* TagJSON.swift in Sources */,
+				6E155FA31D009BB700563B0A /* RealmSummitType.swift in Sources */,
 				6E4485441CFF7537001E475E /* VenueRoomJSON.swift in Sources */,
 				6E44851A1CFF33CC001E475E /* SummitType.swift in Sources */,
 				6E4485461CFF809F001E475E /* Image.swift in Sources */,
+				6E155FC71D00B19300563B0A /* RealmVenueRoom.swift in Sources */,
 				6E4485201CFF382F001E475E /* TicketType.swift in Sources */,
+				6E155FB31D00A1CD00563B0A /* RealmPresentation.swift in Sources */,
 				6EE66C961CFE382B0010A5C4 /* Summit.swift in Sources */,
+				6E155FAF1D00A13F00563B0A /* RealmTicketType.swift in Sources */,
 				6E44852E1CFF4E75001E475E /* PresentationSpeaker.swift in Sources */,
+				6E155FB51D00A2FE00563B0A /* RealmTrack.swift in Sources */,
+				6E155FA01D009BB700563B0A /* Realm.swift in Sources */,
 				6E4485181CFF3140001E475E /* TimeZoneJSON.swift in Sources */,
+				6E155FC11D00A82000563B0A /* RealmMember.swift in Sources */,
+				6E155FC31D00AAA400563B0A /* RealmTrackGroup.swift in Sources */,
+				6E155FBF1D00A7E600563B0A /* RealmLocation.swift in Sources */,
 				6E4485481CFF811F001E475E /* ImageJSON.swift in Sources */,
 				6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */,
+				6E155FAD1D00A03D00563B0A /* RealmPerson.swift in Sources */,
+				6E155FBD1D00A79F00563B0A /* RealmImage.swift in Sources */,
+				6E155FC51D00B18C00563B0A /* RealmVenue.swift in Sources */,
 				6E4485341CFF56CB001E475E /* TrackJSON.swift in Sources */,
 				6E4485361CFF5813001E475E /* TrackGroup.swift in Sources */,
 				6E44852A1CFF482F001E475E /* EventType.swift in Sources */,
+				6E155FBB1D00A76100563B0A /* RealmFeedback.swift in Sources */,
 				6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */,
+				6E155FA51D009BB700563B0A /* RealmSummitAttendee.swift in Sources */,
+				6E155FC91D00B24C00563B0A /* RealmTag.swift in Sources */,
 				6E4485401CFF750D001E475E /* VenueRoom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
