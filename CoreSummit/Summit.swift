@@ -24,19 +24,19 @@ public struct Summit: Named {
     
     //public var active: Bool
     
+    //public var sponsors: [Company]
+    
+    //public var speakers: [PresentationSpeaker]
+    
     public var startShowingVenues: Date?
         
     public var summitTypes: [SummitType]
-    
-    public var sponsors: [Company]
-    
+        
     public var ticketTypes: [TicketType]
     
     // Venue and Venue Rooms
     public var locations: Locations
-    
-    public var speakers: [PresentationSpeaker]
-    
+        
     public var tracks: [Track]
     
     public var trackGroups: [TrackGroup]
