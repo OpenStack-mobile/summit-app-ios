@@ -36,16 +36,7 @@ public struct Event: Named {
     
     public var speakers: [PresentationSpeaker]
     
-    public var location: Event.Location
+    public var locationIdentifier: Identifier
     
     //public var trackIdentifier: Identifier
-}
-
-public extension Event {
-    
-    public enum Location {
-        
-        case venue(Identifier)
-        case room(Identifier)
-    }
 }

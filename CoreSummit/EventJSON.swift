@@ -57,9 +57,9 @@ extension SummitEvent: JSONDecodable {
         self.type = type
         self.sponsors = sponsors
         self.speakers = speakers
+        self.locationIdentifier = locationIdentifier
         //self.trackIdentifier = trackIdentifier
         
-        // location
-        self.location
+        
     }
 }

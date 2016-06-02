@@ -27,7 +27,7 @@ public class RealmSummit: RealmNamed {
 
 // MARK: - Realm Encoding
 
-extension Summit: RealmEncodable {
+extension Summit: RealmDecodable {
     
     public init(realmEntity: RealmSummit) {
         
@@ -46,7 +46,7 @@ extension Summit: RealmEncodable {
         self.schedule = Event.from(realm: realmEntity.events)
         
         // locations
-        /*
+        
         if realmEntity.venues.isEmpty == false {
             
             self.locations = .venues(Venue.from(realm: realmEntity.venues))
@@ -58,7 +58,7 @@ extension Summit: RealmEncodable {
         } else {
             
             self.locations = .none
-        }*/
+        }
         
         // optional values
         if realmEntity.startShowingVenuesDate != NSDate(timeIntervalSince1970: 1) {
@@ -71,12 +71,3 @@ extension Summit: RealmEncodable {
         }
     }
 }
-
-/*
-extension Summit: RealmDecodable {
-    
-    public func save(realm: Realm) throws -> RealmSummit {
-        
-        
-    }
-}*/
