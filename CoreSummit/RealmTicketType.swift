@@ -8,9 +8,21 @@
 
 import RealmSwift
 
-public class RealmTicketType: RealmEntity {
+public class RealmTicketType: RealmNamed {
     
-    public var name = ""
-    public var ticketTypeDescription = ""
+    public dynamic var ticketTypeDescription = ""
     public let allowedSummitTypes = List<RealmSummitType>()
+}
+
+// MARK: - Encoding
+
+extension TicketType: RealmDecodable {
+    
+    public init(realmEntity: RealmTicketType) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+        self.descriptionText = realmEntity.ticketTypeDescription
+        self.allowedSummitTypes = SummitType.from(realm: realmEntity.allowedSummitTypes)
+    }
 }

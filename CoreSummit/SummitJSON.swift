@@ -25,10 +25,10 @@ extension Summit: JSONDecodable {
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-            let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int,
+            /* let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int, */
+            /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
             let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
             let timeZone = TimeZone(JSONValue: timeZoneJSON),
-            let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.fromJSON(sponsorsJSONArray),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
@@ -41,6 +41,8 @@ extension Summit: JSONDecodable {
             let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
             let tracksJSONArray = JSONObject[JSONKey.tracks.rawValue]?.arrayValue,
             let tracks = Track.fromJSON(tracksJSONArray),
+            let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
+            let trackGroups = TrackGroup.fromJSON(trackGroupsJSONArray),
             let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
             let events = SummitEvent.fromJSON(eventsJSONArray)
             else { return nil }
@@ -49,16 +51,19 @@ extension Summit: JSONDecodable {
         self.name = name
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
-        self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
-        self.timeZone = timeZone.name
-        self.active = active
+        self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
         self.sponsors = sponsors
         self.summitTypes = summitTypes
         self.ticketTypes = ticketTypes
         self.locations = locations
         self.speakers = speakers
         self.tracks = tracks
+        self.trackGroups = trackGroups
         self.schedule = events
+        
+        // in JSON but not in Realm
+        //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
+        //self.active = active
         
         // optional values
         
@@ -69,15 +74,6 @@ extension Summit: JSONDecodable {
         } else {
             
             self.startShowingVenues = nil
-        }
-        
-        if let logo = JSONObject[JSONKey.logo.rawValue]?.rawValue as? String {
-            
-            self.logo = logo
-            
-        } else {
-            
-            self.logo = nil
         }
     }
 }

@@ -23,20 +23,20 @@ public class RealmPresentationSpeaker: RealmPerson {
 
 extension PresentationSpeaker: RealmDecodable {
     
-    public init(realm: RealmPerson) {
+    public init(realmEntity: RealmPresentationSpeaker) {
         
         // person
-        self.identifier = realm.id
-        self.firstName = realm.firstName
-        self.lastName = realm.lastName
-        self.title = realm.title
-        self.pictureURL = realm.pictureUrl
-        self.email = realm.email
-        self.twitter = realm.twitter
-        self.irc = realm.irc
-        self.biography = realm.bio
+        self.identifier = realmEntity.id
+        self.firstName = realmEntity.firstName
+        self.lastName = realmEntity.lastName
+        self.title = realmEntity.title
+        self.pictureURL = realmEntity.pictureUrl
+        self.email = realmEntity.email
+        self.twitter = realmEntity.twitter
+        self.irc = realmEntity.irc
+        self.biography = realmEntity.bio
         
         // speaker
-        self.memberIdentifier = realm.memberId
+        self.memberIdentifier = realmEntity.memberId
     }
 }
