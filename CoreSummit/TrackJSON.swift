@@ -24,7 +24,7 @@ extension Track: JSONDecodable {
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
-            let trackGroups = Int.fromJSON(trackGroupsJSONArray)?.first
+            let trackGroups = Int.fromJSON(trackGroupsJSONArray)
             else { return nil }
         
         self.identifier = identifier

@@ -32,7 +32,7 @@ public struct SummitEvent: Named {
     
     public var speakers: [PresentationSpeaker]
     
-    public var location: Location
+    public var locationIdentifier: Identifier
     
     public var tags: [Tag]
     
