@@ -44,7 +44,9 @@ extension Summit: JSONDecodable {
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
             let trackGroups = TrackGroup.fromJSON(trackGroupsJSONArray),
             let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let events = SummitEvent.fromJSON(eventsJSONArray)
+            let events = SummitEvent.fromJSON(eventsJSONArray),
+            let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
+            let eventTypes = EventType.fromJSON(eventTypesJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -60,6 +62,7 @@ extension Summit: JSONDecodable {
         self.tracks = tracks
         self.trackGroups = trackGroups
         self.schedule = events
+        self.eventTypes = eventTypes
         
         // in JSON but not in Realm
         //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))

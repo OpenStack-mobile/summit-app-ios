@@ -11,3 +11,14 @@ import RealmSwift
 public class RealmEventType: RealmNamed {
     
 }
+
+// MARK: - Encoding
+
+extension EventType: RealmDecodable {
+    
+    public init(realmEntity: RealmEventType) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+    }
+}
