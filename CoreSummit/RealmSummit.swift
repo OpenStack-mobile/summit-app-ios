@@ -29,14 +29,25 @@ public class RealmSummit: RealmNamed {
 
 extension Summit: RealmEncodable {
     
-    public init(realm: RealmSummit) {
+    public init(realmEntity: RealmSummit) {
         
-        self.identifier = realm.id
-        self.name = realm.name
-        self.start = Date(foundation: realm.startDate)
-        self.end = Date(foundation: realm.endDate)
-        self.timeZone = realm.timeZone
-        self.startShowingVenues = Date(foundation: realm.startShowingVenuesDate)
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+        self.start = Date(foundation: realmEntity.startDate)
+        self.end = Date(foundation: realmEntity.endDate)
+        self.timeZone = realmEntity.timeZone
+        
+        // optional values
+        if realmEntity.startShowingVenuesDate != NSDate(timeIntervalSince1970: 1) {
+            
+            self.startShowingVenues = Date(foundation: realmEntity.startShowingVenuesDate)
+            
+        } else {
+            
+            self.startShowingVenues = nil
+        }
+        
+        realmEntity.realm
     }
 }
 

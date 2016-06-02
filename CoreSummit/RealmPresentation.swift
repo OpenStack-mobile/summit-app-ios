@@ -16,7 +16,7 @@ public class RealmPresentation: RealmEntity {
     public let speakers = List<RealmPresentationSpeaker>()
     
     
-    public var event: SummitEvent {
+    public var event: RealmSummitEvent {
         return self.linkingObjects(RealmSummitEvent.self, forProperty: "presentation").first!
     }
 }

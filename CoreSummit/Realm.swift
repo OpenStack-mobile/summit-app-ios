@@ -24,7 +24,7 @@ public protocol RealmDecodable {
     
     associatedtype RealmType: RealmEntityProtocol
     
-    init(realm: RealmType)
+    init(realmEntity: RealmType)
 }
 
 public protocol RealmEncodable {
