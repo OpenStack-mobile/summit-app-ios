@@ -16,5 +16,5 @@ public struct TrackGroup: Named {
     
     public var descriptionText: String
     
-    public var tracks: Int
+    public var tracks: [Identifier]
 }
