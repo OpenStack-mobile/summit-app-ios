@@ -133,8 +133,8 @@
 		6E4485341CFF56CB001E475E /* TrackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485331CFF56CB001E475E /* TrackJSON.swift */; };
 		6E4485361CFF5813001E475E /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485351CFF5813001E475E /* TrackGroup.swift */; };
 		6E4485381CFF581C001E475E /* TrackGroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485371CFF581C001E475E /* TrackGroupJSON.swift */; };
-		6E44853A1CFF5D10001E475E /* SummitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485391CFF5D10001E475E /* SummitEvent.swift */; };
-		6E44853C1CFF5D1E001E475E /* SummitEventJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */; };
+		6E44853A1CFF5D10001E475E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485391CFF5D10001E475E /* Event.swift */; };
+		6E44853C1CFF5D1E001E475E /* EventJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853B1CFF5D1E001E475E /* EventJSON.swift */; };
 		6E44853E1CFF7502001E475E /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853D1CFF7502001E475E /* Venue.swift */; };
 		6E4485401CFF750D001E475E /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44853F1CFF750D001E475E /* VenueRoom.swift */; };
 		6E4485421CFF752C001E475E /* VenueJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485411CFF752C001E475E /* VenueJSON.swift */; };
@@ -484,8 +484,8 @@
 		6E4485331CFF56CB001E475E /* TrackJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackJSON.swift; sourceTree = "<group>"; };
 		6E4485351CFF5813001E475E /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
 		6E4485371CFF581C001E475E /* TrackGroupJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupJSON.swift; sourceTree = "<group>"; };
-		6E4485391CFF5D10001E475E /* SummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEvent.swift; sourceTree = "<group>"; };
-		6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEventJSON.swift; sourceTree = "<group>"; };
+		6E4485391CFF5D10001E475E /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		6E44853B1CFF5D1E001E475E /* EventJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventJSON.swift; sourceTree = "<group>"; };
 		6E44853D1CFF7502001E475E /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		6E44853F1CFF750D001E475E /* VenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoom.swift; sourceTree = "<group>"; };
 		6E4485411CFF752C001E475E /* VenueJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueJSON.swift; sourceTree = "<group>"; };
@@ -941,10 +941,10 @@
 				6EE66C8F1CFE20980010A5C4 /* Realm.swift */,
 				6EE66C991CFE39F90010A5C4 /* RealmNamed.swift */,
 				6E155FB61D00A67800563B0A /* RealmCompany.swift */,
-				6E155FB81D00A6DF00563B0A /* RealmEventType.swift */,
 				6EE66C971CFE394F0010A5C4 /* RealmSummit.swift */,
 				6E155FA71D009D4000563B0A /* RealmSummitEvent.swift */,
 				6EE66C9E1CFE3BD50010A5C4 /* RealmSummitType.swift */,
+				6E155FB81D00A6DF00563B0A /* RealmEventType.swift */,
 				6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */,
 				6EE66CA01CFE40A10010A5C4 /* RealmSummitAttendee.swift */,
 				6EE66CA21CFE41090010A5C4 /* RealmPresentationSpeaker.swift */,
@@ -971,7 +971,8 @@
 				6EE66C871CFE1B5F0010A5C4 /* Named.swift */,
 				6EE66C951CFE382B0010A5C4 /* Summit.swift */,
 				6E4485191CFF33CC001E475E /* SummitType.swift */,
-				6E4485391CFF5D10001E475E /* SummitEvent.swift */,
+				6E4485391CFF5D10001E475E /* Event.swift */,
+				6E4485291CFF482F001E475E /* EventType.swift */,
 				6E155F4A1D008D8900563B0A /* Tag.swift */,
 				6E4485151CFF2FEB001E475E /* TimeZone.swift */,
 				6E44851D1CFF3626001E475E /* Company.swift */,
@@ -979,7 +980,6 @@
 				6E4485251CFF467D001E475E /* Location.swift */,
 				6E44853D1CFF7502001E475E /* Venue.swift */,
 				6E44853F1CFF750D001E475E /* VenueRoom.swift */,
-				6E4485291CFF482F001E475E /* EventType.swift */,
 				6E4485311CFF5675001E475E /* Track.swift */,
 				6E4485351CFF5813001E475E /* TrackGroup.swift */,
 				6EE66C8B1CFE1CE20010A5C4 /* Person.swift */,
@@ -997,8 +997,9 @@
 			isa = PBXGroup;
 			children = (
 				6EE66C9C1CFE3BAF0010A5C4 /* SummitJSON.swift */,
-				6E44853B1CFF5D1E001E475E /* SummitEventJSON.swift */,
 				6E44851B1CFF343E001E475E /* SummitTypeJSON.swift */,
+				6E44853B1CFF5D1E001E475E /* EventJSON.swift */,
+				6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */,
 				6E155F4C1D008EDD00563B0A /* TagJSON.swift */,
 				6E4485171CFF3140001E475E /* TimeZoneJSON.swift */,
 				6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */,
@@ -1006,7 +1007,6 @@
 				6E4485271CFF472D001E475E /* LocationJSON.swift */,
 				6E4485411CFF752C001E475E /* VenueJSON.swift */,
 				6E4485431CFF7537001E475E /* VenueRoomJSON.swift */,
-				6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */,
 				6E4485331CFF56CB001E475E /* TrackJSON.swift */,
 				6E4485371CFF581C001E475E /* TrackGroupJSON.swift */,
 				6E44852F1CFF5248001E475E /* PresentationSpeakerJSON.swift */,
@@ -2587,11 +2587,11 @@
 				6E4485161CFF2FEB001E475E /* TimeZone.swift in Sources */,
 				6E4485301CFF5248001E475E /* PresentationSpeakerJSON.swift in Sources */,
 				6E4485221CFF383B001E475E /* CompanyJSON.swift in Sources */,
-				6E44853C1CFF5D1E001E475E /* SummitEventJSON.swift in Sources */,
+				6E44853C1CFF5D1E001E475E /* EventJSON.swift in Sources */,
 				6EE66C9D1CFE3BAF0010A5C4 /* SummitJSON.swift in Sources */,
 				6E155FB11D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift in Sources */,
 				6EE66C8C1CFE1CE20010A5C4 /* Person.swift in Sources */,
-				6E44853A1CFF5D10001E475E /* SummitEvent.swift in Sources */,
+				6E44853A1CFF5D10001E475E /* Event.swift in Sources */,
 				6E155FAA1D009D7200563B0A /* NonConfirmedSummitAttendee.swift in Sources */,
 				6E155FA61D009BB700563B0A /* RealmPresentationSpeaker.swift in Sources */,
 				6E155FAC1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift in Sources */,

@@ -40,10 +40,10 @@ extension Summit: RealmEncodable {
         // relationships
         self.summitTypes = SummitType.from(realm: realmEntity.types)
         self.ticketTypes = TicketType.from(realm: realmEntity.ticketTypes)
-        self.event = EventType.from(realm. realmEntity.eventTypes)
+        self.eventTypes = EventType.from(realm: realmEntity.eventTypes)
         self.tracks = Track.from(realm: realmEntity.track)
         self.trackGroups = TrackGroup.from(realm: realmEntity.trackGroups)
-        self.schedule = SummitEvent.from(realm: realmEntity.events)
+        self.schedule = Event.from(realm: realmEntity.events)
         
         // locations
         /*

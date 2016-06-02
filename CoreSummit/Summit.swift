@@ -43,7 +43,7 @@ public struct Summit: Named {
     
     public var eventTypes: [EventType]
     
-    public var schedule: [SummitEvent]
+    public var schedule: [Event]
 }
 
 // MARK: - Supporting Types

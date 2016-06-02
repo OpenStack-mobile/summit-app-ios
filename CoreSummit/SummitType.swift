@@ -14,5 +14,5 @@ public struct SummitType: Named {
     
     public var color: String
     
-    //public var type: String // could be enum
+    //public var type: String // could be enum, not in Realm
 }
