@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MTDates
 
 @objc
 public protocol ISchedulePresenter {
@@ -114,6 +115,10 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
 
                 if (error != nil) {
                     viewController.showErrorMessage(error!)
+                    
+                    self.scheduleFilter.hasToRefreshSchedule = true
+                    viewController.toggleNoConnectivityMessage(true)
+                    viewController.toggleEventList(false)
                     return
                 }
                 
@@ -129,7 +134,15 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                 
                 if self.selectedDate != nil {
                     if viewController.availableDates.count > 0 && !viewController.availableDates.contains(self.selectedDate!) {
-                        viewController.selectedDate = viewController.availableDates.first
+                        let today = NSDate()
+                        var selected = viewController.availableDates.first
+                        for availableDate in viewController.availableDates {
+                            if availableDate.mt_isWithinSameDay(today) {
+                                selected = availableDate
+                                break
+                            }
+                        }
+                        viewController.selectedDate = selected
                     }
                     else {
                         viewController.selectedDate = self.selectedDate
@@ -137,7 +150,15 @@ public class SchedulePresenter: ScheduleablePresenter, ISchedulePresenter {
                 }
                 else {
                     if viewController.availableDates.count > 0 {
-                        viewController.selectedDate = viewController.availableDates.first
+                        let today = NSDate()
+                        var selected = viewController.availableDates.first
+                        for availableDate in viewController.availableDates {
+                            if availableDate.mt_isWithinSameDay(today) {
+                                selected = availableDate
+                                break
+                            }
+                        }
+                        viewController.selectedDate = selected
                     }
                     else {
                         viewController.selectedDate = viewController.startDate

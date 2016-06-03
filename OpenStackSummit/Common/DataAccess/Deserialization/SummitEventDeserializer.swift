@@ -96,7 +96,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
                 }
             }
             
-            if json["speatagskers"] != nil {
+            if json["tags"] != nil {
                 deserializer = deserializerFactory.create(DeserializerFactoryType.Tag)
                 var tag : Tag
                 for (_, tagsJSON) in json["tags"] {

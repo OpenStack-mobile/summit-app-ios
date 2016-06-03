@@ -23,9 +23,9 @@ public protocol IGeneralSchedulePresenter: ISchedulePresenter {
 
 public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresenter {
     
-    weak var viewController : IGeneralScheduleViewController! {
+    weak var viewController : IScheduleViewController! {
         get {
-            return internalViewController as! IGeneralScheduleViewController
+            return internalViewController
         }
         set {
             internalViewController = newValue
