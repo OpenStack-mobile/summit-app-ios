@@ -12,7 +12,7 @@ public extension Tag {
     
     enum JSONKey: String {
         
-        case id, tags
+        case id, tag
     }
 }
 
@@ -22,10 +22,10 @@ extension Tag: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let tags = JSONObject[JSONKey.tags.rawValue]?.rawValue as? String
+            let tag = JSONObject[JSONKey.tag.rawValue]?.rawValue as? String
             else { return nil }
         
         self.identifier = identifier
-        self.name = tags
+        self.name = tag
     }
 }

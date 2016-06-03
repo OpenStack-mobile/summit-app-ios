@@ -16,7 +16,7 @@ public struct Event: Named {
     
     public var name: String
     
-    public var descriptionText: String
+    public var descriptionText: String?
     
     public var start: Date
     
@@ -26,11 +26,11 @@ public struct Event: Named {
     
     public var averageFeedback: Double?
     
-    public var type: EventType
+    public var type: Identifier
     
-    public var summitTypes: [Int]
+    public var summitTypes: [Identifier]
     
-    public var sponsors: [Company]
+    public var sponsors: [Identifier]
     
     public var tags: [Tag]
         

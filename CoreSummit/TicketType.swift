@@ -12,7 +12,7 @@ public struct TicketType: Named {
     
     public var name: String
     
-    public var descriptionText: String
+    public var descriptionText: String?
     
     public var allowedSummitTypes: [SummitType]
 }

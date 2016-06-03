@@ -46,19 +46,10 @@ extension Summit: RealmDecodable {
         self.schedule = Event.from(realm: realmEntity.events)
         
         // locations
-        
-        if realmEntity.venues.isEmpty == false {
-            
-            self.locations = .venues(Venue.from(realm: realmEntity.venues))
-            
-        } else if realmEntity.venuesRooms.isEmpty == false {
-            
-            self.locations = .rooms(VenueRoom.from(realm: realmEntity.venuesRooms))
-            
-        } else {
-            
-            self.locations = .none
-        }
+        var locations = [Location]()
+        realmEntity.venues.forEach { locations.append(Location.venue(Venue(realmEntity: $0))) }
+        realmEntity.venuesRooms.forEach { locations.append(Location.room(VenueRoom(realmEntity: $0))) }
+        self.locations = locations
         
         // optional values
         if realmEntity.startShowingVenuesDate != NSDate(timeIntervalSince1970: 1) {

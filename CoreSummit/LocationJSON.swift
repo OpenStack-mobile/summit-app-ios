@@ -15,28 +15,23 @@ public enum LocationJSONKey: String {
     case id, name, description, class_name
 }
 
-extension Summit.Locations: JSONDecodable {
+extension Location: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
-        guard let JSONArray = JSONValue.arrayValue
-            else { return nil }
-        
-        guard JSONArray.isEmpty == false
-            else { self = .none; return }
-        
-        if let venues = Venue.fromJSON(JSONArray) {
+        if let venue = Venue(JSONValue: JSONValue) {
             
-            self = .venues(venues)
-            return
-        }
-        
-        if let rooms = VenueRoom.fromJSON(JSONArray) {
+            self = .venue(venue)
             
-            self = .rooms(rooms)
-            return
+            
+        } else if let room = VenueRoom(JSONValue: JSONValue) {
+            
+            self = .room(room)
+            
+            
+        } else {
+            
+            return nil
         }
-        
-        return nil
     }
 }

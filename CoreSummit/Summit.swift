@@ -35,7 +35,7 @@ public struct Summit: Named {
     public var ticketTypes: [TicketType]
     
     // Venue and Venue Rooms
-    public var locations: Locations
+    public var locations: [Location]
         
     public var tracks: [Track]
     
@@ -44,47 +44,6 @@ public struct Summit: Named {
     public var eventTypes: [EventType]
     
     public var schedule: [Event]
-}
-
-// MARK: - Supporting Types
-
-public extension Summit {
-    
-    public enum Locations {
-        
-        case none
-        case venues([Venue])
-        case rooms([VenueRoom])
-        
-        public init?(rawValue: [Location]) {
-            
-            guard rawValue.isEmpty == false
-                else { self = .none; return }
-            
-            if let venues = rawValue as? [Venue] {
-                
-                self = .venues(venues)
-                return
-            }
-            
-            if let rooms = rawValue as? [VenueRoom] {
-                
-                self = .rooms(rooms)
-                return
-            }
-            
-            return nil
-        }
-        
-        /*
-        public var rawValue: [Location] {
-            
-            switch self {
-            case let .venues(values): return values as! [Location]
-            case let .rooms(values): return values as! [Location]
-            }
-        }*/
-    }
 }
 
 
