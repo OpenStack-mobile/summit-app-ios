@@ -19,3 +19,17 @@ public class RealmVenueRoom: RealmLocation {
         return linkingObjects(RealmSummitEvent.self, forProperty: "venueRoom")
     }
 }
+
+// MARK: - Encoding
+
+extension VenueRoom: RealmDecodable {
+    
+    public init(realmEntity: RealmVenueRoom) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+        self.descriptionText = realmEntity.locationDescription
+        self.capacity = realmEntity.capacity
+        self.venueIdentifier = realmEntity.venue.id
+    }
+}

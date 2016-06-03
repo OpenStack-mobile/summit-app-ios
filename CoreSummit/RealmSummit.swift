@@ -53,7 +53,7 @@ extension Summit: RealmDecodable {
             
         } else if realmEntity.venuesRooms.isEmpty == false {
             
-            self.locations = .rooms(VenueRoom.from(realm: realmEntity.venues))
+            self.locations = .rooms(VenueRoom.from(realm: realmEntity.venuesRooms))
             
         } else {
             

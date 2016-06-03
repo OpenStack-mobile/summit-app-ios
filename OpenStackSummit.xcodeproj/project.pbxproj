@@ -141,6 +141,9 @@
 		6E4485441CFF7537001E475E /* VenueRoomJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485431CFF7537001E475E /* VenueRoomJSON.swift */; };
 		6E4485461CFF809F001E475E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485451CFF809F001E475E /* Image.swift */; };
 		6E4485481CFF811F001E475E /* ImageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4485471CFF811F001E475E /* ImageJSON.swift */; };
+		6E59EBE01D01D90000355901 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E59EBDF1D01D90000355901 /* Presentation.swift */; };
+		6E59EBE21D01DB1A00355901 /* PresentationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E59EBE11D01DB1A00355901 /* PresentationJSON.swift */; };
+		6E59EBE41D01E92000355901 /* AustinSummit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E59EBE31D01E92000355901 /* AustinSummit.json */; };
 		6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE66C691CFE1A920010A5C4 /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
 		6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C871CFE1B5F0010A5C4 /* Named.swift */; };
@@ -492,6 +495,9 @@
 		6E4485431CFF7537001E475E /* VenueRoomJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomJSON.swift; sourceTree = "<group>"; };
 		6E4485451CFF809F001E475E /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		6E4485471CFF811F001E475E /* ImageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageJSON.swift; sourceTree = "<group>"; };
+		6E59EBDF1D01D90000355901 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
+		6E59EBE11D01DB1A00355901 /* PresentationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationJSON.swift; sourceTree = "<group>"; };
+		6E59EBE31D01E92000355901 /* AustinSummit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AustinSummit.json; sourceTree = "<group>"; };
 		6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE66C691CFE1A920010A5C4 /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
 		6EE66C6B1CFE1A920010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -909,6 +915,7 @@
 			isa = PBXGroup;
 			children = (
 				6E155F511D00937200563B0A /* Summit.json */,
+				6E59EBE31D01E92000355901 /* AustinSummit.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -943,6 +950,7 @@
 				6E155FB61D00A67800563B0A /* RealmCompany.swift */,
 				6EE66C971CFE394F0010A5C4 /* RealmSummit.swift */,
 				6E155FA71D009D4000563B0A /* RealmSummitEvent.swift */,
+				6E155FB21D00A1CD00563B0A /* RealmPresentation.swift */,
 				6EE66C9E1CFE3BD50010A5C4 /* RealmSummitType.swift */,
 				6E155FB81D00A6DF00563B0A /* RealmEventType.swift */,
 				6EE66C911CFE24C20010A5C4 /* RealmPerson.swift */,
@@ -950,7 +958,6 @@
 				6EE66CA21CFE41090010A5C4 /* RealmPresentationSpeaker.swift */,
 				6E155FAE1D00A13F00563B0A /* RealmTicketType.swift */,
 				6E155FB01D00A19400563B0A /* RealmNonConfirmedSummitAttendee.swift */,
-				6E155FB21D00A1CD00563B0A /* RealmPresentation.swift */,
 				6E155FB41D00A2FE00563B0A /* RealmTrack.swift */,
 				6E155FC21D00AAA400563B0A /* RealmTrackGroup.swift */,
 				6E155FBA1D00A76100563B0A /* RealmFeedback.swift */,
@@ -989,6 +996,7 @@
 				6E155FA91D009D7200563B0A /* NonConfirmedSummitAttendee.swift */,
 				6E4485451CFF809F001E475E /* Image.swift */,
 				6E155FCE1D00B73100563B0A /* Feedback.swift */,
+				6E59EBDF1D01D90000355901 /* Presentation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1000,6 +1008,7 @@
 				6E44851B1CFF343E001E475E /* SummitTypeJSON.swift */,
 				6E44853B1CFF5D1E001E475E /* EventJSON.swift */,
 				6E44852B1CFF48AF001E475E /* EventTypeJSON.swift */,
+				6E59EBE11D01DB1A00355901 /* PresentationJSON.swift */,
 				6E155F4C1D008EDD00563B0A /* TagJSON.swift */,
 				6E4485171CFF3140001E475E /* TimeZoneJSON.swift */,
 				6E4485231CFF3EBA001E475E /* TicketTypeJSON.swift */,
@@ -2432,6 +2441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E155F521D00937200563B0A /* Summit.json in Resources */,
+				6E59EBE41D01E92000355901 /* AustinSummit.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2630,6 +2640,7 @@
 				6E4485481CFF811F001E475E /* ImageJSON.swift in Sources */,
 				6E4485281CFF472D001E475E /* LocationJSON.swift in Sources */,
 				6E155FAD1D00A03D00563B0A /* RealmPerson.swift in Sources */,
+				6E59EBE01D01D90000355901 /* Presentation.swift in Sources */,
 				6E155FBD1D00A79F00563B0A /* RealmImage.swift in Sources */,
 				6E155FC51D00B18C00563B0A /* RealmVenue.swift in Sources */,
 				6E4485341CFF56CB001E475E /* TrackJSON.swift in Sources */,
@@ -2637,6 +2648,7 @@
 				6E44852A1CFF482F001E475E /* EventType.swift in Sources */,
 				6E155FBB1D00A76100563B0A /* RealmFeedback.swift in Sources */,
 				6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */,
+				6E59EBE21D01DB1A00355901 /* PresentationJSON.swift in Sources */,
 				6E155FA51D009BB700563B0A /* RealmSummitAttendee.swift in Sources */,
 				6E155FC91D00B24C00563B0A /* RealmTag.swift in Sources */,
 				6E4485401CFF750D001E475E /* VenueRoom.swift in Sources */,

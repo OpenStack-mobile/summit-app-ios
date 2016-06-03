@@ -57,7 +57,7 @@ extension Venue: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.descriptionText = description
+        self.descriptionText = description // not in Realm
         self.latitude = latitude
         self.longitude = longitude
         self.address = address
