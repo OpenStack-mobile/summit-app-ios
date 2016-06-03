@@ -29,19 +29,19 @@ extension SummitEvent: JSONDecodable {
             let eventTypeJSON = JSONObject[JSONKey.type_id.rawValue],
             let eventType = EventType(JSONValue: eventTypeJSON),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
-            let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
+            let summitTypes = Int.fromJSON(summitTypesJSONArray),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
-            let averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double,
             let typeJSON = JSONObject[JSONKey.type_id.rawValue],
             let type = EventType(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.fromJSON(sponsorsJSONArray),
-            let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
-            let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
-            let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
+            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
+            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
+            let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int,
+            let presentation = Presentation(JSONValue: JSONValue)
             else { return nil }
         
         self.identifier = identifier
@@ -52,14 +52,13 @@ extension SummitEvent: JSONDecodable {
         self.type = eventType
         self.summitTypes = summitTypes
         self.tags = tags
-        self.averageFeedback = averageFeedback
         self.allowFeedback = allowFeedback
         self.type = type
         self.sponsors = sponsors
-        self.speakers = speakers
-        self.locationIdentifier = locationIdentifier
-        //self.trackIdentifier = trackIdentifier
+        self.location = locationIdentifier
+        self.presentation = presentation
         
-        
+        // optional
+        self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double ?? nil
     }
 }

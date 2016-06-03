@@ -31,14 +31,14 @@ extension Summit: JSONDecodable {
             /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
             /* let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue, */
             /* let sponsors = Company.fromJSON(sponsorsJSONArray), */
+            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
+            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
             let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
             let ticketTypes = TicketType.fromJSON(ticketTypeJSONArray),
             let locationsJSON = JSONObject[JSONKey.locations.rawValue],
             let locations = Locations(JSONValue: locationsJSON),
-            let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
-            let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
             let tracksJSONArray = JSONObject[JSONKey.tracks.rawValue]?.arrayValue,
             let tracks = Track.fromJSON(tracksJSONArray),
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
@@ -57,7 +57,6 @@ extension Summit: JSONDecodable {
         self.summitTypes = summitTypes
         self.ticketTypes = ticketTypes
         self.locations = locations
-        self.speakers = speakers
         self.tracks = tracks
         self.trackGroups = trackGroups
         self.schedule = events
@@ -67,6 +66,7 @@ extension Summit: JSONDecodable {
         //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
         //self.active = active
         //self.sponsors = sponsors
+        //self.speakers = speakers
         
         // optional values
         

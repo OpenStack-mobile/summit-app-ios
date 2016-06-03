@@ -11,3 +11,14 @@ import RealmSwift
 public class RealmImage: RealmEntity {
     public dynamic var url = ""
 }
+
+// MARK: - Encoding
+
+extension Image: RealmDecodable {
+    
+    public init(realmEntity: RealmImage) {
+        
+        self.identifier = realmEntity.id
+        self.url = realmEntity.url
+    }
+}

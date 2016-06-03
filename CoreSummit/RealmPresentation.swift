@@ -21,3 +21,17 @@ public class RealmPresentation: RealmEntity {
     }
 }
 
+// MARK: - Encoding
+
+extension Presentation: RealmDecodable {
+    
+    public init(realmEntity: RealmPresentation) {
+        
+        self.identifier = realmEntity.id
+        self.level = realmEntity.level
+        self.track = realmEntity.track!.id
+        self.moderator = realmEntity.moderator?.id
+        self.speakers = realmEntity.speakers.identifiers
+    }
+}
+
