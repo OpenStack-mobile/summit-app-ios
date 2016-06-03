@@ -12,9 +12,9 @@ public struct TrackGroup: Named {
     
     public var name: String
     
+    public var descriptionText: String?
+    
     public var color: String
-    
-    public var descriptionText: String
-    
+        
     public var tracks: [Identifier]
 }

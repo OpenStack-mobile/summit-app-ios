@@ -6,7 +6,13 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public protocol Location: Named {
+public protocol LocationProtocol: Named {
     
-    var descriptionText: String { get }
+    var descriptionText: String? { get }
+}
+
+public enum Location {
+    
+    case venue(Venue)
+    case room(VenueRoom)
 }

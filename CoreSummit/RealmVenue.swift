@@ -38,7 +38,7 @@ extension Venue: RealmDecodable {
         self.country = realmEntity.country
         self.latitude = realmEntity.lat
         self.longitude = realmEntity.long
-        self.isInternal = realmEntity.isInternal
+        self.locationType = realmEntity.isInternal ? .Internal : .External
         self.maps = Image.from(realm: realmEntity.maps)
         self.images = Image.from(realm: realmEntity.images)
     }

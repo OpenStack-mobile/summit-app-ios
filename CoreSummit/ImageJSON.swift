@@ -12,7 +12,7 @@ public extension Image {
     
     enum JSONKey: String {
         
-        case id, url
+        case id, image_url
     }
 }
 
@@ -22,7 +22,7 @@ extension Image: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let url = JSONObject[JSONKey.url.rawValue]?.rawValue as? String
+            let url = JSONObject[JSONKey.image_url.rawValue]?.rawValue as? String
             else { return nil }
         
         self.identifier = identifier

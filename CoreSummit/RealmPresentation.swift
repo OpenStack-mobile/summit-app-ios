@@ -28,7 +28,7 @@ extension Presentation: RealmDecodable {
     public init(realmEntity: RealmPresentation) {
         
         self.identifier = realmEntity.id
-        self.level = realmEntity.level
+        self.level = Level(rawValue: realmEntity.level)
         self.track = realmEntity.track!.id
         self.moderator = realmEntity.moderator?.id
         self.speakers = realmEntity.speakers.identifiers

@@ -23,17 +23,19 @@ extension VenueRoom: JSONDecodable {
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
+            let classNameString = JSONObject[LocationJSONKey.class_name.rawValue]?.rawValue as? String,
             let identifier = JSONObject[LocationJSONKey.id.rawValue]?.rawValue as? Int,
             let name = JSONObject[LocationJSONKey.name.rawValue]?.rawValue as? String,
-            let description = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String,
-            let capacity = JSONObject[JSONKey.Capacity.rawValue]?.rawValue as? Int,
             let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.rawValue as? Int
+            where classNameString == VenueRoom.JSONClassName
             else { return nil }
         
         self.identifier = identifier
         self.name = name
-        self.descriptionText = description
-        self.capacity = capacity
         self.venueIdentifier = venueIdentifier
+        
+        // optional
+        self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String
+        self.capacity = JSONObject[JSONKey.Capacity.rawValue]?.rawValue as? Int
     }
 }
