@@ -37,6 +37,11 @@ public extension RealmDecodable {
     }
 }
 
+public extension List where T: RealmEntity {
+    
+    var identifiers: [Identifier] { return self.map { $0.id } }
+}
+
 public protocol RealmEncodable {
     
     associatedtype RealmType: RealmEntity

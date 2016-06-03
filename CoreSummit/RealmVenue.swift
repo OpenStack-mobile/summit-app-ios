@@ -21,3 +21,25 @@ public class RealmVenue: RealmLocation {
     public let maps = List<RealmImage>()
     public let images = List<RealmImage>()
 }
+
+// MARK: - Encoding
+
+extension Venue: RealmDecodable {
+    
+    public init(realmEntity: RealmVenue) {
+        
+        self.identifier = realmEntity.id
+        self.name = realmEntity.name
+        self.descriptionText = realmEntity.locationDescription
+        self.address = realmEntity.address
+        self.city = realmEntity.city
+        self.zipCode = realmEntity.zipCode
+        self.state = realmEntity.state
+        self.country = realmEntity.country
+        self.latitude = realmEntity.lat
+        self.longitude = realmEntity.long
+        self.isInternal = realmEntity.isInternal
+        self.maps = Image.from(realm: realmEntity.maps)
+        self.images = Image.from(realm: realmEntity.images)
+    }
+}

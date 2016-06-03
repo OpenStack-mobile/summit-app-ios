@@ -24,19 +24,19 @@ public struct Event: Named {
     
     public var allowFeedback: Bool
     
-    public var averageFeedback: Double
+    public var averageFeedback: Double?
     
     public var type: EventType
     
-    public var summitTypes: [SummitType]
+    public var summitTypes: [Int]
     
     public var sponsors: [Company]
     
     public var tags: [Tag]
+        
+    public var location: Identifier
     
-    public var speakers: [PresentationSpeaker]
-    
-    public var locationIdentifier: Identifier
+    public var presentation: Presentation
     
     //public var trackIdentifier: Identifier
 }

@@ -44,9 +44,24 @@ extension SummitEvent: RealmDecodable {
         self.allowFeedback = realmEntity.allowFeedback
         self.averageFeedback = realmEntity.averageFeedback
         self.type = EventType(realmEntity: realmEntity.eventType)
-        self.summitTypes = SummitType.from(realm: realmEntity.summitTypes)
+        self.summitTypes = realmEntity.summitTypes.map { $0.id }
         self.sponsors = Company.from(realm: realmEntity.sponsors)
         self.tags = Tag.from(realm: realmEntity.tags)
+        self.presentation = Presentation(realmEntity: realmEntity.presentation!)
+        
+        // location
+        if let venue = realmEntity.venue?.id {
+            
+            self.location = venue
+            
+        } else if let room = realmEntity.venueRoom?.id {
+            
+            self.location = room
+            
+        } else {
+            
+            fatalError("Missing location identifier: \(realmEntity)")
+        }
     }
 }
 
