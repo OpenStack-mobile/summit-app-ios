@@ -43,9 +43,9 @@ extension SummitEvent: RealmDecodable {
         self.descriptionText = realmEntity.eventDescription
         self.allowFeedback = realmEntity.allowFeedback
         self.averageFeedback = realmEntity.averageFeedback
-        self.type = EventType(realmEntity: realmEntity.eventType)
-        self.summitTypes = realmEntity.summitTypes.map { $0.id }
-        self.sponsors = Company.from(realm: realmEntity.sponsors)
+        self.type = realmEntity.eventType.id
+        self.summitTypes = realmEntity.summitTypes.identifiers
+        self.sponsors = realmEntity.sponsors.identifiers
         self.tags = Tag.from(realm: realmEntity.tags)
         self.presentation = Presentation(realmEntity: realmEntity.presentation!)
         

@@ -10,11 +10,19 @@ public struct Presentation: Unique {
     
     public let identifier: Identifier
     
-    public var level: String
+    public var level: Level?
     
-    public var track: Identifier
+    public var track: Identifier?
     
     public var moderator: Identifier?
     
     public var speakers: [Identifier]
+}
+
+public extension Presentation {
+    
+    public enum Level: String {
+        
+        case Beginner, Intermediate, Advanced
+    }
 }

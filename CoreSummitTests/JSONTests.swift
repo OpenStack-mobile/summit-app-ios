@@ -21,6 +21,16 @@ final class JSONTests: XCTestCase {
         
         dump(decodable)
     }
+    
+    func testAustinSummit() {
+        
+        let testJSON = loadJSON("AustinSummit")
+        
+        guard let _ = Summit(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        //dump(decodable) // too large
+    }
 }
 
 private func loadJSON(filename: String) -> JSON.Value {

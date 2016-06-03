@@ -23,20 +23,19 @@ extension SummitEvent: JSONDecodable {
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
-            let description = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
             let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
             let eventTypeJSON = JSONObject[JSONKey.type_id.rawValue],
-            let eventType = EventType(JSONValue: eventTypeJSON),
+            let eventType = Int(JSONValue: eventTypeJSON),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
             let summitTypes = Int.fromJSON(summitTypesJSONArray),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let typeJSON = JSONObject[JSONKey.type_id.rawValue],
-            let type = EventType(JSONValue: typeJSON),
+            let type = Identifier(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Company.fromJSON(sponsorsJSONArray),
+            let sponsors = Identifier.fromJSON(sponsorsJSONArray),
             /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
             /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
@@ -46,7 +45,6 @@ extension SummitEvent: JSONDecodable {
         
         self.identifier = identifier
         self.name = title
-        self.descriptionText = description
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
@@ -59,6 +57,7 @@ extension SummitEvent: JSONDecodable {
         self.presentation = presentation
         
         // optional
+        self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double ?? nil
     }
 }

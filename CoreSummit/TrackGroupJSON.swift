@@ -34,6 +34,6 @@ extension TrackGroup: JSONDecodable {
         self.tracks = tracks
         
         // optional
-        self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String ?? ""
+        self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
     }
 }

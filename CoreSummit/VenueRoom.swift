@@ -6,15 +6,15 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct VenueRoom: Location {
+public struct VenueRoom: LocationProtocol {
     
     public let identifier: Identifier
     
     public var name: String
     
-    public var descriptionText: String
+    public var descriptionText: String?
     
-    public var capacity: Int
+    public var capacity: Int?
     
     public var venueIdentifier: Identifier
 }
