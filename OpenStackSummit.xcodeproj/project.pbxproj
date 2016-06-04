@@ -144,6 +144,7 @@
 		6E59EBE01D01D90000355901 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E59EBDF1D01D90000355901 /* Presentation.swift */; };
 		6E59EBE21D01DB1A00355901 /* PresentationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E59EBE11D01DB1A00355901 /* PresentationJSON.swift */; };
 		6E59EBE41D01E92000355901 /* AustinSummit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E59EBE31D01E92000355901 /* AustinSummit.json */; };
+		6EAD3E151D025C4D00974938 /* RealmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD3E141D025C4D00974938 /* RealmTest.swift */; };
 		6EE66C6A1CFE1A920010A5C4 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EE66C691CFE1A920010A5C4 /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EE66C711CFE1A930010A5C4 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
 		6EE66C881CFE1B5F0010A5C4 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE66C871CFE1B5F0010A5C4 /* Named.swift */; };
@@ -498,6 +499,7 @@
 		6E59EBDF1D01D90000355901 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		6E59EBE11D01DB1A00355901 /* PresentationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationJSON.swift; sourceTree = "<group>"; };
 		6E59EBE31D01E92000355901 /* AustinSummit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AustinSummit.json; sourceTree = "<group>"; };
+		6EAD3E141D025C4D00974938 /* RealmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTest.swift; sourceTree = "<group>"; };
 		6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE66C691CFE1A920010A5C4 /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
 		6EE66C6B1CFE1A920010A5C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 			children = (
 				6E155F501D00937200563B0A /* JSON */,
 				6E155F4E1D00929A00563B0A /* JSONTests.swift */,
+				6EAD3E141D025C4D00974938 /* RealmTest.swift */,
 				6EE66C791CFE1A930010A5C4 /* Info.plist */,
 			);
 			path = CoreSummitTests;
@@ -2660,6 +2663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E155F4F1D00929A00563B0A /* JSONTests.swift in Sources */,
+				6EAD3E151D025C4D00974938 /* RealmTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,3 +20,15 @@ extension EventType: RealmDecodable {
         self.name = realmEntity.name
     }
 }
+
+extension EventType: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmEventType {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+                realmEntity.name = name
+        
+        return realmEntity
+    }
+}

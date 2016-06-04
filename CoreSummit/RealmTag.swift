@@ -20,3 +20,15 @@ extension Tag: RealmDecodable {
         self.name = realmEntity.name
     }
 }
+
+extension Tag: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmTag {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+                realmEntity.name = name
+        
+        return realmEntity
+    }
+}

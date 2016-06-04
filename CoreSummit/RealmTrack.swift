@@ -21,6 +21,19 @@ extension Track: RealmDecodable {
         
         self.identifier = realmEntity.id
         self.name = realmEntity.name
-        self.groups = realmEntity.trackGroups.map { $0.id }
+        self.groups = realmEntity.trackGroups.identifiers
+    }
+}
+
+extension Track: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmTrack {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+                realmEntity.name = name
+        realmEntity.trackGroups.replace(with: groups)
+        
+        return realmEntity
     }
 }
