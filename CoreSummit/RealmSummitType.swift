@@ -31,7 +31,7 @@ extension SummitType: RealmEncodable {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
         
-                realmEntity.name = name
+        realmEntity.name = name
         realmEntity.color = color
         
         return realmEntity
