@@ -45,5 +45,3 @@ public struct Summit: Named {
     
     public var schedule: [Event]
 }
-
-

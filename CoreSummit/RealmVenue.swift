@@ -54,6 +54,7 @@ extension Venue: RealmEncodable {
         realmEntity.locationDescription = descriptionText ?? ""
         realmEntity.country = country
         realmEntity.address = address ?? ""
+        realmEntity.city = city ?? ""
         realmEntity.zipCode = zipCode ?? ""
         realmEntity.state = state ?? ""
         realmEntity.lat = latitude ?? ""
