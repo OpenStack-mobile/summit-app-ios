@@ -43,7 +43,7 @@ extension Summit: RealmDecodable {
         self.eventTypes = EventType.from(realm: realmEntity.eventTypes)
         self.tracks = Track.from(realm: realmEntity.track)
         self.trackGroups = TrackGroup.from(realm: realmEntity.trackGroups)
-        self.schedule = Event.from(realm: realmEntity.events)
+        self.schedule = SummitEvent.from(realm: realmEntity.events)
         
         // locations
         var locations = [Location]()
@@ -60,5 +60,28 @@ extension Summit: RealmDecodable {
             
             self.startShowingVenues = nil
         }
+    }
+}
+
+extension Summit: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmSummit {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.name = name
+        realmEntity.startDate = start.toFoundation()
+        realmEntity.endDate = end.toFoundation()
+        realmEntity.timeZone = timeZone
+        
+        // relationships
+        realmEntity.types.replace(with: summitTypes.save(realm))
+        realmEntity.ticketTypes.replace(with: ticketTypes.save(realm))
+        realmEntity.eventTypes.replace(with: eventTypes.save(realm))
+        realmEntity.track.replace(with: tracks.save(realm))
+        realmEntity.trackGroups.replace(with: trackGroups.save(realm))
+        realmEntity.events.replace(with: schedule)
+        
+        return realmEntity
     }
 }

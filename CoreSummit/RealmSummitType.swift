@@ -24,3 +24,16 @@ extension SummitType: RealmDecodable {
         self.color = realmEntity.color
     }
 }
+
+extension SummitType: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmSummitType {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+                realmEntity.name = name
+        realmEntity.color = color
+        
+        return realmEntity
+    }
+}
