@@ -29,9 +29,38 @@ extension Presentation: RealmDecodable {
         
         self.identifier = realmEntity.id
         self.level = Level(rawValue: realmEntity.level)
-        self.track = realmEntity.track!.id
+        self.track = realmEntity.track?.id
         self.moderator = realmEntity.moderator?.id
         self.speakers = realmEntity.speakers.identifiers
     }
 }
 
+extension Presentation: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmPresentation {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.level = level?.rawValue ?? ""
+        
+        if let moderatorIdentifier = self.moderator {
+            
+            realmEntity.moderator = RealmPresentationSpeaker.cached(moderatorIdentifier, realm: realm)
+            
+        } else {
+            
+            realmEntity.moderator = nil
+        }
+        
+        if let trackIdentifier = self.track {
+            
+            realmEntity.track = RealmTrack.cached(trackIdentifier, realm: realm)
+            
+        } else {
+            
+            realmEntity.track = nil
+        }
+        
+        return realmEntity
+    }
+}

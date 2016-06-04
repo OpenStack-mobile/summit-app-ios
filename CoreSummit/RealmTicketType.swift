@@ -26,3 +26,17 @@ extension TicketType: RealmDecodable {
         self.allowedSummitTypes = SummitType.from(realm: realmEntity.allowedSummitTypes)
     }
 }
+
+extension TicketType: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmTicketType {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+                realmEntity.name = name
+        realmEntity.ticketTypeDescription = descriptionText ?? ""
+        realmEntity.allowedSummitTypes.replace(with: allowedSummitTypes.save(realm))
+        
+        return realmEntity
+    }
+}

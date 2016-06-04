@@ -33,7 +33,7 @@ final class JSONTests: XCTestCase {
     }
 }
 
-private func loadJSON(filename: String) -> JSON.Value {
+internal func loadJSON(filename: String) -> JSON.Value {
     
     let testBundle = NSBundle(forClass: JSONTests.self)
     

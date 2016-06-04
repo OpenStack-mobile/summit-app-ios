@@ -25,7 +25,7 @@ public struct Venue: LocationProtocol {
     public var zipCode: String?
     
     public var state: String?
-        
+    
     public var latitude: String?
     
     public var longitude: String?

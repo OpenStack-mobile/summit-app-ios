@@ -65,3 +65,40 @@ extension SummitEvent: RealmDecodable {
     }
 }
 
+extension SummitEvent: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmSummitEvent {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.name = name
+        realmEntity.start = start.toFoundation()
+        realmEntity.end = end.toFoundation()
+        realmEntity.eventDescription = descriptionText ?? ""
+        realmEntity.allowFeedback = allowFeedback
+        realmEntity.averageFeedback = averageFeedback ?? 0.0
+        
+        // relationships
+        realmEntity.eventType = RealmEventType.cached(type, realm: realm)
+        realmEntity.summitTypes.replace(with: summitTypes)
+        realmEntity.sponsors.replace(with: sponsors)
+        realmEntity.tags.replace(with: tags)
+        realmEntity.presentation = presentation.save(realm)
+        
+        // location
+        if let cachedRoom = RealmVenueRoom.find(location, realm: realm) {
+            
+            realmEntity.venueRoom = cachedRoom
+            realmEntity.venue = nil
+            
+        } else {
+            
+            realmEntity.venue = RealmVenue.cached(location, realm: realm)
+            realmEntity.venueRoom = nil
+            
+        }
+        
+        return realmEntity
+    }
+}
+
