@@ -15,4 +15,12 @@ public enum Location {
     
     case venue(Venue)
     case room(VenueRoom)
+    
+    public var rawValue: LocationProtocol {
+        
+        switch self {
+        case let .venue(venue): return venue
+        case let .room(room): return room
+        }
+    }
 }

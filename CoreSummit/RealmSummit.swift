@@ -46,10 +46,11 @@ extension Summit: RealmDecodable {
         self.schedule = SummitEvent.from(realm: realmEntity.events)
         
         // locations
-        var locations = [Location]()
-        realmEntity.venues.forEach { locations.append(Location.venue(Venue(realmEntity: $0))) }
-        realmEntity.venuesRooms.forEach { locations.append(Location.room(VenueRoom(realmEntity: $0))) }
-        self.locations = locations
+        var venues = [Location]()
+        var rooms = [Location]()
+        realmEntity.venues.forEach { venues.append(Location.venue(Venue(realmEntity: $0))) }
+        realmEntity.venuesRooms.forEach { rooms.append(Location.room(VenueRoom(realmEntity: $0))) }
+        self.locations = venues + rooms
         
         // optional values
         if realmEntity.startShowingVenuesDate != NSDate(timeIntervalSince1970: 1) {
@@ -73,6 +74,7 @@ extension Summit: RealmEncodable {
         realmEntity.startDate = start.toFoundation()
         realmEntity.endDate = end.toFoundation()
         realmEntity.timeZone = timeZone
+        realmEntity.startShowingVenuesDate = startShowingVenues?.toFoundation() ?? Date(timeIntervalSince1970: 1).toFoundation()
         
         // relationships
         realmEntity.types.replace(with: summitTypes.save(realm))

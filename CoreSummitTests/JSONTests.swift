@@ -16,10 +16,10 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("Summit")
         
-        guard let decodable = Summit(JSONValue: testJSON)
+        guard let _ = Summit(JSONValue: testJSON)
             else { XCTFail("Could not decode from JSON"); return }
         
-        dump(decodable)
+        //dump(decodable)
     }
     
     func testAustinSummit() {
@@ -31,15 +31,4 @@ final class JSONTests: XCTestCase {
         
         //dump(decodable) // too large
     }
-}
-
-internal func loadJSON(filename: String) -> JSON.Value {
-    
-    let testBundle = NSBundle(forClass: JSONTests.self)
-    
-    let resourcePath = testBundle.pathForResource(filename, ofType: "json", inDirectory: nil, forLocalization: nil)!
-    
-    let JSONString = try! String(contentsOfFile: resourcePath)
-    
-    return JSON.Value(string: JSONString)!
 }

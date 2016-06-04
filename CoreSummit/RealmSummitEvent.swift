@@ -40,14 +40,22 @@ extension SummitEvent: RealmDecodable {
         self.name = realmEntity.name
         self.start = Date(foundation: realmEntity.start)
         self.end = Date(foundation: realmEntity.end)
-        self.descriptionText = realmEntity.eventDescription
+        self.descriptionText = String(realm: realmEntity.eventDescription)
         self.allowFeedback = realmEntity.allowFeedback
-        self.averageFeedback = realmEntity.averageFeedback
         self.type = realmEntity.eventType.id
         self.summitTypes = realmEntity.summitTypes.identifiers
         self.sponsors = realmEntity.sponsors.identifiers
         self.tags = Tag.from(realm: realmEntity.tags)
         self.presentation = Presentation(realmEntity: realmEntity.presentation!)
+        
+        if realmEntity.averageFeedback == 0.0 {
+            
+            self.averageFeedback = nil
+            
+        } else {
+            
+            self.averageFeedback = realmEntity.averageFeedback
+        }
         
         // location
         if let venue = realmEntity.venue?.id {

@@ -27,7 +27,7 @@ extension EventType: RealmEncodable {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
         
-                realmEntity.name = name
+        realmEntity.name = name
         
         return realmEntity
     }
