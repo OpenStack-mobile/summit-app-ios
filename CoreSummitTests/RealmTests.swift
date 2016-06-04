@@ -20,24 +20,26 @@ final class RealmTests: XCTestCase {
         // load test data
         let testJSON = loadJSON("AustinSummit")
         
-        guard let summit = Summit(JSONValue: testJSON)
+        guard var summit = Summit(JSONValue: testJSON)
             else { XCTFail("Could not decode from JSON"); return }
         
+        // decode
         var realmSummit: RealmSummit!
             
         do { try realm.write { realmSummit = summit.save(realm) } }
             
         catch { XCTFail("\(error)"); return }
         
-        let decodedSummit = Summit(realmEntity: realmSummit)
+        var decodedSummit = Summit(realmEntity: realmSummit)
         
-        var decodedDump = ""
+        // sort decoded locations so that they dump the same string
+        summit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
+        decodedSummit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
         
-        var summitDump = ""
+        // dump
         
-        dump(decodedSummit, &decodedDump)
-        
-        dump(summit, &summitDump)
+        let decodedDump = dump(decodedSummit, "DecodedSummitDump.txt")
+        let summitDump = dump(summit, "SummitDump.txt")
         
         XCTAssert(decodedDump == summitDump, "Original summit must equal decoded summit")
     }
