@@ -42,6 +42,7 @@ extension Presentation: RealmEncodable {
         let realmEntity = RealmType.cached(identifier, realm: realm)
         
         realmEntity.level = level?.rawValue ?? ""
+        realmEntity.speakers.replace(with: speakers)
         
         if let moderatorIdentifier = self.moderator {
             

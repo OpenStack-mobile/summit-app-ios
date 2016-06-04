@@ -11,7 +11,7 @@ import SwiftFoundation
 import CoreSummit
 import RealmSwift
 
-final class RealmTest: XCTestCase {
+final class RealmTests: XCTestCase {
     
     let realm = try! Realm()
     

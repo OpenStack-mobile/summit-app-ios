@@ -28,8 +28,31 @@ extension VenueRoom: RealmDecodable {
         
         self.identifier = realmEntity.id
         self.name = realmEntity.name
-        self.descriptionText = realmEntity.locationDescription
-        self.capacity = realmEntity.capacity
-        self.venueIdentifier = realmEntity.venue.id
+        self.descriptionText = String(realm: realmEntity.locationDescription)
+        self.venue = realmEntity.venue.id
+        
+        if realmEntity.capacity == 0 {
+            
+            self.capacity = nil
+            
+        } else {
+         
+            self.capacity = realmEntity.capacity
+        }
+    }
+}
+
+extension VenueRoom: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmVenueRoom {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.name = name
+        realmEntity.locationDescription = descriptionText ?? ""
+        realmEntity.venue = RealmVenue.cached(venue, realm: realm)
+        realmEntity.capacity = capacity ?? 0
+        
+        return realmEntity
     }
 }
