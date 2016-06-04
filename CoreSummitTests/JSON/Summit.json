@@ -1,0 +1,245 @@
+{
+	"id": 7,
+	"name": "Barcelona",
+	"start_date": 1477310400,
+	"end_date": 1477681200,
+	"start_showing_venues_date": null,
+	"active": true,
+	"time_zone": {
+		"country_code": "ES",
+		"latitude": 40.4,
+		"longitude": -3.68333,
+		"comments": "mainland",
+		"name": "Europe\/Madrid",
+		"offset": 7200
+	},
+	"logo": null,
+	"summit_types": [{
+		"id": 3,
+		"name": "OpenStack Academy",
+		"color": "#f0f0ee",
+		"type": "MAIN"
+	}, {
+		"id": 4,
+		"name": "Business & Strategy",
+		"color": "#f0f0ee",
+		"type": "MAIN"
+	}, {
+		"id": 5,
+		"name": "Architecture & Operations",
+		"color": "#f0f0ee",
+		"type": "MAIN"
+	}, {
+		"id": 6,
+		"name": "Developers",
+		"color": "#f0f0ee",
+		"type": "MAIN"
+	}, {
+		"id": 7,
+		"name": "vBrownBag Tech Talks",
+		"color": "#f0f0ee",
+		"type": "MAIN"
+	}, {
+		"id": 8,
+		"name": "Community Collaboration",
+		"color": "#f0f0ee",
+		"type": "DESIGN"
+	}],
+	"ticket_types": [],
+	"locations": [],
+	"event_types": [{
+		"id": 86,
+		"name": "Presentation",
+		"color": "#f0f0ee",
+		"black_out_times": false
+	}, {
+		"id": 87,
+		"name": "Keynotes",
+		"color": "#f0f0ee",
+		"black_out_times": false
+	}, {
+		"id": 88,
+		"name": "Hand-on Labs",
+		"color": "#f0f0ee",
+		"black_out_times": false
+	}, {
+		"id": 89,
+		"name": "Lunch & Breaks",
+		"color": "#f0f0ee",
+		"black_out_times": false
+	}, {
+		"id": 90,
+		"name": "Evening Events",
+		"color": "#f0f0ee",
+		"black_out_times": false
+	}, {
+		"id": 91,
+		"name": "Panel",
+		"color": "#f0f0ee",
+		"black_out_times": false
+	}],
+	"sponsors": [],
+	"speakers": [],
+	"tracks": [{
+		"id": 49,
+		"name": "Hands-on Workshops",
+		"track_groups": [12]
+	}, {
+		"id": 56,
+		"name": "Community Building",
+		"track_groups": [13]
+	}, {
+		"id": 57,
+		"name": "IT Strategy",
+		"track_groups": [14]
+	}, {
+		"id": 58,
+		"name": "Evaluating OpenStack",
+		"track_groups": [14]
+	}, {
+		"id": 59,
+		"name": "Case Studies",
+		"track_groups": [14]
+	}, {
+		"id": 60,
+		"name": "Telecom & NFV Strategy",
+		"track_groups": [14]
+	}, {
+		"id": 61,
+		"name": "Cloudfunding",
+		"track_groups": [14]
+	}, {
+		"id": 62,
+		"name": "Products & Services",
+		"track_groups": [14]
+	}, {
+		"id": 65,
+		"name": "Cultural & Organizational Change",
+		"track_groups": [14]
+	}, {
+		"id": 67,
+		"name": "Cloud Models & Economics",
+		"track_groups": [14]
+	}, {
+		"id": 68,
+		"name": "Field Experiences",
+		"track_groups": [15]
+	}, {
+		"id": 69,
+		"name": "Getting Started",
+		"track_groups": [15]
+	}, {
+		"id": 70,
+		"name": "Ops Tools",
+		"track_groups": [15]
+	}, {
+		"id": 71,
+		"name": "Architectural Decisions",
+		"track_groups": [15]
+	}, {
+		"id": 72,
+		"name": "Networking",
+		"track_groups": [15]
+	}, {
+		"id": 73,
+		"name": "Storage",
+		"track_groups": [15]
+	}, {
+		"id": 74,
+		"name": "How To & Best Practices",
+		"track_groups": [15]
+	}, {
+		"id": 75,
+		"name": "Security",
+		"track_groups": [15]
+	}, {
+		"id": 76,
+		"name": "HPC \/ Research",
+		"track_groups": [15]
+	}, {
+		"id": 77,
+		"name": "Telecom \/ NFV Operations",
+		"track_groups": [15]
+	}, {
+		"id": 78,
+		"name": "Project Updates",
+		"track_groups": [15]
+	}, {
+		"id": 79,
+		"name": "Big Data",
+		"track_groups": [16]
+	}, {
+		"id": 80,
+		"name": "Cloud App Development",
+		"track_groups": [16]
+	}, {
+		"id": 81,
+		"name": "Containers",
+		"track_groups": [16]
+	}, {
+		"id": 82,
+		"name": "Upstream Development",
+		"track_groups": [16]
+	}, {
+		"id": 83,
+		"name": "How to Contribute",
+		"track_groups": [16]
+	}, {
+		"id": 85,
+		"name": "vBrownBag",
+		"track_groups": [18]
+	}, {
+		"id": 86,
+		"name": "Working Groups",
+		"track_groups": [19]
+	}, {
+		"id": 87,
+		"name": "Birds of a Feather",
+		"track_groups": [19]
+	}],
+	"track_groups": [{
+		"id": 12,
+		"name": "OpenStack Academy",
+		"color": "#f0f0ee",
+		"description": "<p><span data-sheets-value=\"{&quot;1&quot;:2,&quot;2&quot;:&quot;With a focus on education and training for cloud operators and application developers, the OpenStack Academy brings together hands-on workshops and day-long intensive training sessions under one roof. We&#039;ll also offer the Certified OpenStack Administrator exam on-site. Workshops and trainings will require an RSVP and certain pre-requisites. Bring your laptop and walk away with OpenStack skills.&quot;}\" data-sheets-userformat=\"{&quot;2&quot;:15107,&quot;3&quot;:[null,0],&quot;4&quot;:[null,2,16777215],&quot;11&quot;:4,&quot;12&quot;:0,&quot;14&quot;:[null,2,0],&quot;15&quot;:&quot;&#039;Open Sans&#039;, Helvetica, Arial, sans-serif&quot;,&quot;16&quot;:11}\">With a focus on education and training for cloud operators and application developers, the OpenStack Academy brings together hands-on workshops and day-long intensive training sessions under one roof. We'll also offer the Certified OpenStack Administrator exam on-site. Workshops and trainings will require an RSVP and certain pre-requisites. Bring your laptop and walk away with OpenStack skills.<\/span><\/p>",
+		"tracks": [49]
+	}, {
+		"id": 13,
+		"name": "Community Collaboration",
+		"color": "#f0f0ee",
+		"description": "<p>Community Collaobration brings together the upstream developers, operators and various working groups under the User Committee to plan the future of the software and collaborate around various community initiatives. The Design Summit allows the upstream developer community to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process. In other sessions, organizing bodies, such as ambassadors, user groups, User Committee and associated working groups, and those who are helping evangelize OpenStack around the world have an opportunitiy to join new groups, participate in working sessions, share learnings and collaborate in real-time. None of these are classic conference track with speakers and presentations, but instead collaborative group working sessions.<\/p>",
+		"tracks": [56]
+	}, {
+		"id": 14,
+		"name": "Business & Strategy",
+		"color": "#f0f0ee",
+		"description": "<p>IT leaders building their cloud business case are facing unique requirements to move faster and control costs within the bounds of industry regulations and business realities. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy and recruiting. We'll also cover important emerging technology shifts such as Network Functions Virtualization and the growing use of cloud services in the telecom and carrier space.<\/p>",
+		"tracks": [57, 58, 59, 60, 61, 62, 65, 67]
+	}, {
+		"id": 15,
+		"name": "Architecture & Operations",
+		"color": "#f0f0ee",
+		"description": "<p>The architecture &amp; operations conference is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.<\/p>",
+		"tracks": [71, 68, 72, 73, 74, 75, 76, 77, 78, 69, 70]
+	}, {
+		"id": 16,
+		"name": "Developers",
+		"color": "#f0f0ee",
+		"description": "<p>The developers conference will cover developing cloud applications, making the most of containers, delivering valuable services like big data analytics, as well as presentations and help getting started for upstream contributors.<\/p>",
+		"tracks": [79, 80, 81, 82, 83]
+	}, {
+		"id": 18,
+		"name": "vBrownBag Tech Talks",
+		"color": "#f0f0ee",
+		"description": null,
+		"tracks": [85]
+	}, {
+		"id": 19,
+		"name": "Community Collaboration Private",
+		"color": "#f0f0ee",
+		"description": null,
+		"tracks": [87, 86]
+	}],
+	"schedule": [],
+	"timestamp": 1464737341
+}
