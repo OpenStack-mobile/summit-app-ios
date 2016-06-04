@@ -35,6 +35,16 @@ public struct Venue: LocationProtocol {
     public var images: [Image]
 }
 
+// MARK: - Extensions
+
+public extension Venue {
+    
+    var isInternal: Bool {
+        
+        return locationType == .Internal
+    }
+}
+
 // MARK: - Supporting Types
 
 public extension Venue {

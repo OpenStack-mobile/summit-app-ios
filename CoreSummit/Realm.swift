@@ -106,4 +106,16 @@ public extension CollectionType where Generator.Element: RealmEncodable {
     }
 }
 
+// MARK: - Realm Conversion Helpers
 
+internal extension String {
+    
+    /// Empty strings
+    init?(realm: String) {
+        
+        guard realm.isEmpty == false
+            else { return nil }
+        
+        self = realm
+    }
+}

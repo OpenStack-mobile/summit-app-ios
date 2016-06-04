@@ -22,3 +22,15 @@ extension Image: RealmDecodable {
         self.url = realmEntity.url
     }
 }
+
+extension Image: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmImage {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.url = url
+        
+        return realmEntity
+    }
+}

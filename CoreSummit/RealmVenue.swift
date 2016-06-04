@@ -30,16 +30,39 @@ extension Venue: RealmDecodable {
         
         self.identifier = realmEntity.id
         self.name = realmEntity.name
-        self.descriptionText = realmEntity.locationDescription
-        self.address = realmEntity.address
-        self.city = realmEntity.city
-        self.zipCode = realmEntity.zipCode
-        self.state = realmEntity.state
+        self.descriptionText = String(realm: realmEntity.locationDescription)
+        self.address = String(realm: realmEntity.address)
+        self.city = String(realm: realmEntity.city)
+        self.zipCode = String(realm: realmEntity.zipCode)
+        self.state = String(realm: realmEntity.state)
         self.country = realmEntity.country
-        self.latitude = realmEntity.lat
-        self.longitude = realmEntity.long
+        self.latitude = String(realm: realmEntity.lat)
+        self.longitude = String(realm: realmEntity.long)
         self.locationType = realmEntity.isInternal ? .Internal : .External
         self.maps = Image.from(realm: realmEntity.maps)
         self.images = Image.from(realm: realmEntity.images)
     }
 }
+
+extension Venue: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmVenue {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.name = name
+        realmEntity.locationDescription = descriptionText ?? ""
+        realmEntity.country = country
+        realmEntity.address = address ?? ""
+        realmEntity.zipCode = zipCode ?? ""
+        realmEntity.state = state ?? ""
+        realmEntity.lat = latitude ?? ""
+        realmEntity.long = longitude ?? ""
+        realmEntity.isInternal = locationType == .Internal
+        realmEntity.maps.replace(with: maps)
+        realmEntity.images.replace(with: images)
+        
+        return realmEntity
+    }
+}
+
