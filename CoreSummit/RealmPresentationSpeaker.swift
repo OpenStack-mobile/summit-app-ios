@@ -19,8 +19,6 @@ public class RealmPresentationSpeaker: RealmPerson {
 
 // MARK: - Encoding
 
-//extension Person: RealmEncodable { }
-
 extension PresentationSpeaker: RealmDecodable {
     
     public init(realmEntity: RealmPresentationSpeaker) {
@@ -38,5 +36,26 @@ extension PresentationSpeaker: RealmDecodable {
         
         // speaker
         self.memberIdentifier = realmEntity.memberId
+    }
+}
+
+extension PresentationSpeaker: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmPresentationSpeaker {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.firstName = firstName
+        realmEntity.lastName = lastName
+        realmEntity.title = title
+        realmEntity.pictureUrl = pictureURL
+        realmEntity.email = email
+        realmEntity.twitter = twitter
+        realmEntity.irc = irc
+        realmEntity.bio = biography
+        
+        realmEntity.memberId = memberIdentifier
+        
+        return realmEntity
     }
 }

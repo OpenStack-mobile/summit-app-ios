@@ -21,9 +21,9 @@ extension TrackGroup: RealmDecodable {
         
         self.identifier = realmEntity.id
         self.name = realmEntity.name
-        self.descriptionText = realmEntity.trackGroupDescription
+        self.descriptionText = String(realm: realmEntity.trackGroupDescription)
         self.color = realmEntity.color
-        self.tracks = realmEntity.tracks.map { $0.id }
+        self.tracks = realmEntity.tracks.identifiers
     }
 }
 
@@ -33,9 +33,10 @@ extension TrackGroup: RealmEncodable {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
         
-                realmEntity.name = name
+        realmEntity.name = name
         realmEntity.color = color
         realmEntity.trackGroupDescription = descriptionText ?? ""
+        realmEntity.tracks.replace(with: tracks)
         
         return realmEntity
     }

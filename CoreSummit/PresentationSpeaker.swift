@@ -29,6 +29,8 @@ public struct PresentationSpeaker: Person {
     public var memberIdentifier: Identifier
 }
 
+// MARK: - Extensions
+
 public extension Person {
     
     var speaker: Bool { return self is PresentationSpeaker }

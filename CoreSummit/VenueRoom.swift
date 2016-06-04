@@ -16,5 +16,5 @@ public struct VenueRoom: LocationProtocol {
     
     public var capacity: Int?
     
-    public var venueIdentifier: Identifier
+    public var venue: Identifier
 }

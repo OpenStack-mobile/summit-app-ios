@@ -82,6 +82,17 @@ extension Summit: RealmEncodable {
         realmEntity.trackGroups.replace(with: trackGroups.save(realm))
         realmEntity.events.replace(with: schedule)
         
+        // locations
+        realmEntity.venues.removeAll()
+        realmEntity.venuesRooms.removeAll()
+        for location in locations {
+            
+            switch location {
+            case let .venue(venue): realmEntity.venues.append(venue.save(realm))
+            case let .room(room): realmEntity.venuesRooms.append(room.save(realm))
+            }
+        }
+        
         return realmEntity
     }
 }
