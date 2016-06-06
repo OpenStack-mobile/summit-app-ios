@@ -6,18 +6,19 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IVenueDataStore {
-    func addImage(image: Image, toVenue venue:Venue) throws
-    func removeImage(image: Image, fromVenue venue:Venue) throws
-    func addMap(map: Image, toVenue venue:Venue) throws
-    func removeMap(image: Image, fromVenue venue:Venue) throws
+public protocol VenueDataStoreProtocol {
+    
+    func addImage(image: RealmImage, toVenue venue: RealmVenue) throws
+    func removeImage(image: RealmImage, fromVenue venue: RealmVenue) throws
+    func addMap(map: RealmImage, toVenue venue: RealmVenue) throws
+    func removeMap(image: RealmImage, fromVenue venue: RealmVenue) throws
 }
 
-public class VenueDataStore: GenericDataStore, IVenueDataStore {
-    public func addImage(image: Image, toVenue venue:Venue) throws {
+public class VenueDataStore: GenericDataStore, VenueDataStoreProtocol {
+    
+    public func addImage(image: RealmImage, toVenue venue: RealmVenue) throws {
         try self.realm.write {
             let index = venue.images.indexOf("id = %@", image.id)
             if (index == nil) {
@@ -26,7 +27,7 @@ public class VenueDataStore: GenericDataStore, IVenueDataStore {
         }
     }
 
-    public func removeImage(image: Image, fromVenue venue:Venue) throws {
+    public func removeImage(image: RealmImage, fromVenue venue: RealmVenue) throws {
         try self.realm.write {
             if let index = venue.images.indexOf("id = %@", image.id) {
                 venue.images.removeAtIndex(index)
@@ -35,7 +36,7 @@ public class VenueDataStore: GenericDataStore, IVenueDataStore {
         
     }
     
-    public func addMap(map: Image, toVenue venue:Venue) throws {
+    public func addMap(map: RealmImage, toVenue venue: RealmVenue) throws {
         try self.realm.write {
             let index = venue.maps.indexOf("id = %@", map.id)
             if (index == nil) {
@@ -44,7 +45,7 @@ public class VenueDataStore: GenericDataStore, IVenueDataStore {
         }
     }
     
-    public func removeMap(map: Image, fromVenue venue:Venue) throws {
+    public func removeMap(map: RealmImage, fromVenue venue: RealmVenue) throws {
         try self.realm.write {
             if let index = venue.maps.indexOf("id = %@", map.id) {
                 venue.maps.removeAtIndex(index)

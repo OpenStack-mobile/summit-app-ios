@@ -13,9 +13,13 @@ import AeroGearOAuth2
     case OpenIDGetFormUrlEncoded, OpenIDJson, ServiceAccount
 }
 
+
+
 public final class HttpFactory {
     
-    var securityManager: SecurityManager!
+    private static let DefaultSecurity = SecurityManager.init()
+    
+    public var securityManager: SecurityManager = HttpFactory.DefaultSecurity
     
     public func create(type: HttpType) -> Http {
         let http: Http

@@ -28,7 +28,7 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         }
     }
     
-    var wireframe : IScheduleWireframe! {
+    var wireframe : ScheduleWireframe! {
         get {
             return internalWireframe
         }
@@ -47,7 +47,7 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         return events
     }
     
-    public override func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
+    public override func toggleScheduledStatus(index: Int, cell: ScheduleTableViewCellProtocol) {
         let event = dayEvents[index]
         toggleScheduledStatusForEvent(event, scheduleableView: cell, interactor: internalInteractor) { error in
             if (error != nil) {

@@ -6,7 +6,7 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
 public protocol DataStoreProtocol {
     

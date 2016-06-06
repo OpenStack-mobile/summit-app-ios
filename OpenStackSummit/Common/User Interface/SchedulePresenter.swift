@@ -14,8 +14,8 @@ public protocol SchedulePresenterProtocol {
     func viewLoad()
     func reloadSchedule()
     func getDayEventsCount() -> Int
-    func buildScheduleCell(cell: IScheduleTableViewCell, index: Int)
-    func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell)
+    func buildScheduleCell(cell: ScheduleTableViewCellProtocol, index: Int)
+    func toggleScheduledStatus(index: Int, cell: ScheduleTableViewCellProtocol)
     func showEventDetail(index: Int)
 }
 
@@ -23,13 +23,13 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
     
     // MARK: - Properties
     
-    var summitTimeZoneOffset: Int!
-    var session: Session!
-    var dayEvents: [ScheduleItem]!
-    var scheduleFilter: ScheduleFilter!
+    var summitTimeZoneOffset: Int = 0
+    var session = Session()
+    var dayEvents = [ScheduleItem]()
+    var scheduleFilter = ScheduleFilter()
     var internalInteractor: ScheduleInteractorProtocol!
     var internalViewController: IScheduleViewController!
-    var internalWireframe: ScheduleWireframe
+    var internalWireframe: ScheduleWireframe!
     var selectedDate: NSDate?
     
     // MARK: - Methods
@@ -56,7 +56,7 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
         reloadSchedule(internalInteractor, viewController: internalViewController)
     }
     
-    public func buildScheduleCell(cell: IScheduleTableViewCell, index: Int){
+    public func buildScheduleCell(cell: ScheduleTableViewCell, index: Int){
         let event = dayEvents[index]
         cell.eventTitle = event.name
         cell.eventType = event.eventType
@@ -101,7 +101,8 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
     }
     
     @objc private func loggedOut(notification: NSNotification) {
-        if dayEvents != nil {
+        
+        if dayEvents.isEmpty == nil {
             internalViewController.reloadSchedule()
         }
     }

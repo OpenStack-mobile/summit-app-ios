@@ -8,12 +8,12 @@
 
 import UIKit
 
-@objc
-public protocol ISpeakerPresentationsPresenter: SchedulePresenterProtocol {
+public protocol SpeakerPresentationsPresenterProtocol: SchedulePresenterProtocol {
+    
     var speakerId: Int { get set }
 }
 
-public class SpeakerPresentationsPresenter: SchedulePresenter, ISpeakerPresentationsPresenter {
+public class SpeakerPresentationsPresenter: SchedulePresenter, SpeakerPresentationsPresenterProtocol {
     
     weak var viewController : IScheduleViewController! {
         get {
@@ -33,7 +33,7 @@ public class SpeakerPresentationsPresenter: SchedulePresenter, ISpeakerPresentat
         }
     }
     
-    var wireframe : IScheduleWireframe! {
+    var wireframe : ScheduleWireframe {
         get {
             return internalWireframe
         }
