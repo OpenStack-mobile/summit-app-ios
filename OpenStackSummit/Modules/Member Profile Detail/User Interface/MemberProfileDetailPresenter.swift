@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSummit
 
 @objc
 public protocol IMemberProfileDetailPresenter {
@@ -77,24 +78,30 @@ public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresent
         }
     }
     
-    func showPersonProfile(person: PersonDTO?, error: NSError? = nil) {
+    func showPersonProfile(value: ErrorValue<Person>) {
+        
         dispatch_async(dispatch_get_main_queue(), {
-            if error != nil {
-                self.viewController.handlerError(error!)
-                self.viewController.hideActivityIndicator()
-                return
-            }
             
-            self.viewController.name = person!.name
-            self.viewController.personTitle = person!.title
-            self.viewController.picUrl = person!.pictureUrl
-            self.viewController.location = person!.location
-            self.viewController.email = person!.email
-            self.viewController.twitter = person!.twitter
-            self.viewController.irc = person!.irc
-            self.viewController.bio = person!.bio
-
-            self.viewController.hideActivityIndicator()
+            defer { self.viewController.hideActivityIndicator() }
+            
+            switch value {
+                
+            case let .Error(error):
+                
+                self.viewController.handlerError(error as NSError)
+                self.viewController.hideActivityIndicator()
+                
+            case let .Value(person):
+                
+                self.viewController.name = person.name
+                self.viewController.personTitle = person.title
+                self.viewController.picUrl = person.pictureURL
+                // FIXME: self.viewController.location =
+                self.viewController.email = person.email
+                self.viewController.twitter = person.twitter
+                self.viewController.irc = person.irc
+                self.viewController.bio = person.biography
+            }
         })
     }
     

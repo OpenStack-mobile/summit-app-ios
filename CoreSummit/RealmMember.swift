@@ -8,11 +8,6 @@
 
 import RealmSwift
 
-/*
-@objc public enum MemberRoles: Int {
-    case Anonymous, Attendee, Speaker, Member
-}*/
-
 public class RealmMember: RealmPerson {
     public dynamic var speakerRole : RealmPresentationSpeaker?
     public dynamic var attendeeRole : RealmSummitAttendee?

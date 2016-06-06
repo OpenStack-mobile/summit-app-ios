@@ -28,3 +28,14 @@ public struct Member: Person {
     
     public var friends: [Identifier]
 }
+
+// MARK: - Supporting Types
+
+public extension Member {
+    
+    public enum Role {
+        
+        case Anonymous, Attendee, Speaker, Member
+    }
+}
+

@@ -22,7 +22,7 @@ public class SummitEventDeserializer: NSObject, IDeserializer {
         super.init()
     }
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         var summitEvent = SummitEvent()
         
         if let eventId = json.int {

@@ -19,7 +19,7 @@ class DataUpdateDeserializerMock: DataUpdateDeserializer {
         self.dataUpdateArray = dataUpdateArray
     }
     
-    func deserializeArray(json: String) throws -> [BaseEntity] {
+    func deserializeArray(json: String) throws -> [RealmEntity] {
         return dataUpdateArray
     }
 }

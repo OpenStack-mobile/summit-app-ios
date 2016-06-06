@@ -6,31 +6,22 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
-import SwiftyJSON
 import AeroGearHttp
 import AeroGearOAuth2
 import Crashlytics
+import CoreSummit
+import SwiftFoundation
 
-@objc
-public protocol IMemberRemoteDataStore {
+public protocol MemberRemoteDataStoreProtocol {
     func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)
     func getLoggedInMemberBasicInfo(completionBlock : (Member?, NSError?) -> Void)
     func getAttendeesForTicketOrder(orderNumber: String, completionBlock : ([NonConfirmedSummitAttendee]?, NSError?) -> Void)
     func selectAttendeeFromOrderList(orderNumber: String, externalAttendeeId: Int, completionBlock : (NSError?) -> Void)
 }
 
-public class MemberRemoteDataStore: NSObject, IMemberRemoteDataStore {
-    var deserializerFactory: DeserializerFactory!
+public class MemberRemoteDataStore: MemberRemoteDataStoreProtocol {
+
     var httpFactory: HttpFactory!
-    
-    public override init() {
-        super.init()
-    }
-    
-    public init(deserializerFactory: DeserializerFactory ) {
-        self.deserializerFactory = deserializerFactory
-    }
     
     public func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
         let attendeeEndpoint = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/attendees/me?expand=speaker,feedback,tickets"

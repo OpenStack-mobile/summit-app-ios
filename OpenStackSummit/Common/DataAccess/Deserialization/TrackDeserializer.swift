@@ -12,7 +12,7 @@ import SwiftyJSON
 public class TrackDeserializer: NamedEntityDeserializer, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         
         let track: Track
         

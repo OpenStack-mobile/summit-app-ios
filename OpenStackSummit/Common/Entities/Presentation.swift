@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class Presentation: BaseEntity {
+public class Presentation: RealmEntity {
 
     public dynamic var level = ""
     public dynamic var track: Track?

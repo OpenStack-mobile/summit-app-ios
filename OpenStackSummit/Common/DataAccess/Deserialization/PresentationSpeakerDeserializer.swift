@@ -22,7 +22,7 @@ public class PresentationSpeakerDeserializer: NSObject, IDeserializer {
     }
     
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         var presentationSpeaker: PresentationSpeaker
         
         if let presentationSpeakerId = json.int {

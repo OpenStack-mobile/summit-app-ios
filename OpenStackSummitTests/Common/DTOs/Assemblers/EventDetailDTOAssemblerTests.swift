@@ -68,20 +68,20 @@ class EventDetailDTOAssemblerTests: BaseTests {
         
         let speakerDTO = PresentationSpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
-        let scheduleItemDTO = ScheduleItemDTO()
-        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
-        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let ScheduleItem = ScheduleItem()
+        let ScheduleItemAssemblerMock = ScheduleItemAssemblerMock(ScheduleItem: ScheduleItem)
+        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, ScheduleItemAssembler: ScheduleItemAssemblerMock)
         
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
+        XCTAssertEqual(ScheduleItem.name, eventDetailDTO.name)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
-        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
-        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
-        XCTAssertEqual(scheduleItemDTO.time, eventDetailDTO.time)
-        XCTAssertEqual(scheduleItemDTO.dateTime, eventDetailDTO.dateTime)
+        XCTAssertEqual(ScheduleItem.location, eventDetailDTO.location)
+        XCTAssertEqual(ScheduleItem.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(ScheduleItem.time, eventDetailDTO.time)
+        XCTAssertEqual(ScheduleItem.dateTime, eventDetailDTO.dateTime)
         XCTAssertEqual(event.presentation!.speakers.count, eventDetailDTO.speakers.count)
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
@@ -137,20 +137,20 @@ class EventDetailDTOAssemblerTests: BaseTests {
         
         let speakerDTO = PresentationSpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
-        let scheduleItemDTO = ScheduleItemDTO()
-        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
-        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let ScheduleItem = ScheduleItem()
+        let ScheduleItemAssemblerMock = ScheduleItemAssemblerMock(ScheduleItem: ScheduleItem)
+        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, ScheduleItemAssembler: ScheduleItemAssemblerMock)
         
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
+        XCTAssertEqual(ScheduleItem.name, eventDetailDTO.name)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
-        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
-        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
-        XCTAssertEqual(scheduleItemDTO.time, eventDetailDTO.time)
-        XCTAssertEqual(scheduleItemDTO.dateTime, eventDetailDTO.dateTime)
+        XCTAssertEqual(ScheduleItem.location, eventDetailDTO.location)
+        XCTAssertEqual(ScheduleItem.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(ScheduleItem.time, eventDetailDTO.time)
+        XCTAssertEqual(ScheduleItem.dateTime, eventDetailDTO.dateTime)
         XCTAssertEqual(event.presentation!.speakers.count, eventDetailDTO.speakers.count)
         XCTAssertEqual(speakerDTO, eventDetailDTO.speakers[0])
         XCTAssertTrue(eventDetailDTO.finished)
@@ -178,23 +178,23 @@ class EventDetailDTOAssemblerTests: BaseTests {
         
         let speakerDTO = PresentationSpeakerDTO()
         let speakerDTOAssemblerMock = SpeakerDTOAssemblerMock(speakerDTO: speakerDTO)
-        let scheduleItemDTO = ScheduleItemDTO()
-        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
-        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let ScheduleItem = ScheduleItem()
+        let ScheduleItemAssemblerMock = ScheduleItemAssemblerMock(ScheduleItem: ScheduleItem)
+        let eventDetailDTOAssembler = EventDetailDTOAssembler(speakerDTOAssembler: speakerDTOAssemblerMock, ScheduleItemAssembler: ScheduleItemAssemblerMock)
 
         // Act
         let eventDetailDTO = eventDetailDTOAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
+        XCTAssertEqual(ScheduleItem.name, eventDetailDTO.name)
         XCTAssertEqual(event.eventDescription, eventDetailDTO.eventDescription)
-        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
+        XCTAssertEqual(ScheduleItem.location, eventDetailDTO.location)
         XCTAssertEqual(0, eventDetailDTO.speakers.count)
         XCTAssertTrue(eventDetailDTO.finished)
         XCTAssertTrue(eventDetailDTO.allowFeedback)        
-        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
-        XCTAssertEqual(scheduleItemDTO.time, eventDetailDTO.time)
-        XCTAssertEqual(scheduleItemDTO.dateTime, eventDetailDTO.dateTime)
+        XCTAssertEqual(ScheduleItem.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(ScheduleItem.time, eventDetailDTO.time)
+        XCTAssertEqual(ScheduleItem.dateTime, eventDetailDTO.dateTime)
         XCTAssertEqual("", eventDetailDTO.track)
         XCTAssertEqual("", eventDetailDTO.tags)
         XCTAssertEqual(venue.id, eventDetailDTO.venueId)

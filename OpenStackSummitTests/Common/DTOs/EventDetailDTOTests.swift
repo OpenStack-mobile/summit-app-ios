@@ -23,24 +23,24 @@ class EventDetailDTOTests: XCTestCase {
     
     func test_contructor_dtoWithAllFieldsSet_propertiesAreSetFromDtoParameter() {
         // Arrange
-        let scheduleItemDTO = ScheduleItemDTO()
-        scheduleItemDTO.sponsors = "Sponsored bu sponsor1,sponsor1"
-        scheduleItemDTO.time = "20:00 - 21:00"
-        scheduleItemDTO.dateTime = "Tuesday 01 September 20:00 - 21:00"
-        scheduleItemDTO.name = "test title"
-        scheduleItemDTO.location = "venue"
-        scheduleItemDTO.eventType = "Test Event Type"
+        let ScheduleItem = ScheduleItem()
+        ScheduleItem.sponsors = "Sponsored bu sponsor1,sponsor1"
+        ScheduleItem.time = "20:00 - 21:00"
+        ScheduleItem.dateTime = "Tuesday 01 September 20:00 - 21:00"
+        ScheduleItem.name = "test title"
+        ScheduleItem.location = "venue"
+        ScheduleItem.eventType = "Test Event Type"
         
         // Act
-        let eventDetailDTO = EventDetailDTO(scheduleItemDTO: scheduleItemDTO)
+        let eventDetailDTO = EventDetailDTO(ScheduleItem: ScheduleItem)
         
         // Assert
-        XCTAssertEqual(scheduleItemDTO.name, eventDetailDTO.name)
-        XCTAssertEqual(scheduleItemDTO.location, eventDetailDTO.location)
-        XCTAssertEqual(scheduleItemDTO.sponsors, eventDetailDTO.sponsors)
-        XCTAssertEqual(scheduleItemDTO.time, eventDetailDTO.time)
-        XCTAssertEqual(scheduleItemDTO.dateTime, eventDetailDTO.dateTime)
-        XCTAssertEqual(scheduleItemDTO.summitTypes, eventDetailDTO.summitTypes)
-        XCTAssertEqual(scheduleItemDTO.eventType, eventDetailDTO.eventType)
+        XCTAssertEqual(ScheduleItem.name, eventDetailDTO.name)
+        XCTAssertEqual(ScheduleItem.location, eventDetailDTO.location)
+        XCTAssertEqual(ScheduleItem.sponsors, eventDetailDTO.sponsors)
+        XCTAssertEqual(ScheduleItem.time, eventDetailDTO.time)
+        XCTAssertEqual(ScheduleItem.dateTime, eventDetailDTO.dateTime)
+        XCTAssertEqual(ScheduleItem.summitTypes, eventDetailDTO.summitTypes)
+        XCTAssertEqual(ScheduleItem.eventType, eventDetailDTO.eventType)
     }
 }

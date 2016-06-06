@@ -6,20 +6,21 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IAboutInteractor {
-    func getActiveSummit() -> SummitDTO
+public protocol AboutInteractorProtocol {
+    
+    func getActiveSummit() -> Summit
 }
 
-public class AboutInteractor: NSObject, IAboutInteractor {
-    var summitDataStore: ISummitDataStore!
-    var summitDTOAssembler: ISummitDTOAssembler!
+public final class AboutInteractor: AboutInteractorProtocol {
     
-    public func getActiveSummit() -> SummitDTO {
-        let summit = summitDataStore.getActiveLocal()
-        let summitDTO = summitDTOAssembler.createDTO(summit!)
-        return summitDTO
+    var summitDataStore: SummitDataStore!
+    
+    public func getActiveSummit() -> CoreSummit.Summit {
+        
+        let realmEntity = summitDataStore.getActiveLocal()
+        
+        return Summit(realmEntity: realmEntity)
     }
 }

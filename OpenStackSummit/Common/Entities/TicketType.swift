@@ -10,7 +10,7 @@
 import UIKit
 import RealmSwift
 
-public class TicketType: BaseEntity {
+public class TicketType: RealmEntity {
     public var name = ""
     public var ticketTypeDescription = ""
     public let allowedSummitTypes = List<SummitType>()

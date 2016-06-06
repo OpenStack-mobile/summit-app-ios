@@ -11,13 +11,13 @@ import OpenStackSummit
 
 class DeserializerStorageMock: DeserializerStorage {
 
-    var entity: BaseEntity?
+    var entity: RealmEntity?
     
-    init(entity: BaseEntity?) {
+    init(entity: RealmEntity?) {
         self.entity = entity
     }
     
-    override func get<T : BaseEntity>(id: Int) -> T? {
+    override func get<T : RealmEntity>(id: Int) -> T? {
         return entity as? T
     }
 }

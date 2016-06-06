@@ -5,15 +5,16 @@
 //  Created by Claudio on 12/14/15.
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
-import SystemConfiguration
-import UIKit
 
-@objc
-public protocol IReachability {
+import SystemConfiguration
+
+public protocol ReachabilityProtocol {
+    
     func isConnectedToNetwork() -> Bool
 }
 
-public class Reachability: NSObject, IReachability {
+public final class Reachability: ReachabilityProtocol {
+    
     public func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))

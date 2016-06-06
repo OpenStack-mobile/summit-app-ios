@@ -13,7 +13,7 @@ public class TrackGroupDeserializer: NamedEntityDeserializer, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     var trackDeserializer: TrackDeserializer!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         
         let trackGroup: TrackGroup
         

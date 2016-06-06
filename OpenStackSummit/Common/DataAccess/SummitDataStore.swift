@@ -6,48 +6,72 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import SwiftFoundation
+import CoreSummit
 
-@objc
-public protocol ISummitDataStore {
-    func getActive(completionBlock : (Summit?, NSError?) -> Void)
-    func getActiveLocal() -> Summit?
-    func getSummitTypesLocal() -> [SummitType]
+public protocol SummitDataStoreProtocol {
+    
+    func getActiveLocal() -> RealmSummit?
+    func getSummitTypesLocal() -> [RealmSummitType]
 }
 
-public class SummitDataStore: GenericDataStore, ISummitDataStore {
-    var summitRemoteDataStore: ISummitRemoteDataStore!
+public final class SummitDataStore: GenericDataStore, SummitDataStoreProtocol {
     
-    public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
-        let summit = realm.objects(Summit.self).first
-
-        if (summit != nil) {
-            completionBlock(summit!, nil)
-        }
-        else {
-            getActiveAsync(completionBlock)
-        }
-    }
-
-    public func getActiveLocal() -> Summit? {
-        let summit = realm.objects(Summit.self).first
-        return summit
+    public let summitRemoteDataStore: SummitRemoteDataStore
+    
+    // MARK: - Initialization
+    
+    public init(summitRemoteDataStore: SummitRemoteDataStore) {
+        
+        self.summitRemoteDataStore = summitRemoteDataStore
     }
     
-    func getActiveAsync(completionBlock : (Summit?, NSError?) -> Void) {
-        summitRemoteDataStore.getActive() { (summit, error) in
-            if (error != nil) {
-                completionBlock(nil, error)
-                return
-            }
+    // MARK: - Methods
+    
+    public func getActive(completion: ErrorValue<RealmSummit> -> ()) {
+        
+        if let summit = realm.objects(RealmSummit.self).first {
             
-            self.saveOrUpdateLocal(summit!, completionBlock: completionBlock)
+            completion(.Value(summit))
+            return
+        }
+        
+        getActiveAsync(completion)
+    }
+
+    public func getActiveLocal() -> RealmSummit? {
+        
+        return realm.objects(RealmSummit.self).first
+    }
+    
+    // MARK: - Private Methods
+    
+    private func getActiveAsync(completion: ErrorValue<RealmSummit> -> ()) {
+        
+        summitRemoteDataStore.getActive() { [weak self] (response) in
+            
+            guard let store = self else { return }
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                completion(.Error(error))
+                
+            case let .Value(value):
+                
+                var realmEntity: RealmSummit!
+                
+                try! store.realm.write { realmEntity = value.save(store.realm) }
+                
+                store.saveOrUpdateLocal(realmEntity, completion: completion)
+            }
         }
     }
     
-    public func getSummitTypesLocal() -> [SummitType] {
-        let summitTypes = realm.objects(SummitType.self)
-        return summitTypes.map { $0 }
+    public func getSummitTypesLocal() -> [RealmSummitType] {
+                
+        return realm.objects(RealmSummitType.self).map { $0 }
     }
 }

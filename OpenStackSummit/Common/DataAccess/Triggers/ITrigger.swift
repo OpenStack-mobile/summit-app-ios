@@ -6,7 +6,7 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
 @objc public enum TriggerTypes: Int {
     case Pre, Post
@@ -16,8 +16,7 @@ import UIKit
     case Read, Save, Delete
 }
 
-@objc
-public protocol ITrigger {
+public protocol Trigger {
 
-    func run(entity: BaseEntity, type: TriggerTypes, operation: TriggerOperations, completionBlock : (() -> Void)!)
+    func run(entity: RealmEntity, type: TriggerTypes, operation: TriggerOperations, completionBlock: () -> ())
 }

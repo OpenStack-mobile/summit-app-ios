@@ -6,20 +6,22 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol ISummitTypeDataStore {
-    func getAllLocal() -> [SummitType]
-    func getByIdLocal(id: Int) -> SummitType?
+public protocol SummitTypeDataStoreProtocol {
+    
+    func getAllLocal() -> [RealmSummitType]
+    
+    func getByIdLocal(id: Int) -> RealmSummitType?
 }
 
-public class SummitTypeDataStore: GenericDataStore, ISummitTypeDataStore {
-    public func getAllLocal() -> [SummitType] {
+public class SummitTypeDataStore: GenericDataStore, SummitTypeDataStoreProtocol {
+    
+    public func getAllLocal() -> [RealmSummitType] {
         return super.getAllLocal()
     }
     
-    public func getByIdLocal(id: Int) -> SummitType? {
+    public func getByIdLocal(id: Int) -> RealmSummitType? {
         return super.getByIdLocal(id)
     }
 }

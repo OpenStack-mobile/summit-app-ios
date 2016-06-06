@@ -6,17 +6,19 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol ITrackSchedulePresenter: ISchedulePresenter{
-    func viewLoad(track: TrackDTO)
+public protocol TrackSchedulePresenterProtocol: SchedulePresenterProtocol {
+    
+    func viewLoad(track: Track)
 }
 
-public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter {
-    var track: TrackDTO!
+public final class TrackSchedulePresenter: SchedulePresenter, TrackSchedulePresenterProtocol {
+    
+    var track: Track!
     
     weak var viewController : ITrackScheduleViewController! {
+        
         get {
             return internalViewController as! ITrackScheduleViewController
         }
@@ -25,7 +27,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         }
     }
     
-    var interactor : IScheduleInteractor! {
+    var interactor : ScheduleInteractorProtocol! {
         get {
             return internalInteractor
         }
@@ -43,13 +45,14 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         }
     }
     
-    public func viewLoad(track: TrackDTO) {
+    public func viewLoad(track: Track) {
         self.track = track
         viewController.track = track.name
         viewLoad()
     }
     
-    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [NSDate] {
+        
         let trackSelections = [track.id]
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
@@ -71,7 +74,7 @@ public class TrackSchedulePresenter: SchedulePresenter, ITrackSchedulePresenter 
         return availableDates
     }
     
-    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [ScheduleItem] {
         let trackSelections = [track.id]
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]

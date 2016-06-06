@@ -24,12 +24,12 @@ public protocol IScheduleViewController: class, IMessageEnabledViewController {
     func toggleNoConnectivityMessage(show: Bool)
 }
 
-class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource, IScheduleViewController {
+internal class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource, IScheduleViewController {
     
     @IBOutlet weak var scheduleView: ScheduleView!
     
     let cellIdentifier = "scheduleTableViewCell"
-    var internalPresenter: ISchedulePresenter!
+    var internalPresenter: SchedulePresenterProtocol!
     
     var startDate: NSDate! {
         get {
@@ -110,7 +110,7 @@ class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate,
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
         internalPresenter.buildScheduleCell(cell, index: indexPath.row)
-        cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell.scheduleButton.addTarget(self, action: #selector(ScheduleViewController.toggleScheduledStatus(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
         cell.layoutSubviews()

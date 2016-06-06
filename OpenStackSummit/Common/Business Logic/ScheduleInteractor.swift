@@ -6,13 +6,13 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IScheduleInteractor : IScheduleableInteractor {
-    func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void)
+public protocol ScheduleInteractorProtocol: ScheduleableInteractorProtocol {
+    
+    func getActiveSummit(completionBlock: ErrorValue<Summit> -> ())
     func getScheduleAvailableDates(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?) -> [NSDate]
-    func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?) -> [ScheduleItemDTO]
+    func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?) -> [ScheduleItem]
     func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
@@ -21,13 +21,17 @@ public protocol IScheduleInteractor : IScheduleableInteractor {
     func eventExist(id: Int) -> Bool
 }
 
-public class ScheduleInteractor: ScheduleableInteractor {
-    var summitDataStore: ISummitDataStore!
-    var summitDTOAssembler: ISummitDTOAssembler!
-    var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
-    var dataUpdatePoller: DataUpdatePoller!
-    var pushNotificationsManager: IPushNotificationsManager!
+public final class ScheduleInteractor: ScheduleableInteractor, ScheduleInteractorProtocol {
+    
+    // MARK: - Properties
+    
+    public let summitDataStore: SummitDataStore
+    
+    let dataUpdatePoller = DataUpdatePoller()
+    let pushNotificationsManager = PushNotificationsManager()
     var pushRegisterInProgress = false
+    
+    // MARK: - Methods
     
     public func subscribeToPushChannelsUsingContextIfNotDoneAlready() {        
         if pushRegisterInProgress {
@@ -46,15 +50,22 @@ public class ScheduleInteractor: ScheduleableInteractor {
         }
     }
     
-    public func getActiveSummit(completionBlock: (SummitDTO?, NSError?) -> Void) {
-        summitDataStore.getActive() { summit, error in
+    public func getActiveSummit(completion: ErrorValue<Summit> -> ()) {
+        
+        summitDataStore.getActive() { (response) in
+            
             self.dataUpdatePoller.startPollingIfNotPollingAlready()
+            
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            let summit = Summit(realmEntity: realmEntity)
 
-            var summitDTO: SummitDTO?
+            var summitDTO: Summit?
             if (error == nil) {
                 summitDTO = self.summitDTOAssembler.createDTO(summit!)
             }
-            completionBlock(summitDTO, error)
+            completionBlock(Summit, error)
         }
     }
     
@@ -72,13 +83,13 @@ public class ScheduleInteractor: ScheduleableInteractor {
         return activeDates
     }
     
-    public func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?) -> [ScheduleItemDTO] {
+    public func getScheduleEvents(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?) -> [ScheduleItem] {
         let events = eventDataStore.getByFilterLocal(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
-        var scheduleItemDTO: ScheduleItemDTO
-        var dtos: [ScheduleItemDTO] = []
+        var ScheduleItem: ScheduleItem
+        var dtos: [ScheduleItem] = []
         for event in events {
-            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
-            dtos.append(scheduleItemDTO)
+            ScheduleItem = ScheduleItemAssembler.createDTO(event)
+            dtos.append(ScheduleItem)
         }
         return dtos
     }

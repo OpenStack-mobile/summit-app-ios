@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol IGeneralScheduleInteractor: IScheduleInteractor {
+public protocol IGeneralScheduleInteractor: ScheduleInteractorProtocol {
     func isDataLoaded() -> Bool
     func isNetworkAvailable() -> Bool
     func checkForClearDataEvents()

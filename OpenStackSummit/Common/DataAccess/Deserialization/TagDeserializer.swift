@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 public class TagDeserializer: NamedEntityDeserializer, IDeserializer {
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         try validateRequiredFields(["id"], inJson: json)
 
         let tag = Tag()

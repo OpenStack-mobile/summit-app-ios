@@ -6,19 +6,19 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 import AeroGearHttp
 import AeroGearOAuth2
 import Crashlytics
 
-public class SecurityManager: NSObject {
+public final class SecurityManager {
     
-    var session : ISession!
+    var session: Session
     
     var internalOAuthModuleOpenID: OAuth2Module!
     var internalOAuthModuleServiceAccount: OAuth2Module!
     
-    var memberDataStore: IMemberDataStore!
+    var memberDataStore: MemberDataStore!
     var member: Member!
     
     private let kCurrentMemberId = "currentMemberId"
@@ -26,13 +26,15 @@ public class SecurityManager: NSObject {
     private let kDeviceHadPasscode = "deviceHadPasscode"
     private let kLoggedInNotConfirmedAttendee = -1
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     
-    public override init() {
-        super.init()
+    public init() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "revokedAccess:",
+            selector: #selector(SecurityManager.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
     }
@@ -245,7 +247,7 @@ public class SecurityManager: NSObject {
         }
     }
     
-    public func getCurrentMemberRole() -> MemberRoles{
+    public func getCurrentMemberRole() -> Member.Role {
         
         var role = MemberRoles.Anonymous
         let currentMember = getCurrentMember()
@@ -284,14 +286,11 @@ public class SecurityManager: NSObject {
         return isLoggedIn() && currentMemberId != kLoggedInNotConfirmedAttendee;
     }
     
+    // MARK: - Private Methods
     
-    func revokedAccess(notification: NSNotification) {
+    @objc private func revokedAccess(notification: NSNotification) {
         self.session.set(self.kCurrentMemberId, value: nil)
         let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

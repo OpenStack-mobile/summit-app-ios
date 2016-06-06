@@ -9,9 +9,9 @@
 import UIKit
 
 @objc
-public protocol ISpeakerPresentationsInteractor: IScheduleInteractor {
+public protocol ISpeakerPresentationsInteractor: ScheduleInteractorProtocol {
     func getSpeakerPresentationsDates(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [NSDate]
-    func getSpeakerPresentations(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [ScheduleItemDTO]
+    func getSpeakerPresentations(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [ScheduleItem]
 }
 
 public class SpeakerPresentationsInteractor: ScheduleInteractor, ISpeakerPresentationsInteractor {
@@ -30,14 +30,14 @@ public class SpeakerPresentationsInteractor: ScheduleInteractor, ISpeakerPresent
         return activeDates
     }
     
-    public func getSpeakerPresentations(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [ScheduleItemDTO] {
+    public func getSpeakerPresentations(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [ScheduleItem] {
         let events = eventDataStore.getSpeakerPresentationsLocal(speakerId, startDate: startDate, endDate: endDate)
         
-        var scheduleItemDTO: ScheduleItemDTO
-        var dtos: [ScheduleItemDTO] = []
+        var ScheduleItem: ScheduleItem
+        var dtos: [ScheduleItem] = []
         for event in events {
-            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
-            dtos.append(scheduleItemDTO)
+            ScheduleItem = ScheduleItemAssembler.createDTO(event)
+            dtos.append(ScheduleItem)
         }
         return dtos
     }

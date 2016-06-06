@@ -12,7 +12,7 @@ import Crashlytics
 
 public class NonConfirmedSummitAttendeeDeserializer: NSObject, IDeserializer {
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         
         let nonConfirmedSummitAttendee = NonConfirmedSummitAttendee()
         

@@ -12,7 +12,7 @@ import SwiftyJSON
 public class EventTypeDeserializer: NamedEntityDeserializer, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         let eventType : EventType
         
         if let eventTypeId = json.int {

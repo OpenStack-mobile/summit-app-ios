@@ -23,11 +23,6 @@ public class RealmSummitEvent: RealmNamed {
     public dynamic var presentation : RealmPresentation?
     public dynamic var venue : RealmVenue?
     public dynamic var venueRoom : RealmVenueRoom?
-    
-    /*
-    public var summit: Summit {
-        return try! RealmFactory().create().objects(Summit).first!
-    }*/
 }
 
 // MARK: - Encoding

@@ -6,18 +6,20 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import SwiftFoundation
+import CoreSummit
 
-@objc
-public protocol IFeedbackRemoteDataStore {
-    func saveOrUpdate(feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void)
+public protocol FeedbackRemoteDataStoreProtocol {
     
+    func saveOrUpdate(feedback: RealmFeedback, completionBlock: ErrorValue<RealmFeedback> -> ())
 }
 
-public class FeedbackRemoteDataStore: NSObject {
+public final class FeedbackRemoteDataStore {
+    
     var httpFactory: HttpFactory!
     
-    func saveOrUpdate(feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void) {
+    func aveOrUpdate(feedback: RealmFeedback, completionBlock: ErrorValue<RealmFeedback> -> ()) {
+        
         let endpoint = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/events/\(feedback.event.id)/feedback"
         let http = httpFactory.create(HttpType.OpenIDJson)
         var jsonDictionary = [String:AnyObject]()
@@ -25,15 +27,16 @@ public class FeedbackRemoteDataStore: NSObject {
         jsonDictionary["note"] = feedback.review
         jsonDictionary["owner_id"] = feedback.owner.id
         
-        http.POST(endpoint, parameters: jsonDictionary, completionHandler: {(responseObject, error) in
+        http.POST(endpoint, parameters: jsonDictionary, completionHandler: { (responseObject, error) in
+            
             if (error != nil) {
-                completionBlock(nil, error)
+                completionBlock(.Error(error!))
                 return
             }
             
             let id = Int(responseObject as! String)!
             feedback.id = id
-            completionBlock(feedback, error)
+            completionBlock(.Value(feedback))
         })
     }
 }

@@ -10,10 +10,10 @@ import UIKit
 import RealmSwift
 
 public class DeserializerStorage: NSObject {
-    var deserializedEntityDictionary = Dictionary<String, Dictionary<Int, BaseEntity>>()
+    var deserializedEntityDictionary = Dictionary<String, Dictionary<Int, RealmEntity>>()
     var realm = try! Realm()
     
-    public func add<T : BaseEntity>(entity: T) {
+    public func add<T : RealmEntity>(entity: T) {
         let mirror = Mirror(reflecting: entity)
         let className = String(reflecting: mirror.subjectType)
         if (deserializedEntityDictionary[className] == nil) {
@@ -22,7 +22,7 @@ public class DeserializerStorage: NSObject {
         deserializedEntityDictionary[className]![entity.id] = entity
     }
     
-    public func get<T : BaseEntity>(id: Int) -> T? {
+    public func get<T : RealmEntity>(id: Int) -> T? {
         var entity: T?
         let mirror = Mirror(reflecting: T())
         let className = String(reflecting: mirror.subjectType)
@@ -33,7 +33,7 @@ public class DeserializerStorage: NSObject {
         return entity
     }
     
-    public func getAll<T : BaseEntity>() -> [T] {
+    public func getAll<T : RealmEntity>() -> [T] {
         let entity = T()
         let mirror = Mirror(reflecting: entity)
         let className = String(reflecting: mirror.subjectType)
@@ -48,7 +48,7 @@ public class DeserializerStorage: NSObject {
         return array
     }
     
-    public func exist<T : BaseEntity>(entity: T) -> Bool {
+    public func exist<T : RealmEntity>(entity: T) -> Bool {
         let mirror = Mirror(reflecting: entity)
         let className = String(reflecting: mirror.subjectType)
         return deserializedEntityDictionary[className]?[entity.id] != nil || realm.objects(T.self).filter("id = \(entity.id)").first != nil

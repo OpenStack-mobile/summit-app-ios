@@ -1,34 +1,46 @@
 //
-//  ScheduleItemAssembler.swift
+//  ScheduleItem.swift
 //  OpenStackSummit
 //
-//  Created by Claudio on 9/2/15.
-//  Copyright © 2015 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 6/6/16.
+//  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-public protocol IScheduleItemAssembler {
+public struct ScheduleItem: RealmDecodable {
     
-    func createDTO(event: RealmSummitEvent) -> ScheduleItem
+    // MARK: - Properties
+    
+    public let dateTime: String
+    public let time: String
+    public let location: String
+    public let track: String
+    public let summitTypes: String
+    public let sponsors: String
+    public let eventType: String
+    public let trackGroupColor: String
+    
+    // MARK: - Initialization
+    
+    public init(realmEntity event: RealmSummitEvent) {
+        
+        self.eventType = event.eventType.name
+        self.location = ScheduleItem.getLocation(event)
+        self.dateTime = ScheduleItem.getDateTime(event)
+        self.time = ScheduleItem.getTime(event)
+        self.track = ScheduleItem.getTrack(event)
+        self.summitTypes = ScheduleItem.getSummitTypes(event)
+        self.sponsors = ScheduleItem.getSponsors(event)
+        self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
+    }
 }
 
-public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
+// MARK: - Private Exention
 
-    public func createDTO(event: SummitEvent) -> ScheduleItem {
-        let ScheduleItem: ScheduleItem = super.createDTO(event)
-        ScheduleItem.location = getLocation(event)
-        ScheduleItem.time = getTime(event)
-        ScheduleItem.dateTime = getDateTime(event)
-        ScheduleItem.sponsors = getSponsors(event)
-        ScheduleItem.summitTypes = getSummitTypes(event);
-        ScheduleItem.eventType = event.eventType.name
-        ScheduleItem.track = getTrack(event)
-        ScheduleItem.trackGroupColor = getTrackGroupColor(event)
-        return ScheduleItem
-    }
+private extension ScheduleItem {
     
-    public func getSummitTypes(event: SummitEvent) -> String {
+    static func getSummitTypes(event: RealmSummitEvent) -> String {
         var credentials = ""
         var separator = ""
         for summitType in event.summitTypes {
@@ -38,7 +50,7 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         return credentials
     }
     
-    public func getSponsors(event: SummitEvent) -> String{
+    static func getSponsors(event: RealmSummitEvent) -> String{
         if (event.sponsors.count == 0) {
             return ""
         }
@@ -51,8 +63,8 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         }
         return sponsors
     }
-
-    public func getTime(event: SummitEvent) -> String{
+    
+    static func getTime(event: RealmSummitEvent) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
@@ -65,8 +77,8 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
-
-    public func getDateTime(event: SummitEvent) -> String{
+    
+    static func getDateTime(event: RealmSummitEvent) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
@@ -80,7 +92,7 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    public func getLocation(event: SummitEvent) -> String{
+    static func getLocation(event: RealmSummitEvent) -> String {
         var location = ""
         if event.venueRoom != nil {
             location = event.venueRoom!.venue.name
@@ -94,7 +106,7 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         return location
     }
     
-    public func getTrack(event: SummitEvent) -> String{
+    static func getTrack(event: RealmSummitEvent) -> String{
         var track = ""
         if event.presentation != nil && event.presentation!.track != nil {
             track = event.presentation!.track!.name
@@ -102,7 +114,7 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         return track
     }
     
-    public func getTrackGroupColor(event: SummitEvent) -> String {
+    static func getTrackGroupColor(event: RealmSummitEvent) -> String {
         var color = ""
         if event.presentation != nil && event.presentation!.track != nil {
             if let trackGroup = event.presentation!.track!.trackGroups.first {
@@ -111,5 +123,4 @@ public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
         }
         return color
     }
-    
 }

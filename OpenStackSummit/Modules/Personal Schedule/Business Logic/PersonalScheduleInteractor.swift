@@ -6,15 +6,15 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IPersonalScheduleInteractor: IScheduleInteractor {
+public protocol PersonalScheduleInteractorProtocol: ScheduleInteractorProtocol {
+    
     func getLoggedInMemberScheduledEventsDatesFrom(startDate: NSDate, to endDate: NSDate) -> [NSDate]
-    func getLoggedInMemberScheduledEventsFrom(startDate: NSDate, to endDate: NSDate) -> [ScheduleItemDTO]
+    func getLoggedInMemberScheduledEventsFrom(startDate: NSDate, to endDate: NSDate) -> [ScheduleItem]
 }
 
-public class PersonalScheduleInteractor: ScheduleInteractor, IPersonalScheduleInteractor {
+public class PersonalScheduleInteractor: ScheduleInteractor, PersonalScheduleInteractorProtocol {
     
     public func getLoggedInMemberScheduledEventsDatesFrom(startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         let currentMember = securityManager.getCurrentMember()
@@ -32,15 +32,17 @@ public class PersonalScheduleInteractor: ScheduleInteractor, IPersonalScheduleIn
         return activeDates
     }
     
-    public func getLoggedInMemberScheduledEventsFrom(startDate: NSDate, to endDate: NSDate) -> [ScheduleItemDTO] {
+    public func getLoggedInMemberScheduledEventsFrom(startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
         let currentMember = securityManager.getCurrentMember()
-        let events = currentMember?.attendeeRole?.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        let events = currentMember?.attendeeRole?.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")!
         
-        var scheduleItemDTO: ScheduleItemDTO
-        var dtos: [ScheduleItemDTO] = []
-        for event in events! {
-            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
-            dtos.append(scheduleItemDTO)
+        return events.map { ScheduleItem(event: $0) }
+        
+        var ScheduleItem: ScheduleItem
+        var dtos: [ScheduleItem] = []
+        for event in events {
+            ScheduleItem = ScheduleItemAssembler.createDTO(event)
+            dtos.append(ScheduleItem)
         }
         return dtos
     }

@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import SwiftSpinner
 
 class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
-    var presenter: ISchedulePresenter! {
+    var presenter: SchedulePresenterProtocol! {
         get {
             return internalPresenter
         }

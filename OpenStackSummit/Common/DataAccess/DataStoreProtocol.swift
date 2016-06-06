@@ -8,9 +8,9 @@
 
 import UIKit
 
-public protocol IDataStore {
+public protocol DataStoreProtocol {
     
-    func get(id: Int, completionBlock : (BaseEntity?) -> Void)
-    func saveOrUpdateLocal(entity: BaseEntity, completionBlock : ((BaseEntity) -> Void)!)
-    func delete(entity: BaseEntity, completionBlock : ((Void) -> Void)!)
+    func get(id: Int, completionBlock : (RealmEntity?) -> Void)
+    func saveOrUpdateLocal(entity: RealmEntity, completionBlock : ((RealmEntity) -> Void)!)
+    func delete(entity: RealmEntity, completionBlock : ((Void) -> Void)!)
 }
