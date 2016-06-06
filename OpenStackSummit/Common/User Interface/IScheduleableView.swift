@@ -6,9 +6,7 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
-
-@objc
-public protocol IScheduleableView {
+public protocol ScheduleableView: class {
+    
     var scheduled: Bool { get set }
 }

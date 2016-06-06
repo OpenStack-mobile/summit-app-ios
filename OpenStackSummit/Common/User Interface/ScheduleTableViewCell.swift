@@ -8,8 +8,8 @@
 
 import UIKit
 
-@objc
-public protocol IScheduleTableViewCell : IScheduleableView {
+public protocol ScheduleTableViewCellProtocol: ScheduleableView {
+    
     var eventTitle: String! { get set }
     var eventType: String! { get set }
     var time: String! { get set }
@@ -24,7 +24,7 @@ public protocol IScheduleTableViewCell : IScheduleableView {
     case Scheduled, NotScheduled
 }
 
-class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
+class ScheduleTableViewCell: UITableViewCell, ScheduleTableViewCellProtocol {
     
     private var locationInternal = ""
     private var scheduledInternal = false
@@ -126,6 +126,8 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
         }
     }
     
+    // MARK: - IB Outlets
+    
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var eventTypeLabelTopConstraint: NSLayoutConstraint!
@@ -138,6 +140,8 @@ class ScheduleTableViewCell: UITableViewCell, IScheduleTableViewCell {
     @IBOutlet weak var locationPinImage: UIImageView!
     @IBOutlet weak var scheduleButton: UIButton!
     @IBOutlet weak var trackGroupColorBar: UIView!
+    
+    // MARK: - Loading
     
     override func awakeFromNib() {
         super.awakeFromNib()

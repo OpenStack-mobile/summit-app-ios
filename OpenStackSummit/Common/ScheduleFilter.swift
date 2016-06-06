@@ -6,8 +6,6 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
-
 /*protocol IScheduleFilter {
     var selections: Dictionary<FilterSectionType, [AnyObject]> { get set }
     var filterSections: [FilterSection] { get set }
@@ -15,7 +13,8 @@ import UIKit
     func clearActiveFilters()
 }*/
 
-public class ScheduleFilter: NSObject {
+public final class ScheduleFilter {
+    
     var selections = Dictionary<FilterSectionType, [AnyObject]>()
     var filterSections = [FilterSection]()
     var hasToRefreshSchedule = true

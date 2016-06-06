@@ -13,13 +13,13 @@ import Crashlytics
 
 public final class SecurityManager {
     
-    var session: Session
+    var session = Session()
     
     var internalOAuthModuleOpenID: OAuth2Module!
     var internalOAuthModuleServiceAccount: OAuth2Module!
     
-    var memberDataStore: MemberDataStore!
-    var member: Member!
+    var memberDataStore = MemberDataStore()
+    var member: Member?
     
     private let kCurrentMemberId = "currentMemberId"
     private let kCurrentMemberFullName = "currentMemberFullName"

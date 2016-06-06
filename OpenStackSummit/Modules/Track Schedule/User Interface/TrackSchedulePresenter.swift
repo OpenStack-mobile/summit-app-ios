@@ -36,7 +36,7 @@ public final class TrackSchedulePresenter: SchedulePresenter, TrackSchedulePrese
         }
     }
     
-    var wireframe : IScheduleWireframe! {
+    var wireframe : ScheduleWireframe! {
         get {
             return internalWireframe
         }

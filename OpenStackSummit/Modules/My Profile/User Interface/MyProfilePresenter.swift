@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSummit
 
 @objc
 public protocol IMyProfilePresenter {
@@ -30,7 +31,7 @@ public class MyProfilePresenter: NSObject, IMyProfilePresenter {
         childViewController.append(memberProfileDetailViewController)
         childViewController.append(feedbackGivenListViewController)
         
-        if securityManager.getCurrentMemberRole() == MemberRoles.Speaker {
+        if securityManager.getCurrentMemberRole() == Member.Role.Speaker {
             childViewController.append(speakerPresentationsViewController)
         }
 

@@ -16,14 +16,10 @@ public protocol SummitRemoteDataStoreProtocol {
     func getActive(completion: (ErrorValue<Summit>) -> ())
 }
 
+
 public final class SummitRemoteDataStore: SummitRemoteDataStoreProtocol {
         
-    public let httpFactory: HttpFactory
-    
-    public init(httpFactory: HttpFactory) {
-        
-        self.httpFactory = httpFactory
-    }
+    public let httpFactory: HttpFactory = HttpFactory()
     
     public func getActive(completion: (ErrorValue<Summit>) -> ()) {
         

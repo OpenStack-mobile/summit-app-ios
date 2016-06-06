@@ -22,7 +22,7 @@ protocol IMemberProfileDetailViewController {
     var bio: String! { get set }
     var presenter: IMemberProfileDetailPresenter! { get set }
     
-    func showProfile(profile: MemberProfileDTO)
+    func showProfile(profile: MemberProfile)
     func didFinishFriendshipRequest()
     func handlerError(error: NSError)
     func showActivityIndicator()
