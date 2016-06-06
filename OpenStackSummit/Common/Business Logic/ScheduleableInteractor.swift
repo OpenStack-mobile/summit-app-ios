@@ -6,10 +6,11 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 
-@objc
-public protocol IScheduleableInteractor {
+import Foundation
+
+public protocol ScheduleableInteractorProtocol {
+    
     func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func removeEventFromLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void)
     func isEventScheduledByLoggedMember(eventId: Int) -> Bool
@@ -17,11 +18,16 @@ public protocol IScheduleableInteractor {
     func isLoggedInAndConfirmedAttendee() -> Bool
 }
 
-public class ScheduleableInteractor: NSObject, IScheduleableInteractor {
-    var summitAttendeeDataStore: ISummitAttendeeDataStore!
+public class ScheduleableInteractor: ScheduleableInteractorProtocol {
+    
+    // MARK: - Properties
+    
+    var summitAttendeeDataStore: SummitAttendeeDataStore!
     var securityManager: SecurityManager!
-    var eventDataStore: IEventDataStore!
-    var reachability: IReachability!
+    var eventDataStore: EventDataStore!
+    var reachability: Reachability!
+    
+    // MARK: - Methods
 
     public func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> Void) {
         if !reachability.isConnectedToNetwork() {

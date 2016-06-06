@@ -8,8 +8,9 @@
 
 import UIKit
 import MTDates
+import CoreSummit
 
-extension Array where Element: SummitEvent {
+extension Array where Element: RealmSummitEvent {
     func filter(byDate date: NSDate) -> [SummitEvent] {
         return self.filter { (event) -> Bool in
             event.start.mt_isWithinSameDay(date)
@@ -17,9 +18,7 @@ extension Array where Element: SummitEvent {
     }
 }
 
-@objc
-public protocol IGeneralSchedulePresenter: ISchedulePresenter {
-}
+public protocol IGeneralSchedulePresenter: SchedulePresenterProtocol { }
 
 public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresenter {
     
@@ -73,7 +72,7 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
         super.viewLoad()
     }
     
-    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [NSDate] {
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
         let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
@@ -95,7 +94,7 @@ public class GeneralSchedulePresenter: SchedulePresenter, IGeneralSchedulePresen
         return availableDates
     }
     
-    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [ScheduleItem] {
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
         let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]

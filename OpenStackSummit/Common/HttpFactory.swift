@@ -6,7 +6,6 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -14,7 +13,8 @@ import AeroGearOAuth2
     case OpenIDGetFormUrlEncoded, OpenIDJson, ServiceAccount
 }
 
-public class HttpFactory: NSObject {
+public final class HttpFactory {
+    
     var securityManager: SecurityManager!
     
     public func create(type: HttpType) -> Http {

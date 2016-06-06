@@ -22,7 +22,7 @@ public class FeedbackDeserializer: NSObject, IDeserializer {
         super.init()
     }
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         let feedback : Feedback
         
         if let feedbackId = json.int {

@@ -17,26 +17,26 @@ public enum DeserializerError: ErrorType {
 }
 
 public protocol IDeserializer {
-    func deserialize(json : JSON) throws -> BaseEntity
+    func deserialize(json : JSON) throws -> RealmEntity
 }
 
 public extension IDeserializer {
-    func deserialize(json: String)  throws -> BaseEntity {
+    func deserialize(json: String)  throws -> RealmEntity {
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         let jsonObject = JSON(data: data!)
         return try deserialize(jsonObject)
     }
 
-    func deserializeArray(json: String)  throws -> [BaseEntity] {
+    func deserializeArray(json: String)  throws -> [RealmEntity] {
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         let jsonObject = JSON(data: data!)
         let array = try deserializeArray(jsonObject)
         return array
     }
 
-    func deserializeArray(jsonObject : JSON)  throws -> [BaseEntity] {
-        var array = [BaseEntity]()
-        var entity: BaseEntity
+    func deserializeArray(jsonObject : JSON)  throws -> [RealmEntity] {
+        var array = [RealmEntity]()
+        var entity: RealmEntity
         
         for (_, jsonElem) in jsonObject {
             do {
@@ -55,7 +55,7 @@ public extension IDeserializer {
         return array
     }
     
-    func deserializePage(json: String)  throws -> [BaseEntity] {
+    func deserializePage(json: String)  throws -> [RealmEntity] {
         let data = json.dataUsingEncoding(NSUTF8StringEncoding)
         let jsonObject = JSON(data: data!)
         let array = try deserializeArray(jsonObject["data"])

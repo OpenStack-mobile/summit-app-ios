@@ -6,50 +6,53 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 import RealmSwift
 import Crashlytics
 
-public class GenericDataStore: NSObject {
-    var realm = try! RealmFactory().create()
-    var trigger: ITrigger!
+public class GenericDataStore {
     
-    public override init() {
-        super.init()
-    }
+    internal let realm = try! RealmFactory().create()
     
-    public func getByIdLocal<T: BaseEntity>(id: Int) -> T? {
+    internal var trigger: Trigger?
+    
+    public func getByIdLocal<T: RealmEntity>(id: Int) -> T? {
         let entity = realm.objects(T.self).filter("id = \(id)").first
         return entity
     }
 
-    public func getAllLocal<T: BaseEntity>() -> [T] {
+    public func getAllLocal<T: RealmEntity>() -> [T] {
         let entities = realm.objects(T.self)
         return entities.map { $0 }
     }
     
-    public func saveOrUpdateLocal<T: BaseEntity>(entity: T, completionBlock: ((T?, NSError?) -> Void)?) {
+    public func saveOrUpdateLocal<T: RealmEntity>(entity: T, completion: ErrorValue<T> -> ()) {
         try! realm.write {
             self.realm.add(entity, update: true)
         }
         
-        if (trigger != nil) {
+        if let trigger = self.trigger {
+            
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Save) {
-                () in
                 
-                completionBlock?(entity, nil)
+                completion(.Value(entity))
             }
-        }
-        else {
-            completionBlock?(entity, nil)
+            
+        } else {
+            
+            completion(.Value(entity))
         }
     }
     
-    public func deleteLocal<T: BaseEntity>(entity: T, completionBlock : (NSError? -> Void)!) {
+    public func deleteLocal<T: RealmEntity>(entity: T, completionBlock: (NSError? -> ())!) {
+        
         try! realm.write {
             if entity.realm == realm {
+                
                 realm.delete(entity)
+                
             } else {
+                
                 let message = NSLocalizedString("error_deleting_entity", value: "Entity \(entity.debugDescription) does not belongs to current Realm.", comment: "")
                 let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey:  message]
                 let err = NSError(domain: Constants.ErrorDomain, code: 20022, userInfo: userInfo)
@@ -58,7 +61,8 @@ public class GenericDataStore: NSObject {
             }
         }
 
-        if (trigger != nil) {
+        if let trigger = self.trigger {
+            
             trigger.run(entity, type: TriggerTypes.Post, operation: TriggerOperations.Delete) {
                 () in
                 

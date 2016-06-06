@@ -6,44 +6,53 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 import AeroGearHttp
 import AeroGearOAuth2
+import SwiftFoundation
+import CoreSummit
 
-@objc
-public protocol ISummitRemoteDataStore {
-    func getActive(completionBlock : (Summit?, NSError?) -> Void)
+public protocol SummitRemoteDataStoreProtocol {
+    
+    func getActive(completion: (ErrorValue<Summit>) -> ())
 }
 
-public class SummitRemoteDataStore: NSObject, ISummitRemoteDataStore {
-    var deserializerFactory: DeserializerFactory!
-    var httpFactory: HttpFactory!
+public final class SummitRemoteDataStore: SummitRemoteDataStoreProtocol {
+        
+    public let httpFactory: HttpFactory
     
-    public func getActive(completionBlock : (Summit?, NSError?) -> Void) {
+    public init(httpFactory: HttpFactory) {
+        
+        self.httpFactory = httpFactory
+    }
+    
+    public func getActive(completion: (ErrorValue<Summit>) -> ()) {
+        
         let http = httpFactory.create(HttpType.ServiceAccount)
+        
         let url = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule"
         
-        http.GET(url) {(responseObject, error) in
-            if (error != nil) {
-                completionBlock(nil, error)
-                return
-            }
+        http.GET(url) { (responseObject, error) in
             
-            let json = responseObject as! String		
-            var summit : Summit?
-            var innerError: NSError?
-            var deserializer : IDeserializer!
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
             
-            deserializer = self.deserializerFactory.create(DeserializerFactoryType.Summit)
-
-            do {
-                summit = try deserializer.deserialize(json) as? Summit
-            }
-            catch {
-                innerError = NSError(domain: "There was an error deserializing current summit", code: 6001, userInfo: nil)
-            }
+            let foundationJSON = NSJSONSerialization.Value(rawValue: responseObject!)!
+            let json = JSON.Value(foundation: foundationJSON)
             
-            completionBlock(summit, innerError)            
+            // parse
+            guard let entity = Summit(JSONValue: json)
+                else { completion(.Error(SummitRemoteDataStore.jsonError)); return }
+            
+            // success
+            completion(.Value(entity))
         }
     }
+}
+
+// MARK: - Private
+
+private extension SummitRemoteDataStore {
+    
+    static let jsonError = NSError(domain: "There was an error deserializing current summit", code: 6001, userInfo: nil)
 }

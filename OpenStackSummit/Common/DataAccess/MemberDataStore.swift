@@ -6,27 +6,22 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 import RealmSwift
 
-@objc
-public protocol IMemberDataStore {
-    func getByIdLocal(id: Int) -> Member?
-    func getLoggedInMemberOrigin(completionBlock : (Member?, NSError?) -> Void)
-    func getLoggedInMemberBasicInfoOrigin(completionBlock : (Member?, NSError?) -> Void)
-    func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NonConfirmedSummitAttendee]?, NSError?) -> Void)
-    func selectAttendeeFromOrderListOrigin(orderNumber: String, externalAttendeeId: Int, completionBlock : (NSError?) -> Void)
+public protocol MemberDataStoreProtocol {
+    func getByIdLocal(id: Int) -> RealmMember?
+    func getLoggedInMemberOrigin(completionBlock: ErrorValue<RealmMember> -> ())
+    func getLoggedInMemberBasicInfoOrigin(completionBlock: ErrorValue<RealmMember> -> ())
+    func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock: ErrorValue<[NonConfirmedSummitAttendee]> -> ())
+    func selectAttendeeFromOrderListOrigin(orderNumber: String, externalAttendeeId: Int, completionBlock: (NSError?) -> ())
 }
 
-public class MemberDataStore: GenericDataStore, IMemberDataStore {
+public class MemberDataStore: GenericDataStore, MemberDataStoreProtocol {
     
-    var memberRemoteStorage: IMemberRemoteDataStore!
+    let memberRemoteStorage: MemberRemoteDataStore
     
-    public override init() {
-        super.init()
-    }
-    
-    public init(memberRemoteStorage: IMemberRemoteDataStore) {
+    public init(memberRemoteStorage: MemberRemoteDataStore) {
         self.memberRemoteStorage = memberRemoteStorage
     }
     

@@ -12,7 +12,7 @@ import SwiftyJSON
 public class MemberDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         let member = Member()
         member.id = json["member_id"].int ?? 0
         member.firstName = json["first_name"].string ?? ""

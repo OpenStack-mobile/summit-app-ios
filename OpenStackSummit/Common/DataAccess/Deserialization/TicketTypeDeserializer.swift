@@ -13,7 +13,7 @@ public class TicketTypeDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         
         let ticketType: TicketType
         

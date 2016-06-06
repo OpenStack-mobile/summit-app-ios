@@ -23,7 +23,7 @@ public class SummitAttendeeDeserializer: NSObject, IDeserializer {
         super.init()
     }
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         
         let summitAttendee: SummitAttendee
         

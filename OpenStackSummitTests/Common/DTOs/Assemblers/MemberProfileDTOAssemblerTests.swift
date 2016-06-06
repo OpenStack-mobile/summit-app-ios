@@ -40,9 +40,9 @@ class MemberProfileDTOAssemblerTests: BaseTests {
             self.realm.add(event)
         }
 
-        let scheduleItemDTO = ScheduleItemDTO()
-        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
-        let memberProfileDTOAssembler = MemberProfileDTOAssembler(scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let ScheduleItem = ScheduleItem()
+        let ScheduleItemAssemblerMock = ScheduleItemAssemblerMock(ScheduleItem: ScheduleItem)
+        let memberProfileDTOAssembler = MemberProfileDTOAssembler(ScheduleItemAssembler: ScheduleItemAssemblerMock)
         
         // Act
         let memberProfileDTO = memberProfileDTOAssembler.createDTO(member, full: true)
@@ -86,9 +86,9 @@ class MemberProfileDTOAssemblerTests: BaseTests {
             self.realm.add(event)
         }
         
-        let scheduleItemDTO = ScheduleItemDTO()
-        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
-        let memberProfileDTOAssembler = MemberProfileDTOAssembler(scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let ScheduleItem = ScheduleItem()
+        let ScheduleItemAssemblerMock = ScheduleItemAssemblerMock(ScheduleItem: ScheduleItem)
+        let memberProfileDTOAssembler = MemberProfileDTOAssembler(ScheduleItemAssembler: ScheduleItemAssemblerMock)
         
         // Act
         let memberProfileDTO = memberProfileDTOAssembler.createDTO(member, full: false)
@@ -130,9 +130,9 @@ class MemberProfileDTOAssemblerTests: BaseTests {
             self.realm.add(event)
         }
         
-        let scheduleItemDTO = ScheduleItemDTO()
-        let scheduleItemDTOAssemblerMock = ScheduleItemDTOAssemblerMock(scheduleItemDTO: scheduleItemDTO)
-        let memberProfileDTOAssembler = MemberProfileDTOAssembler(scheduleItemDTOAssembler: scheduleItemDTOAssemblerMock)
+        let ScheduleItem = ScheduleItem()
+        let ScheduleItemAssemblerMock = ScheduleItemAssemblerMock(ScheduleItem: ScheduleItem)
+        let memberProfileDTOAssembler = MemberProfileDTOAssembler(ScheduleItemAssembler: ScheduleItemAssemblerMock)
         
         // Act
         let memberProfileDTO = memberProfileDTOAssembler.createDTO(member, full: false)

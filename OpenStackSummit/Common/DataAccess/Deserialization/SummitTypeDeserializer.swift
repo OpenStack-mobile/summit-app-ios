@@ -13,7 +13,7 @@ public class SummitTypeDeserializer: NamedEntityDeserializer, IDeserializer {
     
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {
+    public func deserialize(json : JSON) throws -> RealmEntity {
         let summitType : SummitType
         
         if let summitTypeId = json.int {

@@ -21,7 +21,7 @@ public class DataUpdateDeserializer: NSObject, IDeserializer {
         super.init()
     }
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         try validateRequiredFields(["id", "class_name", "type"], inJson: json)
 
         let className = json["class_name"].stringValue

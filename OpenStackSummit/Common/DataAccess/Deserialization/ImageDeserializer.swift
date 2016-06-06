@@ -12,7 +12,7 @@ import SwiftyJSON
 public class ImageDeserializer: NSObject, IDeserializer {
     var deserializerStorage: DeserializerStorage!
     
-    public func deserialize(json : JSON) throws -> BaseEntity {        
+    public func deserialize(json : JSON) throws -> RealmEntity {        
         var image: Image
         
         if let imageId = json.int {

@@ -1,5 +1,5 @@
 //
-//  ScheduleItemDTO.swift
+//  ScheduleItem.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 9/2/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ScheduleItemDTO: NamedDTO {
+public class ScheduleItem: NamedDTO {
     public var dateTime = ""
     public var time = ""
     public var location = ""

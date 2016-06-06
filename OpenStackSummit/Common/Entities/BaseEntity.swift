@@ -1,5 +1,5 @@
 //
-//  BaseEntity.swift
+//  RealmEntity.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 8/14/15.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-public class BaseEntity: Object {
+public class RealmEntity: Object {
     public dynamic var id = 0
     
     public override class func primaryKey() -> String {

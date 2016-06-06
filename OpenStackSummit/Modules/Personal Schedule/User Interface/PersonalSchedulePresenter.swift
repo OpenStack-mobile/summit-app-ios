@@ -19,9 +19,9 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         }
     }
     
-    var interactor : IPersonalScheduleInteractor! {
+    var interactor : PersonalScheduleInteractorProtocol! {
         get {
-            return internalInteractor as! IPersonalScheduleInteractor
+            return internalInteractor as! PersonalScheduleInteractorProtocol
         }
         set {
             internalInteractor = newValue
@@ -37,13 +37,13 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         }
     }
     
-    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
-        let availableDates = (interactor as! IPersonalScheduleInteractor).getLoggedInMemberScheduledEventsDatesFrom(startDate, to: endDate)
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [NSDate] {
+        let availableDates = (interactor as! PersonalScheduleInteractorProtocol).getLoggedInMemberScheduledEventsDatesFrom(startDate, to: endDate)
         return availableDates
     }
     
-    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
-        let events = (interactor as! IPersonalScheduleInteractor).getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [ScheduleItem] {
+        let events = (interactor as! PersonalScheduleInteractorProtocol).getLoggedInMemberScheduledEventsFrom(startDate, to: endDate)
         return events
     }
     

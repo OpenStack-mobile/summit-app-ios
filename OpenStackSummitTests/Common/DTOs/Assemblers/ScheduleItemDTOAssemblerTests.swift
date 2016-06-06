@@ -1,5 +1,5 @@
 //
-//  ScheduleItemDTOAssemblerTests.swift
+//  ScheduleItemAssemblerTests.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 9/3/15.
@@ -10,7 +10,7 @@ import XCTest
 import OpenStackSummit
 import RealmSwift
 
-class ScheduleItemDTOAssemblerTests: XCTestCase {
+class ScheduleItemAssemblerTests: XCTestCase {
     var realm = try! Realm()
     
     override func setUp() {
@@ -64,18 +64,18 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
             self.realm.add(summit)
         }
         
-        let scheduleItemDTOAssembler = ScheduleItemDTOAssembler()
+        let ScheduleItemAssembler = ScheduleItemAssembler()
         
         // Act
-        let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+        let ScheduleItem = ScheduleItemAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(event.name, scheduleItemDTO.name)
-        XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
-        XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
-        XCTAssertEqual("05:00 am / 06:00 am", scheduleItemDTO.time)
-        XCTAssertEqual("Wednesday 02 September 05:00 am / 06:00 am", scheduleItemDTO.dateTime)
-        XCTAssertEqual(event.eventType.name, scheduleItemDTO.eventType)
+        XCTAssertEqual(event.name, ScheduleItem.name)
+        XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, ScheduleItem.location)
+        XCTAssertEqual("Sponsored by sponsor1, sponsor2", ScheduleItem.sponsors)
+        XCTAssertEqual("05:00 am / 06:00 am", ScheduleItem.time)
+        XCTAssertEqual("Wednesday 02 September 05:00 am / 06:00 am", ScheduleItem.dateTime)
+        XCTAssertEqual(event.eventType.name, ScheduleItem.eventType)
     }
     
     func test_createDTO_eventWithEndDateMidnight_returnsDTOWithCorrectData() {
@@ -115,18 +115,18 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
             self.realm.add(venue)
             self.realm.add(summit)
         }
-        let scheduleItemDTOAssembler = ScheduleItemDTOAssembler()
+        let ScheduleItemAssembler = ScheduleItemAssembler()
         
         // Act
-        let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+        let ScheduleItem = ScheduleItemAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(event.name, scheduleItemDTO.name)
-        XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, scheduleItemDTO.location)
-        XCTAssertEqual("Sponsored by sponsor1, sponsor2", scheduleItemDTO.sponsors)
-        XCTAssertEqual("07:00 pm / 12:00 am", scheduleItemDTO.time)
-        XCTAssertEqual("Wednesday 28 October 07:00 pm / 12:00 am", scheduleItemDTO.dateTime)
-        XCTAssertEqual(event.eventType.name, scheduleItemDTO.eventType)
+        XCTAssertEqual(event.name, ScheduleItem.name)
+        XCTAssertEqual(event.venueRoom!.venue.name + " - " + event.venueRoom!.name, ScheduleItem.location)
+        XCTAssertEqual("Sponsored by sponsor1, sponsor2", ScheduleItem.sponsors)
+        XCTAssertEqual("07:00 pm / 12:00 am", ScheduleItem.time)
+        XCTAssertEqual("Wednesday 28 October 07:00 pm / 12:00 am", ScheduleItem.dateTime)
+        XCTAssertEqual(event.eventType.name, ScheduleItem.eventType)
     }
     
     func test_createDTO_eventWithSingleSummitType_returnsDTOWithCorrectColorAssigned() {
@@ -163,12 +163,12 @@ class ScheduleItemDTOAssemblerTests: XCTestCase {
             self.realm.add(venue)
             self.realm.add(summit)
         }
-        let scheduleItemDTOAssembler = ScheduleItemDTOAssembler()
+        let ScheduleItemAssembler = ScheduleItemAssembler()
         
         // Act
-        let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+        let ScheduleItem = ScheduleItemAssembler.createDTO(event)
         
         // Assert
-        XCTAssertEqual(summitType.color, scheduleItemDTO.trackGroupColor)
+        XCTAssertEqual(summitType.color, ScheduleItem.trackGroupColor)
     }
 }

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 public class LocationDeserializer: NSObject, IDeserializer {
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         try validateRequiredFields(["id"], inJson: json)
         
         let location = Location()

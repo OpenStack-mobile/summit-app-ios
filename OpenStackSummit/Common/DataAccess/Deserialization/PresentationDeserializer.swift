@@ -13,7 +13,7 @@ import Crashlytics
 public class PresentationDeserializer: NSObject, IDeserializer {
     var deserializerFactory: DeserializerFactory!
     
-    public func deserialize(json: JSON) throws -> BaseEntity {
+    public func deserialize(json: JSON) throws -> RealmEntity {
         try validateRequiredFields(["id"], inJson: json)
 
         let presentation = Presentation()

@@ -9,15 +9,15 @@
 import UIKit
 
 @objc
-public protocol ISearchInteractor: IScheduleableInteractor {
-    func getEventsBySearchTerm(searchTerm: String) -> [ScheduleItemDTO]
+public protocol ISearchInteractor: ScheduleableInteractorProtocol {
+    func getEventsBySearchTerm(searchTerm: String) -> [ScheduleItem]
     func getTracksBySearchTerm(searchTerm: String) -> [TrackDTO]
     func getSpeakersBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
     func getAttendeesBySearchTerm(saerchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([PersonListItemDTO]?, NSError?) -> Void)
 }
 
 public class SearchInteractor: ScheduleableInteractor, ISearchInteractor {
-    var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
+    var ScheduleItemAssembler: IScheduleItemAssembler!
     var trackDataStore: ITrackDataStore!
     var trackDTOAssembler: NamedDTOAssembler!
     var presentationSpeakerDataStore: IPresentationSpeakerDataStore!
@@ -51,13 +51,13 @@ public class SearchInteractor: ScheduleableInteractor, ISearchInteractor {
         completionBlock(dtos, error)
     }
     
-    public func getEventsBySearchTerm(searchTerm: String) -> [ScheduleItemDTO] {
+    public func getEventsBySearchTerm(searchTerm: String) -> [ScheduleItem] {
         let events = eventDataStore.getBySearchTerm(searchTerm)
-        var scheduleItemDTO: ScheduleItemDTO
-        var dtos: [ScheduleItemDTO] = []
+        var ScheduleItem: ScheduleItem
+        var dtos: [ScheduleItem] = []
         for event in events {
-            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
-            dtos.append(scheduleItemDTO)
+            ScheduleItem = ScheduleItemAssembler.createDTO(event)
+            dtos.append(ScheduleItem)
         }
         return dtos
     }

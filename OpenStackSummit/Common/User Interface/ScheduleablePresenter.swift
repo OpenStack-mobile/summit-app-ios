@@ -8,12 +8,12 @@
 
 import UIKit
 
-public class ScheduleablePresenter: NSObject {
+public class ScheduleablePresenter {
     
     var isOperationOngoing = false
     
     
-    func toggleScheduledStatusForEvent(event: ScheduleItemDTO, scheduleableView: IScheduleableView, interactor: IScheduleableInteractor, completionBlock: ((NSError?) -> Void)?) {
+    func toggleScheduledStatusForEvent(event: ScheduleItem, scheduleableView: IScheduleableView, interactor: ScheduleableInteractorProtocol, completionBlock: ((NSError?) -> Void)?) {
         let isScheduled = interactor.isEventScheduledByLoggedMember(event.id)
         if (isScheduled) {
             removeEventFromSchedule(event, scheduleableView: scheduleableView, interactor: interactor, completionBlock: completionBlock)
@@ -23,7 +23,7 @@ public class ScheduleablePresenter: NSObject {
         }
     }
     
-    func addEventToSchedule(event: ScheduleItemDTO, scheduleableView: IScheduleableView, interactor: IScheduleableInteractor, completionBlock: ((NSError?) -> Void)?) {
+    func addEventToSchedule(event: ScheduleItem, scheduleableView: IScheduleableView, interactor: ScheduleableInteractorProtocol, completionBlock: ((NSError?) -> Void)?) {
         if isOperationOngoing {
             return
         }
@@ -47,7 +47,7 @@ public class ScheduleablePresenter: NSObject {
         }
     }
     
-    func removeEventFromSchedule(event: ScheduleItemDTO, scheduleableView: IScheduleableView, interactor: IScheduleableInteractor, completionBlock: ((NSError?) -> Void)?) {
+    func removeEventFromSchedule(event: ScheduleItem, scheduleableView: IScheduleableView, interactor: ScheduleableInteractorProtocol, completionBlock: ((NSError?) -> Void)?) {
         if isOperationOngoing {
             return
         }

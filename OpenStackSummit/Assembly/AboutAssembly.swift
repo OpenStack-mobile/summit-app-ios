@@ -42,7 +42,7 @@ class AboutAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(AboutInteractor.self) {
             (definition) in
             definition.injectProperty("summitDataStore", with: self.dataStoreAssembly.summitDataStore())
-            definition.injectProperty("summitDTOAssembler", with: self.dtoAssemblersAssembly.summitDTOAssembler())
+            definition.injectProperty("CoreSummit.SummitAssembler", with: self.dtoAssemblersAssembly.CoreSummit.SummitAssembler())
         }
     }
     

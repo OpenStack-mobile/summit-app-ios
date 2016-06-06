@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-public class Feedback: BaseEntity {
+public class Feedback: RealmEntity {
     public dynamic var rate = 0
     public dynamic var review = ""
     public dynamic var date = NSDate(timeIntervalSince1970: 1)

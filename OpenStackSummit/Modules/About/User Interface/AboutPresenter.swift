@@ -41,7 +41,7 @@ public class AboutPresenter: NSObject, IAboutPresenter {
         }
     }
     
-    func buildNameDate(summit: SummitDTO) -> String {
+    func buildNameDate(summit: CoreSummit.Summit) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "MMMM dd-"

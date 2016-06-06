@@ -10,7 +10,7 @@ import UIKit
 import Haneke
 
 public class VenueTrigger: NSObject, ITrigger {
-    public func run(entity: BaseEntity, type: TriggerTypes, operation: TriggerOperations, completionBlock : ((Void) -> Void)!) {
+    public func run(entity: RealmEntity, type: TriggerTypes, operation: TriggerOperations, completionBlock : ((Void) -> Void)!) {
         if (entity is Venue){
             run(entity as! Venue, type: type, operation: operation, completionBlock : completionBlock)
         }

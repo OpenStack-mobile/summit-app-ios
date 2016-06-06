@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol ISpeakerPresentationsPresenter: ISchedulePresenter {
+public protocol ISpeakerPresentationsPresenter: SchedulePresenterProtocol {
     var speakerId: Int { get set }
 }
 
@@ -44,12 +44,12 @@ public class SpeakerPresentationsPresenter: SchedulePresenter, ISpeakerPresentat
     
     public var speakerId = 0
     
-    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [NSDate] {
         let availableDates = (interactor as! ISpeakerPresentationsInteractor).getSpeakerPresentationsDates(speakerId, startDate: startDate, endDate: endDate)
         return availableDates
     }
     
-    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [ScheduleItem] {
         let events = (interactor as! ISpeakerPresentationsInteractor).getSpeakerPresentations(speakerId, startDate: startDate, endDate: endDate)
         return events
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol ILevelSchedulePresenter: ISchedulePresenter{
+public protocol ILevelSchedulePresenter: SchedulePresenterProtocol{
     func viewLoad(level: String)
 }
 
@@ -25,7 +25,7 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
         }
     }
     
-    var interactor : IScheduleInteractor! {
+    var interactor : ScheduleInteractorProtocol! {
         get {
             return internalInteractor
         }
@@ -49,7 +49,7 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
         viewLoad()
     }
     
-    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [NSDate] {
+    override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [NSDate] {
         let levelSelections = [level]
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
@@ -71,7 +71,7 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
         return availableDates
     }
     
-    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: IScheduleInteractor) -> [ScheduleItemDTO] {
+    override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [ScheduleItem] {
         let levelSelections = [level]
         let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
         let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]

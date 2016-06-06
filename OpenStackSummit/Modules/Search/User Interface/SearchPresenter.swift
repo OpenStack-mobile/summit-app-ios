@@ -32,7 +32,7 @@ public class SearchPresenter: ScheduleablePresenter {
     var interactor: ISearchInteractor!
     var viewController: ISearchViewController!
     var wireframe: ISearchWireframe!
-    var events: [ScheduleItemDTO]!
+    var events: [ScheduleItem]!
     var tracks: [TrackDTO]!
     var speakers = [PersonListItemDTO]()
     var attendees = [PersonListItemDTO]()

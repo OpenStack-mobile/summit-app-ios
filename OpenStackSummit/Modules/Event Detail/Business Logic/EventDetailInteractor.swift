@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-public protocol IEventDetailInteractor : IScheduleableInteractor {
+public protocol IEventDetailInteractor : ScheduleableInteractorProtocol {
     func getEventDetail(eventId: Int) -> EventDetailDTO
     func getAverageRating(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void)
     func getFeedbackForEvent(eventId: Int, page: Int, objectsPerPage: Int, completionBlock : ([FeedbackDTO]?, NSError?) -> Void)

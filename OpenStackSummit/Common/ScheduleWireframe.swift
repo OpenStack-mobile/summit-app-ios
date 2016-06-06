@@ -8,17 +8,17 @@
 
 import UIKit
 
-@objc
-public protocol IScheduleWireframe {
-    func showEventDetail(eventId: Int)
+public protocol ScheduleWireframe: class {
+    
+    var eventDetailWireframe: EventDetailWireframe { get }
+    
+    func showEventDetail(eventID: Int)
 }
 
-public class ScheduleWireframe: NSObject, IScheduleWireframe {
-    var eventDetailWireframe : IEventDetailWireframe!
-
-    public func showEventDetail(eventId: Int) { preconditionFailure("This method must be overridden")  }
+public extension ScheduleWireframe {
     
     public func showEventDetail(eventId: Int, fromViewController viewController: UIViewController) {
+        
         eventDetailWireframe.pushEventDetailView(eventId, toNavigationViewController: viewController.navigationController!)
     }
 }
