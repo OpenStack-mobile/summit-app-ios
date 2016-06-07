@@ -9,8 +9,7 @@
 import UIKit
 import AFHorizontalDayPicker
 
-@objc
-public protocol IScheduleViewController: class, IMessageEnabledViewController {
+public protocol ScheduleViewControllerProtocol: class, MessageEnabledViewController {
     var startDate: NSDate! { get set }
     var endDate: NSDate! { get set }
     var selectedDate: NSDate! { get set }
@@ -24,7 +23,7 @@ public protocol IScheduleViewController: class, IMessageEnabledViewController {
     func toggleNoConnectivityMessage(show: Bool)
 }
 
-internal class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource, IScheduleViewController {
+internal class ScheduleViewController: BaseViewController, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource, ScheduleViewControllerProtocol {
     
     @IBOutlet weak var scheduleView: ScheduleView!
     
@@ -133,6 +132,6 @@ internal class ScheduleViewController: BaseViewController, AFHorizontalDayPicker
         let view = button.superview!
         let cell = view.superview as! UITableViewCell
         let indexPath = scheduleView.tableView.indexPathForCell(cell)
-        internalPresenter.toggleScheduledStatus(indexPath!.row, cell: view.superview as! IScheduleTableViewCell)
+        internalPresenter.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCellProtocol)
     }
 }

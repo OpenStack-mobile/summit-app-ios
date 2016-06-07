@@ -16,4 +16,19 @@ public extension Feedback {
     }
 }
 
+extension Feedback: JSONDecodable {
+    
+    public init?(JSONValue: JSON.Value) {
+        
+        guard let JSONObject = JSONValue.objectValue,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let rate = JSONObject[JSONKey.rate.rawValue]?.rawValue as? Int,
+            let review = JSONObject[JSONKey.note.rawValue]?.rawValue as? String,
+            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.rawValue as? Int
+            else { return nil }
+        
+        self.identifier = identifier
+        self.event = event
+    }
+}
 

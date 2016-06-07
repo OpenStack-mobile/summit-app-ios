@@ -28,7 +28,7 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
     var dayEvents = [ScheduleItem]()
     var scheduleFilter = ScheduleFilter()
     var internalInteractor: ScheduleInteractorProtocol!
-    var internalViewController: IScheduleViewController!
+    var internalViewController: ScheduleViewControllerProtocol!
     var internalWireframe: ScheduleWireframe!
     var selectedDate: NSDate?
     
@@ -85,7 +85,7 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
         }
     }
     
-    public func toggleScheduledStatus(index: Int, cell: IScheduleTableViewCell) {
+    public func toggleScheduledStatus(index: Int, cell: ScheduleTableViewCellProtocol) {
         let event = dayEvents[index]
         toggleScheduledStatusForEvent(event, scheduleableView: cell, interactor: internalInteractor) { error in
             if (error != nil) {
@@ -107,7 +107,7 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
         }
     }
     
-    private func viewLoad(interactor: ScheduleInteractorProtocol, viewController: IScheduleViewController) {
+    private func viewLoad(interactor: ScheduleInteractorProtocol, viewController: ScheduleViewController) {
         if !interactor.isDataLoaded() {
             internalViewController.showActivityIndicator()
         }
@@ -173,7 +173,7 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
         }
     }
     
-    func reloadSchedule(interactor: ScheduleInteractorProtocol, viewController: IScheduleViewController) {
+    func reloadSchedule(interactor: ScheduleInteractorProtocol, viewController: ScheduleViewController) {
         dispatch_async(dispatch_get_main_queue(),{
             self.selectedDate = viewController.selectedDate
             

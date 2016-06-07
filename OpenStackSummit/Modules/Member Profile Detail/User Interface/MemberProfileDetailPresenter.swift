@@ -9,17 +9,16 @@
 import UIKit
 import CoreSummit
 
-@objc
-public protocol IMemberProfileDetailPresenter {
+public protocol MemberProfileDetailPresenterProtocol {
     var speakerId: Int { get set }
     var attendeeId: Int { get set }
     
     func viewLoad()
 }
 
-public class MemberProfileDetailPresenter: NSObject, IMemberProfileDetailPresenter {
+public class MemberProfileDetailPresenter: MemberProfileDetailPresenterProtocol {
     
-    var interactor: IMemberProfileDetailInteractor!
+    var interactor: MemberProfileDetailInteractor!
     var viewController: IMemberProfileDetailViewController!
     
     var internalSpeakerId = 0

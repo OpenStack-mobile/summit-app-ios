@@ -10,17 +10,17 @@ import CoreSummit
 
 public protocol TrackSchedulePresenterProtocol: SchedulePresenterProtocol {
     
-    func viewLoad(track: Track)
+    func viewLoad(track: RealmTrack)
 }
 
 public final class TrackSchedulePresenter: SchedulePresenter, TrackSchedulePresenterProtocol {
     
-    var track: Track!
+    var track: RealmTrack!
     
-    weak var viewController : ITrackScheduleViewController! {
+    weak var viewController : TrackScheduleViewController! {
         
         get {
-            return internalViewController as! ITrackScheduleViewController
+            return internalViewController as! TrackScheduleViewController
         }
         set {
             internalViewController = newValue
@@ -45,7 +45,7 @@ public final class TrackSchedulePresenter: SchedulePresenter, TrackSchedulePrese
         }
     }
     
-    public func viewLoad(track: Track) {
+    public func viewLoad(track: RealmTrack) {
         self.track = track
         viewController.track = track.name
         viewLoad()

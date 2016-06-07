@@ -7,12 +7,12 @@
 //
 
 import UIKit
-@objc
-protocol ITrackScheduleViewController : IScheduleViewController {
+
+protocol TrackScheduleViewControllerProtocol : ScheduleViewControllerProtocol {
     var track: String! { get set }
 }
 
-class TrackScheduleViewController: ScheduleViewController, ITrackScheduleViewController {
+class TrackScheduleViewController: ScheduleViewController, TrackScheduleViewControllerProtocol {
     var track: String! {
         get {
             return trackLabel.text
@@ -24,9 +24,9 @@ class TrackScheduleViewController: ScheduleViewController, ITrackScheduleViewCon
     
     @IBOutlet weak var trackLabel: UILabel!
     
-    var presenter: ITrackSchedulePresenter! {
+    var presenter: TrackSchedulePresenter! {
         get {
-            return internalPresenter as! ITrackSchedulePresenter
+            return internalPresenter as! TrackSchedulePresenter
         }
         set {
             internalPresenter = newValue

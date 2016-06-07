@@ -8,12 +8,9 @@
 
 import UIKit
 
-@objc
-public protocol IMessageEnabledViewController {
+public protocol MessageEnabledViewController { }
 
-}
-
-extension IMessageEnabledViewController {
+extension MessageEnabledViewController {
     func showInfoMessage(title: String, message: String) {
         SweetAlert().showAlert(title, subTitle: message, style: AlertStyle.Warning)
     }

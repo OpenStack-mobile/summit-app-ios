@@ -23,6 +23,8 @@ public protocol Person: Named {
     var irc: String { get }
     
     var biography: String { get }
+    
+    //var location: String { get } // not sure?
 }
 
 public extension Person {

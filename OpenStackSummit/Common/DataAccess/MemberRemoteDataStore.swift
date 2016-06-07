@@ -21,7 +21,7 @@ public protocol MemberRemoteDataStoreProtocol {
 
 public class MemberRemoteDataStore: MemberRemoteDataStoreProtocol {
 
-    var httpFactory: HttpFactory!
+    var httpFactory = HttpFactory()
     
     public func getLoggedInMember(completionBlock : (Member?, NSError?) -> Void)  {
         let attendeeEndpoint = "\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/attendees/me?expand=speaker,feedback,tickets"
