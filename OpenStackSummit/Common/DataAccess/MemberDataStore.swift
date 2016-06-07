@@ -25,8 +25,12 @@ public class MemberDataStore: GenericDataStore, MemberDataStoreProtocol {
         self.memberRemoteStorage = memberRemoteStorage
     }
     
-    public func getLoggedInMemberOrigin(completionBlock : (Member?, NSError?) -> Void)  {
+    public func getLoggedInMemberOrigin(completionBlock: ErrorValue<RealmMember> -> ())  {
+        
         memberRemoteStorage.getLoggedInMember { member, error in
+            
+            guard error == nil
+                else { completionBlock(.Error(error!)); return }
             
             if (error != nil) {
                 completionBlock(member, error)
@@ -39,19 +43,20 @@ public class MemberDataStore: GenericDataStore, MemberDataStoreProtocol {
         }
     }
     
-    public func getLoggedInMemberBasicInfoOrigin(completionBlock : (Member?, NSError?) -> Void)  {
+    public func getLoggedInMemberBasicInfoOrigin(completionBlock: ErrorValue<RealmMember> -> ())  {
         memberRemoteStorage.getLoggedInMemberBasicInfo { member, error in
             completionBlock(member, error)
         }
     }
     
     
-    public func getByIdLocal(id: Int) -> Member? {
+    public func getByIdLocal(id: Int) -> RealmMember? {
         return super.getByIdLocal(id)
     }
     
-    public func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock : ([NonConfirmedSummitAttendee]?, NSError?) -> Void) {
+    public func getAttendeesForTicketOrderOrigin(orderNumber: String, completionBlock: ErrorValue<[RealmNonConfirmedSummitAttendee]> -> ()) {
         memberRemoteStorage.getAttendeesForTicketOrder(orderNumber) { nonConfirmedAttendees, error in
+            
             completionBlock(nonConfirmedAttendees, error)
         }
     }
