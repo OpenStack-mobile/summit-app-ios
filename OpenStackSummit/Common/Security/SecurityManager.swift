@@ -15,11 +15,11 @@ public final class SecurityManager {
     
     var session = Session()
     
-    var internalOAuthModuleOpenID: OAuth2Module!
-    var internalOAuthModuleServiceAccount: OAuth2Module!
+    var internalOAuthModuleOpenID: OAuth2Module?
+    var internalOAuthModuleServiceAccount: OAuth2Module?
     
-    var memberDataStore = MemberDataStore()
-    var member: Member?
+    var memberDataStore: MemberDataStore
+    var member: RealmMember?
     
     private let kCurrentMemberId = "currentMemberId"
     private let kCurrentMemberFullName = "currentMemberFullName"
@@ -249,23 +249,23 @@ public final class SecurityManager {
     
     public func getCurrentMemberRole() -> Member.Role {
         
-        var role = MemberRoles.Anonymous
+        var role = Member.Role.Anonymous
         let currentMember = getCurrentMember()
         if (currentMember != nil) {
             if (currentMember?.speakerRole != nil) {
-                role = MemberRoles.Speaker
+                role = Member.Role.Speaker
             }
             else if (currentMember?.attendeeRole != nil) {
-                role = MemberRoles.Attendee
+                role = Member.Role.Attendee
             }
             else {
-                role = MemberRoles.Member
+                role = Member.Role.Member
             }
         }
         return role
     }
     
-    public func getCurrentMember() -> Member? {
+    public func getCurrentMember() -> RealmMember? {
         if isLoggedIn() {
             let currentMemberId = session.get(kCurrentMemberId) as! Int
             if currentMemberId > 0 {
