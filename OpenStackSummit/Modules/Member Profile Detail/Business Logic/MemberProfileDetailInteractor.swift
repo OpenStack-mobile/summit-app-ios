@@ -7,27 +7,24 @@
 //
 
 import UIKit
+import CoreSummit
 
-@objc
-public protocol IMemberProfileDetailInteractor {
-    func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void)
-    func getAttendeeProfile(speakerId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void)
+public protocol MemberProfileDetailInteractorProtocol {
+    func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void)
+    func getAttendeeProfile(speakerId: Int, completionBlock : (SummitAttendee?, NSError?) -> Void)
     func isLoggedIn() -> Bool
-    func getCurrentMember() -> MemberDTO?
+    func getCurrentMember() -> Member?
 }
 
-public class MemberProfileDetailInteractor: NSObject, IMemberProfileDetailInteractor {
+public class MemberProfileDetailInteractor: MemberProfileDetailInteractorProtocol {
     
     var presentationSpeakerDataStore: IPresentationSpeakerDataStore!
     var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
-    var summitAttendeeDTOAssembler: ISummitAttendeeDTOAssembler!
-    var presentationSpeakerDTOAssembler: IPresentationSpeakerDTOAssembler!
-    var memberDTOAssembler: IMemberDTOAssembler!
     var securityManager: SecurityManager!
     
-    public func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeakerDTO?, NSError?) -> Void) {
+    public func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void) {
         var error: NSError?
-        var speakerDTO: PresentationSpeakerDTO? = nil
+        var speakerDTO: PresentationSpeaker? = nil
         if let speaker = presentationSpeakerDataStore.getByIdLocal(speakerId) {
             speakerDTO = self.presentationSpeakerDTOAssembler.createDTO(speaker)
         }
@@ -37,7 +34,7 @@ public class MemberProfileDetailInteractor: NSObject, IMemberProfileDetailIntera
         completionBlock(speakerDTO, error)
     }
     
-    public func getAttendeeProfile(attendeeId: Int, completionBlock : (SummitAttendeeDTO?, NSError?) -> Void) {
+    public func getAttendeeProfile(attendeeId: Int, completionBlock : (SummitAttendee?, NSError?) -> Void) {
         summitAttendeeRemoteDataStore.getById(attendeeId) { attendee, error in
             
             if (error != nil) {
@@ -54,10 +51,10 @@ public class MemberProfileDetailInteractor: NSObject, IMemberProfileDetailIntera
         return securityManager.isLoggedIn()
     }
     
-    public func getCurrentMember() -> MemberDTO? {
-        var memberDTO: MemberDTO?
+    public func getCurrentMember() -> Member? {
+        var memberDTO: Member?
         if let member = securityManager.getCurrentMember() {
-            memberDTO = memberDTOAssembler.createDTO(member)
+            memberDTO = Member(realmEntity: )
         }
         return memberDTO
     }

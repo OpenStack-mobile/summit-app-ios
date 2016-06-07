@@ -10,15 +10,14 @@ import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
 
-@objc
-protocol ISpeakerPresentationsViewController: IScheduleViewController {
-    var presenter: ISpeakerPresentationsPresenter! { get set }
+protocol SpeakerPresentationsViewControllerProtocol: ScheduleViewControllerProtocol {
+    var presenter: SpeakerPresentationsPresenter! { get set }
 }
 
-class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider, ISpeakerPresentationsViewController {
-    var presenter: ISpeakerPresentationsPresenter! {
+class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider, SpeakerPresentationsViewControllerProtocol {
+    var presenter: SpeakerPresentationsPresenter! {
         get {
-            return internalPresenter as! ISpeakerPresentationsPresenter
+            return internalPresenter as! SpeakerPresentationsPresenter
         }
         set {
             internalPresenter = newValue

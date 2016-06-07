@@ -27,6 +27,10 @@ public struct Member: Person {
     public var biography: String
     
     public var friends: [Identifier]
+    
+    public var speakerRole: PresentationSpeaker?
+    
+    public var attendeeRole: SummitAttendee?
 }
 
 // MARK: - Supporting Types

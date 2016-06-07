@@ -26,6 +26,8 @@ public struct SummitAttendee: Person {
     
     public var biography: String
     
+    //public var location: String
+    
     public var tickets: [TicketType]
     
     public var scheduledEvents: [SummitEvent]
@@ -35,4 +37,11 @@ public struct SummitAttendee: Person {
     public var friends: [Member]
     
     public var feedback: [Feedback]
+}
+
+// MARK: - Extensions
+
+public extension Person {
+    
+    var attendee: Bool { return self is SummitAttendee }
 }

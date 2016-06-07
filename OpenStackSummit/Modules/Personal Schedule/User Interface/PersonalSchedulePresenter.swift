@@ -10,7 +10,7 @@ import UIKit
 
 public class PersonalSchedulePresenter: SchedulePresenter {
     
-    weak var viewController : IScheduleViewController! {
+    weak var viewController : ScheduleViewControllerProtocol! {
         get {
             return internalViewController
         }

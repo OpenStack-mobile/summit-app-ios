@@ -12,8 +12,7 @@ import Cosmos
 import AHKActionSheet
 import SwiftSpinner
 
-@objc
-public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledViewController {
+public protocol EventDetailViewControllerProtocol : ScheduleableView, MessageEnabledViewController {
     func reloadFeedbackData()
     func reloadSpeakersData()
     func showFeedbackListActivityIndicator()
@@ -40,7 +39,7 @@ public protocol IEventDetailViewController : IScheduleableView, IMessageEnabledV
     var averageFeedback: Double { get set }
 }
 
-class EventDetailViewController: BaseViewController, IEventDetailViewController, UITableViewDelegate, UITableViewDataSource {
+class EventDetailViewController: BaseViewController, EventDetailViewControllerProtocol, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var feedbackListActivityIndicator: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!

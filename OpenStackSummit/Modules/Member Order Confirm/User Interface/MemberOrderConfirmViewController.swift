@@ -8,16 +8,16 @@
 
 import UIKit
 import SwiftSpinner
+import CoreSummit
 
-@objc
-protocol IMemberOrderConfirmViewController: IMessageEnabledViewController{
+protocol MemberOrderConfirmViewControllerProtocol: MessageEnabledViewController{
     func showActivityIndicator()
     func hideActivityIndicator()
-    func setSummitAttendees(attendees: [NamedDTO])
+    func setSummitAttendees(attendees: [Named])
     func showAttendeesSelector(show: Bool)
 }
 
-class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfirmViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class MemberOrderConfirmViewController: RevealViewController, MemberOrderConfirmViewControllerProtocol, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var orderNumberText: UITextField!
@@ -26,20 +26,20 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
     @IBOutlet weak var confirmButton: UIButton!
     
     var presenter : IMemberOrderConfirmPresenter!
-    var attendees: [NamedDTO]!
+    var attendees = [Named]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         orderNumberText.delegate = self
         
-        let singleTap = UITapGestureRecognizer(target: self, action: "resignOnTap:")
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(MemberOrderConfirmViewController.resignOnTap(_:)))
         singleTap.numberOfTapsRequired = 1
         singleTap.numberOfTouchesRequired = 1
         view.addGestureRecognizer(singleTap)
         
         menuButton.target = self
-        menuButton.action = Selector("menuButtonPressed:")
+        menuButton.action = #selector(MemberOrderConfirmViewController.menuButtonPressed(_:))
         
         navigationController?.navigationBar.topItem?.title = "MY PROFILE"
     }
@@ -59,8 +59,8 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
     }
     
     func registerKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemberOrderConfirmViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemberOrderConfirmViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unregisterKeyboardNotifications() {
@@ -114,8 +114,8 @@ class MemberOrderConfirmViewController: RevealViewController, IMemberOrderConfir
         return true
     }
     
-    func setSummitAttendees(attendees: [NamedDTO]) {
-        self.attendees = [ NamedDTO() ]
+    func setSummitAttendees(attendees: [Named]) {
+        self.attendees = [Named]()
         self.attendees.appendContentsOf(attendees)
         if attendees.count > 0 {
             multipleAttendeesMatchingLabel.hidden = false

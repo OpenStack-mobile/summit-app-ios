@@ -9,12 +9,11 @@
 import UIKit
 import XLPagerTabStrip
 
-@objc
-public protocol IFeedbackGivenListViewController: IMessageEnabledViewController {
+public protocol FeedbackGivenListViewControllerProtocol: MessageEnabledViewController {
     func releoadList()
 }
 
-class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IFeedbackGivenListViewController, IndicatorInfoProvider {
+class FeedbackGivenListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FeedbackGivenListViewControllerProtocol, IndicatorInfoProvider {
     
     let cellIdentifier = "feedbackTableViewCell"
     @IBOutlet weak var tableView: UITableView!

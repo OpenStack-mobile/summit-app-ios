@@ -15,8 +15,8 @@ public protocol IEventsInteractor {
 }
 
 public class EventsInteractor: NSObject, IEventsInteractor {
-    var reachability: IReachability!
-    var summitDataStore: ISummitDataStore!
+    var reachability = Reachability()
+    var summitDataStore = SummitDataStore()
     
     public func isDataLoaded() -> Bool {
         return summitDataStore.getActiveLocal() != nil

@@ -17,4 +17,8 @@ public struct Feedback: Unique {
     public var review: String
     
     public var date: Date
+    
+    public var event: Identifier
+    
+    public var owner: Identifier
 }

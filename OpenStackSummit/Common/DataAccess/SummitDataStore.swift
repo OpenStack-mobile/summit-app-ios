@@ -22,7 +22,7 @@ public final class SummitDataStore: GenericDataStore, SummitDataStoreProtocol {
     
     // MARK: - Initialization
     
-    public init(summitRemoteDataStore: SummitRemoteDataStore) {
+    public init(summitRemoteDataStore: SummitRemoteDataStore = SummitRemoteDataStore()) {
         
         self.summitRemoteDataStore = summitRemoteDataStore
     }

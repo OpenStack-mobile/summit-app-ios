@@ -71,6 +71,8 @@
 		6E59EBE41D01E92000355901 /* AustinSummit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E59EBE31D01E92000355901 /* AustinSummit.json */; };
 		6EAD3E151D025C4D00974938 /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD3E141D025C4D00974938 /* RealmTests.swift */; };
 		6EAD3E171D02744000974938 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD3E161D02744000974938 /* TestUtilities.swift */; };
+		6EE09B221D0770CD00A9EAA8 /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE09B211D0770CD00A9EAA8 /* MemberJSON.swift */; };
+		6EE09B241D0772E500A9EAA8 /* SummitAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE09B231D0772E500A9EAA8 /* SummitAttendeeJSON.swift */; };
 		6EE0E4211D05E49C006BCC09 /* ErrorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE0E4201D05E49C006BCC09 /* ErrorValue.swift */; };
 		6EE0E4221D05E4F7006BCC09 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; };
 		6EE0E4231D05E4F7006BCC09 /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE66C671CFE1A920010A5C4 /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -424,6 +426,8 @@
 		6E59EBE31D01E92000355901 /* AustinSummit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AustinSummit.json; sourceTree = "<group>"; };
 		6EAD3E141D025C4D00974938 /* RealmTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		6EAD3E161D02744000974938 /* TestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
+		6EE09B211D0770CD00A9EAA8 /* MemberJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberJSON.swift; sourceTree = "<group>"; };
+		6EE09B231D0772E500A9EAA8 /* SummitAttendeeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeJSON.swift; sourceTree = "<group>"; };
 		6EE0E4201D05E49C006BCC09 /* ErrorValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorValue.swift; sourceTree = "<group>"; };
 		6EE0E4401D05F728006BCC09 /* ScheduleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleItem.swift; sourceTree = "<group>"; };
 		6EE0E4421D05FE59006BCC09 /* SummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEvent.swift; sourceTree = "<group>"; };
@@ -965,6 +969,8 @@
 				6E4485331CFF56CB001E475E /* TrackJSON.swift */,
 				6E4485371CFF581C001E475E /* TrackGroupJSON.swift */,
 				6E44852F1CFF5248001E475E /* PresentationSpeakerJSON.swift */,
+				6EE09B211D0770CD00A9EAA8 /* MemberJSON.swift */,
+				6EE09B231D0772E500A9EAA8 /* SummitAttendeeJSON.swift */,
 				6E4485471CFF811F001E475E /* ImageJSON.swift */,
 				6E155FAB1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift */,
 				6E155FD01D00B7D200563B0A /* FeedbackJSON.swift */,
@@ -2554,6 +2560,7 @@
 				6E155FAA1D009D7200563B0A /* NonConfirmedSummitAttendee.swift in Sources */,
 				6E155FA61D009BB700563B0A /* RealmPresentationSpeaker.swift in Sources */,
 				6E155FAC1D009E3D00563B0A /* NonConfirmedSummitAttendeeJSON.swift in Sources */,
+				6EE09B221D0770CD00A9EAA8 /* MemberJSON.swift in Sources */,
 				6E4485421CFF752C001E475E /* VenueJSON.swift in Sources */,
 				6E44851E1CFF3626001E475E /* Company.swift in Sources */,
 				6EE66C8A1CFE1C670010A5C4 /* Unique.swift in Sources */,
@@ -2593,6 +2600,7 @@
 				6E59EBE01D01D90000355901 /* Presentation.swift in Sources */,
 				6E155FBD1D00A79F00563B0A /* RealmImage.swift in Sources */,
 				6E155FC51D00B18C00563B0A /* RealmVenue.swift in Sources */,
+				6EE09B241D0772E500A9EAA8 /* SummitAttendeeJSON.swift in Sources */,
 				6E4485341CFF56CB001E475E /* TrackJSON.swift in Sources */,
 				6E4485361CFF5813001E475E /* TrackGroup.swift in Sources */,
 				6E44852A1CFF482F001E475E /* EventType.swift in Sources */,

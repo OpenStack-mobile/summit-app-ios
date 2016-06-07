@@ -12,6 +12,8 @@ public struct ScheduleItem: RealmDecodable {
     
     // MARK: - Properties
     
+    public let id: Identifier
+    public let name: String
     public let dateTime: String
     public let time: String
     public let location: String
@@ -25,6 +27,8 @@ public struct ScheduleItem: RealmDecodable {
     
     public init(realmEntity event: RealmSummitEvent) {
         
+        self.id = event.id
+        self.name = event.name
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)

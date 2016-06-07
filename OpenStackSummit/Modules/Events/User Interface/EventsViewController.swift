@@ -48,7 +48,7 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         
         filterButton = UIBarButtonItem()
         filterButton.target = self
-        filterButton.action = Selector("showFilters:")
+        filterButton.action = #selector(EventsViewController.showFilters(_:))
         filterButton.image = UIImage(named: "filter")
         
         navigationItem.rightBarButtonItem = filterButton
@@ -59,7 +59,7 @@ class EventsViewController: RevealTabStripViewController, IEventsViewController 
         message.title = "CLEAR ACTIVE FILTERS"
         message.style = .Plain
         message.target = self
-        message.action = Selector("clearFilters:")
+        message.action = #selector(IEventsPresenter.clearFilters(_:))
         message.tintColor = UIColor(hexaString: "#4A4A4A")
         message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(15)], forState: UIControlState.Normal)
 
