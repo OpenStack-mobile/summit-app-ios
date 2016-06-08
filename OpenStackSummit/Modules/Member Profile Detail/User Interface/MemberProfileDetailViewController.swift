@@ -10,8 +10,7 @@ import UIKit
 import SwiftSpinner
 import XLPagerTabStrip
 
-@objc
-protocol IMemberProfileDetailViewController {
+protocol MemberProfileDetailViewControllerProtocol {
     var name: String! { get set }
     var personTitle: String! { get set }
     var picUrl: String! { get set }
@@ -20,16 +19,16 @@ protocol IMemberProfileDetailViewController {
     var twitter: String! { get set }
     var irc: String! { get set }
     var bio: String! { get set }
-    var presenter: IMemberProfileDetailPresenter! { get set }
+    var presenter: MemberProfileDetailPresenter! { get set }
     
-    func showProfile(profile: RealmMemberProfile)
+    func showProfile(profile: MemberProfile)
     func didFinishFriendshipRequest()
     func handlerError(error: NSError)
     func showActivityIndicator()
     func hideActivityIndicator()
 }
 
-class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailViewController, IndicatorInfoProvider {
+class MemberProfileDetailViewController: UIViewController, MemberProfileDetailViewControllerProtocol, IndicatorInfoProvider {
     
     var name: String!{
         get {
@@ -216,7 +215,7 @@ class MemberProfileDetailViewController: UIViewController, IMemberProfileDetailV
     @IBOutlet weak var bioTextView: UITextView!
     @IBOutlet weak var bioTextViewLayoutConstraint: NSLayoutConstraint!
     
-    var presenter: IMemberProfileDetailPresenter!
+    var presenter: MemberProfileDetailPresenter!
     
     private var picUrlInternal: String!
     private var bioHTML: String!

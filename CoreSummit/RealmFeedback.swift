@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import SwiftFoundation
 
 public class RealmFeedback: RealmEntity {
     
@@ -15,4 +16,19 @@ public class RealmFeedback: RealmEntity {
     public dynamic var date = NSDate(timeIntervalSince1970: 1)
     public dynamic var event: RealmSummitEvent!
     public dynamic var owner: RealmSummitAttendee!
+}
+
+// MARK: - Encoding
+
+extension Feedback: RealmDecodable {
+    
+    public init(realmEntity: RealmFeedback) {
+        
+        self.identifier = realmEntity.id
+        self.rate = realmEntity.rate
+        self.review = realmEntity.review
+        self.date = Date(foundation: realmEntity.date)
+        self.event = realmEntity.event.id
+        self.owner = realmEntity.owner.id
+    }
 }

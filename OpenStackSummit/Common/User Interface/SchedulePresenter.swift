@@ -27,8 +27,8 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
     var session = Session()
     var dayEvents = [ScheduleItem]()
     var scheduleFilter = ScheduleFilter()
-    var internalInteractor: ScheduleInteractorProtocol!
-    var internalViewController: ScheduleViewControllerProtocol!
+    var internalInteractor = ScheduleInteractor()
+    var internalViewController: ScheduleViewController!
     var internalWireframe: ScheduleWireframe!
     var selectedDate: NSDate?
     
