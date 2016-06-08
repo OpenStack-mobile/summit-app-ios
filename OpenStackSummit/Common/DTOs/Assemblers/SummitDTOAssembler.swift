@@ -1,5 +1,5 @@
 //
-//  CoreSummit.SummitAssembler.swift
+//  SummitDTOAssembler.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 9/9/15.
@@ -9,17 +9,17 @@
 import UIKit
 
 @objc
-public protocol ICoreSummit.SummitAssembler {
-    func createDTO(summit: Summit)->CoreSummit.Summit
+public protocol ISummitDTOAssembler {
+    func createDTO(summit: Summit)->SummitDTO
 }
 
-public class CoreSummit.SummitAssembler: NamedDTOAssembler {
-    public func createDTO(summit: Summit)->CoreSummit.Summit{
-        let CoreSummit.Summit: CoreSummit.Summit = super.createDTO(summit)
-        CoreSummit.Summit.startDate = summit.startDate
-        CoreSummit.Summit.endDate = summit.endDate
-        CoreSummit.Summit.timeZone = summit.timeZone
+public class SummitDTOAssembler: NamedDTOAssembler {
+    public func createDTO(summit: Summit)->SummitDTO{
+        let summitDTO: SummitDTO = super.createDTO(summit)
+        summitDTO.startDate = summit.startDate
+        summitDTO.endDate = summit.endDate
+        summitDTO.timeZone = summit.timeZone
         
-        return CoreSummit.Summit
+        return summitDTO
     }
 }

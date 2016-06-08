@@ -8,22 +8,26 @@
 
 import UIKit
 import RealmSwift
+import CoreSummit
 
-@objc
-public protocol IPresentationSpeakerDataStore {
-    func getByIdLocal(id: Int) -> PresentationSpeaker?
-    func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker]
+public protocol PresentationSpeakerDataStoreProtocol {
+    
+    func getByIdLocal(id: Int) -> RealmPresentationSpeaker?
+    
+    func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [RealmPresentationSpeaker]
 }
 
-public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeakerDataStore {
-    public func getByIdLocal(id: Int) -> PresentationSpeaker? {
+public class PresentationSpeakerDataStore: GenericDataStore, PresentationSpeakerDataStoreProtocol {
+    
+    public func getByIdLocal(id: Int) -> RealmPresentationSpeaker? {
+        
         return super.getByIdLocal(id)
     }
     
-    public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
+    public func getByFilterLocal(searchTerm: String?, page: Int, objectsPerPage: Int) -> [RealmPresentationSpeaker] {
         
         let sortProperties = [SortDescriptor(property: "firstName", ascending: true), SortDescriptor(property: "lastName", ascending: true)]
-        var result = realm.objects(PresentationSpeaker.self).sorted(sortProperties)
+        var result = realm.objects(RealmPresentationSpeaker.self).sorted(sortProperties)
         
         // HACK: filter speakers with empty name
         result = result.filter("fullName != ''")
@@ -32,7 +36,7 @@ public class PresentationSpeakerDataStore: GenericDataStore, IPresentationSpeake
             result = result.filter("fullName CONTAINS [c]%@", searchTerm!)
         }
         
-        var speakers = [PresentationSpeaker]()
+        var speakers = [RealmPresentationSpeaker]()
         
         let startRecord = (page - 1) * objectsPerPage;
         let endRecord = (startRecord + (objectsPerPage - 1)) <= result.count ? startRecord + (objectsPerPage - 1) : result.count - 1;

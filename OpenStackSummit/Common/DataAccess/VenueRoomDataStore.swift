@@ -6,15 +6,15 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IVenueRoomDataStore {
-    func getByIdLocal(id: Int) -> VenueRoom?
+public protocol VenueRoomDataStoreProtocol {
+    func getByIdLocal(id: Int) -> RealmVenueRoom?
 }
 
-public class VenueRoomDataStore: GenericDataStore, IVenueRoomDataStore {
-    public func getByIdLocal(id: Int) -> VenueRoom? {
+public final class VenueRoomDataStore: GenericDataStore, VenueRoomDataStoreProtocol {
+    
+    public func getByIdLocal(id: Int) -> RealmVenueRoom? {
         return super.getByIdLocal(id)
     }
 }

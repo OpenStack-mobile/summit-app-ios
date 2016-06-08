@@ -14,14 +14,14 @@ public protocol IMemberProfileDTOAssembler {
 }
 
 public class MemberProfileDTOAssembler: NSObject, IMemberProfileDTOAssembler {
-    var ScheduleItemAssembler: IScheduleItemAssembler!
+    var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
 
     public override init() {
         super.init()
     }
     
-    public init(ScheduleItemAssembler: IScheduleItemAssembler) {
-        self.ScheduleItemAssembler = ScheduleItemAssembler
+    public init(scheduleItemDTOAssembler: IScheduleItemDTOAssembler) {
+        self.scheduleItemDTOAssembler = scheduleItemDTOAssembler
     }
     
     public func createDTO(member: Member, full: Bool) -> MemberProfileDTO {
@@ -35,20 +35,20 @@ public class MemberProfileDTOAssembler: NSObject, IMemberProfileDTOAssembler {
             memberProfileDTO.twitter = member.twitter
             memberProfileDTO.irc = member.irc
             
-            var ScheduleItem: ScheduleItem
+            var scheduleItemDTO: ScheduleItemDTO
             if let attendeeRole = member.attendeeRole {
                 for event in attendeeRole.scheduledEvents {
-                    ScheduleItem = ScheduleItemAssembler.createDTO(event)
-                    memberProfileDTO.scheduledEvents.append(ScheduleItem)
+                    scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+                    memberProfileDTO.scheduledEvents.append(scheduleItemDTO)
                 }
             }
         }
         
-        var ScheduleItem: ScheduleItem
+        var scheduleItemDTO: ScheduleItemDTO
         if let speakerRole = member.speakerRole {
             for presentation in speakerRole.presentations {
-                ScheduleItem = ScheduleItemAssembler.createDTO(presentation.event)
-                memberProfileDTO.presentations.append(ScheduleItem)
+                scheduleItemDTO = scheduleItemDTOAssembler.createDTO(presentation.event)
+                memberProfileDTO.presentations.append(scheduleItemDTO)
             }
         }
         

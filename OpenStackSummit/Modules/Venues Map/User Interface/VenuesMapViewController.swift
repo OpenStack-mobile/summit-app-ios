@@ -10,12 +10,11 @@ import UIKit
 import XLPagerTabStrip
 import GoogleMaps
 
-@objc
-protocol IVenuesMapViewController {
-    func addMarkers(venues:[VenueListItemDTO])
+protocol VenuesMapViewControllerProtocol {
+    func addMarkers(venues:[VenueListItem])
 }
 
-class VenuesMapViewController: UIViewController, IVenuesMapViewController, GMSMapViewDelegate, IndicatorInfoProvider {
+class VenuesMapViewController: UIViewController, VenuesMapViewControllerProtocol, GMSMapViewDelegate, IndicatorInfoProvider {
     
     var presenter: IVenuesMapPresenter!
     
@@ -41,14 +40,14 @@ class VenuesMapViewController: UIViewController, IVenuesMapViewController, GMSMa
         return true
     }
     
-    func addMarkers(venues: [VenueListItemDTO]) {
+    func addMarkers(venues: [VenueListItem]) {
         var bounds = GMSCoordinateBounds()
         
         var marker: GMSMarker
         for venue in venues {
             marker = GMSMarker()
             marker.icon = UIImage(named: "map_pin")
-            marker.position = CLLocationCoordinate2DMake(venue.lat, venue.long)
+            marker.position = CLLocationCoordinate2DMake(venue.latitude, venue.longitude)
             marker.title = venue.name
             marker.map = mapView
             

@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class Image: RealmEntity {
+public class Image: BaseEntity {
     public dynamic var url = ""
 }

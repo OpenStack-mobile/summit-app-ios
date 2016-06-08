@@ -14,7 +14,7 @@ public protocol IVenueRoomDTOAssembler {
 }
 
 public class VenueRoomDTOAssembler: NamedDTOAssembler, IVenueRoomDTOAssembler {
-    var ScheduleItemAssembler: ScheduleItemAssembler!
+    var scheduleItemDTOAssembler: ScheduleItemDTOAssembler!
     
     public func createDTO(venueRoom: VenueRoom) -> VenueRoomDTO {
         let venueRoomDetailDTO: VenueRoomDTO = super.createDTO(venueRoom)
@@ -23,10 +23,10 @@ public class VenueRoomDTOAssembler: NamedDTOAssembler, IVenueRoomDTOAssembler {
             venueRoomDetailDTO.name += " - Capacity: \(venueRoom.capacity)"
         }
         
-        var ScheduleItem: ScheduleItem
+        var scheduleItemDTO: ScheduleItemDTO
         for event in venueRoom.events {
-            ScheduleItem = ScheduleItemAssembler.createDTO(event)
-            venueRoomDetailDTO.events.append(ScheduleItem)
+            scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+            venueRoomDetailDTO.events.append(scheduleItemDTO)
         }
         return venueRoomDetailDTO
     }

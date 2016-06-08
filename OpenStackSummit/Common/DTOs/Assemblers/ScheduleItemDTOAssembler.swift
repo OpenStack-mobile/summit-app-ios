@@ -1,5 +1,5 @@
 //
-//  ScheduleItemAssembler.swift
+//  ScheduleItemDTOAssembler.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 9/2/15.
@@ -8,24 +8,24 @@
 
 import UIKit
 
-public protocol IScheduleItemAssembler {
-    
-    func createDTO(event: RealmSummitEvent) -> ScheduleItem
+@objc
+public protocol IScheduleItemDTOAssembler {
+    func createDTO(event: SummitEvent) -> ScheduleItemDTO
 }
 
-public class ScheduleItemAssembler: NamedDTOAssembler, IScheduleItemAssembler {
+public class ScheduleItemDTOAssembler: NamedDTOAssembler, IScheduleItemDTOAssembler {
 
-    public func createDTO(event: SummitEvent) -> ScheduleItem {
-        let ScheduleItem: ScheduleItem = super.createDTO(event)
-        ScheduleItem.location = getLocation(event)
-        ScheduleItem.time = getTime(event)
-        ScheduleItem.dateTime = getDateTime(event)
-        ScheduleItem.sponsors = getSponsors(event)
-        ScheduleItem.summitTypes = getSummitTypes(event);
-        ScheduleItem.eventType = event.eventType.name
-        ScheduleItem.track = getTrack(event)
-        ScheduleItem.trackGroupColor = getTrackGroupColor(event)
-        return ScheduleItem
+    public func createDTO(event: SummitEvent) -> ScheduleItemDTO {
+        let scheduleItemDTO: ScheduleItemDTO = super.createDTO(event)
+        scheduleItemDTO.location = getLocation(event)
+        scheduleItemDTO.time = getTime(event)
+        scheduleItemDTO.dateTime = getDateTime(event)
+        scheduleItemDTO.sponsors = getSponsors(event)
+        scheduleItemDTO.summitTypes = getSummitTypes(event);
+        scheduleItemDTO.eventType = event.eventType.name
+        scheduleItemDTO.track = getTrack(event)
+        scheduleItemDTO.trackGroupColor = getTrackGroupColor(event)
+        return scheduleItemDTO
     }
     
     public func getSummitTypes(event: SummitEvent) -> String {

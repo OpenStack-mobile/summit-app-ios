@@ -17,7 +17,7 @@ public protocol IPushNotificationsManager {
 
 public class PushNotificationsManager: NSObject, IPushNotificationsManager {
     var securityManager: SecurityManager!
-    var summitDataStore: ISummitDataStore!
+    var summitDataStore = SummitDataStore()
     
     public func subscribeToPushChannelsUsingContext(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
         var channels = [String]()

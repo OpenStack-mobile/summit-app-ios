@@ -15,7 +15,7 @@ public protocol SpeakerPresentationsPresenterProtocol: SchedulePresenterProtocol
 
 public class SpeakerPresentationsPresenter: SchedulePresenter, SpeakerPresentationsPresenterProtocol {
     
-    weak var viewController : IScheduleViewController! {
+    weak var viewController : ScheduleViewController! {
         get {
             return internalViewController
         }
@@ -24,7 +24,7 @@ public class SpeakerPresentationsPresenter: SchedulePresenter, SpeakerPresentati
         }
     }
     
-    var interactor : ISpeakerPresentationsInteractor! {
+    var interactor : SpeakerPresentationsInteractor! {
         get {
             return internalInteractor as! ISpeakerPresentationsInteractor
         }
@@ -45,12 +45,12 @@ public class SpeakerPresentationsPresenter: SchedulePresenter, SpeakerPresentati
     public var speakerId = 0
     
     override func getScheduleAvailableDatesFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [NSDate] {
-        let availableDates = (interactor as! ISpeakerPresentationsInteractor).getSpeakerPresentationsDates(speakerId, startDate: startDate, endDate: endDate)
+        let availableDates = (interactor as! SpeakerPresentationsInteractor).getSpeakerPresentationsDates(speakerId, startDate: startDate, endDate: endDate)
         return availableDates
     }
     
     override func getScheduledEventsFrom(startDate: NSDate, to endDate: NSDate, withInteractor interactor: ScheduleInteractorProtocol) -> [ScheduleItem] {
-        let events = (interactor as! ISpeakerPresentationsInteractor).getSpeakerPresentations(speakerId, startDate: startDate, endDate: endDate)
+        let events = (interactor as! SpeakerPresentationsInteractor).getSpeakerPresentations(speakerId, startDate: startDate, endDate: endDate)
         return events
     }
 }

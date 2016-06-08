@@ -8,56 +8,54 @@
 
 import UIKit
 import RealmSwift
+import CoreSummit
 
-@objc
-public protocol IGeneralScheduleFilterInteractor {
-    func getSummitTypes() -> [NamedDTO]
-    func getEventTypes() -> [NamedDTO]
-    func getTracks() -> [NamedDTO]
-    func getTrackGroups() -> [NamedDTO]
+public protocol GeneralScheduleFilterInteractorProtocol {
+    func getSummitTypes() -> [Named]
+    func getEventTypes() -> [Named]
+    func getTracks() -> [Named]
+    func getTrackGroups() -> [Named]
     func getLevels() -> [String]
     func getTagsBySearchTerm(searchTerm: String) -> [String]
-    func getTrackGroup(id: Int) -> TrackGroup?
+    func getTrackGroup(id: Int) -> RealmTrackGroup?
 }
 
-public class GeneralScheduleFilterInteractor: NSObject {
+public final class GeneralScheduleFilterInteractor: GeneralScheduleFilterInteractorProtocol {
     
-    var summitTypeDataStore: ISummitTypeDataStore!
-    var eventTypeDataStore: IEventTypeDataStore!
-    var trackDataStore: ITrackDataStore!
-    var trackGroupDataStore: ITrackGroupDataStore!
-    var tagDataStore: ITagDataStore!
-    var namedDTOAssembler: NamedDTOAssembler!
-    var eventDataStore: IEventDataStore!
-    var dataUpdatePoller: IDataUpdatePoller!
-
-    public func getSummitTypes() -> [NamedDTO] {
+    var summitTypeDataStore = SummitTypeDataStore()
+    var eventTypeDataStore = EventTypeDataStore()
+    var trackDataStore = TrackDataStore()
+    var trackGroupDataStore = TrackGroupDataStore()
+    var tagDataStore = TagDataStore()
+    var eventDataStore = EventDataStore()
+    
+    public func getSummitTypes() -> [Named] {
         let entities = summitTypeDataStore.getAllLocal().sort({ $0.name < $1.name })
-        return createDTOs(entities)
+        return SummitType.from(realm: entities).map { $0 }
     }
    
-    public func getEventTypes() -> [NamedDTO] {
+    public func getEventTypes() -> [Named] {
         let entities = eventTypeDataStore.getAllLocal().sort({ $0.name < $1.name })
-        return createDTOs(entities)
+        return SummitType.from(realm: entities).map { $0 }
     }
     
-    public func getTracks() -> [NamedDTO] {
+    public func getTracks() -> [Named] {
         let entities = trackDataStore.getAllLocal().sort({ $0.name < $1.name })
-        return createDTOs(entities)
+        return Track.from(realm: entities).map { $0 }
     }
     
-    public func getTrackGroups() -> [NamedDTO] {
+    public func getTrackGroups() -> [Named] {
         let entities = trackGroupDataStore.getAllLocal().sort({ $0.name < $1.name })
-        return createDTOs(entities)
+        return TrackGroup.from(realm: entities).map { $0 }
     }
     
     public func getLevels() -> [String] {
         return eventDataStore.getPresentationLevels()
     }
 
-    public func getTags() -> [NamedDTO] {
+    public func getTags() -> [Named] {
         let entities = tagDataStore.getAllLocal()
-        return createDTOs(entities)
+        return Tag.from(realm: entities).map { $0 }
     }
     
     public func getTagsBySearchTerm(searchTerm: String) -> [String] {
@@ -67,17 +65,7 @@ public class GeneralScheduleFilterInteractor: NSObject {
         ).sort()
     }
     
-    public func createDTOs(entities: [NamedEntity]) -> [NamedDTO]{
-        var dtos: [NamedDTO] = []
-        var dto: NamedDTO
-        for entity in entities {
-            dto = namedDTOAssembler.createDTO(entity)
-            dtos.append(dto)
-        }
-        return dtos
-    }
-    
-    public func getTrackGroup(id: Int) -> TrackGroup? {
+    public func getTrackGroup(id: Int) -> RealmTrackGroup? {
         return trackGroupDataStore.getByIdLocal(id)
     }
 }

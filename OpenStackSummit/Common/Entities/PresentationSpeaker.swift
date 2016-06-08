@@ -11,8 +11,8 @@ import RealmSwift
 
 public class PresentationSpeaker: Person {
     
-    public var presentations: [Presentation] { return []
-        //return linkingObjects(Presentation.self, forProperty: "speakers")
+    public var presentations: [Presentation] {
+        return linkingObjects(Presentation.self, forProperty: "speakers")
     }
     
 }

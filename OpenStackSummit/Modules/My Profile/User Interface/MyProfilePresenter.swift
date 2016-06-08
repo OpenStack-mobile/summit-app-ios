@@ -9,12 +9,11 @@
 import UIKit
 import CoreSummit
 
-@objc
-public protocol IMyProfilePresenter {
+public protocol MyProfilePresenterProtocol {
     func getChildViews() -> [UIViewController]
 }
 
-public class MyProfilePresenter: NSObject, IMyProfilePresenter {
+public class MyProfilePresenter: MyProfilePresenterProtocol {
     var securityManager: SecurityManager!
     var personalScheduleViewController: ScheduleViewController!
     var memberProfileDetailViewController: MemberProfileDetailViewController!
@@ -31,7 +30,7 @@ public class MyProfilePresenter: NSObject, IMyProfilePresenter {
         childViewController.append(memberProfileDetailViewController)
         childViewController.append(feedbackGivenListViewController)
         
-        if securityManager.getCurrentMemberRole() == Member.Role.Speaker {
+        if securityManager.getCurrentMemberRole() == .Speaker {
             childViewController.append(speakerPresentationsViewController)
         }
 

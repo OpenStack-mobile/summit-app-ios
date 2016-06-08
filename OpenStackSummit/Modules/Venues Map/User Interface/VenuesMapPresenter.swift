@@ -8,17 +8,18 @@
 
 import UIKit
 
-@objc
-public protocol IVenuesMapPresenter {
+public protocol VenuesMapPresenterProtocol {
+    
     func viewLoad()
     func showVenueDetail(venueId: Int)
 }
 
-public class VenuesMapPresenter: NSObject {
-    var interactor: IVenuesMapInteractor!
-    var wireframe: IVenueListWireframe!
-    var viewController: IVenuesMapViewController!
-    var venueList: [VenueListItemDTO]!
+public final class VenuesMapPresenter: VenuesMapPresenterProtocol {
+    
+    var interactor = VenuesMapInteractor()
+    var wireframe = VenueListWireframe()
+    var viewController: VenuesMapViewController!
+    var venueList = [VenueListItem]()
     
     public func viewLoad() {
         venueList = interactor.getInternalVenuesWithCoordinates()

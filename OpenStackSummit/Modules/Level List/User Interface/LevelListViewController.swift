@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 @objc
-public protocol ILevelListViewController: IMessageEnabledViewController {
+public protocol ILevelListViewController: MessageEnabledViewController {
     var searchTerm: String! { get set }
     var navigationController: UINavigationController? { get }
     

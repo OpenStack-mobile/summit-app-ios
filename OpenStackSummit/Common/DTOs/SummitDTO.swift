@@ -1,5 +1,5 @@
 //
-//  CoreSummit.Summit.swift
+//  SummitDTO.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 9/9/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CoreSummit.Summit: NamedDTO {
+public class SummitDTO: NamedDTO {
     public var startDate = NSDate(timeIntervalSince1970: 1)
     public var endDate = NSDate(timeIntervalSince1970: 1)
     public var timeZone = ""

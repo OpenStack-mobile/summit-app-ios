@@ -7,23 +7,26 @@
 //
 
 import UIKit
+import CoreSummit
 
-@objc
-public protocol ITrackScheduleWireframe: IScheduleWireframe {
-    func presentTrackScheduleView(track: TrackDTO, toNavigationController navigationController: UINavigationController)
+public protocol TrackScheduleWireframeProtocol: ScheduleWireframe {
+    func presentTrackScheduleView(track: Track, toNavigationController navigationController: UINavigationController)
 }
 
-public class TrackScheduleWireframe: ScheduleWireframe, ITrackScheduleWireframe {
+public class TrackScheduleWireframe: ScheduleWireframe, TrackScheduleWireframeProtocol {
+    
     var trackScheduleViewController: TrackScheduleViewController!
     
-    public func presentTrackScheduleView(track: TrackDTO, toNavigationController navigationController: UINavigationController) {
+    public func presentTrackScheduleView(track: Track, toNavigationController navigationController: UINavigationController) {
+        
         let newViewController = trackScheduleViewController!
         let _ = trackScheduleViewController.view! // this is only to force viewLoad to trigger
         trackScheduleViewController.presenter.viewLoad(track)
         navigationController.pushViewController(newViewController, animated: true)
     }
     
-    public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, fromViewController: trackScheduleViewController)
+    public func showEventDetail(eventId: Int) {
+        
+        showEventDetail(eventId, fromViewController: trackScheduleViewController)
     }    
 }

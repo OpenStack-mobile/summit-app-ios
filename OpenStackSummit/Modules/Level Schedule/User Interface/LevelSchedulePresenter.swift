@@ -8,15 +8,14 @@
 
 import UIKit
 
-@objc
-public protocol ILevelSchedulePresenter: SchedulePresenterProtocol{
+public protocol LevelSchedulePresenterProtocol: SchedulePresenterProtocol{
     func viewLoad(level: String)
 }
 
-public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter {
+public class LevelSchedulePresenter: SchedulePresenter, LevelSchedulePresenterProtocol {
     var level = ""
     
-    weak var viewController : IScheduleViewController! {
+    weak var viewController : ScheduleViewController! {
         get {
             return internalViewController
         }
@@ -25,7 +24,7 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
         }
     }
     
-    var interactor : ScheduleInteractorProtocol! {
+    var interactor : ScheduleInteractor! {
         get {
             return internalInteractor
         }
@@ -34,7 +33,7 @@ public class LevelSchedulePresenter: SchedulePresenter, ILevelSchedulePresenter 
         }
     }
     
-    var wireframe : IScheduleWireframe! {
+    var wireframe : ScheduleWireframe! {
         get {
             return internalWireframe
         }

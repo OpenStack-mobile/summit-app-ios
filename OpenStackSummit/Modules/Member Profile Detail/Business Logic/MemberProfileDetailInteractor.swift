@@ -10,31 +10,35 @@ import UIKit
 import CoreSummit
 
 public protocol MemberProfileDetailInteractorProtocol {
-    func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void)
-    func getAttendeeProfile(speakerId: Int, completionBlock : (SummitAttendee?, NSError?) -> Void)
+    func getSpeakerProfile(speakerId: Int, completionBlock : ErrorValue<PresentationSpeaker> -> ())
+    func getAttendeeProfile(speakerId: Int, completionBlock : ErrorValue<SummitAttendee> -> ())
     func isLoggedIn() -> Bool
     func getCurrentMember() -> Member?
 }
 
 public class MemberProfileDetailInteractor: MemberProfileDetailInteractorProtocol {
     
-    var presentationSpeakerDataStore: IPresentationSpeakerDataStore!
-    var summitAttendeeRemoteDataStore: ISummitAttendeeRemoteDataStore!
+    var presentationSpeakerDataStore = PresentationSpeakerDataStore()
+    var summitAttendeeRemoteDataStore = SummitAttendeeRemoteDataStore()
     var securityManager: SecurityManager!
     
-    public func getSpeakerProfile(speakerId: Int, completionBlock : (PresentationSpeaker?, NSError?) -> Void) {
-        var error: NSError?
-        var speakerDTO: PresentationSpeaker? = nil
+    public func getSpeakerProfile(speakerId: Int, completionBlock : ErrorValue<PresentationSpeaker> -> ()) {
+        
         if let speaker = presentationSpeakerDataStore.getByIdLocal(speakerId) {
-            speakerDTO = self.presentationSpeakerDTOAssembler.createDTO(speaker)
+            
+            let speakerDTO = PresentationSpeaker(realmEntity: speaker)
+            
+            completionBlock(.Value(speakerDTO))
         }
         else {
-            error = NSError(domain: "There was an error getting speaker data", code: 9001, userInfo: nil)
+            
+            let error = NSError(domain: "There was an error getting speaker data", code: 9001, userInfo: nil)
+            
+            completionBlock(.Error(error))
         }
-        completionBlock(speakerDTO, error)
     }
     
-    public func getAttendeeProfile(attendeeId: Int, completionBlock : (SummitAttendee?, NSError?) -> Void) {
+    public func getAttendeeProfile(speakerId: Int, completionBlock : ErrorValue<SummitAttendee> -> ()) {
         summitAttendeeRemoteDataStore.getById(attendeeId) { attendee, error in
             
             if (error != nil) {

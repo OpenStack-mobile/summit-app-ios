@@ -7,22 +7,22 @@
 //
 
 import UIKit
+import CoreSummit
 
-@objc
-public protocol ITrackListPresenter {
+public protocol ITrackListPresenterProtocol {
     func viewLoad()
     func showTrackEvents(index: Int)
-    func buildScheduleCell(cell: ITrackTableViewCell, index: Int)
+    func buildScheduleCell(cell: TrackTableViewCell, index: Int)
     func getTrackCount() -> Int
 }
 
-public class TrackListPresenter: NSObject, ITrackListPresenter {
-    var viewController: ITrackListViewController!
+public class TrackListPresenter: ITrackListPresenterProtocol {
+    var viewController: TrackListViewController!
     var interactor: ITrackListInteractor!
-    var wireframe: ITrackListWireframe!
+    var wireframe: TrackListWireframe!
     
     var scheduleFilter: ScheduleFilter!
-    var tracks = [TrackDTO]()
+    var tracks = [Track]()
     
     public func viewLoad() {
         let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
@@ -30,7 +30,7 @@ public class TrackListPresenter: NSObject, ITrackListPresenter {
         viewController.reloadData()
     }
     
-    public func buildScheduleCell(cell: ITrackTableViewCell, index: Int) {
+    public func buildScheduleCell(cell: TrackTableViewCell, index: Int) {
         let track = tracks[index]
         cell.name = track.name
     }

@@ -10,7 +10,7 @@ import UIKit
 
 public class PersonalSchedulePresenter: SchedulePresenter {
     
-    weak var viewController : ScheduleViewControllerProtocol! {
+    weak var viewController : ScheduleViewController? {
         get {
             return internalViewController
         }
@@ -19,9 +19,9 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         }
     }
     
-    var interactor : PersonalScheduleInteractorProtocol! {
+    var interactor : PersonalScheduleInteractor {
         get {
-            return internalInteractor as! PersonalScheduleInteractorProtocol
+            return internalInteractor as! PersonalScheduleInteractor
         }
         set {
             internalInteractor = newValue
@@ -51,7 +51,7 @@ public class PersonalSchedulePresenter: SchedulePresenter {
         let event = dayEvents[index]
         toggleScheduledStatusForEvent(event, scheduleableView: cell, interactor: internalInteractor) { error in
             if (error != nil) {
-                self.viewController.showErrorMessage(error!)
+                self.viewController?.showErrorMessage(error!)
             }
             self.reloadSchedule()
         }

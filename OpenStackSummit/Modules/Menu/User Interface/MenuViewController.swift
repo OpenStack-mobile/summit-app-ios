@@ -12,7 +12,7 @@ import SWRevealViewController
 import AeroGearOAuth2
 
 @objc
-public protocol IMenuViewController: IMessageEnabledViewController {
+public protocol IMenuViewController: MessageEnabledViewController {
     var name: String! { get set }
     var picUrl: String! { get set }
 
