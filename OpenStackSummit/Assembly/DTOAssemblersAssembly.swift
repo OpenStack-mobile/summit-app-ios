@@ -36,7 +36,7 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("speakerDTOAssembler", with: self.speakerDTOAssembler())
-            definition.injectProperty("ScheduleItemAssembler", with: self.ScheduleItemAssembler())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.scheduleItemDTOAssembler())
         }
     }
     
@@ -48,15 +48,15 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
         }
     }
     
-    dynamic func ScheduleItemAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(ScheduleItemAssembler.self)
+    dynamic func scheduleItemDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(ScheduleItemDTOAssembler.self)
     }
     
     dynamic func memberProfileDTOAssembler() -> AnyObject {
         return TyphoonDefinition.withClass(MemberProfileDTOAssembler.self){
             (definition) in
             
-            definition.injectProperty("ScheduleItemAssembler", with: self.ScheduleItemAssembler())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.scheduleItemDTOAssembler())
         }
     }
     
@@ -64,8 +64,8 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(NamedDTOAssembler.self)
     }
     
-    dynamic func CoreSummit.SummitAssembler() -> AnyObject {
-        return TyphoonDefinition.withClass(CoreSummit.SummitAssembler.self)
+    dynamic func summitDTOAssembler() -> AnyObject {
+        return TyphoonDefinition.withClass(SummitDTOAssembler.self)
     }
 
     dynamic func venueListItemDTOAssembler() -> AnyObject {
@@ -76,7 +76,7 @@ public class DTOAssemblersAssembly: TyphoonAssembly {
         return TyphoonDefinition.withClass(VenueRoomDTOAssembler.self) {
             (definition) in
             
-            definition.injectProperty("ScheduleItemAssembler", with: self.ScheduleItemAssembler())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.scheduleItemDTOAssembler())
         }
     }
     

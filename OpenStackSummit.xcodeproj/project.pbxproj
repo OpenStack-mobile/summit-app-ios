@@ -150,6 +150,7 @@
 		6E841A0F1D087E7C00C7BF01 /* VenueListItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E98DB1B99DAD400CEBD2F /* VenueListItemDTO.swift */; };
 		6E841A101D087E7C00C7BF01 /* VenueRoomDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0029FE1B9E2F95001A9EDA /* VenueRoomDTO.swift */; };
 		6E841A111D087E7C00C7BF01 /* VenueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA894AA91BD92EFE005DE469 /* VenueDTO.swift */; };
+		6E841A131D087FB500C7BF01 /* OldSummitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADDDB9D1B73D1BB008F742E /* OldSummitEvent.swift */; };
 		6EAD3E151D025C4D00974938 /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD3E141D025C4D00974938 /* RealmTests.swift */; };
 		6EAD3E171D02744000974938 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAD3E161D02744000974938 /* TestUtilities.swift */; };
 		6EE09B221D0770CD00A9EAA8 /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE09B211D0770CD00A9EAA8 /* MemberJSON.swift */; };
@@ -787,7 +788,7 @@
 		CADDDB971B73D1BB008F742E /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		CADDDB991B73D1BB008F742E /* PresentationSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationSpeaker.swift; sourceTree = "<group>"; };
 		CADDDB9B1B73D1BB008F742E /* Summit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Summit.swift; sourceTree = "<group>"; };
-		CADDDB9D1B73D1BB008F742E /* SummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEvent.swift; sourceTree = "<group>"; };
+		CADDDB9D1B73D1BB008F742E /* OldSummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSummitEvent.swift; sourceTree = "<group>"; };
 		CADDDB9F1B73D1BB008F742E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CADDDBB51B73D1CA008F742E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		CADDDBB71B73D910008F742E /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneralScheduleViewController.swift; path = "OpenStackSummit/Modules/General Schedule/User Interface/GeneralScheduleViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -1984,7 +1985,7 @@
 				CADDDB991B73D1BB008F742E /* PresentationSpeaker.swift */,
 				CADDDB9B1B73D1BB008F742E /* Summit.swift */,
 				CA9E42441B7B9667005FDD22 /* SummitAttendee.swift */,
-				CADDDB9D1B73D1BB008F742E /* SummitEvent.swift */,
+				CADDDB9D1B73D1BB008F742E /* OldSummitEvent.swift */,
 				CA9E42481B7B9667005FDD22 /* SummitType.swift */,
 				CA9E424A1B7B9667005FDD22 /* Tag.swift */,
 				CADEE6EA1BACA017005152E1 /* TicketType.swift */,
@@ -2875,6 +2876,7 @@
 				CADDDBC41B74F1AB008F742E /* GeneralScheduleInteractor.swift in Sources */,
 				6E8419C51D087E6D00C7BF01 /* EventsAssembly.swift in Sources */,
 				CADF03241BCEEE7500358DCD /* SchedulePresenter.swift in Sources */,
+				6E841A131D087FB500C7BF01 /* OldSummitEvent.swift in Sources */,
 				6E8419DC1D087E6D00C7BF01 /* VenueRoomDetailAssembly.swift in Sources */,
 				CA1CBA901BB6415300E65D2B /* DataUpdateStrategy.swift in Sources */,
 				CADE71281BD54B4B00EAC8EF /* PersonalScheduleWireframe.swift in Sources */,

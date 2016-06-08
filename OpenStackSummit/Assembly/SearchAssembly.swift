@@ -47,7 +47,7 @@ class SearchAssembly: TyphoonAssembly {
             (definition) in
             
             definition.injectProperty("eventDataStore", with: self.dataStoreAssembly.eventDataStore())
-            definition.injectProperty("ScheduleItemAssembler", with: self.dtoAssemblersAssembly.ScheduleItemAssembler())
+            definition.injectProperty("scheduleItemDTOAssembler", with: self.dtoAssemblersAssembly.scheduleItemDTOAssembler())
             definition.injectProperty("trackDataStore", with: self.dataStoreAssembly.trackDataStore())
             definition.injectProperty("trackDTOAssembler", with: self.dtoAssemblersAssembly.namedDTOAssembler())
             definition.injectProperty("presentationSpeakerDataStore", with: self.dataStoreAssembly.presentationSpeakerDataStore())
