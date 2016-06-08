@@ -8,13 +8,10 @@
 
 import UIKit
 
-@objc
-public protocol ITrackTableViewCell : class {
-    var name: String! { get set }
-}
 
-class TrackTableViewCell: UITableViewCell, ITrackTableViewCell {
-    var name: String!{
+public class TrackTableViewCell: UITableViewCell {
+    
+    public var name: String! {
         get {
             return nameLabel.text
         }
@@ -23,14 +20,14 @@ class TrackTableViewCell: UITableViewCell, ITrackTableViewCell {
         }
     }
     
-    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet public weak var nameLabel : UILabel!
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override public func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

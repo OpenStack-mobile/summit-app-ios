@@ -6,11 +6,11 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import CoreSummit
 
-@objc
-public protocol IEventDataStore {
+public protocol EventDataStoreProtocol {
+    
     func getByIdLocal(id: Int) -> SummitEvent?
     func getByFilterLocal(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels:[String]?)->[SummitEvent]
     func getAverageRating(eventId: Int, completionBlock : (SummitEvent?, NSError?) -> Void)
@@ -20,7 +20,7 @@ public protocol IEventDataStore {
     func getSpeakerPresentationsLocal(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [SummitEvent]
 }
 
-public class EventDataStore: GenericDataStore, IEventDataStore {
+public class EventDataStore: GenericDataStore, EventDataStoreProtocol {
     var eventRemoteDataStore: IEventRemoteDataStore!
     let sortProperties = [SortDescriptor(property: "start", ascending: true), SortDescriptor(property: "end", ascending: true), SortDescriptor(property: "name", ascending: true)]
     
@@ -73,8 +73,9 @@ public class EventDataStore: GenericDataStore, IEventDataStore {
         return events.map { $0 }
     }
     
-    public func getBySearchTerm(searchTerm: String!)->[SummitEvent] {
-        let events = realm.objects(SummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.fullName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(self.sortProperties)
+    public func getBySearchTerm(searchTerm: String) -> [SummitEvent] {
+        
+        let events = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.fullName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(self.sortProperties)
         return events.map { $0 }
     }
     

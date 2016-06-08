@@ -6,21 +6,22 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol ITagDataStore {
-    func getAllLocal() -> [Tag]
-    func getTagsBySearchTerm(searchTerm: String) -> [Tag]
+public protocol TagDataStoreProtocol {
+    
+    func getAllLocal() -> [RealmTag]
+    func getTagsBySearchTerm(searchTerm: String) -> [RealmTag]
 }
 
-public class TagDataStore: GenericDataStore, ITagDataStore {
-    public func getAllLocal() -> [Tag] {
+public class TagDataStore: GenericDataStore, TagDataStoreProtocol {
+    
+    public func getAllLocal() -> [RealmTag] {
         return super.getAllLocal()
     }
     
-    public func getTagsBySearchTerm(searchTerm: String) -> [Tag] {
-        let tags = realm.objects(Tag).filter("name CONTAINS [c]%@", searchTerm).sorted("name")
+    public func getTagsBySearchTerm(searchTerm: String) -> [RealmTag] {
+        let tags = realm.objects(RealmTag).filter("name CONTAINS [c]%@", searchTerm).sorted("name")
         return tags.map { $0 }
     }
 }

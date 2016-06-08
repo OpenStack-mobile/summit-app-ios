@@ -14,7 +14,7 @@ public protocol ILevelListInteractor {
 }
 
 public class LevelListInteractor: NSObject, ILevelListInteractor {
-    var eventDataStore: IEventDataStore!
+    var eventDataStore: EventDataStore!
     
     public func getLevels() -> [String] {
         return eventDataStore.getPresentationLevels()
