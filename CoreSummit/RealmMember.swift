@@ -38,10 +38,21 @@ extension Member: RealmDecodable {
         
         if let speaker = realmEntity.speakerRole {
             
-            self.speaker 
+            self.speakerRole = PresentationSpeaker(realmEntity: speaker)
+            
+        } else {
+            
+            self.speakerRole = nil
         }
         
-        
+        if let attendee = realmEntity.attendeeRole {
+            
+            self.attendeeRole = SummitAttendee(realmEntity: attendee)
+            
+        } else {
+            
+            self.attendeeRole = nil
+        }
     }
 }
 

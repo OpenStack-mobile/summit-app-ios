@@ -25,7 +25,7 @@ public final class ScheduleInteractor: ScheduleableInteractor, ScheduleInteracto
     
     // MARK: - Properties
     
-    public let summitDataStore: SummitDataStore
+    public let summitDataStore: SummitDataStore = SummitDataStore()
     
     let dataUpdatePoller = DataUpdatePoller()
     let pushNotificationsManager = PushNotificationsManager()

@@ -26,7 +26,7 @@ public struct Member: Person {
     
     public var biography: String
     
-    public var friends: [Identifier]
+    //public var friends: [Identifier] // not in JSON
     
     public var speakerRole: PresentationSpeaker?
     

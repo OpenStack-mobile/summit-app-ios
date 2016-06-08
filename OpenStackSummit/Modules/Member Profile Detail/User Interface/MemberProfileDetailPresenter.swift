@@ -19,7 +19,7 @@ public protocol MemberProfileDetailPresenterProtocol {
 public class MemberProfileDetailPresenter: MemberProfileDetailPresenterProtocol {
     
     var interactor: MemberProfileDetailInteractor!
-    var viewController: IMemberProfileDetailViewController!
+    var viewController: MemberProfileDetailViewController!
     
     var internalSpeakerId = 0
     var internalAttendeeId = 0

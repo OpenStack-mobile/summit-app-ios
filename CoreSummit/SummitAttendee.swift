@@ -32,11 +32,11 @@ public struct SummitAttendee: Person {
     
     public var scheduledEvents: [SummitEvent]
     
-    public var bookmarkedEvents: [SummitEvent]
-    
-    public var friends: [Member]
-    
     public var feedback: [Feedback]
+    
+    //public var bookmarkedEvents: [SummitEvent]
+    
+    //public var friends: [Member]
 }
 
 // MARK: - Extensions
