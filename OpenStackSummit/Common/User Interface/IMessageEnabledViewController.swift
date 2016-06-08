@@ -1,5 +1,5 @@
 //
-//  IMessageEnabledViewController.swift
+//  MessageEnabledViewController.swift
 //  OpenStackSummit
 //
 //  Created by Claudio on 11/25/15.

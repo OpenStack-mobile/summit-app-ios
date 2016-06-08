@@ -13,12 +13,12 @@ import SwiftyJSON
     case NoOp = -1, Insert, Update, Delete, Truncate
 }
 
-public class DataUpdate: RealmEntity {
+public class DataUpdate: BaseEntity {
     public dynamic var operation: DataOperation = .NoOp
     public dynamic var date = NSDate(timeIntervalSince1970: 1)
     public dynamic var entityClassName = ""
     public var originalJSON: JSON!
-    public dynamic var entity: RealmEntity!
+    public dynamic var entity: BaseEntity!
     
     public override static func ignoredProperties() -> [String] {
         return ["entity", "originalJSON"]

@@ -18,6 +18,6 @@ public class MemberProfileDTO: NamedDTO {
     public var location = ""
     public var isAttendee = false
     public var isSpeaker = false
-    public var scheduledEvents = [ScheduleItem]()
-    public var presentations = [ScheduleItem]()
+    public var scheduledEvents = [ScheduleItemDTO]()
+    public var presentations = [ScheduleItemDTO]()
 }

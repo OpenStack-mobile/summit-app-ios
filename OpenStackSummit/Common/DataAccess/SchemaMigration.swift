@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import CoreSummit
 
 protocol ISchemaMigration {
     func getSchemaVersion() -> UInt64
@@ -24,12 +25,12 @@ public class SchemaMigration: NSObject, ISchemaMigration {
     func getMigrationBlock() -> MigrationBlock {
         return { migration, oldSchemaVersion in
             if (oldSchemaVersion < 1) {
-                migration.enumerate(Summit.className()) { oldObject, newObject in
-                    newObject!["trackGroups"] = List<TrackGroup>()
+                migration.enumerate(RealmSummit.className()) { oldObject, newObject in
+                    newObject!["trackGroups"] = List<RealmTrackGroup>()
                 }
             }
             if (oldSchemaVersion < 2) {
-                migration.enumerate(SummitAttendee.className()) { oldObject, newObject in
+                migration.enumerate(RealmSummitAttendee.className()) { oldObject, newObject in
                     let tickets = List<TicketType>()
                     if let ticketType = oldObject!["ticketType"] as? TicketType {
                         tickets.append(ticketType)
@@ -39,7 +40,7 @@ public class SchemaMigration: NSObject, ISchemaMigration {
                 }
             }
             if (oldSchemaVersion < 3) {
-                migration.enumerate(TrackGroup.className()) { oldObject, newObject in
+                migration.enumerate(RealmTrackGroup.className()) { oldObject, newObject in
                     if let tracks = newObject!["tracks"] as? List<DynamicObject> {
                         for track in tracks {
                             track["trackGroup"] = newObject
@@ -48,22 +49,22 @@ public class SchemaMigration: NSObject, ISchemaMigration {
                 }
             }
             if (oldSchemaVersion < 4) {
-                migration.enumerate(DataUpdate.className()) { oldObject, newObject in
+                migration.enumerate(RealmDataUpdate.className()) { oldObject, newObject in
                     newObject!["operation"] = DataOperation.NoOp.rawValue
                 }
             }
             if (oldSchemaVersion < 5) {
-                migration.enumerate(Summit.className()) { oldObject, newObject in
+                migration.enumerate(RealmSummit.className()) { oldObject, newObject in
                     newObject!["startShowingVenuesDate"] = NSDate(timeIntervalSince1970: 1)
                 }
             }
             if (oldSchemaVersion < 6) {
-                migration.enumerate(Venue.className()) { oldObject, newObject in
+                migration.enumerate(RealmVenue.className()) { oldObject, newObject in
                     newObject!["images"] = List<Image>()
                 }
             }
             if (oldSchemaVersion < 7) {
-                migration.enumerate(VenueRoom.className()) { oldVenueRoom, newVenueRoom in
+                migration.enumerate(RealmVenueRoom.className()) { oldVenueRoom, newVenueRoom in
                     migration.enumerate(Venue.className()) { oldVenue, newVenue in
                         let venueRooms = oldVenue!["venueRooms"] as? List<DynamicObject>
                         if venueRooms != nil {
@@ -78,17 +79,17 @@ public class SchemaMigration: NSObject, ISchemaMigration {
                 }
             }
             if (oldSchemaVersion < 8) {
-                migration.enumerate(Summit.className()) { oldObject, newObject in
-                    newObject!["venuesRooms"] = List<VenueRoom>()
+                migration.enumerate(RealmSummit.className()) { oldObject, newObject in
+                    newObject!["venuesRooms"] = List<RealmVenueRoom>()
                 }
             }
             if (oldSchemaVersion < 9) {
-                migration.enumerate(SummitEvent.className()) { oldObject, newObject in
+                migration.enumerate(RealmSummitEvent.className()) { oldObject, newObject in
                     newObject!["averageFeedback"] = 0.0
                 }
             }
             if (oldSchemaVersion < 10) {
-                migration.enumerate(TrackGroup.className()) { oldTrackGroup, newTrackGroup in
+                migration.enumerate(RealmTrackGroup.className()) { oldTrackGroup, newTrackGroup in
                     migration.enumerate(Track.className()) { oldTrack, newTrack in
                         if let trackGroup = oldTrack!["trackGroup"] as? DynamicObject {
                             if trackGroup["id"] as! Int == oldTrackGroup!["id"] as! Int {

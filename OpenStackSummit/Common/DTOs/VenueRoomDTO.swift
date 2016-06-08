@@ -10,6 +10,6 @@ import UIKit
 
 public class VenueRoomDTO: NamedDTO {
     public var capacity = 0
-    public var events = [ScheduleItem]()
+    public var events = [ScheduleItemDTO]()
     
 }

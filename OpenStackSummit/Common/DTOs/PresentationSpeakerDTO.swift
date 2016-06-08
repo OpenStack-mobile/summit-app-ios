@@ -9,5 +9,5 @@
 import UIKit
 
 public class PresentationSpeakerDTO: PersonDTO {
-    public var presentations: [ScheduleItem]?
+    public var presentations: [ScheduleItemDTO]?
 }

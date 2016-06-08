@@ -8,12 +8,11 @@
 
 import UIKit
 
-@objc
-public protocol ILevelScheduleWireframe: IScheduleWireframe {
+public protocol LevelScheduleWireframeProtocol: ScheduleWireframe {
     func presentLevelScheduleView(level: String, viewController: UINavigationController)
 }
 
-public class LevelScheduleWireframe: ScheduleWireframe, ILevelScheduleWireframe {
+public class LevelScheduleWireframe: ScheduleWireframe, LevelScheduleWireframeProtocol {
     var levelScheduleViewController: LevelScheduleViewController!
     
     public func presentLevelScheduleView(level: String, viewController: UINavigationController) {
@@ -23,7 +22,8 @@ public class LevelScheduleWireframe: ScheduleWireframe, ILevelScheduleWireframe 
         viewController.pushViewController(newViewController, animated: true)
     }
     
-    public override func showEventDetail(eventId: Int) {
-        super.showEventDetail(eventId, fromViewController: levelScheduleViewController)
+    public func showEventDetail(eventId: Int) {
+        
+        showEventDetail(eventId, fromViewController: levelScheduleViewController)
     }
 }

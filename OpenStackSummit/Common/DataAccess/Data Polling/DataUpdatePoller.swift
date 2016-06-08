@@ -11,22 +11,22 @@ import AeroGearHttp
 import AeroGearOAuth2
 import Crashlytics
 
-@objc
-public protocol IDataUpdatePoller {
+public protocol DataUpdatePollerProtocol {
     func startPollingIfNotPollingAlready()
     func clearDataIfTruncateEventExist()
 }
 
-public class DataUpdatePoller: NSObject, IDataUpdatePoller {
+public class DataUpdatePoller: NSObject, DataUpdatePollerProtocol {
+    
     public var pollingInterval: Double = 30
     var timer: NSTimer?
     var httpFactory: HttpFactory!
     var genericDataStore: GenericDataStore!
     var dataUpdateProcessor: DataUpdateProcessor!
     var dataUpdateDataStore: IDataUpdateDataStore!
-    var summitDataStore: ISummitDataStore!
-    var reachability: IReachability!
-    var securityManager: SecurityManager!
+    var summitDataStore = SummitDataStore()
+    var reachability = Reachability()
+    var securityManager = SecurityManager!
     
     var fromDate: Int {
         get {
@@ -41,7 +41,7 @@ public class DataUpdatePoller: NSObject, IDataUpdatePoller {
         super.init()
     }
     
-    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore, summitDataStore: ISummitDataStore, reachability: IReachability, securityManager: SecurityManager) {
+    public init(httpFactory: HttpFactory, dataUpdateProcessor: DataUpdateProcessor, dataUpdateDataStore: IDataUpdateDataStore, summitDataStore: SummitDataStore, reachability: Reachability, securityManager: SecurityManager) {
         self.httpFactory = httpFactory
         self.dataUpdateProcessor = dataUpdateProcessor
         self.dataUpdateDataStore = dataUpdateDataStore

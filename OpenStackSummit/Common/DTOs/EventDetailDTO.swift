@@ -8,22 +8,22 @@
 
 import UIKit
 
-public class EventDetailDTO: ScheduleItem {
+public class EventDetailDTO: ScheduleItemDTO {
     
     public required init() {
         super.init()
     }
     
-    public init(ScheduleItem: ScheduleItem) {
+    public init(scheduleItemDTO: ScheduleItemDTO) {
         super.init()
-        id = ScheduleItem.id
-        name = ScheduleItem.name
-        location = ScheduleItem.location
-        time = ScheduleItem.time
-        dateTime = ScheduleItem.dateTime
-        sponsors = ScheduleItem.sponsors
-        eventType = ScheduleItem.eventType
-        summitTypes = ScheduleItem.summitTypes
+        id = scheduleItemDTO.id
+        name = scheduleItemDTO.name
+        location = scheduleItemDTO.location
+        time = scheduleItemDTO.time
+        dateTime = scheduleItemDTO.dateTime
+        sponsors = scheduleItemDTO.sponsors
+        eventType = scheduleItemDTO.eventType
+        summitTypes = scheduleItemDTO.summitTypes
     }
     
     public var venueId: Int?

@@ -27,7 +27,7 @@ public final class TrackSchedulePresenter: SchedulePresenter, TrackSchedulePrese
         }
     }
     
-    var interactor : ScheduleInteractorProtocol! {
+    var interactor : ScheduleInteractor! {
         get {
             return internalInteractor
         }

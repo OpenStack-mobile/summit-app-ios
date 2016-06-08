@@ -11,7 +11,7 @@ import SwiftSpinner
 import Cosmos
 
 @objc
-public protocol IFeedbackEditViewController: IMessageEnabledViewController {
+public protocol IFeedbackEditViewController: MessageEnabledViewController {
     
     var rate: Int { get set }
     var review: String! { get set }

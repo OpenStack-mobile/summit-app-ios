@@ -13,12 +13,11 @@ public enum VenueListSectionType: Int {
     case Internal, External
 }
 
-@objc
-public protocol IVenueListViewController: IMessageEnabledViewController {
+public protocol VenueListViewControllerProtocol: MessageEnabledViewController {
     func reloadList()
 }
 
-class VenueListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IVenueListViewController, IndicatorInfoProvider {
+class VenueListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, VenueListViewControllerProtocol, IndicatorInfoProvider {
     
     @IBOutlet weak var tableView: UITableView!
     

@@ -10,8 +10,7 @@ import XLPagerTabStrip
 import KTCenterFlowLayout
 import SwiftSpinner
 
-@objc
-protocol IEventsViewController: IMessageEnabledViewController {
+protocol IEventsViewController: MessageEnabledViewController {
     var activeFilterIndicator: Bool { get set }
     
     func showActivityIndicator()

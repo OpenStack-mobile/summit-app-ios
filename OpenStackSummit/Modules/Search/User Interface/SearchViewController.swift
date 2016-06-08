@@ -9,7 +9,7 @@
 import UIKit
 
 @objc
-protocol ISearchViewController : IMessageEnabledViewController {
+protocol ISearchViewController : MessageEnabledViewController {
     var navigationController: UINavigationController? { get }
     var presenter: ISearchPresenter! { get set }
     var searchTerm: String! { get set }

@@ -51,7 +51,7 @@ public final class SecurityManager {
     private func checkState() {
         if let currentMemberId = session.get(kCurrentMemberId) as? Int {
             if (currentMemberId == kLoggedInNotConfirmedAttendee && member == nil) {
-                member = Member()
+                member = RealmMember()
                 member.id = currentMemberId
                 if let fullName = session.get(kCurrentMemberFullName) as? String {
                     member.fullName = fullName;
@@ -247,19 +247,19 @@ public final class SecurityManager {
         }
     }
     
-    public func getCurrentMemberRole() -> Member.Role {
+    public func getCurrentMemberRole() -> CoreSummit.Member.Role {
         
-        var role = Member.Role.Anonymous
+        var role = CoreSummit.Member.Role.Anonymous
         let currentMember = getCurrentMember()
         if (currentMember != nil) {
             if (currentMember?.speakerRole != nil) {
-                role = Member.Role.Speaker
+                role = .Speaker
             }
             else if (currentMember?.attendeeRole != nil) {
-                role = Member.Role.Attendee
+                role = .Attendee
             }
             else {
-                role = Member.Role.Member
+                role = .Member
             }
         }
         return role

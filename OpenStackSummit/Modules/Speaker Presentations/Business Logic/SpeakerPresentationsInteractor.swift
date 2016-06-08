@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import CoreSummit
 
-@objc
-public protocol ISpeakerPresentationsInteractor: ScheduleInteractorProtocol {
+public protocol SpeakerPresentationsInteractorProtocol: ScheduleInteractorProtocol {
     func getSpeakerPresentationsDates(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [NSDate]
     func getSpeakerPresentations(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [ScheduleItem]
 }
 
-public class SpeakerPresentationsInteractor: ScheduleInteractor, ISpeakerPresentationsInteractor {
+public class SpeakerPresentationsInteractor: ScheduleInteractor, SpeakerPresentationsInteractorProtocol {
     
     public func getSpeakerPresentationsDates(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [NSDate] {
         let events = eventDataStore.getSpeakerPresentationsLocal(speakerId, startDate: startDate, endDate: endDate)
@@ -31,15 +31,9 @@ public class SpeakerPresentationsInteractor: ScheduleInteractor, ISpeakerPresent
     }
     
     public func getSpeakerPresentations(speakerId: Int, startDate: NSDate, endDate: NSDate) -> [ScheduleItem] {
+        
         let events = eventDataStore.getSpeakerPresentationsLocal(speakerId, startDate: startDate, endDate: endDate)
         
-        var ScheduleItem: ScheduleItem
-        var dtos: [ScheduleItem] = []
-        for event in events {
-            ScheduleItem = ScheduleItemAssembler.createDTO(event)
-            dtos.append(ScheduleItem)
-        }
-        return dtos
+        return ScheduleItem.from(realm: events)
     }
-    
 }

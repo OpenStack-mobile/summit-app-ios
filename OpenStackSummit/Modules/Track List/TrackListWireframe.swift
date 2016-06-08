@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import CoreSummit
 
-@objc
-public protocol ITrackListWireframe {
-    func showTrackSchedule(track: TrackDTO)
+public protocol TrackListWireframeProtocol {
+    func showTrackSchedule(track: Track)
 }
 
-public class TrackListWireframe: NSObject, ITrackListWireframe {
-    var trackScheduleWireframe: ITrackScheduleWireframe!
+public class TrackListWireframe: TrackListWireframeProtocol {
+    
+    var trackScheduleWireframe = TrackScheduleWireframe()
     var trackListViewController: ITrackListViewController!
     
-    public func showTrackSchedule(track: TrackDTO) {
+    public func showTrackSchedule(track: Track) {
         trackScheduleWireframe.presentTrackScheduleView(track, toNavigationController: trackListViewController.navigationController!)
     }
 }

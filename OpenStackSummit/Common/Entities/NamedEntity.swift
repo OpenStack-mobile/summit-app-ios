@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class NamedEntity: RealmEntity {
+public class NamedEntity: BaseEntity {
     public dynamic var name = ""
 }

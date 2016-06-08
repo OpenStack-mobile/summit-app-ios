@@ -10,6 +10,12 @@ import CoreSummit
 
 public struct VenueListItem: RealmDecodable {
     
+    public let identifier: Identifier
+    
+    public let name: String
+    
+    public let descriptionText: String
+    
     public let address: String
     
     public let latitude: Double
@@ -20,6 +26,9 @@ public struct VenueListItem: RealmDecodable {
     
     public init(realmEntity venue: RealmVenue) {
         
+        self.identifier = venue.id
+        self.name = venue.name
+        self.descriptionText = venue.locationDescription
         self.address = VenueListItem.getAddress(venue)
         self.latitude = Double(venue.lat) ?? 0.0
         self.longitude = Double(venue.long) ?? 0.0

@@ -56,24 +56,34 @@ public class MemberProfileDetailPresenter: MemberProfileDetailPresenterProtocol 
         else {
             if let currentMember = interactor.getCurrentMember() {
                 if currentMember.speakerRole != nil {
-                    showPersonProfile(currentMember.speakerRole!, error: nil)
+                    showPersonProfile(.Value(currentMember.speakerRole!))
                 }
                 else {
-                    showPersonProfile(currentMember.attendeeRole!, error: nil)
+                    showPersonProfile(.Value(currentMember.attendeeRole!))
                 }
             }
         }
     }
     
     func showSpeakerProfile() {
-        self.interactor.getSpeakerProfile(self.speakerId) { speaker, error in
-            self.showPersonProfile(speaker, error: error)
+        self.interactor.getSpeakerProfile(self.speakerId) { (response) in
+            
+            switch response {
+                
+            case let .Error(error): self.showPersonProfile(.Error(error))
+            case let .Value(value): self.showPersonProfile(.Value(value))
+            }
         }
     }
     
     func showAttendeeProfile() {
-        self.interactor.getAttendeeProfile(self.attendeeId) { attendee, error in
-            self.showPersonProfile(attendee, error: error)
+        self.interactor.getAttendeeProfile(self.attendeeId) { (response) in
+            
+            switch response {
+                
+            case let .Error(error): self.showPersonProfile(.Error(error))
+            case let .Value(value): self.showPersonProfile(.Value(value))
+            }
         }
     }
     

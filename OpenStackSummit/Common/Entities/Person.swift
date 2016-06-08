@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-public class Person: RealmEntity {
+public class Person: BaseEntity {
     public dynamic var firstName = ""
     public dynamic var lastName = ""
     public dynamic var fullName = ""

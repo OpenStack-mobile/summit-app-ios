@@ -6,32 +6,29 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IFeedbackGivenListInteractor {
-    func getLoggedMemberGivenFeedback() ->[FeedbackDTO]
+public protocol FeedbackGivenListInteractorProtocol {
+    
+    func getLoggedMemberGivenFeedback() ->[Feedback]
 }
 
-public class FeedbackGivenListInteractor: NSObject, IFeedbackGivenListInteractor {
-    var securityManager: SecurityManager!
-    var feedbackDTOAssembler: IFeedbackDTOAssembler!
+public final class FeedbackGivenListInteractor: FeedbackGivenListInteractorProtocol {
     
-    public func getLoggedMemberGivenFeedback() ->[FeedbackDTO] {
+    var securityManager: SecurityManager!
+    
+    public func getLoggedMemberGivenFeedback() ->[Feedback] {
+        
         guard let member = securityManager.getCurrentMember() else {
-            return [FeedbackDTO]()
+            return [Feedback]()
         }
 
         guard let attendee = member.attendeeRole else {
-            return [FeedbackDTO]()
+            return [Feedback]()
         }
         
-        var feedbackDTO: FeedbackDTO
-        var dtos: [FeedbackDTO] = []
-        for feedback in attendee.feedback.sorted("date", ascending: false) {
-            feedbackDTO = feedbackDTOAssembler.createDTO(feedback)
-            dtos.append(feedbackDTO)
-        }
-        return dtos
+        let realmEntities = attendee.feedback.sorted("date", ascending: false)
+        
+        return Feedback.from(realm: realmEntities)
     }
 }

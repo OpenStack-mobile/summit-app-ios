@@ -10,7 +10,7 @@ import UIKit
 import SwiftSpinner
 
 @objc
-public protocol IPeopleListViewController: IMessageEnabledViewController {
+public protocol IPeopleListViewController: MessageEnabledViewController {
     var presenter: IPeoplePresenter! { get set }
     var searchTerm: String! { get set }
     var navigationController: UINavigationController? { get }

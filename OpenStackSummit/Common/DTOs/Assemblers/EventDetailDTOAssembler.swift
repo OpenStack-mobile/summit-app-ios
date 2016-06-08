@@ -15,20 +15,20 @@ public protocol IEventDetailDTOAssembler {
 
 public class EventDetailDTOAssembler: NSObject, IEventDetailDTOAssembler {
     var speakerDTOAssembler: IPresentationSpeakerDTOAssembler!
-    var ScheduleItemAssembler: IScheduleItemAssembler!
+    var scheduleItemDTOAssembler: IScheduleItemDTOAssembler!
     
     public override init() {
         super.init()
     }
 
-    public init(speakerDTOAssembler: IPresentationSpeakerDTOAssembler, ScheduleItemAssembler: IScheduleItemAssembler) {
+    public init(speakerDTOAssembler: IPresentationSpeakerDTOAssembler, scheduleItemDTOAssembler: IScheduleItemDTOAssembler) {
         self.speakerDTOAssembler = speakerDTOAssembler
-        self.ScheduleItemAssembler = ScheduleItemAssembler
+        self.scheduleItemDTOAssembler = scheduleItemDTOAssembler
     }
     
     public func createDTO(event: SummitEvent) -> EventDetailDTO {
-        let ScheduleItem = ScheduleItemAssembler.createDTO(event)
-        let eventDetailDTO = EventDetailDTO(ScheduleItem: ScheduleItem)
+        let scheduleItemDTO = scheduleItemDTOAssembler.createDTO(event)
+        let eventDetailDTO = EventDetailDTO(scheduleItemDTO: scheduleItemDTO)
         
         eventDetailDTO.venueId = event.venue?.id
         if let venueRoom = event.venueRoom {

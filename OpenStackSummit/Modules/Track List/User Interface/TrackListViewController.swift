@@ -9,18 +9,17 @@
 import UIKit
 import XLPagerTabStrip
 
-@objc
-public protocol ITrackListViewController: IMessageEnabledViewController {
-    var searchTerm: String! { get set }
+public protocol TrackListViewControllerProtocol: MessageEnabledViewController {
+    var searchTerm: String { get set }
     var navigationController: UINavigationController? { get }
     
     func reloadData()
 }
 
 
-class TrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ITrackListViewController, IndicatorInfoProvider {
-    var presenter: ITrackListPresenter!
-    var searchTerm: String!
+class TrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TrackListViewControllerProtocol, IndicatorInfoProvider {
+    var presenter = TrackListPresenter()
+    var searchTerm = ""
     @IBOutlet weak var tableView: UITableView!
     let cellIdentifier = "trackTableViewCell"
 

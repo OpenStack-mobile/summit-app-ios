@@ -6,23 +6,28 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
 import Crashlytics
+import CoreSummit
+import SwiftFoundation
+import RealmSwift
 
-@objc
-public protocol ISummitAttendeeRemoteDataStore {
-    func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([SummitAttendee]?, NSError?) -> Void)
-    func getById(id: Int, completionBlock : (SummitAttendee?, NSError?) -> Void)
-    func addFeedback(attendee: SummitAttendee, feedback: Feedback, completionBlock : (Feedback?, NSError?)->Void)
+public protocol SummitAttendeeRemoteDataStoreProtocol {
+    
+    func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completion: ErrorValue<[RealmSummitAttendee]> -> ())
+    func getById(id: Int, completionBlock : ErrorValue<SummitAttendee> -> ())
+    func addFeedback(attendee: SummitAttendee, feedback: Feedback, completionBlock : ErrorValue<Feedback> -> ())
     func addEventToShedule(attendee: SummitAttendee, event: SummitEvent, completionBlock : (NSError?) -> Void)
     func removeEventFromShedule(attendee: SummitAttendee, event: SummitEvent, completionBlock : (NSError?) -> Void)
 }
 
-public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataStore {
-    var deserializerFactory: DeserializerFactory!
-    var httpFactory: HttpFactory!
+public final class SummitAttendeeRemoteDataStore: SummitAttendeeRemoteDataStoreProtocol {
+
+    var httpFactory = HttpFactory()
     
-    public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completionBlock : ([SummitAttendee]?, NSError?) -> Void) {
+    var realm = try! Realm()
+    
+    public func getByFilter(searchTerm: String?, page: Int, objectsPerPage: Int, completion: ErrorValue<[RealmSummitAttendee]> -> ()) {
+        
         let http = httpFactory.create(HttpType.ServiceAccount)
     
         var filter = ""
@@ -30,31 +35,34 @@ public class SummitAttendeeRemoteDataStore: NSObject, ISummitAttendeeRemoteDataS
             filter = "filter=first_name=@\(searchTerm!),last_name=@\(searchTerm!)&"
         }
         
-        http.GET("\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/attendees?\(filter)page=\(page)&per_page=\(objectsPerPage)") {(responseObject, error) in
-            if (error != nil) {
-                completionBlock(nil, error)
-                return
+        http.GET("\(Constants.Urls.ResourceServerBaseUrl)/api/v1/summits/current/attendees?\(filter)page=\(page)&per_page=\(objectsPerPage)") { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            let foundationJSON = NSJSONSerialization.Value(rawValue: responseObject!)!
+            let json = JSON.Value(foundation: foundationJSON)
+            
+            // parse
+            guard let jsonArray = json.arrayValue,
+                let entities = SummitAttendee.fromJSON(jsonArray)
+                else {
+                    
+                    let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error deserializing summit attendees", value: "", comment: "")]
+                    
+                    let friendlyError = NSError(domain: Constants.ErrorDomain, code: 4001, userInfo: userInfo)
+                    
+                    completion(.Error(friendlyError))
+                    
+                    return
             }
             
-            let json = responseObject as! String
-            let deserializer : IDeserializer!
-            var friendlyError: NSError?
-            var attendees: [SummitAttendee]?
+            // save in Realm
+            let realmEntities = entities.save(self.realm)
             
-            deserializer = self.deserializerFactory.create(DeserializerFactoryType.SummitAttendee)
-            
-            do {
-                attendees = try deserializer.deserializePage(json) as? [SummitAttendee]
-            }
-            catch {
-                let nsError = error as NSError
-                printerr(nsError)
-                Crashlytics.sharedInstance().recordError(nsError)
-                let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey :  NSLocalizedString("There was an error deserializing summit attendees", value: nsError.localizedDescription, comment: "")]
-                friendlyError = NSError(domain: Constants.ErrorDomain, code: 4001, userInfo: userInfo)
-           }
-            
-            completionBlock(attendees, friendlyError)
+            // success
+            completion(.Value(realmEntities))
         }
     }
     
