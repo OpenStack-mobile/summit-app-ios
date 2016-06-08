@@ -27,7 +27,7 @@ public final class FeedbackGivenListInteractor: FeedbackGivenListInteractorProto
             return [Feedback]()
         }
         
-        let realmEntities = attendee.feedback.sorted("date", ascending: false)
+        let realmEntities = attendee.feedback.sorted("date", ascending: false).map { $0 }
         
         return Feedback.from(realm: realmEntities)
     }

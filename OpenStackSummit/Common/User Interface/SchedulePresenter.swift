@@ -14,8 +14,8 @@ public protocol SchedulePresenterProtocol {
     func viewLoad()
     func reloadSchedule()
     func getDayEventsCount() -> Int
-    func buildScheduleCell(cell: ScheduleTableViewCellProtocol, index: Int)
-    func toggleScheduledStatus(index: Int, cell: ScheduleTableViewCellProtocol)
+    func buildScheduleCell(cell: ScheduleTableViewCell, index: Int)
+    func toggleScheduledStatus(index: Int, cell: ScheduleTableViewCell)
     func showEventDetail(index: Int)
 }
 
@@ -102,7 +102,7 @@ public class SchedulePresenter: ScheduleablePresenter, SchedulePresenterProtocol
     
     @objc private func loggedOut(notification: NSNotification) {
         
-        if dayEvents.isEmpty == nil {
+        if dayEvents.isEmpty {
             internalViewController.reloadSchedule()
         }
     }

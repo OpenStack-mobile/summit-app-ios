@@ -24,7 +24,7 @@ public protocol ScheduleTableViewCellProtocol: ScheduleableView {
     case Scheduled, NotScheduled
 }
 
-class ScheduleTableViewCell: UITableViewCell, ScheduleTableViewCellProtocol {
+public class ScheduleTableViewCell: UITableViewCell, ScheduleTableViewCellProtocol {
     
     private var locationInternal = ""
     private var scheduledInternal = false

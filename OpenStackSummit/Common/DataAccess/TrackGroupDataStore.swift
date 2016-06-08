@@ -6,27 +6,26 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
+import CoreSummit
 
-@objc
-public protocol ITrackGroupDataStore {
-    func getByIdLocal(id: Int) -> TrackGroup?
-    func getAllLocal() -> [TrackGroup]
-    func getBySearchTerm(searchTerm: String)->[TrackGroup]
+public protocol TrackGroupDataStoreProtocol {
+    func getByIdLocal(id: Int) -> RealmTrackGroup?
+    func getAllLocal() -> [RealmTrackGroup]
+    func getBySearchTerm(searchTerm: String) -> [RealmTrackGroup]
 }
 
-public class TrackGroupDataStore: GenericDataStore, ITrackGroupDataStore {
+public class TrackGroupDataStore: GenericDataStore, TrackGroupDataStoreProtocol {
     
-    public func getByIdLocal(id: Int) -> TrackGroup? {
+    public func getByIdLocal(id: Int) -> RealmTrackGroup? {
         return super.getByIdLocal(id)
     }
     
-    public func getAllLocal() -> [TrackGroup] {
+    public func getAllLocal() -> [RealmTrackGroup] {
         return super.getAllLocal()
     }
     
     public func getBySearchTerm(searchTerm: String)->[TrackGroup] {
-        let tracks = realm.objects(TrackGroup).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name")
+        let tracks = realm.objects(RealmTrackGroup).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name")
         return tracks.map { $0 }
     }
 }

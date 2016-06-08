@@ -6,21 +6,20 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol ITrackDataStore {
-    func getAllLocal() -> [Track]
-    func getBySearchTerm(searchTerm: String)->[Track]
+public protocol TrackDataStoreProtocol {
+    func getAllLocal() -> [RealmTrack]
+    func getBySearchTerm(searchTerm: String) -> [RealmTrack]
 }
 
-public class TrackDataStore: GenericDataStore, ITrackDataStore {
-    public func getAllLocal() -> [Track] {
+public class TrackDataStore: GenericDataStore, TrackDataStoreProtocol {
+    public func getAllLocal() -> [RealmTrack] {
         return super.getAllLocal()
     }
     
-    public func getBySearchTerm(searchTerm: String)->[Track] {
-        let tracks = realm.objects(Track).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name")
+    public func getBySearchTerm(searchTerm: String) -> [RealmTrack] {
+        let tracks = realm.objects(RealmTrack).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name")
         return tracks.map { $0 }
     }
 }

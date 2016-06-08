@@ -6,15 +6,14 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+import CoreSummit
 
-@objc
-public protocol IEventTypeDataStore {
-    func getAllLocal() -> [EventType]
+public protocol EventTypeDataStoreProtocol {
+    func getAllLocal() -> [RealmEventType]
 }
 
-public class EventTypeDataStore: GenericDataStore, IEventTypeDataStore {
-    public func getAllLocal() -> [EventType] {
+public class EventTypeDataStore: GenericDataStore, EventTypeDataStoreProtocol {
+    public func getAllLocal() -> [RealmEventType] {
         return super.getAllLocal()
     }
 }
