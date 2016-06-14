@@ -1,0 +1,1093 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
+		6E104D341D1061AC00541E84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D331D1061AC00541E84 /* ViewController.swift */; };
+		6E104D371D1061AC00541E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D351D1061AC00541E84 /* Main.storyboard */; };
+		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
+		6E104D3C1D1061AC00541E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */; };
+		6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */; };
+		6E104D521D1061AC00541E84 /* OpenStack_SummitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D511D1061AC00541E84 /* OpenStack_SummitUITests.swift */; };
+		6E10A4F41D1066E9008CBD0C /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E10A4FB1D1066E9008CBD0C /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
+		6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
+		6E10A5071D1066E9008CBD0C /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
+		6E10A5131D10672D008CBD0C /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* RealmTests.swift */; };
+		6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
+		6E10A5181D106741008CBD0C /* AustinSummit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* AustinSummit.json */; };
+		6E10A5191D106741008CBD0C /* Summit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit.json */; };
+		6E10A55D1D10675D008CBD0C /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51A1D10675C008CBD0C /* Company.swift */; };
+		6E10A55E1D10675D008CBD0C /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */; };
+		6E10A55F1D10675D008CBD0C /* ErrorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51C1D10675C008CBD0C /* ErrorValue.swift */; };
+		6E10A5601D10675D008CBD0C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51D1D10675C008CBD0C /* Event.swift */; };
+		6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51E1D10675C008CBD0C /* EventJSON.swift */; };
+		6E10A5621D10675D008CBD0C /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51F1D10675C008CBD0C /* EventType.swift */; };
+		6E10A5631D10675D008CBD0C /* EventTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5201D10675C008CBD0C /* EventTypeJSON.swift */; };
+		6E10A5641D10675D008CBD0C /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5211D10675C008CBD0C /* Feedback.swift */; };
+		6E10A5651D10675D008CBD0C /* FeedbackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5221D10675C008CBD0C /* FeedbackJSON.swift */; };
+		6E10A5661D10675D008CBD0C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5231D10675C008CBD0C /* Image.swift */; };
+		6E10A5671D10675D008CBD0C /* ImageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5241D10675C008CBD0C /* ImageJSON.swift */; };
+		6E10A5691D10675D008CBD0C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5261D10675C008CBD0C /* Location.swift */; };
+		6E10A56A1D10675D008CBD0C /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5271D10675C008CBD0C /* LocationJSON.swift */; };
+		6E10A56B1D10675D008CBD0C /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
+		6E10A56C1D10675D008CBD0C /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
+		6E10A56D1D10675D008CBD0C /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52A1D10675C008CBD0C /* Named.swift */; };
+		6E10A56E1D10675D008CBD0C /* NonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52B1D10675C008CBD0C /* NonConfirmedSummitAttendee.swift */; };
+		6E10A56F1D10675D008CBD0C /* NonConfirmedSummitAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52C1D10675C008CBD0C /* NonConfirmedSummitAttendeeJSON.swift */; };
+		6E10A5701D10675D008CBD0C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52D1D10675C008CBD0C /* Person.swift */; };
+		6E10A5711D10675D008CBD0C /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52E1D10675C008CBD0C /* Presentation.swift */; };
+		6E10A5721D10675D008CBD0C /* PresentationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52F1D10675C008CBD0C /* PresentationJSON.swift */; };
+		6E10A5731D10675D008CBD0C /* PresentationSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5301D10675C008CBD0C /* PresentationSpeaker.swift */; };
+		6E10A5741D10675D008CBD0C /* PresentationSpeakerJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5311D10675C008CBD0C /* PresentationSpeakerJSON.swift */; };
+		6E10A5751D10675D008CBD0C /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5321D10675C008CBD0C /* Realm.swift */; };
+		6E10A5761D10675D008CBD0C /* RealmCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5331D10675C008CBD0C /* RealmCompany.swift */; };
+		6E10A5771D10675D008CBD0C /* RealmEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5341D10675C008CBD0C /* RealmEventType.swift */; };
+		6E10A5781D10675D008CBD0C /* RealmFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5351D10675C008CBD0C /* RealmFeedback.swift */; };
+		6E10A5791D10675D008CBD0C /* RealmImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5361D10675C008CBD0C /* RealmImage.swift */; };
+		6E10A57A1D10675D008CBD0C /* RealmLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5371D10675C008CBD0C /* RealmLocation.swift */; };
+		6E10A57B1D10675D008CBD0C /* RealmMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5381D10675C008CBD0C /* RealmMember.swift */; };
+		6E10A57C1D10675D008CBD0C /* RealmNamed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5391D10675C008CBD0C /* RealmNamed.swift */; };
+		6E10A57D1D10675D008CBD0C /* RealmNonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53A1D10675C008CBD0C /* RealmNonConfirmedSummitAttendee.swift */; };
+		6E10A57E1D10675D008CBD0C /* RealmPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53B1D10675C008CBD0C /* RealmPerson.swift */; };
+		6E10A57F1D10675D008CBD0C /* RealmPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */; };
+		6E10A5801D10675D008CBD0C /* RealmPresentationSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53D1D10675C008CBD0C /* RealmPresentationSpeaker.swift */; };
+		6E10A5811D10675D008CBD0C /* RealmSummit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53E1D10675C008CBD0C /* RealmSummit.swift */; };
+		6E10A5821D10675D008CBD0C /* RealmSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */; };
+		6E10A5831D10675D008CBD0C /* RealmSummitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5401D10675C008CBD0C /* RealmSummitEvent.swift */; };
+		6E10A5841D10675D008CBD0C /* RealmSummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5411D10675C008CBD0C /* RealmSummitType.swift */; };
+		6E10A5851D10675D008CBD0C /* RealmTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5421D10675C008CBD0C /* RealmTag.swift */; };
+		6E10A5861D10675D008CBD0C /* RealmTicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5431D10675C008CBD0C /* RealmTicketType.swift */; };
+		6E10A5871D10675D008CBD0C /* RealmTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5441D10675C008CBD0C /* RealmTrack.swift */; };
+		6E10A5881D10675D008CBD0C /* RealmTrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */; };
+		6E10A5891D10675D008CBD0C /* RealmVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5461D10675C008CBD0C /* RealmVenue.swift */; };
+		6E10A58A1D10675D008CBD0C /* RealmVenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */; };
+		6E10A58B1D10675D008CBD0C /* Summit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5481D10675C008CBD0C /* Summit.swift */; };
+		6E10A58C1D10675D008CBD0C /* SummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5491D10675C008CBD0C /* SummitAttendee.swift */; };
+		6E10A58D1D10675D008CBD0C /* SummitAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54A1D10675C008CBD0C /* SummitAttendeeJSON.swift */; };
+		6E10A58E1D10675D008CBD0C /* SummitJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54B1D10675C008CBD0C /* SummitJSON.swift */; };
+		6E10A58F1D10675D008CBD0C /* SummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54C1D10675C008CBD0C /* SummitType.swift */; };
+		6E10A5901D10675D008CBD0C /* SummitTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54D1D10675C008CBD0C /* SummitTypeJSON.swift */; };
+		6E10A5911D10675D008CBD0C /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54E1D10675D008CBD0C /* Tag.swift */; };
+		6E10A5921D10675D008CBD0C /* TagJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54F1D10675D008CBD0C /* TagJSON.swift */; };
+		6E10A5931D10675D008CBD0C /* TicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5501D10675D008CBD0C /* TicketType.swift */; };
+		6E10A5941D10675D008CBD0C /* TicketTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5511D10675D008CBD0C /* TicketTypeJSON.swift */; };
+		6E10A5951D10675D008CBD0C /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5521D10675D008CBD0C /* TimeZone.swift */; };
+		6E10A5961D10675D008CBD0C /* TimeZoneJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5531D10675D008CBD0C /* TimeZoneJSON.swift */; };
+		6E10A5971D10675D008CBD0C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5541D10675D008CBD0C /* Track.swift */; };
+		6E10A5981D10675D008CBD0C /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5551D10675D008CBD0C /* TrackGroup.swift */; };
+		6E10A5991D10675D008CBD0C /* TrackGroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5561D10675D008CBD0C /* TrackGroupJSON.swift */; };
+		6E10A59A1D10675D008CBD0C /* TrackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5571D10675D008CBD0C /* TrackJSON.swift */; };
+		6E10A59B1D10675D008CBD0C /* Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5581D10675D008CBD0C /* Unique.swift */; };
+		6E10A59C1D10675D008CBD0C /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5591D10675D008CBD0C /* Venue.swift */; };
+		6E10A59D1D10675D008CBD0C /* VenueJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55A1D10675D008CBD0C /* VenueJSON.swift */; };
+		6E10A59E1D10675D008CBD0C /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55B1D10675D008CBD0C /* VenueRoom.swift */; };
+		6E10A59F1D10675D008CBD0C /* VenueRoomJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E104D431D1061AC00541E84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E104D2D1D1061AC00541E84;
+			remoteInfo = "OpenStack Summit";
+		};
+		6E104D4E1D1061AC00541E84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E104D2D1D1061AC00541E84;
+			remoteInfo = "OpenStack Summit";
+		};
+		6E10A4FC1D1066E9008CBD0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
+			remoteInfo = CoreSummit;
+		};
+		6E10A4FE1D1066E9008CBD0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E104D2D1D1061AC00541E84;
+			remoteInfo = "OpenStack Summit";
+		};
+		6E10A5041D1066E9008CBD0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
+			remoteInfo = CoreSummit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6E10A50D1D1066E9008CBD0C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6E10A5071D1066E9008CBD0C /* CoreSummit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenStack Summit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E104D331D1061AC00541E84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6E104D361D1061AC00541E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E104D3B1D1061AC00541E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6E104D3D1D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenStack SummitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStack_SummitTests.swift; sourceTree = "<group>"; };
+		6E104D481D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenStack SummitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E104D511D1061AC00541E84 /* OpenStack_SummitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStack_SummitUITests.swift; sourceTree = "<group>"; };
+		6E104D531D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E10A4F31D1066E9008CBD0C /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
+		6E10A4F51D1066E9008CBD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E10A4FA1D1066E9008CBD0C /* CoreSummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreSummitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E10A5031D1066E9008CBD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E10A50F1D10672D008CBD0C /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		6E10A5101D10672D008CBD0C /* RealmTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
+		6E10A5111D10672D008CBD0C /* TestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
+		6E10A5161D106741008CBD0C /* AustinSummit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AustinSummit.json; sourceTree = "<group>"; };
+		6E10A5171D106741008CBD0C /* Summit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit.json; sourceTree = "<group>"; };
+		6E10A51A1D10675C008CBD0C /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyJSON.swift; sourceTree = "<group>"; };
+		6E10A51C1D10675C008CBD0C /* ErrorValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorValue.swift; sourceTree = "<group>"; };
+		6E10A51D1D10675C008CBD0C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		6E10A51E1D10675C008CBD0C /* EventJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventJSON.swift; sourceTree = "<group>"; };
+		6E10A51F1D10675C008CBD0C /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
+		6E10A5201D10675C008CBD0C /* EventTypeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTypeJSON.swift; sourceTree = "<group>"; };
+		6E10A5211D10675C008CBD0C /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		6E10A5221D10675C008CBD0C /* FeedbackJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackJSON.swift; sourceTree = "<group>"; };
+		6E10A5231D10675C008CBD0C /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		6E10A5241D10675C008CBD0C /* ImageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageJSON.swift; sourceTree = "<group>"; };
+		6E10A5261D10675C008CBD0C /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		6E10A5271D10675C008CBD0C /* LocationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
+		6E10A5281D10675C008CBD0C /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		6E10A5291D10675C008CBD0C /* MemberJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberJSON.swift; sourceTree = "<group>"; };
+		6E10A52A1D10675C008CBD0C /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
+		6E10A52B1D10675C008CBD0C /* NonConfirmedSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendee.swift; sourceTree = "<group>"; };
+		6E10A52C1D10675C008CBD0C /* NonConfirmedSummitAttendeeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendeeJSON.swift; sourceTree = "<group>"; };
+		6E10A52D1D10675C008CBD0C /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		6E10A52E1D10675C008CBD0C /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
+		6E10A52F1D10675C008CBD0C /* PresentationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationJSON.swift; sourceTree = "<group>"; };
+		6E10A5301D10675C008CBD0C /* PresentationSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationSpeaker.swift; sourceTree = "<group>"; };
+		6E10A5311D10675C008CBD0C /* PresentationSpeakerJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationSpeakerJSON.swift; sourceTree = "<group>"; };
+		6E10A5321D10675C008CBD0C /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		6E10A5331D10675C008CBD0C /* RealmCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCompany.swift; sourceTree = "<group>"; };
+		6E10A5341D10675C008CBD0C /* RealmEventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventType.swift; sourceTree = "<group>"; };
+		6E10A5351D10675C008CBD0C /* RealmFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmFeedback.swift; sourceTree = "<group>"; };
+		6E10A5361D10675C008CBD0C /* RealmImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmImage.swift; sourceTree = "<group>"; };
+		6E10A5371D10675C008CBD0C /* RealmLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmLocation.swift; sourceTree = "<group>"; };
+		6E10A5381D10675C008CBD0C /* RealmMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMember.swift; sourceTree = "<group>"; };
+		6E10A5391D10675C008CBD0C /* RealmNamed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmNamed.swift; sourceTree = "<group>"; };
+		6E10A53A1D10675C008CBD0C /* RealmNonConfirmedSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmNonConfirmedSummitAttendee.swift; sourceTree = "<group>"; };
+		6E10A53B1D10675C008CBD0C /* RealmPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPerson.swift; sourceTree = "<group>"; };
+		6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentation.swift; sourceTree = "<group>"; };
+		6E10A53D1D10675C008CBD0C /* RealmPresentationSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationSpeaker.swift; sourceTree = "<group>"; };
+		6E10A53E1D10675C008CBD0C /* RealmSummit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummit.swift; sourceTree = "<group>"; };
+		6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitAttendee.swift; sourceTree = "<group>"; };
+		6E10A5401D10675C008CBD0C /* RealmSummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitEvent.swift; sourceTree = "<group>"; };
+		6E10A5411D10675C008CBD0C /* RealmSummitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitType.swift; sourceTree = "<group>"; };
+		6E10A5421D10675C008CBD0C /* RealmTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTag.swift; sourceTree = "<group>"; };
+		6E10A5431D10675C008CBD0C /* RealmTicketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTicketType.swift; sourceTree = "<group>"; };
+		6E10A5441D10675C008CBD0C /* RealmTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrack.swift; sourceTree = "<group>"; };
+		6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrackGroup.swift; sourceTree = "<group>"; };
+		6E10A5461D10675C008CBD0C /* RealmVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenue.swift; sourceTree = "<group>"; };
+		6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenueRoom.swift; sourceTree = "<group>"; };
+		6E10A5481D10675C008CBD0C /* Summit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Summit.swift; sourceTree = "<group>"; };
+		6E10A5491D10675C008CBD0C /* SummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendee.swift; sourceTree = "<group>"; };
+		6E10A54A1D10675C008CBD0C /* SummitAttendeeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitAttendeeJSON.swift; sourceTree = "<group>"; };
+		6E10A54B1D10675C008CBD0C /* SummitJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitJSON.swift; sourceTree = "<group>"; };
+		6E10A54C1D10675C008CBD0C /* SummitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitType.swift; sourceTree = "<group>"; };
+		6E10A54D1D10675C008CBD0C /* SummitTypeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitTypeJSON.swift; sourceTree = "<group>"; };
+		6E10A54E1D10675D008CBD0C /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		6E10A54F1D10675D008CBD0C /* TagJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagJSON.swift; sourceTree = "<group>"; };
+		6E10A5501D10675D008CBD0C /* TicketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketType.swift; sourceTree = "<group>"; };
+		6E10A5511D10675D008CBD0C /* TicketTypeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketTypeJSON.swift; sourceTree = "<group>"; };
+		6E10A5521D10675D008CBD0C /* TimeZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZone.swift; sourceTree = "<group>"; };
+		6E10A5531D10675D008CBD0C /* TimeZoneJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneJSON.swift; sourceTree = "<group>"; };
+		6E10A5541D10675D008CBD0C /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		6E10A5551D10675D008CBD0C /* TrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroup.swift; sourceTree = "<group>"; };
+		6E10A5561D10675D008CBD0C /* TrackGroupJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupJSON.swift; sourceTree = "<group>"; };
+		6E10A5571D10675D008CBD0C /* TrackJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackJSON.swift; sourceTree = "<group>"; };
+		6E10A5581D10675D008CBD0C /* Unique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unique.swift; sourceTree = "<group>"; };
+		6E10A5591D10675D008CBD0C /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		6E10A55A1D10675D008CBD0C /* VenueJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueJSON.swift; sourceTree = "<group>"; };
+		6E10A55B1D10675D008CBD0C /* VenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoom.swift; sourceTree = "<group>"; };
+		6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomJSON.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E104D2B1D1061AC00541E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E104D3F1D1061AC00541E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E104D4A1D1061AC00541E84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E10A4ED1D1066E9008CBD0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E10A4F71D1066E9008CBD0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E10A4FB1D1066E9008CBD0C /* CoreSummit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E104D251D1061AC00541E84 = {
+			isa = PBXGroup;
+			children = (
+				6E104D301D1061AC00541E84 /* OpenStack Summit */,
+				6E104D451D1061AC00541E84 /* OpenStack SummitTests */,
+				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
+				6E10A4F21D1066E9008CBD0C /* CoreSummit */,
+				6E10A5001D1066E9008CBD0C /* CoreSummitTests */,
+				6E104D2F1D1061AC00541E84 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E104D2F1D1061AC00541E84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */,
+				6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */,
+				6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */,
+				6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */,
+				6E10A4FA1D1066E9008CBD0C /* CoreSummitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E104D301D1061AC00541E84 /* OpenStack Summit */ = {
+			isa = PBXGroup;
+			children = (
+				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
+				6E104D331D1061AC00541E84 /* ViewController.swift */,
+				6E104D351D1061AC00541E84 /* Main.storyboard */,
+				6E104D381D1061AC00541E84 /* Assets.xcassets */,
+				6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */,
+				6E104D3D1D1061AC00541E84 /* Info.plist */,
+			);
+			path = "OpenStack Summit";
+			sourceTree = "<group>";
+		};
+		6E104D451D1061AC00541E84 /* OpenStack SummitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */,
+				6E104D481D1061AC00541E84 /* Info.plist */,
+			);
+			path = "OpenStack SummitTests";
+			sourceTree = "<group>";
+		};
+		6E104D501D1061AC00541E84 /* OpenStack SummitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6E104D511D1061AC00541E84 /* OpenStack_SummitUITests.swift */,
+				6E104D531D1061AC00541E84 /* Info.plist */,
+			);
+			path = "OpenStack SummitUITests";
+			sourceTree = "<group>";
+		};
+		6E10A4F21D1066E9008CBD0C /* CoreSummit */ = {
+			isa = PBXGroup;
+			children = (
+				6E10A4F31D1066E9008CBD0C /* CoreSummit.h */,
+				6E10A51C1D10675C008CBD0C /* ErrorValue.swift */,
+				6E10A5A01D10678E008CBD0C /* Model */,
+				6E10A5A11D1067BB008CBD0C /* JSON */,
+				6E10A5A21D1067C4008CBD0C /* Realm */,
+				6E10A4F51D1066E9008CBD0C /* Info.plist */,
+			);
+			path = CoreSummit;
+			sourceTree = "<group>";
+		};
+		6E10A5001D1066E9008CBD0C /* CoreSummitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E10A5151D106741008CBD0C /* JSON */,
+				6E10A50F1D10672D008CBD0C /* JSONTests.swift */,
+				6E10A5101D10672D008CBD0C /* RealmTests.swift */,
+				6E10A5111D10672D008CBD0C /* TestUtilities.swift */,
+				6E10A5031D1066E9008CBD0C /* Info.plist */,
+			);
+			path = CoreSummitTests;
+			sourceTree = "<group>";
+		};
+		6E10A5151D106741008CBD0C /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				6E10A5161D106741008CBD0C /* AustinSummit.json */,
+				6E10A5171D106741008CBD0C /* Summit.json */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		6E10A5A01D10678E008CBD0C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6E10A51A1D10675C008CBD0C /* Company.swift */,
+				6E10A51D1D10675C008CBD0C /* Event.swift */,
+				6E10A51F1D10675C008CBD0C /* EventType.swift */,
+				6E10A5211D10675C008CBD0C /* Feedback.swift */,
+				6E10A5231D10675C008CBD0C /* Image.swift */,
+				6E10A5261D10675C008CBD0C /* Location.swift */,
+				6E10A5281D10675C008CBD0C /* Member.swift */,
+				6E10A52A1D10675C008CBD0C /* Named.swift */,
+				6E10A52B1D10675C008CBD0C /* NonConfirmedSummitAttendee.swift */,
+				6E10A52D1D10675C008CBD0C /* Person.swift */,
+				6E10A52E1D10675C008CBD0C /* Presentation.swift */,
+				6E10A5301D10675C008CBD0C /* PresentationSpeaker.swift */,
+				6E10A5481D10675C008CBD0C /* Summit.swift */,
+				6E10A5491D10675C008CBD0C /* SummitAttendee.swift */,
+				6E10A54C1D10675C008CBD0C /* SummitType.swift */,
+				6E10A54E1D10675D008CBD0C /* Tag.swift */,
+				6E10A5501D10675D008CBD0C /* TicketType.swift */,
+				6E10A5521D10675D008CBD0C /* TimeZone.swift */,
+				6E10A5541D10675D008CBD0C /* Track.swift */,
+				6E10A5551D10675D008CBD0C /* TrackGroup.swift */,
+				6E10A5581D10675D008CBD0C /* Unique.swift */,
+				6E10A5591D10675D008CBD0C /* Venue.swift */,
+				6E10A55B1D10675D008CBD0C /* VenueRoom.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6E10A5A11D1067BB008CBD0C /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */,
+				6E10A51E1D10675C008CBD0C /* EventJSON.swift */,
+				6E10A5201D10675C008CBD0C /* EventTypeJSON.swift */,
+				6E10A5221D10675C008CBD0C /* FeedbackJSON.swift */,
+				6E10A5241D10675C008CBD0C /* ImageJSON.swift */,
+				6E10A5271D10675C008CBD0C /* LocationJSON.swift */,
+				6E10A5291D10675C008CBD0C /* MemberJSON.swift */,
+				6E10A52C1D10675C008CBD0C /* NonConfirmedSummitAttendeeJSON.swift */,
+				6E10A52F1D10675C008CBD0C /* PresentationJSON.swift */,
+				6E10A5311D10675C008CBD0C /* PresentationSpeakerJSON.swift */,
+				6E10A54A1D10675C008CBD0C /* SummitAttendeeJSON.swift */,
+				6E10A54B1D10675C008CBD0C /* SummitJSON.swift */,
+				6E10A54D1D10675C008CBD0C /* SummitTypeJSON.swift */,
+				6E10A54F1D10675D008CBD0C /* TagJSON.swift */,
+				6E10A5511D10675D008CBD0C /* TicketTypeJSON.swift */,
+				6E10A5531D10675D008CBD0C /* TimeZoneJSON.swift */,
+				6E10A5561D10675D008CBD0C /* TrackGroupJSON.swift */,
+				6E10A5571D10675D008CBD0C /* TrackJSON.swift */,
+				6E10A55A1D10675D008CBD0C /* VenueJSON.swift */,
+				6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		6E10A5A21D1067C4008CBD0C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				6E10A5321D10675C008CBD0C /* Realm.swift */,
+				6E10A5331D10675C008CBD0C /* RealmCompany.swift */,
+				6E10A5341D10675C008CBD0C /* RealmEventType.swift */,
+				6E10A5351D10675C008CBD0C /* RealmFeedback.swift */,
+				6E10A5361D10675C008CBD0C /* RealmImage.swift */,
+				6E10A5371D10675C008CBD0C /* RealmLocation.swift */,
+				6E10A5381D10675C008CBD0C /* RealmMember.swift */,
+				6E10A5391D10675C008CBD0C /* RealmNamed.swift */,
+				6E10A53A1D10675C008CBD0C /* RealmNonConfirmedSummitAttendee.swift */,
+				6E10A53B1D10675C008CBD0C /* RealmPerson.swift */,
+				6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */,
+				6E10A53D1D10675C008CBD0C /* RealmPresentationSpeaker.swift */,
+				6E10A53E1D10675C008CBD0C /* RealmSummit.swift */,
+				6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */,
+				6E10A5401D10675C008CBD0C /* RealmSummitEvent.swift */,
+				6E10A5411D10675C008CBD0C /* RealmSummitType.swift */,
+				6E10A5421D10675C008CBD0C /* RealmTag.swift */,
+				6E10A5431D10675C008CBD0C /* RealmTicketType.swift */,
+				6E10A5441D10675C008CBD0C /* RealmTrack.swift */,
+				6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */,
+				6E10A5461D10675C008CBD0C /* RealmVenue.swift */,
+				6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */,
+			);
+			name = Realm;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6E10A4EE1D1066E9008CBD0C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E10A4F41D1066E9008CBD0C /* CoreSummit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6E104D2D1D1061AC00541E84 /* OpenStack Summit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack Summit" */;
+			buildPhases = (
+				6E104D2A1D1061AC00541E84 /* Sources */,
+				6E104D2B1D1061AC00541E84 /* Frameworks */,
+				6E104D2C1D1061AC00541E84 /* Resources */,
+				6E10A50D1D1066E9008CBD0C /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E10A5051D1066E9008CBD0C /* PBXTargetDependency */,
+			);
+			name = "OpenStack Summit";
+			productName = "OpenStack Summit";
+			productReference = 6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E104D411D1061AC00541E84 /* OpenStack SummitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E104D591D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitTests" */;
+			buildPhases = (
+				6E104D3E1D1061AC00541E84 /* Sources */,
+				6E104D3F1D1061AC00541E84 /* Frameworks */,
+				6E104D401D1061AC00541E84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E104D441D1061AC00541E84 /* PBXTargetDependency */,
+			);
+			name = "OpenStack SummitTests";
+			productName = "OpenStack SummitTests";
+			productReference = 6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6E104D4C1D1061AC00541E84 /* OpenStack SummitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E104D5C1D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitUITests" */;
+			buildPhases = (
+				6E104D491D1061AC00541E84 /* Sources */,
+				6E104D4A1D1061AC00541E84 /* Frameworks */,
+				6E104D4B1D1061AC00541E84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E104D4F1D1061AC00541E84 /* PBXTargetDependency */,
+			);
+			name = "OpenStack SummitUITests";
+			productName = "OpenStack SummitUITests";
+			productReference = 6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		6E10A4F01D1066E9008CBD0C /* CoreSummit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E10A50C1D1066E9008CBD0C /* Build configuration list for PBXNativeTarget "CoreSummit" */;
+			buildPhases = (
+				6E10A4EC1D1066E9008CBD0C /* Sources */,
+				6E10A4ED1D1066E9008CBD0C /* Frameworks */,
+				6E10A4EE1D1066E9008CBD0C /* Headers */,
+				6E10A4EF1D1066E9008CBD0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreSummit;
+			productName = CoreSummit;
+			productReference = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6E10A4F91D1066E9008CBD0C /* CoreSummitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E10A50E1D1066E9008CBD0C /* Build configuration list for PBXNativeTarget "CoreSummitTests" */;
+			buildPhases = (
+				6E10A4F61D1066E9008CBD0C /* Sources */,
+				6E10A4F71D1066E9008CBD0C /* Frameworks */,
+				6E10A4F81D1066E9008CBD0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E10A4FD1D1066E9008CBD0C /* PBXTargetDependency */,
+				6E10A4FF1D1066E9008CBD0C /* PBXTargetDependency */,
+			);
+			name = CoreSummitTests;
+			productName = CoreSummitTests;
+			productReference = 6E10A4FA1D1066E9008CBD0C /* CoreSummitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E104D261D1061AC00541E84 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = OpenStack;
+				TargetAttributes = {
+					6E104D2D1D1061AC00541E84 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					6E104D411D1061AC00541E84 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 6E104D2D1D1061AC00541E84;
+					};
+					6E104D4C1D1061AC00541E84 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 6E104D2D1D1061AC00541E84;
+					};
+					6E10A4F01D1066E9008CBD0C = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					6E10A4F91D1066E9008CBD0C = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 6E104D2D1D1061AC00541E84;
+					};
+				};
+			};
+			buildConfigurationList = 6E104D291D1061AC00541E84 /* Build configuration list for PBXProject "OpenStack Summit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6E104D251D1061AC00541E84;
+			productRefGroup = 6E104D2F1D1061AC00541E84 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E104D2D1D1061AC00541E84 /* OpenStack Summit */,
+				6E104D411D1061AC00541E84 /* OpenStack SummitTests */,
+				6E104D4C1D1061AC00541E84 /* OpenStack SummitUITests */,
+				6E10A4F01D1066E9008CBD0C /* CoreSummit */,
+				6E10A4F91D1066E9008CBD0C /* CoreSummitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E104D2C1D1061AC00541E84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E104D3C1D1061AC00541E84 /* LaunchScreen.storyboard in Resources */,
+				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
+				6E104D371D1061AC00541E84 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E104D401D1061AC00541E84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E104D4B1D1061AC00541E84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E10A4EF1D1066E9008CBD0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E10A4F81D1066E9008CBD0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E10A5191D106741008CBD0C /* Summit.json in Resources */,
+				6E10A5181D106741008CBD0C /* AustinSummit.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E104D2A1D1061AC00541E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E104D341D1061AC00541E84 /* ViewController.swift in Sources */,
+				6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E104D3E1D1061AC00541E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E104D491D1061AC00541E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E104D521D1061AC00541E84 /* OpenStack_SummitUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E10A4EC1D1066E9008CBD0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E10A5811D10675D008CBD0C /* RealmSummit.swift in Sources */,
+				6E10A56E1D10675D008CBD0C /* NonConfirmedSummitAttendee.swift in Sources */,
+				6E10A5601D10675D008CBD0C /* Event.swift in Sources */,
+				6E10A59E1D10675D008CBD0C /* VenueRoom.swift in Sources */,
+				6E10A5891D10675D008CBD0C /* RealmVenue.swift in Sources */,
+				6E10A5781D10675D008CBD0C /* RealmFeedback.swift in Sources */,
+				6E10A5841D10675D008CBD0C /* RealmSummitType.swift in Sources */,
+				6E10A5671D10675D008CBD0C /* ImageJSON.swift in Sources */,
+				6E10A5631D10675D008CBD0C /* EventTypeJSON.swift in Sources */,
+				6E10A56F1D10675D008CBD0C /* NonConfirmedSummitAttendeeJSON.swift in Sources */,
+				6E10A58C1D10675D008CBD0C /* SummitAttendee.swift in Sources */,
+				6E10A55F1D10675D008CBD0C /* ErrorValue.swift in Sources */,
+				6E10A55D1D10675D008CBD0C /* Company.swift in Sources */,
+				6E10A5981D10675D008CBD0C /* TrackGroup.swift in Sources */,
+				6E10A5911D10675D008CBD0C /* Tag.swift in Sources */,
+				6E10A56B1D10675D008CBD0C /* Member.swift in Sources */,
+				6E10A56C1D10675D008CBD0C /* MemberJSON.swift in Sources */,
+				6E10A5731D10675D008CBD0C /* PresentationSpeaker.swift in Sources */,
+				6E10A58B1D10675D008CBD0C /* Summit.swift in Sources */,
+				6E10A5931D10675D008CBD0C /* TicketType.swift in Sources */,
+				6E10A5901D10675D008CBD0C /* SummitTypeJSON.swift in Sources */,
+				6E10A5871D10675D008CBD0C /* RealmTrack.swift in Sources */,
+				6E10A59F1D10675D008CBD0C /* VenueRoomJSON.swift in Sources */,
+				6E10A57F1D10675D008CBD0C /* RealmPresentation.swift in Sources */,
+				6E10A55E1D10675D008CBD0C /* CompanyJSON.swift in Sources */,
+				6E10A5991D10675D008CBD0C /* TrackGroupJSON.swift in Sources */,
+				6E10A5821D10675D008CBD0C /* RealmSummitAttendee.swift in Sources */,
+				6E10A57A1D10675D008CBD0C /* RealmLocation.swift in Sources */,
+				6E10A59A1D10675D008CBD0C /* TrackJSON.swift in Sources */,
+				6E10A5651D10675D008CBD0C /* FeedbackJSON.swift in Sources */,
+				6E10A5771D10675D008CBD0C /* RealmEventType.swift in Sources */,
+				6E10A56A1D10675D008CBD0C /* LocationJSON.swift in Sources */,
+				6E10A5621D10675D008CBD0C /* EventType.swift in Sources */,
+				6E10A59C1D10675D008CBD0C /* Venue.swift in Sources */,
+				6E10A5941D10675D008CBD0C /* TicketTypeJSON.swift in Sources */,
+				6E10A5761D10675D008CBD0C /* RealmCompany.swift in Sources */,
+				6E10A58E1D10675D008CBD0C /* SummitJSON.swift in Sources */,
+				6E10A5851D10675D008CBD0C /* RealmTag.swift in Sources */,
+				6E10A5801D10675D008CBD0C /* RealmPresentationSpeaker.swift in Sources */,
+				6E10A5711D10675D008CBD0C /* Presentation.swift in Sources */,
+				6E10A5741D10675D008CBD0C /* PresentationSpeakerJSON.swift in Sources */,
+				6E10A59D1D10675D008CBD0C /* VenueJSON.swift in Sources */,
+				6E10A59B1D10675D008CBD0C /* Unique.swift in Sources */,
+				6E10A5791D10675D008CBD0C /* RealmImage.swift in Sources */,
+				6E10A57B1D10675D008CBD0C /* RealmMember.swift in Sources */,
+				6E10A56D1D10675D008CBD0C /* Named.swift in Sources */,
+				6E10A58F1D10675D008CBD0C /* SummitType.swift in Sources */,
+				6E10A5701D10675D008CBD0C /* Person.swift in Sources */,
+				6E10A58A1D10675D008CBD0C /* RealmVenueRoom.swift in Sources */,
+				6E10A5921D10675D008CBD0C /* TagJSON.swift in Sources */,
+				6E10A57E1D10675D008CBD0C /* RealmPerson.swift in Sources */,
+				6E10A5961D10675D008CBD0C /* TimeZoneJSON.swift in Sources */,
+				6E10A5641D10675D008CBD0C /* Feedback.swift in Sources */,
+				6E10A5721D10675D008CBD0C /* PresentationJSON.swift in Sources */,
+				6E10A58D1D10675D008CBD0C /* SummitAttendeeJSON.swift in Sources */,
+				6E10A5861D10675D008CBD0C /* RealmTicketType.swift in Sources */,
+				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
+				6E10A5881D10675D008CBD0C /* RealmTrackGroup.swift in Sources */,
+				6E10A5691D10675D008CBD0C /* Location.swift in Sources */,
+				6E10A5831D10675D008CBD0C /* RealmSummitEvent.swift in Sources */,
+				6E10A57D1D10675D008CBD0C /* RealmNonConfirmedSummitAttendee.swift in Sources */,
+				6E10A5951D10675D008CBD0C /* TimeZone.swift in Sources */,
+				6E10A57C1D10675D008CBD0C /* RealmNamed.swift in Sources */,
+				6E10A5971D10675D008CBD0C /* Track.swift in Sources */,
+				6E10A5661D10675D008CBD0C /* Image.swift in Sources */,
+				6E10A5751D10675D008CBD0C /* Realm.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E10A4F61D1066E9008CBD0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E10A5131D10672D008CBD0C /* RealmTests.swift in Sources */,
+				6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */,
+				6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E104D441D1061AC00541E84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E104D2D1D1061AC00541E84 /* OpenStack Summit */;
+			targetProxy = 6E104D431D1061AC00541E84 /* PBXContainerItemProxy */;
+		};
+		6E104D4F1D1061AC00541E84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E104D2D1D1061AC00541E84 /* OpenStack Summit */;
+			targetProxy = 6E104D4E1D1061AC00541E84 /* PBXContainerItemProxy */;
+		};
+		6E10A4FD1D1066E9008CBD0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit */;
+			targetProxy = 6E10A4FC1D1066E9008CBD0C /* PBXContainerItemProxy */;
+		};
+		6E10A4FF1D1066E9008CBD0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E104D2D1D1061AC00541E84 /* OpenStack Summit */;
+			targetProxy = 6E10A4FE1D1066E9008CBD0C /* PBXContainerItemProxy */;
+		};
+		6E10A5051D1066E9008CBD0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit */;
+			targetProxy = 6E10A5041D1066E9008CBD0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E104D351D1061AC00541E84 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E104D361D1061AC00541E84 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E104D3B1D1061AC00541E84 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E104D541D1061AC00541E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E104D551D1061AC00541E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E104D571D1061AC00541E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-Summit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6E104D581D1061AC00541E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-Summit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6E104D5A1D1061AC00541E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
+			};
+			name = Debug;
+		};
+		6E104D5B1D1061AC00541E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
+			};
+			name = Release;
+		};
+		6E104D5D1D1061AC00541E84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "OpenStack Summit";
+			};
+			name = Debug;
+		};
+		6E104D5E1D1061AC00541E84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "OpenStack Summit";
+			};
+			name = Release;
+		};
+		6E10A5081D1066E9008CBD0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6E10A5091D1066E9008CBD0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6E10A50A1D1066E9008CBD0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
+			};
+			name = Debug;
+		};
+		6E10A50B1D1066E9008CBD0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E104D291D1061AC00541E84 /* Build configuration list for PBXProject "OpenStack Summit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E104D541D1061AC00541E84 /* Debug */,
+				6E104D551D1061AC00541E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack Summit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E104D571D1061AC00541E84 /* Debug */,
+				6E104D581D1061AC00541E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E104D591D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E104D5A1D1061AC00541E84 /* Debug */,
+				6E104D5B1D1061AC00541E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E104D5C1D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E104D5D1D1061AC00541E84 /* Debug */,
+				6E104D5E1D1061AC00541E84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E10A50C1D1066E9008CBD0C /* Build configuration list for PBXNativeTarget "CoreSummit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E10A5081D1066E9008CBD0C /* Debug */,
+				6E10A5091D1066E9008CBD0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6E10A50E1D1066E9008CBD0C /* Build configuration list for PBXNativeTarget "CoreSummitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E10A50A1D1066E9008CBD0C /* Debug */,
+				6E10A50B1D1066E9008CBD0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E104D261D1061AC00541E84 /* Project object */;
+}
