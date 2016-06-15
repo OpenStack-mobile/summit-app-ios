@@ -66,6 +66,26 @@
                ReferencedContainer = "container:OpenStackSummit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CAD906211B72B34F00BA5647"
+               BuildableName = "OpenStackSummitTests.xctest"
+               BlueprintName = "OpenStackSummitTests"
+               ReferencedContainer = "container:OpenStackSummit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CAD9062C1B72B34F00BA5647"
+               BuildableName = "OpenStackSummitUITests.xctest"
+               BlueprintName = "OpenStackSummitUITests"
+               ReferencedContainer = "container:OpenStackSummit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

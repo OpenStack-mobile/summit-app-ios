@@ -62,7 +62,7 @@ public final class SecurityManager {
     
     public func deviceHasPasscode() -> Bool {
         let secret = "Device has passcode set?".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let attributes = [kSecClass as String:kSecClassGenericPassword, kSecAttrService as String:"LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String:secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly]
+        let attributes = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String: secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly]
         
         let status = SecItemAdd(attributes, nil)
         if status == 0 {
@@ -105,6 +105,7 @@ public final class SecurityManager {
     }
     
     public func configOAuthAccounts() {
+        
         let hasPasscode = deviceHasPasscode()
         
         var config = Config(
