@@ -1,3 +1,5 @@
 github "PureSwift/JSON-C" "098c5ad91d262de5ad695a6162b6d0d4b384741d"
+github "colemancda/aerogear-ios-http" "f5291965fac2e17a3da3fece7c0f70affa879d73"
 github "realm/realm-cocoa" "v0.98.6"
 github "PureSwift/SwiftFoundation" "1.1.7"
+github "colemancda/aerogear-ios-oauth2" "50bfc66300a14fa1885196fb9af9e5343233750b"

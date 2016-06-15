@@ -95,6 +95,7 @@
 		6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
+		6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Definitions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,6 +246,7 @@
 		6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfile.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
+		6E57DB6F1D11BE8B00F5574C /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				6E10A4F31D1066E9008CBD0C /* CoreSummit.h */,
+				6E57DB6F1D11BE8B00F5574C /* Definitions.swift */,
 				6E10A5AE1D106C9A008CBD0C /* Store.swift */,
 				6E10A51C1D10675C008CBD0C /* ErrorValue.swift */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
@@ -766,6 +769,7 @@
 				6E10A59B1D10675D008CBD0C /* Unique.swift in Sources */,
 				6E10A5791D10675D008CBD0C /* RealmImage.swift in Sources */,
 				6E10A57B1D10675D008CBD0C /* RealmMember.swift in Sources */,
+				6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */,
 				6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */,
 				6E10A56D1D10675D008CBD0C /* Named.swift in Sources */,
 				6E10A58F1D10675D008CBD0C /* SummitType.swift in Sources */,
@@ -1118,6 +1122,7 @@
 				6E10A5091D1066E9008CBD0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E10A50E1D1066E9008CBD0C /* Build configuration list for PBXNativeTarget "CoreSummitTests" */ = {
 			isa = XCConfigurationList;
@@ -1126,6 +1131,7 @@
 				6E10A50B1D1066E9008CBD0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
