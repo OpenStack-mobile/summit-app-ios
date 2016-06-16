@@ -21,10 +21,8 @@ public final class Store {
     
     // MARK: - Properties
     
+    /// The Realm storage context.
     public let realm = try! Realm()
-    
-    // The HTTP client that will be used to execute the requests to the server.
-    public var client: HTTP.Client { return HTTP.Client() }
     
     /// The URL of the server.
     public var serverURL: String = "https://dev-resource-server"
@@ -45,15 +43,18 @@ public final class Store {
     
     // MARK: - Initialization
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     private init() {
         
         configOAuthAccounts()
         
-        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "revokedAccess:",
+            selector: #selector(revokedAccess),
             name: OAuth2Module.revokeNotification,
             object: nil)
     }
@@ -81,52 +82,9 @@ public final class Store {
         self.requestQueue.addOperationWithBlock(block)
     }
     
-    internal func addHeaders(inout request: HTTP.Request) {
-        
-        request.headers["Content-Type"] = "application/json"
-    }
-    
-    // MARK: Requests
-    
-    internal func getEntity<T where T: JSONDecodable, T: RealmEncodable>(request: HTTP.Request, completion: ErrorValue<T> -> ()) {
-        
-        /// **Get Entity** parsing method
-        func parse(response: HTTP.Response) throws -> T  {
-            
-            guard response.statusCode == HTTP.StatusCode.OK.rawValue
-                else { throw Error.ErrorStatusCode(response.statusCode) }
-            
-            guard let jsonString = String(UTF8Data: response.body),
-                let json = JSON.Value(string: jsonString),
-                let entity = T(JSONValue: json)
-                else { throw Error.InvalidResponse }
-            
-            return entity
-        }
-        
-        // execute request
-        newRequest {
-            
-            let entity: T
-            
-            do {
-                let response = try self.client.sendRequest(request)
-                
-                entity = try parse(response)
-                
-                // cache in Realm
-                try! self.realm.write { let _ = entity.save(self.realm) }
-            }
-                
-            catch { mainQueue { completion(.Error(error)) }; return }
-            
-            mainQueue { completion(.Value(entity)) }
-        }
-    }
-    
     // MARK: - OAuth2
     
-    private func create(type: HttpRequestType) -> Http {
+    internal func createHTTP(type: HttpRequestType) -> Http {
         
         // create the oauth accounts
         configOAuthAccounts()
@@ -223,6 +181,12 @@ public final class Store {
             self.linkAttendeeIfExist(completionBlock);
             */
         }
+    }
+    
+    @objc private func revokedAccess(notification: NSNotification) {
+        //self.session.set(self.kCurrentMemberId, value: nil)
+        let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
     }
 }
 

@@ -95,6 +95,7 @@
 		6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
+		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Definitions.swift */; };
 /* End PBXBuildFile section */
 
@@ -246,6 +247,7 @@
 		6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfile.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
+		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -368,6 +370,7 @@
 				6E10A5151D106741008CBD0C /* JSON */,
 				6E10A50F1D10672D008CBD0C /* JSONTests.swift */,
 				6E10A5101D10672D008CBD0C /* RealmTests.swift */,
+				6E52FCBA1D130553006A7302 /* StoreTests.swift */,
 				6E10A5111D10672D008CBD0C /* TestUtilities.swift */,
 				6E10A5031D1066E9008CBD0C /* Info.plist */,
 			);
@@ -802,6 +805,7 @@
 				6E10A5131D10672D008CBD0C /* RealmTests.swift in Sources */,
 				6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */,
 				6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */,
+				6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
