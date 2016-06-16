@@ -7,7 +7,8 @@
 //
 
 import SwiftFoundation
-import OAuthSwift
+import AeroGearHttp
+import AeroGearOAuth2
 
 public extension Store {
     
@@ -26,41 +27,35 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule"
         
+        let http = self.createHTTP(.ServiceAccount)
+        
         let url = Constants.Urls.ResourceServerBaseUrl + URI
-                
-        let oauth = OAuth2Swift(
-            consumerKey:    Constants.Auth.ClientIdServiceAccount,
-            consumerSecret: Constants.Auth.SecretServiceAccount,
-            authorizeUrl:   Constants.Urls.AuthServerBaseUrl + "/oauth2/auth",
-            responseType:   "code"
-        )
         
-        oauth.authorizeWithCallbackURL(NSURL(string: "org.openstack.ios.openstack-summit://oauthcallback/")!,
-                                       scope: "\(Constants.Urls.ResourceServerBaseUrl)/summits/read",
-                                       state: "",
-                                       success: { (credential, response, parameters) in
-                                        
-                                        oauth.client.get(url, success: { (data, response) in
-                                            
-                                            guard let jsonString = String(UTF8Data: Data(foundation: data)),
-                                                let json = JSON.Value(string: jsonString),
-                                                let entity = Summit(JSONValue: json)
-                                                else { completion(.Error(Store.Error.InvalidResponse)); return }
-                                            
-                                            // success
-                                            completion(.Value(entity))
-                                            
-                                            }, failure: { (error) in
-                                                
-                                                completion(.Error(error))
-                                        })
-                                        
-        }, failure: { (error) in
+        oauthModuleOpenID!.login() { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in
             
-            completion(.Error(error))
-        })
-        
-        
+            guard error == nil else {
+                
+                completion(.Error(error!))
+                return
+            }
+            
+            http.GET(url) { (responseObject, error) in
+                
+                // forward error
+                guard error == nil
+                    else { completion(.Error(error!)); return }
+                
+                let foundationJSON = NSJSONSerialization.Value(rawValue: responseObject!)!
+                let json = JSON.Value(foundation: foundationJSON)
+                
+                // parse
+                guard let entity = Summit(JSONValue: json)
+                    else { completion(.Error(jsonError)); return }
+                
+                // success
+                completion(.Value(entity))
+            }
+        }
     }
 }
 
