@@ -210,3 +210,11 @@ public extension Store {
     }
 }
 
+internal extension Store {
+    
+    enum RequestType {
+        
+        case OpenIDGetFormUrlEncoded, OpenIDJSON, ServiceAccount
+    }
+}
+
