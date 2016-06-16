@@ -1,5 +1,6 @@
 github "PureSwift/JSON-C" "098c5ad91d262de5ad695a6162b6d0d4b384741d"
-github "OAuthSwift/OAuthSwift" "v0.5.2"
+github "icanzilb/SwiftSpinner" "43228a8b6552f918a74046ce190ed4e4c5c21b77"
+github "xmartlabs/XLPagerTabStrip" "5.0.0"
 github "colemancda/aerogear-ios-http" "f5291965fac2e17a3da3fece7c0f70affa879d73"
 github "realm/realm-cocoa" "v0.98.6"
 github "PureSwift/SwiftFoundation" "1.1.7"
