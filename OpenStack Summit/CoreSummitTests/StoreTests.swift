@@ -33,6 +33,6 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectationsWithTimeout(60, handler: nil)
     }
 }

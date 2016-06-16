@@ -31,32 +31,18 @@ public extension Store {
         
         let url = Constants.Urls.ResourceServerBaseUrl + URI
         
-        oauthModuleOpenID!.login() { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in
+        http.GET(url) { (responseObject, error) in
             
-            guard error == nil else {
-                
-                completion(.Error(error!))
-                return
-            }
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
             
-            http.GET(url) { (responseObject, error) in
-                
-                // forward error
-                guard error == nil
-                    else { completion(.Error(error!)); return }
-                
-                let foundationJSON = NSJSONSerialization.Value(rawValue: responseObject!)!
-                let json = JSON.Value(foundation: foundationJSON)
-                
-                // parse
-                guard let entity = Summit(JSONValue: json)
-                    else { completion(.Error(jsonError)); return }
-                
-                // success
-                completion(.Value(entity))
-            }
+            guard let json = JSON.Value(string: responseObject as! String),
+                let entity = Summit(JSONValue: json)
+                else { completion(.Error(Error.InvalidResponse)); return }
+            
+            // success
+            completion(.Value(entity))
         }
     }
 }
-
-private let jsonError = NSError(domain: "There was an error deserializing current summit", code: 6001, userInfo: nil)
