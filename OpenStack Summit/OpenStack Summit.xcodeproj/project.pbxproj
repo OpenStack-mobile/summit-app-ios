@@ -97,6 +97,7 @@
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Definitions.swift */; };
+		6EF147EB1D1329F000D5EEF9 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF147EA1D1329F000D5EEF9 /* RequestType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,7 @@
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
+		6EF147EA1D1329F000D5EEF9 /* RequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,6 +488,7 @@
 		6E10A5B01D106D85008CBD0C /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				6EF147EA1D1329F000D5EEF9 /* RequestType.swift */,
 				6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */,
 			);
 			name = Requests;
@@ -735,6 +738,7 @@
 				6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */,
 				6E10A5841D10675D008CBD0C /* RealmSummitType.swift in Sources */,
 				6E10A5671D10675D008CBD0C /* ImageJSON.swift in Sources */,
+				6EF147EB1D1329F000D5EEF9 /* RequestType.swift in Sources */,
 				6E10A5631D10675D008CBD0C /* EventTypeJSON.swift in Sources */,
 				6E10A56F1D10675D008CBD0C /* NonConfirmedSummitAttendeeJSON.swift in Sources */,
 				6E10A58C1D10675D008CBD0C /* SummitAttendee.swift in Sources */,
@@ -1061,6 +1065,7 @@
 		6E10A50A1D1066E9008CBD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = CoreSummitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
@@ -1072,6 +1077,7 @@
 		6E10A50B1D1066E9008CBD0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = CoreSummitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
