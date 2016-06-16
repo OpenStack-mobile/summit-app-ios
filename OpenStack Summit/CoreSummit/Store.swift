@@ -8,8 +8,6 @@
 
 import SwiftFoundation
 import RealmSwift
-import AeroGearHttp
-import AeroGearOAuth2
 
 /// Class used for requesting and caching data from the server.
 public final class Store {
@@ -24,9 +22,6 @@ public final class Store {
     /// The Realm storage context.
     public let realm = try! Realm()
     
-    /// The URL of the server.
-    public var serverURL: String = "https://dev-resource-server"
-    
     /// Request queue
     private let requestQueue: NSOperationQueue = {
         
@@ -37,43 +32,6 @@ public final class Store {
         return queue
     }()
     
-    public private(set) var oauthModuleOpenID: OAuth2Module?
-    
-    public private(set) var oauthModuleServiceAccount: OAuth2Module?
-    
-    // MARK: - Initialization
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    private init() {
-        
-        configOAuthAccounts()
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: #selector(revokedAccess),
-            name: OAuth2Module.revokeNotification,
-            object: nil)
-    }
-    
-    // MARK: - Accessors
-    
-    public var deviceHasPasscode: Bool {
-        
-        let secret = "Device has passcode set?".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let attributes = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String: secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly]
-        
-        let status = SecItemAdd(attributes, nil)
-        if status == 0 {
-            SecItemDelete(attributes)
-            return true
-        }
-        return false
-    }
-    
     // MARK: - Internal / Private Methods
     
     /// Convenience function for adding a block to the request queue.
@@ -82,29 +40,7 @@ public final class Store {
         self.requestQueue.addOperationWithBlock(block)
     }
     
-    // MARK: - OAuth2
-    
-    internal func createHTTP(type: HttpRequestType) -> Http {
-        
-        // create the oauth accounts
-        configOAuthAccounts()
-        
-        let http: Http
-        if (type == .OpenIDGetFormUrlEncoded) {
-            http = Http(responseSerializer: StringResponseSerializer())
-            http.authzModule = oauthModuleOpenID
-        }
-        else if (type == .OpenIDJson) {
-            http = Http(responseSerializer: StringResponseSerializer(), requestSerializer: JsonRequestSerializer())
-            http.authzModule = oauthModuleOpenID
-        }
-        else {
-            http = Http(responseSerializer: StringResponseSerializer())
-            http.authzModule = oauthModuleServiceAccount
-        }
-        return http
-    }
-    
+    /*
     private func configOAuthAccounts() {
         
         let hasPasscode = deviceHasPasscode
@@ -159,35 +95,7 @@ public final class Store {
         
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
-    
-    public func login(completionBlock: (NSError?) -> Void, partialCompletionBlock: (Void) -> Void) {
-        
-        oauthModuleOpenID!.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
-            
-            /*
-            if error != nil {
-                printerr(error)
-                Crashlytics.sharedInstance().recordError(error!)
-                return
-            }
-            
-            partialCompletionBlock()
-            
-            if accessToken == nil {
-                return
-            }
-            
-            
-            self.linkAttendeeIfExist(completionBlock);
-            */
-        }
-    }
-    
-    @objc private func revokedAccess(notification: NSNotification) {
-        //self.session.set(self.kCurrentMemberId, value: nil)
-        let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-    }
+    */
 }
 
 // MARK: - Supporting Types
@@ -211,9 +119,4 @@ public extension Store {
         /// A custom error from the server.
         case CustomServerError(String)
     }
-}
-
-public enum HttpRequestType {
-    
-    case OpenIDGetFormUrlEncoded, OpenIDJson, ServiceAccount
 }
