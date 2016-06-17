@@ -9,7 +9,7 @@
 import UIKit
 import CoreSummit
 
-class PeopleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
+internal class PeopleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
     
     // MARK: - IB Outlets
     
@@ -28,7 +28,8 @@ class PeopleListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        peopleListView.tableView.registerNib(UINib(nibName: "PeopleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
+        peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
     }
     
     // MARK: - Methods
@@ -50,7 +51,8 @@ class PeopleListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
         presenter.buildScheduleCell(cell, index: indexPath.row)
         return cell
     }
