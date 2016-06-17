@@ -1,4 +1,7 @@
+github "Haneke/HanekeSwift" "v0.10.1"
 github "PureSwift/JSON-C" "098c5ad91d262de5ad695a6162b6d0d4b384741d"
+github "mac-cain13/R.swift.Library" "v2.1.0"
+github "colemancda/SWRevealViewController" "351b0b26d93c92f1c9db4f79a7e4ad2951e3931f"
 github "icanzilb/SwiftSpinner" "43228a8b6552f918a74046ce190ed4e4c5c21b77"
 github "xmartlabs/XLPagerTabStrip" "5.0.0"
 github "colemancda/aerogear-ios-http" "f5291965fac2e17a3da3fece7c0f70affa879d73"
