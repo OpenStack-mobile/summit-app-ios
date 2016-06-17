@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haneke
 
 final class PeopleTableViewCell: UITableViewCell {
     

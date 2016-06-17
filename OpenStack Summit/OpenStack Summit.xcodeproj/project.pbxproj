@@ -22,7 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
-		6E104D371D1061AC00541E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D351D1061AC00541E84 /* Main.storyboard */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
 		6E104D3C1D1061AC00541E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */; };
 		6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */; };
@@ -192,7 +191,6 @@
 /* Begin PBXFileReference section */
 		6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenStack Summit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6E104D361D1061AC00541E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E104D3B1D1061AC00541E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E104D3D1D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C5E1D149B4B00814AD0 /* Version.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
-				6E104D351D1061AC00541E84 /* Main.storyboard */,
 				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */,
@@ -762,7 +759,6 @@
 				6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */,
 				6EF1C84B1D148C3C0060BF45 /* PeopleListView.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
-				6E104D371D1061AC00541E84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,7 +842,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"rswift\" \"-p\" \"$SRCROOT/OpenStack Summit.xcodeproj\" \"-t\" \"OpenStack Summit\" \"--bundleIdentifier\" \"org.openstack.OpenStack-Summit\" \"$SRCROOT\"";
+			shellScript = "\"$SRCROOT/rswift\" \"-p\" \"$SRCROOT/OpenStack Summit.xcodeproj\" \"-t\" \"OpenStack Summit\" \"--bundleIdentifier\" \"org.openstack.OpenStack-Summit\" \"$SRCROOT\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1017,14 +1013,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6E104D351D1061AC00541E84 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E104D361D1061AC00541E84 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
