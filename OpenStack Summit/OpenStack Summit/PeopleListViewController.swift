@@ -9,12 +9,17 @@
 import UIKit
 import CoreSummit
 
-final class PeopleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PeopleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
     
-    var presenter: IPeoplePresenter!
-    var searchTerm: String!
-    let cellIdentifier = "peopleTableViewCell"
+    // MARK: - IB Outlets
+    
     @IBOutlet weak var peopleListView: PeopleListView!
+    
+    // MARK: - Properties
+    
+    var searchTerm: String = ""
+    
+    // MARK: - Loading
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,19 +31,15 @@ final class PeopleListViewController: UIViewController, UITableViewDelegate, UIT
         peopleListView.tableView.registerNib(UINib(nibName: "PeopleTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
+    // MARK: - Methods
+    
     func reloadData() {
         peopleListView.tableView.delegate = self
         peopleListView.tableView.dataSource = self
         peopleListView.tableView.reloadData()
     }
     
-    func showActivityIndicator() {
-        SwiftSpinner.showWithDelay(0.5, title: "Please wait...")
-    }
-    
-    func hideActivityIndicator() {
-        SwiftSpinner.hide()
-    }
+    // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -53,6 +54,8 @@ final class PeopleListViewController: UIViewController, UITableViewDelegate, UIT
         presenter.buildScheduleCell(cell, index: indexPath.row)
         return cell
     }
+    
+    // MARK: - UITableViewDataSource
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         self.presenter.showPersonProfile(indexPath.row)

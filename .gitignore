@@ -33,3 +33,5 @@ Carthage/
 # Fabric
 Fabric.framework/
 
+
+*.generated.swift

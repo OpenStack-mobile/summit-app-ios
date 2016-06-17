@@ -11,15 +11,7 @@ import XLPagerTabStrip
 
 final class SpeakerListViewController: PeopleListViewController, IndicatorInfoProvider {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        presenter.speakersListViewLoad()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.speakersListViewWillAppear();
-    }
+    // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Speakers")
