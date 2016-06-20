@@ -66,7 +66,7 @@ final class PeopleTableViewCell: UITableViewCell {
         }
     }
     
-    var picUrl: String! {
+    var pictureURL: String! {
         get {
             return picUrlInternal
         }

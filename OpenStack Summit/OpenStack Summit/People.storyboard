@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A201w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -36,7 +36,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZq-0h-hGL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3549" y="472"/>
+            <point key="canvasLocation" x="3367" y="288"/>
+        </scene>
+        <!--Attendees List View Controller-->
+        <scene sceneID="S5d-OR-Ypu">
+            <objects>
+                <viewController storyboardIdentifier="AttendeesListViewController" id="bo1-y2-4Tk" customClass="AttendeesListViewController" customModule="OpenStack_Summit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BbQ-QZ-Wql"/>
+                        <viewControllerLayoutGuide type="bottom" id="hdt-oH-MNK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E3U-I8-m3o">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bjm-Ty-pqn" customClass="PeopleListView" customModule="OpenStack_Summit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Bjm-Ty-pqn" firstAttribute="leading" secondItem="E3U-I8-m3o" secondAttribute="leading" id="2Na-C0-Kls"/>
+                            <constraint firstItem="Bjm-Ty-pqn" firstAttribute="top" secondItem="BbQ-QZ-Wql" secondAttribute="bottom" id="446-3n-Dys"/>
+                            <constraint firstItem="hdt-oH-MNK" firstAttribute="top" secondItem="Bjm-Ty-pqn" secondAttribute="bottom" id="gbp-yc-e7i"/>
+                            <constraint firstAttribute="trailing" secondItem="Bjm-Ty-pqn" secondAttribute="trailing" id="oru-Fl-VG7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="peopleListView" destination="Bjm-Ty-pqn" id="pW6-ea-ybb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phb-py-gtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2695" y="288"/>
         </scene>
     </scenes>
 </document>

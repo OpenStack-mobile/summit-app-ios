@@ -109,6 +109,12 @@
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Definitions.swift */; };
+		6EB752591D1862F800BC294D /* PersonListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752581D1862F800BC294D /* PersonListItem.swift */; };
+		6EB7525C1D187DB900BC294D /* MemberProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */; };
+		6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */; };
+		6EB752601D18AF2800BC294D /* MemberProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */; };
+		6EB752621D18B14C00BC294D /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752611D18B14C00BC294D /* Profile.swift */; };
+		6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752631D18B77300BC294D /* ErrorAlert.swift */; };
 		6EF12C4D1D14967C00814AD0 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4C1D14967C00814AD0 /* PeopleViewController.swift */; };
 		6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */; };
 		6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
@@ -284,6 +290,12 @@
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
+		6EB752581D1862F800BC294D /* PersonListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonListItem.swift; sourceTree = "<group>"; };
+		6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MemberProfile.storyboard; sourceTree = "<group>"; };
+		6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
+		6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailViewController.swift; sourceTree = "<group>"; };
+		6EB752611D18B14C00BC294D /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		6EB752631D18B77300BC294D /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		6EF12C4C1D14967C00814AD0 /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
 		6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
@@ -375,7 +387,6 @@
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C5E1D149B4B00814AD0 /* Version.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
-				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E104D3A1D1061AC00541E84 /* LaunchScreen.storyboard */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
@@ -531,6 +542,8 @@
 		6E10A5A31D106AC5008CBD0C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6EB752611D18B14C00BC294D /* Profile.swift */,
+				6EB752581D1862F800BC294D /* PersonListItem.swift */,
 				6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */,
 				6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */,
 				6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */,
@@ -547,12 +560,23 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
+		6EB7525A1D187D9800BC294D /* Member Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */,
+				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
+				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
+			);
+			name = "Member Profile";
+			sourceTree = "<group>";
+		};
 		6EF147EC1D13579C00D5EEF9 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */,
 				6EF12C511D1497E100814AD0 /* UIView+Border.swift */,
 				6EF147EE1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift */,
+				6EB752631D18B77300BC294D /* ErrorAlert.swift */,
 				6EF12C541D14997C00814AD0 /* ScheduleableView.swift */,
 				6EF12C581D1499BA00814AD0 /* SweetAlert.swift */,
 				6EF1C8461D148C3C0060BF45 /* PeopleListView.swift */,
@@ -568,6 +592,7 @@
 			children = (
 				6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
+				6EB7525A1D187D9800BC294D /* Member Profile */,
 				6EF147F61D135BC700D5EEF9 /* People */,
 			);
 			name = Controller;
@@ -576,6 +601,7 @@
 		6EF147F61D135BC700D5EEF9 /* People */ = {
 			isa = PBXGroup;
 			children = (
+				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
 				6EF12C4C1D14967C00814AD0 /* PeopleViewController.swift */,
 				6EF147F41D135B4500D5EEF9 /* PeopleListViewController.swift */,
 				6EF12C5A1D149A2700814AD0 /* AttendeesListViewController.swift */,
@@ -756,6 +782,7 @@
 			files = (
 				6EF147F31D1358B400D5EEF9 /* People.storyboard in Resources */,
 				6E104D3C1D1061AC00541E84 /* LaunchScreen.storyboard in Resources */,
+				6EB7525C1D187DB900BC294D /* MemberProfile.storyboard in Resources */,
 				6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */,
 				6EF1C84B1D148C3C0060BF45 /* PeopleListView.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
@@ -852,12 +879,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF147F11D13585C00D5EEF9 /* SpeakerListViewController.swift in Sources */,
+				6EB752621D18B14C00BC294D /* Profile.swift in Sources */,
 				6EF147F51D135B4500D5EEF9 /* PeopleListViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
+				6EB752601D18AF2800BC294D /* MemberProfileDetailViewController.swift in Sources */,
 				6E10A5AA1D106AD5008CBD0C /* SummitEventExtensions.swift in Sources */,
+				6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */,
 				6EF12C5B1D149A2700814AD0 /* AttendeesListViewController.swift in Sources */,
 				6EF147EF1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift in Sources */,
 				6EF12C5F1D149B4B00814AD0 /* Version.swift in Sources */,
+				6EB752591D1862F800BC294D /* PersonListItem.swift in Sources */,
 				6EF12C681D149CA600814AD0 /* R.generated.swift in Sources */,
 				6EF12C4D1D14967C00814AD0 /* PeopleViewController.swift in Sources */,
 				6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */,
@@ -870,6 +901,7 @@
 				6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */,
 				6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
+				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
 				6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1325,6 +1357,7 @@
 				6EF12C631D149C2700814AD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

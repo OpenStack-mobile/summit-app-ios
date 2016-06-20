@@ -11,8 +11,8 @@ import XLPagerTabStrip
 
 final class PeopleViewController: RevealTabStripViewController {
     
-    var attendeesListViewController: AttendeesListViewController!
-    var speakersListViewController: SpeakerListViewController!
+    let attendeesListViewController = R.storyboard.people.attendeesListViewController()!
+    let speakersListViewController = R.storyboard.people.speakerListViewController()!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,6 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
+    
     var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
