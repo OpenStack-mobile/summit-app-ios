@@ -9,9 +9,21 @@
 import UIKit
 import XLPagerTabStrip
 
-final class AttendeesListViewController: PeopleListViewController, IndicatorInfoProvider {
+final class AttendeesListViewController: UIViewController, PeopleListViewController, IndicatorInfoProvider {
+    
+    // MARK: - IB Outlets
+    
+    @IBOutlet weak var peopleListView: PeopleListView!
     
     // MARK: - Properties
+    
+    var searchTerm: String = ""
+    
+    var people = [PersonListItem]()
+    
+    var loadedAll = false
+    
+    // MARK: - Private Properties
     
     private var pageAttendees = 1
     
@@ -20,14 +32,23 @@ final class AttendeesListViewController: PeopleListViewController, IndicatorInfo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if (pageAttendees == 1) {
-            getAttendees()
+        if pageAttendees == 1 {
+            
+            self.fetchData()
         }
+        
+        resetTableView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerCell()
     }
     
     // MARK: - Methods
     
-    func getAttendees() {
+    func fetchData() {
         
         showActivityIndicator()
         /*
@@ -44,6 +65,12 @@ final class AttendeesListViewController: PeopleListViewController, IndicatorInfo
             self.loadedAllAttendees = attendeesPage!.count < self.objectsPerPage
             self.pageAttendees++
         }*/
+    }
+    
+    func showPersonProfile(person: PersonListItem) {
+        
+        
+        self.navigationController.pushViewController(memberProfileViewController, animated: true)
     }
     
     // MARK: - IndicatorInfoProvider

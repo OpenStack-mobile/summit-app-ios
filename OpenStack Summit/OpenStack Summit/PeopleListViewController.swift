@@ -9,7 +9,91 @@
 import UIKit
 import CoreSummit
 
-internal class PeopleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
+protocol PeopleListViewController: UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
+    
+    weak var peopleListView: PeopleListView! { get }
+    
+    var searchTerm: String { get }
+    
+    var people: [PersonListItem] { get }
+    
+    var loadedAll: Bool { get }
+    
+    func fetchData()
+    
+    func showPersonProfile(person: PersonListItem)
+}
+
+extension PeopleListViewController {
+    
+    @inline(__always)
+    func resetTableView() {
+        
+        peopleListView.tableView.setContentOffset(CGPointZero, animated: false)
+    }
+    
+    @inline(__always)
+    func registerCell() {
+        
+        peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
+    }
+    
+    @inline(__always)
+    private func reloadData() {
+        
+        peopleListView.tableView.reloadData()
+    }
+    
+    func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+        
+        let row = indexPath.row
+        
+        let person = people[indexPath.row]
+        
+        cell.name = person.name
+        cell.title = person.title
+        cell.pictureURL = person.pictureURL
+        
+        /// fetch more
+        if row == people.endIndex && loadedAll == false {
+            
+            fetchData()
+        }
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return people.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
+        
+        configure(cell: cell, at: indexPath)
+        
+        return cell
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let person = people[indexPath.row]
+        
+        showPersonProfile(person)
+    }
+}
+
+/*
+internal class PeopleListViewControllerOld: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
     
     // MARK: - IB Outlets
     
@@ -18,6 +102,12 @@ internal class PeopleListViewController: UIViewController, UITableViewDelegate, 
     // MARK: - Properties
     
     var searchTerm: String = ""
+    
+    // MARK: - Private Properies
+    
+    private var people = [PersonListItem]()
+    
+    private var loadedAll = false
     
     // MARK: - Loading
     
@@ -29,37 +119,73 @@ internal class PeopleListViewController: UIViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        peopleListView.tableView.delegate = self
+        peopleListView.tableView.dataSource = self
+        
         peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
     }
     
     // MARK: - Methods
     
-    func reloadData() {
-        peopleListView.tableView.delegate = self
-        peopleListView.tableView.dataSource = self
+    
+    
+    // MARK: - Private Methods
+    
+    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+        
+        let row = indexPath.row
+        
+        let person = people[indexPath.row]
+        
+        cell.name = person.name
+        cell.title = person.title
+        cell.pictureURL = person.pictureURL
+        
+        /// fetch more
+        if row == people.endIndex && loadedAll == false {
+            
+            
+        }
+    }
+    
+    @inline(__always)
+    private func reloadData() {
+        
         peopleListView.tableView.reloadData()
+    }
+    
+    private func loadData() {
+        
+        
     }
     
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getPeopleCount();
+        
+        return people.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
-        presenter.buildScheduleCell(cell, index: indexPath.row)
+        
+        configure(cell: cell, at: indexPath)
+        
         return cell
     }
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        self.presenter.showPersonProfile(indexPath.row)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let person = people[indexPath.row]
+        
+        showPersonProfile(indexPath)
     }
-}
+}*/

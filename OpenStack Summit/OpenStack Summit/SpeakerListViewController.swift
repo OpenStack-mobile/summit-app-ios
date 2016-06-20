@@ -9,7 +9,33 @@
 import UIKit
 import XLPagerTabStrip
 
-final class SpeakerListViewController: PeopleListViewController, IndicatorInfoProvider {
+final class SpeakerListViewController: UIViewController, PeopleListViewController, IndicatorInfoProvider {
+    
+    // MARK: - IB Outlets
+    
+    @IBOutlet weak var peopleListView: PeopleListView!
+    
+    // MARK: - Properties
+    
+    var searchTerm: String = ""
+    
+    var people = [PersonListItem]()
+    
+    var loadedAll = false
+    
+    // MARK: - Loading
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        resetTableView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerCell()
+    }
     
     // MARK: - IndicatorInfoProvider
     
