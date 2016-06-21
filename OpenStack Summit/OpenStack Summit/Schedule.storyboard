@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A201w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Speaker Presentations View Controller-->
+        <scene sceneID="2Oz-Kc-ade">
+            <objects>
+                <viewController storyboardIdentifier="SpeakerPresentationsViewController" id="qsw-jf-UqB" customClass="SpeakerPresentationsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SEc-g0-zdA"/>
+                        <viewControllerLayoutGuide type="bottom" id="3MR-JJ-efb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yaQ-8N-VeA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YfL-4b-PVx" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YfL-4b-PVx" firstAttribute="top" secondItem="SEc-g0-zdA" secondAttribute="bottom" id="2wk-wo-tWB"/>
+                            <constraint firstAttribute="trailing" secondItem="YfL-4b-PVx" secondAttribute="trailing" id="Xej-Kb-LFx"/>
+                            <constraint firstItem="YfL-4b-PVx" firstAttribute="leading" secondItem="yaQ-8N-VeA" secondAttribute="leading" id="ZX2-LN-3HX"/>
+                            <constraint firstItem="3MR-JJ-efb" firstAttribute="top" secondItem="YfL-4b-PVx" secondAttribute="bottom" id="vnS-DR-yhi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scheduleView" destination="YfL-4b-PVx" id="n9D-Oc-Ej8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="txI-CC-bju" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3539" y="-927"/>
+        </scene>
+        <!--Personal Schedule View Controller-->
+        <scene sceneID="mvA-GF-9yc">
+            <objects>
+                <viewController storyboardIdentifier="PersonalScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="OM8-ZL-abj" customClass="PersonalScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rdN-dc-O0b"/>
+                        <viewControllerLayoutGuide type="bottom" id="vUD-6q-4l4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qgV-oE-k59">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O99-Af-xcd" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O99-Af-xcd" firstAttribute="height" secondItem="qgV-oE-k59" secondAttribute="height" id="aQh-yq-VRy"/>
+                            <constraint firstItem="O99-Af-xcd" firstAttribute="top" secondItem="rdN-dc-O0b" secondAttribute="bottom" id="b3H-r1-3DV"/>
+                            <constraint firstItem="O99-Af-xcd" firstAttribute="width" secondItem="qgV-oE-k59" secondAttribute="width" id="nwg-Ju-yFg"/>
+                            <constraint firstItem="O99-Af-xcd" firstAttribute="leading" secondItem="qgV-oE-k59" secondAttribute="leading" id="tah-8l-UFm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scheduleView" destination="O99-Af-xcd" id="7dy-1g-Ac1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jBO-Xk-8Ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3539" y="-1603"/>
+        </scene>
+    </scenes>
+</document>
