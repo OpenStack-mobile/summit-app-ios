@@ -214,12 +214,19 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
             
         case .currentUser:
             
-            if let currentMember = interactor.getCurrentMember() {
-                if currentMember.speakerRole != nil {
-                    showPersonProfile(.Value(currentMember.speakerRole!))
+            if let currentMember = Store.shared.authenticatedMember {
+                
+                if let speakerRole = currentMember.speakerRole {
+                    
+                    updateUI(.Value(speakerRole))
+                }
+                else if let attendeeRole = currentMember.attendeeRole {
+                    
+                    updateUI(.Value(attendeeRole))
                 }
                 else {
-                    showPersonProfile(.Value(currentMember.attendeeRole!))
+                    
+                    fatalError("Authenticated member is not a speaker nor an attendee")
                 }
             }
             

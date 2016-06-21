@@ -8,12 +8,24 @@
 
 import UIKit
 import XLPagerTabStrip
+import KTCenterFlowLayout
 
 final class MemberProfileViewController: RevealTabStripViewController {
     
     // MARK: - Properties
     
-    private(set) var profile: MemberProfile = .currentUser
+    private(set) var profile: MemberProfileIdentifier
+    
+    // MARK: - Initialization
+    
+    init(profile: MemberProfileIdentifier) {
+        
+        self.profile = profile
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Loading
     
@@ -51,23 +63,22 @@ final class MemberProfileViewController: RevealTabStripViewController {
         
         let memberProfileDetailVC = R.storyboard.memberProfile.memberProfileDetailViewController()!
         
+        memberProfileDetailVC.profile = profile
+        
+        childViewControllers.append(memberProfileDetailVC)
+        
+        if case let .speaker(identifier) = profile {
+            
+            let speakerPresentationsViewController = SpeakerPresentationsViewController()
+        }
+        
         switch profile {
             
         case .currentUser: childViewControllers = [memberProfileDetailVC]
             
-        case let .attendee(identifier):
+        case let .attendee(identifier): childViewControllers = [memberProfileDetailVC]
+            
+        case let .speaker(identifier):
         }
-    }
-}
-
-
-
-extension MemberProfileViewController {
-    
-    enum Profile {
-        
-        case currentUser
-        case attendee(Int)
-        case speaker(Int)
     }
 }

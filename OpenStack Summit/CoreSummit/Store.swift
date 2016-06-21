@@ -24,6 +24,11 @@ public final class Store {
     /// The Realm storage context.
     public let realm = try! Realm()
     
+    /// The member that is logged in.
+    public private(set) var authenticatedMember: RealmMember?
+    
+    // MARK: - Private / Internal Properties
+    
     /// Request queue
     private let requestQueue: NSOperationQueue = {
         
@@ -34,9 +39,9 @@ public final class Store {
         return queue
     }()
     
-    public private(set) var oauthModuleOpenID: OAuth2Module?
+    private var oauthModuleOpenID: OAuth2Module?
     
-    public private(set) var oauthModuleServiceAccount: OAuth2Module?
+    private var oauthModuleServiceAccount: OAuth2Module?
     
     // MARK: - Initialization
     

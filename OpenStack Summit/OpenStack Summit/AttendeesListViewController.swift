@@ -69,6 +69,7 @@ final class AttendeesListViewController: UIViewController, PeopleListViewControl
     
     func showPersonProfile(person: PersonListItem) {
         
+        let memberProfileViewController = MemberProfileViewController()
         
         self.navigationController.pushViewController(memberProfileViewController, animated: true)
     }
