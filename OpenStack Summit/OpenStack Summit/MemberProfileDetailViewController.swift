@@ -208,7 +208,7 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // fetch from server
+        // fetch from server / cache
         loadData()
     }
     
@@ -227,7 +227,7 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
         
     }*/
     
-    /// Fetches the data from the server.
+    /// Fetches the data from the server or cache. 
     private func loadData() {
         
         showActivityIndicator()
@@ -263,6 +263,8 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
                 
                 let speaker = PresentationSpeaker(realmEntity: realmEntity)
                 
+                updateUI(.Value(speaker))
+                
             } else {
                 
                 updateUI(.Error(Error.getSpeakerProfile))
@@ -271,14 +273,12 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
         case let .attendee(identifier):
             
             // fetch attendee from server
-            
-            
-            self.interactor.getAttendeeProfile(identifier) { (response) in
+            Store.shared.attendee(identifier) { (response) in
                 
                 switch response {
                     
-                case let .Error(error): self.showPersonProfile(.Error(error))
-                case let .Value(value): self.showPersonProfile(.Value(value))
+                case let .Error(error): self.updateUI(.Error(error))
+                case let .Value(value): self.updateUI(.Value(value))
                 }
             }
         }
