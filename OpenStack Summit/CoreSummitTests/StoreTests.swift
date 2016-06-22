@@ -63,7 +63,7 @@ final class StoreTests: XCTestCase {
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.attendee(2, summit: 6) { (response) in
+        Store.shared.attendee(3, summit: 6) { (response) in
             
             switch response {
                 

@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
+final class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     
     var menuButton: UIBarButtonItem?
     
