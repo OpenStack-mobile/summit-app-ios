@@ -17,6 +17,41 @@ public class RealmPresentationSpeaker: RealmPerson {
     
 }
 
+// MARK: - Fetches
+
+public extension PresentationSpeaker {
+    
+    static func filter(realm: Realm = try! Realm(), searchTerm: String = "", page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
+        
+        let sortProperties = [SortDescriptor(property: "firstName", ascending: true), SortDescriptor(property: "lastName", ascending: true)]
+        
+        var result = realm.objects(RealmPresentationSpeaker.self).sorted(sortProperties)
+        
+        // HACK: filter speakers with empty name
+        result = result.filter("fullName != ''")
+        
+        if searchTerm.isEmpty == false {
+            
+            result = result.filter("fullName CONTAINS [c]%@", searchTerm)
+        }
+        
+        var speakers = [RealmPresentationSpeaker]()
+        
+        let startRecord = (page - 1) * objectsPerPage
+        
+        let endRecord = (startRecord + (objectsPerPage - 1)) <= result.count ? startRecord + (objectsPerPage - 1) : result.count - 1
+        
+        if (startRecord <= endRecord) {
+            
+            for index in (startRecord...endRecord) {
+                speakers.append(result[index])
+            }
+        }
+        
+        return PresentationSpeaker.from(realm: speakers)
+    }
+}
+
 // MARK: - Encoding
 
 extension PresentationSpeaker: RealmDecodable {

@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-final class SpeakerListViewController: UIViewController, PeopleListViewController, IndicatorInfoProvider {
+@objc final class SpeakerListViewController: UIViewController, PeopleListViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -34,7 +34,19 @@ final class SpeakerListViewController: UIViewController, PeopleListViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerCell()
+        configureTableView()
+    }
+    
+    // MARK: - Methods
+    
+    func fetchData() {
+        
+        
+    }
+    
+    func showPersonProfile(person: PersonListItem) {
+        
+        
     }
     
     // MARK: - IndicatorInfoProvider

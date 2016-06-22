@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol MessageEnabledViewController {
+public protocol MessageEnabledViewController: class {
 
 }
 

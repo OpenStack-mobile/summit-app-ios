@@ -1,28 +1,28 @@
 //
-//  SpeakerPresentationsViewController.swift
-//  OpenStack Summit
+//  PersonalScheduleViewController.swift
+//  OpenStackSummit
 //
-//  Created by Alsey Coleman Miller on 6/21/16.
-//  Copyright © 2016 OpenStack. All rights reserved.
+//  Created by Claudio on 10/16/15.
+//  Copyright © 2015 OpenStack. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
 
-final class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider {
+final class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
     // MARK: - Loading
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        //presenter.viewLoad()
     }
     
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Sessions")
+        return IndicatorInfo(title: "Schedule")
     }
 }

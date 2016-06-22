@@ -58,4 +58,27 @@ final class StoreTests: XCTestCase {
         
         waitForExpectationsWithTimeout(60, handler: nil)
     }
+    
+    func testSummitAttendeeRequest() {
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        Store.shared.attendee(1) { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                print(value);
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
 }

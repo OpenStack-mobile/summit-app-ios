@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     
-    var menuButton: UIBarButtonItem!
+    var menuButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         
@@ -32,14 +32,17 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
         
         if navigationController?.childViewControllers.count == 1 {
-            menuButton = UIBarButtonItem()
+            
+            let menuButton = UIBarButtonItem()
             menuButton.target = revealViewController()
             menuButton.action = Selector("revealToggle:")
-            menuButton.image = UIImage(named: "menu")
+            menuButton.image = R.image.menu()!
+            
             navigationItem.leftBarButtonItem = menuButton
+            self.menuButton = menuButton
         }
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        setBlankBackBarButtonItem()
         
         edgesForExtendedLayout = UIRectEdge.Top
         
