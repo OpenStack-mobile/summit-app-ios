@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-final class AttendeesListViewController: UIViewController, PeopleListViewController, IndicatorInfoProvider {
+@objc final class AttendeesListViewController: UIViewController, PeopleListViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -43,7 +43,7 @@ final class AttendeesListViewController: UIViewController, PeopleListViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerCell()
+        configureTableView()
     }
     
     // MARK: - Methods
@@ -69,9 +69,9 @@ final class AttendeesListViewController: UIViewController, PeopleListViewControl
     
     func showPersonProfile(person: PersonListItem) {
         
-        let memberProfileViewController = MemberProfileViewController()
+        let memberProfileViewController = MemberProfileViewController(profile: MemberProfileIdentifier(listItem: person))
         
-        self.navigationController.pushViewController(memberProfileViewController, animated: true)
+        self.navigationController?.pushViewController(memberProfileViewController, animated: true)
     }
     
     // MARK: - IndicatorInfoProvider

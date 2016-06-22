@@ -7,6 +7,7 @@
 //
 
 struct Constants {
+    
     struct Notifications {
         static let LoggedInNotification = "kLoggedInNotification"
         static let LoggedOutNotification = "kLoggedOutNotification"

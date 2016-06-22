@@ -9,7 +9,7 @@
 import UIKit
 import CoreSummit
 
-protocol PeopleListViewController: UITableViewDelegate, UITableViewDataSource, ShowActivityIndicatorProtocol {
+protocol PeopleListViewController: class, ShowActivityIndicatorProtocol {
     
     weak var peopleListView: PeopleListView! { get }
     
@@ -33,9 +33,11 @@ extension PeopleListViewController {
     }
     
     @inline(__always)
-    func registerCell() {
+    func configureTableView() {
         
         peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
+        peopleListView.tableView.delegate = unsafeBitCast(self, UITableViewDelegate.self)
+        peopleListView.tableView.dataSource = unsafeBitCast(self, UITableViewDataSource.self)
     }
     
     @inline(__always)

@@ -53,7 +53,7 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
         }
     }
     
-    var pictureURL: String! {
+    var pictureURL: String = "" {
         
         didSet {
             
@@ -208,50 +208,8 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        showActivityIndicator()
-        
-        switch profile {
-            
-        case .currentUser:
-            
-            if let currentMember = Store.shared.authenticatedMember {
-                
-                if let speakerRole = currentMember.speakerRole {
-                    
-                    updateUI(.Value(speakerRole))
-                }
-                else if let attendeeRole = currentMember.attendeeRole {
-                    
-                    updateUI(.Value(attendeeRole))
-                }
-                else {
-                    
-                    fatalError("Authenticated member is not a speaker nor an attendee")
-                }
-            }
-            
-        case let .speaker(identifier):
-            
-            self.interactor.getSpeakerProfile(identifier) { (response) in
-                
-                switch response {
-                    
-                case let .Error(error): self.showPersonProfile(.Error(error))
-                case let .Value(value): self.showPersonProfile(.Value(value))
-                }
-            }
-            
-        case let .attendee(identifier):
-            
-            self.interactor.getAttendeeProfile(identifier) { (response) in
-                
-                switch response {
-                    
-                case let .Error(error): self.showPersonProfile(.Error(error))
-                case let .Value(value): self.showPersonProfile(.Value(value))
-                }
-            }
-        }
+        // fetch from server
+        loadData()
     }
     
     // MARK: - Methods
@@ -268,6 +226,63 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
     func handleError(error: NSError) {
         
     }*/
+    
+    /// Fetches the data from the server.
+    private func loadData() {
+        
+        showActivityIndicator()
+        
+        switch profile {
+            
+        case .currentUser:
+            
+            if let currentMember = Store.shared.authenticatedMember {
+                
+                if let speakerRole = currentMember.speakerRole {
+                    
+                    let person = PresentationSpeaker(realmEntity: speakerRole)
+                    
+                    updateUI(.Value(person))
+                }
+                else if let attendeeRole = currentMember.attendeeRole {
+                    
+                    let person = SummitAttendee(realmEntity: attendeeRole)
+                    
+                    updateUI(.Value(person))
+                }
+                else {
+                    
+                    fatalError("Authenticated member is not a speaker nor an attendee")
+                }
+            }
+            
+        case let .speaker(identifier):
+            
+            // load speaker from cache
+            if let realmEntity = RealmPresentationSpeaker.find(identifier, realm: Store.shared.realm) {
+                
+                let speaker = PresentationSpeaker(realmEntity: realmEntity)
+                
+            } else {
+                
+                updateUI(.Error(Error.getSpeakerProfile))
+            }
+            
+        case let .attendee(identifier):
+            
+            // fetch attendee from server
+            
+            
+            self.interactor.getAttendeeProfile(identifier) { (response) in
+                
+                switch response {
+                    
+                case let .Error(error): self.showPersonProfile(.Error(error))
+                case let .Value(value): self.showPersonProfile(.Value(value))
+                }
+            }
+        }
+    }
     
     private func updateUI(value: ErrorValue<Person>) {
         

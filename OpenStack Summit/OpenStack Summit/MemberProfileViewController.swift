@@ -9,18 +9,21 @@
 import UIKit
 import XLPagerTabStrip
 import KTCenterFlowLayout
+import CoreSummit
 
 final class MemberProfileViewController: RevealTabStripViewController {
     
     // MARK: - Properties
     
-    private(set) var profile: MemberProfileIdentifier
+    let profile: MemberProfileIdentifier
     
     // MARK: - Initialization
     
     init(profile: MemberProfileIdentifier) {
         
         self.profile = profile
+        
+        super.init(nibName: nil, bundle: nil) // not created from NIB
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,13 +41,14 @@ final class MemberProfileViewController: RevealTabStripViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // try to get name if speaker
         if case let .speaker(speakerID) = profile {
             
-            getSpeakerProfile(speakerID) { speaker, error in
+            if let realmEntity = RealmPresentationSpeaker.find(speakerID, realm: Store.shared.realm) {
                 
-                if speaker != nil {
-                    self.viewController.title = speaker!.name.uppercaseString
-                }
+                let speaker = PresentationSpeaker(realmEntity: realmEntity)
+                
+                self.title = speaker.name.uppercaseString
             }
         }
         
@@ -53,13 +57,11 @@ final class MemberProfileViewController: RevealTabStripViewController {
     
     // MARK: - Methods
     
-    
-    
     // MARK: - RevealTabStripViewController
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let childViewControllers: [UIViewController]
+        var childViewControllers = [UIViewController]()
         
         let memberProfileDetailVC = R.storyboard.memberProfile.memberProfileDetailViewController()!
         
@@ -70,15 +72,13 @@ final class MemberProfileViewController: RevealTabStripViewController {
         if case let .speaker(identifier) = profile {
             
             let speakerPresentationsViewController = SpeakerPresentationsViewController()
+            
+            // set speaker ID
+            //speakerPresentationsViewController.
+            
+            childViewControllers.append(speakerPresentationsViewController)
         }
         
-        switch profile {
-            
-        case .currentUser: childViewControllers = [memberProfileDetailVC]
-            
-        case let .attendee(identifier): childViewControllers = [memberProfileDetailVC]
-            
-        case let .speaker(identifier):
-        }
+        return childViewControllers
     }
 }
