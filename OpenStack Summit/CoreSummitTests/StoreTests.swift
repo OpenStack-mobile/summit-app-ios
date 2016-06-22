@@ -11,6 +11,29 @@ import CoreSummit
 
 final class StoreTests: XCTestCase {
     
+    func testCurrentSummitRequest() {
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        Store.shared.summit() { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                print(value);
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
+    
     func testAustinSummitRequest() {
         
         let austinID = 6
@@ -36,34 +59,11 @@ final class StoreTests: XCTestCase {
         waitForExpectationsWithTimeout(60, handler: nil)
     }
     
-    func testCurrentSummitRequest() {
-        
-        let expectation = expectationWithDescription("API Request")
-        
-        Store.shared.summit() { (response) in
-            
-            switch response {
-                
-            case let .Error(error):
-                
-                XCTFail("\(error)");
-                
-            case let .Value(value):
-                
-                print(value);
-            }
-            
-            expectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(60, handler: nil)
-    }
-    
     func testSummitAttendeeRequest() {
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.attendee(1) { (response) in
+        Store.shared.attendee(2, summit: 6) { (response) in
             
             switch response {
                 
