@@ -21,18 +21,7 @@ public struct PersonListItem: Named {
     
     public let pictureURL: String
     
-    public let type: PersonListItemType
-    
     // MARK: - Initialization
-    
-    public init(person: SummitAttendee) {
-        
-        self.identifier = person.identifier
-        self.name = person.name
-        self.title = person.title
-        self.pictureURL = person.pictureURL
-        self.type = .attendee
-    }
     
     public init(person: PresentationSpeaker) {
         
@@ -40,13 +29,5 @@ public struct PersonListItem: Named {
         self.name = person.name
         self.title = person.title
         self.pictureURL = person.pictureURL
-        self.type = .speaker
     }
-}
-
-// MARK: - Supporting Types
-
-public enum PersonListItemType {
-    
-    case attendee, speaker
 }
