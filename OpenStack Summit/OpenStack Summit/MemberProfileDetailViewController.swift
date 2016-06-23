@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import Haneke
 import CoreSummit
 
-final class MemberProfileDetailViewController: UIViewController, ShowActivityIndicatorProtocol, IndicatorInfoProvider {
+final class MemberProfileDetailViewController: UIViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -208,7 +208,7 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // fetch from server / cache
+        // fetch from cache
         loadData()
     }
     
@@ -227,10 +227,8 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
         
     }*/
     
-    /// Fetches the data from the server or cache. 
+    /// Fetches the data from cache. 
     private func loadData() {
-        
-        showActivityIndicator()
         
         switch profile {
             
@@ -269,24 +267,10 @@ final class MemberProfileDetailViewController: UIViewController, ShowActivityInd
                 
                 updateUI(.Error(Error.getSpeakerProfile))
             }
-            
-        case let .attendee(identifier):
-            
-            // fetch attendee from server
-            Store.shared.attendee(identifier) { (response) in
-                
-                switch response {
-                    
-                case let .Error(error): self.updateUI(.Error(error))
-                case let .Value(value): self.updateUI(.Value(value))
-                }
-            }
         }
     }
     
     private func updateUI(value: ErrorValue<Person>) {
-        
-        defer { hideActivityIndicator() }
         
         switch value {
             

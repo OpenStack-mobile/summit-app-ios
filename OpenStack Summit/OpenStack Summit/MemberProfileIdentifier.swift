@@ -10,7 +10,6 @@
 public enum MemberProfileIdentifier {
     
     case currentUser
-    case attendee(Int)
     case speaker(Int)
 }
 
@@ -20,10 +19,6 @@ public extension MemberProfileIdentifier {
     /// Initialize from `PersonListItem`.
     init(listItem: PersonListItem) {
         
-        switch listItem.type {
-            
-        case .speaker: self = .speaker(listItem.identifier)
-        case .attendee: self = .attendee(listItem.identifier)
-        }
+        self = .speaker(listItem.identifier)
     }
 }

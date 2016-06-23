@@ -8,8 +8,9 @@
 
 import UIKit
 import XLPagerTabStrip
+import SWRevealViewController
 
-final class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
+class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     
     var menuButton: UIBarButtonItem?
     
@@ -34,8 +35,8 @@ final class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         if navigationController?.childViewControllers.count == 1 {
             
             let menuButton = UIBarButtonItem()
-            menuButton.target = revealViewController()
-            menuButton.action = Selector("revealToggle:")
+            menuButton.target = self
+            menuButton.action = #selector(RevealTabStripViewController.revealToggle(_:))
             menuButton.image = R.image.menu()!
             
             navigationItem.leftBarButtonItem = menuButton
@@ -46,5 +47,10 @@ final class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         
         edgesForExtendedLayout = UIRectEdge.Top
         
+    }
+    
+    func revealToggle(sender: UIBarButtonItem) {
+        
+        revealViewController().revealToggle(sender)
     }
 }

@@ -3,7 +3,7 @@ github "realm/realm-cocoa" "v0.98.6"
 github "ColemanCDA/aerogear-ios-http" "master"
 github "ColemanCDA/aerogear-ios-oauth2" "openstack"
 github "icanzilb/SwiftSpinner" "master"
-github "xmartlabs/XLPagerTabStrip"
+github "xmartlabs/XLPagerTabStrip" ~> 5.0
 github "ColemanCDA/SWRevealViewController" "master"
 github "mac-cain13/R.swift.Library"
 github "Haneke/HanekeSwift"

@@ -68,7 +68,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     deinit {
         
-        
+        stopNotifications()
     }
     
     override func viewDidLoad() {
@@ -85,7 +85,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         scheduleView.tableView.rowHeight = UITableViewAutomaticDimension
         
         // register for notifications
-        
+        registerNotifications()
     }
     
     // MARK: - Actions
@@ -100,16 +100,21 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
     }
     
-    func reloadSchedule() {
-        
-        scheduleView.tableView.delegate = self
-        scheduleView.tableView.dataSource = self
-        scheduleView.tableView.reloadData()
-    }
-    
     func toggleEventList(show: Bool) {}
     
     func toggleNoConnectivityMessage(show: Bool) {}
+    
+    // MARK: Data
+    
+    private final func isDataLoaded() -> Bool {
+        
+        return Store.shared.realm.objects(RealmSummit.self).first != nil
+    }
+    
+    private final func eventExist(id: Identifier) -> Bool {
+        
+        return RealmSummitEvent.find(id, realm: Store.shared.realm) != nil
+    }
     
     // MARK: - AFHorizontalDayPickerDelegate
     
@@ -125,7 +130,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func horizontalDayPicker(picker: AFHorizontalDayPicker, didSelectDate date: NSDate) {
         
-        internalPresenter.reloadSchedule()
+        scheduleView.tableView.reloadData()
     }
     
     // MARK: - UITableViewDataSource
