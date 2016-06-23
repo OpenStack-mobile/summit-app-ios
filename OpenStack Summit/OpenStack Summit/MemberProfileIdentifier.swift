@@ -6,6 +6,8 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import struct CoreSummit.PresentationSpeaker
+
 /// Data type Used the configure the member profile-related View Controllers. 
 public enum MemberProfileIdentifier {
     
@@ -17,7 +19,7 @@ public enum MemberProfileIdentifier {
 public extension MemberProfileIdentifier {
     
     /// Initialize from `PersonListItem`.
-    init(listItem: PersonListItem) {
+    init(listItem: PresentationSpeaker) {
         
         self = .speaker(listItem.identifier)
     }
