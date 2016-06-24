@@ -20,9 +20,9 @@ public struct SummitAttendee: Person {
     
     public var email: String
     
-    public var twitter: String
+    public var twitter: String?
     
-    public var irc: String
+    public var irc: String?
     
     public var biography: String
     

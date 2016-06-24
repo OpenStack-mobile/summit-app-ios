@@ -48,11 +48,36 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         
         // reset Table View
         peopleListView.tableView.setContentOffset(CGPointZero, animated: false)
+        
+        // load cached data
+        loadData()
+        
+        // FIXME: temporary request since we dont have the main UI setup
+        do {
+            
+            showActivityIndicator()
+            
+            Store.shared.summit(6) { [weak self] (response) in
+                
+                guard let controller = self else { return }
+                
+                controller.hideActivityIndicator()
+                
+                switch response {
+                    
+                case let .Error(error): controller.showErrorAlert("\(error)")
+                case let .Value(summit):
+                    
+                    controller.loadData()
+                }
+            }
+        }
     }
     
     // MARK: - Methods
     
-    @IBAction func fetchData(sender: AnyObject? = nil) {
+    /// Reloads the list of speakers from cache.
+    @IBAction func loadData(sender: AnyObject? = nil) {
         
         let speakers = PresentationSpeaker.filter(Store.shared.realm, searchTerm: searchTerm, page: page, objectsPerPage: objectsPerPage)
         
@@ -78,7 +103,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         /// fetch more
         if row == people.endIndex && loadedAll == false {
             
-            fetchData()
+            loadData()
         }
     }
     

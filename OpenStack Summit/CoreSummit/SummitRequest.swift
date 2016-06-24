@@ -41,6 +41,9 @@ public extension Store {
                 let entity = Summit(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
+            // cache
+            try! self.realm.write { let _ = entity.save(self.realm) }
+            
             // success
             completion(.Value(entity))
         }

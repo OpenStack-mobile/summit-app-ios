@@ -65,9 +65,11 @@ extension PresentationSpeaker: RealmDecodable {
         self.title = realmEntity.title
         self.pictureURL = realmEntity.pictureUrl
         self.email = realmEntity.email
-        self.twitter = realmEntity.twitter
-        self.irc = realmEntity.irc
         self.biography = realmEntity.bio
+        
+        // optional
+        self.twitter = realmEntity.twitter.isEmpty ? nil : realmEntity.twitter
+        self.irc = realmEntity.irc.isEmpty ? nil : realmEntity.irc
         
         // speaker
         self.memberIdentifier = realmEntity.memberId
@@ -85,8 +87,8 @@ extension PresentationSpeaker: RealmEncodable {
         realmEntity.title = title
         realmEntity.pictureUrl = pictureURL
         realmEntity.email = email
-        realmEntity.twitter = twitter
-        realmEntity.irc = irc
+        realmEntity.twitter = twitter ?? ""
+        realmEntity.irc = irc ?? ""
         realmEntity.bio = biography
         
         realmEntity.memberId = memberIdentifier

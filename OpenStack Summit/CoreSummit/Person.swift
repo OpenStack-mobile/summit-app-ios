@@ -18,9 +18,9 @@ public protocol Person: Named {
         
     var email: String { get }
     
-    var twitter: String { get }
+    var twitter: String? { get }
     
-    var irc: String { get }
+    var irc: String? { get }
     
     var biography: String { get }
     

@@ -28,8 +28,6 @@ extension PresentationSpeaker: JSONDecodable {
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
             let biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String,
-            let irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String,
-            let twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String,
             let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int
             else { return nil }
         
@@ -40,8 +38,10 @@ extension PresentationSpeaker: JSONDecodable {
         self.title = title
         self.pictureURL = pictureURL
         self.biography = biography
-        self.irc = irc
-        self.twitter = twitter
         self.memberIdentifier = memberID
+        
+        // optional
+        self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
+        self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
     }
 }

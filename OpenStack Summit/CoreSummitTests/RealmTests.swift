@@ -13,9 +13,16 @@ import RealmSwift
 
 final class RealmTests: XCTestCase {
     
-    let realm = try! Realm()
+    func createRealm() -> Realm {
+        
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "Test Realm"
+        
+        return try! Realm()
+    }
     
     func testSummit() {
+        
+        let realm = createRealm()
         
         // load test data
         let testJSON = loadJSON("AustinSummit")
