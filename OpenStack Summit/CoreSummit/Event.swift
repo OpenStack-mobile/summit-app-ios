@@ -38,5 +38,7 @@ public struct Event: Named {
     
     public var presentation: Presentation
     
+    public var speakers: [PresentationSpeaker]
+    
     //public var trackIdentifier: Identifier
 }
