@@ -29,7 +29,6 @@ extension Member: RealmDecodable {
         self.identifier = realmEntity.id
         self.firstName = realmEntity.firstName
         self.lastName = realmEntity.lastName
-        self.title = realmEntity.title
         self.pictureURL = realmEntity.pictureUrl
         self.email = realmEntity.email
         self.biography = realmEntity.bio
@@ -37,6 +36,8 @@ extension Member: RealmDecodable {
         // optional
         self.twitter = realmEntity.twitter.isEmpty ? nil : realmEntity.twitter
         self.irc = realmEntity.irc.isEmpty ? nil : realmEntity.irc
+        self.title = realmEntity.title.isEmpty ? nil : realmEntity.title
+        self.biography = realmEntity.bio.isEmpty ? nil : realmEntity.bio
         
         if let speaker = realmEntity.speakerRole {
             
@@ -66,14 +67,12 @@ extension Member: RealmEncodable {
         
         realmEntity.firstName = firstName
         realmEntity.lastName = lastName
-        realmEntity.title = title
+        realmEntity.title = title ?? ""
         realmEntity.pictureUrl = pictureURL
         realmEntity.email = email
         realmEntity.twitter = twitter ?? ""
         realmEntity.irc = irc ?? ""
-        realmEntity.bio = biography
-        
-        
+        realmEntity.bio = biography ?? ""
         
         return realmEntity
     }

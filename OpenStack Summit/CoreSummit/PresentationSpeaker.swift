@@ -14,21 +14,21 @@ public struct PresentationSpeaker: Person {
     
     public var lastName: String
     
-    public var title: String
+    public var title: String?
     
     public var pictureURL: String
-        
-    public var email: String
-    
+            
     public var twitter: String?
     
     public var irc: String?
     
-    public var biography: String
+    public var biography: String?
+    
+    //public var email: String
     
     //public var location: String
     
-    public var memberIdentifier: Identifier
+    public var memberIdentifier: Identifier?
 }
 
 // MARK: - Extensions

@@ -55,7 +55,6 @@ extension SummitEvent: JSONDecodable {
         self.sponsors = sponsors
         self.location = locationIdentifier
         self.presentation = presentation
-        self.speakers = speakers
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
