@@ -203,7 +203,7 @@
 
 /* Begin PBXFileReference section */
 		6E00D1AA1D1C49C200278274 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealViewController.swift; sourceTree = "<group>"; };
-		6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenStack Summit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E104D3D1D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 		6E104D2F1D1061AC00541E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */,
+				6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */,
 				6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */,
 				6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */,
 				6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */,
@@ -675,9 +675,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6E104D2D1D1061AC00541E84 /* OpenStack Summit */ = {
+		6E104D2D1D1061AC00541E84 /* OpenStackSummit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack Summit" */;
+			buildConfigurationList = 6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStackSummit" */;
 			buildPhases = (
 				6E104D2A1D1061AC00541E84 /* Sources */,
 				6E104D2B1D1061AC00541E84 /* Frameworks */,
@@ -692,9 +692,9 @@
 				6E10A5051D1066E9008CBD0C /* PBXTargetDependency */,
 				6EF12C661D149C7200814AD0 /* PBXTargetDependency */,
 			);
-			name = "OpenStack Summit";
+			name = OpenStackSummit;
 			productName = "OpenStack Summit";
-			productReference = 6E104D2E1D1061AC00541E84 /* OpenStack Summit.app */;
+			productReference = 6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6E104D411D1061AC00541E84 /* OpenStack SummitTests */ = {
@@ -814,7 +814,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6E104D2D1D1061AC00541E84 /* OpenStack Summit */,
+				6E104D2D1D1061AC00541E84 /* OpenStackSummit */,
 				6E104D411D1061AC00541E84 /* OpenStack SummitTests */,
 				6E104D4C1D1061AC00541E84 /* OpenStack SummitUITests */,
 				6E10A4F01D1066E9008CBD0C /* CoreSummit */,
@@ -897,6 +897,7 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/SwiftSpinner.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MTDates.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Cosmos.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Realm.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
@@ -930,7 +931,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/rswift\" \"-p\" \"$SRCROOT/OpenStack Summit.xcodeproj\" \"-t\" \"OpenStack Summit\" \"--bundleIdentifier\" \"org.openstack.OpenStack-Summit\" \"$SRCROOT\"";
+			shellScript = "\"$SRCROOT/rswift\" \"-p\" \"$SRCROOT/OpenStack Summit.xcodeproj\" \"-t\" \"OpenStackSummit\" \"--bundleIdentifier\" \"org.openstack.OpenStack-Summit\" \"$SRCROOT\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1084,12 +1085,12 @@
 /* Begin PBXTargetDependency section */
 		6E104D441D1061AC00541E84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6E104D2D1D1061AC00541E84 /* OpenStack Summit */;
+			target = 6E104D2D1D1061AC00541E84 /* OpenStackSummit */;
 			targetProxy = 6E104D431D1061AC00541E84 /* PBXContainerItemProxy */;
 		};
 		6E104D4F1D1061AC00541E84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6E104D2D1D1061AC00541E84 /* OpenStack Summit */;
+			target = 6E104D2D1D1061AC00541E84 /* OpenStackSummit */;
 			targetProxy = 6E104D4E1D1061AC00541E84 /* PBXContainerItemProxy */;
 		};
 		6E10A4FD1D1066E9008CBD0C /* PBXTargetDependency */ = {
@@ -1205,6 +1206,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1217,6 +1219,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1355,7 +1358,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack Summit" */ = {
+		6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStackSummit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E104D571D1061AC00541E84 /* Debug */,

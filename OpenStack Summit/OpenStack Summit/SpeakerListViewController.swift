@@ -35,7 +35,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         
         // setup navigation bar
         navigationItem.title = "SPEAKERS"
-        addMenuButton()
+        //addMenuButton() // FIXME: Enable when Menu Reveal controller is implemented
         
         // setup table view
         peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)

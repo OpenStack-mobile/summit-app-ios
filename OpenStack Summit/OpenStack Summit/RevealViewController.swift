@@ -9,7 +9,7 @@
 import UIKit
 import SWRevealViewController
 
-protocol RevealViewController: class { }
+@objc protocol RevealViewController: class { }
 
 extension RevealViewController {
     
@@ -31,8 +31,25 @@ extension RevealViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("Only UIViewController subclasses should conform to RevealViewController protocol") }
         
+        let revealViewController: SWRevealViewController = {
+           
+            var parent: UIViewController? = viewController
+            
+            while parent != nil {
+                
+                parent = parent?.parentViewController
+                
+                if let revealVC = parent as? SWRevealViewController {
+                    
+                    return revealVC
+                }
+            }
+            
+            fatalError("Not a child view controller of SWRevealViewController")
+        }()
+        
         let menuButton = UIBarButtonItem()
-        menuButton.target = viewController.revealViewController()
+        menuButton.target = revealViewController
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         menuButton.image = UIImage(named: "menu")
         

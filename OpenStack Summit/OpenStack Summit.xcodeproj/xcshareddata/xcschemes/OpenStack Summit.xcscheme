@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E104D2D1D1061AC00541E84"
-               BuildableName = "OpenStack Summit.app"
-               BlueprintName = "OpenStack Summit"
+               BuildableName = "OpenStackSummit.app"
+               BlueprintName = "OpenStackSummit"
                ReferencedContainer = "container:OpenStack Summit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E104D2D1D1061AC00541E84"
-            BuildableName = "OpenStack Summit.app"
-            BlueprintName = "OpenStack Summit"
+            BuildableName = "OpenStackSummit.app"
+            BlueprintName = "OpenStackSummit"
             ReferencedContainer = "container:OpenStack Summit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -86,8 +86,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E104D2D1D1061AC00541E84"
-            BuildableName = "OpenStack Summit.app"
-            BlueprintName = "OpenStack Summit"
+            BuildableName = "OpenStackSummit.app"
+            BlueprintName = "OpenStackSummit"
             ReferencedContainer = "container:OpenStack Summit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -105,8 +105,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E104D2D1D1061AC00541E84"
-            BuildableName = "OpenStack Summit.app"
-            BlueprintName = "OpenStack Summit"
+            BuildableName = "OpenStackSummit.app"
+            BlueprintName = "OpenStackSummit"
             ReferencedContainer = "container:OpenStack Summit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
