@@ -689,8 +689,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				6EF12C661D149C7200814AD0 /* PBXTargetDependency */,
 				6E10A5051D1066E9008CBD0C /* PBXTargetDependency */,
+				6EF12C661D149C7200814AD0 /* PBXTargetDependency */,
 			);
 			name = "OpenStack Summit";
 			productName = "OpenStack Summit";
@@ -882,14 +882,21 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftFoundation.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/JSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Rswift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SWRevealViewController.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftSpinner.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/SwiftFoundation.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/JSON.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Rswift.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Haneke.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/SWRevealViewController.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/XLPagerTabStrip.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/SwiftSpinner.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/AeroGearHttp.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/AeroGearOAuth2.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/AFHorizontalDayPicker.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/KTCenterFlowLayout.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/SwiftSpinner.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/MTDates.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Cosmos.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (

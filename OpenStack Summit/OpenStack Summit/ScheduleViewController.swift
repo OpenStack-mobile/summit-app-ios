@@ -97,7 +97,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         let cell = view.superview as! UITableViewCell
         let indexPath = scheduleView.tableView.indexPathForCell(cell)
         
-        self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
+        //self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
     }
     
     func toggleEventList(show: Bool) {}
@@ -142,17 +142,18 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        /*
         let eventCount = internalPresenter.getDayEventsCount();
         scheduleView.tableView.hidden = eventCount == 0
         scheduleView.noEventsLabel.hidden = eventCount > 0
-        return eventCount
+        return eventCount */ return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell)!
         
-        internalPresenter.buildScheduleCell(cell, index: indexPath.row)
+        //internalPresenter.buildScheduleCell(cell, index: indexPath.row)
         
         cell.scheduleButton.addTarget(self, action: #selector(ScheduleViewController.toggleScheduledStatus(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         cell.separatorInset = UIEdgeInsetsZero
@@ -166,7 +167,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        internalPresenter.showEventDetail(indexPath.row)
+        //internalPresenter.showEventDetail(indexPath.row)
     }
     
     // MARK: - Notifications

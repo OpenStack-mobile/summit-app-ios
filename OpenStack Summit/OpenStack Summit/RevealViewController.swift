@@ -39,19 +39,3 @@ extension RevealViewController {
         viewController.navigationItem.leftBarButtonItem = menuButton
     }
 }
-
-class RevealViewControllerOld: UIViewController {
-    
-    final var menuButton: UIBarButtonItem!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        menuButton = UIBarButtonItem()
-        menuButton.target = revealViewController()
-        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-        menuButton.image = UIImage(named: "menu")
-        
-        navigationItem.leftBarButtonItem = menuButton
-    }
-}
