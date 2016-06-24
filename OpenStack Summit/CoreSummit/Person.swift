@@ -11,18 +11,18 @@ public protocol Person: Named {
     var firstName: String { get }
     
     var lastName: String { get }
-    
-    var title: String { get }
-    
+        
     var pictureURL: String { get }
         
-    var email: String { get }
+    //var email: String { get }
+    
+    var title: String? { get }
     
     var twitter: String? { get }
     
     var irc: String? { get }
     
-    var biography: String { get }
+    var biography: String? { get }
     
     //var location: String { get } // not sure?
 }

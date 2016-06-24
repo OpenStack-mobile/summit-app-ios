@@ -31,8 +31,8 @@ extension Summit: JSONDecodable {
             /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
             /* let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue, */
             /* let sponsors = Company.fromJSON(sponsorsJSONArray), */
-            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
-            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
+            let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
+            let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
             let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
@@ -61,12 +61,12 @@ extension Summit: JSONDecodable {
         self.trackGroups = trackGroups
         self.schedule = events
         self.eventTypes = eventTypes
+        self.speakers = speakers
         
         // in JSON but not in Realm
         //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
         //self.active = active
         //self.sponsors = sponsors
-        //self.speakers = speakers
         
         // optional values
         

@@ -26,7 +26,7 @@ public struct Summit: Named {
     
     //public var sponsors: [Company]
     
-    //public var speakers: [PresentationSpeaker]
+    public var speakers: [PresentationSpeaker]
     
     public var startShowingVenues: Date?
         

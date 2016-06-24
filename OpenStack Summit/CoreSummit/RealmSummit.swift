@@ -23,6 +23,7 @@ public class RealmSummit: RealmNamed {
     public let track = List<RealmTrack>()
     public let trackGroups = List<RealmTrackGroup>()
     public let eventTypes = List<RealmEventType>()
+    public let speakers = List<RealmPresentationSpeaker>()
 }
 
 // MARK: - Realm Encoding
@@ -44,12 +45,11 @@ extension Summit: RealmDecodable {
         self.tracks = Track.from(realm: realmEntity.track)
         self.trackGroups = TrackGroup.from(realm: realmEntity.trackGroups)
         self.schedule = SummitEvent.from(realm: realmEntity.events)
+        self.speakers = PresentationSpeaker.from(realm: realmEntity.speakers)
         
         // locations
-        var venues = [Location]()
-        var rooms = [Location]()
-        realmEntity.venues.forEach { venues.append(Location.venue(Venue(realmEntity: $0))) }
-        realmEntity.venuesRooms.forEach { rooms.append(Location.room(VenueRoom(realmEntity: $0))) }
+        let venues = realmEntity.venues.map { Location.venue(Venue(realmEntity: $0)) }
+        let rooms = realmEntity.venuesRooms.map { Location.room(VenueRoom(realmEntity: $0)) }
         self.locations = venues + rooms
         
         // optional values
@@ -83,6 +83,7 @@ extension Summit: RealmEncodable {
         realmEntity.track.replace(with: tracks.save(realm))
         realmEntity.trackGroups.replace(with: trackGroups.save(realm))
         realmEntity.events.replace(with: schedule)
+        realmEntity.speakers.replace(with: speakers)
         
         // locations
         realmEntity.venues.removeAll()

@@ -20,7 +20,6 @@ public class RealmSummitEvent: RealmNamed {
     public let summitTypes = List<RealmSummitType>()
     public let sponsors = List<RealmCompany>()
     public let tags = List<RealmTag>()
-    public let speakers = List<RealmPresentationSpeaker>()
     public dynamic var presentation : RealmPresentation?
     public dynamic var venue : RealmVenue?
     public dynamic var venueRoom : RealmVenueRoom?
@@ -43,7 +42,6 @@ extension SummitEvent: RealmDecodable {
         self.sponsors = realmEntity.sponsors.identifiers
         self.tags = Tag.from(realm: realmEntity.tags)
         self.presentation = Presentation(realmEntity: realmEntity.presentation!)
-        self.speakers = PresentationSpeaker.from(realm: realmEntity.speakers)
         
         if realmEntity.averageFeedback == 0.0 {
             
@@ -89,7 +87,6 @@ extension SummitEvent: RealmEncodable {
         realmEntity.sponsors.replace(with: sponsors)
         realmEntity.tags.replace(with: tags)
         realmEntity.presentation = presentation.save(realm)
-        realmEntity.speakers.replace(with: speakers)
         
         // location
         if let cachedRoom = RealmVenueRoom.find(location, realm: realm) {

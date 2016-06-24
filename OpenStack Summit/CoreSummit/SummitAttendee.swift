@@ -14,7 +14,7 @@ public struct SummitAttendee: Person {
     
     public var lastName: String
     
-    public var title: String
+    public var title: String?
     
     public var pictureURL: String
     
@@ -24,7 +24,7 @@ public struct SummitAttendee: Person {
     
     public var irc: String?
     
-    public var biography: String
+    public var biography: String?
     
     //public var location: String
     
