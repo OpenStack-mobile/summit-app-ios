@@ -24,15 +24,20 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     
     private(set) var loadedAll = false
     
+    private(set) var page = 1
+    
+    private(set) var objectsPerPage = 10
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.topItem?.title = "SPEAKERS"
-        
+        // setup navigation bar
+        navigationItem.title = "SPEAKERS"
         addMenuButton()
         
+        // setup table view
         peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
         peopleListView.tableView.delegate = self
         peopleListView.tableView.dataSource = self
@@ -41,34 +46,24 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        resetTableView()
+        // reset Table View
+        peopleListView.tableView.setContentOffset(CGPointZero, animated: false)
     }
     
     // MARK: - Methods
     
     @IBAction func fetchData(sender: AnyObject? = nil) {
         
+        let speakers = PresentationSpeaker.filter(Store.shared.realm, searchTerm: searchTerm, page: page, objectsPerPage: objectsPerPage)
         
-    }
-    
-    // MARK: - Private Methods
-    
-    private func showPersonProfile(person: PresentationSpeaker) {
-        
-        
-    }
-    
-    @inline(__always)
-    private func resetTableView() {
-        
-        peopleListView.tableView.setContentOffset(CGPointZero, animated: false)
-    }
-    
-    @inline(__always)
-    private func reloadTableView() {
+        people.appendContentsOf(speakers)
+        loadedAll = speakers.count < objectsPerPage
+        page += 1
         
         peopleListView.tableView.reloadData()
     }
+    
+    // MARK: - Private Methods
     
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
         
@@ -114,7 +109,9 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         
         let person = people[indexPath.row]
         
-        showPersonProfile(person)
+        let memberProfileVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: person))
+        
+        showViewController(memberProfileVC, sender: self)
     }
     
     // MARK: - IndicatorInfoProvider

@@ -19,8 +19,8 @@ public enum MemberProfileIdentifier {
 public extension MemberProfileIdentifier {
     
     /// Initialize from `PersonListItem`.
-    init(listItem: PresentationSpeaker) {
+    init(speaker: PresentationSpeaker) {
         
-        self = .speaker(listItem.identifier)
+        self = .speaker(speaker.identifier)
     }
 }
