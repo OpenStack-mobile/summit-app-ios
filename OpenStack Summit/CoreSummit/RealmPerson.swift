@@ -12,7 +12,7 @@ public class RealmPerson: RealmEntity {
     
     public dynamic var firstName = ""
     public dynamic var lastName = ""
-    public dynamic var fullName = ""
+    //public dynamic var fullName = ""
     public dynamic var title = ""
     public dynamic var pictureUrl = ""
     public dynamic var bio = ""
