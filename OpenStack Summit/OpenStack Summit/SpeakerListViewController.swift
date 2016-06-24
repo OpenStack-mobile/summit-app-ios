@@ -18,6 +18,8 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     
     // MARK: - Properties
     
+    var summit: Identifier?
+    
     var searchTerm: String = ""
     
     private(set) var people = [PresentationSpeaker]()
@@ -66,9 +68,8 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
                 switch response {
                     
                 case let .Error(error): controller.showErrorAlert("\(error)")
-                case let .Value(summit):
                     
-                    controller.loadData()
+                case .Value(_): controller.loadData()
                 }
             }
         }
@@ -78,7 +79,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     
     /// Reloads the list of speakers from cache.
     @IBAction func loadData(sender: AnyObject? = nil) {
-        
+                
         let speakers = PresentationSpeaker.filter(Store.shared.realm, searchTerm: searchTerm, page: page, objectsPerPage: objectsPerPage)
         
         people.appendContentsOf(speakers)

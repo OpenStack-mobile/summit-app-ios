@@ -28,11 +28,11 @@ public extension PresentationSpeaker {
         var result = realm.objects(RealmPresentationSpeaker.self).sorted(sortProperties)
         
         // HACK: filter speakers with empty name
-        result = result.filter("fullName != ''")
+        result = result.filter("firstName != '' && lastName != ''")
         
         if searchTerm.isEmpty == false {
             
-            result = result.filter("fullName CONTAINS [c]%@", searchTerm)
+            result = result.filter("firstName CONTAINS [c]%@ || lastName CONTAINS [c]%@", searchTerm)
         }
         
         var speakers = [RealmPresentationSpeaker]()

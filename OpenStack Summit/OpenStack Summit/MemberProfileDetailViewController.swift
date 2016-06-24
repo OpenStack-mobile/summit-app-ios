@@ -150,9 +150,9 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         }
     }
     
-    var twitter: String! {
+    var twitter: String {
         get {
-            return twitterLabel.text
+            return twitterLabel.text ?? ""
         }
         set {
             twitterLabel.text = newValue.hasPrefix("@") ? newValue : "@" + newValue
@@ -177,9 +177,9 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         }
     }
     
-    var irc: String! {
+    var irc: String {
         get {
-            return ircLabel.text
+            return ircLabel.text ?? ""
         }
         set {
             ircLabel.text = newValue
@@ -281,12 +281,12 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         case let .Value(person):
             
             self.name = person.name
-            self.personTitle = person.title
+            self.personTitle = person.title ?? ""
             self.pictureURL = person.pictureURL
-            self.email = person.email
-            self.twitter = person.twitter
-            self.irc = person.irc
-            self.biographyHTML = person.biography
+            self.email = "" //person.email
+            self.twitter = person.twitter ?? ""
+            self.irc = person.irc ?? ""
+            self.biographyHTML = person.biography ?? ""
             
             // FIXME: Setting location in UI, but not in DTO or deserializer
             // self.viewController.location =
