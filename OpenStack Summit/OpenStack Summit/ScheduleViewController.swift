@@ -100,11 +100,13 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         //self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
     }
     
+    // MARK: - Methods
+    
     func toggleEventList(show: Bool) {}
     
     func toggleNoConnectivityMessage(show: Bool) {}
     
-    // MARK: Data
+    // MARK: Private Methods
     
     private final func isDataLoaded() -> Bool {
         
@@ -114,6 +116,42 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     private final func eventExist(id: Identifier) -> Bool {
         
         return RealmSummitEvent.find(id, realm: Store.shared.realm) != nil
+    }
+    
+    private final func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+        
+        /* FIXME: Implement
+        if !Store.shared.isLoggedInAndConfirmedAttendee() {
+            return false;
+        } */
+        
+        guard let loggedInMember = Store.shared.authenticatedMember else {
+            return false
+        }
+        
+        return loggedInMember.attendeeRole?.scheduledEvents.filter("id = \(eventId)").count > 0
+    }
+    
+    private final func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
+        
+        let index = indexPath.row
+        let event = dayEvents[index]
+        
+        cell.eventTitle = event.name
+        cell.eventType = event.eventType
+        cell.time = event.time
+        cell.location = event.location
+        cell.sponsors = event.sponsors
+        cell.track = event.track
+        cell.scheduled = isEventScheduledByLoggedMember(event.id)
+        cell.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ true // FIXME
+        cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
+        
+        // configure button
+        cell.scheduleButton.addTarget(self, action: #selector(ScheduleViewController.toggleScheduledStatus(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutSubviews()
     }
     
     // MARK: - AFHorizontalDayPickerDelegate
@@ -142,23 +180,19 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        /*
-        let eventCount = internalPresenter.getDayEventsCount();
+        let eventCount = dayEvents.count
+        
         scheduleView.tableView.hidden = eventCount == 0
         scheduleView.noEventsLabel.hidden = eventCount > 0
-        return eventCount */ return 0
+        
+        return eventCount
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell)!
         
-        //internalPresenter.buildScheduleCell(cell, index: indexPath.row)
-        
-        cell.scheduleButton.addTarget(self, action: #selector(ScheduleViewController.toggleScheduledStatus(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.layoutSubviews()
+        configure(cell: cell, at: indexPath)
         
         return cell
     }

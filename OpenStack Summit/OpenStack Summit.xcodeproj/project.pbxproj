@@ -1206,7 +1206,10 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_CFLAGS = "-all_load";
+				OTHER_CFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1219,7 +1222,10 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_CFLAGS = "-all_load";
+				OTHER_CFLAGS = (
+					"-all_load",
+					"-Objc",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

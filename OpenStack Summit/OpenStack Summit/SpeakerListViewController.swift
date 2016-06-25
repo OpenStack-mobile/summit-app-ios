@@ -17,9 +17,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet weak var peopleListView: PeopleListView!
     
     // MARK: - Properties
-    
-    var summit: Identifier?
-    
+        
     var searchTerm: String = ""
     
     private(set) var people = [PresentationSpeaker]()
@@ -57,13 +55,13 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         // FIXME: temporary request since we dont have the main UI setup
         do {
             
-            showActivityIndicator()
+            //showActivityIndicator()
             
             Store.shared.summit(6) { [weak self] (response) in
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                //controller.hideActivityIndicator()
                 
                 switch response {
                     

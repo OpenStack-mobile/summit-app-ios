@@ -71,10 +71,10 @@ final class MemberProfileViewController: RevealTabStripViewController {
         
         if case let .speaker(identifier) = profile {
             
-            let speakerPresentationsViewController = SpeakerPresentationsViewController()
+            let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
             
             // set speaker ID
-            //speakerPresentationsViewController.
+            speakerPresentationsViewController.speaker = identifier
             
             childViewControllers.append(speakerPresentationsViewController)
         }
