@@ -283,7 +283,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
             self.name = person.name
             self.personTitle = person.title ?? ""
             self.pictureURL = person.pictureURL
-            self.email = "" //person.email
+            self.email = "" //person.email not in JSON
             self.twitter = person.twitter ?? ""
             self.irc = person.irc ?? ""
             self.biographyHTML = person.biography ?? ""

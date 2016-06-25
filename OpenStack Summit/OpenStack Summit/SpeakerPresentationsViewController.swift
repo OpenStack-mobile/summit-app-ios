@@ -9,10 +9,22 @@
 import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
+import typealias CoreSummit.Identifier
 
 final class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider {
     
+    // MARK: - Properties
+    
+    // Required for view loading
+    var speaker: Identifier!
+    
     // MARK: - Loading
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        assert(speaker != nil, "Speaker identifier not set")
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,6 +35,7 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: "Sessions")
     }
 }
