@@ -149,6 +149,12 @@
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
 		6EFC99BC1D217141009FD0DA /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */; };
 		6EFC99BD1D217141009FD0DA /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BB1D217141009FD0DA /* NSDateComponents+MTDates.m */; };
+		6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BE1D218280009FD0DA /* MenuViewController.swift */; };
+		6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C01D2198DF009FD0DA /* Menu.storyboard */; };
+		6EFC99C31D21C952009FD0DA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C21D21C952009FD0DA /* Reachability.swift */; };
+		6EFC99C51D21CAE7009FD0DA /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */; };
+		6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C61D21DBE5009FD0DA /* Event.storyboard */; };
+		6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,6 +348,12 @@
 		6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
 		6EFC99BA1D217141009FD0DA /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
 		6EFC99BB1D217141009FD0DA /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateComponents+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
+		6EFC99BE1D218280009FD0DA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		6EFC99C01D2198DF009FD0DA /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		6EFC99C21D21C952009FD0DA /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		6EFC99C61D21DBE5009FD0DA /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
+		6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,9 +430,11 @@
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */,
+				6EFC99C01D2198DF009FD0DA /* Menu.storyboard */,
 				6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */,
 				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
 				6E2537E71D19B1C4003E3400 /* Schedule.storyboard */,
+				6EFC99C61D21DBE5009FD0DA /* Event.storyboard */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
 				6EF147EC1D13579C00D5EEF9 /* View */,
@@ -574,6 +588,7 @@
 		6E10A5A31D106AC5008CBD0C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6EFC99C21D21C952009FD0DA /* Reachability.swift */,
 				6E2538501D1B01D7003E3400 /* Error.swift */,
 				6E25384E1D1AF9C5003E3400 /* Notification.swift */,
 				6E25384A1D1AF416003E3400 /* Filter.swift */,
@@ -593,31 +608,6 @@
 				6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */,
 			);
 			name = Requests;
-			sourceTree = "<group>";
-		};
-		6E2537E41D19B0C1003E3400 /* Speaker Presentations */ = {
-			isa = PBXGroup;
-			children = (
-				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
-			);
-			name = "Speaker Presentations";
-			sourceTree = "<group>";
-		};
-		6E2538471D1AEACA003E3400 /* Personal Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
-			);
-			name = "Personal Schedule";
-			sourceTree = "<group>";
-		};
-		6EB7525A1D187D9800BC294D /* Member Profile */ = {
-			isa = PBXGroup;
-			children = (
-				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
-				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
-			);
-			name = "Member Profile";
 			sourceTree = "<group>";
 		};
 		6EF147EC1D13579C00D5EEF9 /* View */ = {
@@ -653,20 +643,16 @@
 				6E00D1AA1D1C49C200278274 /* RevealViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
-				6E2538471D1AEACA003E3400 /* Personal Schedule */,
-				6E2537E41D19B0C1003E3400 /* Speaker Presentations */,
-				6EB7525A1D187D9800BC294D /* Member Profile */,
-				6EF147F61D135BC700D5EEF9 /* People */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		6EF147F61D135BC700D5EEF9 /* People */ = {
-			isa = PBXGroup;
-			children = (
+				6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */,
+				6EFC99BE1D218280009FD0DA /* MenuViewController.swift */,
+				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
+				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
+				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
+				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
+				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
 			);
-			name = People;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		6EFC99B61D2170E8009FD0DA /* ObjC Categories */ = {
@@ -852,6 +838,7 @@
 				6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */,
 				6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */,
 				6E2537EC1D19B203003E3400 /* ScheduleView.xib in Resources */,
+				6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */,
 				6EF147F31D1358B400D5EEF9 /* People.storyboard in Resources */,
 				6EB7525C1D187DB900BC294D /* MemberProfile.storyboard in Resources */,
 				6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */,
@@ -860,6 +847,7 @@
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
+				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,6 +949,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF147F11D13585C00D5EEF9 /* SpeakerListViewController.swift in Sources */,
+				6EFC99C51D21CAE7009FD0DA /* EventsViewController.swift in Sources */,
 				6EB752621D18B14C00BC294D /* MemberProfileIdentifier.swift in Sources */,
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
@@ -975,10 +964,12 @@
 				6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */,
 				6E25384B1D1AF416003E3400 /* Filter.swift in Sources */,
 				6EF12C681D149CA600814AD0 /* R.generated.swift in Sources */,
+				6EFC99C31D21C952009FD0DA /* Reachability.swift in Sources */,
 				6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */,
 				6E2537EB1D19B203003E3400 /* ScheduleView.swift in Sources */,
 				6EF12C551D14997C00814AD0 /* ScheduleableView.swift in Sources */,
 				6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */,
+				6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */,
 				6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */,
 				6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */,
 				6EF12C571D14999E00814AD0 /* MessageEnabledViewController.swift in Sources */,
@@ -991,6 +982,7 @@
 				6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */,
 				6E2538271D1A14E1003E3400 /* ScheduleTableViewCell.swift in Sources */,
 				6E00D1AB1D1C49C200278274 /* RevealViewController.swift in Sources */,
+				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
 				6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */,

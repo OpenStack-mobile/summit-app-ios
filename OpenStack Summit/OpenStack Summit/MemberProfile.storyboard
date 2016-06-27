@@ -9,7 +9,7 @@
         <!--Member Profile Detail View Controller-->
         <scene sceneID="fXF-Nn-FZW">
             <objects>
-                <viewController storyboardIdentifier="MemberProfileDetailViewController" id="j5Z-XY-pnV" customClass="MemberProfileDetailViewController" customModule="OpenStack_Summit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemberProfileDetailViewController" id="j5Z-XY-pnV" customClass="MemberProfileDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nyN-K9-Rfo"/>
                         <viewControllerLayoutGuide type="bottom" id="3FS-t3-EIp"/>

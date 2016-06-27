@@ -33,13 +33,40 @@ public struct Member: Person {
     public var attendeeRole: SummitAttendee?
 }
 
+// MARK: - Extensions
+
+public extension Store {
+    
+    var memeberRole: MemberRole {
+        
+        if let currentMember = self.authenticatedMember {
+            
+            if (currentMember.speakerRole != nil) {
+                
+                return .speaker
+            }
+            else if (currentMember.attendeeRole != nil) {
+                
+                return .attendee
+            }
+            else {
+                
+                return .member
+            }
+        } else {
+            
+            return .anonymous
+        }
+    }
+}
+
 // MARK: - Supporting Types
 
-public extension Member {
+public extension Store {
     
-    public enum Role {
+    public enum MemberRole {
         
-        case Anonymous, Attendee, Speaker, Member
+        case anonymous, attendee, speaker, member
     }
 }
 
