@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SWRevealViewController
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -21,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // validate R.swift on debug builds
         R.assertValid()
+        
+        // setup root VC
+        let menuVC = R.storyboard.menu.menuViewController()!
+        let eventsVC = EventsViewController()
+        let navigationController = UINavigationController(rootViewController: eventsVC)
+        window?.rootViewController = SWRevealViewController(rearViewController: menuVC, frontViewController: navigationController)
         
         return true
     }
