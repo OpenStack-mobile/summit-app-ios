@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSummit
 
 @objc final class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RevealViewController, MessageEnabledViewController {
     
@@ -21,16 +22,27 @@ import UIKit
     @IBOutlet weak var speakersTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     
-    // MARK: - Accessors
+    // MARK: - Properties
 
     var searchTerm: String = "" {
         
         didSet {
             
-            self.loadView()
+            if isViewLoaded() == false { self.loadView() }
             searchTermTextView.text = searchTerm
         }
     }
+    
+    // MARK: - Private Properties
+    
+    private var events = [ScheduleItem]()
+    private var tracks = [Track]()
+    private var speakers = [PresentationSpeaker]()
+    private let objectsPerPage = 1000
+    private var pageSpeakers = 1
+    private var loadedAllSpeakers = false
+    private var loadedAllAttendees = false
+    private var loadingSpeakers = false
     
     // MARK: - Loading
     
@@ -56,15 +68,89 @@ import UIKit
         navigationItem.title = "SEARCH"
     }
     
+    // MARK: - Actions
+    
+    @IBAction func toggleScheduledStatus(sender: UIButton) {
+        
+        let button = sender
+        let view = button.superview!
+        let cell = view.superview as! UITableViewCell
+        let indexPath = eventsTableView.indexPathForCell(cell)
+        
+        toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
+    }
+    
     // MARK: - Private Methods
+    
+    private func search(searchTerm: String) {
+        
+        // FIXME: Implement search
+        
+        /*
+        loadedAllSpeakers = false
+        pageSpeakers = 1
+        pageAttendees = 1
+        speakers.removeAll()
+        attendees.removeAll()
+        
+        events = interactor.getEventsBySearchTerm(searchTerm)
+        viewController.reloadEvents()
+        tracks = interactor.getTracksBySearchTerm(searchTerm)
+        viewController.reloadTracks()
+        
+        getSpeakers()
+        */
+    }
+    
+    private func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
+        if count > 0 {
+            constraint.constant = count <= 4 ? max(CGFloat(minSize), tableView.contentSize.height) : 290
+            tableView.backgroundView = nil
+        }
+        else {
+            constraint.constant = 40
+            let label = UILabel()
+            label.text = " No results"
+            label.sizeToFit()
+            tableView.backgroundView = label
+        }
+        tableView.frame.size.height = constraint.constant
+    }
     
     // MARK: Configure Table View Cells
     
-    
+    private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
+        
+        func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+            
+            /*
+            if !securityManager.isLoggedInAndConfirmedAttendee() {
+                return false;
+            }*/
+            
+            guard let loggedInMember = Store.shared.authenticatedMember,
+                let attendee = loggedInMember.attendeeRole
+                else { return false }
+            
+            return attendee.scheduledEvents.filter("id = \(eventId)").count > 0
+        }
+        
+        let index = indexPath.row
+        let event = events[index]
+        cell.eventTitle = event.name
+        cell.eventType = event.eventType
+        cell.time = event.time
+        cell.location = event.location
+        cell.sponsors = event.sponsors
+        cell.track = event.track
+        cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
+        cell.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
+        cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
+    }
     
     // MARK: Reload Table Views
     
-    func reloadEvents() {
+    private func reloadEvents() {
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
         eventsTableView.reloadData()
@@ -73,7 +159,7 @@ import UIKit
         eventsTableView.updateConstraintsIfNeeded()
     }
 
-    func reloadTracks() {
+    private func reloadTracks() {
         tracksTableView.delegate = self
         tracksTableView.dataSource = self
         tracksTableView.reloadData()
@@ -82,7 +168,7 @@ import UIKit
         tracksTableView.updateConstraintsIfNeeded()
     }
 
-    func reloadSpeakers() {
+    private func reloadSpeakers() {
         speakersTableView.tableView.delegate = self
         speakersTableView.tableView.dataSource = self
         speakersTableView.tableView.reloadData()
@@ -99,7 +185,7 @@ import UIKit
         
         if searchTermTextView.text!.isEmpty == false {
             
-            self.search(searchTermTextView.text)
+            self.search(searchTermTextView.text ?? "")
         }
         
         return true
@@ -107,22 +193,16 @@ import UIKit
     
     // MARK: - UITableViewDataSource
     
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        if (tableView == eventsTableView) {
-            count = presenter.getEventsCount()
+        
+        switch tableView {
+            
+        case eventsTableView: return events.count
+        case tracksTableView: return tracks.count
+        case speakersTableView.tableView: return speakers.count
+            
+        default: fatalError("Invalid table view: \(tableView)")
         }
-        else if (tableView == tracksTableView) {
-            count = presenter.getTracksCount()
-        }
-        else if (tableView == speakersTableView.tableView) {
-            count = presenter.getSpeakersCount()
-        }
-        else if (tableView == attendeesTableView.tableView) {
-            count = presenter.getAttendeesCount()
-        }
-        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -142,33 +222,24 @@ import UIKit
             
         case tracksTableView:
             
-            
-        }
-        
-        if (tableView == eventsTableView) {
-        }
-        else if (tableView == tracksTableView) {
-            let cell = tableView.dequeueReusableCellWithIdentifier(tracksTableViewCellIdentifier, forIndexPath: indexPath) as! TrackTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.tracksTableViewCell, forIndexPath: indexPath)!
             presenter.buildTrackCell(cell, index: indexPath.row)
             return cell
-        }
-        else if (tableView == speakersTableView.tableView)  {
-            let cell = tableView.dequeueReusableCellWithIdentifier(speakersTableViewCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
+            
+        case speakersTableView.view:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
             presenter.buildSpeakerCell(cell, index: indexPath.row)
             return cell
+            
+        default: fatalError("Invalid table view: \(tableView)")
         }
-        else if (tableView == attendeesTableView.tableView)  {
-            let cell = tableView.dequeueReusableCellWithIdentifier(attendeesTableViewCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
-            presenter.buildAttendeeCell(cell, index: indexPath.row)
-            return cell
-        }
-        
-        return UITableViewCell()
     }
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if (tableView == eventsTableView) {
             presenter.showEventDetail(indexPath.row)
         }
@@ -181,29 +252,5 @@ import UIKit
         else if (tableView == attendeesTableView.tableView) {
             presenter.showAttendeeProfile(indexPath.row)
         }
-    }
-    
-    func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
-        if count > 0 {
-            constraint.constant = count <= 4 ? max(CGFloat(minSize), tableView.contentSize.height) : 290
-            tableView.backgroundView = nil
-        }
-        else {
-            constraint.constant = 40
-            let label = UILabel()
-            label.text = " No results"
-            label.sizeToFit()
-            tableView.backgroundView = label
-        }
-        tableView.frame.size.height = constraint.constant
-    }
-    
-    func toggleScheduledStatus(sender: AnyObject) {
-        let button = sender as! UIButton
-        let view = button.superview!
-        let cell = view.superview as! UITableViewCell
-        let indexPath = eventsTableView.indexPathForCell(cell)
-        
-        presenter.toggleScheduledStatus(indexPath!.row, cell: view.superview as! IScheduleTableViewCell)
     }
 }
