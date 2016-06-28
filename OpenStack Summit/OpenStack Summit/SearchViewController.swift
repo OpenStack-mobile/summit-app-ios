@@ -43,13 +43,12 @@ import UIKit
         addMenuButton()
         
         // setup table view
-        eventsTableView.registerNib(UINib(nibName: "ScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: eventsTableViewCellIdentifier)
+        eventsTableView.registerNib(R.nib.scheduleTableViewCell)
         eventsTableView.estimatedRowHeight = 100
         eventsTableView.rowHeight = UITableViewAutomaticDimension
         
         //attendeesTableView.tableView.registerNib(UINib(nibName: "PeopleTableViewCell", bundle: nil), forCellReuseIdentifier: attendeesTableViewCellIdentifier)
-        speakersTableView.tableView.registerNib(UINib(nibName: "PeopleTableViewCell", bundle: nil), forCellReuseIdentifier: speakersTableViewCellIdentifier)
-
+        speakersTableView.tableView.registerNib(R.nib.peopleTableViewCell)
         searchTermTextView.delegate = self
         
         //hack: if I don't add this constraint, width for table goes out of margins and height doesn't work well

@@ -12,18 +12,6 @@ import SWRevealViewController
 import AeroGearOAuth2
 import CoreSummit
 
-@objc
-public enum MenuItem: Int {
-    case None
-    case Login
-    case Events
-    case Venues
-    case People
-    case Attendees
-    case MyProfile
-    case About
-}
-
 final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActivityIndicatorProtocol, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
     // MARK: - IB Outlets
@@ -63,11 +51,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 picUrlInternal = newValue
             #endif*/
 
-            if (!pictureURL.isEmpty) {
+            if pictureURL.isEmpty == false {
                 pictureImageView.hnk_setImageFromURL(NSURL(string: pictureURL)!)
             }
             else {
-                pictureImageView.image = UIImage(named: "generic-user-avatar")
+                pictureImageView.image = R.image.genericUserAvatar()!
             }
             
             pictureImageView.layer.borderWidth = 0.88;
@@ -108,12 +96,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         
         if Store.shared.authenticatedMember == nil {
+            
+            /*
             // TODO: move this to launch screen or landing page
-            unsubscribeFromPushChannels() { (succeeded: Bool, error: NSError?) in
+            pushNotificationsManager.unsubscribeFromPushChannels { (succeeded: Bool, error: NSError?) in
                 if (error != nil) {
                     self.viewController.showErrorMessage(error!)
                 }
-            }
+            }*/
         }
         
         self.showUserProfile()
@@ -130,26 +120,25 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     @IBAction func toggleMenuSelection(sender: UIButton) {
         
-        var item: MenuItem = .None
+        let item: MenuItem
         
         switch sender {
         case eventsButton:
-            presenter.showEvents()
+            showEvents()
             item = .Events
         case venuesButton:
-            presenter.showVenues()
+            showVenues()
             item = .Venues
         case peopleButton:
-            presenter.showPeopleOrSpeakers()
+            showSpeakers()
             item = .People
         case myProfileButton:
-            presenter.showMyProfile()
+            showMyProfile()
             item = .MyProfile
         case aboutButton:
-            presenter.showAbout()
+            showAbout()
             item = .About
-        default:
-            break
+        default: fatalError("Invalid sender \(sender)")
         }
         
         highlight(item)
@@ -157,20 +146,35 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     @IBAction func login(sender: UIButton) {
         
-        if (presenter.hasAccessToMenuItem(MenuItem.Login)) {
-            presenter.login()
+        if (hasAccessToMenuItem(.Login)) {
+            login()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 self.hideActivityIndicator()
             }
         } else {
-            presenter.logout()
+            logout()
         }
     }
     
     // MARK: - Private Methods
+    
+    private func hasAccessToMenuItem(item: MenuItem) -> Bool {
+        
+        let currentMemberRole = Store.shared.memberRole
+        
+        switch (item) {
+        case .MyProfile:
+            return currentMemberRole != .anonymous
+        case .Login:
+            return currentMemberRole == .anonymous
+        default:
+            return true
+        }
+    }
 
     private func unselectMenuItems() {
+        
         eventsButton.alpha = 0.5
         venuesButton.alpha = 0.5
         peopleButton.alpha = 0.5
@@ -193,37 +197,81 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             myProfileButton.alpha = 1
         case .About:
             aboutButton.alpha = 1
-        default:
-            break
+            
+        // not applicable
+        case .Login: break
         }
     }
     
     @inline(__always)
-    func hideMenu() {
+    private func hideMenu() {
         revealViewController().revealToggle(self)
     }
     
-    func reloadMenu() {
+    private func reloadMenu() {
         
-        let title: String
+        let loginTitle = hasAccessToMenuItem(.Login) ? "LOG IN" : "LOG OUT"
+        loginButton.setTitle(loginTitle, forState: .Normal)
         
-        title = presenter.hasAccessToMenuItem(MenuItem.Login) ? "LOG IN" : "LOG OUT"
-        loginButton.setTitle(title, forState: UIControlState.Normal)
+        peopleButton.setTitle("SPEAKERS", forState: .Normal)
         
-        title = presenter.hasAccessToMenuItem(MenuItem.Attendees) ? "PEOPLE" : "SPEAKERS"
-        peopleButton.setTitle(title, forState: UIControlState.Normal)
-        
-        myProfileButton.hidden = !presenter.hasAccessToMenuItem(MenuItem.MyProfile)
+        myProfileButton.hidden = hasAccessToMenuItem(.MyProfile) == false
     }
     
     @inline(__always)
-    func navigateToHome() {
+    private func navigateToHome() {
         toggleMenuSelection(eventsButton)
     }
     
     @inline(__always)
-    func navigateToMyProfile() {
+    private func navigateToMyProfile() {
         toggleMenuSelection(myProfileButton)
+    }
+    
+    private func showUserProfile() {
+        
+        if let realmMember = Store.shared.authenticatedMember {
+            
+            let currentMember = Member(realmEntity: realmMember)
+            
+            if let speaker = currentMember.speakerRole {
+                
+                name = speaker.name
+                pictureURL = speaker.pictureURL
+                
+            } else if let attendee = currentMember.attendeeRole {
+                
+                name = attendee.name
+                pictureURL = attendee.pictureURL
+                
+            } else {
+                
+                name = currentMember.name
+                pictureURL = currentMember.pictureURL
+            }
+            
+        } else {
+            
+            name = ""
+            pictureURL = ""
+        }
+    }
+    
+    // MARK: Wireframe
+    
+    private func showSpeakers() {
+        
+        let speakersVC = R.storyboard.people.speakerListViewController()!
+        let navigationController = AppDelegate.shared.navigationController
+        let revealViewController = AppDelegate.shared.revealViewController
+        
+        navigationController.setViewControllers([speakersVC], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
+    
+    private func showSearch(for term: String) {
+        
+        searchWireframe.pushSearchResultsView(term)
     }
     
     // MARK: - SWRevealViewControllerDelegate
@@ -265,7 +313,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             let sanitizedTerm = term.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
             
             // show Search VC
-            
+            showSearch(for: sanitizedTerm)
         }
         
         return true
@@ -278,4 +326,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         //presenter.revokedAccess()
         showInfoMessage("Session expired", message: "Your session expired, please log in again using your credentials")
     }
+}
+
+// MARK: - Supporting Types
+
+enum MenuItem {
+    
+    case Login
+    case Events
+    case Venues
+    case People
+    case MyProfile
+    case About
 }

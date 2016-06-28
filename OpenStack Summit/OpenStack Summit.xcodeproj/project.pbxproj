@@ -147,6 +147,8 @@
 		6EF1C84B1D148C3C0060BF45 /* PeopleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8471D148C3C0060BF45 /* PeopleListView.xib */; };
 		6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */; };
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
+		6EFC6E631D22EF900087057A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E621D22EF900087057A /* NavigationController.swift */; };
+		6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC964E1D22DC320081B3E8 /* TrackTableViewCell.swift */; };
 		6EFC99BC1D217141009FD0DA /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */; };
 		6EFC99BD1D217141009FD0DA /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BB1D217141009FD0DA /* NSDateComponents+MTDates.m */; };
 		6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BE1D218280009FD0DA /* MenuViewController.swift */; };
@@ -343,6 +345,8 @@
 		6EF1C8471D148C3C0060BF45 /* PeopleListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleListView.xib; sourceTree = "<group>"; };
 		6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
+		6EFC6E621D22EF900087057A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		6EFC964E1D22DC320081B3E8 /* TrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 		6EFC99B71D217140009FD0DA /* OpenStackSummit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenStackSummit-Bridging-Header.h"; sourceTree = "<group>"; };
 		6EFC99B81D217141009FD0DA /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.h"; sourceTree = "<group>"; };
 		6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
@@ -620,6 +624,7 @@
 				6EB752631D18B77300BC294D /* ErrorAlert.swift */,
 				6EF12C541D14997C00814AD0 /* ScheduleableView.swift */,
 				6EF12C581D1499BA00814AD0 /* SweetAlert.swift */,
+				6EFC964E1D22DC320081B3E8 /* TrackTableViewCell.swift */,
 				6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */,
 				6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */,
 				6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */,
@@ -639,6 +644,7 @@
 		6EF147ED1D1357A100D5EEF9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6EFC6E621D22EF900087057A /* NavigationController.swift */,
 				6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */,
 				6E00D1AA1D1C49C200278274 /* RevealViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
@@ -950,6 +956,7 @@
 			files = (
 				6EF147F11D13585C00D5EEF9 /* SpeakerListViewController.swift in Sources */,
 				6EFC99C51D21CAE7009FD0DA /* EventsViewController.swift in Sources */,
+				6EFC6E631D22EF900087057A /* NavigationController.swift in Sources */,
 				6EB752621D18B14C00BC294D /* MemberProfileIdentifier.swift in Sources */,
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
@@ -983,6 +990,7 @@
 				6E2538271D1A14E1003E3400 /* ScheduleTableViewCell.swift in Sources */,
 				6E00D1AB1D1C49C200278274 /* RevealViewController.swift in Sources */,
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
+				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
 				6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */,

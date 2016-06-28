@@ -37,7 +37,7 @@ public struct Member: Person {
 
 public extension Store {
     
-    var memeberRole: MemberRole {
+    var memberRole: MemberRole {
         
         if let currentMember = self.authenticatedMember {
             
