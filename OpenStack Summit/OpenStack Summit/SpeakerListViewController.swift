@@ -35,7 +35,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         
         // setup navigation bar
         navigationItem.title = "SPEAKERS"
-        //addMenuButton() // FIXME: Enable when Menu Reveal controller is implemented
+        addMenuButton()
         
         // setup table view
         peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
@@ -51,26 +51,6 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         
         // load cached data
         loadData()
-        
-        // FIXME: temporary request since we dont have the main UI setup
-        do {
-            
-            //showActivityIndicator()
-            
-            Store.shared.summit(6) { [weak self] (response) in
-                
-                guard let controller = self else { return }
-                
-                //controller.hideActivityIndicator()
-                
-                switch response {
-                    
-                case let .Error(error): controller.showErrorAlert("\(error)")
-                    
-                case .Value(_): controller.loadData()
-                }
-            }
-        }
     }
     
     // MARK: - Methods

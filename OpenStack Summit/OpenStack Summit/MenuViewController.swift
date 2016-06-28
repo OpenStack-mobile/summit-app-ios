@@ -146,7 +146,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     @IBAction func login(sender: UIButton) {
         
-        if (hasAccessToMenuItem(.Login)) {
+        if (hasAccess(to: .Login)) {
             login()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
@@ -159,11 +159,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     // MARK: - Private Methods
     
-    private func hasAccessToMenuItem(item: MenuItem) -> Bool {
+    private func hasAccess(to menuItem: MenuItem) -> Bool {
         
         let currentMemberRole = Store.shared.memberRole
         
-        switch (item) {
+        switch (menuItem) {
         case .MyProfile:
             return currentMemberRole != .anonymous
         case .Login:
@@ -210,12 +210,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func reloadMenu() {
         
-        let loginTitle = hasAccessToMenuItem(.Login) ? "LOG IN" : "LOG OUT"
+        let loginTitle = hasAccess(to: .Login) ? "LOG IN" : "LOG OUT"
         loginButton.setTitle(loginTitle, forState: .Normal)
         
         peopleButton.setTitle("SPEAKERS", forState: .Normal)
         
-        myProfileButton.hidden = hasAccessToMenuItem(.MyProfile) == false
+        myProfileButton.hidden = hasAccess(to: .MyProfile) == false
     }
     
     @inline(__always)
@@ -257,7 +257,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         }
     }
     
-    // MARK: Wireframe
+    // MARK: Navigation
     
     private func showSpeakers() {
         
@@ -271,12 +271,86 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func showSearch(for term: String) {
         
-        searchWireframe.pushSearchResultsView(term)
+        let searchViewController = R.storyboard.menu.searchViewController()!
+        let navigationController = AppDelegate.shared.navigationController
+        let revealViewController = AppDelegate.shared.revealViewController
+        
+        searchViewController.searchTerm = term
+        navigationController.setViewControllers([searchViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
+    
+    private func showEvents() {
+        
+        highlight(.Events)
+        
+        let eventsViewController = EventsViewController()
+        let navigationController = AppDelegate.shared.navigationController
+        let revealViewController = AppDelegate.shared.revealViewController
+        
+        navigationController.setViewControllers([eventsViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
+    
+    private func showVenues() {
+        
+        let venuesViewController = VenuesViewController()
+        let navigationController = AppDelegate.shared.navigationController
+        let revealViewController = AppDelegate.shared.revealViewController
+        
+        navigationController.setViewControllers([venuesViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)
+    }
+    
+    private func showMyProfile() {
+        
+        if let _ = Store.shared.authenticatedMember {
+            
+            func isLoggedInAndConfirmedAttendee() -> Bool {
+                /*
+                let currentMemberId = session.get(kCurrentMemberId) as? Int
+                return isLoggedIn() && currentMemberId != kLoggedInNotConfirmedAttendee;
+                */ return false
+            }
+            
+            if isLoggedInAndConfirmedAttendee() {
+                
+                /*
+                navigationController.setViewControllers([myProfileViewController], animated: false)
+                revealViewController.pushFrontViewController(navigationController, animated: true)*/
+                
+            } else {
+                
+                /*
+                navigationController.setViewControllers([memberOrderConfirmViewController], animated: false)
+                revealViewController.pushFrontViewController(navigationController, animated: true)*/
+            }
+        }
+    }
+    
+    private func showAbout() {
+        
+        /*
+        navigationController.setViewControllers([aboutViewController], animated: false)
+        revealViewController.pushFrontViewController(navigationController, animated: true)*/
+    }
+    
+    // MARK: Login / Logout
+    
+    private func login() {
+        
+        
+    }
+    
+    private func logout() {
+        
+        
     }
     
     // MARK: - SWRevealViewControllerDelegate
     
     func revealController(revealController: SWRevealViewController, willMoveToPosition position: FrontViewPosition) {
+        
         if let navigationController = revealController.frontViewController {
             if let viewController = navigationController.childViewControllers.first {
                 viewController.view.userInteractionEnabled = position != FrontViewPosition.Right
