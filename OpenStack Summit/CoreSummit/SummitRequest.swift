@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func summit(identifier: Int? = nil, completion: ErrorValue<Summit> -> ()) {
+    func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
         
         let summitID: String
         
