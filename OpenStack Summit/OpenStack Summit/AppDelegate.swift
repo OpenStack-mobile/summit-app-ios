@@ -11,11 +11,22 @@ import SWRevealViewController
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static private(set) var shared: AppDelegate!
 
     var window: UIWindow?
+    
+    lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
+        
+    lazy var navigationController: NavigationController = NavigationController(rootViewController: EventsViewController())
+    
+    lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // set singleton
+        AppDelegate.shared = self
         
         // print app info
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
@@ -24,10 +35,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         R.assertValid()
         
         // setup root VC
-        let menuVC = R.storyboard.menu.menuViewController()!
-        let eventsVC = EventsViewController()
-        let navigationController = UINavigationController(rootViewController: eventsVC)
-        window?.rootViewController = SWRevealViewController(rearViewController: menuVC, frontViewController: navigationController)
+        window?.rootViewController = revealViewController
         
         return true
     }
