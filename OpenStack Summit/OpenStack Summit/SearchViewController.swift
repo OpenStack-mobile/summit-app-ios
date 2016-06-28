@@ -43,6 +43,7 @@ import CoreSummit
     private var loadedAllSpeakers = false
     private var loadedAllAttendees = false
     private var loadingSpeakers = false
+    private var isOperationOngoing = false
     
     // MARK: - Loading
     
@@ -66,40 +67,83 @@ import CoreSummit
         speakersTableView.addConstraint(tableHeightConstraint)
         
         navigationItem.title = "SEARCH"
+        
+        search(searchTerm)
     }
     
     // MARK: - Actions
     
+    /// Called by button in cell
     @IBAction func toggleScheduledStatus(sender: UIButton) {
         
         let button = sender
         let view = button.superview!
-        let cell = view.superview as! UITableViewCell
-        let indexPath = eventsTableView.indexPathForCell(cell)
+        let cell = view.superview as! ScheduleTableViewCell
+        let indexPath = eventsTableView.indexPathForCell(cell)!
+        let event = events[indexPath.row]
         
-        toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
+        let isScheduled = isEventScheduledByLoggedMember(event.id)
+        
+        if isScheduled {
+            
+            if isOperationOngoing {
+                return
+            }
+            
+            cell.scheduled = false
+            
+            isOperationOngoing = true
+            
+            interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
+                dispatch_async(dispatch_get_main_queue(),{
+                    if (error != nil) {
+                        scheduleableView.scheduled = !scheduleableView.scheduled
+                    }
+                    
+                    self.isOperationOngoing = false
+                    
+                    if (completionBlock != nil) {
+                        completionBlock!(error)
+                    }
+                })
+            }
+            
+        } else {
+            
+            
+        }
+        
+        showErrorMessage(error!)
     }
     
     // MARK: - Private Methods
     
     private func search(searchTerm: String) {
         
-        // FIXME: Implement search
-        
-        /*
         loadedAllSpeakers = false
         pageSpeakers = 1
-        pageAttendees = 1
         speakers.removeAll()
-        attendees.removeAll()
         
-        events = interactor.getEventsBySearchTerm(searchTerm)
-        viewController.reloadEvents()
-        tracks = interactor.getTracksBySearchTerm(searchTerm)
-        viewController.reloadTracks()
+        events = getEventsBySearchTerm(searchTerm)
+        reloadEvents()
+        tracks = getTracksBySearchTerm(searchTerm)
+        reloadTracks()
         
         getSpeakers()
-        */
+    }
+    
+    func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+        
+        /*
+         if !securityManager.isLoggedInAndConfirmedAttendee() {
+         return false;
+         }*/
+        
+        guard let loggedInMember = Store.shared.authenticatedMember,
+            let attendee = loggedInMember.attendeeRole
+            else { return false }
+        
+        return attendee.scheduledEvents.filter("id = \(eventId)").count > 0
     }
     
     private func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
@@ -117,22 +161,57 @@ import CoreSummit
         tableView.frame.size.height = constraint.constant
     }
     
+    // MARK: Fetch Data / Requests
+    
+    private func getSpeakers() {
+        
+        if loadingSpeakers || loadedAllSpeakers {
+            return
+        }
+        
+        loadingSpeakers = true
+        
+        getSpeakersBySearchTerm(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage) { (speakersPage, error) in
+            
+            defer { self.loadingSpeakers = false }
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
+                return
+            }
+            
+            self.speakers.appendContentsOf(speakersPage!)
+            self.viewController.reloadSpeakers()
+            self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
+            self.pageSpeakers += 1
+        }
+    }
+    
+    private func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> ()) {
+        
+        if Reachability.isConnectedToNetwork() == false {
+            let error = NSError(domain: "There is no network connectivity. Operation cancelled", code: 12002, userInfo: nil)
+            completionBlock(error)
+            return
+        }
+        
+        if let loggedInMember = securityManager.getCurrentMember() {
+            let event = eventDataStore.getByIdLocal(eventId)
+            
+            summitAttendeeDataStore.addEventToMemberSchedule(loggedInMember.attendeeRole!, event: event!) {(attendee, error) in
+                completionBlock(error)
+            }
+        }
+    }
+    
+    
     // MARK: Configure Table View Cells
     
     private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
         
-        func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+        func isLoggedInAndConfirmedAttendee() -> Bool {
             
-            /*
-            if !securityManager.isLoggedInAndConfirmedAttendee() {
-                return false;
-            }*/
-            
-            guard let loggedInMember = Store.shared.authenticatedMember,
-                let attendee = loggedInMember.attendeeRole
-                else { return false }
-            
-            return attendee.scheduledEvents.filter("id = \(eventId)").count > 0
+            // FIXME
+            return false
         }
         
         let index = indexPath.row
@@ -143,9 +222,37 @@ import CoreSummit
         cell.location = event.location
         cell.sponsors = event.sponsors
         cell.track = event.track
-        cell.scheduled = interactor.isEventScheduledByLoggedMember(event.id)
-        cell.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
+        cell.scheduled = isEventScheduledByLoggedMember(event.id)
+        cell.isScheduledStatusVisible = isLoggedInAndConfirmedAttendee()
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutSubviews()
+        
+        cell.scheduleButton.addTarget(self, action: #selector(SearchViewController.toggleScheduledStatus(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    private func configure(cell cell: TrackTableViewCell, at indexPath: NSIndexPath) {
+        
+        let index = indexPath.row
+        let track = tracks[index]
+        cell.nameLabel.text = track.name
+    }
+    
+    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+        
+        let index = indexPath.row
+        
+        let speaker = speakers[index]
+        cell.name = speaker.name
+        cell.title = speaker.title
+        cell.pictureURL = speaker.pictureURL
+        
+        /// fetch more
+        if (index == (speakers.count-1) && !loadedAllSpeakers) {
+            
+            getSpeakers()
+        }
     }
     
     // MARK: Reload Table Views
@@ -212,24 +319,19 @@ import CoreSummit
         case eventsTableView:
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell, forIndexPath: indexPath)!
-            cell.scheduleButton.addTarget(self, action: #selector(SearchViewController.toggleScheduledStatus(_:)), forControlEvents: .TouchUpInside)
-            
-            presenter.buildEventCell(cell, index: indexPath.row)
-            cell.separatorInset = UIEdgeInsetsZero
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.layoutSubviews()
+            configure(cell: cell, at: indexPath)
             return cell
             
         case tracksTableView:
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.tracksTableViewCell, forIndexPath: indexPath)!
-            presenter.buildTrackCell(cell, index: indexPath.row)
+            configure(cell: cell, at: indexPath)
             return cell
             
         case speakersTableView.view:
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
-            presenter.buildSpeakerCell(cell, index: indexPath.row)
+            configure(cell: cell, at: indexPath)
             return cell
             
         default: fatalError("Invalid table view: \(tableView)")
@@ -240,17 +342,21 @@ import CoreSummit
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if (tableView == eventsTableView) {
-            presenter.showEventDetail(indexPath.row)
-        }
-        else if (tableView == tracksTableView) {
-            presenter.showTrackEvents(indexPath.row)
-        }
-        else if (tableView == speakersTableView.tableView) {
-            presenter.showSpeakerProfile(indexPath.row)
-        }
-        else if (tableView == attendeesTableView.tableView) {
-            presenter.showAttendeeProfile(indexPath.row)
+        switch tableView {
+            
+        case eventsTableView:
+            
+            
+            
+        case tracksTableView:
+            
+            
+            
+        case speakersTableView.view:
+            
+            
+            
+        default: fatalError("Invalid table view: \(tableView)")
         }
     }
 }
