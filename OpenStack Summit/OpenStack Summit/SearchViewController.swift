@@ -12,26 +12,23 @@ import UIKit
     
     // MARK: - IB Outlets
 
-    @IBOutlet weak var attendeesTableView: PeopleListView!
     @IBOutlet weak var speakersTableView: PeopleListView!
     @IBOutlet weak var tracksTableView: UITableView!
     @IBOutlet weak var eventsTableView: UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var searchTermTextView: UITextField!
     @IBOutlet weak var eventsTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tracksTableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var attendeesTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var speakersTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     
     // MARK: - Accessors
 
-    private(set) var searchTerm: String? {
-        get {
-            return searchTermTextView.text
-        }
-        set {
-            searchTermTextView.text = newValue
+    var searchTerm: String = "" {
+        
+        didSet {
+            
+            self.loadView()
+            searchTermTextView.text = searchTerm
         }
     }
     
@@ -47,7 +44,6 @@ import UIKit
         eventsTableView.estimatedRowHeight = 100
         eventsTableView.rowHeight = UITableViewAutomaticDimension
         
-        //attendeesTableView.tableView.registerNib(UINib(nibName: "PeopleTableViewCell", bundle: nil), forCellReuseIdentifier: attendeesTableViewCellIdentifier)
         speakersTableView.tableView.registerNib(R.nib.peopleTableViewCell)
         searchTermTextView.delegate = self
         
@@ -59,6 +55,14 @@ import UIKit
         
         navigationItem.title = "SEARCH"
     }
+    
+    // MARK: - Private Methods
+    
+    // MARK: Configure Table View Cells
+    
+    
+    
+    // MARK: Reload Table Views
     
     func reloadEvents() {
         eventsTableView.delegate = self
@@ -87,24 +91,61 @@ import UIKit
         speakersTableView.updateConstraintsIfNeeded()
     }
     
-    func reloadAttendees() {
-        attendeesTableView.tableView.delegate = self
-        attendeesTableView.tableView.dataSource = self
-        attendeesTableView.tableView.reloadData()
-        attendeesTableView.layoutIfNeeded()
-        setupTable(attendeesTableView.tableView, withRowCount: attendeesTableView.tableView.numberOfRowsInSection(0), withMinSize: 0, withConstraint: attendeesTableViewHeightConstraint)
-        attendeesTableView.updateConstraintsIfNeeded()
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        searchTermTextView.resignFirstResponder()
+        
+        if searchTermTextView.text!.isEmpty == false {
+            
+            self.search(searchTermTextView.text)
+        }
+        
+        return true
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 0
+        if (tableView == eventsTableView) {
+            count = presenter.getEventsCount()
+        }
+        else if (tableView == tracksTableView) {
+            count = presenter.getTracksCount()
+        }
+        else if (tableView == speakersTableView.tableView) {
+            count = presenter.getSpeakersCount()
+        }
+        else if (tableView == attendeesTableView.tableView) {
+            count = presenter.getAttendeesCount()
+        }
+        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (tableView == eventsTableView) {
-            let cell = tableView.dequeueReusableCellWithIdentifier(eventsTableViewCellIdentifier, forIndexPath: indexPath) as! ScheduleTableViewCell
-            cell.scheduleButton.addTarget(self, action: "toggleScheduledStatus:", forControlEvents: UIControlEvents.TouchUpInside)            
+        
+        switch tableView {
+            
+        case eventsTableView:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell, forIndexPath: indexPath)!
+            cell.scheduleButton.addTarget(self, action: #selector(SearchViewController.toggleScheduledStatus(_:)), forControlEvents: .TouchUpInside)
+            
             presenter.buildEventCell(cell, index: indexPath.row)
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
             cell.layoutSubviews()
             return cell
+            
+        case tracksTableView:
+            
+            
+        }
+        
+        if (tableView == eventsTableView) {
         }
         else if (tableView == tracksTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier(tracksTableViewCellIdentifier, forIndexPath: indexPath) as! TrackTableViewCell
@@ -125,6 +166,8 @@ import UIKit
         return UITableViewCell()
     }
     
+    // MARK: - UITableViewDelegate
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         if (tableView == eventsTableView) {
             presenter.showEventDetail(indexPath.row)
@@ -140,23 +183,6 @@ import UIKit
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        if (tableView == eventsTableView) {
-            count = presenter.getEventsCount()
-        }
-        else if (tableView == tracksTableView) {
-            count = presenter.getTracksCount()
-        }
-        else if (tableView == speakersTableView.tableView) {
-            count = presenter.getSpeakersCount()
-        }
-        else if (tableView == attendeesTableView.tableView) {
-            count = presenter.getAttendeesCount()
-        }
-        return count
-    }
-    
     func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
         if count > 0 {
             constraint.constant = count <= 4 ? max(CGFloat(minSize), tableView.contentSize.height) : 290
@@ -170,14 +196,6 @@ import UIKit
             tableView.backgroundView = label
         }
         tableView.frame.size.height = constraint.constant
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        searchTermTextView.resignFirstResponder()
-        if !searchTermTextView.text!.isEmpty {
-            presenter.search(searchTermTextView.text)
-        }
-        return true
     }
     
     func toggleScheduledStatus(sender: AnyObject) {
