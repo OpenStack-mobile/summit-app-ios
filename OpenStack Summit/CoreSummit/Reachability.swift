@@ -1,13 +1,12 @@
 //
 //  Reachability.swift
-//  OpenStackSummit
+//  OpenStack Summit
 //
-//  Created by Claudio on 12/14/15.
-//  Copyright © 2015 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 6/14/16.
+//  Copyright © 2016 OpenStack. All rights reserved.
 //
 
 import SystemConfiguration
-import UIKit
 
 public struct Reachability {
     

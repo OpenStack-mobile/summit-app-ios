@@ -13,10 +13,7 @@ public enum ScheduledStatus {
     case Scheduled, NotScheduled
 }
 
-final class ScheduleTableViewCell: UITableViewCell {
-    
-    private var locationInternal = ""
-    private var scheduledInternal = false
+final class ScheduleTableViewCell: UITableViewCell, ScheduleableView {
     
     var eventTitle: String!{
         get {
@@ -45,9 +42,9 @@ final class ScheduleTableViewCell: UITableViewCell {
         }
     }
     
-    var location: String!{
+    var location: String {
         get {
-            return locationLabel.text
+            return locationLabel.text ?? ""
         }
         set {
             locationLabel.text = newValue
@@ -76,13 +73,11 @@ final class ScheduleTableViewCell: UITableViewCell {
         }
     }
     
-    var scheduled: Bool  {
-        get {
-            return scheduledInternal
-        }
-        set {
-            scheduledInternal = newValue
-            if (scheduledInternal) {
+    var scheduled: Bool = false  {
+        
+        didSet {
+            
+            if (scheduled) {
                 scheduleButton.setImage(UIImage(named:"schedule_checked_active")!, forState: .Normal)
             }
             else {
