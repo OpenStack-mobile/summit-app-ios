@@ -54,7 +54,8 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     // MARK: - Properties
     
-    var event: Identifier
+    var event: Identifier!
+    
     /*
     // MARK: - Private Properties
     
