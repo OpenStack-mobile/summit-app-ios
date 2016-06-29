@@ -68,7 +68,11 @@ import CoreSummit
         
         navigationItem.title = "SEARCH"
         
-        search(searchTerm)
+        // execute search
+        if searchTerm.isEmpty == false {
+            
+            search(searchTerm)
+        }
     }
     
     // MARK: - Actions
@@ -84,41 +88,77 @@ import CoreSummit
         
         let isScheduled = isEventScheduledByLoggedMember(event.id)
         
+        guard let loggedInMember = Store.shared.authenticatedMember?.id
+            else { return }
+        
+        if isOperationOngoing {
+            return
+        }
+        
+        isOperationOngoing = true
+        
+        // remove
         if isScheduled {
-            
-            if isOperationOngoing {
-                return
-            }
             
             cell.scheduled = false
             
-            isOperationOngoing = true
-            
-            interactor.removeEventFromLoggedInMemberSchedule(event.id) { error in
-                dispatch_async(dispatch_get_main_queue(),{
-                    if (error != nil) {
-                        scheduleableView.scheduled = !scheduleableView.scheduled
-                    }
+            Store.shared.removeEventFromSchedule(loggedInMember, event: event.id) { [weak self] (response) in
+                
+                dispatch_async(dispatch_get_main_queue()) {
                     
-                    self.isOperationOngoing = false
+                    guard let controller = self else { return }
                     
-                    if (completionBlock != nil) {
-                        completionBlock!(error)
+                    controller.isOperationOngoing = false
+                    
+                    switch response {
+                        
+                    case let .Error(error):
+                        
+                        cell.scheduled = true
+                        
+                        controller.showErrorMessage(error as NSError)
+                        
+                    case .Value:
+                        
+                        break
                     }
-                })
+                }
             }
-            
-        } else {
-            
-            
         }
         
-        showErrorMessage(error!)
+        // add
+        else {
+            
+            cell.scheduled = true
+            
+            Store.shared.addEventToSchedule(attendee: loggedInMember, event: event.id)  { [weak self] (response) in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    guard let controller = self else { return }
+                    
+                    controller.isOperationOngoing = false
+                    
+                    switch response {
+                        
+                    case let .Error(error):
+                        
+                        cell.scheduled = false
+                        
+                        controller.showErrorMessage(error as NSError)
+                        
+                    case .Value:
+                        
+                        break
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Private Methods
     
-    private func search(searchTerm: String) {
+    private func search() {
         
         loadedAllSpeakers = false
         pageSpeakers = 1
@@ -171,38 +211,15 @@ import CoreSummit
         
         loadingSpeakers = true
         
-        getSpeakersBySearchTerm(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage) { (speakersPage, error) in
-            
-            defer { self.loadingSpeakers = false }
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-                return
-            }
-            
-            self.speakers.appendContentsOf(speakersPage!)
-            self.viewController.reloadSpeakers()
-            self.loadedAllSpeakers = speakersPage!.count < self.objectsPerPage
-            self.pageSpeakers += 1
-        }
-    }
-    
-    private func addEventToLoggedInMemberSchedule(eventId: Int, completionBlock: (NSError?) -> ()) {
+        let speakersPage = PresentationSpeaker.filter(Store.shared.realm, searchTerm: searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage)
         
-        if Reachability.isConnectedToNetwork() == false {
-            let error = NSError(domain: "There is no network connectivity. Operation cancelled", code: 12002, userInfo: nil)
-            completionBlock(error)
-            return
-        }
+        defer { self.loadingSpeakers = false }
         
-        if let loggedInMember = securityManager.getCurrentMember() {
-            let event = eventDataStore.getByIdLocal(eventId)
-            
-            summitAttendeeDataStore.addEventToMemberSchedule(loggedInMember.attendeeRole!, event: event!) {(attendee, error) in
-                completionBlock(error)
-            }
-        }
+        self.speakers.appendContentsOf(speakersPage)
+        self.reloadSpeakers()
+        self.loadedAllSpeakers = speakersPage.count < self.objectsPerPage
+        self.pageSpeakers += 1
     }
-    
     
     // MARK: Configure Table View Cells
     
@@ -346,15 +363,21 @@ import CoreSummit
             
         case eventsTableView:
             
+            let event = events[indexPath.row]
             
+            let eventVC = R.storyboard.event.eventDetailViewController()!
+            
+            eventVC.event = event.id
             
         case tracksTableView:
             
-            
+            // FIXME
+            break
             
         case speakersTableView.view:
             
-            
+            // FIXME
+            break
             
         default: fatalError("Invalid table view: \(tableView)")
         }
