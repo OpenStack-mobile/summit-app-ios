@@ -71,7 +71,7 @@ import CoreSummit
         // execute search
         if searchTerm.isEmpty == false {
             
-            search(searchTerm)
+            search()
         }
     }
     
@@ -307,9 +307,10 @@ import CoreSummit
         
         searchTermTextView.resignFirstResponder()
         
-        if searchTermTextView.text!.isEmpty == false {
+        if let text = searchTermTextView.text where text.isEmpty {
             
-            self.search(searchTermTextView.text ?? "")
+            self.searchTerm = text
+            self.search()
         }
         
         return true
@@ -376,8 +377,11 @@ import CoreSummit
             
         case speakersTableView.view:
             
-            // FIXME
-            break
+            let speaker = speakers[indexPath.row]
+            
+            let memberProfileVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
+            
+            showViewController(memberProfileVC, sender: self)
             
         default: fatalError("Invalid table view: \(tableView)")
         }
