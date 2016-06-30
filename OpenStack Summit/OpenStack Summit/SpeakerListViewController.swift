@@ -58,7 +58,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     /// Reloads the list of speakers from cache.
     @IBAction func loadData(sender: AnyObject? = nil) {
                 
-        let speakers = PresentationSpeaker.filter(Store.shared.realm, searchTerm: searchTerm, page: page, objectsPerPage: objectsPerPage)
+        let speakers = PresentationSpeaker.filter(searchTerm, page: page, objectsPerPage: objectsPerPage)
         
         people.appendContentsOf(speakers)
         loadedAll = speakers.count < objectsPerPage

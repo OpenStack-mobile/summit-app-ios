@@ -215,7 +215,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         
         loadingSpeakers = true
         
-        let speakersPage = PresentationSpeaker.filter(Store.shared.realm, searchTerm: searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage)
+        let speakersPage = PresentationSpeaker.filter(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage)
         
         defer { self.loadingSpeakers = false }
         
