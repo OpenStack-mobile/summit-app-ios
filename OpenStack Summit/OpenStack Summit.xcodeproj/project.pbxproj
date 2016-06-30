@@ -926,6 +926,7 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/MTDates.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Cosmos.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/AHKActionSheet.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (

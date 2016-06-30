@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreSummit
 
-@objc final class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RevealViewController, MessageEnabledViewController {
+final class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RevealViewController, MessageEnabledViewController {
     
     // MARK: - IB Outlets
 
@@ -74,7 +75,7 @@ import CoreSummit
         // execute search
         if searchTerm.isEmpty == false {
             
-            search()
+            self.search()
         }
     }
     
@@ -175,7 +176,7 @@ import CoreSummit
         getSpeakers()
     }
     
-    func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
+    private func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
         
         /*
          if !securityManager.isLoggedInAndConfirmedAttendee() {

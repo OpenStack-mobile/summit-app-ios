@@ -6,8 +6,9 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import CoreSummit
+import Foundation
 import RealmSwift
+import CoreSummit
 
 public struct ScheduleItem: RealmDecodable {
     
@@ -99,14 +100,14 @@ private extension ScheduleItem {
     
     static func getLocation(event: RealmSummitEvent) -> String {
         var location = ""
-        if event.venueRoom != nil {
-            location = event.venueRoom!.venue.name
+        if let room = event.venueRoom {
+            location = room.venue.name
             if event.summit.startShowingVenuesDate.timeIntervalSinceNow.isSignMinus {
-                location += " - " + event.venueRoom!.name
+                location += " - " + room.name
             }
         }
-        else if event.venue != nil {
-            location = event.venue!.name
+        else if let venue = event.venue {
+            location = venue.name
         }
         return location
     }
