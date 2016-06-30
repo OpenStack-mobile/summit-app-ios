@@ -23,7 +23,8 @@ public extension PresentationSpeaker {
     
     static func filter(searchTerm: String, page: Int, objectsPerPage: Int, realm: Realm = Store.shared.realm) -> [PresentationSpeaker] {
         
-        let sortProperties = [SortDescriptor(property: "firstName", ascending: true), SortDescriptor(property: "lastName", ascending: true)]
+        let sortProperties = [SortDescriptor(property: "firstName", ascending: true),
+                              SortDescriptor(property: "lastName", ascending: true)]
         
         var result = realm.objects(RealmPresentationSpeaker.self).sorted(sortProperties)
         
@@ -32,7 +33,7 @@ public extension PresentationSpeaker {
         
         if searchTerm.isEmpty == false {
             
-            result = result.filter("firstName CONTAINS [c]%@ || lastName CONTAINS [c]%@", searchTerm)
+            result = result.filter("firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", searchTerm, searchTerm)
         }
         
         var speakers = [RealmPresentationSpeaker]()
