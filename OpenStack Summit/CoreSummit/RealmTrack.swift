@@ -13,6 +13,16 @@ public class RealmTrack: RealmNamed {
     public let trackGroups = List<RealmTrackGroup>()
 }
 
+// MARK: - Fetches
+
+public extension Track {
+    
+    static func search(searchTerm: String, realm: Realm = Store.shared.realm) -> [Track] {
+        
+        return Track.from(realm: realm.objects(RealmTrack).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name"))
+    }
+}
+
 // MARK: - Encoding
 
 extension Track: RealmDecodable {

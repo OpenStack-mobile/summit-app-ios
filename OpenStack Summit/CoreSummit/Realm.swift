@@ -43,6 +43,11 @@ public extension RealmDecodable {
         
         return realmEntities.map { self.init(realmEntity: $0) }
     }
+    
+    static func from(realm realmEntities: Results<RealmType>) -> [Self] {
+        
+        return realmEntities.map { self.init(realmEntity: $0) }
+    }
 }
 
 public extension List where T: RealmEntity {

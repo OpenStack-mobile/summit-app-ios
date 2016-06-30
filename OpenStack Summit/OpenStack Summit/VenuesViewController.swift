@@ -25,6 +25,6 @@ final class VenuesViewController: RevealTabStripViewController {
         var venuesMapViewController: VenuesMapViewController!
         var venueListViewController: VenueListViewController!*/
         
-        return []
+        return [R.storyboard.people.speakerListViewController()!]
     }
 }

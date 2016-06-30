@@ -106,7 +106,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         childViewController.append(trackListViewController)
         childViewController.append(levelListViewController)
         */
-        
-        return []
+                
+        return [R.storyboard.people.speakerListViewController()!]
     }
 }

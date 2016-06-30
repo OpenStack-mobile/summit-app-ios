@@ -13,6 +13,11 @@ public enum MemberProfileIdentifier {
     
     case currentUser
     case speaker(Int)
+    
+    public init() {
+        
+        self = .currentUser
+    }
 }
 
 

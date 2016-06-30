@@ -25,6 +25,25 @@ public class RealmSummitEvent: RealmNamed {
     public dynamic var venueRoom : RealmVenueRoom?
 }
 
+// MARK: - Fetches
+
+public extension RealmSummitEvent {
+    
+    static var sortProperties: [RealmSwift.SortDescriptor] {
+        
+        return [SortDescriptor(property: "start", ascending: true),
+                SortDescriptor(property: "end", ascending: true),
+                SortDescriptor(property: "name", ascending: true)]
+    }
+    
+    static func search(searchTerm: String, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
+        
+        let realmEntities = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.fullName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(RealmSummitEvent.sortProperties)
+        
+        return realmEntities.map { $0 }
+    }
+}
+
 // MARK: - Encoding
 
 extension SummitEvent: RealmDecodable {
