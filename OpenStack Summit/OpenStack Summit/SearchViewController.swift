@@ -350,7 +350,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             configure(cell: cell, at: indexPath)
             return cell
             
-        case speakersTableView.view:
+        case speakersTableView.tableView:
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
             configure(cell: cell, at: indexPath)
@@ -379,7 +379,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             // FIXME
             break
             
-        case speakersTableView.view:
+        case speakersTableView.tableView:
             
             let speaker = speakers[indexPath.row]
             
