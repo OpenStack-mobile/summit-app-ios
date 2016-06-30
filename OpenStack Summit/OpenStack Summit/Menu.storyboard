@@ -370,7 +370,6 @@
                         <outlet property="contentView" destination="z13-6R-R9Z" id="U1r-2l-9bf"/>
                         <outlet property="eventsTableView" destination="bvA-nd-wYk" id="oAm-OW-vgt"/>
                         <outlet property="eventsTableViewHeightConstraint" destination="9q2-xK-KtW" id="mbd-Z9-MbT"/>
-                        <outlet property="menuButton" destination="luP-eM-Ckq" id="5ux-vn-qlR"/>
                         <outlet property="searchTermTextView" destination="cTI-2K-SKv" id="9ia-gj-n99"/>
                         <outlet property="speakersTableView" destination="nLb-m5-oEh" id="lgB-EJ-Eg3"/>
                         <outlet property="speakersTableViewHeightConstraint" destination="PPc-P7-LjM" id="lwP-Kl-hVu"/>

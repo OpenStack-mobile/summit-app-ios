@@ -38,7 +38,7 @@ public extension RealmSummitEvent {
     
     static func search(searchTerm: String, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
         
-        let realmEntities = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.fullName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(RealmSummitEvent.sortProperties)
+        let realmEntities = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm) /* .sorted(RealmSummitEvent.sortProperties) */
         
         return realmEntities.map { $0 }
     }
