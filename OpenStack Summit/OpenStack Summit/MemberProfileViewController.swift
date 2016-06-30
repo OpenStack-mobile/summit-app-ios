@@ -19,7 +19,7 @@ final class MemberProfileViewController: RevealTabStripViewController {
     
     // MARK: - Initialization
     
-    init(profile: MemberProfileIdentifier) {
+    init(profile: MemberProfileIdentifier = MemberProfileIdentifier()) {
         
         self.profile = profile
         

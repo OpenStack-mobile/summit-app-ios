@@ -28,8 +28,12 @@ import CoreSummit
         
         didSet {
             
-            if isViewLoaded() == false { self.loadView() }
-            searchTermTextView.text = searchTerm
+            guard isViewLoaded() else { return }
+            
+            if searchTermTextView.text != searchTerm {
+                
+                searchTermTextView.text = searchTerm
+            }
         }
     }
     
@@ -41,7 +45,6 @@ import CoreSummit
     private let objectsPerPage = 1000
     private var pageSpeakers = 1
     private var loadedAllSpeakers = false
-    private var loadedAllAttendees = false
     private var loadingSpeakers = false
     private var isOperationOngoing = false
     
@@ -164,9 +167,9 @@ import CoreSummit
         pageSpeakers = 1
         speakers.removeAll()
         
-        events = getEventsBySearchTerm(searchTerm)
+        events = RealmSummitEvent.search(searchTerm).map { ScheduleItem(realmEntity: $0) }
         reloadEvents()
-        tracks = getTracksBySearchTerm(searchTerm)
+        tracks = Track.search(searchTerm)
         reloadTracks()
         
         getSpeakers()

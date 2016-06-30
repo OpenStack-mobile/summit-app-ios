@@ -31,27 +31,10 @@ extension RevealViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("Only UIViewController subclasses should conform to RevealViewController protocol") }
         
-        let revealViewController: SWRevealViewController = {
-           
-            var parent: UIViewController? = viewController
-            
-            while parent != nil {
-                
-                parent = parent?.parentViewController
-                
-                if let revealVC = parent as? SWRevealViewController {
-                    
-                    return revealVC
-                }
-            }
-            
-            fatalError("Not a child view controller of SWRevealViewController")
-        }()
-        
         let menuButton = UIBarButtonItem()
-        menuButton.target = revealViewController
+        menuButton.target = viewController.revealViewController()
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-        menuButton.image = UIImage(named: "menu")
+        menuButton.image = R.image.menu()!
         
         viewController.navigationItem.leftBarButtonItem = menuButton
     }
