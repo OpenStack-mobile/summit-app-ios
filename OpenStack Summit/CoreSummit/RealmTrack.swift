@@ -19,7 +19,7 @@ public extension Track {
     
     static func search(searchTerm: String, realm: Realm = Store.shared.realm) -> [Track] {
         
-        return Track.from(realm: realm.objects(RealmTrack).filter("name CONTAINS [c]%@ ", searchTerm).sorted("name"))
+        return Track.from(realm: realm.objects(RealmTrack).filter("name CONTAINS [c] %@", searchTerm).sorted("name"))
     }
 }
 
@@ -41,7 +41,7 @@ extension Track: RealmEncodable {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
         
-                realmEntity.name = name
+        realmEntity.name = name
         realmEntity.trackGroups.replace(with: groups)
         
         return realmEntity

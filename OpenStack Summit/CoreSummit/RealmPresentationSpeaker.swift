@@ -21,7 +21,7 @@ public class RealmPresentationSpeaker: RealmPerson {
 
 public extension PresentationSpeaker {
     
-    static func filter(realm: Realm = try! Realm(), searchTerm: String = "", page: Int, objectsPerPage: Int) -> [PresentationSpeaker] {
+    static func filter(searchTerm: String, page: Int, objectsPerPage: Int, realm: Realm = Store.shared.realm) -> [PresentationSpeaker] {
         
         let sortProperties = [SortDescriptor(property: "firstName", ascending: true), SortDescriptor(property: "lastName", ascending: true)]
         
