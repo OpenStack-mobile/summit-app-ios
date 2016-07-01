@@ -346,7 +346,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
         case tracksTableView:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.tracksTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.trackTableViewCell, forIndexPath: indexPath)!
             configure(cell: cell, at: indexPath)
             return cell
             

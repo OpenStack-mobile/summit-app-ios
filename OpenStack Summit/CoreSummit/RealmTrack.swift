@@ -25,7 +25,11 @@ public extension Track {
     static func `for`(groups trackGroups: [Identifier], realm: Realm = Store.shared.realm) -> [Track] {
         
         // get all local tracks
-        var tracks = Track.from(realm: realm.objects(RealmTrack)).sort { $0.name < $1.name }
+        let realmTracks = realm.objects(RealmTrack)
+        
+        var tracks = Track.from(realm: realmTracks)
+        
+        tracks = tracks.sort { $0.name < $1.name }
         
         if trackGroups.isEmpty == false {
             
