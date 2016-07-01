@@ -21,6 +21,33 @@ public extension Track {
         
         return Track.from(realm: realm.objects(RealmTrack).filter("name CONTAINS [c] %@", searchTerm).sorted("name"))
     }
+    
+    static func `for`(groups trackGroups: [Identifier], realm: Realm = Store.shared.realm) -> [Track] {
+        
+        // get all local tracks
+        var tracks = Track.from(realm: realm.objects(RealmTrack)).sort { $0.name < $1.name }
+        
+        if trackGroups.isEmpty == false {
+            
+            tracks = tracks.filter { (track) in
+                
+                if track.groups.isEmpty == false {
+                    
+                    for trackGroup in track.groups {
+                        
+                        if trackGroups.contains(trackGroup) {
+                            
+                            return true
+                        }
+                    }
+                }
+                
+                return false
+            }
+        }
+        
+        return tracks
+    }
 }
 
 // MARK: - Encoding

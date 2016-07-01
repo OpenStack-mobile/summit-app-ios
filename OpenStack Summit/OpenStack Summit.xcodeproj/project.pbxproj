@@ -124,6 +124,7 @@
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Definitions.swift */; };
 		6E779E4E1D2581AE00A184A0 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */; };
+		6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFD71D26D347009524C7 /* TrackListViewController.swift */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
 		6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */; };
@@ -327,6 +328,7 @@
 		6E57DB6F1D11BE8B00F5574C /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
+		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
 		6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderView.xib; sourceTree = "<group>"; };
 		6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
 				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
+				6E96BFD71D26D347009524C7 /* TrackListViewController.swift */,
 				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
 				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
@@ -973,6 +976,7 @@
 				6EFC99C51D21CAE7009FD0DA /* EventsViewController.swift in Sources */,
 				6EFC6E631D22EF900087057A /* NavigationController.swift in Sources */,
 				6EB752621D18B14C00BC294D /* MemberProfileIdentifier.swift in Sources */,
+				6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */,
 				6EFC6E651D2300260087057A /* VenuesViewController.swift in Sources */,
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
