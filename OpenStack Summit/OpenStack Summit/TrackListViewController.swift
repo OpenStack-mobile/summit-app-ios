@@ -34,12 +34,17 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // solves custom navigation issues
+        tableView.delegate = self
+        tableView.dataSource = self
         
         reloadData()
     }
@@ -79,7 +84,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.tracksTableViewCell, forIndexPath: indexPath)!
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.trackTableViewCell, forIndexPath: indexPath)!
         
         configure(cell: cell, at: indexPath)
         
@@ -94,7 +99,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
         let track = tracks[indexPath.row]
         
         let newViewController = TrackScheduleViewController
-        navigationController.pushViewController(newViewController, animated: true)
+        presentViewController(newViewController, animated: true)
         */
     }
     

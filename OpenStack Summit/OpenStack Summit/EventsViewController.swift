@@ -101,12 +101,14 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         // FIXME: Add child VCs
+        let trackListViewController = R.storyboard.tracks.trackListViewController()!
+        
         /*
         childViewController.append(generalScheduleViewController)
         childViewController.append(trackListViewController)
         childViewController.append(levelListViewController)
         */
                 
-        return [R.storyboard.people.speakerListViewController()!]
+        return [trackListViewController]
     }
 }

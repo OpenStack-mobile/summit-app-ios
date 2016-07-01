@@ -125,6 +125,7 @@
 		6E57DB701D11BE8B00F5574C /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Definitions.swift */; };
 		6E779E4E1D2581AE00A184A0 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */; };
 		6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFD71D26D347009524C7 /* TrackListViewController.swift */; };
+		6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
 		6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */; };
@@ -329,6 +330,7 @@
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
 		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
+		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
 		6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderView.xib; sourceTree = "<group>"; };
 		6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
 				6E2537E71D19B1C4003E3400 /* Schedule.storyboard */,
 				6EFC99C61D21DBE5009FD0DA /* Event.storyboard */,
+				6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
 				6EF147EC1D13579C00D5EEF9 /* View */,
@@ -858,6 +861,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */,
 				6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */,
 				6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */,
 				6E2537EC1D19B203003E3400 /* ScheduleView.xib in Resources */,
