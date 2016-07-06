@@ -6,6 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import Foundation
 import RealmSwift
 import struct SwiftFoundation.Date
 
@@ -41,6 +42,51 @@ public extension RealmSummitEvent {
         let realmEntities = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(RealmSummitEvent.sortProperties)
         
         return realmEntities.map { $0 }
+    }
+    
+    static func filter(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, realm: Realm = Store.shared.realm)->[SummitEvent]{
+        
+        var events = realm.objects(RealmSummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted(self.sortProperties)
+        
+        if (eventTypes != nil && eventTypes!.count > 0) {
+            events = events.filter("eventType.id in %@", eventTypes!)
+        }
+        
+        if (trackGroups != nil && trackGroups!.count > 0) {
+            var trackGroupsFilter = ""
+            var separator = ""
+            for trackGroup in trackGroups! {
+                trackGroupsFilter += "\(separator)ANY presentation.track.trackGroups.id = \(trackGroup)"
+                separator = " OR "
+            }
+            events = events.filter(trackGroupsFilter)
+        }
+        
+        if (tracks != nil && tracks!.count > 0) {
+            events = events.filter("presentation.track.id in %@", tracks!)
+        }
+        
+        if (levels != nil && levels!.count > 0) {
+            events = events.filter("presentation.level in %@", levels!)
+        }
+        
+        if (summitTypes != nil && summitTypes!.count > 0) {
+            for summitTypeId in summitTypes! {
+                events = events.filter("ANY summitTypes.id = %@", summitTypeId)
+            }
+        }
+        
+        if (tags != nil && tags!.count > 0) {
+            var tagsFilter = ""
+            var separator = ""
+            for tag in tags! {
+                tagsFilter += "\(separator)ANY tags.name = [c] '\(tag)'"
+                separator = " OR "
+            }
+            events = events.filter(tagsFilter)
+        }
+        
+        return SummitEvent.from(realm: events)
     }
 }
 

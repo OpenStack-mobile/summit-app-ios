@@ -6,15 +6,17 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import typealias CoreSummit.Identifier
+
 public enum FilterSectionType {
     
     case SummitType, EventType, Track, TrackGroup, Tag, Level
 }
 
-public struct FilterSectionItem {
+public enum FilterSectionItem {
     
-    public var id: Int
-    public var name: String
+    case identifier(CoreSummit.Identifier)
+    case name(Swift.String)
 }
 
 public struct FilterSection {

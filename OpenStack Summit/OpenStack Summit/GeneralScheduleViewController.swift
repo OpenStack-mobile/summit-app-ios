@@ -61,7 +61,7 @@ class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvid
         
         scheduleFilter.hasToRefreshSchedule = false
         
-        if Store.shared.realm.objects(RealmSummit).isEmpty && Reachability.connected == false {
+        if Store.shared.realm.objects(RealmSummit).isEmpty /* && Reachability.connected == false */ { // FIXME: Reachability
             
             self.toggleNoConnectivityMessage(true)
             self.toggleEventList(false)
