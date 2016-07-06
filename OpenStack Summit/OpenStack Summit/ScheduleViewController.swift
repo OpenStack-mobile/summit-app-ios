@@ -6,6 +6,7 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
+import SwiftFoundation
 import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
@@ -95,7 +96,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         let button = sender
         let view = button.superview!
         let cell = view.superview as! UITableViewCell
-        let indexPath = scheduleView.tableView.indexPathForCell(cell)
+        //let indexPath = scheduleView.tableView.indexPathForCell(cell)
         
         //self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
     }
@@ -105,6 +106,30 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     func toggleEventList(show: Bool) {} // override
     
     func toggleNoConnectivityMessage(show: Bool) {} // override
+    
+    func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+        
+        fatalError("You must override this method")
+    }
+    
+    func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+        
+        fatalError("You must override this method")
+    }
+    
+    final func reloadSchedule() {
+        
+        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
+        
+        let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        
+        self.dayEvents = self.scheduledEvents(from: startDate, to: endDate)
+        
+        scheduleView.tableView.delegate = self
+        scheduleView.tableView.dataSource = self
+        scheduleView.tableView.reloadData()
+    }
     
     func loadData() {
         
@@ -136,21 +161,18 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         }
     }
     
+    // MARK: Private Methods
+    
     private func updateUI(summit: Summit) {
         
-        // FIXME: Implement push notifications
-        //self.internalInteractor.subscribeToPushChannelsUsingContextIfNotDoneAlready()
+        self.subscribeToPushChannelsUsingContextIfNotDoneAlready()
         
         self.summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
         
         self.startDate = summit.start.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
         self.endDate = summit.end.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
         
-        self.availableDates = self.getScheduleAvailableDatesFrom(
-            self.startDate,
-            to: self.endDate,
-            withInteractor: interactor
-        )
+        self.availableDates = self.scheduleAvailableDates(from: self.startDate, to: self.endDate)
         
         if self.selectedDate != nil {
             if self.availableDates.count > 0 && !self.availableDates.contains(self.selectedDate!) {
@@ -163,9 +185,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
                     }
                 }
                 self.selectedDate = selected
-            }
-            else {
-                self.selectedDate = self.selectedDate
             }
         }
         else {
@@ -185,9 +204,50 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             }
         }
     }
-
-    // MARK: Private Methods
-
+    
+    func scheduleAvailableDates(from startDate: NSDate, endDate: NSDate) -> [NSDate] {
+        
+        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType]?.map { $0.id }
+        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType]?.map { $0.id }
+        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track]?.map { $0.id }
+        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup]?.map { $0.id }
+        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
+        
+        let events = SummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
+        
+        var activeDates: [NSDate] = []
+        for event in events {
+            let timeZone = NSTimeZone(name: event.summit.timeZone)!
+            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            if !activeDates.contains(startDate) {
+                activeDates.append(startDate)
+            }
+            
+        }
+        return activeDates
+    }
+    
+    
+    final func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
+        
+        /*
+         if pushRegisterInProgress {
+         return
+         }
+         
+         pushRegisterInProgress = true
+         
+         if NSUserDefaults.standardUserDefaults().objectForKey("registeredPushNotificationChannels") == nil {
+         self.pushNotificationsManager.subscribeToPushChannelsUsingContext(){ (succeeded: Bool, error: NSError?) in
+         if succeeded {
+         NSUserDefaults.standardUserDefaults().setObject("true", forKey: "registeredPushNotificationChannels")
+         }
+         self.pushRegisterInProgress = false
+         }
+         }*/
+    }
+    
     private final func isDataLoaded() -> Bool {
         
         return Store.shared.realm.objects(RealmSummit.self).first != nil
