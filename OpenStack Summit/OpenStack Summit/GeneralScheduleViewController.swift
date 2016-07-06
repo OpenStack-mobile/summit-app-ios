@@ -10,8 +10,9 @@
 import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
+import CoreSummit
 
-class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvider, ShowActivityIndicatorProtocol {
+class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -28,31 +29,59 @@ class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvid
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
+        loadData()
     }
     
     // MARK: - Actions
     
     @IBAction func retryButtonPressed(sender: UIButton) {
         
-        reloadData()
+        loadData()
     }
     
     // MARK: - Methods
     
     override func toggleEventList(show: Bool) {
+        
         scheduleView.hidden = !show
     }
     
     override func toggleNoConnectivityMessage(show: Bool) {
+        
         noConnectivityView.hidden = !show
+    }
+    
+    internal override func loadData() {
+        
+        if !scheduleFilter.hasToRefreshSchedule {
+            return
+        }
+        
+        self.showActivityIndicator()
+        
+        scheduleFilter.hasToRefreshSchedule = false
+        
+        if Store.shared.realm.objects(RealmSummit).isEmpty && Reachability.connected == false {
+            
+            self.toggleNoConnectivityMessage(true)
+            self.toggleEventList(false)
+            return
+        }
+        
+        self.toggleNoConnectivityMessage(false)
+        self.toggleEventList(true)
+        
+        self.checkForClearDataEvents()
+        
+        super.loadData()
     }
     
     // MARK: - Private Methods
     
-    private func reloadData() {
+    @inline(__always)
+    private func checkForClearDataEvents() {
         
-        
+        //dataUpdatePoller.clearDataIfTruncateEventExist()
     }
     
     // MARK: - IndicatorInfoProvider
