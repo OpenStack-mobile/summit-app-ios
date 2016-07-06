@@ -102,25 +102,105 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     // MARK: - Methods
     
-    func toggleEventList(show: Bool) {}
+    func toggleEventList(show: Bool) {} // override
     
-    func toggleNoConnectivityMessage(show: Bool) {}
+    func toggleNoConnectivityMessage(show: Bool) {} // override
     
+    func loadData() {
+        
+        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
+            
+            let summit = Summit(realmEntity: realmSummit)
+            
+            self.updateUI(summit)
+            
+        } else {
+            
+            Store.shared.summit { (response) in
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    self.showErrorMessage(error as NSError)
+                    
+                    self.scheduleFilter.hasToRefreshSchedule = true
+                    self.toggleNoConnectivityMessage(true)
+                    self.toggleEventList(false)
+                    
+                case let .Value(value):
+                    
+                    self.updateUI(value)
+                }
+            }
+        }
+    }
+    
+    private func updateUI(summit: Summit) {
+        
+        // FIXME: Implement push notifications
+        //self.internalInteractor.subscribeToPushChannelsUsingContextIfNotDoneAlready()
+        
+        self.summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        
+        self.startDate = summit.start.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
+        self.endDate = summit.end.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
+        
+        self.availableDates = self.getScheduleAvailableDatesFrom(
+            self.startDate,
+            to: self.endDate,
+            withInteractor: interactor
+        )
+        
+        if self.selectedDate != nil {
+            if self.availableDates.count > 0 && !self.availableDates.contains(self.selectedDate!) {
+                let today = NSDate()
+                var selected = self.availableDates.first
+                for availableDate in self.availableDates {
+                    if availableDate.mt_isWithinSameDay(today) {
+                        selected = availableDate
+                        break
+                    }
+                }
+                self.selectedDate = selected
+            }
+            else {
+                self.selectedDate = self.selectedDate
+            }
+        }
+        else {
+            if self.availableDates.count > 0 {
+                let today = NSDate()
+                var selected = self.availableDates.first
+                for availableDate in self.availableDates {
+                    if availableDate.mt_isWithinSameDay(today) {
+                        selected = availableDate
+                        break
+                    }
+                }
+                self.selectedDate = selected
+            }
+            else {
+                self.selectedDate = self.startDate
+            }
+        }
+    }
+
     // MARK: Private Methods
-    
+
     private final func isDataLoaded() -> Bool {
         
         return Store.shared.realm.objects(RealmSummit.self).first != nil
     }
-    
+
     private final func eventExist(id: Identifier) -> Bool {
         
         return RealmSummitEvent.find(id, realm: Store.shared.realm) != nil
     }
-    
+
     private final func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
         
-        /* FIXME: Implement
+        /* FIXME: Implement Login
         if !Store.shared.isLoggedInAndConfirmedAttendee() {
             return false;
         } */
@@ -144,7 +224,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = isEventScheduledByLoggedMember(event.id)
-        cell.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ true // FIXME
+        cell.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ true // FIXME Login
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
         
         // configure button
@@ -202,6 +282,17 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //internalPresenter.showEventDetail(indexPath.row)
+        
+        /*
+        let event = dayEvents[index]
+        if internalInteractor.eventExist(event.id) {
+            internalWireframe.showEventDetail(event.id)
+        }
+        else {
+            internalViewController.showInfoMessage("Info", message: "This event was removed from schedule.")
+            reloadSchedule()
+            
+        }*/
     }
     
     // MARK: - Notifications
@@ -213,6 +304,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             selector: #selector(ScheduleViewController.loggedIn(_:)),
             name: Notification.loggedIn.rawValue,
             object: nil)
+        
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(ScheduleViewController.loggedOut(_:)),
@@ -228,11 +320,11 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     @objc private func loggedIn(notification: NSNotification) {
         
-        
+        self.scheduleView.tableView.reloadData()
     }
     
     @objc private func loggedOut(notification: NSNotification) {
         
-        
+        self.scheduleView.tableView.reloadData()
     }
 }
