@@ -106,7 +106,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             cell.scheduled = false
             
-            Store.shared.removeEventFromSchedule(loggedInMember, event: event.id) { [weak self] (response) in
+            Store.shared.removeEventFromSchedule(attendee: loggedInMember, event: event.id) { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     

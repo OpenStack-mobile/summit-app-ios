@@ -34,6 +34,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // validate R.swift on debug builds
         R.assertValid()
         
+        // configure global appearance
+        SetAppearance()
+        
         // setup root VC
         window?.rootViewController = revealViewController
         
