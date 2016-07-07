@@ -54,9 +54,20 @@ public extension Store {
         })
     }
     
-    func removeEventFromSchedule(attendee: Identifier, event: Identifier, completion: (ErrorValue<()>) -> ()) {
+    func removeEventFromSchedule(summit: Identifier? = nil, attendee: Identifier, event: Identifier, completion: (ErrorValue<()>) -> ()) {
         
-        let URI = "/api/v1/summits/current/attendees/\(attendee)/schedule/\(event)"
+        let summitID: String
+        
+        if let identifier = summit {
+            
+            summitID = "\(identifier)"
+            
+        } else {
+            
+            summitID = "current"
+        }
+        
+        let URI = "/api/v1/summits/\(summitID)/attendees/\(attendee)/schedule/\(event)"
         
         let URL = Constants.Urls.ResourceServerBaseUrl + URI
         
