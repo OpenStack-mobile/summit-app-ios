@@ -44,7 +44,7 @@ public struct ScheduleItem: RealmDecodable {
 
 // MARK: - Private Exention
 
-private extension ScheduleItem {
+internal extension ScheduleItem {
     
     static func getSummitTypes(event: RealmSummitEvent) -> String {
         var credentials = ""
