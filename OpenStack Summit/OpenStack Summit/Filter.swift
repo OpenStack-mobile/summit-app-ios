@@ -6,36 +6,28 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import typealias CoreSummit.Identifier
-
 public enum FilterSectionType {
     
     case SummitType, EventType, Track, TrackGroup, Tag, Level
 }
 
-public enum FilterSectionItem {
-    
-    case identifier(CoreSummit.Identifier)
-    case name(Swift.String)
+public class FilterSection {
+    public var type : FilterSectionType!
+    public var name = ""
+    public var items = [FilterSectionItem]()
 }
 
-public struct FilterSection {
-    
-    public var type: FilterSectionType
-    public var name: String
-    public var items: [FilterSectionItem]
+public class FilterSectionItem {
+    public var id = 0
+    public var name = ""
 }
 
-public struct ScheduleFilter {
-    
-    var selections = [FilterSectionType: [FilterSectionItem]]()
-    
+public class ScheduleFilter {
+    var selections = [FilterSectionType: [AnyObject]]()
     var filterSections = [FilterSection]()
-    
     var hasToRefreshSchedule = true
     
-    func areAllSelected(for type: FilterSectionType) -> Bool {
-        
+    func areAllSelectedForType(type: FilterSectionType) -> Bool {
         if (filterSections.count == 0) {
             return false
         }
@@ -44,22 +36,18 @@ public struct ScheduleFilter {
     }
     
     func hasActiveFilters() -> Bool {
-        
+        var hasActiveFilters = false
         for values in selections.values {
-            
             if values.count > 0 {
-                
-                return true
+                hasActiveFilters = true
+                break
             }
         }
-        
-        return false
+        return hasActiveFilters
     }
     
-    mutating func clearActiveFilters() {
-        
+    func clearActiveFilters() {
         for key in selections.keys {
-            
             selections[key] = []
         }
     }

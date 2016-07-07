@@ -205,29 +205,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         }
     }
     
-    func scheduleAvailableDates(from startDate: NSDate, endDate: NSDate) -> [NSDate] {
-        
-        let eventTypeSelections = self.scheduleFilter.selections[FilterSectionType.EventType]?.map { $0.id }
-        let summitTypeSelections = self.scheduleFilter.selections[FilterSectionType.SummitType]?.map { $0.id }
-        let trackSelections = self.scheduleFilter.selections[FilterSectionType.Track]?.map { $0.id }
-        let trackGroupSelections = self.scheduleFilter.selections[FilterSectionType.TrackGroup]?.map { $0.id }
-        let tagSelections = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
-        let levelSelections = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
-        
-        let events = SummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
-        
-        var activeDates: [NSDate] = []
-        for event in events {
-            let timeZone = NSTimeZone(name: event.summit.timeZone)!
-            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
-            if !activeDates.contains(startDate) {
-                activeDates.append(startDate)
-            }
-            
-        }
-        return activeDates
-    }
-    
     
     final func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
         

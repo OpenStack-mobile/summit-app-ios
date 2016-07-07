@@ -39,14 +39,14 @@ public extension RealmSummitEvent {
     
     static func search(searchTerm: String, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
         
-        let realmEntities = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(RealmSummitEvent.sortProperties)
+        let realmEntities = realm.objects(RealmSummitEvent).filter("name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm).sorted(self.sortProperties)
         
         return realmEntities.map { $0 }
     }
     
-    static func filter(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, realm: Realm = Store.shared.realm)->[SummitEvent]{
+    static func filter(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
         
-        var events = realm.objects(RealmSummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted(self.sortProperties)
+        var events = realm.objects(RealmSummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted(RealmSummitEvent.sortProperties)
         
         if (eventTypes != nil && eventTypes!.count > 0) {
             events = events.filter("eventType.id in %@", eventTypes!)
@@ -86,7 +86,7 @@ public extension RealmSummitEvent {
             events = events.filter(tagsFilter)
         }
         
-        return SummitEvent.from(realm: events)
+        return events.map { $0 }
     }
 }
 
