@@ -56,15 +56,19 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     var event: Identifier!
     
-    /*
     // MARK: - Private Properties
     
+    private var eventDetail: EventDetail!
     private var eventDescriptionHTML = ""
-    private var speakerCellIdentifier = "speakerTableViewCell"
-    private var feedbackCellIdentifier = "feedbackTableViewCell"
+    private var myFeedbackForEvent: Feedback?
+    private var feedbackPage = 1
+    private var feedbackObjectsPerPage = 5
+    private var feedbackList = [Feedback]()
+    private var loadedAllFeedback = false
+    private var loadingFeedback = false
+    
     private let borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
     private let borderWidth = 1
-    private var scheduledInternal = false
     private var actionSheet: AHKActionSheet!
     
     // MARK: - Accessors
@@ -77,12 +81,10 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
             titleLabel.text = newValue
         }
     }
-    private(set) var eventDescription: String! {
-        get {
-            return eventDescriptionHTML
-        }
-        set {
-            eventDescriptionHTML = String(format:"<span style=\"font-family: Arial; font-size: 13\">%@</span>",newValue)
+    private(set) var eventDescription: String {
+        
+        didSet {
+            eventDescriptionHTML = String(format:"<span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDescription)
             let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
             eventDetailTextView.attributedText = attrStr
             eventDetailTextView.sizeToFit()
@@ -167,7 +169,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
             return speakersHeightConstraint.constant > 0
         }
         set {
-            speakersHeightConstraint.constant = newValue ? CGFloat(presenter.getSpeakersCount() * 79) : 0
+            speakersHeightConstraint.constant = newValue ? CGFloat(eventDetail.speakers.count * 79) : 0
             speakersTableView.updateConstraints()
         }
     }
@@ -182,13 +184,11 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         }
     }
     
-    private(set) var scheduled: Bool  {
-        get {
-            return scheduledInternal
-        }
-        set {
-            scheduledInternal = newValue
-            if (scheduledInternal) {
+    private(set) var scheduled: Bool = false {
+        
+        didSet {
+            
+            if (scheduled) {
                 scheduledButton.image = UIImage(named:"checked_active")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
             }
             else {
@@ -277,9 +277,9 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         addMenuButton()
         
         scheduledButton.target = self
-        scheduledButton.action = Selector("toggleSchedule:")
+        scheduledButton.action = #selector(EventDetailViewController.toggleSchedule(_:))
         submenuButton.target = self
-        submenuButton.action = Selector("leaveFeedback:")
+        submenuButton.action = #selector(EventDetailViewController.leaveFeedback(_:))
         
         feedbackButton.layer.cornerRadius = 10
 
@@ -292,7 +292,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         
         actionSheet = AHKActionSheet()
         actionSheet.addButtonWithTitle("Feedback", image: nil, type: .Default) { actsheet in
-            self.presenter.leaveFeedback()
+            self.leaveFeedback()
         }
         actionSheet.addButtonWithTitle("Share", image: nil, type: .Default, handler: nil)
         actionSheet.blurTintColor = UIColor(white: 0.0, alpha: 0.75)
@@ -302,7 +302,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         actionSheet.buttonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
         actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
         
-        feedbackTableView.registerNib(UINib(nibName: "FeedbackTableViewCell", bundle: nil), forCellReuseIdentifier: feedbackCellIdentifier)
+        feedbackTableView.registerNib(R.reuseIdentifier.feedbackTableViewCell)
         
         navigationItem.title = "EVENTS"
     }
@@ -336,11 +336,15 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     private func updateUI() {
         
+        guard let realmEvent = RealmSummitEvent.find(self.event, realm: Store.shared.realm)
+            else { fatalError("Not in cache") }
+        
+        eventDetail = EventDetail(realmEntity: realmEvent)
+        
         loadedAllFeedback = false
         loadingFeedback = false
         feedbackPage = 1
         feedbackList.removeAll()
-        event = interactor.getEventDetail(eventId)
         myFeedbackForEvent = interactor.getMyFeedbackForEvent(eventId)
         
         self.eventTitle = event.name
@@ -378,6 +382,38 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         feedbackTableView.reloadData()
     }
     
+    private func leaveFeedback() {
+        
+        /*
+        let newViewController = feedbackEditViewController
+        let _ = feedbackEditViewController.view! // this is only to force viewLoad to trigger
+        feedbackEditViewController.presenter.eventId = eventId
+        viewController.pushViewController(newViewController, animated: true)
+         */
+    }
+    
+    @inline(__always)
+    private func myFeedback() -> Feedback? {
+        
+        guard let currentMember = Store.shared.authenticatedMember,
+            let feedback = currentMember.attendeeRole?.feedback.filter("event.id = %@", event).first
+            else { return nil }
+        
+        
+        return Feedback(realmEntity: feedback)
+    }
+    
+    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+        
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsetsZero
+    }
+    
+    private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
+        
+        
+    }
+    
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -385,20 +421,22 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if (tableView == speakersTableView) {
-            return presenter.getSpeakersCount();
+            
+            return eventDetail.speakers.count
         }
         else {
-            return presenter.getFeedbackCount();
+            return feedbackList.count
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         if tableView == speakersTableView {
-            let cell = tableView.dequeueReusableCellWithIdentifier(speakerCellIdentifier, forIndexPath: indexPath) as! PeopleTableViewCell
-            presenter.buildSpeakerCell(cell, index: indexPath.row)
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.separatorInset = UIEdgeInsetsZero
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)
+            configure(cell: cell, at: <#T##NSIndexPath#>)
             return cell
         }
         else if tableView == feedbackTableView {
@@ -442,5 +480,5 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
             presenter.loadFeedback()
         }
-    }*/
+    }
 }
