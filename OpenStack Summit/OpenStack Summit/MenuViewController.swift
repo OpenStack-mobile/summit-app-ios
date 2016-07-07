@@ -330,9 +330,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func showAbout() {
         
-        /*
+        let aboutViewController = R.storyboard.menu.aboutViewController()!
+        let navigationController = AppDelegate.shared.navigationController
+        let revealViewController = AppDelegate.shared.revealViewController
+        
         navigationController.setViewControllers([aboutViewController], animated: false)
-        revealViewController.pushFrontViewController(navigationController, animated: true)*/
+        revealViewController.pushFrontViewController(navigationController, animated: true)
     }
     
     // MARK: Login / Logout

@@ -71,5 +71,109 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-1603"/>
         </scene>
+        <!--General Schedule View Controller-->
+        <scene sceneID="n2G-Ee-8dj">
+            <objects>
+                <viewController storyboardIdentifier="GeneralScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="TxJ-Gr-qUK" customClass="GeneralScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vYx-6d-yoS"/>
+                        <viewControllerLayoutGuide type="bottom" id="lWe-Jb-Rf0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fmU-jn-eES">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKz-rJ-Iht" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yh-Fz-tgi">
+                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slZ-Tr-gBU" userLabel="Alert Message">
+                                        <rect key="frame" x="20" y="168" width="560" height="265"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert" translatesAutoresizingMaskIntoConstraints="NO" id="UK2-5y-czg" userLabel="Alert Image">
+                                                <rect key="frame" x="230" y="2" width="100" height="90"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="cUM-k2-2Ru"/>
+                                                    <constraint firstAttribute="height" constant="90" id="waD-nF-Myd"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWg-sP-dDq" userLabel="Message Label">
+                                                <rect key="frame" x="0.0" y="112" width="560" height="61"/>
+                                                <string key="text">There was a problem loading summit information. If there is no internet connection active, please wait until any is available and click retry to load information</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IP8-mD-cJq" userLabel="Retry Button">
+                                                <rect key="frame" x="220" y="193" width="120" height="40"/>
+                                                <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Aa1-Sr-6I7"/>
+                                                    <constraint firstAttribute="width" constant="120" id="Em7-I9-hVR"/>
+                                                </constraints>
+                                                <state key="normal" title="Retry">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="retryButtonPressed:" destination="TxJ-Gr-qUK" eventType="touchUpInside" id="QPe-jc-2ct"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="265" id="HyH-uj-Rpq"/>
+                                            <constraint firstItem="UK2-5y-czg" firstAttribute="centerX" secondItem="slZ-Tr-gBU" secondAttribute="centerX" id="JBM-Iy-URh"/>
+                                            <constraint firstItem="pWg-sP-dDq" firstAttribute="centerY" secondItem="slZ-Tr-gBU" secondAttribute="centerY" constant="10" id="KJX-do-O0O"/>
+                                            <constraint firstItem="IP8-mD-cJq" firstAttribute="top" secondItem="pWg-sP-dDq" secondAttribute="bottom" constant="20" id="fdR-3K-2hD"/>
+                                            <constraint firstItem="pWg-sP-dDq" firstAttribute="leading" secondItem="slZ-Tr-gBU" secondAttribute="leading" id="lEn-Hz-pyS"/>
+                                            <constraint firstItem="IP8-mD-cJq" firstAttribute="centerX" secondItem="slZ-Tr-gBU" secondAttribute="centerX" id="qXE-3J-aaW"/>
+                                            <constraint firstItem="pWg-sP-dDq" firstAttribute="centerX" secondItem="slZ-Tr-gBU" secondAttribute="centerX" id="tiC-hq-xus"/>
+                                            <constraint firstItem="pWg-sP-dDq" firstAttribute="trailing" secondItem="slZ-Tr-gBU" secondAttribute="trailing" id="xPW-Qe-flB"/>
+                                            <constraint firstItem="pWg-sP-dDq" firstAttribute="top" secondItem="UK2-5y-czg" secondAttribute="bottom" constant="20" id="xsV-9n-KG6"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="slZ-Tr-gBU" firstAttribute="centerY" secondItem="1Yh-Fz-tgi" secondAttribute="centerY" id="Jfj-ob-W4s"/>
+                                    <constraint firstItem="slZ-Tr-gBU" firstAttribute="trailing" secondItem="1Yh-Fz-tgi" secondAttribute="trailing" constant="-20" id="OnR-i5-MtK"/>
+                                    <constraint firstItem="slZ-Tr-gBU" firstAttribute="leading" secondItem="1Yh-Fz-tgi" secondAttribute="leading" constant="20" id="xGq-di-h0f"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1Yh-Fz-tgi" firstAttribute="height" secondItem="fmU-jn-eES" secondAttribute="height" id="D3T-pP-exd"/>
+                            <constraint firstItem="HKz-rJ-Iht" firstAttribute="height" secondItem="fmU-jn-eES" secondAttribute="height" id="O4A-l6-gSB"/>
+                            <constraint firstItem="1Yh-Fz-tgi" firstAttribute="leading" secondItem="fmU-jn-eES" secondAttribute="leading" id="did-hp-OfO"/>
+                            <constraint firstItem="HKz-rJ-Iht" firstAttribute="width" secondItem="fmU-jn-eES" secondAttribute="width" id="iGW-He-GU1"/>
+                            <constraint firstItem="1Yh-Fz-tgi" firstAttribute="width" secondItem="fmU-jn-eES" secondAttribute="width" id="jxy-YC-XJN"/>
+                            <constraint firstItem="1Yh-Fz-tgi" firstAttribute="top" secondItem="vYx-6d-yoS" secondAttribute="bottom" id="mJg-5G-KHd"/>
+                            <constraint firstItem="HKz-rJ-Iht" firstAttribute="top" secondItem="vYx-6d-yoS" secondAttribute="bottom" id="miK-By-3O4"/>
+                            <constraint firstItem="HKz-rJ-Iht" firstAttribute="leading" secondItem="fmU-jn-eES" secondAttribute="leading" id="t5B-hv-8FK"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="noConnectivityView" destination="1Yh-Fz-tgi" id="Diy-aI-Lyk"/>
+                        <outlet property="retryButton" destination="IP8-mD-cJq" id="Kqx-4B-krE"/>
+                        <outlet property="scheduleView" destination="HKz-rJ-Iht" id="NM9-wf-SUg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JDI-sq-lLZ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3539" y="-2330"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="alert" width="167" height="150"/>
+    </resources>
 </document>

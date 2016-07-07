@@ -76,6 +76,34 @@ class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvid
         super.loadData()
     }
     
+    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+        
+        let eventTypes = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
+        let summitTypes = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
+        let tracks = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
+        let trackGroups = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
+        let tags = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
+        let levels = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
+        
+        let events = RealmSummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
+        
+        var activeDates: [NSDate] = []
+        for event in events {
+            let timeZone = NSTimeZone(name: event.summit.timeZone)!
+            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            if !activeDates.contains(startDate) {
+                activeDates.append(startDate)
+            }
+            
+        }
+        return activeDates
+    }
+    
+    override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+        
+        fatalError("Not Implemented in \(self.dynamicType)")
+    }
+    
     // MARK: - Private Methods
     
     @inline(__always)
