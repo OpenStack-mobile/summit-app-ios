@@ -10,7 +10,7 @@ import SystemConfiguration
 
 public struct Reachability {
     
-    static var connected: Bool {
+    public static var connected: Bool {
         
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))

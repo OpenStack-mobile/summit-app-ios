@@ -141,21 +141,27 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             
         } else {
             
-            Store.shared.summit { (response) in
+            self.showActivityIndicator()
+            
+            Store.shared.summit { [weak self] (response) in
+                
+                guard let controller = self else { return }
+                
+                controller.hideActivityIndicator()
                 
                 switch response {
                     
                 case let .Error(error):
                     
-                    self.showErrorMessage(error as NSError)
+                    controller.showErrorMessage(error as NSError)
                     
-                    self.scheduleFilter.hasToRefreshSchedule = true
-                    self.toggleNoConnectivityMessage(true)
-                    self.toggleEventList(false)
+                    controller.scheduleFilter.hasToRefreshSchedule = true
+                    controller.toggleNoConnectivityMessage(true)
+                    controller.toggleEventList(false)
                     
                 case let .Value(value):
                     
-                    self.updateUI(value)
+                    controller.updateUI(value)
                 }
             }
         }
