@@ -55,7 +55,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     // MARK: - Properties
     
     var event: Identifier!
-    
+    /*
     // MARK: - Private Properties
     
     private var eventDetail: EventDetail!
@@ -411,7 +411,8 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
         
-        
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsetsZero
     }
     
     // MARK: - UITableViewDataSource
@@ -435,15 +436,13 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         
         if tableView == speakersTableView {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)
-            configure(cell: cell, at: <#T##NSIndexPath#>)
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            configure(cell: cell, at: indexPath)
             return cell
         }
         else if tableView == feedbackTableView {
-            let cell = tableView.dequeueReusableCellWithIdentifier(feedbackCellIdentifier, forIndexPath: indexPath) as! FeedbackTableViewCell
-            presenter.buildFeedbackCell(cell, index: indexPath.row)
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.separatorInset = UIEdgeInsetsZero
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackCellIdentifier, forIndexPath: indexPath)!
+            configure(cell: cell, at: indexPath)
             return cell
         }
         return UITableViewCell()
@@ -480,5 +479,5 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
             presenter.loadFeedback()
         }
-    }
+    }*/
 }

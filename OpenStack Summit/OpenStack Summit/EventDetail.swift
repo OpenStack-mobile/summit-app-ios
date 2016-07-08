@@ -50,10 +50,7 @@ public struct EventDetail: RealmDecodable {
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
         
-        self.venue = event.venue?.id
-        if let venueRoom = event.venueRoom {
-            self.venue = venueRoom.venue.id
-        }
+        self.venue = event.venue?.id ?? event.venueRoom?.id
         
         self.finished = event.end.compare(NSDate()) == NSComparisonResult.OrderedAscending
         self.eventDescription = event.eventDescription
@@ -71,8 +68,9 @@ public struct EventDetail: RealmDecodable {
         
         self.level = event.presentation != nil ? event.presentation!.level + " Level" : ""
         
+        var speakers = [PresentationSpeaker]()
+        var moderatorSpeaker: PresentationSpeaker?
         if let presentation = event.presentation {
-            self.track = event.presentation!.track != nil ? event.presentation!.track!.name : ""
             
             for speaker in presentation.speakers {
                 // HACK: dismiss speakers with empty name
@@ -80,12 +78,17 @@ public struct EventDetail: RealmDecodable {
                     continue
                 }
                 let speakerDTO = PresentationSpeaker(realmEntity: speaker)
-                self.speakers.append(speakerDTO)
+                
+                speakers.append(speakerDTO)
             }
             
             if let moderator = event.presentation?.moderator {
-                self.moderator = PresentationSpeaker(realmEntity: moderator)
+                
+                moderatorSpeaker = PresentationSpeaker(realmEntity: moderator)
             }
         }
+        
+        self.speakers = speakers
+        self.moderator = moderatorSpeaker
     }
 }
