@@ -26,8 +26,10 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("AustinSummit")
         
-        guard let _ = Summit(JSONValue: testJSON)
+        guard let summit = Summit(JSONValue: testJSON)
             else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
         
         //dump(decodable) // too large
     }

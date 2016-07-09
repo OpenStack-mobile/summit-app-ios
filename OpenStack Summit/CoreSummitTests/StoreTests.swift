@@ -11,7 +11,17 @@ import CoreSummit
 
 final class StoreTests: XCTestCase {
     
+    @inline(__always)
+    private func clearRealm() {
+        
+        //try! NSFileManager.defaultManager().removeItemAtPath(Store.shared.realm.configuration.path!)
+        
+        //try! Store.shared.realm.write { Store.shared.realm.deleteAll() }
+    }
+    
     func testCurrentSummitRequest() {
+        
+        clearRealm()
         
         let expectation = expectationWithDescription("API Request")
         
@@ -23,9 +33,11 @@ final class StoreTests: XCTestCase {
                 
                 XCTFail("\(error)");
                 
-            case let .Value(value):
+            case let .Value(summit):
                 
-                print(value);
+                XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                
+                print(summit)
             }
             
             expectation.fulfill()
@@ -36,6 +48,8 @@ final class StoreTests: XCTestCase {
     
     func testAustinSummitRequest() {
         
+        clearRealm()
+                
         let austinID = 6
         
         let expectation = expectationWithDescription("API Request")
@@ -48,9 +62,13 @@ final class StoreTests: XCTestCase {
                 
                 XCTFail("\(error)");
                 
-            case let .Value(value):
+            case let .Value(summit):
                 
-                print(value);
+                print(summit);
+                
+                XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                
+                
             }
             
             expectation.fulfill()
