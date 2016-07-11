@@ -32,10 +32,13 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBlankBackBarButtonItem()
+        
+        // setup table view
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        setBlankBackBarButtonItem()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -48,7 +51,7 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        var levels = Store.shared.realm.objects(RealmPresentation).map({ $0.level }).sort()
+        self.levels = Store.shared.realm.objects(RealmPresentation).map({ $0.level }).filter({ $0.isEmpty == false }).sort()
         
         if let levelSelections = scheduleFilter.selections[FilterSectionType.Level] as? [String] {
             if levelSelections.count > 0 {
@@ -56,12 +59,13 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
             }
         }
         
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
         self.tableView.reloadData()
     }
     
     private func configure(cell cell: LevelTableViewCell, at indexPath: NSIndexPath) {
+        
+        let level = levels[indexPath.row]
+        cell.nameLabel.text = level
         
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero

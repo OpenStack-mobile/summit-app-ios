@@ -686,8 +686,8 @@
 				6E00D1AA1D1C49C200278274 /* RevealViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
-				6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
+				6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */,
 				6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */,
 				6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */,
 				6EFC99BE1D218280009FD0DA /* MenuViewController.swift */,
@@ -1234,6 +1234,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";

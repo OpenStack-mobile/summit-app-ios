@@ -8,15 +8,16 @@
 
 import XCTest
 import CoreSummit
+import RealmSwift
 
 final class StoreTests: XCTestCase {
     
     @inline(__always)
     private func clearRealm() {
         
-        //try! NSFileManager.defaultManager().removeItemAtPath(Store.shared.realm.configuration.path!)
+        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "StoreTests"
         
-        //try! Store.shared.realm.write { Store.shared.realm.deleteAll() }
+        try! Store.shared.realm.write { Store.shared.realm.deleteAll() }
     }
     
     func testCurrentSummitRequest() {
