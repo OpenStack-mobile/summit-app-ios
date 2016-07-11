@@ -18,7 +18,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
         
-    lazy var navigationController: NavigationController = NavigationController(rootViewController: EventsViewController())
+    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: EventsViewController())
     
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
 
