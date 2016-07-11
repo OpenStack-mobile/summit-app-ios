@@ -342,7 +342,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func login() {
         
-        
+        // FIXME: Implement login
     }
     
     private func logout() {

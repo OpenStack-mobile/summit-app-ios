@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import CoreSummit
 import RealmSwift
 
-final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
+final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ScheduleFilterViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -21,9 +21,12 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     
     var searchTerm = ""
     
-    // MARK: - Private Properties
+    var scheduleFilter = ScheduleFilter() {
+        
+        didSet { reloadData() }
+    }
     
-    private var scheduleFilter = ScheduleFilter()
+    // MARK: - Private Properties
     
     private var levels = [String]()
     
