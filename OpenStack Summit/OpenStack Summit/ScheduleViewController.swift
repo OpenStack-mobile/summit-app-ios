@@ -19,11 +19,14 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     // MARK: - Properties
     
-    var summitTimeZoneOffset: Int = 0
+    final private(set) var summitTimeZoneOffset: Int = 0
     
-    private(set) var dayEvents = [ScheduleItem]()
+    final private(set) var dayEvents = [ScheduleItem]()
     
-    var scheduleFilter = ScheduleFilter()
+    var scheduleFilter = ScheduleFilter()  {
+        
+        didSet { loadData() }
+    }
     
     // MARK: - Accessors
     
@@ -89,16 +92,24 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         registerNotifications()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadData()
+    }
+    
     // MARK: - Actions
     
     @IBAction func toggleScheduledStatus(sender: UIButton) {
         
+        /*
         let button = sender
         let view = button.superview!
         let cell = view.superview as! UITableViewCell
-        //let indexPath = scheduleView.tableView.indexPathForCell(cell)
+        let indexPath = scheduleView.tableView.indexPathForCell(cell)
         
-        //self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
+        self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
+        */
     }
     
     // MARK: - Methods
@@ -115,20 +126,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
         
         fatalError("You must override this method")
-    }
-    
-    final func reloadSchedule() {
-        
-        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
-        
-        let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-        let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-        
-        self.dayEvents = self.scheduledEvents(from: startDate, to: endDate)
-        
-        scheduleView.tableView.delegate = self
-        scheduleView.tableView.dataSource = self
-        scheduleView.tableView.reloadData()
     }
     
     func loadData() {
@@ -209,6 +206,15 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
                 self.selectedDate = self.startDate
             }
         }
+        
+        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
+        
+        let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        
+        self.dayEvents = self.scheduledEvents(from: startDate, to: endDate)
+        
+        scheduleView.tableView.reloadData()
     }
     
     
