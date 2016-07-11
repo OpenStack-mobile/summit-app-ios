@@ -18,6 +18,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     // Child VCs
     let trackListViewController = R.storyboard.tracks.trackListViewController()!
     let generalScheduleViewController = R.storyboard.schedule.generalScheduleViewController()!
+    let levelListViewController = R.storyboard.levels.levelListViewController()!
     
     private(set) var filterButton: UIBarButtonItem!
     
@@ -104,8 +105,6 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        // childViewController.append(levelListViewController) // FIXME: Add levelListViewController
-                
-        return [generalScheduleViewController, trackListViewController]
+        return [generalScheduleViewController, trackListViewController, levelListViewController]
     }
 }

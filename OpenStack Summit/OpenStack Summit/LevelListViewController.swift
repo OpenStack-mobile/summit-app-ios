@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import CoreSummit
 import RealmSwift
 
-final class LevelListViewController: UIViewController, BaseViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
+final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -32,14 +32,14 @@ final class LevelListViewController: UIViewController, BaseViewController, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         setBlankBackBarButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        tableView.estimatedRowHeight = 50
-        tableView.rowHeight = UITableViewAutomaticDimension
         
         reloadData()
     }
@@ -61,6 +61,12 @@ final class LevelListViewController: UIViewController, BaseViewController, UITab
         self.tableView.reloadData()
     }
     
+    private func configure(cell cell: LevelTableViewCell, at indexPath: NSIndexPath) {
+        
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsetsZero
+    }
+    
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -70,16 +76,13 @@ final class LevelListViewController: UIViewController, BaseViewController, UITab
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return presenter.getLevelCount();
+        return levels.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! LevelTableViewCell
-        presenter.buildScheduleCell(cell, index: indexPath.row)
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.separatorInset = UIEdgeInsetsZero
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.levelTableViewCell)!
+        configure(cell: cell, at: indexPath)
         return cell
     }
     
@@ -87,12 +90,13 @@ final class LevelListViewController: UIViewController, BaseViewController, UITab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        self.presenter.showLevelEvents(indexPath.row)
+        //self.presenter.showLevelEvents(indexPath.row)
     }
     
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: "Levels")
     }
 }
