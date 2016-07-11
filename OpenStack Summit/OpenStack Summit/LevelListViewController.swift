@@ -54,7 +54,10 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        self.levels = Store.shared.realm.objects(RealmPresentation).map({ $0.level }).filter({ $0.isEmpty == false }).sort()
+        let levelsSet = Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }).filter({ $0.isEmpty == false }).sort())
+        
+        // remove duplicates
+        self.levels = Array(levelsSet)
         
         if let levelSelections = scheduleFilter.selections[FilterSectionType.Level] as? [String] {
             if levelSelections.count > 0 {
