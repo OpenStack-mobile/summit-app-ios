@@ -13,20 +13,19 @@ final class PeopleTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var moderatorLabel: UILabel!
-    @IBOutlet weak var nameLabel : UILabel!
-    @IBOutlet weak var titleLabel : UILabel!
-    @IBOutlet weak var pictureImageView: UIImageView!
-    private var picUrlInternal: String!
+    @IBOutlet private weak var moderatorLabel: UILabel!
+    @IBOutlet private weak var nameLabel : UILabel!
+    @IBOutlet private weak var titleLabel : UILabel!
+    @IBOutlet private weak var pictureImageView: UIImageView!
     
     // MARK: - Loading
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         let bgColorView = UIView()
         bgColorView.backgroundColor = contentView.backgroundColor
         selectedBackgroundView = bgColorView
-        
     }
     
     // MARK: - Selection
@@ -66,15 +65,16 @@ final class PeopleTableViewCell: UITableViewCell {
         }
     }
     
-    var pictureURL: String! {
-        get {
-            return picUrlInternal
-        }
-        set {
+    var pictureURL: String = "" {
+        
+        didSet {
+            
+            let picUrlInternal: String
+            
             #if DEBUG
-                picUrlInternal = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
             #else
-                picUrlInternal = newValue
+                picUrlInternal = newVapictureURLlue
             #endif
 
             if (!picUrlInternal.isEmpty) {
