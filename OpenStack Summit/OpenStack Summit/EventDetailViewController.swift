@@ -63,7 +63,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     private var myFeedbackForEvent: Feedback?
     private var feedbackPage = 1
     private var feedbackObjectsPerPage = 5
-    private var feedbackList = [Feedback]()
+    private var feedbackList = [FeedbackDetail]()
     private var loadedAllFeedback = false
     private var loadingFeedback = false
     
@@ -302,9 +302,12 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         actionSheet.buttonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
         actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
         
-        feedbackTableView.registerNib(R.reuseIdentifier.feedbackTableViewCell)
+        // setup table views
+        feedbackTableView.registerNib(R.nib.feedbackTableViewCell)
         feedbackTableView.delegate = self
         feedbackTableView.dataSource = self
+        
+        speakersTableView.registerNib(R.nib.peopleTableViewCell)
         speakersTableView.delegate = self
         speakersTableView.dataSource = self
         
@@ -390,13 +393,76 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
          */
     }
     
+    private func loadFeedback() {
+        
+        if (loadingFeedback || loadedAllFeedback) {
+            return
+        }
+        
+        loadingFeedback = true
+        feedbackListActivityIndicator.hidden = false
+        
+        interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                defer {
+                    self.loadingFeedback = false
+                    self.feedbackListActivityIndicator.hidden = true
+                }
+                
+                if (error != nil) {
+                    return
+                }
+                
+                if let feedbackPage = feedbackPage {
+                    var feedbacks = [FeedbackDTO]()
+                    
+                    if let myFeedback = self.myFeedbackForEvent {
+                        for feedbackDTO in feedbackPage {
+                            if feedbackDTO.owner != myFeedback.owner {
+                                feedbacks.append(feedbackDTO)
+                            }
+                        }
+                        if !self.feedbackList.contains(myFeedback) {
+                            feedbacks.insert(myFeedback, atIndex: 0)
+                        }
+                    }
+                    else {
+                        feedbacks = feedbackPage
+                    }
+                    
+                    self.feedbackList.appendContentsOf(feedbacks)
+                    self.viewController.reloadFeedbackData()
+                    self.viewController.hasAnyFeedback = self.feedbackList.count > 0
+                    self.feedbackPage += 1
+                    self.loadedAllFeedback = feedbackPage.count < self.feedbackObjectsPerPage
+                }
+            })
+        }
+    }
+    
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+        
+        let speaker = eventDetail.speakers[indexPath.row]
+        cell.name = speaker.name
+        cell.title = speaker.title
+        cell.pictureURL = speaker.pictureURL
+        cell.isModerator = eventDetail.moderator != nil && speaker.identifier == eventDetail.moderator?.identifier
         
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero
     }
     
     private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
+        
+        let feedback = feedbackList[indexPath.row]
+        
+        cell.eventName = ""
+        cell.owner = feedback.owner
+        cell.rate = Double(feedback.rate)
+        cell.review = feedback.review
+        cell.date = feedback.date
         
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero
