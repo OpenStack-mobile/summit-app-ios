@@ -38,14 +38,15 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let entity = Summit(JSONValue: json)
+                let jsonArray = json.arrayValue,
+                let feedback = Feedback.fromJSON(jsonArray)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! self.realm.write { let _ = entity.save(self.realm) }
+            try! self.realm.write { let _ = feedback.save(self.realm) }
             
             // success
-            completion(.Value(entity))
+            completion(.Value(feedback))
         }
     }
 }
