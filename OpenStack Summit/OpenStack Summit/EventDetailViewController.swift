@@ -13,7 +13,7 @@ import AHKActionSheet
 import SwiftSpinner
 import CoreSummit
 
-final class EventDetailViewController: UIViewController, RevealViewController, ShowActivityIndicatorProtocol /*, UITableViewDelegate, UITableViewDataSource */ {
+final class EventDetailViewController: UIViewController, RevealViewController, ShowActivityIndicatorProtocol, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
     
@@ -55,7 +55,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     // MARK: - Properties
     
     var event: Identifier!
-    /*
+    
     // MARK: - Private Properties
     
     private var eventDetail: EventDetail!
@@ -81,7 +81,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
             titleLabel.text = newValue
         }
     }
-    private(set) var eventDescription: String {
+    private(set) var eventDescription: String = "" {
         
         didSet {
             eventDescriptionHTML = String(format:"<span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDescription)
@@ -303,6 +303,10 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         actionSheet.cancelButtonTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
         
         feedbackTableView.registerNib(R.reuseIdentifier.feedbackTableViewCell)
+        feedbackTableView.delegate = self
+        feedbackTableView.dataSource = self
+        speakersTableView.delegate = self
+        speakersTableView.dataSource = self
         
         navigationItem.title = "EVENTS"
     }
@@ -345,41 +349,35 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         loadingFeedback = false
         feedbackPage = 1
         feedbackList.removeAll()
-        myFeedbackForEvent = interactor.getMyFeedbackForEvent(eventId)
         
-        self.eventTitle = event.name
-        self.eventDescription = event.eventDescription
-        self.location = event.location
-        self.date = event.dateTime
-        self.sponsors = event.sponsors
-        self.summitTypes = event.summitTypes
-        self.allowFeedback = event.allowFeedback && event.finished && interactor.isLoggedInAndConfirmedAttendee() && myFeedbackForEvent == nil
-        self.hasSpeakers = event.speakers.count > 0
+        // get feedback for current user
+        if let member = Store.shared.authenticatedMember,
+            let realmFeedback = member.feedback(forEvent: event) {
+            
+            myFeedbackForEvent = Feedback(realmEntity: realmFeedback)
+        }
+        
+        self.eventTitle = eventDetail.name
+        self.eventDescription = eventDetail.eventDescription
+        self.location = eventDetail.location
+        self.date = eventDetail.dateTime
+        self.sponsors = eventDetail.sponsors
+        self.summitTypes = eventDetail.summitTypes
+        self.allowFeedback = eventDetail.allowFeedback && eventDetail.finished /* && interactor.isLoggedInAndConfirmedAttendee() */ && myFeedbackForEvent == nil
+        self.hasSpeakers = eventDetail.speakers.count > 0
         self.hasAnyFeedback = false
-        self.reloadSpeakersData()
-        self.scheduled = interactor.isEventScheduledByLoggedMember(eventId)
-        self.isScheduledStatusVisible = interactor.isLoggedInAndConfirmedAttendee()
-        self.tags = event.tags
-        self.level = event.level
-        self.track = event.track
+        self.speakersTableView.reloadData()
+        self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
+        self.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ false
+        self.tags = eventDetail.tags
+        self.level = eventDetail.level
+        self.track = eventDetail.track
         self.hasAverageFeedback = false
         
-        if event.allowFeedback && event.finished {
+        if eventDetail.allowFeedback && eventDetail.finished {
             loadAverageFeedback()
             loadFeedback()
         }
-    }
-    
-    func reloadSpeakersData() {
-        speakersTableView.delegate = self
-        speakersTableView.dataSource = self
-        speakersTableView.reloadData()
-    }
-    
-    func reloadFeedbackData() {
-        feedbackTableView.delegate = self
-        feedbackTableView.dataSource = self
-        feedbackTableView.reloadData()
     }
     
     private func leaveFeedback() {
@@ -390,17 +388,6 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         feedbackEditViewController.presenter.eventId = eventId
         viewController.pushViewController(newViewController, animated: true)
          */
-    }
-    
-    @inline(__always)
-    private func myFeedback() -> Feedback? {
-        
-        guard let currentMember = Store.shared.authenticatedMember,
-            let feedback = currentMember.attendeeRole?.feedback.filter("event.id = %@", event).first
-            else { return nil }
-        
-        
-        return Feedback(realmEntity: feedback)
     }
     
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
@@ -418,6 +405,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
     
@@ -426,8 +414,9 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         if (tableView == speakersTableView) {
             
             return eventDetail.speakers.count
-        }
-        else {
+            
+        } else {
+            
             return feedbackList.count
         }
     }
@@ -441,7 +430,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
             return cell
         }
         else if tableView == feedbackTableView {
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackCellIdentifier, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackTableViewCell, forIndexPath: indexPath)!
             configure(cell: cell, at: indexPath)
             return cell
         }
@@ -450,8 +439,15 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        presenter.showSpeakerProfile(indexPath.row)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let speaker = eventDetail.speakers[indexPath.row]
+        
+        let memberVC = R.storyboard.memberProfile.memberProfileDetailViewController()!
+        
+        memberVC.profile = MemberProfileIdentifier(speaker: speaker)
+        
+        self.showViewController(memberVC, sender: self)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -477,7 +473,8 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+            
             presenter.loadFeedback()
         }
-    }*/
+    }
 }

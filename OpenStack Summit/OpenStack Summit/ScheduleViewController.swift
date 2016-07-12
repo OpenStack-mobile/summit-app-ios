@@ -246,20 +246,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         return RealmSummitEvent.find(id, realm: Store.shared.realm) != nil
     }
-
-    private final func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
-        
-        /* FIXME: Implement Login
-        if !Store.shared.isLoggedInAndConfirmedAttendee() {
-            return false;
-        } */
-        
-        guard let loggedInMember = Store.shared.authenticatedMember else {
-            return false
-        }
-        
-        return loggedInMember.attendeeRole?.scheduledEvents.filter("id = \(eventId)").count > 0
-    }
     
     private final func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
         
@@ -272,7 +258,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         cell.location = event.location
         cell.sponsors = event.sponsors
         cell.track = event.track
-        cell.scheduled = isEventScheduledByLoggedMember(event.id)
+        cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
         cell.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ true // FIXME Login
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
         

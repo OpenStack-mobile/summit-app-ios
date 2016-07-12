@@ -701,6 +701,7 @@
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
+				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
 				6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */,
 				6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */,
 				6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */,
@@ -711,7 +712,6 @@
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
 				6E96BFD71D26D347009524C7 /* TrackListViewController.swift */,
 				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
-				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
 			);
 			name = Controller;
