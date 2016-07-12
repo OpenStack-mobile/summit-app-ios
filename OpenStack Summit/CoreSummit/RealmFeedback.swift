@@ -20,6 +20,22 @@ public class RealmFeedback: RealmEntity {
 
 // MARK: - Encoding
 
+extension Feedback: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmFeedback {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.rate = rate
+        realmEntity.review = review
+        realmEntity.date = date.toFoundation()
+        realmEntity.event = RealmSummitEvent.cached(event, realm: realm)
+        realmEntity.owner = RealmSummitAttendee.cached(owner, realm: realm)
+        
+        return realmEntity
+    }
+}
+
 extension Feedback: RealmDecodable {
     
     public init(realmEntity: RealmFeedback) {
@@ -32,3 +48,4 @@ extension Feedback: RealmDecodable {
         self.owner = realmEntity.owner.id
     }
 }
+

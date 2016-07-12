@@ -402,20 +402,23 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         loadingFeedback = true
         feedbackListActivityIndicator.hidden = false
         
-        interactor.getFeedbackForEvent(self.eventId, page: self.feedbackPage, objectsPerPage: self.feedbackObjectsPerPage) { (feedbackPage, error) in
+        Store.shared.feedback(event: event, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { [weak self] (response) in
             
             dispatch_async(dispatch_get_main_queue(),{
                 
+                guard controller = self else { return }
+                
                 defer {
-                    self.loadingFeedback = false
-                    self.feedbackListActivityIndicator.hidden = true
+                    controller.loadingFeedback = false
+                    controller.feedbackListActivityIndicator.hidden = true
                 }
                 
-                if (error != nil) {
-                    return
-                }
-                
-                if let feedbackPage = feedbackPage {
+                switch response {
+                    
+                case .Errror: break // ignore?
+                    
+                case .Value:
+                    
                     var feedbacks = [FeedbackDTO]()
                     
                     if let myFeedback = self.myFeedbackForEvent {
