@@ -307,7 +307,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         feedbackTableView.delegate = self
         feedbackTableView.dataSource = self
         
-        speakersTableView.registerNib(R.nib.peopleTableViewCell)
+        //speakersTableView.registerNib(R.nib.peopleTableViewCell)
         speakersTableView.delegate = self
         speakersTableView.dataSource = self
         
@@ -383,6 +383,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         }
     }
     
+    /// Leave feedback button
     private func leaveFeedback() {
         
         /*
@@ -390,7 +391,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         let _ = feedbackEditViewController.view! // this is only to force viewLoad to trigger
         feedbackEditViewController.presenter.eventId = eventId
         viewController.pushViewController(newViewController, animated: true)
-         */
+        */
     }
     
     private func loadFeedback() {
@@ -404,7 +405,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         
         Store.shared.feedback(event: event, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { [weak self] (response) in
             
-            dispatch_async(dispatch_get_main_queue(),{
+            dispatch_async(dispatch_get_main_queue()) {
                 
                 guard let controller = self else { return }
                 
@@ -445,25 +446,29 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
                     controller.feedbackPage += 1
                     controller.loadedAllFeedback = feedbackPage.count < controller.feedbackObjectsPerPage
                 }
-            })
+            }
         }
     }
     
     private func loadAverageFeedback() {
         
-        /*
-        interactor.getAverageRating(self.eventId) { (event, error) in
-            dispatch_async(dispatch_get_main_queue(), {
-                if (error != nil) {
-                    return
-                }
+        Store.shared.averageFeedback(event: event) { [weak self] (response) in
+            
+            dispatch_async(dispatch_get_main_queue()) {
                 
-                if let event = event {
-                    self.viewController.hasAverageFeedback = event.averageFeedback != 0
-                    self.viewController.averageFeedback = event.averageFeedback
+                guard let controller = self else { return }
+                
+                switch response {
+                    
+                case .Error: break
+                    
+                case let .Value(averageFeedback):
+                    
+                    controller.hasAverageFeedback = averageFeedback != 0
+                    controller.averageFeedback = averageFeedback
                 }
-            })
-        }*/
+            }
+        }
     }
     
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
@@ -515,7 +520,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         
         if tableView == speakersTableView {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.speakerTableViewCell, forIndexPath: indexPath)!
             configure(cell: cell, at: indexPath)
             return cell
         }
