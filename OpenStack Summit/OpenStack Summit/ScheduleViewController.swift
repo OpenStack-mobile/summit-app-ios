@@ -316,18 +316,21 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //internalPresenter.showEventDetail(indexPath.row)
+        let scheduleItem = dayEvents[indexPath.row]
         
-        /*
-        let event = dayEvents[index]
-        if internalInteractor.eventExist(event.id) {
-            internalWireframe.showEventDetail(event.id)
-        }
-        else {
-            internalViewController.showInfoMessage("Info", message: "This event was removed from schedule.")
-            reloadSchedule()
+        if let _ = RealmSummitEvent.find(scheduleItem.id, realm: Store.shared.realm) {
             
-        }*/
+            let eventDetailVC = R.storyboard.event.eventDetailViewController()!
+            
+            eventDetailVC.event = scheduleItem.id
+            
+            self.showViewController(eventDetailVC, sender: self)
+            
+        } else {
+            
+            showInfoMessage("Info", message: "This event was removed from schedule.")
+            self.scheduleView.tableView.reloadData()
+        }
     }
     
     // MARK: - Notifications

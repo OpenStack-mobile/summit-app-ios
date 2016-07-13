@@ -449,6 +449,23 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         }
     }
     
+    private func loadAverageFeedback() {
+        
+        /*
+        interactor.getAverageRating(self.eventId) { (event, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if (error != nil) {
+                    return
+                }
+                
+                if let event = event {
+                    self.viewController.hasAverageFeedback = event.averageFeedback != 0
+                    self.viewController.averageFeedback = event.averageFeedback
+                }
+            })
+        }*/
+    }
+    
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
         
         let speaker = eventDetail.speakers[indexPath.row]
@@ -547,7 +564,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         
         if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
             
-            presenter.loadFeedback()
+            loadFeedback()
         }
     }
 }
