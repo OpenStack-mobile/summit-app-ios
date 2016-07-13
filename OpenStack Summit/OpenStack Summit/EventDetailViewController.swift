@@ -406,7 +406,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
             
             dispatch_async(dispatch_get_main_queue(),{
                 
-                guard controller = self else { return }
+                guard let controller = self else { return }
                 
                 defer {
                     controller.loadingFeedback = false
@@ -415,31 +415,35 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
                 
                 switch response {
                     
-                case .Errror: break // ignore?
+                case .Error: break // ignore?
                     
-                case .Value:
+                case let .Value(feedbackPage):
                     
-                    var feedbacks = [FeedbackDTO]()
+                    var filteredFeedback = [Identifier]()
                     
-                    if let myFeedback = self.myFeedbackForEvent {
-                        for feedbackDTO in feedbackPage {
-                            if feedbackDTO.owner != myFeedback.owner {
-                                feedbacks.append(feedbackDTO)
+                    if let myFeedback = Store.shared.authenticatedMember?.feedback(forEvent: controller.event) {
+                        
+                        for feedback in feedbackPage {
+                            if feedback.owner != myFeedback.owner {
+                                filteredFeedback.append(feedback.identifier)
                             }
                         }
-                        if !self.feedbackList.contains(myFeedback) {
-                            feedbacks.insert(myFeedback, atIndex: 0)
+                        if !controller.feedbackList.contains({ $0.identifier ==  myFeedback.id }) {
+                            filteredFeedback.insert(myFeedback.id, atIndex: 0)
                         }
                     }
                     else {
-                        feedbacks = feedbackPage
+                        filteredFeedback = feedbackPage.map { $0.identifier }
                     }
                     
-                    self.feedbackList.appendContentsOf(feedbacks)
-                    self.viewController.reloadFeedbackData()
-                    self.viewController.hasAnyFeedback = self.feedbackList.count > 0
-                    self.feedbackPage += 1
-                    self.loadedAllFeedback = feedbackPage.count < self.feedbackObjectsPerPage
+                    let realmFeedback = filteredFeedback.map { RealmFeedback.find($0, realm: Store.shared.realm)! }
+                    let feedbackDetail = FeedbackDetail.from(realm: realmFeedback)
+                    
+                    controller.feedbackList.appendContentsOf(feedbackDetail)
+                    controller.feedbackTableView.reloadData()
+                    controller.hasAnyFeedback = controller.feedbackList.count > 0
+                    controller.feedbackPage += 1
+                    controller.loadedAllFeedback = feedbackPage.count < controller.feedbackObjectsPerPage
                 }
             })
         }
