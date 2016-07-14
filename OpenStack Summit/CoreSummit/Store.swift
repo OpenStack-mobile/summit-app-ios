@@ -114,7 +114,7 @@ public final class Store {
         var config = Config(
             base: Constants.Urls.AuthServerBaseUrl,
             authzEndpoint: "oauth2/auth",
-            redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
+            redirectURL: "org.openstack.ios.summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
             clientId: Constants.Auth.ClientIdOpenID,
             refreshTokenEndpoint: "oauth2/token",
@@ -137,7 +137,7 @@ public final class Store {
         config = Config(
             base: Constants.Urls.AuthServerBaseUrl,
             authzEndpoint: "oauth2/auth",
-            redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
+            redirectURL: "org.openstack.ios.summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
             clientId: Constants.Auth.ClientIdServiceAccount,
             revokeTokenEndpoint: "oauth2/token/revoke",
