@@ -35,7 +35,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     // MARK: - Properties
     
-    var feedback: (idenfifier: Identifier, event: Identifier)
+    var feedback: (idenfifier: Identifier, event: Identifier)!
     
     private let placeHolderText = "Add your review (up to 500 characters)"
     
