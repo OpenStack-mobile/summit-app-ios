@@ -11,19 +11,6 @@ import SwiftSpinner
 import Cosmos
 import CoreSummit
 
-/*
-@objc
-public protocol IFeedbackEditViewController: IMessageEnabledViewController {
-    
-    var rate: Int { get set }
-    var review: String! { get set }
-    
-    func showCreateFeedback()
-    func showEditFeedback(feedback: FeedbackDTO)
-    func showActivityIndicator()
-    func hideActivityIndicator()
-}*/
-
 final class FeedbackEditViewController: UIViewController, UITextViewDelegate, ShowActivityIndicatorProtocol, MessageEnabledViewController {
     
     // MARK: - IB Outlets
@@ -35,7 +22,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     // MARK: - Properties
     
-    var feedback: (idenfifier: Identifier, event: Identifier)!
+    var feedback: Value
     
     private let placeHolderText = "Add your review (up to 500 characters)"
     
@@ -84,6 +71,17 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         
         self.rate = 0
         self.review = ""
+        
+        switch self.feedback {
+            
+        case let .event(eventID):
+            
+            showCreateFeedback()
+            
+        case let .feedback(feedbackID):
+            
+            showEditFeedback(<#T##feedback: FeedbackDetail##FeedbackDetail#>)
+        }
         
         /*
         if (feedbackId == 0) {
@@ -185,5 +183,19 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     @objc private func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset = UIEdgeInsetsZero
         scrollView.scrollIndicatorInsets = UIEdgeInsetsZero
+    }
+}
+
+// MARK: - Supporting Types
+
+extension FeedbackEditViewController {
+    
+    enum Value {
+        
+        /// Create a new feedback for the specified event.
+        case event(Identifier)
+        
+        /// Edit an exisitng feedback.
+        case feedback(Identifier)
     }
 }
