@@ -108,27 +108,30 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         }
         
         guard let member = Store.shared.authenticatedMember
-            else { return } // FIXME: handle user not logged in?
+           else { return } // FIXME: handle user not logged in?
         
         // send request
         
         showActivityIndicator()
         
-        Store.shared.saveFeedback(event: event, rate: rate, review: review) { [weak self] (response) in
+        Store.shared.addFeedback(attendee: member.id, event: event, rate: rate, review: review) { [weak self] (response) in
             
-            guard let controller = self else { return }
-            
-            defer { controller.hideActivityIndicator() }
-            
-            switch response {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
                 
-            case let .Error(error):
+                guard let controller = self else { return }
                 
-                controller.showErrorMessage(error as NSError)
+                defer { controller.hideActivityIndicator() }
                 
-            case .Value:
-                
-                controller.navigationController?.popViewControllerAnimated(true)
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    controller.showErrorMessage(error as NSError)
+                    
+                case .Value:
+                    
+                    controller.navigationController?.popViewControllerAnimated(true)
+                }
             }
         }
     }

@@ -94,8 +94,52 @@ public extension Store {
         }
     }
     
-    func saveFeedback(summit: Identifier? = nil, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Double>) -> ()) {
+    func addFeedback(summit: Identifier? = nil, attendee: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Feedback>) -> ()) {
         
+        let summitID: String
         
+        if let identifier = summit {
+            
+            summitID = "\(identifier)"
+            
+        } else {
+            
+            summitID = "current"
+        }
+        
+        let URI = "/api/v1/summits/\(summitID)/events/\(event)/feedback"
+        
+        let URL = Constants.Urls.ResourceServerBaseUrl + URI
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        var jsonDictionary = [String:AnyObject]()
+        jsonDictionary["rate"] = rate
+        jsonDictionary["note"] = review
+        jsonDictionary["attendee_id"] = attendee
+        
+        http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            let id = Int(responseObject as! String)!
+            
+            let feedback = Feedback(identifier: id, rate: rate, review: review, date: Date(), event: event, owner: attendee)
+            
+            // create new feedback in cache
+            if let attendee = RealmSummitAttendee.find(attendee, realm: self.realm) {
+                
+                try! self.realm.write {
+                    
+                    let realmFeedback = feedback.save(self.realm)
+                    
+                    attendee.feedback.append(realmFeedback)
+                }
+            }
+            
+            completion(.Value(feedback))
+        }
     }
 }
