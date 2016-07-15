@@ -279,7 +279,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         scheduledButton.target = self
         scheduledButton.action = #selector(EventDetailViewController.toggleSchedule(_:))
         submenuButton.target = self
-        submenuButton.action = #selector(EventDetailViewController.leaveFeedback(_:))
+        submenuButton.action = #selector(EventDetailViewController.leaveFeedback)
         
         feedbackButton.layer.cornerRadius = 10
 
@@ -321,22 +321,20 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     }
     
     // MARK: - Actions
-        
-    @IBAction func leaveFeedback(sender: AnyObject) {
-        
-    }
     
     @IBAction func showLocation(sender: UITapGestureRecognizer) {
         
+        // presenter.showVenueDetail()
     }
     
     @IBAction func loadMoreFeedback(sender: AnyObject) {
         
+        loadFeedback()
     }
     
     @IBAction func toggleSchedule(sender: UIBarButtonItem) {
         
-        
+        //presenter.toggleScheduledStatus()
     }
     
     // MARK: - Private Methods
@@ -384,14 +382,13 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     }
     
     /// Leave feedback button
-    private func leaveFeedback() {
+    @objc private func leaveFeedback() {
         
-        /*
-        let newViewController = feedbackEditViewController
-        let _ = feedbackEditViewController.view! // this is only to force viewLoad to trigger
-        feedbackEditViewController.presenter.eventId = eventId
-        viewController.pushViewController(newViewController, animated: true)
-        */
+        let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
+        
+        feedbackVC.event = event
+        
+        self.showViewController(feedbackVC, sender: self)
     }
     
     private func loadFeedback() {
