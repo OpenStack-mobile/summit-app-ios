@@ -58,6 +58,11 @@ public extension RealmMember {
         
         return attendeeRole?.feedback.filter("event.id = %@", eventID).first
     }
+    
+    var givenFeedback: [RealmFeedback] {
+        
+        return attendeeRole?.feedback.sorted("date", ascending: false).map { $0 } ?? []
+    }
 }
 
 // MARK: - Encoding

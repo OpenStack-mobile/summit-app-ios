@@ -22,7 +22,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     // MARK: - Properties
     
-    var feedback: Value
+    var event: Identifier!
     
     private let placeHolderText = "Add your review (up to 500 characters)"
     
@@ -67,31 +67,8 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         reviewTextArea.textColor = UIColor.lightGrayColor()
         registerKeyboardNotifications()
         
-        //presenter.viewLoad()
-        
         self.rate = 0
         self.review = ""
-        
-        switch self.feedback {
-            
-        case let .event(eventID):
-            
-            showCreateFeedback()
-            
-        case let .feedback(feedbackID):
-            
-            showEditFeedback(<#T##feedback: FeedbackDetail##FeedbackDetail#>)
-        }
-        
-        /*
-        if (feedbackId == 0) {
-            viewController.showCreateFeedback()
-        }
-        else {
-            let feedback = interactor.getFeedback(feedbackId)
-            viewController.showEditFeedback(feedback!)
-        }
-        */
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -102,26 +79,58 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     // MARK: - Actions
     
-    @IBAction func sendFeedback(sender: AnyObject) {
+    @IBAction func sendFeedback(sender: AnyObject? = nil) {
         
-        //presenter.saveFeedback()
-    }
-    
-    // MARK: - Private Methods
-    
-    // FIXME: Deprecated?
-    
-    private func showCreateFeedback() {
+        guard Reachability.connected
+            else { showErrorMessage(Error.reachability); return }
         
-    }
-    
-    private func showEditFeedback(feedback: FeedbackDetail) {
+        // validate
         
-    }
-    
-    private func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        let validationErrorText: String?
+        if rate == 0 {
+            validationErrorText = "You must provide a rate using stars at the top"
+        }
+        else if review.isEmpty {
+            validationErrorText = "You must provide a review"
+        }
+        else if review.characters.count > 500 {
+            validationErrorText = "Review exceeded 500 characters limit"
+        }
+        else {
+            validationErrorText = nil
+        }
         
-        return 1
+        if let errorMessage = validationErrorText {
+            
+            let error = NSError(domain: errorMessage, code: 7001, userInfo: nil)
+            showErrorMessage(error)
+            return
+        }
+        
+        guard let member = Store.shared.authenticatedMember
+            else { return } // FIXME: handle user not logged in?
+        
+        // send request
+        
+        showActivityIndicator()
+        
+        Store.shared.saveFeedback(event: event, rate: rate, review: review) { [weak self] (response) in
+            
+            guard let controller = self else { return }
+            
+            defer { controller.hideActivityIndicator() }
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                controller.showErrorMessage(error as NSError)
+                
+            case .Value:
+                
+                controller.navigationController?.popViewControllerAnimated(true)
+            }
+        }
     }
     
     // MARK: - UITextViewDelegate
@@ -183,19 +192,5 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     @objc private func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset = UIEdgeInsetsZero
         scrollView.scrollIndicatorInsets = UIEdgeInsetsZero
-    }
-}
-
-// MARK: - Supporting Types
-
-extension FeedbackEditViewController {
-    
-    enum Value {
-        
-        /// Create a new feedback for the specified event.
-        case event(Identifier)
-        
-        /// Edit an exisitng feedback.
-        case feedback(Identifier)
     }
 }

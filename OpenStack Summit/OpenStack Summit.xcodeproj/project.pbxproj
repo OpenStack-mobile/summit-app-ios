@@ -24,7 +24,7 @@
 		6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2538231D1A1049003E3400 /* ScheduleViewController.swift */; };
 		6E00D1AB1D1C49C200278274 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00D1AA1D1C49C200278274 /* RevealViewController.swift */; };
 		6E066D9B1D356764005A8D2D /* FeedbackDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9A1D356764005A8D2D /* FeedbackDetail.swift */; };
-		6E066D9D1D356A2F005A8D2D /* EventFeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9C1D356A2F005A8D2D /* EventFeedbackRequest.swift */; };
+		6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */; };
 		6E0B2F071D33F3A10058F171 /* Levels.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B2F061D33F3A10058F171 /* Levels.storyboard */; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
@@ -111,6 +111,8 @@
 		6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
+		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
+		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1BB01D1D36F1D000F9F95F /* FeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */; };
 		6E2537CA1D199D0C003E3400 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537C91D199D0C003E3400 /* Login.swift */; };
 		6E2537E61D19B0E5003E3400 /* SpeakerPresentationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */; };
@@ -233,7 +235,7 @@
 /* Begin PBXFileReference section */
 		6E00D1AA1D1C49C200278274 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealViewController.swift; sourceTree = "<group>"; };
 		6E066D9A1D356764005A8D2D /* FeedbackDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDetail.swift; sourceTree = "<group>"; };
-		6E066D9C1D356A2F005A8D2D /* EventFeedbackRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedbackRequest.swift; sourceTree = "<group>"; };
+		6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackRequest.swift; sourceTree = "<group>"; };
 		6E0B2F061D33F3A10058F171 /* Levels.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Levels.storyboard; sourceTree = "<group>"; };
 		6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -327,6 +329,8 @@
 		6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfile.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
+		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
+		6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
 		6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditViewController.swift; sourceTree = "<group>"; };
 		6E2537C91D199D0C003E3400 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				6EFC99C61D21DBE5009FD0DA /* Event.storyboard */,
 				6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */,
 				6E0B2F061D33F3A10058F171 /* Levels.storyboard */,
+				6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
 				6EF147EC1D13579C00D5EEF9 /* View */,
@@ -655,7 +660,7 @@
 				6E2537C91D199D0C003E3400 /* Login.swift */,
 				6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */,
 				6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */,
-				6E066D9C1D356A2F005A8D2D /* EventFeedbackRequest.swift */,
+				6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -714,6 +719,7 @@
 				6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */,
 				6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */,
 				6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */,
+				6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */,
 				6EFC99BE1D218280009FD0DA /* MenuViewController.swift */,
 				6EFC6E641D2300260087057A /* VenuesViewController.swift */,
 				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
@@ -925,6 +931,7 @@
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
 				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
+				6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,6 +1048,7 @@
 				6E25384F1D1AF9C5003E3400 /* Notification.swift in Sources */,
 				6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */,
 				6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
+				6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */,
 				6E066D9B1D356764005A8D2D /* FeedbackDetail.swift in Sources */,
 				6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */,
 				6EF147EF1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift in Sources */,
@@ -1163,7 +1171,7 @@
 				6E10A5641D10675D008CBD0C /* Feedback.swift in Sources */,
 				6E10A5721D10675D008CBD0C /* PresentationJSON.swift in Sources */,
 				6E10A58D1D10675D008CBD0C /* SummitAttendeeJSON.swift in Sources */,
-				6E066D9D1D356A2F005A8D2D /* EventFeedbackRequest.swift in Sources */,
+				6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */,
 				6E10A5861D10675D008CBD0C /* RealmTicketType.swift in Sources */,
 				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
 				6E10A5881D10675D008CBD0C /* RealmTrackGroup.swift in Sources */,
