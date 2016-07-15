@@ -93,4 +93,9 @@ public extension Store {
             completion(.Value(averageFeedback))
         }
     }
+    
+    func saveFeedback(summit: Identifier? = nil, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Double>) -> ()) {
+        
+        
+    }
 }
