@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import SwiftSpinner
 import CoreSummit
 
-class GeneralScheduleViewController: ScheduleViewController, ScheduleFilterViewController, IndicatorInfoProvider {
+final class GeneralScheduleViewController: ScheduleViewController, ScheduleFilterViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
