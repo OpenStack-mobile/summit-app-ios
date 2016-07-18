@@ -226,6 +226,17 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         return false
     }
     
+    private func isItemSelected(filterSectionType: FilterSectionType, name: String) -> Bool {
+        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
+            for selectedName in filterSelectionsForType {
+                if (name == selectedName as! String) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     private func configure(cell cell: GeneralScheduleFilterTableViewCell, at indexPath: NSIndexPath, filterSection: FilterSection) {
         
         let index = indexPath.row
@@ -239,6 +250,20 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         }
         else if index == filterSection.items.count - 1 {
             cell.addBottomExtraPadding()
+        }
+    }
+    
+    func toggleSelection(cell cell: GeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {
+        let filterItem = filterSection.items[index]
+        
+        if (isItemSelected(filterSection.type, id: filterItem.id)) {
+            let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.id }
+            scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+            cell.isOptionSelected = false
+        }
+        else {
+            scheduleFilter.selections[filterSection.type]!.append(filterItem.id)
+            cell.isOptionSelected = true
         }
     }
     
@@ -289,7 +314,12 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         }
         else if tableView == levelTableView {
             
-            configure(cell: cell, at: indexPath, filterSection: scheduleFilter.filterSections[3])
+            let index = indexPath.row
+            let filterSection = scheduleFilter.filterSections[3]
+            let filterItem = filterSection.items[index]
+            
+            configure(cell: cell, at: indexPath, filterSection: filterSection)
+            
             cell.name = filterItem.name
             cell.isOptionSelected = isItemSelected(filterSection.type, name: filterItem.name)
             
@@ -328,16 +358,30 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! GeneralScheduleFilterTableViewCell
         
         if tableView == summitTypeTableView {
-            presenter.toggleSelectionSummitType(cell, index: indexPath.row)
+            let filterSection = scheduleFilter.filterSections[0]
+            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
         }
         else if tableView == trackGroupTableView {
-            presenter.toggleSelectionTrackGroup(cell, index: indexPath.row)
+            let filterSection = scheduleFilter.filterSections[1]
+            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
         }
         else if tableView == eventTypeTableView {
-            presenter.toggleSelectionEventType(cell, index: indexPath.row)
+            let filterSection = scheduleFilter.filterSections[2]
+            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
         }
         else if tableView == levelTableView {
-            presenter.toggleSelectionLevel(cell, index: indexPath.row)
+            let filterSection = scheduleFilter.filterSections[3]
+            let filterItem = filterSection.items[indexPath.row]
+            
+            if (isItemSelected(filterSection.type, name: filterItem.name)) {
+                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! String == filterItem.name }
+                scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+                cell.isOptionSelected = false
+            }
+            else {
+                scheduleFilter.selections[filterSection.type]!.append(filterItem.name)
+                cell.isOptionSelected = true
+            }
         }
     }
     
@@ -345,8 +389,18 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     
     @objc private func removeTag(notification: NSNotification) {
         
+        func removeTag(tag: String) {
+            let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            if (escapedTag == "") {
+                return
+            }
+            
+            let index = scheduleFilter.selections[FilterSectionType.Tag]!.indexOf { $0 as! String == escapedTag }
+            scheduleFilter.selections[FilterSectionType.Tag]!.removeAtIndex(index!)
+        }
+        
         let tagView = notification.object as! AMTagView
-        presenter.removeTag(tagView.tagText!)
+        removeTag(tagView.tagText!)
         tagListView.removeTag(tagView)
         resizeTagList(tagListView.contentSize.height)
     }
@@ -356,18 +410,28 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, possibleCompletionsForString string: String!) -> [AnyObject]!  {
         //return presenter.getTagsBySearchTerm(string)
         
-        guard searchTerm.isEmpty == false else { return [] }
+        guard string.isEmpty == false else { return [] }
         
         let tags = Tag.by(searchTerm: string)
         
         return Array(
-            Set(entities.map { $0.name.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) }) // unique values trimming tags
+            Set(tags.map { $0.name.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) }) // unique values trimming tags
             ).sort()
     }
     
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, didSelectAutoCompleteString selectedString: String!, withAutoCompleteObject selectedObject: MLPAutoCompletionObject!, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        func addTag(tag: String) -> Bool {
+            let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            if (escapedTag == "" || scheduleFilter.selections[FilterSectionType.Tag]?.indexOf{ $0 as! String == escapedTag } != nil) {
+                return false
+            }
+            
+            scheduleFilter.selections[FilterSectionType.Tag]!.append(escapedTag)
+            return true
+        }
 
-        if presenter.addTag(selectedString) {
+        if addTag(selectedString) {
             tagListView.addTag(selectedString)
             tagTextView.text = ""
             resizeTagList(tagListView.contentSize.height)

@@ -37,7 +37,7 @@ extension Tag: RealmEncodable {
 
 public extension Tag {
     
-    public func by(searchTerm searchTerm: String, realm: Realm = Store.shared.realm) -> [Tag] {
+    public static func by(searchTerm searchTerm: String, realm: Realm = Store.shared.realm) -> [Tag] {
         
         let tags = realm.objects(RealmTag).filter("name CONTAINS [c] %@", searchTerm).sorted("name")
         
