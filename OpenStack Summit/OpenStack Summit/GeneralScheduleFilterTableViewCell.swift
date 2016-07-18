@@ -69,17 +69,16 @@ final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        
     }
     
-    // MARK: - Private Methods
+    // MARK: - Methods
     
-    private func addTopExtraPadding() {
+    func addTopExtraPadding() {
         
         nameLabelVerticalConstrain.constant = GeneralScheduleFilterTableViewCell.halfExtraPadding
     }
     
-    private func addBottomExtraPadding() {
+    func addBottomExtraPadding() {
         
         nameLabelVerticalConstrain.constant = -GeneralScheduleFilterTableViewCell.halfExtraPadding
     }
