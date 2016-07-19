@@ -61,6 +61,8 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         tagTextView.autoCompleteDataSource = self
         
         navigationItem.title = "FILTER"
+        
+        updateUI()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -90,7 +92,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     
     @IBAction func willClearAllTags(sender: AnyObject) {
         
-        scheduleFilter.selections[FilterSectionType.Tag]!.removeAll()
+        scheduleFilter.selections[FilterSectionType.Tag]?.removeAll()
         tagListView.removeAllTags()
         resizeTagList(tagListView.contentSize.height)
         tagTextView.text = ""

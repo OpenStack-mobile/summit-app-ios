@@ -89,7 +89,9 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
             return
         }
         
-        //presenter.showFilters() push GeneralScheduleFilterViewController
+        let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
+        let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
+        self.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func clearFilters(sender: UIBarButtonItem) {
