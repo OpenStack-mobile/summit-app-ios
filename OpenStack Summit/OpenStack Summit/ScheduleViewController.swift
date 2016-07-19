@@ -11,7 +11,7 @@ import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
 
-class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ScheduleViewController: UIViewController, FilteredScheduleViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IBOutlet
     

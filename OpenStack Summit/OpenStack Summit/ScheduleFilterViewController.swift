@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-protocol ScheduleFilterViewController: class {
+protocol FilteredScheduleViewController: class {
     
     var scheduleFilter: ScheduleFilter { get set }
 }
