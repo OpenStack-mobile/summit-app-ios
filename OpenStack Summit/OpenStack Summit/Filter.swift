@@ -11,18 +11,18 @@ public enum FilterSectionType {
     case SummitType, EventType, Track, TrackGroup, Tag, Level
 }
 
-public class FilterSection {
+public final class FilterSection {
     public var type : FilterSectionType!
     public var name = ""
     public var items = [FilterSectionItem]()
 }
 
-public class FilterSectionItem {
+public final class FilterSectionItem {
     public var id = 0
     public var name = ""
 }
 
-public class ScheduleFilter {
+public final class ScheduleFilter {
     var selections = [FilterSectionType: [AnyObject]]()
     var filterSections = [FilterSection]()
     var hasToRefreshSchedule = true

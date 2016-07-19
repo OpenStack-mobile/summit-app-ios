@@ -33,10 +33,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         }
     }
     
-    var scheduleFilter = ScheduleFilter() {
-        
-        didSet { activeFilterIndicator = scheduleFilter.hasActiveFilters() }
-    }
+    var scheduleFilter = ScheduleFilter()
     
     // MARK: - Loading
     
@@ -71,6 +68,17 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         clear.tintColor = UIColor.blackColor()
         
         toolbarItems = [message, spacer, clear]
+        
+        // set child VCs to the same filter instance
+        trackListViewController.scheduleFilter = scheduleFilter
+        generalScheduleViewController.scheduleFilter = scheduleFilter
+        levelListViewController.scheduleFilter = scheduleFilter
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        activeFilterIndicator = scheduleFilter.hasActiveFilters()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -91,6 +99,10 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         
         let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
         let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
+        
+        generalScheduleFilterViewController.scheduleFilter = scheduleFilter
+        scheduleFilter.hasToRefreshSchedule = true
+        
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
     

@@ -23,10 +23,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     final private(set) var dayEvents = [ScheduleItem]()
     
-    var scheduleFilter = ScheduleFilter()  {
-        
-        didSet { loadData() }
-    }
+    var scheduleFilter = ScheduleFilter()
     
     // MARK: - Accessors
     
