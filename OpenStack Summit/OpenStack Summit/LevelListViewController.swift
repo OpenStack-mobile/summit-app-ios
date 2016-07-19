@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import CoreSummit
 import RealmSwift
 
-final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ScheduleFilterViewController, IndicatorInfoProvider {
+final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilteredScheduleViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     

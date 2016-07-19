@@ -327,6 +327,16 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         // presenter.showVenueDetail()
     }
     
+    /// Leave feedback button
+    @objc private func leaveFeedback(sender: AnyObject? = nil) {
+        
+        let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
+        
+        feedbackVC.event = event
+        
+        self.showViewController(feedbackVC, sender: self)
+    }
+    
     @IBAction func loadMoreFeedback(sender: AnyObject) {
         
         loadFeedback()
@@ -379,16 +389,6 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
             loadAverageFeedback()
             loadFeedback()
         }
-    }
-    
-    /// Leave feedback button
-    @objc private func leaveFeedback() {
-        
-        let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
-        
-        feedbackVC.event = event
-        
-        self.showViewController(feedbackVC, sender: self)
     }
     
     private func loadFeedback() {
