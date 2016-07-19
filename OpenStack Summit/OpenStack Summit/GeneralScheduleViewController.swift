@@ -53,7 +53,7 @@ final class GeneralScheduleViewController: ScheduleViewController, ScheduleFilte
     
     internal override func loadData() {
         
-        if !scheduleFilter.hasToRefreshSchedule {
+        if scheduleFilter.hasToRefreshSchedule == false {
             return
         }
         

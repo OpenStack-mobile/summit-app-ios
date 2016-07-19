@@ -31,7 +31,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     
     // MARK: - Properties
     
-    private var scheduleFilter = ScheduleFilter()
+    var scheduleFilter = ScheduleFilter()
     
     // MARK: - Private Properties
     
@@ -199,7 +199,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     @inline(__always)
     private func removeAllTags() {
         
-        scheduleFilter.selections[FilterSectionType.Tag]!.removeAll()
+        scheduleFilter.selections[FilterSectionType.Tag]?.removeAll()
         tagListView.removeAllTags()
     }
     
@@ -410,11 +410,15 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     // MARK: - MLPAutoCompleteTextFieldDataSource
     
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, possibleCompletionsForString string: String!) -> [AnyObject]!  {
-        //return presenter.getTagsBySearchTerm(string)
         
         guard string.isEmpty == false else { return [] }
         
-        let tags = Tag.by(searchTerm: string)
+        var tags: [Tag]!
+        
+        dispatch_sync(dispatch_get_main_queue()) {
+            
+            tags = Tag.by(searchTerm: string)
+        }
         
         return Array(
             Set(tags.map { $0.name.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) }) // unique values trimming tags

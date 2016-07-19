@@ -21,10 +21,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     // does not seem to be used in legacy codebase
     var searchTerm: String = ""
     
-    var scheduleFilter = ScheduleFilter() {
-        
-        didSet { reloadData() }
-    }
+    var scheduleFilter = ScheduleFilter()
     
     // MARK: - Private Properties
     
