@@ -97,7 +97,13 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //self.presenter.showLevelEvents(indexPath.row)
+        let level = levels[indexPath.row]
+        
+        let levelScheduleViewController = R.storyboard.schedule.levelScheduleViewController()!
+        
+        levelScheduleViewController.level = level
+        
+        self.showViewController(levelScheduleViewController, sender: self)
     }
     
     // MARK: - IndicatorInfoProvider

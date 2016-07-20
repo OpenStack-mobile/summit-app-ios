@@ -227,6 +227,39 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-204"/>
         </scene>
+        <!--Level Schedule View Controller-->
+        <scene sceneID="b0l-3i-vhP">
+            <objects>
+                <viewController storyboardIdentifier="LevelScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="MUF-We-4wd" customClass="LevelScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pfS-dV-65o"/>
+                        <viewControllerLayoutGuide type="bottom" id="TLV-h3-QWY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="I2k-Sf-0nB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xc-oi-gYA" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Xc-oi-gYA" firstAttribute="leading" secondItem="I2k-Sf-0nB" secondAttribute="leading" id="YLX-Zo-jUu"/>
+                            <constraint firstItem="2Xc-oi-gYA" firstAttribute="top" secondItem="I2k-Sf-0nB" secondAttribute="top" id="ha2-Wf-xE2"/>
+                            <constraint firstItem="2Xc-oi-gYA" firstAttribute="width" secondItem="I2k-Sf-0nB" secondAttribute="width" id="vem-6w-jh6"/>
+                            <constraint firstItem="2Xc-oi-gYA" firstAttribute="height" secondItem="I2k-Sf-0nB" secondAttribute="height" id="vhK-Jq-P73"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scheduleView" destination="2Xc-oi-gYA" id="dlf-p9-mdu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p2F-ms-MrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3539" y="514"/>
+        </scene>
     </scenes>
     <resources>
         <image name="alert" width="167" height="150"/>
