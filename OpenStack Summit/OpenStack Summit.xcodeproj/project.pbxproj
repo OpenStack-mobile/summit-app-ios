@@ -137,6 +137,7 @@
 		6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */; };
 		6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */; };
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
+		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
@@ -359,6 +360,7 @@
 		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
 		6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
+		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 				6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */,
 				6E96BFD71D26D347009524C7 /* TrackListViewController.swift */,
 				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
+				6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */,
 				6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */,
 				6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */,
 				6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */,
@@ -1069,6 +1072,7 @@
 				6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */,
 				6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */,
 				6E2537EB1D19B203003E3400 /* ScheduleView.swift in Sources */,
+				6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */,
 				6EF12C551D14997C00814AD0 /* ScheduleableView.swift in Sources */,
 				6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */,
 				6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */,
