@@ -95,12 +95,13 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        /*
         let track = tracks[indexPath.row]
         
-        let newViewController = TrackScheduleViewController
-        presentViewController(newViewController, animated: true)
-        */
+        let trackScheduleVC = R.storyboard.schedule.trackScheduleViewController()!
+        
+        trackScheduleVC.track = track
+        
+        self.showViewController(trackScheduleVC, sender: self)
     }
     
     // MARK: - IndicatorInfoProvider

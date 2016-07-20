@@ -74,7 +74,7 @@ final class PeopleTableViewCell: UITableViewCell {
             #if DEBUG
                 picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
             #else
-                picUrlInternal = newVapictureURLlue
+                picUrlInternal = pictureURL
             #endif
 
             if (!picUrlInternal.isEmpty) {
