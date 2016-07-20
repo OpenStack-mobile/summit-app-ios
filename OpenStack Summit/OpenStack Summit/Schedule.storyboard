@@ -172,6 +172,61 @@
             </objects>
             <point key="canvasLocation" x="3539" y="-2330"/>
         </scene>
+        <!--Track Schedule View Controller-->
+        <scene sceneID="3Bl-cJ-GWu">
+            <objects>
+                <viewController storyboardIdentifier="TrackScheduleViewController" automaticallyAdjustsScrollViewInsets="NO" id="jJc-RB-s6k" customClass="TrackScheduleViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wza-qT-7pt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dki-7d-2ic"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rYY-eq-hpl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyd-S3-VMk" userLabel="Header">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyf-74-Hve">
+                                        <rect key="frame" x="40" y="33" width="520" height="23"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lyf-74-Hve" firstAttribute="leading" secondItem="hyd-S3-VMk" secondAttribute="leading" constant="40" id="0RA-v9-rbO"/>
+                                    <constraint firstAttribute="height" constant="88" id="K7n-ai-Xy6"/>
+                                    <constraint firstItem="lyf-74-Hve" firstAttribute="centerY" secondItem="hyd-S3-VMk" secondAttribute="centerY" id="XWu-ah-aqN"/>
+                                    <constraint firstItem="lyf-74-Hve" firstAttribute="trailing" secondItem="hyd-S3-VMk" secondAttribute="trailing" constant="-40" id="tj0-55-51D"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1v-at-Yxm" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="600" height="512"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="a1v-at-Yxm" firstAttribute="bottom" secondItem="Dki-7d-2ic" secondAttribute="top" id="2am-l4-8oa"/>
+                            <constraint firstItem="a1v-at-Yxm" firstAttribute="top" secondItem="hyd-S3-VMk" secondAttribute="bottom" id="6Fy-9j-xAd"/>
+                            <constraint firstItem="a1v-at-Yxm" firstAttribute="trailing" secondItem="rYY-eq-hpl" secondAttribute="trailing" id="BgD-z2-2JX"/>
+                            <constraint firstItem="a1v-at-Yxm" firstAttribute="leading" secondItem="rYY-eq-hpl" secondAttribute="leading" id="UUh-tC-Hej"/>
+                            <constraint firstItem="hyd-S3-VMk" firstAttribute="top" secondItem="rYY-eq-hpl" secondAttribute="top" id="jt4-Dn-S8p"/>
+                            <constraint firstItem="hyd-S3-VMk" firstAttribute="trailing" secondItem="rYY-eq-hpl" secondAttribute="trailing" id="ucH-80-95y"/>
+                            <constraint firstItem="hyd-S3-VMk" firstAttribute="leading" secondItem="rYY-eq-hpl" secondAttribute="leading" id="yVc-pK-w40"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scheduleView" destination="a1v-at-Yxm" id="ig9-DU-wgo"/>
+                        <outlet property="trackLabel" destination="lyf-74-Hve" id="RQH-Z4-Vwc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4gQ-Pm-VBm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3539" y="-204"/>
+        </scene>
     </scenes>
     <resources>
         <image name="alert" width="167" height="150"/>
