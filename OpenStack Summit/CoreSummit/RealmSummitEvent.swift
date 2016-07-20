@@ -88,6 +88,11 @@ public extension RealmSummitEvent {
         
         return events.map { $0 }
     }
+    
+    static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
+        let events = realm.objects(RealmSummitEvent).filter("ANY presentation.speakers.id = %@ && start >= %@ and end <= %@", speaker, startDate, endDate).sorted(self.sortProperties)
+        return events.map { $0 }
+    }
 }
 
 // MARK: - Encoding

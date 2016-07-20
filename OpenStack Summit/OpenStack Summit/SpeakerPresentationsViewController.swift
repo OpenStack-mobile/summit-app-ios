@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import SwiftSpinner
-import typealias CoreSummit.Identifier
+import CoreSummit
 
 final class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider {
     
@@ -26,10 +26,29 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
         assert(speaker != nil, "Speaker identifier not set")
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    // MARK: - Methods
+    
+    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         
+        let events = RealmSummitEvent.speakerPresentations(speaker, startDate: startDate, endDate: endDate)
         
+        var activeDates: [NSDate] = []
+        for event in events {
+            let timeZone = NSTimeZone(name: event.summit.timeZone)!
+            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            if !activeDates.contains(startDate) {
+                activeDates.append(startDate)
+            }
+            
+        }
+        return activeDates
+    }
+    
+    override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+        
+        let realmEvents = RealmSummitEvent.speakerPresentations(speaker, startDate: startDate, endDate: endDate)
+        
+        return ScheduleItem.from(realm: realmEvents)
     }
     
     // MARK: - IndicatorInfoProvider

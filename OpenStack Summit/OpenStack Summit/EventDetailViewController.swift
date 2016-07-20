@@ -328,7 +328,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     }
     
     /// Leave feedback button
-    @objc private func leaveFeedback(sender: AnyObject? = nil) {
+    @IBAction func leaveFeedback(sender: AnyObject? = nil) {
         
         let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
         
