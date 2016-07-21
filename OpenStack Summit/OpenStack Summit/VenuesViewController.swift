@@ -11,7 +11,6 @@ import KTCenterFlowLayout
 
 final class VenuesViewController: RevealTabStripViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
