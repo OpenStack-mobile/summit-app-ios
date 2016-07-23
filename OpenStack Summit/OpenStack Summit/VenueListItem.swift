@@ -7,6 +7,8 @@
 //
 
 import CoreSummit
+import Foundation
+import CoreLocation
 
 public struct VenueListItem: RealmDecodable {
     
@@ -33,6 +35,16 @@ public struct VenueListItem: RealmDecodable {
         self.latitude = Double(venue.lat) ?? 0.0
         self.longitude = Double(venue.long) ?? 0.0
         self.backgroundImageURL = venue.images.first?.url
+    }
+}
+
+// MARK: - Computed Properties
+
+public extension VenueListItem {
+    
+    var location: CLLocationCoordinate2D {
+        
+        return CLLocationCoordinate2DMake(latitude, longitude)
     }
 }
 

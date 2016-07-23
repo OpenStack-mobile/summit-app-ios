@@ -131,6 +131,7 @@
 		6E313C1B1D4127C2005132DA /* VenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */; };
 		6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */; };
 		6E313C1E1D41302C005132DA /* VenueRoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */; };
+		6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1F1D413254005132DA /* VenueDetailViewController.swift */; };
 		6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054C1D2ED21300D56870 /* AboutViewController.swift */; };
 		6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054E1D2ED6BD00D56870 /* Appearance.swift */; };
 		6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
@@ -142,7 +143,7 @@
 		6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */; };
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
-		6E9B22D81D40171800D25271 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venues.storyboard */; };
+		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
@@ -159,6 +160,24 @@
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
+		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
+		6EDE52121D429F4C00DF4BEA /* VenuesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */; };
+		6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */; };
+		6EDE52191D42D09D00DF4BEA /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52171D42D08200DF4BEA /* GoogleMaps.framework */; };
+		6EDE521B1D42D46400DF4BEA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE521A1D42D46400DF4BEA /* AVFoundation.framework */; };
+		6EDE521E1D42D47A00DF4BEA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE521D1D42D47A00DF4BEA /* CoreData.framework */; };
+		6EDE52251D42D4C700DF4BEA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE521F1D42D4C700DF4BEA /* CoreGraphics.framework */; };
+		6EDE52261D42D4C700DF4BEA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52201D42D4C700DF4BEA /* CoreLocation.framework */; };
+		6EDE52271D42D4C700DF4BEA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52211D42D4C700DF4BEA /* CoreText.framework */; };
+		6EDE52281D42D4C700DF4BEA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52221D42D4C700DF4BEA /* GLKit.framework */; };
+		6EDE52291D42D4C700DF4BEA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52231D42D4C700DF4BEA /* OpenGLES.framework */; };
+		6EDE522A1D42D4C700DF4BEA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52241D42D4C700DF4BEA /* QuartzCore.framework */; };
+		6EDE522C1D42D4D600DF4BEA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE522B1D42D4D600DF4BEA /* ImageIO.framework */; };
+		6EDE522E1D42D4EB00DF4BEA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE522D1D42D4EB00DF4BEA /* libc++.tbd */; };
+		6EDE52301D42D4F600DF4BEA /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE522F1D42D4F600DF4BEA /* libicucore.tbd */; };
+		6EDE52321D42D50000DF4BEA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52311D42D50000DF4BEA /* libz.tbd */; };
+		6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */; };
+		6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52351D42D52D00DF4BEA /* Accelerate.framework */; };
 		6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */; };
 		6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */; };
 		6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
@@ -358,6 +377,7 @@
 		6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDetailViewController.swift; sourceTree = "<group>"; };
+		6E313C1F1D413254005132DA /* VenueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewController.swift; sourceTree = "<group>"; };
 		6E49054C1D2ED21300D56870 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
@@ -370,7 +390,7 @@
 		6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
-		6E9B22D71D40171800D25271 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
+		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
@@ -387,6 +407,24 @@
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelListViewController.swift; sourceTree = "<group>"; };
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
+		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
+		6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapViewController.swift; sourceTree = "<group>"; };
+		6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueLocationDetailViewController.swift; sourceTree = "<group>"; };
+		6EDE52171D42D08200DF4BEA /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		6EDE521A1D42D46400DF4BEA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6EDE521D1D42D47A00DF4BEA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6EDE521F1D42D4C700DF4BEA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6EDE52201D42D4C700DF4BEA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6EDE52211D42D4C700DF4BEA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6EDE52221D42D4C700DF4BEA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6EDE52231D42D4C700DF4BEA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		6EDE52241D42D4C700DF4BEA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6EDE522B1D42D4D600DF4BEA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		6EDE522D1D42D4EB00DF4BEA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		6EDE522F1D42D4F600DF4BEA /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		6EDE52311D42D50000DF4BEA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6EDE52351D42D52D00DF4BEA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
 		6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
@@ -424,6 +462,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */,
+				6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */,
+				6EDE52321D42D50000DF4BEA /* libz.tbd in Frameworks */,
+				6EDE52301D42D4F600DF4BEA /* libicucore.tbd in Frameworks */,
+				6EDE522E1D42D4EB00DF4BEA /* libc++.tbd in Frameworks */,
+				6EDE522C1D42D4D600DF4BEA /* ImageIO.framework in Frameworks */,
+				6EDE52251D42D4C700DF4BEA /* CoreGraphics.framework in Frameworks */,
+				6EDE52261D42D4C700DF4BEA /* CoreLocation.framework in Frameworks */,
+				6EDE52271D42D4C700DF4BEA /* CoreText.framework in Frameworks */,
+				6EDE52281D42D4C700DF4BEA /* GLKit.framework in Frameworks */,
+				6EDE52291D42D4C700DF4BEA /* OpenGLES.framework in Frameworks */,
+				6EDE522A1D42D4C700DF4BEA /* QuartzCore.framework in Frameworks */,
+				6EDE521E1D42D47A00DF4BEA /* CoreData.framework in Frameworks */,
+				6EDE521B1D42D46400DF4BEA /* AVFoundation.framework in Frameworks */,
+				6EDE52191D42D09D00DF4BEA /* GoogleMaps.framework in Frameworks */,
 				6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +516,8 @@
 		6E104D251D1061AC00541E84 = {
 			isa = PBXGroup;
 			children = (
+				6EDE521C1D42D46900DF4BEA /* System Frameworks */,
+				6EDE52161D42D08200DF4BEA /* Vendor */,
 				6E104D301D1061AC00541E84 /* OpenStack Summit */,
 				6E104D451D1061AC00541E84 /* OpenStack SummitTests */,
 				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
@@ -502,7 +557,7 @@
 				6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */,
 				6E0B2F061D33F3A10058F171 /* Levels.storyboard */,
 				6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */,
-				6E9B22D71D40171800D25271 /* Venues.storyboard */,
+				6E9B22D71D40171800D25271 /* Venue.storyboard */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
 				6EF147EC1D13579C00D5EEF9 /* View */,
@@ -667,6 +722,7 @@
 				6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */,
 				6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */,
 				6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */,
+				6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -691,6 +747,36 @@
 				6E00D1AA1D1C49C200278274 /* RevealViewController.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		6EDE52161D42D08200DF4BEA /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				6EDE52171D42D08200DF4BEA /* GoogleMaps.framework */,
+			);
+			name = Vendor;
+			path = ../Vendor;
+			sourceTree = "<group>";
+		};
+		6EDE521C1D42D46900DF4BEA /* System Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EDE52311D42D50000DF4BEA /* libz.tbd */,
+				6EDE522F1D42D4F600DF4BEA /* libicucore.tbd */,
+				6EDE522D1D42D4EB00DF4BEA /* libc++.tbd */,
+				6EDE52351D42D52D00DF4BEA /* Accelerate.framework */,
+				6EDE522B1D42D4D600DF4BEA /* ImageIO.framework */,
+				6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */,
+				6EDE521F1D42D4C700DF4BEA /* CoreGraphics.framework */,
+				6EDE52201D42D4C700DF4BEA /* CoreLocation.framework */,
+				6EDE52211D42D4C700DF4BEA /* CoreText.framework */,
+				6EDE52221D42D4C700DF4BEA /* GLKit.framework */,
+				6EDE52231D42D4C700DF4BEA /* OpenGLES.framework */,
+				6EDE52241D42D4C700DF4BEA /* QuartzCore.framework */,
+				6EDE521D1D42D47A00DF4BEA /* CoreData.framework */,
+				6EDE521A1D42D46400DF4BEA /* AVFoundation.framework */,
+			);
+			name = "System Frameworks";
 			sourceTree = "<group>";
 		};
 		6EF147EC1D13579C00D5EEF9 /* View */ = {
@@ -746,7 +832,10 @@
 				6EFC99BE1D218280009FD0DA /* MenuViewController.swift */,
 				6EFC6E641D2300260087057A /* VenuesViewController.swift */,
 				6E313C171D4123AE005132DA /* VenueListViewController.swift */,
+				6E313C1F1D413254005132DA /* VenueDetailViewController.swift */,
+				6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */,
 				6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */,
+				6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */,
 				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
 				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
@@ -940,7 +1029,7 @@
 			files = (
 				6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */,
 				6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */,
-				6E9B22D81D40171800D25271 /* Venues.storyboard in Resources */,
+				6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */,
 				6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */,
 				6E0B2F071D33F3A10058F171 /* Levels.storyboard in Resources */,
 				6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */,
@@ -1018,6 +1107,7 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/AHKActionSheet.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/AMTagListView.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MLPAutoCompleteTextField.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
@@ -1069,7 +1159,10 @@
 				6EFC6E651D2300260087057A /* VenuesViewController.swift in Sources */,
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */,
+				6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */,
+				6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
+				6EDE52121D429F4C00DF4BEA /* VenuesMapViewController.swift in Sources */,
 				6E313C1B1D4127C2005132DA /* VenueListTableViewCell.swift in Sources */,
 				6EB752601D18AF2800BC294D /* MemberProfileDetailViewController.swift in Sources */,
 				6E25384D1D1AF5C1003E3400 /* BackBarButtonItem.swift in Sources */,
@@ -1118,6 +1211,7 @@
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
 				6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */,
 				6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */,
+				6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */,
 				6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */,
 				6E779E4E1D2581AE00A184A0 /* SWRevealViewController.m in Sources */,
 				6EFC99BC1D217141009FD0DA /* NSDate+MTDates.m in Sources */,
@@ -1357,8 +1451,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					$SRCROOT/../Carthage/Build/iOS,
+					$SRCROOT/../Vendor,
+				);
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
@@ -1372,8 +1471,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					$SRCROOT/../Carthage/Build/iOS,
+					$SRCROOT/../Vendor,
+				);
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
