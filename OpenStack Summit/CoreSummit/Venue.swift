@@ -43,6 +43,11 @@ public extension Venue {
         
         return locationType == .Internal
     }
+    
+    var location: (latitude: Double, longitude: Double) {
+        
+        return ((self.latitude ?? "" as NSString).doubleValue, (self.longitude ?? "" as NSString).doubleValue)
+    }
 }
 
 // MARK: - Supporting Types
