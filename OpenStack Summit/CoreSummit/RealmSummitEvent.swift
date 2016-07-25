@@ -164,11 +164,15 @@ extension SummitEvent: RealmEncodable {
             realmEntity.venueRoom = cachedRoom
             realmEntity.venue = nil
             
-        } else {
+        } else if let cachedVenue = RealmVenue.find(location, realm: realm) {
             
-            realmEntity.venue = RealmVenue.cached(location, realm: realm)
+            realmEntity.venue = cachedVenue
             realmEntity.venueRoom = nil
             
+        } else {
+            
+            realmEntity.venue = nil
+            realmEntity.venueRoom = nil
         }
         
         return realmEntity
