@@ -20,6 +20,6 @@ final class VenuesViewController: RevealTabStripViewController {
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        return [VenuesMapViewController(), R.storyboard.venue.venueListViewController()!]
+        return [/* VenuesMapViewController() , */ R.storyboard.venue.venueListViewController()!]
     }
 }

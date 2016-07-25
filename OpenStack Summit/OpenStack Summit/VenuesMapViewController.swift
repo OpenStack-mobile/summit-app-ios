@@ -16,7 +16,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     // MARK: - Properties
     
     var mapView: GMSMapView!
-    var dictionary = [GMSMarker: Int]()
+    private(set) var dictionary = [GMSMarker: Int]()
     
     // MARK: - Loading
     

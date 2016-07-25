@@ -28,6 +28,8 @@ extension Venue: RealmDecodable {
     
     public init(realmEntity: RealmVenue) {
         
+        assert(realmEntity.name != "", "Empty venue name: \(realmEntity)")
+        
         self.identifier = realmEntity.id
         self.name = realmEntity.name
         self.descriptionText = String(realm: realmEntity.locationDescription)
@@ -49,6 +51,8 @@ extension Venue: RealmEncodable {
     public func save(realm: Realm) -> RealmVenue {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        assert(name != "", "Empty venue name: \(self)")
         
         realmEntity.name = name
         realmEntity.locationDescription = descriptionText ?? ""
