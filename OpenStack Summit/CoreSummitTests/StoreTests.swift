@@ -38,7 +38,7 @@ final class StoreTests: XCTestCase {
                 
                 XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
                 
-                print(summit)
+                dump(summit, "CurrentSummitDump.txt")
             }
             
             expectation.fulfill()

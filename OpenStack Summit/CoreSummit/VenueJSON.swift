@@ -37,6 +37,7 @@ extension Venue: JSONDecodable {
             let images = Image.fromJSON(imagesJSONArray),
             let locationTypeString = JSONObject[JSONKey.location_type.rawValue]?.rawValue as? String,
             let locationType = LocationType(rawValue: locationTypeString)
+            where name.isEmpty == false
             else { return nil }
         
         self.identifier = identifier
@@ -53,7 +54,6 @@ extension Venue: JSONDecodable {
         self.city = JSONObject[JSONKey.city.rawValue]?.rawValue as? String
         self.state = JSONObject[JSONKey.state.rawValue]?.rawValue as? String
         self.zipCode = JSONObject[JSONKey.zip_code.rawValue]?.rawValue as? String
-        
         
         // not in Realm
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String

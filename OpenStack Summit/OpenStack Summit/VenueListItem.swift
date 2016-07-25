@@ -28,6 +28,8 @@ public struct VenueListItem: RealmDecodable {
     
     public init(realmEntity venue: RealmVenue) {
         
+        assert(venue.name != "", "Empty venue: \(venue)")
+        
         self.identifier = venue.id
         self.name = venue.name
         self.descriptionText = venue.locationDescription
