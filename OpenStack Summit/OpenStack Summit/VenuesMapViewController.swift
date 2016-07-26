@@ -41,16 +41,16 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         /// get Internal Venues with Coordinates
         let venues = VenueListItem.from(realm: Store.shared.realm.objects(RealmVenue).filter({ $0.isInternal && !$0.lat.isEmpty && !$0.long.isEmpty }))
         
-        self.addMarkers(venues)
-    }
-    
-    private func addMarkers(venues: [VenueListItem]) {
         var bounds = GMSCoordinateBounds()
         
         for venue in venues {
+            
+            guard let location = venue.location
+                else { fatalError("Cannot show venue with no coordinates: \(venue)") }
+            
             let marker = GMSMarker()
             marker.icon = R.image.map_pin()!
-            marker.position = CLLocationCoordinate2DMake(venue.location.latitude, venue.location.longitude)
+            marker.position = location
             marker.title = venue.name
             marker.map = mapView
             

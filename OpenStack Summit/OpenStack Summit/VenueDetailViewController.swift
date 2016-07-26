@@ -100,6 +100,8 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         mapView.delegate = self
         
         navigationItem.title = "VENUE"
+        
+        updateUI()
     }
     
     // MARK: - Action
@@ -122,17 +124,32 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
+        
         if !arrowImageView.hidden {
-            //presenter.showVenueLocationDetail()
+            
+            let venueLocationDetailVC = R.storyboard.venue.venueLocationDetailViewController()!
+            
+            venueLocationDetailVC.venue = venue
+            
+            self.showViewController(venueLocationDetailVC, sender: self)
         }
     }
     
     // MARK: - Private Methods
     
-    func addMarker(venue: Venue) {
+    private func updateUI() {
+        
+        
+    }
+    
+    private func addMarker(venue: VenueListItem) {
+        
+        guard let location = venue.location
+            else { fatalError("Cannot show venue with no coordinates: \(venue)") }
+        
         let marker = GMSMarker()
         var bounds = GMSCoordinateBounds()
-        marker.position = CLLocationCoordinate2DMake((venue.latitude ?? "" as NSString).doubleValue, (venue.longitude ?? "" as NSString).doubleValue)
+        marker.position = location
         marker.map = mapView
         marker.title = venue.name
         marker.icon = UIImage(named: "map_pin")
@@ -144,20 +161,24 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         mapView.animateToZoom(mapView.camera.zoom - 6)
     }
     
+    @inline(__always)
     func toggleMap(visible: Bool) {
         mapView.hidden = !visible
     }
     
+    @inline(__always)
     func toggleMapsGallery(visible: Bool) {
         mapsSlideshow.hidden = !visible
     }
     
+    @inline(__always)
     func toggleImagesGallery(visible: Bool) {
         imagesSlideshow.hidden = !visible
         imagesSlideshowHeightConstraint.constant = visible ? 220 : 0
         imagesSlideshow.updateConstraints()
     }
     
+    @inline(__always)
     func toggleMapNavigation(visible: Bool) {
         arrowImageView.hidden = !visible
     }
