@@ -27,14 +27,27 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
         
         mapView.myLocationEnabled = true
         mapView.delegate = self
+        
+        updateUI()
     }
     
     // MARK: - Methods
     
-    func addMarker(venue: Venue) {
+    private func updateUI() {
+        
+        assert(self.venue != nil, "No venue set")
+        
+        guard let realmVenue = RealmVenue.find(self.venue, realm: Store.shared.realm)
+            else { fatalError("Venue not found in cache. Invalid venue \(self.venue)") }
+        
+        let venue = VenueListItem(realmEntity: realmVenue)
+        
+        guard let location = venue.location
+            else { fatalError("Venue is not geolocated") }
+        
         let marker = GMSMarker()
         var bounds = GMSCoordinateBounds()
-        marker.position = CLLocationCoordinate2DMake(venue.location!.latitude, venue.location!.longitude)
+        marker.position = location
         marker.map = mapView
         marker.title = venue.name
         marker.icon = R.image.map_pin()!
