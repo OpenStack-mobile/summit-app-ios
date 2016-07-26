@@ -23,6 +23,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
         return IndicatorInfo(title: "Schedule")
     }
 }

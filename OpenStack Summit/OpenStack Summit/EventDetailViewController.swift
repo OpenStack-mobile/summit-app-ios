@@ -324,7 +324,10 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     @IBAction func showLocation(sender: UITapGestureRecognizer) {
         
-        // presenter.showVenueDetail()
+        guard let venue = eventDetail.venue
+            else { return }
+        
+        showLocationDetail(venue)
     }
     
     /// Leave feedback button
