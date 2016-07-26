@@ -135,6 +135,7 @@
 		6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1F1D413254005132DA /* VenueDetailViewController.swift */; };
 		6E3E8C251D47D68100A29003 /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */; };
 		6E3E8C261D47D68100A29003 /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BB1D217141009FD0DA /* NSDateComponents+MTDates.m */; };
+		6E3E8C281D47E64D00A29003 /* ShowVenueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */; };
 		6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054C1D2ED21300D56870 /* AboutViewController.swift */; };
 		6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054E1D2ED6BD00D56870 /* Appearance.swift */; };
 		6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
@@ -379,6 +380,7 @@
 		6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDetailViewController.swift; sourceTree = "<group>"; };
 		6E313C1F1D413254005132DA /* VenueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewController.swift; sourceTree = "<group>"; };
+		6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVenueDetail.swift; sourceTree = "<group>"; };
 		6E49054C1D2ED21300D56870 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
@@ -739,6 +741,14 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
+		6E3E8C291D47E65300A29003 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		6EB699E31D3412B00095474D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -816,6 +826,7 @@
 		6EF147ED1D1357A100D5EEF9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6E3E8C291D47E65300A29003 /* Extensions */,
 				6EB699E31D3412B00095474D /* Protocols */,
 				6E49054C1D2ED21300D56870 /* AboutViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
@@ -835,8 +846,8 @@
 				6EFC6E641D2300260087057A /* VenuesViewController.swift */,
 				6E313C171D4123AE005132DA /* VenueListViewController.swift */,
 				6E313C1F1D413254005132DA /* VenueDetailViewController.swift */,
-				6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */,
 				6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */,
+				6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */,
 				6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */,
 				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
 				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
@@ -1159,6 +1170,7 @@
 				6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */,
 				6EB699E51D3413080095474D /* ScheduleFilterViewController.swift in Sources */,
 				6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */,
+				6E3E8C281D47E64D00A29003 /* ShowVenueDetail.swift in Sources */,
 				6EFC6E651D2300260087057A /* VenuesViewController.swift in Sources */,
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */,

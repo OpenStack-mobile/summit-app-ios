@@ -118,11 +118,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
         case .External: venue = externalVenueList[indexPath.row]
         }
         
-        let venueDetailVC = R.storyboard.venue.venueDetailViewController()!
-        
-        venueDetailVC.venue = venue.identifier
-        
-        self.showViewController(venueDetailVC, sender: self)
+        showLocationDetail(venue.identifier)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

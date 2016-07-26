@@ -71,10 +71,8 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         guard let venue = dictionary[marker]
             else { return false }
         
-        let venueDetailViewController = R.storyboard.venue.venueDetailViewController()!
-        venueDetailViewController.venue = venue
+        showLocationDetail(venue)
         
-        self.showViewController(venueDetailViewController, sender: self)
         return true
     }
     
