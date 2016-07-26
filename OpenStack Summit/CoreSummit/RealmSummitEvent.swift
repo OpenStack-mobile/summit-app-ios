@@ -171,8 +171,7 @@ extension SummitEvent: RealmEncodable {
             
         } else {
             
-            realmEntity.venue = nil
-            realmEntity.venueRoom = nil
+            fatalError("Missing location \(location) for event: \(realmEntity)")
         }
         
         return realmEntity
