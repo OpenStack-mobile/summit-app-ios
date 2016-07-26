@@ -139,26 +139,43 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     private func updateUI() {
         
+        assert(self.venue != nil, "No venue set")
         
-    }
-    
-    private func addMarker(venue: VenueListItem) {
+        guard let realmVenue = RealmVenue.find(self.venue, realm: Store.shared.realm)
+            else { fatalError("Venue not found in cache. Invalid venue \(self.venue)") }
         
-        guard let location = venue.location
-            else { fatalError("Cannot show venue with no coordinates: \(venue)") }
+        let venue = VenueListItem(realmEntity: realmVenue)
         
-        let marker = GMSMarker()
-        var bounds = GMSCoordinateBounds()
-        marker.position = location
-        marker.map = mapView
-        marker.title = venue.name
-        marker.icon = UIImage(named: "map_pin")
-        bounds = bounds.includingCoordinate(marker.position)
-        mapView.selectedMarker = marker
+        self.name = venue.name
+        self.location = venue.address
         
-        let update = GMSCameraUpdate.fitBounds(bounds)
-        mapView.moveCamera(update)
-        mapView.animateToZoom(mapView.camera.zoom - 6)
+        self.toggleImagesGallery(venue.images.count > 0)
+        if venue.images.count > 0 {
+            self.images = venue.images
+        }
+        
+        self.toggleMapNavigation(venue.maps.count > 0)
+        self.toggleMapsGallery(venue.maps.count > 0)
+        self.toggleMap(venue.maps.count == 0 && venue.location != nil)
+        
+        if venue.maps.count > 0 {
+            self.maps = venue.maps
+        }
+        else if let location = venue.location {
+            
+            let marker = GMSMarker()
+            var bounds = GMSCoordinateBounds()
+            marker.position = location
+            marker.map = mapView
+            marker.title = venue.name
+            marker.icon = R.image.map_pin()!
+            bounds = bounds.includingCoordinate(marker.position)
+            mapView.selectedMarker = marker
+            
+            let update = GMSCameraUpdate.fitBounds(bounds)
+            mapView.moveCamera(update)
+            mapView.animateToZoom(mapView.camera.zoom - 6)
+        }
     }
     
     @inline(__always)
