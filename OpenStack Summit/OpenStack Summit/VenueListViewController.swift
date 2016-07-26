@@ -108,12 +108,21 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == VenueListSectionType.Internal.rawValue {
-            //presenter.showInternalVenueDetail(indexPath.row)
+        let venue: VenueListItem
+        
+        guard let section = VenueListSectionType(rawValue: indexPath.section)
+            else { fatalError("Invalid section \(indexPath.section)") }
+        
+        switch section {
+        case .Internal: venue = internalVenueList[indexPath.row]
+        case .External: venue = externalVenueList[indexPath.row]
         }
-        else if indexPath.section == VenueListSectionType.External.rawValue {
-            //presenter.showExternalVenueDetail(indexPath.row)
-        }
+        
+        let venueDetailVC = R.storyboard.venue.venueDetailViewController()!
+        
+        venueDetailVC.venue = venue.identifier
+        
+        self.showViewController(venueDetailVC, sender: self)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -16,6 +16,10 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
 
     @IBOutlet weak var mapView: GMSMapView!
     
+    // MARK: - Properties
+    
+    var venue: Identifier!
+    
     // MARK: - Loading
 
     override func viewDidLoad() {
@@ -30,7 +34,7 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
     func addMarker(venue: Venue) {
         let marker = GMSMarker()
         var bounds = GMSCoordinateBounds()
-        marker.position = CLLocationCoordinate2DMake(venue.location.latitude, venue.location.longitude)
+        marker.position = CLLocationCoordinate2DMake(venue.location!.latitude, venue.location!.longitude)
         marker.map = mapView
         marker.title = venue.name
         marker.icon = R.image.map_pin()!

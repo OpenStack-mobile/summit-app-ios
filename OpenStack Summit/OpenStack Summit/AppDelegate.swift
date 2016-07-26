@@ -9,6 +9,7 @@
 import UIKit
 import SWRevealViewController
 import RealmSwift
+import GoogleMaps
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,8 +41,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // nuke cache
         #if DEBUG
-        //=try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
+        //try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
         #endif
+        
+        // setup Google Maps
+        GMSServices.provideAPIKey("Google Maps API Key")
+        
+        // setup Parse
+        //Parse.setApplicationId("Parse App ID", clientKey: "Parse Client Key")
+        
+        // notifications
+        let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+        application.registerForRemoteNotifications()
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
         // setup root VC
         window?.rootViewController = revealViewController

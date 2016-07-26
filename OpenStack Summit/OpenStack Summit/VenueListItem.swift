@@ -20,11 +20,13 @@ public struct VenueListItem: RealmDecodable {
     
     public let address: String
     
-    public let latitude: Double
-    
-    public let longitude: Double
+    public let location: CLLocationCoordinate2D?
     
     public let backgroundImageURL: String?
+    
+    public let maps: [String]
+    
+    public let images: [String]
     
     public init(realmEntity venue: RealmVenue) {
         
@@ -34,19 +36,19 @@ public struct VenueListItem: RealmDecodable {
         self.name = venue.name
         self.descriptionText = venue.locationDescription
         self.address = VenueListItem.getAddress(venue)
-        self.latitude = Double(venue.lat) ?? 0.0
-        self.longitude = Double(venue.long) ?? 0.0
         self.backgroundImageURL = venue.images.first?.url
-    }
-}
-
-// MARK: - Computed Properties
-
-public extension VenueListItem {
-    
-    var location: CLLocationCoordinate2D {
+        self.maps = venue.maps.map { $0.url }
+        self.images = venue.images.map { $0.url }
         
-        return CLLocationCoordinate2DMake(latitude, longitude)
+        // location
+        if let latitude = Double(venue.lat),
+            let longitude = Double(venue.long) {
+            
+            self.location = CLLocationCoordinate2DMake(latitude, longitude)
+        } else {
+            
+            self.location = nil
+        }
     }
 }
 

@@ -44,9 +44,13 @@ public extension Venue {
         return locationType == .Internal
     }
     
-    var location: (latitude: Double, longitude: Double) {
+    var location: (latitude: Double, longitude: Double)? {
         
-        return ((self.latitude ?? "" as NSString).doubleValue, (self.longitude ?? "" as NSString).doubleValue)
+        guard let latitude = self.latitude,
+            let longitude = self.longitude
+            else { return nil }
+        
+        return ((latitude as NSString).doubleValue, (longitude as NSString).doubleValue)
     }
 }
 
