@@ -40,7 +40,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // nuke cache
         #if DEBUG
-        try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
+        //=try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
         #endif
         
         // setup root VC

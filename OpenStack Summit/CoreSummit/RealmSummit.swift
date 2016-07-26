@@ -82,7 +82,6 @@ extension Summit: RealmEncodable {
         realmEntity.eventTypes.replace(with: eventTypes.save(realm))
         realmEntity.track.replace(with: tracks.save(realm))
         realmEntity.trackGroups.replace(with: trackGroups.save(realm))
-        realmEntity.events.replace(with: schedule)
         realmEntity.speakers.replace(with: speakers)
         
         // locations
@@ -95,6 +94,9 @@ extension Summit: RealmEncodable {
             case let .room(room): realmEntity.venuesRooms.append(room.save(realm))
             }
         }
+        
+        // save schedule after locations, to fault the relationships
+        realmEntity.events.replace(with: schedule)
         
         return realmEntity
     }
