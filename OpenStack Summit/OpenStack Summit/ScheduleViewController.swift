@@ -92,6 +92,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // load UI
         loadData()
     }
     
@@ -204,6 +205,11 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
             }
         }
         
+        reloadSchedule()
+    }
+    
+    private func reloadSchedule() {
+        
         let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
         
         let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
@@ -214,8 +220,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         scheduleView.tableView.reloadData()
     }
     
-    
-    final func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
+    private func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
         
         /*
          if pushRegisterInProgress {
@@ -280,7 +285,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     func horizontalDayPicker(picker: AFHorizontalDayPicker, didSelectDate date: NSDate) {
         
-        scheduleView.tableView.reloadData()
+        reloadSchedule()
     }
     
     // MARK: - UITableViewDataSource
