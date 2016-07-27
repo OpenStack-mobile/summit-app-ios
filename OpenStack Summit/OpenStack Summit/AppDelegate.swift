@@ -42,11 +42,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // update app build
         if AppBuild != Preference.appBuild {
             
-            // nuke cache
-            try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
-            
-            // updated app build preference
+            // update app build preference
             Preference.appBuild = AppBuild
+            
+            // nuke cache
+            let realmPath = Realm.Configuration.defaultConfiguration.path!
+            
+            if NSFileManager.defaultManager().fileExistsAtPath(realmPath) {
+                
+                try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
+            }
         }
         
         // setup Google Maps
