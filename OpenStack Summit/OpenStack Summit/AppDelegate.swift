@@ -39,10 +39,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // configure global appearance
         SetAppearance()
         
-        // nuke cache
-        #if DEBUG
-        //try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
-        #endif
+        // update app build
+        if AppBuild != Preference.appBuild {
+            
+            // nuke cache
+            try! NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.path!)
+            
+            // updated app build preference
+            Preference.appBuild = AppBuild
+        }
         
         // setup Google Maps
         GMSServices.provideAPIKey("Google Maps API Key")
