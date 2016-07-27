@@ -10,16 +10,11 @@ import Foundation
 
 struct Preference {
     
-    static var appBuild: Int? {
+    static var appBuild: Int {
         
-        get { return NSUserDefaults.standardUserDefaults().integerForKey(Key.appBuild.rawValue) }
+        get { return NSUserDefaults.standardUserDefaults().integerForKey(Key.appBuild.rawValue) ?? 0 }
         
-        set {
-            guard let appBuild = newValue
-                else { NSUserDefaults.standardUserDefaults().removeObjectForKey(Key.appBuild.rawValue); return }
-            
-            NSUserDefaults.standardUserDefaults().setInteger(appBuild, forKey: Key.appBuild.rawValue)
-        }
+        set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: Key.appBuild.rawValue) }
     }
 }
 
