@@ -6,13 +6,12 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+let BundleIdentifier = "org.openstack.CoreSummit"
+
+/*
+
 struct Constants {
-    
-    struct Notifications {
-        static let LoggedInNotification = "kLoggedInNotification"
-        static let LoggedOutNotification = "kLoggedOutNotification"
-        static let ForcedLoggedOutNotification = "kForcedLoggedOutNotification"
-    }
+ 
     struct SessionKeys {
         static let ActiveSummitTimeZone = "kActiveSummitTimeZone"
         static let GeneralScheduleFilterSelections = "kGeneralScheduleFilterSelections"
@@ -39,6 +38,6 @@ struct Constants {
         static let SecretServiceAccount = "Service Account Secret"
         #endif
     }
-    
-    static let ErrorDomain = "org.openstack.ios.summit"
 }
+ 
+ */

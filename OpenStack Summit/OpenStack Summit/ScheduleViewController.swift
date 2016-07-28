@@ -222,6 +222,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     private func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
         
+        // FIXME: Implement push notifications
+        
         /*
          if pushRegisterInProgress {
          return

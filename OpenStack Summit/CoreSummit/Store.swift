@@ -24,6 +24,8 @@ public final class Store {
     /// The Realm storage context.
     public let realm = try! Realm()
     
+    public var configuration = Configuration.staging
+    
     /// The member that is logged in.
     public private(set) var authenticatedMember: RealmMember?
     
@@ -112,11 +114,11 @@ public final class Store {
         let hasPasscode = deviceHasPasscode
         
         var config = Config(
-            base: Constants.Urls.AuthServerBaseUrl,
+            base: configuration[.AuthenticationURL],
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: Constants.Auth.ClientIdOpenID,
+            clientId: configuration[.ClientIDOpenID],
             refreshTokenEndpoint: "oauth2/token",
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
@@ -124,32 +126,32 @@ public final class Store {
             scopes: ["openid",
                 "profile",
                 "offline_access",
-                "\(Constants.Urls.ResourceServerBaseUrl)/summits/read",
-                "\(Constants.Urls.ResourceServerBaseUrl)/summits/write",
-                "\(Constants.Urls.ResourceServerBaseUrl)/summits/read-external-orders",
-                "\(Constants.Urls.ResourceServerBaseUrl)/summits/confirm-external-orders"
+                "\(configuration[.ServerURL])/summits/read",
+                "\(configuration[.ServerURL])/summits/write",
+                "\(configuration[.ServerURL])/summits/read-external-orders",
+                "\(configuration[.ServerURL])/summits/confirm-external-orders"
             ],
-            clientSecret: Constants.Auth.SecretOpenID,
+            clientSecret: configuration[.SecretOpenID],
             isWebView: true
         )
         oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
         config = Config(
-            base: Constants.Urls.AuthServerBaseUrl,
+            base: configuration[.AuthenticationURL],
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: Constants.Auth.ClientIdServiceAccount,
+            clientId: configuration[.ClientIDServiceAccount],
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(Constants.Urls.ResourceServerBaseUrl)/summits/read"],
-            clientSecret: Constants.Auth.SecretServiceAccount
+            scopes: ["\(configuration[.ServerURL])/summits/read"],
+            clientSecret: configuration[.SecretServiceAccount]
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
     }
     
-    private func createOAuthModule(config: Config, hasPasscode: Bool) -> OAuth2Module {
+    private func createOAuthModule(config: AeroGearOAuth2.Config, hasPasscode: Bool) -> OAuth2Module {
         var session: OAuth2Session
         
         config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
@@ -187,7 +189,7 @@ public final class Store {
     
     @objc private func revokedAccess(notification: NSNotification) {
         //self.session.set(self.kCurrentMemberId, value: nil)
-        let notification = NSNotification(name: Constants.Notifications.LoggedOutNotification, object:nil, userInfo:nil)
+        let notification = NSNotification(name: Notification.LoggedOut.rawValue, object:nil, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
 }

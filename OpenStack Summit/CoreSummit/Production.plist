@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthenticationURL</key>
+	<string>https://identity-provider</string>
+	<key>ServerURL</key>
+	<string>https://resource-server</string>
+	<key>ClientIDOpenID</key>
+	<string>OpenID Client ID</string>
+	<key>SecretOpenID</key>
+	<string>OpenID Secret</string>
+	<key>ClientIDServiceAccount</key>
+	<string>Service Account Client ID</string>
+	<key>SecretServiceAccount</key>
+	<string>Service Account Secret</string>
+</dict>
+</plist>

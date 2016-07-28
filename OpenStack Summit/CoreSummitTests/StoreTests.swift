@@ -77,7 +77,7 @@ final class StoreTests: XCTestCase {
         
         waitForExpectationsWithTimeout(60, handler: nil)
     }
-    
+    /*
     func testFeedbackRequest() {
         
         clearRealm()
@@ -105,5 +105,5 @@ final class StoreTests: XCTestCase {
         }
         
         waitForExpectationsWithTimeout(60, handler: nil)
-    }
+    }*/
 }
