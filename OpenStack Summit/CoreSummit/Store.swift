@@ -24,7 +24,7 @@ public final class Store {
     /// The Realm storage context.
     public let realm = try! Realm()
     
-    public var configuration = Configuration.staging
+    public var configuration = Configuration(.Staging)
     
     /// The member that is logged in.
     public private(set) var authenticatedMember: RealmMember?

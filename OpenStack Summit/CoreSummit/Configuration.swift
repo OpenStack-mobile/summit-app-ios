@@ -10,12 +10,6 @@ import SwiftFoundation
 
 public struct Configuration {
     
-    // MARK: - Static Instances
-    
-    public static let production = Configuration(.Production)
-    
-    public static let staging = Configuration(.Staging)
-    
     // MARK: - Properties
     
     public let environment: Environment
@@ -24,7 +18,7 @@ public struct Configuration {
     
     // MARK: - Initialization
     
-    private init(_ environment: Environment = .Production) {
+    public init(_ environment: Environment) {
         
         self.environment = environment
         
