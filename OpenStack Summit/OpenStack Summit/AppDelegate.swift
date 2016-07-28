@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSummit
 import SWRevealViewController
 import RealmSwift
 import GoogleMaps
@@ -14,7 +15,7 @@ import GoogleMaps
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static private(set) var shared: AppDelegate!
+    static var shared: AppDelegate { return unsafeBitCast(UIApplication.sharedApplication().delegate!, AppDelegate.self) }
 
     var window: UIWindow?
     
@@ -25,13 +26,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        // set singleton
-        AppDelegate.shared = self
         
         // print app info
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
+        print("Using Environment: \(AppEnvironment.rawValue)")
+        
+        // set configuration
+        Store.shared.configuration = AppConfiguration
         
         // validate R.swift on debug builds
         R.assertValid()
