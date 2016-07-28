@@ -27,7 +27,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)/attendees/\(attendee)/schedule/\(event)"
         
-        let URL = Constants.Urls.ResourceServerBaseUrl + URI
+        let URL = configuration[.ServerURL] + URI
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         
@@ -69,7 +69,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)/attendees/\(attendee)/schedule/\(event)"
         
-        let URL = Constants.Urls.ResourceServerBaseUrl + URI
+        let URL = configuration[.ServerURL] + URI
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         
