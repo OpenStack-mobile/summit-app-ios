@@ -1512,7 +1512,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CORESUMMIT_CONFIGURATION = Staging;
+				CORESUMMIT_ENVIRONMENT = Staging;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
@@ -1536,7 +1536,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CORESUMMIT_CONFIGURATION = Production;
+				CORESUMMIT_ENVIRONMENT = Production;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
@@ -1708,7 +1708,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CORESUMMIT_CONFIGURATION = Staging;
+				CORESUMMIT_ENVIRONMENT = Staging;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
