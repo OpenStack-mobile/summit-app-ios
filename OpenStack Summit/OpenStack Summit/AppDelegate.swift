@@ -10,7 +10,7 @@ import UIKit
 import CoreSummit
 import SWRevealViewController
 import RealmSwift
-import GoogleMaps
+//import GoogleMaps
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
