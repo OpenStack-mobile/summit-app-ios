@@ -37,3 +37,7 @@ Fabric.framework/
 *.generated.swift
 
 Vendor
+
+OpenStack Summit/OpenStackSummit.app.dSYM.zip
+
+DeployBeta.sh
