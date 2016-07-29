@@ -8,7 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
-import GoogleMaps
+//import GoogleMaps
 import CoreSummit
 
 final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, IndicatorInfoProvider {

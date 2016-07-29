@@ -569,7 +569,7 @@
 		6E104D301D1061AC00541E84 /* OpenStack Summit */ = {
 			isa = PBXGroup;
 			children = (
-				6EFC99B61D2170E8009FD0DA /* ObjC Categories */,
+				6EFC99B61D2170E8009FD0DA /* Objective-C */,
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
 				6EF12C5E1D149B4B00814AD0 /* Define.swift */,
@@ -896,7 +896,7 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		6EFC99B61D2170E8009FD0DA /* ObjC Categories */ = {
+		6EFC99B61D2170E8009FD0DA /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
 				6EFC99B71D217140009FD0DA /* OpenStackSummit-Bridging-Header.h */,
@@ -907,7 +907,7 @@
 				6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */,
 				6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */,
 			);
-			name = "ObjC Categories";
+			name = "Objective-C";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

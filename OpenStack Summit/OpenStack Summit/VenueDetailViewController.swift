@@ -8,7 +8,7 @@
 
 import UIKit
 import ImageSlideshow
-import GoogleMaps
+// import GoogleMaps
 import CoreSummit
 
 final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {

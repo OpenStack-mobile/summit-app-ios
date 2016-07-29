@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleMaps
+//import GoogleMaps
 import CoreSummit
 
 final class VenueLocationDetailViewController: UIViewController, GMSMapViewDelegate {
