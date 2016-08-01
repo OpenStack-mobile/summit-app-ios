@@ -11,6 +11,7 @@ import CoreSummit
 import SWRevealViewController
 import RealmSwift
 //import GoogleMaps
+import AeroGearOAuth2
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -86,6 +87,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
+        // yeah, this code is correct. It should delete notification badge when entering app
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -95,7 +99,31 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? NSDictionary {
+                if let message = alert["message"] as? String {
+                    SweetAlert().showAlert("", subTitle: message, style: AlertStyle.None)
+                }
+            } else if let alert = aps["alert"] as? String {
+                SweetAlert().showAlert("", subTitle: alert, style: AlertStyle.None)
+            }
+        }
+        completionHandler(UIBackgroundFetchResult.NoData)
+    }
 
-
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object:nil, userInfo:[UIApplicationLaunchOptionsURLKey:url])
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+        return true
+    }
+    /*
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        // Store the deviceToken in the current installation and save it to Parse.
+        let currentInstallation: PFInstallation = PFInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.saveInBackground()
+    }*/
 }
 
