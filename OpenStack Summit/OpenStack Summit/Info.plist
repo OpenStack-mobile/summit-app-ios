@@ -21,11 +21,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>org.openstack.ios.summit</string>
+			<string>org.openstack.ios.openstack-summit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>org.openstack.ios.summit</string>
+				<string>org.openstack.ios.openstack-summit</string>
 			</array>
 		</dict>
 	</array>
