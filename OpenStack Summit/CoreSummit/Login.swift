@@ -16,46 +16,33 @@ public extension Store {
     /// The member that is logged in.
     var authenticatedMember: RealmMember? {
         
-        guard let member = RealmMember.find(member.identifier, realm: self.realm)
+        guard let session = self.session,
+            let sessionMember = session.member,
+            case let .attendee(memberID) = sessionMember,
+            let member = RealmMember.find(memberID, realm: self.realm)
             else { return nil }
+        
+        return member
     }
     
     var isLoggedIn: Bool {
         
-        guard let session = self.session
-            else { return false }
-        
-        return 
-        
-        checkState()
-        return session.get(kCurrentMemberId) != nil
+        return self.session?.member != nil
     }
     
-    public func isLoggedInAndConfirmedAttendee() -> Bool {
-        let currentMemberId = session.get(kCurrentMemberId) as? Int
-        return isLoggedIn() && currentMemberId != kLoggedInNotConfirmedAttendee;
+    var confirmedAttendee: Bool {
+        
+        guard let session = self.session,
+            let sessionMember = session.member,
+            case .attendee(_) = sessionMember
+            else { return false }
+        
+        return true
     }
     
     func login(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
         
         oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
-            
-            /*
-             if error != nil {
-             printerr(error)
-             Crashlytics.sharedInstance().recordError(error!)
-             return
-             }
-             
-             partialCompletionBlock()
-             
-             if accessToken == nil {
-             return
-             }
-             
-             
-             self.linkAttendeeIfExist(completionBlock);
-             */
             
             guard error == nil
                 else { completion(.Error(error!)) ; return }
@@ -70,12 +57,11 @@ public extension Store {
                     
                     completion(.Error(error))
                     
-                case let .Value(member):
-                    
-                    // save
-                    self.authenticatedMember = RealmMember.find(member.identifier, realm: self.realm)!
+                case .Value:
                     
                     completion(.Value())
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
                 }
             }
         }

@@ -9,9 +9,12 @@
 /// Provides the storage for session values
 public protocol SessionStorage {
     
-    var member: Identifier  { get set }
+    var member: SessionMember?  { get set }
+}
+
+/// The type of member for the current session. 
+public enum SessionMember {
     
-    var memberFullname: String { get set }
-    
-    func clear()
+    case attendee(Identifier)
+    case nonConfirmedAttendee
 }
