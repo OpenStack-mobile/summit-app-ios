@@ -26,8 +26,7 @@ public final class Store {
     
     public var configuration = Configuration(.Staging)
     
-    /// The member that is logged in.
-    public private(set) var authenticatedMember: RealmMember?
+    public var session: SessionStorage?
     
     // MARK: - Private / Internal Properties
     
@@ -41,9 +40,9 @@ public final class Store {
         return queue
     }()
     
-    private var oauthModuleOpenID: OAuth2Module?
+    internal var oauthModuleOpenID: OAuth2Module!
     
-    private var oauthModuleServiceAccount: OAuth2Module?
+    internal var oauthModuleServiceAccount: OAuth2Module!
     
     // MARK: - Initialization
     
@@ -164,29 +163,6 @@ public final class Store {
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
     
-    public func login(completionBlock: (NSError?) -> Void, partialCompletionBlock: (Void) -> Void) {
-        
-        oauthModuleOpenID!.login {(accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
-            
-            /*
-            if error != nil {
-                printerr(error)
-                Crashlytics.sharedInstance().recordError(error!)
-                return
-            }
-            
-            partialCompletionBlock()
-            
-            if accessToken == nil {
-                return
-            }
-            
-            
-            self.linkAttendeeIfExist(completionBlock);
-            */
-        }
-    }
-    
     @objc private func revokedAccess(notification: NSNotification) {
         //self.session.set(self.kCurrentMemberId, value: nil)
         let notification = NSNotification(name: Notification.LoggedOut.rawValue, object:nil, userInfo:nil)
@@ -217,6 +193,16 @@ public extension Store {
     }
 }
 
+public extension Store {
+    
+    public enum Notification: String {
+        
+        case LoggedIn           = "CoreSummit.Store.Notification.LoggedIn"
+        case LoggedOut          = "CoreSummit.Store.Notification.LoggedOut"
+        case ForcedLoggedOut    = "CoreSummit.Store.Notification.ForcedLoggedOut"
+    }
+}
+
 internal extension Store {
     
     enum RequestType {
@@ -224,4 +210,3 @@ internal extension Store {
         case OpenIDGetFormUrlEncoded, OpenIDJSON, ServiceAccount
     }
 }
-
