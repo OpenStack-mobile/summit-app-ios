@@ -358,6 +358,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 
                 controller.hideMenu()
                 
+                controller.hideActivityIndicator()
+                
                 switch response {
                     
                 case let .Error(error):
@@ -368,11 +370,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     
                     controller.showUserProfile()
                     controller.reloadMenu()
-                    controller.hideActivityIndicator()
                     
-                    if controller.isLoggedInAndConfirmedAttendee == false {
+                    if Store.shared.confirmedAttendee == false {
                         
-                        controller.viewController.navigateToMyProfile()
+                        controller.navigateToMyProfile()
                     }
                 }
             }
