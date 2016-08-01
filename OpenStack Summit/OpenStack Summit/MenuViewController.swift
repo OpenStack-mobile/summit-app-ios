@@ -342,7 +342,41 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func login() {
         
-        // FIXME: Implement login
+        guard Store.shared.realm.objects(RealmSummit).count > 0 else {
+            
+            showInfoMessage("Info", message: "Summit data is required to log in.")
+            return
+        }
+        
+        showActivityIndicator()
+        
+        Store.shared.login { [weak self] (response) in
+            
+            guard let controller = self else { return }
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                controller.hideMenu()
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    controller.showErrorMessage(error as NSError)
+                    
+                case .Value:
+                    
+                    controller.showUserProfile()
+                    controller.reloadMenu()
+                    controller.hideActivityIndicator()
+                    
+                    if controller.isLoggedInAndConfirmedAttendee == false {
+                        
+                        controller.viewController.navigateToMyProfile()
+                    }
+                }
+            }
+        }
     }
     
     private func logout() {
