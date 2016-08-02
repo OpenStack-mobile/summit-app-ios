@@ -13,7 +13,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    /// The member that is logged in.
+    /// The member that is logged in. Only valid for confirmed attendees.
     var authenticatedMember: RealmMember? {
         
         guard let session = self.session,
@@ -42,7 +42,11 @@ public extension Store {
     
     func login(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
         
-        func success() {
+        @inline(__always)
+        func success(name name: String, member: SessionMember) {
+            
+            self.session?.name = name
+            self.session?.member = member
             
             completion(.Value())
             
@@ -81,10 +85,7 @@ public extension Store {
                                 
                             case let .Value(name):
                                 
-                                self.session?.name =
-                                self.session?.member = .nonConfirmedAttendee
-                                
-                                success()
+                                success(name: name, member: .nonConfirmedAttendee)
                             }
                         }
                         
@@ -95,9 +96,7 @@ public extension Store {
                     
                 case let .Value(member):
                     
-                    self.session?.member = .attendee(member.identifier)
-                    
-                    success()
+                    success(name: member.name, member: .attendee(member.identifier))
                 }
             }
         }

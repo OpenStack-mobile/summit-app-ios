@@ -81,6 +81,19 @@ public final class UserDefaultsSessionStorage: SessionStorage {
         }
     }
     
+    public var name: String? {
+        
+        get { return userDefaults.stringForKey(Key.name.rawValue) }
+        
+        set {
+            
+            guard let stringValue = newValue
+                else { userDefaults.removeObjectForKey(Key.name.rawValue); return }
+            
+            userDefaults.setObject(stringValue as NSString, forKey: Key.name.rawValue)
+        }
+    }
+    
     private enum Key: String {
         
         case member = "CoreSummit.UserDefaultsSessionStorage.Key.Member"
