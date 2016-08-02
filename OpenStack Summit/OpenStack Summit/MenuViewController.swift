@@ -109,15 +109,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 }
             }*/
         }
-        
-        self.showUserProfile()
-        self.reloadMenu()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        self.showUserProfile()
+        self.reloadMenu()
     }
     
     // MARK: - Actions
@@ -227,11 +225,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         toggleMenuSelection(eventsButton)
     }
     
-    @inline(__always)
-    private func navigateToMyProfile() {
-        toggleMenuSelection(myProfileButton)
-    }
-    
     private func showUserProfile() {
         
         if let realmMember = Store.shared.authenticatedMember {
@@ -310,20 +303,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func showMyProfile() {
         
-        if let _ = Store.shared.authenticatedMember {
+        if Store.shared.isLoggedIn {
             
-            func isLoggedInAndConfirmedAttendee() -> Bool {
-                /*
-                let currentMemberId = session.get(kCurrentMemberId) as? Int
-                return isLoggedIn() && currentMemberId != kLoggedInNotConfirmedAttendee;
-                */ return false
-            }
-            
-            if isLoggedInAndConfirmedAttendee() {
+            if Store.shared.isLoggedInAndConfirmedAttendee {
                 
-                /*
+                let myProfileViewController = MyProfileViewController()
+                let navigationController = AppDelegate.shared.navigationController
+                let revealViewController = AppDelegate.shared.revealViewController
+                
                 navigationController.setViewControllers([myProfileViewController], animated: false)
-                revealViewController.pushFrontViewController(navigationController, animated: true)*/
+                revealViewController.pushFrontViewController(navigationController, animated: true)
                 
             } else {
                 
@@ -384,9 +373,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     controller.showUserProfile()
                     controller.reloadMenu()
                     
-                    if Store.shared.confirmedAttendee == false {
+                    if Store.shared.isLoggedInAndConfirmedAttendee == false {
                         
-                        controller.navigateToMyProfile()
+                        controller.toggleMenuSelection(controller.myProfileButton)
                     }
                 }
             }
