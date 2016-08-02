@@ -40,7 +40,7 @@ public extension Store {
         return true
     }
     
-    func login(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
+    func login(summit: Identifier? = nil, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
         
         @inline(__always)
         func success(name name: String, member: SessionMember) {
@@ -63,6 +63,8 @@ public extension Store {
             
             guard error == nil
                 else { completion(.Error(error!)) ; return }
+            
+            loginCallback()
             
             // link attendee
             

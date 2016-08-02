@@ -44,15 +44,19 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         didSet {
             
-            /*
-            #if DEBUG
-                picUrlInternal = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            #else
-                picUrlInternal = newValue
-            #endif*/
+            let picURLInternal: String
+            
+            if AppEnvironment == .Staging {
+                
+                picURLInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                
+            } else {
+                
+                picURLInternal = pictureURL
+            }
 
-            if pictureURL.isEmpty == false {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: pictureURL)!)
+            if picURLInternal.isEmpty == false {
+                pictureImageView.hnk_setImageFromURL(NSURL(string: picURLInternal)!)
             }
             else {
                 pictureImageView.image = R.image.genericUserAvatar()!
@@ -252,9 +256,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             
         } else {
             
-            name = ""
+            name = Store.shared.session?.name ?? ""
             pictureURL = ""
         }
+        
+        
     }
     
     // MARK: Navigation
@@ -350,7 +356,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         showActivityIndicator()
         
-        Store.shared.login { [weak self] (response) in
+        Store.shared.login(loginCallback: {
+            
+            // return from SafariVC
+            dispatch_async(dispatch_get_main_queue(),{
+                self.showActivityIndicator()
+            })
+            
+        }) { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -381,8 +394,20 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     }
     
     private func logout() {
-        
-        
+        /*
+        interactor.logout() {error in
+            if (error != nil) {
+                self.viewController.showErrorMessage(error!)
+                return
+            }
+            self.showPersonProfile(PersonDTO(), error: nil)
+            
+            self.viewController.navigateToHome()
+            self.viewController.reloadMenu()
+            self.viewController.hideMenu()
+            self.viewController.hideActivityIndicator()
+        }
+        */
     }
     
     // MARK: - SWRevealViewControllerDelegate
