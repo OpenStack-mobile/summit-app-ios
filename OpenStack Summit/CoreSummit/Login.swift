@@ -30,7 +30,7 @@ public extension Store {
         return self.session?.member != nil
     }
     
-    var confirmedAttendee: Bool {
+    var isLoggedInAndConfirmedAttendee: Bool {
         
         guard let session = self.session,
             let sessionMember = session.member,

@@ -39,6 +39,9 @@ public extension Store {
     
     var memberRole: MemberRole {
         
+        guard isLoggedIn
+            else { return .anonymous }
+        
         if let currentMember = self.authenticatedMember {
             
             if (currentMember.speakerRole != nil) {

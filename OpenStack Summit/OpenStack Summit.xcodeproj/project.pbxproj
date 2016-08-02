@@ -169,6 +169,7 @@
 		6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */; };
 		6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
 		6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */; };
+		6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */; };
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
 		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
@@ -436,6 +437,7 @@
 		6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInMemberRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD11D4EC46C00806924 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendeeRequest.swift; sourceTree = "<group>"; };
+		6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelListViewController.swift; sourceTree = "<group>"; };
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
@@ -893,6 +895,7 @@
 				6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */,
 				6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */,
 				6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */,
+				6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */,
 				6E2538481D1AEAE1003E3400 /* PersonalScheduleViewController.swift */,
 				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
@@ -1253,6 +1256,7 @@
 				6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */,
 				6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */,
 				6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */,
+				6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */,
 				6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */,
 				6E1BB01D1D36F1D000F9F95F /* FeedbackEditViewController.swift in Sources */,
 				6EF12C571D14999E00814AD0 /* MessageEnabledViewController.swift in Sources */,
