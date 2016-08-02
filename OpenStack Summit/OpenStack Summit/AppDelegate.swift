@@ -32,15 +32,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
-        // set configuration
-        Store.shared.configuration = AppConfiguration
-        
-        // validate R.swift on debug builds
-        R.assertValid()
-        
-        // configure global appearance
-        SetAppearance()
-        
         // update app build
         if AppBuild != Preference.appBuild {
             
@@ -56,6 +47,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // set configuration
+        Store.shared.configuration = AppConfiguration
+        
+        // validate R.swift on debug builds
+        R.assertValid()
+        
+        // configure global appearance
+        SetAppearance()
+                
         // setup Google Maps
         GMSServices.provideAPIKey("Google Maps API Key")
         

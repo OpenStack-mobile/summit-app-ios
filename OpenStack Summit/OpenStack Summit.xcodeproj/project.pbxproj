@@ -168,6 +168,7 @@
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
 		6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */; };
 		6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
+		6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */; };
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
 		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
@@ -434,6 +435,7 @@
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInMemberRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD11D4EC46C00806924 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendeeRequest.swift; sourceTree = "<group>"; };
 		6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelListViewController.swift; sourceTree = "<group>"; };
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */,
 				6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */,
 				6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */,
+				6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -1368,6 +1371,7 @@
 				6E10A5831D10675D008CBD0C /* RealmSummitEvent.swift in Sources */,
 				6E087DCE1D4A5DE900CDC935 /* Environment.swift in Sources */,
 				6E10A57D1D10675D008CBD0C /* RealmNonConfirmedSummitAttendee.swift in Sources */,
+				6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */,
 				6E10A5951D10675D008CBD0C /* TimeZone.swift in Sources */,
 				6E10A57C1D10675D008CBD0C /* RealmNamed.swift in Sources */,
 				6E10A5971D10675D008CBD0C /* Track.swift in Sources */,

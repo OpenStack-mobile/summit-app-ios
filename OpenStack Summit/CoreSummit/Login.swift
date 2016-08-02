@@ -42,6 +42,19 @@ public extension Store {
     
     func login(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
         
+        func success() {
+            
+            completion(.Value())
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+        }
+        
+        @inline(__always)
+        func failure(error: ErrorType) {
+            
+            completion(.Error(error))
+        }
+        
         oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             
             guard error == nil
@@ -55,13 +68,36 @@ public extension Store {
                     
                 case let .Error(error):
                     
-                    completion(.Error(error))
+                    // get non confirmed attendee
+                    guard (error as NSError).code != 404 else {
+                        
+                        self.loggedInAttendee() { (response) in
+                            
+                            switch response {
+                                
+                            case let .Error(error):
+                                
+                                failure(error)
+                                
+                            case let .Value(name):
+                                
+                                self.session?.name =
+                                self.session?.member = .nonConfirmedAttendee
+                                
+                                success()
+                            }
+                        }
+                        
+                        return
+                    }
                     
-                case .Value:
+                    failure(error)
                     
-                    completion(.Value())
+                case let .Value(member):
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+                    self.session?.member = .attendee(member.identifier)
+                    
+                    success()
                 }
             }
         }
