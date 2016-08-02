@@ -50,6 +50,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // set configuration
         Store.shared.configuration = AppConfiguration
         
+        // set session storage
+        Store.shared.session = UserDefaultsSessionStorage()
+        
         // validate R.swift on debug builds
         R.assertValid()
         
