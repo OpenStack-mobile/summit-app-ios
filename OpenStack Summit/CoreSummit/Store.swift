@@ -89,9 +89,6 @@ public final class Store {
     
     internal func createHTTP(type: RequestType) -> Http {
         
-        // create the oauth accounts
-        configOAuthAccounts()
-        
         let http: Http
         if (type == .OpenIDGetFormUrlEncoded) {
             http = Http(responseSerializer: StringResponseSerializer())
