@@ -11,3 +11,4 @@ import RealmSwift
 public class RealmNonConfirmedSummitAttendee: RealmNamed {
     
 }
+
