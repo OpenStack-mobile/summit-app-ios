@@ -146,6 +146,7 @@
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
 		6E7E18EA1D490DAC009549BA /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E18E91D490DAC009549BA /* Preference.swift */; };
+		6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFD71D26D347009524C7 /* TrackListViewController.swift */; };
 		6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */; };
 		6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */; };
@@ -206,6 +207,8 @@
 		6EF1C84B1D148C3C0060BF45 /* PeopleListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8471D148C3C0060BF45 /* PeopleListView.xib */; };
 		6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */; };
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
+		6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */; };
+		6EF2FB391D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */; };
 		6EFC6E651D2300260087057A /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E641D2300260087057A /* VenuesViewController.swift */; };
 		6EFC6E671D2320610087057A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E661D2320610087057A /* Reachability.swift */; };
 		6EFC6E691D2322E70087057A /* EventScheduleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */; };
@@ -414,6 +417,7 @@
 		6E7E18E91D490DAC009549BA /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		6E7E18F31D495DA7009549BA /* Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
 		6E7E18F41D495DA7009549BA /* Staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Staging.plist; sourceTree = "<group>"; };
+		6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAttendeeFromOrderListRequest.swift; sourceTree = "<group>"; };
 		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
 		6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleViewController.swift; sourceTree = "<group>"; };
@@ -474,6 +478,8 @@
 		6EF1C8471D148C3C0060BF45 /* PeopleListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleListView.xib; sourceTree = "<group>"; };
 		6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
+		6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
+		6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeesForTicketOrderRequest.swift; sourceTree = "<group>"; };
 		6EFC6E641D2300260087057A /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
 		6EFC6E661D2320610087057A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventScheduleRequest.swift; sourceTree = "<group>"; };
@@ -774,6 +780,8 @@
 				6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */,
 				6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */,
 				6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */,
+				6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */,
+				6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -888,6 +896,7 @@
 				6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */,
 				6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */,
 				6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */,
+				6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */,
 				6EFC99BE1D218280009FD0DA /* MenuViewController.swift */,
 				6EFC6E641D2300260087057A /* VenuesViewController.swift */,
 				6E313C171D4123AE005132DA /* VenueListViewController.swift */,
@@ -1275,6 +1284,7 @@
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
+				6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
 				6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */,
 				6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */,
@@ -1344,6 +1354,7 @@
 				6E10A5621D10675D008CBD0C /* EventType.swift in Sources */,
 				6E10A59C1D10675D008CBD0C /* Venue.swift in Sources */,
 				6E10A5941D10675D008CBD0C /* TicketTypeJSON.swift in Sources */,
+				6EF2FB391D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift in Sources */,
 				6E10A5761D10675D008CBD0C /* RealmCompany.swift in Sources */,
 				6E10A58E1D10675D008CBD0C /* SummitJSON.swift in Sources */,
 				6E10A5851D10675D008CBD0C /* RealmTag.swift in Sources */,
@@ -1356,6 +1367,7 @@
 				6E10A5791D10675D008CBD0C /* RealmImage.swift in Sources */,
 				6E10A57B1D10675D008CBD0C /* RealmMember.swift in Sources */,
 				6E57DB701D11BE8B00F5574C /* Define.swift in Sources */,
+				6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */,
 				6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */,
 				6E10A56D1D10675D008CBD0C /* Named.swift in Sources */,
 				6E10A58F1D10675D008CBD0C /* SummitType.swift in Sources */,

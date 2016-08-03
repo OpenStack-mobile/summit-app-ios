@@ -249,11 +249,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             
         } else {
             
-            name = Store.shared.session?.name ?? ""
+            name = ""
             pictureURL = ""
         }
-        
-        
     }
     
     // MARK: Navigation
@@ -279,7 +277,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }
     
-    private func showEvents() {
+    func showEvents() {
         
         highlight(.Events)
         
