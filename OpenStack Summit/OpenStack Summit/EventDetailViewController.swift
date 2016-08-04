@@ -377,7 +377,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         self.date = eventDetail.dateTime
         self.sponsors = eventDetail.sponsors
         self.summitTypes = eventDetail.summitTypes
-        self.allowFeedback = eventDetail.allowFeedback && eventDetail.finished /* && interactor.isLoggedInAndConfirmedAttendee() */ && myFeedbackForEvent == nil
+        self.allowFeedback = eventDetail.allowFeedback && eventDetail.finished && Store.shared.isLoggedInAndConfirmedAttendee && myFeedbackForEvent == nil
         self.hasSpeakers = eventDetail.speakers.count > 0
         self.hasAnyFeedback = false
         self.speakersTableView.reloadData()
