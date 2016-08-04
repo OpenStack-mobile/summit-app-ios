@@ -26,7 +26,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/" + summitID + "/external-orders/" + orderList + "/external-attendees/ + \(externalAttendee)" + "/confirm"
+        let URI = "/api/v1/summits/" + summitID + "/external-orders/" + orderList + "/external-attendees/" + "\(externalAttendee)" + "/confirm"
         
         let URL = configuration[.ServerURL] + URI
         
