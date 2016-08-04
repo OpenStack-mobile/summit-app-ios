@@ -263,7 +263,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        cell.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ true // FIXME Login
+        cell.isScheduledStatusVisible = Store.shared.isLoggedInAndConfirmedAttendee
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
         
         // configure button
