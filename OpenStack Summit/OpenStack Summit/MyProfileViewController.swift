@@ -28,7 +28,7 @@ final class MyProfileViewController: RevealTabStripViewController {
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
-        let memberProfileDetailViewController = R.storyboard.memberProfile.memberProfileDetailViewController()!
+        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
         let feedbackGivenListViewController = R.storyboard.feedback.feedbackGivenListViewController()!
         
         var childViewControllers = [personalScheduleViewController,

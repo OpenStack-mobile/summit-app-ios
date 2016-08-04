@@ -63,7 +63,7 @@ final class MemberProfileViewController: RevealTabStripViewController {
         
         var childViewControllers = [UIViewController]()
         
-        let memberProfileDetailVC = R.storyboard.memberProfile.memberProfileDetailViewController()!
+        let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
         
         memberProfileDetailVC.profile = profile
         

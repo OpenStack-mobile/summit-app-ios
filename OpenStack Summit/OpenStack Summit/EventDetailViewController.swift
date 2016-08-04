@@ -538,7 +538,7 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
         
         let speaker = eventDetail.speakers[indexPath.row]
         
-        let memberVC = R.storyboard.memberProfile.memberProfileDetailViewController()!
+        let memberVC = R.storyboard.member.memberProfileDetailViewController()!
         
         memberVC.profile = MemberProfileIdentifier(speaker: speaker)
         
