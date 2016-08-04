@@ -161,7 +161,7 @@
 		6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */; };
 		6EB699E51D3413080095474D /* ScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB699E41D3413080095474D /* ScheduleFilterViewController.swift */; };
 		6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB699E61D3416AF0095474D /* ScheduleFilter.storyboard */; };
-		6EB7525C1D187DB900BC294D /* MemberProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */; };
+		6EB7525C1D187DB900BC294D /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7525B1D187DB900BC294D /* Member.storyboard */; };
 		6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */; };
 		6EB752601D18AF2800BC294D /* MemberProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */; };
 		6EB752621D18B14C00BC294D /* MemberProfileIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */; };
@@ -432,7 +432,7 @@
 		6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackTableViewCell.xib; sourceTree = "<group>"; };
 		6EB699E41D3413080095474D /* ScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6EB699E61D3416AF0095474D /* ScheduleFilter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScheduleFilter.storyboard; sourceTree = "<group>"; };
-		6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MemberProfile.storyboard; sourceTree = "<group>"; };
+		6EB7525B1D187DB900BC294D /* Member.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
 		6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
 		6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailViewController.swift; sourceTree = "<group>"; };
 		6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileIdentifier.swift; sourceTree = "<group>"; };
@@ -589,7 +589,7 @@
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */,
 				6EFC99C01D2198DF009FD0DA /* Menu.storyboard */,
-				6EB7525B1D187DB900BC294D /* MemberProfile.storyboard */,
+				6EB7525B1D187DB900BC294D /* Member.storyboard */,
 				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
 				6E2537E71D19B1C4003E3400 /* Schedule.storyboard */,
 				6EB699E61D3416AF0095474D /* ScheduleFilter.storyboard */,
@@ -1107,7 +1107,7 @@
 				6E2537EC1D19B203003E3400 /* ScheduleView.xib in Resources */,
 				6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */,
 				6EF147F31D1358B400D5EEF9 /* People.storyboard in Resources */,
-				6EB7525C1D187DB900BC294D /* MemberProfile.storyboard in Resources */,
+				6EB7525C1D187DB900BC294D /* Member.storyboard in Resources */,
 				6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */,
 				6EF1C84B1D148C3C0060BF45 /* PeopleListView.xib in Resources */,
 				6E2538281D1A14E1003E3400 /* ScheduleTableViewCell.xib in Resources */,

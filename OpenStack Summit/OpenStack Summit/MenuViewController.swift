@@ -259,22 +259,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     private func showSpeakers() {
         
         let speakersVC = R.storyboard.people.speakerListViewController()!
-        let navigationController = AppDelegate.shared.navigationController
-        let revealViewController = AppDelegate.shared.revealViewController
         
-        navigationController.setViewControllers([speakersVC], animated: false)
-        revealViewController.pushFrontViewController(navigationController, animated: true)
+        show(speakersVC)
     }
     
     private func showSearch(for term: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
-        let navigationController = AppDelegate.shared.navigationController
-        let revealViewController = AppDelegate.shared.revealViewController
-        
         searchViewController.searchTerm = term
-        navigationController.setViewControllers([searchViewController], animated: false)
-        revealViewController.pushFrontViewController(navigationController, animated: true)
+        
+        show(searchViewController)
     }
     
     func showEvents() {
@@ -282,21 +276,15 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         highlight(.Events)
         
         let eventsViewController = EventsViewController()
-        let navigationController = AppDelegate.shared.navigationController
-        let revealViewController = AppDelegate.shared.revealViewController
         
-        navigationController.setViewControllers([eventsViewController], animated: false)
-        revealViewController.pushFrontViewController(navigationController, animated: true)
+        show(eventsViewController)
     }
     
     private func showVenues() {
         
         let venuesViewController = VenuesViewController()
-        let navigationController = AppDelegate.shared.navigationController
-        let revealViewController = AppDelegate.shared.revealViewController
         
-        navigationController.setViewControllers([venuesViewController], animated: false)
-        revealViewController.pushFrontViewController(navigationController, animated: true)
+        show(venuesViewController)
     }
     
     private func showMyProfile() {
@@ -306,17 +294,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             if Store.shared.isLoggedInAndConfirmedAttendee {
                 
                 let myProfileViewController = MyProfileViewController()
-                let navigationController = AppDelegate.shared.navigationController
-                let revealViewController = AppDelegate.shared.revealViewController
                 
-                navigationController.setViewControllers([myProfileViewController], animated: false)
-                revealViewController.pushFrontViewController(navigationController, animated: true)
+                show(myProfileViewController)
                 
             } else {
                 
-                /*
-                navigationController.setViewControllers([memberOrderConfirmViewController], animated: false)
-                revealViewController.pushFrontViewController(navigationController, animated: true)*/
+                let memberOrderConfirmViewController = R.storyboard.member.memberOrderConfirmViewController()!
+                
+                show(memberOrderConfirmViewController)
             }
         }
     }
@@ -324,10 +309,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     private func showAbout() {
         
         let aboutViewController = R.storyboard.menu.aboutViewController()!
+        
+        show(aboutViewController)
+    }
+    
+    private func show(viewController: UIViewController) {
+        
         let navigationController = AppDelegate.shared.navigationController
         let revealViewController = AppDelegate.shared.revealViewController
         
-        navigationController.setViewControllers([aboutViewController], animated: false)
+        navigationController.setViewControllers([viewController], animated: false)
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }
     
