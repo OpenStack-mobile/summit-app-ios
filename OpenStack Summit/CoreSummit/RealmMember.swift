@@ -25,34 +25,15 @@ public extension Store {
     
     func isEventScheduledByLoggedMember(event eventID: Int) -> Bool {
         
-        /* FIXME: Implement Login
-         if !Store.shared.isLoggedInAndConfirmedAttendee() {
-         return false;
-         } */
-        
-        guard let loggedInMember = Store.shared.authenticatedMember else {
-            return false
-        }
+        guard let loggedInMember = self.authenticatedMember
+            where self.isLoggedInAndConfirmedAttendee
+            else { return false }
         
         return loggedInMember.attendeeRole?.scheduledEvents.filter("id = \(eventID)").count > 0
     }
 }
 
 public extension RealmMember {
-    
-    func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
-        
-        /* FIXME: Implement Login
-         if !Store.shared.isLoggedInAndConfirmedAttendee() {
-         return false;
-         } */
-        
-        guard let loggedInMember = Store.shared.authenticatedMember else {
-            return false
-        }
-        
-        return loggedInMember.attendeeRole?.scheduledEvents.filter("id = \(eventId)").count > 0
-    }
     
     func feedback(forEvent eventID: Identifier) -> RealmFeedback? {
         
