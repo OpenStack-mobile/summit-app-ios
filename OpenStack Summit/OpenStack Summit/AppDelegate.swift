@@ -45,6 +45,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
             }
+            
+            // clear session
+            Store.shared.session = UserDefaultsSessionStorage()
+            Store.shared.session?.clear()
         }
         
         // set configuration
