@@ -106,8 +106,17 @@ public extension Store {
                 
             case let .Value(member):
                 
+                try! self.realm.write { member.save(self.realm) }
+                
                 success(name: member.name, member: .attendee(member.identifier))
             }
         }
+    }
+    
+    func logout() {
+        
+        session?.clear()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
     }
 }

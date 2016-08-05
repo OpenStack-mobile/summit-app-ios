@@ -372,20 +372,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     }
     
     private func logout() {
-        /*
-        interactor.logout() {error in
-            if (error != nil) {
-                self.viewController.showErrorMessage(error!)
-                return
-            }
-            self.showPersonProfile(PersonDTO(), error: nil)
-            
-            self.viewController.navigateToHome()
-            self.viewController.reloadMenu()
-            self.viewController.hideMenu()
-            self.viewController.hideActivityIndicator()
-        }
-        */
+        
+        showUserProfile()
+        navigateToHome()
+        reloadMenu()
+        hideMenu()
+        hideActivityIndicator()
+        
+        Store.shared.logout()
     }
     
     // MARK: - SWRevealViewControllerDelegate
@@ -438,7 +432,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     @objc private func revokedAccess(notification: NSNotification) {
         
-        //presenter.revokedAccess()
+        showUserProfile()
+        navigateToHome()
+        reloadMenu()
+        hideMenu()
+        hideActivityIndicator()
+        
         showInfoMessage("Session expired", message: "Your session expired, please log in again using your credentials")
     }
 }

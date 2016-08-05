@@ -12,7 +12,7 @@ public extension SummitAttendee {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, email, title, bio, irc, twitter, member_id, pic, schedule, tickets, feedback
+        case first_name, last_name, title, bio, irc, twitter, member_id, pic, speaker, schedule, feedback, tickets
     }
 }
 
@@ -21,15 +21,10 @@ extension SummitAttendee: JSONDecodable {
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let email = JSONObject[JSONKey.email.rawValue]?.rawValue as? String,
-            let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
-            let biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String,
-            let irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String,
-            let twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String,
             let scheduledEventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
             let scheduledEvents = Event.fromJSON(scheduledEventsJSONArray),
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
@@ -38,17 +33,17 @@ extension SummitAttendee: JSONDecodable {
             let feedback = Feedback.fromJSON(feedbackJSONArray)
             else { return nil }
         
-        self.identifier = identifier
+        self.identifier = memberID
         self.firstName = firstName
         self.lastName = lastName
-        self.email = email
-        self.title = title
         self.pictureURL = pictureURL
-        self.biography = biography
-        self.irc = irc
-        self.twitter = twitter
         self.scheduledEvents = scheduledEvents
         self.tickets = tickets
         self.feedback = feedback
+        
+        // optional
+        self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
+        self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
+        self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
     }
 }

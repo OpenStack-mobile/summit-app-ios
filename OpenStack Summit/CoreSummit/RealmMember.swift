@@ -96,6 +96,24 @@ extension Member: RealmEncodable {
         realmEntity.irc = irc ?? ""
         realmEntity.bio = biography ?? ""
         
+        if let speaker = speakerRole {
+            
+            realmEntity.speakerRole = speaker.save(realm)
+            
+        } else {
+            
+            realmEntity.speakerRole = nil
+        }
+        
+        if let attendee = attendeeRole {
+            
+            realmEntity.attendeeRole = attendee.save(realm)
+            
+        } else {
+            
+            realmEntity.attendeeRole = nil
+        }
+        
         return realmEntity
     }
 }
