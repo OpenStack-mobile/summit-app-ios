@@ -145,36 +145,53 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
         
         Store.shared.selectAttendee(from: orderNumber, externalAttendee: nonConfirmedSummitAttendee.identifier) { [weak self] (response) in
             
-            guard let controller = self else { return }
-            
-            controller.hideActivityIndicator()
-            
-            switch response {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
                 
-            case let .Error(error):
+                guard let controller = self else { return }
                 
-                let code = (error as NSError).code
+                controller.hideActivityIndicator()
                 
-                switch code {
+                switch response {
                     
-                case 412:
+                case let .Error(error):
                     
-                    controller.showInfoMessage("Info", message: "This Order# has already been associated with another user. If you feel this is an error, please contact summitapp@openstack.org or enter a different Order #.")
+                    let code = (error as NSError).code
                     
-                case 404:
+                    switch code {
+                        
+                    case 412:
+                        
+                        controller.showInfoMessage("Info", message: "This Order# has already been associated with another user. If you feel this is an error, please contact summitapp@openstack.org or enter a different Order #.")
+                        
+                    case 404:
+                        
+                        controller.showInfoMessage("Info", message: "Order wasn\'t found. Please verify that you provided correct order # and try again.")
+                        
+                    default:
+                        
+                        controller.showErrorMessage(error as NSError)
+                    }
                     
-                    controller.showInfoMessage("Info", message: "Order wasn\'t found. Please verify that you provided correct order # and try again.")
+                case .Value:
                     
-                default:
-                    
-                    controller.showErrorMessage(error as NSError)
+                    Store.shared.linkAttendee() { (response) in
+                        
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            
+                            switch response {
+                                
+                            case let .Error(error):
+                                
+                                controller.showErrorMessage(error as NSError)
+                                
+                            case .Value:
+                                
+                                controller.showAttendeesSelector(false)
+                                AppDelegate.shared.menuViewController.showEvents()
+                            }
+                        }
+                    }
                 }
-                
-            case .Value:
-                
-                controller.showAttendeesSelector(false)
-                
-                AppDelegate.shared.menuViewController.showEvents()
             }
         }
     }

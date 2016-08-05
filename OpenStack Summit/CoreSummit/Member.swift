@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Member: Person {
+public struct Member: Named {
     
     public let identifier: Identifier
     
@@ -14,12 +14,8 @@ public struct Member: Person {
     
     public var lastName: String
     
-    public var title: String?
-    
     public var pictureURL: String
-    
-    public var email: String
-    
+        
     public var twitter: String?
     
     public var irc: String?
@@ -34,6 +30,11 @@ public struct Member: Person {
 }
 
 // MARK: - Extensions
+
+extension Member: Person {
+    
+    public var title: String? { return nil }
+}
 
 public extension Store {
     
