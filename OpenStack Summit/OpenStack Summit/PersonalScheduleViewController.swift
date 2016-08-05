@@ -8,16 +8,39 @@
 
 import UIKit
 import XLPagerTabStrip
-import SwiftSpinner
+import CoreSummit
 
 final class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
-    // MARK: - Loading
+    // MARK: - Methods
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         
-        //presenter.viewLoad()
+        guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
+            else { return [] }
+        
+        let events = attendeeRole.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        
+        var activeDates: [NSDate] = []
+        for event in events {
+            let timeZone = NSTimeZone(name: event.summit.timeZone)!
+            let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
+            if !activeDates.contains(startDate) {
+                activeDates.append(startDate)
+            }
+            
+        }
+        return activeDates
+    }
+    
+    override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+        
+        guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
+            else { return [] }
+        
+        let realmEvents = attendeeRole.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        
+        return ScheduleItem.from(realm: realmEvents)
     }
     
     // MARK: - IndicatorInfoProvider
