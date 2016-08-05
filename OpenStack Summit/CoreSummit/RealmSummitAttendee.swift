@@ -26,17 +26,37 @@ extension SummitAttendee: RealmDecodable {
         self.identifier = realmEntity.id
         self.firstName = realmEntity.firstName
         self.lastName = realmEntity.lastName
-        self.title = realmEntity.title
         self.pictureURL = realmEntity.pictureUrl
-        self.email = realmEntity.email
-        self.biography = realmEntity.bio
         
         // optional
         self.twitter = realmEntity.twitter.isEmpty ? nil : realmEntity.twitter
         self.irc = realmEntity.irc.isEmpty ? nil : realmEntity.irc
+        self.biography = realmEntity.bio.isEmpty ? nil : realmEntity.bio
         
         self.tickets = TicketType.from(realm: realmEntity.tickets)
         self.scheduledEvents = Event.from(realm: realmEntity.scheduledEvents)
         self.feedback = Feedback.from(realm: realmEntity.feedback)
+    }
+}
+
+extension SummitAttendee: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmSummitAttendee {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.firstName = firstName
+        realmEntity.lastName = lastName
+        realmEntity.pictureUrl = pictureURL
+        
+        realmEntity.twitter = twitter ?? ""
+        realmEntity.irc = irc ?? ""
+        realmEntity.bio = biography ?? ""
+        
+        realmEntity.tickets.replace(with: tickets)
+        realmEntity.scheduledEvents.replace(with: scheduledEvents)
+        realmEntity.feedback.replace(with: feedback)
+        
+        return realmEntity
     }
 }

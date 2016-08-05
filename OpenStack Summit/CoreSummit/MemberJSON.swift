@@ -12,7 +12,7 @@ public extension Member {
     
     enum JSONKey: String {
         
-        case first_name, last_name, email, title, bio, irc, twitter, member_id, pic, speaker, schedule
+        case first_name, last_name, title, bio, irc, twitter, member_id, pic, speaker, schedule
     }
 }
 

@@ -6,20 +6,16 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct SummitAttendee: Person {
+public struct SummitAttendee: Unique {
     
     public let identifier: Identifier
     
     public var firstName: String
     
     public var lastName: String
-    
-    public var title: String?
-    
+        
     public var pictureURL: String
-    
-    public var email: String
-    
+        
     public var twitter: String?
     
     public var irc: String?
@@ -40,6 +36,11 @@ public struct SummitAttendee: Person {
 }
 
 // MARK: - Extensions
+
+extension SummitAttendee: Person {
+    
+    public var title: String? { return nil }
+}
 
 public extension Person {
     
