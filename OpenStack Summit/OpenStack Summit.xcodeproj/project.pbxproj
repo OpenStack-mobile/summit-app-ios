@@ -1050,6 +1050,14 @@
 					6E104D2D1D1061AC00541E84 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 775U6X6R5M;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					6E104D411D1061AC00541E84 = {
 						CreatedOnToolsVersion = 7.3.1;
