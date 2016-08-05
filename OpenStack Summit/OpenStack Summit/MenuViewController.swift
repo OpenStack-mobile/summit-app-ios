@@ -373,13 +373,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func logout() {
         
+        Store.shared.logout()
+        
         showUserProfile()
         navigateToHome()
         reloadMenu()
         hideMenu()
         hideActivityIndicator()
-        
-        Store.shared.logout()
     }
     
     // MARK: - SWRevealViewControllerDelegate
