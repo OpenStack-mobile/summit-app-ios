@@ -57,15 +57,11 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         
         didSet {
             
-            /*
-             #if DEBUG
-             pictureURL = newValue.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-             #else
-             pictureURL = newValue
-             #endif*/
-            
             if (!pictureURL.isEmpty) {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: pictureURL)!)
+                
+                let urlString = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                
+                pictureImageView.hnk_setImageFromURL(NSURL(string: urlString)!)
             }
             else {
                 pictureImageView.image = UIImage(named: "generic-user-avatar")
@@ -250,8 +246,13 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 }
                 else {
                     
-                    fatalError("Authenticated member is not a speaker nor an attendee")
+                    let member = Member(realmEntity: currentMember)
+                    
+                    updateUI(.Value(member))
                 }
+            } else {
+                
+                fatalError("Cannot show current user, not logged in")
             }
             
         case let .speaker(identifier):
@@ -289,7 +290,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
             self.biographyHTML = person.biography ?? ""
             
             // FIXME: Setting location in UI, but not in DTO or deserializer
-            // self.viewController.location =
+            self.location = ""
         }
     }
     

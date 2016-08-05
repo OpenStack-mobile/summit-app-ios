@@ -40,7 +40,22 @@ public extension Store {
         return true
     }
     
+    /// Login via OAuth with OpenStack ID
     func login(summit: Identifier? = nil, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
+        
+        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
+            
+            guard error == nil
+                else { completion(.Error(error!)) ; return }
+            
+            loginCallback()
+            
+            self.linkAttendee(completion: completion)
+        }
+    }
+    
+    /// Complete the Login process and store the session info. 
+    func linkAttendee(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
         
         @inline(__always)
         func success(name name: String, member: SessionMember) {
@@ -59,47 +74,39 @@ public extension Store {
             completion(.Error(error))
         }
         
-        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
+        // link attendee
+        
+        self.loggedInMember(summit) { (response) in
             
-            guard error == nil
-                else { completion(.Error(error!)) ; return }
-            
-            loginCallback()
-            
-            // link attendee
-            
-            self.loggedInMember(summit) { (response) in
+            switch response {
                 
-                switch response {
+            case let .Error(error):
+                
+                // get non confirmed attendee
+                guard (error as NSError).code != 404 else {
                     
-                case let .Error(error):
-                    
-                    // get non confirmed attendee
-                    guard (error as NSError).code != 404 else {
+                    self.loggedInAttendee() { (response) in
                         
-                        self.loggedInAttendee() { (response) in
+                        switch response {
                             
-                            switch response {
-                                
-                            case let .Error(error):
-                                
-                                failure(error)
-                                
-                            case let .Value(name):
-                                
-                                success(name: name, member: .nonConfirmedAttendee)
-                            }
+                        case let .Error(error):
+                            
+                            failure(error)
+                            
+                        case let .Value(name):
+                            
+                            success(name: name, member: .nonConfirmedAttendee)
                         }
-                        
-                        return
                     }
                     
-                    failure(error)
-                    
-                case let .Value(member):
-                    
-                    success(name: member.name, member: .attendee(member.identifier))
+                    return
                 }
+                
+                failure(error)
+                
+            case let .Value(member):
+                
+                success(name: member.name, member: .attendee(member.identifier))
             }
         }
     }
