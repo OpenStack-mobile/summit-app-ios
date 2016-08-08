@@ -26,7 +26,7 @@ public struct SummitAttendee: Unique {
     
     public var tickets: [TicketType]
     
-    public var scheduledEvents: [SummitEvent]
+    public var scheduledEvents: [Identifier]
     
     public var feedback: [Feedback]
     

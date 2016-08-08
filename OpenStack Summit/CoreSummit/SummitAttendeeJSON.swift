@@ -26,7 +26,7 @@ extension SummitAttendee: JSONDecodable {
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
             let scheduledEventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let scheduledEvents = Event.fromJSON(scheduledEventsJSONArray),
+            let scheduledEvents = Identifier.fromJSON(scheduledEventsJSONArray),
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
             let tickets = TicketType.fromJSON(ticketsJSONArray),
             let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
