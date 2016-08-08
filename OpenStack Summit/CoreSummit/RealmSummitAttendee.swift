@@ -34,8 +34,8 @@ extension SummitAttendee: RealmDecodable {
         self.biography = realmEntity.bio.isEmpty ? nil : realmEntity.bio
         
         self.tickets = TicketType.from(realm: realmEntity.tickets)
-        self.scheduledEvents = Event.from(realm: realmEntity.scheduledEvents)
         self.feedback = Feedback.from(realm: realmEntity.feedback)
+        self.scheduledEvents = realmEntity.feedback.identifiers
     }
 }
 
