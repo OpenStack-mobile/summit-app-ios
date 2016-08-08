@@ -42,7 +42,12 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! self.realm.write { let _ = entity.save(self.realm) }
+            try! self.realm.write {
+                
+                let realmSummit = entity.save(self.realm)
+                
+                realmSummit.initialDataLoadDate = NSDate()
+            }
             
             // success
             completion(.Value(entity))

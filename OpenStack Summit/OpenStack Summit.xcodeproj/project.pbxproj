@@ -118,6 +118,8 @@
 		6E1BB01D1D36F1D000F9F95F /* FeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */; };
 		6E24FDE41D47CE290005EB14 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */; };
 		6E25291E1D58E6F200173B1F /* DataUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */; };
+		6E2529201D591C2D00173B1F /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
+		6E2529221D5924D300173B1F /* DataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2529211D5924D300173B1F /* DataUpdateJSON.swift */; };
 		6E2537CA1D199D0C003E3400 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537C91D199D0C003E3400 /* Login.swift */; };
 		6E2537E61D19B0E5003E3400 /* SpeakerPresentationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */; };
 		6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2537E71D19B1C4003E3400 /* Schedule.storyboard */; };
@@ -389,6 +391,8 @@
 		6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditViewController.swift; sourceTree = "<group>"; };
 		6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateRequest.swift; sourceTree = "<group>"; };
+		6E25291F1D591C2D00173B1F /* DataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdate.swift; sourceTree = "<group>"; };
+		6E2529211D5924D300173B1F /* DataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E2537C91D199D0C003E3400 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerPresentationsViewController.swift; sourceTree = "<group>"; };
 		6E2537E71D19B1C4003E3400 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
@@ -695,6 +699,7 @@
 				6E10A5581D10675D008CBD0C /* Unique.swift */,
 				6E10A5591D10675D008CBD0C /* Venue.swift */,
 				6E10A55B1D10675D008CBD0C /* VenueRoom.swift */,
+				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -722,6 +727,7 @@
 				6E10A5571D10675D008CBD0C /* TrackJSON.swift */,
 				6E10A55A1D10675D008CBD0C /* VenueJSON.swift */,
 				6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */,
+				6E2529211D5924D300173B1F /* DataUpdateJSON.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -1334,6 +1340,7 @@
 				6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */,
 				6E2537CA1D199D0C003E3400 /* Login.swift in Sources */,
 				6E10A5841D10675D008CBD0C /* RealmSummitType.swift in Sources */,
+				6E2529221D5924D300173B1F /* DataUpdateJSON.swift in Sources */,
 				6E10A5671D10675D008CBD0C /* ImageJSON.swift in Sources */,
 				6E10A5631D10675D008CBD0C /* EventTypeJSON.swift in Sources */,
 				6E10A56F1D10675D008CBD0C /* NonConfirmedSummitAttendeeJSON.swift in Sources */,
@@ -1390,6 +1397,7 @@
 				6E10A5641D10675D008CBD0C /* Feedback.swift in Sources */,
 				6E10A5721D10675D008CBD0C /* PresentationJSON.swift in Sources */,
 				6E10A58D1D10675D008CBD0C /* SummitAttendeeJSON.swift in Sources */,
+				6E2529201D591C2D00173B1F /* DataUpdate.swift in Sources */,
 				6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */,
 				6E10A5861D10675D008CBD0C /* RealmTicketType.swift in Sources */,
 				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
