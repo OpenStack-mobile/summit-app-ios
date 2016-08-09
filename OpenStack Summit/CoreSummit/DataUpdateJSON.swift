@@ -32,16 +32,19 @@ extension DataUpdate: JSONDecodable {
         self.identifier = identifier
         self.operation = operation
         self.date = Date(timeIntervalSince1970: TimeInterval(created))
+        self.className = className
         
-        switch operation {
+        if let entityJSON = JSONObject[JSONKey.entity.rawValue]?.objectValue {
             
-        case .Insert:
+            self.entity = .JSON(entityJSON)
             
-        case .Update:
+        } else if let entityID = JSONObject[JSONKey.entity_id.rawValue]?.rawValue as? Int {
             
-        case .Delete:
+            self.entity = .Identifier(entityID)
             
-        case .Truncate:
+        } else {
+            
+            self.entity = nil
         }
     }
 }
