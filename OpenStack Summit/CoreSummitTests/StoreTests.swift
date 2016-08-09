@@ -7,8 +7,9 @@
 //
 
 import XCTest
-import CoreSummit
+import SwiftFoundation
 import RealmSwift
+import CoreSummit
 
 final class StoreTests: XCTestCase {
     
@@ -106,4 +107,33 @@ final class StoreTests: XCTestCase {
         
         waitForExpectationsWithTimeout(60, handler: nil)
     }*/
+    
+    func testDataUpdatesRequest() {
+        
+        clearRealm()
+        
+        let austinID = 6
+        
+        let date = Date() - (60*60*24*365) // last year
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        Store.shared.dataUpdate(austinID, from: date, limit: 100) { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                print(value)
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
 }

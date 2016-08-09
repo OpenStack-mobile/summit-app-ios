@@ -12,7 +12,7 @@ public extension DataUpdate {
     
     enum JSONKey: String {
         
-        case id, class_name, type
+        case id, class_name, type, entity, entity_id, created
     }
 }
 
@@ -22,14 +22,26 @@ extension DataUpdate: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let className = JSONObject[JSONKey.class_name.rawValue]?.rawValue as? String,
-            let entity = Entity(rawValue: className),
+            let created = JSONObject[JSONKey.created.rawValue]?.rawValue as? Int,
+            let classNameString = JSONObject[JSONKey.class_name.rawValue]?.rawValue as? String,
+            let className = ClassName(rawValue: classNameString),
             let typeString = JSONObject[JSONKey.type.rawValue]?.rawValue as? String,
             let operation = Operation(rawValue: typeString)
             else { return nil }
         
         self.identifier = identifier
-        self.entity = entity
         self.operation = operation
+        self.date = Date(timeIntervalSince1970: TimeInterval(created))
+        
+        switch operation {
+            
+        case .Insert:
+            
+        case .Update:
+            
+        case .Delete:
+            
+        case .Truncate:
+        }
     }
 }

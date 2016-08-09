@@ -44,7 +44,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(date)"
+        let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(Int(date.timeIntervalSince1970))"
         
         dataUpdate(URI, completion: completion)
     }
