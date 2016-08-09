@@ -33,4 +33,17 @@ final class JSONTests: XCTestCase {
         
         //dump(decodable) // too large
     }
+    
+    func testDataUpdates1() {
+        
+        let testJSON = loadJSON("DataUpdates1")
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        
+        //dump(decodable) // too large
+    }
 }

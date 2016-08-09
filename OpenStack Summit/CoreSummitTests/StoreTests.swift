@@ -66,11 +66,9 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(summit):
                 
-                print(summit);
+                dump(summit);
                 
                 XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
-                
-                
             }
             
             expectation.fulfill()
@@ -99,7 +97,7 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(value):
                 
-                print(value)
+                dump(value)
             }
             
             expectation.fulfill()
@@ -128,7 +126,7 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(value):
                 
-                print(value)
+                dump(value)
             }
             
             expectation.fulfill()
