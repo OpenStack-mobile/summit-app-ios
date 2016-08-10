@@ -43,6 +43,7 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
         
         XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == 42, "\(dataUpdates.count) DataUpdate. Should be 42")
         
         //dump(decodable) // too large
     }

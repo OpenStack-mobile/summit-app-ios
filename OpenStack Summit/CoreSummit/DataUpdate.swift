@@ -7,6 +7,7 @@
 //
 
 import SwiftFoundation
+import RealmSwift
 
 public struct DataUpdate {
     
@@ -63,7 +64,7 @@ public extension DataUpdate {
         case PresentationSlide
         case SponsorFromEvent
         
-        public var type: JSONDecodable.Type? {
+        private var type: Updatable.Type? {
             
             switch self {
             case .WipeData: return nil
@@ -76,7 +77,7 @@ public extension DataUpdate {
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
             case .SummitVenueRoom: return CoreSummit.VenueRoom.self
-            case .SummitVenueFloor: return CoreSummit.Venue.self
+            case .SummitVenueFloor: return nil
             case .PresentationCategory: return CoreSummit.Track.self
             case .PresentationCategoryGroup: return CoreSummit.TrackGroup.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
@@ -87,3 +88,115 @@ public extension DataUpdate {
     }
 }
 
+// MARK: - Store
+
+public extension Store {
+    
+    func process(dataUpdate: DataUpdate) -> Bool {
+        
+        // truncate
+        guard dataUpdate.operation != .Truncate else {
+            
+            guard dataUpdate.className == .WipeData
+                else { return false }
+            
+            self.realm.deleteAll()
+            self.logout()
+            
+            return true
+        }
+        
+        guard dataUpdate.className != .WipeData
+            else { return false }
+        
+        // schedule
+        guard dataUpdate.className != .MySchedule else {
+            
+            
+            
+            return true
+        }
+        
+        // venue images
+        guard dataUpdate.className != .SummitLocationMap && dataUpdate.className != .SummitLocationImage else {
+            
+            
+            
+            return true
+        }
+        
+        /// we dont support all of the DataUpdate types, but thats ok
+        guard let type = dataUpdate.className.type
+            else { return true }
+        
+        // delete
+        guard dataUpdate.operation != .Delete else {
+            
+            guard let entityID = dataUpdate.entity,
+                case let .Identifier(id) = entityID
+                else { return false }
+            
+            guard let foundEntity = type.find(id, realm: self.realm)
+                else { return false }
+            
+            try! self.realm.write {
+                
+                self.realm.delete(foundEntity)
+            }
+            
+            return true
+        }
+        
+        // parse JSON
+        guard let entityJSON = dataUpdate.entity,
+            case let .JSON(jsonObject) = entityJSON,
+            let entity = type.init(JSONValue: .Object(jsonObject))
+            else { return false }
+        
+        // insert or update
+        entity.write(self.realm)
+        
+        return true
+    }
+}
+
+// MARK: - Private
+
+// Must be private beacuase this is to circumvent the limitations of protocols with associated types
+
+/// The model type can be updated remotely
+private protocol Updatable: JSONDecodable {
+    
+    static func find(id: Identifier, realm: Realm) -> RealmEntity?
+    
+    /// Encodes the object in Realm, but does not write.
+    func write(realm: Realm)
+}
+
+extension Updatable where Self: RealmEncodable {
+    
+    static func find(id: Identifier, realm: Realm) -> RealmEntity? {
+        
+        return RealmType.find(id, realm: realm)
+    }
+    
+    func write(realm: Realm) {
+        
+        try! realm.write {
+            
+            self.save(realm)
+        }
+    }
+}
+
+// Conform to protocol
+extension SummitEvent: Updatable { }
+extension SummitType: Updatable { }
+extension EventType: Updatable { }
+extension PresentationSpeaker: Updatable { }
+extension TicketType: Updatable { }
+extension Venue: Updatable { }
+extension VenueRoom: Updatable { }
+extension Track: Updatable { }
+extension TrackGroup: Updatable { }
+extension Image: Updatable { }

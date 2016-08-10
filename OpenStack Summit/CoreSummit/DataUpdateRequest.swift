@@ -66,6 +66,7 @@ private extension Store {
             guard error == nil
                 else { completion(.Error(error!)); return }
             
+            // parse
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonArray = json.arrayValue,
                 let dataUpdates = DataUpdate.fromJSON(jsonArray)
