@@ -109,22 +109,6 @@ public extension Store {
         guard dataUpdate.className != .WipeData
             else { return false }
         
-        // schedule
-        guard dataUpdate.className != .MySchedule else {
-            
-            
-            
-            return true
-        }
-        
-        // venue images
-        guard dataUpdate.className != .SummitLocationMap && dataUpdate.className != .SummitLocationImage else {
-            
-            
-            
-            return true
-        }
-        
         /// we dont support all of the DataUpdate types, but thats ok
         guard let type = dataUpdate.className.type
             else { return true }
@@ -153,10 +137,39 @@ public extension Store {
             let entity = type.init(JSONValue: .Object(jsonObject))
             else { return false }
         
-        // insert or update
-        entity.write(self.realm)
-        
-        return true
+        switch dataUpdate.className {
+            
+        case .MySchedule:
+            
+            /*
+            guard let event = entity as? SummitEvent
+                else { return false }
+            
+            guard let attendeeRole
+            
+            try! self.realm.write {
+                let index = attendee.scheduledEvents.indexOf("id = %@", event.identifier)
+                if (index == nil) {
+                    attendee.scheduledEvents.append(event)
+                }
+            }*/
+            
+            return true
+            
+        case .SummitLocationImage, .SummitLocationMap:
+            
+            guard let image = entity as? Image
+                else { return false }
+            
+            return true
+            
+        default:
+            
+            // insert or update
+            entity.write(self.realm)
+            
+            return true
+        }
     }
 }
 
@@ -170,7 +183,7 @@ private protocol Updatable: JSONDecodable {
     static func find(id: Identifier, realm: Realm) -> RealmEntity?
     
     /// Encodes the object in Realm, but does not write.
-    func write(realm: Realm)
+    func write(realm: Realm) -> RealmEntity?
 }
 
 extension Updatable where Self: RealmEncodable {
@@ -180,12 +193,14 @@ extension Updatable where Self: RealmEncodable {
         return RealmType.find(id, realm: realm)
     }
     
-    func write(realm: Realm) {
+    func write(realm: Realm) -> RealmEntity? {
         
+        var entity: RealmEntity!
         try! realm.write {
             
-            self.save(realm)
+            entity = self.save(realm)
         }
+        return entity
     }
 }
 

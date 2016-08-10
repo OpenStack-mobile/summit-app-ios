@@ -177,6 +177,7 @@
 		6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */; };
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
+		6EDAF38E1D5BB22700B75B28 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */; };
 		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
 		6EDE52121D429F4C00DF4BEA /* VenuesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */; };
 		6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */; };
@@ -452,6 +453,7 @@
 		6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelListViewController.swift; sourceTree = "<group>"; };
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
+		6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
 		6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapViewController.swift; sourceTree = "<group>"; };
 		6EDE52131D429F8700DF4BEA /* VenueLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueLocationDetailViewController.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 				6E10A51C1D10675C008CBD0C /* ErrorValue.swift */,
 				6EFC6E661D2320610087057A /* Reachability.swift */,
 				6ECA1CD11D4EC46C00806924 /* Session.swift */,
+				6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
 				6E10A5A11D1067BB008CBD0C /* JSON */,
@@ -1406,6 +1409,7 @@
 				6E10A5861D10675D008CBD0C /* RealmTicketType.swift in Sources */,
 				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
 				6E10A5881D10675D008CBD0C /* RealmTrackGroup.swift in Sources */,
+				6EDAF38E1D5BB22700B75B28 /* DataUpdatePoller.swift in Sources */,
 				6E10A5691D10675D008CBD0C /* Location.swift in Sources */,
 				6E10A5831D10675D008CBD0C /* RealmSummitEvent.swift in Sources */,
 				6E25291E1D58E6F200173B1F /* DataUpdateRequest.swift in Sources */,
