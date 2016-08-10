@@ -156,7 +156,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         self.reloadFilters()
         
-        self.removeAllTags()
         for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
             self.addTag(tag as! String)
         }
