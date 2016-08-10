@@ -229,7 +229,21 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         let filterItem = filterSection.items[index]
         
         cell.name = filterItem.name
-        cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.id)
+        
+        if filterSection.type != FilterSectionType.Level {
+            
+            cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.id)
+        }
+        else {
+            
+            cell.isOptionSelected = isItemSelected(filterSection.type, name: filterItem.name)
+        }
+        
+        if filterSection.type == FilterSectionType.TrackGroup {
+            
+            let trackGroup = RealmTrackGroup.find(filterSection.items[indexPath.row].id, realm: Store.shared.realm)
+            cell.circleColor = UIColor(hexaString: trackGroup!.color)
+        }
         
         if index == 0 {
             cell.addTopExtraPadding()
@@ -243,14 +257,33 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let filterItem = filterSection.items[index]
         
-        if isItemSelected(filterSection.type, id: filterItem.id) {
-            let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.id }
-            scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
-            cell.isOptionSelected = false
+        if filterSection.type != FilterSectionType.Level {
+            
+            if isItemSelected(filterSection.type, id: filterItem.id) {
+                
+                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.id }
+                scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+                cell.isOptionSelected = false
+            }
+            else {
+                
+                scheduleFilter.selections[filterSection.type]!.append(filterItem.id)
+                cell.isOptionSelected = true
+            }
         }
         else {
-            scheduleFilter.selections[filterSection.type]!.append(filterItem.id)
-            cell.isOptionSelected = true
+            
+            if isItemSelected(filterSection.type, name: filterItem.name) {
+                
+                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! String == filterItem.name }
+                scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+                cell.isOptionSelected = false
+            }
+            else {
+                
+                scheduleFilter.selections[filterSection.type]!.append(filterItem.name)
+                cell.isOptionSelected = true
+            }
         }
     }
     
@@ -283,6 +316,20 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         return count
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell)!
+        
+        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        
+        configure(cell: cell, at: indexPath, filterSection: filterSection)
+        
+        return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return headerHeight
@@ -300,24 +347,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         return cell
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell)!
-        
-        let filterSection = scheduleFilter.filterSections[indexPath.section]
-        
-        if filterSection.type == FilterSectionType.TrackGroup {
-            let trackGroup = RealmTrackGroup.find(filterSection.items[indexPath.row].id, realm: Store.shared.realm)
-            cell.circleColor = UIColor(hexaString: trackGroup!.color)
-        }
-        
-        configure(cell: cell, at: indexPath, filterSection: filterSection)
-        
-        return cell
-    }
-    
-    // MARK: - UITableViewDelegate
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let filterSection = scheduleFilter.filterSections[indexPath.section]
@@ -334,22 +363,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let filterSection = scheduleFilter.filterSections[indexPath.section]
         
-        if filterSection.type == FilterSectionType.Level {
-            let filterItem = filterSection.items[indexPath.row]
-            
-            if isItemSelected(filterSection.type, name: filterItem.name) {
-                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! String == filterItem.name }
-                scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
-                cell.isOptionSelected = false
-            }
-            else {
-                scheduleFilter.selections[filterSection.type]!.append(filterItem.name)
-                cell.isOptionSelected = true
-            }
-        }
-        else {
-            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
-        }
+        toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
     }
     
     // MARK: - Notifications
