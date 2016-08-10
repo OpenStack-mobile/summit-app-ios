@@ -56,6 +56,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         tagListView.delegate = self
         AMTagView.appearance().tagColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
         AMTagView.appearance().innerTagColor = UIColor(red: 53/255, green: 84/255, blue: 121/255, alpha: 1.0)
+        tagTextView.autoCompleteTableBackgroundColor = UIColor.whiteColor()
         tagTextView.autoCompleteDelegate = self
         tagTextView.autoCompleteDataSource = self
         
