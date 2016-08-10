@@ -16,14 +16,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     // MARK: - IB Outlets
     
     @IBOutlet weak var dismissButton: UIBarButtonItem!
-    @IBOutlet weak var summitTypeTableView: UITableView!
-    @IBOutlet weak var trackGroupTableView: UITableView!
-    @IBOutlet weak var eventTypeTableView: UITableView!
-    @IBOutlet weak var levelTableView: UITableView!
-    @IBOutlet weak var summitTypeHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var trackGroupHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var eventTypeHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var levelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var filtersTableView: UITableView!
+    @IBOutlet weak var filtersTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagListViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagTextView: MLPAutoCompleteTextField!
     @IBOutlet weak var tagListView: AMTagListView!
@@ -35,6 +29,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     // MARK: - Private Properties
     
+    private let headerHeight: CGFloat = 40
     private let cellHeight: CGFloat = 50
     private let extraPadding: CGFloat = 12
     private var filteredTags = [String]()
@@ -43,16 +38,20 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     private var trackGroupItemCount: Int { return scheduleFilter.filterSections[1].items.count }
     private var eventTypeItemCount: Int { return scheduleFilter.filterSections[2].items.count }
     private var levelItemCount: Int { return scheduleFilter.filterSections[3].items.count }
+    private var totalItemCount: Int { return summitTypeItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount }
     
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        summitTypeTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
-        trackGroupTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
-        eventTypeTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
-        levelTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
+        filtersTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
+
+        let nib = UINib(nibName: "TableViewHeaderView", bundle: nil)
+        filtersTableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableViewHeaderView")
+        // https://github.com/mac-cain13/R.swift/issues/144
+        //filtersTableView.registerNibForHeaderFooterView(R.nib.tableViewHeaderView)
+        
         clearTagsButton.layer.cornerRadius = 10
         tagListView.delegate = self
         AMTagView.appearance().tagColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
@@ -107,14 +106,13 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         if (scheduleFilter.filterSections.count == 0) {
             let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
             let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
-            let summitTracks = Track.from(realm: Store.shared.realm.objects(RealmTrack).sort({ $0.name < $1.name }))
             let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
             let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
             
             scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
             var filterSection = FilterSection()
             filterSection.type = FilterSectionType.SummitType
-            filterSection.name = "Credentials"
+            filterSection.name = "SUMMIT TYPE"
             var filterSectionItem: FilterSectionItem
             for summitType in summitTypes {
                 filterSectionItem = createSectionItem(summitType.identifier, name: summitType.name, type: filterSection.type)
@@ -126,7 +124,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.TrackGroup
-            filterSection.name = "Track Group"
+            filterSection.name = "TRACK GROUP"
             for trackGroup in summitTrackGroups {
                 filterSectionItem = createSectionItem(trackGroup.identifier, name: trackGroup.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
@@ -136,7 +134,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.EventType
-            filterSection.name = "Event Type"
+            filterSection.name = "EVENT TYPE"
             for eventType in eventTypes {
                 filterSectionItem = createSectionItem(eventType.identifier, name: eventType.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
@@ -146,19 +144,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             scheduleFilter.selections[FilterSectionType.Level] = [String]()
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.Level
-            filterSection.name = "Levels"
+            filterSection.name = "LEVEL"
             for level in levels {
                 filterSectionItem = createSectionItem(0, name: level, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            scheduleFilter.filterSections.append(filterSection)
-            
-            scheduleFilter.selections[FilterSectionType.Track] = [Int]()
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.Track
-            filterSection.name = "Track"
-            for track in summitTracks {
-                filterSectionItem = createSectionItem(track.identifier, name: track.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
             }
             scheduleFilter.filterSections.append(filterSection)
@@ -175,18 +163,14 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     }
     
     private func reloadFilters() {
-        summitTypeTableView.delegate = self
-        summitTypeTableView.dataSource = self
-        summitTypeTableView.reloadData()
-        trackGroupTableView.delegate = self
-        trackGroupTableView.dataSource = self
-        trackGroupTableView.reloadData()
-        eventTypeTableView.delegate = self
-        eventTypeTableView.dataSource = self
-        eventTypeTableView.reloadData()
-        levelTableView.delegate = self
-        levelTableView.dataSource = self
-        levelTableView.reloadData()
+        
+        filtersTableView.delegate = self
+        filtersTableView.dataSource = self
+        filtersTableView.reloadData()
+        
+        filtersTableViewHeightConstraint.constant = cellHeight * CGFloat(totalItemCount)
+        filtersTableViewHeightConstraint.constant += headerHeight * CGFloat(scheduleFilter.filterSections.count)
+        filtersTableViewHeightConstraint.constant += extraPadding * CGFloat(scheduleFilter.filterSections.count) * 2
     }
     
     @inline(__always)
@@ -256,9 +240,10 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     }
     
     func toggleSelection(cell cell: GeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {
+        
         let filterItem = filterSection.items[index]
         
-        if (isItemSelected(filterSection.type, id: filterItem.id)) {
+        if isItemSelected(filterSection.type, id: filterItem.id) {
             let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.id }
             scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
             cell.isOptionSelected = false
@@ -272,110 +257,87 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     // MARK: - UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1;
+        
+        return scheduleFilter.filterSections.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         var count = 0
-        if tableView == summitTypeTableView {
+        
+        let filterSection = scheduleFilter.filterSections[section]
+        
+        switch filterSection.type! {
+        case FilterSectionType.SummitType:
             count = summitTypeItemCount
-            summitTypeHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
-        }
-        else if tableView == trackGroupTableView {
-            count = trackGroupItemCount
-            trackGroupHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
-        }
-        else if tableView == eventTypeTableView {
+        case FilterSectionType.EventType:
             count = eventTypeItemCount
-            eventTypeHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
-        }
-        else if tableView == levelTableView {
+        case FilterSectionType.TrackGroup:
+            count = trackGroupItemCount
+        case FilterSectionType.Level:
             count = levelItemCount
-            levelHeightConstraint.constant = cellHeight * CGFloat(count) + extraPadding * 2
+        default:
+            break
         }
+        
         return count
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return headerHeight
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewHeaderView")
+        
+        let filterSection = scheduleFilter.filterSections[section]
+        
+        let header = cell as! TableViewHeaderView
+        header.titleLabel.text = filterSection.name
+        
+        return cell
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell)!
-
-        if tableView == summitTypeTableView {
-            configure(cell: cell, at: indexPath, filterSection: scheduleFilter.filterSections[0])
-        }
-        else if tableView == trackGroupTableView {
-            
-            let filterSection = scheduleFilter.filterSections[1]
-            
+        
+        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        
+        if filterSection.type == FilterSectionType.TrackGroup {
             let trackGroup = RealmTrackGroup.find(filterSection.items[indexPath.row].id, realm: Store.shared.realm)
             cell.circleColor = UIColor(hexaString: trackGroup!.color)
-            configure(cell: cell, at: indexPath, filterSection: filterSection)
         }
-        else if tableView == eventTypeTableView {
-            
-            configure(cell: cell, at: indexPath, filterSection: scheduleFilter.filterSections[2])
-        }
-        else if tableView == levelTableView {
-            
-            let index = indexPath.row
-            let filterSection = scheduleFilter.filterSections[3]
-            let filterItem = filterSection.items[index]
-            
-            configure(cell: cell, at: indexPath, filterSection: filterSection)
-            
-            cell.name = filterItem.name
-            cell.isOptionSelected = isItemSelected(filterSection.type, name: filterItem.name)
-            
-            if index == 0 {
-                cell.addTopExtraPadding()
-            }
-            else if index == filterSection.items.count - 1 {
-                cell.addBottomExtraPadding()
-            }
-        }
+        
+        configure(cell: cell, at: indexPath, filterSection: filterSection)
+        
         return cell
     }
     
     // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return cellHeight + extraPadding
-        }
-        else if tableView == summitTypeTableView && indexPath.row == summitTypeItemCount - 1 {
-            return cellHeight + extraPadding
-        }
-        else if tableView == trackGroupTableView && indexPath.row == trackGroupItemCount - 1 {
-            return cellHeight + extraPadding
-        }
-        else if tableView == eventTypeTableView && indexPath.row == eventTypeItemCount - 1 {
-            return cellHeight + extraPadding
-        }
-        else if tableView == levelTableView && indexPath.row == levelItemCount - 1 {
+        
+        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        
+        if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 || indexPath.row == filterSection.items.count {
             return cellHeight + extraPadding
         }
         return cellHeight
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! GeneralScheduleFilterTableViewCell
         
-        if tableView == summitTypeTableView {
-            let filterSection = scheduleFilter.filterSections[0]
-            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
-        }
-        else if tableView == trackGroupTableView {
-            let filterSection = scheduleFilter.filterSections[1]
-            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
-        }
-        else if tableView == eventTypeTableView {
-            let filterSection = scheduleFilter.filterSections[2]
-            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
-        }
-        else if tableView == levelTableView {
-            let filterSection = scheduleFilter.filterSections[3]
+        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        
+        if filterSection.type == FilterSectionType.Level {
             let filterItem = filterSection.items[indexPath.row]
             
-            if (isItemSelected(filterSection.type, name: filterItem.name)) {
+            if isItemSelected(filterSection.type, name: filterItem.name) {
                 let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! String == filterItem.name }
                 scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
                 cell.isOptionSelected = false
@@ -384,6 +346,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
                 scheduleFilter.selections[filterSection.type]!.append(filterItem.name)
                 cell.isOptionSelected = true
             }
+        }
+        else {
+            toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
         }
     }
     

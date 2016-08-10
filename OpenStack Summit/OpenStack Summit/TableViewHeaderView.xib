@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A201w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -15,17 +15,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="500" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECTION HEADER TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eo0-Qu-iOR">
-                            <rect key="frame" x="20" y="7" width="460" height="22"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <rect key="frame" x="16" y="9" width="468" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="eo0-Qu-iOR" firstAttribute="leading" secondItem="jVH-UN-Bby" secondAttribute="leading" constant="20" id="G0X-iP-gAK"/>
+                        <constraint firstItem="eo0-Qu-iOR" firstAttribute="leading" secondItem="jVH-UN-Bby" secondAttribute="leading" constant="16" id="G0X-iP-gAK"/>
                         <constraint firstItem="eo0-Qu-iOR" firstAttribute="centerY" secondItem="jVH-UN-Bby" secondAttribute="centerY" id="hJw-Dx-1vU"/>
-                        <constraint firstItem="eo0-Qu-iOR" firstAttribute="trailing" secondItem="jVH-UN-Bby" secondAttribute="trailing" constant="-20" id="zfR-yh-Sp2"/>
+                        <constraint firstItem="eo0-Qu-iOR" firstAttribute="trailing" secondItem="jVH-UN-Bby" secondAttribute="trailing" constant="-16" id="zfR-yh-Sp2"/>
                     </constraints>
                 </view>
             </subviews>
