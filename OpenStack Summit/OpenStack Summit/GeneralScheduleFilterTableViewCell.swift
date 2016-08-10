@@ -17,9 +17,8 @@ final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     @IBOutlet weak var circleView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var optionSelectedImage: UIImageView!
-    @IBOutlet weak var nameLabelVerticalConstrain: NSLayoutConstraint!
-    @IBOutlet weak var nameLabelLeadingToCircleConstrain: NSLayoutConstraint!
-    @IBOutlet weak var nameLabelLeadingToContainerConstrain: NSLayoutConstraint!
+    @IBOutlet weak var nameLabelLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nameLabelVerticalConstraint: NSLayoutConstraint!
     
     // MARK: - Accessors
     
@@ -52,8 +51,7 @@ final class GeneralScheduleFilterTableViewCell: UITableViewCell {
             
             circleView.hidden = false
             circleView.backgroundColor = circleColor
-            nameLabelLeadingToCircleConstrain.active = true
-            nameLabelLeadingToContainerConstrain.active = false
+            nameLabelLeadingConstraint.constant = 76
         }
     }
     
@@ -75,11 +73,11 @@ final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
     func addTopExtraPadding() {
         
-        nameLabelVerticalConstrain.constant = GeneralScheduleFilterTableViewCell.halfExtraPadding
+        nameLabelVerticalConstraint.constant = GeneralScheduleFilterTableViewCell.halfExtraPadding
     }
     
     func addBottomExtraPadding() {
         
-        nameLabelVerticalConstrain.constant = -GeneralScheduleFilterTableViewCell.halfExtraPadding
+        nameLabelVerticalConstraint.constant = -GeneralScheduleFilterTableViewCell.halfExtraPadding
     }
 }
