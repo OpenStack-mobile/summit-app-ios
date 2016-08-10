@@ -43,6 +43,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     // MARK: - Loading
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         filtersTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
@@ -66,7 +67,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     }
 
     override func viewWillAppear(animated: Bool) {
+        
         super.viewWillAppear(animated)
+        
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(AMTagListView.removeTag(_:)),
@@ -75,7 +78,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     }
     
     override func viewWillDisappear(animated: Bool) {
+        
         super.viewWillDisappear(animated)
+        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -104,53 +109,70 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         scheduleFilter.hasToRefreshSchedule = true
         
-        if (scheduleFilter.filterSections.count == 0) {
+        if scheduleFilter.filterSections.count == 0 {
+            
             let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
             let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
             let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
             let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
             
-            scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
+            var filterSectionItem: FilterSectionItem
+
             var filterSection = FilterSection()
             filterSection.type = FilterSectionType.SummitType
             filterSection.name = "SUMMIT TYPE"
-            var filterSectionItem: FilterSectionItem
+            
             for summitType in summitTypes {
+                
                 filterSectionItem = createSectionItem(summitType.identifier, name: summitType.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
-                
             }
-            scheduleFilter.filterSections.append(filterSection)
             
-            scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
+            scheduleFilter.filterSections.append(filterSection)
+            scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
+            
+            
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.TrackGroup
             filterSection.name = "TRACK GROUP"
+            
             for trackGroup in summitTrackGroups {
+                
                 filterSectionItem = createSectionItem(trackGroup.identifier, name: trackGroup.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
             }
-            scheduleFilter.filterSections.append(filterSection)
             
-            scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
+            scheduleFilter.filterSections.append(filterSection)
+            scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
+            
+            
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.EventType
             filterSection.name = "EVENT TYPE"
+            
             for eventType in eventTypes {
+                
                 filterSectionItem = createSectionItem(eventType.identifier, name: eventType.name, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
             }
-            scheduleFilter.filterSections.append(filterSection)
             
-            scheduleFilter.selections[FilterSectionType.Level] = [String]()
+            scheduleFilter.filterSections.append(filterSection)
+            scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
+            
+            
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.Level
             filterSection.name = "LEVEL"
+            
             for level in levels {
+                
                 filterSectionItem = createSectionItem(0, name: level, type: filterSection.type)
                 filterSection.items.append(filterSectionItem)
             }
+            
             scheduleFilter.filterSections.append(filterSection)
+            scheduleFilter.selections[FilterSectionType.Level] = [String]()
+            
             
             scheduleFilter.selections[FilterSectionType.Tag] = [Int]()
         }
@@ -158,6 +180,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         self.reloadFilters()
         
         for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
+            
             self.addTag(tag as! String)
         }
     }
@@ -195,27 +218,39 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     }
     
     private func createSectionItem(id: Int, name: String, type: FilterSectionType) -> FilterSectionItem {
+        
         let filterSectionItem = FilterSectionItem()
+        
         filterSectionItem.id = id
         filterSectionItem.name = name
+        
         return filterSectionItem
     }
     
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
+        
         if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
+            
             for selectedId in filterSelectionsForType {
-                if (id == selectedId as! Int) {
+                
+                if id == selectedId as! Int {
+                    
                     return true
                 }
             }
         }
+        
         return false
     }
     
     private func isItemSelected(filterSectionType: FilterSectionType, name: String) -> Bool {
+        
         if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
+            
             for selectedName in filterSelectionsForType {
-                if (name == selectedName as! String) {
+                
+                if name == selectedName as! String {
+                    
                     return true
                 }
             }
@@ -246,9 +281,11 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         }
         
         if index == 0 {
+            
             cell.addTopExtraPadding()
         }
         else if index == filterSection.items.count - 1 {
+            
             cell.addBottomExtraPadding()
         }
     }
@@ -301,16 +338,22 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         let filterSection = scheduleFilter.filterSections[section]
         
         switch filterSection.type! {
+            
         case FilterSectionType.SummitType:
             count = summitTypeItemCount
+            
         case FilterSectionType.EventType:
             count = eventTypeItemCount
+            
         case FilterSectionType.TrackGroup:
             count = trackGroupItemCount
+            
         case FilterSectionType.Level:
             count = levelItemCount
+            
         default:
             break
+            
         }
         
         return count
@@ -352,6 +395,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         let filterSection = scheduleFilter.filterSections[indexPath.section]
         
         if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 || indexPath.row == filterSection.items.count {
+            
             return cellHeight + extraPadding
         }
         return cellHeight
@@ -371,8 +415,11 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     @objc private func removeTag(notification: NSNotification) {
         
         func removeTag(tag: String) {
+            
             let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            if (escapedTag == "") {
+            
+            if escapedTag == "" {
+                
                 return
             }
             
@@ -407,16 +454,21 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, didSelectAutoCompleteString selectedString: String!, withAutoCompleteObject selectedObject: MLPAutoCompletionObject!, forRowAtIndexPath indexPath: NSIndexPath!) {
         
         func addTag(tag: String) -> Bool {
+            
             let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            
             if (escapedTag == "" || scheduleFilter.selections[FilterSectionType.Tag]?.indexOf{ $0 as! String == escapedTag } != nil) {
+                
                 return false
             }
             
             scheduleFilter.selections[FilterSectionType.Tag]!.append(escapedTag)
+            
             return true
         }
 
         if addTag(selectedString) {
+            
             tagListView.addTag(selectedString)
             tagTextView.text = ""
             resizeTagList(tagListView.contentSize.height)
