@@ -223,6 +223,7 @@
 		6EFC99C51D21CAE7009FD0DA /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */; };
 		6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C61D21DBE5009FD0DA /* Event.storyboard */; };
 		6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */; };
+		9D4DC7FE1D5D2B660015D49A /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -504,6 +505,7 @@
 		6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		6EFC99C61D21DBE5009FD0DA /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -865,6 +867,7 @@
 			children = (
 				6E49054E1D2ED6BD00D56870 /* Appearance.swift */,
 				6E25384C1D1AF5C1003E3400 /* BackBarButtonItem.swift */,
+				9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */,
 				6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */,
 				6EF12C511D1497E100814AD0 /* UIView+Border.swift */,
 				6EB752631D18B77300BC294D /* ErrorAlert.swift */,
@@ -1299,6 +1302,7 @@
 				6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */,
 				6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */,
 				6E2538511D1B01D7003E3400 /* Error.swift in Sources */,
+				9D4DC7FE1D5D2B660015D49A /* CopyableLabel.swift in Sources */,
 				6E2537E61D19B0E5003E3400 /* SpeakerPresentationsViewController.swift in Sources */,
 				6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */,
 				6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */,
