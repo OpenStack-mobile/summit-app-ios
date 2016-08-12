@@ -13,7 +13,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func dataUpdate(summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -28,10 +28,10 @@ public extension Store {
         
         let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&last_event_id=\(latestDataUpdate)"
         
-        dataUpdate(URI, completion: completion)
+        dataUpdates(URI, completion: completion)
     }
     
-    func dataUpdate(summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -46,7 +46,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/" + summitID + "/entity-events?limit=\(limit)&from_date=\(Int(date.timeIntervalSince1970))"
         
-        dataUpdate(URI, completion: completion)
+        dataUpdates(URI, completion: completion)
     }
 }
 
@@ -54,7 +54,7 @@ public extension Store {
 
 private extension Store {
     
-    func dataUpdate(URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let URL = configuration[.ServerURL] + URI
         
