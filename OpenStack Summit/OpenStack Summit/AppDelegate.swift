@@ -11,7 +11,7 @@ import CoreSummit
 import SWRevealViewController
 import RealmSwift
 //import GoogleMaps
-import AeroGearOAuth2
+import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,6 +49,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             // clear session
             Store.shared.session = UserDefaultsSessionStorage()
             Store.shared.session?.clear()
+            
+            // clear data poller
+            DataUpdatePoller.shared.storage = UserDefaultsDataUpdatePollerStorage()
+            DataUpdatePoller.shared.storage?.clear()
         }
         
         // set configuration
@@ -56,6 +60,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // set session storage
         Store.shared.session = UserDefaultsSessionStorage()
+        
+        // setup data poller
+        DataUpdatePoller.shared.storage = UserDefaultsDataUpdatePollerStorage()
+        DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        DataUpdatePoller.shared.start()
         
         // validate R.swift on debug builds
         R.assertValid()
@@ -125,12 +134,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().postNotification(notification)
         return true
     }
-    /*
+    
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        /*
         // Store the deviceToken in the current installation and save it to Parse.
         let currentInstallation: PFInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackground()
-    }*/
+        */
+    }
 }
 
