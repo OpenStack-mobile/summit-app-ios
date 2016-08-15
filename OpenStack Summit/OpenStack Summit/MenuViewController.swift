@@ -101,13 +101,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         if Store.shared.authenticatedMember == nil {
             
-            /*
-            // TODO: move this to launch screen or landing page
-            pushNotificationsManager.unsubscribeFromPushChannels { (succeeded: Bool, error: NSError?) in
+            PushNotificationsManager.unsubscribeFromPushChannels { (succeeded: Bool, error: NSError?) in
                 if (error != nil) {
-                    self.viewController.showErrorMessage(error!)
+                    self.showErrorMessage(error!)
                 }
-            }*/
+            }
         }
     }
     
