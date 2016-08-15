@@ -12,6 +12,7 @@ import SWRevealViewController
 import RealmSwift
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
+import Parse
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -76,7 +77,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("Google Maps API Key")
         
         // setup Parse
-        //Parse.setApplicationId("Parse App ID", clientKey: "Parse Client Key")
+        Parse.setApplicationId("Parse App ID", clientKey: "Parse Client Key")
         
         // notifications
         let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)

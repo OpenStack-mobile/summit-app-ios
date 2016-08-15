@@ -25,6 +25,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     var scheduleFilter = ScheduleFilter()
     
+    private var pushRegisterInProgress = false
+    
     // MARK: - Accessors
     
     var startDate: NSDate! {
@@ -222,23 +224,20 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     private func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
         
-        // FIXME: Implement push notifications
+        if pushRegisterInProgress {
+            return
+        }
         
-        /*
-         if pushRegisterInProgress {
-         return
-         }
-         
-         pushRegisterInProgress = true
-         
-         if NSUserDefaults.standardUserDefaults().objectForKey("registeredPushNotificationChannels") == nil {
-         self.pushNotificationsManager.subscribeToPushChannelsUsingContext(){ (succeeded: Bool, error: NSError?) in
-         if succeeded {
-         NSUserDefaults.standardUserDefaults().setObject("true", forKey: "registeredPushNotificationChannels")
-         }
-         self.pushRegisterInProgress = false
-         }
-         }*/
+        pushRegisterInProgress = true
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("registeredPushNotificationChannels") == nil {
+            PushNotificationsManager.subscribeToPushChannelsUsingContext(){ (succeeded: Bool, error: NSError?) in
+                if succeeded {
+                    NSUserDefaults.standardUserDefaults().setObject("true", forKey: "registeredPushNotificationChannels")
+                }
+                self.pushRegisterInProgress = false
+            }
+        }
     }
     
     private final func isDataLoaded() -> Bool {
