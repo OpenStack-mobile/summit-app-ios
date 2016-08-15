@@ -116,7 +116,7 @@ final class StoreTests: XCTestCase {
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.dataUpdate(austinID, from: date, limit: 100) { (response) in
+        Store.shared.dataUpdates(austinID, from: date, limit: 100) { (response) in
             
             switch response {
                 
