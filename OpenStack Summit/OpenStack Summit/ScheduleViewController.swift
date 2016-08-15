@@ -231,7 +231,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         pushRegisterInProgress = true
         
         if NSUserDefaults.standardUserDefaults().objectForKey("registeredPushNotificationChannels") == nil {
-            PushNotificationsManager.subscribeToPushChannelsUsingContext(){ (succeeded: Bool, error: NSError?) in
+            
+            PushNotificationsManager.subscribeToPushChannelsUsingContext() { (succeeded: Bool, error: NSError?) in
                 if succeeded {
                     NSUserDefaults.standardUserDefaults().setObject("true", forKey: "registeredPushNotificationChannels")
                 }
