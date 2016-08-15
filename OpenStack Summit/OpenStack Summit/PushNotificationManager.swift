@@ -12,6 +12,9 @@ import Parse
 public final class PushNotificationsManager {
     
     public static func subscribeToPushChannelsUsingContext(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
+        
+        assert(PFInstallation.currentInstallation() != nil)
+        
         var channels = [String]()
         
         if let summit = Store.shared.realm.objects(RealmSummit).first {
