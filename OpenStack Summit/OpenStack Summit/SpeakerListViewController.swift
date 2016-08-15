@@ -80,7 +80,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         cell.pictureURL = person.pictureURL
         
         /// fetch more
-        if row == people.endIndex && loadedAll == false {
+        if row == (people.count - 1) && loadedAll == false {
             
             loadData()
         }
