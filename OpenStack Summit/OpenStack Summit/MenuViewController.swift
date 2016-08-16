@@ -14,6 +14,13 @@ import CoreSummit
 
 final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActivityIndicatorProtocol, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
+    // MARK: - Properties
+    
+    // Menu VCs
+    let eventsViewController = EventsViewController()
+    let venuesViewController = VenuesViewController()
+    let speakersVC = R.storyboard.people.speakerListViewController()!
+    
     // MARK: - IB Outlets
     
     @IBOutlet weak var pictureImageView: UIImageView!
@@ -256,8 +263,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func showSpeakers() {
         
-        let speakersVC = R.storyboard.people.speakerListViewController()!
-        
         show(speakersVC)
     }
     
@@ -273,14 +278,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         highlight(.Events)
         
-        let eventsViewController = EventsViewController()
-        
         show(eventsViewController)
     }
     
     private func showVenues() {
-        
-        let venuesViewController = VenuesViewController()
         
         show(venuesViewController)
     }
