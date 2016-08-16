@@ -314,10 +314,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func show(viewController: UIViewController) {
         
-        let navigationController = AppDelegate.shared.navigationController
         let revealViewController = AppDelegate.shared.revealViewController
+        let navigationController = UINavigationController(rootViewController: viewController)
         
-        navigationController.setViewControllers([viewController], animated: false)
         revealViewController.pushFrontViewController(navigationController, animated: true)
     }
     
