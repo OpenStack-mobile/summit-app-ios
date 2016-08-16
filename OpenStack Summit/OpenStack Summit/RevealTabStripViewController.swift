@@ -47,11 +47,6 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         
         edgesForExtendedLayout = UIRectEdge.Top
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.reloadPagerTabStripView()
+        view.backgroundColor = UIColor(hexaString: "#E5E5E5")
     }
 }
