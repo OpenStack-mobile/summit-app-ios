@@ -134,6 +134,8 @@
 		6E2538511D1B01D7003E3400 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2538501D1B01D7003E3400 /* Error.swift */; };
 		6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */; };
 		6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
+		6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
+		6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
 		6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C171D4123AE005132DA /* VenueListViewController.swift */; };
 		6E313C1B1D4127C2005132DA /* VenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */; };
 		6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */; };
@@ -158,6 +160,7 @@
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
+		6EA062A11D63AD09009538CE /* RealmVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA062A01D63AD09009538CE /* RealmVideo.swift */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
@@ -412,6 +415,8 @@
 		6E2538501D1B01D7003E3400 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E25AD401D5A63F20060E7BA /* DataUpdates1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates1.json; sourceTree = "<group>"; };
+		6E2BB3A71D63A57E0085C876 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		6E2BB3A91D63A6050085C876 /* VideoJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoJSON.swift; sourceTree = "<group>"; };
 		6E313C171D4123AE005132DA /* VenueListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListViewController.swift; sourceTree = "<group>"; };
 		6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
@@ -436,6 +441,7 @@
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
+		6EA062A01D63AD09009538CE /* RealmVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVideo.swift; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
@@ -710,6 +716,7 @@
 				6E10A5581D10675D008CBD0C /* Unique.swift */,
 				6E10A5591D10675D008CBD0C /* Venue.swift */,
 				6E10A55B1D10675D008CBD0C /* VenueRoom.swift */,
+				6E2BB3A71D63A57E0085C876 /* Video.swift */,
 				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
 			);
 			name = Model;
@@ -738,6 +745,7 @@
 				6E10A5571D10675D008CBD0C /* TrackJSON.swift */,
 				6E10A55A1D10675D008CBD0C /* VenueJSON.swift */,
 				6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */,
+				6E2BB3A91D63A6050085C876 /* VideoJSON.swift */,
 				6E2529211D5924D300173B1F /* DataUpdateJSON.swift */,
 			);
 			name = JSON;
@@ -768,6 +776,7 @@
 				6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */,
 				6E10A5461D10675C008CBD0C /* RealmVenue.swift */,
 				6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */,
+				6EA062A01D63AD09009538CE /* RealmVideo.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -1366,6 +1375,7 @@
 				6E10A55F1D10675D008CBD0C /* ErrorValue.swift in Sources */,
 				6E10A55D1D10675D008CBD0C /* Company.swift in Sources */,
 				6E10A5981D10675D008CBD0C /* TrackGroup.swift in Sources */,
+				6EA062A11D63AD09009538CE /* RealmVideo.swift in Sources */,
 				6E10A5911D10675D008CBD0C /* Tag.swift in Sources */,
 				6E10A56B1D10675D008CBD0C /* Member.swift in Sources */,
 				6E10A56C1D10675D008CBD0C /* MemberJSON.swift in Sources */,
@@ -1398,6 +1408,7 @@
 				6E10A5741D10675D008CBD0C /* PresentationSpeakerJSON.swift in Sources */,
 				6E10A59D1D10675D008CBD0C /* VenueJSON.swift in Sources */,
 				6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */,
+				6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */,
 				6E10A59B1D10675D008CBD0C /* Unique.swift in Sources */,
 				6E10A5791D10675D008CBD0C /* RealmImage.swift in Sources */,
 				6E10A57B1D10675D008CBD0C /* RealmMember.swift in Sources */,
@@ -1426,6 +1437,7 @@
 				6E087DCE1D4A5DE900CDC935 /* Environment.swift in Sources */,
 				6E10A57D1D10675D008CBD0C /* RealmNonConfirmedSummitAttendee.swift in Sources */,
 				6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */,
+				6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */,
 				6E10A5951D10675D008CBD0C /* TimeZone.swift in Sources */,
 				6E10A57C1D10675D008CBD0C /* RealmNamed.swift in Sources */,
 				6E10A5971D10675D008CBD0C /* Track.swift in Sources */,

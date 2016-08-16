@@ -12,7 +12,7 @@ public extension SummitEvent {
     
     enum JSONKey: String {
         
-        case id, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, summit_types, sponsors, speakers, location_id, tags, track_id
+        case id, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, summit_types, sponsors, speakers, location_id, tags, track_id, videos
     }
 }
 
@@ -59,5 +59,18 @@ extension SummitEvent: JSONDecodable {
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double ?? nil
+        
+        if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
+            
+            guard let videos = Video.fromJSON(videosJSONArray)
+                else { return nil }
+            
+            self.videos = videos
+            
+        } else {
+            
+            self.videos = []
+        }
+        
     }
 }

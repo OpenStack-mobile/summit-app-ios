@@ -24,6 +24,7 @@ public class RealmSummitEvent: RealmNamed {
     public dynamic var presentation : RealmPresentation?
     public dynamic var venue : RealmVenue?
     public dynamic var venueRoom : RealmVenueRoom?
+    public let videos = List<RealmVideo>()
 }
 
 // MARK: - Fetches
@@ -112,6 +113,7 @@ extension SummitEvent: RealmDecodable {
         self.sponsors = realmEntity.sponsors.identifiers
         self.tags = Tag.from(realm: realmEntity.tags)
         self.presentation = Presentation(realmEntity: realmEntity.presentation!)
+        self.videos = Video.from(realm: realmEntity.videos)
         
         if realmEntity.averageFeedback == 0.0 {
             
@@ -157,6 +159,7 @@ extension SummitEvent: RealmEncodable {
         realmEntity.sponsors.replace(with: sponsors)
         realmEntity.tags.replace(with: tags)
         realmEntity.presentation = presentation.save(realm)
+        realmEntity.videos.replace(with: videos)
         
         // location
         if let cachedRoom = RealmVenueRoom.find(location, realm: realm) {
