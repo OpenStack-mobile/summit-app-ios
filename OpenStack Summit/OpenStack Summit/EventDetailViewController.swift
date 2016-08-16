@@ -13,7 +13,7 @@ import AHKActionSheet
 import SwiftSpinner
 import CoreSummit
 
-final class EventDetailViewController: UIViewController, RevealViewController, ShowActivityIndicatorProtocol, UITableViewDelegate, UITableViewDataSource {
+final class EventDetailViewController: UIViewController, ShowActivityIndicatorProtocol, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
     
@@ -273,8 +273,6 @@ final class EventDetailViewController: UIViewController, RevealViewController, S
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addMenuButton()
         
         scheduledButton.target = self
         scheduledButton.action = #selector(EventDetailViewController.toggleSchedule(_:))
