@@ -39,4 +39,6 @@ public struct Event: Named {
     public var presentation: Presentation
         
     //public var trackIdentifier: Identifier
+    
+    public var videos: [Video]
 }
