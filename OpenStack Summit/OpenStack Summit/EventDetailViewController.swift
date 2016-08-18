@@ -281,11 +281,13 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
             guard let identifier = youtubeVideo,
                 let youtubeVideoURL = NSURL(string: "http://img.youtube.com/vi/" + identifier + "/default.jpg") else {
                 
+                self.videoPlayerView.hidden = true
                 self.videoPlayerImageView.image = nil
                 self.videoPlayerViewHeightConstraint.constant = 0.0
                 return
             }
             
+            self.videoPlayerView.hidden = false
             self.videoPlayerViewHeightConstraint.constant = 200
             self.videoPlayerImageView.hnk_setImageFromURL(youtubeVideoURL)
         }
