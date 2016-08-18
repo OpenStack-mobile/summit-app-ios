@@ -17,40 +17,42 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var feedbackListActivityIndicator: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var eventDetailTextView: UITextView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var feedbackButton: UIButton!
-    @IBOutlet weak var speakersTableView: UITableView!
-    @IBOutlet weak var feedbackTableView: UITableView!
-    @IBOutlet weak var timeView: UIView!
-    @IBOutlet weak var locationView: UIView!
-    @IBOutlet weak var sponsorsLabel: UILabel!
-    @IBOutlet weak var summitTypesLabel: UILabel!
-    @IBOutlet weak var summitTypesView: UIView!
-    @IBOutlet weak var summitTypesHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scheduledButton: UIBarButtonItem!
-    @IBOutlet weak var speakersHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var averageFeedbackView: UIView!
-    @IBOutlet weak var averageFeedbackRatingView: CosmosView!
-    @IBOutlet weak var feedbackButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var averageFeedbackViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var feedbackTableHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var submenuButton: UIBarButtonItem!
-    @IBOutlet weak var tagsViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tagsLabel: UILabel!
-    @IBOutlet weak var tagsView: UIView!
-    @IBOutlet weak var eventDetailLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var locationViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var levelLabelHeightConstraint: NSLayoutConstraint!    
-    @IBOutlet weak var levelLabel: UILabel!
-    @IBOutlet weak var trackLabel: UILabel!
-    @IBOutlet weak var trackLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var feedbackListActivityIndicator: UIView!
+    @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var eventDetailTextView: UITextView!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var timeLabel: UILabel!
+    @IBOutlet private(set) weak var locationLabel: UILabel!
+    @IBOutlet private(set) weak var imageView: UIImageView!
+    @IBOutlet private(set) weak var feedbackButton: UIButton!
+    @IBOutlet private(set) weak var speakersTableView: UITableView!
+    @IBOutlet private(set) weak var feedbackTableView: UITableView!
+    @IBOutlet private(set) weak var timeView: UIView!
+    @IBOutlet private(set) weak var locationView: UIView!
+    @IBOutlet private(set) weak var sponsorsLabel: UILabel!
+    @IBOutlet private(set) weak var summitTypesLabel: UILabel!
+    @IBOutlet private(set) weak var summitTypesView: UIView!
+    @IBOutlet private(set) weak var summitTypesHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var scheduledButton: UIBarButtonItem!
+    @IBOutlet private(set) weak var speakersHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var averageFeedbackView: UIView!
+    @IBOutlet private(set) weak var averageFeedbackRatingView: CosmosView!
+    @IBOutlet private(set) weak var feedbackButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var averageFeedbackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var feedbackTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var submenuButton: UIBarButtonItem!
+    @IBOutlet private(set) weak var tagsViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var tagsLabel: UILabel!
+    @IBOutlet private(set) weak var tagsView: UIView!
+    @IBOutlet private(set) weak var eventDetailLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var locationViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var levelLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var levelLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var videoImageView: UIImageView!
+    @IBOutlet private(set) weak var videoImageViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     
@@ -266,6 +268,23 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
             }
             trackLabel.updateConstraints()
             trackLabel.text = newValue
+        }
+    }
+    
+    private(set) var youtubeVideo: String? = nil {
+        
+        didSet {
+            
+            guard let identifier = youtubeVideo,
+                let youtubeVideoURL = NSURL(string: "http://img.youtube.com/vi/" + identifier + "/default.jpg") else {
+                
+                self.videoImageView.image = nil
+                self.videoImageViewHeightConstraint.constant = 0.0
+                return
+            }
+            
+            self.videoImageView.hnk_setImageFromURL(youtubeVideoURL)
+            self.videoImageViewHeightConstraint.constant = 150
         }
     }
     
