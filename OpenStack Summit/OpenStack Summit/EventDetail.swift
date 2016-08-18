@@ -34,6 +34,7 @@ public struct EventDetail: RealmDecodable {
     public let moderator: PresentationSpeaker?
     public let level: String
     public let averageFeedback: Double
+    public let youtube: String?
     
     // MARK: - Initialization
     
@@ -90,5 +91,6 @@ public struct EventDetail: RealmDecodable {
         
         self.speakers = speakers
         self.moderator = moderatorSpeaker
+        self.youtube = event.videos.first?.youtube
     }
 }

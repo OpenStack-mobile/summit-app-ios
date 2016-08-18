@@ -444,6 +444,7 @@
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
 		6EA062A01D63AD09009538CE /* RealmVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVideo.swift; sourceTree = "<group>"; };
+		6EA1F0891D660B550064C338 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
@@ -577,6 +578,7 @@
 		6E104D251D1061AC00541E84 = {
 			isa = PBXGroup;
 			children = (
+				6EA1F0891D660B550064C338 /* Cartfile */,
 				6EDE521C1D42D46900DF4BEA /* System Frameworks */,
 				6EDE52161D42D08200DF4BEA /* Vendor */,
 				6E104D301D1061AC00541E84 /* OpenStack Summit */,
@@ -1224,6 +1226,7 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Parse.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Bolts.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/XCDYouTubeKit.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
