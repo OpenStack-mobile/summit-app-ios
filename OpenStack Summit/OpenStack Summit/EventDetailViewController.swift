@@ -12,6 +12,7 @@ import Cosmos
 import AHKActionSheet
 import SwiftSpinner
 import CoreSummit
+import XCDYouTubeKit
 
 final class EventDetailViewController: UIViewController, ShowActivityIndicatorProtocol, UITableViewDelegate, UITableViewDataSource {
     
@@ -51,8 +52,10 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     @IBOutlet private(set) weak var levelLabel: UILabel!
     @IBOutlet private(set) weak var trackLabel: UILabel!
     @IBOutlet private(set) weak var trackLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private(set) weak var videoImageView: UIImageView!
-    @IBOutlet private(set) weak var videoImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var videoPlayerView: UIView!
+    @IBOutlet private(set) weak var videoPlayerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var videoPlayerImageView: UIImageView!
+    
     
     // MARK: - Properties
     
@@ -278,13 +281,13 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
             guard let identifier = youtubeVideo,
                 let youtubeVideoURL = NSURL(string: "http://img.youtube.com/vi/" + identifier + "/default.jpg") else {
                 
-                self.videoImageView.image = nil
-                self.videoImageViewHeightConstraint.constant = 0.0
+                self.videoPlayerImageView.image = nil
+                self.videoPlayerViewHeightConstraint.constant = 0.0
                 return
             }
             
-            self.videoImageView.hnk_setImageFromURL(youtubeVideoURL)
-            self.videoImageViewHeightConstraint.constant = 150
+            self.videoPlayerViewHeightConstraint.constant = 200
+            self.videoPlayerImageView.hnk_setImageFromURL(youtubeVideoURL)
         }
     }
     
@@ -292,6 +295,8 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        assert(event != nil, "Event not set")
         
         scheduledButton.target = self
         scheduledButton.action = #selector(EventDetailViewController.toggleSchedule(_:))
@@ -367,6 +372,12 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         //presenter.toggleScheduledStatus()
     }
     
+    @IBAction func playVideo(sender: UIButton) {
+        
+        let videoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: self.youtubeVideo!)
+        self.presentMoviePlayerViewControllerAnimated(videoPlayer)
+    }
+    
     // MARK: - Private Methods
     
     private func updateUI() {
@@ -399,11 +410,12 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         self.hasAnyFeedback = false
         self.speakersTableView.reloadData()
         self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
-        self.isScheduledStatusVisible = /* Store.shared.isLoggedInAndConfirmedAttendee() */ false
+        self.isScheduledStatusVisible = Store.shared.isLoggedInAndConfirmedAttendee
         self.tags = eventDetail.tags
         self.level = eventDetail.level
         self.track = eventDetail.track
         self.hasAverageFeedback = false
+        self.youtubeVideo = eventDetail.youtube
         
         if eventDetail.allowFeedback && eventDetail.finished {
             loadAverageFeedback()
