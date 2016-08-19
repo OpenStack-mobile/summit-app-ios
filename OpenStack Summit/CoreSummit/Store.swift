@@ -26,7 +26,10 @@ public final class Store {
     
     public var configuration = Configuration(.Staging)
     
-    public var session: SessionStorage?
+    public var session: SessionStorage? {
+        
+        didSet { session?.hadPasscode = deviceHasPasscode }
+    }
     
     // MARK: - Private / Internal Properties
     
@@ -152,10 +155,14 @@ public final class Store {
         
         config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
         
-        session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
-        session.clearTokens()
+        if let hadPasscode = self.session?.hadPasscode {
+            if hadPasscode && !hasPasscode {
+                session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
+                session.clearTokens()
+            }
+        }
         
-        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.init(accountId: config.accountId!)
+        session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
         
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
