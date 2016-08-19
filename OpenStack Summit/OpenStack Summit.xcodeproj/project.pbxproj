@@ -151,6 +151,13 @@
 		6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E570A311D676A3800189992 /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
+		6E570A341D6771CF00189992 /* EventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A331D6771CF00189992 /* EventDataUpdate.swift */; };
+		6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A351D67753D00189992 /* PresentationDataUpdate.swift */; };
+		6E570A391D6775C700189992 /* EventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */; };
+		6E570A3B1D6775D200189992 /* PresentationDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */; };
+		6E570A3D1D6777D200189992 /* DataUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3C1D6777D200189992 /* DataUpdateTests.swift */; };
+		6E570A401D67792A00189992 /* RealmEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */; };
+		6E570A421D67797B00189992 /* RealmPresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
 		6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
 		6E7E18EA1D490DAC009549BA /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E18E91D490DAC009549BA /* Preference.swift */; };
@@ -430,6 +437,13 @@
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E570A301D676A3800189992 /* DataUpdates2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates2.json; sourceTree = "<group>"; };
+		6E570A331D6771CF00189992 /* EventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdate.swift; sourceTree = "<group>"; };
+		6E570A351D67753D00189992 /* PresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdate.swift; sourceTree = "<group>"; };
+		6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdateJSON.swift; sourceTree = "<group>"; };
+		6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdateJSON.swift; sourceTree = "<group>"; };
+		6E570A3C1D6777D200189992 /* DataUpdateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateTests.swift; sourceTree = "<group>"; };
+		6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventDataUpdate.swift; sourceTree = "<group>"; };
+		6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
@@ -680,6 +694,7 @@
 				6E10A50F1D10672D008CBD0C /* JSONTests.swift */,
 				6E10A5101D10672D008CBD0C /* RealmTests.swift */,
 				6E52FCBA1D130553006A7302 /* StoreTests.swift */,
+				6E570A3C1D6777D200189992 /* DataUpdateTests.swift */,
 				6E10A5111D10672D008CBD0C /* TestUtilities.swift */,
 				6E10A5031D1066E9008CBD0C /* Info.plist */,
 			);
@@ -724,7 +739,7 @@
 				6E10A5591D10675D008CBD0C /* Venue.swift */,
 				6E10A55B1D10675D008CBD0C /* VenueRoom.swift */,
 				6E2BB3A71D63A57E0085C876 /* Video.swift */,
-				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
+				6E570A321D67711500189992 /* DataUpdate */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -753,7 +768,7 @@
 				6E10A55A1D10675D008CBD0C /* VenueJSON.swift */,
 				6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */,
 				6E2BB3A91D63A6050085C876 /* VideoJSON.swift */,
-				6E2529211D5924D300173B1F /* DataUpdateJSON.swift */,
+				6E570A371D6775B200189992 /* DataUpdate */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -784,6 +799,7 @@
 				6E10A5461D10675C008CBD0C /* RealmVenue.swift */,
 				6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */,
 				6EA062A01D63AD09009538CE /* RealmVideo.swift */,
+				6E570A3E1D67790B00189992 /* DataUpdate */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -829,6 +845,35 @@
 				6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		6E570A321D67711500189992 /* DataUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
+				6E570A331D6771CF00189992 /* EventDataUpdate.swift */,
+				6E570A351D67753D00189992 /* PresentationDataUpdate.swift */,
+			);
+			name = DataUpdate;
+			sourceTree = "<group>";
+		};
+		6E570A371D6775B200189992 /* DataUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				6E2529211D5924D300173B1F /* DataUpdateJSON.swift */,
+				6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */,
+				6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */,
+			);
+			name = DataUpdate;
+			sourceTree = "<group>";
+		};
+		6E570A3E1D67790B00189992 /* DataUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */,
+				6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */,
+			);
+			name = DataUpdate;
 			sourceTree = "<group>";
 		};
 		6E7E18F21D495D90009549BA /* Configurations */ = {
@@ -1384,12 +1429,14 @@
 				6E10A58C1D10675D008CBD0C /* SummitAttendee.swift in Sources */,
 				6EFC6E691D2322E70087057A /* EventScheduleRequest.swift in Sources */,
 				6E10A55F1D10675D008CBD0C /* ErrorValue.swift in Sources */,
+				6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */,
 				6E10A55D1D10675D008CBD0C /* Company.swift in Sources */,
 				6E10A5981D10675D008CBD0C /* TrackGroup.swift in Sources */,
 				6EA062A11D63AD09009538CE /* RealmVideo.swift in Sources */,
 				6E10A5911D10675D008CBD0C /* Tag.swift in Sources */,
 				6E10A56B1D10675D008CBD0C /* Member.swift in Sources */,
 				6E10A56C1D10675D008CBD0C /* MemberJSON.swift in Sources */,
+				6E570A341D6771CF00189992 /* EventDataUpdate.swift in Sources */,
 				6E10A5731D10675D008CBD0C /* PresentationSpeaker.swift in Sources */,
 				6E10A58B1D10675D008CBD0C /* Summit.swift in Sources */,
 				6E10A5931D10675D008CBD0C /* TicketType.swift in Sources */,
@@ -1402,6 +1449,7 @@
 				6EFC6E671D2320610087057A /* Reachability.swift in Sources */,
 				6E10A5821D10675D008CBD0C /* RealmSummitAttendee.swift in Sources */,
 				6E10A57A1D10675D008CBD0C /* RealmLocation.swift in Sources */,
+				6E570A391D6775C700189992 /* EventDataUpdateJSON.swift in Sources */,
 				6E10A59A1D10675D008CBD0C /* TrackJSON.swift in Sources */,
 				6E10A5651D10675D008CBD0C /* FeedbackJSON.swift in Sources */,
 				6E10A5771D10675D008CBD0C /* RealmEventType.swift in Sources */,
@@ -1437,6 +1485,7 @@
 				6E10A5721D10675D008CBD0C /* PresentationJSON.swift in Sources */,
 				6E10A58D1D10675D008CBD0C /* SummitAttendeeJSON.swift in Sources */,
 				6E2529201D591C2D00173B1F /* DataUpdate.swift in Sources */,
+				6E570A421D67797B00189992 /* RealmPresentationDataUpdate.swift in Sources */,
 				6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */,
 				6E10A5861D10675D008CBD0C /* RealmTicketType.swift in Sources */,
 				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
@@ -1449,9 +1498,11 @@
 				6E10A57D1D10675D008CBD0C /* RealmNonConfirmedSummitAttendee.swift in Sources */,
 				6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */,
 				6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */,
+				6E570A3B1D6775D200189992 /* PresentationDataUpdateJSON.swift in Sources */,
 				6E10A5951D10675D008CBD0C /* TimeZone.swift in Sources */,
 				6E10A57C1D10675D008CBD0C /* RealmNamed.swift in Sources */,
 				6E10A5971D10675D008CBD0C /* Track.swift in Sources */,
+				6E570A401D67792A00189992 /* RealmEventDataUpdate.swift in Sources */,
 				6E10A5661D10675D008CBD0C /* Image.swift in Sources */,
 				6E10A5751D10675D008CBD0C /* Realm.swift in Sources */,
 			);
@@ -1465,6 +1516,7 @@
 				6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */,
 				6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */,
 				6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */,
+				6E570A3D1D6777D200189992 /* DataUpdateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,7 +42,7 @@ final class JSONTests: XCTestCase {
         XCTAssert(dataUpdates.count == 42, "\(dataUpdates.count) DataUpdate. Should be 42")
     }
     
-    func testEvent1() {
+    func testDataUpdates2() {
         
         let testJSON = loadJSON("DataUpdates2")
         
@@ -55,9 +55,7 @@ final class JSONTests: XCTestCase {
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
             case let .JSON(entityJSON) = dataUpdateEntity,
-            let event = SummitEvent(JSONValue: .Object(entityJSON))
+            let event = Event.DataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
-        
-        
     }
 }
