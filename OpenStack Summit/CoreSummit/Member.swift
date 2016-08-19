@@ -59,7 +59,7 @@ public extension Store {
             }
         } else {
             
-            return .anonymous
+            return .member
         }
     }
 }
