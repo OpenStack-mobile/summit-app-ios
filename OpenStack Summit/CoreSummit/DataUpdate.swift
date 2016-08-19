@@ -77,7 +77,6 @@ public extension DataUpdate {
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
             case .SummitVenueRoom: return CoreSummit.VenueRoom.self
-            case .SummitVenueFloor: return nil
             case .PresentationCategory: return CoreSummit.Track.self
             case .PresentationCategoryGroup: return CoreSummit.TrackGroup.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
@@ -120,8 +119,9 @@ public extension Store {
                 case let .Identifier(id) = entityID
                 else { return false }
             
+            // if it doesnt exist, dont delete it
             guard let foundEntity = type.find(id, realm: self.realm)
-                else { return false }
+                else { return true }
             
             try! self.realm.write {
                 
