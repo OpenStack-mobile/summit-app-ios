@@ -150,6 +150,7 @@
 		6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054E1D2ED6BD00D56870 /* Appearance.swift */; };
 		6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
+		6E570A311D676A3800189992 /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
 		6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
 		6E7E18EA1D490DAC009549BA /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E18E91D490DAC009549BA /* Preference.swift */; };
@@ -428,6 +429,7 @@
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
+		6E570A301D676A3800189992 /* DataUpdates2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates2.json; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
@@ -690,6 +692,7 @@
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
 				6E10A5161D106741008CBD0C /* AustinSummit.json */,
 				6E10A5171D106741008CBD0C /* Summit.json */,
+				6E570A301D676A3800189992 /* DataUpdates2.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 			files = (
 				6E10A5191D106741008CBD0C /* Summit.json in Resources */,
 				6E10A5181D106741008CBD0C /* AustinSummit.json in Resources */,
+				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
 				6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
