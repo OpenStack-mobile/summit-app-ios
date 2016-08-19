@@ -14,6 +14,9 @@ public protocol SessionStorage {
     
     /// The authenticated member.
     var member: SessionMember?  { get set }
+    
+    /// Whether the device previously had a passcode.
+    var hadPasscode: Bool { get set }
 }
 
 public extension SessionStorage {
@@ -98,10 +101,18 @@ public final class UserDefaultsSessionStorage: SessionStorage {
         }
     }
     
+    public var hadPasscode: Bool {
+        
+        get { return userDefaults.boolForKey(Key.hadPasscode.rawValue) }
+        
+        set { userDefaults.setBool(newValue, forKey: Key.hadPasscode.rawValue) }
+    }
+    
     private enum Key: String {
         
         case member = "CoreSummit.UserDefaultsSessionStorage.Key.Member"
         case name = "CoreSummit.UserDefaultsSessionStorage.Key.Name"
+        case hadPasscode = "CoreSummit.UserDefaultsSessionStorage.Key.HadPasscode"
     }
     
     private static let nonConfirmedAttendeeValue = "CoreSummit.UserDefaultsSessionStorage.NonConfirmedAttendee"
