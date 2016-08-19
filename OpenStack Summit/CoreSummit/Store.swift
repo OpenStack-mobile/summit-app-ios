@@ -161,8 +161,10 @@ public final class Store {
     }
     
     @objc private func revokedAccess(notification: NSNotification) {
-        //self.session.set(self.kCurrentMemberId, value: nil)
-        let notification = NSNotification(name: Notification.LoggedOut.rawValue, object:nil, userInfo:nil)
+        
+        self.session?.clear()
+        
+        let notification = NSNotification(name: Notification.ForcedLoggedOut.rawValue, object:self, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
 }
