@@ -252,6 +252,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 pictureURL = currentMember.pictureURL
             }
             
+        } else if Store.shared.isLoggedIn {
+            
+            name = Store.shared.session?.name ?? ""
+            pictureURL = ""
+            
         } else {
             
             name = ""
