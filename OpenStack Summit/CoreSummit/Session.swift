@@ -78,6 +78,8 @@ public final class UserDefaultsSessionStorage: SessionStorage {
             }
             
             userDefaults.setObject(stringValue as NSString, forKey: Key.member.rawValue)
+            
+            userDefaults.synchronize()
         }
     }
     
@@ -91,6 +93,8 @@ public final class UserDefaultsSessionStorage: SessionStorage {
                 else { userDefaults.removeObjectForKey(Key.name.rawValue); return }
             
             userDefaults.setObject(stringValue as NSString, forKey: Key.name.rawValue)
+            
+            userDefaults.synchronize()
         }
     }
     
