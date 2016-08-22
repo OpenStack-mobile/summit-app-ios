@@ -10,7 +10,7 @@ import UIKit
 
 final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
-    private static let halfExtraPadding: CGFloat = 6
+    private static let extraPadding: CGFloat = 5
     
     // MARK: - IB Outlet
     
@@ -51,7 +51,7 @@ final class GeneralScheduleFilterTableViewCell: UITableViewCell {
             
             circleView.hidden = false
             circleView.backgroundColor = circleColor
-            nameLabelLeadingConstraint.constant = 76
+            nameLabelLeadingConstraint.constant = 63
         }
     }
     
@@ -73,11 +73,11 @@ final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
     func addTopExtraPadding() {
         
-        nameLabelVerticalConstraint.constant = GeneralScheduleFilterTableViewCell.halfExtraPadding
+        nameLabelVerticalConstraint.constant = GeneralScheduleFilterTableViewCell.extraPadding
     }
     
     func addBottomExtraPadding() {
         
-        nameLabelVerticalConstraint.constant = -GeneralScheduleFilterTableViewCell.halfExtraPadding
+        nameLabelVerticalConstraint.constant = -GeneralScheduleFilterTableViewCell.extraPadding
     }
 }
