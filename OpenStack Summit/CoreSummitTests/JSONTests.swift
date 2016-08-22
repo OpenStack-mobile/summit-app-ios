@@ -55,7 +55,15 @@ final class JSONTests: XCTestCase {
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
             case let .JSON(entityJSON) = dataUpdateEntity,
-            let event = Event.DataUpdate(JSONValue: .Object(entityJSON))
+            let _ = Event.DataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testMember1() {
+        
+        let testJSON = loadJSON("Member1")
+        
+        guard let _ = Member(JSONValue: testJSON)
             else { XCTFail("Could not decode from JSON"); return }
     }
 }

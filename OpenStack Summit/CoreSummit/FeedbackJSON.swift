@@ -12,7 +12,7 @@ public extension Feedback {
     
     enum JSONKey: String {
         
-        case id, event_id, rate, note, created_date, attendee_id, owner_id, owner
+        case id, event_id, rate, note, created_date, attendee_id, member_id, owner_id, owner
     }
 }
 
@@ -26,7 +26,7 @@ extension Feedback: JSONDecodable {
             let review = JSONObject[JSONKey.note.rawValue]?.rawValue as? String,
             let createdDate = JSONObject[JSONKey.created_date.rawValue]?.rawValue as? Int,
             let event = JSONObject[JSONKey.event_id.rawValue]?.rawValue as? Int,
-            let owner = JSONObject[JSONKey.owner_id.rawValue]?.rawValue as? Int
+            let owner = JSONObject[JSONKey.attendee_id.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier
