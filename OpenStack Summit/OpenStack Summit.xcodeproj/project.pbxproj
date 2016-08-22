@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2538231D1A1049003E3400 /* ScheduleViewController.swift */; };
 		6E00D1AB1D1C49C200278274 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00D1AA1D1C49C200278274 /* RevealViewController.swift */; };
+		6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E066D9B1D356764005A8D2D /* FeedbackDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9A1D356764005A8D2D /* FeedbackDetail.swift */; };
 		6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */; };
 		6E087DCE1D4A5DE900CDC935 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCD1D4A5DE900CDC935 /* Environment.swift */; };
@@ -305,6 +306,7 @@
 
 /* Begin PBXFileReference section */
 		6E00D1AA1D1C49C200278274 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealViewController.swift; sourceTree = "<group>"; };
+		6E020FB91D6B55D200DF2BCD /* Member1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Member1.json; sourceTree = "<group>"; };
 		6E066D9A1D356764005A8D2D /* FeedbackDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackDetail.swift; sourceTree = "<group>"; };
 		6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackRequest.swift; sourceTree = "<group>"; };
 		6E087DCD1D4A5DE900CDC935 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -705,9 +707,10 @@
 			isa = PBXGroup;
 			children = (
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
+				6E570A301D676A3800189992 /* DataUpdates2.json */,
+				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E10A5161D106741008CBD0C /* AustinSummit.json */,
 				6E10A5171D106741008CBD0C /* Summit.json */,
-				6E570A301D676A3800189992 /* DataUpdates2.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1237,6 +1240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit.json in Resources */,
 				6E10A5181D106741008CBD0C /* AustinSummit.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
