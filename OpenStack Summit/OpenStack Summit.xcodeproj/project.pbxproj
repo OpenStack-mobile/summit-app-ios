@@ -28,6 +28,7 @@
 		6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */; };
 		6E087DCE1D4A5DE900CDC935 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCD1D4A5DE900CDC935 /* Environment.swift */; };
 		6E087DD01D4A5E0F00CDC935 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */; };
+		6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
 		6E0B2F071D33F3A10058F171 /* Levels.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B2F061D33F3A10058F171 /* Levels.storyboard */; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
@@ -311,6 +312,7 @@
 		6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackRequest.swift; sourceTree = "<group>"; };
 		6E087DCD1D4A5DE900CDC935 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		6E08F3C61D6CC43500E3006B /* DataUpdates3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates3.json; sourceTree = "<group>"; };
 		6E0B2F061D33F3A10058F171 /* Levels.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Levels.storyboard; sourceTree = "<group>"; };
 		6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 			children = (
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
 				6E570A301D676A3800189992 /* DataUpdates2.json */,
+				6E08F3C61D6CC43500E3006B /* DataUpdates3.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E10A5161D106741008CBD0C /* AustinSummit.json */,
 				6E10A5171D106741008CBD0C /* Summit.json */,
@@ -1242,6 +1245,7 @@
 			files = (
 				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit.json in Resources */,
+				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6E10A5181D106741008CBD0C /* AustinSummit.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
 				6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */,
