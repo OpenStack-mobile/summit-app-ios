@@ -24,6 +24,7 @@ public class RealmSummit: RealmNamed {
     public let trackGroups = List<RealmTrackGroup>()
     public let eventTypes = List<RealmEventType>()
     public let speakers = List<RealmPresentationSpeaker>()
+    public let sponsors = List<RealmCompany>()
 }
 
 // MARK: - Realm Encoding
@@ -46,6 +47,7 @@ extension Summit: RealmDecodable {
         self.trackGroups = TrackGroup.from(realm: realmEntity.trackGroups)
         self.schedule = SummitEvent.from(realm: realmEntity.events)
         self.speakers = PresentationSpeaker.from(realm: realmEntity.speakers)
+        self.sponsors = Company.from(realm: realmEntity.sponsors)
         
         // locations
         let venues = realmEntity.venues.map { Location.venue(Venue(realmEntity: $0)) }
@@ -83,6 +85,7 @@ extension Summit: RealmEncodable {
         realmEntity.track.replace(with: tracks.save(realm))
         realmEntity.trackGroups.replace(with: trackGroups.save(realm))
         realmEntity.speakers.replace(with: speakers)
+        realmEntity.sponsors.replace(with: sponsors)
         
         // locations
         realmEntity.venues.removeAll()

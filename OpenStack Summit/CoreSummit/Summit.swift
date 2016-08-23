@@ -24,7 +24,7 @@ public struct Summit: Named {
     
     //public var active: Bool
     
-    //public var sponsors: [Company]
+    public var sponsors: [Company]
     
     public var speakers: [PresentationSpeaker]
     
