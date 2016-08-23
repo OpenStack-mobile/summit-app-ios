@@ -20,3 +20,15 @@ extension Company: RealmDecodable {
         self.name = realmEntity.name
     }
 }
+
+extension Company: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmCompany {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.name = name
+        
+        return realmEntity
+    }
+}
