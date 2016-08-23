@@ -42,7 +42,7 @@ public struct ScheduleItem: RealmDecodable {
     }
 }
 
-// MARK: - Private Exention
+// MARK: - Internal Extension
 
 internal extension ScheduleItem {
     
@@ -56,16 +56,17 @@ internal extension ScheduleItem {
         return credentials
     }
     
-    static func getSponsors(event: RealmSummitEvent) -> String{
-        if (event.sponsors.count == 0) {
-            return ""
-        }
+    static func getSponsors(event: RealmSummitEvent) -> String {
+        
+        guard event.sponsors.isEmpty == false
+            else { return "" }
         
         var sponsors = "Sponsored by "
         var separator = ""
         for sponsor in event.sponsors {
             sponsors += separator + sponsor.name
             separator = ", "
+            assert(sponsor.name.isEmpty == false, "Empty sponsor name")
         }
         return sponsors
     }
