@@ -29,8 +29,8 @@ extension Summit: JSONDecodable {
             let timeZone = TimeZone(JSONValue: timeZoneJSON),
             /* let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int, */
             /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
-            /* let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue, */
-            /* let sponsors = Company.fromJSON(sponsorsJSONArray), */
+            let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
+            let sponsors = Company.fromJSON(sponsorsJSONArray),
             let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
             let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
@@ -62,6 +62,7 @@ extension Summit: JSONDecodable {
         self.schedule = events
         self.eventTypes = eventTypes
         self.speakers = speakers
+        self.sponsors = sponsors
         
         // in JSON but not in Realm
         //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
