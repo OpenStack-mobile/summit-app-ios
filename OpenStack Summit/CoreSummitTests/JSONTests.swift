@@ -59,6 +59,20 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
     }
     
+    func testDataUpdates3() {
+        
+        let testJSON = loadJSON("DataUpdates3")
+        
+        let dataUpdatesCount = 67
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == dataUpdatesCount, "\(dataUpdates.count) DataUpdate. Should be \(dataUpdatesCount)")
+    }
+    
     func testMember1() {
         
         let testJSON = loadJSON("Member1")

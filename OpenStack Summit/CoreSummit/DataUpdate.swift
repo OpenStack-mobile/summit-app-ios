@@ -58,6 +58,7 @@ public extension DataUpdate {
         case SummitLocationImage
         
         // Not in legacy code
+        case Summit
         case SummitVenueFloor
         case PresentationLink
         case PresentationVideo
@@ -69,6 +70,7 @@ public extension DataUpdate {
             switch self {
             case .WipeData: return nil
             case .MySchedule: return CoreSummit.SummitEvent.DataUpdate.self
+            case .Summit: return CoreSummit.SummitEvent.DataUpdate.self
             case .Presentation: return CoreSummit.SummitEvent.DataUpdate.self
             case .SummitEvent: return CoreSummit.SummitEvent.DataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
