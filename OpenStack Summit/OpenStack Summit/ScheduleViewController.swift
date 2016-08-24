@@ -102,14 +102,44 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     @IBAction func toggleScheduledStatus(sender: UIButton) {
         
-        /*
         let button = sender
         let view = button.superview!
-        let cell = view.superview as! UITableViewCell
-        let indexPath = scheduleView.tableView.indexPathForCell(cell)
+        let cell = view.superview as! ScheduleTableViewCell
+        let indexPath = scheduleView.tableView.indexPathForCell(cell)!
+        let event = dayEvents[indexPath.row]
+        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
         
-        self.toggleScheduledStatus(indexPath!.row, cell: view.superview as! ScheduleTableViewCell)
-        */
+        // update cell
+        cell.scheduled = !scheduled
+        
+        let attendee = Store.shared.authenticatedMember!.attendeeRole!.id
+        
+        let completion: ErrorValue<()> -> () = { [weak self] (response) in
+            
+            guard let controller = self else { return }
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                // restore original value
+                cell.scheduled = scheduled
+                
+                // show error
+                controller.showErrorMessage(error as NSError)
+                
+            case .Value(): break
+            }
+        }
+        
+        if scheduled {
+            
+            Store.shared.removeEventFromSchedule(attendee: attendee, event: event.id, completion: completion)
+            
+        } else {
+            
+            Store.shared.addEventToSchedule(attendee: attendee, event: event.id, completion: completion)
+        }
     }
     
     // MARK: - Methods
