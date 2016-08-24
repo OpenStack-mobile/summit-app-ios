@@ -23,6 +23,9 @@ public extension Presentation {
     
     public enum Level: String {
         
-        case Beginner, Intermediate, Advanced
+        case Beginner
+        case Intermediate
+        case Advanced
+        case NotApplicable = "N/A"
     }
 }
