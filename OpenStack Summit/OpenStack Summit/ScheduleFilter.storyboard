@@ -38,11 +38,11 @@
                                             <action selector="willClearAllTags:" destination="C69-SI-OHW" eventType="touchUpInside" id="LOn-9l-geI"/>
                                         </connections>
                                     </button>
-                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-VF-cLJ">
-                                        <rect key="frame" x="0.0" y="76" width="600" height="1043"/>
+                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="45" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="Rnc-VF-cLJ">
+                                        <rect key="frame" x="0.0" y="60" width="600" height="1052"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1043" id="AeO-1r-5bd"/>
+                                            <constraint firstAttribute="height" constant="1052" id="AeO-1r-5bd"/>
                                         </constraints>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2za-43-WAU" customClass="AMTagListView">
@@ -61,7 +61,7 @@
                                     <constraint firstItem="A7N-5U-mUT" firstAttribute="leading" secondItem="l4W-Bu-SN0" secondAttribute="trailing" constant="8" id="MGH-jk-sm4"/>
                                     <constraint firstItem="l4W-Bu-SN0" firstAttribute="leading" secondItem="2HB-5Y-9TW" secondAttribute="leading" constant="16" id="RfW-rt-ZgN"/>
                                     <constraint firstItem="Rnc-VF-cLJ" firstAttribute="width" secondItem="2HB-5Y-9TW" secondAttribute="width" id="URN-ds-rPW"/>
-                                    <constraint firstItem="Rnc-VF-cLJ" firstAttribute="top" secondItem="2za-43-WAU" secondAttribute="bottom" constant="16" id="W69-GK-w4U"/>
+                                    <constraint firstItem="Rnc-VF-cLJ" firstAttribute="top" secondItem="2za-43-WAU" secondAttribute="bottom" id="W69-GK-w4U"/>
                                     <constraint firstItem="2za-43-WAU" firstAttribute="leading" secondItem="2HB-5Y-9TW" secondAttribute="leading" constant="16" id="XIn-BB-b5b"/>
                                     <constraint firstItem="A7N-5U-mUT" firstAttribute="trailing" secondItem="2HB-5Y-9TW" secondAttribute="trailing" constant="-16" id="dNQ-bk-beX"/>
                                     <constraint firstItem="2za-43-WAU" firstAttribute="top" secondItem="l4W-Bu-SN0" secondAttribute="bottom" constant="14" id="gsW-ec-4we"/>
