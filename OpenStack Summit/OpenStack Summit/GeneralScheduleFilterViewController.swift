@@ -34,11 +34,12 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     private let extraPadding: CGFloat = 5
     private var filteredTags = [String]()
     
-    private var summitTypeItemCount: Int { return scheduleFilter.filterSections[0].items.count }
-    private var trackGroupItemCount: Int { return scheduleFilter.filterSections[1].items.count }
-    private var eventTypeItemCount: Int { return scheduleFilter.filterSections[2].items.count }
-    private var levelItemCount: Int { return scheduleFilter.filterSections[3].items.count }
-    private var totalItemCount: Int { return summitTypeItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount }
+    private var activeTalksItemCount: Int { return scheduleFilter.filterSections[0].items.count }
+    private var summitTypeItemCount: Int { return scheduleFilter.filterSections[1].items.count }
+    private var trackGroupItemCount: Int { return scheduleFilter.filterSections[2].items.count }
+    private var eventTypeItemCount: Int { return scheduleFilter.filterSections[3].items.count }
+    private var levelItemCount: Int { return scheduleFilter.filterSections[4].items.count }
+    private var totalItemCount: Int { return activeTalksItemCount + summitTypeItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount }
     
     // MARK: - Loading
     
@@ -109,74 +110,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         scheduleFilter.hasToRefreshSchedule = true
         
-        if scheduleFilter.filterSections.count == 0 {
-            
-            let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
-            let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
-            let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
-            let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
-            
-            var filterSectionItem: FilterSectionItem
-
-            var filterSection = FilterSection()
-            filterSection.type = FilterSectionType.SummitType
-            filterSection.name = "SUMMIT TYPE"
-            
-            for summitType in summitTypes {
-                
-                filterSectionItem = createSectionItem(summitType.identifier, name: summitType.name, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
-            
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.TrackGroup
-            filterSection.name = "TRACK GROUP"
-            
-            for trackGroup in summitTrackGroups {
-                
-                filterSectionItem = createSectionItem(trackGroup.identifier, name: trackGroup.name, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
-            
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.EventType
-            filterSection.name = "EVENT TYPE"
-            
-            for eventType in eventTypes {
-                
-                filterSectionItem = createSectionItem(eventType.identifier, name: eventType.name, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
-            
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.Level
-            filterSection.name = "LEVEL"
-            
-            for level in levels {
-                
-                filterSectionItem = createSectionItem(0, name: level, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.Level] = [String]()
-            
-            
-            scheduleFilter.selections[FilterSectionType.Tag] = [Int]()
-        }
-        
         self.reloadFilters()
         
         for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
@@ -192,8 +125,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         filtersTableView.reloadData()
         
         filtersTableViewHeightConstraint.constant = cellHeight * CGFloat(totalItemCount)
-        filtersTableViewHeightConstraint.constant += headerHeight * CGFloat(scheduleFilter.filterSections.count)
-        filtersTableViewHeightConstraint.constant += extraPadding * CGFloat(scheduleFilter.filterSections.count) * 4
+        filtersTableViewHeightConstraint.constant += headerHeight * (CGFloat(scheduleFilter.filterSections.count) - 1)
+        filtersTableViewHeightConstraint.constant += extraPadding * CGFloat(scheduleFilter.filterSections.count) * 2
     }
     
     @inline(__always)
@@ -215,16 +148,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         tagListViewHeightConstraint.constant = height
         tagListView.updateConstraints()
-    }
-    
-    private func createSectionItem(id: Int, name: String, type: FilterSectionType) -> FilterSectionItem {
-        
-        let filterSectionItem = FilterSectionItem()
-        
-        filterSectionItem.id = id
-        filterSectionItem.name = name
-        
-        return filterSectionItem
     }
     
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
@@ -265,7 +188,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         cell.name = filterItem.name
         
-        if filterSection.type != FilterSectionType.Level {
+        if filterSection.type != FilterSectionType.Level && filterSection.type != FilterSectionType.ActiveTalks {
             
             cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.id)
         }
@@ -294,7 +217,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let filterItem = filterSection.items[index]
         
-        if filterSection.type != FilterSectionType.Level {
+        if filterSection.type != FilterSectionType.Level && filterSection.type != FilterSectionType.ActiveTalks {
             
             if isItemSelected(filterSection.type, id: filterItem.id) {
                 
@@ -339,6 +262,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         switch filterSection.type! {
             
+        case FilterSectionType.ActiveTalks:
+            count = activeTalksItemCount
+            
         case FilterSectionType.SummitType:
             count = summitTypeItemCount
             
@@ -375,7 +301,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return headerHeight
+        let filterSection = scheduleFilter.filterSections[section]
+        
+        return filterSection.type != FilterSectionType.ActiveTalks ? headerHeight : 0
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -394,7 +322,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let filterSection = scheduleFilter.filterSections[indexPath.section]
         
-        if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 || indexPath.row == filterSection.items.count {
+        if indexPath.row == filterSection.items.count - 1 || indexPath.row == filterSection.items.count {
             
             return cellHeight + extraPadding * 2
         }

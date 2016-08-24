@@ -205,11 +205,14 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         self.startDate = summit.start.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
         self.endDate = summit.end.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
         
-        self.availableDates = self.scheduleAvailableDates(from: self.startDate, to: self.endDate)
+        let today = NSDate()
+        
+        let shoudHidePastTalks = self.scheduleFilter.shoudHidePastTalks()
+        
+        self.availableDates = self.scheduleAvailableDates(from: shoudHidePastTalks ? today : self.startDate, to: self.endDate)
         
         if self.selectedDate != nil {
-            if self.availableDates.count > 0 && !self.availableDates.contains(self.selectedDate!) {
-                let today = NSDate()
+            if self.availableDates.count > 0 {
                 var selected = self.availableDates.first
                 for availableDate in self.availableDates {
                     if availableDate.mt_isWithinSameDay(today) {
@@ -222,7 +225,6 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         }
         else {
             if self.availableDates.count > 0 {
-                let today = NSDate()
                 var selected = self.availableDates.first
                 for availableDate in self.availableDates {
                     if availableDate.mt_isWithinSameDay(today) {
@@ -247,7 +249,11 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
         let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
         
-        self.dayEvents = self.scheduledEvents(from: startDate, to: endDate)
+        let today = NSDate()
+        
+        let shoudHidePastTalks = self.scheduleFilter.shoudHidePastTalks()
+
+        self.dayEvents = self.scheduledEvents(from: shoudHidePastTalks ? today : startDate, to: endDate)
         
         scheduleView.tableView.reloadData()
     }
