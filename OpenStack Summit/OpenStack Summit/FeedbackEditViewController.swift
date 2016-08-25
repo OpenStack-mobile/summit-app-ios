@@ -53,7 +53,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         
         setBlankBackBarButtonItem()
         
-        navigationItem.title = "REVIEW"
+        navigationItem.title = "RATE SESSION"
         reviewTextArea.delegate = self
         
         sendButton.layer.cornerRadius = 10
