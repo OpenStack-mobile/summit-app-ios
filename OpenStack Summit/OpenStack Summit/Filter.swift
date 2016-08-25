@@ -10,7 +10,7 @@ import CoreSummit
 
 public enum FilterSectionType {
     
-    case ActiveTalks, SummitType, EventType, Track, TrackGroup, Tag, Level
+    case ActiveTalks, EventType, Track, TrackGroup, Tag, Level
 }
 
 public final class FilterSection {
