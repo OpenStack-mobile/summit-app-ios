@@ -207,7 +207,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         filtersTableViewHeightConstraint.constant = cellHeight * CGFloat(totalItemCount)
         filtersTableViewHeightConstraint.constant += headerHeight * (CGFloat(scheduleFilter.filterSections.count) - 1)
-        filtersTableViewHeightConstraint.constant += extraPadding * CGFloat(scheduleFilter.filterSections.count) * 2
+        filtersTableViewHeightConstraint.constant += extraPadding * 4 * (CGFloat(scheduleFilter.filterSections.count) - (activeTalksItemCount == 0 ? 1 : 0)) - (activeTalksItemCount == 0 ? 0 : extraPadding * 2)
     }
     
     @inline(__always)
@@ -294,7 +294,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             cell.circleColor = UIColor(hexaString: trackGroup!.color)
         }
         
-        if index == 0 || index == filterSection.items.count {
+        if index == 0 {
             
             cell.addTopExtraPadding()
         }
@@ -410,8 +410,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let filterSection = scheduleFilter.filterSections[indexPath.section]
         
-        if indexPath.row == filterSection.items.count - 1 || indexPath.row == filterSection.items.count {
+        if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 {
             
+            print("section \(indexPath.section) row \(indexPath.row)")
             return cellHeight + extraPadding * 2
         }
         return cellHeight
