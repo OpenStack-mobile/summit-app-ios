@@ -92,9 +92,6 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         
         let isScheduled = isEventScheduledByLoggedMember(event.id)
         
-        guard let loggedInMember = Store.shared.authenticatedMember?.id
-            else { return }
-        
         if isOperationOngoing {
             return
         }
@@ -106,7 +103,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             cell.scheduled = false
             
-            Store.shared.removeEventFromSchedule(attendee: loggedInMember, event: event.id) { [weak self] (response) in
+            Store.shared.removeEventFromSchedule(event: event.id) { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -135,7 +132,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             cell.scheduled = true
             
-            Store.shared.addEventToSchedule(attendee: loggedInMember, event: event.id)  { [weak self] (response) in
+            Store.shared.addEventToSchedule(event: event.id)  { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -178,10 +175,8 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
     
     private func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
         
-        /*
-         if !securityManager.isLoggedInAndConfirmedAttendee() {
-         return false;
-         }*/
+        guard Store.shared.isLoggedInAndConfirmedAttendee
+            else { return false }
         
         guard let loggedInMember = Store.shared.authenticatedMember,
             let attendee = loggedInMember.attendeeRole

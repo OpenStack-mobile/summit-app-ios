@@ -134,11 +134,11 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         if scheduled {
             
-            Store.shared.removeEventFromSchedule(attendee: attendee, event: event.id, completion: completion)
+            Store.shared.removeEventFromSchedule(event: event.id, completion: completion)
             
         } else {
             
-            Store.shared.addEventToSchedule(attendee: attendee, event: event.id, completion: completion)
+            Store.shared.addEventToSchedule(event: event.id, completion: completion)
         }
     }
     

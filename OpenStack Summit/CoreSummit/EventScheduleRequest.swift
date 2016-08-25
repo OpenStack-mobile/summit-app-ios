@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func addEventToSchedule(summit: Identifier? = nil, attendee: Identifier, event: Identifier, completion: (ErrorValue<()>) -> ()) {
+    func addEventToSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<()>) -> ()) {
         
         let summitID: String
         
@@ -25,7 +25,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/attendees/\(attendee)/schedule/\(event)"
+        let URI = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
         
         let URL = configuration[.ServerURL] + URI
         
@@ -38,7 +38,7 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             // cache
-            if let attendee = RealmSummitAttendee.find(attendee, realm: self.realm),
+            if let attendee = self.authenticatedMember?.attendeeRole,
                 let event = RealmSummitEvent.find(event, realm: self.realm) {
                 
                 try! self.realm.write {
@@ -54,7 +54,7 @@ public extension Store {
         })
     }
     
-    func removeEventFromSchedule(summit: Identifier? = nil, attendee: Identifier, event: Identifier, completion: (ErrorValue<()>) -> ()) {
+    func removeEventFromSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<()>) -> ()) {
         
         let summitID: String
         
@@ -67,7 +67,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/attendees/\(attendee)/schedule/\(event)"
+        let URI = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)"
         
         let URL = configuration[.ServerURL] + URI
         
@@ -80,7 +80,7 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             // cache
-            if let attendee = RealmSummitAttendee.find(attendee, realm: self.realm),
+            if let attendee = self.authenticatedMember?.attendeeRole,
                 let event = RealmSummitEvent.find(event, realm: self.realm) {
                 
                 try! self.realm.write {
