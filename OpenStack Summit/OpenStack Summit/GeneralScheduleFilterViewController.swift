@@ -35,11 +35,10 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     private var filteredTags = [String]()
     
     private var activeTalksItemCount: Int { return scheduleFilter.filterSections[0].items.count }
-    private var summitTypeItemCount: Int { return scheduleFilter.filterSections[1].items.count }
-    private var trackGroupItemCount: Int { return scheduleFilter.filterSections[2].items.count }
-    private var eventTypeItemCount: Int { return scheduleFilter.filterSections[3].items.count }
-    private var levelItemCount: Int { return scheduleFilter.filterSections[4].items.count }
-    private var totalItemCount: Int { return activeTalksItemCount + summitTypeItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount }
+    private var trackGroupItemCount: Int { return scheduleFilter.filterSections[1].items.count }
+    private var eventTypeItemCount: Int { return scheduleFilter.filterSections[2].items.count }
+    private var levelItemCount: Int { return scheduleFilter.filterSections[3].items.count }
+    private var totalItemCount: Int { return activeTalksItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount }
     
     // MARK: - Loading
     
@@ -112,7 +111,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         if scheduleFilter.filterSections.count == 0 {
             
-            let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
             let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
             let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
             let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
@@ -146,19 +144,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             }
             
             scheduleFilter.filterSections.append(filterSection)
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.SummitType
-            filterSection.name = "SUMMIT TYPE"
-            
-            for summitType in summitTypes {
-                
-                filterSectionItem = createSectionItem(summitType.identifier, name: summitType.name, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.SummitType] = [Int]()
             
             
             filterSection = FilterSection()
@@ -370,9 +355,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
         case FilterSectionType.ActiveTalks:
             count = activeTalksItemCount
-            
-        case FilterSectionType.SummitType:
-            count = summitTypeItemCount
             
         case FilterSectionType.EventType:
             count = eventTypeItemCount

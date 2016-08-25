@@ -77,13 +77,12 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         
         let eventTypes = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
-        let summitTypes = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
         let tracks = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
         let trackGroups = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
         let tags = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
         let levels = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
+        let events = RealmSummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -100,13 +99,12 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
         
         let eventTypes = self.scheduleFilter.selections[FilterSectionType.EventType] as? [Int]
-        let summitTypes = self.scheduleFilter.selections[FilterSectionType.SummitType] as? [Int]
         let tracks = self.scheduleFilter.selections[FilterSectionType.Track] as? [Int]
         let trackGroups = self.scheduleFilter.selections[FilterSectionType.TrackGroup] as? [Int]
         let tags = self.scheduleFilter.selections[FilterSectionType.Tag] as? [String]
         let levels = self.scheduleFilter.selections[FilterSectionType.Level] as? [String]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
+        let events = RealmSummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
         
         return ScheduleItem.from(realm: events)
     }
