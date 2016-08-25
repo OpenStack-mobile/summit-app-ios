@@ -83,6 +83,6 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
-        return IndicatorInfo(title: "Feedback")
+        return IndicatorInfo(title: "Reviews")
     }
 }
