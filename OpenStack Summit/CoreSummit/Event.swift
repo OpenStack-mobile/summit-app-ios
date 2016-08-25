@@ -36,7 +36,7 @@ public struct Event: Named {
         
     public var location: Identifier
     
-    public var presentation: Presentation
+    public var presentation: Presentation?
         
     //public var trackIdentifier: Identifier
     
