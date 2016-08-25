@@ -101,6 +101,8 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
         
         trackScheduleVC.track = track
         
+        trackScheduleVC.scheduleFilter = scheduleFilter
+        
         self.showViewController(trackScheduleVC, sender: self)
     }
     
