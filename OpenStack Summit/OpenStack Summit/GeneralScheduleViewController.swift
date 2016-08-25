@@ -43,12 +43,12 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     
     override func toggleEventList(show: Bool) {
         
-        scheduleView.hidden = !show
+        scheduleView!.hidden = !show
     }
     
     override func toggleNoConnectivityMessage(show: Bool) {
         
-        noConnectivityView.hidden = !show
+        noConnectivityView!.hidden = !show
     }
     
     internal override func loadData() {
@@ -68,8 +68,6 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
         
         self.toggleNoConnectivityMessage(false)
         self.toggleEventList(true)
-        
-        self.checkForClearDataEvents()
         
         super.loadData()
     }
@@ -107,14 +105,6 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
         let events = RealmSummitEvent.filter(startDate, endDate: endDate, eventTypes: eventTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels)
         
         return ScheduleItem.from(realm: events)
-    }
-    
-    // MARK: - Private Methods
-    
-    @inline(__always)
-    private func checkForClearDataEvents() {
-        
-        //dataUpdatePoller.clearDataIfTruncateEventExist()
     }
     
     // MARK: - IndicatorInfoProvider
