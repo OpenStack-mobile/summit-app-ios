@@ -96,6 +96,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         // load UI
         loadData()
+        self.scheduleView.tableView.reloadData()
     }
     
     // MARK: - Actions
@@ -111,8 +112,6 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         // update cell
         cell.scheduled = !scheduled
-        
-        let attendee = Store.shared.authenticatedMember!.attendeeRole!.id
         
         let completion: ErrorValue<()> -> () = { [weak self] (response) in
             

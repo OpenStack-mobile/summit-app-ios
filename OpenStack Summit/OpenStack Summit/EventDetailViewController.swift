@@ -14,7 +14,7 @@ import SwiftSpinner
 import CoreSummit
 import XCDYouTubeKit
 
-final class EventDetailViewController: UIViewController, ShowActivityIndicatorProtocol, UITableViewDelegate, UITableViewDataSource {
+final class EventDetailViewController: UIViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
     
@@ -371,7 +371,37 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     
     @IBAction func toggleSchedule(sender: UIBarButtonItem) {
         
-        //presenter.toggleScheduledStatus()
+        let oldValue = self.scheduled
+        
+        // update UI
+        self.scheduled = !oldValue
+        
+        let completion: ErrorValue<()> -> () = { [weak self] (response) in
+            
+            guard let controller = self else { return }
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                // restore original value
+                controller.scheduled = oldValue
+                
+                // show error
+                controller.showErrorMessage(error as NSError)
+                
+            case .Value(): break
+            }
+        }
+        
+        if oldValue {
+            
+            Store.shared.removeEventFromSchedule(event: self.event, completion: completion)
+            
+        } else {
+            
+            Store.shared.addEventToSchedule(event: self.event, completion: completion)
+        }
     }
     
     @IBAction func playVideo(sender: UIButton) {
