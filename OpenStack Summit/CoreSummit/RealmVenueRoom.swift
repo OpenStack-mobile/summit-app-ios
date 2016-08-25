@@ -14,10 +14,11 @@ public class RealmVenueRoom: RealmLocation {
     public dynamic var capacity = 0
     public dynamic var venue: RealmVenue!
     
+    /*
     public var events: [RealmSummitEvent] {
         
         return linkingObjects(RealmSummitEvent.self, forProperty: "venueRoom")
-    }
+    }*/
 }
 
 // MARK: - Encoding

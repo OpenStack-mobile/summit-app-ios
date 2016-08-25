@@ -40,7 +40,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             Preference.appBuild = AppBuild
             
             // nuke cache
-            let realmPath = Realm.Configuration.defaultConfiguration.path!
+            let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
             
             if NSFileManager.defaultManager().fileExistsAtPath(realmPath) {
                 
