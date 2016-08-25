@@ -10,10 +10,11 @@ import RealmSwift
 
 public class RealmPresentationSpeaker: RealmPerson {
     
+    /*
     public var presentations: [RealmPresentation] {
         
         return self.linkingObjects(RealmPresentation.self, forProperty: "speakers")
-    }
+    }*/
     
 }
 

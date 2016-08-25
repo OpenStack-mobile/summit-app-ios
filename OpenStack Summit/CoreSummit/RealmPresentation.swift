@@ -15,10 +15,10 @@ public class RealmPresentation: RealmEntity {
     public dynamic var moderator: RealmPresentationSpeaker?
     public let speakers = List<RealmPresentationSpeaker>()
     
-    
+    /*
     public var event: RealmSummitEvent {
         return self.linkingObjects(RealmSummitEvent.self, forProperty: "presentation").first!
-    }
+    }*/
 }
 
 // MARK: - Encoding

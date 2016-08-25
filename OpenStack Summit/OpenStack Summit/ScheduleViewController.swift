@@ -89,14 +89,9 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         // register for notifications
         registerNotifications()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         // load UI
         loadData()
-        self.scheduleView.tableView.reloadData()
     }
     
     // MARK: - Actions
