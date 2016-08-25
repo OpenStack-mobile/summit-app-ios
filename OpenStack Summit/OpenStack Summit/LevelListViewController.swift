@@ -103,6 +103,8 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
         
         levelScheduleViewController.level = level
         
+        levelScheduleViewController.scheduleFilter = scheduleFilter
+        
         self.showViewController(levelScheduleViewController, sender: self)
     }
     
