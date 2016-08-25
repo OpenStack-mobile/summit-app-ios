@@ -39,8 +39,7 @@ extension SummitEvent: JSONDecodable {
             /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
             /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
-            let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int,
-            let presentation = Presentation(JSONValue: JSONValue)
+            let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier
@@ -54,7 +53,6 @@ extension SummitEvent: JSONDecodable {
         self.type = type
         self.sponsors = sponsors
         self.location = locationIdentifier
-        self.presentation = presentation
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
@@ -72,5 +70,17 @@ extension SummitEvent: JSONDecodable {
             self.videos = []
         }
         
+        // decode presentation
+        if JSONObject[JSONKey.track_id.rawValue] != nil {
+            
+            guard let presentation = Presentation(JSONValue: JSONValue)
+                else { return nil }
+            
+            self.presentation = presentation
+            
+        } else {
+            
+            self.presentation = nil
+        }
     }
 }
