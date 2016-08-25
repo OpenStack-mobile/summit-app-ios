@@ -412,7 +412,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 {
             
-            print("section \(indexPath.section) row \(indexPath.row)")
             return cellHeight + extraPadding * 2
         }
         return cellHeight
