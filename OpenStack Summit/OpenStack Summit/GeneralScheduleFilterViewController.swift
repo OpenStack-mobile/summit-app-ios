@@ -148,7 +148,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             filterSection = FilterSection()
             filterSection.type = FilterSectionType.TrackGroup
-            filterSection.name = "TRACK GROUP"
+            filterSection.name = "SUMMIT CATEGORY"
             
             for trackGroup in summitTrackGroups {
                 
