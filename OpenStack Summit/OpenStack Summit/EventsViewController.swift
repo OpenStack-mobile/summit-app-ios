@@ -121,6 +121,8 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter) {
         
+        activeFilterIndicator = scheduleFilter.hasActiveFilters()
+        
         generalScheduleViewController.loadData()
     }
     
