@@ -101,6 +101,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         // realm notifications
         realmNotificationToken = Store.shared.realm.addNotificationBlock { (notification, realm) in
             
+            guard self.scheduleView.dayPicker.selectedDate != nil else { return }
+            
             self.reloadSchedule()
         }
     }
