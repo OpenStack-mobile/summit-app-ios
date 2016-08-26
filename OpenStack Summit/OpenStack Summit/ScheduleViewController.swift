@@ -10,6 +10,7 @@ import SwiftFoundation
 import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
+import RealmSwift
 
 class ScheduleViewController: UIViewController, FilteredScheduleViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -26,6 +27,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     var scheduleFilter = ScheduleFilter()
     
     private var pushRegisterInProgress = false
+    
+    private var realmNotificationToken: RealmSwift.NotificationToken!
     
     // MARK: - Accessors
     
@@ -72,6 +75,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     deinit {
         
         stopNotifications()
+        
+        realmNotificationToken?.stop()
     }
     
     override func viewDidLoad() {
@@ -92,6 +97,12 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         // load UI
         loadData()
+        
+        // realm notifications
+        realmNotificationToken = Store.shared.realm.addNotificationBlock { (notification, realm) in
+            
+            self.reloadSchedule()
+        }
     }
     
     // MARK: - Actions
