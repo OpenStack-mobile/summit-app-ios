@@ -249,6 +249,10 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     private func reloadSchedule() {
         
+        let tableView = self.scheduleView.tableView
+        
+        let oldSchedule = self.dayEvents
+        
         let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
         
         let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
@@ -260,7 +264,68 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
 
         self.dayEvents = self.scheduledEvents(from: shoudHidePastTalks ? today : startDate, to: endDate)
         
-        scheduleView.tableView.reloadData()
+        if oldSchedule.isEmpty {
+            
+            tableView.reloadData()
+            
+        } else {
+            
+            tableView.beginUpdates()
+            
+            defer { tableView.endUpdates() }
+            
+            // update new schedule with animation
+            
+            for (index, event) in self.dayEvents.enumerate() {
+                
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                
+                // add new item
+                guard index < oldSchedule.count else {
+                    
+                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    
+                    if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ScheduleTableViewCell {
+                        
+                        configure(cell: cell, at: indexPath)
+                    }
+                    
+                    continue
+                }
+                
+                let oldEvent = oldSchedule[index]
+                
+                // delete and insert cell (cell represents different event)
+                guard event.id == oldEvent.id else {
+                    
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    
+                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    
+                    if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ScheduleTableViewCell {
+                        
+                        configure(cell: cell, at: indexPath)
+                    }
+                    
+                    continue
+                }
+                
+                // update existing cell
+                
+                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ScheduleTableViewCell {
+                    
+                    configure(cell: cell, at: indexPath)
+                }
+            }
+            
+            // remove old items
+            if dayEvents.count < oldSchedule.count {
+                
+                let deletedIndexPaths = (dayEvents.count ..< oldSchedule.count).map { NSIndexPath(forRow: $0, inSection: 0) }
+                
+                tableView.deleteRowsAtIndexPaths(deletedIndexPaths, withRowAnimation: .Automatic)
+            }
+        }
     }
     
     private func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
