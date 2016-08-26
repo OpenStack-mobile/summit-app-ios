@@ -11,7 +11,7 @@ import KTCenterFlowLayout
 import SwiftSpinner
 import CoreSummit
 
-final class EventsViewController: RevealTabStripViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class EventsViewController: RevealTabStripViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, GeneralScheduleFilterViewControllerDelegate {
     
     // MARK: - Properties
     
@@ -100,7 +100,9 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
         let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
         
+        navigationController.modalPresentationStyle = .FormSheet
         generalScheduleFilterViewController.scheduleFilter = scheduleFilter
+        generalScheduleFilterViewController.delegate = self
         scheduleFilter.hasToRefreshSchedule = true
         
         self.presentViewController(navigationController, animated: true, completion: nil)
@@ -113,6 +115,13 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         self.activeFilterIndicator = false
         
         self.reloadPagerTabStripView()
+    }
+    
+    // MARK: - GeneralScheduleFilterViewControllerDelegate
+    
+    func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter) {
+        
+        generalScheduleViewController.loadData()
     }
     
     // MARK: - RevealTabStripViewController
