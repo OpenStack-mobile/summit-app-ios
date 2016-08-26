@@ -11,6 +11,11 @@ import MLPAutoCompleteTextField
 import AMTagListView
 import CoreSummit
 
+protocol GeneralScheduleFilterViewControllerDelegate: class {
+    
+    func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter)
+}
+
 final class GeneralScheduleFilterViewController: UIViewController, FilteredScheduleViewController, UITableViewDelegate, UITableViewDataSource, MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource {
     
     // MARK: - IB Outlets
@@ -24,6 +29,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     @IBOutlet weak var clearTagsButton: UIButton!
     
     // MARK: - Properties
+    
+    weak var delegate: GeneralScheduleFilterViewControllerDelegate?
     
     var scheduleFilter = ScheduleFilter()
     
@@ -336,6 +343,11 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
                 cell.isOptionSelected = true
             }
         }
+        
+        scheduleFilter.hasToRefreshSchedule = true
+        
+        // inform delegate
+        delegate?.scheduleFilterController(self, didUpdateFilter: self.scheduleFilter)
     }
     
     // MARK: - UITableViewDataSource
