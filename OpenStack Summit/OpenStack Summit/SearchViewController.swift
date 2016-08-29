@@ -90,7 +90,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         let indexPath = eventsTableView.indexPathForCell(cell)!
         let event = events[indexPath.row]
         
-        let isScheduled = isEventScheduledByLoggedMember(event.id)
+        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
         
         if isOperationOngoing {
             return
@@ -173,18 +173,6 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         getSpeakers()
     }
     
-    private func isEventScheduledByLoggedMember(eventId: Int) -> Bool {
-        
-        guard Store.shared.isLoggedInAndConfirmedAttendee
-            else { return false }
-        
-        guard let loggedInMember = Store.shared.authenticatedMember,
-            let attendee = loggedInMember.attendeeRole
-            else { return false }
-        
-        return attendee.scheduledEvents.filter("id = \(eventId)").count > 0
-    }
-    
     private func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
         if count > 0 {
             constraint.constant = count <= 4 ? max(CGFloat(minSize), tableView.contentSize.height) : 290
@@ -224,12 +212,6 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
     
     private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
         
-        func isLoggedInAndConfirmedAttendee() -> Bool {
-            
-            // FIXME
-            return false
-        }
-        
         let index = indexPath.row
         let event = events[index]
         cell.eventTitle = event.name
@@ -238,8 +220,8 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         cell.location = event.location
         cell.sponsors = event.sponsors
         cell.track = event.track
-        cell.scheduled = isEventScheduledByLoggedMember(event.id)
-        cell.isScheduledStatusVisible = isLoggedInAndConfirmedAttendee()
+        cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        cell.isScheduledStatusVisible = Store.shared.isLoggedInAndConfirmedAttendee
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
@@ -306,7 +288,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         
         searchTermTextView.resignFirstResponder()
         
-        if let text = searchTermTextView.text where text.isEmpty {
+        if let text = searchTermTextView.text where text.isEmpty == false {
             
             self.searchTerm = text
             self.search()
@@ -369,10 +351,17 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             eventVC.event = event.id
             
+            showViewController(eventVC, sender: self)
+            
         case tracksTableView:
             
-            // FIXME
-            break
+            let track = tracks[indexPath.row]
+            
+            let trackScheduleVC = R.storyboard.schedule.trackScheduleViewController()!
+            
+            trackScheduleVC.track = track
+            
+            self.showViewController(trackScheduleVC, sender: self)
             
         case speakersTableView.tableView:
             
