@@ -33,8 +33,6 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         }
     }
     
-    var scheduleFilter = ScheduleFilter.`default`
-    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -70,15 +68,14 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         toolbarItems = [message, spacer, clear]
         
         // set child VCs to the same filter instance
-        trackListViewController.scheduleFilter = scheduleFilter
-        generalScheduleViewController.scheduleFilter = scheduleFilter
-        levelListViewController.scheduleFilter = scheduleFilter
+        trackListViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
+        levelListViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        activeFilterIndicator = scheduleFilter.hasActiveFilters()
+        activeFilterIndicator = generalScheduleViewController.scheduleFilter.hasActiveFilters()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -101,17 +98,17 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
         
         navigationController.modalPresentationStyle = .FormSheet
-        generalScheduleFilterViewController.scheduleFilter = scheduleFilter
+        generalScheduleFilterViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
         generalScheduleFilterViewController.delegate = self
-        scheduleFilter.hasToRefreshSchedule = true
+        generalScheduleViewController.scheduleFilter.hasToRefreshSchedule = true
         
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func clearFilters(sender: UIBarButtonItem) {
         
-        scheduleFilter.clearActiveFilters()
-        scheduleFilter.hasToRefreshSchedule = true
+        generalScheduleViewController.scheduleFilter.clearActiveFilters()
+        generalScheduleViewController.scheduleFilter.hasToRefreshSchedule = true
         self.activeFilterIndicator = false
         
         self.reloadPagerTabStripView()
@@ -121,7 +118,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter) {
         
-        activeFilterIndicator = scheduleFilter.hasActiveFilters()
+        activeFilterIndicator = generalScheduleViewController.scheduleFilter.hasActiveFilters()
         
         generalScheduleViewController.loadData()
     }
