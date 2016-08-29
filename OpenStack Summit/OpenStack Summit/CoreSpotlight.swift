@@ -21,6 +21,8 @@ extension SummitEvent {
     
     static var itemContentType: String { return kUTTypeText as String }
     
+    static let searchDomain = "org.openstack.SummitEvent"
+    
     func toSearchableItem() -> CSSearchableItem {
         
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
@@ -39,9 +41,7 @@ extension SummitEvent {
             attributeSet.contentDescription = attributedString.string
         }
         
-        //attributeSet.thumbnailData = UIImagePNGRepresentation(image)!
-        
-        return CSSearchableItem(uniqueIdentifier: "\(identifier)", domainIdentifier: nil, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: "\(identifier)", domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -49,6 +49,8 @@ extension SummitEvent {
 extension PresentationSpeaker {
     
     static var itemContentType: String { return kUTTypeText as String }
+    
+    static let searchDomain = "org.openstack.PresentationSpeaker"
     
     func toSearchableItem() -> CSSearchableItem {
         
@@ -61,19 +63,27 @@ extension PresentationSpeaker {
             description += twitter + "\n"
         }
         
-        if let biography = self.biography {
+        if let descriptionText = self.biography,
+            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
             
+            let biography = attributedString.string
             description += biography + "\n"
         }
         
         attributeSet.displayName = name
         attributeSet.contentDescription = description
         
+        /*
         // user image
-        //Shared.imageCache.
-        //attributeSet.thumbnailData = UIImagePNGRepresentation(image)!
+        let imageURLString = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
-        return CSSearchableItem(uniqueIdentifier: "\(identifier)", domainIdentifier: nil, attributeSet: attributeSet)
+        if let imageURL = NSURL(string: imageURLString) {
+            
+            attributeSet.thumbnailData = NSData(contentsOfURL: imageURL)
+        }*/
+        
+        return CSSearchableItem(uniqueIdentifier: "\(identifier)", domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
     }
 }
 
@@ -93,12 +103,18 @@ func UpdateSpotlight(index: CSSearchableIndex = CSSearchableIndex.defaultSearcha
         // get all speakers and events
         dispatch_async(dispatch_get_main_queue()) {
             
-            let events = SummitEvent.from(realm: Store.shared.realm.objects(RealmSummitEvent)).map { $0.toSearchableItem() }
-            let speakers = PresentationSpeaker.from(realm: Store.shared.realm.objects(RealmPresentationSpeaker)).map { $0.toSearchableItem() }
+            let realmEvents = SummitEvent.from(realm: Store.shared.realm.objects(RealmSummitEvent))
+            let realmSpeakers = PresentationSpeaker.from(realm: Store.shared.realm.objects(RealmPresentationSpeaker))
             
-            let items = events + speakers
-            
-            index.indexSearchableItems(items, completionHandler: completionHandler)
+            dispatch_async(dispatch_queue_create("CoreSpotlight Update Queue", nil), {
+                
+                let events = realmEvents.map { $0.toSearchableItem() }
+                let speakers = realmSpeakers.map { $0.toSearchableItem() }
+                
+                let items = events + speakers
+                
+                index.indexSearchableItems(items, completionHandler: completionHandler)
+            })
         }
     }
 }
