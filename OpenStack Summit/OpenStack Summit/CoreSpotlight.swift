@@ -112,7 +112,10 @@ final class SpotlightController {
         
         self.realmNotificationToken = Store.shared.realm.addNotificationBlock({ (notification, realm) in
             
-            self.update { if let error = $0 { self.log?("Error Updating CoreSpotlight \(error.localizedDescription)") } }
+            self.update {
+                if let error = $0 { self.log?("Error: \(error.localizedDescription)") }
+                else { self.log?("Updated SpotLight index") }
+            }
         })
     }
     
