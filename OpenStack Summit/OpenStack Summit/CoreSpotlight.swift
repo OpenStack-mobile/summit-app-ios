@@ -89,36 +89,6 @@ extension PresentationSpeaker {
 
 // MARK: - Controller
 
-@available(iOS 9.0, *)
-func UpdateSpotlight(index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex(), completionHandler: ((NSError?) -> ())? = nil) {
-    
-    index.deleteAllSearchableItemsWithCompletionHandler { (deleteError) in
-        
-        if let error = deleteError {
-            
-            completionHandler?(error)
-            return
-        }
-        
-        // get all speakers and events
-        dispatch_async(dispatch_get_main_queue()) {
-            
-            let realmEvents = SummitEvent.from(realm: Store.shared.realm.objects(RealmSummitEvent))
-            let realmSpeakers = PresentationSpeaker.from(realm: Store.shared.realm.objects(RealmPresentationSpeaker))
-            
-            dispatch_async(dispatch_queue_create("CoreSpotlight Update Queue", nil), {
-                
-                let events = realmEvents.map { $0.toSearchableItem() }
-                let speakers = realmSpeakers.map { $0.toSearchableItem() }
-                
-                let items = events + speakers
-                
-                index.indexSearchableItems(items, completionHandler: completionHandler)
-            })
-        }
-    }
-}
-
 /// Updates the CoreSpotlight index from Realm changes.
 @available(iOS 9.0, *)
 final class SpotlightController {
@@ -128,6 +98,50 @@ final class SpotlightController {
     let spotlightIndex = CSSearchableIndex.defaultSearchableIndex()
     
     var log: ((String) -> ())?
-
     
+    private let queue = dispatch_queue_create("CoreSpotlight Update Queue", nil)
+    
+    private var realmNotificationToken: RealmSwift.NotificationToken!
+    
+    deinit {
+        
+        realmNotificationToken?.stop()
+    }
+
+    private init() {
+        
+        self.realmNotificationToken = Store.shared.realm.addNotificationBlock({ (notification, realm) in
+            
+            self.update { if let error = $0 { self.log?("Error Updating CoreSpotlight \(error.localizedDescription)") } }
+        })
+    }
+    
+    func update(index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex(), completionHandler: ((NSError?) -> ())? = nil) {
+        
+        index.deleteAllSearchableItemsWithCompletionHandler { (deleteError) in
+            
+            if let error = deleteError {
+                
+                completionHandler?(error)
+                return
+            }
+            
+            // get all speakers and events
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                let realmEvents = SummitEvent.from(realm: Store.shared.realm.objects(RealmSummitEvent))
+                let realmSpeakers = PresentationSpeaker.from(realm: Store.shared.realm.objects(RealmPresentationSpeaker))
+                
+                dispatch_async(self.queue, {
+                    
+                    let events = realmEvents.map { $0.toSearchableItem() }
+                    let speakers = realmSpeakers.map { $0.toSearchableItem() }
+                    
+                    let items = events + speakers
+                    
+                    index.indexSearchableItems(items, completionHandler: completionHandler)
+                })
+            }
+        }
+    }
 }
