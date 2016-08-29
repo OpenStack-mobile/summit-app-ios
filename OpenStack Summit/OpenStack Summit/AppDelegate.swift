@@ -95,7 +95,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if CSSearchableIndex.isIndexingAvailable() {
                 
-                UpdateSpotlight() { (error) in
+                SpotlightController.shared.update { (error) in
                     
                     print("Updated SpotLight index")
                     
@@ -103,8 +103,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 SpotlightController.shared.log = { print("SpotlightController: " + $0) }
-                
-                //try! SpotlightController.shared.startObserving()
             }
         }
         
