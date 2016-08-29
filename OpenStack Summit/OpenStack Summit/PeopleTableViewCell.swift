@@ -71,12 +71,8 @@ final class PeopleTableViewCell: UITableViewCell {
             
             let picUrlInternal: String
             
-            #if DEBUG
-                picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            #else
-                picUrlInternal = pictureURL
-            #endif
-
+            picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            
             if (!picUrlInternal.isEmpty) {
                 let placeholder = UIImage(named: "generic-user-avatar")
                 pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!, placeholder: placeholder)
