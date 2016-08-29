@@ -440,6 +440,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     @objc private func revokedAccess(notification: NSNotification) {
         
+        // logout in case its not cleared
+        Store.shared.session?.clear()
+        
         showUserProfile()
         navigateToHome()
         reloadMenu()
