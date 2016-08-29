@@ -34,7 +34,7 @@ public struct Event: Named {
     
     public var tags: [Tag]
         
-    public var location: Identifier
+    public var location: Identifier?
     
     public var presentation: Presentation?
         

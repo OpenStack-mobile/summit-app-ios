@@ -137,7 +137,7 @@ extension SummitEvent: RealmDecodable {
             
         } else {
             
-            fatalError("Missing location identifier: \(realmEntity)")
+            self.location = nil
         }
     }
 }
@@ -164,19 +164,24 @@ extension SummitEvent: RealmEncodable {
         realmEntity.videos.replace(with: videos)
         
         // location
-        if let cachedRoom = RealmVenueRoom.find(location, realm: realm) {
+        if let locationIdentifier = self.location {
             
-            realmEntity.venueRoom = cachedRoom
-            realmEntity.venue = nil
-            
-        } else if let cachedVenue = RealmVenue.find(location, realm: realm) {
-            
-            realmEntity.venue = cachedVenue
-            realmEntity.venueRoom = nil
+            if let cachedRoom = RealmVenueRoom.find(locationIdentifier, realm: realm) {
+                
+                realmEntity.venueRoom = cachedRoom
+                realmEntity.venue = nil
+                
+            } else if let cachedVenue = RealmVenue.find(locationIdentifier, realm: realm) {
+                
+                realmEntity.venue = cachedVenue
+                realmEntity.venueRoom = nil
+                
+            }
             
         } else {
             
-            fatalError("Missing location \(location) for event: \(realmEntity)")
+            realmEntity.venue = nil
+            realmEntity.venueRoom = nil
         }
         
         return realmEntity
