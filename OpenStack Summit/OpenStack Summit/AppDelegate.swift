@@ -13,6 +13,7 @@ import RealmSwift
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
 import Parse
+import CoreSpotlight
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -88,6 +89,24 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // setup root VC
         window?.rootViewController = revealViewController
+        
+        // Core Spotlight
+        if #available(iOS 9.0, *) {
+            
+            if CSSearchableIndex.isIndexingAvailable() {
+                
+                UpdateSpotlight() { (error) in
+                    
+                    print("Updated SpotLight index")
+                    
+                    if let error = error { print("Spotlight Error: ", error) }
+                }
+                
+                SpotlightController.shared.log = { print("SpotlightController: " + $0) }
+                
+                //try! SpotlightController.shared.startObserving()
+            }
+        }
         
         return true
     }
