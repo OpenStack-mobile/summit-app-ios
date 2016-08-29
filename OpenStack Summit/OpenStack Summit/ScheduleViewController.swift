@@ -24,7 +24,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     final private(set) var dayEvents = [ScheduleItem]()
     
-    var scheduleFilter = ScheduleFilter()
+    var scheduleFilter = ScheduleFilter.`default`
     
     private var pushRegisterInProgress = false
     

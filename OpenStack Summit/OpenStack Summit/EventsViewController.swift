@@ -33,7 +33,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         }
     }
     
-    var scheduleFilter = ScheduleFilter()
+    var scheduleFilter = ScheduleFilter.`default`
     
     // MARK: - Loading
     
