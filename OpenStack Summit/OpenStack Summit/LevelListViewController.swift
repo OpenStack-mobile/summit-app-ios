@@ -21,7 +21,7 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     
     var searchTerm = ""
     
-    var scheduleFilter = ScheduleFilter()
+    var scheduleFilter = ScheduleFilter.`default`
     
     // MARK: - Private Properties
     

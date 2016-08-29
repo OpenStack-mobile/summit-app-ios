@@ -32,7 +32,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     weak var delegate: GeneralScheduleFilterViewControllerDelegate?
     
-    var scheduleFilter = ScheduleFilter()
+    var scheduleFilter = ScheduleFilter.`default`
     
     // MARK: - Private Properties
     
@@ -115,89 +115,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     private func updateUI() {
         
         scheduleFilter.hasToRefreshSchedule = true
-        
-        if scheduleFilter.filterSections.count == 0 {
-            
-            let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
-            let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
-            let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
-            
-            var filterSectionItem: FilterSectionItem
-            var filterSection: FilterSection
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.ActiveTalks
-            filterSection.name = "ACTIVE TALKS"
-            let activeTalksFilters = ["Hide Past Talks"]
-            
-            if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
                 
-                let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
-                
-                let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-                let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-                let now = NSDate()
-                
-                if now.mt_isBetweenDate(startDate, andDate: endDate) {
-                    
-                    for activeTalkFilter in activeTalksFilters {
-                        
-                        filterSectionItem = createSectionItem(0, name: activeTalkFilter, type: filterSection.type)
-                        filterSection.items.append(filterSectionItem)
-                    }
-                    
-                    scheduleFilter.selections[FilterSectionType.ActiveTalks] = activeTalksFilters
-                }
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.TrackGroup
-            filterSection.name = "SUMMIT CATEGORY"
-            
-            for trackGroup in summitTrackGroups {
-                
-                filterSectionItem = createSectionItem(trackGroup.identifier, name: trackGroup.name, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
-            
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.EventType
-            filterSection.name = "EVENT TYPE"
-            
-            for eventType in eventTypes {
-                
-                filterSectionItem = createSectionItem(eventType.identifier, name: eventType.name, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
-            
-            
-            filterSection = FilterSection()
-            filterSection.type = FilterSectionType.Level
-            filterSection.name = "LEVEL"
-            
-            for level in levels {
-                
-                filterSectionItem = createSectionItem(0, name: level, type: filterSection.type)
-                filterSection.items.append(filterSectionItem)
-            }
-            
-            scheduleFilter.filterSections.append(filterSection)
-            scheduleFilter.selections[FilterSectionType.Level] = [String]()
-            
-            
-            scheduleFilter.selections[FilterSectionType.Tag] = [Int]()
-        }
-        
         self.reloadFilters()
         
         for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
