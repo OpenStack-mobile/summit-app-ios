@@ -193,6 +193,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
                     
                 case let .Value(value):
                     
+                    controller.scheduleFilter = ScheduleFilter.`default` // reset filter
                     controller.updateUI(value)
                 }
             }
