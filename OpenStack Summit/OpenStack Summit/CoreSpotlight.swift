@@ -38,15 +38,9 @@ enum SearchableItemType: String {
     
     case event
     case speaker
-    
-    var type: Any {
-        
-        switch self {
-            
-        case .event: return SummitEvent.self
-        case .speaker: return PresentationSpeaker.self
-        }
-    }
+    case video
+    case venue
+    case venueRoom
     
     var realmType: RealmEntity.Type {
         
@@ -54,6 +48,9 @@ enum SearchableItemType: String {
             
         case .event: return RealmSummitEvent.self
         case .speaker: return RealmPresentationSpeaker.self
+        case .video: return RealmVideo.self
+        case .venue: return RealmVenue.self
+        case .venueRoom: return RealmVenueRoom.self
         }
     }
 }
@@ -133,6 +130,94 @@ extension PresentationSpeaker: CoreSpotlightSearchable {
     }
 }
 
+@available(iOS 9.0, *)
+extension Video: CoreSpotlightSearchable {
+    
+    static var itemContentType: String { return kUTTypeVideo as String }
+    
+    static let searchDomain = "org.openstack.Video"
+    
+    static let searchType = SearchableItemType.video
+    
+    func toSearchableItem() -> CSSearchableItem {
+        
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        
+        attributeSet.displayName = name
+        
+        if let descriptionText = self.descriptionText,
+            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            
+            attributeSet.contentDescription = attributedString.string
+        }
+        
+        attributeSet.local = false
+        
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+    }
+}
+
+@available(iOS 9.0, *)
+extension Venue: CoreSpotlightSearchable {
+    
+    static var itemContentType: String { return kUTTypeText as String }
+    
+    static let searchDomain = "org.openstack.Venue"
+    
+    static let searchType = SearchableItemType.venue
+    
+    func toSearchableItem() -> CSSearchableItem {
+        
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        
+        attributeSet.displayName = name
+        
+        if let descriptionText = self.descriptionText,
+            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            
+            attributeSet.contentDescription = attributedString.string
+        }
+        
+        attributeSet.country = country
+        attributeSet.city = city
+        attributeSet.longitude = location?.longitude
+        attributeSet.latitude = location?.latitude
+        attributeSet.namedLocation = name
+        
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+    }
+}
+
+@available(iOS 9.0, *)
+extension VenueRoom: CoreSpotlightSearchable {
+    
+    static var itemContentType: String { return kUTTypeText as String }
+    
+    static let searchDomain = "org.openstack.VenueRoom"
+    
+    static let searchType = SearchableItemType.venueRoom
+    
+    func toSearchableItem() -> CSSearchableItem {
+        
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
+        
+        attributeSet.displayName = name
+        
+        if let descriptionText = self.descriptionText,
+            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            
+            attributeSet.contentDescription = attributedString.string
+        }
+        
+        attributeSet.namedLocation = name
+        
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+    }
+}
+
 // MARK: - Controller
 
 /// Updates the CoreSpotlight index from Realm changes.
@@ -180,13 +265,19 @@ final class SpotlightController {
                 
                 let realmEvents = SummitEvent.from(realm: Store.shared.realm.objects(RealmSummitEvent))
                 let realmSpeakers = PresentationSpeaker.from(realm: Store.shared.realm.objects(RealmPresentationSpeaker))
+                let realmVideos = Video.from(realm: Store.shared.realm.objects(RealmVideo))
+                let realmVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
+                let realmVenueRooms = VenueRoom.from(realm: Store.shared.realm.objects(RealmVenueRoom))
                 
                 dispatch_async(self.queue, {
                     
                     let events = realmEvents.map { $0.toSearchableItem() }
                     let speakers = realmSpeakers.map { $0.toSearchableItem() }
+                    let videos = realmVideos.map { $0.toSearchableItem() }
+                    let venues = realmVenues.map { $0.toSearchableItem() }
+                    let venueRooms = realmVenueRooms.map { $0.toSearchableItem() }
                     
-                    let items = events + speakers
+                    let items = events + speakers + videos + venues + venueRooms
                     
                     index.indexSearchableItems(items, completionHandler: completionHandler)
                 })

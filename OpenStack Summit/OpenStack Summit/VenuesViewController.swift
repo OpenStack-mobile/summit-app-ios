@@ -11,6 +11,9 @@ import KTCenterFlowLayout
 
 final class VenuesViewController: RevealTabStripViewController {
     
+    let venuesMapViewController = VenuesMapViewController()
+    let venueListViewController = R.storyboard.venue.venueListViewController()!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +23,6 @@ final class VenuesViewController: RevealTabStripViewController {
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        return [VenuesMapViewController() , R.storyboard.venue.venueListViewController()!]
+        return [venuesMapViewController, venueListViewController]
     }
 }

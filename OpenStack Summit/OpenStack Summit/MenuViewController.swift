@@ -268,6 +268,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     func showSpeakers() {
         
+        highlight(.People)
+        
         show(speakersViewController)
     }
     
@@ -278,6 +280,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         show(eventsViewController)
     }
     
+    func showVenues() {
+        
+        highlight(.Venues)
+        
+        show(venuesViewController)
+    }
+    
     private func showSearch(for term: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
@@ -285,12 +294,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         show(searchViewController)
     }
-    
-    private func showVenues() {
         
-        show(venuesViewController)
-    }
-    
     private func showMyProfile() {
         
         if Store.shared.isLoggedIn {

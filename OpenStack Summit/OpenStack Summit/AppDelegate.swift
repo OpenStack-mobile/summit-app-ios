@@ -15,6 +15,7 @@ import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
 import Parse
 import CoreSpotlight
 import RealmSwift
+import XCDYouTubeKit
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -202,6 +203,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
                     self.menuViewController.speakersViewController.showViewController(memberProfileVC, sender: nil)
+                    
+                case .video:
+                    
+                    let video = Video.RealmType.find(identifier, realm: Store.shared.realm)!
+                    
+                    let videoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.youtube)
+                    self.window?.rootViewController?.presentMoviePlayerViewControllerAnimated(videoPlayer)
+                    
+                case .venue, .venueRoom:
+                    
+                    self.menuViewController.showVenues()
+                    
+                    self.menuViewController.venuesViewController.showLocationDetail(identifier)
                 }
             }
         }
