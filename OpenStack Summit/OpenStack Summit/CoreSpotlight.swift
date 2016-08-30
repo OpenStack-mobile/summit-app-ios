@@ -99,23 +99,8 @@ extension PresentationSpeaker: CoreSpotlightSearchable {
         
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
         
-        var description = ""
-        
-        if let twitter = self.twitter {
-            
-            description += twitter + "\n"
-        }
-        
-        if let descriptionText = self.biography,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
-            
-            let biography = attributedString.string
-            description += biography + "\n"
-        }
-        
         attributeSet.displayName = name
-        attributeSet.contentDescription = description
+        attributeSet.contentDescription = title
         
         /*
         // user image
