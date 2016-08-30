@@ -14,6 +14,7 @@ import RealmSwift
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
 import Parse
 import CoreSpotlight
+import RealmSwift
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -159,6 +160,53 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentInstallation: PFInstallation = PFInstallation.currentInstallation()!
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackground()
+    }
+    
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        
+        print("Continue activity \(userActivity.activityType)")
+        
+        if #available(iOS 9.0, *) {
+            
+            if userActivity.activityType == CSSearchableItemActionType {
+                
+                guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                    let searchURL = NSURL(string: searchIdentifierString)
+                    where searchURL.pathComponents?.count == 2
+                    else { return false }
+                
+                let searchTypeString = searchURL.pathComponents![0]
+                let identifierString = searchURL.pathComponents![1]
+                
+                guard let searchType = SearchableItemType(rawValue: searchTypeString),
+                    let identifier = Int(identifierString)
+                    else { return false }
+                
+                // find in cache
+                guard Store.shared.realm.objects(searchType.realmType).filter("id = \(identifier)").first != nil
+                    else { return false }
+                
+                switch searchType {
+                    
+                case .event:
+                    
+                    self.menuViewController.showEvents()
+                    
+                    let eventDetailVC = R.storyboard.event.eventDetailViewController()!
+                    eventDetailVC.event = identifier
+                    self.menuViewController.eventsViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
+                    
+                case .speaker:
+                    
+                    self.menuViewController.showSpeakers()
+                    
+                    let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
+                    self.menuViewController.speakersViewController.showViewController(memberProfileVC, sender: nil)
+                }
+            }
+        }
+        
+        return false
     }
 }
 

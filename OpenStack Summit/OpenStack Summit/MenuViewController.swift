@@ -19,7 +19,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     // Menu VCs
     let eventsViewController = EventsViewController()
     let venuesViewController = VenuesViewController()
-    let speakersVC = R.storyboard.people.speakerListViewController()!
+    let speakersViewController = R.storyboard.people.speakerListViewController()!
     
     // MARK: - IB Outlets
     
@@ -266,9 +266,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     // MARK: Navigation
     
-    private func showSpeakers() {
+    func showSpeakers() {
         
-        show(speakersVC)
+        show(speakersViewController)
+    }
+    
+    func showEvents() {
+        
+        highlight(.Events)
+        
+        show(eventsViewController)
     }
     
     private func showSearch(for term: String) {
@@ -277,13 +284,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         searchViewController.searchTerm = term
         
         show(searchViewController)
-    }
-    
-    func showEvents() {
-        
-        highlight(.Events)
-        
-        show(eventsViewController)
     }
     
     private func showVenues() {
