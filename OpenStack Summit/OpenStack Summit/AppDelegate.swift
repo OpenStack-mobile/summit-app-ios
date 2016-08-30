@@ -25,7 +25,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
         
-    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: EventsViewController())
+    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.eventsViewController)
     
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
 
@@ -95,13 +95,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 9.0, *) {
             
             if CSSearchableIndex.isIndexingAvailable() {
-                
-                SpotlightController.shared.update { (error) in
-                    
-                    print("Updated SpotLight index")
-                    
-                    if let error = error { print("Spotlight Error: ", error) }
-                }
                 
                 SpotlightController.shared.log = { print("SpotlightController: " + $0) }
             }
@@ -186,11 +179,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 guard Store.shared.realm.objects(searchType.realmType).filter("id = \(identifier)").first != nil
                     else { return false }
                 
+                /// force view load
+                let _ = self.menuViewController.view
+                let _ = self.navigationController.view
+                
                 switch searchType {
                     
                 case .event:
                     
                     self.menuViewController.showEvents()
+                    
+                    let _ = self.menuViewController.eventsViewController.generalScheduleViewController.view
+                    let _ = self.menuViewController.eventsViewController.view
                     
                     let eventDetailVC = R.storyboard.event.eventDetailViewController()!
                     eventDetailVC.event = identifier
