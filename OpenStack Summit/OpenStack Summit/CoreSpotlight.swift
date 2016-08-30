@@ -17,11 +17,55 @@ import Haneke
 // MARK: - Model Extensions
 
 @available(iOS 9.0, *)
-extension SummitEvent {
+protocol CoreSpotlightSearchable {
+    
+    static var itemContentType: String { get }
+    
+    static var searchDomain: String { get }
+    
+    static var searchType: SearchableItemType { get }
+    
+    func toSearchableItem() -> CSSearchableItem
+}
+
+@available(iOS 9.0, *)
+extension CoreSpotlightSearchable where Self: CoreSummit.Unique {
+    
+    var searchIdentifier: String { return Self.searchType.rawValue + "/" + "\(identifier)" }
+}
+
+enum SearchableItemType: String {
+    
+    case event
+    case speaker
+    
+    var type: Any {
+        
+        switch self {
+            
+        case .event: return SummitEvent.self
+        case .speaker: return PresentationSpeaker.self
+        }
+    }
+    
+    var realmType: RealmEntity.Type {
+        
+        switch self {
+            
+        case .event: return RealmSummitEvent.self
+        case .speaker: return RealmPresentationSpeaker.self
+        }
+    }
+}
+
+@available(iOS 9.0, *)
+extension SummitEvent: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
     
     static let searchDomain = "org.openstack.SummitEvent"
+    
+    static let searchType = SearchableItemType.event
     
     func toSearchableItem() -> CSSearchableItem {
         
@@ -41,16 +85,18 @@ extension SummitEvent {
             attributeSet.contentDescription = attributedString.string
         }
         
-        return CSSearchableItem(uniqueIdentifier: "\(identifier)", domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
     }
 }
 
 @available(iOS 9.0, *)
-extension PresentationSpeaker {
+extension PresentationSpeaker: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
     
     static let searchDomain = "org.openstack.PresentationSpeaker"
+    
+    static let searchType = SearchableItemType.speaker
     
     func toSearchableItem() -> CSSearchableItem {
         
@@ -83,7 +129,7 @@ extension PresentationSpeaker {
             attributeSet.thumbnailData = NSData(contentsOfURL: imageURL)
         }*/
         
-        return CSSearchableItem(uniqueIdentifier: "\(identifier)", domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
+        return CSSearchableItem(uniqueIdentifier: searchIdentifier, domainIdentifier: self.dynamicType.searchDomain, attributeSet: attributeSet)
     }
 }
 
