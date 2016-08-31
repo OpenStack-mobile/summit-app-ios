@@ -27,7 +27,7 @@ final class VenuesViewController: RevealTabStripViewController {
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
         userActivity.title = "Venues"
-        userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/travel/")
+        userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/barcelona-2016/travel/")
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
         
         self.userActivity = userActivity
