@@ -55,6 +55,7 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     @IBOutlet private(set) weak var videoPlayerView: UIView!
     @IBOutlet private(set) weak var videoPlayerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private(set) weak var videoPlayerImageView: UIImageView!
+    @IBOutlet private(set) weak var shareBarButtonItem: UIBarButtonItem!
     
     // MARK: - Properties
     
@@ -414,6 +415,14 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     @IBAction func playVideo(sender: UIButton) {
         
         self.playVideo(eventDetail.video!)
+    }
+    
+    @IBAction func share(sender: UIBarButtonItem) {
+        
+        let activityViewController = UIActivityViewController(activityItems: [eventDetail.webpageURL], applicationActivities: nil)
+        activityViewController.modalPresentationStyle = .Popover
+        activityViewController.popoverPresentationController?.barButtonItem = sender
+        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
