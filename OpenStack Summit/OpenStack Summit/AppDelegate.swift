@@ -206,10 +206,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 case .video:
                     
-                    let video = Video.RealmType.find(identifier, realm: Store.shared.realm)!
+                    let realmEntity = Video.RealmType.find(identifier, realm: Store.shared.realm)!
+                    let video = Video(realmEntity: realmEntity)
                     
-                    let videoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.youtube)
-                    self.window?.rootViewController?.presentMoviePlayerViewControllerAnimated(videoPlayer)
+                    self.window?.rootViewController?.playVideo(video)
                     
                 case .venue, .venueRoom:
                     
