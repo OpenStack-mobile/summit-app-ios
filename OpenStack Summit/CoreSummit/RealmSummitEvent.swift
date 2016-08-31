@@ -45,7 +45,7 @@ public extension RealmSummitEvent {
         return realmEntities.map { $0 }
     }
     
-    static func filter(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
+    static func filter(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, venues: [Int]?, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
         
         var events = realm.objects(RealmSummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted(RealmSummitEvent.sortProperties)
         
@@ -79,6 +79,10 @@ public extension RealmSummitEvent {
                 separator = " OR "
             }
             events = events.filter(tagsFilter)
+        }
+        
+        if (venues != nil && venues?.count > 0) {
+            events = events.filter("venue.id in %@ OR venueRoom.venue.id in %@", venues!, venues!)
         }
         
         return events.map { $0 }
