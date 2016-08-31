@@ -287,6 +287,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         show(venuesViewController)
     }
     
+    func showAbout() {
+        
+        let aboutViewController = R.storyboard.menu.aboutViewController()!
+        
+        show(aboutViewController)
+    }
+    
     private func showSearch(for term: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
@@ -312,13 +319,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 show(memberOrderConfirmViewController)
             }
         }
-    }
-    
-    private func showAbout() {
-        
-        let aboutViewController = R.storyboard.menu.aboutViewController()!
-        
-        show(aboutViewController)
     }
     
     private func show(viewController: UIViewController) {

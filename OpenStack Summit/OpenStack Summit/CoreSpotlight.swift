@@ -17,13 +17,11 @@ import Haneke
 // MARK: - Model Extensions
 
 @available(iOS 9.0, *)
-protocol CoreSpotlightSearchable {
+protocol CoreSpotlightSearchable: AppActivitySummitData {
     
     static var itemContentType: String { get }
     
     static var searchDomain: String { get }
-    
-    static var searchType: SearchableItemType { get }
     
     func toSearchableItem() -> CSSearchableItem
 }
@@ -31,28 +29,7 @@ protocol CoreSpotlightSearchable {
 @available(iOS 9.0, *)
 extension CoreSpotlightSearchable where Self: CoreSummit.Unique {
     
-    var searchIdentifier: String { return Self.searchType.rawValue + "/" + "\(identifier)" }
-}
-
-enum SearchableItemType: String {
-    
-    case event
-    case speaker
-    case video
-    case venue
-    case venueRoom
-    
-    var realmType: RealmEntity.Type {
-        
-        switch self {
-            
-        case .event: return RealmSummitEvent.self
-        case .speaker: return RealmPresentationSpeaker.self
-        case .video: return RealmVideo.self
-        case .venue: return RealmVenue.self
-        case .venueRoom: return RealmVenueRoom.self
-        }
-    }
+    var searchIdentifier: String { return Self.activityDataType.rawValue + "/" + "\(identifier)" }
 }
 
 @available(iOS 9.0, *)
@@ -61,8 +38,6 @@ extension SummitEvent: CoreSpotlightSearchable {
     static var itemContentType: String { return kUTTypeText as String }
     
     static let searchDomain = "org.openstack.SummitEvent"
-    
-    static let searchType = SearchableItemType.event
     
     func toSearchableItem() -> CSSearchableItem {
         
@@ -93,8 +68,6 @@ extension PresentationSpeaker: CoreSpotlightSearchable {
     
     static let searchDomain = "org.openstack.PresentationSpeaker"
     
-    static let searchType = SearchableItemType.speaker
-    
     func toSearchableItem() -> CSSearchableItem {
         
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
@@ -122,8 +95,6 @@ extension Video: CoreSpotlightSearchable {
     
     static let searchDomain = "org.openstack.Video"
     
-    static let searchType = SearchableItemType.video
-    
     func toSearchableItem() -> CSSearchableItem {
         
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
@@ -149,8 +120,6 @@ extension Venue: CoreSpotlightSearchable {
     static var itemContentType: String { return kUTTypeText as String }
     
     static let searchDomain = "org.openstack.Venue"
-    
-    static let searchType = SearchableItemType.venue
     
     func toSearchableItem() -> CSSearchableItem {
         
@@ -181,8 +150,6 @@ extension VenueRoom: CoreSpotlightSearchable {
     static var itemContentType: String { return kUTTypeText as String }
     
     static let searchDomain = "org.openstack.VenueRoom"
-    
-    static let searchType = SearchableItemType.venueRoom
     
     func toSearchableItem() -> CSSearchableItem {
         

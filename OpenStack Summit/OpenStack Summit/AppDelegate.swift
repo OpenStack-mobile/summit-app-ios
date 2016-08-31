@@ -172,55 +172,101 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 let searchTypeString = searchURL.pathComponents![0]
                 let identifierString = searchURL.pathComponents![1]
                 
-                guard let searchType = SearchableItemType(rawValue: searchTypeString),
+                guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
                     let identifier = Int(identifierString)
                     else { return false }
                 
-                // find in cache
-                guard Store.shared.realm.objects(searchType.realmType).filter("id = \(identifier)").first != nil
-                    else { return false }
-                
-                /// force view load
-                let _ = self.menuViewController.view
-                let _ = self.navigationController.view
-                
-                switch searchType {
-                    
-                case .event:
-                    
-                    self.menuViewController.showEvents()
-                    
-                    let _ = self.menuViewController.eventsViewController.generalScheduleViewController.view
-                    let _ = self.menuViewController.eventsViewController.view
-                    
-                    let eventDetailVC = R.storyboard.event.eventDetailViewController()!
-                    eventDetailVC.event = identifier
-                    self.menuViewController.eventsViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
-                    
-                case .speaker:
-                    
-                    self.menuViewController.showSpeakers()
-                    
-                    let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
-                    self.menuViewController.speakersViewController.showViewController(memberProfileVC, sender: nil)
-                    
-                case .video:
-                    
-                    let realmEntity = Video.RealmType.find(identifier, realm: Store.shared.realm)!
-                    let video = Video(realmEntity: realmEntity)
-                    
-                    self.window?.rootViewController?.playVideo(video)
-                    
-                case .venue, .venueRoom:
-                    
-                    self.menuViewController.showVenues()
-                    
-                    self.menuViewController.venuesViewController.showLocationDetail(identifier)
-                }
+                return self.view(dataType, identifier: identifier)
             }
         }
         
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            
+            // parse URL
+            guard let url = userActivity.webpageURL
+                else { return false }
+            
+            
+            
+        } else if userActivity.activityType == AppActivity.view.rawValue {
+            
+            guard let typeString = userActivity.userInfo?[AppActivityUserInfo.type.rawValue] as? String,
+                let dataType = AppActivitySummitDataType(rawValue: typeString),
+                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
+                else { return false }
+            
+            return self.view(dataType, identifier: identifier)
+            
+        } else if userActivity.activityType == AppActivity.screen.rawValue {
+            
+            guard let screenString = userActivity.userInfo?[AppActivityUserInfo.screen.rawValue] as? String,
+                let screen = AppActivityScreen(rawValue: screenString)
+                else { return false }
+            
+            self.view(screen)
+        }
+        
         return false
+    }
+    
+    // MARK: - Deep Linking
+    
+    private func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+        
+        // find in cache
+        guard Store.shared.realm.objects(data.realmType).filter("id = \(identifier)").first != nil
+            else { return false }
+        
+        /// force view load
+        let _ = self.menuViewController.view
+        let _ = self.navigationController.view
+        
+        switch data {
+            
+        case .event:
+            
+            self.menuViewController.showEvents()
+            
+            let _ = self.menuViewController.eventsViewController.generalScheduleViewController.view
+            let _ = self.menuViewController.eventsViewController.view
+            
+            let eventDetailVC = R.storyboard.event.eventDetailViewController()!
+            eventDetailVC.event = identifier
+            self.menuViewController.eventsViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
+            
+        case .speaker:
+            
+            self.menuViewController.showSpeakers()
+            
+            let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
+            self.menuViewController.speakersViewController.showViewController(memberProfileVC, sender: nil)
+            
+        case .video:
+            
+            let realmEntity = Video.RealmType.find(identifier, realm: Store.shared.realm)!
+            let video = Video(realmEntity: realmEntity)
+            
+            self.window?.rootViewController?.playVideo(video)
+            
+        case .venue, .venueRoom:
+            
+            self.menuViewController.showVenues()
+            
+            self.menuViewController.venuesViewController.showLocationDetail(identifier)
+        }
+        
+        return true
+    }
+    
+    private func view(screen: AppActivityScreen) {
+        
+        switch screen {
+            
+        case .venues: self.menuViewController.showVenues()
+        case .events: self.menuViewController.showEvents()
+        case .speakers: self.menuViewController.showSpeakers()
+        case .about: self.menuViewController.showAbout()
+        }
     }
 }
 
