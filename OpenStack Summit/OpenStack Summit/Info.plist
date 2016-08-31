@@ -40,6 +40,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>org.openstack.summit.viewSummit</string>
+	</array>
 	<key>SummitEnvironment</key>
 	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 	<key>UIBackgroundModes</key>

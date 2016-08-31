@@ -56,7 +56,6 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     @IBOutlet private(set) weak var videoPlayerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private(set) weak var videoPlayerImageView: UIImageView!
     
-    
     // MARK: - Properties
     
     var event: Identifier!
@@ -344,6 +343,14 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         updateUI()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            self.userActivity?.resignCurrent()
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func showLocation(sender: UITapGestureRecognizer) {
@@ -452,6 +459,20 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         if eventDetail.allowFeedback && eventDetail.finished {
             loadAverageFeedback()
             loadFeedback()
+        }
+        
+        do {
+            
+            // set user activity for handoff
+            let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+            userActivity.title = eventTitle
+            userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/summit-schedule/events/\(event)")
+            
+            userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
+            
+            userActivity.becomeCurrent()
+            
+            self.userActivity = userActivity
         }
     }
     
