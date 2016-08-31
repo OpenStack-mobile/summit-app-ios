@@ -66,10 +66,6 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         clear.tintColor = UIColor.blackColor()
         
         toolbarItems = [message, spacer, clear]
-        
-        // set child VCs to the same filter instance
-        trackListViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
-        levelListViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -100,7 +96,6 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         navigationController.modalPresentationStyle = .FormSheet
         generalScheduleFilterViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
         generalScheduleFilterViewController.delegate = self
-        generalScheduleViewController.scheduleFilter.hasToRefreshSchedule = true
         
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
@@ -108,7 +103,6 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     @IBAction func clearFilters(sender: UIBarButtonItem) {
         
         generalScheduleViewController.scheduleFilter.clearActiveFilters()
-        generalScheduleViewController.scheduleFilter.hasToRefreshSchedule = true
         self.activeFilterIndicator = false
         
         self.reloadPagerTabStripView()
@@ -118,8 +112,9 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter) {
         
-        activeFilterIndicator = generalScheduleViewController.scheduleFilter.hasActiveFilters()
+        activeFilterIndicator = filter.hasActiveFilters()
         
+        generalScheduleViewController.scheduleFilter = filter
         generalScheduleViewController.loadData()
     }
     

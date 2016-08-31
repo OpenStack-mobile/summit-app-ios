@@ -32,7 +32,13 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     weak var delegate: GeneralScheduleFilterViewControllerDelegate?
     
-    var scheduleFilter = ScheduleFilter.`default`
+    var scheduleFilter = ScheduleFilter.`default` {
+        
+        didSet {
+            
+            self.delegate?.scheduleFilterController(self, didUpdateFilter: scheduleFilter)
+        }
+    }
     
     // MARK: - Private Properties
     
@@ -45,7 +51,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     private var trackGroupItemCount: Int { return scheduleFilter.filterSections[1].items.count }
     private var eventTypeItemCount: Int { return scheduleFilter.filterSections[2].items.count }
     private var levelItemCount: Int { return scheduleFilter.filterSections[3].items.count }
-    private var totalItemCount: Int { return activeTalksItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount }
+    private var venuesItemCount: Int { return scheduleFilter.filterSections[4].items.count }
+    private var totalItemCount: Int { return activeTalksItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount + venuesItemCount }
     
     // MARK: - Loading
     
@@ -114,8 +121,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     private func updateUI() {
         
-        scheduleFilter.hasToRefreshSchedule = true
-                
         self.reloadFilters()
         
         for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
@@ -154,16 +159,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         tagListViewHeightConstraint.constant = height
         tagListView.updateConstraints()
-    }
-    
-    private func createSectionItem(id: Int, name: String, type: FilterSectionType) -> FilterSectionItem {
-        
-        let filterSectionItem = FilterSectionItem()
-        
-        filterSectionItem.id = id
-        filterSectionItem.name = name
-        
-        return filterSectionItem
     }
     
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
@@ -206,7 +201,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         if filterSection.type != FilterSectionType.Level && filterSection.type != FilterSectionType.ActiveTalks {
             
-            cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.id)
+            cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.identifier)
         }
         else {
             
@@ -215,7 +210,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         if filterSection.type == FilterSectionType.TrackGroup {
             
-            let trackGroup = RealmTrackGroup.find(filterSection.items[indexPath.row].id, realm: Store.shared.realm)
+            let trackGroup = RealmTrackGroup.find(filterSection.items[indexPath.row].identifier, realm: Store.shared.realm)
             cell.circleColor = UIColor(hexaString: trackGroup!.color)
         }
         
@@ -235,15 +230,15 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         if filterSection.type != FilterSectionType.Level && filterSection.type != FilterSectionType.ActiveTalks {
             
-            if isItemSelected(filterSection.type, id: filterItem.id) {
+            if isItemSelected(filterSection.type, id: filterItem.identifier) {
                 
-                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.id }
+                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.identifier }
                 scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
                 cell.isOptionSelected = false
             }
             else {
                 
-                scheduleFilter.selections[filterSection.type]!.append(filterItem.id)
+                scheduleFilter.selections[filterSection.type]!.append(filterItem.identifier)
                 cell.isOptionSelected = true
             }
         }
@@ -261,11 +256,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
                 cell.isOptionSelected = true
             }
         }
-        
-        scheduleFilter.hasToRefreshSchedule = true
-        
-        // inform delegate
-        delegate?.scheduleFilterController(self, didUpdateFilter: self.scheduleFilter)
     }
     
     // MARK: - UITableViewDataSource
@@ -277,30 +267,22 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var count = 0
-        
         let filterSection = scheduleFilter.filterSections[section]
         
-        switch filterSection.type! {
+        switch filterSection.type {
             
-        case FilterSectionType.ActiveTalks:
-            count = activeTalksItemCount
+        case .ActiveTalks: return activeTalksItemCount
             
-        case FilterSectionType.EventType:
-            count = eventTypeItemCount
+        case .EventType: return eventTypeItemCount
             
-        case FilterSectionType.TrackGroup:
-            count = trackGroupItemCount
+        case .TrackGroup: return trackGroupItemCount
             
-        case FilterSectionType.Level:
-            count = levelItemCount
+        case .Level: return levelItemCount
             
-        default:
-            break
+        case .Venue: return venuesItemCount
             
+        default: return 0
         }
-        
-        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

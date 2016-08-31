@@ -8,45 +8,58 @@
 
 import CoreSummit
 
-public enum FilterSectionType {
+enum FilterSectionType {
     
-    case ActiveTalks, EventType, Track, TrackGroup, Tag, Level
+    case ActiveTalks, EventType, Track, TrackGroup, Tag, Level, Venue
 }
 
-public final class FilterSection {
-    public var type : FilterSectionType!
-    public var name = ""
-    public var items = [FilterSectionItem]()
+struct FilterSection {
+    var type: FilterSectionType
+    var name: String
+    var items: [FilterSectionItem]
+    
+    private init(type: FilterSectionType, name: String, items: [FilterSectionItem] = []) {
+        
+        self.type = type
+        self.name = name
+        self.items = items
+    }
 }
 
-public final class FilterSectionItem {
-    public var id = 0
-    public var name = ""
+struct FilterSectionItem {
+    
+    let identifier: Identifier
+    let name: String
 }
 
-public final class ScheduleFilter {
+enum FilterSelection {
+    
+    case identifiers([Identifier])
+    case names([String])
+    
+    var rawValue: [AnyObject] {
+        
+        switch self {
+        case let .identifiers(rawValue): return rawValue as [NSNumber]
+        case let .names(rawValue): return rawValue as [NSString]
+        }
+    }
+    
+    mutating func removeAll() {
+        
+        switch self {
+        case .identifiers: self = .identifiers([])
+        case .names: self = .names([])
+        }
+    }
+}
+
+struct ScheduleFilter {
     
     // MARK: - Properties
     
-    var selections = [FilterSectionType: [AnyObject]]()
+    var selections = [FilterSectionType: FilterSelection]()
     var filterSections = [FilterSection]()
-    var hasToRefreshSchedule = true
-    
-    // MARK: - Initialization
-    
-    private init() { } // not public
-    
-    // MARK: - Private Methods
-    
-    private static func createSectionItem(id: Int, name: String, type: FilterSectionType) -> FilterSectionItem {
-        
-        let filterSectionItem = FilterSectionItem()
-        
-        filterSectionItem.id = id
-        filterSectionItem.name = name
-        
-        return filterSectionItem
-    }
     
     // MARK: - Methods
     
@@ -55,13 +68,13 @@ public final class ScheduleFilter {
             return false
         }
         let filterSection = filterSections.filter() { $0.type == type }.first!
-        return filterSection.items.count == selections[type]?.count
+        return filterSection.items.count == selections[type]?.rawValue.count
     }
     
     func hasActiveFilters() -> Bool {
         var hasActiveFilters = false
         for values in selections.values {
-            if values.count > 0 {
+            if values.rawValue.count > 0 {
                 hasActiveFilters = true
                 break
             }
@@ -69,7 +82,7 @@ public final class ScheduleFilter {
         return hasActiveFilters
     }
     
-    func clearActiveFilters() {
+    mutating func clearActiveFilters() {
         for key in selections.keys {
             selections[key] = []
         }
@@ -88,22 +101,20 @@ public final class ScheduleFilter {
     }
 }
 
-public extension ScheduleFilter {
+extension ScheduleFilter {
     
     static var `default`: ScheduleFilter {
         
-        let scheduleFilter = ScheduleFilter()
+        var scheduleFilter = ScheduleFilter()
         
         let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
         let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
         let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
+        let venues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
         
-        var filterSectionItem: FilterSectionItem
         var filterSection: FilterSection
         
-        filterSection = FilterSection()
-        filterSection.type = FilterSectionType.ActiveTalks
-        filterSection.name = "ACTIVE TALKS"
+        filterSection = FilterSection(type: .ActiveTalks, name: "ACTIVE TALKS")
         let activeTalksFilters = ["Hide Past Talks"]
         
         if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
@@ -116,60 +127,37 @@ public extension ScheduleFilter {
             
             if now.mt_isBetweenDate(startDate, andDate: endDate) {
                 
-                for activeTalkFilter in activeTalksFilters {
-                    
-                    filterSectionItem = createSectionItem(0, name: activeTalkFilter, type: filterSection.type)
-                    filterSection.items.append(filterSectionItem)
-                }
-                
+                filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
                 scheduleFilter.selections[FilterSectionType.ActiveTalks] = activeTalksFilters
             }
         }
         
         scheduleFilter.filterSections.append(filterSection)
         
-        filterSection = FilterSection()
-        filterSection.type = FilterSectionType.TrackGroup
-        filterSection.name = "SUMMIT CATEGORY"
-        
-        for trackGroup in summitTrackGroups {
-            
-            filterSectionItem = createSectionItem(trackGroup.identifier, name: trackGroup.name, type: filterSection.type)
-            filterSection.items.append(filterSectionItem)
-        }
+        filterSection = FilterSection(type: .TrackGroup, name: "SUMMIT CATEGORY")
+        filterSection.items = summitTrackGroups.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
         
         scheduleFilter.filterSections.append(filterSection)
         scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
         
-        
-        filterSection = FilterSection()
-        filterSection.type = FilterSectionType.EventType
-        filterSection.name = "EVENT TYPE"
-        
-        for eventType in eventTypes {
-            
-            filterSectionItem = createSectionItem(eventType.identifier, name: eventType.name, type: filterSection.type)
-            filterSection.items.append(filterSectionItem)
-        }
+        filterSection = FilterSection(type: .EventType, name: "EVENT TYPE")
+        filterSection.items = eventTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
         
         scheduleFilter.filterSections.append(filterSection)
         scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
         
-        
-        filterSection = FilterSection()
-        filterSection.type = FilterSectionType.Level
-        filterSection.name = "LEVEL"
-        
-        for level in levels {
-            
-            filterSectionItem = createSectionItem(0, name: level, type: filterSection.type)
-            filterSection.items.append(filterSectionItem)
-        }
+        filterSection = FilterSection(type: .Level, name: "LEVEL")
+        filterSection.items = levels.map { FilterSectionItem(identifier: 0, name: $0) }
         
         scheduleFilter.filterSections.append(filterSection)
         scheduleFilter.selections[FilterSectionType.Level] = [String]()
         
         scheduleFilter.selections[FilterSectionType.Tag] = [Int]()
+        
+        filterSection = FilterSection(type: .Venue, name: "VENUE")
+        filterSection.items = venues.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
+        scheduleFilter.filterSections.append(filterSection)
+        scheduleFilter.selections[FilterSectionType.Venue] = [Int]()
         
         return scheduleFilter
     }
