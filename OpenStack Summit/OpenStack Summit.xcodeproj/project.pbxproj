@@ -112,7 +112,6 @@
 		6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */; };
 		6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */; };
 		6E10A5AA1D106AD5008CBD0C /* SummitEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */; };
-		6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
@@ -404,7 +403,6 @@
 		6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleItem.swift; sourceTree = "<group>"; };
 		6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItem.swift; sourceTree = "<group>"; };
 		6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEventExtensions.swift; sourceTree = "<group>"; };
-		6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfile.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
@@ -824,7 +822,6 @@
 				6E066D9A1D356764005A8D2D /* FeedbackDetail.swift */,
 				6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */,
 				6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */,
-				6E10A5A71D106AD5008CBD0C /* MemberProfile.swift */,
 				6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */,
 				6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */,
 				6EF7AA1B1D74C24800790ED0 /* CoreSpotlight.swift */,
@@ -1400,7 +1397,6 @@
 				6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */,
 				6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */,
 				6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */,
-				6E10A5AB1D106AD5008CBD0C /* MemberProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
