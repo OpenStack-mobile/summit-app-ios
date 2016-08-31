@@ -34,7 +34,7 @@ public struct EventDetail: RealmDecodable {
     public let moderator: PresentationSpeaker?
     public let level: String
     public let averageFeedback: Double
-    public let youtube: String?
+    public let video: Video?
     
     // MARK: - Initialization
     
@@ -91,6 +91,14 @@ public struct EventDetail: RealmDecodable {
         
         self.speakers = speakers
         self.moderator = moderatorSpeaker
-        self.youtube = event.videos.filter({ $0.featured }).first?.youtube
+        
+        if let video = event.videos.filter({ $0.featured }).first {
+            
+            self.video = Video(realmEntity: video)
+            
+        } else {
+            
+            self.video = nil
+        }
     }
 }

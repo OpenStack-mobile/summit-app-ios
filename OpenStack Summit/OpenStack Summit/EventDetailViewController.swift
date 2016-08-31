@@ -60,6 +60,8 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     
     var event: Identifier!
     
+    var videoActivity: NSUserActivity?
+    
     // MARK: - Private Properties
     
     private var eventDetail: EventDetail!
@@ -413,8 +415,7 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
     
     @IBAction func playVideo(sender: UIButton) {
         
-        let videoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: self.youtubeVideo!)
-        self.presentMoviePlayerViewControllerAnimated(videoPlayer)
+        self.playVideo(eventDetail.video!)
     }
     
     // MARK: - Private Methods
@@ -454,7 +455,7 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         self.level = eventDetail.level
         self.track = eventDetail.track
         self.hasAverageFeedback = false
-        self.youtubeVideo = eventDetail.youtube
+        self.youtubeVideo = eventDetail.video?.youtube
         
         if eventDetail.allowFeedback && eventDetail.finished {
             loadAverageFeedback()
