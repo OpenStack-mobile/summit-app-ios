@@ -53,9 +53,9 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup] ?? []
+        let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as! [Int]
         
-        tracks = Track.`for`(groups: trackGroupSelections.map({ $0 as! Identifier }))
+        tracks = Track.`for`(groups: trackGroupSelections)
         
         tableView.reloadData()
     }

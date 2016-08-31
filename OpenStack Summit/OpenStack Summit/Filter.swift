@@ -52,6 +52,45 @@ enum FilterSelection {
         case .names: self = .names([])
         }
     }
+    
+    mutating func removeAtIndex(index: Int) {
+        
+        switch self {
+        case var .identifiers(rawValue):
+            
+            rawValue.removeAtIndex(index)
+            self = .identifiers(rawValue)
+            
+        case var .names(rawValue):
+            
+            rawValue.removeAtIndex(index)
+            self = .names(rawValue)
+        }
+    }
+    
+    mutating func append(newElement: Identifier) {
+        
+        switch self {
+        case var .identifiers(rawValue):
+            
+            rawValue.append(newElement)
+            self = .identifiers(rawValue)
+            
+        default: fatalError("Appending invalid type")
+        }
+    }
+    
+    mutating func append(newElement: String) {
+        
+        switch self {
+        case var .names(rawValue):
+            
+            rawValue.append(newElement)
+            self = .names(rawValue)
+            
+        default: fatalError("Appending invalid type")
+        }
+    }
 }
 
 struct ScheduleFilter {
@@ -84,14 +123,14 @@ struct ScheduleFilter {
     
     mutating func clearActiveFilters() {
         for key in selections.keys {
-            selections[key] = []
+            selections[key]?.removeAll()
         }
     }
     
     func shoudHidePastTalks() -> Bool {
         var hidePastTalks = false
         
-        if let activeTalks = selections[FilterSectionType.ActiveTalks] as? [String] {
+        if let activeTalks = selections[FilterSectionType.ActiveTalks]?.rawValue as? [String] {
             if activeTalks.contains("Hide Past Talks") {
                 hidePastTalks = true
             }
@@ -128,7 +167,7 @@ extension ScheduleFilter {
             if now.mt_isBetweenDate(startDate, andDate: endDate) {
                 
                 filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
-                scheduleFilter.selections[FilterSectionType.ActiveTalks] = activeTalksFilters
+                scheduleFilter.selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters)
             }
         }
         
@@ -138,26 +177,26 @@ extension ScheduleFilter {
         filterSection.items = summitTrackGroups.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
         
         scheduleFilter.filterSections.append(filterSection)
-        scheduleFilter.selections[FilterSectionType.TrackGroup] = [Int]()
+        scheduleFilter.selections[FilterSectionType.TrackGroup] = .identifiers([])
         
         filterSection = FilterSection(type: .EventType, name: "EVENT TYPE")
         filterSection.items = eventTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
         
         scheduleFilter.filterSections.append(filterSection)
-        scheduleFilter.selections[FilterSectionType.EventType] = [Int]()
+        scheduleFilter.selections[FilterSectionType.EventType] = .identifiers([])
         
         filterSection = FilterSection(type: .Level, name: "LEVEL")
         filterSection.items = levels.map { FilterSectionItem(identifier: 0, name: $0) }
         
         scheduleFilter.filterSections.append(filterSection)
-        scheduleFilter.selections[FilterSectionType.Level] = [String]()
+        scheduleFilter.selections[FilterSectionType.Level] = .names([])
         
-        scheduleFilter.selections[FilterSectionType.Tag] = [Int]()
+        scheduleFilter.selections[FilterSectionType.Tag] = .names([])
         
         filterSection = FilterSection(type: .Venue, name: "VENUE")
         filterSection.items = venues.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
         scheduleFilter.filterSections.append(filterSection)
-        scheduleFilter.selections[FilterSectionType.Venue] = [Int]()
+        scheduleFilter.selections[FilterSectionType.Venue] = .identifiers([])
         
         return scheduleFilter
     }
