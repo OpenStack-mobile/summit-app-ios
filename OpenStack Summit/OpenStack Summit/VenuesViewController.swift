@@ -8,6 +8,7 @@
 
 import XLPagerTabStrip
 import KTCenterFlowLayout
+import CoreSummit
 
 final class VenuesViewController: RevealTabStripViewController {
     
@@ -23,20 +24,24 @@ final class VenuesViewController: RevealTabStripViewController {
         
         navigationItem.title = "VENUES"
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
-        
-        // set user activity for handoff
-        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
-        userActivity.title = "Venues"
-        userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/barcelona-2016/travel/")
-        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
-        
-        self.userActivity = userActivity
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        userActivity?.becomeCurrent()
+        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
+            
+            let summit = Summit(realmEntity: realmSummit)
+            
+            // set user activity for handoff
+            let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+            userActivity.title = "Venues"
+            userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/travel")
+            userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
+            userActivity.becomeCurrent()
+            
+            self.userActivity = userActivity
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {

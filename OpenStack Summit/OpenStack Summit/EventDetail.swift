@@ -35,6 +35,7 @@ public struct EventDetail: RealmDecodable {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
+    public let webpageURL: NSURL
     
     // MARK: - Initialization
     
@@ -100,5 +101,7 @@ public struct EventDetail: RealmDecodable {
             
             self.video = nil
         }
+        
+        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(AppConfiguration, summit: Summit(realmEntity: event.summit)))!
     }
 }
