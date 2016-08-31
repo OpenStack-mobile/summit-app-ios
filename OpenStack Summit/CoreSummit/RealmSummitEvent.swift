@@ -82,7 +82,7 @@ public extension RealmSummitEvent {
         }
         
         if (venues != nil && venues?.count > 0) {
-            events = events.filter("venue.id in %@", venues!)
+            events = events.filter("venue.id in %@ OR venueRoom.venue.id in %@", venues!, venues!)
         }
         
         return events.map { $0 }
