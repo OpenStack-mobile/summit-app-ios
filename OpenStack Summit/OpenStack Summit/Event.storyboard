@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -477,6 +477,11 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
                             <barButtonItem image="checked_active" style="plain" id="3oS-fs-h8J"/>
+                            <barButtonItem image="share" id="t10-BT-wIA">
+                                <connections>
+                                    <action selector="share:" destination="tmo-OH-FCJ" id="G5y-4C-RvU"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
@@ -498,6 +503,7 @@
                         <outlet property="locationView" destination="TDD-0K-h13" id="RwS-LU-PmG"/>
                         <outlet property="locationViewHeightConstraint" destination="6kY-RL-qwC" id="kBd-7K-2Ij"/>
                         <outlet property="scheduledButton" destination="3oS-fs-h8J" id="YRm-tY-Iwu"/>
+                        <outlet property="shareBarButtonItem" destination="t10-BT-wIA" id="FyE-a8-K6i"/>
                         <outlet property="speakersHeightConstraint" destination="Z8e-Is-z8O" id="6hc-eE-9HD"/>
                         <outlet property="speakersTableView" destination="Eco-mP-wK0" id="aJh-PF-JfY"/>
                         <outlet property="sponsorsLabel" destination="GGH-Ev-XLP" id="s9j-Le-9rZ"/>
@@ -538,6 +544,7 @@
         <image name="level" width="30" height="32"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="play" width="121" height="121"/>
+        <image name="share" width="101" height="86"/>
         <image name="tag" width="35" height="35"/>
         <image name="time" width="30" height="30"/>
     </resources>
