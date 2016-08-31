@@ -9,7 +9,7 @@
 import Haneke
 import ImageSlideshow
 
-public class HanekeInputSource: NSObject, InputSource {
+public final class HanekeInputSource: InputSource {
     
     public let url: NSURL
     
@@ -18,15 +18,11 @@ public class HanekeInputSource: NSObject, InputSource {
     }
     
     public init?(urlString: String) {
-        if let validUrl = NSURL(string: urlString) {
-            self.url = validUrl
-            super.init()
-        } else {
-            // this may be simplified in Swift 2.2, which fixes the failable initializer compiler issues
-            self.url = NSURL(string: "")!
-            super.init()
-            return nil
-        }
+        
+        guard let url = NSURL(string: urlString)
+            else { return nil }
+        
+        self.url = url
     }
     
     @objc public func setToImageView(imageView: UIImageView) {
