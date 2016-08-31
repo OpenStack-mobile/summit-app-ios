@@ -16,9 +16,9 @@ public protocol WebConvertible: Unique {
 
 public extension WebConvertible {
     
-    func toURL(configuration: Configuration, summit: Summit) -> String {
+    func toWebpageURL(configuration: Configuration, summit: Summit) -> String {
         
-        return configuration[.WebsiteURL] + "/summit/" + summit.webIdentifier + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
+        return configuration[.WebsiteURL] + "/" + summit.webIdentifier + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
     }
 }
 

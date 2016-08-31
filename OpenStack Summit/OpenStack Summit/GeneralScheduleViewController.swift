@@ -72,18 +72,23 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
             return
         }
         
+        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
+            
+            let summit = Summit(realmEntity: realmSummit)
+            
+            // set user activity for handoff
+            let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+            userActivity.title = "Summit Schedule"
+            userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/summit-schedule/")
+            userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
+            
+            self.userActivity = userActivity
+        }
+        
         self.toggleNoConnectivityMessage(false)
         self.toggleEventList(true)
         
         super.loadData()
-        
-        // set user activity for handoff
-        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
-        userActivity.title = "Summit Schedule"
-        userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/barcelona-2016/summit-schedule/")
-        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
-        
-        self.userActivity = userActivity
     }
     
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {

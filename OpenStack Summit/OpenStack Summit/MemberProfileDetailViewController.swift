@@ -270,12 +270,14 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 
                 let speaker = PresentationSpeaker(realmEntity: realmEntity)
                 
+                let summit = Summit(realmEntity: Store.shared.realm.objects(RealmSummit).first!)
+                
                 updateUI(.Value(speaker))
                 
                 // set user activity for handoff
                 let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
                 userActivity.title = self.title
-                userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/barcelona-2016/summit-schedule/speakers/\(identifier)")
+                userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(AppConfiguration, summit: summit))
                 
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
                 

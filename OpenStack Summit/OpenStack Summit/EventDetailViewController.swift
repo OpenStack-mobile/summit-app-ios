@@ -460,19 +460,14 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
             loadFeedback()
         }
         
-        do {
-            
-            // set user activity for handoff
-            let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
-            userActivity.title = eventTitle
-            userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/barcelona-2016/summit-schedule/events/\(event)")
-            
-            userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
-            
-            userActivity.becomeCurrent()
-            
-            self.userActivity = userActivity
-        }
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+        userActivity.title = eventTitle
+        userActivity.webpageURL = eventDetail.webpageURL
+        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
+        userActivity.becomeCurrent()
+        
+        self.userActivity = userActivity
     }
     
     private func loadFeedback() {
