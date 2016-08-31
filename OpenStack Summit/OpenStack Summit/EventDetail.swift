@@ -91,6 +91,6 @@ public struct EventDetail: RealmDecodable {
         
         self.speakers = speakers
         self.moderator = moderatorSpeaker
-        self.youtube = event.videos.first?.youtube
+        self.youtube = event.videos.filter({ $0.featured }).first?.youtube
     }
 }
