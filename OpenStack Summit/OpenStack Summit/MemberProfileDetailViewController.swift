@@ -208,6 +208,14 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         loadData()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            userActivity?.resignCurrent()
+        }
+    }
+    
     // MARK: - Methods
     
     /* FIXME: Not implemented in legacy codebase
@@ -263,6 +271,17 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 let speaker = PresentationSpeaker(realmEntity: realmEntity)
                 
                 updateUI(.Value(speaker))
+                
+                // set user activity for handoff
+                let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+                userActivity.title = self.title
+                userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/summit-schedule/speakers/\(identifier)")
+                
+                userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
+                
+                userActivity.becomeCurrent()
+                
+                self.userActivity = userActivity
                 
             } else {
                 
