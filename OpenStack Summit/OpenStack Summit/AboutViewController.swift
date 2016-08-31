@@ -32,6 +32,28 @@ final class AboutViewController: UIViewController, RevealViewController {
         
         navigationItem.title = "ABOUT"
         summitTextLabel.sizeToFit()
+        
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+        userActivity.title = "About the Summit"
+        userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/")
+        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
+        
+        self.userActivity = userActivity
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        userActivity?.becomeCurrent()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            userActivity?.resignCurrent()
+        }
     }
     
     // MARK: - Actions
