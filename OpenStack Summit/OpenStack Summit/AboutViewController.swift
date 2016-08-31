@@ -36,7 +36,7 @@ final class AboutViewController: UIViewController, RevealViewController {
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
         userActivity.title = "About the Summit"
-        userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/")
+        userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL])
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         
         self.userActivity = userActivity

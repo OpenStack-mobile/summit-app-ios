@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>WebsiteURL</key>
+	<string>https://dev-openstack.org-site/summit</string>
 	<key>AuthenticationURL</key>
 	<string>https://dev-identity-provider</string>
 	<key>ServerURL</key>

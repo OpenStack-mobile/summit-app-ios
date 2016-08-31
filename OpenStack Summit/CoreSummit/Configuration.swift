@@ -53,5 +53,6 @@ public extension Configuration {
         case SecretOpenID
         case ClientIDServiceAccount
         case SecretServiceAccount
+        case WebsiteURL
     }
 }

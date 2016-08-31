@@ -43,17 +43,6 @@ final class MemberProfileViewController: RevealTabStripViewController {
                 let speaker = PresentationSpeaker(realmEntity: realmEntity)
                 
                 self.title = speaker.name.uppercaseString
-                
-                // set user activity for handoff
-                let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
-                userActivity.title = self.title
-                userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/summit-schedule/speakers/\(speakerID)")
-                
-                userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speakerID]
-                
-                userActivity.becomeCurrent()
-                
-                self.userActivity = userActivity
             }
         }
         
@@ -63,17 +52,7 @@ final class MemberProfileViewController: RevealTabStripViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        userActivity?.becomeCurrent()
-        
         reloadPagerTabStripView()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if #available(iOS 9.0, *) {
-            userActivity?.resignCurrent()
-        }
     }
     
     // MARK: - Methods
