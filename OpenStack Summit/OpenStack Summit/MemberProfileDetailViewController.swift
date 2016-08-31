@@ -303,13 +303,13 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
             self.name = person.name
             self.personTitle = person.title ?? ""
             self.pictureURL = person.pictureURL
-            self.email = "" //person.email not in JSON
             self.twitter = person.twitter ?? ""
             self.irc = person.irc ?? ""
             self.biographyHTML = person.biography ?? ""
             
-            // FIXME: Setting location in UI, but not in DTO or deserializer
+            // not in DTO or deserializer
             self.location = ""
+            self.email = ""
         }
     }
     

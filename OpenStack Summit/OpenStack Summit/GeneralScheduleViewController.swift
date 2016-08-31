@@ -22,14 +22,20 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     
     // MARK: - Loading
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         loadData()
+        
+        userActivity?.becomeCurrent()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            userActivity?.resignCurrent()
+        }
     }
     
     // MARK: - Actions
@@ -70,6 +76,14 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
         self.toggleEventList(true)
         
         super.loadData()
+        
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+        userActivity.title = "Summit Schedule"
+        userActivity.webpageURL = NSURL(string: "https://dev-openstack.org-site/summit/barcelona-2016/summit-schedule/")
+        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
+        
+        self.userActivity = userActivity
     }
     
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
