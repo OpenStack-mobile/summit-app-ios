@@ -123,9 +123,9 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         self.reloadFilters()
         
-        for tag in scheduleFilter.selections[FilterSectionType.Tag]! {
+        for tag in scheduleFilter.selections[FilterSectionType.Tag]!.rawValue as! [String] {
             
-            self.addTag(tag as! String)
+            self.addTag(tag)
         }
     }
     
@@ -163,11 +163,11 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
         
-        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
+        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType]?.rawValue as? [Int] {
             
             for selectedId in filterSelectionsForType {
                 
-                if id == selectedId as! Int {
+                if id == selectedId{
                     
                     return true
                 }
@@ -179,11 +179,11 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     private func isItemSelected(filterSectionType: FilterSectionType, name: String) -> Bool {
         
-        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType] {
+        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType]?.rawValue as? [String] {
             
             for selectedName in filterSelectionsForType {
                 
-                if name == selectedName as! String {
+                if name == selectedName {
                     
                     return true
                 }
@@ -232,7 +232,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             if isItemSelected(filterSection.type, id: filterItem.identifier) {
                 
-                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! Int == filterItem.identifier }
+                let index = scheduleFilter.selections[filterSection.type]!.rawValue.indexOf { $0 as! Int == filterItem.identifier }
                 scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
                 cell.isOptionSelected = false
             }
@@ -246,7 +246,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             if isItemSelected(filterSection.type, name: filterItem.name) {
                 
-                let index = scheduleFilter.selections[filterSection.type]!.indexOf { $0 as! String == filterItem.name }
+                let index = scheduleFilter.selections[filterSection.type]!.rawValue.indexOf { $0 as! String == filterItem.name }
                 scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
                 cell.isOptionSelected = false
             }
@@ -351,7 +351,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
                 return
             }
             
-            let index = scheduleFilter.selections[FilterSectionType.Tag]!.indexOf { $0 as! String == escapedTag }
+            let index = scheduleFilter.selections[FilterSectionType.Tag]!.rawValue.indexOf { $0 as! String == escapedTag }
             scheduleFilter.selections[FilterSectionType.Tag]!.removeAtIndex(index!)
         }
         
@@ -385,7 +385,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
-            if (escapedTag == "" || scheduleFilter.selections[FilterSectionType.Tag]?.indexOf{ $0 as! String == escapedTag } != nil) {
+            if (escapedTag == "" || scheduleFilter.selections[FilterSectionType.Tag]?.rawValue.indexOf{ $0 as! String == escapedTag } != nil) {
                 
                 return false
             }
