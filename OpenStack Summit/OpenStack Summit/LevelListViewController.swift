@@ -56,7 +56,7 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
         // remove duplicates
         self.levels = Array(levelsSet)
         
-        if let levelSelections = scheduleFilter.selections[FilterSectionType.Level] as? [String] {
+        if let levelSelections = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String] {
             if levelSelections.count > 0 {
                 levels = levels.filter { levelSelections.contains($0) }
             }
