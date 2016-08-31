@@ -14,6 +14,9 @@ enum AppActivity: String {
     
     /// App activity for handoff of summit data viewing.
     case view = "org.openstack.summit.viewSummit"
+    
+    /// App activity that takes you to a specific screen (usually with a list of data).
+    case screen = "org.openstack.summit.viewScreen"
 }
 
 enum AppActivityUserInfo: String {
@@ -21,8 +24,11 @@ enum AppActivityUserInfo: String {
     // The type of summit data to be shown.
     case type
     
-    // the identifier of the summit data.
+    // The identifier of the summit data.
     case identifier
+    
+    // The screen to be shown.
+    case screen
 }
 
 enum AppActivitySummitDataType: String {
@@ -44,5 +50,13 @@ enum AppActivitySummitDataType: String {
         case .venueRoom: return RealmVenueRoom.self
         }
     }
+}
+
+enum AppActivityScreen: String {
+    
+    case venues
+    case events
+    case speakers
+    case about
 }
 
