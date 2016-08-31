@@ -187,7 +187,6 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
                     
                     controller.showErrorMessage(error as NSError)
                     
-                    controller.scheduleFilter.hasToRefreshSchedule = true
                     controller.toggleNoConnectivityMessage(true)
                     controller.toggleEventList(false)
                     

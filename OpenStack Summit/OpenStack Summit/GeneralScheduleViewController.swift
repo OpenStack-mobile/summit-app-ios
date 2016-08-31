@@ -59,12 +59,6 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     
     internal override func loadData() {
         
-        if scheduleFilter.hasToRefreshSchedule == false {
-            return
-        }
-        
-        scheduleFilter.hasToRefreshSchedule = false
-        
         if Store.shared.realm.objects(RealmSummit).isEmpty && Reachability.connected == false {
             
             self.toggleNoConnectivityMessage(true)
