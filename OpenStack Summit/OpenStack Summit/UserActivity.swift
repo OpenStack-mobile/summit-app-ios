@@ -31,6 +31,11 @@ enum AppActivityUserInfo: String {
     case screen
 }
 
+protocol AppActivitySummitData {
+    
+    static var activityDataType: AppActivitySummitDataType { get }
+}
+
 enum AppActivitySummitDataType: String {
     
     case event
@@ -58,5 +63,32 @@ enum AppActivityScreen: String {
     case events
     case speakers
     case about
+}
+
+// MARK: - Model Extensions
+
+extension SummitEvent: AppActivitySummitData {
+    
+    static let activityDataType = AppActivitySummitDataType.event
+}
+
+extension PresentationSpeaker: AppActivitySummitData {
+    
+    static let activityDataType = AppActivitySummitDataType.speaker
+}
+
+extension Video: AppActivitySummitData {
+    
+    static let activityDataType = AppActivitySummitDataType.video
+}
+
+extension Venue: AppActivitySummitData {
+    
+    static let activityDataType = AppActivitySummitDataType.venue
+}
+
+extension VenueRoom: AppActivitySummitData {
+    
+    static let activityDataType = AppActivitySummitDataType.venueRoom
 }
 
