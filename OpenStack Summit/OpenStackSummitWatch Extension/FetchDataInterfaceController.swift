@@ -66,7 +66,7 @@ final class FetchDataInterfaceController: WKInterfaceController {
                 // cache summit in memory
                 cachedSummit = summit
                 
-                controller.presentControllerWithName("Events", context: nil)
+                controller.pushControllerWithName("Events", context: nil)
             }
         }
     }
