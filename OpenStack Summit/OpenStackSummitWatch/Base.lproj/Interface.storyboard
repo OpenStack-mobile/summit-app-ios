@@ -5,32 +5,89 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--Summit-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="OpenStackSummitWatch" customModuleProvider="target">
+                <controller identifier="FetchData" title="Summit" id="AgC-eL-Hgc" customClass="FetchDataInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
-                        <table alignment="left" id="WKZ-r1-dhd">
-                            <items>
-                                <tableRow id="ak1-U9-YB1">
-                                    <group key="rootItem" width="1" alignment="left" id="QKq-7G-KyA"/>
-                                </tableRow>
-                            </items>
-                        </table>
+                        <table alignment="left" id="WKZ-r1-dhd"/>
+                        <button width="1" alignment="left" verticalAlignment="center" title="Loading..." id="i3U-Rl-ofL">
+                            <connections>
+                                <action selector="loadData:" destination="AgC-eL-Hgc" id="xUp-t3-fab"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
-                        <segue destination="RWc-2b-Bw2" kind="relationship" relationship="nextPage" id="Qd0-ip-Rkw"/>
+                        <outlet property="loadingButton" destination="i3U-Rl-ofL" id="KYw-fe-dyc"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
         </scene>
-        <!--Interface Controller-->
-        <scene sceneID="rMG-Sm-9vb">
+        <!--Events-->
+        <scene sceneID="kWW-JT-n7D">
             <objects>
-                <controller id="RWc-2b-Bw2"/>
+                <controller identifier="Events" title="Events" id="dLl-Jq-VGC">
+                    <items>
+                        <table alignment="left" id="fOy-3O-EK9">
+                            <items>
+                                <tableRow identifier="EventCell" id="6FI-O9-Yli">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Aon-v4-SmN">
+                                        <items>
+                                            <label width="1" alignment="left" semanticContentAttribute="spatial" text="Event title" numberOfLines="0" id="kns-TS-UUH">
+                                                <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <segue destination="u7P-vB-Uq3" kind="push" identifier="showEvent" id="fwE-jp-7Vq"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="483" y="347"/>
+            <point key="canvasLocation" x="497" y="345"/>
+        </scene>
+        <!--EventDetail-->
+        <scene sceneID="86m-sd-Rx9">
+            <objects>
+                <controller identifier="EventDetail" id="u7P-vB-Uq3">
+                    <items>
+                        <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="FUM-g0-sbg">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                        </label>
+                        <separator alignment="left" id="haq-Tq-NfL"/>
+                        <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="yAw-QM-F0d">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <separator alignment="left" id="D1s-GO-7tf"/>
+                        <label width="1" alignment="left" text="Tags" textAlignment="left" numberOfLines="0" id="4G0-yt-7UM">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <separator alignment="left" id="u26-hg-KH3"/>
+                        <button alignment="left" title="S" id="cOQ-Os-fZd">
+                            <group key="contentGroup" width="1" alignment="left" id="XcQ-CL-WnR">
+                                <items>
+                                    <label width="1" alignment="left" text="1 Speaker" id="V0H-QC-dq7"/>
+                                </items>
+                            </group>
+                        </button>
+                        <separator alignment="left" id="87u-uo-vIt"/>
+                        <button alignment="left" title="S" id="txC-1q-JR0">
+                            <group key="contentGroup" width="1" alignment="left" id="Xk4-Gd-Dq3">
+                                <items>
+                                    <label width="1" alignment="left" text="1 Speaker" id="WmT-To-Tkv" userLabel="Hilton"/>
+                                </items>
+                            </group>
+                        </button>
+                        <separator alignment="left" id="Ik6-iz-N7X"/>
+                        <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="yp8-bG-zhV"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="779" y="345"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -53,7 +110,7 @@
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="OpenStackSummitWatch" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="468" y="643"/>
+            <point key="canvasLocation" x="497" y="643"/>
         </scene>
     </scenes>
 </document>
