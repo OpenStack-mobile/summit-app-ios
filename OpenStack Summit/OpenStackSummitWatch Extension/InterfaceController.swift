@@ -8,7 +8,7 @@
 
 import WatchKit
 import Foundation
-
+//import CoreSummit
 
 class InterfaceController: WKInterfaceController {
 
@@ -16,6 +16,8 @@ class InterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
+        
+        //Store.shared.summit
     }
 
     override func willActivate() {
