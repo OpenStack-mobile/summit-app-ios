@@ -146,7 +146,6 @@
 		6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */; };
 		6E0B5F691D77D4DF0005F6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */; };
 		6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */; };
-		6E0B5F781D77D5200005F6CE /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
 		6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */; };
@@ -252,6 +251,8 @@
 		6E2538511D1B01D7003E3400 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2538501D1B01D7003E3400 /* Error.swift */; };
 		6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */; };
 		6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
+		6E28872D1D77E6A5009B8E62 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */; };
+		6E28872E1D77E6A5009B8E62 /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
 		6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
 		6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C171D4123AE005132DA /* VenueListViewController.swift */; };
@@ -383,13 +384,6 @@
 			remoteGlobalIDString = 6E0B5F4E1D77D4DE0005F6CE;
 			remoteInfo = OpenStackSummitWatch;
 		};
-		6E0B5F791D77D52A0005F6CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6E0B5EB21D77C8950005F6CE;
-			remoteInfo = "CoreSummit WatchOS";
-		};
 		6E104D431D1061AC00541E84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -417,6 +411,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
 			remoteInfo = CoreSummit;
+		};
+		6E28872F1D77E6A5009B8E62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0B5EB21D77C8950005F6CE;
+			remoteInfo = "CoreSummit WatchOS";
 		};
 		6EF12C651D149C7200814AD0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -469,6 +470,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6E10A5071D1066E9008CBD0C /* CoreSummit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E2887311D77E6A5009B8E62 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6E28872E1D77E6A5009B8E62 /* CoreSummit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,7 +770,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E0B5F781D77D5200005F6CE /* CoreSummit.framework in Frameworks */,
+				6E28872D1D77E6A5009B8E62 /* CoreSummit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,11 +1375,13 @@
 				6E0B5F571D77D4DF0005F6CE /* Sources */,
 				6E0B5F581D77D4DF0005F6CE /* Frameworks */,
 				6E0B5F591D77D4DF0005F6CE /* Resources */,
+				6E5915CF1D77E00F008E9C80 /* Copy Frameworks */,
+				6E2887311D77E6A5009B8E62 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6E0B5F7A1D77D52A0005F6CE /* PBXTargetDependency */,
+				6E2887301D77E6A5009B8E62 /* PBXTargetDependency */,
 			);
 			name = "OpenStackSummitWatch Extension";
 			productName = "OpenStackSummitWatch Extension";
@@ -1651,6 +1665,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6E5915CF1D77E00F008E9C80 /* Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/WatchOS/SwiftFoundation.framework",
+				"$(SRCROOT)/../Carthage/Build/WatchOS/JSON.framework",
+				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearHttp.framework",
+				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearOAuth2.framework",
+				"$(SRCROOT)/../Carthage/Build/WatchOS/Realm.framework",
+				"$(SRCROOT)/../Carthage/Build/WatchOS/RealmSwift.framework",
+			);
+			name = "Copy Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		6EF12C5C1D149A8E00814AD0 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2067,11 +2101,6 @@
 			target = 6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */;
 			targetProxy = 6E0B5F6B1D77D4DF0005F6CE /* PBXContainerItemProxy */;
 		};
-		6E0B5F7A1D77D52A0005F6CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */;
-			targetProxy = 6E0B5F791D77D52A0005F6CE /* PBXContainerItemProxy */;
-		};
 		6E104D441D1061AC00541E84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6E104D2D1D1061AC00541E84 /* OpenStackSummit */;
@@ -2091,6 +2120,11 @@
 			isa = PBXTargetDependency;
 			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */;
 			targetProxy = 6E10A5041D1066E9008CBD0C /* PBXContainerItemProxy */;
+		};
+		6E2887301D77E6A5009B8E62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */;
+			targetProxy = 6E28872F1D77E6A5009B8E62 /* PBXContainerItemProxy */;
 		};
 		6EF12C661D149C7200814AD0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2223,6 +2257,7 @@
 		6E0B5F6F1D77D4DF0005F6CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
@@ -2237,6 +2272,7 @@
 		6E0B5F701D77D4DF0005F6CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
@@ -2251,6 +2287,7 @@
 		6E0B5F711D77D4DF0005F6CE /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
@@ -2268,6 +2305,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				IBSC_MODULE = OpenStackSummitWatch_Extension;
 				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp";
@@ -2285,6 +2323,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				IBSC_MODULE = OpenStackSummitWatch_Extension;
 				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp";
@@ -2302,6 +2341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				IBSC_MODULE = OpenStackSummitWatch_Extension;
 				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp";
