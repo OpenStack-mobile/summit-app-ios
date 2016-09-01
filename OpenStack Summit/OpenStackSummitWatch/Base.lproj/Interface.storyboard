@@ -35,26 +35,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="56"/>
-        </scene>
-        <!--Summit-->
-        <scene sceneID="aou-V4-d1y">
-            <objects>
-                <controller identifier="FetchData" title="Summit" id="AgC-eL-Hgc" customClass="FetchDataInterfaceController" customModule="OpenStackSummitWatch_Extension">
-                    <items>
-                        <table alignment="left" id="WKZ-r1-dhd"/>
-                        <button width="1" alignment="left" verticalAlignment="center" title="Loading..." id="i3U-Rl-ofL">
-                            <connections>
-                                <action selector="loadData:" destination="AgC-eL-Hgc" id="xUp-t3-fab"/>
-                            </connections>
-                        </button>
-                    </items>
-                    <connections>
-                        <outlet property="loadingButton" destination="i3U-Rl-ofL" id="KYw-fe-dyc"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="-39" y="-288"/>
         </scene>
         <!--Events-->
         <scene sceneID="kWW-JT-n7D">
@@ -64,9 +45,13 @@
                         <table alignment="left" id="fOy-3O-EK9">
                             <items>
                                 <tableRow identifier="EventCell" id="6FI-O9-Yli" customClass="EventCellController" customModule="OpenStackSummitWatch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Aon-v4-SmN">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Aon-v4-SmN">
                                         <items>
-                                            <label width="1" alignment="left" semanticContentAttribute="spatial" text="Event title" numberOfLines="0" id="kns-TS-UUH">
+                                            <label width="1" alignment="left" text="Date" numberOfLines="0" id="kns-TS-UUH">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                            </label>
+                                            <label width="1" alignment="left" verticalAlignment="bottom" text="Event name" numberOfLines="0" id="B6w-tT-N2G">
                                                 <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                                             </label>
                                         </items>
@@ -86,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="481" y="-288"/>
         </scene>
-        <!--EventDetail-->
+        <!--Event-->
         <scene sceneID="86m-sd-Rx9">
             <objects>
-                <controller identifier="EventDetail" id="u7P-vB-Uq3" customClass="EventDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                <controller identifier="EventDetail" title="Event" id="u7P-vB-Uq3" customClass="EventDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
                         <table alignment="left" id="P2f-Lo-7S7">
                             <items>
@@ -131,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="497" y="643"/>
         </scene>
-        <!--EventDetailOld-->
+        <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
             <objects>
-                <controller identifier="EventDetailOld" id="3Wd-aq-ZaB">
+                <controller identifier="EventDetailOld" title="Event" id="3Wd-aq-ZaB">
                     <items>
                         <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="hJd-4g-bkH">
                             <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
@@ -168,7 +153,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="779" y="642.25"/>
+            <point key="canvasLocation" x="1021" y="-288.75"/>
         </scene>
         <!--Events-->
         <scene sceneID="fse-GJ-kiE">
@@ -177,7 +162,7 @@
                     <items>
                         <table alignment="left" id="RQQ-Ck-r7m">
                             <items>
-                                <tableRow identifier="MenuCell" id="X6H-MW-p1D" customClass="MenuCellController" customModule="OpenStackSummitWatch_Extension">
+                                <tableRow identifier="LabelCell" id="X6H-MW-p1D" customClass="LabelCellController" customModule="OpenStackSummitWatch_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="8He-LH-fVJ">
                                         <items>
                                             <label width="1" height="1" alignment="left" text="By Keyword" textAlignment="center" id="0Fg-n4-dy8"/>
@@ -185,7 +170,7 @@
                                         <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </group>
                                     <connections>
-                                        <outlet property="menuLabel" destination="0Fg-n4-dy8" id="ipC-04-LDM"/>
+                                        <outlet property="textLabel" destination="0Fg-n4-dy8" id="OMZ-Lc-cmS"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -199,6 +184,56 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="-288"/>
+        </scene>
+        <!--Venues-->
+        <scene sceneID="Ck2-DJ-p6d">
+            <objects>
+                <controller identifier="VenuesMap" title="Venues" id="dmw-Fd-pup" customClass="VenuesMapInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <map width="1" height="0.80000000000000004" alignment="left" id="eG6-Eu-SpR"/>
+                        <button width="1" height="0.20000000000000001" alignment="left" title="Directory" id="WEy-1i-yhs">
+                            <connections>
+                                <segue destination="eHr-0A-NxD" kind="push" identifier="showVenuesDirectory" id="kVh-8L-auD"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="mapView" destination="eG6-Eu-SpR" id="pmX-nk-mau"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="10"/>
+        </scene>
+        <!--Venues-->
+        <scene sceneID="nPg-ND-1QP">
+            <objects>
+                <controller identifier="VenuesDirectory" title="Venues" id="eHr-0A-NxD" customClass="VenuesDirectoryInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <table alignment="left" id="3oT-Qo-kgz">
+                            <items>
+                                <tableRow identifier="EventCell" id="uXe-iq-s18" customClass="EventCellController" customModule="OpenStackSummitWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="hJw-w9-aiH">
+                                        <items>
+                                            <label width="1" alignment="left" semanticContentAttribute="spatial" numberOfLines="0" id="We6-C5-Wqc">
+                                                <string key="text">Venue Name
+Address</string>
+                                                <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="eventLabel" destination="We6-C5-Wqc" id="RvU-g2-DHR"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tableView" destination="3oT-Qo-kgz" id="tlV-ei-L5q"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="481" y="10"/>
         </scene>
     </scenes>
 </document>
