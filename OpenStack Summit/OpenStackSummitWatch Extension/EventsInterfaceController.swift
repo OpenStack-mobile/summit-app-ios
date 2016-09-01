@@ -12,20 +12,27 @@ import CoreSummit
 
 final class EventsInterfaceController: WKInterfaceController {
     
+    typealias Filter = (Event) -> Bool
+    
+    static let identifier = "Events"
+    
     // MARK: - IB Outlets
     
     @IBOutlet weak var tableView: WKInterfaceTable!
     
     // MARK: - Properties
     
-    let events = cachedSummit?.schedule ?? []
+    private var events = [Event]()
     
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        updateUI()
+        guard let filter = (context as? Context<Filter>)?.value
+            else { fatalError("No context provided") }
+        
+        updateUI(filter)
     }
     
     override func willActivate() {
@@ -40,11 +47,17 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    private func updateUI(filter: Filter) {
         
-        tableView.setNumberOfRows(events.count, withRowType: EventCellController.identifier)
+        // filter events
+        
+        let allEvents = cachedSummit?.schedule ?? []
+        
+        events = allEvents.filter(filter)
         
         // configure cells
+        
+        tableView.setNumberOfRows(events.count, withRowType: EventCellController.identifier)
         
         for (index, event) in events.enumerate() {
             
