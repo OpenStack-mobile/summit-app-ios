@@ -84,7 +84,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="497" y="345"/>
+            <point key="canvasLocation" x="481" y="-288"/>
         </scene>
         <!--EventDetail-->
         <scene sceneID="86m-sd-Rx9">
@@ -106,7 +106,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="779" y="345"/>
+            <point key="canvasLocation" x="767" y="-288"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -168,7 +168,37 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="769" y="28.25"/>
+            <point key="canvasLocation" x="779" y="642.25"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="fse-GJ-kiE">
+            <objects>
+                <controller identifier="EventFilters" title="Events" id="FXs-a2-43y" customClass="MenuInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <table alignment="left" id="RQQ-Ck-r7m">
+                            <items>
+                                <tableRow identifier="MenuCell" id="X6H-MW-p1D" customClass="MenuCellController" customModule="OpenStackSummitWatch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="8He-LH-fVJ">
+                                        <items>
+                                            <label width="1" height="1" alignment="left" text="By Keyword" textAlignment="center" id="0Fg-n4-dy8"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="menuLabel" destination="0Fg-n4-dy8" id="ipC-04-LDM"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <imageView width="1" height="1" alignment="left" hidden="YES" contentMode="center" id="8Eg-1L-j9j"/>
+                    </items>
+                    <connections>
+                        <outlet property="loadingImageView" destination="8Eg-1L-j9j" id="KeU-7z-80n"/>
+                        <outlet property="tableView" destination="RQQ-Ck-r7m" id="XuY-Cf-pXL"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="-288"/>
         </scene>
     </scenes>
 </document>
