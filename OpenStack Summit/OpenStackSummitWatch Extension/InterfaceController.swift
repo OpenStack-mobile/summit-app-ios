@@ -10,19 +10,20 @@ import WatchKit
 import Foundation
 import CoreSummit
 
-class InterfaceController: WKInterfaceController {
+final class InterfaceController: WKInterfaceController {
+    
+    static let identifier = "identifier"
+    
+    // MARK: - IB Outlets
+    
+    // MARK: - Properties
+    
+    // MARK: - Loading
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        print("Did Awake")
         
-        // Configure interface objects here.
-        
-        Store.shared.summit { (response) in
-            
-            dump(response)
-        }
     }
 
     override func willActivate() {

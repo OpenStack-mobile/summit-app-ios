@@ -1,5 +1,5 @@
 //
-//  EventDetailInterfaceController.swift
+//  VenuesDirectoryInterfaceController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 9/1/16.
@@ -10,16 +10,18 @@ import WatchKit
 import Foundation
 import CoreSummit
 
-final class EventDetailInterfaceController: WKInterfaceController {
+final class VenuesDirectoryInterfaceController: WKInterfaceController {
     
-    static let identifier = "EventDetail"
+    static let identifier = "VenuesDirectory"
+    
+    // MARK: - IB Outlets
+    
+    // MARK: - Properties
     
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
-        let event = (context as! Context<SummitEvent>).value
         
         
     }

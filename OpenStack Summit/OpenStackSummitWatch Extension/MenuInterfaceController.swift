@@ -12,6 +12,8 @@ import CoreSummit
 
 final class MenuInterfaceController: WKInterfaceController {
     
+    static let identifier = "Menu"
+    
     // MARK: - IB Outlets
     
     @IBOutlet weak var tableView: WKInterfaceTable!
@@ -22,13 +24,13 @@ final class MenuInterfaceController: WKInterfaceController {
     
     let menuItems: [MenuItem] = {
        
-        let events = MenuItem(name: "Events", image: "events", controller: "Events")
+        let events = MenuItem(name: "Events", image: "events", controller: EventFiltersInterfaceController.identifier)
         
-        let venues = MenuItem(name: "Venues", image: "venues", controller: "Events")
+        let venues = MenuItem(name: "Venues", image: "venues", controller: VenuesMapInterfaceController.identifier)
         
-        let people = MenuItem(name: "People", image: "people", controller: "Events")
+        let people = MenuItem(name: "People", image: "people", controller: EventFiltersInterfaceController.identifier)
         
-        let about = MenuItem(name: "About", image: "about", controller: "Events")
+        let about = MenuItem(name: "About", image: "about", controller: EventFiltersInterfaceController.identifier)
         
         return [events, venues, people, about]
     }()

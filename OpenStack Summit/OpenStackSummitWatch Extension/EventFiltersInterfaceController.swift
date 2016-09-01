@@ -12,17 +12,18 @@ import CoreSummit
 
 final class EventFiltersInterfaceController: WKInterfaceController {
     
+    static let identifier = "EventFilters"
+    
+    // MARK: - IB Outlets
+    
+    // MARK: - Properties
+    
+    // MARK: - Loading
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        print("Did Awake")
         
-        // Configure interface objects here.
-        
-        Store.shared.summit { (response) in
-            
-            dump(response)
-        }
     }
     
     override func willActivate() {
