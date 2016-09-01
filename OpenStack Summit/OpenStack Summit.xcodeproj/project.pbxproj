@@ -64,7 +64,6 @@
 		6E0B5ED31D77C8950005F6CE /* RealmPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */; };
 		6E0B5ED41D77C8950005F6CE /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */; };
 		6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5561D10675D008CBD0C /* TrackGroupJSON.swift */; };
-		6E0B5ED61D77C8950005F6CE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E661D2320610087057A /* Reachability.swift */; };
 		6E0B5ED71D77C8950005F6CE /* RealmSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */; };
 		6E0B5ED81D77C8950005F6CE /* RealmLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5371D10675C008CBD0C /* RealmLocation.swift */; };
 		6E0B5ED91D77C8950005F6CE /* EventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */; };
@@ -1588,7 +1587,6 @@
 				6E0B5ED31D77C8950005F6CE /* RealmPresentation.swift in Sources */,
 				6E0B5ED41D77C8950005F6CE /* CompanyJSON.swift in Sources */,
 				6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */,
-				6E0B5ED61D77C8950005F6CE /* Reachability.swift in Sources */,
 				6E0B5ED71D77C8950005F6CE /* RealmSummitAttendee.swift in Sources */,
 				6E0B5ED81D77C8950005F6CE /* RealmLocation.swift in Sources */,
 				6E0B5ED91D77C8950005F6CE /* EventDataUpdateJSON.swift in Sources */,
@@ -1926,6 +1924,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1948,6 +1947,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1970,6 +1970,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1984,6 +1985,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
 				SDKROOT = watchos;
+				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
 		};
@@ -1996,6 +1998,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
 				SDKROOT = watchos;
+				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;
 		};
@@ -2008,6 +2011,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
 				SDKROOT = watchos;
+				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Beta;
 		};
