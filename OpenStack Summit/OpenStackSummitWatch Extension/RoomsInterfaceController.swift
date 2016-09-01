@@ -1,5 +1,5 @@
 //
-//  VenuesDirectoryInterfaceController.swift
+//  RoomsInterfaceController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 9/1/16.
@@ -10,9 +10,9 @@ import WatchKit
 import Foundation
 import CoreSummit
 
-final class VenuesDirectoryInterfaceController: WKInterfaceController {
+final class RoomsInterfaceController: WKInterfaceController {
     
-    static let identifier = "VenuesDirectory"
+    static let identifier = "Rooms"
     
     // MARK: - IB Outlets
     
@@ -20,7 +20,17 @@ final class VenuesDirectoryInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    let locations = cachedSummit?.locations.map({ $0.rawValue }) ?? []
+    let rooms = cachedSummit?.locations.reduce([VenueRoom](), combine: {
+        
+        guard case let .room(room) = $1
+            else { return $0 }
+        
+        var rooms = $0
+        rooms.append(room)
+        
+        return rooms
+        
+    }) ?? []
     
     // MARK: - Loading
     
@@ -44,18 +54,18 @@ final class VenuesDirectoryInterfaceController: WKInterfaceController {
     
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
         
-        let location = locations[rowIndex]
+        let room = rooms[rowIndex]
         
-        return Context(location)
+        return Context(room)
     }
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
-        tableView.setNumberOfRows(locations.count, withRowType: LabelCellController.identifier)
+        tableView.setNumberOfRows(rooms.count, withRowType: LabelCellController.identifier)
         
-        for (index, location) in locations.enumerate() {
+        for (index, location) in rooms.enumerate() {
             
             let cell = tableView.rowControllerAtIndex(index) as! LabelCellController
             
