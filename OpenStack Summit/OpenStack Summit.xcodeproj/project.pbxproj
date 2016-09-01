@@ -30,99 +30,61 @@
 		6E087DD01D4A5E0F00CDC935 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */; };
 		6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
 		6E0B2F071D33F3A10058F171 /* Levels.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B2F061D33F3A10058F171 /* Levels.storyboard */; };
-		6E0B5EB41D77C8950005F6CE /* RealmSummit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53E1D10675C008CBD0C /* RealmSummit.swift */; };
 		6E0B5EB51D77C8950005F6CE /* NonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52B1D10675C008CBD0C /* NonConfirmedSummitAttendee.swift */; };
 		6E0B5EB61D77C8950005F6CE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51D1D10675C008CBD0C /* Event.swift */; };
 		6E0B5EB71D77C8950005F6CE /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55B1D10675D008CBD0C /* VenueRoom.swift */; };
-		6E0B5EB81D77C8950005F6CE /* RealmVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5461D10675C008CBD0C /* RealmVenue.swift */; };
-		6E0B5EB91D77C8950005F6CE /* RealmFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5351D10675C008CBD0C /* RealmFeedback.swift */; };
 		6E0B5EBA1D77C8950005F6CE /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
 		6E0B5EBB1D77C8950005F6CE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
-		6E0B5EBC1D77C8950005F6CE /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537C91D199D0C003E3400 /* Login.swift */; };
-		6E0B5EBD1D77C8950005F6CE /* RealmSummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5411D10675C008CBD0C /* RealmSummitType.swift */; };
-		6E0B5EBE1D77C8950005F6CE /* DataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2529211D5924D300173B1F /* DataUpdateJSON.swift */; };
 		6E0B5EBF1D77C8950005F6CE /* ImageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5241D10675C008CBD0C /* ImageJSON.swift */; };
 		6E0B5EC01D77C8950005F6CE /* EventTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5201D10675C008CBD0C /* EventTypeJSON.swift */; };
 		6E0B5EC11D77C8950005F6CE /* NonConfirmedSummitAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52C1D10675C008CBD0C /* NonConfirmedSummitAttendeeJSON.swift */; };
 		6E0B5EC21D77C8950005F6CE /* SummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5491D10675C008CBD0C /* SummitAttendee.swift */; };
-		6E0B5EC31D77C8950005F6CE /* EventScheduleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */; };
 		6E0B5EC41D77C8950005F6CE /* ErrorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51C1D10675C008CBD0C /* ErrorValue.swift */; };
 		6E0B5EC51D77C8950005F6CE /* PresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A351D67753D00189992 /* PresentationDataUpdate.swift */; };
 		6E0B5EC61D77C8950005F6CE /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51A1D10675C008CBD0C /* Company.swift */; };
 		6E0B5EC71D77C8950005F6CE /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5551D10675D008CBD0C /* TrackGroup.swift */; };
-		6E0B5EC81D77C8950005F6CE /* RealmVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA062A01D63AD09009538CE /* RealmVideo.swift */; };
 		6E0B5EC91D77C8950005F6CE /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54E1D10675D008CBD0C /* Tag.swift */; };
-		6E0B5ECA1D77C8950005F6CE /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
-		6E0B5ECB1D77C8950005F6CE /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
 		6E0B5ECC1D77C8950005F6CE /* EventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A331D6771CF00189992 /* EventDataUpdate.swift */; };
 		6E0B5ECD1D77C8950005F6CE /* PresentationSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5301D10675C008CBD0C /* PresentationSpeaker.swift */; };
 		6E0B5ECE1D77C8950005F6CE /* Summit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5481D10675C008CBD0C /* Summit.swift */; };
 		6E0B5ECF1D77C8950005F6CE /* TicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5501D10675D008CBD0C /* TicketType.swift */; };
 		6E0B5ED01D77C8950005F6CE /* SummitTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54D1D10675C008CBD0C /* SummitTypeJSON.swift */; };
-		6E0B5ED11D77C8950005F6CE /* RealmTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5441D10675C008CBD0C /* RealmTrack.swift */; };
 		6E0B5ED21D77C8950005F6CE /* VenueRoomJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */; };
-		6E0B5ED31D77C8950005F6CE /* RealmPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */; };
 		6E0B5ED41D77C8950005F6CE /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */; };
 		6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5561D10675D008CBD0C /* TrackGroupJSON.swift */; };
-		6E0B5ED71D77C8950005F6CE /* RealmSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */; };
-		6E0B5ED81D77C8950005F6CE /* RealmLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5371D10675C008CBD0C /* RealmLocation.swift */; };
 		6E0B5ED91D77C8950005F6CE /* EventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */; };
 		6E0B5EDA1D77C8950005F6CE /* TrackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5571D10675D008CBD0C /* TrackJSON.swift */; };
 		6E0B5EDB1D77C8950005F6CE /* FeedbackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5221D10675C008CBD0C /* FeedbackJSON.swift */; };
-		6E0B5EDC1D77C8950005F6CE /* RealmEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5341D10675C008CBD0C /* RealmEventType.swift */; };
 		6E0B5EDD1D77C8950005F6CE /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5271D10675C008CBD0C /* LocationJSON.swift */; };
 		6E0B5EDE1D77C8950005F6CE /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */; };
 		6E0B5EDF1D77C8950005F6CE /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51F1D10675C008CBD0C /* EventType.swift */; };
 		6E0B5EE01D77C8950005F6CE /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5591D10675D008CBD0C /* Venue.swift */; };
 		6E0B5EE11D77C8950005F6CE /* TicketTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5511D10675D008CBD0C /* TicketTypeJSON.swift */; };
-		6E0B5EE21D77C8950005F6CE /* AttendeesForTicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */; };
-		6E0B5EE31D77C8950005F6CE /* RealmCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5331D10675C008CBD0C /* RealmCompany.swift */; };
 		6E0B5EE41D77C8950005F6CE /* SummitJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54B1D10675C008CBD0C /* SummitJSON.swift */; };
 		6E0B5EE51D77C8950005F6CE /* WebConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */; };
-		6E0B5EE61D77C8950005F6CE /* RealmTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5421D10675C008CBD0C /* RealmTag.swift */; };
-		6E0B5EE71D77C8950005F6CE /* RealmPresentationSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53D1D10675C008CBD0C /* RealmPresentationSpeaker.swift */; };
 		6E0B5EE81D77C8950005F6CE /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52E1D10675C008CBD0C /* Presentation.swift */; };
 		6E0B5EE91D77C8950005F6CE /* PresentationSpeakerJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5311D10675C008CBD0C /* PresentationSpeakerJSON.swift */; };
 		6E0B5EEA1D77C8950005F6CE /* VenueJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55A1D10675D008CBD0C /* VenueJSON.swift */; };
-		6E0B5EEB1D77C8950005F6CE /* LoggedInMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */; };
 		6E0B5EEC1D77C8950005F6CE /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
 		6E0B5EED1D77C8950005F6CE /* Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5581D10675D008CBD0C /* Unique.swift */; };
-		6E0B5EEE1D77C8950005F6CE /* RealmImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5361D10675C008CBD0C /* RealmImage.swift */; };
-		6E0B5EEF1D77C8950005F6CE /* RealmMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5381D10675C008CBD0C /* RealmMember.swift */; };
 		6E0B5EF01D77C8950005F6CE /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
-		6E0B5EF11D77C8950005F6CE /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E0B5EF21D77C8950005F6CE /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E0B5EF31D77C8950005F6CE /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52A1D10675C008CBD0C /* Named.swift */; };
 		6E0B5EF41D77C8950005F6CE /* SummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54C1D10675C008CBD0C /* SummitType.swift */; };
 		6E0B5EF51D77C8950005F6CE /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52D1D10675C008CBD0C /* Person.swift */; };
-		6E0B5EF61D77C8950005F6CE /* RealmVenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */; };
 		6E0B5EF71D77C8950005F6CE /* TagJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54F1D10675D008CBD0C /* TagJSON.swift */; };
-		6E0B5EF81D77C8950005F6CE /* RealmPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53B1D10675C008CBD0C /* RealmPerson.swift */; };
 		6E0B5EF91D77C8950005F6CE /* TimeZoneJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5531D10675D008CBD0C /* TimeZoneJSON.swift */; };
 		6E0B5EFA1D77C8950005F6CE /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5211D10675C008CBD0C /* Feedback.swift */; };
 		6E0B5EFB1D77C8950005F6CE /* PresentationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52F1D10675C008CBD0C /* PresentationJSON.swift */; };
 		6E0B5EFC1D77C8950005F6CE /* SummitAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54A1D10675C008CBD0C /* SummitAttendeeJSON.swift */; };
-		6E0B5EFD1D77C8950005F6CE /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
-		6E0B5EFE1D77C8950005F6CE /* RealmPresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */; };
-		6E0B5EFF1D77C8950005F6CE /* FeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */; };
-		6E0B5F001D77C8950005F6CE /* RealmTicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5431D10675C008CBD0C /* RealmTicketType.swift */; };
 		6E0B5F011D77C8950005F6CE /* EventJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51E1D10675C008CBD0C /* EventJSON.swift */; };
-		6E0B5F021D77C8950005F6CE /* RealmTrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */; };
-		6E0B5F031D77C8950005F6CE /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */; };
 		6E0B5F041D77C8950005F6CE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5261D10675C008CBD0C /* Location.swift */; };
-		6E0B5F051D77C8950005F6CE /* RealmSummitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5401D10675C008CBD0C /* RealmSummitEvent.swift */; };
-		6E0B5F061D77C8950005F6CE /* DataUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */; };
 		6E0B5F071D77C8950005F6CE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCD1D4A5DE900CDC935 /* Environment.swift */; };
-		6E0B5F081D77C8950005F6CE /* RealmNonConfirmedSummitAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A53A1D10675C008CBD0C /* RealmNonConfirmedSummitAttendee.swift */; };
-		6E0B5F091D77C8950005F6CE /* NonConfirmedSummitAttendeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */; };
 		6E0B5F0A1D77C8950005F6CE /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
 		6E0B5F0B1D77C8950005F6CE /* PresentationDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */; };
 		6E0B5F0C1D77C8950005F6CE /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5521D10675D008CBD0C /* TimeZone.swift */; };
-		6E0B5F0D1D77C8950005F6CE /* RealmNamed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5391D10675C008CBD0C /* RealmNamed.swift */; };
 		6E0B5F0E1D77C8950005F6CE /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5541D10675D008CBD0C /* Track.swift */; };
-		6E0B5F0F1D77C8950005F6CE /* RealmEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */; };
 		6E0B5F101D77C8950005F6CE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5231D10675C008CBD0C /* Image.swift */; };
-		6E0B5F111D77C8950005F6CE /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5321D10675C008CBD0C /* Realm.swift */; };
 		6E0B5F141D77C8950005F6CE /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E0B5F171D77C8950005F6CE /* Production.plist in Copy Configurations */ = {isa = PBXBuildFile; fileRef = 6E7E18F31D495DA7009549BA /* Production.plist */; };
 		6E0B5F181D77C8950005F6CE /* Staging.plist in Copy Configurations */ = {isa = PBXBuildFile; fileRef = 6E7E18F41D495DA7009549BA /* Staging.plist */; };
@@ -1754,99 +1716,61 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E0B5EB41D77C8950005F6CE /* RealmSummit.swift in Sources */,
 				6E0B5EB51D77C8950005F6CE /* NonConfirmedSummitAttendee.swift in Sources */,
 				6E0B5EB61D77C8950005F6CE /* Event.swift in Sources */,
 				6E0B5EB71D77C8950005F6CE /* VenueRoom.swift in Sources */,
-				6E0B5EB81D77C8950005F6CE /* RealmVenue.swift in Sources */,
-				6E0B5EB91D77C8950005F6CE /* RealmFeedback.swift in Sources */,
 				6E0B5EBA1D77C8950005F6CE /* SummitRequest.swift in Sources */,
 				6E0B5EBB1D77C8950005F6CE /* Session.swift in Sources */,
-				6E0B5EBC1D77C8950005F6CE /* Login.swift in Sources */,
-				6E0B5EBD1D77C8950005F6CE /* RealmSummitType.swift in Sources */,
-				6E0B5EBE1D77C8950005F6CE /* DataUpdateJSON.swift in Sources */,
 				6E0B5EBF1D77C8950005F6CE /* ImageJSON.swift in Sources */,
 				6E0B5EC01D77C8950005F6CE /* EventTypeJSON.swift in Sources */,
 				6E0B5EC11D77C8950005F6CE /* NonConfirmedSummitAttendeeJSON.swift in Sources */,
 				6E0B5EC21D77C8950005F6CE /* SummitAttendee.swift in Sources */,
-				6E0B5EC31D77C8950005F6CE /* EventScheduleRequest.swift in Sources */,
 				6E0B5EC41D77C8950005F6CE /* ErrorValue.swift in Sources */,
 				6E0B5EC51D77C8950005F6CE /* PresentationDataUpdate.swift in Sources */,
 				6E0B5EC61D77C8950005F6CE /* Company.swift in Sources */,
 				6E0B5EC71D77C8950005F6CE /* TrackGroup.swift in Sources */,
-				6E0B5EC81D77C8950005F6CE /* RealmVideo.swift in Sources */,
 				6E0B5EC91D77C8950005F6CE /* Tag.swift in Sources */,
-				6E0B5ECA1D77C8950005F6CE /* Member.swift in Sources */,
-				6E0B5ECB1D77C8950005F6CE /* MemberJSON.swift in Sources */,
 				6E0B5ECC1D77C8950005F6CE /* EventDataUpdate.swift in Sources */,
 				6E0B5ECD1D77C8950005F6CE /* PresentationSpeaker.swift in Sources */,
 				6E0B5ECE1D77C8950005F6CE /* Summit.swift in Sources */,
 				6E0B5ECF1D77C8950005F6CE /* TicketType.swift in Sources */,
 				6E0B5ED01D77C8950005F6CE /* SummitTypeJSON.swift in Sources */,
-				6E0B5ED11D77C8950005F6CE /* RealmTrack.swift in Sources */,
 				6E0B5ED21D77C8950005F6CE /* VenueRoomJSON.swift in Sources */,
-				6E0B5ED31D77C8950005F6CE /* RealmPresentation.swift in Sources */,
 				6E0B5ED41D77C8950005F6CE /* CompanyJSON.swift in Sources */,
 				6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */,
-				6E0B5ED71D77C8950005F6CE /* RealmSummitAttendee.swift in Sources */,
-				6E0B5ED81D77C8950005F6CE /* RealmLocation.swift in Sources */,
 				6E0B5ED91D77C8950005F6CE /* EventDataUpdateJSON.swift in Sources */,
 				6E0B5EDA1D77C8950005F6CE /* TrackJSON.swift in Sources */,
 				6E0B5EDB1D77C8950005F6CE /* FeedbackJSON.swift in Sources */,
-				6E0B5EDC1D77C8950005F6CE /* RealmEventType.swift in Sources */,
 				6E0B5EDD1D77C8950005F6CE /* LocationJSON.swift in Sources */,
 				6E0B5EDE1D77C8950005F6CE /* Configuration.swift in Sources */,
 				6E0B5EDF1D77C8950005F6CE /* EventType.swift in Sources */,
 				6E0B5EE01D77C8950005F6CE /* Venue.swift in Sources */,
 				6E0B5EE11D77C8950005F6CE /* TicketTypeJSON.swift in Sources */,
-				6E0B5EE21D77C8950005F6CE /* AttendeesForTicketOrderRequest.swift in Sources */,
-				6E0B5EE31D77C8950005F6CE /* RealmCompany.swift in Sources */,
 				6E0B5EE41D77C8950005F6CE /* SummitJSON.swift in Sources */,
 				6E0B5EE51D77C8950005F6CE /* WebConvertible.swift in Sources */,
-				6E0B5EE61D77C8950005F6CE /* RealmTag.swift in Sources */,
-				6E0B5EE71D77C8950005F6CE /* RealmPresentationSpeaker.swift in Sources */,
 				6E0B5EE81D77C8950005F6CE /* Presentation.swift in Sources */,
 				6E0B5EE91D77C8950005F6CE /* PresentationSpeakerJSON.swift in Sources */,
 				6E0B5EEA1D77C8950005F6CE /* VenueJSON.swift in Sources */,
-				6E0B5EEB1D77C8950005F6CE /* LoggedInMemberRequest.swift in Sources */,
 				6E0B5EEC1D77C8950005F6CE /* VideoJSON.swift in Sources */,
 				6E0B5EED1D77C8950005F6CE /* Unique.swift in Sources */,
-				6E0B5EEE1D77C8950005F6CE /* RealmImage.swift in Sources */,
-				6E0B5EEF1D77C8950005F6CE /* RealmMember.swift in Sources */,
 				6E0B5EF01D77C8950005F6CE /* Define.swift in Sources */,
-				6E0B5EF11D77C8950005F6CE /* SelectAttendeeFromOrderListRequest.swift in Sources */,
 				6E0B5EF21D77C8950005F6CE /* Store.swift in Sources */,
 				6E0B5EF31D77C8950005F6CE /* Named.swift in Sources */,
 				6E0B5EF41D77C8950005F6CE /* SummitType.swift in Sources */,
 				6E0B5EF51D77C8950005F6CE /* Person.swift in Sources */,
-				6E0B5EF61D77C8950005F6CE /* RealmVenueRoom.swift in Sources */,
 				6E0B5EF71D77C8950005F6CE /* TagJSON.swift in Sources */,
-				6E0B5EF81D77C8950005F6CE /* RealmPerson.swift in Sources */,
 				6E0B5EF91D77C8950005F6CE /* TimeZoneJSON.swift in Sources */,
 				6E0B5EFA1D77C8950005F6CE /* Feedback.swift in Sources */,
 				6E0B5EFB1D77C8950005F6CE /* PresentationJSON.swift in Sources */,
 				6E0B5EFC1D77C8950005F6CE /* SummitAttendeeJSON.swift in Sources */,
-				6E0B5EFD1D77C8950005F6CE /* DataUpdate.swift in Sources */,
-				6E0B5EFE1D77C8950005F6CE /* RealmPresentationDataUpdate.swift in Sources */,
-				6E0B5EFF1D77C8950005F6CE /* FeedbackRequest.swift in Sources */,
-				6E0B5F001D77C8950005F6CE /* RealmTicketType.swift in Sources */,
 				6E0B5F011D77C8950005F6CE /* EventJSON.swift in Sources */,
-				6E0B5F021D77C8950005F6CE /* RealmTrackGroup.swift in Sources */,
-				6E0B5F031D77C8950005F6CE /* DataUpdatePoller.swift in Sources */,
 				6E0B5F041D77C8950005F6CE /* Location.swift in Sources */,
-				6E0B5F051D77C8950005F6CE /* RealmSummitEvent.swift in Sources */,
-				6E0B5F061D77C8950005F6CE /* DataUpdateRequest.swift in Sources */,
 				6E0B5F071D77C8950005F6CE /* Environment.swift in Sources */,
-				6E0B5F081D77C8950005F6CE /* RealmNonConfirmedSummitAttendee.swift in Sources */,
-				6E0B5F091D77C8950005F6CE /* NonConfirmedSummitAttendeeRequest.swift in Sources */,
 				6E0B5F0A1D77C8950005F6CE /* Video.swift in Sources */,
 				6E0B5F0B1D77C8950005F6CE /* PresentationDataUpdateJSON.swift in Sources */,
 				6E0B5F0C1D77C8950005F6CE /* TimeZone.swift in Sources */,
-				6E0B5F0D1D77C8950005F6CE /* RealmNamed.swift in Sources */,
 				6E0B5F0E1D77C8950005F6CE /* Track.swift in Sources */,
-				6E0B5F0F1D77C8950005F6CE /* RealmEventDataUpdate.swift in Sources */,
 				6E0B5F101D77C8950005F6CE /* Image.swift in Sources */,
-				6E0B5F111D77C8950005F6CE /* Realm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2550,6 +2474,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CoreSummit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D CORESUMMITREALM";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
 				PRODUCT_NAME = CoreSummit;
 				SKIP_INSTALL = YES;
@@ -2572,6 +2497,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CoreSummit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D CORESUMMITREALM";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
 				PRODUCT_NAME = CoreSummit;
 				SKIP_INSTALL = YES;
@@ -2703,6 +2629,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CoreSummit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D CORESUMMITREALM";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
 				PRODUCT_NAME = CoreSummit;
 				SKIP_INSTALL = YES;
