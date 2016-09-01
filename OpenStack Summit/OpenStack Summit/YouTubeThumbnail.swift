@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(watchOS)
+import WatchKit
+#endif
+
 public extension UIImage {
     
     /// Initializes an image with the thumbnail of a YouTube video based on its ID.

@@ -252,11 +252,15 @@
 		6E7E18EA1D490DAC009549BA /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E18E91D490DAC009549BA /* Preference.swift */; };
 		6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */; };
 		6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */; };
+		6E7FEA331D78E8D800B9E809 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
+		6E7FEA341D78E8E000B9E809 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E1E6C1D769E6800F6CB29 /* UserActivity.swift */; };
 		6E8660B71D62001700359FA1 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8660B61D62001700359FA1 /* PushNotificationManager.swift */; };
 		6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFD71D26D347009524C7 /* TrackListViewController.swift */; };
 		6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */; };
 		6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */; };
+		6E9B09CE1D78F121008383A4 /* AboutInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B09CD1D78F121008383A4 /* AboutInterfaceController.swift */; };
+		6E9B09CF1D78F3BF008383A4 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
@@ -648,6 +652,7 @@
 		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
 		6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleViewController.swift; sourceTree = "<group>"; };
+		6E9B09CD1D78F121008383A4 /* AboutInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutInterfaceController.swift; sourceTree = "<group>"; };
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
@@ -1105,6 +1110,7 @@
 			children = (
 				6E0B5F621D77D4DF0005F6CE /* InterfaceController.swift */,
 				6E2CA1191D78658000405A40 /* MenuInterfaceController.swift */,
+				6E9B09CD1D78F121008383A4 /* AboutInterfaceController.swift */,
 				6E2CA1231D78805500405A40 /* Venues */,
 				6E2CA11D1D7876E700405A40 /* Events */,
 			);
@@ -1863,9 +1869,13 @@
 				6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */,
 				6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */,
 				6E2CA1221D787E4D00405A40 /* LabelCellController.swift in Sources */,
+				6E9B09CE1D78F121008383A4 /* AboutInterfaceController.swift in Sources */,
 				6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */,
 				6E0B5F651D77D4DF0005F6CE /* ExtensionDelegate.swift in Sources */,
+				6E7FEA341D78E8E000B9E809 /* UserActivity.swift in Sources */,
 				6E2CA1161D78041300405A40 /* Context.swift in Sources */,
+				6E7FEA331D78E8D800B9E809 /* YouTubeThumbnail.swift in Sources */,
+				6E9B09CF1D78F3BF008383A4 /* Define.swift in Sources */,
 				6E2CA1181D7810E600405A40 /* EventDetailInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

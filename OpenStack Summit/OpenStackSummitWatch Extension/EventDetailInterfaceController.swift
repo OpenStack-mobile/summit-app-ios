@@ -16,9 +16,29 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
+    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var moviePlayer: WKInterfaceMovie!
+    
+    @IBOutlet weak var dateLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var locationLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var locationSeparator: WKInterfaceSeparator!
+    
+    @IBOutlet weak var tagsLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var speakersLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var summitTypesLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var levelLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
+    
     // MARK: - Properties
     
-    private var event: Event!
+    private var eventDetail: EventDetail!
     
     // MARK: - Loading
     
@@ -28,7 +48,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         guard let event = (context as? Context<SummitEvent>)?.value
             else { fatalError("Invalid context") }
         
-        self.event = event
+        self.eventDetail = EventDetail(event: event, summit: Store.shared.cache!)
         
         updateUI()
     }
@@ -45,17 +65,30 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func play(sender: AnyObject? = nil) {
-        /*
-        self.presentMediaPlayerControllerWithURL(<#T##URL: NSURL##NSURL#>, options: <#T##[NSObject : AnyObject]?#>) { (<#Bool#>, <#NSTimeInterval#>, <#NSError?#>) in
-            <#code#>
-        }*/
-    }
+    
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
+        nameLabel.setText(eventDetail.name)
         
+        if let youtube = eventDetail.video?.youtube,
+            let url = NSURL(string: "http://img.youtube.com/vi/" + youtube + "/default.jpg"),
+            let data = NSData(contentsOfURL: url) {
+                
+            moviePlayer.setPosterImage(WKImage(imageData: data))
+        }
+        
+        dateLabel.setText(eventDetail.dateTime)
+        locationLabel.setText(eventDetail.location)
+        locationLabel.setHidden(eventDetail.location.isEmpty)
+        locationSeparator.setHidden(eventDetail.location.isEmpty)
+        tagsLabel.setText(eventDetail.tags)
+        speakersLabel.setText("\(eventDetail.speakers.count) \(eventDetail.speakers.count == 1 ? "speaker" : "speakers")")
+        summitTypesLabel.setText(eventDetail.summitTypes)
+        levelLabel.setText(eventDetail.level)
+        descriptionLabel.setText(eventDetail.descriptionText)
+        descriptionLabel.setHidden((eventDetail.descriptionText ?? "").isEmpty)
     }
 }
