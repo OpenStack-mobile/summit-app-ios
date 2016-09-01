@@ -47,14 +47,24 @@
                                 <tableRow identifier="EventCell" id="6FI-O9-Yli" customClass="EventCellController" customModule="OpenStackSummitWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Aon-v4-SmN">
                                         <items>
-                                            <group width="1" alignment="left" layout="vertical" id="D6a-lk-faj">
+                                            <label width="1" alignment="left" verticalAlignment="bottom" text="Event name" numberOfLines="0" id="B6w-tT-N2G">
+                                                <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                            </label>
+                                            <group width="1" alignment="left" id="D6a-lk-faj">
                                                 <items>
-                                                    <label width="1" alignment="left" text="Date" numberOfLines="0" id="kns-TS-UUH">
+                                                    <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="time" contentMode="scaleAspectFit" id="h0D-cY-mQb"/>
+                                                    <label alignment="left" verticalAlignment="center" text=" 01/30/16, 12:00 AM" minimumScaleFactor="0.69999999999999996" id="kns-TS-UUH">
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                        <fontDescription key="font" type="system" pointSize="13"/>
                                                     </label>
-                                                    <label width="1" alignment="left" verticalAlignment="bottom" text="Event name" numberOfLines="0" id="B6w-tT-N2G">
-                                                        <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                                </items>
+                                            </group>
+                                            <group width="1" alignment="left" id="CHw-9r-XPq">
+                                                <items>
+                                                    <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="map_pin" contentMode="scaleAspectFit" id="eVy-RU-3xu"/>
+                                                    <label alignment="left" verticalAlignment="center" text="Barcelona" numberOfLines="2" minimumScaleFactor="0.69999999999999996" id="WbD-ym-08a">
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="font" type="system" pointSize="13"/>
                                                     </label>
                                                 </items>
                                             </group>
@@ -62,7 +72,10 @@
                                         <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </group>
                                     <connections>
-                                        <outlet property="eventLabel" destination="kns-TS-UUH" id="jtM-c9-H75"/>
+                                        <outlet property="dateLabel" destination="kns-TS-UUH" id="6wW-QH-tor"/>
+                                        <outlet property="locationGroup" destination="CHw-9r-XPq" id="3JL-fo-w5P"/>
+                                        <outlet property="locationLabel" destination="WbD-ym-08a" id="irC-Oj-r3B"/>
+                                        <outlet property="nameLabel" destination="B6w-tT-N2G" id="PQN-Fy-xcA"/>
                                         <segue destination="3Wd-aq-ZaB" kind="push" id="xMo-PC-Mkj"/>
                                     </connections>
                                 </tableRow>
@@ -143,7 +156,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="762" y="-329.75"/>
+            <point key="canvasLocation" x="767" y="-334.25"/>
         </scene>
         <!--Events-->
         <scene sceneID="fse-GJ-kiE">

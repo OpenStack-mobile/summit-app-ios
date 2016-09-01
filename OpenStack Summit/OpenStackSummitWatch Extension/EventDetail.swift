@@ -162,6 +162,7 @@ internal extension EventDetail {
     static func getLocation(event: SummitEvent, summit: Summit) -> String {
         
         guard let locationID = event.location
+            where locationID != 0
             else { return "" }
         
         let location = summit.locations.map({ $0.rawValue }).firstMatching({ $0.identifier == locationID })!

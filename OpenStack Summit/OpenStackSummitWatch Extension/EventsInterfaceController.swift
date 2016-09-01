@@ -24,6 +24,16 @@ final class EventsInterfaceController: WKInterfaceController {
     
     private var events = [Event]()
     
+    private static let dateFormatter: NSDateFormatter = {
+       
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: cachedSummit!.timeZone)
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .ShortStyle
+        
+        return dateFormatter
+    }()
+    
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
@@ -67,7 +77,13 @@ final class EventsInterfaceController: WKInterfaceController {
             
             let cell = tableView.rowControllerAtIndex(index) as! EventCellController
             
-            cell.eventLabel.setText(event.name)
+            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start.toFoundation())
+            let locationText = EventDetail.getLocation(event, summit: cachedSummit!)
+            
+            cell.nameLabel.setText(event.name)
+            cell.dateLabel.setText(" " + dateText)
+            cell.locationLabel.setText(locationText)
+            cell.locationGroup.setHidden(locationText.isEmpty)
         }
     }
     
@@ -87,5 +103,8 @@ final class EventCellController: NSObject {
     
     static let identifier = "EventCell"
     
-    @IBOutlet weak var eventLabel: WKInterfaceLabel!
+    @IBOutlet weak var nameLabel: WKInterfaceLabel!
+    @IBOutlet weak var dateLabel: WKInterfaceLabel!
+    @IBOutlet weak var locationLabel: WKInterfaceLabel!
+    @IBOutlet weak var locationGroup: WKInterfaceGroup!
 }
