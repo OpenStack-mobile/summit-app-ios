@@ -20,4 +20,5 @@ final class Context<T> {
     }
 }
 
+/// The local cached summit. 
 var cachedSummit: Summit?

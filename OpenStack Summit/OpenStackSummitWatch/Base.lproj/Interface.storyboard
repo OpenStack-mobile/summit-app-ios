@@ -27,11 +27,11 @@
         <!--Events-->
         <scene sceneID="kWW-JT-n7D">
             <objects>
-                <controller identifier="Events" title="Events" id="dLl-Jq-VGC">
+                <controller identifier="Events" title="Events" id="dLl-Jq-VGC" customClass="EventsInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
                         <table alignment="left" id="fOy-3O-EK9">
                             <items>
-                                <tableRow identifier="EventCell" id="6FI-O9-Yli">
+                                <tableRow identifier="EventCell" id="6FI-O9-Yli" customClass="EventCellController" customModule="OpenStackSummitWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Aon-v4-SmN">
                                         <items>
                                             <label width="1" alignment="left" semanticContentAttribute="spatial" text="Event title" numberOfLines="0" id="kns-TS-UUH">
@@ -40,12 +40,16 @@
                                         </items>
                                     </group>
                                     <connections>
+                                        <outlet property="eventLabel" destination="kns-TS-UUH" id="jtM-c9-H75"/>
                                         <segue destination="u7P-vB-Uq3" kind="push" identifier="showEvent" id="fwE-jp-7Vq"/>
                                     </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="tableView" destination="fOy-3O-EK9" id="BtF-OF-ZeV"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="497" y="345"/>
@@ -55,35 +59,18 @@
             <objects>
                 <controller identifier="EventDetail" id="u7P-vB-Uq3">
                     <items>
-                        <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="FUM-g0-sbg">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
-                        </label>
-                        <separator alignment="left" id="haq-Tq-NfL"/>
-                        <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="yAw-QM-F0d">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <separator alignment="left" id="D1s-GO-7tf"/>
-                        <label width="1" alignment="left" text="Tags" textAlignment="left" numberOfLines="0" id="4G0-yt-7UM">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <separator alignment="left" id="u26-hg-KH3"/>
-                        <button alignment="left" title="S" id="cOQ-Os-fZd">
-                            <group key="contentGroup" width="1" alignment="left" id="XcQ-CL-WnR">
-                                <items>
-                                    <label width="1" alignment="left" text="1 Speaker" id="V0H-QC-dq7"/>
-                                </items>
-                            </group>
-                        </button>
-                        <separator alignment="left" id="87u-uo-vIt"/>
-                        <button alignment="left" title="S" id="txC-1q-JR0">
-                            <group key="contentGroup" width="1" alignment="left" id="Xk4-Gd-Dq3">
-                                <items>
-                                    <label width="1" alignment="left" text="1 Speaker" id="WmT-To-Tkv" userLabel="Hilton"/>
-                                </items>
-                            </group>
-                        </button>
-                        <separator alignment="left" id="Ik6-iz-N7X"/>
-                        <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="yp8-bG-zhV"/>
+                        <table alignment="left" id="P2f-Lo-7S7">
+                            <items>
+                                <tableRow selectable="NO" id="rb1-UR-Qw2">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Ino-FM-hdd">
+                                        <items>
+                                            <label alignment="left" text="Event Title" id="fkH-0r-AYt"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.17642489450000001" green="0.60687987239999996" blue="0.82575757579999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
                     </items>
                 </controller>
             </objects>
@@ -111,6 +98,45 @@
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="OpenStackSummitWatch" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="497" y="643"/>
+        </scene>
+        <!--EventDetailOld-->
+        <scene sceneID="UaZ-ei-8nh">
+            <objects>
+                <controller identifier="EventDetailOld" id="3Wd-aq-ZaB">
+                    <items>
+                        <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="hJd-4g-bkH">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                        </label>
+                        <separator alignment="left" id="viq-ar-oGj"/>
+                        <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="gA1-TH-haI">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <separator alignment="left" id="Jkf-VD-Nwn"/>
+                        <label width="1" alignment="left" text="Tags" textAlignment="left" numberOfLines="0" id="785-Zb-6OW">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <separator alignment="left" id="RBg-Zy-Kqj"/>
+                        <button alignment="left" title="S" id="nC6-Uz-J6q">
+                            <group key="contentGroup" width="1" alignment="left" id="Tc0-BG-FZf">
+                                <items>
+                                    <label width="1" alignment="left" text="1 Speaker" id="Unr-Ib-VAW"/>
+                                </items>
+                            </group>
+                        </button>
+                        <separator alignment="left" id="Mxv-8Q-F7t"/>
+                        <button alignment="left" title="S" id="fyj-Wb-hA4">
+                            <group key="contentGroup" width="1" alignment="left" id="Mad-9x-Ynv">
+                                <items>
+                                    <label width="1" alignment="left" text="1 Speaker" id="bgb-yA-RNS" userLabel="Hilton"/>
+                                </items>
+                            </group>
+                        </button>
+                        <separator alignment="left" id="dSn-qy-6XT"/>
+                        <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="zwp-xa-74d"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="769" y="28.25"/>
         </scene>
     </scenes>
 </document>
