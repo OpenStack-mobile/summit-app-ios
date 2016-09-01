@@ -1675,8 +1675,6 @@
 				"$(SRCROOT)/../Carthage/Build/WatchOS/JSON.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearOAuth2.framework",
-				"$(SRCROOT)/../Carthage/Build/WatchOS/Realm.framework",
-				"$(SRCROOT)/../Carthage/Build/WatchOS/RealmSwift.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
