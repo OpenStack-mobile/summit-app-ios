@@ -14,14 +14,23 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     static let identifier = "EventDetail"
     
+    // MARK: - IB Outlets
+    
+    // MARK: - Properties
+    
+    private var event: Event!
+    
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        let event = (context as! Context<SummitEvent>).value
+        guard let event = (context as? Context<SummitEvent>)?.value
+            else { fatalError("Invalid context") }
         
+        self.event = event
         
+        updateUI()
     }
     
     override func willActivate() {
@@ -34,4 +43,19 @@ final class EventDetailInterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func play(sender: AnyObject? = nil) {
+        /*
+        self.presentMediaPlayerControllerWithURL(<#T##URL: NSURL##NSURL#>, options: <#T##[NSObject : AnyObject]?#>) { (<#Bool#>, <#NSTimeInterval#>, <#NSError?#>) in
+            <#code#>
+        }*/
+    }
+    
+    // MARK: - Private Methods
+    
+    private func updateUI() {
+        
+        
+    }
 }
