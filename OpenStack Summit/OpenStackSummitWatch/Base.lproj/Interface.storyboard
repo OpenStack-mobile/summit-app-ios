@@ -47,19 +47,23 @@
                                 <tableRow identifier="EventCell" id="6FI-O9-Yli" customClass="EventCellController" customModule="OpenStackSummitWatch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Aon-v4-SmN">
                                         <items>
-                                            <label width="1" alignment="left" text="Date" numberOfLines="0" id="kns-TS-UUH">
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
-                                            </label>
-                                            <label width="1" alignment="left" verticalAlignment="bottom" text="Event name" numberOfLines="0" id="B6w-tT-N2G">
-                                                <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
-                                            </label>
+                                            <group width="1" alignment="left" layout="vertical" id="D6a-lk-faj">
+                                                <items>
+                                                    <label width="1" alignment="left" text="Date" numberOfLines="0" id="kns-TS-UUH">
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    </label>
+                                                    <label width="1" alignment="left" verticalAlignment="bottom" text="Event name" numberOfLines="0" id="B6w-tT-N2G">
+                                                        <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                                                    </label>
+                                                </items>
+                                            </group>
                                         </items>
                                         <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </group>
                                     <connections>
                                         <outlet property="eventLabel" destination="kns-TS-UUH" id="jtM-c9-H75"/>
-                                        <segue destination="u7P-vB-Uq3" kind="push" identifier="showEvent" id="fwE-jp-7Vq"/>
+                                        <segue destination="3Wd-aq-ZaB" kind="push" id="xMo-PC-Mkj"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -71,28 +75,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="481" y="-288"/>
-        </scene>
-        <!--Event-->
-        <scene sceneID="86m-sd-Rx9">
-            <objects>
-                <controller identifier="EventDetail" title="Event" id="u7P-vB-Uq3" customClass="EventDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
-                    <items>
-                        <table alignment="left" id="P2f-Lo-7S7">
-                            <items>
-                                <tableRow selectable="NO" id="rb1-UR-Qw2">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Ino-FM-hdd">
-                                        <items>
-                                            <label alignment="left" text="Event Title" id="fkH-0r-AYt"/>
-                                        </items>
-                                        <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </group>
-                                </tableRow>
-                            </items>
-                        </table>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="767" y="-288"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -120,11 +102,18 @@
         <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
             <objects>
-                <controller identifier="EventDetailOld" title="Event" id="3Wd-aq-ZaB">
+                <controller identifier="EventDetail" title="Event" id="3Wd-aq-ZaB">
                     <items>
                         <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="hJd-4g-bkH">
                             <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                         </label>
+                        <button alignment="center" id="C8Q-qU-aSd">
+                            <group key="contentGroup" width="1" height="80" alignment="left" contentMode="scaleAspectFill" id="s5y-zU-a7r">
+                                <items>
+                                    <imageView width="30" height="40" alignment="center" verticalAlignment="center" image="play" contentMode="scaleAspectFit" id="Lpd-jh-AFQ"/>
+                                </items>
+                            </group>
+                        </button>
                         <separator alignment="left" id="viq-ar-oGj"/>
                         <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="gA1-TH-haI">
                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
@@ -154,7 +143,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1021" y="-288.75"/>
+            <point key="canvasLocation" x="762" y="-329.75"/>
         </scene>
         <!--Events-->
         <scene sceneID="fse-GJ-kiE">
@@ -194,9 +183,6 @@
                         <map width="1" height="0.80000000000000004" alignment="left" id="eG6-Eu-SpR"/>
                         <button width="1" height="0.20000000000000001" alignment="left" title="Directory" id="WEy-1i-yhs">
                             <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="OfB-EH-0kd" kind="push" id="lZq-7n-yJI"/>
-                            </connections>
                         </button>
                     </items>
                     <connections>
@@ -205,28 +191,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="10"/>
-        </scene>
-        <!--Venues-->
-        <scene sceneID="I1F-L3-CCx">
-            <objects>
-                <controller identifier="VenuesDirectory" title="Venues" id="OfB-EH-0kd">
-                    <items>
-                        <button width="1" height="0.5" alignment="left" title="Venues" id="0lk-NM-LQS">
-                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="eHr-0A-NxD" kind="push" id="SUr-uk-50U"/>
-                            </connections>
-                        </button>
-                        <button width="1" height="0.5" alignment="left" title="Rooms" id="gwH-Wg-kvg">
-                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="Wei-Wo-BHv" kind="push" id="Wfa-Ef-gff"/>
-                            </connections>
-                        </button>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="481" y="11"/>
         </scene>
         <!--Venues-->
         <scene sceneID="nPg-ND-1QP">
@@ -259,7 +223,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="758" y="11"/>
+            <point key="canvasLocation" x="489" y="10"/>
         </scene>
         <!--Venue-->
         <scene sceneID="XAf-57-7iO">
@@ -295,42 +259,10 @@
                         </button>
                         <separator alignment="left" id="7Hm-BY-hUq"/>
                         <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="ZxM-b2-snu"/>
-                        <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="WmN-hz-QNt"/>
-                        <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="blD-Rv-JQ8"/>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1021" y="38.75"/>
-        </scene>
-        <!--Rooms-->
-        <scene sceneID="yTq-cc-FIa">
-            <objects>
-                <controller identifier="Rooms" title="Rooms" id="Wei-Wo-BHv" customClass="RoomsInterfaceController" customModule="OpenStackSummitWatch_Extension">
-                    <items>
-                        <table alignment="left" id="ROl-9h-Pbr">
-                            <items>
-                                <tableRow identifier="LabelCell" id="49v-SI-iFG" customClass="LabelCellController" customModule="OpenStackSummitWatch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="cYr-vq-dia">
-                                        <items>
-                                            <label width="1" alignment="left" semanticContentAttribute="spatial" text="Name" numberOfLines="0" id="yCP-nc-95m">
-                                                <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
-                                            </label>
-                                        </items>
-                                        <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="textLabel" destination="yCP-nc-95m" id="aA6-nD-7Ss"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
-                    </items>
-                    <connections>
-                        <outlet property="tableView" destination="ROl-9h-Pbr" id="cTL-52-65i"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="758" y="296"/>
+            <point key="canvasLocation" x="767" y="37.75"/>
         </scene>
     </scenes>
 </document>

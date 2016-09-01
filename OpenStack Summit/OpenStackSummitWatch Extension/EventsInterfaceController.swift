@@ -29,8 +29,12 @@ final class EventsInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let filter = (context as? Context<Filter>)?.value
-            else { fatalError("No context provided") }
+        var filter: Filter = { _ in return true }
+        
+        if let context = context as? Context<Filter> {
+            
+            filter = context.value
+        }
         
         updateUI(filter)
     }
