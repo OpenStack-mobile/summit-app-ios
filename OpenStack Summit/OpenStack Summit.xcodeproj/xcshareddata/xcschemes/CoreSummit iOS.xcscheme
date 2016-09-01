@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E10A4F01D1066E9008CBD0C"
-               BuildableName = "CoreSummit.framework"
-               BlueprintName = "CoreSummit"
+               BuildableName = "CoreSummit iOS.framework"
+               BlueprintName = "CoreSummit iOS"
                ReferencedContainer = "container:OpenStack Summit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E10A4F91D1066E9008CBD0C"
                BuildableName = "CoreSummitTests.xctest"
-               BlueprintName = "CoreSummitTests"
+               BlueprintName = "CoreSummitTests iOS"
                ReferencedContainer = "container:OpenStack Summit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E10A4F01D1066E9008CBD0C"
-            BuildableName = "CoreSummit.framework"
-            BlueprintName = "CoreSummit"
+            BuildableName = "CoreSummit iOS.framework"
+            BlueprintName = "CoreSummit iOS"
             ReferencedContainer = "container:OpenStack Summit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E10A4F01D1066E9008CBD0C"
-            BuildableName = "CoreSummit.framework"
-            BlueprintName = "CoreSummit"
+            BuildableName = "CoreSummit iOS.framework"
+            BlueprintName = "CoreSummit iOS"
             ReferencedContainer = "container:OpenStack Summit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,8 +83,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E10A4F01D1066E9008CBD0C"
-            BuildableName = "CoreSummit.framework"
-            BlueprintName = "CoreSummit"
+            BuildableName = "CoreSummit iOS.framework"
+            BlueprintName = "CoreSummit iOS"
             ReferencedContainer = "container:OpenStack Summit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
