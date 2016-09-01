@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qah-Jh-alR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
+        <!--Summit-->
+        <scene sceneID="M8w-Q3-hhm">
+            <objects>
+                <controller identifier="Menu" title="Summit" id="qah-Jh-alR" customClass="MenuInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <table alignment="left" id="PZA-Ac-yHx">
+                            <items>
+                                <tableRow identifier="MenuCell" id="IA4-KP-T2J" customClass="MenuCellController" customModule="OpenStackSummitWatch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="meC-JV-Aaz">
+                                        <items>
+                                            <imageView width="0.29999999999999999" alignment="left" verticalAlignment="center" image="events" contentMode="scaleAspectFit" id="OeV-BU-POb"/>
+                                            <label width="0.69999999999999996" height="1" alignment="left" text="Events" textAlignment="center" id="1Tj-nK-wdi"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.11613068729639053" green="0.22861218452453613" blue="0.36147233843803406" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imageView" destination="OeV-BU-POb" id="NHG-XN-lHh"/>
+                                        <outlet property="menuLabel" destination="1Tj-nK-wdi" id="bxe-C7-aCd"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <imageView width="1" height="1" alignment="left" hidden="YES" contentMode="center" id="MVl-vY-uBh"/>
+                    </items>
+                    <connections>
+                        <outlet property="loadingImageView" destination="MVl-vY-uBh" id="zgV-qZ-KVI"/>
+                        <outlet property="tableView" destination="PZA-Ac-yHx" id="Nhq-Lv-05J"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="56"/>
+        </scene>
         <!--Summit-->
         <scene sceneID="aou-V4-d1y">
             <objects>
@@ -57,7 +89,7 @@
         <!--EventDetail-->
         <scene sceneID="86m-sd-Rx9">
             <objects>
-                <controller identifier="EventDetail" id="u7P-vB-Uq3">
+                <controller identifier="EventDetail" id="u7P-vB-Uq3" customClass="EventDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
                         <table alignment="left" id="P2f-Lo-7S7">
                             <items>

@@ -219,6 +219,8 @@
 		6E2CA1121D7800D500405A40 /* FetchDataInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1111D7800D500405A40 /* FetchDataInterfaceController.swift */; };
 		6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1131D78037500405A40 /* EventsInterfaceController.swift */; };
 		6E2CA1161D78041300405A40 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1151D78041300405A40 /* Context.swift */; };
+		6E2CA1181D7810E600405A40 /* EventDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1171D7810E600405A40 /* EventDetailInterfaceController.swift */; };
+		6E2CA11A1D78658000405A40 /* MenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1191D78658000405A40 /* MenuInterfaceController.swift */; };
 		6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C171D4123AE005132DA /* VenueListViewController.swift */; };
 		6E313C1B1D4127C2005132DA /* VenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */; };
 		6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */; };
@@ -603,6 +605,8 @@
 		6E2CA1111D7800D500405A40 /* FetchDataInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchDataInterfaceController.swift; sourceTree = "<group>"; };
 		6E2CA1131D78037500405A40 /* EventsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsInterfaceController.swift; sourceTree = "<group>"; };
 		6E2CA1151D78041300405A40 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		6E2CA1171D7810E600405A40 /* EventDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailInterfaceController.swift; sourceTree = "<group>"; };
+		6E2CA1191D78658000405A40 /* MenuInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuInterfaceController.swift; sourceTree = "<group>"; };
 		6E313C171D4123AE005132DA /* VenueListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListViewController.swift; sourceTree = "<group>"; };
 		6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
@@ -811,8 +815,10 @@
 			children = (
 				6E0B5F621D77D4DF0005F6CE /* InterfaceController.swift */,
 				6E2CA1151D78041300405A40 /* Context.swift */,
+				6E2CA1191D78658000405A40 /* MenuInterfaceController.swift */,
 				6E2CA1111D7800D500405A40 /* FetchDataInterfaceController.swift */,
 				6E2CA1131D78037500405A40 /* EventsInterfaceController.swift */,
+				6E2CA1171D7810E600405A40 /* EventDetailInterfaceController.swift */,
 				6E0B5F641D77D4DF0005F6CE /* ExtensionDelegate.swift */,
 				6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */,
 				6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */,
@@ -1798,11 +1804,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E2CA11A1D78658000405A40 /* MenuInterfaceController.swift in Sources */,
 				6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */,
 				6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */,
 				6E0B5F651D77D4DF0005F6CE /* ExtensionDelegate.swift in Sources */,
 				6E2CA1161D78041300405A40 /* Context.swift in Sources */,
 				6E2CA1121D7800D500405A40 /* FetchDataInterfaceController.swift in Sources */,
+				6E2CA1181D7810E600405A40 /* EventDetailInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
