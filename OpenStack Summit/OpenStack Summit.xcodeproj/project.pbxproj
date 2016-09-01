@@ -138,6 +138,15 @@
 		6E0B5F2E1D77C8AB0005F6CE /* AustinSummit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* AustinSummit.json */; };
 		6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
+		6E0B5F531D77D4DE0005F6CE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F511D77D4DE0005F6CE /* Interface.storyboard */; };
+		6E0B5F551D77D4DE0005F6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F541D77D4DE0005F6CE /* Assets.xcassets */; };
+		6E0B5F5C1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E0B5F5B1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E0B5F631D77D4DF0005F6CE /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B5F621D77D4DF0005F6CE /* InterfaceController.swift */; };
+		6E0B5F651D77D4DF0005F6CE /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B5F641D77D4DF0005F6CE /* ExtensionDelegate.swift */; };
+		6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */; };
+		6E0B5F691D77D4DF0005F6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */; };
+		6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */; };
+		6E0B5F781D77D5200005F6CE /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
 		6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */; };
@@ -360,6 +369,27 @@
 			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
 			remoteInfo = CoreSummit;
 		};
+		6E0B5F5D1D77D4DF0005F6CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0B5F5A1D77D4DF0005F6CE;
+			remoteInfo = "OpenStackSummitWatch Extension";
+		};
+		6E0B5F6B1D77D4DF0005F6CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0B5F4E1D77D4DE0005F6CE;
+			remoteInfo = OpenStackSummitWatch;
+		};
+		6E0B5F791D77D52A0005F6CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E0B5EB21D77C8950005F6CE;
+			remoteInfo = "CoreSummit WatchOS";
+		};
 		6E104D431D1061AC00541E84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -410,6 +440,28 @@
 			name = "Copy Configurations";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E0B5F721D77D4DF0005F6CE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6E0B5F5C1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0B5F771D77D4DF0005F6CE /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E10A50D1D1066E9008CBD0C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -446,6 +498,17 @@
 		6E0B2F061D33F3A10058F171 /* Levels.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Levels.storyboard; sourceTree = "<group>"; };
 		6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0B5F351D77C8AB0005F6CE /* CoreSummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreSummitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummitWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E0B5F521D77D4DE0005F6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		6E0B5F541D77D4DE0005F6CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E0B5F561D77D4DE0005F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0B5F5B1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "OpenStackSummitWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E0B5F611D77D4DF0005F6CE /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		6E0B5F621D77D4DF0005F6CE /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		6E0B5F641D77D4DF0005F6CE /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E0B5F6A1D77D4DF0005F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -691,6 +754,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E0B5F581D77D4DF0005F6CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0B5F781D77D5200005F6CE /* CoreSummit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E104D2B1D1061AC00541E84 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -746,6 +817,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */ = {
+			isa = PBXGroup;
+			children = (
+				6E0B5F511D77D4DE0005F6CE /* Interface.storyboard */,
+				6E0B5F541D77D4DE0005F6CE /* Assets.xcassets */,
+				6E0B5F561D77D4DE0005F6CE /* Info.plist */,
+			);
+			path = OpenStackSummitWatch;
+			sourceTree = "<group>";
+		};
+		6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6E0B5F621D77D4DF0005F6CE /* InterfaceController.swift */,
+				6E0B5F641D77D4DF0005F6CE /* ExtensionDelegate.swift */,
+				6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */,
+				6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */,
+				6E0B5F6A1D77D4DF0005F6CE /* Info.plist */,
+				6E0B5F601D77D4DF0005F6CE /* Supporting Files */,
+			);
+			path = "OpenStackSummitWatch Extension";
+			sourceTree = "<group>";
+		};
+		6E0B5F601D77D4DF0005F6CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E0B5F611D77D4DF0005F6CE /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		6E104D251D1061AC00541E84 = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +859,8 @@
 				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
 				6E10A4F21D1066E9008CBD0C /* CoreSummit */,
 				6E10A5001D1066E9008CBD0C /* CoreSummitTests */,
+				6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */,
+				6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -771,6 +875,8 @@
 				6E10A4FA1D1066E9008CBD0C /* CoreSummitTests.xctest */,
 				6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */,
 				6E0B5F351D77C8AB0005F6CE /* CoreSummitTests.xctest */,
+				6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */,
+				6E0B5F5B1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1233,6 +1339,41 @@
 			productReference = 6E0B5F351D77C8AB0005F6CE /* CoreSummitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E0B5F731D77D4DF0005F6CE /* Build configuration list for PBXNativeTarget "OpenStackSummitWatch" */;
+			buildPhases = (
+				6E0B5F4D1D77D4DE0005F6CE /* Resources */,
+				6E0B5F721D77D4DF0005F6CE /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E0B5F5E1D77D4DF0005F6CE /* PBXTargetDependency */,
+			);
+			name = OpenStackSummitWatch;
+			productName = OpenStackSummitWatch;
+			productReference = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E0B5F6E1D77D4DF0005F6CE /* Build configuration list for PBXNativeTarget "OpenStackSummitWatch Extension" */;
+			buildPhases = (
+				6E0B5F571D77D4DF0005F6CE /* Sources */,
+				6E0B5F581D77D4DF0005F6CE /* Frameworks */,
+				6E0B5F591D77D4DF0005F6CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E0B5F7A1D77D52A0005F6CE /* PBXTargetDependency */,
+			);
+			name = "OpenStackSummitWatch Extension";
+			productName = "OpenStackSummitWatch Extension";
+			productReference = 6E0B5F5B1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		6E104D2D1D1061AC00541E84 /* OpenStackSummit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E104D561D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStackSummit" */;
@@ -1243,12 +1384,14 @@
 				6E10A50D1D1066E9008CBD0C /* Embed Frameworks */,
 				6EF12C5C1D149A8E00814AD0 /* Copy Frameworks */,
 				6EF12C5D1D149B2300814AD0 /* Increment Build */,
+				6E0B5F771D77D4DF0005F6CE /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				6E10A5051D1066E9008CBD0C /* PBXTargetDependency */,
 				6EF12C661D149C7200814AD0 /* PBXTargetDependency */,
+				6E0B5F6C1D77D4DF0005F6CE /* PBXTargetDependency */,
 			);
 			name = OpenStackSummit;
 			productName = "OpenStack Summit";
@@ -1338,6 +1481,13 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = OpenStack;
 				TargetAttributes = {
+					6E0B5F4E1D77D4DE0005F6CE = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 775U6X6R5M;
+					};
+					6E0B5F5A1D77D4DF0005F6CE = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					6E104D2D1D1061AC00541E84 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 775U6X6R5M;
@@ -1393,6 +1543,8 @@
 				6E10A4F91D1066E9008CBD0C /* CoreSummitTests iOS */,
 				6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */,
 				6E0B5F1F1D77C8AB0005F6CE /* CoreSummitTests WatchOS */,
+				6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */,
+				6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -1415,6 +1567,23 @@
 				6E0B5F2E1D77C8AB0005F6CE /* AustinSummit.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
 				6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0B5F4D1D77D4DE0005F6CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0B5F551D77D4DE0005F6CE /* Assets.xcassets in Resources */,
+				6E0B5F531D77D4DE0005F6CE /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0B5F591D77D4DF0005F6CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0B5F691D77D4DF0005F6CE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1661,6 +1830,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E0B5F571D77D4DF0005F6CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */,
+				6E0B5F651D77D4DF0005F6CE /* ExtensionDelegate.swift in Sources */,
+				6E0B5F631D77D4DF0005F6CE /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E104D2A1D1061AC00541E84 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1878,6 +2057,21 @@
 			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */;
 			targetProxy = 6E0B5F211D77C8AB0005F6CE /* PBXContainerItemProxy */;
 		};
+		6E0B5F5E1D77D4DF0005F6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */;
+			targetProxy = 6E0B5F5D1D77D4DF0005F6CE /* PBXContainerItemProxy */;
+		};
+		6E0B5F6C1D77D4DF0005F6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */;
+			targetProxy = 6E0B5F6B1D77D4DF0005F6CE /* PBXContainerItemProxy */;
+		};
+		6E0B5F7A1D77D52A0005F6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */;
+			targetProxy = 6E0B5F791D77D52A0005F6CE /* PBXContainerItemProxy */;
+		};
 		6E104D441D1061AC00541E84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6E104D2D1D1061AC00541E84 /* OpenStackSummit */;
@@ -1904,6 +2098,17 @@
 			targetProxy = 6EF12C651D149C7200814AD0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E0B5F511D77D4DE0005F6CE /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E0B5F521D77D4DE0005F6CE /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6E0B5F1A1D77C8950005F6CE /* Debug */ = {
@@ -2012,6 +2217,99 @@
 				PRODUCT_NAME = CoreSummitTests;
 				SDKROOT = watchos;
 				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Beta;
+		};
+		6E0B5F6F1D77D4DF0005F6CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		6E0B5F701D77D4DF0005F6CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		6E0B5F711D77D4DF0005F6CE /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Beta;
+		};
+		6E0B5F741D77D4DF0005F6CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = OpenStackSummitWatch_Extension;
+				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		6E0B5F751D77D4DF0005F6CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = OpenStackSummitWatch_Extension;
+				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		6E0B5F761D77D4DF0005F6CE /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = OpenStackSummitWatch_Extension;
+				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Beta;
 		};
@@ -2203,6 +2501,7 @@
 		6E10A5081D1066E9008CBD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2224,6 +2523,7 @@
 		6E10A5091D1066E9008CBD0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2353,6 +2653,7 @@
 		6E7E18EF1D495AE6009549BA /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2420,6 +2721,26 @@
 				6E0B5F321D77C8AB0005F6CE /* Debug */,
 				6E0B5F331D77C8AB0005F6CE /* Release */,
 				6E0B5F341D77C8AB0005F6CE /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E0B5F6E1D77D4DF0005F6CE /* Build configuration list for PBXNativeTarget "OpenStackSummitWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0B5F6F1D77D4DF0005F6CE /* Debug */,
+				6E0B5F701D77D4DF0005F6CE /* Release */,
+				6E0B5F711D77D4DF0005F6CE /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E0B5F731D77D4DF0005F6CE /* Build configuration list for PBXNativeTarget "OpenStackSummitWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0B5F741D77D4DF0005F6CE /* Debug */,
+				6E0B5F751D77D4DF0005F6CE /* Release */,
+				6E0B5F761D77D4DF0005F6CE /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
