@@ -7,9 +7,12 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 import AeroGearHttp
 import AeroGearOAuth2
+
+#if CORESUMMITREALM
+import RealmSwift
+#endif
 
 /// Class used for requesting and caching data from the server.
 public final class Store {
@@ -21,8 +24,10 @@ public final class Store {
     
     // MARK: - Properties
     
+    #if CORESUMMITREALM
     /// The Realm storage context.
     public let realm = try! Realm()
+    #endif
     
     public var configuration = Configuration(.Staging)
     
