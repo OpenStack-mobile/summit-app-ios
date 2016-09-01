@@ -27,7 +27,7 @@ final class EventsInterfaceController: WKInterfaceController {
     private static let dateFormatter: NSDateFormatter = {
        
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: cachedSummit!.timeZone)
+        dateFormatter.timeZone = NSTimeZone(name: Store.shared.cache!.timeZone)
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .ShortStyle
         
@@ -65,7 +65,7 @@ final class EventsInterfaceController: WKInterfaceController {
         
         // filter events
         
-        let allEvents = cachedSummit?.schedule ?? []
+        let allEvents = Store.shared.cache?.schedule ?? []
         
         events = allEvents.filter(filter)
         
@@ -78,7 +78,7 @@ final class EventsInterfaceController: WKInterfaceController {
             let cell = tableView.rowControllerAtIndex(index) as! EventCellController
             
             let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start.toFoundation())
-            let locationText = EventDetail.getLocation(event, summit: cachedSummit!)
+            let locationText = EventDetail.getLocation(event, summit: Store.shared.cache!)
             
             cell.nameLabel.setText(event.name)
             cell.dateLabel.setText(" " + dateText)

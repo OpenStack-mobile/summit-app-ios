@@ -16,6 +16,8 @@ final class EventFiltersInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
+    @IBOutlet weak var tableView: WKInterfaceTable!
+    
     // MARK: - Properties
     
     // MARK: - Loading

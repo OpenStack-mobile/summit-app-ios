@@ -20,7 +20,7 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    let venues = cachedSummit?.locations.reduce([Venue](), combine: {
+    let venues = Store.shared.cache?.locations.reduce([Venue](), combine: {
         
         guard case let .venue(venue) = $1
             else { return $0 }

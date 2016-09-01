@@ -49,6 +49,9 @@ public extension Store {
                 
                 realmSummit.initialDataLoadDate = NSDate()
             }
+            #else
+            self.cache = entity
+            try! (responseObject as! String).writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
             #endif
             
             // success
