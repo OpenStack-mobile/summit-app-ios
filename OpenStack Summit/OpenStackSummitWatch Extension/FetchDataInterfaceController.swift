@@ -38,6 +38,8 @@ final class FetchDataInterfaceController: WKInterfaceController {
     
     @IBAction func loadData(sender: AnyObject? = nil) {
         
+        print("Loading Summit data")
+        
         loadingButton.setTitle("Loading...")
         loadingButton.setEnabled(false)
         
@@ -55,12 +57,16 @@ final class FetchDataInterfaceController: WKInterfaceController {
                 
                 controller.loadingButton.setTitle("Try again?")
                 
+                controller.presentAlertControllerWithTitle("Error", message: (error as NSError).localizedDescription, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: WKAlertActionStyle.Cancel, handler: {  })])
+                
             case let .Value(summit):
+                
+                print("Fetched \(summit.name) summit")
                 
                 // cache summit in memory
                 cachedSummit = summit
                 
-                controller.pushControllerWithName("Events", context: nil)
+                controller.presentControllerWithName("Events", context: nil)
             }
         }
     }
