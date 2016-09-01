@@ -87,7 +87,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="481" y="-288"/>
+            <point key="canvasLocation" x="489" y="-288.5"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -181,7 +181,6 @@
                         <imageView width="1" height="1" alignment="left" hidden="YES" contentMode="center" id="8Eg-1L-j9j"/>
                     </items>
                     <connections>
-                        <outlet property="loadingImageView" destination="8Eg-1L-j9j" id="KeU-7z-80n"/>
                         <outlet property="tableView" destination="RQQ-Ck-r7m" id="XuY-Cf-pXL"/>
                     </connections>
                 </controller>
@@ -196,6 +195,9 @@
                         <map width="1" height="0.80000000000000004" alignment="left" id="eG6-Eu-SpR"/>
                         <button width="1" height="0.20000000000000001" alignment="left" title="Directory" id="WEy-1i-yhs">
                             <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="eHr-0A-NxD" kind="push" id="oSK-sy-x5j"/>
+                            </connections>
                         </button>
                     </items>
                     <connections>

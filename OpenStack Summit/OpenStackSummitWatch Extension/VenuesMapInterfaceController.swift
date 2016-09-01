@@ -44,7 +44,7 @@ final class VenuesMapInterfaceController: WKInterfaceController {
         
         mapView.removeAllAnnotations()
         
-        guard let summit = cachedSummit
+        guard let summit = Store.shared.cache
             else { return }
         
         var locations = [CLLocationCoordinate2D]()
@@ -58,10 +58,13 @@ final class VenuesMapInterfaceController: WKInterfaceController {
             locations.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         }
         
+        // calculate visible region
+        if let firstVenue = locations.first {
+            
+            mapView.setRegion(MKCoordinateRegion(center: firstVenue, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)))
+        }
+        
         // add locations to Map
         locations.forEach { mapView.addAnnotation($0, withPinColor: .Red) }
-        
-        // calculate visible region
-        
     }
 }

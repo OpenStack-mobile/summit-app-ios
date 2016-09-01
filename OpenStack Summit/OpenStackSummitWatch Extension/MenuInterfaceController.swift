@@ -83,10 +83,10 @@ final class MenuInterfaceController: WKInterfaceController {
     
     private func updateUI() {
         
-        tableView.setHidden(cachedSummit == nil)
-        loadingImageView.setHidden(cachedSummit != nil)
+        tableView.setHidden(Store.shared.cache == nil)
+        loadingImageView.setHidden(Store.shared.cache != nil)
         
-        if cachedSummit == nil {
+        if Store.shared.cache == nil {
             
             loadingImageView.startAnimating()
             
@@ -123,9 +123,6 @@ final class MenuInterfaceController: WKInterfaceController {
             case let .Value(summit):
                 
                 print("Fetched \(summit.name) summit")
-                
-                // cache summit in memory
-                cachedSummit = summit
                 
                 controller.updateUI()
             }

@@ -19,6 +19,3 @@ final class Context<T> {
         self.value = value
     }
 }
-
-/// The local cached summit. 
-var cachedSummit: Summit?
