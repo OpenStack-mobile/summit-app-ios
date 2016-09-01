@@ -115,74 +115,113 @@
         <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
             <objects>
-                <controller identifier="EventDetail" title="Event" id="3Wd-aq-ZaB">
+                <controller identifier="EventDetail" title="Event" id="3Wd-aq-ZaB" customClass="EventDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
                         <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="hJd-4g-bkH">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                            <fontDescription key="font" type="system" pointSize="18"/>
                         </label>
-                        <button alignment="center" id="C8Q-qU-aSd">
-                            <group key="contentGroup" width="1" height="80" alignment="left" contentMode="scaleAspectFill" id="s5y-zU-a7r">
+                        <movie width="1" height="100" alignment="center" semanticContentAttribute="playback" id="9Bf-DC-SQa"/>
+                        <separator alignment="left" id="viq-ar-oGj"/>
+                        <group width="1" alignment="left" id="R7w-Bp-DNU">
+                            <items>
+                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="time" contentMode="scaleAspectFit" id="Qgd-NK-A9g"/>
+                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text=" 01/30/16, 12:00 AM" textAlignment="left" numberOfLines="0" id="gA1-TH-haI">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <separator alignment="left" id="Irp-kx-Xa2"/>
+                        <button alignment="left" id="gXB-y2-PaL">
+                            <group key="contentGroup" width="1" alignment="left" id="fNX-bi-1eG">
                                 <items>
-                                    <imageView width="30" height="40" alignment="center" verticalAlignment="center" image="play" contentMode="scaleAspectFit" id="Lpd-jh-AFQ"/>
+                                    <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="map_pin" contentMode="scaleAspectFit" id="iDK-7d-J07"/>
+                                    <label alignment="left" semanticContentAttribute="forceLeftToRight" text="Barcelona" textAlignment="left" numberOfLines="0" id="LLc-Jh-a2O">
+                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                    </label>
+                                    <imageView width="14" height="15" alignment="right" verticalAlignment="center" image="arrow" contentMode="scaleAspectFit" id="pLS-xN-qRM">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                 </items>
                             </group>
                         </button>
-                        <separator alignment="left" id="viq-ar-oGj"/>
-                        <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="gA1-TH-haI">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
+                        <separator alignment="left" id="j5G-Pv-oG8"/>
+                        <group width="1" alignment="left" id="qpB-jm-3ig">
+                            <items>
+                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="tag" contentMode="scaleAspectFit" id="I2Q-4v-UHV"/>
+                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text="Tags" textAlignment="left" numberOfLines="0" id="gKa-Ku-3aW">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
                         <separator alignment="left" id="Jkf-VD-Nwn"/>
-                        <label width="1" alignment="left" text="Tags" textAlignment="left" numberOfLines="0" id="785-Zb-6OW">
-                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                        </label>
-                        <separator alignment="left" id="RBg-Zy-Kqj"/>
-                        <button alignment="left" title="S" id="nC6-Uz-J6q">
+                        <button alignment="left" title="S" id="nC6-Uz-J6q" userLabel="Speakers Button">
                             <group key="contentGroup" width="1" alignment="left" id="Tc0-BG-FZf">
                                 <items>
-                                    <label width="1" alignment="left" text="1 Speaker" id="Unr-Ib-VAW"/>
+                                    <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="people" contentMode="scaleAspectFit" id="TQg-ZP-huF">
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <label alignment="left" text="1 Speaker" id="Unr-Ib-VAW">
+                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                    </label>
+                                    <imageView width="14" height="15" alignment="right" verticalAlignment="center" image="arrow" contentMode="scaleAspectFit" id="G3D-8t-1rx">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                 </items>
                             </group>
                         </button>
+                        <separator alignment="left" id="mrL-gu-e6D"/>
+                        <group width="1" alignment="left" id="fWy-C9-sl0">
+                            <items>
+                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="credential" contentMode="scaleAspectFit" id="leh-Gh-FnE"/>
+                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text="Architecture" textAlignment="left" numberOfLines="0" id="IjE-nD-ysd">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <separator alignment="left" id="q3h-ay-HsD"/>
+                        <group width="1" alignment="left" id="PrT-NB-RRq">
+                            <items>
+                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="level" contentMode="scaleAspectFit" id="M6a-Rv-Yst"/>
+                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text="Level" textAlignment="left" numberOfLines="0" id="UBY-wz-tyl" userLabel="Beginner Level">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
                         <separator alignment="left" id="Mxv-8Q-F7t"/>
-                        <button alignment="left" title="S" id="fyj-Wb-hA4">
-                            <group key="contentGroup" width="1" alignment="left" id="Mad-9x-Ynv">
-                                <items>
-                                    <label width="1" alignment="left" text="1 Speaker" id="bgb-yA-RNS" userLabel="Hilton"/>
-                                </items>
-                            </group>
-                        </button>
-                        <separator alignment="left" id="dSn-qy-6XT"/>
                         <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="zwp-xa-74d"/>
                     </items>
+                    <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="gA1-TH-haI" id="KxF-Ai-vZ9"/>
+                        <outlet property="descriptionLabel" destination="zwp-xa-74d" id="tX3-Xy-OdT"/>
+                        <outlet property="levelLabel" destination="UBY-wz-tyl" id="mhT-kg-fgJ"/>
+                        <outlet property="locationLabel" destination="LLc-Jh-a2O" id="ohh-5G-Esb"/>
+                        <outlet property="locationSeparator" destination="Irp-kx-Xa2" id="MJ7-v8-mM7"/>
+                        <outlet property="moviePlayer" destination="9Bf-DC-SQa" id="5Jh-l7-aS2"/>
+                        <outlet property="nameLabel" destination="hJd-4g-bkH" id="Cbp-0e-pAb"/>
+                        <outlet property="speakersLabel" destination="Unr-Ib-VAW" id="qus-zx-dOd"/>
+                        <outlet property="summitTypesLabel" destination="IjE-nD-ysd" id="72I-bu-cKi"/>
+                        <outlet property="tagsLabel" destination="gKa-Ku-3aW" id="RK3-4j-rrq"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="767" y="-334.25"/>
+            <point key="canvasLocation" x="767" y="-386.75"/>
         </scene>
         <!--Events-->
         <scene sceneID="fse-GJ-kiE">
             <objects>
                 <controller identifier="EventFilters" title="Events" id="FXs-a2-43y" customClass="EventFiltersInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
-                        <table alignment="left" id="RQQ-Ck-r7m">
-                            <items>
-                                <tableRow identifier="LabelCell" id="X6H-MW-p1D" customClass="LabelCellController" customModule="OpenStackSummitWatch_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="8He-LH-fVJ">
-                                        <items>
-                                            <label width="1" height="1" alignment="left" text="By Keyword" textAlignment="center" id="0Fg-n4-dy8"/>
-                                        </items>
-                                        <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="textLabel" destination="0Fg-n4-dy8" id="OMZ-Lc-cmS"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
-                        <imageView width="1" height="1" alignment="left" hidden="YES" contentMode="center" id="8Eg-1L-j9j"/>
+                        <button width="1" alignment="left" title="By Keyword" id="fqX-bS-6JE">
+                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
+                        <button width="1" alignment="left" title="By Date" id="aTV-Ge-Arf">
+                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
+                        <button width="1" alignment="left" title="By Category" id="fmI-ms-WH4">
+                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
                     </items>
-                    <connections>
-                        <outlet property="tableView" destination="RQQ-Ck-r7m" id="XuY-Cf-pXL"/>
-                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="-288"/>
@@ -206,6 +245,26 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="10"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="wtg-XC-DHU">
+            <objects>
+                <controller identifier="About" title="About" id="0cw-UP-wg5" customClass="AboutInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <label alignment="center" text="Barcelona 2020" textAlignment="center" id="nyU-Bf-Lt8">
+                            <fontDescription key="font" style="UICTFontTextStyleCallout"/>
+                        </label>
+                        <imageView height="0.5" alignment="center" image="summit-logo" contentMode="scaleAspectFit" id="nSp-HF-4cn"/>
+                        <label alignment="center" text="v2.0.0 999" textAlignment="center" id="JZi-BT-UUS">
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </label>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Refresh Data" id="95P-57-atH">
+                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="306"/>
         </scene>
         <!--Venues-->
         <scene sceneID="nPg-ND-1QP">
@@ -275,6 +334,7 @@
                         <separator alignment="left" id="7Hm-BY-hUq"/>
                         <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="ZxM-b2-snu"/>
                     </items>
+                    <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </controller>
             </objects>
             <point key="canvasLocation" x="767" y="37.75"/>

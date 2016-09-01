@@ -44,6 +44,12 @@ public final class Store {
         return summit
     }()
     
+    /// Clears the cache. 
+    public func clear() {
+        
+        self.cache = nil
+    }
+    
     public static let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true).URLByAppendingPathComponent("summit.json")
     
     #endif

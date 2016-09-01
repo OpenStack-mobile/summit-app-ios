@@ -12,6 +12,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+        
+        // print app info
+        print("Launching OpenStack Summit (WatchOS) v\(AppVersion) Build \(AppBuild)")
+        //print("Using Environment: \(AppEnvironment.rawValue)")
     }
 
     func applicationDidBecomeActive() {

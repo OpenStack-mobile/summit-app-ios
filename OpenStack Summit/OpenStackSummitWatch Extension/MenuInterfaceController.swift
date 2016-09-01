@@ -30,7 +30,7 @@ final class MenuInterfaceController: WKInterfaceController {
         
         let people = MenuItem(name: "People", image: "people", controller: EventFiltersInterfaceController.identifier)
         
-        let about = MenuItem(name: "About", image: "about", controller: EventFiltersInterfaceController.identifier)
+        let about = MenuItem(name: "About", image: "about", controller: AboutInterfaceController.identifier)
         
         return [events, venues, people, about]
     }()
