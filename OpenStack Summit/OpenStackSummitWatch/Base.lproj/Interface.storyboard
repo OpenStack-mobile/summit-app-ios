@@ -105,14 +105,14 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="220" y="643"/>
+            <point key="canvasLocation" x="-260" y="317"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="OpenStackSummitWatch" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="497" y="643"/>
+            <point key="canvasLocation" x="-8" y="317"/>
         </scene>
         <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
@@ -316,6 +316,7 @@
                                                         <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                                     </label>
                                                     <imageView width="1" height="100" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" contentMode="scaleAspectFill" id="baM-PM-9O7"/>
+                                                    <imageView width="1" height="100" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" image="Activity1" contentMode="center" initiallyAnimated="NO" id="U3R-nN-EJ9"/>
                                                 </items>
                                                 <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </group>
@@ -327,6 +328,7 @@
                                         </connections>
                                     </group>
                                     <connections>
+                                        <outlet property="activityIndicator" destination="U3R-nN-EJ9" id="e02-xf-afl"/>
                                         <outlet property="addressLabel" destination="1J1-Rv-pUg" id="FKu-3E-hPn"/>
                                         <outlet property="contentGroup" destination="tTf-0i-xov" id="T1f-FC-Fm9"/>
                                         <outlet property="headerGroup" destination="xmB-YN-TeC" id="QL8-Y8-bsk"/>
@@ -342,7 +344,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="489" y="150.75"/>
+            <point key="canvasLocation" x="497" y="196.75"/>
         </scene>
         <!--Venue-->
         <scene sceneID="XAf-57-7iO">
@@ -354,16 +356,18 @@
                         </label>
                         <map height="100" alignment="center" id="WfF-o6-sWh"/>
                         <button alignment="left" id="daH-l7-kUa">
-                            <group key="contentGroup" width="1" alignment="left" id="ghf-VQ-gzS">
+                            <group key="contentGroup" width="1" alignment="left" layout="vertical" id="ghf-VQ-gzS">
                                 <items>
                                     <imageView height="100" alignment="center" contentMode="scaleAspectFill" id="yk5-tP-799"/>
+                                    <imageView width="1" height="100" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" image="Activity1" contentMode="center" initiallyAnimated="NO" id="ZtF-pe-WSt"/>
                                 </items>
                             </group>
                         </button>
                         <button alignment="left" id="pRF-VA-0N7">
-                            <group key="contentGroup" width="1" alignment="left" id="IeX-dR-xcJ">
+                            <group key="contentGroup" width="1" alignment="left" layout="vertical" id="IeX-dR-xcJ">
                                 <items>
                                     <imageView height="100" alignment="center" contentMode="scaleAspectFill" id="3iE-bR-3sR"/>
+                                    <imageView width="1" height="100" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" image="Activity1" contentMode="center" initiallyAnimated="NO" id="kwX-ZJ-bxW"/>
                                 </items>
                             </group>
                         </button>
@@ -400,7 +404,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="777" y="154.5"/>
+            <point key="canvasLocation" x="767" y="252.5"/>
         </scene>
     </scenes>
 </document>

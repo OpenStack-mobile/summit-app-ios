@@ -46,7 +46,14 @@ public final class ImageCache {
     
     public func load(url: NSURL, completion: Response -> ()) {
         
-        urlSession.dataTaskWithURL(url) { (data, response, error) in
+        // attempt to get from cache first
+        if let cachedImageData = self[url] {
+            
+            completion(.Data(cachedImageData))
+            return
+        }
+        
+        let task = urlSession.dataTaskWithURL(url) { (data, response, error) in
             
             guard error == nil else {
                 
@@ -66,20 +73,22 @@ public final class ImageCache {
             // success!
             completion(.Data(data))
         }
+        
+        task.resume()
     }
     
     // MARK: - Subscripting
     
     public subscript (url: NSURL) -> NSData? {
         
-        get { return internalCache.valueForKey(url.absoluteString) as? NSData }
+        get { return internalCache.objectForKey(url.absoluteString) as? NSData }
         
         set {
             
             guard let newData = newValue
                 else { internalCache.removeObjectForKey(url.absoluteString); return }
             
-            internalCache.setValue(newData, forKey: url.absoluteString)
+            internalCache.setObject(newData, forKey: url.absoluteString)
         }
     }
 }
@@ -113,7 +122,10 @@ public extension ImageCacheInterface {
     public func loadCached(url: NSURL, placeholder: UIImage? = nil, cache: ImageCache = ImageCache.shared, completion: (ImageCache.Response -> ())? = nil) {
         
         // set placeholder
-        setImage(placeholder)
+        if let placeholder = placeholder {
+            
+            setImage(placeholder)
+        }
         
         // load data
         cache.load(url) { [weak self] (response) in
@@ -126,10 +138,10 @@ public extension ImageCacheInterface {
                     
                     interface.setImageData(data)
                 }
+                
+                // forward completion block
+                completion?(response)
             }
-            
-            // forward completion block
-            completion?(response)
         }
     }
 }
