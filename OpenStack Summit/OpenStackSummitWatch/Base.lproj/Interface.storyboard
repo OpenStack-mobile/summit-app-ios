@@ -204,7 +204,9 @@
                         <outlet property="locationSeparator" destination="Irp-kx-Xa2" id="MJ7-v8-mM7"/>
                         <outlet property="moviePlayer" destination="9Bf-DC-SQa" id="5Jh-l7-aS2"/>
                         <outlet property="nameLabel" destination="hJd-4g-bkH" id="Cbp-0e-pAb"/>
+                        <outlet property="speakersButton" destination="nC6-Uz-J6q" id="yvZ-j6-0Bj"/>
                         <outlet property="speakersLabel" destination="Unr-Ib-VAW" id="qus-zx-dOd"/>
+                        <outlet property="speakersSeparator" destination="Jkf-VD-Nwn" id="jLz-0B-QJR"/>
                         <outlet property="summitTypesLabel" destination="IjE-nD-ysd" id="72I-bu-cKi"/>
                         <outlet property="tagsGroup" destination="qpB-jm-3ig" id="G02-nT-YLD"/>
                         <outlet property="tagsLabel" destination="gKa-Ku-3aW" id="RK3-4j-rrq"/>

@@ -36,6 +36,10 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var speakersLabel: WKInterfaceLabel!
     
+    @IBOutlet weak var speakersButton: WKInterfaceButton!
+    
+    @IBOutlet weak var speakersSeparator: WKInterfaceSeparator!
+    
     @IBOutlet weak var summitTypesLabel: WKInterfaceLabel!
     
     @IBOutlet weak var levelLabel: WKInterfaceLabel!
@@ -90,29 +94,25 @@ final class EventDetailInterfaceController: WKInterfaceController {
     private func updateUI() {
         
         nameLabel.setText(eventDetail.name)
-        
-        if let video = eventDetail.video,
-            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg"),
-            let data = NSData(contentsOfURL: url) {
-            
-            moviePlayer.setHidden(false)
-            moviePlayer.setPosterImage(WKImage(imageData: data))
-            
-        } else {
-            
-            moviePlayer.setHidden(true)
-        }
-        
         dateLabel.setText(eventDetail.dateTime)
+        
         locationLabel.setText(eventDetail.location)
         locationButton.setHidden(eventDetail.location.isEmpty)
         locationSeparator.setHidden(eventDetail.location.isEmpty)
+        
         tagsLabel.setText(eventDetail.tags)
         tagsGroup.setHidden(eventDetail.tags.isEmpty)
+        tagsSeparator.setHidden(eventDetail.tags.isEmpty)
+        
         speakersLabel.setText("\(eventDetail.speakers.count) \(eventDetail.speakers.count == 1 ? "speaker" : "speakers")")
+        speakersButton.setHidden(eventDetail.speakers.isEmpty)
+        speakersSeparator.setHidden(eventDetail.speakers.isEmpty)
+        
         summitTypesLabel.setText(eventDetail.summitTypes)
+        
         levelLabel.setText(eventDetail.level)
         levelGroup.setHidden(eventDetail.level.isEmpty)
+        levelSeparator.setHidden(eventDetail.level.isEmpty)
         
         if let descriptionText = eventDetail.descriptionText,
             let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
@@ -125,6 +125,18 @@ final class EventDetailInterfaceController: WKInterfaceController {
         } else {
             
             descriptionLabel.setHidden(true)
+        }
+        
+        if let video = eventDetail.video,
+            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg"),
+            let data = NSData(contentsOfURL: url) {
+            
+            moviePlayer.setHidden(false)
+            moviePlayer.setPosterImage(WKImage(imageData: data))
+            
+        } else {
+            
+            moviePlayer.setHidden(true)
         }
     }
 }

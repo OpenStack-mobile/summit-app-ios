@@ -46,6 +46,21 @@ final class AboutViewController: UIViewController, RevealViewController {
         super.viewWillAppear(animated)
         
         userActivity?.becomeCurrent()
+        
+        let webpageURL: NSURL
+        
+        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
+            
+            let summit = Summit(realmEntity: realmSummit)
+            
+            webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier)!
+            
+        } else {
+            
+            webpageURL = NSURL(string: AppConfiguration[.WebsiteURL])!
+        }
+        
+        userActivity?.webpageURL = webpageURL
     }
     
     override func viewWillDisappear(animated: Bool) {
