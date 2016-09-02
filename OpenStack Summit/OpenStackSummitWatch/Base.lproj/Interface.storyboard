@@ -362,6 +362,9 @@
                                     <imageView width="1" height="100" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" image="Activity1" contentMode="center" initiallyAnimated="NO" id="ZtF-pe-WSt"/>
                                 </items>
                             </group>
+                            <connections>
+                                <action selector="showVenueImages:" destination="8ef-IB-VI5" id="VhZ-uf-oc5"/>
+                            </connections>
                         </button>
                         <button alignment="left" id="pRF-VA-0N7">
                             <group key="contentGroup" width="1" alignment="left" layout="vertical" id="IeX-dR-xcJ">
@@ -370,6 +373,9 @@
                                     <imageView width="1" height="100" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" image="Activity1" contentMode="center" initiallyAnimated="NO" id="kwX-ZJ-bxW"/>
                                 </items>
                             </group>
+                            <connections>
+                                <action selector="showMapImages:" destination="8ef-IB-VI5" id="5Xj-b5-YAg"/>
+                            </connections>
                         </button>
                         <separator alignment="left" id="h6k-bW-c83"/>
                         <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Room 101" textAlignment="left" numberOfLines="0" id="BQr-cT-aSw">
@@ -407,6 +413,22 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="767" y="252.5"/>
+        </scene>
+        <!--Image-->
+        <scene sceneID="TdS-7b-TIy">
+            <objects>
+                <controller identifier="Image" id="fO9-ge-RZY" customClass="ImageInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <imageView width="1" height="1" alignment="center" hidden="YES" contentMode="scaleAspectFit" id="mkW-5r-w84"/>
+                        <imageView width="1" height="1" alignment="center" verticalAlignment="center" semanticContentAttribute="spatial" image="Activity1" contentMode="center" id="vNd-ke-OtD"/>
+                    </items>
+                    <connections>
+                        <outlet property="activityIndicator" destination="vNd-ke-OtD" id="Un0-0p-0f5"/>
+                        <outlet property="imageView" destination="mkW-5r-w84" id="4ii-9T-OdF"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1019" y="3"/>
         </scene>
     </scenes>
 </document>
