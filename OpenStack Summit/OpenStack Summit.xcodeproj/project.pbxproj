@@ -86,8 +86,6 @@
 		6E0B5F0E1D77C8950005F6CE /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5541D10675D008CBD0C /* Track.swift */; };
 		6E0B5F101D77C8950005F6CE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5231D10675C008CBD0C /* Image.swift */; };
 		6E0B5F141D77C8950005F6CE /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6E0B5F171D77C8950005F6CE /* Production.plist in Copy Configurations */ = {isa = PBXBuildFile; fileRef = 6E7E18F31D495DA7009549BA /* Production.plist */; };
-		6E0B5F181D77C8950005F6CE /* Staging.plist in Copy Configurations */ = {isa = PBXBuildFile; fileRef = 6E7E18F41D495DA7009549BA /* Staging.plist */; };
 		6E0B5F231D77C8AB0005F6CE /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* RealmTests.swift */; };
 		6E0B5F241D77C8AB0005F6CE /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
 		6E0B5F251D77C8AB0005F6CE /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
@@ -230,8 +228,6 @@
 		6E313C1E1D41302C005132DA /* VenueRoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1D1D41302C005132DA /* VenueRoomDetailViewController.swift */; };
 		6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1F1D413254005132DA /* VenueDetailViewController.swift */; };
 		6E323D1E1D77189500E8C9B3 /* WebConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */; };
-		6E3B98A71D4A684D009B4926 /* Production.plist in Copy Configurations */ = {isa = PBXBuildFile; fileRef = 6E7E18F31D495DA7009549BA /* Production.plist */; };
-		6E3B98A81D4A684D009B4926 /* Staging.plist in Copy Configurations */ = {isa = PBXBuildFile; fileRef = 6E7E18F41D495DA7009549BA /* Staging.plist */; };
 		6E3E1E6D1D769E6800F6CB29 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E1E6C1D769E6800F6CB29 /* UserActivity.swift */; };
 		6E3E8C251D47D68100A29003 /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */; };
 		6E3E8C261D47D68100A29003 /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BB1D217141009FD0DA /* NSDateComponents+MTDates.m */; };
@@ -420,8 +416,6 @@
 			dstPath = Configuration;
 			dstSubfolderSpec = 7;
 			files = (
-				6E0B5F171D77C8950005F6CE /* Production.plist in Copy Configurations */,
-				6E0B5F181D77C8950005F6CE /* Staging.plist in Copy Configurations */,
 			);
 			name = "Copy Configurations";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,8 +470,6 @@
 			dstPath = Configuration;
 			dstSubfolderSpec = 7;
 			files = (
-				6E3B98A71D4A684D009B4926 /* Production.plist in Copy Configurations */,
-				6E3B98A81D4A684D009B4926 /* Staging.plist in Copy Configurations */,
 			);
 			name = "Copy Configurations";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,8 +650,6 @@
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
 		6E7E18E91D490DAC009549BA /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
-		6E7E18F31D495DA7009549BA /* Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Production.plist; sourceTree = "<group>"; };
-		6E7E18F41D495DA7009549BA /* Staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Staging.plist; sourceTree = "<group>"; };
 		6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesInterfaceController.swift; sourceTree = "<group>"; };
 		6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 		6E8660B61D62001700359FA1 /* PushNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
@@ -1225,8 +1215,6 @@
 				6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */,
 				6E6FD1761D7A1A15003D13D7 /* Production.swift */,
 				6E6FD1781D7A1A20003D13D7 /* Staging.swift */,
-				6E7E18F31D495DA7009549BA /* Production.plist */,
-				6E7E18F41D495DA7009549BA /* Staging.plist */,
 			);
 			name = Configurations;
 			sourceTree = "<group>";
