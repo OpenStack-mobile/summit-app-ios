@@ -42,12 +42,17 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
+            #if CORESUMMITREALM
             try! self.realm.write {
                 
                 let realmSummit = entity.save(self.realm)
                 
                 realmSummit.initialDataLoadDate = NSDate()
             }
+            #else
+            self.cache = entity
+            try! (responseObject as! String).writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
+            #endif
             
             // success
             completion(.Value(entity))

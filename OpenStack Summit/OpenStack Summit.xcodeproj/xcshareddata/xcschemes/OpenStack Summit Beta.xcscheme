@@ -54,7 +54,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E10A4F91D1066E9008CBD0C"
                BuildableName = "CoreSummitTests.xctest"
-               BlueprintName = "CoreSummitTests"
+               BlueprintName = "CoreSummitTests iOS"
                ReferencedContainer = "container:OpenStack Summit.xcodeproj">
             </BuildableReference>
          </TestableReference>

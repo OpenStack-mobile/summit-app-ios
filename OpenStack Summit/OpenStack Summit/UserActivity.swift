@@ -44,6 +44,7 @@ enum AppActivitySummitDataType: String {
     case venue
     case venueRoom
     
+    #if os(iOS)
     var realmType: RealmEntity.Type {
         
         switch self {
@@ -55,6 +56,7 @@ enum AppActivitySummitDataType: String {
         case .venueRoom: return RealmVenueRoom.self
         }
     }
+    #endif
 }
 
 enum AppActivityScreen: String {
@@ -91,4 +93,3 @@ extension VenueRoom: AppActivitySummitData {
     
     static let activityDataType = AppActivitySummitDataType.venueRoom
 }
-

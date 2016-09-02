@@ -544,7 +544,7 @@
         <image name="level" width="30" height="32"/>
         <image name="map_pin" width="26" height="33"/>
         <image name="play" width="121" height="121"/>
-        <image name="share" width="101" height="86"/>
+        <image name="share" width="24" height="20"/>
         <image name="tag" width="35" height="35"/>
         <image name="time" width="30" height="30"/>
     </resources>
