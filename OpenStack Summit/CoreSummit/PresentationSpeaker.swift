@@ -24,10 +24,6 @@ public struct PresentationSpeaker: Person {
     
     public var biography: String?
     
-    //public var email: String
-    
-    //public var location: String
-    
     public var memberIdentifier: Identifier?
 }
 
