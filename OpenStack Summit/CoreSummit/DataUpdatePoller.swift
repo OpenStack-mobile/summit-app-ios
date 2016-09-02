@@ -51,7 +51,9 @@ public final class DataUpdatePoller {
     @objc private func pollServer() {
         
         // dont poll if not connectivity
+        #if os(iOS)
         guard Reachability.connected else { return }
+        #endif
         
         // dont poll if no active summit
         guard let summit = Store.shared.realm.objects(RealmSummit.self).first else { return }
