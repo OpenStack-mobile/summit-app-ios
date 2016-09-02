@@ -309,7 +309,6 @@
 		6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */; };
-		6EEEEBFF1D79488300965631 /* RoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFE1D79488300965631 /* RoomDetailViewController.swift */; };
 		6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */; };
 		6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
 		6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C511D1497E100814AD0 /* UIView+Border.swift */; };
@@ -707,7 +706,6 @@
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
 		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
-		6EEEEBFE1D79488300965631 /* RoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailViewController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
 		6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		6EF12C511D1497E100814AD0 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
@@ -1162,7 +1160,6 @@
 				6E2CA1241D78809D00405A40 /* VenuesMapInterfaceController.swift */,
 				6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */,
 				6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */,
-				6EEEEBFE1D79488300965631 /* RoomDetailViewController.swift */,
 			);
 			name = Venues;
 			sourceTree = "<group>";
@@ -1881,7 +1878,6 @@
 				6E2CA11A1D78658000405A40 /* MenuInterfaceController.swift in Sources */,
 				6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */,
 				6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */,
-				6EEEEBFF1D79488300965631 /* RoomDetailViewController.swift in Sources */,
 				6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */,
 				6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */,
 				6E2CA1221D787E4D00405A40 /* LabelCellController.swift in Sources */,

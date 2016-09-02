@@ -112,16 +112,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         guard let location = summit.locations.with(locationID)
             else { fatalError("Invalid location \(locationID)") }
         
-        switch location {
-            
-        case let .venue(venue):
-            
-            self.pushControllerWithName(VenueDetailInterfaceController.identifier, context: Context(venue))
-            
-        case let .room(room):
-            
-            self.pushControllerWithName(RoomDetailInterfaceController.identifier, context: Context(room))
-        }
+        self.pushControllerWithName(VenueDetailInterfaceController.identifier, context: Context(location))
     }
     
     // MARK: - Private Methods
