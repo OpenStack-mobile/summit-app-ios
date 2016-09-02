@@ -105,14 +105,14 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="-260" y="317"/>
+            <point key="canvasLocation" x="-316" y="302"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="OpenStackSummitWatch" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-8" y="317"/>
+            <point key="canvasLocation" x="-32" y="302"/>
         </scene>
         <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
@@ -222,6 +222,78 @@
             </objects>
             <point key="canvasLocation" x="767" y="-386.75"/>
         </scene>
+        <!--Speaker-->
+        <scene sceneID="pJ3-uM-b5Z">
+            <objects>
+                <controller identifier="SpeakerDetail" title="Speaker" id="Bld-LZ-5mS" customClass="SpeakerDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <label width="1" alignment="left" text="Name" textAlignment="left" numberOfLines="0" id="T4O-4H-4n9">
+                            <fontDescription key="font" type="system" pointSize="18"/>
+                        </label>
+                        <label width="1" alignment="left" text="Title" textAlignment="left" numberOfLines="0" id="9JB-MR-Qm3">
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <imageView width="1" height="100" alignment="center" image="generic-user-avatar" contentMode="scaleAspectFit" id="8Hs-2R-7Pw"/>
+                        <separator alignment="left" id="SDz-TL-TOv"/>
+                        <group width="1" alignment="left" id="gTz-LA-Fh6">
+                            <items>
+                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="twitter" contentMode="scaleAspectFit" id="ppa-ox-whg"/>
+                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text="@colemancda" textAlignment="left" numberOfLines="0" id="Zbi-Jz-SUf" userLabel="Beginner Level">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <separator alignment="left" id="4fU-oL-zMo"/>
+                        <group width="1" alignment="left" id="mHX-yj-KBd">
+                            <items>
+                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="irc" contentMode="scaleAspectFit" id="fer-ez-3l9"/>
+                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text="coleman_cda" textAlignment="left" numberOfLines="0" id="Sg4-pA-OKx" userLabel="Beginner Level">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <separator alignment="left" id="oU6-ZR-OkO"/>
+                        <button alignment="left" id="WLt-oR-TrS">
+                            <group key="contentGroup" width="1" alignment="left" id="AXD-r1-leN">
+                                <items>
+                                    <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="events" contentMode="scaleAspectFit" id="xow-TD-zGG"/>
+                                    <label alignment="left" semanticContentAttribute="forceLeftToRight" text="2 sessions" textAlignment="left" numberOfLines="0" id="DGK-Nz-cSU">
+                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                    </label>
+                                    <imageView width="14" height="15" alignment="right" verticalAlignment="center" image="arrow" contentMode="scaleAspectFit" id="eOs-1v-rZz">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                </items>
+                            </group>
+                            <connections>
+                                <action selector="showEvents:" destination="Bld-LZ-5mS" id="nEa-yQ-FjX"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="5fd-Tf-it6"/>
+                        <label width="1" alignment="left" text=" Biography" textAlignment="left" numberOfLines="0" id="D4v-m6-lEe"/>
+                    </items>
+                    <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="biographyLabel" destination="D4v-m6-lEe" id="jHU-0J-mLg"/>
+                        <outlet property="biographySeparator" destination="5fd-Tf-it6" id="uX2-Y6-0of"/>
+                        <outlet property="eventsButton" destination="WLt-oR-TrS" id="TS2-Ja-67W"/>
+                        <outlet property="eventsLabel" destination="DGK-Nz-cSU" id="iae-qy-H2W"/>
+                        <outlet property="eventsSeparator" destination="oU6-ZR-OkO" id="b6r-Lp-2Sx"/>
+                        <outlet property="imageView" destination="8Hs-2R-7Pw" id="cvJ-MY-tzV"/>
+                        <outlet property="ircGroup" destination="mHX-yj-KBd" id="n8w-oY-KhM"/>
+                        <outlet property="ircLabel" destination="Sg4-pA-OKx" id="c2i-tW-oEf"/>
+                        <outlet property="ircSeparator" destination="4fU-oL-zMo" id="hki-gA-UPZ"/>
+                        <outlet property="nameLabel" destination="T4O-4H-4n9" id="ayU-ec-9mt"/>
+                        <outlet property="titleLabel" destination="9JB-MR-Qm3" id="pVx-9p-4MY"/>
+                        <outlet property="twitterGroup" destination="gTz-LA-Fh6" id="Pew-0U-dXM"/>
+                        <outlet property="twitterLabel" destination="Zbi-Jz-SUf" id="UQL-em-NFT"/>
+                        <outlet property="twitterSeparator" destination="SDz-TL-TOv" id="m2y-Lo-usl"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="-629"/>
+        </scene>
         <!--Events-->
         <scene sceneID="fse-GJ-kiE">
             <objects>
@@ -259,7 +331,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="10"/>
+            <point key="canvasLocation" x="220" y="3"/>
         </scene>
         <!--About-->
         <scene sceneID="wtg-XC-DHU">
