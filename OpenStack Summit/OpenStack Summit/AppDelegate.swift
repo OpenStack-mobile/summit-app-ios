@@ -60,7 +60,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // set configuration
-        Store.shared.configuration = AppConfiguration
+        Store.shared.environment = AppEnvironment
         
         // set session storage
         Store.shared.session = UserDefaultsSessionStorage()
@@ -77,10 +77,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         SetAppearance()
                 
         // setup Google Maps
-        GMSServices.provideAPIKey("Google Maps API Key")
+        GMSServices.provideAPIKey(AppConsumerKey.googleMaps)
         
         // setup Parse
-        Parse.setApplicationId("Parse App ID", clientKey: "Parse Client Key")
+        Parse.setApplicationId(AppConsumerKey.parse.appID, clientKey: AppConsumerKey.parse.clientKey)
         
         // notifications
         let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)

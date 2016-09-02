@@ -36,7 +36,7 @@ final class AboutViewController: UIViewController, RevealViewController {
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
         userActivity.title = "About the Summit"
-        userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL])
+        userActivity.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         
         self.userActivity = userActivity
@@ -53,11 +53,11 @@ final class AboutViewController: UIViewController, RevealViewController {
             
             let summit = Summit(realmEntity: realmSummit)
             
-            webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier)!
+            webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL + "/" + summit.webIdentifier)!
             
         } else {
             
-            webpageURL = NSURL(string: AppConfiguration[.WebsiteURL])!
+            webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
         }
         
         userActivity?.webpageURL = webpageURL

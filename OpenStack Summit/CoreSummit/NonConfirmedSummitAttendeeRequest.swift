@@ -16,7 +16,7 @@ public extension Store {
         
         let URI = "/api/v1/users/me"
         
-        let URL = configuration[.AuthenticationURL] + URI
+        let URL = environment.configuration.authenticationURL + URI
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         

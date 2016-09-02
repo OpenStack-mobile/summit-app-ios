@@ -29,7 +29,7 @@ public extension Store {
         
         let http = self.createHTTP(.ServiceAccount)
         
-        let url = configuration[.ServerURL] + URI
+        let url = environment.configuration.serverURL + URI
         
         http.GET(url) { (responseObject, error) in
             

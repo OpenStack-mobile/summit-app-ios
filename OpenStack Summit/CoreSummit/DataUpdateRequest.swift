@@ -56,7 +56,7 @@ private extension Store {
     
     func dataUpdates(URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
-        let URL = configuration[.ServerURL] + URI
+        let URL = environment.configuration.serverURL + URI
         
         let http = self.isLoggedIn ? self.createHTTP(.OpenIDJSON) : self.createHTTP(.ServiceAccount)
         

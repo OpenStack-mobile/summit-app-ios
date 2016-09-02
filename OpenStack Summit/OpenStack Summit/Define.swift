@@ -8,7 +8,7 @@
 
 import Foundation
 import enum CoreSummit.Environment
-import struct CoreSummit.Configuration
+import protocol CoreSummit.Configuration
 
 /// Version of the app.
 public let AppVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
@@ -34,9 +34,3 @@ let AppEnvironment: Environment = {
     let AppEnvironment = Environment.Staging
     #endif
 #endif
-
-/// The app's configuration.
-let AppConfiguration: Configuration = {
-    
-    return Configuration(AppEnvironment)
-}()

@@ -71,7 +71,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: speaker.identifier]
         
-        let webpageURL = NSURL(string: speaker.toWebpageURL(AppConfiguration, summit: Store.shared.cache!))!
+        let webpageURL = NSURL(string: speaker.toWebpageURL(AppEnvironment, summit: Store.shared.cache!))!
         
         updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: webpageURL)
     }

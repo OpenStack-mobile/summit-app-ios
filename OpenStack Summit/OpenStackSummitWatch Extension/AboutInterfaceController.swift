@@ -36,11 +36,11 @@ final class AboutInterfaceController: WKInterfaceController {
         
         if let summit = Store.shared.cache {
             
-             webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier)!
+             webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL + "/" + summit.webIdentifier)!
             
         } else {
             
-            webpageURL = NSURL(string: AppConfiguration[.WebsiteURL])!
+            webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
         }
         
         updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue], webpageURL: webpageURL)

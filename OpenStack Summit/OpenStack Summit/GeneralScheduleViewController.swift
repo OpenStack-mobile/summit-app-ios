@@ -73,7 +73,7 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
             userActivity.title = "Summit Schedule"
-            userActivity.webpageURL = NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/summit-schedule/")
+            userActivity.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL + "/" + summit.webIdentifier + "/summit-schedule/")
             userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
             
             self.userActivity = userActivity

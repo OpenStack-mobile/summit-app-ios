@@ -28,7 +28,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/" + summitID + "/external-orders/" + ticketOrder
         
-        let URL = configuration[.ServerURL] + URI
+        let URL = environment.configuration.serverURL + URI
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         

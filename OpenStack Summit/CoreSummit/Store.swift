@@ -54,7 +54,7 @@ public final class Store {
     
     #endif
     
-    public var configuration = Configuration(.Staging)
+    public var environment = Environment.Staging
     
     public var session: SessionStorage? {
         
@@ -143,11 +143,11 @@ public final class Store {
         let hasPasscode = deviceHasPasscode
         
         var config = Config(
-            base: configuration[.AuthenticationURL],
+            base: environment.configuration.authenticationURL,
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: configuration[.ClientIDOpenID],
+            clientId: environment.configuration.openID.client,
             refreshTokenEndpoint: "oauth2/token",
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
@@ -155,27 +155,27 @@ public final class Store {
             scopes: ["openid",
                 "profile",
                 "offline_access",
-                "\(configuration[.ServerURL])/summits/read",
-                "\(configuration[.ServerURL])/summits/write",
-                "\(configuration[.ServerURL])/summits/read-external-orders",
-                "\(configuration[.ServerURL])/summits/confirm-external-orders"
+                "\(environment.configuration.serverURL)/summits/read",
+                "\(environment.configuration.serverURL)/summits/write",
+                "\(environment.configuration.serverURL)/summits/read-external-orders",
+                "\(environment.configuration.serverURL)/summits/confirm-external-orders"
             ],
-            clientSecret: configuration[.SecretOpenID],
+            clientSecret: environment.configuration.openID.secret,
             isWebView: true
         )
         oauthModuleOpenID = createOAuthModule(config, hasPasscode: hasPasscode)
         
         config = Config(
-            base: configuration[.AuthenticationURL],
+            base: environment.configuration.authenticationURL,
             authzEndpoint: "oauth2/auth",
             redirectURL: "org.openstack.ios.openstack-summit://oauthCallback",
             accessTokenEndpoint: "oauth2/token",
-            clientId: configuration[.ClientIDServiceAccount],
+            clientId: environment.configuration.serviceAccount.client,
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(configuration[.ServerURL])/summits/read"],
-            clientSecret: configuration[.SecretServiceAccount]
+            scopes: ["\(environment.configuration.serverURL)/summits/read"],
+            clientSecret: environment.configuration.serviceAccount.secret
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
     }
