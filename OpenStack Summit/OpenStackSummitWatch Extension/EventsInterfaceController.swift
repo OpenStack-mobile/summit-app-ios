@@ -56,7 +56,7 @@ final class EventsInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.view.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/summit-schedule/"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/summit-schedule/"))
         }
     }
     
