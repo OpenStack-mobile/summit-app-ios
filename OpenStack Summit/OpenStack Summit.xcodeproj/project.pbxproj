@@ -214,6 +214,7 @@
 		6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
 		6E28872D1D77E6A5009B8E62 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */; };
 		6E28872E1D77E6A5009B8E62 /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */; };
 		6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
 		6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
 		6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1131D78037500405A40 /* EventsInterfaceController.swift */; };
@@ -612,6 +613,7 @@
 		6E2538501D1B01D7003E3400 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E25AD401D5A63F20060E7BA /* DataUpdates1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates1.json; sourceTree = "<group>"; };
+		6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInterfaceController.swift; sourceTree = "<group>"; };
 		6E2BB3A71D63A57E0085C876 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		6E2BB3A91D63A6050085C876 /* VideoJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoJSON.swift; sourceTree = "<group>"; };
 		6E2CA1131D78037500405A40 /* EventsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsInterfaceController.swift; sourceTree = "<group>"; };
@@ -1123,6 +1125,7 @@
 				6E0B5F621D77D4DF0005F6CE /* InterfaceController.swift */,
 				6E2CA1191D78658000405A40 /* MenuInterfaceController.swift */,
 				6E9B09CD1D78F121008383A4 /* AboutInterfaceController.swift */,
+				6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */,
 				6E2CA1231D78805500405A40 /* Venues */,
 				6E2CA11D1D7876E700405A40 /* Events */,
 			);
@@ -1882,6 +1885,7 @@
 				6E8D0CD31D79CBA7004B435A /* ImageCache.swift in Sources */,
 				6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */,
 				6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */,
+				6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */,
 				6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */,
 				6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */,
 				6E2CA1221D787E4D00405A40 /* LabelCellController.swift in Sources */,

@@ -50,6 +50,21 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     private(set) var location: Location!
     
+    lazy var venue: Venue = {
+        
+        switch self.location! {
+            
+        case let .venue(value): return value
+            
+        case let .room(room):
+            
+            guard let value = Store.shared.cache?.locations.with(room.venue)?.rawValue as? Venue
+                else { fatalError("Invalid venue \(room.venue)") }
+            
+            return value
+        }
+    }()
+    
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
@@ -87,8 +102,29 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         invalidateUserActivity()
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func showVenueImages(sender: AnyObject? = nil) {
+        
+        showImages(venue.images)
+    }
+    
+    @IBAction func showMapImages(sender: AnyObject? = nil) {
+        
+        showImages(venue.maps)
+    }
         
     // MARK: - Private Methods
+    
+    private func showImages(images: [Image]) {
+        
+        let names = [String](count: images.count, repeatedValue: ImageInterfaceController.identifier)
+        
+        let contexts = images.map { Context($0) }
+        
+        presentControllerWithNames(names, contexts: contexts)
+    }
     
     private func updateUI() {
         
@@ -213,7 +249,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
             
         } else {
             
-            mapImagesView.setHidden(true)
+            mapImagesButton.setHidden(true)
         }
         
         // configure map
