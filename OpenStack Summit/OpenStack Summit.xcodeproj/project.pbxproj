@@ -638,7 +638,7 @@
 		6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventDataUpdate.swift; sourceTree = "<group>"; };
 		6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
-		6E5BE4191D76996600E323D3 /* OpenStackSummit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = OpenStackSummit.entitlements; path = ../OpenStackSummit.entitlements; sourceTree = "<group>"; };
+		6E5BE4191D76996600E323D3 /* Beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Beta.entitlements; path = ../Beta.entitlements; sourceTree = "<group>"; };
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
@@ -679,6 +679,8 @@
 		6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelListViewController.swift; sourceTree = "<group>"; };
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
+		6ED495811D792F7800749940 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Release.entitlements; sourceTree = SOURCE_ROOT; };
+		6ED495821D792F7800749940 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Debug.entitlements; sourceTree = SOURCE_ROOT; };
 		6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
 		6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapViewController.swift; sourceTree = "<group>"; };
@@ -900,7 +902,9 @@
 				6E0B2F061D33F3A10058F171 /* Levels.storyboard */,
 				6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */,
 				6E9B22D71D40171800D25271 /* Venue.storyboard */,
-				6E5BE4191D76996600E323D3 /* OpenStackSummit.entitlements */,
+				6E5BE4191D76996600E323D3 /* Beta.entitlements */,
+				6ED495811D792F7800749940 /* Release.entitlements */,
+				6ED495821D792F7800749940 /* Debug.entitlements */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
 				6EF147EC1D13579C00D5EEF9 /* View */,
@@ -2464,7 +2468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = OpenStackSummit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Debug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CORESUMMIT_ENVIRONMENT = Staging;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -2486,7 +2490,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = OpenStackSummit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Release.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CORESUMMIT_ENVIRONMENT = Production;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -2664,7 +2668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = OpenStackSummit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Beta.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CORESUMMIT_ENVIRONMENT = Staging;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
