@@ -1438,6 +1438,7 @@
 				6E0B5F591D77D4DF0005F6CE /* Resources */,
 				6E5915CF1D77E00F008E9C80 /* Copy Frameworks */,
 				6E2887311D77E6A5009B8E62 /* Embed Frameworks */,
+				6E3FE1781D7A27840004E9CB /* Increment Build */,
 			);
 			buildRules = (
 			);
@@ -1459,6 +1460,7 @@
 				6E10A50D1D1066E9008CBD0C /* Embed Frameworks */,
 				6EF12C5C1D149A8E00814AD0 /* Copy Frameworks */,
 				6EF12C5D1D149B2300814AD0 /* Increment Build */,
+				6E40E1371D7A2F200025D74E /* Increment WatchOS Build */,
 				6E0B5F771D77D4DF0005F6CE /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -1726,6 +1728,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6E3FE1781D7A27840004E9CB /* Increment Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi";
+		};
+		6E40E1371D7A2F200025D74E /* Increment WatchOS Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment WatchOS Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\nfi\nif [ $EFFECTIVE_PLATFORM_NAME == \"-iphonesimulator\" ]\nthen infoPlistPath=\"${BUILD_DIR}/${CONFIGURATION}-watchsimulator/OpenStackSummitWatch.app/Info.plist\"\nelse infoPlistPath=\"${BUILD_DIR}/${CONFIGURATION}-watchos/OpenStackSummitWatch.app/Info.plist\"\necho \"Updating build number to $buildNumber using branch '$branch'.\"\necho $infoPlistPath\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$infoPlistPath\"\nfi";
+		};
 		6E5915CF1D77E00F008E9C80 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
