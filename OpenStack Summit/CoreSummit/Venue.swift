@@ -1,5 +1,5 @@
 //
-//  Venue.swift
+//  swift
 //  OpenStackSummit
 //
 //  Created by Alsey Coleman Miller on 6/1/16.
@@ -51,6 +51,32 @@ public extension Venue {
             else { return nil }
         
         return ((latitude as NSString).doubleValue, (longitude as NSString).doubleValue)
+    }
+    
+    var fullAddress: String {
+        
+        var fullAddress = address ?? ""
+        
+        var separator = fullAddress.isEmpty ? "" : ", "
+        
+        if let city = self.city {
+            fullAddress += "\(separator)\(city)"
+            separator = fullAddress.isEmpty ? "" : " "
+        }
+        
+        if let state = self.state {
+            fullAddress += "\(separator)\(state)"
+            separator = fullAddress.isEmpty ? "" : " "
+        }
+        
+        if let zipCode = self.zipCode {
+            fullAddress += "\(separator)(\(zipCode))"
+            separator = fullAddress.isEmpty ? "" : ", "
+        }
+        
+        fullAddress += "\(separator)\(country)"
+        
+        return fullAddress
     }
 }
 
