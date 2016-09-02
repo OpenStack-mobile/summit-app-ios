@@ -26,6 +26,8 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var locationSeparator: WKInterfaceSeparator!
     
+    @IBOutlet weak var locationButton: WKInterfaceButton!
+    
     @IBOutlet weak var tagsLabel: WKInterfaceLabel!
     
     @IBOutlet weak var speakersLabel: WKInterfaceLabel!
@@ -73,22 +75,38 @@ final class EventDetailInterfaceController: WKInterfaceController {
         
         nameLabel.setText(eventDetail.name)
         
-        if let youtube = eventDetail.video?.youtube,
-            let url = NSURL(string: "http://img.youtube.com/vi/" + youtube + "/default.jpg"),
+        if let video = eventDetail.video,
+            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg"),
             let data = NSData(contentsOfURL: url) {
-                
+            
+            moviePlayer.setHidden(false)
             moviePlayer.setPosterImage(WKImage(imageData: data))
+            
+        } else {
+            
+            moviePlayer.setHidden(true)
         }
         
         dateLabel.setText(eventDetail.dateTime)
         locationLabel.setText(eventDetail.location)
-        locationLabel.setHidden(eventDetail.location.isEmpty)
+        locationButton.setHidden(eventDetail.location.isEmpty)
         locationSeparator.setHidden(eventDetail.location.isEmpty)
         tagsLabel.setText(eventDetail.tags)
         speakersLabel.setText("\(eventDetail.speakers.count) \(eventDetail.speakers.count == 1 ? "speaker" : "speakers")")
         summitTypesLabel.setText(eventDetail.summitTypes)
         levelLabel.setText(eventDetail.level)
-        descriptionLabel.setText(eventDetail.descriptionText)
-        descriptionLabel.setHidden((eventDetail.descriptionText ?? "").isEmpty)
+        
+        if let descriptionText = eventDetail.descriptionText,
+            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            
+            descriptionLabel.setText(attributedString.string)
+            
+            descriptionLabel.setHidden(true)
+            
+        } else {
+            
+            descriptionLabel.setHidden(true)
+        }
     }
 }

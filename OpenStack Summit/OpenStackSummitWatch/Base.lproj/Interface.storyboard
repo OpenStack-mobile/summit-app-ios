@@ -195,6 +195,7 @@
                         <outlet property="dateLabel" destination="gA1-TH-haI" id="KxF-Ai-vZ9"/>
                         <outlet property="descriptionLabel" destination="zwp-xa-74d" id="tX3-Xy-OdT"/>
                         <outlet property="levelLabel" destination="UBY-wz-tyl" id="mhT-kg-fgJ"/>
+                        <outlet property="locationButton" destination="gXB-y2-PaL" id="Vsy-MG-exr"/>
                         <outlet property="locationLabel" destination="LLc-Jh-a2O" id="ohh-5G-Esb"/>
                         <outlet property="locationSeparator" destination="Irp-kx-Xa2" id="MJ7-v8-mM7"/>
                         <outlet property="moviePlayer" destination="9Bf-DC-SQa" id="5Jh-l7-aS2"/>
@@ -260,8 +261,15 @@
                         </label>
                         <button width="1" alignment="left" verticalAlignment="bottom" title="Refresh Data" id="95P-57-atH">
                             <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="refreshData:" destination="0cw-UP-wg5" id="VOp-oU-wy4"/>
+                            </connections>
                         </button>
                     </items>
+                    <connections>
+                        <outlet property="summitNameLabel" destination="nyU-Bf-Lt8" id="99e-yj-nQ6"/>
+                        <outlet property="versionLabel" destination="JZi-BT-UUS" id="fiW-vQ-k6o"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="306"/>
@@ -304,9 +312,10 @@
             <objects>
                 <controller identifier="VenueDetail" title="Venue" id="8ef-IB-VI5">
                     <items>
-                        <label width="1" alignment="left" text="Event Name" textAlignment="left" numberOfLines="0" id="mXk-cP-xJD">
+                        <label width="1" alignment="left" text="Venue Name" textAlignment="left" numberOfLines="0" id="mXk-cP-xJD">
                             <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                         </label>
+                        <imageView height="100" alignment="left" contentMode="scaleAspectFill" id="yk5-tP-799"/>
                         <separator alignment="left" id="0AO-Of-mTM"/>
                         <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="YBy-9J-9S7">
                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
@@ -337,7 +346,7 @@
                     <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="767" y="37.75"/>
+            <point key="canvasLocation" x="767" y="66.25"/>
         </scene>
     </scenes>
 </document>
