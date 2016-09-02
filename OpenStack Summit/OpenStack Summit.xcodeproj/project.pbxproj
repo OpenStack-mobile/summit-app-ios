@@ -306,6 +306,10 @@
 		6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */; };
 		6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52351D42D52D00DF4BEA /* Accelerate.framework */; };
 		6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */; };
+		6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
+		6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
+		6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */; };
+		6EEEEBFF1D79488300965631 /* RoomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFE1D79488300965631 /* RoomDetailViewController.swift */; };
 		6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */; };
 		6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
 		6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C511D1497E100814AD0 /* UIView+Border.swift */; };
@@ -701,6 +705,9 @@
 		6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6EDE52351D42D52D00DF4BEA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
+		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
+		6EEEEBFE1D79488300965631 /* RoomDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailViewController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
 		6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		6EF12C511D1497E100814AD0 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
@@ -945,6 +952,7 @@
 				6ECA1CD11D4EC46C00806924 /* Session.swift */,
 				6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */,
 				6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */,
+				6EEEEBF81D7945D200965631 /* CollectionType.swift */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
 				6E10A5A11D1067BB008CBD0C /* JSON */,
@@ -1153,6 +1161,8 @@
 			children = (
 				6E2CA1241D78809D00405A40 /* VenuesMapInterfaceController.swift */,
 				6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */,
+				6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */,
+				6EEEEBFE1D79488300965631 /* RoomDetailViewController.swift */,
 			);
 			name = Venues;
 			sourceTree = "<group>";
@@ -1821,6 +1831,7 @@
 				6E0B5EDE1D77C8950005F6CE /* Configuration.swift in Sources */,
 				6E0B5EDF1D77C8950005F6CE /* EventType.swift in Sources */,
 				6E0B5EE01D77C8950005F6CE /* Venue.swift in Sources */,
+				6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */,
 				6E0B5EE11D77C8950005F6CE /* TicketTypeJSON.swift in Sources */,
 				6E0B5EE41D77C8950005F6CE /* SummitJSON.swift in Sources */,
 				6E0B5EE51D77C8950005F6CE /* WebConvertible.swift in Sources */,
@@ -1870,12 +1881,14 @@
 				6E2CA11A1D78658000405A40 /* MenuInterfaceController.swift in Sources */,
 				6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */,
 				6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */,
+				6EEEEBFF1D79488300965631 /* RoomDetailViewController.swift in Sources */,
 				6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */,
 				6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */,
 				6E2CA1221D787E4D00405A40 /* LabelCellController.swift in Sources */,
 				6E9B09CE1D78F121008383A4 /* AboutInterfaceController.swift in Sources */,
 				6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */,
 				6E0B5F651D77D4DF0005F6CE /* ExtensionDelegate.swift in Sources */,
+				6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */,
 				6E7FEA341D78E8E000B9E809 /* UserActivity.swift in Sources */,
 				6E2CA1161D78041300405A40 /* Context.swift in Sources */,
 				6E7FEA331D78E8D800B9E809 /* YouTubeThumbnail.swift in Sources */,
@@ -1989,6 +2002,7 @@
 				6E10A5601D10675D008CBD0C /* Event.swift in Sources */,
 				6E10A59E1D10675D008CBD0C /* VenueRoom.swift in Sources */,
 				6E10A5891D10675D008CBD0C /* RealmVenue.swift in Sources */,
+				6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */,
 				6E10A5781D10675D008CBD0C /* RealmFeedback.swift in Sources */,
 				6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */,
 				6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */,

@@ -198,14 +198,3 @@ internal extension EventDetail {
         return trackGroup.color
     }
 }
-
-private extension CollectionType {
-    
-    func firstMatching(@noescape predicate: (Self.Generator.Element) throws -> Bool) rethrows -> Self.Generator.Element? {
-        
-        guard let index = try self.indexOf(predicate)
-            else { return nil }
-        
-        return self[index]
-    }
-}

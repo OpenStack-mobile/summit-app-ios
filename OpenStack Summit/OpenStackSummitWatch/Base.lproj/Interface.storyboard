@@ -145,6 +145,9 @@
                                     </imageView>
                                 </items>
                             </group>
+                            <connections>
+                                <action selector="showLocation:" destination="3Wd-aq-ZaB" id="lWF-LN-Tjd"/>
+                            </connections>
                         </button>
                         <separator alignment="left" id="j5G-Pv-oG8"/>
                         <group width="1" alignment="left" id="qpB-jm-3ig">
@@ -170,6 +173,9 @@
                                     </imageView>
                                 </items>
                             </group>
+                            <connections>
+                                <action selector="showSpeakers:" destination="3Wd-aq-ZaB" id="RTl-5d-mKE"/>
+                            </connections>
                         </button>
                         <separator alignment="left" id="mrL-gu-e6D"/>
                         <group width="1" alignment="left" id="fWy-C9-sl0">
@@ -318,12 +324,13 @@
         <!--Venue-->
         <scene sceneID="XAf-57-7iO">
             <objects>
-                <controller identifier="VenueDetail" title="Venue" id="8ef-IB-VI5">
+                <controller identifier="VenueDetail" title="Venue" id="8ef-IB-VI5" customClass="VenueDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
                         <label width="1" alignment="left" text="Venue Name" textAlignment="left" numberOfLines="0" id="mXk-cP-xJD">
                             <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                         </label>
-                        <imageView height="100" alignment="left" contentMode="scaleAspectFill" id="yk5-tP-799"/>
+                        <map height="100" alignment="center" id="WfF-o6-sWh"/>
+                        <imageView height="100" alignment="center" contentMode="scaleAspectFill" id="yk5-tP-799"/>
                         <separator alignment="left" id="0AO-Of-mTM"/>
                         <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="Date" textAlignment="left" numberOfLines="0" id="YBy-9J-9S7">
                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
@@ -349,12 +356,61 @@
                             </group>
                         </button>
                         <separator alignment="left" id="7Hm-BY-hUq"/>
-                        <label width="1" alignment="left" text="Event Description" textAlignment="left" numberOfLines="0" id="ZxM-b2-snu"/>
+                        <label width="1" alignment="left" text="Description" textAlignment="left" numberOfLines="0" id="ZxM-b2-snu"/>
                     </items>
                     <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="767" y="66.25"/>
+            <point key="canvasLocation" x="1097" y="118.25"/>
+        </scene>
+        <!--Room-->
+        <scene sceneID="6AA-HY-q7u">
+            <objects>
+                <controller identifier="RoomDetail" title="Room" id="rL0-Rx-oIF" customClass="RoomDetailInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <label width="1" alignment="left" text="Room Name" textAlignment="left" numberOfLines="0" id="lwc-bz-PGi">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                        </label>
+                        <separator alignment="left" id="jnN-9X-m8a"/>
+                        <label width="1" alignment="right" semanticContentAttribute="forceLeftToRight" text="0 capacity" textAlignment="left" numberOfLines="0" id="Gm0-zZ-bBK">
+                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                        </label>
+                        <separator alignment="left" id="bcc-Vb-ioK"/>
+                        <button alignment="left" title="S" id="BZM-bl-4L5">
+                            <group key="contentGroup" width="1" alignment="left" id="DEU-Uu-DCa">
+                                <items>
+                                    <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="map_pin" contentMode="scaleAspectFit" id="Wv5-aR-gdJ">
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <label alignment="left" text="Venue Name" id="7eY-FR-rb7">
+                                        <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                    </label>
+                                    <imageView width="14" height="15" alignment="right" verticalAlignment="center" image="arrow" contentMode="scaleAspectFit" id="8PX-EZ-yTQ">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                </items>
+                            </group>
+                            <connections>
+                                <segue destination="8ef-IB-VI5" kind="push" identifier="RoomShowVenue" id="M21-bQ-VxR"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="vPq-98-JcC"/>
+                        <label width="1" alignment="left" text="Description" textAlignment="left" numberOfLines="0" id="Bu7-xn-UHw" userLabel="Description"/>
+                    </items>
+                    <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="capacityLabel" destination="Gm0-zZ-bBK" id="EbQ-p6-xqd"/>
+                        <outlet property="capacitySeparator" destination="jnN-9X-m8a" id="507-Go-ALm"/>
+                        <outlet property="descriptionLabel" destination="Bu7-xn-UHw" id="qek-Ed-OH8"/>
+                        <outlet property="nameLabel" destination="lwc-bz-PGi" id="fRH-yS-QaG"/>
+                        <outlet property="venueLabel" destination="7eY-FR-rb7" id="Nhl-Ef-gMA"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="767" y="10"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="M21-bQ-VxR"/>
+    </inferredMetricsTieBreakers>
 </document>
