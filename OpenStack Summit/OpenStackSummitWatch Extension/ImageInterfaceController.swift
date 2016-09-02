@@ -40,11 +40,18 @@ final class ImageInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        if let imageURL = NSURL(string: image.url) {
+            
+            updateUserActivity(NSUserActivityTypeBrowsingWeb, userInfo: nil, webpageURL: imageURL)
+        }
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
+        invalidateUserActivity()
     }
     
     // MARK: - Private Methods
