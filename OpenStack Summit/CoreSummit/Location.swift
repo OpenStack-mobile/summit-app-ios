@@ -11,7 +11,7 @@ public protocol LocationProtocol: Named {
     var descriptionText: String? { get }
 }
 
-public enum Location {
+public enum Location: Unique {
     
     case venue(Venue)
     case room(VenueRoom)
@@ -22,5 +22,10 @@ public enum Location {
         case let .venue(venue): return venue
         case let .room(room): return room
         }
+    }
+    
+    public var identifier: Identifier {
+        
+        return rawValue.identifier
     }
 }

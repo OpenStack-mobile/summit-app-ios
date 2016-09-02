@@ -52,6 +52,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
+    private var event: Event!
     private var eventDetail: EventDetail!
     
     // MARK: - Loading
@@ -62,6 +63,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         guard let event = (context as? Context<SummitEvent>)?.value
             else { fatalError("Invalid context") }
         
+        self.event = event
         self.eventDetail = EventDetail(event: event, summit: Store.shared.cache!)
         
         updateUI()
@@ -87,7 +89,40 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
+    @IBAction func showSpeakers(sender: AnyObject? = nil) {
+        
+        if eventDetail.speakers.count == 1 {
+            
+            //let speaker = eventDetail.speakers[0]
+            
+            
+            
+        } else {
+            
+            
+        }
+    }
     
+    @IBAction func showLocation(sender: AnyObject? = nil) {
+        
+        guard let summit = Store.shared.cache,
+            let locationID = event.location
+            else { return }
+        
+        guard let location = summit.locations.with(locationID)
+            else { fatalError("Invalid location \(locationID)") }
+        
+        switch location {
+            
+        case let .venue(venue):
+            
+            self.pushControllerWithName(VenueDetailInterfaceController.identifier, context: Context(venue))
+            
+        case let .room(room):
+            
+            self.pushControllerWithName(RoomDetailInterfaceController.identifier, context: Context(room))
+        }
+    }
     
     // MARK: - Private Methods
     
@@ -104,7 +139,15 @@ final class EventDetailInterfaceController: WKInterfaceController {
         tagsGroup.setHidden(eventDetail.tags.isEmpty)
         tagsSeparator.setHidden(eventDetail.tags.isEmpty)
         
-        speakersLabel.setText("\(eventDetail.speakers.count) \(eventDetail.speakers.count == 1 ? "speaker" : "speakers")")
+        if eventDetail.speakers.count == 1 {
+            
+            speakersLabel.setText(eventDetail.speakers[0].name)
+            
+        } else {
+            
+            speakersLabel.setText("\(eventDetail.speakers.count) speakers")
+        }
+        
         speakersButton.setHidden(eventDetail.speakers.isEmpty)
         speakersSeparator.setHidden(eventDetail.speakers.isEmpty)
         
