@@ -15,7 +15,9 @@
                                 <tableRow identifier="MenuCell" id="IA4-KP-T2J" customClass="MenuCellController" customModule="OpenStackSummitWatch_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="meC-JV-Aaz">
                                         <items>
-                                            <imageView width="0.29999999999999999" alignment="left" verticalAlignment="center" image="events" contentMode="scaleAspectFit" id="OeV-BU-POb"/>
+                                            <imageView width="0.29999999999999999" alignment="left" verticalAlignment="center" image="events" contentMode="scaleAspectFit" id="OeV-BU-POb">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </imageView>
                                             <label width="0.69999999999999996" height="1" alignment="left" text="Events" textAlignment="center" id="1Tj-nK-wdi"/>
                                         </items>
                                         <color key="backgroundColor" red="0.11613068729639053" green="0.22861218452453613" blue="0.36147233843803406" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -194,7 +196,9 @@
                     <connections>
                         <outlet property="dateLabel" destination="gA1-TH-haI" id="KxF-Ai-vZ9"/>
                         <outlet property="descriptionLabel" destination="zwp-xa-74d" id="tX3-Xy-OdT"/>
+                        <outlet property="levelGroup" destination="PrT-NB-RRq" id="b2e-G8-gDY"/>
                         <outlet property="levelLabel" destination="UBY-wz-tyl" id="mhT-kg-fgJ"/>
+                        <outlet property="levelSeparator" destination="q3h-ay-HsD" id="Ega-n8-xfb"/>
                         <outlet property="locationButton" destination="gXB-y2-PaL" id="Vsy-MG-exr"/>
                         <outlet property="locationLabel" destination="LLc-Jh-a2O" id="ohh-5G-Esb"/>
                         <outlet property="locationSeparator" destination="Irp-kx-Xa2" id="MJ7-v8-mM7"/>
@@ -202,7 +206,9 @@
                         <outlet property="nameLabel" destination="hJd-4g-bkH" id="Cbp-0e-pAb"/>
                         <outlet property="speakersLabel" destination="Unr-Ib-VAW" id="qus-zx-dOd"/>
                         <outlet property="summitTypesLabel" destination="IjE-nD-ysd" id="72I-bu-cKi"/>
+                        <outlet property="tagsGroup" destination="qpB-jm-3ig" id="G02-nT-YLD"/>
                         <outlet property="tagsLabel" destination="gKa-Ku-3aW" id="RK3-4j-rrq"/>
+                        <outlet property="tagsSeparator" destination="j5G-Pv-oG8" id="2fA-3s-ZG8"/>
                     </connections>
                 </controller>
             </objects>
