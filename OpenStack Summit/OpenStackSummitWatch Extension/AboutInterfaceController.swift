@@ -51,11 +51,23 @@ final class AboutInterfaceController: WKInterfaceController {
     
     private func updateUI() {
         
-        let year = DateComponents(fromDate: Store.shared.cache!.start).year
+        // set summit info
         
-        let summitName = Store.shared.cache!.name + " " + "\(year)"
+        if let summit = Store.shared.cache {
+            
+            let year = DateComponents(fromDate: summit.start).year
+            
+            let summitName = summit.name + " " + "\(year)"
+            
+            summitNameLabel.setHidden(false)
+            summitNameLabel.setText(summitName)
+            
+        } else {
+            
+            summitNameLabel.setHidden(true)
+        }
         
-        summitNameLabel.setText(summitName)
+        // set version
         
         let version = "v\(AppVersion) \(AppBuild)"
         

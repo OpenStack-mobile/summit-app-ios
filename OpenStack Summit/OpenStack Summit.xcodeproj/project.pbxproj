@@ -2266,6 +2266,7 @@
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D $(CORESUMMIT_ENVIRONMENT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -2281,6 +2282,7 @@
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-D $(CORESUMMIT_ENVIRONMENT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -2296,6 +2298,7 @@
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-D $(CORESUMMIT_ENVIRONMENT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;

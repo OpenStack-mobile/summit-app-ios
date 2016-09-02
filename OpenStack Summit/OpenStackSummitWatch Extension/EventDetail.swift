@@ -85,7 +85,7 @@ public struct EventDetail {
                 speakers.append(speaker)
             }
             
-            if let moderator = event.presentation?.moderator {
+            if let moderator = event.presentation?.moderator where moderator != 0 {
                 
                 moderatorSpeaker = summit.speakers.firstMatching({ $0.identifier == moderator })!
             }
