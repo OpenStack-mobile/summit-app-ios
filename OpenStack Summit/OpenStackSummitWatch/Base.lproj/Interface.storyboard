@@ -393,8 +393,10 @@
                         <outlet property="capacitySeparator" destination="0AO-Of-mTM" id="LCP-q5-QaU"/>
                         <outlet property="descriptionLabel" destination="ZxM-b2-snu" id="KX9-gM-rjp"/>
                         <outlet property="descriptionSeparator" destination="7Hm-BY-hUq" id="kFz-On-zST"/>
+                        <outlet property="imagesActivityIndicator" destination="ZtF-pe-WSt" id="tHh-h6-6xb"/>
                         <outlet property="imagesButton" destination="daH-l7-kUa" id="bCH-EW-68s"/>
                         <outlet property="imagesView" destination="yk5-tP-799" id="1la-pq-cEI"/>
+                        <outlet property="mapImagesActivityIndicator" destination="kwX-ZJ-bxW" id="jZa-T2-MUN"/>
                         <outlet property="mapImagesButton" destination="pRF-VA-0N7" id="slz-Pz-i4f"/>
                         <outlet property="mapImagesView" destination="3iE-bR-3sR" id="Qc3-yg-qfj"/>
                         <outlet property="mapView" destination="WfF-o6-sWh" id="ucb-8B-XcI"/>

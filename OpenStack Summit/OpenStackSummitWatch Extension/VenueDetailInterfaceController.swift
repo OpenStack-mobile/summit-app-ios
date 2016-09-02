@@ -38,9 +38,13 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var imagesView: WKInterfaceImage!
     
+    @IBOutlet weak var imagesActivityIndicator: WKInterfaceImage!
+    
     @IBOutlet weak var mapImagesButton: WKInterfaceButton!
     
     @IBOutlet weak var mapImagesView: WKInterfaceImage!
+    
+    @IBOutlet weak var mapImagesActivityIndicator: WKInterfaceImage!
     
     // MARK: - Properties
     
@@ -148,11 +152,31 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         // set images
         if let image = venue.images.first,
-            let imageURL = NSURL(string: image.url),
-            let imageData = NSData(contentsOfURL: imageURL) {
+            let imageURL = NSURL(string: image.url) {
             
-            imagesView.setImageData(imageData)
-            imagesButton.setHidden(false)
+            // show activity indicator
+            imagesActivityIndicator.setImageNamed("Activity")
+            imagesActivityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+            imagesActivityIndicator.setHidden(false)
+            imagesView.setHidden(true)
+            
+            // load image
+            imagesView.loadCached(imageURL) { [weak self] (response) in
+                
+                guard let controller = self else { return }
+                
+                // hide activity indicator
+                controller.imagesActivityIndicator.setHidden(true)
+                
+                // hide image view if no image
+                guard case .Data = response else {
+                    
+                    controller.imagesView.setHidden(true)
+                    return
+                }
+                
+                controller.imagesView.setHidden(false)
+            }
             
         } else {
             
@@ -161,11 +185,31 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         // set map images
         if let image = venue.maps.first,
-            let imageURL = NSURL(string: image.url),
-            let imageData = NSData(contentsOfURL: imageURL) {
+            let imageURL = NSURL(string: image.url) {
             
-            mapImagesView.setImageData(imageData)
-            mapImagesView.setHidden(false)
+            // show activity indicator
+            mapImagesActivityIndicator.setImageNamed("Activity")
+            mapImagesActivityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+            mapImagesActivityIndicator.setHidden(false)
+            mapImagesView.setHidden(true)
+            
+            // load image
+            mapImagesView.loadCached(imageURL) { [weak self] (response) in
+                
+                guard let controller = self else { return }
+                
+                // hide activity indicator
+                controller.mapImagesActivityIndicator.setHidden(true)
+                
+                // hide image view if no image
+                guard case .Data = response else {
+                    
+                    controller.mapImagesView.setHidden(true)
+                    return
+                }
+                
+                controller.mapImagesView.setHidden(false)
+            }
             
         } else {
             
