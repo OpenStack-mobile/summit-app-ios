@@ -31,11 +31,19 @@ final class VenuesMapInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        /// set user activity
+        if let summit = Store.shared.cache {
+            
+            updateUserActivity(AppActivity.view.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/travel"))
+        }
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
+        invalidateUserActivity()
     }
     
     // MARK: - Private Methods
