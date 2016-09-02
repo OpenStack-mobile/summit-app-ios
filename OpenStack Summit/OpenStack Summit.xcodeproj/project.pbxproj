@@ -1128,7 +1128,7 @@
 				6E2CA1191D78658000405A40 /* MenuInterfaceController.swift */,
 				6E9B09CD1D78F121008383A4 /* AboutInterfaceController.swift */,
 				6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */,
-				6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */,
+				6EE208ED1D7A13CC004A772A /* Speakers */,
 				6E2CA1231D78805500405A40 /* Venues */,
 				6E2CA11D1D7876E700405A40 /* Events */,
 			);
@@ -1260,6 +1260,14 @@
 				6EDE521A1D42D46400DF4BEA /* AVFoundation.framework */,
 			);
 			name = "System Frameworks";
+			sourceTree = "<group>";
+		};
+		6EE208ED1D7A13CC004A772A /* Speakers */ = {
+			isa = PBXGroup;
+			children = (
+				6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */,
+			);
+			name = Speakers;
 			sourceTree = "<group>";
 		};
 		6EF147EC1D13579C00D5EEF9 /* View */ = {
