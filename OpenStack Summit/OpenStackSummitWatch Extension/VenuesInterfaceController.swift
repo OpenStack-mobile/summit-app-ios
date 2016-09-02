@@ -52,11 +52,19 @@ final class VenuesInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        /// set user activity
+        if let summit = Store.shared.cache {
+            
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/travel"))
+        }
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
+        invalidateUserActivity()
     }
     
     // MARK: - Segue
@@ -84,15 +92,34 @@ final class VenuesInterfaceController: WKInterfaceController {
             cell.addressLabel.setText(venue.fullAddress)
             
             if let image = venue.images.first,
-                let imageURL = NSURL(string: image.url),
-                let imageData = NSData(contentsOfURL: imageURL) {
+                let imageURL = NSURL(string: image.url) {
                 
-                cell.imageView.setHidden(false)
-                cell.imageView.setImageData(imageData)
+                // show activity indicator
+                cell.activityIndicator.setImageNamed("Activity")
+                cell.activityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+                cell.activityIndicator.setHidden(false)
+                cell.imageView.setHidden(true)
+                
+                // load image
+                cell.imageView.loadCached(imageURL) { (response) in
+                    
+                    // hide activity indicator
+                    cell.activityIndicator.setHidden(true)
+                    
+                    // hide image view if no image
+                    guard case .Data = response else {
+                        
+                        cell.imageView.setHidden(true)
+                        return
+                    }
+                    
+                    cell.imageView.setHidden(false)
+                }
                 
             } else {
                 
                 cell.imageView.setHidden(true)
+                cell.activityIndicator.setHidden(true)
             }
             
             // set header visibility
@@ -117,4 +144,6 @@ final class VenueCellController: NSObject {
     @IBOutlet weak var addressLabel: WKInterfaceLabel!
     
     @IBOutlet weak var imageView: WKInterfaceImage!
+    
+    @IBOutlet weak var activityIndicator: WKInterfaceImage!
 }
