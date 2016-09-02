@@ -30,11 +30,19 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var tagsLabel: WKInterfaceLabel!
     
+    @IBOutlet weak var tagsGroup: WKInterfaceGroup!
+    
+    @IBOutlet weak var tagsSeparator: WKInterfaceSeparator!
+    
     @IBOutlet weak var speakersLabel: WKInterfaceLabel!
     
     @IBOutlet weak var summitTypesLabel: WKInterfaceLabel!
     
     @IBOutlet weak var levelLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var levelGroup: WKInterfaceGroup!
+    
+    @IBOutlet weak var levelSeparator: WKInterfaceSeparator!
     
     @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
     
@@ -58,11 +66,19 @@ final class EventDetailInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        /// set user activity
+        let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
+                                AppActivityUserInfo.identifier.rawValue: eventDetail.identifier]
+        
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: eventDetail.webpageURL)
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
+        invalidateUserActivity()
     }
     
     // MARK: - Actions
@@ -92,9 +108,11 @@ final class EventDetailInterfaceController: WKInterfaceController {
         locationButton.setHidden(eventDetail.location.isEmpty)
         locationSeparator.setHidden(eventDetail.location.isEmpty)
         tagsLabel.setText(eventDetail.tags)
+        tagsGroup.setHidden(eventDetail.tags.isEmpty)
         speakersLabel.setText("\(eventDetail.speakers.count) \(eventDetail.speakers.count == 1 ? "speaker" : "speakers")")
         summitTypesLabel.setText(eventDetail.summitTypes)
         levelLabel.setText(eventDetail.level)
+        levelGroup.setHidden(eventDetail.level.isEmpty)
         
         if let descriptionText = eventDetail.descriptionText,
             let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
@@ -102,7 +120,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
             
             descriptionLabel.setText(attributedString.string)
             
-            descriptionLabel.setHidden(true)
+            descriptionLabel.setHidden(false)
             
         } else {
             

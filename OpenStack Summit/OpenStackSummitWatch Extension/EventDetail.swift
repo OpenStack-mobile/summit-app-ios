@@ -34,7 +34,7 @@ public struct EventDetail {
     public let level: String
     public let averageFeedback: Double?
     public let video: Video?
-    //public let webpageURL: NSURL
+    public let webpageURL: NSURL
     
     // MARK: - Initialization
     
@@ -96,7 +96,7 @@ public struct EventDetail {
         
         self.video = event.videos.filter({ $0.featured }).first
         
-        //self.webpageURL = NSURL(string: event.toWebpageURL(AppConfiguration, summit: Summit(realmEntity: event.summit)))!
+        self.webpageURL = NSURL(string: event.toWebpageURL(AppConfiguration, summit: summit))!
     }
 }
 
