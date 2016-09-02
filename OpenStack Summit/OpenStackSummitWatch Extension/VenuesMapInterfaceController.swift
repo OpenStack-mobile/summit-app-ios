@@ -35,7 +35,7 @@ final class VenuesMapInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.view.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/travel"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: AppConfiguration[.WebsiteURL] + "/" + summit.webIdentifier + "/travel"))
         }
     }
     
