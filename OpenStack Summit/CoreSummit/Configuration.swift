@@ -6,53 +6,30 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
-
-public struct Configuration {
+/// OpenStack Summit constants.
+public protocol Configuration {
     
-    // MARK: - Properties
+    /// URL of the REST server
+    static var serverURL: String { get }
     
-    public let environment: Environment
+    /// URL of the OpenStack ID server.
+    static var authenticationURL: String { get }
     
-    private let dictionary: [String: String]
+    static var openID: (client: String, secret: String) { get }
     
-    // MARK: - Initialization
+    static var serviceAccount: (client: String, secret: String) { get }
     
-    public init(_ environment: Environment) {
-        
-        self.environment = environment
-        
-        let resourceName = environment.rawValue
-        
-        let configFilePath: String! = NSBundle(identifier: BundleIdentifier)!.pathForResource(resourceName, ofType: "plist", inDirectory: "Configuration")
-        
-        let plist = NSDictionary(contentsOfURL: NSURL(fileURLWithPath: configFilePath))
-        
-        self.dictionary = plist as! [String: String]
-    }
-    
-    // MARK: - Methods
-    
-    public subscript(key: Key) -> String {
-        
-        guard let value = self.dictionary[key.rawValue]
-            else { fatalError("Value not found for key: \(key.rawValue)") }
-        
-        return value
-    }
+    /// OpenStack Summit Webpage URL.
+    static var webpageURL: String { get }
 }
 
-public extension Configuration {
+public extension Environment {
     
-    /// Configuration Keys
-    public enum Key: String {
+    var configuration: Configuration.Type {
         
-        case ServerURL
-        case AuthenticationURL
-        case ClientIDOpenID
-        case SecretOpenID
-        case ClientIDServiceAccount
-        case SecretServiceAccount
-        case WebsiteURL
+        switch self {
+        case .Staging: return CoreSummit.Staging.self
+        case .Production: return CoreSummit.Production.self
+        }
     }
 }

@@ -96,7 +96,7 @@ public struct EventDetail {
         
         self.video = event.videos.filter({ $0.featured }).first
         
-        self.webpageURL = NSURL(string: event.toWebpageURL(AppConfiguration, summit: summit))!
+        self.webpageURL = NSURL(string: event.toWebpageURL(AppEnvironment, summit: summit))!
     }
 }
 

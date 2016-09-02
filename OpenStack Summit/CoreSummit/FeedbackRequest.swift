@@ -27,7 +27,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
         
-        let URL = configuration[.ServerURL] + URI
+        let URL = environment.configuration.serverURL + URI
         
         let http = self.createHTTP(.ServiceAccount)
         
@@ -65,7 +65,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
         
-        let URL = configuration[.ServerURL] + URI
+        let URL = environment.configuration.serverURL + URI
         
         let http = self.createHTTP(.ServiceAccount)
         
@@ -109,7 +109,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)/events/\(event)/feedback"
         
-        let URL = configuration[.ServerURL] + URI
+        let URL = environment.configuration.serverURL + URI
         
         let http = self.createHTTP(.OpenIDJSON)
         

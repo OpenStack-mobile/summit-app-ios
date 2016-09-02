@@ -102,6 +102,6 @@ public struct EventDetail: RealmDecodable {
             self.video = nil
         }
         
-        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(AppConfiguration, summit: Summit(realmEntity: event.summit)))!
+        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(AppEnvironment, summit: Summit(realmEntity: event.summit)))!
     }
 }
