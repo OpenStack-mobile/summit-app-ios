@@ -20,6 +20,8 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var addressLabel: WKInterfaceLabel!
     
+    @IBOutlet weak var descriptionSeparator: WKInterfaceSeparator!
+    
     @IBOutlet weak var descriptionLabel: WKInterfaceLabel!
     
     @IBOutlet weak var capacityLabel: WKInterfaceLabel!
@@ -60,15 +62,28 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        let type: AppActivitySummitDataType
+        
+        switch location! {
+        case .venue: type = .venue
+        case .room: type = .venueRoom
+        }
+        
+        /// set user activity
+        let activityUserInfo = [AppActivityUserInfo.type.rawValue: type.rawValue,
+                                AppActivityUserInfo.identifier.rawValue: location.identifier]
+        
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: nil)
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
+        invalidateUserActivity()
     }
-    
-    
-    
+        
     // MARK: - Private Methods
     
     private func updateUI() {
@@ -98,6 +113,21 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         // set venue description
         descriptionLabel.setText(venue.descriptionText)
         descriptionLabel.setHidden(venue.descriptionText == nil)
+        descriptionSeparator.setHidden(venue.descriptionText == nil)
+        
+        if let descriptionText = venue.descriptionText,
+            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            
+            descriptionLabel.setText(attributedString.string)
+            descriptionLabel.setHidden(false)
+            descriptionSeparator.setHidden(false)
+            
+        } else {
+            
+            descriptionLabel.setHidden(true)
+            descriptionSeparator.setHidden(true)
+        }
         
         // address
         addressLabel.setText(venue.fullAddress)
@@ -115,5 +145,47 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         roomLabel.setText(room?.name)
         roomLabel.setHidden(room?.name == nil)
         roomSeparator.setHidden(room?.name == nil)
+        
+        // set images
+        if let image = venue.images.first,
+            let imageURL = NSURL(string: image.url),
+            let imageData = NSData(contentsOfURL: imageURL) {
+            
+            imagesView.setImageData(imageData)
+            imagesButton.setHidden(false)
+            
+        } else {
+            
+            imagesButton.setHidden(true)
+        }
+        
+        // set map images
+        if let image = venue.maps.first,
+            let imageURL = NSURL(string: image.url),
+            let imageData = NSData(contentsOfURL: imageURL) {
+            
+            mapImagesView.setImageData(imageData)
+            mapImagesView.setHidden(false)
+            
+        } else {
+            
+            mapImagesView.setHidden(true)
+        }
+        
+        // configure map
+        if let coordinates = venue.location {
+            
+            let center = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2))
+            
+            mapView.setHidden(false)
+            mapView.removeAllAnnotations()
+            mapView.addAnnotation(center, withPinColor: .Red)
+            mapView.setRegion(region)
+            
+        } else {
+            
+            mapView.setHidden(true)
+        }
     }
 }

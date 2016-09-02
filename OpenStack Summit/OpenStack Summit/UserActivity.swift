@@ -93,4 +93,3 @@ extension VenueRoom: AppActivitySummitData {
     
     static let activityDataType = AppActivitySummitDataType.venueRoom
 }
-
