@@ -388,6 +388,7 @@
                         <outlet property="capacityLabel" destination="hCw-mh-IJc" id="JJj-nh-4Vg"/>
                         <outlet property="capacitySeparator" destination="0AO-Of-mTM" id="LCP-q5-QaU"/>
                         <outlet property="descriptionLabel" destination="ZxM-b2-snu" id="KX9-gM-rjp"/>
+                        <outlet property="descriptionSeparator" destination="7Hm-BY-hUq" id="kFz-On-zST"/>
                         <outlet property="imagesButton" destination="daH-l7-kUa" id="bCH-EW-68s"/>
                         <outlet property="imagesView" destination="yk5-tP-799" id="1la-pq-cEI"/>
                         <outlet property="mapImagesButton" destination="pRF-VA-0N7" id="slz-Pz-i4f"/>
