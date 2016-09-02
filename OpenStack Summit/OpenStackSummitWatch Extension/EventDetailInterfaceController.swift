@@ -162,11 +162,10 @@ final class EventDetailInterfaceController: WKInterfaceController {
         }
         
         if let video = eventDetail.video,
-            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg"),
-            let data = NSData(contentsOfURL: url) {
+            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg") {
             
             moviePlayer.setHidden(false)
-            moviePlayer.setPosterImage(WKImage(imageData: data))
+            moviePlayer.loadCached(url)
             
         } else {
             
