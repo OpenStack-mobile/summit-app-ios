@@ -16,6 +16,8 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - IB Outlets
     
+    @IBOutlet weak var searchButton: WKInterfaceButton!
+    
     @IBOutlet weak var tableView: WKInterfaceTable!
     
     @IBOutlet weak var emptyLabel: WKInterfaceLabel!
@@ -28,6 +30,18 @@ final class SpeakersInterfaceController: WKInterfaceController {
     }
     
     // MARK: - Loading
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        // disable speaker search for selected speakers
+        if let speakers = (context as? Context<[PresentationSpeaker]>)?.value {
+            
+            searchButton.setHidden(true)
+            
+            self.speakers = speakers
+        }
+    }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
