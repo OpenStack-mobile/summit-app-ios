@@ -12,8 +12,6 @@ import CoreSummit
 
 final class EventsInterfaceController: WKInterfaceController {
     
-    typealias Filter = (Event) -> Bool
-    
     static let identifier = "Events"
     
     // MARK: - IB Outlets
@@ -22,7 +20,7 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private var events = [Event]()
+    private(set) var events = [Event]()
     
     private static let dateFormatter: NSDateFormatter = {
        
@@ -39,14 +37,9 @@ final class EventsInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        var filter: Filter = { _ in return true }
+        events = (context as? Context<[Event]>)?.value ?? Store.shared.cache!.schedule
         
-        if let context = context as? Context<Filter> {
-            
-            filter = context.value
-        }
-        
-        updateUI(filter)
+        updateUI()
     }
     
     override func willActivate() {
@@ -69,13 +62,7 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI(filter: Filter) {
-        
-        // filter events
-        
-        let allEvents = Store.shared.cache?.schedule ?? []
-        
-        events = allEvents.filter(filter)
+    private func updateUI() {
         
         // configure cells
         

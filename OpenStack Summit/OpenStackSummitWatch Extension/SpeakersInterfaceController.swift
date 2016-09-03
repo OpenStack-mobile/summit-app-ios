@@ -94,9 +94,16 @@ final class SpeakersInterfaceController: WKInterfaceController {
         }
     }
     
-    private func autosuggestions(for text: String) -> [String] {
+    /// Provide suggestions for the following language (e.g. `en-US`).
+    private func autosuggestions(for language: String) -> [String] {
         
-        //let firstNames = Store.shared.cache!.speakers.
+        /*
+        let firstNames = Store.shared.cache!.speakers.map({ $0.firstName })
+        
+        let lastNames = Store.shared.cache!.speakers.map({ $0.lastName })
+        
+        return firstNames + lastNames
+        */
         
         return []
     }
