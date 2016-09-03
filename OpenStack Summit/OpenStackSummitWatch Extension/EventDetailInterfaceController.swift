@@ -99,7 +99,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
             
         } else {
             
-            presentControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
+            pushControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
         }
     }
     
