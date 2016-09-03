@@ -48,7 +48,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     private(set) var speaker: PresentationSpeaker!
     
-    private lazy var eventCount: Int = Store.shared.cache?.schedule.filter({ $0.presentation?.speakers.contains(self.speaker.identifier) ?? false }).count ?? 0
+    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation?.speakers.contains(self.speaker.identifier) ?? false }) ?? []
     
     // MARK: - Loading
     
@@ -87,7 +87,16 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     @IBAction func showEvents(sender: AnyObject? = nil) {
         
-        
+        if events.count == 1 {
+            
+            let event = events[0]
+            
+            pushControllerWithName(EventDetailInterfaceController.identifier, context: Context(event))
+            
+        } else {
+            
+            pushControllerWithName(EventsInterfaceController.identifier, context: Context(events))
+        }
     }
     
     // MARK: - Private Functions
@@ -112,9 +121,9 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         ircGroup.setHidden(speaker.irc == nil)
         ircSeparator.setHidden(speaker.irc == nil)
         
-        eventsLabel.setText("\(eventCount) " + "\(eventCount == 1 ? "session" : "sessions")")
-        eventsButton.setHidden(eventCount == 0)
-        eventsSeparator.setHidden(eventCount == 0)
+        eventsLabel.setText("\(events.count) " + "\(events.count == 1 ? "session" : "sessions")")
+        eventsButton.setHidden(events.count == 0)
+        eventsSeparator.setHidden(events.count == 0)
         
         biographyLabel.setText(speaker.biography)
         biographyLabel.setHidden(speaker.biography == nil)
