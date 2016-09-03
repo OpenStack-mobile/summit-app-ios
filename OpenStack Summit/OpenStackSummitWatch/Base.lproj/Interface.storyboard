@@ -37,7 +37,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-39" y="-288"/>
+            <point key="canvasLocation" x="-101" y="-687"/>
         </scene>
         <!--Events-->
         <scene sceneID="kWW-JT-n7D">
@@ -89,7 +89,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="489" y="-288.5"/>
+            <point key="canvasLocation" x="477" y="-687"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -105,14 +105,14 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="-316" y="302"/>
+            <point key="canvasLocation" x="-420" y="-1052"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="OpenStackSummitWatch" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-32" y="302"/>
+            <point key="canvasLocation" x="-106" y="-1052"/>
         </scene>
         <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
@@ -220,7 +220,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="767" y="-386.75"/>
+            <point key="canvasLocation" x="797" y="-762.75"/>
         </scene>
         <!--Speaker-->
         <scene sceneID="pJ3-uM-b5Z">
@@ -292,7 +292,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="226" y="-645"/>
+            <point key="canvasLocation" x="477" y="-337"/>
         </scene>
         <!--Events-->
         <scene sceneID="fse-GJ-kiE">
@@ -311,7 +311,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="-288"/>
+            <point key="canvasLocation" x="164" y="-687"/>
         </scene>
         <!--Venues-->
         <scene sceneID="Ck2-DJ-p6d">
@@ -331,7 +331,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="3"/>
+            <point key="canvasLocation" x="164" y="65"/>
         </scene>
         <!--About-->
         <scene sceneID="wtg-XC-DHU">
@@ -358,7 +358,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="306"/>
+            <point key="canvasLocation" x="164" y="447.5"/>
         </scene>
         <!--Venues-->
         <scene sceneID="nPg-ND-1QP">
@@ -416,7 +416,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="497" y="196.75"/>
+            <point key="canvasLocation" x="477" y="196.75"/>
         </scene>
         <!--Venue-->
         <scene sceneID="XAf-57-7iO">
@@ -484,7 +484,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="767" y="252.5"/>
+            <point key="canvasLocation" x="797" y="252.5"/>
         </scene>
         <!--Image-->
         <scene sceneID="TdS-7b-TIy">
@@ -500,7 +500,57 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="1019" y="3"/>
+            <point key="canvasLocation" x="1065" y="3"/>
+        </scene>
+        <!--Speakers-->
+        <scene sceneID="bP1-g4-pJY">
+            <objects>
+                <controller identifier="Speakers" title="Speakers" id="Gig-cf-KFd" customClass="SpeakersInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <button alignment="left" id="mL6-8q-TMc">
+                            <group key="contentGroup" width="1" height="40" alignment="left" id="AIN-Fd-w0n">
+                                <items>
+                                    <imageView width="14" height="15" alignment="center" verticalAlignment="center" image="Search" contentMode="scaleAspectFit" id="xsu-hs-OQ3"/>
+                                    <label alignment="center" verticalAlignment="center" text=" Search" id="0sz-Hp-djT"/>
+                                </items>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </group>
+                            <connections>
+                                <action selector="search:" destination="Gig-cf-KFd" id="KSw-4A-8NG"/>
+                            </connections>
+                        </button>
+                        <table alignment="left" id="IiG-mw-hBn">
+                            <items>
+                                <tableRow identifier="SpeakerCell" id="rY5-Sh-MZY" customClass="SpeakerCellController" customModule="OpenStackSummitWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="9pw-BE-Vf5">
+                                        <items>
+                                            <label width="1" alignment="center" text="Alsey Coleman Miller" textAlignment="left" numberOfLines="0" id="wet-gO-nxG"/>
+                                            <label width="1" alignment="center" verticalAlignment="bottom" text="iOS Developer" textAlignment="left" numberOfLines="0" id="z5M-YO-Fys">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="Bld-LZ-5mS" kind="push" id="Agk-Ck-8nO"/>
+                                        </connections>
+                                    </group>
+                                    <connections>
+                                        <outlet property="nameLabel" destination="wet-gO-nxG" id="IFd-aY-cRg"/>
+                                        <outlet property="titleLabel" destination="z5M-YO-Fys" id="nL4-rG-y5m"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <label height="80" alignment="center" verticalAlignment="center" hidden="YES" text="No Speakers Found" textAlignment="center" numberOfLines="0" id="nmb-Zv-deo"/>
+                    </items>
+                    <connections>
+                        <outlet property="emptyLabel" destination="nmb-Zv-deo" id="tYT-o7-kJn"/>
+                        <outlet property="tableView" destination="IiG-mw-hBn" id="PdK-Sk-jIy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="164" y="-285"/>
         </scene>
     </scenes>
 </document>
