@@ -25,8 +25,6 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadData()
-        
         userActivity?.becomeCurrent()
     }
     
