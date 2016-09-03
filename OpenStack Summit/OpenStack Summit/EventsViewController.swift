@@ -115,7 +115,6 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         activeFilterIndicator = filter.hasActiveFilters()
         
         generalScheduleViewController.scheduleFilter = filter
-        generalScheduleViewController.loadData()
     }
     
     // MARK: - RevealTabStripViewController
