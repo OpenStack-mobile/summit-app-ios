@@ -1,7 +1,7 @@
 github "PureSwift/SwiftFoundation" "Swift.2.2"
 github "realm/realm-cocoa"
-github "ColemanCDA/aerogear-ios-http" "master"
-github "ColemanCDA/aerogear-ios-oauth2" "openstack"
+github "OpenStack-Mobile/aerogear-ios-http" "master"
+github "OpenStack-Mobile/aerogear-ios-oauth2" "openstack"
 github "icanzilb/SwiftSpinner" "master"
 github "xmartlabs/XLPagerTabStrip" ~> 5.0
 github "ColemanCDA/SWRevealViewController" "master"
