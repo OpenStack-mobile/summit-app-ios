@@ -99,11 +99,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
             
         } else {
             
-            let names = [String](count: eventDetail.speakers.count, repeatedValue: SpeakerDetailInterfaceController.identifier)
-            
-            let contexts = eventDetail.speakers.map { Context($0) }
-            
-            presentControllerWithNames(names, contexts: contexts)
+            presentControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
         }
     }
     

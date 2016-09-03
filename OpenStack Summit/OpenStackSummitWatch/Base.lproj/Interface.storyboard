@@ -546,6 +546,7 @@
                     </items>
                     <connections>
                         <outlet property="emptyLabel" destination="nmb-Zv-deo" id="tYT-o7-kJn"/>
+                        <outlet property="searchButton" destination="mL6-8q-TMc" id="bFj-oT-RTT"/>
                         <outlet property="tableView" destination="IiG-mw-hBn" id="PdK-Sk-jIy"/>
                     </connections>
                 </controller>
