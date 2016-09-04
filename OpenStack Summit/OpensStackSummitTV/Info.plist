@@ -30,5 +30,7 @@
 	</array>
 	<key>SummitEnvironment</key>
 	<string>$(CORESUMMIT_ENVIRONMENT)</string>
+	<key>CFBundleDisplayName</key>
+	<string>OpenStack Summit</string>
 </dict>
 </plist>
