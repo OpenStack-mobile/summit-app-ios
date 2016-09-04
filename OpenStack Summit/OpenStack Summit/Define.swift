@@ -16,7 +16,8 @@ public let AppVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVers
 /// Build of the app.
 public let AppBuild = Int(NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String)!
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
+    
 /// The app's environment.
 let AppEnvironment: Environment = {
     
@@ -27,6 +28,7 @@ let AppEnvironment: Environment = {
     
     return environment
 }()
+    
 #elseif os(watchOS)
     #if Production
     let AppEnvironment = Environment.Production

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
+import CoreSummit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // print app info
+        print("Launching OpenStack Summit (tvOS) v\(AppVersion) Build \(AppBuild)")
+        print("Using Environment: \(AppEnvironment.rawValue)")
+        
         return true
     }
 
