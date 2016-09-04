@@ -402,6 +402,7 @@
 		6EB752601D18AF2800BC294D /* MemberProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */; };
 		6EB752621D18B14C00BC294D /* MemberProfileIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */; };
 		6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752631D18B77300BC294D /* ErrorAlert.swift */; };
+		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
@@ -856,6 +857,7 @@
 		6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailViewController.swift; sourceTree = "<group>"; };
 		6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileIdentifier.swift; sourceTree = "<group>"; };
 		6EB752631D18B77300BC294D /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		6EBE00341D7CB6870091DDEB /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
@@ -1419,6 +1421,7 @@
 			isa = PBXGroup;
 			children = (
 				6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */,
+				6EBE00341D7CB6870091DDEB /* EventsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2686,6 +2689,7 @@
 				6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */,
 				6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */,
 				6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */,
+				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
 				6E74FB041D7CAFDB0018633D /* Define.swift in Sources */,
 				6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */,
 			);
