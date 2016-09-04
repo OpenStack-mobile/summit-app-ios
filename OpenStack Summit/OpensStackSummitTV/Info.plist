@@ -28,5 +28,7 @@
 	<array>
 		<string>arm64</string>
 	</array>
+	<key>SummitEnvironment</key>
+	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 </dict>
 </plist>
