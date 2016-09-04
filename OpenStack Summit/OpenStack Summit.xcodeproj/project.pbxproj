@@ -837,7 +837,7 @@
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
-		6E9F28EF1D7C903E002B7C7A /* OpensStackSummitTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpensStackSummitTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummitTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E9F28F61D7C903E002B7C7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E9F28F81D7C903E002B7C7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1074,7 +1074,7 @@
 				6E10A5001D1066E9008CBD0C /* CoreSummitTests */,
 				6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
-				6E9F28F01D7C903E002B7C7A /* OpensStackSummitTV */,
+				6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1093,7 +1093,7 @@
 				6E0B5F5B1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex */,
 				6E2924101D7AF8C900D14F0A /* CoreSummit.framework */,
 				6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */,
-				6E9F28EF1D7C903E002B7C7A /* OpensStackSummitTV.app */,
+				6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1463,7 +1463,7 @@
 			name = Configurations;
 			sourceTree = "<group>";
 		};
-		6E9F28F01D7C903E002B7C7A /* OpensStackSummitTV */ = {
+		6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */ = {
 			isa = PBXGroup;
 			children = (
 				6E74FAF71D7C9E9F0018633D /* Objective-C */,
@@ -1474,7 +1474,7 @@
 				6E9F28F81D7C903E002B7C7A /* Assets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
 			);
-			path = OpensStackSummitTV;
+			path = OpenStackSummitTV;
 			sourceTree = "<group>";
 		};
 		6EB699E31D3412B00095474D /* Protocols */ = {
@@ -1861,9 +1861,9 @@
 			productReference = 6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6E9F28EE1D7C903E002B7C7A /* OpensStackSummitTV */ = {
+		6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpensStackSummitTV" */;
+			buildConfigurationList = 6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */;
 			buildPhases = (
 				6E9F28EB1D7C903E002B7C7A /* Sources */,
 				6E9F28EC1D7C903E002B7C7A /* Frameworks */,
@@ -1879,9 +1879,9 @@
 				6E74FAEF1D7C96C50018633D /* PBXTargetDependency */,
 				6ECBD1DF1D7CB092004BF1A8 /* PBXTargetDependency */,
 			);
-			name = OpensStackSummitTV;
+			name = OpenStackSummitTV;
 			productName = OpensStackSummitTV;
-			productReference = 6E9F28EF1D7C903E002B7C7A /* OpensStackSummitTV.app */;
+			productReference = 6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1963,7 +1963,7 @@
 				6E0B5F1F1D77C8AB0005F6CE /* CoreSummitTests WatchOS */,
 				6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
-				6E9F28EE1D7C903E002B7C7A /* OpensStackSummitTV */,
+				6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */,
 			);
 		};
 /* End PBXProject section */
@@ -3682,7 +3682,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpensStackSummitTV" */ = {
+		6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E9F28FC1D7C903E002B7C7A /* Debug */,
