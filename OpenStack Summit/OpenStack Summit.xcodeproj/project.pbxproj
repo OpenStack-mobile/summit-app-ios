@@ -817,7 +817,7 @@
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
 		6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConsumerKey.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
-		6E74FAF81D7C9EBC0018633D /* OpensStackSummitTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpensStackSummitTV-Bridging-Header.h"; sourceTree = "<group>"; };
+		6E74FAF81D7C9EBC0018633D /* OpenStackSummitTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenStackSummitTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.h"; sourceTree = "<group>"; };
 		6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
 		6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
@@ -1437,7 +1437,7 @@
 		6E74FAF71D7C9E9F0018633D /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
-				6E74FAF81D7C9EBC0018633D /* OpensStackSummitTV-Bridging-Header.h */,
+				6E74FAF81D7C9EBC0018633D /* OpenStackSummitTV-Bridging-Header.h */,
 				6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */,
 				6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */,
 				6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */,
