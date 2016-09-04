@@ -145,7 +145,7 @@
             </objects>
             <point key="canvasLocation" x="728" y="3171"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Events-->
         <scene sceneID="jPk-D1-TqR">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="Rdv-8C-UGS" sceneMemberID="viewController">
@@ -153,14 +153,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" textLabel="cfW-6w-QC2" style="IBUITableViewCellStyleDefault" id="pxO-xV-8rQ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" textLabel="SPn-I2-lzW" style="IBUITableViewCellStyleDefault" id="pxO-xV-8rQ">
                                 <rect key="frame" x="0.0" y="199" width="1285" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pxO-xV-8rQ" id="6Of-rk-vxl">
                                     <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cfW-6w-QC2">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SPn-I2-lzW">
                                             <rect key="frame" x="20" y="0.0" width="1229" height="66"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
@@ -176,7 +176,7 @@
                             <outlet property="delegate" destination="Rdv-8C-UGS" id="iCK-eB-q6M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Dao-4L-BUR"/>
+                    <navigationItem key="navigationItem" title="Events" id="Dao-4L-BUR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6re-y2-oIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

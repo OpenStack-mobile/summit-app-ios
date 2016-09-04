@@ -12,17 +12,24 @@ import RealmSwift
 import CoreSummit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         // print app info
         print("Launching OpenStack Summit (tvOS) v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
+        
+        // always nuke cache
+        let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
+        
+        if NSFileManager.defaultManager().fileExistsAtPath(realmPath) {
+            
+            try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
+        }
         
         return true
     }

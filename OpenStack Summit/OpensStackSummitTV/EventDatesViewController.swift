@@ -134,6 +134,18 @@ final class EventDatesViewController: UITableViewController {
         
         return cell
     }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "showDayEvents": break
+            
+        default: fatalError("Unknown segue: \(segue)")
+        }
+    }
 }
 
 // MARK: - Supporting Types
