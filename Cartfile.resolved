@@ -19,5 +19,6 @@ github "OpenStack-Mobile/aerogear-ios-http" "702fc6fd2c3bd52a4a2e0daca54e291a9ae
 github "realm/realm-cocoa" "v1.0.2"
 github "ColemanCDA/AFHorizontalDayPicker" "290e3cf7b14ab872203e38f9ff6d4f3d839661a7"
 github "ParsePlatform/Parse-SDK-iOS-OSX" "1.14.2"
+github "OpenStack-Mobile/RealmResultsController" "88ea831748dc232f73f2802104a20dd34b446761"
 github "PureSwift/SwiftFoundation" "30f3f6e17a8644447b7e1fd26dad997f4999c548"
 github "OpenStack-Mobile/aerogear-ios-oauth2" "eed684cd43881d0ce4029984ee5a35e61202526a"
