@@ -10,6 +10,7 @@ github "ColemanCDA/MLPAutoCompleteTextField" "a0664c0e1d1225ce846f1e2be3c54d5eee
 github "mysterioustrousers/MTDates" "1.0.3"
 github "ColemanCDA/MTDates" "def729947a5f07d6440ce9b97f2761af299bc13c"
 github "mac-cain13/R.swift.Library" "v2.3.0"
+github "OpenStack-Mobile/RealmResultsController" "ddd93593c52843f8345454036c598dd061b466d2"
 github "ColemanCDA/SWRevealViewController" "c3113e1508597ee2d9ea7081d97caa5117dddf00"
 github "icanzilb/SwiftSpinner" "43228a8b6552f918a74046ce190ed4e4c5c21b77"
 github "0xced/XCDYouTubeKit" "2.5.3"
