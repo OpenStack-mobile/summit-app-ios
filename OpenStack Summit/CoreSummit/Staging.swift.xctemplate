@@ -1,0 +1,21 @@
+//
+//  Staging.swift
+//  OpenStack Summit
+//
+//  Created by Alsey Coleman Miller on 9/2/16.
+//  Copyright © 2016 OpenStack. All rights reserved.
+//
+
+/// The staging environment constants.
+public struct Staging: Configuration {
+    
+    public static let serverURL = "OpenStack Server URL"
+
+    public static let authenticationURL = "OpenStack ID URL"
+
+    public static let openID = (client: "OpenID Client", secret: "OpenStack Secret")
+
+    public static let serviceAccount = (client: "Service Account Client", secret: "Service Account Secret")
+
+    public static let webpageURL = "OpenStack Summit Website URL"
+}
