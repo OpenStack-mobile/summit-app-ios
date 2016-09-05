@@ -1,0 +1,15 @@
+//
+//  AppConsumerKey.swift
+//  OpenStack Summit
+//
+//  Created by Alsey Coleman Miller on 9/2/16.
+//  Copyright © 2016 OpenStack. All rights reserved.
+//
+
+/// Secret tokens the app uses for third-party frameworks.
+public struct AppConsumerKey {
+    
+    static let googleMaps = "Google Maps API Key"
+    
+    static let parse = (appID: "Parse App ID", clientKey: "Parse Client Key")
+}
