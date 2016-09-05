@@ -856,9 +856,6 @@
 		6EF1C8471D148C3C0060BF45 /* PeopleListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleListView.xib; sourceTree = "<group>"; };
 		6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
-		6EF2E97F1D7DE36F003F4290 /* AppConsumerKey.swift.xctemplate */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; path = AppConsumerKey.swift.xctemplate; sourceTree = "<group>"; };
-		6EF2E9811D7DE56D003F4290 /* Production.swift.xctemplate */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Production.swift.xctemplate; sourceTree = "<group>"; };
-		6EF2E9821D7DE584003F4290 /* Staging.swift.xctemplate */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Staging.swift.xctemplate; sourceTree = "<group>"; };
 		6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
 		6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeesForTicketOrderRequest.swift; sourceTree = "<group>"; };
 		6EF7AA1B1D74C24800790ED0 /* CoreSpotlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSpotlight.swift; sourceTree = "<group>"; };
@@ -1048,7 +1045,6 @@
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
 				6EF12C5E1D149B4B00814AD0 /* Define.swift */,
-				6EF2E97F1D7DE36F003F4290 /* AppConsumerKey.swift.xctemplate */,
 				6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */,
 				6E7E18E91D490DAC009549BA /* Preference.swift */,
 				6E8660B61D62001700359FA1 /* PushNotificationManager.swift */,
@@ -1366,9 +1362,7 @@
 			children = (
 				6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */,
 				6E6FD1761D7A1A15003D13D7 /* Production.swift */,
-				6EF2E9811D7DE56D003F4290 /* Production.swift.xctemplate */,
 				6E6FD1781D7A1A20003D13D7 /* Staging.swift */,
-				6EF2E9821D7DE584003F4290 /* Staging.swift.xctemplate */,
 			);
 			name = Configurations;
 			sourceTree = "<group>";
