@@ -7,13 +7,13 @@
         <!--Summit-->
         <scene sceneID="Zgy-jD-ymh">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="uTe-3Z-oFd" customClass="EventDatesViewController" customModule="OpensStackSummitTV" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EventDatesViewController" clearsSelectionOnViewWillAppear="NO" id="uTe-3Z-oFd" customClass="EventDatesViewController" customModule="OpenStackSummitTV" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="jzK-Pz-3b8">
                         <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDayTableViewCell" textLabel="THq-hM-8jz" style="IBUITableViewCellStyleDefault" id="EPR-Zu-vBc">
-                                <rect key="frame" x="0.0" y="199" width="634" height="66"/>
+                                <rect key="frame" x="0.0" y="199" width="594" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EPR-Zu-vBc" id="866-q3-iLl">
                                     <rect key="frame" x="0.0" y="0.0" width="618" height="66"/>
@@ -28,6 +28,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Rdv-8C-UGS" kind="showDetail" identifier="showDayEvents" id="Tg5-Uk-Dj5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -46,7 +49,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgW-4i-64B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="WVa-yf-6al" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="P2f-Aj-fy5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P2f-Aj-fy5">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -148,13 +151,13 @@
         <!--Events-->
         <scene sceneID="jPk-D1-TqR">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Rdv-8C-UGS" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EventsViewController" clearsSelectionOnViewWillAppear="NO" id="Rdv-8C-UGS" customClass="EventsViewController" customModule="OpenStackSummitTV" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="PfM-bq-JP8">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" textLabel="SPn-I2-lzW" style="IBUITableViewCellStyleDefault" id="pxO-xV-8rQ">
-                                <rect key="frame" x="0.0" y="199" width="1285" height="66"/>
+                                <rect key="frame" x="0.0" y="54" width="1285" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pxO-xV-8rQ" id="6Of-rk-vxl">
                                     <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
@@ -187,7 +190,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0W7-U3-Nwm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="TrE-S1-D6n" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ofZ-2p-wus">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ofZ-2p-wus">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -199,4 +202,7 @@
             <point key="canvasLocation" x="2567.5" y="-486"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Tg5-Uk-Dj5"/>
+    </inferredMetricsTieBreakers>
 </document>

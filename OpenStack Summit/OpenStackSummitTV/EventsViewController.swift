@@ -10,8 +10,9 @@ import UIKit
 import SwiftFoundation
 import CoreSummit
 import RealmSwift
+import RealmResultsController
 
-final class EventsViewController: UITableViewController {
+final class EventsViewController: UITableViewController, RealmResultsControllerDelegate {
     
     // MARK: - Properties
     
@@ -26,6 +27,8 @@ final class EventsViewController: UITableViewController {
         }
     }
     
+    private var resultsController: RealmResultsController<RealmSummitEvent, SummitEvent>?
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -38,7 +41,38 @@ final class EventsViewController: UITableViewController {
     
     private func updateUI() {
         
+        switch state {
+            
+        case let .empty(title, _ /* body */ ):
+            
+            resultsController = nil
+            
+            self.title = title
+            
+            // TODO: Set empty selection body
+            
+        case let .events(request):
+            
+            let resultsController = try! RealmResultsController(request: request, sectionKeyPath: nil, mapper: { SummitEvent(realmEntity: $0) })
+            
+            self.resultsController = resultsController
+            
+            resultsController.delegate = self
+            
+            resultsController.performFetch()
+            
+        }
+        
         tableView.reloadData()
+    }
+    
+    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+        
+        let event = resultsController!.objectAt(indexPath)
+        
+        assert(event.name.isEmpty == false, "Empty event name: \(event)")
+        
+        cell.textLabel!.text = event.name
     }
     
     // MARK: - UITableViewDataSource
@@ -50,7 +84,60 @@ final class EventsViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 0
+        return resultsController?.numberOfObjectsAt(section) ?? 0
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath)
+        
+        configure(cell: cell, at: indexPath)
+        
+        return cell
+    }
+    
+    // MARK: - RealmResultsControllerDelegate
+    
+    func willChangeResults(controller: AnyObject) {
+        
+        tableView.beginUpdates()
+    }
+    
+    func didChangeResults(controller: AnyObject) {
+        
+        tableView.endUpdates()
+    }
+    
+    func didChangeObject<U>(controller: AnyObject, object: U, oldIndexPath: NSIndexPath, newIndexPath: NSIndexPath, changeType: RealmResultsChangeType) {
+        
+        switch changeType {
+            
+        case .Insert:
+            
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+            
+        case .Delete:
+            
+            tableView.deleteRowsAtIndexPaths([oldIndexPath], withRowAnimation: .Automatic)
+            
+        case .Update:
+            
+            if let cell = tableView.cellForRowAtIndexPath(oldIndexPath) {
+                
+                configure(cell: cell, at: oldIndexPath)
+            }
+            
+        case .Move:
+            
+            tableView.deleteRowsAtIndexPaths([oldIndexPath], withRowAnimation: .Automatic)
+            
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+        }
+    }
+    
+    func didChangeSection<U>(controller: AnyObject, section: RealmSection<U>, index: Int, changeType: RealmResultsChangeType) {
+        
+        
     }
 }
 
@@ -62,6 +149,6 @@ extension EventsViewController {
         
         // The view controller needs to configured.
         case empty(String, String)
-        //case events(RealmRequest)
+        case events(RealmRequest<RealmSummitEvent>)
     }
 }

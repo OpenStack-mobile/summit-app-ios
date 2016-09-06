@@ -9,6 +9,8 @@
 import UIKit
 import SwiftFoundation
 import CoreSummit
+import RealmSwift
+import RealmResultsController
 
 final class EventDatesViewController: UITableViewController {
     
@@ -141,7 +143,24 @@ final class EventDatesViewController: UITableViewController {
         
         switch segue.identifier! {
             
-        case "showDayEvents": break
+        case "showDayEvents":
+            
+            guard case let .summit(start, _, _) = state
+                else { fatalError("Invalid state") }
+            
+            let indexPath = tableView.indexPathForSelectedRow!
+            
+            let selectedDate = start.toFoundation().mt_dateDaysAfter(indexPath.row)
+            
+            let endDate = selectedDate.mt_endOfCurrentDay()
+            
+            let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
+            
+            let request = RealmRequest<RealmSummitEvent>(predicate: predicate, realm: Store.shared.realm, sortDescriptors: RealmSummitEvent.sortProperties)
+            
+            let destinationViewController = segue.destinationViewController as! EventsViewController
+            
+            destinationViewController.state = .events(request)
             
         default: fatalError("Unknown segue: \(segue)")
         }
