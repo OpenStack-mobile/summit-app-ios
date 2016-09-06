@@ -29,7 +29,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Rdv-8C-UGS" kind="showDetail" identifier="showDayEvents" id="Tg5-Uk-Dj5"/>
+                                    <segue destination="TrE-S1-D6n" kind="showDetail" identifier="showDayEvents" id="meh-33-cQf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -157,7 +157,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" textLabel="SPn-I2-lzW" style="IBUITableViewCellStyleDefault" id="pxO-xV-8rQ">
-                                <rect key="frame" x="0.0" y="54" width="1285" height="66"/>
+                                <rect key="frame" x="0.0" y="199" width="1285" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pxO-xV-8rQ" id="6Of-rk-vxl">
                                     <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
@@ -172,6 +172,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="MRN-wS-dae" kind="show" identifier="showEventDetail" id="va3-E7-FVC"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -184,6 +187,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6re-y2-oIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4059.5" y="-486"/>
+        </scene>
+        <!--Event Name-->
+        <scene sceneID="rb5-4a-qAk">
+            <objects>
+                <tableViewController id="MRN-wS-dae" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="5aC-xC-aGD">
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2Hm-Ra-sF0">
+                                <rect key="frame" x="0.0" y="199" width="1285" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Hm-Ra-sF0" id="l1M-ar-7Og">
+                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NKf-Nm-dcF">
+                                <rect key="frame" x="0.0" y="279" width="1285" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NKf-Nm-dcF" id="JRx-k9-s8r">
+                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Haz-Cu-5wN">
+                                <rect key="frame" x="0.0" y="359" width="1285" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Haz-Cu-5wN" id="4mD-aU-As3">
+                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="MRN-wS-dae" id="LOz-hi-jbK"/>
+                            <outlet property="delegate" destination="MRN-wS-dae" id="1gt-py-zIA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Event Name" id="KJg-0J-tIZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1MZ-F1-nbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5766.5" y="-486"/>
+        </scene>
+        <!--Event Detail View Controller-->
+        <scene sceneID="Uyu-tt-2qW">
+            <objects>
+                <viewController id="AEX-L3-Dmr" customClass="EventDetailViewController" customModule="OpenStackSummitTV" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JOm-NE-REH"/>
+                        <viewControllerLayoutGuide type="bottom" id="qwT-LN-AVO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TaL-PM-mMI">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q7S-Lb-iru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7768" y="-486"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="45r-IJ-4HS">
@@ -203,6 +268,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tg5-Uk-Dj5"/>
+        <segue reference="meh-33-cQf"/>
     </inferredMetricsTieBreakers>
 </document>

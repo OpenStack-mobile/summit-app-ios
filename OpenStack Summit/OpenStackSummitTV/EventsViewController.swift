@@ -10,67 +10,44 @@ import UIKit
 import SwiftFoundation
 import CoreSummit
 import RealmSwift
-import RealmResultsController
 
-final class EventsViewController: UITableViewController, RealmResultsControllerDelegate {
+final class EventsViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var state: State = .empty("Events", "No selection") {
-        
-        didSet {
-            
-            if isViewLoaded() {
-                
-                updateUI()
-            }
-        }
-    }
+    var predicate = NSPredicate(value: false)
     
-    private var resultsController: RealmResultsController<RealmSummitEvent, SummitEvent>?
+    private var events = [Event]()
+    
+    private var notificationToken: NotificationToken!
     
     // MARK: - Loading
+    
+    deinit {
+        
+        notificationToken?.stop()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateUI()
+        
+        notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
     }
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
-        switch state {
-            
-        case let .empty(title, _ /* body */ ):
-            
-            resultsController = nil
-            
-            self.title = title
-            
-            // TODO: Set empty selection body
-            
-        case let .events(request):
-            
-            let resultsController = try! RealmResultsController(request: request, sectionKeyPath: nil, mapper: { SummitEvent(realmEntity: $0) })
-            
-            self.resultsController = resultsController
-            
-            resultsController.delegate = self
-            
-            resultsController.performFetch()
-            
-        }
+        events = Event.from(realm: Store.shared.realm.objects(RealmSummitEvent).filter(predicate))
         
         tableView.reloadData()
     }
     
     private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
         
-        let event = resultsController!.objectAt(indexPath)
-        
-        assert(event.name.isEmpty == false, "Empty event name: \(event)")
+        let event = events[indexPath.row]
         
         cell.textLabel!.text = event.name
     }
@@ -84,7 +61,7 @@ final class EventsViewController: UITableViewController, RealmResultsControllerD
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return resultsController?.numberOfObjectsAt(section) ?? 0
+        return events.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -96,59 +73,21 @@ final class EventsViewController: UITableViewController, RealmResultsControllerD
         return cell
     }
     
-    // MARK: - RealmResultsControllerDelegate
+    // MARK: - Segue
     
-    func willChangeResults(controller: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        tableView.beginUpdates()
-    }
-    
-    func didChangeResults(controller: AnyObject) {
-        
-        tableView.endUpdates()
-    }
-    
-    func didChangeObject<U>(controller: AnyObject, object: U, oldIndexPath: NSIndexPath, newIndexPath: NSIndexPath, changeType: RealmResultsChangeType) {
-        
-        switch changeType {
+        switch segue.identifier! {
             
-        case .Insert:
+        case "showEventDetail":
             
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+            let event = events[tableView.indexPathForSelectedRow!.row]
             
-        case .Delete:
+            let eventDetailViewController = segue.destinationViewController as! EventDetailViewController
             
-            tableView.deleteRowsAtIndexPaths([oldIndexPath], withRowAnimation: .Automatic)
+            eventDetailViewController.event = event.identifier
             
-        case .Update:
-            
-            if let cell = tableView.cellForRowAtIndexPath(oldIndexPath) {
-                
-                configure(cell: cell, at: oldIndexPath)
-            }
-            
-        case .Move:
-            
-            tableView.deleteRowsAtIndexPaths([oldIndexPath], withRowAnimation: .Automatic)
-            
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+        default: fatalError("Unknown segue: \(segue)")
         }
-    }
-    
-    func didChangeSection<U>(controller: AnyObject, section: RealmSection<U>, index: Int, changeType: RealmResultsChangeType) {
-        
-        
-    }
-}
-
-// MARK: - Supporting Types
-
-extension EventsViewController {
-    
-    enum State {
-        
-        // The view controller needs to configured.
-        case empty(String, String)
-        case events(RealmRequest<RealmSummitEvent>)
     }
 }
