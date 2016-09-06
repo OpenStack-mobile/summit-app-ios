@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="FQy-v2-oKC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Summit-->
@@ -173,7 +174,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="MRN-wS-dae" kind="show" identifier="showEventDetail" id="va3-E7-FVC"/>
+                                    <segue destination="tSK-J9-Pg7" kind="showDetail" identifier="showEventDetail" action="showViewController:sender:" id="QNp-il-d6r"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -186,69 +187,64 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6re-y2-oIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4059.5" y="-486"/>
+            <point key="canvasLocation" x="4155.5" y="-486"/>
         </scene>
-        <!--Event Name-->
-        <scene sceneID="rb5-4a-qAk">
+        <!--Event-->
+        <scene sceneID="V0A-ex-grv">
             <objects>
-                <tableViewController id="MRN-wS-dae" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="5aC-xC-aGD">
+                <viewController id="tSK-J9-Pg7" customClass="EventDetailViewController" customModule="OpenStackSummitTV" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6yM-xH-7GR"/>
+                        <viewControllerLayoutGuide type="bottom" id="xNt-m5-zQV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HZf-Fd-h7r">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2Hm-Ra-sF0">
-                                <rect key="frame" x="0.0" y="199" width="1285" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Hm-Ra-sF0" id="l1M-ar-7Og">
-                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NKf-Nm-dcF">
-                                <rect key="frame" x="0.0" y="279" width="1285" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NKf-Nm-dcF" id="JRx-k9-s8r">
-                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Haz-Cu-5wN">
-                                <rect key="frame" x="0.0" y="359" width="1285" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Haz-Cu-5wN" id="4mD-aU-As3">
-                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="MRN-wS-dae" id="LOz-hi-jbK"/>
-                            <outlet property="delegate" destination="MRN-wS-dae" id="1gt-py-zIA"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Event Name" id="KJg-0J-tIZ"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1MZ-F1-nbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5766.5" y="-486"/>
-        </scene>
-        <!--Event Detail View Controller-->
-        <scene sceneID="Uyu-tt-2qW">
-            <objects>
-                <viewController id="AEX-L3-Dmr" customClass="EventDetailViewController" customModule="OpenStackSummitTV" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JOm-NE-REH"/>
-                        <viewControllerLayoutGuide type="bottom" id="qwT-LN-AVO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TaL-PM-mMI">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="gLf-AW-5U0">
+                                <rect key="frame" x="20" y="145" width="1245" height="935"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventNameCell" textLabel="BXW-mc-qzr" style="IBUITableViewCellStyleDefault" id="5gk-Lw-bHX">
+                                        <rect key="frame" x="0.0" y="199" width="1245" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5gk-Lw-bHX" id="S0x-WE-Y2u">
+                                            <rect key="frame" x="0.0" y="0.0" width="1229" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BXW-mc-qzr">
+                                                    <rect key="frame" x="20" y="0.0" width="1189" height="66"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="tSK-J9-Pg7" id="BY5-cg-IuK"/>
+                                    <outlet property="delegate" destination="tSK-J9-Pg7" id="iCq-qC-r7e"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="gLf-AW-5U0" firstAttribute="top" secondItem="6yM-xH-7GR" secondAttribute="bottom" id="3F6-XJ-tIx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gLf-AW-5U0" secondAttribute="trailing" id="Dhq-j2-Ye9"/>
+                            <constraint firstItem="xNt-m5-zQV" firstAttribute="top" secondItem="gLf-AW-5U0" secondAttribute="bottom" id="rVh-oz-DT7"/>
+                            <constraint firstItem="gLf-AW-5U0" firstAttribute="leading" secondItem="HZf-Fd-h7r" secondAttribute="leadingMargin" id="xXj-Y5-c5W"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Event" id="xpj-tt-qAF"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="gLf-AW-5U0" id="Xkz-2x-5Bv"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q7S-Lb-iru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vAI-Nj-c0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7768" y="-486"/>
+            <point key="canvasLocation" x="5809.5" y="-486"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="45r-IJ-4HS">
