@@ -10,7 +10,6 @@ import UIKit
 import SwiftFoundation
 import CoreSummit
 import RealmSwift
-import RealmResultsController
 
 final class EventDatesViewController: UITableViewController {
     
@@ -156,11 +155,11 @@ final class EventDatesViewController: UITableViewController {
             
             let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
             
-            let request = RealmRequest<RealmSummitEvent>(predicate: predicate, realm: Store.shared.realm, sortDescriptors: RealmSummitEvent.sortProperties)
+            let destinationViewController = segue.destinationViewController as! UINavigationController
             
-            let destinationViewController = segue.destinationViewController as! EventsViewController
+            let eventsViewController = destinationViewController.topViewController as! EventsViewController
             
-            destinationViewController.state = .events(request)
+            eventsViewController.predicate = predicate
             
         default: fatalError("Unknown segue: \(segue)")
         }
