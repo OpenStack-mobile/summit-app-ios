@@ -26,7 +26,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     var scheduleFilter = ScheduleFilter.`default` {
         
-        didSet { self.loadData() }
+        didSet { let _ = self.view; self.loadData() }
     }
     
     private var pushRegisterInProgress = false
