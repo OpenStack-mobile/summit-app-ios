@@ -110,6 +110,54 @@ public extension Store {
         guard dataUpdate.className != .WipeData
             else { return false }
         
+        // add or remove to schedule
+        guard dataUpdate.className != .MySchedule else {
+            
+            // should only get for authenticated requests
+            guard let attendeeRole = self.authenticatedMember?.attendeeRole
+                else { return false }
+            
+            switch dataUpdate.operation {
+                
+            case .Insert:
+                
+                guard let entityJSON = dataUpdate.entity,
+                    case let .JSON(jsonObject) = entityJSON,
+                    let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
+                    else { return false }
+                
+                try! self.realm.write {
+                    
+                    let realmEvent = event.save(self.realm)
+                    
+                    if attendeeRole.scheduledEvents.indexOf("id = %@", event.identifier) == nil {
+                        
+                        attendeeRole.scheduledEvents.append(realmEvent)
+                    }
+                }
+                
+                return true
+                
+            case .Delete:
+                
+                guard let entityID = dataUpdate.entity,
+                    case let .Identifier(identifier) = entityID
+                    else { return false }
+                
+                try! self.realm.write {
+                    
+                    if let index = attendeeRole.scheduledEvents.indexOf("id = %@", identifier) {
+                        
+                        attendeeRole.scheduledEvents.removeAtIndex(index)
+                    }
+                }
+                
+                return true
+                
+            default: return false
+            }
+        }
+        
         /// we dont support all of the DataUpdate types, but thats ok
         guard let type = dataUpdate.className.type
             else { return true }
@@ -141,28 +189,11 @@ public extension Store {
         
         switch dataUpdate.className {
             
-        case .MySchedule:
-            
-            /*
-            guard let event = entity as? SummitEvent
-                else { return false }
-            
-            guard let attendeeRole
-            
-            try! self.realm.write {
-                let index = attendee.scheduledEvents.indexOf("id = %@", event.identifier)
-                if (index == nil) {
-                    attendee.scheduledEvents.append(event)
-                }
-            }*/
-            
-            return true
-            
         case .SummitLocationImage, .SummitLocationMap:
-            
+            /*
             guard let image = entity as? Image
                 else { return false }
-            
+            */
             return true
             
         default:

@@ -81,6 +81,8 @@ public final class DataUpdatePoller {
                         
                         //Crashlytics.sharedInstance().recordError(friendlyError)
                         
+                        print("Could not process data update: \(update)")
+                        
                         return
                     }
                     
