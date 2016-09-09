@@ -77,10 +77,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         SetAppearance()
                 
         // setup Google Maps
-        GMSServices.provideAPIKey(AppConsumerKey.googleMaps)
+        GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
         
         // setup Parse
-        Parse.setApplicationId(AppConsumerKey.parse.appID, clientKey: AppConsumerKey.parse.clientKey)
+        Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
         // notifications
         let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
