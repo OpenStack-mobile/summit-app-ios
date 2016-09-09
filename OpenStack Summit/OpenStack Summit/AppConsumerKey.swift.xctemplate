@@ -15,7 +15,7 @@ struct AppConsumerKey {
     
     let parse: (appID: String, clientKey: String)
     
-    init(environment: Environment) {
+    init(_ environment: Environment) {
         
         self.googleMaps = "Google Maps API Key"
         
