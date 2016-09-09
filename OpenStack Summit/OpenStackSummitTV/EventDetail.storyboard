@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Event-->
@@ -50,7 +51,7 @@
                                     <segue destination="FD6-bu-Rpe" kind="show" identifier="showTrackEvents" id="FuB-Gw-jrh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" id="PSI-Ha-JwH">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventTimeCell" id="PSI-Ha-JwH" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="427" width="1920" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PSI-Ha-JwH" id="lTj-k5-zSV">
@@ -63,21 +64,61 @@
                                                 <constraint firstAttribute="width" secondItem="PZA-ei-l2k" secondAttribute="height" id="xCl-Sp-DgV"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTD-8Q-B5N">
+                                            <rect key="frame" x="78" y="15" width="1754" height="35"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="centerY" secondItem="lTj-k5-zSV" secondAttribute="centerY" id="E2W-9G-d5P"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pTD-8Q-B5N" secondAttribute="trailing" constant="20" id="JeM-pj-d6h"/>
                                         <constraint firstItem="PZA-ei-l2k" firstAttribute="top" secondItem="lTj-k5-zSV" secondAttribute="top" constant="8" id="Lfd-4h-erX"/>
+                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="leading" secondItem="PZA-ei-l2k" secondAttribute="trailing" constant="20" id="hnW-Me-xh5"/>
                                         <constraint firstItem="PZA-ei-l2k" firstAttribute="leading" secondItem="lTj-k5-zSV" secondAttribute="leading" constant="8" id="vAH-a4-Qnd"/>
                                         <constraint firstAttribute="bottom" secondItem="PZA-ei-l2k" secondAttribute="bottom" constant="8" id="zPT-R2-POr"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailImageView" destination="PZA-ei-l2k" id="Btg-Ik-TQO"/>
+                                    <outlet property="titleLabel" destination="pTD-8Q-B5N" id="aMQ-Hg-eas"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" id="qok-Ya-SkY">
-                                <rect key="frame" x="0.0" y="507" width="1920" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventVideoCell" rowHeight="500" id="qok-Ya-SkY" customClass="VideoPlayerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="507" width="1920" height="500"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qok-Ya-SkY" id="rtb-QA-y5V">
-                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="500"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="crP-mC-Cr5">
+                                            <rect key="frame" x="928" y="218" width="64" height="64"/>
+                                        </activityIndicatorView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zo7-M0-Kvu">
+                                            <rect key="frame" x="20" y="20" width="1880" height="460"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="460" id="Yxb-Fa-Xkv"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqP-Cm-skb">
+                                            <rect key="frame" x="900" y="190" width="121" height="121"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Zo7-M0-Kvu" secondAttribute="trailing" constant="20" id="5u7-Ha-LfM"/>
+                                        <constraint firstItem="Zo7-M0-Kvu" firstAttribute="top" secondItem="rtb-QA-y5V" secondAttribute="top" constant="20" id="Jnr-6R-JXJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="Zo7-M0-Kvu" secondAttribute="bottom" constant="20" id="L9c-pe-aVI"/>
+                                        <constraint firstItem="ZqP-Cm-skb" firstAttribute="centerY" secondItem="rtb-QA-y5V" secondAttribute="centerY" id="Yxv-zf-mNa"/>
+                                        <constraint firstItem="ZqP-Cm-skb" firstAttribute="centerX" secondItem="rtb-QA-y5V" secondAttribute="centerX" id="tRW-F6-DRz"/>
+                                        <constraint firstItem="Zo7-M0-Kvu" firstAttribute="leading" secondItem="rtb-QA-y5V" secondAttribute="leading" constant="20" id="thb-iY-Ia1"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="crP-mC-Cr5" id="xr2-hu-L7E"/>
+                                    <outlet property="playImageView" destination="ZqP-Cm-skb" id="JwI-om-reV"/>
+                                    <outlet property="videoImageView" destination="Zo7-M0-Kvu" id="zFP-9y-skc"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -120,6 +161,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="play" width="121" height="121"/>
         <image name="time" width="30" height="30"/>
     </resources>
 </document>
