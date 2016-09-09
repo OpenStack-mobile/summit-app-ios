@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import CoreSummit
+import Haneke
+import XCDYouTubeKit
 
 @objc(OSSTVEventDetailViewController)
 final class EventDetailViewController: UITableViewController {
@@ -55,7 +57,13 @@ final class EventDetailViewController: UITableViewController {
             data.append(.track(eventDetail.track))
         }
         
+        data.append(.time(eventDetail.dateTime))
         
+        if let video = eventDetail.video,
+            let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
+            
+            data.append(.video(thumbnailURL))
+        }
         
         // reload table
         self.tableView.reloadData()
@@ -94,6 +102,46 @@ final class EventDetailViewController: UITableViewController {
             cell.textLabel!.text = name
             
             return cell
+            
+        case let .time(text):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("EventTimeCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            
+            cell.titleLabel!.text = text
+            
+            return cell
+            
+        case let .video(imageURL):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("EventVideoCell", forIndexPath: indexPath) as! VideoPlayerTableViewCell
+            
+            cell.videoImageView.hidden = true
+            cell.playImageView.hidden = true
+            cell.activityIndicator.hidden = false
+            
+            cell.videoImageView.hnk_setImageFromURL(imageURL, placeholder: nil, format: nil, failure: nil, success: { _ in
+                
+                cell.videoImageView.hidden = false
+                cell.playImageView.hidden = false
+                cell.activityIndicator.stopAnimating()
+            })
+            cell.videoImageView.hnk_setImageFromURL(imageURL)
+            
+            return cell
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let data = self.data[indexPath.row]
+        
+        switch data {
+            
+        case .video:
+            
+            self.playVideo(eventDetail.video!)
+            
+        default: break
         }
     }
     
@@ -106,7 +154,7 @@ final class EventDetailViewController: UITableViewController {
         case "showTrackEvents":
             
             let predicate = NSPredicate(format: "presentation.track.id == %@", eventCache.presentation!.track! as NSNumber)
-                        
+            
             let eventsViewController = segue.destinationViewController as! EventsViewController
             
             eventsViewController.predicate = predicate
@@ -124,5 +172,15 @@ private extension EventDetailViewController {
         
         case name(String)
         case track(String)
+        case time(String)
+        case video(NSURL)
+        
     }
+}
+
+final class VideoPlayerTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var videoImageView: UIImageView!
 }

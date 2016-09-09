@@ -279,7 +279,7 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         didSet {
             
             guard let identifier = youtubeVideo,
-                let youtubeVideoURL = NSURL(string: "http://img.youtube.com/vi/" + identifier + "/default.jpg") else {
+                let youtubeVideoURL = NSURL(youtubeThumbnial: identifier) else {
                 
                 self.videoPlayerView.hidden = true
                 self.videoPlayerImageView.image = nil
