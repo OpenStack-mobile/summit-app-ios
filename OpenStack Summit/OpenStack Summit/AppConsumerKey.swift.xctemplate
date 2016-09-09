@@ -6,10 +6,29 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import enum CoreSummit.Environment
+
 /// Secret tokens the app uses for third-party frameworks.
-public struct AppConsumerKey {
+struct AppConsumerKey {
     
-    static let googleMaps = "Google Maps API Key"
+    let googleMaps: String
     
-    static let parse = (appID: "Parse App ID", clientKey: "Parse Client Key")
+    let parse: (appID: String, clientKey: String)
+    
+    init(environment: Environment) {
+        
+        self.googleMaps = "Google Maps API Key"
+        
+        switch environment {
+            
+        case .Production:
+            
+            self.parse = (appID: "Parse Production App ID", clientKey: "Parse Production Client Key")
+            
+        case .Staging:
+            
+            self.parse = (appID: "Parse Staging App ID", clientKey: "Parse Staging Client Key")
+        }
+    }
 }
+
