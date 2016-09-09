@@ -31,6 +31,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
         }
         
+        // set appearance
+        SetAppearance()
+        
         return true
     }
 

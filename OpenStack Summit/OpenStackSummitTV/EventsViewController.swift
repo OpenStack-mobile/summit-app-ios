@@ -11,6 +11,7 @@ import SwiftFoundation
 import CoreSummit
 import RealmSwift
 
+@objc(OSSTVEventsViewController)
 final class EventsViewController: UITableViewController {
     
     // MARK: - Properties
@@ -83,7 +84,9 @@ final class EventsViewController: UITableViewController {
             
             let event = events[tableView.indexPathForSelectedRow!.row]
             
-            let eventDetailViewController = segue.destinationViewController as! EventDetailViewController
+            let navigationController = segue.destinationViewController as! UINavigationController
+            
+            let eventDetailViewController = navigationController.topViewController as! EventDetailViewController
             
             eventDetailViewController.event = event.identifier
             

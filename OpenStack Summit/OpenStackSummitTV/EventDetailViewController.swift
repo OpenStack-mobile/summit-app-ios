@@ -10,15 +10,14 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class EventDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    // MARK: - IB Outlets 
-    
-    @IBOutlet weak var tableView: UITableView!
+@objc(OSSTVEventDetailViewController)
+final class EventDetailViewController: UITableViewController {
     
     // MARK: - Properties
     
     var event: Identifier!
+    
+    private var eventCache: Event!
     
     private var eventDetail: EventDetail!
     
@@ -28,6 +27,9 @@ final class EventDetailViewController: UIViewController, UITableViewDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
         
         updateUI()
     }
@@ -41,28 +43,37 @@ final class EventDetailViewController: UIViewController, UITableViewDataSource, 
         guard let realmEvent = RealmSummitEvent.find(event, realm: Store.shared.realm)
             else { fatalError("Invalid event \(event)") }
         
+        self.eventCache = Event(realmEntity: realmEvent)
         self.eventDetail = EventDetail(realmEntity: realmEvent)
         
         self.data = [Detail]()
         
         data.append(.name(eventDetail.name))
         
+        if eventDetail.track.isEmpty == false {
+            
+            data.append(.track(eventDetail.track))
+        }
+        
+        
+        
+        // reload table
         self.tableView.reloadData()
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let detail = self.data[indexPath.row]
         
@@ -75,6 +86,32 @@ final class EventDetailViewController: UIViewController, UITableViewDataSource, 
             cell.textLabel!.text = name
             
             return cell
+            
+        case let .track(name):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("EventTrackCell", forIndexPath: indexPath)
+            
+            cell.textLabel!.text = name
+            
+            return cell
+        }
+    }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "showTrackEvents":
+            
+            let predicate = NSPredicate(format: "presentation.track.id == %@", eventCache.presentation!.track! as NSNumber)
+                        
+            let eventsViewController = segue.destinationViewController as! EventsViewController
+            
+            eventsViewController.predicate = predicate
+            
+        default: fatalError("Unknown segue: \(segue)")
         }
     }
 }
@@ -86,6 +123,6 @@ private extension EventDetailViewController {
     enum Detail {
         
         case name(String)
-        
+        case track(String)
     }
 }
