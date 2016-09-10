@@ -125,6 +125,9 @@ final class EventDatesViewController: UITableViewController {
         case let .summit(_, _, name):
             
             self.title = name
+            
+            self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .None)
+            self.performSegueWithIdentifier("showDayEvents", sender: self)
         }
     }
     
