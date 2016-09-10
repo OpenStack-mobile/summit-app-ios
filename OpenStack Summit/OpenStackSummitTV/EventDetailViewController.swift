@@ -115,17 +115,16 @@ final class EventDetailViewController: UITableViewController {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("EventVideoCell", forIndexPath: indexPath) as! VideoPlayerTableViewCell
             
-            cell.videoImageView.hidden = true
             cell.playImageView.hidden = true
             cell.activityIndicator.hidden = false
             
-            cell.videoImageView.hnk_setImageFromURL(imageURL, placeholder: nil, format: nil, failure: nil, success: { _ in
+            cell.videoImageView.hnk_setImageFromURL(imageURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
                 
-                cell.videoImageView.hidden = false
+                cell.videoImageView.image = image
                 cell.playImageView.hidden = false
                 cell.activityIndicator.stopAnimating()
+                cell.setNeedsDisplay()
             })
-            cell.videoImageView.hnk_setImageFromURL(imageURL)
             
             return cell
         }
@@ -137,7 +136,7 @@ final class EventDetailViewController: UITableViewController {
         
         switch data {
             
-        case .video:
+        case .video(_):
             
             self.playVideo(eventDetail.video!)
             
