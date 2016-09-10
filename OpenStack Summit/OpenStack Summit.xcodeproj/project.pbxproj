@@ -450,6 +450,8 @@
 		6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */; };
+		6EF0DB1D1D839B810013AAEC /* LoadSummitDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0DB1C1D839B810013AAEC /* LoadSummitDataViewController.swift */; };
+		6EF0DB1F1D839BBE0013AAEC /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF0DB1E1D839BBE0013AAEC /* Loading.storyboard */; };
 		6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */; };
 		6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
 		6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C511D1497E100814AD0 /* UIView+Border.swift */; };
@@ -910,6 +912,8 @@
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
 		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
+		6EF0DB1C1D839B810013AAEC /* LoadSummitDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadSummitDataViewController.swift; sourceTree = "<group>"; };
+		6EF0DB1E1D839BBE0013AAEC /* Loading.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
 		6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		6EF12C511D1497E100814AD0 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
@@ -1449,6 +1453,7 @@
 			children = (
 				6E1D51B71D8362AE007391A3 /* Extensions */,
 				6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */,
+				6EF0DB1C1D839B810013AAEC /* LoadSummitDataViewController.swift */,
 				6EBE00341D7CB6870091DDEB /* EventsViewController.swift */,
 				6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */,
 			);
@@ -1500,6 +1505,7 @@
 				6E74FAF71D7C9E9F0018633D /* Objective-C */,
 				6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */,
 				6E9F28F51D7C903E002B7C7A /* Main.storyboard */,
+				6EF0DB1E1D839BBE0013AAEC /* Loading.storyboard */,
 				6EB9B89B1D83482F00917077 /* Events.storyboard */,
 				6EB9B89D1D8348B000917077 /* EventDetail.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
@@ -2129,6 +2135,7 @@
 				6EB9B89E1D8348B000917077 /* EventDetail.storyboard in Resources */,
 				6EB9B89C1D83482F00917077 /* Events.storyboard in Resources */,
 				6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */,
+				6EF0DB1F1D839BBE0013AAEC /* Loading.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2723,6 +2730,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */,
+				6EF0DB1D1D839B810013AAEC /* LoadSummitDataViewController.swift in Sources */,
 				6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */,
 				6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */,
 				6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */,
