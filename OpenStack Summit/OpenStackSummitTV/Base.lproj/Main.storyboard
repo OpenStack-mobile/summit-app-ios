@@ -14,6 +14,16 @@
             </objects>
             <point key="canvasLocation" x="-47" y="-1122"/>
         </scene>
+        <!--Venues-->
+        <scene sceneID="kEb-Mo-Faa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Venues" id="wTD-oI-ERk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Venues" id="Ufc-Fn-euW"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hAp-J1-vkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-38" y="-965"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mKl-Mj-zgC">
             <objects>
@@ -25,108 +35,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="dNH-La-dHF"/>
-                        <segue destination="Tao-bl-bsk" kind="relationship" relationship="viewControllers" id="r8E-xT-FTd"/>
+                        <segue destination="wTD-oI-ERk" kind="relationship" relationship="viewControllers" id="ykk-Me-Z25"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTo-uj-EgU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1438" y="-587"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="lGW-66-4ym">
-            <objects>
-                <viewController id="Vc8-7m-oqS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FR2-3K-eT8"/>
-                        <viewControllerLayoutGuide type="bottom" id="dgE-Xa-krj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1IS-Qi-CvS">
-                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6PJ-lq-67V">
-                                <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
-                            </mapView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="6PJ-lq-67V" firstAttribute="leading" secondItem="1IS-Qi-CvS" secondAttribute="leading" id="7mT-jL-pf8"/>
-                            <constraint firstAttribute="trailing" secondItem="6PJ-lq-67V" secondAttribute="trailing" id="KiG-Pa-fXL"/>
-                            <constraint firstItem="dgE-Xa-krj" firstAttribute="top" secondItem="6PJ-lq-67V" secondAttribute="bottom" id="mEF-Z6-xPP"/>
-                            <constraint firstItem="6PJ-lq-67V" firstAttribute="top" secondItem="FR2-3K-eT8" secondAttribute="bottom" id="yb7-8T-Am5"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tpL-LZ-s66" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3665.5" y="673"/>
-        </scene>
-        <!--Venues-->
-        <scene sceneID="qWp-L0-hQl">
-            <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Tii-qp-sbv" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="TGT-Oy-zNq">
-                        <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="CHw-ed-jwO" style="IBUITableViewCellStyleDefault" id="fcu-ik-zeA">
-                                <rect key="frame" x="0.0" y="199" width="594" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fcu-ik-zeA" id="cXj-h7-yJC">
-                                    <rect key="frame" x="0.0" y="0.0" width="618" height="66"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Marriot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CHw-ed-jwO">
-                                            <rect key="frame" x="20" y="0.0" width="578" height="66"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Tii-qp-sbv" id="SEV-ka-lyF"/>
-                            <outlet property="delegate" destination="Tii-qp-sbv" id="ezC-hG-zii"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Venues" id="7sU-J6-Pdc"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lnG-os-Sr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4190" y="-467"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="kHm-il-Fr4">
-            <objects>
-                <navigationController id="aWZ-qW-uXC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="y8h-sJ-lAn">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Tii-qp-sbv" kind="relationship" relationship="rootViewController" id="uHj-FZ-AEW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wSU-VY-qeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3336" y="-471"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="dFr-z6-mss">
-            <objects>
-                <splitViewController storyboardIdentifier="SplitViewController" id="Tao-bl-bsk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="QYX-rc-eap"/>
-                    <connections>
-                        <segue destination="aWZ-qW-uXC" kind="relationship" relationship="masterViewController" id="wue-Qp-wJL"/>
-                        <segue destination="Vc8-7m-oqS" kind="relationship" relationship="detailViewController" id="Wfa-wC-yFZ"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rkc-jt-yMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarItem title="Venues" id="pdc-Vr-X2f"/>
-            </objects>
-            <point key="canvasLocation" x="1839" y="98"/>
         </scene>
     </scenes>
 </document>
