@@ -1965,6 +1965,7 @@
 					};
 					6E9F28EE1D7C903E002B7C7A = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 775U6X6R5M;
 					};
 					6EF12C601D149C2700814AD0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2209,6 +2210,7 @@
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearOAuth2.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/Rswift.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/Haneke.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
@@ -3540,11 +3542,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.OpensStackSummitTV;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
@@ -3560,11 +3563,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.OpensStackSummitTV;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
@@ -3579,11 +3583,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.OpensStackSummitTV;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
