@@ -20,7 +20,7 @@ final class RealmTests: XCTestCase {
         return try! Realm()
     }
     
-    func testSummit() {
+    func testAustinSummit() {
         
         let realm = createRealm("RealmTests_AustinSummit")
         

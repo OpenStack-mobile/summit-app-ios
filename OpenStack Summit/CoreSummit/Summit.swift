@@ -44,4 +44,6 @@ public struct Summit: Named {
     public var eventTypes: [EventType]
     
     public var schedule: [Event]
+    
+    public var webpageURL: String
 }

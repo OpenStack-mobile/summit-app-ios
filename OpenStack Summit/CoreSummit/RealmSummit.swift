@@ -15,6 +15,7 @@ public class RealmSummit: RealmNamed {
     public dynamic var timeZone = ""
     public dynamic var initialDataLoadDate = NSDate(timeIntervalSince1970: 1)
     public dynamic var startShowingVenuesDate = NSDate(timeIntervalSince1970: 1)
+    public dynamic var webpageURL = ""
     public let types = List<RealmSummitType>()
     public let ticketTypes = List<RealmTicketType>()
     public let venues = List<RealmVenue>()
@@ -38,6 +39,7 @@ extension Summit: RealmDecodable {
         self.start = Date(foundation: realmEntity.startDate)
         self.end = Date(foundation: realmEntity.endDate)
         self.timeZone = realmEntity.timeZone
+        self.webpageURL = realmEntity.webpageURL
         
         // relationships
         self.summitTypes = SummitType.from(realm: realmEntity.types)
@@ -77,6 +79,7 @@ extension Summit: RealmEncodable {
         realmEntity.endDate = end.toFoundation()
         realmEntity.timeZone = timeZone
         realmEntity.startShowingVenuesDate = startShowingVenues?.toFoundation() ?? Date(timeIntervalSince1970: 1).toFoundation()
+        realmEntity.webpageURL = webpageURL
         
         // relationships
         realmEntity.types.replace(with: summitTypes.save(realm))
