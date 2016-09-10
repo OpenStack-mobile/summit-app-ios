@@ -189,6 +189,7 @@
 		6E10A5AA1D106AD5008CBD0C /* SummitEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
+		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
 		6E1651941D84628200574CE5 /* VenuesDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1651931D84628200574CE5 /* VenuesDirectoryViewController.swift */; };
 		6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1651951D8462AE00574CE5 /* MapKit.framework */; };
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
@@ -770,6 +771,7 @@
 		6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEventExtensions.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
+		6E1651911D845E4F00574CE5 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
 		6E1651931D84628200574CE5 /* VenuesDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesDirectoryViewController.swift; sourceTree = "<group>"; };
 		6E1651951D8462AE00574CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
@@ -1533,6 +1535,7 @@
 				6E9F28F51D7C903E002B7C7A /* Main.storyboard */,
 				6EB9B89B1D83482F00917077 /* Events.storyboard */,
 				6EB9B89D1D8348B000917077 /* EventDetail.storyboard */,
+				6E1651911D845E4F00574CE5 /* Venues.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
 				6E74FAEB1D7C95E70018633D /* Controller */,
@@ -2159,6 +2162,7 @@
 			files = (
 				6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */,
 				6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */,
+				6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */,
 				6EB9B89E1D8348B000917077 /* EventDetail.storyboard in Resources */,
 				6EB9B89C1D83482F00917077 /* Events.storyboard in Resources */,
 				6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */,
