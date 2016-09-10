@@ -12,7 +12,7 @@ public extension Summit {
     
     enum JSONKey: String {
         
-        case id, name, start_date, end_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp
+        case id, name, start_date, end_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp, page_url
     }
 }
 
@@ -46,7 +46,8 @@ extension Summit: JSONDecodable {
             let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
             let events = SummitEvent.fromJSON(eventsJSONArray),
             let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
-            let eventTypes = EventType.fromJSON(eventTypesJSONArray)
+            let eventTypes = EventType.fromJSON(eventTypesJSONArray),
+            let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String
             else { return nil }
         
         self.identifier = identifier
@@ -63,11 +64,7 @@ extension Summit: JSONDecodable {
         self.eventTypes = eventTypes
         self.speakers = speakers
         self.sponsors = sponsors
-        
-        // in JSON but not in Realm
-        //self.timestamp = Date(timeIntervalSince1970: TimeInterval(timestamp))
-        //self.active = active
-        //self.sponsors = sponsors
+        self.webpageURL = webpageURL
         
         // optional values
         
