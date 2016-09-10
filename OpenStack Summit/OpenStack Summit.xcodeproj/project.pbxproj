@@ -3146,7 +3146,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CORESUMMIT_ENVIRONMENT = Staging;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
 					$SRCROOT/../Vendor,
@@ -3168,7 +3167,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CORESUMMIT_ENVIRONMENT = Production;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
 					$SRCROOT/../Vendor,
@@ -3460,7 +3458,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CORESUMMIT_ENVIRONMENT = Staging;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
 					$SRCROOT/../Vendor,
