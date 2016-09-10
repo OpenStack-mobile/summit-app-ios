@@ -50,19 +50,18 @@ final class EventDetailViewController: UITableViewController {
         
         self.data = [Detail]()
         
-        data.append(.name(eventDetail.name))
+        data.append(.name)
         
         if eventDetail.track.isEmpty == false {
             
-            data.append(.track(eventDetail.track))
+            data.append(.track)
         }
         
-        data.append(.time(eventDetail.dateTime))
+        data.append(.time)
         
-        if let video = eventDetail.video,
-            let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
+        if eventDetail.video != nil {
             
-            data.append(.video(thumbnailURL))
+            data.append(.video)
         }
         
         // reload table
@@ -87,44 +86,47 @@ final class EventDetailViewController: UITableViewController {
         
         switch detail {
             
-        case let .name(name):
+        case .name:
             
             let cell = tableView.dequeueReusableCellWithIdentifier("EventNameCell", forIndexPath: indexPath)
             
-            cell.textLabel!.text = name
+            cell.textLabel!.text = eventDetail.name
             
             return cell
             
-        case let .track(name):
+        case .track:
             
             let cell = tableView.dequeueReusableCellWithIdentifier("EventTrackCell", forIndexPath: indexPath)
             
-            cell.textLabel!.text = name
+            cell.textLabel!.text = eventDetail.track
             
             return cell
             
-        case let .time(text):
+        case .time:
             
             let cell = tableView.dequeueReusableCellWithIdentifier("EventTimeCell", forIndexPath: indexPath) as! DetailImageTableViewCell
             
-            cell.titleLabel!.text = text
+            cell.titleLabel!.text = eventDetail.dateTime
             
             return cell
             
-        case let .video(imageURL):
+        case .video:
             
             let cell = tableView.dequeueReusableCellWithIdentifier("EventVideoCell", forIndexPath: indexPath) as! VideoPlayerTableViewCell
             
             cell.playImageView.hidden = true
             cell.activityIndicator.hidden = false
             
-            cell.videoImageView.hnk_setImageFromURL(imageURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
+            if let thumbnailURL = NSURL(youtubeThumbnail: eventDetail.video!.youtube) {
                 
-                cell.videoImageView.image = image
-                cell.playImageView.hidden = false
-                cell.activityIndicator.stopAnimating()
-                cell.setNeedsDisplay()
-            })
+                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
+                    
+                    cell.videoImageView.image = image
+                    cell.playImageView.hidden = false
+                    cell.activityIndicator.stopAnimating()
+                    cell.setNeedsDisplay()
+                })
+            }
             
             return cell
         }
@@ -136,7 +138,7 @@ final class EventDetailViewController: UITableViewController {
         
         switch data {
             
-        case .video(_):
+        case .video:
             
             self.playVideo(eventDetail.video!)
             
@@ -169,11 +171,10 @@ private extension EventDetailViewController {
     
     enum Detail {
         
-        case name(String)
-        case track(String)
-        case time(String)
-        case video(NSURL)
-        
+        case name
+        case track
+        case time
+        case video
     }
 }
 
