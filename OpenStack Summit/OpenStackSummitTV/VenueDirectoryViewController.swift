@@ -1,5 +1,5 @@
 //
-//  VenuesDirectoryViewController.swift
+//  VenueDirectoryViewController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 9/10/16.
@@ -11,8 +11,8 @@ import SwiftFoundation
 import CoreSummit
 import RealmSwift
 
-@objc(OSSTVVenuesDirectoryViewController)
-final class VenuesDirectoryViewController: UITableViewController {
+@objc(OSSTVVenueDirectoryViewController)
+final class VenueDirectoryViewController: UITableViewController {
     
     // MARK: - Properties
     
@@ -22,7 +22,18 @@ final class VenuesDirectoryViewController: UITableViewController {
     
     private var notificationToken: NotificationToken!
     
+    private var mapViewController: VenueMapViewController!
+    
+    private var lastSelectedIndexPath: NSIndexPath?
+    
+    private let delayedSeguesOperationQueue = NSOperationQueue()
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        notificationToken?.stop()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +55,9 @@ final class VenuesDirectoryViewController: UITableViewController {
         updateUI()
         
         notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
+        
+        // show map view controller
+        performSegueWithIdentifier("showVenueMap", sender: self)
     }
     
     // MARK: - Private Methods
@@ -111,14 +125,73 @@ final class VenuesDirectoryViewController: UITableViewController {
         case .External: return "External Venues"
         }
     }
+        
+    override func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+        // Check that the next focus view is a child of the table view.
+        guard let nextFocusedView = context.nextFocusedView where nextFocusedView.isDescendantOfView(tableView) else { return }
+        guard let indexPath = context.nextFocusedIndexPath else { return }
+        
+        // Cancel any previously queued segues.
+        delayedSeguesOperationQueue.cancelAllOperations()
+        
+        // Create an `NSBlockOperation` to perform the detail segue after a delay.
+        let performSegueOperation = NSBlockOperation()
+        
+        performSegueOperation.addExecutionBlock { [weak self, unowned performSegueOperation] in
+            
+            guard let controller = self else { return }
+            
+            // Pause the block so the segue isn't immediately performed.
+            NSThread.sleepForTimeInterval(0.1)
+            
+            /*
+             Check that the operation wasn't cancelled and that the segue identifier
+             is different to the last performed segue identifier.
+             */
+            guard performSegueOperation.cancelled == false
+                && indexPath != controller.lastSelectedIndexPath
+                else { return }
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                // Record the last performed segue identifier.
+                controller.lastSelectedIndexPath = indexPath
+                
+                /*
+                 Select the focused cell so that the table view visibly reflects
+                 which detail view is being shown.
+                 */
+                let selectedVenue = controller[indexPath]
+                
+                if selectedVenue.location != nil {
+                    
+                    controller.mapViewController.selectedVenue = selectedVenue.identifier
+                }
+            }
+        }
+        
+        delayedSeguesOperationQueue.addOperation(performSegueOperation)
+    }
     
     // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "showVenueMap":
+            
+            self.mapViewController = segue.destinationViewController as! VenueMapViewController
+            
+        default: fatalError("Unknown segue: \(segue)")
+        }
+    }
 }
 
 
 // MARK: - Supporting Types
 
-private extension VenuesDirectoryViewController {
+private extension VenueDirectoryViewController {
     
     enum Section: Int {
         
