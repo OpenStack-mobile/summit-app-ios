@@ -18,6 +18,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcb-3N-1uw">
                                 <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                                <connections>
+                                    <outlet property="delegate" destination="lcu-1G-wrV" id="ntx-1V-jbZ"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <constraints>
@@ -60,6 +63,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="OJy-TR-RAG" kind="presentation" identifier="showVenueDetail" modalPresentationStyle="pageSheet" id="tG1-bx-OcB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -75,6 +81,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0N-fG-iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1288" y="-651"/>
+        </scene>
+        <!--VenueDetail-->
+        <scene sceneID="mVH-3M-frX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="VenueDetail" id="OJy-TR-RAG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x62-Bp-qme" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1913.5" y="-981"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f5J-5i-H6v">

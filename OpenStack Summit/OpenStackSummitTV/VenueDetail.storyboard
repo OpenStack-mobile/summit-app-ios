@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="xgy-wu-B4g">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Venue Name-->
+        <scene sceneID="QBO-6f-1ZI">
+            <objects>
+                <tableViewController id="8fs-nb-QSc" customClass="OSSTVVenueDetailViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="ChR-Sf-IEA">
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventLocationCell" editingAccessoryType="disclosureIndicator" rowHeight="80" id="XE2-MM-wDU" userLabel="VenueLocationCell" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="199" width="1285" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XE2-MM-wDU" id="5Aq-NW-wuu">
+                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="Unp-iu-tEt">
+                                            <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="Unp-iu-tEt" secondAttribute="height" id="iOC-Yq-S1L"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDh-g3-DpY">
+                                            <rect key="frame" x="92" y="20" width="1165" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="TDh-g3-DpY" secondAttribute="bottom" constant="20" id="Mk0-le-Zvp"/>
+                                        <constraint firstItem="TDh-g3-DpY" firstAttribute="top" secondItem="5Aq-NW-wuu" secondAttribute="top" constant="20" id="XXl-e1-leh"/>
+                                        <constraint firstItem="Unp-iu-tEt" firstAttribute="leading" secondItem="5Aq-NW-wuu" secondAttribute="leading" constant="8" id="cFV-3p-mfn"/>
+                                        <constraint firstItem="TDh-g3-DpY" firstAttribute="centerY" secondItem="5Aq-NW-wuu" secondAttribute="centerY" id="kDL-zl-t9N"/>
+                                        <constraint firstItem="Unp-iu-tEt" firstAttribute="top" secondItem="5Aq-NW-wuu" secondAttribute="top" constant="8" id="pTg-km-RXW"/>
+                                        <constraint firstItem="TDh-g3-DpY" firstAttribute="leading" secondItem="Unp-iu-tEt" secondAttribute="trailing" constant="20" id="qBc-3f-w2Z"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="TDh-g3-DpY" secondAttribute="trailing" constant="20" id="uwt-ra-0Rx"/>
+                                        <constraint firstAttribute="bottom" secondItem="Unp-iu-tEt" secondAttribute="bottom" constant="8" id="xWg-cq-Rfh"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailImageView" destination="Unp-iu-tEt" id="yDA-9N-hha"/>
+                                    <outlet property="titleLabel" destination="TDh-g3-DpY" id="b0m-FP-TqY"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDescriptionCell" textLabel="SEC-CV-I5b" rowHeight="100" style="IBUITableViewCellStyleDefault" id="Q11-rD-SBD" userLabel="VenueDescriptionCell">
+                                <rect key="frame" x="0.0" y="293" width="1285" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q11-rD-SBD" id="6ud-7S-Xdr">
+                                    <rect key="frame" x="0.0" y="0.0" width="1269" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Event Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SEC-CV-I5b">
+                                            <rect key="frame" x="20" y="0.0" width="1229" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8fs-nb-QSc" id="YtZ-g8-vmI"/>
+                            <outlet property="delegate" destination="8fs-nb-QSc" id="IJk-Rc-Id4"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Venue Name" id="ZM9-sP-zyH"/>
+                    <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZ3-4l-bFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="423" y="226"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jcC-Wv-S0B">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tjV-YZ-9bZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="xgy-wu-B4g" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VFR-Yo-Oh4">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8fs-nb-QSc" kind="relationship" relationship="rootViewController" id="0cc-Gl-Gpa"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-1717" y="226"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="map_pin" width="26" height="33"/>
+    </resources>
+</document>
