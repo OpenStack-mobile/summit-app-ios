@@ -67,7 +67,7 @@
                                                 <constraint firstAttribute="height" constant="460" id="Yxb-Fa-Xkv"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqP-Cm-skb">
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="play" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqP-Cm-skb">
                                             <rect key="frame" x="900" y="190" width="121" height="121"/>
                                         </imageView>
                                     </subviews>
