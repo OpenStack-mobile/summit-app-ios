@@ -50,6 +50,10 @@ final class VenuesDirectoryViewController: UITableViewController {
     
     private func updateUI() {
         
+        let dataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
+        
+        self.title = dataLoaded ? "Venues" : "Loading..."
+        
         self.internalVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.isInternal }
         self.externalVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.isInternal == false }
         
@@ -70,7 +74,9 @@ final class VenuesDirectoryViewController: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return Section.count
+        let dataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
+        
+        return dataLoaded ? Section.count : 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,6 +98,18 @@ final class VenuesDirectoryViewController: UITableViewController {
         cell.textLabel!.text = venue.name
         
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        let section = Section(rawValue: section)!
+        
+        switch section {
+        case .Internal: return nil
+        case .External: return "External Venues"
+        }
     }
     
     // MARK: - Segue
