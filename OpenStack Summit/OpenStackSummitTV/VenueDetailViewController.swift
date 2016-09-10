@@ -39,6 +39,11 @@ final class VenueDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
+        tableView.layoutMargins.left = 90
+        tableView.layoutMargins.right = 90
+        
         updateUI()
     }
     
@@ -62,7 +67,35 @@ final class VenueDetailViewController: UITableViewController {
         
         self.title = room == nil ? venue.name : venue.name + " - " + room!.name
         
+        data = []
         
+        if room != nil {
+            
+            data.append(.room)
+        }
+        
+        if venue.fullAddress.isEmpty == false {
+            
+            data.append(.address)
+        }
+        
+        if venue.images.isEmpty == false {
+            
+            data.append(.images)
+        }
+        
+        if venue.maps.isEmpty == false {
+            
+            data.append(.mapImages)
+        }
+        
+        if venue.descriptionText != nil {
+            
+            data.append(.description)
+        }
+        
+        // reload table view
+        tableView.reloadData()
     }
     
     // MARK: - UITableViewDataSource
@@ -70,6 +103,82 @@ final class VenueDetailViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return data.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let data = self.data[indexPath.row]
+        
+        switch data {
+            
+        case .room:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            
+            let room = location.rawValue as! VenueRoom
+            
+            cell.textLabel!.text = room.name
+            
+            cell.accessoryType = .None
+            
+            return cell
+            
+        case .address:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("VenueLocationCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            
+            cell.titleLabel.text = venue.fullAddress
+            
+            return cell
+            
+        case .images:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            
+            cell.textLabel!.text = venue.images.count == 1 ? "View Image" : "\(venue.images.count) images"
+            
+            cell.accessoryType = .DisclosureIndicator
+            
+            return cell
+            
+        case .mapImages:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            
+            cell.textLabel!.text = venue.maps.count == 1 ? "View Map Image" : "\(venue.images.count) map images"
+            
+            cell.accessoryType = .DisclosureIndicator
+            
+            return cell
+            
+        case .description:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("VenueTextCell", forIndexPath: indexPath)
+            
+            let text: String
+            
+            if let descriptionText = venue.descriptionText,
+                let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                
+                text = attributedString.string
+                
+            } else {
+                
+                text = ""
+            }
+            
+            cell.textLabel!.text = text
+            
+            cell.accessoryType = .None
+            
+            return cell
+        }
     }
 }
 
@@ -79,10 +188,10 @@ private extension VenueDetailViewController {
     
     enum Detail {
         
-        case description
-        case address
         case room
+        case address
         case images
         case mapImages
+        case description
     }
 }
