@@ -183,6 +183,12 @@ final class VenueDirectoryViewController: UITableViewController {
             
             self.mapViewController = segue.destinationViewController as! VenueMapViewController
             
+        case "showVenueDetail":
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            
+            let venueDetailViewController = navigationController.topViewController as! VenueDetailViewController
+            
         default: fatalError("Unknown segue: \(segue)")
         }
     }

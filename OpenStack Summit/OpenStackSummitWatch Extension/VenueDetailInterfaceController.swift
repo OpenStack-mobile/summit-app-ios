@@ -136,10 +136,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
             
         case let .room(room):
             
-            guard let venue = Store.shared.cache?.locations.with(room.venue)?.rawValue as? Venue
-                else { fatalError("Invalid venue \(room.venue)") }
-            
-            configureView(for: venue, room: room)
+            configureView(for: self.venue, room: room)
         }
     }
     

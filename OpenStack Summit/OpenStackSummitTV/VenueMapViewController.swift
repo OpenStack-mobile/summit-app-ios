@@ -22,6 +22,8 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Properties
     
+    weak var delegate: VenueMapViewControllerDelegate?
+    
     var selectedVenue: Identifier? {
         
         didSet { showSelectedVenue() }
@@ -76,10 +78,21 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - MKMapViewDelegate
     
-    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        
+        let annotation = view.annotation as! VenueAnnotation
+        
+        delegate?.venueMapViewController(self, didSelectVenue: annotation.venue)
+    }
 }
 
 // MARK: - Supporting Types
+
+protocol VenueMapViewControllerDelegate: class {
+    
+    /// Informs the delegate that the venue selection has changed via the Map interface.
+    func venueMapViewController(controller: VenueMapViewController, didSelectVenue venue: Identifier)
+}
 
 final class VenueAnnotation: NSObject, MKAnnotation {
     
@@ -89,15 +102,16 @@ final class VenueAnnotation: NSObject, MKAnnotation {
     
     let coordinate: CLLocationCoordinate2D
     
+    let venue: Identifier
+    
     init?(venue: Venue) {
         
         guard let location = venue.location
             else { return nil }
         
-        coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-        
-        title = venue.name
-        
-        subtitle = venue.fullAddress
+        self.title = venue.name
+        self.subtitle = venue.fullAddress
+        self.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+        self.venue = venue.identifier
     }
 }
