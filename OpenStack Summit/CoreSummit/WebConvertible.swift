@@ -18,7 +18,7 @@ public extension WebConvertible {
     
     func toWebpageURL(environment: Environment, summit: Summit) -> String {
         
-        return  environment.configuration.webpageURL + "/" + summit.webIdentifier + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
+        return environment.configuration.webpageURL + "/" + summit.webIdentifier + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
     }
 }
 

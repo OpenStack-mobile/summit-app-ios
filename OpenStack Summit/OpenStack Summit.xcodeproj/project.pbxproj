@@ -189,9 +189,15 @@
 		6E10A5AA1D106AD5008CBD0C /* SummitEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
+		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
+		6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */; };
+		6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1651951D8462AE00574CE5 /* MapKit.framework */; };
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
 		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1BB01D1D36F1D000F9F95F /* FeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */; };
+		6E1D51B21D835832007391A3 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D51B11D835832007391A3 /* DetailImageTableViewCell.swift */; };
+		6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
+		6E1D51B61D8362A9007391A3 /* PlayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D51B51D8362A9007391A3 /* PlayVideo.swift */; };
 		6E24FDE41D47CE290005EB14 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */; };
 		6E25291E1D58E6F200173B1F /* DataUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */; };
 		6E2529201D591C2D00173B1F /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
@@ -356,12 +362,22 @@
 		6E570A401D67792A00189992 /* RealmEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */; };
 		6E570A421D67797B00189992 /* RealmPresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
+		6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6964351D84846B00BA576E /* VenueMapViewController.swift */; };
+		6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6964381D84993300BA576E /* VenueDetail.storyboard */; };
+		6E69643B1D849D0000BA576E /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */; };
 		6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
 		6E6FD17A1D7A1A24003D13D7 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
 		6E6FD17B1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
 		6E6FD17C1D7A1A24003D13D7 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
 		6E6FD17D1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
 		6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */; };
+		6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */; };
+		6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */; };
+		6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */; };
+		6E74FB011D7CA7030018633D /* NSDate+MTDates.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */; };
+		6E74FB021D7CA7030018633D /* NSDateComponents+MTDates.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */; };
+		6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752631D18B77300BC294D /* ErrorAlert.swift */; };
+		6E74FB041D7CAFDB0018633D /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
 		6E7E18EA1D490DAC009549BA /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E18E91D490DAC009549BA /* Preference.swift */; };
 		6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */; };
 		6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */; };
@@ -378,6 +394,12 @@
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
+		6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
+		6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */; };
+		6E9CDB061D7E72B60010D1E1 /* SummitEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */; };
+		6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */; };
+		6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F51D7C903E002B7C7A /* Main.storyboard */; };
+		6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */; };
 		6EA062A11D63AD09009538CE /* RealmVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA062A01D63AD09009538CE /* RealmVideo.swift */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
@@ -392,6 +414,13 @@
 		6EB752601D18AF2800BC294D /* MemberProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */; };
 		6EB752621D18B14C00BC294D /* MemberProfileIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */; };
 		6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752631D18B77300BC294D /* ErrorAlert.swift */; };
+		6EB9B89C1D83482F00917077 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB9B89B1D83482F00917077 /* Events.storyboard */; };
+		6EB9B89E1D8348B000917077 /* EventDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB9B89D1D8348B000917077 /* EventDetail.storyboard */; };
+		6EB9B8A01D83495C00917077 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9B89F1D83495C00917077 /* Appearance.swift */; };
+		6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
+		6EB9B8A21D8349A400917077 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
+		6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
+		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
@@ -399,8 +428,11 @@
 		6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
 		6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */; };
 		6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */; };
+		6ECBD1DC1D7CB092004BF1A8 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2924101D7AF8C900D14F0A /* CoreSummit.framework */; };
+		6ECBD1DD1D7CB092004BF1A8 /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2924101D7AF8C900D14F0A /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
+		6EDA19001D7F4A6100AB450F /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */; };
 		6EDAF38E1D5BB22700B75B28 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */; };
 		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
 		6EDE52121D429F4C00DF4BEA /* VenuesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */; };
@@ -518,6 +550,20 @@
 			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
 			remoteInfo = CoreSummit;
 		};
+		6E74FAEE1D7C96C50018633D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EF12C601D149C2700814AD0;
+			remoteInfo = R.swift;
+		};
+		6ECBD1DE1D7CB092004BF1A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E2923A41D7AF8C900D14F0A;
+			remoteInfo = "CoreSummit tvOS";
+		};
 		6EF12C651D149C7200814AD0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -600,6 +646,17 @@
 			files = (
 			);
 			name = "Copy Configurations";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6ECBD1E01D7CB092004BF1A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6ECBD1DD1D7CB092004BF1A8 /* CoreSummit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -717,9 +774,14 @@
 		6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitEventExtensions.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
+		6E1651911D845E4F00574CE5 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
+		6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDirectoryViewController.swift; sourceTree = "<group>"; };
+		6E1651951D8462AE00574CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
 		6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditViewController.swift; sourceTree = "<group>"; };
+		6E1D51B11D835832007391A3 /* DetailImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageTableViewCell.swift; sourceTree = "<group>"; };
+		6E1D51B51D8362A9007391A3 /* PlayVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideo.swift; sourceTree = "<group>"; };
 		6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateRequest.swift; sourceTree = "<group>"; };
 		6E25291F1D591C2D00173B1F /* DataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdate.swift; sourceTree = "<group>"; };
@@ -774,10 +836,19 @@
 		6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6E5BE4191D76996600E323D3 /* Beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Beta.entitlements; path = ../Beta.entitlements; sourceTree = "<group>"; };
+		6E6964351D84846B00BA576E /* VenueMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueMapViewController.swift; sourceTree = "<group>"; };
+		6E6964381D84993300BA576E /* VenueDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VenueDetail.storyboard; sourceTree = "<group>"; };
+		6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewController.swift; sourceTree = "<group>"; };
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
 		6E6FD1761D7A1A15003D13D7 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
 		6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConsumerKey.swift; sourceTree = "<group>"; };
+		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
+		6E74FAF81D7C9EBC0018633D /* OpenStackSummitTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenStackSummitTV-Bridging-Header.h"; sourceTree = "<group>"; };
+		6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.h"; sourceTree = "<group>"; };
+		6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
+		6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
+		6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateComponents+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
 		6E7E18E91D490DAC009549BA /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
@@ -793,6 +864,12 @@
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
+		6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummitTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E9F28F61D7C903E002B7C7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TVAssets.xcassets; sourceTree = "<group>"; };
+		6E9F28FA1D7C903E002B7C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EA062A01D63AD09009538CE /* RealmVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVideo.swift; sourceTree = "<group>"; };
 		6EA1F0891D660B550064C338 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -808,6 +885,10 @@
 		6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileDetailViewController.swift; sourceTree = "<group>"; };
 		6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileIdentifier.swift; sourceTree = "<group>"; };
 		6EB752631D18B77300BC294D /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		6EB9B89B1D83482F00917077 /* Events.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
+		6EB9B89D1D8348B000917077 /* EventDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventDetail.storyboard; sourceTree = "<group>"; };
+		6EB9B89F1D83495C00917077 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		6EBE00341D7CB6870091DDEB /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
@@ -967,6 +1048,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E9F28EC1D7C903E002B7C7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */,
+				6ECBD1DC1D7CB092004BF1A8 /* CoreSummit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1007,8 +1097,6 @@
 			isa = PBXGroup;
 			children = (
 				6EA1F0891D660B550064C338 /* Cartfile */,
-				6EDE521C1D42D46900DF4BEA /* System Frameworks */,
-				6EDE52161D42D08200DF4BEA /* Vendor */,
 				6E104D301D1061AC00541E84 /* OpenStack Summit */,
 				6E104D451D1061AC00541E84 /* OpenStack SummitTests */,
 				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
@@ -1016,6 +1104,7 @@
 				6E10A5001D1066E9008CBD0C /* CoreSummitTests */,
 				6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
+				6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1034,6 +1123,7 @@
 				6E0B5F5B1D77D4DF0005F6CE /* OpenStackSummitWatch Extension.appex */,
 				6E2924101D7AF8C900D14F0A /* CoreSummit.framework */,
 				6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */,
+				6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1041,6 +1131,8 @@
 		6E104D301D1061AC00541E84 /* OpenStack Summit */ = {
 			isa = PBXGroup;
 			children = (
+				6EDE52161D42D08200DF4BEA /* Vendor */,
+				6EDE521C1D42D46900DF4BEA /* System Frameworks */,
 				6EFC99B61D2170E8009FD0DA /* Objective-C */,
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
@@ -1102,7 +1194,7 @@
 				6ECA1CD11D4EC46C00806924 /* Session.swift */,
 				6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */,
 				6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */,
-				6EEEEBF81D7945D200965631 /* CollectionType.swift */,
+				6E74FAF01D7C992A0018633D /* Swift Extensions */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
 				6E10A5A11D1067BB008CBD0C /* JSON */,
@@ -1267,6 +1359,42 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
+		6E16518B1D84546F00574CE5 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */,
+				6EBE00341D7CB6870091DDEB /* EventsViewController.swift */,
+				6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		6E16518C1D84547800574CE5 /* Venues */ = {
+			isa = PBXGroup;
+			children = (
+				6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */,
+				6E6964351D84846B00BA576E /* VenueMapViewController.swift */,
+				6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */,
+			);
+			name = Venues;
+			sourceTree = "<group>";
+		};
+		6E1651971D8462B600574CE5 /* System Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E1651951D8462AE00574CE5 /* MapKit.framework */,
+			);
+			name = "System Frameworks";
+			sourceTree = "<group>";
+		};
+		6E1D51B71D8362AE007391A3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6E1D51B51D8362A9007391A3 /* PlayVideo.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		6E2CA11B1D7875BE00405A40 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1357,6 +1485,45 @@
 			name = DataUpdate;
 			sourceTree = "<group>";
 		};
+		6E74FAEB1D7C95E70018633D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6E1D51B71D8362AE007391A3 /* Extensions */,
+				6E16518B1D84546F00574CE5 /* Events */,
+				6E16518C1D84547800574CE5 /* Venues */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		6E74FAF01D7C992A0018633D /* Swift Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6EEEEBF81D7945D200965631 /* CollectionType.swift */,
+			);
+			name = "Swift Extensions";
+			sourceTree = "<group>";
+		};
+		6E74FAF71D7C9E9F0018633D /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				6E74FAF81D7C9EBC0018633D /* OpenStackSummitTV-Bridging-Header.h */,
+				6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */,
+				6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */,
+				6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */,
+				6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */,
+			);
+			name = "Objective-C";
+			sourceTree = "<group>";
+		};
+		6E74FAFF1D7CA0A60018633D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6EB9B89F1D83495C00917077 /* Appearance.swift */,
+				6E1D51B11D835832007391A3 /* DetailImageTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		6E7E18F21D495D90009549BA /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1365,6 +1532,25 @@
 				6E6FD1781D7A1A20003D13D7 /* Staging.swift */,
 			);
 			name = Configurations;
+			sourceTree = "<group>";
+		};
+		6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */ = {
+			isa = PBXGroup;
+			children = (
+				6E1651971D8462B600574CE5 /* System Frameworks */,
+				6E74FAF71D7C9E9F0018633D /* Objective-C */,
+				6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */,
+				6E9F28F51D7C903E002B7C7A /* Main.storyboard */,
+				6EB9B89B1D83482F00917077 /* Events.storyboard */,
+				6EB9B89D1D8348B000917077 /* EventDetail.storyboard */,
+				6E1651911D845E4F00574CE5 /* Venues.storyboard */,
+				6E6964381D84993300BA576E /* VenueDetail.storyboard */,
+				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
+				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
+				6E74FAEB1D7C95E70018633D /* Controller */,
+				6E74FAFF1D7CA0A60018633D /* View */,
+			);
+			path = OpenStackSummitTV;
 			sourceTree = "<group>";
 		};
 		6EB699E31D3412B00095474D /* Protocols */ = {
@@ -1385,7 +1571,7 @@
 				6EDE52171D42D08200DF4BEA /* GoogleMaps.framework */,
 			);
 			name = Vendor;
-			path = ../Vendor;
+			path = ../../Vendor;
 			sourceTree = "<group>";
 		};
 		6EDE521C1D42D46900DF4BEA /* System Frameworks */ = {
@@ -1407,6 +1593,7 @@
 				6EDE521A1D42D46400DF4BEA /* AVFoundation.framework */,
 			);
 			name = "System Frameworks";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		6EE208ED1D7A13CC004A772A /* Speakers */ = {
@@ -1529,12 +1716,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E74FB001D7CA6F70018633D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E74FB011D7CA7030018633D /* NSDate+MTDates.h in Headers */,
+				6E74FB021D7CA7030018633D /* NSDateComponents+MTDates.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */ = {
+		6E0B5EB21D77C8950005F6CE /* CoreSummit watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E0B5F191D77C8950005F6CE /* Build configuration list for PBXNativeTarget "CoreSummit WatchOS" */;
+			buildConfigurationList = 6E0B5F191D77C8950005F6CE /* Build configuration list for PBXNativeTarget "CoreSummit watchOS" */;
 			buildPhases = (
 				6E0B5EB31D77C8950005F6CE /* Sources */,
 				6E0B5F121D77C8950005F6CE /* Frameworks */,
@@ -1546,7 +1742,7 @@
 			);
 			dependencies = (
 			);
-			name = "CoreSummit WatchOS";
+			name = "CoreSummit watchOS";
 			productName = CoreSummit;
 			productReference = 6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1742,6 +1938,29 @@
 			productReference = 6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */;
+			buildPhases = (
+				6E9F28EB1D7C903E002B7C7A /* Sources */,
+				6E9F28EC1D7C903E002B7C7A /* Frameworks */,
+				6E9F28ED1D7C903E002B7C7A /* Resources */,
+				6E74FB001D7CA6F70018633D /* Headers */,
+				6E74FB051D7CB01F0018633D /* Increment Build */,
+				6ECBD1E01D7CB092004BF1A8 /* Embed Frameworks */,
+				6ECBD1E11D7CB0A0004BF1A8 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E74FAEF1D7C96C50018633D /* PBXTargetDependency */,
+				6ECBD1DF1D7CB092004BF1A8 /* PBXTargetDependency */,
+			);
+			name = OpenStackSummitTV;
+			productName = OpensStackSummitTV;
+			productReference = 6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1788,6 +2007,10 @@
 					6E10A4F91D1066E9008CBD0C = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					6E9F28EE1D7C903E002B7C7A = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 775U6X6R5M;
+					};
 					6EF12C601D149C2700814AD0 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -1814,10 +2037,11 @@
 				6E10A4F91D1066E9008CBD0C /* CoreSummitTests iOS */,
 				6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */,
 				6E2924121D7AF8CC00D14F0A /* CoreSummitTests tvOS */,
-				6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */,
+				6E0B5EB21D77C8950005F6CE /* CoreSummit watchOS */,
 				6E0B5F1F1D77C8AB0005F6CE /* CoreSummitTests WatchOS */,
 				6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
+				6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */,
 			);
 		};
 /* End PBXProject section */
@@ -1941,6 +2165,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E9F28ED1D7C903E002B7C7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */,
+				6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */,
+				6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */,
+				6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */,
+				6EB9B89E1D8348B000917077 /* EventDetail.storyboard in Resources */,
+				6EB9B89C1D83482F00917077 /* Events.storyboard in Resources */,
+				6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1982,6 +2220,43 @@
 				"$(SRCROOT)/../Carthage/Build/WatchOS/JSON.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/WatchOS/AeroGearOAuth2.framework",
+			);
+			name = "Copy Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		6E74FB051D7CB01F0018633D /* Increment Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi";
+		};
+		6ECBD1E11D7CB0A0004BF1A8 /* Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/tvOS/SwiftFoundation.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/JSON.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/Realm.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/RealmSwift.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/XCDYouTubeKit.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearHttp.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearOAuth2.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/Rswift.framework",
+				"$(SRCROOT)/../Carthage/Build/tvOS/Haneke.framework",
 			);
 			name = "Copy Frameworks";
 			outputPaths = (
@@ -2144,6 +2419,7 @@
 				6E46F3AC1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift in Sources */,
 				6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */,
 				6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */,
+				6EB9B8A21D8349A400917077 /* UIColor+HexString.swift in Sources */,
 				6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */,
 				6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */,
 				6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */,
@@ -2490,6 +2766,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E9F28EB1D7C903E002B7C7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */,
+				6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */,
+				6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */,
+				6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */,
+				6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */,
+				6E1D51B61D8362A9007391A3 /* PlayVideo.swift in Sources */,
+				6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */,
+				6E69643B1D849D0000BA576E /* VenueDetailViewController.swift in Sources */,
+				6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */,
+				6E9CDB061D7E72B60010D1E1 /* SummitEventExtensions.swift in Sources */,
+				6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */,
+				6E1D51B21D835832007391A3 /* DetailImageTableViewCell.swift in Sources */,
+				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
+				6EB9B8A01D83495C00917077 /* Appearance.swift in Sources */,
+				6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */,
+				6E74FB041D7CAFDB0018633D /* Define.swift in Sources */,
+				6EDA19001D7F4A6100AB450F /* EventDetailViewController.swift in Sources */,
+				6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */,
+				6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2530,13 +2832,23 @@
 		};
 		6E2887301D77E6A5009B8E62 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6E0B5EB21D77C8950005F6CE /* CoreSummit WatchOS */;
+			target = 6E0B5EB21D77C8950005F6CE /* CoreSummit watchOS */;
 			targetProxy = 6E28872F1D77E6A5009B8E62 /* PBXContainerItemProxy */;
 		};
 		6E2924131D7AF8CC00D14F0A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */;
 			targetProxy = 6E2924141D7AF8CC00D14F0A /* PBXContainerItemProxy */;
+		};
+		6E74FAEF1D7C96C50018633D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EF12C601D149C2700814AD0 /* R.swift */;
+			targetProxy = 6E74FAEE1D7C96C50018633D /* PBXContainerItemProxy */;
+		};
+		6ECBD1DF1D7CB092004BF1A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */;
+			targetProxy = 6ECBD1DE1D7CB092004BF1A8 /* PBXContainerItemProxy */;
 		};
 		6EF12C661D149C7200814AD0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2552,6 +2864,14 @@
 				6E0B5F521D77D4DE0005F6CE /* Base */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		6E9F28F51D7C903E002B7C7A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E9F28F61D7C903E002B7C7A /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3261,6 +3581,67 @@
 			};
 			name = Beta;
 		};
+		6E9F28FC1D7C903E002B7C7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		6E9F28FD1D7C903E002B7C7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+		6E9F28FE1D7C903E002B7C7A /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Beta;
+		};
 		6EF12C621D149C2700814AD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3278,7 +3659,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6E0B5F191D77C8950005F6CE /* Build configuration list for PBXNativeTarget "CoreSummit WatchOS" */ = {
+		6E0B5F191D77C8950005F6CE /* Build configuration list for PBXNativeTarget "CoreSummit watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E0B5F1A1D77C8950005F6CE /* Debug */,
@@ -3394,6 +3775,16 @@
 				6E2924251D7AF8CC00D14F0A /* Debug */,
 				6E2924261D7AF8CC00D14F0A /* Release */,
 				6E2924271D7AF8CC00D14F0A /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E9F28FC1D7C903E002B7C7A /* Debug */,
+				6E9F28FD1D7C903E002B7C7A /* Release */,
+				6E9F28FE1D7C903E002B7C7A /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
