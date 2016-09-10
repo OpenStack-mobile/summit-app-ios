@@ -72,8 +72,6 @@ final class EventDatesViewController: UITableViewController {
     
     @IBAction func loadData(sender: AnyObject? = nil) {
         
-        loadSummitData()
-        
         state = .loading
         
         if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
