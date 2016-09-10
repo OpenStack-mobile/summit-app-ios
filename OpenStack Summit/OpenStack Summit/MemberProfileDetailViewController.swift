@@ -277,7 +277,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 // set user activity for handoff
                 let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
                 userActivity.title = self.title
-                userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(AppEnvironment, summit: summit))
+                userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
                 
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
                 

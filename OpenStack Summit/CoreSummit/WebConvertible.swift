@@ -16,23 +16,13 @@ public protocol WebConvertible: Unique {
 
 public extension WebConvertible {
     
-    func toWebpageURL(environment: Environment, summit: Summit) -> String {
+    func toWebpageURL(summit: Summit) -> String {
         
-        return environment.configuration.webpageURL + "/" + summit.webIdentifier + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
+        return summit.webpageURL + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
     }
 }
 
 // MARK: - Model Extensions
-
-public extension Summit {
-    
-    var webIdentifier: String {
-        
-        let year = DateComponents(fromDate: start).year
-        
-        return name.lowercaseString + "-" + "\(year)"
-    }
-}
 
 extension Event: WebConvertible {
     

@@ -36,7 +36,7 @@ final class AboutInterfaceController: WKInterfaceController {
         
         if let summit = Store.shared.cache {
             
-             webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL + "/" + summit.webIdentifier)!
+             webpageURL = NSURL(string: summit.webpageURL)!
             
         } else {
             
@@ -70,12 +70,8 @@ final class AboutInterfaceController: WKInterfaceController {
         
         if let summit = Store.shared.cache {
             
-            let year = DateComponents(fromDate: summit.start).year
-            
-            let summitName = summit.name + " " + "\(year)"
-            
             summitNameLabel.setHidden(false)
-            summitNameLabel.setText(summitName)
+            summitNameLabel.setText(summit.name)
             
         } else {
             

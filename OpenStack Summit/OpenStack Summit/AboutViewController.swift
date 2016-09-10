@@ -53,7 +53,7 @@ final class AboutViewController: UIViewController, RevealViewController {
             
             let summit = Summit(realmEntity: realmSummit)
             
-            webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL + "/" + summit.webIdentifier)!
+            webpageURL = NSURL(string: summit.webpageURL)!
             
         } else {
             

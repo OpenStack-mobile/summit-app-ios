@@ -251,11 +251,7 @@ extension EventDatesViewController {
         
         init(summit: Summit) {
             
-            let year = DateComponents(fromDate: summit.start).year
-            
-            let summitName = summit.name + " " + "\(year)"
-            
-            self = .summit(summit.start, summit.end, summitName)
+            self = .summit(summit.start, summit.end, summit.name)
         }
     }
 }
