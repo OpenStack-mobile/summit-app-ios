@@ -43,6 +43,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="dNH-La-dHF"/>
+                        <segue destination="jIX-aE-WLl" kind="relationship" relationship="viewControllers" id="7cx-ui-ejG"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTo-uj-EgU" userLabel="First Responder" sceneMemberID="firstResponder"/>

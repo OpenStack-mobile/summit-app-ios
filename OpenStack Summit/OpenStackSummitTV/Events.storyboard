@@ -29,9 +29,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="hLm-fg-Rde" kind="showDetail" identifier="showDayEvents" id="hP1-cZ-yj1">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <segue destination="hLm-fg-Rde" kind="showDetail" identifier="showDayEvents" id="V2D-J0-F8K"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -143,6 +141,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hP1-cZ-yj1"/>
+        <segue reference="V2D-J0-F8K"/>
     </inferredMetricsTieBreakers>
 </document>
