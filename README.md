@@ -1,6 +1,8 @@
-# OpenStack Foundation Summit iOS App
+# OpenStack Foundation Summit App
 
 The official app for the OpenStack Summit. ([iTunes](https://itunes.apple.com/us/app/openstack-foundation-summit/id1071261846?mt=8))
+
+Supports iOS, watchOS and tvOS.
 
 ## Setup
 
