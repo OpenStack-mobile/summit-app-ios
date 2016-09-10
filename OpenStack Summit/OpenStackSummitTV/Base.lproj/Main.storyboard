@@ -8,29 +8,21 @@
         <scene sceneID="ytV-Nt-S5O">
             <objects>
                 <viewControllerPlaceholder storyboardName="Events" id="bLQ-ek-K4m" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="BNE-kl-jml"/>
+                    <tabBarItem key="tabBarItem" title="Events" id="BNE-kl-jml"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sl-xQ-8Be" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-47" y="-1122"/>
         </scene>
         <!--Venues-->
-        <scene sceneID="pVT-8S-6I1">
+        <scene sceneID="kEb-Mo-Faa">
             <objects>
-                <viewController id="jIX-aE-WLl" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="H2P-rz-7zv"/>
-                        <viewControllerLayoutGuide type="bottom" id="HuW-Fv-UHH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ETx-Ur-QPH">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Venues" id="QwD-sP-S4s"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cwH-Ab-H14" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Venues" id="wTD-oI-ERk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Venues" id="Ufc-Fn-euW"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hAp-J1-vkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="513"/>
+            <point key="canvasLocation" x="-38" y="-965"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mKl-Mj-zgC">
@@ -43,48 +35,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="dNH-La-dHF"/>
-                        <segue destination="jIX-aE-WLl" kind="relationship" relationship="viewControllers" id="7cx-ui-ejG"/>
+                        <segue destination="wTD-oI-ERk" kind="relationship" relationship="viewControllers" id="ykk-Me-Z25"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTo-uj-EgU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1438" y="-587"/>
-        </scene>
-        <!--People-->
-        <scene sceneID="Dhf-dA-4Zc">
-            <objects>
-                <viewController id="vEr-3u-agr" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5cq-NM-7LT"/>
-                        <viewControllerLayoutGuide type="bottom" id="okO-0b-Gst"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GJ7-fh-Pcl">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="People" id="cIh-7h-cJR"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZYH-lO-NVU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="728" y="1769"/>
-        </scene>
-        <!--Search-->
-        <scene sceneID="lae-In-dmZ">
-            <objects>
-                <viewController id="urF-dn-uH0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RTh-nJ-LvP"/>
-                        <viewControllerLayoutGuide type="bottom" id="ztc-hm-uv6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="r5F-3i-mI9">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="yAl-FG-xVg" userLabel="About"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0YF-4P-nCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="728" y="3171"/>
         </scene>
     </scenes>
 </document>
