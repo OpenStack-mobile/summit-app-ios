@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Venue Map View Controller-->
         <scene sceneID="Qo6-ut-1G7">
             <objects>
-                <viewController id="lcu-1G-wrV" sceneMemberID="viewController">
+                <viewController id="lcu-1G-wrV" customClass="OSSTVVenueMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7MF-Jm-wUy"/>
                         <viewControllerLayoutGuide type="bottom" id="Ur5-b6-OvQ"/>
@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcb-3N-1uw">
+                            <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcb-3N-1uw">
                                 <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                             </mapView>
                         </subviews>
@@ -27,6 +27,10 @@
                             <constraint firstItem="Ur5-b6-OvQ" firstAttribute="top" secondItem="hcb-3N-1uw" secondAttribute="bottom" id="wQj-MF-zqB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="hcb-3N-1uw" id="c13-Vc-tL6"/>
+                        <outlet property="preferredFocusedView" destination="hcb-3N-1uw" id="HTr-ZB-c3h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8Q-Oh-b18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -35,7 +39,7 @@
         <!--Venues-->
         <scene sceneID="cDn-pq-hDo">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lyF-yx-co5" customClass="OSSTVVenuesDirectoryViewController" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lyF-yx-co5" customClass="OSSTVVenueDirectoryViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="OGw-AC-y05">
                         <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,10 +68,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Venues" id="mvW-Mg-duR"/>
+                    <connections>
+                        <segue destination="lcu-1G-wrV" kind="showDetail" identifier="showVenueMap" id="Q7h-Ii-Ewc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0N-fG-iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1262" y="-647"/>
+            <point key="canvasLocation" x="1288" y="-651"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f5J-5i-H6v">
@@ -100,4 +107,7 @@
             <point key="canvasLocation" x="-1089" y="-82"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Q7h-Ii-Ewc"/>
+    </inferredMetricsTieBreakers>
 </document>
