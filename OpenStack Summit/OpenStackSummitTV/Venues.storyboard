@@ -85,17 +85,17 @@
             </objects>
             <point key="canvasLocation" x="408" y="-651"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Venues-->
         <scene sceneID="pnq-9R-3IZ">
             <objects>
                 <splitViewController storyboardIdentifier="SplitViewController" id="iQa-Ya-2eP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Venues" id="vzF-cd-hq7"/>
                     <connections>
                         <segue destination="wnE-vu-m8p" kind="relationship" relationship="masterViewController" id="E3w-fg-z7m"/>
                         <segue destination="lcu-1G-wrV" kind="relationship" relationship="detailViewController" id="DSU-ho-9cU"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rx9-bx-TZh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarItem title="Venues" id="TuJ-yr-stv"/>
             </objects>
             <point key="canvasLocation" x="-1089" y="-82"/>
         </scene>
