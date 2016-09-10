@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcb-3N-1uw">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcb-3N-1uw">
                                 <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                             </mapView>
                         </subviews>
@@ -35,12 +35,12 @@
         <!--Venues-->
         <scene sceneID="cDn-pq-hDo">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lyF-yx-co5" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lyF-yx-co5" customClass="OSSTVVenuesDirectoryViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="OGw-AC-y05">
                         <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" textLabel="28P-h0-jEt" style="IBUITableViewCellStyleDefault" id="684-37-eLu">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VenueTableViewCell" textLabel="28P-h0-jEt" style="IBUITableViewCellStyleDefault" id="684-37-eLu">
                                 <rect key="frame" x="0.0" y="199" width="634" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="684-37-eLu" id="Qam-do-Zhe">
