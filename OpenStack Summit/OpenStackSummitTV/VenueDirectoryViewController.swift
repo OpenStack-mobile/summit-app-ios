@@ -185,9 +185,13 @@ final class VenueDirectoryViewController: UITableViewController {
             
         case "showVenueDetail":
             
+            let venue = self[tableView.indexPathForSelectedRow!]
+            
             let navigationController = segue.destinationViewController as! UINavigationController
             
             let venueDetailViewController = navigationController.topViewController as! VenueDetailViewController
+            
+            venueDetailViewController.location = .venue(venue)
             
         default: fatalError("Unknown segue: \(segue)")
         }
