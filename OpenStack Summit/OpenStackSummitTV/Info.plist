@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>OpenStack Summit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -19,18 +21,16 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>GitVersion</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>SummitEnvironment</key>
+	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
 	</array>
-	<key>SummitEnvironment</key>
-	<string>$(CORESUMMIT_ENVIRONMENT)</string>
-	<key>CFBundleDisplayName</key>
-	<string>OpenStack Summit</string>
 </dict>
 </plist>
