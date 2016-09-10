@@ -49,7 +49,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83c-wh-H2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cFQ-25-7WP" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="inw-yc-hGo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="inw-yc-hGo">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -128,7 +128,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RaB-86-gKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="hLm-fg-Rde" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fi4-fR-1Kc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fi4-fR-1Kc">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

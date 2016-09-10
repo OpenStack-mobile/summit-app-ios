@@ -32,6 +32,8 @@ final class EventDetailViewController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
+        tableView.layoutMargins.left = 90
+        tableView.layoutMargins.right = 90
         
         updateUI()
     }
@@ -57,12 +59,14 @@ final class EventDetailViewController: UITableViewController {
             data.append(.track)
         }
         
-        data.append(.time)
-        
         if eventDetail.video != nil {
             
             data.append(.video)
         }
+        
+        data.append(.time)
+        data.append(.location)
+        data.append(.description)
         
         // reload table
         self.tableView.reloadData()
@@ -91,6 +95,22 @@ final class EventDetailViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("EventNameCell", forIndexPath: indexPath)
             
             cell.textLabel!.text = eventDetail.name
+            
+            return cell
+            
+        case .description:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("EventDescriptionCell", forIndexPath: indexPath)
+            
+            if let data = eventDetail.eventDescription.dataUsingEncoding(NSUTF8StringEncoding),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                
+                cell.textLabel!.text = attributedString.string
+                
+            } else {
+                
+                cell.textLabel!.text = "No description."
+            }
             
             return cell
             
@@ -129,6 +149,14 @@ final class EventDetailViewController: UITableViewController {
             }
             
             return cell
+            
+        case .location:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("EventLocationCell", forIndexPath: indexPath) as! DetailImageTableViewCell
+            
+            cell.titleLabel!.text = eventDetail.location
+            
+            return cell
         }
     }
     
@@ -160,6 +188,8 @@ final class EventDetailViewController: UITableViewController {
             
             eventsViewController.predicate = predicate
             
+            eventsViewController.title = eventDetail.track
+            
         default: fatalError("Unknown segue: \(segue)")
         }
     }
@@ -172,9 +202,11 @@ private extension EventDetailViewController {
     enum Detail {
         
         case name
+        case description
         case track
         case time
         case video
+        case location
     }
 }
 

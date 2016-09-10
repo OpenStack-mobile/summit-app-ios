@@ -39,11 +39,31 @@ final class EventDatesViewController: UITableViewController {
         return dateFormatter
     }()
     
+    private static let performSegueDelay: NSTimeInterval = 0.1
+    
+    private var lastSelectedIndexPath: NSIndexPath?
+    
+    private let delayedSeguesOperationQueue = NSOperationQueue()
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        /*
+         Set `remembersLastFocusedIndexPath` to `true` to ensure the same row
+         becomes focused whenever focus is returned to the table view.
+         */
+        tableView.remembersLastFocusedIndexPath = true
+        
+        /*
+         Adjust the layout margins of the `tableView` to add a horizontal inset
+         to the cells. This will allow for overscan on older TVs and space for
+         the focus effect.
+         */
+        tableView.layoutMargins.left = 90
+        tableView.layoutMargins.right = 20
         
         loadData()
     }
@@ -137,6 +157,51 @@ final class EventDatesViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+        // Check that the next focus view is a child of the table view.
+        guard let nextFocusedView = context.nextFocusedView where nextFocusedView.isDescendantOfView(tableView) else { return }
+        guard let indexPath = context.nextFocusedIndexPath else { return }
+        
+        // Cancel any previously queued segues.
+        delayedSeguesOperationQueue.cancelAllOperations()
+        
+        // Create an `NSBlockOperation` to perform the detail segue after a delay.
+        let performSegueOperation = NSBlockOperation()
+        
+        performSegueOperation.addExecutionBlock { [weak self, unowned performSegueOperation] in
+            
+            guard let controller = self else { return }
+            
+            // Pause the block so the segue isn't immediately performed.
+            NSThread.sleepForTimeInterval(0.1)
+            
+            /*
+             Check that the operation wasn't cancelled and that the segue identifier
+             is different to the last performed segue identifier.
+             */
+            guard performSegueOperation.cancelled == false
+                && indexPath != controller.lastSelectedIndexPath
+                else { return }
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                // Record the last performed segue identifier.
+                controller.lastSelectedIndexPath = indexPath
+                
+                /*
+                 Select the focused cell so that the table view visibly reflects
+                 which detail view is being shown.
+                 */
+                controller.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+                controller.performSegueWithIdentifier("showDayEvents", sender: self)
+            }
+        }
+        
+        delayedSeguesOperationQueue.addOperation(performSegueOperation)
+    }
+    
     // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -161,6 +226,10 @@ final class EventDatesViewController: UITableViewController {
             let eventsViewController = destinationViewController.topViewController as! EventsViewController
             
             eventsViewController.predicate = predicate
+            
+            // adjust margins for VC
+            eventsViewController.tableView.layoutMargins.left = 20
+            eventsViewController.tableView.layoutMargins.right = 90
             
         default: fatalError("Unknown segue: \(segue)")
         }
