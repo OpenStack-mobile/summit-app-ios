@@ -25,11 +25,14 @@ extension UIViewController {
                 return
             }
             
-            let streamURL = youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.HD720.rawValue] ?? youtubeVideo!.streamURLs.values.first!
+            guard let streamURL = youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.HD720.rawValue as NSNumber]
+                ?? youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.Medium360.rawValue as NSNumber]
+                ?? youtubeVideo!.streamURLs[XCDYouTubeVideoQuality.Small240.rawValue as NSNumber]
+                else { controller.showErrorAlert("YouTube API Error"); return }
             
-            let player = AVPlayer(URL: streamURL)
-            
-            player.play()
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = AVPlayer(URL: streamURL)
+            controller.presentViewController(playerViewController, animated: true) { playerViewController.player?.play() }
         }
     }
 }
