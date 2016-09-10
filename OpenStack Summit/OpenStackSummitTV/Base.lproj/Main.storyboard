@@ -8,7 +8,7 @@
         <scene sceneID="ytV-Nt-S5O">
             <objects>
                 <viewControllerPlaceholder storyboardName="Events" id="bLQ-ek-K4m" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Events" id="BNE-kl-jml"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="BNE-kl-jml"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sl-xQ-8Be" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
