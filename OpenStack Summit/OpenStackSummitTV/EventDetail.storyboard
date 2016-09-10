@@ -11,7 +11,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="EventDetail" id="x1i-QX-lv5" customClass="OSSTVEventDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="poN-TX-XPM">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventNameCell" textLabel="MGk-bD-dbm" rowHeight="100" style="IBUITableViewCellStyleDefault" id="wAT-Fx-ao6">
@@ -21,10 +21,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MGk-bD-dbm">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MGk-bD-dbm">
                                             <rect key="frame" x="20" y="0.0" width="1864" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -51,42 +51,8 @@
                                     <segue destination="FD6-bu-Rpe" kind="show" identifier="showTrackEvents" id="FuB-Gw-jrh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventTimeCell" id="PSI-Ha-JwH" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="427" width="1920" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PSI-Ha-JwH" id="lTj-k5-zSV">
-                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="PZA-ei-l2k">
-                                            <rect key="frame" x="8" y="8" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="PZA-ei-l2k" secondAttribute="height" id="xCl-Sp-DgV"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTD-8Q-B5N">
-                                            <rect key="frame" x="78" y="15" width="1754" height="35"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="centerY" secondItem="lTj-k5-zSV" secondAttribute="centerY" id="E2W-9G-d5P"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="pTD-8Q-B5N" secondAttribute="trailing" constant="20" id="JeM-pj-d6h"/>
-                                        <constraint firstItem="PZA-ei-l2k" firstAttribute="top" secondItem="lTj-k5-zSV" secondAttribute="top" constant="8" id="Lfd-4h-erX"/>
-                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="leading" secondItem="PZA-ei-l2k" secondAttribute="trailing" constant="20" id="hnW-Me-xh5"/>
-                                        <constraint firstItem="PZA-ei-l2k" firstAttribute="leading" secondItem="lTj-k5-zSV" secondAttribute="leading" constant="8" id="vAH-a4-Qnd"/>
-                                        <constraint firstAttribute="bottom" secondItem="PZA-ei-l2k" secondAttribute="bottom" constant="8" id="zPT-R2-POr"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="detailImageView" destination="PZA-ei-l2k" id="Btg-Ik-TQO"/>
-                                    <outlet property="titleLabel" destination="pTD-8Q-B5N" id="aMQ-Hg-eas"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventVideoCell" rowHeight="500" id="qok-Ya-SkY" customClass="VideoPlayerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="507" width="1920" height="500"/>
+                                <rect key="frame" x="0.0" y="427" width="1920" height="500"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qok-Ya-SkY" id="rtb-QA-y5V">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="500"/>
@@ -120,6 +86,95 @@
                                     <outlet property="videoImageView" destination="Zo7-M0-Kvu" id="zFP-9y-skc"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventTimeCell" rowHeight="80" id="PSI-Ha-JwH" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="941" width="1920" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PSI-Ha-JwH" id="lTj-k5-zSV">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="PZA-ei-l2k">
+                                            <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="PZA-ei-l2k" secondAttribute="height" id="xCl-Sp-DgV"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTD-8Q-B5N">
+                                            <rect key="frame" x="92" y="20" width="1800" height="40"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="centerY" secondItem="lTj-k5-zSV" secondAttribute="centerY" id="E2W-9G-d5P"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pTD-8Q-B5N" secondAttribute="trailing" constant="20" id="JeM-pj-d6h"/>
+                                        <constraint firstItem="PZA-ei-l2k" firstAttribute="top" secondItem="lTj-k5-zSV" secondAttribute="top" constant="8" id="Lfd-4h-erX"/>
+                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="top" secondItem="lTj-k5-zSV" secondAttribute="top" constant="20" id="YBf-DA-v5M"/>
+                                        <constraint firstAttribute="bottom" secondItem="pTD-8Q-B5N" secondAttribute="bottom" constant="20" id="gHr-MF-JZQ"/>
+                                        <constraint firstItem="pTD-8Q-B5N" firstAttribute="leading" secondItem="PZA-ei-l2k" secondAttribute="trailing" constant="20" id="hnW-Me-xh5"/>
+                                        <constraint firstItem="PZA-ei-l2k" firstAttribute="leading" secondItem="lTj-k5-zSV" secondAttribute="leading" constant="8" id="vAH-a4-Qnd"/>
+                                        <constraint firstAttribute="bottom" secondItem="PZA-ei-l2k" secondAttribute="bottom" constant="8" id="zPT-R2-POr"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailImageView" destination="PZA-ei-l2k" id="Btg-Ik-TQO"/>
+                                    <outlet property="titleLabel" destination="pTD-8Q-B5N" id="aMQ-Hg-eas"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventLocationCell" editingAccessoryType="disclosureIndicator" rowHeight="80" id="Jqm-Sh-GcQ" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="1035" width="1920" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jqm-Sh-GcQ" id="Fvm-yK-nBA">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="BuN-zq-yEk">
+                                            <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="BuN-zq-yEk" secondAttribute="height" id="0R7-zX-Dec"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-lf-vS2">
+                                            <rect key="frame" x="92" y="20" width="1800" height="40"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="BuN-zq-yEk" secondAttribute="bottom" constant="8" id="K2p-3G-7bR"/>
+                                        <constraint firstItem="rcP-lf-vS2" firstAttribute="top" secondItem="Fvm-yK-nBA" secondAttribute="top" constant="20" id="Kxc-xJ-iPU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rcP-lf-vS2" secondAttribute="trailing" constant="20" id="gfb-Nf-uIB"/>
+                                        <constraint firstItem="BuN-zq-yEk" firstAttribute="top" secondItem="Fvm-yK-nBA" secondAttribute="top" constant="8" id="inn-gh-px5"/>
+                                        <constraint firstItem="BuN-zq-yEk" firstAttribute="leading" secondItem="Fvm-yK-nBA" secondAttribute="leading" constant="8" id="kSl-Vx-jmD"/>
+                                        <constraint firstItem="rcP-lf-vS2" firstAttribute="centerY" secondItem="Fvm-yK-nBA" secondAttribute="centerY" id="kwd-wD-syd"/>
+                                        <constraint firstItem="rcP-lf-vS2" firstAttribute="leading" secondItem="BuN-zq-yEk" secondAttribute="trailing" constant="20" id="uwd-nR-gHa"/>
+                                        <constraint firstAttribute="bottom" secondItem="rcP-lf-vS2" secondAttribute="bottom" constant="20" id="vMU-Yh-74g"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailImageView" destination="BuN-zq-yEk" id="Fhu-61-gJc"/>
+                                    <outlet property="titleLabel" destination="rcP-lf-vS2" id="9o3-HA-Qij"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDescriptionCell" textLabel="PO5-ig-3yy" rowHeight="100" style="IBUITableViewCellStyleDefault" id="p9x-au-rk5">
+                                <rect key="frame" x="0.0" y="1129" width="1920" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9x-au-rk5" id="9lF-lR-HUX">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Event Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PO5-ig-3yy">
+                                            <rect key="frame" x="20" y="0.0" width="1864" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -129,6 +184,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Event" id="eDO-UK-cap"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="1920" height="1500"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etV-TB-sGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -161,6 +218,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="map_pin" width="26" height="33"/>
         <image name="play" width="121" height="121"/>
         <image name="time" width="30" height="30"/>
     </resources>

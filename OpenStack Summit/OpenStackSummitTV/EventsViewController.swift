@@ -32,6 +32,9 @@ final class EventsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.layoutMargins.left = 90
+        tableView.layoutMargins.right = 90
+        
         updateUI()
         
         notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
