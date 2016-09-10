@@ -8,20 +8,12 @@
 
 import Foundation
 
-#if os(watchOS)
-import WatchKit
-#endif
-
-public extension UIImage {
+public extension NSURL {
     
-    /// Initializes an image with the thumbnail of a YouTube video based on its ID.
-    convenience init?(youtube identifier: String) {
+    /// Initializes an URL for the thumbnail of a YouTube video based on its ID.
+    convenience init?(youtubeThumbnail identifier: String) {
         
-        guard let url = NSURL(string: "http://img.youtube.com/vi/" + identifier + "/default.jpg"),
-            let data = NSData(contentsOfURL: url)
-            else { return nil }
-        
-        self.init(data: data)
+        self.init(string: "https://img.youtube.com/vi/" + identifier + "/default.jpg")
     }
 }
 
