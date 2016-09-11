@@ -22,12 +22,15 @@ public class RealmPresentationSpeaker: RealmPerson {
 
 public extension PresentationSpeaker {
     
+    static var sortProperties: [SortDescriptor] {
+        
+        return [SortDescriptor(property: "firstName", ascending: true),
+                SortDescriptor(property: "lastName", ascending: true)]
+    }
+    
     static func filter(searchTerm: String, page: Int, objectsPerPage: Int, realm: Realm = Store.shared.realm) -> [PresentationSpeaker] {
         
-        let sortProperties = [SortDescriptor(property: "firstName", ascending: true),
-                              SortDescriptor(property: "lastName", ascending: true)]
-        
-        var result = realm.objects(RealmPresentationSpeaker.self).sorted(sortProperties)
+        var result = realm.objects(RealmPresentationSpeaker.self).sorted(PresentationSpeaker.sortProperties)
         
         // HACK: filter speakers with empty name
         result = result.filter("firstName != '' || lastName != ''")
