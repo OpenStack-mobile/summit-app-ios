@@ -192,18 +192,18 @@
             </objects>
             <point key="canvasLocation" x="455" y="409"/>
         </scene>
-        <!--EventsViewController-->
+        <!--Events-->
         <scene sceneID="I8c-fz-V8y">
             <objects>
-                <viewControllerPlaceholder storyboardName="Events" referencedIdentifier="EventsViewController" id="FD6-bu-Rpe" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Events" referencedIdentifier="Events" id="FD6-bu-Rpe" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBP-Q1-x5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1740.5" y="49"/>
         </scene>
-        <!--VenueDetailViewController-->
+        <!--VenueDetail-->
         <scene sceneID="rxi-Bb-djj">
             <objects>
-                <viewControllerPlaceholder storyboardName="VenueDetail" referencedIdentifier="VenueDetailViewController" id="gtY-Zs-KWR" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="VenueDetail" referencedIdentifier="VenueDetail" id="gtY-Zs-KWR" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rcQ-Yl-UUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1756.5" y="207"/>

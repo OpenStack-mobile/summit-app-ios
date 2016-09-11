@@ -9,7 +9,7 @@
         <!--Venue Name-->
         <scene sceneID="QBO-6f-1ZI">
             <objects>
-                <tableViewController storyboardIdentifier="VenueDetailViewController" id="8fs-nb-QSc" customClass="OSSTVVenueDetailViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VenueDetail" id="8fs-nb-QSc" customClass="OSSTVVenueDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="ChR-Sf-IEA">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

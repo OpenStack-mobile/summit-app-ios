@@ -7,12 +7,13 @@
 //
 
 import struct CoreSummit.PresentationSpeaker
+import typealias CoreSummit.Identifier
 
 /// Data type Used the configure the member profile-related View Controllers. 
 public enum MemberProfileIdentifier {
     
     case currentUser
-    case speaker(Int)
+    case speaker(Identifier)
     
     public init() {
         
