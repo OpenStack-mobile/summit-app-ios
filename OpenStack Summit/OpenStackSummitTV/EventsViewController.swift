@@ -20,7 +20,7 @@ final class EventsViewController: UITableViewController {
     
     private var events = [Event]()
     
-    private var notificationToken: NotificationToken!
+    private var notificationToken: RealmSwift.NotificationToken?
     
     // MARK: - Loading
     

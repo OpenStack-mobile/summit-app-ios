@@ -20,7 +20,7 @@ final class VenueDirectoryViewController: UITableViewController {
     
     private var externalVenues = [Venue]()
     
-    private var notificationToken: NotificationToken!
+    private var notificationToken: RealmSwift.NotificationToken?
     
     private var mapViewController: VenueMapViewController!
     

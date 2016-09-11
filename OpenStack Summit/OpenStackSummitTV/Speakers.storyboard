@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="54" width="1920" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o0N-5b-zJC" id="fGn-XV-VvP">
-                                    <rect key="frame" x="0.0" y="0.0" width="1920" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCN-Vy-Rfj">
@@ -82,6 +82,7 @@
                                     <outlet property="nameLabel" destination="9Sk-F7-xB7" id="pO1-Cj-w5Y"/>
                                     <outlet property="speakerImageView" destination="QCN-Vy-Rfj" id="ecz-1W-hSO"/>
                                     <outlet property="titleLabel" destination="aKP-Pe-1lL" id="wtI-Xd-KRx"/>
+                                    <segue destination="bnv-sd-gTU" kind="presentation" identifier="showSpeakerDetail" id="IjI-ah-Ayz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -94,6 +95,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gDY-mb-rX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1565" y="1009"/>
+        </scene>
+        <!--SpeakerDetail-->
+        <scene sceneID="HhJ-xY-6vr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SpeakerDetail" id="bnv-sd-gTU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ElA-lP-90b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-147.5" y="1009"/>
         </scene>
     </scenes>
     <resources>

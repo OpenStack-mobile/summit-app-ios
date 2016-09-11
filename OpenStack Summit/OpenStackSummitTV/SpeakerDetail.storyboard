@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="T64-ib-6DV">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Speaker-->
+        <scene sceneID="GmS-Y8-DaZ">
+            <objects>
+                <tableViewController title="Speaker" id="8bi-ro-cnL" customClass="SpeakerDetailViewController" customModule="OpenStackSummitTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="brZ-3m-r6d">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" id="WvC-SP-LQ7">
+                                <rect key="frame" x="0.0" y="199" width="1920" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WvC-SP-LQ7" id="s3a-S5-mKc">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8bi-ro-cnL" id="oY3-Wk-F1f"/>
+                            <outlet property="delegate" destination="8bi-ro-cnL" id="2ML-Tb-WhR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Speaker" id="lgS-1M-3hX"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qpH-Zf-6KM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-380" y="804"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UKr-aj-3ii">
+            <objects>
+                <navigationController id="T64-ib-6DV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4S6-0s-Je2">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8bi-ro-cnL" kind="relationship" relationship="rootViewController" id="WO1-cb-0EA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kof-m4-nnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2520" y="804"/>
+        </scene>
+    </scenes>
+</document>

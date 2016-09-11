@@ -29,7 +29,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
         didSet { if isViewLoaded() { showSelectedVenue() } }
     }
     
-    private var notificationToken: NotificationToken!
+    private var notificationToken: RealmSwift.NotificationToken?
     
     // MARK: - Loading
     

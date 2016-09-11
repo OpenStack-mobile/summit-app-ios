@@ -355,6 +355,9 @@
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E53B2A31D850FE600641A8F /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E53B2A21D850FE600641A8F /* Speakers.storyboard */; };
 		6E53B2A51D8524F500641A8F /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */; };
+		6E53B2A71D85340700641A8F /* SpeakerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53B2A61D85340700641A8F /* SpeakerDetailViewController.swift */; };
+		6E53B2A91D8534F600641A8F /* SpeakerSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53B2A81D8534F600641A8F /* SpeakerSearchResultsViewController.swift */; };
+		6E53B2AB1D85366400641A8F /* SpeakerDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E53B2AA1D85366400641A8F /* SpeakerDetail.storyboard */; };
 		6E570A311D676A3800189992 /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E570A341D6771CF00189992 /* EventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A331D6771CF00189992 /* EventDataUpdate.swift */; };
 		6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A351D67753D00189992 /* PresentationDataUpdate.swift */; };
@@ -830,6 +833,9 @@
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E53B2A21D850FE600641A8F /* Speakers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speakers.storyboard; sourceTree = "<group>"; };
 		6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
+		6E53B2A61D85340700641A8F /* SpeakerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailViewController.swift; sourceTree = "<group>"; };
+		6E53B2A81D8534F600641A8F /* SpeakerSearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerSearchResultsViewController.swift; sourceTree = "<group>"; };
+		6E53B2AA1D85366400641A8F /* SpeakerDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpeakerDetail.storyboard; sourceTree = "<group>"; };
 		6E570A301D676A3800189992 /* DataUpdates2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates2.json; sourceTree = "<group>"; };
 		6E570A331D6771CF00189992 /* EventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdate.swift; sourceTree = "<group>"; };
 		6E570A351D67753D00189992 /* PresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdate.swift; sourceTree = "<group>"; };
@@ -1464,6 +1470,8 @@
 			isa = PBXGroup;
 			children = (
 				6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */,
+				6E53B2A81D8534F600641A8F /* SpeakerSearchResultsViewController.swift */,
+				6E53B2A61D85340700641A8F /* SpeakerDetailViewController.swift */,
 			);
 			name = Speakers;
 			sourceTree = "<group>";
@@ -1559,6 +1567,7 @@
 				6E1651911D845E4F00574CE5 /* Venues.storyboard */,
 				6E6964381D84993300BA576E /* VenueDetail.storyboard */,
 				6E53B2A21D850FE600641A8F /* Speakers.storyboard */,
+				6E53B2AA1D85366400641A8F /* SpeakerDetail.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
 				6E74FAEB1D7C95E70018633D /* Controller */,
@@ -2183,6 +2192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E53B2AB1D85366400641A8F /* SpeakerDetail.storyboard in Resources */,
 				6E53B2A31D850FE600641A8F /* Speakers.storyboard in Resources */,
 				6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */,
 				6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */,
@@ -2794,10 +2804,12 @@
 				6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */,
 				6E69643B1D849D0000BA576E /* VenueDetailViewController.swift in Sources */,
 				6E53B2A51D8524F500641A8F /* SpeakersViewController.swift in Sources */,
+				6E53B2A91D8534F600641A8F /* SpeakerSearchResultsViewController.swift in Sources */,
 				6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */,
 				6E9CDB061D7E72B60010D1E1 /* SummitEventExtensions.swift in Sources */,
 				6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */,
 				6E1D51B21D835832007391A3 /* DetailImageTableViewCell.swift in Sources */,
+				6E53B2A71D85340700641A8F /* SpeakerDetailViewController.swift in Sources */,
 				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
 				6EB9B8A01D83495C00917077 /* Appearance.swift in Sources */,
 				6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */,
