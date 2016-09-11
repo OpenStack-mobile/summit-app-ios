@@ -78,7 +78,7 @@
         <!--Events-->
         <scene sceneID="Zn6-ki-Ad6">
             <objects>
-                <tableViewController storyboardIdentifier="EventsViewController" clearsSelectionOnViewWillAppear="NO" id="vtH-NH-2nm" customClass="OSSTVEventsViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Events" clearsSelectionOnViewWillAppear="NO" id="vtH-NH-2nm" customClass="OSSTVEventsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="iXp-OR-7D0">
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
