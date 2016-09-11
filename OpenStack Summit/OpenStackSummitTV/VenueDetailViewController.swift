@@ -15,6 +15,8 @@ final class VenueDetailViewController: UITableViewController {
     
     // MARK: - Properties
     
+    var canShowMap = true
+    
     var location: Location!
     
     private lazy var venue: Venue = {
@@ -152,7 +154,7 @@ final class VenueDetailViewController: UITableViewController {
             
             cell.textLabel!.text = venue.maps.count == 1 ? "View Map Image" : "\(venue.images.count) map images"
             
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = canShowMap ? .DisclosureIndicator : .None
             
             return cell
             
@@ -178,6 +180,32 @@ final class VenueDetailViewController: UITableViewController {
             cell.accessoryType = .None
             
             return cell
+        }
+    }
+    
+    // MARK: - Segue
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        switch identifier {
+            
+        case "venueDetailShowMap": return canShowMap
+            
+        default: return true
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "venueDetailShowMap":
+            
+            let venueMapViewController = segue.destinationViewController as! VenueMapViewController
+            
+            venueMapViewController.selectedVenue = venue.identifier
+            
+        default: fatalError("Unknown segue: \(segue)")
         }
     }
 }

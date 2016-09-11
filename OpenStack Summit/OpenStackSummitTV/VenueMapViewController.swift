@@ -26,7 +26,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
     
     var selectedVenue: Identifier? {
         
-        didSet { showSelectedVenue() }
+        didSet { if isViewLoaded() { showSelectedVenue() } }
     }
     
     private var notificationToken: NotificationToken!
@@ -64,15 +64,13 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
     
     private func showSelectedVenue() {
         
+        mapView.showAnnotations(mapView.annotations, animated: true)
+        
         if let venueID = self.selectedVenue,
             let venue = Store.shared.realm.objects(RealmVenue).filter("id = %@", venueID).first,
             let selectedAnnotation = mapView.annotations.filter({ $0.coordinate.latitude == Double(venue.lat) && $0.coordinate.longitude == Double(venue.long) }).first {
             
             mapView.selectAnnotation(selectedAnnotation, animated: true)
-            
-        } else {
-            
-            mapView.showAnnotations(mapView.annotations, animated: true)
         }
     }
     

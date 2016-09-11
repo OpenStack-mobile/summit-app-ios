@@ -190,6 +190,30 @@ final class EventDetailViewController: UITableViewController {
             
             eventsViewController.title = eventDetail.track
             
+        case "eventShowVenue":
+            
+            guard let locationID = eventDetail.venue
+                else { fatalError("Event has no location") }
+            
+            let location: Location
+            
+            if let realmVenue = RealmVenue.find(locationID, realm: Store.shared.realm) {
+                
+                location = .venue(Venue(realmEntity: realmVenue))
+                
+            } else if let realmVenueRoom = RealmVenueRoom.find(locationID, realm: Store.shared.realm) {
+                
+                location = .room(VenueRoom(realmEntity: realmVenueRoom))
+                
+            } else {
+                
+                fatalError("Invalid location \(locationID)")
+            }
+            
+            let venueDetailViewController = segue.destinationViewController as! VenueDetailViewController
+            
+            venueDetailViewController.location = location
+            
         default: fatalError("Unknown segue: \(segue)")
         }
     }
