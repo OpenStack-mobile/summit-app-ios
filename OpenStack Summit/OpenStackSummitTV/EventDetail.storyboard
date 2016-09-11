@@ -122,11 +122,11 @@
                                     <outlet property="titleLabel" destination="pTD-8Q-B5N" id="aMQ-Hg-eas"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventLocationCell" editingAccessoryType="disclosureIndicator" rowHeight="80" id="Jqm-Sh-GcQ" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventLocationCell" rowHeight="80" id="Jqm-Sh-GcQ" customClass="DetailImageTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="1035" width="1920" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jqm-Sh-GcQ" id="Fvm-yK-nBA">
-                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1844" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="BuN-zq-yEk">
@@ -136,7 +136,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-lf-vS2">
-                                            <rect key="frame" x="92" y="20" width="1800" height="40"/>
+                                            <rect key="frame" x="92" y="20" width="121" height="40"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -145,7 +145,7 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="BuN-zq-yEk" secondAttribute="bottom" constant="8" id="K2p-3G-7bR"/>
                                         <constraint firstItem="rcP-lf-vS2" firstAttribute="top" secondItem="Fvm-yK-nBA" secondAttribute="top" constant="20" id="Kxc-xJ-iPU"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="rcP-lf-vS2" secondAttribute="trailing" constant="20" id="gfb-Nf-uIB"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rcP-lf-vS2" secondAttribute="trailingMargin" constant="20" id="hom-Kb-UIM"/>
                                         <constraint firstItem="BuN-zq-yEk" firstAttribute="top" secondItem="Fvm-yK-nBA" secondAttribute="top" constant="8" id="inn-gh-px5"/>
                                         <constraint firstItem="BuN-zq-yEk" firstAttribute="leading" secondItem="Fvm-yK-nBA" secondAttribute="leading" constant="8" id="kSl-Vx-jmD"/>
                                         <constraint firstItem="rcP-lf-vS2" firstAttribute="centerY" secondItem="Fvm-yK-nBA" secondAttribute="centerY" id="kwd-wD-syd"/>
@@ -156,6 +156,7 @@
                                 <connections>
                                     <outlet property="detailImageView" destination="BuN-zq-yEk" id="Fhu-61-gJc"/>
                                     <outlet property="titleLabel" destination="rcP-lf-vS2" id="9o3-HA-Qij"/>
+                                    <segue destination="gtY-Zs-KWR" kind="show" identifier="eventShowVenue" id="sfG-9X-3h1"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDescriptionCell" textLabel="PO5-ig-3yy" rowHeight="100" style="IBUITableViewCellStyleDefault" id="p9x-au-rk5">
@@ -197,7 +198,15 @@
                 <viewControllerPlaceholder storyboardName="Events" referencedIdentifier="EventsViewController" id="FD6-bu-Rpe" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBP-Q1-x5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1689.5" y="41"/>
+            <point key="canvasLocation" x="1740.5" y="49"/>
+        </scene>
+        <!--VenueDetailViewController-->
+        <scene sceneID="rxi-Bb-djj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="VenueDetail" referencedIdentifier="VenueDetailViewController" id="gtY-Zs-KWR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rcQ-Yl-UUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1756.5" y="207"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="klz-3r-Qhs">

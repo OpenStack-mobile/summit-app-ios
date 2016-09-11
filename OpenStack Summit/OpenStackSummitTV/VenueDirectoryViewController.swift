@@ -193,6 +193,8 @@ final class VenueDirectoryViewController: UITableViewController {
             
             venueDetailViewController.location = .venue(venue)
             
+            //venueDetailViewController.canShowMap = false
+            
         default: fatalError("Unknown segue: \(segue)")
         }
     }

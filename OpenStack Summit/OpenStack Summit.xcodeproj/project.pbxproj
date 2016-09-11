@@ -1456,6 +1456,13 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		6E53B2A11D850F4F00641A8F /* People */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = People;
+			sourceTree = "<group>";
+		};
 		6E570A321D67711500189992 /* DataUpdate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1489,6 +1496,7 @@
 			isa = PBXGroup;
 			children = (
 				6E1D51B71D8362AE007391A3 /* Extensions */,
+				6E53B2A11D850F4F00641A8F /* People */,
 				6E16518B1D84546F00574CE5 /* Events */,
 				6E16518C1D84547800574CE5 /* Venues */,
 			);
