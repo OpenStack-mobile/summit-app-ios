@@ -66,7 +66,7 @@ final class VenueDirectoryViewController: UITableViewController {
         
         let dataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
         
-        self.title = dataLoaded ? "Venues" : "Loading..."
+        self.title = dataLoaded ? "Venues" : "Loading Summit..."
         
         self.internalVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.isInternal }
         self.externalVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.isInternal == false }
