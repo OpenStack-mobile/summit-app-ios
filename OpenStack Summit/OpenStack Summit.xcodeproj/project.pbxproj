@@ -412,6 +412,8 @@
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
 		6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */; };
 		6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */; };
+		6EB54E701D85FC570027350D /* Images.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB54E6F1D85FC570027350D /* Images.storyboard */; };
+		6EB54E721D85FCBA0027350D /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB54E711D85FCBA0027350D /* ImagesViewController.swift */; };
 		6EB699E51D3413080095474D /* ScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB699E41D3413080095474D /* ScheduleFilterViewController.swift */; };
 		6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB699E61D3416AF0095474D /* ScheduleFilter.storyboard */; };
 		6EB7525C1D187DB900BC294D /* Member.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7525B1D187DB900BC294D /* Member.storyboard */; };
@@ -888,6 +890,8 @@
 		6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderView.xib; sourceTree = "<group>"; };
 		6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackTableViewCell.xib; sourceTree = "<group>"; };
+		6EB54E6F1D85FC570027350D /* Images.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Images.storyboard; sourceTree = "<group>"; };
+		6EB54E711D85FCBA0027350D /* ImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
 		6EB699E41D3413080095474D /* ScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6EB699E61D3416AF0095474D /* ScheduleFilter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ScheduleFilter.storyboard; sourceTree = "<group>"; };
 		6EB7525B1D187DB900BC294D /* Member.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Member.storyboard; sourceTree = "<group>"; };
@@ -1509,6 +1513,7 @@
 			isa = PBXGroup;
 			children = (
 				6E1D51B71D8362AE007391A3 /* Extensions */,
+				6EB54E711D85FCBA0027350D /* ImagesViewController.swift */,
 				6E53B2A11D850F4F00641A8F /* Speakers */,
 				6E16518B1D84546F00574CE5 /* Events */,
 				6E16518C1D84547800574CE5 /* Venues */,
@@ -1568,6 +1573,7 @@
 				6E6964381D84993300BA576E /* VenueDetail.storyboard */,
 				6E53B2A21D850FE600641A8F /* Speakers.storyboard */,
 				6E53B2AA1D85366400641A8F /* SpeakerDetail.storyboard */,
+				6EB54E6F1D85FC570027350D /* Images.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
 				6E74FAEB1D7C95E70018633D /* Controller */,
@@ -2198,6 +2204,7 @@
 				6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */,
 				6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */,
 				6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */,
+				6EB54E701D85FC570027350D /* Images.storyboard in Resources */,
 				6EB9B89E1D8348B000917077 /* EventDetail.storyboard in Resources */,
 				6EB9B89C1D83482F00917077 /* Events.storyboard in Resources */,
 				6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */,
@@ -2811,6 +2818,7 @@
 				6E1D51B21D835832007391A3 /* DetailImageTableViewCell.swift in Sources */,
 				6E53B2A71D85340700641A8F /* SpeakerDetailViewController.swift in Sources */,
 				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
+				6EB54E721D85FCBA0027350D /* ImagesViewController.swift in Sources */,
 				6EB9B8A01D83495C00917077 /* Appearance.swift in Sources */,
 				6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */,
 				6E74FB041D7CAFDB0018633D /* Define.swift in Sources */,
