@@ -18,6 +18,7 @@ public class RealmVenue: RealmLocation {
     public dynamic var lat = ""
     public dynamic var long = ""
     public dynamic var isInternal = true
+    public dynamic var venueClassName = ""
     public let maps = List<RealmImage>()
     public let images = List<RealmImage>()
 }
@@ -29,6 +30,7 @@ extension Venue: RealmDecodable {
     public init(realmEntity: RealmVenue) {
         
         self.identifier = realmEntity.id
+        self.type = ClassName(rawValue: realmEntity.venueClassName)!
         self.name = realmEntity.name
         self.descriptionText = String(realm: realmEntity.locationDescription)
         self.address = String(realm: realmEntity.address)
@@ -49,7 +51,8 @@ extension Venue: RealmEncodable {
     public func save(realm: Realm) -> RealmVenue {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
-                
+        
+        realmEntity.venueClassName = type.rawValue
         realmEntity.name = name
         realmEntity.locationDescription = descriptionText ?? ""
         realmEntity.country = country
