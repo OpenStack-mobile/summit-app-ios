@@ -10,6 +10,8 @@ public struct Venue: LocationProtocol {
     
     public let identifier: Identifier
     
+    public let type: ClassName
+    
     public var name: String
     
     public var descriptionText: String?
@@ -86,6 +88,11 @@ public extension Venue {
     
     public enum LocationType: String {
         
-        case Internal, External
+        case Internal, External, None
+    }
+    
+    enum ClassName: String {
+        
+        case SummitVenue, SummitExternalLocation, SummitHotel, SummitAirport
     }
 }

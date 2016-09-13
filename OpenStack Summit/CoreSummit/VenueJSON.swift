@@ -10,11 +10,6 @@ import SwiftFoundation
 
 public extension Venue {
     
-    enum JSONClassName: String {
-        
-        case SummitVenue, SummitExternalLocation, SummitHotel, SummitAirport
-    }
-    
     enum JSONKey: String {
         
         case lat, lng, address_1, city, state, zip_code, country, maps, images, location_type
@@ -27,7 +22,7 @@ extension Venue: JSONDecodable {
                 
         guard let JSONObject = JSONValue.objectValue,
             let classNameString = JSONObject[LocationJSONKey.class_name.rawValue]?.rawValue as? String,
-            let _ = JSONClassName(rawValue: classNameString), // not stored, but verified
+            let type = ClassName(rawValue: classNameString),
             let identifier = JSONObject[LocationJSONKey.id.rawValue]?.rawValue as? Int,
             let name = JSONObject[LocationJSONKey.name.rawValue]?.rawValue as? String,
             let country = JSONObject[JSONKey.country.rawValue]?.rawValue as? String,
@@ -41,6 +36,7 @@ extension Venue: JSONDecodable {
             else { return nil }
         
         self.identifier = identifier
+        self.type = type
         self.name = name
         self.country = country
         self.maps = maps

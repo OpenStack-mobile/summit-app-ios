@@ -57,7 +57,6 @@ extension Summit: JSONDecodable {
         self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
         self.summitTypes = summitTypes
         self.ticketTypes = ticketTypes
-        self.locations = locations
         self.tracks = tracks
         self.trackGroups = trackGroups
         self.schedule = events
@@ -65,6 +64,17 @@ extension Summit: JSONDecodable {
         self.speakers = speakers
         self.sponsors = sponsors
         self.webpageURL = webpageURL
+        
+        // filter venues (we have to ignore other types of venues)
+        self.locations = locations.filter {
+            
+            switch $0 {
+                
+            case let .venue(venue): return venue.type == .SummitVenue || venue.type == .SummitExternalLocation
+                
+            case .room: return true
+            }
+        }
         
         // optional values
         
