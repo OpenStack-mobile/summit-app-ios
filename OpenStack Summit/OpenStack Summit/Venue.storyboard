@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Venue List View Controller-->
@@ -15,37 +16,32 @@
                         <viewControllerLayoutGuide type="bottom" id="3M4-FC-Xus"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WQt-lO-mRY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="120" sectionHeaderHeight="45" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="yzT-he-9FX">
-                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" rowHeight="120" sectionHeaderHeight="45" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="yzT-he-9FX">
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="internalVenuesTableViewCell" rowHeight="176" id="Rpp-hy-dhs" customClass="InternalVenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49.5" width="600" height="176"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="1024" height="176"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rpp-hy-dhs" id="HCK-Ir-nPc">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="175.5"/>
+                                            <frame key="frameInset" width="1024" height="175.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" alpha="0.44999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zDR-Uh-pjj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="175"/>
-                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" alpha="0.44999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zDR-Uh-pjj"/>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQu-3X-5om" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="56" width="544" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tai-4r-PTp" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="48" y="88" width="504" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <color key="textColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="tai-4r-PTp" firstAttribute="top" secondItem="WQu-3X-5om" secondAttribute="bottom" constant="8" id="28B-Ah-ckH"/>
                                                 <constraint firstItem="tai-4r-PTp" firstAttribute="leading" secondItem="HCK-Ir-nPc" secondAttribute="leadingMargin" constant="40" id="AMj-JN-G5e"/>
@@ -66,26 +62,24 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="externalVenuesTableViewCell" rowHeight="88" id="YEt-UZ-9U5" customClass="VenueListTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="225.5" width="600" height="88"/>
+                                        <rect key="frame" x="0.0" y="231.5" width="1024" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YEt-UZ-9U5" id="EIY-yR-u03">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="87.5"/>
+                                            <frame key="frameInset" width="1024" height="87.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSM-UL-tMP" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="11" width="544" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEJ-zz-ziP" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="48" y="37" width="504" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <color key="textColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="gSM-UL-tMP" firstAttribute="centerY" secondItem="EIY-yR-u03" secondAttribute="centerY" constant="-21" id="arZ-mC-Vxk"/>
                                                 <constraint firstItem="rEJ-zz-ziP" firstAttribute="top" secondItem="gSM-UL-tMP" secondAttribute="bottom" constant="2" id="eqt-ib-ajs"/>
@@ -103,7 +97,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yzT-he-9FX" firstAttribute="top" secondItem="F6z-E5-7xN" secondAttribute="bottom" id="ICQ-3B-79q"/>
                             <constraint firstItem="yzT-he-9FX" firstAttribute="leading" secondItem="WQt-lO-mRY" secondAttribute="leading" id="XKN-QP-85X"/>
@@ -134,13 +128,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byA-M7-FxY">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="1100"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7f-bH-izm" userLabel="Location">
-                                        <rect key="frame" x="0.0" y="88" width="600" height="60"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="MUj-j8-jlF" userLabel="Pin Image">
-                                                <rect key="frame" x="22" y="19" width="18" height="22"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="K9j-53-l6F"/>
@@ -148,21 +139,19 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsq-MY-YO6" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                <rect key="frame" x="50" y="22" width="508" height="16"/>
                                                 <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="A3K-Do-EnS" userLabel="Arrow Image">
-                                                <rect key="frame" x="566" y="22" width="10" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="ZBS-qi-pru"/>
                                                     <constraint firstAttribute="height" constant="15" id="ZfI-bm-Whr"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="MUj-j8-jlF" firstAttribute="leading" secondItem="F7f-bH-izm" secondAttribute="leading" constant="22" id="8N6-K4-wbs"/>
@@ -179,8 +168,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-Yg-Hco" userLabel="Images Slideshow" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                        <rect key="frame" x="0.0" y="148" width="600" height="220"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="aOF-f3-Rd7"/>
                                         </constraints>
@@ -189,8 +177,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pRH-bT-WIL" userLabel="Maps Slideshow" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                        <rect key="frame" x="0.0" y="368" width="600" height="220"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="qOG-HR-yxc"/>
                                         </constraints>
@@ -199,23 +186,20 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8O-rw-lE5" userLabel="Map" customClass="GMSMapView">
-                                        <rect key="frame" x="0.0" y="368" width="600" height="220"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="Pn7-Bu-Cw7"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eb1-wf-A5X" userLabel="Header">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPj-6f-R8K" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                <rect key="frame" x="28" y="33" width="544" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="lPj-6f-R8K" firstAttribute="trailing" secondItem="eb1-wf-A5X" secondAttribute="trailingMargin" constant="-20" id="Kne-l8-eNa"/>
                                             <constraint firstItem="lPj-6f-R8K" firstAttribute="centerY" secondItem="eb1-wf-A5X" secondAttribute="centerY" id="MX8-2j-bmK"/>
@@ -246,7 +230,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="byA-M7-FxY" firstAttribute="trailing" secondItem="EAW-ON-c1r" secondAttribute="trailing" id="BqQ-8S-4D5"/>
                             <constraint firstItem="byA-M7-FxY" firstAttribute="leading" secondItem="EAW-ON-c1r" secondAttribute="leading" id="VSa-kg-91n"/>
@@ -295,15 +279,14 @@
                         <viewControllerLayoutGuide type="bottom" id="Euk-fy-Xu3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="H1m-42-cwR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVT-j8-jXg" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="cVT-j8-jXg" firstAttribute="trailing" secondItem="H1m-42-cwR" secondAttribute="trailing" id="31C-Z5-eGf"/>
                             <constraint firstItem="cVT-j8-jXg" firstAttribute="top" secondItem="Wlv-Tg-pGr" secondAttribute="bottom" id="IT7-An-DVy"/>
@@ -321,7 +304,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow" width="10" height="15"/>
+        <image name="arrow" width="9" height="14"/>
         <image name="map_pin" width="26" height="33"/>
     </resources>
 </document>
