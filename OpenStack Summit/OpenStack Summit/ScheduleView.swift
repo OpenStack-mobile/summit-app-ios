@@ -46,6 +46,8 @@ final class ScheduleView: UIView {
         dayPicker.backgroundInactiveColor = UIColor(hexaString: "#E5E5E5")
         dayPicker.backgroundSelectedColor = UIColor(hexaString: "#4A4A4A")
         
+        self.view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        self.view.frame = self.bounds
         addSubview(self.view)
     }
     
