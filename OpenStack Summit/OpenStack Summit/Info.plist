@@ -44,6 +44,7 @@
 	</dict>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>org.openstack.summit.viewScreen</string>
 		<string>org.openstack.summit.viewSummit</string>
 	</array>
 	<key>SummitEnvironment</key>
