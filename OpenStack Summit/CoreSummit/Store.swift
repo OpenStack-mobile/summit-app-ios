@@ -50,7 +50,7 @@ public final class Store {
         self.cache = nil
     }
     
-    public static let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true).URLByAppendingPathComponent("summit.json")
+    public static let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true).URLByAppendingPathComponent("summit.json")!
     
     #endif
     

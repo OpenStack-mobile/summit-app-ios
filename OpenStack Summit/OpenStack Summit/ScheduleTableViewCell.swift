@@ -165,7 +165,7 @@ final class ScheduleTableViewCell: UITableViewCell, ScheduleableView {
             
             contentView.addConstraint(eventTypeLabelTopConstraint)
             
-            eventTypeLabelBaselineConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.Baseline, relatedBy: NSLayoutRelation.Equal, toItem:
+            eventTypeLabelBaselineConstraint = NSLayoutConstraint(item: eventTypeLabel, attribute: NSLayoutAttribute.LastBaseline, relatedBy: NSLayoutRelation.Equal, toItem:
                 trackLabel, attribute: NSLayoutAttribute.FirstBaseline, multiplier: CGFloat(1), constant: CGFloat(0))
         }
         

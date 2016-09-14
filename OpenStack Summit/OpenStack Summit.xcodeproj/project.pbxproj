@@ -2006,6 +2006,7 @@
 					};
 					6E0B5F5A1D77D4DF0005F6CE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 775U6X6R5M;
 					};
 					6E104D2D1D1061AC00541E84 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -3029,6 +3030,7 @@
 		6E0B5F6F1D77D4DF0005F6CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -3044,6 +3046,7 @@
 		6E0B5F701D77D4DF0005F6CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -3059,6 +3062,7 @@
 		6E0B5F711D77D4DF0005F6CE /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
