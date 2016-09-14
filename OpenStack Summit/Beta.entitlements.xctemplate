@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:dev-openstack.org-site</string>
+		<string>applinks:devbranch.openstack.org</string>
 	</array>
 </dict>
 </plist>

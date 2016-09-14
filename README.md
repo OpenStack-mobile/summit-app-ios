@@ -20,4 +20,12 @@ Supports iOS, watchOS and tvOS.
 	CoreSummit/Production.swift.xctemplate -> CoreSummit/Production.swift
 	OpenStack Summit/AppConsumerKey.swift.xctemplate -> OpenStack Summit/AppConsumerKey.swift
 	```
+
+3. Generate .entitlements out of sample entitlements files
+
+	```
+	Debug.entitlements.xctemplate -> Debug.entitlements
+	Beta.entitlements.xctemplate -> Beta.entitlements
+	Release.entitlements.xctemplate -> Release.entitlements
+	```
 4. Compile and run
