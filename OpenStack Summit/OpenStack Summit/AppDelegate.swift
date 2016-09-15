@@ -186,7 +186,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let url = userActivity.webpageURL
                 else { return false }
             
-            
+            guard openWebURL(url)
+                else { UIApplication.sharedApplication().openURL(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
@@ -267,6 +268,31 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         case .speakers: self.menuViewController.showSpeakers()
         case .about: self.menuViewController.showAbout()
         }
+    }
+    
+    // MARK: - URL Handling
+    
+    private func openWebURL(url: NSURL) -> Bool {
+        
+        guard let components = url.pathComponents
+            where components.count >= 5
+            else { return false }
+        
+        let typeString = components[3]
+        let identifierString = components[4]
+        
+        guard let identifier = Int(identifierString)
+            else { return false }
+        
+        var dataType: AppActivitySummitDataType!
+        
+        switch typeString {
+        case Event.webPathComponent: dataType = .event
+        case PresentationSpeaker.webPathComponent:  dataType = .speaker
+        default: return false
+        }
+        
+        self.view(dataType, identifier: identifier)
     }
 }
 
