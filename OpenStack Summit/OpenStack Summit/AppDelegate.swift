@@ -275,11 +275,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func openWebURL(url: NSURL) -> Bool {
         
         guard let components = url.pathComponents
-            where components.count >= 5
+            where components.count >= 6
             else { return false }
         
-        let typeString = components[3]
-        let identifierString = components[4]
+        let typeString = components[4]
+        let identifierString = components[5]
         
         guard let identifier = Int(identifierString)
             else { return false }
@@ -293,6 +293,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         self.view(dataType, identifier: identifier)
+        
+        return true
     }
 }
 
