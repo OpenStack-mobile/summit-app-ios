@@ -36,19 +36,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
-        // update app build
-        if AppBuild != Preference.appBuild {
+        // update app build preference
+        Preference.appBuild = AppBuild
+        
+        // nuke Realm if errored
+        do { let _ = try Realm() }
+        catch {
             
-            // update app build preference
-            Preference.appBuild = AppBuild
+            print("Nuking Realm")
             
             // nuke cache
             let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
             
-            if NSFileManager.defaultManager().fileExistsAtPath(realmPath) {
-                
-                try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
-            }
+            try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
             
             // clear session
             Store.shared.session = UserDefaultsSessionStorage()
