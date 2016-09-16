@@ -51,12 +51,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
             
             // clear session
-            Store.shared.session = UserDefaultsSessionStorage()
-            Store.shared.session?.clear()
+            var sessionStorage = UserDefaultsSessionStorage()
+            sessionStorage.clear()
             
             // clear data poller
-            DataUpdatePoller.shared.storage = UserDefaultsDataUpdatePollerStorage()
-            DataUpdatePoller.shared.storage?.clear()
+            var pollerStorage = UserDefaultsDataUpdatePollerStorage()
+            pollerStorage.clear()
         }
         
         // set configuration
