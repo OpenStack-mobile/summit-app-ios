@@ -623,9 +623,7 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         
         let speaker = eventDetail.speakers[indexPath.row]
         
-        let memberVC = R.storyboard.member.memberProfileDetailViewController()!
-        
-        memberVC.profile = MemberProfileIdentifier(speaker: speaker)
+        let memberVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
         
         self.showViewController(memberVC, sender: self)
     }
