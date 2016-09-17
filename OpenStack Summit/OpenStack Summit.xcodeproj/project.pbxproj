@@ -90,7 +90,6 @@
 		6E0B5F241D77C8AB0005F6CE /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
 		6E0B5F251D77C8AB0005F6CE /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
 		6E0B5F261D77C8AB0005F6CE /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
-		6E0B5F271D77C8AB0005F6CE /* DataUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3C1D6777D200189992 /* DataUpdateTests.swift */; };
 		6E0B5F291D77C8AB0005F6CE /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
 		6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E0B5F2C1D77C8AB0005F6CE /* Summit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit.json */; };
@@ -320,7 +319,6 @@
 		6E2924171D7AF8CC00D14F0A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
 		6E2924181D7AF8CC00D14F0A /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
 		6E2924191D7AF8CC00D14F0A /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
-		6E29241A1D7AF8CC00D14F0A /* DataUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3C1D6777D200189992 /* DataUpdateTests.swift */; };
 		6E29241C1D7AF8CC00D14F0A /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
 		6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E29241F1D7AF8CC00D14F0A /* Summit.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit.json */; };
@@ -363,10 +361,12 @@
 		6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A351D67753D00189992 /* PresentationDataUpdate.swift */; };
 		6E570A391D6775C700189992 /* EventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */; };
 		6E570A3B1D6775D200189992 /* PresentationDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */; };
-		6E570A3D1D6777D200189992 /* DataUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3C1D6777D200189992 /* DataUpdateTests.swift */; };
 		6E570A401D67792A00189992 /* RealmEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */; };
 		6E570A421D67797B00189992 /* RealmPresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
+		6E5D05C61D8CBC9500451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
+		6E5D05C71D8CBC9500451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
+		6E5D05C81D8CBC9600451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
 		6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6964351D84846B00BA576E /* VenueMapViewController.swift */; };
 		6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6964381D84993300BA576E /* VenueDetail.storyboard */; };
 		6E69643B1D849D0000BA576E /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */; };
@@ -460,6 +460,12 @@
 		6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */; };
 		6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52351D42D52D00DF4BEA /* Accelerate.framework */; };
 		6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */; };
+		6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
+		6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
+		6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
+		6EEBAEA71D8CD7A30067B228 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
+		6EEBAEA81D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
+		6EEBAEA91D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
 		6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */; };
@@ -480,6 +486,8 @@
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
 		6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */; };
 		6EF2FB391D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */; };
+		6EF5D9231D8CE7DC00C680D1 /* RealmSummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5D9201D8CE77800C680D1 /* RealmSummitDataUpdate.swift */; };
+		6EF5D9241D8CE7DD00C680D1 /* RealmSummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF5D9201D8CE77800C680D1 /* RealmSummitDataUpdate.swift */; };
 		6EF7AA1C1D74C24800790ED0 /* CoreSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF7AA1B1D74C24800790ED0 /* CoreSpotlight.swift */; };
 		6EFC6E651D2300260087057A /* VenuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E641D2300260087057A /* VenuesViewController.swift */; };
 		6EFC6E671D2320610087057A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E661D2320610087057A /* Reachability.swift */; };
@@ -843,11 +851,11 @@
 		6E570A351D67753D00189992 /* PresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdateJSON.swift; sourceTree = "<group>"; };
-		6E570A3C1D6777D200189992 /* DataUpdateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateTests.swift; sourceTree = "<group>"; };
 		6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventDataUpdate.swift; sourceTree = "<group>"; };
 		6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6E5BE4191D76996600E323D3 /* Beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Beta.entitlements; path = ../Beta.entitlements; sourceTree = "<group>"; };
+		6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E6964351D84846B00BA576E /* VenueMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueMapViewController.swift; sourceTree = "<group>"; };
 		6E6964381D84993300BA576E /* VenueDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VenueDetail.storyboard; sourceTree = "<group>"; };
 		6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewController.swift; sourceTree = "<group>"; };
@@ -861,6 +869,7 @@
 		6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
 		6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
 		6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateComponents+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
+		6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdate.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
 		6E7E18E91D490DAC009549BA /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
@@ -934,6 +943,7 @@
 		6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6EDE52351D42D52D00DF4BEA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates4.json; sourceTree = "<group>"; };
 		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
 		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
@@ -953,6 +963,7 @@
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
 		6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
 		6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeesForTicketOrderRequest.swift; sourceTree = "<group>"; };
+		6EF5D9201D8CE77800C680D1 /* RealmSummitDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitDataUpdate.swift; sourceTree = "<group>"; };
 		6EF7AA1B1D74C24800790ED0 /* CoreSpotlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSpotlight.swift; sourceTree = "<group>"; };
 		6EFC6E641D2300260087057A /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
 		6EFC6E661D2320610087057A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -1225,7 +1236,6 @@
 				6E10A50F1D10672D008CBD0C /* JSONTests.swift */,
 				6E10A5101D10672D008CBD0C /* RealmTests.swift */,
 				6E52FCBA1D130553006A7302 /* StoreTests.swift */,
-				6E570A3C1D6777D200189992 /* DataUpdateTests.swift */,
 				6E10A5111D10672D008CBD0C /* TestUtilities.swift */,
 				6E10A5031D1066E9008CBD0C /* Info.plist */,
 			);
@@ -1238,6 +1248,7 @@
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
 				6E570A301D676A3800189992 /* DataUpdates2.json */,
 				6E08F3C61D6CC43500E3006B /* DataUpdates3.json */,
+				6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E10A5161D106741008CBD0C /* AustinSummit.json */,
 				6E10A5171D106741008CBD0C /* Summit.json */,
@@ -1484,6 +1495,7 @@
 			isa = PBXGroup;
 			children = (
 				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
+				6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */,
 				6E570A331D6771CF00189992 /* EventDataUpdate.swift */,
 				6E570A351D67753D00189992 /* PresentationDataUpdate.swift */,
 			);
@@ -1494,6 +1506,7 @@
 			isa = PBXGroup;
 			children = (
 				6E2529211D5924D300173B1F /* DataUpdateJSON.swift */,
+				6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */,
 				6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */,
 				6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */,
 			);
@@ -1503,6 +1516,7 @@
 		6E570A3E1D67790B00189992 /* DataUpdate */ = {
 			isa = PBXGroup;
 			children = (
+				6EF5D9201D8CE77800C680D1 /* RealmSummitDataUpdate.swift */,
 				6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */,
 				6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */,
 			);
@@ -2091,6 +2105,7 @@
 				6E0B5F2C1D77C8AB0005F6CE /* Summit.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6E0B5F2E1D77C8AB0005F6CE /* AustinSummit.json in Resources */,
+				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
 				6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */,
 			);
@@ -2169,6 +2184,7 @@
 				6E10A5191D106741008CBD0C /* Summit.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6E10A5181D106741008CBD0C /* AustinSummit.json in Resources */,
+				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
 				6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */,
 			);
@@ -2189,6 +2205,7 @@
 				6E29241F1D7AF8CC00D14F0A /* Summit.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6E2924211D7AF8CC00D14F0A /* AustinSummit.json in Resources */,
+				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */,
 				6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */,
 			);
@@ -2399,6 +2416,7 @@
 				6E0B5EDE1D77C8950005F6CE /* Configuration.swift in Sources */,
 				6E0B5EDF1D77C8950005F6CE /* EventType.swift in Sources */,
 				6E0B5EE01D77C8950005F6CE /* Venue.swift in Sources */,
+				6E5D05C81D8CBC9600451639 /* SummitDataUpdate.swift in Sources */,
 				6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */,
 				6E0B5EE11D77C8950005F6CE /* TicketTypeJSON.swift in Sources */,
 				6E0B5EE41D77C8950005F6CE /* SummitJSON.swift in Sources */,
@@ -2418,6 +2436,7 @@
 				6E0B5EFA1D77C8950005F6CE /* Feedback.swift in Sources */,
 				6E0B5EFB1D77C8950005F6CE /* PresentationJSON.swift in Sources */,
 				6E0B5EFC1D77C8950005F6CE /* SummitAttendeeJSON.swift in Sources */,
+				6EEBAEA71D8CD7A30067B228 /* SummitDataUpdateJSON.swift in Sources */,
 				6E0B5F011D77C8950005F6CE /* EventJSON.swift in Sources */,
 				6E0B5F041D77C8950005F6CE /* Location.swift in Sources */,
 				6E0B5F071D77C8950005F6CE /* Environment.swift in Sources */,
@@ -2437,7 +2456,6 @@
 				6E0B5F241D77C8AB0005F6CE /* TestUtilities.swift in Sources */,
 				6E0B5F251D77C8AB0005F6CE /* JSONTests.swift in Sources */,
 				6E0B5F261D77C8AB0005F6CE /* StoreTests.swift in Sources */,
-				6E0B5F271D77C8AB0005F6CE /* DataUpdateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2591,6 +2609,7 @@
 				6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */,
 				6E10A55D1D10675D008CBD0C /* Company.swift in Sources */,
 				6E6FD17B1D7A1A24003D13D7 /* Staging.swift in Sources */,
+				6EEBAEA91D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */,
 				6E10A5981D10675D008CBD0C /* TrackGroup.swift in Sources */,
 				6EA062A11D63AD09009538CE /* RealmVideo.swift in Sources */,
 				6E10A5911D10675D008CBD0C /* Tag.swift in Sources */,
@@ -2616,6 +2635,7 @@
 				6E10A56A1D10675D008CBD0C /* LocationJSON.swift in Sources */,
 				6E087DD01D4A5E0F00CDC935 /* Configuration.swift in Sources */,
 				6E10A5621D10675D008CBD0C /* EventType.swift in Sources */,
+				6EF5D9241D8CE7DD00C680D1 /* RealmSummitDataUpdate.swift in Sources */,
 				6E10A59C1D10675D008CBD0C /* Venue.swift in Sources */,
 				6E10A5941D10675D008CBD0C /* TicketTypeJSON.swift in Sources */,
 				6EF2FB391D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift in Sources */,
@@ -2627,6 +2647,7 @@
 				6E10A5801D10675D008CBD0C /* RealmPresentationSpeaker.swift in Sources */,
 				6E10A5711D10675D008CBD0C /* Presentation.swift in Sources */,
 				6E10A5741D10675D008CBD0C /* PresentationSpeakerJSON.swift in Sources */,
+				6E5D05C61D8CBC9500451639 /* SummitDataUpdate.swift in Sources */,
 				6E10A59D1D10675D008CBD0C /* VenueJSON.swift in Sources */,
 				6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */,
 				6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */,
@@ -2678,7 +2699,6 @@
 				6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */,
 				6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */,
 				6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */,
-				6E570A3D1D6777D200189992 /* DataUpdateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2707,6 +2727,7 @@
 				6E2923B81D7AF8C900D14F0A /* PresentationDataUpdate.swift in Sources */,
 				6E2923B91D7AF8C900D14F0A /* Company.swift in Sources */,
 				6E2923BA1D7AF8C900D14F0A /* Staging.swift in Sources */,
+				6EEBAEA81D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */,
 				6E2923BB1D7AF8C900D14F0A /* TrackGroup.swift in Sources */,
 				6E2923BC1D7AF8C900D14F0A /* RealmVideo.swift in Sources */,
 				6E2923BD1D7AF8C900D14F0A /* Tag.swift in Sources */,
@@ -2732,6 +2753,7 @@
 				6E2923D11D7AF8C900D14F0A /* LocationJSON.swift in Sources */,
 				6E2923D21D7AF8C900D14F0A /* Configuration.swift in Sources */,
 				6E2923D31D7AF8C900D14F0A /* EventType.swift in Sources */,
+				6EF5D9231D8CE7DC00C680D1 /* RealmSummitDataUpdate.swift in Sources */,
 				6E2923D41D7AF8C900D14F0A /* Venue.swift in Sources */,
 				6E2923D51D7AF8C900D14F0A /* TicketTypeJSON.swift in Sources */,
 				6E2923D61D7AF8C900D14F0A /* AttendeesForTicketOrderRequest.swift in Sources */,
@@ -2743,6 +2765,7 @@
 				6E2923DC1D7AF8C900D14F0A /* RealmPresentationSpeaker.swift in Sources */,
 				6E2923DD1D7AF8C900D14F0A /* Presentation.swift in Sources */,
 				6E2923DE1D7AF8C900D14F0A /* PresentationSpeakerJSON.swift in Sources */,
+				6E5D05C71D8CBC9500451639 /* SummitDataUpdate.swift in Sources */,
 				6E2923DF1D7AF8C900D14F0A /* VenueJSON.swift in Sources */,
 				6E2923E01D7AF8C900D14F0A /* LoggedInMemberRequest.swift in Sources */,
 				6E2923E11D7AF8C900D14F0A /* VideoJSON.swift in Sources */,
@@ -2794,7 +2817,6 @@
 				6E2924171D7AF8CC00D14F0A /* TestUtilities.swift in Sources */,
 				6E2924181D7AF8CC00D14F0A /* JSONTests.swift in Sources */,
 				6E2924191D7AF8CC00D14F0A /* StoreTests.swift in Sources */,
-				6E29241A1D7AF8CC00D14F0A /* DataUpdateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

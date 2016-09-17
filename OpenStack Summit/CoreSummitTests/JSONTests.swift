@@ -73,6 +73,20 @@ final class JSONTests: XCTestCase {
         XCTAssert(dataUpdates.count == dataUpdatesCount, "\(dataUpdates.count) DataUpdate. Should be \(dataUpdatesCount)")
     }
     
+    func testDataUpdates4() {
+        
+        let testJSON = loadJSON("DataUpdates4")
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        guard let dataUpdateEntity = dataUpdates.first?.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = Summit.DataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
     func testMember1() {
         
         let testJSON = loadJSON("Member1")
