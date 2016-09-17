@@ -104,16 +104,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             selector: #selector(MenuViewController.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
-        
-        
-        if Store.shared.authenticatedMember == nil {
-            
-            PushNotificationsManager.unsubscribeFromPushChannels { (succeeded: Bool, error: NSError?) in
-                if (error != nil) {
-                    self.showErrorMessage(error!)
-                }
-            }
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -344,7 +334,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         Store.shared.login(loginCallback: {
             
             // return from SafariVC
-            dispatch_async(dispatch_get_main_queue(),{
+            dispatch_async(dispatch_get_main_queue(), {
+                
                 self.showActivityIndicator()
             })
             
@@ -376,8 +367,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                        
                     } else {
                         
-                         controller.toggleMenuSelection(controller.myProfileButton)
+                        controller.toggleMenuSelection(controller.myProfileButton)
                     }
+                    
+                    PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in
+                    })
                 }
             }
         }
@@ -392,6 +386,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         reloadMenu()
         hideMenu()
         hideActivityIndicator()
+        
+        PushNotificationsManager.unsubscribeFromPushChannels { (succeeded, error) in
+        }
     }
     
     // MARK: - SWRevealViewControllerDelegate

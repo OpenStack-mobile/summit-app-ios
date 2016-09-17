@@ -188,6 +188,9 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                                 
                                 controller.showAttendeesSelector(false)
                                 AppDelegate.shared.menuViewController.showEvents()
+                                
+                                PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in
+                                })
                             }
                         }
                     }
