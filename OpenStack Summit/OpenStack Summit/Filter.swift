@@ -120,6 +120,9 @@ struct ScheduleFilter {
                 
                 selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters)
             }
+            else {
+                selections[FilterSectionType.ActiveTalks] = .names([])
+            }
         }
         
         selections[FilterSectionType.TrackGroup] = .identifiers([])
