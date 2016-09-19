@@ -83,7 +83,7 @@ final class JSONTests: XCTestCase {
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
             case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = Summit.DataUpdate(JSONValue: .Object(entityJSON))
+            let _ = SummitDataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
