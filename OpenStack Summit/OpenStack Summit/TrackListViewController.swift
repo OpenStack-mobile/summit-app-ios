@@ -21,7 +21,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     // does not seem to be used in legacy codebase
     var searchTerm: String = ""
     
-    var scheduleFilter = ScheduleFilter.`default`
+    var scheduleFilter = ScheduleFilter()
     
     // MARK: - Private Properties
     
@@ -52,6 +52,8 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     // MARK: - Private Methods
     
     private func reloadData() {
+        
+        scheduleFilter.updateSections()
         
         let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as! [Int]
         

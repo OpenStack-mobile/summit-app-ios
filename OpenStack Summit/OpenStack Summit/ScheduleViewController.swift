@@ -24,7 +24,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     final private(set) var dayEvents = [ScheduleItem]()
     
-    var scheduleFilter = ScheduleFilter.`default` {
+    var scheduleFilter = ScheduleFilter() {
         
         didSet { let _ = self.view; self.loadData() }
     }
@@ -195,7 +195,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
                     
                 case let .Value(value):
                     
-                    controller.scheduleFilter = ScheduleFilter.`default` // reset filter
+                    controller.scheduleFilter = ScheduleFilter() // reset filter
                     controller.updateUI(value)
                 }
             }

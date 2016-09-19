@@ -32,7 +32,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     weak var delegate: GeneralScheduleFilterViewControllerDelegate?
     
-    var scheduleFilter = ScheduleFilter.`default` {
+    var scheduleFilter = ScheduleFilter() {
         
         didSet {
             
@@ -89,6 +89,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             selector: #selector(AMTagListView.removeTag(_:)),
             name: AMTagViewNotification,
             object: nil)
+        
+        scheduleFilter.updateSections()
     }
     
     override func viewWillDisappear(animated: Bool) {
