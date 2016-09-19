@@ -160,6 +160,10 @@ struct ScheduleFilter {
                 
                 filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
             }
+            else {
+                
+                selections[FilterSectionType.ActiveTalks] = .names([])
+            }
         }
         
         filterSections.append(filterSection)
