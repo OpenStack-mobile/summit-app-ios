@@ -49,6 +49,8 @@ public extension Store {
                         
                         attendee.scheduledEvents.append(event)
                     }
+                    
+                    completion(.Value())
                 }
             }
         })
@@ -89,6 +91,8 @@ public extension Store {
                         
                         attendee.scheduledEvents.removeAtIndex(index)
                     }
+                    
+                    completion(.Value())
                 }
             }
         })
