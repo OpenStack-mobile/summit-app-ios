@@ -16,8 +16,8 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     // MARK: - Properties
     
     // Child VCs
-    let trackListViewController = R.storyboard.tracks.trackListViewController()!
     let generalScheduleViewController = R.storyboard.schedule.generalScheduleViewController()!
+    let trackListViewController = R.storyboard.tracks.trackListViewController()!
     let levelListViewController = R.storyboard.levels.levelListViewController()!
     
     private(set) var filterButton: UIBarButtonItem!
@@ -115,6 +115,8 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         activeFilterIndicator = filter.hasActiveFilters()
         
         generalScheduleViewController.scheduleFilter = filter
+        trackListViewController.scheduleFilter = filter
+        levelListViewController.scheduleFilter = filter
     }
     
     // MARK: - RevealTabStripViewController
