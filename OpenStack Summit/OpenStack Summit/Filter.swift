@@ -33,17 +33,39 @@ struct FilterSectionItem: Unique, Named {
     let name: String
 }
 
-enum FilterSelection {
+enum FilterSelection: RawRepresentable {
     
     case identifiers([Identifier])
     case names([String])
     
-    var rawValue: [AnyObject] {
+    init?(rawValue: [Any]) {
+        
+        if let identifiers = rawValue as? [Int] {
+            
+            self = .identifiers(identifiers)
+            return
+        }
+        
+        if let names = rawValue as? [String] {
+            
+            self = .names(names)
+            return
+        }
+        
+        return nil
+    }
+    
+    var rawValue: [Any] {
         
         switch self {
-        case let .identifiers(rawValue): return rawValue as [NSNumber]
-        case let .names(rawValue): return rawValue as [NSString]
+        case let .identifiers(rawValue): return rawValue as [Int]
+        case let .names(rawValue): return rawValue as [String]
         }
+    }
+    
+    var isEmpty: Bool {
+        
+        return rawValue.isEmpty
     }
     
     mutating func removeAll() {
@@ -127,6 +149,9 @@ struct ScheduleFilter {
     var selections = [FilterSectionType: FilterSelection]()
     var filterSections = [FilterSection]()
     
+    /// Whether a selection has been made in the `Active Talks` filters.
+    var didChangeActiveTalks = false
+    
     // MARK: - Initialization
     
     init() {
@@ -142,6 +167,8 @@ struct ScheduleFilter {
     
     // MARK: - Methods
     
+    /// Updates the filter sections from Realm. 
+    /// Removes selections from deleted filters.
     mutating func updateSections() {
         
         filterSections = []
@@ -167,12 +194,10 @@ struct ScheduleFilter {
             if now.mt_isBetweenDate(startDate, andDate: endDate) {
                 
                 filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
-                selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters) // Active Talks filters are static
             }
             else {
                 
-                // reset active talks selections if the summit has finished (or hasnt started)
-                selections[FilterSectionType.ActiveTalks] = .names([])
+                filterSection.items = []
             }
         }
         
@@ -201,6 +226,37 @@ struct ScheduleFilter {
         selections[FilterSectionType.Venue]?.update(.identifiers(venues.identifiers))
         
         filterSections.append(filterSection)
+        
+        updateActiveTalksSelections()
+    }
+    
+    /// Updates the active talks selections
+    mutating func updateActiveTalksSelections() {
+        
+        if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
+            
+            let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+            
+            let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
+            let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
+            let now = NSDate()
+            
+            let activeTalksFilters = ["Hide Past Talks"]
+            
+            if now.mt_isBetweenDate(startDate, andDate: endDate) {
+                
+                // dont want to override selection
+                if didChangeActiveTalks == false {
+                    
+                    selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters) // Active Talks filters are static
+                }
+            }
+            else {
+                
+                // reset active talks selections if the summit has finished (or hasnt started)
+                selections[FilterSectionType.ActiveTalks] = .names([])
+            }
+        }
     }
     
     func areAllSelectedForType(type: FilterSectionType) -> Bool {
@@ -253,6 +309,8 @@ final class FilterManager {
     
     private var notificationToken: NotificationToken?
     
+    private var timer: NSTimer!
+    
     deinit {
         
         notificationToken?.stop()
@@ -264,7 +322,12 @@ final class FilterManager {
         filter.value.updateSections()
         
         notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _,_ in self?.filter.value.updateSections() }
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
     }
     
-    
+    @objc private func timerUpdate(sender: NSTimer) {
+        
+        filter.value.updateActiveTalksSelections()
+    }
 }
