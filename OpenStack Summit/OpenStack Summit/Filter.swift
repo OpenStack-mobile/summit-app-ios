@@ -58,8 +58,8 @@ enum FilterSelection: RawRepresentable {
     var rawValue: [Any] {
         
         switch self {
-        case let .identifiers(rawValue): return rawValue as [Int]
-        case let .names(rawValue): return rawValue as [String]
+        case let .identifiers(rawValue): return rawValue
+        case let .names(rawValue): return rawValue
         }
     }
     
