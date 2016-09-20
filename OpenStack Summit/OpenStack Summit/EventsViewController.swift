@@ -29,7 +29,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
             filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
             navigationController?.toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
             navigationController?.toolbar.translucent = false
-            navigationController?.setToolbarHidden(!activeFilterIndicator, animated: !activeFilterIndicator)
+            navigationController?.setToolbarHidden(!activeFilterIndicator, animated: true)
         }
     }
     
@@ -77,8 +77,8 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         filterObserver = FilterManager.shared.filter.observe { [weak self] in self?.activeFilterIndicator = $0.hasActiveFilters() }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         activeFilterIndicator = FilterManager.shared.filter.value.hasActiveFilters()
     }

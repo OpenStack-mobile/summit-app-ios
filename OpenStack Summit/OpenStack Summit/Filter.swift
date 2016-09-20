@@ -148,7 +148,7 @@ struct ScheduleFilter {
         
         let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
         let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
-        let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort()
+        let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort().filter { $0 != "" }
         let venues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
         
         var filterSection: FilterSection
@@ -212,14 +212,16 @@ struct ScheduleFilter {
     }
     
     func hasActiveFilters() -> Bool {
-        var hasActiveFilters = false
+        
         for values in selections.values {
+            
             if values.rawValue.count > 0 {
-                hasActiveFilters = true
-                break
+                
+                return true
             }
         }
-        return hasActiveFilters
+        
+        return false
     }
     
     mutating func clearActiveFilters() {

@@ -14,10 +14,17 @@ public protocol Unique {
 
 public typealias Identifier = Int
 
+// MARK: - Extensions
+
 public extension CollectionType where Generator.Element: Unique {
     
     var identifiers: [Identifier] {
         
         return self.map { $0.identifier }
+    }
+    
+    func with(identifier: Identifier) -> Self.Generator.Element? {
+        
+        return firstMatching { $0.identifier == identifier }
     }
 }

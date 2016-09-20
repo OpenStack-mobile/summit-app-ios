@@ -16,11 +16,3 @@ public extension CollectionType {
         return self[index]
     }
 }
-
-public extension CollectionType where Self.Generator.Element: Unique {
-    
-    func with(identifier: Identifier) -> Self.Generator.Element? {
-        
-        return firstMatching { $0.identifier == identifier }
-    }
-}

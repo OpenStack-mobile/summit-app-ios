@@ -41,3 +41,15 @@ extension TrackGroup: RealmEncodable {
         return realmEntity
     }
 }
+
+// MARK: - Fetches
+
+public extension RealmTrackGroup {
+    
+    static var sortProperties: [RealmSwift.SortDescriptor] {
+        
+        return [SortDescriptor(property: "name", ascending: true)]
+    }
+    
+    
+}
