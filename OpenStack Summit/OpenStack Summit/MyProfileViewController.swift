@@ -9,15 +9,17 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
+import KTCenterFlowLayout
 
 final class MyProfileViewController: RevealTabStripViewController {
     
     // MARK: - Loading
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        super.viewDidLoad()
+        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
         navigationController?.navigationBar.topItem?.title = "MY SUMMIT"
         
         reloadPagerTabStripView()
