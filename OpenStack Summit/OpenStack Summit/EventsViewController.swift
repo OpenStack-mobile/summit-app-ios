@@ -103,6 +103,8 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     @IBAction func clearFilters(sender: UIBarButtonItem) {
         
         generalScheduleViewController.scheduleFilter.clearActiveFilters()
+        trackListViewController.scheduleFilter.clearActiveFilters()
+        levelListViewController.scheduleFilter.clearActiveFilters()
         self.activeFilterIndicator = false
         
         self.reloadPagerTabStripView()
