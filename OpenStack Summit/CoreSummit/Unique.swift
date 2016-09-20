@@ -13,3 +13,11 @@ public protocol Unique {
 }
 
 public typealias Identifier = Int
+
+public extension CollectionType where Generator.Element: Unique {
+    
+    var identifiers: [Identifier] {
+        
+        return self.map { $0.identifier }
+    }
+}

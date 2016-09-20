@@ -26,7 +26,7 @@ struct FilterSection {
     }
 }
 
-struct FilterSectionItem {
+struct FilterSectionItem: Unique, Named {
     
     let identifier: Identifier
     let name: String
@@ -89,6 +89,32 @@ enum FilterSelection {
             self = .names(rawValue)
             
         default: fatalError("Appending invalid type")
+        }
+    }
+    
+    /// Updates the current filter selection by removing selections that are not availible anymore.
+    ///
+    /// - Parameter newItems: All the possible selections this `FilterSelection` can support. 
+    /// If an item is currently selected and not avalible in the new list of selections then it will be removed.
+    ///
+    /// - Note: The `newItems` case must match the case of the `FilterSelection`. Otherwise, an exception is thrown.
+    mutating func update(newItems: FilterSelection) {
+        
+        switch (self, newItems) {
+    
+        case (let .identifiers(existing), let .identifiers(new)):
+            
+            let filteredSelection = existing.filter { new.contains($0) }
+            
+            self = .identifiers(filteredSelection)
+            
+        case (let .names(existing), let .names(new)):
+            
+            let filteredSelection = existing.filter { new.contains($0) }
+            
+            self = .names(filteredSelection)
+            
+        default: fatalError("New items type mismatch, can only filter with the same type of FilterSelection")
         }
     }
 }
@@ -159,9 +185,11 @@ struct ScheduleFilter {
             if now.mt_isBetweenDate(startDate, andDate: endDate) {
                 
                 filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
+                selections[FilterSectionType.ActiveTalks]?.update(.names(activeTalksFilters))
             }
             else {
                 
+                // reset active talks selections if the summit has finished (or hasnt started)
                 selections[FilterSectionType.ActiveTalks] = .names([])
             }
         }
@@ -170,21 +198,26 @@ struct ScheduleFilter {
         
         filterSection = FilterSection(type: .TrackGroup, name: "SUMMIT CATEGORY")
         filterSection.items = summitTrackGroups.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
+        selections[FilterSectionType.TrackGroup]?.update(.identifiers(summitTrackGroups.identifiers))
         
         filterSections.append(filterSection)
         
         filterSection = FilterSection(type: .EventType, name: "EVENT TYPE")
         filterSection.items = eventTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
+        selections[FilterSectionType.EventType]?.update(.identifiers(eventTypes.identifiers))
         
         filterSections.append(filterSection)
         
         filterSection = FilterSection(type: .Level, name: "LEVEL")
         filterSection.items = levels.map { FilterSectionItem(identifier: 0, name: $0) }
+        selections[FilterSectionType.Level]?.update(.names(levels))
         
         filterSections.append(filterSection)
         
         filterSection = FilterSection(type: .Venue, name: "VENUE")
         filterSection.items = venues.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
+        selections[FilterSectionType.Venue]?.update(.identifiers(venues.identifiers))
+        
         filterSections.append(filterSection)
     }
     
