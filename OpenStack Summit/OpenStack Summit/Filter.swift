@@ -38,28 +38,28 @@ enum FilterSelection: RawRepresentable {
     case identifiers([Identifier])
     case names([String])
     
-    init?(rawValue: [Any]) {
+    init?(rawValue: [AnyObject]) {
         
-        if let identifiers = rawValue as? [Int] {
+        if let identifiers = (rawValue as? [NSNumber]) as? [Int] {
             
             self = .identifiers(identifiers)
             return
         }
         
-        if let names = rawValue as? [String] {
+        if let names = rawValue as? [NSString] {
             
-            self = .names(names)
+            self = .names(names.map { String($0) })
             return
         }
         
         return nil
     }
     
-    var rawValue: [Any] {
+    var rawValue: [AnyObject] {
         
         switch self {
-        case let .identifiers(rawValue): return rawValue
-        case let .names(rawValue): return rawValue
+        case let .identifiers(rawValue): return rawValue as [NSNumber]
+        case let .names(rawValue): return rawValue as [NSString]
         }
     }
     
