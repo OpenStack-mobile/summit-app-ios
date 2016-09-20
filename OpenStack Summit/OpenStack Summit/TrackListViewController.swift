@@ -16,13 +16,6 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - Properties
-    
-    // does not seem to be used in legacy codebase
-    var searchTerm: String = ""
-    
-    var scheduleFilter = ScheduleFilter()
-    
     // MARK: - Private Properties
     
     private var tracks = [Track]()
@@ -53,7 +46,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        scheduleFilter.updateSections()
+        let scheduleFilter = FilterManager.shared.filter.value
         
         let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as! [Int]
         
@@ -102,9 +95,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
         let trackScheduleVC = R.storyboard.schedule.trackScheduleViewController()!
         
         trackScheduleVC.track = track
-        
-        trackScheduleVC.scheduleFilter = scheduleFilter
-        
+                
         self.showViewController(trackScheduleVC, sender: self)
     }
     

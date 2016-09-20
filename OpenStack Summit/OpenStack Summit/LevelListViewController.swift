@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import CoreSummit
 import RealmSwift
 
-final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilteredScheduleViewController, IndicatorInfoProvider {
+final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -20,8 +20,6 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     // MARK: - Properties
     
     var searchTerm = ""
-    
-    var scheduleFilter = ScheduleFilter()
     
     // MARK: - Private Properties
     
@@ -50,6 +48,8 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
     // MARK: - Private Methods
     
     private func reloadData() {
+        
+        let scheduleFilter = FilterManager.shared.filter.value
         
         let levelsSet = Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }).filter({ $0.isEmpty == false }).sort())
         
@@ -102,9 +102,7 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
         let levelScheduleViewController = R.storyboard.schedule.levelScheduleViewController()!
         
         levelScheduleViewController.level = level
-        
-        levelScheduleViewController.scheduleFilter = scheduleFilter
-        
+                
         self.showViewController(levelScheduleViewController, sender: self)
     }
     

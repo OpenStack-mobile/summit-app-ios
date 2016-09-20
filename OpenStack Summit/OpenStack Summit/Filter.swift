@@ -7,6 +7,7 @@
 //
 
 import CoreSummit
+import RealmSwift
 
 enum FilterSectionType {
     
@@ -130,27 +131,8 @@ struct ScheduleFilter {
     
     init() {
         
-        self.updateSections()
-
-        let activeTalksFilters = ["Hide Past Talks"]
-        
-        if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
-            
-            let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
-            
-            let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-            let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-            let now = NSDate()
-            
-            if now.mt_isBetweenDate(startDate, andDate: endDate) {
-                
-                selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters)
-            }
-            else {
-                selections[FilterSectionType.ActiveTalks] = .names([])
-            }
-        }
-        
+        // setup empty selections
+        selections[FilterSectionType.ActiveTalks] = .names([])
         selections[FilterSectionType.TrackGroup] = .identifiers([])
         selections[FilterSectionType.EventType] = .identifiers([])
         selections[FilterSectionType.Level] = .names([])
@@ -185,7 +167,7 @@ struct ScheduleFilter {
             if now.mt_isBetweenDate(startDate, andDate: endDate) {
                 
                 filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
-                selections[FilterSectionType.ActiveTalks]?.update(.names(activeTalksFilters))
+                selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters) // Active Talks filters are static
             }
             else {
                 
@@ -257,4 +239,30 @@ struct ScheduleFilter {
         
         return hidePastTalks
     }
+}
+
+// MARK: - Manager
+
+final class FilterManager {
+    
+    static let shared = FilterManager()
+    
+    var filter = Observable(ScheduleFilter())
+    
+    private var notificationToken: NotificationToken?
+    
+    deinit {
+        
+        notificationToken?.stop()
+    }
+    
+    private init() {
+        
+        // update sections from Realm
+        filter.value.updateSections()
+        
+        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _,_ in self?.filter.value.updateSections() }
+    }
+    
+    
 }

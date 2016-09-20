@@ -11,7 +11,7 @@ import KTCenterFlowLayout
 import SwiftSpinner
 import CoreSummit
 
-final class EventsViewController: RevealTabStripViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, GeneralScheduleFilterViewControllerDelegate {
+final class EventsViewController: RevealTabStripViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
     
     // MARK: - Properties
     
@@ -22,7 +22,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     private(set) var filterButton: UIBarButtonItem!
     
-    var activeFilterIndicator = false {
+    private(set) var activeFilterIndicator = false {
         
         didSet {
             
@@ -33,7 +33,14 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         }
     }
     
+    private var filterObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = filterObserver { FilterManager.shared.filter.remove(observer) }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +73,14 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         clear.tintColor = UIColor.blackColor()
         
         toolbarItems = [message, spacer, clear]
+        
+        filterObserver = FilterManager.shared.filter.observe { [weak self] in self?.activeFilterIndicator = $0.hasActiveFilters() }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        activeFilterIndicator = generalScheduleViewController.scheduleFilter.hasActiveFilters()
+        activeFilterIndicator = FilterManager.shared.filter.value.hasActiveFilters()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -92,33 +101,16 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         
         let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
         let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
-        
         navigationController.modalPresentationStyle = .FormSheet
-        generalScheduleFilterViewController.scheduleFilter = generalScheduleViewController.scheduleFilter
-        generalScheduleFilterViewController.delegate = self
         
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func clearFilters(sender: UIBarButtonItem) {
         
-        generalScheduleViewController.scheduleFilter.clearActiveFilters()
-        trackListViewController.scheduleFilter.clearActiveFilters()
-        levelListViewController.scheduleFilter.clearActiveFilters()
-        self.activeFilterIndicator = false
+        FilterManager.shared.filter.value.clearActiveFilters()
         
         self.reloadPagerTabStripView()
-    }
-    
-    // MARK: - GeneralScheduleFilterViewControllerDelegate
-    
-    func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter) {
-        
-        activeFilterIndicator = filter.hasActiveFilters()
-        
-        generalScheduleViewController.scheduleFilter = filter
-        trackListViewController.scheduleFilter = filter
-        levelListViewController.scheduleFilter = filter
     }
     
     // MARK: - RevealTabStripViewController

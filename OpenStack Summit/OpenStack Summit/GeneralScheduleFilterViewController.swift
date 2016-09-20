@@ -16,7 +16,7 @@ protocol GeneralScheduleFilterViewControllerDelegate: class {
     func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter)
 }
 
-final class GeneralScheduleFilterViewController: UIViewController, FilteredScheduleViewController, UITableViewDelegate, UITableViewDataSource, MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource {
+final class GeneralScheduleFilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource {
     
     // MARK: - IB Outlets
     
@@ -28,18 +28,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     @IBOutlet weak var tagListView: AMTagListView!
     @IBOutlet weak var clearTagsButton: UIButton!
     
-    // MARK: - Properties
-    
-    weak var delegate: GeneralScheduleFilterViewControllerDelegate?
-    
-    var scheduleFilter = ScheduleFilter() {
-        
-        didSet {
-            
-            self.delegate?.scheduleFilterController(self, didUpdateFilter: scheduleFilter)
-        }
-    }
-    
     // MARK: - Private Properties
     
     private let headerHeight: CGFloat = 40
@@ -47,14 +35,21 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     private let extraPadding: CGFloat = 5
     private var filteredTags = [String]()
     
-    private var activeTalksItemCount: Int { return scheduleFilter.filterSections[0].items.count }
-    private var trackGroupItemCount: Int { return scheduleFilter.filterSections[1].items.count }
-    private var eventTypeItemCount: Int { return scheduleFilter.filterSections[2].items.count }
-    private var levelItemCount: Int { return scheduleFilter.filterSections[3].items.count }
-    private var venuesItemCount: Int { return scheduleFilter.filterSections[4].items.count }
+    private var activeTalksItemCount: Int { return FilterManager.shared.filter.value.filterSections[0].items.count }
+    private var trackGroupItemCount: Int { return FilterManager.shared.filter.value.filterSections[1].items.count }
+    private var eventTypeItemCount: Int { return FilterManager.shared.filter.value.filterSections[2].items.count }
+    private var levelItemCount: Int { return FilterManager.shared.filter.value.filterSections[3].items.count }
+    private var venuesItemCount: Int { return FilterManager.shared.filter.value.filterSections[4].items.count }
     private var totalItemCount: Int { return activeTalksItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount + venuesItemCount }
     
+    private var filterObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = filterObserver { FilterManager.shared.filter.remove(observer) }
+    }
     
     override func viewDidLoad() {
         
@@ -78,6 +73,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         navigationItem.title = "FILTER"
         
         updateUI()
+        
+        filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.updateUI() }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -89,8 +86,6 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             selector: #selector(AMTagListView.removeTag(_:)),
             name: AMTagViewNotification,
             object: nil)
-        
-        scheduleFilter.updateSections()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -113,7 +108,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     @IBAction func willClearAllTags(sender: AnyObject) {
         
-        scheduleFilter.selections[FilterSectionType.Tag]?.removeAll()
+        FilterManager.shared.filter.value.selections[FilterSectionType.Tag]?.removeAll()
         tagListView.removeAllTags()
         resizeTagList(tagListView.contentSize.height)
         tagTextView.text = ""
@@ -125,13 +120,15 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         self.reloadFilters()
         
-        for tag in scheduleFilter.selections[FilterSectionType.Tag]!.rawValue as! [String] {
+        for tag in FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.rawValue as! [String] {
             
             self.addTag(tag)
         }
     }
     
     private func reloadFilters() {
+        
+        let scheduleFilter = FilterManager.shared.filter.value
         
         filtersTableView.delegate = self
         filtersTableView.dataSource = self
@@ -152,7 +149,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     @inline(__always)
     private func removeAllTags() {
         
-        scheduleFilter.selections[FilterSectionType.Tag]?.removeAll()
+        FilterManager.shared.filter.value.selections[FilterSectionType.Tag]?.removeAll()
         tagListView.removeAllTags()
     }
     
@@ -165,7 +162,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
         
-        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType]?.rawValue as? [Int] {
+        if let filterSelectionsForType = FilterManager.shared.filter.value.selections[filterSectionType]?.rawValue as? [Int] {
             
             for selectedId in filterSelectionsForType {
                 
@@ -181,7 +178,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     private func isItemSelected(filterSectionType: FilterSectionType, name: String) -> Bool {
         
-        if let filterSelectionsForType = scheduleFilter.selections[filterSectionType]?.rawValue as? [String] {
+        if let filterSelectionsForType = FilterManager.shared.filter.value.selections[filterSectionType]?.rawValue as? [String] {
             
             for selectedName in filterSelectionsForType {
                 
@@ -234,13 +231,13 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             if isItemSelected(filterSection.type, id: filterItem.identifier) {
                 
-                let index = scheduleFilter.selections[filterSection.type]!.rawValue.indexOf { $0 as! Int == filterItem.identifier }
-                scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+                let index = FilterManager.shared.filter.value.selections[filterSection.type]!.rawValue.indexOf { $0 as! Int == filterItem.identifier }
+                FilterManager.shared.filter.value.selections[filterSection.type]!.removeAtIndex(index!)
                 cell.isOptionSelected = false
             }
             else {
                 
-                scheduleFilter.selections[filterSection.type]!.append(filterItem.identifier)
+                FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.identifier)
                 cell.isOptionSelected = true
             }
         }
@@ -248,13 +245,13 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             if isItemSelected(filterSection.type, name: filterItem.name) {
                 
-                let index = scheduleFilter.selections[filterSection.type]!.rawValue.indexOf { $0 as! String == filterItem.name }
-                scheduleFilter.selections[filterSection.type]!.removeAtIndex(index!)
+                let index = FilterManager.shared.filter.value.selections[filterSection.type]!.rawValue.indexOf { $0 as! String == filterItem.name }
+                FilterManager.shared.filter.value.selections[filterSection.type]!.removeAtIndex(index!)
                 cell.isOptionSelected = false
             }
             else {
                 
-                scheduleFilter.selections[filterSection.type]!.append(filterItem.name)
+                FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.name)
                 cell.isOptionSelected = true
             }
         }
@@ -264,12 +261,12 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return scheduleFilter.filterSections.count
+        return FilterManager.shared.filter.value.filterSections.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let filterSection = scheduleFilter.filterSections[section]
+        let filterSection = FilterManager.shared.filter.value.filterSections[section]
         
         switch filterSection.type {
             
@@ -291,7 +288,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell)!
         
-        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
         
         configure(cell: cell, at: indexPath, filterSection: filterSection)
         
@@ -303,7 +300,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        let filterSection = scheduleFilter.filterSections[section]
+        let filterSection = FilterManager.shared.filter.value.filterSections[section]
         
         return filterSection.type != FilterSectionType.ActiveTalks ? headerHeight : 0
     }
@@ -312,7 +309,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewHeaderView")
         
-        let filterSection = scheduleFilter.filterSections[section]
+        let filterSection = FilterManager.shared.filter.value.filterSections[section]
         
         let header = cell as! TableViewHeaderView
         header.titleLabel.text = filterSection.name
@@ -322,7 +319,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
         
         if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 {
             
@@ -335,7 +332,7 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! GeneralScheduleFilterTableViewCell
         
-        let filterSection = scheduleFilter.filterSections[indexPath.section]
+        let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
         
         toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
     }
@@ -353,8 +350,8 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
                 return
             }
             
-            let index = scheduleFilter.selections[FilterSectionType.Tag]!.rawValue.indexOf { $0 as! String == escapedTag }
-            scheduleFilter.selections[FilterSectionType.Tag]!.removeAtIndex(index!)
+            let index = FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.rawValue.indexOf { $0 as! String == escapedTag }
+            FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.removeAtIndex(index!)
         }
         
         let tagView = notification.object as! AMTagView
@@ -387,12 +384,12 @@ final class GeneralScheduleFilterViewController: UIViewController, FilteredSched
             
             let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
-            if (escapedTag == "" || scheduleFilter.selections[FilterSectionType.Tag]?.rawValue.indexOf{ $0 as! String == escapedTag } != nil) {
+            if (escapedTag == "" || FilterManager.shared.filter.value.selections[FilterSectionType.Tag]?.rawValue.indexOf{ $0 as! String == escapedTag } != nil) {
                 
                 return false
             }
             
-            scheduleFilter.selections[FilterSectionType.Tag]!.append(escapedTag)
+            FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.append(escapedTag)
             
             return true
         }

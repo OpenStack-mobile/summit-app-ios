@@ -12,7 +12,7 @@ import AFHorizontalDayPicker
 import CoreSummit
 import RealmSwift
 
-class ScheduleViewController: UIViewController, FilteredScheduleViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IBOutlet
     
@@ -24,14 +24,11 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     final private(set) var dayEvents = [ScheduleItem]()
     
-    var scheduleFilter = ScheduleFilter() {
-        
-        didSet { let _ = self.view; self.loadData() }
-    }
-    
     private var pushRegisterInProgress = false
     
     private var realmNotificationToken: RealmSwift.NotificationToken!
+    
+    private var filterObserver: Int?
     
     // MARK: - Accessors
     
@@ -80,9 +77,12 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         stopNotifications()
         
         realmNotificationToken?.stop()
+        
+        if let observer = filterObserver { FilterManager.shared.filter.remove(observer) }
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         setBlankBackBarButtonItem()
@@ -102,10 +102,10 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         loadData()
         
         // realm notifications
-        realmNotificationToken = Store.shared.realm.addNotificationBlock { (notification, realm) in
-            
-            self.reloadSchedule()
-        }
+        realmNotificationToken = Store.shared.realm.addNotificationBlock { (_, _) in self.reloadSchedule() }
+        
+        // filter notifications
+        filterObserver = FilterManager.shared.filter.observe { _ in let _ = self.view; self.reloadSchedule() }
     }
     
     // MARK: - Actions
@@ -195,7 +195,6 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
                     
                 case let .Value(value):
                     
-                    controller.scheduleFilter = ScheduleFilter() // reset filter
                     controller.updateUI(value)
                 }
             }
@@ -206,6 +205,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
     
     private func updateUI(summit: Summit) {
         
+        let scheduleFilter = FilterManager.shared.filter.value
+        
         self.subscribeToPushChannelsUsingContextIfNotDoneAlready()
         
         self.summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
@@ -215,7 +216,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         let today = NSDate()
         
-        let shoudHidePastTalks = self.scheduleFilter.shoudHidePastTalks()
+        let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
         
         self.availableDates = self.scheduleAvailableDates(from: shoudHidePastTalks ? today : self.startDate, to: self.endDate)
         
@@ -254,6 +255,8 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         guard self.scheduleView.dayPicker.selectedDate != nil else { return }
         
+        let scheduleFilter = FilterManager.shared.filter.value
+        
         let tableView = self.scheduleView.tableView
         
         let oldSchedule = self.dayEvents
@@ -265,7 +268,7 @@ class ScheduleViewController: UIViewController, FilteredScheduleViewController, 
         
         let today = NSDate()
         
-        let shoudHidePastTalks = self.scheduleFilter.shoudHidePastTalks()
+        let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
 
         self.dayEvents = self.scheduledEvents(from: shoudHidePastTalks ? today : startDate, to: endDate)
         
