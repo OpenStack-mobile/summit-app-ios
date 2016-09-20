@@ -177,15 +177,11 @@ struct ScheduleFilter {
         filterSection.items = eventTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
         
         filterSections.append(filterSection)
-        selections[FilterSectionType.EventType] = .identifiers([])
         
         filterSection = FilterSection(type: .Level, name: "LEVEL")
         filterSection.items = levels.map { FilterSectionItem(identifier: 0, name: $0) }
         
         filterSections.append(filterSection)
-        selections[FilterSectionType.Level] = .names([])
-        
-        selections[FilterSectionType.Tag] = .names([])
         
         filterSection = FilterSection(type: .Venue, name: "VENUE")
         filterSection.items = venues.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
