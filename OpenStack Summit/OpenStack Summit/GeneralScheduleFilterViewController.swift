@@ -255,6 +255,11 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
                 cell.isOptionSelected = true
             }
         }
+        
+        if filterSection.type == FilterSectionType.ActiveTalks {
+            
+            FilterManager.shared.filter.value.didChangeActiveTalks = true
+        }
     }
     
     // MARK: - UITableViewDataSource
