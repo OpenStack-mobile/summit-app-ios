@@ -432,6 +432,11 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     func horizontalDayPicker(picker: AFHorizontalDayPicker, didSelectDate date: NSDate) {
         
         reloadSchedule()
+        
+        if dayEvents.isEmpty == false {
+            
+            self.scheduleView.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .Top)
+        }
     }
     
     // MARK: - UITableViewDataSource
