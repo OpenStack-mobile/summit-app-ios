@@ -259,12 +259,6 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
                 FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.name)
                 cell.isOptionSelected = true
             }
-            
-        fallthrough
-            
-        case .ActiveTalks:
-            
-            FilterManager.shared.filter.value.didChangeActiveTalks = true
         }
     }
     

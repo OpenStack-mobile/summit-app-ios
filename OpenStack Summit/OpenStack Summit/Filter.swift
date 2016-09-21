@@ -168,11 +168,24 @@ struct ScheduleFilter: Equatable {
     
     // MARK: - Properties
     
-    var selections = [FilterSectionType: FilterSelection]()
+    var selections = [FilterSectionType: FilterSelection]() {
+        
+        didSet {
+            
+            var oldFilter = self
+            oldFilter.selections = oldValue
+            let wasHidingPastTalks = oldFilter.shoudHidePastTalks()
+            
+            if shoudHidePastTalks() != wasHidingPastTalks {
+                
+                didChangeActiveTalks = true
+            }
+        }
+    }
     var filterSections = [FilterSection]()
     
     /// Whether a selection has been made in the `Active Talks` filters.
-    var didChangeActiveTalks = false
+    private(set) var didChangeActiveTalks = false
     
     // MARK: - Initialization
     
