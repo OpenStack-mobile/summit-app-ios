@@ -105,7 +105,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         realmNotificationToken = Store.shared.realm.addNotificationBlock { (_, _) in self.reloadSchedule() }
         
         // filter notifications
-        filterObserver = FilterManager.shared.filter.observe { _ in let _ = self.view; self.reloadSchedule() }
+        filterObserver = FilterManager.shared.filter.observe { _ in self.filterUpdated() }
     }
     
     // MARK: - Actions
@@ -269,8 +269,19 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         let today = NSDate()
         
         let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
+        
+        let dailyScheduleStartDate: NSDate
+        
+        if shoudHidePastTalks {
+            
+            dailyScheduleStartDate = startDate.mt_isAfter(today) ? startDate : today
+            
+        } else {
+            
+            dailyScheduleStartDate = startDate
+        }
 
-        self.dayEvents = self.scheduledEvents(from: shoudHidePastTalks ? today : startDate, to: endDate)
+        self.dayEvents = self.scheduledEvents(from: dailyScheduleStartDate, to: endDate)
         
         if oldSchedule.isEmpty {
             
@@ -355,17 +366,17 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         }
     }
     
-    private final func isDataLoaded() -> Bool {
+    private func isDataLoaded() -> Bool {
         
         return Store.shared.realm.objects(RealmSummit.self).first != nil
     }
 
-    private final func eventExist(id: Identifier) -> Bool {
+    private func eventExist(id: Identifier) -> Bool {
         
         return RealmSummitEvent.find(id, realm: Store.shared.realm) != nil
     }
     
-    private final func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
         
         let index = indexPath.row
         let event = dayEvents[index]
@@ -385,6 +396,25 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
         cell.layoutSubviews()
+    }
+    
+    private func filterUpdated() {
+        
+        // force view load
+        let _ = self.view
+        
+        let oldSelection = self.selectedDate
+        
+        self.loadData()
+        
+        if let firstDate = availableDates.first where firstDate.mt_isAfter(oldSelection) {
+            
+            self.selectedDate = firstDate
+            
+        } else {
+            
+            self.selectedDate = oldSelection
+        }
     }
     
     // MARK: - AFHorizontalDayPickerDelegate

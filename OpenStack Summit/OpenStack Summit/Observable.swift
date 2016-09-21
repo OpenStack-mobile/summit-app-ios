@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public final class Observable<Value> {
+public final class Observable<Value: Equatable> {
     
     // MARK: - Properties
     
@@ -14,7 +14,10 @@ public final class Observable<Value> {
         
         didSet {
             
-            observers.forEach { $0.callback(value) }
+            if value != oldValue {
+                
+                observers.forEach { $0.callback(value) }
+            }
         }
     }
     
