@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreSummit
-import SWRevealViewController
 import RealmSwift
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification

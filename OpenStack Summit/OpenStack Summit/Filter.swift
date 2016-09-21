@@ -209,7 +209,7 @@ struct ScheduleFilter: Equatable {
         filterSections = []
         
         let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
-        let summitTrackGroups = TrackGroup.from(realm: Store.shared.realm.objects(RealmTrackGroup).sort({ $0.name < $1.name }))
+        let summitTrackGroups = TrackGroup.scheduled()
         let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort().filter { $0 != "" }
         let venues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
         

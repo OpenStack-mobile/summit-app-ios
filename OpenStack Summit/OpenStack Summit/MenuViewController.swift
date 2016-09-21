@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftSpinner
-import SWRevealViewController
 import AeroGearOAuth2
 import CoreSummit
 
