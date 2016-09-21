@@ -57,10 +57,19 @@ public extension TrackGroup {
     /// Fetch all track groups that have some event associated with them. 
     static func scheduled(realm: Realm = Store.shared.realm) -> [TrackGroup] {
         
-        let tracks = realm.objects(RealmSummitEvent).filter("presentation.track.id > 0").map { $0.presentation!.track! }
+        let presentationTracks = SummitEvent.from(realm: realm.objects(RealmSummitEvent)).filter({ $0.presentation?.track != nil }).map { $0.presentation!.track! }
         
-        let trackGroups = realm.objects(RealmTrackGroup).filter("ANY %@ IN tracks.id", tracks.map({ $0.id })).sorted(RealmTrackGroup.sortProperties)
-        
-        return TrackGroup.from(realm: trackGroups)
+        return TrackGroup.from(realm: realm.objects(RealmTrackGroup)).filter {
+            
+            for track in $0.tracks {
+                
+                if presentationTracks.contains(track) {
+                    
+                    return true
+                }
+            }
+            
+            return false
+        }
     }
 }
