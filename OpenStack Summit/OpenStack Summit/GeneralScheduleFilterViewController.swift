@@ -86,6 +86,8 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
             selector: #selector(AMTagListView.removeTag(_:)),
             name: AMTagViewNotification,
             object: nil)
+        
+        FilterManager.shared.filter.value.updateSections()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -126,6 +128,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         }
     }
     
+    @inline(__always)
     private func reloadFilters() {
         
         let scheduleFilter = FilterManager.shared.filter.value
@@ -227,7 +230,9 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         
         let filterItem = filterSection.items[index]
         
-        if filterSection.type != FilterSectionType.Level && filterSection.type != FilterSectionType.ActiveTalks {
+        switch filterSection.type {
+            
+        case .EventType, .Tag, .Track, .TrackGroup, .Venue:
             
             if isItemSelected(filterSection.type, id: filterItem.identifier) {
                 
@@ -240,8 +245,8 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
                 FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.identifier)
                 cell.isOptionSelected = true
             }
-        }
-        else {
+            
+        case .Level, .ActiveTalks:
             
             if isItemSelected(filterSection.type, name: filterItem.name) {
                 
@@ -254,11 +259,6 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
                 FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.name)
                 cell.isOptionSelected = true
             }
-        }
-        
-        if filterSection.type == FilterSectionType.ActiveTalks {
-            
-            FilterManager.shared.filter.value.didChangeActiveTalks = true
         }
     }
     

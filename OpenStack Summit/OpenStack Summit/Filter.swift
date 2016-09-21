@@ -14,7 +14,7 @@ enum FilterSectionType {
     case ActiveTalks, EventType, Track, TrackGroup, Tag, Level, Venue
 }
 
-struct FilterSection {
+struct FilterSection: Equatable {
     var type: FilterSectionType
     var name: String
     var items: [FilterSectionItem]
@@ -27,13 +27,26 @@ struct FilterSection {
     }
 }
 
-struct FilterSectionItem: Unique, Named {
+func == (lhs: FilterSection, rhs: FilterSection) -> Bool {
+    
+    return lhs.type == rhs.type
+        && lhs.name == rhs.name
+        && lhs.items == rhs.items
+}
+
+struct FilterSectionItem: Unique, Named, Equatable {
     
     let identifier: Identifier
     let name: String
 }
 
-enum FilterSelection: RawRepresentable {
+func == (lhs: FilterSectionItem, rhs: FilterSectionItem) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+}
+
+enum FilterSelection: RawRepresentable, Equatable {
     
     case identifiers([Identifier])
     case names([String])
@@ -142,15 +155,37 @@ enum FilterSelection: RawRepresentable {
     }
 }
 
-struct ScheduleFilter {
+func == (lhs: FilterSelection, rhs: FilterSelection) -> Bool {
+    
+    switch (lhs, rhs) {
+    case let (.identifiers(lhsValues), .identifiers(rhsValues)): return lhsValues == rhsValues
+    case let (.names(lhsValues), .names(rhsValues)): return lhsValues == rhsValues
+    default: return false
+    }
+}
+
+struct ScheduleFilter: Equatable {
     
     // MARK: - Properties
     
-    var selections = [FilterSectionType: FilterSelection]()
+    var selections = [FilterSectionType: FilterSelection]() {
+        
+        didSet {
+            
+            var oldFilter = self
+            oldFilter.selections = oldValue
+            let wasHidingPastTalks = oldFilter.shoudHidePastTalks()
+            
+            if shoudHidePastTalks() != wasHidingPastTalks {
+                
+                didChangeActiveTalks = true
+            }
+        }
+    }
     var filterSections = [FilterSection]()
     
     /// Whether a selection has been made in the `Active Talks` filters.
-    var didChangeActiveTalks = false
+    private(set) var didChangeActiveTalks = false
     
     // MARK: - Initialization
     
@@ -240,15 +275,14 @@ struct ScheduleFilter {
             let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
             let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
             let now = NSDate()
-            
-            let activeTalksFilters = ["Hide Past Talks"]
-            
+                        
             if now.mt_isBetweenDate(startDate, andDate: endDate) {
                 
                 // dont want to override selection
                 if didChangeActiveTalks == false {
                     
-                    selections[FilterSectionType.ActiveTalks] = .names(activeTalksFilters) // Active Talks filters are static
+                    // start hiding active talks
+                    selections[FilterSectionType.ActiveTalks] = .names(["Hide Past Talks"])
                 }
             }
             else {
@@ -299,6 +333,13 @@ struct ScheduleFilter {
     }
 }
 
+func == (lhs: ScheduleFilter, rhs: ScheduleFilter) -> Bool {
+    
+    return lhs.selections == rhs.selections
+        && lhs.filterSections == rhs.filterSections
+        && lhs.didChangeActiveTalks == rhs.didChangeActiveTalks
+}
+
 // MARK: - Manager
 
 final class FilterManager {
@@ -323,7 +364,7 @@ final class FilterManager {
         
         notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _,_ in self?.filter.value.updateSections() }
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
     }
     
     @objc private func timerUpdate(sender: NSTimer) {
