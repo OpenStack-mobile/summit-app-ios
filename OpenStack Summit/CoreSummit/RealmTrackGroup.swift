@@ -50,6 +50,26 @@ public extension RealmTrackGroup {
         
         return [SortDescriptor(property: "name", ascending: true)]
     }
+}
+
+public extension TrackGroup {
     
-    
+    /// Fetch all track groups that have some event associated with them. 
+    static func scheduled(realm: Realm = Store.shared.realm) -> [TrackGroup] {
+        
+        let presentationTracks = SummitEvent.from(realm: realm.objects(RealmSummitEvent)).filter({ $0.presentation?.track != nil }).map { $0.presentation!.track! }
+        
+        return TrackGroup.from(realm: realm.objects(RealmTrackGroup).sorted(RealmTrackGroup.sortProperties)).filter {
+            
+            for track in $0.tracks {
+                
+                if presentationTracks.contains(track) {
+                    
+                    return true
+                }
+            }
+            
+            return false
+        }
+    }
 }

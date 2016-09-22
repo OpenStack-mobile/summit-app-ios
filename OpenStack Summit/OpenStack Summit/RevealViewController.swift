@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SWRevealViewController
 
 @objc protocol RevealViewController: class { }
 
