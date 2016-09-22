@@ -88,6 +88,8 @@ public final class Store {
     
     private init() {
         
+        configOAuthAccounts()
+        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(
             self,
