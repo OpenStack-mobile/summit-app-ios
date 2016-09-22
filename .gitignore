@@ -28,10 +28,26 @@ DerivedData
 Pods/
 
 # Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-Carthage/Build
+Carthage/
 
 # Fabric
 Fabric.framework/
+
+
+*.generated.swift
+
+Vendor
+
+OpenStack Summit/OpenStackSummit.app.dSYM.zip
+
+DeployBeta.sh
+
+
+OpenStack Summit/CoreSummit/Staging.swift
+OpenStack Summit/CoreSummit/Production.swift
+
+OpenStack Summit/OpenStack Summit/AppConsumerKey.swift
+
+OpenStack Summit/Release.entitlements
+OpenStack Summit/Debug.entitlements
+OpenStack Summit/Beta.entitlements

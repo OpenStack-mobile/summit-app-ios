@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="iQa-Ya-2eP">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Venues-->
+        <scene sceneID="Qo6-ut-1G7">
+            <objects>
+                <viewController storyboardIdentifier="VenueMap" id="lcu-1G-wrV" customClass="OSSTVVenueMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7MF-Jm-wUy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ur5-b6-OvQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZbT-yG-cSi">
+                        <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcb-3N-1uw">
+                                <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
+                                <connections>
+                                    <outlet property="delegate" destination="lcu-1G-wrV" id="ntx-1V-jbZ"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hcb-3N-1uw" firstAttribute="top" secondItem="7MF-Jm-wUy" secondAttribute="bottom" id="39A-Ky-bv1"/>
+                            <constraint firstAttribute="trailing" secondItem="hcb-3N-1uw" secondAttribute="trailing" id="3CP-4o-3sw"/>
+                            <constraint firstItem="hcb-3N-1uw" firstAttribute="leading" secondItem="ZbT-yG-cSi" secondAttribute="leading" id="bXt-co-ceq"/>
+                            <constraint firstItem="Ur5-b6-OvQ" firstAttribute="top" secondItem="hcb-3N-1uw" secondAttribute="bottom" id="wQj-MF-zqB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Venues" id="KRf-oN-6yH"/>
+                    <connections>
+                        <outlet property="mapView" destination="hcb-3N-1uw" id="c13-Vc-tL6"/>
+                        <outlet property="preferredFocusedView" destination="hcb-3N-1uw" id="HTr-ZB-c3h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p8Q-Oh-b18" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="737.5" y="493"/>
+        </scene>
+        <!--Venues-->
+        <scene sceneID="cDn-pq-hDo">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lyF-yx-co5" customClass="OSSTVVenueDirectoryViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="OGw-AC-y05">
+                        <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VenueTableViewCell" textLabel="28P-h0-jEt" style="IBUITableViewCellStyleDefault" id="684-37-eLu">
+                                <rect key="frame" x="0.0" y="199" width="634" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="684-37-eLu" id="Qam-do-Zhe">
+                                    <rect key="frame" x="0.0" y="0.0" width="618" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Marriot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="28P-h0-jEt">
+                                            <rect key="frame" x="20" y="0.0" width="578" height="66"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="OJy-TR-RAG" kind="presentation" identifier="showVenueDetail" id="tG1-bx-OcB"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lyF-yx-co5" id="Xx1-k1-FoH"/>
+                            <outlet property="delegate" destination="lyF-yx-co5" id="lgm-bM-wHy"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Venues" id="mvW-Mg-duR"/>
+                    <connections>
+                        <segue destination="lcu-1G-wrV" kind="showDetail" identifier="showVenueMap" id="Q7h-Ii-Ewc"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0N-fG-iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1288" y="-651"/>
+        </scene>
+        <!--VenueDetail-->
+        <scene sceneID="mVH-3M-frX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="VenueDetail" id="OJy-TR-RAG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x62-Bp-qme" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1913.5" y="-981"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f5J-5i-H6v">
+            <objects>
+                <navigationController id="wnE-vu-m8p" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gD7-nf-kK9">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lyF-yx-co5" kind="relationship" relationship="rootViewController" id="UQC-Z0-Gvy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2e-MJ-PtR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="408" y="-651"/>
+        </scene>
+        <!--Venues-->
+        <scene sceneID="pnq-9R-3IZ">
+            <objects>
+                <splitViewController storyboardIdentifier="SplitViewController" id="iQa-Ya-2eP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Venues" id="vzF-cd-hq7"/>
+                    <connections>
+                        <segue destination="wnE-vu-m8p" kind="relationship" relationship="masterViewController" id="E3w-fg-z7m"/>
+                        <segue destination="lcu-1G-wrV" kind="relationship" relationship="detailViewController" id="DSU-ho-9cU"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rx9-bx-TZh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1089" y="-82"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Q7h-Ii-Ewc"/>
+    </inferredMetricsTieBreakers>
+</document>
