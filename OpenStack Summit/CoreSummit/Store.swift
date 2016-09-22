@@ -54,7 +54,9 @@ public final class Store {
     
     #endif
     
-    public var environment = Environment.Staging
+    public var environment = Environment.Staging {
+        didSet { configOAuthAccounts() }
+    }
     
     public var session: SessionStorage? {
         
@@ -80,12 +82,11 @@ public final class Store {
     // MARK: - Initialization
     
     deinit {
+        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private init() {
-        
-        configOAuthAccounts()
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(
