@@ -27,7 +27,18 @@ public extension Track {
         // get all local tracks
         let realmTracks = realm.objects(RealmTrack)
         
-        var tracks = Track.from(realm: realmTracks)
+        // get all scheduled track ids
+        let presentationTracks = SummitEvent.from(realm: realm.objects(RealmSummitEvent)).filter({ $0.presentation?.track != nil }).map { $0.presentation!.track! }
+
+        var tracks = Track.from(realm: realmTracks).filter {
+            
+            if presentationTracks.contains($0.identifier) {
+                
+                return true
+            }
+            
+            return false
+        }
         
         tracks = tracks.sort { $0.name < $1.name }
         
