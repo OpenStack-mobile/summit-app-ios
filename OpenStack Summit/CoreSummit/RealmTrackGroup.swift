@@ -59,7 +59,7 @@ public extension TrackGroup {
         
         let presentationTracks = SummitEvent.from(realm: realm.objects(RealmSummitEvent)).filter({ $0.presentation?.track != nil }).map { $0.presentation!.track! }
         
-        return TrackGroup.from(realm: realm.objects(RealmTrackGroup)).filter {
+        return TrackGroup.from(realm: realm.objects(RealmTrackGroup).sorted(RealmTrackGroup.sortProperties)).filter {
             
             for track in $0.tracks {
                 
