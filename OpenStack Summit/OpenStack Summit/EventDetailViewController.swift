@@ -1,4 +1,4 @@
-	//
+//
 //  EventDetailViewController.swift
 //  OpenStackSummit
 //
@@ -12,9 +12,397 @@ import Cosmos
 import AHKActionSheet
 import SwiftSpinner
 import CoreSummit
+import RealmSwift
 import XCDYouTubeKit
+    
+final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+    
+    // MARK: - IB Outlets
+    
+    @IBOutlet private(set) weak var scheduledButton: UIBarButtonItem!
+    
+    // MARK: - Properties
+    
+    var event: Identifier! {
+        
+        didSet { if isViewLoaded() { updateUI() } }
+    }
+    
+    // MARK: - Private Properties
+    
+    private var eventCache: Event!
+    
+    private var eventDetail: EventDetail!
+    
+    private var data = [Detail]()
+    
+    private var notificationToken: RealmSwift.NotificationToken?
+    
+    private var scheduled = false {
+        
+        didSet {
+            
+            let image = scheduled ? R.image.checked_active()! : R.image.unchecked()!
+            
+            scheduledButton.image = image.imageWithRenderingMode(.AlwaysOriginal)
+        }
+    }
+    
+    // MARK: - Loading
+    
+    deinit {
+        
+        notificationToken?.stop()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // setup tableview
+        tableView.registerNib(R.nib.peopleTableViewCell)
+        tableView.registerNib(R.nib.detailImageTableViewCell)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
+        
+        // update from Realm
+        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _ in self?.updateUI() }
+        
+        // update UI
+        self.updateUI()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func playVideo(sender: UIButton) {
+        
+        assert(eventDetail.video != nil, "No video")
+        
+        self.playVideo(eventDetail.video!)
+    }
+    
+    @IBAction func share(sender: UIBarButtonItem) {
+        
+        let activityViewController = UIActivityViewController(activityItems: [eventDetail.webpageURL], applicationActivities: nil)
+        activityViewController.modalPresentationStyle = .Popover
+        activityViewController.popoverPresentationController?.barButtonItem = sender
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func toggleSchedule(sender: UIBarButtonItem) {
+        
+        let oldValue = self.scheduled
+        
+        // update UI
+        self.scheduled = !oldValue
+        
+        let completion: ErrorValue<()> -> () = { [weak self] (response) in
+            
+            guard let controller = self else { return }
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                // restore original value
+                controller.scheduled = oldValue
+                
+                // show error
+                controller.showErrorMessage(error as NSError)
+                
+            case .Value(): break
+            }
+        }
+        
+        if oldValue {
+            
+            Store.shared.removeEventFromSchedule(event: self.event, completion: completion)
+            
+        } else {
+            
+            Store.shared.addEventToSchedule(event: self.event, completion: completion)
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func updateUI() {
+        
+        assert(event != nil, "No identifier set")
+        
+        // handle event deletion
+        guard let realmEvent = RealmSummitEvent.find(event, realm: Store.shared.realm) else {
+            
+            showErrorAlert("The event has been deleted.",
+                           okHandler: { self.navigationController?.popToRootViewControllerAnimated(true) })
+            return
+        }
+        
+        self.eventCache = Event(realmEntity: realmEvent)
+        self.eventDetail = EventDetail(realmEntity: realmEvent)
+        
+        self.data = [.title]
+        
+        if eventDetail.video != nil {
+            
+            data.append(.video)
+        }
+        
+        data.append(.date)
+        data.append(.location)
+        data.append(.description)
+        
+        // configure bar button items
+        self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
+        
+        // reload table
+        self.tableView.reloadData()
+    }
+    
+    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+        
+        assert(indexPath.section == Section.speakers.rawValue, "\(indexPath.section) is not speaker section")
+        
+        let speaker = eventDetail.speakers[indexPath.row]
+        cell.name = speaker.name
+        cell.title = speaker.title
+        cell.pictureURL = speaker.pictureURL
+        cell.isModerator = eventDetail.moderator != nil && speaker.identifier == eventDetail.moderator?.identifier
+        
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsetsZero
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return Section.count
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let section = Section(rawValue: section)!
+        
+        switch section {
+            
+        case .details: return data.count
+        case .speakers: return eventCache.presentation?.speakers.count ?? 0
+        }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let section = Section(rawValue: indexPath.section)!
+        
+        switch section {
+            
+        case .details:
+            
+            let detail = self.data[indexPath.row]
+            
+            switch detail {
+                
+            case .title:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTitleTableViewCell, forIndexPath: indexPath)!
+                
+                // title
+                cell.titleLabel.text = eventDetail.name
+                
+                // track
+                cell.trackLabel.text = eventDetail.track
+                cell.trackLabelHeightConstraint.constant = eventDetail.track.isEmpty ? 0 : 30
+                cell.trackLabel.updateConstraints()
+                
+                return cell
+                
+            case .description:
+                
+                // description text
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDescriptionTableViewCell, forIndexPath: indexPath)!
+                
+                let eventDescriptionHTML = String(format:"<span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
+                let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+                
+                cell.descriptionTextView.attributedText = attrStr
+                cell.descriptionTextView.sizeToFit()
+                
+                // sponsors
+                
+                cell.sponsorsLabel.text = eventDetail.sponsors
+                cell.sponsorsLabelHeightConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 30
+                cell.sponsorsLabel.updateConstraints()
+                
+                return cell
+                
+            case .date:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                
+                cell.titleLabel!.text = eventDetail.dateTime
+                cell.detailImageView.image = R.image.time()!
+                cell.accessoryType = .None
+                
+                return cell
+                
+            case .tags:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                
+                cell.titleLabel!.text = eventDetail.tags
+                cell.detailImageView.image = R.image.tag()!
+                cell.accessoryType = .None
+                
+                return cell
+                
+            case .location:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                
+                cell.titleLabel!.text = eventDetail.location
+                cell.detailImageView.image = R.image.map_pin()!
+                cell.accessoryType = .DisclosureIndicator
+                
+                return cell
+                
+            case .level:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                
+                cell.titleLabel!.text = eventDetail.level
+                cell.detailImageView.image = R.image.level()!
+                cell.accessoryType = .None
+                
+                return cell
+                
+            case .summitTypes:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                
+                cell.titleLabel!.text = eventDetail.summitTypes
+                cell.detailImageView.image = R.image.credential()!
+                cell.accessoryType = .None
+                
+                return cell
+                
+            case .video:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
+                
+                cell.playButton.hidden = true
+                cell.activityIndicator.hidden = false
+                cell.activityIndicator.startAnimating()
+                
+                if let thumbnailURL = NSURL(youtubeThumbnail: eventDetail.video!.youtube) {
+                    
+                    cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
+                        
+                        cell.videoImageView.image = image
+                        cell.playButton.hidden = false
+                        cell.activityIndicator.stopAnimating()
+                        cell.setNeedsDisplay()
+                    })
+                }
+                
+                return cell
+                
+            case .feedback:
+                
+                return Optional.None!
+            }
+            
+        case .speakers:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            
+            configure(cell: cell, at: indexPath)
+            
+            return cell
+        }
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let section = Section(rawValue: indexPath.section)!
+        
+        switch section {
+            
+        case .details:
+            
+            let detail = self.data[indexPath.row]
+            
+            switch detail {
+                
+            case .location:
+                
+                guard let venue = eventDetail.venue
+                    else { return }
+                
+                showLocationDetail(venue)
+                
+            default: break
+            }
+            
+        case .speakers:
+            
+            
+        }
+    }
+}
 
-final class EventDetailViewController: UIViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, UITableViewDelegate, UITableViewDataSource {
+// MARK: - Supporting Types
+
+private extension EventDetailViewController {
+    
+    enum Section: Int {
+        
+        static let count = 2
+        
+        case details
+        case speakers
+    }
+    
+    enum Detail {
+        
+        case title
+        case video
+        case feedback
+        case date
+        case location
+        case tags
+        case description
+        case summitTypes
+        case level
+    }
+}
+
+final class EventDetailTitleTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet weak var trackLabelHeightConstraint: NSLayoutConstraint!
+}
+
+final class EventDetailVideoTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var videoImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+}
+
+final class EventDetailDescriptionTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var sponsorsLabel: UILabel!
+    @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
+}
+    
+// MARK: - Legacy
+
+final class OldEventDetailViewController: UIViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
     
@@ -301,9 +689,9 @@ final class EventDetailViewController: UIViewController, ShowActivityIndicatorPr
         assert(event != nil, "Event not set")
         
         scheduledButton.target = self
-        scheduledButton.action = #selector(EventDetailViewController.toggleSchedule(_:))
+        scheduledButton.action = #selector(OldEventDetailViewController.toggleSchedule(_:))
         submenuButton.target = self
-        submenuButton.action = #selector(EventDetailViewController.leaveFeedback)
+        submenuButton.action = #selector(OldEventDetailViewController.leaveFeedback)
         
         feedbackButton.layer.cornerRadius = 10
 
