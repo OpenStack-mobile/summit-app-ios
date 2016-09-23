@@ -359,15 +359,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     controller.showUserProfile()
                     controller.reloadMenu()
                     
-                    if Store.shared.isLoggedInAndConfirmedAttendee {
-                        
-                        // reload schedule
-                        controller.showEvents()
-                       
-                    } else {
-                        
-                        controller.toggleMenuSelection(controller.myProfileButton)
-                    }
+                    controller.toggleMenuSelection(controller.myProfileButton)
                     
                     PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in
                     })
