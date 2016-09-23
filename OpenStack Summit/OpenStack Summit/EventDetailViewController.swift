@@ -59,7 +59,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         super.viewDidLoad()
         
         // setup tableview
-        tableView.registerNib(R.nib.peopleTableViewCell)
         tableView.registerNib(R.nib.detailImageTableViewCell)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
@@ -69,6 +68,20 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // update UI
         self.updateUI()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.userActivity?.becomeCurrent()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            self.userActivity?.resignCurrent()
+        }
     }
     
     // MARK: - Actions
@@ -156,6 +169,14 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // reload table
         self.tableView.reloadData()
+        
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+        userActivity.title = eventDetail.name
+        userActivity.webpageURL = eventDetail.webpageURL
+        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
+        
+        self.userActivity = userActivity
     }
     
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
@@ -348,7 +369,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
         case .speakers:
             
+            let speaker = eventDetail.speakers[indexPath.row]
             
+            let memberVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
+            
+            self.showViewController(memberVC, sender: self)
         }
     }
 }
