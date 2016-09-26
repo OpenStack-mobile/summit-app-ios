@@ -160,15 +160,31 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             data.append(.video)
         }
         
-        data.append(.date)
-        data.append(.location)
+        data += [.date, .location]
+        
+        if eventDetail.tags.isEmpty == false {
+            
+            data.append(.tags)
+        }
+        
         data.append(.description)
+                
+        if eventDetail.summitTypes.isEmpty == false {
+            
+            data.append(.summitTypes)
+        }
+        
+        if eventDetail.level.isEmpty == false {
+            
+            data.append(.level)
+        }
         
         // configure bar button items
         self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
         
         // reload table
         self.tableView.reloadData()
+        self.tableView.tableFooterView = UIView()
         
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
@@ -253,6 +269,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 cell.sponsorsLabel.text = eventDetail.sponsors
                 cell.sponsorsLabelHeightConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 30
+                cell.sponsorsLabelSeparationConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 8
                 cell.sponsorsLabel.updateConstraints()
                 
                 return cell
@@ -264,6 +281,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.dateTime
                 cell.detailImageView.image = R.image.time()!
                 cell.accessoryType = .None
+                cell.selectionStyle = .None
                 
                 return cell
                 
@@ -274,6 +292,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.tags
                 cell.detailImageView.image = R.image.tag()!
                 cell.accessoryType = .None
+                cell.selectionStyle = .None
                 
                 return cell
                 
@@ -284,6 +303,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.location
                 cell.detailImageView.image = R.image.map_pin()!
                 cell.accessoryType = .DisclosureIndicator
+                cell.selectionStyle = .None
                 
                 return cell
                 
@@ -294,6 +314,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.level
                 cell.detailImageView.image = R.image.level()!
                 cell.accessoryType = .None
+                cell.selectionStyle = .None
                 
                 return cell
                 
@@ -304,6 +325,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.summitTypes
                 cell.detailImageView.image = R.image.credential()!
                 cell.accessoryType = .None
+                cell.selectionStyle = .None
                 
                 return cell
                 
@@ -335,7 +357,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
         case .speakers:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.speakerTableViewCell, forIndexPath: indexPath)!
             
             configure(cell: cell, at: indexPath)
             
@@ -423,6 +445,7 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
 }
     
 // MARK: - Legacy
