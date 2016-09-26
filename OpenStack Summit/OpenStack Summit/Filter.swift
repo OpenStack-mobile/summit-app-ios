@@ -11,7 +11,7 @@ import RealmSwift
 
 enum FilterSectionType {
     
-    case ActiveTalks, EventType, Track, TrackGroup, Tag, Level, Venue
+    case ActiveTalks, SummitType, Track, TrackGroup, Tag, Level, Venue
 }
 
 struct FilterSection: Equatable {
@@ -193,8 +193,8 @@ struct ScheduleFilter: Equatable {
         
         // setup empty selections
         selections[FilterSectionType.ActiveTalks] = .names([])
+        selections[FilterSectionType.SummitType] = .identifiers([])
         selections[FilterSectionType.TrackGroup] = .identifiers([])
-        selections[FilterSectionType.EventType] = .identifiers([])
         selections[FilterSectionType.Level] = .names([])
         selections[FilterSectionType.Tag] = .names([])
         selections[FilterSectionType.Venue] = .identifiers([])
@@ -208,7 +208,7 @@ struct ScheduleFilter: Equatable {
         
         filterSections = []
         
-        let eventTypes = EventType.from(realm: Store.shared.realm.objects(RealmEventType).sort({ $0.name < $1.name }))
+        let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
         let summitTrackGroups = TrackGroup.scheduled()
         let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort().filter { $0 != "" }
         let venues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
@@ -238,15 +238,15 @@ struct ScheduleFilter: Equatable {
         
         filterSections.append(filterSection)
         
-        filterSection = FilterSection(type: .TrackGroup, name: "SUMMIT CATEGORY")
-        filterSection.items = summitTrackGroups.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
-        selections[FilterSectionType.TrackGroup]?.update(.identifiers(summitTrackGroups.identifiers))
+        filterSection = FilterSection(type: .SummitType, name: "SUMMIT TYPE")
+        filterSection.items = summitTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
+        selections[FilterSectionType.SummitType]?.update(.identifiers(summitTypes.identifiers))
         
         filterSections.append(filterSection)
         
-        filterSection = FilterSection(type: .EventType, name: "EVENT TYPE")
-        filterSection.items = eventTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
-        selections[FilterSectionType.EventType]?.update(.identifiers(eventTypes.identifiers))
+        filterSection = FilterSection(type: .TrackGroup, name: "SUMMIT CATEGORY")
+        filterSection.items = summitTrackGroups.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
+        selections[FilterSectionType.TrackGroup]?.update(.identifiers(summitTrackGroups.identifiers))
         
         filterSections.append(filterSection)
         
