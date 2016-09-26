@@ -36,11 +36,11 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     private var filteredTags = [String]()
     
     private var activeTalksItemCount: Int { return FilterManager.shared.filter.value.filterSections[0].items.count }
-    private var trackGroupItemCount: Int { return FilterManager.shared.filter.value.filterSections[1].items.count }
-    private var eventTypeItemCount: Int { return FilterManager.shared.filter.value.filterSections[2].items.count }
+    private var summitTypeItemCount: Int { return FilterManager.shared.filter.value.filterSections[1].items.count }
+    private var trackGroupItemCount: Int { return FilterManager.shared.filter.value.filterSections[2].items.count }
     private var levelItemCount: Int { return FilterManager.shared.filter.value.filterSections[3].items.count }
     private var venuesItemCount: Int { return FilterManager.shared.filter.value.filterSections[4].items.count }
-    private var totalItemCount: Int { return activeTalksItemCount + trackGroupItemCount + eventTypeItemCount + levelItemCount + venuesItemCount }
+    private var totalItemCount: Int { return activeTalksItemCount + summitTypeItemCount + trackGroupItemCount + levelItemCount + venuesItemCount }
     
     private var filterObserver: Int?
     
@@ -138,7 +138,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         filtersTableView.reloadData()
         
         filtersTableViewHeightConstraint.constant = cellHeight * CGFloat(totalItemCount)
-        filtersTableViewHeightConstraint.constant += headerHeight * (CGFloat(scheduleFilter.filterSections.count) - 1)
+        filtersTableViewHeightConstraint.constant += headerHeight * (CGFloat(scheduleFilter.filterSections.count) - 2)
         filtersTableViewHeightConstraint.constant += extraPadding * 4 * (CGFloat(scheduleFilter.filterSections.count) - (activeTalksItemCount == 0 ? 1 : 0)) - (activeTalksItemCount == 0 ? 0 : extraPadding * 2)
     }
     
@@ -232,7 +232,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         
         switch filterSection.type {
             
-        case .EventType, .Tag, .Track, .TrackGroup, .Venue:
+        case .SummitType, .Tag, .Track, .TrackGroup, .Venue:
             
             if isItemSelected(filterSection.type, id: filterItem.identifier) {
                 
@@ -277,7 +277,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
             
         case .ActiveTalks: return activeTalksItemCount
             
-        case .EventType: return eventTypeItemCount
+        case .SummitType: return summitTypeItemCount
             
         case .TrackGroup: return trackGroupItemCount
             
@@ -307,7 +307,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         
         let filterSection = FilterManager.shared.filter.value.filterSections[section]
         
-        return filterSection.type != FilterSectionType.ActiveTalks ? headerHeight : 0
+        return filterSection.type != FilterSectionType.ActiveTalks && filterSection.type != FilterSectionType.SummitType ? headerHeight : 0
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
