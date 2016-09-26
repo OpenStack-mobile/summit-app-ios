@@ -45,12 +45,14 @@ public extension RealmSummitEvent {
         return realmEntities.map { $0 }
     }
     
-    static func filter(startDate: NSDate, endDate: NSDate, eventTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, venues: [Int]?, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
+    static func filter(startDate: NSDate, endDate: NSDate, summitTypes: [Int]?, tracks: [Int]?, trackGroups: [Int]?, tags: [String]?, levels: [String]?, venues: [Int]?, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
         
         var events = realm.objects(RealmSummitEvent).filter("start >= %@ and end <= %@", startDate, endDate).sorted(RealmSummitEvent.sortProperties)
         
-        if (eventTypes != nil && eventTypes!.count > 0) {
-            events = events.filter("eventType.id in %@", eventTypes!)
+        if (summitTypes != nil && summitTypes!.count > 0) {
+            for summitTypeId in summitTypes! {
+                events = events.filter("ANY summitTypes.id = %@", summitTypeId)
+            }
         }
         
         if (trackGroups != nil && trackGroups!.count > 0) {
