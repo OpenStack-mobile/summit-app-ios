@@ -303,7 +303,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.location
                 cell.detailImageView.image = R.image.map_pin()!
                 cell.accessoryType = .DisclosureIndicator
-                cell.selectionStyle = .None
                 
                 return cell
                 
@@ -352,7 +351,24 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
             case .feedback:
                 
-                return Optional.None!
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailFeedbackTableViewCell, forIndexPath: indexPath)!
+                
+                cell.feedbackView.rating = 0.0
+                
+                cell.feedbackView.didFinishTouchingCosmos = { [weak self] (rating) in
+                    
+                    guard let controller = self else { return }
+                    
+                    let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
+                    
+                    feedbackVC.event = controller.event
+                    
+                    feedbackVC.rate = Int(rating) // prefill rating
+                    
+                    controller.showViewController(feedbackVC, sender: self)
+                }
+                
+                return cell
             }
             
         case .speakers:
@@ -446,6 +462,11 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
     @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
+}
+
+final class EventDetailFeedbackTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var feedbackView: CosmosView!
 }
     
 // MARK: - Legacy

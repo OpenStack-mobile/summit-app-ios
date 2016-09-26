@@ -12,5 +12,5 @@ final class DetailImageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var detailImageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: CopyableLabel!
 }

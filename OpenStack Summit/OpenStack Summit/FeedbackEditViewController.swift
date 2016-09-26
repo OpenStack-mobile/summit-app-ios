@@ -28,11 +28,19 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     // MARK: - Accessors
     
-    private(set) var rate: Int {
+    var rate: Int {
         get {
+            
+            // force view load
+            let _ = self.view
+            
             return Int(rateView.rating)
         }
         set {
+            
+            // force view load
+            let _ = self.view
+            
             rateView.rating = Double(newValue)
         }
     }

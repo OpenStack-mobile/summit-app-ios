@@ -97,8 +97,55 @@
                                     <outlet property="videoImageView" destination="m58-uj-ukS" id="coj-eI-RE6"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDetailFeedbackTableViewCell" rowHeight="73" id="WhY-wo-8cf" customClass="EventDetailFeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="333" width="414" height="73"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WhY-wo-8cf" id="7NU-tV-dMx">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zr2-pC-X4H" customClass="CosmosView" customModule="Cosmos">
+                                            <rect key="frame" x="130" y="20" width="154" height="30"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                                            </accessibility>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="KvM-9T-tra"/>
+                                                <constraint firstAttribute="width" constant="154" id="dyO-kL-ao4"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                    <real key="value" value="30"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                                    <color key="value" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                    <color key="value" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="zr2-pC-X4H" firstAttribute="centerX" secondItem="7NU-tV-dMx" secondAttribute="centerX" id="ITK-iF-uGx"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zr2-pC-X4H" secondAttribute="bottom" constant="20" id="f0P-SZ-Kqb"/>
+                                        <constraint firstItem="zr2-pC-X4H" firstAttribute="top" secondItem="7NU-tV-dMx" secondAttribute="top" constant="20" id="f9M-40-JkB"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="feedbackView" destination="zr2-pC-X4H" id="lEn-LA-ZCb"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDescriptionTableViewCell" rowHeight="178" id="KT2-cw-qaQ" customClass="EventDetailDescriptionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="333" width="414" height="178"/>
+                                <rect key="frame" x="0.0" y="406" width="414" height="178"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT2-cw-qaQ" id="vdo-rN-wnx">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="177.5"/>
@@ -139,7 +186,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="102" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="511" width="414" height="102"/>
+                                <rect key="frame" x="0.0" y="584" width="414" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xz4-Sc-pHU" id="D2t-on-rtc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="101.5"/>
