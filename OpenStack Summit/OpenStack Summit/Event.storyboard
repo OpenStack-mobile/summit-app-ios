@@ -58,25 +58,28 @@
                                     <outlet property="trackLabelHeightConstraint" destination="TDr-b0-wDx" id="3dI-mi-sfb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailVideoTableViewCell" rowHeight="149" id="gU0-Ox-iCc" customClass="EventDetailVideoTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="184" width="414" height="149"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailVideoTableViewCell" rowHeight="160" id="gU0-Ox-iCc" customClass="EventDetailVideoTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="184" width="414" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gU0-Ox-iCc" id="OBk-Rl-t1c">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="148.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m58-uj-ukS">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="148.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="160" id="Ubl-Fs-nfg"/>
+                                            </constraints>
                                         </imageView>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPi-Oa-tVX">
-                                            <rect key="frame" x="146" y="14" width="121" height="121"/>
+                                            <rect key="frame" x="146" y="19" width="121" height="121"/>
                                             <state key="normal" image="play"/>
                                             <connections>
                                                 <action selector="playVideo:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="dBT-5u-k1w"/>
                                             </connections>
                                         </button>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wAC-fi-8QP">
-                                            <rect key="frame" x="189" y="56" width="37" height="37"/>
+                                            <rect key="frame" x="189" y="61.5" width="37" height="37"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
@@ -98,7 +101,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDetailFeedbackTableViewCell" rowHeight="73" id="WhY-wo-8cf" customClass="EventDetailFeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="333" width="414" height="73"/>
+                                <rect key="frame" x="0.0" y="344" width="414" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WhY-wo-8cf" id="7NU-tV-dMx">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
@@ -145,7 +148,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDescriptionTableViewCell" rowHeight="178" id="KT2-cw-qaQ" customClass="EventDetailDescriptionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="406" width="414" height="178"/>
+                                <rect key="frame" x="0.0" y="417" width="414" height="178"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT2-cw-qaQ" id="vdo-rN-wnx">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="177.5"/>
@@ -186,7 +189,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="102" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="584" width="414" height="102"/>
+                                <rect key="frame" x="0.0" y="595" width="414" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xz4-Sc-pHU" id="D2t-on-rtc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="101.5"/>

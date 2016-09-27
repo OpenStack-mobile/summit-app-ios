@@ -180,7 +180,17 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // configure bar button items
-        self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
+        let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
+        self.scheduledButton.enabled = isAtteendee
+        
+        if isAtteendee {
+            
+            self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
+            
+        } else {
+            
+            self.scheduledButton.image = nil
+        }
         
         // reload table
         self.tableView.reloadData()
@@ -303,6 +313,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.titleLabel!.text = eventDetail.location
                 cell.detailImageView.image = R.image.map_pin()!
                 cell.accessoryType = .DisclosureIndicator
+                cell.selectionStyle = .Default
                 
                 return cell
                 
