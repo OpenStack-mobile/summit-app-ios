@@ -8,7 +8,7 @@
 
 import XCTest
 import SwiftFoundation
-import CoreSummit
+@testable import CoreSummit
 
 final class JSONTests: XCTestCase {
 
@@ -85,6 +85,30 @@ final class JSONTests: XCTestCase {
             case let .JSON(entityJSON) = dataUpdateEntity,
             let _ = SummitDataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates5() {
+        
+        let testJSON = loadJSON("DataUpdates5")
+        
+        let dataUpdatesCount = 4
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == dataUpdatesCount, "\(dataUpdates.count) DataUpdate. Should be \(dataUpdatesCount)")
+        
+        for dataUpdate in dataUpdates {
+            
+            guard dataUpdate.operation == .Update,
+                let dataUpdateEntity = dataUpdate.entity,
+                case let .JSON(entityJSON) = dataUpdateEntity,
+                let type = dataUpdate.className.type,
+                let _ = type.init(JSONValue: .Object(entityJSON))
+                else { XCTFail("Could not decode \(dataUpdate.className) from JSON"); return }
+        }
     }
     
     func testMember1() {
