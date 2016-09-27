@@ -15,7 +15,7 @@ import CoreSummit
 import RealmSwift
 import XCDYouTubeKit
     
-final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, UITextViewDelegate {
+final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController {
     
     // MARK: - IB Outlets
     
@@ -430,9 +430,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     // MARK: - UITextViewDelegate
     
+    // Protocol extensions are not working entirely, need to place implementation here and not in extension
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         
-        guard AppDelegate.shared.openWebURL(URL)
+        guard self.openWebURL(URL)
             else { return true }
         
         return false
