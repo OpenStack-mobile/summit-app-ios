@@ -15,7 +15,7 @@ import CoreSummit
 import RealmSwift
 import XCDYouTubeKit
     
-final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, UITextViewDelegate {
     
     // MARK: - IB Outlets
     
@@ -275,6 +275,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.descriptionTextView.attributedText = attrStr
                 cell.descriptionTextView.sizeToFit()
                 
+                cell.descriptionTextView.delegate = self
+                
                 // sponsors
                 
                 cell.sponsorsLabel.text = eventDetail.sponsors
@@ -424,6 +426,16 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
             self.showViewController(memberVC, sender: self)
         }
+    }
+    
+    // MARK: - UITextViewDelegate
+    
+    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+        
+        guard AppDelegate.shared.openWebURL(URL)
+            else { return true }
+        
+        return false
     }
 }
 
