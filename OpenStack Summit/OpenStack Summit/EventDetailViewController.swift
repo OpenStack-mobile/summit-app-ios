@@ -189,6 +189,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             data.append(.level)
         }
         
+        if eventDetail.rsvp.isEmpty == false {
+            
+            data.append(.rsvp)
+        }
+        
         // configure bar button items
         let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
         self.scheduledButton.enabled = isAtteendee
@@ -394,6 +399,17 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 }
                 
                 return cell
+                
+            case .rsvp:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                
+                cell.titleLabel!.text = "RSVP required"
+                cell.detailImageView.image = R.image.events()!
+                cell.accessoryType = .DisclosureIndicator
+                cell.selectionStyle = .Default
+                
+                return cell
             }
             
         case .speakers:
@@ -409,6 +425,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     // MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let section = Section(rawValue: indexPath.section)!
         
@@ -426,6 +444,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     else { return }
                 
                 showLocationDetail(venue)
+                
+            case .rsvp:
+                
+                guard let url = NSURL(string: eventDetail.rsvp)
+                    else { return }
+                
+                UIApplication.sharedApplication().openURL(url)
                 
             default: break
             }
@@ -475,6 +500,7 @@ private extension EventDetailViewController {
         case description
         case summitTypes
         case level
+        case rsvp
     }
 }
 
