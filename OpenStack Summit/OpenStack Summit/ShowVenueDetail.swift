@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
-internal extension UIViewController {
+extension UIViewController {
     
     /// Shows the approriate Venue detail VC for the specified venue.
     func showLocationDetail(location: Identifier) {

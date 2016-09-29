@@ -17,7 +17,7 @@ import RealmSwift
 import XCDYouTubeKit
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling {
     
     static var shared: AppDelegate { return unsafeBitCast(UIApplication.sharedApplication().delegate!, AppDelegate.self) }
 
@@ -209,9 +209,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
     
-    // MARK: - Deep Linking
+    // MARK: - SummitActivityHandling
     
-    private func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
         // find in cache
         guard Store.shared.realm.objects(data.realmType).filter("id = \(identifier)").first != nil
@@ -258,7 +258,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func view(screen: AppActivityScreen) {
+    func view(screen: AppActivityScreen) {
         
         switch screen {
             
@@ -267,33 +267,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         case .speakers: self.menuViewController.showSpeakers()
         case .about: self.menuViewController.showAbout()
         }
-    }
-    
-    // MARK: - URL Handling
-    
-    private func openWebURL(url: NSURL) -> Bool {
-        
-        guard let components = url.pathComponents
-            where components.count >= 6
-            else { return false }
-        
-        let typeString = components[4]
-        let identifierString = components[5]
-        
-        guard let identifier = Int(identifierString)
-            else { return false }
-        
-        var dataType: AppActivitySummitDataType!
-        
-        switch typeString {
-        case Event.webPathComponent: dataType = .event
-        case PresentationSpeaker.webPathComponent:  dataType = .speaker
-        default: return false
-        }
-        
-        self.view(dataType, identifier: identifier)
-        
-        return true
     }
 }
 
