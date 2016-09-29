@@ -107,7 +107,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/events/\(event)/feedback"
+        let URI = "/api/v2/summits/\(summitID)/events/\(event)/feedback"
         
         let URL = environment.configuration.serverURL + URI
         
@@ -116,7 +116,7 @@ public extension Store {
         var jsonDictionary = [String:AnyObject]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
-        jsonDictionary["attendee_id"] = attendee
+        //jsonDictionary["attendee_id"] = attendee
         
         http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
             
