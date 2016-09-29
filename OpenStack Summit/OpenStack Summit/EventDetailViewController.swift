@@ -11,6 +11,7 @@ import Haneke
 import Cosmos
 import AHKActionSheet
 import SwiftSpinner
+import SwiftFoundation
 import CoreSummit
 import RealmSwift
 import XCDYouTubeKit
@@ -158,6 +159,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         if eventDetail.video != nil {
             
             data.append(.video)
+        }
+        
+        if eventCache.start < Date() && Store.shared.isLoggedInAndConfirmedAttendee {
+            
+            data.append(.feedback)
         }
         
         data += [.date, .location]
@@ -368,9 +374,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 cell.feedbackView.rating = 0.0
                 
-                cell.feedbackView.didFinishTouchingCosmos = { [weak self] (rating) in
+                cell.feedbackView.didTouchCosmos = { [weak self] (rating) in
                     
                     guard let controller = self else { return }
+                    
+                    cell.feedbackView.rating = rating
                     
                     let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
                     
@@ -430,7 +438,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     // MARK: - UITextViewDelegate
     
-    // Protocol extensions are not working entirely, need to place implementation here and not in extension
+    // Protocol extensions are not working entirely in ObjC, need to place implementation here and not in extension
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         
         guard self.openWebURL(URL)

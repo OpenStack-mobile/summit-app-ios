@@ -13,26 +13,26 @@
             <objects>
                 <tableViewController storyboardIdentifier="EventDetailViewController" id="SnY-ae-Z8a" customClass="EventDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="0hO-jF-Ulg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="820"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailTitleTableViewCell" rowHeight="92" id="uGT-3k-mt6" customClass="EventDetailTitleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="414" height="92"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailTitleTableViewCell" rowHeight="127" id="uGT-3k-mt6" customClass="EventDetailTitleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="414" height="127"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uGT-3k-mt6" id="WF8-UM-5Tw">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uGT-3k-mt6" id="WF8-UM-5Tw">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="126.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgm-5C-23d" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="8" width="374" height="37"/>
+                                            <rect key="frame" x="20" y="20" width="374" height="48.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLH-lM-hPM" userLabel="Track" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="53" width="374" height="30"/>
+                                            <rect key="frame" x="20" y="76.5" width="374" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="TDr-b0-wDx" userLabel="Track Label Height Constraint"/>
                                             </constraints>
@@ -41,17 +41,18 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="dLH-lM-hPM" firstAttribute="leading" secondItem="WF8-UM-5Tw" secondAttribute="leading" constant="20" id="H4g-Rk-jQQ"/>
-                                        <constraint firstItem="Rgm-5C-23d" firstAttribute="top" secondItem="WF8-UM-5Tw" secondAttribute="top" constant="8" id="LFC-iB-2xa"/>
+                                        <constraint firstItem="Rgm-5C-23d" firstAttribute="top" secondItem="WF8-UM-5Tw" secondAttribute="top" constant="20" id="LFC-iB-2xa"/>
                                         <constraint firstItem="dLH-lM-hPM" firstAttribute="top" secondItem="Rgm-5C-23d" secondAttribute="bottom" constant="8" id="XIG-dF-XNh"/>
                                         <constraint firstItem="Rgm-5C-23d" firstAttribute="leading" secondItem="WF8-UM-5Tw" secondAttribute="leading" constant="20" id="juR-Dg-Ddo"/>
                                         <constraint firstAttribute="trailing" secondItem="dLH-lM-hPM" secondAttribute="trailing" constant="20" id="jvN-Ck-jG8"/>
-                                        <constraint firstAttribute="bottom" secondItem="dLH-lM-hPM" secondAttribute="bottom" constant="8" id="pNw-xt-MLp"/>
+                                        <constraint firstAttribute="bottom" secondItem="dLH-lM-hPM" secondAttribute="bottom" constant="20" id="pNw-xt-MLp"/>
                                         <constraint firstAttribute="trailing" secondItem="Rgm-5C-23d" secondAttribute="trailing" constant="20" id="wEs-oe-3lD"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="titleLabel" destination="Rgm-5C-23d" id="dyk-sx-ujH"/>
                                     <outlet property="trackLabel" destination="dLH-lM-hPM" id="PIJ-z4-yza"/>
@@ -59,7 +60,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailVideoTableViewCell" rowHeight="160" id="gU0-Ox-iCc" customClass="EventDetailVideoTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="184" width="414" height="160"/>
+                                <rect key="frame" x="0.0" y="219" width="414" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gU0-Ox-iCc" id="OBk-Rl-t1c">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
@@ -100,8 +101,8 @@
                                     <outlet property="videoImageView" destination="m58-uj-ukS" id="coj-eI-RE6"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDetailFeedbackTableViewCell" rowHeight="73" id="WhY-wo-8cf" customClass="EventDetailFeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="344" width="414" height="73"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailFeedbackTableViewCell" rowHeight="73" id="WhY-wo-8cf" customClass="EventDetailFeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="379" width="414" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WhY-wo-8cf" id="7NU-tV-dMx">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="72.5"/>
@@ -148,7 +149,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDescriptionTableViewCell" rowHeight="178" id="KT2-cw-qaQ" customClass="EventDetailDescriptionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="417" width="414" height="178"/>
+                                <rect key="frame" x="0.0" y="452" width="414" height="178"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT2-cw-qaQ" id="vdo-rN-wnx">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="177.5"/>
@@ -189,7 +190,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="102" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="595" width="414" height="102"/>
+                                <rect key="frame" x="0.0" y="630" width="414" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xz4-Sc-pHU" id="D2t-on-rtc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="101.5"/>
@@ -284,9 +285,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="736"/>
+                    <size key="freeformSize" width="414" height="820"/>
                     <connections>
                         <outlet property="scheduledButton" destination="Ft7-gj-Qhp" id="uk1-d7-Bg7"/>
                     </connections>
