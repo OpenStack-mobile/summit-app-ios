@@ -148,49 +148,81 @@
                                     <outlet property="feedbackView" destination="zr2-pC-X4H" id="lEn-LA-ZCb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDescriptionTableViewCell" rowHeight="178" id="KT2-cw-qaQ" customClass="EventDetailDescriptionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="452" width="414" height="178"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDescriptionTableViewCell" rowHeight="168" id="KT2-cw-qaQ" customClass="EventDetailDescriptionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="452" width="414" height="168"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT2-cw-qaQ" id="vdo-rN-wnx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="177.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="167.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz9-0R-hjp" userLabel="Sponsors" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="132" width="382" height="29"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="29" id="c5V-xc-vUf"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Detail Text View" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-0u-up7" userLabel="Event Detail Text View">
-                                            <rect key="frame" x="16" y="16" width="382" height="108"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-0u-up7" userLabel="Event Detail Text View">
+                                            <rect key="frame" x="16" y="16" width="382" height="44"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Event description">
+                                                    <attributes>
+                                                        <font key="NSFont" size="13" name=".AppleSystemUIFont"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz9-0R-hjp" userLabel="Sponsors Label" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="68" width="382" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="29" id="c5V-xc-vUf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miy-9m-nEB" userLabel="RSVP Button">
+                                            <rect key="frame" x="131.5" y="113" width="150" height="38"/>
+                                            <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="38" id="7q0-Sp-IFh"/>
+                                                <constraint firstAttribute="width" constant="150" id="qlY-5l-7sz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                            <state key="normal" title="RSVP REQUIRED">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="rsvp:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="tVy-wj-qqL"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fz9-0R-hjp" firstAttribute="leading" secondItem="vdo-rN-wnx" secondAttribute="leadingMargin" constant="8" id="5e1-Q5-vqQ"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="ONb-0u-up7" secondAttribute="trailing" constant="8" id="MNf-V6-SNO"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="fz9-0R-hjp" secondAttribute="bottom" constant="8" id="SkH-BL-MYN"/>
+                                        <constraint firstItem="ONb-0u-up7" firstAttribute="trailing" secondItem="vdo-rN-wnx" secondAttribute="trailingMargin" constant="-8" id="MNf-V6-SNO"/>
                                         <constraint firstItem="ONb-0u-up7" firstAttribute="leading" secondItem="vdo-rN-wnx" secondAttribute="leadingMargin" constant="8" id="XpX-hR-SLG"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="fz9-0R-hjp" secondAttribute="trailing" constant="8" id="bxq-zM-p9j"/>
+                                        <constraint firstItem="miy-9m-nEB" firstAttribute="centerX" secondItem="vdo-rN-wnx" secondAttribute="centerX" id="beb-vU-cis"/>
+                                        <constraint firstItem="fz9-0R-hjp" firstAttribute="trailing" secondItem="vdo-rN-wnx" secondAttribute="trailingMargin" constant="-8" id="bxq-zM-p9j"/>
                                         <constraint firstItem="ONb-0u-up7" firstAttribute="top" secondItem="vdo-rN-wnx" secondAttribute="topMargin" constant="8" id="cdV-cc-dii"/>
+                                        <constraint firstItem="miy-9m-nEB" firstAttribute="top" secondItem="fz9-0R-hjp" secondAttribute="bottom" constant="16" id="fdH-fV-LMg"/>
                                         <constraint firstItem="fz9-0R-hjp" firstAttribute="top" secondItem="ONb-0u-up7" secondAttribute="bottom" constant="8" id="g8s-9t-aye"/>
+                                        <constraint firstItem="miy-9m-nEB" firstAttribute="bottom" secondItem="vdo-rN-wnx" secondAttribute="bottomMargin" constant="-8" id="vIB-ch-Nmc"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionTextView" destination="ONb-0u-up7" id="xCt-d0-Qmp"/>
+                                    <outlet property="rsvpButton" destination="miy-9m-nEB" id="frL-xe-z9U"/>
+                                    <outlet property="rsvpButtonHeightConstraint" destination="7q0-Sp-IFh" id="Gzw-1t-Olq"/>
+                                    <outlet property="rsvpButtonSeparationConstraint" destination="fdH-fV-LMg" id="mDW-AD-7UM"/>
                                     <outlet property="sponsorsLabel" destination="fz9-0R-hjp" id="eFC-Eh-NLJ"/>
                                     <outlet property="sponsorsLabelHeightConstraint" destination="c5V-xc-vUf" id="ibo-QB-EJb"/>
                                     <outlet property="sponsorsLabelSeparationConstraint" destination="g8s-9t-aye" id="dfx-X2-Gfg"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="102" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="630" width="414" height="102"/>
+                                <rect key="frame" x="0.0" y="620" width="414" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xz4-Sc-pHU" id="D2t-on-rtc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="101.5"/>
