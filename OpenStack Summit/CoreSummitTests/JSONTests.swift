@@ -10,24 +10,21 @@ import XCTest
 import SwiftFoundation
 @testable import CoreSummit
 
-final class JSONTests: XCTestCase {
+let SummitJSONIdentifiers = [6, 7]
 
-    func testSummit() {
-        
-        let testJSON = loadJSON("Summit")
-        
-        guard let _ = Summit(JSONValue: testJSON)
-            else { XCTFail("Could not decode from JSON"); return }
-    }
+final class JSONTests: XCTestCase {
     
-    func testAustinSummit() {
+    func testSummits() {
         
-        let testJSON = loadJSON("AustinSummit")
-        
-        guard let summit = Summit(JSONValue: testJSON)
-            else { XCTFail("Could not decode from JSON"); return }
-        
-        XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+        for summitID in SummitJSONIdentifiers {
+            
+            let testJSON = loadJSON("Summit\(summitID)")
+            
+            guard let summit = Summit(JSONValue: testJSON)
+                else { XCTFail("Could not decode from JSON"); return }
+            
+            XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+        }
     }
     
     func testDataUpdates1() {

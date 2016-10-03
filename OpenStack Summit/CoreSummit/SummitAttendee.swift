@@ -34,15 +34,3 @@ public struct SummitAttendee: Unique {
     
     //public var friends: [Member]
 }
-
-// MARK: - Extensions
-
-extension SummitAttendee: Person {
-    
-    public var title: String? { return nil }
-}
-
-public extension Person {
-    
-    var attendee: Bool { return self is SummitAttendee }
-}

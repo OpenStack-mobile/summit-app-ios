@@ -119,7 +119,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         
         showActivityIndicator()
         
-        Store.shared.addFeedback(attendee: member.id, event: event, rate: rate, review: review) { [weak self] (response) in
+        Store.shared.addFeedback(event: event, rate: rate, review: review) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 

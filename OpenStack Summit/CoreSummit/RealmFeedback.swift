@@ -15,7 +15,7 @@ public class RealmFeedback: RealmEntity {
     public dynamic var review = ""
     public dynamic var date = NSDate(timeIntervalSince1970: 1)
     public dynamic var event: RealmSummitEvent!
-    public dynamic var owner: RealmSummitAttendee!
+    public dynamic var owner: RealmFeedbackOwner!
 }
 
 // MARK: - Encoding
@@ -30,7 +30,7 @@ extension Feedback: RealmEncodable {
         realmEntity.review = review
         realmEntity.date = date.toFoundation()
         realmEntity.event = RealmSummitEvent.cached(event, realm: realm)
-        realmEntity.owner = RealmSummitAttendee.cached(owner, realm: realm)
+        realmEntity.owner = owner.save(realm)
         
         return realmEntity
     }
@@ -45,7 +45,7 @@ extension Feedback: RealmDecodable {
         self.review = realmEntity.review
         self.date = Date(foundation: realmEntity.date)
         self.event = realmEntity.event.id
-        self.owner = realmEntity.owner.id
+        self.owner = FeedbackOwner(realmEntity: realmEntity.owner)
     }
 }
 

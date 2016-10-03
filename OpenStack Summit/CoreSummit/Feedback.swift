@@ -20,5 +20,5 @@ public struct Feedback: Unique {
     
     public var event: Identifier
     
-    public var owner: Identifier
+    public var owner: Owner
 }
