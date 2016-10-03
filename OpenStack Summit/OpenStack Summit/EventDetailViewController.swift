@@ -49,6 +49,12 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
     }
     
+    private var feedbackPage = 1
+    private let feedbackObjectsPerPage = 5
+    private var feedbackList = [FeedbackDetail]()
+    private var loadedAllFeedback = false
+    private var loadingFeedback = false
+    
     // MARK: - Loading
     
     deinit {
@@ -60,6 +66,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         super.viewDidLoad()
         
         // setup tableview
+        tableView.registerNib(R.nib.feedbackTableViewCell)
         tableView.registerNib(R.nib.detailImageTableViewCell)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
@@ -146,6 +153,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // handle event deletion
         guard let realmEvent = RealmSummitEvent.find(event, realm: Store.shared.realm) else {
             
+            self.view.userInteractionEnabled = false
+            self.navigationItem.rightBarButtonItems = []
             showErrorAlert("The event has been deleted.",
                            okHandler: { self.navigationController?.popToRootViewControllerAnimated(true) })
             return
@@ -213,6 +222,50 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
         
         self.userActivity = userActivity
+        
+        // load feedback
+        loadFeedback()
+    }
+    
+    private func loadFeedback() {
+        
+        guard loadingFeedback == false && loadedAllFeedback == false
+            else { return }
+        
+        loadingFeedback = true
+        
+        Store.shared.feedback(event: event, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { [weak self] (response) in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                guard let controller = self else { return }
+                
+                defer { controller.loadingFeedback = false }
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    print("Error loading feedback: \(error)")
+                    
+                case let .Value(feedbackPage):
+                    
+                    var realmFeedback = feedbackPage.identifiers.map { RealmFeedback.find($0, realm: Store.shared.realm)! }
+                    
+                    // filter current user's feedback
+                    if let attendee = Store.shared.authenticatedMember?.attendeeRole {
+                        
+                        realmFeedback = realmFeedback.filter { $0.owner != attendee }
+                    }
+                    
+                    let feedbackDetail = FeedbackDetail.from(realm: realmFeedback)
+                    controller.feedbackList += feedbackDetail
+                    controller.feedbackPage += 1
+                    controller.loadedAllFeedback = feedbackPage.count < controller.feedbackObjectsPerPage
+                    controller.tableView.reloadData()
+                }
+            }
+        }
     }
     
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
@@ -224,6 +277,22 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         cell.title = speaker.title
         cell.pictureURL = speaker.pictureURL
         cell.isModerator = eventDetail.moderator != nil && speaker.identifier == eventDetail.moderator?.identifier
+        
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsetsZero
+    }
+    
+    private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
+        
+        assert(indexPath.section == Section.feedback.rawValue, "\(indexPath.section) is not feedback section")
+        
+        let feedback = feedbackList[indexPath.row]
+        
+        cell.eventName = ""
+        cell.owner = feedback.owner
+        cell.rate = Double(feedback.rate)
+        cell.review = feedback.review
+        cell.date = feedback.date
         
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero
@@ -244,6 +313,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
         case .details: return data.count
         case .speakers: return eventCache.presentation?.speakers.count ?? 0
+        case .feedback: return feedbackList.count
         }
     }
     
@@ -378,7 +448,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 cell.feedbackView.rating = 0.0
                 
-                cell.feedbackView.didTouchCosmos = { [weak self] (rating) in
+                cell.feedbackView.didFinishTouchingCosmos = { [weak self] (rating) in
                     
                     guard let controller = self else { return }
                     
@@ -401,6 +471,19 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.speakerTableViewCell, forIndexPath: indexPath)!
             
             configure(cell: cell, at: indexPath)
+            
+            return cell
+            
+        case .feedback:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackTableViewCell, forIndexPath: indexPath)!
+            
+            configure(cell: cell, at: indexPath)
+            
+            // load feedback
+            if indexPath.row == feedbackList.count - 1 && loadedAllFeedback == false {
+                loadFeedback()
+            }
             
             return cell
         }
@@ -437,6 +520,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             let memberVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
             
             self.showViewController(memberVC, sender: self)
+            
+        case .feedback: break
         }
     }
     
@@ -458,10 +543,11 @@ private extension EventDetailViewController {
     
     enum Section: Int {
         
-        static let count = 2
+        static let count = 3
         
         case details
         case speakers
+        case feedback
     }
     
     enum Detail {
@@ -503,4 +589,10 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
 final class EventDetailFeedbackTableViewCell: UITableViewCell {
     
     @IBOutlet weak var feedbackView: CosmosView!
+}
+
+final class EventFeedbackHeader: UIView {
+    
+    @IBOutlet weak var averageRatingView: CosmosView!
+    @IBOutlet weak var reviewsLabel: UILabel!
 }
