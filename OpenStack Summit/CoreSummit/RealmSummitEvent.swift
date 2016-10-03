@@ -17,6 +17,7 @@ public class RealmSummitEvent: RealmNamed {
     public dynamic var eventDescription = ""
     public dynamic var allowFeedback = false
     public dynamic var averageFeedback = 0.0
+    public dynamic var rsvp = ""
     public dynamic var eventType: RealmEventType!
     public let summitTypes = List<RealmSummitType>()
     public let sponsors = List<RealmCompany>()
@@ -113,6 +114,7 @@ extension SummitEvent: RealmDecodable {
         self.sponsors = realmEntity.sponsors.identifiers
         self.tags = Tag.from(realm: realmEntity.tags)
         self.videos = Video.from(realm: realmEntity.videos)
+        self.rsvp = String(realm: realmEntity.rsvp)
         
         if realmEntity.averageFeedback == 0.0 {
             
@@ -160,6 +162,7 @@ extension SummitEvent: RealmEncodable {
         realmEntity.eventDescription = descriptionText ?? ""
         realmEntity.allowFeedback = allowFeedback
         realmEntity.averageFeedback = averageFeedback ?? 0.0
+        realmEntity.rsvp = rsvp ?? ""
         
         // relationships
         realmEntity.eventType = RealmEventType.cached(type, realm: realm)

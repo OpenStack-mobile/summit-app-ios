@@ -101,6 +101,14 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         self.playVideo(eventDetail.video!)
     }
     
+    @IBAction func rsvp(sender: UIButton) {
+        
+        guard let url = NSURL(string: eventDetail.rsvp)
+            else { return }
+        
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
     @IBAction func share(sender: UIBarButtonItem) {
         
         let activityViewController = UIActivityViewController(activityItems: [eventDetail.webpageURL], applicationActivities: nil)
@@ -349,11 +357,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDescriptionTableViewCell, forIndexPath: indexPath)!
                 
-                let eventDescriptionHTML = String(format:"<span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
+                let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
                 let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                 
                 cell.descriptionTextView.attributedText = attrStr
-                cell.descriptionTextView.sizeToFit()
+                cell.descriptionTextView.textContainerInset = UIEdgeInsetsZero
                 
                 cell.descriptionTextView.delegate = self
                 
@@ -363,6 +371,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 cell.sponsorsLabelHeightConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 30
                 cell.sponsorsLabelSeparationConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 8
                 cell.sponsorsLabel.updateConstraints()
+                
+                // rsvp
+                
+                cell.rsvpButtonHeightConstraint.constant = eventDetail.rsvp.isEmpty ? 0 : 38
+                cell.rsvpButtonSeparationConstraint.constant = eventDetail.rsvp.isEmpty ? 0 : 16
+                cell.rsvpButton.hidden = eventDetail.rsvp.isEmpty
+                cell.rsvpButton.updateConstraints()
                 
                 return cell
                 
@@ -493,6 +508,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         let section = Section(rawValue: indexPath.section)!
         
         switch section {
@@ -584,6 +601,9 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
     @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rsvpButton: UIButton!
+    @IBOutlet weak var rsvpButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rsvpButtonSeparationConstraint: NSLayoutConstraint!
 }
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {
