@@ -7,7 +7,7 @@
 //
 
 public struct SummitAttendee: Unique {
-    
+        
     public let identifier: Identifier
     
     public var firstName: String
@@ -28,7 +28,7 @@ public struct SummitAttendee: Unique {
     
     public var scheduledEvents: [Identifier]
     
-    public var feedback: [Feedback]
+    public var feedback: [MemberFeedback]
     
     //public var bookmarkedEvents: [SummitEvent]
     
