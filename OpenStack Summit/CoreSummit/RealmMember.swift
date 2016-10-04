@@ -35,12 +35,12 @@ public extension Store {
 
 public extension RealmMember {
     
-    func feedback(forEvent eventID: Identifier) -> RealmFeedback? {
+    func feedback(forEvent eventID: Identifier) -> RealmAttendeeFeedback? {
         
         return attendeeRole?.feedback.filter("event.id = %@", eventID).first
     }
     
-    var givenFeedback: [RealmFeedback] {
+    var givenFeedback: [RealmAttendeeFeedback] {
         
         return attendeeRole?.feedback.sorted("date", ascending: false).map { $0 } ?? []
     }

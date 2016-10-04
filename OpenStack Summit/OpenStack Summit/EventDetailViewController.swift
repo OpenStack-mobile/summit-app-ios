@@ -182,7 +182,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         if let attendee = Store.shared.authenticatedMember?.attendeeRole,
             let _ = eventCache.presentation
             where eventCache.start < Date() &&
-            Store.shared.realm.objects(RealmFeedback).filter("event.id = %@ AND owner.id = %@", event, attendee.id).isEmpty {
+            Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@ AND owner.id = %@", event, attendee.id).isEmpty {
             
             data.append(.feedback)
         }
@@ -258,18 +258,18 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     
                 case let .Value(feedbackPage):
                     
-                    var realmFeedback = feedbackPage.identifiers.map { RealmFeedback.find($0, realm: Store.shared.realm)! }
+                    var realmFeedback = feedbackPage.items.identifiers.map { RealmReview.find($0, realm: Store.shared.realm)! }
                     
                     // filter current user's feedback
                     if let attendee = Store.shared.authenticatedMember?.attendeeRole {
                         
-                        realmFeedback = realmFeedback.filter { $0.owner != attendee }
+                        realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
                     }
                     
-                    let feedbackDetail = FeedbackDetail.from(realm: realmFeedback)
+                    let feedbackDetail = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
                     controller.feedbackList += feedbackDetail
                     controller.feedbackPage += 1
-                    controller.loadedAllFeedback = feedbackPage.count < controller.feedbackObjectsPerPage
+                    controller.loadedAllFeedback = feedbackPage.items.count < controller.feedbackObjectsPerPage
                     controller.tableView.reloadData()
                 }
             }
