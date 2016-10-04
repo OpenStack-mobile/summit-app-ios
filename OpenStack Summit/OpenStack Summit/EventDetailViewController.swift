@@ -21,6 +21,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var scheduledButton: UIBarButtonItem!
+    @IBOutlet private(set) var feedBackHeader: EventFeedbackHeader!
     
     // MARK: - Properties
     
@@ -49,11 +50,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
     }
     
+    private var shouldShowReviews = false
     private var feedbackPage = 1
     private let feedbackObjectsPerPage = 5
     private var feedbackList = [FeedbackDetail]()
     private var loadedAllFeedback = false
     private var loadingFeedback = false
+    private var averageRating: Double?
     
     // MARK: - Loading
     
@@ -219,6 +222,20 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             self.scheduledButton.image = nil
         }
         
+        // load feedback
+        
+        shouldShowReviews = eventCache.start < Date()
+        
+        if shouldShowReviews {
+            
+            loadFeedback()
+        }
+        
+        // configure feedback view
+        feedBackHeader.reviewsLabel.text = loadingFeedback ? "Loading..." : "\(feedbackList.count) Reviews"
+        feedBackHeader.averageRatingView.hidden = averageRating == nil
+        feedBackHeader.averageRatingView.rating = averageRating ?? 0
+        
         // reload table
         self.tableView.reloadData()
         self.tableView.tableFooterView = UIView()
@@ -230,9 +247,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
         
         self.userActivity = userActivity
-        
-        // load feedback
-        loadFeedback()
     }
     
     private func loadFeedback() {
@@ -273,6 +287,14 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     controller.tableView.reloadData()
                 }
             }
+        }
+    }
+    
+    private func loadAverageRating() {
+        
+        Store.shared.averageFeedback(event: event) { (response) in
+            
+            
         }
     }
     
@@ -321,7 +343,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
         case .details: return data.count
         case .speakers: return eventCache.presentation?.speakers.count ?? 0
-        case .feedback: return feedbackList.count
+        case .feedback: return shouldShowReviews ? feedbackList.count : 0
         }
     }
     
@@ -542,6 +564,18 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
     }
     
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let section = Section(rawValue: section)!
+        
+        switch section {
+            
+        case .details: return nil
+        case .speakers: return nil
+        case .feedback: return shouldShowReviews ? feedBackHeader : nil
+        }
+    }
+    
     // MARK: - UITextViewDelegate
     
     // Protocol extensions are not working entirely in ObjC, need to place implementation here and not in extension
@@ -614,5 +648,6 @@ final class EventDetailFeedbackTableViewCell: UITableViewCell {
 final class EventFeedbackHeader: UIView {
     
     @IBOutlet weak var averageRatingView: CosmosView!
+    @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var reviewsLabel: UILabel!
 }
