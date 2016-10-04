@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func feedback(summit: Identifier? = nil, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Feedback>>) -> ()) {
+    func feedback(summit: Identifier? = nil, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Review>>) -> ()) {
         
         let summitID: String
         
@@ -38,7 +38,7 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<Feedback>(JSONValue: json)
+                let page = Page<Review>(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
@@ -115,7 +115,6 @@ public extension Store {
         var jsonDictionary = [String:AnyObject]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
-        //jsonDictionary["attendee_id"] = attendee
         
         http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
             
@@ -129,9 +128,7 @@ public extension Store {
             if let member = self.authenticatedMember,
                 let attendee = member.attendeeRole {
                 
-                let owner = FeedbackOwner(identifier: member.id, attendee: attendee.id, firstName: member.firstName, lastName: member.lastName)
-                
-                let feedback = Feedback(identifier: id, rate: rate, review: review, date: Date(), event: event, owner: owner)
+                let feedback = AttendeeFeedback(identifier: id, rate: rate, review: review, date: Date(), event: event, member: member.id, attendee: attendee.id)
                 
                 try! self.realm.write {
                     

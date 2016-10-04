@@ -30,7 +30,7 @@ extension SummitAttendee: JSONDecodable {
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
             let tickets = TicketType.fromJSON(ticketsJSONArray),
             let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
-            let feedback = Feedback.fromJSON(feedbackJSONArray)
+            let feedback = AttendeeFeedback.fromJSON(feedbackJSONArray)
             else { return nil }
         
         self.identifier = memberID

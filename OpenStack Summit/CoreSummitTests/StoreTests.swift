@@ -135,6 +135,8 @@ final class StoreTests: XCTestCase {
     
     func testFeedbackRequest() {
         
+        clearRealm()
+        
         let summit = 7 // Barcelona
         
         let event = 16638 // Upstream University - Day 1
