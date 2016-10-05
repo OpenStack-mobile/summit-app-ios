@@ -112,7 +112,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
             return
         }
         
-        guard let member = Store.shared.authenticatedMember
+        guard let _ = Store.shared.authenticatedMember
            else { return } // FIXME: handle user not logged in?
         
         // send request
