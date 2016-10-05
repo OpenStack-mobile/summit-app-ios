@@ -254,6 +254,21 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         loadingFeedback = true
         
+        // load from cache
+        if feedbackList.isEmpty {
+            
+            /// load first 5 from cache
+            var realmFeedback = Array(Store.shared.realm.objects(RealmReview).prefix(5))
+            
+            // filter current user's feedback
+            if let attendee = Store.shared.authenticatedMember?.attendeeRole {
+                
+                realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
+            }
+            
+            let feedbackDetail = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
+        }
+        
         updateUI()
         
         Store.shared.feedback(event: event, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { [weak self] (response) in
@@ -273,6 +288,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 case let .Value(feedbackPage):
                     
                     var realmFeedback = feedbackPage.items.identifiers.map { RealmReview.find($0, realm: Store.shared.realm)! }
+                    
+                    // filter feedback already loaded
+                    realmFeedback = realmFeedback.filter { controller.feedbackList.identifiers.contains($0.id) == false }
                     
                     // filter current user's feedback
                     if let attendee = Store.shared.authenticatedMember?.attendeeRole {

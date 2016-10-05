@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import CoreSummit
 
-public struct FeedbackDetail {
+public struct FeedbackDetail: Unique {
 
     // MARK: - Properties
     
