@@ -12,7 +12,7 @@ public extension SummitAttendee {
     
     enum JSONKey: String {
         
-        case first_name, last_name, title, bio, irc, twitter, member_id, pic, speaker, schedule, feedback, tickets
+        case id, first_name, last_name, title, bio, irc, twitter, pic, speaker, schedule, feedback, tickets
     }
 }
 
@@ -21,7 +21,7 @@ extension SummitAttendee: JSONDecodable {
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
@@ -30,10 +30,10 @@ extension SummitAttendee: JSONDecodable {
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
             let tickets = TicketType.fromJSON(ticketsJSONArray),
             let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
-            let feedback = Feedback.fromJSON(feedbackJSONArray)
+            let feedback = AttendeeFeedback.fromJSON(feedbackJSONArray)
             else { return nil }
         
-        self.identifier = memberID
+        self.identifier = identifier
         self.firstName = firstName
         self.lastName = lastName
         self.pictureURL = pictureURL

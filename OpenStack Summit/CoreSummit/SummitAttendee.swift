@@ -28,7 +28,7 @@ public struct SummitAttendee: Unique {
     
     public var scheduledEvents: [Identifier]
     
-    public var feedback: [Feedback]
+    public var feedback: [AttendeeFeedback]
     
     //public var bookmarkedEvents: [SummitEvent]
     
@@ -40,9 +40,4 @@ public struct SummitAttendee: Unique {
 extension SummitAttendee: Person {
     
     public var title: String? { return nil }
-}
-
-public extension Person {
-    
-    var attendee: Bool { return self is SummitAttendee }
 }

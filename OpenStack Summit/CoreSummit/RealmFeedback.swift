@@ -9,20 +9,36 @@
 import RealmSwift
 import SwiftFoundation
 
+/// Abstract class, should never be instantiated
 public class RealmFeedback: RealmEntity {
     
     public dynamic var rate = 0
     public dynamic var review = ""
     public dynamic var date = NSDate(timeIntervalSince1970: 1)
     public dynamic var event: RealmSummitEvent!
-    public dynamic var owner: RealmSummitAttendee!
+}
+
+// Concrete subclasses
+
+public class RealmAttendeeFeedback: RealmFeedback {
+    
+    public dynamic var member: RealmMember!
+    public dynamic var attendee: RealmSummitAttendee!
+}
+
+public class RealmReview: RealmFeedback {
+    
+    public dynamic var memberId = 0
+    public dynamic var attendeeId = 0
+    public dynamic var firstName: String = ""
+    public dynamic var lastName: String = ""
 }
 
 // MARK: - Encoding
 
-extension Feedback: RealmEncodable {
+extension Review: RealmEncodable {
     
-    public func save(realm: Realm) -> RealmFeedback {
+    public func save(realm: Realm) -> RealmReview {
         
         let realmEntity = RealmType.cached(identifier, realm: realm)
         
@@ -30,22 +46,55 @@ extension Feedback: RealmEncodable {
         realmEntity.review = review
         realmEntity.date = date.toFoundation()
         realmEntity.event = RealmSummitEvent.cached(event, realm: realm)
-        realmEntity.owner = RealmSummitAttendee.cached(owner, realm: realm)
+        realmEntity.memberId = owner.member
+        realmEntity.attendeeId = owner.attendee
+        realmEntity.firstName = owner.firstName
+        realmEntity.lastName = owner.lastName
         
         return realmEntity
     }
 }
 
-extension Feedback: RealmDecodable {
+extension Review: RealmDecodable {
     
-    public init(realmEntity: RealmFeedback) {
+    public init(realmEntity: RealmReview) {
         
         self.identifier = realmEntity.id
         self.rate = realmEntity.rate
         self.review = realmEntity.review
         self.date = Date(foundation: realmEntity.date)
         self.event = realmEntity.event.id
-        self.owner = realmEntity.owner.id
+        self.owner = Owner(member: realmEntity.memberId, attendee: realmEntity.attendeeId, firstName: realmEntity.firstName, lastName: realmEntity.lastName)
     }
 }
 
+extension AttendeeFeedback: RealmEncodable {
+    
+    public func save(realm: Realm) -> RealmAttendeeFeedback {
+        
+        let realmEntity = RealmType.cached(identifier, realm: realm)
+        
+        realmEntity.rate = rate
+        realmEntity.review = review
+        realmEntity.date = date.toFoundation()
+        realmEntity.event = RealmSummitEvent.cached(event, realm: realm)
+        realmEntity.member = RealmMember.cached(member, realm: realm)
+        realmEntity.attendee = RealmSummitAttendee.cached(attendee, realm: realm)
+        
+        return realmEntity
+    }
+}
+
+extension AttendeeFeedback: RealmDecodable {
+    
+    public init(realmEntity: RealmAttendeeFeedback) {
+        
+        self.identifier = realmEntity.id
+        self.rate = realmEntity.rate
+        self.review = realmEntity.review
+        self.date = Date(foundation: realmEntity.date)
+        self.event = realmEntity.event.id
+        self.member = realmEntity.member.id
+        self.attendee = realmEntity.attendee.id
+    }
+}

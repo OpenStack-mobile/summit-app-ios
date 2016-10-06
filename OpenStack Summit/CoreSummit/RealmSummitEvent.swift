@@ -115,15 +115,7 @@ extension SummitEvent: RealmDecodable {
         self.tags = Tag.from(realm: realmEntity.tags)
         self.videos = Video.from(realm: realmEntity.videos)
         self.rsvp = String(realm: realmEntity.rsvp)
-        
-        if realmEntity.averageFeedback == 0.0 {
-            
-            self.averageFeedback = nil
-            
-        } else {
-            
-            self.averageFeedback = realmEntity.averageFeedback
-        }
+        self.averageFeedback = realmEntity.averageFeedback
         
         if let realmPresentation = realmEntity.presentation {
             
@@ -161,7 +153,7 @@ extension SummitEvent: RealmEncodable {
         realmEntity.end = end.toFoundation()
         realmEntity.eventDescription = descriptionText ?? ""
         realmEntity.allowFeedback = allowFeedback
-        realmEntity.averageFeedback = averageFeedback ?? 0.0
+        realmEntity.averageFeedback = averageFeedback
         realmEntity.rsvp = rsvp ?? ""
         
         // relationships

@@ -14,7 +14,7 @@ public class RealmSummitAttendee: RealmPerson {
     public let scheduledEvents = List<RealmSummitEvent>()
     public let bookmarkedEvents = List<RealmSummitEvent>()
     public let friends = List<RealmMember>()
-    public let feedback = List<RealmFeedback>()
+    public let feedback = List<RealmAttendeeFeedback>()
 }
 
 // MARK: - Encoding
@@ -34,7 +34,7 @@ extension SummitAttendee: RealmDecodable {
         self.biography = realmEntity.bio.isEmpty ? nil : realmEntity.bio
         
         self.tickets = TicketType.from(realm: realmEntity.tickets)
-        self.feedback = Feedback.from(realm: realmEntity.feedback)
+        self.feedback = AttendeeFeedback.from(realm: realmEntity.feedback)
         self.scheduledEvents = realmEntity.feedback.identifiers
     }
 }

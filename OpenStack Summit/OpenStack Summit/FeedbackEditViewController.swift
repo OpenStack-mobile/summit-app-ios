@@ -112,14 +112,14 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
             return
         }
         
-        guard let member = Store.shared.authenticatedMember
+        guard let _ = Store.shared.authenticatedMember
            else { return } // FIXME: handle user not logged in?
         
         // send request
         
         showActivityIndicator()
         
-        Store.shared.addFeedback(attendee: member.id, event: event, rate: rate, review: review) { [weak self] (response) in
+        Store.shared.addFeedback(event: event, rate: rate, review: review) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 

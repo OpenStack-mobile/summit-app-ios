@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import CoreSummit
 
-public struct FeedbackDetail: RealmDecodable {
+public struct FeedbackDetail: Unique {
 
     // MARK: - Properties
     
@@ -24,7 +24,7 @@ public struct FeedbackDetail: RealmDecodable {
     
     // MARK: - Initialization
     
-    public init(realmEntity feedback: RealmFeedback) {
+    public init(realmEntity feedback: RealmReview) {
         
         self.identifier = feedback.id
         self.rate = feedback.rate
@@ -32,7 +32,18 @@ public struct FeedbackDetail: RealmDecodable {
         self.event = feedback.event.id
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
-        self.owner = feedback.owner.firstName + " " + feedback.owner.lastName
+        self.owner = feedback.firstName + " " + feedback.lastName
+    }
+    
+    public init(realmEntity feedback: RealmAttendeeFeedback) {
+        
+        self.identifier = feedback.id
+        self.rate = feedback.rate
+        self.review = feedback.review
+        self.event = feedback.event.id
+        self.eventName = feedback.event.name
+        self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
+        self.owner = feedback.attendee.firstName + " " + feedback.attendee.lastName
     }
     
     // MARK: - Static Methods

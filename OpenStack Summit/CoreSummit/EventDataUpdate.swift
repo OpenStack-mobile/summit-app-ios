@@ -25,7 +25,7 @@ public extension Event {
         
         public var allowFeedback: Bool
         
-        public var averageFeedback: Double?
+        public var averageFeedback: Double
         
         public var type: Identifier
         

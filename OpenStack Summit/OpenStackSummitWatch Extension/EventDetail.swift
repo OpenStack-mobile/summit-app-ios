@@ -32,7 +32,7 @@ public struct EventDetail {
     public let allowFeedback: Bool
     public let moderator: PresentationSpeaker?
     public let level: String
-    public let averageFeedback: Double?
+    public let averageFeedback: Double
     public let video: Video?
     public let webpageURL: NSURL
     
