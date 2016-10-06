@@ -201,7 +201,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         if let attendee = Store.shared.authenticatedMember?.attendeeRole,
             let _ = eventCache.presentation
             where eventCache.start < Date() &&
-            Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@ AND owner.id = %@", event, attendee.id).isEmpty {
+            Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@ AND attendee.id = %@", event, attendee.id).isEmpty {
             
             data.append(.feedback)
         }
