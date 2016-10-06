@@ -245,8 +245,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // load feedback
         
-        //shouldShowReviews = eventCache.start < Date()
-        shouldShowReviews = true // TEMP
+        shouldShowReviews = eventCache.start < Date()
         
         if shouldShowReviews {
             
