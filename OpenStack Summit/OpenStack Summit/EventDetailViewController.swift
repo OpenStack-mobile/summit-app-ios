@@ -51,13 +51,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     }
     
     private var shouldShowReviews = false
-    private var totalFeedback = 0
-    private var feedbackPage = 1
-    private let feedbackObjectsPerPage = 5
-    private var feedbackList = [FeedbackDetail]()
-    private var loadedAllFeedback = false
     private var loadingFeedback = false
     private var loadingAverageRating = false
+    private var feedbackList = [FeedbackDetail]()
+    private var loadedAllFeedback = false
+    private var currentFeedbackPage: Page<Review>?
     
     // MARK: - Loading
     
@@ -76,10 +74,32 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         tableView.estimatedRowHeight = 40
         
         // update from Realm
-        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _ in self?.updateUI() }
+        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _ in
+            
+            guard let controller = self else { return }
+            
+            guard controller.loadingFeedback == false && controller.loadingAverageRating == false
+                else { return }
+            
+            controller.updateUI()
+        
+        }
         
         // update UI
         self.updateUI()
+        tableView.tableFooterView = UIView()
+        
+        // load feedback
+        if shouldShowReviews {
+            
+            if self.eventCache.averageFeedback == nil {
+                
+                loadAverageRating()
+            }
+            
+            // load reviews
+            loadFeedback()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -225,18 +245,29 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // load feedback
         
-        shouldShowReviews = eventCache.start < Date()
+        //shouldShowReviews = eventCache.start < Date()
+        shouldShowReviews = true // TEMP
         
         if shouldShowReviews {
             
-            configureFeedbackHeader()
-            loadFeedback()
-            loadAverageRating()
+            // get all reviews for this event
+            var realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
+            
+            // filter current user's feedback
+            if let attendee = Store.shared.authenticatedMember?.attendeeRole {
+                
+                realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
+            }
+            
+            feedbackList = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
+            
+            // configure feedback view
+            configureReviewCountView()
+            configureAverageRatingView()
         }
         
         // reload table
         self.tableView.reloadData()
-        self.tableView.tableFooterView = UIView()
         
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
@@ -254,30 +285,19 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         loadingFeedback = true
         
-        // load from cache
-        if feedbackList.isEmpty {
-            
-            /// load first 5 from cache
-            var realmFeedback = Array(Store.shared.realm.objects(RealmReview).prefix(5))
-            
-            // filter current user's feedback
-            if let attendee = Store.shared.authenticatedMember?.attendeeRole {
-                
-                realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
-            }
-            
-            let feedbackDetail = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
-        }
+        configureReviewCountView()
         
-        updateUI()
+        let nextPage = (currentFeedbackPage?.currentPage ?? 0) + 1
         
-        Store.shared.feedback(event: event, page: feedbackPage, objectsPerPage: feedbackObjectsPerPage) { [weak self] (response) in
+        Store.shared.feedback(event: event, page: nextPage, objectsPerPage: 5) { [weak self] (response) in
             
             dispatch_async(dispatch_get_main_queue()) {
                 
                 guard let controller = self else { return }
                 
-                defer { controller.loadingFeedback = false }
+                assert(controller.loadingFeedback)
+                
+                controller.loadingFeedback = false
                 
                 switch response {
                     
@@ -287,22 +307,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     
                 case let .Value(feedbackPage):
                     
-                    var realmFeedback = feedbackPage.items.identifiers.map { RealmReview.find($0, realm: Store.shared.realm)! }
-                    
-                    // filter feedback already loaded
-                    realmFeedback = realmFeedback.filter { controller.feedbackList.identifiers.contains($0.id) == false }
-                    
-                    // filter current user's feedback
-                    if let attendee = Store.shared.authenticatedMember?.attendeeRole {
-                        
-                        realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
-                    }
-                    
-                    let feedbackDetail = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
-                    controller.feedbackList += feedbackDetail
-                    controller.feedbackPage += 1
-                    controller.totalFeedback = feedbackPage.total
-                    controller.loadedAllFeedback = controller.feedbackList.count == feedbackPage.total
+                    controller.currentFeedbackPage = feedbackPage
+                    controller.loadedAllFeedback = feedbackPage.items.isEmpty
                     controller.updateUI()
                 }
             }
@@ -316,7 +322,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         loadingAverageRating = true
         
-        updateUI()
+        configureAverageRatingView()
         
         Store.shared.averageFeedback(event: event) { [weak self] (response) in
             
@@ -324,7 +330,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 guard let controller = self else { return }
                 
-                defer { controller.loadingAverageRating = false }
+                controller.loadingAverageRating = false
                 
                 switch response {
                     
@@ -334,8 +340,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     
                 case .Value:
                     
-                    // Realm should update UI
-                    break
+                    controller.configureAverageRatingView()
                 }
             }
         }
@@ -371,23 +376,24 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         cell.separatorInset = UIEdgeInsetsZero
     }
     
-    private func configureFeedbackHeader() {
+    private func configureAverageRatingView() {
         
-        // configure feedback view
+        feedBackHeader.averageRatingView.hidden = loadingAverageRating
+        feedBackHeader.averageRatingView.rating = eventCache.averageFeedback ?? 0
+        feedBackHeader.averageRatingActivityIndicator.hidden = !loadingAverageRating
         
-        if loadingAverageRating || loadingFeedback {
+        if loadingFeedback {
             
-            feedBackHeader.reviewsLabel.text = "Loading..."
-            
+            feedBackHeader.averageRatingActivityIndicator.startAnimating()
         } else {
             
-            feedBackHeader.reviewsLabel.text = "\(totalFeedback) Reviews"
+            feedBackHeader.averageRatingActivityIndicator.stopAnimating()
         }
+    }
+    
+    private func configureReviewCountView() {
         
-        feedBackHeader.averageRatingView.hidden = eventCache.averageFeedback == nil
-        feedBackHeader.averageRatingView.rating = eventCache.averageFeedback ?? 0
-        feedBackHeader.averageRatingActivityIndicator.hidden = eventCache.averageFeedback != nil
-
+        
     }
     
     // MARK: - UITableViewDataSource
@@ -579,7 +585,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             configure(cell: cell, at: indexPath)
             
             // load feedback
-            if indexPath.row == feedbackList.count - 1 && loadedAllFeedback == false {
+            if indexPath.row == feedbackList.count - 1
+                && loadingFeedback == false
+                && loadedAllFeedback == false {
+                
                 loadFeedback()
             }
             
