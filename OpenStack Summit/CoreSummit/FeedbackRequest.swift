@@ -49,7 +49,7 @@ public extension Store {
         }
     }
     
-    func averageFeedback(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<Int>) -> ()) {
+    func averageFeedback(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
         
         let summitID: String
         
@@ -75,11 +75,10 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let jsonObject = json.objectValue
+                let jsonObject = json.objectValue,
+                let averageFeedback = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double
                 else { completion(.Error(Error.InvalidResponse)); return }
-            
-            let averageFeedback = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Int ?? 0
-            
+                        
             // update cache
             if let realmEvent = RealmSummitEvent.find(event, realm: self.realm) {
                 

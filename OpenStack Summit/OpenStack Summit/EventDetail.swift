@@ -33,7 +33,7 @@ public struct EventDetail: RealmDecodable {
     public let allowFeedback: Bool
     public let moderator: PresentationSpeaker?
     public let level: String
-    public let averageFeedback: Int
+    public let averageFeedback: Double
     public let video: Video?
     public let rsvp: String
     
@@ -108,7 +108,7 @@ public struct EventDetail: RealmDecodable {
         }
         
         #if os(iOS)
-        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(Summit(realmEntity: event.summit)))!
+        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(Summit(realmEntity: event.summit))) ?? NSURL(string: "http://google.com")!
         #endif
     }
 }

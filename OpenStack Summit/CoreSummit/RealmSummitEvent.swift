@@ -16,7 +16,7 @@ public class RealmSummitEvent: RealmNamed {
     public dynamic var start = NSDate(timeIntervalSince1970: 1)
     public dynamic var eventDescription = ""
     public dynamic var allowFeedback = false
-    public dynamic var averageFeedback = 0
+    public dynamic var averageFeedback = 0.0
     public dynamic var rsvp = ""
     public dynamic var eventType: RealmEventType!
     public let summitTypes = List<RealmSummitType>()
