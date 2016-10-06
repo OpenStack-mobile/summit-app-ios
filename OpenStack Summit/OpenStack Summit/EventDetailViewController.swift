@@ -240,25 +240,23 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // load feedback
         
-        shouldShowReviews = eventCache.start < Date()
         
-        if shouldShowReviews {
+        // get all reviews for this event
+        var realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
+        
+        shouldShowReviews = eventCache.start < Date() && realmFeedback.isEmpty == false
+        
+        // filter current user's feedback
+        if let attendee = Store.shared.authenticatedMember?.attendeeRole {
             
-            // get all reviews for this event
-            var realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
-            
-            // filter current user's feedback
-            if let attendee = Store.shared.authenticatedMember?.attendeeRole {
-                
-                realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
-            }
-            
-            feedbackList = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
-            
-            // configure feedback view
-            configureReviewCountView()
-            configureAverageRatingView()
+            realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
         }
+        
+        feedbackList = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
+        
+        // configure feedback view
+        configureReviewCountView()
+        configureAverageRatingView()
         
         // reload table
         self.tableView.reloadData()
