@@ -51,22 +51,8 @@ extension SummitEvent: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Int ?? 0
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
-        
-        let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
-        
-        if let doubleValue = averageFeedbackJSON?.rawValue as? Double {
-            
-            self.averageFeedback = doubleValue
-            
-        } else if let integerValue = averageFeedbackJSON?.rawValue as? Double {
-            
-            self.averageFeedback = Double(integerValue)
-            
-        } else {
-            
-            self.averageFeedback = nil
-        }
         
         if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
             where location > 0 {

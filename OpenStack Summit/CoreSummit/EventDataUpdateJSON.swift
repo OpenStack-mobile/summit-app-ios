@@ -55,21 +55,7 @@ extension Event.DataUpdate: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
-        
-        let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
-        
-        if let doubleValue = averageFeedbackJSON?.rawValue as? Double {
-            
-            self.averageFeedback = doubleValue
-            
-        } else if let integerValue = averageFeedbackJSON?.rawValue as? Double {
-            
-            self.averageFeedback = Double(integerValue)
-            
-        } else {
-            
-            self.averageFeedback = nil
-        }
+        self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Int ?? 0
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
