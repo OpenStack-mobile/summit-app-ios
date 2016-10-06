@@ -393,7 +393,16 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private func configureReviewCountView() {
         
-        
+        if loadingFeedback {
+            
+            feedBackHeader.reviewsLabel.text = "Loading..."
+            
+        } else {
+            
+            let reviewCount = currentFeedbackPage?.total ?? 0
+            
+            feedBackHeader.reviewsLabel.text = "\(reviewCount) Reviews"
+        }
     }
     
     // MARK: - UITableViewDataSource
