@@ -36,7 +36,7 @@ extension SummitEvent: JSONDecodable {
             let type = Identifier(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Identifier.fromJSON(sponsorsJSONArray),
-            let averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double
+            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         
         self.identifier = identifier
@@ -49,7 +49,19 @@ extension SummitEvent: JSONDecodable {
         self.allowFeedback = allowFeedback
         self.type = type
         self.sponsors = sponsors
-        self.averageFeedback = averageFeedback
+        
+        if let doubleValue = averageFeedbackJSON.rawValue as? Double {
+            
+            self.averageFeedback = doubleValue
+            
+        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+            
+            self.averageFeedback = Double(integerValue)
+            
+        } else {
+            
+            return nil
+        }
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String

@@ -76,8 +76,23 @@ public extension Store {
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
-                let averageFeedback = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double
+                let averageFeedbackJSON = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]
                 else { completion(.Error(Error.InvalidResponse)); return }
+            
+            let averageFeedback: Double
+            
+            if let doubleValue = averageFeedbackJSON.rawValue as? Double {
+                
+                averageFeedback = doubleValue
+                
+            } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+                
+                averageFeedback = Double(integerValue)
+                
+            } else {
+                
+                completion(.Error(Error.InvalidResponse)); return
+            }
                         
             // update cache
             if let realmEvent = RealmSummitEvent.find(event, realm: self.realm) {

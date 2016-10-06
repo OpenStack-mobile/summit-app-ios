@@ -108,7 +108,7 @@ public struct EventDetail: RealmDecodable {
         }
         
         #if os(iOS)
-        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(Summit(realmEntity: event.summit)))
+        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(Summit(realmEntity: event.summit)))!
         #endif
     }
 }
