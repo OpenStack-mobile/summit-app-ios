@@ -373,7 +373,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     private func configureAverageRatingView() {
         
         feedBackHeader.averageRatingView.hidden = loadingAverageRating
-        feedBackHeader.averageRatingView.rating = Double(eventCache.averageFeedback)
+        feedBackHeader.averageRatingView.rating = eventCache.averageFeedback
         feedBackHeader.averageRatingActivityIndicator.hidden = !loadingAverageRating
         
         if loadingFeedback {
