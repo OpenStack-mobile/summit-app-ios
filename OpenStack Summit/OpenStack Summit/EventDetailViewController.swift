@@ -92,12 +92,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // load feedback
         if shouldShowReviews {
             
-            if self.eventCache.averageFeedback == nil {
-                
-                loadAverageRating()
-            }
-            
-            // load reviews
+            loadAverageRating()
             loadFeedback()
         }
     }
@@ -378,7 +373,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     private func configureAverageRatingView() {
         
         feedBackHeader.averageRatingView.hidden = loadingAverageRating
-        feedBackHeader.averageRatingView.rating = eventCache.averageFeedback ?? 0
+        feedBackHeader.averageRatingView.rating = Double(eventCache.averageFeedback)
         feedBackHeader.averageRatingActivityIndicator.hidden = !loadingAverageRating
         
         if loadingFeedback {

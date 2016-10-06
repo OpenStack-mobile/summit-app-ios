@@ -74,35 +74,6 @@ final class StoreTests: XCTestCase {
         
         waitForExpectationsWithTimeout(60, handler: nil)
     }
-    /*
-    func testFeedbackRequest() {
-        
-        clearRealm()
-        
-        let austinID = 6
-        
-        let eventID = 1
-        
-        let expectation = expectationWithDescription("API Request")
-        
-        Store.shared.feedback(austinID, event: eventID, page: 1, objectsPerPage: 10) { (response) in
-            
-            switch response {
-                
-            case let .Error(error):
-                
-                XCTFail("\(error)");
-                
-            case let .Value(value):
-                
-                dump(value)
-            }
-            
-            expectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(60, handler: nil)
-    }*/
     
     func testDataUpdatesRequest() {
         

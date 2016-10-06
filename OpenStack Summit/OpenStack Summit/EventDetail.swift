@@ -33,7 +33,7 @@ public struct EventDetail: RealmDecodable {
     public let allowFeedback: Bool
     public let moderator: PresentationSpeaker?
     public let level: String
-    public let averageFeedback: Double
+    public let averageFeedback: Int
     public let video: Video?
     public let rsvp: String
     
