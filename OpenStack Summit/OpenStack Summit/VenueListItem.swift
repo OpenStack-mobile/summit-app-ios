@@ -24,7 +24,7 @@ public struct VenueListItem: RealmDecodable {
     
     public let backgroundImageURL: String?
     
-    public let maps: [String]
+    public var maps: [String]
     
     public let images: [String]
     
@@ -38,6 +38,10 @@ public struct VenueListItem: RealmDecodable {
         self.address = VenueListItem.getAddress(venue)
         self.backgroundImageURL = venue.images.first?.url
         self.maps = venue.maps.map { $0.url }
+        
+        let floors = venue.floors.sort { $0.number < $1.number }
+        self.maps.appendContentsOf(floors.map { $0.imageURL }.filter { $0 != "" })
+        
         self.images = venue.images.map { $0.url }
         
         // location

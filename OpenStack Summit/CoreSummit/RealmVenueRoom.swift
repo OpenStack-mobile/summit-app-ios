@@ -7,13 +7,12 @@
 //
 
 import RealmSwift
-import Realm
 
 public class RealmVenueRoom: RealmLocation {
     
     public dynamic var capacity = 0
     public dynamic var venue: RealmVenue!
-    
+    public dynamic var floor: RealmVenueFloor!
     /*
     public var events: [RealmSummitEvent] {
         
@@ -31,6 +30,7 @@ extension VenueRoom: RealmDecodable {
         self.name = realmEntity.name
         self.descriptionText = String(realm: realmEntity.locationDescription)
         self.venue = realmEntity.venue.id
+        self.floor = realmEntity.floor.id
         
         if realmEntity.capacity == 0 {
             
@@ -52,6 +52,7 @@ extension VenueRoom: RealmEncodable {
         realmEntity.name = name
         realmEntity.locationDescription = descriptionText ?? ""
         realmEntity.venue = RealmVenue.cached(venue, realm: realm)
+        realmEntity.floor = RealmVenueFloor.cached(floor, realm: realm)
         realmEntity.capacity = capacity ?? 0
         
         return realmEntity
