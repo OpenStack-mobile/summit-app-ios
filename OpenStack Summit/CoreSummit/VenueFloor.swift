@@ -14,7 +14,7 @@ public struct VenueFloor: Named {
     
     public var descriptionText: String?
     
-    public var number: Int?
+    public var number: Int
     
     public var imageURL: String?
     
