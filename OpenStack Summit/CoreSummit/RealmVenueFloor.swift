@@ -27,7 +27,7 @@ extension VenueFloor: RealmDecodable {
         self.name = realmEntity.name
         self.descriptionText = String(realm: realmEntity.descriptionText)
         self.number = realmEntity.number
-        self.imageURL = realmEntity.imageURL
+        self.imageURL = String(realm: realmEntity.imageURL)
         self.venue = realmEntity.venue.id
         self.rooms = realmEntity.rooms.identifiers
     }
