@@ -38,6 +38,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // update app build preference
         Preference.appBuild = AppBuild
         
+        // verify Fabric integration
+        assert(NSBundle.mainBundle().infoDictionary!["Fabric"] != nil, "Fabric missing from Info.plist \n \(NSBundle.mainBundle().infoDictionary!)")
+        
         // nuke Realm if errored
         do { let _ = try Realm() }
         catch {

@@ -80,7 +80,9 @@ public final class DataUpdatePoller {
                         
                         // could not process update
                         
+                        #if os(iOS)
                         Crashlytics.sharedInstance().recordError(friendlyError)
+                        #endif
                         
                         print("Could not process data update: \(update)")
                     }
@@ -153,5 +155,3 @@ public final class UserDefaultsDataUpdatePollerStorage: DataUpdatePollerStorage 
         case LatestDataUpdate = "CoreSummit.UserDefaultsDataUpdatePollerStorage.Key.LatestDataUpdate"
     }
 }
-
-
