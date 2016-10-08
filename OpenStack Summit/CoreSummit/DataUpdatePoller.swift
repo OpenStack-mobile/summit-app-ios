@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftFoundation
+import Crashlytics
 
 public final class DataUpdatePoller {
     
@@ -75,15 +76,13 @@ public final class DataUpdatePoller {
                 
                 for update in dataUpdates {
                     
-                    guard Store.shared.process(update) else {
+                    if Store.shared.process(update) == false {
                         
                         // could not process update
                         
-                        //Crashlytics.sharedInstance().recordError(friendlyError)
+                        Crashlytics.sharedInstance().recordError(friendlyError)
                         
                         print("Could not process data update: \(update)")
-                        
-                        return
                     }
                     
                     // store latest data update
