@@ -25,7 +25,7 @@ func integrateFabric() {
     // modify
     var infoPlist = currentInfoPlist
     
-    let kit = ["KitInfo": ["KitName": "Crashlytics"]]
+    let kit = ["KitInfo": [:], "KitName": "Crashlytics"]
     
     var fabric = [String: AnyObject]()
     fabric["APIKey"] = FabricAPIKey as NSString

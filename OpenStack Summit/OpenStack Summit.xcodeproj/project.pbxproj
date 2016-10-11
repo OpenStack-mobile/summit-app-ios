@@ -417,7 +417,6 @@
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
-		6E9CB32D1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		6E9CB32E1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
 		6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */; };
@@ -433,7 +432,6 @@
 		6EA6FD381D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
-		6EB295171DA97B0B0021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
@@ -680,16 +678,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6E29240B1D7AF8C900D14F0A /* Copy Configurations */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Configuration;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			name = "Copy Configurations";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E3B98A61D4A6840009B4926 /* Copy Configurations */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Configuration;
@@ -1067,7 +1055,6 @@
 				6EDE52321D42D50000DF4BEA /* libz.tbd in Frameworks */,
 				6EDE52301D42D4F600DF4BEA /* libicucore.tbd in Frameworks */,
 				6EDE522E1D42D4EB00DF4BEA /* libc++.tbd in Frameworks */,
-				6E9CB32D1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */,
 				6EDE522C1D42D4D600DF4BEA /* ImageIO.framework in Frameworks */,
 				6EDE52251D42D4C700DF4BEA /* CoreGraphics.framework in Frameworks */,
 				6EDE52261D42D4C700DF4BEA /* CoreLocation.framework in Frameworks */,
@@ -1079,7 +1066,6 @@
 				6EDE521B1D42D46400DF4BEA /* AVFoundation.framework in Frameworks */,
 				6EDE52191D42D09D00DF4BEA /* GoogleMaps.framework in Frameworks */,
 				6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */,
-				6EB295171DA97B0B0021C846 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1988,7 +1974,6 @@
 				6E10A4ED1D1066E9008CBD0C /* Frameworks */,
 				6E10A4EE1D1066E9008CBD0C /* Headers */,
 				6E10A4EF1D1066E9008CBD0C /* Resources */,
-				6E3B98A61D4A6840009B4926 /* Copy Configurations */,
 			);
 			buildRules = (
 			);
