@@ -85,10 +85,20 @@ public final class DataUpdatePoller {
                         // could not process update
                         
                         #if os(iOS)
+                            
+                            var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
+                            
+                            if let updateEntity = update.entity,
+                                case let .JSON(jsonObject) = updateEntity {
+                                
+                                let jsonString = JSON.Value.Object(jsonObject).toString()!
+                                
+                                errorUserInfo["JSON"] = jsonString
+                            }
                         
-                        let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo: [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"])
+                            let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo:errorUserInfo)
                         
-                        Crashlytics.sharedInstance().recordError(friendlyError)
+                            Crashlytics.sharedInstance().recordError(friendlyError)
                         
                         #endif
                         
