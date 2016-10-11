@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func feedback(summit: Identifier? = nil, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<[Feedback]>) -> ()) {
+    func feedback(summit: Identifier? = nil, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Review>>) -> ()) {
         
         let summitID: String
         
@@ -38,15 +38,14 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let jsonArray = json.arrayValue,
-                let feedback = Feedback.fromJSON(jsonArray)
+                let page = Page<Review>(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! self.realm.write { let _ = feedback.save(self.realm) }
+            try! self.realm.write { let _ = page.items.save(self.realm) }
             
             // success
-            completion(.Value(feedback))
+            completion(.Value(page))
         }
     }
     
@@ -77,9 +76,24 @@ public extension Store {
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
-                let averageFeedback = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double
+                let averageFeedbackJSON = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]
                 else { completion(.Error(Error.InvalidResponse)); return }
             
+            let averageFeedback: Double
+            
+            if let doubleValue = averageFeedbackJSON.rawValue as? Double {
+                
+                averageFeedback = doubleValue
+                
+            } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+                
+                averageFeedback = Double(integerValue)
+                
+            } else {
+                
+                completion(.Error(Error.InvalidResponse)); return
+            }
+                        
             // update cache
             if let realmEvent = RealmSummitEvent.find(event, realm: self.realm) {
                 
@@ -94,7 +108,7 @@ public extension Store {
         }
     }
     
-    func addFeedback(summit: Identifier? = nil, attendee: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Feedback>) -> ()) {
+    func addFeedback(summit: Identifier? = nil, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
         
         let summitID: String
         
@@ -107,16 +121,15 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)/events/\(event)/feedback"
+        let URI = "/api/v2/summits/\(summitID)/events/\(event)/feedback"
         
         let URL = environment.configuration.serverURL + URI
         
         let http = self.createHTTP(.OpenIDJSON)
         
-        var jsonDictionary = [String:AnyObject]()
+        var jsonDictionary = [String: AnyObject]()
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
-        jsonDictionary["attendee_id"] = attendee
         
         http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
             
@@ -126,10 +139,11 @@ public extension Store {
             
             let id = Int(responseObject as! String)!
             
-            let feedback = Feedback(identifier: id, rate: rate, review: review, date: Date(), event: event, owner: attendee)
-            
             // create new feedback in cache
-            if let attendee = RealmSummitAttendee.find(attendee, realm: self.realm) {
+            if let member = self.authenticatedMember,
+                let attendee = member.attendeeRole {
+                
+                let feedback = AttendeeFeedback(identifier: id, rate: rate, review: review, date: Date(), event: event, member: member.id, attendee: attendee.id)
                 
                 try! self.realm.write {
                     
@@ -139,7 +153,7 @@ public extension Store {
                 }
             }
             
-            completion(.Value(feedback))
+            completion(.Value(id))
         }
     }
 }

@@ -74,11 +74,11 @@ final class PeopleTableViewCell: UITableViewCell {
             picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
             
             if (!picUrlInternal.isEmpty) {
-                let placeholder = UIImage(named: "generic-user-avatar")
+                let placeholder = R.image.genericUserAvatar()!
                 pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!, placeholder: placeholder)
             }
             else {
-                pictureImageView.image = UIImage(named: "generic-user-avatar")
+                pictureImageView.image = R.image.genericUserAvatar()!
             }
             pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
             pictureImageView.clipsToBounds = true;

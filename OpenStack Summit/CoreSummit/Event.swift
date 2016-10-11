@@ -24,7 +24,7 @@ public struct Event: Named {
     
     public var allowFeedback: Bool
     
-    public var averageFeedback: Double?
+    public var averageFeedback: Double
     
     public var type: Identifier
     
@@ -41,4 +41,6 @@ public struct Event: Named {
     //public var trackIdentifier: Identifier
     
     public var videos: [Video]
+    
+    public var rsvp: String?
 }

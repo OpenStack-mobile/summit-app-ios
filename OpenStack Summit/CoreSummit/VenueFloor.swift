@@ -1,12 +1,12 @@
 //
-//  VenueRoom.swift
+//  VenueFloor.swift
 //  OpenStackSummit
 //
-//  Created by Alsey Coleman Miller on 6/1/16.
+//  Created by Gabriel Horacio Cutrini on 10/4/16.
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct VenueRoom: LocationProtocol {
+public struct VenueFloor: Named {
     
     public let identifier: Identifier
     
@@ -14,9 +14,11 @@ public struct VenueRoom: LocationProtocol {
     
     public var descriptionText: String?
     
-    public var capacity: Int?
+    public var number: Int
+    
+    public var imageURL: String?
     
     public var venue: Identifier
     
-    public var floor: Identifier
+    public var rooms: [Identifier]
 }

@@ -8,26 +8,36 @@
 
 import XCTest
 import SwiftFoundation
-import CoreSummit
+@testable import CoreSummit
+
+let SummitJSONIdentifiers = 6 ... 7
+
+let MemberJSONIdentifiers = 1 ... 2
 
 final class JSONTests: XCTestCase {
-
-    func testSummit() {
+    
+    func testSummits() {
         
-        let testJSON = loadJSON("Summit")
-        
-        guard let _ = Summit(JSONValue: testJSON)
-            else { XCTFail("Could not decode from JSON"); return }
+        for summitID in SummitJSONIdentifiers {
+            
+            let testJSON = loadJSON("Summit\(summitID)")
+            
+            guard let summit = Summit(JSONValue: testJSON)
+                else { XCTFail("Could not decode from JSON"); return }
+            
+            XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+        }
     }
     
-    func testAustinSummit() {
+    func testMembers() {
         
-        let testJSON = loadJSON("AustinSummit")
-        
-        guard let summit = Summit(JSONValue: testJSON)
-            else { XCTFail("Could not decode from JSON"); return }
-        
-        XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+        for memberJSONID in MemberJSONIdentifiers {
+            
+            let testJSON = loadJSON("Member\(memberJSONID)")
+            
+            guard let _ = Member(JSONValue: testJSON)
+                else { XCTFail("Could not decode from JSON"); return }
+        }
     }
     
     func testDataUpdates1() {
@@ -87,11 +97,27 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
     }
     
-    func testMember1() {
+    func testDataUpdates5() {
         
-        let testJSON = loadJSON("Member1")
+        let testJSON = loadJSON("DataUpdates5")
         
-        guard let _ = Member(JSONValue: testJSON)
+        let dataUpdatesCount = 4
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
             else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == dataUpdatesCount, "\(dataUpdates.count) DataUpdate. Should be \(dataUpdatesCount)")
+        
+        for dataUpdate in dataUpdates {
+            
+            guard dataUpdate.operation == .Update,
+                let dataUpdateEntity = dataUpdate.entity,
+                case let .JSON(entityJSON) = dataUpdateEntity,
+                let type = dataUpdate.className.type,
+                let _ = type.init(JSONValue: .Object(entityJSON))
+                else { XCTFail("Could not decode \(dataUpdate.className) from JSON"); return }
+        }
     }
 }

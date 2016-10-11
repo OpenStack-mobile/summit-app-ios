@@ -65,7 +65,7 @@ public extension DataUpdate {
         case PresentationSlide
         case SponsorFromEvent
         
-        private var type: Updatable.Type? {
+        internal var type: Updatable.Type? {
             
             switch self {
             case .WipeData: return nil
@@ -78,9 +78,10 @@ public extension DataUpdate {
             case .PresentationSpeaker: return CoreSummit.PresentationSpeaker.self
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
+            case .SummitVenueFloor: return CoreSummit.VenueFloor.self
             case .SummitVenueRoom: return CoreSummit.VenueRoom.self
             case .PresentationCategory: return CoreSummit.Track.self
-            case .PresentationCategoryGroup: return CoreSummit.TrackGroup.self
+            case .PresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
             
             default: return nil
@@ -211,7 +212,7 @@ public extension Store {
 // Must be private beacuase this is to circumvent the limitations of protocols with associated types
 
 /// The model type can be updated remotely
-private protocol Updatable: JSONDecodable {
+internal protocol Updatable: JSONDecodable {
     
     static func find(id: Identifier, realm: Realm) -> RealmEntity?
     
@@ -245,7 +246,8 @@ extension EventType: Updatable { }
 extension PresentationSpeaker: Updatable { }
 extension TicketType: Updatable { }
 extension Venue: Updatable { }
+extension VenueFloor: Updatable { }
 extension VenueRoom: Updatable { }
 extension Track: Updatable { }
-extension TrackGroup: Updatable { }
+extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }

@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import OpenStack_Summit
+@testable import OpenStackSummit
 
-class OpenStack_SummitTests: XCTestCase {
+class OpenStackSummitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

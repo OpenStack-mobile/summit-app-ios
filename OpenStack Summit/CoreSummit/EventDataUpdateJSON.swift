@@ -37,7 +37,8 @@ extension Event.DataUpdate: JSONDecodable {
             /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
             let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int,
-            let presentation = Presentation.DataUpdate(JSONValue: JSONValue)
+            let presentation = Presentation.DataUpdate(JSONValue: JSONValue),
+            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         
         self.identifier = identifier
@@ -53,9 +54,21 @@ extension Event.DataUpdate: JSONDecodable {
         self.location = locationIdentifier
         self.presentation = presentation
         
+        if let doubleValue = averageFeedbackJSON.rawValue as? Double {
+            
+            self.averageFeedback = doubleValue
+            
+        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+            
+            self.averageFeedback = Double(integerValue)
+            
+        } else {
+            
+            return nil
+        }
+        
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
-        self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double ?? nil
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             

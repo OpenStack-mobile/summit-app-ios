@@ -12,7 +12,7 @@ public extension SummitEvent {
     
     enum JSONKey: String {
         
-        case id, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, summit_types, sponsors, speakers, location_id, tags, track_id, videos
+        case id, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, summit_types, sponsors, speakers, location_id, tags, track_id, videos, rsvp_link
     }
 }
 
@@ -36,10 +36,7 @@ extension SummitEvent: JSONDecodable {
             let type = Identifier(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Identifier.fromJSON(sponsorsJSONArray),
-            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
-            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
-            /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
-            let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
+            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         
         self.identifier = identifier
@@ -52,11 +49,33 @@ extension SummitEvent: JSONDecodable {
         self.allowFeedback = allowFeedback
         self.type = type
         self.sponsors = sponsors
-        self.location = locationIdentifier
+        
+        if let doubleValue = averageFeedbackJSON.rawValue as? Double {
+            
+            self.averageFeedback = doubleValue
+            
+        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+            
+            self.averageFeedback = Double(integerValue)
+            
+        } else {
+            
+            return nil
+        }
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
-        self.averageFeedback = JSONObject[JSONKey.avg_feedback_rate.rawValue]?.rawValue as? Double ?? nil
+        self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
+        
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
+            where location > 0 {
+            
+            self.location = location
+            
+        } else {
+            
+            self.location = nil
+        }
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             

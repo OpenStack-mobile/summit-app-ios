@@ -66,8 +66,6 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(summit):
                 
-                dump(summit);
-                
                 XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
             }
             
@@ -76,35 +74,6 @@ final class StoreTests: XCTestCase {
         
         waitForExpectationsWithTimeout(60, handler: nil)
     }
-    /*
-    func testFeedbackRequest() {
-        
-        clearRealm()
-        
-        let austinID = 6
-        
-        let eventID = 1
-        
-        let expectation = expectationWithDescription("API Request")
-        
-        Store.shared.feedback(austinID, event: eventID, page: 1, objectsPerPage: 10) { (response) in
-            
-            switch response {
-                
-            case let .Error(error):
-                
-                XCTFail("\(error)");
-                
-            case let .Value(value):
-                
-                dump(value)
-            }
-            
-            expectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(60, handler: nil)
-    }*/
     
     func testDataUpdatesRequest() {
         
@@ -126,7 +95,36 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(value):
                 
-                dump(value)
+                XCTAssert(value.isEmpty == false)
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
+    
+    func testFeedbackRequest() {
+        
+        clearRealm()
+        
+        let summit = 7 // Barcelona
+        
+        let event = 16638 // Upstream University - Day 1
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        Store.shared.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                XCTAssert(value.items.isEmpty == false)
             }
             
             expectation.fulfill()

@@ -10,6 +10,7 @@ import UIKit
 import SwiftSpinner
 import AeroGearOAuth2
 import CoreSummit
+import Crashlytics
 
 final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActivityIndicatorProtocol, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
@@ -369,8 +370,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                         controller.toggleMenuSelection(controller.myProfileButton)
                     }
                     
-                    PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in
-                    })
+                    // log user email
+                    Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember!.email)
+                    
+                    PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
                 }
             }
         }
@@ -379,6 +382,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     private func logout() {
         
         Store.shared.logout()
+        
+        Crashlytics.sharedInstance().setUserEmail(nil)
         
         showUserProfile()
         navigateToHome()

@@ -74,7 +74,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         
         toolbarItems = [message, spacer, clear]
         
-        filterObserver = FilterManager.shared.filter.observe { [weak self] in self?.activeFilterIndicator = $0.hasActiveFilters() }
+        filterObserver = FilterManager.shared.filter.observe(filterChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -111,6 +111,16 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         FilterManager.shared.filter.value.clearActiveFilters()
         
         self.reloadPagerTabStripView()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func filterChanged(filter: ScheduleFilter) {
+        
+        if self.navigationController?.topViewController === self {
+            
+            self.activeFilterIndicator = filter.hasActiveFilters()
+        }
     }
     
     // MARK: - RevealTabStripViewController

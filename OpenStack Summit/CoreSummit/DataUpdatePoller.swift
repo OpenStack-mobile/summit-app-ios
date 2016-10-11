@@ -9,6 +9,11 @@
 import Foundation
 import SwiftFoundation
 
+#if os(iOS)
+import Crashlytics
+import Fabric
+#endif
+
 public final class DataUpdatePoller {
     
     public static let shared = DataUpdatePoller()
@@ -75,15 +80,29 @@ public final class DataUpdatePoller {
                 
                 for update in dataUpdates {
                     
-                    guard Store.shared.process(update) else {
+                    if Store.shared.process(update) == false {
                         
                         // could not process update
                         
-                        //Crashlytics.sharedInstance().recordError(friendlyError)
+                        #if os(iOS)
+                            
+                            var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
+                            
+                            if let updateEntity = update.entity,
+                                case let .JSON(jsonObject) = updateEntity {
+                                
+                                let jsonString = JSON.Value.Object(jsonObject).toString()!
+                                
+                                errorUserInfo["JSON"] = jsonString
+                            }
+                        
+                            let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo:errorUserInfo)
+                        
+                            Crashlytics.sharedInstance().recordError(friendlyError)
+                        
+                        #endif
                         
                         print("Could not process data update: \(update)")
-                        
-                        return
                     }
                     
                     // store latest data update
@@ -154,5 +173,3 @@ public final class UserDefaultsDataUpdatePollerStorage: DataUpdatePollerStorage 
         case LatestDataUpdate = "CoreSummit.UserDefaultsDataUpdatePollerStorage.Key.LatestDataUpdate"
     }
 }
-
-

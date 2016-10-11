@@ -35,6 +35,7 @@ public struct EventDetail: RealmDecodable {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
+    public let rsvp: String
     
     #if os(iOS)
     public let webpageURL: NSURL
@@ -54,6 +55,7 @@ public struct EventDetail: RealmDecodable {
         self.summitTypes = ScheduleItem.getSummitTypes(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
+        self.rsvp = event.rsvp
         
         self.venue = event.venue?.id ?? event.venueRoom?.id
         

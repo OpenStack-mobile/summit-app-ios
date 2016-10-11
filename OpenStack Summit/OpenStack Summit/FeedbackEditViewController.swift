@@ -28,11 +28,19 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     // MARK: - Accessors
     
-    private(set) var rate: Int {
+    var rate: Int {
         get {
+            
+            // force view load
+            let _ = self.view
+            
             return Int(rateView.rating)
         }
         set {
+            
+            // force view load
+            let _ = self.view
+            
             rateView.rating = Double(newValue)
         }
     }
@@ -57,7 +65,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         reviewTextArea.delegate = self
         
         sendButton.layer.cornerRadius = 10
-        reviewTextArea.returnKeyType = UIReturnKeyType.Done
+        reviewTextArea.returnKeyType = .Done
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,9 +74,6 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         reviewTextArea.text = placeHolderText
         reviewTextArea.textColor = UIColor.lightGrayColor()
         registerKeyboardNotifications()
-        
-        self.rate = 0
-        self.review = ""
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -107,20 +112,20 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
             return
         }
         
-        guard let member = Store.shared.authenticatedMember
+        guard let _ = Store.shared.authenticatedMember
            else { return } // FIXME: handle user not logged in?
         
         // send request
         
         showActivityIndicator()
         
-        Store.shared.addFeedback(attendee: member.id, event: event, rate: rate, review: review) { [weak self] (response) in
+        Store.shared.addFeedback(event: event, rate: rate, review: review) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
                 guard let controller = self else { return }
                 
-                defer { controller.hideActivityIndicator() }
+                controller.hideActivityIndicator()
                 
                 switch response {
                     

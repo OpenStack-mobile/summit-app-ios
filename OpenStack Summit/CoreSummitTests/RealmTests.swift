@@ -20,34 +20,37 @@ final class RealmTests: XCTestCase {
         return try! Realm()
     }
     
-    func testAustinSummit() {
+    func testSummits() {
         
-        let realm = createRealm("RealmTests_AustinSummit")
-        
-        // load test data
-        let testJSON = loadJSON("AustinSummit")
-        
-        guard var summit = Summit(JSONValue: testJSON)
-            else { XCTFail("Could not decode from JSON"); return }
-        
-        // decode
-        var realmSummit: RealmSummit!
+        for summitID in SummitJSONIdentifiers {
             
-        do { try realm.write { realmSummit = summit.save(realm) } }
+            let realm = createRealm("RealmTests_Summit\(summitID)")
             
-        catch { XCTFail("\(error)"); return }
-        
-        var decodedSummit = Summit(realmEntity: realmSummit)
-        
-        // sort decoded locations so that they dump the same string
-        summit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
-        decodedSummit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
-        
-        // dump
-        
-        let decodedDump = dump(decodedSummit, "DecodedSummitDump.txt")
-        let summitDump = dump(summit, "SummitDump.txt")
-        
-        XCTAssert(decodedDump == summitDump, "Original summit must equal decoded summit")
+            // load test data
+            let testJSON = loadJSON("Summit\(summitID)")
+            
+            guard var summit = Summit(JSONValue: testJSON)
+                else { XCTFail("Could not decode from JSON"); return }
+            
+            // decode
+            var realmSummit: RealmSummit!
+            
+            do { try realm.write { realmSummit = summit.save(realm) } }
+                
+            catch { XCTFail("\(error)"); return }
+            
+            var decodedSummit = Summit(realmEntity: realmSummit)
+            
+            // sort decoded locations so that they dump the same string
+            summit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
+            decodedSummit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
+            
+            // dump
+            
+            let decodedDump = dump(decodedSummit, "DecodedSummit\(summitID)Dump.txt")
+            let summitDump = dump(summit, "Summit\(summitID)Dump.txt")
+            
+            XCTAssert(decodedDump == summitDump, "Original summit \(summitID) must equal decoded summit")
+        }
     }
 }
