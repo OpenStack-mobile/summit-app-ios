@@ -45,9 +45,8 @@ DeployBeta.sh
 
 OpenStack Summit/CoreSummit/Staging.swift
 OpenStack Summit/CoreSummit/Production.swift
-
 OpenStack Summit/OpenStack Summit/AppConsumerKey.swift
-
 OpenStack Summit/Release.entitlements
 OpenStack Summit/Debug.entitlements
 OpenStack Summit/Beta.entitlements
+OpenStack Summit/FabricInfoPlist.swift

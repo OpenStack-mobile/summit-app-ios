@@ -15,6 +15,8 @@ import Parse
 import CoreSpotlight
 import RealmSwift
 import XCDYouTubeKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling {
@@ -38,6 +40,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // update app build preference
         Preference.appBuild = AppBuild
         
+        // verify Fabric integration
+        assert(NSBundle.mainBundle().infoDictionary!["Fabric"] != nil, "Fabric missing from Info.plist \n \(NSBundle.mainBundle().infoDictionary!)")
+        
+        Fabric.with([Crashlytics.self])
+        
         // nuke Realm if errored
         do { let _ = try Realm() }
         catch {
@@ -56,6 +63,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             // clear data poller
             var pollerStorage = UserDefaultsDataUpdatePollerStorage()
             pollerStorage.clear()
+            
+            // log nuking realm
+            Crashlytics.sharedInstance().recordError(error as NSError)
         }
         
         // set configuration
