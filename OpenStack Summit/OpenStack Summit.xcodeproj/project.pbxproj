@@ -417,6 +417,8 @@
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
+		6E9CB32D1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
+		6E9CB32E1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
 		6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */; };
 		6E9CDB061D7E72B60010D1E1 /* SummitEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */; };
@@ -927,6 +929,7 @@
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
+		6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummitTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1064,6 +1067,7 @@
 				6EDE52321D42D50000DF4BEA /* libz.tbd in Frameworks */,
 				6EDE52301D42D4F600DF4BEA /* libicucore.tbd in Frameworks */,
 				6EDE522E1D42D4EB00DF4BEA /* libc++.tbd in Frameworks */,
+				6E9CB32D1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */,
 				6EDE522C1D42D4D600DF4BEA /* ImageIO.framework in Frameworks */,
 				6EDE52251D42D4C700DF4BEA /* CoreGraphics.framework in Frameworks */,
 				6EDE52261D42D4C700DF4BEA /* CoreLocation.framework in Frameworks */,
@@ -1098,6 +1102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */,
+				6E9CB32E1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1673,6 +1678,7 @@
 		6EDE52161D42D08200DF4BEA /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */,
 				6EB295161DA97B0B0021C846 /* Crashlytics.framework */,
 				6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */,
 				6EDE52171D42D08200DF4BEA /* GoogleMaps.framework */,
@@ -2364,7 +2370,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Integrating Fabric into Info.plist\"\n$(SRCROOT)/FabricInfoPlist.swift \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n";
+			shellScript = "echo \"Integrating Fabric into Info.plist\"\n\"${SRCROOT}/FabricInfoPlist.swift\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 		6E74FB051D7CB01F0018633D /* Increment Build */ = {
 			isa = PBXShellScriptBuildPhase;

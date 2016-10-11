@@ -8,7 +8,11 @@
 
 import Foundation
 import SwiftFoundation
+
+#if os(iOS)
 import Crashlytics
+import Fabric
+#endif
 
 public final class DataUpdatePoller {
     
@@ -81,7 +85,11 @@ public final class DataUpdatePoller {
                         // could not process update
                         
                         #if os(iOS)
+                        
+                        let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo: [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"])
+                        
                         Crashlytics.sharedInstance().recordError(friendlyError)
+                        
                         #endif
                         
                         print("Could not process data update: \(update)")
