@@ -888,7 +888,6 @@
 		6E6FD1761D7A1A15003D13D7 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
 		6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConsumerKey.swift; sourceTree = "<group>"; };
-		6E72BCBE1DA97E42002E1BA9 /* FabricInfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabricInfoPlist.swift; sourceTree = "<group>"; };
 		6E730B8C1DA2E254005E486B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		6E730B8E1DA2E405005E486B /* PageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageJSON.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
@@ -1163,7 +1162,6 @@
 			isa = PBXGroup;
 			children = (
 				6EA1F0891D660B550064C338 /* Cartfile */,
-				6E72BCBE1DA97E42002E1BA9 /* FabricInfoPlist.swift */,
 				6E104D301D1061AC00541E84 /* OpenStack Summit */,
 				6E104D451D1061AC00541E84 /* OpenStack SummitTests */,
 				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
