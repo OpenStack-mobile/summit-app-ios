@@ -14,5 +14,5 @@ public struct TicketType: Named {
     
     public var descriptionText: String?
     
-    public var allowedSummitTypes: [SummitType]
+    public var allowedSummitTypes: [Identifier]
 }
