@@ -888,7 +888,6 @@
 		6E6FD1761D7A1A15003D13D7 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
 		6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConsumerKey.swift; sourceTree = "<group>"; };
-		6E72BCBE1DA97E42002E1BA9 /* FabricInfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabricInfoPlist.swift; sourceTree = "<group>"; };
 		6E730B8C1DA2E254005E486B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		6E730B8E1DA2E405005E486B /* PageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageJSON.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
@@ -1163,7 +1162,6 @@
 			isa = PBXGroup;
 			children = (
 				6EA1F0891D660B550064C338 /* Cartfile */,
-				6E72BCBE1DA97E42002E1BA9 /* FabricInfoPlist.swift */,
 				6E104D301D1061AC00541E84 /* OpenStack Summit */,
 				6E104D451D1061AC00541E84 /* OpenStack SummitTests */,
 				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
@@ -1913,7 +1911,6 @@
 				6E10A50D1D1066E9008CBD0C /* Embed Frameworks */,
 				6EF12C5C1D149A8E00814AD0 /* Copy Frameworks */,
 				6EF12C5D1D149B2300814AD0 /* Increment Build */,
-				6E72BCBF1DA97F05002E1BA9 /* Integrate Fabric */,
 				6E40E1371D7A2F200025D74E /* Increment WatchOS Build */,
 				6E0B5F771D77D4DF0005F6CE /* Embed Watch Content */,
 			);
@@ -2340,20 +2337,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		6E72BCBF1DA97F05002E1BA9 /* Integrate Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Integrate Fabric";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"Integrating Fabric into Info.plist\"\n\"${SRCROOT}/FabricInfoPlist.swift\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 		6E74FB051D7CB01F0018633D /* Increment Build */ = {
 			isa = PBXShellScriptBuildPhase;

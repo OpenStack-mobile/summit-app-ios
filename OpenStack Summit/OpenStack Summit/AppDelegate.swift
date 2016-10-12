@@ -40,10 +40,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // update app build preference
         Preference.appBuild = AppBuild
         
-        // verify Fabric integration
-        assert(NSBundle.mainBundle().infoDictionary!["Fabric"] != nil, "Fabric missing from Info.plist \n \(NSBundle.mainBundle().infoDictionary!)")
+        // setup Fabric
+        Crashlytics.startWithAPIKey(AppConsumerKey(AppEnvironment).fabric)
+        // setup Google Maps
+        GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
+        // setup Parse
+        Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
-        Fabric.with([Crashlytics.self])
         
         // nuke Realm if errored
         do { let _ = try Realm() }
@@ -84,12 +87,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // configure global appearance
         SetAppearance()
-                
-        // setup Google Maps
-        GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
-        
-        // setup Parse
-        Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
         // notifications
         let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
