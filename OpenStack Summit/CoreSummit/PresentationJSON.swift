@@ -30,6 +30,16 @@ extension Presentation: JSONDecodable {
         self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
         self.track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
         
+        if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
+            where moderator > 0 {
+            
+            self.moderator = moderator
+            
+        } else {
+            
+            self.moderator = nil
+        }
+        
         if let levelString = JSONObject[JSONKey.level.rawValue]?.rawValue as? String {
             
             guard let level = Level(rawValue: levelString)

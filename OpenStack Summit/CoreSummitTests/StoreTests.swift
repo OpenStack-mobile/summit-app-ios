@@ -124,7 +124,10 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(value):
                 
-                XCTAssert(value.items.isEmpty == false)
+                if value.total > 0 {
+                    
+                    XCTAssert(value.items.isEmpty == false)
+                }
             }
             
             expectation.fulfill()
