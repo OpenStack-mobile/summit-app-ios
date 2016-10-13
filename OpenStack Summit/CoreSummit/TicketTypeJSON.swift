@@ -24,7 +24,7 @@ extension TicketType: JSONDecodable {
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let allowedSummitTypesJSONArray = JSONObject[JSONKey.allowed_summit_types.rawValue]?.arrayValue,
-            let allowedSummitTypes = SummitType.fromJSON(allowedSummitTypesJSONArray)
+            let allowedSummitTypes = Identifier.fromJSON(allowedSummitTypesJSONArray)
             else { return nil }
         
         self.identifier = identifier

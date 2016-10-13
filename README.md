@@ -19,7 +19,6 @@ Supports iOS, watchOS and tvOS.
 	CoreSummit/Staging.swift.xctemplate -> CoreSummit/Staging.swift
 	CoreSummit/Production.swift.xctemplate -> CoreSummit/Production.swift
 	OpenStack Summit/AppConsumerKey.swift.xctemplate -> OpenStack Summit/AppConsumerKey.swift
-	OpenStack Summit/FabricInfoPlist.swift.xctemplate -> OpenStack Summit/FabricInfoPlist.swift
 	```
 
 3. Generate .entitlements out of sample entitlements files

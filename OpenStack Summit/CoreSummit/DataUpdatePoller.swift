@@ -73,9 +73,7 @@ public final class DataUpdatePoller {
             case let .Error(error):
                 
                 log?("Error polling server for data updates: \(error)")
-                
-                //Crashlytics.sharedInstance().recordError(error!)
-                
+                                
             case let .Value(dataUpdates):
                 
                 for update in dataUpdates {
@@ -103,6 +101,10 @@ public final class DataUpdatePoller {
                         #endif
                         
                         print("Could not process data update: \(update)")
+                        
+                        #if DEBUG
+                        return // block
+                        #endif
                     }
                     
                     // store latest data update

@@ -12,12 +12,16 @@ import enum CoreSummit.Environment
 struct AppConsumerKey {
     
     let googleMaps: String
+		
+		let fabric: String
     
     let parse: (appID: String, clientKey: String)
     
     init(_ environment: Environment) {
         
         self.googleMaps = "Google Maps API Key"
+				
+				self.fabric = "Fabric API Key"
         
         switch environment {
             

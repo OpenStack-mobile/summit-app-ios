@@ -337,7 +337,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         cell.name = speaker.name
         cell.title = speaker.title
         cell.pictureURL = speaker.pictureURL
-        cell.isModerator = eventDetail.moderator != nil && speaker.identifier == eventDetail.moderator?.identifier
+        cell.isModerator = speaker.isModerator
         
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero
@@ -401,7 +401,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         switch section {
         case .details: return data.count
-        case .speakers: return eventCache.presentation?.speakers.count ?? 0
+        case .speakers: return eventDetail.speakers.count
         case .feedback: return shouldShowReviews ? feedbackList.count : 0
         }
     }
@@ -618,7 +618,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
             let speaker = eventDetail.speakers[indexPath.row]
             
-            let memberVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
+            let memberVC = MemberProfileViewController(profile: MemberProfileIdentifier.speaker(speaker.identifier))
             
             self.showViewController(memberVC, sender: self)
             
