@@ -28,10 +28,9 @@ public struct EventDetail: RealmDecodable {
     public let venue: Identifier?
     public let eventDescription: String
     public let tags: String
-    public let speakers: [PresentationSpeaker]
+    public let speakers: [Speaker]
     public let finished: Bool
     public let allowFeedback: Bool
-    public let moderator: PresentationSpeaker?
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
@@ -75,28 +74,27 @@ public struct EventDetail: RealmDecodable {
         
         self.level = event.presentation != nil ? event.presentation!.level + " Level" : ""
         
-        var speakers = [PresentationSpeaker]()
-        var moderatorSpeaker: PresentationSpeaker?
+        var speakers = [Speaker]()
+        
+        if let realmEntity = event.presentation?.moderator
+            where realmEntity.id > 0 {
+            
+            let moderatorSpeaker = PresentationSpeaker(realmEntity: realmEntity)
+            let speaker = Speaker(speaker: moderatorSpeaker, isModerator: true)
+            speakers.append(speaker)
+        }
+        
         if let presentation = event.presentation {
             
-            for speaker in presentation.speakers {
-                // HACK: dismiss speakers with empty name
-                if speaker.firstName.isEmpty && speaker.lastName.isEmpty {
-                    continue
-                }
-                let speakerDTO = PresentationSpeaker(realmEntity: speaker)
-                
-                speakers.append(speakerDTO)
-            }
+            // HACK: dismiss speakers with empty name
+            let realmSpeakers = presentation.speakers.filter { $0.firstName.isEmpty == false && $0.lastName.isEmpty == false }
             
-            if let moderator = event.presentation?.moderator {
-                
-                moderatorSpeaker = PresentationSpeaker(realmEntity: moderator)
-            }
+            let presentationSpeakers = realmSpeakers.map { Speaker(speaker: PresentationSpeaker(realmEntity: $0)) }
+            
+            speakers += presentationSpeakers
         }
         
         self.speakers = speakers
-        self.moderator = moderatorSpeaker
         
         if let video = event.videos.filter({ $0.featured }).first {
             
@@ -110,5 +108,45 @@ public struct EventDetail: RealmDecodable {
         #if os(iOS)
         self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(Summit(realmEntity: event.summit)))!
         #endif
+    }
+}
+
+public extension EventDetail {
+    
+    public struct Speaker: Person {
+        
+        public let identifier: Identifier
+        
+        public let firstName: String
+        
+        public let lastName: String
+        
+        public let title: String?
+        
+        public let pictureURL: String
+        
+        public let twitter: String?
+        
+        public let irc: String?
+        
+        public let biography: String?
+        
+        public let memberIdentifier: Identifier?
+        
+        public let isModerator: Bool
+        
+        private init(speaker: PresentationSpeaker, isModerator: Bool = false) {
+            
+            self.identifier = speaker.identifier
+            self.firstName = speaker.firstName
+            self.lastName = speaker.lastName
+            self.title = speaker.title
+            self.pictureURL = speaker.pictureURL
+            self.twitter = speaker.twitter
+            self.irc = speaker.irc
+            self.biography = speaker.biography
+            self.memberIdentifier = speaker.memberIdentifier
+            self.isModerator = isModerator
+        }
     }
 }
