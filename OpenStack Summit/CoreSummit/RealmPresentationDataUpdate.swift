@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-extension Presentation.DataUpdate: RealmEncodable {
+extension PresentationDataUpdate: RealmEncodable {
     
     public func save(realm: Realm) -> RealmPresentation {
         

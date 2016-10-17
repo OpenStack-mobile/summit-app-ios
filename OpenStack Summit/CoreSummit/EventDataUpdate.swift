@@ -37,7 +37,7 @@ public extension Event {
         
         public var location: Identifier
         
-        public var presentation: Presentation.DataUpdate
+        public var presentation: PresentationDataUpdate
         
         //public var trackIdentifier: Identifier
         

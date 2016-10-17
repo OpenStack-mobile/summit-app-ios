@@ -9,10 +9,7 @@
 import SwiftFoundation
 import AeroGearHttp
 import AeroGearOAuth2
-
-#if CORESUMMITREALM
 import RealmSwift
-#endif
 
 /// Class used for requesting and caching data from the server.
 public final class Store {
@@ -24,37 +21,11 @@ public final class Store {
     
     // MARK: - Properties
     
-    #if CORESUMMITREALM
-    
     /// The Realm storage context.
     public let realm = try! Realm()
     
-    #else
-    
-    /// The local cached summit.
-    public internal(set) var cache: Summit? = {
-        
-        // attempt to get cached summit
-        guard let data = NSData(contentsOfURL: Store.cacheURL),
-            let jsonString = String(UTF8Data: Data(foundation: data)),
-            let json = JSON.Value(string: jsonString),
-            let summit = Summit(JSONValue: json)
-            else { return nil }
-        
-        return summit
-    }()
-    
-    /// Clears the cache. 
-    public func clear() {
-        
-        self.cache = nil
-    }
-    
-    public static let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true).URLByAppendingPathComponent("summit.json")
-    
-    #endif
-    
     public var environment = Environment.Staging {
+        
         didSet { configOAuthAccounts() }
     }
     
