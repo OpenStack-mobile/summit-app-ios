@@ -20,24 +20,14 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var events = [Event]()
-    
-    private static let dateFormatter: NSDateFormatter = {
-       
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: Store.shared.cache!.timeZone)
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
-        
-        return dateFormatter
-    }()
+    private(set) var events = [ScheduleItem]()
     
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        events = (context as? Context<[Event]>)?.value ?? Store.shared.cache!.schedule
+        events = (context as? Context<[ScheduleItem]>)?.value ?? ScheduleItem.from(realm: Store.shared.realm.objects(RealmSummitEvent))
         
         updateUI()
     }
@@ -47,7 +37,7 @@ final class EventsInterfaceController: WKInterfaceController {
         super.willActivate()
         
         /// set user activity
-        if let summit = Store.shared.cache {
+        if let summit = Store.shared.realm.objects(RealmSummit).first {
             
             updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/summit-schedule"))
         }
@@ -71,9 +61,8 @@ final class EventsInterfaceController: WKInterfaceController {
         for (index, event) in events.enumerate() {
             
             let cell = tableView.rowControllerAtIndex(index) as! EventCellController
-            
-            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start.toFoundation())
-            let locationText = EventDetail.getLocation(event, summit: Store.shared.cache!)
+            let dateText = event.dateTime
+            let locationText = event.location
             
             cell.nameLabel.setText(event.name)
             cell.dateLabel.setText(" " + dateText)

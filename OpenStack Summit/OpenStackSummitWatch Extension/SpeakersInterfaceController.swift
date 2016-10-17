@@ -67,18 +67,21 @@ final class SpeakersInterfaceController: WKInterfaceController {
                 else { return }
             
             // search for speakers
-            self.speakers = Store.shared.cache!.speakers.filter {
+            let filteredSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).filter({
                 
                 for string in inputText {
                     
-                    if $0.name.containsString(string) {
+                    if $0.firstName.containsString(string) || $0.lastName.containsString(string) {
                         
                         return true
                     }
                 }
                 
                 return false
-            }
+                
+            }).prefix(30)
+            
+            self.speakers = PresentationSpeaker.from(realm: Array(filteredSpeakers))
         }
     }
     
