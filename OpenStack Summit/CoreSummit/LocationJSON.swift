@@ -19,19 +19,32 @@ extension Location: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
-        if let venue = Venue(JSONValue: JSONValue) {
+        guard let className = JSONValue.objectValue?[LocationJSONKey.class_name.rawValue]?.rawValue as? String
+            else { return nil }
+        
+        switch className {
             
-            self = .venue(venue)
+        case VenueRoom.JSONClassName:
             
+            if let room = VenueRoom(JSONValue: JSONValue) {
+                
+                self = .room(room)
+                
+            } else {
+                
+                return nil
+            }
             
-        } else if let room = VenueRoom(JSONValue: JSONValue) {
+        default:
             
-            self = .room(room)
-            
-            
-        } else {
-            
-            return nil
+            if let venue = Venue(JSONValue: JSONValue) {
+                
+                self = .venue(venue)
+                
+            } else {
+                
+                return nil
+            }
         }
     }
 }
