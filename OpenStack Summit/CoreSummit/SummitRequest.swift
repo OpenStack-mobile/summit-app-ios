@@ -11,7 +11,33 @@ import AeroGearHttp
 import AeroGearOAuth2
 
 public extension Store {
+    #if MOCKED
+    func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
     
+        let resourcePath = NSBundle(forClass: Store.self).bundlePath + "/Summit7.json"
+    
+        let JSONString = try! String(contentsOfFile: resourcePath)
+    
+        let json = JSON.Value(string: JSONString)!
+    
+        let entity = Summit(JSONValue: json)!
+        
+        // cache
+        #if CORESUMMITREALM
+            try! self.realm.write {
+                
+                let realmSummit = entity.save(self.realm)
+                
+                realmSummit.initialDataLoadDate = NSDate()
+            }
+        #else
+            self.cache = entity
+            try! JSONString.writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
+        #endif
+    
+        completion(.Value(entity))
+    }
+    #else
     func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
         
         let summitID: String
@@ -58,4 +84,5 @@ public extension Store {
             completion(.Value(entity))
         }
     }
+    #endif
 }

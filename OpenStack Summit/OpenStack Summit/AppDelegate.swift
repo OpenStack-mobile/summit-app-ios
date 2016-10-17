@@ -47,10 +47,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // setup Parse
         Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
-        
-        // nuke Realm if errored
-        do { let _ = try Realm() }
-        catch {
+        // nuke
+        func clearCache(error: ErrorType? = nil) {
             
             print("Nuking Realm")
             
@@ -68,8 +66,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             pollerStorage.clear()
             
             // log nuking realm
-            Crashlytics.sharedInstance().recordError(error as NSError)
+            if let error = error {
+                
+                Crashlytics.sharedInstance().recordError(error as NSError)
+            }
         }
+        
+        // nuke Realm if errored
+        do { let _ = try Realm() }
+        catch { clearCache(error) }
+        
+        #if MOCKED
+        clearCache()
+        #endif
         
         // set configuration
         Store.shared.environment = AppEnvironment
@@ -78,9 +87,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         Store.shared.session = UserDefaultsSessionStorage()
         
         // setup data poller
+        #if !MOCKED
         DataUpdatePoller.shared.storage = UserDefaultsDataUpdatePollerStorage()
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
         DataUpdatePoller.shared.start()
+        #endif
         
         // validate R.swift on debug builds
         R.assertValid()
