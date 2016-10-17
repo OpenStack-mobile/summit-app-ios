@@ -622,16 +622,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6E0B5F161D77C8950005F6CE /* Copy Configurations */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Configuration;
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			name = "Copy Configurations";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6E0B5F721D77D4DF0005F6CE /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1834,7 +1824,7 @@
 				6E0B5F121D77C8950005F6CE /* Frameworks */,
 				6E0B5F131D77C8950005F6CE /* Headers */,
 				6E0B5F151D77C8950005F6CE /* Resources */,
-				6E0B5F161D77C8950005F6CE /* Copy Configurations */,
+				6EE15EBC1DB4959400154DB6 /* Copy Mocked Data */,
 			);
 			buildRules = (
 			);
@@ -1970,6 +1960,7 @@
 				6E10A4ED1D1066E9008CBD0C /* Frameworks */,
 				6E10A4EE1D1066E9008CBD0C /* Headers */,
 				6E10A4EF1D1066E9008CBD0C /* Resources */,
+				6E9392711DB48C1F0021905B /* Copy Mocked Data */,
 			);
 			buildRules = (
 			);
@@ -2352,6 +2343,20 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi";
 		};
+		6E9392711DB48C1F0021905B /* Copy Mocked Data */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Mocked Data";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Mocked\" ]; then\ncp -r \"${PROJECT_DIR}/CoreSummitTests/JSON/Summit7.json\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\nfi";
+		};
 		6ECBD1E11D7CB0A0004BF1A8 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2374,6 +2379,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		6EE15EBC1DB4959400154DB6 /* Copy Mocked Data */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Mocked Data";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Mocked\" ]; then\ncp -r \"${PROJECT_DIR}/CoreSummitTests/JSON/Summit7.json\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\nfi";
 		};
 		6EF12C5C1D149A8E00814AD0 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3743,6 +3762,279 @@
 			};
 			name = Beta;
 		};
+		6E9392631DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_ID_SUFFIX = .mock;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CORESUMMIT_ENVIRONMENT = Staging;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D MOCKED";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Mocked;
+		};
+		6E9392641DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Debug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CORESUMMIT_ENVIRONMENT = Staging;
+				DISPLAY_NAME = "$(CONFIGURATION)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					$SRCROOT/../Carthage/Build/iOS,
+					$SRCROOT/../Vendor,
+				);
+				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+			};
+			name = Mocked;
+		};
+		6E9392651DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Mocked;
+		};
+		6E9392661DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
+			};
+			name = Mocked;
+		};
+		6E9392671DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "OpenStack Summit";
+			};
+			name = Mocked;
+		};
+		6E9392681DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					$SRCROOT/../Carthage/Build/iOS,
+					$SRCROOT/../Vendor,
+				);
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D CORESUMMITREALM -D MOCKED";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Mocked;
+		};
+		6E9392691DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+			};
+			name = Mocked;
+		};
+		6E93926A1DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D CORESUMMITREALM -D MOCKED";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Mocked;
+		};
+		6E93926B1DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+				SDKROOT = appletvos;
+			};
+			name = Mocked;
+		};
+		6E93926C1DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Mocked;
+		};
+		6E93926D1DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+				SDKROOT = watchos;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Mocked;
+		};
+		6E93926E1DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
+				IBSC_MODULE = OpenStackSummitWatch_Extension;
+				INFOPLIST_FILE = OpenStackSummitWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Mocked;
+		};
+		6E93926F1DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
+				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D $(CORESUMMIT_ENVIRONMENT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Mocked;
+		};
+		6E9392701DB470420021905B /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitTV/OpenStackSummitTV-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Mocked;
+		};
 		6E9F28FC1D7C903E002B7C7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3825,6 +4117,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E0B5F1A1D77C8950005F6CE /* Debug */,
+				6E93926C1DB470420021905B /* Mocked */,
 				6E0B5F1B1D77C8950005F6CE /* Release */,
 				6E0B5F1C1D77C8950005F6CE /* Beta */,
 			);
@@ -3835,6 +4128,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E0B5F321D77C8AB0005F6CE /* Debug */,
+				6E93926D1DB470420021905B /* Mocked */,
 				6E0B5F331D77C8AB0005F6CE /* Release */,
 				6E0B5F341D77C8AB0005F6CE /* Beta */,
 			);
@@ -3845,6 +4139,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E0B5F6F1D77D4DF0005F6CE /* Debug */,
+				6E93926F1DB470420021905B /* Mocked */,
 				6E0B5F701D77D4DF0005F6CE /* Release */,
 				6E0B5F711D77D4DF0005F6CE /* Beta */,
 			);
@@ -3855,6 +4150,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E0B5F741D77D4DF0005F6CE /* Debug */,
+				6E93926E1DB470420021905B /* Mocked */,
 				6E0B5F751D77D4DF0005F6CE /* Release */,
 				6E0B5F761D77D4DF0005F6CE /* Beta */,
 			);
@@ -3865,6 +4161,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E104D541D1061AC00541E84 /* Debug */,
+				6E9392631DB470420021905B /* Mocked */,
 				6E104D551D1061AC00541E84 /* Release */,
 				6E7E18EB1D495AE6009549BA /* Beta */,
 			);
@@ -3875,6 +4172,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E104D571D1061AC00541E84 /* Debug */,
+				6E9392641DB470420021905B /* Mocked */,
 				6E104D581D1061AC00541E84 /* Release */,
 				6E7E18EC1D495AE6009549BA /* Beta */,
 			);
@@ -3885,6 +4183,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E104D5A1D1061AC00541E84 /* Debug */,
+				6E9392661DB470420021905B /* Mocked */,
 				6E104D5B1D1061AC00541E84 /* Release */,
 				6E7E18ED1D495AE6009549BA /* Beta */,
 			);
@@ -3895,6 +4194,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E104D5D1D1061AC00541E84 /* Debug */,
+				6E9392671DB470420021905B /* Mocked */,
 				6E104D5E1D1061AC00541E84 /* Release */,
 				6E7E18EE1D495AE6009549BA /* Beta */,
 			);
@@ -3905,6 +4205,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E10A5081D1066E9008CBD0C /* Debug */,
+				6E9392681DB470420021905B /* Mocked */,
 				6E10A5091D1066E9008CBD0C /* Release */,
 				6E7E18EF1D495AE6009549BA /* Beta */,
 			);
@@ -3915,6 +4216,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E10A50A1D1066E9008CBD0C /* Debug */,
+				6E9392691DB470420021905B /* Mocked */,
 				6E10A50B1D1066E9008CBD0C /* Release */,
 				6E7E18F01D495AE6009549BA /* Beta */,
 			);
@@ -3925,6 +4227,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E29240D1D7AF8C900D14F0A /* Debug */,
+				6E93926A1DB470420021905B /* Mocked */,
 				6E29240E1D7AF8C900D14F0A /* Release */,
 				6E29240F1D7AF8C900D14F0A /* Beta */,
 			);
@@ -3935,6 +4238,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E2924251D7AF8CC00D14F0A /* Debug */,
+				6E93926B1DB470420021905B /* Mocked */,
 				6E2924261D7AF8CC00D14F0A /* Release */,
 				6E2924271D7AF8CC00D14F0A /* Beta */,
 			);
@@ -3945,6 +4249,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E9F28FC1D7C903E002B7C7A /* Debug */,
+				6E9392701DB470420021905B /* Mocked */,
 				6E9F28FD1D7C903E002B7C7A /* Release */,
 				6E9F28FE1D7C903E002B7C7A /* Beta */,
 			);
@@ -3955,6 +4260,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EF12C621D149C2700814AD0 /* Debug */,
+				6E9392651DB470420021905B /* Mocked */,
 				6EF12C631D149C2700814AD0 /* Release */,
 				6E7E18F11D495AE6009549BA /* Beta */,
 			);
