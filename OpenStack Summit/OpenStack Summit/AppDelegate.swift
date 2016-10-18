@@ -146,6 +146,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    // HACK: implemented old delegate to make notifications work as is on iOS 10
+    // TODO: implement notification using UserNotifications framework for iOS 10
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        
+        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: {(result: UIBackgroundFetchResult) -> Void in  })
+    }
+    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? NSDictionary {
