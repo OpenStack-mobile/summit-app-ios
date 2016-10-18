@@ -96,6 +96,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         self.updateUI()
         tableView.tableFooterView = UIView()
         
+        // dont continue if no connectivity
+        guard Reachability.connected else { return }
+        
         // load feedback
         loadAverageRating()
         loadFeedback()
