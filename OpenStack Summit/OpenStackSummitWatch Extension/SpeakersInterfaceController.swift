@@ -35,11 +35,12 @@ final class SpeakersInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         // disable speaker search for selected speakers
-        if let speakers = (context as? Context<[PresentationSpeaker]>)?.value {
+        if let speakers = (context as? Context<[Identifier]>)?.value {
             
             searchButton.setHidden(true)
             
-            self.speakers = speakers
+            let realmSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).filter("ALL id IN %@", speakers)
+            self.speakers = PresentationSpeaker.from(realm: realmSpeakers)
         }
     }
     

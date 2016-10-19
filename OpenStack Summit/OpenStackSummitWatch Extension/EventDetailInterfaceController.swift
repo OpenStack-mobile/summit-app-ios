@@ -60,11 +60,11 @@ final class EventDetailInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let event = (context as? Context<SummitEvent>)?.value
+        guard let eventID = (context as? Context<Identifier>)?.value,
+            let realmEvent = RealmSummitEvent.find(eventID, realm: Store.shared.realm)
             else { fatalError("Invalid context") }
         
-        self.event = event
-        let realmEvent = RealmSummitEvent.find(event.identifier, realm: Store.shared.realm)!
+        self.event = Event(realmEntity: realmEvent)
         self.eventDetail = EventDetail(realmEntity: realmEvent)
         
         updateUI()
@@ -91,7 +91,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     // MARK: - Actions
     
     @IBAction func showSpeakers(sender: AnyObject? = nil) {
-        
+                
         if eventDetail.speakers.count == 1 {
             
             let speaker = eventDetail.speakers[0]

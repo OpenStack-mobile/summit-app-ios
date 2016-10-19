@@ -93,11 +93,11 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
             
             let event = events[0]
             
-            pushControllerWithName(EventDetailInterfaceController.identifier, context: Context(event))
+            pushControllerWithName(EventDetailInterfaceController.identifier, context: Context(event.identifier))
             
         } else {
             
-            pushControllerWithName(EventsInterfaceController.identifier, context: Context(events))
+            pushControllerWithName(EventsInterfaceController.identifier, context: Context(events.identifiers))
         }
     }
     

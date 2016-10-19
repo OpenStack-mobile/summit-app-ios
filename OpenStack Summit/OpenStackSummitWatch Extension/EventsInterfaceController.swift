@@ -77,7 +77,7 @@ final class EventsInterfaceController: WKInterfaceController {
         
         let event = events[rowIndex]
         
-        return Context(event)
+        return Context(event.id)
     }
 }
 
