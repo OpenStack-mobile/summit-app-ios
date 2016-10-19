@@ -33,7 +33,7 @@ final class VenuesMapInterfaceController: WKInterfaceController {
         super.willActivate()
         
         /// set user activity
-        if let summit = Store.shared.cache {
+        if let summit = Store.shared.realm.objects(RealmSummit).first {
             
             updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/travel"))
         }
@@ -52,8 +52,10 @@ final class VenuesMapInterfaceController: WKInterfaceController {
         
         mapView.removeAllAnnotations()
         
-        guard let summit = Store.shared.cache
+        guard let realmSummit = Store.shared.realm.objects(RealmSummit).first
             else { return }
+        
+        let summit = Summit(realmEntity: realmSummit)
         
         var locations = [CLLocationCoordinate2D]()
         

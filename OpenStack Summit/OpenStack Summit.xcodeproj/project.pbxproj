@@ -528,6 +528,7 @@
 		6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */; };
 		6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52351D42D52D00DF4BEA /* Accelerate.framework */; };
 		6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */; };
+		6EEB031C1DB747F7002C0977 /* SummitEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A61D106AD5008CBD0C /* SummitEventExtensions.swift */; };
 		6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
 		6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
 		6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
@@ -2642,6 +2643,7 @@
 				6E2CA1221D787E4D00405A40 /* LabelCellController.swift in Sources */,
 				6E9B09CE1D78F121008383A4 /* AboutInterfaceController.swift in Sources */,
 				6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */,
+				6EEB031C1DB747F7002C0977 /* SummitEventExtensions.swift in Sources */,
 				6E0B5F651D77D4DF0005F6CE /* ExtensionDelegate.swift in Sources */,
 				6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */,
 				6E7D9FDD1DB57AF00077D9E6 /* EventDetail.swift in Sources */,

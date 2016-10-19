@@ -58,10 +58,10 @@ final class VenueDetailInterfaceController: WKInterfaceController {
             
         case let .room(room):
             
-            guard let value = Store.shared.cache?.locations.with(room.venue)?.rawValue as? Venue
+            guard let realmEntity = RealmVenue.find(room.venue, realm: Store.shared.realm)
                 else { fatalError("Invalid venue \(room.venue)") }
             
-            return value
+            return Venue(realmEntity: realmEntity)
         }
     }()
     

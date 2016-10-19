@@ -48,7 +48,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     private(set) var speaker: PresentationSpeaker!
     
-    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation?.speakers.contains(self.speaker.identifier) ?? false }) ?? []
+    private lazy var events: [Event] = Event.from(realm: Store.shared.realm.objects(RealmSummitEvent).filter({ $0.presentation?.speakers.contains({ $0.id == self.speaker.identifier }) ?? false }))
     
     // MARK: - Loading
     
@@ -67,11 +67,13 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
+        let summit = Summit(realmEntity: Store.shared.realm.objects(RealmSummit).first!)
+        
         /// set user activity
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: speaker.identifier]
         
-        let webpageURL = NSURL(string: speaker.toWebpageURL(Store.shared.cache!))!
+        let webpageURL = NSURL(string: speaker.toWebpageURL(summit))!
         
         updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: webpageURL)
     }
