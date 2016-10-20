@@ -11,25 +11,31 @@ import SwiftFoundation
 /// A type which can export a URL to open the summit data on the website.
 public protocol WebConvertible: Unique {
     
-    static var webPathComponent: String { get }
+    static var webPathComponent: WebPathComponent { get }
 }
 
 public extension WebConvertible {
     
     func toWebpageURL(summit: Summit) -> String {
         
-        return summit.webpageURL + "/summit-schedule/" + Self.webPathComponent + "/\(identifier)"
+        return summit.webpageURL + "/summit-schedule/" + Self.webPathComponent.rawValue + "/\(identifier)"
     }
+}
+
+public enum WebPathComponent: String {
+    
+    case events
+    case speakers
 }
 
 // MARK: - Model Extensions
 
 extension Event: WebConvertible {
     
-    public static let webPathComponent = "events"
+    public static let webPathComponent = WebPathComponent.events
 }
 
 extension PresentationSpeaker: WebConvertible {
     
-    public static let webPathComponent = "speakers"
+    public static let webPathComponent = WebPathComponent.speakers
 }

@@ -18,6 +18,7 @@ protocol SummitActivityHandling {
 
 extension SummitActivityHandling {
     
+    /// Opens URL of universal domain.
     func openWebURL(url: NSURL) -> Bool {
         
         guard let components = url.pathComponents
@@ -27,13 +28,17 @@ extension SummitActivityHandling {
         let typeString = components[4]
         let identifierString = components[5]
         
-        guard let identifier = Int(identifierString)
+        guard let identifier = Int(identifierString),
+            let type = WebPathComponent(rawValue: typeString)
             else { return false }
         
-        return self.handle(typeString, identifier: identifier)
+        let dataType = AppActivitySummitDataType(webPathComponent: type)
+        
+        return self.view(dataType, identifier: identifier)
     }
     
-    func openURLSchemeURL(url: NSURL) -> Bool {
+    /// Opens URL of custom scheme.
+    func openSchemeURL(url: NSURL) -> Bool {
         
         guard let typeString = url.host, let components = url.pathComponents
             where components.count >= 2
@@ -41,25 +46,13 @@ extension SummitActivityHandling {
         
         let identifierString = components[1]
         
-        guard let identifier = Int(identifierString)
+        guard let identifier = Int(identifierString),
+            let type = WebPathComponent(rawValue: typeString)
             else { return false }
         
-        return self.handle(typeString, identifier: identifier)
-    }
-    
-    private func handle(typeString: String, identifier: Int) -> Bool {
+        let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        var dataType: AppActivitySummitDataType!
-        
-        switch typeString {
-        case Event.webPathComponent: dataType = .event
-        case PresentationSpeaker.webPathComponent:  dataType = .speaker
-        default: return false
-        }
-        
-        self.view(dataType, identifier: identifier)
-        
-        return true
+        return self.view(dataType, identifier: identifier)
     }
 }
 
