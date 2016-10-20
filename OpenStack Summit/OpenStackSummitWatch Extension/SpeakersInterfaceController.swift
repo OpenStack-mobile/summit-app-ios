@@ -39,7 +39,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
             
             searchButton.setHidden(true)
             
-            let realmSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).filter("ALL id IN %@", speakers)
+            let realmSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).filter("id IN %@", speakers)
             self.speakers = PresentationSpeaker.from(realm: realmSpeakers)
         }
     }
@@ -92,7 +92,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
         
         let speaker = speakers[rowIndex]
         
-        return Context(speaker)
+        return Context(speaker.identifier)
     }
     
     // MARK: - Private Methods

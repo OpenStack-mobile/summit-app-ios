@@ -55,10 +55,11 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let speaker = (context as? Context<PresentationSpeaker>)?.value
+        guard let speakerID = (context as? Context<Identifier>)?.value,
+            let realmEntity = RealmPresentationSpeaker.find(speakerID, realm: Store.shared.realm)
             else { fatalError("Invalid context") }
         
-        self.speaker = speaker
+        self.speaker = PresentationSpeaker(realmEntity: realmEntity)
         
         updateUI()
     }

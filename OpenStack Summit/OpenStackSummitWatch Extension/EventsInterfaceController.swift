@@ -9,6 +9,7 @@
 import WatchKit
 import Foundation
 import CoreSummit
+import RealmSwift
 
 final class EventsInterfaceController: WKInterfaceController {
     
@@ -22,12 +23,33 @@ final class EventsInterfaceController: WKInterfaceController {
     
     private(set) var events = [ScheduleItem]()
     
+    private static let dateFormatter: NSDateFormatter = {
+       
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: Store.shared.realm.objects(RealmSummit).first!.timeZone)
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .ShortStyle
+        
+        return dateFormatter
+    }()
+    
     // MARK: - Loading
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        events = (context as? Context<[ScheduleItem]>)?.value ?? ScheduleItem.from(realm: Store.shared.realm.objects(RealmSummitEvent))
+        let realmEvents: Results<RealmSummitEvent>
+        
+        if let identifiers = (context as? Context<[Identifier]>)?.value {
+            
+            realmEvents = Store.shared.realm.objects(RealmSummitEvent).filter("id IN %@", identifiers)
+            
+        } else {
+            
+            realmEvents = Store.shared.realm.objects(RealmSummitEvent)
+        }
+        
+        events = ScheduleItem.from(realm: realmEvents)
         
         updateUI()
     }
@@ -61,6 +83,7 @@ final class EventsInterfaceController: WKInterfaceController {
         for (index, event) in events.enumerate() {
             
             let cell = tableView.rowControllerAtIndex(index) as! EventCellController
+            
             let dateText = event.dateTime
             let locationText = event.location
             
