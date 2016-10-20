@@ -165,11 +165,40 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
         completionHandler(UIBackgroundFetchResult.NoData)
     }
-
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object:nil, userInfo:[UIApplicationLaunchOptionsURLKey:url])
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-        return true
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        var options = [String : AnyObject]()
+        
+        if let sourceApplication = sourceApplication {
+            
+            options["UIApplicationOpenURLOptionsSourceApplicationKey"] = sourceApplication
+        }
+        
+        return self.application(application, openURL: url, options: options)
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+        if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] as? String {
+            
+            let bundleID = NSBundle.mainBundle().bundleIdentifier
+            
+            if sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService" {
+                
+                let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object: nil, userInfo: [UIApplicationLaunchOptionsURLKey:url])
+                NSNotificationCenter.defaultCenter().postNotification(notification)
+                
+                return true
+            }
+        }
+        
+        // HACK: async is needed in case app was not already opened
+        dispatch_async(dispatch_get_main_queue()) {
+            return self.openURLSchemeURL(url)
+        }
+        
+        return false
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

@@ -30,6 +30,25 @@ extension SummitActivityHandling {
         guard let identifier = Int(identifierString)
             else { return false }
         
+        return self.handle(typeString, identifier: identifier)
+    }
+    
+    func openURLSchemeURL(url: NSURL) -> Bool {
+        
+        guard let typeString = url.host, let components = url.pathComponents
+            where components.count >= 2
+            else { return false }
+        
+        let identifierString = components[1]
+        
+        guard let identifier = Int(identifierString)
+            else { return false }
+        
+        return self.handle(typeString, identifier: identifier)
+    }
+    
+    private func handle(typeString: String, identifier: Int) -> Bool {
+        
         var dataType: AppActivitySummitDataType!
         
         switch typeString {
