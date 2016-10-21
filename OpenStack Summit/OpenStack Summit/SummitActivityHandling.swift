@@ -18,6 +18,7 @@ protocol SummitActivityHandling {
 
 extension SummitActivityHandling {
     
+    /// Opens URL of universal domain.
     func openWebURL(url: NSURL) -> Bool {
         
         guard let components = url.pathComponents
@@ -27,20 +28,31 @@ extension SummitActivityHandling {
         let typeString = components[4]
         let identifierString = components[5]
         
-        guard let identifier = Int(identifierString)
+        guard let identifier = Int(identifierString),
+            let type = WebPathComponent(rawValue: typeString)
             else { return false }
         
-        var dataType: AppActivitySummitDataType!
+        let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        switch typeString {
-        case Event.webPathComponent: dataType = .event
-        case PresentationSpeaker.webPathComponent:  dataType = .speaker
-        default: return false
-        }
+        return self.view(dataType, identifier: identifier)
+    }
+    
+    /// Opens URL of custom scheme.
+    func openSchemeURL(url: NSURL) -> Bool {
         
-        self.view(dataType, identifier: identifier)
+        guard let typeString = url.host, let components = url.pathComponents
+            where components.count >= 2
+            else { return false }
         
-        return true
+        let identifierString = components[1]
+        
+        guard let identifier = Int(identifierString),
+            let type = WebPathComponent(rawValue: typeString)
+            else { return false }
+        
+        let dataType = AppActivitySummitDataType(webPathComponent: type)
+        
+        return self.view(dataType, identifier: identifier)
     }
 }
 
