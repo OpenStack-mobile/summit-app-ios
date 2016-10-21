@@ -86,6 +86,9 @@ internal extension ScheduleItem {
     }
     
     static func getDateTime(event: RealmSummitEvent) -> String {
+        
+        #if os(iOS) || os(tvOS)
+            
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
@@ -97,6 +100,24 @@ internal extension ScheduleItem {
         let stringDateTo = dateFormatter.stringFromDate(event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
+            
+        #elseif os(watchOS)
+            
+            struct Storage {
+                static let dateFormatter: NSDateFormatter = {
+                    
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.timeZone = NSTimeZone(name: Store.shared.realm.objects(RealmSummit).first!.timeZone)
+                    dateFormatter.dateStyle = .ShortStyle
+                    dateFormatter.timeStyle = .ShortStyle
+                    
+                    return dateFormatter
+                }()
+            }
+            
+            return Storage.dateFormatter.stringFromDate(event.start)
+            
+        #endif
     }
     
     static func getLocation(event: RealmSummitEvent) -> String {

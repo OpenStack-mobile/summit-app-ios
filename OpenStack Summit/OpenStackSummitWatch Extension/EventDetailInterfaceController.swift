@@ -60,11 +60,12 @@ final class EventDetailInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let event = (context as? Context<SummitEvent>)?.value
+        guard let eventID = (context as? Context<Identifier>)?.value,
+            let realmEvent = RealmSummitEvent.find(eventID, realm: Store.shared.realm)
             else { fatalError("Invalid context") }
         
-        self.event = event
-        self.eventDetail = EventDetail(event: event, summit: Store.shared.cache!)
+        self.event = Event(realmEntity: realmEvent)
+        self.eventDetail = EventDetail(realmEntity: realmEvent)
         
         updateUI()
     }
@@ -75,7 +76,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         
         /// set user activity
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
-                                AppActivityUserInfo.identifier.rawValue: eventDetail.identifier]
+                                AppActivityUserInfo.identifier.rawValue: eventDetail.id]
         
         updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: eventDetail.webpageURL)
     }
@@ -90,24 +91,26 @@ final class EventDetailInterfaceController: WKInterfaceController {
     // MARK: - Actions
     
     @IBAction func showSpeakers(sender: AnyObject? = nil) {
-        
+                
         if eventDetail.speakers.count == 1 {
             
             let speaker = eventDetail.speakers[0]
             
-            pushControllerWithName(SpeakerDetailInterfaceController.identifier, context: Context(speaker))
+            pushControllerWithName(SpeakerDetailInterfaceController.identifier, context: Context(speaker.identifier))
             
         } else {
             
-            pushControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers))
+            pushControllerWithName(SpeakersInterfaceController.identifier, context: Context(eventDetail.speakers.identifiers))
         }
     }
     
     @IBAction func showLocation(sender: AnyObject? = nil) {
         
-        guard let summit = Store.shared.cache,
+        guard let realmSummit = Store.shared.realm.objects(RealmSummit).first,
             let locationID = event.location
             else { return }
+        
+        let summit = Summit(realmEntity: realmSummit)
         
         guard let location = summit.locations.with(locationID)
             else { fatalError("Invalid location \(locationID)") }
@@ -148,9 +151,9 @@ final class EventDetailInterfaceController: WKInterfaceController {
         levelGroup.setHidden(eventDetail.level.isEmpty)
         levelSeparator.setHidden(eventDetail.level.isEmpty)
         
-        if let descriptionText = eventDetail.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+        if let data = eventDetail.eventDescription.dataUsingEncoding(NSUTF8StringEncoding),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil)
+            where eventDetail.eventDescription.isEmpty == false {
             
             descriptionLabel.setText(attributedString.string)
             

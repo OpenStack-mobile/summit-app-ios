@@ -35,11 +35,12 @@ final class SpeakersInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         // disable speaker search for selected speakers
-        if let speakers = (context as? Context<[PresentationSpeaker]>)?.value {
+        if let speakers = (context as? Context<[Identifier]>)?.value {
             
             searchButton.setHidden(true)
             
-            self.speakers = speakers
+            let realmSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).filter("id IN %@", speakers)
+            self.speakers = PresentationSpeaker.from(realm: realmSpeakers)
         }
     }
     
@@ -67,18 +68,21 @@ final class SpeakersInterfaceController: WKInterfaceController {
                 else { return }
             
             // search for speakers
-            self.speakers = Store.shared.cache!.speakers.filter {
+            let filteredSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).filter({
                 
                 for string in inputText {
                     
-                    if $0.name.containsString(string) {
+                    if $0.firstName.containsString(string) || $0.lastName.containsString(string) {
                         
                         return true
                     }
                 }
                 
                 return false
-            }
+                
+            }).prefix(30)
+            
+            self.speakers = PresentationSpeaker.from(realm: Array(filteredSpeakers))
         }
     }
     
@@ -88,7 +92,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
         
         let speaker = speakers[rowIndex]
         
-        return Context(speaker)
+        return Context(speaker.identifier)
     }
     
     // MARK: - Private Methods
