@@ -72,7 +72,8 @@ final class SpeakersInterfaceController: WKInterfaceController {
                 
                 for string in inputText {
                     
-                    if $0.firstName.containsString(string) || $0.lastName.containsString(string) {
+                    if $0.firstName.localizedCaseInsensitiveContainsString(string)
+                    || $0.lastName.localizedCaseInsensitiveContainsString(string) {
                         
                         return true
                     }
