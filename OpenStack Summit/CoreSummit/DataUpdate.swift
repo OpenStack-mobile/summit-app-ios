@@ -94,7 +94,9 @@ public extension DataUpdate {
 
 public extension Store {
     
-    func process(dataUpdate: DataUpdate) -> Bool {
+    func process(dataUpdate: DataUpdate, realm: Realm? = nil) -> Bool {
+        
+        let realm = realm ?? self.realm
         
         // truncate
         guard dataUpdate.operation != .Truncate else {
@@ -102,7 +104,7 @@ public extension Store {
             guard dataUpdate.className == .WipeData
                 else { return false }
             
-            self.realm.deleteAll()
+            realm.deleteAll()
             self.logout()
             
             return true
@@ -127,9 +129,9 @@ public extension Store {
                     let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
                     else { return false }
                 
-                try! self.realm.write {
+                try! realm.write {
                     
-                    let realmEvent = event.save(self.realm)
+                    let realmEvent = event.save(realm)
                     
                     if attendeeRole.scheduledEvents.indexOf("id = %@", event.identifier) == nil {
                         
@@ -145,7 +147,7 @@ public extension Store {
                     case let .Identifier(identifier) = entityID
                     else { return false }
                 
-                try! self.realm.write {
+                try! realm.write {
                     
                     if let index = attendeeRole.scheduledEvents.indexOf("id = %@", identifier) {
                         
@@ -171,12 +173,12 @@ public extension Store {
                 else { return false }
             
             // if it doesnt exist, dont delete it
-            guard let foundEntity = type.find(id, realm: self.realm)
+            guard let foundEntity = type.find(id, realm: realm)
                 else { return true }
             
-            try! self.realm.write {
+            try! realm.write {
                 
-                self.realm.delete(foundEntity)
+                realm.delete(foundEntity)
             }
             
             return true
@@ -200,7 +202,7 @@ public extension Store {
         default:
             
             // insert or update
-            entity.write(self.realm)
+            entity.write(realm)
             
             return true
         }
