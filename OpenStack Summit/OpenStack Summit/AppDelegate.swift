@@ -47,10 +47,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // setup Parse
         Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
-        
-        // nuke Realm if errored
-        do { let _ = try Realm() }
-        catch {
+        // nuke
+        func clearCache(error: ErrorType? = nil) {
             
             print("Nuking Realm")
             
@@ -68,8 +66,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             pollerStorage.clear()
             
             // log nuking realm
-            Crashlytics.sharedInstance().recordError(error as NSError)
+            if let error = error {
+                
+                Crashlytics.sharedInstance().recordError(error as NSError)
+            }
         }
+        
+        // nuke Realm if errored
+        do { let _ = try Realm() }
+        catch { clearCache(error) }
+        
+        #if MOCKED
+        clearCache()
+        #endif
         
         // set configuration
         Store.shared.environment = AppEnvironment
@@ -78,9 +87,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         Store.shared.session = UserDefaultsSessionStorage()
         
         // setup data poller
+        #if !MOCKED
         DataUpdatePoller.shared.storage = UserDefaultsDataUpdatePollerStorage()
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
         DataUpdatePoller.shared.start()
+        #endif
         
         // validate R.swift on debug builds
         R.assertValid()
@@ -135,6 +146,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    // HACK: implemented old delegate to make notifications work as is on iOS 10
+    // TODO: implement notification using UserNotifications framework for iOS 10
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        
+        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: {(result: UIBackgroundFetchResult) -> Void in  })
+    }
+    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? NSDictionary {
@@ -147,11 +165,40 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
         completionHandler(UIBackgroundFetchResult.NoData)
     }
-
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object:nil, userInfo:[UIApplicationLaunchOptionsURLKey:url])
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-        return true
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        var options = [String : AnyObject]()
+        
+        if let sourceApplication = sourceApplication {
+            
+            options["UIApplicationOpenURLOptionsSourceApplicationKey"] = sourceApplication
+        }
+        
+        return self.application(application, openURL: url, options: options)
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+        if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] as? String {
+            
+            let bundleID = NSBundle.mainBundle().bundleIdentifier
+            
+            if sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService" {
+                
+                let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object: nil, userInfo: [UIApplicationLaunchOptionsURLKey:url])
+                NSNotificationCenter.defaultCenter().postNotification(notification)
+                
+                return true
+            }
+        }
+        
+        // HACK: async is needed in case app was not already opened
+        dispatch_async(dispatch_get_main_queue()) {
+            return self.openSchemeURL(url)
+        }
+        
+        return false
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

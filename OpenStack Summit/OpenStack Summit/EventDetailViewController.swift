@@ -96,6 +96,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         self.updateUI()
         tableView.tableFooterView = UIView()
         
+        // dont continue if no connectivity
+        guard Reachability.connected else { return }
+        
         // load feedback
         loadAverageRating()
         loadFeedback()
@@ -128,7 +131,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     @IBAction func share(sender: UIBarButtonItem) {
         
-        let activityViewController = UIActivityViewController(activityItems: [eventDetail.webpageURL], applicationActivities: nil)
+        let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
+            
+        let activityViewController = UIActivityViewController(activityItems: [message, eventDetail.webpageURL], applicationActivities: nil)
         activityViewController.modalPresentationStyle = .Popover
         activityViewController.popoverPresentationController?.barButtonItem = sender
         self.presentViewController(activityViewController, animated: true, completion: nil)

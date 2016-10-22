@@ -93,3 +93,16 @@ extension VenueRoom: AppActivitySummitData {
     
     static let activityDataType = AppActivitySummitDataType.venueRoom
 }
+
+// MARK: - WebConvertible
+
+extension AppActivitySummitDataType {
+    
+    init(webPathComponent: WebPathComponent) {
+        
+        switch webPathComponent {
+        case .events: self = .event
+        case .speakers: self = .speaker
+        }
+    }
+}
