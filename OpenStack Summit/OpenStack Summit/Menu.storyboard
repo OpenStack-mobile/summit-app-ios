@@ -459,7 +459,7 @@ For general support, please email summit@openstack.org</string>
                                                     </textView>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-tU-WrB">
                                                         <rect key="frame" x="216" y="342" width="131" height="30"/>
-                                                        <state key="normal" title="Code of conduct"/>
+                                                        <state key="normal" title="Code of Conduct"/>
                                                         <connections>
                                                             <action selector="codeOfConductTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="WWi-ZU-vbN"/>
                                                             <action selector="websiteTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="0Ak-oG-p1N"/>
