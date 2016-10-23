@@ -9,7 +9,6 @@
 import WatchKit
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
 
 final class AboutInterfaceController: WKInterfaceController {
     
@@ -35,7 +34,7 @@ final class AboutInterfaceController: WKInterfaceController {
         
         let webpageURL: NSURL
         
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        if let summit = Store.shared.cache {
             
              webpageURL = NSURL(string: summit.webpageURL)!
             
@@ -58,9 +57,7 @@ final class AboutInterfaceController: WKInterfaceController {
     
     @IBAction func refreshData(sender: AnyObject? = nil) {
         
-        let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
-        
-        try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
+        Store.shared.clear()
         
         self.popToRootController()
     }
@@ -71,7 +68,7 @@ final class AboutInterfaceController: WKInterfaceController {
         
         // set summit info
         
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        if let summit = Store.shared.cache {
             
             summitNameLabel.setHidden(false)
             summitNameLabel.setText(summit.name)
