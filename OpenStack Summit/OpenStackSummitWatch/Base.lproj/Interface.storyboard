@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16B2548a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qah-Jh-alR">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16B2553a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qah-Jh-alR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
@@ -105,14 +105,14 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="-420" y="-1052"/>
+            <point key="canvasLocation" x="-804" y="-687"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="OpenStackSummitWatch" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-106" y="-1052"/>
+            <point key="canvasLocation" x="-480" y="-687"/>
         </scene>
         <!--Event-->
         <scene sceneID="UaZ-ei-8nh">
@@ -299,19 +299,28 @@
             <objects>
                 <controller identifier="EventFilters" title="Events" id="FXs-a2-43y" customClass="EventFiltersInterfaceController" customModule="OpenStackSummitWatch_Extension">
                     <items>
-                        <button width="1" alignment="left" title="By Keyword" id="fqX-bS-6JE">
-                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <button alignment="left" id="mOS-fe-FeG">
+                            <group key="contentGroup" width="1" height="40" alignment="left" id="SFG-9p-xhp">
+                                <items>
+                                    <imageView width="14" height="15" alignment="center" verticalAlignment="center" image="Search" contentMode="scaleAspectFit" id="AqH-vX-Snn"/>
+                                    <label alignment="center" verticalAlignment="center" text=" Search" id="30Z-fG-cWY"/>
+                                </items>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </group>
+                            <connections>
+                                <action selector="search:" destination="FXs-a2-43y" id="t8P-1m-1np"/>
+                            </connections>
                         </button>
                         <button width="1" alignment="left" title="By Date" id="aTV-Ge-Arf">
                             <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </button>
-                        <button width="1" alignment="left" title="By Category" id="fmI-ms-WH4">
-                            <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="6NW-Wg-ZdP" kind="push" identifier="EventDates" id="4Bu-1v-lZH"/>
+                            </connections>
                         </button>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="164" y="-687"/>
+            <point key="canvasLocation" x="175" y="-687"/>
         </scene>
         <!--Venues-->
         <scene sceneID="Ck2-DJ-p6d">
@@ -552,6 +561,37 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="164" y="-285"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="WY3-V4-H8p">
+            <objects>
+                <controller identifier="EventDates" title="Events" id="6NW-Wg-ZdP" customClass="EventDatesInterfaceController" customModule="OpenStackSummitWatch_Extension">
+                    <items>
+                        <table alignment="left" id="AgH-a2-yvl">
+                            <items>
+                                <tableRow identifier="LabelCell" id="9Lz-co-rop" customClass="LabelCellController" customModule="OpenStackSummitWatch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="FK3-yR-Ev3">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="April 24" id="ZFW-Qe-tgB"/>
+                                        </items>
+                                        <color key="backgroundColor" red="0.11613068729999999" green="0.22861218450000001" blue="0.36147233839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="dLl-Jq-VGC" kind="push" identifier="showDateEvents" id="Xez-cl-3Ss"/>
+                                        </connections>
+                                    </group>
+                                    <connections>
+                                        <outlet property="textLabel" destination="ZFW-Qe-tgB" id="Piu-j9-Lyd"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tableView" destination="AgH-a2-yvl" id="pYN-5S-hWG"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="175" y="-1035"/>
         </scene>
     </scenes>
 </document>

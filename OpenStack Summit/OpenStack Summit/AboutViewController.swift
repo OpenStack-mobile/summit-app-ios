@@ -80,6 +80,13 @@ final class AboutViewController: UIViewController, RevealViewController {
         }
     }
     
+    @IBAction func codeOfConductTouch(sender: AnyObject) {
+        let url = NSURL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
+        if UIApplication.sharedApplication().canOpenURL(url) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func buildNameDate() -> String {

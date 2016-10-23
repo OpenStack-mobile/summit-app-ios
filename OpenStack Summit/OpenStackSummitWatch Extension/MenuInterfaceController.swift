@@ -24,7 +24,7 @@ final class MenuInterfaceController: WKInterfaceController {
     
     let menuItems: [MenuItem] = {
        
-        let events = MenuItem(name: "Events", image: "events", controller: EventsInterfaceController.identifier)
+        let events = MenuItem(name: "Events", image: "events", controller: EventFiltersInterfaceController.identifier)
         
         let venues = MenuItem(name: "Venues", image: "venues", controller: VenuesMapInterfaceController.identifier)
         
