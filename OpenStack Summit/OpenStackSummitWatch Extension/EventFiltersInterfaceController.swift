@@ -51,7 +51,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
             guard let inputText = input as? [String]
                 else { return }
             
-            let filteredEvents = Store.shared.realm.objects(RealmSummitEvent).filter({
+            let filteredEvents = Store.shared.cache?.schedule.filter({
                 
                 for string in inputText {
                     
@@ -63,7 +63,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
                 
                 return false
                 
-            }).prefix(20).map { $0.id }
+            })
             
             self.pushControllerWithName(EventsInterfaceController.identifier, context: Context(filteredEvents))
         }

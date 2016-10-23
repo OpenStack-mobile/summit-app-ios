@@ -83,11 +83,10 @@ final class MenuInterfaceController: WKInterfaceController {
     
     private func updateUI() {
         
-        let isDataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
-        tableView.setHidden(isDataLoaded == false)
-        loadingImageView.setHidden(isDataLoaded)
+        tableView.setHidden(Store.shared.cache == nil)
+        loadingImageView.setHidden(Store.shared.cache != nil)
         
-        if isDataLoaded == false {
+        if Store.shared.cache == nil {
             
             loadingImageView.startAnimating()
             

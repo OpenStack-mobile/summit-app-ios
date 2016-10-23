@@ -9,7 +9,6 @@
 import WatchKit
 import Foundation
 import CoreSummit
-import RealmSwift
 
 final class EventsInterfaceController: WKInterfaceController {
     
@@ -21,12 +20,12 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var events = [ScheduleItem]()
+    private(set) var events = [Event]()
     
     private static let dateFormatter: NSDateFormatter = {
        
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: Store.shared.realm.objects(RealmSummit).first!.timeZone)
+        dateFormatter.timeZone = NSTimeZone(name: Store.shared.cache!.timeZone)
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .ShortStyle
         
@@ -38,18 +37,7 @@ final class EventsInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        let realmEvents: Results<RealmSummitEvent>
-        
-        if let identifiers = (context as? Context<[Identifier]>)?.value {
-            
-            realmEvents = Store.shared.realm.objects(RealmSummitEvent).filter("id IN %@", identifiers)
-            
-        } else {
-            
-            realmEvents = Store.shared.realm.objects(RealmSummitEvent)
-        }
-        
-        events = ScheduleItem.from(realm: realmEvents)
+        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule
         
         updateUI()
     }
@@ -59,7 +47,7 @@ final class EventsInterfaceController: WKInterfaceController {
         super.willActivate()
         
         /// set user activity
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        if let summit = Store.shared.cache {
             
             updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/summit-schedule"))
         }
@@ -84,8 +72,8 @@ final class EventsInterfaceController: WKInterfaceController {
             
             let cell = tableView.rowControllerAtIndex(index) as! EventCellController
             
-            let dateText = event.dateTime
-            let locationText = event.location
+            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start.toFoundation())
+            let locationText = EventDetail.getLocation(event, summit: Store.shared.cache!)
             
             cell.nameLabel.setText(event.name)
             cell.dateLabel.setText(" " + dateText)
@@ -100,7 +88,7 @@ final class EventsInterfaceController: WKInterfaceController {
         
         let event = events[rowIndex]
         
-        return Context(event.id)
+        return Context(event)
     }
 }
 

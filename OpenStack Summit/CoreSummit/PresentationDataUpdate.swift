@@ -6,15 +6,18 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct PresentationDataUpdate: Unique {
+public extension Presentation {
     
-    public let identifier: Identifier
-    
-    public var level: Presentation.Level?
-    
-    public var track: Identifier?
-    
-    public var moderator: Identifier?
-    
-    public var speakers: [PresentationSpeaker]
+    public struct DataUpdate: Unique {
+        
+        public let identifier: Identifier
+        
+        public var level: Level?
+        
+        public var track: Identifier?
+        
+        public var moderator: Identifier?
+        
+        public var speakers: [PresentationSpeaker]
+    }
 }

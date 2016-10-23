@@ -9,7 +9,6 @@
 import SwiftFoundation
 import AeroGearHttp
 import AeroGearOAuth2
-import RealmSwift
 
 public extension Store {
     #if MOCKED
@@ -24,12 +23,17 @@ public extension Store {
         let entity = Summit(JSONValue: json)!
         
         // cache
-        try! self.realm.write {
-    
-            let realmSummit = entity.save(self.realm)
-    
-            realmSummit.initialDataLoadDate = NSDate()
-        }
+        #if CORESUMMITREALM
+            try! self.realm.write {
+                
+                let realmSummit = entity.save(self.realm)
+                
+                realmSummit.initialDataLoadDate = NSDate()
+            }
+        #else
+            self.cache = entity
+            try! JSONString.writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
+        #endif
     
         completion(.Value(entity))
     }
@@ -64,12 +68,17 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
+            #if CORESUMMITREALM
             try! self.realm.write {
                 
                 let realmSummit = entity.save(self.realm)
                 
                 realmSummit.initialDataLoadDate = NSDate()
             }
+            #else
+            self.cache = entity
+            try! (responseObject as! String).writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
+            #endif
             
             // success
             completion(.Value(entity))

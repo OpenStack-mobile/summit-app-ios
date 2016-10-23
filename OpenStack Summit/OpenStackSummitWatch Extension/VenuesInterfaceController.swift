@@ -22,7 +22,17 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     let venues: [Venue] = {
         
-        let allVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
+        let allVenues = Store.shared.cache?.locations.reduce([Venue](), combine: {
+            
+            guard case let .venue(venue) = $1
+                else { return $0 }
+            
+            var venues = $0
+            venues.append(venue)
+            
+            return venues
+            
+        }) ?? []
         
         let internalVenues = allVenues.filter({ $0.isInternal }).sort { $0.0.name > $0.1.name }
         
@@ -44,7 +54,7 @@ final class VenuesInterfaceController: WKInterfaceController {
         super.willActivate()
         
         /// set user activity
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        if let summit = Store.shared.cache {
             
             updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/travel"))
         }
