@@ -30,15 +30,6 @@ final class EventDatesViewController: UITableViewController {
         return dateFormatter
     }()
     
-    private static let dayFormatter: NSDateFormatter = {
-        
-        let dateFormatter = NSDateFormatter()
-        
-        dateFormatter.dateFormat = "EEEE"
-        
-        return dateFormatter
-    }()
-    
     private static let performSegueDelay: NSTimeInterval = 0.1
     
     private var lastSelectedIndexPath: NSIndexPath?

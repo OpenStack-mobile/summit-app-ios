@@ -426,6 +426,9 @@
 		6E9B22D41D3FE33500D25271 /* TrackScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */; };
 		6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */; };
 		6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B22D71D40171800D25271 /* Venue.storyboard */; };
+		6E9B6D071DBAA7780037865C /* EventDatesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B6D061DBAA7780037865C /* EventDatesInterfaceController.swift */; };
+		6E9B6D0D1DBAAABB0037865C /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B6D0A1DBAAABB0037865C /* NSDate+MTDates.m */; };
+		6E9B6D0E1DBAAABB0037865C /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B6D0C1DBAAABB0037865C /* NSDateComponents+MTDates.m */; };
 		6E9CB32E1DAD6DDD00FCD859 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
 		6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A41D106AD5008CBD0C /* ScheduleItem.swift */; };
@@ -946,6 +949,12 @@
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScheduleViewController.swift; sourceTree = "<group>"; };
 		6E9B22D71D40171800D25271 /* Venue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venue.storyboard; sourceTree = "<group>"; };
+		6E9B6D061DBAA7780037865C /* EventDatesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesInterfaceController.swift; sourceTree = "<group>"; };
+		6E9B6D081DBAAAB80037865C /* OpenStackSummitWatch Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenStackSummitWatch Extension-Bridging-Header.h"; sourceTree = "<group>"; };
+		6E9B6D091DBAAABB0037865C /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.h"; sourceTree = "<group>"; };
+		6E9B6D0A1DBAAABB0037865C /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
+		6E9B6D0B1DBAAABB0037865C /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
+		6E9B6D0C1DBAAABB0037865C /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateComponents+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
 		6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummitTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1169,6 +1178,7 @@
 		6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6E9B6D0F1DBAAAC50037865C /* Objective-C */,
 				6E0B5F641D77D4DF0005F6CE /* ExtensionDelegate.swift */,
 				6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */,
 				6E2CA1201D787E2C00405A40 /* View */,
@@ -1525,6 +1535,7 @@
 			isa = PBXGroup;
 			children = (
 				6E2CA11E1D787B8E00405A40 /* EventFiltersInterfaceController.swift */,
+				6E9B6D061DBAA7780037865C /* EventDatesInterfaceController.swift */,
 				6E2CA1131D78037500405A40 /* EventsInterfaceController.swift */,
 				6E2CA1171D7810E600405A40 /* EventDetailInterfaceController.swift */,
 			);
@@ -1652,6 +1663,18 @@
 				6E6FD1781D7A1A20003D13D7 /* Staging.swift */,
 			);
 			name = Configurations;
+			sourceTree = "<group>";
+		};
+		6E9B6D0F1DBAAAC50037865C /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				6E9B6D081DBAAAB80037865C /* OpenStackSummitWatch Extension-Bridging-Header.h */,
+				6E9B6D091DBAAABB0037865C /* NSDate+MTDates.h */,
+				6E9B6D0A1DBAAABB0037865C /* NSDate+MTDates.m */,
+				6E9B6D0B1DBAAABB0037865C /* NSDateComponents+MTDates.h */,
+				6E9B6D0C1DBAAABB0037865C /* NSDateComponents+MTDates.m */,
+			);
+			name = "Objective-C";
 			sourceTree = "<group>";
 		};
 		6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */ = {
@@ -2632,11 +2655,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2CA11F1D787B8E00405A40 /* EventFiltersInterfaceController.swift in Sources */,
+				6E9B6D0E1DBAAABB0037865C /* NSDateComponents+MTDates.m in Sources */,
 				6E2CA11A1D78658000405A40 /* MenuInterfaceController.swift in Sources */,
 				6E8D0CD31D79CBA7004B435A /* ImageCache.swift in Sources */,
 				6E46F3AC1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift in Sources */,
 				6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */,
 				6E2CA1141D78037500405A40 /* EventsInterfaceController.swift in Sources */,
+				6E9B6D071DBAA7780037865C /* EventDatesInterfaceController.swift in Sources */,
 				6EB9B8A21D8349A400917077 /* UIColor+HexString.swift in Sources */,
 				6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */,
 				6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */,
@@ -2654,6 +2679,7 @@
 				6E7D9FDE1DB57B180077D9E6 /* ScheduleItem.swift in Sources */,
 				6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */,
 				6E2CA1181D7810E600405A40 /* EventDetailInterfaceController.swift in Sources */,
+				6E9B6D0D1DBAAABB0037865C /* NSDate+MTDates.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3236,6 +3262,7 @@
 		6E0B5F6F1D77D4DF0005F6CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
@@ -3245,6 +3272,8 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitWatch Extension/OpenStackSummitWatch Extension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
@@ -3252,6 +3281,7 @@
 		6E0B5F701D77D4DF0005F6CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
@@ -3261,6 +3291,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitWatch Extension/OpenStackSummitWatch Extension-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Release;
@@ -3268,6 +3299,7 @@
 		6E0B5F711D77D4DF0005F6CE /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
@@ -3277,6 +3309,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitWatch Extension/OpenStackSummitWatch Extension-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Beta;
@@ -3358,6 +3391,7 @@
 				COPY_PHASE_STRIP = NO;
 				CORESUMMIT_ENVIRONMENT = Staging;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DISPLAY_NAME = "$(CONFIGURATION)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
@@ -3412,6 +3446,7 @@
 				COPY_PHASE_STRIP = NO;
 				CORESUMMIT_ENVIRONMENT = Production;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DISPLAY_NAME = OpenStack;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
@@ -3443,8 +3478,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(CONFIGURATION).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CORESUMMIT_ENVIRONMENT = Staging;
-				DISPLAY_NAME = "$(CONFIGURATION)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
@@ -3465,8 +3498,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(CONFIGURATION).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CORESUMMIT_ENVIRONMENT = Production;
-				DISPLAY_NAME = OpenStack;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
@@ -3729,6 +3760,7 @@
 				COPY_PHASE_STRIP = NO;
 				CORESUMMIT_ENVIRONMENT = Staging;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DISPLAY_NAME = "$(CONFIGURATION)";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
@@ -3760,8 +3792,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(CONFIGURATION).entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CORESUMMIT_ENVIRONMENT = Staging;
-				DISPLAY_NAME = "$(CONFIGURATION)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
@@ -3863,6 +3893,7 @@
 				COPY_PHASE_STRIP = NO;
 				CORESUMMIT_ENVIRONMENT = Staging;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DISPLAY_NAME = "$(CONFIGURATION)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
@@ -3901,8 +3932,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Debug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CORESUMMIT_ENVIRONMENT = Staging;
-				DISPLAY_NAME = "$(CONFIGURATION)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					$SRCROOT/../Carthage/Build/iOS,
@@ -4077,6 +4106,7 @@
 		6E93926F1DB470420021905B /* Mocked */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				INFOPLIST_FILE = "OpenStackSummitWatch Extension/Info.plist";
@@ -4086,6 +4116,8 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenStackSummitWatch Extension/OpenStackSummitWatch Extension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Mocked;

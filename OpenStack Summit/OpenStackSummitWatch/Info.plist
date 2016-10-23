@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>OpenStack Summit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -31,5 +29,7 @@
 	<string>org.openstack.ios.summit$(BUNDLE_ID_SUFFIX)</string>
 	<key>WKWatchKitApp</key>
 	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>$(DISPLAY_NAME)</string>
 </dict>
 </plist>
