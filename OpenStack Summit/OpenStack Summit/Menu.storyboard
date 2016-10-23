@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -393,16 +393,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Net-Zb-oXk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Net-Zb-oXk">
                                 <rect key="frame" x="0.0" y="0.0" width="605" height="605"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-yU-YUa" userLabel="Content View">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-yU-YUa" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="605" height="605"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNT-pU-5kL">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNT-pU-5kL">
                                                 <rect key="frame" x="18" y="19" width="563" height="451"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Austin -April 24,29 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-bo-0ig">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Austin -April 24,29 2016" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-bo-0ig">
                                                         <rect key="frame" x="20" y="20" width="527" height="26"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -439,21 +439,32 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kK2-62-kVi">
-                                                        <rect key="frame" x="246" y="314" width="72" height="30"/>
+                                                        <rect key="frame" x="246" y="316" width="72" height="30"/>
                                                         <state key="normal" title="Website"/>
                                                         <connections>
                                                             <action selector="websiteTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="fx5-0c-Qpn"/>
                                                         </connections>
                                                     </button>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Aii-WS-79p" userLabel="Support Email">
-                                                        <rect key="frame" x="164" y="337" width="240" height="84"/>
+                                                        <rect key="frame" x="164" y="367" width="240" height="84"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="84" id="IGd-OB-vzl"/>
+                                                        </constraints>
                                                         <string key="text">For app support, please email summitapp@openstack.org
 For general support, please email summit@openstack.org</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                     </textView>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-tU-WrB">
+                                                        <rect key="frame" x="216" y="342" width="131" height="30"/>
+                                                        <state key="normal" title="Code of conduct"/>
+                                                        <connections>
+                                                            <action selector="codeOfConductTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="WWi-ZU-vbN"/>
+                                                            <action selector="websiteTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="0Ak-oG-p1N"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -461,31 +472,33 @@ For general support, please email summit@openstack.org</string>
                                                     <constraint firstItem="0Qd-db-kRw" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" constant="2.5" id="5fj-AE-c53"/>
                                                     <constraint firstItem="o7C-n1-Ka4" firstAttribute="trailing" secondItem="GNT-pU-5kL" secondAttribute="trailing" priority="999" constant="-18" id="5gp-6F-Lem"/>
                                                     <constraint firstItem="o7C-n1-Ka4" firstAttribute="top" secondItem="xUa-bo-0ig" secondAttribute="bottom" constant="20" id="APl-pY-e8q"/>
+                                                    <constraint firstItem="UPa-tU-WrB" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" id="Ho4-XX-iTh"/>
                                                     <constraint firstAttribute="bottom" secondItem="Aii-WS-79p" secondAttribute="bottom" constant="15" id="O97-f8-BSx"/>
                                                     <constraint firstItem="xUa-bo-0ig" firstAttribute="leading" secondItem="GNT-pU-5kL" secondAttribute="leading" constant="20" id="OUL-tS-q2C"/>
                                                     <constraint firstItem="xFf-dd-jh7" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" id="P4d-jP-0r8"/>
+                                                    <constraint firstItem="UPa-tU-WrB" firstAttribute="top" secondItem="kK2-62-kVi" secondAttribute="bottom" id="RcG-x3-7SX"/>
                                                     <constraint firstItem="xFf-dd-jh7" firstAttribute="top" secondItem="0Qd-db-kRw" secondAttribute="bottom" constant="3" id="TYr-1m-25f"/>
                                                     <constraint firstItem="xUa-bo-0ig" firstAttribute="trailing" secondItem="GNT-pU-5kL" secondAttribute="trailing" constant="-16" id="VpN-Lt-mbU"/>
                                                     <constraint firstItem="Aii-WS-79p" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" id="YKG-1q-qTO"/>
                                                     <constraint firstItem="o7C-n1-Ka4" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" constant="2" id="cZD-Om-fvU"/>
                                                     <constraint firstItem="kK2-62-kVi" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" id="cZa-5D-WhD"/>
                                                     <constraint firstItem="0Qd-db-kRw" firstAttribute="top" secondItem="o7C-n1-Ka4" secondAttribute="bottom" constant="16" id="eBC-LE-2GB"/>
+                                                    <constraint firstItem="Aii-WS-79p" firstAttribute="top" secondItem="UPa-tU-WrB" secondAttribute="bottom" id="qSf-tU-XhN"/>
                                                     <constraint firstItem="kK2-62-kVi" firstAttribute="top" secondItem="xFf-dd-jh7" secondAttribute="bottom" constant="8" id="r5E-xQ-MRQ"/>
-                                                    <constraint firstItem="Aii-WS-79p" firstAttribute="top" secondItem="kK2-62-kVi" secondAttribute="bottom" id="wII-nX-lig"/>
                                                     <constraint firstItem="o7C-n1-Ka4" firstAttribute="leading" secondItem="GNT-pU-5kL" secondAttribute="leading" priority="999" constant="18" id="xE7-Uh-tMr"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-wc-oMM">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-wc-oMM">
                                                 <rect key="frame" x="18" y="478" width="563" height="97"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhU-GH-qKB">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhU-GH-qKB">
                                                         <rect key="frame" x="17" y="7" width="529" height="169"/>
                                                         <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3RT-yK-5yL">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3RT-yK-5yL">
                                                         <rect key="frame" x="17" y="-22" width="529" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
