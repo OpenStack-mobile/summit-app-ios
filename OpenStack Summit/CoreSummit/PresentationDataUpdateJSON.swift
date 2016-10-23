@@ -8,12 +8,12 @@
 
 import SwiftFoundation
 
-public extension PresentationDataUpdate {
+public extension Presentation.DataUpdate {
     
     typealias JSONKey = Presentation.JSONKey
 }
 
-extension PresentationDataUpdate: JSONDecodable {
+extension Presentation.DataUpdate: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
