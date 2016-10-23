@@ -59,15 +59,15 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         // load dates
         
-        let summit = Store.shared.realm.objects(RealmSummit).first!
+        let summit = Store.shared.cache!
         
-        let dayCount = summit.endDate.mt_daysSinceDate(summit.startDate)
+        let dayCount = summit.end.toFoundation().mt_daysSinceDate(summit.start.toFoundation())
         
         self.dates = [NSDate]()
         
         for index in 0 ..< dayCount {
             
-            let date = summit.startDate.mt_dateDaysAfter(index)
+            let date = summit.start.toFoundation().mt_dateDaysAfter(index)
             
             dates.append(date)
         }
@@ -95,10 +95,14 @@ final class EventDatesInterfaceController: WKInterfaceController {
         let selectedDate = self.dates[rowIndex]
         
         // get events for date
-                
+        
+        let startDate = selectedDate.mt_startOfCurrentDay()
         let endDate = selectedDate.mt_endOfCurrentDay()
         
-        let events = Store.shared.realm.objects(RealmSummitEvent).filter("start >= %@ AND end <= %@", selectedDate, endDate).map { $0.id }
+        let events = Store.shared.cache?.schedule.filter({
+            
+            return $0.start.toFoundation().mt_isBetweenDate(startDate, andDate: endDate)
+        })
         
         return Context(events)
     }
