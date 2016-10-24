@@ -16,6 +16,7 @@
                 <outlet property="dayPicker" destination="BrO-92-FB5" id="QeQ-r1-tpo"/>
                 <outlet property="noEventsLabel" destination="7UD-xN-OK6" id="zSz-7o-ugC"/>
                 <outlet property="nowButton" destination="wis-wA-eYi" id="N13-1o-8uE"/>
+                <outlet property="nowWidthConstraint" destination="xbY-Tq-wbw" id="80d-3N-3B4"/>
                 <outlet property="tableView" destination="GXx-g3-Qpp" id="piT-40-yBW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jBk-DV-KBV"/>
             </connections>
@@ -46,11 +47,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="60" height="52"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wis-wA-eYi">
-                            <rect key="frame" x="11.5" y="11" width="37" height="30"/>
+                            <rect key="frame" x="12" y="11" width="37" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="NOW"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="wis-wA-eYi" firstAttribute="centerY" secondItem="Q0e-J9-8kd" secondAttribute="centerY" id="Psh-oN-2pT"/>
                         <constraint firstItem="wis-wA-eYi" firstAttribute="centerX" secondItem="Q0e-J9-8kd" secondAttribute="centerX" id="aKD-hV-vo4"/>

@@ -249,6 +249,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         let summitActive = today.mt_isBetweenDate(self.startDate, andDate: self.endDate)
         
+        self.scheduleView.nowButtonEnabled = summitActive
+        
         // default start day when summit is inactive
         
         let oldSelectedDate = self.selectedDate
