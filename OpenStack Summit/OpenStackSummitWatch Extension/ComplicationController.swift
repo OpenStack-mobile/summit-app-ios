@@ -20,7 +20,14 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
         
-        handler([.Backward, .Forward])
+        if Store.shared.cache != nil {
+            
+            handler([.Backward, .Forward])
+            
+        } else {
+            
+            handler(.None)
+        }
     }
     
     func getPrivacyBehaviorForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
@@ -31,35 +38,78 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
         
         // when current event ends
-        
-        // Update hourly
-        handler(NSDate(timeIntervalSinceNow: 60*60))
+        if let event = self.event(for: Date()) {
+            
+            handler(event.end.toFoundation())
+            
+        } else {
+            
+            // Update hourly by default
+            handler(NSDate(timeIntervalSinceNow: 60*60))
+        }
     }
     
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
-        handler(nil)
+        
+        let template = self.template(for: complication, with: nil)
+        handler(template)
     }
-    
-    
-    
+        
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimelineEntry?) -> Void) {
-        handler(nil)
+        
+        let event = self.event(for: Date())
+        
+        let template = self.template(for: complication, with: event)
+        
+        let entry = CLKComplicationTimelineEntry(date: event?.start.toFoundation() ?? NSDate(), complicationTemplate: template)
+        
+        handler(entry)
     }
     
     func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
-        handler(nil)
+        
+        guard let summit = Store.shared.cache
+            else { handler(nil); return }
+        
+        let beforeDate = Date(foundation: date)
+        
+        let events = summit.schedule.filter({ $0.start <= beforeDate }).sort({ $0.0.start < $0.1.start }).prefix(limit)
+        
+        let eventDetails = events.map { EventDetail(event: $0, summit: summit) }
+        
+        let entries = eventDetails.map { CLKComplicationTimelineEntry(date: $0.start.toFoundation(), complicationTemplate: self.template(for: complication, with: $0)) }
+        
+        handler(entries)
     }
     
     func getTimelineEntriesForComplication(complication: CLKComplication, afterDate date: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
-        handler([])
+        
+        guard let summit = Store.shared.cache
+            else { handler(nil); return }
+        
+        let afterDate = Date(foundation: date)
+        
+        let events = summit.schedule.filter({ $0.start >= afterDate }).sort({ $0.0.start < $0.1.start }).prefix(limit)
+        
+        let eventDetails = events.map { EventDetail(event: $0, summit: summit) }
+        
+        let entries = eventDetails.map { CLKComplicationTimelineEntry(date: $0.start.toFoundation(), complicationTemplate: self.template(for: complication, with: $0)) }
+        
+        handler(entries)
     }
     
     func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
-        handler(NSDate())
+        
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start
+        
+        handler(date?.toFoundation())
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
-        handler(NSDate())
+        
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.end
+        
+        handler(date?.toFoundation())
     }
     
     // MARK: - Private Methods
@@ -82,16 +132,38 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             
         case .ModularLarge:
             
-            let complicationTemplate = CLKComplicationTemplateModularLargeStandardBody()
-            
-            complicationTemplate.headerTextProvider = CLKSimpleTextProvider
-            
-            
-            
-            return complicationTemplate
+            if let event = event {
+                
+                let complicationTemplate = CLKComplicationTemplateModularLargeStandardBody()
+                
+                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(startDate: event.start.toFoundation(), endDate: event.end.toFoundation(), timeZone: NSTimeZone(name: event.timeZone))
+                
+                complicationTemplate.body1TextProvider = CLKSimpleTextProvider(text: event.name)
+                
+                complicationTemplate.body2TextProvider = CLKSimpleTextProvider(text: event.location)
+                
+                return complicationTemplate
+                
+            } else {
+                
+                let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
+                
+                complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "No current event")
+                
+                return complicationTemplate
+            }
             
         default: fatalError("Complication family \(complication.family.rawValue) not supported")
         }
+    }
+    
+    private func event(for date: Date) -> EventDetail? {
+        
+        guard let summit = Store.shared.cache,
+            let event = summit.schedule.filter({ $0.start >= date }).sort({ $0.0.start < $0.1.start }).first
+            else { return nil }
+        
+        return EventDetail(event: event, summit: summit)
     }
 }
 
@@ -104,6 +176,7 @@ extension ComplicationController {
         let start: Date
         let end: Date
         let location: String
+        let timeZone: String
         
         init(event: Event, summit: Summit) {
             
@@ -112,6 +185,7 @@ extension ComplicationController {
             self.start = event.start
             self.end = event.end
             self.location = OpenStackSummitWatch_Extension.EventDetail.getLocation(event, summit: summit)
+            self.timeZone = summit.timeZone
         }
     }
 }
