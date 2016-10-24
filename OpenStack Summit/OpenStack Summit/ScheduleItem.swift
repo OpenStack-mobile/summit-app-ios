@@ -104,7 +104,14 @@ internal extension ScheduleItem {
         if let room = event.venueRoom {
             location = room.venue.name
             if event.summit.startShowingVenuesDate.timeIntervalSinceNow.isSignMinus {
-                location += " - " + room.name
+                
+                if !room.floor.name.isEmpty {
+                    location += " - " + room.floor.name
+                }
+                
+                if !room.name.isEmpty {
+                    location += " - " + room.name
+                }
             }
         }
         else if let venue = event.venue {
