@@ -1,24 +1,19 @@
 //
-//  VenueRoomJSON.swift
+//  VenueRoomDataUpdateJSON.swift
 //  OpenStackSummit
 //
-//  Created by Alsey Coleman Miller on 6/1/16.
+//  Created by Gabriel Horacio Cutrini on 10/24/16.
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
 import SwiftFoundation
 
-public extension VenueRoom {
+public extension VenueRoomDataUpdate {
     
-    static var JSONClassName: String { return "SummitVenueRoom" }
-    
-    enum JSONKey: String {
-        
-        case Capacity, venue_id, floor_id, floor
-    }
+    typealias JSONKey = VenueRoom.JSONKey
 }
 
-extension VenueRoom: JSONDecodable {
+extension VenueRoomDataUpdate: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
@@ -27,14 +22,15 @@ extension VenueRoom: JSONDecodable {
             let identifier = JSONObject[LocationJSONKey.id.rawValue]?.rawValue as? Int,
             let name = JSONObject[LocationJSONKey.name.rawValue]?.rawValue as? String,
             let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.rawValue as? Int,
-            let floorIdentifier = JSONObject[JSONKey.floor_id.rawValue]?.rawValue as? Int
+            let floorJSON = JSONObject[JSONKey.floor.rawValue],
+            let floor = VenueFloor(JSONValue: floorJSON)
             where classNameString == VenueRoom.JSONClassName
             else { return nil }
         
         self.identifier = identifier
         self.name = name
         self.venue = venueIdentifier
-        self.floor = floorIdentifier
+        self.floor = floor
         
         // optional
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String

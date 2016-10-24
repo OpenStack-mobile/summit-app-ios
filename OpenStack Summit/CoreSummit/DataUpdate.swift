@@ -79,7 +79,7 @@ public extension DataUpdate {
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
-            case .SummitVenueRoom: return CoreSummit.VenueRoom.self
+            case .SummitVenueRoom: return CoreSummit.VenueRoomDataUpdate.self
             case .PresentationCategory: return CoreSummit.Track.self
             case .PresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
@@ -249,7 +249,7 @@ extension PresentationSpeaker: Updatable { }
 extension TicketType: Updatable { }
 extension Venue: Updatable { }
 extension VenueFloor: Updatable { }
-extension VenueRoom: Updatable { }
+extension VenueRoomDataUpdate: Updatable { }
 extension Track: Updatable { }
 extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }
