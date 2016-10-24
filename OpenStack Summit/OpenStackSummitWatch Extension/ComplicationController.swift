@@ -108,14 +108,18 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date(foundation: beforeDate)
         
-        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+        var dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 < date })
+        
+        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
             .prefix(limit)
             .sort({ $0.0 < $0.1 })
         
         let entries = dates.map { ($0, self.entry(for: $0)) }
         
-        print("Requesting \(limit) entries before \(beforeDate):\n\(dates.map({ $0.toFoundation() })))")
+        print("Requesting \(limit) entries before \(beforeDate))")
+        
+        entries.forEach { print($0.0.toFoundation().description, $0.1) }
         
         let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
         
@@ -129,14 +133,18 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date(foundation: afterDate)
         
-        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+        var dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 > date })
+        
+        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
             .prefix(limit)
             .sort({ $0.0 > $0.1 })
         
         let entries = dates.map { ($0, self.entry(for: $0)) }
         
-        print("Requesting \(limit) entries after \(afterDate):\n\(dates.map({ $0.toFoundation() })))")
+        print("Requesting \(limit) entries after \(afterDate))")
+        
+        entries.forEach { print($0.0.toFoundation().description, $0.1) }
         
         let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
         
@@ -217,13 +225,13 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 return complicationTemplate
                 
-            case let .multiple(count, start, timeZone):
+            case let .multiple(count, start, end, timeZone):
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
                 
-                complicationTemplate.headerTextProvider = CLKTimeTextProvider(date: start.toFoundation(), timeZone: NSTimeZone(name: timeZone))
+                complicationTemplate.headerTextProvider = CLKSimpleTextProvider(text: "\(count) events")
                 
-                complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "\(count) events")
+                complicationTemplate.bodyTextProvider = CLKTimeIntervalTextProvider(startDate: start.toFoundation(), endDate: end.toFoundation(), timeZone: NSTimeZone(name: timeZone))
                 
                 return complicationTemplate
                 
@@ -268,7 +276,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         // multiple events
         if events.count > 1 {
             
-            return .multiple(events.count, startDate, summit.timeZone)
+            return .multiple(events.count, startDate, endDate, summit.timeZone)
             
         } else {
             
@@ -292,7 +300,7 @@ extension ComplicationController {
         case none
         
         /// Multiple Events, with the date of the earliest one and time zone.
-        case multiple(Int, Date, String)
+        case multiple(Int, Date, Date, String)
         
         /// A single event
         case event(EventDetail)
@@ -301,7 +309,7 @@ extension ComplicationController {
             
             switch self {
             case .none: return nil
-            case let .multiple(_, start, _): return start
+            case let .multiple(_, start, _, _): return start
             case let .event(event): return event.start
             }
         }
