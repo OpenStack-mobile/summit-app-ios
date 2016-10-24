@@ -6,6 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import WatchKit
 import ClockKit
 import SwiftFoundation
 import CoreSummit
@@ -16,7 +17,29 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         super.init()
         
         print("Initialized \(self.dynamicType)")
+        
+        #if DEBUG
+        WKInterfaceDevice.currentDevice().playHaptic(WKHapticType.Click) // haptic only for debugging
+        #endif
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(complicationServerActiveComplicationsDidChange), name: CLKComplicationServerActiveComplicationsDidChangeNotification, object: self)
     }
+    
+    static func reloadComplications() {
+        if let complications: [CLKComplication] = CLKComplicationServer.sharedInstance().activeComplications {
+            if complications.count > 0 {
+                for complication in complications {
+                    CLKComplicationServer.sharedInstance().reloadTimelineForComplication(complication)
+                    print("Reloading complication \(complication.description)...")
+                }
+                #if DEBUG
+                WKInterfaceDevice.currentDevice().playHaptic(WKHapticType.Click) // haptic only for debugging
+                #endif
+            }
+        }
+    }
+    
+    // MARK: - CLKComplicationDataSource
     
     func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
         
@@ -164,6 +187,13 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             else { return nil }
         
         return EventDetail(event: event, summit: summit)
+    }
+    
+    // MARK: - Notifications
+    
+    @objc private func complicationServerActiveComplicationsDidChange(notification: NSNotification) {
+        
+        ComplicationController.reloadComplications()
     }
 }
 

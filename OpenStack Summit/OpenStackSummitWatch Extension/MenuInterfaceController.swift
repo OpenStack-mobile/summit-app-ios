@@ -125,6 +125,9 @@ final class MenuInterfaceController: WKInterfaceController {
                 print("Fetched \(summit.name) summit")
                 
                 controller.updateUI()
+                
+                // reload complication controller
+                ComplicationController.reloadComplications()
             }
         }
     }
