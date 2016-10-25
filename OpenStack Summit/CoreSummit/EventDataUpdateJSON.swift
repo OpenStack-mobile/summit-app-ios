@@ -32,7 +32,7 @@ extension Event.DataUpdate: JSONDecodable {
             let typeJSON = JSONObject[JSONKey.type_id.rawValue],
             let type = Identifier(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Identifier.fromJSON(sponsorsJSONArray),
+            let sponsors = Company.fromJSON(sponsorsJSONArray),
             /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
             /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
