@@ -98,6 +98,9 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let events = summit.schedule.filter({ $0.start <= beforeDate }).sort({ $0.0.start < $0.1.start }).prefix(limit)
         
+        guard events.isEmpty == false
+            else { handler(nil); return }
+        
         let eventDetails = events.map { EventDetail(event: $0, summit: summit) }
         
         let entries = eventDetails.map { CLKComplicationTimelineEntry(date: $0.start.toFoundation(), complicationTemplate: self.template(for: complication, with: $0)) }
@@ -112,7 +115,10 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let afterDate = Date(foundation: date)
         
-        let events = summit.schedule.filter({ $0.start >= afterDate }).sort({ $0.0.start < $0.1.start }).prefix(limit)
+        let events = summit.schedule.filter({ $0.start.timeIntervalSinceDate(afterDate) > 0 }).sort({ $0.0.start < $0.1.start }).prefix(limit)
+        
+        guard events.isEmpty == false
+            else { handler(nil); return }
         
         let eventDetails = events.map { EventDetail(event: $0, summit: summit) }
         
@@ -125,14 +131,14 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start
         
-        handler(date?.toFoundation())
+        handler(date?.toFoundation() ?? NSDate())
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.end
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.start
         
-        handler(date?.toFoundation())
+        handler(date?.toFoundation() ?? NSDate())
     }
     
     // MARK: - Private Methods
