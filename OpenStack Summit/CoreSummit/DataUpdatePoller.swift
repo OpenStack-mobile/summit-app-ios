@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftFoundation
-import RealmSwift
 
 #if os(iOS)
 import Crashlytics
@@ -30,15 +29,6 @@ public final class DataUpdatePoller {
     // MARK: - Private Properties
     
     private var timer: NSTimer?
-    
-    private let queue: NSOperationQueue = {
-        
-        let queue = NSOperationQueue()
-        
-        queue.name = "DataUpdatePoller Internal Queue"
-        
-        return queue
-    }()
     
     // MARK: - Initializations
     
@@ -86,51 +76,44 @@ public final class DataUpdatePoller {
                                 
             case let .Value(dataUpdates):
                 
-                self.queue.addOperationWithBlock { [weak self] in
+                for update in dataUpdates {
                     
-                    guard let poller = self else { return }
-                    
-                    for update in dataUpdates {
+                    if Store.shared.process(update) == false {
                         
-                        let backgroundRealm = try! Realm()
+                        // could not process update
                         
-                        if Store.shared.process(update, realm: backgroundRealm) == false {
+                        #if os(iOS)
                             
-                            // could not process update
+                            var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
                             
-                            #if os(iOS)
+                            if let updateEntity = update.entity,
+                                case let .JSON(jsonObject) = updateEntity {
                                 
-                                var errorUserInfo = [NSLocalizedDescriptionKey: "Could not process data update.", "DataUpdate": "\(update)"]
+                                let jsonString = JSON.Value.Object(jsonObject).toString()!
                                 
-                                if let updateEntity = update.entity,
-                                    case let .JSON(jsonObject) = updateEntity {
-                                    
-                                    let jsonString = JSON.Value.Object(jsonObject).toString()!
-                                    
-                                    errorUserInfo["JSON"] = jsonString
-                                }
-                                
-                                let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo:errorUserInfo)
-                                
-                                Crashlytics.sharedInstance().recordError(friendlyError)
-                                
-                            #endif
-                            
-                            print("Could not process data update: \(update)")
-                            
-                            #if DEBUG
-                                return // block
-                            #endif
-                        }
+                                errorUserInfo["JSON"] = jsonString
+                            }
                         
-                        // store latest data update
-                        poller.storage?.latestDataUpdate = update.identifier
+                            let friendlyError = NSError(domain: "CoreSummit", code: -200, userInfo:errorUserInfo)
+                        
+                            Crashlytics.sharedInstance().recordError(friendlyError)
+                        
+                        #endif
+                        
+                        print("Could not process data update: \(update)")
+                        
+                        #if DEBUG
+                        return // block
+                        #endif
                     }
                     
-                    if dataUpdates.isEmpty == false {
-                        
-                        poller.log?("Processed \(dataUpdates.count) data updates")
-                    }
+                    // store latest data update
+                    storage?.latestDataUpdate = update.identifier
+                }
+                
+                if dataUpdates.isEmpty == false {
+                    
+                    log?("Processed \(dataUpdates.count) data updates")
                 }
             }
         }
