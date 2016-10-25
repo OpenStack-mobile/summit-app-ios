@@ -43,13 +43,19 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         
         didSet {
             
-            let attrStr = try! NSMutableAttributedString(data: biographyHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-            
-            let range = NSMakeRange(0, attrStr.length)
-            
-            attrStr.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: range)
-            
-            bioTextView.attributedText = attrStr
+            if let data = biographyHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+                let attrStr = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+                
+                let range = NSMakeRange(0, attrStr.length)
+                
+                attrStr.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: range)
+                
+                bioTextView.attributedText = attrStr
+                
+            } else {
+                
+                bioTextView.text = ""
+            }
         }
     }
     
