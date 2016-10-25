@@ -171,6 +171,8 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
                 
+                complicationTemplate.headerTextProvider = CLKSimpleTextProvider(text: "OpenStack Summit")
+                
                 complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "No current event")
                 
                 return complicationTemplate
