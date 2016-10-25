@@ -31,7 +31,7 @@ public extension Event {
         
         public var summitTypes: [Identifier]
         
-        public var sponsors: [Identifier]
+        public var sponsors: [Company]
         
         public var tags: [Tag]
         
