@@ -79,7 +79,7 @@ public extension DataUpdate {
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
-            case .SummitVenueRoom: return CoreSummit.VenueRoom.self
+            case .SummitVenueRoom: return CoreSummit.VenueRoomDataUpdate.self
             case .PresentationCategory: return CoreSummit.Track.self
             case .PresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
@@ -94,9 +94,7 @@ public extension DataUpdate {
 
 public extension Store {
     
-    func process(dataUpdate: DataUpdate, realm: Realm? = nil) -> Bool {
-        
-        let realm = realm ?? self.realm
+    func process(dataUpdate: DataUpdate) -> Bool {
         
         // truncate
         guard dataUpdate.operation != .Truncate else {
@@ -104,7 +102,7 @@ public extension Store {
             guard dataUpdate.className == .WipeData
                 else { return false }
             
-            realm.deleteAll()
+            self.realm.deleteAll()
             self.logout()
             
             return true
@@ -129,9 +127,9 @@ public extension Store {
                     let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
                     else { return false }
                 
-                try! realm.write {
+                try! self.realm.write {
                     
-                    let realmEvent = event.save(realm)
+                    let realmEvent = event.save(self.realm)
                     
                     if attendeeRole.scheduledEvents.indexOf("id = %@", event.identifier) == nil {
                         
@@ -147,7 +145,7 @@ public extension Store {
                     case let .Identifier(identifier) = entityID
                     else { return false }
                 
-                try! realm.write {
+                try! self.realm.write {
                     
                     if let index = attendeeRole.scheduledEvents.indexOf("id = %@", identifier) {
                         
@@ -173,12 +171,12 @@ public extension Store {
                 else { return false }
             
             // if it doesnt exist, dont delete it
-            guard let foundEntity = type.find(id, realm: realm)
+            guard let foundEntity = type.find(id, realm: self.realm)
                 else { return true }
             
-            try! realm.write {
+            try! self.realm.write {
                 
-                realm.delete(foundEntity)
+                self.realm.delete(foundEntity)
             }
             
             return true
@@ -202,7 +200,7 @@ public extension Store {
         default:
             
             // insert or update
-            entity.write(realm)
+            entity.write(self.realm)
             
             return true
         }
@@ -249,7 +247,7 @@ extension PresentationSpeaker: Updatable { }
 extension TicketType: Updatable { }
 extension Venue: Updatable { }
 extension VenueFloor: Updatable { }
-extension VenueRoom: Updatable { }
+extension VenueRoomDataUpdate: Updatable { }
 extension Track: Updatable { }
 extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }
