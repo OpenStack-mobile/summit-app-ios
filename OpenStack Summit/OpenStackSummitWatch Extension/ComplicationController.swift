@@ -66,10 +66,15 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         switch entry {
             
-        case .none, .multiple:
+        case .none:
             
             // Update hourly by default
             date = NSDate(timeIntervalSinceNow: 60*60)
+            
+        case let .multiple(_, _, end, _):
+            
+            // when current timeframe ends
+            date = end.toFoundation()
             
         case let .event(event):
             
@@ -185,7 +190,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
             case .none: textProvider.text = "No event"
                 
-            case let .multiple(events, start, timeZone):
+            case let .multiple(events, start, end, timeZone):
                 
                 struct Static {
                     static let dateFormatter: NSDateFormatter = {
@@ -200,7 +205,9 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let startDateText = Static.dateFormatter.stringFromDate(start.toFoundation())
                 
-                textProvider.text = "\(events) events starting at " + startDateText
+                let endDateText = Static.dateFormatter.stringFromDate(end.toFoundation())
+                
+                textProvider.text = "\(startDateText) - \(endDateText) \(events) events"
                 
             case let .event(event):
                 
@@ -229,9 +236,9 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
                 
-                complicationTemplate.headerTextProvider = CLKSimpleTextProvider(text: "\(count) events")
+                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(startDate: start.toFoundation(), endDate: end.toFoundation(), timeZone: NSTimeZone(name: timeZone))
                 
-                complicationTemplate.bodyTextProvider = CLKTimeIntervalTextProvider(startDate: start.toFoundation(), endDate: end.toFoundation(), timeZone: NSTimeZone(name: timeZone))
+                complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "\(count) events")
                 
                 return complicationTemplate
                 
