@@ -444,9 +444,16 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDescriptionTableViewCell, forIndexPath: indexPath)!
                 
                 let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
-                let attrStr = try! NSAttributedString(data: eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+                if let data = eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+                    let attrStr = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+                    
+                    cell.descriptionTextView.attributedText = attrStr
+                    
+                } else {
+                    
+                    cell.descriptionTextView.text = ""
+                }
                 
-                cell.descriptionTextView.attributedText = attrStr
                 cell.descriptionTextView.textContainerInset = UIEdgeInsetsZero
                 
                 cell.descriptionTextView.delegate = self

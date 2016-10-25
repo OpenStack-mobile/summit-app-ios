@@ -489,6 +489,13 @@
 		6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */; };
 		6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE52351D42D52D00DF4BEA /* Accelerate.framework */; };
 		6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */; };
+		6EE33F491DBF8F9500ECDDCF /* DataUpdates7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */; };
+		6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E35086E1D9AE4900055801C /* DataUpdates5.json */; };
+		6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */; };
+		6EE74DEA1DBF8E5800616BEA /* DataUpdates7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */; };
+		6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E35086E1D9AE4900055801C /* DataUpdates5.json */; };
+		6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */; };
+		6EE74DED1DBF8E5A00616BEA /* DataUpdates7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */; };
 		6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
 		6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
 		6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
@@ -988,6 +995,7 @@
 		6EDE52331D42D50D00DF4BEA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6EDE52351D42D52D00DF4BEA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DataUpdates7.json; sourceTree = "<group>"; };
 		6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates4.json; sourceTree = "<group>"; };
 		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
 		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
@@ -1307,6 +1315,7 @@
 				6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */,
 				6E35086E1D9AE4900055801C /* DataUpdates5.json */,
 				9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */,
+				6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E586FBE1DC29083001DE605 /* Member2.json */,
 				6E10A5161D106741008CBD0C /* Summit6.json */,
@@ -2191,12 +2200,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */,
+				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6E0B5F2E1D77C8AB0005F6CE /* Summit6.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
 				6E586FC21DC29083001DE605 /* Member2.json in Resources */,
+				6EE74DEA1DBF8E5800616BEA /* DataUpdates7.json in Resources */,
 				6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2280,6 +2292,7 @@
 				6E586FC01DC29083001DE605 /* Member2.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
 				6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */,
+				6EE33F491DBF8F9500ECDDCF /* DataUpdates7.json in Resources */,
 				6E93D4411D9AEC5000E3302A /* DataUpdates5.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2296,12 +2309,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */,
+				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6E2924211D7AF8CC00D14F0A /* Summit6.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */,
 				6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */,
 				6E586FC11DC29083001DE605 /* Member2.json in Resources */,
+				6EE74DED1DBF8E5A00616BEA /* DataUpdates7.json in Resources */,
 				6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
