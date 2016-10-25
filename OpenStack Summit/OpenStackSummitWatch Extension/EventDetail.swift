@@ -94,7 +94,7 @@ public struct EventDetail {
         self.speakers = speakers
         self.moderator = moderatorSpeaker
         
-        self.video = event.videos.filter({ $0.featured }).first
+        self.video = event.videos.filter({ $0.featured }).first ?? event.videos.first
         
         self.webpageURL = NSURL(string: event.toWebpageURL(summit))!
     }
