@@ -370,6 +370,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                         controller.toggleMenuSelection(controller.myProfileButton)
                     }
                     
+                    // log user email
+                    Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember!.email)
+                    
                     PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
                 }
             }
