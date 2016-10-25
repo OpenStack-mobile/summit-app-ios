@@ -96,7 +96,7 @@ public struct EventDetail: RealmDecodable {
         
         self.speakers = speakers
         
-        if let video = event.videos.filter({ $0.featured }).first {
+        if let video = event.videos.filter({ $0.featured }).first ?? event.videos.first {
             
             self.video = Video(realmEntity: video)
             
