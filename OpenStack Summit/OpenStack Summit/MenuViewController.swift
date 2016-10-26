@@ -371,7 +371,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     }
                     
                     // log user email
-                    Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember!.email)
+                    Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember?.email)
                     
                     PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
                 }
