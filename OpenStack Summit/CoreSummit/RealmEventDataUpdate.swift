@@ -21,7 +21,7 @@ extension SummitEvent.DataUpdate: RealmEncodable {
         realmEntity.end = end.toFoundation()
         realmEntity.eventDescription = descriptionText ?? ""
         realmEntity.allowFeedback = allowFeedback
-        realmEntity.averageFeedback = averageFeedback
+        realmEntity.averageFeedback = averageFeedback ?? 0
         
         // relationships
         realmEntity.eventType = RealmEventType.cached(type, realm: realm)

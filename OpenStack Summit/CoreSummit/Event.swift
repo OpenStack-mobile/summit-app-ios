@@ -24,7 +24,7 @@ public struct Event: Named {
     
     public var allowFeedback: Bool
     
-    public var averageFeedback: Int
+    public var averageFeedback: Double?
     
     public var type: Identifier
     
