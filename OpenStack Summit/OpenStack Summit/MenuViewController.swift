@@ -371,7 +371,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     }
                     
                     // log user email
-                    Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember?.email)
+                    if AppEnvironment == .Staging {
+                        
+                        Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember?.email)
+                    }
                     
                     PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
                 }
@@ -383,7 +386,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         Store.shared.logout()
         
-        Crashlytics.sharedInstance().setUserEmail(nil)
+        // log user email
+        if AppEnvironment == .Staging {
+            
+            Crashlytics.sharedInstance().setUserEmail(nil)
+        }
         
         showUserProfile()
         navigateToHome()

@@ -50,6 +50,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
     }
     
+    private var addToScheduleInProgress = false
     private var shouldShowReviews = false
     private var loadingFeedback = false
     private var loadingAverageRating = false
@@ -143,12 +144,20 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         let oldValue = self.scheduled
         
+        if addToScheduleInProgress {
+            return
+        }
+        
+        addToScheduleInProgress = true
+        
         // update UI
         self.scheduled = !oldValue
         
         let completion: ErrorValue<()> -> () = { [weak self] (response) in
             
             guard let controller = self else { return }
+            
+            controller.addToScheduleInProgress = false
             
             switch response {
                 

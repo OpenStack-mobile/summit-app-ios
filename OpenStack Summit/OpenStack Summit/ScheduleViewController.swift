@@ -24,6 +24,9 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     final private(set) var dayEvents = [ScheduleItem]()
     
+    
+    private var addToScheduleInProgress = false
+    
     private var pushRegisterInProgress = false
     
     private var realmNotificationToken: RealmSwift.NotificationToken!
@@ -119,12 +122,21 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         let event = dayEvents[indexPath.row]
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
         
+        
+        if addToScheduleInProgress {
+            return
+        }
+        
+        addToScheduleInProgress = true
+        
         // update cell
         cell.scheduled = !scheduled
         
         let completion: ErrorValue<()> -> () = { [weak self] (response) in
             
             guard let controller = self else { return }
+            
+            controller.addToScheduleInProgress = false
             
             switch response {
                 
