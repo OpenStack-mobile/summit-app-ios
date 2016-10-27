@@ -194,9 +194,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             data.append(.video)
         }
         
-        // Can give feedback for presentations, after event started, and if there is no feedback for that user
-        if let attendee = Store.shared.authenticatedMember?.attendeeRole,
-            let _ = eventCache.presentation
+        // Can give feedback after event started, and if there is no feedback for that user
+        if let attendee = Store.shared.authenticatedMember?.attendeeRole
             where eventCache.start < Date() &&
             Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@ AND attendee.id = %@", event, attendee.id).isEmpty &&
             Store.shared.realm.objects(RealmReview).filter("event.id = %@ AND attendeeId = %@", event, attendee.id).isEmpty {
