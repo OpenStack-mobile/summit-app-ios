@@ -88,16 +88,17 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // update UI
         self.updateUI()
         tableView.tableFooterView = UIView()
-        
-        // load feedback
-        loadAverageRating()
-        loadFeedback()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // handoff
         self.userActivity?.becomeCurrent()
+        
+        // load feedback
+        loadAverageRating()
+        loadFeedback()
     }
     
     override func viewWillDisappear(animated: Bool) {
