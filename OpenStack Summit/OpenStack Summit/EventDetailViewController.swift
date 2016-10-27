@@ -90,11 +90,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         tableView.tableFooterView = UIView()
         
         // load feedback
-        if shouldShowReviews {
-            
-            loadAverageRating()
-            loadFeedback()
-        }
+        loadAverageRating()
+        loadFeedback()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -554,7 +551,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 cell.feedbackView.rating = 0.0
                 
-                cell.feedbackView.didFinishTouchingCosmos = { [weak self] (rating) in
+                cell.feedbackView.didTouchCosmos = { [weak self] (rating) in
                     
                     guard let controller = self else { return }
                     
