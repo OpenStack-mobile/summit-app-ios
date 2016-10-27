@@ -1,5 +1,5 @@
 //
-//  swift
+//  Venue.swift
 //  OpenStackSummit
 //
 //  Created by Alsey Coleman Miller on 6/1/16.
@@ -35,6 +35,8 @@ public struct Venue: LocationProtocol {
     public var maps: [Image]
     
     public var images: [Image]
+    
+    public var floors: [VenueFloor]
 }
 
 // MARK: - Extensions

@@ -12,7 +12,7 @@ public extension Venue {
     
     enum JSONKey: String {
         
-        case lat, lng, address_1, city, state, zip_code, country, maps, images, location_type
+        case lat, lng, address_1, city, state, zip_code, country, maps, images, floors, location_type
     }
 }
 
@@ -50,6 +50,18 @@ extension Venue: JSONDecodable {
         self.city = JSONObject[JSONKey.city.rawValue]?.rawValue as? String
         self.state = JSONObject[JSONKey.state.rawValue]?.rawValue as? String
         self.zipCode = JSONObject[JSONKey.zip_code.rawValue]?.rawValue as? String
+        
+        if let floorsJSONArray = JSONObject[JSONKey.floors.rawValue]?.arrayValue {
+            
+            guard let floors = VenueFloor.fromJSON(floorsJSONArray)
+                else { return nil }
+            
+            self.floors = floors
+
+        } else {
+            
+            self.floors = []
+        }
         
         // not in Realm
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String

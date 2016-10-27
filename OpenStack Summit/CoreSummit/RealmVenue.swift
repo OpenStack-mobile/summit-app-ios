@@ -21,6 +21,7 @@ public class RealmVenue: RealmLocation {
     public dynamic var venueClassName = ""
     public let maps = List<RealmImage>()
     public let images = List<RealmImage>()
+    public let floors = List<RealmVenueFloor>()
 }
 
 // MARK: - Encoding
@@ -43,6 +44,7 @@ extension Venue: RealmDecodable {
         self.locationType = realmEntity.isInternal ? .Internal : .External
         self.maps = Image.from(realm: realmEntity.maps)
         self.images = Image.from(realm: realmEntity.images)
+        self.floors = VenueFloor.from(realm: realmEntity.floors)
     }
 }
 
@@ -65,6 +67,7 @@ extension Venue: RealmEncodable {
         realmEntity.isInternal = locationType == .Internal
         realmEntity.maps.replace(with: maps)
         realmEntity.images.replace(with: images)
+        realmEntity.floors.replace(with: floors)
         
         return realmEntity
     }
