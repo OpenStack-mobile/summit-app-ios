@@ -10,7 +10,9 @@ import XCTest
 import SwiftFoundation
 @testable import CoreSummit
 
-let SummitJSONIdentifiers = [6, 7]
+let SummitJSONIdentifiers = 6 ... 7
+
+let MemberJSONIdentifiers = 1 ... 2
 
 final class JSONTests: XCTestCase {
     
@@ -24,6 +26,17 @@ final class JSONTests: XCTestCase {
                 else { XCTFail("Could not decode from JSON"); return }
             
             XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+        }
+    }
+    
+    func testMembers() {
+        
+        for memberJSONID in MemberJSONIdentifiers {
+            
+            let testJSON = loadJSON("Member\(memberJSONID)")
+            
+            guard let _ = Member(JSONValue: testJSON)
+                else { XCTFail("Could not decode from JSON"); return }
         }
     }
     
@@ -106,13 +119,5 @@ final class JSONTests: XCTestCase {
                 let _ = type.init(JSONValue: .Object(entityJSON))
                 else { XCTFail("Could not decode \(dataUpdate.className) from JSON"); return }
         }
-    }
-    
-    func testMember1() {
-        
-        let testJSON = loadJSON("Member1")
-        
-        guard let _ = Member(JSONValue: testJSON)
-            else { XCTFail("Could not decode from JSON"); return }
     }
 }
