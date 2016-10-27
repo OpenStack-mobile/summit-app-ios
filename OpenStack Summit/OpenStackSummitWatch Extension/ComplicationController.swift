@@ -143,7 +143,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Private Methods
     
-    private func template(for complication: CLKComplication, with event: EventDetail?) -> CLKComplicationTemplate {
+    private func template(for complication: CLKComplication, with entry: TimelineEntry) -> CLKComplicationTemplate {
         
         switch complication.family {
             
@@ -153,7 +153,31 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             
             let textProvider = CLKSimpleTextProvider()
             
-            textProvider.text = event?.name ?? "No current event"
+            switch entry {
+                
+            case .none: textProvider.text = "No event"
+                
+            case let .multiple(events, start, timeZone):
+                
+                struct Static {
+                    static let dateFormatter: NSDateFormatter = {
+                        let formatter = NSDateFormatter()
+                        formatter.dateStyle = .NoStyle
+                        formatter.timeStyle = .ShortStyle
+                        return formatter
+                    }()
+                }
+                
+                Static.dateFormatter.timeZone = NSTimeZone(name: timeZone)
+                
+                let startDateText = Static.dateFormatter.stringFromDate(start.toFoundation())
+                
+                textProvider.text = "\(events) events starting at " + startDateText
+                
+            case let .event(event):
+                
+                textProvider.text = event.name
+            }
             
             complicationTemplate.textProvider = textProvider
             
@@ -161,7 +185,29 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             
         case .ModularLarge:
             
-            if let event = event {
+            switch entry {
+                
+            case .none:
+                
+                let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
+                
+                complicationTemplate.headerTextProvider = CLKSimpleTextProvider(text: "OpenStack Summit")
+                
+                complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "No event")
+                
+                return complicationTemplate
+                
+            case let .multiple(count, start, timeZone):
+                
+                let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
+                
+                complicationTemplate.headerTextProvider = CLKTimeTextProvider(date: start.toFoundation(), timeZone: NSTimeZone(name: timeZone))
+                
+                complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "\(count) events")
+                
+                return complicationTemplate
+                
+            case let .event(event):
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeStandardBody()
                 
@@ -172,29 +218,42 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 complicationTemplate.body2TextProvider = CLKSimpleTextProvider(text: event.location)
                 
                 return complicationTemplate
-                
-            } else {
-                
-                let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
-                
-                complicationTemplate.headerTextProvider = CLKSimpleTextProvider(text: "OpenStack Summit")
-                
-                complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "No current event")
-                
-                return complicationTemplate
             }
             
         default: fatalError("Complication family \(complication.family.rawValue) not supported")
         }
     }
     
-    private func event(for date: Date) -> EventDetail? {
+    private func entry(for date: Date) -> TimelineEntry {
         
-        guard let summit = Store.shared.cache,
-            let event = summit.schedule.filter({ $0.start >= date }).sort({ $0.0.start < $0.1.start }).first
-            else { return nil }
+        guard let summit = Store.shared.cache
+            else { return .none }
         
-        return EventDetail(event: event, summit: summit)
+        // get sorted events
+        // had to break into multiple expressions for compiler
+        var events = summit.schedule.sort({ $0.0.start < $0.1.start && $0.0.end < $0.1.end })
+            .sort({ $0.0.name.caseInsensitiveCompare($0.1.name) == .OrderedAscending })
+            
+        // only events that start after the specified date
+        .filter({ $0.start >= date })
+        
+        // get first event
+        guard let firstEvent = events.first
+            else { return .none }
+        
+        // get overlapping events (only events that start within the timeframe of the first event)
+        events = events.filter { $0.start <= firstEvent.end }
+        assert(events.isEmpty == false, "Should never filter out all events, revise algorithm.")
+        
+        // multiple events
+        if events.count > 1 {
+            
+            return .multiple(events.count, firstEvent.start, summit.timeZone)
+            
+        } else {
+            
+            return .event(EventDetail(event: firstEvent, summit: summit))
+        }
     }
     
     // MARK: - Notifications
@@ -206,6 +265,18 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
 }
 
 extension ComplicationController {
+    
+    enum TimelineEntry {
+        
+        /// No Event
+        case none
+        
+        /// Multiple Events, with the date of the earliest one and time zone.
+        case multiple(Int, Date, String)
+        
+        /// A single event
+        case event(EventDetail)
+    }
     
     struct EventDetail: Unique {
         
