@@ -84,10 +84,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             controller.updateUI()
         
         }
-        
-        // update UI
-        self.updateUI()
-        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,6 +91,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // handoff
         self.userActivity?.becomeCurrent()
+        
+        // update UI
+        self.updateUI()
+        tableView.tableFooterView = UIView()
         
         // load feedback
         loadAverageRating()
@@ -236,19 +236,12 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             self.scheduledButton.image = nil
         }
         
-        // load feedback
-        
-        
         // get all reviews for this event
-        var realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
+        let realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
         
-        shouldShowReviews = eventCache.start < Date() && realmFeedback.isEmpty == false
+        let attendeeFeedback = Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@", event)
         
-        // filter current user's feedback
-        if let attendee = Store.shared.authenticatedMember?.attendeeRole {
-            
-            realmFeedback = realmFeedback.filter { $0.attendeeId != attendee.id }
-        }
+        shouldShowReviews = eventCache.start < Date() && (realmFeedback.count + attendeeFeedback.count) > 0
         
         feedbackList = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
         
