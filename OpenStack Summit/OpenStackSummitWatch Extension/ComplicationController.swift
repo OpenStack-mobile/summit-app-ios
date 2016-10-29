@@ -111,10 +111,11 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 < date })
             .prefix(limit)
+            .sort({ $0.0 < $0.1 })
         
         let entries = dates.map { ($0, self.entry(for: $0)) }
         
-        print("Requesting \(limit) entries before \(beforeDate):\n\(entries))")
+        print("Requesting \(limit) entries before \(beforeDate):\n\(dates.map({ $0.toFoundation() })))")
         
         let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
         
@@ -131,10 +132,11 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 > date })
             .prefix(limit)
+            .sort({ $0.0 > $0.1 })
         
         let entries = dates.map { ($0, self.entry(for: $0)) }
         
-        print("Requesting \(limit) entries after \(afterDate):\n\(entries))")
+        print("Requesting \(limit) entries after \(afterDate):\n\(dates.map({ $0.toFoundation() })))")
         
         let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
         
@@ -250,24 +252,27 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         // get sorted events
         var events = summit.schedule
             .filter({ $0.start >= date }) // only events that start after the specified date
-            .sort({ $0.0.start < $0.1.start && $0.0.end < $0.1.end })
+            .sort({ $0.0.start < $0.1.start })
         
-        // get first event
-        guard let firstEvent = events.first
+        guard events.isEmpty == false
             else { return .none }
         
-        // get overlapping events (only events that are within the timeframe of the first event)
-        events = events.filter { $0.start >= firstEvent.start && $0.start <= firstEvent.end }
+        // timeframe smallest and closest to requested date
+        let startDate = events.first!.start
+        let endDate = events.sort({ $0.0.end < $0.1.end }).first!.end
+        
+        // get overlapping events (only events that are within the timeframe)
+        events = events.filter { $0.start >= startDate && $0.start <= endDate }
         assert(events.isEmpty == false, "Should never filter out all events, revise algorithm.")
         
         // multiple events
         if events.count > 1 {
             
-            return .multiple(events.count, firstEvent.start, summit.timeZone)
+            return .multiple(events.count, startDate, summit.timeZone)
             
         } else {
             
-            return .event(EventDetail(event: firstEvent, summit: summit))
+            return .event(EventDetail(event: events.first!, summit: summit))
         }
     }
     
