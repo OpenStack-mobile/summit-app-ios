@@ -62,18 +62,24 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let entry = self.entry(for: Date())
         
+        let date: NSDate
+        
         switch entry {
             
         case .none, .multiple:
             
             // Update hourly by default
-            handler(NSDate(timeIntervalSinceNow: 60*60))
+            date = NSDate(timeIntervalSinceNow: 60*60)
             
         case let .event(event):
             
             // when current event ends
-            handler(event.end.toFoundation())
+            date = event.end.toFoundation()
         }
+        
+        print("Next complication update date: \(date)")
+        
+        handler(date)
     }
     
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
@@ -86,6 +92,8 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let entry = self.entry(for: Date())
         
+        print("Current timeline entry: \(entry)")
+        
         let template = self.template(for: complication, with: entry)
         
         let complicationEntry = CLKComplicationTimelineEntry(date: entry.start?.toFoundation() ?? NSDate(), complicationTemplate: template)
@@ -93,57 +101,54 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(complicationEntry)
     }
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate date: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
         
-        guard Store.shared.cache != nil
+        guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        var dates = [NSDate]()
+        let date = Date(foundation: beforeDate)
         
-        for index in 1 ... limit {
-            
-            let entryDate = date.mt_dateMinutesBefore(index)
-            
-            dates.append(entryDate)
-        }
+        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] }).filter({ $0 < date }).prefix(limit)
         
-        let entries = dates.map { CLKComplicationTimelineEntry(date: $0, complicationTemplate: self.template(for: complication, with: self.entry(for: Date(foundation: $0)))) }
+        print("Requesting \(limit) entries before \(date)")
+        
+        let entries = dates.map { CLKComplicationTimelineEntry(date: $0.toFoundation(), complicationTemplate: self.template(for: complication, with: self.entry(for: $0))) }
         
         handler(entries)
     }
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, afterDate date: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntriesForComplication(complication: CLKComplication, afterDate: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
         
-        guard Store.shared.cache != nil
+        guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        var dates = [NSDate]()
+        let date = Date(foundation: afterDate)
         
-        // get next `n` minutes
-        for index in 1 ... limit {
-            
-            let entryDate = date.mt_dateMinutesAfter(index)
-            
-            dates.append(entryDate)
-        }
+        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] }).filter({ $0 > date }).prefix(limit)
         
-        let entries = dates.map { CLKComplicationTimelineEntry(date: $0, complicationTemplate: self.template(for: complication, with: self.entry(for: Date(foundation: $0)))) }
+        print("Requesting \(limit) entries after \(date)")
+        
+        let entries = dates.map { CLKComplicationTimelineEntry(date: $0.toFoundation(), complicationTemplate: self.template(for: complication, with: self.entry(for: $0))) }
         
         handler(entries)
     }
     
     func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start.toFoundation()
         
-        handler(date?.toFoundation() ?? NSDate())
+        print("Timeline Start Date: \(date)")
+        
+        handler(date)
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.start
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.end.toFoundation()
         
-        handler(date?.toFoundation() ?? NSDate())
+        print("Timeline End Date: \(date)")
+        
+        handler(date)
     }
     
     // MARK: - Private Methods
@@ -246,8 +251,8 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let firstEvent = events.first
             else { return .none }
         
-        // get overlapping events (only events that start within the timeframe of the first event)
-        events = events.filter { $0.start <= firstEvent.end }
+        // get overlapping events (only events that are within the timeframe of the first event)
+        events = events.filter { $0.start >= firstEvent.start && $0.start <= firstEvent.end }
         assert(events.isEmpty == false, "Should never filter out all events, revise algorithm.")
         
         // multiple events
