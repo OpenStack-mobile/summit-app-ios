@@ -54,8 +54,7 @@ final class MenuInterfaceController: WKInterfaceController {
         
         // configure activity indicator
         loadingImageView.setImageNamed("Activity")
-        loading
-        ImageView.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+        loadingImageView.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
     }
     
     override func willActivate() {
