@@ -266,8 +266,8 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         let startDate = events.first!.start
         let endDate = events.sort({ $0.0.end < $0.1.end }).first!.end
         
-        // get overlapping events (only events that are within the timeframe)
-        events = events.filter { $0.start >= startDate && $0.start <= endDate }
+        // get events that are within the timeframe
+        events = summit.schedule.filter { $0.start <= startDate && $0.end >= endDate }
         assert(events.isEmpty == false, "Should never filter out all events, revise algorithm.")
         
         // multiple events
