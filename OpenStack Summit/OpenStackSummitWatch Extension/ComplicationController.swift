@@ -113,12 +113,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date(foundation: beforeDate)
         
-        var dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
-            .filter({ $0 < date })
-        
-        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
-            .prefix(limit)
-            .sort({ $0.0 < $0.1 })
+        let dates = summit.dates(before: date, limit: limit)
         
         let entries = dates.map { ($0, self.entry(for: $0)) }
         
@@ -138,12 +133,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date(foundation: afterDate)
         
-        var dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
-            .filter({ $0 > date })
-        
-        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
-            .prefix(limit)
-            .sort({ $0.0 > $0.1 })
+        let dates = summit.dates(after: date, limit: limit)
         
         let entries = dates.map { ($0, self.entry(for: $0)) }
         
@@ -340,5 +330,34 @@ extension ComplicationController {
             self.location = OpenStackSummitWatch_Extension.EventDetail.getLocation(event, summit: summit)
             self.timeZone = summit.timeZone
         }
+    }
+}
+
+// MARK: - Model Extensions
+
+extension Summit {
+    
+    private func dates(after date: Date, limit: Int = Int.max) -> [Date] {
+        
+        var dates = self.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+            .filter({ $0 > date })
+        
+        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
+            .prefix(limit)
+            .sort({ $0.0 > $0.1 })
+        
+        return dates
+    }
+    
+    private func dates(before date: Date, limit: Int = Int.max) -> [Date] {
+        
+        var dates = self.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+            .filter({ $0 < date })
+        
+        dates = dates.reduce([Date](), combine: { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }) // remove duplicates
+            .prefix(limit)
+            .sort({ $0.0 < $0.1 })
+        
+        return dates
     }
 }
