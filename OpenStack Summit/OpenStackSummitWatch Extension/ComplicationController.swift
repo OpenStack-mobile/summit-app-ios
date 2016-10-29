@@ -254,6 +254,10 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let summit = Store.shared.cache
             else { return .none }
         
+        // make sure date is one of the timeline dates before the current date
+        let timelineDates = summit.timelineDates
+        let date = timelineDates.filter({ $0 <= date }).first ?? date
+        
         // get sorted events
         var events = summit.schedule
             .filter({ $0.start >= date }) // only events that start after the specified date
@@ -337,7 +341,28 @@ extension ComplicationController {
 
 extension Summit {
     
-    private func dates(after date: Date, limit: Int = Int.max) -> [Date] {
+    var timelineDates: [Date] {
+        
+        return schedule.reduce([Date](), combine: {
+            
+            var newDates = $0.0
+            
+            if $0.0.contains($0.1.start) {
+                
+                newDates.append($0.1.start)
+            }
+            
+            if $0.0.contains($0.1.end) {
+                
+                newDates.append($0.1.end)
+            }
+            
+            return newDates
+        })
+        .sort()
+    }
+    
+    func dates(after date: Date, limit: Int = Int.max) -> [Date] {
         
         var dates = self.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 > date })
@@ -349,7 +374,7 @@ extension Summit {
         return dates
     }
     
-    private func dates(before date: Date, limit: Int = Int.max) -> [Date] {
+    func dates(before date: Date, limit: Int = Int.max) -> [Date] {
         
         var dates = self.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
             .filter({ $0 < date })
