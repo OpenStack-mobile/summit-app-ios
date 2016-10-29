@@ -108,13 +108,17 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date(foundation: beforeDate)
         
-        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] }).filter({ $0 < date }).prefix(limit)
+        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+            .filter({ $0 < date })
+            .prefix(limit)
         
-        print("Requesting \(limit) entries before \(date)")
+        let entries = dates.map { ($0, self.entry(for: $0)) }
         
-        let entries = dates.map { CLKComplicationTimelineEntry(date: $0.toFoundation(), complicationTemplate: self.template(for: complication, with: self.entry(for: $0))) }
+        print("Requesting \(limit) entries before \(beforeDate):\n\(entries))")
         
-        handler(entries)
+        let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
+        
+        handler(complicationEntries)
     }
     
     func getTimelineEntriesForComplication(complication: CLKComplication, afterDate: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
@@ -124,13 +128,17 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let date = Date(foundation: afterDate)
         
-        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] }).filter({ $0 > date }).prefix(limit)
+        let dates = summit.schedule.reduce([Date](), combine: { $0.0 + [$0.1.start, $0.1.end] })
+            .filter({ $0 > date })
+            .prefix(limit)
         
-        print("Requesting \(limit) entries after \(date)")
+        let entries = dates.map { ($0, self.entry(for: $0)) }
         
-        let entries = dates.map { CLKComplicationTimelineEntry(date: $0.toFoundation(), complicationTemplate: self.template(for: complication, with: self.entry(for: $0))) }
+        print("Requesting \(limit) entries after \(afterDate):\n\(entries))")
         
-        handler(entries)
+        let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
+        
+        handler(complicationEntries)
     }
     
     func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
@@ -240,12 +248,9 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             else { return .none }
         
         // get sorted events
-        // had to break into multiple expressions for compiler
-        var events = summit.schedule.sort({ $0.0.start < $0.1.start && $0.0.end < $0.1.end })
-            .sort({ $0.0.name.caseInsensitiveCompare($0.1.name) == .OrderedAscending })
-            
-        // only events that start after the specified date
-        .filter({ $0.start >= date })
+        var events = summit.schedule
+            .filter({ $0.start >= date }) // only events that start after the specified date
+            .sort({ $0.0.start < $0.1.start && $0.0.end < $0.1.end })
         
         // get first event
         guard let firstEvent = events.first
