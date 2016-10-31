@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16B2553a" minimumToolsVersion="Xcode 7.0">
+    <entity name="Company" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="sponsors" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Event" syncable="YES">
+        <attribute name="allowFeedback" attributeType="Boolean" syncable="YES"/>
+        <attribute name="averageFeedback" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="rsvp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="start" attributeType="Date" syncable="YES"/>
+        <relationship name="eventType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventType" inverseName="events" inverseEntity="EventType" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
+        <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="events" inverseEntity="Company" syncable="YES"/>
+        <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="schedule" inverseEntity="Summit" syncable="YES"/>
+        <relationship name="summitTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SummitType" inverseName="events" inverseEntity="SummitType" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="events" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="event" inverseEntity="Video" syncable="YES"/>
+    </entity>
+    <entity name="EventType" syncable="YES">
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="eventType" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Location" isAbstract="YES" syncable="YES">
+        <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Presentation" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Summit" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" syncable="YES"/>
+        <relationship name="schedule" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="summit" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="SummitType" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="summitTypes" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Tag" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="tags" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Venue" parentEntity="Location" syncable="YES"/>
+    <entity name="VenueRoom" parentEntity="Location" syncable="YES"/>
+    <entity name="Video" syncable="YES">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="videos" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Summit" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="30"/>
+        <element name="Company" positionX="-36" positionY="18" width="128" height="90"/>
+        <element name="EventType" positionX="-18" positionY="81" width="128" height="60"/>
+        <element name="SummitType" positionX="0" positionY="99" width="128" height="75"/>
+        <element name="Tag" positionX="18" positionY="117" width="128" height="90"/>
+        <element name="Venue" positionX="27" positionY="153" width="128" height="45"/>
+        <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="45"/>
+        <element name="Location" positionX="-18" positionY="108" width="128" height="105"/>
+        <element name="Presentation" positionX="-9" positionY="126" width="128" height="30"/>
+        <element name="Video" positionX="0" positionY="126" width="128" height="30"/>
+    </elements>
+</model>
