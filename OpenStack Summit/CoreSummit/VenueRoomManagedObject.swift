@@ -11,7 +11,7 @@ import CoreData
 
 public final class VenueRoomManagedObject: LocationManagedObject {
     
-    @NSManaged public var capacity: Int32
+    @NSManaged public var capacity: NSNumber?
     
     @NSManaged public var venue: VenueManagedObject
     
@@ -22,11 +22,12 @@ extension VenueRoom: CoreDataDecodable {
     
     public init(managedObject: VenueRoomManagedObject) {
         
-        self.identifier = Int(managedObject.id)
+        self.identifier = managedObject.identifier
         self.name = managedObject.name
+        self.capacity = managedObject.capacity?.integerValue
         self.descriptionText = managedObject.descriptionText
-        self.venue = Int(managedObject.venue.id)
-        self.floor = Int(managedObject.floor.id)
+        self.venue = managedObject.venue.identifier
+        self.floor = managedObject.floor.identifier
     }
 }
 
@@ -34,12 +35,13 @@ extension VenueRoom: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> VenueRoomManagedObject {
         
-        let managedObject = try ManagedObject.cached(identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
+        let managedObject = try cached(context)
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.venue = try VenueManagedObject.cached(venue, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
-        managedObject.floor = try VenueFloorManagedObject.cached(floor, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
+        managedObject.capacity = capacity != nil ? NSNumber(int: Int32(capacity!)) : nil
+        managedObject.venue = try context.relationshipFault(venue)
+        managedObject.floor = try context.relationshipFault(floor)
         
         return managedObject
     }

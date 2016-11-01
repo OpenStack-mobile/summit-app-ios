@@ -85,31 +85,9 @@ public extension CollectionType where Generator.Element: Entity {
 public extension CoreDataEncodable where Self: Unique, ManagedObject: Entity {
     
     @inline(__always)
-    static func save(identifiers: [Identifier], context: NSManagedObjectContext) throws -> Set<ManagedObject> {
-        
-        let managedObjects = try identifiers.map({ try ManagedObject.cached($0, context: context, returnsObjectsAsFaults: true, includesSubentities: true) })
-        
-        return Set(managedObjects)
-    }
-    
-    @inline(__always)
     func cached(context: NSManagedObjectContext) throws -> ManagedObject {
         
         return try ManagedObject.cached(self.identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: true)
-    }
-}
-
-public extension CoreDataDecodable where ManagedObject: Entity {
-    
-    @inline(__always)
-    static func from(identifiers: [Identifier], context: NSManagedObjectContext) throws -> [Self] {
-        
-        return try identifiers.map {
-            
-            let managedObject = try ManagedObject.cached($0, context: context, returnsObjectsAsFaults: false, includesSubentities: true)
-            
-            return self.init(managedObject: managedObject)
-        }
     }
 }
 

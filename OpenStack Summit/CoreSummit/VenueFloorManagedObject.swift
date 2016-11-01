@@ -46,7 +46,7 @@ extension VenueFloor: CoreDataEncodable {
         managedObject.descriptionText = descriptionText
         managedObject.number = Int32(number)
         managedObject.imageURL = imageURL
-        managedObject.venue = try VenueManagedObject.cached(identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
+        managedObject.venue = try context.relationshipFault(venue)
         
         return managedObject
     }

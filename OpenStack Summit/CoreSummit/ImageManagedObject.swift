@@ -18,7 +18,7 @@ extension Image: CoreDataDecodable {
     
     public init(managedObject: ImageManagedObject) {
         
-        self.identifier = Int(managedObject.id)
+        self.identifier = managedObject.identifier
         self.url = managedObject.url
     }
 }
@@ -27,7 +27,7 @@ extension Image: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> ImageManagedObject {
         
-        let managedObject = try ManagedObject.cached(identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
+        let managedObject = try cached(context)
         
         managedObject.url = url
         
