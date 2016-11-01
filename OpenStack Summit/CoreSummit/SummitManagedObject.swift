@@ -10,7 +10,10 @@ import Foundation
 import CoreData
 
 public final class SummitManagedObject: Entity {
-        
+    
+    /// The date this object was fetched from the server.
+    @NSManaged public var cached: NSDate?
+    
     @NSManaged public var name: String
     
     @NSManaged public var timeZone: String
@@ -23,21 +26,21 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var startShowingVenues: NSDate?
     
-    @NSManaged public var sponsors: Set<CompanyManagedObject>?
+    @NSManaged public var sponsors: Set<CompanyManagedObject>
     
-    @NSManaged public var speakers: Set<SpeakerManagedObject>?
+    @NSManaged public var speakers: Set<SpeakerManagedObject>
     
-    @NSManaged public var summitTypes: Set<SummitTypeManagedObject>?
+    @NSManaged public var summitTypes: Set<SummitTypeManagedObject>
     
-    @NSManaged public var ticketTypes: Set<TicketTypeManagedObject>?
+    @NSManaged public var ticketTypes: Set<TicketTypeManagedObject>
     
-    @NSManaged public var locations: Set<LocationManagedObject>?
+    @NSManaged public var locations: Set<LocationManagedObject>
     
-    @NSManaged public var tracks: Set<TrackManagedObject>?
+    @NSManaged public var tracks: Set<TrackManagedObject>
     
-    @NSManaged public var trackGroups: Set<TrackGroupManagedObject>?
+    @NSManaged public var trackGroups: Set<TrackGroupManagedObject>
     
-    @NSManaged public var eventTypes: Set<EventTypeManagedObject>?
+    @NSManaged public var eventTypes: Set<EventTypeManagedObject>
     
-    @NSManaged public var schedule: Set<EventManagedObject>?
+    @NSManaged public var schedule: Set<EventManagedObject>
 }

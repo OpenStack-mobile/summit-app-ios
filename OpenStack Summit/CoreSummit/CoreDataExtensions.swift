@@ -34,7 +34,7 @@ public extension NSManagedObjectContext {
         return
     }
     
-    func findOrCreate<T: NSManagedObject>(entity: NSEntityDescription, resourceID: String, identifierProperty: String) throws -> T {
+    func findOrCreate<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T {
         
         // get cached resource...
         
@@ -42,13 +42,13 @@ public extension NSManagedObjectContext {
         
         fetchRequest.fetchLimit = 1
         
-        fetchRequest.includesSubentities = false
+        fetchRequest.includesSubentities = includesSubentities
+        
+        fetchRequest.returnsObjectsAsFaults = returnsObjectsAsFaults
         
         // create predicate
         
         fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicateModifier.DirectPredicateModifier, type: NSPredicateOperatorType.EqualToPredicateOperatorType, options: NSComparisonPredicateOptions.NormalizedPredicateOption)
-        
-        fetchRequest.returnsObjectsAsFaults = false
         
         // fetch
         
@@ -76,7 +76,7 @@ public extension NSManagedObjectContext {
         return resource
     }
     
-    func find<T: NSManagedObject>(entity: NSEntityDescription, resourceID: String, identifierProperty: String) throws -> T? {
+    func find<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T? {
         
         // get cached resource...
         
@@ -84,13 +84,13 @@ public extension NSManagedObjectContext {
         
         fetchRequest.fetchLimit = 1
         
-        fetchRequest.includesSubentities = false
+        fetchRequest.includesSubentities = includesSubentities
+        
+        fetchRequest.returnsObjectsAsFaults = returnsObjectsAsFaults
         
         // create predicate
         
         fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicateModifier.DirectPredicateModifier, type: NSPredicateOperatorType.EqualToPredicateOperatorType, options: NSComparisonPredicateOptions.NormalizedPredicateOption)
-        
-        fetchRequest.returnsObjectsAsFaults = false
         
         // fetch
         

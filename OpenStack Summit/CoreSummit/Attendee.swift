@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct SummitAttendee: Unique {
+public struct Attendee: Unique {
     
     public let identifier: Identifier
     
@@ -37,7 +37,7 @@ public struct SummitAttendee: Unique {
 
 // MARK: - Extensions
 
-extension SummitAttendee: Person {
+extension Attendee: Person {
     
     public var title: String? { return nil }
 }

@@ -21,15 +21,16 @@ public extension CollectionType where Generator.Element: CoreDataEncodable {
     
     func save(context: NSManagedObjectContext) throws -> [Self.Generator.Element.ManagedObject] {
         
-        var managedObjects: [Self.Generator.Element.ManagedObject] = []
+        var managedObjects = ContiguousArray<Generator.Element.ManagedObject>()
+        managedObjects.reserveCapacity(numericCast(self.count))
         
-        for element in self {
+        for (index, element) in self.enumerate() {
             
             let managedObject = try element.save(context)
             
-            managedObjects.append(managedObject)
+            managedObjects[index] = managedObject
         }
         
-        return managedObjects
+        return Array(managedObjects)
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct NonConfirmedSummitAttendee: Named {
+public struct NonConfirmedAttendee: Named {
     
     public let identifier: Identifier
     
@@ -15,7 +15,7 @@ public struct NonConfirmedSummitAttendee: Named {
     public var lastName: String
 }
 
-public extension NonConfirmedSummitAttendee {
+public extension NonConfirmedAttendee {
     
     var name: String { return firstName + " " + lastName }
 }

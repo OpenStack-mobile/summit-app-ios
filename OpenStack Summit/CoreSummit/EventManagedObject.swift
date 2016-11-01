@@ -27,15 +27,15 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var eventType: EventTypeManagedObject
     
-    @NSManaged public var summitTypes: Set<SummitTypeManagedObject>?
+    @NSManaged public var summitTypes: Set<SummitTypeManagedObject>
     
     @NSManaged public var sponsors: Set<CompanyManagedObject>
     
-    @NSManaged public var tags: Set<TagManagedObject>?
+    @NSManaged public var tags: Set<TagManagedObject>
     
-    @NSManaged public var location: LocationManagedObject?
+    @NSManaged public var location: LocationManagedObject
     
-    @NSManaged  public var presentation: PresentationManagedObject?
+    @NSManaged public var presentation: PresentationManagedObject?
     
-    @NSManaged public var videos: Set<VideoManagedObject>?
+    @NSManaged public var videos: Set<VideoManagedObject>
 }

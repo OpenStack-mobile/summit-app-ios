@@ -19,7 +19,7 @@ public class RealmSummitAttendee: RealmPerson {
 
 // MARK: - Encoding
 
-extension SummitAttendee: RealmDecodable {
+extension Attendee: RealmDecodable {
     
     public init(realmEntity: RealmSummitAttendee) {
         
@@ -39,7 +39,7 @@ extension SummitAttendee: RealmDecodable {
     }
 }
 
-extension SummitAttendee: RealmEncodable {
+extension Attendee: RealmEncodable {
     
     public func save(realm: Realm) -> RealmSummitAttendee {
         

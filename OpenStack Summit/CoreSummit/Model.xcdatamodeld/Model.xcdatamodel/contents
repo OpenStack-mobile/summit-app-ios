@@ -44,6 +44,7 @@
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="speakers" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="Summit" representedClassName=".SummitManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="end" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -103,7 +104,7 @@
         <element name="EventType" positionX="-18" positionY="81" width="128" height="105"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="120"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="75"/>
-        <element name="Summit" positionX="-63" positionY="-18" width="128" height="285"/>
+        <element name="Summit" positionX="-63" positionY="-18" width="128" height="300"/>
         <element name="SummitType" positionX="0" positionY="99" width="128" height="105"/>
         <element name="Tag" positionX="18" positionY="117" width="128" height="90"/>
         <element name="Venue" positionX="27" positionY="153" width="128" height="45"/>

@@ -35,7 +35,7 @@ public extension NSManagedObjectContext {
 
 public extension CoreDataDecodable {
     
-    static func from<C: CollectionType where C.Generator.Element == ManagedObject>(managedObjects: C) -> [Self] {
+    static func from<C: CollectionType where C.Generator.Element == ManagedObject>(managedObjects managedObjects: C) -> [Self] {
         
         return managedObjects.map { (managedObject) in return self.init(managedObject: managedObject) }
     }

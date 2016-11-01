@@ -14,12 +14,12 @@ import AeroGearOAuth2
 public extension Store {
     
     /// The member that is logged in. Only valid for confirmed attendees.
-    var authenticatedMember: RealmMember? {
+    var authenticatedMember: MemberManagedObject? {
         
         guard let session = self.session,
             let sessionMember = session.member,
             case let .attendee(memberID) = sessionMember,
-            let member = RealmMember.find(memberID, realm: self.realm)
+            let member = MemberManagedObject.find(memberID, realm: self.realm)
             else { return nil }
         
         return member

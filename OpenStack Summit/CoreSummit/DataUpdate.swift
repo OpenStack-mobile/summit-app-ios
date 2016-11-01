@@ -69,10 +69,10 @@ public extension DataUpdate {
             
             switch self {
             case .WipeData: return nil
-            case .MySchedule: return CoreSummit.SummitEvent.DataUpdate.self
+            case .MySchedule: return CoreSummit.Event.DataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
-            case .Presentation: return CoreSummit.SummitEvent.DataUpdate.self
-            case .SummitEvent: return CoreSummit.SummitEvent.DataUpdate.self
+            case .Presentation: return CoreSummit.Event.DataUpdate.self
+            case .SummitEvent: return CoreSummit.Event.DataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
             case .PresentationSpeaker: return CoreSummit.PresentationSpeaker.self
@@ -240,7 +240,7 @@ extension Updatable where Self: RealmEncodable {
 
 // Conform to protocol
 extension Summit.DataUpdate: Updatable { }
-extension SummitEvent.DataUpdate: Updatable { }
+extension Event.DataUpdate: Updatable { }
 extension SummitType: Updatable { }
 extension EventType: Updatable { }
 extension PresentationSpeaker: Updatable { }
