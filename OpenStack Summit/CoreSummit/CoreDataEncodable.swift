@@ -19,7 +19,7 @@ public protocol CoreDataEncodable {
 
 public extension CollectionType where Generator.Element: CoreDataEncodable {
     
-    func save(context: NSManagedObjectContext) throws -> [Self.Generator.Element.ManagedObject] {
+    func save(context: NSManagedObjectContext) throws -> Set<Self.Generator.Element.ManagedObject> {
         
         var managedObjects = ContiguousArray<Generator.Element.ManagedObject>()
         managedObjects.reserveCapacity(numericCast(self.count))
@@ -31,6 +31,6 @@ public extension CollectionType where Generator.Element: CoreDataEncodable {
             managedObjects[index] = managedObject
         }
         
-        return Array(managedObjects)
+        return Set(managedObjects)
     }
 }

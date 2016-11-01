@@ -8,7 +8,6 @@
 
 import UIKit
 import Realm
-import RealmSwift
 import CoreSummit
 
 @UIApplicationMain

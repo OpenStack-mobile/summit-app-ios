@@ -9,7 +9,6 @@
 import SwiftFoundation
 import UIKit
 import CoreSummit
-import RealmSwift
 
 /// View Controller that contains a `UITextView`. Handles URLs internally in the app.
 protocol TextViewController: class, UITextViewDelegate, SummitActivityHandlingViewController { }

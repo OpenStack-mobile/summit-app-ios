@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16B2553a" minimumToolsVersion="Xcode 7.0">
     <entity name="Company" representedClassName=".CompanyManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="sponsors" inverseEntity="Event" syncable="YES"/>
@@ -9,6 +10,7 @@
     <entity name="Event" representedClassName=".EventManagedObject" syncable="YES">
         <attribute name="allowFeedback" attributeType="Boolean" syncable="YES"/>
         <attribute name="averageFeedback" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -24,12 +26,21 @@
         <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="event" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="EventType" representedClassName=".EventTypeManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="eventType" inverseEntity="Event" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="eventTypes" inverseEntity="Summit" syncable="YES"/>
     </entity>
+    <entity name="Image" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="url" attributeType="String" syncable="YES"/>
+        <relationship name="venueImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="images" inverseEntity="Venue" syncable="YES"/>
+        <relationship name="venueMap" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="maps" inverseEntity="Venue" syncable="YES"/>
+    </entity>
     <entity name="Location" representedClassName=".LocationManagedObject" isAbstract="YES" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -37,16 +48,20 @@
         <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="locations" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="Presentation" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="presentation" inverseEntity="Event" syncable="YES"/>
     </entity>
     <entity name="Speaker" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="speakers" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="Summit" representedClassName=".SummitManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="cached1" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="end" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="initialDataLoad" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="start" attributeType="Date" syncable="YES"/>
         <attribute name="startShowingVenues" optional="YES" attributeType="Date" syncable="YES"/>
@@ -63,17 +78,20 @@
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="summits" inverseEntity="Track" syncable="YES"/>
     </entity>
     <entity name="SummitType" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="summitTypes" inverseEntity="Event" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="summitTypes" inverseEntity="Summit" syncable="YES"/>
         <relationship name="ticketTypeAllowedSummitTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TicketType" inverseName="allowedSummitTypes" inverseEntity="TicketType" syncable="YES"/>
     </entity>
     <entity name="Tag" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="tags" inverseEntity="Event" syncable="YES"/>
     </entity>
     <entity name="TicketType" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -81,38 +99,71 @@
         <relationship name="summits" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="ticketTypes" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="Track" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="tracks" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="TrackGroup" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="summits" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="trackGroups" inverseEntity="Summit" syncable="YES"/>
     </entity>
-    <entity name="Venue" parentEntity="Location" syncable="YES"/>
-    <entity name="VenueRoom" parentEntity="Location" syncable="YES"/>
+    <entity name="Venue" representedClassName=".VenueManagedObject" parentEntity="Location" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationType" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="venueType" attributeType="String" syncable="YES"/>
+        <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="floors" toMany="YES" deletionRule="Nullify" destinationEntity="VenueFloor" inverseName="venue" inverseEntity="VenueFloor" syncable="YES"/>
+        <relationship name="images" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="venueImage" inverseEntity="Image" syncable="YES"/>
+        <relationship name="maps" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="venueMap" inverseEntity="Image" syncable="YES"/>
+        <relationship name="rooms" toMany="YES" deletionRule="Nullify" destinationEntity="VenueRoom" inverseName="venue" inverseEntity="VenueRoom" syncable="YES"/>
+    </entity>
+    <entity name="VenueFloor" representedClassName=".VenueFloorManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="rooms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VenueRoom" inverseName="floor" inverseEntity="VenueRoom" syncable="YES"/>
+        <relationship name="venue" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="floors" inverseEntity="Venue" syncable="YES"/>
+    </entity>
+    <entity name="VenueRoom" parentEntity="Location" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="capacity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="floor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VenueFloor" inverseName="rooms" inverseEntity="VenueFloor" syncable="YES"/>
+        <relationship name="venue" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="rooms" inverseEntity="Venue" syncable="YES"/>
+    </entity>
     <entity name="Video" representedClassName=".VideoManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayOnSite" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="featured" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="youtube" attributeType="String" syncable="YES"/>
-        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="videos" inverseEntity="Event" syncable="YES"/>
+        <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="videos" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Company" positionX="-36" positionY="18" width="128" height="105"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="270"/>
-        <element name="EventType" positionX="-18" positionY="81" width="128" height="105"/>
-        <element name="Location" positionX="-18" positionY="108" width="128" height="120"/>
-        <element name="Presentation" positionX="-9" positionY="126" width="128" height="75"/>
-        <element name="Summit" positionX="-63" positionY="-18" width="128" height="300"/>
-        <element name="SummitType" positionX="0" positionY="99" width="128" height="105"/>
-        <element name="Tag" positionX="18" positionY="117" width="128" height="90"/>
-        <element name="Venue" positionX="27" positionY="153" width="128" height="45"/>
-        <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="45"/>
-        <element name="Video" positionX="0" positionY="126" width="128" height="30"/>
-        <element name="Speaker" positionX="-27" positionY="108" width="128" height="60"/>
-        <element name="TicketType" positionX="-18" positionY="117" width="128" height="120"/>
-        <element name="Track" positionX="-9" positionY="126" width="128" height="75"/>
-        <element name="TrackGroup" positionX="0" positionY="135" width="128" height="75"/>
+        <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="285"/>
+        <element name="EventType" positionX="-18" positionY="81" width="128" height="120"/>
+        <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
+        <element name="Presentation" positionX="-9" positionY="126" width="128" height="90"/>
+        <element name="Summit" positionX="-63" positionY="-18" width="128" height="330"/>
+        <element name="SummitType" positionX="0" positionY="99" width="128" height="120"/>
+        <element name="Tag" positionX="18" positionY="117" width="128" height="105"/>
+        <element name="Venue" positionX="27" positionY="153" width="128" height="255"/>
+        <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="105"/>
+        <element name="Video" positionX="0" positionY="126" width="128" height="150"/>
+        <element name="Speaker" positionX="-27" positionY="108" width="128" height="75"/>
+        <element name="TicketType" positionX="-18" positionY="117" width="128" height="135"/>
+        <element name="Track" positionX="-9" positionY="126" width="128" height="90"/>
+        <element name="TrackGroup" positionX="0" positionY="135" width="128" height="90"/>
+        <element name="Image" positionX="9" positionY="171" width="128" height="120"/>
+        <element name="VenueFloor" positionX="27" positionY="180" width="128" height="135"/>
     </elements>
 </model>

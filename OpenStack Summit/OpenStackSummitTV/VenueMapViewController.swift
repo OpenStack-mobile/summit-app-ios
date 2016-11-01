@@ -11,7 +11,6 @@ import UIKit
 import CoreLocation
 import MapKit
 import CoreSummit
-import RealmSwift
 
 @objc(OSSTVVenueMapViewController)
 final class VenueMapViewController: UIViewController, MKMapViewDelegate {

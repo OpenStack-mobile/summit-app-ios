@@ -7,7 +7,6 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 
 public class RealmSummit: RealmNamed {
     public dynamic var startDate = NSDate(timeIntervalSince1970: 1)

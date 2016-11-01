@@ -9,7 +9,6 @@
 import Foundation
 import SwiftFoundation
 import CoreSpotlight
-import RealmSwift
 import MobileCoreServices
 import CoreSummit
 import Haneke

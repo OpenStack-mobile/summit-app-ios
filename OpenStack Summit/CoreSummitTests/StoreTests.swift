@@ -8,7 +8,6 @@
 
 import XCTest
 import SwiftFoundation
-import RealmSwift
 import CoreSummit
 
 final class StoreTests: XCTestCase {

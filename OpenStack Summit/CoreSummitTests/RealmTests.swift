@@ -9,7 +9,6 @@
 import XCTest
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
 
 final class RealmTests: XCTestCase {
     

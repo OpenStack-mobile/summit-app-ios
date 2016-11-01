@@ -34,6 +34,7 @@ public extension NSManagedObjectContext {
         return
     }
     
+    @inline(__always)
     func findOrCreate<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T {
         
         // get cached resource...
@@ -76,6 +77,7 @@ public extension NSManagedObjectContext {
         return resource
     }
     
+    @inline(__always)
     func find<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T? {
         
         // get cached resource...

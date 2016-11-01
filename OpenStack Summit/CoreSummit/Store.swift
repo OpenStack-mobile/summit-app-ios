@@ -11,7 +11,6 @@ import AeroGearHttp
 import AeroGearOAuth2
 
 #if CORESUMMITREALM
-import RealmSwift
 #endif
 
 /// Class used for requesting and caching data from the server.

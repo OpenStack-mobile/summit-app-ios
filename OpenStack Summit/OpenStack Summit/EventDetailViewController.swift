@@ -13,7 +13,6 @@ import AHKActionSheet
 import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
 import XCDYouTubeKit
     
 final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController {

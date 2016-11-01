@@ -7,7 +7,6 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 import AeroGearHttp
 import AeroGearOAuth2
 

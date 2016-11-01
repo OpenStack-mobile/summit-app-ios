@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 import CoreSummit
 
 public struct FeedbackDetail: Unique {

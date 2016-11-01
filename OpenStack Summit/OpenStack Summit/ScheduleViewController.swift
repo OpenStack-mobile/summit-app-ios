@@ -10,7 +10,6 @@ import SwiftFoundation
 import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
-import RealmSwift
 
 class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     

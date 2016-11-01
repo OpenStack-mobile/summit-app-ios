@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CoreSummit
-import RealmSwift
 import Haneke
 
 final class SpeakerSearchResultsViewController: UITableViewController, UISearchResultsUpdating {

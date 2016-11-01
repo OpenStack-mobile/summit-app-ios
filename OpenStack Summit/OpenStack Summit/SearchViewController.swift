@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 import CoreSummit
 
 final class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RevealViewController, MessageEnabledViewController {

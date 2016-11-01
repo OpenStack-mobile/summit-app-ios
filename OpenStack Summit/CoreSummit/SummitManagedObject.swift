@@ -11,8 +11,8 @@ import CoreData
 
 public final class SummitManagedObject: Entity {
     
-    /// The date this object was fetched from the server.
-    @NSManaged public var cached: NSDate?
+    /// The date this summit was fetched from the server.
+    @NSManaged public var initialDataLoad: NSDate?
     
     @NSManaged public var name: String
     

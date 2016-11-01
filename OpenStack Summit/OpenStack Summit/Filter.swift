@@ -7,7 +7,6 @@
 //
 
 import CoreSummit
-import RealmSwift
 
 enum FilterSectionType {
     

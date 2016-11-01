@@ -9,7 +9,6 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
-import RealmSwift
 
 final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
     

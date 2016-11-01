@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreSummit
-import RealmSwift
 
 final class AboutViewController: UIViewController, RevealViewController {
 

@@ -8,12 +8,10 @@
 
 import UIKit
 import CoreSummit
-import RealmSwift
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
 import Parse
 import CoreSpotlight
-import RealmSwift
 import XCDYouTubeKit
 import Fabric
 import Crashlytics

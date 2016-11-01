@@ -14,6 +14,9 @@ public class Entity: NSManagedObject {
     
     /// The unique identifier of this entity.
     @NSManaged final var id: Int64
+    
+    /// The date this object was stored in its entirety.
+    @NSManaged final var cached: NSDate?
 }
 
 // MARK: - Extensions
@@ -21,6 +24,8 @@ public class Entity: NSManagedObject {
 public extension Entity {
     
     static var identifierProperty: String { return "id" }
+    
+    var identifier: Int { return Int(self.id) }
     
     static func entity(in context: NSManagedObjectContext) -> NSEntityDescription {
         
@@ -59,16 +64,16 @@ public extension Entity {
     }
     
     /// Find or create.
-    static func cached(identifier: Int,
+    static func cached(identifier: Identifier,
                        context: NSManagedObjectContext,
                        returnsObjectsAsFaults: Bool = true,
-                       includesSubentities: Bool = true) -> Self {
+                       includesSubentities: Bool = true) throws -> Self {
         
         let entity = self.entity(in: context)
         
         let resourceID = NSNumber(longLong: Int64(identifier))
         
-        return try! context.findOrCreate(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
+        return try context.findOrCreate(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
     }
 }
 
@@ -77,18 +82,66 @@ public extension CollectionType where Generator.Element: Entity {
     var identifiers: [Identifier] { return self.map { Int($0.id) } }
 }
 
-public extension CoreDataEncodable where ManagedObject: Entity {
+public extension CoreDataEncodable where Self: Unique, ManagedObject: Entity {
     
-    static func save(identifiers: [Identifier], context: NSManagedObjectContext) -> Set<ManagedObject> {
+    @inline(__always)
+    static func save(identifiers: [Identifier], context: NSManagedObjectContext) throws -> Set<ManagedObject> {
         
-        return Set(identifiers.map({ ManagedObject.cached($0, context: context, returnsObjectsAsFaults: true, includesSubentities: true) }))
+        let managedObjects = try identifiers.map({ try ManagedObject.cached($0, context: context, returnsObjectsAsFaults: true, includesSubentities: true) })
+        
+        return Set(managedObjects)
+    }
+    
+    @inline(__always)
+    func cached(context: NSManagedObjectContext) throws -> ManagedObject {
+        
+        return try ManagedObject.cached(self.identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: true)
     }
 }
 
 public extension CoreDataDecodable where ManagedObject: Entity {
     
-    static func from(identifiers: [Identifier], context: NSManagedObjectContext) -> [Self] {
+    @inline(__always)
+    static func from(identifiers: [Identifier], context: NSManagedObjectContext) throws -> [Self] {
         
-        return identifiers.map { self.init(managedObject: ManagedObject.cached($0, context: context, returnsObjectsAsFaults: false, includesSubentities: true)) }
+        return try identifiers.map {
+            
+            let managedObject = try ManagedObject.cached($0, context: context, returnsObjectsAsFaults: false, includesSubentities: true)
+            
+            return self.init(managedObject: managedObject)
+        }
+    }
+}
+
+internal extension NSManagedObjectContext {
+    
+    /// Caches to-many relationship.
+    @inline(__always)
+    func relationshipFault<T: CoreDataEncodable>(encodables: [T]) throws -> Set<T.ManagedObject> {
+        
+        return try encodables.save(self)
+    }
+    
+    /// Caches to-one relationship.
+    @inline(__always)
+    func relationshipFault<T: CoreDataEncodable>(encodable: T) throws -> T.ManagedObject {
+        
+        return try encodable.save(self)
+    }
+    
+    /// Returns faults for to-many relationships.
+    @inline(__always)
+    func relationshipFault<T: CoreDataEncodable where T.ManagedObject: Entity>(identifiers: [Identifier]) throws -> Set<T.ManagedObject> {
+        
+        let managedObjects = try identifiers.map { try T.ManagedObject.cached($0, context: self, returnsObjectsAsFaults: true, includesSubentities: true) }
+        
+        return Set(managedObjects)
+    }
+    
+    /// Returns faults for to-one relationship.
+    @inline(__always)
+    func relationshipFault<ManagedObject: Entity>(identifier: Identifier) throws -> ManagedObject {
+        
+        return try ManagedObject.cached(identifier, context: self, returnsObjectsAsFaults: true, includesSubentities: true)
     }
 }

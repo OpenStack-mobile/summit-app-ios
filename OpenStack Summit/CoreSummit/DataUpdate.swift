@@ -7,7 +7,6 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 
 public struct DataUpdate {
     

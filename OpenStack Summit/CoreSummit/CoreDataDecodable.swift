@@ -22,7 +22,7 @@ public extension NSManagedObjectContext {
     /// Executes a fetch request and returns ```CoreDataDecodable``` types.
     func fetch<T: CoreDataDecodable>(fetchRequest: NSFetchRequest) throws -> [T] {
         
-        guard fetchRequest.resultType == NSFetchRequestResultType(rawValue: 0x00)
+        guard fetchRequest.resultType == .ManagedObjectResultType
             else { fatalError("Method only supports fetch requests with NSFetchRequestManagedObjectResultType") }
         
         let managedObjects = try self.executeFetchRequest(fetchRequest) as! [T.ManagedObject]

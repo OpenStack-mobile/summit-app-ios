@@ -7,7 +7,6 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -19,7 +18,7 @@ public extension Store {
         guard let session = self.session,
             let sessionMember = session.member,
             case let .attendee(memberID) = sessionMember,
-            let member = MemberManagedObject.find(memberID, realm: self.realm)
+            let member = MemberManagedObject.find(memberID, context: self.managedObjectContext)
             else { return nil }
         
         return member

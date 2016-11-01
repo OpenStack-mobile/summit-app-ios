@@ -9,7 +9,6 @@
 import UIKit
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
 
 @objc(OSSTVEventsViewController)
 final class EventsViewController: UITableViewController {
