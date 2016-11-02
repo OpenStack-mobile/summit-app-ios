@@ -35,7 +35,7 @@ extension Event: WebConvertible {
     public static let webPathComponent = WebPathComponent.events
 }
 
-extension PresentationSpeaker: WebConvertible {
+extension Speaker: WebConvertible {
     
     public static let webPathComponent = WebPathComponent.speakers
 }

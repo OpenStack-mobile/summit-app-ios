@@ -1,5 +1,5 @@
 //
-//  EventTypeManagedObject.swift
+//  TrackManagedObject.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 11/1/16.
@@ -9,33 +9,31 @@
 import Foundation
 import CoreData
 
-public final class EventTypeManagedObject: Entity {
+public final class TrackManagedObject: Entity {
     
     @NSManaged public var name: String
     
-    // Inverse Relationships
-    
-    @NSManaged public var events: Set<EventManagedObject>
-    
-    @NSManaged public var summits: Set<SummitManagedObject>
+    @NSManaged public var groups: Set<TrackGroupManagedObject>
 }
 
-extension EventType: CoreDataDecodable {
+extension Track: CoreDataDecodable {
     
-    public init(managedObject: EventTypeManagedObject) {
+    public init(managedObject: TrackManagedObject) {
         
         self.identifier = managedObject.identifier
         self.name = managedObject.name
+        self.groups = managedObject.groups.identifiers
     }
 }
 
-extension EventType: CoreDataEncodable {
+extension Track: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventTypeManagedObject {
+    public func save(context: NSManagedObjectContext) throws -> TrackManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.name = name
+        managedObject.groups = context.relationshipFault(groups)
         
         managedObject.didCache()
         

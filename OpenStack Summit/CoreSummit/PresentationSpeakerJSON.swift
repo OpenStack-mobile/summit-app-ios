@@ -8,7 +8,7 @@
 
 import SwiftFoundation
 
-public extension PresentationSpeaker {
+public extension Speaker {
     
     enum JSONKey: String {
         
@@ -16,7 +16,7 @@ public extension PresentationSpeaker {
     }
 }
 
-extension PresentationSpeaker: JSONDecodable {
+extension Speaker: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         

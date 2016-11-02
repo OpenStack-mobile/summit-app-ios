@@ -242,7 +242,7 @@ extension Summit.DataUpdate: Updatable { }
 extension Event.DataUpdate: Updatable { }
 extension SummitType: Updatable { }
 extension EventType: Updatable { }
-extension PresentationSpeaker: Updatable { }
+extension Speaker: Updatable { }
 extension TicketType: Updatable { }
 extension Venue: Updatable { }
 extension VenueFloor: Updatable { }

@@ -41,12 +41,14 @@ extension VenueFloor: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> VenueFloorManagedObject {
         
-        let managedObject = try ManagedObject.cached(identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
+        let managedObject = try cached(context)
         
         managedObject.descriptionText = descriptionText
         managedObject.number = Int32(number)
         managedObject.imageURL = imageURL
         managedObject.venue = try context.relationshipFault(venue)
+        
+        managedObject.didCache()
         
         return managedObject
     }

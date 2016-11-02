@@ -43,6 +43,8 @@ extension VenueRoom: CoreDataEncodable {
         managedObject.venue = try context.relationshipFault(venue)
         managedObject.floor = try context.relationshipFault(floor)
         
+        managedObject.didCache()
+        
         return managedObject
     }
 }

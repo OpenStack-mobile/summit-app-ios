@@ -37,27 +37,9 @@ public extension NSManagedObjectContext {
     @inline(__always)
     func findOrCreate<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T {
         
-        // get cached resource...
-        
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
-        
-        fetchRequest.fetchLimit = 1
-        
-        fetchRequest.includesSubentities = includesSubentities
-        
-        fetchRequest.returnsObjectsAsFaults = returnsObjectsAsFaults
-        
-        // create predicate
-        
-        fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicateModifier.DirectPredicateModifier, type: NSPredicateOperatorType.EqualToPredicateOperatorType, options: NSComparisonPredicateOptions.NormalizedPredicateOption)
-        
-        // fetch
-        
-        let results = try self.executeFetchRequest(fetchRequest) as! [T]
-        
         let resource: T
         
-        if let firstResult = results.first {
+        if let firstResult = try find(entity, resourceID: resourceID, identifierProperty: identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities) as T? {
             
             resource = firstResult
         }
@@ -96,6 +78,6 @@ public extension NSManagedObjectContext {
         
         // fetch
         
-        return try self.executeFetchRequest(fetchRequest).first as? T
+        return try self.executeFetchRequest(fetchRequest).first as! T?
     }
 }

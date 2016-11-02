@@ -45,3 +45,14 @@ extension Location: CoreDataDecodable {
         }
     }
 }
+
+extension Location: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> LocationManagedObject {
+        
+        switch self {
+        case let .venue(venue): return try venue.save(context)
+        case let .room(room): return try room.save(context)
+        }
+    }
+}

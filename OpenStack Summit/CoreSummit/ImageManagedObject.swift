@@ -31,6 +31,8 @@ extension Image: CoreDataEncodable {
         
         managedObject.url = url
         
+        managedObject.didCache()
+        
         return managedObject
     }
 }

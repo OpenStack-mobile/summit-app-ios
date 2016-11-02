@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct PresentationSpeaker: Person {
+public struct Speaker: Person {
     
     public let identifier: Identifier
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftFoundation
 
 public final class SummitManagedObject: Entity {
     
@@ -44,3 +45,36 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var schedule: Set<EventManagedObject>
 }
+
+extension Summit: CoreDataDecodable {
+    
+    public init(managedObject: SummitManagedObject) {
+        
+        self.identifier = managedObject.identifier
+        self.name = managedObject.name
+        self.timeZone = managedObject.timeZone
+        self.start = Date(foundation: managedObject.start)
+        self.end = Date(foundation: managedObject.end)
+        self.webpageURL = managedObject.webpageURL
+        
+        if let startShowingVenues = managedObject.startShowingVenues {
+            self.startShowingVenues = Date(foundation: startShowingVenues)
+        } else {
+            self.startShowingVenues = nil
+        }
+        
+        self.sponsors = Company.from(managedObjects: managedObject.sponsors)
+        self.speakers = Speaker.from(managedObjects: managedObject.speakers)
+        self.summitTypes = SummitType.from(managedObjects: managedObject.summitTypes)
+        self.ticketTypes = TicketType.from()
+    }
+}
+
+extension Summit: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> SummitManagedObject {
+        
+        
+    }
+}
+

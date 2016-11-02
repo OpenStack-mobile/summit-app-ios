@@ -27,6 +27,11 @@ public extension Entity {
     
     var identifier: Int { return Int(self.id) }
     
+    func didCache() {
+        
+        self.cached = NSDate()
+    }
+    
     static func entity(in context: NSManagedObjectContext) -> NSEntityDescription {
         
         let className = NSStringFromClass(self as AnyClass)
@@ -102,6 +107,13 @@ internal extension NSManagedObjectContext {
     
     /// Caches to-one relationship.
     @inline(__always)
+    func relationshipFault<T: CoreDataEncodable>(encodable: T?) throws -> T.ManagedObject? {
+        
+        return try encodable?.save(self)
+    }
+    
+    /// Caches to-one relationship.
+    @inline(__always)
     func relationshipFault<T: CoreDataEncodable>(encodable: T) throws -> T.ManagedObject {
         
         return try encodable.save(self)
@@ -109,11 +121,21 @@ internal extension NSManagedObjectContext {
     
     /// Returns faults for to-many relationships.
     @inline(__always)
-    func relationshipFault<T: CoreDataEncodable where T.ManagedObject: Entity>(identifiers: [Identifier]) throws -> Set<T.ManagedObject> {
+    func relationshipFault<T: CoreDataEncodable where T.ManagedObject: Entity>(identifiers: [Identifier], _ type: T.Type) throws -> Set<T.ManagedObject> {
         
         let managedObjects = try identifiers.map { try T.ManagedObject.cached($0, context: self, returnsObjectsAsFaults: true, includesSubentities: true) }
         
         return Set(managedObjects)
+    }
+    
+    /// Returns faults for to-one relationship.
+    @inline(__always)
+    func relationshipFault<ManagedObject: Entity>(identifier: Identifier?) throws -> ManagedObject? {
+        
+        guard let identifier = identifier
+            else { return nil }
+        
+        return try relationshipFault(identifier)
     }
     
     /// Returns faults for to-one relationship.

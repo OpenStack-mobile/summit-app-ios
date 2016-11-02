@@ -37,6 +37,8 @@ extension Company: CoreDataEncodable {
         
         managedObject.name = name
         
+        managedObject.didCache()
+        
         return managedObject
     }
 }

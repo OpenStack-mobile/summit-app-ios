@@ -75,6 +75,8 @@ extension Venue: CoreDataEncodable {
         managedObject.maps = try context.relationshipFault(maps)
         managedObject.floors = try context.relationshipFault(floors)
         
+        managedObject.didCache()
+        
         return managedObject
     }
 }

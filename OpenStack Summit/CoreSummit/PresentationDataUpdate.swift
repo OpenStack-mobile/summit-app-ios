@@ -18,6 +18,6 @@ public extension Presentation {
         
         public var moderator: Identifier?
         
-        public var speakers: [PresentationSpeaker]
+        public var speakers: [Speaker]
     }
 }
