@@ -85,11 +85,11 @@ extension Event: CoreDataEncodable {
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
-        managedObject.eventType = try context.relationshipFault(type, EventType.self)
+        managedObject.eventType = try context.relationshipFault(type)
         managedObject.summitTypes = try context.relationshipFault(summitTypes, SummitType.self)
         managedObject.sponsors = try context.relationshipFault(sponsors, Company.self)
         managedObject.tags = try context.relationshipFault(tags)
-        managedObject.location = try context.relationshipFault(location, Location.self)
+        managedObject.location = try context.relationshipFault(location)
         managedObject.presentation = try context.relationshipFault(presentation)
         managedObject.videos = try context.relationshipFault(videos)
         
