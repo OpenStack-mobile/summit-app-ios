@@ -21,6 +21,20 @@ public class Entity: NSManagedObject {
 
 // MARK: - Extensions
 
+public extension NSManagedObjectModel {
+    
+    /// CoreData Managed Object Model for CoreSummit framework (OpenStack Foundation Summit).
+    static var summitModel: NSManagedObjectModel {
+        
+        guard let bundle = NSBundle(identifier: "org.openstack.CoreSummit"),
+            let modelURL = bundle.URLForResource("Model", withExtension: "momd"),
+            let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
+            else { fatalError("Could not load managed object model") }
+        
+        return managedObjectModel
+    }
+}
+
 public extension Entity {
     
     static var identifierProperty: String { return "id" }

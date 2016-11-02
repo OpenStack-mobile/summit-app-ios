@@ -6,12 +6,11 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import Foundation
+import CoreData
 import SwiftFoundation
 import AeroGearHttp
 import AeroGearOAuth2
-
-#if CORESUMMITREALM
-#endif
 
 /// Class used for requesting and caching data from the server.
 public final class Store {
@@ -23,36 +22,13 @@ public final class Store {
     
     // MARK: - Properties
     
-    #if CORESUMMITREALM
+    /// The managed object context used for caching.
+    public let managedObjectContext: NSManagedObjectContext
     
-    /// The Realm storage context.
-    public let realm = try! Realm()
+    /// A convenience variable for the managed object model.
+    public let managedObjectModel: NSManagedObjectModel
     
-    #else
-    
-    /// The local cached summit.
-    public internal(set) var cache: Summit? = {
-        
-        // attempt to get cached summit
-        guard let data = NSData(contentsOfURL: Store.cacheURL),
-            let jsonString = String(UTF8Data: Data(foundation: data)),
-            let json = JSON.Value(string: jsonString),
-            let summit = Summit(JSONValue: json)
-            else { return nil }
-        
-        return summit
-    }()
-    
-    /// Clears the cache. 
-    public func clear() {
-        
-        self.cache = nil
-    }
-    
-    public static let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true).URLByAppendingPathComponent("summit.json")
-    
-    #endif
-    
+    /// The current targeted environment
     public var environment = Environment.Staging {
         didSet { configOAuthAccounts() }
     }
@@ -63,6 +39,9 @@ public final class Store {
     }
     
     // MARK: - Private / Internal Properties
+    
+    /// The managed object context running on a background thread for asyncronous caching.
+    internal let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
     
     /// Request queue
     private let requestQueue: NSOperationQueue = {
@@ -81,12 +60,33 @@ public final class Store {
     // MARK: - Initialization
     
     deinit {
-        
+    
+        // stop recieving 'didSave' notifications from private context
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+    
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private init() {
         
+        // set managed object model
+        self.managedObjectModel = NSManagedObjectModel.summitModel
+        
+        // setup managed object contexts
+        self.managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        self.managedObjectContext.undoManager = nil
+        self.managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        
+        self.privateQueueManagedObjectContext.undoManager = nil
+        self.privateQueueManagedObjectContext.persistentStoreCoordinator = self.managedObjectContext.persistentStoreCoordinator
+        
+        // set private context name
+        self.privateQueueManagedObjectContext.name = "\(Store.self) Private Managed Object Context"
+        
+        // listen for notifications (for merging changes)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Store.mergeChangesFromContextDidSaveNotification(_:)), name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+        
+        // config OAuth and HTTP
         configOAuthAccounts()
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
@@ -197,6 +197,19 @@ public final class Store {
         session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
         
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
+    }
+    
+    // MARK: Notifications
+    
+    @objc private func mergeChangesFromContextDidSaveNotification(notification: NSNotification) {
+        
+        self.managedObjectContext.performBlockAndWait {
+            
+            self.managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+            
+            // manually send notification
+            NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: notification.userInfo)
+        }
     }
     
     @objc private func revokedAccess(notification: NSNotification) {

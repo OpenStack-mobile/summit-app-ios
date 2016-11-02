@@ -105,9 +105,14 @@ public extension Store {
                 
             case let .Value(member):
                 
-                try! self.realm.write { member.save(self.realm) }
+                let context = self.privateQueueManagedObjectContext
                 
-                success(name: member.name, member: .attendee(member.identifier))
+                context.performBlock {
+                    
+                    try! member.save(context)
+                    
+                    success(name: member.name, member: .attendee(member.identifier))
+                }
             }
         }
     }
