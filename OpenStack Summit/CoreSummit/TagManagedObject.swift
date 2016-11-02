@@ -11,13 +11,28 @@ import CoreData
 
 public final class TagManagedObject: Entity {
     
-    
+    @NSManaged public var name: String
 }
 
 extension Tag: CoreDataDecodable {
     
     public init(managedObject: TagManagedObject) {
         
+        self.identifier = managedObject.identifier
+        self.name = managedObject.name
+    }
+}
+
+extension Tag: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> TagManagedObject {
         
+        let managedObject = try cached(context)
+        
+        managedObject.name = name
+        
+        managedObject.didCache()
+        
+        return managedObject
     }
 }

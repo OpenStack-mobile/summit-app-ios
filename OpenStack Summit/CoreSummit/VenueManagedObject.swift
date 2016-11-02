@@ -41,6 +41,8 @@ extension Venue: CoreDataDecodable {
     public init(managedObject: VenueManagedObject) {
         
         self.identifier = managedObject.identifier
+        self.name = managedObject.name
+        self.descriptionText = managedObject.descriptionText
         self.type = ClassName(rawValue: managedObject.venueType)!
         self.locationType = LocationType(rawValue: managedObject.locationType)!
         self.country = managedObject.country
@@ -62,6 +64,8 @@ extension Venue: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
+        managedObject.name = name
+        managedObject.descriptionText = descriptionText
         managedObject.venueType = type.rawValue
         managedObject.locationType = locationType.rawValue
         managedObject.country = country

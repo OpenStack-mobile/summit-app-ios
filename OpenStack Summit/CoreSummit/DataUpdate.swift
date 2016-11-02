@@ -7,6 +7,7 @@
 //
 
 import SwiftFoundation
+import CoreData
 
 public struct DataUpdate {
     
@@ -213,25 +214,24 @@ public extension Store {
 /// The model type can be updated remotely
 internal protocol Updatable: JSONDecodable {
     
-    static func find(id: Identifier, realm: Realm) -> RealmEntity?
+    static func find(identifier: Identifier, context: NSManagedObjectContext) -> Entity?
     
-    /// Encodes the object in Realm, but does not write.
-    func write(realm: Realm) -> RealmEntity?
+    /// Encodes to CoreData.
+    func write(context: NSManagedObjectContext) -> Entity
 }
 
-extension Updatable where Self: RealmEncodable {
+extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
     
-    static func find(id: Identifier, realm: Realm) -> RealmEntity? {
+    static func find(identifier: Identifier, context: NSManagedObjectContext) -> Entity? {
         
-        return RealmType.find(id, realm: realm)
+        return ManagedObject.find(identifier, context: context)
     }
     
-    func write(realm: Realm) -> RealmEntity? {
+    func write(context: NSManagedObjectContext) throws -> Entity {
         
-        var entity: RealmEntity!
-        try! realm.write {
-            
-            entity = self.save(realm)
+        var entity: Entity!
+        try context.performErrorBlockAndWait {
+            entity = try self.save(context)
         }
         return entity
     }

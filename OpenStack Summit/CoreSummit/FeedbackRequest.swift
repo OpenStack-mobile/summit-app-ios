@@ -76,7 +76,7 @@ public extension Store {
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
-                let averageFeedbackJSON = jsonObject[SummitEvent.JSONKey.avg_feedback_rate.rawValue]
+                let averageFeedbackJSON = jsonObject[Event.JSONKey.avg_feedback_rate.rawValue]
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             let averageFeedback: Double

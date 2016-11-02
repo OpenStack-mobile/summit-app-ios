@@ -135,7 +135,7 @@ internal extension NSManagedObjectContext {
         guard let identifier = identifier
             else { return nil }
         
-        return try relationshipFault(identifier)
+        return try ManagedObject.cached(identifier, context: self, returnsObjectsAsFaults: true, includesSubentities: true)
     }
     
     /// Returns faults for to-one relationship.

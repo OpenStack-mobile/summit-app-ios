@@ -32,7 +32,7 @@ extension Summit: JSONDecodable {
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.fromJSON(sponsorsJSONArray),
             let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
-            let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
+            let speakers = Speaker.fromJSON(speakersJSONArray),
             let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
             let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
@@ -44,7 +44,7 @@ extension Summit: JSONDecodable {
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
             let trackGroups = TrackGroup.fromJSON(trackGroupsJSONArray),
             let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let events = SummitEvent.fromJSON(eventsJSONArray),
+            let events = Event.fromJSON(eventsJSONArray),
             let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
             let eventTypes = EventType.fromJSON(eventTypesJSONArray),
             let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String

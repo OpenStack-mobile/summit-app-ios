@@ -11,7 +11,11 @@ import CoreData
 
 public final class TicketTypeManagedObject: Entity {
     
+    @NSManaged public var name: String
     
+    @NSManaged public var descriptionText: String?
+    
+    @NSManaged public var allowedSummitTypes: Set<SummitTypeManagedObject>
 }
 
 extension TicketType: CoreDataDecodable {
@@ -22,5 +26,21 @@ extension TicketType: CoreDataDecodable {
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.allowedSummitTypes = managedObject.allowedSummitTypes.identifiers
+    }
+}
+
+extension TicketType: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> TicketTypeManagedObject {
+        
+        let managedObject = try cached(context)
+        
+        managedObject.name = name
+        managedObject.descriptionText = descriptionText
+        managedObject.allowedSummitTypes = try context.relationshipFault(allowedSummitTypes, SummitType.self)
+        
+        managedObject.didCache()
+        
+        return managedObject
     }
 }

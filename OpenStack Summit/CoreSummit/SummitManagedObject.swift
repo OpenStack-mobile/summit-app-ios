@@ -58,15 +58,23 @@ extension Summit: CoreDataDecodable {
         self.webpageURL = managedObject.webpageURL
         
         if let startShowingVenues = managedObject.startShowingVenues {
+            
             self.startShowingVenues = Date(foundation: startShowingVenues)
+            
         } else {
+            
             self.startShowingVenues = nil
         }
         
         self.sponsors = Company.from(managedObjects: managedObject.sponsors)
         self.speakers = Speaker.from(managedObjects: managedObject.speakers)
         self.summitTypes = SummitType.from(managedObjects: managedObject.summitTypes)
-        self.ticketTypes = TicketType.from()
+        self.ticketTypes = TicketType.from(managedObjects: managedObject.ticketTypes)
+        self.locations = Location.from(managedObjects: managedObject.locations)
+        self.tracks = Track.from(managedObjects: managedObject.tracks)
+        self.trackGroups = TrackGroup.from(managedObjects: managedObject.trackGroups)
+        self.eventTypes = EventType.from(managedObjects: managedObject.eventTypes)
+        self.schedule = Event.from(managedObjects: managedObject.schedule)
     }
 }
 

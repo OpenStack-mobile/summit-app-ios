@@ -25,6 +25,7 @@ extension TrackGroup: CoreDataDecodable {
     public init(managedObject: TrackGroupManagedObject) {
         
         self.identifier = managedObject.identifier
+        self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.color = managedObject.color
         self.tracks = managedObject.tracks.identifiers
@@ -40,7 +41,7 @@ extension TrackGroup: CoreDataEncodable {
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.color = color
-        managedObject.tracks = try context.relationshipFault(tracks)
+        managedObject.tracks = try context.relationshipFault(tracks, Track.self)
         
         managedObject.didCache()
         

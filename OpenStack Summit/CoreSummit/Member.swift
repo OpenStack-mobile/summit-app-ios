@@ -21,12 +21,10 @@ public struct Member: Named {
     public var irc: String?
     
     public var biography: String?
+        
+    public var speakerRole: Speaker?
     
-    //public var friends: [Identifier] // not in JSON
-    
-    public var speakerRole: PresentationSpeaker?
-    
-    public var attendeeRole: SummitAttendee?
+    public var attendeeRole: Attendee?
 }
 
 // MARK: - Extensions

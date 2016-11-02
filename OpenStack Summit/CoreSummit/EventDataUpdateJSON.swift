@@ -10,7 +10,7 @@ import SwiftFoundation
 
 public extension Event.DataUpdate {
     
-    typealias JSONKey = SummitEvent.JSONKey
+    typealias JSONKey = Event.JSONKey
 }
 
 extension Event.DataUpdate: JSONDecodable {

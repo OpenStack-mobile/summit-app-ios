@@ -32,7 +32,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="eventType" inverseEntity="Event" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="eventTypes" inverseEntity="Summit" syncable="YES"/>
     </entity>
-    <entity name="Image" syncable="YES">
+    <entity name="Image" representedClassName=".ImageManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" attributeType="String" syncable="YES"/>
@@ -47,7 +47,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
         <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="locations" inverseEntity="Summit" syncable="YES"/>
     </entity>
-    <entity name="Presentation" syncable="YES">
+    <entity name="Presentation" representedClassName=".PresentationManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,7 +56,7 @@
         <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationModerator" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="presentations" inverseEntity="Track" syncable="YES"/>
     </entity>
-    <entity name="Speaker" syncable="YES">
+    <entity name="Speaker" representedClassName=".SpeakerManagedObject" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="firstName" attributeType="String" syncable="YES"/>
@@ -92,20 +92,20 @@
         <relationship name="trackGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackGroup" inverseName="summits" inverseEntity="TrackGroup" syncable="YES"/>
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="summits" inverseEntity="Track" syncable="YES"/>
     </entity>
-    <entity name="SummitType" syncable="YES">
+    <entity name="SummitType" representedClassName=".SummitTypeManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="summitTypes" inverseEntity="Event" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="summitTypes" inverseEntity="Summit" syncable="YES"/>
         <relationship name="ticketTypeAllowedSummitTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TicketType" inverseName="allowedSummitTypes" inverseEntity="TicketType" syncable="YES"/>
     </entity>
-    <entity name="Tag" syncable="YES">
+    <entity name="Tag" representedClassName=".TagManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="tags" inverseEntity="Event" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="tags" inverseEntity="Event" syncable="YES"/>
     </entity>
-    <entity name="TicketType" syncable="YES">
+    <entity name="TicketType" representedClassName=".TicketTypeManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -123,7 +123,10 @@
     </entity>
     <entity name="TrackGroup" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="color" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="trackGroups" inverseEntity="Summit" syncable="YES"/>
         <relationship name="tracks" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="groups" inverseEntity="Track" syncable="YES"/>
     </entity>
@@ -168,16 +171,16 @@
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
         <element name="Event" positionX="-54" positionY="0" width="128" height="285"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="120"/>
-        <element name="Image" positionX="9" positionY="171" width="128" height="120"/>
+        <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
-        <element name="Presentation" positionX="-9" positionY="126" width="128" height="150"/>
-        <element name="Speaker" positionX="-27" positionY="108" width="128" height="240"/>
+        <element name="Presentation" positionX="-9" positionY="126" width="128" height="30"/>
+        <element name="Speaker" positionX="-27" positionY="108" width="128" height="30"/>
         <element name="Summit" positionX="-63" positionY="-18" width="128" height="330"/>
-        <element name="SummitType" positionX="0" positionY="99" width="128" height="120"/>
+        <element name="SummitType" positionX="0" positionY="99" width="128" height="30"/>
         <element name="Tag" positionX="18" positionY="117" width="128" height="105"/>
-        <element name="TicketType" positionX="-18" positionY="117" width="128" height="135"/>
+        <element name="TicketType" positionX="-18" positionY="117" width="128" height="30"/>
         <element name="Track" positionX="-9" positionY="126" width="128" height="135"/>
-        <element name="TrackGroup" positionX="0" positionY="135" width="128" height="105"/>
+        <element name="TrackGroup" positionX="0" positionY="135" width="128" height="150"/>
         <element name="Venue" positionX="27" positionY="153" width="128" height="240"/>
         <element name="VenueFloor" positionX="27" positionY="180" width="128" height="135"/>
         <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="90"/>
