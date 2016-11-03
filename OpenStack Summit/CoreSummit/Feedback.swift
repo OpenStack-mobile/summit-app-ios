@@ -8,7 +8,7 @@
 
 import struct SwiftFoundation.Date
 
-public protocol Feedback: Unique {
+public protocol Feedback: Unique, Equatable {
     
     var identifier: Identifier { get }
     
@@ -47,6 +47,24 @@ public struct Review: Feedback {
     }
 }
 
+public func == (lhs: Review, rhs: Review) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.rate == rhs.rate
+        && lhs.review == rhs.review
+        && lhs.date == rhs.date
+        && lhs.event == lhs.event
+        && lhs.owner == lhs.owner
+}
+
+public func == (lhs: Review.Owner, rhs: Review.Owner) -> Bool {
+    
+    return lhs.member == rhs.member
+        && lhs.attendee == rhs.attendee
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+}
+
 public struct AttendeeFeedback: Feedback {
     
     public let identifier: Identifier
@@ -62,4 +80,15 @@ public struct AttendeeFeedback: Feedback {
     public let member: Identifier
     
     public let attendee: Identifier
+}
+
+public func == (lhs: AttendeeFeedback, rhs: AttendeeFeedback) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.rate == rhs.rate
+        && lhs.review == rhs.review
+        && lhs.date == rhs.date
+        && lhs.event == lhs.event
+        && lhs.member == lhs.member
+        && lhs.attendee == lhs.attendee
 }

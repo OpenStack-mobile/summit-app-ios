@@ -26,3 +26,18 @@ public struct Speaker: Person {
     
     public var memberIdentifier: Identifier?
 }
+
+// MARK: - Equatable
+
+public func == (lhs: Speaker, rhs: Speaker) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+        && lhs.title == rhs.title
+        && lhs.pictureURL == rhs.pictureURL
+        && lhs.twitter == rhs.twitter
+        && lhs.irc == rhs.irc
+        && lhs.biography == rhs.biography
+        && lhs.memberIdentifier == rhs.memberIdentifier
+}

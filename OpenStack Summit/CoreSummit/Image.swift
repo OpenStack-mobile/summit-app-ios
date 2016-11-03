@@ -12,3 +12,9 @@ public struct Image: Unique {
     
     public var url: String
 }
+
+public func == (lhs: Image, rhs: Image) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.url == rhs.url
+}

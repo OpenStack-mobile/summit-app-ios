@@ -8,7 +8,7 @@
 
 import struct SwiftFoundation.Date
 
-public struct Summit: Named {
+public struct Summit: Named, Equatable {
     
     public let identifier: Identifier
     
@@ -46,4 +46,26 @@ public struct Summit: Named {
     public var schedule: [Event]
     
     public var webpageURL: String
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Summit, rhs: Summit) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.timeZone == rhs.timeZone
+        && lhs.start == rhs.start
+        && lhs.end == rhs.end
+        && lhs.sponsors == rhs.sponsors
+        && lhs.speakers == rhs.speakers
+        && lhs.startShowingVenues == rhs.startShowingVenues
+        && lhs.summitTypes == rhs.summitTypes
+        && lhs.ticketTypes == rhs.ticketTypes
+        && lhs.locations == rhs.locations
+        && lhs.tracks == rhs.tracks
+        && lhs.trackGroups == rhs.trackGroups
+        && lhs.eventTypes == rhs.eventTypes
+        && lhs.schedule == rhs.schedule
+        && lhs.webpageURL == rhs.webpageURL
 }
