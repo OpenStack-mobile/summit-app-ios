@@ -15,7 +15,7 @@ public final class VenueFloorManagedObject: Entity {
     
     @NSManaged public var descriptionText: String?
     
-    @NSManaged public var number: Int32
+    @NSManaged public var number: Int16
     
     @NSManaged public var imageURL: String?
     
@@ -45,7 +45,7 @@ extension VenueFloor: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.descriptionText = descriptionText
-        managedObject.number = Int32(number)
+        managedObject.number = Int16(number)
         managedObject.imageURL = imageURL
         managedObject.venue = try context.relationshipFault(venue)
         

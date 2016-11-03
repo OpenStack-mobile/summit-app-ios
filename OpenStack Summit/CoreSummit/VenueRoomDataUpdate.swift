@@ -23,6 +23,6 @@ public struct VenueRoomDataUpdate: LocationProtocol {
     
     public var venue: Identifier
     
-    public var floor: VenueFloor
+    public var floor: VenueFloor?
 }
 

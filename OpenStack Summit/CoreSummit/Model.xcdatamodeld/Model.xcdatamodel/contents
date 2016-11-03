@@ -53,7 +53,7 @@
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="presentation" inverseEntity="Event" syncable="YES"/>
-        <relationship name="moderator" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationSpeaker" inverseEntity="Speaker" syncable="YES"/>
+        <relationship name="moderator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationSpeaker" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationModerator" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="presentations" inverseEntity="Track" syncable="YES"/>
     </entity>
@@ -150,9 +150,10 @@
     </entity>
     <entity name="VenueFloor" representedClassName=".VenueFloorManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="rooms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VenueRoom" inverseName="floor" inverseEntity="VenueRoom" syncable="YES"/>
         <relationship name="venue" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="floors" inverseEntity="Venue" syncable="YES"/>
     </entity>
@@ -167,6 +168,7 @@
         <attribute name="displayOnSite" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="featured" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="youtube" attributeType="String" syncable="YES"/>
         <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="videos" inverseEntity="Event" syncable="YES"/>
     </entity>
@@ -176,7 +178,7 @@
         <element name="EventType" positionX="-18" positionY="81" width="128" height="120"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
-        <element name="Presentation" positionX="-9" positionY="126" width="128" height="30"/>
+        <element name="Presentation" positionX="-9" positionY="126" width="128" height="150"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="30"/>
         <element name="Summit" positionX="-63" positionY="-18" width="128" height="330"/>
         <element name="SummitType" positionX="0" positionY="99" width="128" height="150"/>
@@ -185,8 +187,8 @@
         <element name="Track" positionX="-9" positionY="126" width="128" height="135"/>
         <element name="TrackGroup" positionX="0" positionY="135" width="128" height="150"/>
         <element name="Venue" positionX="27" positionY="153" width="128" height="240"/>
-        <element name="VenueFloor" positionX="27" positionY="180" width="128" height="135"/>
+        <element name="VenueFloor" positionX="27" positionY="180" width="128" height="150"/>
         <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="90"/>
-        <element name="Video" positionX="0" positionY="126" width="128" height="150"/>
+        <element name="Video" positionX="0" positionY="126" width="128" height="165"/>
     </elements>
 </model>

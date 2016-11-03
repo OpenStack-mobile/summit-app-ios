@@ -15,7 +15,7 @@ public final class VenueRoomManagedObject: LocationManagedObject {
     
     @NSManaged public var venue: VenueManagedObject
     
-    @NSManaged public var floor: VenueFloorManagedObject
+    @NSManaged public var floor: VenueFloorManagedObject?
 }
 
 extension VenueRoom: CoreDataDecodable {
@@ -27,7 +27,7 @@ extension VenueRoom: CoreDataDecodable {
         self.capacity = managedObject.capacity?.integerValue
         self.descriptionText = managedObject.descriptionText
         self.venue = managedObject.venue.identifier
-        self.floor = managedObject.floor.identifier
+        self.floor = managedObject.floor?.identifier
     }
 }
 

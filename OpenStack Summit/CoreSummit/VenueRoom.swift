@@ -18,5 +18,5 @@ public struct VenueRoom: LocationProtocol {
     
     public var venue: Identifier
     
-    public var floor: Identifier
+    public var floor: Identifier?
 }

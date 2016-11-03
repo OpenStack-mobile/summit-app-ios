@@ -34,7 +34,7 @@ extension VenueRoom: JSONDecodable {
         self.identifier = identifier
         self.name = name
         self.venue = venueIdentifier
-        self.floor = floorIdentifier
+        self.floor = floorIdentifier > 0 ? floorIdentifier : nil
         
         // optional
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String
