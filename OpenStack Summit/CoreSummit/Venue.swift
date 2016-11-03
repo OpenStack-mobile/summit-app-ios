@@ -32,11 +32,11 @@ public struct Venue: LocationProtocol, Equatable {
     
     public var longitude: String?
     
-    public var maps: [Image]
+    public var maps: Set<Image>
     
-    public var images: [Image]
+    public var images: Set<Image>
     
-    public var floors: [VenueFloor]
+    public var floors: Set<VenueFloor>
 }
 
 // MARK: - Extensions

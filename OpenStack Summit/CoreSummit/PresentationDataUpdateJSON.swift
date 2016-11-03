@@ -44,7 +44,7 @@ extension Presentation.DataUpdate: JSONDecodable {
             guard let speakers = Speaker.fromJSON(speakersJSONArray)
                 else { return nil }
             
-            self.speakers = speakers
+            self.speakers = Set(speakers)
             
         } else {
             

@@ -29,7 +29,7 @@ extension TicketType: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.allowedSummitTypes = allowedSummitTypes
+        self.allowedSummitTypes = Set(allowedSummitTypes)
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
     }
 }

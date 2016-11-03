@@ -14,7 +14,7 @@ public struct TicketType: Named, Equatable {
     
     public var descriptionText: String?
     
-    public var allowedSummitTypes: [Identifier]
+    public var allowedSummitTypes: Set<Identifier>
 }
 
 // MARK: - Equatable

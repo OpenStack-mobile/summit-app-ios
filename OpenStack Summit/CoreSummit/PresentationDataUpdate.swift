@@ -18,6 +18,17 @@ public extension Presentation {
         
         public var moderator: Identifier?
         
-        public var speakers: [Speaker]
+        public var speakers: Set<Speaker>
     }
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Presentation.DataUpdate, rhs: Presentation.DataUpdate) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.level == rhs.level
+        && lhs.track == rhs.track
+        && lhs.moderator == rhs.moderator
+        && lhs.speakers == rhs.speakers
 }

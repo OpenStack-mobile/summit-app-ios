@@ -24,26 +24,26 @@ public struct Summit: Named, Equatable {
     
     //public var active: Bool
     
-    public var sponsors: [Company]
+    public var sponsors: Set<Company>
     
-    public var speakers: [Speaker]
+    public var speakers: Set<Speaker>
     
     public var startShowingVenues: Date?
         
-    public var summitTypes: [SummitType]
+    public var summitTypes: Set<SummitType>
         
-    public var ticketTypes: [TicketType]
+    public var ticketTypes: Set<TicketType>
     
     // Venue and Venue Rooms
-    public var locations: [Location]
+    public var locations: Set<Location>
         
-    public var tracks: [Track]
+    public var tracks: Set<Track>
     
-    public var trackGroups: [TrackGroup]
+    public var trackGroups: Set<TrackGroup>
     
-    public var eventTypes: [EventType]
+    public var eventTypes: Set<EventType>
     
-    public var schedule: [Event]
+    public var schedule: Set<Event>
     
     public var webpageURL: String
 }

@@ -39,8 +39,8 @@ extension Venue: JSONDecodable {
         self.type = type
         self.name = name
         self.country = country
-        self.maps = maps
-        self.images = images
+        self.maps = Set(maps)
+        self.images = Set(images)
         self.locationType = locationType
         
         // optional
@@ -56,7 +56,7 @@ extension Venue: JSONDecodable {
             guard let floors = VenueFloor.fromJSON(floorsJSONArray)
                 else { return nil }
             
-            self.floors = floors
+            self.floors = Set(floors)
 
         } else {
             

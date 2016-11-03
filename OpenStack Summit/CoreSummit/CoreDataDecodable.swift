@@ -37,6 +37,14 @@ public extension CoreDataDecodable {
     
     static func from<C: CollectionType where C.Generator.Element == ManagedObject>(managedObjects managedObjects: C) -> [Self] {
         
-        return managedObjects.map { (managedObject) in return self.init(managedObject: managedObject) }
+        return managedObjects.map { self.init(managedObject: $0) }
+    }
+}
+
+public extension CoreDataDecodable where Self: Hashable {
+    
+    static func from(managedObjects managedObjects: Set<ManagedObject>) -> Set<Self> {
+        
+        return Set(managedObjects.map({ self.init(managedObject: $0) }))
     }
 }

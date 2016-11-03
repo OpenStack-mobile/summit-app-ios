@@ -22,6 +22,16 @@ public struct TrackGroupDataUpdate: Named {
     
     public var color: String
     
-    public var tracks: [Track]
+    public var tracks: Set<Track>
 }
 
+// MARK: - Equatable
+
+public func == (lhs: TrackGroup.DataUpdate, rhs: TrackGroup.DataUpdate) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.color == rhs.color
+        && lhs.tracks == rhs.tracks
+}

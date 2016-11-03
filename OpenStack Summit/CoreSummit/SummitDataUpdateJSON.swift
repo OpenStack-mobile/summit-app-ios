@@ -38,12 +38,12 @@ extension SummitDataUpdate: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
-        self.summitTypes = summitTypes
-        self.ticketTypes = ticketTypes
+        self.summitTypes = Set(summitTypes)
+        self.ticketTypes = Set(ticketTypes)
         self.webpageURL = webpageURL
         
         // filter venues (we have to ignore other types of venues)
-        self.locations = locations.filter {
+        self.locations = Set(locations.filter({
             
             switch $0 {
                 
@@ -51,7 +51,7 @@ extension SummitDataUpdate: JSONDecodable {
                 
             case .room: return true
             }
-        }
+        }))
         
         // optional values
         

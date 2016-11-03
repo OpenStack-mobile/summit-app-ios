@@ -22,17 +22,11 @@ public struct Attendee: Unique, Equatable {
     
     public var biography: String?
     
-    //public var location: String
+    public var tickets: Set<TicketType>
     
-    public var tickets: [TicketType]
+    public var scheduledEvents: Set<Identifier>
     
-    public var scheduledEvents: [Identifier]
-    
-    public var feedback: [AttendeeFeedback]
-    
-    //public var bookmarkedEvents: [SummitEvent]
-    
-    //public var friends: [Member]
+    public var feedback: Set<AttendeeFeedback>
 }
 
 // MARK: - Extensions

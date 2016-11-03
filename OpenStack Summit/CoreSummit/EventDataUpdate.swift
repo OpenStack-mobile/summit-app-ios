@@ -29,18 +29,34 @@ public extension Event {
         
         public var type: Identifier
         
-        public var summitTypes: [Identifier]
+        public var summitTypes: Set<Identifier>
         
-        public var sponsors: [Company]
+        public var sponsors: Set<Company>
         
-        public var tags: [Tag]
+        public var tags: Set<Tag>
         
         public var location: Identifier
         
         public var presentation: Presentation.DataUpdate?
-        
-        //public var trackIdentifier: Identifier
-        
-        public var videos: [Video]
+                
+        public var videos: Set<Video>
     }
+}
+
+public func == (lhs: Event.DataUpdate, rhs: Event.DataUpdate) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.start == rhs.start
+        && lhs.end == rhs.end
+        && lhs.allowFeedback == rhs.allowFeedback
+        && lhs.averageFeedback == rhs.averageFeedback
+        && lhs.type == rhs.type
+        && lhs.summitTypes == rhs.summitTypes
+        && lhs.sponsors == rhs.sponsors
+        && lhs.tags == rhs.tags
+        && lhs.location == rhs.location
+        && lhs.presentation == rhs.presentation
+        && lhs.videos == rhs.videos
 }

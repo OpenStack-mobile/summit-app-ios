@@ -40,7 +40,7 @@ extension VenueFloor: JSONDecodable {
             guard let rooms = Int.fromJSON(roomsJSONArray)
                 else { return nil }
             
-            self.rooms = rooms
+            self.rooms = Set(rooms)
             
         } else {
             

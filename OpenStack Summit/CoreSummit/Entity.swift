@@ -95,9 +95,9 @@ public extension Entity {
     }
 }
 
-public extension CollectionType where Generator.Element: Entity {
+public extension CollectionType where Self: Hashable, Generator.Element: Entity {
     
-    var identifiers: [Identifier] { return self.map { Int($0.id) } }
+    var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
 }
 
 public extension CoreDataEncodable where Self: Unique, ManagedObject: Entity {
@@ -113,7 +113,7 @@ internal extension NSManagedObjectContext {
     
     /// Caches to-many relationship.
     @inline(__always)
-    func relationshipFault<T: CoreDataEncodable>(encodables: [T]) throws -> Set<T.ManagedObject> {
+    func relationshipFault<T: CoreDataEncodable>(encodables: Set<T>) throws -> Set<T.ManagedObject> {
         
         return try encodables.save(self)
     }
@@ -134,7 +134,7 @@ internal extension NSManagedObjectContext {
     
     /// Returns faults for to-many relationships.
     @inline(__always)
-    func relationshipFault<ManagedObject: Entity>(identifiers: [Identifier]) throws -> Set<ManagedObject> {
+    func relationshipFault<ManagedObject: Entity>(identifiers: Set<Identifier>) throws -> Set<ManagedObject> {
         
         let managedObjects = try identifiers.map { try ManagedObject.cached($0, context: self, returnsObjectsAsFaults: true, includesSubentities: true) }
         

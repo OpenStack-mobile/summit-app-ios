@@ -19,3 +19,12 @@ public extension NonConfirmedAttendee {
     
     var name: String { return firstName + " " + lastName }
 }
+
+// MARK: - Equatable
+
+public func == (lhs: NonConfirmedAttendee, rhs: NonConfirmedAttendee) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+}

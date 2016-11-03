@@ -20,7 +20,7 @@ public struct VenueFloor: Named, Equatable {
     
     public var venue: Identifier
     
-    public var rooms: [Identifier]
+    public var rooms: Set<Identifier>
 }
 
 // MARK: - Equatable

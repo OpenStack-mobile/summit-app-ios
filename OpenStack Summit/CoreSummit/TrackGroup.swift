@@ -16,7 +16,7 @@ public struct TrackGroup: Named, Equatable {
     
     public var color: String
         
-    public var tracks: [Identifier]
+    public var tracks: Set<Identifier>
 }
 
 // MARK: - Equatable

@@ -16,7 +16,7 @@ public struct Presentation: Unique, Equatable {
     
     public var moderator: Identifier?
     
-    public var speakers: [Identifier]
+    public var speakers: Set<Identifier>
 }
 
 // MARK: - Supporting Types

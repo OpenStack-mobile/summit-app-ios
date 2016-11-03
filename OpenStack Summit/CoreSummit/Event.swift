@@ -26,17 +26,17 @@ public struct Event: Named, Equatable {
     
     public var type: Identifier
     
-    public var summitTypes: [Identifier]
+    public var summitTypes: Set<Identifier>
     
-    public var sponsors: [Identifier]
+    public var sponsors: Set<Identifier>
     
-    public var tags: [Tag]
+    public var tags: Set<Tag>
         
     public var location: Identifier?
     
     public var presentation: Presentation?
     
-    public var videos: [Video]
+    public var videos: Set<Video>
     
     public var rsvp: String?
 }

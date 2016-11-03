@@ -28,7 +28,7 @@ extension TrackGroupDataUpdate: JSONDecodable {
         self.identifier = identifier
         self.name = name
         self.color = color
-        self.tracks = tracks
+        self.tracks = Set(tracks)
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String

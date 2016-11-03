@@ -46,11 +46,11 @@ extension Event.DataUpdate: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.summitTypes = summitTypes
-        self.tags = tags
+        self.summitTypes = Set(summitTypes)
+        self.tags = Set(tags)
         self.allowFeedback = allowFeedback
         self.type = type
-        self.sponsors = sponsors
+        self.sponsors = Set(sponsors)
         self.location = locationIdentifier
         self.presentation = presentation
         
@@ -75,7 +75,7 @@ extension Event.DataUpdate: JSONDecodable {
             guard let videos = Video.fromJSON(videosJSONArray)
                 else { return nil }
             
-            self.videos = videos
+            self.videos = Set(videos)
             
         } else {
             

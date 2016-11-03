@@ -40,6 +40,7 @@ extension Presentation: CoreDataEncodable {
         
         managedObject.level = level?.rawValue
         managedObject.track = try context.relationshipFault(track)
+        managedObject.moderator = try context.relationshipFault(moderator)
         managedObject.speakers = try context.relationshipFault(speakers)
         
         managedObject.didCache()

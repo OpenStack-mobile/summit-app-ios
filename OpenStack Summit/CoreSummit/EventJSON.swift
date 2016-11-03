@@ -44,11 +44,11 @@ extension Event: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.summitTypes = summitTypes
-        self.tags = tags
+        self.summitTypes = Set(summitTypes)
+        self.tags = Set(tags)
         self.allowFeedback = allowFeedback
         self.type = type
-        self.sponsors = sponsors
+        self.sponsors = Set(sponsors)
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
             
@@ -82,7 +82,7 @@ extension Event: JSONDecodable {
             guard let videos = Video.fromJSON(videosJSONArray)
                 else { return nil }
             
-            self.videos = videos
+            self.videos = Set(videos)
             
         } else {
             

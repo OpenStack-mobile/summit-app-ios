@@ -12,7 +12,7 @@ public struct Track: Named, Equatable {
     
     public var name: String
         
-    public var groups: [Identifier]
+    public var groups: Set<Identifier>
 }
 
 // MARK: - Equatable
