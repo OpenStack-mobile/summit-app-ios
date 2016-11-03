@@ -8,6 +8,7 @@
 
 public extension CollectionType {
     
+    @inline(__always)
     func firstMatching(@noescape predicate: (Self.Generator.Element) throws -> Bool) rethrows -> Self.Generator.Element? {
         
         guard let index = try self.indexOf(predicate)

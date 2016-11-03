@@ -416,6 +416,7 @@
 		6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */; };
 		6E9FBCFB1D933F1B0005234F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */; };
 		6EA38A701DCB059400B703CE /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
+		6EA38A711DCB154A00B703CE /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537C91D199D0C003E3400 /* Login.swift */; };
 		6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */; };
 		6EA6FD351D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */; };
 		6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
@@ -2649,6 +2650,7 @@
 				6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */,
 				6E0B5EE11D77C8950005F6CE /* TicketTypeJSON.swift in Sources */,
 				6E0B5EE41D77C8950005F6CE /* SummitJSON.swift in Sources */,
+				6EA38A711DCB154A00B703CE /* Login.swift in Sources */,
 				6E0B5EE51D77C8950005F6CE /* WebConvertible.swift in Sources */,
 				6EF4F8611DC8CE1600D31A99 /* Entity.swift in Sources */,
 				6E2D9FDC1DC9944E0015C588 /* SpeakerManagedObject.swift in Sources */,

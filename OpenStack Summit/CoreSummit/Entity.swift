@@ -61,9 +61,8 @@ public extension Entity {
         }
         
         // search for entity with class name
-        guard let entity = context.persistentStoreCoordinator?.managedObjectModel.entities
-            .firstMatching({ $0.managedObjectClassName == className })
-            else { fatalError("Could not find entity for \(self) in managed object context") }
+        guard let entity = context.persistentStoreCoordinator?.managedObjectModel[self]
+            else { fatalError("Could not find entity") }
         
         Cache.entities[className] = entity
         

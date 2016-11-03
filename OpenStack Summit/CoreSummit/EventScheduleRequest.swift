@@ -42,15 +42,13 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
-                if let attendeeObjectID = self.authenticatedMember?.attendeeRole?.objectID,
+                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    let attendee = context.objectWithID(attendeeObjectID) as! AttendeeManagedObject
-                    
                     attendee.scheduledEvents.insert(eventManagedObject)
+                    
+                    try context.save()
                 }
-                
-                try context.save()
             }
             
             completion(.Value())
@@ -86,16 +84,14 @@ public extension Store {
             
             // cache
             try! context.performErrorBlockAndWait {
-                
-                if let attendeeObjectID = self.authenticatedMember?.attendeeRole?.objectID,
+                                
+                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    let attendee = context.objectWithID(attendeeObjectID) as! AttendeeManagedObject
-                    
                     attendee.scheduledEvents.remove(eventManagedObject)
+                    
+                    try context.save()
                 }
-                
-                try context.save()
             }
             
             completion(.Value())

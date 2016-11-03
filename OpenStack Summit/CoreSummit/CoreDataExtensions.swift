@@ -37,6 +37,28 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
+    func find<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T? {
+        
+        // get cached resource...
+        
+        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        
+        fetchRequest.fetchLimit = 1
+        
+        fetchRequest.includesSubentities = includesSubentities
+        
+        fetchRequest.returnsObjectsAsFaults = returnsObjectsAsFaults
+        
+        // create predicate
+        
+        fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicateModifier.DirectPredicateModifier, type: NSPredicateOperatorType.EqualToPredicateOperatorType, options: NSComparisonPredicateOptions.NormalizedPredicateOption)
+        
+        // fetch
+        
+        return try self.executeFetchRequest(fetchRequest).first as! T?
+    }
+    
+    @inline(__always)
     func findOrCreate<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T {
         
         let resource: T
@@ -62,24 +84,24 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func find<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T? {
+    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type) throws -> [ManagedObject] {
         
-        // get cached resource...
+        let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
         let fetchRequest = NSFetchRequest(entityName: entity.name!)
         
-        fetchRequest.fetchLimit = 1
+        return try self.executeFetchRequest(fetchRequest) as! [ManagedObject]
+    }
+}
+
+public extension NSManagedObjectModel {
+    
+    subscript(managedObjectType: NSManagedObject.Type) -> NSEntityDescription? {
         
-        fetchRequest.includesSubentities = includesSubentities
+        // search for entity with class name
         
-        fetchRequest.returnsObjectsAsFaults = returnsObjectsAsFaults
+        let className = NSStringFromClass(managedObjectType)
         
-        // create predicate
-        
-        fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicateModifier.DirectPredicateModifier, type: NSPredicateOperatorType.EqualToPredicateOperatorType, options: NSComparisonPredicateOptions.NormalizedPredicateOption)
-        
-        // fetch
-        
-        return try self.executeFetchRequest(fetchRequest).first as! T?
+        return self.entities.firstMatching { $0.managedObjectClassName == className }
     }
 }

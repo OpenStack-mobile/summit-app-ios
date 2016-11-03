@@ -31,6 +31,8 @@ public extension Store {
         
         let http = self.createHTTP(.ServiceAccount)
         
+        let context = privateQueueManagedObjectContext
+        
         http.GET(URL) { (responseObject, error) in
             
             // forward error
@@ -42,7 +44,7 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! self.realm.write { let _ = page.items.save(self.realm) }
+            try! context.performErrorBlockAndWait { try page.items.save(context) }
             
             // success
             completion(.Value(page))
@@ -67,6 +69,8 @@ public extension Store {
         let URL = environment.configuration.serverURL + URI
         
         let http = self.createHTTP(.ServiceAccount)
+        
+        let context = privateQueueManagedObjectContext
         
         http.GET(URL) { (responseObject, error) in
             
@@ -95,11 +99,11 @@ public extension Store {
             }
                         
             // update cache
-            if let realmEvent = RealmSummitEvent.find(event, realm: self.realm) {
+            try! context.performErrorBlockAndWait {
                 
-                try! self.realm.write {
+                if let managedObject = try EventManagedObject.find(event, context: context) {
                     
-                    realmEvent.averageFeedback = averageFeedback
+                    managedObject.averageFeedback = averageFeedback
                 }
             }
             
@@ -131,29 +135,33 @@ public extension Store {
         jsonDictionary["rate"] = rate
         jsonDictionary["note"] = review
         
+        let context = privateQueueManagedObjectContext
+        
         http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
                 else { completion(.Error(error!)); return }
             
-            let id = Int(responseObject as! String)!
+            let identifier = Int(responseObject as! String)!
             
             // create new feedback in cache
-            if let member = self.authenticatedMember,
-                let attendee = member.attendeeRole {
+            try! context.performErrorBlockAndWait {
                 
-                let feedback = AttendeeFeedback(identifier: id, rate: rate, review: review, date: Date(), event: event, member: member.id, attendee: attendee.id)
-                
-                try! self.realm.write {
+                if let member = try self.authenticatedMember(context),
+                    let attendee = member.attendeeRole {
                     
-                    let realmFeedback = feedback.save(self.realm)
+                    let feedback = AttendeeFeedback(identifier: identifier, rate: rate, review: review, date: Date(), event: event, member: member.identifier, attendee: attendee.identifier)
                     
-                    attendee.feedback.append(realmFeedback)
+                    let managedObject = try feedback.save(context)
+                    
+                    attendee.feedback.insert(managedObject)
+                    
+                    try context.save()
                 }
             }
             
-            completion(.Value(id))
+            completion(.Value(identifier))
         }
     }
 }

@@ -64,7 +64,16 @@ public final class Store {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    private init() {
+    private init(environment: Environment,
+                 session: SessionStorage,
+                 createPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore,
+                 resetPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore) {
+        
+        // store values
+        self.environment = environment
+        self.session = session
+        self.createPersistentStore = createPersistentStore
+        self.resetPersistentStore = resetPersistentStore
         
         // set managed object model
         self.managedObjectModel = NSManagedObjectModel.summitModel
@@ -211,7 +220,7 @@ public final class Store {
     
     @objc private func revokedAccess(notification: NSNotification) {
         
-        self.session?.clear()
+        self.session.clear()
         
         let notification = NSNotification(name: Notification.ForcedLoggedOut.rawValue, object:self, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)

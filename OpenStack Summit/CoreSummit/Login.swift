@@ -9,15 +9,22 @@
 import SwiftFoundation
 import AeroGearHttp
 import AeroGearOAuth2
+import CoreData
 
 public extension Store {
     
     /// The member that is logged in. Only valid for confirmed attendees.
     var authenticatedMember: MemberManagedObject? {
         
+        return try! self.authenticatedMember(self.managedObjectContext)
+    }
+    
+    /// The member that is logged in. Only valid for confirmed attendees.
+    internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
+        
         guard let sessionMember = session.member,
             case let .attendee(memberID) = sessionMember,
-            let member = MemberManagedObject.find(memberID, context: self.managedObjectContext)
+            let member = try MemberManagedObject.find(memberID, context: context)
             else { return nil }
         
         return member
@@ -57,8 +64,8 @@ public extension Store {
         @inline(__always)
         func success(name name: String, member: SessionMember) {
             
-            self.session?.name = name
-            self.session?.member = member
+            self.session.name = name
+            self.session.member = member
             
             completion(.Value())
             
@@ -117,7 +124,7 @@ public extension Store {
     
     func logout() {
         
-        session?.clear()
+        session.clear()
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
     }

@@ -37,7 +37,26 @@ extension Member: CoreDataDecodable {
         self.lastName = managedObject.lastName
         self.pictureURL = managedObject.pictureURL
         self.twitter = managedObject.twitter
+        self.irc = managedObject.irc
+        self.biography = managedObject.biography
         
+        if let managedObject = managedObject.speakerRole {
+            
+            self.speakerRole = Speaker(managedObject: managedObject)
+            
+        } else {
+            
+            self.speakerRole = nil
+        }
+        
+        if let managedObject = managedObject.attendeeRole {
+            
+            self.attendeeRole = Attendee(managedObject: managedObject)
+            
+        } else {
+            
+            self.attendeeRole = nil
+        }
     }
 }
 
@@ -45,6 +64,19 @@ extension Member: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
         
+        let managedObject = try cached(context)
         
+        managedObject.firstName = firstName
+        managedObject.lastName = lastName
+        managedObject.pictureURL = pictureURL
+        managedObject.twitter = twitter
+        managedObject.irc = irc
+        managedObject.biography = biography
+        managedObject.speakerRole = try context.relationshipFault(speakerRole)
+        managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
+        
+        managedObject.didCache()
+        
+        return managedObject
     }
 }
