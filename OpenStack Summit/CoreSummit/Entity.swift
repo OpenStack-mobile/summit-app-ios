@@ -135,9 +135,9 @@ internal extension NSManagedObjectContext {
     
     /// Returns faults for to-many relationships.
     @inline(__always)
-    func relationshipFault<T: CoreDataEncodable where T.ManagedObject: Entity>(identifiers: [Identifier], _ type: T.Type) throws -> Set<T.ManagedObject> {
+    func relationshipFault<ManagedObject: Entity>(identifiers: [Identifier]) throws -> Set<ManagedObject> {
         
-        let managedObjects = try identifiers.map { try T.ManagedObject.cached($0, context: self, returnsObjectsAsFaults: true, includesSubentities: true) }
+        let managedObjects = try identifiers.map { try ManagedObject.cached($0, context: self, returnsObjectsAsFaults: true, includesSubentities: true) }
         
         return Set(managedObjects)
     }
