@@ -67,7 +67,7 @@ public final class DataUpdatePoller {
         #endif
         
         // dont poll if no active summit
-        guard let summit = store.realm.objects(RealmSummit.self).first else { return }
+        guard let summit = try! store.managedObjectContext.managedObjects(SummitManagedObject.self).first else { return }
         
         log?("Polling server for data updates")
         
@@ -132,7 +132,7 @@ public final class DataUpdatePoller {
             
         } else {
             
-            store.dataUpdates(from: Date(foundation: summit.initialDataLoadDate)) { process(response: $0) }
+            store.dataUpdates(from: Date(foundation: summit.initialDataLoad ?? NSDate())) { process(response: $0) }
         }
     }
 }

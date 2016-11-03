@@ -96,93 +96,78 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        let authenticatedMember: MemberManagedObject?
-        
-        if let managedObject = self.authenticatedMember {
+        return try! context.performErrorBlockAndWait {
             
-            authenticatedMember = context.objectWithID(managedObject.objectID) as? MemberManagedObject
+            let authenticatedMember = try self.authenticatedMember(context)
             
-        } else {
-            
-            authenticatedMember = nil
-        }
-        
-        // truncate
-        guard dataUpdate.operation != .Truncate else {
-            
-            guard dataUpdate.className == .WipeData
-                else { return false }
-            
-            self.resetPersistentStore(self.managedObjectContext.persistentStoreCoordinator!)
-            self.logout()
-            
-            return true
-        }
-        
-        guard dataUpdate.className != .WipeData
-            else { return false }
-        
-        // add or remove to schedule
-        guard dataUpdate.className != .MySchedule else {
-            
-            // should only get for authenticated requests
-            guard let attendeeRole = self.authenticatedMember?.attendeeRole
-                else { return false }
-            
-            switch dataUpdate.operation {
+            // truncate
+            guard dataUpdate.operation != .Truncate else {
                 
-            case .Insert:
-                
-                guard let entityJSON = dataUpdate.entity,
-                    case let .JSON(jsonObject) = entityJSON,
-                    let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
+                guard dataUpdate.className == .WipeData
                     else { return false }
                 
-                try! context.performErrorBlockAndWait {
+                try self.resetPersistentStore(context.persistentStoreCoordinator!)
+                self.logout()
+                
+                return true
+            }
+            
+            guard dataUpdate.className != .WipeData
+                else { return false }
+            
+            // add or remove to schedule
+            guard dataUpdate.className != .MySchedule else {
+                
+                // should only get for authenticated requests
+                guard let attendeeRole = authenticatedMember?.attendeeRole
+                    else { return false }
+                
+                switch dataUpdate.operation {
+                    
+                case .Insert:
+                    
+                    guard let entityJSON = dataUpdate.entity,
+                        case let .JSON(jsonObject) = entityJSON,
+                        let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
+                        else { return false }
                     
                     let eventManagedObject = try event.save(context)
                     
-                    authenticatedMember?.attendeeRole?.scheduledEvents.insert(eventManagedObject)
+                    attendeeRole.scheduledEvents.insert(eventManagedObject)
                     
                     try context.save()
+                    
+                    return true
+                    
+                case .Delete:
+                    
+                    guard let entityID = dataUpdate.entity,
+                        case let .Identifier(identifier) = entityID
+                        else { return false }
+                    
+                    if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
+                        
+                        attendeeRole.scheduledEvents.remove(eventManagedObject)
+                        
+                        try context.save()
+                    }
+                    
+                    return true
+                    
+                default: return false
                 }
-                
-                return true
-                
-            case .Delete:
+            }
+            
+            /// we dont support all of the DataUpdate types, but thats ok
+            guard let type = dataUpdate.className.type
+                else { return true }
+            
+            // delete
+            guard dataUpdate.operation != .Delete else {
                 
                 guard let entityID = dataUpdate.entity,
                     case let .Identifier(identifier) = entityID
                     else { return false }
-                
-                try! context.performErrorBlockAndWait {
-                    
-                    if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
-                        
-                        authenticatedMember?.attendeeRole?.scheduledEvents.remove(eventManagedObject)
-                        
-                        try context.save()
-                    }
-                }
-                
-                return true
-                
-            default: return false
-            }
-        }
-        
-        /// we dont support all of the DataUpdate types, but thats ok
-        guard let type = dataUpdate.className.type
-            else { return true }
-        
-        // delete
-        guard dataUpdate.operation != .Delete else {
-            
-            guard let entityID = dataUpdate.entity,
-                case let .Identifier(identifier) = entityID
-                else { return false }
-            
-            try! context.performErrorBlockAndWait {
                 
                 // if it doesnt exist, dont delete it
                 if let foundEntity = try type.find(identifier, context: context) {
@@ -191,35 +176,34 @@ public extension Store {
                     
                     try context.save()
                 }
-            }
-            
-            return true
-        }
-        
-        // parse JSON
-        guard let entityJSON = dataUpdate.entity,
-            case let .JSON(jsonObject) = entityJSON,
-            let entity = type.init(JSONValue: .Object(jsonObject))
-            else { return false }
-        
-        switch dataUpdate.className {
-            
-        case .SummitLocationImage, .SummitLocationMap:
-            /*
-            guard let image = entity as? Image
-                else { return false }
-            */
-            return true
-            
-        default:
-            
-            // insert or update
-            try! context.performErrorBlockAndWait {
                 
-                try entity.write(context)
+                return true
             }
             
-            return true
+            // parse JSON
+            guard let entityJSON = dataUpdate.entity,
+                case let .JSON(jsonObject) = entityJSON,
+                let entity = type.init(JSONValue: .Object(jsonObject))
+                else { return false }
+            
+            switch dataUpdate.className {
+                
+            case .SummitLocationImage, .SummitLocationMap:
+                /*
+                 guard let image = entity as? Image
+                 else { return false }
+                 */
+                return true
+                
+            default:
+                
+                // insert or update
+                try entity.write(context)
+                
+                try context.save()
+                
+                return true
+            }
         }
     }
 }

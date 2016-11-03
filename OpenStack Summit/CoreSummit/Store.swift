@@ -24,10 +24,10 @@ public final class Store {
     public let managedObjectModel: NSManagedObjectModel
     
     /// Block for creating the persistent store.
-    public let createPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore
+    public let createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore
     
     /// Block for resetting the persistent store.
-    public let resetPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore
+    public let resetPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore
     
     /// The server targeted environment. 
     public let environment: Environment
@@ -66,8 +66,8 @@ public final class Store {
     
     private init(environment: Environment,
                  session: SessionStorage,
-                 createPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore,
-                 resetPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore) {
+                 createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
+                 resetPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore) {
         
         // store values
         self.environment = environment
