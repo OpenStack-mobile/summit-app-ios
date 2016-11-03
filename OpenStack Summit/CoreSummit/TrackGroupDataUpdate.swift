@@ -27,7 +27,7 @@ public struct TrackGroupDataUpdate: Named {
 
 // MARK: - Equatable
 
-public func == (lhs: TrackGroup.DataUpdate, rhs: TrackGroup.DataUpdate) -> Bool {
+public func == (lhs: TrackGroupDataUpdate, rhs: TrackGroupDataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name

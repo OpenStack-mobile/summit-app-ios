@@ -8,42 +8,39 @@
 
 import struct SwiftFoundation.Date
 
-public extension Event {
+/// The `DataUpdate` version of an `Event`.
+public struct EventDataUpdate: Named {
     
-    /// The `DataUpdate` version of an `Event`.
-    public struct DataUpdate: Named {
-        
-        public let identifier: Identifier
-        
-        public var name: String
-        
-        public var descriptionText: String?
-        
-        public var start: Date
-        
-        public var end: Date
-        
-        public var allowFeedback: Bool
-        
-        public var averageFeedback: Double
-        
-        public var type: Identifier
-        
-        public var summitTypes: Set<Identifier>
-        
-        public var sponsors: Set<Company>
-        
-        public var tags: Set<Tag>
-        
-        public var location: Identifier
-        
-        public var presentation: Presentation.DataUpdate?
-                
-        public var videos: Set<Video>
-    }
+    public let identifier: Identifier
+    
+    public var name: String
+    
+    public var descriptionText: String?
+    
+    public var start: Date
+    
+    public var end: Date
+    
+    public var allowFeedback: Bool
+    
+    public var averageFeedback: Double
+    
+    public var type: Identifier
+    
+    public var summitTypes: Set<Identifier>
+    
+    public var sponsors: Set<Company>
+    
+    public var tags: Set<Tag>
+    
+    public var location: Identifier
+    
+    public var presentation: PresentationDataUpdate?
+    
+    public var videos: Set<Video>
 }
 
-public func == (lhs: Event.DataUpdate, rhs: Event.DataUpdate) -> Bool {
+public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name

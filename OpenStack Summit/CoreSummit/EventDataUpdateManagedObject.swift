@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftFoundation
 
-extension Event.DataUpdate: CoreDataEncodable {
+extension EventDataUpdate: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
         

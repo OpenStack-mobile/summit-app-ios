@@ -48,6 +48,7 @@ extension Member: Person {
     public var title: String? { return nil }
 }
 
+#if os(iOS)
 public extension Store {
     
     var memberRole: MemberRole {
@@ -75,14 +76,12 @@ public extension Store {
         }
     }
 }
+#endif
 
 // MARK: - Supporting Types
 
-public extension Store {
+public enum MemberRole {
     
-    public enum MemberRole {
-        
-        case anonymous, attendee, speaker, member
-    }
+    case anonymous, attendee, speaker, member
 }
 

@@ -67,10 +67,10 @@ public extension DataUpdate {
             
             switch self {
             case .WipeData: return nil
-            case .MySchedule: return CoreSummit.Event.DataUpdate.self
+            case .MySchedule: return CoreSummit.EventDataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
-            case .Presentation: return CoreSummit.Event.DataUpdate.self
-            case .SummitEvent: return CoreSummit.Event.DataUpdate.self
+            case .Presentation: return CoreSummit.EventDataUpdate.self
+            case .SummitEvent: return CoreSummit.EventDataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
             case .PresentationSpeaker: return CoreSummit.Speaker.self
@@ -98,7 +98,11 @@ public extension Store {
         
         return try! context.performErrorBlockAndWait {
             
+            #if os(iOS)
             let authenticatedMember = try self.authenticatedMember(context)
+            #else
+            let authenticatedMember: MemberManagedObject? = nil
+            #endif
             
             // truncate
             guard dataUpdate.operation != .Truncate else {
@@ -107,7 +111,10 @@ public extension Store {
                     else { return false }
                 
                 try self.resetContext()
+                
+                #if os(iOS)
                 self.logout()
+                #endif
                 
                 return true
             }
@@ -128,7 +135,7 @@ public extension Store {
                     
                     guard let entityJSON = dataUpdate.entity,
                         case let .JSON(jsonObject) = entityJSON,
-                        let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
+                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
                         else { return false }
                     
                     let eventManagedObject = try event.save(context)
@@ -237,8 +244,8 @@ extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
 }
 
 // Conform to protocol
-extension Summit.DataUpdate: Updatable { }
-extension Event.DataUpdate: Updatable { }
+extension SummitDataUpdate: Updatable { }
+extension EventDataUpdate: Updatable { }
 extension SummitType: Updatable { }
 extension EventType: Updatable { }
 extension Speaker: Updatable { }
