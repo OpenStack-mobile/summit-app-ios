@@ -15,8 +15,7 @@ public extension Store {
     /// The member that is logged in. Only valid for confirmed attendees.
     var authenticatedMember: MemberManagedObject? {
         
-        guard let session = self.session,
-            let sessionMember = session.member,
+        guard let sessionMember = session.member,
             case let .attendee(memberID) = sessionMember,
             let member = MemberManagedObject.find(memberID, context: self.managedObjectContext)
             else { return nil }
@@ -26,13 +25,12 @@ public extension Store {
     
     var isLoggedIn: Bool {
         
-        return self.session?.member != nil
+        return self.session.member != nil
     }
     
     var isLoggedInAndConfirmedAttendee: Bool {
         
-        guard let session = self.session,
-            let sessionMember = session.member,
+        guard let sessionMember = session.member,
             case .attendee(_) = sessionMember
             else { return false }
         

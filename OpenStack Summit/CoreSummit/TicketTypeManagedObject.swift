@@ -37,7 +37,7 @@ extension TicketType: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.allowedSummitTypes = try context.relationshipFault(allowedSummitTypes, SummitType.self)
+        managedObject.allowedSummitTypes = try context.relationshipFault(allowedSummitTypes)
         
         managedObject.didCache()
         

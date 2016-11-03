@@ -15,11 +15,6 @@ import AeroGearOAuth2
 /// Class used for requesting and caching data from the server.
 public final class Store {
     
-    // MARK: - Singleton
-    
-    /// Singleton Store instance
-    public static let shared = Store()
-    
     // MARK: - Properties
     
     /// The managed object context used for caching.
@@ -28,15 +23,17 @@ public final class Store {
     /// A convenience variable for the managed object model.
     public let managedObjectModel: NSManagedObjectModel
     
-    /// The current targeted environment
-    public var environment = Environment.Staging {
-        didSet { configOAuthAccounts() }
-    }
+    /// Block for creating the persistent store.
+    public let createPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore
     
-    public var session: SessionStorage? {
-        
-        didSet { session?.hadPasscode = deviceHasPasscode }
-    }
+    /// Block for resetting the persistent store.
+    public let resetPersistentStore: (NSPersistentStoreCoordinator) -> NSPersistentStore
+    
+    /// The server targeted environment. 
+    public let environment: Environment
+    
+    /// Provides the storage for session values. 
+    public var session: SessionStorage
     
     // MARK: - Private / Internal Properties
     
@@ -115,6 +112,7 @@ public final class Store {
     // MARK: - Internal / Private Methods
     
     /// Convenience function for adding a block to the request queue.
+    @inline(__always)
     internal func newRequest(block: () -> ()) {
         
         self.requestQueue.addOperationWithBlock(block)
@@ -187,11 +185,10 @@ public final class Store {
         
         config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
         
-        if let hadPasscode = self.session?.hadPasscode {
-            if hadPasscode && !hasPasscode {
-                session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
-                session.clearTokens()
-            }
+        if self.session.hadPasscode && !hasPasscode {
+            
+            session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
+            session.clearTokens()
         }
         
         session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)

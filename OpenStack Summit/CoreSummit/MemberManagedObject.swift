@@ -33,6 +33,11 @@ extension Member: CoreDataDecodable {
     public init(managedObject: MemberManagedObject) {
         
         self.identifier = managedObject.identifier
+        self.firstName = managedObject.firstName
+        self.lastName = managedObject.lastName
+        self.pictureURL = managedObject.pictureURL
+        self.twitter = managedObject.twitter
+        
     }
 }
 

@@ -41,7 +41,7 @@ extension TrackGroup: CoreDataEncodable {
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.color = color
-        managedObject.tracks = try context.relationshipFault(tracks, Track.self)
+        managedObject.tracks = try context.relationshipFault(tracks)
         
         managedObject.didCache()
         

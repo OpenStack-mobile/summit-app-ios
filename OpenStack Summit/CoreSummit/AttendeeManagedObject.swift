@@ -40,6 +40,7 @@ extension Attendee: CoreDataDecodable {
         self.pictureURL = managedObject.pictureURL
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
+        self.biography = managedObject.biography
         self.tickets = TicketType.from(managedObjects: managedObject.tickets)
         self.scheduledEvents = managedObject.scheduledEvents.identifiers
         self.feedback = AttendeeFeedback.from(managedObjects: managedObject.feedback)
@@ -59,7 +60,7 @@ extension Attendee: CoreDataEncodable {
         managedObject.irc = irc
         managedObject.biography = biography
         managedObject.tickets = try context.relationshipFault(tickets)
-        managedObject.scheduledEvents = try context.relationshipFault(scheduledEvents, Event.self)
+        managedObject.scheduledEvents = try context.relationshipFault(scheduledEvents)
         managedObject.feedback = try context.relationshipFault(feedback)
         
         managedObject.didCache()

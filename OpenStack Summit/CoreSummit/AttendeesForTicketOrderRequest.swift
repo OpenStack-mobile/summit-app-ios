@@ -46,9 +46,6 @@ public extension Store {
             guard let attendees = NonConfirmedAttendee.fromJSON(attendeesJSONArray)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
-            // cache
-            //try! self.realm.write { let _ = attendees.save(self.realm) }
-            
             // success
             completion(.Value(attendees))
         })

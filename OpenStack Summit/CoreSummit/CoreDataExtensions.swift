@@ -13,13 +13,15 @@ public extension NSManagedObjectContext {
     
     /// Wraps the block to allow for error throwing.
     @available(OSX 10.7, *)
-    func performErrorBlockAndWait(block: () throws -> ()) throws {
+    func performErrorBlockAndWait<T>(block: () throws -> T) throws -> T {
         
         var blockError: ErrorType?
         
+        var value: T!
+        
         self.performBlockAndWait {
             
-            do { try block() }
+            do { value = try block() }
             
             catch { blockError = error }
             
@@ -31,7 +33,7 @@ public extension NSManagedObjectContext {
             throw error
         }
         
-        return
+        return value
     }
     
     @inline(__always)

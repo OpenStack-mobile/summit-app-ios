@@ -31,6 +31,8 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         
+        let context = privateQueueManagedObjectContext
+        
         http.GET(URL, parameters: nil, completionHandler: { (responseObject, error) in
           
             // forward error
@@ -42,7 +44,12 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! self.realm.write { let _ = entity.save(self.realm) }
+            try! context.performErrorBlockAndWait {
+                
+                try entity.save(context)
+                
+                try context.save()
+            }
             
             // success
             completion(.Value(entity))

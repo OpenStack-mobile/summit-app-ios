@@ -56,8 +56,6 @@ public extension DataUpdate {
         case PresentationCategoryGroup
         case SummitLocationMap
         case SummitLocationImage
-        
-        // Not in legacy code
         case Summit
         case SummitVenueFloor
         case PresentationLink
@@ -75,7 +73,7 @@ public extension DataUpdate {
             case .SummitEvent: return CoreSummit.Event.DataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
-            case .PresentationSpeaker: return CoreSummit.PresentationSpeaker.self
+            case .PresentationSpeaker: return CoreSummit.Speaker.self
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
@@ -96,13 +94,26 @@ public extension Store {
     
     func process(dataUpdate: DataUpdate) -> Bool {
         
+        let context = privateQueueManagedObjectContext
+        
+        let authenticatedMember: MemberManagedObject?
+        
+        if let managedObject = self.authenticatedMember {
+            
+            authenticatedMember = context.objectWithID(managedObject.objectID) as? MemberManagedObject
+            
+        } else {
+            
+            authenticatedMember = nil
+        }
+        
         // truncate
         guard dataUpdate.operation != .Truncate else {
             
             guard dataUpdate.className == .WipeData
                 else { return false }
             
-            self.realm.deleteAll()
+            self.resetPersistentStore(self.managedObjectContext.persistentStoreCoordinator!)
             self.logout()
             
             return true
@@ -127,14 +138,13 @@ public extension Store {
                     let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
                     else { return false }
                 
-                try! self.realm.write {
+                try! context.performErrorBlockAndWait {
                     
-                    let realmEvent = event.save(self.realm)
+                    let eventManagedObject = try event.save(context)
                     
-                    if attendeeRole.scheduledEvents.indexOf("id = %@", event.identifier) == nil {
-                        
-                        attendeeRole.scheduledEvents.append(realmEvent)
-                    }
+                    authenticatedMember?.attendeeRole?.scheduledEvents.insert(eventManagedObject)
+                    
+                    try context.save()
                 }
                 
                 return true
@@ -145,11 +155,13 @@ public extension Store {
                     case let .Identifier(identifier) = entityID
                     else { return false }
                 
-                try! self.realm.write {
+                try! context.performErrorBlockAndWait {
                     
-                    if let index = attendeeRole.scheduledEvents.indexOf("id = %@", identifier) {
+                    if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
-                        attendeeRole.scheduledEvents.removeAtIndex(index)
+                        authenticatedMember?.attendeeRole?.scheduledEvents.remove(eventManagedObject)
+                        
+                        try context.save()
                     }
                 }
                 
@@ -167,16 +179,18 @@ public extension Store {
         guard dataUpdate.operation != .Delete else {
             
             guard let entityID = dataUpdate.entity,
-                case let .Identifier(id) = entityID
+                case let .Identifier(identifier) = entityID
                 else { return false }
             
-            // if it doesnt exist, dont delete it
-            guard let foundEntity = type.find(id, realm: self.realm)
-                else { return true }
-            
-            try! self.realm.write {
+            try! context.performErrorBlockAndWait {
                 
-                self.realm.delete(foundEntity)
+                // if it doesnt exist, dont delete it
+                if let foundEntity = try type.find(identifier, context: context) {
+                    
+                    context.deleteObject(foundEntity)
+                    
+                    try context.save()
+                }
             }
             
             return true
@@ -200,7 +214,10 @@ public extension Store {
         default:
             
             // insert or update
-            entity.write(self.realm)
+            try! context.performErrorBlockAndWait {
+                
+                try entity.write(context)
+            }
             
             return true
         }
@@ -214,26 +231,24 @@ public extension Store {
 /// The model type can be updated remotely
 internal protocol Updatable: JSONDecodable {
     
-    static func find(identifier: Identifier, context: NSManagedObjectContext) -> Entity?
+    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity?
     
     /// Encodes to CoreData.
-    func write(context: NSManagedObjectContext) -> Entity
+    func write(context: NSManagedObjectContext) throws -> Entity
 }
 
 extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
     
-    static func find(identifier: Identifier, context: NSManagedObjectContext) -> Entity? {
+    @inline(__always)
+    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
         
-        return ManagedObject.find(identifier, context: context)
+        return try ManagedObject.find(identifier, context: context)
     }
     
+    @inline(__always)
     func write(context: NSManagedObjectContext) throws -> Entity {
         
-        var entity: Entity!
-        try context.performErrorBlockAndWait {
-            entity = try self.save(context)
-        }
-        return entity
+        return try self.save(context)
     }
 }
 

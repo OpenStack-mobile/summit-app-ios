@@ -86,8 +86,8 @@ extension Event: CoreDataEncodable {
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
         managedObject.eventType = try context.relationshipFault(type)
-        managedObject.summitTypes = try context.relationshipFault(summitTypes, SummitType.self)
-        managedObject.sponsors = try context.relationshipFault(sponsors, Company.self)
+        managedObject.summitTypes = try context.relationshipFault(summitTypes)
+        managedObject.sponsors = try context.relationshipFault(sponsors)
         managedObject.tags = try context.relationshipFault(tags)
         managedObject.location = try context.relationshipFault(location)
         managedObject.presentation = try context.relationshipFault(presentation)

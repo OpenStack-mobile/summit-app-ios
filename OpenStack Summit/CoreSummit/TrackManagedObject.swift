@@ -33,7 +33,7 @@ extension Track: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.name = name
-        managedObject.groups = try context.relationshipFault(groups, TrackGroup.self)
+        managedObject.groups = try context.relationshipFault(groups)
         
         managedObject.didCache()
         

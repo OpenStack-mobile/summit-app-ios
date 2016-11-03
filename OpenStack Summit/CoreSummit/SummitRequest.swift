@@ -20,22 +20,21 @@ public extension Store {
     
         let json = JSON.Value(string: JSONString)!
     
-        let entity = Summit(JSONValue: json)!
+        let summit = Summit(JSONValue: json)!
+        
+        let context = self.privateQueueManagedObjectContext
         
         // cache
-        #if CORESUMMITREALM
-            try! self.realm.write {
-                
-                let realmSummit = entity.save(self.realm)
-                
-                realmSummit.initialDataLoadDate = NSDate()
-            }
-        #else
-            self.cache = entity
-            try! JSONString.writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
-        #endif
+        try! context.performErrorBlockAndWait {
+            
+            let managedObject = try summit.save(context)
+            
+            managedObject.initialDataLoad = NSDate()
+            
+            try context.save()
+        }
     
-        completion(.Value(entity))
+        completion(.Value(summit))
     }
     #else
     func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
@@ -57,6 +56,8 @@ public extension Store {
         
         let url = environment.configuration.serverURL + URI
         
+        let context = privateQueueManagedObjectContext
+        
         http.GET(url) { (responseObject, error) in
             
             // forward error
@@ -64,24 +65,21 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let entity = Summit(JSONValue: json)
+                let summit = Summit(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            #if CORESUMMITREALM
-            try! self.realm.write {
+            try! context.performErrorBlockAndWait {
                 
-                let realmSummit = entity.save(self.realm)
+                let managedObject = try summit.save(context)
                 
-                realmSummit.initialDataLoadDate = NSDate()
+                managedObject.initialDataLoad = NSDate()
+                
+                try context.save()
             }
-            #else
-            self.cache = entity
-            try! (responseObject as! String).writeToURL(Store.cacheURL, atomically: true, encoding: NSUTF8StringEncoding)
-            #endif
             
             // success
-            completion(.Value(entity))
+            completion(.Value(summit))
         }
     }
     #endif

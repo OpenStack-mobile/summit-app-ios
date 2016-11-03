@@ -73,13 +73,13 @@ public extension Entity {
     static func find(identifier: Int,
                      context: NSManagedObjectContext,
                      returnsObjectsAsFaults: Bool = true,
-                     includesSubentities: Bool = true) -> Self? {
+                     includesSubentities: Bool = true) throws -> Self? {
         
         let entity = self.entity(in: context)
         
         let resourceID = NSNumber(longLong: Int64(identifier))
         
-        return try! context.find(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
+        return try context.find(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
     }
     
     /// Find or create.

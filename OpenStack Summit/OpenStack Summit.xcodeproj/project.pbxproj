@@ -415,6 +415,7 @@
 		6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F51D7C903E002B7C7A /* Main.storyboard */; };
 		6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */; };
 		6E9FBCFB1D933F1B0005234F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */; };
+		6EA38A701DCB059400B703CE /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
 		6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */; };
 		6EA6FD351D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */; };
 		6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
@@ -1322,6 +1323,7 @@
 				6ECA1CD11D4EC46C00806924 /* Session.swift */,
 				6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */,
 				6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */,
+				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
 				6E74FAF01D7C992A0018633D /* Swift Extensions */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
@@ -1609,7 +1611,6 @@
 		6E570A321D67711500189992 /* DataUpdate */ = {
 			isa = PBXGroup;
 			children = (
-				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
 				6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */,
 				6E570A331D6771CF00189992 /* EventDataUpdate.swift */,
 				6E570A351D67753D00189992 /* PresentationDataUpdate.swift */,
@@ -2671,6 +2672,7 @@
 				6E0B5EF71D77C8950005F6CE /* TagJSON.swift in Sources */,
 				6E7847F31DC9224700B8AD05 /* LocationManagedObject.swift in Sources */,
 				6E0B5EF91D77C8950005F6CE /* TimeZoneJSON.swift in Sources */,
+				6EA38A701DCB059400B703CE /* DataUpdate.swift in Sources */,
 				6E0B5EFA1D77C8950005F6CE /* Feedback.swift in Sources */,
 				6E0B5EFB1D77C8950005F6CE /* PresentationJSON.swift in Sources */,
 				6E0B5EFC1D77C8950005F6CE /* SummitAttendeeJSON.swift in Sources */,

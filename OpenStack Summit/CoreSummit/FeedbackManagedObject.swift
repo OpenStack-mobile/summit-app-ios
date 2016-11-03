@@ -76,3 +76,36 @@ extension Review: CoreDataEncodable {
         return managedObject
     }
 }
+
+extension AttendeeFeedback: CoreDataDecodable {
+    
+    public init(managedObject: AttendeeFeedbackManagedObject) {
+        
+        self.identifier = managedObject.identifier
+        self.rate = Int(managedObject.rate)
+        self.review = managedObject.review
+        self.date = Date(foundation: managedObject.date)
+        self.event = managedObject.event.identifier
+        self.member = managedObject.member.identifier
+        self.attendee = managedObject.attendee.identifier
+    }
+}
+
+extension AttendeeFeedback: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> AttendeeFeedbackManagedObject {
+        
+        let managedObject = try cached(context)
+        
+        managedObject.rate = Int16(rate)
+        managedObject.review = review
+        managedObject.date = date.toFoundation()
+        managedObject.event = try context.relationshipFault(event)
+        managedObject.member = try context.relationshipFault(member)
+        managedObject.attendee = try context.relationshipFault(attendee)
+        
+        managedObject.didCache()
+        
+        return managedObject
+    }
+}
