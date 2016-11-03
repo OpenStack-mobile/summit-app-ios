@@ -47,6 +47,7 @@ public func == (lhs: Event, rhs: Event) -> Bool {
         && lhs.name == rhs.name
         && lhs.descriptionText == rhs.descriptionText
         && lhs.start == rhs.start
+        && lhs.end == rhs.end
         && lhs.allowFeedback == rhs.allowFeedback
         && lhs.averageFeedback == rhs.averageFeedback
         && lhs.type == rhs.type

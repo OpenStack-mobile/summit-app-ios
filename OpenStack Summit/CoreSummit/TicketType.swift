@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct TicketType: Named {
+public struct TicketType: Named, Equatable {
     
     public let identifier: Identifier
     
@@ -15,4 +15,14 @@ public struct TicketType: Named {
     public var descriptionText: String?
     
     public var allowedSummitTypes: [Identifier]
+}
+
+// MARK: - Equatable
+
+public func == (lhs: TicketType, rhs: TicketType) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.allowedSummitTypes == rhs.allowedSummitTypes
 }

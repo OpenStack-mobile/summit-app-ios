@@ -13,6 +13,8 @@ public struct Company: Named, Equatable {
     public var name: String
 }
 
+// MARK: - Equatable
+
 public func == (lhs: Company, rhs: Company) -> Bool {
     
     return lhs.identifier == rhs.identifier

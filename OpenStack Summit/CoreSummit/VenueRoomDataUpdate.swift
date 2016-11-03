@@ -26,3 +26,14 @@ public struct VenueRoomDataUpdate: LocationProtocol {
     public var floor: VenueFloor?
 }
 
+// MARK: - Equatable
+
+public func == (lhs: VenueRoom.DataUpdate, rhs: VenueRoom.DataUpdate) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.capacity == rhs.capacity
+        && lhs.venue == rhs.venue
+        && lhs.floor == rhs.floor
+}

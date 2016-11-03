@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Image: Unique {
+public struct Image: Unique, Equatable {
     
     public let identifier: Identifier
     

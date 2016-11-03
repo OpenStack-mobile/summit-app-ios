@@ -23,6 +23,7 @@ public extension CollectionType where Generator.Element: Unique {
         return self.map { $0.identifier }
     }
     
+    @inline(__always)
     func with(identifier: Identifier) -> Self.Generator.Element? {
         
         return firstMatching { $0.identifier == identifier }

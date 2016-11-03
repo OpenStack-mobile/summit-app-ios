@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Attendee: Unique {
+public struct Attendee: Unique, Equatable {
     
     public let identifier: Identifier
     
@@ -40,4 +40,20 @@ public struct Attendee: Unique {
 extension Attendee: Person {
     
     public var title: String? { return nil }
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Attendee, rhs: Attendee) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+        && lhs.pictureURL == rhs.pictureURL
+        && lhs.twitter == rhs.twitter
+        && lhs.irc == rhs.irc
+        && lhs.biography == rhs.biography
+        && lhs.tickets == rhs.tickets
+        && lhs.scheduledEvents == rhs.scheduledEvents
+        && lhs.feedback == rhs.feedback
 }

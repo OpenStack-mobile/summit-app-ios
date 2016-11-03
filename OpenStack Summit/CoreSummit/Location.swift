@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public protocol LocationProtocol: Named, Equatable {
+public protocol LocationProtocol: Named {
     
     var descriptionText: String? { get }
 }

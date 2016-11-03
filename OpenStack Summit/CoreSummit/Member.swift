@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Member: Named {
+public struct Member: Named, Equatable {
     
     public let identifier: Identifier
     
@@ -25,6 +25,20 @@ public struct Member: Named {
     public var speakerRole: Speaker?
     
     public var attendeeRole: Attendee?
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Member, rhs: Member) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+        && lhs.pictureURL == rhs.pictureURL
+        && lhs.twitter == rhs.twitter
+        && lhs.irc == rhs.irc
+        && lhs.speakerRole == rhs.speakerRole
+        && lhs.attendeeRole == rhs.attendeeRole
 }
 
 // MARK: - Extensions
