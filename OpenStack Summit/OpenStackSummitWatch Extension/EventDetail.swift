@@ -27,10 +27,10 @@ public struct EventDetail {
     public let venue: Identifier?
     public let descriptionText: String?
     public let tags: String
-    public let speakers: [PresentationSpeaker]
+    public let speakers: [Speaker]
     public let finished: Bool
     public let allowFeedback: Bool
-    public let moderator: PresentationSpeaker?
+    public let moderator: Speaker?
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
@@ -69,8 +69,8 @@ public struct EventDetail {
         
         self.level = event.presentation != nil ? event.presentation!.level!.rawValue + " Level" : ""
         
-        var speakers = [PresentationSpeaker]()
-        var moderatorSpeaker: PresentationSpeaker?
+        var speakers = [Speaker]()
+        var moderatorSpeaker: Speaker?
         if let presentation = event.presentation {
             
             for speakerID in presentation.speakers {
@@ -115,7 +115,7 @@ internal extension EventDetail {
         return credentials
     }
     
-    static func getSponsors(event: SummitEvent, summit: Summit) -> String {
+    static func getSponsors(event: Event, summit: Summit) -> String {
         
         guard event.sponsors.isEmpty == false
             else { return "" }
@@ -131,7 +131,7 @@ internal extension EventDetail {
         return sponsors
     }
     
-    static func getTime(event: SummitEvent, summit: Summit) -> String {
+    static func getTime(event: Event, summit: Summit) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
@@ -145,7 +145,7 @@ internal extension EventDetail {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getDateTime(event: SummitEvent, summit: Summit) -> String {
+    static func getDateTime(event: Event, summit: Summit) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
@@ -159,27 +159,31 @@ internal extension EventDetail {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getLocation(event: SummitEvent, summit: Summit) -> String {
+    static func getLocation(event: Event, summit: Summit) -> String {
         
         guard let locationID = event.location
             where locationID != 0
             else { return "" }
         
-        let location = summit.locations.map({ $0.rawValue }).firstMatching({ $0.identifier == locationID })!
+        let location = summit.locations.firstMatching({ $0.identifier == locationID })!
         
-        if let room = location as? VenueRoom {
+        switch location {
             
-            let venue = summit.locations.map({ $0.rawValue }).firstMatching({ $0.identifier == room.venue })!
+        case let .room(room):
+            
+            guard let venueLocation = summit.locations.firstMatching({ $0.identifier == room.venue }),
+                case let .venue(venue) = venueLocation
+                else { fatalError("No venue") }
             
             return venue.name + " - " + room.name
             
-        } else {
+        case let .venue(venue):
             
-            return location.name
+            return venue.name
         }
     }
     
-    static func getTrack(event: SummitEvent, summit: Summit) -> String {
+    static func getTrack(event: Event, summit: Summit) -> String {
         
         guard let trackID = event.presentation?.track
             else { return "" }
@@ -187,7 +191,7 @@ internal extension EventDetail {
         return summit.tracks.firstMatching({ $0.identifier == trackID })!.name
     }
     
-    static func getTrackGroupColor(event: SummitEvent, summit: Summit) -> String {
+    static func getTrackGroupColor(event: Event, summit: Summit) -> String {
         
         guard let trackID = event.presentation?.track,
             let track = summit.tracks.firstMatching({ $0.identifier == trackID }),
