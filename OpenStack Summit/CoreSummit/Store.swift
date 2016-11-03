@@ -27,7 +27,7 @@ public final class Store {
     public let createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore
     
     /// Block for resetting the persistent store.
-    public let deletePersistentStore: () throws -> ()
+    public let deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()
     
     /// The server targeted environment. 
     public let environment: Environment
@@ -36,6 +36,10 @@ public final class Store {
     public var session: SessionStorage
     
     // MARK: - Private / Internal Properties
+    
+    private let persistentStoreCoordinator: NSPersistentStoreCoordinator
+    
+    private var persistentStore: NSPersistentStore
     
     /// The managed object context running on a background thread for asyncronous caching.
     internal let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
@@ -67,7 +71,7 @@ public final class Store {
     public init(environment: Environment,
                  session: SessionStorage,
                  createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
-                 deletePersistentStore: () -> ()) throws {
+                 deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
         
         // store values
         self.environment = environment
@@ -77,8 +81,7 @@ public final class Store {
         
         // set managed object model
         self.managedObjectModel = NSManagedObjectModel.summitModel
-        
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
         // setup managed object contexts
         self.managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
@@ -87,15 +90,14 @@ public final class Store {
         
         self.privateQueueManagedObjectContext.undoManager = nil
         self.privateQueueManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
-        // set private context name
         self.privateQueueManagedObjectContext.name = "\(Store.self) Private Managed Object Context"
+        
+        // configure CoreData backing store
+        self.persistentStore = try createPersistentStore(persistentStoreCoordinator)
         
         // listen for notifications (for merging changes)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Store.mergeChangesFromContextDidSaveNotification(_:)), name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
         
-        // configure CoreData backing store
-        try createPersistentStore(persistentStoreCoordinator)
         
         // config OAuth and HTTP
         configOAuthAccounts()
@@ -135,11 +137,14 @@ public final class Store {
     @inline(__always)
     internal func resetContext() throws {
         
-        try self.deletePersistentStore()
-        try self.createPersistentStore(self.managedObjectContext.persistentStoreCoordinator!)
+        try self.deletePersistentStore(persistentStoreCoordinator, persistentStore)
+        self.persistentStore = try self.createPersistentStore(persistentStoreCoordinator)
         
         self.managedObjectContext.reset()
         self.privateQueueManagedObjectContext.reset()
+        
+        // manually send notification
+        NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: [:])
     }
     
     // MARK: - OAuth2
