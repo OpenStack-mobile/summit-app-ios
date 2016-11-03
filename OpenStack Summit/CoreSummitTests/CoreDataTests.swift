@@ -38,16 +38,49 @@ final class CoreDataTests: XCTestCase {
             
             var decodedSummit = Summit(managedObject: managedObject)
             
-            // sort decoded locations so that they dump the same string
-            summit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
-            decodedSummit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
+            // sort relationhips so that they dump the same string
+            summit.sortInPlace()
+            decodedSummit.sortInPlace()
             
             // dump
-            
             let decodedDump = dump(decodedSummit, "DecodedSummit\(summitID)Dump.txt")
             let summitDump = dump(summit, "Summit\(summitID)Dump.txt")
             
             XCTAssert(decodedDump == summitDump, "Original summit \(summitID) must equal decoded summit")
+        }
+    }
+}
+
+private extension Summit {
+    
+    /// Sorting method to produce and text for dump
+    mutating func sortInPlace() {
+        
+        sponsors.sortInPlace { $0.identifier < $1.identifier }
+        speakers.sortInPlace { $0.identifier < $1.identifier }
+        summitTypes.sortInPlace { $0.identifier < $1.identifier }
+        ticketTypes.sortInPlace { $0.identifier < $1.identifier }
+        tracks.sortInPlace { $0.identifier < $1.identifier }
+        trackGroups.sortInPlace { $0.identifier < $1.identifier }
+        eventTypes.sortInPlace { $0.identifier < $1.identifier }
+        locations.sortInPlace { $0.identifier < $1.identifier }
+        schedule.sortInPlace { $0.identifier < $1.identifier }
+        locations.sortInPlace { $0.identifier < $1.identifier }
+        locations = locations.map {
+            
+            switch $0 {
+                
+            case var .venue(venue):
+                
+                venue.images.sortInPlace { $0.identifier < $1.identifier }
+                venue.maps.sortInPlace { $0.identifier < $1.identifier }
+                
+                return .venue(venue)
+                
+            case var .room(room):
+                
+                return .room(room)
+            }
         }
     }
 }
