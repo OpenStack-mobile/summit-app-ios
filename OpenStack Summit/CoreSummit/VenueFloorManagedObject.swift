@@ -44,10 +44,12 @@ extension VenueFloor: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
+        managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.number = Int16(number)
         managedObject.imageURL = imageURL
         managedObject.venue = try context.relationshipFault(venue)
+        managedObject.rooms = try context.relationshipFault(rooms)
         
         managedObject.didCache()
         

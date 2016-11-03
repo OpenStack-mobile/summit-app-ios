@@ -153,6 +153,7 @@
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="rooms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VenueRoom" inverseName="floor" inverseEntity="VenueRoom" syncable="YES"/>
         <relationship name="venue" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="floors" inverseEntity="Venue" syncable="YES"/>
@@ -187,7 +188,7 @@
         <element name="Track" positionX="-9" positionY="126" width="128" height="135"/>
         <element name="TrackGroup" positionX="0" positionY="135" width="128" height="150"/>
         <element name="Venue" positionX="27" positionY="153" width="128" height="240"/>
-        <element name="VenueFloor" positionX="27" positionY="180" width="128" height="150"/>
+        <element name="VenueFloor" positionX="27" positionY="180" width="128" height="165"/>
         <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="90"/>
         <element name="Video" positionX="0" positionY="126" width="128" height="165"/>
     </elements>

@@ -1,30 +1,28 @@
 //
-//  RealmTest.swift
+//  CoreDataTests.swift
 //  OpenStackSummit
 //
-//  Created by Alsey Coleman Miller on 6/3/16.
+//  Created by Alsey Coleman Miller on 11/3/16.
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
 import XCTest
+import Foundation
+import CoreData
 import SwiftFoundation
-import CoreSummit
+@testable import CoreSummit
 
-final class RealmTests: XCTestCase {
-    
-    func createRealm(name: String) -> Realm {
-        
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = name
-        
-        return try! Realm()
-    }
+final class CoreDataTests: XCTestCase {
     
     func testSummits() {
         
         for summitID in SummitJSONIdentifiers {
             
-            let realm = createRealm("RealmTests_Summit\(summitID)")
-            
+            let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+            managedObjectContext.undoManager = nil
+            managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel.summitModel)
+            try! managedObjectContext.persistentStoreCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+                        
             // load test data
             let testJSON = loadJSON("Summit\(summitID)")
             
@@ -32,13 +30,13 @@ final class RealmTests: XCTestCase {
                 else { XCTFail("Could not decode from JSON"); return }
             
             // decode
-            var realmSummit: RealmSummit!
+            var managedObject: SummitManagedObject!
             
-            do { try realm.write { realmSummit = summit.save(realm) } }
+            do { managedObject = try summit.save(managedObjectContext) }
                 
             catch { XCTFail("\(error)"); return }
             
-            var decodedSummit = Summit(realmEntity: realmSummit)
+            var decodedSummit = Summit(managedObject: managedObject)
             
             // sort decoded locations so that they dump the same string
             summit.locations.sortInPlace { $0.rawValue.identifier < $1.rawValue.identifier }
