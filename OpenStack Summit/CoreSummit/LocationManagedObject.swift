@@ -11,15 +11,15 @@ import CoreData
 
 public class LocationManagedObject: Entity {
     
-    @NSManaged public final var name: String
+    @NSManaged public var name: String
     
-    @NSManaged public final var descriptionText: String?
+    @NSManaged public var descriptionText: String?
     
     // Inverse Relationships
     
-    @NSManaged public final var events: Set<EventManagedObject>
+    @NSManaged public var events: Set<EventManagedObject>
     
-    @NSManaged public final var summits: SummitManagedObject
+    @NSManaged public var summits: SummitManagedObject
 }
 
 extension Location: CoreDataDecodable {

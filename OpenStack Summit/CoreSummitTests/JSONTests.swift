@@ -156,7 +156,7 @@ final class JSONTests: XCTestCase {
                 where dataUpdate.className == .MySchedule
                 else { continue }
             
-            guard let _ = SummitEvent.DataUpdate(JSONValue: .Object(entityJSON))
+            guard let _ = Event.DataUpdate(JSONValue: .Object(entityJSON))
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }

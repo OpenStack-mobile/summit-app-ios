@@ -13,10 +13,10 @@ import CoreData
 public class Entity: NSManagedObject {
     
     /// The unique identifier of this entity.
-    @NSManaged final var id: Int64
+    @NSManaged public var id: Int64
     
     /// The date this object was stored in its entirety.
-    @NSManaged final var cached: NSDate?
+    @NSManaged public var cached: NSDate?
 }
 
 // MARK: - Extensions

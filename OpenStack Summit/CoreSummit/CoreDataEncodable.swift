@@ -24,11 +24,11 @@ public extension CollectionType where Generator.Element: CoreDataEncodable {
         var managedObjects = ContiguousArray<Generator.Element.ManagedObject>()
         managedObjects.reserveCapacity(numericCast(self.count))
         
-        for (index, element) in self.enumerate() {
+        for element in self {
             
             let managedObject = try element.save(context)
             
-            managedObjects[index] = managedObject
+            managedObjects.append(managedObject)
         }
         
         return Set(managedObjects)

@@ -7,26 +7,20 @@
 //
 
 import XCTest
+import Foundation
+import CoreData
 import SwiftFoundation
-import CoreSummit
+@testable import CoreSummit
 
 final class StoreTests: XCTestCase {
     
-    @inline(__always)
-    private func clearRealm() {
-        
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "StoreTests"
-        
-        try! Store.shared.realm.write { Store.shared.realm.deleteAll() }
-    }
-    
     func testCurrentSummitRequest() {
         
-        clearRealm()
+        let store = try! createStore()
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.summit() { (response) in
+        store.summit() { (response) in
             
             switch response {
                 
@@ -49,13 +43,13 @@ final class StoreTests: XCTestCase {
     
     func testAustinSummitRequest() {
         
-        clearRealm()
+        let store = try! createStore()
                 
         let austinID = 6
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.summit(austinID) { (response) in
+        store.summit(austinID) { (response) in
             
             switch response {
                 
@@ -76,7 +70,7 @@ final class StoreTests: XCTestCase {
     
     func testDataUpdatesRequest() {
         
-        clearRealm()
+        let store = try! createStore()
         
         let austinID = 6
         
@@ -84,7 +78,7 @@ final class StoreTests: XCTestCase {
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.dataUpdates(austinID, from: date, limit: 100) { (response) in
+        store.dataUpdates(austinID, from: date, limit: 100) { (response) in
             
             switch response {
                 
@@ -105,7 +99,7 @@ final class StoreTests: XCTestCase {
     
     func testFeedbackRequest() {
         
-        clearRealm()
+        let store = try! createStore()
         
         let summit = 7 // Barcelona
         
@@ -113,7 +107,7 @@ final class StoreTests: XCTestCase {
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
+        store.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
             
             switch response {
                 

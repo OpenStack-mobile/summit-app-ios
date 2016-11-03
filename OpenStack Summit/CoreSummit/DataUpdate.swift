@@ -106,7 +106,7 @@ public extension Store {
                 guard dataUpdate.className == .WipeData
                     else { return false }
                 
-                try self.resetPersistentStore(context.persistentStoreCoordinator!)
+                try self.resetContext()
                 self.logout()
                 
                 return true
