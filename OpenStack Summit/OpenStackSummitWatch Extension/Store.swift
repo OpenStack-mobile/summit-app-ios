@@ -39,10 +39,28 @@ extension Store {
     
     static func createPersistentStore(coordinator: NSPersistentStoreCoordinator) throws -> NSPersistentStore {
         
-        return try coordinator.addPersistentStoreWithType(NSSQLiteStoreType,
-                                                          configuration: nil,
-                                                          URL: Store.fileURL,
-                                                          options: nil)
+        func createStore() throws -> NSPersistentStore {
+            
+            return try coordinator.addPersistentStoreWithType(NSSQLiteStoreType,
+                                                              configuration: nil,
+                                                              URL: Store.fileURL,
+                                                              options: nil)
+        }
+        
+        var store: NSPersistentStore!
+        
+        do { store = try createStore() }
+        
+        catch {
+            
+            // delete file
+            try Store.deletePersistentStore()
+            
+            // try again
+            store = try createStore()
+        }
+        
+        return store
     }
     
     static func deletePersistentStore(store: (NSPersistentStoreCoordinator, NSPersistentStore)? = nil) throws {
@@ -61,4 +79,26 @@ extension Store {
         }
     }
     
+    var cache: Summit? {
+        
+        struct Static {
+            static var summit: Summit?
+        }
+        
+        if let summit = Static.summit {
+            
+            return summit
+            
+        } else {
+            
+            guard let results = try? self.managedObjectContext.managedObjects(SummitManagedObject.self),
+                let managedObject = results.first
+                else { return nil }
+            
+            Static.summit = Summit(managedObject: managedObject)
+            
+            return Static.summit
+        }
+    }
 }
+

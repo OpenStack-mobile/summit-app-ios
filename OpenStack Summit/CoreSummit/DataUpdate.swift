@@ -110,7 +110,7 @@ public extension Store {
                 guard dataUpdate.className == .WipeData
                     else { return false }
                 
-                try self.resetContext()
+                try self.clear()
                 
                 #if os(iOS)
                 self.logout()

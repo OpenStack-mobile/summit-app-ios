@@ -60,7 +60,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let event = (context as? Context<SummitEvent>)?.value
+        guard let event = (context as? Context<Event>)?.value
             else { fatalError("Invalid context") }
         
         self.event = event

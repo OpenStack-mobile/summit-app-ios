@@ -125,17 +125,9 @@ public final class Store {
         return false
     }
     
-    // MARK: - Internal / Private Methods
+    // MARK: - Methods
     
-    /// Convenience function for adding a block to the request queue.
-    @inline(__always)
-    internal func newRequest(block: () -> ()) {
-        
-        self.requestQueue.addOperationWithBlock(block)
-    }
-    
-    @inline(__always)
-    internal func resetContext() throws {
+    public func clear() throws {
         
         try self.deletePersistentStore(persistentStoreCoordinator, persistentStore)
         self.persistentStore = try self.createPersistentStore(persistentStoreCoordinator)
@@ -145,6 +137,15 @@ public final class Store {
         
         // manually send notification
         NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: [:])
+    }
+    
+    // MARK: - Internal / Private Methods
+    
+    /// Convenience function for adding a block to the request queue.
+    @inline(__always)
+    internal func newRequest(block: () -> ()) {
+        
+        self.requestQueue.addOperationWithBlock(block)
     }
     
     // MARK: - OAuth2

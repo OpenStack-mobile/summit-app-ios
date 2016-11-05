@@ -46,7 +46,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var speaker: PresentationSpeaker!
+    private(set) var speaker: Speaker!
     
     private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation?.speakers.contains(self.speaker.identifier) ?? false }) ?? []
     
@@ -55,7 +55,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let speaker = (context as? Context<PresentationSpeaker>)?.value
+        guard let speaker = (context as? Context<Speaker>)?.value
             else { fatalError("Invalid context") }
         
         self.speaker = speaker
