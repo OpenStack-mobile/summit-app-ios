@@ -32,7 +32,7 @@ extension CoreSpotlightSearchable where Self: CoreSummit.Unique {
 }
 
 @available(iOS 9.0, *)
-extension SummitEvent: CoreSpotlightSearchable {
+extension Event: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
     
@@ -61,7 +61,7 @@ extension SummitEvent: CoreSpotlightSearchable {
 }
 
 @available(iOS 9.0, *)
-extension PresentationSpeaker: CoreSpotlightSearchable {
+extension Speaker: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
     

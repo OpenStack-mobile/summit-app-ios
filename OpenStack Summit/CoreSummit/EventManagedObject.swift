@@ -39,6 +39,10 @@ public final class EventManagedObject: Entity {
     @NSManaged public var presentation: PresentationManagedObject?
     
     @NSManaged public var videos: Set<VideoManagedObject>
+    
+    // Inverse Relationships
+    
+    @NSManaged public var summit: SummitManagedObject
 }
 
 extension Event: CoreDataDecodable {

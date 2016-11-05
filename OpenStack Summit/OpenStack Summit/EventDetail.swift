@@ -9,7 +9,7 @@
 import Foundation
 import CoreSummit
 
-public struct EventDetail: RealmDecodable {
+public struct EventDetail: CoreDataDecodable {
     
     // MARK: - Properties
     
@@ -27,7 +27,7 @@ public struct EventDetail: RealmDecodable {
     public let venue: Identifier?
     public let eventDescription: String
     public let tags: String
-    public let speakers: [Speaker]
+    public let speakers: [SpeakerDetail]
     public let finished: Bool
     public let allowFeedback: Bool
     public let level: String
@@ -35,15 +35,13 @@ public struct EventDetail: RealmDecodable {
     public let video: Video?
     public let rsvp: String
     
-    #if os(iOS)
     public let webpageURL: NSURL
-    #endif
     
     // MARK: - Initialization
     
-    public init(realmEntity event: RealmSummitEvent) {
+    public init(managedObject event: EventManagedObject) {
         
-        self.id = event.id
+        self.id = event.identifier
         self.name = event.name
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
@@ -53,12 +51,12 @@ public struct EventDetail: RealmDecodable {
         self.summitTypes = ScheduleItem.getSummitTypes(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
-        self.rsvp = event.rsvp
+        self.rsvp = event.rsvp ?? ""
         
-        self.venue = event.venue?.id ?? event.venueRoom?.id
+        self.venue = event.location?.identifier
         
-        self.finished = event.end.compare(NSDate()) == NSComparisonResult.OrderedAscending
-        self.eventDescription = event.eventDescription
+        self.finished = event.end.compare(NSDate()) == .OrderedAscending
+        self.eventDescription = event.descriptionText ?? ""
         self.allowFeedback = event.allowFeedback
         self.averageFeedback = event.averageFeedback
         
@@ -71,16 +69,16 @@ public struct EventDetail: RealmDecodable {
         
         self.tags = tags
         
-        self.level = event.presentation != nil ? event.presentation!.level + " Level" : ""
+        self.level = event.presentation?.level != nil ? event.presentation!.level! + " Level" : ""
         
-        var speakers = [Speaker]()
+        var speakers = [SpeakerDetail]()
         
-        if let realmEntity = event.presentation?.moderator
-            where realmEntity.id > 0 {
+        if let managedObject = event.presentation?.moderator
+            where managedObject.id > 0 {
             
-            let moderatorSpeaker = PresentationSpeaker(realmEntity: realmEntity)
-            let speaker = Speaker(speaker: moderatorSpeaker, isModerator: true)
-            speakers.append(speaker)
+            let moderatorSpeaker = CoreSummit.Speaker(managedObject: managedObject)
+            let speakerDetail = SpeakerDetail(speaker: moderatorSpeaker, isModerator: true)
+            speakers.append(speakerDetail)
         }
         
         if let presentation = event.presentation {
@@ -88,31 +86,31 @@ public struct EventDetail: RealmDecodable {
             // HACK: dismiss speakers with empty name
             let realmSpeakers = presentation.speakers.filter { $0.firstName.isEmpty == false && $0.lastName.isEmpty == false }
             
-            let presentationSpeakers = realmSpeakers.map { Speaker(speaker: PresentationSpeaker(realmEntity: $0)) }
+            let presentationSpeakers = realmSpeakers.map { SpeakerDetail(speaker: Speaker(managedObject: $0)) }
             
             speakers += presentationSpeakers
         }
         
         self.speakers = speakers
         
-        if let video = event.videos.first {
+        if let videoManagedObject = event.videos.first {
             
-            self.video = Video(realmEntity: video)
+            self.video = Video(managedObject: videoManagedObject)
             
         } else {
             
             self.video = nil
         }
         
-        #if os(iOS)
-        self.webpageURL = NSURL(string: Event(realmEntity: event).toWebpageURL(Summit(realmEntity: event.summit)))!
-        #endif
+        self.webpageURL = NSURL(string: Event(managedObject: event).toWebpageURL(Summit(managedObject: event.summit)))!
     }
 }
 
+// MARK: - Supporting Types
+
 public extension EventDetail {
     
-    public struct Speaker: Person {
+    public struct SpeakerDetail: Person {
         
         public let identifier: Identifier
         
@@ -134,7 +132,7 @@ public extension EventDetail {
         
         public let isModerator: Bool
         
-        private init(speaker: PresentationSpeaker, isModerator: Bool = false) {
+        private init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier
             self.firstName = speaker.firstName
@@ -148,4 +146,18 @@ public extension EventDetail {
             self.isModerator = isModerator
         }
     }
+}
+
+public func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+        && lhs.title == rhs.title
+        && lhs.pictureURL == rhs.pictureURL
+        && lhs.twitter == rhs.twitter
+        && lhs.irc == rhs.irc
+        && lhs.biography == rhs.biography
+        && lhs.memberIdentifier == rhs.memberIdentifier
+        && lhs.isModerator == rhs.isModerator
 }

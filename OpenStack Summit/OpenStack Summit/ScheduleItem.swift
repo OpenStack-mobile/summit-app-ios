@@ -9,7 +9,7 @@
 import Foundation
 import CoreSummit
 
-public struct ScheduleItem: RealmDecodable {
+public struct ScheduleItem: CoreDataDecodable {
     
     // MARK: - Properties
     
@@ -26,9 +26,9 @@ public struct ScheduleItem: RealmDecodable {
     
     // MARK: - Initialization
     
-    public init(realmEntity event: RealmSummitEvent) {
+    public init(managedObject event: EventManagedObject) {
         
-        self.id = event.id
+        self.id = event.identifier
         self.name = event.name
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
@@ -45,7 +45,7 @@ public struct ScheduleItem: RealmDecodable {
 
 internal extension ScheduleItem {
     
-    static func getSummitTypes(event: RealmSummitEvent) -> String {
+    static func getSummitTypes(event: EventManagedObject) -> String {
         var credentials = ""
         var separator = ""
         for summitType in event.summitTypes {
@@ -55,7 +55,7 @@ internal extension ScheduleItem {
         return credentials
     }
     
-    static func getSponsors(event: RealmSummitEvent) -> String {
+    static func getSponsors(event: EventManagedObject) -> String {
         
         guard event.sponsors.isEmpty == false
             else { return "" }
@@ -70,7 +70,8 @@ internal extension ScheduleItem {
         return sponsors
     }
     
-    static func getTime(event: RealmSummitEvent) -> String {
+    static func getTime(event: EventManagedObject) -> String {
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
@@ -84,7 +85,7 @@ internal extension ScheduleItem {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getDateTime(event: RealmSummitEvent) -> String {
+    static func getDateTime(event: EventManagedObject) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
@@ -98,42 +99,45 @@ internal extension ScheduleItem {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getLocation(event: RealmSummitEvent) -> String {
+    static func getLocation(event: EventManagedObject) -> String {
+        
         var location = ""
-        if let room = event.venueRoom {
+        
+        if let room = event.location as? VenueRoomManagedObject {
+            
             location = room.venue.name
-            if event.summit.startShowingVenuesDate.timeIntervalSinceNow.isSignMinus {
+            
+            if event.summit.startShowingVenues?.timeIntervalSinceNow.isSignMinus ?? false {
                 
-                if !room.floor.name.isEmpty {
-                    location += " - " + room.floor.name
+                if let floorName = room.floor?.name
+                    where floorName.isEmpty == false {
+                    
+                    location += " - " + floorName
                 }
                 
-                if !room.name.isEmpty {
+                if room.name.isEmpty == false {
+                    
                     location += " - " + room.name
                 }
             }
         }
-        else if let venue = event.venue {
+        else if let venue = event.location as? VenueManagedObject {
+            
             location = venue.name
         }
+        
         return location
     }
     
-    static func getTrack(event: RealmSummitEvent) -> String{
-        var track = ""
-        if event.presentation != nil && event.presentation!.track != nil {
-            track = event.presentation!.track!.name
-        }
-        return track
+    @inline(__always)
+    static func getTrack(event: EventManagedObject) -> String {
+        
+        return event.presentation?.track?.name ?? ""
     }
     
-    static func getTrackGroupColor(event: RealmSummitEvent) -> String {
-        var color = ""
-        if event.presentation != nil && event.presentation!.track != nil {
-            if let trackGroup = event.presentation!.track!.trackGroups.first {
-                color = trackGroup.color
-            }
-        }
-        return color
+    @inline(__always)
+    static func getTrackGroupColor(event: EventManagedObject) -> String {
+        
+        return event.presentation?.track?.groups.first?.color ?? ""
     }
 }
