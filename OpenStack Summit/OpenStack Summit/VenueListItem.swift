@@ -10,7 +10,7 @@ import CoreSummit
 import Foundation
 import CoreLocation
 
-public struct VenueListItem: RealmDecodable {
+public struct VenueListItem: CoreDataDecodable {
     
     public let identifier: Identifier
     
@@ -28,25 +28,25 @@ public struct VenueListItem: RealmDecodable {
     
     public let images: [String]
     
-    public init(realmEntity venue: RealmVenue) {
+    public init(managedObject venue: VenueManagedObject) {
         
         assert(venue.name != "", "Empty venue: \(venue)")
         
-        self.identifier = venue.id
+        self.identifier = venue.identifier
         self.name = venue.name
-        self.descriptionText = venue.locationDescription
+        self.descriptionText = venue.descriptionText ?? ""
         self.address = VenueListItem.getAddress(venue)
         self.backgroundImageURL = venue.images.first?.url
         self.maps = venue.maps.map { $0.url }
         
         let floors = venue.floors.sort { $0.number < $1.number }
-        self.maps.appendContentsOf(floors.map { $0.imageURL }.filter { $0 != "" })
+        self.maps.appendContentsOf(floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false })
         
         self.images = venue.images.map { $0.url }
         
         // location
-        if let latitude = Double(venue.lat),
-            let longitude = Double(venue.long) {
+        if let latitude = Double(venue.latitude ?? ""),
+            let longitude = Double(venue.longitude ?? "") {
             
             self.location = CLLocationCoordinate2DMake(latitude, longitude)
         } else {
@@ -60,26 +60,27 @@ public struct VenueListItem: RealmDecodable {
 
 private extension VenueListItem {
     
-    static func getAddress(venue: RealmVenue) -> String {
-        var fullAddress = venue.address
+    static func getAddress(venue: VenueManagedObject) -> String {
+        
+        var fullAddress = venue.address ?? ""
         
         var separator = fullAddress.isEmpty ? "" : ", "
-        if (!venue.city.isEmpty) {
-            fullAddress += "\(separator)\(venue.city)"
+        if let city = venue.city {
+            fullAddress += "\(separator)\(city)"
             separator = fullAddress.isEmpty ? "" : " "
         }
         
-        if (!venue.state.isEmpty) {
-            fullAddress += "\(separator)\(venue.state)"
+        if let state = venue.state {
+            fullAddress += "\(separator)\(state)"
             separator = fullAddress.isEmpty ? "" : " "
         }
         
-        if (!venue.zipCode.isEmpty) {
-            fullAddress += "\(separator)(\(venue.zipCode))"
+        if let zipCode = venue.zipCode {
+            fullAddress += "\(separator)(\(zipCode))"
             separator = fullAddress.isEmpty ? "" : ", "
         }
         
-        if (!venue.country.isEmpty) {
+        if venue.country.isEmpty == false {
             fullAddress += "\(separator)\(venue.country)"
         }
         

@@ -17,13 +17,13 @@ extension UIViewController {
         
         let venue: Identifier
         
-        if let realmVenue = RealmVenue.find(location, realm: Store.shared.realm) {
+        if let realmVenue = try! VenueManagedObject.find(location, context: Store.shared.managedObjectContext) {
             
-            venue = realmVenue.id
+            venue = realmVenue.identifier
             
-        } else if let realmVenueRoom = RealmVenueRoom.find(location, realm: Store.shared.realm) {
+        } else if let realmVenueRoom = try! VenueRoomManagedObject.find(location, context: Store.shared.managedObjectContext) {
             
-            venue = realmVenueRoom.venue.id
+            venue = realmVenueRoom.venue.identifier
             
         } else {
             
