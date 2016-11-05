@@ -16,6 +16,8 @@ public final class TrackManagedObject: Entity {
     @NSManaged public var groups: Set<TrackGroupManagedObject>
 }
 
+// MARK: - Encoding
+
 extension Track: CoreDataDecodable {
     
     public init(managedObject: TrackManagedObject) {
@@ -40,3 +42,38 @@ extension Track: CoreDataEncodable {
         return managedObject
     }
 }
+
+// MARK: - Fetches
+
+public extension TrackManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "name", ascending: true)]
+    }
+}
+
+public extension Track {
+    
+    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Track] {
+        
+        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        
+        let managedObjects = try context.managedObjects(TrackManagedObject.self, predicate: predicate, sortDescriptors: TrackManagedObject.sortDescriptors)
+        
+        return Track.from(managedObjects: managedObjects)
+    }
+    
+    /// Get scheduled tracks that belong to track groups.
+    static func `for`(groups trackGroups: [Identifier], context: NSManagedObjectContext) throws -> [Track] {
+        
+        let trackGroupIdentifiers = trackGroups.map({ NSNumber(longLong: Int64($0)) })
+        
+        let predicate = NSPredicate(format: "presentations.@count > 0 AND groups.id IN %@", argumentArray: [trackGroupIdentifiers])
+        
+        let managedObjects = try context.managedObjects(TrackManagedObject.self, predicate: predicate, sortDescriptors: TrackManagedObject.sortDescriptors)
+        
+        return Track.from(managedObjects: managedObjects)
+    }
+}
+

@@ -64,3 +64,51 @@ extension Speaker: CoreDataEncodable {
         return managedObject
     }
 }
+
+public extension SpeakerManagedObject {
+    
+    public enum Property: String {
+        
+        case firstName, lastName, title, pictureURL, twitter, irc, biography, member
+    }
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "firstName", ascending: true),
+                NSSortDescriptor(key: "lastName", ascending: true)]
+    }
+}
+
+public extension Speaker {
+    
+    static func filter(searchTerm: String, page: Int, objectsPerPage: Int, context: NSManagedObjectContext) throws -> [Speaker] {
+        
+        let predicate: NSPredicate?
+        
+        if searchTerm.isEmpty == false {
+            
+            predicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
+            
+        } else {
+            
+            predicate = nil
+        }
+        
+        let results = try context.managedObjects(SpeakerManagedObject.self, predicate: predicate, sortDescriptors: SpeakerManagedObject.sortDescriptors)
+        
+        var speakers = [SpeakerManagedObject]()
+        
+        let startRecord = (page - 1) * objectsPerPage
+        
+        let endRecord = (startRecord + (objectsPerPage - 1)) <= results.count ? startRecord + (objectsPerPage - 1) : results.count - 1
+        
+        if (startRecord <= endRecord) {
+            
+            for index in (startRecord...endRecord) {
+                speakers.append(results[index])
+            }
+        }
+        
+        return Speaker.from(managedObjects: speakers)
+    }
+}

@@ -121,7 +121,7 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="groups" toMany="YES" deletionRule="Nullify" destinationEntity="TrackGroup" inverseName="tracks" inverseEntity="TrackGroup" syncable="YES"/>
         <relationship name="presentations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Presentation" inverseName="track" inverseEntity="Presentation" syncable="YES"/>
-        <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="tracks" inverseEntity="Summit" syncable="YES"/>
+        <relationship name="summits" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="tracks" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="TrackGroup" representedClassName=".TrackGroupManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
