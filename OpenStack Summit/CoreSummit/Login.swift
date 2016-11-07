@@ -13,37 +13,6 @@ import CoreData
 
 public extension Store {
     
-    /// The member that is logged in. Only valid for confirmed attendees.
-    var authenticatedMember: MemberManagedObject? {
-        
-        return try! self.authenticatedMember(self.managedObjectContext)
-    }
-    
-    /// The member that is logged in. Only valid for confirmed attendees.
-    internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
-        
-        guard let sessionMember = session.member,
-            case let .attendee(memberID) = sessionMember,
-            let member = try MemberManagedObject.find(memberID, context: context)
-            else { return nil }
-        
-        return member
-    }
-    
-    var isLoggedIn: Bool {
-        
-        return self.session.member != nil
-    }
-    
-    var isLoggedInAndConfirmedAttendee: Bool {
-        
-        guard let sessionMember = session.member,
-            case .attendee(_) = sessionMember
-            else { return false }
-        
-        return true
-    }
-    
     /// Login via OAuth with OpenStack ID
     func login(summit: Identifier? = nil, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
         

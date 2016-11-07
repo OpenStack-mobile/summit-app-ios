@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftFoundation
 
 public final class MemberManagedObject: Entity {
     
@@ -27,6 +28,8 @@ public final class MemberManagedObject: Entity {
     
     @NSManaged public var attendeeRole: AttendeeManagedObject?
 }
+
+// MARK: - Encoding
 
 extension Member: CoreDataDecodable {
     
@@ -78,5 +81,65 @@ extension Member: CoreDataEncodable {
         managedObject.didCache()
         
         return managedObject
+    }
+}
+
+// MARK: - Fetch
+
+public extension MemberManagedObject {
+    
+    func feedback(for event: Identifier) -> AttendeeFeedbackManagedObject? {
+        
+        return attendeeRole?.feedback.firstMatching({ $0.event.identifier == event})
+    }
+    
+    var givenFeedback: [AttendeeFeedbackManagedObject] {
+        
+        return attendeeRole?.feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
+    }
+}
+
+// MARK: - Store
+
+public extension Store {
+    
+    /// The member that is logged in. Only valid for confirmed attendees.
+    var authenticatedMember: MemberManagedObject? {
+        
+        return try! self.authenticatedMember(self.managedObjectContext)
+    }
+    
+    /// The member that is logged in. Only valid for confirmed attendees.
+    internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
+        
+        guard let sessionMember = session.member,
+            case let .attendee(memberID) = sessionMember,
+            let member = try MemberManagedObject.find(memberID, context: context)
+            else { return nil }
+        
+        return member
+    }
+    
+    var isLoggedIn: Bool {
+        
+        return self.session.member != nil
+    }
+    
+    var isLoggedInAndConfirmedAttendee: Bool {
+        
+        guard let sessionMember = session.member,
+            case .attendee(_) = sessionMember
+            else { return false }
+        
+        return true
+    }
+    
+    func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
+        
+        guard let loggedInMember = self.authenticatedMember
+            where self.isLoggedInAndConfirmedAttendee
+            else { return false }
+        
+        return loggedInMember.attendeeRole?.scheduledEvents.contains({ $0.identifier == eventID }) ?? false
     }
 }

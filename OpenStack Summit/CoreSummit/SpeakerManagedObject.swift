@@ -28,6 +28,8 @@ public final class SpeakerManagedObject: Entity {
     @NSManaged public var member: NSNumber?
 }
 
+// MARK: - Encoding
+
 extension Speaker: CoreDataDecodable {
     
     public init(managedObject: SpeakerManagedObject) {
@@ -64,6 +66,8 @@ extension Speaker: CoreDataEncodable {
         return managedObject
     }
 }
+
+// MARK: - Fetches
 
 public extension SpeakerManagedObject {
     

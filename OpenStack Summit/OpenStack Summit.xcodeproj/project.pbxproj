@@ -329,6 +329,9 @@
 		6E41EFE41DCDD8E400733E04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E41EFE51DCDD8E400733E04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E46F3AC1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */; };
+		6E488F5D1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
+		6E488F5E1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
+		6E488F5F1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
 		6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054C1D2ED21300D56870 /* AboutViewController.swift */; };
 		6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054E1D2ED6BD00D56870 /* Appearance.swift */; };
 		6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
@@ -913,6 +916,7 @@
 		6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVenueDetail.swift; sourceTree = "<group>"; };
 		6E41EFE31DCDD8E400733E04 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersInterfaceController.swift; sourceTree = "<group>"; };
+		6E488F5C1DD1107500EA6B0F /* EntityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityController.swift; sourceTree = "<group>"; };
 		6E49054C1D2ED21300D56870 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
@@ -1722,6 +1726,7 @@
 				6EF4F8621DC8D1D300D31A99 /* CoreDataExtensions.swift */,
 				6EF4F8631DC8D1D300D31A99 /* CoreDataEncodable.swift */,
 				6EF4F8641DC8D1D300D31A99 /* CoreDataDecodable.swift */,
+				6E488F5C1DD1107500EA6B0F /* EntityController.swift */,
 				6EF4F85E1DC8CE1600D31A99 /* Entity.swift */,
 				6EF4F8521DC8C68700D31A99 /* SummitManagedObject.swift */,
 				6EF4F8561DC8C7D600D31A99 /* CompanyManagedObject.swift */,
@@ -1734,10 +1739,10 @@
 				6EF4F87A1DC928D700D31A99 /* ImageManagedObject.swift */,
 				6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */,
 				6E2D9FD51DC994210015C588 /* TrackManagedObject.swift */,
+				6E2D9FE51DC9A5B90015C588 /* TrackGroupManagedObject.swift */,
 				6E2D9FD91DC9944E0015C588 /* SpeakerManagedObject.swift */,
 				6E2D9FDD1DC9A5730015C588 /* SummitTypeManagedObject.swift */,
 				6E2D9FE11DC9A5960015C588 /* TicketTypeManagedObject.swift */,
-				6E2D9FE51DC9A5B90015C588 /* TrackGroupManagedObject.swift */,
 				6E2D9FE91DC9B0D40015C588 /* TagManagedObject.swift */,
 				6E2D9FED1DC9B0F50015C588 /* VideoManagedObject.swift */,
 				6E2D9FF11DC9CC820015C588 /* MemberManagedObject.swift */,
@@ -2647,6 +2652,7 @@
 				6E0B5EC11D77C8950005F6CE /* NonConfirmedAttendeeJSON.swift in Sources */,
 				6E1949331DCBB3E000A00603 /* Member.swift in Sources */,
 				6E0B5EC21D77C8950005F6CE /* Attendee.swift in Sources */,
+				6E488F5F1DD1107500EA6B0F /* EntityController.swift in Sources */,
 				6E0B5EC41D77C8950005F6CE /* ErrorValue.swift in Sources */,
 				6E0B5EC51D77C8950005F6CE /* PresentationDataUpdate.swift in Sources */,
 				6E0B5EC61D77C8950005F6CE /* Company.swift in Sources */,
@@ -2965,6 +2971,7 @@
 				6E2D9FFA1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */,
 				6E2D9FF21DC9CC820015C588 /* MemberManagedObject.swift in Sources */,
 				6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */,
+				6E488F5D1DD1107500EA6B0F /* EntityController.swift in Sources */,
 				6E10A56D1D10675D008CBD0C /* Named.swift in Sources */,
 				6E10A58F1D10675D008CBD0C /* SummitType.swift in Sources */,
 				6EF4F85B1DC8CAEC00D31A99 /* EventManagedObject.swift in Sources */,
@@ -3116,6 +3123,7 @@
 				6E2923FF1D7AF8C900D14F0A /* Video.swift in Sources */,
 				9D6AADB31DBE58040057888E /* VenueRoomDataUpdateJSON.swift in Sources */,
 				6E2924001D7AF8C900D14F0A /* PresentationDataUpdateJSON.swift in Sources */,
+				6E488F5E1DD1107500EA6B0F /* EntityController.swift in Sources */,
 				6E2924011D7AF8C900D14F0A /* TimeZone.swift in Sources */,
 				6E2924031D7AF8C900D14F0A /* Track.swift in Sources */,
 				6E2D9FE71DC9A5B90015C588 /* TrackGroupManagedObject.swift in Sources */,

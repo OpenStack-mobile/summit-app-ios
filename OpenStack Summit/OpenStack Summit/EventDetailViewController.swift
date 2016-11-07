@@ -20,6 +20,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var scheduledButton: UIBarButtonItem!
+    
     @IBOutlet private(set) var feedBackHeader: EventFeedbackHeader!
     
     // MARK: - Properties
@@ -37,7 +38,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private var data = [Detail]()
     
-    private var notificationToken: RealmSwift.NotificationToken?
+    private var entityController: EntityController<Event>!
     
     private var scheduled = false {
         
@@ -59,11 +60,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     // MARK: - Loading
     
-    deinit {
-        
-        notificationToken?.stop()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,7 +78,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 else { return }
             
             controller.updateUI()
-        
         }
     }
     
@@ -189,7 +184,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         assert(event != nil, "No identifier set")
         
         // handle event deletion
-        guard let realmEvent = RealmSummitEvent.find(event, realm: Store.shared.realm) else {
+        guard let eventManagedObject = try! EventManagedObject.find(event, context: Store.shared.managedObjectContext) else {
             
             self.view.userInteractionEnabled = false
             self.navigationItem.rightBarButtonItems = []
@@ -198,8 +193,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             return
         }
         
-        self.eventCache = Event(realmEntity: realmEvent)
-        self.eventDetail = EventDetail(realmEntity: realmEvent)
+        self.eventCache = Event(managedObject: eventManagedObject)
+        self.eventDetail = EventDetail(managedObject: eventManagedObject)
         
         self.data = [.title]
         

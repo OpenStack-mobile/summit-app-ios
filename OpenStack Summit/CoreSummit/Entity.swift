@@ -69,7 +69,7 @@ public extension Entity {
         return entity
     }
     
-    static func find(identifier: Int,
+    static func find(identifier: Identifier,
                      context: NSManagedObjectContext,
                      returnsObjectsAsFaults: Bool = true,
                      includesSubentities: Bool = true) throws -> Self? {
@@ -95,7 +95,7 @@ public extension Entity {
     }
 }
 
-public extension CollectionType where Self: Hashable, Generator.Element: Entity {
+public extension CollectionType where Generator.Element: Entity {
     
     var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
 }
@@ -106,6 +106,21 @@ public extension CoreDataEncodable where Self: Unique, ManagedObject: Entity {
     func cached(context: NSManagedObjectContext) throws -> ManagedObject {
         
         return try ManagedObject.cached(self.identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: true)
+    }
+}
+
+public extension EntityController {
+    
+    @inline(__always)
+    convenience init(identifier: Identifier, entity: Entity.Type, context: NSManagedObjectContext) {
+        
+        let entity = entity.entity(in: context)
+        
+        let entityName = entity.name!
+        
+        let resourceID = NSNumber(longLong: Int64(identifier))
+        
+        self.init(entityName: entityName, identifier: (key: Entity.identifierProperty, value: resourceID), context: context)
     }
 }
 

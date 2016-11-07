@@ -205,12 +205,14 @@ struct ScheduleFilter: Equatable {
     /// Removes selections from deleted filters.
     mutating func updateSections() {
         
+        let context = Store.shared.managedObjectContext
+        
         filterSections = []
         
-        let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
-        let summitTrackGroups = TrackGroup.scheduled()
-        let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort().filter { $0 != "" }
-        let venues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
+        let summitTypes = SummitType.from(managedObjects: try! context.managedObjects(SummitTypeManagedObject).sort({ $0.name < $1.name }))
+        let summitTrackGroups = try! TrackGroup.scheduled(context)
+        let levels = Array(Set(context.objects(PresentationManagedObject).map({ $0.level }))).sort().filter { $0 != "" }
+        let venues = Venue.from(managedObjects: Store.shared.realm.objects(VenueManagedObject)).sort()
         
         var filterSection: FilterSection
         
@@ -346,8 +348,6 @@ final class FilterManager {
     static let shared = FilterManager()
     
     var filter = Observable(ScheduleFilter())
-    
-    private var notificationToken: NotificationToken?
     
     private var timer: NSTimer!
     

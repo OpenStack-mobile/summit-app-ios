@@ -20,6 +20,8 @@ public final class TrackGroupManagedObject: Entity {
     @NSManaged public var tracks: Set<TrackManagedObject>
 }
 
+// MARK: - Encoding
+
 extension TrackGroup: CoreDataDecodable {
     
     public init(managedObject: TrackGroupManagedObject) {
@@ -46,5 +48,26 @@ extension TrackGroup: CoreDataEncodable {
         managedObject.didCache()
         
         return managedObject
+    }
+}
+
+// MARK: - Fetches
+
+public extension TrackGroupManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "name", ascending: true)]
+    }
+}
+
+public extension TrackGroup {
+    
+    /// Fetch all track groups that have some event associated with them.
+    static func scheduled(context: NSManagedObjectContext) throws -> [TrackGroup] {
+        
+        let predicate = NSPredicate(format: "tracks.presentations.@count > 0")
+        
+        return try TrackGroup.from(managedObjects: context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors))
     }
 }
