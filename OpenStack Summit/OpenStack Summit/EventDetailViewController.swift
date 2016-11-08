@@ -25,10 +25,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     // MARK: - Properties
     
-    var event: Identifier! {
-        
-        didSet { if isViewLoaded() { updateUI() } }
-    }
+    var event: Identifier!
     
     // MARK: - Private Properties
     
@@ -69,8 +66,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
         
-        // update from Realm
-        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _ in
+        // entityController 
+        entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
+        
+        entityController.event.updated = { [weak self] _ in
             
             guard let controller = self else { return }
             
@@ -79,6 +78,15 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
             controller.updateUI()
         }
+        
+        entityController.event.deleted = { [weak self] _ in
+            
+            guard let controller = self else { return }
+            
+            controller.updateUI()
+        }
+        
+        self.updateUI()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -183,8 +191,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         assert(event != nil, "No identifier set")
         
+        let context = Store.shared.managedObjectContext
+        
         // handle event deletion
-        guard let eventManagedObject = try! EventManagedObject.find(event, context: Store.shared.managedObjectContext) else {
+        guard let eventManagedObject = try! EventManagedObject.find(event, context: context) else {
             
             self.view.userInteractionEnabled = false
             self.navigationItem.rightBarButtonItems = []
@@ -205,9 +215,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // Can give feedback after event started, and if there is no feedback for that user
         if let attendee = Store.shared.authenticatedMember?.attendeeRole
-            where eventCache.start < Date() &&
-            Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@ AND attendee.id = %@", event, attendee.id).isEmpty &&
-            Store.shared.realm.objects(RealmReview).filter("event.id = %@ AND attendeeId = %@", event, attendee.id).isEmpty {
+            where eventCache.start < Date()
+            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee.id == %@", event, event))).isEmpty &&
+            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee == %@", event, event))).isEmpty {
             
             data.append(.feedback)
         }

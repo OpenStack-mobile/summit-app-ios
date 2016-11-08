@@ -9,7 +9,7 @@
 import Foundation
 import CoreSummit
 
-public struct FeedbackDetail: Unique {
+public struct FeedbackDetail {
 
     // MARK: - Properties
     
@@ -23,23 +23,23 @@ public struct FeedbackDetail: Unique {
     
     // MARK: - Initialization
     
-    public init(realmEntity feedback: RealmReview) {
+    public init(managedObject feedback: ReviewManagedObject) {
         
-        self.identifier = feedback.id
-        self.rate = feedback.rate
+        self.identifier = feedback.identifier
+        self.rate = Int(feedback.rate)
         self.review = feedback.review
-        self.event = feedback.event.id
+        self.event = feedback.event.identifier
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
         self.owner = feedback.firstName + " " + feedback.lastName
     }
     
-    public init(realmEntity feedback: RealmAttendeeFeedback) {
+    public init(managedObject feedback: AttendeeFeedbackManagedObject) {
         
-        self.identifier = feedback.id
-        self.rate = feedback.rate
+        self.identifier = feedback.identifier
+        self.rate = Int(feedback.rate)
         self.review = feedback.review
-        self.event = feedback.event.id
+        self.event = feedback.event.identifier
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
         self.owner = feedback.attendee.firstName + " " + feedback.attendee.lastName
