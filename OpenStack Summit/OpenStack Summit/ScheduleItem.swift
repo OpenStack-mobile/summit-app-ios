@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreSummit
+import CoreData
 
 public struct ScheduleItem: CoreDataDecodable {
     
@@ -38,6 +39,18 @@ public struct ScheduleItem: CoreDataDecodable {
         self.summitTypes = ScheduleItem.getSummitTypes(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
+    }
+}
+
+// MARK: - Fetches
+
+public extension ScheduleItem {
+    
+    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [ScheduleItem] {
+        
+        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }
 

@@ -41,8 +41,10 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        internalVenueList = VenueListItem.from(realm: Store.shared.realm.objects(RealmVenue).filter({ $0.isInternal == true }))
-        externalVenueList = VenueListItem.from(realm: Store.shared.realm.objects(RealmVenue).filter({ $0.isInternal == false }))
+        let venues = try! Store.shared.managedObjectContext.managedObjects(VenueListItem)
+        
+        internalVenueList = venues.filter({ $0.isInternal == true })
+        externalVenueList = venues.filter({ $0.isInternal == false })
         tableView.reloadData()
     }
     

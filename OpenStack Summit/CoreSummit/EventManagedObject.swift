@@ -45,6 +45,8 @@ public final class EventManagedObject: Entity {
     @NSManaged public var summit: SummitManagedObject
 }
 
+// MARK: - Encoding
+
 extension Event: CoreDataDecodable {
     
     public init(managedObject: EventManagedObject) {
@@ -100,5 +102,27 @@ extension Event: CoreDataEncodable {
         managedObject.didCache()
         
         return managedObject
+    }
+}
+
+// MARK: - Fetches
+
+public extension EventManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "start", ascending: true),
+                NSSortDescriptor(key: "end", ascending: true),
+                NSSortDescriptor(key: "name", ascending: true)]
+    }
+}
+
+public extension Event {
+    
+    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Event] {
+        
+        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }

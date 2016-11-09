@@ -10,7 +10,7 @@ import CoreSummit
 import Foundation
 import CoreLocation
 
-public struct VenueListItem: CoreDataDecodable {
+public struct VenueListItem: Unique, CoreDataDecodable {
     
     public let identifier: Identifier
     
@@ -24,9 +24,11 @@ public struct VenueListItem: CoreDataDecodable {
     
     public let backgroundImageURL: String?
     
-    public var maps: [String]
+    public let maps: [String]
     
     public let images: [String]
+    
+    public let isInternal: Bool
     
     public init(managedObject venue: VenueManagedObject) {
         
@@ -37,10 +39,12 @@ public struct VenueListItem: CoreDataDecodable {
         self.descriptionText = venue.descriptionText ?? ""
         self.address = VenueListItem.getAddress(venue)
         self.backgroundImageURL = venue.images.first?.url
-        self.maps = venue.maps.map { $0.url }
+        self.isInternal = venue.locationType == Venue.LocationType.Internal.rawValue
         
         let floors = venue.floors.sort { $0.number < $1.number }
-        self.maps.appendContentsOf(floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false })
+        var maps = venue.maps.map { $0.url }
+        maps.appendContentsOf(floors.map { $0.imageURL ?? "" }.filter { $0.isEmpty == false })
+        self.maps = maps
         
         self.images = venue.images.map { $0.url }
         
@@ -54,6 +58,20 @@ public struct VenueListItem: CoreDataDecodable {
             self.location = nil
         }
     }
+}
+
+// MARK: - Comparable
+
+public func == (lhs: VenueListItem, rhs: VenueListItem) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.address == rhs.address
+        && lhs.location?.latitude == rhs.location?.latitude
+        && lhs.location?.longitude == rhs.location?.longitude
+        && lhs.backgroundImageURL == rhs.backgroundImageURL
+        && lhs.maps == rhs.maps
 }
 
 // MARK: - Private
