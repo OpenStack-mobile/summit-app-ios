@@ -37,10 +37,8 @@ final class VenueLocationDetailViewController: UIViewController, GMSMapViewDeleg
         
         assert(self.venue != nil, "No venue set")
         
-        guard let realmVenue = RealmVenue.find(self.venue, realm: Store.shared.realm)
+        guard let venue = try! VenueListItem.find(self.venue, context: Store.shared.managedObjectContext)
             else { fatalError("Venue not found in cache. Invalid venue \(self.venue)") }
-        
-        let venue = VenueListItem(realmEntity: realmVenue)
         
         guard let location = venue.location
             else { fatalError("Venue is not geolocated") }

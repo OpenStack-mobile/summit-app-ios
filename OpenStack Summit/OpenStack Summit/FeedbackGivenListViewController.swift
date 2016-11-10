@@ -40,7 +40,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     private func reloadData() {
         
         // Get Logged Member Given Feedback
-        feedbackList = (Store.shared.authenticatedMember?.givenFeedback ?? []).map { FeedbackDetail(realmEntity: $0) }
+        feedbackList = (Store.shared.authenticatedMember?.givenFeedback ?? []).map { FeedbackDetail(managedObject: $0) }
         
         tableView.reloadData()
     }

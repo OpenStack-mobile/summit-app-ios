@@ -39,6 +39,8 @@ public final class AttendeeFeedbackManagedObject: FeedbackManagedObject {
     @NSManaged public var attendee: AttendeeManagedObject
 }
 
+// MARK: - Encoding
+
 extension Review: CoreDataDecodable {
     
     public init(managedObject: ReviewManagedObject) {
@@ -107,5 +109,15 @@ extension AttendeeFeedback: CoreDataEncodable {
         managedObject.didCache()
         
         return managedObject
+    }
+}
+
+// MARK: - Fetches
+
+public extension FeedbackManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "date", ascending: true)]
     }
 }

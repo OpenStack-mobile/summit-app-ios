@@ -100,6 +100,21 @@ public extension CollectionType where Generator.Element: Entity {
     var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
 }
 
+public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
+    
+    @inline(__always)
+    static func find(identifier: Identifier,
+                     context: NSManagedObjectContext,
+                     returnsObjectsAsFaults: Bool = true,
+                     includesSubentities: Bool = true) throws -> Self? {
+        
+        guard let managedObject = try ManagedObject.find(identifier, context: context, returnsObjectsAsFaults: returnsObjectsAsFaults,includesSubentities: includesSubentities)
+            else { return nil }
+        
+        return Self.init(managedObject: managedObject)
+    }
+}
+
 public extension CoreDataEncodable where Self: Unique, ManagedObject: Entity {
     
     @inline(__always)

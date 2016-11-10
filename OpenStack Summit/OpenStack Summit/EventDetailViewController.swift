@@ -243,6 +243,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // configure bar button items
         let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
+        
         self.scheduledButton.enabled = isAtteendee
         
         if isAtteendee {
@@ -255,13 +256,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // get all reviews for this event
-        let realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
+        let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event.id == %@", event), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        let attendeeFeedback = Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@", event)
+        let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@", event), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        shouldShowReviews = eventCache.start < Date() && (realmFeedback.count + attendeeFeedback.count) > 0
+        shouldShowReviews = eventCache.start < Date() && (reviews.count + attendeeFeedback.count) > 0
         
-        feedbackList = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
+        feedbackList = reviews.map { FeedbackDetail(managedObject: $0) }
         
         // configure feedback view
         configureReviewCountView()

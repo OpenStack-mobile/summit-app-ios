@@ -209,17 +209,17 @@ struct ScheduleFilter: Equatable {
         
         filterSections = []
         
-        let summitTypes = SummitType.from(managedObjects: try! context.managedObjects(SummitTypeManagedObject).sort({ $0.name < $1.name }))
+        let summitTypes = try! context.managedObjects(SummitType).sort({ $0.name < $1.name })
         let summitTrackGroups = try! TrackGroup.scheduled(context)
-        let levels = Array(Set(context.objects(PresentationManagedObject).map({ $0.level }))).sort().filter { $0 != "" }
-        let venues = Venue.from(managedObjects: Store.shared.realm.objects(VenueManagedObject)).sort()
+        let levels = try! Set(context.managedObjects(PresentationManagedObject).map({ $0.level ?? "" })).filter({ $0 != "" }).sort()
+        let venues = try! context.managedObjects(Venue).sort()
         
         var filterSection: FilterSection
         
         filterSection = FilterSection(type: .ActiveTalks, name: "ACTIVE TALKS")
         let activeTalksFilters = ["Hide Past Talks"]
         
-        if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
+        if let summit = try! context.managedObjects(Summit).first {
             
             let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
             
@@ -269,7 +269,7 @@ struct ScheduleFilter: Equatable {
     /// Updates the active talks selections
     mutating func updateActiveTalksSelections() {
         
-        if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
+        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit).first {
             
             let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
             

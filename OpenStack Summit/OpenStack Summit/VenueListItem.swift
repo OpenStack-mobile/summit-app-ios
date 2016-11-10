@@ -10,7 +10,9 @@ import CoreSummit
 import Foundation
 import CoreLocation
 
-public struct VenueListItem: Unique, CoreDataDecodable {
+public struct VenueListItem: Named, CoreDataDecodable {
+    
+    public typealias ManagedObject = VenueManagedObject
     
     public let identifier: Identifier
     
@@ -53,6 +55,7 @@ public struct VenueListItem: Unique, CoreDataDecodable {
             let longitude = Double(venue.longitude ?? "") {
             
             self.location = CLLocationCoordinate2DMake(latitude, longitude)
+            
         } else {
             
             self.location = nil
