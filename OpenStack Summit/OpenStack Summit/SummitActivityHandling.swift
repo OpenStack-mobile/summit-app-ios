@@ -71,8 +71,10 @@ extension SummitActivityHandlingViewController {
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
+        let context = Store.shared.managedObjectContext
+        
         // find in cache
-        guard Store.shared.realm.objects(data.realmType).filter("id = \(identifier)").first != nil
+        guard let managedObject = try! data.managedObject.find(identifier, context: context)
             else { return false }
         
         switch data {
@@ -90,8 +92,7 @@ extension SummitActivityHandlingViewController {
             
         case .video:
             
-            let realmEntity = Video.RealmType.find(identifier, realm: Store.shared.realm)!
-            let video = Video(realmEntity: realmEntity)
+            let video = Video(managedObject: managedObject as! VideoManagedObject)
             
             self.playVideo(video)
             

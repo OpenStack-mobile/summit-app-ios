@@ -11,9 +11,7 @@ import Foundation
 import CoreLocation
 
 public struct VenueListItem: Named, CoreDataDecodable {
-    
-    public typealias ManagedObject = VenueManagedObject
-    
+        
     public let identifier: Identifier
     
     public let name: String

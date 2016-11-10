@@ -26,6 +26,10 @@ public final class SpeakerManagedObject: Entity {
     @NSManaged public var biography: String?
     
     @NSManaged public var member: NSNumber?
+    
+    // Inverse Relationships
+    
+    @NSManaged public var summits: Set<SummitManagedObject>
 }
 
 // MARK: - Encoding
@@ -98,9 +102,9 @@ public extension Speaker {
             predicate = nil
         }
         
-        let results = try context.managedObjects(SpeakerManagedObject.self, predicate: predicate, sortDescriptors: SpeakerManagedObject.sortDescriptors)
+        let results = try context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
         
-        var speakers = [SpeakerManagedObject]()
+        var speakers = [ManagedObject]()
         
         let startRecord = (page - 1) * objectsPerPage
         

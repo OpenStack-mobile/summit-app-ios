@@ -212,7 +212,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         
         if filterSection.type == FilterSectionType.TrackGroup {
             
-            let trackGroup = TrackGroup.find(filterSection.items[indexPath.row].identifier, context: Store.shared.managedObjectContext)
+            let trackGroup = try! TrackGroup.find(filterSection.items[indexPath.row].identifier, context: Store.shared.managedObjectContext)
             cell.circleColor = UIColor(hexaString: trackGroup!.color)
         }
         

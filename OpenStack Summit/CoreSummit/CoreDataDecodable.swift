@@ -27,7 +27,7 @@ public extension NSManagedObjectContext {
         
         let managedObjects = try self.executeFetchRequest(fetchRequest) as! [T.ManagedObject]
         
-        let decodables = managedObjects.map { (element) -> T in T.init(managedObject: element) }
+        let decodables = managedObjects.map { T.init(managedObject: $0) }
         
         return decodables
     }
@@ -38,6 +38,26 @@ public extension NSManagedObjectContext {
         let results = try self.managedObjects(decodableType.ManagedObject.self)
         
         return T.from(managedObjects: results)
+    }
+}
+
+public extension NSFetchedResultsController {
+    
+    convenience init<T: CoreDataDecodable>(_ decodable: T.Type, delegate: NSFetchedResultsControllerDelegate? = nil, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], context: NSManagedObjectContext) {
+        
+        let managedObjectType = T.ManagedObject.self
+        
+        let entity = context.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
+        
+        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        
+        fetchRequest.predicate = predicate
+        
+        fetchRequest.sortDescriptors = sortDescriptors
+        
+        self.init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        self.delegate = delegate
     }
 }
 

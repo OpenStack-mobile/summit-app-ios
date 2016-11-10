@@ -12,6 +12,7 @@ import CoreSpotlight
 import MobileCoreServices
 import CoreSummit
 import Haneke
+import CoreData
 
 // MARK: - Model Extensions
 
@@ -173,7 +174,7 @@ extension VenueRoom: CoreSpotlightSearchable {
 
 /// Updates the CoreSpotlight index from Realm changes.
 @available(iOS 9.0, *)
-final class SpotlightController {
+final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
     
     static let shared = SpotlightController()
     
@@ -183,7 +184,9 @@ final class SpotlightController {
     
     private let queue = dispatch_queue_create("CoreSpotlight Update Queue", nil)
     
-    private var realmNotificationToken: RealmSwift.NotificationToken!
+    private lazy var eventFetchedResultsController: NSFetchedResultsController = NSFetchedResultsController.init(Event.self, delegate: self, context: Store.shared.managedObjectContext)
+    
+    private lazy var speakerFetchedResultsController: NSFetchedResultsController = NSFetchedResultsController.init(Speaker.self, delegate: self, context: Store.shared.managedObjectContext)
     
     deinit {
         
