@@ -375,7 +375,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         
         dispatch_sync(dispatch_get_main_queue()) {
             
-            tags = Tag.by(searchTerm: string)
+            tags = try! Tag.search(string, context: Store.shared.managedObjectContext)
         }
         
         return Array(

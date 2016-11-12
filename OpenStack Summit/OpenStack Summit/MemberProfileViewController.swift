@@ -38,9 +38,7 @@ final class MemberProfileViewController: RevealTabStripViewController {
         // try to get name if speaker
         if case let .speaker(speakerID) = profile {
             
-            if let realmEntity = RealmPresentationSpeaker.find(speakerID, realm: Store.shared.realm) {
-                
-                let speaker = PresentationSpeaker(realmEntity: realmEntity)
+            if let speaker = try! Speaker.find(speakerID, context: Store.shared.managedObjectContext) {
                 
                 self.title = speaker.name.uppercaseString
             }

@@ -45,48 +45,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // setup Parse
         Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
-        // nuke
-        func clearCache(error: ErrorType? = nil) {
-            
-            print("Nuking Realm")
-            
-            // nuke cache
-            let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
-            
-            try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
-            
-            // clear session
-            var sessionStorage = UserDefaultsSessionStorage()
-            sessionStorage.clear()
-            
-            // clear data poller
-            var pollerStorage = UserDefaultsDataUpdatePollerStorage()
-            pollerStorage.clear()
-            
-            // log nuking realm
-            if let error = error {
-                
-                Crashlytics.sharedInstance().recordError(error as NSError)
-            }
-        }
-        
-        // nuke Realm if errored
-        do { let _ = try Realm() }
-        catch { clearCache(error) }
+        // initialize Store
+        let _ = Store.shared
         
         #if MOCKED
-        clearCache()
+        try! Store.shared.clear()
         #endif
-        
-        // set configuration
-        Store.shared.environment = AppEnvironment
-        
-        // set session storage
-        Store.shared.session = UserDefaultsSessionStorage()
         
         // setup data poller
         #if !MOCKED
-        DataUpdatePoller.shared.storage = UserDefaultsDataUpdatePollerStorage()
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
         DataUpdatePoller.shared.start()
         #endif
@@ -266,7 +233,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
         // find in cache
-        guard Store.shared.realm.objects(data.realmType).filter("id = \(identifier)").first != nil
+        guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
             else { return false }
         
         /// force view load
@@ -295,8 +262,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             
         case .video:
             
-            let realmEntity = Video.RealmType.find(identifier, realm: Store.shared.realm)!
-            let video = Video(realmEntity: realmEntity)
+            let video = Video(managedObject: managedObject as! VideoManagedObject)
             
             self.window?.rootViewController?.playVideo(video)
             

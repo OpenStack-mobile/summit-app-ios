@@ -7,6 +7,7 @@
 //
 
 import CoreSummit
+import CoreData
 
 enum FilterSectionType {
     
@@ -353,7 +354,7 @@ final class FilterManager {
     
     deinit {
         
-        notificationToken?.stop()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private init() {
@@ -361,13 +362,22 @@ final class FilterManager {
         // update sections from Realm
         filter.value.updateSections()
         
-        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _,_ in self?.filter.value.updateSections() }
-        
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(managedObjectContextObjectsDidChange),
+            name: NSManagedObjectContextObjectsDidChangeNotification,
+            object: Store.shared.managedObjectContext)
     }
     
     @objc private func timerUpdate(sender: NSTimer) {
         
         filter.value.updateActiveTalksSelections()
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        
+        self.filter.value.updateSections()
     }
 }

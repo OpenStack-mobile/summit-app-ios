@@ -14,6 +14,8 @@ public final class TagManagedObject: Entity {
     @NSManaged public var name: String
 }
 
+// MARK: - Encoding
+
 extension Tag: CoreDataDecodable {
     
     public init(managedObject: TagManagedObject) {
@@ -34,5 +36,27 @@ extension Tag: CoreDataEncodable {
         managedObject.didCache()
         
         return managedObject
+    }
+}
+
+// MARK: - Fetches
+
+public extension TagManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "name", ascending: true)]
+    }
+}
+
+public extension Tag {
+    
+    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Tag] {
+        
+        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        
+        let managedObjects = try context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
+        
+        return Tag.from(managedObjects: managedObjects)
     }
 }

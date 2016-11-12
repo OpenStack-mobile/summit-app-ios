@@ -38,7 +38,7 @@ final class LevelScheduleViewController: ScheduleViewController {
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = Event.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -63,7 +63,7 @@ final class LevelScheduleViewController: ScheduleViewController {
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = Event.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
         
         return ScheduleItem.from(realm: events)
     }

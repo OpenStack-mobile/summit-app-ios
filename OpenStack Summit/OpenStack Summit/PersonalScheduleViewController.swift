@@ -19,7 +19,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
-        let events = attendeeRole.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        let events = attendeeRole.scheduledEvents.filter("start >= %@ AND end <= %@", startDate, endDate).sorted("start")
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -38,7 +38,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
-        let realmEvents = attendeeRole.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        let realmEvents = attendeeRole.scheduledEvents.filter("start >= %@ AND end <= %@", startDate, endDate).sorted("start")
         
         return ScheduleItem.from(realm: realmEvents)
     }
