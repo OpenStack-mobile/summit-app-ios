@@ -16,4 +16,20 @@ public extension CollectionType {
         
         return self[index]
     }
+    
+    /// Attempt to reduce and convert the contents of the collection to another type.
+    func reduce<T>(to type: T.Type) -> [T] {
+        
+        var newTypeArray = [T]()
+        
+        for element in self {
+            
+            guard let newType = element as? T
+                else { continue }
+            
+            newTypeArray.append(newType)
+        }
+        
+        return newTypeArray
+    }
 }
