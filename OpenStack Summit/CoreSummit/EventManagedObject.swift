@@ -126,30 +126,20 @@ public extension EventManagedObject {
                        venues: [Identifier]?,
                        context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
-        let eventsPredicate = NSPredicate(format: "start >= %@ AND end <= %@")
+        let eventsPredicate = NSPredicate(format: "start >= %@ AND end <= %@", startDate, endDate)
         
         var predicates = [eventsPredicate]
         
         if let summitTypes = summitTypes where summitTypes.isEmpty == false {
             
-            for summitType in summitTypes {
-                
-                let summitTypePredicate = NSPredicate(format: "ANY summitTypes.id == %@", summitType)
-                
-                predicates.append(summitTypePredicate)
-            }
+            let summitTypePredicate = NSPredicate(format: "ANY summitTypes.id IN %@", summitTypes)
+            
+            predicates.append(summitTypePredicate)
         }
         
         if let trackGroups = trackGroups where trackGroups.isEmpty == false {
             
-            var trackGroupsFilter = ""
-            var separator = ""
-            for trackGroup in trackGroups {
-                trackGroupsFilter += separator + "ANY presentation.track.trackGroups.id == \(trackGroup)"
-                separator = " OR "
-            }
-            
-            let trackGroupPredicate = NSPredicate(format: trackGroupsFilter)
+            let trackGroupPredicate = NSPredicate(format: "ANY presentation.track.trackGroups.id IN %@", trackGroups)
             
             predicates.append(trackGroupPredicate)
         }
@@ -172,7 +162,16 @@ public extension EventManagedObject {
             
             let tagPredicates = tags.map { NSPredicate(format: "ANY tags.name ==[c] %@", $0) }
             
-            let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: tagPredicates)
+            let predicate: NSPredicate
+            
+            if tagPredicates.count > 1 {
+                
+                predicate = NSCompoundPredicate(orPredicateWithSubpredicates: tagPredicates)
+                
+            } else {
+                
+                predicate = predicates[0]
+            }
             
             predicates.append(predicate)
         }
@@ -184,7 +183,16 @@ public extension EventManagedObject {
             predicates.append(predicate)
         }
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        let predicate: NSPredicate
+            
+        if predicates.count > 1 {
+            
+           predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            
+        } else {
+            
+            predicate = predicates[0]
+        }
         
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
     }

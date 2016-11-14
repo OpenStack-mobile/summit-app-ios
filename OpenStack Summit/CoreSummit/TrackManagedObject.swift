@@ -14,6 +14,10 @@ public final class TrackManagedObject: Entity {
     @NSManaged public var name: String
     
     @NSManaged public var groups: Set<TrackGroupManagedObject>
+    
+    // Inverse Relationships
+    
+    @NSManaged public var presentations: Set<PresentationManagedObject>
 }
 
 // MARK: - Encoding
