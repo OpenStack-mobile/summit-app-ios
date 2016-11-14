@@ -216,8 +216,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // Can give feedback after event started, and if there is no feedback for that user
         if let attendee = Store.shared.authenticatedMember?.attendeeRole
             where eventCache.start < Date()
-            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee.id == %@", event, event))).isEmpty &&
-            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee == %@", event, event))).isEmpty {
+            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee == %@", event, attendee))).isEmpty &&
+            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee == %@", event, attendee))).isEmpty {
             
             data.append(.feedback)
         }

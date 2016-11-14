@@ -38,7 +38,7 @@ final class LevelScheduleViewController: ScheduleViewController {
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = Event.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = try! EventManagedObject.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, context: Store.shared.managedObjectContext)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -63,8 +63,8 @@ final class LevelScheduleViewController: ScheduleViewController {
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = Event.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = try! EventManagedObject.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, context: Store.shared.managedObjectContext)
         
-        return ScheduleItem.from(realm: events)
+        return ScheduleItem.from(managedObjects: events)
     }
 }

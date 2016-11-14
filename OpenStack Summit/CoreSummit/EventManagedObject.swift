@@ -115,6 +115,86 @@ public extension EventManagedObject {
                 NSSortDescriptor(key: "end", ascending: true),
                 NSSortDescriptor(key: "name", ascending: true)]
     }
+    
+    static func filter(startDate: NSDate,
+                       endDate: NSDate,
+                       summitTypes: [Identifier]?,
+                       tracks: [Identifier]?,
+                       trackGroups: [Identifier]?,
+                       tags: [String]?,
+                       levels: [String]?,
+                       venues: [Identifier]?,
+                       context: NSManagedObjectContext) throws -> [EventManagedObject] {
+        
+        let eventsPredicate = NSPredicate(format: "start >= %@ AND end <= %@")
+        
+        var predicates = [eventsPredicate]
+        
+        if let summitTypes = summitTypes where summitTypes.isEmpty == false {
+            
+            for summitType in summitTypes {
+                
+                let summitTypePredicate = NSPredicate(format: "ANY summitTypes.id == %@", summitType)
+                
+                predicates.append(summitTypePredicate)
+            }
+        }
+        
+        if let trackGroups = trackGroups where trackGroups.isEmpty == false {
+            
+            var trackGroupsFilter = ""
+            var separator = ""
+            for trackGroup in trackGroups {
+                trackGroupsFilter += separator + "ANY presentation.track.trackGroups.id == \(trackGroup)"
+                separator = " OR "
+            }
+            
+            let trackGroupPredicate = NSPredicate(format: trackGroupsFilter)
+            
+            predicates.append(trackGroupPredicate)
+        }
+        
+        if let tracks = tracks where tracks.isEmpty == false {
+            
+            let tracksPredicate = NSPredicate(format: "presentation.track.id IN %@", tracks)
+            
+            predicates.append(tracksPredicate)
+        }
+        
+        if let levels = levels where levels.isEmpty == false {
+            
+            let levelsPredicate = NSPredicate(format: "presentation.level IN %@", levels)
+            
+            predicates.append(levelsPredicate)
+        }
+        
+        if let tags = tags where tags.isEmpty == false {
+            
+            let tagPredicates = tags.map { NSPredicate(format: "ANY tags.name ==[c] %@", $0) }
+            
+            let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: tagPredicates)
+            
+            predicates.append(predicate)
+        }
+        
+        if let venues = venues where venues.isEmpty == false {
+            
+            let predicate = NSPredicate(format: "location.id IN %@", venues)
+            
+            predicates.append(predicate)
+        }
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        
+        return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
+    }
+    
+    static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, context: NSManagedObjectContext) throws -> [EventManagedObject] {
+        
+        let predicate = NSPredicate(format: "ANY presentation.speakers.id == %@ || presentation.moderator.id == %@ && start >= %@ AND end <= %@", speaker, speaker, startDate, endDate)
+        
+        return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
+    }
 }
 
 public extension Event {
