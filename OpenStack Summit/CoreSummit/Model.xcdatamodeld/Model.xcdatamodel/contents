@@ -41,7 +41,7 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
         <relationship name="presentation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Presentation" inverseName="event" inverseEntity="Presentation" syncable="YES"/>
         <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="events" inverseEntity="Company" syncable="YES"/>
-        <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="schedule" inverseEntity="Summit" syncable="YES"/>
+        <relationship name="summit" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="schedule" inverseEntity="Summit" syncable="YES"/>
         <relationship name="summitTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SummitType" inverseName="events" inverseEntity="SummitType" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="events" inverseEntity="Tag" syncable="YES"/>
         <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="event" inverseEntity="Video" syncable="YES"/>

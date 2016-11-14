@@ -84,7 +84,7 @@ public final class DataUpdatePoller {
                 
                 for update in dataUpdates {
                     
-                    if store.process(update) == false {
+                    if store.process(update, summit: summit.identifier) == false {
                         
                         // could not process update
                         
@@ -128,11 +128,11 @@ public final class DataUpdatePoller {
         
         if let latestDataUpdate = storage.latestDataUpdate {
             
-            store.dataUpdates(latestDataUpdate: latestDataUpdate) { process(response: $0) }
+            store.dataUpdates(summit.identifier, latestDataUpdate: latestDataUpdate) { process(response: $0) }
             
         } else {
             
-            store.dataUpdates(from: Date(foundation: summit.initialDataLoad ?? NSDate())) { process(response: $0) }
+            store.dataUpdates(summit.identifier, from: Date(foundation: summit.initialDataLoad ?? NSDate())) { process(response: $0) }
         }
     }
 }

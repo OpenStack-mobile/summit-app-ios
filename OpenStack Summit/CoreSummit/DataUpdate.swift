@@ -92,11 +92,14 @@ public extension DataUpdate {
 
 public extension Store {
     
-    func process(dataUpdate: DataUpdate) -> Bool {
+    func process(dataUpdate: DataUpdate, summit: Identifier) -> Bool {
         
         let context = privateQueueManagedObjectContext
         
         return try! context.performErrorBlockAndWait {
+            
+            guard let summit = try SummitManagedObject.find(summit, context: context)
+                else { return false }
             
             #if os(iOS)
             let authenticatedMember = try self.authenticatedMember(context)
