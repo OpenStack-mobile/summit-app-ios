@@ -256,7 +256,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // get all reviews for this event
-        let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event.id == %@", event), sortDescriptors: FeedbackManagedObject.sortDescriptors)
+        let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
         let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@", event), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         

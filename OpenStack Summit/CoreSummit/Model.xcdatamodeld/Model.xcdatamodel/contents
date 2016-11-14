@@ -9,9 +9,14 @@
         <attribute name="lastName" attributeType="String" syncable="YES"/>
         <attribute name="pictureURL" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AttendeeFeedback" inverseName="attendee" inverseEntity="AttendeeFeedback" syncable="YES"/>
         <relationship name="memberAttendeeRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="attendeeRole" inverseEntity="Member" syncable="YES"/>
         <relationship name="scheduledEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="attendees" inverseEntity="Event" syncable="YES"/>
         <relationship name="tickets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TicketType" inverseName="attendees" inverseEntity="TicketType" syncable="YES"/>
+    </entity>
+    <entity name="AttendeeFeedback" representedClassName=".AttendeeFeedbackManagedObject" parentEntity="Feedback" syncable="YES">
+        <relationship name="attendee" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="feedback" inverseEntity="Attendee" syncable="YES"/>
+        <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="feedback" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="Company" representedClassName=".CompanyManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
@@ -32,8 +37,9 @@
         <attribute name="start" attributeType="Date" syncable="YES"/>
         <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendee" inverseName="scheduledEvents" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="eventType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventType" inverseName="events" inverseEntity="EventType" syncable="YES"/>
+        <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feedback" inverseName="event" inverseEntity="Feedback" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
-        <relationship name="presentation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Presentation" inverseName="event" inverseEntity="Presentation" syncable="YES"/>
+        <relationship name="presentation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Presentation" inverseName="event" inverseEntity="Presentation" syncable="YES"/>
         <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="events" inverseEntity="Company" syncable="YES"/>
         <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="schedule" inverseEntity="Summit" syncable="YES"/>
         <relationship name="summitTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SummitType" inverseName="events" inverseEntity="SummitType" syncable="YES"/>
@@ -46,6 +52,14 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="eventType" inverseEntity="Event" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="eventTypes" inverseEntity="Summit" syncable="YES"/>
+    </entity>
+    <entity name="Feedback" representedClassName=".FeedbackManagedObject" isAbstract="YES" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="rate" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="review" attributeType="String" syncable="YES"/>
+        <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="feedback" inverseEntity="Event" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName=".ImageManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
@@ -72,6 +86,7 @@
         <attribute name="pictureURL" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendeeRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="memberAttendeeRole" inverseEntity="Attendee" syncable="YES"/>
+        <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AttendeeFeedback" inverseName="member" inverseEntity="AttendeeFeedback" syncable="YES"/>
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
     </entity>
     <entity name="Presentation" representedClassName=".PresentationManagedObject" syncable="YES">
@@ -82,6 +97,12 @@
         <relationship name="moderator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationSpeaker" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationModerator" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="presentations" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Review" representedClassName=".ReviewManagedObject" parentEntity="Feedback" syncable="YES">
+        <attribute name="attendee" attributeType="Integer 64" syncable="YES"/>
+        <attribute name="firstName" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" attributeType="String" syncable="YES"/>
+        <attribute name="member" attributeType="Integer 64" syncable="YES"/>
     </entity>
     <entity name="Speaker" representedClassName=".SpeakerManagedObject" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
@@ -201,11 +222,13 @@
         <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="videos" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Attendee" positionX="-9" positionY="135" width="128" height="225"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="315"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="330"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="120"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
+        <element name="Member" positionX="0" positionY="144" width="128" height="210"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="150"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="255"/>
         <element name="Summit" positionX="-63" positionY="-18" width="128" height="315"/>
@@ -218,7 +241,8 @@
         <element name="VenueFloor" positionX="27" positionY="180" width="128" height="165"/>
         <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="90"/>
         <element name="Video" positionX="0" positionY="126" width="128" height="165"/>
-        <element name="Attendee" positionX="-9" positionY="135" width="128" height="210"/>
-        <element name="Member" positionX="0" positionY="144" width="128" height="195"/>
+        <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
+        <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
+        <element name="AttendeeFeedback" positionX="9" positionY="153" width="128" height="75"/>
     </elements>
 </model>

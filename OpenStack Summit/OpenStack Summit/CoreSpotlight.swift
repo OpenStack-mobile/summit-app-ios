@@ -207,7 +207,14 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
         
         func completionHandler(error: NSError?) {
             
-            self.log?("Error updating Spotlight index: \(error)")
+            if let error = error {
+                
+                self.log?("Error updating Spotlight index: \(error)")
+                
+            } else {
+                
+                self.log?("Updated Spotlight index")
+            }
         }
         
         // index new and updated items

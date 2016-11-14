@@ -139,7 +139,7 @@ public extension EventManagedObject {
         
         if let trackGroups = trackGroups where trackGroups.isEmpty == false {
             
-            let trackGroupPredicate = NSPredicate(format: "ANY presentation.track.trackGroups.id IN %@", trackGroups)
+            let trackGroupPredicate = NSPredicate(format: "ANY presentation.track.groups.id IN %@", trackGroups)
             
             predicates.append(trackGroupPredicate)
         }
