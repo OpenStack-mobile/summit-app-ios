@@ -189,7 +189,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private func updateUI() {
         
-        assert(event != nil, "No identifier set")
+        guard let event = self.event
+            else { fatalError("No identifier set") }
         
         let context = Store.shared.managedObjectContext
         
@@ -216,8 +217,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // Can give feedback after event started, and if there is no feedback for that user
         if let attendee = Store.shared.authenticatedMember?.attendeeRole
             where eventCache.start < Date()
-            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee == %@", event, attendee))).isEmpty &&
-            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event.id == %@ AND attendee == %@", event, attendee))).isEmpty {
+            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty &&
+            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty {
             
             data.append(.feedback)
         }
@@ -258,7 +259,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // get all reviews for this event
         let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event.id == %@", event), sortDescriptors: FeedbackManagedObject.sortDescriptors)
+        let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
         shouldShowReviews = eventCache.start < Date() && (reviews.count + attendeeFeedback.count) > 0
         

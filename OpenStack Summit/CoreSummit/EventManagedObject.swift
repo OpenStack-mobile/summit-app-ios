@@ -178,7 +178,10 @@ public extension EventManagedObject {
         
         if let venues = venues where venues.isEmpty == false {
             
-            let predicate = NSPredicate(format: "location.id IN %@", venues)
+            // get all rooms for the specified venue
+            let venueRooms = try context.managedObjects(VenueRoomManagedObject.self, predicate: NSPredicate(format: "venue.id IN %@", venues))
+            
+            let predicate = NSPredicate(format: "location.id IN %@ OR location IN %@", venues, venueRooms)
             
             predicates.append(predicate)
         }

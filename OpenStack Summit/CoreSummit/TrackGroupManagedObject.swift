@@ -70,10 +70,8 @@ public extension TrackGroup {
         let presentations = try context.managedObjects(PresentationManagedObject.self, predicate: NSPredicate(format: "track != nil"))
         
         var groups = presentations.reduce([TrackGroupManagedObject](), combine: { $0.0 + Array($0.1.track!.groups) })
-        
-        groups = Array(Set(groups))
-        
-        groups = (groups as NSArray).sortedArrayUsingDescriptors(ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
+                
+        groups = (Set(groups) as NSSet).sortedArrayUsingDescriptors(ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
         
         return TrackGroup.from(managedObjects: groups)
     }
