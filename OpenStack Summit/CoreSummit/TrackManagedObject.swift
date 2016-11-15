@@ -71,13 +71,25 @@ public extension Track {
     /// Get scheduled tracks that belong to track groups.
     static func `for`(groups trackGroups: [Identifier], context: NSManagedObjectContext) throws -> [Track] {
         
-        let trackGroupIdentifiers = trackGroups.map({ NSNumber(longLong: Int64($0)) })
+        let predicate: NSPredicate
         
-        let predicate = NSPredicate(format: "presentations.@count > 0 AND groups.id IN %@", argumentArray: [trackGroupIdentifiers])
+        let scheduledTracksPredicate = NSPredicate(format: "presentations.@count > 0")
         
-        let managedObjects = try context.managedObjects(TrackManagedObject.self, predicate: predicate, sortDescriptors: TrackManagedObject.sortDescriptors)
+        // optionally filter for track groups
+        if trackGroups.isEmpty == false {
+            
+            let trackGroupIdentifiers = trackGroups.map { NSNumber(longLong: Int64($0)) }
+            
+            let trackGroupsPredicate = NSPredicate(format: "ANY groups.id IN %@", [trackGroupIdentifiers])
+            
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [scheduledTracksPredicate, trackGroupsPredicate])
+            
+        } else {
+            
+            predicate = scheduledTracksPredicate
+        }
         
-        return Track.from(managedObjects: managedObjects)
+        return try context.managedObjects(Track.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }
 
