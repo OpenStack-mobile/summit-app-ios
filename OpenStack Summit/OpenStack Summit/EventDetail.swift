@@ -91,7 +91,7 @@ public struct EventDetail: CoreDataDecodable {
             speakers += presentationSpeakers
         }
         
-        self.speakers = speakers
+        self.speakers = speakers.sort()
         
         if let videoManagedObject = event.videos.first {
             
@@ -102,7 +102,14 @@ public struct EventDetail: CoreDataDecodable {
             self.video = nil
         }
         
-        self.webpageURL = NSURL(string: Event(managedObject: event).toWebpageURL(Summit(managedObject: event.summit)))!
+        let summit = Summit(managedObject: event.summit)
+        
+        let webpageURLString = Event(managedObject: event).toWebpageURL(summit)
+        
+        guard let webpageURL = NSURL(string: webpageURLString)
+            else { fatalError("Invalid URLL \(webpageURLString)") }
+        
+        self.webpageURL = webpageURL
     }
 }
 
