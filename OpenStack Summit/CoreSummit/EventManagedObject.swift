@@ -202,7 +202,10 @@ public extension EventManagedObject {
     
     static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
-        let predicate = NSPredicate(format: "(ANY presentation.speakers.id == %@ OR presentation.moderator.id == %@) AND (start >= %@ AND end <= %@)", speaker, speaker, startDate, endDate)
+        guard let speaker = try SpeakerManagedObject.find(speaker, context: context)
+            else { return [] }
+        
+        let predicate = NSPredicate(format: "(ANY presentation.speakers == %@ OR presentation.moderator == %@) AND (start >= %@ AND end <= %@)", speaker, speaker, startDate, endDate)
         
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
     }
