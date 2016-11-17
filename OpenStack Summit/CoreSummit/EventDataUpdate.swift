@@ -38,6 +38,8 @@ public struct EventDataUpdate: Named {
     public var presentation: PresentationDataUpdate?
     
     public var videos: Set<Video>
+    
+    public var rsvp: String?
 }
 
 public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
@@ -56,4 +58,5 @@ public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
         && lhs.location == rhs.location
         && lhs.presentation == rhs.presentation
         && lhs.videos == rhs.videos
+        && lhs.rsvp == rhs.rsvp
 }

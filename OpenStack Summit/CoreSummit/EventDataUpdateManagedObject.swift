@@ -22,7 +22,7 @@ extension EventDataUpdate: CoreDataEncodable {
         managedObject.end = end.toFoundation()
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
-        //managedObject.rsvp = rsvp
+        managedObject.rsvp = rsvp
         managedObject.eventType = try context.relationshipFault(type)
         managedObject.summitTypes = try context.relationshipFault(summitTypes)
         managedObject.sponsors = try context.relationshipFault(sponsors)
@@ -31,7 +31,7 @@ extension EventDataUpdate: CoreDataEncodable {
         managedObject.presentation = try context.relationshipFault(presentation)
         managedObject.videos = try context.relationshipFault(videos)
         
-        //managedObject.didCache()
+        managedObject.didCache()
         
         return managedObject
     }

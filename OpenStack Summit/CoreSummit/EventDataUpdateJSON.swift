@@ -69,6 +69,7 @@ extension EventDataUpdate: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
@@ -81,6 +82,5 @@ extension EventDataUpdate: JSONDecodable {
             
             self.videos = []
         }
-        
     }
 }

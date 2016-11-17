@@ -6,11 +6,6 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public extension TrackGroup {
-    
-    typealias DataUpdate = TrackGroupDataUpdate
-}
-
 /// The `DataUpdate` version of a `TrackGroup`.
 public struct TrackGroupDataUpdate: Named {
     
