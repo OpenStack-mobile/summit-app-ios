@@ -84,6 +84,49 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
         return cell
     }
     
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        case .Delete:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+        case .Update:
+            if let updateIndexPath = indexPath,
+                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
+                
+                self.configure(cell: cell, at: updateIndexPath)
+            }
+        case .Move:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        }
+    }
+    
     // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

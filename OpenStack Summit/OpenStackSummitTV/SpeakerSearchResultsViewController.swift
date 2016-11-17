@@ -26,7 +26,7 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
         }
     }
     
-    private(set) var filteredSpeakers = [PresentationSpeaker]()
+    private(set) var filteredSpeakers = [Speaker]()
     
     private var notificationToken: RealmSwift.NotificationToken?
     

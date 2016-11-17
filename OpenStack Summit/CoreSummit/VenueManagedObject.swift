@@ -34,7 +34,16 @@ public final class VenueManagedObject: LocationManagedObject {
     @NSManaged public var maps: Set<ImageManagedObject>
     
     @NSManaged public var floors: Set<VenueFloorManagedObject>
+    
+    // Transient Properties
+    
+    @objc public var isInternal: Bool {
+        
+        return locationType == Venue.LocationType.Internal.rawValue
+    }
 }
+
+// MARK: - Encoding
 
 extension Venue: CoreDataDecodable {
     
@@ -82,5 +91,15 @@ extension Venue: CoreDataEncodable {
         managedObject.didCache()
         
         return managedObject
+    }
+}
+
+// MARK: - Fetches
+
+public extension VenueManagedObject {
+    
+    static var sortDescriptors: [NSSortDescriptor] {
+        
+        return [NSSortDescriptor(key: "name", ascending: true)]
     }
 }

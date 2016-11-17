@@ -11,6 +11,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import CoreSummit
+import CoreData
 
 @objc(OSSTVVenueMapViewController)
 final class VenueMapViewController: UIViewController, MKMapViewDelegate {
@@ -28,7 +29,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
         didSet { if isViewLoaded() { showSelectedVenue() } }
     }
     
-    private var notificationToken: RealmSwift.NotificationToken?
+    private var fetchedResultsController: NSFetchedResultsController!
     
     // MARK: - Loading
     

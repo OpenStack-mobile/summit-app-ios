@@ -43,7 +43,7 @@ public extension NSManagedObjectContext {
 
 public extension NSFetchedResultsController {
     
-    convenience init<T: CoreDataDecodable>(_ decodable: T.Type, delegate: NSFetchedResultsControllerDelegate? = nil, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], context: NSManagedObjectContext) {
+    convenience init<T: CoreDataDecodable>(_ decodable: T.Type, delegate: NSFetchedResultsControllerDelegate? = nil, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], sectionNameKeyPath: String? = nil, context: NSManagedObjectContext) {
         
         let managedObjectType = T.ManagedObject.self
         
