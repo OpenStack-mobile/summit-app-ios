@@ -10,7 +10,13 @@ import UIKit
 
 final class DetailImageTableViewCell: UITableViewCell {
     
+    #if os(iOS)
+    typealias Label = CopyableLabel
+    #elseif os(tvOS)
+    typealias Label = UILabel
+    #endif
+    
     @IBOutlet weak var detailImageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: CopyableLabel!
+    @IBOutlet weak var titleLabel: Label!
 }

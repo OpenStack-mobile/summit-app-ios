@@ -22,20 +22,13 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     // MARK: - Properties
     
-    var speaker: PresentationSpeaker!
+    var speaker: Speaker!
     
     private var data = [Detail]()
     
     private var eventsPredicate: NSPredicate!
     
-    private var notificationToken: RealmSwift.NotificationToken?
-    
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

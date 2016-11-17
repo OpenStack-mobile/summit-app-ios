@@ -460,6 +460,7 @@
 		6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
 		6EB9B8A21D8349A400917077 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
 		6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
+		6EBCB4891DDE10B800727130 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
@@ -3155,6 +3156,7 @@
 				6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */,
 				6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */,
 				6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */,
+				6EBCB4891DDE10B800727130 /* Store.swift in Sources */,
 				6E1D51B61D8362A9007391A3 /* PlayVideo.swift in Sources */,
 				6EA6FD351D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
 				6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */,
