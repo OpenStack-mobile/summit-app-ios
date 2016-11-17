@@ -99,7 +99,7 @@
         <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="presentations" inverseEntity="Track" syncable="YES"/>
     </entity>
     <entity name="Review" representedClassName=".ReviewManagedObject" parentEntity="Feedback" syncable="YES">
-        <attribute name="attendee" attributeType="Integer 64" syncable="YES"/>
+        <attribute name="attendee" optional="YES" attributeType="Integer 64" syncable="YES"/>
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="lastName" attributeType="String" syncable="YES"/>
         <attribute name="member" attributeType="Integer 64" syncable="YES"/>
@@ -223,13 +223,16 @@
     </entity>
     <elements>
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="225"/>
+        <element name="AttendeeFeedback" positionX="9" positionY="153" width="128" height="75"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
         <element name="Event" positionX="-54" positionY="0" width="128" height="330"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="120"/>
+        <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
         <element name="Member" positionX="0" positionY="144" width="128" height="210"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="150"/>
+        <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="255"/>
         <element name="Summit" positionX="-63" positionY="-18" width="128" height="315"/>
         <element name="SummitType" positionX="0" positionY="99" width="128" height="150"/>
@@ -241,8 +244,5 @@
         <element name="VenueFloor" positionX="27" positionY="180" width="128" height="165"/>
         <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="90"/>
         <element name="Video" positionX="0" positionY="126" width="128" height="165"/>
-        <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
-        <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
-        <element name="AttendeeFeedback" positionX="9" positionY="153" width="128" height="75"/>
     </elements>
 </model>

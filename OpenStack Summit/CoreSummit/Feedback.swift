@@ -39,7 +39,7 @@ public struct Review: Feedback {
         
         public let member: Identifier
         
-        public let attendee: Identifier
+        public let attendee: Identifier?
         
         public let firstName: String
         

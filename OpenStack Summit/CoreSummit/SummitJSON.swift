@@ -54,7 +54,7 @@ extension Summit: JSONDecodable {
         self.name = name
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
-        self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
+        self.timeZone = timeZone.name
         self.summitTypes = Set(summitTypes)
         self.ticketTypes = Set(ticketTypes)
         self.tracks = Set(tracks)

@@ -25,7 +25,7 @@ public final class ReviewManagedObject: FeedbackManagedObject {
     
     @NSManaged public var member: Int64
     
-    @NSManaged public var attendee: Int64
+    @NSManaged public var attendee: NSNumber?
     
     @NSManaged public var firstName: String
     
@@ -52,9 +52,9 @@ extension Review: CoreDataDecodable {
         self.event = managedObject.event.identifier
         
         self.owner = Owner(member: Int(managedObject.member),
-                          attendee: Int(managedObject.attendee),
-                          firstName: managedObject.firstName,
-                          lastName: managedObject.lastName)
+                           attendee: managedObject.attendee != nil ? Int(managedObject.attendee!) : nil,
+                           firstName: managedObject.firstName,
+                           lastName: managedObject.lastName)
     }
 }
 
@@ -69,7 +69,7 @@ extension Review: CoreDataEncodable {
         managedObject.date = date.toFoundation()
         managedObject.event = try context.relationshipFault(event)
         managedObject.member = Int64(owner.member)
-        managedObject.attendee = Int64(owner.attendee)
+        managedObject.attendee = owner.attendee != nil ? NSNumber(longLong: Int64(owner.attendee!)) : nil
         managedObject.firstName = owner.firstName
         managedObject.lastName = owner.lastName
         
