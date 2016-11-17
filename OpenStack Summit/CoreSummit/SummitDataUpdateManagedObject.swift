@@ -10,11 +10,18 @@ import Foundation
 import CoreData
 import SwiftFoundation
 
-extension SummitDataUpdate: CoreDataEncodable {
+extension SummitDataUpdate: Updatable {
     
-    public func save(context: NSManagedObjectContext) throws -> SummitManagedObject {
+    @inline(__always)
+    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
         
-        let managedObject = try cached(context)
+        return try SummitManagedObject.find(identifier, context: context)
+    }
+    
+    /// update current summit with Data Update
+    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
+        
+        let managedObject = summit
         
         managedObject.name = name
         managedObject.timeZone = timeZone
@@ -22,17 +29,14 @@ extension SummitDataUpdate: CoreDataEncodable {
         managedObject.end = end.toFoundation()
         managedObject.webpageURL = webpageURL
         managedObject.startShowingVenues = startShowingVenues?.toFoundation()
-        //managedObject.sponsors = try context.relationshipFault(sponsors)
-        //managedObject.speakers = try context.relationshipFault(speakers)
         managedObject.summitTypes = try context.relationshipFault(summitTypes)
         managedObject.ticketTypes = try context.relationshipFault(ticketTypes)
         managedObject.locations = try context.relationshipFault(locations)
-        //managedObject.tracks = try context.relationshipFault(tracks)
-        //managedObject.trackGroups = try context.relationshipFault(trackGroups)
-        //managedObject.eventTypes = try context.relationshipFault(eventTypes)
-        //managedObject.schedule = try context.relationshipFault(schedule)
         
-        //managedObject.didCache()
+        if managedObject.cached != nil {
+            
+            managedObject.didCache()
+        }
         
         return managedObject
     }

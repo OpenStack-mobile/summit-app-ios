@@ -141,7 +141,7 @@ public extension Store {
                         let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
                         else { return false }
                     
-                    let eventManagedObject = try event.save(context)
+                    let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
                     
                     attendeeRole.scheduledEvents.insert(eventManagedObject)
                     
@@ -208,7 +208,7 @@ public extension Store {
             default:
                 
                 // insert or update
-                try entity.write(context)
+                try entity.write(context, summit: summit)
                 
                 try context.save()
                 
@@ -228,7 +228,7 @@ internal protocol Updatable: JSONDecodable {
     static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity?
     
     /// Encodes to CoreData.
-    func write(context: NSManagedObjectContext) throws -> Entity
+    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity
 }
 
 extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
@@ -240,15 +240,13 @@ extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
     }
     
     @inline(__always)
-    func write(context: NSManagedObjectContext) throws -> Entity {
+    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
         
         return try self.save(context)
     }
 }
 
 // Conform to protocol
-extension SummitDataUpdate: Updatable { }
-extension EventDataUpdate: Updatable { }
 extension SummitType: Updatable { }
 extension EventType: Updatable { }
 extension Speaker: Updatable { }

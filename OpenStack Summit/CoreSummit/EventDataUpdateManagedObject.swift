@@ -10,11 +10,20 @@ import Foundation
 import CoreData
 import SwiftFoundation
 
-extension EventDataUpdate: CoreDataEncodable {
+extension EventDataUpdate: Updatable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
+    @inline(__always)
+    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
         
-        let managedObject = try cached(context)
+        return try EventManagedObject.find(identifier, context: context)
+    }
+    
+    /// update current summit with Data Update
+    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
+        
+        let managedObject = try EventManagedObject.cached(self.identifier, context: context, returnsObjectsAsFaults: true, includesSubentities: false)
+        
+        managedObject.summit = summit
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
