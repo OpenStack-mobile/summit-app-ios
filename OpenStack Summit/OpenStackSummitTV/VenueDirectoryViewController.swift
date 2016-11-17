@@ -9,17 +9,18 @@
 import UIKit
 import SwiftFoundation
 import CoreSummit
+import CoreData
 
 @objc(OSSTVVenueDirectoryViewController)
-final class VenueDirectoryViewController: UITableViewController {
+final class VenueDirectoryViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
+    
+    private var fetchedResultsController: NSFetchedResultsController
     
     private var internalVenues = [Venue]()
     
     private var externalVenues = [Venue]()
-    
-    private var notificationToken: RealmSwift.NotificationToken?
     
     private var mapViewController: VenueMapViewController!
     
@@ -28,11 +29,6 @@ final class VenueDirectoryViewController: UITableViewController {
     private let delayedSeguesOperationQueue = NSOperationQueue()
     
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +59,7 @@ final class VenueDirectoryViewController: UITableViewController {
     
     private func updateUI() {
         
-        let dataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
+        let dataLoaded = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).isEmpty == false
         
         self.title = dataLoaded ? "Venues" : "Loading Summit..."
         

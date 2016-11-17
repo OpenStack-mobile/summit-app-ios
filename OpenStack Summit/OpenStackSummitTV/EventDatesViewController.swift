@@ -64,9 +64,7 @@ final class EventDatesViewController: UITableViewController {
         
         state = .loading
         
-        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
-            
-            let summit = Summit(realmEntity: realmSummit)
+        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit.self).first {
             
             self.state = State(summit: summit)
             
