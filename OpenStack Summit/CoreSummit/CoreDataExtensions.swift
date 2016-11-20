@@ -96,6 +96,20 @@ public extension NSManagedObjectContext {
         
         return try self.executeFetchRequest(fetchRequest) as! [ManagedObject]
     }
+    
+    @inline(__always)
+    func count<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil) throws -> Int {
+        
+        let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
+        
+        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        
+        fetchRequest.resultType = .CountResultType
+        
+        fetchRequest.predicate = predicate
+        
+        return (try self.executeFetchRequest(fetchRequest) as! [NSNumber]).first!.integerValue
+    }
 }
 
 public extension NSManagedObjectModel {

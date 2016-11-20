@@ -380,10 +380,10 @@
 		6E74FB021D7CA7030018633D /* NSDateComponents+MTDates.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */; };
 		6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752631D18B77300BC294D /* ErrorAlert.swift */; };
 		6E74FB041D7CAFDB0018633D /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
+		6E77C70D1DBE5C6B008BF684 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77C70C1DBE5C6B008BF684 /* ComplicationController.swift */; };
 		6E7847F11DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
 		6E7847F21DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
 		6E7847F31DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
-		6E77C70D1DBE5C6B008BF684 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77C70C1DBE5C6B008BF684 /* ComplicationController.swift */; };
 		6E7E18EA1D490DAC009549BA /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E18E91D490DAC009549BA /* Preference.swift */; };
 		6E7FEA2B1D78959900B9E809 /* VenuesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */; };
 		6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */; };
@@ -439,7 +439,6 @@
 		6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */; };
 		6EA6FD351D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */; };
 		6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
-		6EA6FD381D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
@@ -960,8 +959,8 @@
 		6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdate.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
-		6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManagedObject.swift; sourceTree = "<group>"; };
 		6E77C70C1DBE5C6B008BF684 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManagedObject.swift; sourceTree = "<group>"; };
 		6E7E18E91D490DAC009549BA /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesInterfaceController.swift; sourceTree = "<group>"; };
 		6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
@@ -2454,7 +2453,6 @@
 				6EB9B89E1D8348B000917077 /* EventDetail.storyboard in Resources */,
 				6EB9B89C1D83482F00917077 /* Events.storyboard in Resources */,
 				6EB9B8A31D834CBB00917077 /* Assets.xcassets in Resources */,
-				6EA6FD381D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

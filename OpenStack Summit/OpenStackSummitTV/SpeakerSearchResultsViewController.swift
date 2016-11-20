@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import CoreSummit
 import Haneke
+import CoreData
 
-final class SpeakerSearchResultsViewController: UITableViewController, UISearchResultsUpdating {
+final class SpeakerSearchResultsViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
@@ -22,20 +23,13 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
             // Return if the filter string hasn't changed.
             guard filterString != oldValue && isViewLoaded() else { return }
             
-            updateUI()
+            filterChanged()
         }
     }
     
-    private(set) var filteredSpeakers = [Speaker]()
-    
-    private var notificationToken: RealmSwift.NotificationToken?
+    private var fetchedResultsController: NSFetchedResultsController!
     
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,36 +39,48 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
         tableView.layoutMargins.left = 90
         tableView.layoutMargins.right = 90
         
-        updateUI()
-        
-        notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
+        filterChanged()
     }
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    private func filterChanged() {
         
-        // fetch all speakers
-        let allSpeakers = Store.shared.realm.objects(RealmPresentationSpeaker).sorted(PresentationSpeaker.sortProperties).filter("firstName != '' || lastName != ''")
+        let predicate: NSPredicate?
         
-        let realmFilteredSpeakers = filterString.isEmpty ? allSpeakers : allSpeakers.filter("firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+        if filterString.isEmpty == false {
+            
+            predicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            
+        } else {
+            
+            predicate = nil
+        }
         
-        filteredSpeakers = PresentationSpeaker.from(realm: realmFilteredSpeakers)
+        self.fetchedResultsController = NSFetchedResultsController(Speaker.self, delegate: self, predicate: predicate, sortDescriptors: SpeakerManagedObject.sortDescriptors, sectionNameKeyPath: nil, context: Store.shared.managedObjectContext)
         
-        // Reload the table view to reflect the changes.
-        tableView?.reloadData()
+        try! self.fetchedResultsController.performFetch()
+        
+        self.tableView.reloadData()
     }
     
     @inline(__always)
     private func configure(cell cell: SpeakerTableViewCell, at indexPath: NSIndexPath) {
         
-        let speaker = filteredSpeakers[indexPath.row]
+        let speaker = self[indexPath]
         
         cell.nameLabel.text = speaker.name
         cell.titleLabel.text = speaker.title ?? ""
         cell.speakerImageView.hnk_setImageFromURL(NSURL(string: speaker.pictureURL)!, placeholder: UIImage(named: "generic-user-avatar"))
         cell.speakerImageView.layer.cornerRadius = cell.speakerImageView.frame.size.width / 2
         cell.speakerImageView.clipsToBounds = true
+    }
+    
+    private subscript (indexPath: NSIndexPath) -> Speaker {
+        
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        
+        return Speaker(managedObject: managedObject)
     }
     
     // MARK: - UISearchResultsUpdating
@@ -94,7 +100,7 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return filteredSpeakers.count
+        return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -106,6 +112,49 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
         return cell
     }
     
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        case .Delete:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+        case .Update:
+            if let updateIndexPath = indexPath,
+                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) as? SpeakerTableViewCell {
+                
+                self.configure(cell: cell, at: updateIndexPath)
+            }
+        case .Move:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        }
+    }
+    
     // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -114,13 +163,13 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
             
         case "showSpeakerDetail":
             
-            let speaker = filteredSpeakers[tableView.indexPathForSelectedRow!.row]
+            let speaker = self[tableView.indexPathForSelectedRow!]
             
             let navigationController = segue.destinationViewController as! UINavigationController
             
             let speakerDetailViewController = navigationController.topViewController as! SpeakerDetailViewController
             
-            speakerDetailViewController.speaker = speaker
+            speakerDetailViewController.speaker = speaker.identifier
             
         default: fatalError("Unknown segue: \(segue)")
             
