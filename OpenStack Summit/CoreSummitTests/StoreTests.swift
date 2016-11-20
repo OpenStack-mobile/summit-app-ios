@@ -41,31 +41,34 @@ final class StoreTests: XCTestCase {
         waitForExpectationsWithTimeout(60, handler: nil)
     }
     
-    func testAustinSummitRequest() {
+    func testPastSummitsRequest() {
         
         let store = try! createStore()
                 
-        let austinID = 6
+        let pastSummits = 6 ... 7
         
-        let expectation = expectationWithDescription("API Request")
-        
-        store.summit(austinID) { (response) in
+        for summitID in pastSummits {
             
-            switch response {
+            let expectation = expectationWithDescription("API Request")
+            
+            store.summit(summitID) { (response) in
                 
-            case let .Error(error):
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    XCTFail("\(error)");
+                    
+                case let .Value(summit):
+                    
+                    XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                }
                 
-                XCTFail("\(error)");
-                
-            case let .Value(summit):
-                
-                XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                expectation.fulfill()
             }
             
-            expectation.fulfill()
+            waitForExpectationsWithTimeout(60, handler: nil)
         }
-        
-        waitForExpectationsWithTimeout(60, handler: nil)
     }
     
     func testDataUpdatesRequest() {
