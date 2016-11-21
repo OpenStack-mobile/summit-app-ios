@@ -69,6 +69,22 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - NSFetchedResultsControllerDelegate
     
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        let dataLoaded = controller.fetchedObjects?.count > 0
+        
+        if dataLoaded {
+            
+            self.navigationItem.title = NSLocalizedString("Venues", comment: "")
+            
+            mapView.showAnnotations(mapView.annotations, animated: true)
+            
+        } else {
+            
+            self.navigationItem.title = NSLocalizedString("Loading Summit...", comment: "")
+        }
+    }
+    
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         
         let managedObject = anObject as! VenueManagedObject

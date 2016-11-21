@@ -182,7 +182,7 @@ final class EventDetailViewController: UITableViewController {
             
         case "showTrackEvents":
             
-            let predicate = NSPredicate(format: "track.id == %@", eventCache.presentation!.track! as NSNumber)
+            let predicate = NSPredicate(format: "track.id == %@", eventCache.track! as NSNumber)
             
             let eventsViewController = segue.destinationViewController as! EventsViewController
             
