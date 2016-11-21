@@ -42,9 +42,27 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: NSPredicate(format: "latitude != nil AND longitude != nil"), sortDescriptors: sortDescriptors, context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
+        
+        updateUI()
     }
     
     // MARK: - Private Methods
+    
+    private func updateUI() {
+        
+        let dataLoaded = mapView.annotations.isEmpty == false
+        
+        if dataLoaded {
+            
+            self.navigationItem.title = NSLocalizedString("Venues", comment: "")
+            
+            showSelectedVenue()
+            
+        } else {
+            
+            self.navigationItem.title = NSLocalizedString("Loading Summit...", comment: "")
+        }
+    }
     
     private func showSelectedVenue() {
         
@@ -69,20 +87,14 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - NSFetchedResultsControllerDelegate
     
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        let _ = self.view
+    }
+    
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         
-        let dataLoaded = controller.fetchedObjects?.count > 0
-        
-        if dataLoaded {
-            
-            self.navigationItem.title = NSLocalizedString("Venues", comment: "")
-            
-            mapView.showAnnotations(mapView.annotations, animated: true)
-            
-        } else {
-            
-            self.navigationItem.title = NSLocalizedString("Loading Summit...", comment: "")
-        }
+        updateUI()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
