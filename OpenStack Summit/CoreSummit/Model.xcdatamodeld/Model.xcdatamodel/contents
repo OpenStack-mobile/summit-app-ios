@@ -43,6 +43,7 @@
         <relationship name="sponsors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="events" inverseEntity="Company" syncable="YES"/>
         <relationship name="summit" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="schedule" inverseEntity="Summit" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="events" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="events" inverseEntity="Track" syncable="YES"/>
         <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="event" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="EventType" representedClassName=".EventTypeManagedObject" syncable="YES">
@@ -95,7 +96,6 @@
         <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="presentation" inverseEntity="Event" syncable="YES"/>
         <relationship name="moderator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationSpeaker" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationModerator" inverseEntity="Speaker" syncable="YES"/>
-        <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="presentations" inverseEntity="Track" syncable="YES"/>
     </entity>
     <entity name="Review" representedClassName=".ReviewManagedObject" parentEntity="Feedback" syncable="YES">
         <attribute name="attendee" optional="YES" attributeType="Integer 64" syncable="YES"/>
@@ -163,8 +163,8 @@
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="track" inverseEntity="Event" syncable="YES"/>
         <relationship name="groups" toMany="YES" deletionRule="Nullify" destinationEntity="TrackGroup" inverseName="tracks" inverseEntity="TrackGroup" syncable="YES"/>
-        <relationship name="presentations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Presentation" inverseName="track" inverseEntity="Presentation" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="tracks" inverseEntity="Summit" syncable="YES"/>
     </entity>
     <entity name="TrackGroup" representedClassName=".TrackGroupManagedObject" syncable="YES">
@@ -220,13 +220,13 @@
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="225"/>
         <element name="AttendeeFeedback" positionX="9" positionY="153" width="128" height="75"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="315"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="330"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="120"/>
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
         <element name="Member" positionX="0" positionY="144" width="128" height="210"/>
-        <element name="Presentation" positionX="-9" positionY="126" width="128" height="150"/>
+        <element name="Presentation" positionX="-9" positionY="126" width="128" height="135"/>
         <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="255"/>
         <element name="Summit" positionX="-63" positionY="-18" width="128" height="315"/>

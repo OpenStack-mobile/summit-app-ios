@@ -19,7 +19,6 @@ public struct EventDetail: CoreDataDecodable {
     public let time: String
     public let location: String
     public let track: String
-    public let summitTypes: String
     public let sponsors: String
     public let eventType: String
     public let trackGroupColor: String
@@ -48,7 +47,6 @@ public struct EventDetail: CoreDataDecodable {
         self.dateTime = ScheduleItem.getDateTime(event)
         self.time = ScheduleItem.getTime(event)
         self.track = ScheduleItem.getTrack(event)
-        self.summitTypes = ScheduleItem.getSummitTypes(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
         self.rsvp = event.rsvp ?? ""
@@ -69,11 +67,11 @@ public struct EventDetail: CoreDataDecodable {
         
         self.tags = tags
         
-        self.level = event.presentation?.level != nil ? event.presentation!.level! + " Level" : ""
+        self.level = event.presentation.level != nil ? event.presentation.level! + " Level" : ""
         
         var speakers = [SpeakerDetail]()
         
-        if let managedObject = event.presentation?.moderator
+        if let managedObject = event.presentation.moderator
             where managedObject.id > 0 {
             
             let moderatorSpeaker = CoreSummit.Speaker(managedObject: managedObject)
@@ -81,15 +79,11 @@ public struct EventDetail: CoreDataDecodable {
             speakers.append(speakerDetail)
         }
         
-        if let presentation = event.presentation {
-            
-            // HACK: dismiss speakers with empty name
-            let realmSpeakers = presentation.speakers.filter { $0.firstName.isEmpty == false && $0.lastName.isEmpty == false }
-            
-            let presentationSpeakers = realmSpeakers.map { SpeakerDetail(speaker: Speaker(managedObject: $0)) }
-            
-            speakers += presentationSpeakers
-        }
+        let speakerManagedObjects = event.presentation.speakers
+        
+        let presentationSpeakers = speakerManagedObjects.map { SpeakerDetail(speaker: Speaker(managedObject: $0)) }
+        
+        speakers += presentationSpeakers
         
         self.speakers = speakers.sort()
         

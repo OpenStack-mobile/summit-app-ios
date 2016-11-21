@@ -231,11 +231,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         data.append(.description)
-                
-        if eventDetail.summitTypes.isEmpty == false {
-            
-            data.append(.summitTypes)
-        }
         
         if eventDetail.level.isEmpty == false {
             
@@ -533,17 +528,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 return cell
                 
-            case .summitTypes:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
-                
-                cell.titleLabel!.text = eventDetail.summitTypes
-                cell.detailImageView.image = R.image.credential()!
-                cell.accessoryType = .None
-                cell.selectionStyle = .None
-                
-                return cell
-                
             case .video:
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
@@ -721,7 +705,6 @@ private extension EventDetailViewController {
         case location
         case tags
         case description
-        case summitTypes
         case level
     }
 }

@@ -26,6 +26,8 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var rsvp: String?
     
+    @NSManaged public var track: TrackManagedObject?
+    
     @NSManaged public var eventType: EventTypeManagedObject
     
     @NSManaged public var sponsors: Set<CompanyManagedObject>
@@ -57,6 +59,7 @@ extension Event: CoreDataDecodable {
         self.allowFeedback = managedObject.allowFeedback
         self.averageFeedback = managedObject.averageFeedback
         self.rsvp = managedObject.rsvp
+        self.track = managedObject.track?.identifier
         self.type = managedObject.eventType.identifier
         self.sponsors = managedObject.sponsors.identifiers
         self.tags = Tag.from(managedObjects: managedObject.tags)
@@ -79,6 +82,7 @@ extension Event: CoreDataEncodable {
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
+        managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
         managedObject.sponsors = try context.relationshipFault(sponsors)
         managedObject.tags = try context.relationshipFault(tags)
@@ -126,14 +130,14 @@ public extension EventManagedObject {
         
         if let trackGroups = trackGroups where trackGroups.isEmpty == false {
             
-            let trackGroupPredicate = NSPredicate(format: "ANY presentation.track.groups.id IN %@", trackGroups)
+            let trackGroupPredicate = NSPredicate(format: "ANY track.groups.id IN %@", trackGroups)
             
             predicates.append(trackGroupPredicate)
         }
         
         if let tracks = tracks where tracks.isEmpty == false {
             
-            let tracksPredicate = NSPredicate(format: "presentation.track.id IN %@", tracks)
+            let tracksPredicate = NSPredicate(format: "track.id IN %@", tracks)
             
             predicates.append(tracksPredicate)
         }

@@ -12,8 +12,6 @@ public struct PresentationDataUpdate: Unique {
     
     public var level: Presentation.Level?
     
-    public var track: Identifier?
-    
     public var moderator: Identifier?
     
     public var speakers: Set<Speaker>
@@ -25,7 +23,6 @@ public func == (lhs: PresentationDataUpdate, rhs: PresentationDataUpdate) -> Boo
     
     return lhs.identifier == rhs.identifier
         && lhs.level == rhs.level
-        && lhs.track == rhs.track
         && lhs.moderator == rhs.moderator
         && lhs.speakers == rhs.speakers
 }

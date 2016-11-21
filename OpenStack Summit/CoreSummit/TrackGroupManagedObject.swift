@@ -66,10 +66,10 @@ public extension TrackGroup {
     /// Fetch all track groups that have some event associated with them.
     static func scheduled(context: NSManagedObjectContext) throws -> [TrackGroup] {
         
-        // all presentations
-        let presentations = try context.managedObjects(PresentationManagedObject.self, predicate: NSPredicate(format: "track != nil"))
+        // all events
+        let events = try context.managedObjects(EventManagedObject.self, predicate: NSPredicate(format: "track != nil"))
         
-        var groups = presentations.reduce([TrackGroupManagedObject](), combine: { $0.0 + Array($0.1.track!.groups) })
+        var groups = events.reduce([TrackGroupManagedObject](), combine: { $0.0 + Array($0.1.track!.groups) })
                 
         groups = (Set(groups) as NSSet).sortedArrayUsingDescriptors(ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
         

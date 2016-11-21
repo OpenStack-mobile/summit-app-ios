@@ -25,7 +25,6 @@ extension PresentationDataUpdate: JSONDecodable {
         
         // optional
         self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
-        self.track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
         
         if let levelString = JSONObject[JSONKey.level.rawValue]?.rawValue as? String {
             

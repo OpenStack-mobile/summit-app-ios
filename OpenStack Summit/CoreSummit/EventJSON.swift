@@ -66,6 +66,15 @@ extension Event: JSONDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
+            
+            self.track = track
+            
+        } else {
+            
+            self.track = nil
+        }
+        
         if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
             where location > 0 {
             

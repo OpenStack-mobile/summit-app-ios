@@ -26,7 +26,6 @@ extension Presentation: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.level = managedObject.level != nil ? Level(rawValue: managedObject.level!) : nil
-        self.track = managedObject.track?.identifier
         self.moderator = managedObject.moderator?.identifier
         self.speakers = managedObject.speakers.identifiers
     }
@@ -39,7 +38,6 @@ extension Presentation: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.level = level?.rawValue
-        managedObject.track = try context.relationshipFault(track)
         managedObject.moderator = try context.relationshipFault(moderator)
         managedObject.speakers = try context.relationshipFault(speakers)
         

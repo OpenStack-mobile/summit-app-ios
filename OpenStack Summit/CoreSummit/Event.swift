@@ -20,6 +20,8 @@ public struct Event: Named, Equatable {
     
     public var end: Date
     
+    public var track: Identifier?
+    
     public var allowFeedback: Bool
     
     public var averageFeedback: Double
@@ -46,6 +48,7 @@ public func == (lhs: Event, rhs: Event) -> Bool {
         && lhs.descriptionText == rhs.descriptionText
         && lhs.start == rhs.start
         && lhs.end == rhs.end
+        && lhs.track == rhs.track
         && lhs.allowFeedback == rhs.allowFeedback
         && lhs.averageFeedback == rhs.averageFeedback
         && lhs.type == rhs.type

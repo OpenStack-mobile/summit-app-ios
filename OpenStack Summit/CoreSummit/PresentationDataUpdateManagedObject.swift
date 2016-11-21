@@ -16,7 +16,6 @@ extension PresentationDataUpdate: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.level = level?.rawValue
-        managedObject.track = try context.relationshipFault(track)
         managedObject.speakers = try context.relationshipFault(speakers)
         
         managedObject.didCache()

@@ -20,7 +20,6 @@ public struct ScheduleItem: CoreDataDecodable {
     public let time: String
     public let location: String
     public let track: String
-    public let summitTypes: String
     public let sponsors: String
     public let eventType: String
     public let trackGroupColor: String
@@ -36,7 +35,6 @@ public struct ScheduleItem: CoreDataDecodable {
         self.dateTime = ScheduleItem.getDateTime(event)
         self.time = ScheduleItem.getTime(event)
         self.track = ScheduleItem.getTrack(event)
-        self.summitTypes = ScheduleItem.getSummitTypes(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
     }
@@ -57,16 +55,6 @@ public extension ScheduleItem {
 // MARK: - Internal Extension
 
 internal extension ScheduleItem {
-    
-    static func getSummitTypes(event: EventManagedObject) -> String {
-        var credentials = ""
-        var separator = ""
-        for summitType in event.summitTypes {
-            credentials += separator + summitType.name
-            separator = ", "
-        }
-        return credentials
-    }
     
     static func getSponsors(event: EventManagedObject) -> String {
         
@@ -145,12 +133,12 @@ internal extension ScheduleItem {
     @inline(__always)
     static func getTrack(event: EventManagedObject) -> String {
         
-        return event.presentation?.track?.name ?? ""
+        return event.track?.name ?? ""
     }
     
     @inline(__always)
     static func getTrackGroupColor(event: EventManagedObject) -> String {
         
-        return event.presentation?.track?.groups.first?.color ?? ""
+        return event.track?.groups.first?.color ?? ""
     }
 }

@@ -12,8 +12,6 @@ public struct Presentation: Unique, Equatable {
     
     public var level: Level?
     
-    public var track: Identifier?
-    
     public var moderator: Identifier?
     
     public var speakers: Set<Identifier>
@@ -38,7 +36,6 @@ public func == (lhs: Presentation, rhs: Presentation) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.level == rhs.level
-        && lhs.track == rhs.track
         && lhs.moderator == rhs.moderator
         && lhs.speakers == rhs.speakers
 }

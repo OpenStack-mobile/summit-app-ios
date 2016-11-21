@@ -48,7 +48,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     private(set) var speaker: Speaker!
     
-    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation?.speakers.contains(self.speaker.identifier) ?? false }) ?? []
+    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier) ?? false }) ?? []
     
     // MARK: - Loading
     
