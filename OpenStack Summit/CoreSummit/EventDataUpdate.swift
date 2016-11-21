@@ -27,15 +27,13 @@ public struct EventDataUpdate: Named {
     
     public var type: Identifier
     
-    public var summitTypes: Set<Identifier>
-    
     public var sponsors: Set<Company>
     
     public var tags: Set<Tag>
     
     public var location: Identifier
     
-    public var presentation: PresentationDataUpdate?
+    public var presentation: PresentationDataUpdate
     
     public var videos: Set<Video>
     
@@ -52,7 +50,6 @@ public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
         && lhs.allowFeedback == rhs.allowFeedback
         && lhs.averageFeedback == rhs.averageFeedback
         && lhs.type == rhs.type
-        && lhs.summitTypes == rhs.summitTypes
         && lhs.sponsors == rhs.sponsors
         && lhs.tags == rhs.tags
         && lhs.location == rhs.location

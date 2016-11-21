@@ -28,8 +28,8 @@ extension SummitDataUpdate: Updatable {
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.webpageURL = webpageURL
+        managedObject.active = active
         managedObject.startShowingVenues = startShowingVenues?.toFoundation()
-        managedObject.summitTypes = try context.relationshipFault(summitTypes)
         managedObject.ticketTypes = try context.relationshipFault(ticketTypes)
         managedObject.locations = try context.relationshipFault(locations)
         

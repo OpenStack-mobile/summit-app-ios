@@ -28,15 +28,13 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var eventType: EventTypeManagedObject
     
-    @NSManaged public var summitTypes: Set<SummitTypeManagedObject>
-    
     @NSManaged public var sponsors: Set<CompanyManagedObject>
     
     @NSManaged public var tags: Set<TagManagedObject>
     
     @NSManaged public var location: LocationManagedObject?
     
-    @NSManaged public var presentation: PresentationManagedObject?
+    @NSManaged public var presentation: PresentationManagedObject
     
     @NSManaged public var videos: Set<VideoManagedObject>
     
@@ -60,20 +58,10 @@ extension Event: CoreDataDecodable {
         self.averageFeedback = managedObject.averageFeedback
         self.rsvp = managedObject.rsvp
         self.type = managedObject.eventType.identifier
-        self.summitTypes = managedObject.summitTypes.identifiers
         self.sponsors = managedObject.sponsors.identifiers
         self.tags = Tag.from(managedObjects: managedObject.tags)
         self.location = managedObject.location?.identifier
-        
-        if let presentationManagedObject = managedObject.presentation {
-            
-            self.presentation = Presentation(managedObject: presentationManagedObject)
-            
-        } else {
-            
-            self.presentation = nil
-        }
-        
+        self.presentation = Presentation(managedObject: managedObject.presentation)
         self.videos = Video.from(managedObjects: managedObject.videos)
     }
 }
@@ -92,7 +80,6 @@ extension Event: CoreDataEncodable {
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
         managedObject.eventType = try context.relationshipFault(type)
-        managedObject.summitTypes = try context.relationshipFault(summitTypes)
         managedObject.sponsors = try context.relationshipFault(sponsors)
         managedObject.tags = try context.relationshipFault(tags)
         managedObject.location = try context.relationshipFault(location)

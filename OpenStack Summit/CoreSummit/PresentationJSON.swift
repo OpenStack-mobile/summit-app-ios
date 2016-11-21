@@ -28,7 +28,15 @@ extension Presentation: JSONDecodable {
         
         // optional
         self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
-        self.track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
+        
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
+            
+            self.track = track
+            
+        } else {
+            
+            self.track = nil
+        }
         
         if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
             where moderator > 0 {

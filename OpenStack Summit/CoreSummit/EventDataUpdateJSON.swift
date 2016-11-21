@@ -24,8 +24,6 @@ extension EventDataUpdate: JSONDecodable {
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
             let eventTypeJSON = JSONObject[JSONKey.type_id.rawValue],
             let eventType = Int(JSONValue: eventTypeJSON),
-            let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
-            let summitTypes = Int.fromJSON(summitTypesJSONArray),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
@@ -46,7 +44,6 @@ extension EventDataUpdate: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.summitTypes = Set(summitTypes)
         self.tags = Set(tags)
         self.allowFeedback = allowFeedback
         self.type = type

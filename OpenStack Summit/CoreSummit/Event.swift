@@ -25,16 +25,14 @@ public struct Event: Named, Equatable {
     public var averageFeedback: Double
     
     public var type: Identifier
-    
-    public var summitTypes: Set<Identifier>
-    
+        
     public var sponsors: Set<Identifier>
     
     public var tags: Set<Tag>
         
     public var location: Identifier?
     
-    public var presentation: Presentation?
+    public var presentation: Presentation
     
     public var videos: Set<Video>
     
@@ -51,7 +49,6 @@ public func == (lhs: Event, rhs: Event) -> Bool {
         && lhs.allowFeedback == rhs.allowFeedback
         && lhs.averageFeedback == rhs.averageFeedback
         && lhs.type == rhs.type
-        && lhs.summitTypes == rhs.summitTypes
         && lhs.sponsors == rhs.sponsors
         && lhs.tags == rhs.tags
         && lhs.location == rhs.location

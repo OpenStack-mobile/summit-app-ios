@@ -12,7 +12,7 @@ public extension Event {
     
     enum JSONKey: String {
         
-        case id, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, summit_types, sponsors, speakers, location_id, tags, track_id, videos, rsvp_link
+        case id, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, sponsors, speakers, location_id, tags, track_id, videos, rsvp_link
     }
 }
 
@@ -27,8 +27,6 @@ extension Event: JSONDecodable {
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
             let eventTypeJSON = JSONObject[JSONKey.type_id.rawValue],
             let eventType = Int(JSONValue: eventTypeJSON),
-            let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
-            let summitTypes = Int.fromJSON(summitTypesJSONArray),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
@@ -36,7 +34,8 @@ extension Event: JSONDecodable {
             let type = Identifier(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Identifier.fromJSON(sponsorsJSONArray),
-            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
+            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
+            let presentation = Presentation(JSONValue: JSONValue)
             else { return nil }
         
         self.identifier = identifier
@@ -44,11 +43,11 @@ extension Event: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.summitTypes = Set(summitTypes)
         self.tags = Set(tags)
         self.allowFeedback = allowFeedback
         self.type = type
         self.sponsors = Set(sponsors)
+        self.presentation = presentation
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
             
@@ -87,19 +86,6 @@ extension Event: JSONDecodable {
         } else {
             
             self.videos = []
-        }
-        
-        // decode presentation
-        if JSONObject[JSONKey.track_id.rawValue] != nil {
-            
-            guard let presentation = Presentation(JSONValue: JSONValue)
-                else { return nil }
-            
-            self.presentation = presentation
-            
-        } else {
-            
-            self.presentation = nil
         }
     }
 }

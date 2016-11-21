@@ -25,14 +25,14 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var webpageURL: String
     
+    @NSManaged public var active: Bool
+    
     @NSManaged public var startShowingVenues: NSDate?
     
     @NSManaged public var sponsors: Set<CompanyManagedObject>
     
     @NSManaged public var speakers: Set<SpeakerManagedObject>
-    
-    @NSManaged public var summitTypes: Set<SummitTypeManagedObject>
-    
+        
     @NSManaged public var ticketTypes: Set<TicketTypeManagedObject>
     
     @NSManaged public var locations: Set<LocationManagedObject>
@@ -56,6 +56,7 @@ extension Summit: CoreDataDecodable {
         self.start = Date(foundation: managedObject.start)
         self.end = Date(foundation: managedObject.end)
         self.webpageURL = managedObject.webpageURL
+        self.active = managedObject.active
         
         if let startShowingVenues = managedObject.startShowingVenues {
             
@@ -68,7 +69,6 @@ extension Summit: CoreDataDecodable {
         
         self.sponsors = Company.from(managedObjects: managedObject.sponsors)
         self.speakers = Speaker.from(managedObjects: managedObject.speakers)
-        self.summitTypes = SummitType.from(managedObjects: managedObject.summitTypes)
         self.ticketTypes = TicketType.from(managedObjects: managedObject.ticketTypes)
         self.locations = Location.from(managedObjects: managedObject.locations)
         self.tracks = Track.from(managedObjects: managedObject.tracks)
@@ -89,10 +89,10 @@ extension Summit: CoreDataEncodable {
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.webpageURL = webpageURL
+        managedObject.active = active
         managedObject.startShowingVenues = startShowingVenues?.toFoundation()
         managedObject.sponsors = try context.relationshipFault(sponsors)
         managedObject.speakers = try context.relationshipFault(speakers)
-        managedObject.summitTypes = try context.relationshipFault(summitTypes)
         managedObject.ticketTypes = try context.relationshipFault(ticketTypes)
         managedObject.locations = try context.relationshipFault(locations)
         managedObject.tracks = try context.relationshipFault(tracks)

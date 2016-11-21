@@ -30,7 +30,8 @@ extension SummitDataUpdate: JSONDecodable {
             let ticketTypes = TicketType.fromJSON(ticketTypeJSONArray),
             let locationsJSONArray = JSONObject[JSONKey.locations.rawValue]?.arrayValue,
             let locations = Location.fromJSON(locationsJSONArray),
-            let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String
+            let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String,
+            let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool
             else { return nil }
         
         self.identifier = identifier
@@ -41,6 +42,7 @@ extension SummitDataUpdate: JSONDecodable {
         self.summitTypes = Set(summitTypes)
         self.ticketTypes = Set(ticketTypes)
         self.webpageURL = webpageURL
+        self.active = active
         
         // filter venues (we have to ignore other types of venues)
         self.locations = Set(locations.filter({

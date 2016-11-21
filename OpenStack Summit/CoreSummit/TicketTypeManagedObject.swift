@@ -14,8 +14,6 @@ public final class TicketTypeManagedObject: Entity {
     @NSManaged public var name: String
     
     @NSManaged public var descriptionText: String?
-    
-    @NSManaged public var allowedSummitTypes: Set<SummitTypeManagedObject>
 }
 
 extension TicketType: CoreDataDecodable {
@@ -25,7 +23,6 @@ extension TicketType: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
-        self.allowedSummitTypes = managedObject.allowedSummitTypes.identifiers
     }
 }
 
@@ -37,7 +34,6 @@ extension TicketType: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.allowedSummitTypes = try context.relationshipFault(allowedSummitTypes)
         
         managedObject.didCache()
         

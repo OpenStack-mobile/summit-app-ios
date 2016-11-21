@@ -20,18 +20,14 @@ public struct Summit: Named, Equatable {
     
     public var end: Date
     
-    //public var timestamp: Date
-    
-    //public var active: Bool
+    public var active: Bool
     
     public var sponsors: Set<Company>
     
     public var speakers: Set<Speaker>
     
     public var startShowingVenues: Date?
-        
-    public var summitTypes: Set<SummitType>
-        
+    
     public var ticketTypes: Set<TicketType>
     
     // Venue and Venue Rooms
@@ -57,10 +53,10 @@ public func == (lhs: Summit, rhs: Summit) -> Bool {
         && lhs.timeZone == rhs.timeZone
         && lhs.start == rhs.start
         && lhs.end == rhs.end
+        && lhs.active == rhs.active
         && lhs.sponsors == rhs.sponsors
         && lhs.speakers == rhs.speakers
         && lhs.startShowingVenues == rhs.startShowingVenues
-        && lhs.summitTypes == rhs.summitTypes
         && lhs.ticketTypes == rhs.ticketTypes
         && lhs.locations == rhs.locations
         && lhs.tracks == rhs.tracks
