@@ -117,7 +117,7 @@ public extension EventManagedObject {
                        venues: [Identifier]?,
                        context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
-        let eventsPredicate = NSPredicate(format: "start >= %@ AND end <= %@", startDate, endDate)
+        let eventsPredicate = NSPredicate(format: "end >= %@ AND end <= %@", startDate, endDate)
         
         var predicates = [eventsPredicate]
         
