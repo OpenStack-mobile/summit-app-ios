@@ -91,7 +91,7 @@ public extension RealmSummitEvent {
     }
     
     static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, realm: Realm = Store.shared.realm) -> [RealmSummitEvent] {
-        let events = realm.objects(RealmSummitEvent).filter("ANY presentation.speakers.id = %@ || presentation.moderator.id = %@ && start >= %@ and end <= %@", speaker, speaker, startDate, endDate).sorted(self.sortProperties)
+        let events = realm.objects(RealmSummitEvent).filter("ANY presentation.speakers.id = %@ || presentation.moderator.id = %@ && end >= %@ and end <= %@", speaker, speaker, startDate, endDate).sorted(self.sortProperties)
         return events.map { $0 }
     }
 }

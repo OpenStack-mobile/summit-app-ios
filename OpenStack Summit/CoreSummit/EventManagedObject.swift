@@ -196,7 +196,7 @@ public extension EventManagedObject {
         guard let speaker = try SpeakerManagedObject.find(speaker, context: context)
             else { return [] }
         
-        let predicate = NSPredicate(format: "(ANY presentation.speakers == %@ OR presentation.moderator == %@) AND (start >= %@ AND end <= %@)", speaker, speaker, startDate, endDate)
+        let predicate = NSPredicate(format: "(ANY presentation.speakers == %@ OR presentation.moderator == %@) AND (end >= %@ AND end <= %@)", speaker, speaker, startDate, endDate)
         
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
     }
