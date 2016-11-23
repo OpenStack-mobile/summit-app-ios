@@ -73,7 +73,7 @@ public extension Track {
         
         let predicate: NSPredicate
         
-        let scheduledTracksPredicate = NSPredicate(format: "presentations.@count > 0")
+        let scheduledTracksPredicate = NSPredicate(format: "events.@count > 0")
         
         // optionally filter for track groups
         if trackGroups.isEmpty == false {
