@@ -24,7 +24,15 @@ extension PresentationDataUpdate: JSONDecodable {
         self.identifier = identifier
         
         // optional
-        self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
+        if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
+            where moderator > 0 {
+            
+            self.moderator = moderator
+            
+        } else {
+            
+            self.moderator = nil
+        }
         
         if let levelString = JSONObject[JSONKey.level.rawValue]?.rawValue as? String {
             
@@ -49,6 +57,5 @@ extension PresentationDataUpdate: JSONDecodable {
             
             self.speakers = []
         }
-        
     }
 }

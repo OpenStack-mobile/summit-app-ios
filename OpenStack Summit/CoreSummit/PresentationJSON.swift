@@ -27,8 +27,6 @@ extension Presentation: JSONDecodable {
         self.identifier = identifier
         
         // optional
-        self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
-        
         if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
             where moderator > 0 {
             
