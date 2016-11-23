@@ -206,7 +206,7 @@ public extension Event {
     
     static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Event] {
         
-        let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+        let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
         
         return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
