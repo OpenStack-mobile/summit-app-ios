@@ -70,6 +70,7 @@ public final class Store {
     
     public init(environment: Environment,
                  session: SessionStorage,
+                 contextConcurrencyType: NSManagedObjectContextConcurrencyType = .MainQueueConcurrencyType,
                  createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
                  deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
         
@@ -84,7 +85,7 @@ public final class Store {
         self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
         // setup managed object contexts
-        self.managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        self.managedObjectContext = NSManagedObjectContext(concurrencyType: contextConcurrencyType)
         self.managedObjectContext.undoManager = nil
         self.managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         

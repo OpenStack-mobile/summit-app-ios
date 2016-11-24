@@ -14,6 +14,33 @@ import SwiftFoundation
 
 final class StoreTests: XCTestCase {
     
+    func testAllSummitsRequest() {
+        
+        let store = try! createStore()
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        store.summits() { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                XCTAssert(value.summits.isEmpty == false, "No summits")
+                
+                dump(value, "AllSummitsDump.txt")
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
+    
     func testCurrentSummitRequest() {
         
         let store = try! createStore()
@@ -62,6 +89,8 @@ final class StoreTests: XCTestCase {
                 case let .Value(summit):
                     
                     XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                    
+                    dump(summit, "Summit" + "\(summitID)" + "Dump.txt")
                 }
                 
                 expectation.fulfill()
@@ -75,13 +104,13 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
         
-        let austinID = 6
+        let summitID = 7  // Barcelona
         
         let date = Date() - (60*60*24*365) // last year
         
         let expectation = expectationWithDescription("API Request")
         
-        store.dataUpdates(austinID, from: date, limit: 100) { (response) in
+        store.dataUpdates(summitID, from: date, limit: 100) { (response) in
             
             switch response {
                 

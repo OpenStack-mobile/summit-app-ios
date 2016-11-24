@@ -14,7 +14,7 @@ public struct Summit: Named, Equatable {
     
     public var name: String
     
-    public var timeZone: String // should be `TimeZone` but would require Realm Schema migration
+    public var timeZone: String
     
     public var start: Date
     
