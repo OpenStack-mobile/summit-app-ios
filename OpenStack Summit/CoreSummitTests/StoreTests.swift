@@ -106,7 +106,7 @@ final class StoreTests: XCTestCase {
         
         let summitID = 7  // Barcelona
         
-        let date = Date() - (60*60*24*365) // last year
+        let date = Date() - (60*60*24*30) // last month
         
         let expectation = expectationWithDescription("API Request")
         
