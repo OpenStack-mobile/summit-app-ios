@@ -26,6 +26,8 @@ public final class DataUpdatePoller {
     
     public var storage: DataUpdatePollerStorage
     
+    public var summit: Identifier?
+    
     // MARK: - Private Properties
     
     private var timer: NSTimer?
@@ -67,9 +69,11 @@ public final class DataUpdatePoller {
         #endif
         
         // dont poll if no active summit
-        guard let summit = try! store.managedObjectContext.managedObjects(SummitManagedObject.self).first else { return }
+        guard let summitID = self.summit,
+            let summit = try! SummitManagedObject.find(summitID, context: store.managedObjectContext)
+            else { return }
         
-        log?("Polling server for data updates")
+        log?("Polling server for data updates for summit \(summitID)")
         
         /// Handles the polling of the data updates
         func process(response response: ErrorValue<[DataUpdate]>) {

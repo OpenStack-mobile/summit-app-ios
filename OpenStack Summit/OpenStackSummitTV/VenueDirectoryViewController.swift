@@ -53,9 +53,7 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     
     private func updateUI() {
         
-        let dataLoaded = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).isEmpty == false
-        
-        self.title = dataLoaded ? "Venues" : "Loading Summit..."
+        self.title = isDataLoaded ? "Venues" : "Loading Summit..."
         
         self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: nil, sortDescriptors: VenueManagedObject.sortDescriptors, sectionNameKeyPath: "isInternal", context: Store.shared.managedObjectContext)
         

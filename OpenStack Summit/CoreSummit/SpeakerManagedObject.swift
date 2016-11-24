@@ -89,17 +89,34 @@ public extension SpeakerManagedObject {
 
 public extension Speaker {
     
-    static func filter(searchTerm: String, page: Int, objectsPerPage: Int, context: NSManagedObjectContext) throws -> [Speaker] {
+    static func filter(searchTerm: String = "", page: Int, objectsPerPage: Int, summit: Identifier? = nil, context: NSManagedObjectContext) throws -> [Speaker] {
         
-        let predicate: NSPredicate?
+        var predicates = [NSPredicate]()
         
         if searchTerm.isEmpty == false {
             
-            predicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
+            let searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
+            
+            predicates.append(searchPredicate)
+        }
+        
+        if let summitID = summit,
+            let summit = try SummitManagedObject.find(summitID, context: context) {
+            
+            let summitPredicate = NSPredicate(format: "%@ IN summits", summit)
+            
+            predicates.append(summitPredicate)
+        }
+        
+        let predicate: NSPredicate?
+        
+        if predicates.count > 1 {
+            
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
             
         } else {
             
-            predicate = nil
+            predicate = predicates.first
         }
         
         let results = try context.managedObjects(ManagedObject.self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)

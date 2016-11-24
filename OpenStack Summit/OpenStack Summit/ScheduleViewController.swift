@@ -172,7 +172,9 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func loadData() {
         
-        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit.self).first {
+        if let summitManagedObject = self.currentSummit {
+            
+            let summit = Summit(managedObject: summitManagedObject)
             
             self.updateUI(summit)
             
@@ -366,12 +368,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
                 self.pushRegisterInProgress = false
             }
         }
-    }
-    
-    @inline(__always)
-    private func isDataLoaded() -> Bool {
-        
-        return try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).first != nil
     }
     
     @inline(__always)

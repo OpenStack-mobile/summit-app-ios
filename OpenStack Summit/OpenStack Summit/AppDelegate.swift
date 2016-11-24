@@ -83,6 +83,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             }
         }
         
+        // hardcode summit
+        SummitManager.shared.summit.value = 7
+        
         return true
     }
 

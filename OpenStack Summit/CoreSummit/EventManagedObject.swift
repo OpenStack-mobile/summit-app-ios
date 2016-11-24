@@ -107,26 +107,29 @@ public extension EventManagedObject {
                 NSSortDescriptor(key: "name", ascending: true)]
     }
     
+    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [EventManagedObject] {
+        
+        let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+        
+        return try context.managedObjects(self, predicate: predicate, sortDescriptors: self.sortDescriptors)
+    }
+    
     static func filter(startDate: NSDate,
                        endDate: NSDate,
-                       summitTypes: [Identifier]?,
                        tracks: [Identifier]?,
                        trackGroups: [Identifier]?,
                        tags: [String]?,
                        levels: [String]?,
                        venues: [Identifier]?,
+                       summit: Identifier,
                        context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
-        let eventsPredicate = NSPredicate(format: "end >= %@ AND end <= %@", startDate, endDate)
+        guard let summit = try SummitManagedObject.find(summit, context: context)
+            else { return [] }
+        
+        let eventsPredicate = NSPredicate(format: "end >= %@ AND end <= %@ AND summit == %@", startDate, endDate, summit)
         
         var predicates = [eventsPredicate]
-        
-        if let summitTypes = summitTypes where summitTypes.isEmpty == false {
-            
-            let summitTypePredicate = NSPredicate(format: "ANY summitTypes.id IN %@", summitTypes)
-            
-            predicates.append(summitTypePredicate)
-        }
         
         if let trackGroups = trackGroups where trackGroups.isEmpty == false {
             
@@ -191,23 +194,14 @@ public extension EventManagedObject {
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
     }
     
-    static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, context: NSManagedObjectContext) throws -> [EventManagedObject] {
+    static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, summit: Identifier, context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
-        guard let speaker = try SpeakerManagedObject.find(speaker, context: context)
+        guard let speaker = try SpeakerManagedObject.find(speaker, context: context),
+            let summit = try SummitManagedObject.find(summit, context: context)
             else { return [] }
         
-        let predicate = NSPredicate(format: "(ANY presentation.speakers == %@ OR presentation.moderator == %@) AND (end >= %@ AND end <= %@)", speaker, speaker, startDate, endDate)
+        let predicate = NSPredicate(format: "(ANY presentation.speakers == %@ OR presentation.moderator == %@) AND (end >= %@ AND end <= %@) AND summit == %@", speaker, speaker, startDate, endDate, summit)
         
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
-    }
-}
-
-public extension Event {
-    
-    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Event] {
-        
-        let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
-        
-        return try context.managedObjects(self, predicate: predicate, sortDescriptors: ManagedObject.sortDescriptors)
     }
 }

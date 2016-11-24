@@ -30,7 +30,9 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
     
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         
-        let events = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, context: Store.shared.managedObjectContext)
+        let summit = SummitManager.shared.summit.value
+        
+        let events = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -46,7 +48,9 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
     
     override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
         
-        let managedObjects = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, context: Store.shared.managedObjectContext)
+        let summit = SummitManager.shared.summit.value
+        
+        let managedObjects = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: managedObjects)
     }

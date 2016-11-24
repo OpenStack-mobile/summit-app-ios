@@ -14,7 +14,15 @@ extension DataUpdatePoller {
     static var shared: DataUpdatePoller {
         
         struct Static {
-            static let poller = DataUpdatePoller(storage: UserDefaultsDataUpdatePollerStorage(), store: Store.shared)
+            
+            static let poller: DataUpdatePoller = {
+               
+                let poller = DataUpdatePoller(storage: UserDefaultsDataUpdatePollerStorage(), store: Store.shared)
+                
+                SummitManager.shared.summit.observe { poller.summit = $0 }
+                
+                return poller
+            }()
         }
         
         return Static.poller
