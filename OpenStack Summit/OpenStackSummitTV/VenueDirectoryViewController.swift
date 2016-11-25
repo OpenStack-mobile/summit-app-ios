@@ -12,11 +12,9 @@ import CoreSummit
 import CoreData
 
 @objc(OSSTVVenueDirectoryViewController)
-final class VenueDirectoryViewController: UITableViewController, SummitConfigurableViewController, NSFetchedResultsControllerDelegate {
+final class VenueDirectoryViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
-    
-    var summit: Identifier!
     
     private var fetchedResultsController: NSFetchedResultsController!
     
@@ -57,7 +55,11 @@ final class VenueDirectoryViewController: UITableViewController, SummitConfigura
         
         self.title = "Venues"
         
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: nil, sortDescriptors: VenueManagedObject.sortDescriptors, sectionNameKeyPath: "isInternal", context: Store.shared.managedObjectContext)
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: summitPredicate, sortDescriptors: VenueManagedObject.sortDescriptors, sectionNameKeyPath: "isInternal", context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         

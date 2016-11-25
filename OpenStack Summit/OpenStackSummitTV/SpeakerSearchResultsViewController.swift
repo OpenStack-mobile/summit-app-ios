@@ -15,7 +15,7 @@ import CoreData
 final class SpeakerSearchResultsViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
-    
+        
     var filterString = "" {
         
         didSet {
@@ -46,15 +46,30 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
     
     private func filterChanged() {
         
-        let predicate: NSPredicate?
+        var predicates = [NSPredicate]()
+        
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let summitPredicate = NSPredicate(format: "%@ IN summits.id", summitID)
+        
+        predicates.append(summitPredicate)
         
         if filterString.isEmpty == false {
             
-            predicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            let filterPredicate = NSPredicate(format: "firstName CONTAINS [c] %@ or lastName CONTAINS [c] %@", filterString, filterString)
+            
+            predicates.append(filterPredicate)
+        }
+        
+        let predicate: NSPredicate?
+        
+        if predicates.count > 0 {
+            
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
             
         } else {
             
-            predicate = nil
+            predicate = predicates.first
         }
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self, delegate: self, predicate: predicate, sortDescriptors: SpeakerManagedObject.sortDescriptors, sectionNameKeyPath: nil, context: Store.shared.managedObjectContext)

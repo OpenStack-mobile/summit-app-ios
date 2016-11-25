@@ -36,10 +36,14 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        
         let sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true),
                                NSSortDescriptor(key: "longitude", ascending: true)]
         
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: NSPredicate(format: "latitude != nil AND longitude != nil"), sortDescriptors: sortDescriptors, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sortDescriptors, context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         

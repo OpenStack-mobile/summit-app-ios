@@ -12,7 +12,7 @@ import CoreSummit
 import SwiftSpinner
 
 @objc(OSSTVSummitsViewController)
-final class SummitsViewController: UITableViewController, UITabBarControllerDelegate {
+final class SummitsViewController: UITableViewController {
     
     typealias Summit = SummitsResponse.Summit
     
@@ -112,37 +112,9 @@ final class SummitsViewController: UITableViewController, UITabBarControllerDele
         
         let selectedSummit = self[indexPath]
         
-        self.navigationItem.title = "Loading \(selectedSummit.name) Summit"
+        SummitManager.shared.summit.value = selectedSummit.identifier
         
-        Store.shared.summit(selectedSummit.identifier) { (response) in
-            
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
-                
-                guard let controller = self else { return }
-                
-                controller.navigationItem.title = "Summits"
-                
-                switch response {
-                    
-                case let .Error(error):
-                    
-                    controller.showErrorAlert((error as NSError).localizedDescription, okHandler:  { controller.refresh() })
-                    
-                case .Value:
-                    
-                    controller.performSegueWithIdentifier(Segue.presentSummit.rawValue, sender: controller)
-                }
-            }
-        }
-    }
-    
-    // MARK: - UITabBarControllerDelegate
-    
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        
-        
-        
-        return true
+        self.performSegueWithIdentifier(Segue.presentSummit.rawValue, sender: self)
     }
     
     // MARK: - Segue
@@ -153,9 +125,7 @@ final class SummitsViewController: UITableViewController, UITabBarControllerDele
         
         switch segueIdentifier {
             
-        case .presentSummit:
-            
-            let destinationVC = segue.destinationViewController as! UITabBarController
+        case .presentSummit: break
         }
     }
 }

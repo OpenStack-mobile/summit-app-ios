@@ -40,7 +40,11 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
     
     private func updateUI() {
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, EventsViewController.cachedPredicate])
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, EventsViewController.cachedPredicate])
         
         self.fetchedResultsController = NSFetchedResultsController(Event.self, delegate: self, predicate: predicate, sortDescriptors: EventManagedObject.sortDescriptors, context: Store.shared.managedObjectContext)
         

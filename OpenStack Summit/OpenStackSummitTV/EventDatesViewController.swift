@@ -11,12 +11,10 @@ import SwiftFoundation
 import CoreSummit
 
 @objc(OSSTVEventDatesViewController)
-final class EventDatesViewController: UITableViewController, SummitConfigurableViewController {
+final class EventDatesViewController: UITableViewController {
     
     // MARK: - Properties
-    
-    var summit: Identifier!
-    
+        
     private(set) var state: State = .loading {
         
         didSet { updateUI() }
@@ -66,13 +64,17 @@ final class EventDatesViewController: UITableViewController, SummitConfigurableV
         
         state = .loading
         
-        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit.self).first {
+        let summitID = SummitManager.shared.summit.value
+        
+        assert(summitID != 0, "No summit selected")
+        
+        if let summit = try! Summit.find(summitID, context: Store.shared.managedObjectContext) {
             
             self.state = State(summit: summit)
             
         } else {
             
-            Store.shared.summit { [weak self] (response) in
+            Store.shared.summit(summitID) { [weak self] (response) in
                 
                 guard let controller = self else { return }
                 
@@ -110,7 +112,7 @@ final class EventDatesViewController: UITableViewController, SummitConfigurableV
             self.title = "Error"
             
             // show alert
-            showErrorAlert((error as NSError).localizedDescription, retryHandler: { self.loadData() })
+            showErrorAlert((error as NSError).localizedDescription, okHandler: { self.loadData() })
             
         case let .summit(_, _, name):
             
