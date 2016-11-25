@@ -11,9 +11,11 @@ import SwiftFoundation
 import CoreSummit
 
 @objc(OSSTVEventDatesViewController)
-final class EventDatesViewController: UITableViewController {
+final class EventDatesViewController: UITableViewController, SummitConfigurableViewController {
     
     // MARK: - Properties
+    
+    var summit: Identifier!
     
     private(set) var state: State = .loading {
         

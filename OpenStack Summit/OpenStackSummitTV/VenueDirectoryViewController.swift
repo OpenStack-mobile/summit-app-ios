@@ -12,9 +12,11 @@ import CoreSummit
 import CoreData
 
 @objc(OSSTVVenueDirectoryViewController)
-final class VenueDirectoryViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+final class VenueDirectoryViewController: UITableViewController, SummitConfigurableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
+    
+    var summit: Identifier!
     
     private var fetchedResultsController: NSFetchedResultsController!
     
@@ -53,7 +55,7 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     
     private func updateUI() {
         
-        self.title = isDataLoaded ? "Venues" : "Loading Summit..."
+        self.title = "Venues"
         
         self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: nil, sortDescriptors: VenueManagedObject.sortDescriptors, sectionNameKeyPath: "isInternal", context: Store.shared.managedObjectContext)
         

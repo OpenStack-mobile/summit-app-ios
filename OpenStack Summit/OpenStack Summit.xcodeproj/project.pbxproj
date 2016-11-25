@@ -327,6 +327,7 @@
 		6E3E8C251D47D68100A29003 /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99B91D217141009FD0DA /* NSDate+MTDates.m */; };
 		6E3E8C261D47D68100A29003 /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BB1D217141009FD0DA /* NSDateComponents+MTDates.m */; };
 		6E3E8C281D47E64D00A29003 /* ShowVenueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */; };
+		6E4139701DE8D2080074D631 /* SummitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41396F1DE8D2080074D631 /* SummitsViewController.swift */; };
 		6E41EFE41DCDD8E400733E04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E41EFE51DCDD8E400733E04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E46F3AC1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */; };
@@ -406,6 +407,7 @@
 		6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFD71D26D347009524C7 /* TrackListViewController.swift */; };
 		6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */; };
 		6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */; };
+		6E96C1C81DE8ECE2002F4690 /* SummitConfigurableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96C1C71DE8ECE2002F4690 /* SummitConfigurableViewController.swift */; };
 		6E99B8AA1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E99B8A81DC7D68F009CE28D /* Model.xcdatamodeld */; };
 		6E99B8AB1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E99B8A81DC7D68F009CE28D /* Model.xcdatamodeld */; };
 		6E99B8AC1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E99B8A81DC7D68F009CE28D /* Model.xcdatamodeld */; };
@@ -921,6 +923,7 @@
 		6E35086E1D9AE4900055801C /* DataUpdates5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates5.json; sourceTree = "<group>"; };
 		6E3E1E6C1D769E6800F6CB29 /* UserActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActivity.swift; sourceTree = "<group>"; };
 		6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVenueDetail.swift; sourceTree = "<group>"; };
+		6E41396F1DE8D2080074D631 /* SummitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsViewController.swift; sourceTree = "<group>"; };
 		6E41EFE31DCDD8E400733E04 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersInterfaceController.swift; sourceTree = "<group>"; };
 		6E488F5C1DD1107500EA6B0F /* EntityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityController.swift; sourceTree = "<group>"; };
@@ -979,6 +982,7 @@
 		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
 		6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleViewController.swift; sourceTree = "<group>"; };
+		6E96C1C71DE8ECE2002F4690 /* SummitConfigurableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitConfigurableViewController.swift; sourceTree = "<group>"; };
 		6E99B8A91DC7D68F009CE28D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		6E9B09CD1D78F121008383A4 /* AboutInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutInterfaceController.swift; sourceTree = "<group>"; };
 		6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackScheduleViewController.swift; sourceTree = "<group>"; };
@@ -1686,11 +1690,13 @@
 		6E74FAEB1D7C95E70018633D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6E96C1C61DE8ECBF002F4690 /* Protocols */,
 				6E1D51B71D8362AE007391A3 /* Extensions */,
 				6EB54E711D85FCBA0027350D /* ImagesViewController.swift */,
-				6E53B2A11D850F4F00641A8F /* Speakers */,
+				6E41396F1DE8D2080074D631 /* SummitsViewController.swift */,
 				6E16518B1D84546F00574CE5 /* Events */,
 				6E16518C1D84547800574CE5 /* Venues */,
+				6E53B2A11D850F4F00641A8F /* Speakers */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1731,6 +1737,14 @@
 				6E6FD1781D7A1A20003D13D7 /* Staging.swift */,
 			);
 			name = Configurations;
+			sourceTree = "<group>";
+		};
+		6E96C1C61DE8ECBF002F4690 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6E96C1C71DE8ECE2002F4690 /* SummitConfigurableViewController.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		6E99B8A71DC7D66A009CE28D /* CoreData */ = {
@@ -3172,7 +3186,9 @@
 				6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */,
 				6EBCB4891DDE10B800727130 /* Store.swift in Sources */,
 				6E1D51B61D8362A9007391A3 /* PlayVideo.swift in Sources */,
+				6E4139701DE8D2080074D631 /* SummitsViewController.swift in Sources */,
 				6EA6FD351D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
+				6E96C1C81DE8ECE2002F4690 /* SummitConfigurableViewController.swift in Sources */,
 				6E9F28F21D7C903E002B7C7A /* AppDelegate.swift in Sources */,
 				6E69643B1D849D0000BA576E /* VenueDetailViewController.swift in Sources */,
 				6E53B2A51D8524F500641A8F /* SpeakersViewController.swift in Sources */,

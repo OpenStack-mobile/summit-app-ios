@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class SpeakersViewController: UINavigationController {
+final class SpeakersViewController: UINavigationController, SummitConfigurableViewController {
     
     // MARK: - Loading
     
