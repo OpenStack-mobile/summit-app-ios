@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import CoreData
 import SwiftFoundation
+@testable import CoreSummit
 
 internal func loadJSON(filename: String) -> JSON.Value {
     
@@ -48,3 +50,15 @@ let outputDirectory: String = {
     
     return outputDirectory
 }()
+
+func createStore() throws -> Store {
+    
+    return try Store(environment: .Staging,
+                     session: UserDefaultsSessionStorage(),
+                     createPersistentStore: {
+                        try $0.addPersistentStoreWithType(NSInMemoryStoreType,
+                            configuration: nil,
+                            URL: nil,
+                            options: nil) },
+                     deletePersistentStore: { _ in fatalError("Not needed") })
+}

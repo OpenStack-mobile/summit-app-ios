@@ -6,13 +6,20 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct SummitType: Named {
+public struct SummitType: Named, Equatable {
     
     public let identifier: Identifier
     
     public var name: String
     
     public var color: String
+}
+
+// MARK: - Equatable
+
+public func == (lhs: SummitType, rhs: SummitType) -> Bool {
     
-    //public var type: String // could be enum, not in Realm
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.color == rhs.color
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import RealmSwift
 import SwiftFoundation
 
 /// Abstract class, should never be instantiated

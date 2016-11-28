@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
+import SwiftFoundation
 
 final class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
@@ -19,7 +20,9 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
-        let events = attendeeRole.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        let events = attendeeRole.scheduledEvents
+            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate) && Date(foundation: $0.end) <= Date(foundation: startDate) })
+            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -38,9 +41,11 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
-        let realmEvents = attendeeRole.scheduledEvents.filter("start >= %@ and end <= %@", startDate, endDate).sorted("start")
+        let events = attendeeRole.scheduledEvents
+            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate) && Date(foundation: $0.end) <= Date(foundation: startDate) })
+            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
         
-        return ScheduleItem.from(realm: realmEvents)
+        return ScheduleItem.from(managedObjects: events)
     }
     
     // MARK: - IndicatorInfoProvider

@@ -39,7 +39,7 @@ extension Member: JSONDecodable {
         
         if let speakerJSON = JSONObject[JSONKey.speaker.rawValue] {
             
-            guard let speaker = PresentationSpeaker(JSONValue: speakerJSON)
+            guard let speaker = Speaker(JSONValue: speakerJSON)
                 else { return nil }
             
             self.speakerRole = speaker
@@ -51,7 +51,7 @@ extension Member: JSONDecodable {
         
         if JSONObject[JSONKey.schedule.rawValue] != nil {
             
-            guard let attendee = SummitAttendee(JSONValue: JSONValue)
+            guard let attendee = Attendee(JSONValue: JSONValue)
                 else { return nil }
             
             self.attendeeRole = attendee

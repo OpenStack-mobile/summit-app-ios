@@ -9,25 +9,23 @@
 import UIKit
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
+import CoreData
 
 @objc(OSSTVEventsViewController)
-final class EventsViewController: UITableViewController {
+final class EventsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false)
+    var predicate = NSPredicate(value: false) {
+        
+        didSet { if isViewLoaded() { updateUI() } }
+    }
     
-    private var events = [Event]()
+    private var fetchedResultsController: NSFetchedResultsController!
     
-    private var notificationToken: RealmSwift.NotificationToken?
+    private static let cachedPredicate = NSPredicate(format: "cached != nil")
     
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,24 +34,37 @@ final class EventsViewController: UITableViewController {
         tableView.layoutMargins.right = 90
         
         updateUI()
-        
-        notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
     }
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
-        events = Event.from(realm: Store.shared.realm.objects(RealmSummitEvent).filter(predicate))
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, EventsViewController.cachedPredicate])
+        
+        self.fetchedResultsController = NSFetchedResultsController(Event.self, delegate: self, predicate: predicate, sortDescriptors: EventManagedObject.sortDescriptors, context: Store.shared.managedObjectContext)
+        
+        try! self.fetchedResultsController.performFetch()
         
         tableView.reloadData()
     }
     
     private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
         
-        let event = events[indexPath.row]
+        let event = self[indexPath]
         
         cell.textLabel!.text = event.name
+    }
+    
+    private subscript (indexPath: NSIndexPath) -> Event {
+        
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! EventManagedObject
+        
+        return Event(managedObject: managedObject)
     }
     
     // MARK: - UITableViewDataSource
@@ -65,7 +76,7 @@ final class EventsViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return events.count
+        return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -77,6 +88,49 @@ final class EventsViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        case .Delete:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+        case .Update:
+            if let updateIndexPath = indexPath,
+                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
+                
+                self.configure(cell: cell, at: updateIndexPath)
+            }
+        case .Move:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        }
+    }
+    
     // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -85,7 +139,7 @@ final class EventsViewController: UITableViewController {
             
         case "showEventDetail":
             
-            let event = events[tableView.indexPathForSelectedRow!.row]
+            let event = self[tableView.indexPathForSelectedRow!]
             
             let navigationController = segue.destinationViewController as! UINavigationController
             

@@ -50,7 +50,7 @@ final class TrackListViewController: UIViewController, UITableViewDataSource, UI
         
         let trackGroupSelections = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as! [Int]
         
-        tracks = Track.`for`(groups: trackGroupSelections)
+        tracks = try! Track.`for`(groups: trackGroupSelections, context: Store.shared.managedObjectContext)
         
         tableView.reloadData()
     }

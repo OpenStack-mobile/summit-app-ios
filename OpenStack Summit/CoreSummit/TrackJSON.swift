@@ -29,6 +29,6 @@ extension Track: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.groups = trackGroups
+        self.groups = Set(trackGroups)
     }
 }

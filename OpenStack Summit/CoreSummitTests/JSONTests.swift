@@ -65,7 +65,7 @@ final class JSONTests: XCTestCase {
         
         guard let dataUpdateEntity = dataUpdates.first?.entity,
             case let .JSON(entityJSON) = dataUpdateEntity,
-            let _ = Event.DataUpdate(JSONValue: .Object(entityJSON))
+            let _ = EventDataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
     
@@ -156,7 +156,7 @@ final class JSONTests: XCTestCase {
                 where dataUpdate.className == .MySchedule
                 else { continue }
             
-            guard let _ = SummitEvent.DataUpdate(JSONValue: .Object(entityJSON))
+            guard let _ = EventDataUpdate(JSONValue: .Object(entityJSON))
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }

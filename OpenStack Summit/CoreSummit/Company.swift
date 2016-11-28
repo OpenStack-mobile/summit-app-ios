@@ -6,9 +6,17 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Company: Named {
+public struct Company: Named, Equatable {
     
     public let identifier: Identifier
     
     public var name: String
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Company, rhs: Company) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
 }

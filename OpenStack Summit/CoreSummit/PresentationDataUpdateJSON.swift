@@ -8,12 +8,12 @@
 
 import SwiftFoundation
 
-public extension Presentation.DataUpdate {
+public extension PresentationDataUpdate {
     
     typealias JSONKey = Presentation.JSONKey
 }
 
-extension Presentation.DataUpdate: JSONDecodable {
+extension PresentationDataUpdate: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
@@ -24,8 +24,15 @@ extension Presentation.DataUpdate: JSONDecodable {
         self.identifier = identifier
         
         // optional
-        self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
-        self.track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
+        if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
+            where moderator > 0 {
+            
+            self.moderator = moderator
+            
+        } else {
+            
+            self.moderator = nil
+        }
         
         if let levelString = JSONObject[JSONKey.level.rawValue]?.rawValue as? String {
             
@@ -41,15 +48,14 @@ extension Presentation.DataUpdate: JSONDecodable {
         
         if let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue {
             
-            guard let speakers = PresentationSpeaker.fromJSON(speakersJSONArray)
+            guard let speakers = Speaker.fromJSON(speakersJSONArray)
                 else { return nil }
             
-            self.speakers = speakers
+            self.speakers = Set(speakers)
             
         } else {
             
             self.speakers = []
         }
-        
     }
 }

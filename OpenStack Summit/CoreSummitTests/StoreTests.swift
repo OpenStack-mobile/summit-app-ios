@@ -7,27 +7,47 @@
 //
 
 import XCTest
+import Foundation
+import CoreData
 import SwiftFoundation
-import RealmSwift
-import CoreSummit
+@testable import CoreSummit
 
 final class StoreTests: XCTestCase {
     
-    @inline(__always)
-    private func clearRealm() {
+    func testAllSummitsRequest() {
         
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = "StoreTests"
+        let store = try! createStore()
         
-        try! Store.shared.realm.write { Store.shared.realm.deleteAll() }
+        let expectation = expectationWithDescription("API Request")
+        
+        store.summits() { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                XCTAssert(value.summits.isEmpty == false, "No summits")
+                
+                dump(value, "AllSummitsDump.txt")
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
     }
     
     func testCurrentSummitRequest() {
         
-        clearRealm()
+        let store = try! createStore()
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.summit() { (response) in
+        store.summit() { (response) in
             
             switch response {
                 
@@ -48,44 +68,49 @@ final class StoreTests: XCTestCase {
         waitForExpectationsWithTimeout(60, handler: nil)
     }
     
-    func testAustinSummitRequest() {
+    func testPastSummitsRequest() {
         
-        clearRealm()
+        let store = try! createStore()
                 
-        let austinID = 6
+        let pastSummits = 6 ... 7
         
-        let expectation = expectationWithDescription("API Request")
-        
-        Store.shared.summit(austinID) { (response) in
+        for summitID in pastSummits {
             
-            switch response {
+            let expectation = expectationWithDescription("API Request")
+            
+            store.summit(summitID) { (response) in
                 
-            case let .Error(error):
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    XCTFail("\(error)");
+                    
+                case let .Value(summit):
+                    
+                    XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                    
+                    dump(summit, "Summit" + "\(summitID)" + "Dump.txt")
+                }
                 
-                XCTFail("\(error)");
-                
-            case let .Value(summit):
-                
-                XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
+                expectation.fulfill()
             }
             
-            expectation.fulfill()
+            waitForExpectationsWithTimeout(60, handler: nil)
         }
-        
-        waitForExpectationsWithTimeout(60, handler: nil)
     }
     
     func testDataUpdatesRequest() {
         
-        clearRealm()
+        let store = try! createStore()
         
-        let austinID = 6
+        let summitID = 7  // Barcelona
         
-        let date = Date() - (60*60*24*365) // last year
+        let date = Date() - (60*60*24*30) // last month
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.dataUpdates(austinID, from: date, limit: 100) { (response) in
+        store.dataUpdates(summitID, from: date, limit: 100) { (response) in
             
             switch response {
                 
@@ -106,7 +131,7 @@ final class StoreTests: XCTestCase {
     
     func testFeedbackRequest() {
         
-        clearRealm()
+        let store = try! createStore()
         
         let summit = 7 // Barcelona
         
@@ -114,7 +139,7 @@ final class StoreTests: XCTestCase {
         
         let expectation = expectationWithDescription("API Request")
         
-        Store.shared.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
+        store.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
             
             switch response {
                 

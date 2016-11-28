@@ -17,9 +17,9 @@ public final class PushNotificationsManager {
         
         var channels = [String]()
         
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit).first {
             
-            channels.append("su_\(summit.id)")
+            channels.append("su_\(summit.identifier)")
             
             if let member = Store.shared.authenticatedMember {
                 
@@ -39,13 +39,13 @@ public final class PushNotificationsManager {
         }
     }
     
-    public static func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
+    public static func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> ()) {
         
         var channels = [String]()
         
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit).first {
             
-            channels.append("su_\(summit.id)")
+            channels.append("su_\(summit.identifier)")
             
             PFInstallation.currentInstallation()!.channels = channels
             PFInstallation.currentInstallation()!.saveEventually(completionBlock)

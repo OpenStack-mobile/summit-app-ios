@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct EventType: Named {
+public struct EventType: Named, Equatable {
     
     public let identifier: Identifier
     
@@ -15,4 +15,10 @@ public struct EventType: Named {
     //public var color: String
     
     //public var blackOutTimes: Bool
+}
+
+public func == (lhs: EventType, rhs: EventType) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
 }

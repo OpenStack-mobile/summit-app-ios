@@ -27,9 +27,6 @@ extension Presentation: JSONDecodable {
         self.identifier = identifier
         
         // optional
-        self.moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
-        self.track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
-        
         if let moderator = JSONObject[JSONKey.moderator_speaker_id.rawValue]?.rawValue as? Int
             where moderator > 0 {
             
@@ -57,7 +54,7 @@ extension Presentation: JSONDecodable {
             guard let speakers = Int.fromJSON(speakersJSONArray)
                 else { return nil }
             
-            self.speakers = speakers
+            self.speakers = Set(speakers)
             
         } else {
             

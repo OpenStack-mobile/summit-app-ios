@@ -10,7 +10,7 @@ import SwiftFoundation
 import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
-import RealmSwift
+import CoreData
 
 class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -24,12 +24,9 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     final private(set) var dayEvents = [ScheduleItem]()
     
-    
     private var addToScheduleInProgress = false
     
     private var pushRegisterInProgress = false
-    
-    private var realmNotificationToken: RealmSwift.NotificationToken!
     
     private var filterObserver: Int?
     
@@ -79,8 +76,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         stopNotifications()
         
-        realmNotificationToken?.stop()
-        
         if let observer = filterObserver { FilterManager.shared.filter.remove(observer) }
     }
     
@@ -103,9 +98,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         // load UI
         loadData()
-        
-        // realm notifications
-        realmNotificationToken = Store.shared.realm.addNotificationBlock { (_, _) in self.reloadSchedule() }
         
         // filter notifications
         filterObserver = FilterManager.shared.filter.observe { _ in self.filterUpdated() }
@@ -180,9 +172,9 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     func loadData() {
         
-        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
+        if let summitManagedObject = self.currentSummit {
             
-            let summit = Summit(realmEntity: realmSummit)
+            let summit = Summit(managedObject: summitManagedObject)
             
             self.updateUI(summit)
             
@@ -378,14 +370,10 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         }
     }
     
-    private func isDataLoaded() -> Bool {
+    @inline(__always)
+    private func eventExists(id: Identifier) -> Bool {
         
-        return Store.shared.realm.objects(RealmSummit.self).first != nil
-    }
-
-    private func eventExist(id: Identifier) -> Bool {
-        
-        return RealmSummitEvent.find(id, realm: Store.shared.realm) != nil
+        return try! EventManagedObject.find(id, context: Store.shared.managedObjectContext) != nil
     }
     
     private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
@@ -483,7 +471,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         let scheduleItem = dayEvents[indexPath.row]
         
-        if let _ = RealmSummitEvent.find(scheduleItem.id, realm: Store.shared.realm) {
+        if let _ = try! EventManagedObject.find(scheduleItem.id, context: Store.shared.managedObjectContext) {
             
             let eventDetailVC = R.storyboard.event.eventDetailViewController()!
             
@@ -504,15 +492,21 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: #selector(ScheduleViewController.loggedIn(_:)),
+            selector: #selector(loggedIn),
             name: Notification.loggedIn.rawValue,
             object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: #selector(ScheduleViewController.loggedOut(_:)),
+            selector: #selector(loggedOut),
             name: Notification.loggedOut.rawValue,
             object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(managedObjectContextObjectsDidChange),
+            name: NSManagedObjectContextObjectsDidChangeNotification,
+            object: Store.shared.managedObjectContext)
     }
     
     private func stopNotifications() {
@@ -529,5 +523,10 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     @objc private func loggedOut(notification: NSNotification) {
         
         self.scheduleView.tableView.reloadData()
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        
+        self.reloadSchedule()
     }
 }

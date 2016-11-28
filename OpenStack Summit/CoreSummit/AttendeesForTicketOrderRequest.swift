@@ -7,13 +7,12 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 import AeroGearHttp
 import AeroGearOAuth2
 
 public extension Store {
     
-    func attendees(for ticketOrder: String, summit: Identifier? = nil, completion: (ErrorValue<[NonConfirmedSummitAttendee]>) -> ()) {
+    func attendees(for ticketOrder: String, summit: Identifier? = nil, completion: (ErrorValue<[NonConfirmedAttendee]>) -> ()) {
         
         let summitID: String
         
@@ -44,11 +43,8 @@ public extension Store {
             guard let attendeesJSONArray = json.objectValue?["attendees"]?.arrayValue
                 else { completion(.Value([])); return }
             
-            guard let attendees = NonConfirmedSummitAttendee.fromJSON(attendeesJSONArray)
+            guard let attendees = NonConfirmedAttendee.fromJSON(attendeesJSONArray)
                 else { completion(.Error(Error.InvalidResponse)); return }
-            
-            // cache
-            //try! self.realm.write { let _ = attendees.save(self.realm) }
             
             // success
             completion(.Value(attendees))

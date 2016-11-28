@@ -40,7 +40,7 @@ final class MyProfileViewController: RevealTabStripViewController {
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
             let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
-            speakerPresentationsViewController.speaker = speaker.id
+            speakerPresentationsViewController.speaker = speaker.identifier
             childViewControllers.append(speakerPresentationsViewController)
         }
         

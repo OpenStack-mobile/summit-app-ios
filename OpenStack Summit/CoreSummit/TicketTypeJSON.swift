@@ -12,7 +12,7 @@ public extension TicketType {
     
     enum JSONKey: String {
         
-        case id, name, allowed_summit_types, description
+        case id, name, description
     }
 }
 
@@ -22,14 +22,11 @@ extension TicketType: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let allowedSummitTypesJSONArray = JSONObject[JSONKey.allowed_summit_types.rawValue]?.arrayValue,
-            let allowedSummitTypes = Identifier.fromJSON(allowedSummitTypesJSONArray)
+            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String
             else { return nil }
         
         self.identifier = identifier
         self.name = name
-        self.allowedSummitTypes = allowedSummitTypes
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
     }
 }

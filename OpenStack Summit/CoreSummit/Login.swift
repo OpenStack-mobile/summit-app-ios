@@ -7,38 +7,11 @@
 //
 
 import SwiftFoundation
-import RealmSwift
 import AeroGearHttp
 import AeroGearOAuth2
+import CoreData
 
 public extension Store {
-    
-    /// The member that is logged in. Only valid for confirmed attendees.
-    var authenticatedMember: RealmMember? {
-        
-        guard let session = self.session,
-            let sessionMember = session.member,
-            case let .attendee(memberID) = sessionMember,
-            let member = RealmMember.find(memberID, realm: self.realm)
-            else { return nil }
-        
-        return member
-    }
-    
-    var isLoggedIn: Bool {
-        
-        return self.session?.member != nil
-    }
-    
-    var isLoggedInAndConfirmedAttendee: Bool {
-        
-        guard let session = self.session,
-            let sessionMember = session.member,
-            case .attendee(_) = sessionMember
-            else { return false }
-        
-        return true
-    }
     
     /// Login via OAuth with OpenStack ID
     func login(summit: Identifier? = nil, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
@@ -60,8 +33,8 @@ public extension Store {
         @inline(__always)
         func success(name name: String, member: SessionMember) {
             
-            self.session?.name = name
-            self.session?.member = member
+            self.session.name = name
+            self.session.member = member
             
             completion(.Value())
             
@@ -106,16 +79,21 @@ public extension Store {
                 
             case let .Value(member):
                 
-                try! self.realm.write { member.save(self.realm) }
+                let context = self.privateQueueManagedObjectContext
                 
-                success(name: member.name, member: .attendee(member.identifier))
+                context.performBlock {
+                    
+                    try! member.save(context)
+                    
+                    success(name: member.name, member: .attendee(member.identifier))
+                }
             }
         }
     }
     
     func logout() {
         
-        session?.clear()
+        session.clear()
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
     }

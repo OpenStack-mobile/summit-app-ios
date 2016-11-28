@@ -21,7 +21,7 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
     
     // MARK: - Properties
     
-    private var attendees = [NonConfirmedSummitAttendee]()
+    private var attendees = [NonConfirmedAttendee]()
     
     private var orderNumber: String!
     

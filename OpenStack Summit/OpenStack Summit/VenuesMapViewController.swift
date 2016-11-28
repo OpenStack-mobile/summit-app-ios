@@ -39,7 +39,9 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     private func updateUI() {
         
         /// get Internal Venues with Coordinates
-        let venues = VenueListItem.from(realm: Store.shared.realm.objects(RealmVenue).filter({ $0.isInternal && !$0.lat.isEmpty && !$0.long.isEmpty }))
+        let venues = try! Store.shared.managedObjectContext
+            .managedObjects(VenueListItem)
+            .filter { $0.isInternal && $0.location != nil }
         
         var bounds = GMSCoordinateBounds()
         

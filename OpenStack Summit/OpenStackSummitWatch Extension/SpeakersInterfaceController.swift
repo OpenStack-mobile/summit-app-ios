@@ -24,7 +24,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var speakers = [PresentationSpeaker]() {
+    private(set) var speakers = [Speaker]() {
         
         didSet { updateUI() }
     }
@@ -35,7 +35,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         // disable speaker search for selected speakers
-        if let speakers = (context as? Context<[PresentationSpeaker]>)?.value {
+        if let speakers = (context as? Context<[Speaker]>)?.value {
             
             searchButton.setHidden(true)
             

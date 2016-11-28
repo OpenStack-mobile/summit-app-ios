@@ -31,6 +31,8 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         
+        let context = privateQueueManagedObjectContext
+        
         http.POST(URL, parameters: nil, completionHandler: {(responseObject, error) in
             
             // forward error
@@ -38,21 +40,18 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             // cache
-            if let attendee = self.authenticatedMember?.attendeeRole,
-                let event = RealmSummitEvent.find(event, realm: self.realm) {
+            try! context.performErrorBlockAndWait {
                 
-                try! self.realm.write {
+                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
+                    let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    let index = attendee.scheduledEvents.indexOf("id = %@", event.id)
+                    attendee.scheduledEvents.insert(eventManagedObject)
                     
-                    if (index == nil) {
-                        
-                        attendee.scheduledEvents.append(event)
-                    }
-                    
-                    completion(.Value())
+                    try context.save()
                 }
             }
+            
+            completion(.Value())
         })
     }
     
@@ -75,6 +74,8 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
         
+        let context = privateQueueManagedObjectContext
+        
         http.DELETE(URL, parameters: nil, completionHandler: {(responseObject, error) in
             
             // forward error
@@ -82,19 +83,18 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             // cache
-            if let attendee = self.authenticatedMember?.attendeeRole,
-                let event = RealmSummitEvent.find(event, realm: self.realm) {
-                
-                try! self.realm.write {
+            try! context.performErrorBlockAndWait {
+                                
+                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
+                    let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    if let index = attendee.scheduledEvents.indexOf("id = %@", event.id) {
-                        
-                        attendee.scheduledEvents.removeAtIndex(index)
-                    }
+                    attendee.scheduledEvents.remove(eventManagedObject)
                     
-                    completion(.Value())
+                    try context.save()
                 }
             }
+            
+            completion(.Value())
         })
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 import struct SwiftFoundation.Date
 
 extension SummitDataUpdate: RealmEncodable {

@@ -6,8 +6,6 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import RealmSwift
-
 extension TrackGroupDataUpdate: RealmEncodable {
     
     public func save(realm: Realm) -> RealmTrackGroup {
