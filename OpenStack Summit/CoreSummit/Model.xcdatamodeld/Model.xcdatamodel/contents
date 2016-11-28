@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16B2553a" minimumToolsVersion="Xcode 7.0">
-    <entity name="Attendee" syncable="YES">
+    <entity name="Attendee" representedClassName=".AttendeeManagedObject" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="firstName" attributeType="String" syncable="YES"/>
@@ -76,7 +76,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
         <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="locations" inverseEntity="Summit" syncable="YES"/>
     </entity>
-    <entity name="Member" syncable="YES">
+    <entity name="Member" representedClassName=".MemberManagedObject" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="firstName" attributeType="String" syncable="YES"/>
