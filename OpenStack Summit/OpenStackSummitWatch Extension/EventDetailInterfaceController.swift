@@ -40,8 +40,6 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var speakersSeparator: WKInterfaceSeparator!
     
-    @IBOutlet weak var summitTypesLabel: WKInterfaceLabel!
-    
     @IBOutlet weak var levelLabel: WKInterfaceLabel!
     
     @IBOutlet weak var levelGroup: WKInterfaceGroup!
@@ -53,6 +51,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     // MARK: - Properties
     
     private var event: Event!
+    
     private var eventDetail: EventDetail!
     
     // MARK: - Loading
@@ -60,7 +59,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        guard let event = (context as? Context<SummitEvent>)?.value
+        guard let event = (context as? Context<Event>)?.value
             else { fatalError("Invalid context") }
         
         self.event = event
@@ -141,8 +140,6 @@ final class EventDetailInterfaceController: WKInterfaceController {
         
         speakersButton.setHidden(eventDetail.speakers.isEmpty)
         speakersSeparator.setHidden(eventDetail.speakers.isEmpty)
-        
-        summitTypesLabel.setText(eventDetail.summitTypes)
         
         levelLabel.setText(eventDetail.level)
         levelGroup.setHidden(eventDetail.level.isEmpty)

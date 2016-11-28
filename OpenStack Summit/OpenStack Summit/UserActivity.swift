@@ -44,19 +44,16 @@ enum AppActivitySummitDataType: String {
     case venue
     case venueRoom
     
-    #if os(iOS)
-    var realmType: RealmEntity.Type {
+    var managedObject: Entity.Type {
         
         switch self {
-            
-        case .event: return RealmSummitEvent.self
-        case .speaker: return RealmPresentationSpeaker.self
-        case .video: return RealmVideo.self
-        case .venue: return RealmVenue.self
-        case .venueRoom: return RealmVenueRoom.self
+        case .event: return EventManagedObject.self
+        case .speaker: return SpeakerManagedObject.self
+        case .video: return VideoManagedObject.self
+        case .venue: return VenueManagedObject.self
+        case .venueRoom: return VenueRoomManagedObject.self
         }
     }
-    #endif
 }
 
 enum AppActivityScreen: String {
@@ -69,12 +66,12 @@ enum AppActivityScreen: String {
 
 // MARK: - Model Extensions
 
-extension SummitEvent: AppActivitySummitData {
+extension Event: AppActivitySummitData {
     
     static let activityDataType = AppActivitySummitDataType.event
 }
 
-extension PresentationSpeaker: AppActivitySummitData {
+extension Speaker: AppActivitySummitData {
     
     static let activityDataType = AppActivitySummitDataType.speaker
 }

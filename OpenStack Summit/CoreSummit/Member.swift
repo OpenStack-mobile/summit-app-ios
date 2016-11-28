@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Member: Named {
+public struct Member: Named, Equatable {
     
     public let identifier: Identifier
     
@@ -21,12 +21,24 @@ public struct Member: Named {
     public var irc: String?
     
     public var biography: String?
+        
+    public var speakerRole: Speaker?
     
-    //public var friends: [Identifier] // not in JSON
+    public var attendeeRole: Attendee?
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Member, rhs: Member) -> Bool {
     
-    public var speakerRole: PresentationSpeaker?
-    
-    public var attendeeRole: SummitAttendee?
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+        && lhs.pictureURL == rhs.pictureURL
+        && lhs.twitter == rhs.twitter
+        && lhs.irc == rhs.irc
+        && lhs.speakerRole == rhs.speakerRole
+        && lhs.attendeeRole == rhs.attendeeRole
 }
 
 // MARK: - Extensions
@@ -36,6 +48,7 @@ extension Member: Person {
     public var title: String? { return nil }
 }
 
+#if os(iOS)
 public extension Store {
     
     var memberRole: MemberRole {
@@ -63,14 +76,12 @@ public extension Store {
         }
     }
 }
+#endif
 
 // MARK: - Supporting Types
 
-public extension Store {
+public enum MemberRole {
     
-    public enum MemberRole {
-        
-        case anonymous, attendee, speaker, member
-    }
+    case anonymous, attendee, speaker, member
 }
 

@@ -13,7 +13,6 @@ import AHKActionSheet
 import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
 import XCDYouTubeKit
     
 final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController {
@@ -21,14 +20,12 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var scheduledButton: UIBarButtonItem!
+    
     @IBOutlet private(set) var feedBackHeader: EventFeedbackHeader!
     
     // MARK: - Properties
     
-    var event: Identifier! {
-        
-        didSet { if isViewLoaded() { updateUI() } }
-    }
+    var event: Identifier!
     
     // MARK: - Private Properties
     
@@ -38,7 +35,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private var data = [Detail]()
     
-    private var notificationToken: RealmSwift.NotificationToken?
+    private var entityController: EntityController<Event>!
     
     private var scheduled = false {
         
@@ -60,11 +57,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     // MARK: - Loading
     
-    deinit {
-        
-        notificationToken?.stop()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,8 +66,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
         
-        // update from Realm
-        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _ in
+        // entityController 
+        entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
+        
+        entityController.event.updated = { [weak self] _ in
             
             guard let controller = self else { return }
             
@@ -83,8 +77,16 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 else { return }
             
             controller.updateUI()
-        
         }
+        
+        entityController.event.deleted = { [weak self] _ in
+            
+            guard let controller = self else { return }
+            
+            controller.updateUI()
+        }
+        
+        self.updateUI()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -187,10 +189,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private func updateUI() {
         
-        assert(event != nil, "No identifier set")
+        guard let event = self.event
+            else { fatalError("No identifier set") }
+        
+        let context = Store.shared.managedObjectContext
         
         // handle event deletion
-        guard let realmEvent = RealmSummitEvent.find(event, realm: Store.shared.realm) else {
+        guard let eventManagedObject = try! EventManagedObject.find(event, context: context) else {
             
             self.view.userInteractionEnabled = false
             self.navigationItem.rightBarButtonItems = []
@@ -199,8 +204,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             return
         }
         
-        self.eventCache = Event(realmEntity: realmEvent)
-        self.eventDetail = EventDetail(realmEntity: realmEvent)
+        self.eventCache = Event(managedObject: eventManagedObject)
+        self.eventDetail = EventDetail(managedObject: eventManagedObject)
         
         self.data = [.title]
         
@@ -211,9 +216,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // Can give feedback after event started, and if there is no feedback for that user
         if let attendee = Store.shared.authenticatedMember?.attendeeRole
-            where eventCache.start < Date() &&
-            Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@ AND attendee.id = %@", event, attendee.id).isEmpty &&
-            Store.shared.realm.objects(RealmReview).filter("event.id = %@ AND attendeeId = %@", event, attendee.id).isEmpty {
+            where eventCache.start < Date()
+            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty &&
+            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty {
             
             data.append(.feedback)
         }
@@ -226,11 +231,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         data.append(.description)
-                
-        if eventDetail.summitTypes.isEmpty == false {
-            
-            data.append(.summitTypes)
-        }
         
         if eventDetail.level.isEmpty == false {
             
@@ -239,6 +239,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         // configure bar button items
         let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
+        
         self.scheduledButton.enabled = isAtteendee
         
         if isAtteendee {
@@ -251,13 +252,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // get all reviews for this event
-        let realmFeedback = Array(Store.shared.realm.objects(RealmReview).filter("event.id == %@", event))
+        let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        let attendeeFeedback = Store.shared.realm.objects(RealmAttendeeFeedback).filter("event.id = %@", event)
+        let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        shouldShowReviews = eventCache.start < Date() && (realmFeedback.count + attendeeFeedback.count) > 0
+        shouldShowReviews = eventCache.start < Date() && (reviews.count + attendeeFeedback.count) > 0
         
-        feedbackList = realmFeedback.map { FeedbackDetail(realmEntity: $0) }
+        feedbackList = reviews.map { FeedbackDetail(managedObject: $0) }
         
         // configure feedback view
         configureReviewCountView()
@@ -527,17 +528,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 
                 return cell
                 
-            case .summitTypes:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
-                
-                cell.titleLabel!.text = eventDetail.summitTypes
-                cell.detailImageView.image = R.image.credential()!
-                cell.accessoryType = .None
-                cell.selectionStyle = .None
-                
-                return cell
-                
             case .video:
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
@@ -715,7 +705,6 @@ private extension EventDetailViewController {
         case location
         case tags
         case description
-        case summitTypes
         case level
     }
 }

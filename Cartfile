@@ -1,5 +1,4 @@
 github "PureSwift/SwiftFoundation" "Swift.2.2"
-github "realm/realm-cocoa"
 github "OpenStack-Mobile/aerogear-ios-http" "master"
 github "OpenStack-Mobile/aerogear-ios-oauth2" "openstack"
 github "icanzilb/SwiftSpinner" "master"

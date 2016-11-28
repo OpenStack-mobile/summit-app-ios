@@ -57,7 +57,7 @@ final class AboutInterfaceController: WKInterfaceController {
     
     @IBAction func refreshData(sender: AnyObject? = nil) {
         
-        Store.shared.clear()
+        try! Store.shared.clear()
         
         self.popToRootController()
     }

@@ -17,8 +17,6 @@ final class ExtensionDelegate: NSObject, WKExtensionDelegate {
         // print app info
         print("Launching OpenStack Summit (WatchOS) v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
-        
-        Store.shared.environment = AppEnvironment
     }
 
     func applicationDidBecomeActive() {

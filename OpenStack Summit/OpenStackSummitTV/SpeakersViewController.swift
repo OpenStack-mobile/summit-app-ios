@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreSummit
 
 final class SpeakersViewController: UINavigationController {
     

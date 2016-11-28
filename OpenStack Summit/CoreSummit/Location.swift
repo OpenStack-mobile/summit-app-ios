@@ -11,12 +11,12 @@ public protocol LocationProtocol: Named {
     var descriptionText: String? { get }
 }
 
-public enum Location: Unique {
+public enum Location: Unique, Equatable {
     
     case venue(Venue)
     case room(VenueRoom)
     
-    public var rawValue: LocationProtocol {
+    public var rawValue: Any {
         
         switch self {
         case let .venue(venue): return venue
@@ -26,6 +26,20 @@ public enum Location: Unique {
     
     public var identifier: Identifier {
         
-        return rawValue.identifier
+        switch self {
+        case let .venue(venue): return venue.identifier
+        case let .room(room): return room.identifier
+        }
+    }
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Location, rhs: Location) -> Bool {
+    
+    switch (lhs, rhs) {
+    case let (.venue(lhsValue), .venue(rhsValue)): return lhsValue == rhsValue
+    case let (.room(lhsValue), .room(rhsValue)): return lhsValue == rhsValue
+    default: return false
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import SwiftFoundation
-import RealmSwift
+import CoreData
 
 public struct DataUpdate {
     
@@ -56,8 +56,6 @@ public extension DataUpdate {
         case PresentationCategoryGroup
         case SummitLocationMap
         case SummitLocationImage
-        
-        // Not in legacy code
         case Summit
         case SummitVenueFloor
         case PresentationLink
@@ -69,13 +67,13 @@ public extension DataUpdate {
             
             switch self {
             case .WipeData: return nil
-            case .MySchedule: return CoreSummit.SummitEvent.DataUpdate.self
+            case .MySchedule: return CoreSummit.EventDataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
-            case .Presentation: return CoreSummit.SummitEvent.DataUpdate.self
-            case .SummitEvent: return CoreSummit.SummitEvent.DataUpdate.self
+            case .Presentation: return CoreSummit.EventDataUpdate.self
+            case .SummitEvent: return CoreSummit.EventDataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
-            case .PresentationSpeaker: return CoreSummit.PresentationSpeaker.self
+            case .PresentationSpeaker: return CoreSummit.Speaker.self
             case .SummitTicketType: return CoreSummit.TicketType.self
             case .SummitVenue: return CoreSummit.Venue.self
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
@@ -94,115 +92,128 @@ public extension DataUpdate {
 
 public extension Store {
     
-    func process(dataUpdate: DataUpdate) -> Bool {
+    func process(dataUpdate: DataUpdate, summit: Identifier) -> Bool {
         
-        // truncate
-        guard dataUpdate.operation != .Truncate else {
+        let context = privateQueueManagedObjectContext
+        
+        return try! context.performErrorBlockAndWait {
             
-            guard dataUpdate.className == .WipeData
+            guard let summit = try SummitManagedObject.find(summit, context: context)
                 else { return false }
             
-            self.realm.deleteAll()
-            self.logout()
+            #if os(iOS)
+            let authenticatedMember = try self.authenticatedMember(context)
+            #else
+            let authenticatedMember: MemberManagedObject? = nil
+            #endif
             
-            return true
-        }
-        
-        guard dataUpdate.className != .WipeData
-            else { return false }
-        
-        // add or remove to schedule
-        guard dataUpdate.className != .MySchedule else {
-            
-            // should only get for authenticated requests
-            guard let attendeeRole = self.authenticatedMember?.attendeeRole
-                else { return false }
-            
-            switch dataUpdate.operation {
+            // truncate
+            guard dataUpdate.operation != .Truncate else {
                 
-            case .Insert:
-                
-                guard let entityJSON = dataUpdate.entity,
-                    case let .JSON(jsonObject) = entityJSON,
-                    let event = Event.DataUpdate.init(JSONValue: .Object(jsonObject))
+                guard dataUpdate.className == .WipeData
                     else { return false }
                 
-                try! self.realm.write {
-                    
-                    let realmEvent = event.save(self.realm)
-                    
-                    if attendeeRole.scheduledEvents.indexOf("id = %@", event.identifier) == nil {
-                        
-                        attendeeRole.scheduledEvents.append(realmEvent)
-                    }
-                }
+                try self.clear()
+                
+                #if os(iOS)
+                self.logout()
+                #endif
                 
                 return true
+            }
+            
+            guard dataUpdate.className != .WipeData
+                else { return false }
+            
+            // add or remove to schedule
+            guard dataUpdate.className != .MySchedule else {
                 
-            case .Delete:
+                // should only get for authenticated requests
+                guard let attendeeRole = authenticatedMember?.attendeeRole
+                    else { return false }
+                
+                switch dataUpdate.operation {
+                    
+                case .Insert:
+                    
+                    guard let entityJSON = dataUpdate.entity,
+                        case let .JSON(jsonObject) = entityJSON,
+                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        else { return false }
+                    
+                    let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
+                    
+                    attendeeRole.scheduledEvents.insert(eventManagedObject)
+                    
+                    try context.save()
+                    
+                    return true
+                    
+                case .Delete:
+                    
+                    guard let entityID = dataUpdate.entity,
+                        case let .Identifier(identifier) = entityID
+                        else { return false }
+                    
+                    if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
+                        
+                        attendeeRole.scheduledEvents.remove(eventManagedObject)
+                        
+                        try context.save()
+                    }
+                    
+                    return true
+                    
+                default: return false
+                }
+            }
+            
+            /// we dont support all of the DataUpdate types, but thats ok
+            guard let type = dataUpdate.className.type
+                else { return true }
+            
+            // delete
+            guard dataUpdate.operation != .Delete else {
                 
                 guard let entityID = dataUpdate.entity,
                     case let .Identifier(identifier) = entityID
                     else { return false }
                 
-                try! self.realm.write {
+                // if it doesnt exist, dont delete it
+                if let foundEntity = try type.find(identifier, context: context) {
                     
-                    if let index = attendeeRole.scheduledEvents.indexOf("id = %@", identifier) {
-                        
-                        attendeeRole.scheduledEvents.removeAtIndex(index)
-                    }
+                    context.deleteObject(foundEntity)
+                    
+                    try context.save()
                 }
                 
                 return true
-                
-            default: return false
-            }
-        }
-        
-        /// we dont support all of the DataUpdate types, but thats ok
-        guard let type = dataUpdate.className.type
-            else { return true }
-        
-        // delete
-        guard dataUpdate.operation != .Delete else {
-            
-            guard let entityID = dataUpdate.entity,
-                case let .Identifier(id) = entityID
-                else { return false }
-            
-            // if it doesnt exist, dont delete it
-            guard let foundEntity = type.find(id, realm: self.realm)
-                else { return true }
-            
-            try! self.realm.write {
-                
-                self.realm.delete(foundEntity)
             }
             
-            return true
-        }
-        
-        // parse JSON
-        guard let entityJSON = dataUpdate.entity,
-            case let .JSON(jsonObject) = entityJSON,
-            let entity = type.init(JSONValue: .Object(jsonObject))
-            else { return false }
-        
-        switch dataUpdate.className {
-            
-        case .SummitLocationImage, .SummitLocationMap:
-            /*
-            guard let image = entity as? Image
+            // parse JSON
+            guard let entityJSON = dataUpdate.entity,
+                case let .JSON(jsonObject) = entityJSON,
+                let entity = type.init(JSONValue: .Object(jsonObject))
                 else { return false }
-            */
-            return true
             
-        default:
-            
-            // insert or update
-            entity.write(self.realm)
-            
-            return true
+            switch dataUpdate.className {
+                
+            case .SummitLocationImage, .SummitLocationMap:
+                /*
+                 guard let image = entity as? Image
+                 else { return false }
+                 */
+                return true
+                
+            default:
+                
+                // insert or update
+                try entity.write(context, summit: summit)
+                
+                try context.save()
+                
+                return true
+            }
         }
     }
 }
@@ -214,36 +225,31 @@ public extension Store {
 /// The model type can be updated remotely
 internal protocol Updatable: JSONDecodable {
     
-    static func find(id: Identifier, realm: Realm) -> RealmEntity?
+    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity?
     
-    /// Encodes the object in Realm, but does not write.
-    func write(realm: Realm) -> RealmEntity?
+    /// Encodes to CoreData.
+    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity
 }
 
-extension Updatable where Self: RealmEncodable {
+extension Updatable where Self: CoreDataEncodable, Self.ManagedObject: Entity {
     
-    static func find(id: Identifier, realm: Realm) -> RealmEntity? {
+    @inline(__always)
+    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
         
-        return RealmType.find(id, realm: realm)
+        return try ManagedObject.find(identifier, context: context)
     }
     
-    func write(realm: Realm) -> RealmEntity? {
+    @inline(__always)
+    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
         
-        var entity: RealmEntity!
-        try! realm.write {
-            
-            entity = self.save(realm)
-        }
-        return entity
+        return try self.save(context)
     }
 }
 
 // Conform to protocol
-extension Summit.DataUpdate: Updatable { }
-extension SummitEvent.DataUpdate: Updatable { }
 extension SummitType: Updatable { }
 extension EventType: Updatable { }
-extension PresentationSpeaker: Updatable { }
+extension Speaker: Updatable { }
 extension TicketType: Updatable { }
 extension Venue: Updatable { }
 extension VenueFloor: Updatable { }

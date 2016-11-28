@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreSummit
-import RealmSwift
 
 final class AboutViewController: UIViewController, RevealViewController {
 
@@ -49,9 +48,7 @@ final class AboutViewController: UIViewController, RevealViewController {
         
         let webpageURL: NSURL
         
-        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
-            
-            let summit = Summit(realmEntity: realmSummit)
+        if let summit = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).first {
             
             webpageURL = NSURL(string: summit.webpageURL)!
             
@@ -91,18 +88,16 @@ final class AboutViewController: UIViewController, RevealViewController {
     
     private func buildNameDate() -> String {
         
-        guard let realmSummit = Store.shared.realm.objects(RealmSummit).first
+        guard let summit = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).first
             else { return "" }
-        
-        let summit = Summit(realmEntity: realmSummit)
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        let stringDateFrom = dateFormatter.stringFromDate(summit.start)
         
         dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        let stringDateTo = dateFormatter.stringFromDate(summit.end)
         
         return "\(summit.name) - \(stringDateFrom)\(stringDateTo)"
     }

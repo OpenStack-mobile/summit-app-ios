@@ -316,7 +316,7 @@ extension ComplicationController {
         }
     }
     
-    struct EventDetail: Unique {
+    struct EventDetail {
         
         let identifier: Identifier
         let name: String

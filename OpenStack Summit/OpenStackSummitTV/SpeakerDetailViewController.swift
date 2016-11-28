@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CoreSummit
-import RealmSwift
 import Haneke
 
 @objc(OSSTVSpeakerDetailViewController)
@@ -23,20 +22,17 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     // MARK: - Properties
     
-    var speaker: PresentationSpeaker!
+    var speaker: Identifier!
+    
+    var entityController: EntityController<Speaker>!
+    
+    private var speakerCache: Speaker!
     
     private var data = [Detail]()
     
     private var eventsPredicate: NSPredicate!
     
-    private var notificationToken: RealmSwift.NotificationToken?
-    
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,18 +45,29 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
         pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
         pictureImageView.clipsToBounds = true
         
-        updateUI()
-        
-        notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
+        configureController()
     }
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    private func configureController() {
         
         assert(speaker != nil, "No speaker set")
         
+        self.entityController = EntityController(identifier: speaker, entity: SpeakerManagedObject.self, context: Store.shared.managedObjectContext)
+        
+        self.entityController.event.updated = updateUI
+        
+        eventsPredicate = NSPredicate(format: "ANY presentation.speakers.id == %@", NSNumber(longLong: Int64(self.speaker)))
+        
+        
+    }
+    
+    private func updateUI(speaker: Speaker) {
+        
         self.title = speaker.name
+        
+        self.speakerCache = speaker
         
         pictureImageView.hnk_setImageFromURL(NSURL(string: speaker.pictureURL)!, placeholder: UIImage(named: "generic-user-avatar"))
         
@@ -76,9 +83,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             data.append(.irc)
         }
         
-        eventsPredicate = NSPredicate(format: "ANY presentation.speakers.id == %@", speaker.identifier as NSNumber)
-        
-        let eventCount = Store.shared.realm.objects(RealmSummitEvent).filter(eventsPredicate).count
+        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self)
         
         data.append(.sessions(eventCount))
         
@@ -112,7 +117,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
             let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerTwitterCell", forIndexPath: indexPath) as! DetailImageTableViewCell
             
-            cell.titleLabel.text = speaker.twitter
+            cell.titleLabel.text = speakerCache.twitter
             
             return cell
             
@@ -120,7 +125,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
             let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerIRCCell", forIndexPath: indexPath) as! DetailImageTableViewCell
             
-            cell.titleLabel.text = speaker.irc
+            cell.titleLabel.text = speakerCache.irc
             
             return cell
             
@@ -128,7 +133,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
             let cell = tableView.dequeueReusableCellWithIdentifier("SpeakerBiographyCell", forIndexPath: indexPath)
             
-            if let data = speaker.biography?.dataUsingEncoding(NSUTF8StringEncoding),
+            if let data = speakerCache.biography?.dataUsingEncoding(NSUTF8StringEncoding),
                 let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
                 
                 cell.textLabel!.text = attributedString.string
@@ -162,7 +167,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             
             eventsViewController.predicate = eventsPredicate
             
-            eventsViewController.title = speaker.name
+            eventsViewController.title = speakerCache.name
             
         default: fatalError("Unknown segue: \(segue)")
         }

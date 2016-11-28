@@ -41,15 +41,15 @@ final class TrackScheduleViewController: ScheduleViewController {
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         
         let scheduleFilter = FilterManager.shared.filter.value
+        let summit = SummitManager.shared.summit.value
         
         let tracks = [self.track.identifier]
-        let summitTypes = scheduleFilter.selections[FilterSectionType.SummitType]?.rawValue as? [Int]
         let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = try! EventManagedObject.filter(startDate, endDate: endDate, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -66,16 +66,16 @@ final class TrackScheduleViewController: ScheduleViewController {
     override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
         
         let scheduleFilter = FilterManager.shared.filter.value
+        let summit = SummitManager.shared.summit.value
         
         let tracks = [self.track.identifier]
-        let summitTypes = scheduleFilter.selections[FilterSectionType.SummitType]?.rawValue as? [Int]
         let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let realmEvents = RealmSummitEvent.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = try! EventManagedObject.filter(startDate, endDate: endDate, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
-        return ScheduleItem.from(realm: realmEvents)
+        return ScheduleItem.from(managedObjects: events)
     }
 }

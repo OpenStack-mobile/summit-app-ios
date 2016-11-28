@@ -17,10 +17,8 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet weak var peopleListView: PeopleListView!
     
     // MARK: - Properties
-        
-    var searchTerm: String = ""
     
-    private(set) var people = [PresentationSpeaker]()
+    private(set) var people = [Speaker]()
     
     private(set) var loadedAll = false
     
@@ -58,7 +56,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     /// Reloads the list of speakers from cache.
     @IBAction func loadData(sender: AnyObject? = nil) {
                 
-        let speakers = PresentationSpeaker.filter(searchTerm, page: page, objectsPerPage: objectsPerPage)
+        let speakers = try! Speaker.filter(page: page, objectsPerPage: objectsPerPage, summit: self.currentSummit?.identifier, context: Store.shared.managedObjectContext)
         
         people.appendContentsOf(speakers)
         loadedAll = speakers.count < objectsPerPage

@@ -27,14 +27,11 @@ extension Summit: JSONDecodable {
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
             let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
             let timeZone = TimeZone(JSONValue: timeZoneJSON),
-            /* let timestamp = JSONObject[JSONKey.timestamp.rawValue]?.rawValue as? Int, */
-            /* let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool, */
+            let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.fromJSON(sponsorsJSONArray),
             let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue,
-            let speakers = PresentationSpeaker.fromJSON(speakersJSONArray),
-            let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
-            let summitTypes = SummitType.fromJSON(summitTypesJSONArray),
+            let speakers = Speaker.fromJSON(speakersJSONArray),
             let ticketTypeJSONArray = JSONObject[JSONKey.ticket_types.rawValue]?.arrayValue,
             let ticketTypes = TicketType.fromJSON(ticketTypeJSONArray),
             let locationsJSONArray = JSONObject[JSONKey.locations.rawValue]?.arrayValue,
@@ -44,7 +41,7 @@ extension Summit: JSONDecodable {
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
             let trackGroups = TrackGroup.fromJSON(trackGroupsJSONArray),
             let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let events = SummitEvent.fromJSON(eventsJSONArray),
+            let events = Event.fromJSON(eventsJSONArray),
             let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
             let eventTypes = EventType.fromJSON(eventTypesJSONArray),
             let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String
@@ -54,19 +51,19 @@ extension Summit: JSONDecodable {
         self.name = name
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
-        self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
-        self.summitTypes = summitTypes
-        self.ticketTypes = ticketTypes
-        self.tracks = tracks
-        self.trackGroups = trackGroups
-        self.schedule = events
-        self.eventTypes = eventTypes
-        self.speakers = speakers
-        self.sponsors = sponsors
+        self.timeZone = timeZone.name
+        self.ticketTypes = Set(ticketTypes)
+        self.tracks = Set(tracks)
+        self.trackGroups = Set(trackGroups)
+        self.schedule = Set(events)
+        self.eventTypes = Set(eventTypes)
+        self.speakers = Set(speakers)
+        self.sponsors = Set(sponsors)
         self.webpageURL = webpageURL
+        self.active = active
         
         // filter venues (we have to ignore other types of venues)
-        self.locations = locations.filter {
+        self.locations = Set(locations.filter({
             
             switch $0 {
                 
@@ -74,7 +71,7 @@ extension Summit: JSONDecodable {
                 
             case .room: return true
             }
-        }
+        }))
         
         // optional values
         

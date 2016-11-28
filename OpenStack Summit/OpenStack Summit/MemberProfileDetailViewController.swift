@@ -248,19 +248,19 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 
                 if let speakerRole = currentMember.speakerRole {
                     
-                    let person = PresentationSpeaker(realmEntity: speakerRole)
+                    let person = Speaker(managedObject: speakerRole)
                     
                     updateUI(.Value(person))
                 }
                 else if let attendeeRole = currentMember.attendeeRole {
                     
-                    let person = SummitAttendee(realmEntity: attendeeRole)
+                    let person = Attendee(managedObject: attendeeRole)
                     
                     updateUI(.Value(person))
                 }
                 else {
                     
-                    let member = Member(realmEntity: currentMember)
+                    let member = Member(managedObject: currentMember)
                     
                     updateUI(.Value(member))
                 }
@@ -272,11 +272,11 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         case let .speaker(identifier):
             
             // load speaker from cache
-            if let realmEntity = RealmPresentationSpeaker.find(identifier, realm: Store.shared.realm) {
+            if let speakerManagedObject = try! SpeakerManagedObject.find(identifier, context: Store.shared.managedObjectContext) {
                 
-                let speaker = PresentationSpeaker(realmEntity: realmEntity)
+                let speaker = Speaker(managedObject: speakerManagedObject)
                 
-                let summit = Summit(realmEntity: Store.shared.realm.objects(RealmSummit).first!)
+                let summit = Summit(managedObject: speakerManagedObject.summits.first!)
                 
                 updateUI(.Value(speaker))
                 
@@ -293,12 +293,12 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 
             } else {
                 
-                updateUI(.Error(Error.getSpeakerProfile))
+                updateUI(ErrorValue<Speaker>.Error(Error.getSpeakerProfile))
             }
         }
     }
     
-    private func updateUI(value: ErrorValue<Person>) {
+    private func updateUI<T: Person>(value: ErrorValue<T>) {
         
         switch value {
             

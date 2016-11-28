@@ -107,12 +107,12 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     @IBAction func showVenueImages(sender: AnyObject? = nil) {
         
-        showImages(venue.images)
+        showImages(venue.images.sort())
     }
     
     @IBAction func showMapImages(sender: AnyObject? = nil) {
         
-        showImages(venue.maps)
+        showImages(venue.maps.sort())
     }
         
     // MARK: - Private Methods

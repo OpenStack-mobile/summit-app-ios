@@ -11,10 +11,10 @@ import UIKit
 import CoreLocation
 import MapKit
 import CoreSummit
-import RealmSwift
+import CoreData
 
 @objc(OSSTVVenueMapViewController)
-final class VenueMapViewController: UIViewController, MKMapViewDelegate {
+final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - IB Outlets
     
@@ -29,37 +29,43 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
         didSet { if isViewLoaded() { showSelectedVenue() } }
     }
     
-    private var notificationToken: RealmSwift.NotificationToken?
+    private var fetchedResultsController: NSFetchedResultsController!
     
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateUI()
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
-        notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
+        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        
+        let sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true),
+                               NSSortDescriptor(key: "longitude", ascending: true)]
+        
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sortDescriptors, context: Store.shared.managedObjectContext)
+        
+        try! self.fetchedResultsController.performFetch()
+        
+        updateUI()
     }
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
-        // remove all annotations
-        mapView.removeAnnotations(mapView.annotations)
+        let dataLoaded = mapView.annotations.isEmpty == false
         
-        let locations = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.location != nil }
-        
-        let annotations = locations.map { VenueAnnotation(venue: $0)! }
-        
-        mapView.addAnnotations(annotations)
-        
-        showSelectedVenue()
+        if dataLoaded {
+            
+            self.navigationItem.title = NSLocalizedString("Venues", comment: "")
+            
+            showSelectedVenue()
+            
+        } else {
+            
+            self.navigationItem.title = NSLocalizedString("Loading Summit...", comment: "")
+        }
     }
     
     private func showSelectedVenue() {
@@ -67,8 +73,8 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
         mapView.showAnnotations(mapView.annotations, animated: true)
         
         if let venueID = self.selectedVenue,
-            let venue = Store.shared.realm.objects(RealmVenue).filter("id = %@", venueID).first,
-            let selectedAnnotation = mapView.annotations.filter({ $0.coordinate.latitude == Double(venue.lat) && $0.coordinate.longitude == Double(venue.long) }).first {
+            let venue = try! Venue.find(venueID, context: Store.shared.managedObjectContext),
+            let selectedAnnotation = mapView.annotations.firstMatching({ $0.coordinate.latitude == Double(venue.latitude ?? "") && $0.coordinate.longitude == Double(venue.longitude ?? "") }) {
             
             mapView.selectAnnotation(selectedAnnotation, animated: true)
         }
@@ -82,6 +88,66 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate {
         
         delegate?.venueMapViewController(self, didSelectVenue: annotation.venue)
     }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        let _ = self.view
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        updateUI()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        let managedObject = anObject as! VenueManagedObject
+        
+        let venue = Venue(managedObject: managedObject)
+        
+        guard let location = venue.location
+            else { fatalError("Predicate must filter venues with no location") }
+        
+        switch type {
+            
+        case .Insert:
+            
+            let annotation = VenueAnnotation(venue: venue)!
+            
+            mapView.addAnnotation(annotation)
+            
+        case .Delete:
+            
+            guard let annotation = mapView.annotations.firstMatching({ ($0 as? VenueAnnotation)?.venue == venue.identifier })
+                else { return }
+            
+            mapView.removeAnnotation(annotation)
+            
+        case .Update:
+            
+            guard let annotation = mapView.annotations.firstMatching({ ($0 as? VenueAnnotation)?.venue == venue.identifier }) as? VenueAnnotation
+                else { return }
+            
+            if annotation.coordinate.latitude == location.latitude
+                && annotation.coordinate.longitude == location.longitude {
+                
+                // update title and subtitle
+                annotation.title = venue.name
+                annotation.subtitle = venue.fullAddress
+                
+            } else {
+                
+                // update coordinates
+                let newAnnotation = VenueAnnotation(venue: venue)!
+                mapView.removeAnnotation(annotation)
+                mapView.addAnnotation(newAnnotation)
+            }
+            
+        case .Move: break
+        }
+    }
 }
 
 // MARK: - Supporting Types
@@ -94,14 +160,14 @@ protocol VenueMapViewControllerDelegate: class {
 
 final class VenueAnnotation: NSObject, MKAnnotation {
     
-    let title: String?
-    
-    let subtitle: String?
+    let venue: Identifier
     
     let coordinate: CLLocationCoordinate2D
     
-    let venue: Identifier
+    var title: String?
     
+    var subtitle: String?
+        
     init?(venue: Venue) {
         
         guard let location = venue.location
