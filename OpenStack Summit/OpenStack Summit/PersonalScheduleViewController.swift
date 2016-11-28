@@ -21,7 +21,8 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
             else { return [] }
         
         let events = attendeeRole.scheduledEvents
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate) && Date(foundation: $0.end) <= Date(foundation: startDate) })
+            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
+                && Date(foundation: $0.end) <= Date(foundation: endDate) })
             .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
         
         var activeDates: [NSDate] = []
@@ -42,7 +43,8 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
             else { return [] }
         
         let events = attendeeRole.scheduledEvents
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate) && Date(foundation: $0.end) <= Date(foundation: startDate) })
+            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
+                && Date(foundation: $0.end) <= Date(foundation: endDate) })
             .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
         
         return ScheduleItem.from(managedObjects: events)
