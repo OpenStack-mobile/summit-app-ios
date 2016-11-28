@@ -32,7 +32,7 @@ extension Store {
                                                                            appropriateForURL: nil,
                                                                            create: false)
         
-        let fileURL = cacheURL.URLByAppendingPathComponent("data.sqlite")
+        let fileURL = cacheURL.URLByAppendingPathComponent("data.sqlite")!
         
         return fileURL
     }()

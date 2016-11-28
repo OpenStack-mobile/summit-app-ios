@@ -81,14 +81,14 @@ public final class ImageCache {
     
     public subscript (url: NSURL) -> NSData? {
         
-        get { return internalCache.objectForKey(url.absoluteString) as? NSData }
+        get { return internalCache.objectForKey(url.absoluteString!) as? NSData }
         
         set {
             
             guard let newData = newValue
-                else { internalCache.removeObjectForKey(url.absoluteString); return }
+                else { internalCache.removeObjectForKey(url.absoluteString!); return }
             
-            internalCache.setObject(newData, forKey: url.absoluteString)
+            internalCache.setObject(newData, forKey: url.absoluteString!)
         }
     }
 }
