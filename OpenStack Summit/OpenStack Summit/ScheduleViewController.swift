@@ -237,7 +237,15 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             }
         }
         else {
-            if self.availableDates.count > 0 {
+            
+            let summitActive = today.mt_isBetweenDate(self.startDate, andDate: self.endDate)
+            
+            // default start day when summit is inactive
+            if let defaultStart = summit.defaultStart where summitActive == false {
+                
+                self.selectedDate = defaultStart.toFoundation()
+            
+            } else if self.availableDates.count > 0 {
                 var selected = self.availableDates.first
                 for availableDate in self.availableDates {
                     if availableDate.mt_isWithinSameDay(today) {
@@ -248,6 +256,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
                 self.selectedDate = selected
             }
             else {
+                
                 self.selectedDate = self.startDate
             }
         }
