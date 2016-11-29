@@ -30,6 +30,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     private var filterObserver: Int?
     
+    private var didSelectDate = false
+    
     // MARK: - Accessors
     
     var startDate: NSDate! {
@@ -224,41 +226,24 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         self.availableDates = self.scheduleAvailableDates(from: shoudHidePastTalks ? today : self.startDate, to: self.endDate)
         
-        if self.selectedDate != nil {
-            if self.availableDates.count > 0 {
-                var selected = self.availableDates.first
-                for availableDate in self.availableDates {
-                    if availableDate.mt_isWithinSameDay(today) {
-                        selected = availableDate
-                        break
-                    }
-                }
-                self.selectedDate = selected
-            }
-        }
-        else {
+        let summitActive = today.mt_isBetweenDate(self.startDate, andDate: self.endDate)
+        
+        // default start day when summit is inactive
+        
+        let oldSelectedDate = self.selectedDate
+        
+        if let defaultStart = summit.defaultStart?.toFoundation(),
+            let defaultDay = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(defaultStart) })
+            where summitActive == false && self.didSelectDate == false {
             
-            let summitActive = today.mt_isBetweenDate(self.startDate, andDate: self.endDate)
+            self.selectedDate = defaultDay
             
-            // default start day when summit is inactive
-            if let defaultStart = summit.defaultStart where summitActive == false {
-                
-                self.selectedDate = defaultStart.toFoundation()
+        } else if self.didSelectDate == false || self.availableDates.contains(self.selectedDate) == false {
             
-            } else if self.availableDates.count > 0 {
-                var selected = self.availableDates.first
-                for availableDate in self.availableDates {
-                    if availableDate.mt_isWithinSameDay(today) {
-                        selected = availableDate
-                        break
-                    }
-                }
-                self.selectedDate = selected
-            }
-            else {
-                
-                self.selectedDate = self.startDate
-            }
+            self.selectedDate = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(today) }) ?? self.availableDates.first
+        } else {
+            
+            self.selectedDate = oldSelectedDate
         }
         
         reloadSchedule()
@@ -412,18 +397,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         // force view load
         let _ = self.view
         
-        let oldSelection = self.selectedDate
-        
         self.loadData()
-        
-        if let firstDate = availableDates.first where firstDate.mt_isAfter(oldSelection) {
-            
-            self.selectedDate = firstDate
-            
-        } else {
-            
-            self.selectedDate = oldSelection
-        }
     }
     
     // MARK: - AFHorizontalDayPickerDelegate
@@ -439,6 +413,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     }
     
     func horizontalDayPicker(picker: AFHorizontalDayPicker, didSelectDate date: NSDate) {
+        
+        self.didSelectDate = true
         
         reloadSchedule()
         
