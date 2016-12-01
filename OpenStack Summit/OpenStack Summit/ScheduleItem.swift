@@ -102,24 +102,26 @@ internal extension ScheduleItem {
     
     static func getLocation(event: EventManagedObject) -> String {
         
+        // only show after date
+        guard let startShowingVenues = event.summit.startShowingVenues
+            where NSDate().mt_isAfter(startShowingVenues)
+            else { return "" }
+        
         var location = ""
         
         if let room = event.location as? VenueRoomManagedObject {
             
             location = room.venue.name
             
-            if event.summit.startShowingVenues?.timeIntervalSinceNow.isSignMinus ?? false {
+            if let floorName = room.floor?.name
+                where floorName.isEmpty == false {
                 
-                if let floorName = room.floor?.name
-                    where floorName.isEmpty == false {
-                    
-                    location += " - " + floorName
-                }
+                location += " - " + floorName
+            }
+            
+            if room.name.isEmpty == false {
                 
-                if room.name.isEmpty == false {
-                    
-                    location += " - " + room.name
-                }
+                location += " - " + room.name
             }
         }
         else if let venue = event.location as? VenueManagedObject {

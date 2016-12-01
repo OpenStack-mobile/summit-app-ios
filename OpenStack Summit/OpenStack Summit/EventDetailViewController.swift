@@ -223,8 +223,13 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             data.append(.feedback)
         }
         
-        data += [.date, .location]
+        data.append(.date)
         
+        if eventDetail.location.isEmpty == false {
+            
+            data.append(.location)
+        }
+                
         if eventDetail.tags.isEmpty == false {
             
             data.append(.tags)
