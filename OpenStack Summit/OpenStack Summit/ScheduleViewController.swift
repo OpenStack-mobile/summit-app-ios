@@ -215,7 +215,11 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         self.subscribeToPushChannelsUsingContextIfNotDoneAlready()
         
-        self.summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        let timeZone = NSTimeZone(name: summit.timeZone)!
+        
+        NSDate.mt_setTimeZone(timeZone)
+        
+        self.summitTimeZoneOffset = timeZone.secondsFromGMT
         
         self.startDate = summit.start.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
         self.endDate = summit.end.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
@@ -241,6 +245,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         } else if self.didSelectDate == false || self.availableDates.contains(self.selectedDate) == false {
             
             self.selectedDate = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(today) }) ?? self.availableDates.first
+            
         } else {
             
             self.selectedDate = oldSelectedDate
