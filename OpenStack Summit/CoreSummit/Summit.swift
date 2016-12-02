@@ -20,6 +20,9 @@ public struct Summit: Named, Equatable {
     
     public var end: Date
     
+    /// Default start date for the Summit.
+    public var defaultStart: Date?
+    
     public var active: Bool
     
     public var sponsors: Set<Company>
