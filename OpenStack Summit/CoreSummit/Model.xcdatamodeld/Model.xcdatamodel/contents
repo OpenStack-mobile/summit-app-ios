@@ -125,6 +125,7 @@
         <attribute name="end" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="initialDataLoad" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="defaultStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="start" attributeType="Date" syncable="YES"/>
         <attribute name="startShowingVenues" optional="YES" attributeType="Date" syncable="YES"/>

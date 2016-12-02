@@ -23,6 +23,8 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var end: NSDate
     
+    @NSManaged public var defaultStart: NSDate?
+    
     @NSManaged public var webpageURL: String
     
     @NSManaged public var active: Bool
@@ -67,6 +69,15 @@ extension Summit: CoreDataDecodable {
             self.startShowingVenues = nil
         }
         
+        if let defaultStart = managedObject.defaultStart {
+            
+            self.defaultStart = Date(foundation: defaultStart)
+            
+        } else {
+            
+            self.defaultStart = nil
+        }
+        
         self.sponsors = Company.from(managedObjects: managedObject.sponsors)
         self.speakers = Speaker.from(managedObjects: managedObject.speakers)
         self.ticketTypes = TicketType.from(managedObjects: managedObject.ticketTypes)
@@ -88,6 +99,7 @@ extension Summit: CoreDataEncodable {
         managedObject.timeZone = timeZone
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
+        managedObject.defaultStart = defaultStart?.toFoundation()
         managedObject.webpageURL = webpageURL
         managedObject.active = active
         managedObject.startShowingVenues = startShowingVenues?.toFoundation()
