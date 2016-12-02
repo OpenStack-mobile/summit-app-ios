@@ -65,7 +65,7 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
             return
         }
         
-        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit).first {
+        if let summit = self.currentSummit {
             
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)

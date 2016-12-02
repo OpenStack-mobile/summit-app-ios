@@ -184,7 +184,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             
             self.showActivityIndicator()
             
-            Store.shared.summit { [weak self] (response) in
+            Store.shared.summit(SummitManager.shared.summit.value) { [weak self] (response) in
                 
                 guard let controller = self else { return }
                 

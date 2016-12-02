@@ -221,22 +221,19 @@ struct ScheduleFilter: Equatable {
         filterSection = FilterSection(type: .ActiveTalks, name: "ACTIVE TALKS")
         let activeTalksFilters = ["Hide Past Talks"]
         
-        if let summit = try! context.managedObjects(Summit).first {
+        let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        
+        let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
+        let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
+        let now = NSDate()
+        
+        if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
-            let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+            filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
+        }
+        else {
             
-            let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-            let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-            let now = NSDate()
-            
-            if now.mt_isBetweenDate(startDate, andDate: endDate) {
-                
-                filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
-            }
-            else {
-                
-                filterSection.items = []
-            }
+            filterSection.items = []
         }
         
         filterSections.append(filterSection)
@@ -265,28 +262,30 @@ struct ScheduleFilter: Equatable {
     /// Updates the active talks selections
     mutating func updateActiveTalksSelections() {
         
-        if let summit = try! Store.shared.managedObjectContext.managedObjects(Summit).first {
+        let context = Store.shared.managedObjectContext
+        let summitID = SummitManager.shared.summit.value
+        guard let summit = try! SummitManagedObject.find(summitID, context: context)
+            else { return }
+        
+        let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        
+        let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
+        let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
+        let now = NSDate()
+        
+        if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
-            let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+            // dont want to override selection
+            if didChangeActiveTalks == false {
+                
+                // start hiding active talks
+                selections[FilterSectionType.ActiveTalks] = .names(["Hide Past Talks"])
+            }
+        }
+        else {
             
-            let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-            let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-            let now = NSDate()
-                        
-            if now.mt_isBetweenDate(startDate, andDate: endDate) {
-                
-                // dont want to override selection
-                if didChangeActiveTalks == false {
-                    
-                    // start hiding active talks
-                    selections[FilterSectionType.ActiveTalks] = .names(["Hide Past Talks"])
-                }
-            }
-            else {
-                
-                // reset active talks selections if the summit has finished (or hasnt started)
-                selections[FilterSectionType.ActiveTalks] = .names([])
-            }
+            // reset active talks selections if the summit has finished (or hasnt started)
+            selections[FilterSectionType.ActiveTalks] = .names([])
         }
     }
     

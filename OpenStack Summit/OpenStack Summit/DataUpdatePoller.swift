@@ -19,6 +19,8 @@ extension DataUpdatePoller {
                
                 let poller = DataUpdatePoller(storage: UserDefaultsDataUpdatePollerStorage(), store: Store.shared)
                 
+                poller.summit = SummitManager.shared.summit.value
+                
                 SummitManager.shared.summit.observe { poller.summit = $0 }
                 
                 return poller
