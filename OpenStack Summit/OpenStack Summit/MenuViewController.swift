@@ -323,15 +323,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func login() {
         
-        guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).isEmpty == false else {
-            
-            showInfoMessage("Info", message: "Summit data is required to log in.")
-            return
-        }
+        let summit = SummitManager.shared.summit.value
+        
+        guard self.isDataLoaded
+            else { showInfoMessage("Info", message: "Summit data is required to log in."); return }
         
         showActivityIndicator()
         
-        Store.shared.login(loginCallback: {
+        Store.shared.login(summit, loginCallback: {
             
             // return from SafariVC
             dispatch_async(dispatch_get_main_queue(), {

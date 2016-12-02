@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16B2553a" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16B2555" minimumToolsVersion="Xcode 7.0">
     <entity name="Attendee" representedClassName=".AttendeeManagedObject" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
@@ -15,7 +15,7 @@
         <relationship name="tickets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TicketType" inverseName="attendees" inverseEntity="TicketType" syncable="YES"/>
     </entity>
     <entity name="AttendeeFeedback" representedClassName=".AttendeeFeedbackManagedObject" parentEntity="Feedback" syncable="YES">
-        <relationship name="attendee" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="feedback" inverseEntity="Attendee" syncable="YES"/>
+        <relationship name="attendee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="feedback" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="feedback" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="Company" representedClassName=".CompanyManagedObject" syncable="YES">
@@ -122,10 +122,10 @@
     <entity name="Summit" representedClassName=".SummitManagedObject" syncable="YES">
         <attribute name="active" attributeType="Boolean" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="defaultStart" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="end" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="initialDataLoad" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="defaultStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="start" attributeType="Date" syncable="YES"/>
         <attribute name="startShowingVenues" optional="YES" attributeType="Date" syncable="YES"/>

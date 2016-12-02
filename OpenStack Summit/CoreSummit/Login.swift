@@ -23,7 +23,7 @@ public extension Store {
             
             loginCallback()
             
-            self.linkAttendee(completion: completion)
+            self.linkAttendee(summit, completion: completion)
         }
     }
     
@@ -58,7 +58,7 @@ public extension Store {
                 // get non confirmed attendee
                 guard (error as NSError).code != 404 else {
                     
-                    self.loggedInAttendee() { (response) in
+                    self.loggedInAttendee(summit) { (response) in
                         
                         switch response {
                             

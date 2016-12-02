@@ -79,7 +79,7 @@ public struct AttendeeFeedback: Feedback {
     
     public let member: Identifier
     
-    public let attendee: Identifier
+    public let attendee: Identifier?
 }
 
 public func == (lhs: AttendeeFeedback, rhs: AttendeeFeedback) -> Bool {

@@ -42,7 +42,7 @@ public struct FeedbackDetail {
         self.event = feedback.event.identifier
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
-        self.owner = feedback.attendee.firstName + " " + feedback.attendee.lastName
+        self.owner = feedback.member.firstName + " " + feedback.member.lastName
     }
     
     // MARK: - Static Methods
