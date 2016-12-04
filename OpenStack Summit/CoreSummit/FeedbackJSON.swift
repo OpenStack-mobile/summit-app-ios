@@ -63,8 +63,7 @@ extension AttendeeFeedback: JSONDecodable {
             let review = JSONObject[FeedbackJSONKey.note.rawValue]?.rawValue as? String,
             let createdDate = JSONObject[FeedbackJSONKey.created_date.rawValue]?.rawValue as? Int,
             let event = JSONObject[FeedbackJSONKey.event_id.rawValue]?.rawValue as? Int,
-            let member = JSONObject[FeedbackJSONKey.member_id.rawValue]?.rawValue as? Int,
-            let attendee = JSONObject[FeedbackJSONKey.attendee_id.rawValue]?.rawValue as? Int
+            let member = JSONObject[FeedbackJSONKey.member_id.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier
@@ -73,7 +72,7 @@ extension AttendeeFeedback: JSONDecodable {
         self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event
         self.member = member
-        self.attendee = attendee
+        self.attendee = JSONObject[FeedbackJSONKey.attendee_id.rawValue]?.rawValue as? Int
     }
 }
 
