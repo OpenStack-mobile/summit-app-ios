@@ -483,13 +483,13 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(loggedIn),
-            name: Notification.loggedIn.rawValue,
+            name: Store.Notification.LoggedIn.rawValue,
             object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(loggedOut),
-            name: Notification.loggedOut.rawValue,
+            name: Store.Notification.LoggedOut.rawValue,
             object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(
@@ -501,8 +501,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     private func stopNotifications() {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Notification.loggedIn.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Notification.loggedOut.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Store.Notification.LoggedIn.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Store.Notification.LoggedOut.rawValue, object: nil)
     }
     
     @objc private func loggedIn(notification: NSNotification) {
