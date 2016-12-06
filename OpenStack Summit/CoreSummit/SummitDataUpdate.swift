@@ -30,8 +30,6 @@ public struct SummitDataUpdate: Named {
     
     public var startShowingVenues: Date?
     
-    public var summitTypes: Set<SummitType>
-    
     public var ticketTypes: Set<TicketType>
     
     // Venue and Venue Rooms
@@ -49,7 +47,6 @@ public func == (lhs: Summit.DataUpdate, rhs: Summit.DataUpdate) -> Bool {
         && lhs.end == rhs.end
         && lhs.active == rhs.active
         && lhs.startShowingVenues == rhs.startShowingVenues
-        && lhs.summitTypes == rhs.summitTypes
         && lhs.ticketTypes == rhs.ticketTypes
         && lhs.locations == rhs.locations
         && lhs.webpageURL == rhs.webpageURL
