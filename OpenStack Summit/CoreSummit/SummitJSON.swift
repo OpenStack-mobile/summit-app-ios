@@ -12,7 +12,7 @@ public extension Summit {
     
     enum JSONKey: String {
         
-        case id, name, start_date, end_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp, page_url
+        case id, name, start_date, end_date, schedule_start_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp, page_url
     }
 }
 
@@ -82,6 +82,15 @@ extension Summit: JSONDecodable {
         } else {
             
             self.startShowingVenues = nil
+        }
+        
+        if let scheduleStartDate = JSONObject[JSONKey.schedule_start_date.rawValue]?.rawValue as? Int {
+            
+            self.defaultStart = Date(timeIntervalSince1970: TimeInterval(scheduleStartDate))
+            
+        } else {
+            
+            self.defaultStart = nil
         }
     }
 }

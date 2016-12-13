@@ -36,7 +36,7 @@ public final class AttendeeFeedbackManagedObject: FeedbackManagedObject {
     
     @NSManaged public var member: MemberManagedObject
     
-    @NSManaged public var attendee: AttendeeManagedObject
+    @NSManaged public var attendee: AttendeeManagedObject?
 }
 
 // MARK: - Encoding
@@ -89,7 +89,7 @@ extension AttendeeFeedback: CoreDataDecodable {
         self.date = Date(foundation: managedObject.date)
         self.event = managedObject.event.identifier
         self.member = managedObject.member.identifier
-        self.attendee = managedObject.attendee.identifier
+        self.attendee = managedObject.attendee?.identifier
     }
 }
 

@@ -287,7 +287,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         let nextPage = (currentFeedbackPage?.currentPage ?? 0) + 1
         
-        Store.shared.feedback(event: event, page: nextPage, objectsPerPage: 5) { [weak self] (response) in
+        Store.shared.feedback(self.currentSummit?.identifier, event: event, page: nextPage, objectsPerPage: 5) { [weak self] (response) in
             
             dispatch_async(dispatch_get_main_queue()) {
                 
@@ -322,7 +322,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         configureAverageRatingView()
         
-        Store.shared.averageFeedback(event: event) { [weak self] (response) in
+        Store.shared.averageFeedback(self.currentSummit?.identifier, event: event) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
