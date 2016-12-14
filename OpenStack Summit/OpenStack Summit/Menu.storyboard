@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2553a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="UH9-fZ-W17"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VUv-0t-TMY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdL-Wt-VxC" userLabel="Header">
-                                <rect key="frame" x="0.0" y="20" width="320" height="152"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="152"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="XVe-T6-xnI">
                                         <rect key="frame" x="20" y="20" width="75" height="75"/>
@@ -83,10 +83,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwI-1E-DCu">
-                                <rect key="frame" x="0.0" y="172" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="172" width="414" height="584"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhk-cO-heP" userLabel="Buttons">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="491"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhA-QB-4RU" userLabel="Events Button">
                                                 <rect key="frame" x="22" y="17" width="400" height="40"/>
@@ -144,7 +144,7 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hYC-on-4dU" userLabel="Summit Logo Image View">
-                                        <rect key="frame" x="30" y="323" width="168" height="68"/>
+                                        <rect key="frame" x="30" y="491" width="168" height="68"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="168" id="1C6-I5-78G"/>
                                             <constraint firstAttribute="height" constant="68" id="IQi-5O-Qck"/>
@@ -267,7 +267,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhW-rF-zd9" id="qqQ-ba-eD9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="oNa-qV-csu">
@@ -308,7 +308,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A6h-6z-xpB" id="rpb-OE-50j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -404,29 +404,29 @@
                         <viewControllerLayoutGuide type="bottom" id="mTq-Ve-SYc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9Ou-sc-WYL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Net-Zb-oXk">
-                                <rect key="frame" x="0.0" y="0.0" width="605" height="605"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Net-Zb-oXk">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="731"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-yU-YUa" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="605" height="605"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-yU-YUa" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNT-pU-5kL">
-                                                <rect key="frame" x="18" y="19" width="563" height="451"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GNT-pU-5kL">
+                                                <rect key="frame" x="18" y="18" width="378" height="466"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Austin -April 24,29 2016" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-bo-0ig">
-                                                        <rect key="frame" x="20" y="20" width="527" height="26"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Austin -April 24,29 2016" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-bo-0ig">
+                                                        <rect key="frame" x="20" y="22" width="342" height="26"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                         <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7C-n1-Ka4">
-                                                        <rect key="frame" x="105" y="69" width="357" height="185"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7C-n1-Ka4">
+                                                        <rect key="frame" x="18" y="68" width="346" height="175"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="DUE-Vg-c84">
-                                                                <rect key="frame" x="28" y="25" width="300" height="135"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="DUE-Vg-c84">
+                                                                <rect key="frame" x="27" y="20" width="291" height="135"/>
                                                                 <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </imageView>
                                                         </subviews>
@@ -440,30 +440,31 @@
                                                             <constraint firstItem="DUE-Vg-c84" firstAttribute="bottom" secondItem="o7C-n1-Ka4" secondAttribute="bottom" constant="-20" id="kGA-0U-IsS"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-db-kRw">
-                                                        <rect key="frame" x="220" y="270" width="128" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-db-kRw">
+                                                        <rect key="frame" x="154.66666666666666" y="259" width="74" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Build Number 1.0.1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFf-dd-jh7" userLabel="Build Number Label">
-                                                        <rect key="frame" x="208" y="294" width="153" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Number 1.0.1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFf-dd-jh7" userLabel="Build Number Label">
+                                                        <rect key="frame" x="120.66666666666667" y="280" width="137" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kK2-62-kVi">
-                                                        <rect key="frame" x="246" y="316" width="72" height="30"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kK2-62-kVi">
+                                                        <rect key="frame" x="161.66666666666666" y="306" width="56" height="40"/>
                                                         <state key="normal" title="Website"/>
                                                         <connections>
                                                             <action selector="websiteTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="fx5-0c-Qpn"/>
                                                         </connections>
                                                     </button>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Aii-WS-79p" userLabel="Support Email">
-                                                        <rect key="frame" x="164" y="367" width="240" height="84"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Aii-WS-79p" userLabel="Support Email">
+                                                        <rect key="frame" x="69" y="367" width="240" height="84"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="84" id="IGd-OB-vzl"/>
+                                                            <constraint firstAttribute="width" constant="240" id="PGP-i2-MWp"/>
                                                         </constraints>
                                                         <string key="text">For app support, please email summitapp@openstack.org
 For general support, please email summit@openstack.org</string>
@@ -471,8 +472,8 @@ For general support, please email summit@openstack.org</string>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                     </textView>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-tU-WrB">
-                                                        <rect key="frame" x="216" y="342" width="131" height="30"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-tU-WrB">
+                                                        <rect key="frame" x="130.66666666666669" y="346" width="117.00000000000003" height="21"/>
                                                         <state key="normal" title="Code of Conduct"/>
                                                         <connections>
                                                             <action selector="codeOfConductTouch:" destination="uLE-8I-FQr" eventType="touchUpInside" id="WWi-ZU-vbN"/>
@@ -490,6 +491,7 @@ For general support, please email summit@openstack.org</string>
                                                     <constraint firstAttribute="bottom" secondItem="Aii-WS-79p" secondAttribute="bottom" constant="15" id="O97-f8-BSx"/>
                                                     <constraint firstItem="xUa-bo-0ig" firstAttribute="leading" secondItem="GNT-pU-5kL" secondAttribute="leading" constant="20" id="OUL-tS-q2C"/>
                                                     <constraint firstItem="xFf-dd-jh7" firstAttribute="centerX" secondItem="GNT-pU-5kL" secondAttribute="centerX" id="P4d-jP-0r8"/>
+                                                    <constraint firstItem="Aii-WS-79p" firstAttribute="top" secondItem="GNT-pU-5kL" secondAttribute="top" constant="367" id="Pa0-4e-4r9"/>
                                                     <constraint firstItem="UPa-tU-WrB" firstAttribute="top" secondItem="kK2-62-kVi" secondAttribute="bottom" id="RcG-x3-7SX"/>
                                                     <constraint firstItem="xFf-dd-jh7" firstAttribute="top" secondItem="0Qd-db-kRw" secondAttribute="bottom" constant="3" id="TYr-1m-25f"/>
                                                     <constraint firstItem="xUa-bo-0ig" firstAttribute="trailing" secondItem="GNT-pU-5kL" secondAttribute="trailing" constant="-16" id="VpN-Lt-mbU"/>
@@ -500,20 +502,21 @@ For general support, please email summit@openstack.org</string>
                                                     <constraint firstItem="Aii-WS-79p" firstAttribute="top" secondItem="UPa-tU-WrB" secondAttribute="bottom" id="qSf-tU-XhN"/>
                                                     <constraint firstItem="kK2-62-kVi" firstAttribute="top" secondItem="xFf-dd-jh7" secondAttribute="bottom" constant="8" id="r5E-xQ-MRQ"/>
                                                     <constraint firstItem="o7C-n1-Ka4" firstAttribute="leading" secondItem="GNT-pU-5kL" secondAttribute="leading" priority="999" constant="18" id="xE7-Uh-tMr"/>
+                                                    <constraint firstItem="Aii-WS-79p" firstAttribute="top" secondItem="kK2-62-kVi" secondAttribute="bottom" constant="21" id="xpX-y1-t0u"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-wc-oMM">
-                                                <rect key="frame" x="18" y="478" width="563" height="97"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-wc-oMM">
+                                                <rect key="frame" x="18" y="502" width="378" height="244"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhU-GH-qKB">
-                                                        <rect key="frame" x="17" y="7" width="529" height="169"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhU-GH-qKB">
+                                                        <rect key="frame" x="17" y="45" width="344" height="184"/>
                                                         <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3RT-yK-5yL">
-                                                        <rect key="frame" x="17" y="-22" width="529" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3RT-yK-5yL">
+                                                        <rect key="frame" x="17" y="17" width="344" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -577,10 +580,10 @@ For general support, please email summit@openstack.org</string>
     </scenes>
     <resources>
         <image name="about" width="29" height="29"/>
-        <image name="arrow" width="9" height="14"/>
+        <image name="arrow" width="12" height="19"/>
         <image name="events" width="26" height="26"/>
         <image name="generic-user-avatar" width="122" height="122"/>
-        <image name="menu" width="20" height="16"/>
+        <image name="menu" width="26" height="22"/>
         <image name="my-profile" width="26" height="26"/>
         <image name="people" width="29" height="29"/>
         <image name="summit-logo" width="335" height="135"/>
