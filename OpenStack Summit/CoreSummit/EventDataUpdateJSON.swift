@@ -8,12 +8,12 @@
 
 import SwiftFoundation
 
-public extension Event.DataUpdate {
+public extension EventDataUpdate {
     
-    typealias JSONKey = SummitEvent.JSONKey
+    typealias JSONKey = Event.JSONKey
 }
 
-extension Event.DataUpdate: JSONDecodable {
+extension EventDataUpdate: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
@@ -24,8 +24,6 @@ extension Event.DataUpdate: JSONDecodable {
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
             let eventTypeJSON = JSONObject[JSONKey.type_id.rawValue],
             let eventType = Int(JSONValue: eventTypeJSON),
-            let summitTypesJSONArray = JSONObject[JSONKey.summit_types.rawValue]?.arrayValue,
-            let summitTypes = Int.fromJSON(summitTypesJSONArray),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
@@ -37,7 +35,7 @@ extension Event.DataUpdate: JSONDecodable {
             /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
             /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
             let locationIdentifier = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int,
-            let presentation = Presentation.DataUpdate(JSONValue: JSONValue),
+            let presentation = PresentationDataUpdate(JSONValue: JSONValue),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         
@@ -46,11 +44,10 @@ extension Event.DataUpdate: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.summitTypes = summitTypes
-        self.tags = tags
+        self.tags = Set(tags)
         self.allowFeedback = allowFeedback
         self.type = type
-        self.sponsors = sponsors
+        self.sponsors = Set(sponsors)
         self.location = locationIdentifier
         self.presentation = presentation
         
@@ -69,18 +66,27 @@ extension Event.DataUpdate: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
+        
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
+            
+            self.track = track
+            
+        } else {
+            
+            self.track = nil
+        }
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
             guard let videos = Video.fromJSON(videosJSONArray)
                 else { return nil }
             
-            self.videos = videos
+            self.videos = Set(videos)
             
         } else {
             
             self.videos = []
         }
-        
     }
 }

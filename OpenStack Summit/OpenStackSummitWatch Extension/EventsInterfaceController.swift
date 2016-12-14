@@ -37,7 +37,7 @@ final class EventsInterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
-        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule
+        events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule.sort()
         
         updateUI()
     }

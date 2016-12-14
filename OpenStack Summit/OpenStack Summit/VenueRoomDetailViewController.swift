@@ -67,10 +67,8 @@ final class VenueRoomDetailViewController: UIViewController {
     
     private func updateUI() {
         
-        guard let realmEntity = RealmVenueRoom.find(self.venueRoom, realm: Store.shared.realm)
+        guard let venueRoom = try! VenueRoom.find(self.venueRoom, context: Store.shared.managedObjectContext)
             else { fatalError("Invalid identifier \(self.venueRoom!)") }
-        
-        let venueRoom = VenueRoom(realmEntity: realmEntity)
         
         self.name = venueRoom.name
         self.capacity = venueRoom.capacity ?? 0

@@ -19,7 +19,6 @@ public struct EventDetail {
     public let time: String
     public let location: String
     public let track: String
-    public let summitTypes: String
     public let sponsors: String
     public let eventType: String
     public let trackGroupColor: String
@@ -27,10 +26,10 @@ public struct EventDetail {
     public let venue: Identifier?
     public let descriptionText: String?
     public let tags: String
-    public let speakers: [PresentationSpeaker]
+    public let speakers: [Speaker]
     public let finished: Bool
     public let allowFeedback: Bool
-    public let moderator: PresentationSpeaker?
+    public let moderator: Speaker?
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
@@ -47,7 +46,6 @@ public struct EventDetail {
         self.dateTime = EventDetail.getDateTime(event, summit: summit)
         self.time = EventDetail.getTime(event, summit: summit)
         self.track = EventDetail.getTrack(event, summit: summit)
-        self.summitTypes = EventDetail.getSummitTypes(event, summit: summit)
         self.sponsors = EventDetail.getSponsors(event, summit: summit)
         self.trackGroupColor = EventDetail.getTrackGroupColor(event, summit: summit)
         
@@ -67,28 +65,26 @@ public struct EventDetail {
         
         self.tags = tags
         
-        self.level = event.presentation != nil ? event.presentation!.level!.rawValue + " Level" : ""
+        self.level = event.presentation.level != nil ? event.presentation.level!.rawValue + " Level" : ""
         
-        var speakers = [PresentationSpeaker]()
-        var moderatorSpeaker: PresentationSpeaker?
-        if let presentation = event.presentation {
+        var speakers = [Speaker]()
+        var moderatorSpeaker: Speaker?
+        
+        for speakerID in event.presentation.speakers {
             
-            for speakerID in presentation.speakers {
-                
-                let speaker = summit.speakers.firstMatching({ $0.identifier == speakerID })!
-                
-                // HACK: dismiss speakers with empty name
-                if speaker.firstName.isEmpty && speaker.lastName.isEmpty {
-                    continue
-                }
-                
-                speakers.append(speaker)
+            let speaker = summit.speakers.firstMatching({ $0.identifier == speakerID })!
+            
+            // HACK: dismiss speakers with empty name
+            if speaker.firstName.isEmpty && speaker.lastName.isEmpty {
+                continue
             }
             
-            if let moderator = event.presentation?.moderator where moderator != 0 {
-                
-                moderatorSpeaker = summit.speakers.firstMatching({ $0.identifier == moderator })!
-            }
+            speakers.append(speaker)
+        }
+        
+        if let moderator = event.presentation.moderator where moderator != 0 {
+            
+            moderatorSpeaker = summit.speakers.firstMatching({ $0.identifier == moderator })!
         }
         
         self.speakers = speakers
@@ -104,18 +100,7 @@ public struct EventDetail {
 
 internal extension EventDetail {
     
-    static func getSummitTypes(event: Event, summit: Summit) -> String {
-        var credentials = ""
-        var separator = ""
-        for summitTypeID in event.summitTypes {
-            let summitType = summit.summitTypes.firstMatching({ summitTypeID == $0.identifier })!
-            credentials += separator + summitType.name
-            separator = ", "
-        }
-        return credentials
-    }
-    
-    static func getSponsors(event: SummitEvent, summit: Summit) -> String {
+    static func getSponsors(event: Event, summit: Summit) -> String {
         
         guard event.sponsors.isEmpty == false
             else { return "" }
@@ -131,7 +116,7 @@ internal extension EventDetail {
         return sponsors
     }
     
-    static func getTime(event: SummitEvent, summit: Summit) -> String {
+    static func getTime(event: Event, summit: Summit) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
@@ -145,7 +130,7 @@ internal extension EventDetail {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getDateTime(event: SummitEvent, summit: Summit) -> String {
+    static func getDateTime(event: Event, summit: Summit) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
@@ -159,37 +144,41 @@ internal extension EventDetail {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getLocation(event: SummitEvent, summit: Summit) -> String {
+    static func getLocation(event: Event, summit: Summit) -> String {
         
         guard let locationID = event.location
             where locationID != 0
             else { return "" }
         
-        let location = summit.locations.map({ $0.rawValue }).firstMatching({ $0.identifier == locationID })!
+        let location = summit.locations.firstMatching({ $0.identifier == locationID })!
         
-        if let room = location as? VenueRoom {
+        switch location {
             
-            let venue = summit.locations.map({ $0.rawValue }).firstMatching({ $0.identifier == room.venue })!
+        case let .room(room):
+            
+            guard let venueLocation = summit.locations.firstMatching({ $0.identifier == room.venue }),
+                case let .venue(venue) = venueLocation
+                else { fatalError("No venue") }
             
             return venue.name + " - " + room.name
             
-        } else {
+        case let .venue(venue):
             
-            return location.name
+            return venue.name
         }
     }
     
-    static func getTrack(event: SummitEvent, summit: Summit) -> String {
+    static func getTrack(event: Event, summit: Summit) -> String {
         
-        guard let trackID = event.presentation?.track
+        guard let trackID = event.track
             else { return "" }
         
         return summit.tracks.firstMatching({ $0.identifier == trackID })!.name
     }
     
-    static func getTrackGroupColor(event: SummitEvent, summit: Summit) -> String {
+    static func getTrackGroupColor(event: Event, summit: Summit) -> String {
         
-        guard let trackID = event.presentation?.track,
+        guard let trackID = event.track,
             let track = summit.tracks.firstMatching({ $0.identifier == trackID }),
             let trackGroupID = track.groups.first,
             let trackGroup = summit.trackGroups.firstMatching({ $0.identifier == trackGroupID })

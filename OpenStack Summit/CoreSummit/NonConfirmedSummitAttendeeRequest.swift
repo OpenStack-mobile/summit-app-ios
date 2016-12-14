@@ -12,9 +12,20 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func loggedInAttendee(completion: (ErrorValue<String>) -> ()) {
+    func loggedInAttendee(summitIdentifier: Identifier? = nil, completion: (ErrorValue<String>) -> ()) {
         
-        let URI = "/api/v1/users/me"
+        let summitID: String
+        
+        if let identifier = summitIdentifier {
+            
+            summitID = "\(identifier)"
+            
+        } else {
+            
+            summitID = "current"
+        }
+        
+        let URI = "/api/v1/summits/" + summitID + "/members/me/"
         
         let URL = environment.configuration.authenticationURL + URI
         

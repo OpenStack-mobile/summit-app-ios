@@ -16,25 +16,33 @@ import Fabric
 
 public final class DataUpdatePoller {
     
-    public static let shared = DataUpdatePoller()
-    
     // MARK: - Properties
     
     public var pollingInterval: Double = 30
     
     public var log: ((String) -> ())?
     
-    public var storage: DataUpdatePollerStorage?
+    public let store: Store
+    
+    public var storage: DataUpdatePollerStorage
+    
+    public var summit: Identifier?
     
     // MARK: - Private Properties
     
     private var timer: NSTimer?
     
-    // MARK: - Initializations
+    // MARK: - Initialization
     
     deinit {
         
         stop()
+    }
+    
+    public init(storage: DataUpdatePollerStorage, store: Store) {
+        
+        self.storage = storage
+        self.store = store
     }
     
     // MARK: - Methods
@@ -56,14 +64,16 @@ public final class DataUpdatePoller {
     @objc private func pollServer() {
         
         // dont poll if not connectivity
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
         guard Reachability.connected else { return }
         #endif
         
         // dont poll if no active summit
-        guard let summit = Store.shared.realm.objects(RealmSummit.self).first else { return }
+        guard let summitID = self.summit,
+            let summit = try! SummitManagedObject.find(summitID, context: store.managedObjectContext)
+            else { return }
         
-        log?("Polling server for data updates")
+        log?("Polling server for data updates for summit \(summitID)")
         
         /// Handles the polling of the data updates
         func process(response response: ErrorValue<[DataUpdate]>) {
@@ -78,7 +88,7 @@ public final class DataUpdatePoller {
                 
                 for update in dataUpdates {
                     
-                    if Store.shared.process(update) == false {
+                    if store.process(update, summit: summit.identifier) == false {
                         
                         // could not process update
                         
@@ -108,7 +118,7 @@ public final class DataUpdatePoller {
                     }
                     
                     // store latest data update
-                    storage?.latestDataUpdate = update.identifier
+                    storage.latestDataUpdate = update.identifier
                 }
                 
                 if dataUpdates.isEmpty == false {
@@ -120,13 +130,13 @@ public final class DataUpdatePoller {
         
         // execute request
         
-        if let latestDataUpdate = storage?.latestDataUpdate {
+        if let latestDataUpdate = storage.latestDataUpdate {
             
-            Store.shared.dataUpdates(latestDataUpdate: latestDataUpdate) { process(response: $0) }
+            store.dataUpdates(summit.identifier, latestDataUpdate: latestDataUpdate) { process(response: $0) }
             
         } else {
             
-            Store.shared.dataUpdates(from: Date(foundation: summit.initialDataLoadDate)) { process(response: $0) }
+            store.dataUpdates(summit.identifier, from: Date(foundation: summit.initialDataLoad ?? NSDate())) { process(response: $0) }
         }
     }
 }

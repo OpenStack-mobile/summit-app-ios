@@ -6,64 +6,43 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import Foundation
+import CoreData
 import SwiftFoundation
 import AeroGearHttp
 import AeroGearOAuth2
 
-#if CORESUMMITREALM
-import RealmSwift
-#endif
-
 /// Class used for requesting and caching data from the server.
 public final class Store {
     
-    // MARK: - Singleton
-    
-    /// Singleton Store instance
-    public static let shared = Store()
-    
     // MARK: - Properties
     
-    #if CORESUMMITREALM
+    /// The managed object context used for caching.
+    public let managedObjectContext: NSManagedObjectContext
     
-    /// The Realm storage context.
-    public let realm = try! Realm()
+    /// A convenience variable for the managed object model.
+    public let managedObjectModel: NSManagedObjectModel
     
-    #else
+    /// Block for creating the persistent store.
+    public let createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore
     
-    /// The local cached summit.
-    public internal(set) var cache: Summit? = {
-        
-        // attempt to get cached summit
-        guard let data = NSData(contentsOfURL: Store.cacheURL),
-            let jsonString = String(UTF8Data: Data(foundation: data)),
-            let json = JSON.Value(string: jsonString),
-            let summit = Summit(JSONValue: json)
-            else { return nil }
-        
-        return summit
-    }()
+    /// Block for resetting the persistent store.
+    public let deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()
     
-    /// Clears the cache. 
-    public func clear() {
-        
-        self.cache = nil
-    }
+    /// The server targeted environment. 
+    public let environment: Environment
     
-    public static let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true).URLByAppendingPathComponent("summit.json")
-    
-    #endif
-    
-    public var environment = Environment.Staging {
-        didSet { configOAuthAccounts() }
-    }
-    
-    public var session: SessionStorage? {
-        
-        didSet { session?.hadPasscode = deviceHasPasscode }
-    }
+    /// Provides the storage for session values. 
+    public var session: SessionStorage
     
     // MARK: - Private / Internal Properties
+    
+    private let persistentStoreCoordinator: NSPersistentStoreCoordinator
+    
+    private var persistentStore: NSPersistentStore
+    
+    /// The managed object context running on a background thread for asyncronous caching.
+    internal let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
     
     /// Request queue
     private let requestQueue: NSOperationQueue = {
@@ -82,12 +61,46 @@ public final class Store {
     // MARK: - Initialization
     
     deinit {
-        
+    
+        // stop recieving 'didSave' notifications from private context
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+    
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    private init() {
+    public init(environment: Environment,
+                 session: SessionStorage,
+                 contextConcurrencyType: NSManagedObjectContextConcurrencyType = .MainQueueConcurrencyType,
+                 createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
+                 deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
         
+        // store values
+        self.environment = environment
+        self.session = session
+        self.createPersistentStore = createPersistentStore
+        self.deletePersistentStore = deletePersistentStore
+        
+        // set managed object model
+        self.managedObjectModel = NSManagedObjectModel.summitModel
+        self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        
+        // setup managed object contexts
+        self.managedObjectContext = NSManagedObjectContext(concurrencyType: contextConcurrencyType)
+        self.managedObjectContext.undoManager = nil
+        self.managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        
+        self.privateQueueManagedObjectContext.undoManager = nil
+        self.privateQueueManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        self.privateQueueManagedObjectContext.name = "\(Store.self) Private Managed Object Context"
+        
+        // configure CoreData backing store
+        self.persistentStore = try createPersistentStore(persistentStoreCoordinator)
+        
+        // listen for notifications (for merging changes)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Store.mergeChangesFromContextDidSaveNotification(_:)), name: NSManagedObjectContextDidSaveNotification, object: self.privateQueueManagedObjectContext)
+        
+        
+        // config OAuth and HTTP
         configOAuthAccounts()
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: OAuth2Module.revokeNotification, object: nil)
@@ -113,9 +126,24 @@ public final class Store {
         return false
     }
     
+    // MARK: - Methods
+    
+    public func clear() throws {
+        
+        try self.deletePersistentStore(persistentStoreCoordinator, persistentStore)
+        self.persistentStore = try self.createPersistentStore(persistentStoreCoordinator)
+        
+        self.managedObjectContext.reset()
+        self.privateQueueManagedObjectContext.reset()
+        
+        // manually send notification
+        NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: [:])
+    }
+    
     // MARK: - Internal / Private Methods
     
     /// Convenience function for adding a block to the request queue.
+    @inline(__always)
     internal func newRequest(block: () -> ()) {
         
         self.requestQueue.addOperationWithBlock(block)
@@ -188,11 +216,10 @@ public final class Store {
         
         config.accountId = "ACCOUNT_FOR_CLIENTID_\(config.clientId)"
         
-        if let hadPasscode = self.session?.hadPasscode {
-            if hadPasscode && !hasPasscode {
-                session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
-                session.clearTokens()
-            }
+        if self.session.hadPasscode && !hasPasscode {
+            
+            session = TrustedPersistantOAuth2Session(accountId: config.accountId!)
+            session.clearTokens()
         }
         
         session = hasPasscode ? TrustedPersistantOAuth2Session(accountId: config.accountId!) : UntrustedMemoryOAuth2Session.getInstance(config.accountId!)
@@ -200,9 +227,22 @@ public final class Store {
         return AccountManager.addAccount(config, session: session, moduleClass: OpenStackOAuth2Module.self)
     }
     
+    // MARK: Notifications
+    
+    @objc private func mergeChangesFromContextDidSaveNotification(notification: NSNotification) {
+        
+        self.managedObjectContext.performBlockAndWait {
+            
+            self.managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+            
+            // manually send notification
+            NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: notification.userInfo)
+        }
+    }
+    
     @objc private func revokedAccess(notification: NSNotification) {
         
-        self.session?.clear()
+        self.session.clear()
         
         let notification = NSNotification(name: Notification.ForcedLoggedOut.rawValue, object:self, userInfo:nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)

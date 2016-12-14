@@ -8,7 +8,7 @@
 
 import SwiftFoundation
 
-public extension SummitAttendee {
+public extension Attendee {
     
     enum JSONKey: String {
         
@@ -16,7 +16,7 @@ public extension SummitAttendee {
     }
 }
 
-extension SummitAttendee: JSONDecodable {
+extension Attendee: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
@@ -37,9 +37,9 @@ extension SummitAttendee: JSONDecodable {
         self.firstName = firstName
         self.lastName = lastName
         self.pictureURL = pictureURL
-        self.scheduledEvents = scheduledEvents
-        self.tickets = tickets
-        self.feedback = feedback
+        self.scheduledEvents = Set(scheduledEvents)
+        self.tickets = Set(tickets)
+        self.feedback = Set(feedback)
         
         // optional
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String

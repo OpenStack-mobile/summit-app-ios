@@ -26,14 +26,28 @@ public struct SummitDataUpdate: Named {
     
     public var end: Date
     
+    public var active: Bool
+    
     public var startShowingVenues: Date?
     
-    public var summitTypes: [SummitType]
-    
-    public var ticketTypes: [TicketType]
+    public var ticketTypes: Set<TicketType>
     
     // Venue and Venue Rooms
-    public var locations: [Location]
+    public var locations: Set<Location>
             
     public var webpageURL: String
+}
+
+public func == (lhs: Summit.DataUpdate, rhs: Summit.DataUpdate) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.timeZone == rhs.timeZone
+        && lhs.start == rhs.start
+        && lhs.end == rhs.end
+        && lhs.active == rhs.active
+        && lhs.startShowingVenues == rhs.startShowingVenues
+        && lhs.ticketTypes == rhs.ticketTypes
+        && lhs.locations == rhs.locations
+        && lhs.webpageURL == rhs.webpageURL
 }

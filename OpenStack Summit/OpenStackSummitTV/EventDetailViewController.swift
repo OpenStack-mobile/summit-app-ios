@@ -44,11 +44,11 @@ final class EventDetailViewController: UITableViewController {
         
         assert(event != nil, "No identifier set")
         
-        guard let realmEvent = RealmSummitEvent.find(event, realm: Store.shared.realm)
+        guard let managedObject = try! EventManagedObject.find(event, context: Store.shared.managedObjectContext)
             else { fatalError("Invalid event \(event)") }
         
-        self.eventCache = Event(realmEntity: realmEvent)
-        self.eventDetail = EventDetail(realmEntity: realmEvent)
+        self.eventCache = Event(managedObject: managedObject)
+        self.eventDetail = EventDetail(managedObject: managedObject)
         
         self.data = [Detail]()
         
@@ -182,7 +182,7 @@ final class EventDetailViewController: UITableViewController {
             
         case "showTrackEvents":
             
-            let predicate = NSPredicate(format: "presentation.track.id == %@", eventCache.presentation!.track! as NSNumber)
+            let predicate = NSPredicate(format: "track.id == %@", eventCache.track! as NSNumber)
             
             let eventsViewController = segue.destinationViewController as! EventsViewController
             
@@ -192,23 +192,10 @@ final class EventDetailViewController: UITableViewController {
             
         case "eventShowVenue":
             
-            guard let locationID = eventDetail.venue
+            guard let locationID = eventCache.location
                 else { fatalError("Event has no location") }
             
-            let location: Location
-            
-            if let realmVenue = RealmVenue.find(locationID, realm: Store.shared.realm) {
-                
-                location = .venue(Venue(realmEntity: realmVenue))
-                
-            } else if let realmVenueRoom = RealmVenueRoom.find(locationID, realm: Store.shared.realm) {
-                
-                location = .room(VenueRoom(realmEntity: realmVenueRoom))
-                
-            } else {
-                
-                fatalError("Invalid location \(locationID)")
-            }
+            let location = try! Location.find(locationID, context: Store.shared.managedObjectContext)
             
             let venueDetailViewController = segue.destinationViewController as! VenueDetailViewController
             

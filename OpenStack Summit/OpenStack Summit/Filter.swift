@@ -7,11 +7,11 @@
 //
 
 import CoreSummit
-import RealmSwift
+import CoreData
 
 enum FilterSectionType {
     
-    case ActiveTalks, SummitType, Track, TrackGroup, Tag, Level, Venue
+    case ActiveTalks, Track, TrackGroup, Tag, Level, Venue
 }
 
 struct FilterSection: Equatable {
@@ -193,7 +193,6 @@ struct ScheduleFilter: Equatable {
         
         // setup empty selections
         selections[FilterSectionType.ActiveTalks] = .names([])
-        selections[FilterSectionType.SummitType] = .identifiers([])
         selections[FilterSectionType.TrackGroup] = .identifiers([])
         selections[FilterSectionType.Level] = .names([])
         selections[FilterSectionType.Tag] = .names([])
@@ -202,45 +201,40 @@ struct ScheduleFilter: Equatable {
     
     // MARK: - Methods
     
-    /// Updates the filter sections from Realm. 
+    /// Updates the filter sections.
     /// Removes selections from deleted filters.
     mutating func updateSections() {
         
         filterSections = []
         
-        let summitTypes = SummitType.from(realm: Store.shared.realm.objects(RealmSummitType).sort({ $0.name < $1.name }))
-        let summitTrackGroups = TrackGroup.scheduled()
-        let levels = Array(Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }))).sort().filter { $0 != "" }
-        let venues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
+        let context = Store.shared.managedObjectContext
+        let summitID = SummitManager.shared.summit.value
+        guard let summit = try! SummitManagedObject.find(summitID, context: context)
+            else { return }
+        
+        let summitTrackGroups = try! TrackGroup.scheduled(for: summitID, context: context)
+        let levels = try! Set(context.managedObjects(PresentationManagedObject).map({ $0.level ?? "" })).filter({ $0 != "" }).sort()
+        let venues = try! context.managedObjects(Venue.self, predicate: NSPredicate(format: "summit == %@", summit), sortDescriptors: VenueManagedObject.sortDescriptors)
         
         var filterSection: FilterSection
         
         filterSection = FilterSection(type: .ActiveTalks, name: "ACTIVE TALKS")
         let activeTalksFilters = ["Hide Past Talks"]
         
-        if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
+        let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        
+        let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
+        let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
+        let now = NSDate()
+        
+        if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
-            let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
-            
-            let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-            let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-            let now = NSDate()
-            
-            if now.mt_isBetweenDate(startDate, andDate: endDate) {
-                
-                filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
-            }
-            else {
-                
-                filterSection.items = []
-            }
+            filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
         }
-        
-        filterSections.append(filterSection)
-        
-        filterSection = FilterSection(type: .SummitType, name: "SUMMIT TYPE")
-        filterSection.items = summitTypes.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
-        selections[FilterSectionType.SummitType]?.update(.identifiers(summitTypes.identifiers))
+        else {
+            
+            filterSection.items = []
+        }
         
         filterSections.append(filterSection)
         
@@ -268,28 +262,30 @@ struct ScheduleFilter: Equatable {
     /// Updates the active talks selections
     mutating func updateActiveTalksSelections() {
         
-        if let summit = Summit.from(realm: Store.shared.realm.objects(RealmSummit)).first {
+        let context = Store.shared.managedObjectContext
+        let summitID = SummitManager.shared.summit.value
+        guard let summit = try! SummitManagedObject.find(summitID, context: context)
+            else { return }
+        
+        let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        
+        let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
+        let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
+        let now = NSDate()
+        
+        if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
-            let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+            // dont want to override selection
+            if didChangeActiveTalks == false {
+                
+                // start hiding active talks
+                selections[FilterSectionType.ActiveTalks] = .names(["Hide Past Talks"])
+            }
+        }
+        else {
             
-            let startDate = summit.start.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
-            let endDate = summit.end.toFoundation().mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-            let now = NSDate()
-                        
-            if now.mt_isBetweenDate(startDate, andDate: endDate) {
-                
-                // dont want to override selection
-                if didChangeActiveTalks == false {
-                    
-                    // start hiding active talks
-                    selections[FilterSectionType.ActiveTalks] = .names(["Hide Past Talks"])
-                }
-            }
-            else {
-                
-                // reset active talks selections if the summit has finished (or hasnt started)
-                selections[FilterSectionType.ActiveTalks] = .names([])
-            }
+            // reset active talks selections if the summit has finished (or hasnt started)
+            selections[FilterSectionType.ActiveTalks] = .names([])
         }
     }
     
@@ -348,13 +344,11 @@ final class FilterManager {
     
     var filter = Observable(ScheduleFilter())
     
-    private var notificationToken: NotificationToken?
-    
     private var timer: NSTimer!
     
     deinit {
         
-        notificationToken?.stop()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private init() {
@@ -362,13 +356,29 @@ final class FilterManager {
         // update sections from Realm
         filter.value.updateSections()
         
-        notificationToken = Store.shared.realm.addNotificationBlock { [weak self] _,_ in self?.filter.value.updateSections() }
-        
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(managedObjectContextObjectsDidChange),
+            name: NSManagedObjectContextObjectsDidChangeNotification,
+            object: Store.shared.managedObjectContext)
+        
+        SummitManager.shared.summit.observe(currentSummitChanged)
     }
     
     @objc private func timerUpdate(sender: NSTimer) {
         
         filter.value.updateActiveTalksSelections()
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        
+        self.filter.value.updateSections()
+    }
+    
+    private func currentSummitChanged(summit: Identifier) {
+        
+        self.filter.value.updateSections()
     }
 }

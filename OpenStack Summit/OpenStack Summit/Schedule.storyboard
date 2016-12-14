@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2553a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Speaker Presentations View Controller-->
@@ -14,15 +18,15 @@
                         <viewControllerLayoutGuide type="bottom" id="3MR-JJ-efb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yaQ-8N-VeA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YfL-4b-PVx" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YfL-4b-PVx" firstAttribute="top" secondItem="SEc-g0-zdA" secondAttribute="bottom" id="2wk-wo-tWB"/>
                             <constraint firstAttribute="trailing" secondItem="YfL-4b-PVx" secondAttribute="trailing" id="Xej-Kb-LFx"/>
@@ -47,15 +51,15 @@
                         <viewControllerLayoutGuide type="bottom" id="vUD-6q-4l4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qgV-oE-k59">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O99-Af-xcd" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="568"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="O99-Af-xcd" firstAttribute="height" secondItem="qgV-oE-k59" secondAttribute="height" id="aQh-yq-VRy"/>
                             <constraint firstItem="O99-Af-xcd" firstAttribute="top" secondItem="rdN-dc-O0b" secondAttribute="bottom" id="b3H-r1-3DV"/>
@@ -80,42 +84,42 @@
                         <viewControllerLayoutGuide type="bottom" id="lWe-Jb-Rf0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fmU-jn-eES">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKz-rJ-Iht" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="568"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yh-Fz-tgi">
-                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slZ-Tr-gBU" userLabel="Alert Message">
-                                        <rect key="frame" x="20" y="168" width="560" height="265"/>
+                                        <rect key="frame" x="20" y="152" width="280" height="265"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert" translatesAutoresizingMaskIntoConstraints="NO" id="UK2-5y-czg" userLabel="Alert Image">
-                                                <rect key="frame" x="230" y="2" width="100" height="90"/>
+                                                <rect key="frame" x="90" y="-18" width="100" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="cUM-k2-2Ru"/>
                                                     <constraint firstAttribute="height" constant="90" id="waD-nF-Myd"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWg-sP-dDq" userLabel="Message Label">
-                                                <rect key="frame" x="0.0" y="112" width="560" height="61"/>
+                                                <rect key="frame" x="0.0" y="92" width="280" height="101.5"/>
                                                 <string key="text">There was a problem loading summit information. If there is no internet connection active, please wait until any is available and click retry to load information</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IP8-mD-cJq" userLabel="Retry Button">
-                                                <rect key="frame" x="220" y="193" width="120" height="40"/>
-                                                <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="80" y="213.5" width="120" height="40"/>
+                                                <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Aa1-Sr-6I7"/>
                                                     <constraint firstAttribute="width" constant="120" id="Em7-I9-hVR"/>
                                                 </constraints>
                                                 <state key="normal" title="Retry">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -127,7 +131,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="265" id="HyH-uj-Rpq"/>
                                             <constraint firstItem="UK2-5y-czg" firstAttribute="centerX" secondItem="slZ-Tr-gBU" secondAttribute="centerX" id="JBM-Iy-URh"/>
@@ -141,7 +145,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="slZ-Tr-gBU" firstAttribute="centerY" secondItem="1Yh-Fz-tgi" secondAttribute="centerY" id="Jfj-ob-W4s"/>
                                     <constraint firstItem="slZ-Tr-gBU" firstAttribute="trailing" secondItem="1Yh-Fz-tgi" secondAttribute="trailing" constant="-20" id="OnR-i5-MtK"/>
@@ -149,7 +153,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1Yh-Fz-tgi" firstAttribute="height" secondItem="fmU-jn-eES" secondAttribute="height" id="D3T-pP-exd"/>
                             <constraint firstItem="HKz-rJ-Iht" firstAttribute="height" secondItem="fmU-jn-eES" secondAttribute="height" id="O4A-l6-gSB"/>
@@ -181,20 +185,20 @@
                         <viewControllerLayoutGuide type="bottom" id="Dki-7d-2ic"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rYY-eq-hpl">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyd-S3-VMk" userLabel="Header">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyf-74-Hve">
-                                        <rect key="frame" x="40" y="33" width="520" height="23"/>
+                                        <rect key="frame" x="40" y="33" width="240" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="lyf-74-Hve" firstAttribute="leading" secondItem="hyd-S3-VMk" secondAttribute="leading" constant="40" id="0RA-v9-rbO"/>
                                     <constraint firstAttribute="height" constant="88" id="K7n-ai-Xy6"/>
@@ -203,11 +207,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1v-at-Yxm" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="600" height="512"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="480"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="a1v-at-Yxm" firstAttribute="bottom" secondItem="Dki-7d-2ic" secondAttribute="top" id="2am-l4-8oa"/>
                             <constraint firstItem="a1v-at-Yxm" firstAttribute="top" secondItem="hyd-S3-VMk" secondAttribute="bottom" id="6Fy-9j-xAd"/>
@@ -236,15 +240,15 @@
                         <viewControllerLayoutGuide type="bottom" id="TLV-h3-QWY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I2k-Sf-0nB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xc-oi-gYA" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2Xc-oi-gYA" firstAttribute="leading" secondItem="I2k-Sf-0nB" secondAttribute="leading" id="YLX-Zo-jUu"/>
                             <constraint firstItem="2Xc-oi-gYA" firstAttribute="top" secondItem="I2k-Sf-0nB" secondAttribute="top" id="ha2-Wf-xE2"/>

@@ -8,7 +8,6 @@
 
 import UIKit
 import Realm
-import RealmSwift
 import CoreSummit
 
 @UIApplicationMain
@@ -24,12 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Using Environment: \(AppEnvironment.rawValue)")
         
         // always nuke cache
-        let realmPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
-        
-        if NSFileManager.defaultManager().fileExistsAtPath(realmPath) {
-            
-            try! NSFileManager.defaultManager().removeItemAtPath(realmPath)
-        }
+        try! Store.shared.clear()
         
         // set appearance
         SetAppearance()

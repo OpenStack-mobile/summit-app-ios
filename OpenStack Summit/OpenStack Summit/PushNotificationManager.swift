@@ -17,38 +17,44 @@ public final class PushNotificationsManager {
         
         var channels = [String]()
         
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
+        // TODO: Observe summit manager and authenticated member
+        
+        let context = Store.shared.managedObjectContext
+        let summitID = SummitManager.shared.summit.value
+        guard let summit = try! SummitManagedObject.find(summitID, context: context)
+            else { return }
+        
+        channels.append("su_\(summit.identifier)")
+        
+        if let member = Store.shared.authenticatedMember {
             
-            channels.append("su_\(summit.id)")
+            channels.append("me_\(member.id)")
             
-            if let member = Store.shared.authenticatedMember {
-                
-                channels.append("me_\(member.id)")
-                
-                if member.attendeeRole != nil {
-                    channels.append("attendees")
-                }
-                
-                if member.speakerRole != nil {
-                    channels.append("speakers")
-                }
+            if member.attendeeRole != nil {
+                channels.append("attendees")
             }
             
-            PFInstallation.currentInstallation()!.channels = channels
-            PFInstallation.currentInstallation()!.saveEventually(completionBlock)
+            if member.speakerRole != nil {
+                channels.append("speakers")
+            }
         }
+        
+        PFInstallation.currentInstallation()!.channels = channels
+        PFInstallation.currentInstallation()!.saveEventually(completionBlock)
     }
     
-    public static func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> Void) {
+    public static func unsubscribeFromPushChannels(completionBlock: (succeeded: Bool, error: NSError?) -> ()) {
         
         var channels = [String]()
         
-        if let summit = Store.shared.realm.objects(RealmSummit).first {
-            
-            channels.append("su_\(summit.id)")
-            
-            PFInstallation.currentInstallation()!.channels = channels
-            PFInstallation.currentInstallation()!.saveEventually(completionBlock)
-        }
+        let context = Store.shared.managedObjectContext
+        let summitID = SummitManager.shared.summit.value
+        guard let summit = try! SummitManagedObject.find(summitID, context: context)
+            else { return }
+        
+        channels.append("su_\(summit.identifier)")
+        
+        PFInstallation.currentInstallation()!.channels = channels
+        PFInstallation.currentInstallation()!.saveEventually(completionBlock)
     }
 }

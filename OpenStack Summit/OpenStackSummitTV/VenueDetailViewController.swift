@@ -27,10 +27,10 @@ final class VenueDetailViewController: UITableViewController {
             
         case let .room(room):
             
-            guard let realmVenue = RealmVenue.find(room.venue, realm: Store.shared.realm)
+            guard let venue = try! Venue.find(room.venue, context: Store.shared.managedObjectContext)
                 else { fatalError("Invalid venue \(room.venue)") }
             
-            return Venue(realmEntity: realmVenue)
+            return venue
         }
     }()
     

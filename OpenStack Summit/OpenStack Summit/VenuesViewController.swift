@@ -29,9 +29,9 @@ final class VenuesViewController: RevealTabStripViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
+        if let realmSummit = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).first {
             
-            let summit = Summit(realmEntity: realmSummit)
+            let summit = Summit(managedObject: realmSummit)
             
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)

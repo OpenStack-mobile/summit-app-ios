@@ -177,15 +177,6 @@
                                 <action selector="showSpeakers:" destination="3Wd-aq-ZaB" id="RTl-5d-mKE"/>
                             </connections>
                         </button>
-                        <separator alignment="left" id="mrL-gu-e6D"/>
-                        <group width="1" alignment="left" id="fWy-C9-sl0">
-                            <items>
-                                <imageView width="14" height="15" alignment="left" verticalAlignment="center" image="credential" contentMode="scaleAspectFit" id="leh-Gh-FnE"/>
-                                <label alignment="left" semanticContentAttribute="forceLeftToRight" text="Architecture" textAlignment="left" numberOfLines="0" id="IjE-nD-ysd">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                </label>
-                            </items>
-                        </group>
                         <separator alignment="left" id="q3h-ay-HsD"/>
                         <group width="1" alignment="left" id="PrT-NB-RRq">
                             <items>
@@ -213,7 +204,6 @@
                         <outlet property="speakersButton" destination="nC6-Uz-J6q" id="yvZ-j6-0Bj"/>
                         <outlet property="speakersLabel" destination="Unr-Ib-VAW" id="qus-zx-dOd"/>
                         <outlet property="speakersSeparator" destination="Jkf-VD-Nwn" id="jLz-0B-QJR"/>
-                        <outlet property="summitTypesLabel" destination="IjE-nD-ysd" id="72I-bu-cKi"/>
                         <outlet property="tagsGroup" destination="qpB-jm-3ig" id="G02-nT-YLD"/>
                         <outlet property="tagsLabel" destination="gKa-Ku-3aW" id="RK3-4j-rrq"/>
                         <outlet property="tagsSeparator" destination="j5G-Pv-oG8" id="2fA-3s-ZG8"/>

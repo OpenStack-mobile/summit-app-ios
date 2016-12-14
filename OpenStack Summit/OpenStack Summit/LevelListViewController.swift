@@ -9,7 +9,6 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
-import RealmSwift
 
 final class LevelListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, IndicatorInfoProvider {
     
@@ -51,7 +50,7 @@ final class LevelListViewController: UIViewController, UITableViewDataSource, UI
         
         let scheduleFilter = FilterManager.shared.filter.value
         
-        let levelsSet = Set(Store.shared.realm.objects(RealmPresentation).map({ $0.level }).filter({ $0.isEmpty == false }).sort())
+        let levelsSet = Set(try! Store.shared.managedObjectContext.managedObjects(PresentationManagedObject.self).map({ $0.level ?? "" }).filter({ $0.isEmpty == false }).sort())
         
         // remove duplicates
         self.levels = Array(levelsSet)

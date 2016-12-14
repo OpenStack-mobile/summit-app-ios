@@ -9,18 +9,14 @@
 import UIKit
 import SwiftFoundation
 import CoreSummit
-import RealmSwift
+import CoreData
 
 @objc(OSSTVVenueDirectoryViewController)
-final class VenueDirectoryViewController: UITableViewController {
+final class VenueDirectoryViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
-    private var internalVenues = [Venue]()
-    
-    private var externalVenues = [Venue]()
-    
-    private var notificationToken: RealmSwift.NotificationToken?
+    private var fetchedResultsController: NSFetchedResultsController!
     
     private var mapViewController: VenueMapViewController!
     
@@ -29,11 +25,6 @@ final class VenueDirectoryViewController: UITableViewController {
     private let delayedSeguesOperationQueue = NSOperationQueue()
     
     // MARK: - Loading
-    
-    deinit {
-        
-        notificationToken?.stop()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +45,6 @@ final class VenueDirectoryViewController: UITableViewController {
         
         updateUI()
         
-        notificationToken = Store.shared.realm.addNotificationBlock { _ in self.updateUI() }
-        
         // show map view controller
         performSegueWithIdentifier("showVenueMap", sender: self)
     }
@@ -64,52 +53,52 @@ final class VenueDirectoryViewController: UITableViewController {
     
     private func updateUI() {
         
-        let dataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
+        self.title = "Venues"
         
-        self.title = dataLoaded ? "Venues" : "Loading Summit..."
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
-        self.internalVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.isInternal }
-        self.externalVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue)).filter { $0.isInternal == false }
+        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: summitPredicate, sortDescriptors: VenueManagedObject.sortDescriptors, sectionNameKeyPath: "isInternal", context: Store.shared.managedObjectContext)
+        
+        try! self.fetchedResultsController.performFetch()
         
         tableView.reloadData()
     }
     
+    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+        
+        let venue = self[indexPath]
+        
+        cell.textLabel!.text = venue.name
+    }
+    
     private subscript (indexPath: NSIndexPath) -> Venue {
         
-        let section = Section(rawValue: indexPath.section)!
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! VenueManagedObject
         
-        switch section {
-        case .Internal: return internalVenues[indexPath.row]
-        case .External: return externalVenues[indexPath.row]
-        }
+        return Venue(managedObject: managedObject)
     }
     
     // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        let dataLoaded = Store.shared.realm.objects(RealmSummit).isEmpty == false
-        
-        return dataLoaded ? Section.count : 0
+        return self.fetchedResultsController?.sections?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let section = Section(rawValue: section)!
+        let section = self.fetchedResultsController.sections![section]
         
-        switch section {
-        case .Internal: return internalVenues.count
-        case .External: return externalVenues.count
-        }
+        return section.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("VenueTableViewCell", forIndexPath: indexPath)
         
-        let venue = self[indexPath]
-        
-        cell.textLabel!.text = venue.name
+        configure(cell: cell, at: indexPath)
         
         return cell
     }
@@ -171,6 +160,49 @@ final class VenueDirectoryViewController: UITableViewController {
         }
         
         delayedSeguesOperationQueue.addOperation(performSegueOperation)
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        self.tableView.endUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        case .Delete:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+        case .Update:
+            if let updateIndexPath = indexPath,
+                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
+                
+                self.configure(cell: cell, at: updateIndexPath)
+            }
+        case .Move:
+            
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+            }
+            
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+            }
+        }
     }
     
     // MARK: - Segue

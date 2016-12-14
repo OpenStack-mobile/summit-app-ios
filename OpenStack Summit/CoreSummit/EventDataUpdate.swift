@@ -8,39 +8,55 @@
 
 import struct SwiftFoundation.Date
 
-public extension Event {
+/// The `DataUpdate` version of an `Event`.
+public struct EventDataUpdate: Named {
     
-    /// The `DataUpdate` version of an `Event`.
-    public struct DataUpdate: Named {
-        
-        public let identifier: Identifier
-        
-        public var name: String
-        
-        public var descriptionText: String?
-        
-        public var start: Date
-        
-        public var end: Date
-        
-        public var allowFeedback: Bool
-        
-        public var averageFeedback: Double
-        
-        public var type: Identifier
-        
-        public var summitTypes: [Identifier]
-        
-        public var sponsors: [Company]
-        
-        public var tags: [Tag]
-        
-        public var location: Identifier
-        
-        public var presentation: Presentation.DataUpdate
-        
-        //public var trackIdentifier: Identifier
-        
-        public var videos: [Video]
-    }
+    public let identifier: Identifier
+    
+    public var name: String
+    
+    public var descriptionText: String?
+    
+    public var start: Date
+    
+    public var end: Date
+    
+    public var track: Identifier?
+    
+    public var allowFeedback: Bool
+    
+    public var averageFeedback: Double
+    
+    public var type: Identifier
+    
+    public var sponsors: Set<Company>
+    
+    public var tags: Set<Tag>
+    
+    public var location: Identifier
+    
+    public var presentation: PresentationDataUpdate
+    
+    public var videos: Set<Video>
+    
+    public var rsvp: String?
+}
+
+public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.start == rhs.start
+        && lhs.end == rhs.end
+        && lhs.track == rhs.track
+        && lhs.allowFeedback == rhs.allowFeedback
+        && lhs.averageFeedback == rhs.averageFeedback
+        && lhs.type == rhs.type
+        && lhs.sponsors == rhs.sponsors
+        && lhs.tags == rhs.tags
+        && lhs.location == rhs.location
+        && lhs.presentation == rhs.presentation
+        && lhs.videos == rhs.videos
+        && lhs.rsvp == rhs.rsvp
 }

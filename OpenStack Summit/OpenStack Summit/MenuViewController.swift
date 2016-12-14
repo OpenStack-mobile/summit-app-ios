@@ -222,9 +222,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func showUserProfile() {
         
-        if let realmMember = Store.shared.authenticatedMember {
+        if let memberManagedObject = Store.shared.authenticatedMember {
             
-            let currentMember = Member(realmEntity: realmMember)
+            let currentMember = Member(managedObject: memberManagedObject)
             
             if let speaker = currentMember.speakerRole {
                 
@@ -244,7 +244,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             
         } else if Store.shared.isLoggedIn {
             
-            name = Store.shared.session?.name ?? ""
+            name = Store.shared.session.name ?? ""
             pictureURL = ""
             
         } else {
@@ -323,15 +323,14 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private func login() {
         
-        guard Store.shared.realm.objects(RealmSummit).count > 0 else {
-            
-            showInfoMessage("Info", message: "Summit data is required to log in.")
-            return
-        }
+        let summit = SummitManager.shared.summit.value
+        
+        guard self.isDataLoaded
+            else { showInfoMessage("Info", message: "Summit data is required to log in."); return }
         
         showActivityIndicator()
         
-        Store.shared.login(loginCallback: {
+        Store.shared.login(summit, loginCallback: {
             
             // return from SafariVC
             dispatch_async(dispatch_get_main_queue(), {
@@ -371,9 +370,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     }
                     
                     // log user email
-                    if AppEnvironment == .Staging {
+                    if let userID = Store.shared.authenticatedMember?.identifier
+                        where AppEnvironment == .Staging {
                         
-                        Crashlytics.sharedInstance().setUserEmail(Store.shared.authenticatedMember?.email)
+                        Crashlytics.sharedInstance().setUserIdentifier("\(userID)")
                     }
                     
                     PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
@@ -389,7 +389,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         // log user email
         if AppEnvironment == .Staging {
             
-            Crashlytics.sharedInstance().setUserEmail(nil)
+            Crashlytics.sharedInstance().setUserIdentifier(nil)
         }
         
         showUserProfile()
@@ -425,7 +425,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             
             unselectMenuItems()
             
-            guard Store.shared.realm.objects(RealmSummit).count > 0 else {
+            guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).count > 0 else {
                 
                 showInfoMessage("Info", message: "No summit data available")
                 return true
@@ -453,7 +453,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @objc private func revokedAccess(notification: NSNotification) {
         
         // logout in case its not cleared
-        Store.shared.session?.clear()
+        Store.shared.session.clear()
         
         showUserProfile()
         navigateToHome()

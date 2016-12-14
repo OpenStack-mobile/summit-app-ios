@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="FQy-v2-oKC">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16B2553a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="MXg-Ox-HXh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -33,6 +33,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v67-Bb-A5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-32.5" y="-879"/>
+        </scene>
+        <!--Summits-->
+        <scene sceneID="Tsz-cB-SnQ">
+            <objects>
+                <tableViewController id="Vk1-XG-8TI" customClass="OSSTVSummitsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="6zG-jg-kH8">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" id="fxZ-Ej-0mJ">
+                                <rect key="frame" x="0.0" y="199" width="1880" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fxZ-Ej-0mJ" id="CcZ-JY-kOD">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Vk1-XG-8TI" id="3eI-RF-c2O"/>
+                            <outlet property="delegate" destination="Vk1-XG-8TI" id="tta-8w-4wW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Summits" id="jtn-RH-A6G"/>
+                    <connections>
+                        <segue destination="FQy-v2-oKC" kind="presentation" identifier="presentSummit" modalPresentationStyle="fullScreen" id="wAu-Em-YE6"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5OX-kL-VfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3684" y="-587"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PAr-Wx-Soo">
+            <objects>
+                <navigationController id="MXg-Ox-HXh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4UD-Ir-QTO">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Vk1-XG-8TI" kind="relationship" relationship="rootViewController" id="JUW-KK-Lgh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ie-Rm-SeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6024" y="-587"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="mKl-Mj-zgC">

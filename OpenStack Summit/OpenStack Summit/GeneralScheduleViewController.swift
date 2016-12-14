@@ -57,16 +57,15 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     
     internal override func loadData() {
         
-        if Store.shared.realm.objects(RealmSummit).isEmpty && Reachability.connected == false {
+        if try! Store.shared.managedObjectContext.managedObjects(Summit).isEmpty
+            && Reachability.connected == false {
             
             self.toggleNoConnectivityMessage(true)
             self.toggleEventList(false)
             return
         }
         
-        if let realmSummit = Store.shared.realm.objects(RealmSummit).first {
-            
-            let summit = Summit(realmEntity: realmSummit)
+        if let summit = self.currentSummit {
             
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
@@ -86,15 +85,15 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
         
         let scheduleFilter = FilterManager.shared.filter.value
+        let summit = SummitManager.shared.summit.value
         
-        let summitTypes = scheduleFilter.selections[FilterSectionType.SummitType]?.rawValue as? [Int]
         let tracks = scheduleFilter.selections[FilterSectionType.Track]?.rawValue as? [Int]
         let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = try! EventManagedObject.filter(startDate, endDate: endDate, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -111,17 +110,17 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
         
         let scheduleFilter = FilterManager.shared.filter.value
+        let summit = SummitManager.shared.summit.value
         
-        let summitTypes = scheduleFilter.selections[FilterSectionType.SummitType]?.rawValue as? [Int]
         let tracks = scheduleFilter.selections[FilterSectionType.Track]?.rawValue as? [Int]
         let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
         let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = RealmSummitEvent.filter(startDate, endDate: endDate, summitTypes: summitTypes, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues)
+        let events = try! EventManagedObject.filter(startDate, endDate: endDate, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
-        return ScheduleItem.from(realm: events)
+        return ScheduleItem.from(managedObjects: events)
     }
     
     // MARK: - IndicatorInfoProvider

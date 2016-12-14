@@ -8,7 +8,7 @@
 
 import SwiftFoundation
 
-public extension NonConfirmedSummitAttendee {
+public extension NonConfirmedAttendee {
     
     enum JSONKey: String {
         
@@ -16,7 +16,7 @@ public extension NonConfirmedSummitAttendee {
     }
 }
 
-extension NonConfirmedSummitAttendee: JSONDecodable {
+extension NonConfirmedAttendee: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         

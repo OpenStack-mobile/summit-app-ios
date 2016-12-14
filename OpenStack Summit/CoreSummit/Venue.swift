@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Venue: LocationProtocol {
+public struct Venue: LocationProtocol, Equatable {
     
     public let identifier: Identifier
     
@@ -32,11 +32,11 @@ public struct Venue: LocationProtocol {
     
     public var longitude: String?
     
-    public var maps: [Image]
+    public var maps: Set<Image>
     
-    public var images: [Image]
+    public var images: Set<Image>
     
-    public var floors: [VenueFloor]
+    public var floors: Set<VenueFloor>
 }
 
 // MARK: - Extensions
@@ -97,4 +97,25 @@ public extension Venue {
         
         case SummitVenue, SummitExternalLocation, SummitHotel, SummitAirport
     }
+}
+
+// MARK: - Equatable
+
+public func == (lhs: Venue, rhs: Venue) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.type == rhs.type
+        && lhs.name == rhs.name
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.locationType == rhs.locationType
+        && lhs.country == rhs.country
+        && lhs.address == rhs.address
+        && lhs.city == rhs.city
+        && lhs.zipCode == rhs.zipCode
+        && lhs.state == rhs.state
+        && lhs.latitude == rhs.latitude
+        && lhs.longitude == rhs.longitude
+        && lhs.maps == rhs.maps
+        && lhs.images == rhs.images
+        && lhs.floors == rhs.floors
 }

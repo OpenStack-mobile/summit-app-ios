@@ -9,10 +9,10 @@
 import Foundation
 import SwiftFoundation
 import CoreSpotlight
-import RealmSwift
 import MobileCoreServices
 import CoreSummit
 import Haneke
+import CoreData
 
 // MARK: - Model Extensions
 
@@ -22,6 +22,8 @@ protocol CoreSpotlightSearchable: AppActivitySummitData {
     static var itemContentType: String { get }
     
     static var searchDomain: String { get }
+    
+    var searchIdentifier: String { get }
     
     func toSearchableItem() -> CSSearchableItem
 }
@@ -33,7 +35,7 @@ extension CoreSpotlightSearchable where Self: CoreSummit.Unique {
 }
 
 @available(iOS 9.0, *)
-extension SummitEvent: CoreSpotlightSearchable {
+extension Event: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
     
@@ -62,7 +64,7 @@ extension SummitEvent: CoreSpotlightSearchable {
 }
 
 @available(iOS 9.0, *)
-extension PresentationSpeaker: CoreSpotlightSearchable {
+extension Speaker: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
     
@@ -174,7 +176,7 @@ extension VenueRoom: CoreSpotlightSearchable {
 
 /// Updates the CoreSpotlight index from Realm changes.
 @available(iOS 9.0, *)
-final class SpotlightController {
+final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
     
     static let shared = SpotlightController()
     
@@ -184,56 +186,122 @@ final class SpotlightController {
     
     private let queue = dispatch_queue_create("CoreSpotlight Update Queue", nil)
     
-    private var realmNotificationToken: RealmSwift.NotificationToken!
-    
     deinit {
         
-        realmNotificationToken?.stop()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    private init() {
+    private override init() {
         
-        self.realmNotificationToken = Store.shared.realm.addNotificationBlock({ (notification, realm) in
-            
-            self.update {
-                if let error = $0 { self.log?("Error: \(error.localizedDescription)") }
-                else { self.log?("Updated SpotLight index") }
-            }
-        })
+        super.init()
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(managedObjectContextObjectsDidChange),
+            name: NSManagedObjectContextObjectsDidChangeNotification,
+            object: Store.shared.managedObjectContext)
+        
     }
     
-    func update(index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex(), completionHandler: ((NSError?) -> ())? = nil) {
+    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         
-        index.deleteAllSearchableItemsWithCompletionHandler { (deleteError) in
+        func completionHandler(error: NSError?) {
             
-            if let error = deleteError {
+            if let error = error {
                 
-                completionHandler?(error)
-                return
+                self.log?("Error updating Spotlight index: \(error)")
+                
+            } else {
+                
+                self.log?("Updated Spotlight index")
             }
+        }
+        
+        // index new and updated items
+        
+        var indexableManagedObjects = [NSManagedObject]()
+        
+        if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as! Set<NSManagedObject>? {
             
-            // get all speakers and events
-            dispatch_async(dispatch_get_main_queue()) {
-                
-                let realmEvents = SummitEvent.from(realm: Store.shared.realm.objects(RealmSummitEvent))
-                let realmSpeakers = PresentationSpeaker.from(realm: Store.shared.realm.objects(RealmPresentationSpeaker))
-                let realmVideos = Video.from(realm: Store.shared.realm.objects(RealmVideo))
-                let realmVenues = Venue.from(realm: Store.shared.realm.objects(RealmVenue))
-                let realmVenueRooms = VenueRoom.from(realm: Store.shared.realm.objects(RealmVenueRoom))
-                
-                dispatch_async(self.queue, {
-                    
-                    let events = realmEvents.map { $0.toSearchableItem() }
-                    let speakers = realmSpeakers.map { $0.toSearchableItem() }
-                    let videos = realmVideos.map { $0.toSearchableItem() }
-                    let venues = realmVenues.map { $0.toSearchableItem() }
-                    let venueRooms = realmVenueRooms.map { $0.toSearchableItem() }
-                    
-                    let items = events + speakers + videos + venues + venueRooms
-                    
-                    index.indexSearchableItems(items, completionHandler: completionHandler)
-                })
-            }
+            indexableManagedObjects.appendContentsOf(updatedObjects)
+        }
+        
+        if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as! Set<NSManagedObject>? {
+            
+            indexableManagedObjects.appendContentsOf(insertedObjects)
+        }
+        
+        if indexableManagedObjects.isEmpty == false {
+            
+            let searchableItems = indexableManagedObjects
+                .reduce(to: CoreSpotlightSearchableManagedObject.self)
+                .map { $0.toSearchable().toSearchableItem() }
+            
+            spotlightIndex.indexSearchableItems(searchableItems, completionHandler: completionHandler)
+        }
+        
+        // delete items
+        
+        if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as! Set<NSManagedObject>? {
+            
+            let searchableItems = deletedObjects
+                .reduce(to: CoreSpotlightSearchableManagedObject.self)
+                .map { $0.toSearchable().searchIdentifier }
+            
+            spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
         }
     }
 }
+
+@available(iOS 9.0, *)
+protocol CoreSpotlightSearchableManagedObject: class {
+    
+    func toSearchable() -> CoreSpotlightSearchable
+}
+
+@available(iOS 9.0, *)
+extension EventManagedObject: CoreSpotlightSearchableManagedObject {
+    
+    func toSearchable() -> CoreSpotlightSearchable {
+        
+        return Event(managedObject: self)
+    }
+}
+
+@available(iOS 9.0, *)
+extension SpeakerManagedObject: CoreSpotlightSearchableManagedObject {
+    
+    func toSearchable() -> CoreSpotlightSearchable {
+        
+        return Speaker(managedObject: self)
+    }
+}
+
+@available(iOS 9.0, *)
+extension VideoManagedObject: CoreSpotlightSearchableManagedObject {
+    
+    func toSearchable() -> CoreSpotlightSearchable {
+        
+        return Video(managedObject: self)
+    }
+}
+
+@available(iOS 9.0, *)
+extension VenueManagedObject: CoreSpotlightSearchableManagedObject {
+    
+    func toSearchable() -> CoreSpotlightSearchable {
+        
+        return Venue(managedObject: self)
+    }
+}
+
+@available(iOS 9.0, *)
+extension VenueRoomManagedObject: CoreSpotlightSearchableManagedObject {
+    
+    func toSearchable() -> CoreSpotlightSearchable {
+        
+        return VenueRoom(managedObject: self)
+    }
+}
+
+

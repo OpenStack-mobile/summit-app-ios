@@ -93,7 +93,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     @IBAction func showFilters(sender: UIBarButtonItem) {
         
-        guard Store.shared.realm.objects(RealmSummit).count > 0  else {
+        guard try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject).count > 0  else {
             
             showInfoMessage("Info", message: "No summit data available")
             return
