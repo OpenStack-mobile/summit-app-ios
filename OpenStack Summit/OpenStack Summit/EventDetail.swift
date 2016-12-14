@@ -15,6 +15,7 @@ public struct EventDetail: CoreDataDecodable {
     
     public let id: Identifier
     public let name: String
+    public let summit: Identifier
     public let dateTime: String
     public let time: String
     public let location: String
@@ -42,6 +43,7 @@ public struct EventDetail: CoreDataDecodable {
         
         self.id = event.identifier
         self.name = event.name
+        self.summit = event.summit.identifier
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)

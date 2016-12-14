@@ -177,11 +177,11 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         if oldValue {
             
-            Store.shared.removeEventFromSchedule(event: self.event, completion: completion)
+            Store.shared.removeEventFromSchedule(self.eventDetail.summit, event: self.event, completion: completion)
             
         } else {
             
-            Store.shared.addEventToSchedule(event: self.event, completion: completion)
+            Store.shared.addEventToSchedule(self.eventDetail.summit, event: self.event, completion: completion)
         }
     }
     
@@ -287,7 +287,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         let nextPage = (currentFeedbackPage?.currentPage ?? 0) + 1
         
-        Store.shared.feedback(self.currentSummit?.identifier, event: event, page: nextPage, objectsPerPage: 5) { [weak self] (response) in
+        Store.shared.feedback(self.eventDetail.summit, event: self.event, page: nextPage, objectsPerPage: 5) { [weak self] (response) in
             
             dispatch_async(dispatch_get_main_queue()) {
                 

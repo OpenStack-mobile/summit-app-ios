@@ -148,11 +148,11 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         if scheduled {
             
-            Store.shared.removeEventFromSchedule(event: event.id, completion: completion)
+            Store.shared.removeEventFromSchedule(event.summit, event: event.id, completion: completion)
             
         } else {
             
-            Store.shared.addEventToSchedule(event: event.id, completion: completion)
+            Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
         }
     }
     

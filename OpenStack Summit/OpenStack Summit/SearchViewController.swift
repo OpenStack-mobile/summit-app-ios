@@ -102,7 +102,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             cell.scheduled = false
             
-            Store.shared.removeEventFromSchedule(event: event.id) { [weak self] (response) in
+            Store.shared.removeEventFromSchedule(event.summit, event: event.id) { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -131,7 +131,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             cell.scheduled = true
             
-            Store.shared.addEventToSchedule(event: event.id)  { [weak self] (response) in
+            Store.shared.addEventToSchedule(event.summit, event: event.id)  { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
