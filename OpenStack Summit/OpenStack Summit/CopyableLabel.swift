@@ -60,6 +60,6 @@ final class CopyableLabel: UILabel {
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
         
-        return action == #selector(NSObject.copy(_:))
+        return action == #selector(NSObject.copy)
     }
 }
