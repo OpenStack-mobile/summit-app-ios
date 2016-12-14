@@ -379,7 +379,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         let index = indexPath.row
         let event = dayEvents[index]
-        
+                
         cell.eventTitle = event.name
         cell.eventType = event.eventType
         cell.time = event.time
