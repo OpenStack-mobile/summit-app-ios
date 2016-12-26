@@ -1,5 +1,5 @@
 //
-//  GroupManagedObject.swift
+//  TeamManagedObject.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 12/5/16.
@@ -9,16 +9,22 @@
 import Foundation
 import CoreData
 
-public final class NotificationGroupManagedObject: Entity {
+public final class TeamManagedObject: Entity {
     
     @NSManaged public var name: String
     
+    @NSManaged public var descriptionText: String
+    
     @NSManaged public var notifications: Set<NotificationManagedObject>
+    
+    @NSManaged public var owner: TeamMemberManagedObject
+    
+    @NSManaged public var members: Set<TeamMemberManagedObject>
 }
 
 // MARK: - Encoding
 
-extension NotificationGroup: CoreDataDecodable {
+extension Team: CoreDataDecodable {
     
     public init(managedObject: NotificationGroupManagedObject) {
         
@@ -27,7 +33,7 @@ extension NotificationGroup: CoreDataDecodable {
     }
 }
 
-extension NotificationGroup: CoreDataEncodable {
+extension Team: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> NotificationGroupManagedObject {
         
@@ -43,7 +49,7 @@ extension NotificationGroup: CoreDataEncodable {
 
 // MARK: - Fetches
 
-public extension NotificationGroupManagedObject {
+public extension TeamManagedObject {
     
     static var sortDescriptors: [NSSortDescriptor] {
         
