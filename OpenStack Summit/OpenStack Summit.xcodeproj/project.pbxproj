@@ -396,6 +396,12 @@
 		6E8660B71D62001700359FA1 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8660B61D62001700359FA1 /* PushNotificationManager.swift */; };
 		6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E8D0CD31D79CBA7004B435A /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D0CD21D79CBA7004B435A /* ImageCache.swift */; };
+		6E8D10951DF87F3100A0BBDC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10941DF87F3100A0BBDC /* Notification.swift */; };
+		6E8D10961DF87F3100A0BBDC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10941DF87F3100A0BBDC /* Notification.swift */; };
+		6E8D10971DF87F3100A0BBDC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10941DF87F3100A0BBDC /* Notification.swift */; };
+		6E8D10991DF87F3B00A0BBDC /* NotificationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* NotificationGroup.swift */; };
+		6E8D109A1DF87F3B00A0BBDC /* NotificationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* NotificationGroup.swift */; };
+		6E8D109B1DF87F3B00A0BBDC /* NotificationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* NotificationGroup.swift */; };
 		6E93D4411D9AEC5000E3302A /* DataUpdates5.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E35086E1D9AE4900055801C /* DataUpdates5.json */; };
 		6E93D4431D9AECA500E3302A /* TrackGroupDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */; };
 		6E93D4441D9AECA500E3302A /* TrackGroupDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */; };
@@ -403,6 +409,12 @@
 		6E93D4471D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */; };
 		6E93D4481D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */; };
 		6E93D4491D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */; };
+		6E959E151DF5F36E002981FD /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E141DF5F36E002981FD /* NotificationManagedObject.swift */; };
+		6E959E161DF5F36E002981FD /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E141DF5F36E002981FD /* NotificationManagedObject.swift */; };
+		6E959E171DF5F36E002981FD /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E141DF5F36E002981FD /* NotificationManagedObject.swift */; };
+		6E959E191DF61557002981FD /* NotificationGroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E181DF61557002981FD /* NotificationGroupManagedObject.swift */; };
+		6E959E1A1DF61557002981FD /* NotificationGroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E181DF61557002981FD /* NotificationGroupManagedObject.swift */; };
+		6E959E1B1DF61557002981FD /* NotificationGroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E181DF61557002981FD /* NotificationGroupManagedObject.swift */; };
 		6E96BFD81D26D347009524C7 /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFD71D26D347009524C7 /* TrackListViewController.swift */; };
 		6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */; };
 		6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */; };
@@ -482,6 +494,9 @@
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
 		6EDA19001D7F4A6100AB450F /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */; };
+		6EDA4ABE1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA4ABD1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift */; };
+		6EDA4AC01DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA4ABF1DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift */; };
+		6EDA4AC11DFA7ED800ADF96D /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8D109C1DF8957100A0BBDC /* Notifications.storyboard */; };
 		6EDAF38E1D5BB22700B75B28 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */; };
 		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
 		6EDE52121D429F4C00DF4BEA /* VenuesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */; };
@@ -535,6 +550,9 @@
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
 		6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */; };
 		6EF2FB391D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */; };
+		6EF4484A1DFC850600BEEF1D /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF448491DFC850600BEEF1D /* PushNotification.swift */; };
+		6EF4484B1DFC850600BEEF1D /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF448491DFC850600BEEF1D /* PushNotification.swift */; };
+		6EF4484C1DFC850600BEEF1D /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF448491DFC850600BEEF1D /* PushNotification.swift */; };
 		6EF4F8531DC8C68700D31A99 /* SummitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8521DC8C68700D31A99 /* SummitManagedObject.swift */; };
 		6EF4F8541DC8C68700D31A99 /* SummitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8521DC8C68700D31A99 /* SummitManagedObject.swift */; };
 		6EF4F8551DC8C68700D31A99 /* SummitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8521DC8C68700D31A99 /* SummitManagedObject.swift */; };
@@ -975,9 +993,14 @@
 		6E8660B61D62001700359FA1 /* PushNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAttendeeFromOrderListRequest.swift; sourceTree = "<group>"; };
 		6E8D0CD21D79CBA7004B435A /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		6E8D10941DF87F3100A0BBDC /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		6E8D10981DF87F3B00A0BBDC /* NotificationGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationGroup.swift; sourceTree = "<group>"; };
+		6E8D109C1DF8957100A0BBDC /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdate.swift; sourceTree = "<group>"; };
 		6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E93D44A1D9AEE1F00E3302A /* RealmTrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrackGroupDataUpdate.swift; sourceTree = "<group>"; };
+		6E959E141DF5F36E002981FD /* NotificationManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManagedObject.swift; sourceTree = "<group>"; };
+		6E959E181DF61557002981FD /* NotificationGroupManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationGroupManagedObject.swift; sourceTree = "<group>"; };
 		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
 		6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleViewController.swift; sourceTree = "<group>"; };
@@ -1040,6 +1063,8 @@
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		6ED495811D792F7800749940 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Release.entitlements; sourceTree = SOURCE_ROOT; };
 		6ED495821D792F7800749940 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Debug.entitlements; sourceTree = SOURCE_ROOT; };
+		6EDA4ABD1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationGroupsViewController.swift; sourceTree = "<group>"; };
+		6EDA4ABF1DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationGroupDetailViewController.swift; sourceTree = "<group>"; };
 		6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
 		6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapViewController.swift; sourceTree = "<group>"; };
@@ -1081,6 +1106,7 @@
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
 		6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
 		6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeesForTicketOrderRequest.swift; sourceTree = "<group>"; };
+		6EF448491DFC850600BEEF1D /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		6EF4F8521DC8C68700D31A99 /* SummitManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitManagedObject.swift; sourceTree = "<group>"; };
 		6EF4F8561DC8C7D600D31A99 /* CompanyManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyManagedObject.swift; sourceTree = "<group>"; };
 		6EF4F85A1DC8CAEC00D31A99 /* EventManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManagedObject.swift; sourceTree = "<group>"; };
@@ -1318,6 +1344,7 @@
 				6E0B2F061D33F3A10058F171 /* Levels.storyboard */,
 				6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */,
 				6E9B22D71D40171800D25271 /* Venue.storyboard */,
+				6E8D109C1DF8957100A0BBDC /* Notifications.storyboard */,
 				6E5BE4191D76996600E323D3 /* Beta.entitlements */,
 				6ED495811D792F7800749940 /* Release.entitlements */,
 				6ED495821D792F7800749940 /* Debug.entitlements */,
@@ -1361,6 +1388,7 @@
 				6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */,
 				6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */,
 				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
+				6EF448491DFC850600BEEF1D /* PushNotification.swift */,
 				6E74FAF01D7C992A0018633D /* Swift Extensions */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
@@ -1432,6 +1460,8 @@
 				9D1CE1051DA43DCF0064B3B1 /* VenueFloor.swift */,
 				6E2BB3A71D63A57E0085C876 /* Video.swift */,
 				6E730B8C1DA2E254005E486B /* Page.swift */,
+				6E8D10941DF87F3100A0BBDC /* Notification.swift */,
+				6E8D10981DF87F3B00A0BBDC /* NotificationGroup.swift */,
 				6E570A321D67711500189992 /* DataUpdate */,
 			);
 			name = Model;
@@ -1735,9 +1765,17 @@
 			name = Configurations;
 			sourceTree = "<group>";
 		};
+		6E959E131DF5F347002981FD /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
 		6E99B8A71DC7D66A009CE28D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6E959E131DF5F347002981FD /* Notifications */,
 				6E99B8A81DC7D68F009CE28D /* Model.xcdatamodeld */,
 				6EF4F8621DC8D1D300D31A99 /* CoreDataExtensions.swift */,
 				6EF4F8631DC8D1D300D31A99 /* CoreDataEncodable.swift */,
@@ -1755,6 +1793,8 @@
 				6EF4F87A1DC928D700D31A99 /* ImageManagedObject.swift */,
 				6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */,
 				6E2D9FD51DC994210015C588 /* TrackManagedObject.swift */,
+				6E959E141DF5F36E002981FD /* NotificationManagedObject.swift */,
+				6E959E181DF61557002981FD /* NotificationGroupManagedObject.swift */,
 				6E2D9FE51DC9A5B90015C588 /* TrackGroupManagedObject.swift */,
 				6E2D9FD91DC9944E0015C588 /* SpeakerManagedObject.swift */,
 				6E2D9FDD1DC9A5730015C588 /* SummitTypeManagedObject.swift */,
@@ -1938,6 +1978,8 @@
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
 				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
+				6EDA4ABD1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift */,
+				6EDA4ABF1DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2378,6 +2420,7 @@
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
+				6EDA4AC11DFA7ED800ADF96D /* Notifications.storyboard in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
 				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
 				6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */,
@@ -2654,6 +2697,7 @@
 				6EF4F85D1DC8CAED00D31A99 /* EventManagedObject.swift in Sources */,
 				6E730B941DA2E40C005E486B /* Page.swift in Sources */,
 				6E0B5EB61D77C8950005F6CE /* Event.swift in Sources */,
+				6EF4484C1DFC850600BEEF1D /* PushNotification.swift in Sources */,
 				6E6FD17C1D7A1A24003D13D7 /* Production.swift in Sources */,
 				6E6FD17D1D7A1A24003D13D7 /* Staging.swift in Sources */,
 				6E0B5EB71D77C8950005F6CE /* VenueRoom.swift in Sources */,
@@ -2693,11 +2737,13 @@
 				6EA38A7A1DCB1CA000B703CE /* EventDataUpdateManagedObject.swift in Sources */,
 				6E0B5EDE1D77C8950005F6CE /* Configuration.swift in Sources */,
 				6E2D9FF01DC9B0F50015C588 /* VideoManagedObject.swift in Sources */,
+				6E959E171DF5F36E002981FD /* NotificationManagedObject.swift in Sources */,
 				6E0B5EDF1D77C8950005F6CE /* EventType.swift in Sources */,
 				6EF4F8671DC8D1D300D31A99 /* CoreDataExtensions.swift in Sources */,
 				6E2D9FE41DC9A5960015C588 /* TicketTypeManagedObject.swift in Sources */,
 				6E730B971DA2F0CC005E486B /* PageJSON.swift in Sources */,
 				6E2D9FE01DC9A5730015C588 /* SummitTypeManagedObject.swift in Sources */,
+				6E8D109B1DF87F3B00A0BBDC /* NotificationGroup.swift in Sources */,
 				6EF4F86D1DC8D1D300D31A99 /* CoreDataDecodable.swift in Sources */,
 				6E0B5EE01D77C8950005F6CE /* Venue.swift in Sources */,
 				6E5D05C81D8CBC9600451639 /* SummitDataUpdate.swift in Sources */,
@@ -2748,6 +2794,8 @@
 				6EF4F8791DC9234A00D31A99 /* VenueRoomManagedObject.swift in Sources */,
 				6E0B5F0B1D77C8950005F6CE /* PresentationDataUpdateJSON.swift in Sources */,
 				6E2D9FD81DC994210015C588 /* TrackManagedObject.swift in Sources */,
+				6E959E1B1DF61557002981FD /* NotificationGroupManagedObject.swift in Sources */,
+				6E8D10971DF87F3100A0BBDC /* Notification.swift in Sources */,
 				6E0B5F0C1D77C8950005F6CE /* TimeZone.swift in Sources */,
 				6E0B5F0E1D77C8950005F6CE /* Track.swift in Sources */,
 				6E0B5F101D77C8950005F6CE /* Image.swift in Sources */,
@@ -2825,6 +2873,7 @@
 				6E3E8C251D47D68100A29003 /* NSDate+MTDates.m in Sources */,
 				6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */,
 				6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
+				6EDA4AC01DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift in Sources */,
 				6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */,
 				6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */,
 				6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */,
@@ -2875,6 +2924,7 @@
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
 				6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */,
+				6EDA4ABE1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
@@ -2918,12 +2968,14 @@
 				6E2D9FEA1DC9B0D40015C588 /* TagManagedObject.swift in Sources */,
 				6E10A5671D10675D008CBD0C /* ImageJSON.swift in Sources */,
 				6E10A5631D10675D008CBD0C /* EventTypeJSON.swift in Sources */,
+				6EF4484A1DFC850600BEEF1D /* PushNotification.swift in Sources */,
 				6E10A56F1D10675D008CBD0C /* NonConfirmedAttendeeJSON.swift in Sources */,
 				6EF4F86B1DC8D1D300D31A99 /* CoreDataDecodable.swift in Sources */,
 				6E10A58C1D10675D008CBD0C /* Attendee.swift in Sources */,
 				6EFC6E691D2322E70087057A /* EventScheduleRequest.swift in Sources */,
 				6E10A55F1D10675D008CBD0C /* ErrorValue.swift in Sources */,
 				6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */,
+				6E8D10951DF87F3100A0BBDC /* Notification.swift in Sources */,
 				9D6AADB21DBE58030057888E /* VenueRoomDataUpdateJSON.swift in Sources */,
 				6EF4F8651DC8D1D300D31A99 /* CoreDataExtensions.swift in Sources */,
 				6E10A55D1D10675D008CBD0C /* Company.swift in Sources */,
@@ -2972,13 +3024,16 @@
 				6E99B8AA1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */,
 				6E323D1E1D77189500E8C9B3 /* WebConvertible.swift in Sources */,
 				6EA38A841DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift in Sources */,
+				6E959E151DF5F36E002981FD /* NotificationManagedObject.swift in Sources */,
 				6E2D9FE21DC9A5960015C588 /* TicketTypeManagedObject.swift in Sources */,
 				6E10A5711D10675D008CBD0C /* Presentation.swift in Sources */,
+				6E8D10991DF87F3B00A0BBDC /* NotificationGroup.swift in Sources */,
 				6E10A5741D10675D008CBD0C /* SpeakerJSON.swift in Sources */,
 				6E730B951DA2F0CB005E486B /* PageJSON.swift in Sources */,
 				6E5D05C61D8CBC9500451639 /* SummitDataUpdate.swift in Sources */,
 				6E10A59D1D10675D008CBD0C /* VenueJSON.swift in Sources */,
 				6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */,
+				6E959E191DF61557002981FD /* NotificationGroupManagedObject.swift in Sources */,
 				6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */,
 				6E2D9FD61DC994210015C588 /* TrackManagedObject.swift in Sources */,
 				6EF4F87F1DC9296100D31A99 /* VenueFloorManagedObject.swift in Sources */,
@@ -3046,6 +3101,8 @@
 				6E2D9FEB1DC9B0D40015C588 /* TagManagedObject.swift in Sources */,
 				6E2923B11D7AF8C900D14F0A /* DataUpdateJSON.swift in Sources */,
 				6EA38A7D1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift in Sources */,
+				6E8D109A1DF87F3B00A0BBDC /* NotificationGroup.swift in Sources */,
+				6E959E1A1DF61557002981FD /* NotificationGroupManagedObject.swift in Sources */,
 				6E7847F21DC9224700B8AD05 /* LocationManagedObject.swift in Sources */,
 				6E2923B21D7AF8C900D14F0A /* ImageJSON.swift in Sources */,
 				6E2923B31D7AF8C900D14F0A /* EventTypeJSON.swift in Sources */,
@@ -3061,6 +3118,7 @@
 				6EA38A811DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift in Sources */,
 				6EF4F8701DC920B800D31A99 /* EventTypeManagedObject.swift in Sources */,
 				6EEBAEA81D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */,
+				6E8D10961DF87F3100A0BBDC /* Notification.swift in Sources */,
 				6E2D9FDB1DC9944E0015C588 /* SpeakerManagedObject.swift in Sources */,
 				6EF4F8691DC8D1D300D31A99 /* CoreDataEncodable.swift in Sources */,
 				6E2923BB1D7AF8C900D14F0A /* TrackGroup.swift in Sources */,
@@ -3075,6 +3133,7 @@
 				6E2923C31D7AF8C900D14F0A /* TicketType.swift in Sources */,
 				6E2923C41D7AF8C900D14F0A /* SummitTypeJSON.swift in Sources */,
 				6E2923C61D7AF8C900D14F0A /* VenueRoomJSON.swift in Sources */,
+				6EF4484B1DFC850600BEEF1D /* PushNotification.swift in Sources */,
 				6E2D9FD71DC994210015C588 /* TrackManagedObject.swift in Sources */,
 				6E2923C81D7AF8C900D14F0A /* CompanyJSON.swift in Sources */,
 				6E2923C91D7AF8C900D14F0A /* TrackGroupJSON.swift in Sources */,
@@ -3144,6 +3203,7 @@
 				6E488F5E1DD1107500EA6B0F /* EntityController.swift in Sources */,
 				6E2924011D7AF8C900D14F0A /* TimeZone.swift in Sources */,
 				6E2924031D7AF8C900D14F0A /* Track.swift in Sources */,
+				6E959E161DF5F36E002981FD /* NotificationManagedObject.swift in Sources */,
 				6E2D9FE71DC9A5B90015C588 /* TrackGroupManagedObject.swift in Sources */,
 				6E2D9FFB1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */,
 				6EF4F87C1DC928D700D31A99 /* ImageManagedObject.swift in Sources */,

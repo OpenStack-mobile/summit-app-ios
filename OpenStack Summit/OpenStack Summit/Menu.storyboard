@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -128,8 +128,18 @@
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Rpa-rB-CVT"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UM-eh-Q5r">
+                                                <rect key="frame" x="20" y="213" width="400" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="NOTIFICATIONS" image="about"/>
+                                                <connections>
+                                                    <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="rfy-uJ-Ogj"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbZ-RL-hoW" userLabel="My Profile Button">
-                                                <rect key="frame" x="22" y="214" width="400" height="40"/>
+                                                <rect key="frame" x="22" y="261" width="400" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -180,6 +190,7 @@
                         <outlet property="loginButton" destination="2XL-uy-eo6" id="Vaa-tV-baw"/>
                         <outlet property="myProfileButton" destination="KbZ-RL-hoW" id="cA0-OY-ozY"/>
                         <outlet property="nameLabel" destination="9Is-LK-cIs" id="CjQ-hd-gAQ"/>
+                        <outlet property="notificationsButton" destination="4UM-eh-Q5r" id="9cr-dk-F8B"/>
                         <outlet property="peopleButton" destination="7my-lK-e1A" id="lhz-vk-cVT"/>
                         <outlet property="pictureImageView" destination="XVe-T6-xnI" id="g6c-Bh-kwt"/>
                         <outlet property="searchTextView" destination="PdW-V6-JSm" id="eUO-2w-PlL"/>
@@ -267,7 +278,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhW-rF-zd9" id="qqQ-ba-eD9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="oNa-qV-csu">
@@ -308,7 +319,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A6h-6z-xpB" id="rpb-OE-50j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>

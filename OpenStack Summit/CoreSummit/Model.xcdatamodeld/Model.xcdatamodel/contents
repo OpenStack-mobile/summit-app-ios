@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16B2555" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16C63a" minimumToolsVersion="Xcode 7.0">
     <entity name="Attendee" representedClassName=".AttendeeManagedObject" syncable="YES">
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
@@ -87,7 +87,22 @@
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendeeRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="memberAttendeeRole" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AttendeeFeedback" inverseName="member" inverseEntity="AttendeeFeedback" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="member" inverseEntity="Notification" syncable="YES"/>
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
+    </entity>
+    <entity name="Notification" representedClassName=".NotificationManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="message" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" syncable="YES"/>
+        <relationship name="group" maxCount="1" deletionRule="Nullify" destinationEntity="NotificationGroup" inverseName="notifications" inverseEntity="NotificationGroup" syncable="YES"/>
+        <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="notifications" inverseEntity="Member" syncable="YES"/>
+    </entity>
+    <entity name="NotificationGroup" representedClassName=".NotificationGroupManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Notification" inverseName="group" inverseEntity="Notification" syncable="YES"/>
     </entity>
     <entity name="Presentation" representedClassName=".PresentationManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" syncable="YES"/>
@@ -226,7 +241,9 @@
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
-        <element name="Member" positionX="0" positionY="144" width="128" height="210"/>
+        <element name="Member" positionX="0" positionY="144" width="128" height="225"/>
+        <element name="Notification" positionX="18" positionY="162" width="128" height="135"/>
+        <element name="NotificationGroup" positionX="27" positionY="171" width="128" height="105"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="135"/>
         <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="255"/>

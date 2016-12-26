@@ -32,6 +32,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var notificationsButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
     
@@ -120,21 +121,31 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         let item: MenuItem
         
         switch sender {
+            
         case eventsButton:
             showEvents()
             item = .Events
+            
         case venuesButton:
             showVenues()
             item = .Venues
+            
         case peopleButton:
             showSpeakers()
             item = .People
+            
         case myProfileButton:
             showMyProfile()
             item = .MyProfile
+            
         case aboutButton:
             showAbout()
             item = .About
+            
+        case notificationsButton:
+            showNotifications()
+            item = .Notifications
+            
         default: fatalError("Invalid sender \(sender)")
         }
         
@@ -177,6 +188,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
         aboutButton.alpha = 0.5
+        notificationsButton.alpha = 0.5
     }
     
     private func highlight(item: MenuItem) {
@@ -194,6 +206,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             myProfileButton.alpha = 1
         case .About:
             aboutButton.alpha = 1
+        case .Notifications:
+            notificationsButton.alpha = 1
             
         // not applicable
         case .Login: break
@@ -279,9 +293,20 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     func showAbout() {
         
+        highlight(.About)
+        
         let aboutViewController = R.storyboard.menu.aboutViewController()!
         
         show(aboutViewController)
+    }
+    
+    func showNotifications() {
+        
+        highlight(.Notifications)
+        
+        let notificationsViewController = R.storyboard.notifications.notificationGroupsViewController()!
+        
+        show(notificationsViewController)
     }
     
     private func showSearch(for term: String) {
@@ -473,6 +498,7 @@ enum MenuItem {
     case Events
     case Venues
     case People
-    case MyProfile
     case About
+    case Notifications
+    case MyProfile
 }

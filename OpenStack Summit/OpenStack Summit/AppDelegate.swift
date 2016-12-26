@@ -122,15 +122,26 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        var text: String?
+        
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? NSDictionary {
                 if let message = alert["message"] as? String {
+                    text = message
                     SweetAlert().showAlert("", subTitle: message, style: AlertStyle.None)
                 }
             } else if let alert = aps["alert"] as? String {
+                text = alert
                 SweetAlert().showAlert("", subTitle: alert, style: AlertStyle.None)
             }
         }
+        
+        if let pushText = text {
+            
+            Store.shared.process(pushNotification: pushText)
+        }
+        
         completionHandler(UIBackgroundFetchResult.NoData)
     }
     
