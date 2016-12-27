@@ -87,8 +87,8 @@
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendeeRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="memberAttendeeRole" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AttendeeFeedback" inverseName="member" inverseEntity="AttendeeFeedback" syncable="YES"/>
-        <relationship name="notifications" optional="YES" toMany="YES" deletionRule="Cascade" syncable="YES"/>
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
+        <relationship name="teamPermissions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamPermission" syncable="YES"/>
     </entity>
     <entity name="Presentation" representedClassName=".PresentationManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>

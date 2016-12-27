@@ -28,7 +28,31 @@ extension TeamPermission: CoreDataDecodable {
     
     public init(managedObject: TeamPermissionManagedObject) {
         
+        let team: TeamManagedObject
         
+        let membership: TeamPermission.Membership
+        
+        if let teamOwner = managedObject.teamOwner {
+            
+            team = teamOwner
+            
+            membership = .owner
+            
+        } else if let teamMember = managedObject.teamMember {
+            
+            team = teamMember
+            
+            membership = .member
+            
+        } else {
+            
+            fatalError("Missing team: \(managedObject)")
+        }
+        
+        self.team = team.identifier
+        self.membership = membership
+        self.type = PermissionType(rawValue: managedObject.type)!
+        self.member = TeamMember(managedObject: managedObject.member)
     }
 }
 

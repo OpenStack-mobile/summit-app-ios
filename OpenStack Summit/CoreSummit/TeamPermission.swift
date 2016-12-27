@@ -8,13 +8,15 @@
 
 import SwiftFoundation
 
-public struct TeamPermission: Equatable, Hashable {
+public struct TeamPermission: Equatable {
     
     public var type: PermissionType
     
     public var team: Identifier
     
-    public var member: Member
+    public var member: TeamMember
+    
+    public var membership: Membership
 }
 
 // MARK: - Hashable
@@ -23,7 +25,7 @@ public extension TeamPermission {
     
     var hashValue: Int {
         
-        return "\(type.hashValue),\(team.hashValue),\(member.hashValue)".hashValue
+        return "\(type.hashValue),\(team.hashValue),\(member.hashValue),\(membership.hashValue)".hashValue
     }
 }
 
@@ -33,7 +35,7 @@ public func == (lhs: TeamPermission, rhs: TeamPermission) -> Bool {
     
     return lhs.type == rhs.type
         && lhs.team == rhs.team
-        && lhs.member == rhs.member
+        && lhs.membership == rhs.membership
 }
 
 // MARK: - Supporting Types
@@ -45,5 +47,11 @@ public extension TeamPermission {
         case admin
         case read
         case write
+    }
+    
+    public enum Membership {
+        
+        case owner
+        case member
     }
 }
