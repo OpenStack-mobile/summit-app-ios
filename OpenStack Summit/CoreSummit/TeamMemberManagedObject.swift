@@ -25,9 +25,9 @@ public final class TeamMemberManagedObject: Entity {
     
     // Inverse relationship
     
-    @NSManaged public var teamMember: Set<TeamManagedObject>
+    @NSManaged public var teamMember: Set<TeamPermissionManagedObject>
     
-    @NSManaged public var teamOwner: Set<TeamManagedObject>
+    @NSManaged public var teamOwner: Set<TeamPermissionManagedObject>
 }
 
 // MARK: - Encoding

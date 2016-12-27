@@ -180,7 +180,7 @@
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="messages" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="TeamPermission" syncable="YES">
-        <attribute name="permission" attributeType="String" syncable="YES"/>
+        <attribute name="type" attributeType="String" syncable="YES"/>
         <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="TeamMember" inverseName="permissions" inverseEntity="TeamMember" syncable="YES"/>
         <relationship name="teamMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
         <relationship name="teamOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="owner" inverseEntity="Team" syncable="YES"/>
