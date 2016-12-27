@@ -2,44 +2,63 @@
 //  TeamMember.swift
 //  OpenStack Summit
 //
-//  Created by Alsey Coleman Miller on 12/26/16.
+//  Created by Alsey Coleman Miller on 12/27/16.
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
 import SwiftFoundation
 
-public struct TeamMember: Named {
+public struct TeamMember: Equatable, Hashable {
     
-    public let identifier: Identifier
+    public var permission: PermissionType
     
-    public var firstName: String
+    public var team: Identifier
     
-    public var lastName: String
+    public var member: Member
     
-    public var pictureURL: String
+    public var membership: Membership
+}
+
+// MARK: - Hashable
+
+public extension TeamPermission {
     
-    public var twitter: String?
-    
-    public var irc: String?
+    var hashValue: Int {
+        
+        return "\(type.hashValue),\(team.hashValue),\(member.hashValue),\(membership.hashValue)".hashValue
+    }
 }
 
 // MARK: - Equatable
 
-public func == (lhs: TeamMember, rhs: TeamMember) -> Bool {
+public func == (lhs: TeamPermission, rhs: TeamPermission) -> Bool {
     
-    return lhs.identifier == rhs.identifier &&
-        lhs.firstName == rhs.firstName &&
-        lhs.lastName == rhs.lastName &&
-        lhs.pictureURL == rhs.pictureURL &&
-        lhs.twitter == rhs.twitter &&
-        lhs.irc == rhs.irc
+    return lhs.type == rhs.type
+        && lhs.team == rhs.team
+        && lhs.membership == rhs.membership
 }
 
-// MARK: - Person
+// MARK: - Supporting Types
 
-extension TeamMember: Person {
+public enum PermissionType: String {
     
-    public var title: String? { return nil }
+    case admin
+    case read
+    case write
+}
+
+public extension TeamPermission {
     
-    public var biography: String? { return nil }
+    public enum PermissionType: String {
+        
+        case admin
+        case read
+        case write
+    }
+    
+    public enum Membership {
+        
+        case owner
+        case member
+    }
 }
