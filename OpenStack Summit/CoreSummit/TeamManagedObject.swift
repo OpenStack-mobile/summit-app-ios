@@ -21,7 +21,7 @@ public final class TeamManagedObject: Entity {
     
     // Inverse Relationships
     
-    @NSManaged public var notifications: Set<NotificationManagedObject>
+    @NSManaged public var messages: Set<TeamMessageManagedObject>
 }
 
 // MARK: - Encoding

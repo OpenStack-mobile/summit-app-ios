@@ -10,55 +10,46 @@ import SwiftFoundation
 
 public struct TeamMember: Equatable, Hashable {
     
-    public var permission: PermissionType
-    
     public var team: Identifier
     
     public var member: Member
     
-    public var membership: Membership
+    public var permission: TeamPermission
+    
+    public var membership: TeamMembership
 }
 
 // MARK: - Hashable
 
-public extension TeamPermission {
+public extension TeamMember {
     
     var hashValue: Int {
         
-        return "\(type.hashValue),\(team.hashValue),\(member.hashValue),\(membership.hashValue)".hashValue
+        return "\(team.hashValue),\(member.hashValue),\(permission.hashValue),\(membership.hashValue)".hashValue
     }
 }
 
 // MARK: - Equatable
 
-public func == (lhs: TeamPermission, rhs: TeamPermission) -> Bool {
+public func == (lhs: TeamMember, rhs: TeamMember) -> Bool {
     
-    return lhs.type == rhs.type
-        && lhs.team == rhs.team
+    return lhs.team == rhs.team
+        && lhs.member == rhs.member
+        && lhs.permission == rhs.permission
         && lhs.membership == rhs.membership
 }
 
 // MARK: - Supporting Types
 
-public enum PermissionType: String {
+public enum TeamPermission: String {
     
     case admin
     case read
     case write
 }
 
-public extension TeamPermission {
+public enum TeamMembership {
     
-    public enum PermissionType: String {
-        
-        case admin
-        case read
-        case write
-    }
-    
-    public enum Membership {
-        
-        case owner
-        case member
-    }
+    case owner
+    case member
 }

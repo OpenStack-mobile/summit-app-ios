@@ -9,25 +9,17 @@
 import Foundation
 import CoreData
 
-public final class TeamMemberManagedObject: Entity {
-    
-    @NSManaged public var firstName: String
-    
-    @NSManaged public var lastName: String
-    
-    @NSManaged public var pictureURL: String
-    
-    @NSManaged public var twitter: String?
-    
-    @NSManaged public var irc: String?
+public final class TeamMemberManagedObject: NSManagedObject {
     
     @NSManaged public var permission: String
     
-    // Inverse relationship
+    @NSManaged public var member: MemberManagedObject
     
-    @NSManaged public var teamMember: Set<TeamPermissionManagedObject>
+    // Inverse Relationships
     
-    @NSManaged public var teamOwner: Set<TeamPermissionManagedObject>
+    @NSManaged public var teamOwner: TeamManagedObject?
+    
+    @NSManaged public var teamMember: TeamManagedObject?
 }
 
 // MARK: - Encoding
@@ -36,12 +28,31 @@ extension TeamMember: CoreDataDecodable {
     
     public init(managedObject: TeamMemberManagedObject) {
         
-        self.firstName = managedObject.firstName
-        self.lastName = managedObject.lastName
-        self.pictureURL = managedObject.pictureURL
-        self.twitter = managedObject.twitter
-        self.irc = managedObject.irc
-        self.permission = Permission(rawValue: managedObject.permission)!
+        let team: TeamManagedObject
+        
+        let membership: TeamMembership
+        
+        if let teamOwner = managedObject.teamOwner {
+            
+            team = teamOwner
+            
+            membership = .owner
+            
+        } else if let teamMember = managedObject.teamMember {
+            
+            team = teamMember
+            
+            membership = .member
+            
+        } else {
+            
+            fatalError("Missing team: \(managedObject)")
+        }
+        
+        self.team = team.identifier
+        self.membership = membership
+        self.permission = TeamPermission(rawValue: managedObject.permission)!
+        self.member = TeamMember(managedObject: managedObject.member)
     }
 }
 
@@ -49,17 +60,24 @@ extension TeamMember: CoreDataEncodable {
     
     public func save(context: NSManagedObjectContext) throws -> TeamMemberManagedObject {
         
-        let managedObject = try cached(context)
+        guard let entity = context.persistentStoreCoordinator?.managedObjectModel[ManagedObject.self]
+            else { fatalError("Could not find entity") }
         
-        managedObject.firstName = firstName
-        managedObject.lastName = lastName
-        managedObject.pictureURL = pictureURL
-        managedObject.twitter = twitter
-        managedObject.irc = irc
-        managedObject.permission = permission.rawValue
+        let resourceID = self.identifier.rawValue as NSString
         
-        managedObject.didCache()
+        let managedObject = try context.findOrCreate(entity,
+                                                     resourceID: resourceID,
+                                                     identifierProperty: "uuid",
+                                                     returnsObjectsAsFaults: true,
+                                                     includesSubentities: false) as ManagedObject
         
-        return managedObject
+        
     }
+}
+
+// MARK: - Fetches
+
+public extension TeamMemberManagedObject {
+    
+    static func find()
 }
