@@ -10,22 +10,24 @@ import SwiftFoundation
 
 public extension Team {
     
-    public struct Member: Named {
-        
-        public let identifier: Identifier
-        
-        public var firstName: String
-        
-        public var lastName: String
-        
-        public var pictureURL: String
-        
-        public var twitter: String?
-        
-        public var irc: String?
-        
-        public var permission: Permission
-    }
+    public typealias Member = TeamMember
+}
+
+public struct TeamMember: Named {
+    
+    public let identifier: Identifier
+    
+    public var firstName: String
+    
+    public var lastName: String
+    
+    public var pictureURL: String
+    
+    public var twitter: String?
+    
+    public var irc: String?
+    
+    public var permission: Permission
 }
 
 // MARK: - Equatable
