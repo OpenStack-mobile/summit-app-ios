@@ -8,11 +8,6 @@
 
 import SwiftFoundation
 
-public extension Team {
-    
-    public typealias Member = TeamMember
-}
-
 public struct TeamMember: Named {
     
     public let identifier: Identifier
@@ -26,40 +21,25 @@ public struct TeamMember: Named {
     public var twitter: String?
     
     public var irc: String?
-    
-    public var permission: Permission
 }
 
 // MARK: - Equatable
 
-public func == (lhs: Team.Member, rhs: Team.Member) -> Bool {
+public func == (lhs: TeamMember, rhs: TeamMember) -> Bool {
     
     return lhs.identifier == rhs.identifier &&
         lhs.firstName == rhs.firstName &&
         lhs.lastName == rhs.lastName &&
         lhs.pictureURL == rhs.pictureURL &&
         lhs.twitter == rhs.twitter &&
-        lhs.irc == rhs.irc &&
-        lhs.permission == rhs.permission
+        lhs.irc == rhs.irc
 }
 
 // MARK: - Person
 
-extension Team.Member: Person {
+extension TeamMember: Person {
     
     public var title: String? { return nil }
     
     public var biography: String? { return nil }
-}
-
-// MARK: - Supporting Types
-
-public extension Team.Member {
-    
-    public enum Permission: String {
-        
-        case admin
-        case read
-        case write
-    }
 }
