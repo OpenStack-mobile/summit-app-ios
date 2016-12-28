@@ -27,9 +27,9 @@ extension Team: JSONDecodable {
             let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
             let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int,
             let ownerJSON = JSONObject[JSONKey.owner.rawValue],
-            let owner = TeamMember(JSONValue: ownerJSON),
+            let owner = TeamMember(JSONValue: ownerJSON, parameters: (team: identifier, membership: .owner)),
             let membersJSONArray = JSONObject[JSONKey.members.rawValue]?.arrayValue,
-            let members = TeamMember.fromJSON(membersJSONArray)
+            let members = TeamMember.fromJSON(membersJSONArray, parameters: (team: identifier, membership: .member))
             else { return nil }
         
         self.identifier = identifier

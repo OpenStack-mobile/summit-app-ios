@@ -16,10 +16,21 @@ public extension TeamMember {
     }
 }
 
-extension TeamMember: JSONDecodable {
+extension TeamMember: JSONParametrizedDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(JSONValue: JSON.Value, parameters: (team: Identifier, membership: TeamMembership)) {
         
-        guard let member = Member(
+        guard let JSONObject = JSONValue.objectValue,
+            let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
+            let permission = TeamPermission(rawValue: permissionString),
+            let member = Member(JSONValue: JSONValue)
+            else { return nil }
+        
+        self.member = member
+        self.permission = permission
+        
+        // not really from JSON
+        self.team = parameters.team
+        self.membership = parameters.membership
     }
 }
