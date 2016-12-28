@@ -36,5 +36,6 @@ public func == <T: Unique> (lhs: Fault<T>, rhs: Fault<T>) -> Bool {
     switch (lhs, rhs) {
     case let (.identifier(lhsValue), .identifier(rhsValue)): return lhsValue == rhsValue
     case let (.value(lhsValue), .value(rhsValue)): return lhsValue == rhsValue
+    default: return false
     }
 }

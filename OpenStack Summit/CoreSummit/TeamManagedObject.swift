@@ -8,12 +8,17 @@
 
 import Foundation
 import CoreData
+import SwiftFoundation
 
 public final class TeamManagedObject: Entity {
     
     @NSManaged public var name: String
     
     @NSManaged public var descriptionText: String
+    
+    @NSManaged public var created: NSDate
+    
+    @NSManaged public var updatedDate: NSDate
     
     @NSManaged public var owner: TeamMemberManagedObject
     
@@ -32,6 +37,8 @@ extension Team: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.name = managedObject.name
+        self.created = Date(foundation: managedObject.created)
+        self.updated = Date(foundation: managedObject.updatedDate)
         self.descriptionText = managedObject.descriptionText
         self.owner = TeamMember(managedObject: managedObject.owner)
         self.members = TeamMember.from(managedObjects: managedObject.members)
@@ -46,6 +53,8 @@ extension Team: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
+        managedObject.created = created.toFoundation()
+        managedObject.updatedDate = updated.toFoundation()
         managedObject.owner = try context.relationshipFault(owner)
         managedObject.members = try context.relationshipFault(members)
         

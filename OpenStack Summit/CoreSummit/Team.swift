@@ -20,9 +20,9 @@ public struct Team: Named {
     
     public var updated: Date
     
-    public var owner: TeamPermission
+    public var owner: TeamMember
     
-    public var members: Set<TeamPermission>
+    public var members: Set<TeamMember>
 }
 
 // MARK: - Equatable

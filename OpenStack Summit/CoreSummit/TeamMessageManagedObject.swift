@@ -11,12 +11,12 @@ import CoreData
 import SwiftFoundation
 
 public final class TeamMessageManagedObject: Entity {
-    
-    @NSManaged public var team: TeamManagedObject
-    
+        
     @NSManaged public var body: String
     
     @NSManaged public var created: NSDate
+    
+    @NSManaged public var team: TeamManagedObject
     
     @NSManaged public var from: MemberManagedObject
 }
