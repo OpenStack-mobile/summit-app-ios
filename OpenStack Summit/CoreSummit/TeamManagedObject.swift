@@ -14,7 +14,7 @@ public final class TeamManagedObject: Entity {
     
     @NSManaged public var name: String
     
-    @NSManaged public var descriptionText: String
+    @NSManaged public var descriptionText: String?
     
     @NSManaged public var created: NSDate
     

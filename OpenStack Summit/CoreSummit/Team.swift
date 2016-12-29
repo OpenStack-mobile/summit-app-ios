@@ -14,7 +14,7 @@ public struct Team: Named {
     
     public var name: String
     
-    public var descriptionText: String
+    public var descriptionText: String?
     
     public var created: Date
     
