@@ -205,7 +205,9 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(environment.configuration.serverURL)/summits/read"],
+            scopes: ["\(environment.configuration.serverURL)/summits/read",
+                "\(environment.configuration.serverURL)/members/read"
+            ],
             clientSecret: environment.configuration.serviceAccount.secret
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
