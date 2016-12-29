@@ -167,7 +167,7 @@ final class StoreTests: XCTestCase {
         
         let expectation = expectationWithDescription("API Request")
         
-        store.members("Jimmy") { (response) in
+        store.members(MemberListRequest.Filter(value: "Jimmy", property: .firstName)) { (response) in
             
             switch response {
                 

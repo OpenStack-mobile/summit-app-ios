@@ -12,7 +12,7 @@ public extension Member {
     
     enum JSONKey: String {
         
-        case first_name, last_name, title, bio, irc, twitter, member_id, pic, speaker, schedule
+        case id, first_name, last_name, title, bio, irc, twitter, member_id, pic, speaker, schedule
     }
 }
 
@@ -21,7 +21,8 @@ extension Member: JSONDecodable {
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int,
+            let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int
+                ?? JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String
