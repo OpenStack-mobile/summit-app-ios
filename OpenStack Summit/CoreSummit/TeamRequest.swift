@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func createTeam(name: String, description: String? = nil, completion: (ErrorValue<Team>) -> ()) {
+    func create(team name: String, description: String? = nil, completion: (ErrorValue<Team>) -> ()) {
         
         let URI = "api/v1/teams"
         
@@ -20,11 +20,11 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDJSON)
         
+        let context = privateQueueManagedObjectContext
+        
         var jsonDictionary = [String: AnyObject]()
         jsonDictionary["name"] = name
         jsonDictionary["description"] = description
-        
-        let context = privateQueueManagedObjectContext
         
         http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
             
@@ -32,6 +32,7 @@ public extension Store {
             guard error == nil
                 else { completion(.Error(error!)); return }
             
+            // parse
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let identifier = jsonObject["id"]?.rawValue as? Int
@@ -55,6 +56,166 @@ public extension Store {
                 // success
                 completion(.Value(team))
             }
+        }
+    }
+    
+    func update(team identifier: Identifier, name: String, description: String? = nil, completion: (ErrorType?) -> ()) {
+        
+        let uri = "api/v1/teams/\(identifier)"
+        
+        let url = environment.configuration.serverURL + uri
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        let context = privateQueueManagedObjectContext
+        
+        var jsonDictionary = [String: AnyObject]()
+        jsonDictionary["name"] = name
+        jsonDictionary["description"] = description
+        
+        http.PUT(url, parameters: jsonDictionary)  { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(error!); return }
+            
+            // update cache
+            try! context.performErrorBlockAndWait {
+                
+                if let managedObject = try TeamManagedObject.find(identifier, context: context) {
+                    
+                    managedObject.name = name
+                    
+                    managedObject.descriptionText = description
+                    
+                    managedObject.updatedDate = NSDate()
+                    
+                    managedObject.didCache()
+                    
+                    try context.save()
+                }
+            }
+            
+            // success
+            completion(nil)
+        }
+    }
+    
+    func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
+        
+        let URI = "api/v1/teams/\(identifier)"
+        
+        let URL = environment.configuration.serverURL + URI
+        
+        let http = self.createHTTP(.ServiceAccount)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.GET(URL) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            guard let json = JSON.Value(string: responseObject as! String),
+                let entity = Team(JSONValue: json)
+                else { completion(.Error(Error.InvalidResponse)); return }
+            
+            // cache
+            try! context.performErrorBlockAndWait { try entity.save(context) }
+            
+            // success
+            completion(.Value(entity))
+        }
+    }
+    
+    func delete(team identifier: Identifier, completion: (ErrorType?) -> ()) {
+        
+        let uri = "api/v1/teams/\(identifier)"
+        
+        let url = environment.configuration.serverURL + uri
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.DELETE(url) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(error!); return }
+            
+            // remove from cache
+            try! context.performErrorBlockAndWait {
+                
+                if let managedObject = try TeamManagedObject.find(identifier, context: context) {
+                    
+                    context.deleteObject(managedObject)
+                    
+                    try context.save()
+                }
+            }
+            
+            // success
+            completion(nil)
+        }
+    }
+    
+    /*
+    func add(member memberIdentifier: Identifier, to team: Identifier, permission: TeamPermission = .read, completion: (ErrorValue<TeamMember>) -> ()) {
+        
+        let uri = "api/v1/teams/\(team)/members/\(memberIdentifier)"
+        
+        let url = environment.configuration.serverURL + uri
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.POST(url, parameters: ["permissions": permission.rawValue]) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            guard let json = JSON.Value(string: responseObject as! String),
+                let jsonObject = json.objectValue,
+                let identifier = jsonObject["id"]?.rawValue as? Int
+                else { completion(.Error(Error.InvalidResponse)); return }
+            
+            
+        }
+    }*/
+    
+    func remove(member memberIdentifier: Identifier, from team: Identifier, completion: (ErrorType?) -> ()) {
+        
+        let uri = "api/v1/teams/\(team)/members/\(memberIdentifier)"
+        
+        let url = environment.configuration.serverURL + uri
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.DELETE(url) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(error!); return }
+            
+            // remove from cache
+            try! context.performErrorBlockAndWait {
+                
+                if let managedObject = try TeamMemberManagedObject.find(team: team, member: memberIdentifier, context: context) {
+                    
+                    context.deleteObject(managedObject)
+                    
+                    try context.save()
+                }
+            }
+            
+            // success
+            completion(nil)
         }
     }
 }

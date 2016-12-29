@@ -189,7 +189,8 @@ public final class Store {
                 "\(environment.configuration.serverURL)/summits/read",
                 "\(environment.configuration.serverURL)/summits/write",
                 "\(environment.configuration.serverURL)/summits/read-external-orders",
-                "\(environment.configuration.serverURL)/summits/confirm-external-orders"
+                "\(environment.configuration.serverURL)/summits/confirm-external-orders",
+                "\(environment.configuration.serverURL)/teams/write"
             ],
             clientSecret: environment.configuration.openID.secret,
             isWebView: true
@@ -206,7 +207,8 @@ public final class Store {
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
             scopes: ["\(environment.configuration.serverURL)/summits/read",
-                "\(environment.configuration.serverURL)/members/read"
+                "\(environment.configuration.serverURL)/members/read",
+                "\(environment.configuration.serverURL)/teams/read"
             ],
             clientSecret: environment.configuration.serviceAccount.secret
         )
