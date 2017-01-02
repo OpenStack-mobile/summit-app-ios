@@ -12,15 +12,15 @@ public struct TeamInvitation: Unique {
     
     public let identifier: Identifier
     
-    public var team: Identifier
+    public let team: Identifier
     
-    public var owner: Identifier
+    public let inviter: Identifier
     
-    public var inviter: Identifier
+    public let invitee: Identifier
     
-    public var permission: TeamPermission
+    public let permission: TeamPermission
     
-    public var created: Date
+    public let created: Date
 }
 
 // MARK: - Equatable
@@ -29,7 +29,6 @@ public func == (lhs: TeamInvitation, rhs: TeamInvitation) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.team == rhs.team
-        && lhs.owner == rhs.owner
         && lhs.inviter == rhs.inviter
         && lhs.permission == rhs.permission
         && lhs.created == rhs.created
