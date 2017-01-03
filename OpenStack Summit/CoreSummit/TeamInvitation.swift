@@ -30,6 +30,7 @@ public func == (lhs: TeamInvitation, rhs: TeamInvitation) -> Bool {
     return lhs.identifier == rhs.identifier
         && lhs.team == rhs.team
         && lhs.inviter == rhs.inviter
+        && lhs.invitee == rhs.invitee
         && lhs.permission == rhs.permission
         && lhs.created == rhs.created
 }
