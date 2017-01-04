@@ -32,9 +32,9 @@ extension TeamInvitation: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.created = Date(foundation: managedObject.created)
         self.permission = TeamPermission(rawValue: managedObject.permission)!
-        self.invitee = managedObject.invitee.identifier
-        self.inviter = managedObject.inviter.identifier
-        self.team = managedObject.team.identifier
+        self.invitee = Member(managedObject: managedObject.invitee)
+        self.inviter = Member(managedObject: managedObject.inviter)
+        self.team = Team(managedObject: managedObject.team)
     }
 }
 

@@ -10,13 +10,15 @@ import Foundation
 import CoreData
 import SwiftFoundation
 
-public final class PageController<Item: JSONDecodable> {
+public final class PageController<Item> {
     
     // MARK: - Properties
     
     public let perPage: Int
     
     public var fetch: (page: Int, perPage: Int, response: (ErrorValue<Page<Item>>) -> ()) -> ()
+    
+    public var callback = PageControllerCallback<Item>()
     
     public let operationQueue: NSOperationQueue
     
@@ -47,6 +49,8 @@ public final class PageController<Item: JSONDecodable> {
     public func refresh() {
         
         self.pages = []
+        
+        self.callback.reloadData()
     }
     
     public func loadNextPage() {
@@ -61,7 +65,9 @@ public final class PageController<Item: JSONDecodable> {
         
         isLoading = true
         
-        self.fetch(page: nextPage, perPage: perPage) { [weak self] (response) in
+        callback.willLoadData()
+        
+        fetch(page: nextPage, perPage: perPage) { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -71,16 +77,14 @@ public final class PageController<Item: JSONDecodable> {
                 
                 switch response {
                     
-                case let .Error(error):
-                    
-                    
+                case .Error: break
                     
                 case let .Value(value):
                     
-                    controller.pages += value
-                    
-                    
+                    controller.pages.append(value)
                 }
+                
+                controller.callback.didLoadNextPage(response)
             }
         }
     }
@@ -140,11 +144,11 @@ public enum PageControllerData<Item> {
     case item(Item)
 }
 
-public struct PageControllerCallback<Item: JSONDecodable> {
+public struct PageControllerCallback<Item> {
     
     public var reloadData: () -> () = { _ in }
     
     public var willLoadData: () -> () = { _ in }
     
-    public var didLoadNextPage: (Page<Item>) -> () = { _ in }
+    public var didLoadNextPage: (ErrorValue<Page<Item>>) -> () = { _ in }
 }
