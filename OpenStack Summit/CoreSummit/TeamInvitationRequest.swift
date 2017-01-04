@@ -39,8 +39,31 @@ public extension Store {
         }
     }
     
-    func invitations(completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
+    func invitations(page: Int = 1, perPage: Int = 10, completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
         
+        let uri = "api/v1/members/me/team-invitations?page=\(page)&per_page=\(perPage)"
         
+        let url = environment.configuration.serverURL + uri
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.GET(url) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            guard let json = JSON.Value(string: responseObject as! String),
+                let page = Page<TeamInvitation>(JSONValue: json)
+                else { completion(.Error(Error.InvalidResponse)); return }
+            
+            // cache
+            try! context.performErrorBlockAndWait { try page.items.save(context) }
+            
+            // success
+            completion(.Value(page))
+        }
     }
 }
