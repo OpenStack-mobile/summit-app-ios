@@ -41,7 +41,7 @@ public extension Store {
     
     func invitations(page: Int = 1, perPage: Int = 10, completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
         
-        let uri = "api/v1/members/me/team-invitations?page=\(page)&per_page=\(perPage)"
+        let uri = "api/v1/members/me/team-invitations?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter"
         
         let url = environment.configuration.serverURL + uri
         

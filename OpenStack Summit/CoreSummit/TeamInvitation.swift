@@ -12,11 +12,11 @@ public struct TeamInvitation: Unique {
     
     public let identifier: Identifier
     
-    public let team: Identifier
+    public let team: Team
     
-    public let inviter: Identifier
+    public let inviter: Member
     
-    public let invitee: Identifier
+    public let invitee: Member
     
     public let permission: TeamPermission
     

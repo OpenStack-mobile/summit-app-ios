@@ -39,9 +39,9 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            context.performBlock {
+            try! context.performErrorBlockAndWait {
                 
-                guard let memberManagedObject = try! self.authenticatedMember(context)
+                guard let memberManagedObject = try self.authenticatedMember(context)
                     else { fatalError("Not authenticated") }
                 
                 // create team and cache
@@ -51,7 +51,7 @@ public extension Store {
                 
                 let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [])
                 
-                try! team.save(context)
+                try team.save(context)
                 
                 try context.save()
                 
