@@ -486,6 +486,7 @@
 		6EB1FE001E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE011E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE021E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
+		6EB1FE031E1DA6360048045D /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
@@ -2809,6 +2810,7 @@
 				6E0B5ECF1D77C8950005F6CE /* TicketType.swift in Sources */,
 				6E0B5ED01D77C8950005F6CE /* SummitTypeJSON.swift in Sources */,
 				6E0B5ED21D77C8950005F6CE /* VenueRoomJSON.swift in Sources */,
+				6EB1FE031E1DA6360048045D /* MemberJSON.swift in Sources */,
 				6E2D9FF81DC9D2FE0015C588 /* AttendeeManagedObject.swift in Sources */,
 				6E0B5ED41D77C8950005F6CE /* CompanyJSON.swift in Sources */,
 				6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */,

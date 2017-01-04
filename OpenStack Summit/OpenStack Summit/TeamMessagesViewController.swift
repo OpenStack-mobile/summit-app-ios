@@ -15,9 +15,9 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
     
     // MARK: - Properties
     
-    var group: Identifier? {
+    var team: Identifier? {
         
-        didSet { configureView() }
+        didSet { if isViewLoaded() { configureView() } }
     }
     
     // MARK: - Properties
@@ -44,7 +44,7 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
             
             let sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             
-            self.fetchedResultsController = NSFetchedResultsController(Notification.self,
+            self.fetchedResultsController = NSFetchedResultsController(TeamMessage.self,
                                                                        delegate: self,
                                                                        predicate: predicate,
                                                                        sortDescriptors: sortDescriptors,
