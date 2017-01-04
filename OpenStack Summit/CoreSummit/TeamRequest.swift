@@ -53,6 +53,8 @@ public extension Store {
                 
                 try! team.save(context)
                 
+                try context.save()
+                
                 // success
                 completion(.Value(team))
             }
@@ -122,7 +124,12 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! context.performErrorBlockAndWait { try entity.save(context) }
+            try! context.performErrorBlockAndWait {
+                
+                try entity.save(context)
+                
+                try context.save()
+            }
             
             // success
             completion(.Value(entity))

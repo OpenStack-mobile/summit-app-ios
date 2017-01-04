@@ -44,7 +44,12 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
-            try! context.performErrorBlockAndWait { try page.items.save(context) }
+            try! context.performErrorBlockAndWait {
+                
+                try page.items.save(context)
+                
+                try context.save()
+            }
             
             // success
             completion(.Value(page))
@@ -105,6 +110,8 @@ public extension Store {
                     
                     managedObject.averageFeedback = averageFeedback
                 }
+                
+                try context.save()
             }
             
             // success
