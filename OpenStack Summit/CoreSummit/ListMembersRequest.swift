@@ -114,6 +114,3 @@ public extension MemberListRequest {
         public init() { self = .identifier }
     }
 }
-
-
-

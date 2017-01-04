@@ -542,9 +542,9 @@
 		6ED1D13C1D30569C00B4D64C /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13B1D30569C00B4D64C /* LevelListViewController.swift */; };
 		6ED1D13E1D30577C00B4D64C /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */; };
 		6EDA19001D7F4A6100AB450F /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9CDB021D7E6DF00010D1E1 /* EventDetailViewController.swift */; };
-		6EDA4ABE1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA4ABD1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift */; };
-		6EDA4AC01DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA4ABF1DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift */; };
-		6EDA4AC11DFA7ED800ADF96D /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8D109C1DF8957100A0BBDC /* Notifications.storyboard */; };
+		6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */; };
+		6EDA4AC01DFA1CEB00ADF96D /* TeamMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */; };
+		6EDA4AC11DFA7ED800ADF96D /* Teams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8D109C1DF8957100A0BBDC /* Teams.storyboard */; };
 		6EDAF38E1D5BB22700B75B28 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */; };
 		6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */; };
 		6EDE52121D429F4C00DF4BEA /* VenuesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */; };
@@ -1042,7 +1042,7 @@
 		6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAttendeeFromOrderListRequest.swift; sourceTree = "<group>"; };
 		6E8D0CD21D79CBA7004B435A /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6E8D10981DF87F3B00A0BBDC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		6E8D109C1DF8957100A0BBDC /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		6E8D109C1DF8957100A0BBDC /* Teams.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Teams.storyboard; sourceTree = "<group>"; };
 		6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdate.swift; sourceTree = "<group>"; };
 		6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E93D44A1D9AEE1F00E3302A /* RealmTrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrackGroupDataUpdate.swift; sourceTree = "<group>"; };
@@ -1124,8 +1124,8 @@
 		6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		6ED495811D792F7800749940 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Release.entitlements; sourceTree = SOURCE_ROOT; };
 		6ED495821D792F7800749940 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Debug.entitlements; sourceTree = SOURCE_ROOT; };
-		6EDA4ABD1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationGroupsViewController.swift; sourceTree = "<group>"; };
-		6EDA4ABF1DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationGroupDetailViewController.swift; sourceTree = "<group>"; };
+		6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsViewController.swift; sourceTree = "<group>"; };
+		6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMessagesViewController.swift; sourceTree = "<group>"; };
 		6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6EDE520F1D429B8200DF4BEA /* HanekeInputSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanekeInputSource.swift; sourceTree = "<group>"; };
 		6EDE52111D429F4C00DF4BEA /* VenuesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapViewController.swift; sourceTree = "<group>"; };
@@ -1404,7 +1404,7 @@
 				6E0B2F061D33F3A10058F171 /* Levels.storyboard */,
 				6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */,
 				6E9B22D71D40171800D25271 /* Venue.storyboard */,
-				6E8D109C1DF8957100A0BBDC /* Notifications.storyboard */,
+				6E8D109C1DF8957100A0BBDC /* Teams.storyboard */,
 				6E5BE4191D76996600E323D3 /* Beta.entitlements */,
 				6ED495811D792F7800749940 /* Release.entitlements */,
 				6ED495821D792F7800749940 /* Debug.entitlements */,
@@ -2053,8 +2053,8 @@
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
 				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
-				6EDA4ABD1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift */,
-				6EDA4ABF1DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift */,
+				6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */,
+				6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2495,7 +2495,7 @@
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
-				6EDA4AC11DFA7ED800ADF96D /* Notifications.storyboard in Resources */,
+				6EDA4AC11DFA7ED800ADF96D /* Teams.storyboard in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
 				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
 				6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */,
@@ -2963,7 +2963,7 @@
 				6E3E8C251D47D68100A29003 /* NSDate+MTDates.m in Sources */,
 				6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */,
 				6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
-				6EDA4AC01DFA1CEB00ADF96D /* NotificationGroupDetailViewController.swift in Sources */,
+				6EDA4AC01DFA1CEB00ADF96D /* TeamMessagesViewController.swift in Sources */,
 				6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */,
 				6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */,
 				6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */,
@@ -3014,7 +3014,7 @@
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
 				6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */,
-				6EDA4ABE1DFA1CCF00ADF96D /* NotificationGroupsViewController.swift in Sources */,
+				6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  NotificationGroupsViewController.swift
+//  TeamsViewController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 12/8/16.
@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 import CoreSummit
 
-final class NotificationGroupsViewController: UITableViewController, NSFetchedResultsControllerDelegate, RevealViewController {
+final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, RevealViewController {
     
     // MARK: - Properties
     
@@ -31,10 +31,15 @@ final class NotificationGroupsViewController: UITableViewController, NSFetchedRe
     
     private func configureView() {
         
-        self.fetchedResultsController = NSFetchedResultsController(NotificationGroup.self,
+        guard let member = Store.shared.authenticatedMember
+            else { fatalError("Not logged in") }
+        
+        let predicate = NSPredicate(format: "owner.member == %@ || members.member CONTAINS %@", member, member)
+        
+        self.fetchedResultsController = NSFetchedResultsController(Team.self,
                                                                    delegate: self,
-                                                                   predicate: nil,
-                                                                   sortDescriptors: NotificationGroupManagedObject.sortDescriptors,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: TeamManagedObject.sortDescriptors,
                                                                    sectionNameKeyPath: nil,
                                                                    context: Store.shared.managedObjectContext)
         
@@ -43,18 +48,18 @@ final class NotificationGroupsViewController: UITableViewController, NSFetchedRe
         self.tableView.reloadData()
     }
     
-    private subscript (indexPath: NSIndexPath) -> NotificationGroup {
+    private subscript (indexPath: NSIndexPath) -> Team {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NotificationGroupManagedObject
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! TeamManagedObject
         
-        return NotificationGroup(managedObject: managedObject)
+        return Team(managedObject: managedObject)
     }
     
     private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
         
-        let notificationGroup = self[indexPath]
+        let team = self[indexPath]
         
-        cell.textLabel!.text = notificationGroup.name
+        cell.textLabel!.text = team.name
     }
     
     // MARK: - UITableViewDataSource
@@ -133,7 +138,7 @@ final class NotificationGroupsViewController: UITableViewController, NSFetchedRe
             
             // configure view controller
             
-            let selectedGroup = self[self.tableView.indexPathForSelectedRow!]
+            let selectedTeam = self[self.tableView.indexPathForSelectedRow!]
             
             groupDetailViewController.group = selectedGroup.identifier
             

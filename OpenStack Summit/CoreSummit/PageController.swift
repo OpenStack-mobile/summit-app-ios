@@ -49,7 +49,6 @@ public final class PageController<Item> {
     public func refresh() {
         
         self.pages = []
-        
         self.callback.reloadData()
     }
     
@@ -132,7 +131,7 @@ public final class PageController<Item> {
     @inline(__always)
     private func updateItemsCache() {
         
-        self.itemsCache = pages.reduce([Item](), combine: { $0.0 + $0.1.items })
+        itemsCache = pages.reduce([Item](), combine: { $0.0 + $0.1.items })
     }
 }
 

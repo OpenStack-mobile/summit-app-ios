@@ -1,5 +1,5 @@
 //
-//  NotificationGroupDetailViewController.swift
+//  TeamMessagesViewController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 12/8/16.
@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 import CoreSummit
 
-final class NotificationGroupDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+final class TeamMessagesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     

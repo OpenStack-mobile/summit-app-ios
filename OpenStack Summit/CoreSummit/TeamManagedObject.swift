@@ -55,7 +55,11 @@ extension Team: CoreDataEncodable {
         managedObject.descriptionText = descriptionText
         managedObject.created = created.toFoundation()
         managedObject.updatedDate = updated.toFoundation()
+        
+        // delete previous team members and owner, to not have nil inverse relationships
+        context.deleteObject(managedObject.owner)
         managedObject.owner = try context.relationshipFault(owner)
+        managedObject.members.forEach { context.deleteObject($0) }
         managedObject.members = try context.relationshipFault(members)
         
         managedObject.didCache()
