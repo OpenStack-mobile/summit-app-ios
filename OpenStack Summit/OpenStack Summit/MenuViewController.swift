@@ -227,6 +227,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.setTitle("SPEAKERS", forState: .Normal)
         
         myProfileButton.hidden = hasAccess(to: .MyProfile) == false
+        teamsButton.hidden = hasAccess(to: .Teams) == false
     }
     
     @inline(__always)

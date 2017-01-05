@@ -23,6 +23,8 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.estimatedRowHeight = 98
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerNib(R.nib.loadingTableViewCell)
         
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }

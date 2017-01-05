@@ -49,7 +49,9 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="gue-GD-t9G">
                                 <connections>
-                                    <segue destination="LSn-bv-Y7U" kind="presentation" identifier="createTeam" modalPresentationStyle="pageSheet" id="oDw-Mk-5oR"/>
+                                    <segue destination="LSn-bv-Y7U" kind="popoverPresentation" identifier="createTeam" popoverAnchorBarButtonItem="gue-GD-t9G" id="oDw-Mk-5oR">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="organize" id="aUE-Qp-FGr">
@@ -114,7 +116,7 @@
         <!--Invitations-->
         <scene sceneID="Fmp-cW-JUv">
             <objects>
-                <tableViewController id="evU-ra-yVq" sceneMemberID="viewController">
+                <tableViewController id="evU-ra-yVq" customClass="TeamInvitationsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" id="VvP-ty-nYV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,6 +175,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Invitations" id="xDm-cR-CSW"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="SNq-ea-zSu">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="evU-ra-yVq" eventType="valueChanged" id="7rd-tw-HVx"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="387-hw-V4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
