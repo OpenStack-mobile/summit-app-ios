@@ -132,7 +132,7 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         switch segue.identifier! {
             
-        case R.segue.notificationGroupsViewController.showNotificationGroup.identifier: 
+        case R.segue.teamsViewController.show.identifier:
             
             let groupDetailViewController = segue.destinationViewController as! NotificationGroupDetailViewController
             

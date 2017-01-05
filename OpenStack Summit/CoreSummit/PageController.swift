@@ -50,6 +50,7 @@ public final class PageController<Item> {
         
         self.pages = []
         self.callback.reloadData()
+        self.loadNextPage()
     }
     
     public func loadNextPage() {
@@ -76,14 +77,20 @@ public final class PageController<Item> {
                 
                 switch response {
                     
-                case .Error: break
+                case let .Error(error):
+                    
+                    controller.callback.didLoadNextPage(.Error(error))
                     
                 case let .Value(value):
                     
+                    let previousCount = controller.count
+                    
                     controller.pages.append(value)
+                    
+                    let newCount = controller.count
+                    
+                    var newIndexes
                 }
-                
-                controller.callback.didLoadNextPage(response)
             }
         }
     }
@@ -141,6 +148,21 @@ public enum PageControllerData<Item> {
     
     case loading
     case item(Item)
+}
+
+public struct PageControllerRow<Item> {
+    
+    public let index: Int
+    
+    public let data: PageControllerData<Item>
+    
+    public let change: PageControllerChange
+}
+
+public enum PageControllerChange {
+    
+    case update
+    case insert
 }
 
 public struct PageControllerCallback<Item> {
