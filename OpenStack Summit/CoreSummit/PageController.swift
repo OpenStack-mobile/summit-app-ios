@@ -85,11 +85,31 @@ public final class PageController<Item> {
                     
                     let previousCount = controller.count
                     
+                    let oldLastIndex = previousCount - 1
+                     
                     controller.pages.append(value)
+                    
+                    guard value.items.isEmpty == false else {
+                        
+                        assert(value.currentPage == value.lastPage, "Empty page but not last")
+                        
+                        let removedRow = PageControllerChange(index: oldLastIndex, change: .delete)
+                        
+                        controller.callback.didLoadNextPage(.Value([removedRow]))
+                        
+                        return
+                    }
                     
                     let newCount = controller.count
                     
-                    var newIndexes
+                    var changes = [PageControllerChange(index: oldLastIndex, change: .update)]
+                    
+                    for index in previousCount ..< newCount {
+                        
+                        changes.append(PageControllerChange(index: index, change: .insert))
+                    }
+                    
+                    controller.callback.didLoadNextPage(.Value(changes))
                 }
             }
         }
@@ -150,19 +170,18 @@ public enum PageControllerData<Item> {
     case item(Item)
 }
 
-public struct PageControllerRow<Item> {
+public struct PageControllerChange {
+    
+    public enum ChangeType {
+        
+        case update
+        case insert
+        case delete
+    }
     
     public let index: Int
     
-    public let data: PageControllerData<Item>
-    
-    public let change: PageControllerChange
-}
-
-public enum PageControllerChange {
-    
-    case update
-    case insert
+    public let change: ChangeType
 }
 
 public struct PageControllerCallback<Item> {
@@ -171,5 +190,5 @@ public struct PageControllerCallback<Item> {
     
     public var willLoadData: () -> () = { _ in }
     
-    public var didLoadNextPage: (ErrorValue<Page<Item>>) -> () = { _ in }
+    public var didLoadNextPage: (ErrorValue<[PageControllerChange]>) -> () = { _ in }
 }

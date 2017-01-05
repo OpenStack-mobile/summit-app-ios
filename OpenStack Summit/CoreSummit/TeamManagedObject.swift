@@ -67,13 +67,3 @@ extension Team: CoreDataEncodable {
         return managedObject
     }
 }
-
-// MARK: - Fetches
-
-public extension TeamManagedObject {
-    
-    static var sortDescriptors: [NSSortDescriptor] {
-        
-        return [NSSortDescriptor(key: "name", ascending: true)]
-    }
-}
