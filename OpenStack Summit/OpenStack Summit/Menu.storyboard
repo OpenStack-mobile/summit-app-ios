@@ -133,7 +133,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="NOTIFICATIONS" image="about"/>
+                                                <state key="normal" title="TEAMS" image="about"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="rfy-uJ-Ogj"/>
                                                 </connections>
@@ -190,10 +190,10 @@
                         <outlet property="loginButton" destination="2XL-uy-eo6" id="Vaa-tV-baw"/>
                         <outlet property="myProfileButton" destination="KbZ-RL-hoW" id="cA0-OY-ozY"/>
                         <outlet property="nameLabel" destination="9Is-LK-cIs" id="CjQ-hd-gAQ"/>
-                        <outlet property="notificationsButton" destination="4UM-eh-Q5r" id="9cr-dk-F8B"/>
                         <outlet property="peopleButton" destination="7my-lK-e1A" id="lhz-vk-cVT"/>
                         <outlet property="pictureImageView" destination="XVe-T6-xnI" id="g6c-Bh-kwt"/>
                         <outlet property="searchTextView" destination="PdW-V6-JSm" id="eUO-2w-PlL"/>
+                        <outlet property="teamsButton" destination="4UM-eh-Q5r" id="4FR-kH-Y1p"/>
                         <outlet property="venuesButton" destination="Zak-3i-NtK" id="l0g-sg-ruY"/>
                     </connections>
                 </viewController>
@@ -278,7 +278,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhW-rF-zd9" id="qqQ-ba-eD9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="oNa-qV-csu">
@@ -319,7 +319,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A6h-6z-xpB" id="rpb-OE-50j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>

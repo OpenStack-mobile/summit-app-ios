@@ -32,7 +32,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
-    @IBOutlet weak var notificationsButton: UIButton!
+    @IBOutlet weak var teamsButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
     
@@ -142,9 +142,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             showAbout()
             item = .About
             
-        case notificationsButton:
-            showNotifications()
-            item = .Notifications
+        case teamsButton:
+            showTeams()
+            item = .Teams
             
         default: fatalError("Invalid sender \(sender)")
         }
@@ -172,7 +172,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         let currentMemberRole = Store.shared.memberRole
         
         switch (menuItem) {
-        case .MyProfile:
+        case .MyProfile, .Teams:
             return currentMemberRole != .anonymous
         case .Login:
             return currentMemberRole == .anonymous
@@ -188,7 +188,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
         aboutButton.alpha = 0.5
-        notificationsButton.alpha = 0.5
+        teamsButton.alpha = 0.5
     }
     
     private func highlight(item: MenuItem) {
@@ -206,8 +206,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             myProfileButton.alpha = 1
         case .About:
             aboutButton.alpha = 1
-        case .Notifications:
-            notificationsButton.alpha = 1
+        case .Teams:
+            teamsButton.alpha = 1
             
         // not applicable
         case .Login: break
@@ -300,13 +300,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         show(aboutViewController)
     }
     
-    func showNotifications() {
+    func showTeams() {
         
-        highlight(.Notifications)
+        highlight(.Teams)
         
-        let notificationsViewController = R.storyboard.notifications.notificationGroupsViewController()!
+        let teamsViewController = R.storyboard.teams.initialViewController()!
         
-        show(notificationsViewController)
+        show(teamsViewController)
     }
     
     private func showSearch(for term: String) {
@@ -499,6 +499,6 @@ enum MenuItem {
     case Venues
     case People
     case About
-    case Notifications
+    case Teams
     case MyProfile
 }

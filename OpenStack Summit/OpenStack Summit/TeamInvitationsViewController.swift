@@ -23,6 +23,8 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.registerNib(R.nib.loadingTableViewCell)
+        
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
         pageController.callback.willLoadData = { [weak self] in self?.willLoadData() }
@@ -49,7 +51,7 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
         }
     }
     
-    private func didLoadNextPage(response: ErrorValue<Page<TeamInvitation>>) {
+    private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
         
         hideActivityIndicator()
         
@@ -59,13 +61,84 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
             
             showErrorMessage(error as NSError)
             
-        case let .Value(newPage):
+        case let .Value(changes):
             
             tableView.beginUpdates()
             
-            
+            for change in changes {
+                
+                let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
+                
+                switch change.change {
+                    
+                case .delete:
+                    
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    
+                case .insert:
+                    
+                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    
+                case .update:
+                    
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                }
+            }
             
             tableView.endUpdates()
         }
     }
+    
+    private func configure(cell cell: TeamInvitationTableViewCell, with invitation: TeamInvitation) {
+        
+        cell.teamLabel.text = invitation.team.name
+        
+        cell.inviterLabel.text = invitation.inviter.name
+        
+        cell.dateLabel.text = invitation.created.toFoundation().description
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return pageController.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let data = pageController[indexPath.row]
+        
+        switch data {
+            
+        case .loading:
+            
+            return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell)!
+            
+        case let .item(item):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamInvitationCell)!
+            
+            configure(cell: cell, with: item)
+            
+            return cell
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+final class TeamInvitationTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var teamLabel: UILabel!
+    
+    @IBOutlet weak var inviterLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
 }

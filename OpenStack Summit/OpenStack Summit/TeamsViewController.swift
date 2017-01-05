@@ -24,6 +24,9 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         addMenuButton()
         
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         configureView()
     }
     
@@ -36,10 +39,12 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         let predicate = NSPredicate(format: "owner.member == %@ || members.member CONTAINS %@", member, member)
         
+        let sort = [NSSortDescriptor(key: "updated", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
+        
         self.fetchedResultsController = NSFetchedResultsController(Team.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
-                                                                   sortDescriptors: TeamManagedObject.sortDescriptors,
+                                                                   sortDescriptors: sort,
                                                                    sectionNameKeyPath: nil,
                                                                    context: Store.shared.managedObjectContext)
         
@@ -76,7 +81,7 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationGroupCell)!
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamMessageCell)!
         
         configure(cell: cell, at: indexPath)
         
@@ -132,15 +137,17 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         switch segue.identifier! {
             
-        case R.segue.teamsViewController.show.identifier:
+        case R.segue.teamsViewController.showTeamMessages.identifier:
             
-            let groupDetailViewController = segue.destinationViewController as! NotificationGroupDetailViewController
+            let viewController = segue.destinationViewController as! TeamMessagesViewController
             
-            // configure view controller
+            let selectedItem = self[self.tableView.indexPathForSelectedRow!]
             
-            let selectedTeam = self[self.tableView.indexPathForSelectedRow!]
+            viewController.team = selectedItem.identifier
             
-            groupDetailViewController.group = selectedGroup.identifier
+        case R.segue.teamsViewController.createTeam.identifier:
+            
+            break
             
         default: fatalError("Unknown segue: \(segue)")
         }

@@ -339,6 +339,9 @@
 		6E41EFE41DCDD8E400733E04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E41EFE51DCDD8E400733E04 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E42419D1E1EB3690017E555 /* TeamInvitationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42419C1E1EB3690017E555 /* TeamInvitationsViewController.swift */; };
+		6E4241A01E1ED4C90017E555 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E42419F1E1ED4C90017E555 /* LoadingTableViewCell.swift */; };
+		6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4241A11E1ED4D60017E555 /* LoadingTableViewCell.xib */; };
+		6E4241A41E1ED6560017E555 /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */; };
 		6E46F3AC1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */; };
 		6E488F5D1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
 		6E488F5E1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
@@ -486,7 +489,6 @@
 		6EB1FDF51E1C073E0048045D /* TeamInvitationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDF21E1C073E0048045D /* TeamInvitationRequest.swift */; };
 		6EB1FE001E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE011E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
-		6EB1FE021E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE031E1DA6360048045D /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
@@ -993,6 +995,9 @@
 		6E41396F1DE8D2080074D631 /* SummitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsViewController.swift; sourceTree = "<group>"; };
 		6E41EFE31DCDD8E400733E04 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E42419C1E1EB3690017E555 /* TeamInvitationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitationsViewController.swift; sourceTree = "<group>"; };
+		6E42419F1E1ED4C90017E555 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
+		6E4241A11E1ED4D60017E555 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
+		6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersInterfaceController.swift; sourceTree = "<group>"; };
 		6E488F5C1DD1107500EA6B0F /* EntityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityController.swift; sourceTree = "<group>"; };
 		6E49054C1D2ED21300D56870 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -2019,6 +2024,8 @@
 				6E2537EA1D19B203003E3400 /* ScheduleView.xib */,
 				6EA6FD331D956C4D009B66B0 /* DetailImageTableViewCell.swift */,
 				6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */,
+				6E42419F1E1ED4C90017E555 /* LoadingTableViewCell.swift */,
+				6E4241A11E1ED4D60017E555 /* LoadingTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2059,6 +2066,7 @@
 				6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */,
 				6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */,
 				6E42419C1E1EB3690017E555 /* TeamInvitationsViewController.swift */,
+				6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2499,6 +2507,7 @@
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
+				6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */,
 				6EDA4AC11DFA7ED800ADF96D /* Teams.storyboard in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
 				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
@@ -2783,7 +2792,6 @@
 				6EB1FDF11E1AF9F50048045D /* TeamInvitationJSON.swift in Sources */,
 				6E0B5EB71D77C8950005F6CE /* VenueRoom.swift in Sources */,
 				6E0B5EBA1D77C8950005F6CE /* SummitRequest.swift in Sources */,
-				6EB1FE021E1D6BB90048045D /* PageController.swift in Sources */,
 				6E0B5EBB1D77C8950005F6CE /* Session.swift in Sources */,
 				6E0B5EBF1D77C8950005F6CE /* ImageJSON.swift in Sources */,
 				6E3D4D011E12D44A00D542CD /* TeamMember.swift in Sources */,
@@ -2980,11 +2988,13 @@
 				6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */,
 				6EF7AA1C1D74C24800790ED0 /* CoreSpotlight.swift in Sources */,
 				6E41EFE41DCDD8E400733E04 /* Store.swift in Sources */,
+				6E4241A41E1ED6560017E555 /* CreateTeamViewController.swift in Sources */,
 				6EF147EF1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift in Sources */,
 				6EF12C5F1D149B4B00814AD0 /* Define.swift in Sources */,
 				6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */,
 				6E25384B1D1AF416003E3400 /* Filter.swift in Sources */,
 				6EF12C681D149CA600814AD0 /* R.generated.swift in Sources */,
+				6E4241A01E1ED4C90017E555 /* LoadingTableViewCell.swift in Sources */,
 				6E42419D1E1EB3690017E555 /* TeamInvitationsViewController.swift in Sources */,
 				6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */,
 				6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */,

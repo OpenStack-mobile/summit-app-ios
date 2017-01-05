@@ -36,11 +36,11 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
     
     private func configureView() {
         
-        if let group = self.group {
+        if let team = self.team {
             
-            let groupID = NSNumber(longLong: Int64(group))
+            let teamID = NSNumber(longLong: Int64(team))
             
-            let predicate = NSPredicate(format: "group.id == %@", groupID)
+            let predicate = NSPredicate(format: "team.id == %@", teamID)
             
             let sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
             
@@ -61,20 +61,20 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
         self.tableView.reloadData()
     }
     
-    private subscript (indexPath: NSIndexPath) -> Notification {
+    private subscript (indexPath: NSIndexPath) -> TeamMessage {
         
-        let managedObject = self.fetchedResultsController!.objectAtIndexPath(indexPath) as! NotificationManagedObject
+        let managedObject = self.fetchedResultsController!.objectAtIndexPath(indexPath) as! TeamMessageManagedObject
         
-        return Notification(managedObject: managedObject)
+        return TeamMessage(managedObject: managedObject)
     }
     
     private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
         
-        let notification = self[indexPath]
+        let message = self[indexPath]
         
-        cell.textLabel!.text = notification.message
+        cell.textLabel!.text = message.body
         
-        cell.detailTextLabel!.text = notification.date.description
+        cell.detailTextLabel!.text = message.created.toFoundation().description
     }
     
     // MARK: - UITableViewDataSource
@@ -91,7 +91,7 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationGroupCell)!
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamCell)!
         
         configure(cell: cell, at: indexPath)
         
