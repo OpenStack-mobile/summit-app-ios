@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func create(team name: String, description: String? = nil, completion: (ErrorValue<Team>) -> ()) {
+    func create(team name: String, description: String, completion: (ErrorValue<Team>) -> ()) {
         
         let uri = "/api/v1/teams"
         

@@ -31,7 +31,7 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
         
         let name = self.nameTextField.text ?? ""
         
-        let description = self.descriptionTextField.text
+        let description = self.descriptionTextField.text ?? ""
         
         showActivityIndicator()
         
