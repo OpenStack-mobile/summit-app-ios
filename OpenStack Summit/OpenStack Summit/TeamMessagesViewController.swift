@@ -42,7 +42,7 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
             
             let predicate = NSPredicate(format: "team.id == %@", teamID)
             
-            let sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            let sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
             
             self.fetchedResultsController = NSFetchedResultsController(TeamMessage.self,
                                                                        delegate: self,

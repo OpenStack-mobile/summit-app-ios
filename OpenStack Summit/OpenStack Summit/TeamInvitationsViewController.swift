@@ -42,6 +42,11 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
         
         pageController.refresh()
     }
+        
+    @IBAction func cancel(sender: AnyObject? = nil) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // MARK: - Private Methods
     

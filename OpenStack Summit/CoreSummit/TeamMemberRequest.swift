@@ -14,7 +14,7 @@ public extension Store {
     
     func add(member memberIdentifier: Identifier, to team: Identifier, permission: TeamPermission = .read, completion: (ErrorValue<Identifier>) -> ()) {
         
-        let uri = "api/v1/teams/\(team)/members/\(memberIdentifier)"
+        let uri = "/api/v1/teams/\(team)/members/\(memberIdentifier)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -38,7 +38,7 @@ public extension Store {
     
     func remove(member memberIdentifier: Identifier, from team: Identifier, completion: (ErrorType?) -> ()) {
         
-        let uri = "api/v1/teams/\(team)/members/\(memberIdentifier)"
+        let uri = "/api/v1/teams/\(team)/members/\(memberIdentifier)"
         
         let url = environment.configuration.serverURL + uri
         

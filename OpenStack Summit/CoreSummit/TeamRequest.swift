@@ -63,7 +63,7 @@ public extension Store {
     
     func update(team identifier: Identifier, name: String, description: String? = nil, completion: (ErrorType?) -> ()) {
         
-        let uri = "api/v1/teams/\(identifier)"
+        let uri = "/api/v1/teams/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -105,15 +105,15 @@ public extension Store {
     
     func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
         
-        let URI = "api/v1/teams/\(identifier)"
+        let uri = "/api/v1/teams/\(identifier)"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.ServiceAccount)
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL) { (responseObject, error) in
+        http.GET(url) { (responseObject, error) in
             
             // forward error
             guard error == nil
@@ -138,7 +138,7 @@ public extension Store {
     
     func delete(team identifier: Identifier, completion: (ErrorType?) -> ()) {
         
-        let uri = "api/v1/teams/\(identifier)"
+        let uri = "/api/v1/teams/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         

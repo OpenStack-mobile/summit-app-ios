@@ -13,7 +13,7 @@ public extension Store {
     
     func accept(invitation identifier: Identifier, completion: (ErrorType?) -> ()) {
         
-        let uri = "api/v1/members/me/team-invitations/\(identifier)"
+        let uri = "/api/v1/members/me/team-invitations/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -27,7 +27,7 @@ public extension Store {
     
     func decline(invitation identifier: Identifier, completion: (ErrorType?) -> ()) {
         
-        let uri = "api/v1/members/me/team-invitations/\(identifier)"
+        let uri = "/api/v1/members/me/team-invitations/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -41,7 +41,7 @@ public extension Store {
     
     func invitations(page: Int = 1, perPage: Int = 10, completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
         
-        let uri = "api/v1/members/me/team-invitations?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter"
+        let uri = "/api/v1/members/me/team-invitations?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter"
         
         let url = environment.configuration.serverURL + uri
         

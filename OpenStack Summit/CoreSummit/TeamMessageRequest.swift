@@ -14,7 +14,7 @@ public extension Store {
     
     func send(message: String, to team: Identifier, priority: TeamMessage.Priority = .normal, completion: (ErrorValue<TeamMessage>) -> ()) {
         
-        let uri = "api/v1/teams/\(team)/messages"
+        let uri = "/api/v1/teams/\(team)/messages"
         
         let url = environment.configuration.serverURL + uri
         

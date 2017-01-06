@@ -65,6 +65,8 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         let team = self[indexPath]
         
         cell.textLabel!.text = team.name
+        
+        cell.detailTextLabel!.text = team.descriptionText
     }
     
     // MARK: - UITableViewDataSource
@@ -81,7 +83,7 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamMessageCell)!
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamCell)!
         
         configure(cell: cell, at: indexPath)
         
@@ -148,6 +150,10 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         case R.segue.teamsViewController.createTeam.identifier:
             
             break
+            
+        case R.segue.teamsViewController.showTeamInvitations.identifier:
+            
+            break;
             
         default: fatalError("Unknown segue: \(segue)")
         }
