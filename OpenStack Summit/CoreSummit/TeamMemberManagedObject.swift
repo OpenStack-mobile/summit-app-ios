@@ -68,7 +68,7 @@ extension TeamMember: CoreDataEncodable {
             
         } else {
             
-            managedObject = NSEntityDescription.insertNewObjectForEntityForName(NSStringFromClass(TeamMemberManagedObject.self), inManagedObjectContext: context) as! ManagedObject
+            managedObject = NSEntityDescription.insertNewObjectForEntityForName("TeamMember", inManagedObjectContext: context) as! TeamMemberManagedObject
         }
         
         managedObject.member = try context.relationshipFault(member)
@@ -109,7 +109,9 @@ public extension TeamMemberManagedObject {
         
         // create predicate
         
-        fetchRequest.predicate = NSPredicate(format: "(teamOwner.id == %@ || teamMember.id == %@) && member.id == %@", Int64(team), Int64(team), Int64(member))
+        let teamNumber = NSNumber(longLong: Int64(team))
+        
+        fetchRequest.predicate = NSPredicate(format: "(teamOwner.id == %@ || teamMember.id == %@) && member.id == %@", teamNumber, teamNumber, teamNumber)
         
         // fetch
         return try context.executeFetchRequest(fetchRequest).first as! TeamMemberManagedObject?

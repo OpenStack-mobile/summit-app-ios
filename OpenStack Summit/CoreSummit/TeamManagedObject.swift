@@ -57,9 +57,16 @@ extension Team: CoreDataEncodable {
         managedObject.updatedDate = updated.toFoundation()
         
         // delete previous team members and owner, to not have nil inverse relationships
-        context.deleteObject(managedObject.owner)
+        var previousMembers = [TeamMemberManagedObject]()
+        previousMembers += managedObject.members
+        let previousOwner: TeamMemberManagedObject? = managedObject.owner
+        if let owner = previousOwner {
+            previousMembers.append(owner)
+        }
+        previousMembers.forEach { context.deleteObject($0) }
+        
+        // set members
         managedObject.owner = try context.relationshipFault(owner)
-        managedObject.members.forEach { context.deleteObject($0) }
         managedObject.members = try context.relationshipFault(members)
         
         managedObject.didCache()
