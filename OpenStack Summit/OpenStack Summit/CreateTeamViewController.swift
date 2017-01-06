@@ -16,9 +16,9 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionTextField: UITextField!
     
     // MARK: - Actions
     
@@ -29,9 +29,9 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
     
     @IBAction func done(sender: AnyObject? = nil) {
         
-        let name = self.nameLabel.text ?? ""
+        let name = self.nameTextField.text ?? ""
         
-        let description = self.descriptionLabel.text
+        let description = self.descriptionTextField.text
         
         showActivityIndicator()
         

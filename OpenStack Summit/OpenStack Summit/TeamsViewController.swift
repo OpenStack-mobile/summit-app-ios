@@ -39,7 +39,7 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         let predicate = NSPredicate(format: "owner.member == %@ || members.member CONTAINS %@", member, member)
         
-        let sort = [NSSortDescriptor(key: "updated", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
+        let sort = [NSSortDescriptor(key: "updatedDate", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
         
         self.fetchedResultsController = NSFetchedResultsController(Team.self,
                                                                    delegate: self,

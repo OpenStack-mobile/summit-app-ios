@@ -176,6 +176,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Invitations" id="xDm-cR-CSW"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="SNq-ea-zSu">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="evU-ra-yVq" eventType="valueChanged" id="7rd-tw-HVx"/>
@@ -189,7 +190,7 @@
         <!--New Team-->
         <scene sceneID="iQ9-We-7Gq">
             <objects>
-                <tableViewController id="qki-B3-hXJ" sceneMemberID="viewController">
+                <tableViewController id="qki-B3-hXJ" customClass="CreateTeamViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="s1H-Pq-vww">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,9 +251,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Team" id="idD-BD-fyS">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="68y-oM-HZC"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" systemItem="done" id="SdG-GK-S9g"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="68y-oM-HZC">
+                            <connections>
+                                <action selector="cancel:" destination="qki-B3-hXJ" id="NPi-Q5-Ndr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" systemItem="done" id="SdG-GK-S9g">
+                            <connections>
+                                <action selector="done:" destination="qki-B3-hXJ" id="6FN-vI-aru"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="PPm-so-S7f" id="XZC-Ou-WCT"/>
+                        <outlet property="nameTextField" destination="V1B-42-4mq" id="KAl-OU-Ub2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOb-L6-RJL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

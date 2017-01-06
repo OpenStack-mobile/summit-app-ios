@@ -14,9 +14,9 @@ public extension Store {
     
     func create(team name: String, description: String? = nil, completion: (ErrorValue<Team>) -> ()) {
         
-        let URI = "api/v1/teams"
+        let uri = "/api/v1/teams"
         
-        let URL = environment.configuration.serverURL + URI
+        let url = environment.configuration.serverURL + uri
         
         let http = self.createHTTP(.OpenIDJSON)
         
@@ -26,7 +26,7 @@ public extension Store {
         jsonDictionary["name"] = name
         jsonDictionary["description"] = description
         
-        http.POST(URL, parameters: jsonDictionary) { (responseObject, error) in
+        http.POST(url, parameters: jsonDictionary) { (responseObject, error) in
             
             // forward error
             guard error == nil
