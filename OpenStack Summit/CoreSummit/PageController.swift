@@ -100,7 +100,12 @@ public final class PageController<Item> {
                     
                     let newCount = controller.items.count
                     
-                    var changes = [PageControllerChange(index: previousLastIndex, change: .update)]
+                    var changes = [PageControllerChange]()
+                    
+                    if previousCount > 0 {
+                        
+                        changes.append(PageControllerChange(index: previousLastIndex, change: .update))
+                    }
                     
                     for index in previousCount ..< newCount {
                         
