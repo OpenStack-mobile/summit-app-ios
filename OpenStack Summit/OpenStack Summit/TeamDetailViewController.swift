@@ -89,6 +89,44 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
     }
     
+    @IBAction func addMember(sender: AnyObject? = nil) {
+        
+        let memberSearchViewController = R.storyboard.member.searchMembersViewController()!
+        
+        memberSearchViewController.didCancel = { $0.dismissViewControllerAnimated(true, completion: nil) }
+        
+        memberSearchViewController.selectedMember = { [weak self] in
+            
+            guard let controller = self else { return }
+            
+            let memberID = $0.1.identifier
+            
+            $0.0.dismissViewControllerAnimated(true) {
+                
+                Store.shared.add(member: memberID, to: controller.team, permission: .admin) { (response) in
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                        
+                        guard let controller = self else { return }
+                        
+                        switch response {
+                            
+                        case let .Error(error):
+                            
+                            controller.showErrorMessage(error as NSError)
+                            
+                        case .Value: break
+                        }
+                    }
+                }
+            }
+        }
+        
+        let navigationController = UINavigationController(rootViewController: memberSearchViewController)
+        
+        self.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
     // MARK: - Private Methods
     
     private func configureView(team: Team) {

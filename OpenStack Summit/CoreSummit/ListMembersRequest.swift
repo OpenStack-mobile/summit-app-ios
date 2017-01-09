@@ -90,8 +90,8 @@ public extension MemberListRequest {
             
             case firstName = "first_name"
             case lastName = "last_name"
-            case irc
             case twitter
+            case irc
         }
         
         public var value: String
