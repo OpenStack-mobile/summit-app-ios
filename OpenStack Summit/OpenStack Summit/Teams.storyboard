@@ -329,14 +329,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V1B-42-4mq">
-                                                    <rect key="frame" x="8" y="8" width="304" height="27"/>
+                                                    <rect key="frame" x="20" y="8" width="292" height="27"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="V1B-42-4mq" firstAttribute="leading" secondItem="oUi-hb-rPZ" secondAttribute="leading" constant="8" id="86q-9d-H5w"/>
+                                                <constraint firstItem="V1B-42-4mq" firstAttribute="leading" secondItem="oUi-hb-rPZ" secondAttribute="leading" constant="20" id="86q-9d-H5w"/>
                                                 <constraint firstItem="V1B-42-4mq" firstAttribute="top" secondItem="oUi-hb-rPZ" secondAttribute="top" constant="8" id="FoZ-Bf-umk"/>
                                                 <constraint firstAttribute="bottom" secondItem="V1B-42-4mq" secondAttribute="bottom" constant="8" id="hut-QN-PJE"/>
                                                 <constraint firstAttribute="trailing" secondItem="V1B-42-4mq" secondAttribute="trailing" constant="8" id="l3y-Ts-I3d"/>
@@ -351,7 +351,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPm-so-S7f">
-                                                    <rect key="frame" x="8" y="8" width="304" height="27"/>
+                                                    <rect key="frame" x="20" y="8" width="292" height="27"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -361,7 +361,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="PPm-so-S7f" secondAttribute="trailing" constant="8" id="1OD-Ke-RBb"/>
                                                 <constraint firstItem="PPm-so-S7f" firstAttribute="top" secondItem="uVI-mG-lL5" secondAttribute="top" constant="8" id="BhV-By-95Q"/>
                                                 <constraint firstAttribute="bottom" secondItem="PPm-so-S7f" secondAttribute="bottom" constant="8" id="DSz-Ww-Xbs"/>
-                                                <constraint firstItem="PPm-so-S7f" firstAttribute="leading" secondItem="uVI-mG-lL5" secondAttribute="leading" constant="8" id="YFW-Ji-NaN"/>
+                                                <constraint firstItem="PPm-so-S7f" firstAttribute="leading" secondItem="uVI-mG-lL5" secondAttribute="leading" constant="20" id="YFW-Ji-NaN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -399,7 +399,7 @@
             <objects>
                 <navigationController id="LSn-bv-Y7U" sceneMemberID="viewController">
                     <value key="contentSizeForViewInPopover" type="size" width="320" height="320"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wJP-9x-bec">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wJP-9x-bec">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -415,7 +415,7 @@
         <scene sceneID="cld-HY-TRI">
             <objects>
                 <navigationController id="Xks-w5-ZqE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="SMZ-MJ-dQr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SMZ-MJ-dQr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

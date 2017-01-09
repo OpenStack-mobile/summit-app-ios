@@ -55,6 +55,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         entityController.event.updated = { [weak self] in self?.configureView($0) }
         
+        entityController.event.deleted = { [weak self] in self?.wasDeleted() }
+        
         entityController.enabled = true
         
         // fetch from server
@@ -118,6 +120,40 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         let rows = self.data[section]!
         
         return rows[indexPath.row]
+    }
+    
+    private func wasDeleted() {
+        
+        /** Presents an alert controller with the specified completion handlers.  */
+        func showAlert(localizedText: String, okHandler: (() -> ())? = nil, retryHandler: (()-> ())? = nil) {
+            
+            let alert = UIAlertController(title: nil,
+                                          message: localizedText,
+                                          preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                okHandler?()
+                
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            // optionally add retry button
+            
+            if retryHandler != nil {
+                
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Retry"), style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    
+                    retryHandler!()
+                    
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                }))
+            }
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        showAlert("Team was deleted", okHandler: { self.navigationController?.popToRootViewControllerAnimated(true) })
     }
     
     // MARK: - UITableViewDataSource
@@ -205,6 +241,29 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             memberProfileDetailVC.profile = .member(member.identifier)
             
             showViewController(memberProfileDetailVC, sender: self)
+            
+        case .delete:
+            
+            showActivityIndicator()
+            
+            Store.shared.delete(team: team) { (response) in
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                    
+                    guard let controller = self else { return }
+                    
+                    controller.hideActivityIndicator()
+                    
+                    if let error = response {
+                        
+                        controller.showErrorMessage(error as NSError)
+                        
+                    } else {
+                        
+                        // entity controller will manage
+                    }
+                }
+            }
             
         default: break
         }
