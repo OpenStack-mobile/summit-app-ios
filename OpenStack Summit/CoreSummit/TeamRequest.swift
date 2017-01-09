@@ -109,7 +109,7 @@ public extension Store {
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.OpenIDJSON)
         
         let context = privateQueueManagedObjectContext
         
