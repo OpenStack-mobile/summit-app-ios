@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func create(team name: String, description: String, completion: (ErrorValue<Team>) -> ()) {
+    func create(team name: String, description: String?, completion: (ErrorValue<Team>) -> ()) {
         
         let uri = "/api/v1/teams"
         
@@ -23,8 +23,12 @@ public extension Store {
         let context = privateQueueManagedObjectContext
         
         var jsonDictionary = [String: AnyObject]()
+        
         jsonDictionary["name"] = name
-        jsonDictionary["description"] = description
+        
+        if let description = description where description.isEmpty == false {
+            jsonDictionary["description"] = description
+        }
         
         http.POST(url, parameters: jsonDictionary) { (responseObject, error) in
             
@@ -70,8 +74,12 @@ public extension Store {
         let context = privateQueueManagedObjectContext
         
         var jsonDictionary = [String: AnyObject]()
+        
         jsonDictionary["name"] = name
-        jsonDictionary["description"] = description
+        
+        if let description = description where description.isEmpty == false {
+            jsonDictionary["description"] = description
+        }
         
         http.PUT(url, parameters: jsonDictionary)  { (responseObject, error) in
             

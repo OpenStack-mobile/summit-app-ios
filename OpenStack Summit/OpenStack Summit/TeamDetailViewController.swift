@@ -297,7 +297,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             showActivityIndicator()
             
-            Store.shared.update(team: team, name: newName, description: description, completion: { (response) in
+            Store.shared.update(team: team, name: newName, description: description) { (response) in
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                     
@@ -309,14 +309,48 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                         
                         controller.showErrorMessage(error as NSError)
                         
-                    } else {
-                        
-                        // do nothing, entity controller will update
                     }
                 }
-            })
+            }
             
             return false
+        }
+        
+        // table view cell text field
+        let pointInTable = textField.convertPoint(textField.bounds.origin, toView: self.tableView)
+        if let indexPath = self.tableView.indexPathForRowAtPoint(pointInTable) {
+            
+            let cellData = self[indexPath]
+            
+            switch cellData {
+                
+            case .description:
+                
+                let name = teamCache.name
+                
+                let newDescription = textField.text
+                
+                showActivityIndicator()
+                
+                Store.shared.update(team: team, name: name, description: newDescription) { (response) in
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                        
+                        guard let controller = self else { return }
+                        
+                        controller.hideActivityIndicator()
+                        
+                        if let error = response {
+                            
+                            controller.showErrorMessage(error as NSError)
+                        }
+                    }
+                }
+                
+                return false
+                
+            default: break
+            }
         }
         
         return true
