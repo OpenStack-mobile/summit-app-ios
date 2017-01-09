@@ -92,16 +92,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Detail Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OE0-Q0-nJM">
-                                            <rect key="frame" x="18" y="8" width="287" height="27"/>
+                                            <rect key="frame" x="20" y="8" width="285" height="27"/>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="done"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="OE0-Q0-nJM" secondAttribute="bottom" constant="8" id="1wK-ii-lRf"/>
                                         <constraint firstItem="OE0-Q0-nJM" firstAttribute="top" secondItem="Xf7-2u-ayp" secondAttribute="top" constant="8" id="5H6-EG-niy"/>
-                                        <constraint firstItem="OE0-Q0-nJM" firstAttribute="leading" secondItem="Xf7-2u-ayp" secondAttribute="leading" constant="18" id="qVd-l5-Ffo"/>
+                                        <constraint firstItem="OE0-Q0-nJM" firstAttribute="leading" secondItem="Xf7-2u-ayp" secondAttribute="leading" constant="20" id="qVd-l5-Ffo"/>
                                         <constraint firstAttribute="trailing" secondItem="OE0-Q0-nJM" secondAttribute="trailing" constant="15" id="vUy-lZ-85v"/>
                                     </constraints>
                                 </tableViewCellContentView>
