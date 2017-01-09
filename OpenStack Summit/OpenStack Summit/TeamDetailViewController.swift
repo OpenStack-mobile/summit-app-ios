@@ -119,13 +119,13 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         self.data.append((.description, descriptionSection))
         
         // owner
-        self.data.append((.owner, [.member(team.owner, nil)]))
+        self.data.append((.owner, [.owner(team.owner)]))
         
         // members
         let membersSection = team.members
             .sort()
             .filter({ $0.member.identifier != team.owner.identifier })
-            .map { Cell.member($0.member, $0.permission) }
+            .map { Cell.member($0) }
         
         if membersSection.isEmpty == false {
             
@@ -237,13 +237,23 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             return cell
             
-        case let .member(member, permission):
+        case let .member(teamMember):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            
+            cell.name = teamMember.member.name
+            cell.pictureURL = teamMember.member.pictureURL
+            cell.title = teamMember.permission.rawValue.lowercaseString.capitalizedString
+            
+            return cell
+            
+        case let .owner(member):
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
             
             cell.name = member.name
             cell.pictureURL = member.pictureURL
-            cell.title = permission?.rawValue ?? ""
+            cell.title = ""
             
             return cell
             
@@ -255,6 +265,22 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - UITableViewDelegate
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        let section = self.data[section].0
+        
+        switch section {
+            
+        case .description: return nil
+            
+        case .owner: return "Owner"
+            
+        case .members: return self.data.firstMatching({ $0.0 == .members })?.1.isEmpty ?? true ? nil : "Members"
+            
+        case .delete: return nil
+        }
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -263,7 +289,15 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         switch cellData {
             
-        case let .member(member, _):
+        case let .member(teamMember):
+            
+            let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
+            
+            memberProfileDetailVC.profile = .member(teamMember.identifier)
+            
+            showViewController(memberProfileDetailVC, sender: self)
+            
+        case let .owner(member):
             
             let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
             
@@ -294,19 +328,52 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        let section = self.data[section].0
+        let cellData = self[indexPath]
         
-        switch section {
+        switch cellData {
             
-        case .description: return nil
+        case .member:
             
-        case .owner: return "Owner"
+            return .Delete
             
-        case .members: return self.data.firstMatching({ $0.0 == .members })?.1.isEmpty ?? true ? nil : "Members"
+        default:
             
-        case .delete: return nil
+            return .None
+        }
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cellData = self[indexPath]
+        
+        if editingStyle == .Delete {
+            
+            switch cellData {
+                
+            case let .member(teamMember):
+                
+                showActivityIndicator()
+                
+                Store.shared.remove(member: teamMember.identifier, from: team) { (response) in
+                    
+                    NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                        
+                        guard let controller = self else { return }
+                        
+                        controller.hideActivityIndicator()
+                        
+                        if let error = response {
+                            
+                            controller.showErrorMessage(error as NSError)
+                        }
+                    }
+                }
+                
+            default: break
+                
+            }
         }
     }
     
@@ -399,7 +466,8 @@ private extension TeamDetailViewController {
         case description(String?)
         case created(Date)
         case updated(Date)
-        case member(Member, TeamPermission?)
+        case owner(Member)
+        case member(TeamMember)
         case delete
     }
 }

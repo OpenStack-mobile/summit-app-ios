@@ -36,9 +36,9 @@ public extension Store {
         }
     }
     
-    func remove(member memberIdentifier: Identifier, from team: Identifier, completion: (ErrorType?) -> ()) {
+    func remove(member identifier: Identifier, from team: Identifier, completion: (ErrorType?) -> ()) {
         
-        let uri = "/api/v1/teams/\(team)/members/\(memberIdentifier)"
+        let uri = "/api/v1/teams/\(team)/members/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
@@ -55,7 +55,7 @@ public extension Store {
             // remove from cache
             try! context.performErrorBlockAndWait {
                 
-                if let managedObject = try TeamMemberManagedObject.find(team, context: context) {
+                if let managedObject = try TeamMemberManagedObject.find(identifier, context: context) {
                     
                     context.deleteObject(managedObject)
                     
