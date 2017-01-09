@@ -37,3 +37,18 @@ public func == (lhs: Team, rhs: Team) -> Bool {
         && lhs.owner == rhs.owner
         && lhs.members == rhs.members
 }
+
+// MARK: - Extensions
+
+public extension Team {
+    
+    func permission(for member: Identifier) -> TeamPermission? {
+        
+        if member == owner.identifier {
+            
+            return .admin
+        }
+        
+        return members.firstMatching({ $0.member.identifier == identifier })?.permission
+    }
+}

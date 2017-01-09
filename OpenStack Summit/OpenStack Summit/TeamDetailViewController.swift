@@ -26,7 +26,9 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     private var teamCache: Team!
     
-    private var data = [Section: [Cell]]()
+    private var canEdit = false
+    
+    private var data = [(Section, [Cell])]()
     
     private static let dateFormatter: NSDateFormatter = {
         
@@ -93,31 +95,56 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         self.teamCache = team
         
+        let userPermission = team.permission(for: Store.shared.authenticatedMember!.identifier)!
+        
+        self.canEdit = userPermission == .admin
+        
         self.nameTextField.text = team.name
+        
+        self.nameTextField.userInteractionEnabled = canEdit
         
         self.data.removeAll()
         
-        self.data[.description] = [.description(team.descriptionText),
-                                   .created(team.created),
-                                   .updated(team.updated)]
+        // description
         
-        self.data[.owner] = [.member(team.owner, nil)]
+        var descriptionSection = [Cell]()
         
-        self.data[.members] = team.members
+        if (canEdit || team.descriptionText != nil || team.descriptionText!.isEmpty == false) {
+            
+            descriptionSection.append(.description(team.descriptionText))
+        }
+        
+        descriptionSection += [.created(team.created), .updated(team.updated)]
+        
+        self.data.append((.description, descriptionSection))
+        
+        // owner
+        self.data.append((.owner, [.member(team.owner, nil)]))
+        
+        // members
+        let membersSection = team.members
             .sort()
-            .filter({ $0.member.identifier != team.owner.identifier }) // filter owner from members list
-            .map { .member($0.member, $0.permission) }
+            .filter({ $0.member.identifier != team.owner.identifier })
+            .map { Cell.member($0.member, $0.permission) }
         
-        self.data[.delete] = [.delete]
+        if membersSection.isEmpty == false {
+            
+            self.data.append((.members, membersSection))
+        }
+        
+        if canEdit {
+            
+            self.data.append((.delete, [.delete]))
+        }
         
         self.tableView.reloadData()
     }
     
     private subscript (indexPath: NSIndexPath) -> Cell {
         
-        let section = Section(rawValue: indexPath.section)!
+        let section = self.data[indexPath.section]
         
-        let rows = self.data[section]!
+        let rows = section.1
         
         return rows[indexPath.row]
     }
@@ -160,14 +187,14 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return Section.count
+        return self.data.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let section = Section(rawValue: section)!
+        let section = self.data[section]
         
-        let rows = self.data[section]!
+        let rows = section.1
         
         return rows.count
     }
@@ -185,6 +212,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             cell.textField.placeholder = "Description"
             
             cell.textField.text = description
+            
+            cell.userInteractionEnabled = canEdit
             
             return cell
             
@@ -257,10 +286,6 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                     if let error = response {
                         
                         controller.showErrorMessage(error as NSError)
-                        
-                    } else {
-                        
-                        // entity controller will manage
                     }
                 }
             }
@@ -271,7 +296,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        let section = Section(rawValue: section)!
+        let section = self.data[section].0
         
         switch section {
             
@@ -279,7 +304,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case .owner: return "Owner"
             
-        case .members: return self.data[.members]!.isEmpty ? nil : "Members"
+        case .members: return self.data.firstMatching({ $0.0 == .members })?.1.isEmpty ?? true ? nil : "Members"
             
         case .delete: return nil
         }
@@ -361,9 +386,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
 
 private extension TeamDetailViewController {
     
-    enum Section: Int {
-        
-        static let count = 4
+    enum Section {
         
         case description
         case owner
