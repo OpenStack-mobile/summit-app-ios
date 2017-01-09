@@ -43,9 +43,9 @@ public func == (lhs: TeamMember, rhs: TeamMember) -> Bool {
 
 public enum TeamPermission: String {
     
-    case admin
-    case read
-    case write
+    case admin  = "ADMIN"
+    case read   = "READ"
+    case write  = "WRITE"
 }
 
 public enum TeamMembership {

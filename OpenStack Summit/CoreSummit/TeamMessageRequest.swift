@@ -58,8 +58,8 @@ public extension TeamMessage {
     
     public enum Priority: String {
         
-        case normal
-        case high
+        case normal = "NORMAL"
+        case high   = "HIGH"
         
         public init() { self = .normal }
     }
