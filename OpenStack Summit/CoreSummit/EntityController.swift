@@ -126,7 +126,7 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
                 if managedObject.valueForKey(identifier.key) as? NSObject == identifier.value
                     && managedObject.entity.name! == self.entityName {
                         
-                        self.delegate?.managedObjectDeletedForObserver(self)
+                        self.delegate?.observer(self, managedObjectUpdated: managedObject)
                         
                         return
                 }
