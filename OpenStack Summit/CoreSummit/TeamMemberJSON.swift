@@ -12,25 +12,26 @@ public extension TeamMember {
     
     enum JSONKey: String {
         
-        case permission
+        case id, permission, team_id, member
     }
 }
 
-extension TeamMember: JSONParametrizedDecodable {
+extension TeamMember: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value, parameters: (team: Identifier, membership: TeamMembership)) {
+    public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let team = JSONObject[JSONKey.team_id.rawValue]?.rawValue as? Int,
             let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
             let permission = TeamPermission(rawValue: permissionString),
-            let member = Member(JSONValue: JSONValue)
+            let memberJSON = JSONObject[JSONKey.member.rawValue],
+            let member = Member(JSONValue: memberJSON)
             else { return nil }
         
+        self.identifier = identifier
+        self.team = team
         self.member = member
         self.permission = permission
-        
-        // not really from JSON
-        self.team = parameters.team
-        self.membership = parameters.membership
     }
 }

@@ -20,7 +20,7 @@ public final class TeamManagedObject: Entity {
     
     @NSManaged public var updatedDate: NSDate
     
-    @NSManaged public var owner: TeamMemberManagedObject
+    @NSManaged public var owner: MemberManagedObject
     
     @NSManaged public var members: Set<TeamMemberManagedObject>
     
@@ -40,7 +40,7 @@ extension Team: CoreDataDecodable {
         self.created = Date(foundation: managedObject.created)
         self.updated = Date(foundation: managedObject.updatedDate)
         self.descriptionText = managedObject.descriptionText
-        self.owner = TeamMember(managedObject: managedObject.owner)
+        self.owner = Member(managedObject: managedObject.owner)
         self.members = TeamMember.from(managedObjects: managedObject.members)
     }
 }
@@ -57,13 +57,7 @@ extension Team: CoreDataEncodable {
         managedObject.updatedDate = updated.toFoundation()
         
         // delete previous team members and owner, to not have nil inverse relationships
-        var previousMembers = [TeamMemberManagedObject]()
-        previousMembers += managedObject.members
-        let previousOwner: TeamMemberManagedObject? = managedObject.owner
-        if let owner = previousOwner {
-            previousMembers.append(owner)
-        }
-        previousMembers.forEach { context.deleteObject($0) }
+        managedObject.members.forEach { context.deleteObject($0) }
         
         // set members
         managedObject.owner = try context.relationshipFault(owner)

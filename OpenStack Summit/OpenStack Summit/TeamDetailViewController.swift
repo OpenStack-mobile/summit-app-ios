@@ -99,9 +99,9 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                                    .created(team.created),
                                    .updated(team.updated)]
         
-        self.data[.owner] = [.member(team.owner)]
+        self.data[.owner] = [.member(team.owner, nil)]
         
-        self.data[.members] = team.members.map { .member($0) }
+        self.data[.members] = team.members.map { .member($0.member, $0.permission) }
         
         self.data[.delete] = [.delete]
         
@@ -169,13 +169,13 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             return cell
             
-        case let .member(teamMember):
+        case let .member(member, permission):
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
             
-            cell.name = teamMember.member.name
-            cell.pictureURL = teamMember.member.pictureURL
-            cell.title = teamMember.permission.rawValue
+            cell.name = member.name
+            cell.pictureURL = member.pictureURL
+            cell.title = permission?.rawValue ?? ""
             
             return cell
             
@@ -267,7 +267,7 @@ private extension TeamDetailViewController {
         case description(String?)
         case created(Date)
         case updated(Date)
-        case member(TeamMember)
+        case member(Member, TeamPermission?)
         case delete
     }
 }

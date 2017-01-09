@@ -20,7 +20,7 @@ public struct Team: Named {
     
     public var updated: Date
     
-    public var owner: TeamMember
+    public var owner: Member
     
     public var members: Set<TeamMember>
 }

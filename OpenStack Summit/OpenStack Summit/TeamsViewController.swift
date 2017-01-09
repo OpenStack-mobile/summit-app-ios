@@ -37,7 +37,7 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         guard let member = Store.shared.authenticatedMember
             else { fatalError("Not logged in") }
         
-        let predicate = NSPredicate(format: "owner.member == %@ || members.member CONTAINS %@", member, member)
+        let predicate = NSPredicate(format: "owner == %@ || members.member CONTAINS %@", member, member)
         
         let sort = [NSSortDescriptor(key: "updatedDate", ascending: false), NSSortDescriptor(key: "name", ascending: true)]
         

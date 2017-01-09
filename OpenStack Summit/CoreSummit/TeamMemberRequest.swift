@@ -55,7 +55,7 @@ public extension Store {
             // remove from cache
             try! context.performErrorBlockAndWait {
                 
-                if let managedObject = try TeamMemberManagedObject.find(team: team, member: memberIdentifier, context: context) {
+                if let managedObject = try TeamMemberManagedObject.find(team, context: context) {
                     
                     context.deleteObject(managedObject)
                     

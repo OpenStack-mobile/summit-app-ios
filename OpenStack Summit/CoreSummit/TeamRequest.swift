@@ -45,9 +45,7 @@ public extension Store {
                     else { fatalError("Not authenticated") }
                 
                 // create team and cache
-                let member = Member(managedObject: memberManagedObject)
-                
-                let owner = TeamMember(team: identifier, member: member, permission: .admin, membership: .owner)
+                let owner = Member(managedObject: memberManagedObject)
                 
                 let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [])
                 
@@ -105,7 +103,7 @@ public extension Store {
     
     func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
         
-        let uri = "/api/v1/teams/\(identifier)"
+        let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member"
         
         let url = environment.configuration.serverURL + uri
         

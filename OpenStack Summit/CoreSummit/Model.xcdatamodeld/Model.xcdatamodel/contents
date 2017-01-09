@@ -92,6 +92,7 @@
         <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMessage" inverseName="from" inverseEntity="TeamMessage" syncable="YES"/>
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="teamMembership" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMember" inverseName="member" inverseEntity="TeamMember" syncable="YES"/>
+        <relationship name="teamOwner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="owner" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="Presentation" representedClassName=".PresentationManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -164,9 +165,9 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="invitations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="team" inverseEntity="TeamInvitation" syncable="YES"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMember" inverseName="teamMember" inverseEntity="TeamMember" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMember" inverseName="team" inverseEntity="TeamMember" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMessage" inverseName="team" inverseEntity="TeamMessage" syncable="YES"/>
-        <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="TeamMember" inverseName="teamOwner" inverseEntity="TeamMember" syncable="YES"/>
+        <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="teamOwner" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="TeamInvitation" representedClassName=".TeamInvitationManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -178,10 +179,11 @@
         <relationship name="team" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="invitations" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="TeamMember" representedClassName=".TeamMemberManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="permission" attributeType="String" syncable="YES"/>
         <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="teamMembership" inverseEntity="Member" syncable="YES"/>
-        <relationship name="teamMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
-        <relationship name="teamOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="owner" inverseEntity="Team" syncable="YES"/>
+        <relationship name="team" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="TeamMessage" representedClassName=".TeamMessageManagedObject" syncable="YES">
         <attribute name="body" attributeType="String" syncable="YES"/>
@@ -265,7 +267,7 @@
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
-        <element name="Member" positionX="0" positionY="144" width="128" height="270"/>
+        <element name="Member" positionX="0" positionY="144" width="128" height="285"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="135"/>
         <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="255"/>
@@ -274,7 +276,7 @@
         <element name="Tag" positionX="18" positionY="117" width="128" height="105"/>
         <element name="Team" positionX="27" positionY="171" width="128" height="195"/>
         <element name="TeamInvitation" positionX="-9" positionY="135" width="128" height="150"/>
-        <element name="TeamMember" positionX="-9" positionY="135" width="128" height="105"/>
+        <element name="TeamMember" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="TeamMessage" positionX="0" positionY="144" width="128" height="135"/>
         <element name="TicketType" positionX="-18" positionY="117" width="128" height="135"/>
         <element name="Track" positionX="-9" positionY="126" width="128" height="135"/>
