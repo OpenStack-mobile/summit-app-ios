@@ -14,5 +14,7 @@ struct Error {
     
     static let getSpeakerProfile = NSError(domain: Error.domain, code: 9001, userInfo: [NSLocalizedDescriptionKey: "There was an error getting speaker data"])
     
+    static let getMemberProfile = NSError(domain: Error.domain, code: 9001, userInfo: [NSLocalizedDescriptionKey: "There was an error getting member data"])
+    
     static let reachability = NSError(domain: Error.domain, code: 13002, userInfo: [NSLocalizedDescriptionKey: "There is no network connectivity."])
 }

@@ -101,7 +101,10 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         self.data[.owner] = [.member(team.owner, nil)]
         
-        self.data[.members] = team.members.map { .member($0.member, $0.permission) }
+        self.data[.members] = team.members
+            .sort()
+            .filter({ $0.member.identifier != team.owner.identifier }) // filter owner from members list
+            .map { .member($0.member, $0.permission) }
         
         self.data[.delete] = [.delete]
         
@@ -189,9 +192,22 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         let cellData = self[indexPath]
         
-        
+        switch cellData {
+            
+        case let .member(member, _):
+            
+            let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
+            
+            memberProfileDetailVC.profile = .member(member.identifier)
+            
+            showViewController(memberProfileDetailVC, sender: self)
+            
+        default: break
+        }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
