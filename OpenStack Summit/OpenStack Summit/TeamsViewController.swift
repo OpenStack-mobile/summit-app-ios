@@ -141,19 +141,23 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
             
         case R.segue.teamsViewController.showTeamMessages.identifier:
             
-            let viewController = segue.destinationViewController as! TeamMessagesViewController
+            let selectedItem = self[tableView.indexPathForSelectedRow!]
             
-            let selectedItem = self[self.tableView.indexPathForSelectedRow!]
+            let viewController = segue.destinationViewController as! TeamMessagesViewController
             
             viewController.team = selectedItem.identifier
             
-        case R.segue.teamsViewController.createTeam.identifier:
+        case R.segue.teamsViewController.showTeamDetail.identifier:
             
-            break
+            let selectedItem = self[tableView.indexPathForCell(sender as! UITableViewCell)!]
             
-        case R.segue.teamsViewController.showTeamInvitations.identifier:
+            let viewController = segue.destinationViewController as! TeamDetailViewController
             
-            break;
+            viewController.team = selectedItem.identifier
+            
+        case R.segue.teamsViewController.createTeam.identifier: break
+            
+        case R.segue.teamsViewController.showTeamInvitations.identifier: break
             
         default: fatalError("Unknown segue: \(segue)")
         }

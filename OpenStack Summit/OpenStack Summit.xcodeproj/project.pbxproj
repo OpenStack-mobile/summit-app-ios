@@ -349,6 +349,7 @@
 		6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054C1D2ED21300D56870 /* AboutViewController.swift */; };
 		6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49054E1D2ED6BD00D56870 /* Appearance.swift */; };
 		6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4905501D2EE04F00D56870 /* EventDetail.swift */; };
+		6E4E24601E23477F00F7F3FB /* TeamDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */; };
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E53B2A31D850FE600641A8F /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E53B2A21D850FE600641A8F /* Speakers.storyboard */; };
 		6E53B2A51D8524F500641A8F /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */; };
@@ -1003,6 +1004,7 @@
 		6E49054C1D2ED21300D56870 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
+		6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailViewController.swift; sourceTree = "<group>"; };
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E53B2A21D850FE600641A8F /* Speakers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speakers.storyboard; sourceTree = "<group>"; };
 		6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
@@ -2065,6 +2067,7 @@
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
 				6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */,
 				6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */,
+				6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */,
 				6E42419C1E1EB3690017E555 /* TeamInvitationsViewController.swift */,
 				6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */,
 			);
@@ -3028,6 +3031,7 @@
 				6E00D1AB1D1C49C200278274 /* RevealViewController.swift in Sources */,
 				6E3E8C261D47D68100A29003 /* NSDateComponents+MTDates.m in Sources */,
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
+				6E4E24601E23477F00F7F3FB /* TeamDetailViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
 				6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */,
 				6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */,

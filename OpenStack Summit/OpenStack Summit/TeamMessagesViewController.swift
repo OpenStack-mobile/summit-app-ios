@@ -36,11 +36,12 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
     
     private func configureView() {
         
-        if let team = self.team {
+        if let team = self.team,
+            let teamManagedObject = try! TeamManagedObject.find(team, context: Store.shared.managedObjectContext) {
             
-            let teamID = NSNumber(longLong: Int64(team))
+            self.title = teamManagedObject.name
             
-            let predicate = NSPredicate(format: "team.id == %@", teamID)
+            let predicate = NSPredicate(format: "team == %@", teamManagedObject)
             
             let sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
             
@@ -54,6 +55,8 @@ final class TeamMessagesViewController: UITableViewController, NSFetchedResultsC
             try! self.fetchedResultsController!.performFetch()
             
         } else {
+            
+            self.title = ""
             
             self.fetchedResultsController = nil
         }
