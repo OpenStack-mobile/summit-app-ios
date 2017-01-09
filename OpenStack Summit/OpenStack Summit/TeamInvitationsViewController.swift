@@ -115,12 +115,12 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return pageController.count
+        return pageController.items.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let data = pageController[indexPath.row]
+        let data = pageController.items[indexPath.row]
         
         switch data {
             

@@ -191,7 +191,9 @@ public final class Store {
                 "\(environment.configuration.serverURL)/summits/read-external-orders",
                 "\(environment.configuration.serverURL)/summits/confirm-external-orders",
                 "\(environment.configuration.serverURL)/teams/read",
-                "\(environment.configuration.serverURL)/teams/write"
+                "\(environment.configuration.serverURL)/teams/write",
+                "\(environment.configuration.serverURL)/members/invitations/read",
+                "\(environment.configuration.serverURL)/members/invitations/write"
             ],
             clientSecret: environment.configuration.openID.secret,
             isWebView: true

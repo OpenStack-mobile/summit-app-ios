@@ -24,14 +24,12 @@ public final class PageController<Item> {
     
     public private(set) var pages = [Page<Item>]() {
         
-        didSet { updateItemsCache() }
+        didSet { updateItems() }
     }
     
+    public private(set) var items = [PageControllerData<Item>]()
+    
     public private(set) var isLoading: Bool = false
-    
-    // MARK: - Private Properties
-    
-    private var itemsCache = [Item]()
     
     // MARK: - Initialization
     
@@ -83,26 +81,26 @@ public final class PageController<Item> {
                     
                 case let .Value(value):
                     
-                    let previousCount = controller.count
+                    let previousCount = controller.items.count
                     
-                    let oldLastIndex = previousCount - 1
+                    let previousLastIndex = controller.items.endIndex
                      
                     controller.pages.append(value)
                     
-                    guard value.items.isEmpty == false else {
+                    if value.items.isEmpty && previousCount != 0 {
                         
                         assert(value.currentPage == value.lastPage, "Empty page but not last")
                         
-                        let removedRow = PageControllerChange(index: oldLastIndex, change: .delete)
+                        let removedRow = PageControllerChange(index: previousLastIndex, change: .delete)
                         
                         controller.callback.didLoadNextPage(.Value([removedRow]))
                         
                         return
                     }
                     
-                    let newCount = controller.count
+                    let newCount = controller.items.count
                     
-                    var changes = [PageControllerChange(index: oldLastIndex, change: .update)]
+                    var changes = [PageControllerChange(index: previousLastIndex, change: .update)]
                     
                     for index in previousCount ..< newCount {
                         
@@ -117,34 +115,6 @@ public final class PageController<Item> {
     
     // MARK: - Data
     
-    public var count: Int {
-        
-        var count = itemsCache.count
-        
-        if dataLoaded == false {
-            
-            count += 1
-        }
-        
-        return count
-    }
-    
-    public subscript (index: Int) -> PageControllerData<Item> {
-        
-        if index < itemsCache.count {
-            
-            let item = itemsCache[index]
-            
-            return .item(item)
-            
-        } else {
-            
-            assert(dataLoaded == false)
-         
-            return .loading
-        }
-    }
-    
     public var dataLoaded: Bool {
         
         guard let lastPage = pages.last
@@ -156,9 +126,14 @@ public final class PageController<Item> {
     // MARK: - Private Methods
     
     @inline(__always)
-    private func updateItemsCache() {
+    private func updateItems() {
         
-        itemsCache = pages.reduce([Item](), combine: { $0.0 + $0.1.items })
+        items = pages.reduce([Item](), combine: { $0.0 + $0.1.items }).map({ .item($0) })
+        
+        if dataLoaded == false && items.isEmpty == false {
+            
+            items.append(.loading)
+        }
     }
 }
 

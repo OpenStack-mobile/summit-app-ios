@@ -22,5 +22,6 @@ extension MessageEnabledViewController {
         var message = error.localizedDescription
         message += "\n\nDomain: \(error.domain)\nCode: \(error.code)"
         SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Error)
+        debugPrint(error)
     }
 }
