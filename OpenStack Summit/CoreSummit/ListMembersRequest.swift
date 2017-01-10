@@ -104,7 +104,7 @@ public extension MemberListRequest {
         public enum Operator: String {
             
             case equal = "=="
-            case contains = "@="
+            case contains = "=@"
         }
         
         public var value: String

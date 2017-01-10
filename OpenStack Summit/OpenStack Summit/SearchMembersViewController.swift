@@ -121,8 +121,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
                     
                 case .update:
                     
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 }
             }
             

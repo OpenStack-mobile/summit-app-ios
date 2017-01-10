@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 import SwiftFoundation
 
 public final class PageController<Item> {
@@ -83,7 +82,9 @@ public final class PageController<Item> {
                     
                     let previousCount = controller.items.count
                     
-                    let previousLastIndex = controller.items.endIndex
+                    let previousLastIndex = previousCount > 0 ? previousCount - 1 : 0
+                    
+                    assert(previousCount != previousLastIndex || previousCount == 0)
                      
                     controller.pages.append(value)
                     
