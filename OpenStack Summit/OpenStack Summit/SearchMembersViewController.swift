@@ -93,7 +93,9 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
         
-        hideActivityIndicator()
+        self.hideActivityIndicator()
+        
+        self.refreshControl?.endRefreshing()
         
         switch response {
             

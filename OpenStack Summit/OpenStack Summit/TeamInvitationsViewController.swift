@@ -60,7 +60,9 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
         
-        hideActivityIndicator()
+        self.hideActivityIndicator()
+        
+        self.refreshControl?.endRefreshing()
         
         switch response {
             
