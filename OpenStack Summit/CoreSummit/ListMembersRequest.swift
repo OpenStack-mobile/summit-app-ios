@@ -18,28 +18,9 @@ public extension Store {
                  perPage: Int = 10,
                  completion: (ErrorValue<Page<Member>>) -> ()) {
         
-        let urlComponents = NSURLComponents(string: environment.configuration.serverURL + "/api/v1/members")!
+        let request = MemberListRequest(page: page, perPage: perPage, filter: filter, sort: sort)
         
-        var queryItems = [NSURLQueryItem]()
-        
-        queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
-        queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
-        
-        if let filter = filter {
-            
-            let queryValueString = filter.property.rawValue + "==" + filter.value
-            
-            queryItems.append(NSURLQueryItem(name: "filter", value: queryValueString))
-        }
-        
-        if let sort = sort {
-            
-            queryItems.append(NSURLQueryItem(name: "sort", value: sort.rawValue))
-        }
-        
-        urlComponents.queryItems = queryItems
-        
-        let url = urlComponents.URL!.absoluteString!
+        let url = request.toURL(environment.configuration.serverURL)
         
         let http = self.createHTTP(.ServiceAccount)
         
@@ -80,6 +61,32 @@ public struct MemberListRequest {
     public var filter: Filter?
     
     public var sort: SortDescriptor?
+    
+    public func toURL(serverURL: String) -> String {
+        
+        let urlComponents = NSURLComponents(string: serverURL + "/api/v1/members")!
+        
+        var queryItems = [NSURLQueryItem]()
+        
+        queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
+        queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
+        
+        if let filter = filter {
+            
+            let queryValueString = filter.property.rawValue + filter.filterOperator.rawValue + filter.value
+            
+            queryItems.append(NSURLQueryItem(name: "filter", value: queryValueString))
+        }
+        
+        if let sort = sort {
+            
+            queryItems.append(NSURLQueryItem(name: "sort", value: sort.rawValue))
+        }
+        
+        urlComponents.queryItems = queryItems
+        
+        return urlComponents.URL!.absoluteString!
+    }
 }
 
 public extension MemberListRequest {
@@ -94,14 +101,23 @@ public extension MemberListRequest {
             case irc
         }
         
+        public enum Operator: String {
+            
+            case equal = "=="
+            case contains = "@="
+        }
+        
         public var value: String
         
         public var property: Property
         
-        public init(value: String, property: Property) {
+        public var filterOperator: Operator
+        
+        public init(value: String, property: Property, filterOperator: Operator = .contains) {
             
             self.value = value
             self.property = property
+            self.filterOperator = filterOperator
         }
     }
     

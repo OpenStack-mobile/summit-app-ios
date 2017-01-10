@@ -20,4 +20,9 @@ public struct Page<Item> {
     public let perPage: Int
     
     public let items: [Item]
+    
+    public static var empty: Page<Item> {
+        
+        return Page(currentPage: 1, total: 1, lastPage: 1, perPage: 0, items: [])
+    }
 }

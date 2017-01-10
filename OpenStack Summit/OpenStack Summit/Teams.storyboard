@@ -199,7 +199,7 @@
         <!--Add Member-->
         <scene sceneID="c86-J5-6Y1">
             <objects>
-                <tableViewController id="BWG-mj-H3e" customClass="AddTeamMemberViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddTeamMemberViewController" id="BWG-mj-H3e" customClass="AddTeamMemberViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="yTE-kE-JtV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C89-y6-mc3">
-                                                    <rect key="frame" x="91" y="0.0" width="196" height="89"/>
+                                                    <rect key="frame" x="91" y="0.0" width="196" height="89.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -333,6 +333,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Member" id="1UK-S3-oEg">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="qrX-vh-3h4"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PyF-OJ-9wr">
                             <connections>
                                 <action selector="cancel:" destination="BWG-mj-H3e" id="07g-g5-Xci"/>

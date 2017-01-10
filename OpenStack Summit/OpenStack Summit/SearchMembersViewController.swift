@@ -19,13 +19,15 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    
+    @IBOutlet private var cancelButton: UIBarButtonItem!
     
     // MARK: - Properties
     
     var didCancel: ((SearchMembersViewController) -> ())? {
         
-        didSet { self.navigationItem.leftBarButtonItem?.enabled = didCancel != nil }
+        didSet { configureView() }
     }
     
     var selectedMember: (SearchMembersViewController, Member) -> () = { _ in }
@@ -50,6 +52,8 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         pageController.callback.didLoadNextPage = { [weak self] in self?.didLoadNextPage($0) }
         
         search()
+        
+        configureView()
     }
     
     // MARK: - Actions
@@ -68,16 +72,11 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     private func fetch(page: Int, perPage: Int, completion: (ErrorValue<Page<Member>>) -> ()) {
         
-        let filter: MemberListRequest.Filter?
+        // dont make request for empty search filter
+        guard let searchText = self.searchBar.text where searchText.isEmpty == false
+            else { completion(.Value(.empty)); return }
         
-        if let searchText = self.searchBar.text {
-            
-            filter = MemberListRequest.Filter(value: searchText, property: scope)
-            
-        } else {
-            
-            filter = nil
-        }
+        let filter = MemberListRequest.Filter(value: searchText, property: scope)
         
         let sort = scope.preferredSortDescriptor
         
@@ -86,7 +85,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     
     private func willLoadData() {
         
-        if pageController.pages.isEmpty {
+        if pageController.pages.isEmpty && (self.searchBar.text?.isEmpty ?? true) == false {
             
             showActivityIndicator()
         }
@@ -152,6 +151,11 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         }
     }
     
+    private func configureView() {
+        
+        self.navigationItem.leftBarButtonItem = didCancel != nil ? cancelButton : nil
+    }
+    
     // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -214,6 +218,28 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         self.scope = Scope(scopeIndex: selectedScope)!
         
         self.search()
+    }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.searchMembersViewController.showMemberDetail.identifier:
+            
+            let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+            
+            let data = self.pageController.items[indexPath.row]
+            
+            guard case let .item(member) = data else { fatalError("Invalid cell") }
+            
+            let memberProfileDetailViewController = segue.destinationViewController as! MemberProfileDetailViewController
+            
+            memberProfileDetailViewController.profile = .member(member.identifier)
+            
+        default: fatalError("Unknown segue: \(segue)")
+        }
     }
 }
 

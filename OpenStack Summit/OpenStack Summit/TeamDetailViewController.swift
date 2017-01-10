@@ -62,7 +62,10 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         entityController.enabled = true
         
         // fetch from server
-        self.refresh()
+        if Reachability.connected {
+            
+            self.refresh()
+        }
     }
     
     // MARK: - Actions
