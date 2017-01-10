@@ -173,11 +173,11 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         
         switch data {
             
-        case let .item(member):
+        case let .item(item):
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
             
-            configure(cell: cell, with: member)
+            configure(cell: cell, with: item)
             
             return cell
             
@@ -185,7 +185,13 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
             pageController.loadNextPage()
             
-            return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            
+            cell.activityIndicator.hidden = false
+            
+            cell.activityIndicator.startAnimating()
+            
+            return cell
         }
     }
     

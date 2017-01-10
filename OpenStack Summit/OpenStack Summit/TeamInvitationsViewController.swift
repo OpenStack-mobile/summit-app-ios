@@ -88,8 +88,7 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
                     
                 case .update:
                     
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 }
             }
             
@@ -124,15 +123,23 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
         
         switch data {
             
-        case .loading:
-            
-            return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell)!
-            
         case let .item(item):
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamInvitationCell)!
             
             configure(cell: cell, with: item)
+            
+            return cell
+            
+        case .loading:
+            
+            pageController.loadNextPage()
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
+            
+            cell.activityIndicator.hidden = false
+            
+            cell.activityIndicator.startAnimating()
             
             return cell
         }

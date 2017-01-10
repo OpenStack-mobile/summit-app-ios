@@ -101,11 +101,12 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
             
         } else {
             
-            self.selectedMemberCell.selectMemberLabel.hidden = false
-            self.selectedMemberCell.nameLabel.hidden = true
-            self.selectedMemberCell.titleLabel.hidden = true
             self.selectedMemberCell.pictureURL = ""
         }
+        
+        self.selectedMemberCell.selectMemberLabel.hidden = self.member != nil
+        self.selectedMemberCell.nameLabel.hidden = self.member == nil
+        self.selectedMemberCell.titleLabel.hidden = self.member == nil
         
         // configure permission cells
         
@@ -143,14 +144,11 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - SearchMembersViewControllerDelegate
     
-    private func searchMembersViewControllerDidCancel(searchMembersViewController: SearchMembersViewController) {
-        
-        searchMembersViewController.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     private func searchMembersViewController(searchMembersViewController: SearchMembersViewController, didSelect member: Member) {
         
         self.member = member
+        
+        self.navigationController!.popViewControllerAnimated(true)
     }
     
     // MARK: - UITableViewDelegate
