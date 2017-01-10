@@ -456,6 +456,7 @@
 		6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F51D7C903E002B7C7A /* Main.storyboard */; };
 		6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */; };
 		6E9FBCFB1D933F1B0005234F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */; };
+		6EA159881E25217A007FB9E6 /* AddTeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA159871E25217A007FB9E6 /* AddTeamMemberViewController.swift */; };
 		6EA38A701DCB059400B703CE /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
 		6EA38A741DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */; };
 		6EA38A751DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */; };
@@ -1084,6 +1085,7 @@
 		6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TVAssets.xcassets; sourceTree = "<group>"; };
 		6E9F28FA1D7C903E002B7C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EA062A01D63AD09009538CE /* RealmVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVideo.swift; sourceTree = "<group>"; };
+		6EA159871E25217A007FB9E6 /* AddTeamMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTeamMemberViewController.swift; sourceTree = "<group>"; };
 		6EA1F0891D660B550064C338 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdateManagedObject.swift; sourceTree = "<group>"; };
 		6EA38A771DCB1CA000B703CE /* EventDataUpdateManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdateManagedObject.swift; sourceTree = "<group>"; };
@@ -2073,6 +2075,7 @@
 				6E42419C1E1EB3690017E555 /* TeamInvitationsViewController.swift */,
 				6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */,
 				6E4E24611E24258D00F7F3FB /* SearchMembersViewController.swift */,
+				6EA159871E25217A007FB9E6 /* AddTeamMemberViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3032,6 +3035,7 @@
 				6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */,
 				6E9FBCFB1D933F1B0005234F /* SWRevealViewController.m in Sources */,
 				6E2538271D1A14E1003E3400 /* ScheduleTableViewCell.swift in Sources */,
+				6EA159881E25217A007FB9E6 /* AddTeamMemberViewController.swift in Sources */,
 				6E00D1AB1D1C49C200278274 /* RevealViewController.swift in Sources */,
 				6E3E8C261D47D68100A29003 /* NSDateComponents+MTDates.m in Sources */,
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,

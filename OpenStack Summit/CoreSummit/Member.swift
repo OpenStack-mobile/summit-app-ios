@@ -45,7 +45,7 @@ public func == (lhs: Member, rhs: Member) -> Bool {
 
 extension Member: Person {
     
-    public var title: String? { return nil }
+    public var title: String? { return speakerRole?.title }
 }
 
 #if os(iOS)

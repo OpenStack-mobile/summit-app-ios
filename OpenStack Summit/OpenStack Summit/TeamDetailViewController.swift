@@ -89,44 +89,6 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
     }
     
-    @IBAction func addMember(sender: AnyObject? = nil) {
-        
-        let memberSearchViewController = R.storyboard.member.searchMembersViewController()!
-        
-        memberSearchViewController.didCancel = { $0.dismissViewControllerAnimated(true, completion: nil) }
-        
-        memberSearchViewController.selectedMember = { [weak self] in
-            
-            guard let controller = self else { return }
-            
-            let memberID = $0.1.identifier
-            
-            $0.0.dismissViewControllerAnimated(true) {
-                
-                Store.shared.add(member: memberID, to: controller.team, permission: .admin) { (response) in
-                    
-                    NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
-                        
-                        guard let controller = self else { return }
-                        
-                        switch response {
-                            
-                        case let .Error(error):
-                            
-                            controller.showErrorMessage(error as NSError)
-                            
-                        case .Value: break
-                        }
-                    }
-                }
-            }
-        }
-        
-        let navigationController = UINavigationController(rootViewController: memberSearchViewController)
-        
-        self.presentViewController(navigationController, animated: true, completion: nil)
-    }
-    
     // MARK: - Private Methods
     
     private func configureView(team: Team) {
@@ -291,7 +253,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             cell.name = member.name
             cell.pictureURL = member.pictureURL
-            cell.title = ""
+            cell.title = member.title ?? member.twitter ?? member.irc
             
             return cell
             
@@ -484,6 +446,24 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         }
         
         return true
+    }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.teamDetailViewController.addMember.identifier:
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            
+            let addTeamMemberViewController = navigationController.topViewController as! AddTeamMemberViewController
+            
+            addTeamMemberViewController.team = self.team
+            
+        default: fatalError("Unknown segue")
+        }
     }
 }
 
