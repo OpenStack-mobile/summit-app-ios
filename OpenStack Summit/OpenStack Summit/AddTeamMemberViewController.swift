@@ -80,7 +80,9 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value: break
+                case .Value:
+                    
+                    controller.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
         }

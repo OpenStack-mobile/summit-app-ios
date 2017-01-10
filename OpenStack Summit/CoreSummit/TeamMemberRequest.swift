@@ -20,7 +20,7 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDJSON)
         
-        http.POST(url, parameters: ["permissions": permission.rawValue]) { (responseObject, error) in
+        http.POST(url, parameters: ["permission": permission.rawValue]) { (responseObject, error) in
             
             // forward error
             guard error == nil
