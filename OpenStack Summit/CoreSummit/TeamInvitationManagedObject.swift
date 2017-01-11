@@ -14,6 +14,8 @@ public final class TeamInvitationManagedObject: Entity {
     
     @NSManaged public var created: NSDate
     
+    @NSManaged public var updatedDate: NSDate
+    
     @NSManaged public var permission: String
     
     @NSManaged public var invitee: MemberManagedObject
@@ -31,6 +33,7 @@ extension TeamInvitation: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.created = Date(foundation: managedObject.created)
+        self.updated = Date(foundation: managedObject.updatedDate)
         self.permission = TeamPermission(rawValue: managedObject.permission)!
         self.invitee = Member(managedObject: managedObject.invitee)
         self.inviter = Member(managedObject: managedObject.inviter)
@@ -45,6 +48,7 @@ extension TeamInvitation: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.created = created.toFoundation()
+        managedObject.updatedDate = updated.toFoundation()
         managedObject.permission = permission.rawValue
         managedObject.invitee = try context.relationshipFault(invitee)
         managedObject.inviter = try context.relationshipFault(inviter)

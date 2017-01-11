@@ -12,7 +12,7 @@ public extension TeamInvitation {
     
     enum JSONKey: String {
         
-        case id, team, invitee, inviter, permissions, created_at
+        case id, team, invitee, inviter, permission, created_at, updated_at
     }
 }
 
@@ -28,9 +28,10 @@ extension TeamInvitation: JSONDecodable {
             let invitee = Member(JSONValue: inviteeJSON),
             let inviterJSON = JSONObject[JSONKey.inviter.rawValue],
             let inviter = Member(JSONValue: inviterJSON),
-            let permissionString = JSONObject[JSONKey.permissions.rawValue]?.rawValue as? String,
+            let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
             let permission = TeamPermission(rawValue: permissionString),
-            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int
+            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
+            let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier
@@ -39,5 +40,6 @@ extension TeamInvitation: JSONDecodable {
         self.inviter = inviter
         self.permission = permission
         self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
     }
 }

@@ -174,6 +174,7 @@
         <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="permission" attributeType="String" syncable="YES"/>
+        <attribute name="updatedDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="invitee" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="recievedInvites" inverseEntity="Member" syncable="YES"/>
         <relationship name="inviter" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="sentInvites" inverseEntity="Member" syncable="YES"/>
         <relationship name="team" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="invitations" inverseEntity="Team" syncable="YES"/>
@@ -275,7 +276,7 @@
         <element name="SummitType" positionX="0" positionY="99" width="128" height="105"/>
         <element name="Tag" positionX="18" positionY="117" width="128" height="105"/>
         <element name="Team" positionX="27" positionY="171" width="128" height="195"/>
-        <element name="TeamInvitation" positionX="-9" positionY="135" width="128" height="150"/>
+        <element name="TeamInvitation" positionX="-9" positionY="135" width="128" height="165"/>
         <element name="TeamMember" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="TeamMessage" positionX="0" positionY="144" width="128" height="135"/>
         <element name="TicketType" positionX="-18" positionY="117" width="128" height="135"/>
