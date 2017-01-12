@@ -75,8 +75,16 @@ extension Member: CoreDataEncodable {
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.biography = biography
-        managedObject.speakerRole = try context.relationshipFault(speakerRole)
-        managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
+        
+        if speakerRole != nil {
+            
+            managedObject.speakerRole = try context.relationshipFault(speakerRole)
+        }
+        
+        if attendeeRole != nil {
+            
+            managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
+        }
         
         managedObject.didCache()
         

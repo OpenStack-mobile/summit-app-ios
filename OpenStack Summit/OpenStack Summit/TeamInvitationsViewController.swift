@@ -18,6 +18,14 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     let pageController = PageController<TeamInvitation>(fetch: Store.shared.invitations)
     
+    private static let dateFormatter: NSDateFormatter = {
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter
+    }()
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -102,9 +110,76 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
         
         cell.teamLabel.text = invitation.team.name
         
-        cell.inviterLabel.text = invitation.inviter.name
+        cell.inviterLabel.text = "Invited by: " + invitation.inviter.name
         
-        cell.dateLabel.text = invitation.created.toFoundation().description
+        cell.dateLabel.text = TeamInvitationsViewController.dateFormatter.stringFromDate(invitation.created.toFoundation())
+    }
+    
+    private func accept(invitation: TeamInvitation) {
+        
+        showActivityIndicator()
+        
+        Store.shared.accept(invitation: invitation.identifier) { (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                
+                guard let controller = self else { return }
+                
+                if let error = response {
+                    
+                    controller.hideActivityIndicator()
+                    
+                    controller.showErrorMessage(error)
+                    
+                } else {
+                    
+                    Store.shared.fetch(team: invitation.team.identifier) { [weak self] (response) in
+                        
+                        NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                            
+                            guard let controller = self else { return }
+                            
+                            controller.hideActivityIndicator()
+                            
+                            switch response {
+                                
+                            case let .Error(error):
+                                
+                                controller.showErrorMessage(error)
+                                
+                            case .Value:
+                                
+                                controller.refresh()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func decline(invitation: TeamInvitation) {
+        
+        showActivityIndicator()
+        
+        Store.shared.decline(invitation: invitation.identifier) { (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                
+                guard let controller = self else { return }
+                
+                controller.hideActivityIndicator()
+                
+                if let error = response {
+                    
+                    controller.showErrorMessage(error)
+                    
+                } else {
+                    
+                    controller.refresh()
+                }
+            }
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -149,9 +224,24 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
+        let data = pageController.items[indexPath.row]
         
+        switch data {
+            
+        case let .item(item):
+            
+            let accept = UITableViewRowAction(style: .Normal, title: "Accept") { [weak self] (_,_) in self?.accept(item) }
+            
+            let decline = UITableViewRowAction(style: .Destructive, title: "Decline") { [weak self] (_,_) in self?.decline(item)  }
+            
+            return [decline, accept]
+            
+        case .loading:
+            
+            return nil
+        }
     }
 }
 

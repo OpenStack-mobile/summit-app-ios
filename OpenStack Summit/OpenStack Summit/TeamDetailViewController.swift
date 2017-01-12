@@ -296,7 +296,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
             
-            memberProfileDetailVC.profile = .member(teamMember.identifier)
+            memberProfileDetailVC.profile = .member(teamMember.member.identifier)
             
             showViewController(memberProfileDetailVC, sender: self)
             

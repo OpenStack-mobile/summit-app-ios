@@ -49,6 +49,6 @@ public extension Team {
             return .admin
         }
         
-        return members.firstMatching({ $0.member.identifier == identifier })?.permission
+        return members.firstMatching({ $0.member.identifier == member })?.permission
     }
 }
