@@ -14,7 +14,7 @@
         <!--Teams-->
         <scene sceneID="rm1-Gw-hu4">
             <objects>
-                <tableViewController storyboardIdentifier="TeamsViewController" clearsSelectionOnViewWillAppear="NO" id="G1H-dn-TEh" customClass="TeamsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TeamsViewController" title="Teams" clearsSelectionOnViewWillAppear="NO" id="G1H-dn-TEh" customClass="TeamsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xbX-aR-eNH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="fys-4W-ja5" kind="show" identifier="showTeamDetail" trigger="accessoryAction" id="SbF-06-Bzg"/>
-                                    <segue destination="n2X-fr-Zje" kind="show" identifier="showTeamMessages" id="QWw-CB-qv8"/>
+                                    <segue destination="B7A-5B-onm" kind="show" identifier="showTeamMessages" id="95u-6a-aLw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -75,6 +75,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYi-nQ-nJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1166" y="-54"/>
+        </scene>
+        <!--Team Name-->
+        <scene sceneID="SNi-uz-jA0">
+            <objects>
+                <viewController storyboardIdentifier="TeamMessagesViewController" id="B7A-5B-onm" customClass="TeamMessagesViewController" customModule="OpenStackSummit" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="X0K-cy-l69"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qu4-JM-9T0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HfW-p5-D5p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Team Name" id="7zq-Fg-sBS">
+                        <barButtonItem key="backBarButtonItem" title="Team" id="v1K-Eg-r30"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v0a-ga-Kyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235" y="-55"/>
         </scene>
         <!--Team Detail View Controller-->
         <scene sceneID="lc8-lZ-Dsp">
@@ -162,7 +183,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="fmU-ir-gZx">
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Team" placeholder="Team Name" textAlignment="center" minimumFontSize="17" id="WmG-gC-fhm">
-                            <rect key="frame" x="47" y="7" width="224" height="30"/>
+                            <rect key="frame" x="45.5" y="7" width="224" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -373,51 +394,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfT-xi-Wjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3219" y="-805"/>
-        </scene>
-        <!--Team Name-->
-        <scene sceneID="TmA-Lh-1MZ">
-            <objects>
-                <tableViewController storyboardIdentifier="TeamMessagesViewController" id="n2X-fr-Zje" customClass="TeamMessagesViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VCy-Pi-hY2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TeamMessageCell" textLabel="o0P-LG-SIr" detailTextLabel="LRs-ob-wdi" rowHeight="58" style="IBUITableViewCellStyleSubtitle" id="fF4-ow-el3">
-                                <rect key="frame" x="0.0" y="28" width="320" height="58"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fF4-ow-el3" id="BXh-XZ-tRX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o0P-LG-SIr">
-                                            <rect key="frame" x="15" y="12" width="66" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LRs-ob-wdi">
-                                            <rect key="frame" x="15" y="32" width="25" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="n2X-fr-Zje" id="yeU-5x-c7O"/>
-                            <outlet property="delegate" destination="n2X-fr-Zje" id="nls-zB-1sp"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Team Name" id="Erh-d0-JPG"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9YX-3B-tdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2177" y="-55"/>
         </scene>
         <!--Invitations-->
         <scene sceneID="Fmp-cW-JUv">

@@ -6,3 +6,4 @@
 #import "NSDate+MTDates.h"
 #import "NSDateComponents+MTDates.h"
 #import "SWRevealViewController.h"
+#import "MessageTableViewCell.h"
