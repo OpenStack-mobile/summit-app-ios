@@ -177,7 +177,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     override func canPressRightButton() -> Bool {
         
-        return sending
+        return sending == false
     }
     
     override func didPressRightButton(sender: AnyObject?) {
@@ -198,9 +198,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
                     
                     controller.showErrorMessage(error)
                     
-                case let .Value(error):
-                    
-                    
+                case .Value: break
                 }
             }
         }
