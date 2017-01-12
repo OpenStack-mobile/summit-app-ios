@@ -43,6 +43,8 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
                                                            self.readPermissionCell,
                                                            self.writePermissionCell]
     
+    private var teamCache: Team!
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -91,6 +93,11 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     // MARK: - Private Methods
     
     private func configureView() {
+        
+        guard let team = try! Team.find(self.team, context: Store.shared.managedObjectContext)
+            else { fatalError("Team not present") }
+        
+        self.teamCache = team
         
         // configure member cell
         
@@ -147,6 +154,9 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     // MARK: - SearchMembersViewControllerDelegate
     
     private func searchMembersViewController(searchMembersViewController: SearchMembersViewController, didSelect member: Member) {
+        
+        guard teamCache.permission(for: member.identifier) == nil
+            else { return }
         
         self.member = member
         

@@ -16,6 +16,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     // MARK: - IB Outlets
     
+    @IBOutlet private(set) var addMemberBarButtonItem: UIBarButtonItem!
+    
     @IBOutlet private(set) weak var nameTextField: UITextField!
     
     // MARK: - Properties
@@ -60,6 +62,10 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         entityController.event.deleted = { [weak self] in self?.wasDeleted() }
         
         entityController.enabled = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         // fetch from server
         if Reachability.connected {
@@ -105,6 +111,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         self.nameTextField.text = team.name
         
         self.nameTextField.userInteractionEnabled = canEdit
+        
+        self.navigationItem.rightBarButtonItem = canEdit ? addMemberBarButtonItem : nil
         
         self.data.removeAll()
         
@@ -339,7 +347,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case .member:
             
-            return .Delete
+            return canEdit ? .Delete : .None
             
         default:
             
