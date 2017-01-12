@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import Haneke
 import SlackTextViewController
 
 final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsControllerDelegate, MessageEnabledViewController {
@@ -65,7 +66,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         let predicate = NSPredicate(format: "team == %@", teamManagedObject)
         
-        let sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
+        let sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
         
         self.fetchedResultsController = NSFetchedResultsController(TeamMessage.self,
                                                                    delegate: self,
@@ -114,6 +115,8 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     private func configure(cell cell: MessageTableViewCell, at indexPath: NSIndexPath) {
         
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        
         let messageData = self[data: indexPath]
         
         cell.indexPath = indexPath
@@ -122,13 +125,24 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         cell.titleLabel.text = messageData.name
         cell.bodyLabel.text = messageData.body
         
+        cell.thumbnailView.image = placeholderMemberImage
+        
         if let url = messageData.image {
             
-            cell.thumbnailView.hnk_setImageFromURL(url, placeholder: placeholderMemberImage)
-            
-        } else {
-            
-            cell.thumbnailView.image = placeholderMemberImage
+            Shared.imageCache.fetch(URL: url, failure: nil, success: { [weak self] (image) in
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                    
+                    guard let controller = self else { return }
+                    
+                    // cell hasnt changed
+                    guard indexPath == controller.fetchedResultsController.indexPathForObject(managedObject)
+                        && controller[data: indexPath].image == url
+                        else { return }
+                    
+                    cell.thumbnailView.image = image
+                }
+            })
         }
         
         // Cells must inherit the table view's transform
