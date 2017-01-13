@@ -401,8 +401,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                         
                         Crashlytics.sharedInstance().setUserIdentifier("\(userID)")
                     }
-                    
-                    PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
                 }
             }
         }
@@ -423,9 +421,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         reloadMenu()
         hideMenu()
         hideActivityIndicator()
-        
-        PushNotificationsManager.unsubscribeFromPushChannels { (succeeded, error) in
-        }
     }
     
     // MARK: - SWRevealViewControllerDelegate

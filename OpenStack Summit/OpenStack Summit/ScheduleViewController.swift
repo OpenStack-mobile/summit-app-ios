@@ -25,9 +25,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     final private(set) var dayEvents = [ScheduleItem]()
     
     private var addToScheduleInProgress = false
-    
-    private var pushRegisterInProgress = false
-    
+        
     private var filterObserver: Int?
     
     private var didSelectDate = false
@@ -212,9 +210,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     private func updateUI(summit: Summit) {
         
         let scheduleFilter = FilterManager.shared.filter.value
-        
-        self.subscribeToPushChannelsUsingContextIfNotDoneAlready()
-        
+                
         let timeZone = NSTimeZone(name: summit.timeZone)!
         
         NSDate.mt_setTimeZone(timeZone)
@@ -346,25 +342,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
                 let deletedIndexPaths = (dayEvents.count ..< oldSchedule.count).map { NSIndexPath(forRow: $0, inSection: 0) }
                 
                 tableView.deleteRowsAtIndexPaths(deletedIndexPaths, withRowAnimation: .Automatic)
-            }
-        }
-    }
-    
-    private func subscribeToPushChannelsUsingContextIfNotDoneAlready() {
-        
-        if pushRegisterInProgress {
-            return
-        }
-        
-        pushRegisterInProgress = true
-        
-        if NSUserDefaults.standardUserDefaults().objectForKey("registeredPushNotificationChannels") == nil {
-            
-            PushNotificationsManager.subscribeToPushChannelsUsingContext() { (succeeded: Bool, error: NSError?) in
-                if succeeded {
-                    NSUserDefaults.standardUserDefaults().setObject("true", forKey: "registeredPushNotificationChannels")
-                }
-                self.pushRegisterInProgress = false
             }
         }
     }

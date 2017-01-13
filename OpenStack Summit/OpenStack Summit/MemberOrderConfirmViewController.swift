@@ -182,15 +182,12 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                                 
                             case let .Error(error):
                                 
-                                controller.showErrorMessage(error as NSError)
+                                controller.showErrorMessage(error)
                                 
                             case .Value:
                                 
                                 controller.showAttendeesSelector(false)
                                 AppDelegate.shared.menuViewController.showEvents()
-                                
-                                PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in
-                                })
                             }
                         }
                     }

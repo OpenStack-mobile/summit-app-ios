@@ -283,6 +283,14 @@
 		6E2CA11F1D787B8E00405A40 /* EventFiltersInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA11E1D787B8E00405A40 /* EventFiltersInterfaceController.swift */; };
 		6E2CA1221D787E4D00405A40 /* LabelCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1211D787E4D00405A40 /* LabelCellController.swift */; };
 		6E2CA1251D78809D00405A40 /* VenuesMapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CA1241D78809D00405A40 /* VenuesMapInterfaceController.swift */; };
+		6E2D18541E29417F0095508A /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D18531E29417F0095508A /* Firebase.swift */; };
+		6E2D185C1E29431C0095508A /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D18551E29431C0095508A /* FirebaseAnalytics.framework */; };
+		6E2D185D1E29431C0095508A /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D18561E29431C0095508A /* FirebaseCore.framework */; };
+		6E2D185E1E29431C0095508A /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D18571E29431C0095508A /* FirebaseInstanceID.framework */; };
+		6E2D185F1E29431C0095508A /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D18581E29431C0095508A /* FirebaseMessaging.framework */; };
+		6E2D18601E29431C0095508A /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D18591E29431C0095508A /* GoogleInterchangeUtilities.framework */; };
+		6E2D18611E29431C0095508A /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D185A1E29431C0095508A /* GoogleSymbolUtilities.framework */; };
+		6E2D18621E29431C0095508A /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2D185B1E29431C0095508A /* GoogleToolboxForMac.framework */; };
 		6E2D9FD21DC98E330015C588 /* PresentationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */; };
 		6E2D9FD31DC98E330015C588 /* PresentationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */; };
 		6E2D9FD41DC98E330015C588 /* PresentationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */; };
@@ -409,7 +417,6 @@
 		6E7FEA321D78AA6200B9E809 /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */; };
 		6E7FEA331D78E8D800B9E809 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
 		6E7FEA341D78E8E000B9E809 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E1E6C1D769E6800F6CB29 /* UserActivity.swift */; };
-		6E8660B71D62001700359FA1 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8660B61D62001700359FA1 /* PushNotificationManager.swift */; };
 		6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E8D0CD31D79CBA7004B435A /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D0CD21D79CBA7004B435A /* ImageCache.swift */; };
 		6E8D10991DF87F3B00A0BBDC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
@@ -973,6 +980,14 @@
 		6E2CA11E1D787B8E00405A40 /* EventFiltersInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFiltersInterfaceController.swift; sourceTree = "<group>"; };
 		6E2CA1211D787E4D00405A40 /* LabelCellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCellController.swift; sourceTree = "<group>"; };
 		6E2CA1241D78809D00405A40 /* VenuesMapInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesMapInterfaceController.swift; sourceTree = "<group>"; };
+		6E2D18531E29417F0095508A /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		6E2D18551E29431C0095508A /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		6E2D18561E29431C0095508A /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
+		6E2D18571E29431C0095508A /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		6E2D18581E29431C0095508A /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
+		6E2D18591E29431C0095508A /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		6E2D185A1E29431C0095508A /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		6E2D185B1E29431C0095508A /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
 		6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationManagedObject.swift; sourceTree = "<group>"; };
 		6E2D9FD51DC994210015C588 /* TrackManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackManagedObject.swift; sourceTree = "<group>"; };
 		6E2D9FD91DC9944E0015C588 /* SpeakerManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerManagedObject.swift; sourceTree = "<group>"; };
@@ -1055,7 +1070,6 @@
 		6E7E18E91D490DAC009549BA /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesInterfaceController.swift; sourceTree = "<group>"; };
 		6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
-		6E8660B61D62001700359FA1 /* PushNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAttendeeFromOrderListRequest.swift; sourceTree = "<group>"; };
 		6E8D0CD21D79CBA7004B435A /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6E8D10981DF87F3B00A0BBDC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -1251,13 +1265,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E2D18601E29431C0095508A /* GoogleInterchangeUtilities.framework in Frameworks */,
 				6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */,
+				6E2D18621E29431C0095508A /* GoogleToolboxForMac.framework in Frameworks */,
 				6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */,
+				6E2D185D1E29431C0095508A /* FirebaseCore.framework in Frameworks */,
+				6E2D18611E29431C0095508A /* GoogleSymbolUtilities.framework in Frameworks */,
+				6E2D185E1E29431C0095508A /* FirebaseInstanceID.framework in Frameworks */,
 				6EDE52321D42D50000DF4BEA /* libz.tbd in Frameworks */,
 				6EDE52301D42D4F600DF4BEA /* libicucore.tbd in Frameworks */,
+				6E2D185F1E29431C0095508A /* FirebaseMessaging.framework in Frameworks */,
 				6EDE522E1D42D4EB00DF4BEA /* libc++.tbd in Frameworks */,
 				6EDE522C1D42D4D600DF4BEA /* ImageIO.framework in Frameworks */,
 				6EDE52251D42D4C700DF4BEA /* CoreGraphics.framework in Frameworks */,
+				6E2D185C1E29431C0095508A /* FirebaseAnalytics.framework in Frameworks */,
 				6EDE52261D42D4C700DF4BEA /* CoreLocation.framework in Frameworks */,
 				6EDE52271D42D4C700DF4BEA /* CoreText.framework in Frameworks */,
 				6EDE52281D42D4C700DF4BEA /* GLKit.framework in Frameworks */,
@@ -1409,7 +1430,7 @@
 				6EF12C5E1D149B4B00814AD0 /* Define.swift */,
 				6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */,
 				6E7E18E91D490DAC009549BA /* Preference.swift */,
-				6E8660B61D62001700359FA1 /* PushNotificationManager.swift */,
+				6E2D18531E29417F0095508A /* Firebase.swift */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */,
 				6EFC99C01D2198DF009FD0DA /* Menu.storyboard */,
@@ -1963,6 +1984,13 @@
 		6EDE52161D42D08200DF4BEA /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				6E2D18551E29431C0095508A /* FirebaseAnalytics.framework */,
+				6E2D18561E29431C0095508A /* FirebaseCore.framework */,
+				6E2D18571E29431C0095508A /* FirebaseInstanceID.framework */,
+				6E2D18581E29431C0095508A /* FirebaseMessaging.framework */,
+				6E2D18591E29431C0095508A /* GoogleInterchangeUtilities.framework */,
+				6E2D185A1E29431C0095508A /* GoogleSymbolUtilities.framework */,
+				6E2D185B1E29431C0095508A /* GoogleToolboxForMac.framework */,
 				6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */,
 				6EB295161DA97B0B0021C846 /* Crashlytics.framework */,
 				6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */,
@@ -3012,6 +3040,7 @@
 				6EF12C5F1D149B4B00814AD0 /* Define.swift in Sources */,
 				6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */,
 				6E25384B1D1AF416003E3400 /* Filter.swift in Sources */,
+				6E2D18541E29417F0095508A /* Firebase.swift in Sources */,
 				6EF12C681D149CA600814AD0 /* R.generated.swift in Sources */,
 				6E4241A01E1ED4C90017E555 /* LoadingTableViewCell.swift in Sources */,
 				6E42419D1E1EB3690017E555 /* TeamInvitationsViewController.swift in Sources */,
@@ -3024,7 +3053,6 @@
 				6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */,
 				6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */,
 				6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */,
-				6E8660B71D62001700359FA1 /* PushNotificationManager.swift in Sources */,
 				6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */,
 				6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */,
 				6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */,
@@ -3845,6 +3873,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Debug;
 		};
@@ -3865,6 +3894,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Release;
 		};
@@ -4171,6 +4201,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Beta;
 		};
@@ -4315,6 +4346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Mocked;
 		};
