@@ -93,7 +93,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
-        // [START register_for_notifications]
         if #available(iOS 10.0, *) {
             let authOptions: UNAuthorizationOptions = [.Alert, .Badge, .Sound]
             UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(authOptions, completionHandler: { _ in })
@@ -102,14 +101,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             UNUserNotificationCenter.currentNotificationCenter().delegate = self
             
         } else {
+            
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            
             application.registerUserNotificationSettings(settings)
         }
         
         application.registerForRemoteNotifications()
-        
-        // [END register_for_notifications]
         
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self,
@@ -144,6 +143,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        connectToFcm()
     }
 
     func applicationWillTerminate(application: UIApplication) {
