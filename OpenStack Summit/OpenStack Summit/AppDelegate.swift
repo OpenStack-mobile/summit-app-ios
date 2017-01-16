@@ -66,13 +66,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // configure global appearance
         SetAppearance()
         
-        // notifications
-        let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
-        application.registerUserNotificationSettings(notificationSettings)
-        application.registerForRemoteNotifications()
-        
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-        
         // setup root VC
         window?.rootViewController = revealViewController
         
@@ -109,6 +102,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
         
         application.registerForRemoteNotifications()
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self,
