@@ -89,7 +89,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         FIRApp.configure()
         
         // For iOS 10 data message (sent via FCM)
-        FIRMessaging.messaging().remoteMessageDelegate = MessageManager.shared
+        FIRMessaging.messaging().remoteMessageDelegate = FirebaseManager.shared
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.

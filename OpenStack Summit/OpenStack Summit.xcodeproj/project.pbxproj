@@ -381,6 +381,7 @@
 		6E5D05C61D8CBC9500451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
 		6E5D05C71D8CBC9500451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
 		6E5D05C81D8CBC9600451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
+		6E5DEDB81E2D300C00F45602 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DEDB71E2D300C00F45602 /* GoogleService-Info.plist */; };
 		6E6179691DE7657500EED286 /* SummitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6179681DE7657500EED286 /* SummitManager.swift */; };
 		6E61796B1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
 		6E61796C1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
@@ -1044,6 +1045,7 @@
 		6E5AE1351E27E1E3004D9A26 /* SLKUIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLKUIConstants.h; path = ../../Carthage/Checkouts/SlackTextViewController/Source/SLKUIConstants.h; sourceTree = "<group>"; };
 		6E5BE4191D76996600E323D3 /* Beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Beta.entitlements; path = ../Beta.entitlements; sourceTree = "<group>"; };
 		6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdateJSON.swift; sourceTree = "<group>"; };
+		6E5DEDB71E2D300C00F45602 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E6179681DE7657500EED286 /* SummitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitManager.swift; sourceTree = "<group>"; };
 		6E61796A1DE7920E00EED286 /* SummitsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsRequest.swift; sourceTree = "<group>"; };
 		6E67CCE21D91B7E600B7D20E /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -1448,6 +1450,7 @@
 				6ED495811D792F7800749940 /* Release.entitlements */,
 				6ED495821D792F7800749940 /* Debug.entitlements */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
+				6E5DEDB51E2D300C00F45602 /* GoogleServices */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
 				6EF147EC1D13579C00D5EEF9 /* View */,
 				6E10A5A31D106AC5008CBD0C /* Model */,
@@ -1824,6 +1827,22 @@
 				9D6AADB51DBE5B420057888E /* RealmVenueRoomDataUpdate.swift */,
 			);
 			name = DataUpdate;
+			sourceTree = "<group>";
+		};
+		6E5DEDB51E2D300C00F45602 /* GoogleServices */ = {
+			isa = PBXGroup;
+			children = (
+				6E5DEDB61E2D300C00F45602 /* Debug */,
+			);
+			path = GoogleServices;
+			sourceTree = SOURCE_ROOT;
+		};
+		6E5DEDB61E2D300C00F45602 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				6E5DEDB71E2D300C00F45602 /* GoogleService-Info.plist */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		6E74FAEB1D7C95E70018633D /* Controller */ = {
@@ -2551,6 +2570,7 @@
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
+				6E5DEDB81E2D300C00F45602 /* GoogleService-Info.plist in Resources */,
 				6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */,
 				6EDA4AC11DFA7ED800ADF96D /* Teams.storyboard in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
@@ -3870,9 +3890,11 @@
 				);
 				INFOPLIST_FILE = "OpenStack Summit/Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Debug;

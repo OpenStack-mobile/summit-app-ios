@@ -23,7 +23,7 @@ public final class FirebaseManager: NSObject, FIRMessagingDelegate {
     
     public func applicationReceivedRemoteMessage(remoteMessage: FIRMessagingRemoteMessage) {
         
-        
+        print("Got Firebase message:", remoteMessage.appData)
     }
 }
 

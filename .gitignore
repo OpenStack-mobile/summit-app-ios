@@ -50,3 +50,5 @@ OpenStack Summit/Release.entitlements
 OpenStack Summit/Debug.entitlements
 OpenStack Summit/Beta.entitlements
 OpenStack Summit/FabricInfoPlist.swift
+
+OpenStack Summit/GoogleServices/Debug/GoogleService-Info.plist
