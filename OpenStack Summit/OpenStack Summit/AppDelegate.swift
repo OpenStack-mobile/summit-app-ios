@@ -89,7 +89,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         FIRApp.configure()
         
         // For iOS 10 data message (sent via FCM)
-        FIRMessaging.messaging().remoteMessageDelegate = FirebaseManager.shared
+        FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
@@ -174,6 +174,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
+        
+        PushNotificationManager.shared.process(userInfo as! [String: AnyObject])
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -188,7 +190,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
         
-        completionHandler(UIBackgroundFetchResult.NoData)
+        PushNotificationManager.shared.process(userInfo as! [String: AnyObject])
+        
+        completionHandler(.NewData)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
