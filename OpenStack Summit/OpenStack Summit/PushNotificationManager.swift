@@ -13,13 +13,20 @@ import CoreSummit
 import FirebaseCore
 import FirebaseMessaging
 
-public final class PushNotificationManager: NSObject, FIRMessagingDelegate {
+public final class PushNotificationManager: NSObject, NSFetchedResultsControllerDelegate, FIRMessagingDelegate {
     
     public static let shared = PushNotificationManager()
     
     public let store: Store
     
-    private var teamsFetchedResultsController: NSFetchedResultsController!
+    public var log: ((String) -> ())?
+    
+    private var teamsFetchedResultsController: NSFetchedResultsController?
+    
+    private var teams: [Team] {
+        
+        return Team.from(managedObjects: teamsFetchedResultsController?.fetchedObjects as? [TeamManagedObject] ?? [])
+    }
     
     // MARK: - Initialization
     
@@ -34,58 +41,126 @@ public final class PushNotificationManager: NSObject, FIRMessagingDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loggedOut), name: Store.Notification.LoggedOut.rawValue, object: self.store)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(forcedLoggedOut), name: Store.Notification.ForcedLoggedOut.rawValue, object: self.store)
+        
+        startObservingTeams()
     }
     
     // MARK: - Methods
     
     public func process(pushNotification: [String: AnyObject]) {
         
-        let message: PushNotification?
+        let notification: PushNotification?
         
         // parse
         
-        if let teamMessage = TeamMessageNotification(pushNotification: pushNotification) {
+        if let teamMessageNotification = TeamMessageNotification(pushNotification: pushNotification) {
             
-            message = teamMessage
+            notification = teamMessageNotification
             
-        } else if let generalMessage = GeneralMessageNotification(pushNotification:pushNotification) {
+            let teamMessage = TeamMessage(notification: teamMessageNotification)
             
-            message = generalMessage
+            try! teamMessage.save(store.managedObjectContext)
+            
+        } else if let generalNotification = GeneralNotification(pushNotification:pushNotification) {
+            
+            notification = generalNotification
             
         } else {
             
-            message = nil
+            notification = nil
         }
         
-        print("Got push notification: \(message)")
+        if let notification = notification {
+            
+            log?("Got push notification: \(notification)")
+            
+        } else {
+            
+            log?("Could not parse push notification: \(pushNotification)")
+        }
+    }
+    
+    @inline(__always)
+    private func subscribe(to topic: PushNotificationTopic) {
         
+        FIRMessaging.messaging().subscribeToTopic(topic.rawValue)
         
+        log?("Subscribed to \(topic.rawValue)")
+    }
+    
+    @inline(__always)
+    private func unsubscribe(from topic: PushNotificationTopic) {
+        
+        FIRMessaging.messaging().unsubscribeFromTopic(topic.rawValue)
+        
+        log?("Unsubscribed from \(topic.rawValue)")
+    }
+    
+    private func startObservingTeams() {
+        
+        // unsubscribe to current teams
+        
+        teams.forEach { unsubscribe(from: .team($0.identifier)) }
+        
+        // fetch member's teams
+        
+        guard let member = self.store.authenticatedMember else {
+            
+            self.teamsFetchedResultsController = nil
+            return
+        }
+        
+        let predicate = NSPredicate(format: "owner == %@ || members.member CONTAINS %@", member, member)
+        
+        let sort = [NSSortDescriptor(key: "id", ascending: true)]
+        
+        teamsFetchedResultsController = NSFetchedResultsController(Team.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: nil, context: store.managedObjectContext)
+        
+        try! teamsFetchedResultsController!.performFetch()
     }
     
     // MARK: - FIRMessagingDelegate
     
     public func applicationReceivedRemoteMessage(remoteMessage: FIRMessagingRemoteMessage) {
         
-        print("Got Firebase message:", remoteMessage.appData)
+        log?("Got Firebase message: \(remoteMessage.appData)")
         
         process(remoteMessage.appData as! [String: AnyObject])
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    public func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        let identifier = (anObject as! Entity).identifier
+        
+        let topic = PushNotificationTopic.team(identifier)
+        
+        switch type {
+            
+        case .Insert: subscribe(to: topic)
+            
+        case .Delete: unsubscribe(from: topic)
+            
+        case .Move, .Update: break
+        }
     }
     
     // MARK: - Notifications
     
     @objc private func loggedIn(notification: NSNotification) {
         
-        
+        startObservingTeams()
     }
     
     @objc private func loggedOut(notification: NSNotification) {
         
-        
+        startObservingTeams()
     }
     
     @objc private func forcedLoggedOut(notification: NSNotification) {
         
-        
+        startObservingTeams()
     }
 }
 
@@ -129,25 +204,32 @@ public enum PushNotificationTopic {
         }
     }
     
-    /// Prefixes of topics that include a identifier
-    private enum InstanceTopicPrefix: String {
+    private enum Prefix: String {
         
-        case summit, member, event, team
-    }
-    
-    /// Prefixes of topics that don't include a identifier
-    private enum CollectionTopicPrefix: String {
+        case summit, member, event, team, attendees, speakers, everyone
         
-        case attendees, speakers, everyone
+        init(_ topic: PushNotificationTopic) {
+            
+            switch topic {
+                
+            case .summit:       self = .summit
+            case .team:         self = .team
+            case .member:       self = .member
+            case .event:        self = .event
+            case .attendees:    self = .attendees
+            case .speakers:     self = .speakers
+            case .everyone:     self = .everyone
+            }
+        }
     }
     
     public init?(rawValue: String) {
         
         struct Cache {
-            static var instanceTopicRegularExpressions = [InstanceTopicPrefix: RegularExpression]()
+            static var prefixRegularExpressions = [Prefix: RegularExpression]()
         }
         
-        func parseIdentifier(prefix: InstanceTopicPrefix) -> Identifier? {
+        func parseIdentifier(prefix: Prefix) -> Identifier? {
             
             let prefixString = "/topics/" + prefix.rawValue + "_"
             
@@ -157,7 +239,7 @@ public enum PushNotificationTopic {
             
             let regularExpression: RegularExpression
             
-            if let cached = Cache.instanceTopicRegularExpressions[prefix] {
+            if let cached = Cache.prefixRegularExpressions[prefix] {
                 
                 regularExpression = cached
                 
@@ -165,7 +247,7 @@ public enum PushNotificationTopic {
                 
                 regularExpression = try! RegularExpression(prefixString + "(\\d+)")
                 
-                Cache.instanceTopicRegularExpressions[prefix] = regularExpression
+                Cache.prefixRegularExpressions[prefix] = regularExpression
             }
             
             // run regex
@@ -180,13 +262,14 @@ public enum PushNotificationTopic {
         
         func parseCollection() -> PushNotificationTopic? {
             
-            guard let collectionTopic = CollectionTopicPrefix(rawValue: rawValue)
+            guard let prefix = Prefix(rawValue: rawValue)
                 else { return nil }
             
-            switch collectionTopic {
+            switch prefix {
             case .attendees: return .attendees
             case .everyone: return .everyone
             case .speakers: return .speakers
+            default: return nil
             }
         }
         
@@ -220,14 +303,14 @@ public enum PushNotificationTopic {
     
     public var rawValue: String {
         
+        var stringValue = "/topics/" + Prefix(self).rawValue
+        
         if let identifier = self.identifier {
             
-            
-            
-        } else {
-            
-            
+            stringValue += "_\(identifier)"
         }
+        
+        return stringValue
     }
 }
 
@@ -235,10 +318,12 @@ public struct TeamMessageNotification: PushNotification {
     
     private enum Key: String {
         
-        case id, type, body, from_id, from_first_name, from_last_name, created_at
+        case from, id, type, body, from_id, from_first_name, from_last_name, created_at
     }
     
     public static let type = PushNotificationType.team
+    
+    public let team: Identifier
     
     public let identifier: Identifier
     
@@ -250,11 +335,23 @@ public struct TeamMessageNotification: PushNotification {
     
     public init?(pushNotification: [String: AnyObject]) {
         
-        fatalError()
+        return nil
+        
+        /*
+        
+        guard let topicString = pushNotification[Key.from.rawValue] as? String,
+            let topic = PushNotificationTopic(rawValue: topicString),
+            let typeString = pushNotification[Key.type.rawValue] as? String,
+            let type = PushNotificationType(rawValue: channelString),
+            case let .team(team) = topic,
+            let identifier = pushNotification[Key.id.rawValue] as? Int,
+            let body = pushNotification[Key.body.rawValue] as? String,
+            let created = pushNotification[Key.created_at.rawValue] as? Int,
+            let fromID = pushNotification[Key.from_id.rawValue] as? Int
+        */
     }
 }
 
-/*
 public extension TeamMessage {
     
     init(notification: TeamMessageNotification) {
@@ -262,12 +359,12 @@ public extension TeamMessage {
         self.identifier = notification.identifier
         self.body = notification.body
         self.created = notification.created
-        self.from = .identifier(from.identifier)
-        self.team = .identifier(<#T##Identifier#>)
+        self.from = .identifier(notification.from.idenfitier)
+        self.team = .identifier(notification.team)
     }
-}*/
+}
 
-public struct GeneralMessageNotification: PushNotification {
+public struct GeneralNotification: PushNotification {
     
     public enum Channel: String {
         
@@ -287,6 +384,8 @@ public struct GeneralMessageNotification: PushNotification {
     
     public static let type = PushNotificationType.notification
     
+    public let from: PushNotificationTopic
+    
     public let identifier: Identifier
     
     public let body: String
@@ -300,6 +399,17 @@ public struct GeneralMessageNotification: PushNotification {
     public let event: (identifier: Identifier, title: String)?
     
     public init?(pushNotification: [String: AnyObject]) {
+        
+        /*
+        guard let topicString = pushNotification[Key.from.rawValue] as? String,
+        let topic = PushNotificationTopic(rawValue: topicString),
+        let channelString = pushNotification[Key.channel.rawValue] as? String,
+        let channel = PushNotificationType(rawValue: channelString),
+        case let .team(team) = topic,
+        let identifier = pushNotification[Key.id.rawValue] as? Int,
+        let body = pushNotification[Key.body.rawValue] as? String,
+        let created = pushNotification[Key.created_at.rawValue] as? Int,
+        let fromID = pushNotification[Key.from_id.rawValue] as? Int*/
         
         fatalError()
     }

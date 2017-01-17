@@ -78,10 +78,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             }
         }
         
-        // FireBase
+        // Setup FireBase
         FIRApp.configure()
-        
-        // For iOS 10 data message (sent via FCM)
+        PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
         
         // Register for remote notifications. This shows a permission dialog on first run, to
