@@ -21,7 +21,7 @@ import FirebaseInstanceID
 import FirebaseMessaging
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling, UNUserNotificationCenterDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling {
     
     static var shared: AppDelegate { return unsafeBitCast(UIApplication.sharedApplication().delegate!, AppDelegate.self) }
 
@@ -84,25 +84,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
         
-        // Register for remote notifications. This shows a permission dialog on first run, to
-        // show the dialog at a more appropriate time move this registration accordingly.
-        if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.Alert, .Badge, .Sound]
-            UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(authOptions, completionHandler: { _ in })
-            
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.currentNotificationCenter().delegate = self
-            
-        } else {
-            
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            
-            application.registerUserNotificationSettings(settings)
-        }
-        
-        application.registerForRemoteNotifications()
-        
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
         // Add observer for InstanceID token refresh callback.
@@ -159,7 +140,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     }
     
     // HACK: implemented old delegate to make notifications work as is on iOS 10
-    // TODO: implement notification using UserNotifications framework for iOS 10
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         
         // Print message ID.
@@ -188,6 +168,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         PushNotificationManager.shared.process(userInfo as! [String: String])
         
         completionHandler(.NewData)
+    }
+    
+    func application(application: UIApplication,
+                     handleActionWithIdentifier identifier: String?,
+                     forLocalNotification notification: UILocalNotification,
+                     completionHandler: () -> Void) {
+        
+        PushNotificationManager.shared.handleNotification(action: identifier, for: notification, completion: completionHandler)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

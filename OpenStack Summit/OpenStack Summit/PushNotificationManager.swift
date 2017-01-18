@@ -12,8 +12,10 @@ import SwiftFoundation
 import CoreSummit
 import FirebaseCore
 import FirebaseMessaging
+import UserNotifications
+import UserNotificationsUI
 
-public final class PushNotificationManager: NSObject, NSFetchedResultsControllerDelegate, FIRMessagingDelegate {
+public final class PushNotificationManager: NSObject, NSFetchedResultsControllerDelegate, FIRMessagingDelegate, UNUserNotificationCenterDelegate {
     
     public static let shared = PushNotificationManager()
     
@@ -47,6 +49,50 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - Methods
     
+    public func setupNotifications(application: UIApplication) {
+        
+        var notificationCategories = [UIMutableUserNotificationCategory]()
+        
+        do {
+            
+            let replyAction = UIMutableUserNotificationAction()
+            replyAction.identifier = TeamMessageNotificationAction.reply.rawValue
+            replyAction.title = "Reply"
+            replyAction.activationMode = .Background
+            replyAction.authenticationRequired = true
+            replyAction.destructive = false
+            
+            if #available(iOS 9.0, *) {
+                replyAction.behavior = .TextInput
+            }
+            
+            let notificationCategory = UIMutableUserNotificationCategory()
+            notificationCategory.identifier = TeamMessageNotificationAction.category.rawValue
+            notificationCategory.setActions([replyAction], forContext: .Default)
+            notificationCategory.setActions([replyAction], forContext: .Minimal)
+            notificationCategories.append(notificationCategory)
+        }
+        
+        // Register for remote notifications. This shows a permission dialog on first run, to
+        // show the dialog at a more appropriate time move this registration accordingly.
+        if #available(iOS 10.0, *) {
+            let authOptions: UNAuthorizationOptions = [.Alert, .Badge, .Sound]
+            UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(authOptions, completionHandler: { _ in })
+            
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.currentNotificationCenter().delegate = self
+            
+        } else {
+            
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+    }
+    
     public func process(pushNotification: [String: String]) {
         
         let notification: PushNotification?
@@ -59,9 +105,20 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             let teamMessage = TeamMessage(notification: teamMessageNotification)
             
+            // cache
             try! teamMessage.save(store.managedObjectContext)
             
             try! store.managedObjectContext.save()
+            
+            // schedule local notification
+            
+            let userNotification = UILocalNotification()
+            userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: PushNotificationTopic.team(teamMessage.team.identifier).rawValue]
+            userNotification.alertBody = teamMessageNotification.body
+            userNotification.fireDate = NSDate()
+            userNotification.category = TeamMessageNotificationAction.category.rawValue
+            
+            UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
             
         } else if let generalNotification = GeneralNotification(pushNotification:pushNotification) {
             
@@ -79,6 +136,51 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         } else {
             
             log?("Could not parse push notification: \(pushNotification)")
+        }
+    }
+    
+    public func handleNotification(action identifier: String?, for notification: UILocalNotification, completion: () -> ()) {
+        
+        let category = UserNotificationCategory(rawValue: notification.category!)!
+        
+        switch category {
+            
+        case .teamMessage:
+            
+            let action = TeamMessageNotificationAction(rawValue: identifier!)!
+            
+            switch action {
+                
+            case .reply:
+                
+                guard let topicString = notification.userInfo?[UserNotificationUserInfo.topic.rawValue] as? String,
+                    let topic = PushNotificationTopic(rawValue: topicString),
+                    case let .team(team) = topic
+                    else { completion(); return }
+                
+                if #available(iOS 9.0, *),
+                let replyText = notification.userInfo?[UIUserNotificationActionResponseTypedTextKey] as? String {
+                    
+                    Store.shared.send(replyText, to: team, completion: { (response) in
+                        
+                        switch response {
+                            
+                        case let .Error(error):
+                            
+                            print("Could not send message from local notification: \(error)")
+                            
+                        case let .Value(newMessage):
+                            
+                            print("Send message from local notification: \(newMessage)")
+                        }
+                        
+                    })
+                    
+                } else {
+                    // Fallback on earlier versions
+                    
+                }
+            }
         }
     }
     
@@ -128,6 +230,10 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         process(remoteMessage.appData as! [String: String])
     }
     
+    // MARK: - UNUserNotificationCenterDelegate
+    
+    
+    
     // MARK: - NSFetchedResultsControllerDelegate
     
     public func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
@@ -162,6 +268,25 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         startObservingTeams()
     }
+}
+
+// MARK: - Supporting Types
+
+public enum UserNotificationCategory: String {
+    
+    case teamMessage = "TeamMessageNotification"
+}
+
+public enum TeamMessageNotificationAction: String {
+    
+    public static let category = UserNotificationCategory.teamMessage
+    
+    case reply
+}
+
+public enum UserNotificationUserInfo: String {
+    
+    case topic
 }
 
 public enum PushNotificationType: String {

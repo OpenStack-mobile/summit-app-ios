@@ -43,7 +43,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         registerNotifications()
         
         self.shouldScrollToBottomAfterKeyboardShows = false
-        self.inverted = true
+        self.inverted = false
         self.textInputbar.autoHideRightButton = true
         self.textInputbar.maxCharCount = 256
         self.textInputbar.counterStyle = .Split
@@ -66,7 +66,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         let predicate = NSPredicate(format: "team == %@", teamManagedObject)
         
-        let sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
+        let sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
         
         self.fetchedResultsController = NSFetchedResultsController(TeamMessage.self,
                                                                    delegate: self,
