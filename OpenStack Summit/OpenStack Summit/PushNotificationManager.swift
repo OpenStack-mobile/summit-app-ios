@@ -47,7 +47,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - Methods
     
-    public func process(pushNotification: [String: AnyObject]) {
+    public func process(pushNotification: [String: String]) {
         
         let notification: PushNotification?
         
@@ -123,9 +123,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     public func applicationReceivedRemoteMessage(remoteMessage: FIRMessagingRemoteMessage) {
         
-        log?("Got Firebase message: \(remoteMessage.appData)")
-        
-        process(remoteMessage.appData as! [String: AnyObject])
+        process(remoteMessage.appData as! [String: String])
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -180,7 +178,7 @@ public protocol PushNotification {
     
     var created: Date { get }
     
-    //init?(pushNotification: [String: AnyObject])
+    init?(pushNotification: [String: String])
 }
 
 public enum PushNotificationTopic {
@@ -226,7 +224,7 @@ public enum PushNotificationTopic {
     public init?(rawValue: String) {
         
         struct Cache {
-            static var prefixRegularExpressions = [Prefix: RegularExpression]()
+            static var prefixRegularExpressions = [Prefix: NSRegularExpression]()
         }
         
         func parseIdentifier(prefix: Prefix) -> Identifier? {
@@ -237,7 +235,7 @@ public enum PushNotificationTopic {
             
             // get regex
             
-            let regularExpression: RegularExpression
+            let regularExpression: NSRegularExpression
             
             if let cached = Cache.prefixRegularExpressions[prefix] {
                 
@@ -245,16 +243,25 @@ public enum PushNotificationTopic {
                 
             } else {
                 
-                regularExpression = try! RegularExpression(prefixString + "(\\d+)")
+                regularExpression = try! NSRegularExpression(pattern: prefixString + "(\\d+)", options: [])
                 
                 Cache.prefixRegularExpressions[prefix] = regularExpression
             }
             
             // run regex
             
-            guard let match = regularExpression.match(rawValue),
-                let substring = rawValue.substring(match.range),
-                let identifier = Int(substring)
+            guard let match = regularExpression.firstMatchInString(rawValue, options: [], range: NSMakeRange(0, (rawValue as NSString).length))
+                where match.numberOfRanges == 2
+                else { return nil }
+            
+            let matchString = (rawValue as NSString).substringWithRange(match.range)
+            
+            guard matchString == rawValue
+                else { return nil }
+            
+            let captureGroup = (rawValue as NSString).substringWithRange(match.rangeAtIndex(1))
+            
+            guard let identifier = Int(captureGroup)
                 else { return nil }
             
             return identifier
@@ -323,32 +330,40 @@ public struct TeamMessageNotification: PushNotification {
     
     public static let type = PushNotificationType.team
     
-    public let team: Identifier
-    
     public let identifier: Identifier
     
     public let body: String
     
     public let created: Date
     
+    public let team: Identifier
+    
     public let from: (idenfitier: Identifier, firstName: String, lastName: String)
     
-    public init?(pushNotification: [String: AnyObject]) {
+    public init?(pushNotification: [String: String]) {
         
-        return nil
-        
-        /*
-        
-        guard let topicString = pushNotification[Key.from.rawValue] as? String,
+        guard let topicString = pushNotification[Key.from.rawValue],
             let topic = PushNotificationTopic(rawValue: topicString),
-            let typeString = pushNotification[Key.type.rawValue] as? String,
-            let type = PushNotificationType(rawValue: channelString),
+            let typeString = pushNotification[Key.type.rawValue],
+            let type = PushNotificationType(rawValue: typeString),
             case let .team(team) = topic,
-            let identifier = pushNotification[Key.id.rawValue] as? Int,
-            let body = pushNotification[Key.body.rawValue] as? String,
-            let created = pushNotification[Key.created_at.rawValue] as? Int,
-            let fromID = pushNotification[Key.from_id.rawValue] as? Int
-        */
+            let identifierString = pushNotification[Key.id.rawValue],
+            let identifier = Int(identifierString),
+            let body = pushNotification[Key.body.rawValue],
+            let createdString = pushNotification[Key.created_at.rawValue],
+            let created = Int(createdString),
+            let fromIDString = pushNotification[Key.from_id.rawValue],
+            let fromID = Int(fromIDString),
+            let fromFirstName = pushNotification[Key.from_last_name.rawValue],
+            let fromLastName = pushNotification[Key.from_first_name.rawValue]
+            where type == self.dynamicType.type
+            else { return nil }
+        
+        self.identifier = identifier
+        self.team = team
+        self.body = body
+        self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.from = (fromID, fromFirstName, fromLastName)
     }
 }
 
@@ -379,12 +394,10 @@ public struct GeneralNotification: PushNotification {
     
     private enum Key: String {
         
-        case id, type, body, summit_id, channel, created_at, event_id, title
+        case from, id, type, body, summit_id, channel, created_at, event_id, title
     }
     
     public static let type = PushNotificationType.notification
-    
-    public let from: PushNotificationTopic
     
     public let identifier: Identifier
     
@@ -392,25 +405,53 @@ public struct GeneralNotification: PushNotification {
     
     public let created: Date
     
+    public let from: PushNotificationTopic
+    
     public let summit: Identifier
     
     public let channel: Channel
     
     public let event: (identifier: Identifier, title: String)?
     
-    public init?(pushNotification: [String: AnyObject]) {
+    public init?(pushNotification: [String: String]) {
         
-        /*
-        guard let topicString = pushNotification[Key.from.rawValue] as? String,
-        let topic = PushNotificationTopic(rawValue: topicString),
-        let channelString = pushNotification[Key.channel.rawValue] as? String,
-        let channel = PushNotificationType(rawValue: channelString),
-        case let .team(team) = topic,
-        let identifier = pushNotification[Key.id.rawValue] as? Int,
-        let body = pushNotification[Key.body.rawValue] as? String,
-        let created = pushNotification[Key.created_at.rawValue] as? Int,
-        let fromID = pushNotification[Key.from_id.rawValue] as? Int*/
+        guard let topicString = pushNotification[Key.from.rawValue],
+            let topic = PushNotificationTopic(rawValue: topicString),
+            let typeString = pushNotification[Key.type.rawValue],
+            let type = PushNotificationType(rawValue: typeString),
+            let identifierString = pushNotification[Key.id.rawValue],
+            let identifier = Int(identifierString),
+            let body = pushNotification[Key.body.rawValue],
+            let createdString = pushNotification[Key.created_at.rawValue],
+            let created = Int(createdString),
+            let summitIDString = pushNotification[Key.summit_id.rawValue],
+            let summitID = Int(summitIDString),
+            let channelString = pushNotification[Key.channel.rawValue],
+            let channel = Channel(rawValue: channelString)
+            where type == self.dynamicType.type
+            else { return nil }
         
-        fatalError()
+        self.identifier = identifier
+        self.from = topic
+        self.body = body
+        self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.summit = summitID
+        self.channel = channel
+        
+        switch channel {
+            
+        case .event:
+            
+            guard let eventIDString = pushNotification[Key.event_id.rawValue],
+                let eventID = Int(eventIDString),
+                let eventTitle = pushNotification[Key.title.rawValue]
+                else { return nil }
+            
+            self.event = (eventID, eventTitle)
+            
+        default:
+            
+            self.event = nil
+        }
     }
 }

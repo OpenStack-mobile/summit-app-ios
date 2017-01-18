@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import CoreSpotlight
+import SwiftFoundation
 import CoreSummit
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
@@ -169,7 +170,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
         
-        PushNotificationManager.shared.process(userInfo as! [String: AnyObject])
+        PushNotificationManager.shared.process(userInfo as! [String: String])
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -184,7 +185,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
         
-        PushNotificationManager.shared.process(userInfo as! [String: AnyObject])
+        PushNotificationManager.shared.process(userInfo as! [String: String])
         
         completionHandler(.NewData)
     }

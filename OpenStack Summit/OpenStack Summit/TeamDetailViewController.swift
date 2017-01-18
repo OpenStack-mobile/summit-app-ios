@@ -120,7 +120,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         var descriptionSection = [Cell]()
         
-        if (canEdit || team.descriptionText != nil || team.descriptionText!.isEmpty == false) {
+        if (canEdit || team.descriptionText?.isEmpty ?? true == false) {
             
             descriptionSection.append(.description(team.descriptionText))
         }
