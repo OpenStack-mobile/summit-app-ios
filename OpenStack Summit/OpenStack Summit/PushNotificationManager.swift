@@ -61,6 +61,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             try! teamMessage.save(store.managedObjectContext)
             
+            try! store.managedObjectContext.save()
+            
         } else if let generalNotification = GeneralNotification(pushNotification:pushNotification) {
             
             notification = generalNotification

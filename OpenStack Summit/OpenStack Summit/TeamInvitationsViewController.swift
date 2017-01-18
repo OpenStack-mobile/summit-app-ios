@@ -16,7 +16,7 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     // MARK: - Properties
     
-    let pageController = PageController<TeamInvitation>(fetch: Store.shared.invitations)
+    let pageController = PageController<TeamInvitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
     private static let dateFormatter: NSDateFormatter = {
         

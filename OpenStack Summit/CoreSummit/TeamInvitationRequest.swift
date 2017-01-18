@@ -39,9 +39,23 @@ public extension Store {
         }
     }
     
-    func invitations(page: Int = 1, perPage: Int = 10, completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
+    func invitations(page: Int = 1, perPage: Int = 10, filter: InvitationsFilter? = nil, completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
         
-        let uri = "/api/v1/members/me/team-invitations?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter"
+        let filterString: String
+        
+        if let filter = filter {
+            
+            switch filter {
+            case .pending: filterString = "/pending"
+            case .accepted: filterString = "/accepted"
+            }
+            
+        } else {
+            
+            filterString = ""
+        }
+        
+        let uri = "/api/v1/members/me/team-invitations\(filterString)?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter"
         
         let url = environment.configuration.serverURL + uri
         
@@ -72,3 +86,12 @@ public extension Store {
         }
     }
 }
+
+// MARK: - Supporting Types
+
+public enum InvitationsFilter {
+    
+    case pending
+    case accepted
+}
+
