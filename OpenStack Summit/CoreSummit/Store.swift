@@ -42,7 +42,7 @@ public final class Store {
     private var persistentStore: NSPersistentStore
     
     /// The managed object context running on a background thread for asyncronous caching.
-    internal let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+    public let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
     
     /// Request queue
     private let requestQueue: NSOperationQueue = {

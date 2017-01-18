@@ -43,7 +43,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         registerNotifications()
         
         self.shouldScrollToBottomAfterKeyboardShows = false
-        self.inverted = false
+        self.inverted = true
         self.textInputbar.autoHideRightButton = true
         self.textInputbar.maxCharCount = 256
         self.textInputbar.counterStyle = .Split

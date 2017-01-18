@@ -106,9 +106,13 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             let teamMessage = TeamMessage(notification: teamMessageNotification)
             
             // cache
-            try! teamMessage.save(store.managedObjectContext)
-            
-            try! store.managedObjectContext.save()
+            let context = store.privateQueueManagedObjectContext
+            context.performBlock {
+                
+                try! teamMessage.save(context)
+                
+                try! context.save()
+            }
             
             // schedule local notification
             
