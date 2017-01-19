@@ -82,6 +82,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Setup Notification Manager
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
         PushNotificationManager.shared.setupNotifications(application)
+        PushNotificationManager.shared.startObservingTeams()
         
         // setup FireBase
         FIRApp.configure()
@@ -97,6 +98,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // hardcode summit
         SummitManager.shared.summit.value = 7
+        
+        connectToFcm()
         
         return true
     }
@@ -175,12 +178,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         completionHandler(.NewData)
     }
     
-    func application(application: UIApplication,
-                     handleActionWithIdentifier identifier: String?,
-                     forLocalNotification notification: UILocalNotification,
-                     completionHandler: () -> Void) {
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         
-        PushNotificationManager.shared.handleNotification(action: identifier, for: notification, completion: completionHandler)
+        PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

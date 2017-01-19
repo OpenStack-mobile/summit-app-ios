@@ -30,6 +30,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - Initialization
     
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     private init(store: Store = Store.shared) {
         
         self.store = store
@@ -41,8 +46,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loggedOut), name: Store.Notification.LoggedOut.rawValue, object: self.store)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(forcedLoggedOut), name: Store.Notification.ForcedLoggedOut.rawValue, object: self.store)
-        
-        startObservingTeams()
     }
     
     // MARK: - Methods
@@ -102,15 +105,17 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             }
             
             // schedule local notification
-            
-            let userNotification = UILocalNotification()
-            userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: PushNotificationTopic.team(teamMessage.team.identifier).rawValue]
-            userNotification.alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName) sent you a message"
-            userNotification.alertBody = teamMessageNotification.body
-            userNotification.fireDate = NSDate()
-            userNotification.category = TeamMessageNotificationAction.category.rawValue
-            
-            UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+            if teamMessage.from.identifier != store.authenticatedMember?.identifier {
+                
+                let userNotification = UILocalNotification()
+                userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: PushNotificationTopic.team(teamMessage.team.identifier).rawValue]
+                userNotification.alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName) sent you a message"
+                userNotification.alertBody = teamMessageNotification.body
+                userNotification.fireDate = NSDate()
+                userNotification.category = TeamMessageNotificationAction.category.rawValue
+                
+                UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+            }
             
         } else if let generalNotification = GeneralNotification(pushNotification:pushNotification) {
             
@@ -131,7 +136,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         }
     }
     
-    public func handleNotification(action identifier: String?, for notification: UILocalNotification, completion: () -> ()) {
+    public func handleNotification(action identifier: String?, for notification: UILocalNotification, with response: [String: AnyObject], completion: () -> ()) {
         
         let category = UserNotificationCategory(rawValue: notification.category!)!
         
@@ -151,7 +156,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     else { completion(); return }
                 
                 if #available(iOS 9.0, *),
-                let replyText = notification.userInfo?[UIUserNotificationActionResponseTypedTextKey] as? String {
+                let replyText = response[UIUserNotificationActionResponseTypedTextKey] as? String {
                     
                     Store.shared.send(replyText, to: team, completion: { (response) in
                         
@@ -163,11 +168,13 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                             
                         case let .Value(newMessage):
                             
-                            print("Send message from local notification: \(newMessage)")
+                            print("Sent message from local notification: \(newMessage)")
                         }
                         
-                        completion()
+                        
                     })
+                    
+                    completion()
                     
                 } else {
                     // Fallback on earlier versions
@@ -193,7 +200,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         log?("Unsubscribed from \(topic.rawValue)")
     }
     
-    private func startObservingTeams() {
+    public func startObservingTeams() {
         
         // unsubscribe to current teams
         
@@ -214,6 +221,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         teamsFetchedResultsController = NSFetchedResultsController(Team.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: nil, context: store.managedObjectContext)
         
         try! teamsFetchedResultsController!.performFetch()
+        
+        teams.forEach { subscribe(to: .team($0.identifier)) }
     }
     
     // MARK: - FIRMessagingDelegate
@@ -222,10 +231,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         process(remoteMessage.appData as! [String: String])
     }
-    
-    // MARK: - UNUserNotificationCenterDelegate
-    
-    
     
     // MARK: - NSFetchedResultsControllerDelegate
     
