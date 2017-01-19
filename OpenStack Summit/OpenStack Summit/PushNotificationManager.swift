@@ -12,10 +12,8 @@ import SwiftFoundation
 import CoreSummit
 import FirebaseCore
 import FirebaseMessaging
-import UserNotifications
-import UserNotificationsUI
 
-public final class PushNotificationManager: NSObject, NSFetchedResultsControllerDelegate, FIRMessagingDelegate, UNUserNotificationCenterDelegate {
+public final class PushNotificationManager: NSObject, NSFetchedResultsControllerDelegate, FIRMessagingDelegate {
     
     public static let shared = PushNotificationManager()
     
@@ -51,7 +49,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     public func setupNotifications(application: UIApplication) {
         
-        var notificationCategories = [UIMutableUserNotificationCategory]()
+        var notificationCategories = Set<UIMutableUserNotificationCategory>()
         
         do {
             
@@ -70,25 +68,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             notificationCategory.identifier = TeamMessageNotificationAction.category.rawValue
             notificationCategory.setActions([replyAction], forContext: .Default)
             notificationCategory.setActions([replyAction], forContext: .Minimal)
-            notificationCategories.append(notificationCategory)
+            notificationCategories.insert(notificationCategory)
         }
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
-        if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.Alert, .Badge, .Sound]
-            UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(authOptions, completionHandler: { _ in })
-            
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.currentNotificationCenter().delegate = self
-            
-        } else {
-            
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            
-            application.registerUserNotificationSettings(settings)
-        }
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: notificationCategories)
+        
+        application.registerUserNotificationSettings(settings)
         
         application.registerForRemoteNotifications()
     }
@@ -118,6 +105,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             let userNotification = UILocalNotification()
             userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: PushNotificationTopic.team(teamMessage.team.identifier).rawValue]
+            userNotification.alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName) sent you a message"
             userNotification.alertBody = teamMessageNotification.body
             userNotification.fireDate = NSDate()
             userNotification.category = TeamMessageNotificationAction.category.rawValue
@@ -178,6 +166,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                             print("Send message from local notification: \(newMessage)")
                         }
                         
+                        completion()
                     })
                     
                 } else {
@@ -485,8 +474,8 @@ public struct TeamMessageNotification: PushNotification {
             let created = Int(createdString),
             let fromIDString = pushNotification[Key.from_id.rawValue],
             let fromID = Int(fromIDString),
-            let fromFirstName = pushNotification[Key.from_last_name.rawValue],
-            let fromLastName = pushNotification[Key.from_first_name.rawValue]
+            let fromFirstName = pushNotification[Key.from_first_name.rawValue],
+            let fromLastName = pushNotification[Key.from_last_name.rawValue]
             where type == self.dynamicType.type
             else { return nil }
         

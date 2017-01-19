@@ -79,9 +79,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             }
         }
         
-        // Setup FireBase
-        FIRApp.configure()
+        // Setup Notification Manager
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
+        PushNotificationManager.shared.setupNotifications(application)
+        
+        // setup FireBase
+        FIRApp.configure()
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
@@ -107,7 +110,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
+        #if !DEBUG
         FIRMessaging.messaging().disconnect()
+        #endif
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
