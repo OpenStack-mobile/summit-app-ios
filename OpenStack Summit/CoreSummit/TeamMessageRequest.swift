@@ -25,7 +25,9 @@ public extension Store {
         guard let member = self.authenticatedMember?.identifier
             else { fatalError("Must be logged in") }
         
-        http.POST(url, parameters: ["body": message, "priority": priority.rawValue]) { (responseObject, error) in
+        let messageASCII = String(CString: message.cStringUsingEncoding(NSNonLossyASCIIStringEncoding)!, encoding: NSUTF8StringEncoding)!
+        
+        http.POST(url, parameters: ["body": messageASCII, "priority": priority.rawValue]) { (responseObject, error) in
             
             // forward error
             guard error == nil

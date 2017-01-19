@@ -109,7 +109,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 
                 let userNotification = UILocalNotification()
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: PushNotificationTopic.team(teamMessage.team.identifier).rawValue]
-                userNotification.alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName) sent you a message"
+                userNotification.alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName)"
                 userNotification.alertBody = teamMessageNotification.body
                 userNotification.fireDate = NSDate()
                 userNotification.category = TeamMessageNotificationAction.category.rawValue
@@ -158,17 +158,17 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 if #available(iOS 9.0, *),
                 let replyText = response[UIUserNotificationActionResponseTypedTextKey] as? String {
                     
-                    Store.shared.send(replyText, to: team, completion: { (response) in
+                    Store.shared.send(replyText, to: team, completion: { [weak self] (response) in
                         
                         switch response {
                             
                         case let .Error(error):
                             
-                            print("Could not send message from local notification: \(error)")
+                            self?.log?("Could not send message from local notification: \(error)")
                             
                         case let .Value(newMessage):
                             
-                            print("Sent message from local notification: \(newMessage)")
+                            self?.log?("Sent message from local notification: \(newMessage)")
                         }
                         
                         
@@ -486,7 +486,7 @@ public struct TeamMessageNotification: PushNotification {
         
         self.identifier = identifier
         self.team = team
-        self.body = body
+        self.body = String(CString: body.cStringUsingEncoding(NSUTF8StringEncoding)!, encoding: NSNonLossyASCIIStringEncoding)!
         self.created = Date(timeIntervalSince1970: TimeInterval(created))
         self.from = (fromID, fromFirstName, fromLastName)
     }
