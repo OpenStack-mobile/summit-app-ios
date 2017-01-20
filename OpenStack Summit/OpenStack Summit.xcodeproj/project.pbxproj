@@ -896,28 +896,6 @@
 		6E10A52F1D10675C008CBD0C /* PresentationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationJSON.swift; sourceTree = "<group>"; };
 		6E10A5301D10675C008CBD0C /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		6E10A5311D10675C008CBD0C /* SpeakerJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerJSON.swift; sourceTree = "<group>"; };
-		6E10A5321D10675C008CBD0C /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
-		6E10A5331D10675C008CBD0C /* RealmCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCompany.swift; sourceTree = "<group>"; };
-		6E10A5341D10675C008CBD0C /* RealmEventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventType.swift; sourceTree = "<group>"; };
-		6E10A5351D10675C008CBD0C /* RealmFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmFeedback.swift; sourceTree = "<group>"; };
-		6E10A5361D10675C008CBD0C /* RealmImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmImage.swift; sourceTree = "<group>"; };
-		6E10A5371D10675C008CBD0C /* RealmLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmLocation.swift; sourceTree = "<group>"; };
-		6E10A5381D10675C008CBD0C /* RealmMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMember.swift; sourceTree = "<group>"; };
-		6E10A5391D10675C008CBD0C /* RealmNamed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmNamed.swift; sourceTree = "<group>"; };
-		6E10A53A1D10675C008CBD0C /* RealmNonConfirmedSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmNonConfirmedSummitAttendee.swift; sourceTree = "<group>"; };
-		6E10A53B1D10675C008CBD0C /* RealmPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPerson.swift; sourceTree = "<group>"; };
-		6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentation.swift; sourceTree = "<group>"; };
-		6E10A53D1D10675C008CBD0C /* RealmPresentationSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationSpeaker.swift; sourceTree = "<group>"; };
-		6E10A53E1D10675C008CBD0C /* RealmSummit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummit.swift; sourceTree = "<group>"; };
-		6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitAttendee.swift; sourceTree = "<group>"; };
-		6E10A5401D10675C008CBD0C /* RealmSummitEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitEvent.swift; sourceTree = "<group>"; };
-		6E10A5411D10675C008CBD0C /* RealmSummitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitType.swift; sourceTree = "<group>"; };
-		6E10A5421D10675C008CBD0C /* RealmTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTag.swift; sourceTree = "<group>"; };
-		6E10A5431D10675C008CBD0C /* RealmTicketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTicketType.swift; sourceTree = "<group>"; };
-		6E10A5441D10675C008CBD0C /* RealmTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrack.swift; sourceTree = "<group>"; };
-		6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrackGroup.swift; sourceTree = "<group>"; };
-		6E10A5461D10675C008CBD0C /* RealmVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenue.swift; sourceTree = "<group>"; };
-		6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenueRoom.swift; sourceTree = "<group>"; };
 		6E10A5481D10675C008CBD0C /* Summit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Summit.swift; sourceTree = "<group>"; };
 		6E10A5491D10675C008CBD0C /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		6E10A54A1D10675C008CBD0C /* AttendeeJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeJSON.swift; sourceTree = "<group>"; };
@@ -1036,8 +1014,6 @@
 		6E570A351D67753D00189992 /* PresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdateJSON.swift; sourceTree = "<group>"; };
-		6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmEventDataUpdate.swift; sourceTree = "<group>"; };
-		6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmPresentationDataUpdate.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6E586FBE1DC29083001DE605 /* Member2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Member2.json; sourceTree = "<group>"; };
 		6E5AE1321E27E163004D9A26 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = "../../Carthage/Checkouts/SlackTextViewController/Examples/Messenger-Shared/MessageTableViewCell.h"; sourceTree = "<group>"; };
@@ -1078,7 +1054,6 @@
 		6E8D109C1DF8957100A0BBDC /* Teams.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Teams.storyboard; sourceTree = "<group>"; };
 		6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdate.swift; sourceTree = "<group>"; };
 		6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdateJSON.swift; sourceTree = "<group>"; };
-		6E93D44A1D9AEE1F00E3302A /* RealmTrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTrackGroupDataUpdate.swift; sourceTree = "<group>"; };
 		6E959E181DF61557002981FD /* TeamManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamManagedObject.swift; sourceTree = "<group>"; };
 		6E96BFD71D26D347009524C7 /* TrackListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 		6E96BFDB1D26DB2D009524C7 /* Tracks.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracks.storyboard; sourceTree = "<group>"; };
@@ -1104,7 +1079,6 @@
 		6E9F28F61D7C903E002B7C7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TVAssets.xcassets; sourceTree = "<group>"; };
 		6E9F28FA1D7C903E002B7C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EA062A01D63AD09009538CE /* RealmVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVideo.swift; sourceTree = "<group>"; };
 		6EA159871E25217A007FB9E6 /* AddTeamMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTeamMemberViewController.swift; sourceTree = "<group>"; };
 		6EA1F0891D660B550064C338 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdateManagedObject.swift; sourceTree = "<group>"; };
@@ -1213,7 +1187,6 @@
 		6EF4F8761DC9234A00D31A99 /* VenueRoomManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomManagedObject.swift; sourceTree = "<group>"; };
 		6EF4F87A1DC928D700D31A99 /* ImageManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManagedObject.swift; sourceTree = "<group>"; };
 		6EF4F87E1DC9296100D31A99 /* VenueFloorManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloorManagedObject.swift; sourceTree = "<group>"; };
-		6EF5D9201D8CE77800C680D1 /* RealmSummitDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSummitDataUpdate.swift; sourceTree = "<group>"; };
 		6EF7AA1B1D74C24800790ED0 /* CoreSpotlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSpotlight.swift; sourceTree = "<group>"; };
 		6EFC6E641D2300260087057A /* VenuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesViewController.swift; sourceTree = "<group>"; };
 		6EFC6E661D2320610087057A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -1231,12 +1204,10 @@
 		6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9D1CE1051DA43DCF0064B3B1 /* VenueFloor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloor.swift; sourceTree = "<group>"; };
 		9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloorJSON.swift; sourceTree = "<group>"; };
-		9D1CE1091DA492D90064B3B1 /* RealmVenueFloor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenueFloor.swift; sourceTree = "<group>"; };
 		9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
 		9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates6.json; sourceTree = "<group>"; };
 		9D6AADAB1DBE563A0057888E /* VenueRoomDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDataUpdateJSON.swift; sourceTree = "<group>"; };
 		9D6AADAD1DBE56CB0057888E /* VenueRoomDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDataUpdate.swift; sourceTree = "<group>"; };
-		9D6AADB51DBE5B420057888E /* RealmVenueRoomDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmVenueRoomDataUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1495,7 +1466,6 @@
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
 				6E10A5A11D1067BB008CBD0C /* JSON */,
-				6E10A5A21D1067C4008CBD0C /* Realm */,
 				6E99B8A71DC7D66A009CE28D /* CoreData */,
 				6E10A4F51D1066E9008CBD0C /* Info.plist */,
 			);
@@ -1606,38 +1576,6 @@
 				6E570A371D6775B200189992 /* DataUpdate */,
 			);
 			name = JSON;
-			sourceTree = "<group>";
-		};
-		6E10A5A21D1067C4008CBD0C /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-				6E10A5321D10675C008CBD0C /* Realm.swift */,
-				6E10A5331D10675C008CBD0C /* RealmCompany.swift */,
-				6E10A5341D10675C008CBD0C /* RealmEventType.swift */,
-				6E10A5351D10675C008CBD0C /* RealmFeedback.swift */,
-				6E10A5361D10675C008CBD0C /* RealmImage.swift */,
-				6E10A5371D10675C008CBD0C /* RealmLocation.swift */,
-				6E10A5381D10675C008CBD0C /* RealmMember.swift */,
-				6E10A5391D10675C008CBD0C /* RealmNamed.swift */,
-				6E10A53A1D10675C008CBD0C /* RealmNonConfirmedSummitAttendee.swift */,
-				6E10A53B1D10675C008CBD0C /* RealmPerson.swift */,
-				6E10A53C1D10675C008CBD0C /* RealmPresentation.swift */,
-				6E10A53D1D10675C008CBD0C /* RealmPresentationSpeaker.swift */,
-				6E10A53E1D10675C008CBD0C /* RealmSummit.swift */,
-				6E10A53F1D10675C008CBD0C /* RealmSummitAttendee.swift */,
-				6E10A5401D10675C008CBD0C /* RealmSummitEvent.swift */,
-				6E10A5411D10675C008CBD0C /* RealmSummitType.swift */,
-				6E10A5421D10675C008CBD0C /* RealmTag.swift */,
-				6E10A5431D10675C008CBD0C /* RealmTicketType.swift */,
-				6E10A5441D10675C008CBD0C /* RealmTrack.swift */,
-				6E10A5451D10675C008CBD0C /* RealmTrackGroup.swift */,
-				6E10A5461D10675C008CBD0C /* RealmVenue.swift */,
-				9D1CE1091DA492D90064B3B1 /* RealmVenueFloor.swift */,
-				6E10A5471D10675C008CBD0C /* RealmVenueRoom.swift */,
-				6EA062A01D63AD09009538CE /* RealmVideo.swift */,
-				6E570A3E1D67790B00189992 /* DataUpdate */,
-			);
-			name = Realm;
 			sourceTree = "<group>";
 		};
 		6E10A5A31D106AC5008CBD0C /* Model */ = {
@@ -1813,18 +1751,6 @@
 				6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */,
 				6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */,
 				9D6AADAB1DBE563A0057888E /* VenueRoomDataUpdateJSON.swift */,
-			);
-			name = DataUpdate;
-			sourceTree = "<group>";
-		};
-		6E570A3E1D67790B00189992 /* DataUpdate */ = {
-			isa = PBXGroup;
-			children = (
-				6EF5D9201D8CE77800C680D1 /* RealmSummitDataUpdate.swift */,
-				6E570A3F1D67792A00189992 /* RealmEventDataUpdate.swift */,
-				6E570A411D67797B00189992 /* RealmPresentationDataUpdate.swift */,
-				6E93D44A1D9AEE1F00E3302A /* RealmTrackGroupDataUpdate.swift */,
-				9D6AADB51DBE5B420057888E /* RealmVenueRoomDataUpdate.swift */,
 			);
 			name = DataUpdate;
 			sourceTree = "<group>";
