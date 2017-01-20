@@ -10,6 +10,8 @@ import SwiftFoundation
 
 public struct Team: Named {
     
+    public typealias Invitation = TeamInvitation<Reference<Team>>
+    
     public let identifier: Identifier
     
     public var name: String
@@ -23,6 +25,8 @@ public struct Team: Named {
     public var owner: Member
     
     public var members: Set<TeamMember>
+    
+    public var invitations: Set<Invitation>
 }
 
 // MARK: - Equatable
@@ -36,6 +40,7 @@ public func == (lhs: Team, rhs: Team) -> Bool {
         && lhs.updated == rhs.updated
         && lhs.owner == rhs.owner
         && lhs.members == rhs.members
+        && lhs.invitations == rhs.invitations
 }
 
 // MARK: - Extensions

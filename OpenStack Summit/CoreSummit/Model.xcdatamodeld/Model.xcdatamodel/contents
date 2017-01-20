@@ -170,6 +170,7 @@
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="teamOwner" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="TeamInvitation" representedClassName=".TeamInvitationManagedObject" syncable="YES">
+        <attribute name="accepted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -276,7 +277,7 @@
         <element name="SummitType" positionX="0" positionY="99" width="128" height="105"/>
         <element name="Tag" positionX="18" positionY="117" width="128" height="105"/>
         <element name="Team" positionX="27" positionY="171" width="128" height="195"/>
-        <element name="TeamInvitation" positionX="-9" positionY="135" width="128" height="165"/>
+        <element name="TeamInvitation" positionX="-9" positionY="135" width="128" height="180"/>
         <element name="TeamMember" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="TeamMessage" positionX="0" positionY="144" width="128" height="135"/>
         <element name="TicketType" positionX="-18" positionY="117" width="128" height="135"/>

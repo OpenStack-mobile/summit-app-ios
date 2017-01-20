@@ -18,6 +18,8 @@ public final class TeamInvitationManagedObject: Entity {
     
     @NSManaged public var permission: String
     
+    @NSManaged public var accepted: Bool
+    
     @NSManaged public var invitee: MemberManagedObject
     
     @NSManaged public var inviter: MemberManagedObject
@@ -34,10 +36,11 @@ extension TeamInvitation: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.created = Date(foundation: managedObject.created)
         self.updated = Date(foundation: managedObject.updatedDate)
+        self.accepted = managedObject.accepted
         self.permission = TeamPermission(rawValue: managedObject.permission)!
         self.invitee = Member(managedObject: managedObject.invitee)
         self.inviter = Member(managedObject: managedObject.inviter)
-        self.team = Team(managedObject: managedObject.team)
+        self.team = TeamFault(managedObject: managedObject.team)
     }
 }
 
@@ -49,6 +52,7 @@ extension TeamInvitation: CoreDataEncodable {
         
         managedObject.created = created.toFoundation()
         managedObject.updatedDate = updated.toFoundation()
+        managedObject.accepted = accepted
         managedObject.permission = permission.rawValue
         managedObject.invitee = try context.relationshipFault(invitee)
         managedObject.inviter = try context.relationshipFault(inviter)

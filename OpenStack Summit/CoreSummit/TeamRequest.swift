@@ -51,7 +51,7 @@ public extension Store {
                 // create team and cache
                 let owner = Member(managedObject: memberManagedObject)
                 
-                let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [])
+                let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [], invitations: [])
                 
                 try team.save(context)
                 

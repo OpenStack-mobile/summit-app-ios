@@ -14,9 +14,11 @@ import CoreSummit
 
 final class TeamInvitationsViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
     
+    typealias Invitation = TeamInvitation<Expanded<Team>>
+    
     // MARK: - Properties
     
-    let pageController = PageController<TeamInvitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
+    let pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
     private static let dateFormatter: NSDateFormatter = {
         
@@ -106,16 +108,16 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
         }
     }
     
-    private func configure(cell cell: TeamInvitationTableViewCell, with invitation: TeamInvitation) {
+    private func configure(cell cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         
-        cell.teamLabel.text = invitation.team.name
+        cell.teamLabel.text = invitation.team.value.name
         
         cell.inviterLabel.text = "Invited by: " + invitation.inviter.name
         
         cell.dateLabel.text = TeamInvitationsViewController.dateFormatter.stringFromDate(invitation.created.toFoundation())
     }
     
-    private func accept(invitation: TeamInvitation) {
+    private func accept(invitation: Invitation) {
         
         showActivityIndicator()
         
@@ -158,7 +160,7 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
         }
     }
     
-    private func decline(invitation: TeamInvitation) {
+    private func decline(invitation: Invitation) {
         
         showActivityIndicator()
         

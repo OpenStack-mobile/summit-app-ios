@@ -102,9 +102,12 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
     
     private func configureView(team: Team) {
         
-        self.teamCache = team
+        guard let memberID = Store.shared.authenticatedMember?.identifier
+            else { fatalError("Not logged in") }
         
-        let userPermission = team.permission(for: Store.shared.authenticatedMember!.identifier)!
+        let userPermission = team.permission(for: memberID)
+        
+        self.teamCache = team
         
         self.canEdit = userPermission == .admin
         
@@ -133,14 +136,24 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         self.data.append((.owner, [.owner(team.owner)]))
         
         // members
-        let membersSection = team.members
+        let members = team.members
             .sort()
-            .filter({ $0.member.identifier != team.owner.identifier })
+            .filter { $0.member.identifier != team.owner.identifier }
             .map { Cell.member($0) }
         
-        if membersSection.isEmpty == false {
+        if members.isEmpty == false {
             
-            self.data.append((.members, membersSection))
+            self.data.append((.members, members))
+        }
+        
+        let invitations = team.invitations
+            .sort()
+            .filter { $0.invitee.identifier != memberID }
+            .map { Cell.invitation($0) }
+        
+        if invitations.isEmpty == false {
+            
+            self.data.append((.invitations, invitations))
         }
         
         if canEdit {
@@ -268,6 +281,16 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             return cell
             
+        case let .invitation(invitation):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
+            
+            cell.name = invitation.invitee.name
+            cell.pictureURL = invitation.invitee.pictureURL
+            cell.title = invitation.permission.rawValue.lowercaseString.capitalizedString
+            
+            return cell
+            
         case .delete:
             
             return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.teamDetailDeleteTableViewCell, forIndexPath: indexPath)!
@@ -286,7 +309,9 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case .owner: return "Owner"
             
-        case .members: return self.data.firstMatching({ $0.0 == .members })?.1.isEmpty ?? true ? nil : "Members"
+        case .members: return "Members"
+            
+        case .invitations: return "Pending Invitations"
             
         case .delete: return nil
         }
@@ -487,6 +512,7 @@ private extension TeamDetailViewController {
         case description
         case owner
         case members
+        case invitations
         case delete
     }
     
@@ -497,6 +523,7 @@ private extension TeamDetailViewController {
         case updated(Date)
         case owner(Member)
         case member(TeamMember)
+        case invitation(Team.Invitation)
         case delete
     }
 }

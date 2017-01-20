@@ -1822,17 +1822,9 @@
 			name = Configurations;
 			sourceTree = "<group>";
 		};
-		6E959E131DF5F347002981FD /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Notifications;
-			sourceTree = "<group>";
-		};
 		6E99B8A71DC7D66A009CE28D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6E959E131DF5F347002981FD /* Notifications */,
 				6E99B8A81DC7D68F009CE28D /* Model.xcdatamodeld */,
 				6EF4F8621DC8D1D300D31A99 /* CoreDataExtensions.swift */,
 				6EF4F8631DC8D1D300D31A99 /* CoreDataEncodable.swift */,

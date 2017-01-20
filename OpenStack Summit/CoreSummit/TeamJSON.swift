@@ -12,7 +12,7 @@ public extension Team {
     
     enum JSONKey: String {
         
-        case id, name, description, created_at, updated_at, owner, members
+        case id, name, description, created_at, updated_at, owner, members, invitations
     }
 }
 
@@ -28,7 +28,9 @@ extension Team: JSONDecodable {
             let ownerJSON = JSONObject[JSONKey.owner.rawValue],
             let owner = Member(JSONValue: ownerJSON),
             let membersJSONArray = JSONObject[JSONKey.members.rawValue]?.arrayValue,
-            let members = TeamMember.fromJSON(membersJSONArray)
+            let members = TeamMember.fromJSON(membersJSONArray),
+            let invitationsJSONArray = JSONObject[JSONKey.invitations.rawValue]?.arrayValue,
+            let invitations = TeamInvitation<Reference<Team>>.fromJSON(invitationsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -37,6 +39,7 @@ extension Team: JSONDecodable {
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
         self.owner = owner
         self.members = Set(members)
+        self.invitations = Set(invitations)
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String

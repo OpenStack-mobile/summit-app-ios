@@ -24,6 +24,8 @@ public final class TeamManagedObject: Entity {
     
     @NSManaged public var members: Set<TeamMemberManagedObject>
     
+    @NSManaged public var invitations: Set<TeamInvitationManagedObject>
+    
     // Inverse Relationships
     
     @NSManaged public var messages: Set<TeamMessageManagedObject>
@@ -42,6 +44,7 @@ extension Team: CoreDataDecodable {
         self.descriptionText = managedObject.descriptionText
         self.owner = Member(managedObject: managedObject.owner)
         self.members = TeamMember.from(managedObjects: managedObject.members)
+        self.invitations = Invitation.from(managedObjects: managedObject.invitations)
     }
 }
 
@@ -62,6 +65,10 @@ extension Team: CoreDataEncodable {
         // set members
         managedObject.owner = try context.relationshipFault(owner)
         managedObject.members = try context.relationshipFault(members)
+        
+        // set invitations
+        managedObject.invitations.forEach { context.deleteObject($0) } // invitations must always have a team
+        managedObject.invitations = try context.relationshipFault(invitations)
         
         managedObject.didCache()
         

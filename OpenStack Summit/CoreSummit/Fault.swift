@@ -39,3 +39,70 @@ public func == <T: Unique> (lhs: Fault<T>, rhs: Fault<T>) -> Bool {
     default: return false
     }
 }
+
+
+// MARK: - Generic Faults
+
+public protocol FaultConvertible: Unique, CoreDataDecodable {
+    
+    associatedtype Value: Unique, CoreDataDecodable
+    
+    init?(fault: Fault<Value>)
+    
+    func toFault() -> Fault<Value>
+}
+
+public struct Expanded<Value where Value: Unique, Value: CoreDataDecodable>: FaultConvertible {
+    
+    public var identifier: Identifier { return value.identifier }
+    
+    public var value: Value
+    
+    public init(managedObject: Value.ManagedObject) {
+        
+        self.value = Value(managedObject)
+    }
+    
+    public init?(fault: Fault<Value>) {
+        
+        switch fault {
+        case .identifier: return nil
+        case let .value(value): self.value = value
+        }
+    }
+    
+    public func toFault() -> Fault<Value> {
+        
+        return .value(value)
+    }
+}
+
+public func == <Value where Value: Unique, Value: CoreDataDecodable> (lhs: Expanded<Value>, rhs: Expanded<Value>) -> Bool {
+    
+    return lhs.value == rhs.value
+}
+
+public struct Reference<Value where Value: Unique, Value: CoreDataDecodable>: FaultConvertible {
+    
+    public var identifier: Identifier
+    
+    public init(managedObject: ManagedObject) {
+        
+        self.identifier = managedObject.identifier
+    }
+    
+    public init?(fault: Fault<Value>) {
+        
+        self.identifier = fault.identifier
+    }
+    
+    public func toFault() -> Fault<Value> {
+        
+        return .identifier(identifier)
+    }
+}
+
+public func == <Value where Value: Unique, Value: CoreDataDecodable> (lhs: Reference<Value>, rhs: Reference<Value>) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+}

@@ -19,8 +19,24 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDJSON)
         
+        let context = privateQueueManagedObjectContext
+        
         http.PUT(url) { (responseObject, error) in
             
+            if error == nil {
+                
+                try! context.performErrorBlockAndWait {
+                    
+                    guard let managedObject = try TeamInvitationManagedObject.find(identifier, context: context)
+                        else { return }
+                    
+                    managedObject.accepted = true
+                    
+                    try context.save()
+                }
+            }
+            
+            // call completion block
             completion(error)
         }
     }
@@ -33,13 +49,30 @@ public extension Store {
         
         let http = self.createHTTP(.OpenIDJSON)
         
+        let context = privateQueueManagedObjectContext
+        
         http.DELETE(url) { (responseObject, error) in
+            
+            if error == nil {
+                
+                try! context.performErrorBlockAndWait {
+                    
+                    guard let managedObject = try TeamInvitationManagedObject.find(identifier, context: context)
+                        else { return }
+                    
+                    managedObject.accepted = false
+                    
+                    try context.save()
+                }
+            }
+            
+            // call completion block
             
             completion(error)
         }
     }
     
-    func invitations(page: Int = 1, perPage: Int = 10, filter: InvitationsFilter? = nil, completion: (ErrorValue<Page<TeamInvitation>>) -> ()) {
+    func invitations(page: Int = 1, perPage: Int = 10, filter: InvitationsFilter? = nil, completion: (ErrorValue<Page<TeamInvitation<Expanded<Team>>>>) -> ()) {
         
         let filterString: String
         
@@ -70,7 +103,7 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<TeamInvitation>(JSONValue: json)
+                let page = Page<TeamInvitation<Expanded<Team>>>(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
