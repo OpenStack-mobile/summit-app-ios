@@ -474,7 +474,8 @@ public struct TeamMessageNotification: PushNotification {
             case let .team(team) = topic,
             let identifierString = pushNotification[Key.id.rawValue],
             let identifier = Int(identifierString),
-            let body = pushNotification[Key.body.rawValue],
+            let encodedBody = pushNotification[Key.body.rawValue],
+            let body = String(openStackEncoded: encodedBody),
             let createdString = pushNotification[Key.created_at.rawValue],
             let created = Int(createdString),
             let fromIDString = pushNotification[Key.from_id.rawValue],
@@ -486,7 +487,7 @@ public struct TeamMessageNotification: PushNotification {
         
         self.identifier = identifier
         self.team = team
-        self.body = String(CString: body.cStringUsingEncoding(NSUTF8StringEncoding)!, encoding: NSNonLossyASCIIStringEncoding)!
+        self.body = body
         self.created = Date(timeIntervalSince1970: TimeInterval(created))
         self.from = (fromID, fromFirstName, fromLastName)
     }

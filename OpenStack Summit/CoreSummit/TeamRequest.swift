@@ -24,10 +24,10 @@ public extension Store {
         
         var jsonDictionary = [String: AnyObject]()
         
-        jsonDictionary["name"] = name
+        jsonDictionary["name"] = name.toOpenStackEncoding()!
         
         if let description = description where description.isEmpty == false {
-            jsonDictionary["description"] = description
+            jsonDictionary["description"] = description.toOpenStackEncoding()!
         }
         
         http.POST(url, parameters: jsonDictionary) { (responseObject, error) in
@@ -75,10 +75,10 @@ public extension Store {
         
         var jsonDictionary = [String: AnyObject]()
         
-        jsonDictionary["name"] = name
+        jsonDictionary["name"] = name.toOpenStackEncoding()!
         
         if let description = description where description.isEmpty == false {
-            jsonDictionary["description"] = description
+            jsonDictionary["description"] = description.toOpenStackEncoding()!
         }
         
         http.PUT(url, parameters: jsonDictionary)  { (responseObject, error) in

@@ -25,7 +25,7 @@ public extension Store {
         guard let member = self.authenticatedMember?.identifier
             else { fatalError("Must be logged in") }
         
-        let messageASCII = String(CString: message.cStringUsingEncoding(NSNonLossyASCIIStringEncoding)!, encoding: NSUTF8StringEncoding)!
+        let messageASCII = message.toOpenStackEncoding()!
         
         http.POST(url, parameters: ["body": messageASCII, "priority": priority.rawValue]) { (responseObject, error) in
             

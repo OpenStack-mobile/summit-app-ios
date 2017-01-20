@@ -22,7 +22,8 @@ extension Team: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
+            let encodedName = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
+            let name = String(openStackEncoded: encodedName),
             let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
             let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int,
             let ownerJSON = JSONObject[JSONKey.owner.rawValue],
@@ -42,6 +43,14 @@ extension Team: JSONDecodable {
         self.invitations = Set(invitations)
         
         // optional
-        self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        if let encodedDescriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
+            let descriptionText = String(openStackEncoded: encodedDescriptionText) {
+            
+            self.descriptionText = descriptionText
+            
+        } else {
+            
+            self.descriptionText = nil
+        }
     }
 }

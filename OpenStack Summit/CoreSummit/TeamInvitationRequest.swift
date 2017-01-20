@@ -72,7 +72,10 @@ public extension Store {
         }
     }
     
-    func invitations(page: Int = 1, perPage: Int = 10, filter: ListTeamInvitations.Request.Filter? = nil, completion: (ErrorValue<Page<ListTeamInvitations.Response.Invitation>>) -> ()) {
+    func invitations(page: Int = 1,
+                     perPage: Int = 10,
+                     filter: ListTeamInvitations.Request.Filter? = nil,
+                     completion: (ErrorValue<Page<ListTeamInvitations.Response.Invitation>>) -> ()) {
         
         let request = ListTeamInvitations.Request(filter: filter, page: page, perPage: perPage)
         
