@@ -11,7 +11,7 @@ Supports iOS, watchOS and tvOS.
 	```
 	carthage bootstrap
 	```
-2. Download [Google Maps SDK](https://www.gstatic.com/cpdc/aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz), [Fabric](https://kit-downloads.fabric.io/cocoapods/fabric/1.6.9/fabric.zip), [Crashlytics](https://kit-downloads.fabric.io/cocoapods/crashlytics/3.8.1/crashlytics.zip) and copy to `Vendor` folder.
+2. Download [Google Maps SDK](https://www.gstatic.com/cpdc/aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz), [Firebase SDK](https://dl.google.com/firebase/sdk/ios/3_11_1/Firebase-3.11.1.zip) (frameworks in Analytics and Messaging folders), [Fabric](https://kit-downloads.fabric.io/cocoapods/fabric/1.6.9/fabric.zip), [Crashlytics](https://kit-downloads.fabric.io/cocoapods/crashlytics/3.8.1/crashlytics.zip) and copy to `Vendor` folder.
 
 3. Generate .swift out of sample configuration files
 
@@ -28,4 +28,13 @@ Supports iOS, watchOS and tvOS.
 	Beta.entitlements.xctemplate -> Beta.entitlements
 	Release.entitlements.xctemplate -> Release.entitlements
 	```
-4. Compile and run
+
+4. Add Firebase configuration files
+
+	```
+	OpenStack Summit/Debug/GoogleService-Info.plist
+	OpenStack Summit/Beta/GoogleService-Info.plist
+	OpenStack Summit/Release/GoogleService-Info.plist
+	```
+
+5. Compile and run
