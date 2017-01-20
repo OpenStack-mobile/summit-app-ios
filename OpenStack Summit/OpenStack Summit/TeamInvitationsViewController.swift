@@ -14,13 +14,13 @@ import CoreSummit
 
 final class TeamInvitationsViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
     
-    typealias Invitation = TeamInvitation<Expanded<Team>>
+    typealias Invitation = ListTeamInvitations.Response.Invitation
     
     // MARK: - Properties
     
     let pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
-    private static let dateFormatter: NSDateFormatter = {
+    private lazy var dateFormatter: NSDateFormatter = {
         
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
@@ -110,11 +110,11 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     private func configure(cell cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         
-        cell.teamLabel.text = invitation.team.value.name
+        cell.teamLabel.text = invitation.team.name
         
         cell.inviterLabel.text = "Invited by: " + invitation.inviter.name
         
-        cell.dateLabel.text = TeamInvitationsViewController.dateFormatter.stringFromDate(invitation.created.toFoundation())
+        cell.dateLabel.text = dateFormatter.stringFromDate(invitation.created.toFoundation())
     }
     
     private func accept(invitation: Invitation) {

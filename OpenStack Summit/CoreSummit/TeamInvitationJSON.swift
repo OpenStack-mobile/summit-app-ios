@@ -21,6 +21,7 @@ extension TeamInvitation: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let team = JSONObject[JSONKey.team_id.rawValue]?.rawValue as? Int,
             let inviteeJSON = JSONObject[JSONKey.invitee.rawValue],
             let invitee = Member(JSONValue: inviteeJSON),
             let inviterJSON = JSONObject[JSONKey.inviter.rawValue],
@@ -33,28 +34,55 @@ extension TeamInvitation: JSONDecodable {
             else { return nil }
         
         self.identifier = identifier
+        self.team = team
         self.invitee = invitee
         self.inviter = inviter
         self.permission = permission
         self.created = Date(timeIntervalSince1970: TimeInterval(created))
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
         self.accepted = accepted
+    }
+}
+
+extension ListTeamInvitations.Response.Invitation: JSONDecodable {
+    
+    public init?(JSONValue: JSON.Value) {
         
-        // team relationship fault
-        if let teamJSON = JSONObject[JSONKey.team.rawValue],
+        typealias JSONKey = TeamInvitationJSONKey
+        
+        guard let JSONObject = JSONValue.objectValue,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let teamJSON = JSONObject[JSONKey.team.rawValue],
             let team = Team(JSONValue: teamJSON),
-            let fault = TeamFault(fault: Fault<Team>.value(team)) {
-            
-            self.team = fault
-            
-        } else if let team = JSONObject[JSONKey.team_id.rawValue]?.rawValue as? Int,
-            let fault = TeamFault(fault: Fault<Team>.identifier(team))  {
-            
-            self.team = fault
-            
-        } else {
-            
-            return nil
-        }
+            let inviteeJSON = JSONObject[JSONKey.invitee.rawValue],
+            let invitee = Member(JSONValue: inviteeJSON),
+            let inviterJSON = JSONObject[JSONKey.inviter.rawValue],
+            let inviter = Member(JSONValue: inviterJSON),
+            let permissionString = JSONObject[JSONKey.permission.rawValue]?.rawValue as? String,
+            let permission = TeamPermission(rawValue: permissionString),
+            let created = JSONObject[JSONKey.created_at.rawValue]?.rawValue as? Int,
+            let updated = JSONObject[JSONKey.updated_at.rawValue]?.rawValue as? Int,
+            let accepted = JSONObject[JSONKey.is_accepted.rawValue]?.rawValue as? Bool
+            else { return nil }
+        
+        self.identifier = identifier
+        self.team = team
+        self.invitee = invitee
+        self.inviter = inviter
+        self.permission = permission
+        self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+        self.accepted = accepted
+    }
+}
+
+extension ListTeamInvitations.Response: JSONDecodable {
+    
+    public init?(JSONValue: JSON.Value) {
+        
+        guard let page = Page<ListTeamInvitations.Response.Invitation>(JSONValue: JSONValue)
+            else { return nil }
+        
+        self.page = page
     }
 }

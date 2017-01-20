@@ -8,11 +8,11 @@
 
 import SwiftFoundation
 
-public struct TeamInvitation<TeamFault: FaultConvertible where TeamFault.Value == Team>: Unique {
+public struct TeamInvitation: Unique {
     
     public let identifier: Identifier
     
-    public let team: TeamFault
+    public let team: Identifier
     
     public let inviter: Member
     
@@ -29,7 +29,7 @@ public struct TeamInvitation<TeamFault: FaultConvertible where TeamFault.Value =
 
 // MARK: - Equatable
 
-public func == <TeamFault: FaultConvertible> (lhs: TeamInvitation<TeamFault>, rhs: TeamInvitation<TeamFault>) -> Bool {
+public func == (lhs: TeamInvitation, rhs: TeamInvitation) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.team == rhs.team

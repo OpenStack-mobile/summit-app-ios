@@ -30,7 +30,7 @@ extension Team: JSONDecodable {
             let membersJSONArray = JSONObject[JSONKey.members.rawValue]?.arrayValue,
             let members = TeamMember.fromJSON(membersJSONArray),
             let invitationsJSONArray = JSONObject[JSONKey.invitations.rawValue]?.arrayValue,
-            let invitations = TeamInvitation<Reference<Team>>.fromJSON(invitationsJSONArray)
+            let invitations = TeamInvitation.fromJSON(invitationsJSONArray)
             else { return nil }
         
         self.identifier = identifier

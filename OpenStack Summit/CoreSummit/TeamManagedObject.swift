@@ -44,7 +44,7 @@ extension Team: CoreDataDecodable {
         self.descriptionText = managedObject.descriptionText
         self.owner = Member(managedObject: managedObject.owner)
         self.members = TeamMember.from(managedObjects: managedObject.members)
-        self.invitations = Invitation.from(managedObjects: managedObject.invitations)
+        self.invitations = TeamInvitation.from(managedObjects: managedObject.invitations)
     }
 }
 

@@ -112,22 +112,6 @@ public extension Fault where Value: CoreDataDecodable, Value.ManagedObject: Enti
     }
 }
 
-public extension Expanded where Value: CoreDataDecodable, Value.ManagedObject: Entity {
-    
-    init(managedObject: Value.ManagedObject) {
-        
-        self.value = Value.init(managedObject: managedObject)
-    }
-}
-
-public extension Reference where Value: CoreDataDecodable, Value.ManagedObject: Entity {
-    
-    init(managedObject: Value.ManagedObject) {
-        
-        self.identifier = managedObject.identifier
-    }
-}
-
 public extension CollectionType where Generator.Element: Entity {
     
     var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
@@ -238,14 +222,5 @@ internal extension NSManagedObjectContext {
             
             return try value.save(self)
         }
-    }
-    
-    @inline(__always)
-    func relationshipFault<Convertible: FaultConvertible
-        where Convertible.Value: CoreDataEncodable,
-        Convertible.Value.ManagedObject: Entity>
-        (faultConvertible: Convertible) throws -> Convertible.Value.ManagedObject {
-        
-        return try relationshipFault(faultConvertible.toFault())
     }
 }

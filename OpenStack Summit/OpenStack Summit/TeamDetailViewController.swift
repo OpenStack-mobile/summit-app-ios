@@ -523,7 +523,7 @@ private extension TeamDetailViewController {
         case updated(Date)
         case owner(Member)
         case member(TeamMember)
-        case invitation(Team.Invitation)
+        case invitation(TeamInvitation)
         case delete
     }
 }

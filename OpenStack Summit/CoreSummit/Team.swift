@@ -10,8 +10,6 @@ import SwiftFoundation
 
 public struct Team: Named {
     
-    public typealias Invitation = TeamInvitation<Reference<Team>>
-    
     public let identifier: Identifier
     
     public var name: String
@@ -26,7 +24,7 @@ public struct Team: Named {
     
     public var members: Set<TeamMember>
     
-    public var invitations: Set<Invitation>
+    public var invitations: Set<TeamInvitation>
 }
 
 // MARK: - Equatable
