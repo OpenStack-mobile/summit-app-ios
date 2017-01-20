@@ -295,6 +295,19 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 
                 updateUI(ErrorValue<Speaker>.Error(Error.getSpeakerProfile))
             }
+            
+        case let .member(identifier):
+            
+            if let member = try! Member.find(identifier, context: Store.shared.managedObjectContext) {
+                
+                self.userActivity = nil
+                
+                updateUI(.Value(member))
+                
+            } else {
+                
+                updateUI(ErrorValue<Member>.Error(Error.getMemberProfile))
+            }
         }
     }
     
@@ -308,6 +321,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
             
         case let .Value(person):
             
+            self.title = person.name
             self.name = person.name
             self.personTitle = person.title ?? ""
             self.pictureURL = person.pictureURL

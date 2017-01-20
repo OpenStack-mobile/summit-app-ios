@@ -160,4 +160,32 @@ final class StoreTests: XCTestCase {
         
         waitForExpectationsWithTimeout(60, handler: nil)
     }
+    
+    func testListMembersRequest() {
+        
+        let store = try! createStore()
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        store.members(MemberListRequest.Filter(value: "Jimmy", property: .firstName)) { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                if value.total > 0 {
+                    
+                    XCTAssert(value.items.isEmpty == false)
+                }
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
 }

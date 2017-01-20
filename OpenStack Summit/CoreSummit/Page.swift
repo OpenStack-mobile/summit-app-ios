@@ -9,7 +9,7 @@
 import SwiftFoundation
 
 /// Used for fetching requests that require paging.
-public struct Page<Item: JSONDecodable> {
+public struct Page<Item> {
     
     public let currentPage: Int
     
@@ -20,4 +20,9 @@ public struct Page<Item: JSONDecodable> {
     public let perPage: Int
     
     public let items: [Item]
+    
+    public static var empty: Page<Item> {
+        
+        return Page(currentPage: 1, total: 1, lastPage: 1, perPage: 0, items: [])
+    }
 }

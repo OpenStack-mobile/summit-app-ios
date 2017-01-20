@@ -6,27 +6,27 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct CoreSummit.Speaker
-import typealias CoreSummit.Identifier
+import CoreSummit
 
-/// Data type Used the configure the member profile-related View Controllers. 
+/// Data type Used the configure the member profile-related View Controllers.
 public enum MemberProfileIdentifier {
     
     case currentUser
     case speaker(Identifier)
+    case member(Identifier)
     
     public init() {
         
         self = .currentUser
     }
-}
-
-
-public extension MemberProfileIdentifier {
     
-    /// Initialize from `PersonListItem`.
-    init(speaker: Speaker) {
+    public init(speaker: Speaker) {
         
         self = .speaker(speaker.identifier)
+    }
+    
+    public init(member: Member) {
+        
+        self = .member(member.identifier)
     }
 }

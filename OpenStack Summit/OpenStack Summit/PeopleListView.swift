@@ -17,5 +17,7 @@ final class PeopleListView: UIView {
         super.init(coder: aDecoder)
         NSBundle.mainBundle().loadNibNamed("PeopleListView", owner: self, options: nil)
         addSubview(self.view)
+        self.tableView.estimatedRowHeight = 96
+        self.tableView.rowHeight = UITableViewAutomaticDimension
     }
 }

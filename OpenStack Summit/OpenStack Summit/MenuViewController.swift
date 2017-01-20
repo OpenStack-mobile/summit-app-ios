@@ -32,6 +32,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var teamsButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
     
@@ -120,21 +121,31 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         let item: MenuItem
         
         switch sender {
+            
         case eventsButton:
             showEvents()
             item = .Events
+            
         case venuesButton:
             showVenues()
             item = .Venues
+            
         case peopleButton:
             showSpeakers()
             item = .People
+            
         case myProfileButton:
             showMyProfile()
             item = .MyProfile
+            
         case aboutButton:
             showAbout()
             item = .About
+            
+        case teamsButton:
+            showTeams()
+            item = .Teams
+            
         default: fatalError("Invalid sender \(sender)")
         }
         
@@ -161,7 +172,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         let currentMemberRole = Store.shared.memberRole
         
         switch (menuItem) {
-        case .MyProfile:
+        case .MyProfile, .Teams:
             return currentMemberRole != .anonymous
         case .Login:
             return currentMemberRole == .anonymous
@@ -177,6 +188,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
         aboutButton.alpha = 0.5
+        teamsButton.alpha = 0.5
     }
     
     private func highlight(item: MenuItem) {
@@ -194,6 +206,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             myProfileButton.alpha = 1
         case .About:
             aboutButton.alpha = 1
+        case .Teams:
+            teamsButton.alpha = 1
             
         // not applicable
         case .Login: break
@@ -213,6 +227,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.setTitle("SPEAKERS", forState: .Normal)
         
         myProfileButton.hidden = hasAccess(to: .MyProfile) == false
+        teamsButton.hidden = hasAccess(to: .Teams) == false
     }
     
     @inline(__always)
@@ -279,9 +294,20 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     func showAbout() {
         
+        highlight(.About)
+        
         let aboutViewController = R.storyboard.menu.aboutViewController()!
         
         show(aboutViewController)
+    }
+    
+    func showTeams() {
+        
+        highlight(.Teams)
+        
+        let teamsViewController = R.storyboard.teams.initialViewController()!
+        
+        show(teamsViewController)
     }
     
     private func showSearch(for term: String) {
@@ -375,8 +401,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                         
                         Crashlytics.sharedInstance().setUserIdentifier("\(userID)")
                     }
-                    
-                    PushNotificationsManager.subscribeToPushChannelsUsingContext({ (succeeded, error) in })
                 }
             }
         }
@@ -397,9 +421,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         reloadMenu()
         hideMenu()
         hideActivityIndicator()
-        
-        PushNotificationsManager.unsubscribeFromPushChannels { (succeeded, error) in
-        }
     }
     
     // MARK: - SWRevealViewControllerDelegate
@@ -473,6 +494,7 @@ enum MenuItem {
     case Events
     case Venues
     case People
-    case MyProfile
     case About
+    case Teams
+    case MyProfile
 }

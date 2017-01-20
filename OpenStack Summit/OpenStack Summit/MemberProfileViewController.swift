@@ -35,13 +35,27 @@ final class MemberProfileViewController: RevealTabStripViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // try to get name if speaker
-        if case let .speaker(speakerID) = profile {
+        // try to get name
+        
+        switch profile {
             
-            if let speaker = try! Speaker.find(speakerID, context: Store.shared.managedObjectContext) {
+        case let .speaker(identifier):
+            
+            if let person = try! Speaker.find(identifier, context: Store.shared.managedObjectContext) {
                 
-                self.title = speaker.name.uppercaseString
+                self.title = person.name.uppercaseString
             }
+            
+        case let .member(identifier):
+            
+            if let person = try! Member.find(identifier, context: Store.shared.managedObjectContext) {
+                
+                self.title = person.name.uppercaseString
+            }
+            
+        case .currentUser:
+            
+            break
         }
         
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
@@ -52,8 +66,6 @@ final class MemberProfileViewController: RevealTabStripViewController {
         
         reloadPagerTabStripView()
     }
-    
-    // MARK: - Methods
     
     // MARK: - RevealTabStripViewController
     
