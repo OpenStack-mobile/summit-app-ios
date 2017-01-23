@@ -27,3 +27,11 @@ public extension Person {
     
     var name: String { return firstName + " " + lastName }
 }
+
+// MARK: - Supporting Types
+
+public enum Gender: String {
+    
+    case male = "Male"
+    case female = "Female"
+}

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Attendee: Unique, Equatable {
+public struct Attendee: Unique {
     
     public let identifier: Identifier
     
