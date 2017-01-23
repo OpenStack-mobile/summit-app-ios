@@ -14,7 +14,7 @@ public struct Member: Named {
     
     public var lastName: String
     
-    public var gender: Gender
+    public var gender: Gender?
     
     public var pictureURL: String
         

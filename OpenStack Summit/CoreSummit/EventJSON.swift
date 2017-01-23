@@ -12,7 +12,7 @@ internal extension Event {
     
     enum JSONKey: String {
         
-        case id, summit, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, tags, track_id, videos, rsvp_link, groups
+        case id, summit, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups
     }
 }
 
@@ -127,7 +127,7 @@ extension MemberResponse.Event: JSONDecodable {
             let eventTypeJSON = JSONObject[JSONKey.type.rawValue],
             let eventType = EventType(JSONValue: eventTypeJSON),
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
-            let tags = MemberResponse.Tag.fromJSON(tagsJSONArray),
+            let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let typeJSON = JSONObject[JSONKey.type.rawValue],
             let type = EventType(JSONValue: typeJSON),
@@ -143,10 +143,10 @@ extension MemberResponse.Event: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.tags = Set(tags)
+        self.tags = tags
         self.allowFeedback = allowFeedback
         self.type = type
-        self.sponsors = Set(sponsors)
+        self.sponsors = sponsors
         self.presentation = presentation
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
@@ -166,7 +166,10 @@ extension MemberResponse.Event: JSONDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
+        if let trackJSON = JSONObject[JSONKey.track.rawValue] {
+            
+            guard let track = MemberResponse.Track(JSONValue: trackJSON)
+                else { return nil }
             
             self.track = track
             
@@ -175,8 +178,10 @@ extension MemberResponse.Event: JSONDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
-            where location > 0 {
+        if let locationJSON = JSONObject[JSONKey.location.rawValue] {
+            
+            guard let location = Location(JSONValue: locationJSON)
+                else { return nil }
             
             self.location = location
             
@@ -190,7 +195,7 @@ extension MemberResponse.Event: JSONDecodable {
             guard let videos = Video.fromJSON(videosJSONArray)
                 else { return nil }
             
-            self.videos = Set(videos)
+            self.videos = videos
             
         } else {
             
@@ -202,7 +207,7 @@ extension MemberResponse.Event: JSONDecodable {
             guard let groups = Group.fromJSON(groupsJSONArray)
                 else { return nil }
             
-            self.groups = Set(groups)
+            self.groups = groups
             
         } else {
             

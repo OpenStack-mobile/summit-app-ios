@@ -111,17 +111,16 @@ public extension MemberManagedObject {
 
 public extension Store {
     
-    /// The member that is logged in. Only valid for confirmed attendees.
+    /// The member that is logged in.
     var authenticatedMember: MemberManagedObject? {
         
         return try! self.authenticatedMember(self.managedObjectContext)
     }
     
-    /// The member that is logged in. Only valid for confirmed attendees.
+    /// The member that is logged in.
     internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
         
-        guard let sessionMember = session.member,
-            case let .attendee(memberID) = sessionMember,
+        guard let memberID = session.member,
             let member = try MemberManagedObject.find(memberID, context: context)
             else { return nil }
         
@@ -135,11 +134,7 @@ public extension Store {
     
     var isLoggedInAndConfirmedAttendee: Bool {
         
-        guard let sessionMember = session.member,
-            case .attendee(_) = sessionMember
-            else { return false }
-        
-        return true
+        return authenticatedMember?.attendeeRole != nil
     }
     
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {

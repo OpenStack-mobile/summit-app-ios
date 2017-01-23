@@ -50,7 +50,7 @@ public extension Store {
 
 public struct MemberResponse {
     
-    public struct Member: Named {
+    public struct Member: Person {
         
         public let identifier: Identifier
         
@@ -107,7 +107,7 @@ public struct MemberResponse {
         
         public let tags: [Tag]
         
-        public let location: Location
+        public let location: Location?
         
         public let presentation: Presentation
         
@@ -124,10 +124,15 @@ public struct MemberResponse {
         
         public var name: String
         
-        public var groups: Set<Group>
+        public var groups: [TrackGroup]
     }
     
     public typealias Presentation = PresentationDataUpdate
+}
+
+public extension MemberResponse.Member {
+    
+    public var title: String? { return speakerRole?.title }
 }
 
 // MARK: - Equatable
