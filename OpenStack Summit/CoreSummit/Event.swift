@@ -8,7 +8,7 @@
 
 import struct SwiftFoundation.Date
 
-public struct Event: Named, Equatable {
+public struct Event: Named {
     
     public let identifier: Identifier
     

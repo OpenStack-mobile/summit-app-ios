@@ -22,16 +22,14 @@ extension EventType: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String
-            /* let color = JSONObject[JSONKey.color.rawValue]?.rawValue as? String, */
-            /* let blackOutTimes = JSONObject[JSONKey.black_out_times.rawValue]?.rawValue as? Bool */
+            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
+            let color = JSONObject[JSONKey.color.rawValue]?.rawValue as? String,
+            let blackOutTimes = JSONObject[JSONKey.black_out_times.rawValue]?.rawValue as? Bool
             else { return nil }
         
         self.identifier = identifier
         self.name = name
-        
-        // not in Realm
-        //self.color = color
-        //self.blackOutTimes = blackOutTimes
+        self.color = color
+        self.blackOutTimes = blackOutTimes
     }
 }

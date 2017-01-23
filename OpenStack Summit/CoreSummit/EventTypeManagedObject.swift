@@ -13,6 +13,10 @@ public final class EventTypeManagedObject: Entity {
     
     @NSManaged public var name: String
     
+    @NSManaged public var color: String
+    
+    @NSManaged public var blackOutTimes: Bool
+    
     // Inverse Relationships
     
     @NSManaged public var events: Set<EventManagedObject>
@@ -26,6 +30,8 @@ extension EventType: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.name = managedObject.name
+        self.color = managedObject.color
+        self.blackOutTimes = managedObject.blackOutTimes
     }
 }
 
@@ -36,6 +42,8 @@ extension EventType: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.name = name
+        managedObject.color = color
+        managedObject.blackOutTimes = blackOutTimes
         
         managedObject.didCache()
         

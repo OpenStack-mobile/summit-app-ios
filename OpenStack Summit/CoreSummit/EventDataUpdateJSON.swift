@@ -8,7 +8,7 @@
 
 import SwiftFoundation
 
-public extension EventDataUpdate {
+private extension EventDataUpdate {
     
     typealias JSONKey = Event.JSONKey
 }

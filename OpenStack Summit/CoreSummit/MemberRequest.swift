@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func member(for summit: Identifier, completion: (ErrorValue<MemberResponse.Member>) -> ()) {
+    func currentMember(for summit: Identifier, completion: (ErrorValue<MemberResponse.Member>) -> ()) {
         
         let URI = "/api/v1/summits/\(summit)/members/me/?expand=attendee,speaker,feedback,groups"
         
@@ -29,19 +29,19 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let entity = Member(JSONValue: json)
+                let member = MemberResponse.Member(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try entity.save(context)
+                try member.save(context)
                 
                 try context.save()
             }
             
             // success
-            completion(.Value(entity))
+            completion(.Value(member))
         })
     }
 }
@@ -50,7 +50,7 @@ public extension Store {
 
 public struct MemberResponse {
     
-    public struct Member {
+    public struct Member: Named {
         
         public let identifier: Identifier
         
@@ -79,7 +79,7 @@ public struct MemberResponse {
         public let groups: [Group]
     }
     
-    public struct Event {
+    public struct Event: Named {
         
         public let identifier: Identifier
         
@@ -118,9 +118,61 @@ public struct MemberResponse {
         public let groups: [Group]
     }
     
-    public struct 
+    public struct Track: Named {
+        
+        public let identifier: Identifier
+        
+        public var name: String
+        
+        public var groups: Set<Group>
+    }
+    
+    public typealias Presentation = PresentationDataUpdate
 }
 
 // MARK: - Equatable
 
+public func == (lhs: MemberResponse.Event, rhs: MemberResponse.Event) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.summit == rhs.summit
+        && lhs.name == rhs.name
+        && lhs.summit == rhs.summit
+        && lhs.descriptionText == rhs.descriptionText
+        && lhs.socialDescription == rhs.socialDescription
+        && lhs.start == rhs.start
+        && lhs.end == rhs.end
+        && lhs.track == rhs.track
+        && lhs.allowFeedback == rhs.allowFeedback
+        && lhs.averageFeedback == rhs.averageFeedback
+        && lhs.type == rhs.type
+        && lhs.sponsors == rhs.sponsors
+        && lhs.tags == rhs.tags
+        && lhs.location == rhs.location
+        && lhs.presentation == rhs.presentation
+        && lhs.videos == rhs.videos
+        && lhs.rsvp == rhs.rsvp
+        && lhs.groups == rhs.groups
+}
 
+public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.firstName == rhs.firstName
+        && lhs.lastName == rhs.lastName
+        && lhs.pictureURL == rhs.pictureURL
+        && lhs.twitter == rhs.twitter
+        && lhs.irc == rhs.irc
+        && lhs.linkedIn == rhs.linkedIn
+        && lhs.speakerRole == rhs.speakerRole
+        && lhs.attendeeRole == rhs.attendeeRole
+        && lhs.groups == rhs.groups
+        && lhs.groupEvents == rhs.groupEvents
+}
+
+public func == (lhs: MemberResponse.Track, rhs: MemberResponse.Track) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.name == rhs.name
+        && lhs.groups == rhs.groups
+}

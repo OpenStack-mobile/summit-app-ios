@@ -13,8 +13,17 @@ import CoreData
 
 public extension Store {
     
+    func logout() {
+        
+        session.clear()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
+    }
+    
     /// Login via OAuth with OpenStack ID
-    func login(summit: Identifier? = nil, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
+    func login(summit: Identifier, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
+        
+        let context = self.privateQueueManagedObjectContext
         
         oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             
@@ -23,78 +32,24 @@ public extension Store {
             
             loginCallback()
             
-            self.linkAttendee(summit, completion: completion)
-        }
-    }
-    
-    /// Complete the Login process and store the session info. 
-    func linkAttendee(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
-        
-        @inline(__always)
-        func success(name name: String, member: SessionMember) {
-            
-            self.session.name = name
-            self.session.member = member
-            
-            completion(.Value())
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
-        }
-        
-        @inline(__always)
-        func failure(error: ErrorType) {
-            
-            completion(.Error(error))
-        }
-        
-        // link attendee
-        
-        self.loggedInMember(summit) { (response) in
-            
-            switch response {
+            self.currentMember(for: summit) { (response) in
                 
-            case let .Error(error):
-                
-                // get non confirmed attendee
-                guard (error as NSError).code != 404 else {
+                switch response {
                     
-                    self.loggedInAttendee(summit) { (response) in
-                        
-                        switch response {
-                            
-                        case let .Error(error):
-                            
-                            failure(error)
-                            
-                        case let .Value(name):
-                            
-                            success(name: name, member: .nonConfirmedAttendee)
-                        }
-                    }
+                case let .Error(error):
                     
-                    return
-                }
-                
-                failure(error)
-                
-            case let .Value(member):
-                
-                let context = self.privateQueueManagedObjectContext
-                
-                context.performBlock {
+                    completion(.Error(error))
                     
-                    try! member.save(context)
+                case let .Value(member):
                     
-                    success(name: member.name, member: .attendee(member.identifier))
+                    self.session.name = member.name
+                    self.session.member = member.identifier
+                    
+                    completion(.Value())
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
                 }
             }
         }
-    }
-    
-    func logout() {
-        
-        session.clear()
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
     }
 }
