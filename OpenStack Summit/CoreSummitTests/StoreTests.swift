@@ -30,7 +30,7 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(value):
                 
-                XCTAssert(value.summits.isEmpty == false, "No summits")
+                XCTAssert(value.items.isEmpty == false, "No summits")
                 
                 dump(value, "AllSummitsDump.txt")
             }

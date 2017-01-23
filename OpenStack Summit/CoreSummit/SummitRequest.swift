@@ -50,7 +50,7 @@ public extension Store {
             summitID = "current"
         }
         
-        let URI = "/api/v1/summits/\(summitID)?expand=locations,sponsors,summit_types,event_types,presentation_categories,schedule"
+        let URI = "/api/v1/summits/\(summitID)?expand=schedule"
         
         let http = self.createHTTP(.ServiceAccount)
         

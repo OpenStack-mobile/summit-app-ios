@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func summits(completion: ErrorValue<SummitsResponse> -> ()) {
+    func summits(completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
         
         let URI = "/api/v1/summits"
         
@@ -31,7 +31,7 @@ public extension Store {
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // success
-            completion(.Value(response))
+            completion(.Value(response.page))
         }
     }
 }
@@ -40,15 +40,14 @@ public extension Store {
 
 public struct SummitsResponse: JSONDecodable {
     
-    public let summits: [Summit]
+    public let page: Page<Summit>
     
     public init?(JSONValue: JSON.Value) {
         
-        guard let JSONArray = JSONValue.arrayValue,
-            let summits = Summit.fromJSON(JSONArray)
+        guard let page = Page<Summit>(JSONValue: JSONValue)
             else { return nil }
         
-        self.summits = summits
+        self.page = page
     }
 }
 
