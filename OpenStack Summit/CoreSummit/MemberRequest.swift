@@ -14,7 +14,7 @@ public extension Store {
     
     func currentMember(for summit: Identifier, completion: (ErrorValue<MemberResponse.Member>) -> ()) {
         
-        let URI = "/api/v1/summits/\(summit)/members/me/?expand=attendee,speaker,feedback,groups"
+        let URI = "/api/v1/summits/\(summit)/members/me?expand=attendee,speaker,feedback,groups"
         
         let URL = environment.configuration.serverURL + URI
         
