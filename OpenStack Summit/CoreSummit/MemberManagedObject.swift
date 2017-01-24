@@ -108,6 +108,38 @@ extension Member: CoreDataEncodable {
             managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         }
         
+        if groups.isEmpty == false {
+            
+            managedObject.groups = try context.relationshipFault(groups)
+        }
+        
+        // dont touch group events
+        
+        managedObject.didCache()
+        
+        return managedObject
+    }
+}
+
+extension MemberResponse.Member: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
+        
+        let managedObject = try cached(context)
+        
+        managedObject.firstName = firstName
+        managedObject.lastName = lastName
+        managedObject.pictureURL = pictureURL
+        managedObject.twitter = twitter
+        managedObject.irc = irc
+        managedObject.linkedIn = linkedIn
+        managedObject.biography = biography
+        
+        managedObject.speakerRole = try context.relationshipFault(speakerRole)
+        managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
+        managedObject.groups = try context.relationshipFault(Set(groups))
+        managedObject.groupEvents = try context.relationshipFault(Set(groupEvents))
+        
         managedObject.didCache()
         
         return managedObject

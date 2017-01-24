@@ -10,29 +10,29 @@ public struct Member: Named {
     
     public let identifier: Identifier
     
-    public var firstName: String
+    public let firstName: String
     
-    public var lastName: String
+    public let lastName: String
     
-    public var gender: Gender?
+    public let gender: Gender?
     
-    public var pictureURL: String
+    public let pictureURL: String
         
-    public var twitter: String?
+    public let twitter: String?
     
-    public var linkedIn: String?
+    public let linkedIn: String?
     
-    public var irc: String?
+    public let irc: String?
     
-    public var biography: String?
+    public let biography: String?
         
-    public var speakerRole: Speaker?
+    public let speakerRole: Speaker?
     
-    public var attendeeRole: Attendee?
+    public let attendeeRole: Attendee?
     
-    public var groupEvents: Set<Identifier>
+    public let groupEvents: Set<Identifier>
     
-    public var groups: Set<Group>
+    public let groups: Set<Group>
 }
 
 // MARK: - Equatable

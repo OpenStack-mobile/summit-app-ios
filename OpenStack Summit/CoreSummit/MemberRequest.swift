@@ -122,9 +122,9 @@ public struct MemberResponse {
         
         public let identifier: Identifier
         
-        public var name: String
+        public let name: String
         
-        public var groups: [TrackGroup]
+        public let groups: [TrackGroup]
     }
     
     public typealias Presentation = PresentationDataUpdate

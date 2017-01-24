@@ -10,11 +10,11 @@ public struct PresentationDataUpdate: Unique {
     
     public let identifier: Identifier
     
-    public var level: Presentation.Level?
+    public let level: Presentation.Level?
     
-    public var moderator: Identifier?
+    public let moderator: Identifier?
     
-    public var speakers: Set<Speaker>
+    public let speakers: Set<Speaker>
 }
 
 // MARK: - Equatable
