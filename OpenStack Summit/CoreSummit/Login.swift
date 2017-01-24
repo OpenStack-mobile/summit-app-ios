@@ -22,9 +22,7 @@ public extension Store {
     
     /// Login via OAuth with OpenStack ID
     func login(summit: Identifier, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
-        
-        let context = self.privateQueueManagedObjectContext
-        
+                
         oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             
             guard error == nil
@@ -32,22 +30,26 @@ public extension Store {
             
             loginCallback()
             
-            self.currentMember(for: summit) { (response) in
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
                 
-                switch response {
+                self.currentMember(for: summit) { (response) in
                     
-                case let .Error(error):
-                    
-                    completion(.Error(error))
-                    
-                case let .Value(member):
-                    
-                    self.session.name = member.name
-                    self.session.member = member.identifier
-                    
-                    completion(.Value())
-                    
-                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+                    switch response {
+                        
+                    case let .Error(error):
+                        
+                        completion(.Error(error))
+                        
+                    case let .Value(member):
+                        
+                        self.session.name = member.name
+                        self.session.member = member.identifier
+                        
+                        completion(.Value())
+                        
+                        NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+                    }
                 }
             }
         }

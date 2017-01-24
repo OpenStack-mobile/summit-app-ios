@@ -1,5 +1,5 @@
 //
-//  LoggedInMemberRequest.swift
+//  MemberRequest.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 7/31/16.
@@ -16,9 +16,9 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summit)/members/me/?expand=attendee,speaker,feedback,groups"
         
-        let URL = environment.configuration.authenticationURL + URI
+        let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.OpenIDJSON)
         
         let context = privateQueueManagedObjectContext
         
