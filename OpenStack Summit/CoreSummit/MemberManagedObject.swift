@@ -16,9 +16,13 @@ public final class MemberManagedObject: Entity {
     
     @NSManaged public var lastName: String
     
+    @NSManaged public var gender: String?
+    
     @NSManaged public var pictureURL: String
     
     @NSManaged public var twitter: String?
+    
+    @NSManaged public var linkedIn: String?
     
     @NSManaged public var irc: String?
     
@@ -27,6 +31,10 @@ public final class MemberManagedObject: Entity {
     @NSManaged public var speakerRole: SpeakerManagedObject?
     
     @NSManaged public var attendeeRole: AttendeeManagedObject?
+    
+    @NSManaged public var groups: Set<GroupManagedObject>
+    
+    @NSManaged public var groupEvents: Set<EventManagedObject>
 }
 
 // MARK: - Encoding
@@ -41,7 +49,20 @@ extension Member: CoreDataDecodable {
         self.pictureURL = managedObject.pictureURL
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
+        self.linkedIn = managedObject.linkedIn
         self.biography = managedObject.biography
+        
+        self.groups = Group.from(managedObjects: managedObject.groups)
+        self.groupEvents = managedObject.groups.identifiers
+        
+        if let gender = managedObject.gender {
+            
+            self.gender = Gender(rawValue: gender)
+            
+        } else {
+            
+            self.gender = nil
+        }
         
         if let managedObject = managedObject.speakerRole {
             
@@ -74,6 +95,7 @@ extension Member: CoreDataEncodable {
         managedObject.pictureURL = pictureURL
         managedObject.twitter = twitter
         managedObject.irc = irc
+        managedObject.linkedIn = linkedIn
         managedObject.biography = biography
         
         if speakerRole != nil {

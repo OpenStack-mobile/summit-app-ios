@@ -141,9 +141,11 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
         
         showActivityIndicator()
         
+        let summit = SummitManager.shared.summit.value
+        
         let nonConfirmedSummitAttendee = attendees[index]
         
-        Store.shared.selectAttendee(from: orderNumber, externalAttendee: nonConfirmedSummitAttendee.identifier) { [weak self] (response) in
+        Store.shared.selectAttendee(from: orderNumber, externalAttendee: nonConfirmedSummitAttendee.identifier, summit: summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
@@ -174,7 +176,7 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                     
                 case .Value:
                     
-                    Store.shared.linkAttendee() { (response) in
+                    Store.shared.currentMember(for: summit) { (response) in
                         
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             

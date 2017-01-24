@@ -58,7 +58,7 @@ public struct MemberResponse {
         
         public let lastName: String
         
-        public let gender: Gender
+        public let gender: Gender?
         
         public let pictureURL: String
         

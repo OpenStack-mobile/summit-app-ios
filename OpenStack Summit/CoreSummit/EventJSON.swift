@@ -12,7 +12,7 @@ internal extension Event {
     
     enum JSONKey: String {
         
-        case id, summit, title, description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups
+        case id, summit, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups
     }
 }
 
@@ -30,8 +30,6 @@ extension Event: JSONParametrizedDecodable {
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
-            let typeJSON = JSONObject[JSONKey.type_id.rawValue],
-            let type = Identifier(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Identifier.fromJSON(sponsorsJSONArray),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
@@ -46,7 +44,6 @@ extension Event: JSONParametrizedDecodable {
         self.type = eventType
         self.tags = Set(tags)
         self.allowFeedback = allowFeedback
-        self.type = type
         self.sponsors = Set(sponsors)
         self.presentation = presentation
         
@@ -65,6 +62,7 @@ extension Event: JSONParametrizedDecodable {
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
         if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
@@ -129,12 +127,12 @@ extension MemberResponse.Event: JSONDecodable {
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
             let tags = Tag.fromJSON(tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
-            let typeJSON = JSONObject[JSONKey.type.rawValue],
-            let type = EventType(JSONValue: typeJSON),
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.fromJSON(sponsorsJSONArray),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
-            let presentation = MemberResponse.Presentation(JSONValue: JSONValue)
+            let presentation = MemberResponse.Presentation(JSONValue: JSONValue),
+            let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
+            let groups = Group.fromJSON(groupsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -145,9 +143,9 @@ extension MemberResponse.Event: JSONDecodable {
         self.type = eventType
         self.tags = tags
         self.allowFeedback = allowFeedback
-        self.type = type
         self.sponsors = sponsors
         self.presentation = presentation
+        self.groups = groups
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
             
@@ -164,6 +162,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
+        self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
         if let trackJSON = JSONObject[JSONKey.track.rawValue] {
@@ -200,18 +199,6 @@ extension MemberResponse.Event: JSONDecodable {
         } else {
             
             self.videos = []
-        }
-        
-        if let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue {
-            
-            guard let groups = Group.fromJSON(groupsJSONArray)
-                else { return nil }
-            
-            self.groups = groups
-            
-        } else {
-            
-            self.groups = []
         }
     }
 }
