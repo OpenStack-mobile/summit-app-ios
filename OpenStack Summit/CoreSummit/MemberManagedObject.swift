@@ -51,8 +51,7 @@ extension Member: CoreDataDecodable {
         self.irc = managedObject.irc
         self.linkedIn = managedObject.linkedIn
         self.biography = managedObject.biography
-        
-        self.groups = Group.from(managedObjects: managedObject.groups)
+        self.groups = managedObject.groups.identifiers
         self.groupEvents = managedObject.groups.identifiers
         
         if let gender = managedObject.gender {
@@ -197,6 +196,6 @@ public extension Store {
             where self.isLoggedInAndConfirmedAttendee
             else { return false }
         
-        return loggedInMember.attendeeRole?.scheduledEvents.contains({ $0.identifier == eventID }) ?? false
+        return loggedInMember.attendeeRole?.schedule.contains({ $0.identifier == eventID }) ?? false
     }
 }

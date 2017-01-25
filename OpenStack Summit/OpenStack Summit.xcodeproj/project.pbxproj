@@ -93,7 +93,6 @@
 		6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
 		6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
-		6E0B5F2E1D77C8AB0005F6CE /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* Summit6.json */; };
 		6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
 		6E0B5F531D77D4DE0005F6CE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F511D77D4DE0005F6CE /* Interface.storyboard */; };
@@ -113,7 +112,6 @@
 		6E10A5071D1066E9008CBD0C /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
 		6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
-		6E10A5181D106741008CBD0C /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* Summit6.json */; };
 		6E10A5191D106741008CBD0C /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
 		6E10A55D1D10675D008CBD0C /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51A1D10675C008CBD0C /* Company.swift */; };
 		6E10A55E1D10675D008CBD0C /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */; };
@@ -280,7 +278,6 @@
 		6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
 		6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
-		6E2924211D7AF8CC00D14F0A /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* Summit6.json */; };
 		6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
 		6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */; };
@@ -882,7 +879,6 @@
 		6E10A50F1D10672D008CBD0C /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		6E10A5101D10672D008CBD0C /* CoreDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		6E10A5111D10672D008CBD0C /* TestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
-		6E10A5161D106741008CBD0C /* Summit6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit6.json; sourceTree = "<group>"; };
 		6E10A5171D106741008CBD0C /* Summit7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit7.json; sourceTree = "<group>"; };
 		6E10A51A1D10675C008CBD0C /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyJSON.swift; sourceTree = "<group>"; };
@@ -1511,7 +1507,6 @@
 				6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E586FBE1DC29083001DE605 /* Member2.json */,
-				6E10A5161D106741008CBD0C /* Summit6.json */,
 				6E10A5171D106741008CBD0C /* Summit7.json */,
 			);
 			path = JSON;
@@ -2457,7 +2452,6 @@
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
-				6E0B5F2E1D77C8AB0005F6CE /* Summit6.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
@@ -2544,7 +2538,6 @@
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
-				6E10A5181D106741008CBD0C /* Summit6.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6E586FC01DC29083001DE605 /* Member2.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
@@ -2569,7 +2562,6 @@
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
-				6E2924211D7AF8CC00D14F0A /* Summit6.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */,
 				6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */,

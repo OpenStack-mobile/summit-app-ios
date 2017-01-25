@@ -155,7 +155,7 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .Some(error):
                     
                     let code = (error as NSError).code
                     
@@ -171,10 +171,10 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                         
                     default:
                         
-                        controller.showErrorMessage(error as NSError)
+                        controller.showErrorMessage(error)
                     }
                     
-                case .Value:
+                case .None:
                     
                     Store.shared.currentMember(for: summit) { (response) in
                         

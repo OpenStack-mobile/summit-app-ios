@@ -252,12 +252,6 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                     
                     updateUI(.Value(person))
                 }
-                else if let attendeeRole = currentMember.attendeeRole {
-                    
-                    let person = Attendee(managedObject: attendeeRole)
-                    
-                    updateUI(.Value(person))
-                }
                 else {
                     
                     let member = Member(managedObject: currentMember)

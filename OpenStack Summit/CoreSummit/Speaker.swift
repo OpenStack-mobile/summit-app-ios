@@ -23,8 +23,6 @@ public struct Speaker: Person {
     public var irc: String?
     
     public var biography: String?
-    
-    public var memberIdentifier: Identifier?
 }
 
 // MARK: - Equatable
@@ -39,5 +37,4 @@ public func == (lhs: Speaker, rhs: Speaker) -> Bool {
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.biography == rhs.biography
-        && lhs.memberIdentifier == rhs.memberIdentifier
 }

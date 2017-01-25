@@ -12,20 +12,9 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func feedback(summit: Identifier? = nil, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Review>>) -> ()) {
+    func feedback(summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Review>>) -> ()) {
         
-        let summitID: String
-        
-        if let identifier = summit {
-            
-            summitID = "\(identifier)"
-            
-        } else {
-            
-            summitID = "current"
-        }
-        
-        let URI = "/api/v1/summits/\(summitID)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
+        let URI = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
         
         let URL = environment.configuration.serverURL + URI
         
@@ -46,6 +35,10 @@ public extension Store {
             // cache
             try! context.performErrorBlockAndWait {
                 
+                // only cache if event exists
+                guard let _ = try EventManagedObject.find(event, context: context)
+                    else { return }
+                
                 try page.items.save(context)
                 
                 try context.save()
@@ -56,20 +49,9 @@ public extension Store {
         }
     }
     
-    func averageFeedback(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
+    func averageFeedback(summit: Identifier, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
         
-        let summitID: String
-        
-        if let identifier = summit {
-            
-            summitID = "\(identifier)"
-            
-        } else {
-            
-            summitID = "current"
-        }
-        
-        let URI = "/api/v1/summits/\(summitID)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
+        let URI = "/api/v1/summits/\(summit)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
         
         let URL = environment.configuration.serverURL + URI
         
@@ -119,20 +101,9 @@ public extension Store {
         }
     }
     
-    func addFeedback(summit: Identifier? = nil, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
+    func addFeedback(summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
         
-        let summitID: String
-        
-        if let identifier = summit {
-            
-            summitID = "\(identifier)"
-            
-        } else {
-            
-            summitID = "current"
-        }
-        
-        let URI = "/api/v2/summits/\(summitID)/events/\(event)/feedback"
+        let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
         let URL = environment.configuration.serverURL + URI
         

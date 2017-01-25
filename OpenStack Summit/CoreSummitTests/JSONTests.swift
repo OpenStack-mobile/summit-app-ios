@@ -10,7 +10,7 @@ import XCTest
 import SwiftFoundation
 @testable import CoreSummit
 
-let SummitJSONIdentifiers = 6 ... 7
+let SummitJSONIdentifiers = 7 ... 7
 
 let MemberJSONIdentifiers = 1 ... 2
 
@@ -35,7 +35,7 @@ final class JSONTests: XCTestCase {
             
             let testJSON = loadJSON("Member\(memberJSONID)")
             
-            guard let _ = Member(JSONValue: testJSON)
+            guard let _ = MemberResponse.Member(JSONValue: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }

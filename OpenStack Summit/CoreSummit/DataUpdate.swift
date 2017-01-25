@@ -143,7 +143,7 @@ public extension Store {
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
                     
-                    attendeeRole.scheduledEvents.insert(eventManagedObject)
+                    attendeeRole.schedule.insert(eventManagedObject)
                     
                     try context.save()
                     
@@ -157,7 +157,7 @@ public extension Store {
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
-                        attendeeRole.scheduledEvents.remove(eventManagedObject)
+                        attendeeRole.schedule.remove(eventManagedObject)
                         
                         try context.save()
                     }

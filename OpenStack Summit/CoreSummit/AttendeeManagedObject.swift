@@ -11,21 +11,11 @@ import CoreData
 
 public final class AttendeeManagedObject: Entity {
     
-    @NSManaged public var firstName: String
+    @NSManaged public var member: MemberManagedObject
     
-    @NSManaged public var lastName: String
-    
-    @NSManaged public var pictureURL: String
-    
-    @NSManaged public var twitter: String?
-    
-    @NSManaged public var irc: String?
-    
-    @NSManaged public var biography: String?
+    @NSManaged public var schedule: Set<EventManagedObject>
     
     @NSManaged public var tickets: Set<TicketTypeManagedObject>
-    
-    @NSManaged public var scheduledEvents: Set<EventManagedObject>
     
     @NSManaged public var feedback: Set<AttendeeFeedbackManagedObject>
 }
@@ -35,14 +25,9 @@ extension Attendee: CoreDataDecodable {
     public init(managedObject: AttendeeManagedObject) {
         
         self.identifier = managedObject.identifier
-        self.firstName = managedObject.firstName
-        self.lastName = managedObject.lastName
-        self.pictureURL = managedObject.pictureURL
-        self.twitter = managedObject.twitter
-        self.irc = managedObject.irc
-        self.biography = managedObject.biography
-        self.tickets = TicketType.from(managedObjects: managedObject.tickets)
-        self.scheduledEvents = managedObject.scheduledEvents.identifiers
+        self.member = managedObject.member.identifier
+        self.tickets = managedObject.tickets.identifiers
+        self.schedule = managedObject.schedule.identifiers
         self.feedback = AttendeeFeedback.from(managedObjects: managedObject.feedback)
     }
 }
@@ -53,14 +38,9 @@ extension Attendee: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
-        managedObject.firstName = firstName
-        managedObject.lastName = lastName
-        managedObject.pictureURL = pictureURL
-        managedObject.twitter = twitter
-        managedObject.irc = irc
-        managedObject.biography = biography
+        managedObject.member = try context.relationshipFault(member)
         managedObject.tickets = try context.relationshipFault(tickets)
-        managedObject.scheduledEvents = try context.relationshipFault(scheduledEvents)
+        managedObject.schedule = try context.relationshipFault(schedule)
         managedObject.feedback = try context.relationshipFault(feedback)
         
         managedObject.didCache()

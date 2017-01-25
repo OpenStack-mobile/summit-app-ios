@@ -12,7 +12,7 @@ internal extension Event {
     
     enum JSONKey: String {
         
-        case id, summit, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups
+        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups
     }
 }
 
@@ -118,7 +118,7 @@ extension MemberResponse.Event: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let summit = JSONObject[JSONKey.summit.rawValue]?.rawValue as? Int,
+            let summit = JSONObject[JSONKey.summit_id.rawValue]?.rawValue as? Int,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
             let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public protocol Person: Named, Equatable {
+public protocol Person: Named {
     
     var firstName: String { get }
     
@@ -22,6 +22,8 @@ public protocol Person: Named, Equatable {
     
     var biography: String? { get }
 }
+
+// MARK: - Named
 
 public extension Person {
     

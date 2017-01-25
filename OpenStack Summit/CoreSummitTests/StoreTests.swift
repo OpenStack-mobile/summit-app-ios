@@ -72,7 +72,7 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
                 
-        let pastSummits = 6 ... 7
+        let pastSummits = 7 ... 7
         
         for summitID in pastSummits {
             

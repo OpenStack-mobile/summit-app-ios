@@ -12,7 +12,7 @@ public extension Attendee {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, title, bio, irc, twitter, pic, speaker, schedule, feedback, tickets
+        case id, summit_hall_checked_in, summit_hall_checked_in_date, shared_contact_info, member_id, schedule, tickets, feedback
     }
 }
 
@@ -22,28 +22,19 @@ extension Attendee: JSONDecodable {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
-            let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
+            let member = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int,
             let scheduledEventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
             let scheduledEvents = Identifier.fromJSON(scheduledEventsJSONArray),
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
-            let tickets = TicketType.fromJSON(ticketsJSONArray),
+            let tickets = Identifier.fromJSON(ticketsJSONArray),
             let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
             let feedback = AttendeeFeedback.fromJSON(feedbackJSONArray)
             else { return nil }
         
         self.identifier = identifier
-        self.firstName = firstName
-        self.lastName = lastName
-        self.pictureURL = pictureURL
-        self.scheduledEvents = Set(scheduledEvents)
+        self.member = member
+        self.schedule = Set(scheduledEvents)
         self.tickets = Set(tickets)
         self.feedback = Set(feedback)
-        
-        // optional
-        self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
-        self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
-        self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
     }
 }

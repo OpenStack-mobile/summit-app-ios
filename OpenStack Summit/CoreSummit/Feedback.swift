@@ -8,7 +8,7 @@
 
 import struct SwiftFoundation.Date
 
-public protocol Feedback: Unique, Equatable {
+public protocol Feedback: Unique {
     
     var identifier: Identifier { get }
     

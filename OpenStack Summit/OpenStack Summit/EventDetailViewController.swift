@@ -155,7 +155,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // update UI
         self.scheduled = !oldValue
         
-        let completion: ErrorValue<()> -> () = { [weak self] (response) in
+        let completion: ErrorType? -> () = { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -163,7 +163,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
             switch response {
                 
-            case let .Error(error):
+            case let .Some(error):
                 
                 // restore original value
                 controller.scheduled = oldValue
@@ -171,7 +171,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 // show error
                 controller.showErrorMessage(error as NSError)
                 
-            case .Value(): break
+            case .None: break
             }
         }
         
@@ -327,7 +327,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         configureAverageRatingView()
         
-        Store.shared.averageFeedback(self.currentSummit?.identifier, event: event) { [weak self] (response) in
+        let summit = eventCache.summit
+        
+        Store.shared.averageFeedback(summit, event: event) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
@@ -339,7 +341,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     
                 case let .Error(error):
                     
-                    controller.showErrorMessage(error as NSError)
+                    controller.showErrorMessage(error)
                     
                 case .Value:
                     

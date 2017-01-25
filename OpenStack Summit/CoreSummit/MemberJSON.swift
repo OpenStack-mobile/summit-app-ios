@@ -25,13 +25,16 @@ extension Member: JSONDecodable {
                 ?? JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String
+            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
+            let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
+            let groups = Identifier.fromJSON(groupsJSONArray)
             else { return nil }
         
         self.identifier = memberID
         self.firstName = firstName
         self.lastName = lastName
         self.pictureURL = pictureURL
+        self.groups = Set(groups)
         
         // optional
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
@@ -63,32 +66,9 @@ extension Member: JSONDecodable {
             self.speakerRole = nil
         }
         
-        if let attendeeJSON = JSONObject[JSONKey.attendee.rawValue] {
-            
-            guard let attendee = Attendee(JSONValue: attendeeJSON)
-                else { return nil }
-            
-            self.attendeeRole = attendee
-            
-        } else {
-            
-            self.attendeeRole = nil
-        }
-        
-        if let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue {
-            
-            guard let groups = Group.fromJSON(groupsJSONArray)
-                else { return nil }
-            
-            self.groups = Set(groups)
-            
-        } else {
-            
-            self.groups = []
-        }
-        
-        // no group events come from this JSON response
+        // not in this JSON response
         self.groupEvents = []
+        self.attendeeRole = nil
     }
 }
 
