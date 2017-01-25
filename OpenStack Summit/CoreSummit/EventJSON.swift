@@ -96,17 +96,8 @@ extension Event: JSONParametrizedDecodable {
             self.videos = []
         }
         
-        if let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue {
-            
-            guard let groups = Group.fromJSON(groupsJSONArray)
-                else { return nil }
-            
-            self.groups = Set(groups)
-            
-        } else {
-            
-            self.groups = []
-        }
+        // should never come in this JSON response
+        self.groups = []
     }
 }
 
