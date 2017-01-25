@@ -15,8 +15,6 @@ public extension Store {
     
     func logout() {
         
-        session.clear()
-        
         let context = privateQueueManagedObjectContext
         
         // remove member from cache
@@ -29,6 +27,8 @@ public extension Store {
                 try context.save()
             }
         }
+        
+        session.clear()
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
     }
