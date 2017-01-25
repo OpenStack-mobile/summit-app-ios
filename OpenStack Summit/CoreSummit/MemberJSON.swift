@@ -12,7 +12,7 @@ private extension Member {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee
+        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee, feedback
     }
 }
 
@@ -67,6 +67,7 @@ extension Member: JSONDecodable {
         }
         
         // not in this JSON response
+        self.feedback = []
         self.groupEvents = []
         self.attendeeRole = nil
     }
@@ -86,7 +87,9 @@ extension MemberResponse.Member: JSONDecodable {
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
             let groups = Group.fromJSON(groupsJSONArray),
             let groupEventsJSONArray = JSONObject[JSONKey.groups_events.rawValue]?.arrayValue,
-            let groupEvents = MemberResponse.Event.fromJSON(groupEventsJSONArray)
+            let groupEvents = MemberResponse.Event.fromJSON(groupEventsJSONArray),
+            let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
+            let feedback = MemberFeedback.fromJSON(feedbackJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -95,6 +98,7 @@ extension MemberResponse.Member: JSONDecodable {
         self.pictureURL = pictureURL
         self.groups = groups
         self.groupEvents = groupEvents
+        self.feedback = feedback
         
         // optional
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String

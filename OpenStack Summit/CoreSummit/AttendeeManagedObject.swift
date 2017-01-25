@@ -16,8 +16,6 @@ public final class AttendeeManagedObject: Entity {
     @NSManaged public var schedule: Set<EventManagedObject>
     
     @NSManaged public var tickets: Set<TicketTypeManagedObject>
-    
-    @NSManaged public var feedback: Set<AttendeeFeedbackManagedObject>
 }
 
 extension Attendee: CoreDataDecodable {
@@ -28,7 +26,6 @@ extension Attendee: CoreDataDecodable {
         self.member = managedObject.member.identifier
         self.tickets = managedObject.tickets.identifiers
         self.schedule = managedObject.schedule.identifiers
-        self.feedback = AttendeeFeedback.from(managedObjects: managedObject.feedback)
     }
 }
 
@@ -41,7 +38,6 @@ extension Attendee: CoreDataEncodable {
         managedObject.member = try context.relationshipFault(member)
         managedObject.tickets = try context.relationshipFault(tickets)
         managedObject.schedule = try context.relationshipFault(schedule)
-        managedObject.feedback = try context.relationshipFault(feedback)
         
         managedObject.didCache()
         

@@ -66,7 +66,14 @@
 		"pic": "https://devbranch.openstack.org/profile_images/speakers/1"
 	},
 	"feedback": [
-
+		{
+			"id": 458,
+			"rate": 4,
+			"note": "Everything is awesome!",
+			"created_date": 1485333904,
+			"event_id": 16889,
+			"member_id": 1395
+		}
 	],
 	"groups": [
 		{

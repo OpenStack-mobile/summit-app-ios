@@ -35,6 +35,8 @@ public final class MemberManagedObject: Entity {
     @NSManaged public var groups: Set<GroupManagedObject>
     
     @NSManaged public var groupEvents: Set<EventManagedObject>
+    
+    @NSManaged public var feedback: Set<MemberFeedbackManagedObject>
 }
 
 // MARK: - Encoding
@@ -53,6 +55,7 @@ extension Member: CoreDataDecodable {
         self.biography = managedObject.biography
         self.groups = Group.from(managedObjects: managedObject.groups)
         self.groupEvents = managedObject.groups.identifiers
+        self.feedback = MemberFeedback.from(managedObjects: managedObject.feedback)
         
         if let gender = managedObject.gender {
             
@@ -108,7 +111,7 @@ extension Member: CoreDataEncodable {
             managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         }
                 
-        // dont touch group events
+        // dont touch group events, feedback
         
         managedObject.didCache()
         
@@ -134,6 +137,7 @@ extension MemberResponse.Member: CoreDataEncodable {
         managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         managedObject.groups = try context.relationshipFault(Set(groups))
         managedObject.groupEvents = try context.relationshipFault(Set(groupEvents))
+        managedObject.feedback = try context.relationshipFault(Set(feedback))
         
         managedObject.didCache()
         
@@ -145,14 +149,14 @@ extension MemberResponse.Member: CoreDataEncodable {
 
 public extension MemberManagedObject {
     
-    func feedback(for event: Identifier) -> AttendeeFeedbackManagedObject? {
+    func feedback(for event: Identifier) -> MemberFeedbackManagedObject? {
         
-        return attendeeRole?.feedback.firstMatching({ $0.event.identifier == event})
+        return feedback.firstMatching({ $0.event.identifier == event})
     }
     
-    var givenFeedback: [AttendeeFeedbackManagedObject] {
+    var givenFeedback: [MemberFeedbackManagedObject] {
         
-        return attendeeRole?.feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
+        return feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
     }
 }
 

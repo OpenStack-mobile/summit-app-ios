@@ -215,10 +215,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // Can give feedback after event started, and if there is no feedback for that user
-        if let attendee = Store.shared.authenticatedMember?.attendeeRole
+        if let member = Store.shared.authenticatedMember
             where eventCache.start < Date()
-            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty &&
-            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty {
+            && (try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty &&
+            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty {
             
             data.append(.feedback)
         }
@@ -259,7 +259,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // get all reviews for this event
         let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
+        let attendeeFeedback = try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
         shouldShowReviews = eventCache.start < Date() && (reviews.count + attendeeFeedback.count) > 0
         

@@ -33,6 +33,8 @@ public struct Member: Named {
     public let groupEvents: Set<Identifier>
     
     public let groups: Set<Group>
+    
+    public let feedback: Set<MemberFeedback>
 }
 
 // MARK: - Equatable

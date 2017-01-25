@@ -126,14 +126,13 @@ public extension Store {
             // create new feedback in cache
             try! context.performErrorBlockAndWait {
                 
-                if let member = try self.authenticatedMember(context),
-                    let attendee = member.attendeeRole {
+                if let member = try self.authenticatedMember(context) {
                     
-                    let feedback = AttendeeFeedback(identifier: identifier, rate: rate, review: review, date: Date(), event: event, member: member.identifier, attendee: attendee.identifier)
+                    let feedback = MemberFeedback(identifier: identifier, rate: rate, review: review, date: Date(), event: event, member: member.identifier)
                     
                     let managedObject = try feedback.save(context)
                     
-                    attendee.feedback.insert(managedObject)
+                    member.feedback.insert(managedObject)
                     
                     try context.save()
                 }

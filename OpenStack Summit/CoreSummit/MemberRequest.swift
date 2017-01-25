@@ -77,6 +77,8 @@ public struct MemberResponse {
         public let groupEvents: [Event]
         
         public let groups: [Group]
+        
+        public let feedback: [MemberFeedback]
     }
     
     public struct Event: Named {
@@ -173,6 +175,7 @@ public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool 
         && lhs.attendeeRole == rhs.attendeeRole
         && lhs.groups == rhs.groups
         && lhs.groupEvents == rhs.groupEvents
+        && lhs.feedback == rhs.feedback
 }
 
 public func == (lhs: MemberResponse.Track, rhs: MemberResponse.Track) -> Bool {

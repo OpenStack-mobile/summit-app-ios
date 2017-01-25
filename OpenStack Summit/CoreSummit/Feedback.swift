@@ -65,7 +65,7 @@ public func == (lhs: Review.Owner, rhs: Review.Owner) -> Bool {
         && lhs.lastName == rhs.lastName
 }
 
-public struct AttendeeFeedback: Feedback {
+public struct MemberFeedback: Feedback {
     
     public let identifier: Identifier
     
@@ -78,11 +78,9 @@ public struct AttendeeFeedback: Feedback {
     public var event: Identifier
     
     public let member: Identifier
-    
-    public let attendee: Identifier?
 }
 
-public func == (lhs: AttendeeFeedback, rhs: AttendeeFeedback) -> Bool {
+public func == (lhs: MemberFeedback, rhs: MemberFeedback) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.rate == rhs.rate
@@ -90,5 +88,4 @@ public func == (lhs: AttendeeFeedback, rhs: AttendeeFeedback) -> Bool {
         && lhs.date == rhs.date
         && lhs.event == lhs.event
         && lhs.member == lhs.member
-        && lhs.attendee == lhs.attendee
 }

@@ -15,8 +15,6 @@ public struct Attendee: Unique {
     public var schedule: Set<Identifier>
     
     public var tickets: Set<Identifier>
-    
-    public var feedback: Set<AttendeeFeedback>
 }
 
 // MARK: - Equatable
@@ -27,5 +25,4 @@ public func == (lhs: Attendee, rhs: Attendee) -> Bool {
         && lhs.member == rhs.member
         && lhs.schedule == rhs.schedule
         && lhs.tickets == rhs.tickets
-        && lhs.feedback == rhs.feedback
 }
