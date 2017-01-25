@@ -51,7 +51,7 @@ extension Member: CoreDataDecodable {
         self.irc = managedObject.irc
         self.linkedIn = managedObject.linkedIn
         self.biography = managedObject.biography
-        self.groups = managedObject.groups.identifiers
+        self.groups = Group.from(managedObjects: managedObject.groups)
         self.groupEvents = managedObject.groups.identifiers
         
         if let gender = managedObject.gender {
@@ -96,6 +96,7 @@ extension Member: CoreDataEncodable {
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn
         managedObject.biography = biography
+        managedObject.groups = try context.relationshipFault(groups)
         
         if speakerRole != nil {
             
@@ -106,12 +107,7 @@ extension Member: CoreDataEncodable {
             
             managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         }
-        
-        if groups.isEmpty == false {
-            
-            managedObject.groups = try context.relationshipFault(groups)
-        }
-        
+                
         // dont touch group events
         
         managedObject.didCache()

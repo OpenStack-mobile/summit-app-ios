@@ -27,7 +27,7 @@ extension Member: JSONDecodable {
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
-            let groups = Identifier.fromJSON(groupsJSONArray)
+            let groups = Group.fromJSON(groupsJSONArray)
             else { return nil }
         
         self.identifier = memberID

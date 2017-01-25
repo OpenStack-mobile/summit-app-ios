@@ -56,9 +56,7 @@ final class StoreTests: XCTestCase {
                 XCTFail("\(error)");
                 
             case let .Value(summit):
-                
-                XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
-                
+                                
                 dump(summit, "CurrentSummitDump.txt")
             }
             
