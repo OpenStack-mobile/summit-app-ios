@@ -36,7 +36,7 @@
         <relationship name="summit" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="schedule" inverseEntity="Summit" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="events" inverseEntity="Tag" syncable="YES"/>
         <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="events" inverseEntity="Track" syncable="YES"/>
-        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="event" inverseEntity="Video" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Video" inverseName="event" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="EventType" representedClassName=".EventTypeManagedObject" syncable="YES">
         <attribute name="blackOutTimes" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -92,14 +92,14 @@
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendeeRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Attendee" inverseName="member" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MemberFeedback" inverseName="member" inverseEntity="MemberFeedback" syncable="YES"/>
-        <relationship name="groupEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="groupMembers" inverseEntity="Event" syncable="YES"/>
-        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
-        <relationship name="recievedInvites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamInvitation" inverseName="invitee" inverseEntity="TeamInvitation" syncable="YES"/>
-        <relationship name="sentInvites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamInvitation" inverseName="inviter" inverseEntity="TeamInvitation" syncable="YES"/>
+        <relationship name="groupEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="groupMembers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
+        <relationship name="recievedInvites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="invitee" inverseEntity="TeamInvitation" syncable="YES"/>
+        <relationship name="sentInvites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="inviter" inverseEntity="TeamInvitation" syncable="YES"/>
         <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMessage" inverseName="from" inverseEntity="TeamMessage" syncable="YES"/>
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="teamMembership" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMember" inverseName="member" inverseEntity="TeamMember" syncable="YES"/>
-        <relationship name="teamOwner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="owner" inverseEntity="Team" syncable="YES"/>
+        <relationship name="teamOwner" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Team" inverseName="owner" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="MemberFeedback" representedClassName=".MemberFeedbackManagedObject" parentEntity="Feedback" syncable="YES">
         <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="feedback" inverseEntity="Member" syncable="YES"/>
@@ -271,7 +271,6 @@
     </entity>
     <elements>
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="120"/>
-        <element name="MemberFeedback" positionX="9" positionY="153" width="128" height="60"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
         <element name="Event" positionX="-54" positionY="0" width="128" height="375"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="30"/>
@@ -280,6 +279,7 @@
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
         <element name="Member" positionX="0" positionY="144" width="128" height="345"/>
+        <element name="MemberFeedback" positionX="9" positionY="153" width="128" height="60"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="135"/>
         <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
         <element name="Speaker" positionX="-27" positionY="108" width="128" height="240"/>

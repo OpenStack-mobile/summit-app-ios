@@ -17,6 +17,19 @@ public extension Store {
         
         session.clear()
         
+        let context = privateQueueManagedObjectContext
+        
+        // remove member from cache
+        try! context.performErrorBlockAndWait {
+            
+            if let member = try self.authenticatedMember(context) {
+                
+                context.deleteObject(member)
+                
+                try context.save()
+            }
+        }
+        
         NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
     }
     
