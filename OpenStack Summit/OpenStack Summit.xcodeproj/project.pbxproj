@@ -391,7 +391,6 @@
 		6E5D05C61D8CBC9500451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
 		6E5D05C71D8CBC9500451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
 		6E5D05C81D8CBC9600451639 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
-		6E5DEDB81E2D300C00F45602 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DEDB71E2D300C00F45602 /* GoogleService-Info.plist */; };
 		6E6179691DE7657500EED286 /* SummitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6179681DE7657500EED286 /* SummitManager.swift */; };
 		6E61796B1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
 		6E61796C1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
@@ -1182,6 +1181,7 @@
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DataUpdates7.json; sourceTree = "<group>"; };
 		6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates4.json; sourceTree = "<group>"; };
+		6EEED0301E3A60E900795B3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "GoogleServices/Beta/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
 		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
@@ -1787,6 +1787,7 @@
 		6E5DEDB51E2D300C00F45602 /* GoogleServices */ = {
 			isa = PBXGroup;
 			children = (
+				6EEED02F1E3A60E900795B3D /* Beta */,
 				6E5DEDB61E2D300C00F45602 /* Debug */,
 			);
 			path = GoogleServices;
@@ -1998,6 +1999,14 @@
 				6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */,
 			);
 			name = Speakers;
+			sourceTree = "<group>";
+		};
+		6EEED02F1E3A60E900795B3D /* Beta */ = {
+			isa = PBXGroup;
+			children = (
+				6EEED0301E3A60E900795B3D /* GoogleService-Info.plist */,
+			);
+			path = Beta;
 			sourceTree = "<group>";
 		};
 		6EF147EC1D13579C00D5EEF9 /* View */ = {
@@ -2224,6 +2233,7 @@
 				6EF12C5D1D149B2300814AD0 /* Increment Build */,
 				6E40E1371D7A2F200025D74E /* Increment WatchOS Build */,
 				6E0B5F771D77D4DF0005F6CE /* Embed Watch Content */,
+				6EEED02E1E3A60B500795B3D /* Copy Google Services files */,
 			);
 			buildRules = (
 			);
@@ -2520,7 +2530,6 @@
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
 				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
-				6E5DEDB81E2D300C00F45602 /* GoogleService-Info.plist in Resources */,
 				6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */,
 				6EDA4AC11DFA7ED800ADF96D /* Teams.storyboard in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
@@ -2724,6 +2733,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${CONFIGURATION}\" == \"Mocked\" ]; then\ncp -r \"${PROJECT_DIR}/CoreSummitTests/JSON/Summit7.json\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\nfi";
+		};
+		6EEED02E1E3A60B500795B3D /* Copy Google Services files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Google Services files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -r \"${PROJECT_DIR}/GoogleServices/${CONFIGURATION}/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\"\n\n";
 		};
 		6EF12C5C1D149A8E00814AD0 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
