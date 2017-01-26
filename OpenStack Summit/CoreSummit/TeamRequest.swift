@@ -111,7 +111,7 @@ public extension Store {
     
     func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
         
-        let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member,groups"
+        let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member"
         
         let url = environment.configuration.serverURL + uri
         
@@ -171,6 +171,47 @@ public extension Store {
             
             // success
             completion(nil)
+        }
+    }
+    
+    func teams(page: Int = 1,
+               perPage: Int = 10,
+               completion: (ErrorValue<Page<Team>>) -> ()) {
+        
+        let urlComponents = NSURLComponents(string: environment.configuration.serverURL + "/api/v1/teams")!
+        
+        var queryItems = [NSURLQueryItem]()
+        queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
+        queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
+        queryItems.append(NSURLQueryItem(name: "expand", value: "owner,members,member"))
+        urlComponents.queryItems = queryItems
+        
+        let url = urlComponents.URL!.absoluteString!
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.GET(url) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(.Error(error!)); return }
+            
+            guard let json = JSON.Value(string: responseObject as! String),
+                let page = Page<Team>(JSONValue: json)
+                else { completion(.Error(Error.InvalidResponse)); return }
+            
+            // cache
+            try! context.performErrorBlockAndWait {
+                
+                try page.items.save(context)
+                
+                try context.save()
+            }
+            
+            // success
+            completion(.Value(page))
         }
     }
 }
