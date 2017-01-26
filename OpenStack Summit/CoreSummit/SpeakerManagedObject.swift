@@ -25,8 +25,6 @@ public final class SpeakerManagedObject: Entity {
     
     @NSManaged public var biography: String?
     
-    @NSManaged public var member: NSNumber?
-    
     // Inverse Relationships
     
     @NSManaged public var summits: Set<SummitManagedObject>
@@ -46,7 +44,6 @@ extension Speaker: CoreDataDecodable {
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.biography = managedObject.biography
-        self.memberIdentifier = managedObject.member?.integerValue
     }
 }
 
@@ -63,7 +60,6 @@ extension Speaker: CoreDataEncodable {
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.biography = biography
-        managedObject.member = memberIdentifier
         
         managedObject.didCache()
         

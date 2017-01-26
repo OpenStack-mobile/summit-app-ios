@@ -18,25 +18,27 @@ public struct SummitDataUpdate: Named {
     
     public let identifier: Identifier
     
-    public var name: String
+    public let name: String
     
-    public var timeZone: String // should be `TimeZone` but would require Realm Schema migration
+    public let timeZone: String // should be `TimeZone` but would require Realm Schema migration
     
-    public var start: Date
+    public let start: Date
     
-    public var end: Date
+    public let end: Date
     
-    public var active: Bool
+    public let active: Bool
     
-    public var startShowingVenues: Date?
+    public let startShowingVenues: Date?
     
-    public var ticketTypes: Set<TicketType>
+    public let ticketTypes: Set<TicketType>
     
     // Venue and Venue Rooms
-    public var locations: Set<Location>
+    public let locations: Set<Location>
             
-    public var webpageURL: String
+    public let webpageURL: String
 }
+
+// MARK: - Equatable
 
 public func == (lhs: Summit.DataUpdate, rhs: Summit.DataUpdate) -> Bool {
     

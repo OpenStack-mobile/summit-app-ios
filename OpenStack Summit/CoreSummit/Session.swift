@@ -13,7 +13,7 @@ public protocol SessionStorage {
     var name: String? { get set }
     
     /// The authenticated member.
-    var member: SessionMember?  { get set }
+    var member: Identifier?  { get set }
     
     /// Whether the device previously had a passcode.
     var hadPasscode: Bool { get set }
@@ -29,13 +29,6 @@ public extension SessionStorage {
     }
 }
 
-/// The type of member for the current session. 
-public enum SessionMember {
-    
-    case attendee(Identifier)
-    case nonConfirmedAttendee
-}
-
 // MARK: - Implementations
 
 public final class UserDefaultsSessionStorage: SessionStorage {
@@ -47,40 +40,16 @@ public final class UserDefaultsSessionStorage: SessionStorage {
         self.userDefaults = userDefaults
     }
     
-    public var member: SessionMember? {
+    public var member: Identifier? {
         
-        get {
-            
-            guard let memberValue = userDefaults.stringForKey(Key.member.rawValue)
-                else { return nil }
-            
-            guard memberValue != UserDefaultsSessionStorage.nonConfirmedAttendeeValue
-                else { return .nonConfirmedAttendee }
-            
-            let identifier = Int(memberValue)!
-            
-            return .attendee(identifier)
-        }
+        get { return (userDefaults.objectForKey(Key.member.rawValue) as? NSNumber)?.integerValue }
         
         set {
             
             guard let member = newValue
                 else { userDefaults.removeObjectForKey(Key.member.rawValue); return }
             
-            let stringValue: String
-            
-            switch member {
-                
-            case .nonConfirmedAttendee:
-                
-                stringValue = UserDefaultsSessionStorage.nonConfirmedAttendeeValue
-                
-            case let .attendee(memberID):
-                
-                stringValue = "\(memberID)"
-            }
-            
-            userDefaults.setObject(stringValue as NSString, forKey: Key.member.rawValue)
+            userDefaults.setObject(NSNumber(long: member), forKey: Key.member.rawValue)
             
             userDefaults.synchronize()
         }
@@ -114,6 +83,4 @@ public final class UserDefaultsSessionStorage: SessionStorage {
         case name = "CoreSummit.UserDefaultsSessionStorage.Key.Name"
         case hadPasscode = "CoreSummit.UserDefaultsSessionStorage.Key.HadPasscode"
     }
-    
-    private static let nonConfirmedAttendeeValue = "CoreSummit.UserDefaultsSessionStorage.NonConfirmedAttendee"
 }

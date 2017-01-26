@@ -1,0 +1,38 @@
+[
+	{
+		"created": 1485351595,
+		"class_name": "SummitGroupEvent",
+		"id": 651483,
+		"entity_id": 17451,
+		"entity": {
+			"title": "test group event #1",
+			"allow_feedback": false,
+			"track_id": 65,
+			"summit_id": 7,
+			"description": "<p>test group event #1</p>",
+			"is_published": true,
+			"type_id": 111,
+			"sponsors": [
+
+			],
+			"avg_feedback_rate": 0,
+			"start_date": 1477299600,
+			"tags": [
+
+			],
+			"end_date": 1477305900,
+			"id": 17451,
+			"class_name": "SummitEvent",
+			"groups": [
+				2,
+				5,
+				6
+			],
+			"location_id": 0,
+			"rsvp_link": null,
+			"social_description": "test group event #1",
+			"head_count": 0
+		},
+		"type": "INSERT"
+	}
+]

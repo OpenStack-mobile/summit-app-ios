@@ -41,4 +41,26 @@ final class CoreDataTests: XCTestCase {
             XCTAssert(summit == decodedSummit, "Original summit \(summitID) must equal decoded summit")
         }
     }
+    
+    func testMembers() {
+        
+        for memberID in MemberJSONIdentifiers {
+            
+            let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+            managedObjectContext.undoManager = nil
+            managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel.summitModel)
+            try! managedObjectContext.persistentStoreCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+            
+            // load test data
+            let testJSON = loadJSON("Member\(memberID)")
+            
+            guard let member = MemberResponse.Member(JSONValue: testJSON)
+                else { XCTFail("Could not decode from JSON"); return }
+            
+            // cache in CoreData
+            do { let _ = try member.save(managedObjectContext) }
+                
+            catch { XCTFail("\(error)"); return }
+        }
+    }
 }

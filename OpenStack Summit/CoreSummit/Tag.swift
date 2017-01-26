@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Tag: Named, Equatable {
+public struct Tag: Named {
     
     public let identifier: Identifier
     

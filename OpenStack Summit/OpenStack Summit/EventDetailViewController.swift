@@ -155,7 +155,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // update UI
         self.scheduled = !oldValue
         
-        let completion: ErrorValue<()> -> () = { [weak self] (response) in
+        let completion: ErrorType? -> () = { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -163,7 +163,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
             switch response {
                 
-            case let .Error(error):
+            case let .Some(error):
                 
                 // restore original value
                 controller.scheduled = oldValue
@@ -171,7 +171,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                 // show error
                 controller.showErrorMessage(error as NSError)
                 
-            case .Value(): break
+            case .None: break
             }
         }
         
@@ -215,10 +215,10 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // Can give feedback after event started, and if there is no feedback for that user
-        if let attendee = Store.shared.authenticatedMember?.attendeeRole
+        if let member = Store.shared.authenticatedMember
             where eventCache.start < Date()
-            && (try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty &&
-            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND attendee == %@", eventManagedObject, attendee))).isEmpty {
+            && (try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty &&
+            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty {
             
             data.append(.feedback)
         }
@@ -259,7 +259,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // get all reviews for this event
         let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        let attendeeFeedback = try! context.managedObjects(AttendeeFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
+        let attendeeFeedback = try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
         shouldShowReviews = eventCache.start < Date() && (reviews.count + attendeeFeedback.count) > 0
         
@@ -327,7 +327,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         configureAverageRatingView()
         
-        Store.shared.averageFeedback(self.currentSummit?.identifier, event: event) { [weak self] (response) in
+        let summit = eventCache.summit
+        
+        Store.shared.averageFeedback(summit, event: event) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
@@ -339,7 +341,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     
                 case let .Error(error):
                     
-                    controller.showErrorMessage(error as NSError)
+                    controller.showErrorMessage(error)
                     
                 case .Value:
                     

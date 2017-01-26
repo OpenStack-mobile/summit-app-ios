@@ -34,7 +34,7 @@ public struct FeedbackDetail {
         self.owner = feedback.firstName + " " + feedback.lastName
     }
     
-    public init(managedObject feedback: AttendeeFeedbackManagedObject) {
+    public init(managedObject feedback: MemberFeedbackManagedObject) {
         
         self.identifier = feedback.identifier
         self.rate = Int(feedback.rate)

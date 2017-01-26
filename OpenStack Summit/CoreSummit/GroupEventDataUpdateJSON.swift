@@ -1,24 +1,25 @@
 //
-//  EventDataUpdateJSON.swift
+//  GroupEventDataUpdateJSON.swift
 //  OpenStack Summit
 //
-//  Created by Alsey Coleman Miller on 8/19/16.
-//  Copyright © 2016 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 1/26/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
 import SwiftFoundation
 
-private extension EventDataUpdate {
+private extension GroupEventDataUpdate {
     
     typealias JSONKey = Event.JSONKey
 }
 
-extension EventDataUpdate: JSONDecodable {
+extension GroupEventDataUpdate: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let summit = JSONObject[JSONKey.summit_id.rawValue]?.rawValue as? Int,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
             let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
             let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
@@ -28,22 +29,23 @@ extension EventDataUpdate: JSONDecodable {
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.fromJSON(sponsorsJSONArray),
-            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
-            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
-            /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
             let presentation = PresentationDataUpdate(JSONValue: JSONValue),
-            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
+            let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
+            let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
+            let groups = Int.fromJSON(groupsJSONArray)
             else { return nil }
         
         self.identifier = identifier
+        self.summit = summit
         self.name = title
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
-        self.tags = Set(tags)
         self.allowFeedback = allowFeedback
-        self.sponsors = Set(sponsors)
         self.presentation = presentation
+        self.tags = Set(tags)
+        self.sponsors = Set(sponsors)
+        self.groups = Set(groups)
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
             

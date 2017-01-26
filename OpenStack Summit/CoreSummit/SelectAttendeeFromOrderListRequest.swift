@@ -12,20 +12,9 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func selectAttendee(from orderList: String, externalAttendee: Identifier, summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
+    func selectAttendee(from orderList: String, externalAttendee: Identifier, summit: Identifier, completion: (ErrorType?) -> ()) {
         
-        let summitID: String
-        
-        if let identifier = summit {
-            
-            summitID = "\(identifier)"
-            
-        } else {
-            
-            summitID = "current"
-        }
-        
-        let URI = "/api/v1/summits/" + summitID + "/external-orders/" + orderList + "/external-attendees/" + "\(externalAttendee)" + "/confirm"
+        let URI = "/api/v1/summits/\(summit)/external-orders/" + orderList + "/external-attendees/" + "\(externalAttendee)" + "/confirm"
         
         let URL = environment.configuration.serverURL + URI
         
@@ -35,9 +24,9 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(error!); return }
             
-            completion(.Value())
+            completion(nil)
         })
     }
 }

@@ -47,6 +47,21 @@ extension Track: CoreDataEncodable {
     }
 }
 
+extension MemberResponse.Track: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> TrackManagedObject {
+        
+        let managedObject = try cached(context)
+        
+        managedObject.name = name
+        managedObject.groups = try context.relationshipFault(Set(groups))
+        
+        managedObject.didCache()
+        
+        return managedObject
+    }
+}
+
 // MARK: - Fetches
 
 public extension TrackManagedObject {

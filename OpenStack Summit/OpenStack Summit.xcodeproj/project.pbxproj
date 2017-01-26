@@ -93,7 +93,6 @@
 		6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
 		6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
-		6E0B5F2E1D77C8AB0005F6CE /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* Summit6.json */; };
 		6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
 		6E0B5F531D77D4DE0005F6CE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F511D77D4DE0005F6CE /* Interface.storyboard */; };
@@ -113,7 +112,6 @@
 		6E10A5071D1066E9008CBD0C /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
 		6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
-		6E10A5181D106741008CBD0C /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* Summit6.json */; };
 		6E10A5191D106741008CBD0C /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
 		6E10A55D1D10675D008CBD0C /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51A1D10675C008CBD0C /* Company.swift */; };
 		6E10A55E1D10675D008CBD0C /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */; };
@@ -171,6 +169,18 @@
 		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1949331DCBB3E000A00603 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
 		6E1BB01D1D36F1D000F9F95F /* FeedbackEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */; };
+		6E1BCFE21E35CBF100059E94 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
+		6E1BCFE31E35CBF100059E94 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
+		6E1BCFE41E35CBF100059E94 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
+		6E1BCFEA1E36A3B800059E94 /* GroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */; };
+		6E1BCFEB1E36A3B800059E94 /* GroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */; };
+		6E1BCFEC1E36A3B800059E94 /* GroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */; };
+		6E1BCFEE1E379F4400059E94 /* GroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */; };
+		6E1BCFEF1E379F4400059E94 /* GroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */; };
+		6E1BCFF01E379F4400059E94 /* GroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */; };
+		6E1BCFF11E37A5FE00059E94 /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
+		6E1BCFF21E37A61000059E94 /* MemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */; };
+		6E1BCFF41E37A61200059E94 /* MemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */; };
 		6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
 		6E1D51B61D8362A9007391A3 /* PlayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D51B51D8362A9007391A3 /* PlayVideo.swift */; };
 		6E24FDE41D47CE290005EB14 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */; };
@@ -236,7 +246,6 @@
 		6E2923DD1D7AF8C900D14F0A /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52E1D10675C008CBD0C /* Presentation.swift */; };
 		6E2923DE1D7AF8C900D14F0A /* SpeakerJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5311D10675C008CBD0C /* SpeakerJSON.swift */; };
 		6E2923DF1D7AF8C900D14F0A /* VenueJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55A1D10675D008CBD0C /* VenueJSON.swift */; };
-		6E2923E01D7AF8C900D14F0A /* LoggedInMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */; };
 		6E2923E11D7AF8C900D14F0A /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
 		6E2923E21D7AF8C900D14F0A /* Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5581D10675D008CBD0C /* Unique.swift */; };
 		6E2923E51D7AF8C900D14F0A /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
@@ -256,7 +265,6 @@
 		6E2923F91D7AF8C900D14F0A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5261D10675C008CBD0C /* Location.swift */; };
 		6E2923FB1D7AF8C900D14F0A /* DataUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */; };
 		6E2923FC1D7AF8C900D14F0A /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCD1D4A5DE900CDC935 /* Environment.swift */; };
-		6E2923FE1D7AF8C900D14F0A /* NonConfirmedSummitAttendeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */; };
 		6E2923FF1D7AF8C900D14F0A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
 		6E2924001D7AF8C900D14F0A /* PresentationDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */; };
 		6E2924011D7AF8C900D14F0A /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5521D10675D008CBD0C /* TimeZone.swift */; };
@@ -270,7 +278,6 @@
 		6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
 		6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
 		6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
-		6E2924211D7AF8CC00D14F0A /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5161D106741008CBD0C /* Summit6.json */; };
 		6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
 		6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */; };
@@ -426,6 +433,18 @@
 		6E8D10991DF87F3B00A0BBDC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
 		6E8D109A1DF87F3B00A0BBDC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
 		6E8D109B1DF87F3B00A0BBDC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
+		6E919B491E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B481E39C1B700FBF910 /* GroupEventDataUpdate.swift */; };
+		6E919B4A1E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B481E39C1B700FBF910 /* GroupEventDataUpdate.swift */; };
+		6E919B4B1E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B481E39C1B700FBF910 /* GroupEventDataUpdate.swift */; };
+		6E919B4D1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B4C1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift */; };
+		6E919B4E1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B4C1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift */; };
+		6E919B4F1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B4C1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift */; };
+		6E919B511E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B501E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift */; };
+		6E919B521E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B501E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift */; };
+		6E919B531E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B501E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift */; };
+		6E919B551E39CA4300FBF910 /* DataUpdates8.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E919B541E39CA4300FBF910 /* DataUpdates8.json */; };
+		6E919B561E39CA4300FBF910 /* DataUpdates8.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E919B541E39CA4300FBF910 /* DataUpdates8.json */; };
+		6E919B571E39CA4300FBF910 /* DataUpdates8.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E919B541E39CA4300FBF910 /* DataUpdates8.json */; };
 		6E93D4411D9AEC5000E3302A /* DataUpdates5.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E35086E1D9AE4900055801C /* DataUpdates5.json */; };
 		6E93D4431D9AECA500E3302A /* TrackGroupDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */; };
 		6E93D4441D9AECA500E3302A /* TrackGroupDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */; };
@@ -504,7 +523,6 @@
 		6EB1FDF51E1C073E0048045D /* TeamInvitationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDF21E1C073E0048045D /* TeamInvitationRequest.swift */; };
 		6EB1FE001E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB1FE011E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
-		6EB1FE031E1DA6360048045D /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
 		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
@@ -550,9 +568,8 @@
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
-		6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */; };
+		6ECA1CD01D4EC09400806924 /* MemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */; };
 		6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
-		6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */; };
 		6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */; };
 		6ECBD1DC1D7CB092004BF1A8 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2924101D7AF8C900D14F0A /* CoreSummit.framework */; };
 		6ECBD1DD1D7CB092004BF1A8 /* CoreSummit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2924101D7AF8C900D14F0A /* CoreSummit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -877,7 +894,6 @@
 		6E10A50F1D10672D008CBD0C /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		6E10A5101D10672D008CBD0C /* CoreDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		6E10A5111D10672D008CBD0C /* TestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
-		6E10A5161D106741008CBD0C /* Summit6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit6.json; sourceTree = "<group>"; };
 		6E10A5171D106741008CBD0C /* Summit7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit7.json; sourceTree = "<group>"; };
 		6E10A51A1D10675C008CBD0C /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyJSON.swift; sourceTree = "<group>"; };
@@ -934,6 +950,9 @@
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
 		6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditViewController.swift; sourceTree = "<group>"; };
+		6E1BCFE11E35CBF100059E94 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupJSON.swift; sourceTree = "<group>"; };
+		6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManagedObject.swift; sourceTree = "<group>"; };
 		6E1D51B51D8362A9007391A3 /* PlayVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideo.swift; sourceTree = "<group>"; };
 		6E24FDE31D47CE290005EB14 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdateRequest.swift; sourceTree = "<group>"; };
@@ -1059,6 +1078,10 @@
 		6E8D0CD21D79CBA7004B435A /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6E8D10981DF87F3B00A0BBDC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		6E8D109C1DF8957100A0BBDC /* Teams.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Teams.storyboard; sourceTree = "<group>"; };
+		6E919B481E39C1B700FBF910 /* GroupEventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupEventDataUpdate.swift; sourceTree = "<group>"; };
+		6E919B4C1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupEventDataUpdateJSON.swift; sourceTree = "<group>"; };
+		6E919B501E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupEventDataUpdateManagedObject.swift; sourceTree = "<group>"; };
+		6E919B541E39CA4300FBF910 /* DataUpdates8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates8.json; sourceTree = "<group>"; };
 		6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdate.swift; sourceTree = "<group>"; };
 		6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackGroupDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E959E181DF61557002981FD /* TeamManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamManagedObject.swift; sourceTree = "<group>"; };
@@ -1129,9 +1152,8 @@
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
-		6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInMemberRequest.swift; sourceTree = "<group>"; };
+		6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD11D4EC46C00806924 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonConfirmedSummitAttendeeRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		6ED1B11D1D9B0CFF00084B03 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		6ED1B11F1D9B0F0000084B03 /* SummitActivityHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitActivityHandling.swift; sourceTree = "<group>"; };
@@ -1506,9 +1528,9 @@
 				6E35086E1D9AE4900055801C /* DataUpdates5.json */,
 				9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */,
 				6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */,
+				6E919B541E39CA4300FBF910 /* DataUpdates8.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E586FBE1DC29083001DE605 /* Member2.json */,
-				6E10A5161D106741008CBD0C /* Summit6.json */,
 				6E10A5171D106741008CBD0C /* Summit7.json */,
 			);
 			path = JSON;
@@ -1521,6 +1543,7 @@
 				6E10A51D1D10675C008CBD0C /* Event.swift */,
 				6E10A51F1D10675C008CBD0C /* EventType.swift */,
 				6E10A5211D10675C008CBD0C /* Feedback.swift */,
+				6E1BCFE11E35CBF100059E94 /* Group.swift */,
 				6E10A5231D10675C008CBD0C /* Image.swift */,
 				6E10A5261D10675C008CBD0C /* Location.swift */,
 				6E10A5281D10675C008CBD0C /* Member.swift */,
@@ -1560,6 +1583,7 @@
 				6E10A51E1D10675C008CBD0C /* EventJSON.swift */,
 				6E10A5201D10675C008CBD0C /* EventTypeJSON.swift */,
 				6E10A5221D10675C008CBD0C /* FeedbackJSON.swift */,
+				6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */,
 				6E10A5241D10675C008CBD0C /* ImageJSON.swift */,
 				6E10A5271D10675C008CBD0C /* LocationJSON.swift */,
 				6E10A5291D10675C008CBD0C /* MemberJSON.swift */,
@@ -1619,8 +1643,7 @@
 				6E61796A1DE7920E00EED286 /* SummitsRequest.swift */,
 				6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */,
 				6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */,
-				6ECA1CCF1D4EC09400806924 /* LoggedInMemberRequest.swift */,
-				6ECA1CD31D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift */,
+				6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */,
 				6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */,
 				6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */,
 				6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */,
@@ -1746,6 +1769,7 @@
 			children = (
 				6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */,
 				6E570A331D6771CF00189992 /* EventDataUpdate.swift */,
+				6E919B481E39C1B700FBF910 /* GroupEventDataUpdate.swift */,
 				6E570A351D67753D00189992 /* PresentationDataUpdate.swift */,
 				6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */,
 				9D6AADAD1DBE56CB0057888E /* VenueRoomDataUpdate.swift */,
@@ -1759,6 +1783,7 @@
 				6E2529211D5924D300173B1F /* DataUpdateJSON.swift */,
 				6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */,
 				6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */,
+				6E919B4C1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift */,
 				6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */,
 				6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */,
 				9D6AADAB1DBE563A0057888E /* VenueRoomDataUpdateJSON.swift */,
@@ -1847,6 +1872,7 @@
 				6EF4F8561DC8C7D600D31A99 /* CompanyManagedObject.swift */,
 				6EF4F85A1DC8CAEC00D31A99 /* EventManagedObject.swift */,
 				6EF4F86E1DC920B800D31A99 /* EventTypeManagedObject.swift */,
+				6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */,
 				6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */,
 				6EF4F8721DC9233F00D31A99 /* VenueManagedObject.swift */,
 				6EF4F8761DC9234A00D31A99 /* VenueRoomManagedObject.swift */,
@@ -1911,6 +1937,7 @@
 			children = (
 				6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */,
 				6EA38A771DCB1CA000B703CE /* EventDataUpdateManagedObject.swift */,
+				6E919B501E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift */,
 				6EA38A7F1DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift */,
 				6EA38A7B1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift */,
 				6EA38A831DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift */,
@@ -2454,13 +2481,13 @@
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
-				6E0B5F2E1D77C8AB0005F6CE /* Summit6.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
 				6E586FC21DC29083001DE605 /* Member2.json in Resources */,
 				6EE74DEA1DBF8E5800616BEA /* DataUpdates7.json in Resources */,
 				6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */,
+				6E919B571E39CA4300FBF910 /* DataUpdates8.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2542,13 +2569,13 @@
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
-				6E10A5181D106741008CBD0C /* Summit6.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6E586FC01DC29083001DE605 /* Member2.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
 				6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */,
 				6EE33F491DBF8F9500ECDDCF /* DataUpdates7.json in Resources */,
 				6E93D4411D9AEC5000E3302A /* DataUpdates5.json in Resources */,
+				6E919B551E39CA4300FBF910 /* DataUpdates8.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2567,13 +2594,13 @@
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
-				6E2924211D7AF8CC00D14F0A /* Summit6.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
 				6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */,
 				6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */,
 				6E586FC11DC29083001DE605 /* Member2.json in Resources */,
 				6EE74DED1DBF8E5A00616BEA /* DataUpdates7.json in Resources */,
 				6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */,
+				6E919B561E39CA4300FBF910 /* DataUpdates8.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2778,7 +2805,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E919B4F1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */,
 				6EBC48F91E1309790077806B /* FaultJSON.swift in Sources */,
+				6E1BCFEC1E36A3B800059E94 /* GroupJSON.swift in Sources */,
 				6E0B5EB51D77C8950005F6CE /* NonConfirmedAttendee.swift in Sources */,
 				6EA38A821DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift in Sources */,
 				6EB1FDE91E1A9C280048045D /* TeamInvitation.swift in Sources */,
@@ -2819,12 +2848,13 @@
 				6E0B5ECF1D77C8950005F6CE /* TicketType.swift in Sources */,
 				6E0B5ED01D77C8950005F6CE /* SummitTypeJSON.swift in Sources */,
 				6E0B5ED21D77C8950005F6CE /* VenueRoomJSON.swift in Sources */,
-				6EB1FE031E1DA6360048045D /* MemberJSON.swift in Sources */,
 				6E2D9FF81DC9D2FE0015C588 /* AttendeeManagedObject.swift in Sources */,
 				6E0B5ED41D77C8950005F6CE /* CompanyJSON.swift in Sources */,
 				6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */,
+				6E1BCFF01E379F4400059E94 /* GroupManagedObject.swift in Sources */,
 				6E0B5ED91D77C8950005F6CE /* EventDataUpdateJSON.swift in Sources */,
 				6E0B5EDA1D77C8950005F6CE /* TrackJSON.swift in Sources */,
+				6E1BCFF41E37A61200059E94 /* MemberRequest.swift in Sources */,
 				6EF4F87D1DC928D700D31A99 /* ImageManagedObject.swift in Sources */,
 				6E0B5EDB1D77C8950005F6CE /* FeedbackJSON.swift in Sources */,
 				6E0B5EDD1D77C8950005F6CE /* LocationJSON.swift in Sources */,
@@ -2837,6 +2867,7 @@
 				6E730B971DA2F0CC005E486B /* PageJSON.swift in Sources */,
 				6EBC49091E1398F10077806B /* ListMembersRequest.swift in Sources */,
 				6E2D9FE01DC9A5730015C588 /* SummitTypeManagedObject.swift in Sources */,
+				6E1BCFE41E35CBF100059E94 /* Group.swift in Sources */,
 				6EBC48FD1E138EB20077806B /* TeamJSON.swift in Sources */,
 				6E8D109B1DF87F3B00A0BBDC /* Team.swift in Sources */,
 				6EF4F86D1DC8D1D300D31A99 /* CoreDataDecodable.swift in Sources */,
@@ -2872,6 +2903,7 @@
 				6E0B5EF51D77C8950005F6CE /* Person.swift in Sources */,
 				6E0B5EF71D77C8950005F6CE /* TagJSON.swift in Sources */,
 				6E7847F31DC9224700B8AD05 /* LocationManagedObject.swift in Sources */,
+				6E919B4B1E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */,
 				6E0B5EF91D77C8950005F6CE /* TimeZoneJSON.swift in Sources */,
 				6EBC49011E13902A0077806B /* TeamMemberJSON.swift in Sources */,
 				6E982E411E15A92F00ECB76E /* TeamMemberRequest.swift in Sources */,
@@ -2887,12 +2919,14 @@
 				6E0B5F071D77C8950005F6CE /* Environment.swift in Sources */,
 				6E2D9FFC1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */,
 				6EF4F8551DC8C68700D31A99 /* SummitManagedObject.swift in Sources */,
+				6E919B531E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */,
 				6E2D9FE81DC9A5B90015C588 /* TrackGroupManagedObject.swift in Sources */,
 				6EF4F8591DC8C7D600D31A99 /* CompanyManagedObject.swift in Sources */,
 				6EB1FDF51E1C073E0048045D /* TeamInvitationRequest.swift in Sources */,
 				6EBC49051E1394FE0077806B /* TeamMessageJSON.swift in Sources */,
 				9DABFF911DA6A74C00B3101A /* VenueFloor.swift in Sources */,
 				6E0B5F0A1D77C8950005F6CE /* Video.swift in Sources */,
+				6E1BCFF11E37A5FE00059E94 /* MemberJSON.swift in Sources */,
 				6EF4F8791DC9234A00D31A99 /* VenueRoomManagedObject.swift in Sources */,
 				6E0B5F0B1D77C8950005F6CE /* PresentationDataUpdateJSON.swift in Sources */,
 				6E982E3D1E158DC800ECB76E /* TeamRequest.swift in Sources */,
@@ -3066,6 +3100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2D9FE61DC9A5B90015C588 /* TrackGroupManagedObject.swift in Sources */,
+				6E1BCFEA1E36A3B800059E94 /* GroupJSON.swift in Sources */,
 				6E10A56E1D10675D008CBD0C /* NonConfirmedAttendee.swift in Sources */,
 				6E10A5601D10675D008CBD0C /* Event.swift in Sources */,
 				6E10A59E1D10675D008CBD0C /* VenueRoom.swift in Sources */,
@@ -3078,6 +3113,7 @@
 				6EF4F87B1DC928D700D31A99 /* ImageManagedObject.swift in Sources */,
 				6E2D9FEA1DC9B0D40015C588 /* TagManagedObject.swift in Sources */,
 				6EBC48F71E1309790077806B /* FaultJSON.swift in Sources */,
+				6E919B511E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */,
 				6E10A5671D10675D008CBD0C /* ImageJSON.swift in Sources */,
 				6E10A5631D10675D008CBD0C /* EventTypeJSON.swift in Sources */,
 				6E10A56F1D10675D008CBD0C /* NonConfirmedAttendeeJSON.swift in Sources */,
@@ -3100,6 +3136,7 @@
 				6EF4F86F1DC920B800D31A99 /* EventTypeManagedObject.swift in Sources */,
 				6E10A5911D10675D008CBD0C /* Tag.swift in Sources */,
 				6EBC48FF1E13902A0077806B /* TeamMemberJSON.swift in Sources */,
+				6E1BCFE21E35CBF100059E94 /* Group.swift in Sources */,
 				6E2D9FDA1DC9944E0015C588 /* SpeakerManagedObject.swift in Sources */,
 				6E10A56B1D10675D008CBD0C /* Member.swift in Sources */,
 				6E10A56C1D10675D008CBD0C /* MemberJSON.swift in Sources */,
@@ -3132,6 +3169,7 @@
 				6E3D4CFF1E12D44A00D542CD /* TeamMember.swift in Sources */,
 				6E10A56A1D10675D008CBD0C /* LocationJSON.swift in Sources */,
 				6E087DD01D4A5E0F00CDC935 /* Configuration.swift in Sources */,
+				6E1BCFEE1E379F4400059E94 /* GroupManagedObject.swift in Sources */,
 				6EF4F8571DC8C7D600D31A99 /* CompanyManagedObject.swift in Sources */,
 				6E10A5621D10675D008CBD0C /* EventType.swift in Sources */,
 				6EF4F8681DC8D1D300D31A99 /* CoreDataEncodable.swift in Sources */,
@@ -3148,14 +3186,16 @@
 				6EA38A841DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift in Sources */,
 				6E2D9FE21DC9A5960015C588 /* TicketTypeManagedObject.swift in Sources */,
 				6E10A5711D10675D008CBD0C /* Presentation.swift in Sources */,
+				6E919B4D1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */,
 				6EBC48EF1E12F7D50077806B /* TeamMessageManagedObject.swift in Sources */,
+				6E919B491E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */,
 				6E8D10991DF87F3B00A0BBDC /* Team.swift in Sources */,
 				6EB1FDEB1E1AB1A20048045D /* TeamInvitationManagedObject.swift in Sources */,
 				6E10A5741D10675D008CBD0C /* SpeakerJSON.swift in Sources */,
 				6E730B951DA2F0CB005E486B /* PageJSON.swift in Sources */,
 				6E5D05C61D8CBC9500451639 /* SummitDataUpdate.swift in Sources */,
 				6E10A59D1D10675D008CBD0C /* VenueJSON.swift in Sources */,
-				6ECA1CD01D4EC09400806924 /* LoggedInMemberRequest.swift in Sources */,
+				6ECA1CD01D4EC09400806924 /* MemberRequest.swift in Sources */,
 				6E959E191DF61557002981FD /* TeamManagedObject.swift in Sources */,
 				6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */,
 				6EBC48FB1E138EB20077806B /* TeamJSON.swift in Sources */,
@@ -3193,7 +3233,6 @@
 				6E25291E1D58E6F200173B1F /* DataUpdateRequest.swift in Sources */,
 				6E7847F11DC9224700B8AD05 /* LocationManagedObject.swift in Sources */,
 				6E087DCE1D4A5DE900CDC935 /* Environment.swift in Sources */,
-				6ECA1CD41D511DD600806924 /* NonConfirmedSummitAttendeeRequest.swift in Sources */,
 				6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */,
 				6EF4F8531DC8C68700D31A99 /* SummitManagedObject.swift in Sources */,
 				6E570A3B1D6775D200189992 /* PresentationDataUpdateJSON.swift in Sources */,
@@ -3220,6 +3259,7 @@
 			files = (
 				6EBC48F01E12F7D50077806B /* TeamMessageManagedObject.swift in Sources */,
 				6E982E441E15A93800ECB76E /* TeamMessageRequest.swift in Sources */,
+				6E1BCFF21E37A61000059E94 /* MemberRequest.swift in Sources */,
 				6E2923A71D7AF8C900D14F0A /* NonConfirmedAttendee.swift in Sources */,
 				6E3D4D041E12D45400D542CD /* TeamMessage.swift in Sources */,
 				6E2923A81D7AF8C900D14F0A /* Event.swift in Sources */,
@@ -3251,6 +3291,7 @@
 				6EA38A811DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift in Sources */,
 				6EF4F8701DC920B800D31A99 /* EventTypeManagedObject.swift in Sources */,
 				6EEBAEA81D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */,
+				6E1BCFE31E35CBF100059E94 /* Group.swift in Sources */,
 				6E2D9FDB1DC9944E0015C588 /* SpeakerManagedObject.swift in Sources */,
 				6EF4F8691DC8D1D300D31A99 /* CoreDataEncodable.swift in Sources */,
 				6E2923BB1D7AF8C900D14F0A /* TrackGroup.swift in Sources */,
@@ -3260,6 +3301,7 @@
 				6E2923BF1D7AF8C900D14F0A /* MemberJSON.swift in Sources */,
 				6E2923C01D7AF8C900D14F0A /* EventDataUpdate.swift in Sources */,
 				9DABFF951DA6A75C00B3101A /* VenueFloorJSON.swift in Sources */,
+				6E919B4E1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */,
 				6E2923C11D7AF8C900D14F0A /* Speaker.swift in Sources */,
 				6E2923C21D7AF8C900D14F0A /* Summit.swift in Sources */,
 				6E2923C31D7AF8C900D14F0A /* TicketType.swift in Sources */,
@@ -3273,6 +3315,7 @@
 				6EBC49001E13902A0077806B /* TeamMemberJSON.swift in Sources */,
 				9DABFF921DA6A74C00B3101A /* VenueFloor.swift in Sources */,
 				6E2D9FEF1DC9B0F50015C588 /* VideoManagedObject.swift in Sources */,
+				6E919B4A1E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */,
 				6EA38A851DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift in Sources */,
 				6E2923CD1D7AF8C900D14F0A /* EventDataUpdateJSON.swift in Sources */,
 				6EB1FDF41E1C073E0048045D /* TeamInvitationRequest.swift in Sources */,
@@ -3290,6 +3333,7 @@
 				6E3D4D001E12D44A00D542CD /* TeamMember.swift in Sources */,
 				6E2923D81D7AF8C900D14F0A /* SummitJSON.swift in Sources */,
 				6E2923D91D7AF8C900D14F0A /* Production.swift in Sources */,
+				6E1BCFEB1E36A3B800059E94 /* GroupJSON.swift in Sources */,
 				6EBC49041E1394FE0077806B /* TeamMessageJSON.swift in Sources */,
 				6E2D9FF31DC9CC820015C588 /* MemberManagedObject.swift in Sources */,
 				6E2923DA1D7AF8C900D14F0A /* WebConvertible.swift in Sources */,
@@ -3302,7 +3346,6 @@
 				6EB1FDF01E1AF9F50048045D /* TeamInvitationJSON.swift in Sources */,
 				6E2D9FD31DC98E330015C588 /* PresentationManagedObject.swift in Sources */,
 				6E2923DF1D7AF8C900D14F0A /* VenueJSON.swift in Sources */,
-				6E2923E01D7AF8C900D14F0A /* LoggedInMemberRequest.swift in Sources */,
 				6E61796C1DE7920E00EED286 /* SummitsRequest.swift in Sources */,
 				6E2923E11D7AF8C900D14F0A /* VideoJSON.swift in Sources */,
 				6E2923E21D7AF8C900D14F0A /* Unique.swift in Sources */,
@@ -3322,11 +3365,13 @@
 				6E2923EF1D7AF8C900D14F0A /* Feedback.swift in Sources */,
 				6EBC48FC1E138EB20077806B /* TeamJSON.swift in Sources */,
 				6EF4F8781DC9234A00D31A99 /* VenueRoomManagedObject.swift in Sources */,
+				6E919B521E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */,
 				6EBC48F81E1309790077806B /* FaultJSON.swift in Sources */,
 				6E2923F01D7AF8C900D14F0A /* PresentationJSON.swift in Sources */,
 				6E2923F11D7AF8C900D14F0A /* AttendeeJSON.swift in Sources */,
 				6E2923F21D7AF8C900D14F0A /* DataUpdate.swift in Sources */,
 				6E93D4481D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift in Sources */,
+				6E1BCFEF1E379F4400059E94 /* GroupManagedObject.swift in Sources */,
 				6E93D4441D9AECA500E3302A /* TrackGroupDataUpdate.swift in Sources */,
 				6E2923F41D7AF8C900D14F0A /* FeedbackRequest.swift in Sources */,
 				6E982E3C1E158DC800ECB76E /* TeamRequest.swift in Sources */,
@@ -3338,7 +3383,6 @@
 				6E2923FB1D7AF8C900D14F0A /* DataUpdateRequest.swift in Sources */,
 				6E2923FC1D7AF8C900D14F0A /* Environment.swift in Sources */,
 				6EF4F85C1DC8CAEC00D31A99 /* EventManagedObject.swift in Sources */,
-				6E2923FE1D7AF8C900D14F0A /* NonConfirmedSummitAttendeeRequest.swift in Sources */,
 				6EF4F8661DC8D1D300D31A99 /* CoreDataExtensions.swift in Sources */,
 				6E2923FF1D7AF8C900D14F0A /* Video.swift in Sources */,
 				9D6AADB31DBE58040057888E /* VenueRoomDataUpdateJSON.swift in Sources */,

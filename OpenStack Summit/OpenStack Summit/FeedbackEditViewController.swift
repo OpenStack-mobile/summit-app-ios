@@ -24,6 +24,8 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     
     var event: Identifier!
     
+    private var eventCache: Event!
+    
     private let placeHolderText = "Add your review (up to 500 characters)"
     
     // MARK: - Accessors
@@ -66,6 +68,11 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         
         sendButton.layer.cornerRadius = 10
         reviewTextArea.returnKeyType = .Done
+        
+        guard let event = try! Event.find(self.event, context: Store.shared.managedObjectContext)
+            else { fatalError("Invalid event \(self.event)") }
+        
+        self.eventCache = event
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -119,7 +126,9 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         
         showActivityIndicator()
         
-        Store.shared.addFeedback(event: event, rate: rate, review: review) { [weak self] (response) in
+        let summit = eventCache.summit
+        
+        Store.shared.addFeedback(summit, event: event, rate: rate, review: review) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
