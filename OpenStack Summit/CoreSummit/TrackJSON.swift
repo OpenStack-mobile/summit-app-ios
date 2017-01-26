@@ -8,7 +8,7 @@
 
 import SwiftFoundation
 
-public extension Track {
+private extension Track {
     
     enum JSONKey: String {
         
@@ -30,5 +30,24 @@ extension Track: JSONDecodable {
         self.identifier = identifier
         self.name = name
         self.groups = Set(trackGroups)
+    }
+}
+
+extension MemberResponse.Track: JSONDecodable {
+    
+    private typealias JSONKey = Track.JSONKey
+    
+    public init?(JSONValue: JSON.Value) {
+        
+        guard let JSONObject = JSONValue.objectValue,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
+            let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
+            let trackGroups = TrackGroup.fromJSON(trackGroupsJSONArray)
+            else { return nil }
+        
+        self.identifier = identifier
+        self.name = name
+        self.groups = trackGroups
     }
 }

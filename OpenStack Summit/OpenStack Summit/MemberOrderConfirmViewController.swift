@@ -141,9 +141,11 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
         
         showActivityIndicator()
         
+        let summit = SummitManager.shared.summit.value
+        
         let nonConfirmedSummitAttendee = attendees[index]
         
-        Store.shared.selectAttendee(from: orderNumber, externalAttendee: nonConfirmedSummitAttendee.identifier) { [weak self] (response) in
+        Store.shared.selectAttendee(from: orderNumber, externalAttendee: nonConfirmedSummitAttendee.identifier, summit: summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
@@ -153,7 +155,7 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .Some(error):
                     
                     let code = (error as NSError).code
                     
@@ -169,12 +171,12 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                         
                     default:
                         
-                        controller.showErrorMessage(error as NSError)
+                        controller.showErrorMessage(error)
                     }
                     
-                case .Value:
+                case .None:
                     
-                    Store.shared.linkAttendee() { (response) in
+                    Store.shared.currentMember(for: summit) { (response) in
                         
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             

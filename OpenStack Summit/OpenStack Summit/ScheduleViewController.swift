@@ -124,7 +124,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         // update cell
         cell.scheduled = !scheduled
         
-        let completion: ErrorValue<()> -> () = { [weak self] (response) in
+        let completion: ErrorType? -> () = { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -132,7 +132,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             
             switch response {
                 
-            case let .Error(error):
+            case let .Some(error):
                 
                 // restore original value
                 cell.scheduled = scheduled
@@ -140,7 +140,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
                 // show error
                 controller.showErrorMessage(error as NSError)
                 
-            case .Value(): break
+            case .None: break
             }
         }
         

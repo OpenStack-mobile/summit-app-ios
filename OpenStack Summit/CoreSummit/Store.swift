@@ -186,6 +186,7 @@ public final class Store {
             scopes: ["openid",
                 "profile",
                 "offline_access",
+                "\(environment.configuration.serverURL)/me/read",
                 "\(environment.configuration.serverURL)/summits/read",
                 "\(environment.configuration.serverURL)/summits/write",
                 "\(environment.configuration.serverURL)/summits/read-external-orders",

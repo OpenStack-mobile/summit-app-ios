@@ -246,11 +246,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 name = speaker.name
                 pictureURL = speaker.pictureURL
                 
-            } else if let attendee = currentMember.attendeeRole {
-                
-                name = attendee.name
-                pictureURL = attendee.pictureURL
-                
             } else {
                 
                 name = currentMember.name
@@ -376,11 +371,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .Some(error):
                     
                     controller.showErrorMessage(error as NSError)
                     
-                case .Value:
+                case .None:
                     
                     controller.showUserProfile()
                     controller.reloadMenu()

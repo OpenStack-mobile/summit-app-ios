@@ -27,6 +27,7 @@ extension EventDataUpdate: Updatable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
+        managedObject.socialDescription = socialDescription
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.allowFeedback = allowFeedback

@@ -20,7 +20,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
-        let events = attendeeRole.scheduledEvents
+        let events = attendeeRole.schedule
             .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
                 && Date(foundation: $0.end) <= Date(foundation: endDate) })
             .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
@@ -42,7 +42,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
         
-        let events = attendeeRole.scheduledEvents
+        let events = attendeeRole.schedule
             .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
                 && Date(foundation: $0.end) <= Date(foundation: endDate) })
             .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })

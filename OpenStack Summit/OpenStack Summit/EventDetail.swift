@@ -131,8 +131,6 @@ public extension EventDetail {
         
         public let biography: String?
         
-        public let memberIdentifier: Identifier?
-        
         public let isModerator: Bool
         
         private init(speaker: Speaker, isModerator: Bool = false) {
@@ -145,7 +143,6 @@ public extension EventDetail {
             self.twitter = speaker.twitter
             self.irc = speaker.irc
             self.biography = speaker.biography
-            self.memberIdentifier = speaker.memberIdentifier
             self.isModerator = isModerator
         }
     }
@@ -161,6 +158,5 @@ public func == (lhs: EventDetail.SpeakerDetail, rhs: EventDetail.SpeakerDetail) 
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.biography == rhs.biography
-        && lhs.memberIdentifier == rhs.memberIdentifier
         && lhs.isModerator == rhs.isModerator
 }

@@ -70,6 +70,7 @@ public struct MemberListRequest {
         
         queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
         queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
+        queryItems.append(NSURLQueryItem(name: "expand", value: "groups"))
         
         if let filter = filter {
             

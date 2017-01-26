@@ -11,13 +11,13 @@ public struct TrackGroupDataUpdate: Named {
     
     public let identifier: Identifier
     
-    public var name: String
+    public let name: String
     
-    public var descriptionText: String?
+    public let descriptionText: String?
     
-    public var color: String
+    public let color: String
     
-    public var tracks: Set<Track>
+    public let tracks: Set<Track>
 }
 
 // MARK: - Equatable
