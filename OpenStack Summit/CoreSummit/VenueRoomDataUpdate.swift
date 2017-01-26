@@ -15,15 +15,15 @@ public struct VenueRoomDataUpdate: LocationProtocol {
     
     public let identifier: Identifier
     
-    public var name: String
+    public let name: String
     
-    public var descriptionText: String?
+    public let descriptionText: String?
     
-    public var capacity: Int?
+    public let capacity: Int?
     
-    public var venue: Identifier
+    public let venue: Identifier
     
-    public var floor: VenueFloor?
+    public let floor: VenueFloor?
 }
 
 // MARK: - Equatable

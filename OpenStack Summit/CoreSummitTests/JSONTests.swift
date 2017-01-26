@@ -160,4 +160,21 @@ final class JSONTests: XCTestCase {
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }
+    
+    func testDataUpdates8() {
+        
+        let testJSON = loadJSON("DataUpdates8")
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == 1, "\(dataUpdates.count) DataUpdates. Should be 1")
+        
+        guard let dataUpdateEntity = dataUpdates.first?.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = GroupEventDataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
 }

@@ -1,19 +1,20 @@
 //
-//  EventDataUpdate.swift
+//  GroupEventDataUpdate.swift
 //  OpenStack Summit
 //
-//  Created by Alsey Coleman Miller on 8/19/16.
-//  Copyright © 2016 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 1/26/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import SwiftFoundation
 
-/// The `DataUpdate` version of an `Event`.
-public struct EventDataUpdate: Named {
+public struct GroupEventDataUpdate: Named {
     
     public let identifier: Identifier
     
     public let name: String
+    
+    public let summit: Identifier
     
     public let descriptionText: String?
     
@@ -42,13 +43,16 @@ public struct EventDataUpdate: Named {
     public let videos: Set<Video>
     
     public let rsvp: String?
+    
+    public let groups: Set<Identifier>
 }
 
 // MARK: - Equatable
 
-public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
+public func == (lhs: GroupEventDataUpdate, rhs: GroupEventDataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
+        && lhs.summit == rhs.summit
         && lhs.name == rhs.name
         && lhs.descriptionText == rhs.descriptionText
         && lhs.socialDescription == rhs.socialDescription
@@ -64,4 +68,5 @@ public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
         && lhs.presentation == rhs.presentation
         && lhs.videos == rhs.videos
         && lhs.rsvp == rhs.rsvp
+        && lhs.groups == rhs.groups
 }
