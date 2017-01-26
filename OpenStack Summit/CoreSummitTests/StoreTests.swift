@@ -30,7 +30,7 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(value):
                 
-                XCTAssert(value.summits.isEmpty == false, "No summits")
+                XCTAssert(value.items.isEmpty == false, "No summits")
                 
                 dump(value, "AllSummitsDump.txt")
             }
@@ -56,9 +56,7 @@ final class StoreTests: XCTestCase {
                 XCTFail("\(error)");
                 
             case let .Value(summit):
-                
-                XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
-                
+                                
                 dump(summit, "CurrentSummitDump.txt")
             }
             
@@ -72,7 +70,7 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
                 
-        let pastSummits = 6 ... 7
+        let pastSummits = 7 ... 7
         
         for summitID in pastSummits {
             
@@ -140,6 +138,34 @@ final class StoreTests: XCTestCase {
         let expectation = expectationWithDescription("API Request")
         
         store.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
+            
+            switch response {
+                
+            case let .Error(error):
+                
+                XCTFail("\(error)");
+                
+            case let .Value(value):
+                
+                if value.total > 0 {
+                    
+                    XCTAssert(value.items.isEmpty == false)
+                }
+            }
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(60, handler: nil)
+    }
+    
+    func testListMembersRequest() {
+        
+        let store = try! createStore()
+        
+        let expectation = expectationWithDescription("API Request")
+        
+        store.members(MemberListRequest.Filter(value: "Jimmy", property: .firstName)) { (response) in
             
             switch response {
                 

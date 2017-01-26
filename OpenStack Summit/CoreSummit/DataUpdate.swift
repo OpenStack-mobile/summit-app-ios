@@ -62,6 +62,7 @@ public extension DataUpdate {
         case PresentationVideo
         case PresentationSlide
         case SponsorFromEvent
+        case SummitGroupEvent
         
         internal var type: Updatable.Type? {
             
@@ -71,6 +72,7 @@ public extension DataUpdate {
             case .Summit: return CoreSummit.Summit.DataUpdate.self
             case .Presentation: return CoreSummit.EventDataUpdate.self
             case .SummitEvent: return CoreSummit.EventDataUpdate.self
+            case .SummitGroupEvent: return CoreSummit.GroupEventDataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
             case .PresentationSpeaker: return CoreSummit.Speaker.self
@@ -143,7 +145,7 @@ public extension Store {
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
                     
-                    attendeeRole.scheduledEvents.insert(eventManagedObject)
+                    attendeeRole.schedule.insert(eventManagedObject)
                     
                     try context.save()
                     
@@ -157,7 +159,7 @@ public extension Store {
                     
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
-                        attendeeRole.scheduledEvents.remove(eventManagedObject)
+                        attendeeRole.schedule.remove(eventManagedObject)
                         
                         try context.save()
                     }
@@ -203,6 +205,22 @@ public extension Store {
                  guard let image = entity as? Image
                  else { return false }
                  */
+                return true
+                
+            case .SummitGroupEvent:
+                
+                guard let member = authenticatedMember,
+                    let event = entity as? GroupEventDataUpdate
+                    else { return false }
+                
+                // insert or update
+                let managedObject = try event.save(context)
+                
+                // add to authenticated member's group events
+                member.groupEvents.insert(managedObject)
+                
+                try context.save()
+                
                 return true
                 
             default:
@@ -257,3 +275,4 @@ extension VenueRoomDataUpdate: Updatable { }
 extension Track: Updatable { }
 extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }
+extension GroupEventDataUpdate: Updatable { }

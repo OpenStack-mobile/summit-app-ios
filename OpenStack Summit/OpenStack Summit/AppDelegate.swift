@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import UserNotifications
+import CoreSpotlight
+import SwiftFoundation
 import CoreSummit
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification
-import Parse
-import CoreSpotlight
 import XCDYouTubeKit
 import Fabric
 import Crashlytics
+import FirebaseCore
+import FirebaseInstanceID
+import FirebaseMessaging
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling {
@@ -40,10 +44,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // setup Fabric
         Crashlytics.startWithAPIKey(AppConsumerKey(AppEnvironment).fabric)
+        
         // setup Google Maps
         GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
-        // setup Parse
-        Parse.setApplicationId(AppConsumerKey(AppEnvironment).parse.appID, clientKey: AppConsumerKey(AppEnvironment).parse.clientKey)
         
         // initialize Store
         let _ = Store.shared
@@ -64,13 +67,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // configure global appearance
         SetAppearance()
         
-        // notifications
-        let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
-        application.registerUserNotificationSettings(notificationSettings)
-        application.registerForRemoteNotifications()
-        
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-        
         // setup root VC
         window?.rootViewController = revealViewController
         
@@ -83,8 +79,27 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             }
         }
         
+        // Setup Notification Manager
+        PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
+        PushNotificationManager.shared.setupNotifications(application)
+        PushNotificationManager.shared.startObservingTeams()
+        
+        // setup FireBase
+        FIRApp.configure()
+        FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        
+        // Add observer for InstanceID token refresh callback.
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(self.tokenRefreshNotification),
+                                                         name: kFIRInstanceIDTokenRefreshNotification,
+                                                         object: nil)
+        
         // hardcode summit
         SummitManager.shared.summit.value = 7
+        
+        connectToFcm()
         
         return true
     }
@@ -97,6 +112,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        #if !DEBUG
+        FIRMessaging.messaging().disconnect()
+        #endif
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -108,30 +127,60 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        connectToFcm()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        print("APNs token retrieved: \(deviceToken)")
+        
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+    }
+    
     // HACK: implemented old delegate to make notifications work as is on iOS 10
-    // TODO: implement notification using UserNotifications framework for iOS 10
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         
-        self.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: {(result: UIBackgroundFetchResult) -> Void in  })
+        // Print message ID.
+        if let messageID = userInfo["gcm.message_id"] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print("Recieved remote notification: \(userInfo)")
+        
+        PushNotificationManager.shared.process(userInfo as! [String: String])
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if let aps = userInfo["aps"] as? NSDictionary {
-            if let alert = aps["alert"] as? NSDictionary {
-                if let message = alert["message"] as? String {
-                    SweetAlert().showAlert("", subTitle: message, style: AlertStyle.None)
-                }
-            } else if let alert = aps["alert"] as? String {
-                SweetAlert().showAlert("", subTitle: alert, style: AlertStyle.None)
-            }
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        
+        // Print message ID.
+        if let messageID = userInfo["gcm.message_id"] {
+            print("Message ID: \(messageID)")
         }
-        completionHandler(UIBackgroundFetchResult.NoData)
+        
+        // Print full message.
+        print("Recieved remote notification: \(userInfo)")
+        
+        PushNotificationManager.shared.process(userInfo as! [String: String])
+        
+        completionHandler(.NewData)
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        
+        PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -167,14 +216,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
         
         return false
-    }
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        
-        // Store the deviceToken in the current installation and save it to Parse.
-        let currentInstallation: PFInstallation = PFInstallation.currentInstallation()!
-        currentInstallation.setDeviceTokenFromData(deviceToken)
-        currentInstallation.saveInBackground()
     }
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
@@ -229,6 +270,39 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
         
         return false
+    }
+    
+    // MARK: - Private Methods
+    
+    func connectToFcm() {
+        // Won't connect since there is no token
+        guard FIRInstanceID.instanceID().token() != nil else {
+            return;
+        }
+        
+        // Disconnect previous FCM connection if it exists.
+        FIRMessaging.messaging().disconnect()
+        
+        FIRMessaging.messaging().connectWithCompletion { (error) in
+            if error != nil {
+                print("Unable to connect with FCM. \(error)")
+            } else {
+                print("Connected to FCM.")
+            }
+        }
+    }
+    
+    // MARK: - Notifications
+    
+    func tokenRefreshNotification(notification: NSNotification) {
+        
+        if let refreshedToken = FIRInstanceID.instanceID().token() {
+            
+            print("InstanceID token: \(refreshedToken)")
+        }
+        
+        // Connect to FCM since connection may have failed when attempted before having a token.
+        connectToFcm()
     }
     
     // MARK: - SummitActivityHandling

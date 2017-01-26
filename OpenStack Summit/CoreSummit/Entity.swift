@@ -95,6 +95,23 @@ public extension Entity {
     }
 }
 
+public extension Fault where Value: CoreDataDecodable, Value.ManagedObject: Entity {
+    
+    init(managedObject: Value.ManagedObject) {
+        
+        if (managedObject.cached != nil) {
+            
+            let decoded = Value.init(managedObject: managedObject)
+            
+            self = .value(decoded)
+            
+        } else {
+            
+            self = .identifier(managedObject.identifier)
+        }
+    }
+}
+
 public extension CollectionType where Generator.Element: Entity {
     
     var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
@@ -186,5 +203,24 @@ internal extension NSManagedObjectContext {
     func relationshipFault<ManagedObject: Entity>(identifier: Identifier) throws -> ManagedObject {
         
         return try ManagedObject.cached(identifier, context: self, returnsObjectsAsFaults: true, includesSubentities: true)
+    }
+    
+    /// Returns managed object for fault value type.
+    @inline(__always)
+    func relationshipFault<Encodable: Unique where Encodable: CoreDataEncodable, Encodable.ManagedObject: Entity>(fault: Fault<Encodable>) throws -> Encodable.ManagedObject {
+        
+        switch fault {
+            
+        case let .identifier(identifier):
+            
+            return try Encodable.ManagedObject.cached(identifier,
+                                                      context: self,
+                                                      returnsObjectsAsFaults: true,
+                                                      includesSubentities: true)
+            
+        case let .value(value):
+            
+            return try value.save(self)
+        }
     }
 }

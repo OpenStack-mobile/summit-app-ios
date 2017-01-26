@@ -80,6 +80,8 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
             if newValue {
                 
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(objectsDidChange(_:)), name: NSManagedObjectContextObjectsDidChangeNotification, object: context)
+                
+                self.update()
             }
             else {
                 
@@ -98,6 +100,21 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
         self.entityName = entityName
         self.identifier = identifier
         self.context = context
+    }
+    
+    func update() {
+        
+        guard let entity = context.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
+            else { fatalError("Unknown entity: \(entityName)") }
+        
+        if let managedObject = try! context.find(entity, resourceID: self.identifier.value, identifierProperty: self.identifier.key) {
+            
+            self.delegate?.observer(self, managedObjectUpdated: managedObject)
+            
+        } else {
+            
+            self.delegate?.managedObjectDeletedForObserver(self)
+        }
     }
     
     @objc func objectsDidChange(notification: NSNotification) {
@@ -123,7 +140,7 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
                 if managedObject.valueForKey(identifier.key) as? NSObject == identifier.value &&
                     managedObject.entity.name! == self.entityName {
                         
-                        self.delegate?.observer(self, managedObjectDeleted: managedObject)
+                        self.delegate?.managedObjectDeletedForObserver(self)
                         
                         return
                 }
@@ -136,7 +153,7 @@ private protocol PrivateEntityControllerDelegate: class {
     
     func observer(observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject)
     
-    func observer(observer: PrivateEntityController, managedObjectDeleted managedObject: NSManagedObject)
+    func managedObjectDeletedForObserver(observer: PrivateEntityController)
 }
 
 extension EntityController: PrivateEntityControllerDelegate {
@@ -150,7 +167,7 @@ extension EntityController: PrivateEntityControllerDelegate {
         self.event.updated(decodable)
     }
     
-    private func observer(observer: PrivateEntityController, managedObjectDeleted managedObject: NSManagedObject) {
+    private func managedObjectDeletedForObserver(observer: PrivateEntityController) {
         
         self.event.deleted()
     }

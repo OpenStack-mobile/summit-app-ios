@@ -11,7 +11,7 @@ public protocol LocationProtocol: Named {
     var descriptionText: String? { get }
 }
 
-public enum Location: Unique, Equatable {
+public enum Location: Unique {
     
     case venue(Venue)
     case room(VenueRoom)

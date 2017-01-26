@@ -13,40 +13,45 @@ public struct EventDataUpdate: Named {
     
     public let identifier: Identifier
     
-    public var name: String
+    public let name: String
     
-    public var descriptionText: String?
+    public let descriptionText: String?
     
-    public var start: Date
+    public let socialDescription: String?
     
-    public var end: Date
+    public let start: Date
     
-    public var track: Identifier?
+    public let end: Date
     
-    public var allowFeedback: Bool
+    public let track: Identifier?
     
-    public var averageFeedback: Double
+    public let allowFeedback: Bool
     
-    public var type: Identifier
+    public let averageFeedback: Double
     
-    public var sponsors: Set<Company>
+    public let type: Identifier
     
-    public var tags: Set<Tag>
+    public let sponsors: Set<Company>
     
-    public var location: Identifier
+    public let tags: Set<Tag>
     
-    public var presentation: PresentationDataUpdate
+    public let location: Identifier?
     
-    public var videos: Set<Video>
+    public let presentation: PresentationDataUpdate
     
-    public var rsvp: String?
+    public let videos: Set<Video>
+    
+    public let rsvp: String?
 }
+
+// MARK: - Equatable
 
 public func == (lhs: EventDataUpdate, rhs: EventDataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.descriptionText == rhs.descriptionText
+        && lhs.socialDescription == rhs.socialDescription
         && lhs.start == rhs.start
         && lhs.end == rhs.end
         && lhs.track == rhs.track

@@ -6,25 +6,35 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Member: Named, Equatable {
+public struct Member: Named {
     
     public let identifier: Identifier
     
-    public var firstName: String
+    public let firstName: String
     
-    public var lastName: String
+    public let lastName: String
     
-    public var pictureURL: String
+    public let gender: String?
+    
+    public let pictureURL: String
         
-    public var twitter: String?
+    public let twitter: String?
     
-    public var irc: String?
+    public let linkedIn: String?
     
-    public var biography: String?
+    public let irc: String?
+    
+    public let biography: String?
         
-    public var speakerRole: Speaker?
+    public let speakerRole: Speaker?
     
-    public var attendeeRole: Attendee?
+    public let attendeeRole: Attendee?
+    
+    public let groupEvents: Set<Identifier>
+    
+    public let groups: Set<Group>
+    
+    public let feedback: Set<MemberFeedback>
 }
 
 // MARK: - Equatable
@@ -37,15 +47,18 @@ public func == (lhs: Member, rhs: Member) -> Bool {
         && lhs.pictureURL == rhs.pictureURL
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
+        && lhs.linkedIn == rhs.linkedIn
         && lhs.speakerRole == rhs.speakerRole
         && lhs.attendeeRole == rhs.attendeeRole
+        && lhs.groups == rhs.groups
+        && lhs.groupEvents == rhs.groupEvents
 }
 
 // MARK: - Extensions
 
 extension Member: Person {
     
-    public var title: String? { return nil }
+    public var title: String? { return speakerRole?.title }
 }
 
 #if os(iOS)

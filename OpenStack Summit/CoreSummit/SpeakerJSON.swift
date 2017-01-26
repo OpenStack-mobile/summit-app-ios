@@ -12,7 +12,7 @@ public extension Speaker {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, email, title, bio, irc, twitter, member_id, pic
+        case id, first_name, last_name, email, title, bio, irc, twitter, pic
     }
 }
 
@@ -37,6 +37,5 @@ extension Speaker: JSONDecodable {
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
         self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
         self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
-        self.memberIdentifier = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int
     }
 }

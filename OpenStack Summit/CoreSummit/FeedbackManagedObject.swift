@@ -32,11 +32,9 @@ public final class ReviewManagedObject: FeedbackManagedObject {
     @NSManaged public var lastName: String
 }
 
-public final class AttendeeFeedbackManagedObject: FeedbackManagedObject {
+public final class MemberFeedbackManagedObject: FeedbackManagedObject {
     
     @NSManaged public var member: MemberManagedObject
-    
-    @NSManaged public var attendee: AttendeeManagedObject?
 }
 
 // MARK: - Encoding
@@ -79,9 +77,9 @@ extension Review: CoreDataEncodable {
     }
 }
 
-extension AttendeeFeedback: CoreDataDecodable {
+extension MemberFeedback: CoreDataDecodable {
     
-    public init(managedObject: AttendeeFeedbackManagedObject) {
+    public init(managedObject: MemberFeedbackManagedObject) {
         
         self.identifier = managedObject.identifier
         self.rate = Int(managedObject.rate)
@@ -89,13 +87,12 @@ extension AttendeeFeedback: CoreDataDecodable {
         self.date = Date(foundation: managedObject.date)
         self.event = managedObject.event.identifier
         self.member = managedObject.member.identifier
-        self.attendee = managedObject.attendee?.identifier
     }
 }
 
-extension AttendeeFeedback: CoreDataEncodable {
+extension MemberFeedback: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> AttendeeFeedbackManagedObject {
+    public func save(context: NSManagedObjectContext) throws -> MemberFeedbackManagedObject {
         
         let managedObject = try cached(context)
         
@@ -104,7 +101,6 @@ extension AttendeeFeedback: CoreDataEncodable {
         managedObject.date = date.toFoundation()
         managedObject.event = try context.relationshipFault(event)
         managedObject.member = try context.relationshipFault(member)
-        managedObject.attendee = try context.relationshipFault(attendee)
         
         managedObject.didCache()
         

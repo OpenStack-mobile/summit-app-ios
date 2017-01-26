@@ -53,7 +53,7 @@ extension Review.Owner: JSONDecodable {
     }
 }
 
-extension AttendeeFeedback: JSONDecodable {
+extension MemberFeedback: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
@@ -72,7 +72,6 @@ extension AttendeeFeedback: JSONDecodable {
         self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event
         self.member = member
-        self.attendee = JSONObject[FeedbackJSONKey.attendee_id.rawValue]?.rawValue as? Int
     }
 }
 

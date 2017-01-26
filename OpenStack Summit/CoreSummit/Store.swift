@@ -42,7 +42,7 @@ public final class Store {
     private var persistentStore: NSPersistentStore
     
     /// The managed object context running on a background thread for asyncronous caching.
-    internal let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+    public let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
     
     /// Request queue
     private let requestQueue: NSOperationQueue = {
@@ -186,10 +186,15 @@ public final class Store {
             scopes: ["openid",
                 "profile",
                 "offline_access",
+                "\(environment.configuration.serverURL)/me/read",
                 "\(environment.configuration.serverURL)/summits/read",
                 "\(environment.configuration.serverURL)/summits/write",
                 "\(environment.configuration.serverURL)/summits/read-external-orders",
-                "\(environment.configuration.serverURL)/summits/confirm-external-orders"
+                "\(environment.configuration.serverURL)/summits/confirm-external-orders",
+                "\(environment.configuration.serverURL)/teams/read",
+                "\(environment.configuration.serverURL)/teams/write",
+                "\(environment.configuration.serverURL)/members/invitations/read",
+                "\(environment.configuration.serverURL)/members/invitations/write"
             ],
             clientSecret: environment.configuration.openID.secret,
             isWebView: true
@@ -205,7 +210,9 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(environment.configuration.serverURL)/summits/read"],
+            scopes: ["\(environment.configuration.serverURL)/summits/read",
+                "\(environment.configuration.serverURL)/members/read"
+            ],
             clientSecret: environment.configuration.serviceAccount.secret
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)

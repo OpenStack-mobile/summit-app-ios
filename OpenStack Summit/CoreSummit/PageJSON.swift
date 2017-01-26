@@ -13,7 +13,7 @@ enum PageJSONKey: String {
     case current_page, total, last_page, data, per_page
 }
 
-extension Page: JSONDecodable {
+public extension Page where Item: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         

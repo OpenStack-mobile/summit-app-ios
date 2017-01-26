@@ -13,88 +13,54 @@ import CoreData
 
 public extension Store {
     
-    /// Login via OAuth with OpenStack ID
-    func login(summit: Identifier? = nil, loginCallback: () -> (), completion: (ErrorValue<()>) -> ()) {
+    func logout() {
         
-        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
-            
-            guard error == nil
-                else { completion(.Error(error!)) ; return }
-            
-            loginCallback()
-            
-            self.linkAttendee(summit, completion: completion)
-        }
-    }
-    
-    /// Complete the Login process and store the session info. 
-    func linkAttendee(summit: Identifier? = nil, completion: (ErrorValue<()>) -> ()) {
+        let context = privateQueueManagedObjectContext
         
-        @inline(__always)
-        func success(name name: String, member: SessionMember) {
+        // remove member from cache
+        try! context.performErrorBlockAndWait {
             
-            self.session.name = name
-            self.session.member = member
-            
-            completion(.Value())
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
-        }
-        
-        @inline(__always)
-        func failure(error: ErrorType) {
-            
-            completion(.Error(error))
-        }
-        
-        // link attendee
-        
-        self.loggedInMember(summit) { (response) in
-            
-            switch response {
+            if let member = try self.authenticatedMember(context) {
                 
-            case let .Error(error):
+                context.deleteObject(member)
                 
-                // get non confirmed attendee
-                guard (error as NSError).code != 404 else {
-                    
-                    self.loggedInAttendee(summit) { (response) in
-                        
-                        switch response {
-                            
-                        case let .Error(error):
-                            
-                            failure(error)
-                            
-                        case let .Value(name):
-                            
-                            success(name: name, member: .nonConfirmedAttendee)
-                        }
-                    }
-                    
-                    return
-                }
-                
-                failure(error)
-                
-            case let .Value(member):
-                
-                let context = self.privateQueueManagedObjectContext
-                
-                context.performBlock {
-                    
-                    try! member.save(context)
-                    
-                    success(name: member.name, member: .attendee(member.identifier))
-                }
+                try context.save()
             }
         }
-    }
-    
-    func logout() {
         
         session.clear()
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
+    }
+    
+    /// Login via OAuth with OpenStack ID
+    func login(summit: Identifier, loginCallback: () -> (), completion: (ErrorType?) -> ()) {
+                
+        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
+            
+            guard error == nil
+                else { completion(error!) ; return }
+            
+            loginCallback()
+            
+            self.currentMember(for: summit) { (response) in
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    completion(error)
+                    
+                case let .Value(member):
+                    
+                    self.session.name = member.name
+                    self.session.member = member.identifier
+                    
+                    completion(nil)
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+                }
+            }
+        }
     }
 }

@@ -1,1 +1,229 @@
-{"id":2685,"summit_hall_checked_in":false,"summit_hall_checked_in_date":null,"shared_contact_info":false,"member_id":58157,"schedule":[8758,9461,8772,8064,9029,8148,7676,7674,8545,8623,7723,7337,7989,10819,10829,10830,8916,8939,6952,7527,8277,8922,8884,8711,8929,9462,9444,8895,9530,8927,8509,8888,8085,8977,8906,8256,8763,7995,9025,8826,7226,8868,8879,8866,9443,13682,8870,8875,9458,9457,9460,9459,9466,9467,9465,9464,9463,9140,6829,8900,13663,8887,9052,8890],"first_name":"Clint","last_name":"Espinoza","gender":"Prefer not to say","bio":null,"pic":"https:\/\/dev-openstack.org-site\/profile_images\/members\/58157","linked_in":null,"irc":null,"twitter":null,"feedback":[{"id":85,"rate":5,"note":"This was a great intro class.  We didn't finish the material because of time constraints but these guys could enthusiastically teach anything OpenStack related for hours if we had the time.","created_date":1461881830,"event_id":9442,"member_id":58157,"attendee_id":2685},{"id":156,"rate":5,"note":"test from cespin@gmail.com","created_date":1470853975,"event_id":7372,"member_id":58157,"attendee_id":2685},{"id":157,"rate":4,"note":"test from cespin@gmail.com","created_date":1470856779,"event_id":8970,"member_id":58157,"attendee_id":2685}],"tickets":[{"id":3,"name":"Full Access Pass","description":null,"allowed_summit_types":[]}]}
+{
+	"id": 1395,
+	"first_name": "Jimmy",
+	"last_name": "McArthur",
+	"gender": "Male",
+	"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+	"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+	"irc": "jamesmcarthur",
+	"twitter": "jimmymcarthur",
+	"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+	"groups_events": [
+		{
+			"id": 17451,
+			"title": "test group event #1",
+			"description": "<p>test group event #1</p>",
+			"social_description": "test group event #1",
+			"start_date": 1477299600,
+			"end_date": 1477305900,
+			"location_id": 0,
+			"summit_id": 7,
+			"class_name": "SummitEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": 0,
+			"is_published": true,
+			"head_count": 0,
+			"rsvp_link": null,
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"type": {
+				"id": 111,
+				"name": "Groups Events",
+				"color": "#f0f0ee",
+				"black_out_times": false
+			},
+			"track": {
+				"id": 65,
+				"name": "Cultural & Organizational Change",
+				"description": "As the OpenStack community and ecosystem have matured, it's clear that people and processes are at the heart of cloud transformation, and technology is no longer the barrier. Join us to learn from organizations who have successfully navigated organizational change to gain agility, speed to market and developer satisfaction. ",
+				"code": "COG",
+				"track_groups": [
+					{
+						"id": 14,
+						"name": "Business & Strategy",
+						"color": "#E79837",
+						"description": "<p>IT leaders building their cloud business case are facing unique requirements to move faster and control costs within the bounds of industry regulations and business realities. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy and recruiting. We'll also cover important emerging technology shifts such as Network Functions Virtualization and the growing use of cloud services in the telecom and carrier space.</p>",
+						"tracks": [
+							57,
+							58,
+							59,
+							60,
+							61,
+							62,
+							65,
+							67
+						]
+					}
+				]
+			},
+			"groups": [
+				{
+					"id": 2,
+					"title": "Administrators",
+					"description": null,
+					"code": "administrators"
+				},
+				{
+					"id": 5,
+					"title": "Foundation Members",
+					"description": null,
+					"code": "foundation-members"
+				},
+				{
+					"id": 6,
+					"title": "Foundation Staff",
+					"description": null,
+					"code": "foundation-staff"
+				}
+			]
+		}
+	],
+	"attendee": {
+		"id": 5966,
+		"summit_hall_checked_in": false,
+		"summit_hall_checked_in_date": null,
+		"shared_contact_info": true,
+		"member_id": 1395,
+		"schedule": [
+			15404,
+			16625,
+			15195,
+			16638,
+			15170,
+			15318,
+			16894,
+			16637,
+			16628,
+			15621,
+			17324,
+			16889,
+			17377,
+			16870,
+			15177,
+			17300,
+			17303,
+			17317,
+			17362,
+			17363,
+			17365,
+			17364,
+			15714,
+			16636
+		],
+		"tickets": [
+			14
+		]
+	},
+	"speaker": {
+		"id": 1,
+		"first_name": "Jimmy",
+		"last_name": "McArthur",
+		"title": "Senior Software Development Manager",
+		"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack.&nbsp;</p>",
+		"irc": "jimmymcarthur",
+		"twitter": "jamesmcarthur",
+		"presentations": {
+			"2": 16645
+		},
+		"moderated_presentations": [
+
+		],
+		"pic": "https://devbranch.openstack.org/profile_images/speakers/1"
+	},
+	"feedback": [
+		{
+			"id": 458,
+			"rate": 4,
+			"note": "Everything is awesome!",
+			"created_date": 1485333904,
+			"event_id": 16889,
+			"member_id": 1395
+		},
+		{
+			"id": 459,
+			"rate": 4,
+			"note": "Awesome!",
+			"created_date": 1485334038,
+			"event_id": 17300,
+			"member_id": 1395
+		}
+	],
+	"groups": [
+		{
+			"id": 1,
+			"title": "Content Authors",
+			"description": null,
+			"code": "content-authors"
+		},
+		{
+			"id": 2,
+			"title": "Administrators",
+			"description": null,
+			"code": "administrators"
+		},
+		{
+			"id": 4,
+			"title": "Users",
+			"description": null,
+			"code": "users"
+		},
+		{
+			"id": 5,
+			"title": "Foundation Members",
+			"description": null,
+			"code": "foundation-members"
+		},
+		{
+			"id": 8,
+			"title": "Speakers",
+			"description": null,
+			"code": "speakers"
+		},
+		{
+			"id": 30,
+			"title": "News Managers",
+			"description": "News Manager",
+			"code": "news-managers"
+		},
+		{
+			"id": 32,
+			"title": "oauth2 server admin",
+			"description": "OpenstackID OAUTH2 Server Administrators",
+			"code": "oauth2-server-admin"
+		},
+		{
+			"id": 31,
+			"title": "openstackid server admin",
+			"description": "OpenstackID Administrators",
+			"code": "openstackid-server-admin"
+		},
+		{
+			"id": 14,
+			"title": "OpenStack Foundation Staff",
+			"description": null,
+			"code": "openstack-foundation-staff"
+		},
+		{
+			"id": 9,
+			"title": "Track Chairs",
+			"description": null,
+			"code": "track-chairs"
+		},
+		{
+			"id": 38,
+			"title": "Working Groups",
+			"description": "Working Group list for Barcelona Summit",
+			"code": "working-groups"
+		},
+		{
+			"id": 45,
+			"title": "Survey Testers",
+			"description": null,
+			"code": "survey-testers"
+		}
+	]
+}

@@ -16,9 +16,13 @@ public final class MemberManagedObject: Entity {
     
     @NSManaged public var lastName: String
     
+    @NSManaged public var gender: String?
+    
     @NSManaged public var pictureURL: String
     
     @NSManaged public var twitter: String?
+    
+    @NSManaged public var linkedIn: String?
     
     @NSManaged public var irc: String?
     
@@ -27,6 +31,12 @@ public final class MemberManagedObject: Entity {
     @NSManaged public var speakerRole: SpeakerManagedObject?
     
     @NSManaged public var attendeeRole: AttendeeManagedObject?
+    
+    @NSManaged public var groups: Set<GroupManagedObject>
+    
+    @NSManaged public var groupEvents: Set<EventManagedObject>
+    
+    @NSManaged public var feedback: Set<MemberFeedbackManagedObject>
 }
 
 // MARK: - Encoding
@@ -41,7 +51,12 @@ extension Member: CoreDataDecodable {
         self.pictureURL = managedObject.pictureURL
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
+        self.linkedIn = managedObject.linkedIn
         self.biography = managedObject.biography
+        self.gender = managedObject.gender
+        self.groups = Group.from(managedObjects: managedObject.groups)
+        self.groupEvents = managedObject.groups.identifiers
+        self.feedback = MemberFeedback.from(managedObjects: managedObject.feedback)
         
         if let managedObject = managedObject.speakerRole {
             
@@ -74,9 +89,49 @@ extension Member: CoreDataEncodable {
         managedObject.pictureURL = pictureURL
         managedObject.twitter = twitter
         managedObject.irc = irc
+        managedObject.linkedIn = linkedIn
         managedObject.biography = biography
+        managedObject.gender = gender
+        managedObject.groups = try context.relationshipFault(groups)
+        
+        if speakerRole != nil {
+            
+            managedObject.speakerRole = try context.relationshipFault(speakerRole)
+        }
+        
+        if attendeeRole != nil {
+            
+            managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
+        }
+                
+        // dont touch group events, feedback
+        
+        managedObject.didCache()
+        
+        return managedObject
+    }
+}
+
+extension MemberResponse.Member: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
+        
+        let managedObject = try cached(context)
+        
+        managedObject.firstName = firstName
+        managedObject.lastName = lastName
+        managedObject.pictureURL = pictureURL
+        managedObject.twitter = twitter
+        managedObject.irc = irc
+        managedObject.linkedIn = linkedIn
+        managedObject.biography = biography
+        managedObject.gender = gender
+        
         managedObject.speakerRole = try context.relationshipFault(speakerRole)
         managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
+        managedObject.groups = try context.relationshipFault(Set(groups))
+        managedObject.groupEvents = try context.relationshipFault(Set(groupEvents))
+        managedObject.feedback = try context.relationshipFault(Set(feedback))
         
         managedObject.didCache()
         
@@ -88,14 +143,14 @@ extension Member: CoreDataEncodable {
 
 public extension MemberManagedObject {
     
-    func feedback(for event: Identifier) -> AttendeeFeedbackManagedObject? {
+    func feedback(for event: Identifier) -> MemberFeedbackManagedObject? {
         
-        return attendeeRole?.feedback.firstMatching({ $0.event.identifier == event})
+        return feedback.firstMatching({ $0.event.identifier == event})
     }
     
-    var givenFeedback: [AttendeeFeedbackManagedObject] {
+    var givenFeedback: [MemberFeedbackManagedObject] {
         
-        return attendeeRole?.feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
+        return feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
     }
 }
 
@@ -103,17 +158,16 @@ public extension MemberManagedObject {
 
 public extension Store {
     
-    /// The member that is logged in. Only valid for confirmed attendees.
+    /// The member that is logged in.
     var authenticatedMember: MemberManagedObject? {
         
         return try! self.authenticatedMember(self.managedObjectContext)
     }
     
-    /// The member that is logged in. Only valid for confirmed attendees.
+    /// The member that is logged in.
     internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
         
-        guard let sessionMember = session.member,
-            case let .attendee(memberID) = sessionMember,
+        guard let memberID = session.member,
             let member = try MemberManagedObject.find(memberID, context: context)
             else { return nil }
         
@@ -127,11 +181,7 @@ public extension Store {
     
     var isLoggedInAndConfirmedAttendee: Bool {
         
-        guard let sessionMember = session.member,
-            case .attendee(_) = sessionMember
-            else { return false }
-        
-        return true
+        return authenticatedMember?.attendeeRole != nil
     }
     
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
@@ -140,6 +190,6 @@ public extension Store {
             where self.isLoggedInAndConfirmedAttendee
             else { return false }
         
-        return loggedInMember.attendeeRole?.scheduledEvents.contains({ $0.identifier == eventID }) ?? false
+        return loggedInMember.attendeeRole?.schedule.contains({ $0.identifier == eventID }) ?? false
     }
 }

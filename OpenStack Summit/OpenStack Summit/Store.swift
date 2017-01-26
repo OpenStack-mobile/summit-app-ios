@@ -16,13 +16,21 @@ extension Store {
     static var shared: Store {
         
         struct Static {
+            
             static let store = try! Store(environment: AppEnvironment,
                                      session: UserDefaultsSessionStorage(),
                                      createPersistentStore: Store.createPersistentStore,
                                      deletePersistentStore: Store.deletePersistentStore)
         }
         
-        return Static.store
+        let store = Static.store
+        
+        if store.authenticatedMember == nil && store.session.member != nil {
+            
+            store.session.clear()
+        }
+        
+        return store
     }
     
     static let fileURL: NSURL = {
@@ -79,6 +87,7 @@ extension Store {
         }
     }
     
+    #if os(watchOS)
     var cache: Summit? {
         
         struct Static {
@@ -100,5 +109,6 @@ extension Store {
             return Static.summit
         }
     }
+    #endif
 }
 

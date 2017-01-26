@@ -18,9 +18,15 @@ extension MessageEnabledViewController {
         SweetAlert().showAlert(title, subTitle: message, style: AlertStyle.Warning)
     }
     
-    func showErrorMessage(error: NSError) {
-        var message = error.localizedDescription
-        message += "\n\nDomain: \(error.domain)\nCode: \(error.code)"
+    func showErrorMessage(error: ErrorType,
+                          fileName: String = #file,
+                          lineNumber: Int = #line) {
+        
+        let nsError = (error as NSError)
+        var message = nsError.localizedDescription
+        message += "\n\nDomain: \(nsError.domain)\nCode: \(nsError.code)"
         SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Error)
+        
+        print("Error at \(fileName):\(lineNumber)\n\(error)")
     }
 }

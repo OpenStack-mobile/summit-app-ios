@@ -112,15 +112,13 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .Some(error):
                         
                         cell.scheduled = true
                         
-                        controller.showErrorMessage(error as NSError)
+                        controller.showErrorMessage(error)
                         
-                    case .Value:
-                        
-                        break
+                    case .None: break
                     }
                 }
             }
@@ -141,15 +139,13 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                     
                     switch response {
                         
-                    case let .Error(error):
+                    case let .Some(error):
                         
                         cell.scheduled = false
                         
                         controller.showErrorMessage(error as NSError)
                         
-                    case .Value:
-                        
-                        break
+                    case .None: break
                     }
                 }
             }

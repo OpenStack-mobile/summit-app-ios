@@ -16,6 +16,8 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var descriptionText: String?
     
+    @NSManaged public var socialDescription: String?
+    
     @NSManaged public var start: NSDate
     
     @NSManaged public var end: NSDate
@@ -40,7 +42,7 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var videos: Set<VideoManagedObject>
     
-    // Inverse Relationships
+    @NSManaged public var groups: Set<GroupManagedObject>
     
     @NSManaged public var summit: SummitManagedObject
 }
@@ -52,8 +54,10 @@ extension Event: CoreDataDecodable {
     public init(managedObject: EventManagedObject) {
         
         self.identifier = managedObject.identifier
+        self.summit = managedObject.summit.identifier
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
+        self.socialDescription = managedObject.socialDescription
         self.start = Date(foundation: managedObject.start)
         self.end = Date(foundation: managedObject.end)
         self.allowFeedback = managedObject.allowFeedback
@@ -66,6 +70,7 @@ extension Event: CoreDataDecodable {
         self.location = managedObject.location?.identifier
         self.presentation = Presentation(managedObject: managedObject.presentation)
         self.videos = Video.from(managedObjects: managedObject.videos)
+        self.groups = Group.from(managedObjects: managedObject.groups)
     }
 }
 
@@ -77,11 +82,13 @@ extension Event: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
+        managedObject.socialDescription = socialDescription
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
+        managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
         managedObject.sponsors = try context.relationshipFault(sponsors)
@@ -89,6 +96,37 @@ extension Event: CoreDataEncodable {
         managedObject.location = try context.relationshipFault(location)
         managedObject.presentation = try context.relationshipFault(presentation)
         managedObject.videos = try context.relationshipFault(videos)
+        managedObject.groups = try context.relationshipFault(groups)
+        
+        managedObject.didCache()
+        
+        return managedObject
+    }
+}
+
+extension MemberResponse.Event: CoreDataEncodable {
+    
+    public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
+        
+        let managedObject = try cached(context)
+        
+        managedObject.name = name
+        managedObject.descriptionText = descriptionText
+        managedObject.socialDescription = socialDescription
+        managedObject.start = start.toFoundation()
+        managedObject.end = end.toFoundation()
+        managedObject.allowFeedback = allowFeedback
+        managedObject.averageFeedback = averageFeedback
+        managedObject.rsvp = rsvp
+        managedObject.summit = try context.relationshipFault(summit)
+        managedObject.track = try context.relationshipFault(track)
+        managedObject.eventType = try context.relationshipFault(type)
+        managedObject.sponsors = try context.relationshipFault(Set(sponsors))
+        managedObject.tags = try context.relationshipFault(Set(tags))
+        managedObject.location = try context.relationshipFault(location)
+        managedObject.presentation = try context.relationshipFault(presentation)
+        managedObject.videos = try context.relationshipFault(Set(videos))
+        managedObject.groups = try context.relationshipFault(Set(groups))
         
         managedObject.didCache()
         

@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func addEventToSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<()>) -> ()) {
+    func addEventToSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
         
         let summitID: String
         
@@ -37,7 +37,7 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(error!); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -45,17 +45,17 @@ public extension Store {
                 if let attendee = try self.authenticatedMember(context)?.attendeeRole,
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    attendee.scheduledEvents.insert(eventManagedObject)
+                    attendee.schedule.insert(eventManagedObject)
                     
                     try context.save()
                 }
             }
             
-            completion(.Value())
+            completion(nil)
         })
     }
     
-    func removeEventFromSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorValue<()>) -> ()) {
+    func removeEventFromSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
         
         let summitID: String
         
@@ -80,7 +80,7 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(error!); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -88,13 +88,13 @@ public extension Store {
                 if let attendee = try self.authenticatedMember(context)?.attendeeRole,
                     let eventManagedObject = try EventManagedObject.find(event, context: context) {
                     
-                    attendee.scheduledEvents.remove(eventManagedObject)
+                    attendee.schedule.remove(eventManagedObject)
                     
                     try context.save()
                 }
             }
             
-            completion(.Value())
+            completion(nil)
         })
     }
 }
