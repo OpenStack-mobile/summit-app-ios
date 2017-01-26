@@ -174,7 +174,7 @@ public extension Store {
         }
     }
     
-    func teams(page: Int = 1,
+    func teams(page page: Int = 1,
                perPage: Int = 10,
                completion: (ErrorValue<Page<Team>>) -> ()) {
         
