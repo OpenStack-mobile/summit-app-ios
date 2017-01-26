@@ -16,18 +16,33 @@ protocol ContextMenuViewController: class {
 
 extension ContextMenuViewController {
     
-    func showContextMenu(sender: UIBarButtonItem) {
+    func addContextMenuBarButtonItem() {
         
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let menu = self.contextMenu
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(UIViewController.showContextMenu))
+        
+        viewController.navigationItem.rightBarButtonItem = barButtonItem
+    }
+}
+
+private extension UIViewController {
+    
+    @objc func showContextMenu(sender: UIBarButtonItem) {
+        
+        guard let contextMenuViewController = self as? ContextMenuViewController
+            else { fatalError("\(self) is not a ContextMenuViewController") }
+        
+        let menu = contextMenuViewController.contextMenu
         
         let actionActivities = menu.actions.map { ContextMenuActionActivity(action: $0) }
         
         let activityVC = UIActivityViewController(activityItems: menu.shareItems, applicationActivities: actionActivities)
         
-        viewController.presentViewController(activityVC, animated: true, completion: nil)
+        activityVC.popoverPresentationController?.barButtonItem = sender
+        
+        presentViewController(activityVC, animated: true, completion: nil)
     }
 }
 

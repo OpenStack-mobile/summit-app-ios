@@ -25,6 +25,8 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addContextMenuBarButtonItem()
+        
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerNib(R.nib.loadingTableViewCell)
@@ -51,14 +53,14 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         let createTeam = ContextMenu.Action(activityType: "\(self).CreateTeam", image: { return nil }, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
             
-            let createTeamVC = R.storyboard.teams.createTeamViewController()!
+            let createTeamViewController = R.storyboard.teams.createTeamViewController()!
             
-            createTeamVC.completion = (
+            createTeamViewController.completion = (
                 done: { _ in didComplete(true); self?.refresh() },
                 cancel: { _ in didComplete(false) }
             )
             
-            return createTeamVC
+            return UINavigationController(rootViewController: createTeamViewController)
         }))
         
         return ContextMenu(actions: [createTeam], shareItems: [])
