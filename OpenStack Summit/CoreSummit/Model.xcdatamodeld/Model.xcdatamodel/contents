@@ -176,7 +176,7 @@
         <relationship name="invitations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="team" inverseEntity="TeamInvitation" syncable="YES"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMember" inverseName="team" inverseEntity="TeamMember" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMessage" inverseName="team" inverseEntity="TeamMessage" syncable="YES"/>
-        <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="teamOwner" inverseEntity="Member" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="teamOwner" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="TeamInvitation" representedClassName=".TeamInvitationManagedObject" syncable="YES">
         <attribute name="accepted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
