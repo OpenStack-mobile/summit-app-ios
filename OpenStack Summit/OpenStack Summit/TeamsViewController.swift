@@ -12,11 +12,13 @@ import CoreData
 import CoreSummit
 import XLPagerTabStrip
 
-final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider, MessageEnabledViewController, ShowActivityIndicatorProtocol {
+final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider, MessageEnabledViewController, ShowActivityIndicatorProtocol, ContextMenuViewController {
     
     // MARK: - Properties
     
     private lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
+    
+    lazy var contextMenu: ContextMenu = self.setupContextMenu()
     
     // MARK: - Loading
     
@@ -44,6 +46,23 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     }
     
     // MARK: - Private Methods
+    
+    private func setupContextMenu() -> ContextMenu {
+        
+        let createTeam = ContextMenu.Action(activityType: "\(self).CreateTeam", image: { return nil }, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
+            
+            let createTeamVC = R.storyboard.teams.createTeamViewController()!
+            
+            createTeamVC.completion = (
+                done: { _ in didComplete(true); self?.refresh() },
+                cancel: { _ in didComplete(false) }
+            )
+            
+            return createTeamVC
+        }))
+        
+        return ContextMenu(actions: [createTeam], shareItems: [])
+    }
     
     private func willLoadData() {
         
@@ -171,10 +190,6 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
             let viewController = segue.destinationViewController as! TeamDetailViewController
             
             viewController.team = selectedItem.identifier
-            
-        case R.segue.teamsViewController.createTeam.identifier: break
-            
-        case R.segue.teamsViewController.showTeamInvitations.identifier: break
             
         default: fatalError("Unknown segue: \(segue)")
         }

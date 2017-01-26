@@ -20,11 +20,15 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
     
     @IBOutlet weak var descriptionTextField: UITextField!
     
+    // MARK: - Properties
+    
+    var completion: (done: (CreateTeamViewController) -> (), cancel: (CreateTeamViewController) -> ())?
+    
     // MARK: - Actions
     
     @IBAction func cancel(sender: AnyObject? = nil) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.completion?.cancel(self)
     }
     
     @IBAction func done(sender: AnyObject? = nil) {
@@ -51,7 +55,7 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
                     
                 case .Value:
                     
-                    controller.dismissViewControllerAnimated(true, completion: nil)
+                    controller.completion?.done(controller)
                 }
             }
         }
