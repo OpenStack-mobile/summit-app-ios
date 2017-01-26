@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import XLPagerTabStrip
 
-final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, RevealViewController {
+final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider {
     
     // MARK: - Properties
     
@@ -21,8 +22,6 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addMenuButton()
         
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -67,6 +66,13 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         cell.textLabel!.text = team.name
         
         cell.detailTextLabel!.text = team.descriptionText
+    }
+    
+    // MARK: - IndicatorInfoProvider
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
+        return IndicatorInfo(title: "Teams")
     }
     
     // MARK: - UITableViewDataSource

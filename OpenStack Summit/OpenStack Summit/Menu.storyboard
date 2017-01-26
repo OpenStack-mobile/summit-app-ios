@@ -118,22 +118,12 @@
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="vbe-Gc-6CM"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrl-Me-5MB" userLabel="About Button">
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UM-eh-Q5r">
                                                 <rect key="frame" x="20" y="165" width="400" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="ABOUT" image="about"/>
-                                                <connections>
-                                                    <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Rpa-rB-CVT"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UM-eh-Q5r">
-                                                <rect key="frame" x="20" y="213" width="400" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="TEAMS" image="about"/>
+                                                <state key="normal" title="INBOX" image="about"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="rfy-uJ-Ogj"/>
                                                 </connections>
@@ -146,6 +136,16 @@
                                                 <state key="normal" title="MY SUMMIT" image="my-profile"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Lbq-cM-Ad2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrl-Me-5MB" userLabel="About Button">
+                                                <rect key="frame" x="20" y="213" width="400" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="ABOUT" image="about"/>
+                                                <connections>
+                                                    <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Rpa-rB-CVT"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -187,13 +187,13 @@
                     <connections>
                         <outlet property="aboutButton" destination="lrl-Me-5MB" id="cxo-Vv-idY"/>
                         <outlet property="eventsButton" destination="OhA-QB-4RU" id="9Dk-si-29K"/>
+                        <outlet property="inboxButton" destination="4UM-eh-Q5r" id="G0U-BU-FuR"/>
                         <outlet property="loginButton" destination="2XL-uy-eo6" id="Vaa-tV-baw"/>
                         <outlet property="myProfileButton" destination="KbZ-RL-hoW" id="cA0-OY-ozY"/>
                         <outlet property="nameLabel" destination="9Is-LK-cIs" id="CjQ-hd-gAQ"/>
                         <outlet property="peopleButton" destination="7my-lK-e1A" id="lhz-vk-cVT"/>
                         <outlet property="pictureImageView" destination="XVe-T6-xnI" id="g6c-Bh-kwt"/>
                         <outlet property="searchTextView" destination="PdW-V6-JSm" id="eUO-2w-PlL"/>
-                        <outlet property="teamsButton" destination="4UM-eh-Q5r" id="4FR-kH-Y1p"/>
                         <outlet property="venuesButton" destination="Zak-3i-NtK" id="l0g-sg-ruY"/>
                     </connections>
                 </viewController>
