@@ -41,18 +41,7 @@ extension Member: JSONDecodable {
         self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
         self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
         self.linkedIn = JSONObject[JSONKey.linked_in.rawValue]?.rawValue as? String
-        
-        if let genderString = JSONObject[JSONKey.gender.rawValue]?.rawValue as? String {
-            
-            guard let gender = Gender(rawValue: genderString)
-                else { return nil }
-            
-            self.gender = gender
-            
-        } else {
-            
-            self.gender = nil
-        }
+        self.gender = JSONObject[JSONKey.gender.rawValue]?.rawValue as? String
         
         if let speakerJSON = JSONObject[JSONKey.speaker.rawValue] {
             
@@ -105,18 +94,7 @@ extension MemberResponse.Member: JSONDecodable {
         self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
         self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
         self.linkedIn = JSONObject[JSONKey.linked_in.rawValue]?.rawValue as? String
-        
-        if let genderString = JSONObject[JSONKey.gender.rawValue]?.rawValue as? String {
-            
-            guard let gender = Gender(rawValue: genderString)
-                else { return nil }
-            
-            self.gender = gender
-            
-        } else {
-            
-            self.gender = nil
-        }
+        self.gender = JSONObject[JSONKey.gender.rawValue]?.rawValue as? String
         
         if let speakerJSON = JSONObject[JSONKey.speaker.rawValue] {
             

@@ -53,18 +53,10 @@ extension Member: CoreDataDecodable {
         self.irc = managedObject.irc
         self.linkedIn = managedObject.linkedIn
         self.biography = managedObject.biography
+        self.gender = managedObject.gender
         self.groups = Group.from(managedObjects: managedObject.groups)
         self.groupEvents = managedObject.groups.identifiers
         self.feedback = MemberFeedback.from(managedObjects: managedObject.feedback)
-        
-        if let gender = managedObject.gender {
-            
-            self.gender = Gender(rawValue: gender)
-            
-        } else {
-            
-            self.gender = nil
-        }
         
         if let managedObject = managedObject.speakerRole {
             
@@ -99,6 +91,7 @@ extension Member: CoreDataEncodable {
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn
         managedObject.biography = biography
+        managedObject.gender = gender
         managedObject.groups = try context.relationshipFault(groups)
         
         if speakerRole != nil {
@@ -132,6 +125,7 @@ extension MemberResponse.Member: CoreDataEncodable {
         managedObject.irc = irc
         managedObject.linkedIn = linkedIn
         managedObject.biography = biography
+        managedObject.gender = gender
         
         managedObject.speakerRole = try context.relationshipFault(speakerRole)
         managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
