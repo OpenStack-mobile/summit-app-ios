@@ -36,7 +36,7 @@ private extension UIViewController {
         
         let menu = contextMenuViewController.contextMenu
         
-        var activites: [UIActivity] = [OpenInSafariActivity()]
+        var activites = [UIActivity]()
         
         activites += menu.actions.map { ContextMenuActionActivity(action: $0) }
         

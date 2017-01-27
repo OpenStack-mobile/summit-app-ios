@@ -15,7 +15,7 @@ import SwiftFoundation
 import CoreSummit
 import XCDYouTubeKit
     
-final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController {
+final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
@@ -55,10 +55,43 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     private var loadedAllFeedback = false
     private var currentFeedbackPage: Page<Review>?
     
+    var contextMenu: ContextMenu {
+        
+        let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
+        
+        let url = eventDetail.webpageURL
+        
+        var actions: [ContextMenu.Action] = []
+        
+        if self.data.contains(.feedback) {
+            
+            let rate = ContextMenu.Action(activityType: "\(self.dynamicType).Rate", image: { return nil }, title: "Rate", handler: .background({ [weak self] (didComplete) in
+                
+                guard let controller = self else { return }
+                
+                let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
+                
+                feedbackVC.event = controller.event
+                
+                feedbackVC.rate = 0
+                
+                controller.showViewController(feedbackVC, sender: self)
+                
+                didComplete(true)
+            }))
+            
+            actions.append(rate)
+        }
+        
+        return ContextMenu(actions: actions, shareItems: [message, url])
+    }
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addContextMenuBarButtonItem()
         
         // setup tableview
         tableView.registerNib(R.nib.feedbackTableViewCell)
@@ -130,16 +163,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             else { return }
         
         UIApplication.sharedApplication().openURL(url)
-    }
-    
-    @IBAction func share(sender: UIBarButtonItem) {
-        
-        let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
-            
-        let activityViewController = UIActivityViewController(activityItems: [message, eventDetail.webpageURL], applicationActivities: nil)
-        activityViewController.modalPresentationStyle = .Popover
-        activityViewController.popoverPresentationController?.barButtonItem = sender
-        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     @IBAction func toggleSchedule(sender: UIBarButtonItem) {

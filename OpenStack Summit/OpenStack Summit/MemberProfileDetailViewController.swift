@@ -43,7 +43,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         
         var items = [AnyObject]()
         
-        items.append(self.title!)
+        items.append(self.name)
         
         if let biographyText = self.bioTextView.attributedText {
             

@@ -18,7 +18,39 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     
     private lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
     
-    lazy var contextMenu: ContextMenu = self.setupContextMenu()
+    lazy var contextMenu: ContextMenu = {
+        
+        let createTeam = ContextMenu.Action(activityType: "\(self.dynamicType).CreateTeam", image: { return nil }, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
+            
+            let createTeamViewController = R.storyboard.teams.createTeamViewController()!
+            
+            createTeamViewController.completion = (
+                done: { _ in didComplete(true); self?.refresh() },
+                cancel: { _ in didComplete(false) }
+            )
+            
+            let navigationController = UINavigationController(rootViewController: createTeamViewController)
+            
+            navigationController.modalPresentationStyle = .Popover
+            
+            return navigationController
+            }))
+        
+        let viewInvitations = ContextMenu.Action(activityType: "\(self.dynamicType).TeamInvitations", image: { return nil }, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
+            
+            let teamInvitationsViewController = R.storyboard.teams.teamInvitationsViewController()!
+            
+            teamInvitationsViewController.completion = { _ in didComplete(true); self?.refresh() }
+            
+            let navigationController = UINavigationController(rootViewController: teamInvitationsViewController)
+            
+            navigationController.modalPresentationStyle = .PageSheet
+            
+            return navigationController
+            }))
+        
+        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [])
+    }()
     
     // MARK: - Loading
     
@@ -48,40 +80,6 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     }
     
     // MARK: - Private Methods
-    
-    private func setupContextMenu() -> ContextMenu {
-        
-        let createTeam = ContextMenu.Action(activityType: "\(self.dynamicType).CreateTeam", image: { return nil }, title: "Create Team", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
-            
-            let createTeamViewController = R.storyboard.teams.createTeamViewController()!
-            
-            createTeamViewController.completion = (
-                done: { _ in didComplete(true); self?.refresh() },
-                cancel: { _ in didComplete(false) }
-            )
-            
-            let navigationController = UINavigationController(rootViewController: createTeamViewController)
-            
-            navigationController.modalPresentationStyle = .Popover
-            
-            return navigationController
-        }))
-        
-        let viewInvitations = ContextMenu.Action(activityType: "\(self.dynamicType).TeamInvitations", image: { return nil }, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
-            
-            let teamInvitationsViewController = R.storyboard.teams.teamInvitationsViewController()!
-            
-            teamInvitationsViewController.completion = { _ in didComplete(true); self?.refresh() }
-            
-            let navigationController = UINavigationController(rootViewController: teamInvitationsViewController)
-            
-            navigationController.modalPresentationStyle = .PageSheet
-            
-            return navigationController
-        }))
-        
-        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [])
-    }
     
     private func willLoadData() {
         
