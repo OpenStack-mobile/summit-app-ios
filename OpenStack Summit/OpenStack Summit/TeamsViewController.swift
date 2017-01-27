@@ -60,10 +60,27 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
                 cancel: { _ in didComplete(false) }
             )
             
-            return UINavigationController(rootViewController: createTeamViewController)
+            let navigationController = UINavigationController(rootViewController: createTeamViewController)
+            
+            navigationController.modalPresentationStyle = .Popover
+            
+            return navigationController
         }))
         
-        return ContextMenu(actions: [createTeam], shareItems: [])
+        let viewInvitations = ContextMenu.Action(activityType: "\(self).TeamInvitations", image: { return nil }, title: "View Invitations", handler: .modal({ [weak self] (didComplete) -> UIViewController? in
+            
+            let teamInvitationsViewController = R.storyboard.teams.teamInvitationsViewController()!
+            
+            teamInvitationsViewController.completion = { _ in didComplete(true); self?.refresh() }
+            
+            let navigationController = UINavigationController(rootViewController: teamInvitationsViewController)
+            
+            navigationController.modalPresentationStyle = .PageSheet
+            
+            return navigationController
+        }))
+        
+        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [])
     }
     
     private func willLoadData() {

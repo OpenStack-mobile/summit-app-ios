@@ -12,6 +12,10 @@ import CoreSummit
 
 final class InboxViewController: RevealTabStripViewController, RevealViewController {
     
+    // MARK: - Properties
+    
+    override var forwardChildBarButtonItems: Bool { return true }
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
