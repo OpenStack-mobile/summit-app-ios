@@ -156,7 +156,9 @@ public extension Notification {
             
             func parseCollection() -> Topic? {
                 
-                guard let prefix = Prefix(rawValue: rawValue)
+                let prefixString = rawValue.stringByReplacingOccurrencesOfString("/topics/", withString: "")
+                
+                guard let prefix = Prefix(rawValue: prefixString)
                     else { return nil }
                 
                 switch prefix {
