@@ -36,9 +36,11 @@ private extension UIViewController {
         
         let menu = contextMenuViewController.contextMenu
         
-        let actionActivities = menu.actions.map { ContextMenuActionActivity(action: $0) }
+        var activites: [UIActivity] = [OpenInSafariActivity()]
         
-        let activityVC = UIActivityViewController(activityItems: menu.shareItems, applicationActivities: actionActivities)
+        activites += menu.actions.map { ContextMenuActionActivity(action: $0) }
+        
+        let activityVC = UIActivityViewController(activityItems: menu.shareItems, applicationActivities: activites)
         
         activityVC.popoverPresentationController?.barButtonItem = sender
         
@@ -133,5 +135,63 @@ extension ContextMenu {
             
             handler({ [weak self] in self?.activityDidFinish($0) })
         }
+    }
+}
+
+final class OpenInSafariActivity: UIActivity {
+    
+    private var url: NSURL!
+    
+    override class func activityCategory() -> UIActivityCategory {
+        
+        return .Action
+    }
+    
+    override func activityType() -> String? {
+        
+        return "\(self.dynamicType)"
+    }
+    
+    override func activityTitle() -> String? {
+        
+        return "Open in Safari"
+    }
+    
+    override func activityImage() -> UIImage? {
+        
+        return R.image.openInSafariActivity()!
+    }
+    
+    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+        
+        return url(from: activityItems) != nil
+    }
+    
+    override func prepareWithActivityItems(activityItems: [AnyObject]) {
+        
+        self.url = url(from: activityItems)!
+    }
+    
+    override func performActivity() {
+        
+        let completed = UIApplication.sharedApplication().openURL(self.url)
+        
+        self.activityDidFinish(completed)
+    }
+    
+    private func url(from activityItems: [AnyObject]) -> NSURL? {
+        
+        return activityItems.firstMatching({ (item) in
+            
+            if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
+                
+                return true
+                
+            } else {
+                
+                return false
+            }
+            
+        }) as! NSURL?
     }
 }

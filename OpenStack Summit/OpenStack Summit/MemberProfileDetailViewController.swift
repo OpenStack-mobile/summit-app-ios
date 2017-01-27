@@ -45,16 +45,16 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         
         items.append(self.title!)
         
-        if let url = self.userActivity?.webpageURL {
+        if let biographyText = self.bioTextView.attributedText {
             
-            items.append(url)
+            items.append(biographyText)
         }
         
         items.append(self.pictureImageView.image!)
         
-        if let biographyText = self.bioTextView.attributedText {
+        if let url = self.userActivity?.webpageURL {
             
-            items.append(biographyText)
+            items.append(url)
         }
                 
         return ContextMenu(actions: [], shareItems: items)
