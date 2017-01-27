@@ -97,7 +97,19 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return self.fetchedResultsController.sections?[section].name
+        guard let channelString = self.fetchedResultsController.sections?[section].name,
+            let channel = Notification.Channel(rawValue: channelString)
+        else { return nil }
+        
+        switch channel {
+        case .attendees:    return "Attendees"
+        case .everyone:     return "Everyone"
+        case .event:        return "Events"
+        case .group:        return "Groups"
+        case .members:      return "Members"
+        case .summit:       return "Summit"
+        case .speakers:     return "Speakers"
+        }
     }
     
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
@@ -163,7 +175,7 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         default: break
         }
     }
-        
+    
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

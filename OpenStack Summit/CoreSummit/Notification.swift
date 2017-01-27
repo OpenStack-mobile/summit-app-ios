@@ -61,7 +61,7 @@ public extension Notification {
         
         case everyone = "EVERYONE"
         case speakers = "SPEAKERS"
-        case attendess = "ATTENDEES"
+        case attendees = "ATTENDEES"
         case members = "MEMBERS"
         case summit = "SUMMIT"
         case event = "EVENT"
