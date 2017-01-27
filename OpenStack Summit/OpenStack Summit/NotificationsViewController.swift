@@ -44,13 +44,13 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
     
     private func configureView() {
         
-        let sort = [NSSortDescriptor(key: "id", ascending: false)]
+        let sort = [NSSortDescriptor(key: "channel", ascending: true), NSSortDescriptor(key: "id", ascending: false)]
         
         self.fetchedResultsController = NSFetchedResultsController(Notification.self,
                                                                    delegate: self,
                                                                    predicate: nil,
                                                                    sortDescriptors: sort,
-                                                                   sectionNameKeyPath: nil,
+                                                                   sectionNameKeyPath: "channel",
                                                                    context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
@@ -78,12 +78,12 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return 1
+        return self.fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.fetchedResultsController.fetchedObjects?.count ?? 0
+        return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -93,6 +93,16 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         configure(cell: cell, at: indexPath)
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return self.fetchedResultsController.sections?[section].name
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        
+        return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -138,6 +148,22 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         }
     }
     
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
+        switch type {
+            
+        case .Insert:
+            
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            
+        case .Delete:
+            
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            
+        default: break
+        }
+    }
+        
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
