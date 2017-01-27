@@ -43,7 +43,7 @@ final class SummitManager {
     }
     
     @inline(__always)
-    private func summitChanged(newValue: Identifier) {
+    private func summitChanged(newValue: Identifier, oldValue: Identifier) {
         
         userDefaults.setObject(newValue, forKey: PreferenceKey.summit.rawValue)
         userDefaults.synchronize()

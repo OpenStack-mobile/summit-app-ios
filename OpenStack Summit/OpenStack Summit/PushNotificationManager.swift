@@ -21,16 +21,27 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     public var log: ((String) -> ())?
     
+    private var summitObserver: Int!
+    
     private var teamsFetchedResultsController: NSFetchedResultsController?
     
-    private var teams: [Team] {
+    private var teams: Set<Identifier> {
         
-        return Team.from(managedObjects: teamsFetchedResultsController?.fetchedObjects as? [TeamManagedObject] ?? [])
+        return (teamsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
+    }
+    
+    private var eventsFetchedResultsController: NSFetchedResultsController?
+    
+    private var events: Set<Identifier> {
+        
+        return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
     // MARK: - Initialization
     
     deinit {
+        
+        SummitManager.shared.summit.remove(summitObserver)
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -40,6 +51,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         self.store = store
         
         super.init()
+        
+        self.summitObserver = SummitManager.shared.summit.observe(summitChanged)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loggedIn), name: Store.Notification.LoggedIn.rawValue, object: self.store)
         
@@ -184,6 +197,22 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         }
     }
     
+    public func reloadSubscriptions() {
+        
+        subscribe(to: .everyone)
+        
+        let summit = SummitManager.shared.summit.value
+        
+        if summit > 0 {
+            
+            subscribe(to: .summit(summit))
+        }
+        
+        startObservingUser()
+        
+        startObservingTeams()
+    }
+    
     @inline(__always)
     private func subscribe(to topic: PushNotificationTopic) {
         
@@ -200,11 +229,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         log?("Unsubscribed from \(topic.rawValue)")
     }
     
-    public func startObservingTeams() {
+    private func startObservingTeams() {
         
         // unsubscribe to current teams
         
-        teams.forEach { unsubscribe(from: .team($0.identifier)) }
+        teams.forEach { unsubscribe(from: .team($0)) }
         
         // fetch member's teams
         
@@ -222,7 +251,48 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         try! teamsFetchedResultsController!.performFetch()
         
-        teams.forEach { subscribe(to: .team($0.identifier)) }
+        teams.forEach { subscribe(to: .team($0)) }
+    }
+    
+    private func startObservingUser() {
+        
+        let member = self.store.authenticatedMember
+        
+        if member?.speakerRole != nil {
+            
+            subscribe(to: .speakers)
+            
+        } else {
+            
+            unsubscribe(from: .speakers)
+        }
+        
+        events.forEach { unsubscribe(from: .event($0)) }
+        
+        if let attendeeRole = member?.attendeeRole {
+            
+            subscribe(to: .attendees)
+            
+            let predicate = NSPredicate(format: "attendees CONTAINS %@", attendeeRole)
+            
+            let sort = [NSSortDescriptor(key: "id", ascending: true)]
+            
+            eventsFetchedResultsController = NSFetchedResultsController(Event.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: nil, context: store.managedObjectContext)
+            
+            try! eventsFetchedResultsController!.performFetch()
+            
+            events.forEach { subscribe(to: .event($0)) }
+            
+        } else {
+            
+            unsubscribe(from: .attendees)
+        }
+    }
+    
+    private func summitChanged(newValue: Identifier, oldValue: Identifier) {
+        
+        unsubscribe(from: .summit(oldValue))
+        subscribe(to: .summit(newValue))
     }
     
     // MARK: - FIRMessagingDelegate
@@ -238,7 +308,20 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let identifier = (anObject as! Entity).identifier
         
-        let topic = PushNotificationTopic.team(identifier)
+        let topic: PushNotificationTopic
+        
+        if controller === teamsFetchedResultsController {
+            
+            topic = .team(identifier)
+            
+        } else if controller == eventsFetchedResultsController {
+            
+            topic = .event(identifier)
+            
+        } else {
+            
+            fatalError("Unknown fetched results controller \(controller)")
+        }
         
         switch type {
             
@@ -254,17 +337,17 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     @objc private func loggedIn(notification: NSNotification) {
         
-        startObservingTeams()
+        reloadSubscriptions()
     }
     
     @objc private func loggedOut(notification: NSNotification) {
         
-        startObservingTeams()
+        reloadSubscriptions()
     }
     
     @objc private func forcedLoggedOut(notification: NSNotification) {
         
-        startObservingTeams()
+        reloadSubscriptions()
     }
 }
 
