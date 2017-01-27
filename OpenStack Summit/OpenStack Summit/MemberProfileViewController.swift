@@ -11,11 +11,22 @@ import XLPagerTabStrip
 import KTCenterFlowLayout
 import CoreSummit
 
-final class MemberProfileViewController: RevealTabStripViewController {
+final class MemberProfileViewController: RevealTabStripViewController, ContextMenuViewController {
     
     // MARK: - Properties
     
     let profile: MemberProfileIdentifier
+    
+    lazy var memberProfileDetailViewController: MemberProfileDetailViewController = {
+        
+        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
+        
+        memberProfileDetailViewController.profile = self.profile
+        
+        return memberProfileDetailViewController
+    }()
+    
+    var contextMenu: ContextMenu { return memberProfileDetailViewController.contextMenu }
     
     // MARK: - Initialization
     
@@ -59,6 +70,8 @@ final class MemberProfileViewController: RevealTabStripViewController {
         }
         
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        
+        addContextMenuBarButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -73,11 +86,7 @@ final class MemberProfileViewController: RevealTabStripViewController {
         
         var childViewControllers = [UIViewController]()
         
-        let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
-        
-        memberProfileDetailVC.profile = profile
-        
-        childViewControllers.append(memberProfileDetailVC)
+        childViewControllers.append(memberProfileDetailViewController)
         
         if case let .speaker(identifier) = profile {
             
