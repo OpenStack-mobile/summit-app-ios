@@ -19,8 +19,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) weak var scheduledButton: UIBarButtonItem!
-    
     @IBOutlet private(set) var feedBackHeader: EventFeedbackHeader!
     
     // MARK: - Properties
@@ -37,15 +35,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private var entityController: EntityController<Event>!
     
-    private var scheduled = false {
-        
-        didSet {
-            
-            let image = scheduled ? R.image.checked_active()! : R.image.unchecked()!
-            
-            scheduledButton.image = image.imageWithRenderingMode(.AlwaysOriginal)
-        }
-    }
+    private var scheduled = false
     
     private var addToScheduleInProgress = false
     private var shouldShowReviews = false
@@ -81,6 +71,24 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             }))
             
             actions.append(rate)
+        }
+        
+        let isAttendee = Store.shared.isLoggedInAndConfirmedAttendee
+        
+        if isAttendee && addToScheduleInProgress == false {
+            
+            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: { return nil }, title: title, handler: .background({ [weak self] (didComplete) in
+                
+                guard let controller = self else { return }
+                
+                controller.toggleSchedule()
+                
+                didComplete(true)
+            }))
+            
+            actions.append(scheduleEvent)
         }
         
         return ContextMenu(actions: actions, shareItems: [message, url])
@@ -157,55 +165,12 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         self.playVideo(eventDetail.video!)
     }
     
-    @IBAction func rsvp(sender: UIButton) {
+    @IBAction func rsvp(sender: AnyObject? = nil) {
         
         guard let url = NSURL(string: eventDetail.rsvp)
             else { return }
         
         UIApplication.sharedApplication().openURL(url)
-    }
-    
-    @IBAction func toggleSchedule(sender: UIBarButtonItem) {
-        
-        let oldValue = self.scheduled
-        
-        if addToScheduleInProgress {
-            return
-        }
-        
-        addToScheduleInProgress = true
-        
-        // update UI
-        self.scheduled = !oldValue
-        
-        let completion: ErrorType? -> () = { [weak self] (response) in
-            
-            guard let controller = self else { return }
-            
-            controller.addToScheduleInProgress = false
-            
-            switch response {
-                
-            case let .Some(error):
-                
-                // restore original value
-                controller.scheduled = oldValue
-                
-                // show error
-                controller.showErrorMessage(error as NSError)
-                
-            case .None: break
-            }
-        }
-        
-        if oldValue {
-            
-            Store.shared.removeEventFromSchedule(self.eventDetail.summit, event: self.event, completion: completion)
-            
-        } else {
-            
-            Store.shared.addEventToSchedule(self.eventDetail.summit, event: self.event, completion: completion)
-        }
     }
     
     // MARK: - Private Methods
@@ -268,15 +233,9 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         // configure bar button items
         let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
         
-        self.scheduledButton.enabled = isAtteendee
-        
         if isAtteendee {
             
             self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
-            
-        } else {
-            
-            self.scheduledButton.image = nil
         }
         
         // get all reviews for this event
@@ -371,6 +330,49 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     controller.configureAverageRatingView()
                 }
             }
+        }
+    }
+    
+    private func toggleSchedule() {
+        
+        let oldValue = self.scheduled
+        
+        if addToScheduleInProgress {
+            return
+        }
+        
+        addToScheduleInProgress = true
+        
+        // update UI
+        self.scheduled = !oldValue
+        
+        let completion: ErrorType? -> () = { [weak self] (response) in
+            
+            guard let controller = self else { return }
+            
+            controller.addToScheduleInProgress = false
+            
+            switch response {
+                
+            case let .Some(error):
+                
+                // restore original value
+                controller.scheduled = oldValue
+                
+                // show error
+                controller.showErrorMessage(error as NSError)
+                
+            case .None: break
+            }
+        }
+        
+        if oldValue {
+            
+            Store.shared.removeEventFromSchedule(self.eventDetail.summit, event: self.event, completion: completion)
+            
+        } else {
+            
+            Store.shared.addEventToSchedule(self.eventDetail.summit, event: self.event, completion: completion)
         }
     }
     
