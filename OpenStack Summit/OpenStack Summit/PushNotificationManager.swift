@@ -100,6 +100,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let notification: PushNotification?
         
+        let backgroundState = UIApplication.sharedApplication().applicationState == .Background
+        
         // parse
         
         if let teamMessageNotification = TeamMessageNotification(pushNotification: pushNotification) {
@@ -118,7 +120,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             }
             
             // schedule local notification
-            if teamMessage.from.identifier != store.authenticatedMember?.identifier {
+            if backgroundState && teamMessage.from.identifier != store.authenticatedMember?.identifier {
                 
                 let userNotification = UILocalNotification()
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue]
@@ -134,6 +136,31 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             notification = generalNotification
             
+            let encodable = Notification(notification: generalNotification)
+            
+            // cache
+            let context = store.privateQueueManagedObjectContext
+            context.performBlock {
+                
+                try! encodable.save(context)
+                
+                try! context.save()
+            }
+            
+            // show notification
+            
+            if backgroundState {
+                
+                let userNotification = UILocalNotification()
+                userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue]
+                userNotification.alertTitle = generalNotification.event?.title
+                userNotification.alertBody = generalNotification.body
+                userNotification.fireDate = NSDate()
+                userNotification.category = UserNotificationCategory.generalNotification.rawValue
+                
+                UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+            }
+                        
         } else {
             
             notification = nil
@@ -194,6 +221,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     
                 }
             }
+            
+        case .generalNotification:
+            
+            break
+            
         }
     }
     
@@ -355,7 +387,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
 
 public enum UserNotificationCategory: String {
     
-    case teamMessage = "TeamMessageNotification"
+    case teamMessage
+    case generalNotification
 }
 
 public enum TeamMessageNotificationAction: String {
@@ -511,5 +544,19 @@ public struct GeneralNotification: PushNotification {
             
             self.event = nil
         }
+    }
+}
+
+extension Notification {
+    
+    init(notification: GeneralNotification) {
+        
+        self.identifier = notification.identifier
+        self.body = notification.body
+        self.created = notification.created
+        self.from = notification.from
+        self.summit = notification.summit
+        self.channel = notification.channel
+        self.event = notification.event?.identifier
     }
 }

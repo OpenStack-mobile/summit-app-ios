@@ -22,7 +22,7 @@ public struct Notification: Unique {
     
     public let channel: Channel
     
-    public let event: Identifier
+    public let event: Identifier?
 }
 
 // MARK: - Equatable
