@@ -112,9 +112,34 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         }
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    // MARK: - UITableViewDataSource
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
+        return .Delete
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let context = Store.shared.privateQueueManagedObjectContext
+        
+        let notificationManagedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Notification.ManagedObject
+        
+        switch editingStyle {
+            
+        case .Delete:
+            
+            context.performBlock {
+                
+                let managedObject = context.objectWithID(notificationManagedObject.objectID)
+                
+                context.deleteObject(managedObject)
+                
+                try! context.save()
+            }
+            
+        case .Insert, .None: break
+        }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
