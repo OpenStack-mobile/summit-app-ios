@@ -55,7 +55,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         
         if self.data.contains(.feedback) {
             
-            let rate = ContextMenu.Action(activityType: "\(self.dynamicType).Rate", image: { return nil }, title: "Rate", handler: .background({ [weak self] (didComplete) in
+            let rate = ContextMenu.Action(activityType: "\(self.dynamicType).Rate", image: nil, title: "Rate", handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -79,7 +79,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
             
             let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
             
-            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: { return nil }, title: title, handler: .background({ [weak self] (didComplete) in
+            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 

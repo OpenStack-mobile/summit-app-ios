@@ -36,15 +36,56 @@ private extension UIViewController {
         
         let menu = contextMenuViewController.contextMenu
         
-        var activites = [UIActivity]()
+        let menuViewController: UIViewController
         
-        activites += menu.actions.map { ContextMenuActionActivity(action: $0) }
+        if menu.shareItems.isEmpty {
+            
+            let alertViewController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            
+            menu.actions.forEach { (action) in
+                
+                let action = UIAlertAction(title: action.title, style: .Default, handler: { [weak self] _ in
+                
+                    switch action.handler {
+                        
+                    case let .modal(handler):
+                        
+                        let viewController = handler { _ in
+                            
+                            self?.dismissViewControllerAnimated(true, completion: nil)
+                        }
+                        
+                        viewController.popoverPresentationController?.barButtonItem = sender
+                        
+                        self?.presentViewController(viewController, animated: true, completion: nil)
+                        
+                    case let .background(handler):
+                        
+                        alertViewController.dismissViewControllerAnimated(true, completion: { handler { _ in } })
+                    }
+                })
+                
+                alertViewController.addAction(action)
+            }
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { _ in })
+            
+            alertViewController.addAction(cancel)
+            
+            menuViewController = alertViewController
+            
+        } else {
+            
+            var activites = [UIActivity]()
+            
+            activites += menu.actions.map { ContextMenuActionActivity(action: $0) }
+            
+            menuViewController = UIActivityViewController(activityItems: menu.shareItems, applicationActivities: activites)
+        }
         
-        let activityVC = UIActivityViewController(activityItems: menu.shareItems, applicationActivities: activites)
+        menuViewController.popoverPresentationController?.barButtonItem = sender
         
-        activityVC.popoverPresentationController?.barButtonItem = sender
-        
-        presentViewController(activityVC, animated: true, completion: nil)
+        presentViewController(menuViewController, animated: true, completion: nil)
     }
 }
 
@@ -61,7 +102,7 @@ extension ContextMenu {
         
         let activityType: String
         
-        let image: () -> UIImage?
+        let image: (() -> UIImage)?
         
         let title: String
         
@@ -69,7 +110,7 @@ extension ContextMenu {
         
         enum Handler {
             
-            case modal((Bool -> ()) -> UIViewController?)
+            case modal((Bool -> ()) -> UIViewController)
             case background((Bool -> ()) -> ())
         }
     }
@@ -103,7 +144,7 @@ extension ContextMenu {
     
     override func activityImage() -> UIImage? {
         
-        return action.image()
+        return action.image?()
     }
     
     override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
