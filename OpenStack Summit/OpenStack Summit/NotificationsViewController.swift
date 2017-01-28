@@ -40,6 +40,54 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         configureView()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+                
+        self.navigationController?.setToolbarHidden(!self.editing, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.setToolbarHidden(true, animated: animated)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func toggleEdit(sender: UIBarButtonItem) {
+        
+        let willEdit = !self.editing
+        
+        self.setEditing(willEdit, animated: true)
+        
+        self.navigationController?.setToolbarHidden(!willEdit, animated: true)
+    }
+    
+    @IBAction func deleteItems(sender: UIBarButtonItem) {
+        
+        let selectedIndexPaths = self.tableView.indexPathsForSelectedRows ?? []
+        
+        let selectedItems = selectedIndexPaths.map { self.fetchedResultsController.objectAtIndexPath($0) as! NotificationManagedObject }
+        
+        let context = Store.shared.privateQueueManagedObjectContext
+        
+        context.performBlock {
+            
+            let managedObjects = selectedItems.map { context.objectWithID($0.objectID) }
+            
+            managedObjects.forEach { context.deleteObject($0) }
+            
+            try! context.save()
+        }
+    }
+    
+    @IBAction func markAll(sender: UIBarButtonItem) {
+        
+        let indexPaths = (self.fetchedResultsController.fetchedObjects ?? []).map { self.fetchedResultsController.indexPathForObject($0) }
+        
+        indexPaths.forEach { self.tableView.selectRowAtIndexPath($0, animated: true, scrollPosition: .None) }
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
@@ -116,30 +164,7 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
-        return .Delete
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let context = Store.shared.privateQueueManagedObjectContext
-        
-        let notificationManagedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Notification.ManagedObject
-        
-        switch editingStyle {
-            
-        case .Delete:
-            
-            context.performBlock {
-                
-                let managedObject = context.objectWithID(notificationManagedObject.objectID)
-                
-                context.deleteObject(managedObject)
-                
-                try! context.save()
-            }
-            
-        case .Insert, .None: break
-        }
+        return UITableViewCellEditingStyle(rawValue: 3)!
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

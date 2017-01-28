@@ -65,6 +65,8 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         let topChild = self.viewControllers[self.currentIndex]
         
         self.navigationItem.rightBarButtonItems = topChild.navigationItem.rightBarButtonItems
+        
+        self.toolbarItems = topChild.toolbarItems
     }
     
     override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
