@@ -2705,8 +2705,6 @@
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/tvOS/SwiftFoundation.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/JSON.framework",
-				"$(SRCROOT)/../Carthage/Build/tvOS/Realm.framework",
-				"$(SRCROOT)/../Carthage/Build/tvOS/RealmSwift.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearOAuth2.framework",
