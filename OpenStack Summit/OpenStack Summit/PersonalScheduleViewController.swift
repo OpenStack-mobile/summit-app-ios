@@ -37,7 +37,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
         return activeDates
     }
     
-    override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
         
         guard let attendeeRole = Store.shared.authenticatedMember?.attendeeRole
             else { return [] }
