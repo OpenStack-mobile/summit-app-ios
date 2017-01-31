@@ -86,6 +86,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         setBlankBackBarButtonItem()
         
         scheduleView.dayPicker.delegate = self
+        scheduleView.nowButton.addTarget(self, action: #selector(nowTapped), forControlEvents: .TouchUpInside)
         
         scheduleView.tableView.registerNib(R.nib.scheduleTableViewCell)
         scheduleView.tableView.delegate = self
@@ -152,6 +153,11 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             
             Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
         }
+    }
+    
+    @IBAction func nowTapped(sender: UIButton) {
+        
+        
     }
     
     // MARK: - Methods
