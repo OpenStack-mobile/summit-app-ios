@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AVr-0z-NbI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="XKE-7l-Ovl">
+            <objects>
+                <viewController storyboardIdentifier="LaunchScreenViewController" id="AVr-0z-NbI" customClass="LaunchScreenViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rlu-Q7-wHN"/>
+                        <viewControllerLayoutGuide type="bottom" id="xcU-XA-VjV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EFE-Qh-WGT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0m-29-s0K">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hje-NR-jtt">
+                                        <rect key="frame" x="57" y="40.5" width="262" height="120"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="hje-NR-jtt" firstAttribute="width" secondItem="i0m-29-s0K" secondAttribute="width" multiplier="0.7" id="Ceg-2n-y7V"/>
+                                    <constraint firstItem="hje-NR-jtt" firstAttribute="centerY" secondItem="i0m-29-s0K" secondAttribute="centerY" id="GvW-pL-zv7"/>
+                                    <constraint firstItem="hje-NR-jtt" firstAttribute="height" secondItem="i0m-29-s0K" secondAttribute="height" multiplier="0.6" id="P8c-TM-i4y"/>
+                                    <constraint firstItem="hje-NR-jtt" firstAttribute="centerX" secondItem="i0m-29-s0K" secondAttribute="centerX" id="RVF-0N-Rdc"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nU2-eI-CBz">
+                                <rect key="frame" x="0.0" y="200" width="375" height="329"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDc-Q1-oct">
+                                <rect key="frame" x="0.0" y="529" width="375" height="138"/>
+                                <subviews>
+                                    <button hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeV-KC-TN4">
+                                        <rect key="frame" x="20" y="73" width="335" height="45"/>
+                                        <color key="backgroundColor" red="0.079267598689999996" green="0.1471248567" blue="0.2384558618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="pX7-jM-FgI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="CONTINUE AS GUEST">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ge6-hl-sol">
+                                        <rect key="frame" x="20" y="20" width="335" height="45"/>
+                                        <color key="backgroundColor" red="0.17642489450000001" green="0.60687987239999996" blue="0.82575757579999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Qqw-5Z-iKy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="SIGN IN USING OPENSTACK ID">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ge6-hl-sol" secondAttribute="trailing" constant="20" id="ABG-by-Bhs"/>
+                                    <constraint firstItem="Ge6-hl-sol" firstAttribute="leading" secondItem="fDc-Q1-oct" secondAttribute="leading" constant="20" id="CCu-T6-6ly"/>
+                                    <constraint firstItem="Ge6-hl-sol" firstAttribute="top" secondItem="fDc-Q1-oct" secondAttribute="top" constant="20" id="OQC-GH-t8z"/>
+                                    <constraint firstAttribute="trailing" secondItem="GeV-KC-TN4" secondAttribute="trailing" constant="20" id="Tzt-ZL-eWu"/>
+                                    <constraint firstItem="GeV-KC-TN4" firstAttribute="top" secondItem="Ge6-hl-sol" secondAttribute="bottom" constant="8" id="V9x-xs-YXU"/>
+                                    <constraint firstItem="GeV-KC-TN4" firstAttribute="leading" secondItem="fDc-Q1-oct" secondAttribute="leading" constant="20" id="ich-mc-Wta"/>
+                                    <constraint firstAttribute="bottom" secondItem="GeV-KC-TN4" secondAttribute="bottom" constant="20" id="tdE-lg-Ohr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11265573650000001" green="0.2169151604" blue="0.34561526780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fDc-Q1-oct" secondAttribute="trailing" id="7sj-2O-mN7"/>
+                            <constraint firstItem="fDc-Q1-oct" firstAttribute="top" secondItem="nU2-eI-CBz" secondAttribute="bottom" id="YfK-JY-65r"/>
+                            <constraint firstItem="i0m-29-s0K" firstAttribute="top" secondItem="EFE-Qh-WGT" secondAttribute="top" id="aYf-f5-5iJ"/>
+                            <constraint firstItem="nU2-eI-CBz" firstAttribute="top" secondItem="i0m-29-s0K" secondAttribute="bottom" id="akt-dH-YJ5"/>
+                            <constraint firstAttribute="trailing" secondItem="nU2-eI-CBz" secondAttribute="trailing" id="kF1-hL-5Yr"/>
+                            <constraint firstItem="nU2-eI-CBz" firstAttribute="leading" secondItem="EFE-Qh-WGT" secondAttribute="leading" id="nUQ-tC-nCs"/>
+                            <constraint firstItem="fDc-Q1-oct" firstAttribute="leading" secondItem="EFE-Qh-WGT" secondAttribute="leading" id="oMR-pU-tqz"/>
+                            <constraint firstItem="i0m-29-s0K" firstAttribute="height" secondItem="EFE-Qh-WGT" secondAttribute="height" multiplier="0.3" id="q5D-iW-PqY"/>
+                            <constraint firstItem="xcU-XA-VjV" firstAttribute="top" secondItem="fDc-Q1-oct" secondAttribute="bottom" id="s6D-TB-N48"/>
+                            <constraint firstItem="i0m-29-s0K" firstAttribute="leading" secondItem="EFE-Qh-WGT" secondAttribute="leading" id="sdU-8m-vAv"/>
+                            <constraint firstAttribute="trailing" secondItem="i0m-29-s0K" secondAttribute="trailing" id="uo2-Mg-eeK"/>
+                            <constraint firstItem="nU2-eI-CBz" firstAttribute="top" secondItem="i0m-29-s0K" secondAttribute="bottom" id="wZQ-v5-k0s"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="guestButton" destination="GeV-KC-TN4" id="hj6-lp-cAe"/>
+                        <outlet property="loginButton" destination="Ge6-hl-sol" id="ZTd-ev-eKb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wlu-QN-bFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="920.80000000000007" y="385.45727136431788"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="summit-logo" width="335" height="135"/>
+    </resources>
+</document>

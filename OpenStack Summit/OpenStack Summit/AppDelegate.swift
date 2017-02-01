@@ -68,7 +68,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         SetAppearance()
         
         // setup root VC
-        window?.rootViewController = revealViewController
+        window?.rootViewController = R.storyboard.main.launchScreenViewController()!
         
         // Core Spotlight
         if #available(iOS 9.0, *) {
