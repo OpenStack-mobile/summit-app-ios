@@ -12,9 +12,9 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func summits(completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
+    func summits(page: Int = 1, objectsPerPage: Int = 30, completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
         
-        let URI = "/api/v1/summits"
+        let URI = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
         
         let http = self.createHTTP(.ServiceAccount)
         
