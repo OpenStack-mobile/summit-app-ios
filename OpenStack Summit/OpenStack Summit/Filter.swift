@@ -377,7 +377,7 @@ final class FilterManager {
         self.filter.value.updateSections()
     }
     
-    private func currentSummitChanged(summit: Identifier) {
+    private func currentSummitChanged(summit: Identifier, oldValue: Identifier) {
         
         self.filter.value.updateSections()
     }

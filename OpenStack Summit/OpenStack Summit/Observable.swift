@@ -16,7 +16,7 @@ public final class Observable<Value: Equatable> {
             
             if value != oldValue {
                 
-                observers.forEach { $0.callback(value) }
+                observers.forEach { $0.callback(value, oldValue) }
             }
         }
     }
@@ -36,7 +36,7 @@ public final class Observable<Value: Equatable> {
     
     // MARK: - Methods
     
-    public func observe(observer: (Value) -> ()) -> Int {
+    public func observe(observer: (new: Value, old: Value) -> ()) -> Int {
         
         let identifier = nextID
         
@@ -72,9 +72,9 @@ private struct Observer<Value> {
     
     let identifier: Int
     
-    let callback: (Value) -> ()
+    let callback: (Value, Value) -> ()
     
-    init(identifier: Int, callback: (Value) -> ()) {
+    init(identifier: Int, callback: (Value, Value) -> ()) {
         
         self.identifier = identifier
         self.callback = callback
