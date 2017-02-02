@@ -13,6 +13,10 @@ import KTCenterFlowLayout
 
 final class MyProfileViewController: RevealTabStripViewController {
     
+    // MARK: - Properties
+    
+    override var forwardChildBarButtonItems: Bool { return true }
+    
     // MARK: - Loading
     
     override func viewDidLoad() {

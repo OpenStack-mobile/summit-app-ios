@@ -21,7 +21,7 @@ extension DataUpdatePoller {
                 
                 poller.summit = SummitManager.shared.summit.value
                 
-                SummitManager.shared.summit.observe { poller.summit = $0 }
+                SummitManager.shared.summit.observe { poller.summit = $0.0 }
                 
                 return poller
             }()

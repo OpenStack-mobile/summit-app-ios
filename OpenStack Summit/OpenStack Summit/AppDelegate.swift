@@ -79,7 +79,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Setup Notification Manager
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
         PushNotificationManager.shared.setupNotifications(application)
-        PushNotificationManager.shared.startObservingTeams()
+        PushNotificationManager.shared.reloadSubscriptions()
         
         // setup FireBase
         FIRApp.configure()

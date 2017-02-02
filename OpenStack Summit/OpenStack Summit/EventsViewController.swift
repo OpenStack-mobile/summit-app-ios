@@ -115,7 +115,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
     
     // MARK: - Private Methods
     
-    private func filterChanged(filter: ScheduleFilter) {
+    private func filterChanged(filter: ScheduleFilter, oldValue: ScheduleFilter) {
         
         if self.navigationController?.topViewController === self {
             

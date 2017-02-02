@@ -55,7 +55,7 @@ public extension NSFetchedResultsController {
         
         fetchRequest.sortDescriptors = sortDescriptors
         
-        self.init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        self.init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
         
         self.delegate = delegate
     }

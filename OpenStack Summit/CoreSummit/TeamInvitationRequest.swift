@@ -143,7 +143,7 @@ public struct ListTeamInvitations {
                 filterString = ""
             }
             
-            let uri = "/api/v1/members/me/team-invitations\(filterString)?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter"
+            let uri = "/api/v1/members/me/team-invitations\(filterString)?page=\(page)&per_page=\(perPage)&expand=team,invitee,inviter,groups"
             
             return serverURL + uri
         }
