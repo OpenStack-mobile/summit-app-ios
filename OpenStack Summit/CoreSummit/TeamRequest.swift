@@ -183,7 +183,7 @@ public extension Store {
         var queryItems = [NSURLQueryItem]()
         queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
         queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
-        queryItems.append(NSURLQueryItem(name: "expand", value: "owner,members,member"))
+        queryItems.append(NSURLQueryItem(name: "expand", value: "owner,members,member,groups"))
         urlComponents.queryItems = queryItems
         
         let url = urlComponents.URL!.absoluteString!
