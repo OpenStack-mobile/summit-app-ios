@@ -137,7 +137,9 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         self.showViewController(revealViewController, sender: sender)
         
-        completion?()
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        
+        dispatch_after(delayTime, dispatch_get_main_queue()) { completion?() }
     }
     
     private func loadSummits() {
