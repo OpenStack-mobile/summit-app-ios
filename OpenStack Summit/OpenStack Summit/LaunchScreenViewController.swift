@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class LaunchScreenViewController: UIViewController {
+final class LaunchScreenViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol {
     
     // MARK: - IB Outlets
     
@@ -56,9 +56,10 @@ final class LaunchScreenViewController: UIViewController {
     
     @IBAction func login(sender: UIButton) {
         
-        showRevealController(sender)
-        
-        AppDelegate.shared.menuViewController.login(sender)
+        showRevealController(sender) {
+            
+            AppDelegate.shared.menuViewController.login(sender)
+        }
     }
     
     @IBAction func continueAsGuest(sender: UIButton) {
@@ -70,8 +71,9 @@ final class LaunchScreenViewController: UIViewController {
     
     private func configureView() {
         
-        self.loginButton.hidden = Store.shared.isLoggedIn
         self.guestButton.hidden = Store.shared.isLoggedIn
+        self.loginButton.hidden = Store.shared.isLoggedIn
+        self.loginButton.enabled = SummitManager.shared.summit.value > 0
         
         self.summitView.hidden = self.summit == nil
         self.activityIndicatorView.hidden = self.summit != nil
@@ -98,12 +100,44 @@ final class LaunchScreenViewController: UIViewController {
         }
     }
     
-    @inline(__always)
-    private func showRevealController(sender: AnyObject? = nil) {
+    private func showRevealController(sender: AnyObject? = nil, completion: (() -> ())? = nil) {
+        
+        // load summit
+        if isDataLoaded == false {
+            
+            let summit = SummitManager.shared.summit.value
+            
+            self.showActivityIndicator()
+            
+            Store.shared.summit(summit) { [weak self] (response) in
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    
+                    guard let controller = self else { return }
+                    
+                    controller.hideActivityIndicator()
+                    
+                    switch response {
+                        
+                    case let .Error(error):
+                        
+                        controller.showErrorMessage(error)
+                        
+                    case .Value:
+                        
+                        controller.showRevealController(sender, completion: completion)
+                    }
+                }
+            }
+            
+            return
+        }
         
         let revealViewController = AppDelegate.shared.revealViewController
         
         self.showViewController(revealViewController, sender: sender)
+        
+        completion?()
     }
     
     private func loadSummits() {
@@ -129,6 +163,11 @@ final class LaunchScreenViewController: UIViewController {
                         else { fatalError("No summits") }
                     
                     controller.summit = latestSummit
+                    
+                    if SummitManager.shared.summit.value == 0 {
+                        
+                        SummitManager.shared.summit.value = latestSummit.identifier
+                    }
                     
                     controller.configureView()
                 }

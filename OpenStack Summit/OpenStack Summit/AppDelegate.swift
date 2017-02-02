@@ -93,9 +93,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                                                          name: kFIRInstanceIDTokenRefreshNotification,
                                                          object: nil)
         
-        // hardcode summit
-        SummitManager.shared.summit.value = 7
-        
         connectToFcm()
         
         return true
