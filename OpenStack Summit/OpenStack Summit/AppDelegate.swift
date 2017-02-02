@@ -67,9 +67,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // configure global appearance
         SetAppearance()
         
-        // setup root VC
-        window?.rootViewController = R.storyboard.main.launchScreenViewController()!
-        
         // Core Spotlight
         if #available(iOS 9.0, *) {
             
@@ -272,9 +269,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         return false
     }
     
-    // MARK: - Private Methods
+    // MARK: - Methods
     
-    func connectToFcm() {
+    private func connectToFcm() {
         // Won't connect since there is no token
         guard FIRInstanceID.instanceID().token() != nil else {
             return;
