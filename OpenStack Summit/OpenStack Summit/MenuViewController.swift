@@ -80,7 +80,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     // MARK: - Loading
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+        return .LightContent
     }
     
     deinit {

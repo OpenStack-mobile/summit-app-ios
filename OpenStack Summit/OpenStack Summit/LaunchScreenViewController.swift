@@ -52,6 +52,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     // MARK: - Actions
     
     @IBAction func login(sender: UIButton) {
