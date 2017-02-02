@@ -566,6 +566,9 @@
 		6EBC49091E1398F10077806B /* ListMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC49061E1398F10077806B /* ListMembersRequest.swift */; };
 		6EBCB4891DDE10B800727130 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
+		6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
@@ -1149,6 +1152,7 @@
 		6EBC49021E1394FE0077806B /* TeamMessageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMessageJSON.swift; sourceTree = "<group>"; };
 		6EBC49061E1398F10077806B /* ListMembersRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMembersRequest.swift; sourceTree = "<group>"; };
 		6EBE00341D7CB6870091DDEB /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		6EC151B51E43BBEC00416E5D /* AllSummits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllSummits.json; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
@@ -1519,6 +1523,7 @@
 		6E10A5151D106741008CBD0C /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				6EC151B51E43BBEC00416E5D /* AllSummits.json */,
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
 				6E570A301D676A3800189992 /* DataUpdates2.json */,
 				6E08F3C61D6CC43500E3006B /* DataUpdates3.json */,
@@ -2486,6 +2491,7 @@
 			files = (
 				6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */,
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
+				6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2573,6 +2579,7 @@
 			files = (
 				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
+				6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2598,6 +2605,7 @@
 			files = (
 				6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */,
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
+				6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,

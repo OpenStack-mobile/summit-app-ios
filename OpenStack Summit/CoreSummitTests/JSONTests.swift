@@ -40,6 +40,16 @@ final class JSONTests: XCTestCase {
         }
     }
     
+    func testAllSummits() {
+        
+        let testJSON = loadJSON("AllSummits")
+        
+        guard let reponse = SummitsResponse(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(reponse.page.items.isEmpty == false, "No summits parsed")
+    }
+    
     func testDataUpdates1() {
         
         let testJSON = loadJSON("DataUpdates1")
