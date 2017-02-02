@@ -15,7 +15,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yaV-JP-cpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="aED-a0-oD6" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="28o-9F-Sa0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="28o-9F-Sa0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hje-NR-jtt">
-                                        <rect key="frame" x="57" y="40.5" width="262" height="120"/>
+                                        <rect key="frame" x="57" y="40" width="262" height="120"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -55,7 +55,47 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nU2-eI-CBz">
                                 <rect key="frame" x="0.0" y="200" width="375" height="329"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="frF-zg-TjI">
+                                        <rect key="frame" x="169" y="146" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jq3-r8-xIB">
+                                        <rect key="frame" x="0.0" y="122" width="375" height="86"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columbia, SC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8S-77-hZ6">
+                                                <rect key="frame" x="20" y="37" width="335" height="41"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 24 - 25, 1995" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYL-yB-6Eb">
+                                                <rect key="frame" x="20" y="8" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="hYL-yB-6Eb" firstAttribute="top" secondItem="Jq3-r8-xIB" secondAttribute="top" constant="8" id="0pK-ZF-tpY"/>
+                                            <constraint firstAttribute="bottom" secondItem="C8S-77-hZ6" secondAttribute="bottom" constant="8" id="4Cc-hd-t8k"/>
+                                            <constraint firstAttribute="trailing" secondItem="C8S-77-hZ6" secondAttribute="trailing" constant="20" id="Q7v-fe-c2R"/>
+                                            <constraint firstItem="C8S-77-hZ6" firstAttribute="leading" secondItem="Jq3-r8-xIB" secondAttribute="leading" constant="20" id="SB6-Ms-Lbf"/>
+                                            <constraint firstAttribute="trailing" secondItem="hYL-yB-6Eb" secondAttribute="trailing" constant="20" id="SX2-jG-fen"/>
+                                            <constraint firstItem="C8S-77-hZ6" firstAttribute="top" secondItem="hYL-yB-6Eb" secondAttribute="bottom" constant="8" id="aGM-D6-wIW"/>
+                                            <constraint firstItem="hYL-yB-6Eb" firstAttribute="leading" secondItem="Jq3-r8-xIB" secondAttribute="leading" constant="20" id="oLH-x3-7e5"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Jq3-r8-xIB" secondAttribute="trailing" id="0h6-Os-Kjm"/>
+                                    <constraint firstItem="Jq3-r8-xIB" firstAttribute="centerY" secondItem="nU2-eI-CBz" secondAttribute="centerY" id="4Zm-oB-8oU"/>
+                                    <constraint firstItem="frF-zg-TjI" firstAttribute="centerY" secondItem="nU2-eI-CBz" secondAttribute="centerY" id="Bcm-s2-E3x"/>
+                                    <constraint firstItem="frF-zg-TjI" firstAttribute="centerX" secondItem="nU2-eI-CBz" secondAttribute="centerX" id="ZCZ-Hw-MpP"/>
+                                    <constraint firstItem="Jq3-r8-xIB" firstAttribute="leading" secondItem="nU2-eI-CBz" secondAttribute="leading" id="qAL-oa-k5d"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDc-Q1-oct">
                                 <rect key="frame" x="0.0" y="529" width="375" height="138"/>
@@ -131,13 +171,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="Meu-Q5-hfb"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="frF-zg-TjI" id="CLz-7Z-Lc5"/>
                         <outlet property="guestButton" destination="GeV-KC-TN4" id="hj6-lp-cAe"/>
                         <outlet property="loginButton" destination="Ge6-hl-sol" id="ZTd-ev-eKb"/>
+                        <outlet property="summitDateLabel" destination="hYL-yB-6Eb" id="cDh-xj-k5u"/>
+                        <outlet property="summitNameLabel" destination="C8S-77-hZ6" id="w1P-ha-HHD"/>
+                        <outlet property="summitView" destination="Jq3-r8-xIB" id="kMy-HR-QTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wlu-QN-bFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920.80000000000007" y="385.45727136431788"/>
+            <point key="canvasLocation" x="920.79999999999995" y="385.45727136431788"/>
         </scene>
     </scenes>
     <resources>

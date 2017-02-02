@@ -18,13 +18,24 @@ final class LaunchScreenViewController: UIViewController {
     
     @IBOutlet weak var guestButton: UIButton!
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    @IBOutlet weak var summitView: UIView!
+    
+    @IBOutlet weak var summitDateLabel: UILabel!
+    
+    @IBOutlet weak var summitNameLabel: UILabel!
+    
+    // MARK: - Properties
+    
+    private var summit: SummitsResponse.Summit?
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loginButton.hidden = Store.shared.isLoggedIn
-        self.guestButton.hidden = Store.shared.isLoggedIn
+        self.configureView()
         
         if Store.shared.isLoggedIn {
             
@@ -34,6 +45,10 @@ final class LaunchScreenViewController: UIViewController {
                 
                 self?.showRevealController()
             }
+            
+        } else {
+            
+            self.loadSummits()
         }
     }
     
@@ -53,11 +68,71 @@ final class LaunchScreenViewController: UIViewController {
     
     // MARK: - Private Methods
     
+    private func configureView() {
+        
+        self.loginButton.hidden = Store.shared.isLoggedIn
+        self.guestButton.hidden = Store.shared.isLoggedIn
+        
+        self.summitView.hidden = self.summit == nil
+        self.activityIndicatorView.hidden = self.summit != nil
+        
+        if let summit = self.summit {
+            
+            self.activityIndicatorView.stopAnimating()
+            
+            self.summitNameLabel.text = summit.name
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+            dateFormatter.dateFormat = "MMMM dd-"
+            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+            
+            dateFormatter.dateFormat = "dd, yyyy"
+            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+            
+            self.summitDateLabel.text = stringDateFrom + stringDateTo
+            
+        } else {
+            
+            self.activityIndicatorView.startAnimating()
+        }
+    }
+    
     @inline(__always)
     private func showRevealController(sender: AnyObject? = nil) {
         
         let revealViewController = AppDelegate.shared.revealViewController
         
         self.showViewController(revealViewController, sender: sender)
+    }
+    
+    private func loadSummits() {
+        
+        Store.shared.summits { [weak self] (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                guard let controller = self else { return }
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    print("Error getting summits: \(error)")
+                    
+                    // try again
+                    controller.loadSummits()
+                    
+                case let .Value(page):
+                    
+                    guard let latestSummit = page.items.last
+                        else { fatalError("No summits") }
+                    
+                    controller.summit = latestSummit
+                    
+                    controller.configureView()
+                }
+            }
+        }
     }
 }
