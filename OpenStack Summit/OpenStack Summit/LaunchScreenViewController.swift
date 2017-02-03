@@ -104,7 +104,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    private func showRevealController(sender: AnyObject? = nil, completion: (() -> ())? = nil) {
+    func showRevealController(sender: AnyObject? = nil, completion: (() -> ())? = nil) {
         
         // load summit
         if isDataLoaded == false {

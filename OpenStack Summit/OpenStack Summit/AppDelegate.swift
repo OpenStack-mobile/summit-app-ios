@@ -32,6 +32,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.eventsViewController)
     
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
+    
+    lazy var launchScreenViewController: LaunchScreenViewController = (self.window!.rootViewController as! UINavigationController).viewControllers.first as! LaunchScreenViewController
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -214,6 +216,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         
+        /// force view load
+        let _ = self.revealViewController.view
+        let _ = self.menuViewController.view
+        let _ = self.navigationController.view
+        
+        if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController {
+            
+            self.launchScreenViewController.showRevealController() { self.application(application, continueUserActivity: userActivity, restorationHandler: restorationHandler) }
+            return true
+        }
+        
         print("Continue activity \(userActivity.activityType)")
         
         if #available(iOS 9.0, *) {
@@ -306,10 +319,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // find in cache
         guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
             else { return false }
-        
-        /// force view load
-        let _ = self.menuViewController.view
-        let _ = self.navigationController.view
         
         switch data {
             
