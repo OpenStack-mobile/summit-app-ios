@@ -29,9 +29,7 @@ extension Team: JSONDecodable {
             let ownerJSON = JSONObject[JSONKey.owner.rawValue],
             let owner = Member(JSONValue: ownerJSON),
             let membersJSONArray = JSONObject[JSONKey.members.rawValue]?.arrayValue,
-            let members = TeamMember.fromJSON(membersJSONArray),
-            let invitationsJSONArray = JSONObject[JSONKey.invitations.rawValue]?.arrayValue,
-            let invitations = TeamInvitation.fromJSON(invitationsJSONArray)
+            let members = TeamMember.fromJSON(membersJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -40,7 +38,6 @@ extension Team: JSONDecodable {
         self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
         self.owner = owner
         self.members = Set(members)
-        self.invitations = Set(invitations)
         
         // optional
         if let encodedDescriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
@@ -52,5 +49,18 @@ extension Team: JSONDecodable {
             
             self.descriptionText = nil
         }
+        
+        if let invitationsJSONArray = JSONObject[JSONKey.invitations.rawValue]?.arrayValue {
+            
+            guard let invitations = TeamInvitation.fromJSON(invitationsJSONArray)
+                else { return nil }
+            
+            self.invitations = Set(invitations)
+            
+        } else {
+            
+            self.invitations = []
+        }
+        
     }
 }
