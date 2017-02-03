@@ -11,7 +11,7 @@ import XLPagerTabStrip
 import Haneke
 import CoreSummit
 
-final class MemberProfileDetailViewController: UIViewController, IndicatorInfoProvider {
+final class MemberProfileDetailViewController: UIViewController, IndicatorInfoProvider, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
@@ -38,6 +38,27 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
     // MARK: - Properties
     
     var profile: MemberProfileIdentifier = .currentUser
+    
+    var contextMenu: ContextMenu {
+        
+        var items = [AnyObject]()
+        
+        items.append(self.name)
+        
+        if let biographyText = self.bioTextView.attributedText {
+            
+            items.append(biographyText)
+        }
+        
+        items.append(self.pictureImageView.image!)
+        
+        if let url = self.userActivity?.webpageURL {
+            
+            items.append(url)
+        }
+                
+        return ContextMenu(actions: [], shareItems: items)
+    }
     
     var biographyHTML: String = "" {
         
@@ -207,6 +228,12 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
     
     // MARK: - Loading
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addContextMenuBarButtonItem()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -224,21 +251,10 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
     
     // MARK: - Methods
     
-    /* FIXME: Not implemented in legacy codebase
-    func showProfile(profile: MemberProfile) {
-        
-    }
-    
-    func didFinishFriendshipRequest() {
-        
-    }
-    
-    func handleError(error: NSError) {
-        
-    }*/
-    
     /// Fetches the data from cache. 
     private func loadData() {
+        
+        self.userActivity = nil
         
         switch profile {
             
@@ -270,7 +286,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 
                 let speaker = Speaker(managedObject: speakerManagedObject)
                 
-                let summit = Summit(managedObject: speakerManagedObject.summits.first!)
+                let summit = Summit(managedObject: self.currentSummit!)
                 
                 updateUI(.Value(speaker))
                 
@@ -293,8 +309,6 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
         case let .member(identifier):
             
             if let member = try! Member.find(identifier, context: Store.shared.managedObjectContext) {
-                
-                self.userActivity = nil
                 
                 updateUI(.Value(member))
                 

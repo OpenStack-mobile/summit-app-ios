@@ -32,7 +32,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @IBOutlet weak var peopleButton: UIButton!
     @IBOutlet weak var myProfileButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
-    @IBOutlet weak var teamsButton: UIButton!
+    @IBOutlet weak var inboxButton: UIButton!
     
     @IBOutlet weak var searchTextView: UITextField!
     
@@ -80,7 +80,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     // MARK: - Loading
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+        return .LightContent
     }
     
     deinit {
@@ -142,9 +142,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             showAbout()
             item = .About
             
-        case teamsButton:
-            showTeams()
-            item = .Teams
+        case inboxButton:
+            showInbox()
+            item = .Inbox
             
         default: fatalError("Invalid sender \(sender)")
         }
@@ -156,7 +156,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         if (hasAccess(to: .Login)) {
             login()
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 self.hideActivityIndicator()
             }
@@ -172,7 +172,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         let currentMemberRole = Store.shared.memberRole
         
         switch (menuItem) {
-        case .MyProfile, .Teams:
+        case .MyProfile:
             return currentMemberRole != .anonymous
         case .Login:
             return currentMemberRole == .anonymous
@@ -188,7 +188,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.alpha = 0.5
         myProfileButton.alpha = 0.5
         aboutButton.alpha = 0.5
-        teamsButton.alpha = 0.5
+        inboxButton.alpha = 0.5
     }
     
     private func highlight(item: MenuItem) {
@@ -206,8 +206,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             myProfileButton.alpha = 1
         case .About:
             aboutButton.alpha = 1
-        case .Teams:
-            teamsButton.alpha = 1
+        case .Inbox:
+            inboxButton.alpha = 1
             
         // not applicable
         case .Login: break
@@ -227,7 +227,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         peopleButton.setTitle("SPEAKERS", forState: .Normal)
         
         myProfileButton.hidden = hasAccess(to: .MyProfile) == false
-        teamsButton.hidden = hasAccess(to: .Teams) == false
     }
     
     @inline(__always)
@@ -296,11 +295,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         show(aboutViewController)
     }
     
-    func showTeams() {
+    func showInbox() {
         
-        highlight(.Teams)
+        highlight(.Inbox)
         
-        let teamsViewController = R.storyboard.teams.initialViewController()!
+        let teamsViewController = InboxViewController()
         
         show(teamsViewController)
     }
@@ -490,6 +489,6 @@ enum MenuItem {
     case Venues
     case People
     case About
-    case Teams
+    case Inbox
     case MyProfile
 }

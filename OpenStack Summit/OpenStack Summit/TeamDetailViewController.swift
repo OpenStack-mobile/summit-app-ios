@@ -341,6 +341,14 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             showViewController(memberProfileDetailVC, sender: self)
             
+        case let .invitation(invitation):
+            
+            let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
+            
+            memberProfileDetailVC.profile = .member(invitation.invitee.identifier)
+            
+            showViewController(memberProfileDetailVC, sender: self)
+            
         case .delete:
             
             showActivityIndicator()

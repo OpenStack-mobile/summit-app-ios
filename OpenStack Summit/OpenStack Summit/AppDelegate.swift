@@ -32,6 +32,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.eventsViewController)
     
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
+    
+    lazy var launchScreenViewController: LaunchScreenViewController = (self.window!.rootViewController as! UINavigationController).viewControllers.first as! LaunchScreenViewController
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -67,9 +69,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // configure global appearance
         SetAppearance()
         
-        // setup root VC
-        window?.rootViewController = revealViewController
-        
         // Core Spotlight
         if #available(iOS 9.0, *) {
             
@@ -82,7 +81,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Setup Notification Manager
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
         PushNotificationManager.shared.setupNotifications(application)
-        PushNotificationManager.shared.startObservingTeams()
+        PushNotificationManager.shared.reloadSubscriptions()
         
         // setup FireBase
         FIRApp.configure()
@@ -95,9 +94,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                                                          selector: #selector(self.tokenRefreshNotification),
                                                          name: kFIRInstanceIDTokenRefreshNotification,
                                                          object: nil)
-        
-        // hardcode summit
-        SummitManager.shared.summit.value = 7
         
         connectToFcm()
         
@@ -220,6 +216,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         
+        /// force view load
+        let _ = self.revealViewController.view
+        let _ = self.menuViewController.view
+        let _ = self.navigationController.view
+        
+        if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController
+            && self.launchScreenViewController.willTransition == false {
+            
+            self.launchScreenViewController.showRevealController() { self.application(application, continueUserActivity: userActivity, restorationHandler: restorationHandler) }
+            return true
+        }
+        
         print("Continue activity \(userActivity.activityType)")
         
         if #available(iOS 9.0, *) {
@@ -272,9 +280,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         return false
     }
     
-    // MARK: - Private Methods
+    // MARK: - Methods
     
-    func connectToFcm() {
+    private func connectToFcm() {
         // Won't connect since there is no token
         guard FIRInstanceID.instanceID().token() != nil else {
             return;
@@ -312,10 +320,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // find in cache
         guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
             else { return false }
-        
-        /// force view load
-        let _ = self.menuViewController.view
-        let _ = self.navigationController.view
         
         switch data {
             

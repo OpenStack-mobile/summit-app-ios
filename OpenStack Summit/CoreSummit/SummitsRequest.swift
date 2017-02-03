@@ -12,9 +12,9 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func summits(completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
+    func summits(page: Int = 1, objectsPerPage: Int = 30, completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
         
-        let URI = "/api/v1/summits"
+        let URI = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
         
         let http = self.createHTTP(.ServiceAccount)
         
@@ -61,7 +61,7 @@ public extension SummitsResponse {
         
         public let name: String
         
-        //public let timeZone: String
+        public let timeZone: TimeZone
         
         public let start: Date
         
@@ -76,8 +76,8 @@ public extension SummitsResponse {
                 let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
                 let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
                 let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-                //let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
-                //let timeZone = TimeZone(JSONValue: timeZoneJSON),
+                let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
+                let timeZone = TimeZone(JSONValue: timeZoneJSON),
                 let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool
                 else { return nil }
             
@@ -85,7 +85,7 @@ public extension SummitsResponse {
             self.name = name
             self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
             self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
-            //self.timeZone = timeZone.name
+            self.timeZone = timeZone
             self.active = active
         }
     }
@@ -95,7 +95,7 @@ public func == (lhs: SummitsResponse.Summit, rhs: SummitsResponse.Summit) -> Boo
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
-        //&& lhs.timeZone == rhs.timeZone
+        && lhs.timeZone == rhs.timeZone
         && lhs.start == rhs.start
         && lhs.end == rhs.end
         && lhs.active == rhs.active

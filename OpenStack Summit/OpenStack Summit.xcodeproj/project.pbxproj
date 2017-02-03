@@ -331,6 +331,8 @@
 		6E2D9FFA1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
 		6E2D9FFB1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
 		6E2D9FFC1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
+		6E2F49B21E4274E8001083AD /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */; };
+		6E2F49B41E427829001083AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2F49B31E427829001083AD /* Main.storyboard */; };
 		6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C171D4123AE005132DA /* VenueListViewController.swift */; };
 		6E313C1B1D4127C2005132DA /* VenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */; };
 		6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */; };
@@ -564,6 +566,9 @@
 		6EBC49091E1398F10077806B /* ListMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC49061E1398F10077806B /* ListMembersRequest.swift */; };
 		6EBCB4891DDE10B800727130 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
+		6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
@@ -613,6 +618,16 @@
 		6EEBAEA71D8CD7A30067B228 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
 		6EEBAEA81D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
 		6EEBAEA91D8CD7A40067B228 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
+		6EEED0291E3A48AF00795B3D /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED0281E3A48AF00795B3D /* InboxViewController.swift */; };
+		6EEED02B1E3A494400795B3D /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */; };
+		6EEED02D1E3A4DAD00795B3D /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EEED02C1E3A4DAD00795B3D /* Notifications.storyboard */; };
+		6EEED0321E3A900B00795B3D /* ContextMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED0311E3A900B00795B3D /* ContextMenuViewController.swift */; };
+		6EEED0391E3BB9FA00795B3D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED0381E3BB9FA00795B3D /* Notification.swift */; };
+		6EEED03A1E3BB9FA00795B3D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED0381E3BB9FA00795B3D /* Notification.swift */; };
+		6EEED03B1E3BB9FA00795B3D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED0381E3BB9FA00795B3D /* Notification.swift */; };
+		6EEED03D1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */; };
+		6EEED03E1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */; };
+		6EEED03F1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */; };
 		6EEEEBFA1D7945DB00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
 		6EEEEBFD1D7947F800965631 /* VenueDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */; };
@@ -999,6 +1014,8 @@
 		6E2D9FF11DC9CC820015C588 /* MemberManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberManagedObject.swift; sourceTree = "<group>"; };
 		6E2D9FF51DC9D2FE0015C588 /* AttendeeManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeManagedObject.swift; sourceTree = "<group>"; };
 		6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackManagedObject.swift; sourceTree = "<group>"; };
+		6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		6E2F49B31E427829001083AD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6E313C171D4123AE005132DA /* VenueListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListViewController.swift; sourceTree = "<group>"; };
 		6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1145,6 +1162,7 @@
 		6EBC49021E1394FE0077806B /* TeamMessageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMessageJSON.swift; sourceTree = "<group>"; };
 		6EBC49061E1398F10077806B /* ListMembersRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMembersRequest.swift; sourceTree = "<group>"; };
 		6EBE00341D7CB6870091DDEB /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		6EC151B51E43BBEC00416E5D /* AllSummits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllSummits.json; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
@@ -1181,7 +1199,13 @@
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DataUpdates7.json; sourceTree = "<group>"; };
 		6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates4.json; sourceTree = "<group>"; };
+		6EEED0281E3A48AF00795B3D /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		6EEED02C1E3A4DAD00795B3D /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		6EEED0301E3A60E900795B3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "GoogleServices/Beta/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		6EEED0311E3A900B00795B3D /* ContextMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextMenuViewController.swift; sourceTree = "<group>"; };
+		6EEED0381E3BB9FA00795B3D /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManagedObject.swift; sourceTree = "<group>"; };
 		6EEEEBF81D7945D200965631 /* CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
 		6EEEEBFC1D7947F800965631 /* VenueDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
@@ -1432,6 +1456,7 @@
 				6E2D18531E29417F0095508A /* PushNotificationManager.swift */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */,
+				6E2F49B31E427829001083AD /* Main.storyboard */,
 				6EFC99C01D2198DF009FD0DA /* Menu.storyboard */,
 				6EB7525B1D187DB900BC294D /* Member.storyboard */,
 				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
@@ -1443,6 +1468,7 @@
 				6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */,
 				6E9B22D71D40171800D25271 /* Venue.storyboard */,
 				6E8D109C1DF8957100A0BBDC /* Teams.storyboard */,
+				6EEED02C1E3A4DAD00795B3D /* Notifications.storyboard */,
 				6E5BE4191D76996600E323D3 /* Beta.entitlements */,
 				6ED495811D792F7800749940 /* Release.entitlements */,
 				6ED495821D792F7800749940 /* Debug.entitlements */,
@@ -1514,6 +1540,7 @@
 		6E10A5151D106741008CBD0C /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				6EC151B51E43BBEC00416E5D /* AllSummits.json */,
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
 				6E570A301D676A3800189992 /* DataUpdates2.json */,
 				6E08F3C61D6CC43500E3006B /* DataUpdates3.json */,
@@ -1564,6 +1591,7 @@
 				6E3D4D021E12D45400D542CD /* TeamMessage.swift */,
 				6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */,
 				6EBC48F21E12FA1A0077806B /* Fault.swift */,
+				6EEED0381E3BB9FA00795B3D /* Notification.swift */,
 				6E570A321D67711500189992 /* DataUpdate */,
 			);
 			name = Model;
@@ -1887,6 +1915,7 @@
 				6E2D9FF11DC9CC820015C588 /* MemberManagedObject.swift */,
 				6E2D9FF51DC9D2FE0015C588 /* AttendeeManagedObject.swift */,
 				6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */,
+				6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */,
 				6EA38A721DCB1BBB00B703CE /* DataUpdate */,
 			);
 			name = CoreData;
@@ -1947,6 +1976,7 @@
 				6E00D1AA1D1C49C200278274 /* RevealViewController.swift */,
 				6ED1B11D1D9B0CFF00084B03 /* TextViewController.swift */,
 				6ED1B11F1D9B0F0000084B03 /* SummitActivityHandling.swift */,
+				6EEED0311E3A900B00795B3D /* ContextMenuViewController.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -2052,6 +2082,7 @@
 				6E3E8C291D47E65300A29003 /* Extensions */,
 				6EB699E31D3412B00095474D /* Protocols */,
 				6E49054C1D2ED21300D56870 /* AboutViewController.swift */,
+				6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
@@ -2079,6 +2110,8 @@
 				6EB7525F1D18AF2800BC294D /* MemberProfileDetailViewController.swift */,
 				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
+				6EEED0281E3A48AF00795B3D /* InboxViewController.swift */,
+				6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */,
 				6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */,
 				6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */,
 				6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */,
@@ -2480,6 +2513,7 @@
 			files = (
 				6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */,
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
+				6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2516,6 +2550,7 @@
 				6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */,
 				6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */,
 				6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */,
+				6E2F49B41E427829001083AD /* Main.storyboard in Resources */,
 				6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */,
 				6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */,
 				6E0B2F071D33F3A10058F171 /* Levels.storyboard in Resources */,
@@ -2524,6 +2559,7 @@
 				6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */,
 				6EF147F31D1358B400D5EEF9 /* People.storyboard in Resources */,
 				6EB7525C1D187DB900BC294D /* Member.storyboard in Resources */,
+				6EEED02D1E3A4DAD00795B3D /* Notifications.storyboard in Resources */,
 				6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */,
 				6EF1C84B1D148C3C0060BF45 /* PeopleListView.xib in Resources */,
 				6E2538281D1A14E1003E3400 /* ScheduleTableViewCell.xib in Resources */,
@@ -2566,6 +2602,7 @@
 			files = (
 				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
+				6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2591,6 +2628,7 @@
 			files = (
 				6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */,
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
+				6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2705,8 +2743,6 @@
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/tvOS/SwiftFoundation.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/JSON.framework",
-				"$(SRCROOT)/../Carthage/Build/tvOS/Realm.framework",
-				"$(SRCROOT)/../Carthage/Build/tvOS/RealmSwift.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/tvOS/AeroGearOAuth2.framework",
@@ -2831,6 +2867,7 @@
 				6E6FD17D1D7A1A24003D13D7 /* Staging.swift in Sources */,
 				6EB1FDF11E1AF9F50048045D /* TeamInvitationJSON.swift in Sources */,
 				6E0B5EB71D77C8950005F6CE /* VenueRoom.swift in Sources */,
+				6EEED03F1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */,
 				6E0B5EBA1D77C8950005F6CE /* SummitRequest.swift in Sources */,
 				6E0B5EBB1D77C8950005F6CE /* Session.swift in Sources */,
 				6E0B5EBF1D77C8950005F6CE /* ImageJSON.swift in Sources */,
@@ -2895,6 +2932,7 @@
 				6EF4F8611DC8CE1600D31A99 /* Entity.swift in Sources */,
 				6E2D9FDC1DC9944E0015C588 /* SpeakerManagedObject.swift in Sources */,
 				6EB1FDED1E1AB1A20048045D /* TeamInvitationManagedObject.swift in Sources */,
+				6EEED03B1E3BB9FA00795B3D /* Notification.swift in Sources */,
 				6E0B5EE81D77C8950005F6CE /* Presentation.swift in Sources */,
 				6E0B5EE91D77C8950005F6CE /* SpeakerJSON.swift in Sources */,
 				6E0B5EEA1D77C8950005F6CE /* VenueJSON.swift in Sources */,
@@ -3013,6 +3051,7 @@
 				6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
 				6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */,
 				6E4E24621E24258D00F7F3FB /* SearchMembersViewController.swift in Sources */,
+				6E2F49B21E4274E8001083AD /* LaunchScreenViewController.swift in Sources */,
 				6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
 				6E1399E11DD7A7B900FD1D37 /* DataUpdatePoller.swift in Sources */,
@@ -3034,15 +3073,18 @@
 				6ED1B11E1D9B0CFF00084B03 /* TextViewController.swift in Sources */,
 				6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */,
 				6EDF8C131D247DB300D8DD27 /* EventDetailViewController.swift in Sources */,
+				6EEED0321E3A900B00795B3D /* ContextMenuViewController.swift in Sources */,
 				6EF7AA1C1D74C24800790ED0 /* CoreSpotlight.swift in Sources */,
 				6E41EFE41DCDD8E400733E04 /* Store.swift in Sources */,
 				6E4241A41E1ED6560017E555 /* CreateTeamViewController.swift in Sources */,
 				6EF147EF1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift in Sources */,
 				6EF12C5F1D149B4B00814AD0 /* Define.swift in Sources */,
+				6EEED0291E3A48AF00795B3D /* InboxViewController.swift in Sources */,
 				6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */,
 				6E25384B1D1AF416003E3400 /* Filter.swift in Sources */,
 				6E2D18541E29417F0095508A /* PushNotificationManager.swift in Sources */,
 				6EF12C681D149CA600814AD0 /* R.generated.swift in Sources */,
+				6EEED02B1E3A494400795B3D /* NotificationsViewController.swift in Sources */,
 				6E4241A01E1ED4C90017E555 /* LoadingTableViewCell.swift in Sources */,
 				6E42419D1E1EB3690017E555 /* TeamInvitationsViewController.swift in Sources */,
 				6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */,
@@ -3115,6 +3157,7 @@
 				6E10A56E1D10675D008CBD0C /* NonConfirmedAttendee.swift in Sources */,
 				6E10A5601D10675D008CBD0C /* Event.swift in Sources */,
 				6E10A59E1D10675D008CBD0C /* VenueRoom.swift in Sources */,
+				6EEED0391E3BB9FA00795B3D /* Notification.swift in Sources */,
 				6EEEEBFB1D7945DC00965631 /* CollectionType.swift in Sources */,
 				6EF4F8731DC9233F00D31A99 /* VenueManagedObject.swift in Sources */,
 				6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */,
@@ -3238,6 +3281,7 @@
 				6EA38A7C1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift in Sources */,
 				6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */,
 				6EA38A801DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift in Sources */,
+				6EEED03D1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */,
 				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
 				6EDAF38E1D5BB22700B75B28 /* DataUpdatePoller.swift in Sources */,
 				6E10A5691D10675D008CBD0C /* Location.swift in Sources */,
@@ -3281,6 +3325,7 @@
 				6E2923AE1D7AF8C900D14F0A /* Session.swift in Sources */,
 				6E2D9FEB1DC9B0D40015C588 /* TagManagedObject.swift in Sources */,
 				6E2923B11D7AF8C900D14F0A /* DataUpdateJSON.swift in Sources */,
+				6EEED03E1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */,
 				6EA38A7D1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift in Sources */,
 				6E8D109A1DF87F3B00A0BBDC /* Team.swift in Sources */,
 				6E959E1A1DF61557002981FD /* TeamManagedObject.swift in Sources */,
@@ -3312,6 +3357,7 @@
 				6E2923BF1D7AF8C900D14F0A /* MemberJSON.swift in Sources */,
 				6E2923C01D7AF8C900D14F0A /* EventDataUpdate.swift in Sources */,
 				9DABFF951DA6A75C00B3101A /* VenueFloorJSON.swift in Sources */,
+				6EEED03A1E3BB9FA00795B3D /* Notification.swift in Sources */,
 				6E919B4E1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift in Sources */,
 				6E2923C11D7AF8C900D14F0A /* Speaker.swift in Sources */,
 				6E2923C21D7AF8C900D14F0A /* Summit.swift in Sources */,

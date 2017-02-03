@@ -46,7 +46,7 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
         return activeDates
     }
     
-    override func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
         
         let summit = SummitManager.shared.summit.value
         

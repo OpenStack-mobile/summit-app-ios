@@ -88,11 +88,11 @@ final class AboutViewController: UIViewController, RevealViewController {
     
     private func buildNameDate() -> String {
         
-        guard let summit = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).first
+        guard let summit = self.currentSummit
             else { return "" }
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
+        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
         dateFormatter.dateFormat = "MMMM dd-"
         let stringDateFrom = dateFormatter.stringFromDate(summit.start)
         
