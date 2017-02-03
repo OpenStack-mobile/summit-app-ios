@@ -221,7 +221,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         let _ = self.menuViewController.view
         let _ = self.navigationController.view
         
-        if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController {
+        if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController
+            && self.launchScreenViewController.willTransition == false {
             
             self.launchScreenViewController.showRevealController() { self.application(application, continueUserActivity: userActivity, restorationHandler: restorationHandler) }
             return true

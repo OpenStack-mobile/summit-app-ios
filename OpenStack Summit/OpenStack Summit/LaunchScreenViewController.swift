@@ -28,6 +28,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - Properties
     
+    private(set) var willTransition = false
+    
     private var summit: SummitsResponse.Summit?
     
     // MARK: - Loading
@@ -38,6 +40,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         self.configureView()
         
         if Store.shared.isLoggedIn {
+            
+            self.willTransition = true
             
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             
@@ -106,6 +110,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     func showRevealController(sender: AnyObject? = nil, completion: (() -> ())? = nil) {
         
+        self.willTransition = true
+        
         // load summit
         if isDataLoaded == false {
             
@@ -143,7 +149,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) { completion?() }
+        dispatch_after(delayTime, dispatch_get_main_queue()) { self.willTransition = false; completion?() }
     }
     
     private func loadSummits() {
