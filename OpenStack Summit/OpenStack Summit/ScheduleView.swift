@@ -15,6 +15,19 @@ final class ScheduleView: UIView {
     @IBOutlet weak var dayPicker: AFHorizontalDayPicker!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noEventsLabel: UILabel!
+    @IBOutlet weak var nowButton: UIButton!
+    @IBOutlet private weak var nowWidthConstraint: NSLayoutConstraint!
+    
+    var nowButtonEnabled: Bool = true {
+        
+        didSet {
+            
+            self.nowWidthConstraint.constant = nowButtonEnabled ? 60 : 0
+            self.nowButton.hidden = nowButtonEnabled == false
+            
+            self.needsUpdateConstraints()
+        }
+    }
     
     var activeDates: [NSDate] = []
     

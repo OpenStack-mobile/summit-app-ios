@@ -14,6 +14,8 @@ import CoreData
 
 class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    typealias DateFilter = EventManagedObject.DateFilter
+    
     // MARK: - IBOutlet
     
     @IBOutlet weak var scheduleView: ScheduleView!
@@ -23,6 +25,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     final private(set) var summitTimeZoneOffset: Int = 0
     
     final private(set) var dayEvents = [ScheduleItem]()
+    
+    final private(set) var nowSelected = false
     
     private var addToScheduleInProgress = false
         
@@ -86,6 +90,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         setBlankBackBarButtonItem()
         
         scheduleView.dayPicker.delegate = self
+        scheduleView.nowButton.addTarget(self, action: #selector(nowTapped), forControlEvents: .TouchUpInside)
         
         scheduleView.tableView.registerNib(R.nib.scheduleTableViewCell)
         scheduleView.tableView.delegate = self
@@ -154,6 +159,22 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         }
     }
     
+    @IBAction func nowTapped(sender: UIButton) {
+        
+        let now = NSDate()
+        
+        guard let today = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(now) })
+            else { return }
+        
+        self.selectedDate = today
+        
+        self.didSelectDate = true
+        
+        self.nowSelected = true
+        
+        self.loadData()
+    }
+    
     // MARK: - Methods
     
     func toggleEventList(show: Bool) {} // override
@@ -165,7 +186,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         fatalError("You must override this method")
     }
     
-    func scheduledEvents(from startDate: NSDate, to endDate: NSDate) -> [ScheduleItem] {
+    func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
         
         fatalError("You must override this method")
     }
@@ -228,9 +249,13 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         let summitActive = today.mt_isBetweenDate(self.startDate, andDate: self.endDate)
         
+        self.scheduleView.nowButtonEnabled = summitActive
+        
         // default start day when summit is inactive
         
         let oldSelectedDate = self.selectedDate
+        
+        let oldNowSelected = self.nowSelected
         
         if let defaultStart = summit.defaultStart?.toFoundation(),
             let defaultDay = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(defaultStart) })
@@ -247,6 +272,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
             self.selectedDate = oldSelectedDate
         }
         
+        self.nowSelected = oldNowSelected
+        
         reloadSchedule()
     }
     
@@ -260,27 +287,38 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         
         let oldSchedule = self.dayEvents
         
-        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
+        // fetch new events
         
-        let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-        let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-        
-        let today = NSDate()
-        
-        let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
-        
-        let dailyScheduleStartDate: NSDate
-        
-        if shoudHidePastTalks {
+        if nowSelected {
             
-            dailyScheduleStartDate = startDate.mt_isAfter(today) ? startDate : today
+            self.dayEvents = self.scheduledEvents(.now)
             
         } else {
             
-            dailyScheduleStartDate = startDate
+            let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
+            
+            let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+            let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+            
+            let today = NSDate()
+            
+            let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
+            
+            let dailyScheduleStartDate: NSDate
+            
+            if shoudHidePastTalks {
+                
+                dailyScheduleStartDate = startDate.mt_isAfter(today) ? startDate : today
+                
+            } else {
+                
+                dailyScheduleStartDate = startDate
+            }
+            
+            self.dayEvents = self.scheduledEvents(.interval(start: Date(foundation: dailyScheduleStartDate), end: Date(foundation: endDate)))
         }
-
-        self.dayEvents = self.scheduledEvents(from: dailyScheduleStartDate, to: endDate)
+        
+        // reload table view
         
         if oldSchedule.isEmpty {
             
@@ -397,6 +435,8 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     func horizontalDayPicker(picker: AFHorizontalDayPicker, didSelectDate date: NSDate) {
         
         self.didSelectDate = true
+        
+        self.nowSelected = false
         
         reloadSchedule()
         

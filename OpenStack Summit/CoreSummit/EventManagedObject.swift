@@ -152,8 +152,7 @@ public extension EventManagedObject {
         return try context.managedObjects(self, predicate: predicate, sortDescriptors: self.sortDescriptors)
     }
     
-    static func filter(startDate: NSDate,
-                       endDate: NSDate,
+    static func filter(date: DateFilter,
                        tracks: [Identifier]?,
                        trackGroups: [Identifier]?,
                        tags: [String]?,
@@ -165,9 +164,24 @@ public extension EventManagedObject {
         guard let summit = try SummitManagedObject.find(summit, context: context)
             else { return [] }
         
-        let eventsPredicate = NSPredicate(format: "end >= %@ AND end <= %@ AND summit == %@", startDate, endDate, summit)
+        let summitPredicate = NSPredicate(format: "summit == %@", summit)
         
-        var predicates = [eventsPredicate]
+        let datePredicate: NSPredicate
+        
+        switch date {
+            
+        case .now:
+            
+            let now = NSDate()
+            
+            datePredicate = NSPredicate(format: "start <= %@ AND end >= %@", now, now)
+            
+        case let .interval(start, end):
+            
+            datePredicate = NSPredicate(format: "end >= %@ AND end <= %@", start.toFoundation(), end.toFoundation())
+        }
+        
+        var predicates = [summitPredicate, datePredicate]
         
         if let trackGroups = trackGroups where trackGroups.isEmpty == false {
             
@@ -218,16 +232,9 @@ public extension EventManagedObject {
             predicates.append(predicate)
         }
         
-        let predicate: NSPredicate
-            
-        if predicates.count > 1 {
-            
-           predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-            
-        } else {
-            
-            predicate = predicates[0]
-        }
+        assert(predicates.count > 1)
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
     }
@@ -241,5 +248,16 @@ public extension EventManagedObject {
         let predicate = NSPredicate(format: "(ANY presentation.speakers == %@ OR presentation.moderator == %@) AND (end >= %@ AND end <= %@) AND summit == %@", speaker, speaker, startDate, endDate, summit)
         
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
+    }
+}
+
+// MARK: - Supporting Types
+
+public extension EventManagedObject {
+    
+    public enum DateFilter {
+        
+        case now
+        case interval(start: Date, end: Date)
     }
 }
