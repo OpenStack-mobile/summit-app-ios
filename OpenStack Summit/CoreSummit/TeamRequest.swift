@@ -111,7 +111,7 @@ public extension Store {
     
     func fetch(team identifier: Identifier, completion: (ErrorValue<Team>) -> ()) {
         
-        let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member"
+        let uri = "/api/v1/teams/\(identifier)?expand=owner,members,member,groups"
         
         let url = environment.configuration.serverURL + uri
         
