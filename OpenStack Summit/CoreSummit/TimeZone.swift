@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct TimeZone {
+public struct TimeZone: Equatable {
     
     public var name: String
     
@@ -19,4 +19,16 @@ public struct TimeZone {
     public var comments: String
         
     public var offset: Int
+}
+
+// MARK: - Equatable
+
+public func == (lhs: TimeZone, rhs: TimeZone) -> Bool {
+    
+    return lhs.name == rhs.name
+        && lhs.countryCode == rhs.countryCode
+        && lhs.latitude == rhs.latitude
+        && lhs.longitude == rhs.longitude
+        && lhs.comments == rhs.comments
+        && lhs.offset == rhs.offset
 }

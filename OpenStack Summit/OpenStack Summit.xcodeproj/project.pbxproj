@@ -331,6 +331,8 @@
 		6E2D9FFA1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
 		6E2D9FFB1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
 		6E2D9FFC1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
+		6E2F49B21E4274E8001083AD /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */; };
+		6E2F49B41E427829001083AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2F49B31E427829001083AD /* Main.storyboard */; };
 		6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C171D4123AE005132DA /* VenueListViewController.swift */; };
 		6E313C1B1D4127C2005132DA /* VenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */; };
 		6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */; };
@@ -564,6 +566,9 @@
 		6EBC49091E1398F10077806B /* ListMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC49061E1398F10077806B /* ListMembersRequest.swift */; };
 		6EBCB4891DDE10B800727130 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
+		6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
@@ -1009,6 +1014,8 @@
 		6E2D9FF11DC9CC820015C588 /* MemberManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberManagedObject.swift; sourceTree = "<group>"; };
 		6E2D9FF51DC9D2FE0015C588 /* AttendeeManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeManagedObject.swift; sourceTree = "<group>"; };
 		6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackManagedObject.swift; sourceTree = "<group>"; };
+		6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		6E2F49B31E427829001083AD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6E313C171D4123AE005132DA /* VenueListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListViewController.swift; sourceTree = "<group>"; };
 		6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListTableViewCell.swift; sourceTree = "<group>"; };
 		6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalVenueListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1155,6 +1162,7 @@
 		6EBC49021E1394FE0077806B /* TeamMessageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMessageJSON.swift; sourceTree = "<group>"; };
 		6EBC49061E1398F10077806B /* ListMembersRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMembersRequest.swift; sourceTree = "<group>"; };
 		6EBE00341D7CB6870091DDEB /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		6EC151B51E43BBEC00416E5D /* AllSummits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllSummits.json; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
@@ -1448,6 +1456,7 @@
 				6E2D18531E29417F0095508A /* PushNotificationManager.swift */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
 				6E2538521D1B02C3003E3400 /* LaunchScreen.storyboard */,
+				6E2F49B31E427829001083AD /* Main.storyboard */,
 				6EFC99C01D2198DF009FD0DA /* Menu.storyboard */,
 				6EB7525B1D187DB900BC294D /* Member.storyboard */,
 				6EF147F21D1358B400D5EEF9 /* People.storyboard */,
@@ -1531,6 +1540,7 @@
 		6E10A5151D106741008CBD0C /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				6EC151B51E43BBEC00416E5D /* AllSummits.json */,
 				6E25AD401D5A63F20060E7BA /* DataUpdates1.json */,
 				6E570A301D676A3800189992 /* DataUpdates2.json */,
 				6E08F3C61D6CC43500E3006B /* DataUpdates3.json */,
@@ -2072,6 +2082,7 @@
 				6E3E8C291D47E65300A29003 /* Extensions */,
 				6EB699E31D3412B00095474D /* Protocols */,
 				6E49054C1D2ED21300D56870 /* AboutViewController.swift */,
+				6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
@@ -2502,6 +2513,7 @@
 			files = (
 				6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */,
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
+				6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2538,6 +2550,7 @@
 				6E96BFDC1D26DB2D009524C7 /* Tracks.storyboard in Resources */,
 				6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */,
 				6E2538531D1B02C3003E3400 /* LaunchScreen.storyboard in Resources */,
+				6E2F49B41E427829001083AD /* Main.storyboard in Resources */,
 				6E9B22D81D40171800D25271 /* Venue.storyboard in Resources */,
 				6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */,
 				6E0B2F071D33F3A10058F171 /* Levels.storyboard in Resources */,
@@ -2589,6 +2602,7 @@
 			files = (
 				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
+				6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -2614,6 +2628,7 @@
 			files = (
 				6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */,
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
+				6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
@@ -3036,6 +3051,7 @@
 				6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
 				6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */,
 				6E4E24621E24258D00F7F3FB /* SearchMembersViewController.swift in Sources */,
+				6E2F49B21E4274E8001083AD /* LaunchScreenViewController.swift in Sources */,
 				6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
 				6E1399E11DD7A7B900FD1D37 /* DataUpdatePoller.swift in Sources */,
