@@ -201,7 +201,7 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
             
         case R.segue.teamsViewController.showTeamDetail.identifier:
             
-            guard case let .item(selectedItem) = self.pageController.items[tableView.indexPathForSelectedRow!.row]
+            guard case let .item(selectedItem) = self.pageController.items[tableView.indexPathForCell(sender as! UITableViewCell)!.row]
                 else { fatalError("Invalid row") }
             
             let viewController = segue.destinationViewController as! TeamDetailViewController
