@@ -40,25 +40,37 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         
         let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
         
-        let sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true),
-                               NSSortDescriptor(key: "longitude", ascending: true)]
+        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
         
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sortDescriptors, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        updateUI()
+         updateUI()
     }
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
-        let dataLoaded = mapView.annotations.isEmpty == false
-        
-        if dataLoaded {
+        if isDataLoaded {
             
             self.navigationItem.title = NSLocalizedString("Venues", comment: "")
+            
+            // reload map view if empty but shouldnt be
+            if self.fetchedResultsController.fetchedObjects?.isEmpty == false && self.mapView.annotations.isEmpty {
+                
+                for venue in Venue.from(managedObjects: (self.fetchedResultsController.fetchedObjects as! [VenueManagedObject])) {
+                    
+                    let annotation = VenueAnnotation(venue: venue)!
+                    
+                    mapView.addAnnotation(annotation)
+                }
+            }
             
             showSelectedVenue()
             
@@ -90,11 +102,6 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        
-        let _ = self.view
-    }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         

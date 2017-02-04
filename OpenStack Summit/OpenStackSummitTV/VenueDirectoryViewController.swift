@@ -43,27 +43,35 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
         tableView.layoutMargins.left = 90
         tableView.layoutMargins.right = 20
         
-        updateUI()
-        
         // show map view controller
         performSegueWithIdentifier("showVenueMap", sender: self)
+        
+        // setup fetched results controller
+        
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        
+        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
+        
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, sectionNameKeyPath: "venueType", context: Store.shared.managedObjectContext)
+        
+        try! self.fetchedResultsController.performFetch()
+        
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.updateUI()
     }
     
     // MARK: - Private Methods
     
     private func updateUI() {
         
-        self.title = "Venues"
-        
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
-        
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: summitPredicate, sortDescriptors: VenueManagedObject.sortDescriptors, sectionNameKeyPath: "isInternal", context: Store.shared.managedObjectContext)
-        
-        try! self.fetchedResultsController.performFetch()
-        
-        tableView.reloadData()
+        self.title = self.isDataLoaded ? "Venues" : "Loading..."
     }
     
     private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
@@ -107,11 +115,14 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        let section = Section(rawValue: section)!
+        guard let sectionString = self.fetchedResultsController.sections?[section].name,
+            let locationType = Venue.LocationType(rawValue: sectionString)
+            else { return nil }
         
-        switch section {
-        case .Internal: return nil
+        switch locationType {
         case .External: return "External Venues"
+        case .Internal: return nil
+        case .None: return nil
         }
     }
         
@@ -172,6 +183,8 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         
         self.tableView.endUpdates()
+        
+        self.updateUI()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
@@ -205,6 +218,22 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
         }
     }
     
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
+        switch type {
+            
+        case .Insert:
+            
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            
+        case .Delete:
+            
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            
+        default: break
+        }
+    }
+    
     // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -229,18 +258,5 @@ final class VenueDirectoryViewController: UITableViewController, NSFetchedResult
             
         default: fatalError("Unknown segue: \(segue)")
         }
-    }
-}
-
-
-// MARK: - Supporting Types
-
-private extension VenueDirectoryViewController {
-    
-    enum Section: Int {
-        
-        static let count = 2
-        
-        case Internal, External
     }
 }

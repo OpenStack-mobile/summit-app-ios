@@ -34,13 +34,6 @@ public final class VenueManagedObject: LocationManagedObject {
     @NSManaged public var maps: Set<ImageManagedObject>
     
     @NSManaged public var floors: Set<VenueFloorManagedObject>
-    
-    // Transient Properties
-    
-    @objc public var isInternal: Bool {
-        
-        return locationType == Venue.LocationType.Internal.rawValue
-    }
 }
 
 // MARK: - Encoding
