@@ -81,6 +81,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         self.guestButton.hidden = Store.shared.isLoggedIn
         self.loginButton.hidden = Store.shared.isLoggedIn
+        self.guestButton.enabled = SummitManager.shared.summit.value > 0
         self.loginButton.enabled = SummitManager.shared.summit.value > 0
         
         self.summitView.hidden = self.summit == nil
