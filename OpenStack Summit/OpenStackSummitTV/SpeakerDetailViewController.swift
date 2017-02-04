@@ -52,15 +52,20 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
     
     private func configureController() {
         
-        assert(speaker != nil, "No speaker set")
+        assert(self.speaker != nil, "No speaker set")
         
-        self.entityController = EntityController(identifier: speaker, entity: SpeakerManagedObject.self, context: Store.shared.managedObjectContext)
+        let context = Store.shared.managedObjectContext
+        
+        self.entityController = EntityController(identifier: self.speaker, entity: SpeakerManagedObject.self, context: context)
         
         self.entityController.event.updated = updateUI
         
         eventsPredicate = NSPredicate(format: "ANY presentation.speakers.id == %@", NSNumber(longLong: Int64(self.speaker)))
         
+        guard let speaker = try! Speaker.find(self.speaker, context: context)
+            else { fatalError("Invalid Speaker \(self.speaker)") }
         
+        self.updateUI(speaker)
     }
     
     private func updateUI(speaker: Speaker) {
@@ -83,7 +88,7 @@ final class SpeakerDetailViewController: UIViewController, UITableViewDataSource
             data.append(.irc)
         }
         
-        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self)
+        let eventCount = try! Store.shared.managedObjectContext.count(EventManagedObject.self, predicate: eventsPredicate)
         
         data.append(.sessions(eventCount))
         
