@@ -8,87 +8,32 @@
 
 import Foundation
 import UIKit
-import CoreData
 import CoreSummit
-import Haneke
 
 @objc(OSSTVVideosViewController)
-final class VideosViewController: CollectionViewController {
+final class VideosViewController: UINavigationController {
     
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureView()
+        let storyboard = UIStoryboard(name: "Videos", bundle: nil)
+        let searchResultsController = storyboard.instantiateViewControllerWithIdentifier("VideoSearchResults") as! VideoSearchResultsViewController
+        
+        /*
+         Create a UISearchController, passing the `searchResultsController` to
+         use to display search results.
+         */
+        let searchController = UISearchController(searchResultsController: searchResultsController)
+        searchController.searchResultsUpdater = searchResultsController
+        searchController.searchBar.placeholder = "Search Videos"
+        
+        // Contain the `UISearchController` in a `UISearchContainerViewController`.
+        let searchContainer = UISearchContainerViewController(searchController: searchController)
+        searchContainer.title = "Videos"
+        
+        // Finally contain the `UISearchContainerViewController` in a `UINavigationController`.
+        self.setViewControllers([searchContainer], animated: false)
     }
-    
-    // MARK: - Private Methods
-    
-    private func configureView() {
-        
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
-        
-        let predicate = NSPredicate(format: "event.summit.id == %@", summitID)
-        
-        let sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
-        
-        self.fetchedResultsController = NSFetchedResultsController(Video.self,
-                                                                   delegate: self,
-                                                                   predicate: predicate,
-                                                                   sortDescriptors: sortDescriptors,
-                                                                   sectionNameKeyPath: nil,
-                                                                   context: Store.shared.managedObjectContext)
-        
-        try! self.fetchedResultsController!.performFetch()
-    }
-    
-    private func configure(cell cell: VideoCell, at indexPath: NSIndexPath) {
-        
-        let video = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
-        
-        cell.label.text = video.event.name
-        
-        cell.imageView.image = nil
-        
-        if let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
-            
-            cell.imageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
-                
-                cell.imageView.image = image
-            })
-        }
-    }
-    
-    // MARK: - UICollectionViewDataSource
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VideoCell", forIndexPath: indexPath) as! VideoCell
-        
-        configure(cell: cell, at: indexPath)
-        
-        return cell
-    }
-    
-    // MARK: - UICollectionViewDelegate
-    
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
-        
-        let video = Video(managedObject: managedObject)
-        
-        self.play(video: video)
-    }
-}
-
-// MARK: - Supporting Types
-
-@objc(OSSTVVideoCell)
-final class VideoCell: UICollectionViewCell {
-    
-    @IBOutlet weak var label: UILabel!
-    
-    @IBOutlet weak var imageView: UIImageView!
 }

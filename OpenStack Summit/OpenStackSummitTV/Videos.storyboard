@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="R5h-Uf-VNv">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FKd-S3-AVa">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
@@ -10,9 +10,22 @@
     </dependencies>
     <scenes>
         <!--Videos-->
+        <scene sceneID="lL1-qr-Gc2">
+            <objects>
+                <navigationController storyboardIdentifier="VideosViewController" title="Videos" id="FKd-S3-AVa" customClass="OSSTVVideosViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hCa-NX-lHZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GaU-9f-tih" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-408" y="-1501"/>
+        </scene>
+        <!--Videos-->
         <scene sceneID="Z1f-JO-Uae">
             <objects>
-                <collectionViewController storyboardIdentifier="VideosViewController" title="Videos" id="R5h-Uf-VNv" customClass="OSSTVVideosViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="VideoSearchResults" title="Videos" id="R5h-Uf-VNv" customClass="OSSTVVideoSearchResultsViewController" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Nw3-1I-9a3">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

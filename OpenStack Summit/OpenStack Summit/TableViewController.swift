@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
     
