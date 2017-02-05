@@ -49,6 +49,8 @@ final class VideosViewController: CollectionViewController {
         
         cell.label.text = video.event.name
         
+        cell.imageView.image = nil
+        
         if let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
             
             cell.imageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in

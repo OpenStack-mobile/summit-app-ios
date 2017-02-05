@@ -17,7 +17,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sl-xQ-8Be" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="-1122"/>
+            <point key="canvasLocation" x="-24" y="-1024"/>
         </scene>
         <!--Venues-->
         <scene sceneID="kEb-Mo-Faa">
@@ -27,7 +27,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAp-J1-vkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="-965"/>
+            <point key="canvasLocation" x="-20" y="-901"/>
         </scene>
         <!--Speakers-->
         <scene sceneID="GJa-Pk-Zkf">
@@ -37,7 +37,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v67-Bb-A5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-24" y="-801"/>
+            <point key="canvasLocation" x="-4" y="-778"/>
         </scene>
         <!--Videos-->
         <scene sceneID="Xg3-zC-StZ">
@@ -47,7 +47,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8c-1K-9kx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-43" y="-561"/>
+            <point key="canvasLocation" x="-26" y="-1160"/>
         </scene>
         <!--Summits-->
         <scene sceneID="Tsz-cB-SnQ">
@@ -57,7 +57,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" id="fxZ-Ej-0mJ">
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" id="fxZ-Ej-0mJ">
                                 <rect key="frame" x="0.0" y="40" width="1920" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fxZ-Ej-0mJ" id="CcZ-JY-kOD">
@@ -106,10 +106,10 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="dNH-La-dHF"/>
-                        <segue destination="wTD-oI-ERk" kind="relationship" relationship="viewControllers" id="ykk-Me-Z25"/>
-                        <segue destination="hsv-f5-hCX" kind="relationship" relationship="viewControllers" id="csR-Tw-bOb"/>
-                        <segue destination="1YJ-nr-3ur" kind="relationship" relationship="viewControllers" id="QND-T1-vo9"/>
+                        <segue destination="1YJ-nr-3ur" kind="relationship" relationship="viewControllers" id="X3F-ax-o1u"/>
+                        <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="LA9-nM-Hkl"/>
+                        <segue destination="wTD-oI-ERk" kind="relationship" relationship="viewControllers" id="igP-Uj-khS"/>
+                        <segue destination="hsv-f5-hCX" kind="relationship" relationship="viewControllers" id="tag-5u-ZZB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTo-uj-EgU" userLabel="First Responder" sceneMemberID="firstResponder"/>
