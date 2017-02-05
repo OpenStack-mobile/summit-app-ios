@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="s3j-dI-74u">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="s3j-dI-74u">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Summit-->
@@ -12,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="634" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDayTableViewCell" textLabel="vUq-UX-cwh" style="IBUITableViewCellStyleDefault" id="k22-tV-ey6">
-                                <rect key="frame" x="0.0" y="199" width="634" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDayTableViewCell" textLabel="vUq-UX-cwh" style="IBUITableViewCellStyleDefault" id="k22-tV-ey6">
+                                <rect key="frame" x="0.0" y="40" width="634" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k22-tV-ey6" id="zfG-pP-uYq">
                                     <rect key="frame" x="0.0" y="0.0" width="618" height="66"/>
@@ -23,7 +28,7 @@
                                             <rect key="frame" x="20" y="0.0" width="578" height="66"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -42,14 +47,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chs-e6-PDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3101" y="-1682"/>
+            <point key="canvasLocation" x="5649" y="-3464"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="q4p-BA-5KH">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83c-wh-H2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cFQ-25-7WP" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="inw-yc-hGo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="inw-yc-hGo">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -58,14 +63,13 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2249" y="-1682"/>
+            <point key="canvasLocation" x="2913" y="-3464"/>
         </scene>
         <!--Events-->
         <scene sceneID="imh-Ap-vTp">
             <objects>
                 <splitViewController id="s3j-dI-74u" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="AfY-g6-GCm"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="cFQ-25-7WP" kind="relationship" relationship="masterViewController" id="pwP-uN-rcw"/>
                         <segue destination="hLm-fg-Rde" kind="relationship" relationship="detailViewController" id="U0R-bh-VBr"/>
@@ -73,7 +77,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eng-Rx-7YR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="-1042"/>
+            <point key="canvasLocation" x="-407" y="-1037"/>
         </scene>
         <!--Events-->
         <scene sceneID="Zn6-ki-Ad6">
@@ -83,8 +87,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1285" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" textLabel="FqE-Nw-cNl" style="IBUITableViewCellStyleDefault" id="H9l-FW-rHT">
-                                <rect key="frame" x="0.0" y="199" width="1285" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" textLabel="FqE-Nw-cNl" style="IBUITableViewCellStyleDefault" id="H9l-FW-rHT">
+                                <rect key="frame" x="0.0" y="40" width="1285" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H9l-FW-rHT" id="l26-9t-e3B">
                                     <rect key="frame" x="0.0" y="0.0" width="1269" height="66"/>
@@ -94,7 +98,7 @@
                                             <rect key="frame" x="20" y="0.0" width="1229" height="66"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -113,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IOU-tP-b07" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4155.5" y="-486"/>
+            <point key="canvasLocation" x="4972" y="993"/>
         </scene>
         <!--EventDetail-->
         <scene sceneID="g5F-zO-JSj">
@@ -121,14 +125,14 @@
                 <viewControllerPlaceholder storyboardName="EventDetail" id="cB7-k1-b4g" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJG-Br-p2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5139" y="-486"/>
+            <point key="canvasLocation" x="7726" y="994"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hP7-jw-XQO">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RaB-86-gKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="hLm-fg-Rde" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fi4-fR-1Kc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fi4-fR-1Kc">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -137,9 +141,14 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2567.5" y="-486"/>
+            <point key="canvasLocation" x="2056" y="993"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <nil key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="U0R-bh-VBr"/>
     </inferredMetricsTieBreakers>
