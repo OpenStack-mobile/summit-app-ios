@@ -20,7 +20,7 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
     
     final override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return self.fetchedResultsController.sections?.count ?? 0
+        return self.fetchedResultsController?.sections?.count ?? 0
     }
     
     final override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

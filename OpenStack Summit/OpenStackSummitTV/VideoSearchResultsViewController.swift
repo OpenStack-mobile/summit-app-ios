@@ -40,7 +40,7 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
     
     private func filterChanged() {
         
-        let sortDescriptors = [NSSortDescriptor(key: "event.name", ascending: false)]
+        let sort: [NSSortDescriptor]
         
         var predicates = [NSPredicate]()
         
@@ -50,7 +50,13 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         
         predicates.append(summitPredicate)
         
-        if filterString.isEmpty == false {
+        if filterString.isEmpty {
+            
+           sort = [NSSortDescriptor(key: "event.start", ascending: true)]
+            
+        } else {
+            
+            sort = [NSSortDescriptor(key: "event.name", ascending: true)]
             
             let filterPredicate = NSPredicate(format: "event.name CONTAINS[c] %@", filterString)
             
@@ -71,7 +77,7 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         self.fetchedResultsController = NSFetchedResultsController(Video.self,
                                                                    delegate: self,
                                                                    predicate: predicate,
-                                                                   sortDescriptors: sortDescriptors,
+                                                                   sortDescriptors: sort,
                                                                    sectionNameKeyPath: nil,
                                                                    context: Store.shared.managedObjectContext)
         

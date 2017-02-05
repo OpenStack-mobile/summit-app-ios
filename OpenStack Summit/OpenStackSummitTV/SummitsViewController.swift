@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CoreSummit
-import SwiftSpinner
 
 @objc(OSSTVSummitsViewController)
 final class SummitsViewController: UITableViewController {
@@ -23,6 +22,11 @@ final class SummitsViewController: UITableViewController {
         didSet { didLoadSummits() }
     }
     
+    private(set) var loading = false {
+        
+        didSet { loadingChanged() }
+    }
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -32,6 +36,10 @@ final class SummitsViewController: UITableViewController {
         tableView.estimatedRowHeight = 40
         tableView.layoutMargins.left = 90
         tableView.layoutMargins.right = 90
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.refresh()
     }
@@ -40,7 +48,7 @@ final class SummitsViewController: UITableViewController {
     
     @IBAction func refresh(sender: AnyObject? = nil) {
         
-        self.navigationItem.title = "Loading..."
+        self.loading = true
         
         Store.shared.summits { (response) in
             
@@ -48,7 +56,7 @@ final class SummitsViewController: UITableViewController {
                 
                 guard let controller = self else { return }
                 
-                controller.navigationItem.title = "Summits"
+                controller.loading = false
                 
                 switch response {
                     
@@ -73,16 +81,43 @@ final class SummitsViewController: UITableViewController {
     }
     
     @inline(__always)
+    private func loadingChanged() {
+        
+        self.navigationItem.title = loading ? "Loading..." : "Summits"
+        
+        self.tableView.allowsSelection = loading == false
+    }
+    
+    @inline(__always)
     private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
         
         let summit = self[indexPath]
         
         cell.textLabel?.text = summit.name
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        dateFormatter.dateFormat = "MMMM dd-"
+        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        
+        dateFormatter.dateFormat = "dd, yyyy"
+        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        
+        cell.detailTextLabel?.text = stringDateFrom + stringDateTo
     }
     
     private subscript (indexPath: NSIndexPath) -> Summit {
         
         return self.summits[indexPath.row]
+    }
+    
+    private func select(summit identifier: Identifier) {
+        
+        SummitManager.shared.summit.value = identifier
+        
+        assert(self.currentSummit != nil, "Summit must already be loaded")
+        
+        self.performSegueWithIdentifier(Segue.presentSummit.rawValue, sender: self)
     }
     
     // MARK: - UITableViewDataSource
@@ -112,9 +147,31 @@ final class SummitsViewController: UITableViewController {
         
         let selectedSummit = self[indexPath]
         
-        SummitManager.shared.summit.value = selectedSummit.identifier
-        
-        self.performSegueWithIdentifier(Segue.presentSummit.rawValue, sender: self)
+        if let _ = try! SummitManagedObject.find(selectedSummit.identifier, context: Store.shared.managedObjectContext) {
+            
+            self.select(summit: selectedSummit.identifier)
+            
+        } else {
+            
+            Store.shared.summit(selectedSummit.identifier) { [weak self] (response) in
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    
+                    guard let controller = self else { return }
+                    
+                    switch response {
+                        
+                    case let .Error(error):
+                        
+                        controller.showErrorAlert((error as NSError).localizedDescription)
+                        
+                    case .Value:
+                        
+                        controller.select(summit: selectedSummit.identifier)
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Segue
@@ -125,7 +182,9 @@ final class SummitsViewController: UITableViewController {
         
         switch segueIdentifier {
             
-        case .presentSummit: break
+        case .presentSummit:
+            
+            break
         }
     }
 }

@@ -32,7 +32,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpeakerTableViewCell" rowHeight="150" id="o0N-5b-zJC" customClass="SpeakerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpeakerTableViewCell" rowHeight="150" id="o0N-5b-zJC" customClass="SpeakerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="40" width="1920" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o0N-5b-zJC" id="fGn-XV-VvP">
