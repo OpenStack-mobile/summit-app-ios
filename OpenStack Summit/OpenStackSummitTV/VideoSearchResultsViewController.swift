@@ -135,13 +135,3 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         self.play(video: video)
     }
 }
-
-// MARK: - Supporting Types
-
-@objc(OSSTVVideoCell)
-final class VideoCell: UICollectionViewCell {
-    
-    @IBOutlet weak var label: UILabel!
-    
-    @IBOutlet weak var imageView: UIImageView!
-}

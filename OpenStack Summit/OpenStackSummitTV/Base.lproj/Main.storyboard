@@ -57,7 +57,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" textLabel="UOO-W6-5T4" detailTextLabel="YqW-vz-X8b" style="IBUITableViewCellStyleSubtitle" id="fxZ-Ej-0mJ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" textLabel="UOO-W6-5T4" detailTextLabel="YqW-vz-X8b" style="IBUITableViewCellStyleSubtitle" id="fxZ-Ej-0mJ">
                                 <rect key="frame" x="0.0" y="40" width="1920" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fxZ-Ej-0mJ" id="CcZ-JY-kOD">
