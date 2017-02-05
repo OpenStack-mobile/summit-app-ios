@@ -43,16 +43,11 @@ final class VideosViewController: CollectionViewController {
         try! self.fetchedResultsController!.performFetch()
     }
     
-    private subscript (indexPath: NSIndexPath) -> Video {
-        
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
-        
-        return Video(managedObject: managedObject)
-    }
-    
     private func configure(cell cell: VideoCell, at indexPath: NSIndexPath) {
         
-        let video = self[indexPath]
+        let video = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
+        
+        cell.label.text = video.event.name
         
         if let thumbnailURL = NSURL(youtubeThumbnail: video.youtube) {
             
@@ -73,12 +68,25 @@ final class VideosViewController: CollectionViewController {
         
         return cell
     }
+    
+    // MARK: - UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Video.ManagedObject
+        
+        let video = Video(managedObject: managedObject)
+        
+        self.play(video: video)
+    }
 }
 
 // MARK: - Supporting Types
 
 @objc(OSSTVVideoCell)
 final class VideoCell: UICollectionViewCell {
+    
+    @IBOutlet weak var label: UILabel!
     
     @IBOutlet weak var imageView: UIImageView!
 }

@@ -13,7 +13,7 @@ import XCDYouTubeKit
 
 extension UIViewController {
     
-    func playVideo(video: Video) {
+    func play(video video: Video) {
         
         XCDYouTubeClient.defaultClient().getVideoWithIdentifier(video.youtube) { [weak self] (youtubeVideo, error) in
             
