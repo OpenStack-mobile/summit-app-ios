@@ -46,7 +46,13 @@ final class EventsViewController: UITableViewController, NSFetchedResultsControl
         
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, EventsViewController.cachedPredicate])
         
-        self.fetchedResultsController = NSFetchedResultsController(Event.self, delegate: self, predicate: predicate, sortDescriptors: EventManagedObject.sortDescriptors, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Event.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: EventManagedObject.sortDescriptors,
+                                                                   context: Store.shared.managedObjectContext)
+        
+        self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         
         try! self.fetchedResultsController.performFetch()
         

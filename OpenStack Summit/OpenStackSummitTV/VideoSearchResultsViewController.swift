@@ -81,6 +81,8 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
                                                                    sectionNameKeyPath: nil,
                                                                    context: Store.shared.managedObjectContext)
         
+        self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
+        
         try! self.fetchedResultsController.performFetch()
         
         self.collectionView!.reloadData()

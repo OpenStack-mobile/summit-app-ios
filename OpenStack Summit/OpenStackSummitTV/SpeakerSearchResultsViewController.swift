@@ -70,7 +70,14 @@ final class SpeakerSearchResultsViewController: TableViewController, UISearchRes
             predicate = predicates.first
         }
         
-        self.fetchedResultsController = NSFetchedResultsController(Speaker.self, delegate: self, predicate: predicate, sortDescriptors: SpeakerManagedObject.sortDescriptors, sectionNameKeyPath: nil, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: SpeakerManagedObject.sortDescriptors,
+                                                                   sectionNameKeyPath: nil,
+                                                                   context: Store.shared.managedObjectContext)
+        
+        self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         
         try! self.fetchedResultsController.performFetch()
         
