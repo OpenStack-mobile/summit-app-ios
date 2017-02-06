@@ -69,6 +69,8 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         
         pageController.callback.didLoadNextPage = { [weak self] in self?.didLoadNextPage($0) }
         
+        pageController.cached = { [weak self] in self?.loadFromCache() ?? [] }
+        
         refresh()
     }
     
@@ -80,6 +82,11 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     }
     
     // MARK: - Private Methods
+    
+    private func loadFromCache() -> [Team] {
+        
+        return try! Team.all(Store.shared.managedObjectContext)
+    }
     
     @inline(__always)
     private func configure(cell cell: UITableViewCell, with team: Team) {

@@ -29,7 +29,7 @@ extension PagingTableViewController {
     
     func willLoadData() {
         
-        if pageController.pages.isEmpty {
+        if pageController.items.isEmpty {
             
             showActivityIndicator()
         }
@@ -49,29 +49,38 @@ extension PagingTableViewController {
             
         case let .Value(changes):
             
-            tableView.beginUpdates()
+            let wasCached = pageController.cached != nil && pageController.pages.count == 1
             
-            for change in changes {
+            if wasCached {
                 
-                let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
+                tableView.reloadData()
                 
-                switch change.change {
+            } else {
+                
+                tableView.beginUpdates()
+                
+                for change in changes {
                     
-                case .delete:
+                    let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
                     
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .insert:
-                    
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .update:
-                    
-                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    switch change.change {
+                        
+                    case .delete:
+                        
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        
+                    case .insert:
+                        
+                        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        
+                    case .update:
+                        
+                        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    }
                 }
+                
+                tableView.endUpdates()
             }
-            
-            tableView.endUpdates()
         }
     }
 }
