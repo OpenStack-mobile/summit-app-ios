@@ -10,7 +10,7 @@ import XCTest
 import SwiftFoundation
 @testable import CoreSummit
 
-let SummitJSONIdentifiers = 7 ... 7
+let SummitJSONIdentifiers = [6, 7, 22]
 
 let MemberJSONIdentifiers = 1 ... 2
 

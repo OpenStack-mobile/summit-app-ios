@@ -25,6 +25,8 @@ public struct Summit: Named, Equatable {
     
     public var active: Bool
     
+    public var webpageURL: String
+    
     public var sponsors: Set<Company>
     
     public var speakers: Set<Speaker>
@@ -44,7 +46,7 @@ public struct Summit: Named, Equatable {
     
     public var schedule: Set<Event>
     
-    public var webpageURL: String
+    public var wirelessNetworks: Set<WirelessNetwork>
 }
 
 // MARK: - Equatable
@@ -67,4 +69,5 @@ public func == (lhs: Summit, rhs: Summit) -> Bool {
         && lhs.eventTypes == rhs.eventTypes
         && lhs.schedule == rhs.schedule
         && lhs.webpageURL == rhs.webpageURL
+        && lhs.wirelessNetworks == rhs.wirelessNetworks
 }
