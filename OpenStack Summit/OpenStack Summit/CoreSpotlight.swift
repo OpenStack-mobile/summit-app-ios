@@ -237,7 +237,10 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
                 .reduce(to: CoreSpotlightSearchableManagedObject.self)
                 .map { $0.toSearchable().toSearchableItem() }
             
-            spotlightIndex.indexSearchableItems(searchableItems, completionHandler: completionHandler)
+            if searchableItems.isEmpty == false {
+                
+                spotlightIndex.indexSearchableItems(searchableItems, completionHandler: completionHandler)
+            }
         }
         
         // delete items
@@ -248,7 +251,10 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
                 .reduce(to: CoreSpotlightSearchableManagedObject.self)
                 .map { $0.toSearchable().searchIdentifier }
             
-            spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
+            if searchableItems.isEmpty == false {
+                
+                spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
+            }
         }
     }
 }
