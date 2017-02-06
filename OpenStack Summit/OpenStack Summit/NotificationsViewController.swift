@@ -12,11 +12,9 @@ import CoreData
 import CoreSummit
 import XLPagerTabStrip
 
-final class NotificationsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider {
+final class NotificationsViewController: TableViewController, IndicatorInfoProvider {
     
     // MARK: - Properties
-    
-    private var fetchedResultsController: NSFetchedResultsController!
     
     private lazy var dateFormatter: NSDateFormatter = {
        
@@ -124,16 +122,6 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return self.fetchedResultsController.sections?.count ?? 0
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationCell)!
@@ -165,65 +153,6 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         return UITableViewCellEditingStyle(rawValue: 3)!
-    }
-    
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        
-        self.tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        
-        self.tableView.endUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
-        switch type {
-        case .Insert:
-            
-            if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-            }
-        case .Delete:
-            
-            if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-            }
-        case .Update:
-            if let updateIndexPath = indexPath,
-                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
-                
-                self.configure(cell: cell, at: updateIndexPath)
-            }
-        case .Move:
-            
-            if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-            }
-            
-            if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-            }
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        
-        switch type {
-            
-        case .Insert:
-            
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
-            
-        case .Delete:
-            
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
-            
-        default: break
-        }
     }
     
     // MARK: - IndicatorInfoProvider
