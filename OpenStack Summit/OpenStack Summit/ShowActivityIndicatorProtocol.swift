@@ -6,14 +6,16 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftSpinner
-
 protocol ShowActivityIndicatorProtocol {
     
     func showActivityIndicator()
     
     func hideActivityIndicator()
 }
+
+#if os(iOS)
+
+import SwiftSpinner
 
 extension ShowActivityIndicatorProtocol {
     
@@ -27,3 +29,5 @@ extension ShowActivityIndicatorProtocol {
         SwiftSpinner.hide()
     }
 }
+
+#endif

@@ -11,7 +11,7 @@ import UIKit
 import SwiftFoundation
 import CoreSummit
 
-final class SearchMembersViewController: UITableViewController, UISearchBarDelegate, MessageEnabledViewController, ShowActivityIndicatorProtocol {
+final class SearchMembersViewController: UITableViewController, UISearchBarDelegate, PagingTableViewController {
     
     typealias Scope = MemberListRequest.Filter.Property
     
@@ -83,51 +83,11 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
         Store.shared.members(filter, sort: sort, page: page, perPage: perPage, completion: completion)
     }
     
-    private func willLoadData() {
+    func willLoadData() {
         
         if pageController.pages.isEmpty && (self.searchBar.text?.isEmpty ?? true) == false {
             
             showActivityIndicator()
-        }
-    }
-    
-    private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
-        
-        self.hideActivityIndicator()
-        
-        self.refreshControl?.endRefreshing()
-        
-        switch response {
-            
-        case let .Error(error):
-            
-            showErrorMessage(error as NSError)
-            
-        case let .Value(changes):
-            
-            tableView.beginUpdates()
-            
-            for change in changes {
-                
-                let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
-                
-                switch change.change {
-                    
-                case .delete:
-                    
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .insert:
-                    
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .update:
-                    
-                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                }
-            }
-            
-            tableView.endUpdates()
         }
     }
     

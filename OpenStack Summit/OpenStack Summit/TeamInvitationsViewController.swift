@@ -12,7 +12,7 @@ import UIKit
 import SwiftFoundation
 import CoreSummit
 
-final class TeamInvitationsViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class TeamInvitationsViewController: UITableViewController, PagingTableViewController {
     
     typealias Invitation = ListTeamInvitations.Response.Invitation
     
@@ -20,7 +20,7 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     
     var completion: ((TeamInvitationsViewController) -> ())?
     
-    private lazy var pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
+    lazy var pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
     private lazy var dateFormatter: NSDateFormatter = {
         
@@ -61,54 +61,6 @@ final class TeamInvitationsViewController: UITableViewController, ShowActivityIn
     }
     
     // MARK: - Private Methods
-    
-    private func willLoadData() {
-        
-        if pageController.pages.isEmpty {
-            
-            showActivityIndicator()
-        }
-    }
-    
-    private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
-        
-        self.hideActivityIndicator()
-        
-        self.refreshControl?.endRefreshing()
-        
-        switch response {
-            
-        case let .Error(error):
-            
-            showErrorMessage(error as NSError)
-            
-        case let .Value(changes):
-            
-            tableView.beginUpdates()
-            
-            for change in changes {
-                
-                let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
-                
-                switch change.change {
-                    
-                case .delete:
-                    
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .insert:
-                    
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .update:
-                    
-                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                }
-            }
-            
-            tableView.endUpdates()
-        }
-    }
     
     private func configure(cell cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         

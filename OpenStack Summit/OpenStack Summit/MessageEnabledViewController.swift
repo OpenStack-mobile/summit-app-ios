@@ -8,9 +8,14 @@
 
 import UIKit
 
-public protocol MessageEnabledViewController: class {
+protocol MessageEnabledViewController: class {
 
+    func showInfoMessage(title: String, message: String)
+    
+    func showErrorMessage(error: ErrorType, fileName: String, lineNumber: Int)
 }
+
+#if os(iOS)
 
 extension MessageEnabledViewController {
     
@@ -30,3 +35,39 @@ extension MessageEnabledViewController {
         print("Error at \(fileName):\(lineNumber)\n\(error)")
     }
 }
+
+#elseif os(tvOS)
+
+extension MessageEnabledViewController {
+    
+    func showInfoMessage(title: String, message: String) {
+        
+        guard let viewController = self as! UIViewController
+            else { fatalError("Not a view controller") }
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: { (UIAlertAction) -> Void in
+            
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showErrorMessage(error: ErrorType,
+                          fileName: String = #file,
+                          lineNumber: Int = #line) {
+        
+        let nsError = (error as NSError)
+        let message = nsError.localizedDescription
+        
+        print("Error at \(fileName):\(lineNumber)\n\(error)")
+        
+        showErrorAlert(message)
+    }
+}
+
+#endif

@@ -12,11 +12,11 @@ import CoreData
 import CoreSummit
 import XLPagerTabStrip
 
-final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider, MessageEnabledViewController, ShowActivityIndicatorProtocol, ContextMenuViewController {
+final class TeamsViewController: UITableViewController, PagingTableViewController, IndicatorInfoProvider, ContextMenuViewController {
     
     // MARK: - Properties
     
-    private lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
+    lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
     
     lazy var contextMenu: ContextMenu = {
         
@@ -80,54 +80,6 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     }
     
     // MARK: - Private Methods
-    
-    private func willLoadData() {
-        
-        if pageController.pages.isEmpty {
-            
-            showActivityIndicator()
-        }
-    }
-    
-    private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
-        
-        self.hideActivityIndicator()
-        
-        self.refreshControl?.endRefreshing()
-        
-        switch response {
-            
-        case let .Error(error):
-            
-            showErrorMessage(error as NSError)
-            
-        case let .Value(changes):
-            
-            tableView.beginUpdates()
-            
-            for change in changes {
-                
-                let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
-                
-                switch change.change {
-                    
-                case .delete:
-                    
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .insert:
-                    
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .update:
-                    
-                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                }
-            }
-            
-            tableView.endUpdates()
-        }
-    }
     
     @inline(__always)
     private func configure(cell cell: UITableViewCell, with team: Team) {
