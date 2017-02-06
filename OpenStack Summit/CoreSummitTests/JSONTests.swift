@@ -50,6 +50,16 @@ final class JSONTests: XCTestCase {
         XCTAssert(reponse.page.items.isEmpty == false, "No summits parsed")
     }
     
+    func testListMembers() {
+        
+        let testJSON = loadJSON("ListMembers")
+        
+        guard let page = Page<Member>(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(page.items.isEmpty == false, "No members parsed")
+    }
+    
     func testDataUpdates1() {
         
         let testJSON = loadJSON("DataUpdates1")

@@ -449,6 +449,9 @@
 		6E8221061E48E6880025FE58 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
 		6E8221071E48E6880025FE58 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
 		6E8221081E48E6880025FE58 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
+		6E82210A1E48E72C0025FE58 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
+		6E82210B1E48E72C0025FE58 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
+		6E82210C1E48E72C0025FE58 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
 		6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E8D0CD31D79CBA7004B435A /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D0CD21D79CBA7004B435A /* ImageCache.swift */; };
 		6E8D10991DF87F3B00A0BBDC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
@@ -1121,6 +1124,7 @@
 		6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WirelessNetworkManagedObject.swift; sourceTree = "<group>"; };
 		6E8221001E48E67A0025FE58 /* Summit22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit22.json; sourceTree = "<group>"; };
 		6E8221051E48E6880025FE58 /* Summit6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit6.json; sourceTree = "<group>"; };
+		6E8221091E48E72C0025FE58 /* ListMembers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListMembers.json; sourceTree = "<group>"; };
 		6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAttendeeFromOrderListRequest.swift; sourceTree = "<group>"; };
 		6E8D0CD21D79CBA7004B435A /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6E8D10981DF87F3B00A0BBDC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -1594,6 +1598,7 @@
 				6E8221051E48E6880025FE58 /* Summit6.json */,
 				6E10A5171D106741008CBD0C /* Summit7.json */,
 				6E8221001E48E67A0025FE58 /* Summit22.json */,
+				6E8221091E48E72C0025FE58 /* ListMembers.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -2585,6 +2590,7 @@
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E82210C1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */,
 				6E8221081E48E6880025FE58 /* Summit6.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
@@ -2676,6 +2682,7 @@
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E82210A1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6E586FC01DC29083001DE605 /* Member2.json in Resources */,
 				6E8221061E48E6880025FE58 /* Summit6.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
@@ -2704,6 +2711,7 @@
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E82210B1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */,
 				6E8221071E48E6880025FE58 /* Summit6.json in Resources */,
 				6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */,
