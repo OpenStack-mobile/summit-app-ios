@@ -197,4 +197,27 @@ final class JSONTests: XCTestCase {
             let _ = GroupEventDataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
+    
+    func testDataUpdates9() {
+        
+        let testJSON = loadJSON("DataUpdates9")
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == 2, "\(dataUpdates.count) DataUpdate. Should be 2")
+        
+        for dataUpdate in dataUpdates {
+            
+            guard let dataUpdateEntity = dataUpdate.entity,
+                case let .JSON(entityJSON) = dataUpdateEntity
+                where dataUpdate.className == .SummitWIFIConnection
+                else { continue }
+            
+            guard let _ = WirelessNetwork(JSONValue: .Object(entityJSON))
+                else { XCTFail("Could not decode from JSON"); return }
+        }
+    }
 }
