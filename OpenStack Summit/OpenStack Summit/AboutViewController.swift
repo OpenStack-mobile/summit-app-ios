@@ -18,6 +18,8 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     @IBOutlet var wirelessNetworksHeaderView: UIView!
     
+    @IBOutlet var wirelessNetworksFooterView: UIView!
+    
     // MARK: - Properties
     
     private var summitCache: Summit?
@@ -249,19 +251,46 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
+        
+        let section = sections[index]
+        
+        switch section {
+        case .wirelessNetworks: return 90
+        case .about: return 0
+            
+        }
+    }
+    
     override func tableView(tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
         
         let section = sections[index]
         
         switch section {
-            
-        case .wirelessNetworks:
-            
-            return wirelessNetworksHeaderView
-            
-        case .about:
-            
-            return nil
+        case .wirelessNetworks: return wirelessNetworksHeaderView
+        case .about: return nil
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection index: Int) -> CGFloat {
+        
+        let section = sections[index]
+        
+        switch section {
+        case .wirelessNetworks: return 30
+        case .about: return 0
+        }
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection index: Int) -> UIView? {
+        
+        let section = sections[index]
+        
+        switch section {
+        case .wirelessNetworks: return wirelessNetworksFooterView
+        case .about: return nil
         }
     }
 }
