@@ -42,7 +42,7 @@ extension MessageEnabledViewController {
     
     func showInfoMessage(title: String, message: String) {
         
-        guard let viewController = self as! UIViewController
+        guard let viewController = self as? UIViewController
             else { fatalError("Not a view controller") }
         
         let alert = UIAlertController(title: title,
@@ -54,19 +54,22 @@ extension MessageEnabledViewController {
             alert.dismissViewControllerAnimated(true, completion: nil)
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        viewController.presentViewController(alert, animated: true, completion: nil)
     }
     
     func showErrorMessage(error: ErrorType,
                           fileName: String = #file,
                           lineNumber: Int = #line) {
         
+        guard let viewController = self as? UIViewController
+            else { fatalError("Not a view controller") }
+        
         let nsError = (error as NSError)
         let message = nsError.localizedDescription
         
         print("Error at \(fileName):\(lineNumber)\n\(error)")
         
-        showErrorAlert(message)
+        viewController.showErrorAlert(message)
     }
 }
 

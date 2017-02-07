@@ -18,7 +18,9 @@ protocol PagingTableViewController: class, UITableViewDataSource, ShowActivityIn
     
     var tableView: UITableView! { get }
     
+    #if os(iOS)
     var refreshControl: UIRefreshControl? { get }
+    #endif
     
     func willLoadData()
     
@@ -39,7 +41,9 @@ extension PagingTableViewController {
         
         hideActivityIndicator()
         
+        #if os(iOS)
         refreshControl?.endRefreshing()
+        #endif
         
         switch response {
             
