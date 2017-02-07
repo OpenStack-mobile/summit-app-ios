@@ -1,8 +1,8 @@
 //
 //  AboutViewController.swift
-//  OpenStackSummit
+//  OpenStack Summit
 //
-//  Created by Claudio on 4/6/16.
+//  Created by Alsey Coleman Miller on 2/07/17.
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
+import MessageUI
 
-final class AboutViewController: UITableViewController, RevealViewController {
+final class AboutViewController: UITableViewController, RevealViewController, EmailComposerViewController {
     
     // MARK: - IB Outlets
     
@@ -19,11 +20,9 @@ final class AboutViewController: UITableViewController, RevealViewController {
     
     // MARK: - Properties
     
-    private var sections = [Section]() = [.wirelessNetworks, .about]
+    private var summitCache: Summit?
     
-    private var aboutCells = [AboutCell]() = [.name, .links, .description]
-    
-    private var wirelessNetworksFetchedResultsController: NSFetchedResultsController!
+    private var sections = [Section]()
     
     // MARK: - Loading
     
@@ -32,54 +31,123 @@ final class AboutViewController: UITableViewController, RevealViewController {
         
         addMenuButton()
         
+        // setup table view
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+        userActivity.title = "About the Summit"
+        userActivity.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)
+        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
+        self.userActivity = userActivity
+        
+        // setup UI
         configureView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        userActivity?.becomeCurrent()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if #available(iOS 9.0, *) {
+            
+            userActivity?.resignCurrent()
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func showLink(sender: UIButton) {
+        
+        let link = Link(rawValue: sender.tag)!
+        
+        switch link {
+            
+        case .openStackWebsite:
+            
+            let url = NSURL(string: "https://openstack.org")!
+            
+            open(url: url)
+            
+        case .codeOfConduct:
+            
+            let url = NSURL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
+            
+            open(url: url)
+            
+        case .appSupport:
+            
+            let email = "summitapp@openstack.org"
+            
+            sendEmail(to: email)
+            
+        case .generalInquiries:
+            
+            let email = "summitapp@openstack.org"
+            
+            sendEmail(to: email)
+        }
     }
     
     // MARK: - Private Methods
     
     private func configureView() {
         
-        // wireless networks section
-        
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
-        
-        let predicate = NSPredicate(format: "summit.id == %@", summitID)
-        
-        let sort = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        self.fetchedResultsController = NSFetchedResultsController.init(WirelessNetwork.self,
-                                                                        delegate: self,
-                                                                        predicate: predicate,
-                                                                        sortDescriptors: sort,
-                                                                        context: Store.shared.managedObjectContext)
-        
-        try! self.fetchedResultsController.performFetch()
-        
         // setup sections
         
         sections = []
         
-        if
+        var aboutCells = [AboutCell]()
         
+        if let summitManagedObject = self.currentSummit {
+            
+            let summit = Summit(managedObject: summitManagedObject)
+            
+            summitCache = summit
+            
+            aboutCells.append(.name)
+            
+            // fetch wireless networks
+            
+            let predicate = NSPredicate(format: "summit == %@", summitManagedObject)
+            
+            let sort = [NSSortDescriptor(key: "name", ascending: true)]
+            
+            let wirelessNetworks = try! WirelessNetwork.filter(predicate, sort: sort, context: Store.shared.managedObjectContext)
+            
+            if wirelessNetworks.isEmpty == false {
+                
+                sections.append(.wirelessNetworks(wirelessNetworks))
+            }
+            
+            // setup handoff
+            
+            userActivity?.webpageURL = NSURL(string: summit.webpageURL)!
+            
+        } else {
+            
+            summitCache = nil
+            
+            userActivity?.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
+        }
         
+        aboutCells += [.links, .description]
+        
+        sections.append(.about(aboutCells))
+        
+        // reload table view
         
         self.tableView.reloadData()
     }
     
-    private subscript (wirelessNetwork row: Int) -> WirelessNetwork {
-        
-        let managedObject = self.fetchedResultsController.fetchedObjects![row] as! WirelessNetwork.ManagedObject
-        
-        return WirelessNetwork(managedObject: managedObject)
-    }
-    
     @inline(__always)
-    private func configure(cell cell: WirelessNetworkCell, at row: Int) {
-        
-        let network = self[wirelessNetwork: row]
+    private func configure(cell cell: WirelessNetworkCell, with network: WirelessNetwork) {
         
         cell.nameLabel.text = network.name
         
@@ -89,29 +157,54 @@ final class AboutViewController: UITableViewController, RevealViewController {
     @inline(__always)
     private func configure(cell cell: AboutNameCell) {
         
-        cell.nameLabel.text =
+        guard let summit = self.summitCache
+            else { fatalError("No summit cache") }
+        
+        cell.nameLabel.text = summit.name
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
+        dateFormatter.dateFormat = "MMMM dd-"
+        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        
+        dateFormatter.dateFormat = "dd, yyyy"
+        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        
+        cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
+        
+        cell.buildVersionLabel.text = "Version \(AppVersion)"
+        cell.buildNumberLabel.text = "Build \(AppBuild)"
+    }
+    
+    @inline(__always)
+    private func open(url url: NSURL) {
+        
+        if UIApplication.sharedApplication().canOpenURL(url) {
+            
+            UIApplication.sharedApplication().openURL(url)
+            
+        } else {
+            
+            showErrorAlert("Could open URL.")
+        }
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return sections.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
         
-        let section = sections[indexPath.section]
+        let section = sections[index]
         
         switch section {
             
-        case .wirelessNetworks:
+        case let .wirelessNetworks(networks): return networks.count
             
-            return wirelessNetworksFetchedResultsController?.fetchedObjects?.count ?? 0
-            
-        case .about:
-            
-            return aboutCells.count
+        case let .about(cells): return cells.count
         }
     }
     
@@ -121,15 +214,17 @@ final class AboutViewController: UITableViewController, RevealViewController {
         
         switch section {
             
-        case .wirelessNetworks:
+        case let .wirelessNetworks(networks):
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.wirelessNetworkCell, atIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.wirelessNetworkCell, forIndexPath: indexPath)!
             
-            configure(cell: cell, at: indexPath)
+            let network = networks[indexPath.row]
+            
+            configure(cell: cell, with: network)
             
             return cell
             
-        case .about:
+        case let .about(aboutCells):
             
             let data = aboutCells[indexPath.row]
             
@@ -137,18 +232,36 @@ final class AboutViewController: UITableViewController, RevealViewController {
                 
             case .name:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, atIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, forIndexPath: indexPath)!
                 
-                cell
+                configure(cell: cell)
+                
+                return cell
                 
             case .links:
                 
-                
+                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutLinksCell, forIndexPath: indexPath)!
                 
             case .description:
                 
-                
+                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutDescriptionCell, forIndexPath: indexPath)!
             }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
+        
+        let section = sections[index]
+        
+        switch section {
+            
+        case .wirelessNetworks:
+            
+            return wirelessNetworksHeaderView
+            
+        case .about:
+            
+            return nil
         }
     }
 }
@@ -159,8 +272,8 @@ private extension AboutViewController {
     
     enum Section {
         
-        case wirelessNetworks
-        case about
+        case wirelessNetworks([WirelessNetwork])
+        case about([AboutCell])
     }
     
     enum AboutCell {
@@ -168,6 +281,14 @@ private extension AboutViewController {
         case name
         case links
         case description
+    }
+    
+    enum Link: Int {
+        
+        case openStackWebsite
+        case codeOfConduct
+        case appSupport
+        case generalInquiries
     }
 }
 
@@ -252,14 +373,14 @@ final class OldAboutViewController: UIViewController, RevealViewController {
     
     // MARK: - Actions
     
-    @IBAction func websiteTouch(sender: AnyObject) {
+    @IBAction func showWebsite(sender: AnyObject) {
         let url = NSURL(string: "https://openstack.org")!
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
         }
     }
     
-    @IBAction func codeOfConductTouch(sender: AnyObject) {
+    @IBAction func showCodeOfConduct(sender: AnyObject) {
         let url = NSURL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
