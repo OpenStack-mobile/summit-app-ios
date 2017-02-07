@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -407,9 +408,279 @@
             <point key="canvasLocation" x="194" y="1515"/>
         </scene>
         <!--About View Controller-->
+        <scene sceneID="H0g-ht-ytK">
+            <objects>
+                <tableViewController storyboardIdentifier="AboutViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f3D-Xb-lXH" customClass="AboutViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="46" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hau-iO-T3g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WirelessNetworkCell" rowHeight="46" id="Qbu-WP-gaU" customClass="WirelessNetworkCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qbu-WP-gaU" id="h4U-0s-luK">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-fP-7cq">
+                                            <rect key="frame" x="16" y="0.0" width="140" height="46"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PMv-Ui-qu4" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                                    <rect key="frame" x="36" y="13.5" width="104" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Activity1" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-yK-Wah">
+                                                    <rect key="frame" x="0.0" y="8" width="28" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="jPd-Sh-Acb"/>
+                                                        <constraint firstAttribute="width" secondItem="vaO-yK-Wah" secondAttribute="height" id="ld9-Ai-rS7"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="PMv-Ui-qu4" firstAttribute="centerY" secondItem="vaO-yK-Wah" secondAttribute="centerY" id="He4-r2-CAI"/>
+                                                <constraint firstItem="PMv-Ui-qu4" firstAttribute="leading" secondItem="vaO-yK-Wah" secondAttribute="trailing" constant="8" id="Tmz-l6-ARt"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vaO-yK-Wah" secondAttribute="bottom" constant="8" id="Vjk-AS-oZz"/>
+                                                <constraint firstItem="vaO-yK-Wah" firstAttribute="top" secondItem="Q7c-fP-7cq" secondAttribute="top" constant="8" id="iLE-3k-OoO"/>
+                                                <constraint firstAttribute="trailing" secondItem="PMv-Ui-qu4" secondAttribute="trailing" id="llV-6I-9J4"/>
+                                                <constraint firstItem="vaO-yK-Wah" firstAttribute="leading" secondItem="Q7c-fP-7cq" secondAttribute="leading" id="z3E-Un-3nH"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcl-Ae-dHg">
+                                            <rect key="frame" x="164" y="0.0" width="140" height="46"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="r2j-0M-X2P" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                                    <rect key="frame" x="36" y="13" width="104" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Activity1" translatesAutoresizingMaskIntoConstraints="NO" id="qB3-zT-c2p">
+                                                    <rect key="frame" x="0.0" y="8" width="28" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="qB3-zT-c2p" secondAttribute="height" id="jRq-Jy-5jt"/>
+                                                        <constraint firstAttribute="height" constant="28" id="nI0-xa-jGB"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="r2j-0M-X2P" secondAttribute="trailing" id="CAc-f0-8Ze"/>
+                                                <constraint firstItem="qB3-zT-c2p" firstAttribute="leading" secondItem="Tcl-Ae-dHg" secondAttribute="leading" id="KmY-dm-do9"/>
+                                                <constraint firstItem="r2j-0M-X2P" firstAttribute="centerY" secondItem="qB3-zT-c2p" secondAttribute="centerY" id="caP-aR-tsl"/>
+                                                <constraint firstItem="r2j-0M-X2P" firstAttribute="leading" secondItem="qB3-zT-c2p" secondAttribute="trailing" constant="8" id="n2g-NC-xeD"/>
+                                                <constraint firstItem="qB3-zT-c2p" firstAttribute="top" secondItem="Tcl-Ae-dHg" secondAttribute="top" constant="8" id="s65-7H-XhZ"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qB3-zT-c2p" secondAttribute="bottom" constant="8" id="stp-4q-TRa"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Tcl-Ae-dHg" firstAttribute="top" secondItem="h4U-0s-luK" secondAttribute="top" id="1U6-LK-yn3"/>
+                                        <constraint firstItem="Q7c-fP-7cq" firstAttribute="top" secondItem="h4U-0s-luK" secondAttribute="top" id="DHk-GT-FT2"/>
+                                        <constraint firstAttribute="bottom" secondItem="Tcl-Ae-dHg" secondAttribute="bottom" id="OBZ-SO-u45"/>
+                                        <constraint firstItem="Tcl-Ae-dHg" firstAttribute="leading" secondItem="Q7c-fP-7cq" secondAttribute="trailing" constant="8" id="UOx-lW-zbP"/>
+                                        <constraint firstItem="Tcl-Ae-dHg" firstAttribute="width" secondItem="Q7c-fP-7cq" secondAttribute="width" id="bRU-vN-Svg"/>
+                                        <constraint firstItem="Q7c-fP-7cq" firstAttribute="leading" secondItem="h4U-0s-luK" secondAttribute="leading" constant="16" id="sAp-GL-79b"/>
+                                        <constraint firstAttribute="trailing" secondItem="Tcl-Ae-dHg" secondAttribute="trailing" constant="16" id="tMz-o9-iZu"/>
+                                        <constraint firstAttribute="bottom" secondItem="Q7c-fP-7cq" secondAttribute="bottom" id="xGk-Lt-cfD"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.075067676599999994" green="0.1470116377" blue="0.2424912155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="nameLabel" destination="PMv-Ui-qu4" id="B8V-0v-iwP"/>
+                                    <outlet property="passwordLabel" destination="r2j-0M-X2P" id="hja-Di-Zo8"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutNameCell" rowHeight="175" id="3lx-TO-cwS" customClass="AboutNameCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="74" width="320" height="175"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3lx-TO-cwS" id="3gw-L9-PLB">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columbia, SC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myc-Ki-vnp" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="30" width="288" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 24-25, 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBO-b3-7fI" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="62" width="288" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 2.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6Q-qf-d5w" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="104" width="288" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build 9000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDY-kV-7Qm" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="129" width="288" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="top" secondItem="X6Q-qf-d5w" secondAttribute="bottom" constant="8" id="7Jz-nz-mqy"/>
+                                        <constraint firstAttribute="trailing" secondItem="X6Q-qf-d5w" secondAttribute="trailing" constant="16" id="8EA-Ws-vdm"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Myc-Ki-vnp" secondAttribute="trailing" constant="8" id="Hzf-YH-EbP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="UBO-b3-7fI" secondAttribute="trailing" constant="8" id="Isv-4u-ic4"/>
+                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="JaD-hF-hXS"/>
+                                        <constraint firstItem="UBO-b3-7fI" firstAttribute="top" secondItem="Myc-Ki-vnp" secondAttribute="bottom" constant="8" id="JmB-Kd-L6T"/>
+                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="top" secondItem="X6Q-qf-d5w" secondAttribute="bottom" constant="8" id="NZx-97-lmo"/>
+                                        <constraint firstItem="X6Q-qf-d5w" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leading" constant="16" id="QoZ-Ce-rqf"/>
+                                        <constraint firstItem="Myc-Ki-vnp" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="RYF-tX-rbe"/>
+                                        <constraint firstItem="X6Q-qf-d5w" firstAttribute="top" secondItem="UBO-b3-7fI" secondAttribute="bottom" constant="25" id="SZ5-fz-HAQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zDY-kV-7Qm" secondAttribute="trailing" constant="8" id="Tmd-RP-ftn"/>
+                                        <constraint firstItem="Myc-Ki-vnp" firstAttribute="top" secondItem="3gw-L9-PLB" secondAttribute="top" constant="30" id="WjK-LN-RXY"/>
+                                        <constraint firstItem="UBO-b3-7fI" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="aRD-7N-cjA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zDY-kV-7Qm" secondAttribute="bottom" constant="20" id="pKS-Ky-r9T"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.12723124027252197" green="0.25187474489212036" blue="0.39719080924987793" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="buildNumberLabel" destination="zDY-kV-7Qm" id="xEn-BT-Zpx"/>
+                                    <outlet property="buildVersionLabel" destination="X6Q-qf-d5w" id="DJi-fk-V9d"/>
+                                    <outlet property="dateLabel" destination="UBO-b3-7fI" id="ylN-Ob-OaS"/>
+                                    <outlet property="nameLabel" destination="Myc-Ki-vnp" id="oqK-02-CBN"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutLinksCell" rowHeight="208" id="XAa-2G-uHD">
+                                <rect key="frame" x="0.0" y="249" width="320" height="208"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XAa-2G-uHD" id="vbC-yB-6z3">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="207"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EF9-MN-Goa">
+                                            <rect key="frame" x="67" y="20" width="186" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            <state key="normal" title="OpenStack Website">
+                                                <color key="titleColor" red="0.079267598689999996" green="0.1471248567" blue="0.2384558618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yN5-ej-0DQ">
+                                            <rect key="frame" x="80" y="64" width="160" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            <state key="normal" title="Code of Conduct">
+                                                <color key="titleColor" red="0.079267598689999996" green="0.1471248567" blue="0.2384558618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6X-np-7qO">
+                                            <rect key="frame" x="101" y="108" width="119" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            <state key="normal" title="App Support">
+                                                <color key="titleColor" red="0.079267598689999996" green="0.1471248567" blue="0.2384558618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KE7-ok-Cq0">
+                                            <rect key="frame" x="81" y="152" width="159" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            <state key="normal" title="General Inquiries">
+                                                <color key="titleColor" red="0.079267598689999996" green="0.1471248567" blue="0.2384558618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="EF9-MN-Goa" firstAttribute="top" secondItem="vbC-yB-6z3" secondAttribute="top" constant="20" id="0Yg-sl-Nha"/>
+                                        <constraint firstItem="KE7-ok-Cq0" firstAttribute="centerX" secondItem="vbC-yB-6z3" secondAttribute="centerX" id="3JW-rZ-5tI"/>
+                                        <constraint firstItem="w6X-np-7qO" firstAttribute="top" secondItem="yN5-ej-0DQ" secondAttribute="bottom" constant="8" id="7Y3-wW-ISc"/>
+                                        <constraint firstItem="yN5-ej-0DQ" firstAttribute="centerX" secondItem="vbC-yB-6z3" secondAttribute="centerX" id="C7C-8i-65Q"/>
+                                        <constraint firstItem="KE7-ok-Cq0" firstAttribute="top" secondItem="w6X-np-7qO" secondAttribute="bottom" constant="8" id="DFP-aM-TvK"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KE7-ok-Cq0" secondAttribute="bottom" constant="20" id="g7Q-Tf-Xzb"/>
+                                        <constraint firstItem="yN5-ej-0DQ" firstAttribute="top" secondItem="EF9-MN-Goa" secondAttribute="bottom" constant="8" id="g98-Fy-csn"/>
+                                        <constraint firstItem="EF9-MN-Goa" firstAttribute="centerX" secondItem="vbC-yB-6z3" secondAttribute="centerX" id="keK-LG-kG3"/>
+                                        <constraint firstItem="w6X-np-7qO" firstAttribute="centerX" secondItem="vbC-yB-6z3" secondAttribute="centerX" id="mMQ-Cy-bTt"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutDescriptionCell" rowHeight="286" id="9t1-Ni-kr1">
+                                <rect key="frame" x="0.0" y="457" width="320" height="286"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9t1-Ni-kr1" id="ZmO-hx-5CG">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-kI-xaq">
+                                            <rect key="frame" x="8" y="8" width="304" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-iW-mpM">
+                                            <rect key="frame" x="16" y="35.5" width="288" height="234"/>
+                                            <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="DYl-kI-xaq" firstAttribute="top" secondItem="ZmO-hx-5CG" secondAttribute="top" constant="8" id="FhN-MF-VDi"/>
+                                        <constraint firstItem="uaJ-iW-mpM" firstAttribute="top" secondItem="DYl-kI-xaq" secondAttribute="bottom" constant="8" id="MO5-nH-2Rl"/>
+                                        <constraint firstItem="uaJ-iW-mpM" firstAttribute="leading" secondItem="ZmO-hx-5CG" secondAttribute="leadingMargin" constant="8" id="NQi-aa-Yyi"/>
+                                        <constraint firstAttribute="trailing" secondItem="DYl-kI-xaq" secondAttribute="trailing" constant="8" id="O3p-kx-53F"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="uaJ-iW-mpM" secondAttribute="trailing" constant="8" id="QSp-bB-bqN"/>
+                                        <constraint firstItem="DYl-kI-xaq" firstAttribute="leading" secondItem="ZmO-hx-5CG" secondAttribute="leading" constant="8" id="arG-cP-CEI"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="uaJ-iW-mpM" secondAttribute="bottom" constant="8" id="zWu-iK-iDE"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f3D-Xb-lXH" id="QPw-bl-eEn"/>
+                            <outlet property="delegate" destination="f3D-Xb-lXH" id="Uxt-Hp-Y9j"/>
+                        </connections>
+                    </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1000"/>
+                    <connections>
+                        <outlet property="wirelessNetworksHeaderView" destination="y4k-N7-hJf" id="dM2-1M-8fJ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GxW-rU-6ug" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="y4k-N7-hJf">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-by-fxK">
+                            <rect key="frame" x="99" y="8" width="43" height="21"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Availible Networks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05i-lg-zTr">
+                            <rect key="frame" x="50" y="37" width="140" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.075067676599999994" green="0.1470116377" blue="0.2424912155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="j4g-by-fxK" firstAttribute="centerX" secondItem="y4k-N7-hJf" secondAttribute="centerX" id="74N-tY-iXq"/>
+                        <constraint firstItem="j4g-by-fxK" firstAttribute="top" secondItem="y4k-N7-hJf" secondAttribute="top" constant="8" id="LaK-cC-MMz"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="05i-lg-zTr" secondAttribute="bottom" constant="8" id="S7U-I6-BoQ"/>
+                        <constraint firstItem="05i-lg-zTr" firstAttribute="centerX" secondItem="y4k-N7-hJf" secondAttribute="centerX" id="Tpb-ZV-bt8"/>
+                        <constraint firstItem="05i-lg-zTr" firstAttribute="top" secondItem="j4g-by-fxK" secondAttribute="bottom" constant="8" id="kQt-0T-kuI"/>
+                    </constraints>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="-933.75" y="3003.1690140845071"/>
+        </scene>
+        <!--About View Controller-->
         <scene sceneID="B4c-B5-cii">
             <objects>
-                <viewController storyboardIdentifier="AboutViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uLE-8I-FQr" customClass="AboutViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uLE-8I-FQr" customClass="AboutViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bb4-Ko-0hO"/>
                         <viewControllerLayoutGuide type="bottom" id="mTq-Ve-SYc"/>
@@ -422,7 +693,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1095"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Le-yU-YUa" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="899.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GNT-pU-5kL">
                                                 <rect key="frame" x="18" y="18" width="284" height="466"/>
@@ -517,10 +788,10 @@ For general support, please email summit@openstack.org</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-wc-oMM">
-                                                <rect key="frame" x="18" y="554" width="284" height="328"/>
+                                                <rect key="frame" x="18" y="554" width="284" height="327.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhU-GH-qKB">
-                                                        <rect key="frame" x="17" y="45" width="250" height="268"/>
+                                                        <rect key="frame" x="17" y="45" width="250" height="267.5"/>
                                                         <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -696,7 +967,7 @@ For general support, please email summit@openstack.org</string>
             <objects>
                 <navigationController hidesBarsWhenVerticallyCompact="YES" id="ZMw-N5-7Ms" sceneMemberID="viewController">
                     <value key="contentSizeForViewInPopover" type="size" width="320" height="568"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCJ-CL-2yQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LCJ-CL-2yQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -710,6 +981,7 @@ For general support, please email summit@openstack.org</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Activity1" width="29" height="29"/>
         <image name="about" width="29" height="29"/>
         <image name="arrow" width="9" height="14"/>
         <image name="events" width="26" height="26"/>

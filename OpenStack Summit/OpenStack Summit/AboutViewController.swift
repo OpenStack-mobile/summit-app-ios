@@ -6,10 +6,192 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import CoreData
 import CoreSummit
 
-final class AboutViewController: UIViewController, RevealViewController {
+final class AboutViewController: UITableViewController, RevealViewController {
+    
+    // MARK: - IB Outlets
+    
+    @IBOutlet var wirelessNetworksHeaderView: UIView!
+    
+    // MARK: - Properties
+    
+    private var sections = [Section]() = [.wirelessNetworks, .about]
+    
+    private var aboutCells = [AboutCell]() = [.name, .links, .description]
+    
+    private var wirelessNetworksFetchedResultsController: NSFetchedResultsController!
+    
+    // MARK: - Loading
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addMenuButton()
+        
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        configureView()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func configureView() {
+        
+        // wireless networks section
+        
+        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        
+        let predicate = NSPredicate(format: "summit.id == %@", summitID)
+        
+        let sort = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        self.fetchedResultsController = NSFetchedResultsController.init(WirelessNetwork.self,
+                                                                        delegate: self,
+                                                                        predicate: predicate,
+                                                                        sortDescriptors: sort,
+                                                                        context: Store.shared.managedObjectContext)
+        
+        try! self.fetchedResultsController.performFetch()
+        
+        // setup sections
+        
+        sections = []
+        
+        if
+        
+        
+        
+        self.tableView.reloadData()
+    }
+    
+    private subscript (wirelessNetwork row: Int) -> WirelessNetwork {
+        
+        let managedObject = self.fetchedResultsController.fetchedObjects![row] as! WirelessNetwork.ManagedObject
+        
+        return WirelessNetwork(managedObject: managedObject)
+    }
+    
+    @inline(__always)
+    private func configure(cell cell: WirelessNetworkCell, at row: Int) {
+        
+        let network = self[wirelessNetwork: row]
+        
+        cell.nameLabel.text = network.name
+        
+        cell.passwordLabel.text = network.password
+    }
+    
+    @inline(__always)
+    private func configure(cell cell: AboutNameCell) {
+        
+        cell.nameLabel.text =
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return sections.count
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let section = sections[indexPath.section]
+        
+        switch section {
+            
+        case .wirelessNetworks:
+            
+            return wirelessNetworksFetchedResultsController?.fetchedObjects?.count ?? 0
+            
+        case .about:
+            
+            return aboutCells.count
+        }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let section = sections[indexPath.section]
+        
+        switch section {
+            
+        case .wirelessNetworks:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.wirelessNetworkCell, atIndexPath: indexPath)!
+            
+            configure(cell: cell, at: indexPath)
+            
+            return cell
+            
+        case .about:
+            
+            let data = aboutCells[indexPath.row]
+            
+            switch data {
+                
+            case .name:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, atIndexPath: indexPath)!
+                
+                cell
+                
+            case .links:
+                
+                
+                
+            case .description:
+                
+                
+            }
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+private extension AboutViewController {
+    
+    enum Section {
+        
+        case wirelessNetworks
+        case about
+    }
+    
+    enum AboutCell {
+        
+        case name
+        case links
+        case description
+    }
+}
+
+final class WirelessNetworkCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: CopyableLabel!
+    
+    @IBOutlet weak var passwordLabel: CopyableLabel!
+}
+
+final class AboutNameCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: CopyableLabel!
+    
+    @IBOutlet weak var dateLabel: CopyableLabel!
+    
+    @IBOutlet weak var buildVersionLabel: CopyableLabel!
+    
+    @IBOutlet weak var buildNumberLabel: CopyableLabel!
+}
+
+// MARK: - Legacy
+
+final class OldAboutViewController: UIViewController, RevealViewController {
 
     // MARK: - IB Outlets
     
