@@ -36,6 +36,12 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         filterChanged()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        resetScrollPosition()
+    }
+    
     // MARK: - Private Methods
     
     private func filterChanged() {
@@ -85,7 +91,14 @@ final class VideoSearchResultsViewController: CollectionViewController, UISearch
         
         try! self.fetchedResultsController.performFetch()
         
+        self.resetScrollPosition()
+        
         self.collectionView!.reloadData()
+    }
+    
+    private func resetScrollPosition() {
+        
+        self.collectionView!.setContentOffset(.zero, animated: true)
     }
     
     private func configure(cell cell: VideoCell, at indexPath: NSIndexPath) {
