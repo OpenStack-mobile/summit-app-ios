@@ -1925,6 +1925,7 @@
 		6E74FAFF1D7CA0A60018633D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6EA737641E47B4BE00700F64 /* VideoCell.swift */,
 				6EB9B89F1D83495C00917077 /* Appearance.swift */,
 			);
 			name = View;
@@ -2010,7 +2011,6 @@
 				6EF3A8891E4675E800CD85EF /* Videos.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
-				6EA737631E47B4B200700F64 /* View */,
 				6E74FAEB1D7C95E70018633D /* Controller */,
 				6E74FAFF1D7CA0A60018633D /* View */,
 			);
@@ -2037,14 +2037,6 @@
 				6EA737601E47984400700F64 /* VideoSearchResultsViewController.swift */,
 			);
 			name = Videos;
-			sourceTree = "<group>";
-		};
-		6EA737631E47B4B200700F64 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				6EA737641E47B4BE00700F64 /* VideoCell.swift */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		6EB699E31D3412B00095474D /* Protocols */ = {
