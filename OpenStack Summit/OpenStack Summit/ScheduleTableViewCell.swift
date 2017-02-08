@@ -8,11 +8,6 @@
 
 import UIKit
 
-public enum ScheduledStatus {
-    
-    case Scheduled, NotScheduled
-}
-
 final class ScheduleTableViewCell: UITableViewCell, ScheduleableView {
     
     var eventTitle: String!{

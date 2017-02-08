@@ -30,14 +30,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     // MARK: - Private Properties
     
     private var eventCache: Event!
-    
     private var eventDetail: EventDetail!
-    
     private var data = [Detail]()
-    
     private var entityController: EntityController<Event>!
-    
-    private var scheduled = false
     
     private var shouldShowReviews = false
     private var loadingFeedback = false
@@ -157,10 +152,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
         
         // Can give feedback after event started, and if there is no feedback for that user
-        if let member = Store.shared.authenticatedMember
-            where eventCache.start < Date()
-            && (try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty &&
-            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty {
+        if canAddFeedback(for: eventDetail) {
             
             data.append(.feedback)
         }
@@ -182,14 +174,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         if eventDetail.level.isEmpty == false {
             
             data.append(.level)
-        }
-        
-        // configure bar button items
-        let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
-        
-        if isAtteendee {
-            
-            self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
         }
         
         // get all reviews for this event
@@ -284,49 +268,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     controller.configureAverageRatingView()
                 }
             }
-        }
-    }
-    
-    private func toggleSchedule() {
-        
-        let oldValue = self.scheduled
-        
-        if addToScheduleInProgress {
-            return
-        }
-        
-        addToScheduleInProgress = true
-        
-        // update UI
-        self.scheduled = !oldValue
-        
-        let completion: ErrorType? -> () = { [weak self] (response) in
-            
-            guard let controller = self else { return }
-            
-            controller.addToScheduleInProgress = false
-            
-            switch response {
-                
-            case let .Some(error):
-                
-                // restore original value
-                controller.scheduled = oldValue
-                
-                // show error
-                controller.showErrorMessage(error as NSError)
-                
-            case .None: break
-            }
-        }
-        
-        if oldValue {
-            
-            Store.shared.removeEventFromSchedule(self.eventDetail.summit, event: self.event, completion: completion)
-            
-        } else {
-            
-            Store.shared.addEventToSchedule(self.eventDetail.summit, event: self.event, completion: completion)
         }
     }
     

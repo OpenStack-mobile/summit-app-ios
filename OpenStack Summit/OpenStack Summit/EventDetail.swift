@@ -106,7 +106,7 @@ public struct EventDetail: CoreDataDecodable {
         let webpageURLString = Event(managedObject: event).toWebpageURL(summit)
         
         guard let webpageURL = NSURL(string: webpageURLString)
-            else { fatalError("Invalid URLL \(webpageURLString)") }
+            else { fatalError("Invalid URL \(webpageURLString)") }
         
         self.webpageURL = webpageURL
     }
