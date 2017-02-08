@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFoundation
 import CoreSummit
 
 public struct EventDetail: CoreDataDecodable {
@@ -16,6 +17,9 @@ public struct EventDetail: CoreDataDecodable {
     public let id: Identifier
     public let name: String
     public let summit: Identifier
+    public let start: Date
+    public let end: Date
+    public let timeZone: String
     public let dateTime: String
     public let time: String
     public let location: String
@@ -44,6 +48,9 @@ public struct EventDetail: CoreDataDecodable {
         self.id = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
+        self.start = Date(foundation: event.start)
+        self.end = Date(foundation: event.end)
+        self.timeZone = event.summit.timeZone
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)
@@ -103,7 +110,7 @@ public struct EventDetail: CoreDataDecodable {
         let webpageURLString = Event(managedObject: event).toWebpageURL(summit)
         
         guard let webpageURL = NSURL(string: webpageURLString)
-            else { fatalError("Invalid URLL \(webpageURLString)") }
+            else { fatalError("Invalid URL \(webpageURLString)") }
         
         self.webpageURL = webpageURL
     }

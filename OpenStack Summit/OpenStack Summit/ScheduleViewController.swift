@@ -11,8 +11,9 @@ import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
 import CoreData
+import EventKit
 
-class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ScheduleViewController: UIViewController, EventViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     typealias DateFilter = EventManagedObject.DateFilter
     
@@ -22,14 +23,16 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     // MARK: - Properties
     
+    final var addToScheduleInProgress = false
+    
+    final lazy var eventStore: EKEventStore = EKEventStore()
+    
     final private(set) var summitTimeZoneOffset: Int = 0
     
     final private(set) var dayEvents = [ScheduleItem]()
     
     final private(set) var nowSelected = false
-    
-    private var addToScheduleInProgress = false
-        
+            
     private var filterObserver: Int?
     
     private var didSelectDate = false
@@ -110,55 +113,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     // MARK: - Actions
     
-    @IBAction func toggleScheduledStatus(sender: UIButton) {
-        
-        let button = sender
-        let view = button.superview!
-        let cell = view.superview as! ScheduleTableViewCell
-        let indexPath = scheduleView.tableView.indexPathForCell(cell)!
-        let event = dayEvents[indexPath.row]
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        
-        
-        if addToScheduleInProgress {
-            return
-        }
-        
-        addToScheduleInProgress = true
-        
-        // update cell
-        cell.scheduled = !scheduled
-        
-        let completion: ErrorType? -> () = { [weak self] (response) in
-            
-            guard let controller = self else { return }
-            
-            controller.addToScheduleInProgress = false
-            
-            switch response {
-                
-            case let .Some(error):
-                
-                // restore original value
-                cell.scheduled = scheduled
-                
-                // show error
-                controller.showErrorMessage(error as NSError)
-                
-            case .None: break
-            }
-        }
-        
-        if scheduled {
-            
-            Store.shared.removeEventFromSchedule(event.summit, event: event.id, completion: completion)
-            
-        } else {
-            
-            Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
-        }
-    }
-    
     @IBAction func nowTapped(sender: UIButton) {
         
         let now = NSDate()
@@ -173,6 +127,24 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         self.nowSelected = true
         
         self.loadData()
+    }
+    
+    @IBAction func showEventContextMenu(sender: UIButton) {
+        
+        let tableView = scheduleView.tableView
+        let buttonOrigin = sender.convertPoint(.zero, toView: tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ScheduleTableViewCell
+        let scheduleItem = dayEvents[indexPath.row]
+        
+        guard let eventManagedObject = try! EventManagedObject.find(scheduleItem.id, context: Store.shared.managedObjectContext)
+            else { fatalError("Invalid event \(scheduleItem.id)") }
+        
+        let eventDetail = EventDetail(managedObject: eventManagedObject)
+        
+        let contextMenu = self.contextMenu(for: eventDetail, scheduleableView: cell)
+        
+        self.show(contextMenu: contextMenu, sender: .view(sender))
     }
     
     // MARK: - Methods
@@ -402,11 +374,10 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        cell.isScheduledStatusVisible = Store.shared.isLoggedInAndConfirmedAttendee
         cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
         
         // configure button
-        cell.scheduleButton.addTarget(self, action: #selector(ScheduleViewController.toggleScheduledStatus(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.scheduleButton.addTarget(self, action: #selector(showEventContextMenu), forControlEvents: .TouchUpInside)
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
         cell.layoutSubviews()

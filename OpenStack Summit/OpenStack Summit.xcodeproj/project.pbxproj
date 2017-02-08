@@ -386,6 +386,8 @@
 		6E574B6D1DCB2DFC00AE4837 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* CoreDataTests.swift */; };
 		6E574B6E1DCB2DFD00AE4837 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* CoreDataTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
+		6E57DDC71E4AD22100783BA6 /* PresentPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DDC61E4AD22100783BA6 /* PresentPopover.swift */; };
+		6E57DDC91E4ADCB300783BA6 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DDC81E4ADCB300783BA6 /* EventViewController.swift */; };
 		6E57DDC31E4A723B00783BA6 /* EmailComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DDC21E4A723B00783BA6 /* EmailComposerViewController.swift */; };
 		6E586FC01DC29083001DE605 /* Member2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E586FBE1DC29083001DE605 /* Member2.json */; };
 		6E586FC11DC29083001DE605 /* Member2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E586FBE1DC29083001DE605 /* Member2.json */; };
@@ -1089,6 +1091,8 @@
 		6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		6E57DDC61E4AD22100783BA6 /* PresentPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentPopover.swift; sourceTree = "<group>"; };
+		6E57DDC81E4ADCB300783BA6 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		6E57DDC21E4A723B00783BA6 /* EmailComposerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailComposerViewController.swift; sourceTree = "<group>"; };
 		6E586FBE1DC29083001DE605 /* Member2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Member2.json; sourceTree = "<group>"; };
 		6E5AE1321E27E163004D9A26 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = "../../Carthage/Checkouts/SlackTextViewController/Examples/Messenger-Shared/MessageTableViewCell.h"; sourceTree = "<group>"; };
@@ -1829,6 +1833,7 @@
 				6E25384C1D1AF5C1003E3400 /* BackBarButtonItem.swift */,
 				6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */,
 				6EC417E71D76B60000E5888C /* ShowVideo.swift */,
+				6E57DDC61E4AD22100783BA6 /* PresentPopover.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2050,6 +2055,7 @@
 				6ED1B11D1D9B0CFF00084B03 /* TextViewController.swift */,
 				6ED1B11F1D9B0F0000084B03 /* SummitActivityHandling.swift */,
 				6EEED0311E3A900B00795B3D /* ContextMenuViewController.swift */,
+				6E57DDC81E4ADCB300783BA6 /* EventViewController.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -3138,6 +3144,7 @@
 				6E00D1A71D1C2F1100278274 /* ScheduleViewController.swift in Sources */,
 				6E313C181D4123AE005132DA /* VenueListViewController.swift in Sources */,
 				6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
+				6E57DDC91E4ADCB300783BA6 /* EventViewController.swift in Sources */,
 				6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */,
 				6E4E24621E24258D00F7F3FB /* SearchMembersViewController.swift in Sources */,
 				6E57DDC31E4A723B00783BA6 /* EmailComposerViewController.swift in Sources */,
@@ -3186,6 +3193,7 @@
 				6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */,
 				6EF12C551D14997C00814AD0 /* ScheduleableView.swift in Sources */,
 				6E313C1E1D41302C005132DA /* VenueRoomDetailViewController.swift in Sources */,
+				6E57DDC71E4AD22100783BA6 /* PresentPopover.swift in Sources */,
 				6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */,
 				6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */,
 				6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */,

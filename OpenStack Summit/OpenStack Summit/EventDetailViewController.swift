@@ -14,8 +14,9 @@ import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
 import XCDYouTubeKit
+import EventKit
     
-final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
+final class EventDetailViewController: UITableViewController, EventViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
@@ -25,19 +26,17 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     var event: Identifier!
     
+    var addToScheduleInProgress = false
+    
+    lazy var eventStore: EKEventStore = EKEventStore()
+    
     // MARK: - Private Properties
     
     private var eventCache: Event!
-    
     private var eventDetail: EventDetail!
-    
     private var data = [Detail]()
-    
     private var entityController: EntityController<Event>!
     
-    private var scheduled = false
-    
-    private var addToScheduleInProgress = false
     private var shouldShowReviews = false
     private var loadingFeedback = false
     private var loadingAverageRating = false
@@ -45,54 +44,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     private var loadedAllFeedback = false
     private var currentFeedbackPage: Page<Review>?
     
-    var contextMenu: ContextMenu {
-        
-        let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
-        
-        let url = eventDetail.webpageURL
-        
-        var actions: [ContextMenu.Action] = []
-        
-        if self.data.contains(.feedback) {
-            
-            let rate = ContextMenu.Action(activityType: "\(self.dynamicType).Rate", image: nil, title: "Rate", handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
-                
-                feedbackVC.event = controller.event
-                
-                feedbackVC.rate = 0
-                
-                controller.showViewController(feedbackVC, sender: self)
-                
-                didComplete(true)
-            }))
-            
-            actions.append(rate)
-        }
-        
-        let isAttendee = Store.shared.isLoggedInAndConfirmedAttendee
-        
-        if isAttendee && addToScheduleInProgress == false {
-            
-            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
-            
-            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                controller.toggleSchedule()
-                
-                didComplete(true)
-            }))
-            
-            actions.append(scheduleEvent)
-        }
-        
-        return ContextMenu(actions: actions, shareItems: [message, url])
-    }
+    var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Loading
     
@@ -203,10 +155,7 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         }
         
         // Can give feedback after event started, and if there is no feedback for that user
-        if let member = Store.shared.authenticatedMember
-            where eventCache.start < Date()
-            && (try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty &&
-            (try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@ AND member == %@", eventManagedObject, member))).isEmpty {
+        if canAddFeedback(for: eventDetail) {
             
             data.append(.feedback)
         }
@@ -228,14 +177,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
         if eventDetail.level.isEmpty == false {
             
             data.append(.level)
-        }
-        
-        // configure bar button items
-        let isAtteendee = Store.shared.isLoggedInAndConfirmedAttendee
-        
-        if isAtteendee {
-            
-            self.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event)
         }
         
         // get all reviews for this event
@@ -330,49 +271,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
                     controller.configureAverageRatingView()
                 }
             }
-        }
-    }
-    
-    private func toggleSchedule() {
-        
-        let oldValue = self.scheduled
-        
-        if addToScheduleInProgress {
-            return
-        }
-        
-        addToScheduleInProgress = true
-        
-        // update UI
-        self.scheduled = !oldValue
-        
-        let completion: ErrorType? -> () = { [weak self] (response) in
-            
-            guard let controller = self else { return }
-            
-            controller.addToScheduleInProgress = false
-            
-            switch response {
-                
-            case let .Some(error):
-                
-                // restore original value
-                controller.scheduled = oldValue
-                
-                // show error
-                controller.showErrorMessage(error as NSError)
-                
-            case .None: break
-            }
-        }
-        
-        if oldValue {
-            
-            Store.shared.removeEventFromSchedule(self.eventDetail.summit, event: self.event, completion: completion)
-            
-        } else {
-            
-            Store.shared.addEventToSchedule(self.eventDetail.summit, event: self.event, completion: completion)
         }
     }
     
