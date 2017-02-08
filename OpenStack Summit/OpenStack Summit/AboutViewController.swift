@@ -117,15 +117,22 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             // fetch wireless networks
             
-            let predicate = NSPredicate(format: "summit == %@", summitManagedObject)
+            let today = NSDate()
             
-            let sort = [NSSortDescriptor(key: "name", ascending: true)]
+            let summitActive = today.mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
             
-            let wirelessNetworks = try! WirelessNetwork.filter(predicate, sort: sort, context: Store.shared.managedObjectContext)
-            
-            if wirelessNetworks.isEmpty == false {
+            if summitActive {
                 
-                sections.append(.wirelessNetworks(wirelessNetworks))
+                let predicate = NSPredicate(format: "summit == %@", summitManagedObject)
+                
+                let sort = [NSSortDescriptor(key: "name", ascending: true)]
+                
+                let wirelessNetworks = try! WirelessNetwork.filter(predicate, sort: sort, context: Store.shared.managedObjectContext)
+                
+                if wirelessNetworks.isEmpty == false {
+                    
+                    sections.append(.wirelessNetworks(wirelessNetworks))
+                }
             }
             
             // setup handoff
