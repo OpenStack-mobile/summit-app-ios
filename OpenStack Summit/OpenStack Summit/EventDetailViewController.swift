@@ -14,6 +14,7 @@ import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
 import XCDYouTubeKit
+import EventKit
     
 final class EventDetailViewController: UITableViewController, EventViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
     
@@ -26,6 +27,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     var event: Identifier!
     
     var addToScheduleInProgress = false
+    
+    lazy var eventStore: EKEventStore = EKEventStore()
     
     // MARK: - Private Properties
     

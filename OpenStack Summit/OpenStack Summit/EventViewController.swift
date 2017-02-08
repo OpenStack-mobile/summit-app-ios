@@ -8,12 +8,16 @@
 
 import Foundation
 import UIKit
+import CoreData
+import EventKit
 import SwiftFoundation
 import CoreSummit
 
 protocol EventViewController: class, MessageEnabledViewController {
     
     var addToScheduleInProgress: Bool { get set }
+    
+    var eventStore: EKEventStore { get }
 }
 
 extension EventViewController {
@@ -36,6 +40,16 @@ extension EventViewController {
             && (try! context.count(ReviewManagedObject.self, predicate: predicate)) == 0
     }
     
+    func canAddToCalendar() -> Bool {
+        
+        let status = EKEventStore.authorizationStatusForEntityType(.Event)
+        
+        switch status {
+        case .NotDetermined, .Authorized: return true
+        case .Restricted, .Denied: return false
+        }
+    }
+    
     func contextMenu(for event: EventDetail, scheduleableView: ScheduleableView? = nil) -> ContextMenu {
         
         guard let viewController = self as? UIViewController
@@ -51,7 +65,7 @@ extension EventViewController {
         
         if canAddFeedback(for: event) {
             
-            let rate = ContextMenu.Action(activityType: "\(self.dynamicType).Rate", image: nil, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: nil, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
                 
                 guard let controller = viewController else { return }
                 
@@ -75,7 +89,7 @@ extension EventViewController {
             
             let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
             
-            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -87,10 +101,24 @@ extension EventViewController {
             actions.append(scheduleEvent)
         }
         
+        if canAddToCalendar() {
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: nil, title: "Add to Calendar", handler: .background({ [weak self] (didComplete) in
+                
+                guard let controller = self else { return }
+                
+                controller.addToCalendar(event)
+                
+                didComplete(true)
+                }))
+            
+            actions.append(scheduleEvent)
+        }
+        
         return ContextMenu(actions: actions, shareItems: [message, url])
     }
     
-    private func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {
+    func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {
         
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
         
@@ -128,6 +156,77 @@ extension EventViewController {
         } else {
             
             Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
+        }
+    }
+    
+    func addToCalendar(event: EventDetail) {
+        
+        let status = EKEventStore.authorizationStatusForEntityType(.Event)
+        
+        switch status {
+            
+        case .Restricted, .Denied:
+            
+            break
+            
+        case .NotDetermined:
+            
+            eventStore.requestAccessToEntityType(.Event) { [weak self] (granted, error) in
+                
+                // retry
+                self?.addToCalendar(event)
+            }
+        
+        case .Authorized:
+            
+            let calendarListTitle = "OpenStack Summit"
+            
+            // get calendar
+            
+            let calendar: EKCalendar
+            
+            if let existingCalendar = eventStore.calendarsForEntityType(.Event).firstMatching({ $0.title == calendarListTitle }) {
+                
+                calendar = existingCalendar
+                
+            } else {
+                
+                calendar = EKCalendar(forEntityType: .Event, eventStore: eventStore)
+                
+                calendar.title = calendarListTitle
+                
+                calendar.source = eventStore.defaultCalendarForNewEvents.source
+                
+                do { try eventStore.saveCalendar(calendar, commit: true) }
+                
+                catch {
+                    
+                    showErrorMessage(error, fileName: #file, lineNumber: #line)
+                    return
+                }
+            }
+            
+            // create event
+            
+            let calendarEvent = EKEvent(eventStore: eventStore)
+            
+            calendarEvent.calendar = calendar
+            calendarEvent.title = event.name
+            calendarEvent.startDate = event.start.toFoundation()
+            calendarEvent.endDate = event.end.toFoundation()
+            calendarEvent.timeZone = NSTimeZone(name: event.timeZone)
+            calendarEvent.URL = event.webpageURL
+            calendarEvent.location = event.location
+            
+            if let data = event.eventDescription.dataUsingEncoding(NSUTF8StringEncoding),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                
+                calendarEvent.notes = attributedString.string
+            }
+            
+            do { try eventStore.saveEvent(calendarEvent, span: .ThisEvent, commit: true) }
+                
+            catch { showErrorMessage(error, fileName: #file, lineNumber: #line) }
         }
     }
 }

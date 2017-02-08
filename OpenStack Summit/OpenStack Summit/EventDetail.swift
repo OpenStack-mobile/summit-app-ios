@@ -18,6 +18,8 @@ public struct EventDetail: CoreDataDecodable {
     public let name: String
     public let summit: Identifier
     public let start: Date
+    public let end: Date
+    public let timeZone: String
     public let dateTime: String
     public let time: String
     public let location: String
@@ -47,6 +49,8 @@ public struct EventDetail: CoreDataDecodable {
         self.name = event.name
         self.summit = event.summit.identifier
         self.start = Date(foundation: event.start)
+        self.end = Date(foundation: event.end)
+        self.timeZone = event.summit.timeZone
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)

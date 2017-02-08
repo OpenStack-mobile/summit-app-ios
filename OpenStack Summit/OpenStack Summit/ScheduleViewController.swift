@@ -11,6 +11,7 @@ import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
 import CoreData
+import EventKit
 
 class ScheduleViewController: UIViewController, EventViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,14 +23,16 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - Properties
     
+    final var addToScheduleInProgress = false
+    
+    final lazy var eventStore: EKEventStore = EKEventStore()
+    
     final private(set) var summitTimeZoneOffset: Int = 0
     
     final private(set) var dayEvents = [ScheduleItem]()
     
     final private(set) var nowSelected = false
-    
-    final var addToScheduleInProgress = false
-        
+            
     private var filterObserver: Int?
     
     private var didSelectDate = false
