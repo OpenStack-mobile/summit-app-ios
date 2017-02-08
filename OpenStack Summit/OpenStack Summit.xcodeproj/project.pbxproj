@@ -164,7 +164,6 @@
 		6E1399E11DD7A7B900FD1D37 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */; };
 		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
 		6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */; };
-		6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1651951D8462AE00574CE5 /* MapKit.framework */; };
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
 		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1949331DCBB3E000A00603 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
@@ -969,7 +968,6 @@
 		6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6E1651911D845E4F00574CE5 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
 		6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDirectoryViewController.swift; sourceTree = "<group>"; };
-		6E1651951D8462AE00574CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
 		6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditViewController.swift; sourceTree = "<group>"; };
@@ -1383,7 +1381,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */,
 				6ECBD1DC1D7CB092004BF1A8 /* CoreSummit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1716,14 +1713,6 @@
 			name = Venues;
 			sourceTree = "<group>";
 		};
-		6E1651971D8462B600574CE5 /* System Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6E1651951D8462AE00574CE5 /* MapKit.framework */,
-			);
-			name = "System Frameworks";
-			sourceTree = "<group>";
-		};
 		6E1D51B71D8362AE007391A3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,7 +1946,6 @@
 		6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */ = {
 			isa = PBXGroup;
 			children = (
-				6E1651971D8462B600574CE5 /* System Frameworks */,
 				6E74FAF71D7C9E9F0018633D /* Objective-C */,
 				6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */,
 				6E9F28F51D7C903E002B7C7A /* Main.storyboard */,
