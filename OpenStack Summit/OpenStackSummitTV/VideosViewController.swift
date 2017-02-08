@@ -13,27 +13,41 @@ import CoreSummit
 @objc(OSSTVVideosViewController)
 final class VideosViewController: UINavigationController {
     
+    // MARK: - Properties
+    
+    private(set) var searchResultsController: VideoSearchResultsViewController!
+    private(set) var searchController: UISearchController!
+    private(set) var searchContainer: UISearchContainerViewController!
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Videos", bundle: nil)
-        let searchResultsController = storyboard.instantiateViewControllerWithIdentifier("VideoSearchResults") as! VideoSearchResultsViewController
+        searchResultsController = storyboard.instantiateViewControllerWithIdentifier("VideoSearchResults") as! VideoSearchResultsViewController
         
         /*
          Create a UISearchController, passing the `searchResultsController` to
          use to display search results.
          */
-        let searchController = UISearchController(searchResultsController: searchResultsController)
+        searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.searchResultsUpdater = searchResultsController
         searchController.searchBar.placeholder = "Search Videos"
         
         // Contain the `UISearchController` in a `UISearchContainerViewController`.
-        let searchContainer = UISearchContainerViewController(searchController: searchController)
+        searchContainer = UISearchContainerViewController(searchController: searchController)
         searchContainer.title = "Videos"
         
         // Finally contain the `UISearchContainerViewController` in a `UINavigationController`.
         self.setViewControllers([searchContainer], animated: false)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.searchController.searchBar.becomeFirstResponder()
+        
+        self.searchResultsController.viewDidAppear(animated)
     }
 }
