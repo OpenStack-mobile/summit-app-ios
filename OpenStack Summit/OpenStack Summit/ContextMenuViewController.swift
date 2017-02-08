@@ -36,7 +36,7 @@ private extension UIViewController {
         
         let contextMenu = contextMenuViewController.contextMenu
         
-        self.show(contextMenu: contextMenu, sender: .BarButtonItem(sender))
+        self.show(contextMenu: contextMenu, sender: .barButtonItem(sender))
     }
 }
 

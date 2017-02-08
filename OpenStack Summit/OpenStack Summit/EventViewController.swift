@@ -32,11 +32,11 @@ extension EventViewController {
         let predicate = NSPredicate(format: "event.id == %@ AND member == %@", eventID, member)
         
         return event.start < Date()
-            && (try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: predicate)).isEmpty
-            && (try! context.managedObjects(ReviewManagedObject.self, predicate: predicate)).isEmpty
+            && (try! context.count(MemberFeedbackManagedObject.self, predicate: predicate)) == 0
+            && (try! context.count(ReviewManagedObject.self, predicate: predicate)) == 0
     }
     
-    func showContextMenu(for event: EventDetail, scheduleableView: ScheduleableView? = nil, sender: PopoverPresentingView) {
+    func contextMenu(for event: EventDetail, scheduleableView: ScheduleableView? = nil) -> ContextMenu {
         
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
@@ -87,9 +87,7 @@ extension EventViewController {
             actions.append(scheduleEvent)
         }
         
-        let contextMenu = ContextMenu(actions: actions, shareItems: [message, url])
-        
-        viewController.show(contextMenu: contextMenu, sender: sender)
+        return ContextMenu(actions: actions, shareItems: [message, url])
     }
     
     private func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {

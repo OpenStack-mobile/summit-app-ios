@@ -139,7 +139,9 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        self.showContextMenu(for: eventDetail, scheduleableView: cell, sender: .view(sender))
+        let contextMenu = self.contextMenu(for: eventDetail, scheduleableView: cell)
+        
+        self.show(contextMenu: contextMenu, sender: .view(sender))
     }
     
     // MARK: - Methods

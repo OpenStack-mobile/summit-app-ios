@@ -46,54 +46,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     private var loadedAllFeedback = false
     private var currentFeedbackPage: Page<Review>?
     
-    var contextMenu: ContextMenu {
-        
-        let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
-        
-        let url = eventDetail.webpageURL
-        
-        var actions: [ContextMenu.Action] = []
-        
-        if self.data.contains(.feedback) {
-            
-            let rate = ContextMenu.Action(activityType: "\(self.dynamicType).Rate", image: nil, title: "Rate", handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
-                
-                feedbackVC.event = controller.event
-                
-                feedbackVC.rate = 0
-                
-                controller.showViewController(feedbackVC, sender: self)
-                
-                didComplete(true)
-            }))
-            
-            actions.append(rate)
-        }
-        
-        let isAttendee = Store.shared.isLoggedInAndConfirmedAttendee
-        
-        if isAttendee && addToScheduleInProgress == false {
-            
-            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
-            
-            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                controller.toggleSchedule()
-                
-                didComplete(true)
-            }))
-            
-            actions.append(scheduleEvent)
-        }
-        
-        return ContextMenu(actions: actions, shareItems: [message, url])
-    }
+    var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Loading
     
