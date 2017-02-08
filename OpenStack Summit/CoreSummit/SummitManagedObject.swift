@@ -46,6 +46,8 @@ public final class SummitManagedObject: Entity {
     @NSManaged public var eventTypes: Set<EventTypeManagedObject>
     
     @NSManaged public var schedule: Set<EventManagedObject>
+    
+    @NSManaged public var wirelessNetworks: Set<WirelessNetworkManagedObject>
 }
 
 extension Summit: CoreDataDecodable {
@@ -86,6 +88,7 @@ extension Summit: CoreDataDecodable {
         self.trackGroups = TrackGroup.from(managedObjects: managedObject.trackGroups)
         self.eventTypes = EventType.from(managedObjects: managedObject.eventTypes)
         self.schedule = Event.from(managedObjects: managedObject.schedule)
+        self.wirelessNetworks = WirelessNetwork.from(managedObjects: managedObject.wirelessNetworks)
     }
 }
 
@@ -111,6 +114,7 @@ extension Summit: CoreDataEncodable {
         managedObject.trackGroups = try context.relationshipFault(trackGroups)
         managedObject.eventTypes = try context.relationshipFault(eventTypes)
         managedObject.schedule = try context.relationshipFault(schedule)
+        managedObject.wirelessNetworks = try context.relationshipFault(wirelessNetworks)
         
         managedObject.didCache()
         

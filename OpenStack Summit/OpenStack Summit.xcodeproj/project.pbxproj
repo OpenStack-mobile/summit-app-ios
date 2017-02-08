@@ -164,6 +164,7 @@
 		6E1399E11DD7A7B900FD1D37 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */; };
 		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
 		6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */; };
+		6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1651951D8462AE00574CE5 /* MapKit.framework */; };
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
 		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1949331DCBB3E000A00603 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
@@ -385,6 +386,7 @@
 		6E574B6D1DCB2DFC00AE4837 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* CoreDataTests.swift */; };
 		6E574B6E1DCB2DFD00AE4837 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* CoreDataTests.swift */; };
 		6E57DB701D11BE8B00F5574C /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
+		6E57DDC31E4A723B00783BA6 /* EmailComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DDC21E4A723B00783BA6 /* EmailComposerViewController.swift */; };
 		6E586FC01DC29083001DE605 /* Member2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E586FBE1DC29083001DE605 /* Member2.json */; };
 		6E586FC11DC29083001DE605 /* Member2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E586FBE1DC29083001DE605 /* Member2.json */; };
 		6E586FC21DC29083001DE605 /* Member2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E586FBE1DC29083001DE605 /* Member2.json */; };
@@ -430,8 +432,30 @@
 		6E7FEA341D78E8E000B9E809 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E1E6C1D769E6800F6CB29 /* UserActivity.swift */; };
 		6E8220EF1E48D0670025FE58 /* PagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220EE1E48D0670025FE58 /* PagingTableViewController.swift */; };
 		6E8220F01E48D0670025FE58 /* PagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220EE1E48D0670025FE58 /* PagingTableViewController.swift */; };
-		6E8221131E499B3C0025FE58 /* ShowActivityIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF147EE1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift */; };
-		6E8221141E499C3A0025FE58 /* MessageEnabledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */; };
+		6E8220F21E48E0E50025FE58 /* WirelessNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */; };
+		6E8220F31E48E0E50025FE58 /* WirelessNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */; };
+		6E8220F41E48E0E50025FE58 /* WirelessNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */; };
+		6E8220F51E48E0E50025FE58 /* WirelessNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */; };
+		6E8220F71E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */; };
+		6E8220F81E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */; };
+		6E8220F91E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */; };
+		6E8220FA1E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */; };
+		6E8220FC1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */; };
+		6E8220FD1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */; };
+		6E8220FE1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */; };
+		6E8220FF1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */; };
+		6E8221011E48E67A0025FE58 /* Summit22.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221001E48E67A0025FE58 /* Summit22.json */; };
+		6E8221021E48E67A0025FE58 /* Summit22.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221001E48E67A0025FE58 /* Summit22.json */; };
+		6E8221031E48E67A0025FE58 /* Summit22.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221001E48E67A0025FE58 /* Summit22.json */; };
+		6E8221061E48E6880025FE58 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
+		6E8221071E48E6880025FE58 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
+		6E8221081E48E6880025FE58 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
+		6E82210A1E48E72C0025FE58 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
+		6E82210B1E48E72C0025FE58 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
+		6E82210C1E48E72C0025FE58 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
+		6E82210E1E48E9D70025FE58 /* DataUpdates9.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E82210D1E48E9D70025FE58 /* DataUpdates9.json */; };
+		6E82210F1E48E9D70025FE58 /* DataUpdates9.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E82210D1E48E9D70025FE58 /* DataUpdates9.json */; };
+		6E8221101E48E9D70025FE58 /* DataUpdates9.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E82210D1E48E9D70025FE58 /* DataUpdates9.json */; };
 		6E8A61051D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
 		6E8D0CD31D79CBA7004B435A /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D0CD21D79CBA7004B435A /* ImageCache.swift */; };
 		6E8D10991DF87F3B00A0BBDC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
@@ -968,6 +992,7 @@
 		6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6E1651911D845E4F00574CE5 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
 		6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDirectoryViewController.swift; sourceTree = "<group>"; };
+		6E1651951D8462AE00574CE5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGivenListViewController.swift; sourceTree = "<group>"; };
 		6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackEditViewController.swift; sourceTree = "<group>"; };
@@ -1064,6 +1089,7 @@
 		6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdateJSON.swift; sourceTree = "<group>"; };
 		6E57DB6F1D11BE8B00F5574C /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		6E57DDC21E4A723B00783BA6 /* EmailComposerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailComposerViewController.swift; sourceTree = "<group>"; };
 		6E586FBE1DC29083001DE605 /* Member2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Member2.json; sourceTree = "<group>"; };
 		6E5AE1321E27E163004D9A26 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageTableViewCell.h; path = "../../Carthage/Checkouts/SlackTextViewController/Examples/Messenger-Shared/MessageTableViewCell.h"; sourceTree = "<group>"; };
 		6E5AE1331E27E163004D9A26 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageTableViewCell.m; path = "../../Carthage/Checkouts/SlackTextViewController/Examples/Messenger-Shared/MessageTableViewCell.m"; sourceTree = "<group>"; };
@@ -1098,6 +1124,13 @@
 		6E7FEA2A1D78959900B9E809 /* VenuesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesInterfaceController.swift; sourceTree = "<group>"; };
 		6E7FEA2E1D78A19000B9E809 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 		6E8220EE1E48D0670025FE58 /* PagingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingTableViewController.swift; sourceTree = "<group>"; };
+		6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WirelessNetwork.swift; sourceTree = "<group>"; };
+		6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WirelessNetworkJSON.swift; sourceTree = "<group>"; };
+		6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WirelessNetworkManagedObject.swift; sourceTree = "<group>"; };
+		6E8221001E48E67A0025FE58 /* Summit22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit22.json; sourceTree = "<group>"; };
+		6E8221051E48E6880025FE58 /* Summit6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Summit6.json; sourceTree = "<group>"; };
+		6E8221091E48E72C0025FE58 /* ListMembers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListMembers.json; sourceTree = "<group>"; };
+		6E82210D1E48E9D70025FE58 /* DataUpdates9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates9.json; sourceTree = "<group>"; };
 		6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAttendeeFromOrderListRequest.swift; sourceTree = "<group>"; };
 		6E8D0CD21D79CBA7004B435A /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6E8D10981DF87F3B00A0BBDC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -1381,6 +1414,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */,
 				6ECBD1DC1D7CB092004BF1A8 /* CoreSummit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1565,9 +1599,13 @@
 				9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */,
 				6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */,
 				6E919B541E39CA4300FBF910 /* DataUpdates8.json */,
+				6E82210D1E48E9D70025FE58 /* DataUpdates9.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E586FBE1DC29083001DE605 /* Member2.json */,
+				6E8221051E48E6880025FE58 /* Summit6.json */,
 				6E10A5171D106741008CBD0C /* Summit7.json */,
+				6E8221001E48E67A0025FE58 /* Summit22.json */,
+				6E8221091E48E72C0025FE58 /* ListMembers.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1608,6 +1646,7 @@
 				6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */,
 				6EBC48F21E12FA1A0077806B /* Fault.swift */,
 				6EEED0381E3BB9FA00795B3D /* Notification.swift */,
+				6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */,
 				6E570A321D67711500189992 /* DataUpdate */,
 			);
 			name = Model;
@@ -1645,6 +1684,7 @@
 				6EBC48FE1E13902A0077806B /* TeamMemberJSON.swift */,
 				6EBC49021E1394FE0077806B /* TeamMessageJSON.swift */,
 				6EB1FDEE1E1AF9F50048045D /* TeamInvitationJSON.swift */,
+				6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */,
 				6E570A371D6775B200189992 /* DataUpdate */,
 			);
 			name = JSON;
@@ -1713,6 +1753,14 @@
 			name = Venues;
 			sourceTree = "<group>";
 		};
+		6E1651971D8462B600574CE5 /* System Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E1651951D8462AE00574CE5 /* MapKit.framework */,
+			);
+			name = "System Frameworks";
+			sourceTree = "<group>";
+		};
 		6E1D51B71D8362AE007391A3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1777,6 +1825,8 @@
 		6E3E8C291D47E65300A29003 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6EB752631D18B77300BC294D /* ErrorAlert.swift */,
+				6E25384C1D1AF5C1003E3400 /* BackBarButtonItem.swift */,
 				6E3E8C271D47E64D00A29003 /* ShowVenueDetail.swift */,
 				6EC417E71D76B60000E5888C /* ShowVideo.swift */,
 			);
@@ -1926,6 +1976,7 @@
 				6E2D9FF51DC9D2FE0015C588 /* AttendeeManagedObject.swift */,
 				6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */,
 				6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */,
+				6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */,
 				6EA38A721DCB1BBB00B703CE /* DataUpdate */,
 			);
 			name = CoreData;
@@ -1946,6 +1997,7 @@
 		6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */ = {
 			isa = PBXGroup;
 			children = (
+				6E1651971D8462B600574CE5 /* System Frameworks */,
 				6E74FAF71D7C9E9F0018633D /* Objective-C */,
 				6E9F28F11D7C903E002B7C7A /* AppDelegate.swift */,
 				6E9F28F51D7C903E002B7C7A /* Main.storyboard */,
@@ -1990,6 +2042,7 @@
 		6EB699E31D3412B00095474D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				6E57DDC21E4A723B00783BA6 /* EmailComposerViewController.swift */,
 				6E8220EE1E48D0670025FE58 /* PagingTableViewController.swift */,
 				6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */,
 				6EF147EE1D1357CE00D5EEF9 /* ShowActivityIndicatorProtocol.swift */,
@@ -2063,11 +2116,9 @@
 			isa = PBXGroup;
 			children = (
 				6E49054E1D2ED6BD00D56870 /* Appearance.swift */,
-				6E25384C1D1AF5C1003E3400 /* BackBarButtonItem.swift */,
 				9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */,
 				6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */,
 				6EF12C511D1497E100814AD0 /* UIView+Border.swift */,
-				6EB752631D18B77300BC294D /* ErrorAlert.swift */,
 				6EF12C541D14997C00814AD0 /* ScheduleableView.swift */,
 				6EF12C581D1499BA00814AD0 /* SweetAlert.swift */,
 				6EFC964E1D22DC320081B3E8 /* TrackTableViewCell.swift */,
@@ -2535,13 +2586,17 @@
 			files = (
 				6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */,
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
+				6E8221101E48E9D70025FE58 /* DataUpdates9.json in Resources */,
 				6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E82210C1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */,
+				6E8221081E48E6880025FE58 /* Summit6.json in Resources */,
 				6E0B5F2F1D77C8AB0005F6CE /* DataUpdates2.json in Resources */,
 				6E586FC21DC29083001DE605 /* Member2.json in Resources */,
+				6E8221031E48E67A0025FE58 /* Summit22.json in Resources */,
 				6EE74DEA1DBF8E5800616BEA /* DataUpdates7.json in Resources */,
 				6E0B5F301D77C8AB0005F6CE /* DataUpdates1.json in Resources */,
 				6E919B571E39CA4300FBF910 /* DataUpdates8.json in Resources */,
@@ -2624,13 +2679,17 @@
 			files = (
 				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
+				6E82210E1E48E9D70025FE58 /* DataUpdates9.json in Resources */,
 				6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E82210A1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6E586FC01DC29083001DE605 /* Member2.json in Resources */,
+				6E8221061E48E6880025FE58 /* Summit6.json in Resources */,
 				6E570A311D676A3800189992 /* DataUpdates2.json in Resources */,
 				6E25AD411D5A63F20060E7BA /* DataUpdates1.json in Resources */,
+				6E8221011E48E67A0025FE58 /* Summit22.json in Resources */,
 				6EE33F491DBF8F9500ECDDCF /* DataUpdates7.json in Resources */,
 				6E93D4411D9AEC5000E3302A /* DataUpdates5.json in Resources */,
 				6E919B551E39CA4300FBF910 /* DataUpdates8.json in Resources */,
@@ -2650,13 +2709,17 @@
 			files = (
 				6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */,
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
+				6E82210F1E48E9D70025FE58 /* DataUpdates9.json in Resources */,
 				6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */,
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E82210B1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */,
+				6E8221071E48E6880025FE58 /* Summit6.json in Resources */,
 				6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */,
 				6E586FC11DC29083001DE605 /* Member2.json in Resources */,
+				6E8221021E48E67A0025FE58 /* Summit22.json in Resources */,
 				6EE74DED1DBF8E5A00616BEA /* DataUpdates7.json in Resources */,
 				6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */,
 				6E919B561E39CA4300FBF910 /* DataUpdates8.json in Resources */,
@@ -2895,6 +2958,7 @@
 				6E0B5EBB1D77C8950005F6CE /* Session.swift in Sources */,
 				6E0B5EBF1D77C8950005F6CE /* ImageJSON.swift in Sources */,
 				6E3D4D011E12D44A00D542CD /* TeamMember.swift in Sources */,
+				6E8220F91E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */,
 				6E0B5EC01D77C8950005F6CE /* EventTypeJSON.swift in Sources */,
 				6EF4F8811DC9296100D31A99 /* VenueFloorManagedObject.swift in Sources */,
 				6E982E451E15A93800ECB76E /* TeamMessageRequest.swift in Sources */,
@@ -2926,6 +2990,7 @@
 				6E0B5ED51D77C8950005F6CE /* TrackGroupJSON.swift in Sources */,
 				6E1BCFF01E379F4400059E94 /* GroupManagedObject.swift in Sources */,
 				6E0B5ED91D77C8950005F6CE /* EventDataUpdateJSON.swift in Sources */,
+				6E8220FE1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */,
 				6E0B5EDA1D77C8950005F6CE /* TrackJSON.swift in Sources */,
 				6E1BCFF41E37A61200059E94 /* MemberRequest.swift in Sources */,
 				6EF4F87D1DC928D700D31A99 /* ImageManagedObject.swift in Sources */,
@@ -2953,6 +3018,7 @@
 				6E0B5EE41D77C8950005F6CE /* SummitJSON.swift in Sources */,
 				6E0B5EE51D77C8950005F6CE /* WebConvertible.swift in Sources */,
 				6EF4F8611DC8CE1600D31A99 /* Entity.swift in Sources */,
+				6E8220F41E48E0E50025FE58 /* WirelessNetwork.swift in Sources */,
 				6E2D9FDC1DC9944E0015C588 /* SpeakerManagedObject.swift in Sources */,
 				6EB1FDED1E1AB1A20048045D /* TeamInvitationManagedObject.swift in Sources */,
 				6EEED03B1E3BB9FA00795B3D /* Notification.swift in Sources */,
@@ -3074,6 +3140,7 @@
 				6EA6FD341D956C4D009B66B0 /* DetailImageTableViewCell.swift in Sources */,
 				6EDE52141D429F8700DF4BEA /* VenueLocationDetailViewController.swift in Sources */,
 				6E4E24621E24258D00F7F3FB /* SearchMembersViewController.swift in Sources */,
+				6E57DDC31E4A723B00783BA6 /* EmailComposerViewController.swift in Sources */,
 				6E2F49B21E4274E8001083AD /* LaunchScreenViewController.swift in Sources */,
 				6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */,
 				6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */,
@@ -3262,7 +3329,9 @@
 				6E2D9FDE1DC9A5730015C588 /* SummitTypeManagedObject.swift in Sources */,
 				6E6FD17A1D7A1A24003D13D7 /* Production.swift in Sources */,
 				6E99B8AA1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */,
+				6E8220F21E48E0E50025FE58 /* WirelessNetwork.swift in Sources */,
 				6E323D1E1D77189500E8C9B3 /* WebConvertible.swift in Sources */,
+				6E8220F71E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */,
 				6EA38A841DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift in Sources */,
 				6E2D9FE21DC9A5960015C588 /* TicketTypeManagedObject.swift in Sources */,
 				6E10A5711D10675D008CBD0C /* Presentation.swift in Sources */,
@@ -3296,6 +3365,7 @@
 				6E10A5701D10675D008CBD0C /* Person.swift in Sources */,
 				6E10A5921D10675D008CBD0C /* TagJSON.swift in Sources */,
 				6E10A5961D10675D008CBD0C /* TimeZoneJSON.swift in Sources */,
+				6E8220FC1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */,
 				6EA38A781DCB1CA000B703CE /* EventDataUpdateManagedObject.swift in Sources */,
 				6E10A5641D10675D008CBD0C /* Feedback.swift in Sources */,
 				6E10A5721D10675D008CBD0C /* PresentationJSON.swift in Sources */,
@@ -3448,8 +3518,10 @@
 				6E2923EF1D7AF8C900D14F0A /* Feedback.swift in Sources */,
 				6EBC48FC1E138EB20077806B /* TeamJSON.swift in Sources */,
 				6EF4F8781DC9234A00D31A99 /* VenueRoomManagedObject.swift in Sources */,
+				6E8220F81E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */,
 				6E919B521E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */,
 				6EBC48F81E1309790077806B /* FaultJSON.swift in Sources */,
+				6E8220F31E48E0E50025FE58 /* WirelessNetwork.swift in Sources */,
 				6E2923F01D7AF8C900D14F0A /* PresentationJSON.swift in Sources */,
 				6E2923F11D7AF8C900D14F0A /* AttendeeJSON.swift in Sources */,
 				6E2923F21D7AF8C900D14F0A /* DataUpdate.swift in Sources */,
@@ -3469,6 +3541,7 @@
 				6EF4F8661DC8D1D300D31A99 /* CoreDataExtensions.swift in Sources */,
 				6E2923FF1D7AF8C900D14F0A /* Video.swift in Sources */,
 				9D6AADB31DBE58040057888E /* VenueRoomDataUpdateJSON.swift in Sources */,
+				6E8220FD1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */,
 				6E2924001D7AF8C900D14F0A /* PresentationDataUpdateJSON.swift in Sources */,
 				6E488F5E1DD1107500EA6B0F /* EntityController.swift in Sources */,
 				6EB1FDEC1E1AB1A20048045D /* TeamInvitationManagedObject.swift in Sources */,
@@ -3496,7 +3569,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E8221141E499C3A0025FE58 /* MessageEnabledViewController.swift in Sources */,
 				6E96C1CA1DE8F101002F4690 /* Observable.swift in Sources */,
 				6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */,
 				6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */,
@@ -3504,6 +3576,7 @@
 				6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */,
 				6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */,
 				6EBCB4891DDE10B800727130 /* Store.swift in Sources */,
+				6E8220F51E48E0E50025FE58 /* WirelessNetwork.swift in Sources */,
 				6E96C1C91DE8F0F8002F4690 /* SummitManager.swift in Sources */,
 				6E1D51B61D8362A9007391A3 /* PlayVideo.swift in Sources */,
 				6E4139701DE8D2080074D631 /* SummitsViewController.swift in Sources */,
@@ -3515,18 +3588,19 @@
 				6EF3A8921E470BEC00CD85EF /* CollectionViewController.swift in Sources */,
 				6EF3A88F1E47095100CD85EF /* TableViewController.swift in Sources */,
 				6E9CDB051D7E72830010D1E1 /* ScheduleItem.swift in Sources */,
-				6E8221131E499B3C0025FE58 /* ShowActivityIndicatorProtocol.swift in Sources */,
 				6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */,
 				6E53B2A71D85340700641A8F /* SpeakerDetailViewController.swift in Sources */,
 				6EF3A88C1E46760500CD85EF /* VideosViewController.swift in Sources */,
 				6EA737651E47B4BE00700F64 /* VideoCell.swift in Sources */,
 				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
 				6E8220F01E48D0670025FE58 /* PagingTableViewController.swift in Sources */,
+				6E8220FF1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */,
 				6EB54E721D85FCBA0027350D /* ImagesViewController.swift in Sources */,
 				6EB9B8A01D83495C00917077 /* Appearance.swift in Sources */,
 				6E9CDB041D7E72760010D1E1 /* EventDetail.swift in Sources */,
 				6EA737611E47984400700F64 /* VideoSearchResultsViewController.swift in Sources */,
 				6E74FB041D7CAFDB0018633D /* Define.swift in Sources */,
+				6E8220FA1E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */,
 				6EDA19001D7F4A6100AB450F /* EventDetailViewController.swift in Sources */,
 				6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */,
 				6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */,
