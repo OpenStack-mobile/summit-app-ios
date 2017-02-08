@@ -63,6 +63,7 @@ public extension DataUpdate {
         case PresentationSlide
         case SponsorFromEvent
         case SummitGroupEvent
+        case SummitWIFIConnection
         
         internal var type: Updatable.Type? {
             
@@ -83,6 +84,7 @@ public extension DataUpdate {
             case .PresentationCategory: return CoreSummit.Track.self
             case .PresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
+            case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
             
             default: return nil
             }
@@ -276,3 +278,4 @@ extension Track: Updatable { }
 extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }
 extension GroupEventDataUpdate: Updatable { }
+extension WirelessNetwork: Updatable { }

@@ -151,15 +151,35 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
                      context: NSManagedObjectContext,
                      includesSubentities: Bool = true) throws -> Self? {
         
-        guard let managedObject = try ManagedObject.find(identifier, context: context, returnsObjectsAsFaults: false,includesSubentities: includesSubentities)
+        guard let managedObject = try ManagedObject.find(identifier,
+                                                         context: context,
+                                                         returnsObjectsAsFaults: false,
+                                                         includesSubentities: includesSubentities)
             else { return nil }
         
         return Self.init(managedObject: managedObject)
     }
     
+    static func filter(predicate: NSPredicate,
+                       sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
+                       fetchLimit: Int? = nil,
+                       context: NSManagedObjectContext) throws -> [Self] {
+        
+        let managedObjects = try ManagedObject.filter(predicate,
+                                                      sort: sort,
+                                                      fetchLimit: fetchLimit,
+                                                      returnsObjectsAsFaults: false,
+                                                      includesSubentities: true,
+                                                      context: context) as! [ManagedObject]
+        
+        return Self.from(managedObjects: managedObjects)
+    }
+    
     static func all(context: NSManagedObjectContext) throws -> [Self] {
         
-        let managedObjects = try ManagedObject.filter(nil, returnsObjectsAsFaults: false, includesSubentities: true, context: context) as! [ManagedObject]
+        let managedObjects = try ManagedObject.filter(returnsObjectsAsFaults: false,
+                                                      includesSubentities: true,
+                                                      context: context) as! [ManagedObject]
         
         return Self.from(managedObjects: managedObjects)
     }

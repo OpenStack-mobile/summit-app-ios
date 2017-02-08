@@ -1,0 +1,30 @@
+[
+	{
+		"id": 651636,
+		"entity_id": 1,
+		"class_name": "SummitWIFIConnection",
+		"created": 1486368442,
+		"type": "INSERT",
+		"entity": {
+			"id": 1,
+			"ssid": "Awesome-0 Wi-Fi",
+			"password": "developer",
+			"description": "<p>This wifi is just awesome. We rock your world and you know it. </p>",
+			"summit_id": 7
+		}
+	},
+	{
+		"id": 651637,
+		"entity_id": 2,
+		"class_name": "SummitWIFIConnection",
+		"created": 1486379361,
+		"type": "INSERT",
+		"entity": {
+			"id": 2,
+			"ssid": "Summit Wi-Fi",
+			"password": "1234",
+			"description": null,
+			"summit_id": 7
+		}
+	}
+]

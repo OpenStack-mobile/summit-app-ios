@@ -10,7 +10,7 @@ import XCTest
 import SwiftFoundation
 @testable import CoreSummit
 
-let SummitJSONIdentifiers = 7 ... 7
+let SummitJSONIdentifiers = [6, 7, 22]
 
 let MemberJSONIdentifiers = 1 ... 2
 
@@ -48,6 +48,16 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
         
         XCTAssert(reponse.page.items.isEmpty == false, "No summits parsed")
+    }
+    
+    func testListMembers() {
+        
+        let testJSON = loadJSON("ListMembers")
+        
+        guard let page = Page<Member>(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(page.items.isEmpty == false, "No members parsed")
     }
     
     func testDataUpdates1() {
@@ -186,5 +196,28 @@ final class JSONTests: XCTestCase {
             case let .JSON(entityJSON) = dataUpdateEntity,
             let _ = GroupEventDataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates9() {
+        
+        let testJSON = loadJSON("DataUpdates9")
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == 2, "\(dataUpdates.count) DataUpdate. Should be 2")
+        
+        for dataUpdate in dataUpdates {
+            
+            guard let dataUpdateEntity = dataUpdate.entity,
+                case let .JSON(entityJSON) = dataUpdateEntity
+                where dataUpdate.className == .SummitWIFIConnection
+                else { continue }
+            
+            guard let _ = WirelessNetwork(JSONValue: .Object(entityJSON))
+                else { XCTFail("Could not decode from JSON"); return }
+        }
     }
 }

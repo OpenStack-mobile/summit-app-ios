@@ -25,7 +25,7 @@
         <!--Videos-->
         <scene sceneID="Z1f-JO-Uae">
             <objects>
-                <collectionViewController storyboardIdentifier="VideoSearchResults" title="Videos" id="R5h-Uf-VNv" customClass="OSSTVVideoSearchResultsViewController" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="VideoSearchResults" title="Videos" definesPresentationContext="YES" id="R5h-Uf-VNv" customClass="OSSTVVideoSearchResultsViewController" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Nw3-1I-9a3">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
