@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftFoundation
 import CoreSummit
 
 public struct EventDetail: CoreDataDecodable {
@@ -16,6 +17,7 @@ public struct EventDetail: CoreDataDecodable {
     public let id: Identifier
     public let name: String
     public let summit: Identifier
+    public let start: Date
     public let dateTime: String
     public let time: String
     public let location: String
@@ -44,6 +46,7 @@ public struct EventDetail: CoreDataDecodable {
         self.id = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
+        self.start = Date(foundation: event.start)
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)

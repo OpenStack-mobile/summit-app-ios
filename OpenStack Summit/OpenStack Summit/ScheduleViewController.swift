@@ -12,7 +12,7 @@ import AFHorizontalDayPicker
 import CoreSummit
 import CoreData
 
-class ScheduleViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ScheduleViewController: UIViewController, EventViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     typealias DateFilter = EventManagedObject.DateFilter
     
@@ -28,7 +28,7 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
     
     final private(set) var nowSelected = false
     
-    private var addToScheduleInProgress = false
+    final var addToScheduleInProgress = false
         
     private var filterObserver: Int?
     
@@ -133,40 +133,13 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ScheduleTableViewCell
         let scheduleItem = dayEvents[indexPath.row]
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: scheduleItem.id)
         
         guard let eventManagedObject = try! EventManagedObject.find(scheduleItem.id, context: Store.shared.managedObjectContext)
             else { fatalError("Invalid event \(scheduleItem.id)") }
         
         let eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
-        
-        let url = eventDetail.webpageURL
-        
-        var actions: [ContextMenu.Action] = []
-        
-        let isAttendee = Store.shared.isLoggedInAndConfirmedAttendee
-        
-        if isAttendee && addToScheduleInProgress == false {
-            
-            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
-            
-            let scheduleEvent = ContextMenu.Action(activityType: "\(self.dynamicType).ScheduleEvent", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                controller.toggleScheduledStatus(for: scheduleItem, cell: cell)
-                
-                didComplete(true)
-                }))
-            
-            actions.append(scheduleEvent)
-        }
-        
-        let contextMenu = ContextMenu(actions: actions, shareItems: [message, url])
-        
-        self.show(contextMenu: contextMenu, sender: .View(sender))
+        self.showContextMenu(for: eventDetail, scheduleableView: cell, sender: .view(sender))
     }
     
     // MARK: - Methods
@@ -411,47 +384,6 @@ class ScheduleViewController: UIViewController, MessageEnabledViewController, Sh
         let _ = self.view
         
         self.loadData()
-    }
-    
-    private func toggleScheduledStatus(for event: ScheduleItem, cell: ScheduleTableViewCell) {
-        
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        
-        guard addToScheduleInProgress == false else { return }
-        
-        addToScheduleInProgress = true
-        
-        // update cell
-        cell.scheduled = !scheduled
-        
-        let completion: ErrorType? -> () = { [weak self] (response) in
-            
-            guard let controller = self else { return }
-            
-            controller.addToScheduleInProgress = false
-            
-            switch response {
-                
-            case let .Some(error):
-                
-                // restore original value
-                cell.scheduled = scheduled
-                
-                // show error
-                controller.showErrorMessage(error)
-                
-            case .None: break
-            }
-        }
-        
-        if scheduled {
-            
-            Store.shared.removeEventFromSchedule(event.summit, event: event.id, completion: completion)
-            
-        } else {
-            
-            Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
-        }
     }
     
     // MARK: - AFHorizontalDayPickerDelegate

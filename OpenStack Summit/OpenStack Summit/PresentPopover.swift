@@ -15,12 +15,12 @@ extension UIViewController {
         
         switch sender {
             
-        case let .View(view):
+        case let .view(view):
             
             viewController.popoverPresentationController?.sourceRect = view.bounds
             viewController.popoverPresentationController?.sourceView = view
             
-        case let .BarButtonItem(tabBarItem):
+        case let .barButtonItem(tabBarItem):
             
             viewController.popoverPresentationController?.barButtonItem = tabBarItem
         }
@@ -33,6 +33,6 @@ extension UIViewController {
 
 enum PopoverPresentingView {
     
-    case View(UIView)
-    case BarButtonItem(UIBarButtonItem)
+    case view(UIView)
+    case barButtonItem(UIBarButtonItem)
 }

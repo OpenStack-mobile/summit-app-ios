@@ -15,7 +15,7 @@ import SwiftFoundation
 import CoreSummit
 import XCDYouTubeKit
     
-final class EventDetailViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
+final class EventDetailViewController: UITableViewController, EventViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
@@ -24,6 +24,8 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     // MARK: - Properties
     
     var event: Identifier!
+    
+    var addToScheduleInProgress = false
     
     // MARK: - Private Properties
     
@@ -37,7 +39,6 @@ final class EventDetailViewController: UITableViewController, ShowActivityIndica
     
     private var scheduled = false
     
-    private var addToScheduleInProgress = false
     private var shouldShowReviews = false
     private var loadingFeedback = false
     private var loadingAverageRating = false

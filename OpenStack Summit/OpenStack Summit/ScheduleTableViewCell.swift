@@ -174,7 +174,6 @@ final class ScheduleTableViewCell: UITableViewCell, ScheduleableView {
         super.layoutSubviews()
     }
     
-    
     override func setSelected(selected: Bool, animated: Bool) {
         // On cell selected, internal views lose background color http://stackoverflow.com/questions/6745919/uitableviewcell-subview-disappears-when-cell-is-selected
         let color = trackGroupColorBar.backgroundColor
