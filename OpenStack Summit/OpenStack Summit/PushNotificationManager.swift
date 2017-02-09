@@ -130,11 +130,16 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
+            let incomingMessage = teamMessage.from.identifier != store.authenticatedMember?.identifier
+            
             // set as unread
-            unreadTeamMessages.value.insert(teamMessage.identifier)
+            if incomingMessage {
+                
+                unreadTeamMessages.value.insert(teamMessage.identifier)
+            }
             
             // schedule local notification
-            if backgroundState && teamMessage.from.identifier != store.authenticatedMember?.identifier {
+            if backgroundState && incomingMessage {
                 
                 let userNotification = UILocalNotification()
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue, UserNotificationUserInfo.identifier.rawValue : teamMessage.identifier]
