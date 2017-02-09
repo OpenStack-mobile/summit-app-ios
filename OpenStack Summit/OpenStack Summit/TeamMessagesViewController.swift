@@ -238,6 +238,11 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         
         configure(cell: cell, at: indexPath)
         
+        let message = self[indexPath]
+        
+        // mark notification as read
+        PushNotificationManager.shared.unreadTeamMessages.value.remove(message.identifier)
+        
         return cell
     }
     

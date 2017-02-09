@@ -141,6 +141,11 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         configure(cell: cell, at: indexPath)
         
+        let notification = self[indexPath]
+        
+        // mark notification as read
+        PushNotificationManager.shared.unreadNotifications.value.remove(notification.identifier)
+        
         return cell
     }
     

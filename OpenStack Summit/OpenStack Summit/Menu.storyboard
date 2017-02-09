@@ -90,7 +90,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhA-QB-4RU" userLabel="Events Button">
-                                                <rect key="frame" x="22" y="17" width="400" height="40"/>
+                                                <rect key="frame" x="22" y="17" width="290" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -100,7 +100,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zak-3i-NtK" userLabel="Venues Button">
-                                                <rect key="frame" x="24" y="67" width="400" height="40"/>
+                                                <rect key="frame" x="24" y="67" width="288" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="21" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -110,17 +110,17 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7my-lK-e1A" userLabel="People or Speakers Button">
-                                                <rect key="frame" x="20" y="117" width="400" height="40"/>
+                                                <rect key="frame" x="20" y="117" width="292" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="PEOPLE OR SPEAKERS" image="people"/>
+                                                <state key="normal" title="SPEAKERS" image="people"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="vbe-Gc-6CM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UM-eh-Q5r">
-                                                <rect key="frame" x="20" y="165" width="400" height="40"/>
+                                                <rect key="frame" x="20" y="165" width="292" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -149,6 +149,26 @@
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Rpa-rB-CVT"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="exc-UN-4tk">
+                                                <rect key="frame" x="203" y="168" width="35" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpm-nC-RgX">
+                                                        <rect key="frame" x="4" y="7" width="27" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <real key="value" value="17.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="275" id="l3J-mz-oAp"/>
@@ -189,6 +209,8 @@
                         <outlet property="aboutButton" destination="lrl-Me-5MB" id="cxo-Vv-idY"/>
                         <outlet property="eventsButton" destination="OhA-QB-4RU" id="9Dk-si-29K"/>
                         <outlet property="inboxButton" destination="4UM-eh-Q5r" id="G0U-BU-FuR"/>
+                        <outlet property="inboxCounterLabel" destination="lpm-nC-RgX" id="BuI-6Y-lY5"/>
+                        <outlet property="inboxCounterView" destination="exc-UN-4tk" id="kp2-Uv-nb7"/>
                         <outlet property="loginButton" destination="2XL-uy-eo6" id="Vaa-tV-baw"/>
                         <outlet property="myProfileButton" destination="KbZ-RL-hoW" id="cA0-OY-ozY"/>
                         <outlet property="nameLabel" destination="9Is-LK-cIs" id="CjQ-hd-gAQ"/>
@@ -200,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4H-U9-HZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="194" y="472"/>
+            <point key="canvasLocation" x="193.125" y="471.12676056338029"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="gu9-km-v08">

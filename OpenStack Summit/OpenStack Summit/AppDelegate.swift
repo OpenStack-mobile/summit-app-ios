@@ -82,12 +82,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
         PushNotificationManager.shared.setupNotifications(application)
         PushNotificationManager.shared.reloadSubscriptions()
+        PushNotificationManager.shared.updateAppBadge()
         
         // setup FireBase
         FIRApp.configure()
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
-        
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self,
@@ -116,9 +115,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        
-        // yeah, this code is correct. It should delete notification badge when entering app
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
