@@ -55,6 +55,18 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         configureView()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        PushNotificationManager.shared.teamMessageAlertFilter = team
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        PushNotificationManager.shared.teamMessageAlertFilter = nil
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
@@ -237,6 +249,11 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         let cell = tableView.dequeueReusableCellWithIdentifier(MessengerCellIdentifier, forIndexPath: indexPath) as! MessageTableViewCell
         
         configure(cell: cell, at: indexPath)
+        
+        let message = self[indexPath]
+        
+        // mark notification as read
+        PushNotificationManager.shared.unreadTeamMessages.value.remove(message.identifier)
         
         return cell
     }

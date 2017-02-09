@@ -14,15 +14,9 @@ import Crashlytics
 
 final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActivityIndicatorProtocol, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
-    // MARK: - Properties
-    
-    // Menu VCs
-    let eventsViewController = EventsViewController()
-    let venuesViewController = VenuesViewController()
-    let speakersViewController = R.storyboard.people.speakerListViewController()!
-    
     // MARK: - IB Outlets
     
+    @IBOutlet weak var searchTextView: UITextField!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
@@ -33,8 +27,18 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @IBOutlet weak var myProfileButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
     @IBOutlet weak var inboxButton: UIButton!
+    @IBOutlet weak var inboxCounterView: UIView!
+    @IBOutlet weak var inboxCounterLabel: UILabel!
     
-    @IBOutlet weak var searchTextView: UITextField!
+    // MARK: - Properties
+    
+    // Menu VCs
+    let eventsViewController = EventsViewController()
+    let venuesViewController = VenuesViewController()
+    let speakersViewController = R.storyboard.people.speakerListViewController()!
+    
+    private var unreadNotificationsObserver: Int?
+    private var unreadTeamMessagesObserver: Int?
     
     // MARK: - Accessors
     
@@ -85,6 +89,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     deinit {
         
+        if let observer = unreadTeamMessagesObserver {
+            
+            PushNotificationManager.shared.unreadTeamMessages.remove(observer)
+        }
+        
+        if let observer = unreadNotificationsObserver {
+            
+            PushNotificationManager.shared.unreadNotifications.remove(observer)
+        }
+        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -105,6 +119,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             selector: #selector(MenuViewController.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
+        
+        // observe unread notifications
+        unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
+            .observe { [weak self] _ in self?.reloadInboxCounter() }
+        unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications
+            .observe { [weak self] _ in self?.reloadInboxCounter() }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -112,6 +132,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         self.showUserProfile()
         self.reloadMenu()
+        self.reloadInboxCounter()
     }
     
     // MARK: - Actions
@@ -229,8 +250,19 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         myProfileButton.hidden = hasAccess(to: .MyProfile) == false
     }
     
+    private func reloadInboxCounter() {
+        
+        let unreadCount = PushNotificationManager.shared.unreadCount
+        
+        inboxCounterView.hidden = unreadCount == 0
+        inboxCounterLabel.text = "\(unreadCount)"
+    }
+    
+    // MARK: Navigation
+    
     @inline(__always)
     private func navigateToHome() {
+        
         toggleMenuSelection(eventsButton)
     }
     
@@ -262,8 +294,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             pictureURL = ""
         }
     }
-    
-    // MARK: Navigation
     
     func showSpeakers() {
         

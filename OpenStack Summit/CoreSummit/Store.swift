@@ -138,6 +138,11 @@ public final class Store {
         
         // manually send notification
         NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: [:])
+        
+        #if os(iOS)
+        // logout
+        self.logout()
+        #endif
     }
     
     // MARK: - Internal / Private Methods

@@ -52,7 +52,17 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [])
     }()
     
+    private var unreadTeamMessagesObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = unreadTeamMessagesObserver {
+            
+            PushNotificationManager.shared.unreadTeamMessages.remove(observer)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +80,9 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         pageController.callback.didLoadNextPage = { [weak self] in self?.didLoadNextPage($0) }
         
         pageController.cached = { [weak self] in self?.loadFromCache() ?? [] }
+        
+        unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
+            .observe { [weak self] _ in self?.tableView.reloadData() }
         
         refresh()
     }
@@ -89,11 +102,16 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     }
     
     @inline(__always)
-    private func configure(cell cell: UITableViewCell, with team: Team) {
+    private func configure(cell cell: TeamCell, with team: Team) {
         
-        cell.textLabel!.text = team.name
+        cell.nameLabel.text = team.name
         
-        cell.detailTextLabel!.text = team.descriptionText
+        cell.descriptionLabel.text = team.descriptionText
+        
+        let unreadCount = try! PushNotificationManager.shared.unreadMessages(in: team.identifier, context: Store.shared.managedObjectContext)
+        
+        cell.unreadView.hidden = unreadCount == 0
+        cell.unreadLabel.text = "\(unreadCount)"
     }
     
     // MARK: - IndicatorInfoProvider
@@ -170,4 +188,17 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         default: fatalError("Unknown segue: \(segue)")
         }
     }
+}
+
+// MARK: - Supporting Types
+
+final class TeamCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var unreadView: UIView!
+    
+    @IBOutlet weak var unreadLabel: UILabel!
 }

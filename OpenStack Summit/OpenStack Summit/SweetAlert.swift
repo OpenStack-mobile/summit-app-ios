@@ -210,7 +210,7 @@ public class SweetAlert: UIViewController {
         return self
     }
     
-    public func showAlert(title: String, subTitle: String?, style: AlertStyle) -> SweetAlert {
+    public func showAlert(title: String, subTitle: String?, style: AlertStyle = .None) -> SweetAlert {
         self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: "OK")
         return self
         

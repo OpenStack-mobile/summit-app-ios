@@ -118,6 +118,15 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         cell.textLabel!.text = notification.body
         
         cell.detailTextLabel!.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+        
+        if let _ = notification.event {
+            
+            cell.accessoryType = .DisclosureIndicator
+            
+        } else {
+            
+            cell.accessoryType = .None
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -127,6 +136,11 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationCell)!
         
         configure(cell: cell, at: indexPath)
+        
+        let notification = self[indexPath]
+        
+        // mark notification as read
+        PushNotificationManager.shared.unreadNotifications.value.remove(notification.identifier)
         
         return cell
     }
@@ -153,6 +167,23 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         return UITableViewCellEditingStyle(rawValue: 3)!
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard tableView.editing == false else { return }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let notification = self[indexPath]
+        
+        guard let event = notification.event else { return }
+        
+        let eventDetailViewController = R.storyboard.event.eventDetailViewController()!
+        
+        eventDetailViewController.event = event
+        
+        self.showViewController(eventDetailViewController, sender: self)
     }
     
     // MARK: - IndicatorInfoProvider
