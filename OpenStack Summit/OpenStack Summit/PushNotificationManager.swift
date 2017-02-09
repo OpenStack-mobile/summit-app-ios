@@ -37,6 +37,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
+    private(set) var subscribedTopics = Set<Notification.Topic>()
+    
     // MARK: - Initialization
     
     deinit {
@@ -102,6 +104,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let backgroundState = UIApplication.sharedApplication().applicationState == .Background
         
+        let context = store.privateQueueManagedObjectContext
+        
         // parse
         
         if let teamMessageNotification = TeamMessageNotification(pushNotification: pushNotification) {
@@ -111,7 +115,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             let teamMessage = TeamMessage(notification: teamMessageNotification)
             
             // cache
-            let context = store.privateQueueManagedObjectContext
             context.performBlock {
                 
                 try! teamMessage.save(context)
@@ -136,10 +139,24 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             notification = generalNotification
             
+            guard try! SummitManagedObject.find(generalNotification.summit, context: context) != nil else {
+                
+                log?("Invalid summit in push notification: \(generalNotification)")
+                return
+            }
+            
+            if let event = generalNotification.event?.identifier {
+                
+                guard try! EventManagedObject.find(event, context: context) != nil else {
+                    
+                    log?("Invalid event in push notification: \(generalNotification)")
+                    return
+                }
+            }
+            
             let encodable = Notification(notification: generalNotification)
             
             // cache
-            let context = store.privateQueueManagedObjectContext
             context.performBlock {
                 
                 try! encodable.save(context)
@@ -210,8 +227,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                             
                             self?.log?("Sent message from local notification: \(newMessage)")
                         }
-                        
-                        
                     })
                     
                     completion()
@@ -230,6 +245,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     public func reloadSubscriptions() {
+        
+        unsubscribeAll()
         
         subscribe(to: .everyone)
         
@@ -250,6 +267,8 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         FIRMessaging.messaging().subscribeToTopic(topic.rawValue)
         
+        subscribedTopics.insert(topic)
+        
         log?("Subscribed to \(topic.rawValue)")
     }
     
@@ -258,14 +277,20 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         FIRMessaging.messaging().unsubscribeFromTopic(topic.rawValue)
         
+        subscribedTopics.remove(topic)
+        
         log?("Unsubscribed from \(topic.rawValue)")
     }
     
+    @inline(__always)
+    private func unsubscribeAll() {
+        
+        log?("Will unsubscribe from all topics")
+        
+        subscribedTopics.forEach { unsubscribe(from: $0) }
+    }
+    
     private func startObservingTeams() {
-        
-        // unsubscribe to current teams
-        
-        teams.forEach { unsubscribe(from: .team($0)) }
         
         // fetch member's teams
         
@@ -290,16 +315,15 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let member = self.store.authenticatedMember
         
+        if let memberID = member?.identifier {
+            
+            subscribe(to: .member(memberID))
+        }
+        
         if member?.speakerRole != nil {
             
             subscribe(to: .speakers)
-            
-        } else {
-            
-            unsubscribe(from: .speakers)
         }
-        
-        events.forEach { unsubscribe(from: .event($0)) }
         
         if let attendeeRole = member?.attendeeRole {
             
@@ -317,7 +341,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
         } else {
             
-            unsubscribe(from: .attendees)
+            eventsFetchedResultsController = nil
         }
     }
     
