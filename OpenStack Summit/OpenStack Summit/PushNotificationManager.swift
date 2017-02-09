@@ -395,7 +395,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    func updateAppBadge() {
+    public func updateAppBadge() {
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = unreadCount
     }
@@ -407,6 +407,17 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         unreadTeamMessages.value = []
         
         assert(unreadCount == 0)
+    }
+    
+    public func unreadMessages(in team: Identifier, context: NSManagedObjectContext) throws -> Int {
+        
+        let unreadTeamMessages = Array(self.unreadTeamMessages.value)
+        
+        let teamID = NSNumber(longLong: Int64(team))
+        
+        let predicate = NSPredicate(format: "team.id == %@ AND id IN %@", teamID, unreadTeamMessages)
+        
+        return try context.count(TeamMessageManagedObject.self, predicate: predicate)
     }
     
     // MARK: - FIRMessagingDelegate
