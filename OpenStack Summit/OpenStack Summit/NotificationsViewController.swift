@@ -123,13 +123,9 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
             
             cell.accessoryType = .DisclosureIndicator
             
-            cell.selectionStyle = .Default
-            
         } else {
             
             cell.accessoryType = .None
-            
-            cell.selectionStyle = .None
         }
     }
     
@@ -174,6 +170,8 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard tableView.editing == false else { return }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
