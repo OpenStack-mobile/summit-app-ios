@@ -118,6 +118,19 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         cell.textLabel!.text = notification.body
         
         cell.detailTextLabel!.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+        
+        if let _ = notification.event {
+            
+            cell.accessoryType = .DisclosureIndicator
+            
+            cell.selectionStyle = .Default
+            
+        } else {
+            
+            cell.accessoryType = .None
+            
+            cell.selectionStyle = .None
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -153,6 +166,21 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         
         return UITableViewCellEditingStyle(rawValue: 3)!
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let notification = self[indexPath]
+        
+        guard let event = notification.event else { return }
+        
+        let eventDetailViewController = R.storyboard.event.eventDetailViewController()!
+        
+        eventDetailViewController.event = event
+        
+        self.showViewController(eventDetailViewController, sender: self)
     }
     
     // MARK: - IndicatorInfoProvider
