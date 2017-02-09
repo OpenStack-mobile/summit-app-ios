@@ -137,15 +137,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             if incomingMessage {
                 
-                let alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName)"
+                // set as unread
+                unreadTeamMessages.value.insert(teamMessage.identifier)
                 
+                let alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName)"
                 let alertBody = teamMessageNotification.body
                 
                 // schedule local notification
                 if backgroundState {
-                    
-                    // set as unread
-                    unreadTeamMessages.value.insert(teamMessage.identifier)
                     
                     let userNotification = UILocalNotification()
                     userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue, UserNotificationUserInfo.identifier.rawValue : teamMessage.identifier]
@@ -191,12 +190,12 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
+            // set as unread
+            unreadNotifications.value.insert(generalNotification.identifier)
+            
             // show notification
             
             if backgroundState {
-                
-                // set as unread
-                unreadNotifications.value.insert(generalNotification.identifier)
                 
                 let userNotification = UILocalNotification()
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
