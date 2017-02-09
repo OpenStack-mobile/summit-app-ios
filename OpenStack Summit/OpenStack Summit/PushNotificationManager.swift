@@ -21,6 +21,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     public var log: ((String) -> ())?
     
+    // Alerts for messages belonging to this team will be excluded.
+    public var teamMessageAlertFilter: Identifier?
+    
     private var summitObserver: Int!
     
     private var teamsFetchedResultsController: NSFetchedResultsController?
@@ -132,23 +135,31 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             let incomingMessage = teamMessage.from.identifier != store.authenticatedMember?.identifier
             
-            // set as unread
             if incomingMessage {
                 
-                unreadTeamMessages.value.insert(teamMessage.identifier)
-            }
-            
-            // schedule local notification
-            if backgroundState && incomingMessage {
+                let alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName)"
                 
-                let userNotification = UILocalNotification()
-                userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue, UserNotificationUserInfo.identifier.rawValue : teamMessage.identifier]
-                userNotification.alertTitle = "\(teamMessageNotification.from.firstName) \(teamMessageNotification.from.lastName)"
-                userNotification.alertBody = teamMessageNotification.body
-                userNotification.fireDate = NSDate()
-                userNotification.category = TeamMessageNotificationAction.category.rawValue
+                let alertBody = teamMessageNotification.body
                 
-                UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+                // schedule local notification
+                if backgroundState {
+                    
+                    // set as unread
+                    unreadTeamMessages.value.insert(teamMessage.identifier)
+                    
+                    let userNotification = UILocalNotification()
+                    userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue, UserNotificationUserInfo.identifier.rawValue : teamMessage.identifier]
+                    userNotification.alertTitle = alertTitle
+                    userNotification.alertBody = alertBody
+                    userNotification.fireDate = NSDate()
+                    userNotification.category = TeamMessageNotificationAction.category.rawValue
+                    
+                    UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+                    
+                } else if teamMessageAlertFilter != teamMessageNotification.team {
+                    
+                    SweetAlert().showAlert(alertTitle, subTitle: alertBody, style: .None)
+                }
             }
             
         } else if let generalNotification = GeneralNotification(pushNotification:pushNotification) {
@@ -170,9 +181,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 }
             }
             
-            // set as unread
-            unreadNotifications.value.insert(generalNotification.identifier)
-            
             let encodable = Notification(notification: generalNotification)
             
             // cache
@@ -187,6 +195,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             if backgroundState {
                 
+                // set as unread
+                unreadNotifications.value.insert(generalNotification.identifier)
+                
                 let userNotification = UILocalNotification()
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
                 userNotification.alertTitle = generalNotification.event?.title
@@ -195,8 +206,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 userNotification.category = UserNotificationCategory.generalNotification.rawValue
                 
                 UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+                
+            } else {
+                
+                let alertTitle = generalNotification.event?.title ?? "Notification"
+                
+                SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
             }
-                        
+            
         } else {
             
             notification = nil

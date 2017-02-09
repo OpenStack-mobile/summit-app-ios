@@ -55,6 +55,18 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         configureView()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        PushNotificationManager.shared.teamMessageAlertFilter = team
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        PushNotificationManager.shared.teamMessageAlertFilter = nil
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
