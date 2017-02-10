@@ -104,8 +104,6 @@
 		6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
-		6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */; };
-		6E104D521D1061AC00541E84 /* OpenStack_SummitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D511D1061AC00541E84 /* OpenStack_SummitUITests.swift */; };
 		6E10A4F41D1066E9008CBD0C /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E10A4FB1D1066E9008CBD0C /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
 		6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
@@ -768,20 +766,6 @@
 			remoteGlobalIDString = 6E0B5F4E1D77D4DE0005F6CE;
 			remoteInfo = OpenStackSummitWatch;
 		};
-		6E104D431D1061AC00541E84 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6E104D2D1D1061AC00541E84;
-			remoteInfo = "OpenStack Summit";
-		};
-		6E104D4E1D1061AC00541E84 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6E104D2D1D1061AC00541E84;
-			remoteInfo = "OpenStack Summit";
-		};
 		6E10A4FC1D1066E9008CBD0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -927,12 +911,6 @@
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E104D3D1D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenStack SummitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStack_SummitTests.swift; sourceTree = "<group>"; };
-		6E104D481D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenStack SummitUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E104D511D1061AC00541E84 /* OpenStack_SummitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStack_SummitUITests.swift; sourceTree = "<group>"; };
-		6E104D531D1061AC00541E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E10A4F31D1066E9008CBD0C /* CoreSummit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSummit.h; sourceTree = "<group>"; };
 		6E10A4F51D1066E9008CBD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1367,20 +1345,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6E104D3F1D1061AC00541E84 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E104D4A1D1061AC00541E84 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6E10A4ED1D1066E9008CBD0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1465,8 +1429,6 @@
 			children = (
 				6EA1F0891D660B550064C338 /* Cartfile */,
 				6E104D301D1061AC00541E84 /* OpenStack Summit */,
-				6E104D451D1061AC00541E84 /* OpenStack SummitTests */,
-				6E104D501D1061AC00541E84 /* OpenStack SummitUITests */,
 				6E10A4F21D1066E9008CBD0C /* CoreSummit */,
 				6E10A5001D1066E9008CBD0C /* CoreSummitTests */,
 				6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */,
@@ -1480,8 +1442,6 @@
 			isa = PBXGroup;
 			children = (
 				6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */,
-				6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */,
-				6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */,
 				6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */,
 				6E10A4FA1D1066E9008CBD0C /* CoreSummitTests.xctest */,
 				6E0B5F1D1D77C8950005F6CE /* CoreSummit.framework */,
@@ -1532,24 +1492,6 @@
 				6E10A5A31D106AC5008CBD0C /* Model */,
 			);
 			path = "OpenStack Summit";
-			sourceTree = "<group>";
-		};
-		6E104D451D1061AC00541E84 /* OpenStack SummitTests */ = {
-			isa = PBXGroup;
-			children = (
-				6E104D461D1061AC00541E84 /* OpenStack_SummitTests.swift */,
-				6E104D481D1061AC00541E84 /* Info.plist */,
-			);
-			path = "OpenStack SummitTests";
-			sourceTree = "<group>";
-		};
-		6E104D501D1061AC00541E84 /* OpenStack SummitUITests */ = {
-			isa = PBXGroup;
-			children = (
-				6E104D511D1061AC00541E84 /* OpenStack_SummitUITests.swift */,
-				6E104D531D1061AC00541E84 /* Info.plist */,
-			);
-			path = "OpenStack SummitUITests";
 			sourceTree = "<group>";
 		};
 		6E10A4F21D1066E9008CBD0C /* CoreSummit */ = {
@@ -2358,42 +2300,6 @@
 			productReference = 6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6E104D411D1061AC00541E84 /* OpenStack SummitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6E104D591D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitTests" */;
-			buildPhases = (
-				6E104D3E1D1061AC00541E84 /* Sources */,
-				6E104D3F1D1061AC00541E84 /* Frameworks */,
-				6E104D401D1061AC00541E84 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6E104D441D1061AC00541E84 /* PBXTargetDependency */,
-			);
-			name = "OpenStack SummitTests";
-			productName = "OpenStack SummitTests";
-			productReference = 6E104D421D1061AC00541E84 /* OpenStack SummitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		6E104D4C1D1061AC00541E84 /* OpenStack SummitUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6E104D5C1D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitUITests" */;
-			buildPhases = (
-				6E104D491D1061AC00541E84 /* Sources */,
-				6E104D4A1D1061AC00541E84 /* Frameworks */,
-				6E104D4B1D1061AC00541E84 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6E104D4F1D1061AC00541E84 /* PBXTargetDependency */,
-			);
-			name = "OpenStack SummitUITests";
-			productName = "OpenStack SummitUITests";
-			productReference = 6E104D4D1D1061AC00541E84 /* OpenStack SummitUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E10A50C1D1066E9008CBD0C /* Build configuration list for PBXNativeTarget "CoreSummit iOS" */;
@@ -2524,14 +2430,6 @@
 							};
 						};
 					};
-					6E104D411D1061AC00541E84 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = 6E104D2D1D1061AC00541E84;
-					};
-					6E104D4C1D1061AC00541E84 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = 6E104D2D1D1061AC00541E84;
-					};
 					6E10A4F01D1066E9008CBD0C = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -2562,8 +2460,6 @@
 			targets = (
 				6E104D2D1D1061AC00541E84 /* OpenStackSummit */,
 				6EF12C601D149C2700814AD0 /* R.swift */,
-				6E104D411D1061AC00541E84 /* OpenStack SummitTests */,
-				6E104D4C1D1061AC00541E84 /* OpenStack SummitUITests */,
 				6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */,
 				6E10A4F91D1066E9008CBD0C /* CoreSummitTests iOS */,
 				6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */,
@@ -2654,20 +2550,6 @@
 				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
 				6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */,
 				6E24FDE41D47CE290005EB14 /* GoogleMaps.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E104D401D1061AC00541E84 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E104D4B1D1061AC00541E84 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2899,7 +2781,6 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/AMTagListView.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MLPAutoCompleteTextField.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/Parse.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Bolts.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/SlackTextViewController.framework",
@@ -3229,22 +3110,6 @@
 				6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */,
 				6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */,
 				6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E104D3E1D1061AC00541E84 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6E104D471D1061AC00541E84 /* OpenStack_SummitTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E104D491D1061AC00541E84 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6E104D521D1061AC00541E84 /* OpenStack_SummitUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3630,16 +3495,6 @@
 			isa = PBXTargetDependency;
 			target = 6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */;
 			targetProxy = 6E0B5F6B1D77D4DF0005F6CE /* PBXContainerItemProxy */;
-		};
-		6E104D441D1061AC00541E84 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6E104D2D1D1061AC00541E84 /* OpenStackSummit */;
-			targetProxy = 6E104D431D1061AC00541E84 /* PBXContainerItemProxy */;
-		};
-		6E104D4F1D1061AC00541E84 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6E104D2D1D1061AC00541E84 /* OpenStackSummit */;
-			targetProxy = 6E104D4E1D1061AC00541E84 /* PBXContainerItemProxy */;
 		};
 		6E10A4FD1D1066E9008CBD0C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4073,52 +3928,6 @@
 			};
 			name = Release;
 		};
-		6E104D5A1D1061AC00541E84 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
-			};
-			name = Debug;
-		};
-		6E104D5B1D1061AC00541E84 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
-			};
-			name = Release;
-		};
-		6E104D5D1D1061AC00541E84 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "OpenStack Summit";
-			};
-			name = Debug;
-		};
-		6E104D5E1D1061AC00541E84 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "OpenStack Summit";
-			};
-			name = Release;
-		};
 		6E10A5081D1066E9008CBD0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4380,29 +4189,6 @@
 			};
 			name = Beta;
 		};
-		6E7E18ED1D495AE6009549BA /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
-			};
-			name = Beta;
-		};
-		6E7E18EE1D495AE6009549BA /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "OpenStack Summit";
-			};
-			name = Beta;
-		};
 		6E7E18EF1D495AE6009549BA /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4529,29 +4315,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Mocked;
-		};
-		6E9392661DB470420021905B /* Mocked */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "OpenStack SummitTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenStack Summit.app/OpenStack Summit";
-			};
-			name = Mocked;
-		};
-		6E9392671DB470420021905B /* Mocked */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "OpenStack SummitUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.OpenStack-SummitUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "OpenStack Summit";
 			};
 			name = Mocked;
 		};
@@ -4869,28 +4632,6 @@
 				6E9392641DB470420021905B /* Mocked */,
 				6E104D581D1061AC00541E84 /* Release */,
 				6E7E18EC1D495AE6009549BA /* Beta */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6E104D591D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E104D5A1D1061AC00541E84 /* Debug */,
-				6E9392661DB470420021905B /* Mocked */,
-				6E104D5B1D1061AC00541E84 /* Release */,
-				6E7E18ED1D495AE6009549BA /* Beta */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6E104D5C1D1061AC00541E84 /* Build configuration list for PBXNativeTarget "OpenStack SummitUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E104D5D1D1061AC00541E84 /* Debug */,
-				6E9392671DB470420021905B /* Mocked */,
-				6E104D5E1D1061AC00541E84 /* Release */,
-				6E7E18EE1D495AE6009549BA /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
