@@ -16,3 +16,7 @@ unzip -o ${BUDDYBUILD_SECURE_FILES}/VendorFirebase.zip
 wget https://www.gstatic.com/cpdc/aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz
 tar -zxvf aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz Frameworks/GoogleMaps.framework
 cp -rf ./Frameworks ./Vendor
+
+# Install Carthage dependencies for watchOS and tvOS
+carthage bootstrap --platform watchOS --verbose --toolchain com.apple.dt.toolchain.Swift_2_3
+carthage bootstrap --platform tvOS --verbose --toolchain com.apple.dt.toolchain.Swift_2_3
