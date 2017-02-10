@@ -6,6 +6,8 @@ cp -rf ${BUDDYBUILD_SECURE_FILES}/Staging.swift ./OpenStack\ Summit/CoreSummit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/AppConsumerKey.swift ./OpenStack\ Summit/OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Beta.entitlements ./OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/R.generated.swift ./OpenStack\ Summit/
+mkdir ./OpenStack\ Summit/GoogleServices
+mkdir ./OpenStack\ Summit/GoogleServices/Beta
 cp -rf ${BUDDYBUILD_SECURE_FILES}/GoogleService-Info.plist ./OpenStack\ Summit/GoogleServices/Beta/
 
 # Install Vendor frameworks
