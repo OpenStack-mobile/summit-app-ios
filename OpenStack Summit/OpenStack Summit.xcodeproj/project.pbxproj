@@ -2781,7 +2781,6 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/AMTagListView.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MLPAutoCompleteTextField.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/Parse.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Bolts.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/SlackTextViewController.framework",
