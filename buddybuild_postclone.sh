@@ -5,6 +5,7 @@ cp -rf ${BUDDYBUILD_SECURE_FILES}/Staging.swift ./OpenStack\ Summit/CoreSummit/
 # Copy iOS environment source files
 cp -rf ${BUDDYBUILD_SECURE_FILES}/AppConsumerKey.swift ./OpenStack\ Summit/OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Beta.entitlements ./OpenStack\ Summit/
+cp -rf ${BUDDYBUILD_SECURE_FILES}/R.generated.swift ./OpenStack\ Summit/
 mkdir ./OpenStack\ Summit/GoogleServices
 mkdir ./OpenStack\ Summit/GoogleServices/Beta
 cp -rf ${BUDDYBUILD_SECURE_FILES}/GoogleService-Info.plist ./OpenStack\ Summit/GoogleServices/Beta/
@@ -14,7 +15,6 @@ unzip -o ${BUDDYBUILD_SECURE_FILES}/VendorFabric.zip
 unzip -o ${BUDDYBUILD_SECURE_FILES}/VendorFirebase.zip
 
 # Download and install Google Maps
-
-
-# Generate R.swift
-./OpenStack\ Summit/rswift -p ./OpenStack\ Summit/OpenStack Summit.xcodeproj -t OpenStackSummit --bundleIdentifier org.openstack.OpenStack-Summit ./OpenStack\ Summit/
+wget https://www.gstatic.com/cpdc/aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz
+tar -zxvf aa3052925ceeea2d-GoogleMaps-1.13.2.tar.gz
+cp -rf ./Frameworks ./Vendor
