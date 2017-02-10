@@ -1,5 +1,7 @@
 # OpenStack Foundation Summit App
 
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=589d42c2ac95bf01009695f6&branch=develop&build=latest)](https://dashboard.buddybuild.com/apps/589d42c2ac95bf01009695f6/build/latest?branch=develop)
+
 The official app for the OpenStack Summit. ([iTunes](https://itunes.apple.com/us/app/openstack-foundation-summit/id1071261846?mt=8))
 
 Supports iOS, watchOS and tvOS.
