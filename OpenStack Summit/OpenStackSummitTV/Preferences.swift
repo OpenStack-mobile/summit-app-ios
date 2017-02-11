@@ -17,7 +17,7 @@ final class Preferences {
     
     private init() {
         
-        self.userDefaults = NSUserDefaults.standardUserDefaults()
+        self.userDefaults = NSUserDefaults(suiteName: AppGroup)!
     }
     
     // MARK: - Accessors
@@ -36,6 +36,22 @@ final class Preferences {
         let limit = 10
         
         var recentlyPlayed = self.recentlyPlayed
+        
+        // remove previous instances
+        var didRemovePrevious = false
+        repeat {
+            
+            if let previousIndex = recentlyPlayed.indexOf(video) {
+                
+                recentlyPlayed.removeAtIndex(previousIndex)
+                didRemovePrevious = true
+                
+            } else {
+                
+                didRemovePrevious = false
+            }
+            
+        } while didRemovePrevious
         
         // insert at top
         if recentlyPlayed.isEmpty {

@@ -25,6 +25,8 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
 
     var topShelfItems: [TVContentItem] {
         
+        print("Get Top Shelf Items")
+        
         return [Section.recentlyPlayed.toContentItem("Recently Played", items: recentlyPlayedItems)]
     }
     
@@ -70,7 +72,9 @@ extension VideoManagedObject {
     
     func toContentItem() -> TVContentItem {
         
-        let identifier = TVContentIdentifier(identifier: "\(self.identifier)", container: nil)!
+        let serviceURL = ServiceURL(identifier: self.identifier).url
+        
+        let identifier = TVContentIdentifier(identifier: serviceURL.absoluteString!, container: nil)!
         
         let contentItem = TVContentItem(contentIdentifier: identifier)!
         
@@ -82,7 +86,7 @@ extension VideoManagedObject {
         
         contentItem.imageShape = .Square
         
-        contentItem.playURL = NSURL(string: "openstacktvservice://\(self.identifier)")
+        contentItem.displayURL = serviceURL
         
         return contentItem
     }

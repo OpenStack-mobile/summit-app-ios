@@ -406,6 +406,8 @@
 		6E65D2181E4F7E2B00F8F582 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
 		6E65D21B1E4F7EE200F8F582 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21A1E4F7EE200F8F582 /* Preferences.swift */; };
 		6E65D21C1E4F7EE200F8F582 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21A1E4F7EE200F8F582 /* Preferences.swift */; };
+		6E65D2201E4FA37A00F8F582 /* ServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */; };
+		6E65D2211E4FA37A00F8F582 /* ServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */; };
 		6E67CCE31D91B7E600B7D20E /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67CCE21D91B7E600B7D20E /* Observable.swift */; };
 		6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6964351D84846B00BA576E /* VenueMapViewController.swift */; };
 		6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6964381D84993300BA576E /* VenueDetail.storyboard */; };
@@ -1111,6 +1113,9 @@
 		6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		6E65D20B1E4F78D200F8F582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E65D21A1E4F7EE200F8F582 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		6E65D21D1E4F9DFA00F8F582 /* OpenStackSummitTV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenStackSummitTV.entitlements; sourceTree = "<group>"; };
+		6E65D21E1E4F9E8C00F8F582 /* OpenStackSummitTVService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenStackSummitTVService.entitlements; sourceTree = "<group>"; };
+		6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceURL.swift; sourceTree = "<group>"; };
 		6E67CCE21D91B7E600B7D20E /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		6E6964351D84846B00BA576E /* VenueMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueMapViewController.swift; sourceTree = "<group>"; };
 		6E6964381D84993300BA576E /* VenueDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VenueDetail.storyboard; sourceTree = "<group>"; };
@@ -1886,7 +1891,9 @@
 		6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */ = {
 			isa = PBXGroup;
 			children = (
+				6E65D21E1E4F9E8C00F8F582 /* OpenStackSummitTVService.entitlements */,
 				6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */,
+				6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */,
 				6E65D20B1E4F78D200F8F582 /* Info.plist */,
 			);
 			path = OpenStackSummitTVService;
@@ -2024,6 +2031,7 @@
 				6EF3A8891E4675E800CD85EF /* Videos.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
+				6E65D21D1E4F9DFA00F8F582 /* OpenStackSummitTV.entitlements */,
 				6E65D2191E4F7ECB00F8F582 /* Model */,
 				6E74FAEB1D7C95E70018633D /* Controller */,
 				6E74FAFF1D7CA0A60018633D /* View */,
@@ -2528,10 +2536,20 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 775U6X6R5M;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					6E9F28EE1D7C903E002B7C7A = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 775U6X6R5M;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					6EF12C601D149C2700814AD0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -3561,6 +3579,7 @@
 				6E65D21C1E4F7EE200F8F582 /* Preferences.swift in Sources */,
 				6E65D2181E4F7E2B00F8F582 /* YouTubeThumbnail.swift in Sources */,
 				6E65D20A1E4F78D200F8F582 /* ServiceProvider.swift in Sources */,
+				6E65D2211E4FA37A00F8F582 /* ServiceURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3591,6 +3610,7 @@
 				6EF3A88C1E46760500CD85EF /* VideosViewController.swift in Sources */,
 				6EA737651E47B4BE00700F64 /* VideoCell.swift in Sources */,
 				6E65D21B1E4F7EE200F8F582 /* Preferences.swift in Sources */,
+				6E65D2201E4FA37A00F8F582 /* ServiceURL.swift in Sources */,
 				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
 				6E8220F01E48D0670025FE58 /* PagingTableViewController.swift in Sources */,
 				6EB54E721D85FCBA0027350D /* ImagesViewController.swift in Sources */,
@@ -4256,6 +4276,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4276,6 +4297,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4295,6 +4317,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4314,6 +4337,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4688,6 +4712,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4709,6 +4734,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4730,6 +4756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
@@ -4750,6 +4777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;

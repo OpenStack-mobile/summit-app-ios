@@ -63,10 +63,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch url.scheme ?? "" {
             
-        case "openstacktvservice":
+        case ServiceURL.scheme:
             
-            guard let identifier = Int(url.path ?? ""),
-                let video = try! Video.find(identifier, context: Store.shared.managedObjectContext)
+            guard let serviceURL = ServiceURL(url: url),
+                let video = try! Video.find(serviceURL.identifier, context: Store.shared.managedObjectContext)
                 else { return false }
             
             self.window!.rootViewController!.play(video: video)
