@@ -32,7 +32,9 @@ extension GroupEventDataUpdate: CoreDataEncodable {
         managedObject.location = try context.relationshipFault(location)
         managedObject.presentation = try context.relationshipFault(presentation)
         managedObject.videos = try context.relationshipFault(Set(videos))
-        managedObject.groups = try context.relationshipFault(Set(groups))
+        
+        // Don't cache groups because they are incomplete data, we need more than just the identifier
+        //managedObject.groups = try context.relationshipFault(Set(groups))
         
         managedObject.didCache()
         
