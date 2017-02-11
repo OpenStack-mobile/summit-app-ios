@@ -811,6 +811,13 @@
 			remoteGlobalIDString = 6E65D2031E4F78D100F8F582;
 			remoteInfo = OpenStackTVService;
 		};
+		6E65D2221E4FC06300F8F582 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E2923A41D7AF8C900D14F0A;
+			remoteInfo = "CoreSummit tvOS";
+		};
 		6E74FAEE1D7C96C50018633D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -2462,6 +2469,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6E65D2231E4FC06300F8F582 /* PBXTargetDependency */,
 			);
 			name = OpenStackSummitTVService;
 			productName = OpenStackTVService;
@@ -3668,6 +3676,11 @@
 			isa = PBXTargetDependency;
 			target = 6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */;
 			targetProxy = 6E65D20C1E4F78D200F8F582 /* PBXContainerItemProxy */;
+		};
+		6E65D2231E4FC06300F8F582 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */;
+			targetProxy = 6E65D2221E4FC06300F8F582 /* PBXContainerItemProxy */;
 		};
 		6E74FAEF1D7C96C50018633D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

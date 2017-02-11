@@ -15,7 +15,7 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
     override init() {
         super.init()
         
-        print("Launching OpenStack Summit tvOS Service Provider v\(AppVersion) Build \(AppBuild)")
+        print("Launching OpenStack Summit tvOS Services Provider v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
     }
 
