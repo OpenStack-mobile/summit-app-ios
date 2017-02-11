@@ -35,7 +35,7 @@ extension Store {
     
     static let fileURL: NSURL = {
         
-        #if os(iOS)
+        #if os(iOS) || os(watchOS)
         let folderURL = try! NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.CachesDirectory,
                                                                            inDomain: NSSearchPathDomainMask.UserDomainMask,
                                                                            appropriateForURL: nil,
