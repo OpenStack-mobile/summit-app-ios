@@ -37,18 +37,4 @@ extension EmailComposerViewController {
         
         viewController.presentViewController(composerVC, animated: true, completion: nil)
     }
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        
-        guard let viewController = self as? UIViewController
-            else { fatalError("Not a view controller") }
-        
-        viewController.dismissViewControllerAnimated(true) {
-            
-            if let error = error {
-                
-                viewController.showErrorAlert(error.localizedDescription)
-            }
-        }
-    }
 }
