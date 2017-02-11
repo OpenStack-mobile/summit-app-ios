@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftFoundation
 import CoreSummit
 
 @UIApplicationMain
@@ -49,6 +50,31 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+        return open(url: url)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func open(url url: NSURL) -> Bool {
+        
+        print("App should open URL: \(url)")
+        
+        switch url.scheme ?? "" {
+            
+        case "openstacktvservice":
+            
+            guard let identifier = Int(url.path ?? ""),
+                let video = try! Video.find(identifier, context: Store.shared.managedObjectContext)
+                else { return false }
+            
+            self.window!.rootViewController!.play(video: video)
+            
+            return true
+            
+        default: return false
+        }
+    }
 }
 

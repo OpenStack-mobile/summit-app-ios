@@ -80,6 +80,10 @@ extension VideoManagedObject {
         
         contentItem.imageURL = NSURL(youtubeThumbnail: youtube)
         
+        contentItem.imageShape = .Square
+        
+        contentItem.playURL = NSURL(string: "openstacktvservice://\(self.identifier)")
+        
         return contentItem
     }
 }
