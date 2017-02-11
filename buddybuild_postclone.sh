@@ -5,10 +5,12 @@ cp -rf ${BUDDYBUILD_SECURE_FILES}/Staging.swift ./OpenStack\ Summit/CoreSummit/
 # Copy iOS environment source files
 cp -rf ${BUDDYBUILD_SECURE_FILES}/AppConsumerKey.swift ./OpenStack\ Summit/OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Beta.entitlements ./OpenStack\ Summit/
-cp -rf ${BUDDYBUILD_SECURE_FILES}/R.generated.swift ./OpenStack\ Summit/
+cp -rf ${BUDDYBUILD_SECURE_FILES}/Release.entitlements ./OpenStack\ Summit/
 mkdir ./OpenStack\ Summit/GoogleServices
 mkdir ./OpenStack\ Summit/GoogleServices/Beta
-cp -rf ${BUDDYBUILD_SECURE_FILES}/GoogleService-Info.plist ./OpenStack\ Summit/GoogleServices/Beta/
+mkdir ./OpenStack\ Summit/GoogleServices/Release
+cp -rf ${BUDDYBUILD_SECURE_FILES}/Beta-GoogleService-Info.plist ./OpenStack\ Summit/GoogleServices/Beta/GoogleService-Info.plist
+cp -rf ${BUDDYBUILD_SECURE_FILES}/Release-GoogleService-Info.plist ./OpenStack\ Summit/GoogleServices/Release/GoogleService-Info.plist
 
 # Install Vendor frameworks
 unzip -o ${BUDDYBUILD_SECURE_FILES}/VendorFabric.zip
