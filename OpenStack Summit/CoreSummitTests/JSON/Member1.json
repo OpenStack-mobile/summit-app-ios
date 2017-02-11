@@ -8,6 +8,7 @@
 	"irc": "jamesmcarthur",
 	"twitter": "jimmymcarthur",
 	"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+	"favorite_summit_events" : [ ],
 	"groups_events": [
 		{
 			"id": 17451,

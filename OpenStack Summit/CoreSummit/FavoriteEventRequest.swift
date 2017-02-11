@@ -11,7 +11,7 @@ import CoreData
 
 public extension Store {
     
-    func addFavorite(event event: Identifier, summit: Identifier, completion: (ErrorType?) -> ()) {
+    func favorite(isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: (ErrorType?) -> ()) {
         
         let uri = "/api/v1/summits/\(summit)/members/me/favorites/\(event)"
         
@@ -21,47 +21,37 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.POST(url) { (responseObject, error) in
+        let requestCompletion: (AnyObject?, NSError?) -> () = { (responseObject, error) in
             
             if error == nil {
                 
                 try! context.performErrorBlockAndWait {
                     
+                    guard let member = self.authenticatedMember,
+                        let event = try EventManagedObject.find(event, context: context)
+                        else { return }
                     
+                    if isFavorite {
+                        
+                        member.favoriteEvents.insert(event)
+                        
+                    } else {
+                        
+                        member.favoriteEvents.remove(event)
+                    }
                     
                     try context.save()
                 }
             }
-            
-            // call completion block
-            completion(error)
         }
-    }
-    
-    func removeFavorite(event event: Identifier, summit: Identifier, completion: (ErrorType?) -> ()) {
         
-        let uri = "/api/v1/summits/\(summit)/members/me/favorites/\(event)"
-        
-        let url = environment.configuration.serverURL + uri
-        
-        let http = self.createHTTP(.OpenIDJSON)
-        
-        let context = privateQueueManagedObjectContext
-        
-        http.DELETE(url) { (responseObject, error) in
+        if isFavorite {
             
-            if error == nil {
-                
-                try! context.performErrorBlockAndWait {
-                    
-                    
-                    
-                    try context.save()
-                }
-            }
+            http.POST(url, completionHandler: requestCompletion)
             
-            // call completion block
-            completion(error)
+        } else {
+            
+            http.DELETE(url, completionHandler: requestCompletion)
         }
     }
 }
