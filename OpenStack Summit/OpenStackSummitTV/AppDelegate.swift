@@ -21,9 +21,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Launching OpenStack Summit (tvOS) v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
-        // always nuke cache
-        try! Store.shared.clear()
-        
         // set appearance
         SetAppearance()
         

@@ -15,6 +15,12 @@ extension UIViewController {
     
     func play(video video: Video) {
         
+        // add to recently watched
+        
+        Preferences.shared.addRecentlyWatched(video.identifier)
+        
+        // load video
+        
         XCDYouTubeClient.defaultClient().getVideoWithIdentifier(video.youtube) { [weak self] (youtubeVideo, error) in
             
             guard let controller = self else { return }
