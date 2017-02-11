@@ -15,9 +15,9 @@ extension UIViewController {
     
     func play(video video: Video) {
         
-        // add to recently watched
+        // add to recently played
         
-        Preferences.shared.addRecentlyWatched(video.identifier)
+        Preferences.shared.addRecentlyPlayed(video.identifier)
         
         // load video
         

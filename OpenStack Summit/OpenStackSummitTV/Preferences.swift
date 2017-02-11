@@ -11,7 +11,7 @@ import typealias CoreSummit.Identifier
 
 final class Preferences {
     
-    static let shared = Preferences.init()
+    static let shared = Preferences()
     
     private let userDefaults: NSUserDefaults
     
@@ -22,36 +22,36 @@ final class Preferences {
     
     // MARK: - Accessors
     
-    private(set) var recentlyWatched: [Identifier] {
+    private(set) var recentlyPlayed: [Identifier] {
         
-        get { return userDefaults.objectForKey(Key.recentlyWatched.rawValue) as? [Int] ?? [] }
+        get { return userDefaults.objectForKey(Key.recentlyPlayed.rawValue) as? [Int] ?? [] }
         
-        set { userDefaults.setObject(newValue, forKey: Key.recentlyWatched.rawValue) }
+        set { userDefaults.setObject(newValue, forKey: Key.recentlyPlayed.rawValue) }
     }
     
     // MARK: - Methods
     
-    func addRecentlyWatched(video: Identifier) {
+    func addRecentlyPlayed(video: Identifier) {
         
         let limit = 10
         
-        var recentlyWatched = self.recentlyWatched
+        var recentlyPlayed = self.recentlyPlayed
         
         // insert at top
-        if recentlyWatched.isEmpty {
+        if recentlyPlayed.isEmpty {
             
-            recentlyWatched.append(video)
+            recentlyPlayed.append(video)
             
         } else {
             
-            recentlyWatched.insert(video, atIndex: 0)
+            recentlyPlayed.insert(video, atIndex: 0)
         }
         
         // trim
-        recentlyWatched = Array(recentlyWatched.prefix(limit))
+        recentlyPlayed = Array(recentlyPlayed.prefix(limit))
         
         // store new value
-        self.recentlyWatched = recentlyWatched
+        self.recentlyPlayed = recentlyPlayed
     }
     
     // MARK: - Private Methods
@@ -63,8 +63,7 @@ final class Preferences {
         set {
             
             userDefaults.setObject(newValue, forKey: key.rawValue)
-            
-            
+            userDefaults.synchronize()
         }
     }
 }
@@ -75,6 +74,6 @@ private extension Preferences {
     
     enum Key: String {
         
-        case recentlyWatched
+        case recentlyPlayed
     }
 }

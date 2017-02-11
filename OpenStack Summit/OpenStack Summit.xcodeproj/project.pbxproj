@@ -400,7 +400,7 @@
 		6E61796D1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
 		6E65D2071E4F78D100F8F582 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E65D2061E4F78D100F8F582 /* TVServices.framework */; };
 		6E65D20A1E4F78D200F8F582 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */; };
-		6E65D20E1E4F78D200F8F582 /* OpenStackTVService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E65D2041E4F78D100F8F582 /* OpenStackTVService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E65D20E1E4F78D200F8F582 /* OpenStackSummitTVService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6E65D2161E4F7D8F00F8F582 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
 		6E65D2171E4F7E2000F8F582 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6E65D2181E4F7E2B00F8F582 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
@@ -893,7 +893,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6E65D20E1E4F78D200F8F582 /* OpenStackTVService.appex in Embed App Extensions */,
+				6E65D20E1E4F78D200F8F582 /* OpenStackSummitTVService.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1106,7 +1106,7 @@
 		6E5DEDB71E2D300C00F45602 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E6179681DE7657500EED286 /* SummitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitManager.swift; sourceTree = "<group>"; };
 		6E61796A1DE7920E00EED286 /* SummitsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsRequest.swift; sourceTree = "<group>"; };
-		6E65D2041E4F78D100F8F582 /* OpenStackTVService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenStackTVService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenStackSummitTVService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E65D2061E4F78D100F8F582 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		6E65D20B1E4F78D200F8F582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1473,7 +1473,7 @@
 				6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */,
-				6E65D2081E4F78D100F8F582 /* OpenStackTVService */,
+				6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */,
 				6E65D2051E4F78D100F8F582 /* Frameworks */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
@@ -1492,7 +1492,7 @@
 				6E2924101D7AF8C900D14F0A /* CoreSummit.framework */,
 				6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */,
 				6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */,
-				6E65D2041E4F78D100F8F582 /* OpenStackTVService.appex */,
+				6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1883,13 +1883,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6E65D2081E4F78D100F8F582 /* OpenStackTVService */ = {
+		6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */ = {
 			isa = PBXGroup;
 			children = (
 				6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */,
 				6E65D20B1E4F78D200F8F582 /* Info.plist */,
 			);
-			path = OpenStackTVService;
+			path = OpenStackSummitTVService;
 			sourceTree = "<group>";
 		};
 		6E65D2191E4F7ECB00F8F582 /* Model */ = {
@@ -2442,9 +2442,9 @@
 			productReference = 6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6E65D2031E4F78D100F8F582 /* OpenStackTVService */ = {
+		6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackTVService" */;
+			buildConfigurationList = 6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackSummitTVService" */;
 			buildPhases = (
 				6E65D2001E4F78D100F8F582 /* Sources */,
 				6E65D2011E4F78D100F8F582 /* Frameworks */,
@@ -2455,9 +2455,9 @@
 			);
 			dependencies = (
 			);
-			name = OpenStackTVService;
+			name = OpenStackSummitTVService;
 			productName = OpenStackTVService;
-			productReference = 6E65D2041E4F78D100F8F582 /* OpenStackTVService.appex */;
+			productReference = 6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */;
 			productType = "com.apple.product-type.tv-app-extension";
 		};
 		6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */ = {
@@ -2562,7 +2562,7 @@
 				6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */,
-				6E65D2031E4F78D100F8F582 /* OpenStackTVService */,
+				6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */,
 			);
 		};
 /* End PBXProject section */
@@ -3646,7 +3646,7 @@
 		};
 		6E65D20D1E4F78D200F8F582 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6E65D2031E4F78D100F8F582 /* OpenStackTVService */;
+			target = 6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */;
 			targetProxy = 6E65D20C1E4F78D200F8F582 /* PBXContainerItemProxy */;
 		};
 		6E74FAEF1D7C96C50018633D /* PBXTargetDependency */ = {
@@ -4260,7 +4260,7 @@
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
-				INFOPLIST_FILE = OpenStackTVService/Info.plist;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4280,7 +4280,7 @@
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
-				INFOPLIST_FILE = OpenStackTVService/Info.plist;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4299,7 +4299,7 @@
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
-				INFOPLIST_FILE = OpenStackTVService/Info.plist;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4318,7 +4318,7 @@
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
-				INFOPLIST_FILE = OpenStackTVService/Info.plist;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4890,7 +4890,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackTVService" */ = {
+		6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackSummitTVService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E65D20F1E4F78D200F8F582 /* Debug */,
@@ -4899,6 +4899,7 @@
 				6E65D2121E4F78D200F8F582 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */ = {
 			isa = XCConfigurationList;
