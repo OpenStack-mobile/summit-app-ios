@@ -38,8 +38,11 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
         
         print("Recently played videos: \(recentlyPlayed)")
         
-        let videos = try! context.managedObjects(VideoManagedObject.self,
-                                                 predicate: NSPredicate(format: "id IN %@", recentlyPlayed))
+        // fetch all videos from CoreData at once. Will be sorted by `id`.
+        let fetchedVideos = try! context.managedObjects(VideoManagedObject.self,predicate: NSPredicate(format: "id IN %@", recentlyPlayed))
+        
+        // sort videos
+        let videos = recentlyPlayed.map { playedVideo in fetchedVideos.firstMatching({ $0.identifier == playedVideo })! }
         
         return videos.map { $0.toContentItem() }
     }
