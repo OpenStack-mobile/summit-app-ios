@@ -3,7 +3,7 @@ cp -rf ${BUDDYBUILD_SECURE_FILES}/Production.swift ./OpenStack\ Summit/CoreSummi
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Staging.swift ./OpenStack\ Summit/CoreSummit/
 
 # Copy iOS environment source files
-cp -rf ${BUDDYBUILD_SECURE_FILES}/AppConsumerKey.swift ./OpenStack\ Summit/OpenStack\ Summit/
+cp -rf ${BUDDYBUILD_SECURE_FILES}/AppSecrets.swift ./OpenStack\ Summit/OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Debug.entitlements ./OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Beta.entitlements ./OpenStack\ Summit/
 cp -rf ${BUDDYBUILD_SECURE_FILES}/Release.entitlements ./OpenStack\ Summit/
