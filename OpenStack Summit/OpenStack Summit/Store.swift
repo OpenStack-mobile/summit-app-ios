@@ -35,12 +35,24 @@ extension Store {
     
     static let fileURL: NSURL = {
         
-        let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.CachesDirectory,
-                                                                           inDomain: NSSearchPathDomainMask.UserDomainMask,
-                                                                           appropriateForURL: nil,
-                                                                           create: false)
+        let fileManager = NSFileManager.defaultManager()
         
-        let fileURL = cacheURL.URLByAppendingPathComponent("data.sqlite")!
+        #if os(iOS) || os(watchOS)
+        let folderURL = try! fileManager.URLForDirectory(NSSearchPathDirectory.CachesDirectory,
+                                                         inDomain: NSSearchPathDomainMask.UserDomainMask,
+                                                         appropriateForURL: nil,
+                                                         create: false)
+        #elseif os(tvOS)
+            
+        let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroup)!
+            
+        let folderURL = containerURL
+            .URLByAppendingPathComponent("Library", isDirectory: true)!
+            .URLByAppendingPathComponent("Caches", isDirectory: true)!
+            
+        #endif
+        
+        let fileURL = folderURL.URLByAppendingPathComponent("data.sqlite", isDirectory: false)!
         
         return fileURL
     }()

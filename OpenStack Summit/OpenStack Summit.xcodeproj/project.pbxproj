@@ -398,6 +398,18 @@
 		6E61796B1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
 		6E61796C1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
 		6E61796D1DE7920E00EED286 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
+		6E65D2071E4F78D100F8F582 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E65D2061E4F78D100F8F582 /* TVServices.framework */; };
+		6E65D20A1E4F78D200F8F582 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */; };
+		6E65D20E1E4F78D200F8F582 /* OpenStackSummitTVService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E65D2161E4F7D8F00F8F582 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
+		6E65D2171E4F7E2000F8F582 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
+		6E65D2181E4F7E2B00F8F582 /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
+		6E65D21B1E4F7EE200F8F582 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21A1E4F7EE200F8F582 /* Preferences.swift */; };
+		6E65D21C1E4F7EE200F8F582 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21A1E4F7EE200F8F582 /* Preferences.swift */; };
+		6E65D2201E4FA37A00F8F582 /* ServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */; };
+		6E65D2211E4FA37A00F8F582 /* ServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */; };
+		6E65D2241E4FC9E700F8F582 /* AppSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */; };
+		6E65D2251E4FC9E900F8F582 /* AppSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */; };
 		6E67CCE31D91B7E600B7D20E /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67CCE21D91B7E600B7D20E /* Observable.swift */; };
 		6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6964351D84846B00BA576E /* VenueMapViewController.swift */; };
 		6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6964381D84993300BA576E /* VenueDetail.storyboard */; };
@@ -407,7 +419,7 @@
 		6E6FD17B1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
 		6E6FD17C1D7A1A24003D13D7 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
 		6E6FD17D1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
-		6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */; };
+		6E6FD17F1D7A1CA2003D13D7 /* AppSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */; };
 		6E730B921DA2E40A005E486B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
 		6E730B931DA2E40B005E486B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
 		6E730B941DA2E40C005E486B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
@@ -794,6 +806,20 @@
 			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
 			remoteInfo = CoreSummit;
 		};
+		6E65D20C1E4F78D200F8F582 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E65D2031E4F78D100F8F582;
+			remoteInfo = OpenStackTVService;
+		};
+		6E65D2221E4FC06300F8F582 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E2923A41D7AF8C900D14F0A;
+			remoteInfo = "CoreSummit tvOS";
+		};
 		6E74FAEE1D7C96C50018633D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -870,6 +896,17 @@
 			files = (
 			);
 			name = "Copy Configurations";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E65D2141E4F78D200F8F582 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6E65D20E1E4F78D200F8F582 /* OpenStackSummitTVService.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6ECBD1E01D7CB092004BF1A8 /* Embed Frameworks */ = {
@@ -1080,6 +1117,14 @@
 		6E5DEDB71E2D300C00F45602 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E6179681DE7657500EED286 /* SummitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitManager.swift; sourceTree = "<group>"; };
 		6E61796A1DE7920E00EED286 /* SummitsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsRequest.swift; sourceTree = "<group>"; };
+		6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenStackSummitTVService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E65D2061E4F78D100F8F582 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
+		6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		6E65D20B1E4F78D200F8F582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E65D21A1E4F7EE200F8F582 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		6E65D21D1E4F9DFA00F8F582 /* OpenStackSummitTV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenStackSummitTV.entitlements; sourceTree = "<group>"; };
+		6E65D21E1E4F9E8C00F8F582 /* OpenStackSummitTVService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenStackSummitTVService.entitlements; sourceTree = "<group>"; };
+		6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceURL.swift; sourceTree = "<group>"; };
 		6E67CCE21D91B7E600B7D20E /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		6E6964351D84846B00BA576E /* VenueMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueMapViewController.swift; sourceTree = "<group>"; };
 		6E6964381D84993300BA576E /* VenueDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VenueDetail.storyboard; sourceTree = "<group>"; };
@@ -1087,7 +1132,7 @@
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
 		6E6FD1761D7A1A15003D13D7 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
-		6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConsumerKey.swift; sourceTree = "<group>"; };
+		6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift; sourceTree = "<group>"; };
 		6E730B8C1DA2E254005E486B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		6E730B8E1DA2E405005E486B /* PageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageJSON.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
@@ -1377,6 +1422,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E65D2011E4F78D100F8F582 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E65D2071E4F78D100F8F582 /* TVServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9F28EC1D7C903E002B7C7A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1434,6 +1487,8 @@
 				6E0B5F501D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */,
+				6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */,
+				6E65D2051E4F78D100F8F582 /* Frameworks */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1451,6 +1506,7 @@
 				6E2924101D7AF8C900D14F0A /* CoreSummit.framework */,
 				6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */,
 				6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */,
+				6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1464,7 +1520,7 @@
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
 				6EF12C5E1D149B4B00814AD0 /* Define.swift */,
-				6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */,
+				6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */,
 				6E7E18E91D490DAC009549BA /* Preference.swift */,
 				6E2D18531E29417F0095508A /* PushNotificationManager.swift */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
@@ -1833,6 +1889,33 @@
 			path = Debug;
 			sourceTree = "<group>";
 		};
+		6E65D2051E4F78D100F8F582 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E65D2061E4F78D100F8F582 /* TVServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */ = {
+			isa = PBXGroup;
+			children = (
+				6E65D21E1E4F9E8C00F8F582 /* OpenStackSummitTVService.entitlements */,
+				6E65D2091E4F78D200F8F582 /* ServiceProvider.swift */,
+				6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */,
+				6E65D20B1E4F78D200F8F582 /* Info.plist */,
+			);
+			path = OpenStackSummitTVService;
+			sourceTree = "<group>";
+		};
+		6E65D2191E4F7ECB00F8F582 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6E65D21A1E4F7EE200F8F582 /* Preferences.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		6E74FAEB1D7C95E70018633D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,6 +2040,8 @@
 				6EF3A8891E4675E800CD85EF /* Videos.storyboard */,
 				6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */,
 				6E9F28FA1D7C903E002B7C7A /* Info.plist */,
+				6E65D21D1E4F9DFA00F8F582 /* OpenStackSummitTV.entitlements */,
+				6E65D2191E4F7ECB00F8F582 /* Model */,
 				6E74FAEB1D7C95E70018633D /* Controller */,
 				6E74FAFF1D7CA0A60018633D /* View */,
 			);
@@ -2374,6 +2459,25 @@
 			productReference = 6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackSummitTVService" */;
+			buildPhases = (
+				6E65D2001E4F78D100F8F582 /* Sources */,
+				6E65D2011E4F78D100F8F582 /* Frameworks */,
+				6E65D2021E4F78D100F8F582 /* Resources */,
+				6E65D2151E4F790300F8F582 /* Increment Build */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E65D2231E4FC06300F8F582 /* PBXTargetDependency */,
+			);
+			name = OpenStackSummitTVService;
+			productName = OpenStackTVService;
+			productReference = 6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */;
+			productType = "com.apple.product-type.tv-app-extension";
+		};
 		6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */;
@@ -2385,12 +2489,14 @@
 				6E74FB051D7CB01F0018633D /* Increment Build */,
 				6ECBD1E01D7CB092004BF1A8 /* Embed Frameworks */,
 				6ECBD1E11D7CB0A0004BF1A8 /* Copy Frameworks */,
+				6E65D2141E4F78D200F8F582 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				6E74FAEF1D7C96C50018633D /* PBXTargetDependency */,
 				6ECBD1DF1D7CB092004BF1A8 /* PBXTargetDependency */,
+				6E65D20D1E4F78D200F8F582 /* PBXTargetDependency */,
 			);
 			name = OpenStackSummitTV;
 			productName = OpensStackSummitTV;
@@ -2403,7 +2509,7 @@
 		6E104D261D1061AC00541E84 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = OpenStack;
 				TargetAttributes = {
@@ -2436,9 +2542,25 @@
 					6E10A4F91D1066E9008CBD0C = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					6E65D2031E4F78D100F8F582 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 775U6X6R5M;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					6E9F28EE1D7C903E002B7C7A = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 775U6X6R5M;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					6EF12C601D149C2700814AD0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2469,6 +2591,7 @@
 				6E0B5F4E1D77D4DE0005F6CE /* OpenStackSummitWatch */,
 				6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */,
+				6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */,
 			);
 		};
 /* End PBXProject section */
@@ -2613,6 +2736,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E65D2021E4F78D100F8F582 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9F28ED1D7C903E002B7C7A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2679,6 +2809,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		6E65D2151E4F790300F8F582 /* Increment Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi";
 		};
 		6E74FB051D7CB01F0018633D /* Increment Build */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3102,7 +3246,7 @@
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
 				6E4E24601E23477F00F7F3FB /* TeamDetailViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
-				6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */,
+				6E6FD17F1D7A1CA2003D13D7 /* AppSecrets.swift in Sources */,
 				6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */,
@@ -3437,11 +3581,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E65D2001E4F78D100F8F582 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E65D2171E4F7E2000F8F582 /* Store.swift in Sources */,
+				6E65D2161E4F7D8F00F8F582 /* Define.swift in Sources */,
+				6E65D21C1E4F7EE200F8F582 /* Preferences.swift in Sources */,
+				6E65D2181E4F7E2B00F8F582 /* YouTubeThumbnail.swift in Sources */,
+				6E65D20A1E4F78D200F8F582 /* ServiceProvider.swift in Sources */,
+				6E65D2251E4FC9E900F8F582 /* AppSecrets.swift in Sources */,
+				6E65D2211E4FA37A00F8F582 /* ServiceURL.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9F28EB1D7C903E002B7C7A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6E96C1CA1DE8F101002F4690 /* Observable.swift in Sources */,
+				6E65D2241E4FC9E700F8F582 /* AppSecrets.swift in Sources */,
 				6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */,
 				6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */,
 				6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */,
@@ -3463,6 +3622,8 @@
 				6E53B2A71D85340700641A8F /* SpeakerDetailViewController.swift in Sources */,
 				6EF3A88C1E46760500CD85EF /* VideosViewController.swift in Sources */,
 				6EA737651E47B4BE00700F64 /* VideoCell.swift in Sources */,
+				6E65D21B1E4F7EE200F8F582 /* Preferences.swift in Sources */,
+				6E65D2201E4FA37A00F8F582 /* ServiceURL.swift in Sources */,
 				6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */,
 				6E8220F01E48D0670025FE58 /* PagingTableViewController.swift in Sources */,
 				6EB54E721D85FCBA0027350D /* ImagesViewController.swift in Sources */,
@@ -3515,6 +3676,16 @@
 			isa = PBXTargetDependency;
 			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */;
 			targetProxy = 6E2924141D7AF8CC00D14F0A /* PBXContainerItemProxy */;
+		};
+		6E65D20D1E4F78D200F8F582 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */;
+			targetProxy = 6E65D20C1E4F78D200F8F582 /* PBXContainerItemProxy */;
+		};
+		6E65D2231E4FC06300F8F582 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */;
+			targetProxy = 6E65D2221E4FC06300F8F582 /* PBXContainerItemProxy */;
 		};
 		6E74FAEF1D7C96C50018633D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4118,6 +4289,91 @@
 			};
 			name = Beta;
 		};
+		6E65D20F1E4F78D200F8F582 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		6E65D2101E4F78D200F8F582 /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Mocked;
+		};
+		6E65D2111E4F78D200F8F582 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		6E65D2121E4F78D200F8F582 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTVService/OpenStackSummitTVService.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
+				INFOPLIST_FILE = OpenStackSummitTVService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.openstack.ios.summit$(BUNDLE_ID_SUFFIX).tvservice";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Beta;
+		};
 		6E7E18EB1D495AE6009549BA /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4478,7 +4734,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
@@ -4499,7 +4758,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
@@ -4520,7 +4782,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
@@ -4540,7 +4805,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenStackSummitTV/OpenStackSummitTV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				HEADER_SEARCH_PATHS = $SRCROOT/../Carthage/Build/tvOS;
 				INFOPLIST_FILE = OpenStackSummitTV/Info.plist;
@@ -4676,6 +4944,17 @@
 				6E93926B1DB470420021905B /* Mocked */,
 				6E2924261D7AF8CC00D14F0A /* Release */,
 				6E2924271D7AF8CC00D14F0A /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackSummitTVService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E65D20F1E4F78D200F8F582 /* Debug */,
+				6E65D2101E4F78D200F8F582 /* Mocked */,
+				6E65D2111E4F78D200F8F582 /* Release */,
+				6E65D2121E4F78D200F8F582 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

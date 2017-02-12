@@ -28,7 +28,7 @@ let AppEnvironment: Environment = {
     
     return environment
 }()
-    
+
 #elseif os(watchOS)
     #if Production
     let AppEnvironment = Environment.Production
