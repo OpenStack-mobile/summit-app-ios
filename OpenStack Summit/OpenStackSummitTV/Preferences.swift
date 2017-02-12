@@ -24,9 +24,9 @@ final class Preferences {
     
     private(set) var recentlyPlayed: [Identifier] {
         
-        get { return userDefaults.objectForKey(Key.recentlyPlayed.rawValue) as? [Int] ?? [] }
+        get { return self[.recentlyPlayed] as? [Int] ?? [] }
         
-        set { userDefaults.setObject(newValue, forKey: Key.recentlyPlayed.rawValue) }
+        set { self[.recentlyPlayed] = newValue as [NSNumber] }
     }
     
     // MARK: - Methods
