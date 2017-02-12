@@ -408,8 +408,8 @@
 		6E65D21C1E4F7EE200F8F582 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21A1E4F7EE200F8F582 /* Preferences.swift */; };
 		6E65D2201E4FA37A00F8F582 /* ServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */; };
 		6E65D2211E4FA37A00F8F582 /* ServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65D21F1E4FA37A00F8F582 /* ServiceURL.swift */; };
-		6E65D2241E4FC9E700F8F582 /* AppConsumerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */; };
-		6E65D2251E4FC9E900F8F582 /* AppConsumerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */; };
+		6E65D2241E4FC9E700F8F582 /* AppSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */; };
+		6E65D2251E4FC9E900F8F582 /* AppSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */; };
 		6E67CCE31D91B7E600B7D20E /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67CCE21D91B7E600B7D20E /* Observable.swift */; };
 		6E6964361D84846B00BA576E /* VenueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6964351D84846B00BA576E /* VenueMapViewController.swift */; };
 		6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6964381D84993300BA576E /* VenueDetail.storyboard */; };
@@ -419,7 +419,7 @@
 		6E6FD17B1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
 		6E6FD17C1D7A1A24003D13D7 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
 		6E6FD17D1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
-		6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */; };
+		6E6FD17F1D7A1CA2003D13D7 /* AppSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */; };
 		6E730B921DA2E40A005E486B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
 		6E730B931DA2E40B005E486B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
 		6E730B941DA2E40C005E486B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
@@ -1132,7 +1132,7 @@
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
 		6E6FD1761D7A1A15003D13D7 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
-		6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConsumerKey.swift; sourceTree = "<group>"; };
+		6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift; sourceTree = "<group>"; };
 		6E730B8C1DA2E254005E486B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		6E730B8E1DA2E405005E486B /* PageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageJSON.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
@@ -1520,7 +1520,7 @@
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
 				6EF12C5E1D149B4B00814AD0 /* Define.swift */,
-				6E6FD17E1D7A1CA2003D13D7 /* AppConsumerKey.swift */,
+				6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */,
 				6E7E18E91D490DAC009549BA /* Preference.swift */,
 				6E2D18531E29417F0095508A /* PushNotificationManager.swift */,
 				6E104D381D1061AC00541E84 /* Assets.xcassets */,
@@ -3246,7 +3246,7 @@
 				6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */,
 				6E4E24601E23477F00F7F3FB /* TeamDetailViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
-				6E6FD17F1D7A1CA2003D13D7 /* AppConsumerKey.swift in Sources */,
+				6E6FD17F1D7A1CA2003D13D7 /* AppSecrets.swift in Sources */,
 				6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */,
@@ -3590,7 +3590,7 @@
 				6E65D21C1E4F7EE200F8F582 /* Preferences.swift in Sources */,
 				6E65D2181E4F7E2B00F8F582 /* YouTubeThumbnail.swift in Sources */,
 				6E65D20A1E4F78D200F8F582 /* ServiceProvider.swift in Sources */,
-				6E65D2251E4FC9E900F8F582 /* AppConsumerKey.swift in Sources */,
+				6E65D2251E4FC9E900F8F582 /* AppSecrets.swift in Sources */,
 				6E65D2211E4FA37A00F8F582 /* ServiceURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3600,7 +3600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E96C1CA1DE8F101002F4690 /* Observable.swift in Sources */,
-				6E65D2241E4FC9E700F8F582 /* AppConsumerKey.swift in Sources */,
+				6E65D2241E4FC9E700F8F582 /* AppSecrets.swift in Sources */,
 				6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */,
 				6E1D51B31D835BB8007391A3 /* YouTubeThumbnail.swift in Sources */,
 				6EB9B8A11D83499F00917077 /* UIColor+HexString.swift in Sources */,

@@ -36,6 +36,9 @@ Carthage/
 Vendor
 OpenStack Summit/CoreSummit/Staging.swift
 OpenStack Summit/CoreSummit/Production.swift
+OpenStack Summit/OpenStack Summit/AppSecrets.swift
+OpenStack Summit/GoogleServices
+
+# Legacy
 OpenStack Summit/OpenStack Summit/AppConsumerKey.swift
 OpenStack Summit/FabricInfoPlist.swift
-OpenStack Summit/GoogleServices
