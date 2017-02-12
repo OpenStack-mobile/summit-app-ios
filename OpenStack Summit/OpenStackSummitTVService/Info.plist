@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>OpenStack Summit</string>
+	<string>OpenStackTVService</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,33 +15,30 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>OpenstackTV Service</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>openstacktvservice</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>GitVersion</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>SummitEnvironment</key>
-	<string>$(CORESUMMIT_ENVIRONMENT)</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionAttributes</key>
+		<dict>
+			<key>TVExtensionProtocols</key>
+			<array>
+				<string>TVTopShelfProvider</string>
+			</array>
+		</dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.tv-services</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).ServiceProvider</string>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
 	</array>
+	<key>SummitEnvironment</key>
+	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 </dict>
 </plist>

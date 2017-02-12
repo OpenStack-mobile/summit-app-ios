@@ -300,6 +300,19 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         case .about: return nil
         }
     }
+    
+    // MARK: - MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        dismissViewControllerAnimated(true) {
+            
+            if let error = error {
+                
+                self.showErrorAlert(error.localizedDescription)
+            }
+        }
+    }
 }
 
 // MARK: - Supporting Types
