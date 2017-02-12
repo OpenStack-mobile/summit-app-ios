@@ -28,9 +28,7 @@ let AppEnvironment: Environment = {
     
     return environment
 }()
-    
-let AppGroup = "group.org.openstack.ios.summit"
-    
+
 #elseif os(watchOS)
     #if Production
     let AppEnvironment = Environment.Production
