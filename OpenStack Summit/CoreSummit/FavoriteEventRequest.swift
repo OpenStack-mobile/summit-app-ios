@@ -27,7 +27,7 @@ public extension Store {
                 
                 try! context.performErrorBlockAndWait {
                     
-                    guard let member = self.authenticatedMember,
+                    guard let member = try self.authenticatedMember(context),
                         let event = try EventManagedObject.find(event, context: context)
                         else { return }
                     
