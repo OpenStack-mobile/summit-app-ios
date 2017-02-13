@@ -32,8 +32,15 @@ final class CoreDataTests: XCTestCase {
             // decode
             var managedObject: SummitManagedObject!
             
-            do { managedObject = try summit.save(managedObjectContext) }
+            do {
                 
+                // cache
+                managedObject = try summit.save(managedObjectContext)
+                
+                // persist and validate
+                try managedObjectContext.save()
+            }
+            
             catch { XCTFail("\(error)"); return }
             
             let decodedSummit = Summit(managedObject: managedObject)
