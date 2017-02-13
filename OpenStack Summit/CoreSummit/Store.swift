@@ -154,6 +154,32 @@ public final class Store {
         self.requestQueue.addOperationWithBlock(block)
     }
     
+    /// Validate / cleanup CoreData
+    internal func validate(context: NSManagedObjectContext) throws {
+        
+        var invalidObjects = [Entity]()
+        
+        // find all non-cached entities
+        for entity in managedObjectModel.entities {
+            
+            let entityClass = NSClassFromString(entity.managedObjectClassName)! as! Entity.Type
+            
+            let managedObjects = try context.managedObjects(entityClass, predicate: NSPredicate(format: "cached == nil"))
+            
+            invalidObjects += managedObjects
+        }
+        
+        // cleanup invalid data
+        if invalidObjects.isEmpty == false {
+            
+            #if DEBUG
+            print("Invalid managed objects: \(invalidObjects)")
+            #endif
+            
+            invalidObjects.forEach { context.deleteObject($0) }
+        }
+    }
+    
     // MARK: - OAuth2
     
     internal func createHTTP(type: RequestType) -> Http {

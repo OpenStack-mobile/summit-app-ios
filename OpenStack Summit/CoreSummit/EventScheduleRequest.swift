@@ -90,6 +90,8 @@ public extension Store {
                     
                     attendee.schedule.remove(eventManagedObject)
                     
+                    try self.validate(context)
+                    
                     try context.save()
                 }
             }

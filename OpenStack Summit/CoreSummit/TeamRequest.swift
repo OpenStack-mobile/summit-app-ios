@@ -55,6 +55,8 @@ public extension Store {
                 
                 try team.save(context)
                 
+                try self.validate(context)
+                
                 try context.save()
                 
                 // success
@@ -100,6 +102,8 @@ public extension Store {
                     
                     managedObject.didCache()
                     
+                    try self.validate(context)
+                    
                     try context.save()
                 }
             }
@@ -134,6 +138,8 @@ public extension Store {
                 
                 try entity.save(context)
                 
+                try self.validate(context)
+                
                 try context.save()
             }
             
@@ -164,6 +170,8 @@ public extension Store {
                 if let managedObject = try TeamManagedObject.find(identifier, context: context) {
                     
                     context.deleteObject(managedObject)
+                    
+                    try self.validate(context)
                     
                     try context.save()
                 }
@@ -206,6 +214,8 @@ public extension Store {
             try! context.performErrorBlockAndWait {
                 
                 try page.items.save(context)
+                
+                try self.validate(context)
                 
                 try context.save()
             }

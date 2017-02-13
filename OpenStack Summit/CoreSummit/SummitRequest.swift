@@ -75,6 +75,8 @@ public extension Store {
                 
                 managedObject.initialDataLoad = NSDate()
                 
+                try self.validate(context)
+                
                 try context.save()
             }
             
