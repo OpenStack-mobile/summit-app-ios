@@ -1,1 +1,1147 @@
-[{"id":387479,"entity_id":null,"class_name":"WipeData","created":1470671677,"type":"TRUNCATE"},{"id":387483,"entity_id":8970,"class_name":"Presentation","created":1470672212,"type":"UPDATE","entity":{"id":8970,"title":"Upstream University - Saturday & Sunday","description":"<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">This session is two full-days. Upstream University runs both\u00a0<\/span><span style=\"font-size: 15px; line-height: 22px;\">Saturday, April 23, 2016 and\u00a0<\/span><span style=\"font-size: 15px; line-height: 22px;\">Sunday, April 24, 2016. The sessions run from 10:00am -4:00pm each day.<\/span><\/p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\">\u00a0<\/p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px;\">\u00a0<\/span><\/p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Upstream University is an intensive program designed to help new contributors learn how to effectively work upstream, by fixing bugs and getting their features accepted into the OpenStack project. The educational program requires students to work on real-life bug fixes or new features during two days of real-life classes and online mentoring, until the work is accepted by OpenStack. The live two-day class teaches them to navigate the intricacies of the project\u2019s technical tools and social interactions. In a followup session, the students benefit from individual online sessions to help them resolve any remaining problems they might have.<\/span><\/p>\n<p style=\"margin: 0px; padding: 10px 0px 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Make sure to book your travel plans to arrive in Austin Friday evening or Saturday morning in order to attend the full two-day training session.<\/span><\/p>","start_date":1461510000,"end_date":1461531600,"location_id":42,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":4.5,"is_published":true,"head_count":null,"rsvp_link":"https:\/\/www.eventbrite.com\/e\/upstream-university-openstack-summit-austin-tickets-22669105906","level":"Beginner","track_id":41,"moderator_speaker_id":null,"problem_addressed":null,"attendees_expected_learnt":null,"summit_types":[1],"sponsors":[],"tags":[],"feedback":[],"speakers":[{"id":63,"first_name":"Marton","last_name":"Kiss","title":"GM of Europe, Aptira","bio":"<p>OpenStack Ambassador, founder of Hungarian OpenStack user group, co-organizer of OpenStack CEE Day event and active contributor of multiple OpenStack projects. Marton have a background in the telecommunication sector, he was a CTO for a Telenor owned company and managed the operation and development areas in Central Europe and Asia. Actually he is working at Aptira as a GM for the EU region.<\/p>","irc":"mrmartin","twitter":"@marton_kiss","presentations":{"1":7202,"2":8970,"3":14255,"4":14347,"5":14352,"6":14462,"7":14478},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/63","gender":"Male","member_id":5882}]}},{"id":387489,"entity_id":9,"class_name":"SummitVenueFloor","created":1470739898,"type":"UPDATE","entity":{"id":9,"name":"Level 8","description":"Level 8","number":8,"venue_id":38,"image":"https:\/\/dev-openstack.org-site\/assets\/Uploads\/floor4.png","rooms":[42]}},{"id":387496,"entity_id":134,"class_name":"SummitVenue","created":1470750366,"type":"INSERT","entity":{"id":134,"name":"Test Venue","description":"<p>Test venue for DataUpdate\u00a0<\/p>","location_type":"Internal","order":20,"class_name":"SummitVenue","address_1":null,"address_2":null,"zip_code":null,"city":null,"state":null,"country":"US","lng":null,"lat":null,"is_main":false,"maps":[],"images":[]}},{"id":387497,"entity_id":6829,"class_name":"Presentation","created":1470750813,"type":"UPDATE","entity":{"id":6829,"title":"Command Presence Workshop, Organized by the Women of OpenStack","description":"<p><a href=\"https:\/\/commandpresenceworkshop.eventbrite.com\">RSVP Required<\/a>.<\/p>\n<p>The <strong>Command Presence\u00a0Workshop<\/strong> has been recognized by the Anita Borg Institute and Harvard Business Review.\u00a0 It is intended to teach participants how to handle \u201csenior-level high pressure meetings\u201d.\u00a0 The majority of the workshop is a task-force convened to address a simulated, but very realistic crisis event.\u00a0 In the class, each participant assumes a role, and is given about 30minutes to prepare 1-2 slides.\u00a0 Once the class has prepared, the simulation begins.\u00a0 There is a role-play simulation. It is not uncommon to hear occasional \u201cgasps\u201d of disbelief from the participants.\u00a0 The workshop participants will experience rapid-fire questioning, interruption, and other situations that occur in senior-level meetings, but in a safe environment conducive to learning techniques for handling such situations. This will be a great session.<\/p>\n<p><strong>Facilitators<\/strong>: Ruchi Bhargava (Intel), Malini\u00a0Bhandaru (Intel) and a panel of leaders representative of\u00a0the\u00a0OpenStack leadership in the community (business leaders and technical leaders).<\/p>","start_date":1461517200,"end_date":1461528000,"location_id":45,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":4,"is_published":true,"head_count":null,"rsvp_link":"https:\/\/commandpresenceworkshop.eventbrite.com","level":"Intermediate","track_id":40,"moderator_speaker_id":null,"problem_addressed":"<p>Giving people more confidence in handling high pressure scenarios to attain success.It simulates challenging dynamics (think: cross-industry, cross-project priorities, and responses that seem dismissive\/my-way or no way.<\/p>","attendees_expected_learnt":"<p>Leave with tips to handle high pressure scenarios, stay focused, command presence.<\/p>\n<p>Perhaps become aware of any existing negative behavior patterns to eliminate.<\/p>","summit_types":[1],"sponsors":[],"tags":[{"id":837,"tag":"Community"},{"id":3351,"tag":" Women of OpenStack"},{"id":38,"tag":" Horizon"},{"id":36,"tag":" Keystone"},{"id":34,"tag":" Nova"}],"feedback":[],"speakers":[{"id":13,"first_name":"Ruchi","last_name":"Bhargava","title":"Director, Datacenter and Cloud Software Engineerin","bio":"Ruchi Bhargava manages the Datacenter &amp; Cloud software engineering team focusing on Network and Storage solutions at Intel&rsquo;s Open Source Technology Center. She has been the Hybrid Cloud Product Owner for Intel IT responsible for building, deploying and running an enterprise Cloud for Intel. Ruchi has also held roles of IT Country Manager for Intel Malaysia, IT Supply Planning Production Service Manager and Manufacturing computing services engineering based in Malaysia. &nbsp;For Intel&rsquo;s manufacturing group, she has led fab and assembly\/test factory startups and manufacturing automation development and operations.&nbsp; She has also managed global deployments and ERP applications operations for IT. She joined Intel in Arizona in 1991.&nbsp;Ruchi holds a Bachelor&rsquo;s degree in Electrical Engineering from Delhi University, India. ","irc":null,"twitter":null,"presentations":{"0":6829,"1":6838,"3":14157,"4":14230,"5":14865},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/13","gender":null,"member_id":14577},{"id":1401,"first_name":"Malini","last_name":"Bhandaru","title":"Senior Software Architect ","bio":"<p><strong><span style=\"font-size: 10.0pt;\">Malini Bhandaru, Ph.D., Intel, <\/span><\/strong><span style=\"font-size: 10.0pt;\">is an Senior Software Architect &nbsp;with the Open source Technology Center at Intel. &nbsp;She has been involved with OpenStack for over&nbsp;three years. &nbsp;Her interests span security, key management, access control, dynamic resource scheduling, network function virtualization, and scalability. She co-authored the &ldquo;OpenStack Security Guide&rdquo;. Prior to her open source cloud endeavors she worked on power and performance aspects on Intel&rsquo;s Xeon server product line. &nbsp;Before joining Intel, she worked at Nuance, Verizon, and several start-ups in Massachusetts. She has two patents granted and nine more filed. She has&nbsp;a Ph.D. in Artificial Intelligence from the University of Massachusetts, Amherst. She volunteers for science education activities and computer literacy. Through Intel she had the&nbsp;unique opportunity to develop and field trial in Bangladesh and India an Android application to assist farmers with their fertilizer needs. Malini lives in the Bay Area with her husband and sons, and enjoys gardening and hiking.<\/span><\/p>","irc":null,"twitter":null,"presentations":{"8":6829},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/1401","gender":null,"member_id":6023}],"links":[{"id":1042,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"http:\/\/www.wsj.com\/articles\/SB10001424053111904140604576498380000356032"},{"id":1043,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/openstacksummitoctober2015tokyo.sched.org\/event\/1ddf6338bc6c5e9fec181663ea1fa47b"}]}},{"id":387499,"entity_id":6859,"class_name":"Presentation","created":1470751201,"type":"UPDATE","entity":{"id":6859,"title":"Dragonflow - Neutron Done the SDN Way!!!","description":"<p>Dragonflow is an open source distributed control plane implementation of Neutron which is an<strong> integral part of<\/strong> OpenStack.<\/p>\n<p>Dragonflow introduces innovative solutions and features to implement networking and distributed network services in a manner that is both lightweight and simple to extend, yet targeted towards performance-intensive and latency-sensitive applications.<\/p>\n<p>Dragonflow aims at solving the performance and scale problems in Neutron leveraging lessons Learned from running OpenStack at scale and doing it the SDN way.<\/p>\n<p><em>We will cover the following topics:<\/em><\/p>\n<ul><li>Dragonflow introduction and progress<\/li>\n<li>Pluggable topology and policy distribution model<\/li>\n<li>Supported distributed networking services (DHCP, Routing and more)<\/li>\n<li>Innovative and interesting solutions for some hot networking topics:\u00a0 Security groups, Container networking, Service chaining &amp; topology injection, Integration with smart NICs for h\/w offloading<\/li>\n<\/ul>","start_date":1461795600,"end_date":1461798000,"location_id":53,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":5,"is_published":true,"head_count":null,"rsvp_link":null,"level":"Intermediate","track_id":24,"moderator_speaker_id":null,"problem_addressed":"<p>An important use case for Dragonflow is to be an integral part of OpenStack and Neutron, both the implementation and the plugin are under OpenStack governance and located in an official OpenStack project, all running in an open source way and according to OpenStack TC guidelines.<\/p>\n<p>Dragonflow was created in order to solve some of the challenges of running Neutron reference implementation at scale and suggest simple ways to solve them in an SDN way.<\/p>\n<p>We recieve constant feedback and requierments from cloud operators running OpenStack at scale and integrating solutions in Dragonflow to accomodate these.<\/p>\n<p>Dragonflow implements networking services (like Routing, DHCP, Security and more) in a distributed way that fits scaling these services and providing proper HA\/Redundancy.<\/p>\n<p>Instead of selecting a specific locked-in solution for control plane distribution, Dragonflow uses a pluggable architecture which allows operator to pick perfect framework for his\/her cloud<\/p>","attendees_expected_learnt":"<p>They attendees should get familiar with Dragonflow and hear a complete Introduction to the project.<\/p>\n<p>They should understand the ways Dragonflow is trying to solve the use cases mentioned above.<\/p>\n<p>Information regarding Dragonflow deployments will be shared in addition to complete roadmap plan for future features we plan for the project.<\/p>","summit_types":[1],"sponsors":[],"tags":[{"id":3370,"tag":"Architect"},{"id":3371,"tag":" Telecom"},{"id":1527,"tag":" Upstream"},{"id":12,"tag":" Enterprise"},{"id":3374,"tag":" Public Clouds"},{"id":2033,"tag":" Community"},{"id":3368,"tag":" Upstream Dev"},{"id":35,"tag":" Neutron"}],"feedback":[],"speakers":[{"id":324,"first_name":"Gal","last_name":"Sagie","title":"Open Source Software Architect","bio":"<p>&nbsp;I am a software architect, passionate about open source, experienced with networking, virtualization and all areas of SDN\/NFV and cloud computing.<\/p>\r\n<p>Contributing to OpenStack Neutron, Containers networking projects and hybrid cloud. Eager to bridge the gaps between OpenStack development and its users and explore new areas to help OpenStack shine<\/p>\r\n<p>Blogging for anything OpenStack related at:<\/p>\r\n<p>Blog - http:\/\/galsagie.github.io<\/p>","irc":"gsagie","twitter":"GalSagie","presentations":{"1":6859,"2":6861,"3":7633,"4":10865},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/324","gender":"Male","member_id":31535},{"id":3548,"first_name":"Li","last_name":"Ma","title":"Architect","bio":"<p>Nick is a Linux veteran with over 10 years of experience on Linux development. He is the cloud architect at AWcloud where he works on OpenStack Networking, SDN\/NFV, messaging system and large-scale cloud architecture. Prior to joining OpenStack community, he spent 4 years on infosec, virtualization\/containerization and distributed system.<\/p>","irc":"nick-ma","twitter":null,"presentations":{"1":6859},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/3548","gender":"Male","member_id":10176},{"id":336,"first_name":"Eran","last_name":"Gampel","title":"Chief Architect - Cloud and Open Source at Huawei","bio":"<p>Eran is&nbsp;currently Chief Architect of Cloud and Open Source in Huawei,&nbsp;managing a research team of open source experts, developing in OpenStack.<\/p>\r\n<p>In the community Eran is leading&nbsp;the design and development of Dragonflow and Smaug.<\/p>\r\n<p>&nbsp;<\/p>","irc":"gampel","twitter":"@gampel29","presentations":{"14":6859,"15":10927},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/336","gender":"Male","member_id":26768}],"links":[{"id":46,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/github.com\/openstack\/dragonflow"},{"id":47,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"http:\/\/superuser.openstack.org\/articles\/what-you-need-to-know-about-dragonflow-for-the-openstack-liberty-release"},{"id":48,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/www.youtube.com\/watch?v=wo1Q-BL3nII"},{"id":49,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"http:\/\/galsagie.github.io\/sdn\/openstack\/ovs\/dragonflow\/2015\/12\/28\/dragonflow-security-groups\/"},{"id":50,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"http:\/\/blog.gampel.net\/2015\/09\/dragonflow-distributed-dhcp-for.html"}],"videos":[{"id":23577,"name":"Dragonflow - Neutron Done the SDN Way","description":null,"display_on_site":true,"featured":false,"youtube_id":"2zrMZFnBQuw","data_uploaded":1461858094,"highlighted":false,"views":95}]}},{"id":387500,"entity_id":8868,"class_name":"SummitEvent","created":1470751221,"type":"UPDATE","entity":{"id":8868,"title":"Lunch - Day 3 changed title","description":null,"start_date":1461778219,"end_date":1461783059,"location_id":67,"summit_id":6,"type_id":4,"class_name":"SummitEvent","allow_feedback":false,"avg_feedback_rate":null,"is_published":true,"head_count":null,"rsvp_link":null,"summit_types":[1,2],"sponsors":[],"tags":[],"feedback":[]}},{"id":387501,"entity_id":8891,"class_name":"SummitEvent","created":1470751262,"type":"UPDATE","entity":{"id":8891,"title":"Registration Check-In & Bag \/ Coat Check","description":"<p>\u00a0Attendee registration and check in. santi changed description<\/p>","start_date":1461936619,"end_date":1461949200,"location_id":71,"summit_id":6,"type_id":6,"class_name":"SummitEvent","allow_feedback":false,"avg_feedback_rate":null,"is_published":true,"head_count":null,"rsvp_link":null,"summit_types":[1,2],"sponsors":[],"tags":[],"feedback":[]}},{"id":387502,"entity_id":9004,"class_name":"SummitEvent","created":1470751312,"type":"UPDATE","entity":{"id":9004,"title":"Storage Made Easy","description":"<p>Storage Made Easy sponsored demo. santi changed description<\/p>","start_date":1461790800,"end_date":1461792000,"location_id":79,"summit_id":6,"type_id":1,"class_name":"SummitEvent","allow_feedback":false,"avg_feedback_rate":null,"is_published":true,"head_count":20,"rsvp_link":null,"summit_types":[1],"sponsors":[],"tags":[],"feedback":[]}},{"id":387503,"entity_id":6838,"class_name":"Presentation","created":1470751408,"type":"UPDATE","entity":{"id":6838,"title":"Fostering Full Equality, Organized by the Women of OpenStack","description":"<p>Following up on the themes related to gender equality presented at the previous Summit talks sponsored by The Women of OpenStack working group, this session will focus on our vision of a world where the OpenStack community is truly and completely blind to meaningless differences in gender, color, creed and culture. What will this new world look like? How will it differ from the current one?<\/p>\n<p>A panel of people from all walks of life will explore what that future is and what we can do as a community as a whole to achieve it.<\/p>","start_date":1461868219,"end_date":1461870900,"location_id":60,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":null,"is_published":true,"head_count":null,"rsvp_link":null,"level":"Beginner","track_id":39,"moderator_speaker_id":null,"problem_addressed":"<p>The OpenStack Community is not immune to the outside world. GamerGate, FOSDEM and other recent scandals related to the acceptance of women and other minorities in the technology community amply demonstrate the need for change. \u00a0The issues of gender and ethnic bias are just as relevant within the OpenStack community as anywhere else. Raising the awareness for the community is important for maintaining our reputation for inclusivity and fairness in all our relationships.<\/p>","attendees_expected_learnt":"<p>Suggestions for practices that allow all people regardless of their gender, origin, color or creed to participate fully in the OpenStack Community, including:<\/p>\n<ul><li>Be mindful of subtle biases and how they can color people\u2019s judgment<\/li>\n<li>Institutionalizing inclusivity to ensure fair treatment for all<\/li>\n<li>\u00a0Understanding the critical roles of all the people in the OpenStack community, technical and business focused alike.<\/li>\n<li>How to be more accepting of alternative ways to contribute<\/li>\n<\/ul>","summit_types":[1],"sponsors":[],"tags":[{"id":837,"tag":"Community"},{"id":3351,"tag":" Women of OpenStack"}],"feedback":[],"speakers":[{"id":13,"first_name":"Ruchi","last_name":"Bhargava","title":"Director, Datacenter and Cloud Software Engineerin","bio":"Ruchi Bhargava manages the Datacenter &amp; Cloud software engineering team focusing on Network and Storage solutions at Intel&rsquo;s Open Source Technology Center. She has been the Hybrid Cloud Product Owner for Intel IT responsible for building, deploying and running an enterprise Cloud for Intel. Ruchi has also held roles of IT Country Manager for Intel Malaysia, IT Supply Planning Production Service Manager and Manufacturing computing services engineering based in Malaysia. &nbsp;For Intel&rsquo;s manufacturing group, she has led fab and assembly\/test factory startups and manufacturing automation development and operations.&nbsp; She has also managed global deployments and ERP applications operations for IT. She joined Intel in Arizona in 1991.&nbsp;Ruchi holds a Bachelor&rsquo;s degree in Electrical Engineering from Delhi University, India. ","irc":null,"twitter":null,"presentations":{"0":6829,"1":6838,"3":14157,"4":14230,"5":14865},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/13","gender":null,"member_id":14577},{"id":151,"first_name":"Nithya","last_name":"Ruff","title":"Director, SanDisk Open Source Strategy Office","bio":"<p><span><span><span>Nithya A. Ruff is the Head of SanDisk&rsquo;s Open Source Strategy Office. She first glimpsed the power of open source while at SGI in the 90s and has been building bridges between hardware developers and the open source community ever since.<span>&nbsp; <\/span><span>&nbsp;&nbsp;&nbsp;<\/span><\/span><span>Nithya has been an advocate and a speaker for opening doors to new people in open source and promoting diverse ways of contributing such as in marketing, legal and community. <\/span><\/span><\/span><\/p>\r\n<p><span><span>&nbsp;<\/span><\/span><\/p>\r\n<p><span><span>She&rsquo;s also held leadership positions at Wind River, Synopsys, Avaya, Cranite, Tripwire and Eastman Kodak. <\/span><\/span><\/p>\r\n<p><span><span>&nbsp;<\/span><\/span><\/p>\r\n<p><span><span>Nithya is also is the President of SanDisk&rsquo;s Women&rsquo;s Innovation Network or WIN dedicated to the development of women&rsquo;s highest potential in the work place.<\/span><\/span><\/p>\r\n<p><span><span>&nbsp;<\/span><\/span><\/p>\r\n<p><span><span><span>Nithya graduated with an MS in Computer Science from NDSU and an MBA from the University of Rochester, Simon Business School.<span>&nbsp; <\/span><\/span><span>She lives in the bay area and is a proud mother of two daughters. <\/span><\/span><\/span><\/p>\r\n<p><span><span>&nbsp;<\/span><\/span><\/p>","irc":null,"twitter":"@nithyaruff","presentations":{"2":6838,"4":14821},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/151","gender":"Female","member_id":25441},{"id":3254,"first_name":"Nina","last_name":"Goradia","title":"Architect, IBM Cloud","bio":"<p>Nina Goradia is an Architect in the IBM Cloud Business Unit where she leads design and development of OpenStack based cloud solutions.&nbsp; Nina was key in driving the initial integration of OpenStack into IBM private cloud offerings.&nbsp; Her initiative resulted in the delivery of several OpenStack solutions for IBM's enterprise customers including IBM Cloud Manager with OpenStack (ICM).&nbsp; She was also responsible for the design &amp; delivery of IBM&rsquo;s hybrid cloud solution between private clouds running within the enterprise and dedicated, hosted Clouds in SoftLayer. She is currently working on providing OpenStack based features and support for all of IBM&rsquo;s Cloud Solutions across private, dedicated and public spaces.<\/p>","irc":"ninag","twitter":null,"presentations":[6838,7102],"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/3254","gender":"Female","member_id":16066},{"id":4670,"first_name":"Vince","last_name":"Brunssen","title":"Manager, IaaS & OpenStack IBM","bio":"<p>I currently work in the OpenStack Open Source community where I manage a group of 17 developers who contribute code to various project. &nbsp;I also work on the OpenStack project myself, contributing where I am able to do so. &nbsp;In the time when I am not working on OpenStack I also like to work with other technologies such as Cloud Foundry and Bluemix. &nbsp;I find it interesting how we can now use IaaS and PaaS to quickly and easily create applications, try them out, and use the result or toss it aside depending on the outcome. &nbsp;This ability to quickly and easily develop, test and iterate on code in an agile manner is where it is at in Software Development.<\/p>","irc":"brunssen","twitter":"vbrunssen","presentations":{"1":6838},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/4670","gender":"Male","member_id":22792},{"id":4992,"first_name":"Josh","last_name":"Kleinpeter","title":"Mr","bio":"<p>A software engineer by training, Josh has been working with OpenStack since the Bexar days. At AT&amp;T, he was heavily involved in building an early production cloud in close partnership with CloudScaling. At Cisco, Josh has been invovled with helping bring to fruition the Cisco cloud and evolve it over time.<\/p>","irc":"j05hk","twitter":"j05th","presentations":[6838],"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/4992","gender":"Prefer not to say","member_id":13387}],"links":[{"id":142,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/www.openstack.org\/summit\/vancouver-2015\/summit-videos\/presentation\/standing-tall-in-the-room-sponsored-by-the-women-of-openstack"},{"id":143,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/www.techwell.com\/techwell-insights\/2014\/03\/women-technology-more-important-ever"},{"id":144,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/www.openstack.org\/summit\/tokyo-2015\/videos\/presentation\/overcoming-subtle-bias-presented-by-the-women-of-openstack"},{"id":145,"name":null,"description":null,"display_on_site":false,"featured":false,"link":"https:\/\/opensource.com\/business\/14\/12\/getting-more-women-involved-openstack-community"}],"videos":[{"id":23646,"name":"Fostering Full Equality, Organized by the Women of OpenStack","description":null,"display_on_site":true,"featured":false,"youtube_id":"bFUQgk7zKr8","data_uploaded":1461998077,"highlighted":false,"views":22}]}},{"id":387504,"entity_id":6869,"class_name":"Presentation","created":1470751463,"type":"DELETE"},{"id":387508,"entity_id":301,"class_name":"PresentationLink","created":1470751638,"type":"DELETE"},{"id":387509,"entity_id":302,"class_name":"PresentationLink","created":1470751638,"type":"DELETE"},{"id":387510,"entity_id":23507,"class_name":"PresentationVideo","created":1470751638,"type":"DELETE"},{"id":387511,"entity_id":28091,"class_name":"PresentationSlide","created":1470751638,"type":"DELETE"},{"id":387512,"entity_id":6868,"class_name":"Presentation","created":1470751697,"type":"DELETE"},{"id":387513,"entity_id":74,"class_name":"PresentationLink","created":1470751697,"type":"DELETE"},{"id":387514,"entity_id":75,"class_name":"PresentationLink","created":1470751697,"type":"DELETE"},{"id":387515,"entity_id":76,"class_name":"PresentationLink","created":1470751697,"type":"DELETE"},{"id":387516,"entity_id":77,"class_name":"PresentationLink","created":1470751697,"type":"DELETE"},{"id":387517,"entity_id":78,"class_name":"PresentationLink","created":1470751697,"type":"DELETE"},{"id":387518,"entity_id":23485,"class_name":"PresentationVideo","created":1470751697,"type":"DELETE"},{"id":387519,"entity_id":6873,"class_name":"Presentation","created":1470751748,"type":"UPDATE","entity":{"id":6873,"title":"Advances in Keystone's Role Based Access Control","description":"<p>Keystone provides the mechanism for configuring role based access control (RBAC) thoughout the OpenStack deployment.\u00a0 New mechanisms in recent releases have greatly improved the ability to tune the access control approach for your deployment.\u00a0 This presentation will walk though the configuration of RBAC in your deployment.\u00a0 To start, we'll investigate the defaults that ship with upstream Keystone.\u00a0 We'll cover a brief overview of requests that have driven the design over the past couple releases.\u00a0 Finally, we'll see customizations making use of the limitation of admin-scoping, role inference rules and domain specific roles that you can use to tailor your deployment to suit your organization.<\/p>","start_date":1461703201,"end_date":1461705641,"location_id":53,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":null,"is_published":true,"head_count":null,"rsvp_link":null,"level":"Intermediate","track_id":27,"moderator_speaker_id":null,"problem_addressed":"<p>Early OpenStack clouds really had two \"roles\" in terms of administration - you were either admin or you were not. This simply isn't good enough for today's clouds, especially those public (or shared private) clouds, where you need to create layers of administration (e.g. cloud, domain, project etc.). Unless you understand how you can use keystone's RBAC capabilities (some of which are new), then you simply cannot do that. santi change<\/p>","attendees_expected_learnt":"<p>All about Keystone's RBAC, from defaults to advanced customizations. How to\u00a0create cloud, domain and project admin capabilities and delegate responsibility appropriately.<\/p>","summit_types":[1],"sponsors":[],"tags":[{"id":1419,"tag":"ops"},{"id":1527,"tag":" Upstream"},{"id":12,"tag":" Enterprise"},{"id":3374,"tag":" Public Clouds"},{"id":3368,"tag":" Upstream Dev"},{"id":36,"tag":" Keystone"},{"id":1143,"tag":" security"},{"id":2,"tag":" Article"}],"feedback":[],"speakers":[{"id":591,"first_name":"Adam","last_name":"Young","title":"Senior Software Engineer, Red Hat","bio":"<pre>Adam Young is a member of Red Hat's OpenStack team and a core developer on Keystone, the identity management service for OpenStack. Adam has worked on various systems management tools, including the<br \/>Identity Management component of Red Hat Enterprise Linux based on the FreeIPA technology.  A 19 year industry veteran, Adam contributed to multiple projects, products and solutions from Java based eCommerce<br \/>Web Sites to Kernel modifications for Beowulf clustering.<\/pre>\r\n<p>&nbsp;<\/p>","irc":"ayoung","twitter":"admiyoung","presentations":{"4":6873,"7":14415},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/591","gender":"Male","member_id":310},{"id":2642,"first_name":"Henry","last_name":"Nash","title":"Software Architect & Wild Duck, IBM Cloud","bio":"<p><span style=\"font-size: 14.666666666666666px; color: #000000;\">Henry works in IBM's Cloud division as an OpenStack Architect and a core contributor to OpenStack Keystone, driving enterprise capabilities into OpenStack as well as IBM's products that use OpenStack. He has a long history in the creation of enterprise software, having founded a number of successful companies in Europe and the USA, coming to IBM via acquisition in 2009. He holds a 1st class honours degree in Electrical Engineering from the University of Southampton, UK.<\/span><\/p>","irc":"henrynash","twitter":"@henrynash","presentations":{"1":6873,"3":14652},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/2642","gender":"Male","member_id":39359}],"videos":[{"id":21951,"name":"Advances in Keystone's Role Based Access Control","description":null,"display_on_site":true,"featured":false,"youtube_id":"Z1NDfzJkpzA","data_uploaded":1461711818,"highlighted":false,"views":49}]}},{"id":387521,"entity_id":6893,"class_name":"Presentation","created":1470751862,"type":"DELETE"},{"id":387522,"entity_id":97,"class_name":"PresentationLink","created":1470751862,"type":"DELETE"},{"id":387523,"entity_id":98,"class_name":"PresentationLink","created":1470751862,"type":"DELETE"},{"id":387524,"entity_id":99,"class_name":"PresentationLink","created":1470751862,"type":"DELETE"},{"id":387525,"entity_id":100,"class_name":"PresentationLink","created":1470751862,"type":"DELETE"},{"id":387526,"entity_id":23529,"class_name":"PresentationVideo","created":1470751862,"type":"DELETE"},{"id":387527,"entity_id":28032,"class_name":"PresentationSlide","created":1470751862,"type":"DELETE"},{"id":387528,"entity_id":6894,"class_name":"Presentation","created":1470751870,"type":"DELETE"},{"id":387529,"entity_id":2751,"class_name":"PresentationLink","created":1470751870,"type":"DELETE"},{"id":387530,"entity_id":2752,"class_name":"PresentationLink","created":1470751870,"type":"DELETE"},{"id":387531,"entity_id":2753,"class_name":"PresentationLink","created":1470751870,"type":"DELETE"},{"id":387532,"entity_id":2754,"class_name":"PresentationLink","created":1470751870,"type":"DELETE"},{"id":387533,"entity_id":23680,"class_name":"PresentationVideo","created":1470751870,"type":"DELETE"},{"id":387534,"entity_id":28075,"class_name":"PresentationSlide","created":1470751870,"type":"DELETE"},{"id":387535,"entity_id":9523,"class_name":"SummitEvent","created":1470751902,"type":"DELETE"},{"id":387536,"entity_id":9517,"class_name":"SummitEvent","created":1470751928,"type":"DELETE"},{"id":387537,"entity_id":482,"class_name":"SponsorFromEvent","created":1470751965,"type":"UPDATE","entity":{"id":9513,"title":"Ops: Future of Op Meetups Organisation","description":"<p><a href=\"https:\/\/etherpad.openstack.org\/p\/AUS-ops-Future-of-op-meetups-organisation\">https:\/\/etherpad.openstack.org\/p\/AUS-ops-Future-of-op-meetups-organisation<\/a><\/p>\n<p>The Ops Meetup, organized by the User Committee, is a track comprised of collaborative, working sessions for people who are operating OpenStack clouds (and contributors who want to hear from them). The purpose is to share knowledge and best practices among cloud operators, as well as provide feedback based on experience running OpenStack. There will be no formal presentations, and a moderate level of knowledge around running OpenStack is assumed. If you're just starting out, the Operations Track of the conference will be much more friendly!<\/p>\n<p>Moderator:\u00a0Tom Fifield<\/p>\n<p>\u00a0<\/p>","start_date":1461610800,"end_date":1461613200,"location_id":92,"summit_id":6,"type_id":13,"class_name":"SummitEvent","allow_feedback":false,"avg_feedback_rate":null,"is_published":true,"head_count":null,"rsvp_link":null,"summit_types":[2],"sponsors":[482],"tags":[{"id":1419,"tag":"ops"}],"feedback":[{"id":482,"name":"Tipit"}]}},{"id":387539,"entity_id":9513,"class_name":"SummitEvent","created":1470751987,"type":"UPDATE","entity":{"id":9513,"title":"Ops: Future of Op Meetups Organisation","description":"<p><a href=\"https:\/\/etherpad.openstack.org\/p\/AUS-ops-Future-of-op-meetups-organisation\">https:\/\/etherpad.openstack.org\/p\/AUS-ops-Future-of-op-meetups-organisation<\/a><\/p>\n<p>The Ops Meetup, organized by the User Committee, is a track comprised of collaborative, working sessions for people who are operating OpenStack clouds (and contributors who want to hear from them). The purpose is to share knowledge and best practices among cloud operators, as well as provide feedback based on experience running OpenStack. There will be no formal presentations, and a moderate level of knowledge around running OpenStack is assumed. If you're just starting out, the Operations Track of the conference will be much more friendly!<\/p>\n<p>Moderator:\u00a0Tom Fifield<\/p>\n<p>\u00a0<\/p>","start_date":1461610800,"end_date":1461613200,"location_id":92,"summit_id":6,"type_id":13,"class_name":"SummitEvent","allow_feedback":false,"avg_feedback_rate":null,"is_published":true,"head_count":null,"rsvp_link":null,"summit_types":[2],"sponsors":[482],"tags":[{"id":1419,"tag":"ops"}],"feedback":[{"id":482,"name":"Tipit"}]}},{"id":387543,"entity_id":15028,"class_name":"Presentation","created":1470752177,"type":"INSERT","entity":{"id":15028,"title":"This is a new event","description":"<p>by Santi<\/p>","start_date":1461646800,"end_date":1461648300,"location_id":54,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":null,"is_published":true,"head_count":20,"rsvp_link":null,"level":"Intermediate","track_id":22,"moderator_speaker_id":null,"problem_addressed":null,"attendees_expected_learnt":null,"summit_types":[1],"sponsors":[],"tags":[],"feedback":[],"speakers":[{"id":3492,"first_name":"Santiago","last_name":"Palenque","title":"Mr.","bio":"<p>This is my speaker bio<\/p>","irc":null,"twitter":null,"presentations":{"1":15028},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/3492","gender":"Male","member_id":27088}]}}]
+[
+	{
+		"id": 387479,
+		"entity_id": null,
+		"class_name": "WipeData",
+		"created": 1470671677,
+		"type": "TRUNCATE"
+	},
+	{
+		"id": 387483,
+		"entity_id": 8970,
+		"class_name": "Presentation",
+		"created": 1470672212,
+		"type": "UPDATE",
+		"entity": {
+			"id": 8970,
+			"title": "Upstream University - Saturday & Sunday",
+			"description": "<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">This session is two full-days. Upstream University runs both </span><span style=\"font-size: 15px; line-height: 22px;\">Saturday, April 23, 2016 and </span><span style=\"font-size: 15px; line-height: 22px;\">Sunday, April 24, 2016. The sessions run from 10:00am -4:00pm each day.</span></p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"> </p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px;\"> </span></p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Upstream University is an intensive program designed to help new contributors learn how to effectively work upstream, by fixing bugs and getting their features accepted into the OpenStack project. The educational program requires students to work on real-life bug fixes or new features during two days of real-life classes and online mentoring, until the work is accepted by OpenStack. The live two-day class teaches them to navigate the intricacies of the project’s technical tools and social interactions. In a followup session, the students benefit from individual online sessions to help them resolve any remaining problems they might have.</span></p>\n<p style=\"margin: 0px; padding: 10px 0px 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Make sure to book your travel plans to arrive in Austin Friday evening or Saturday morning in order to attend the full two-day training session.</span></p>",
+			"start_date": 1461510000,
+			"end_date": 1461531600,
+			"location_id": 42,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": 4.5,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": "https://www.eventbrite.com/e/upstream-university-openstack-summit-austin-tickets-22669105906",
+			"level": "Beginner",
+			"track_id": 41,
+			"moderator_speaker_id": null,
+			"problem_addressed": null,
+			"attendees_expected_learnt": null,
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"feedback": [
+
+			],
+			"speakers": [
+				{
+					"id": 63,
+					"first_name": "Marton",
+					"last_name": "Kiss",
+					"title": "GM of Europe, Aptira",
+					"bio": "<p>OpenStack Ambassador, founder of Hungarian OpenStack user group, co-organizer of OpenStack CEE Day event and active contributor of multiple OpenStack projects. Marton have a background in the telecommunication sector, he was a CTO for a Telenor owned company and managed the operation and development areas in Central Europe and Asia. Actually he is working at Aptira as a GM for the EU region.</p>",
+					"irc": "mrmartin",
+					"twitter": "@marton_kiss",
+					"presentations": {
+						"1": 7202,
+						"2": 8970,
+						"3": 14255,
+						"4": 14347,
+						"5": 14352,
+						"6": 14462,
+						"7": 14478
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/63",
+					"gender": "Male",
+					"member_id": 5882
+				}
+			]
+		}
+	},
+	{
+		"id": 387489,
+		"entity_id": 9,
+		"class_name": "SummitVenueFloor",
+		"created": 1470739898,
+		"type": "UPDATE",
+		"entity": {
+			"id": 9,
+			"name": "Level 8",
+			"description": "Level 8",
+			"number": 8,
+			"venue_id": 38,
+			"image": "https://dev-openstack.org-site/assets/Uploads/floor4.png",
+			"rooms": [
+				42
+			]
+		}
+	},
+	{
+		"id": 387496,
+		"entity_id": 134,
+		"class_name": "SummitVenue",
+		"created": 1470750366,
+		"type": "INSERT",
+		"entity": {
+			"id": 134,
+			"name": "Test Venue",
+			"description": "<p>Test venue for DataUpdate </p>",
+			"location_type": "Internal",
+			"order": 20,
+			"class_name": "SummitVenue",
+			"address_1": null,
+			"address_2": null,
+			"zip_code": null,
+			"city": null,
+			"state": null,
+			"country": "US",
+			"lng": null,
+			"lat": null,
+			"is_main": false,
+			"maps": [
+
+			],
+			"images": [
+
+			]
+		}
+	},
+	{
+		"id": 387497,
+		"entity_id": 6829,
+		"class_name": "Presentation",
+		"created": 1470750813,
+		"type": "UPDATE",
+		"entity": {
+			"id": 6829,
+			"title": "Command Presence Workshop, Organized by the Women of OpenStack",
+			"description": "<p><a href=\"https://commandpresenceworkshop.eventbrite.com\">RSVP Required</a>.</p>\n<p>The <strong>Command Presence Workshop</strong> has been recognized by the Anita Borg Institute and Harvard Business Review.  It is intended to teach participants how to handle “senior-level high pressure meetings”.  The majority of the workshop is a task-force convened to address a simulated, but very realistic crisis event.  In the class, each participant assumes a role, and is given about 30minutes to prepare 1-2 slides.  Once the class has prepared, the simulation begins.  There is a role-play simulation. It is not uncommon to hear occasional “gasps” of disbelief from the participants.  The workshop participants will experience rapid-fire questioning, interruption, and other situations that occur in senior-level meetings, but in a safe environment conducive to learning techniques for handling such situations. This will be a great session.</p>\n<p><strong>Facilitators</strong>: Ruchi Bhargava (Intel), Malini Bhandaru (Intel) and a panel of leaders representative of the OpenStack leadership in the community (business leaders and technical leaders).</p>",
+			"start_date": 1461517200,
+			"end_date": 1461528000,
+			"location_id": 45,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": 4,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": "https://commandpresenceworkshop.eventbrite.com",
+			"level": "Intermediate",
+			"track_id": 40,
+			"moderator_speaker_id": null,
+			"problem_addressed": "<p>Giving people more confidence in handling high pressure scenarios to attain success.It simulates challenging dynamics (think: cross-industry, cross-project priorities, and responses that seem dismissive/my-way or no way.</p>",
+			"attendees_expected_learnt": "<p>Leave with tips to handle high pressure scenarios, stay focused, command presence.</p>\n<p>Perhaps become aware of any existing negative behavior patterns to eliminate.</p>",
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+				{
+					"id": 837,
+					"tag": "Community"
+				},
+				{
+					"id": 3351,
+					"tag": " Women of OpenStack"
+				},
+				{
+					"id": 38,
+					"tag": " Horizon"
+				},
+				{
+					"id": 36,
+					"tag": " Keystone"
+				},
+				{
+					"id": 34,
+					"tag": " Nova"
+				}
+			],
+			"feedback": [
+
+			],
+			"speakers": [
+				{
+					"id": 13,
+					"first_name": "Ruchi",
+					"last_name": "Bhargava",
+					"title": "Director, Datacenter and Cloud Software Engineerin",
+					"bio": "Ruchi Bhargava manages the Datacenter &amp; Cloud software engineering team focusing on Network and Storage solutions at Intel&rsquo;s Open Source Technology Center. She has been the Hybrid Cloud Product Owner for Intel IT responsible for building, deploying and running an enterprise Cloud for Intel. Ruchi has also held roles of IT Country Manager for Intel Malaysia, IT Supply Planning Production Service Manager and Manufacturing computing services engineering based in Malaysia. &nbsp;For Intel&rsquo;s manufacturing group, she has led fab and assembly/test factory startups and manufacturing automation development and operations.&nbsp; She has also managed global deployments and ERP applications operations for IT. She joined Intel in Arizona in 1991.&nbsp;Ruchi holds a Bachelor&rsquo;s degree in Electrical Engineering from Delhi University, India. ",
+					"irc": null,
+					"twitter": null,
+					"presentations": {
+						"0": 6829,
+						"1": 6838,
+						"3": 14157,
+						"4": 14230,
+						"5": 14865
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/13",
+					"gender": null,
+					"member_id": 14577
+				},
+				{
+					"id": 1401,
+					"first_name": "Malini",
+					"last_name": "Bhandaru",
+					"title": "Senior Software Architect ",
+					"bio": "<p><strong><span style=\"font-size: 10.0pt;\">Malini Bhandaru, Ph.D., Intel, </span></strong><span style=\"font-size: 10.0pt;\">is an Senior Software Architect &nbsp;with the Open source Technology Center at Intel. &nbsp;She has been involved with OpenStack for over&nbsp;three years. &nbsp;Her interests span security, key management, access control, dynamic resource scheduling, network function virtualization, and scalability. She co-authored the &ldquo;OpenStack Security Guide&rdquo;. Prior to her open source cloud endeavors she worked on power and performance aspects on Intel&rsquo;s Xeon server product line. &nbsp;Before joining Intel, she worked at Nuance, Verizon, and several start-ups in Massachusetts. She has two patents granted and nine more filed. She has&nbsp;a Ph.D. in Artificial Intelligence from the University of Massachusetts, Amherst. She volunteers for science education activities and computer literacy. Through Intel she had the&nbsp;unique opportunity to develop and field trial in Bangladesh and India an Android application to assist farmers with their fertilizer needs. Malini lives in the Bay Area with her husband and sons, and enjoys gardening and hiking.</span></p>",
+					"irc": null,
+					"twitter": null,
+					"presentations": {
+						"8": 6829
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/1401",
+					"gender": null,
+					"member_id": 6023
+				}
+			],
+			"links": [
+				{
+					"id": 1042,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "http://www.wsj.com/articles/SB10001424053111904140604576498380000356032"
+				},
+				{
+					"id": 1043,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://openstacksummitoctober2015tokyo.sched.org/event/1ddf6338bc6c5e9fec181663ea1fa47b"
+				}
+			]
+		}
+	},
+	{
+		"id": 387499,
+		"entity_id": 6859,
+		"class_name": "Presentation",
+		"created": 1470751201,
+		"type": "UPDATE",
+		"entity": {
+			"id": 6859,
+			"title": "Dragonflow - Neutron Done the SDN Way!!!",
+			"description": "<p>Dragonflow is an open source distributed control plane implementation of Neutron which is an<strong> integral part of</strong> OpenStack.</p>\n<p>Dragonflow introduces innovative solutions and features to implement networking and distributed network services in a manner that is both lightweight and simple to extend, yet targeted towards performance-intensive and latency-sensitive applications.</p>\n<p>Dragonflow aims at solving the performance and scale problems in Neutron leveraging lessons Learned from running OpenStack at scale and doing it the SDN way.</p>\n<p><em>We will cover the following topics:</em></p>\n<ul><li>Dragonflow introduction and progress</li>\n<li>Pluggable topology and policy distribution model</li>\n<li>Supported distributed networking services (DHCP, Routing and more)</li>\n<li>Innovative and interesting solutions for some hot networking topics:  Security groups, Container networking, Service chaining &amp; topology injection, Integration with smart NICs for h/w offloading</li>\n</ul>",
+			"start_date": 1461795600,
+			"end_date": 1461798000,
+			"location_id": 53,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": 5,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"level": "Intermediate",
+			"track_id": 24,
+			"moderator_speaker_id": null,
+			"problem_addressed": "<p>An important use case for Dragonflow is to be an integral part of OpenStack and Neutron, both the implementation and the plugin are under OpenStack governance and located in an official OpenStack project, all running in an open source way and according to OpenStack TC guidelines.</p>\n<p>Dragonflow was created in order to solve some of the challenges of running Neutron reference implementation at scale and suggest simple ways to solve them in an SDN way.</p>\n<p>We recieve constant feedback and requierments from cloud operators running OpenStack at scale and integrating solutions in Dragonflow to accomodate these.</p>\n<p>Dragonflow implements networking services (like Routing, DHCP, Security and more) in a distributed way that fits scaling these services and providing proper HA/Redundancy.</p>\n<p>Instead of selecting a specific locked-in solution for control plane distribution, Dragonflow uses a pluggable architecture which allows operator to pick perfect framework for his/her cloud</p>",
+			"attendees_expected_learnt": "<p>They attendees should get familiar with Dragonflow and hear a complete Introduction to the project.</p>\n<p>They should understand the ways Dragonflow is trying to solve the use cases mentioned above.</p>\n<p>Information regarding Dragonflow deployments will be shared in addition to complete roadmap plan for future features we plan for the project.</p>",
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+				{
+					"id": 3370,
+					"tag": "Architect"
+				},
+				{
+					"id": 3371,
+					"tag": " Telecom"
+				},
+				{
+					"id": 1527,
+					"tag": " Upstream"
+				},
+				{
+					"id": 12,
+					"tag": " Enterprise"
+				},
+				{
+					"id": 3374,
+					"tag": " Public Clouds"
+				},
+				{
+					"id": 2033,
+					"tag": " Community"
+				},
+				{
+					"id": 3368,
+					"tag": " Upstream Dev"
+				},
+				{
+					"id": 35,
+					"tag": " Neutron"
+				}
+			],
+			"feedback": [
+
+			],
+			"speakers": [
+				{
+					"id": 324,
+					"first_name": "Gal",
+					"last_name": "Sagie",
+					"title": "Open Source Software Architect",
+					"bio": "<p>&nbsp;I am a software architect, passionate about open source, experienced with networking, virtualization and all areas of SDN/NFV and cloud computing.</p>\r\n<p>Contributing to OpenStack Neutron, Containers networking projects and hybrid cloud. Eager to bridge the gaps between OpenStack development and its users and explore new areas to help OpenStack shine</p>\r\n<p>Blogging for anything OpenStack related at:</p>\r\n<p>Blog - http://galsagie.github.io</p>",
+					"irc": "gsagie",
+					"twitter": "GalSagie",
+					"presentations": {
+						"1": 6859,
+						"2": 6861,
+						"3": 7633,
+						"4": 10865
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/324",
+					"gender": "Male",
+					"member_id": 31535
+				},
+				{
+					"id": 3548,
+					"first_name": "Li",
+					"last_name": "Ma",
+					"title": "Architect",
+					"bio": "<p>Nick is a Linux veteran with over 10 years of experience on Linux development. He is the cloud architect at AWcloud where he works on OpenStack Networking, SDN/NFV, messaging system and large-scale cloud architecture. Prior to joining OpenStack community, he spent 4 years on infosec, virtualization/containerization and distributed system.</p>",
+					"irc": "nick-ma",
+					"twitter": null,
+					"presentations": {
+						"1": 6859
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/3548",
+					"gender": "Male",
+					"member_id": 10176
+				},
+				{
+					"id": 336,
+					"first_name": "Eran",
+					"last_name": "Gampel",
+					"title": "Chief Architect - Cloud and Open Source at Huawei",
+					"bio": "<p>Eran is&nbsp;currently Chief Architect of Cloud and Open Source in Huawei,&nbsp;managing a research team of open source experts, developing in OpenStack.</p>\r\n<p>In the community Eran is leading&nbsp;the design and development of Dragonflow and Smaug.</p>\r\n<p>&nbsp;</p>",
+					"irc": "gampel",
+					"twitter": "@gampel29",
+					"presentations": {
+						"14": 6859,
+						"15": 10927
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/336",
+					"gender": "Male",
+					"member_id": 26768
+				}
+			],
+			"links": [
+				{
+					"id": 46,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://github.com/openstack/dragonflow"
+				},
+				{
+					"id": 47,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "http://superuser.openstack.org/articles/what-you-need-to-know-about-dragonflow-for-the-openstack-liberty-release"
+				},
+				{
+					"id": 48,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://www.youtube.com/watch?v=wo1Q-BL3nII"
+				},
+				{
+					"id": 49,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "http://galsagie.github.io/sdn/openstack/ovs/dragonflow/2015/12/28/dragonflow-security-groups/"
+				},
+				{
+					"id": 50,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "http://blog.gampel.net/2015/09/dragonflow-distributed-dhcp-for.html"
+				}
+			],
+			"videos": [
+				{
+					"id": 23577,
+					"name": "Dragonflow - Neutron Done the SDN Way",
+					"description": null,
+					"display_on_site": true,
+					"featured": false,
+					"youtube_id": "2zrMZFnBQuw",
+					"data_uploaded": 1461858094,
+					"highlighted": false,
+					"views": 95
+				}
+			]
+		}
+	},
+	{
+		"id": 387500,
+		"entity_id": 8868,
+		"class_name": "SummitEvent",
+		"created": 1470751221,
+		"type": "UPDATE",
+		"entity": {
+			"id": 8868,
+			"title": "Lunch - Day 3 changed title",
+			"description": null,
+			"start_date": 1461778219,
+			"end_date": 1461783059,
+			"location_id": 67,
+			"summit_id": 6,
+			"type_id": 4,
+			"class_name": "SummitEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"summit_types": [
+				1,
+				2
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"feedback": [
+
+			]
+		}
+	},
+	{
+		"id": 387501,
+		"entity_id": 8891,
+		"class_name": "SummitEvent",
+		"created": 1470751262,
+		"type": "UPDATE",
+		"entity": {
+			"id": 8891,
+			"title": "Registration Check-In & Bag / Coat Check",
+			"description": "<p> Attendee registration and check in. santi changed description</p>",
+			"start_date": 1461936619,
+			"end_date": 1461949200,
+			"location_id": 71,
+			"summit_id": 6,
+			"type_id": 6,
+			"class_name": "SummitEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"summit_types": [
+				1,
+				2
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"feedback": [
+
+			]
+		}
+	},
+	{
+		"id": 387502,
+		"entity_id": 9004,
+		"class_name": "SummitEvent",
+		"created": 1470751312,
+		"type": "UPDATE",
+		"entity": {
+			"id": 9004,
+			"title": "Storage Made Easy",
+			"description": "<p>Storage Made Easy sponsored demo. santi changed description</p>",
+			"start_date": 1461790800,
+			"end_date": 1461792000,
+			"location_id": 79,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "SummitEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": 20,
+			"rsvp_link": null,
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"feedback": [
+
+			]
+		}
+	},
+	{
+		"id": 387503,
+		"entity_id": 6838,
+		"class_name": "Presentation",
+		"created": 1470751408,
+		"type": "UPDATE",
+		"entity": {
+			"id": 6838,
+			"title": "Fostering Full Equality, Organized by the Women of OpenStack",
+			"description": "<p>Following up on the themes related to gender equality presented at the previous Summit talks sponsored by The Women of OpenStack working group, this session will focus on our vision of a world where the OpenStack community is truly and completely blind to meaningless differences in gender, color, creed and culture. What will this new world look like? How will it differ from the current one?</p>\n<p>A panel of people from all walks of life will explore what that future is and what we can do as a community as a whole to achieve it.</p>",
+			"start_date": 1461868219,
+			"end_date": 1461870900,
+			"location_id": 60,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"level": "Beginner",
+			"track_id": 39,
+			"moderator_speaker_id": null,
+			"problem_addressed": "<p>The OpenStack Community is not immune to the outside world. GamerGate, FOSDEM and other recent scandals related to the acceptance of women and other minorities in the technology community amply demonstrate the need for change.  The issues of gender and ethnic bias are just as relevant within the OpenStack community as anywhere else. Raising the awareness for the community is important for maintaining our reputation for inclusivity and fairness in all our relationships.</p>",
+			"attendees_expected_learnt": "<p>Suggestions for practices that allow all people regardless of their gender, origin, color or creed to participate fully in the OpenStack Community, including:</p>\n<ul><li>Be mindful of subtle biases and how they can color people’s judgment</li>\n<li>Institutionalizing inclusivity to ensure fair treatment for all</li>\n<li> Understanding the critical roles of all the people in the OpenStack community, technical and business focused alike.</li>\n<li>How to be more accepting of alternative ways to contribute</li>\n</ul>",
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+				{
+					"id": 837,
+					"tag": "Community"
+				},
+				{
+					"id": 3351,
+					"tag": " Women of OpenStack"
+				}
+			],
+			"feedback": [
+
+			],
+			"speakers": [
+				{
+					"id": 13,
+					"first_name": "Ruchi",
+					"last_name": "Bhargava",
+					"title": "Director, Datacenter and Cloud Software Engineerin",
+					"bio": "Ruchi Bhargava manages the Datacenter &amp; Cloud software engineering team focusing on Network and Storage solutions at Intel&rsquo;s Open Source Technology Center. She has been the Hybrid Cloud Product Owner for Intel IT responsible for building, deploying and running an enterprise Cloud for Intel. Ruchi has also held roles of IT Country Manager for Intel Malaysia, IT Supply Planning Production Service Manager and Manufacturing computing services engineering based in Malaysia. &nbsp;For Intel&rsquo;s manufacturing group, she has led fab and assembly/test factory startups and manufacturing automation development and operations.&nbsp; She has also managed global deployments and ERP applications operations for IT. She joined Intel in Arizona in 1991.&nbsp;Ruchi holds a Bachelor&rsquo;s degree in Electrical Engineering from Delhi University, India. ",
+					"irc": null,
+					"twitter": null,
+					"presentations": {
+						"0": 6829,
+						"1": 6838,
+						"3": 14157,
+						"4": 14230,
+						"5": 14865
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/13",
+					"gender": null,
+					"member_id": 14577
+				},
+				{
+					"id": 151,
+					"first_name": "Nithya",
+					"last_name": "Ruff",
+					"title": "Director, SanDisk Open Source Strategy Office",
+					"bio": "<p><span><span><span>Nithya A. Ruff is the Head of SanDisk&rsquo;s Open Source Strategy Office. She first glimpsed the power of open source while at SGI in the 90s and has been building bridges between hardware developers and the open source community ever since.<span>&nbsp; </span><span>&nbsp;&nbsp;&nbsp;</span></span><span>Nithya has been an advocate and a speaker for opening doors to new people in open source and promoting diverse ways of contributing such as in marketing, legal and community. </span></span></span></p>\r\n<p><span><span>&nbsp;</span></span></p>\r\n<p><span><span>She&rsquo;s also held leadership positions at Wind River, Synopsys, Avaya, Cranite, Tripwire and Eastman Kodak. </span></span></p>\r\n<p><span><span>&nbsp;</span></span></p>\r\n<p><span><span>Nithya is also is the President of SanDisk&rsquo;s Women&rsquo;s Innovation Network or WIN dedicated to the development of women&rsquo;s highest potential in the work place.</span></span></p>\r\n<p><span><span>&nbsp;</span></span></p>\r\n<p><span><span><span>Nithya graduated with an MS in Computer Science from NDSU and an MBA from the University of Rochester, Simon Business School.<span>&nbsp; </span></span><span>She lives in the bay area and is a proud mother of two daughters. </span></span></span></p>\r\n<p><span><span>&nbsp;</span></span></p>",
+					"irc": null,
+					"twitter": "@nithyaruff",
+					"presentations": {
+						"2": 6838,
+						"4": 14821
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/151",
+					"gender": "Female",
+					"member_id": 25441
+				},
+				{
+					"id": 3254,
+					"first_name": "Nina",
+					"last_name": "Goradia",
+					"title": "Architect, IBM Cloud",
+					"bio": "<p>Nina Goradia is an Architect in the IBM Cloud Business Unit where she leads design and development of OpenStack based cloud solutions.&nbsp; Nina was key in driving the initial integration of OpenStack into IBM private cloud offerings.&nbsp; Her initiative resulted in the delivery of several OpenStack solutions for IBM's enterprise customers including IBM Cloud Manager with OpenStack (ICM).&nbsp; She was also responsible for the design &amp; delivery of IBM&rsquo;s hybrid cloud solution between private clouds running within the enterprise and dedicated, hosted Clouds in SoftLayer. She is currently working on providing OpenStack based features and support for all of IBM&rsquo;s Cloud Solutions across private, dedicated and public spaces.</p>",
+					"irc": "ninag",
+					"twitter": null,
+					"presentations": [
+						6838,
+						7102
+					],
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/3254",
+					"gender": "Female",
+					"member_id": 16066
+				},
+				{
+					"id": 4670,
+					"first_name": "Vince",
+					"last_name": "Brunssen",
+					"title": "Manager, IaaS & OpenStack IBM",
+					"bio": "<p>I currently work in the OpenStack Open Source community where I manage a group of 17 developers who contribute code to various project. &nbsp;I also work on the OpenStack project myself, contributing where I am able to do so. &nbsp;In the time when I am not working on OpenStack I also like to work with other technologies such as Cloud Foundry and Bluemix. &nbsp;I find it interesting how we can now use IaaS and PaaS to quickly and easily create applications, try them out, and use the result or toss it aside depending on the outcome. &nbsp;This ability to quickly and easily develop, test and iterate on code in an agile manner is where it is at in Software Development.</p>",
+					"irc": "brunssen",
+					"twitter": "vbrunssen",
+					"presentations": {
+						"1": 6838
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/4670",
+					"gender": "Male",
+					"member_id": 22792
+				},
+				{
+					"id": 4992,
+					"first_name": "Josh",
+					"last_name": "Kleinpeter",
+					"title": "Mr",
+					"bio": "<p>A software engineer by training, Josh has been working with OpenStack since the Bexar days. At AT&amp;T, he was heavily involved in building an early production cloud in close partnership with CloudScaling. At Cisco, Josh has been invovled with helping bring to fruition the Cisco cloud and evolve it over time.</p>",
+					"irc": "j05hk",
+					"twitter": "j05th",
+					"presentations": [
+						6838
+					],
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/4992",
+					"gender": "Prefer not to say",
+					"member_id": 13387
+				}
+			],
+			"links": [
+				{
+					"id": 142,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://www.openstack.org/summit/vancouver-2015/summit-videos/presentation/standing-tall-in-the-room-sponsored-by-the-women-of-openstack"
+				},
+				{
+					"id": 143,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://www.techwell.com/techwell-insights/2014/03/women-technology-more-important-ever"
+				},
+				{
+					"id": 144,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://www.openstack.org/summit/tokyo-2015/videos/presentation/overcoming-subtle-bias-presented-by-the-women-of-openstack"
+				},
+				{
+					"id": 145,
+					"name": null,
+					"description": null,
+					"display_on_site": false,
+					"featured": false,
+					"link": "https://opensource.com/business/14/12/getting-more-women-involved-openstack-community"
+				}
+			],
+			"videos": [
+				{
+					"id": 23646,
+					"name": "Fostering Full Equality, Organized by the Women of OpenStack",
+					"description": null,
+					"display_on_site": true,
+					"featured": false,
+					"youtube_id": "bFUQgk7zKr8",
+					"data_uploaded": 1461998077,
+					"highlighted": false,
+					"views": 22
+				}
+			]
+		}
+	},
+	{
+		"id": 387504,
+		"entity_id": 6869,
+		"class_name": "Presentation",
+		"created": 1470751463,
+		"type": "DELETE"
+	},
+	{
+		"id": 387508,
+		"entity_id": 301,
+		"class_name": "PresentationLink",
+		"created": 1470751638,
+		"type": "DELETE"
+	},
+	{
+		"id": 387509,
+		"entity_id": 302,
+		"class_name": "PresentationLink",
+		"created": 1470751638,
+		"type": "DELETE"
+	},
+	{
+		"id": 387510,
+		"entity_id": 23507,
+		"class_name": "PresentationVideo",
+		"created": 1470751638,
+		"type": "DELETE"
+	},
+	{
+		"id": 387511,
+		"entity_id": 28091,
+		"class_name": "PresentationSlide",
+		"created": 1470751638,
+		"type": "DELETE"
+	},
+	{
+		"id": 387512,
+		"entity_id": 6868,
+		"class_name": "Presentation",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387513,
+		"entity_id": 74,
+		"class_name": "PresentationLink",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387514,
+		"entity_id": 75,
+		"class_name": "PresentationLink",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387515,
+		"entity_id": 76,
+		"class_name": "PresentationLink",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387516,
+		"entity_id": 77,
+		"class_name": "PresentationLink",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387517,
+		"entity_id": 78,
+		"class_name": "PresentationLink",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387518,
+		"entity_id": 23485,
+		"class_name": "PresentationVideo",
+		"created": 1470751697,
+		"type": "DELETE"
+	},
+	{
+		"id": 387519,
+		"entity_id": 6873,
+		"class_name": "Presentation",
+		"created": 1470751748,
+		"type": "UPDATE",
+		"entity": {
+			"id": 6873,
+			"title": "Advances in Keystone's Role Based Access Control",
+			"description": "<p>Keystone provides the mechanism for configuring role based access control (RBAC) thoughout the OpenStack deployment.  New mechanisms in recent releases have greatly improved the ability to tune the access control approach for your deployment.  This presentation will walk though the configuration of RBAC in your deployment.  To start, we'll investigate the defaults that ship with upstream Keystone.  We'll cover a brief overview of requests that have driven the design over the past couple releases.  Finally, we'll see customizations making use of the limitation of admin-scoping, role inference rules and domain specific roles that you can use to tailor your deployment to suit your organization.</p>",
+			"start_date": 1461703201,
+			"end_date": 1461705641,
+			"location_id": 53,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"level": "Intermediate",
+			"track_id": 27,
+			"moderator_speaker_id": null,
+			"problem_addressed": "<p>Early OpenStack clouds really had two \"roles\" in terms of administration - you were either admin or you were not. This simply isn't good enough for today's clouds, especially those public (or shared private) clouds, where you need to create layers of administration (e.g. cloud, domain, project etc.). Unless you understand how you can use keystone's RBAC capabilities (some of which are new), then you simply cannot do that. santi change</p>",
+			"attendees_expected_learnt": "<p>All about Keystone's RBAC, from defaults to advanced customizations. How to create cloud, domain and project admin capabilities and delegate responsibility appropriately.</p>",
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+				{
+					"id": 1419,
+					"tag": "ops"
+				},
+				{
+					"id": 1527,
+					"tag": " Upstream"
+				},
+				{
+					"id": 12,
+					"tag": " Enterprise"
+				},
+				{
+					"id": 3374,
+					"tag": " Public Clouds"
+				},
+				{
+					"id": 3368,
+					"tag": " Upstream Dev"
+				},
+				{
+					"id": 36,
+					"tag": " Keystone"
+				},
+				{
+					"id": 1143,
+					"tag": " security"
+				},
+				{
+					"id": 2,
+					"tag": " Article"
+				}
+			],
+			"feedback": [
+
+			],
+			"speakers": [
+				{
+					"id": 591,
+					"first_name": "Adam",
+					"last_name": "Young",
+					"title": "Senior Software Engineer, Red Hat",
+					"bio": "<pre>Adam Young is a member of Red Hat's OpenStack team and a core developer on Keystone, the identity management service for OpenStack. Adam has worked on various systems management tools, including the<br />Identity Management component of Red Hat Enterprise Linux based on the FreeIPA technology.  A 19 year industry veteran, Adam contributed to multiple projects, products and solutions from Java based eCommerce<br />Web Sites to Kernel modifications for Beowulf clustering.</pre>\r\n<p>&nbsp;</p>",
+					"irc": "ayoung",
+					"twitter": "admiyoung",
+					"presentations": {
+						"4": 6873,
+						"7": 14415
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/591",
+					"gender": "Male",
+					"member_id": 310
+				},
+				{
+					"id": 2642,
+					"first_name": "Henry",
+					"last_name": "Nash",
+					"title": "Software Architect & Wild Duck, IBM Cloud",
+					"bio": "<p><span style=\"font-size: 14.666666666666666px; color: #000000;\">Henry works in IBM's Cloud division as an OpenStack Architect and a core contributor to OpenStack Keystone, driving enterprise capabilities into OpenStack as well as IBM's products that use OpenStack. He has a long history in the creation of enterprise software, having founded a number of successful companies in Europe and the USA, coming to IBM via acquisition in 2009. He holds a 1st class honours degree in Electrical Engineering from the University of Southampton, UK.</span></p>",
+					"irc": "henrynash",
+					"twitter": "@henrynash",
+					"presentations": {
+						"1": 6873,
+						"3": 14652
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/2642",
+					"gender": "Male",
+					"member_id": 39359
+				}
+			],
+			"videos": [
+				{
+					"id": 21951,
+					"name": "Advances in Keystone's Role Based Access Control",
+					"description": null,
+					"display_on_site": true,
+					"featured": false,
+					"youtube_id": "Z1NDfzJkpzA",
+					"data_uploaded": 1461711818,
+					"highlighted": false,
+					"views": 49
+				}
+			]
+		}
+	},
+	{
+		"id": 387521,
+		"entity_id": 6893,
+		"class_name": "Presentation",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387522,
+		"entity_id": 97,
+		"class_name": "PresentationLink",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387523,
+		"entity_id": 98,
+		"class_name": "PresentationLink",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387524,
+		"entity_id": 99,
+		"class_name": "PresentationLink",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387525,
+		"entity_id": 100,
+		"class_name": "PresentationLink",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387526,
+		"entity_id": 23529,
+		"class_name": "PresentationVideo",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387527,
+		"entity_id": 28032,
+		"class_name": "PresentationSlide",
+		"created": 1470751862,
+		"type": "DELETE"
+	},
+	{
+		"id": 387528,
+		"entity_id": 6894,
+		"class_name": "Presentation",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387529,
+		"entity_id": 2751,
+		"class_name": "PresentationLink",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387530,
+		"entity_id": 2752,
+		"class_name": "PresentationLink",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387531,
+		"entity_id": 2753,
+		"class_name": "PresentationLink",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387532,
+		"entity_id": 2754,
+		"class_name": "PresentationLink",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387533,
+		"entity_id": 23680,
+		"class_name": "PresentationVideo",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387534,
+		"entity_id": 28075,
+		"class_name": "PresentationSlide",
+		"created": 1470751870,
+		"type": "DELETE"
+	},
+	{
+		"id": 387535,
+		"entity_id": 9523,
+		"class_name": "SummitEvent",
+		"created": 1470751902,
+		"type": "DELETE"
+	},
+	{
+		"id": 387536,
+		"entity_id": 9517,
+		"class_name": "SummitEvent",
+		"created": 1470751928,
+		"type": "DELETE"
+	},
+	{
+		"id": 387537,
+		"entity_id": 482,
+		"class_name": "SponsorFromEvent",
+		"created": 1470751965,
+		"type": "UPDATE",
+		"entity": {
+			"id": 9513,
+			"title": "Ops: Future of Op Meetups Organisation",
+			"description": "<p><a href=\"https://etherpad.openstack.org/p/AUS-ops-Future-of-op-meetups-organisation\">https://etherpad.openstack.org/p/AUS-ops-Future-of-op-meetups-organisation</a></p>\n<p>The Ops Meetup, organized by the User Committee, is a track comprised of collaborative, working sessions for people who are operating OpenStack clouds (and contributors who want to hear from them). The purpose is to share knowledge and best practices among cloud operators, as well as provide feedback based on experience running OpenStack. There will be no formal presentations, and a moderate level of knowledge around running OpenStack is assumed. If you're just starting out, the Operations Track of the conference will be much more friendly!</p>\n<p>Moderator: Tom Fifield</p>\n<p> </p>",
+			"start_date": 1461610800,
+			"end_date": 1461613200,
+			"location_id": 92,
+			"summit_id": 6,
+			"type_id": 13,
+			"class_name": "SummitEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"summit_types": [
+				2
+			],
+			"sponsors": [
+				482
+			],
+			"tags": [
+				{
+					"id": 1419,
+					"tag": "ops"
+				}
+			],
+			"feedback": [
+				{
+					"id": 482,
+					"name": "Tipit"
+				}
+			]
+		}
+	},
+	{
+		"id": 387539,
+		"entity_id": 9513,
+		"class_name": "SummitEvent",
+		"created": 1470751987,
+		"type": "UPDATE",
+		"entity": {
+			"id": 9513,
+			"title": "Ops: Future of Op Meetups Organisation",
+			"description": "<p><a href=\"https://etherpad.openstack.org/p/AUS-ops-Future-of-op-meetups-organisation\">https://etherpad.openstack.org/p/AUS-ops-Future-of-op-meetups-organisation</a></p>\n<p>The Ops Meetup, organized by the User Committee, is a track comprised of collaborative, working sessions for people who are operating OpenStack clouds (and contributors who want to hear from them). The purpose is to share knowledge and best practices among cloud operators, as well as provide feedback based on experience running OpenStack. There will be no formal presentations, and a moderate level of knowledge around running OpenStack is assumed. If you're just starting out, the Operations Track of the conference will be much more friendly!</p>\n<p>Moderator: Tom Fifield</p>\n<p> </p>",
+			"start_date": 1461610800,
+			"end_date": 1461613200,
+			"location_id": 92,
+			"summit_id": 6,
+			"type_id": 13,
+			"class_name": "SummitEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": null,
+			"rsvp_link": null,
+			"summit_types": [
+				2
+			],
+			"sponsors": [
+				482
+			],
+			"tags": [
+				{
+					"id": 1419,
+					"tag": "ops"
+				}
+			],
+			"feedback": [
+				{
+					"id": 482,
+					"name": "Tipit"
+				}
+			]
+		}
+	},
+	{
+		"id": 387543,
+		"entity_id": 15028,
+		"class_name": "Presentation",
+		"created": 1470752177,
+		"type": "INSERT",
+		"entity": {
+			"id": 15028,
+			"title": "This is a new event",
+			"description": "<p>by Santi</p>",
+			"start_date": 1461646800,
+			"end_date": 1461648300,
+			"location_id": 54,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": null,
+			"is_published": true,
+			"head_count": 20,
+			"rsvp_link": null,
+			"level": "Intermediate",
+			"track_id": 22,
+			"moderator_speaker_id": null,
+			"problem_addressed": null,
+			"attendees_expected_learnt": null,
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"feedback": [
+
+			],
+			"speakers": [
+				{
+					"id": 3492,
+					"first_name": "Santiago",
+					"last_name": "Palenque",
+					"title": "Mr.",
+					"bio": "<p>This is my speaker bio</p>",
+					"irc": null,
+					"twitter": null,
+					"presentations": {
+						"1": 15028
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/3492",
+					"gender": "Male",
+					"member_id": 27088
+				}
+			]
+		}
+	}
+]

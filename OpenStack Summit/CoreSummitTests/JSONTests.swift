@@ -12,7 +12,7 @@ import SwiftFoundation
 
 let SummitJSONIdentifiers = [6, 7, 22]
 
-let MemberJSONIdentifiers = 1 ... 2
+let MemberJSONIdentifiers = 1 ... 3
 
 final class JSONTests: XCTestCase {
     

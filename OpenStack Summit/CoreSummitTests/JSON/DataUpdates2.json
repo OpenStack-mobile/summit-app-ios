@@ -1,1 +1,98 @@
-[{"id":387622,"entity_id":8970,"class_name":"Presentation","created":1471604402,"type":"UPDATE","entity":{"id":8970,"title":"Upstream University - Saturday & Sunday","description":"<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">This session is two full-days. Upstream University runs both\u00a0<\/span><span style=\"font-size: 15px; line-height: 22px;\">Saturday, April 23, 2016 and\u00a0<\/span><span style=\"font-size: 15px; line-height: 22px;\">Sunday, April 24, 2016. The sessions run from 10:00am -4:00pm each day.<\/span><\/p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\">\u00a0<\/p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px;\">\u00a0<\/span><\/p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Upstream University is an intensive program designed to help new contributors learn how to effectively work upstream, by fixing bugs and getting their features accepted into the OpenStack project. The educational program requires students to work on real-life bug fixes or new features during two days of real-life classes and online mentoring, until the work is accepted by OpenStack. The live two-day class teaches them to navigate the intricacies of the project\u2019s technical tools and social interactions. In a followup session, the students benefit from individual online sessions to help them resolve any remaining problems they might have.<\/span><\/p>\n<p style=\"margin: 0px; padding: 10px 0px 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Make sure to book your travel plans to arrive in Austin Friday evening or Saturday morning in order to attend the full two-day training session.<\/span><\/p>","start_date":1461510000,"end_date":1461531600,"location_id":42,"summit_id":6,"type_id":1,"class_name":"Presentation","allow_feedback":true,"avg_feedback_rate":4.6,"is_published":true,"head_count":0,"rsvp_link":"https:\/\/www.eventbrite.com\/e\/upstream-university-openstack-summit-austin-tickets-22669105906","level":"Beginner","track_id":41,"moderator_speaker_id":0,"problem_addressed":null,"attendees_expected_learnt":null,"summit_types":[1],"sponsors":[],"tags":[],"speakers":[{"id":63,"first_name":"Marton","last_name":"Kiss","title":"GM of Europe, Aptira","bio":"<p>OpenStack Ambassador, founder of Hungarian OpenStack user group, co-organizer of OpenStack CEE Day event and active contributor of multiple OpenStack projects. Marton have a background in the telecommunication sector, he was a CTO for a Telenor owned company and managed the operation and development areas in Central Europe and Asia. Actually he is working at Aptira as a GM for the EU region.<\/p>","irc":"mrmartin","twitter":"@marton_kiss","presentations":{"1":7202,"2":8970,"3":14255,"4":14347,"5":14352,"6":14462,"7":14478},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/63","gender":"Male","member_id":5882},{"id":9,"first_name":"Sebastian","last_name":"Marcet","title":"Senior Software Enginner","bio":"<p>Senior Software developer on several techs.<\/p>\r\n<p>Openstackid main architect update update UPDATE!!!! tetss<\/p>","irc":"smarcet","twitter":"smarcet","presentations":{"1":8970},"pic":"https:\/\/dev-openstack.org-site\/profile_images\/speakers\/9","gender":"Male","member_id":11624}],"slides":[],"links":[],"videos":[{"id":28370,"name":"10 Actors Who HATED Their Superhero Movie Costumes","description":"<h1 class=\"watch-title-container\"><span id=\"eow-title\" class=\"watch-title\" title=\"10 Actors Who HATED Their Superhero Movie Costumes\">10 Actors Who HATED Their Superhero Movie Costumes<\/span><\/h1>","display_on_site":true,"featured":true,"order":0,"presentation_id":8970,"youtube_id":"C2omic5yWRQ","data_uploaded":1471461090,"highlighted":true,"views":0}]}}]
+[
+	{
+		"id": 387622,
+		"entity_id": 8970,
+		"class_name": "Presentation",
+		"created": 1471604402,
+		"type": "UPDATE",
+		"entity": {
+			"id": 8970,
+			"title": "Upstream University - Saturday & Sunday",
+			"description": "<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">This session is two full-days. Upstream University runs both </span><span style=\"font-size: 15px; line-height: 22px;\">Saturday, April 23, 2016 and </span><span style=\"font-size: 15px; line-height: 22px;\">Sunday, April 24, 2016. The sessions run from 10:00am -4:00pm each day.</span></p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"> </p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px;\"> </span></p>\n<p style=\"margin: 0px; padding: 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Upstream University is an intensive program designed to help new contributors learn how to effectively work upstream, by fixing bugs and getting their features accepted into the OpenStack project. The educational program requires students to work on real-life bug fixes or new features during two days of real-life classes and online mentoring, until the work is accepted by OpenStack. The live two-day class teaches them to navigate the intricacies of the project’s technical tools and social interactions. In a followup session, the students benefit from individual online sessions to help them resolve any remaining problems they might have.</span></p>\n<p style=\"margin: 0px; padding: 10px 0px 0px; color: #666a73; font-family: &#039;Benton Sans&#039;, &#039;Helvetica Neue&#039;, Helvetica, Roboto, Arial, sans-serif; font-size: 15px; letter-spacing: 0.5px; line-height: 22px;\"><span style=\"padding-top: 0px;\">Make sure to book your travel plans to arrive in Austin Friday evening or Saturday morning in order to attend the full two-day training session.</span></p>",
+			"start_date": 1461510000,
+			"end_date": 1461531600,
+			"location_id": 42,
+			"summit_id": 6,
+			"type_id": 1,
+			"class_name": "Presentation",
+			"allow_feedback": true,
+			"avg_feedback_rate": 4.6,
+			"is_published": true,
+			"head_count": 0,
+			"rsvp_link": "https://www.eventbrite.com/e/upstream-university-openstack-summit-austin-tickets-22669105906",
+			"level": "Beginner",
+			"track_id": 41,
+			"moderator_speaker_id": 0,
+			"problem_addressed": null,
+			"attendees_expected_learnt": null,
+			"summit_types": [
+				1
+			],
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"speakers": [
+				{
+					"id": 63,
+					"first_name": "Marton",
+					"last_name": "Kiss",
+					"title": "GM of Europe, Aptira",
+					"bio": "<p>OpenStack Ambassador, founder of Hungarian OpenStack user group, co-organizer of OpenStack CEE Day event and active contributor of multiple OpenStack projects. Marton have a background in the telecommunication sector, he was a CTO for a Telenor owned company and managed the operation and development areas in Central Europe and Asia. Actually he is working at Aptira as a GM for the EU region.</p>",
+					"irc": "mrmartin",
+					"twitter": "@marton_kiss",
+					"presentations": {
+						"1": 7202,
+						"2": 8970,
+						"3": 14255,
+						"4": 14347,
+						"5": 14352,
+						"6": 14462,
+						"7": 14478
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/63",
+					"gender": "Male",
+					"member_id": 5882
+				},
+				{
+					"id": 9,
+					"first_name": "Sebastian",
+					"last_name": "Marcet",
+					"title": "Senior Software Enginner",
+					"bio": "<p>Senior Software developer on several techs.</p>\r\n<p>Openstackid main architect update update UPDATE!!!! tetss</p>",
+					"irc": "smarcet",
+					"twitter": "smarcet",
+					"presentations": {
+						"1": 8970
+					},
+					"pic": "https://dev-openstack.org-site/profile_images/speakers/9",
+					"gender": "Male",
+					"member_id": 11624
+				}
+			],
+			"slides": [
+
+			],
+			"links": [
+
+			],
+			"videos": [
+				{
+					"id": 28370,
+					"name": "10 Actors Who HATED Their Superhero Movie Costumes",
+					"description": "<h1 class=\"watch-title-container\"><span id=\"eow-title\" class=\"watch-title\" title=\"10 Actors Who HATED Their Superhero Movie Costumes\">10 Actors Who HATED Their Superhero Movie Costumes</span></h1>",
+					"display_on_site": true,
+					"featured": true,
+					"order": 0,
+					"presentation_id": 8970,
+					"youtube_id": "C2omic5yWRQ",
+					"data_uploaded": 1471461090,
+					"highlighted": true,
+					"views": 0
+				}
+			]
+		}
+	}
+]
