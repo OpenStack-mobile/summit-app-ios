@@ -2,24 +2,26 @@
 	"id": 1395,
 	"first_name": "Jimmy",
 	"last_name": "McArthur",
-	"gender": "Male",
+	"gender": "Super Mega Attack Helicopter",
 	"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
 	"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
 	"irc": "jamesmcarthur",
 	"twitter": "jimmymcarthur",
+	"state": "TX",
+	"country": "US",
 	"pic": "https://devbranch.openstack.org/profile_images/members/1395",
 	"favorite_summit_events" : [ ],
 	"groups_events": [
 		{
 			"id": 17451,
-			"title": "test group event #1",
-			"description": "<p>test group event #1</p>",
+			"title": "test group event #1 update update 2 update 3",
+			"description": "<p>test group event #1</p>\n<p>ip sum ileren run update update 3</p>",
 			"social_description": "test group event #1",
 			"start_date": 1477299600,
 			"end_date": 1477305900,
 			"location_id": 0,
 			"summit_id": 7,
-			"class_name": "SummitEvent",
+			"class_name": "SummitGroupEvent",
 			"allow_feedback": false,
 			"avg_feedback_rate": 0,
 			"is_published": true,
@@ -29,7 +31,10 @@
 
 			],
 			"tags": [
-
+				{
+					"id": 1784,
+					"tag": "Python"
+				}
 			],
 			"type": {
 				"id": 111,
@@ -81,7 +86,3167 @@
 					"code": "foundation-staff"
 				}
 			]
+		},
+		{
+			"id": 17452,
+			"title": "test group event #2 update",
+			"description": "<p>test group event #2 update</p>",
+			"social_description": "test group event #2",
+			"start_date": 1477314900,
+			"end_date": 1477317300,
+			"location_id": 0,
+			"summit_id": 7,
+			"class_name": "SummitGroupEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": 0,
+			"is_published": true,
+			"head_count": 0,
+			"rsvp_link": null,
+			"sponsors": [
+
+			],
+			"tags": [
+				{
+					"id": 1533,
+					"tag": "developement"
+				},
+				{
+					"id": 349,
+					"tag": "Python Ansible automation modelling orchestration"
+				}
+			],
+			"type": {
+				"id": 111,
+				"name": "Groups Events",
+				"color": "#f0f0ee",
+				"black_out_times": false
+			},
+			"track": {
+				"id": 85,
+				"name": "#vBrownBag",
+				"description": null,
+				"code": "vB",
+				"track_groups": [
+
+				]
+			},
+			"groups": [
+				{
+					"id": 2,
+					"title": "Administrators",
+					"description": null,
+					"code": "administrators"
+				}
+			]
+		},
+		{
+			"id": 17458,
+			"title": "Test Event for CESPIN - administrators",
+			"description": "<p>Tis</p>",
+			"social_description": "Social testing.",
+			"start_date": 1477369200,
+			"end_date": 1477374900,
+			"summit_id": 7,
+			"class_name": "SummitGroupEvent",
+			"allow_feedback": true,
+			"avg_feedback_rate": 0,
+			"is_published": true,
+			"head_count": 1,
+			"rsvp_link": null,
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"type": {
+				"id": 111,
+				"name": "Groups Events",
+				"color": "#f0f0ee",
+				"black_out_times": false
+			},
+			"location": {
+				"id": 168,
+				"name": "P14 - Bonanova",
+				"description": null,
+				"location_type": "Internal",
+				"order": 0,
+				"class_name": "SummitVenueRoom",
+				"venue_id": 162,
+				"floor_id": 10,
+				"capacity": 29
+			},
+			"track": {
+				"id": 88,
+				"name": "Developer Tools",
+				"description": "This track covers the large ecosystem of developer tools for building applications on OpenStack clouds.",
+				"code": "DT",
+				"track_groups": [
+					{
+						"id": 16,
+						"name": "Developers",
+						"color": "#9aa0b5",
+						"description": "<p>The developers conference will cover developing cloud applications, making the most of containers, delivering valuable services like big data analytics, as well as presentations and help getting started for upstream contributors.</p>",
+						"tracks": [
+							79,
+							80,
+							81,
+							82,
+							83,
+							88
+						]
+					}
+				]
+			},
+			"groups": [
+				{
+					"id": 46,
+					"title": "CESPIN test group - admins",
+					"description": "Test group.  Admin role.",
+					"code": "cespin-test-group---admins"
+				}
+			]
+		},
+		{
+			"id": 17462,
+			"title": "Test Event #2 for Friday Test Group ",
+			"description": "<p>This one is going to be published.</p>\n<p> </p>",
+			"social_description": "Test Social",
+			"start_date": 1477454400,
+			"end_date": 1477457100,
+			"summit_id": 7,
+			"class_name": "SummitGroupEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": 0,
+			"is_published": true,
+			"head_count": 3,
+			"rsvp_link": null,
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"type": {
+				"id": 111,
+				"name": "Groups Events",
+				"color": "#f0f0ee",
+				"black_out_times": false
+			},
+			"location": {
+				"id": 164,
+				"name": "P14 - Lesseps",
+				"description": null,
+				"location_type": "Internal",
+				"order": 0,
+				"class_name": "SummitVenueRoom",
+				"venue_id": 162,
+				"floor_id": 10,
+				"capacity": 12
+			},
+			"track": {
+				"id": 71,
+				"name": "Architectural Decisions",
+				"description": "If you are a cloud architect or involved in planning your cloud srategy, this track will discuss popular reference architectures, configuration options, workload optimiziation, and architecture show and tell, where experienced users will share their architectures and experiences.\t\t\t\t",
+				"code": "AD",
+				"track_groups": [
+					{
+						"id": 15,
+						"name": "Architecture & Operations",
+						"color": "#00cbea",
+						"description": "<p>The architecture &amp; operations conference is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.</p>",
+						"tracks": [
+							71,
+							68,
+							72,
+							73,
+							74,
+							75,
+							76,
+							77,
+							78,
+							69,
+							70
+						]
+					}
+				]
+			},
+			"groups": [
+				{
+					"id": 50,
+					"title": "Friday Test Group",
+					"description": null,
+					"code": "friday-test-group"
+				}
+			]
 		}
+	],
+	"team_memberships": [
+		{
+			"id": 1,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 1,
+				"name": "New Team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1483722131,
+				"updated_at": 1483722131,
+				"members": [
+					{
+						"id": 1,
+						"team_id": 1,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 58,
+						"team_id": 1,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 2,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 2,
+				"name": "New team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1483722258,
+				"updated_at": 1483722258,
+				"members": [
+					{
+						"id": 2,
+						"team_id": 2,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 3,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 3,
+				"name": "team",
+				"description": "de",
+				"owner_id": 1395,
+				"created_at": 1483733333,
+				"updated_at": 1483733333,
+				"members": [
+					{
+						"id": 3,
+						"team_id": 3,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 4,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 4,
+				"name": "t",
+				"description": "t",
+				"owner_id": 1395,
+				"created_at": 1483734888,
+				"updated_at": 1483734888,
+				"members": [
+					{
+						"id": 4,
+						"team_id": 4,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 5,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 5,
+				"name": "t",
+				"description": "t",
+				"owner_id": 1395,
+				"created_at": 1483735600,
+				"updated_at": 1483735600,
+				"members": [
+					{
+						"id": 5,
+						"team_id": 5,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 6,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 6,
+				"name": "t",
+				"description": "t",
+				"owner_id": 1395,
+				"created_at": 1483736535,
+				"updated_at": 1483736535,
+				"members": [
+					{
+						"id": 6,
+						"team_id": 6,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 7,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 7,
+				"name": "t",
+				"description": "t",
+				"owner_id": 1395,
+				"created_at": 1483736993,
+				"updated_at": 1483736993,
+				"members": [
+					{
+						"id": 7,
+						"team_id": 7,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 8,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 8,
+				"name": "t",
+				"description": "t",
+				"owner_id": 1395,
+				"created_at": 1483737152,
+				"updated_at": 1483737152,
+				"members": [
+					{
+						"id": 8,
+						"team_id": 8,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 9,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 9,
+				"name": "team 2",
+				"description": "hey baby",
+				"owner_id": 1395,
+				"created_at": 1483737237,
+				"updated_at": 1483737237,
+				"members": [
+					{
+						"id": 9,
+						"team_id": 9,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 10,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 10,
+				"name": "y",
+				"description": "y",
+				"owner_id": 1395,
+				"created_at": 1483739031,
+				"updated_at": 1483739031,
+				"members": [
+					{
+						"id": 10,
+						"team_id": 10,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 11,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 11,
+				"name": "Team",
+				"description": "Awesome team",
+				"owner_id": 1395,
+				"created_at": 1483967608,
+				"updated_at": 1483967608,
+				"members": [
+					{
+						"id": 11,
+						"team_id": 11,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 12,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 12,
+				"name": "New team",
+				"description": "New description",
+				"owner_id": 1395,
+				"created_at": 1483967778,
+				"updated_at": 1483967778,
+				"members": [
+					{
+						"id": 12,
+						"team_id": 12,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 14,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 14,
+				"name": "New Team",
+				"description": "New description",
+				"owner_id": 1395,
+				"created_at": 1483973377,
+				"updated_at": 1483973377,
+				"members": [
+					{
+						"id": 14,
+						"team_id": 14,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 19,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 19,
+				"name": "team 1",
+				"description": "hey dude",
+				"owner_id": 1395,
+				"created_at": 1483974321,
+				"updated_at": 1483974321,
+				"members": [
+					{
+						"id": 19,
+						"team_id": 19,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 20,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 20,
+				"name": "New team1",
+				"description": "1",
+				"owner_id": 1395,
+				"created_at": 1483974392,
+				"updated_at": 1483974392,
+				"members": [
+					{
+						"id": 20,
+						"team_id": 20,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 21,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 21,
+				"name": "Team 2 ",
+				"description": "Description text",
+				"owner_id": 1395,
+				"created_at": 1483975108,
+				"updated_at": 1483975108,
+				"members": [
+					{
+						"id": 21,
+						"team_id": 21,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 22,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 22,
+				"name": "New Team",
+				"description": "Súper description",
+				"owner_id": 1395,
+				"created_at": 1484061783,
+				"updated_at": 1484061783,
+				"members": [
+					{
+						"id": 22,
+						"team_id": 22,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 23,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 23,
+				"name": "New Team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1484062705,
+				"updated_at": 1484062705,
+				"members": [
+					{
+						"id": 23,
+						"team_id": 23,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 24,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 24,
+				"name": "New team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1484064322,
+				"updated_at": 1484064322,
+				"members": [
+					{
+						"id": 24,
+						"team_id": 24,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 25,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 25,
+				"name": "The A-Team",
+				"description": "I pity the fool!",
+				"owner_id": 1395,
+				"created_at": 1484074098,
+				"updated_at": 1484074098,
+				"members": [
+					{
+						"id": 25,
+						"team_id": 25,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 26,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 26,
+				"name": "Team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1484074244,
+				"updated_at": 1484074244,
+				"members": [
+					{
+						"id": 26,
+						"team_id": 26,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 30,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 29,
+				"name": "team 2",
+				"description": "hey",
+				"owner_id": 1395,
+				"created_at": 1484188664,
+				"updated_at": 1484188664,
+				"members": [
+					{
+						"id": 30,
+						"team_id": 29,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 31,
+						"team_id": 29,
+						"permission": "WRITE",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 32,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 27,
+				"name": "Clint's Team",
+				"description": "Test Te",
+				"owner_id": 58157,
+				"created_at": 1484074875,
+				"updated_at": 1484074875,
+				"members": [
+					{
+						"id": 27,
+						"team_id": 27,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 32,
+						"team_id": 27,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 34,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 31,
+				"name": "team ",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1484258652,
+				"updated_at": 1484258652,
+				"members": [
+					{
+						"id": 34,
+						"team_id": 31,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 40,
+						"team_id": 31,
+						"permission": "READ",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 37,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 33,
+				"name": "new team",
+				"description": null,
+				"owner_id": 58157,
+				"created_at": 1484686445,
+				"updated_at": 1484686445,
+				"members": [
+					{
+						"id": 36,
+						"team_id": 33,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 37,
+						"team_id": 33,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 38,
+			"member_id": 1395,
+			"permission": "WRITE",
+			"team": {
+				"id": 32,
+				"name": "test team",
+				"description": null,
+				"owner_id": 58157,
+				"created_at": 1484686028,
+				"updated_at": 1484686028,
+				"members": [
+					{
+						"id": 35,
+						"team_id": 32,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 38,
+						"team_id": 32,
+						"permission": "WRITE",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 39,
+			"member_id": 1395,
+			"permission": "READ",
+			"team": {
+				"id": 30,
+				"name": "team",
+				"description": "hey",
+				"owner_id": 58157,
+				"created_at": 1484254648,
+				"updated_at": 1484254648,
+				"members": [
+					{
+						"id": 33,
+						"team_id": 30,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 39,
+						"team_id": 30,
+						"permission": "READ",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 41,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 34,
+				"name": "Novo gruppo",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1484764365,
+				"updated_at": 1484764365,
+				"members": [
+					{
+						"id": 41,
+						"team_id": 34,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 42,
+						"team_id": 34,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 47,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 39,
+				"name": "Tipit",
+				"description": "A team for Tipit members",
+				"owner_id": 1395,
+				"created_at": 1485189043,
+				"updated_at": 1485189043,
+				"members": [
+					{
+						"id": 47,
+						"team_id": 39,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 48,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 40,
+				"name": "team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1485355693,
+				"updated_at": 1485355693,
+				"members": [
+					{
+						"id": 48,
+						"team_id": 40,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 50,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 42,
+				"name": "hey ",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1485451417,
+				"updated_at": 1485451417,
+				"members": [
+					{
+						"id": 50,
+						"team_id": 42,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 53,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 45,
+				"name": "team ",
+				"description": "\\ud83d\\ude0e",
+				"owner_id": 1395,
+				"created_at": 1485467460,
+				"updated_at": 1485467460,
+				"members": [
+					{
+						"id": 53,
+						"team_id": 45,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 54,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 46,
+				"name": "new team",
+				"description": null,
+				"owner_id": 1395,
+				"created_at": 1485489857,
+				"updated_at": 1485489857,
+				"members": [
+					{
+						"id": 54,
+						"team_id": 46,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 55,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 47,
+				"name": "Test",
+				"description": "hey!",
+				"owner_id": 1395,
+				"created_at": 1486143802,
+				"updated_at": 1486143802,
+				"members": [
+					{
+						"id": 55,
+						"team_id": 47,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"id": 56,
+			"member_id": 1395,
+			"permission": "WRITE",
+			"team": {
+				"id": 35,
+				"name": "new team",
+				"description": "Cool \\ud83d\\ude0e ",
+				"owner_id": 58157,
+				"created_at": 1484896961,
+				"updated_at": 1484896961,
+				"members": [
+					{
+						"id": 43,
+						"team_id": 35,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								38,
+								9,
+								47,
+								48,
+								49,
+								50
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					},
+					{
+						"id": 56,
+						"team_id": 35,
+						"permission": "WRITE",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Super Mega Attack Helicopter",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	],
+	"favorite_summit_events": [
+
 	],
 	"attendee": {
 		"id": 5966,
@@ -96,16 +3261,12 @@
 			16638,
 			15170,
 			15318,
-			16894,
 			16637,
 			16628,
 			15621,
-			17324,
-			16889,
 			17377,
 			16870,
 			15177,
-			17300,
 			17303,
 			17317,
 			17362,
@@ -113,7 +3274,29 @@
 			17365,
 			17364,
 			15714,
-			16636
+			16636,
+			15737,
+			16889,
+			17294,
+			17298,
+			17299,
+			17335,
+			16863,
+			15987,
+			15018,
+			16861,
+			15433,
+			17332,
+			15968,
+			17333,
+			15117,
+			16483,
+			15358,
+			15110,
+			15584,
+			17331,
+			17295,
+			17458
 		],
 		"tickets": [
 			14
@@ -151,80 +3334,6 @@
 			"created_date": 1485334038,
 			"event_id": 17300,
 			"member_id": 1395
-		}
-	],
-	"groups": [
-		{
-			"id": 1,
-			"title": "Content Authors",
-			"description": null,
-			"code": "content-authors"
-		},
-		{
-			"id": 2,
-			"title": "Administrators",
-			"description": null,
-			"code": "administrators"
-		},
-		{
-			"id": 4,
-			"title": "Users",
-			"description": null,
-			"code": "users"
-		},
-		{
-			"id": 5,
-			"title": "Foundation Members",
-			"description": null,
-			"code": "foundation-members"
-		},
-		{
-			"id": 8,
-			"title": "Speakers",
-			"description": null,
-			"code": "speakers"
-		},
-		{
-			"id": 30,
-			"title": "News Managers",
-			"description": "News Manager",
-			"code": "news-managers"
-		},
-		{
-			"id": 32,
-			"title": "oauth2 server admin",
-			"description": "OpenstackID OAUTH2 Server Administrators",
-			"code": "oauth2-server-admin"
-		},
-		{
-			"id": 31,
-			"title": "openstackid server admin",
-			"description": "OpenstackID Administrators",
-			"code": "openstackid-server-admin"
-		},
-		{
-			"id": 14,
-			"title": "OpenStack Foundation Staff",
-			"description": null,
-			"code": "openstack-foundation-staff"
-		},
-		{
-			"id": 9,
-			"title": "Track Chairs",
-			"description": null,
-			"code": "track-chairs"
-		},
-		{
-			"id": 38,
-			"title": "Working Groups",
-			"description": "Working Group list for Barcelona Summit",
-			"code": "working-groups"
-		},
-		{
-			"id": 45,
-			"title": "Survey Testers",
-			"description": null,
-			"code": "survey-testers"
 		}
 	]
 }
