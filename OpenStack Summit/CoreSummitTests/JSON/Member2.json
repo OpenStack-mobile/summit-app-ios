@@ -8,6 +8,9 @@
 	"irc": null,
 	"twitter": null,
 	"pic": "http://www.openstack.org/profile_images/members/11624",
+	"favorite_summit_events": [
+
+	],
 	"groups_events": [
 		{
 			"id": 17504,
