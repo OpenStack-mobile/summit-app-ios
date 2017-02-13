@@ -55,9 +55,7 @@ public extension Store {
                 
                 try team.save(context)
                 
-                try self.validate(context)
-                
-                try context.save()
+                try context.validateAndSave()
                 
                 // success
                 completion(.Value(team))
@@ -102,9 +100,7 @@ public extension Store {
                     
                     managedObject.didCache()
                     
-                    try self.validate(context)
-                    
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
@@ -138,9 +134,7 @@ public extension Store {
                 
                 try entity.save(context)
                 
-                try self.validate(context)
-                
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success
@@ -171,9 +165,7 @@ public extension Store {
                     
                     context.deleteObject(managedObject)
                     
-                    try self.validate(context)
-                    
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
@@ -215,9 +207,7 @@ public extension Store {
                 
                 try page.items.save(context)
                 
-                try self.validate(context)
-                
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success

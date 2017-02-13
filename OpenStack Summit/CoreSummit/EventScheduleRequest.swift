@@ -47,7 +47,7 @@ public extension Store {
                     
                     attendee.schedule.insert(eventManagedObject)
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
@@ -90,9 +90,7 @@ public extension Store {
                     
                     attendee.schedule.remove(eventManagedObject)
                     
-                    try self.validate(context)
-                    
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             

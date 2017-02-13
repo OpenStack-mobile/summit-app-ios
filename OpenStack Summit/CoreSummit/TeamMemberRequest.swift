@@ -59,7 +59,7 @@ public extension Store {
                     
                     context.deleteObject(managedObject)
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             

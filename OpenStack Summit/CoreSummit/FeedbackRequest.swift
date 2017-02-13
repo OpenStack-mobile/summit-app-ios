@@ -41,9 +41,7 @@ public extension Store {
                 
                 try page.items.save(context)
                 
-                try self.validate(context)
-                
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success
@@ -94,9 +92,7 @@ public extension Store {
                     
                     managedObject.averageFeedback = averageFeedback
                     
-                    try self.validate(context)
-                    
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
@@ -138,9 +134,7 @@ public extension Store {
                     
                     member.feedback.insert(managedObject)
                     
-                    try self.validate(context)
-                    
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
