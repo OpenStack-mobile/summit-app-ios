@@ -20,10 +20,8 @@ final class MyProfileViewController: RevealTabStripViewController {
     // MARK: - Loading
     
     override func viewDidLoad() {
-        
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         super.viewDidLoad()
-        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        
         title = "MY SUMMIT"
         
         reloadPagerTabStripView()
