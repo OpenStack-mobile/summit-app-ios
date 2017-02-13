@@ -200,7 +200,7 @@ public final class Store {
                 "\(environment.configuration.serverURL)/teams/write",
                 "\(environment.configuration.serverURL)/members/invitations/read",
                 "\(environment.configuration.serverURL)/members/invitations/write",
-                "\(environment.configuration.serverURL)//me/summits/events/favorites/add",
+                "\(environment.configuration.serverURL)/me/summits/events/favorites/add",
                 "\(environment.configuration.serverURL)/me/summits/events/favorites/delete"
             ],
             clientSecret: environment.configuration.openID.secret,
