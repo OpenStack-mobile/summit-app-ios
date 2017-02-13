@@ -43,6 +43,8 @@ public extension Store {
                     try context.save()
                 }
             }
+            
+            completion(error)
         }
         
         if isFavorite {

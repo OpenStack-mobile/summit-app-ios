@@ -24,7 +24,7 @@ final class MyProfileViewController: RevealTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         super.viewDidLoad()
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
-        navigationController?.navigationBar.topItem?.title = "MY SUMMIT"
+        title = "MY SUMMIT"
         
         reloadPagerTabStripView()
     }
@@ -36,10 +36,12 @@ final class MyProfileViewController: RevealTabStripViewController {
         let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
         let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
         let feedbackGivenListViewController = R.storyboard.feedback.feedbackGivenListViewController()!
+        let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
         
         var childViewControllers = [personalScheduleViewController,
                                     memberProfileDetailViewController,
-                                    feedbackGivenListViewController]
+                                    feedbackGivenListViewController,
+                                    favoriteEventsViewController]
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
