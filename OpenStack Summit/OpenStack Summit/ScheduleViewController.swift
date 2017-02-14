@@ -23,7 +23,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - Properties
     
-    final var addToScheduleInProgress = false
+    final var eventRequestInProgress = false
     
     final lazy var eventStore: EKEventStore = EKEventStore()
     
