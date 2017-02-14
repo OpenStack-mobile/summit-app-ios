@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16C67" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16D32" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Attendee" representedClassName=".AttendeeManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -27,6 +27,7 @@
         <attribute name="start" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendee" inverseName="schedule" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="eventType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventType" inverseName="events" inverseEntity="EventType" syncable="YES"/>
+        <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="favoriteEvents" inverseEntity="Member" syncable="YES"/>
         <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feedback" inverseName="event" inverseEntity="Feedback" syncable="YES"/>
         <relationship name="groupMembers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="groupEvents" inverseEntity="Member" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="events" inverseEntity="Group" syncable="YES"/>
@@ -92,6 +93,7 @@
         <attribute name="pictureURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendeeRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Attendee" inverseName="member" inverseEntity="Attendee" syncable="YES"/>
+        <relationship name="favoriteEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="favorites" inverseEntity="Event" syncable="YES"/>
         <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MemberFeedback" inverseName="member" inverseEntity="MemberFeedback" syncable="YES"/>
         <relationship name="groupEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="groupMembers" inverseEntity="Event" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
@@ -293,13 +295,13 @@
     <elements>
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="30"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="405"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="30"/>
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="Group" positionX="-9" positionY="135" width="128" height="150"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
-        <element name="Member" positionX="0" positionY="144" width="128" height="345"/>
+        <element name="Member" positionX="0" positionY="144" width="128" height="360"/>
         <element name="MemberFeedback" positionX="9" positionY="153" width="128" height="60"/>
         <element name="Notification" positionX="-9" positionY="135" width="128" height="30"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="135"/>
