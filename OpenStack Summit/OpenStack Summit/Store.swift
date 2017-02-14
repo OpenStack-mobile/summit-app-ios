@@ -102,25 +102,32 @@ extension Store {
     #if os(watchOS)
     var cache: Summit? {
         
-        struct Static {
-            static var summit: Summit?
+        get {
+            
+            if let summit = summitCache {
+                
+                return summit
+                
+            } else {
+                
+                guard let results = try? self.managedObjectContext.managedObjects(SummitManagedObject.self),
+                    let managedObject = results.first
+                    else { return nil }
+                
+                summitCache = Summit(managedObject: managedObject)
+                
+                return summitCache
+            }
         }
         
-        if let summit = Static.summit {
+        set {
             
-            return summit
-            
-        } else {
-            
-            guard let results = try? self.managedObjectContext.managedObjects(SummitManagedObject.self),
-                let managedObject = results.first
-                else { return nil }
-            
-            Static.summit = Summit(managedObject: managedObject)
-            
-            return Static.summit
+            summitCache = newValue
         }
     }
     #endif
 }
 
+#if os(watchOS)
+private var summitCache: Summit?
+#endif
