@@ -22,7 +22,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
     
-    @IBOutlet private(set) var eventHeader: EventDetailHeader!
+    @IBOutlet private(set) var speakersHeader: EventDetailHeader!
     
     // MARK: - Properties
     
@@ -148,7 +148,14 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.eventCache = Event(managedObject: eventManagedObject)
         self.eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        self.data = [.title, .description]
+        self.data = [.title]
+        
+        if Store.shared.isLoggedIn {
+            
+            self.data.append(.actions)
+        }
+        
+        self.data.append(.description)
         
         if eventDetail.location.isEmpty == false {
             
@@ -287,7 +294,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     private func configureAverageRatingView() {
         
+        feedBackHeader.averageRatingLabel.hidden = loadingAverageRating
         feedBackHeader.averageRatingView.hidden = loadingAverageRating
+        feedBackHeader.averageRatingLabel.text = "\(eventCache.averageFeedback)"
         feedBackHeader.averageRatingView.rating = eventCache.averageFeedback
         feedBackHeader.averageRatingActivityIndicator.hidden = !loadingAverageRating
         
@@ -401,7 +410,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTableViewCell, forIndexPath: indexPath)!
                 
-                cell.label.text = eventDetail.location
+                cell.sectionLabel.text = "VENUE"
+                cell.valueLabel.text = eventDetail.location
                 
                 return cell
                 
@@ -409,16 +419,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTableViewCell, forIndexPath: indexPath)!
                 
-                cell.label.text = eventDetail.level
+                cell.sectionLabel.text = "LEVEL"
+                cell.valueLabel.text = eventDetail.level
                 
                 return cell
                 
             case .actions:
-                
-                guard let memberManagedObject = Store.shared.authenticatedMember
-                    else { fatalError("Only authenticated members can perform actions for events") }
-                
-                let member = Member(managedObject: memberManagedObject)
                 
                 let cell: EventDetailActionsTableViewCell
                 
@@ -431,7 +437,20 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsBCell, forIndexPath: indexPath)!
                 }
                 
-                cell.saveButton.actionLabel.text = eventCache
+                let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
+                
+                let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
+                
+                cell.saveButton.actionLabel.text = isFavorite ? "Saved" : "Save"
+                
+                if eventDetail.rsvp.isEmpty {
+                    
+                    cell.confirmButton.actionLabel.text = didConfirm ? "Confirmed" : "Confirm"
+                    
+                } else {
+                    
+                    cell.confirmButton.actionLabel.text = didConfirm ? "RSVP'd" : "RSVP"
+                }
                 
                 return cell
             }
@@ -485,6 +504,10 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 showLocationDetail(venue)
                 
+            case .level:
+                
+                break
+                
             default: break
             }
             
@@ -505,9 +528,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return 0.0
-        case .speakers: return 0.0
-        case .feedback: return shouldShowReviews ? 60 : 0
+        case .details: return 0
+        case .speakers: return EventDetailHeader.height
+        case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
     }
     
@@ -516,9 +539,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return 0.0
-        case .speakers: return 0.0
-        case .feedback: return shouldShowReviews ? UITableViewAutomaticDimension : 0
+        case .details: return 0
+        case .speakers: return EventDetailHeader.height
+        case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
     }
     
@@ -528,8 +551,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
             
-        case .details: return UIView()
-        case .speakers: return UIView()
+        case .details: return nil
+        case .speakers: return speakersHeader
         case .feedback: return shouldShowReviews ? feedBackHeader : nil
         }
     }
@@ -589,7 +612,9 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
 
 final class EventDetailTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var sectionLabel: UILabel!
+    
+    @IBOutlet weak var valueLabel: UILabel!
 }
 
 final class EventDetailActionsTableViewCell: UITableViewCell {
@@ -610,15 +635,17 @@ final class EventDetailActionButton: Button {
 
 final class EventDetailHeader: UIView {
     
+    static let height: CGFloat = 60.0
+    
     @IBOutlet weak var label: UILabel!
 }
 
 final class EventDetailFeedbackHeader: UIView {
+    
+    static let height: CGFloat = 60.0
     
     @IBOutlet weak var reviewsLabel: UILabel!
     @IBOutlet weak var averageRatingView: CosmosView!
     @IBOutlet weak var averageRatingLabel: UILabel!
     @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
 }
-
-
