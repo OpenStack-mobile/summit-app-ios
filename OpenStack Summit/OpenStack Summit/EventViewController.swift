@@ -15,7 +15,7 @@ import CoreSummit
 
 protocol EventViewController: class, MessageEnabledViewController {
     
-    var addToScheduleInProgress: Bool { get set }
+    var eventRequestInProgress: Bool { get set }
     
     var eventStore: EKEventStore { get }
 }
@@ -85,7 +85,7 @@ extension EventViewController {
         
         let isAttendee = Store.shared.isLoggedInAndConfirmedAttendee
         
-        if isAttendee && addToScheduleInProgress == false {
+        if isAttendee && eventRequestInProgress == false {
             
             let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
             
@@ -115,6 +115,24 @@ extension EventViewController {
             actions.append(scheduleEvent)
         }
         
+        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.id) ?? false
+        
+        if Store.shared.isLoggedIn {
+            
+            let title = isFavorite ? "Remove from Favorites" : "Add to Favorites"
+            
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
+                
+                guard let controller = self else { return }
+                
+                controller.toggleFavorite(for: event)
+                
+                didComplete(true)
+                }))
+            
+            actions.append(favoriteEvent)
+        }
+        
         return ContextMenu(actions: actions, shareItems: [message, url])
     }
     
@@ -122,30 +140,33 @@ extension EventViewController {
         
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
         
-        guard addToScheduleInProgress == false else { return }
+        guard eventRequestInProgress == false else { return }
         
-        addToScheduleInProgress = true
+        eventRequestInProgress = true
         
         // update view
         scheduleableView?.scheduled = !scheduled
         
         let completion: ErrorType? -> () = { [weak self] (response) in
             
-            guard let controller = self else { return }
-            
-            controller.addToScheduleInProgress = false
-            
-            switch response {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
                 
-            case let .Some(error):
+                guard let controller = self else { return }
                 
-                // restore original value
-                scheduleableView?.scheduled = scheduled
+                controller.eventRequestInProgress = false
                 
-                // show error
-                controller.showErrorMessage(error)
-                
-            case .None: break
+                switch response {
+                    
+                case let .Some(error):
+                    
+                    // restore original value
+                    scheduleableView?.scheduled = scheduled
+                    
+                    // show error
+                    controller.showErrorMessage(error)
+                    
+                case .None: break
+                }
             }
         }
         
@@ -156,6 +177,35 @@ extension EventViewController {
         } else {
             
             Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
+        }
+    }
+    
+    func toggleFavorite(for event: EventDetail) {
+        
+       let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.id) ?? false
+        
+        guard eventRequestInProgress == false else { return }
+        
+        eventRequestInProgress = true
+        
+        Store.shared.favorite(!isFavorite, event: event.id, summit: event.summit) { [weak self] (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                guard let controller = self else { return }
+                
+                controller.eventRequestInProgress = false
+                
+                switch response {
+                    
+                case let .Some(error):
+                    
+                    // show error
+                    controller.showErrorMessage(error)
+                    
+                case .None: break
+                }
+            }
         }
     }
     

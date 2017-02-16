@@ -59,6 +59,8 @@ final class AboutInterfaceController: WKInterfaceController {
         
         try! Store.shared.clear()
         
+        Store.shared.cache = nil
+        
         self.popToRootController()
     }
     

@@ -1,0 +1,800 @@
+{
+  "id": 22,
+  "name": "Boston, MA",
+  "start_date": 1494248400,
+  "end_date": 1494604800,
+  "start_showing_venues_date": 1493654400,
+  "active": true,
+  "schedule_start_date": 1494302400,
+  "type_id": 0,
+  "time_zone": {
+    "country_code": "US",
+    "latitude": 40.71417,
+    "longitude": -74.00639,
+    "comments": "Eastern (most areas)",
+    "name": "America\/New_York",
+    "offset": -18000
+  },
+  "logo": null,
+  "page_url": "https:\/\/devbranch.openstack.org\/summit\/boston-2017",
+  "schedule_page_url": "https:\/\/devbranch.openstack.org\/summit\/boston-2017\/",
+  "schedule_event_detail_url": "https:\/\/devbranch.openstack.org\/summit\/boston-2017\/\/events\/:event_id\/:event_title",
+  "ticket_types": [],
+  "locations": [
+    {
+      "id": 209,
+      "name": "Hilton Boston Back Bay",
+      "description": null,
+      "location_type": "None",
+      "order": 1,
+      "class_name": "SummitHotel",
+      "address_1": "40 Dalton St",
+      "address_2": null,
+      "zip_code": "02115",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.08496663373",
+      "lat": "42.346486389543",
+      "capacity": 100,
+      "booking_link": "http:\/\/group.hilton.com\/openstackfoundationboston",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 210,
+      "name": "The Westin Copley Place, Boston",
+      "description": null,
+      "location_type": "None",
+      "order": 2,
+      "class_name": "SummitHotel",
+      "address_1": "10 Huntington Ave",
+      "address_2": null,
+      "zip_code": "02116",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.077390588361",
+      "lat": "42.348458445426",
+      "capacity": 200,
+      "booking_link": "https:\/\/www.starwoodmeeting.com\/Book\/openstacksummitboston2017",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 211,
+      "name": "Sheraton Boston Hotel",
+      "description": null,
+      "location_type": "None",
+      "order": 3,
+      "class_name": "SummitHotel",
+      "address_1": "39 Dalton St",
+      "address_2": null,
+      "zip_code": "02199",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.084280392065",
+      "lat": "42.346387564766",
+      "capacity": 650,
+      "booking_link": "https:\/\/www.starwoodmeeting.com\/Book\/OpenStackBoston",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 212,
+      "name": "Hotel Commonwealth",
+      "description": null,
+      "location_type": "None",
+      "order": 5,
+      "class_name": "SummitHotel",
+      "address_1": "500 Commonwealth Avenue",
+      "address_2": null,
+      "zip_code": "02215",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.0952228",
+      "lat": "42.3486282",
+      "capacity": 0,
+      "booking_link": "http:\/\/bookings.ihotelier.com\/bookings.jsp?groupID=1658086&hotelID=15517",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 213,
+      "name": "The Lenox Hotel",
+      "description": null,
+      "location_type": "None",
+      "order": 7,
+      "class_name": "SummitHotel",
+      "address_1": "61 Exeter St",
+      "address_2": null,
+      "zip_code": "02116",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.0796498",
+      "lat": "42.3491526",
+      "capacity": 73,
+      "booking_link": "https:\/\/gc.synxis.com\/rez.aspx?tps=fml&arrive=2017-05-6&adult=1&step=1&hotel=37&shell=rBOSLH&chain=56&template=rBOSLH&avcurrency=USD&Group=170506OPEN",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 214,
+      "name": "Hynes Convention Center",
+      "description": null,
+      "location_type": "Internal",
+      "order": 8,
+      "class_name": "SummitVenue",
+      "address_1": "900 Boylston St",
+      "address_2": null,
+      "zip_code": "02115",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.08367390000001",
+      "lat": "42.3481503",
+      "is_main": true,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 215,
+      "name": "Boston Marriott Copley Place",
+      "description": null,
+      "location_type": "None",
+      "order": 9,
+      "class_name": "SummitHotel",
+      "address_1": "110 Huntington Ave",
+      "address_2": null,
+      "zip_code": "02116",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.0792887",
+      "lat": "42.3470204",
+      "capacity": 800,
+      "booking_link": "https:\/\/aws.passkey.com\/go\/OpenStack2017",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 216,
+      "name": "The Colonnade Boston Hotel",
+      "description": null,
+      "location_type": "None",
+      "order": 10,
+      "class_name": "SummitHotel",
+      "address_1": "120 Huntington Ave",
+      "address_2": null,
+      "zip_code": "02116",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.0809277",
+      "lat": "42.3457705",
+      "capacity": 0,
+      "booking_link": "https:\/\/gc.synxis.com\/rez.aspx?Hotel=27205&Chain=10237&template=fBOSCO&shell=fBOSCO2&start=availresults&arrive=5%2f4%2f2017&depart=5%2f13%2f2017&adult=1&child=0&group=OPS04A",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 217,
+      "name": "Fairmont Copley Plaza, Boston",
+      "description": null,
+      "location_type": "None",
+      "order": 11,
+      "class_name": "SummitHotel",
+      "address_1": "138 St James Ave",
+      "address_2": null,
+      "zip_code": "02116",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.076217",
+      "lat": "42.3492046",
+      "capacity": 0,
+      "booking_link": "https:\/\/resweb.passkey.com\/go\/openstackfoundation2017",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 218,
+      "name": "The Midtown Hotel",
+      "description": null,
+      "location_type": "None",
+      "order": 6,
+      "class_name": "SummitHotel",
+      "address_1": "220 Huntington Ave",
+      "address_2": null,
+      "zip_code": "02115",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.0839585",
+      "lat": "42.3432608",
+      "capacity": 0,
+      "booking_link": "http:\/\/www.midtownhotel.com",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 219,
+      "name": "Boston Park Plaza",
+      "description": null,
+      "location_type": "None",
+      "order": 4,
+      "class_name": "SummitHotel",
+      "address_1": "50 Park Plaza",
+      "address_2": null,
+      "zip_code": "02116",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.0697049",
+      "lat": "42.3510417",
+      "capacity": 325,
+      "booking_link": "https:\/\/bostonparkplaza.reztrip.com\/classic\/en\/special_offer?accessCode=OSS&action=show&controller=landings&locale=en&offer_code=OSS&rate_code=OSS&rate_code=OSS&vr=3",
+      "hotel_type": "Primary",
+      "sold_out": false,
+      "maps": [],
+      "images": []
+    },
+    {
+      "id": 221,
+      "name": "Logan International Airport",
+      "description": null,
+      "location_type": "None",
+      "order": 12,
+      "class_name": "SummitAirport",
+      "address_1": "1 Harborside Dr",
+      "address_2": null,
+      "zip_code": "02128",
+      "city": "Boston",
+      "state": "MA",
+      "country": "US",
+      "lng": "-71.02579029999998",
+      "lat": "42.3630313",
+      "capacity": 0,
+      "airport_type": "International",
+      "maps": [],
+      "images": []
+    }
+  ],
+  "wifi_connections": [],
+  "event_types": [
+    {
+      "id": 101,
+      "name": "Presentation",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 102,
+      "name": "Keynotes",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 103,
+      "name": "Panel",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 104,
+      "name": "Hand-on Labs",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 106,
+      "name": "Evening Events",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 110,
+      "name": "Lightning Talks",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 112,
+      "name": "Lunch",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 113,
+      "name": "Breaks",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    },
+    {
+      "id": 114,
+      "name": "Groups Events",
+      "color": "#f0f0ee",
+      "black_out_times": false
+    }
+  ],
+  "tracks": [
+    {
+      "id": 98,
+      "name": "Hands-on Workshops",
+      "description": "Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.",
+      "code": "HW",
+      "track_groups": [
+        29
+      ]
+    },
+    {
+      "id": 99,
+      "name": "Upstream University",
+      "description": "Upstream University is an intensive program designed to share knowledge about the different ways of contributing to OpenStack like providing new features, writing documentation, participating in working groups, and so forth. ",
+      "code": "UU",
+      "track_groups": [
+        29
+      ]
+    },
+    {
+      "id": 102,
+      "name": "Community Building",
+      "description": "OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups and community leaders will discuss new tools, metrics and ongoing diversity initiatives. Content in this track will be viewable across all Summit Categories.",
+      "code": "I",
+      "track_groups": [
+        32,
+        31,
+        33
+      ]
+    },
+    {
+      "id": 103,
+      "name": "Working Groups",
+      "description": "This track is meant for established OpenStack community working groups to organize meetings, share reports and findings. These are primarily collaborative working sessions rather than presentations.*<br\/><br\/>\r\n\r\n* Please note: all Working Group\/BoF space requests are subject to approval by the Foundation.\t\t\t",
+      "code": "W",
+      "track_groups": [
+        30,
+        39
+      ]
+    },
+    {
+      "id": 104,
+      "name": "Birds of a Feather",
+      "description": "For the first time, the OpenStack Summit will formalize BoF sessions as part of the call for speakers. BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.*<br\/><br\/>\r\n\r\n* Please note: all Working Group\/BoF space requests are subject to approval by the Foundation.\t",
+      "code": "BF",
+      "track_groups": [
+        30,
+        39
+      ]
+    },
+    {
+      "id": 106,
+      "name": "Evaluating OpenStack",
+      "description": "From evaluating OpenStack to planning your cloud transition, this track covers the basics of what you need to know from a business perspective to get started with OpenStack.",
+      "code": "EO",
+      "track_groups": [
+        31
+      ]
+    },
+    {
+      "id": 107,
+      "name": "Case Studies",
+      "description": "Sharing knowledge is a core value for the OpenStack community. In the case studies track, you'll hear directly from end users, service providers and application developers who are using OpenStack to address their business problems. Learn challenges, best practices and measured results.",
+      "code": "CS",
+      "track_groups": [
+        31
+      ]
+    },
+    {
+      "id": 108,
+      "name": "Telecom & NFV Strategy",
+      "description": "86% of global telecoms report OpenStack important to their success. In this track, telecoms will cover the value of OpenStack and open source standards to address leading use cases like IoT, NFV and 5G. ",
+      "code": "#",
+      "track_groups": [
+        31
+      ]
+    },
+    {
+      "id": 110,
+      "name": "Products, Tools, and Services",
+      "description": "How do your existing tools mix with OpenStack? How do tools your dev team is asking for fit within an OpenStack framework? Sessions in this track will answer the \"OpenStack and...\" question from a business perspective. OpenStack is surrounded by a vibrant network of tools and services, and in this track you'll come to understand what's possible, what's best practice, and where to go from here. ",
+      "code": "P",
+      "track_groups": [
+        31
+      ]
+    },
+    {
+      "id": 111,
+      "name": "Cultural & Organizational Change",
+      "description": "Open source success requires organizational cultures that support it. This track will discuss developing and nurturing cultures that support open source success, recruiting in the OpenStack ecosystem, and developer satisfaction. ",
+      "code": "COG",
+      "track_groups": [
+        31
+      ]
+    },
+    {
+      "id": 112,
+      "name": "CIO Cloud Strategy",
+      "description": "Now that you're starting with OpenStack, tackle the details and strategy decisions, from choosing the right cloud model, planning multiple environments, optimizing costs, meeting regulatory requirements and mitigating risks. ",
+      "code": "CIO",
+      "track_groups": [
+        31
+      ]
+    },
+    {
+      "id": 113,
+      "name": "Architectural Decisions",
+      "description": "If you are a cloud architect or involved in planning your cloud strategy, this track will discuss proven reference architectures, configuration options, workload optimization, and experienced users will share their architectures and experiences.",
+      "code": "AD",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 114,
+      "name": "Operations War Stories",
+      "description": "Sharing knowledge and best practices is a core value for the OpenStack community. In this track, you'll hear directly from fellow cloud architects and operators who will share their stories from the trenches and lessons learned.",
+      "code": "OW",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 115,
+      "name": "Networking",
+      "description": "The networking track will feature technical presentations, use cases, design and implementation discussions relevant to cloud networking, specifically topics like SDN, scale, IPv6, policies, HA and performance.",
+      "code": "N",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 116,
+      "name": "Storage",
+      "description": "The storage track will feature technical presentations, use cases, design and implementation discussions relevant to cloud storage and OpenStack.",
+      "code": "G",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 117,
+      "name": "How To & Best Practices",
+      "description": "This track is about what it takes to run OpenStack in production. Automation, upgrade management, efficient tool use, cluster management, and other topics that production users encounter and want to discuss, learn and improve. If you're already running OpenStack in production, join other users in the Forum for advanced working sessions to collaborate on enhancing the OpenStack software and ops tools. ",
+      "code": "BP",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 118,
+      "name": "Security",
+      "description": "Technical presentations, design and implementation discussions relevant to security and OpenStack.",
+      "code": "S",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 119,
+      "name": "HPC \/ Research",
+      "description": "HPC and HTC continue to be popular use cases for OpenStack, allowing operators to run workloads on standard hardware rather than supercomputers. In this track, we'll discuss reference architectures, best practices and case studies for high performance computing.",
+      "code": "R",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 120,
+      "name": "Telecom \/ NFV Operations",
+      "description": "This track will cover technical presentations, design and implementation discussions relevant to telecom operators and architects. Navigate the growing telecom ecosystem of emerging projects, cross-community collaboration and leading use cases. ",
+      "code": "##",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 121,
+      "name": "Project Updates",
+      "description": "Hear directly from technical contributors and project leads on the latest features and project roadmaps.",
+      "code": "PU",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 122,
+      "name": "OpenStack Ops 101",
+      "description": "Are you new to the OpenStack ops community? The sessions in this track will give you OpenStack 101, including an overview of the technology, navigating the ops community, and using the tools of the OpenStack project.",
+      "code": "101",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 123,
+      "name": "Ops Tools",
+      "description": "OpenStack provides cloud infrastructure services, but there are many other tools that come into play when operating a full cloud environment. In this track, you'll learn from fellow operators and cloud experts about popular open source and commercial tools, including monitoring, billing, lifecycle management, and more.",
+      "code": "Op",
+      "track_groups": [
+        32
+      ]
+    },
+    {
+      "id": 124,
+      "name": "Big Data",
+      "description": "Learn about specific reference architectures and use cases for big data, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.",
+      "code": "BD",
+      "track_groups": [
+        33
+      ]
+    },
+    {
+      "id": 125,
+      "name": "Cloud App Development",
+      "description": "A large community of application developers and ecosystem of development tools is growing around OpenStack. This track will be for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, application software configuration, SDKs, tools, PaaS and big data.",
+      "code": "CD",
+      "track_groups": [
+        33
+      ]
+    },
+    {
+      "id": 126,
+      "name": "Containers",
+      "description": "OpenStack provides a single platform and set of APIs for virtual machines, bare metal and containers. OpenStack is a prime deployment environment for containers, but many organizations are also starting to use containers to deploy OpenStack. In this track, learn how containers fit with OpenStack, including reference architectures, use cases and updates from OpenStack projects like Magnum, Kolla and Kuryr.",
+      "code": "C",
+      "track_groups": [
+        33
+      ]
+    },
+    {
+      "id": 127,
+      "name": "Upstream Development",
+      "description": "Upstream development sessions are targeted toward prospective and existing contributors, to discover new processes, learn about common cross-project features or libraries you should adopt in your project, or share best development practices.",
+      "code": "UD",
+      "track_groups": [
+        33
+      ]
+    },
+    {
+      "id": 128,
+      "name": "How to Contribute",
+      "description": "The How to Contribute track is for community members and companies interested in contributing to the OpenStack code, with a focus on the community processes, tools and best practices.\t",
+      "code": "2",
+      "track_groups": [
+        33
+      ]
+    },
+    {
+      "id": 129,
+      "name": "Lunchs",
+      "description": "Lunchs",
+      "code": "LCH",
+      "track_groups": [
+        40
+      ]
+    }
+  ],
+  "track_groups": [
+    {
+      "id": 29,
+      "name": "OpenStack Academy",
+      "color": "#f75466",
+      "description": "<p>With a focus on education and training for cloud operators and application developers, the OpenStack Academy brings together hands-on workshops and day-long intensive training sessions under one roof. Workshops and trainings require an RSVP and certain pre-requisites. Bring your laptop and walk away with OpenStack skills.<\/p>",
+      "tracks": [
+        98,
+        99
+      ]
+    },
+    {
+      "id": 30,
+      "name": "The Forum",
+      "color": "#5244c0",
+      "description": "<p>At The Forum, OpenStack users and developers in equal parts gather to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Development teams, working groups and interested individuals will discuss release requirements, connect with community members about cross-project collaboration, and to exchange feedback between design and operations members. These are collaborative, interactive group working sessions.<\/p>",
+      "tracks": [
+        103,
+        104
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Business & Strategy",
+      "color": "#E79837",
+      "description": "<p>IT leaders building their cloud business case are facing unique requirements to move faster and control costs within the bounds of industry regulations and business realities. For business decision makers and those who are interested in topics like financial impact, organizational change, and business products to enhance and support your deployment, case studies in this track are presented from a business perspective, where you can learn why and how organizations adopted OpenStack.<\/p>",
+      "tracks": [
+        107,
+        112,
+        111,
+        106,
+        110,
+        108,
+        102
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Architecture & Operations",
+      "color": "#00cbea",
+      "description": "<p>For cloud architects, operators and administrators who are looking for technical sessions--ranging from beginner to advanced--that will help you improve your current deployment, learn new tools or understand how to get an OpenStack cloud up and running.<\/p>",
+      "tracks": [
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        102
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Developers",
+      "color": "#9aa0b5",
+      "description": "<p>The Developers category will cover developing cloud applications, making the most of containers, delivering valuable services like big data analytics, as well as presentations and help getting started for upstream contributors.<\/p>",
+      "tracks": [
+        124,
+        125,
+        126,
+        127,
+        128,
+        102
+      ]
+    },
+    {
+      "id": 39,
+      "name": "BoF & Working Groups",
+      "color": "#f0f0ee",
+      "description": null,
+      "tracks": [
+        104,
+        103
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Lunchs & Breaks",
+      "color": "#eded13",
+      "description": null,
+      "tracks": [
+        129
+      ]
+    }
+  ],
+  "schedule": [
+    {
+      "id": 17449,
+      "title": "Test Presentation #16 for QA ticket # 12211",
+      "description": "<p>test<\/p>",
+      "social_description": "test",
+      "start_date": 1494252000,
+      "end_date": 1494255000,
+      "location_id": 214,
+      "summit_id": 22,
+      "type_id": 101,
+      "class_name": "Presentation",
+      "allow_feedback": true,
+      "avg_feedback_rate": 0,
+      "is_published": true,
+      "head_count": 0,
+      "rsvp_link": null,
+      "track_id": 113,
+      "level": "Beginner",
+      "moderator_speaker_id": 0,
+      "problem_addressed": null,
+      "attendees_expected_learnt": "<p>test<\/p>",
+      "sponsors": [],
+      "tags": [
+        {
+          "id": 493,
+          "tag": "Cinder"
+        },
+        {
+          "id": 1142,
+          "tag": "freezer"
+        },
+        {
+          "id": 12,
+          "tag": "Enterprise"
+        },
+        {
+          "id": 35,
+          "tag": "Neutron"
+        },
+        {
+          "id": 34,
+          "tag": "Nova"
+        },
+        {
+          "id": 976,
+          "tag": "Ops"
+        },
+        {
+          "id": 38,
+          "tag": "Horizon"
+        },
+        {
+          "id": 3937,
+          "tag": "Community App Catalog"
+        }
+      ],
+      "speakers": [
+        9566
+      ],
+      "slides": [],
+      "links": [],
+      "videos": []
+    },
+    {
+      "id": 17453,
+      "title": "Test Lunch#1",
+      "description": "<p>Test Lunch<\/p>",
+      "social_description": "Test Lunch",
+      "start_date": 1494261000,
+      "end_date": 1494264600,
+      "location_id": 214,
+      "summit_id": 22,
+      "type_id": 112,
+      "class_name": "SummitEventWithFile",
+      "allow_feedback": false,
+      "avg_feedback_rate": 0,
+      "is_published": true,
+      "head_count": 0,
+      "rsvp_link": null,
+      "track_id": 129,
+      "sponsors": [],
+      "tags": [
+        {
+          "id": 4529,
+          "tag": "Lunch and Breaks"
+        }
+      ],
+      "attachment": "https:\/\/devbranch.openstack.org\/assets\/summit-event-attachments\/menu.pdf"
+    }
+  ],
+  "sponsors": [],
+  "speakers": [
+    {
+      "id": 9566,
+      "first_name": "Clint",
+      "last_name": "Espinoza",
+      "title": "Test title",
+      "bio": "<p>CFP QA&nbsp;bio.<\/p>",
+      "irc": null,
+      "twitter": null,
+      "presentations": {
+        "2": 17449
+      },
+      "moderated_presentations": [],
+      "pic": "https:\/\/devbranch.openstack.org\/profile_images\/speakers\/9566",
+      "gender": "Prefer not to say",
+      "member_id": 58157
+    }
+  ],
+  "timestamp": 1486959511
+}

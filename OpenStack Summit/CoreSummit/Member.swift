@@ -32,6 +32,8 @@ public struct Member: Named {
     
     public let groupEvents: Set<Identifier>
     
+    public let favoriteEvents: Set<Identifier>
+    
     public let groups: Set<Group>
     
     public let feedback: Set<MemberFeedback>
@@ -52,6 +54,7 @@ public func == (lhs: Member, rhs: Member) -> Bool {
         && lhs.attendeeRole == rhs.attendeeRole
         && lhs.groups == rhs.groups
         && lhs.groupEvents == rhs.groupEvents
+        && lhs.favoriteEvents == rhs.favoriteEvents
 }
 
 // MARK: - Extensions

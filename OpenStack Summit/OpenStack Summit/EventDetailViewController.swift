@@ -28,7 +28,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     var event: Identifier!
     
-    var addToScheduleInProgress = false
+    var eventRequestInProgress = false
     
     lazy var eventStore: EKEventStore = EKEventStore()
     
