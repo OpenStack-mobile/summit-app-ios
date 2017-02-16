@@ -110,6 +110,31 @@ public extension NSManagedObjectContext {
         
         return (try self.executeFetchRequest(fetchRequest) as! [NSNumber]).first!.integerValue
     }
+    
+    /// Save and attempt to recover from validation errors
+    func validateAndSave() throws {
+        
+        do { try save() }
+        
+        catch {
+            
+            // attempt to get invalid managed objects
+            let invalidObjects = (error as NSError).invalidManagedObjects
+            
+            guard invalidObjects.isEmpty == false
+                else { throw error }
+            
+            // delete invalid objects
+            invalidObjects.forEach { self.deleteObject($0) }
+            
+            #if DEBUG
+            print("CoreData validation error: \(error)")
+            #endif
+            
+            // try to save again (and catch more validation errors)
+            try validateAndSave()
+        }
+    }
 }
 
 public extension NSManagedObjectModel {
@@ -121,5 +146,24 @@ public extension NSManagedObjectModel {
         let className = NSStringFromClass(managedObjectType)
         
         return self.entities.firstMatching { $0.managedObjectClassName == className }
+    }
+}
+
+public extension NSError {
+    
+    var invalidManagedObjects: Set<NSManagedObject> {
+        
+        var invalidObjects = Set<NSManagedObject>()
+        
+        if let errors = userInfo[NSDetailedErrorsKey] as? [NSError] {
+            
+            errors.forEach { $0.invalidManagedObjects.forEach { invalidObjects.insert($0) } }
+            
+        } else if let invalidObject = userInfo[NSValidationObjectErrorKey] as? NSManagedObject {
+            
+            invalidObjects.insert(invalidObject)
+        }
+        
+        return invalidObjects
     }
 }

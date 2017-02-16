@@ -150,7 +150,7 @@ public extension Store {
                     
                     attendeeRole.schedule.insert(eventManagedObject)
                     
-                    try context.save()
+                    try context.validateAndSave()
                     
                     return true
                     
@@ -164,7 +164,7 @@ public extension Store {
                         
                         attendeeRole.schedule.remove(eventManagedObject)
                         
-                        try context.save()
+                        try context.validateAndSave()
                     }
                     
                     return true
@@ -232,7 +232,7 @@ public extension Store {
                     
                     context.deleteObject(foundEntity)
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
                 
                 return true
@@ -265,7 +265,7 @@ public extension Store {
                 // add to authenticated member's group events
                 member.groupEvents.insert(managedObject)
                 
-                try context.save()
+                try context.validateAndSave()
                 
                 return true
                 
@@ -274,7 +274,7 @@ public extension Store {
                 // insert or update
                 try entity.write(context, summit: summit)
                 
-                try context.save()
+                try context.validateAndSave()
                 
                 return true
             }

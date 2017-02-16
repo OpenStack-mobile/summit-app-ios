@@ -37,7 +37,7 @@ public extension Store {
                 
                 try member.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success

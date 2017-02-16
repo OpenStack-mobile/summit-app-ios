@@ -41,7 +41,7 @@ public extension Store {
                 
                 try page.items.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success
