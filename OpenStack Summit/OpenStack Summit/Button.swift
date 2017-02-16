@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@IBDesignable final class Button: UIButton {
+@IBDesignable class Button: UIButton {
     
     @IBInspectable var cornerRadius: CGFloat = 0.0 {
         

@@ -16,7 +16,7 @@
         <scene sceneID="JKu-1V-nph">
             <objects>
                 <tableViewController storyboardIdentifier="EventDetailViewController" id="SnY-ae-Z8a" customClass="EventDetailViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="0hO-jF-Ulg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="0hO-jF-Ulg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -26,17 +26,17 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="127"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uGT-3k-mt6" id="WF8-UM-5Tw">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgm-5C-23d" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="20" width="280" height="48"/>
+                                            <rect key="frame" x="20" y="20" width="280" height="49"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLH-lM-hPM" userLabel="Track" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="76" width="280" height="30"/>
+                                            <rect key="frame" x="20" y="77" width="280" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="TDr-b0-wDx" userLabel="Track Label Height Constraint"/>
                                             </constraints>
@@ -63,18 +63,18 @@
                                     <outlet property="trackLabelHeightConstraint" destination="TDr-b0-wDx" id="3dI-mi-sfb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailActionsACell" rowHeight="70" id="Big-Nh-rkD" customClass="EventDetailTitleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailActionsACell" rowHeight="70" id="Big-Nh-rkD" customClass="EventDetailActionsTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="155" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Big-Nh-rkD" id="48t-0V-0XI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4I-ON-TeG" userLabel="Button Container">
-                                            <rect key="frame" x="8" y="0.0" width="304" height="69"/>
+                                            <rect key="frame" x="8" y="0.0" width="304" height="70"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leb-TK-Ndx" userLabel="Button Segment">
-                                                    <rect key="frame" x="0.0" y="0.0" width="101.5" height="69"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="101.5" height="70"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-bq-gaf" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="85.5" height="40"/>
@@ -130,7 +130,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PmC-R4-07M" userLabel="Button Segment">
-                                                    <rect key="frame" x="101.5" y="0.0" width="101" height="69"/>
+                                                    <rect key="frame" x="101.5" y="0.0" width="101" height="70"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skz-CL-l9Y" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="85" height="40"/>
@@ -186,7 +186,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4o9-pg-eLG" userLabel="Button Segment">
-                                                    <rect key="frame" x="202.5" y="0.0" width="101.5" height="69"/>
+                                                    <rect key="frame" x="202.5" y="0.0" width="101.5" height="70"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czy-l4-h96" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="85.5" height="40"/>
@@ -271,18 +271,18 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailActionsBCell" rowHeight="70" id="fYM-gd-Xxx" customClass="EventDetailTitleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailActionsBCell" rowHeight="70" id="fYM-gd-Xxx" customClass="EventDetailActionsTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="225" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fYM-gd-Xxx" id="IZ6-sS-VqK">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNK-98-fnV" userLabel="Button Container">
-                                            <rect key="frame" x="64" y="0.0" width="192" height="69"/>
+                                            <rect key="frame" x="64" y="0.0" width="192" height="70"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cy2-sC-E2l" userLabel="Button Segment">
-                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="69"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="70"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbg-xf-535" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="89" height="40"/>
@@ -338,7 +338,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOS-ZU-jJ6" userLabel="Button Segment">
-                                                    <rect key="frame" x="105" y="0.0" width="105" height="69"/>
+                                                    <rect key="frame" x="105" y="0.0" width="105" height="70"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-Pa-YA2" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="89" height="40"/>
@@ -423,11 +423,11 @@
                                 <rect key="frame" x="0.0" y="295" width="320" height="169"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT2-cw-qaQ" id="vdo-rN-wnx">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-0u-up7" userLabel="Event Detail Text View">
-                                            <rect key="frame" x="16" y="75" width="288" height="48.5"/>
+                                            <rect key="frame" x="16" y="75" width="288" height="49.5"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Event description">
@@ -441,7 +441,7 @@
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz9-0R-hjp" userLabel="Sponsors Label" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="131" width="288" height="29"/>
+                                            <rect key="frame" x="16" y="132" width="288" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="c5V-xc-vUf"/>
                                             </constraints>
@@ -488,6 +488,9 @@
                                                             <real key="value" value="5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="playVideo:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="0Nb-LW-y0w"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -517,20 +520,23 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionTextView" destination="ONb-0u-up7" id="xCt-d0-Qmp"/>
+                                    <outlet property="eventDayLabel" destination="ejz-cB-IEV" id="YBc-5k-ZQG"/>
+                                    <outlet property="eventTimeLabel" destination="JEX-Oq-XGN" id="Dvd-kT-KHI"/>
+                                    <outlet property="playButton" destination="04m-7R-xvH" id="Jbt-zO-Vlq"/>
                                     <outlet property="sponsorsLabel" destination="fz9-0R-hjp" id="eFC-Eh-NLJ"/>
                                     <outlet property="sponsorsLabelHeightConstraint" destination="c5V-xc-vUf" id="ibo-QB-EJb"/>
                                     <outlet property="sponsorsLabelSeparationConstraint" destination="g8s-9t-aye" id="dfx-X2-Gfg"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDetailCell" rowHeight="50" id="Gie-OQ-Gj2">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventDetailTableViewCell" rowHeight="50" id="Gie-OQ-Gj2" customClass="EventDetailTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="464" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gie-OQ-Gj2" id="rdi-aY-oEn">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNE-Yo-DXp" userLabel="Accessory View">
-                                            <rect key="frame" x="286" y="0.0" width="34" height="49"/>
+                                            <rect key="frame" x="286" y="0.0" width="34" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="miR-cA-71p">
                                                     <rect key="frame" x="13" y="18" width="9" height="14"/>
@@ -544,7 +550,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTl-ng-8Uk">
-                                            <rect key="frame" x="16" y="14" width="262" height="21"/>
+                                            <rect key="frame" x="16" y="16" width="262" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -552,21 +558,24 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="yNE-Yo-DXp" secondAttribute="bottom" id="7Rf-2k-xWu"/>
-                                        <constraint firstAttribute="bottom" secondItem="kTl-ng-8Uk" secondAttribute="bottom" constant="14" id="IwO-yZ-eoI"/>
+                                        <constraint firstAttribute="bottom" secondItem="kTl-ng-8Uk" secondAttribute="bottom" constant="16" id="IwO-yZ-eoI"/>
                                         <constraint firstAttribute="trailing" secondItem="yNE-Yo-DXp" secondAttribute="trailing" id="L6f-E2-ImB"/>
                                         <constraint firstItem="kTl-ng-8Uk" firstAttribute="leading" secondItem="rdi-aY-oEn" secondAttribute="leading" constant="16" id="OFA-sE-C2k"/>
                                         <constraint firstItem="yNE-Yo-DXp" firstAttribute="top" secondItem="rdi-aY-oEn" secondAttribute="top" id="kOp-mH-lEJ"/>
-                                        <constraint firstItem="kTl-ng-8Uk" firstAttribute="top" secondItem="rdi-aY-oEn" secondAttribute="top" constant="14" id="upp-bS-kP7"/>
+                                        <constraint firstItem="kTl-ng-8Uk" firstAttribute="top" secondItem="rdi-aY-oEn" secondAttribute="top" constant="16" id="upp-bS-kP7"/>
                                         <constraint firstItem="yNE-Yo-DXp" firstAttribute="leading" secondItem="kTl-ng-8Uk" secondAttribute="trailing" constant="8" id="uxw-hy-1eK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="label" destination="kTl-ng-8Uk" id="Kq1-li-FWD"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="102" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="514" width="320" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xz4-Sc-pHU" id="D2t-on-rtc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-kZ-vid" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
@@ -595,7 +604,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wf-qP-1X3" userLabel="Accessory View">
-                                            <rect key="frame" x="286" y="0.0" width="34" height="101"/>
+                                            <rect key="frame" x="286" y="0.0" width="34" height="102"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="O5t-B2-lou">
                                                     <rect key="frame" x="13" y="44" width="9" height="14"/>
@@ -653,7 +662,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qs0-pl-Ccz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="LdI-q1-rd1">
+                <view contentMode="scaleToFill" id="LdI-q1-rd1" customClass="EventDetailHeader" customModule="OpenStackSummit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -670,8 +679,11 @@
                         <constraint firstAttribute="bottom" secondItem="ZNU-wi-PBB" secondAttribute="bottom" constant="8" id="TyS-dt-dWn"/>
                         <constraint firstAttribute="trailing" secondItem="ZNU-wi-PBB" secondAttribute="trailing" constant="16" id="WNb-Xw-Yev"/>
                     </constraints>
+                    <connections>
+                        <outlet property="label" destination="ZNU-wi-PBB" id="YvD-jj-e0j"/>
+                    </connections>
                 </view>
-                <view contentMode="scaleToFill" id="wAF-09-BCg" customClass="EventFeedbackHeader" customModule="OpenStackSummit" customModuleProvider="target">
+                <view contentMode="scaleToFill" id="wAF-09-BCg" customClass="EventDetailFeedbackHeader" customModule="OpenStackSummit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="404" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -685,7 +697,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phj-lY-1hL">
-                            <rect key="frame" x="364" y="19.5" width="24" height="21"/>
+                            <rect key="frame" x="364" y="20" width="24" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -735,6 +747,7 @@
                     </constraints>
                     <connections>
                         <outlet property="averageRatingActivityIndicator" destination="I8l-E2-m9Q" id="sUn-yZ-MLu"/>
+                        <outlet property="averageRatingLabel" destination="phj-lY-1hL" id="aNM-JM-DwY"/>
                         <outlet property="averageRatingView" destination="NNU-Ei-sIC" id="Wvj-Bc-KIX"/>
                         <outlet property="reviewsLabel" destination="IqD-sa-FyG" id="wYu-D0-cwd"/>
                     </connections>

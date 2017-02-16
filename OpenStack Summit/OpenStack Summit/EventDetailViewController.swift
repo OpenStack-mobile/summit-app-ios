@@ -20,7 +20,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) var feedBackHeader: EventFeedbackHeader!
+    @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
+    
+    @IBOutlet private(set) var eventHeader: EventDetailHeader!
     
     // MARK: - Properties
     
@@ -55,9 +57,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         // setup tableview
         tableView.registerNib(R.nib.feedbackTableViewCell)
-        tableView.registerNib(R.nib.detailImageTableViewCell)
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 40
+        tableView.estimatedRowHeight = 60
         
         // entityController 
         entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
@@ -147,32 +148,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.eventCache = Event(managedObject: eventManagedObject)
         self.eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        self.data = [.title]
-        
-        if eventDetail.video != nil {
-            
-            data.append(.video)
-        }
-        
-        // Can give feedback after event started, and if there is no feedback for that user
-        if canAddFeedback(for: eventDetail) {
-            
-            data.append(.feedback)
-        }
-        
-        data.append(.date)
+        self.data = [.title, .description]
         
         if eventDetail.location.isEmpty == false {
             
             data.append(.location)
         }
-                
-        if eventDetail.tags.isEmpty == false {
-            
-            data.append(.tags)
-        }
-        
-        data.append(.description)
         
         if eventDetail.level.isEmpty == false {
             
@@ -379,9 +360,18 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .description:
                 
-                // description text
-                
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDescriptionTableViewCell, forIndexPath: indexPath)!
+                
+                // date and time
+                
+                cell.eventDayLabel.text = eventDetail.dateTime
+                cell.eventTimeLabel.text = eventDetail.time
+                
+                // video
+                
+                cell.playButton.hidden = eventDetail.video == nil
+                
+                // description text
                 
                 let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
                 if let data = eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
@@ -405,100 +395,43 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 cell.sponsorsLabelSeparationConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 8
                 cell.sponsorsLabel.updateConstraints()
                 
-                // rsvp
-                
-                cell.rsvpButtonHeightConstraint.constant = eventDetail.rsvp.isEmpty ? 0 : 38
-                cell.rsvpButtonSeparationConstraint.constant = eventDetail.rsvp.isEmpty ? 0 : 16
-                cell.rsvpButton.hidden = eventDetail.rsvp.isEmpty
-                cell.rsvpButton.updateConstraints()
-                
-                return cell
-                
-            case .date:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
-                
-                cell.titleLabel!.text = eventDetail.dateTime
-                cell.detailImageView.image = R.image.time()!
-                cell.accessoryType = .None
-                cell.selectionStyle = .None
-                
-                return cell
-                
-            case .tags:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
-                
-                cell.titleLabel!.text = eventDetail.tags
-                cell.detailImageView.image = R.image.tag()!
-                cell.accessoryType = .None
-                cell.selectionStyle = .None
-                
                 return cell
                 
             case .location:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTableViewCell, forIndexPath: indexPath)!
                 
-                cell.titleLabel!.text = eventDetail.location
-                cell.detailImageView.image = R.image.map_pin()!
-                cell.accessoryType = .DisclosureIndicator
-                cell.selectionStyle = .Default
+                cell.label.text = eventDetail.location
                 
                 return cell
                 
             case .level:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.detailImageTableViewCell, forIndexPath: indexPath)!
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTableViewCell, forIndexPath: indexPath)!
                 
-                cell.titleLabel!.text = eventDetail.level
-                cell.detailImageView.image = R.image.level()!
-                cell.accessoryType = .None
-                cell.selectionStyle = .None
+                cell.label.text = eventDetail.level
                 
                 return cell
                 
-            case .video:
+            case .actions:
                 
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
+                guard let memberManagedObject = Store.shared.authenticatedMember
+                    else { fatalError("Only authenticated members can perform actions for events") }
                 
-                cell.playButton.hidden = true
-                cell.activityIndicator.hidden = false
-                cell.activityIndicator.startAnimating()
+                let member = Member(managedObject: memberManagedObject)
                 
-                if let thumbnailURL = NSURL(youtubeThumbnail: eventDetail.video!.youtube) {
+                let cell: EventDetailActionsTableViewCell
+                
+                if canAddFeedback(for: eventDetail) {
                     
-                    cell.videoImageView.hnk_setImageFromURL(thumbnailURL, placeholder: nil, format: nil, failure: nil, success: { (image) in
-                        
-                        cell.videoImageView.image = image
-                        cell.playButton.hidden = false
-                        cell.activityIndicator.stopAnimating()
-                        cell.setNeedsDisplay()
-                    })
+                    cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsACell, forIndexPath: indexPath)!
+                    
+                } else {
+                    
+                    cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsBCell, forIndexPath: indexPath)!
                 }
                 
-                return cell
-                
-            case .feedback:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailFeedbackTableViewCell, forIndexPath: indexPath)!
-                
-                cell.feedbackView.rating = 0.0
-                
-                cell.feedbackView.didTouchCosmos = { [weak self] (rating) in
-                    
-                    guard let controller = self else { return }
-                    
-                    cell.feedbackView.rating = rating
-                    
-                    let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
-                    
-                    feedbackVC.event = controller.event
-                    
-                    feedbackVC.rate = Int(rating) // prefill rating
-                    
-                    controller.showViewController(feedbackVC, sender: self)
-                }
+                cell.saveButton.actionLabel.text = eventCache
                 
                 return cell
             }
@@ -603,7 +536,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - UITextViewDelegate
     
-    // Protocol extensions are not working entirely in ObjC, need to place implementation here and not in extension
+    // Swift Protocol extensions are not working entirely in ObjC, need to place implementation here and not in extension
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         
         guard self.openWebURL(URL)
@@ -629,12 +562,9 @@ private extension EventDetailViewController {
     enum Detail {
         
         case title
-        case video
-        case feedback
-        case date
-        case location
-        case tags
         case description
+        case actions
+        case location
         case level
     }
 }
@@ -646,32 +576,49 @@ final class EventDetailTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var trackLabelHeightConstraint: NSLayoutConstraint!
 }
 
-final class EventDetailVideoTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var videoImageView: UIImageView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-}
-
 final class EventDetailDescriptionTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var eventDayLabel: UILabel!
+    @IBOutlet weak var eventTimeLabel: UILabel!
+    @IBOutlet weak var playButton: Button!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var sponsorsLabel: UILabel!
     @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rsvpButton: UIButton!
-    @IBOutlet weak var rsvpButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rsvpButtonSeparationConstraint: NSLayoutConstraint!
 }
 
-final class EventDetailFeedbackTableViewCell: UITableViewCell {
+final class EventDetailTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var feedbackView: CosmosView!
+    @IBOutlet weak var label: UILabel!
 }
 
-final class EventFeedbackHeader: UIView {
+final class EventDetailActionsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var averageRatingView: CosmosView!
-    @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var saveButton: EventDetailActionButton!
+    
+    @IBOutlet weak var confirmButton: EventDetailActionButton!
+    
+    @IBOutlet weak var rateButton: EventDetailActionButton?
+}
+
+final class EventDetailActionButton: Button {
+    
+    @IBOutlet weak var actionImageView: UIImageView!
+    
+    @IBOutlet weak var actionLabel: UILabel!
+}
+
+final class EventDetailHeader: UIView {
+    
+    @IBOutlet weak var label: UILabel!
+}
+
+final class EventDetailFeedbackHeader: UIView {
+    
     @IBOutlet weak var reviewsLabel: UILabel!
+    @IBOutlet weak var averageRatingView: CosmosView!
+    @IBOutlet weak var averageRatingLabel: UILabel!
+    @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
 }
+
+
