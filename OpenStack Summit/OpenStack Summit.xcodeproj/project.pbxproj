@@ -364,6 +364,9 @@
 		6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4241A11E1ED4D60017E555 /* LoadingTableViewCell.xib */; };
 		6E4241A41E1ED6560017E555 /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */; };
 		6E46F3AC1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */; };
+		6E4885DC1E563807002C87D2 /* DataUpdates10.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4885DB1E563807002C87D2 /* DataUpdates10.json */; };
+		6E4885DD1E563807002C87D2 /* DataUpdates10.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4885DB1E563807002C87D2 /* DataUpdates10.json */; };
+		6E4885DE1E563807002C87D2 /* DataUpdates10.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4885DB1E563807002C87D2 /* DataUpdates10.json */; };
 		6E488F5D1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
 		6E488F5E1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
 		6E488F5F1DD1107500EA6B0F /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
@@ -1095,6 +1098,7 @@
 		6E4241A11E1ED4D60017E555 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		6E4241A31E1ED6560017E555 /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		6E46F3AB1D7A7B4B0023AD9A /* SpeakersInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersInterfaceController.swift; sourceTree = "<group>"; };
+		6E4885DB1E563807002C87D2 /* DataUpdates10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates10.json; sourceTree = "<group>"; };
 		6E488F5C1DD1107500EA6B0F /* EntityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityController.swift; sourceTree = "<group>"; };
 		6E49054C1D2ED21300D56870 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
@@ -1611,6 +1615,7 @@
 				6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */,
 				6E919B541E39CA4300FBF910 /* DataUpdates8.json */,
 				6E82210D1E48E9D70025FE58 /* DataUpdates9.json */,
+				6E4885DB1E563807002C87D2 /* DataUpdates10.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E586FBE1DC29083001DE605 /* Member2.json */,
 				6E931FE81E5164ED00762B74 /* Member3.json */,
@@ -2628,6 +2633,7 @@
 				6E0B5F2C1D77C8AB0005F6CE /* Summit7.json in Resources */,
 				6E0B5F2D1D77C8AB0005F6CE /* DataUpdates3.json in Resources */,
 				6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E4885DE1E563807002C87D2 /* DataUpdates10.json in Resources */,
 				6E931FEB1E5164ED00762B74 /* Member3.json in Resources */,
 				6E82210C1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6EE74DE81DBF8E5800616BEA /* DataUpdates5.json in Resources */,
@@ -2708,6 +2714,7 @@
 				6E10A5191D106741008CBD0C /* Summit7.json in Resources */,
 				6E08F3C71D6CC43500E3006B /* DataUpdates3.json in Resources */,
 				6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E4885DC1E563807002C87D2 /* DataUpdates10.json in Resources */,
 				6E931FE91E5164ED00762B74 /* Member3.json in Resources */,
 				6E82210A1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6E586FC01DC29083001DE605 /* Member2.json in Resources */,
@@ -2739,6 +2746,7 @@
 				6E29241F1D7AF8CC00D14F0A /* Summit7.json in Resources */,
 				6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */,
 				6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */,
+				6E4885DD1E563807002C87D2 /* DataUpdates10.json in Resources */,
 				6E931FEA1E5164ED00762B74 /* Member3.json in Resources */,
 				6E82210B1E48E72C0025FE58 /* ListMembers.json in Resources */,
 				6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */,
