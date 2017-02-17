@@ -132,7 +132,7 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
-        return ContextMenu(actions: actions, shareItems: [message, url])
+        return ContextMenu(actions: actions, shareItems: [message, url], systemActions: false)
     }
     
     func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {

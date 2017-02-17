@@ -86,7 +86,20 @@ extension UIViewController {
             
             activites += contextMenu.actions.map { ContextMenuActionActivity(action: $0) }
             
-            menuViewController = UIActivityViewController(activityItems: contextMenu.shareItems, applicationActivities: activites)
+            let activityViewController = UIActivityViewController(activityItems: contextMenu.shareItems, applicationActivities: activites)
+            
+            if contextMenu.systemActions == false {
+                
+                activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,
+                                                                UIActivityTypeAddToReadingList]
+                
+                if #available(iOS 9, *) {
+                    
+                    activityViewController.excludedActivityTypes?.append(UIActivityTypeOpenInIBooks)
+                }
+            }
+            
+            menuViewController = activityViewController
         }
         
         self.present(viewController: menuViewController, sender: sender)
@@ -98,6 +111,8 @@ struct ContextMenu {
     var actions = [Action]()
     
     var shareItems = [AnyObject]()
+    
+    var systemActions = true
 }
 
 extension ContextMenu {
