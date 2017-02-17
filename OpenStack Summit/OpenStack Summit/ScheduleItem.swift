@@ -85,10 +85,20 @@ internal extension ScheduleItem {
         dateFormatter.dateFormat = "hh:mm a"
         let stringDateTo = dateFormatter.stringFromDate(event.end)
         
-        return "\(stringDateFrom) / \(stringDateTo)"
+        return "\(stringDateFrom) - \(stringDateTo)"
+    }
+    
+    static func getDay(event: EventManagedObject) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
+        dateFormatter.dateStyle = .MediumStyle
+        
+        return dateFormatter.stringFromDate(event.start)
     }
     
     static func getDateTime(event: EventManagedObject) -> String {
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"

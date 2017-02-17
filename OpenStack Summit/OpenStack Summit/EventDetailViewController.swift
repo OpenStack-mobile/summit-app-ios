@@ -56,7 +56,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         addContextMenuBarButtonItem()
         
         // setup tableview
-        tableView.registerNib(R.nib.feedbackTableViewCell)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         
@@ -276,17 +275,16 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         cell.separatorInset = UIEdgeInsetsZero
     }
     
-    private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: EventDetailFeedbackTableViewCell, at indexPath: NSIndexPath) {
         
         assert(indexPath.section == Section.feedback.rawValue, "\(indexPath.section) is not feedback section")
         
         let feedback = feedbackList[indexPath.row]
         
-        cell.eventName = ""
-        cell.owner = feedback.owner
-        cell.rate = Double(feedback.rate)
-        cell.review = feedback.review
-        cell.date = feedback.date
+        cell.nameLabel.text = feedback.owner
+        cell.ratingView.rating = Double(feedback.rate)
+        cell.reviewLabel.text = feedback.review
+        cell.dateLabel.text = feedback.date
         
         cell.layoutMargins = UIEdgeInsetsZero
         cell.separatorInset = UIEdgeInsetsZero
@@ -373,7 +371,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 // date and time
                 
-                cell.eventDayLabel.text = eventDetail.dateTime
+                cell.eventDayLabel.text = eventDetail.day
                 cell.eventTimeLabel.text = eventDetail.time
                 
                 // video
@@ -465,7 +463,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
         case .feedback:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackTableViewCell, forIndexPath: indexPath)!
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailFeedbackTableViewCell, forIndexPath: indexPath)!
             
             configure(cell: cell, at: indexPath)
             
@@ -592,6 +590,30 @@ private extension EventDetailViewController {
     }
 }
 
+final class EventDetailActionButton: Button {
+    
+    @IBOutlet weak var actionImageView: UIImageView!
+    
+    @IBOutlet weak var actionLabel: UILabel!
+}
+
+final class EventDetailHeader: UIView {
+    
+    static let height: CGFloat = 60.0
+    
+    @IBOutlet weak var label: UILabel!
+}
+
+final class EventDetailFeedbackHeader: UIView {
+    
+    static let height: CGFloat = 60.0
+    
+    @IBOutlet weak var reviewsLabel: UILabel!
+    @IBOutlet weak var averageRatingView: CosmosView!
+    @IBOutlet weak var averageRatingLabel: UILabel!
+    @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
+}
+
 final class EventDetailTitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -626,26 +648,23 @@ final class EventDetailActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var rateButton: EventDetailActionButton?
 }
 
-final class EventDetailActionButton: Button {
+final class EventDetailFeedbackTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var actionImageView: UIImageView!
+    @IBOutlet weak var memberImageView: UIImageView!
     
-    @IBOutlet weak var actionLabel: UILabel!
-}
-
-final class EventDetailHeader: UIView {
+    @IBOutlet weak var nameLabel: UILabel!
     
-    static let height: CGFloat = 60.0
+    @IBOutlet weak var dateLabel: UILabel!
     
-    @IBOutlet weak var label: UILabel!
-}
-
-final class EventDetailFeedbackHeader: UIView {
+    @IBOutlet weak var reviewLabel: UILabel!
     
-    static let height: CGFloat = 60.0
+    @IBOutlet weak var ratingView: CosmosView!
     
-    @IBOutlet weak var reviewsLabel: UILabel!
-    @IBOutlet weak var averageRatingView: CosmosView!
-    @IBOutlet weak var averageRatingLabel: UILabel!
-    @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.ratingView.settings.updateOnTouch = false
+        self.memberImageView.layer.masksToBounds = true
+        self.memberImageView.layer.cornerRadius = CGRectGetWidth(self.memberImageView.bounds) / 2
+    }
 }

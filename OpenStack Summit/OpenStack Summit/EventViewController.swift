@@ -26,7 +26,7 @@ extension EventViewController {
         
         // Can give feedback after event started, and if there is no feedback for that user
         
-        let eventID = NSNumber(longLong: Int64(event.id))
+        let eventID = NSNumber(longLong: Int64(event.identifier))
         
         let context = Store.shared.managedObjectContext
         
@@ -55,7 +55,7 @@ extension EventViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
         
@@ -71,7 +71,7 @@ extension EventViewController {
                 
                 let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
                 
-                feedbackVC.event = event.id
+                feedbackVC.event = event.identifier
                 
                 feedbackVC.rate = 0
                 
@@ -115,7 +115,7 @@ extension EventViewController {
             actions.append(scheduleEvent)
         }
         
-        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.id) ?? false
+        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
         if Store.shared.isLoggedIn {
             
@@ -138,7 +138,7 @@ extension EventViewController {
     
     func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {
         
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         guard eventRequestInProgress == false else { return }
         
@@ -172,23 +172,23 @@ extension EventViewController {
         
         if scheduled {
             
-            Store.shared.removeEventFromSchedule(event.summit, event: event.id, completion: completion)
+            Store.shared.removeEventFromSchedule(event.summit, event: event.identifier, completion: completion)
             
         } else {
             
-            Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
+            Store.shared.addEventToSchedule(event.summit, event: event.identifier, completion: completion)
         }
     }
     
     func toggleFavorite(for event: EventDetail) {
         
-       let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.id) ?? false
+       let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
         guard eventRequestInProgress == false else { return }
         
         eventRequestInProgress = true
         
-        Store.shared.favorite(!isFavorite, event: event.id, summit: event.summit) { [weak self] (response) in
+        Store.shared.favorite(!isFavorite, event: event.identifier, summit: event.summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
