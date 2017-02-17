@@ -79,7 +79,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-bq-gaf" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="8" width="90.5" height="30"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rka-aA-MMh">
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rka-aA-MMh">
                                                                     <rect key="frame" x="17" y="5" width="56" height="20"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="kbj-8D-cKe">
@@ -120,6 +120,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
+                                                                <action selector="favoriteAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="9fT-ND-X2n"/>
                                                                 <outlet property="actionImageView" destination="kbj-8D-cKe" id="f54-rP-3UD"/>
                                                                 <outlet property="actionLabel" destination="FAV-au-NNB" id="X9k-VY-zf5"/>
                                                             </connections>
@@ -139,7 +140,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skz-CL-l9Y" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="8" width="91" height="30"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tS-nN-NJc">
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tS-nN-NJc">
                                                                     <rect key="frame" x="10.5" y="5" width="70" height="20"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="6IU-DM-tre">
@@ -182,6 +183,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
+                                                                <action selector="confirmAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="B2t-EU-4sR"/>
                                                                 <outlet property="actionImageView" destination="6IU-DM-tre" id="6PS-d5-tdM"/>
                                                                 <outlet property="actionLabel" destination="bs1-v7-HaC" id="Xwq-Ch-JfC"/>
                                                             </connections>
@@ -201,7 +203,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czy-l4-h96" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="8" width="90.5" height="30"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twE-2u-9dn">
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twE-2u-9dn">
                                                                     <rect key="frame" x="18.5" y="5" width="54" height="20"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-e9-yWn">
@@ -242,6 +244,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
+                                                                <action selector="rateAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="ki4-XO-JAv"/>
                                                                 <outlet property="actionImageView" destination="W9o-e9-yWn" id="1mG-WB-UOQ"/>
                                                                 <outlet property="actionLabel" destination="SL0-b2-za4" id="V6Y-7K-WZv"/>
                                                             </connections>
@@ -306,7 +309,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbg-xf-535" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="105" height="30"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FgO-Fl-RHB">
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FgO-Fl-RHB">
                                                                     <rect key="frame" x="25" y="5" width="56" height="20"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="1DQ-2K-67h">
@@ -347,6 +350,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
+                                                                <action selector="favoriteAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="aM8-8f-seT"/>
                                                                 <outlet property="actionImageView" destination="1DQ-2K-67h" id="neR-tP-drJ"/>
                                                                 <outlet property="actionLabel" destination="Sv0-D6-Urw" id="ZDZ-6N-HsT"/>
                                                             </connections>
@@ -366,7 +370,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-Pa-YA2" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="105" height="30"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68i-Z6-jfe">
+                                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68i-Z6-jfe">
                                                                     <rect key="frame" x="16" y="5" width="74" height="20"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-PE-twX">
@@ -409,6 +413,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
+                                                                <action selector="confirmAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="I73-5P-pO9"/>
                                                                 <outlet property="actionImageView" destination="Yhb-PE-twX" id="jCe-Dz-tn2"/>
                                                                 <outlet property="actionLabel" destination="3M2-J7-1ZJ" id="psi-lK-zSF"/>
                                                             </connections>
@@ -850,11 +855,11 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="wAF-09-BCg" customClass="EventDetailFeedbackHeader" customModule="OpenStackSummit" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="404" height="60"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="I8l-E2-m9Q">
-                            <rect key="frame" x="261" y="32" width="20" height="20"/>
+                            <rect key="frame" x="201.5" y="32" width="20" height="20"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 REVIEWS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqD-sa-FyG">
                             <rect key="frame" x="20" y="31" width="98" height="21"/>
@@ -863,19 +868,19 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phj-lY-1hL">
-                            <rect key="frame" x="364" y="31" width="24" height="21"/>
+                            <rect key="frame" x="280" y="31" width="24" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNU-Ei-sIC" customClass="CosmosView" customModule="Cosmos">
-                            <rect key="frame" x="194" y="31" width="154" height="21"/>
+                            <rect key="frame" x="159" y="31" width="105" height="21"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" notEnabled="YES"/>
                             </accessibility>
                             <constraints>
-                                <constraint firstAttribute="width" constant="154" id="LRQ-Q8-xyR"/>
+                                <constraint firstAttribute="width" constant="105" id="LRQ-Q8-xyR"/>
                                 <constraint firstAttribute="height" constant="21" id="SIn-x2-E5K"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -898,7 +903,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="064-eo-N4M" userLabel="Separator View">
-                            <rect key="frame" x="0.0" y="59" width="404" height="1"/>
+                            <rect key="frame" x="0.0" y="59" width="320" height="1"/>
                             <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="jx2-O0-VAs"/>

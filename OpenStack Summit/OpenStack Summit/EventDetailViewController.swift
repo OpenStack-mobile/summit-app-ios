@@ -117,6 +117,27 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.playVideo(eventDetail.video!)
     }
     
+    @IBAction func favoriteAction(sender: UIButton) {
+        
+        self.toggleFavorite(for: eventDetail)
+    }
+    
+    @IBAction func confirmAction(sender: UIButton) {
+        
+        self.toggleScheduledStatus(for: eventDetail)
+    }
+    
+    @IBAction func rateAction(sender: UIButton) {
+        
+        let feedbackViewController = R.storyboard.feedback.feedbackEditViewController()!
+        
+        feedbackViewController.event = event
+        
+        feedbackViewController.rate = 0
+        
+        self.showViewController(feedbackViewController, sender: self)
+    }
+    
     @IBAction func rsvp(sender: AnyObject? = nil) {
         
         guard let url = NSURL(string: eventDetail.rsvp)
@@ -295,11 +316,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         feedBackHeader.averageRatingView.hidden = loadingAverageRating
         feedBackHeader.averageRatingLabel.text = "\(eventCache.averageFeedback)"
         feedBackHeader.averageRatingView.rating = eventCache.averageFeedback
-        feedBackHeader.averageRatingActivityIndicator.hidden = !loadingAverageRating
+        feedBackHeader.averageRatingActivityIndicator.hidden = loadingAverageRating == false
         
         if loadingFeedback {
             
             feedBackHeader.averageRatingActivityIndicator.startAnimating()
+            
         } else {
             
             feedBackHeader.averageRatingActivityIndicator.stopAnimating()
@@ -566,7 +588,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - UITextViewDelegate
     
-    // Swift Protocol extensions are not working entirely in ObjC, need to place implementation here and not in extension
+    // Swift Protocol extensions are not visible to ObjC, need to place implementation here and not in extension
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
         
         guard self.openWebURL(URL)
