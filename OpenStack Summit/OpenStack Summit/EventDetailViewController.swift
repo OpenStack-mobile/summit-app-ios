@@ -79,6 +79,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             controller.updateUI()
         }
         
+        entityController.enabled = true
+        
         self.updateUI()
     }
     
