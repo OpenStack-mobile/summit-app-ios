@@ -44,7 +44,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     private var loadingAverageRating = false
     private var feedbackList = [FeedbackDetail]()
     private var loadedAllFeedback = false
-    private var currentFeedbackPage: Page<Review>?
+    private var currentFeedbackPage: Page<Feedback>?
     
     var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
@@ -167,11 +167,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
         
         // get all reviews for this event
-        let reviews = try! context.managedObjects(ReviewManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
+        let reviews = try! context.managedObjects(FeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        let attendeeFeedback = try! context.managedObjects(MemberFeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
-        
-        shouldShowReviews = eventCache.start < Date() && (reviews.count + attendeeFeedback.count) > 0
+        shouldShowReviews = eventCache.start < Date() && reviews.isEmpty == false
         
         feedbackList = reviews.map { FeedbackDetail(managedObject: $0) }
         
@@ -281,14 +279,14 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         let feedback = feedbackList[indexPath.row]
         
-        cell.nameLabel.text = feedback.ownerName
+        cell.nameLabel.text = feedback.member.name
         cell.ratingView.rating = Double(feedback.rate)
         cell.reviewLabel.text = feedback.review
         cell.dateLabel.text = feedback.date
         
         // set member image
         let placeholderImage = R.image.genericUserAvatar()!
-        cell.memberImageView.hnk_setImageFromURL(NSURL(string: feedback.ownerPictureURL)!, placeholder: placeholderImage)
+        cell.memberImageView.hnk_setImageFromURL(NSURL(string: feedback.member.name)!, placeholder: placeholderImage)
     }
     
     private func configureAverageRatingView() {

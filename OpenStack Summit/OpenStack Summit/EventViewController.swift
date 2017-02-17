@@ -36,8 +36,7 @@ extension EventViewController {
         let predicate = NSPredicate(format: "event.id == %@ AND member == %@", eventID, member)
         
         return event.start < Date()
-            && (try! context.count(MemberFeedbackManagedObject.self, predicate: predicate)) == 0
-            && (try! context.count(ReviewManagedObject.self, predicate: predicate)) == 0
+            && (try! context.count(FeedbackManagedObject.self, predicate: predicate)) == 0
     }
     
     func canAddToCalendar() -> Bool {
