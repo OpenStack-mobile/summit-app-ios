@@ -44,6 +44,7 @@ public extension DataUpdate {
         
         case WipeData
         case MySchedule
+        case MyFavorite
         case Presentation
         case SummitEvent
         case SummitType
@@ -69,7 +70,7 @@ public extension DataUpdate {
             
             switch self {
             case .WipeData: return nil
-            case .MySchedule: return CoreSummit.EventDataUpdate.self
+            case .MySchedule, .MyFavorite: return CoreSummit.EventDataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
             case .Presentation: return CoreSummit.EventDataUpdate.self
             case .SummitEvent: return CoreSummit.EventDataUpdate.self
@@ -162,6 +163,49 @@ public extension Store {
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
                         attendeeRole.schedule.remove(eventManagedObject)
+                        
+                        try context.save()
+                    }
+                    
+                    return true
+                    
+                default: return false
+                }
+            }
+            
+            // add or remove to my favorites
+            guard dataUpdate.className != .MyFavorite else {
+                
+                // should only get for authenticated requests
+                guard let member = authenticatedMember
+                    else { return false }
+                
+                switch dataUpdate.operation {
+                    
+                case .Insert:
+                    
+                    guard let entityJSON = dataUpdate.entity,
+                        case let .JSON(jsonObject) = entityJSON,
+                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        else { return false }
+                    
+                    let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
+                    
+                    member.favoriteEvents.insert(eventManagedObject)
+                    
+                    try context.save()
+                    
+                    return true
+                    
+                case .Delete:
+                    
+                    guard let entityID = dataUpdate.entity,
+                        case let .Identifier(identifier) = entityID
+                        else { return false }
+                    
+                    if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
+                        
+                        member.favoriteEvents.remove(eventManagedObject)
                         
                         try context.save()
                     }

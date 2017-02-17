@@ -220,4 +220,20 @@ final class JSONTests: XCTestCase {
                 else { XCTFail("Could not decode from JSON"); return }
         }
     }
+    
+    func testDataUpdates10() {
+        
+        let testJSON = loadJSON("DataUpdates10")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        guard let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity
+            where dataUpdate.className == .MyFavorite
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        guard let _ = EventDataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
 }
