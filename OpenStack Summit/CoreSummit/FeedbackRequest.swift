@@ -41,7 +41,7 @@ public extension Store {
                 
                 try page.items.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success
@@ -91,9 +91,9 @@ public extension Store {
                 if let managedObject = try EventManagedObject.find(event, context: context) {
                     
                     managedObject.averageFeedback = averageFeedback
+                    
+                    try context.validateAndSave()
                 }
-                
-                try context.save()
             }
             
             // success
@@ -134,7 +134,7 @@ public extension Store {
                     
                     member.feedback.insert(managedObject)
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             

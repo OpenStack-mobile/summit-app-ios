@@ -32,7 +32,7 @@ public extension Store {
                     
                     managedObject.accepted = true
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
@@ -62,7 +62,7 @@ public extension Store {
                     
                     managedObject.accepted = false
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             
@@ -100,7 +100,7 @@ public extension Store {
                 
                 try response.page.items.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success

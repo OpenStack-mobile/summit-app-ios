@@ -65,7 +65,7 @@ extension MemberFeedback: JSONDecodable {
             let review = JSONObject[FeedbackJSONKey.note.rawValue]?.rawValue as? String,
             let createdDate = JSONObject[FeedbackJSONKey.created_date.rawValue]?.rawValue as? Int,
             let event = JSONObject[FeedbackJSONKey.event_id.rawValue]?.rawValue as? Int,
-            let member = JSONObject[FeedbackJSONKey.member_id.rawValue]?.rawValue as? Int
+            let member = JSONObject[FeedbackJSONKey.owner_id.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier
