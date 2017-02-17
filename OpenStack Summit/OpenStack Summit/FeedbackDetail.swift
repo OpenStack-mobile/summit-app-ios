@@ -17,7 +17,8 @@ public struct FeedbackDetail {
     public let rate: Int
     public let review: String
     public let date: String
-    public let owner: String
+    public let owner: Identifier
+    public let ownerName: String
     public let eventName: String
     public let event: Identifier
     
@@ -31,7 +32,8 @@ public struct FeedbackDetail {
         self.event = feedback.event.identifier
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
-        self.owner = feedback.firstName + " " + feedback.lastName
+        self.ownerName = feedback.firstName + " " + feedback.lastName
+        self.owner = Identifier(feedback.member)
     }
     
     public init(managedObject feedback: MemberFeedbackManagedObject) {
@@ -42,7 +44,8 @@ public struct FeedbackDetail {
         self.event = feedback.event.identifier
         self.eventName = feedback.event.name
         self.date = FeedbackDetail.timeAgoSinceDate(feedback.date, numericDates: false)
-        self.owner = feedback.member.firstName + " " + feedback.member.lastName
+        self.ownerName = feedback.member.firstName + " " + feedback.member.lastName
+        self.owner = feedback.member.identifier
     }
     
     // MARK: - Static Methods

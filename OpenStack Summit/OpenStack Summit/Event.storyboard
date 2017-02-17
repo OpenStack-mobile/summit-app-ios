@@ -854,7 +854,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="I8l-E2-m9Q">
-                            <rect key="frame" x="261" y="27" width="20" height="20"/>
+                            <rect key="frame" x="261" y="31.5" width="20" height="20"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 REVIEWS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqD-sa-FyG">
                             <rect key="frame" x="20" y="31" width="98" height="21"/>
@@ -869,19 +869,18 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNU-Ei-sIC" customClass="CosmosView" customModule="Cosmos">
-                            <rect key="frame" x="194" y="22" width="154" height="30"/>
+                            <rect key="frame" x="194" y="31" width="154" height="21"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" notEnabled="YES"/>
                             </accessibility>
                             <constraints>
                                 <constraint firstAttribute="width" constant="154" id="LRQ-Q8-xyR"/>
-                                <constraint firstAttribute="height" constant="30" id="SIn-x2-E5K"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="paX-hV-qgs"/>
+                                <constraint firstAttribute="height" constant="21" id="SIn-x2-E5K"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                    <real key="value" value="30"/>
+                                    <integer key="value" value="21"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
                                     <real key="value" value="1"/>

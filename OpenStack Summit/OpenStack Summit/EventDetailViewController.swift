@@ -281,13 +281,25 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         let feedback = feedbackList[indexPath.row]
         
-        cell.nameLabel.text = feedback.owner
+        cell.nameLabel.text = feedback.ownerName
         cell.ratingView.rating = Double(feedback.rate)
         cell.reviewLabel.text = feedback.review
         cell.dateLabel.text = feedback.date
         
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.separatorInset = UIEdgeInsetsZero
+        // set member image
+        let placeholderImage = R.image.genericUserAvatar()!
+        
+        let memberID = feedback.owner
+        
+        if let member = try! Member.find(memberID, context: Store.shared.managedObjectContext) {
+            
+            cell.memberImageView.hnk_setImageFromURL(NSURL(string: member.pictureURL)!, placeholder: placeholderImage)
+            
+        } else {
+            
+            // fetch member
+            
+        }
     }
     
     private func configureAverageRatingView() {
@@ -504,7 +516,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .level:
                 
-                break
+                let levelScheduleViewController = R.storyboard.schedule.levelScheduleViewController()!
+                
+                levelScheduleViewController.level = eventDetail.level
+                
+                self.showViewController(levelScheduleViewController, sender: self)
                 
             default: break
             }
@@ -527,7 +543,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
         case .details: return 0
-        case .speakers: return EventDetailHeader.height
+        case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
         case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
     }
@@ -538,7 +554,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
         case .details: return 0
-        case .speakers: return EventDetailHeader.height
+        case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
         case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
     }
@@ -550,7 +566,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         switch section {
             
         case .details: return nil
-        case .speakers: return speakersHeader
+        case .speakers: return eventDetail.speakers.isEmpty ? nil : speakersHeader
         case .feedback: return shouldShowReviews ? feedBackHeader : nil
         }
     }
