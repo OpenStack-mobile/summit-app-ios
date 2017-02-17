@@ -64,7 +64,7 @@ final class JSONTests: XCTestCase {
         
         let testJSON = loadJSON("Feedback")
         
-        guard let page = Page<Review>(JSONValue: testJSON)
+        guard let page = Page<Feedback>(JSONValue: testJSON)
             else { XCTFail("Could not decode from JSON"); return }
         
         XCTAssert(page.items.isEmpty == false, "No feedback parsed")
