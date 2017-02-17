@@ -57,7 +57,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
             items.append(url)
         }
                 
-        return ContextMenu(actions: [], shareItems: items)
+        return ContextMenu(actions: [], shareItems: items, systemActions: true)
     }
     
     var biographyHTML: String = "" {

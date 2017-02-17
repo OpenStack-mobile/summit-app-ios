@@ -49,7 +49,7 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
             return navigationController
             }))
         
-        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [])
+        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [], systemActions: false)
     }()
     
     private var unreadTeamMessagesObserver: Int?
