@@ -286,7 +286,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         // set member image
         let placeholderImage = R.image.genericUserAvatar()!
-        cell.memberImageView.hnk_setImageFromURL(NSURL(string: feedback.member.name)!, placeholder: placeholderImage)
+        cell.memberImageView.hnk_setImageFromURL(NSURL(string: feedback.member.pictureURL)!, placeholder: placeholderImage)
     }
     
     private func configureAverageRatingView() {
@@ -516,11 +516,17 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let speaker = eventDetail.speakers[indexPath.row]
             
-            let memberVC = MemberProfileViewController(profile: MemberProfileIdentifier.speaker(speaker.identifier))
+            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier.speaker(speaker.identifier))
             
-            self.showViewController(memberVC, sender: self)
+            self.showViewController(memberViewController, sender: self)
             
-        case .feedback: break
+        case .feedback:
+            
+            let feedback = feedbackList[indexPath.row]
+            
+            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier(member: feedback.member))
+            
+            self.showViewController(memberViewController, sender: self)
         }
     }
     
