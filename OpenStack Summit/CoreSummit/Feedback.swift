@@ -44,6 +44,8 @@ public struct Review: Feedback {
         public let firstName: String
         
         public let lastName: String
+        
+        public let pictureURL: String
     }
 }
 
@@ -63,6 +65,7 @@ public func == (lhs: Review.Owner, rhs: Review.Owner) -> Bool {
         && lhs.attendee == rhs.attendee
         && lhs.firstName == rhs.firstName
         && lhs.lastName == rhs.lastName
+        && lhs.pictureURL == rhs.pictureURL
 }
 
 public struct MemberFeedback: Feedback {

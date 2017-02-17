@@ -62,6 +62,7 @@
         <attribute name="code" attributeType="String" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="pictureURL" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="groups" inverseEntity="Event" syncable="YES"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="groups" inverseEntity="Member" syncable="YES"/>
@@ -298,7 +299,7 @@
         <element name="Event" positionX="-54" positionY="0" width="128" height="405"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="30"/>
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
-        <element name="Group" positionX="-9" positionY="135" width="128" height="150"/>
+        <element name="Group" positionX="-9" positionY="135" width="128" height="165"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
         <element name="Member" positionX="0" positionY="144" width="128" height="360"/>

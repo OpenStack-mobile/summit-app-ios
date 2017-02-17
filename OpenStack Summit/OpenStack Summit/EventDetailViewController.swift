@@ -288,18 +288,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         // set member image
         let placeholderImage = R.image.genericUserAvatar()!
-        
-        let memberID = feedback.owner
-        
-        if let member = try! Member.find(memberID, context: Store.shared.managedObjectContext) {
-            
-            cell.memberImageView.hnk_setImageFromURL(NSURL(string: member.pictureURL)!, placeholder: placeholderImage)
-            
-        } else {
-            
-            // fetch member
-            
-        }
+        cell.memberImageView.hnk_setImageFromURL(NSURL(string: feedback.ownerPictureURL)!, placeholder: placeholderImage)
     }
     
     private func configureAverageRatingView() {

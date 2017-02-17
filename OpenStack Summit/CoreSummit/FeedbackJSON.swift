@@ -10,7 +10,7 @@ import SwiftFoundation
 
 enum FeedbackJSONKey: String {
     
-    case id, event_id, rate, note, created_date, member_id, owner_id, owner, attendee_id, first_name, last_name
+    case id, event_id, rate, note, created_date, member_id, owner_id, owner, attendee_id, first_name, last_name, pic
 }
 
 extension Review: JSONDecodable {
@@ -43,12 +43,14 @@ extension Review.Owner: JSONDecodable {
         guard let JSONObject = JSONValue.objectValue,
             let member = JSONObject[FeedbackJSONKey.id.rawValue]?.rawValue as? Int,
             let firstName = JSONObject[FeedbackJSONKey.first_name.rawValue]?.rawValue as? String,
-            let lastName = JSONObject[FeedbackJSONKey.last_name.rawValue]?.rawValue as? String
+            let lastName = JSONObject[FeedbackJSONKey.last_name.rawValue]?.rawValue as? String,
+            let pictureURL = JSONObject[FeedbackJSONKey.pic.rawValue]?.rawValue as? String
             else { return nil }
         
         self.member = member
         self.firstName = firstName
         self.lastName = lastName
+        self.pictureURL = pictureURL
         self.attendee = JSONObject[FeedbackJSONKey.attendee_id.rawValue]?.rawValue as? Int
     }
 }

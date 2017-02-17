@@ -30,6 +30,8 @@ public final class ReviewManagedObject: FeedbackManagedObject {
     @NSManaged public var firstName: String
     
     @NSManaged public var lastName: String
+    
+    @NSManaged public var pictureURL: String
 }
 
 public final class MemberFeedbackManagedObject: FeedbackManagedObject {
@@ -52,7 +54,8 @@ extension Review: CoreDataDecodable {
         self.owner = Owner(member: Int(managedObject.member),
                            attendee: managedObject.attendee != nil ? Int(managedObject.attendee!) : nil,
                            firstName: managedObject.firstName,
-                           lastName: managedObject.lastName)
+                           lastName: managedObject.lastName,
+                           pictureURL: managedObject.pictureURL)
     }
 }
 
@@ -70,6 +73,7 @@ extension Review: CoreDataEncodable {
         managedObject.attendee = owner.attendee != nil ? NSNumber(longLong: Int64(owner.attendee!)) : nil
         managedObject.firstName = owner.firstName
         managedObject.lastName = owner.lastName
+        managedObject.pictureURL = owner.pictureURL
         
         managedObject.didCache()
         
