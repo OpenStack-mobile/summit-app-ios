@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 import CoreSummit
 
 /// Manages the current summit being displayed in the UI
@@ -58,7 +57,7 @@ private extension SummitManager {
     }
 }
 
-extension UIViewController {
+extension ViewController {
     
     var currentSummit: SummitManagedObject? {
         

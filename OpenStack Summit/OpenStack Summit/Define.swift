@@ -36,3 +36,4 @@ let AppEnvironment: Environment = {
     let AppEnvironment = Environment.Staging
     #endif
 #endif
+

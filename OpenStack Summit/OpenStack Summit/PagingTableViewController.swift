@@ -6,17 +6,22 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
+    import UIKit
+#elseif os(OSX)
+    import AppKit
+#endif
+
 import Foundation
-import UIKit
 import CoreSummit
 
-protocol PagingTableViewController: class, UITableViewDataSource, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+protocol PagingTableViewController: class, TableViewDataSource, ShowActivityIndicatorProtocol, MessageEnabledViewController {
     
     associatedtype Item
     
     var pageController: PageController<Item> { get }
     
-    var tableView: UITableView! { get }
+    var tableView: TableView! { get }
     
     #if os(iOS)
     var refreshControl: UIRefreshControl? { get }
