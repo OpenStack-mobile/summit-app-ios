@@ -9,18 +9,21 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    func applicationDidFinishLaunching(notification: NSNotification) {
         // Insert code here to initialize your application
+        
+        // print app info
+        print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
+        print("Using Environment: \(AppEnvironment.rawValue)")
+        
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
+    func applicationWillTerminate(notification: NSNotification) {
         // Insert code here to tear down your application
+        
+        
     }
-
-
 }
 
