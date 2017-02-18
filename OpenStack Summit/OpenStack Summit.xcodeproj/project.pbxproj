@@ -439,6 +439,182 @@
 		6E74FB021D7CA7030018633D /* NSDateComponents+MTDates.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */; };
 		6E74FB031D7CAC270018633D /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752631D18B77300BC294D /* ErrorAlert.swift */; };
 		6E74FB041D7CAFDB0018633D /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
+		6E7557A51E58C48C003B6844 /* TrackGroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FE51DC9A5B90015C588 /* TrackGroupManagedObject.swift */; };
+		6E7557A61E58C48C003B6844 /* GroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE91E36A3B800059E94 /* GroupJSON.swift */; };
+		6E7557A71E58C48C003B6844 /* NonConfirmedAttendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52B1D10675C008CBD0C /* NonConfirmedAttendee.swift */; };
+		6E7557A81E58C48C003B6844 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51D1D10675C008CBD0C /* Event.swift */; };
+		6E7557A91E58C48C003B6844 /* VenueRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55B1D10675D008CBD0C /* VenueRoom.swift */; };
+		6E7557AA1E58C48C003B6844 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED0381E3BB9FA00795B3D /* Notification.swift */; };
+		6E7557AB1E58C48C003B6844 /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEEBF81D7945D200965631 /* CollectionType.swift */; };
+		6E7557AC1E58C48C003B6844 /* VenueManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8721DC9233F00D31A99 /* VenueManagedObject.swift */; };
+		6E7557AD1E58C48C003B6844 /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
+		6E7557AE1E58C48C003B6844 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
+		6E7557AF1E58C48C003B6844 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2537C91D199D0C003E3400 /* Login.swift */; };
+		6E7557B01E58C48C003B6844 /* DataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2529211D5924D300173B1F /* DataUpdateJSON.swift */; };
+		6E7557B11E58C48C003B6844 /* ImageManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F87A1DC928D700D31A99 /* ImageManagedObject.swift */; };
+		6E7557B21E58C48C003B6844 /* TagManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FE91DC9B0D40015C588 /* TagManagedObject.swift */; };
+		6E7557B31E58C48C003B6844 /* FaultJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC48F61E1309790077806B /* FaultJSON.swift */; };
+		6E7557B41E58C48C003B6844 /* GroupEventDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B501E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift */; };
+		6E7557B51E58C48C003B6844 /* ImageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5241D10675C008CBD0C /* ImageJSON.swift */; };
+		6E7557B61E58C48C003B6844 /* EventTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5201D10675C008CBD0C /* EventTypeJSON.swift */; };
+		6E7557B71E58C48C003B6844 /* NonConfirmedAttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52C1D10675C008CBD0C /* NonConfirmedAttendeeJSON.swift */; };
+		6E7557B81E58C48C003B6844 /* CoreDataDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8641DC8D1D300D31A99 /* CoreDataDecodable.swift */; };
+		6E7557B91E58C48C003B6844 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5491D10675C008CBD0C /* Attendee.swift */; };
+		6E7557BA1E58C48C003B6844 /* EventScheduleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E681D2322E70087057A /* EventScheduleRequest.swift */; };
+		6E7557BB1E58C48C003B6844 /* ErrorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51C1D10675C008CBD0C /* ErrorValue.swift */; };
+		6E7557BC1E58C48C003B6844 /* PresentationDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A351D67753D00189992 /* PresentationDataUpdate.swift */; };
+		6E7557BD1E58C48C003B6844 /* VenueRoomDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AADAB1DBE563A0057888E /* VenueRoomDataUpdateJSON.swift */; };
+		6E7557BE1E58C48C003B6844 /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8621DC8D1D300D31A99 /* CoreDataExtensions.swift */; };
+		6E7557BF1E58C48C003B6844 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51A1D10675C008CBD0C /* Company.swift */; };
+		6E7557C01E58C48C003B6844 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
+		6E7557C11E58C48C003B6844 /* TeamInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */; };
+		6E7557C21E58C48C003B6844 /* VenueRoomManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8761DC9234A00D31A99 /* VenueRoomManagedObject.swift */; };
+		6E7557C31E58C48C003B6844 /* SummitDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D05C41D8CBBF200451639 /* SummitDataUpdateJSON.swift */; };
+		6E7557C41E58C48C003B6844 /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5551D10675D008CBD0C /* TrackGroup.swift */; };
+		6E7557C51E58C48C003B6844 /* PresentationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FD11DC98E330015C588 /* PresentationManagedObject.swift */; };
+		6E7557C61E58C48C003B6844 /* ListMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC49061E1398F10077806B /* ListMembersRequest.swift */; };
+		6E7557C71E58C48C003B6844 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8C1DA2E254005E486B /* Page.swift */; };
+		6E7557C81E58C48C003B6844 /* EventTypeManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F86E1DC920B800D31A99 /* EventTypeManagedObject.swift */; };
+		6E7557C91E58C48C003B6844 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54E1D10675D008CBD0C /* Tag.swift */; };
+		6E7557CA1E58C48C003B6844 /* TeamMemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC48FE1E13902A0077806B /* TeamMemberJSON.swift */; };
+		6E7557CB1E58C48C003B6844 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFE11E35CBF100059E94 /* Group.swift */; };
+		6E7557CC1E58C48C003B6844 /* SpeakerManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FD91DC9944E0015C588 /* SpeakerManagedObject.swift */; };
+		6E7557CD1E58C48C003B6844 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
+		6E7557CE1E58C48C003B6844 /* MemberJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5291D10675C008CBD0C /* MemberJSON.swift */; };
+		6E7557CF1E58C48C003B6844 /* SummitsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61796A1DE7920E00EED286 /* SummitsRequest.swift */; };
+		6E7557D01E58C48C003B6844 /* EventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A331D6771CF00189992 /* EventDataUpdate.swift */; };
+		6E7557D11E58C48C003B6844 /* VenueFloorJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */; };
+		6E7557D21E58C48C003B6844 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5301D10675C008CBD0C /* Speaker.swift */; };
+		6E7557D31E58C48C003B6844 /* Summit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5481D10675C008CBD0C /* Summit.swift */; };
+		6E7557D41E58C48C003B6844 /* VideoManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FED1DC9B0F50015C588 /* VideoManagedObject.swift */; };
+		6E7557D51E58C48C003B6844 /* TicketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5501D10675D008CBD0C /* TicketType.swift */; };
+		6E7557D61E58C48C003B6844 /* SummitTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54D1D10675C008CBD0C /* SummitTypeJSON.swift */; };
+		6E7557D71E58C48C003B6844 /* TeamRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E982E3A1E158DC800ECB76E /* TeamRequest.swift */; };
+		6E7557D81E58C48C003B6844 /* VenueRoomJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55C1D10675D008CBD0C /* VenueRoomJSON.swift */; };
+		6E7557D91E58C48C003B6844 /* SummitDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */; };
+		6E7557DA1E58C48C003B6844 /* CompanyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51B1D10675C008CBD0C /* CompanyJSON.swift */; };
+		6E7557DB1E58C48C003B6844 /* TeamMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D4D021E12D45400D542CD /* TeamMessage.swift */; };
+		6E7557DC1E58C48C003B6844 /* TrackGroupJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5561D10675D008CBD0C /* TrackGroupJSON.swift */; };
+		6E7557DD1E58C48C003B6844 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E661D2320610087057A /* Reachability.swift */; };
+		6E7557DE1E58C48C003B6844 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F85E1DC8CE1600D31A99 /* Entity.swift */; };
+		6E7557DF1E58C48C003B6844 /* VenueFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1CE1051DA43DCF0064B3B1 /* VenueFloor.swift */; };
+		6E7557E01E58C48C003B6844 /* EventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A381D6775C700189992 /* EventDataUpdateJSON.swift */; };
+		6E7557E11E58C48C003B6844 /* TrackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5571D10675D008CBD0C /* TrackJSON.swift */; };
+		6E7557E21E58C48C003B6844 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
+		6E7557E31E58C48C003B6844 /* TeamInvitationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDEE1E1AF9F50048045D /* TeamInvitationJSON.swift */; };
+		6E7557E41E58C48C003B6844 /* FeedbackJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5221D10675C008CBD0C /* FeedbackJSON.swift */; };
+		6E7557E51E58C48C003B6844 /* Fault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC48F21E12FA1A0077806B /* Fault.swift */; };
+		6E7557E61E58C48C003B6844 /* TeamMemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E982E3E1E15A92F00ECB76E /* TeamMemberRequest.swift */; };
+		6E7557E71E58C48C003B6844 /* AttendeeManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF51DC9D2FE0015C588 /* AttendeeManagedObject.swift */; };
+		6E7557E81E58C48C003B6844 /* TeamMemberManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D4D061E12DB3400D542CD /* TeamMemberManagedObject.swift */; };
+		6E7557E91E58C48C003B6844 /* TeamMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D4CFE1E12D44A00D542CD /* TeamMember.swift */; };
+		6E7557EA1E58C48C003B6844 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5271D10675C008CBD0C /* LocationJSON.swift */; };
+		6E7557EB1E58C48C003B6844 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCF1D4A5E0F00CDC935 /* Configuration.swift */; };
+		6E7557EC1E58C48C003B6844 /* GroupManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BCFED1E379F4400059E94 /* GroupManagedObject.swift */; };
+		6E7557ED1E58C48C003B6844 /* CompanyManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8561DC8C7D600D31A99 /* CompanyManagedObject.swift */; };
+		6E7557EE1E58C48C003B6844 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51F1D10675C008CBD0C /* EventType.swift */; };
+		6E7557EF1E58C48C003B6844 /* CoreDataEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8631DC8D1D300D31A99 /* CoreDataEncodable.swift */; };
+		6E7557F01E58C48C003B6844 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5591D10675D008CBD0C /* Venue.swift */; };
+		6E7557F11E58C48C003B6844 /* VenueRoomDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AADAD1DBE56CB0057888E /* VenueRoomDataUpdate.swift */; };
+		6E7557F21E58C48C003B6844 /* TicketTypeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5511D10675D008CBD0C /* TicketTypeJSON.swift */; };
+		6E7557F31E58C48C003B6844 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
+		6E7557F41E58C48C003B6844 /* AttendeesForTicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */; };
+		6E7557F51E58C48C003B6844 /* SummitJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54B1D10675C008CBD0C /* SummitJSON.swift */; };
+		6E7557F61E58C48C003B6844 /* SummitTypeManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FDD1DC9A5730015C588 /* SummitTypeManagedObject.swift */; };
+		6E7557F71E58C48C003B6844 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
+		6E7557F81E58C48C003B6844 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E99B8A81DC7D68F009CE28D /* Model.xcdatamodeld */; };
+		6E7557F91E58C48C003B6844 /* WirelessNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F11E48E0E50025FE58 /* WirelessNetwork.swift */; };
+		6E7557FA1E58C48C003B6844 /* WebConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */; };
+		6E7557FB1E58C48C003B6844 /* WirelessNetworkJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220F61E48E1BD0025FE58 /* WirelessNetworkJSON.swift */; };
+		6E7557FC1E58C48C003B6844 /* VenueRoomDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A831DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift */; };
+		6E7557FD1E58C48C003B6844 /* TicketTypeManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FE11DC9A5960015C588 /* TicketTypeManagedObject.swift */; };
+		6E7557FE1E58C48C003B6844 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52E1D10675C008CBD0C /* Presentation.swift */; };
+		6E7557FF1E58C48C003B6844 /* GroupEventDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B4C1E39C73000FBF910 /* GroupEventDataUpdateJSON.swift */; };
+		6E7558001E58C48C003B6844 /* TeamMessageManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC48EE1E12F7D50077806B /* TeamMessageManagedObject.swift */; };
+		6E7558011E58C48C003B6844 /* GroupEventDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E919B481E39C1B700FBF910 /* GroupEventDataUpdate.swift */; };
+		6E7558021E58C48C003B6844 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D10981DF87F3B00A0BBDC /* Team.swift */; };
+		6E7558031E58C48C003B6844 /* TeamInvitationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDEA1E1AB1A20048045D /* TeamInvitationManagedObject.swift */; };
+		6E7558041E58C48C003B6844 /* SpeakerJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5311D10675C008CBD0C /* SpeakerJSON.swift */; };
+		6E7558051E58C48C003B6844 /* PageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8E1DA2E405005E486B /* PageJSON.swift */; };
+		6E7558061E58C48C003B6844 /* SummitDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */; };
+		6E7558071E58C48C003B6844 /* VenueJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A55A1D10675D008CBD0C /* VenueJSON.swift */; };
+		6E7558081E58C48C003B6844 /* MemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */; };
+		6E7558091E58C48C003B6844 /* TeamManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E959E181DF61557002981FD /* TeamManagedObject.swift */; };
+		6E75580A1E58C48C003B6844 /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
+		6E75580B1E58C48C003B6844 /* TeamJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC48FA1E138EB20077806B /* TeamJSON.swift */; };
+		6E75580C1E58C48C003B6844 /* TrackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FD51DC994210015C588 /* TrackManagedObject.swift */; };
+		6E75580D1E58C48C003B6844 /* VenueFloorManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F87E1DC9296100D31A99 /* VenueFloorManagedObject.swift */; };
+		6E75580E1E58C48C003B6844 /* Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5581D10675D008CBD0C /* Unique.swift */; };
+		6E75580F1E58C48C003B6844 /* FavoriteEventRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1C8ACD1E4EBE6400BE8BC9 /* FavoriteEventRequest.swift */; };
+		6E7558101E58C48C003B6844 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57DB6F1D11BE8B00F5574C /* Define.swift */; };
+		6E7558111E58C48C003B6844 /* SelectAttendeeFromOrderListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A61041D5279EB001E9C58 /* SelectAttendeeFromOrderListRequest.swift */; };
+		6E7558121E58C48C003B6844 /* FeedbackManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF91DC9D4320015C588 /* FeedbackManagedObject.swift */; };
+		6E7558131E58C48C003B6844 /* MemberManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D9FF11DC9CC820015C588 /* MemberManagedObject.swift */; };
+		6E7558141E58C48C003B6844 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
+		6E7558151E58C48C003B6844 /* TeamMessageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC49021E1394FE0077806B /* TeamMessageJSON.swift */; };
+		6E7558161E58C48C003B6844 /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E488F5C1DD1107500EA6B0F /* EntityController.swift */; };
+		6E7558171E58C48C003B6844 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52A1D10675C008CBD0C /* Named.swift */; };
+		6E7558181E58C48C003B6844 /* TeamInvitationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDF21E1C073E0048045D /* TeamInvitationRequest.swift */; };
+		6E7558191E58C48C003B6844 /* SummitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54C1D10675C008CBD0C /* SummitType.swift */; };
+		6E75581A1E58C48C003B6844 /* EventManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F85A1DC8CAEC00D31A99 /* EventManagedObject.swift */; };
+		6E75581B1E58C48C003B6844 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52D1D10675C008CBD0C /* Person.swift */; };
+		6E75581C1E58C48C003B6844 /* TagJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54F1D10675D008CBD0C /* TagJSON.swift */; };
+		6E75581D1E58C48C003B6844 /* TimeZoneJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5531D10675D008CBD0C /* TimeZoneJSON.swift */; };
+		6E75581E1E58C48C003B6844 /* WirelessNetworkManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8220FB1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift */; };
+		6E75581F1E58C48C003B6844 /* EventDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A771DCB1CA000B703CE /* EventDataUpdateManagedObject.swift */; };
+		6E7558201E58C48C003B6844 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5211D10675C008CBD0C /* Feedback.swift */; };
+		6E7558211E58C48C003B6844 /* PresentationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A52F1D10675C008CBD0C /* PresentationJSON.swift */; };
+		6E7558221E58C48C003B6844 /* AttendeeJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A54A1D10675C008CBD0C /* AttendeeJSON.swift */; };
+		6E7558231E58C48C003B6844 /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
+		6E7558241E58C48C003B6844 /* TrackGroupDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4461D9AED1800E3302A /* TrackGroupDataUpdateJSON.swift */; };
+		6E7558251E58C48C003B6844 /* TeamMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E982E421E15A93800ECB76E /* TeamMessageRequest.swift */; };
+		6E7558261E58C48C003B6844 /* TrackGroupDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93D4421D9AECA500E3302A /* TrackGroupDataUpdate.swift */; };
+		6E7558271E58C48C003B6844 /* TrackGroupDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A7B1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift */; };
+		6E7558281E58C48C003B6844 /* FeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E066D9C1D356A2F005A8D2D /* FeedbackRequest.swift */; };
+		6E7558291E58C48C003B6844 /* PresentationDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A7F1DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift */; };
+		6E75582A1E58C48C003B6844 /* NotificationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEED03C1E3BCB5E00795B3D /* NotificationManagedObject.swift */; };
+		6E75582B1E58C48C003B6844 /* EventJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A51E1D10675C008CBD0C /* EventJSON.swift */; };
+		6E75582C1E58C48C003B6844 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF38D1D5BB22700B75B28 /* DataUpdatePoller.swift */; };
+		6E75582D1E58C48C003B6844 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5261D10675C008CBD0C /* Location.swift */; };
+		6E75582E1E58C48C003B6844 /* DataUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291D1D58E6F200173B1F /* DataUpdateRequest.swift */; };
+		6E75582F1E58C48C003B6844 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
+		6E7558301E58C48C003B6844 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E087DCD1D4A5DE900CDC935 /* Environment.swift */; };
+		6E7558311E58C48C003B6844 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
+		6E7558321E58C48C003B6844 /* SummitManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4F8521DC8C68700D31A99 /* SummitManagedObject.swift */; };
+		6E7558331E58C48C003B6844 /* PresentationDataUpdateJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E570A3A1D6775D200189992 /* PresentationDataUpdateJSON.swift */; };
+		6E7558341E58C48C003B6844 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5521D10675D008CBD0C /* TimeZone.swift */; };
+		6E7558351E58C48C003B6844 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5541D10675D008CBD0C /* Track.swift */; };
+		6E7558361E58C48C003B6844 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5231D10675C008CBD0C /* Image.swift */; };
+		6E7558381E58C48C003B6844 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
+		6E7558391E58C48C003B6844 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
+		6E75583B1E58C48C003B6844 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E7558491E58C4A7003B6844 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* CoreDataTests.swift */; };
+		6E75584A1E58C4A7003B6844 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
+		6E75584B1E58C4A7003B6844 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A50F1D10672D008CBD0C /* JSONTests.swift */; };
+		6E75584C1E58C4A7003B6844 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
+		6E75584E1E58C4A7003B6844 /* CoreSummit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E10A4F11D1066E9008CBD0C /* CoreSummit.framework */; };
+		6E7558501E58C4A7003B6844 /* Member1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E020FB91D6B55D200DF2BCD /* Member1.json */; };
+		6E7558511E58C4A7003B6844 /* DataUpdates6.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */; };
+		6E7558521E58C4A7003B6844 /* DataUpdates9.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E82210D1E48E9D70025FE58 /* DataUpdates9.json */; };
+		6E7558531E58C4A7003B6844 /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
+		6E7558541E58C4A7003B6844 /* Summit7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E10A5171D106741008CBD0C /* Summit7.json */; };
+		6E7558551E58C4A7003B6844 /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
+		6E7558561E58C4A7003B6844 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
+		6E7558571E58C4A7003B6844 /* DataUpdates10.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4885DB1E563807002C87D2 /* DataUpdates10.json */; };
+		6E7558581E58C4A7003B6844 /* Member3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E931FE81E5164ED00762B74 /* Member3.json */; };
+		6E7558591E58C4A7003B6844 /* ListMembers.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221091E48E72C0025FE58 /* ListMembers.json */; };
+		6E75585A1E58C4A7003B6844 /* Member2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E586FBE1DC29083001DE605 /* Member2.json */; };
+		6E75585B1E58C4A7003B6844 /* Summit6.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221051E48E6880025FE58 /* Summit6.json */; };
+		6E75585C1E58C4A7003B6844 /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
+		6E75585D1E58C4A7003B6844 /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
+		6E75585E1E58C4A7003B6844 /* Summit22.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E8221001E48E67A0025FE58 /* Summit22.json */; };
+		6E75585F1E58C4A7003B6844 /* DataUpdates7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */; };
+		6E7558601E58C4A7003B6844 /* DataUpdates5.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E35086E1D9AE4900055801C /* DataUpdates5.json */; };
+		6E7558611E58C4A7003B6844 /* DataUpdates8.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E919B541E39CA4300FBF910 /* DataUpdates8.json */; };
+		6E7558701E58C62B003B6844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75586F1E58C62B003B6844 /* AppDelegate.swift */; };
+		6E7558721E58C62B003B6844 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7558711E58C62B003B6844 /* ViewController.swift */; };
+		6E7558741E58C62B003B6844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E7558731E58C62B003B6844 /* Assets.xcassets */; };
+		6E7558771E58C62B003B6844 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7558751E58C62B003B6844 /* Main.storyboard */; };
 		6E77C70D1DBE5C6B008BF684 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77C70C1DBE5C6B008BF684 /* ComplicationController.swift */; };
 		6E7847F11DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
 		6E7847F21DC9224700B8AD05 /* LocationManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7847F01DC9224700B8AD05 /* LocationManagedObject.swift */; };
@@ -837,6 +1013,13 @@
 			remoteGlobalIDString = 6EF12C601D149C2700814AD0;
 			remoteInfo = R.swift;
 		};
+		6E7558471E58C4A7003B6844 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E10A4F01D1066E9008CBD0C;
+			remoteInfo = CoreSummit;
+		};
 		6ECBD1DE1D7CB092004BF1A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -1153,6 +1336,14 @@
 		6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.m"; sourceTree = "<group>"; };
 		6E74FAFB1D7C9EBC0018633D /* NSDateComponents+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateComponents+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.h"; sourceTree = "<group>"; };
 		6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateComponents+MTDates.m"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDateComponents+MTDates.m"; sourceTree = "<group>"; };
+		6E7558431E58C48C003B6844 /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E7558671E58C4A7003B6844 /* CoreSummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreSummitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E75586D1E58C62B003B6844 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E75586F1E58C62B003B6844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E7558711E58C62B003B6844 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6E7558731E58C62B003B6844 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E7558761E58C62B003B6844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E7558781E58C62B003B6844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E761D031D8CBA53009A2AAC /* SummitDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdate.swift; sourceTree = "<group>"; };
 		6E779E4C1D2581AE00A184A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.h; sourceTree = "<group>"; };
 		6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = ../../Carthage/Checkouts/SWRevealViewController/SWRevealController/SWRevealViewController.m; sourceTree = "<group>"; };
@@ -1444,6 +1635,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E7558371E58C48C003B6844 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7558381E58C48C003B6844 /* Crashlytics.framework in Frameworks */,
+				6E7558391E58C48C003B6844 /* Fabric.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E75584D1E58C4A7003B6844 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E75584E1E58C4A7003B6844 /* CoreSummit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E75586A1E58C62B003B6844 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9F28EC1D7C903E002B7C7A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1502,6 +1717,7 @@
 				6E0B5F5F1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */,
 				6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */,
+				6E75586E1E58C62B003B6844 /* OpenStackSummit macOS */,
 				6E65D2051E4F78D100F8F582 /* Frameworks */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
@@ -1521,6 +1737,9 @@
 				6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */,
 				6E9F28EF1D7C903E002B7C7A /* OpenStackSummitTV.app */,
 				6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */,
+				6E7558431E58C48C003B6844 /* CoreSummit.framework */,
+				6E7558671E58C4A7003B6844 /* CoreSummitTests.xctest */,
+				6E75586D1E58C62B003B6844 /* OpenStackSummit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1977,6 +2196,18 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		6E75586E1E58C62B003B6844 /* OpenStackSummit macOS */ = {
+			isa = PBXGroup;
+			children = (
+				6E75586F1E58C62B003B6844 /* AppDelegate.swift */,
+				6E7558711E58C62B003B6844 /* ViewController.swift */,
+				6E7558731E58C62B003B6844 /* Assets.xcassets */,
+				6E7558751E58C62B003B6844 /* Main.storyboard */,
+				6E7558781E58C62B003B6844 /* Info.plist */,
+			);
+			path = "OpenStackSummit macOS";
+			sourceTree = "<group>";
+		};
 		6E7E18F21D495D90009549BA /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -2299,6 +2530,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E75583A1E58C48C003B6844 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E75583B1E58C48C003B6844 /* CoreSummit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -2496,6 +2735,60 @@
 			productReference = 6E65D2041E4F78D100F8F582 /* OpenStackSummitTVService.appex */;
 			productType = "com.apple.product-type.tv-app-extension";
 		};
+		6E7557A31E58C48C003B6844 /* CoreSummit macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E75583E1E58C48C003B6844 /* Build configuration list for PBXNativeTarget "CoreSummit macOS" */;
+			buildPhases = (
+				6E7557A41E58C48C003B6844 /* Sources */,
+				6E7558371E58C48C003B6844 /* Frameworks */,
+				6E75583A1E58C48C003B6844 /* Headers */,
+				6E75583C1E58C48C003B6844 /* Resources */,
+				6E75583D1E58C48C003B6844 /* Copy Mocked Data */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreSummit macOS";
+			productName = CoreSummit;
+			productReference = 6E7558431E58C48C003B6844 /* CoreSummit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6E7558451E58C4A7003B6844 /* CoreSummitTests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E7558621E58C4A7003B6844 /* Build configuration list for PBXNativeTarget "CoreSummitTests macOS" */;
+			buildPhases = (
+				6E7558481E58C4A7003B6844 /* Sources */,
+				6E75584D1E58C4A7003B6844 /* Frameworks */,
+				6E75584F1E58C4A7003B6844 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E7558461E58C4A7003B6844 /* PBXTargetDependency */,
+			);
+			name = "CoreSummitTests macOS";
+			productName = CoreSummitTests;
+			productReference = 6E7558671E58C4A7003B6844 /* CoreSummitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6E75586C1E58C62B003B6844 /* OpenStackSummit macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E7558791E58C62B003B6844 /* Build configuration list for PBXNativeTarget "OpenStackSummit macOS" */;
+			buildPhases = (
+				6E7558691E58C62B003B6844 /* Sources */,
+				6E75586A1E58C62B003B6844 /* Frameworks */,
+				6E75586B1E58C62B003B6844 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenStackSummit macOS";
+			productName = Summit;
+			productReference = 6E75586D1E58C62B003B6844 /* OpenStackSummit.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */;
@@ -2570,6 +2863,11 @@
 							};
 						};
 					};
+					6E75586C1E58C62B003B6844 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 775U6X6R5M;
+						ProvisioningStyle = Automatic;
+					};
 					6E9F28EE1D7C903E002B7C7A = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 775U6X6R5M;
@@ -2600,6 +2898,8 @@
 			targets = (
 				6E104D2D1D1061AC00541E84 /* OpenStackSummit */,
 				6EF12C601D149C2700814AD0 /* R.swift */,
+				6E7557A31E58C48C003B6844 /* CoreSummit macOS */,
+				6E7558451E58C4A7003B6844 /* CoreSummitTests macOS */,
 				6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */,
 				6E10A4F91D1066E9008CBD0C /* CoreSummitTests iOS */,
 				6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */,
@@ -2610,6 +2910,7 @@
 				6E0B5F5A1D77D4DF0005F6CE /* OpenStackSummitWatch Extension */,
 				6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */,
 				6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */,
+				6E75586C1E58C62B003B6844 /* OpenStackSummit macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -2767,6 +3068,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E75583C1E58C48C003B6844 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E75584F1E58C4A7003B6844 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7558501E58C4A7003B6844 /* Member1.json in Resources */,
+				6E7558511E58C4A7003B6844 /* DataUpdates6.json in Resources */,
+				6E7558521E58C4A7003B6844 /* DataUpdates9.json in Resources */,
+				6E7558531E58C4A7003B6844 /* AllSummits.json in Resources */,
+				6E7558541E58C4A7003B6844 /* Summit7.json in Resources */,
+				6E7558551E58C4A7003B6844 /* DataUpdates3.json in Resources */,
+				6E7558561E58C4A7003B6844 /* DataUpdates4.json in Resources */,
+				6E7558571E58C4A7003B6844 /* DataUpdates10.json in Resources */,
+				6E7558581E58C4A7003B6844 /* Member3.json in Resources */,
+				6E7558591E58C4A7003B6844 /* ListMembers.json in Resources */,
+				6E75585A1E58C4A7003B6844 /* Member2.json in Resources */,
+				6E75585B1E58C4A7003B6844 /* Summit6.json in Resources */,
+				6E75585C1E58C4A7003B6844 /* DataUpdates2.json in Resources */,
+				6E75585D1E58C4A7003B6844 /* DataUpdates1.json in Resources */,
+				6E75585E1E58C4A7003B6844 /* Summit22.json in Resources */,
+				6E75585F1E58C4A7003B6844 /* DataUpdates7.json in Resources */,
+				6E7558601E58C4A7003B6844 /* DataUpdates5.json in Resources */,
+				6E7558611E58C4A7003B6844 /* DataUpdates8.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E75586B1E58C62B003B6844 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7558741E58C62B003B6844 /* Assets.xcassets in Resources */,
+				6E7558771E58C62B003B6844 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9F28ED1D7C903E002B7C7A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2861,6 +3203,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi";
+		};
+		6E75583D1E58C48C003B6844 /* Copy Mocked Data */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Mocked Data";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Mocked\" ]; then\ncp -r \"${PROJECT_DIR}/CoreSummitTests/JSON/Summit7.json\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\nfi";
 		};
 		6E9392711DB48C1F0021905B /* Copy Mocked Data */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3623,6 +3979,179 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E7557A41E58C48C003B6844 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7557A51E58C48C003B6844 /* TrackGroupManagedObject.swift in Sources */,
+				6E7557A61E58C48C003B6844 /* GroupJSON.swift in Sources */,
+				6E7557A71E58C48C003B6844 /* NonConfirmedAttendee.swift in Sources */,
+				6E7557A81E58C48C003B6844 /* Event.swift in Sources */,
+				6E7557A91E58C48C003B6844 /* VenueRoom.swift in Sources */,
+				6E7557AA1E58C48C003B6844 /* Notification.swift in Sources */,
+				6E7557AB1E58C48C003B6844 /* CollectionType.swift in Sources */,
+				6E7557AC1E58C48C003B6844 /* VenueManagedObject.swift in Sources */,
+				6E7557AD1E58C48C003B6844 /* SummitRequest.swift in Sources */,
+				6E7557AE1E58C48C003B6844 /* Session.swift in Sources */,
+				6E7557AF1E58C48C003B6844 /* Login.swift in Sources */,
+				6E7557B01E58C48C003B6844 /* DataUpdateJSON.swift in Sources */,
+				6E7557B11E58C48C003B6844 /* ImageManagedObject.swift in Sources */,
+				6E7557B21E58C48C003B6844 /* TagManagedObject.swift in Sources */,
+				6E7557B31E58C48C003B6844 /* FaultJSON.swift in Sources */,
+				6E7557B41E58C48C003B6844 /* GroupEventDataUpdateManagedObject.swift in Sources */,
+				6E7557B51E58C48C003B6844 /* ImageJSON.swift in Sources */,
+				6E7557B61E58C48C003B6844 /* EventTypeJSON.swift in Sources */,
+				6E7557B71E58C48C003B6844 /* NonConfirmedAttendeeJSON.swift in Sources */,
+				6E7557B81E58C48C003B6844 /* CoreDataDecodable.swift in Sources */,
+				6E7557B91E58C48C003B6844 /* Attendee.swift in Sources */,
+				6E7557BA1E58C48C003B6844 /* EventScheduleRequest.swift in Sources */,
+				6E7557BB1E58C48C003B6844 /* ErrorValue.swift in Sources */,
+				6E7557BC1E58C48C003B6844 /* PresentationDataUpdate.swift in Sources */,
+				6E7557BD1E58C48C003B6844 /* VenueRoomDataUpdateJSON.swift in Sources */,
+				6E7557BE1E58C48C003B6844 /* CoreDataExtensions.swift in Sources */,
+				6E7557BF1E58C48C003B6844 /* Company.swift in Sources */,
+				6E7557C01E58C48C003B6844 /* Staging.swift in Sources */,
+				6E7557C11E58C48C003B6844 /* TeamInvitation.swift in Sources */,
+				6E7557C21E58C48C003B6844 /* VenueRoomManagedObject.swift in Sources */,
+				6E7557C31E58C48C003B6844 /* SummitDataUpdateJSON.swift in Sources */,
+				6E7557C41E58C48C003B6844 /* TrackGroup.swift in Sources */,
+				6E7557C51E58C48C003B6844 /* PresentationManagedObject.swift in Sources */,
+				6E7557C61E58C48C003B6844 /* ListMembersRequest.swift in Sources */,
+				6E7557C71E58C48C003B6844 /* Page.swift in Sources */,
+				6E7557C81E58C48C003B6844 /* EventTypeManagedObject.swift in Sources */,
+				6E7557C91E58C48C003B6844 /* Tag.swift in Sources */,
+				6E7557CA1E58C48C003B6844 /* TeamMemberJSON.swift in Sources */,
+				6E7557CB1E58C48C003B6844 /* Group.swift in Sources */,
+				6E7557CC1E58C48C003B6844 /* SpeakerManagedObject.swift in Sources */,
+				6E7557CD1E58C48C003B6844 /* Member.swift in Sources */,
+				6E7557CE1E58C48C003B6844 /* MemberJSON.swift in Sources */,
+				6E7557CF1E58C48C003B6844 /* SummitsRequest.swift in Sources */,
+				6E7557D01E58C48C003B6844 /* EventDataUpdate.swift in Sources */,
+				6E7557D11E58C48C003B6844 /* VenueFloorJSON.swift in Sources */,
+				6E7557D21E58C48C003B6844 /* Speaker.swift in Sources */,
+				6E7557D31E58C48C003B6844 /* Summit.swift in Sources */,
+				6E7557D41E58C48C003B6844 /* VideoManagedObject.swift in Sources */,
+				6E7557D51E58C48C003B6844 /* TicketType.swift in Sources */,
+				6E7557D61E58C48C003B6844 /* SummitTypeJSON.swift in Sources */,
+				6E7557D71E58C48C003B6844 /* TeamRequest.swift in Sources */,
+				6E7557D81E58C48C003B6844 /* VenueRoomJSON.swift in Sources */,
+				6E7557D91E58C48C003B6844 /* SummitDataUpdateManagedObject.swift in Sources */,
+				6E7557DA1E58C48C003B6844 /* CompanyJSON.swift in Sources */,
+				6E7557DB1E58C48C003B6844 /* TeamMessage.swift in Sources */,
+				6E7557DC1E58C48C003B6844 /* TrackGroupJSON.swift in Sources */,
+				6E7557DD1E58C48C003B6844 /* Reachability.swift in Sources */,
+				6E7557DE1E58C48C003B6844 /* Entity.swift in Sources */,
+				6E7557DF1E58C48C003B6844 /* VenueFloor.swift in Sources */,
+				6E7557E01E58C48C003B6844 /* EventDataUpdateJSON.swift in Sources */,
+				6E7557E11E58C48C003B6844 /* TrackJSON.swift in Sources */,
+				6E7557E21E58C48C003B6844 /* String.swift in Sources */,
+				6E7557E31E58C48C003B6844 /* TeamInvitationJSON.swift in Sources */,
+				6E7557E41E58C48C003B6844 /* FeedbackJSON.swift in Sources */,
+				6E7557E51E58C48C003B6844 /* Fault.swift in Sources */,
+				6E7557E61E58C48C003B6844 /* TeamMemberRequest.swift in Sources */,
+				6E7557E71E58C48C003B6844 /* AttendeeManagedObject.swift in Sources */,
+				6E7557E81E58C48C003B6844 /* TeamMemberManagedObject.swift in Sources */,
+				6E7557E91E58C48C003B6844 /* TeamMember.swift in Sources */,
+				6E7557EA1E58C48C003B6844 /* LocationJSON.swift in Sources */,
+				6E7557EB1E58C48C003B6844 /* Configuration.swift in Sources */,
+				6E7557EC1E58C48C003B6844 /* GroupManagedObject.swift in Sources */,
+				6E7557ED1E58C48C003B6844 /* CompanyManagedObject.swift in Sources */,
+				6E7557EE1E58C48C003B6844 /* EventType.swift in Sources */,
+				6E7557EF1E58C48C003B6844 /* CoreDataEncodable.swift in Sources */,
+				6E7557F01E58C48C003B6844 /* Venue.swift in Sources */,
+				6E7557F11E58C48C003B6844 /* VenueRoomDataUpdate.swift in Sources */,
+				6E7557F21E58C48C003B6844 /* TicketTypeJSON.swift in Sources */,
+				6E7557F31E58C48C003B6844 /* PageController.swift in Sources */,
+				6E7557F41E58C48C003B6844 /* AttendeesForTicketOrderRequest.swift in Sources */,
+				6E7557F51E58C48C003B6844 /* SummitJSON.swift in Sources */,
+				6E7557F61E58C48C003B6844 /* SummitTypeManagedObject.swift in Sources */,
+				6E7557F71E58C48C003B6844 /* Production.swift in Sources */,
+				6E7557F81E58C48C003B6844 /* Model.xcdatamodeld in Sources */,
+				6E7557F91E58C48C003B6844 /* WirelessNetwork.swift in Sources */,
+				6E7557FA1E58C48C003B6844 /* WebConvertible.swift in Sources */,
+				6E7557FB1E58C48C003B6844 /* WirelessNetworkJSON.swift in Sources */,
+				6E7557FC1E58C48C003B6844 /* VenueRoomDataUpdateManagedObject.swift in Sources */,
+				6E7557FD1E58C48C003B6844 /* TicketTypeManagedObject.swift in Sources */,
+				6E7557FE1E58C48C003B6844 /* Presentation.swift in Sources */,
+				6E7557FF1E58C48C003B6844 /* GroupEventDataUpdateJSON.swift in Sources */,
+				6E7558001E58C48C003B6844 /* TeamMessageManagedObject.swift in Sources */,
+				6E7558011E58C48C003B6844 /* GroupEventDataUpdate.swift in Sources */,
+				6E7558021E58C48C003B6844 /* Team.swift in Sources */,
+				6E7558031E58C48C003B6844 /* TeamInvitationManagedObject.swift in Sources */,
+				6E7558041E58C48C003B6844 /* SpeakerJSON.swift in Sources */,
+				6E7558051E58C48C003B6844 /* PageJSON.swift in Sources */,
+				6E7558061E58C48C003B6844 /* SummitDataUpdate.swift in Sources */,
+				6E7558071E58C48C003B6844 /* VenueJSON.swift in Sources */,
+				6E7558081E58C48C003B6844 /* MemberRequest.swift in Sources */,
+				6E7558091E58C48C003B6844 /* TeamManagedObject.swift in Sources */,
+				6E75580A1E58C48C003B6844 /* VideoJSON.swift in Sources */,
+				6E75580B1E58C48C003B6844 /* TeamJSON.swift in Sources */,
+				6E75580C1E58C48C003B6844 /* TrackManagedObject.swift in Sources */,
+				6E75580D1E58C48C003B6844 /* VenueFloorManagedObject.swift in Sources */,
+				6E75580E1E58C48C003B6844 /* Unique.swift in Sources */,
+				6E75580F1E58C48C003B6844 /* FavoriteEventRequest.swift in Sources */,
+				6E7558101E58C48C003B6844 /* Define.swift in Sources */,
+				6E7558111E58C48C003B6844 /* SelectAttendeeFromOrderListRequest.swift in Sources */,
+				6E7558121E58C48C003B6844 /* FeedbackManagedObject.swift in Sources */,
+				6E7558131E58C48C003B6844 /* MemberManagedObject.swift in Sources */,
+				6E7558141E58C48C003B6844 /* Store.swift in Sources */,
+				6E7558151E58C48C003B6844 /* TeamMessageJSON.swift in Sources */,
+				6E7558161E58C48C003B6844 /* EntityController.swift in Sources */,
+				6E7558171E58C48C003B6844 /* Named.swift in Sources */,
+				6E7558181E58C48C003B6844 /* TeamInvitationRequest.swift in Sources */,
+				6E7558191E58C48C003B6844 /* SummitType.swift in Sources */,
+				6E75581A1E58C48C003B6844 /* EventManagedObject.swift in Sources */,
+				6E75581B1E58C48C003B6844 /* Person.swift in Sources */,
+				6E75581C1E58C48C003B6844 /* TagJSON.swift in Sources */,
+				6E75581D1E58C48C003B6844 /* TimeZoneJSON.swift in Sources */,
+				6E75581E1E58C48C003B6844 /* WirelessNetworkManagedObject.swift in Sources */,
+				6E75581F1E58C48C003B6844 /* EventDataUpdateManagedObject.swift in Sources */,
+				6E7558201E58C48C003B6844 /* Feedback.swift in Sources */,
+				6E7558211E58C48C003B6844 /* PresentationJSON.swift in Sources */,
+				6E7558221E58C48C003B6844 /* AttendeeJSON.swift in Sources */,
+				6E7558231E58C48C003B6844 /* DataUpdate.swift in Sources */,
+				6E7558241E58C48C003B6844 /* TrackGroupDataUpdateJSON.swift in Sources */,
+				6E7558251E58C48C003B6844 /* TeamMessageRequest.swift in Sources */,
+				6E7558261E58C48C003B6844 /* TrackGroupDataUpdate.swift in Sources */,
+				6E7558271E58C48C003B6844 /* TrackGroupDataUpdateManagedObject.swift in Sources */,
+				6E7558281E58C48C003B6844 /* FeedbackRequest.swift in Sources */,
+				6E7558291E58C48C003B6844 /* PresentationDataUpdateManagedObject.swift in Sources */,
+				6E75582A1E58C48C003B6844 /* NotificationManagedObject.swift in Sources */,
+				6E75582B1E58C48C003B6844 /* EventJSON.swift in Sources */,
+				6E75582C1E58C48C003B6844 /* DataUpdatePoller.swift in Sources */,
+				6E75582D1E58C48C003B6844 /* Location.swift in Sources */,
+				6E75582E1E58C48C003B6844 /* DataUpdateRequest.swift in Sources */,
+				6E75582F1E58C48C003B6844 /* LocationManagedObject.swift in Sources */,
+				6E7558301E58C48C003B6844 /* Environment.swift in Sources */,
+				6E7558311E58C48C003B6844 /* Video.swift in Sources */,
+				6E7558321E58C48C003B6844 /* SummitManagedObject.swift in Sources */,
+				6E7558331E58C48C003B6844 /* PresentationDataUpdateJSON.swift in Sources */,
+				6E7558341E58C48C003B6844 /* TimeZone.swift in Sources */,
+				6E7558351E58C48C003B6844 /* Track.swift in Sources */,
+				6E7558361E58C48C003B6844 /* Image.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E7558481E58C4A7003B6844 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7558491E58C4A7003B6844 /* CoreDataTests.swift in Sources */,
+				6E75584A1E58C4A7003B6844 /* TestUtilities.swift in Sources */,
+				6E75584B1E58C4A7003B6844 /* JSONTests.swift in Sources */,
+				6E75584C1E58C4A7003B6844 /* StoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E7558691E58C62B003B6844 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7558721E58C62B003B6844 /* ViewController.swift in Sources */,
+				6E7558701E58C62B003B6844 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E9F28EB1D7C903E002B7C7A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3720,6 +4249,11 @@
 			target = 6EF12C601D149C2700814AD0 /* R.swift */;
 			targetProxy = 6E74FAEE1D7C96C50018633D /* PBXContainerItemProxy */;
 		};
+		6E7558461E58C4A7003B6844 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */;
+			targetProxy = 6E7558471E58C4A7003B6844 /* PBXContainerItemProxy */;
+		};
 		6ECBD1DF1D7CB092004BF1A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */;
@@ -3739,6 +4273,14 @@
 				6E0B5F521D77D4DE0005F6CE /* Base */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		6E7558751E58C62B003B6844 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E7558761E58C62B003B6844 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		6E9F28F51D7C903E002B7C7A /* Main.storyboard */ = {
@@ -4402,6 +4944,229 @@
 			};
 			name = Beta;
 		};
+		6E75583F1E58C48C003B6844 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6E7558401E58C48C003B6844 /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Mocked;
+		};
+		6E7558411E58C48C003B6844 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6E7558421E58C48C003B6844 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummit;
+				PRODUCT_NAME = CoreSummit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Beta;
+		};
+		6E7558631E58C4A7003B6844 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+			};
+			name = Debug;
+		};
+		6E7558641E58C4A7003B6844 /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+			};
+			name = Mocked;
+		};
+		6E7558651E58C4A7003B6844 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+			};
+			name = Release;
+		};
+		6E7558661E58C4A7003B6844 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
+				INFOPLIST_FILE = CoreSummitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
+				PRODUCT_NAME = CoreSummitTests;
+			};
+			name = Beta;
+		};
+		6E75587A1E58C62B003B6844 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				INFOPLIST_FILE = "OpenStackSummit macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.mac.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = OpenStackSummit;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		6E75587B1E58C62B003B6844 /* Mocked */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				INFOPLIST_FILE = "OpenStackSummit macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.mac.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = OpenStackSummit;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Mocked;
+		};
+		6E75587C1E58C62B003B6844 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				INFOPLIST_FILE = "OpenStackSummit macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.mac.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = OpenStackSummit;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		6E75587D1E58C62B003B6844 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 775U6X6R5M;
+				INFOPLIST_FILE = "OpenStackSummit macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.mac.summit$BUNDLE_ID_SUFFIX;
+				PRODUCT_NAME = OpenStackSummit;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Beta;
+		};
 		6E7E18EB1D495AE6009549BA /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4986,6 +5751,38 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6E75583E1E58C48C003B6844 /* Build configuration list for PBXNativeTarget "CoreSummit macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E75583F1E58C48C003B6844 /* Debug */,
+				6E7558401E58C48C003B6844 /* Mocked */,
+				6E7558411E58C48C003B6844 /* Release */,
+				6E7558421E58C48C003B6844 /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E7558621E58C4A7003B6844 /* Build configuration list for PBXNativeTarget "CoreSummitTests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E7558631E58C4A7003B6844 /* Debug */,
+				6E7558641E58C4A7003B6844 /* Mocked */,
+				6E7558651E58C4A7003B6844 /* Release */,
+				6E7558661E58C4A7003B6844 /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E7558791E58C62B003B6844 /* Build configuration list for PBXNativeTarget "OpenStackSummit macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E75587A1E58C62B003B6844 /* Debug */,
+				6E75587B1E58C62B003B6844 /* Mocked */,
+				6E75587C1E58C62B003B6844 /* Release */,
+				6E75587D1E58C62B003B6844 /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */ = {
 			isa = XCConfigurationList;
