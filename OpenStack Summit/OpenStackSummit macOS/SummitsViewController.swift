@@ -42,6 +42,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         
+        tableView.tableColumns.first!.maxWidth = tableView.bounds.width
         tableView.tableColumns.first!.width = tableView.bounds.width
     }
     
@@ -50,6 +51,19 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     @IBAction func refresh(sender: AnyObject? = nil) {
         
         pageController.refresh()
+    }
+    
+    @IBAction func tableViewDoubleClick(sender: AnyObject) {
+        
+        guard tableView.selectedRow >= 0,
+            case let .item(item) = pageController.items[tableView.selectedRow]
+            else { return }
+        
+        // set summit
+        SummitManager.shared.summit.value = item.identifier
+        
+        // show view controller
+        self.performSegueWithIdentifier("showSummit", sender: nil)
     }
     
     // MARK: - Private Methods
