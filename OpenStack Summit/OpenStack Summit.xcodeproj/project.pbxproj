@@ -585,8 +585,6 @@
 		6E7558341E58C48C003B6844 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5521D10675D008CBD0C /* TimeZone.swift */; };
 		6E7558351E58C48C003B6844 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5541D10675D008CBD0C /* Track.swift */; };
 		6E7558361E58C48C003B6844 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5231D10675C008CBD0C /* Image.swift */; };
-		6E7558381E58C48C003B6844 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
-		6E7558391E58C48C003B6844 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9CB32C1DAD6DDD00FCD859 /* Fabric.framework */; };
 		6E75583B1E58C48C003B6844 /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E7558491E58C4A7003B6844 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5101D10672D008CBD0C /* CoreDataTests.swift */; };
 		6E75584A1E58C4A7003B6844 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5111D10672D008CBD0C /* TestUtilities.swift */; };
@@ -1664,8 +1662,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E7558381E58C48C003B6844 /* Crashlytics.framework in Frameworks */,
-				6E7558391E58C48C003B6844 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2930,10 +2926,10 @@
 			targets = (
 				6E104D2D1D1061AC00541E84 /* OpenStackSummit */,
 				6EF12C601D149C2700814AD0 /* R.swift */,
-				6E7557A31E58C48C003B6844 /* CoreSummit macOS */,
-				6E7558451E58C4A7003B6844 /* CoreSummitTests macOS */,
 				6E10A4F01D1066E9008CBD0C /* CoreSummit iOS */,
 				6E10A4F91D1066E9008CBD0C /* CoreSummitTests iOS */,
+				6E7557A31E58C48C003B6844 /* CoreSummit macOS */,
+				6E7558451E58C4A7003B6844 /* CoreSummitTests macOS */,
 				6E2923A41D7AF8C900D14F0A /* CoreSummit tvOS */,
 				6E2924121D7AF8CC00D14F0A /* CoreSummitTests tvOS */,
 				6E0B5EB21D77C8950005F6CE /* CoreSummit watchOS */,
@@ -4616,7 +4612,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -4668,7 +4664,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -5103,44 +5099,52 @@
 		6E7558631E58C4A7003B6844 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
 				INFOPLIST_FILE = CoreSummitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/Mac";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		6E7558641E58C4A7003B6844 /* Mocked */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
 				INFOPLIST_FILE = CoreSummitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/Mac";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
+				SDKROOT = macosx;
 			};
 			name = Mocked;
 		};
 		6E7558651E58C4A7003B6844 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
 				INFOPLIST_FILE = CoreSummitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/Mac";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		6E7558661E58C4A7003B6844 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
 				INFOPLIST_FILE = CoreSummitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/iOS";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS) $(PROJECT_DIR)/Carthage/Build/Mac";
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
+				SDKROOT = macosx;
 			};
 			name = Beta;
 		};
@@ -5260,7 +5264,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -5381,7 +5385,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $FRAMEWORK_SEARCH_PATHS";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D MOCKED";

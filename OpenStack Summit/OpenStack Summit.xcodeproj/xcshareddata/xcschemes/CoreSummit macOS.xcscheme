@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6E7558451E58C4A7003B6844"
+               BuildableName = "CoreSummitTests.xctest"
+               BlueprintName = "CoreSummitTests macOS"
+               ReferencedContainer = "container:OpenStack Summit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6E7557A31E58C48C003B6844"
+            BuildableName = "CoreSummit.framework"
+            BlueprintName = "CoreSummit macOS"
+            ReferencedContainer = "container:OpenStack Summit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

@@ -16,4 +16,4 @@ github "OpenStack-Mobile/XLPagerTabStrip" "dd31ec30fc71d7cd534cf81662b9f1ff3875b
 github "OpenStack-Mobile/aerogear-ios-http" "274b560fbf9fb902fbb329bdbd20a728521fd186"
 github "OpenStack-Mobile/AFHorizontalDayPicker" "74c3521f935039b2b6e945380ecd06752076ec8a"
 github "OpenStack-Mobile/SwiftFoundation" "6288d7a238fd503498fd26cf199c17ed3894c508"
-github "OpenStack-Mobile/aerogear-ios-oauth2" "4f3290636a1a2f7f569a2f3074531a8bbfa312f0"
+github "OpenStack-Mobile/aerogear-ios-oauth2" "8a3a5599adea4586e28f0ac7a1540bbc09af4c8d"
