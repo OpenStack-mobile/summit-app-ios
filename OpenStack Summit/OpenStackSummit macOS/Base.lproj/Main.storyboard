@@ -664,8 +664,8 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                    <window key="window" title="OpenStack Summit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
                         <rect key="contentRect" x="597" y="251" width="600" height="480"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="600" height="480"/>
@@ -678,17 +678,14 @@
             </objects>
             <point key="canvasLocation" x="-694" y="83"/>
         </scene>
-        <!--View Controller-->
+        <!--Summits View Controller-->
         <scene sceneID="N9y-22-x5v">
             <objects>
-                <viewController id="Tmj-Jh-ato" sceneMemberID="viewController">
+                <viewController id="Tmj-Jh-ato" customClass="SummitsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="nZx-O5-s21">
                         <rect key="frame" x="0.0" y="0.0" width="470" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="yXF-qy-U4u">
-                                <rect key="frame" x="227" y="142" width="16" height="16"/>
-                            </progressIndicator>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsN-wl-yOf">
                                 <rect key="frame" x="0.0" y="0.0" width="470" height="300"/>
                                 <clipView key="contentView" id="lLa-b4-sqn">
@@ -715,7 +712,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="dOp-UD-0Nm">
+                                                        <tableCellView identifier="SummitCell" id="dOp-UD-0Nm">
                                                             <rect key="frame" x="1" y="1" width="466" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -772,6 +769,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="yXF-qy-U4u">
+                                <rect key="frame" x="227" y="142" width="16" height="16"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ZsN-wl-yOf" secondAttribute="bottom" id="8CI-Rb-b5g"/>
@@ -782,6 +782,10 @@
                             <constraint firstAttribute="trailing" secondItem="ZsN-wl-yOf" secondAttribute="trailing" id="zgn-4K-HAM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="yXF-qy-U4u" id="OdX-pm-tNc"/>
+                        <outlet property="tableView" destination="xd9-o0-gGh" id="bKo-5W-OeZ"/>
+                    </connections>
                 </viewController>
                 <customObject id="eFy-ag-YCH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

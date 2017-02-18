@@ -15,13 +15,13 @@
 import Foundation
 import CoreSummit
 
-protocol PagingTableViewController: class, TableViewDataSource, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+protocol PagingTableViewController: class, UITableViewDataSource, UITableViewDelegate, ShowActivityIndicatorProtocol, MessageEnabledViewController {
     
     associatedtype Item
     
     var pageController: PageController<Item> { get }
     
-    var tableView: TableView! { get }
+    var tableView: UITableView! { get }
     
     #if os(iOS)
     var refreshControl: UIRefreshControl? { get }
@@ -68,6 +68,8 @@ extension PagingTableViewController {
                 
                 tableView.beginUpdates()
                 
+                #if os(iOS) || os(tvOS)
+                
                 for change in changes {
                     
                     let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
@@ -87,6 +89,31 @@ extension PagingTableViewController {
                         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                     }
                 }
+                
+                #elseif os(OSX)
+                                        
+                    for change in changes {
+                        
+                         let indexSet = NSIndexSet(index: change.index)
+                        
+                        switch change.change {
+                            
+                        case .delete:
+                            
+                            tableView.removeRowsAtIndexes(indexSet, withAnimation: .EffectFade)
+                            
+                        case .insert:
+                            
+                            tableView.insertRowsAtIndexes(indexSet, withAnimation: .EffectFade)
+                            
+                        case .update:
+                            
+                            tableView.removeRowsAtIndexes(indexSet, withAnimation: .EffectNone)
+                            tableView.insertRowsAtIndexes(indexSet, withAnimation: .EffectNone)
+                        }
+                    }
+                    
+                #endif
                 
                 tableView.endUpdates()
             }

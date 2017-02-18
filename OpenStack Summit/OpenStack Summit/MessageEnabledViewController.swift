@@ -76,5 +76,27 @@ extension MessageEnabledViewController {
         viewController.showErrorAlert(message)
     }
 }
+    
+#elseif os(OSX)
+    
+extension MessageEnabledViewController {
 
+    func showInfoMessage(title: String, message: String) {
+        
+        guard let viewController = self as? NSViewController
+            else { fatalError("Not a view controller") }
+        
+        
+    }
+    
+    func showErrorMessage(error: ErrorType,
+                          fileName: String = #file,
+                          lineNumber: Int = #line) {
+        
+        NSApp.presentError(error as NSError)
+        
+        print("Error at \(fileName):\(lineNumber)\n\(error)")
+    }
+}
+    
 #endif

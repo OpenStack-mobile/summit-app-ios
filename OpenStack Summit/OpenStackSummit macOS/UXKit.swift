@@ -7,32 +7,19 @@
 //
 
 import Foundation
-
-#if os(iOS) || os(tvOS)
-import UIKit
-#elseif os(OSX)
 import AppKit
-#endif
 
-#if os(iOS) || os(tvOS)
+typealias UIViewController = NSViewController
+typealias UITableViewDataSource = NSTableViewDataSource
+typealias UITableViewDelegate = NSTableViewDelegate
+typealias UITableView = NSTableView
+typealias UITableViewCell = NSTableCellView
+
+extension NSIndexPath {
     
-    typealias ViewController = UIViewController
-    typealias TableViewDataSource = UITableViewDataSource
-    typealias TableView = UITableView
-    
-#elseif os(OSX)
-    
-    typealias UIViewController = NSViewController
-    typealias UITableViewDataSource = NSTableViewDataSource
-    typealias UITableView = NSTableView
-    
-    extension NSIndexPath {
+    @inline(__always)
+    convenience init(forRow row: Int, inSection section: Int) {
         
-        @inline(__always)
-        convenience init(forRow row: Int, inSection section: Int) {
-            
-            self.init(forItem: row, inSection: section)
-        }
+        self.init(forItem: row, inSection: section)
     }
-    
-#endif
+}

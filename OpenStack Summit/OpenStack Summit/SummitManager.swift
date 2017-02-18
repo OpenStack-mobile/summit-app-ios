@@ -57,7 +57,7 @@ private extension SummitManager {
     }
 }
 
-extension ViewController {
+extension UIViewController {
     
     var currentSummit: SummitManagedObject? {
         
