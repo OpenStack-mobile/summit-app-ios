@@ -10,11 +10,13 @@ import Foundation
 import AppKit
 import CoreSummit
 
-final class EventDatesViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+final class EventDatesViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSOutlineViewDataSource {
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) weak var outlineView: NSOutlineView!
+    @IBOutlet private(set) weak var tableView: NSTableView!
+    
+    @IBOutlet private(set) weak var delegate: EventDatesViewControllerDelegate?
     
     // MARK: - Properties
     
@@ -49,6 +51,22 @@ final class EventDatesViewController: NSViewController, NSOutlineViewDataSource,
         configureView()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func tableViewClick(sender: AnyObject) {
+        
+        guard tableView.selectedRow >= 0
+            else { return }
+        
+        let selectedDate = summitCache!.start.mt_dateDaysAfter(tableView.selectedRow)
+        
+        let endDate = selectedDate.mt_endOfCurrentDay()
+        
+        let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
+        
+        
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
@@ -67,24 +85,13 @@ final class EventDatesViewController: NSViewController, NSOutlineViewDataSource,
             
             self.summitCache = nil
         }
+        
+        self.tableView.reloadData()
     }
     
-    // MARK: - NSOutlineViewDelegate
+    // MARK: - NSTableViewDataSource
     
-    func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-        
-        let cell = outlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! NSTableCellView
-        
-        let date = summitCache!.start.mt_dateDaysAfter(row)
-        
-        cell.textField?.stringValue = dateFormatter.stringFromDate(date)
-        
-        return cell
-    }
-    
-    // MARK: - NSOutlineViewDataSource
-    
-    func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         
         guard let summit = summitCache
             else { return 0 }
@@ -92,18 +99,24 @@ final class EventDatesViewController: NSViewController, NSOutlineViewDataSource,
         return summit.end.mt_daysSinceDate(summit.start)
     }
     
-    func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-        
-        return false
-    }
+    // MARK: - NSTableViewDelegate
     
-    func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        fatalError()
+        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! NSTableCellView
+        
+        let date = summitCache!.start.mt_dateDaysAfter(row)
+        
+        cell.textField?.stringValue = dateFormatter.stringFromDate(date)
+        
+        return cell
     }
+}
+
+// MARK: - Supporting Types
+
+@objc
+protocol EventDatesViewControllerDelegate: class {
     
-    func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
-        
-        return NSObject()
-    }
+    func eventDatesViewController(controller: EventDatesViewController)
 }
