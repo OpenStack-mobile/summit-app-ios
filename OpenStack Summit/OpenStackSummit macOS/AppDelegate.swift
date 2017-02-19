@@ -13,7 +13,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Properties
     
-    private(set) var window: NSWindow?
+    @IBOutlet private(set) var window: NSWindow!
     
     // MARK: - NSApplicationDelegate
 
@@ -39,9 +39,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
-    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+    func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        
+        showWindow()
         
         return true
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+        
+        return false
     }
     
     // MARK: - Actions
@@ -49,9 +56,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func showPreferences(sender: AnyObject? = nil) {
         
         let preferencesWindowController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateControllerWithIdentifier("PreferencesWindowController") as! NSWindowController
+            .instantiateControllerWithIdentifier("Preferences") as! NSWindowController
         
         preferencesWindowController.showWindow(sender)
+    }
+    
+    @IBAction func showWindow(sender: AnyObject? = nil) {
+        
+        let mainWindowController = NSStoryboard(name: "Main", bundle: nil).instantiateInitialController() as! NSWindowController
+        
+        mainWindowController.window?.makeKeyAndOrderFront(sender)
     }
 }
 

@@ -146,18 +146,21 @@ final class SummitTableViewCell: NSTableCellView {
     
     @IBOutlet private(set) weak var indicatorView: NSView!
     
-    var isSelected = false {
-        
-        didSet {
-            
-            
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //indicatorView
+        let circleRect = indicatorView.bounds
+        
+        let circle = CGPathCreateMutable()
+        CGPathAddEllipseInRect(circle, nil, circleRect)
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.frame = circleRect
+        shapeLayer.fillColor = NSColor(calibratedRed: 0, green: 0, blue: 1, alpha: 1).CGColor
+        
+        indicatorView.wantsLayer = true
+        indicatorView.layer = shapeLayer
+        indicatorView.needsDisplay = true
     }
 }
 

@@ -670,10 +670,73 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="OpenStack Summit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
+                    <window key="window" title="OpenStack Summit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="INAppStoreWindow">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="597" y="251" width="800" height="600"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+                        <value key="minSize" type="size" width="800" height="600"/>
+                        <toolbar key="toolbar" implicitIdentifier="ADE720A3-073B-4809-AE2A-E99EF95282F8" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="Qe9-C2-SWV">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Rys-1y-U6k"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ghL-T8-0sS" customClass="TA"/>
+                                <toolbarItem implicitItemIdentifier="C16B990F-534B-411E-9506-C6A56701CF98" label="Content" paletteLabel="Content" id="IhQ-Fx-0Oi">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="269" height="28"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="84L-gP-hwv">
+                                        <rect key="frame" x="0.0" y="14" width="269" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="2ie-em-sNn">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Events"/>
+                                                <segment label="Venues" selected="YES" tag="1"/>
+                                                <segment label="Speakers"/>
+                                                <segment label="Videos"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7C28643C-8FA0-4CA2-812A-C855216F47C3" label="Toggle Sidebar" paletteLabel="Toggle Sidebar" image="NSSidebarTemplate" id="qfD-B4-zwX">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="38" height="25"/>
+                                    <size key="maxSize" width="38" height="25"/>
+                                    <button key="view" verticalHuggingPriority="750" id="cYk-DH-l6o">
+                                        <rect key="frame" x="24" y="14" width="38" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSSidebarTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fnJ-Ab-oBq">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="toggleSidebar:" target="Oky-zY-oP4" id="tvi-V0-ZlC"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="42809C62-1FDD-4DDA-B7FD-53A687BFA31A" label="Search" paletteLabel="Search" id="9RD-Yc-BLr">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="22"/>
+                                    <size key="maxSize" width="200" height="22"/>
+                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="OL9-7M-cPO">
+                                        <rect key="frame" x="0.0" y="14" width="127" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <searchFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="FMF-Cn-Lsi">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="EFC6058B-765B-4151-8990-829C52D2A45F" label="Adaptive Space" paletteLabel="Adaptive Space" tag="-1" id="Y8d-Gi-kIC" customClass="TAAdaptiveSpaceItem"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="qfD-B4-zwX"/>
+                                <toolbarItem reference="Y8d-Gi-kIC"/>
+                                <toolbarItem reference="IhQ-Fx-0Oi"/>
+                                <toolbarItem reference="ghL-T8-0sS"/>
+                                <toolbarItem reference="9RD-Yc-BLr"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                     </window>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -683,7 +746,7 @@
         <!--Window Controller-->
         <scene sceneID="vL6-Yh-Vvb">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="n80-Qh-adB" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Preferences" showSeguePresentationStyle="single" id="n80-Qh-adB" sceneMemberID="viewController">
                     <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="utilityWindow" frameAutosaveName="" id="y0o-xJ-PeY">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <rect key="contentRect" x="519" y="361" width="480" height="270"/>
@@ -892,10 +955,71 @@
             </objects>
             <point key="canvasLocation" x="1668" y="-291"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="qao-6h-Szr">
+            <objects>
+                <viewController id="WKS-8l-Ou8" sceneMemberID="viewController">
+                    <view key="view" id="Db7-ef-kf6">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhW-rh-q7c">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" drawsBackground="NO" id="s76-pL-UPw">
+                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="TX4-Rp-OW4" id="Dzq-MN-R9I">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn identifier="" width="200" minWidth="10" maxWidth="1000" id="TX4-Rp-OW4">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" id="g7y-Ic-BRA">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                            </tableColumns>
+                                        </outlineView>
+                                    </subviews>
+                                    <nil key="backgroundColor"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hCu-aB-5Z5">
+                                    <rect key="frame" x="1" y="283" width="448" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="osE-wi-Z4J">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="vhW-rh-q7c" firstAttribute="leading" secondItem="Db7-ef-kf6" secondAttribute="leading" id="Dfh-oQ-oNn"/>
+                            <constraint firstItem="vhW-rh-q7c" firstAttribute="top" secondItem="Db7-ef-kf6" secondAttribute="top" id="Dtr-sv-x4f"/>
+                            <constraint firstAttribute="bottom" secondItem="vhW-rh-q7c" secondAttribute="bottom" id="Q6m-jm-lv7"/>
+                            <constraint firstAttribute="trailing" secondItem="vhW-rh-q7c" secondAttribute="trailing" id="icN-ZL-v3c"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="qwe-4a-nLq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-78" y="1498"/>
+        </scene>
         <!--Summit-->
         <scene sceneID="4IM-i7-qbU">
             <objects>
-                <tabViewController title="Summit" selectedTabViewItemIndex="0" tabStyle="toolbar" canPropagateSelectedChildViewControllerTitle="NO" id="UhV-BG-4Sg" sceneMemberID="viewController">
+                <tabViewController title="Summit" selectedTabViewItemIndex="0" canPropagateSelectedChildViewControllerTitle="NO" id="UhV-BG-4Sg" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="Yft-vf-hrD"/>
                         <tabViewItem id="DDG-Rw-Gds"/>
@@ -913,7 +1037,7 @@
                 </tabViewController>
                 <customObject id="NJH-QX-RXa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="792"/>
+            <point key="canvasLocation" x="655" y="597"/>
         </scene>
         <!--Events-->
         <scene sceneID="YBK-5e-5un">
@@ -934,7 +1058,7 @@
                     </connections>
                 </splitViewController>
             </objects>
-            <point key="canvasLocation" x="704" y="793"/>
+            <point key="canvasLocation" x="1218" y="597"/>
         </scene>
         <!--Venues-->
         <scene sceneID="TQD-AB-g9P">
@@ -1060,7 +1184,7 @@
                 </viewController>
                 <customObject id="9ui-BR-bti" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="612"/>
+            <point key="canvasLocation" x="1809" y="597"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="UgP-OR-mKp">
@@ -1073,7 +1197,7 @@
                 </viewController>
                 <customObject id="Ofu-46-sEe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="973"/>
+            <point key="canvasLocation" x="1374" y="1072"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="V8e-Im-e4g">
@@ -1178,7 +1302,7 @@
                 </viewController>
                 <customObject id="1ZP-ss-crF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="1386"/>
+            <point key="canvasLocation" x="1374" y="1417"/>
         </scene>
         <!--Venues Map View Controller-->
         <scene sceneID="tjy-ao-4Fa">
@@ -1205,10 +1329,11 @@
                 </viewController>
                 <customObject id="0dD-A3-Ppc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="1747"/>
+            <point key="canvasLocation" x="1365" y="1807"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSSidebarTemplate" width="15" height="12"/>
     </resources>
 </document>
