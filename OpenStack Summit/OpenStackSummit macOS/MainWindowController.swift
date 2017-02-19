@@ -8,18 +8,31 @@
 
 import Foundation
 import AppKit
+import CoreSummit
 
 final class MainWindowController: NSWindowController {
     
-    var appWindow: INAppStoreWindow {
-        
-        return self.window as! INAppStoreWindow
-    }
+    private var summitObserver: Int?
     
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        appWindow.centerTrafficLightButtons = true
-        appWindow.titleBarView = self.window?.toolbar
+        summitObserver = SummitManager.shared.summit.observe { [weak self] in self?.updateTitle() }
+        
+        updateTitle()
+    }
+    
+    private func updateTitle() {
+        
+        var title = "OpenStack Summit"
+        
+        let summitID = SummitManager.shared.summit.value
+        
+        if let summit = Summit.find(summitID, context: Store.shared.managedObjectContext) {
+            
+            title += " - " + summit.name
+        }
+        
+        window?.title = title
     }
 }
