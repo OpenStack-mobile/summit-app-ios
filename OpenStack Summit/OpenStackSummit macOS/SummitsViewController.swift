@@ -134,11 +134,6 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         return pageController.items.count
     }
     
-    func tableView(tableView: NSTableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return pageController.items.count
-    }
-    
     // MARK: - NSTableViewDelegate
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
