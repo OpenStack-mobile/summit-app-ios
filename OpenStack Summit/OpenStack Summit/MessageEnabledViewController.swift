@@ -83,10 +83,11 @@ extension MessageEnabledViewController {
 
     func showInfoMessage(title: String, message: String) {
         
-        guard let viewController = self as? NSViewController
-            else { fatalError("Not a view controller") }
-        
-        
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = .Informational
+        alert.runModal()
     }
     
     func showErrorMessage(error: ErrorType,

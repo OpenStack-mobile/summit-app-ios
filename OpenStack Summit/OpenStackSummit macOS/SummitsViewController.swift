@@ -27,9 +27,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.rowHeight = 50
-        
+                
         pageController.callback.reloadData = { [weak self] in self?.tableView.reloadData() }
         
         pageController.callback.willLoadData = { [weak self] in self?.willLoadData() }
@@ -69,9 +67,19 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     // MARK: - Private Methods
     
     @inline(__always)
-    private func configure(cell cell: NSTableCellView, with summit: Summit) {
+    private func configure(cell cell: SummitTableViewCell, with summit: Summit) {
         
-        cell.textField!.stringValue = summit.name
+        cell.nameLabel!.stringValue = summit.name
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        dateFormatter.dateFormat = "MMMM dd-"
+        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        
+        dateFormatter.dateFormat = "dd, yyyy"
+        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        
+        cell.dateLabel!.stringValue = stringDateFrom + stringDateTo
     }
     
     // MARK: - ShowActivityIndicatorProtocol
@@ -110,7 +118,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
             
         case let .item(item):
             
-            let cell = tableView.makeViewWithIdentifier("SummitCell", owner: nil) as! NSTableCellView
+            let cell = tableView.makeViewWithIdentifier(SummitTableViewCell.identifier, owner: nil) as! SummitTableViewCell
             
             configure(cell: cell, with: item)
             
@@ -127,5 +135,16 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
             return cell
         }
     }
+}
+
+// MARK: - Supporting Types
+
+final class SummitTableViewCell: NSTableCellView {
+    
+    static let identifier = "SummitTableViewCell"
+    
+    @IBOutlet private(set) weak var nameLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var dateLabel: NSTextField!
 }
 
