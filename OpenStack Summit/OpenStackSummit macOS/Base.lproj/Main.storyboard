@@ -682,19 +682,22 @@
                                 <toolbarItem implicitItemIdentifier="C16B990F-534B-411E-9506-C6A56701CF98" label="Content" paletteLabel="Content" id="IhQ-Fx-0Oi">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
-                                    <size key="maxSize" width="269" height="28"/>
+                                    <size key="maxSize" width="321" height="28"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="84L-gP-hwv">
                                         <rect key="frame" x="0.0" y="14" width="269" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="2ie-em-sNn">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Events"/>
-                                                <segment label="Venues" selected="YES" tag="1"/>
+                                                <segment label="Events" selected="YES"/>
+                                                <segment label="Venues" tag="1"/>
                                                 <segment label="Speakers"/>
                                                 <segment label="Videos"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="contentTabChanged:" target="B8D-0N-5wS" id="9vc-dH-tNh"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="7C28643C-8FA0-4CA2-812A-C855216F47C3" label="Toggle Sidebar" paletteLabel="Toggle Sidebar" image="NSSidebarTemplate" id="qfD-B4-zwX">
@@ -712,6 +715,9 @@
                                             <action selector="toggleSidebar:" target="Oky-zY-oP4" id="tvi-V0-ZlC"/>
                                         </connections>
                                     </button>
+                                    <connections>
+                                        <action selector="toggleSidebar:" target="B8D-0N-5wS" id="OwS-ih-5IM"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="42809C62-1FDD-4DDA-B7FD-53A687BFA31A" label="Search" paletteLabel="Search" id="9RD-Yc-BLr">
                                     <nil key="toolTip"/>
@@ -738,6 +744,10 @@
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
+                    <connections>
+                        <outlet property="contentSegmentedControl" destination="84L-gP-hwv" id="brQ-VU-nzG"/>
+                        <outlet property="toggleSidebarToolbarItem" destination="qfD-B4-zwX" id="H0l-wI-qtl"/>
+                    </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -955,95 +965,11 @@
             </objects>
             <point key="canvasLocation" x="1668" y="-291"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="qao-6h-Szr">
-            <objects>
-                <viewController id="WKS-8l-Ou8" sceneMemberID="viewController">
-                    <view key="view" id="Db7-ef-kf6">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhW-rh-q7c">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <clipView key="contentView" drawsBackground="NO" id="s76-pL-UPw">
-                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="TX4-Rp-OW4" id="Dzq-MN-R9I">
-                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                            <tableColumns>
-                                                <tableColumn identifier="" width="200" minWidth="10" maxWidth="1000" id="TX4-Rp-OW4">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" id="g7y-Ic-BRA">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                </tableColumn>
-                                            </tableColumns>
-                                        </outlineView>
-                                    </subviews>
-                                    <nil key="backgroundColor"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hCu-aB-5Z5">
-                                    <rect key="frame" x="1" y="283" width="448" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="osE-wi-Z4J">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="vhW-rh-q7c" firstAttribute="leading" secondItem="Db7-ef-kf6" secondAttribute="leading" id="Dfh-oQ-oNn"/>
-                            <constraint firstItem="vhW-rh-q7c" firstAttribute="top" secondItem="Db7-ef-kf6" secondAttribute="top" id="Dtr-sv-x4f"/>
-                            <constraint firstAttribute="bottom" secondItem="vhW-rh-q7c" secondAttribute="bottom" id="Q6m-jm-lv7"/>
-                            <constraint firstAttribute="trailing" secondItem="vhW-rh-q7c" secondAttribute="trailing" id="icN-ZL-v3c"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="qwe-4a-nLq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-78" y="1498"/>
-        </scene>
-        <!--Summit-->
-        <scene sceneID="4IM-i7-qbU">
-            <objects>
-                <tabViewController title="Summit" selectedTabViewItemIndex="0" canPropagateSelectedChildViewControllerTitle="NO" id="UhV-BG-4Sg" sceneMemberID="viewController">
-                    <tabViewItems>
-                        <tabViewItem id="Yft-vf-hrD"/>
-                        <tabViewItem id="DDG-Rw-Gds"/>
-                    </tabViewItems>
-                    <tabView key="tabView" type="noTabsNoBorder" id="HSv-5G-0nP">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <font key="font" metaFont="message"/>
-                        <tabViewItems/>
-                    </tabView>
-                    <connections>
-                        <segue destination="JMU-DO-Ecm" kind="relationship" relationship="tabItems" id="vMf-te-g7D"/>
-                        <segue destination="hAA-yr-9tr" kind="relationship" relationship="tabItems" id="Wai-YG-2Zm"/>
-                    </connections>
-                </tabViewController>
-                <customObject id="NJH-QX-RXa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="655" y="597"/>
-        </scene>
         <!--Events-->
         <scene sceneID="YBK-5e-5un">
             <objects>
                 <customObject id="2hL-bv-AQA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <splitViewController title="Events" id="JMU-DO-Ecm" sceneMemberID="viewController">
+                <splitViewController title="Events" storyboardIdentifier="Events" id="JMU-DO-Ecm" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="Wb8-Ek-YAq"/>
                         <splitViewItem id="be7-Fp-ijB"/>
@@ -1064,7 +990,7 @@
         <scene sceneID="TQD-AB-g9P">
             <objects>
                 <customObject id="Uh9-nT-Cpq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <splitViewController title="Venues" id="hAA-yr-9tr" sceneMemberID="viewController">
+                <splitViewController title="Venues" storyboardIdentifier="Venues" id="hAA-yr-9tr" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="0H1-gs-a1b"/>
                         <splitViewItem id="qsr-hn-iba"/>
@@ -1080,6 +1006,32 @@
                 </splitViewController>
             </objects>
             <point key="canvasLocation" x="704" y="1663"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Fdz-wn-N90">
+            <objects>
+                <viewController storyboardIdentifier="Speakers" id="kn8-Rs-kyP" sceneMemberID="viewController">
+                    <view key="view" id="WlG-t0-mrO">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="D8c-S4-xF5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885" y="2266"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xh3-mG-bOT">
+            <objects>
+                <viewController storyboardIdentifier="Videos" id="8Rl-UC-peh" sceneMemberID="viewController">
+                    <view key="view" id="Fcy-ET-gsz">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="xaz-Iw-EZU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885" y="2662"/>
         </scene>
         <!--Dates-->
         <scene sceneID="Pzn-Db-U0E">

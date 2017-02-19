@@ -12,7 +12,13 @@ import CoreSummit
 
 final class MainWindowController: NSWindowController {
     
+    @IBOutlet private(set) weak var contentSegmentedControl: NSSegmentedControl!
+    
+    @IBOutlet private(set) weak var toggleSidebarToolbarItem: NSToolbarItem!
+    
     private var summitObserver: Int?
+    
+    private var contentViewControllersCache = [String: NSViewController]()
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -22,6 +28,9 @@ final class MainWindowController: NSWindowController {
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.updateTitle() }
         
         updateTitle()
+        
+        // update content view controller
+        contentTabChanged(contentSegmentedControl)
     }
     
     private func updateTitle() {
@@ -36,5 +45,56 @@ final class MainWindowController: NSWindowController {
         }
         
         window?.title = title
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func contentTabChanged(sender: NSSegmentedControl) {
+        
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        let content = ContentTab(rawValue: sender.selectedSegment)!
+        
+        let contentViewControllerID: String
+                
+        switch content {
+        case .events: contentViewControllerID = "Events"
+        case .venues: contentViewControllerID = "Venues"
+        case .speakers: contentViewControllerID = "Speakers"
+        case .videos: contentViewControllerID = "Videos"
+        }
+        
+        if let cachedViewController = contentViewControllersCache[contentViewControllerID] {
+            
+            contentViewController = cachedViewController
+            
+        } else {
+            
+            let viewController = storyboard.instantiateControllerWithIdentifier(contentViewControllerID) as! NSViewController
+            
+            contentViewControllersCache[contentViewControllerID] = viewController
+            
+            contentViewController = viewController
+        }
+        
+        toggleSidebarToolbarItem.enabled = (contentViewController is NSSplitViewController)
+    }
+    
+    @IBAction func toggleSidebar(sender: NSToolbarItem) {
+        
+        (contentViewController as? NSSplitViewController)?.toggleSidebar(sender)
+    }
+}
+
+// MARK: - Supporting Types
+
+private extension MainWindowController {
+    
+    enum ContentTab: Int {
+        
+        case events
+        case venues
+        case speakers
+        case videos
     }
 }
