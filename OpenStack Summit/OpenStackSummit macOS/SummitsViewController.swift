@@ -57,8 +57,29 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
             case let .item(item) = pageController.items[tableView.selectedRow]
             else { return }
         
-        // set summit
-        SummitManager.shared.summit.value = item.identifier
+        showActivityIndicator()
+        
+        Store.shared.summit(item.identifier) { [weak self] (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                guard let controller = self else { return }
+                
+                controller.hideActivityIndicator()
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    controller.showErrorMessage(error)
+                    
+                case .Value:
+                    
+                    // set summit
+                    SummitManager.shared.summit.value = item.identifier
+                }
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -83,12 +104,14 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     func showActivityIndicator() {
         
+        tableView.hidden = true
         activityIndicator.hidden = false
         activityIndicator.startAnimation(nil)
     }
     
     func hideActivityIndicator() {
         
+        tableView.hidden = false
         activityIndicator.hidden = true
         activityIndicator.stopAnimation(nil)
     }

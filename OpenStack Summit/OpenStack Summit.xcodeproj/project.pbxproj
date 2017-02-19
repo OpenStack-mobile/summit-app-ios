@@ -160,6 +160,7 @@
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
 		6E11E4F51E59FC8500EBA211 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */; };
+		6E11E4F81E5A122300EBA211 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E11E4F71E5A122300EBA211 /* MapKit.framework */; };
 		6E1399E11DD7A7B900FD1D37 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */; };
 		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
 		6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */; };
@@ -1233,6 +1234,8 @@
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
 		6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		6E11E4F61E5A120400EBA211 /* OpenStackSummit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenStackSummit.entitlements; sourceTree = "<group>"; };
+		6E11E4F71E5A122300EBA211 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6E1651911D845E4F00574CE5 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
 		6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDirectoryViewController.swift; sourceTree = "<group>"; };
@@ -1700,6 +1703,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E11E4F81E5A122300EBA211 /* MapKit.framework in Frameworks */,
 				6E75588D1E58D0F8003B6844 /* CoreSummit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2195,6 +2199,7 @@
 		6E65D2051E4F78D100F8F582 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E11E4F71E5A122300EBA211 /* MapKit.framework */,
 				6E65D2061E4F78D100F8F582 /* TVServices.framework */,
 			);
 			name = Frameworks;
@@ -2266,6 +2271,7 @@
 		6E75586E1E58C62B003B6844 /* OpenStackSummit macOS */ = {
 			isa = PBXGroup;
 			children = (
+				6E11E4F61E5A120400EBA211 /* OpenStackSummit.entitlements */,
 				6E7558C91E595742003B6844 /* Objective-C */,
 				6E75586F1E58C62B003B6844 /* AppDelegate.swift */,
 				6E7558BF1E58D8D4003B6844 /* UXKit.swift */,
@@ -2956,6 +2962,14 @@
 						DevelopmentTeam = 775U6X6R5M;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.Mac = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					6E9F28EE1D7C903E002B7C7A = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -5243,7 +5257,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = "OpenStackSummit macOS/OpenStackSummit.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
@@ -5267,7 +5282,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = "OpenStackSummit macOS/OpenStackSummit.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
@@ -5290,7 +5306,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = "OpenStackSummit macOS/OpenStackSummit.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
@@ -5312,7 +5329,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = "OpenStackSummit macOS/OpenStackSummit.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 775U6X6R5M;
 				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;

@@ -27,9 +27,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Show preferences
         
-        if try! Summit.find(SummitManager.shared.summit.value, context: Store.shared.managedObjectContext) == nil {
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+        
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
             
-            showPreferences()
+            if try! Summit.find(SummitManager.shared.summit.value, context: Store.shared.managedObjectContext) == nil {
+                
+                self?.showPreferences()
+            }
         }
     }
 
@@ -59,6 +64,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .instantiateControllerWithIdentifier("Preferences") as? NSWindowController
         
         preferencesWindowController?.showWindow(sender)
+        
+        preferencesWindowController?.window?.makeKeyAndOrderFront(sender)
     }
 }
 
