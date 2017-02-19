@@ -7,13 +7,14 @@
 //
 
 import Cocoa
+import CoreSummit
 
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Properties
     
-    @IBOutlet private(set) var window: NSWindow!
+    private var preferencesWindowController: NSWindowController?
     
     // MARK: - NSApplicationDelegate
 
@@ -24,10 +25,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
-        showPreferences()
+        // Show preferences
         
-        // show preferences if no summit selected
-        if SummitManager.shared.summit.value == 0 {
+        if try! Summit.find(SummitManager.shared.summit.value, context: Store.shared.managedObjectContext) == nil {
             
             showPreferences()
         }
@@ -39,9 +39,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
-    func applicationShouldHandleReopen(sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    func applicationShouldHandleReopen(application: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         
-        showWindow()
+        application.windows.forEach { $0.makeKeyAndOrderFront(application) }
         
         return true
     }
@@ -55,17 +55,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func showPreferences(sender: AnyObject? = nil) {
         
-        let preferencesWindowController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateControllerWithIdentifier("Preferences") as! NSWindowController
+        preferencesWindowController = NSStoryboard(name: "Main", bundle: nil)
+            .instantiateControllerWithIdentifier("Preferences") as? NSWindowController
         
-        preferencesWindowController.showWindow(sender)
-    }
-    
-    @IBAction func showWindow(sender: AnyObject? = nil) {
-        
-        let mainWindowController = NSStoryboard(name: "Main", bundle: nil).instantiateInitialController() as! NSWindowController
-        
-        mainWindowController.window?.makeKeyAndOrderFront(sender)
+        preferencesWindowController?.showWindow(sender)
     }
 }
 

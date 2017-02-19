@@ -678,7 +678,7 @@
                         <toolbar key="toolbar" implicitIdentifier="ADE720A3-073B-4809-AE2A-E99EF95282F8" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="Qe9-C2-SWV">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Rys-1y-U6k"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ghL-T8-0sS" customClass="TA"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ghL-T8-0sS"/>
                                 <toolbarItem implicitItemIdentifier="C16B990F-534B-411E-9506-C6A56701CF98" label="Content" paletteLabel="Content" id="IhQ-Fx-0Oi">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
