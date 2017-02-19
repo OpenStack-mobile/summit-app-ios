@@ -345,6 +345,7 @@
 		6E3A53561E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
 		6E3A53571E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
 		6E3A53581E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
+		6E3B74501E5A1535008A1BB2 /* SummitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */; };
 		6E3D4CFF1E12D44A00D542CD /* TeamMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D4CFE1E12D44A00D542CD /* TeamMember.swift */; };
 		6E3D4D001E12D44A00D542CD /* TeamMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D4CFE1E12D44A00D542CD /* TeamMember.swift */; };
 		6E3D4D011E12D44A00D542CD /* TeamMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D4CFE1E12D44A00D542CD /* TeamMember.swift */; };
@@ -1307,6 +1308,7 @@
 		6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConvertible.swift; sourceTree = "<group>"; };
 		6E35086E1D9AE4900055801C /* DataUpdates5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates5.json; sourceTree = "<group>"; };
 		6E3A53551E325EE100EA7CAF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitViewController.swift; sourceTree = "<group>"; };
 		6E3D4CFE1E12D44A00D542CD /* TeamMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMember.swift; sourceTree = "<group>"; };
 		6E3D4D021E12D45400D542CD /* TeamMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMessage.swift; sourceTree = "<group>"; };
 		6E3D4D061E12DB3400D542CD /* TeamMemberManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberManagedObject.swift; sourceTree = "<group>"; };
@@ -2277,6 +2279,7 @@
 				6E7558BF1E58D8D4003B6844 /* UXKit.swift */,
 				6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */,
 				6E7558711E58C62B003B6844 /* SummitsViewController.swift */,
+				6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */,
 				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
 				6E7558731E58C62B003B6844 /* Assets.xcassets */,
 				6E7558751E58C62B003B6844 /* Main.storyboard */,
@@ -4297,6 +4300,7 @@
 				6E7558831E58D026003B6844 /* SummitManager.swift in Sources */,
 				6E96FD9F1E59F8D500EF38F0 /* TAAdaptiveSpaceItem.m in Sources */,
 				6E7558701E58C62B003B6844 /* AppDelegate.swift in Sources */,
+				6E3B74501E5A1535008A1BB2 /* SummitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

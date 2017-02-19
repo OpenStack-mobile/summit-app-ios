@@ -19,6 +19,8 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     @IBOutlet private(set) weak var activityIndicator: NSProgressIndicator!
     
+    @IBOutlet private(set) weak var refreshButton: NSButton!
+    
     // MARK: - Properties
     
     lazy var pageController = PageController<Summit>(fetch: Store.shared.summits)
@@ -35,13 +37,6 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         pageController.callback.didLoadNextPage = { [weak self] in self?.didLoadNextPage($0) }
         
         refresh()
-    }
-    
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        
-        tableView.tableColumns.first!.maxWidth = tableView.bounds.width
-        tableView.tableColumns.first!.width = tableView.bounds.width
     }
     
     // MARK: - Actions
@@ -77,6 +72,9 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
                     
                     // set summit
                     SummitManager.shared.summit.value = item.identifier
+                    
+                    // reload data
+                    controller.refresh()
                 }
             }
         }
@@ -86,6 +84,17 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     @inline(__always)
     private func configure(cell cell: SummitTableViewCell, with summit: Summit) {
+        
+        let currentSummit = SummitManager.shared.summit.value == summit.identifier
+        
+        if currentSummit {
+            
+            cell.indicatorImageView.image = NSImage(named: "NSStatusAvailable")
+            
+        } else {
+            
+            cell.indicatorImageView.image = NSImage(named: "NSStatusNone")
+        }
         
         cell.nameLabel!.stringValue = summit.name
         
@@ -104,6 +113,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     func showActivityIndicator() {
         
+        refreshButton.hidden = true
         tableView.hidden = true
         activityIndicator.hidden = false
         activityIndicator.startAnimation(nil)
@@ -111,6 +121,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
     
     func hideActivityIndicator() {
         
+        refreshButton.hidden = false
         tableView.hidden = false
         activityIndicator.hidden = true
         activityIndicator.stopAnimation(nil)
@@ -167,23 +178,6 @@ final class SummitTableViewCell: NSTableCellView {
     
     @IBOutlet private(set) weak var dateLabel: NSTextField!
     
-    @IBOutlet private(set) weak var indicatorView: NSView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        let circleRect = indicatorView.bounds
-        
-        let circle = CGPathCreateMutable()
-        CGPathAddEllipseInRect(circle, nil, circleRect)
-        
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.frame = circleRect
-        shapeLayer.fillColor = NSColor(calibratedRed: 0, green: 0, blue: 1, alpha: 1).CGColor
-        
-        indicatorView.wantsLayer = true
-        indicatorView.layer = shapeLayer
-        indicatorView.needsDisplay = true
-    }
+    @IBOutlet private(set) weak var indicatorImageView: NSImageView!
 }
 
