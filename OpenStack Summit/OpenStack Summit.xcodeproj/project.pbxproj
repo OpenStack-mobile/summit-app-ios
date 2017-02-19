@@ -159,11 +159,6 @@
 		6E10A5A91D106AD5008CBD0C /* VenueListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */; };
 		6E10A5AF1D106C9A008CBD0C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5AE1D106C9A008CBD0C /* Store.swift */; };
 		6E10A5B21D106DF1008CBD0C /* SummitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */; };
-		6E11E4ED1E59FBEC00EBA211 /* INAppStoreWindowSwizzling.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4E21E59FBEC00EBA211 /* INAppStoreWindowSwizzling.c */; };
-		6E11E4EE1E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4E51E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.m */; };
-		6E11E4EF1E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4E71E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.m */; };
-		6E11E4F01E59FBEC00EBA211 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4E91E59FBEC00EBA211 /* INAppStoreWindow.m */; };
-		6E11E4F11E59FBEC00EBA211 /* INWindowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4EC1E59FBEC00EBA211 /* INWindowButton.m */; };
 		6E11E4F51E59FC8500EBA211 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */; };
 		6E1399E11DD7A7B900FD1D37 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */; };
 		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
@@ -1237,17 +1232,6 @@
 		6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListItem.swift; sourceTree = "<group>"; };
 		6E10A5AE1D106C9A008CBD0C /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6E10A5B11D106DF1008CBD0C /* SummitRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitRequest.swift; sourceTree = "<group>"; };
-		6E11E4E21E59FBEC00EBA211 /* INAppStoreWindowSwizzling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = INAppStoreWindowSwizzling.c; sourceTree = "<group>"; };
-		6E11E4E31E59FBEC00EBA211 /* INAppStoreWindowSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindowSwizzling.h; sourceTree = "<group>"; };
-		6E11E4E41E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INWindowBackgroundView+CoreUIRendering.h"; sourceTree = "<group>"; };
-		6E11E4E51E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "INWindowBackgroundView+CoreUIRendering.m"; sourceTree = "<group>"; };
-		6E11E4E61E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDocument+INAppStoreWindowFixes.h"; sourceTree = "<group>"; };
-		6E11E4E71E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDocument+INAppStoreWindowFixes.m"; sourceTree = "<group>"; };
-		6E11E4E81E59FBEC00EBA211 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
-		6E11E4E91E59FBEC00EBA211 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
-		6E11E4EA1E59FBEC00EBA211 /* INAppStoreWindowCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindowCompatibility.h; sourceTree = "<group>"; };
-		6E11E4EB1E59FBEC00EBA211 /* INWindowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWindowButton.h; sourceTree = "<group>"; };
-		6E11E4EC1E59FBEC00EBA211 /* INWindowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWindowButton.m; sourceTree = "<group>"; };
 		6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUpdatePoller.swift; sourceTree = "<group>"; };
 		6E1651911D845E4F00574CE5 /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
@@ -2031,32 +2015,6 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
-		6E11E4E01E59FBEC00EBA211 /* INAppStoreWindow */ = {
-			isa = PBXGroup;
-			children = (
-				6E11E4E11E59FBEC00EBA211 /* Extensions */,
-				6E11E4E81E59FBEC00EBA211 /* INAppStoreWindow.h */,
-				6E11E4E91E59FBEC00EBA211 /* INAppStoreWindow.m */,
-				6E11E4EA1E59FBEC00EBA211 /* INAppStoreWindowCompatibility.h */,
-				6E11E4EB1E59FBEC00EBA211 /* INWindowButton.h */,
-				6E11E4EC1E59FBEC00EBA211 /* INWindowButton.m */,
-			);
-			path = INAppStoreWindow;
-			sourceTree = "<group>";
-		};
-		6E11E4E11E59FBEC00EBA211 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6E11E4E21E59FBEC00EBA211 /* INAppStoreWindowSwizzling.c */,
-				6E11E4E31E59FBEC00EBA211 /* INAppStoreWindowSwizzling.h */,
-				6E11E4E41E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.h */,
-				6E11E4E51E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.m */,
-				6E11E4E61E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.h */,
-				6E11E4E71E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		6E11E4F21E59FC0100EBA211 /* MTDates */ = {
 			isa = PBXGroup;
 			children = (
@@ -2326,7 +2284,6 @@
 			children = (
 				6E7558CA1E595752003B6844 /* OpenStackSummit macOS-Bridging-Header.h */,
 				6E11E4F21E59FC0100EBA211 /* MTDates */,
-				6E11E4E01E59FBEC00EBA211 /* INAppStoreWindow */,
 				6E11E4F31E59FC0C00EBA211 /* TAAdaptiveSpaceItem */,
 			);
 			name = "Objective-C";
@@ -4308,7 +4265,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E11E4EF1E59FBEC00EBA211 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
 				6E11E4F51E59FC8500EBA211 /* MainWindowController.swift in Sources */,
 				6E7558C11E58D8D4003B6844 /* UXKit.swift in Sources */,
 				6E7558D01E595753003B6844 /* NSDateComponents+MTDates.m in Sources */,
@@ -4321,15 +4277,11 @@
 				6E7558841E58D02A003B6844 /* Store.swift in Sources */,
 				6E7558C31E58D97F003B6844 /* ShowActivityIndicatorProtocol.swift in Sources */,
 				6E75587E1E58C97F003B6844 /* Define.swift in Sources */,
-				6E11E4F01E59FBEC00EBA211 /* INAppStoreWindow.m in Sources */,
 				6E7558C61E58EB4A003B6844 /* VenuesMapViewController.swift in Sources */,
 				6E96FDA01E59F8D500EF38F0 /* TAAdaptiveSpaceItemView.m in Sources */,
 				6E7558CF1E595753003B6844 /* NSDate+MTDates.m in Sources */,
 				6E7558831E58D026003B6844 /* SummitManager.swift in Sources */,
 				6E96FD9F1E59F8D500EF38F0 /* TAAdaptiveSpaceItem.m in Sources */,
-				6E11E4F11E59FBEC00EBA211 /* INWindowButton.m in Sources */,
-				6E11E4EE1E59FBEC00EBA211 /* INWindowBackgroundView+CoreUIRendering.m in Sources */,
-				6E11E4ED1E59FBEC00EBA211 /* INAppStoreWindowSwizzling.c in Sources */,
 				6E7558701E58C62B003B6844 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

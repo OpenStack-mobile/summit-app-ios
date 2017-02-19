@@ -17,7 +17,9 @@ final class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] in self?.updateTitle() }
+        window?.titleVisibility = .Hidden
+        
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.updateTitle() }
         
         updateTitle()
     }
@@ -28,7 +30,7 @@ final class MainWindowController: NSWindowController {
         
         let summitID = SummitManager.shared.summit.value
         
-        if let summit = Summit.find(summitID, context: Store.shared.managedObjectContext) {
+        if let summit = try! Summit.find(summitID, context: Store.shared.managedObjectContext) {
             
             title += " - " + summit.name
         }
