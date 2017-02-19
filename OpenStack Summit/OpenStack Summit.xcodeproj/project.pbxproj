@@ -5908,6 +5908,7 @@
 				6E75587D1E58C62B003B6844 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E9F28FB1D7C903E002B7C7A /* Build configuration list for PBXNativeTarget "OpenStackSummitTV" */ = {
 			isa = XCConfigurationList;

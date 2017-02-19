@@ -59,9 +59,6 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         
         // set summit
         SummitManager.shared.summit.value = item.identifier
-        
-        // show view controller
-        self.performSegueWithIdentifier("showSummit", sender: nil)
     }
     
     // MARK: - Private Methods
@@ -146,5 +143,21 @@ final class SummitTableViewCell: NSTableCellView {
     @IBOutlet private(set) weak var nameLabel: NSTextField!
     
     @IBOutlet private(set) weak var dateLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var indicatorView: NSView!
+    
+    var isSelected = false {
+        
+        didSet {
+            
+            
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        //indicatorView
+    }
 }
 
