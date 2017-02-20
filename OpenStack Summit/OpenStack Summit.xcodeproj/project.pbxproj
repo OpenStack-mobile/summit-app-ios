@@ -440,6 +440,7 @@
 		6E730B961DA2F0CB005E486B /* PageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8E1DA2E405005E486B /* PageJSON.swift */; };
 		6E730B971DA2F0CC005E486B /* PageJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E730B8E1DA2E405005E486B /* PageJSON.swift */; };
 		6E7451031E5AB3980061E418 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
+		6E7451061E5ABA000061E418 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */; };
 		6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */; };
 		6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */; };
 		6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */; };
@@ -1377,6 +1378,7 @@
 		6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift; sourceTree = "<group>"; };
 		6E730B8C1DA2E254005E486B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		6E730B8E1DA2E405005E486B /* PageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageJSON.swift; sourceTree = "<group>"; };
+		6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
 		6E74FAF81D7C9EBC0018633D /* OpenStackSummitTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenStackSummitTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.h"; sourceTree = "<group>"; };
@@ -2145,6 +2147,7 @@
 				6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */,
 				6E7558711E58C62B003B6844 /* SummitsViewController.swift */,
 				6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */,
+				6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */,
 				6E3B74511E5A249C008A1BB2 /* EventDatesViewController.swift */,
 				6E3B74541E5A3A10008A1BB2 /* EventsViewController.swift */,
 				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
@@ -2246,6 +2249,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		6E7451041E5AB4880061E418 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		6E74FAEB1D7C95E70018633D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2297,6 +2307,7 @@
 				6E7558C91E595742003B6844 /* Objective-C */,
 				6E75586F1E58C62B003B6844 /* AppDelegate.swift */,
 				6E7558BF1E58D8D4003B6844 /* UXKit.swift */,
+				6E7451041E5AB4880061E418 /* View */,
 				6E3B74531E5A274A008A1BB2 /* Controller */,
 				6E7558731E58C62B003B6844 /* Assets.xcassets */,
 				6E7558751E58C62B003B6844 /* Main.storyboard */,
@@ -4317,6 +4328,7 @@
 				6E75587E1E58C97F003B6844 /* Define.swift in Sources */,
 				6E7558C61E58EB4A003B6844 /* VenuesMapViewController.swift in Sources */,
 				6E96FDA01E59F8D500EF38F0 /* TAAdaptiveSpaceItemView.m in Sources */,
+				6E7451061E5ABA000061E418 /* EventsSplitViewController.swift in Sources */,
 				6E7558CF1E595753003B6844 /* NSDate+MTDates.m in Sources */,
 				6E7558831E58D026003B6844 /* SummitManager.swift in Sources */,
 				6E96FD9F1E59F8D500EF38F0 /* TAAdaptiveSpaceItem.m in Sources */,

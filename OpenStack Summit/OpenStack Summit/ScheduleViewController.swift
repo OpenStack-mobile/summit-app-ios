@@ -374,7 +374,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         cell.sponsors = event.sponsors
         cell.track = event.track
         cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
+        cell.trackGroupColor = UIColor(hexString: event.trackGroupColor)
         
         // configure button
         cell.scheduleButton.addTarget(self, action: #selector(showEventContextMenu), forControlEvents: .TouchUpInside)

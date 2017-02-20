@@ -46,7 +46,9 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         pageController.refresh()
     }
     
-    @IBAction func tableViewDoubleClick(sender: AnyObject) {
+    @IBAction func tableViewClick(sender: AnyObject) {
+        
+        defer { tableView.deselectAll(sender) }
         
         guard tableView.selectedRow >= 0,
             case let .item(item) = pageController.items[tableView.selectedRow]

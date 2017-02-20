@@ -16,9 +16,9 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     @IBOutlet private(set) weak var tableView: NSTableView!
     
-    @IBOutlet private(set) weak var delegate: EventDatesViewControllerDelegate?
-    
     // MARK: - Properties
+    
+    weak var delegate: EventDatesViewControllerDelegate?
     
     private var summitCache: (start: NSDate, end: NSDate, timeZone: NSTimeZone, name: String)?
     
@@ -54,17 +54,13 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     // MARK: - Actions
     
     @IBAction func tableViewClick(sender: AnyObject) {
-        
+                
         guard tableView.selectedRow >= 0
             else { return }
         
         let selectedDate = summitCache!.start.mt_dateDaysAfter(tableView.selectedRow)
         
-        let endDate = selectedDate.mt_endOfCurrentDay()
-        
-        let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
-        
-        
+        delegate?.eventDatesViewController(self, didSelect: selectedDate)
     }
     
     // MARK: - Private Methods
@@ -115,8 +111,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
 
 // MARK: - Supporting Types
 
-@objc
-protocol EventDatesViewControllerDelegate: class {
+@objc protocol EventDatesViewControllerDelegate: class {
     
-    func eventDatesViewController(controller: EventDatesViewController)
+    func eventDatesViewController(controller: EventDatesViewController, didSelect date: NSDate)
 }

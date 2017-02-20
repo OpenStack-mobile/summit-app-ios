@@ -36,6 +36,19 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         configureView()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func tableViewClick(sender: AnyObject) {
+        
+        guard tableView.selectedRow >= 0
+            else { return }
+        
+        defer { tableView.deselectAll(sender) }
+        
+        // show controller for event detail
+        
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
@@ -70,6 +83,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         cell.locationLabel.stringValue = eventDetail.location
         cell.trackLabel.stringValue = eventDetail.track
         cell.typeLabel.stringValue = eventDetail.eventType
+        cell.trackGroupColorView.fillColor = NSColor(hexString: eventDetail.trackGroupColor) ?? NSColor.clearColor()
     }
     
     private subscript (indexPath: NSIndexPath) -> EventDetail {
@@ -156,4 +170,5 @@ final class EventTableViewCell: NSTableCellView {
     
     @IBOutlet private(set) weak var typeLabel: NSTextField!
     
+    @IBOutlet private(set) weak var trackGroupColorView: NSBox!
 }
