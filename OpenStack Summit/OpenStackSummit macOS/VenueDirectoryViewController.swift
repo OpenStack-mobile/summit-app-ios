@@ -43,6 +43,22 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         configureView()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func tableViewClick(sender: AnyObject? = nil) {
+        
+        guard tableView.selectedRow >= 0
+            else { return }
+        
+        defer { tableView.deselectAll(sender) }
+        
+        // get selected venue
+        
+        let venue = self.fetchedResultsController.fetchedObjects![tableView.selectedRow] as! VenueManagedObject
+        
+        delegate?.venueDirectoryViewController(self, didSelect: venue.identifier)
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
@@ -58,6 +74,17 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         try! self.fetchedResultsController.performFetch()
         
         self.tableView.reloadData()
+        
+        // select first row
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            
+            if self.tableView.numberOfRows > 0 {
+                
+                self.tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
+                
+                self.tableViewClick()
+            }
+        }
     }
     
     private func configure(cell cell: VenueTableViewCell, at row: Int) {
@@ -74,22 +101,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         // load image
         if let imageURL = NSURL(string: venue.backgroundImageURL ?? "") {
             
-            cell.venueImageView.loadCached(imageURL) { (response) in
-                
-                /*
-                // hide activity indicator
-                cell.activityIndicator.setHidden(true)
-                
-                // hide image view if no image
-                guard case .Data = response else {
-                    
-                    cell.imageView.setHidden(true)
-                    return
-                }
-                
-                cell.imageView.setHidden(false)
-                */
-            }
+            cell.venueImageView.loadCached(imageURL)
         }
     }
     

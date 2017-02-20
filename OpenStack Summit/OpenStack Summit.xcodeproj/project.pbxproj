@@ -444,6 +444,7 @@
 		6E7451081E5AC9B60061E418 /* VenueDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */; };
 		6E7451091E5ACCB40061E418 /* VenueListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5A51D106AD5008CBD0C /* VenueListItem.swift */; };
 		6E74510A1E5AD5C80061E418 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D0CD21D79CBA7004B435A /* ImageCache.swift */; };
+		6E74510C1E5AE34F0061E418 /* VenuesSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */; };
 		6E74FAED1D7C962B0018633D /* EventDatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */; };
 		6E74FAFD1D7C9EBC0018633D /* NSDate+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAFA1D7C9EBC0018633D /* NSDate+MTDates.m */; };
 		6E74FAFE1D7C9EBC0018633D /* NSDateComponents+MTDates.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FAFC1D7C9EBC0018633D /* NSDateComponents+MTDates.m */; };
@@ -1383,6 +1384,7 @@
 		6E730B8E1DA2E405005E486B /* PageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageJSON.swift; sourceTree = "<group>"; };
 		6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
 		6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDirectoryViewController.swift; sourceTree = "<group>"; };
+		6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenuesSplitViewController.swift; sourceTree = "<group>"; };
 		6E74FAEC1D7C962B0018633D /* EventDatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatesViewController.swift; sourceTree = "<group>"; };
 		6E74FAF81D7C9EBC0018633D /* OpenStackSummitTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenStackSummitTV-Bridging-Header.h"; sourceTree = "<group>"; };
 		6E74FAF91D7C9EBC0018633D /* NSDate+MTDates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+MTDates.h"; path = "../../Carthage/Checkouts/MTDates/MTDates/NSDate+MTDates.h"; sourceTree = "<group>"; };
@@ -2154,6 +2156,7 @@
 				6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */,
 				6E3B74511E5A249C008A1BB2 /* EventDatesViewController.swift */,
 				6E3B74541E5A3A10008A1BB2 /* EventsViewController.swift */,
+				6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */,
 				6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */,
 				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
 			);
@@ -4322,6 +4325,7 @@
 				6E7558721E58C62B003B6844 /* SummitsViewController.swift in Sources */,
 				6E7558C21E58D94D003B6844 /* PagingTableViewController.swift in Sources */,
 				6E7451031E5AB3980061E418 /* UIColor+HexString.swift in Sources */,
+				6E74510C1E5AE34F0061E418 /* VenuesSplitViewController.swift in Sources */,
 				6E7558C41E58D984003B6844 /* MessageEnabledViewController.swift in Sources */,
 				6E7558821E58D024003B6844 /* UserActivity.swift in Sources */,
 				6E7558811E58D01E003B6844 /* YouTubeThumbnail.swift in Sources */,

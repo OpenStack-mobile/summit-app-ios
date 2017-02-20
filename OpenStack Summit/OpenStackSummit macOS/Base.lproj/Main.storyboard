@@ -818,10 +818,10 @@
             </objects>
             <point key="canvasLocation" x="1658" y="63"/>
         </scene>
-        <!--Summits-->
+        <!--Summits View Controller-->
         <scene sceneID="N9y-22-x5v">
             <objects>
-                <viewController title="Summits" showSeguePresentationStyle="single" id="Tmj-Jh-ato" customClass="SummitsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="Tmj-Jh-ato" customClass="SummitsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="nZx-O5-s21">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1125,7 +1125,7 @@
         <scene sceneID="TQD-AB-g9P">
             <objects>
                 <customObject id="Uh9-nT-Cpq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <splitViewController title="Venues" storyboardIdentifier="Venues" id="hAA-yr-9tr" sceneMemberID="viewController">
+                <splitViewController title="Venues" storyboardIdentifier="Venues" id="hAA-yr-9tr" customClass="VenuesSplitViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="0H1-gs-a1b"/>
                         <splitViewItem id="qsr-hn-iba"/>
@@ -1168,10 +1168,10 @@
             </objects>
             <point key="canvasLocation" x="885" y="2662"/>
         </scene>
-        <!--Dates-->
+        <!--Event Dates View Controller-->
         <scene sceneID="Pzn-Db-U0E">
             <objects>
-                <viewController title="Dates" showSeguePresentationStyle="single" id="ZfW-ax-544" customClass="EventDatesViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="ZfW-ax-544" customClass="EventDatesViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="1ry-SF-fE2">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1276,10 +1276,10 @@
             </objects>
             <point key="canvasLocation" x="1809" y="597"/>
         </scene>
-        <!--Events-->
+        <!--Events View Controller-->
         <scene sceneID="UgP-OR-mKp">
             <objects>
-                <viewController title="Events" storyboardIdentifier="EventsViewController" id="bWb-uq-b6Q" customClass="EventsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventsViewController" id="bWb-uq-b6Q" customClass="EventsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Sr3-bv-GcO">
                         <rect key="frame" x="0.0" y="0.0" width="524" height="344"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1480,7 +1480,7 @@ Room 1</string>
         <!--Venue Directory View Controller-->
         <scene sceneID="V8e-Im-e4g">
             <objects>
-                <viewController storyboardIdentifier="VenueDirectoryViewController" id="tZh-ql-m02" customClass="VenueDirectoryViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VenueDirectoryViewController" showSeguePresentationStyle="single" id="tZh-ql-m02" customClass="VenueDirectoryViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="enZ-EN-weI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1488,7 +1488,7 @@ Room 1</string>
                             <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="txt-iZ-W7U">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                 <subviews>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="202" horizontalPageScroll="10" verticalLineScroll="202" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Ox-jr9">
+                                    <scrollView borderType="none" horizontalLineScroll="202" horizontalPageScroll="10" verticalLineScroll="202" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Ox-jr9">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ArU-0P-cSI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
@@ -1587,6 +1587,7 @@ Room 1</string>
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
+                                                        <action selector="tableViewClick:" target="tZh-ql-m02" id="wOz-aa-m03"/>
                                                         <outlet property="dataSource" destination="tZh-ql-m02" id="8ZK-VI-sb7"/>
                                                         <outlet property="delegate" destination="tZh-ql-m02" id="dL5-3L-uwR"/>
                                                     </connections>
@@ -1602,7 +1603,7 @@ Room 1</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="yCJ-PX-cl6">
-                                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                            <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -1630,10 +1631,10 @@ Room 1</string>
             </objects>
             <point key="canvasLocation" x="1374" y="1417"/>
         </scene>
-        <!--Venues Map View Controller-->
+        <!--Venue Map View Controller-->
         <scene sceneID="tjy-ao-4Fa">
             <objects>
-                <viewController id="aIE-6C-zAZ" customClass="VenuesMapViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VenueMapViewController" showSeguePresentationStyle="single" id="aIE-6C-zAZ" customClass="VenueMapViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="0ir-6q-LXk">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
