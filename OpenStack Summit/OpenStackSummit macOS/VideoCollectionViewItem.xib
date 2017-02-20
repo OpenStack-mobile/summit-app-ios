@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,22 +35,34 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <box boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="4" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-WQ-vjo">
+                            <rect key="frame" x="8" y="33" width="308" height="173"/>
+                            <view key="contentView" id="bCc-PP-x2L">
+                                <rect key="frame" x="0.0" y="0.0" width="308" height="173"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                            <color key="fillColor" red="0.17642489450000001" green="0.60687987239999996" blue="0.82575757579999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </box>
                         <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ol6-tE-DFC">
                             <rect key="frame" x="8" y="33" width="308" height="173"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Ol6-tE-DFC" secondAttribute="height" multiplier="1280:720" id="FhA-5y-jVB"/>
                             </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="play" id="AFc-GL-ZY9"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="AFc-GL-ZY9"/>
                         </imageView>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Ol6-tE-DFC" secondAttribute="trailing" constant="8" id="4E9-As-nEG"/>
+                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="top" secondItem="e4P-WQ-vjo" secondAttribute="top" id="E3E-Mw-DKJ"/>
                         <constraint firstItem="ehq-e4-bch" firstAttribute="leading" secondItem="PKx-WK-QvQ" secondAttribute="leading" constant="8" id="ENF-Ld-Vqc"/>
                         <constraint firstItem="Ol6-tE-DFC" firstAttribute="top" secondItem="PKx-WK-QvQ" secondAttribute="top" constant="8" id="I23-46-8HG"/>
                         <constraint firstAttribute="trailing" secondItem="ehq-e4-bch" secondAttribute="trailing" constant="8" id="KqV-Qi-ZHW"/>
                         <constraint firstAttribute="bottom" secondItem="ehq-e4-bch" secondAttribute="bottom" constant="8" id="OyI-up-vsf"/>
                         <constraint firstItem="ehq-e4-bch" firstAttribute="top" secondItem="Ol6-tE-DFC" secondAttribute="bottom" constant="8" id="lVc-wb-53e"/>
+                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="bottom" secondItem="e4P-WQ-vjo" secondAttribute="bottom" id="obJ-r3-kVi"/>
+                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="leading" secondItem="e4P-WQ-vjo" secondAttribute="leading" id="udj-Dp-o1h"/>
                         <constraint firstItem="Ol6-tE-DFC" firstAttribute="leading" secondItem="PKx-WK-QvQ" secondAttribute="leading" constant="8" id="vCY-Gz-ZDM"/>
+                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="trailing" secondItem="e4P-WQ-vjo" secondAttribute="trailing" id="yBE-gO-Muf"/>
                     </constraints>
                 </customView>
             </subviews>
@@ -59,10 +72,7 @@
                 <constraint firstAttribute="bottom" secondItem="PKx-WK-QvQ" secondAttribute="bottom" id="QQy-hl-O2v"/>
                 <constraint firstAttribute="trailing" secondItem="PKx-WK-QvQ" secondAttribute="trailing" id="TY4-CI-b2Z"/>
             </constraints>
-            <point key="canvasLocation" x="168" y="188.5"/>
+            <point key="canvasLocation" x="168" y="188"/>
         </view>
     </objects>
-    <resources>
-        <image name="play" width="121" height="121"/>
-    </resources>
 </document>

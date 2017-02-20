@@ -2170,16 +2170,8 @@
 			children = (
 				6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */,
 				6E74510F1E5AEB710061E418 /* Preferences */,
-				6E7558711E58C62B003B6844 /* SummitsViewController.swift */,
-				6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */,
 				6E74510D1E5AEB620061E418 /* Events */,
-				6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */,
-				6E3B74511E5A249C008A1BB2 /* EventDatesViewController.swift */,
-				6E3B74541E5A3A10008A1BB2 /* EventsViewController.swift */,
 				6E74510E1E5AEB6A0061E418 /* Venues */,
-				6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */,
-				6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */,
-				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
 				6E7451121E5AEBA10061E418 /* Speakers */,
 				6E31EC911E5B6FAE000E5BAC /* Videos */,
 			);
@@ -2294,6 +2286,9 @@
 		6E74510D1E5AEB620061E418 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */,
+				6E3B74511E5A249C008A1BB2 /* EventDatesViewController.swift */,
+				6E3B74541E5A3A10008A1BB2 /* EventsViewController.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -2301,6 +2296,9 @@
 		6E74510E1E5AEB6A0061E418 /* Venues */ = {
 			isa = PBXGroup;
 			children = (
+				6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */,
+				6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */,
+				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
 			);
 			name = Venues;
 			sourceTree = "<group>";
@@ -2308,6 +2306,8 @@
 		6E74510F1E5AEB710061E418 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				6E7558711E58C62B003B6844 /* SummitsViewController.swift */,
+				6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
