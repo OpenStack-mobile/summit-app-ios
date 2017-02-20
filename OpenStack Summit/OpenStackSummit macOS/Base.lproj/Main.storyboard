@@ -1210,11 +1210,63 @@
         <!--Videos-->
         <scene sceneID="xh3-mG-bOT">
             <objects>
-                <viewController title="Videos" storyboardIdentifier="Videos" showSeguePresentationStyle="single" id="8Rl-UC-peh" sceneMemberID="viewController">
+                <viewController title="Videos" storyboardIdentifier="Videos" showSeguePresentationStyle="single" id="8Rl-UC-peh" customClass="VideosViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Fcy-ET-gsz">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="TxI-2O-rFv">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5Y-Bg-wrE">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                        <clipView key="contentView" drawsBackground="NO" id="Pbc-v2-KIr">
+                                            <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <collectionView selectable="YES" id="Zy7-Zl-i8q">
+                                                    <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="lWP-AO-s0N">
+                                                        <size key="itemSize" width="324" height="221"/>
+                                                    </collectionViewFlowLayout>
+                                                    <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="8Rl-UC-peh" id="Xae-Zk-xJj"/>
+                                                        <outlet property="delegate" destination="8Rl-UC-peh" id="iCi-RQ-85G"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="vb2-BI-FwV">
+                                            <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lGG-Gm-dAE">
+                                            <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="I5Y-Bg-wrE" firstAttribute="leading" secondItem="TxI-2O-rFv" secondAttribute="leading" id="Cx5-y8-tVt"/>
+                                    <constraint firstAttribute="bottom" secondItem="I5Y-Bg-wrE" secondAttribute="bottom" id="FYI-sy-gBQ"/>
+                                    <constraint firstItem="I5Y-Bg-wrE" firstAttribute="top" secondItem="TxI-2O-rFv" secondAttribute="top" id="bhL-rB-lHy"/>
+                                    <constraint firstAttribute="trailing" secondItem="I5Y-Bg-wrE" secondAttribute="trailing" id="dNl-Yh-2yH"/>
+                                </constraints>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="TxI-2O-rFv" firstAttribute="top" secondItem="Fcy-ET-gsz" secondAttribute="top" id="DpD-cz-mc7"/>
+                            <constraint firstAttribute="trailing" secondItem="TxI-2O-rFv" secondAttribute="trailing" id="WPu-Ta-PJK"/>
+                            <constraint firstAttribute="bottom" secondItem="TxI-2O-rFv" secondAttribute="bottom" id="mQG-ym-QbY"/>
+                            <constraint firstItem="TxI-2O-rFv" firstAttribute="leading" secondItem="Fcy-ET-gsz" secondAttribute="leading" id="vxg-pD-zZN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Zy7-Zl-i8q" id="ejm-8l-4m4"/>
+                    </connections>
                 </viewController>
                 <customObject id="xaz-Iw-EZU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1709,30 +1761,6 @@ Room 1</string>
                 <customObject id="0dD-A3-Ppc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1365" y="1807"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="9kn-g9-TWb">
-            <objects>
-                <viewController id="8JP-qj-9sB" sceneMemberID="viewController">
-                    <view key="view" id="n67-Qa-acX">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKg-WQ-dIN">
-                                <rect key="frame" x="18" y="263" width="92" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Multiline Label" id="fgH-zd-dVX">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                    </view>
-                </viewController>
-                <customObject id="FpS-Vi-OHm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1892" y="1807"/>
         </scene>
     </scenes>
     <resources>

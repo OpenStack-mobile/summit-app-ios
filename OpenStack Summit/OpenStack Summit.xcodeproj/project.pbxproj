@@ -343,6 +343,8 @@
 		6E313C201D413255005132DA /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E313C1F1D413254005132DA /* VenueDetailViewController.swift */; };
 		6E31EC8C1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */; };
 		6E31EC8E1E5B5B31000E5BAC /* PersonCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31EC8D1E5B5B31000E5BAC /* PersonCollectionViewItem.swift */; };
+		6E31EC901E5B6FA9000E5BAC /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31EC8F1E5B6FA9000E5BAC /* VideosViewController.swift */; };
+		6E31EC931E5B7362000E5BAC /* VideoCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */; };
 		6E323D1E1D77189500E8C9B3 /* WebConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */; };
 		6E3A53561E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
 		6E3A53571E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
@@ -1320,6 +1322,8 @@
 		6E313C1F1D413254005132DA /* VenueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewController.swift; sourceTree = "<group>"; };
 		6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCollectionViewItem.xib; sourceTree = "<group>"; };
 		6E31EC8D1E5B5B31000E5BAC /* PersonCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewItem.swift; sourceTree = "<group>"; };
+		6E31EC8F1E5B6FA9000E5BAC /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
+		6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCollectionViewItem.xib; sourceTree = "<group>"; };
 		6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConvertible.swift; sourceTree = "<group>"; };
 		6E35086E1D9AE4900055801C /* DataUpdates5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates5.json; sourceTree = "<group>"; };
 		6E3A53551E325EE100EA7CAF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -2153,14 +2157,31 @@
 			name = Venues;
 			sourceTree = "<group>";
 		};
+		6E31EC911E5B6FAE000E5BAC /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				6E31EC8F1E5B6FA9000E5BAC /* VideosViewController.swift */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
 		6E3B74531E5A274A008A1BB2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */,
 				6E74510F1E5AEB710061E418 /* Preferences */,
+				6E7558711E58C62B003B6844 /* SummitsViewController.swift */,
+				6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */,
 				6E74510D1E5AEB620061E418 /* Events */,
+				6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */,
+				6E3B74511E5A249C008A1BB2 /* EventDatesViewController.swift */,
+				6E3B74541E5A3A10008A1BB2 /* EventsViewController.swift */,
 				6E74510E1E5AEB6A0061E418 /* Venues */,
+				6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */,
+				6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */,
+				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
 				6E7451121E5AEBA10061E418 /* Speakers */,
+				6E31EC911E5B6FAE000E5BAC /* Videos */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2265,6 +2286,7 @@
 				6E7558BF1E58D8D4003B6844 /* UXKit.swift */,
 				6E31EC8D1E5B5B31000E5BAC /* PersonCollectionViewItem.swift */,
 				6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */,
+				6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2272,9 +2294,6 @@
 		6E74510D1E5AEB620061E418 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				6E7451051E5ABA000061E418 /* EventsSplitViewController.swift */,
-				6E3B74511E5A249C008A1BB2 /* EventDatesViewController.swift */,
-				6E3B74541E5A3A10008A1BB2 /* EventsViewController.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -2282,9 +2301,6 @@
 		6E74510E1E5AEB6A0061E418 /* Venues */ = {
 			isa = PBXGroup;
 			children = (
-				6E74510B1E5AE34F0061E418 /* VenuesSplitViewController.swift */,
-				6E7451071E5AC9B60061E418 /* VenueDirectoryViewController.swift */,
-				6E7558C51E58EB4A003B6844 /* VenuesMapViewController.swift */,
 			);
 			name = Venues;
 			sourceTree = "<group>";
@@ -2292,8 +2308,6 @@
 		6E74510F1E5AEB710061E418 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				6E7558711E58C62B003B6844 /* SummitsViewController.swift */,
-				6E3B744F1E5A1535008A1BB2 /* SummitViewController.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -3288,6 +3302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E31EC8C1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib in Resources */,
+				6E31EC931E5B7362000E5BAC /* VideoCollectionViewItem.xib in Resources */,
 				6E7558741E58C62B003B6844 /* Assets.xcassets in Resources */,
 				6E7558771E58C62B003B6844 /* Main.storyboard in Resources */,
 			);
@@ -4390,6 +4405,7 @@
 				6E7451091E5ACCB40061E418 /* VenueListItem.swift in Sources */,
 				6E74510A1E5AD5C80061E418 /* ImageCache.swift in Sources */,
 				6E31EC8E1E5B5B31000E5BAC /* PersonCollectionViewItem.swift in Sources */,
+				6E31EC901E5B6FA9000E5BAC /* VideosViewController.swift in Sources */,
 				6E3B74501E5A1535008A1BB2 /* SummitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
