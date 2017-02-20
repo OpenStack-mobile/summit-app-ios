@@ -1159,11 +1159,11 @@
                                             <rect key="frame" x="1" y="1" width="448" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <collectionView id="zVQ-uM-j1h">
+                                                <collectionView selectable="YES" id="zVQ-uM-j1h">
                                                     <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="7hF-kd-ijo">
-                                                        <size key="itemSize" width="150" height="150"/>
+                                                        <size key="itemSize" width="166" height="191"/>
                                                     </collectionViewFlowLayout>
                                                     <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <connections>
@@ -1206,46 +1206,6 @@
                 <customObject id="D8c-S4-xF5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="885" y="2266"/>
-        </scene>
-        <!--Collection View Item-->
-        <scene sceneID="m49-Wr-yW1">
-            <objects>
-                <collectionViewItem storyboardIdentifier="PersonCollectionViewItem" id="ANk-Tr-5P3" sceneMemberID="viewController">
-                    <view key="view" id="htg-79-rh5">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0EW-zS-DAo">
-                                <rect key="frame" x="6" y="8" width="138" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Alsey Coleman Miller" id="2uJ-ob-tHo">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KaK-MY-H6v">
-                                <rect key="frame" x="8" y="33" width="134" height="109"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSUser" id="mCh-hQ-KWx"/>
-                            </imageView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="0EW-zS-DAo" firstAttribute="leading" secondItem="htg-79-rh5" secondAttribute="leading" constant="8" id="3aZ-0D-QLq"/>
-                            <constraint firstItem="0EW-zS-DAo" firstAttribute="top" secondItem="KaK-MY-H6v" secondAttribute="bottom" constant="8" id="7DP-Qn-T2s"/>
-                            <constraint firstAttribute="trailing" secondItem="KaK-MY-H6v" secondAttribute="trailing" constant="8" id="HdK-QE-okX"/>
-                            <constraint firstAttribute="bottom" secondItem="0EW-zS-DAo" secondAttribute="bottom" constant="8" id="V2W-2b-tJa"/>
-                            <constraint firstAttribute="trailing" secondItem="0EW-zS-DAo" secondAttribute="trailing" constant="8" id="dem-bo-DEi"/>
-                            <constraint firstItem="KaK-MY-H6v" firstAttribute="leading" secondItem="htg-79-rh5" secondAttribute="leading" constant="8" id="iy7-5x-LZf"/>
-                            <constraint firstItem="KaK-MY-H6v" firstAttribute="top" secondItem="htg-79-rh5" secondAttribute="top" constant="8" id="oLU-uO-6ec"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="KaK-MY-H6v" id="OVs-V7-Heb"/>
-                        <outlet property="textField" destination="0EW-zS-DAo" id="DUr-a7-Q1u"/>
-                    </connections>
-                </collectionViewItem>
-                <customObject id="9x8-fk-fec" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1215" y="2191"/>
         </scene>
         <!--Videos-->
         <scene sceneID="xh3-mG-bOT">
@@ -1448,7 +1408,7 @@
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Wc-NK-SI6">
                                                                             <rect key="frame" x="14" y="81" width="501" height="24"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Event Name" id="RUm-fR-Zr5">
+                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Event Name" id="RUm-fR-Zr5">
                                                                                 <font key="font" metaFont="system" size="20"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1464,7 +1424,7 @@
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tAl-Kb-Bz0">
                                                                             <rect key="frame" x="42" y="35" width="473" height="38"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="C8E-b4-VZw">
+                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="C8E-b4-VZw">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <string key="title">Location
 Room 1</string>
@@ -1623,7 +1583,7 @@ Room 1</string>
                                                                                     <subviews>
                                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ujb-ee-FZ7">
                                                                                             <rect key="frame" x="-2" y="32" width="292" height="29"/>
-                                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Hilton" id="SYj-af-fkW">
+                                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Hilton" id="SYj-af-fkW">
                                                                                                 <font key="font" metaFont="system" size="24"/>
                                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -47,31 +47,62 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
-        let predicate = NSPredicate(format: "summit.id == %@", summitID)
+        let predicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
         
-        let sort = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: SpeakerManagedObject.sortDescriptors,
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
         self.collectionView.reloadData()
     }
     
+    private func configure(item item: PersonCollectionViewItem, at indexPath: NSIndexPath) {
+        
+        let managedObject = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        
+        let speaker = Speaker(managedObject: managedObject)
+        
+        item.representedObject = managedObject
+        
+        item.configure(with: speaker)
+    }
+    
     // MARK: - NSCollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
         
-        return 0
+        return fetchedResultsController.sections?.count ?? 0
     }
     
     func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
         
-        return NSCollectionViewItem()
+        let item = collectionView.makeItemWithIdentifier("PersonCollectionViewItem", forIndexPath: indexPath) as! PersonCollectionViewItem
+        
+        configure(item: item, at: indexPath)
+        
+        return item
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+        //self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        //self.tableView.endUpdates()
+        
+        self.collectionView.reloadData()
     }
 }

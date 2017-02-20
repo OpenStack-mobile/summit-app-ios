@@ -104,7 +104,7 @@ public extension ImageCache {
     }
 }
 
-public protocol ImageCacheView: class {
+public protocol ImageCacheView: class, Hashable {
     
     func loadCached(url: NSURL, placeholder: UIImage?, cache: ImageCache, completion: (ImageCache.Response -> ())?)
     
@@ -116,6 +116,8 @@ public protocol ImageCacheView: class {
     
     func setImageData(imageData: NSData?)
 }
+
+private var InProgressCache = [Int: NSURL]()
 
 public extension ImageCacheView {
     
@@ -131,16 +133,26 @@ public extension ImageCacheView {
             #endif
         }
         
+        let hash = self.hashValue
+        
+        InProgressCache[hash] = url
+        
         // load data
         cache.load(url) { [weak self] (response) in
             
-            guard let interface = self else { return }
+            guard let view = self else { return }
+            
+            // make sure image view hasnt been reused
+            guard InProgressCache[hash] == url else { return }
+            
+            // remove from cache
+            InProgressCache[hash] = nil
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
                 if case let .Data(data) = response {
                     
-                    interface.setImageData(data)
+                    view.setImageData(data)
                 }
                 
                 // forward completion block
