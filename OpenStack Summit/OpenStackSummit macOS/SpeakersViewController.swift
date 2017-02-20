@@ -130,11 +130,15 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
             
         case "showSpeaker":
             
+            let windowController = segue.destinationController as! NSWindowController
+            
+            let speakerViewController = windowController.contentViewController as! SpeakerViewController
+            
             let indexPath = collectionView.selectionIndexPaths.first!
             
-            let speaker = fetchedResultsController.objectAtIndexPath(indexPath)
+            let speaker = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
             
-            
+            speakerViewController.speaker = speaker.identifier
             
         default: fatalError()
         }

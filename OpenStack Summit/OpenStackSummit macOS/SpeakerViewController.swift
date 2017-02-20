@@ -15,7 +15,10 @@ final class SpeakerViewController: NSSplitViewController {
     
     // MARK: - Properties
     
-    var speaker: Identifier!
+    var speaker: Identifier? {
+        
+        didSet { configureView() }
+    }
     
     private var entityController: EntityController<Speaker>!
     
@@ -36,35 +39,30 @@ final class SpeakerViewController: NSSplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        assert(speaker, "Did not set speaker")
-        
         configureView()
     }
     
     // MARK: - Private Methods
-    
+        
     private func configureView() {
         
-        // configure child view controllers
-        
-        memberProfileViewController.profile = .speaker(speaker)
-        
-        eventsViewController.predicate = NSPredicate()
-        
-        // obserb
-        entityController = EntityController(identifier: speaker,
-                                            entity: SpeakerManagedObject.self,
-                                            context: Store.shared.managedObjectContext)
-        
-        entityController.event.updated = { [weak self] _ in self?.configureView() }
-        
-        entityController.event.deleted = { [weak self] _ in self?.configureView() }
-        
-        ")
-    }
-    
-    private func updateUI() {
-        
-        
+        if let speaker = self.speaker {
+            
+            // configure child view controllers
+            
+            memberProfileViewController.profile = .speaker(speaker)
+            
+            let speakerID = NSNumber(longLong: Int64(speaker))
+            
+            let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+            
+            eventsViewController.predicate = NSPredicate(format: "ANY presentation.speakers.id == %@ && summit.id == %@", speakerID, summitID)
+            
+        } else {
+            
+            memberProfileViewController.profile = .currentUser
+            
+            eventsViewController.predicate = NSPredicate(value: false)
+        }
     }
 }

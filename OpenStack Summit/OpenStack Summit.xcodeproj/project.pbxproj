@@ -352,6 +352,8 @@
 		6E31ECA51E5B89B1000E5BAC /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECA41E5B89B1000E5BAC /* MemberProfileViewController.swift */; };
 		6E31ECA81E5B8E46000E5BAC /* ContentBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */; };
 		6E31ECAA1E5B91DD000E5BAC /* MemberProfileIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */; };
+		6E31ECAC1E5BA1ED000E5BAC /* SpeakerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECAB1E5BA1ED000E5BAC /* SpeakerWindowController.swift */; };
+		6E31ECAF1E5BA89C000E5BAC /* GRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECAE1E5BA89C000E5BAC /* GRTextField.m */; };
 		6E323D1E1D77189500E8C9B3 /* WebConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */; };
 		6E3A53561E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
 		6E3A53571E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
@@ -1337,6 +1339,9 @@
 		6E31ECA21E5B8951000E5BAC /* SpeakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerViewController.swift; sourceTree = "<group>"; };
 		6E31ECA41E5B89B1000E5BAC /* MemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
 		6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentBackgroundView.swift; sourceTree = "<group>"; };
+		6E31ECAB1E5BA1ED000E5BAC /* SpeakerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerWindowController.swift; sourceTree = "<group>"; };
+		6E31ECAD1E5BA89C000E5BAC /* GRTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTextField.h; sourceTree = "<group>"; };
+		6E31ECAE1E5BA89C000E5BAC /* GRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTextField.m; sourceTree = "<group>"; };
 		6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConvertible.swift; sourceTree = "<group>"; };
 		6E35086E1D9AE4900055801C /* DataUpdates5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates5.json; sourceTree = "<group>"; };
 		6E3A53551E325EE100EA7CAF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -2329,6 +2334,7 @@
 			isa = PBXGroup;
 			children = (
 				6E7451101E5AEB9D0061E418 /* SpeakersViewController.swift */,
+				6E31ECAB1E5BA1ED000E5BAC /* SpeakerWindowController.swift */,
 				6E31ECA21E5B8951000E5BAC /* SpeakerViewController.swift */,
 				6E31ECA41E5B89B1000E5BAC /* MemberProfileViewController.swift */,
 			);
@@ -2402,6 +2408,8 @@
 			isa = PBXGroup;
 			children = (
 				6E7558CA1E595752003B6844 /* OpenStackSummit macOS-Bridging-Header.h */,
+				6E31ECAD1E5BA89C000E5BAC /* GRTextField.h */,
+				6E31ECAE1E5BA89C000E5BAC /* GRTextField.m */,
 				6E11E4F21E59FC0100EBA211 /* MTDates */,
 				6E11E4F31E59FC0C00EBA211 /* TAAdaptiveSpaceItem */,
 			);
@@ -4413,6 +4421,7 @@
 				6E7451031E5AB3980061E418 /* UIColor+HexString.swift in Sources */,
 				6E74510C1E5AE34F0061E418 /* VenuesSplitViewController.swift in Sources */,
 				6E7558C41E58D984003B6844 /* MessageEnabledViewController.swift in Sources */,
+				6E31ECAC1E5BA1ED000E5BAC /* SpeakerWindowController.swift in Sources */,
 				6E7558821E58D024003B6844 /* UserActivity.swift in Sources */,
 				6E7558811E58D01E003B6844 /* YouTubeThumbnail.swift in Sources */,
 				6E3B74571E5A3EB0008A1BB2 /* EventDetail.swift in Sources */,
@@ -4428,6 +4437,7 @@
 				6E7451061E5ABA000061E418 /* EventsSplitViewController.swift in Sources */,
 				6E7558CF1E595753003B6844 /* NSDate+MTDates.m in Sources */,
 				6E7558831E58D026003B6844 /* SummitManager.swift in Sources */,
+				6E31ECAF1E5BA89C000E5BAC /* GRTextField.m in Sources */,
 				6E96FD9F1E59F8D500EF38F0 /* TAAdaptiveSpaceItem.m in Sources */,
 				6E3B74561E5A3EAE008A1BB2 /* ScheduleItem.swift in Sources */,
 				6E31ECAA1E5B91DD000E5BAC /* MemberProfileIdentifier.swift in Sources */,
