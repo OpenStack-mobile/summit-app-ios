@@ -344,6 +344,14 @@
 		6E31EC8C1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */; };
 		6E31EC901E5B6FA9000E5BAC /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31EC8F1E5B6FA9000E5BAC /* VideosViewController.swift */; };
 		6E31EC931E5B7362000E5BAC /* VideoCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */; };
+		6E31EC9B1E5B8521000E5BAC /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC9A1E5B8521000E5BAC /* Speakers.storyboard */; };
+		6E31EC9D1E5B852A000E5BAC /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC9C1E5B852A000E5BAC /* Events.storyboard */; };
+		6E31EC9F1E5B8538000E5BAC /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E31EC9E1E5B8538000E5BAC /* Venues.storyboard */; };
+		6E31ECA11E5B8549000E5BAC /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E31ECA01E5B8549000E5BAC /* Videos.storyboard */; };
+		6E31ECA31E5B8951000E5BAC /* SpeakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECA21E5B8951000E5BAC /* SpeakerViewController.swift */; };
+		6E31ECA51E5B89B1000E5BAC /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECA41E5B89B1000E5BAC /* MemberProfileViewController.swift */; };
+		6E31ECA81E5B8E46000E5BAC /* ContentBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */; };
+		6E31ECAA1E5B91DD000E5BAC /* MemberProfileIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB752611D18B14C00BC294D /* MemberProfileIdentifier.swift */; };
 		6E323D1E1D77189500E8C9B3 /* WebConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */; };
 		6E3A53561E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
 		6E3A53571E325EE100EA7CAF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A53551E325EE100EA7CAF /* String.swift */; };
@@ -1322,6 +1330,13 @@
 		6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCollectionViewItem.xib; sourceTree = "<group>"; };
 		6E31EC8F1E5B6FA9000E5BAC /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCollectionViewItem.xib; sourceTree = "<group>"; };
+		6E31EC9A1E5B8521000E5BAC /* Speakers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speakers.storyboard; sourceTree = "<group>"; };
+		6E31EC9C1E5B852A000E5BAC /* Events.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
+		6E31EC9E1E5B8538000E5BAC /* Venues.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Venues.storyboard; sourceTree = "<group>"; };
+		6E31ECA01E5B8549000E5BAC /* Videos.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Videos.storyboard; sourceTree = "<group>"; };
+		6E31ECA21E5B8951000E5BAC /* SpeakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerViewController.swift; sourceTree = "<group>"; };
+		6E31ECA41E5B89B1000E5BAC /* MemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
+		6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentBackgroundView.swift; sourceTree = "<group>"; };
 		6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConvertible.swift; sourceTree = "<group>"; };
 		6E35086E1D9AE4900055801C /* DataUpdates5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates5.json; sourceTree = "<group>"; };
 		6E3A53551E325EE100EA7CAF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -2274,6 +2289,7 @@
 			isa = PBXGroup;
 			children = (
 				6E7558BF1E58D8D4003B6844 /* UXKit.swift */,
+				6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */,
 				6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */,
 				6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */,
 			);
@@ -2313,6 +2329,8 @@
 			isa = PBXGroup;
 			children = (
 				6E7451101E5AEB9D0061E418 /* SpeakersViewController.swift */,
+				6E31ECA21E5B8951000E5BAC /* SpeakerViewController.swift */,
+				6E31ECA41E5B89B1000E5BAC /* MemberProfileViewController.swift */,
 			);
 			name = Speakers;
 			sourceTree = "<group>";
@@ -2367,11 +2385,15 @@
 				6E11E4F61E5A120400EBA211 /* OpenStackSummit.entitlements */,
 				6E7558C91E595742003B6844 /* Objective-C */,
 				6E75586F1E58C62B003B6844 /* AppDelegate.swift */,
-				6E7451041E5AB4880061E418 /* View */,
-				6E3B74531E5A274A008A1BB2 /* Controller */,
 				6E7558731E58C62B003B6844 /* Assets.xcassets */,
 				6E7558751E58C62B003B6844 /* Main.storyboard */,
+				6E31EC9C1E5B852A000E5BAC /* Events.storyboard */,
+				6E31EC9E1E5B8538000E5BAC /* Venues.storyboard */,
+				6E31EC9A1E5B8521000E5BAC /* Speakers.storyboard */,
+				6E31ECA01E5B8549000E5BAC /* Videos.storyboard */,
 				6E7558781E58C62B003B6844 /* Info.plist */,
+				6E7451041E5AB4880061E418 /* View */,
+				6E3B74531E5A274A008A1BB2 /* Controller */,
 			);
 			path = "OpenStackSummit macOS";
 			sourceTree = "<group>";
@@ -3298,9 +3320,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E31EC9B1E5B8521000E5BAC /* Speakers.storyboard in Resources */,
 				6E31EC8C1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib in Resources */,
+				6E31ECA11E5B8549000E5BAC /* Videos.storyboard in Resources */,
+				6E31EC9D1E5B852A000E5BAC /* Events.storyboard in Resources */,
 				6E31EC931E5B7362000E5BAC /* VideoCollectionViewItem.xib in Resources */,
 				6E7558741E58C62B003B6844 /* Assets.xcassets in Resources */,
+				6E31EC9F1E5B8538000E5BAC /* Venues.storyboard in Resources */,
 				6E7558771E58C62B003B6844 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4378,7 +4404,9 @@
 			files = (
 				6E11E4F51E59FC8500EBA211 /* MainWindowController.swift in Sources */,
 				6E7558C11E58D8D4003B6844 /* UXKit.swift in Sources */,
+				6E31ECA31E5B8951000E5BAC /* SpeakerViewController.swift in Sources */,
 				6E7558D01E595753003B6844 /* NSDateComponents+MTDates.m in Sources */,
+				6E31ECA81E5B8E46000E5BAC /* ContentBackgroundView.swift in Sources */,
 				6E7558BE1E58D81E003B6844 /* Observable.swift in Sources */,
 				6E7558721E58C62B003B6844 /* SummitsViewController.swift in Sources */,
 				6E7558C21E58D94D003B6844 /* PagingTableViewController.swift in Sources */,
@@ -4402,7 +4430,9 @@
 				6E7558831E58D026003B6844 /* SummitManager.swift in Sources */,
 				6E96FD9F1E59F8D500EF38F0 /* TAAdaptiveSpaceItem.m in Sources */,
 				6E3B74561E5A3EAE008A1BB2 /* ScheduleItem.swift in Sources */,
+				6E31ECAA1E5B91DD000E5BAC /* MemberProfileIdentifier.swift in Sources */,
 				6E7558701E58C62B003B6844 /* AppDelegate.swift in Sources */,
+				6E31ECA51E5B89B1000E5BAC /* MemberProfileViewController.swift in Sources */,
 				6E7451091E5ACCB40061E418 /* VenueListItem.swift in Sources */,
 				6E74510A1E5AD5C80061E418 /* ImageCache.swift in Sources */,
 				6E31EC901E5B6FA9000E5BAC /* VideosViewController.swift in Sources */,

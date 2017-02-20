@@ -101,21 +101,11 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
         
+        let indexPath = indexPaths.first!
+        
         defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
         
-        indexPaths.forEach {
-            
-            let managedObject = fetchedResultsController.objectAtIndexPath($0) as! SpeakerManagedObject
-            
-            let speaker = Speaker(managedObject: managedObject)
-            
-            let summit = Summit(managedObject: currentSummit!)
-            
-            if let url = NSURL(string: speaker.toWebpageURL(summit)) {
-                
-                NSWorkspace.sharedWorkspace().openURL(url)
-            }
-        }
+        self.performSegueWithIdentifier("showSpeaker", sender: nil)
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -130,5 +120,23 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         //self.tableView.endUpdates()
         
         self.collectionView.reloadData()
+    }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "showSpeaker":
+            
+            let indexPath = collectionView.selectionIndexPaths.first!
+            
+            let speaker = fetchedResultsController.objectAtIndexPath(indexPath)
+            
+            
+            
+        default: fatalError()
+        }
     }
 }

@@ -18,7 +18,7 @@ final class MainWindowController: NSWindowController {
     
     private var summitObserver: Int?
     
-    private var contentViewControllersCache = [String: NSViewController]()
+    private var contentViewControllersCache = [ContentTab: NSViewController]()
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -53,30 +53,30 @@ final class MainWindowController: NSWindowController {
         
         let windowFrame = window!.frame
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        
         let content = ContentTab(rawValue: sender.selectedSegment)!
         
-        let contentViewControllerID: String
+        let storyboardName: String
                 
         switch content {
-        case .events: contentViewControllerID = "Events"
-        case .venues: contentViewControllerID = "Venues"
-        case .speakers: contentViewControllerID = "Speakers"
-        case .videos: contentViewControllerID = "Videos"
+        case .events: storyboardName = "Events"
+        case .venues: storyboardName = "Venues"
+        case .speakers: storyboardName = "Speakers"
+        case .videos: storyboardName = "Videos"
         }
         
         // set content view controler
         
-        if let cachedViewController = contentViewControllersCache[contentViewControllerID] {
+        if let cachedViewController = contentViewControllersCache[content] {
             
             contentViewController = cachedViewController
             
         } else {
             
-            let viewController = storyboard.instantiateControllerWithIdentifier(contentViewControllerID) as! NSViewController
+            let storyboard = NSStoryboard(name: storyboardName, bundle: nil)
             
-            contentViewControllersCache[contentViewControllerID] = viewController
+            let viewController = storyboard.instantiateInitialController() as? NSViewController
+            
+            contentViewControllersCache[content] = viewController
             
             contentViewController = viewController
         }

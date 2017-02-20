@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FJp-i3-hhV">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Venues-->
+        <scene sceneID="VZx-BG-chK">
+            <objects>
+                <customObject id="Xud-Mq-QcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <splitViewController title="Venues" storyboardIdentifier="Venues" showSeguePresentationStyle="single" id="FJp-i3-hhV" customClass="VenuesSplitViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="tIq-Lj-Wmf"/>
+                        <splitViewItem id="mXd-BT-c6d"/>
+                        <splitViewItem id="1bJ-QO-iw6"/>
+                        <splitViewItem id="su3-5a-lCw"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="EwG-ur-Ruv">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </splitView>
+                    <connections>
+                        <segue destination="w9S-8v-wxy" kind="relationship" relationship="splitItems" id="Swt-qb-Ugc"/>
+                        <segue destination="U1z-t2-fx0" kind="relationship" relationship="splitItems" id="Brq-yK-kkH"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="704" y="1663"/>
+        </scene>
+        <!--Venue Directory View Controller-->
+        <scene sceneID="1VH-cV-9zE">
+            <objects>
+                <viewController storyboardIdentifier="VenueDirectoryViewController" showSeguePresentationStyle="single" id="w9S-8v-wxy" customClass="VenueDirectoryViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="XKk-BV-Ztm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <visualEffectView appearanceType="vibrantDark" blendingMode="behindWindow" material="dark" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="B2g-oh-M5H">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                                <subviews>
+                                    <scrollView borderType="none" horizontalLineScroll="202" horizontalPageScroll="10" verticalLineScroll="202" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-El-4je">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="XA4-qn-tVL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="200" viewBased="YES" id="RY8-su-CGD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="323" height="300"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <size key="intercellSpacing" width="3" height="2"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
+                                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                    <tableColumns>
+                                                        <tableColumn editable="NO" width="320" minWidth="100" maxWidth="1000" id="TCc-nR-uHI">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            </tableHeaderCell>
+                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="wnj-Z6-Ldb">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <prototypeCellViews>
+                                                                <tableCellView id="kkK-Mb-Wln" customClass="VenueTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                                                    <rect key="frame" x="1" y="1" width="320" height="200"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <subviews>
+                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hhm-1N-1BG">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                                                            <subviews>
+                                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n6x-ez-Jg9">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="ovO-8Z-P3g"/>
+                                                                                </imageView>
+                                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="fH1-bo-eHD">
+                                                                                    <rect key="frame" x="16" y="70" width="288" height="61"/>
+                                                                                    <subviews>
+                                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ajO-kA-fva">
+                                                                                            <rect key="frame" x="-2" y="32" width="292" height="29"/>
+                                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Hilton" id="gjQ-dI-wkl">
+                                                                                                <font key="font" metaFont="system" size="24"/>
+                                                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                        </textField>
+                                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mCO-iJ-O1A">
+                                                                                            <rect key="frame" x="-2" y="0.0" width="292" height="24"/>
+                                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Av. Sesame 123, Lima, Peru" id="4hG-VE-kH4">
+                                                                                                <font key="font" metaFont="system" size="20"/>
+                                                                                                <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                            </textFieldCell>
+                                                                                        </textField>
+                                                                                    </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="mCO-iJ-O1A" firstAttribute="top" secondItem="ajO-kA-fva" secondAttribute="bottom" constant="8" id="DtW-rh-Z03"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="mCO-iJ-O1A" secondAttribute="bottom" id="IuC-fs-d3P"/>
+                                                                                        <constraint firstItem="ajO-kA-fva" firstAttribute="top" secondItem="fH1-bo-eHD" secondAttribute="top" id="NHq-6L-GLo"/>
+                                                                                        <constraint firstItem="mCO-iJ-O1A" firstAttribute="leading" secondItem="fH1-bo-eHD" secondAttribute="leading" id="Xje-xI-QPW"/>
+                                                                                        <constraint firstItem="ajO-kA-fva" firstAttribute="leading" secondItem="fH1-bo-eHD" secondAttribute="leading" id="fZw-wJ-vIS"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="mCO-iJ-O1A" secondAttribute="trailing" id="rMu-FR-nWK"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="ajO-kA-fva" secondAttribute="trailing" id="vMl-RD-PL1"/>
+                                                                                    </constraints>
+                                                                                </customView>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstItem="fH1-bo-eHD" firstAttribute="centerY" secondItem="Hhm-1N-1BG" secondAttribute="centerY" id="1Xi-Ir-zHI"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="fH1-bo-eHD" secondAttribute="trailing" constant="16" id="A4M-Zl-U2p"/>
+                                                                                <constraint firstItem="n6x-ez-Jg9" firstAttribute="top" secondItem="Hhm-1N-1BG" secondAttribute="top" id="EMk-XB-5uj"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="n6x-ez-Jg9" secondAttribute="trailing" id="EyW-yM-Y3L"/>
+                                                                                <constraint firstItem="n6x-ez-Jg9" firstAttribute="leading" secondItem="Hhm-1N-1BG" secondAttribute="leading" id="EzQ-f7-zUM"/>
+                                                                                <constraint firstItem="fH1-bo-eHD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hhm-1N-1BG" secondAttribute="top" constant="8" id="ItL-Mu-nyY"/>
+                                                                                <constraint firstItem="fH1-bo-eHD" firstAttribute="leading" secondItem="Hhm-1N-1BG" secondAttribute="leading" constant="16" id="RPr-kG-zPR"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="n6x-ez-Jg9" secondAttribute="bottom" id="wdK-Pf-5a3"/>
+                                                                            </constraints>
+                                                                        </customView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="Hhm-1N-1BG" firstAttribute="top" secondItem="kkK-Mb-Wln" secondAttribute="top" id="9SA-i9-oIB"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="Hhm-1N-1BG" secondAttribute="bottom" id="AIM-S2-zfJ"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Hhm-1N-1BG" secondAttribute="trailing" id="Z24-Qn-SV0"/>
+                                                                        <constraint firstItem="Hhm-1N-1BG" firstAttribute="leading" secondItem="kkK-Mb-Wln" secondAttribute="leading" id="kBV-tW-g21"/>
+                                                                    </constraints>
+                                                                    <connections>
+                                                                        <outlet property="imageView" destination="n6x-ez-Jg9" id="eVe-Ta-bFf"/>
+                                                                        <outlet property="textField" destination="ajO-kA-fva" id="GyB-Yy-Ey3"/>
+                                                                        <outlet property="venueAddressLabel" destination="mCO-iJ-O1A" id="4eA-ad-zcN"/>
+                                                                        <outlet property="venueImageView" destination="n6x-ez-Jg9" id="LDU-d7-Xv2"/>
+                                                                        <outlet property="venueNameLabel" destination="ajO-kA-fva" id="rn1-Nm-reP"/>
+                                                                    </connections>
+                                                                </tableCellView>
+                                                            </prototypeCellViews>
+                                                        </tableColumn>
+                                                    </tableColumns>
+                                                    <connections>
+                                                        <action selector="tableViewClick:" target="w9S-8v-wxy" id="fm8-80-eCA"/>
+                                                        <outlet property="dataSource" destination="w9S-8v-wxy" id="n9v-ce-jfG"/>
+                                                        <outlet property="delegate" destination="w9S-8v-wxy" id="2y7-Bp-uIT"/>
+                                                    </connections>
+                                                </tableView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </clipView>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="rYK-VG-4SU"/>
+                                        </constraints>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="paA-pV-Get">
+                                            <rect key="frame" x="-100" y="-100" width="470" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="GlZ-5l-rwy">
+                                            <rect key="frame" x="-100" y="-100" width="15" height="102"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="4kR-El-4je" firstAttribute="leading" secondItem="B2g-oh-M5H" secondAttribute="leading" id="43y-eq-2vK"/>
+                                    <constraint firstAttribute="bottom" secondItem="4kR-El-4je" secondAttribute="bottom" id="G8U-eo-D0A"/>
+                                    <constraint firstItem="4kR-El-4je" firstAttribute="top" secondItem="B2g-oh-M5H" secondAttribute="top" id="QXP-Ye-mRK"/>
+                                    <constraint firstAttribute="trailing" secondItem="4kR-El-4je" secondAttribute="trailing" id="W0S-ZI-IZJ"/>
+                                </constraints>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="B2g-oh-M5H" firstAttribute="leading" secondItem="XKk-BV-Ztm" secondAttribute="leading" id="2J8-bA-rr5"/>
+                            <constraint firstAttribute="trailing" secondItem="B2g-oh-M5H" secondAttribute="trailing" id="CeU-Wz-6ng"/>
+                            <constraint firstAttribute="bottom" secondItem="B2g-oh-M5H" secondAttribute="bottom" id="Mo0-Z3-Iuk"/>
+                            <constraint firstItem="B2g-oh-M5H" firstAttribute="top" secondItem="XKk-BV-Ztm" secondAttribute="top" id="b3h-Gi-gfU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="RY8-su-CGD" id="E8o-T7-IcT"/>
+                    </connections>
+                </viewController>
+                <customObject id="HjK-34-7CW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1374" y="1417"/>
+        </scene>
+        <!--Venue Map View Controller-->
+        <scene sceneID="QvB-DK-Z9j">
+            <objects>
+                <viewController storyboardIdentifier="VenueMapViewController" showSeguePresentationStyle="single" id="U1z-t2-fx0" customClass="VenueMapViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Z0X-gY-hYi">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9hq-OG-9IV">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                            </mapView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9hq-OG-9IV" secondAttribute="bottom" id="7Vb-1J-jJk"/>
+                            <constraint firstItem="9hq-OG-9IV" firstAttribute="top" secondItem="Z0X-gY-hYi" secondAttribute="top" id="MB5-Eb-rda"/>
+                            <constraint firstItem="9hq-OG-9IV" firstAttribute="leading" secondItem="Z0X-gY-hYi" secondAttribute="leading" id="vWi-b4-J3v"/>
+                            <constraint firstAttribute="trailing" secondItem="9hq-OG-9IV" secondAttribute="trailing" id="yA1-mi-7RS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="9hq-OG-9IV" id="DIM-vo-IYm"/>
+                    </connections>
+                </viewController>
+                <customObject id="l98-wm-fil" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1365" y="1807"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSComputer" width="32" height="32"/>
+    </resources>
+</document>
