@@ -45,8 +45,16 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         
         defer { tableView.deselectAll(sender) }
         
-        // show controller for event detail
+        let managedObject = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
         
+        let event = Event(managedObject: managedObject)
+        
+        let summit = Summit(managedObject: currentSummit!)
+        
+        if let url = NSURL(string: event.toWebpageURL(summit)) {
+            
+            NSWorkspace.sharedWorkspace().openURL(url)
+        }
     }
     
     // MARK: - Private Methods

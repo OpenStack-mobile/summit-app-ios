@@ -60,15 +60,20 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         self.collectionView.reloadData()
     }
     
-    private func configure(item item: PersonCollectionViewItem, at indexPath: NSIndexPath) {
+    private func configure(item item: NSCollectionViewItem, at indexPath: NSIndexPath) {
         
         let managedObject = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
         
         let speaker = Speaker(managedObject: managedObject)
         
-        item.representedObject = managedObject
+        item.textField!.stringValue = speaker.name
         
-        item.configure(with: speaker)
+        item.imageView!.image = NSImage(named: "generic-user-avatar")
+        
+        if let url = NSURL(string: speaker.pictureURL) {
+            
+            item.imageView!.loadCached(url)
+        }
     }
     
     // MARK: - NSCollectionViewDataSource
@@ -85,11 +90,32 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItemWithIdentifier("PersonCollectionViewItem", forIndexPath: indexPath) as! PersonCollectionViewItem
+        let item = collectionView.makeItemWithIdentifier("PersonCollectionViewItem", forIndexPath: indexPath)
         
         configure(item: item, at: indexPath)
         
         return item
+    }
+    
+    // MARK: - NSCollectionViewDelegate
+    
+    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
+        
+        defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
+        
+        indexPaths.forEach {
+            
+            let managedObject = fetchedResultsController.objectAtIndexPath($0) as! SpeakerManagedObject
+            
+            let speaker = Speaker(managedObject: managedObject)
+            
+            let summit = Summit(managedObject: currentSummit!)
+            
+            if let url = NSURL(string: speaker.toWebpageURL(summit)) {
+                
+                NSWorkspace.sharedWorkspace().openURL(url)
+            }
+        }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

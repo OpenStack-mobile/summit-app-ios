@@ -86,17 +86,12 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
-        let annotation = view.annotation as! VenueAnnotation
+        // let annotation = view.annotation as! VenueAnnotation
         
         
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        
-        
-    }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         

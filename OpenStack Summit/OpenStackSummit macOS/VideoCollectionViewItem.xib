@@ -35,34 +35,34 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <box boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="4" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-WQ-vjo">
+                        <box fixedFrame="YES" boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="5" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-WQ-vjo">
                             <rect key="frame" x="8" y="33" width="308" height="173"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView" id="bCc-PP-x2L">
                                 <rect key="frame" x="0.0" y="0.0" width="308" height="173"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView wantsLayer="YES" canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ol6-tE-DFC">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ol6-tE-DFC" secondAttribute="height" multiplier="1280:720" id="FhA-5y-jVB"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="AFc-GL-ZY9"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ol6-tE-DFC" secondAttribute="trailing" id="70l-cT-GC0"/>
+                                    <constraint firstItem="Ol6-tE-DFC" firstAttribute="leading" secondItem="bCc-PP-x2L" secondAttribute="leading" id="HlU-6Z-r2f"/>
+                                    <constraint firstItem="Ol6-tE-DFC" firstAttribute="top" secondItem="bCc-PP-x2L" secondAttribute="top" id="LZK-KU-1B9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ol6-tE-DFC" secondAttribute="bottom" id="PMN-4f-l03"/>
+                                </constraints>
                             </view>
                             <color key="fillColor" red="0.17642489450000001" green="0.60687987239999996" blue="0.82575757579999998" alpha="1" colorSpace="calibratedRGB"/>
                         </box>
-                        <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ol6-tE-DFC">
-                            <rect key="frame" x="8" y="33" width="308" height="173"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="Ol6-tE-DFC" secondAttribute="height" multiplier="1280:720" id="FhA-5y-jVB"/>
-                            </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="AFc-GL-ZY9"/>
-                        </imageView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Ol6-tE-DFC" secondAttribute="trailing" constant="8" id="4E9-As-nEG"/>
-                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="top" secondItem="e4P-WQ-vjo" secondAttribute="top" id="E3E-Mw-DKJ"/>
                         <constraint firstItem="ehq-e4-bch" firstAttribute="leading" secondItem="PKx-WK-QvQ" secondAttribute="leading" constant="8" id="ENF-Ld-Vqc"/>
-                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="top" secondItem="PKx-WK-QvQ" secondAttribute="top" constant="8" id="I23-46-8HG"/>
                         <constraint firstAttribute="trailing" secondItem="ehq-e4-bch" secondAttribute="trailing" constant="8" id="KqV-Qi-ZHW"/>
                         <constraint firstAttribute="bottom" secondItem="ehq-e4-bch" secondAttribute="bottom" constant="8" id="OyI-up-vsf"/>
-                        <constraint firstItem="ehq-e4-bch" firstAttribute="top" secondItem="Ol6-tE-DFC" secondAttribute="bottom" constant="8" id="lVc-wb-53e"/>
-                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="bottom" secondItem="e4P-WQ-vjo" secondAttribute="bottom" id="obJ-r3-kVi"/>
-                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="leading" secondItem="e4P-WQ-vjo" secondAttribute="leading" id="udj-Dp-o1h"/>
-                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="leading" secondItem="PKx-WK-QvQ" secondAttribute="leading" constant="8" id="vCY-Gz-ZDM"/>
-                        <constraint firstItem="Ol6-tE-DFC" firstAttribute="trailing" secondItem="e4P-WQ-vjo" secondAttribute="trailing" id="yBE-gO-Muf"/>
                     </constraints>
                 </customView>
             </subviews>

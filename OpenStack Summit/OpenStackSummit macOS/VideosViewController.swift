@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import XCDYouTubeKit
 
 final class VideosViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
     
@@ -65,9 +66,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     private func configure(item item: NSCollectionViewItem, at indexPath: NSIndexPath) {
         
         let video = fetchedResultsController.objectAtIndexPath(indexPath) as! VideoManagedObject
-        
-        item.representedObject = video
-        
+                
         item.textField!.stringValue = video.event.name
         
         item.imageView!.image = nil
@@ -97,6 +96,22 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         configure(item: item, at: indexPath)
         
         return item
+    }
+    
+    // MARK: - NSCollectionViewDelegate
+    
+    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
+        
+        defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
+        
+        indexPaths.forEach {
+            
+            let video = fetchedResultsController.objectAtIndexPath($0) as! VideoManagedObject
+            
+            let url = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube)!
+            
+            NSWorkspace.sharedWorkspace().openURL(url)
+        }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,27 +23,45 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gbx-KZ-L7S">
+                <box boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="75" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="2fB-T4-RC4">
                     <rect key="frame" x="8" y="33" width="150" height="150"/>
+                    <view key="contentView" id="Ipl-9N-htO">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gbx-KZ-L7S">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="2xw-uj-iZ4"/>
+                                    <constraint firstAttribute="width" secondItem="gbx-KZ-L7S" secondAttribute="height" multiplier="1:1" id="pjH-6Y-dk2"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="generic-user-avatar" id="BVS-E0-3Kf"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="gbx-KZ-L7S" firstAttribute="top" secondItem="Ipl-9N-htO" secondAttribute="top" id="FSy-k2-6Wk"/>
+                            <constraint firstAttribute="trailing" secondItem="gbx-KZ-L7S" secondAttribute="trailing" id="JuI-c0-wuM"/>
+                            <constraint firstItem="gbx-KZ-L7S" firstAttribute="leading" secondItem="Ipl-9N-htO" secondAttribute="leading" id="bXt-h6-9cf"/>
+                            <constraint firstAttribute="bottom" secondItem="gbx-KZ-L7S" secondAttribute="bottom" id="idq-zg-T0i"/>
+                        </constraints>
+                    </view>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="2xw-uj-iZ4"/>
-                        <constraint firstAttribute="width" secondItem="gbx-KZ-L7S" secondAttribute="height" multiplier="1:1" id="pjH-6Y-dk2"/>
+                        <constraint firstAttribute="width" secondItem="2fB-T4-RC4" secondAttribute="height" multiplier="1:1" id="wuw-at-IgG"/>
                     </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="generic-user-avatar" id="BVS-E0-3Kf"/>
-                </imageView>
+                </box>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Gfu-ga-hU1" secondAttribute="bottom" constant="8" id="4hB-gu-wMk"/>
                 <constraint firstAttribute="trailing" secondItem="Gfu-ga-hU1" secondAttribute="trailing" constant="8" id="FVz-gS-b7x"/>
-                <constraint firstItem="gbx-KZ-L7S" firstAttribute="leading" secondItem="dHY-ex-pKO" secondAttribute="leading" constant="8" id="FmP-GY-AIQ"/>
-                <constraint firstAttribute="trailing" secondItem="gbx-KZ-L7S" secondAttribute="trailing" constant="8" id="coS-2O-7sp"/>
-                <constraint firstItem="Gfu-ga-hU1" firstAttribute="top" secondItem="gbx-KZ-L7S" secondAttribute="bottom" constant="8" id="n18-dd-V39"/>
-                <constraint firstItem="gbx-KZ-L7S" firstAttribute="top" secondItem="dHY-ex-pKO" secondAttribute="top" constant="8" id="wOg-0V-RDE"/>
+                <constraint firstItem="2fB-T4-RC4" firstAttribute="top" secondItem="dHY-ex-pKO" secondAttribute="top" constant="8" id="ldv-te-iBn"/>
+                <constraint firstItem="Gfu-ga-hU1" firstAttribute="top" secondItem="2fB-T4-RC4" secondAttribute="bottom" constant="8" id="uwN-v2-x4X"/>
                 <constraint firstItem="Gfu-ga-hU1" firstAttribute="leading" secondItem="dHY-ex-pKO" secondAttribute="leading" constant="8" id="zbL-hg-uv7"/>
+                <constraint firstAttribute="trailing" secondItem="2fB-T4-RC4" secondAttribute="trailing" constant="8" id="zi8-CC-uUa"/>
+                <constraint firstItem="2fB-T4-RC4" firstAttribute="leading" secondItem="dHY-ex-pKO" secondAttribute="leading" constant="8" id="znh-Ib-cB8"/>
             </constraints>
             <point key="canvasLocation" x="-125" y="-135.5"/>
         </customView>
-        <collectionViewItem id="4Zm-ir-5qs" customClass="PersonCollectionViewItem" customModule="OpenStackSummit" customModuleProvider="target">
+        <collectionViewItem id="4Zm-ir-5qs">
             <connections>
                 <outlet property="imageView" destination="gbx-KZ-L7S" id="Hrk-2S-z4D"/>
                 <outlet property="sourceItemView" destination="dHY-ex-pKO" id="UCl-ZW-khA"/>
