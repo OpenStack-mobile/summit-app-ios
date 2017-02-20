@@ -92,13 +92,6 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         cell.trackGroupColorView.fillColor = NSColor(hexString: eventDetail.trackGroupColor) ?? NSColor.clearColor()
     }
     
-    private subscript (indexPath: NSIndexPath) -> EventDetail {
-        
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! EventManagedObject
-        
-        return EventDetail(managedObject: managedObject)
-    }
-    
     // MARK: - NSTableViewDataSource
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {

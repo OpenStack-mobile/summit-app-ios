@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import WatchKit
 
 public final class ImageCache {
     
@@ -105,26 +104,31 @@ public extension ImageCache {
     }
 }
 
-// MARK: - WatchKit Extensions
-
-/// The WatchKit Interface type supports image caching.
-public protocol ImageCacheInterface: class {
+public protocol ImageCacheView: class {
     
     func loadCached(url: NSURL, placeholder: UIImage?, cache: ImageCache, completion: (ImageCache.Response -> ())?)
     
+    #if os(watchOS)
     func setImage(image: UIImage?)
+    #else
+    var image: UIImage? { get set }
+    #endif
     
     func setImageData(imageData: NSData?)
 }
 
-public extension ImageCacheInterface {
+public extension ImageCacheView {
     
     public func loadCached(url: NSURL, placeholder: UIImage? = nil, cache: ImageCache = ImageCache.shared, completion: (ImageCache.Response -> ())? = nil) {
         
         // set placeholder
         if let placeholder = placeholder {
             
-            setImage(placeholder)
+            #if os(watchOS)
+            self.setImage(placeholder)
+            #else
+            self.image = placeholder
+            #endif
         }
         
         // load data
@@ -146,9 +150,17 @@ public extension ImageCacheInterface {
     }
 }
 
-extension WKInterfaceImage: ImageCacheInterface { }
+// MARK: - WatchKit Extensions
 
-extension WKInterfaceGroup: ImageCacheInterface {
+#if os(watchOS)
+    
+import WatchKit
+    
+/// The WatchKit Interface type supports image caching.
+
+extension WKInterfaceImage: ImageCacheView { }
+
+extension WKInterfaceGroup: ImageCacheView {
     
     public func setImage(image: UIImage?) {
         
@@ -161,7 +173,7 @@ extension WKInterfaceGroup: ImageCacheInterface {
     }
 }
 
-extension WKInterfaceMovie: ImageCacheInterface {
+extension WKInterfaceMovie: ImageCacheView {
     
     public func setImage(image: UIImage?) {
         
@@ -195,3 +207,24 @@ extension WKInterfaceMovie: ImageCacheInterface {
         setPosterImage(watchImage)
     }
 }
+
+#elseif os(OSX)
+
+import AppKit
+
+extension NSImageView: ImageCacheView {
+    
+    public func setImageData(imageData: NSData?) {
+        
+        if let data = imageData {
+            
+            self.image = NSImage(data: data)
+            
+        } else {
+            
+             self.image = nil
+        }
+    }
+}
+
+#endif

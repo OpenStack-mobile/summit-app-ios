@@ -9,14 +9,15 @@
 import Foundation
 import AppKit
 
-typealias UIColor = NSColor
-typealias UIViewController = NSViewController
-typealias UITableViewDataSource = NSTableViewDataSource
-typealias UITableViewDelegate = NSTableViewDelegate
-typealias UITableView = NSTableView
-typealias UITableViewCell = NSTableCellView
+public typealias UIColor = NSColor
+public typealias UIImage = NSImage
+public typealias UIViewController = NSViewController
+public typealias UITableViewDataSource = NSTableViewDataSource
+public typealias UITableViewDelegate = NSTableViewDelegate
+public typealias UITableView = NSTableView
+public typealias UITableViewCell = NSTableCellView
 
-extension NSIndexPath {
+public extension NSIndexPath {
     
     @inline(__always)
     convenience init(forRow row: Int, inSection section: Int) {
