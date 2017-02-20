@@ -88,14 +88,14 @@
             <objects>
                 <viewController title="Profile" storyboardIdentifier="MemberProfileViewController" id="jQ8-iQ-SGF" customClass="MemberProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="XTW-uZ-JcY" customClass="ContentBackgroundView" customModule="OpenStackSummit" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="176"/>
+                        <rect key="frame" x="0.0" y="0.0" width="520" height="269"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7U-xf-5dw">
-                                <rect key="frame" x="0.0" y="0.0" width="520" height="168"/>
+                                <rect key="frame" x="0.0" y="0.0" width="520" height="253"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-NG-aTc">
-                                        <rect key="frame" x="0.0" y="83" width="520" height="85"/>
+                                        <rect key="frame" x="0.0" y="168" width="520" height="85"/>
                                         <subviews>
                                             <customView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lCh-v7-A6s" userLabel="Profile Header View">
                                                 <rect key="frame" x="0.0" y="23" width="520" height="62"/>
@@ -320,13 +320,13 @@
                                         </customSpacing>
                                     </stackView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Mn2-K2-WKs">
-                                        <rect key="frame" x="0.0" y="0.0" width="520" height="83"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="520" height="168"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="taC-zE-IcS" customClass="GRTextField">
-                                                <rect key="frame" x="14" y="16" width="492" height="51"/>
+                                                <rect key="frame" x="14" y="16" width="492" height="136"/>
                                                 <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" id="XTW-Sf-nOF">
                                                     <font key="font" metaFont="system"/>
-                                                    <string key="title">Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </string>
+                                                    <mutableString key="title">Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </mutableString>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
@@ -359,7 +359,7 @@
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="w7U-xf-5dw" firstAttribute="top" secondItem="XTW-uZ-JcY" secondAttribute="top" constant="8" id="1pX-EH-VIq"/>
+                            <constraint firstItem="w7U-xf-5dw" firstAttribute="top" secondItem="XTW-uZ-JcY" secondAttribute="top" constant="16" id="1pX-EH-VIq"/>
                             <constraint firstAttribute="trailing" secondItem="w7U-xf-5dw" secondAttribute="trailing" id="caB-la-4nB"/>
                             <constraint firstAttribute="bottom" secondItem="w7U-xf-5dw" secondAttribute="bottom" id="pgt-7n-NZa"/>
                             <constraint firstItem="w7U-xf-5dw" firstAttribute="leading" secondItem="XTW-uZ-JcY" secondAttribute="leading" id="wKh-to-qwS"/>
@@ -372,6 +372,7 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="taC-zE-IcS" id="PzU-lv-3b9"/>
+                        <outlet property="imageView" destination="XIq-dD-nQ6" id="7ae-ys-LvS"/>
                         <outlet property="nameLabel" destination="5St-im-zVu" id="fN4-ro-U49"/>
                         <outlet property="titleLabel" destination="8xI-a2-vyX" id="SRZ-gK-pw4"/>
                     </connections>
