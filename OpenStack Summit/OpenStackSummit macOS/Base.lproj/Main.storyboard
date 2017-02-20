@@ -671,7 +671,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="MainWindowController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="OpenStack Summit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="OpenStack Summit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="MainWindow" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="597" y="251" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
@@ -758,7 +758,7 @@
         <scene sceneID="vL6-Yh-Vvb">
             <objects>
                 <windowController storyboardIdentifier="Preferences" showSeguePresentationStyle="single" id="n80-Qh-adB" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="utilityWindow" frameAutosaveName="" id="y0o-xJ-PeY">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="utilityWindow" frameAutosaveName="" id="y0o-xJ-PeY">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <rect key="contentRect" x="519" y="361" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
@@ -835,7 +835,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="xd9-o0-gGh">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="xd9-o0-gGh">
                                                     <rect key="frame" x="0.0" y="0.0" width="203" height="300"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -1298,7 +1298,7 @@
                                             <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="521" minWidth="100" maxWidth="1000" id="JKu-sq-PJt">
+                                                <tableColumn editable="NO" width="521" minWidth="100" maxWidth="10000" id="JKu-sq-PJt">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1312,14 +1312,14 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="O6C-5L-QD9" customClass="EventTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="521" height="152"/>
+                                                            <rect key="frame" x="1" y="1" width="521" height="149"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hq2-Ru-kx8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="521" height="152"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="521" height="149"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="raS-W8-P9v">
-                                                                            <rect key="frame" x="45" y="115" width="470" height="19"/>
+                                                                            <rect key="frame" x="42" y="114" width="473" height="19"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Date Time" id="r6e-N3-Qqe">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1327,12 +1327,12 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ixh-zP-ivl">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="8" height="152"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="8" height="149"/>
                                                                             <subviews>
                                                                                 <box boxType="custom" borderType="none" borderWidth="0.0" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5d1-wp-Fke">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="8" height="152"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="8" height="149"/>
                                                                                     <view key="contentView" id="Pad-Sf-ctK">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="152"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="149"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     </view>
                                                                                     <color key="fillColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
@@ -1347,9 +1347,9 @@
                                                                             </constraints>
                                                                         </customView>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="27i-Eo-6Wp">
-                                                                            <rect key="frame" x="16" y="113" width="23" height="23"/>
+                                                                            <rect key="frame" x="16" y="113" width="20" height="20"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="23" id="COv-ZD-vbA"/>
+                                                                                <constraint firstAttribute="width" constant="20" id="COv-ZD-vbA"/>
                                                                                 <constraint firstAttribute="width" secondItem="27i-Eo-6Wp" secondAttribute="height" id="QbQ-An-Rub"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="time" id="A21-nn-fYL"/>
@@ -1363,15 +1363,15 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RGK-z6-2Lj">
-                                                                            <rect key="frame" x="16" y="50" width="23" height="23"/>
+                                                                            <rect key="frame" x="16" y="53" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="RGK-z6-2Lj" secondAttribute="height" id="SnB-Ys-sSb"/>
-                                                                                <constraint firstAttribute="width" constant="23" id="nCf-i6-bOT"/>
+                                                                                <constraint firstAttribute="width" constant="20" id="nCf-i6-bOT"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="map_pin" id="hTd-BB-Gkv"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tAl-Kb-Bz0">
-                                                                            <rect key="frame" x="45" y="35" width="470" height="38"/>
+                                                                            <rect key="frame" x="42" y="35" width="473" height="38"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="C8E-b4-VZw">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <string key="title">Location

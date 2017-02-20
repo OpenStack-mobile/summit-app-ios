@@ -53,7 +53,7 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
     
     // MARK: - Actions
     
-    @IBAction func tableViewClick(sender: AnyObject) {
+    @IBAction func tableViewClick(sender: AnyObject? = nil) {
                 
         guard tableView.selectedRow >= 0
             else { return }
@@ -83,6 +83,17 @@ final class EventDatesViewController: NSViewController, NSTableViewDataSource, N
         }
         
         self.tableView.reloadData()
+        
+        // select first row
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            
+            if self.tableView.numberOfRows > 0 {
+                
+                self.tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
+                
+                self.tableViewClick()
+            }
+        }
     }
     
     // MARK: - NSTableViewDataSource

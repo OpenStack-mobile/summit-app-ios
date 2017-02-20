@@ -23,7 +23,7 @@ final class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        window?.titleVisibility = .Hidden
+        window!.titleVisibility = .Hidden
         
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.updateTitle() }
         
@@ -51,6 +51,8 @@ final class MainWindowController: NSWindowController {
     
     @IBAction func contentTabChanged(sender: NSSegmentedControl) {
         
+        let windowFrame = window!.frame
+        
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         
         let content = ContentTab(rawValue: sender.selectedSegment)!
@@ -63,6 +65,8 @@ final class MainWindowController: NSWindowController {
         case .speakers: contentViewControllerID = "Speakers"
         case .videos: contentViewControllerID = "Videos"
         }
+        
+        // set content view controler
         
         if let cachedViewController = contentViewControllersCache[contentViewControllerID] {
             
@@ -77,6 +81,10 @@ final class MainWindowController: NSWindowController {
             contentViewController = viewController
         }
         
+        // restore old frame
+        window!.setFrame(windowFrame, display: true)
+        
+        // enable tool bar item
         toggleSidebarToolbarItem.enabled = (contentViewController is NSSplitViewController)
     }
     

@@ -25,6 +25,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
+        //#if DEBUG
+        //SummitManager.shared.summit.value = 0
+        //try! Store.shared.clear()
+        //#endif
+        
         // Show preferences
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))

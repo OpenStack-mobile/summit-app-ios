@@ -19,7 +19,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: true) {
+    var predicate = NSPredicate(value: false) {
         
         didSet { configureView() }
     }
@@ -70,6 +70,12 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         try! self.fetchedResultsController.performFetch()
         
         tableView.reloadData()
+        
+        // scroll to top
+        if tableView.numberOfRows > 0 {
+            
+            tableView.scrollRowToVisible(0)
+        }
     }
     
     private func configure(cell cell: EventTableViewCell, at row: Int) {
