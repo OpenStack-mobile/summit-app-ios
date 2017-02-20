@@ -861,16 +861,16 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="55"/>
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="X97-wF-b9h">
-                                                                                    <rect key="frame" x="32" y="26" width="160" height="21"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Barcelona, Spain" drawsBackground="YES" id="0CI-TG-CSA">
+                                                                                    <rect key="frame" x="30" y="26" width="164" height="21"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Barcelona, Spain" id="0CI-TG-CSA">
                                                                                         <font key="font" metaFont="system" size="17"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="90P-ys-gfq">
-                                                                                    <rect key="frame" x="32" y="8" width="160" height="18"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="April 24-15, 2016" drawsBackground="YES" id="c2a-cb-OFy">
+                                                                                    <rect key="frame" x="30" y="8" width="164" height="18"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="April 24-15, 2016" id="c2a-cb-OFy">
                                                                                         <font key="font" metaFont="system" size="14"/>
                                                                                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1211,8 +1211,8 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="37"/>
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="oVq-De-fO2">
-                                                                                    <rect key="frame" x="16" y="8" width="176" height="21"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="April 26" drawsBackground="YES" id="m7Z-P2-kpg">
+                                                                                    <rect key="frame" x="14" y="8" width="180" height="21"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="April 26" id="m7Z-P2-kpg">
                                                                                         <font key="font" metaFont="system" size="17"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1247,7 +1247,7 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <nil key="backgroundColor"/>
                                         </clipView>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="25D-Pa-2WT"/>
@@ -1288,7 +1288,7 @@
         <!--Events-->
         <scene sceneID="UgP-OR-mKp">
             <objects>
-                <viewController title="Events" id="bWb-uq-b6Q" sceneMemberID="viewController">
+                <viewController title="Events" storyboardIdentifier="EventsViewController" id="bWb-uq-b6Q" customClass="EventsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Sr3-bv-GcO">
                         <rect key="frame" x="0.0" y="0.0" width="524" height="344"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1320,7 +1320,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="O6C-5L-QD9">
+                                                        <tableCellView id="O6C-5L-QD9" customClass="EventTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="521" height="152"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1328,8 +1328,8 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="521" height="152"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="raS-W8-P9v">
-                                                                            <rect key="frame" x="47" y="115" width="466" height="19"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Date Time" drawsBackground="YES" id="r6e-N3-Qqe">
+                                                                            <rect key="frame" x="45" y="115" width="470" height="19"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Date Time" id="r6e-N3-Qqe">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1350,8 +1350,8 @@
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="time" id="A21-nn-fYL"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Wc-NK-SI6">
-                                                                            <rect key="frame" x="16" y="81" width="497" height="24"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Event Name" drawsBackground="YES" id="RUm-fR-Zr5">
+                                                                            <rect key="frame" x="14" y="81" width="501" height="24"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Event Name" id="RUm-fR-Zr5">
                                                                                 <font key="font" metaFont="system" size="20"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1366,8 +1366,8 @@
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="map_pin" id="hTd-BB-Gkv"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tAl-Kb-Bz0">
-                                                                            <rect key="frame" x="47" y="35" width="466" height="38"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="C8E-b4-VZw">
+                                                                            <rect key="frame" x="45" y="35" width="470" height="38"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="C8E-b4-VZw">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <string key="title">Location
 Room 1</string>
@@ -1376,16 +1376,16 @@ Room 1</string>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6T2-iN-fOh">
-                                                                            <rect key="frame" x="16" y="8" width="43" height="19"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Track" drawsBackground="YES" id="tal-Vf-CNX">
+                                                                            <rect key="frame" x="14" y="8" width="43" height="19"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Track" id="tal-Vf-CNX">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Gy8-nV-mTm">
-                                                                            <rect key="frame" x="472" y="8" width="41" height="19"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="TYPE" drawsBackground="YES" id="kNM-60-9be">
+                                                                            <rect key="frame" x="474" y="8" width="41" height="19"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="TYPE" id="kNM-60-9be">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1427,16 +1427,19 @@ Room 1</string>
                                                                 <constraint firstAttribute="bottom" secondItem="Hq2-Ru-kx8" secondAttribute="bottom" id="yWO-si-YKf"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="textField" destination="raS-W8-P9v" id="n51-Aa-TZ9"/>
+                                                                <outlet property="dateTimeLabel" destination="raS-W8-P9v" id="Wln-V9-sIa"/>
+                                                                <outlet property="locationLabel" destination="tAl-Kb-Bz0" id="VsR-Sd-VY4"/>
+                                                                <outlet property="nameLabel" destination="2Wc-NK-SI6" id="uHl-3j-c0s"/>
+                                                                <outlet property="trackLabel" destination="6T2-iN-fOh" id="hbI-Yf-NVe"/>
+                                                                <outlet property="typeLabel" destination="Gy8-nV-mTm" id="4nr-V9-xiT"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <action selector="tableViewClick:" target="ZfW-ax-544" id="daM-9i-0vz"/>
-                                                <outlet property="dataSource" destination="ZfW-ax-544" id="iSu-eB-zRL"/>
-                                                <outlet property="delegate" destination="ZfW-ax-544" id="O48-DJ-M5b"/>
+                                                <outlet property="dataSource" destination="bWb-uq-b6Q" id="toD-l7-CQF"/>
+                                                <outlet property="delegate" destination="bWb-uq-b6Q" id="O4h-An-q0Y"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -1459,6 +1462,9 @@ Room 1</string>
                             <constraint firstAttribute="trailing" secondItem="jfS-2r-eLL" secondAttribute="trailing" id="h0B-Pc-HHm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="4A7-Rw-j0k" id="dwa-XO-3kS"/>
+                    </connections>
                 </viewController>
                 <customObject id="Ofu-46-sEe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

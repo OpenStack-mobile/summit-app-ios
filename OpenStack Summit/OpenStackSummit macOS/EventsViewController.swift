@@ -19,9 +19,9 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // MARK: - Properties
     
-    var predicate = NSPredicate(value: false) {
+    var predicate = NSPredicate(value: true) {
         
-        didSet { updateUI() }
+        didSet { configureView() }
     }
     
     private var fetchedResultsController: NSFetchedResultsController!
@@ -33,12 +33,12 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateUI()
+        configureView()
     }
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    private func configureView() {
         
         let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
@@ -59,11 +59,17 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         tableView.reloadData()
     }
     
-    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: EventTableViewCell, at row: Int) {
         
-        let event = self[indexPath]
+        let eventManagedObject = self.fetchedResultsController.fetchedObjects![row] as! EventManagedObject
         
-        cell.textLabel!.text = event.name
+        let eventDetail = ScheduleItem(managedObject: eventManagedObject)
+        
+        cell.nameLabel.stringValue = eventDetail.name
+        cell.dateTimeLabel.stringValue = eventDetail.dateTime
+        cell.locationLabel.stringValue = eventDetail.location
+        cell.trackLabel.stringValue = eventDetail.track
+        cell.typeLabel.stringValue = eventDetail.eventType
     }
     
     private subscript (indexPath: NSIndexPath) -> EventDetail {
@@ -73,23 +79,18 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         return EventDetail(managedObject: managedObject)
     }
     
-    // MARK: - UITableViewDataSource
+    // MARK: - NSTableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    override func tableView(tableView: NSTableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
-    override func tableView(tableView: NSTableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(EventTableViewCell.identifier, forIndexPath: indexPath) as! EventTableViewCell
+        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! EventTableViewCell
         
-        configure(cell: cell, at: indexPath)
+        configure(cell: cell, at: row)
         
         return cell
     }
@@ -144,10 +145,15 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
 // MARK: - Supporting Types
 
 final class EventTableViewCell: NSTableCellView {
+        
+    @IBOutlet private(set) weak var dateTimeLabel: NSTextField!
     
-    static let identifier = "EventTableViewCell"
+    @IBOutlet private(set) weak var nameLabel: NSTextField!
     
-    @IBOutlet weak var dateTimeLabel: NSTextView!
+    @IBOutlet private(set) weak var locationLabel: NSTextField!
     
-    @IBOutlet weak var nameLabel: NSTextView!
+    @IBOutlet private(set) weak var trackLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var typeLabel: NSTextField!
+    
 }

@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 
+typealias UIColor = NSColor
 typealias UIViewController = NSViewController
 typealias UITableViewDataSource = NSTableViewDataSource
 typealias UITableViewDelegate = NSTableViewDelegate

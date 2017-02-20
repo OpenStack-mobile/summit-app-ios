@@ -6,7 +6,11 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 extension UIColor {
     convenience init(hexaString:String) {
