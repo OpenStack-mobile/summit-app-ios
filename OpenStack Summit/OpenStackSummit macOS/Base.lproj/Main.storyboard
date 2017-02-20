@@ -1658,6 +1658,30 @@ Room 1</string>
             </objects>
             <point key="canvasLocation" x="1365" y="1807"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="9kn-g9-TWb">
+            <objects>
+                <viewController id="8JP-qj-9sB" sceneMemberID="viewController">
+                    <view key="view" id="n67-Qa-acX">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKg-WQ-dIN">
+                                <rect key="frame" x="18" y="263" width="92" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Multiline Label" id="fgH-zd-dVX">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="FpS-Vi-OHm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1892" y="1807"/>
+        </scene>
     </scenes>
     <resources>
         <image name="NSComputer" width="32" height="32"/>

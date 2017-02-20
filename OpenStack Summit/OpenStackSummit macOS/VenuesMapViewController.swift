@@ -23,10 +23,22 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     private var fetchedResultsController: NSFetchedResultsController!
     
+    private var summitObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = summitObserver {
+            
+            SummitManager.shared.summit.remove(observer)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
         configureView()
     }
