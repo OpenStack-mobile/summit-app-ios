@@ -187,14 +187,14 @@
             <objects>
                 <viewController title="Venue" storyboardIdentifier="VenueDetailViewController" id="KYg-L6-bUy" customClass="OSSVenueDetailViewController" sceneMemberID="viewController">
                     <view key="view" id="eyd-GT-ciM">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="235"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="468.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Z1-Os-uzd">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="248"/>
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="481.5"/>
                                 <subviews>
                                     <customView verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZZd-aJ-DT8" userLabel="Header View" customClass="ContentBackgroundView" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="198" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="431.5" width="350" height="50"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3f7-mP-a8i">
                                                 <rect key="frame" x="20" y="8" width="310" height="34"/>
@@ -231,6 +231,29 @@
                                                 <color key="value" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                    </customView>
+                                    <customView horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="YmH-yJ-dAE">
+                                        <rect key="frame" x="0.0" y="198" width="350" height="233.5"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8F5-Wd-llS">
+                                                <rect key="frame" x="0.0" y="-1" width="350" height="233.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="8F5-Wd-llS" secondAttribute="height" multiplier="300:200" id="a9y-ja-r2Z"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="rtV-Gy-LTA"/>
+                                            </imageView>
+                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="JI4-sz-yjQ">
+                                                <rect key="frame" x="159" y="101" width="32" height="32"/>
+                                            </progressIndicator>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="8F5-Wd-llS" firstAttribute="top" secondItem="YmH-yJ-dAE" secondAttribute="top" id="6T2-CV-he5"/>
+                                            <constraint firstItem="8F5-Wd-llS" firstAttribute="leading" secondItem="YmH-yJ-dAE" secondAttribute="leading" id="FRO-hd-bdm"/>
+                                            <constraint firstAttribute="trailing" secondItem="8F5-Wd-llS" secondAttribute="trailing" id="VXh-Wu-JxX"/>
+                                            <constraint firstAttribute="bottom" secondItem="8F5-Wd-llS" secondAttribute="bottom" id="dy0-lP-921"/>
+                                            <constraint firstItem="JI4-sz-yjQ" firstAttribute="centerY" secondItem="YmH-yJ-dAE" secondAttribute="centerY" id="h88-rc-8J0"/>
+                                            <constraint firstItem="JI4-sz-yjQ" firstAttribute="centerX" secondItem="YmH-yJ-dAE" secondAttribute="centerX" id="uIp-06-Xgj"/>
+                                        </constraints>
                                     </customView>
                                     <customView horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3PR-KK-8A2">
                                         <rect key="frame" x="0.0" y="166" width="350" height="32"/>
@@ -328,7 +351,7 @@
                                         </constraints>
                                     </customView>
                                     <customView verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="QvC-e1-hoS">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="83"/>
+                                        <rect key="frame" x="0.0" y="-0.5" width="350" height="83"/>
                                         <subviews>
                                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdg-xz-PrB">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
@@ -379,13 +402,18 @@
                                         </constraints>
                                     </customView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="bD3-7d-r5w"/>
+                                </constraints>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -403,8 +431,13 @@
                     <connections>
                         <outlet property="addressLabel" destination="5ZX-b2-6Li" id="Wg2-FL-tuM"/>
                         <outlet property="imagesCollectionView" destination="o3V-aJ-128" id="ixC-Ny-K9G"/>
+                        <outlet property="imagesView" destination="EDQ-80-jQs" id="cTl-ty-tMB"/>
                         <outlet property="mapImagesCollectionView" destination="68S-S7-Ifc" id="3xv-pQ-vIb"/>
+                        <outlet property="mapImagesView" destination="QvC-e1-hoS" id="bDq-Qo-X48"/>
                         <outlet property="nameLabel" destination="SHY-9I-rr9" id="ZK7-fe-DO6"/>
+                        <outlet property="venueImageActivityIndicator" destination="JI4-sz-yjQ" id="YZD-GG-YX7"/>
+                        <outlet property="venueImageView" destination="8F5-Wd-llS" id="PKH-Rc-sBc"/>
+                        <outlet property="venueImageViewContainer" destination="YmH-yJ-dAE" id="ZaT-hT-TTk"/>
                     </connections>
                 </viewController>
                 <customObject id="7Ii-LW-xPe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -442,7 +475,7 @@
                 <button verticalHuggingPriority="750" id="wfi-lK-iOu">
                     <rect key="frame" x="0.0" y="0.0" width="37" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSInfo" imagePosition="only" alignment="center" inset="2" id="wMR-Hl-v1q">
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="infoButton" imagePosition="only" alignment="center" inset="2" id="wMR-Hl-v1q">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -456,8 +489,8 @@
     </scenes>
     <resources>
         <image name="NSComputer" width="32" height="32"/>
-        <image name="NSInfo" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="infoButton" width="128" height="128"/>
         <image name="map_pin" width="26" height="33"/>
     </resources>
 </document>

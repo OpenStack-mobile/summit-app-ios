@@ -20,7 +20,17 @@ final class VenueDetailViewController: NSViewController {
     
     @IBOutlet private(set) weak var addressLabel: NSTextField!
     
+    @IBOutlet private(set) weak var venueImageViewContainer: NSView!
+    
+    @IBOutlet private(set) weak var venueImageView: NSImageView!
+    
+    @IBOutlet private(set) weak var venueImageActivityIndicator: NSProgressIndicator!
+    
+    @IBOutlet private(set) weak var imagesView: NSView!
+    
     @IBOutlet private(set) weak var imagesCollectionView: NSCollectionView!
+    
+    @IBOutlet private(set) weak var mapImagesView: NSView!
     
     @IBOutlet private(set) weak var mapImagesCollectionView: NSCollectionView!
     
@@ -43,9 +53,17 @@ final class VenueDetailViewController: NSViewController {
         
     }
     
+    // MARK: - Actions
+    
+    
+    
     // MARK: - Private Methods
     
     private func configureView() {
+        
+        let _ = self.view
+        
+        assert(viewLoaded)
         
         entityController = EntityController(identifier: venue,
                                             entity: VenueManagedObject.self,
@@ -66,6 +84,32 @@ final class VenueDetailViewController: NSViewController {
         
         addressLabel.stringValue = venue.address
         
+        imagesView.hidden = venue.images.isEmpty
+        imagesCollectionView.reloadData()
         
+        mapImagesView.hidden = venue.maps.isEmpty
+        mapImagesCollectionView.reloadData()
+        
+        venueImageView.image = nil
+        
+        if let urlString = venue.backgroundImageURL,
+            let imageURL = NSURL(string: urlString) {
+            
+            venueImageViewContainer.hidden = false
+            
+            venueImageActivityIndicator.hidden = false
+            venueImageActivityIndicator.startAnimation(self)
+            
+            venueImageView.loadCached(imageURL) { [weak self] _ in
+                
+                self?.venueImageActivityIndicator.stopAnimation(nil)
+                self?.venueImageActivityIndicator.hidden = true
+            }
+            
+        } else {
+            
+            venueImageViewContainer.hidden = true
+            venueImageActivityIndicator.hidden = true
+        }
     }
 }

@@ -63,13 +63,16 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         
         let venueAnnotation = mapView.selectedAnnotations.first as! VenueAnnotation
         
+        guard let annotationView = mapView.viewForAnnotation(venueAnnotation)
+            else { return }
+        
         self.mapView.deselectAnnotation(venueAnnotation, animated: true)
         
         popover.1.venue = venueAnnotation.venue
         
-        popover.0.showRelativeToRect(sender.bounds,
-                                   ofView: sender,
-                                   preferredEdge: .MinY)
+        popover.0.showRelativeToRect(annotationView.bounds,
+                                   ofView: annotationView,
+                                   preferredEdge: .MinX)
     }
     
     // MARK: - Private Methods
