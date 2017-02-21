@@ -55,11 +55,11 @@ final class SpeakersTableViewController: TableViewController {
     
     private func configureView() {
         
-        let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
+        let _ = self.view
         
-        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
+        assert(viewLoaded)
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate, cachedPredicate])
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, cachedPredicate])
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,

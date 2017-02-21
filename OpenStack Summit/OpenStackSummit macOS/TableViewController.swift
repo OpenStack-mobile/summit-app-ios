@@ -22,14 +22,9 @@ class TableViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     
     // MARK: - UITableViewDataSource
     
-    final func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    final func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         
-        return self.fetchedResultsController?.sections?.count ?? 0
-    }
-    
-    final func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

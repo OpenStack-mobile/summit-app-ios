@@ -9,10 +9,10 @@
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
-        <!--Speakers-->
+        <!--Speakers Collection View Controller-->
         <scene sceneID="UHn-iH-vXT">
             <objects>
-                <viewController title="Speakers" storyboardIdentifier="Speakers" showSeguePresentationStyle="single" id="agd-tE-5uh" customClass="SpeakersViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Speakers" storyboardIdentifier="Speakers" showSeguePresentationStyle="single" id="agd-tE-5uh" userLabel="Speakers Collection View Controller" customClass="SpeakersViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="L4q-Le-o9M">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -73,7 +73,7 @@
                 </viewController>
                 <customObject id="Cms-kW-Zxw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-554" y="183"/>
+            <point key="canvasLocation" x="-549" y="-44"/>
         </scene>
         <!--EventsViewController-->
         <scene sceneID="GkU-Uy-KcE">
@@ -437,25 +437,24 @@
         <scene sceneID="0Fa-1w-x1p">
             <objects>
                 <viewController title="Speakers" storyboardIdentifier="SpeakersTableViewController" id="VDq-iR-Syc" userLabel="Speakers Table View Controller" customClass="SpeakersTableViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="qxk-56-FVc">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <view key="view" wantsLayer="YES" id="qxk-56-FVc">
+                        <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="68" horizontalPageScroll="10" verticalLineScroll="68" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="nq3-fZ-urB">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <clipView key="contentView" id="Bvz-8Z-IGE">
-                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="66" horizontalPageScroll="10" verticalLineScroll="66" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="nq3-fZ-urB">
+                                <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                <clipView key="contentView" wantsLayer="YES" drawsBackground="NO" id="Bvz-8Z-IGE">
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" id="AVa-Ba-JI6">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" viewBased="YES" floatsGroupRows="NO" id="AVa-Ba-JI6">
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <tableViewGridLines key="gridStyleMask" vertical="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="447" minWidth="40" maxWidth="1000" id="PGb-pK-xVv">
+                                                <tableColumn width="330" minWidth="40" maxWidth="1000" id="PGb-pK-xVv">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -468,13 +467,13 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="trF-h4-VnG" customClass="SpeakerTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="447" height="66"/>
+                                                        <tableCellView wantsLayer="YES" id="trF-h4-VnG" customClass="SpeakerTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="330" height="66"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <box boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="25" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-ST-cQi">
+                                                                <box wantsLayer="YES" boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="25" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="VRD-ST-cQi">
                                                                     <rect key="frame" x="16" y="8" width="50" height="50"/>
-                                                                    <view key="contentView" id="iGi-gP-Szg">
+                                                                    <view key="contentView" wantsLayer="YES" id="iGi-gP-Szg">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -498,20 +497,20 @@
                                                                         <constraint firstAttribute="width" secondItem="VRD-ST-cQi" secondAttribute="height" multiplier="1:1" id="JdX-V6-32I"/>
                                                                     </constraints>
                                                                 </box>
-                                                                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqh-h2-u33">
-                                                                    <rect key="frame" x="76" y="10" width="355" height="46"/>
+                                                                <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqh-h2-u33">
+                                                                    <rect key="frame" x="76" y="10" width="238" height="46"/>
                                                                     <subviews>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="phU-OX-TUh">
+                                                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="phU-OX-TUh">
                                                                             <rect key="frame" x="-2" y="25" width="164" height="21"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Alsey Coleman Miller" id="j2X-P9-MSI">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Alsey Coleman Miller" usesSingleLineMode="YES" id="j2X-P9-MSI">
                                                                                 <font key="font" metaFont="system" size="17"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sZ4-TF-PDm">
+                                                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sZ4-TF-PDm">
                                                                             <rect key="frame" x="-2" y="0.0" width="91" height="17"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="iOS Developer" id="fLf-cF-cc6">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" title="iOS Developer" usesSingleLineMode="YES" id="fLf-cF-cc6">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -554,7 +553,7 @@
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="2DC-8T-IfX">
                                     <rect key="frame" x="-100" y="-100" width="223" height="15"/>
@@ -573,10 +572,14 @@
                             <constraint firstAttribute="trailing" secondItem="nq3-fZ-urB" secondAttribute="trailing" id="s87-7P-tLA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="AVa-Ba-JI6" id="lNE-QT-LiH"/>
+                        <segue destination="NqH-bz-Tqp" kind="show" identifier="showSpeaker" id="PUU-Pj-YKW"/>
+                    </connections>
                 </viewController>
                 <customObject id="aRk-T9-bo0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="126" y="726"/>
+            <point key="canvasLocation" x="-583" y="318"/>
         </scene>
         <!--Speaker View Controller-->
         <scene sceneID="STK-Je-73b">
@@ -607,4 +610,7 @@
         <image name="map_pin" width="26" height="33"/>
         <image name="twitter" width="29" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="PUU-Pj-YKW"/>
+    </inferredMetricsTieBreakers>
 </document>

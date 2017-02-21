@@ -187,7 +187,16 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
             
             let speakersViewController = segue.destinationController as! SpeakersTableViewController
             
-            speakersViewController.predicate = NSPredicate("")
+            let eventID = NSNumber(longLong: Int64(eventDetail.id))
+            
+            speakersViewController.predicate = NSPredicate(format: "presentationModerator.event.id CONTAINS %@ OR presentationSpeaker.event.id CONTAINS %@", eventID, eventID)
+            
+            let speakerCount = speakersViewController.fetchedResultsController.fetchedObjects?.count ?? 0
+            
+            // set content size
+            var contentSize = speakersViewController.view.bounds.size
+            contentSize.height = speakersViewController.tableView.rowHeight * CGFloat(speakerCount)
+            speakersViewController.view.setFrameSize(contentSize)
             
         default: fatalError()
         }
