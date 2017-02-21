@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FJp-i3-hhV">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="3IK-0t-XCE">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
@@ -7,29 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Venues-->
-        <scene sceneID="VZx-BG-chK">
-            <objects>
-                <customObject id="Xud-Mq-QcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <splitViewController title="Venues" storyboardIdentifier="Venues" showSeguePresentationStyle="single" id="FJp-i3-hhV" customClass="VenuesSplitViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem id="tIq-Lj-Wmf"/>
-                        <splitViewItem id="mXd-BT-c6d"/>
-                        <splitViewItem id="1bJ-QO-iw6"/>
-                        <splitViewItem id="su3-5a-lCw"/>
-                    </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="EwG-ur-Ruv">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </splitView>
-                    <connections>
-                        <segue destination="w9S-8v-wxy" kind="relationship" relationship="splitItems" id="Swt-qb-Ugc"/>
-                        <segue destination="U1z-t2-fx0" kind="relationship" relationship="splitItems" id="Brq-yK-kkH"/>
-                    </connections>
-                </splitViewController>
-            </objects>
-            <point key="canvasLocation" x="704" y="1663"/>
-        </scene>
         <!--Venue Directory View Controller-->
         <scene sceneID="1VH-cV-9zE">
             <objects>
@@ -80,20 +57,20 @@
                                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="ovO-8Z-P3g"/>
                                                                                 </imageView>
                                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="fH1-bo-eHD">
-                                                                                    <rect key="frame" x="16" y="70" width="288" height="61"/>
+                                                                                    <rect key="frame" x="16" y="75" width="288" height="51"/>
                                                                                     <subviews>
                                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ajO-kA-fva">
-                                                                                            <rect key="frame" x="-2" y="32" width="292" height="29"/>
+                                                                                            <rect key="frame" x="-2" y="27" width="292" height="24"/>
                                                                                             <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Hilton" id="gjQ-dI-wkl">
-                                                                                                <font key="font" metaFont="system" size="24"/>
+                                                                                                <font key="font" metaFont="system" size="20"/>
                                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mCO-iJ-O1A">
-                                                                                            <rect key="frame" x="-2" y="0.0" width="292" height="24"/>
+                                                                                            <rect key="frame" x="-2" y="0.0" width="292" height="19"/>
                                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Av. Sesame 123, Lima, Peru" id="4hG-VE-kH4">
-                                                                                                <font key="font" metaFont="system" size="20"/>
+                                                                                                <font key="font" metaFont="system" size="15"/>
                                                                                                 <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
@@ -148,9 +125,6 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </clipView>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="rYK-VG-4SU"/>
-                                        </constraints>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="paA-pV-Get">
                                             <rect key="frame" x="-100" y="-100" width="470" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -164,6 +138,7 @@
                                 <constraints>
                                     <constraint firstItem="4kR-El-4je" firstAttribute="leading" secondItem="B2g-oh-M5H" secondAttribute="leading" id="43y-eq-2vK"/>
                                     <constraint firstAttribute="bottom" secondItem="4kR-El-4je" secondAttribute="bottom" id="G8U-eo-D0A"/>
+                                    <constraint firstAttribute="width" constant="320" id="OXE-zJ-pUG"/>
                                     <constraint firstItem="4kR-El-4je" firstAttribute="top" secondItem="B2g-oh-M5H" secondAttribute="top" id="QXP-Ye-mRK"/>
                                     <constraint firstAttribute="trailing" secondItem="4kR-El-4je" secondAttribute="trailing" id="W0S-ZI-IZJ"/>
                                 </constraints>
@@ -183,6 +158,27 @@
                 <customObject id="HjK-34-7CW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1374" y="1417"/>
+        </scene>
+        <!--Venues-->
+        <scene sceneID="FDD-IR-heM">
+            <objects>
+                <splitViewController title="Venues" showSeguePresentationStyle="single" id="3IK-0t-XCE" customClass="VenuesSplitViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem holdingPriority="1000" id="7tS-Ju-BnG"/>
+                        <splitViewItem id="qiV-2j-YHc"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="2VJ-h4-PYt">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </splitView>
+                    <connections>
+                        <segue destination="w9S-8v-wxy" kind="relationship" relationship="splitItems" id="117-ve-8KP"/>
+                        <segue destination="U1z-t2-fx0" kind="relationship" relationship="splitItems" id="gRz-tL-Ugk"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="2b5-sk-V3Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="689" y="1679"/>
         </scene>
         <!--Venue Map View Controller-->
         <scene sceneID="QvB-DK-Z9j">

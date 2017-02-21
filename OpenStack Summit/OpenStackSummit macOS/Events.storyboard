@@ -348,9 +348,9 @@ Room 1</string>
                 <windowController storyboardIdentifier="EventWindowController" id="tvU-bg-whW" customClass="EventWindowController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Event" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="bQw-MB-Gl0">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="480"/>
+                        <rect key="contentRect" x="196" y="240" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
-                        <value key="minSize" type="size" width="480" height="480"/>
+                        <value key="minSize" type="size" width="800" height="600"/>
                     </window>
                     <connections>
                         <segue destination="EJa-na-JbP" kind="relationship" relationship="window.shadowedContentViewController" id="FIn-Xl-Udb"/>
@@ -358,7 +358,7 @@ Room 1</string>
                 </windowController>
                 <customObject id="Bce-fd-KxB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2510" y="1137"/>
+            <point key="canvasLocation" x="2744" y="1136"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="5dR-Cv-5j3">
@@ -382,7 +382,8 @@ Room 1</string>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="x6t-ys-acv">
                                         <rect key="frame" x="18" y="16" width="444" height="19"/>
                                         <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Track" usesSingleLineMode="YES" id="dKX-b8-EPk">
-                                            <font key="font" metaFont="system" size="16"/>
+                                            <font key="font" metaFont="system" size="15"/>
+                                            <color key="textColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -483,7 +484,7 @@ Room 1</string>
                 </viewController>
                 <customObject id="Yip-fe-bRc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3214" y="1130"/>
+            <point key="canvasLocation" x="3817" y="1136"/>
         </scene>
     </scenes>
     <resources>
