@@ -57,7 +57,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         didSet { didSetEvent() }
     }
     
-    var entityController: EntityController<EventDetail>?
+    var entityController: EntityController<EventDetail>!
     
     var eventDetail: EventDetail!
     
@@ -89,11 +89,6 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         sharingServicePicker.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: NSRectEdge.MinY)
     }
     
-    @IBAction func showLocation(sender: NSButton) {
-        
-        
-    }
-    
     @IBAction func showLevel(sender: NSButton) {
         
         
@@ -111,7 +106,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
             
             entityController.event.updated = { [weak self] in self?.configureView($0) }
             
-            entityController.event.deleted = { [weak self] _ in self?.view.window?.close() }
+            entityController.event.deleted = { [weak self] _ in self?.dismissController(nil) }
             
             entityController.enabled = true
             
@@ -165,7 +160,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         self.tagLabel.stringValue = event.tags
         
         self.speakersView.hidden = event.speakers.isEmpty
-        self.speakersButton.stringValue = "\(event.speakers.count) speakers"
+        self.speakersButton.title = "\(event.speakers.count) speakers"
         
         self.reviewsView.hidden = true
     }

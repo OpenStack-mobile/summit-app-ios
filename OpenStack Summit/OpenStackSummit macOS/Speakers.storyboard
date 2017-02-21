@@ -433,6 +433,19 @@
             </objects>
             <point key="canvasLocation" x="132" y="198"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="0Fa-1w-x1p">
+            <objects>
+                <viewController storyboardIdentifier="SpeakersTableViewController" id="VDq-iR-Syc" sceneMemberID="viewController">
+                    <view key="view" id="qxk-56-FVc">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="aRk-T9-bo0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="126" y="726"/>
+        </scene>
         <!--Speaker View Controller-->
         <scene sceneID="STK-Je-73b">
             <objects>

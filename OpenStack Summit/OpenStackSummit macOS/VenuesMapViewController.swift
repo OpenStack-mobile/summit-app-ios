@@ -17,13 +17,28 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet private(set) weak var mapView: MKMapView!
+    
+    @IBOutlet private(set) weak var annotationButton: NSButton!
     
     // MARK: - Properties
     
     private var fetchedResultsController: NSFetchedResultsController!
     
     private var summitObserver: Int?
+    
+    private lazy var venueDetailViewController = {
+        
+        let venueDetailViewController = self.storyboard!.instantiateControllerWithIdentifier("VenueDetailViewController") as! VenueDetailViewController
+        venueDetailViewController.headerView.hidden = true
+        
+        let popover = NSPopover()
+        popover.behavior = .Transient
+        popover.animates = true
+        popover.contentViewController = venueDetailViewController
+        
+        return venueDetailViewController
+    }()
     
     // MARK: - Loading
     
@@ -41,6 +56,19 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
         configureView()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func annotationButtonPressed(sender: NSButton) {
+        
+        let venueAnnotation = mapView.selectedAnnotations.first as! VenueAnnotation
+        
+        popover.1.venue = venueAnnotation.venue
+        
+        popover.0.showRelativeToRect(sender.bounds,
+                                   ofView: sender,
+                                   preferredEdge: .MinY)
     }
     
     // MARK: - Private Methods
@@ -84,11 +112,33 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     // MARK: - MKMapViewDelegate
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
-        // let annotation = view.annotation as! VenueAnnotation
+        if annotation is VenueAnnotation {
+            
+            let reuseIdentifier = "Venue"
+            
+            let annotationView: MKAnnotationView
+            
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier) as? MKPinAnnotationView {
+                
+                annotationView = dequeuedView
+                
+            } else {
+                
+                let newAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+                
+                newAnnotationView.canShowCallout = true
+                newAnnotationView.pinTintColor = .redColor()
+                newAnnotationView.detailCalloutAccessoryView = annotationButton
+                
+                annotationView = newAnnotationView
+            }
+            
+            return annotationView
+        }
         
-        
+        return nil
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -150,9 +200,9 @@ final class VenueAnnotation: NSObject, MKAnnotation {
     
     let coordinate: CLLocationCoordinate2D
     
-    var title: String?
+    private(set) var title: String?
     
-    var subtitle: String?
+    private(set) var subtitle: String?
     
     init?(venue: Venue) {
         
