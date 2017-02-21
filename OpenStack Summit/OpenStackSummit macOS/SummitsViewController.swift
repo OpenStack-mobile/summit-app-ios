@@ -91,11 +91,11 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         
         if currentSummit {
             
-            cell.indicatorImageView.image = NSImage(named: "NSStatusAvailable")
+            cell.indicatorImageView.image = NSImage(named: NSImageNameStatusAvailable)
             
         } else {
             
-            cell.indicatorImageView.image = NSImage(named: "NSStatusNone")
+            cell.indicatorImageView.image = NSImage(named: NSImageNameStatusNone)
         }
         
         cell.nameLabel!.stringValue = summit.name
