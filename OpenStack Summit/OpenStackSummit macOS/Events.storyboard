@@ -220,7 +220,7 @@
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="our-dh-LgZ">
                                                                             <rect key="frame" x="14" y="81" width="501" height="24"/>
-                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Event Name" id="a8U-Wo-a2q">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Event Name" id="a8U-Wo-a2q">
                                                                                 <font key="font" metaFont="system" size="20"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -236,7 +236,7 @@
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9qT-X4-tmE">
                                                                             <rect key="frame" x="42" y="35" width="473" height="38"/>
-                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="fvL-Sr-AeS">
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="fvL-Sr-AeS">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <string key="title">Location
 Room 1</string>
@@ -641,7 +641,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                             </imageView>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-g3-8U7">
                                                 <rect key="frame" x="38" y="8" width="102" height="16"/>
-                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="ios, swift, xcode" id="kwF-tt-zzq">
+                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="ios, swift, xcode" id="kwF-tt-zzq">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -763,6 +763,8 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                         <outlet property="nameLabel" destination="FkT-2J-KVU" id="aGr-yR-wVu"/>
                         <outlet property="playVideoButton" destination="eLM-3d-A71" id="vXB-AR-l0p"/>
                         <outlet property="shareButton" destination="A0d-Ow-VxZ" id="6pO-Vu-XC4"/>
+                        <outlet property="tableView" destination="906-1r-Fxq" id="Y6f-HQ-s3G"/>
+                        <outlet property="tagLabel" destination="1aP-g3-8U7" id="boR-vU-8Jo"/>
                         <outlet property="tagView" destination="XZG-3s-pRG" id="JQW-rs-sjJ"/>
                         <outlet property="trackLabel" destination="x6t-ys-acv" id="RNX-gB-pvV"/>
                     </connections>
