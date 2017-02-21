@@ -67,6 +67,11 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         
         items.append(venueCache.address)
         
+        if descriptionLabel.attributedStringValue.string.isEmpty == false {
+            
+            items.append(descriptionLabel.attributedStringValue)
+        }
+        
         if let _ = venueCache.backgroundImageURL,
             let venueImage = self.venueImageView.image {
             
