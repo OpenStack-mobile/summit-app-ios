@@ -26,7 +26,21 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     @IBOutlet private(set) weak var shareButton: NSButton!
     
-    @IBOutlet private(set) weak var descriptionTextView: NSTextView!
+    @IBOutlet private(set) weak var descriptionView: NSView!
+    
+    @IBOutlet private(set) weak var descriptionLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var locationView: NSView!
+    
+    @IBOutlet private(set) weak var locationButton: NSButton!
+    
+    @IBOutlet private(set) weak var levelView: NSView!
+    
+    @IBOutlet private(set) weak var levelButton: NSButton!
+    
+    @IBOutlet private(set) weak var tagView: NSView!
+    
+    @IBOutlet private(set) weak var tagLabel: NSTextField!
     
     @IBOutlet private(set) weak var tableView: NSTableView!
     
@@ -46,7 +60,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 1000
+        //tableView.rowHeight = 1000
     }
     
     // MARK: - Actions
@@ -67,6 +81,16 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         sharingServicePicker.delegate = self
         
         sharingServicePicker.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: NSRectEdge.MinY)
+    }
+    
+    @IBAction func showLocation(sender: NSButton) {
+        
+        
+    }
+    
+    @IBAction func showLevel(sender: NSButton) {
+        
+        
     }
     
     // MARK: - Private Methods
@@ -98,23 +122,41 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         self.eventDetail = event
         
         self.nameLabel.stringValue = event.name
+        
         self.trackLabel.stringValue = event.track
+        self.trackLabel.hidden = event.track.isEmpty
+        
         self.dateTimeLabel.stringValue = event.dateTime
+        
         self.playVideoButton.hidden = event.video == nil
         
         let htmlString = event.eventDescription
         
-        self.descriptionTextView.string = ""
-        
         if let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
             let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+            
+            self.descriptionView.hidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
             attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
             
-            self.descriptionTextView.textStorage!.appendAttributedString(attributedString)
+            self.descriptionLabel.attributedStringValue = attributedString
+            
+        } else {
+            
+            self.descriptionView.hidden = true
+            self.descriptionLabel.stringValue = ""
         }
+        
+        self.locationView.hidden = event.location.isEmpty
+        self.locationButton.title = event.location
+        
+        self.levelView.hidden = event.level.isEmpty
+        self.levelButton.title = event.level
+        
+        self.tagView.hidden = event.tags.isEmpty
+        self.tagLabel.stringValue = event.tags
     }
     
     // MARK: - NSTableViewDataSource
@@ -152,27 +194,6 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
 }
 
 // MARK: - Supporting Types
-
-private extension EventDetailViewController {
-    
-    enum Section: Int {
-        
-        static let count = 2
-        
-        case details
-        case speakers
-        //case feedback
-    }
-    
-    enum Data {
-        
-        case date
-        case location
-        case description
-        case level
-        case speaker(EventDetail.SpeakerDetail)
-    }
-}
 
 final class EventDetailHeader: NSTableCellView {
     
