@@ -15,9 +15,7 @@ import CoreSummit
 final class VenueDetailViewController: NSViewController {
     
     // MARK: - IB Outlets
-    
-    @IBOutlet private(set) weak var headerView: NSView!
-    
+        
     @IBOutlet private(set) weak var nameLabel: NSTextField!
     
     @IBOutlet private(set) weak var addressLabel: NSTextField!

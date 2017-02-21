@@ -279,19 +279,19 @@
                                     <customView verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="EDQ-80-jQs">
                                         <rect key="frame" x="0.0" y="83" width="350" height="83"/>
                                         <subviews>
-                                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Nf-8n-OvN">
+                                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Nf-8n-OvN">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="ffh-iY-KeX">
-                                                    <rect key="frame" x="1" y="1" width="348" height="58"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <collectionView id="o3V-aJ-128">
-                                                            <rect key="frame" x="0.0" y="0.0" width="348" height="58"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Mg3-PL-BwU">
                                                                 <size key="itemSize" width="50" height="50"/>
                                                             </collectionViewFlowLayout>
-                                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -330,19 +330,19 @@
                                     <customView verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="QvC-e1-hoS">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="83"/>
                                         <subviews>
-                                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdg-xz-PrB">
+                                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdg-xz-PrB">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="YoM-Wd-VQG">
-                                                    <rect key="frame" x="1" y="1" width="348" height="58"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <collectionView id="68S-S7-Ifc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="348" height="58"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="xRN-t6-OCU">
                                                                 <size key="itemSize" width="50" height="50"/>
                                                             </collectionViewFlowLayout>
-                                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -402,15 +402,14 @@
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="5ZX-b2-6Li" id="Wg2-FL-tuM"/>
-                        <outlet property="headerView" destination="ZZd-aJ-DT8" id="vUV-sT-d8f"/>
                         <outlet property="imagesCollectionView" destination="o3V-aJ-128" id="ixC-Ny-K9G"/>
                         <outlet property="mapImagesCollectionView" destination="68S-S7-Ifc" id="3xv-pQ-vIb"/>
-                        <outlet property="nameLabel" destination="SHY-9I-rr9" id="ora-MP-vB0"/>
+                        <outlet property="nameLabel" destination="SHY-9I-rr9" id="ZK7-fe-DO6"/>
                     </connections>
                 </viewController>
                 <customObject id="7Ii-LW-xPe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="2194"/>
+            <point key="canvasLocation" x="708" y="2193.5"/>
         </scene>
         <!--Venue Map View Controller-->
         <scene sceneID="QvB-DK-Z9j">

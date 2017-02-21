@@ -164,4 +164,24 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         
         self.reviewsView.hidden = true
     }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "showEventVenue":
+            
+            let venueDetailViewController = segue.destinationController as! VenueDetailViewController
+            
+            venueDetailViewController.venue = eventDetail.venue!.venue
+            
+        case "showEventSpeakers":
+            
+            break
+            
+        default: fatalError()
+        }
+    }
 }

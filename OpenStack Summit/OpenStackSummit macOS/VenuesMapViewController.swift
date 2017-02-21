@@ -27,17 +27,16 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     
     private var summitObserver: Int?
     
-    private lazy var venueDetailViewController = {
+    private lazy var popover: (NSPopover, VenueDetailViewController) = {
         
         let venueDetailViewController = self.storyboard!.instantiateControllerWithIdentifier("VenueDetailViewController") as! VenueDetailViewController
-        venueDetailViewController.headerView.hidden = true
         
         let popover = NSPopover()
         popover.behavior = .Transient
         popover.animates = true
         popover.contentViewController = venueDetailViewController
         
-        return venueDetailViewController
+        return (popover, venueDetailViewController)
     }()
     
     // MARK: - Loading
@@ -63,6 +62,8 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
     @IBAction func annotationButtonPressed(sender: NSButton) {
         
         let venueAnnotation = mapView.selectedAnnotations.first as! VenueAnnotation
+        
+        self.mapView.deselectAnnotation(venueAnnotation, animated: true)
         
         popover.1.venue = venueAnnotation.venue
         
@@ -130,7 +131,7 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
                 
                 newAnnotationView.canShowCallout = true
                 newAnnotationView.pinTintColor = .redColor()
-                newAnnotationView.detailCalloutAccessoryView = annotationButton
+                newAnnotationView.rightCalloutAccessoryView = annotationButton
                 
                 annotationView = newAnnotationView
             }

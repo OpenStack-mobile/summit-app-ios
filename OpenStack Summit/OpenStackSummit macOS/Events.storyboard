@@ -200,7 +200,6 @@
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     </view>
                                                                                     <color key="fillColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <font key="titleFont" metaFont="message" size="11"/>
                                                                                 </box>
                                                                             </subviews>
                                                                             <constraints>
@@ -561,7 +560,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <segue destination="ukv-OS-LVh" kind="popover" popoverAnchorView="hxz-wF-7iB" popoverBehavior="t" preferredEdge="maxY" id="LwI-XG-6O3"/>
+                                                    <segue destination="ukv-OS-LVh" kind="popover" identifier="showEventVenue" popoverAnchorView="hxz-wF-7iB" popoverBehavior="t" preferredEdge="maxY" id="LwI-XG-6O3"/>
                                                 </connections>
                                             </button>
                                             <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wrA-Vj-YSe">
