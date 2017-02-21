@@ -28,6 +28,7 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
     private lazy var popover: (NSPopover, VenueDetailViewController) = {
         
         let venueDetailViewController = self.storyboard!.instantiateControllerWithIdentifier("VenueDetailViewController") as! VenueDetailViewController
+        self.addChildViewController(venueDetailViewController)
         
         let popover = NSPopover()
         popover.behavior = .Transient
@@ -53,6 +54,12 @@ final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetch
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
         configureView()
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        
+        popover.0.close()
     }
     
     // MARK: - Private Methods

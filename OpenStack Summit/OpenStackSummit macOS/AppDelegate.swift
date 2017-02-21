@@ -51,7 +51,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationShouldHandleReopen(application: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         
-        application.windows.forEach { $0.makeKeyAndOrderFront(application) }
+        application.windows
+            .filter { $0.className != "_NSPopoverWindow" }
+            .forEach { $0.makeKeyAndOrderFront(application) }
         
         return true
     }

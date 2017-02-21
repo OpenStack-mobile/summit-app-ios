@@ -185,7 +185,9 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
             
         case "showEventSpeakers":
             
-            break
+            let speakersViewController = segue.destinationController as! SpeakersTableViewController
+            
+            speakersViewController.predicate = NSPredicate("")
             
         default: fatalError()
         }
