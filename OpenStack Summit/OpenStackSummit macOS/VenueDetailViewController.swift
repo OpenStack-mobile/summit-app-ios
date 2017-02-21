@@ -12,7 +12,7 @@ import CoreData
 import CoreSummit
 
 @objc(OSSVenueDetailViewController)
-final class VenueDetailViewController: NSViewController {
+final class VenueDetailViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, NSSharingServicePickerDelegate {
     
     // MARK: - IB Outlets
         
@@ -55,7 +55,28 @@ final class VenueDetailViewController: NSViewController {
     
     // MARK: - Actions
     
-    
+    @IBAction func share(sender: NSButton) {
+        
+        var items = [AnyObject]()
+        
+        items.append(venueCache.name)
+        
+        items.append(venueCache.address)
+        
+        if let _ = venueCache.backgroundImageURL,
+            let venueImage = self.venueImageView.image {
+            
+            items.append(venueImage)
+        }
+        
+        let sharingServicePicker = NSSharingServicePicker(items: items)
+        
+        sharingServicePicker.delegate = self
+        
+        sharingServicePicker.showRelativeToRect(sender.bounds,
+                                                ofView: sender,
+                                                preferredEdge: .MinY)
+    }
     
     // MARK: - Private Methods
     
@@ -84,11 +105,15 @@ final class VenueDetailViewController: NSViewController {
         
         addressLabel.stringValue = venue.address
         
-        imagesView.hidden = venue.images.isEmpty
-        imagesCollectionView.reloadData()
+        // TEMP
+        imagesView.hidden = true
+        mapImagesView.hidden = true
         
-        mapImagesView.hidden = venue.maps.isEmpty
-        mapImagesCollectionView.reloadData()
+        //imagesView.hidden = venue.images.isEmpty
+        //imagesCollectionView.reloadData()
+        
+        //mapImagesView.hidden = venue.maps.isEmpty
+        //mapImagesCollectionView.reloadData()
         
         venueImageView.image = nil
         
@@ -102,8 +127,15 @@ final class VenueDetailViewController: NSViewController {
             
             venueImageView.loadCached(imageURL) { [weak self] _ in
                 
-                self?.venueImageActivityIndicator.stopAnimation(nil)
-                self?.venueImageActivityIndicator.hidden = true
+                if self?.venueImageView.image != nil {
+                    
+                    self?.venueImageActivityIndicator.stopAnimation(nil)
+                    self?.venueImageActivityIndicator.hidden = true
+                    
+                } else {
+                    
+                    self?.venueImageViewContainer.hidden = true
+                }
             }
             
         } else {
@@ -112,4 +144,87 @@ final class VenueDetailViewController: NSViewController {
             venueImageActivityIndicator.hidden = true
         }
     }
+    
+    private func configure(item item: VenueImageCollectionViewItem, at indexPath: NSIndexPath, collectionView: NSCollectionView) {
+        
+        let urlString: String
+        
+        switch collectionView {
+        case imagesCollectionView: urlString = venueCache.images[indexPath.item]
+        case mapImagesCollectionView: urlString = venueCache.maps[indexPath.item]
+        default: fatalError()
+        }
+        
+        item.imageView!.image = nil
+        
+        item.activityIndicator.hidden = false
+        item.activityIndicator.startAnimation(nil)
+        
+        if let imageURL = NSURL(string: urlString) {
+            
+            item.imageView!.loadCached(imageURL) { _ in
+                
+                if let _ = item.imageView?.image {
+                    
+                    item.activityIndicator.hidden = true
+                    item.activityIndicator.stopAnimation(nil)
+                }
+            }
+        }
+    }
+    
+    // MARK: - NSCollectionViewDataSource
+    
+    func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
+        
+        return 1
+    }
+    
+    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        switch collectionView {
+        case imagesCollectionView: return venueCache.images.count
+        case mapImagesCollectionView: return venueCache.maps.count
+        default: fatalError()
+        }
+    }
+    
+    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
+        
+        let item = collectionView.makeItemWithIdentifier("VenueImageCollectionViewItem", forIndexPath: indexPath) as! VenueImageCollectionViewItem
+        
+        configure(item: item, at: indexPath, collectionView: collectionView)
+        
+        return item
+    }
+    
+    // MARK: - NSCollectionViewDelegate
+    
+    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
+        
+        defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
+        
+        let indexPath = indexPaths.first!
+        
+        let imageString: String
+        
+        switch collectionView {
+        case imagesCollectionView: imageString = venueCache.images[indexPath.item]
+        case mapImagesCollectionView: imageString = venueCache.maps[indexPath.item]
+        default: fatalError()
+        }
+        
+        if let url = NSURL(string: imageString) {
+            
+            NSWorkspace.sharedWorkspace().openURL(url)
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+final class VenueImageCollectionViewItem: NSCollectionViewItem {
+    
+    @IBOutlet private(set) weak var activityIndicator: NSProgressIndicator!
+    
 }

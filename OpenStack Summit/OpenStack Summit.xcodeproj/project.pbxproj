@@ -283,6 +283,7 @@
 		6E2924201D7AF8CC00D14F0A /* DataUpdates3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E08F3C61D6CC43500E3006B /* DataUpdates3.json */; };
 		6E2924221D7AF8CC00D14F0A /* DataUpdates2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E570A301D676A3800189992 /* DataUpdates2.json */; };
 		6E2924231D7AF8CC00D14F0A /* DataUpdates1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E25AD401D5A63F20060E7BA /* DataUpdates1.json */; };
+		6E2929AF1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2929AE1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib */; };
 		6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */; };
 		6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
 		6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
@@ -1296,6 +1297,7 @@
 		6E25AD401D5A63F20060E7BA /* DataUpdates1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates1.json; sourceTree = "<group>"; };
 		6E2924101D7AF8C900D14F0A /* CoreSummit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreSummit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreSummitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E2929AE1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueImageCollectionViewItem.xib; sourceTree = "<group>"; };
 		6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInterfaceController.swift; sourceTree = "<group>"; };
 		6E2BB3A71D63A57E0085C876 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		6E2BB3A91D63A6050085C876 /* VideoJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoJSON.swift; sourceTree = "<group>"; };
@@ -2303,6 +2305,7 @@
 				6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */,
 				6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */,
 				6E31EC921E5B7362000E5BAC /* VideoCollectionViewItem.xib */,
+				6E2929AE1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3338,6 +3341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E31EC9B1E5B8521000E5BAC /* Speakers.storyboard in Resources */,
+				6E2929AF1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib in Resources */,
 				6E31EC8C1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib in Resources */,
 				6E31ECA11E5B8549000E5BAC /* Videos.storyboard in Resources */,
 				6E31EC9D1E5B852A000E5BAC /* Events.storyboard in Resources */,

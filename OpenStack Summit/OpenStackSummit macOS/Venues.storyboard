@@ -308,13 +308,17 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <collectionView id="o3V-aJ-128">
+                                                        <collectionView selectable="YES" id="o3V-aJ-128">
                                                             <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Mg3-PL-BwU">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" scrollDirection="horizontal" id="Mg3-PL-BwU">
                                                                 <size key="itemSize" width="50" height="50"/>
                                                             </collectionViewFlowLayout>
                                                             <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <connections>
+                                                                <outlet property="dataSource" destination="KYg-L6-bUy" id="7bH-m3-hxb"/>
+                                                                <outlet property="delegate" destination="KYg-L6-bUy" id="iPV-SE-1iD"/>
+                                                            </connections>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -359,10 +363,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <collectionView id="68S-S7-Ifc">
+                                                        <collectionView selectable="YES" id="68S-S7-Ifc">
                                                             <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="xRN-t6-OCU">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" scrollDirection="horizontal" id="xRN-t6-OCU">
                                                                 <size key="itemSize" width="50" height="50"/>
                                                             </collectionViewFlowLayout>
                                                             <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -490,7 +494,7 @@
     <resources>
         <image name="NSComputer" width="32" height="32"/>
         <image name="NSShareTemplate" width="11" height="16"/>
-        <image name="infoButton" width="128" height="128"/>
+        <image name="infoButton" width="20" height="20"/>
         <image name="map_pin" width="26" height="33"/>
     </resources>
 </document>
