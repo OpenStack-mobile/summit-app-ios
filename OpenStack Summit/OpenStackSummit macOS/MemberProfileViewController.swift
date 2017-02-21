@@ -56,6 +56,12 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         var items = [AnyObject]()
         
+        items.append(self.nameLabel.stringValue ?? "")
+        
+        items.append(self.titleLabel.stringValue ?? "")
+        
+        items.append(self.biographyTextView.attributedString())
+        
         items.append(self.imageView.image!)
         
         if let url = self.userActivity?.webpageURL {

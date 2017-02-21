@@ -45,15 +45,15 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         
         defer { tableView.deselectAll(sender) }
         
-        let managedObject = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
+        let event = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
         
-        let event = Event(managedObject: managedObject)
-        
-        let summit = Summit(managedObject: currentSummit!)
-        
-        if let url = NSURL(string: event.toWebpageURL(summit)) {
+        if let existingWindow = NSApp.windows.firstMatching({ ($0.windowController as? EventWindowController)?.event == event.identifier }) {
             
-            NSWorkspace.sharedWorkspace().openURL(url)
+            existingWindow.makeKeyAndOrderFront(nil)
+            
+        } else {
+            
+            self.performSegueWithIdentifier("showEvent", sender: nil)
         }
     }
     
@@ -161,6 +161,25 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
             }
         }
     }*/
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case "showEvent":
+            
+            // get selected event
+            let event = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
+            
+            // show window controller
+            let windowController = segue.destinationController as! EventWindowController
+            windowController.event = event.identifier
+            
+        default: fatalError()
+        }
+    }
 }
 
 // MARK: - Supporting Types

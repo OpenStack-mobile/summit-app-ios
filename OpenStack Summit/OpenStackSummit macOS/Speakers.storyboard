@@ -140,6 +140,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="I6k-pc-CsV" secondAttribute="height" multiplier="1:1" id="hcn-I6-En6"/>
                                                         </constraints>
+                                                        <font key="titleFont" metaFont="message" size="11"/>
                                                     </box>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qiB-Ym-3OC">
                                                         <rect key="frame" x="476" y="14" width="36" height="32"/>
@@ -212,6 +213,7 @@
                                                                 <constraint firstItem="NTo-eY-ZuR" firstAttribute="leading" secondItem="nIU-lc-9mU" secondAttribute="leading" constant="3" id="s7p-fG-XDI"/>
                                                             </constraints>
                                                         </view>
+                                                        <font key="titleFont" metaFont="message" size="11"/>
                                                     </box>
                                                     <box horizontalCompressionResistancePriority="250" boxType="custom" borderWidth="0.0" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="xUG-ly-6X0">
                                                         <rect key="frame" x="94" y="0.0" width="104" height="22"/>
@@ -245,6 +247,7 @@
                                                                 <constraint firstItem="fat-oB-OLl" firstAttribute="leading" secondItem="EOP-EF-0NA" secondAttribute="leading" constant="3" id="vkA-Ks-N7E"/>
                                                             </constraints>
                                                         </view>
+                                                        <font key="titleFont" metaFont="message" size="11"/>
                                                     </box>
                                                     <box horizontalCompressionResistancePriority="250" boxType="custom" borderWidth="0.0" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="cPR-EO-21e">
                                                         <rect key="frame" x="206" y="0.0" width="104" height="22"/>
@@ -278,6 +281,7 @@
                                                                 <constraint firstItem="u2N-0u-ZJf" firstAttribute="leading" secondItem="GyB-fC-Rc7" secondAttribute="trailing" constant="3" id="xOe-P6-XNf"/>
                                                             </constraints>
                                                         </view>
+                                                        <font key="titleFont" metaFont="message" size="11"/>
                                                     </box>
                                                 </subviews>
                                                 <visibilityPriorities>
