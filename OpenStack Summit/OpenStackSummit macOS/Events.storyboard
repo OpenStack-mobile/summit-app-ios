@@ -420,10 +420,10 @@ Room 1</string>
                                 </userDefinedRuntimeAttributes>
                             </customView>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="249.99998474121094" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AOT-Mf-XWN" userLabel="Details Stack View">
-                                <rect key="frame" x="0.0" y="264" width="800" height="245"/>
+                                <rect key="frame" x="0.0" y="200" width="800" height="309"/>
                                 <subviews>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBj-6U-1Fa" userLabel="Date Time Actions View">
-                                        <rect key="frame" x="0.0" y="197" width="800" height="48"/>
+                                        <rect key="frame" x="0.0" y="261" width="800" height="48"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1f-iU-GTI" userLabel="Date Time Stack View">
                                                 <rect key="frame" x="16" y="16" width="688" height="17"/>
@@ -464,7 +464,7 @@ Room 1</string>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="eLM-3d-A71" secondAttribute="height" id="wJu-AK-zlx"/>
                                                         </constraints>
-                                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="play" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="jr1-Al-Owh">
+                                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSSlideshowTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="jr1-Al-Owh">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -515,7 +515,7 @@ Room 1</string>
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mlx-Fu-aQL">
-                                        <rect key="frame" x="0.0" y="96" width="800" height="101"/>
+                                        <rect key="frame" x="0.0" y="160" width="800" height="101"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IOo-oB-gJh">
                                                 <rect key="frame" x="14" y="8" width="772" height="85"/>
@@ -530,6 +530,8 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                         </subviews>
                                         <edgeInsets key="edgeInsets" left="16" right="16" top="8" bottom="8"/>
                                         <constraints>
+                                            <constraint firstItem="IOo-oB-gJh" firstAttribute="top" secondItem="Mlx-Fu-aQL" secondAttribute="top" constant="8" id="bhL-nV-ybT"/>
+                                            <constraint firstAttribute="bottom" secondItem="IOo-oB-gJh" secondAttribute="bottom" constant="8" id="eoJ-MX-rVl"/>
                                             <constraint firstAttribute="trailing" secondItem="IOo-oB-gJh" secondAttribute="trailing" constant="16" id="gsg-34-1FG"/>
                                             <constraint firstItem="IOo-oB-gJh" firstAttribute="leading" secondItem="Mlx-Fu-aQL" secondAttribute="leading" constant="16" id="ncc-K6-cxS"/>
                                         </constraints>
@@ -541,7 +543,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                         </customSpacing>
                                     </stackView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="7SD-hN-Vr4">
-                                        <rect key="frame" x="0.0" y="64" width="800" height="32"/>
+                                        <rect key="frame" x="0.0" y="128" width="800" height="32"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f4D-6k-aof">
                                                 <rect key="frame" x="16" y="8" width="16" height="16"/>
@@ -561,7 +563,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                                     <action selector="showLocation:" target="EJa-na-JbP" id="zH2-T9-0vJ"/>
                                                 </connections>
                                             </button>
-                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wrA-Vj-YSe">
+                                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wrA-Vj-YSe">
                                                 <rect key="frame" x="764" y="8" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="wrA-Vj-YSe" secondAttribute="height" multiplier="1:1" id="5m8-ie-YDg"/>
@@ -585,7 +587,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Rn-ur-dFL">
-                                        <rect key="frame" x="0.0" y="32" width="800" height="32"/>
+                                        <rect key="frame" x="0.0" y="96" width="800" height="32"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PTR-ZG-zt1">
                                                 <rect key="frame" x="16" y="8" width="16" height="16"/>
@@ -605,7 +607,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                                     <action selector="showLevel:" target="EJa-na-JbP" id="shg-d7-rBH"/>
                                                 </connections>
                                             </button>
-                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tOJ-qv-v3v">
+                                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tOJ-qv-v3v">
                                                 <rect key="frame" x="764" y="8" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="5FZ-hN-gEh"/>
@@ -629,7 +631,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="XZG-3s-pRG">
-                                        <rect key="frame" x="0.0" y="0.0" width="800" height="32"/>
+                                        <rect key="frame" x="0.0" y="64" width="800" height="32"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vNf-8Z-iAj">
                                                 <rect key="frame" x="16" y="8" width="16" height="16"/>
@@ -658,8 +660,85 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                             <constraint firstItem="1aP-g3-8U7" firstAttribute="leading" secondItem="vNf-8Z-iAj" secondAttribute="trailing" constant="8" id="zzt-Y7-rXr"/>
                                         </constraints>
                                     </customView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZxX-MS-DWb">
+                                        <rect key="frame" x="0.0" y="32" width="800" height="32"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="93E-my-IXJ">
+                                                <rect key="frame" x="16" y="8" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="93E-my-IXJ" secondAttribute="height" multiplier="1:1" id="C9t-a8-4vF"/>
+                                                    <constraint firstAttribute="height" constant="16" id="IjP-Iy-EEk"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSUserGroup" id="JvC-Tw-YsM"/>
+                                            </imageView>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PPA-cy-ROB">
+                                                <rect key="frame" x="40" y="8" width="63" height="16"/>
+                                                <buttonCell key="cell" type="bevel" title="1 Speaker" bezelStyle="rounded" imagePosition="overlaps" alignment="left" imageScaling="proportionallyDown" inset="2" id="jJ3-Gc-ZXu">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="showLevel:" target="EJa-na-JbP" id="eCo-el-Mhf"/>
+                                                </connections>
+                                            </button>
+                                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kad-PC-My1">
+                                                <rect key="frame" x="764" y="8" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="NDu-jn-G0L"/>
+                                                    <constraint firstAttribute="width" secondItem="Kad-PC-My1" secondAttribute="height" multiplier="1:1" id="TMx-uc-vMg"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSGoRightTemplate" id="h8r-4B-wq7"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="93E-my-IXJ" firstAttribute="leading" secondItem="ZxX-MS-DWb" secondAttribute="leading" constant="16" id="1Q3-jS-C89"/>
+                                            <constraint firstItem="PPA-cy-ROB" firstAttribute="leading" secondItem="93E-my-IXJ" secondAttribute="trailing" constant="8" id="9gT-bX-h1K"/>
+                                            <constraint firstAttribute="bottom" secondItem="93E-my-IXJ" secondAttribute="bottom" constant="8" id="FtM-xN-8DJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="Kad-PC-My1" secondAttribute="bottom" constant="8" id="KRR-P6-hCT"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kad-PC-My1" secondAttribute="trailing" constant="20" id="LYd-F4-6ar"/>
+                                            <constraint firstItem="Kad-PC-My1" firstAttribute="top" secondItem="ZxX-MS-DWb" secondAttribute="top" constant="8" id="Ztw-8x-G4j"/>
+                                            <constraint firstAttribute="bottom" secondItem="PPA-cy-ROB" secondAttribute="bottom" constant="8" id="ak8-rq-tmw"/>
+                                            <constraint firstItem="93E-my-IXJ" firstAttribute="top" secondItem="ZxX-MS-DWb" secondAttribute="top" constant="8" id="fxk-25-CqD"/>
+                                            <constraint firstItem="PPA-cy-ROB" firstAttribute="top" secondItem="ZxX-MS-DWb" secondAttribute="top" constant="8" id="o1v-Aa-sKX"/>
+                                            <constraint firstItem="Kad-PC-My1" firstAttribute="width" secondItem="Kad-PC-My1" secondAttribute="height" multiplier="1:1" id="rkE-vn-HAR"/>
+                                            <constraint firstItem="Kad-PC-My1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PPA-cy-ROB" secondAttribute="trailing" constant="8" id="vod-rZ-TRj"/>
+                                        </constraints>
+                                    </customView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="VOt-tN-oqp">
+                                        <rect key="frame" x="0.0" y="0.0" width="800" height="32"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EUQ-uX-uCK">
+                                                <rect key="frame" x="16" y="8" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EUQ-uX-uCK" secondAttribute="height" multiplier="1:1" id="YBC-Xj-XpV"/>
+                                                    <constraint firstAttribute="height" constant="16" id="bmp-hu-wNa"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="credential" id="Gm2-bL-r8C"/>
+                                            </imageView>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q22-ea-cPQ">
+                                                <rect key="frame" x="40" y="8" width="65" height="16"/>
+                                                <buttonCell key="cell" type="bevel" title="5 Reviews" bezelStyle="rounded" imagePosition="overlaps" alignment="left" imageScaling="proportionallyDown" inset="2" id="pyf-to-Cjz">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="showLevel:" target="EJa-na-JbP" id="RLB-Vm-k9c"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Q22-ea-cPQ" secondAttribute="bottom" constant="8" id="BEa-tN-Tvs"/>
+                                            <constraint firstAttribute="bottom" secondItem="EUQ-uX-uCK" secondAttribute="bottom" constant="8" id="JnE-UY-fbV"/>
+                                            <constraint firstItem="EUQ-uX-uCK" firstAttribute="top" secondItem="VOt-tN-oqp" secondAttribute="top" constant="8" id="Rfs-Sa-e7D"/>
+                                            <constraint firstItem="EUQ-uX-uCK" firstAttribute="leading" secondItem="VOt-tN-oqp" secondAttribute="leading" constant="16" id="SpE-lc-Hvp"/>
+                                            <constraint firstItem="Q22-ea-cPQ" firstAttribute="leading" secondItem="EUQ-uX-uCK" secondAttribute="trailing" constant="8" id="Zo8-2c-hQS"/>
+                                            <constraint firstItem="Q22-ea-cPQ" firstAttribute="top" secondItem="VOt-tN-oqp" secondAttribute="top" constant="8" id="mBH-zO-qEX"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -672,78 +751,18 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="1000" horizontalPageScroll="10" verticalLineScroll="1000" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="gFC-MQ-1F4">
-                                <rect key="frame" x="0.0" y="0.0" width="800" height="264"/>
-                                <clipView key="contentView" id="tTd-3U-j2A">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="264"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="1000" viewBased="YES" id="906-1r-Fxq">
-                                            <rect key="frame" x="0.0" y="0.0" width="800" height="264"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <tableViewGridLines key="gridStyleMask" vertical="YES"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                            <tableColumns>
-                                                <tableColumn width="797" minWidth="40" maxWidth="10000" id="Rfo-d8-H14">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Section">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="Fwg-kk-qFO">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                    <prototypeCellViews>
-                                                        <tableCellView id="hH3-XX-bHA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="797" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HfB-5N-jP3">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="797" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="H4J-ez-8uF">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                            </subviews>
-                                                            <connections>
-                                                                <outlet property="textField" destination="HfB-5N-jP3" id="BIZ-0x-T4u"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                    </prototypeCellViews>
-                                                </tableColumn>
-                                            </tableColumns>
-                                        </tableView>
-                                    </subviews>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="c9H-Ra-8Kb">
-                                    <rect key="frame" x="-100" y="-100" width="800" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="9fb-rh-Ebl">
-                                    <rect key="frame" x="784" y="23" width="16" height="241"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="MYg-pL-CYl" firstAttribute="top" secondItem="82T-p5-Tlu" secondAttribute="top" id="NSO-rd-uFX"/>
-                            <constraint firstAttribute="trailing" secondItem="gFC-MQ-1F4" secondAttribute="trailing" id="R2T-cy-xoR"/>
-                            <constraint firstAttribute="bottom" secondItem="gFC-MQ-1F4" secondAttribute="bottom" id="StE-1F-gcx"/>
-                            <constraint firstItem="gFC-MQ-1F4" firstAttribute="top" secondItem="AOT-Mf-XWN" secondAttribute="bottom" id="Zte-lG-GtB"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AOT-Mf-XWN" secondAttribute="bottom" constant="20" id="Q2e-o3-Zk8"/>
                             <constraint firstItem="AOT-Mf-XWN" firstAttribute="leading" secondItem="82T-p5-Tlu" secondAttribute="leading" id="bjR-4E-K4U"/>
                             <constraint firstItem="MYg-pL-CYl" firstAttribute="leading" secondItem="82T-p5-Tlu" secondAttribute="leading" id="hZo-bc-3He"/>
                             <constraint firstAttribute="trailing" secondItem="MYg-pL-CYl" secondAttribute="trailing" id="lec-ch-Yah"/>
                             <constraint firstAttribute="trailing" secondItem="AOT-Mf-XWN" secondAttribute="trailing" id="m7T-PC-fI3"/>
-                            <constraint firstItem="gFC-MQ-1F4" firstAttribute="leading" secondItem="82T-p5-Tlu" secondAttribute="leading" id="mxb-SZ-l77"/>
                             <constraint firstItem="AOT-Mf-XWN" firstAttribute="top" secondItem="MYg-pL-CYl" secondAttribute="bottom" id="pHq-5l-5Ar"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -762,8 +781,11 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                         <outlet property="locationView" destination="7SD-hN-Vr4" id="Z1T-22-Os7"/>
                         <outlet property="nameLabel" destination="FkT-2J-KVU" id="aGr-yR-wVu"/>
                         <outlet property="playVideoButton" destination="eLM-3d-A71" id="vXB-AR-l0p"/>
+                        <outlet property="reviewsButton" destination="Q22-ea-cPQ" id="Kny-P9-2Sq"/>
+                        <outlet property="reviewsView" destination="VOt-tN-oqp" id="dhq-OX-WpX"/>
                         <outlet property="shareButton" destination="A0d-Ow-VxZ" id="6pO-Vu-XC4"/>
-                        <outlet property="tableView" destination="906-1r-Fxq" id="Y6f-HQ-s3G"/>
+                        <outlet property="speakersButton" destination="PPA-cy-ROB" id="sOb-Qr-JRn"/>
+                        <outlet property="speakersView" destination="ZxX-MS-DWb" id="b9H-20-pkf"/>
                         <outlet property="tagLabel" destination="1aP-g3-8U7" id="boR-vU-8Jo"/>
                         <outlet property="tagView" destination="XZG-3s-pRG" id="JQW-rs-sjJ"/>
                         <outlet property="trackLabel" destination="x6t-ys-acv" id="RNX-gB-pvV"/>
@@ -777,9 +799,11 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
     <resources>
         <image name="NSGoRightTemplate" width="9" height="12"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSSlideshowTemplate" width="17" height="14"/>
+        <image name="NSUserGroup" width="32" height="32"/>
+        <image name="credential" width="46" height="31"/>
         <image name="level" width="30" height="32"/>
         <image name="map_pin" width="26" height="33"/>
-        <image name="play" width="121" height="121"/>
         <image name="tag" width="35" height="35"/>
         <image name="time" width="30" height="30"/>
     </resources>

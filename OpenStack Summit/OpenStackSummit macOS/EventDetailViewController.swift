@@ -42,7 +42,13 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     @IBOutlet private(set) weak var tagLabel: NSTextField!
     
-    @IBOutlet private(set) weak var tableView: NSTableView!
+    @IBOutlet private(set) weak var speakersView: NSView!
+    
+    @IBOutlet private(set) weak var speakersButton: NSButton!
+    
+    @IBOutlet private(set) weak var reviewsView: NSView!
+    
+    @IBOutlet private(set) weak var reviewsButton: NSButton!
     
     // MARK: - Properties
     
@@ -157,59 +163,10 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         
         self.tagView.hidden = event.tags.isEmpty
         self.tagLabel.stringValue = event.tags
-    }
-    
-    // MARK: - NSTableViewDataSource
-    
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         
-        return 0
-    }
-    
-    // MARK: - NSTableViewDelegate
-    
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        self.speakersView.hidden = event.speakers.isEmpty
+        self.speakersButton.stringValue = "\(event.speakers.count) speakers"
         
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: nil) as! NSTableCellView
-        
-        
-        
-        return cell
-    }
-    
-    func tableView(tableView: NSTableView, isGroupRow row: Int) -> Bool {
-        
-        return false
-    }
-    
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        
-        return 10
-    }
-    
-    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        
-        return true
+        self.reviewsView.hidden = true
     }
 }
-
-// MARK: - Supporting Types
-
-final class EventDetailHeader: NSTableCellView {
-    
-    @IBOutlet private(set) weak var nameLabel: NSTextField!
-    
-    @IBOutlet private(set) weak var dateLabel: NSTextField!
-    
-    @IBOutlet private(set) weak var indicatorImageView: NSImageView!
-}
-
-final class EventDetailTableViewCell: NSTableCellView {
-    
-    @IBOutlet private(set) weak var nameLabel: NSTextField!
-    
-    @IBOutlet private(set) weak var dateLabel: NSTextField!
-    
-    @IBOutlet private(set) weak var indicatorImageView: NSImageView!
-}
-
