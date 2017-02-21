@@ -74,17 +74,6 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         try! self.fetchedResultsController.performFetch()
         
         self.tableView.reloadData()
-        
-        // select first row
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            
-            if self.tableView.numberOfRows > 0 {
-                
-                self.tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
-                
-                self.tableViewClick()
-            }
-        }
     }
     
     private func configure(cell cell: VenueTableViewCell, at row: Int) {

@@ -39,6 +39,8 @@ final class SpeakerViewController: NSSplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        eventsViewController.tableView.selectionHighlightStyle = .Regular
+        
         configureView()
     }
     

@@ -11,7 +11,7 @@ import AppKit
 import CoreData
 import CoreSummit
 
-final class MemberProfileViewController: NSViewController {
+final class MemberProfileViewController: NSViewController, NSSharingServicePickerDelegate {
     
     // MARK: - IB Outlets
     
@@ -19,9 +19,21 @@ final class MemberProfileViewController: NSViewController {
     
     @IBOutlet private(set) weak var titleLabel: NSTextField!
     
-    @IBOutlet private(set) weak var descriptionLabel: NSTextField!
+    @IBOutlet private(set) weak var biographyTextView: NSTextView!
     
     @IBOutlet private(set) weak var imageView: NSImageView!
+    
+    @IBOutlet private(set) weak var locationView: NSBox!
+    
+    @IBOutlet private(set) weak var locationLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var twitterView: NSBox!
+    
+    @IBOutlet private(set) weak var twitterLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var ircView: NSBox!
+    
+    @IBOutlet private(set) weak var ircLabel: NSTextField!
     
     // MARK: - Properties
     
@@ -36,6 +48,26 @@ final class MemberProfileViewController: NSViewController {
         super.viewDidLoad()
         
         loadData()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func share(sender: NSButton) {
+        
+        var items = [AnyObject]()
+        
+        items.append(self.imageView.image!)
+        
+        if let url = self.userActivity?.webpageURL {
+            
+            items.append(url)
+        }
+        
+        let sharingServicePicker = NSSharingServicePicker(items: items)
+        
+        sharingServicePicker.delegate = self
+        
+        sharingServicePicker.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: NSRectEdge.MinY)
     }
     
     // MARK: - Private Methods
@@ -113,6 +145,8 @@ final class MemberProfileViewController: NSViewController {
             self.imageView.loadCached(imageURL)
         }
         
+        self.biographyTextView.string = ""
+        
         if let biography = person.biography,
             let data = biography.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
             let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
@@ -121,11 +155,16 @@ final class MemberProfileViewController: NSViewController {
             
             attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
             
-            self.descriptionLabel.attributedStringValue = attributedString
+            self.biographyTextView.textStorage!.appendAttributedString(attributedString)
             
-        } else {
-            
-            self.descriptionLabel.stringValue = ""
         }
+        
+        locationView.hidden = true
+        
+        twitterView.hidden = person.twitter == nil
+        twitterLabel.stringValue = person.twitter ?? ""
+        
+        ircView.hidden = person.irc == nil
+        ircLabel.stringValue = person.irc ?? ""
     }
 }

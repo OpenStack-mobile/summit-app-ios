@@ -101,11 +101,20 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
         
-        let indexPath = indexPaths.first!
-        
         defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
         
-        self.performSegueWithIdentifier("showSpeaker", sender: nil)
+        let indexPath = indexPaths.first!
+        
+        let speaker = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
+        
+        if let previousWindow = NSApp.windows.firstMatching({ ($0.windowController as? SpeakerWindowController)?.speaker == speaker.identifier }) {
+            
+            previousWindow.makeKeyAndOrderFront(nil)
+            
+        } else {
+            
+            self.performSegueWithIdentifier("showSpeaker", sender: nil)
+        }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -130,15 +139,17 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
             
         case "showSpeaker":
             
-            let windowController = segue.destinationController as! NSWindowController
-            
-            let speakerViewController = windowController.contentViewController as! SpeakerViewController
+            // get selected speaker
             
             let indexPath = collectionView.selectionIndexPaths.first!
             
             let speaker = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
             
-            speakerViewController.speaker = speaker.identifier
+            // show window controller
+            
+            let windowController = segue.destinationController as! SpeakerWindowController
+            
+            windowController.speaker = speaker.identifier
             
         default: fatalError()
         }
