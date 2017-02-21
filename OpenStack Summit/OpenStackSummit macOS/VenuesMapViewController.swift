@@ -13,13 +13,11 @@ import CoreLocation
 import CoreData
 import CoreSummit
 
-final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
+final class VenueMapViewController: NSViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
     
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var mapView: MKMapView!
-    
-    @IBOutlet private(set) weak var annotationButton: NSButton!
     
     // MARK: - Properties
     
@@ -55,24 +53,6 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
         configureView()
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func annotationButtonPressed(sender: NSButton) {
-        
-        let venueAnnotation = mapView.selectedAnnotations.first as! VenueAnnotation
-        
-        guard let annotationView = mapView.viewForAnnotation(venueAnnotation)
-            else { return }
-        
-        self.mapView.deselectAnnotation(venueAnnotation, animated: true)
-        
-        popover.1.venue = venueAnnotation.venue
-        
-        popover.0.showRelativeToRect(annotationView.bounds,
-                                   ofView: annotationView,
-                                   preferredEdge: .MinX)
     }
     
     // MARK: - Private Methods
@@ -134,7 +114,6 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
                 
                 newAnnotationView.canShowCallout = true
                 newAnnotationView.pinTintColor = .redColor()
-                newAnnotationView.rightCalloutAccessoryView = annotationButton
                 
                 annotationView = newAnnotationView
             }
@@ -143,6 +122,20 @@ final class VenueMapViewController: UIViewController, MKMapViewDelegate, NSFetch
         }
         
         return nil
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView annotationView: MKAnnotationView) {
+        
+        if let venueAnnotation = annotationView.annotation as? VenueAnnotation {
+            
+            mapView.deselectAnnotation(annotationView.annotation, animated: false)
+            
+            popover.1.venue = venueAnnotation.venue
+            
+            popover.0.showRelativeToRect(annotationView.bounds,
+                                         ofView: annotationView,
+                                         preferredEdge: .MinX)
+        }
     }
     
     // MARK: - NSFetchedResultsControllerDelegate

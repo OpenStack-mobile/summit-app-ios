@@ -26,6 +26,10 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     
     @IBOutlet private(set) weak var venueImageActivityIndicator: NSProgressIndicator!
     
+    @IBOutlet private(set) weak var descriptionView: NSView!
+    
+    @IBOutlet private(set) weak var descriptionLabel: NSTextField!
+    
     @IBOutlet private(set) weak var imagesView: NSView!
     
     @IBOutlet private(set) weak var imagesCollectionView: NSCollectionView!
@@ -102,8 +106,28 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         venueCache = venue
         
         nameLabel.stringValue = venue.name
-        
         addressLabel.stringValue = venue.address
+        
+        // set description
+        let htmlString = venue.descriptionText
+        
+        if let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            where attributedString.string.isEmpty == false {
+            
+            self.descriptionView.hidden = false
+            
+            let range = NSMakeRange(0, attributedString.length)
+            
+            attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
+            
+            self.descriptionLabel.attributedStringValue = attributedString
+            
+        } else {
+            
+            self.descriptionView.hidden = true
+            self.descriptionLabel.stringValue = ""
+        }
         
         // TEMP
         imagesView.hidden = true

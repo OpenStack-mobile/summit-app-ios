@@ -66,14 +66,20 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //tableView.rowHeight = 1000
+        
     }
     
     // MARK: - Actions
     
     @IBAction func playVideo(sender: NSButton) {
         
+        guard let video = eventDetail.video
+            else { fatalError("Event has no video") }
         
+        if let url = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube) {
+            
+            NSWorkspace.sharedWorkspace().openURL(url)
+        }
     }
     
     @IBAction func share(sender: NSButton) {
