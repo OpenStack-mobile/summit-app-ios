@@ -114,7 +114,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                         
                     case let .Some(error):
                         
-                        cell.scheduled = true
+                        //cell.scheduled = true
                         
                         controller.showErrorMessage(error)
                         
@@ -127,7 +127,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         // add
         else {
             
-            cell.scheduled = true
+            //cell.scheduled = true
             
             Store.shared.addEventToSchedule(event.summit, event: event.id)  { [weak self] (response) in
                 
@@ -141,7 +141,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                         
                     case let .Some(error):
                         
-                        cell.scheduled = false
+                        //cell.scheduled = false
                         
                         controller.showErrorMessage(error as NSError)
                         
