@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -455,7 +455,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-yK-Wah">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetwork" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-yK-Wah">
                                                     <rect key="frame" x="0.0" y="8" width="28" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="jPd-Sh-Acb"/>
@@ -482,7 +482,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about" translatesAutoresizingMaskIntoConstraints="NO" id="qB3-zT-c2p">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetworkPassword" translatesAutoresizingMaskIntoConstraints="NO" id="qB3-zT-c2p">
                                                     <rect key="frame" x="0.0" y="8" width="28" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="qB3-zT-c2p" secondAttribute="height" id="jRq-Jy-5jt"/>
@@ -723,6 +723,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="WirelessNetwork" width="13" height="9"/>
+        <image name="WirelessNetworkPassword" width="9" height="11"/>
         <image name="about" width="29" height="29"/>
         <image name="arrow" width="9" height="14"/>
         <image name="events" width="26" height="26"/>

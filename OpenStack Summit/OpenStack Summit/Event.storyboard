@@ -82,8 +82,9 @@
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rka-aA-MMh">
                                                                     <rect key="frame" x="17" y="5" width="56" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="kbj-8D-cKe">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonSave" translatesAutoresizingMaskIntoConstraints="NO" id="kbj-8D-cKe">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="20" id="6BL-EA-71n"/>
                                                                                 <constraint firstAttribute="width" secondItem="kbj-8D-cKe" secondAttribute="height" multiplier="1:1" id="N9Q-2M-dD2"/>
@@ -143,7 +144,7 @@
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tS-nN-NJc">
                                                                     <rect key="frame" x="10.5" y="5" width="70" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="6IU-DM-tre">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonScheduleAdd" translatesAutoresizingMaskIntoConstraints="NO" id="6IU-DM-tre">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="20" id="5gU-GH-VlE"/>
@@ -206,7 +207,7 @@
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twE-2u-9dn">
                                                                     <rect key="frame" x="18.5" y="5" width="54" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-e9-yWn">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonRate" translatesAutoresizingMaskIntoConstraints="NO" id="W9o-e9-yWn">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="20" id="0qY-Te-VK9"/>
@@ -312,7 +313,7 @@
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FgO-Fl-RHB">
                                                                     <rect key="frame" x="25" y="5" width="56" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="1DQ-2K-67h">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonSave" translatesAutoresizingMaskIntoConstraints="NO" id="1DQ-2K-67h">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="1DQ-2K-67h" secondAttribute="height" multiplier="1:1" id="S3b-9K-72s"/>
@@ -373,7 +374,7 @@
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68i-Z6-jfe">
                                                                     <rect key="frame" x="16" y="5" width="74" height="20"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-PE-twX">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonScheduleAdd" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-PE-twX">
                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="Yhb-PE-twX" secondAttribute="height" multiplier="1:1" id="f6U-5y-ndW"/>
@@ -503,14 +504,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04m-7R-xvH" userLabel="Play Button" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="254" y="15" width="46" height="30"/>
+                                                    <rect key="frame" x="252" y="15.5" width="48" height="29"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" translatesAutoresizingMaskIntoConstraints="NO" id="tEg-DK-ALl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play2" translatesAutoresizingMaskIntoConstraints="NO" id="tEg-DK-ALl">
+                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="29"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="46" id="r2H-mM-Vvf"/>
-                                                            </constraints>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -518,7 +516,6 @@
                                                         <constraint firstAttribute="bottom" secondItem="tEg-DK-ALl" secondAttribute="bottom" id="8Wk-tz-uwS"/>
                                                         <constraint firstItem="tEg-DK-ALl" firstAttribute="leading" secondItem="04m-7R-xvH" secondAttribute="leading" id="Bsb-lQ-qme"/>
                                                         <constraint firstAttribute="trailing" secondItem="tEg-DK-ALl" secondAttribute="trailing" id="GxY-ds-sqW"/>
-                                                        <constraint firstAttribute="height" constant="30" id="KaG-5S-SUm"/>
                                                         <constraint firstItem="tEg-DK-ALl" firstAttribute="top" secondItem="04m-7R-xvH" secondAttribute="top" id="LyE-5I-AuW"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -859,7 +856,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="I8l-E2-m9Q">
-                            <rect key="frame" x="201.5" y="32" width="20" height="20"/>
+                            <rect key="frame" x="202" y="32" width="20" height="20"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 REVIEWS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqD-sa-FyG">
                             <rect key="frame" x="20" y="31" width="98" height="21"/>
@@ -936,10 +933,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="EventButtonRate" width="27" height="26"/>
+        <image name="EventButtonSave" width="26" height="23"/>
+        <image name="EventButtonScheduleAdd" width="23" height="25"/>
         <image name="arrow" width="9" height="14"/>
         <image name="generic-user-avatar" width="122" height="122"/>
-        <image name="play" width="121" height="121"/>
-        <image name="share" width="24" height="20"/>
+        <image name="play2" width="48" height="29"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

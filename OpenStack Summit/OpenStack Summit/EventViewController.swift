@@ -64,7 +64,9 @@ extension EventViewController {
         
         if canAddFeedback(for: event) {
             
-            let rate = ContextMenu.Action(activityType: "Event.Rate", image: nil, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
+            let image = "Rate"
+            
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { UIImage(named: image)! }, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
                 
                 guard let controller = viewController else { return }
                 
@@ -86,9 +88,20 @@ extension EventViewController {
         
         if isAttendee && eventRequestInProgress == false {
             
-            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
+            let title: String
             
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
+            if scheduled {
+                
+                title = "Confirmed"
+                
+            } else {
+                
+                title = event.rsvp.isEmpty ? "Confirm" : "RSVP"
+            }
+            
+            let image = scheduled ? "CalendarRemove" : "CalendarAdd"
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -102,7 +115,9 @@ extension EventViewController {
         
         if canAddToCalendar() {
             
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: nil, title: "Add to Calendar", handler: .background({ [weak self] (didComplete) in
+            let image = "CalendarAddEmpty"
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: { UIImage(named: image)! }, title: "Add to Calendar", handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -118,9 +133,11 @@ extension EventViewController {
         
         if Store.shared.isLoggedIn {
             
-            let title = isFavorite ? "Remove from Favorites" : "Add to Favorites"
+            let title = isFavorite ? "Saved" : "Save"
             
-            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
+            let image = isFavorite ? "Saved" : "Save"
+            
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
