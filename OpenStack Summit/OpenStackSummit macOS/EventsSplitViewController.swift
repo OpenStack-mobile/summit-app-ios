@@ -9,9 +9,19 @@
 import Foundation
 import AppKit
 
-final class EventsSplitViewController: NSSplitViewController, EventDatesViewControllerDelegate {
+final class EventsSplitViewController: NSSplitViewController, SearchableController, EventDatesViewControllerDelegate {
     
     // MARK: - Properties
+    
+    var searchTerm = "" {
+        
+        didSet { configureView() }
+    }
+    
+    private(set) var selectedDate: NSDate? {
+        
+        didSet { configureView() }
+    }
     
     var eventDatesViewController: EventDatesViewController {
         
@@ -31,15 +41,50 @@ final class EventsSplitViewController: NSSplitViewController, EventDatesViewCont
         eventDatesViewController.delegate = self
     }
     
+    // MARK: - Private Methods
+    
+    private func configureView() {
+        
+        let predicate: NSPredicate
+        
+        if searchTerm.isEmpty == false {
+            
+            // show events for search term
+            
+            predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
+            
+        } else if let selectedDate = self.selectedDate  {
+            
+            // show events for date
+            
+            let endDate = selectedDate.mt_endOfCurrentDay()
+            
+            predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
+            
+        } else {
+            
+            // show no events
+            predicate = NSPredicate(value: false)
+        }
+        
+        let collapseSidebar = searchTerm.isEmpty == false
+        
+        // collapse sidebar
+        if collapseSidebar != splitViewItems[0].collapsed {
+            
+            splitViewItems[0].canCollapse = true
+            splitViewItems[0].animator().collapsed = collapseSidebar
+            splitViewItems[0].canCollapse = false
+        }
+        
+        eventsViewController.predicate = predicate
+    }
+    
     // MARK: - EventDatesViewControllerDelegate
     
     func eventDatesViewController(controller: EventDatesViewController, didSelect selectedDate: NSDate) {
         
-        let endDate = selectedDate.mt_endOfCurrentDay()
-        
-        let predicate = NSPredicate(format: "start >= %@ AND end <= %@", selectedDate, endDate)
-        
-        eventsViewController.predicate = predicate
+        self.selectedDate = selectedDate
     }
 }
 

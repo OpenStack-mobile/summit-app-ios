@@ -10,30 +10,65 @@ import Foundation
 import AppKit
 import CoreSummit
 
-final class MainWindowController: NSWindowController {
+final class MainWindowController: NSWindowController, SearchableController, NSSearchFieldDelegate {
+    
+    // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var contentSegmentedControl: NSSegmentedControl!
     
-    @IBOutlet private(set) weak var toggleSidebarToolbarItem: NSToolbarItem!
+    // MARK: - Properties
+    
+    var searchTerm = "" {
+        
+        didSet {
+            
+            // Return if the filter string hasn't changed.
+            guard searchTerm != oldValue else { return }
+            
+            filter()
+        }
+    }
+    
+    var currentContent = Content() {
+        
+        didSet { updateContent() }
+    }
     
     private var summitObserver: Int?
     
-    private var contentViewControllersCache = [ContentTab: NSViewController]()
+    private var contentViewControllersCache = [Content: NSViewController]()
+    
+    // MARK: - Loading
     
     override func windowDidLoad() {
         super.windowDidLoad()
         
         window!.titleVisibility = .Hidden
         
-        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.updateTitle() }
+        summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
-        updateTitle()
-        
-        // update content view controller
-        contentTabChanged(contentSegmentedControl)
+        configureView()
     }
     
-    private func updateTitle() {
+    // MARK: - Actions
+    
+    @IBAction func contentTabChanged(sender: NSSegmentedControl) {
+        
+        self.currentContent = Content(rawValue: sender.selectedSegment)!
+    }
+    
+    @IBAction func searchTermChanged(sender: NSSearchField) {
+        
+        self.searchTerm = sender.stringValue
+    }
+    
+    // MARK: - Private Methods
+    
+    private func configureView() {
+        
+        assert(windowLoaded)
+        
+        // set window name
         
         var title = "OpenStack Summit"
         
@@ -45,18 +80,27 @@ final class MainWindowController: NSWindowController {
         }
         
         window?.title = title
+        
+        // update content view controller
+        updateContent()
     }
     
-    // MARK: - Actions
+    private func filter() {
+        
+        // filter content view controller
+        (contentViewController as? SearchableController)?.searchTerm = self.searchTerm
+    }
     
-    @IBAction func contentTabChanged(sender: NSSegmentedControl) {
+    private func updateContent() {
+        
+        // set content tab
         
         let windowFrame = window!.frame
         
-        let content = ContentTab(rawValue: sender.selectedSegment)!
-        
         let storyboardName: String
-                
+        
+        let content = self.currentContent
+        
         switch content {
         case .events: storyboardName = "Events"
         case .venues: storyboardName = "Venues"
@@ -84,25 +128,34 @@ final class MainWindowController: NSWindowController {
         // restore old frame
         window!.setFrame(windowFrame, display: true)
         
-        // enable tool bar item
-        toggleSidebarToolbarItem.enabled = (contentViewController is NSSplitViewController)
+        // apply filter to new content view controller
+        filter()
     }
     
-    @IBAction func toggleSidebar(sender: NSToolbarItem) {
+    // MARK: - NSSearchFieldDelegate
+    
+    func searchFieldDidStartSearching(sender: NSSearchField) {
         
-        (contentViewController as? NSSplitViewController)?.toggleSidebar(sender)
+        
+    }
+    
+    func searchFieldDidEndSearching(sender: NSSearchField) {
+        
+        
     }
 }
 
 // MARK: - Supporting Types
 
-private extension MainWindowController {
+extension MainWindowController {
     
-    enum ContentTab: Int {
+    enum Content: Int {
         
         case events
         case venues
         case speakers
         case videos
+        
+        init() { self = .events }
     }
 }

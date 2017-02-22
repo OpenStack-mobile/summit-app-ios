@@ -726,6 +726,10 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                                     <action selector="showLevel:" target="EJa-na-JbP" id="RLB-Vm-k9c"/>
                                                 </connections>
                                             </button>
+                                            <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Ho-Oh-2lm">
+                                                <rect key="frame" x="113" y="9.5" width="65" height="13"/>
+                                                <levelIndicatorCell key="cell" alignment="left" doubleValue="5" maxValue="5" criticalValue="2" levelIndicatorStyle="rating" id="fUw-3d-YiS"/>
+                                            </levelIndicator>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Q22-ea-cPQ" secondAttribute="bottom" constant="8" id="BEa-tN-Tvs"/>
@@ -733,7 +737,9 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                             <constraint firstItem="EUQ-uX-uCK" firstAttribute="top" secondItem="VOt-tN-oqp" secondAttribute="top" constant="8" id="Rfs-Sa-e7D"/>
                                             <constraint firstItem="EUQ-uX-uCK" firstAttribute="leading" secondItem="VOt-tN-oqp" secondAttribute="leading" constant="16" id="SpE-lc-Hvp"/>
                                             <constraint firstItem="Q22-ea-cPQ" firstAttribute="leading" secondItem="EUQ-uX-uCK" secondAttribute="trailing" constant="8" id="Zo8-2c-hQS"/>
+                                            <constraint firstItem="6Ho-Oh-2lm" firstAttribute="leading" secondItem="Q22-ea-cPQ" secondAttribute="trailing" constant="8" id="huk-sb-au2"/>
                                             <constraint firstItem="Q22-ea-cPQ" firstAttribute="top" secondItem="VOt-tN-oqp" secondAttribute="top" constant="8" id="mBH-zO-qEX"/>
+                                            <constraint firstItem="6Ho-Oh-2lm" firstAttribute="centerY" secondItem="VOt-tN-oqp" secondAttribute="centerY" id="q81-Bh-CMy"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
