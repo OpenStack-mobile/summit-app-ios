@@ -64,7 +64,7 @@ extension EventViewController {
         
         if canAddFeedback(for: event) {
             
-            let image = "Rate"
+            let image = "ContextMenuRate"
             
             let rate = ContextMenu.Action(activityType: "Event.Rate", image: { UIImage(named: image)! }, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
                 
@@ -99,7 +99,7 @@ extension EventViewController {
                 title = event.rsvp.isEmpty ? "Confirm" : "RSVP"
             }
             
-            let image = scheduled ? "CalendarRemove" : "CalendarAdd"
+            let image = scheduled ? "ContextMenuScheduleRemove" : "ContextMenuScheduleAdd"
             
             let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
@@ -115,7 +115,7 @@ extension EventViewController {
         
         if canAddToCalendar() {
             
-            let image = "CalendarAddEmpty"
+            let image = "ContextMenuCalendarAdd"
             
             let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: { UIImage(named: image)! }, title: "Add to Calendar", handler: .background({ [weak self] (didComplete) in
                 
@@ -135,7 +135,7 @@ extension EventViewController {
             
             let title = isFavorite ? "Saved" : "Save"
             
-            let image = isFavorite ? "Saved" : "Save"
+            let image = isFavorite ? "ContextMenuSaved" : "ContextMenuSave"
             
             let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
