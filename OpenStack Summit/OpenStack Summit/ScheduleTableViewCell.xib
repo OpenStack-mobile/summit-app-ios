@@ -24,31 +24,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="283" height="138"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9tT-sN-kDz">
-                        <rect key="frame" x="16" y="16" width="173" height="105"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-nf-o3L">
-                                <rect key="frame" x="0.0" y="0.0" width="173" height="18"/>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
-                                <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o93-QE-2Jq">
-                                <rect key="frame" x="0.0" y="26" width="173" height="47"/>
-                                <string key="text">Event Name
-Multiline</string>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
-                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-1f-mlR">
-                                <rect key="frame" x="0.0" y="81" width="173" height="24"/>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OFV-Tq-hPv">
                         <rect key="frame" x="226" y="16" width="41" height="106"/>
                         <subviews>
@@ -67,15 +42,45 @@ Multiline</string>
                                     <constraint firstAttribute="width" constant="1" id="7LQ-Xi-5Qc"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOh-qK-9JY">
-                                <rect key="frame" x="37" y="42" width="4" height="22"/>
-                                <state key="normal" image="cell-context-menu"/>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell-context-menu" translatesAutoresizingMaskIntoConstraints="NO" id="Pwj-D6-nRg">
+                                <rect key="frame" x="37" y="44" width="4" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Pwj-D6-nRg" secondAttribute="height" multiplier="2:9" id="33Q-ft-Gt4"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="WuQ-HH-GK8" firstAttribute="top" secondItem="OFV-Tq-hPv" secondAttribute="top" id="LpP-cb-aya"/>
                             <constraint firstAttribute="bottom" secondItem="WuQ-HH-GK8" secondAttribute="bottom" id="y1D-5E-daS"/>
                         </constraints>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmL-PF-Y5C">
+                        <rect key="frame" x="226" y="16" width="41" height="106"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9tT-sN-kDz">
+                        <rect key="frame" x="16" y="16" width="167.5" height="91.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-nf-o3L">
+                                <rect key="frame" x="0.0" y="0.0" width="167.5" height="15.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
+                                <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o93-QE-2Jq">
+                                <rect key="frame" x="0.0" y="23.5" width="167.5" height="40"/>
+                                <string key="text">Event Name
+Multiline</string>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-1f-mlR">
+                                <rect key="frame" x="0.0" y="71.5" width="167.5" height="20"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -83,13 +88,17 @@ Multiline</string>
                     <constraint firstAttribute="trailing" secondItem="OFV-Tq-hPv" secondAttribute="trailing" constant="16" id="Isr-xa-V6H"/>
                     <constraint firstItem="OFV-Tq-hPv" firstAttribute="top" secondItem="FSX-ZX-gx1" secondAttribute="top" constant="16" id="NyH-Ek-Xyf"/>
                     <constraint firstItem="OFV-Tq-hPv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9tT-sN-kDz" secondAttribute="trailing" constant="8" id="RcV-HO-yol"/>
+                    <constraint firstItem="OFV-Tq-hPv" firstAttribute="leading" secondItem="qmL-PF-Y5C" secondAttribute="leading" id="dWd-2c-exl"/>
+                    <constraint firstItem="OFV-Tq-hPv" firstAttribute="trailing" secondItem="qmL-PF-Y5C" secondAttribute="trailing" id="eN0-D3-Z3z"/>
+                    <constraint firstItem="OFV-Tq-hPv" firstAttribute="top" secondItem="qmL-PF-Y5C" secondAttribute="top" id="hei-E1-cyi"/>
+                    <constraint firstItem="OFV-Tq-hPv" firstAttribute="bottom" secondItem="qmL-PF-Y5C" secondAttribute="bottom" id="ju2-Kl-lhh"/>
                     <constraint firstItem="9tT-sN-kDz" firstAttribute="leading" secondItem="FSX-ZX-gx1" secondAttribute="leading" constant="16" id="mtz-7i-sQb"/>
                     <constraint firstAttribute="bottom" secondItem="OFV-Tq-hPv" secondAttribute="bottom" constant="16" id="oCe-J9-3Yi"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9tT-sN-kDz" secondAttribute="bottom" constant="16" id="vxz-0w-PqY"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="contextMenuButton" destination="SOh-qK-9JY" id="HzQ-qi-gBQ"/>
+                <outlet property="contextMenuButton" destination="qmL-PF-Y5C" id="60F-Ff-6EZ"/>
                 <outlet property="dateTimeLabel" destination="Vmv-nf-o3L" id="Poa-bE-SG0"/>
                 <outlet property="nameLabel" destination="o93-QE-2Jq" id="8u1-Ir-rxc"/>
                 <outlet property="statusImageView" destination="atb-nB-uKY" id="eSX-kN-Eki"/>
