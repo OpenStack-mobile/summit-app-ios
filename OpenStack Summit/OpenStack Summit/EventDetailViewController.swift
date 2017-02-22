@@ -477,7 +477,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     cell.confirmButton.actionLabel.text = didConfirm ? "RSVP'd" : "RSVP"
                 }
                 
-                let scheduleImage = isFavorite ? "EventButtonScheduleRemove" : "EventButtonScheduleAdd"
+                let scheduleImage = didConfirm ? "EventButtonScheduleRemove" : "EventButtonScheduleAdd"
                 
                 cell.confirmButton.actionImageView.image = UIImage(named: scheduleImage)!
                 
