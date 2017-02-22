@@ -11,7 +11,7 @@ import AppKit
 import CoreData
 import CoreSummit
 
-final class SpeakerViewController: NSSplitViewController {
+final class SpeakerViewController: NSViewController {
     
     // MARK: - Properties
     

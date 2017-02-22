@@ -187,14 +187,14 @@
             <objects>
                 <viewController title="Venue" storyboardIdentifier="VenueDetailViewController" id="KYg-L6-bUy" customClass="OSSVenueDetailViewController" sceneMemberID="viewController">
                     <view key="view" id="eyd-GT-ciM">
-                        <rect key="frame" x="0.0" y="0.0" width="350" height="671.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="672.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Z1-Os-uzd">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="684.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="702.5"/>
                                 <subviews>
                                     <customView verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZZd-aJ-DT8" userLabel="Header View" customClass="ContentBackgroundView" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="634.5" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="652.5" width="350" height="50"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3f7-mP-a8i">
                                                 <rect key="frame" x="20" y="8" width="310" height="34"/>
@@ -233,7 +233,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </customView>
                                     <customView horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="YmH-yJ-dAE">
-                                        <rect key="frame" x="0.0" y="401" width="350" height="233.5"/>
+                                        <rect key="frame" x="0.0" y="419" width="350" height="233.5"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8F5-Wd-llS">
                                                 <rect key="frame" x="0.0" y="-0.5" width="350" height="233.5"/>
@@ -255,27 +255,19 @@
                                             <constraint firstItem="JI4-sz-yjQ" firstAttribute="centerX" secondItem="YmH-yJ-dAE" secondAttribute="centerX" id="uIp-06-Xgj"/>
                                         </constraints>
                                     </customView>
-                                    <customView horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3PR-KK-8A2">
-                                        <rect key="frame" x="0.0" y="369" width="350" height="32"/>
+                                    <customView horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3PR-KK-8A2">
+                                        <rect key="frame" x="0.0" y="369" width="350" height="50"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3R7-zh-47X">
-                                                <rect key="frame" x="16" y="8" width="16" height="16"/>
+                                                <rect key="frame" x="16" y="16.5" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="Djd-30-BTr"/>
                                                     <constraint firstAttribute="width" secondItem="3R7-zh-47X" secondAttribute="height" multiplier="1:1" id="Zsh-Hk-KOH"/>
                                                 </constraints>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="map_pin" id="jtp-oB-R7V"/>
                                             </imageView>
-                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="5ZX-b2-6Li">
-                                                <rect key="frame" x="38" y="8" width="266" height="16"/>
-                                                <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" title="Lima, Peru" id="8Ce-cX-rtH">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jfa-Ss-6h2">
-                                                <rect key="frame" x="318" y="8" width="16" height="16"/>
+                                                <rect key="frame" x="318" y="16.5" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="FqR-06-66x"/>
                                                 </constraints>
@@ -287,6 +279,14 @@
                                                     <action selector="share:" target="KYg-L6-bUy" id="EzW-Vh-G1S"/>
                                                 </connections>
                                             </button>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="5ZX-b2-6Li">
+                                                <rect key="frame" x="38" y="8" width="266" height="34"/>
+                                                <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Lima, Peru" id="8Ce-cX-rtH">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="5ZX-b2-6Li" firstAttribute="leading" secondItem="3R7-zh-47X" secondAttribute="trailing" constant="8" id="0X1-6j-0hp"/>
@@ -295,14 +295,12 @@
                                             <constraint firstItem="jfa-Ss-6h2" firstAttribute="leading" secondItem="5ZX-b2-6Li" secondAttribute="trailing" constant="16" id="3G6-m4-Eyh"/>
                                             <constraint firstItem="5ZX-b2-6Li" firstAttribute="top" secondItem="3PR-KK-8A2" secondAttribute="top" constant="8" id="5xz-k2-MuO"/>
                                             <constraint firstAttribute="trailing" secondItem="jfa-Ss-6h2" secondAttribute="trailing" constant="16" id="ECC-Iq-Bew"/>
+                                            <constraint firstItem="3R7-zh-47X" firstAttribute="centerY" secondItem="3PR-KK-8A2" secondAttribute="centerY" id="Sti-HT-1AI"/>
                                             <constraint firstItem="3R7-zh-47X" firstAttribute="leading" secondItem="3PR-KK-8A2" secondAttribute="leading" constant="16" id="fBI-Ga-IQ4"/>
-                                            <constraint firstAttribute="bottom" secondItem="3R7-zh-47X" secondAttribute="bottom" constant="8" id="haC-6k-Pef"/>
-                                            <constraint firstItem="3R7-zh-47X" firstAttribute="top" secondItem="3PR-KK-8A2" secondAttribute="top" constant="8" id="j6i-E8-a2d"/>
-                                            <constraint firstItem="jfa-Ss-6h2" firstAttribute="top" secondItem="3PR-KK-8A2" secondAttribute="top" constant="8" id="pMR-GB-cph"/>
-                                            <constraint firstAttribute="bottom" secondItem="jfa-Ss-6h2" secondAttribute="bottom" constant="8" id="qch-mT-2jV"/>
+                                            <constraint firstItem="jfa-Ss-6h2" firstAttribute="centerY" secondItem="3PR-KK-8A2" secondAttribute="centerY" id="miu-yu-SxD"/>
                                         </constraints>
                                     </customView>
-                                    <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" verticalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gk6-F9-HlP">
+                                    <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gk6-F9-HlP">
                                         <rect key="frame" x="0.0" y="166" width="350" height="203"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-Iv-0ZD">
@@ -480,7 +478,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                 </viewController>
                 <customObject id="7Ii-LW-xPe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="689" y="2355"/>
+            <point key="canvasLocation" x="689" y="2316.5"/>
         </scene>
         <!--Venue Map View Controller-->
         <scene sceneID="QvB-DK-Z9j">

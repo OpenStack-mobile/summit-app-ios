@@ -81,33 +81,33 @@
                 <controllerPlaceholder storyboardName="Events" referencedIdentifier="EventsViewController" id="yAB-1a-Hn9" sceneMemberID="viewController"/>
                 <customObject id="Ewe-Vh-d8f" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1442" y="436"/>
+            <point key="canvasLocation" x="1609" y="256"/>
         </scene>
         <!--Profile-->
         <scene sceneID="nDY-lU-DD6">
             <objects>
                 <viewController title="Profile" storyboardIdentifier="MemberProfileViewController" id="jQ8-iQ-SGF" customClass="MemberProfileViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="XTW-uZ-JcY" customClass="ContentBackgroundView" customModule="OpenStackSummit" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="486" height="244"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="278"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-NG-aTc">
-                                <rect key="frame" x="0.0" y="0.0" width="486" height="244"/>
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="278"/>
                                 <subviews>
                                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-k6-KAj">
-                                        <rect key="frame" x="0.0" y="136" width="486" height="108"/>
+                                        <rect key="frame" x="0.0" y="170" width="400" height="108"/>
                                         <subviews>
                                             <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="behindWindow" material="light" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="osS-MA-dH7">
-                                                <rect key="frame" x="0.0" y="0.0" width="486" height="108"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="108"/>
                                                 <subviews>
                                                     <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VxC-d6-Xni" userLabel="Header Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="486" height="92"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="92"/>
                                                         <subviews>
                                                             <customView wantsLayer="YES" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lCh-v7-A6s" userLabel="Profile Header View">
-                                                                <rect key="frame" x="0.0" y="30" width="486" height="62"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="62"/>
                                                                 <subviews>
                                                                     <textField wantsLayer="YES" horizontalHuggingPriority="230" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="5St-im-zVu">
-                                                                        <rect key="frame" x="76" y="27" width="360" height="19"/>
+                                                                        <rect key="frame" x="76" y="27" width="274" height="19"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" title="Alsey Coleman Miller" id="uQq-ID-TZV">
                                                                             <font key="font" metaFont="systemBold" size="15"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -115,7 +115,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField wantsLayer="YES" horizontalHuggingPriority="230" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="8xI-a2-vyX">
-                                                                        <rect key="frame" x="76" y="11" width="360" height="14"/>
+                                                                        <rect key="frame" x="76" y="11" width="274" height="14"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" title="iOS Developer" id="8gf-nS-593">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -148,7 +148,7 @@
                                                                         </constraints>
                                                                     </box>
                                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qiB-Ym-3OC">
-                                                                        <rect key="frame" x="442" y="14" width="36" height="32"/>
+                                                                        <rect key="frame" x="356" y="14" width="36" height="32"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="qiB-Ym-3OC" secondAttribute="height" multiplier="9:8" id="VEj-2M-q3k"/>
                                                                             <constraint firstAttribute="width" constant="36" id="pdf-ja-oBB"/>
@@ -179,7 +179,7 @@
                                                                 </constraints>
                                                             </customView>
                                                             <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FkZ-92-0su" userLabel="Info VIew">
-                                                                <rect key="frame" x="0.0" y="0.0" width="486" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="400" height="30"/>
                                                                 <subviews>
                                                                     <stackView wantsLayer="YES" distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" horizontalClippingResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Em-J4-K48">
                                                                         <rect key="frame" x="16" y="8" width="310" height="22"/>
@@ -330,7 +330,7 @@
                                         </constraints>
                                     </customView>
                                     <customView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BM7-qr-Q0y" userLabel="Separator View" customClass="ContentBackgroundView" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="135" width="486" height="1"/>
+                                        <rect key="frame" x="0.0" y="169" width="400" height="1"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="9w8-kN-gea"/>
                                         </constraints>
@@ -341,10 +341,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </customView>
                                     <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" verticalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FUP-eO-C5n">
-                                        <rect key="frame" x="0.0" y="0.0" width="486" height="135"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="169"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DSr-w3-iwi">
-                                                <rect key="frame" x="14" y="8" width="458" height="119"/>
+                                                <rect key="frame" x="14" y="8" width="372" height="153"/>
                                                 <textFieldCell key="cell" controlSize="mini" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="Fbg-iM-tgN">
                                                     <font key="font" metaFont="system"/>
                                                     <string key="title">Description:
@@ -408,7 +408,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                 </viewController>
                 <customObject id="z3q-D1-Gjk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1776" y="-8"/>
+            <point key="canvasLocation" x="1766" y="-18"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="xa5-NY-We8">
@@ -421,7 +421,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                         <value key="minSize" type="size" width="480" height="550"/>
                     </window>
                     <connections>
-                        <segue destination="Ppl-qV-zdJ" kind="relationship" relationship="window.shadowedContentViewController" id="yx6-Xp-os9"/>
+                        <segue destination="87J-eV-9Rf" kind="relationship" relationship="window.shadowedContentViewController" id="voz-0q-Qzj"/>
                     </connections>
                 </windowController>
                 <customObject id="4CZ-52-rEc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -433,17 +433,17 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
             <objects>
                 <viewController title="Speakers" storyboardIdentifier="SpeakersTableViewController" id="VDq-iR-Syc" userLabel="Speakers Table View Controller" customClass="SpeakersTableViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="qxk-56-FVc">
-                        <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                        <rect key="frame" x="0.0" y="0.0" width="330" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="66" horizontalPageScroll="10" verticalLineScroll="66" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="nq3-fZ-urB">
-                                <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                <rect key="frame" x="0.0" y="0.0" width="330" height="200"/>
                                 <clipView key="contentView" wantsLayer="YES" drawsBackground="NO" id="Bvz-8Z-IGE">
-                                    <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="200"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" viewBased="YES" floatsGroupRows="NO" id="AVa-Ba-JI6">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <tableViewGridLines key="gridStyleMask" vertical="YES"/>
@@ -574,56 +574,58 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                 </viewController>
                 <customObject id="aRk-T9-bo0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-583" y="318"/>
+            <point key="canvasLocation" x="-540" y="330"/>
         </scene>
         <!--Speaker View Controller-->
         <scene sceneID="YkI-EF-x5N">
             <objects>
-                <viewController id="87J-eV-9Rf" customClass="SpeakerViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpeakerViewController" showSeguePresentationStyle="single" id="87J-eV-9Rf" customClass="SpeakerViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="had-Xy-CFq">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="344"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6a4-2H-Z3Y">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="344"/>
+                                <beginningViews>
+                                    <containerView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swN-be-zIc">
+                                        <rect key="frame" x="0.0" y="194" width="450" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="z6j-cE-vtq"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="jQ8-iQ-SGF" kind="embed" id="d5T-R5-Ol8"/>
+                                        </connections>
+                                    </containerView>
+                                </beginningViews>
+                                <endViews>
+                                    <containerView verticalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hUg-H7-Qbt">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="194"/>
+                                        <connections>
+                                            <segue destination="yAB-1a-Hn9" kind="embed" id="9az-6c-8qo"/>
+                                        </connections>
+                                    </containerView>
+                                </endViews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <real value="750"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="6a4-2H-Z3Y" firstAttribute="top" secondItem="had-Xy-CFq" secondAttribute="top" id="6lT-w8-o9B"/>
+                            <constraint firstItem="6a4-2H-Z3Y" firstAttribute="leading" secondItem="had-Xy-CFq" secondAttribute="leading" id="QlI-SN-TK8"/>
+                            <constraint firstAttribute="trailing" secondItem="6a4-2H-Z3Y" secondAttribute="trailing" id="Qn0-iR-xda"/>
+                            <constraint firstAttribute="bottom" secondItem="6a4-2H-Z3Y" secondAttribute="bottom" id="gaN-TZ-1yJ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="3Vn-Hh-R13" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="4"/>
-        </scene>
-        <!--Tab View Controller-->
-        <scene sceneID="03R-wg-RhU">
-            <objects>
-                <tabViewController id="lPn-nh-myw" sceneMemberID="viewController">
-                    <tabView key="tabView" type="noTabsNoBorder" id="4Pj-0E-mY8">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <font key="font" metaFont="message"/>
-                        <tabViewItems/>
-                    </tabView>
-                </tabViewController>
-                <customObject id="1PH-Uc-IwR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1318" y="4"/>
-        </scene>
-        <!--Speaker View Controller-->
-        <scene sceneID="STK-Je-73b">
-            <objects>
-                <splitViewController storyboardIdentifier="SpeakerViewController" id="Ppl-qV-zdJ" customClass="SpeakerViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem holdingPriority="750" id="5zq-qR-lFV"/>
-                        <splitViewItem id="hMH-ec-Rel"/>
-                    </splitViewItems>
-                    <splitView key="splitView" arrangesAllSubviews="NO" dividerStyle="thin" id="Rzw-w0-kCS">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="452"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </splitView>
-                    <connections>
-                        <segue destination="jQ8-iQ-SGF" kind="relationship" relationship="splitItems" id="zSl-I8-mtG"/>
-                        <segue destination="yAB-1a-Hn9" kind="relationship" relationship="splitItems" id="QRA-nT-lpf"/>
-                    </connections>
-                </splitViewController>
-                <customObject id="czy-od-tMJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="789" y="259"/>
+            <point key="canvasLocation" x="923" y="198"/>
         </scene>
     </scenes>
     <resources>
