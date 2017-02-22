@@ -14,6 +14,8 @@ import XCDYouTubeKit
 
 final class VideosViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate, SearchableController {
     
+    typealias CollectionViewItem = ImageCollectionViewItem
+    
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var collectionView: NSCollectionView!
@@ -81,18 +83,13 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         self.collectionView.reloadData()
     }
     
-    private func configure(item item: NSCollectionViewItem, at indexPath: NSIndexPath) {
+    private func configure(item item: CollectionViewItem, at indexPath: NSIndexPath) {
         
         let video = fetchedResultsController.objectAtIndexPath(indexPath) as! VideoManagedObject
                 
         item.textField!.stringValue = video.event.name
         
-        item.imageView!.image = nil
-        
-        if let url = NSURL(youtubeThumbnail: video.youtube) {
-            
-            item.imageView!.loadCached(url)
-        }
+        item.imageURL = NSURL(youtubeThumbnail: video.youtube)
     }
     
     // MARK: - NSCollectionViewDataSource
@@ -109,7 +106,7 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
     
     func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItemWithIdentifier("VideoCollectionViewItem", forIndexPath: indexPath)
+        let item = collectionView.makeItemWithIdentifier("VideoCollectionViewItem", forIndexPath: indexPath) as! CollectionViewItem
         
         configure(item: item, at: indexPath)
         
