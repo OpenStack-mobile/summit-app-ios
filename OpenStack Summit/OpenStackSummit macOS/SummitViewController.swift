@@ -72,7 +72,9 @@ final class SummitViewController: NSViewController {
             
             let summitActive = today.mt_isBetweenDate(summit.start, andDate: summit.end)
             
+            #if !DEBUG // never hide for debug builds
             wirelessNetworkButton.hidden = summitActive == false
+            #endif
         }
     }
 }

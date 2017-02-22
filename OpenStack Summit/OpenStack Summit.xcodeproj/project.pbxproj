@@ -286,6 +286,9 @@
 		6E2929AF1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2929AE1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib */; };
 		6E2929B11E5CF15B00F1C2F9 /* SpeakersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2929B01E5CF15B00F1C2F9 /* SpeakersTableViewController.swift */; };
 		6E2929B41E5CF3C600F1C2F9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2929B31E5CF3C600F1C2F9 /* TableViewController.swift */; };
+		6E2929B61E5D0C0D00F1C2F9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2929B51E5D0C0D00F1C2F9 /* SearchViewController.swift */; };
+		6E2929B71E5D0D5100F1C2F9 /* DataUpdatePoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1399E01DD7A7B900FD1D37 /* DataUpdatePoller.swift */; };
+		6E2929B81E5D0DBE00F1C2F9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC6E661D2320610087057A /* Reachability.swift */; };
 		6E29834D1D79E56D009E0A79 /* ImageInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */; };
 		6E2BB3A81D63A57E0085C876 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A71D63A57E0085C876 /* Video.swift */; };
 		6E2BB3AA1D63A6050085C876 /* VideoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2BB3A91D63A6050085C876 /* VideoJSON.swift */; };
@@ -1302,6 +1305,7 @@
 		6E2929AE1E5CD21D00F1C2F9 /* VenueImageCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueImageCollectionViewItem.xib; sourceTree = "<group>"; };
 		6E2929B01E5CF15B00F1C2F9 /* SpeakersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersTableViewController.swift; sourceTree = "<group>"; };
 		6E2929B31E5CF3C600F1C2F9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		6E2929B51E5D0C0D00F1C2F9 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6E29834C1D79E56D009E0A79 /* ImageInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInterfaceController.swift; sourceTree = "<group>"; };
 		6E2BB3A71D63A57E0085C876 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		6E2BB3A91D63A6050085C876 /* VideoJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoJSON.swift; sourceTree = "<group>"; };
@@ -2199,6 +2203,7 @@
 			isa = PBXGroup;
 			children = (
 				6E11E4F41E59FC8500EBA211 /* MainWindowController.swift */,
+				6E2929B51E5D0C0D00F1C2F9 /* SearchViewController.swift */,
 				6E2929B31E5CF3C600F1C2F9 /* TableViewController.swift */,
 				6E74510F1E5AEB710061E418 /* Preferences */,
 				6E74510D1E5AEB620061E418 /* Events */,
@@ -4444,12 +4449,15 @@
 				6E7558C41E58D984003B6844 /* MessageEnabledViewController.swift in Sources */,
 				6E31ECAC1E5BA1ED000E5BAC /* SpeakerWindowController.swift in Sources */,
 				6E2929B11E5CF15B00F1C2F9 /* SpeakersTableViewController.swift in Sources */,
+				6E2929B61E5D0C0D00F1C2F9 /* SearchViewController.swift in Sources */,
+				6E2929B71E5D0D5100F1C2F9 /* DataUpdatePoller.swift in Sources */,
 				6E7558821E58D024003B6844 /* UserActivity.swift in Sources */,
 				6E7558811E58D01E003B6844 /* YouTubeThumbnail.swift in Sources */,
 				6E3B74571E5A3EB0008A1BB2 /* EventDetail.swift in Sources */,
 				6E7451081E5AC9B60061E418 /* VenueDirectoryViewController.swift in Sources */,
 				6E7558841E58D02A003B6844 /* Store.swift in Sources */,
 				6E7558C31E58D97F003B6844 /* ShowActivityIndicatorProtocol.swift in Sources */,
+				6E2929B81E5D0DBE00F1C2F9 /* Reachability.swift in Sources */,
 				6E3B74551E5A3A10008A1BB2 /* EventsViewController.swift in Sources */,
 				6E3B74521E5A249C008A1BB2 /* EventDatesViewController.swift in Sources */,
 				6E75587E1E58C97F003B6844 /* Define.swift in Sources */,

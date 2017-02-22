@@ -64,7 +64,7 @@ public final class DataUpdatePoller {
     @objc private func pollServer() {
         
         // dont poll if not connectivity
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS) || os(OSX)
         guard Reachability.connected else { return }
         #endif
         

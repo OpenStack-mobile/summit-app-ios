@@ -19,7 +19,9 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     
     @IBOutlet private(set) weak var titleLabel: NSTextField!
     
-    @IBOutlet private(set) weak var biographyTextView: NSTextView!
+    @IBOutlet private(set) weak var descriptionView: NSView!
+    
+    @IBOutlet private(set) weak var descriptionLabel: NSTextField!
     
     @IBOutlet private(set) weak var imageView: NSImageView!
     
@@ -42,14 +44,6 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         didSet { loadData() }
     }
     
-    // MARK: - Loading
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        loadData()
-    }
-    
     // MARK: - Actions
     
     @IBAction func share(sender: NSButton) {
@@ -60,7 +54,10 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         items.append(self.titleLabel.stringValue ?? "")
         
-        items.append(self.biographyTextView.attributedString())
+        if descriptionLabel.attributedStringValue.string.isEmpty == false {
+            
+            items.append(descriptionLabel.attributedStringValue)
+        }
         
         items.append(self.imageView.image!)
         
@@ -141,6 +138,10 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     
     private func configureView<T: Person>(person: T) {
         
+        let _ = self.view
+        
+        assert(viewLoaded)
+        
         self.nameLabel.stringValue = person.name
         self.titleLabel.stringValue = person.title ?? ""
         
@@ -151,18 +152,24 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
             self.imageView.loadCached(imageURL)
         }
         
-        self.biographyTextView.string = ""
-        
-        if let biography = person.biography,
-            let data = biography.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
-            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+        // set description
+        if let htmlString = person.biography,
+            let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            where attributedString.string.isEmpty == false {
+            
+            self.descriptionView.hidden = false
             
             let range = NSMakeRange(0, attributedString.length)
             
             attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
             
-            self.biographyTextView.textStorage!.appendAttributedString(attributedString)
+            self.descriptionLabel.attributedStringValue = attributedString
             
+        } else {
+            
+            self.descriptionView.hidden = true
+            self.descriptionLabel.stringValue = ""
         }
         
         locationView.hidden = true

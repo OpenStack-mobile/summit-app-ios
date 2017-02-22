@@ -25,6 +25,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
         
+        #if DEBUG
+        DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        #endif
+        
+        DataUpdatePoller.shared.start()
+        
         //#if DEBUG
         //SummitManager.shared.summit.value = 0
         //try! Store.shared.clear()
