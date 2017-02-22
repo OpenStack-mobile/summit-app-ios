@@ -14,7 +14,7 @@ public struct ScheduleItem: CoreDataDecodable {
     
     // MARK: - Properties
     
-    public let id: Identifier
+    public let identifier: Identifier
     public let name: String
     public let summit: Identifier
     public let dateTime: String
@@ -29,7 +29,7 @@ public struct ScheduleItem: CoreDataDecodable {
     
     public init(managedObject event: EventManagedObject) {
         
-        self.id = event.identifier
+        self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
         self.eventType = event.eventType.name

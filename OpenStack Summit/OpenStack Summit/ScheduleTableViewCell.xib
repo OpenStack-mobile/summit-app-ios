@@ -27,13 +27,13 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9tT-sN-kDz">
                         <rect key="frame" x="16" y="16" width="173" height="104"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-nf-o3L">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-nf-o3L">
                                 <rect key="frame" x="0.0" y="0.0" width="173" height="18"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o93-QE-2Jq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o93-QE-2Jq">
                                 <rect key="frame" x="0.0" y="26" width="173" height="46.5"/>
                                 <string key="text">Event Name
 Multiline</string>
@@ -41,7 +41,7 @@ Multiline</string>
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-1f-mlR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-1f-mlR">
                                 <rect key="frame" x="0.0" y="80.5" width="173" height="23.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -50,7 +50,7 @@ Multiline</string>
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OFV-Tq-hPv">
-                        <rect key="frame" x="263" y="16" width="41" height="104.5"/>
+                        <rect key="frame" x="263" y="16" width="41" height="105"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ContextMenuSaved" translatesAutoresizingMaskIntoConstraints="NO" id="atb-nB-uKY">
                                 <rect key="frame" x="0.0" y="42.5" width="20" height="20"/>
@@ -60,7 +60,7 @@ Multiline</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WuQ-HH-GK8">
-                                <rect key="frame" x="28" y="15.5" width="1" height="73.5"/>
+                                <rect key="frame" x="28" y="16" width="1" height="73"/>
                                 <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="7LQ-Xi-5Qc"/>
@@ -83,6 +83,13 @@ Multiline</string>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9tT-sN-kDz" secondAttribute="bottom" constant="16" id="vxz-0w-PqY"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="contextMenuButton" destination="SOh-qK-9JY" id="HzQ-qi-gBQ"/>
+                <outlet property="dateTimeLabel" destination="Vmv-nf-o3L" id="Poa-bE-SG0"/>
+                <outlet property="nameLabel" destination="o93-QE-2Jq" id="8u1-Ir-rxc"/>
+                <outlet property="statusImageView" destination="atb-nB-uKY" id="eSX-kN-Eki"/>
+                <outlet property="trackLabel" destination="195-1f-mlR" id="Wyx-PI-GLu"/>
+            </connections>
             <point key="canvasLocation" x="639" y="355.5"/>
         </tableViewCell>
     </objects>

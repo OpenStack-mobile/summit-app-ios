@@ -89,7 +89,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         let indexPath = eventsTableView.indexPathForCell(cell)!
         let event = events[indexPath.row]
         
-        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         if isOperationOngoing {
             return
@@ -100,9 +100,9 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         // remove
         if isScheduled {
             
-            cell.scheduled = false
+            cell.statusImageView.hidden = true
             
-            Store.shared.removeEventFromSchedule(event.summit, event: event.id) { [weak self] (response) in
+            Store.shared.removeEventFromSchedule(event.summit, event: event.identifier) { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -114,7 +114,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                         
                     case let .Some(error):
                         
-                        //cell.scheduled = true
+                        cell.statusImageView.hidden = false
                         
                         controller.showErrorMessage(error)
                         
@@ -127,9 +127,9 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         // add
         else {
             
-            //cell.scheduled = true
+            cell.statusImageView.hidden = false
             
-            Store.shared.addEventToSchedule(event.summit, event: event.id)  { [weak self] (response) in
+            Store.shared.addEventToSchedule(event.summit, event: event.identifier)  { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -141,7 +141,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                         
                     case let .Some(error):
                         
-                        //cell.scheduled = false
+                        cell.statusImageView.hidden = true
                         
                         controller.showErrorMessage(error as NSError)
                         
@@ -211,20 +211,14 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         
         let index = indexPath.row
         let event = events[index]
-        cell.eventTitle = event.name
-        cell.eventType = event.eventType
-        cell.time = event.time
-        cell.location = event.location
-        cell.sponsors = event.sponsors
-        cell.track = event.track
-        cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        cell.isScheduledStatusVisible = Store.shared.isLoggedInAndConfirmedAttendee
-        cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.layoutSubviews()
         
-        cell.scheduleButton.addTarget(self, action: #selector(SearchViewController.toggleScheduledStatus(_:)), forControlEvents: .TouchUpInside)
+        cell.nameLabel.text = event.name
+        cell.dateTimeLabel.text = event.dateTime
+        cell.trackLabel.text = event.track
+        cell.trackLabel.hidden = event.track.isEmpty
+        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? .blackColor()
+        cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
+        cell.statusImageView.hidden = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
     }
     
     private func configure(cell cell: TrackTableViewCell, at indexPath: NSIndexPath) {
@@ -346,7 +340,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             let eventVC = R.storyboard.event.eventDetailViewController()!
             
-            eventVC.event = event.id
+            eventVC.event = event.identifier
             
             showViewController(eventVC, sender: self)
             
