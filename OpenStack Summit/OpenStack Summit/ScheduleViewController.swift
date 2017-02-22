@@ -372,7 +372,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         cell.dateTimeLabel.text = event.dateTime
         cell.trackLabel.text = event.track
         cell.trackLabel.hidden = event.track.isEmpty
-        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? .clearColor()
+        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
         
         // set image
         let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
@@ -462,6 +462,8 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let scheduleItem = dayEvents[indexPath.row]
         

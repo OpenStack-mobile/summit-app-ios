@@ -17,32 +17,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="scheduleTableViewCell" rowHeight="143" id="d1R-Lx-Gua" customClass="ScheduleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="scheduleTableViewCell" rowHeight="145" id="d1R-Lx-Gua" customClass="ScheduleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="283" height="139"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d1R-Lx-Gua" id="FSX-ZX-gx1">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                <rect key="frame" x="0.0" y="0.0" width="283" height="138"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9tT-sN-kDz">
-                        <rect key="frame" x="16" y="16" width="173" height="104"/>
+                        <rect key="frame" x="16" y="16" width="173" height="105"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-nf-o3L">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-nf-o3L">
                                 <rect key="frame" x="0.0" y="0.0" width="173" height="18"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o93-QE-2Jq">
-                                <rect key="frame" x="0.0" y="26" width="173" height="46.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o93-QE-2Jq">
+                                <rect key="frame" x="0.0" y="26" width="173" height="47"/>
                                 <string key="text">Event Name
 Multiline</string>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-1f-mlR">
-                                <rect key="frame" x="0.0" y="80.5" width="173" height="23.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-1f-mlR">
+                                <rect key="frame" x="0.0" y="81" width="173" height="24"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -50,27 +50,32 @@ Multiline</string>
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OFV-Tq-hPv">
-                        <rect key="frame" x="263" y="16" width="41" height="105"/>
+                        <rect key="frame" x="226" y="16" width="41" height="106"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ContextMenuSaved" translatesAutoresizingMaskIntoConstraints="NO" id="atb-nB-uKY">
-                                <rect key="frame" x="0.0" y="42.5" width="20" height="20"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ContextMenuSaved" translatesAutoresizingMaskIntoConstraints="NO" id="atb-nB-uKY">
+                                <rect key="frame" x="0.0" y="43" width="20" height="20"/>
+                                <color key="tintColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="HlU-lu-Kge"/>
                                     <constraint firstAttribute="width" secondItem="atb-nB-uKY" secondAttribute="height" id="lxx-ZD-xAn"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WuQ-HH-GK8">
-                                <rect key="frame" x="28" y="16" width="1" height="73"/>
+                                <rect key="frame" x="28" y="0.0" width="1" height="106"/>
                                 <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="7LQ-Xi-5Qc"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOh-qK-9JY">
-                                <rect key="frame" x="37" y="41.5" width="4" height="22"/>
+                                <rect key="frame" x="37" y="42" width="4" height="22"/>
                                 <state key="normal" image="cell-context-menu"/>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="WuQ-HH-GK8" firstAttribute="top" secondItem="OFV-Tq-hPv" secondAttribute="top" id="LpP-cb-aya"/>
+                            <constraint firstAttribute="bottom" secondItem="WuQ-HH-GK8" secondAttribute="bottom" id="y1D-5E-daS"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -90,7 +95,7 @@ Multiline</string>
                 <outlet property="statusImageView" destination="atb-nB-uKY" id="eSX-kN-Eki"/>
                 <outlet property="trackLabel" destination="195-1f-mlR" id="Wyx-PI-GLu"/>
             </connections>
-            <point key="canvasLocation" x="639" y="355.5"/>
+            <point key="canvasLocation" x="622.5" y="339.5"/>
         </tableViewCell>
     </objects>
     <resources>

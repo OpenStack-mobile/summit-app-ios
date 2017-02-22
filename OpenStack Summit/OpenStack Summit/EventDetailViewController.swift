@@ -105,9 +105,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if #available(iOS 9.0, *) {
-            self.userActivity?.resignCurrent()
-        }
+        self.userActivity?.resignCurrent()
     }
     
     // MARK: - Actions
