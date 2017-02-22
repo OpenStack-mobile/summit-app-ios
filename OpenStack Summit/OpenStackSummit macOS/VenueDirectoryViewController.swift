@@ -19,6 +19,11 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     // MARK: - Properties
     
+    var predicate = NSPredicate(value: true) {
+        
+        didSet { configureView() }
+    }
+    
     weak var delegate: VenueDirectoryViewControllerDelegate?
     
     private var fetchedResultsController: NSFetchedResultsController!
@@ -65,11 +70,17 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
         
         let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
-        let predicate = NSPredicate(format: "(latitude != nil AND longitude != nil) AND summit.id == %@", summitID)
+        let summitPredicate = NSPredicate(format: "summit.id == %@", summitID)
         
-        let sort = [NSSortDescriptor(key: "venueType", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [self.predicate, summitPredicate])
         
-        self.fetchedResultsController = NSFetchedResultsController(Venue.self, delegate: self, predicate: predicate, sortDescriptors: sort, context: Store.shared.managedObjectContext)
+        let sort = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        self.fetchedResultsController = NSFetchedResultsController(Venue.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: sort,
+                                                                   context: Store.shared.managedObjectContext)
         
         try! self.fetchedResultsController.performFetch()
         
@@ -78,20 +89,16 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     
     private func configure(cell cell: VenueTableViewCell, at row: Int) {
         
-        let venueManagedObject = self.fetchedResultsController.fetchedObjects![row] as! VenueManagedObject
+        assert(fetchedResultsController.fetchedObjects != nil)
+        
+        let venueManagedObject = fetchedResultsController.fetchedObjects![row] as! VenueManagedObject
         
         let venue = VenueListItem(managedObject: venueManagedObject)
         
         cell.venueNameLabel.stringValue = venue.name
         cell.venueAddressLabel.stringValue = venue.address
         
-        cell.venueImageView.image = nil
-        
-        // load image
-        if let imageURL = NSURL(string: venue.backgroundImageURL ?? "") {
-            
-            cell.venueImageView.loadCached(imageURL)
-        }
+        cell.imageURL = NSURL(string: venue.backgroundImageURL ?? "")
     }
     
     // MARK: - NSTableViewDataSource
@@ -182,9 +189,7 @@ final class VenueDirectoryViewController: NSViewController, NSTableViewDataSourc
     func venueDirectoryViewController(controller: VenueDirectoryViewController, didSelect venue: Identifier)
 }
 
-final class VenueTableViewCell: NSTableCellView {
-    
-    @IBOutlet private(set) weak var venueImageView: NSImageView!
+final class VenueTableViewCell: ImageTableViewCell {
     
     @IBOutlet private(set) weak var venueNameLabel: NSTextField!
     

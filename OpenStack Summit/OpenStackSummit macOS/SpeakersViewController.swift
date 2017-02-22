@@ -11,7 +11,9 @@ import AppKit
 import CoreData
 import CoreSummit
 
-final class SpeakersViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
+final class SpeakersViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate, SearchableController {
+    
+    typealias CollectionViewItem = ImageCollectionViewItem
     
     // MARK: - IB Outlets
     
@@ -19,9 +21,16 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     // MARK: - Properties
     
+    var searchTerm = "" {
+        
+        didSet { configureView() }
+    }
+    
     private var fetchedResultsController: NSFetchedResultsController!
     
     private var summitObserver: Int?
+    
+    private lazy var placeholderImage: NSImage = NSImage(named: "generic-user-avatar")!
     
     // MARK: - Loading
     
@@ -47,7 +56,20 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
-        let predicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
+        let summitPredicate = NSPredicate(format: "summits.id CONTAINS %@", summitID)
+        
+        let searchPredicate: NSPredicate
+        
+        if searchTerm.isEmpty {
+            
+            searchPredicate = NSPredicate(value: true)
+            
+        } else {
+            
+            searchPredicate = NSPredicate(format: "firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@", searchTerm, searchTerm)
+        }
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [searchPredicate, summitPredicate])
         
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
@@ -60,7 +82,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         self.collectionView.reloadData()
     }
     
-    private func configure(item item: NSCollectionViewItem, at indexPath: NSIndexPath) {
+    private func configure(item item: CollectionViewItem, at indexPath: NSIndexPath) {
         
         let managedObject = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
         
@@ -68,12 +90,9 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         item.textField!.stringValue = speaker.name
         
-        item.imageView!.image = NSImage(named: "generic-user-avatar")
+        item.placeholderImage = self.placeholderImage
         
-        if let url = NSURL(string: speaker.pictureURL) {
-            
-            item.imageView!.loadCached(url)
-        }
+        item.imageURL = NSURL(string: speaker.pictureURL)
     }
     
     // MARK: - NSCollectionViewDataSource
@@ -90,7 +109,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
     
     func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
         
-        let item = collectionView.makeItemWithIdentifier("PersonCollectionViewItem", forIndexPath: indexPath)
+        let item = collectionView.makeItemWithIdentifier("PersonCollectionViewItem", forIndexPath: indexPath) as! CollectionViewItem
         
         configure(item: item, at: indexPath)
         

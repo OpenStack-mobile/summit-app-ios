@@ -111,7 +111,6 @@
                                                                         <outlet property="imageView" destination="n6x-ez-Jg9" id="eVe-Ta-bFf"/>
                                                                         <outlet property="textField" destination="ajO-kA-fva" id="GyB-Yy-Ey3"/>
                                                                         <outlet property="venueAddressLabel" destination="mCO-iJ-O1A" id="4eA-ad-zcN"/>
-                                                                        <outlet property="venueImageView" destination="n6x-ez-Jg9" id="LDU-d7-Xv2"/>
                                                                         <outlet property="venueNameLabel" destination="ajO-kA-fva" id="rn1-Nm-reP"/>
                                                                     </connections>
                                                                 </tableCellView>
@@ -233,17 +232,17 @@
                                         </userDefinedRuntimeAttributes>
                                     </customView>
                                     <customView horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="YmH-yJ-dAE">
-                                        <rect key="frame" x="0.0" y="419" width="350" height="233.5"/>
+                                        <rect key="frame" x="0.0" y="418.5" width="350" height="233.5"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8F5-Wd-llS">
-                                                <rect key="frame" x="0.0" y="-0.5" width="350" height="233.5"/>
+                                                <rect key="frame" x="0.0" y="-1" width="350" height="233.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="8F5-Wd-llS" secondAttribute="height" multiplier="300:200" id="a9y-ja-r2Z"/>
                                                 </constraints>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="rtV-Gy-LTA"/>
                                             </imageView>
                                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="JI4-sz-yjQ">
-                                                <rect key="frame" x="159" y="101" width="32" height="32"/>
+                                                <rect key="frame" x="159" y="100" width="32" height="32"/>
                                             </progressIndicator>
                                         </subviews>
                                         <constraints>
@@ -256,7 +255,7 @@
                                         </constraints>
                                     </customView>
                                     <customView horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3PR-KK-8A2">
-                                        <rect key="frame" x="0.0" y="369" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="368.5" width="350" height="50"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3R7-zh-47X">
                                                 <rect key="frame" x="16" y="16.5" width="16" height="16"/>
@@ -301,7 +300,7 @@
                                         </constraints>
                                     </customView>
                                     <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gk6-F9-HlP">
-                                        <rect key="frame" x="0.0" y="166" width="350" height="203"/>
+                                        <rect key="frame" x="0.0" y="165.5" width="350" height="203"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-Iv-0ZD">
                                                 <rect key="frame" x="14" y="8" width="322" height="187"/>
@@ -328,7 +327,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                         </customSpacing>
                                     </stackView>
                                     <customView verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="EDQ-80-jQs">
-                                        <rect key="frame" x="0.0" y="83" width="350" height="83"/>
+                                        <rect key="frame" x="0.0" y="82.5" width="350" height="83"/>
                                         <subviews>
                                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Nf-8n-OvN">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>

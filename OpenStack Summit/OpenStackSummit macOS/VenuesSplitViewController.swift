@@ -10,9 +10,14 @@ import Foundation
 import AppKit
 import CoreSummit
 
-final class VenuesSplitViewController: NSSplitViewController, VenueDirectoryViewControllerDelegate {
+final class VenuesSplitViewController: NSSplitViewController, SearchableController, VenueDirectoryViewControllerDelegate {
     
     // MARK: - Properties
+    
+    var searchTerm = "" {
+        
+        didSet { configureView() }
+    }
     
     var venueDirectoryViewController: VenueDirectoryViewController {
         
@@ -30,6 +35,30 @@ final class VenuesSplitViewController: NSSplitViewController, VenueDirectoryView
         super.viewDidLoad()
         
         venueDirectoryViewController.delegate = self
+        
+        configureView()
+    }
+    
+    // MARK: - Private Functions
+    
+    private func configureView() {
+        
+        let searchPredicate: NSPredicate
+        
+        if searchTerm.isEmpty {
+            
+            searchPredicate = NSPredicate(value: true)
+            
+        } else {
+            
+            searchPredicate = NSPredicate(format: "name CONTAINS[c] %@ OR address CONTAINS[c] %@ OR city CONTAINS[c] %@ OR state CONTAINS[c] %@ OR country CONTAINS[c] %@ OR zipCode CONTAINS[c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
+        }
+        
+        let mapVenuesPredicate = NSPredicate(format: "latitude != nil AND longitude != nil")
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [mapVenuesPredicate, searchPredicate])
+        
+        venueDirectoryViewController.predicate = predicate
     }
     
     // MARK: - VenueDirectoryViewControllerDelegate

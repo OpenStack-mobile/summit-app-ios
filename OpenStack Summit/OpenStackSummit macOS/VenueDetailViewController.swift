@@ -252,8 +252,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
 
 // MARK: - Supporting Types
 
-final class VenueImageCollectionViewItem: NSCollectionViewItem {
+final class VenueImageCollectionViewItem: ImageCollectionViewItem {
     
     @IBOutlet private(set) weak var activityIndicator: NSProgressIndicator!
-    
 }

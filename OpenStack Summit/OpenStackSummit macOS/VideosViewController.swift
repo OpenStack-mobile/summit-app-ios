@@ -12,13 +12,18 @@ import CoreData
 import CoreSummit
 import XCDYouTubeKit
 
-final class VideosViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate {
+final class VideosViewController: NSViewController, NSFetchedResultsControllerDelegate, NSCollectionViewDataSource, NSCollectionViewDelegate, SearchableController {
     
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var collectionView: NSCollectionView!
     
     // MARK: - Properties
+    
+    var searchTerm = "" {
+        
+        didSet { configureView() }
+    }
     
     private var fetchedResultsController: NSFetchedResultsController!
     
@@ -48,7 +53,20 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         
         let summitID = NSNumber(longLong: Int64(SummitManager.shared.summit.value))
         
-        let predicate = NSPredicate(format: "event.summit.id == %@", summitID)
+        let summitPredicate = NSPredicate(format: "event.summit.id == %@", summitID)
+        
+        let searchPredicate: NSPredicate
+        
+        if searchTerm.isEmpty {
+            
+            searchPredicate = NSPredicate(value: true)
+            
+        } else {
+            
+            searchPredicate = NSPredicate(format: "event.name CONTAINS[c] %@", searchTerm)
+        }
+        
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [searchPredicate, summitPredicate])
         
         let sort = [NSSortDescriptor(key: "event.name", ascending: true)]
         

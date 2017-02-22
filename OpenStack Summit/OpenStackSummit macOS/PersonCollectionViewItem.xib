@@ -61,7 +61,7 @@
             </constraints>
             <point key="canvasLocation" x="-125" y="-135.5"/>
         </customView>
-        <collectionViewItem id="4Zm-ir-5qs">
+        <collectionViewItem id="4Zm-ir-5qs" customClass="ImageCollectionViewItem" customModule="OpenStackSummit" customModuleProvider="target">
             <connections>
                 <outlet property="imageView" destination="gbx-KZ-L7S" id="Hrk-2S-z4D"/>
                 <outlet property="sourceItemView" destination="dHY-ex-pKO" id="UCl-ZW-khA"/>

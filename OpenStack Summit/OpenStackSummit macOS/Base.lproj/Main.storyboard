@@ -713,9 +713,6 @@
                                             <action selector="toggleSidebar:" target="Oky-zY-oP4" id="tvi-V0-ZlC"/>
                                         </connections>
                                     </button>
-                                    <connections>
-                                        <action selector="toggleSidebar:" target="B8D-0N-5wS" id="OwS-ih-5IM"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="42809C62-1FDD-4DDA-B7FD-53A687BFA31A" label="Search" paletteLabel="Search" id="9RD-Yc-BLr">
                                     <nil key="toolTip"/>
