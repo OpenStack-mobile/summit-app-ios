@@ -587,7 +587,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                             <stackView orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6a4-2H-Z3Y">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="344"/>
                                 <beginningViews>
-                                    <containerView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swN-be-zIc">
+                                    <containerView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" placeholderIntrinsicWidth="450" placeholderIntrinsicHeight="150" translatesAutoresizingMaskIntoConstraints="NO" id="swN-be-zIc">
                                         <rect key="frame" x="0.0" y="194" width="450" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="z6j-cE-vtq"/>
@@ -596,20 +596,42 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                             <segue destination="jQ8-iQ-SGF" kind="embed" id="d5T-R5-Ol8"/>
                                         </connections>
                                     </containerView>
+                                    <customView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yET-iv-b4w" userLabel="Separator View" customClass="ContentBackgroundView" customModule="OpenStackSummit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="194"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="uZ6-hh-QcN"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                <color key="value" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </customView>
                                 </beginningViews>
                                 <endViews>
                                     <containerView verticalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hUg-H7-Qbt">
-                                        <rect key="frame" x="0.0" y="0.0" width="450" height="194"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="0.0"/>
                                         <connections>
                                             <segue destination="yAB-1a-Hn9" kind="embed" id="9az-6c-8qo"/>
                                         </connections>
                                     </containerView>
                                 </endViews>
+                                <constraints>
+                                    <constraint firstItem="hUg-H7-Qbt" firstAttribute="leading" secondItem="6a4-2H-Z3Y" secondAttribute="leading" id="9Cg-JU-hNa"/>
+                                    <constraint firstItem="yET-iv-b4w" firstAttribute="leading" secondItem="6a4-2H-Z3Y" secondAttribute="leading" id="AVj-59-hEU"/>
+                                    <constraint firstAttribute="trailing" secondItem="hUg-H7-Qbt" secondAttribute="trailing" id="HLj-2z-DRW"/>
+                                    <constraint firstItem="hUg-H7-Qbt" firstAttribute="top" secondItem="yET-iv-b4w" secondAttribute="bottom" id="QiX-IY-zTq"/>
+                                    <constraint firstAttribute="trailing" secondItem="yET-iv-b4w" secondAttribute="trailing" id="h3d-eZ-uew"/>
+                                    <constraint firstItem="yET-iv-b4w" firstAttribute="top" secondItem="swN-be-zIc" secondAttribute="bottom" id="nhU-ee-Ttn"/>
+                                    <constraint firstAttribute="bottom" secondItem="hUg-H7-Qbt" secondAttribute="bottom" id="ubV-5e-pf3"/>
+                                </constraints>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <real value="750"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
