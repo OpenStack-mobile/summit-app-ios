@@ -464,6 +464,10 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 cell.saveButton.actionLabel.text = isFavorite ? "Saved" : "Save"
                 
+                let saveImage = isFavorite ? "EventButtonSaved" : "EventButtonSave"
+                
+                cell.saveButton.actionImageView.image = UIImage(named: saveImage)!
+                
                 if eventDetail.rsvp.isEmpty {
                     
                     cell.confirmButton.actionLabel.text = didConfirm ? "Confirmed" : "Confirm"
@@ -472,6 +476,10 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     
                     cell.confirmButton.actionLabel.text = didConfirm ? "RSVP'd" : "RSVP"
                 }
+                
+                let scheduleImage = isFavorite ? "EventButtonScheduleRemove" : "EventButtonScheduleAdd"
+                
+                cell.confirmButton.actionImageView.image = UIImage(named: scheduleImage)!
                 
                 return cell
             }
