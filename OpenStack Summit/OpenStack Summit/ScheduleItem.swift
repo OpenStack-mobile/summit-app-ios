@@ -14,7 +14,7 @@ public struct ScheduleItem: CoreDataDecodable {
     
     // MARK: - Properties
     
-    public let id: Identifier
+    public let identifier: Identifier
     public let name: String
     public let summit: Identifier
     public let dateTime: String
@@ -29,7 +29,7 @@ public struct ScheduleItem: CoreDataDecodable {
     
     public init(managedObject event: EventManagedObject) {
         
-        self.id = event.identifier
+        self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
         self.eventType = event.eventType.name
@@ -85,10 +85,20 @@ internal extension ScheduleItem {
         dateFormatter.dateFormat = "hh:mm a"
         let stringDateTo = dateFormatter.stringFromDate(event.end)
         
-        return "\(stringDateFrom) / \(stringDateTo)"
+        return "\(stringDateFrom) - \(stringDateTo)"
+    }
+    
+    static func getDay(event: EventManagedObject) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
+        dateFormatter.dateStyle = .MediumStyle
+        
+        return dateFormatter.stringFromDate(event.start)
     }
     
     static func getDateTime(event: EventManagedObject) -> String {
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: event.summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"

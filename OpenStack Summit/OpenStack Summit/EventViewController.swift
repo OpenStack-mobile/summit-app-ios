@@ -26,7 +26,7 @@ extension EventViewController {
         
         // Can give feedback after event started, and if there is no feedback for that user
         
-        let eventID = NSNumber(longLong: Int64(event.id))
+        let eventID = NSNumber(longLong: Int64(event.identifier))
         
         let context = Store.shared.managedObjectContext
         
@@ -36,8 +36,7 @@ extension EventViewController {
         let predicate = NSPredicate(format: "event.id == %@ AND member == %@", eventID, member)
         
         return event.start < Date()
-            && (try! context.count(MemberFeedbackManagedObject.self, predicate: predicate)) == 0
-            && (try! context.count(ReviewManagedObject.self, predicate: predicate)) == 0
+            && (try! context.count(FeedbackManagedObject.self, predicate: predicate)) == 0
     }
     
     func canAddToCalendar() -> Bool {
@@ -50,12 +49,12 @@ extension EventViewController {
         }
     }
     
-    func contextMenu(for event: EventDetail, scheduleableView: ScheduleableView? = nil) -> ContextMenu {
+    func contextMenu(for event: EventDetail) -> ContextMenu {
         
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
         
@@ -65,13 +64,15 @@ extension EventViewController {
         
         if canAddFeedback(for: event) {
             
-            let rate = ContextMenu.Action(activityType: "Event.Rate", image: nil, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
+            let image = "ContextMenuRate"
+            
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { UIImage(named: image)! }, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
                 
                 guard let controller = viewController else { return }
                 
                 let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
                 
-                feedbackVC.event = event.id
+                feedbackVC.event = event.identifier
                 
                 feedbackVC.rate = 0
                 
@@ -89,11 +90,13 @@ extension EventViewController {
             
             let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
             
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
+            let image = scheduled ? "ContextMenuScheduleRemove" : "ContextMenuScheduleAdd"
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
-                controller.toggleScheduledStatus(for: event, scheduleableView: scheduleableView)
+                controller.toggleScheduledStatus(for: event)
                 
                 didComplete(true)
                 }))
@@ -101,27 +104,15 @@ extension EventViewController {
             actions.append(scheduleEvent)
         }
         
-        if canAddToCalendar() {
-            
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: nil, title: "Add to Calendar", handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                controller.addToCalendar(event)
-                
-                didComplete(true)
-                }))
-            
-            actions.append(scheduleEvent)
-        }
-        
-        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.id) ?? false
+        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
         if Store.shared.isLoggedIn {
             
             let title = isFavorite ? "Remove from Favorites" : "Add to Favorites"
             
-            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: nil, title: title, handler: .background({ [weak self] (didComplete) in
+            let image = "ContextMenuSave"
+            
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -133,19 +124,53 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
+        if canAddToCalendar() {
+            
+            let image = "ContextMenuCalendarAdd"
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: { UIImage(named: image)! }, title: "Save to Calendar", handler: .background({ [weak self] (didComplete) in
+                
+                guard let controller = self else { return }
+                
+                controller.addToCalendar(event)
+                
+                didComplete(true)
+            }))
+            
+            actions.append(scheduleEvent)
+        }
+        
         return ContextMenu(actions: actions, shareItems: [message, url], systemActions: false)
     }
     
-    func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {
+    func toggleScheduledStatus(for event: EventDetail) {
         
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        guard let attendee = Store.shared.authenticatedMember?.attendeeRole
+            else { return }
+        
+        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         guard eventRequestInProgress == false else { return }
         
         eventRequestInProgress = true
         
-        // update view
-        scheduleableView?.scheduled = !scheduled
+        func setScheduled(newValue: Bool) {
+            
+            // update model
+            if let managedObject = try! EventManagedObject.find(event.identifier, context: Store.shared.managedObjectContext) {
+                
+                if newValue {
+                    
+                    attendee.schedule.insert(managedObject)
+                    
+                } else {
+                    
+                    attendee.schedule.remove(managedObject)
+                }
+            }
+        }
+        
+        setScheduled(!scheduled)
         
         let completion: ErrorType? -> () = { [weak self] (response) in
             
@@ -160,7 +185,7 @@ extension EventViewController {
                 case let .Some(error):
                     
                     // restore original value
-                    scheduleableView?.scheduled = scheduled
+                    setScheduled(scheduled)
                     
                     // show error
                     controller.showErrorMessage(error)
@@ -172,23 +197,41 @@ extension EventViewController {
         
         if scheduled {
             
-            Store.shared.removeEventFromSchedule(event.summit, event: event.id, completion: completion)
+            Store.shared.removeEventFromSchedule(event.summit, event: event.identifier, completion: completion)
             
         } else {
             
-            Store.shared.addEventToSchedule(event.summit, event: event.id, completion: completion)
+            Store.shared.addEventToSchedule(event.summit, event: event.identifier, completion: completion)
         }
     }
     
     func toggleFavorite(for event: EventDetail) {
         
-       let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.id) ?? false
+       let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
         guard eventRequestInProgress == false else { return }
         
         eventRequestInProgress = true
         
-        Store.shared.favorite(!isFavorite, event: event.id, summit: event.summit) { [weak self] (response) in
+        func setFavorite(newValue: Bool) {
+            
+            // update model
+            if let managedObject = try! EventManagedObject.find(event.identifier, context: Store.shared.managedObjectContext) {
+                
+                if newValue {
+                    
+                    Store.shared.authenticatedMember?.favoriteEvents.insert(managedObject)
+                    
+                } else {
+                    
+                    Store.shared.authenticatedMember?.favoriteEvents.remove(managedObject)
+                }
+            }
+        }
+        
+        setFavorite(!isFavorite)
+        
+        Store.shared.favorite(!isFavorite, event: event.identifier, summit: event.summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
@@ -202,6 +245,9 @@ extension EventViewController {
                     
                     // show error
                     controller.showErrorMessage(error)
+                    
+                    // restore old value
+                    setFavorite(isFavorite)
                     
                 case .None: break
                 }

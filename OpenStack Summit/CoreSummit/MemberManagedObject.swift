@@ -36,7 +36,7 @@ public final class MemberManagedObject: Entity {
     
     @NSManaged public var groupEvents: Set<EventManagedObject>
     
-    @NSManaged public var feedback: Set<MemberFeedbackManagedObject>
+    @NSManaged public var feedback: Set<FeedbackManagedObject>
     
     @NSManaged public var favoriteEvents: Set<EventManagedObject>
 }
@@ -57,7 +57,7 @@ extension Member: CoreDataDecodable {
         self.biography = managedObject.biography
         self.gender = managedObject.gender
         self.groups = Group.from(managedObjects: managedObject.groups)
-        self.feedback = MemberFeedback.from(managedObjects: managedObject.feedback)
+        self.feedback = managedObject.feedback.identifiers
         self.groupEvents = managedObject.groupEvents.identifiers
         self.favoriteEvents = managedObject.favoriteEvents.identifiers
         
@@ -160,12 +160,12 @@ public extension MemberManagedObject {
     }
     
     @inline(__always)
-    func feedback(for event: Identifier) -> MemberFeedbackManagedObject? {
+    func feedback(for event: Identifier) -> FeedbackManagedObject? {
         
         return feedback.firstMatching({ $0.event.identifier == event})
     }
     
-    var givenFeedback: [MemberFeedbackManagedObject] {
+    var givenFeedback: [FeedbackManagedObject] {
         
         return feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
     }

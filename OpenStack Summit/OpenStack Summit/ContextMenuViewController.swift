@@ -21,7 +21,7 @@ extension ContextMenuViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(UIViewController.showControllerContextMenu))
+        let barButtonItem = UIBarButtonItem(image: R.image.contextMenu(), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
         
         viewController.navigationItem.rightBarButtonItem = barButtonItem
     }
