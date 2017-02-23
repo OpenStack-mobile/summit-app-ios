@@ -39,6 +39,15 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
         peopleListView.tableView.delegate = self
         peopleListView.tableView.dataSource = self
+        
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+        userActivity.title = "Speakers"
+        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
+        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
+        userActivity.becomeCurrent()
+        
+        self.userActivity = userActivity
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,6 +58,15 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         
         // load cached data
         loadData()
+    }
+    
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Methods

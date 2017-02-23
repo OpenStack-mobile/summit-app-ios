@@ -61,6 +61,15 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         userActivity?.resignCurrent()
     }
     
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
+    }
+    
     // MARK: - Actions
     
     @IBAction func showLink(sender: UIButton) {
