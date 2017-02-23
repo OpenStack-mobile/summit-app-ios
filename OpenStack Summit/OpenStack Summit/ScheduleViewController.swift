@@ -482,6 +482,11 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
+    func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+    }
+    
     // MARK: - Notifications
     
     private func registerNotifications() {

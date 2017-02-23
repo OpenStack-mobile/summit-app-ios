@@ -18,4 +18,15 @@ final class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet private(set) weak var statusImageView: UIImageView!
     @IBOutlet private(set) weak var contextMenuButton: UIButton!
     
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        
+    }
 }

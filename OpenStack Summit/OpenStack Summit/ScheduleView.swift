@@ -59,6 +59,14 @@ final class ScheduleView: UIView {
         dayPicker.backgroundSelectedColor = UIColor(hexString: "#4A4A4A")
         
         addSubview(self.view)
+        
+        // for some reason the first cell is being automatically selected
+        if tableView.numberOfRowsInSection(0) > 0 {
+            
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }
     }
     
     func setInactiveAppearanceWithCell(cell: AFDayCell) {
