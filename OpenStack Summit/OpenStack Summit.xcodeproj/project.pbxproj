@@ -783,6 +783,7 @@
 		6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
 		6EA737611E47984400700F64 /* VideoSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA737601E47984400700F64 /* VideoSearchResultsViewController.swift */; };
 		6EA737651E47B4BE00700F64 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA737641E47B4BE00700F64 /* VideoCell.swift */; };
+		6EA983D51E5E7DA900D5BB55 /* SharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA983D41E5E7DA900D5BB55 /* SharingService.swift */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB1FDE71E1A9C280048045D /* TeamInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */; };
@@ -1519,6 +1520,7 @@
 		6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailImageTableViewCell.xib; sourceTree = "<group>"; };
 		6EA737601E47984400700F64 /* VideoSearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSearchResultsViewController.swift; sourceTree = "<group>"; };
 		6EA737641E47B4BE00700F64 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		6EA983D41E5E7DA900D5BB55 /* SharingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingService.swift; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitation.swift; sourceTree = "<group>"; };
@@ -2314,6 +2316,7 @@
 			isa = PBXGroup;
 			children = (
 				6E7558BF1E58D8D4003B6844 /* UXKit.swift */,
+				6EA983D41E5E7DA900D5BB55 /* SharingService.swift */,
 				6E31ECA61E5B8E46000E5BAC /* ContentBackgroundView.swift */,
 				6E5054961E5D583600AD75FF /* ImageCell.swift */,
 				6E31EC8B1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib */,
@@ -4455,6 +4458,7 @@
 				6E2929B61E5D0C0D00F1C2F9 /* SearchableViewController.swift in Sources */,
 				6E2929B71E5D0D5100F1C2F9 /* DataUpdatePoller.swift in Sources */,
 				6E7558821E58D024003B6844 /* UserActivity.swift in Sources */,
+				6EA983D51E5E7DA900D5BB55 /* SharingService.swift in Sources */,
 				6E7558811E58D01E003B6844 /* YouTubeThumbnail.swift in Sources */,
 				6E3B74571E5A3EB0008A1BB2 /* EventDetail.swift in Sources */,
 				6E7451081E5AC9B60061E418 /* VenueDirectoryViewController.swift in Sources */,

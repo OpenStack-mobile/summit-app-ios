@@ -10,9 +10,10 @@ import Foundation
 import AppKit
 import CoreData
 import CoreSummit
+import EventKit
 
 @objc(OSSEventDetailViewController)
-final class EventDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate {
+final class EventDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -61,12 +62,14 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     var eventDetail: EventDetail!
     
+    private lazy var calendarEventStore: EKEventStore = EKEventStore()
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        shareButton.sendActionOn(.LeftMouseDown)
     }
     
     // MARK: - Actions
@@ -169,6 +172,116 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         self.speakersButton.title = "\(event.speakers.count) speakers"
         
         self.reviewsView.hidden = true
+    }
+    
+    func addToCalendar() {
+        
+        let event = eventDetail
+        
+        let status = EKEventStore.authorizationStatusForEntityType(.Event)
+        
+        switch status {
+            
+        case .Restricted, .Denied:
+            
+            break
+            
+        case .NotDetermined:
+            
+            calendarEventStore.requestAccessToEntityType(.Event) { [weak self] (granted, error) in
+                
+                // retry
+                self?.addToCalendar()
+            }
+            
+        case .Authorized:
+            
+            let calendarListTitle = "OpenStack Summit"
+            
+            // get calendar
+            
+            let calendar: EKCalendar
+            
+            if let existingCalendar = calendarEventStore.calendarsForEntityType(.Event).firstMatching({ $0.title == calendarListTitle }) {
+                
+                calendar = existingCalendar
+                
+            } else {
+                
+                calendar = EKCalendar(forEntityType: .Event, eventStore: calendarEventStore)
+                
+                calendar.title = calendarListTitle
+                
+                calendar.source = calendarEventStore.defaultCalendarForNewEvents.source
+                
+                do { try calendarEventStore.saveCalendar(calendar, commit: true) }
+                    
+                catch {
+                    
+                    showErrorMessage(error, fileName: #file, lineNumber: #line)
+                    return
+                }
+            }
+            
+            // create event
+            
+            let calendarEvent = EKEvent(eventStore: calendarEventStore)
+            
+            calendarEvent.calendar = calendar
+            calendarEvent.title = event.name
+            calendarEvent.startDate = event.start.toFoundation()
+            calendarEvent.endDate = event.end.toFoundation()
+            calendarEvent.timeZone = NSTimeZone(name: event.timeZone)
+            calendarEvent.URL = event.webpageURL
+            calendarEvent.location = event.location
+            
+            if let data = event.eventDescription.dataUsingEncoding(NSUTF8StringEncoding),
+                let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+                
+                calendarEvent.notes = attributedString.string
+            }
+            
+            do { try calendarEventStore.saveEvent(calendarEvent, span: .ThisEvent, commit: true) }
+                
+            catch { showErrorMessage(error) }
+        }
+    }
+    
+    // MARK: - NSSharingServicePickerDelegate
+    
+    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+        
+        var customItems = [NSSharingService]()
+        
+        if let url = eventDetail.webpageURL.absoluteString {
+            
+            let copyLink = NSSharingService(copyLink: url)
+            
+            customItems.append(copyLink)
+        }
+        
+        let calendarIcon = NSWorkspace.sharedWorkspace().iconForFile("/Applications/Calendar.app")
+        
+        let addToCalendar = NSSharingService(title: "Save to Calendar",
+                                             image: calendarIcon,
+                                             alternateImage: nil,
+                                             handler: self.addToCalendar)
+        
+        customItems.append(addToCalendar)
+        
+        return customItems + proposedServices
+    }
+    
+    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate? {
+        
+        return self
+    }
+    
+    // MARK: - NSSharingServiceDelegate
+    
+    func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
+        
+        
     }
     
     // MARK: - Segue
