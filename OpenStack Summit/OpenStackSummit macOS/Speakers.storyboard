@@ -415,7 +415,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
         <scene sceneID="xa5-NY-We8">
             <objects>
                 <windowController storyboardIdentifier="SpeakerWindowController" id="NqH-bz-Tqp" customClass="SpeakerWindowController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Speaker" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="XLq-5J-j2V">
+                    <window key="window" title="Speaker" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="XLq-5J-j2V">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="550"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>

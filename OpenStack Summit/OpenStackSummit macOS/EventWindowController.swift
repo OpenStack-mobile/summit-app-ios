@@ -12,6 +12,8 @@ import CoreSummit
 
 final class EventWindowController: NSWindowController, ContentController {
     
+    static let contentType: Any.Type = Event.self
+    
     var contentIdentifier: Identifier = 0 {
         
         didSet { configureView() }

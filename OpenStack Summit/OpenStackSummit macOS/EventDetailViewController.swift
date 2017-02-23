@@ -15,6 +15,8 @@ import EventKit
 @objc(OSSEventDetailViewController)
 final class EventDetailViewController: NSViewController, ContentController, MessageEnabledViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate  {
     
+    static let contentType: Any.Type = Event.self
+    
     // MARK: - IB Outlets
     
     @IBOutlet private(set) weak var nameLabel: NSTextField!

@@ -165,43 +165,44 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         // try to get existing window
         if let existingController = childContentWindowControllers
             .firstMatching({ ($0 as? ContentController)?.contentIdentifier == identifier
-                && ($0 as? ContentController)?.dynamicType.Content == contentType }) {
+                && ($0 as? ContentController)?.dynamicType.contentType == contentType }) {
             
             windowController = existingController
             
         } else {
             
             // instantiate controller
-            switch childContent.content {
+            switch contentType {
                 
-            case .event:
+            case is Event.Type:
                 
                 windowController = NSStoryboard(name: "Events", bundle: nil).instantiateControllerWithIdentifier("EventWindowController") as! NSWindowController
                 
-            case .speaker:
+            case is Speaker.Type:
                 
                 windowController = NSStoryboard(name: "Speakers", bundle: nil).instantiateControllerWithIdentifier("SpeakerWindowController") as! NSWindowController
+                
+            default:
+                
+                fatalError("Cannot show \(contentType)")
             }
             
             // configure
             guard let contentController = windowController as? ContentController
                 else { fatalError("\(windowController) is not a `ContentController`") }
             
-            contentController.contentIdentifier = childContent.identifier
+            contentController.contentIdentifier = identifier
             
             // hold reference
-            childContentWindowControllers[childContent] = windowController
+            childContentWindowControllers.insert(windowController)
             
             let window = windowController.window!
             
             // release when closed
-            if window.releasedWhenClosed {
-                
-                NSNotificationCenter.defaultCenter().addObserver(self,
-                                                                 selector: #selector(windowWillClose),
-                                                                 name: NSWindowWillCloseNotification,
-                                                                 object: window)
-            }
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                                                             selector: #selector(windowWillClose),
+                                                             name: NSWindowWillCloseNotification,
+                                                             object: window)
         }
         
         // show window
@@ -232,11 +233,11 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
          
          case .event:
             
-            show(childContent: ChildContent(content: .event, identifier: identifier))
+            show(childContent: Event.self, identifier: identifier)
          
          case .speaker:
          
-            show(childContent: ChildContent(content: .speaker, identifier: identifier))
+            show(childContent: Speaker.self, identifier: identifier)
          
          case .video:
          
@@ -294,7 +295,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
                                                             name: NSWindowWillCloseNotification,
                                                             object: window)
         
-        guard let controllerIndex = childContentWindowControllers.indexOf({ $0.1 === window.windowController })
+        guard let controllerIndex = childContentWindowControllers.indexOf({ $0.window === window })
             else { fatalError("Invalid notification: \(notification)") }
         
         // will release controller, and window

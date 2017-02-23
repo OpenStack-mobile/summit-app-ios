@@ -12,6 +12,8 @@ import CoreSummit
 
 final class SpeakerWindowController: NSWindowController, ContentController {
     
+    static let contentType: Any.Type = Speaker.self
+    
     var contentIdentifier: Identifier = 0 {
         
         didSet { configureView() }
