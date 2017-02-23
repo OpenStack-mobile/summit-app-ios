@@ -21,7 +21,7 @@ extension ContextMenuViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(UIViewController.showControllerContextMenu))
+        let barButtonItem = UIBarButtonItem(image: R.image.contextMenu(), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
         
         viewController.navigationItem.rightBarButtonItem = barButtonItem
     }
@@ -91,12 +91,8 @@ extension UIViewController {
             if contextMenu.systemActions == false {
                 
                 activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,
-                                                                UIActivityTypeAddToReadingList]
-                
-                if #available(iOS 9, *) {
-                    
-                    activityViewController.excludedActivityTypes?.append(UIActivityTypeOpenInIBooks)
-                }
+                                                                UIActivityTypeAddToReadingList,
+                                                                UIActivityTypeOpenInIBooks]
             }
             
             menuViewController = activityViewController

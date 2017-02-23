@@ -78,7 +78,7 @@ public struct MemberResponse {
         
         public let groups: [Group]
         
-        public let feedback: [MemberFeedback]
+        public let feedback: [Feedback]
         
         public let favoriteEvents: [Identifier]
     }
@@ -129,6 +129,21 @@ public struct MemberResponse {
         public let name: String
         
         public let groups: [TrackGroup]
+    }
+    
+    public struct Feedback: FeedbackProtocol {
+        
+        public let identifier: Identifier
+        
+        public let rate: Int
+        
+        public let review: String
+        
+        public let date: Date
+        
+        public let event: Identifier
+        
+        public let member: Identifier
     }
     
     public typealias Presentation = PresentationDataUpdate
@@ -186,4 +201,14 @@ public func == (lhs: MemberResponse.Track, rhs: MemberResponse.Track) -> Bool {
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.groups == rhs.groups
+}
+
+public func == (lhs: MemberResponse.Feedback, rhs: MemberResponse.Feedback) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.rate == rhs.rate
+        && lhs.review == rhs.review
+        && lhs.date == rhs.date
+        && lhs.event == lhs.event
+        && lhs.member == lhs.member
 }

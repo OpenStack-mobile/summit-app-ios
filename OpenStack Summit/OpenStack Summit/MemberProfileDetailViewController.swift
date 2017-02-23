@@ -244,9 +244,20 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if #available(iOS 9.0, *) {
-            userActivity?.resignCurrent()
+        userActivity?.resignCurrent()
+    }
+    
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        if case let .speaker(speaker) = profile {
+            
+            let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
+                            AppActivityUserInfo.identifier.rawValue: speaker]
+            
+            userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject: AnyObject])
         }
+        
+        super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Methods
@@ -296,6 +307,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
                 
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
+                userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 
                 userActivity.becomeCurrent()
                 
@@ -325,7 +337,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
             
         case let .Error(error):
             
-            showErrorAlert((error as NSError).localizedDescription)
+            showErrorAlert((error as! NSError).localizedDescription)
             
         case let .Value(person):
             

@@ -58,8 +58,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         #endif
         
         // setup data poller
-        #if !MOCKED
+        #if DEBUG
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        #endif
+        #if !MOCKED
         DataUpdatePoller.shared.start()
         #endif
         
@@ -70,16 +72,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         SetAppearance()
         
         // Core Spotlight
-        if #available(iOS 9.0, *) {
+        if CSSearchableIndex.isIndexingAvailable() {
             
-            if CSSearchableIndex.isIndexingAvailable() {
-                
-                SpotlightController.shared.log = { print("SpotlightController: " + $0) }
-            }
+            SpotlightController.shared.log = { print("SpotlightController: " + $0) }
         }
         
         // Setup Notification Manager
+        #if DEBUG
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
+        #endif
         PushNotificationManager.shared.setupNotifications(application)
         PushNotificationManager.shared.reloadSubscriptions()
         PushNotificationManager.shared.updateAppBadge()
@@ -224,26 +225,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             return true
         }
         
-        print("Continue activity \(userActivity.activityType)")
+        print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo?.description ?? "")")
         
-        if #available(iOS 9.0, *) {
+        if userActivity.activityType == CSSearchableItemActionType {
             
-            if userActivity.activityType == CSSearchableItemActionType {
-                
-                guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-                    let searchURL = NSURL(string: searchIdentifierString)
-                    where searchURL.pathComponents?.count == 2
-                    else { return false }
-                
-                let searchTypeString = searchURL.pathComponents![0]
-                let identifierString = searchURL.pathComponents![1]
-                
-                guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
-                    let identifier = Int(identifierString)
-                    else { return false }
-                
-                return self.view(dataType, identifier: identifier)
-            }
+            guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                let searchURL = NSURL(string: searchIdentifierString)
+                where searchURL.pathComponents?.count == 2
+                else { return false }
+            
+            let searchTypeString = searchURL.pathComponents![0]
+            let identifierString = searchURL.pathComponents![1]
+            
+            guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
+                let identifier = Int(identifierString)
+                else { return false }
+            
+            return self.view(dataType, identifier: identifier)
         }
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {

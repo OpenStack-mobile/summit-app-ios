@@ -12,8 +12,8 @@ func SetAppearance() {
     
     UINavigationBar.appearance().translucent = false
     UINavigationBar.appearance().barStyle = UIBarStyle.Black
-    UINavigationBar.appearance().barTintColor = UIColor(hexaString: "#214065")
+    UINavigationBar.appearance().barTintColor = UIColor(hexString: "#214065")
     UINavigationBar.appearance().tintColor = UIColor.whiteColor()
     
-    UISearchBar.appearance().tintColor = UIColor(hexaString: "#214065")
+    UISearchBar.appearance().tintColor = UIColor(hexString: "#214065")
 }

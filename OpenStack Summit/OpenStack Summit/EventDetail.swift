@@ -14,13 +14,14 @@ public struct EventDetail: CoreDataDecodable {
     
     // MARK: - Properties
     
-    public let id: Identifier
+    public let identifier: Identifier
     public let name: String
     public let summit: Identifier
     public let start: Date
     public let end: Date
     public let timeZone: String
     public let dateTime: String
+    public let day: String
     public let time: String
     public let location: String
     public let track: String
@@ -45,7 +46,7 @@ public struct EventDetail: CoreDataDecodable {
     
     public init(managedObject event: EventManagedObject) {
         
-        self.id = event.identifier
+        self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
         self.start = Date(foundation: event.start)
@@ -54,6 +55,7 @@ public struct EventDetail: CoreDataDecodable {
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)
+        self.day = ScheduleItem.getDay(event)
         self.time = ScheduleItem.getTime(event)
         self.track = ScheduleItem.getTrack(event)
         self.sponsors = ScheduleItem.getSponsors(event)
