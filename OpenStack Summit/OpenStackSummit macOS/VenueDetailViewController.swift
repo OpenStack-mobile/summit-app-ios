@@ -289,11 +289,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
             
             let imageView = self.venueImageView
             
-            let imageViewBounds = imageView.bounds
-            let imageSize = image.size
-            let imageFrame = NSMakeRect((NSWidth(imageViewBounds) - imageSize.width) / 2.0, (NSHeight(imageViewBounds) - imageSize.height) / 2.0, imageSize.width, imageSize.height)
-            
-            var frame = imageView.convertRect(imageFrame, toView: nil)
+            var frame = imageView.convertRect(imageView.bounds, toView: nil)
             frame = imageView.window!.convertRectToScreen(frame)
             return frame
             

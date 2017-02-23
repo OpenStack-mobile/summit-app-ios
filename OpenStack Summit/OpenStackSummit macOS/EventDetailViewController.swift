@@ -72,6 +72,18 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         shareButton.sendActionOn(.LeftMouseDown)
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        userActivity?.becomeCurrent()
+    }
+    
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        
+        userActivity?.resignCurrent()
+    }
+    
     // MARK: - Actions
     
     @IBAction func playVideo(sender: NSButton) {

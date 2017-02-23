@@ -11,9 +11,11 @@ import AppKit
 import CoreData
 import CoreSummit
 
-final class MemberProfileViewController: NSViewController, NSSharingServicePickerDelegate {
+final class MemberProfileViewController: NSViewController, NSSharingServicePickerDelegate, NSSharingServiceDelegate {
     
     // MARK: - IB Outlets
+    
+    @IBOutlet private(set) weak var shareButton: NSButton!
     
     @IBOutlet private(set) weak var nameLabel: NSTextField!
     
@@ -42,6 +44,20 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     var profile: MemberProfileIdentifier = .currentUser {
         
         didSet { loadData() }
+    }
+    
+    // MARK: - Loading
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        userActivity?.becomeCurrent()
+    }
+    
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        
+        userActivity?.resignCurrent()
     }
     
     // MARK: - Actions
@@ -179,5 +195,43 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         
         ircView.hidden = person.irc == nil
         ircLabel.stringValue = person.irc ?? ""
+    }
+    
+    // MARK: - NSSharingServicePickerDelegate
+    
+    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+        
+        var customItems = [NSSharingService]()
+        
+        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+            
+            customItems.append(airdrop)
+        }
+        
+        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+            
+            customItems.append(safariReadList)
+        }
+        
+        if let url = self.userActivity?.webpageURL?.absoluteString {
+            
+            let copyLink = NSSharingService(copyLink: url)
+            
+            customItems.append(copyLink)
+        }
+        
+        return customItems + proposedServices
+    }
+    
+    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate? {
+        
+        return self
+    }
+    
+    // MARK: - NSSharingServiceDelegate
+    
+    func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
+        
+        sharingService.subject = nameLabel.stringValue
     }
 }
