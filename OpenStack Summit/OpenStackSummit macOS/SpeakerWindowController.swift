@@ -10,9 +10,9 @@ import Foundation
 import AppKit
 import CoreSummit
 
-final class SpeakerWindowController: NSWindowController {
+final class SpeakerWindowController: NSWindowController, ContentController {
     
-    var speaker: Identifier? {
+    var contentIdentifier: Identifier = 0 {
         
         didSet { configureView() }
     }
@@ -26,8 +26,6 @@ final class SpeakerWindowController: NSWindowController {
         super.windowDidLoad()
         
         configureWindowAppearance()
-        
-        configureView()
     }
     
     private func configureWindowAppearance() {
@@ -47,11 +45,10 @@ final class SpeakerWindowController: NSWindowController {
     private func configureView() {
         
         // configure child view controller
-        speakerViewController.speaker = speaker
+        speakerViewController.speaker = contentIdentifier
         
         // set title
-        if let identifier = self.speaker,
-            let speaker = try! Speaker.find(identifier, context: Store.shared.managedObjectContext) {
+        if let speaker = try! Speaker.find(contentIdentifier, context: Store.shared.managedObjectContext) {
             
             window?.title = speaker.name
             

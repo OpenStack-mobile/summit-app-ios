@@ -41,14 +41,7 @@ final class SpeakersTableViewController: TableViewController {
         
         let speaker = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! SpeakerManagedObject
         
-        if let existingWindow = NSApp.windows.firstMatching({ ($0.windowController as? SpeakerWindowController)?.speaker == speaker.identifier }) {
-            
-            existingWindow.makeKeyAndOrderFront(nil)
-            
-        } else {
-            
-            self.performSegueWithIdentifier("showSpeaker", sender: nil)
-        }
+        AppDelegate.shared.mainWindowController.view(.speaker, identifier: speaker.identifier)
     }
     
     // MARK: - Private Methods
@@ -108,25 +101,6 @@ final class SpeakersTableViewController: TableViewController {
         configure(cell: cell, at: row)
         
         return cell
-    }
-    
-    // MARK: - Segue
-    
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        
-        switch segue.identifier! {
-            
-        case "showSpeaker":
-            
-            // get selected speaker
-            let speaker = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! SpeakerManagedObject
-            
-            // show window controller
-            let windowController = segue.destinationController as! SpeakerWindowController
-            windowController.speaker = speaker.identifier
-            
-        default: fatalError()
-        }
     }
 }
 

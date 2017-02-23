@@ -126,14 +126,7 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         
         let speaker = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
         
-        if let previousWindow = NSApp.windows.firstMatching({ ($0.windowController as? SpeakerWindowController)?.speaker == speaker.identifier }) {
-            
-            previousWindow.makeKeyAndOrderFront(nil)
-            
-        } else {
-            
-            self.performSegueWithIdentifier("showSpeaker", sender: nil)
-        }
+        AppDelegate.shared.mainWindowController.view(.speaker, identifier: speaker.identifier)
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -148,29 +141,5 @@ final class SpeakersViewController: NSViewController, NSFetchedResultsController
         //self.tableView.endUpdates()
         
         self.collectionView.reloadData()
-    }
-    
-    // MARK: - Segue
-    
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        
-        switch segue.identifier! {
-            
-        case "showSpeaker":
-            
-            // get selected speaker
-            
-            let indexPath = collectionView.selectionIndexPaths.first!
-            
-            let speaker = fetchedResultsController.objectAtIndexPath(indexPath) as! SpeakerManagedObject
-            
-            // show window controller
-            
-            let windowController = segue.destinationController as! SpeakerWindowController
-            
-            windowController.speaker = speaker.identifier
-            
-        default: fatalError()
-        }
     }
 }

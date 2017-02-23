@@ -10,9 +10,9 @@ import Foundation
 import AppKit
 import CoreSummit
 
-final class EventWindowController: NSWindowController {
+final class EventWindowController: NSWindowController, ContentController {
     
-    var event: Identifier? {
+    var contentIdentifier: Identifier = 0 {
         
         didSet { configureView() }
     }
@@ -47,11 +47,10 @@ final class EventWindowController: NSWindowController {
     private func configureView() {
         
         // configure child view controller
-        eventViewController.event = event
+        eventViewController.contentIdentifier = contentIdentifier
         
         // set title
-        if let identifier = self.event,
-            let event = try! Event.find(identifier, context: Store.shared.managedObjectContext) {
+        if let event = try! Event.find(contentIdentifier, context: Store.shared.managedObjectContext) {
             
             window?.title = event.name
             

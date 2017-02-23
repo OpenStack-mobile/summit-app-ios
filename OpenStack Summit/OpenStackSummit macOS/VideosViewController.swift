@@ -120,12 +120,10 @@ final class VideosViewController: NSViewController, NSFetchedResultsControllerDe
         defer { collectionView.deselectItemsAtIndexPaths(indexPaths) }
         
         indexPaths.forEach {
-            
+                        
             let video = fetchedResultsController.objectAtIndexPath($0) as! VideoManagedObject
             
-            let url = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube)!
-            
-            NSWorkspace.sharedWorkspace().openURL(url)
+            AppDelegate.shared.mainWindowController.view(.video, identifier: video.identifier)
         }
     }
     

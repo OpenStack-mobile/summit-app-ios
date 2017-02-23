@@ -47,14 +47,7 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
         
         let event = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
         
-        if let existingWindow = NSApp.windows.firstMatching({ ($0.windowController as? EventWindowController)?.event == event.identifier }) {
-            
-            existingWindow.makeKeyAndOrderFront(nil)
-            
-        } else {
-            
-            self.performSegueWithIdentifier("showEvent", sender: nil)
-        }
+        AppDelegate.shared.mainWindowController.view(.event, identifier: event.identifier)
     }
     
     // MARK: - Private Methods
@@ -161,25 +154,6 @@ final class EventsViewController: NSViewController, NSTableViewDataSource, NSTab
             }
         }
     }*/
-    
-    // MARK: - Segue
-    
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        
-        switch segue.identifier! {
-            
-        case "showEvent":
-            
-            // get selected event
-            let event = fetchedResultsController.fetchedObjects![tableView.selectedRow] as! EventManagedObject
-            
-            // show window controller
-            let windowController = segue.destinationController as! EventWindowController
-            windowController.event = event.identifier
-            
-        default: fatalError()
-        }
-    }
 }
 
 // MARK: - Supporting Types

@@ -38,7 +38,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         //try! Store.shared.clear()
         //#endif
         
-        
     }
 
     func applicationWillTerminate(notification: NSNotification) {
@@ -63,7 +62,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     func application(application: NSApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]) -> Void) -> Bool {
         
-        print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo ?? [:])")
+        print("Continue activity \(userActivity.activityType)\n\(userActivity.webpageURL?.description ?? "")\n\(userActivity.userInfo?.description ?? "")")
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             
@@ -71,7 +70,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             guard let url = userActivity.webpageURL
                 else { return false }
             
-            guard mainWindowController.mainViewController.openWebURL(url)
+            guard mainWindowController.openWebURL(url)
                 else { NSWorkspace.sharedWorkspace().openURL(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
@@ -81,7 +80,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
                 else { return false }
             
-            return mainWindowController.mainViewController.view(dataType, identifier: identifier)
+            return mainWindowController.view(dataType, identifier: identifier)
             
         } else if userActivity.activityType == AppActivity.screen.rawValue {
             
@@ -89,7 +88,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let screen = AppActivityScreen(rawValue: screenString)
                 else { return false }
             
-            mainWindowController.mainViewController.view(screen)
+            mainWindowController.view(screen)
         }
         
         return false

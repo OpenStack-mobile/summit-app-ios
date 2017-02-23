@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -28,12 +30,12 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SummitEnvironment</key>
-	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>org.openstack.summit.viewScreen</string>
 		<string>org.openstack.summit.viewSummit</string>
 	</array>
+	<key>SummitEnvironment</key>
+	<string>$(CORESUMMIT_ENVIRONMENT)</string>
 </dict>
 </plist>

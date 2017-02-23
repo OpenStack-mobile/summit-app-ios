@@ -13,7 +13,7 @@ import CoreSummit
 import EventKit
 
 @objc(OSSEventDetailViewController)
-final class EventDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate, MessageEnabledViewController {
+final class EventDetailViewController: NSViewController, ContentController, MessageEnabledViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate  {
     
     // MARK: - IB Outlets
     
@@ -53,7 +53,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     // MARK: - Properties
     
-    var event: Identifier! {
+    var contentIdentifier: Identifier = 0 {
         
         didSet { didSetEvent() }
     }
@@ -119,24 +119,19 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     private func didSetEvent() {
         
-        if let event = self.event {
-            
-            let entityController = EntityController<EventDetail>(identifier: event,
-                                                                 entity: EventManagedObject.self,
-                                                                 context: Store.shared.managedObjectContext)
-            
-            entityController.event.updated = { [weak self] in self?.configureView($0) }
-            
-            entityController.event.deleted = { [weak self] _ in self?.dismissController(nil) }
-            
-            entityController.enabled = true
-            
-            self.entityController = entityController
-            
-        } else {
-            
-            entityController = nil
-        }
+        let event = self.contentIdentifier
+        
+        let entityController = EntityController<EventDetail>(identifier: event,
+                                                             entity: EventManagedObject.self,
+                                                             context: Store.shared.managedObjectContext)
+        
+        entityController.event.updated = { [weak self] in self?.configureView($0) }
+        
+        entityController.event.deleted = { [weak self] _ in self?.dismissController(nil) }
+        
+        entityController.enabled = true
+        
+        self.entityController = entityController
     }
     
     private func configureView(event: EventDetail) {
@@ -189,7 +184,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
         userActivity.title = eventDetail.name
         userActivity.webpageURL = eventDetail.webpageURL
-        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
+        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.contentIdentifier]
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         
         self.userActivity = userActivity
