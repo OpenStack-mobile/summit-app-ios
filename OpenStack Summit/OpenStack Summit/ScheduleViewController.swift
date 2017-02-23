@@ -429,7 +429,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         if dayEvents.isEmpty == false {
             
-            self.scheduleView.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .Top)
+            self.scheduleView.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }
     
