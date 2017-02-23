@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 import CoreSummit
 
-final class MainViewController: NSViewController, SearchableController, SummitActivityHandling {
+final class MainViewController: NSTabViewController, SearchableController, SummitActivityHandling {
     
     // MARK: - Properties
     
@@ -40,6 +40,8 @@ final class MainViewController: NSViewController, SearchableController, SummitAc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.subviews.firstMatching({ $0 is NSSegmentedControl })?.hidden = true
         
         summitObserver = SummitManager.shared.summit.observe { [weak self] _ in self?.configureView() }
         
@@ -97,37 +99,7 @@ final class MainViewController: NSViewController, SearchableController, SummitAc
     private func updateContent() {
         
         // set content tab
-                
-        let storyboardName: String
-        
-        let content = self.currentContent
-        
-        switch content {
-        case .events: storyboardName = "Events"
-        case .venues: storyboardName = "Venues"
-        case .speakers: storyboardName = "Speakers"
-        case .videos: storyboardName = "Videos"
-        }
-        
-        // set content view controler
-        
-        if let cachedViewController = contentViewControllersCache[content] {
-            
-            contentViewController = cachedViewController
-            
-        } else {
-            
-            let storyboard = NSStoryboard(name: storyboardName, bundle: nil)
-            
-            let viewController = storyboard.instantiateInitialController() as? NSViewController
-            
-            contentViewControllersCache[content] = viewController
-            
-            contentViewController = viewController
-        }
-        
-        // restore old frame
-        window!.setFrame(windowFrame, display: true)
+        self.selectedTabViewItemIndex = currentContent.rawValue
         
         // apply filter to new content view controller
         filter()
@@ -136,7 +108,7 @@ final class MainViewController: NSViewController, SearchableController, SummitAc
     // MARK: - SummitActivityHandling
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
-        
+        /*
         // find in cache
         guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
             else { return false }
@@ -166,7 +138,7 @@ final class MainViewController: NSViewController, SearchableController, SummitAc
             
             
         }
-        
+        */
         return true
     }
     
@@ -176,22 +148,22 @@ final class MainViewController: NSViewController, SearchableController, SummitAc
             
         case .venues:
             
-            self.window!.makeKeyAndOrderFront(nil)
+            self.view.window!.makeKeyAndOrderFront(nil)
             self.currentContent = .venues
             
         case .events:
             
-            self.window!.makeKeyAndOrderFront(nil)
+            self.view.window!.makeKeyAndOrderFront(nil)
             self.currentContent = .events
             
         case .speakers:
             
-            self.window!.makeKeyAndOrderFront(nil)
+            self.view.window!.makeKeyAndOrderFront(nil)
             self.currentContent = .speakers
             
         case .about:
             
-            self.window!.makeKeyAndOrderFront(nil)
+            self.view.window!.makeKeyAndOrderFront(nil)
             self.currentContent = .venues
         }
     }

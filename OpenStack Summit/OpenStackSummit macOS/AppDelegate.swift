@@ -71,7 +71,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             guard let url = userActivity.webpageURL
                 else { return false }
             
-            guard mainWindowController.openWebURL(url)
+            guard mainWindowController.mainViewController.openWebURL(url)
                 else { NSWorkspace.sharedWorkspace().openURL(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
@@ -81,7 +81,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
                 else { return false }
             
-            return mainWindowController.view(dataType, identifier: identifier)
+            return mainWindowController.mainViewController.view(dataType, identifier: identifier)
             
         } else if userActivity.activityType == AppActivity.screen.rawValue {
             
@@ -89,10 +89,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let screen = AppActivityScreen(rawValue: screenString)
                 else { return false }
             
-            mainWindowController.view(screen)
+            mainWindowController.mainViewController.view(screen)
         }
         
         return false
     }
 }
-

@@ -744,28 +744,71 @@
                     </window>
                     <connections>
                         <outlet property="contentSegmentedControl" destination="84L-gP-hwv" id="brQ-VU-nzG"/>
-                        <segue destination="Zep-O2-c8I" kind="relationship" relationship="window.shadowedContentViewController" id="rss-Og-qM6"/>
+                        <segue destination="8B1-W4-Jjr" kind="relationship" relationship="window.shadowedContentViewController" id="Bve-vZ-Iew"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-694" y="135"/>
         </scene>
-        <!--Main View Controller-->
-        <scene sceneID="n3a-QK-4Lo">
+        <!--OpenStack Summit-->
+        <scene sceneID="2H9-5T-wSZ">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" showSeguePresentationStyle="single" id="Zep-O2-c8I" customClass="MainViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="f0h-2s-al2">
+                <tabViewController title="OpenStack Summit" storyboardIdentifier="MainViewController" showSeguePresentationStyle="single" selectedTabViewItemIndex="0" canPropagateSelectedChildViewControllerTitle="NO" id="8B1-W4-Jjr" customClass="MainViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem id="46U-Rp-fvG"/>
+                        <tabViewItem id="1VW-9l-Pfr"/>
+                        <tabViewItem id="Aal-wG-V1b"/>
+                        <tabViewItem id="roU-jo-MuE"/>
+                    </tabViewItems>
+                    <tabView key="tabView" drawsBackground="NO" allowsTruncatedLabels="NO" type="noTabsNoBorder" id="4GZ-tJ-S04">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                    </view>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                    </tabView>
                     <connections>
-                        <segue destination="n80-Qh-adB" kind="show" identifier="showPreferences" id="adT-Ns-sL4"/>
+                        <segue destination="fzG-BY-9bN" kind="relationship" relationship="tabItems" id="tBb-Gb-NbF"/>
+                        <segue destination="ILb-UN-vOs" kind="relationship" relationship="tabItems" id="ucp-vW-CDQ"/>
+                        <segue destination="Top-Nu-Gga" kind="relationship" relationship="tabItems" id="dBK-ij-KD1"/>
+                        <segue destination="kcN-vs-Tu7" kind="relationship" relationship="tabItems" id="1Zn-ex-rTd"/>
                     </connections>
-                </viewController>
-                <customObject id="bL2-fH-3G1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </tabViewController>
+                <customObject id="A3p-mM-zsU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-694" y="816"/>
+            <point key="canvasLocation" x="-694" y="807"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="Dv6-Cq-tec">
+            <objects>
+                <controllerPlaceholder storyboardName="Events" id="fzG-BY-9bN" sceneMemberID="viewController"/>
+                <customObject id="gpl-cu-0GG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-267" y="646"/>
+        </scene>
+        <!--Venues-->
+        <scene sceneID="Luh-ix-UhF">
+            <objects>
+                <controllerPlaceholder storyboardName="Venues" id="ILb-UN-vOs" sceneMemberID="viewController"/>
+                <customObject id="dfK-5o-wd7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-266" y="744"/>
+        </scene>
+        <!--Speakers-->
+        <scene sceneID="b7a-75-3lQ">
+            <objects>
+                <controllerPlaceholder storyboardName="Speakers" id="Top-Nu-Gga" sceneMemberID="viewController"/>
+                <customObject id="maC-bp-usS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-262" y="818"/>
+        </scene>
+        <!--Videos-->
+        <scene sceneID="cqs-5c-ycb">
+            <objects>
+                <controllerPlaceholder storyboardName="Videos" id="kcN-vs-Tu7" sceneMemberID="viewController"/>
+                <customObject id="DGw-1H-58P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-266" y="935"/>
         </scene>
         <!--Preferences Window Controller-->
         <scene sceneID="vL6-Yh-Vvb">
@@ -1121,7 +1164,4 @@
         <image name="NSUser" width="32" height="32"/>
         <image name="SidebarCalendar" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="adT-Ns-sL4"/>
-    </inferredMetricsTieBreakers>
 </document>
