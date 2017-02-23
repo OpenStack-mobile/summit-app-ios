@@ -253,6 +253,16 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         
         var customItems = [NSSharingService]()
         
+        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+            
+            customItems.append(airdrop)
+        }
+        
+        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+            
+            customItems.append(safariReadList)
+        }
+        
         if let url = eventDetail.webpageURL.absoluteString {
             
             let copyLink = NSSharingService(copyLink: url)
@@ -281,7 +291,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
         
-        
+        sharingService.subject = eventDetail.name
     }
     
     // MARK: - Segue

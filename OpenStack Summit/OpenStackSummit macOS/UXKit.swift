@@ -25,3 +25,8 @@ public extension NSIndexPath {
         self.init(forItem: row, inSection: section)
     }
 }
+
+extension NSPopover {
+    
+    static var windowClassName: String { return "_NSPopoverWindow" }
+}

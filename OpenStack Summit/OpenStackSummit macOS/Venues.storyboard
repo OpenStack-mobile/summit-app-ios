@@ -232,7 +232,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </customView>
                                     <customView horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="YmH-yJ-dAE">
-                                        <rect key="frame" x="0.0" y="418.5" width="350" height="233.5"/>
+                                        <rect key="frame" x="0.0" y="419" width="350" height="233.5"/>
                                         <subviews>
                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8F5-Wd-llS">
                                                 <rect key="frame" x="0.0" y="-1" width="350" height="233.5"/>
@@ -242,7 +242,7 @@
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSComputer" id="rtV-Gy-LTA"/>
                                             </imageView>
                                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="JI4-sz-yjQ">
-                                                <rect key="frame" x="159" y="100" width="32" height="32"/>
+                                                <rect key="frame" x="159" y="100.5" width="32" height="32"/>
                                             </progressIndicator>
                                         </subviews>
                                         <constraints>
@@ -470,6 +470,8 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                         <outlet property="mapImagesCollectionView" destination="68S-S7-Ifc" id="3xv-pQ-vIb"/>
                         <outlet property="mapImagesView" destination="QvC-e1-hoS" id="bDq-Qo-X48"/>
                         <outlet property="nameLabel" destination="SHY-9I-rr9" id="ZK7-fe-DO6"/>
+                        <outlet property="shareButton" destination="jfa-Ss-6h2" id="LdN-cC-NMN"/>
+                        <outlet property="sourceItemView" destination="YmH-yJ-dAE" id="Jx6-Yj-aIg"/>
                         <outlet property="venueImageActivityIndicator" destination="JI4-sz-yjQ" id="YZD-GG-YX7"/>
                         <outlet property="venueImageView" destination="8F5-Wd-llS" id="PKH-Rc-sBc"/>
                         <outlet property="venueImageViewContainer" destination="YmH-yJ-dAE" id="ZaT-hT-TTk"/>

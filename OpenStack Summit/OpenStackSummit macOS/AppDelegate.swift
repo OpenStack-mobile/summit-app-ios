@@ -12,9 +12,13 @@ import CoreSummit
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
+    static var shared: AppDelegate { return NSApp.delegate as! AppDelegate }
+    
     // MARK: - Properties
     
     private var preferencesWindowController: NSWindowController?
+    
+    lazy var mainWindowController: MainWindowController = NSApp.windows.firstMatching({ $0.windowController is MainWindowController })!.windowController as! MainWindowController
     
     // MARK: - NSApplicationDelegate
 
@@ -58,7 +62,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldHandleReopen(application: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         
         application.windows
-            .filter { $0.className != "_NSPopoverWindow" }
+            .filter { $0.className != NSPopover.windowClassName }
             .forEach { $0.makeKeyAndOrderFront(application) }
         
         return true

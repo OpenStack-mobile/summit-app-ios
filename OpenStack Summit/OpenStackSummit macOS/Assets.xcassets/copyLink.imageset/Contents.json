@@ -1,17 +1,14 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "mac",
+      "filename" : "Very-Basic-Copy-Filled-icon-3.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
-      "filename" : "Very-Basic-Copy-Filled-icon-2.png",
+      "idiom" : "mac",
+      "filename" : "Very-Basic-Copy-Filled-icon-4.png",
       "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
     }
   ],
   "info" : {

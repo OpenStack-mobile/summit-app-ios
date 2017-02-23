@@ -12,10 +12,12 @@ import CoreData
 import CoreSummit
 
 @objc(OSSVenueDetailViewController)
-final class VenueDetailViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, NSSharingServicePickerDelegate {
+final class VenueDetailViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate {
     
     // MARK: - IB Outlets
-        
+    
+    @IBOutlet private(set) weak var shareButton: NSButton!
+    
     @IBOutlet private(set) weak var nameLabel: NSTextField!
     
     @IBOutlet private(set) weak var addressLabel: NSTextField!
@@ -54,7 +56,7 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        shareButton.sendActionOn(.LeftMouseDown)
     }
     
     // MARK: - Actions
@@ -246,6 +248,70 @@ final class VenueDetailViewController: NSViewController, NSCollectionViewDataSou
         if let url = NSURL(string: imageString) {
             
             NSWorkspace.sharedWorkspace().openURL(url)
+        }
+    }
+    
+    // MARK: - NSSharingServicePickerDelegate
+    
+    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [AnyObject], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+        
+        var customItems = [NSSharingService]()
+        
+        if let airdrop = NSSharingService(named: NSSharingServiceNameSendViaAirDrop) {
+            
+            customItems.append(airdrop)
+        }
+        
+        /*
+        if let safariReadList = NSSharingService(named: NSSharingServiceNameAddToSafariReadingList) {
+            
+            customItems.append(safariReadList)
+        }*/
+        
+        return customItems + proposedServices
+    }
+    
+    func sharingServicePicker(sharingServicePicker: NSSharingServicePicker, delegateForSharingService sharingService: NSSharingService) -> NSSharingServiceDelegate? {
+        
+        return self
+    }
+    
+    // MARK: - NSSharingServiceDelegate
+    
+    func sharingService(sharingService: NSSharingService, willShareItems items: [AnyObject]) {
+        
+        sharingService.subject = nameLabel.stringValue
+    }
+    
+    func sharingService(sharingService: NSSharingService, sourceFrameOnScreenForShareItem item: AnyObject) -> NSRect {
+        
+        if let image = item as? NSImage where image == self.venueImageView.image {
+            
+            let imageView = self.venueImageView
+            
+            let imageViewBounds = imageView.bounds
+            let imageSize = image.size
+            let imageFrame = NSMakeRect((NSWidth(imageViewBounds) - imageSize.width) / 2.0, (NSHeight(imageViewBounds) - imageSize.height) / 2.0, imageSize.width, imageSize.height)
+            
+            var frame = imageView.convertRect(imageFrame, toView: nil)
+            frame = imageView.window!.convertRectToScreen(frame)
+            return frame
+            
+        } else {
+            
+            return .zero
+        }
+    }
+    
+    func sharingService(sharingService: NSSharingService, sourceWindowForShareItems items: [AnyObject], sharingContentScope: UnsafeMutablePointer<NSSharingContentScope>) -> NSWindow? {
+        
+        if self.view.window?.className == NSPopover.windowClassName {
+            
+            return presentingViewController?.view.window
+            
+        } else {
+            
+            return view.window
         }
     }
 }
