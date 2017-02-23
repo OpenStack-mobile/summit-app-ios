@@ -73,6 +73,7 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
             userActivity.title = "Summit Schedule"
             userActivity.webpageURL = NSURL(string: summit.webpageURL + "/summit-schedule")
             userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
+            userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
             
             self.userActivity = userActivity
         }

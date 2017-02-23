@@ -224,26 +224,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             return true
         }
         
-        print("Continue activity \(userActivity.activityType)")
+        print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo?.description ?? "")")
         
-        if #available(iOS 9.0, *) {
+        if userActivity.activityType == CSSearchableItemActionType {
             
-            if userActivity.activityType == CSSearchableItemActionType {
-                
-                guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-                    let searchURL = NSURL(string: searchIdentifierString)
-                    where searchURL.pathComponents?.count == 2
-                    else { return false }
-                
-                let searchTypeString = searchURL.pathComponents![0]
-                let identifierString = searchURL.pathComponents![1]
-                
-                guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
-                    let identifier = Int(identifierString)
-                    else { return false }
-                
-                return self.view(dataType, identifier: identifier)
-            }
+            guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                let searchURL = NSURL(string: searchIdentifierString)
+                where searchURL.pathComponents?.count == 2
+                else { return false }
+            
+            let searchTypeString = searchURL.pathComponents![0]
+            let identifierString = searchURL.pathComponents![1]
+            
+            guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
+                let identifier = Int(identifierString)
+                else { return false }
+            
+            return self.view(dataType, identifier: identifier)
         }
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {

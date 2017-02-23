@@ -42,6 +42,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         userActivity.title = "About the Summit"
         userActivity.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
+        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
         self.userActivity = userActivity
         
         // setup UI
@@ -57,10 +58,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if #available(iOS 9.0, *) {
-            
-            userActivity?.resignCurrent()
-        }
+        userActivity?.resignCurrent()
     }
     
     // MARK: - Actions
