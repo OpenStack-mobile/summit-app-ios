@@ -39,6 +39,15 @@ final class VenuesSplitViewController: NSSplitViewController, SearchableControll
         configureView()
     }
     
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
+    }
+    
     // MARK: - Private Functions
     
     private func configureView() {
@@ -59,6 +68,22 @@ final class VenuesSplitViewController: NSSplitViewController, SearchableControll
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [mapVenuesPredicate, searchPredicate])
         
         venueDirectoryViewController.predicate = predicate
+        
+        // set user activity
+        if let summitManagedObject = self.currentSummit {
+            
+            let summit = Summit(managedObject: summitManagedObject)
+            
+            // set user activity for handoff
+            let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
+            userActivity.title = "Venues"
+            userActivity.webpageURL = NSURL(string: summit.webpageURL + "/travel")
+            userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
+            userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
+            userActivity.becomeCurrent()
+            
+            self.userActivity = userActivity
+        }
     }
     
     // MARK: - VenueDirectoryViewControllerDelegate
