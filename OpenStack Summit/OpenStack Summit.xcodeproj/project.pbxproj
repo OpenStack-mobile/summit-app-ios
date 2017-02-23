@@ -409,10 +409,6 @@
 		6E4E24621E24258D00F7F3FB /* SearchMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E24611E24258D00F7F3FB /* SearchMembersViewController.swift */; };
 		6E5054971E5D583600AD75FF /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5054961E5D583600AD75FF /* ImageCell.swift */; };
 		6E5145451E5ED36B007FA666 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5145441E5ED36B007FA666 /* ContentViewController.swift */; };
-		6E51454E1E5F1298007FA666 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E51454D1E5F1298007FA666 /* main.c */; };
-		6E5145501E5F1298007FA666 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E51454F1E5F1298007FA666 /* GetMetadataForFile.m */; };
-		6E5145531E5F1298007FA666 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5145521E5F1298007FA666 /* MySpotlightImporter.m */; };
-		6E5145581E5F1298007FA666 /* SpotlightImporter.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 6E51454A1E5F1298007FA666 /* SpotlightImporter.mdimporter */; };
 		6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52FCBA1D130553006A7302 /* StoreTests.swift */; };
 		6E53B2A31D850FE600641A8F /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E53B2A21D850FE600641A8F /* Speakers.storyboard */; };
 		6E53B2A51D8524F500641A8F /* SpeakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */; };
@@ -1050,13 +1046,6 @@
 			remoteGlobalIDString = 6E0B5EB21D77C8950005F6CE;
 			remoteInfo = "CoreSummit WatchOS";
 		};
-		6E5145561E5F1298007FA666 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6E5145491E5F1298007FA666;
-			remoteInfo = SpotlightImporter;
-		};
 		6E65D20C1E4F78D200F8F582 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E104D261D1061AC00541E84 /* Project object */;
@@ -1414,13 +1403,6 @@
 		6E4E24611E24258D00F7F3FB /* SearchMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMembersViewController.swift; sourceTree = "<group>"; };
 		6E5054961E5D583600AD75FF /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		6E5145441E5ED36B007FA666 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
-		6E51454A1E5F1298007FA666 /* SpotlightImporter.mdimporter */ = {isa = PBXFileReference; explicitFileType = "wrapper.spotlight-importer"; includeInIndex = 0; path = SpotlightImporter.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E51454D1E5F1298007FA666 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		6E51454F1E5F1298007FA666 /* GetMetadataForFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
-		6E5145511E5F1298007FA666 /* MySpotlightImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySpotlightImporter.h; sourceTree = "<group>"; };
-		6E5145521E5F1298007FA666 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
-		6E5145541E5F1298007FA666 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
-		6E5145551E5F1298007FA666 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E52FCBA1D130553006A7302 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		6E53B2A21D850FE600641A8F /* Speakers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speakers.storyboard; sourceTree = "<group>"; };
 		6E53B2A41D8524F500641A8F /* SpeakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakersViewController.swift; sourceTree = "<group>"; };
@@ -1786,13 +1768,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6E5145471E5F1298007FA666 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6E65D2011E4F78D100F8F582 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1884,7 +1859,6 @@
 				6E9F28F01D7C903E002B7C7A /* OpenStackSummitTV */,
 				6E65D2081E4F78D100F8F582 /* OpenStackSummitTVService */,
 				6E75586E1E58C62B003B6844 /* OpenStackSummit macOS */,
-				6E51454B1E5F1298007FA666 /* SpotlightImporter */,
 				6E65D2051E4F78D100F8F582 /* Frameworks */,
 				6E104D2F1D1061AC00541E84 /* Products */,
 			);
@@ -1907,7 +1881,6 @@
 				6E7558431E58C48C003B6844 /* CoreSummit.framework */,
 				6E7558671E58C4A7003B6844 /* CoreSummitTests.xctest */,
 				6E75586D1E58C62B003B6844 /* OpenStackSummit.app */,
-				6E51454A1E5F1298007FA666 /* SpotlightImporter.mdimporter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2285,27 +2258,6 @@
 				6E57DDC61E4AD22100783BA6 /* PresentPopover.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		6E51454B1E5F1298007FA666 /* SpotlightImporter */ = {
-			isa = PBXGroup;
-			children = (
-				6E51454F1E5F1298007FA666 /* GetMetadataForFile.m */,
-				6E5145511E5F1298007FA666 /* MySpotlightImporter.h */,
-				6E5145521E5F1298007FA666 /* MySpotlightImporter.m */,
-				6E5145541E5F1298007FA666 /* Importer Read Me.txt */,
-				6E5145551E5F1298007FA666 /* Info.plist */,
-				6E51454C1E5F1298007FA666 /* Supporting Files */,
-			);
-			path = SpotlightImporter;
-			sourceTree = "<group>";
-		};
-		6E51454C1E5F1298007FA666 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6E51454D1E5F1298007FA666 /* main.c */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		6E53B2A11D850F4F00641A8F /* Speakers */ = {
@@ -3056,23 +3008,6 @@
 			productReference = 6E2924281D7AF8CC00D14F0A /* CoreSummitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6E5145491E5F1298007FA666 /* SpotlightImporter */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6E51455D1E5F1298007FA666 /* Build configuration list for PBXNativeTarget "SpotlightImporter" */;
-			buildPhases = (
-				6E5145461E5F1298007FA666 /* Sources */,
-				6E5145471E5F1298007FA666 /* Frameworks */,
-				6E5145481E5F1298007FA666 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SpotlightImporter;
-			productName = SpotlightImporter;
-			productReference = 6E51454A1E5F1298007FA666 /* SpotlightImporter.mdimporter */;
-			productType = "com.apple.product-type.spotlight-importer";
-		};
 		6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackSummitTVService" */;
@@ -3144,7 +3079,6 @@
 			);
 			dependencies = (
 				6E7558861E58D0B8003B6844 /* PBXTargetDependency */,
-				6E5145571E5F1298007FA666 /* PBXTargetDependency */,
 			);
 			name = "OpenStackSummit macOS";
 			productName = Summit;
@@ -3214,11 +3148,6 @@
 					};
 					6E10A4F91D1066E9008CBD0C = {
 						CreatedOnToolsVersion = 7.3.1;
-					};
-					6E5145491E5F1298007FA666 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 775U6X6R5M;
-						ProvisioningStyle = Automatic;
 					};
 					6E65D2031E4F78D100F8F582 = {
 						CreatedOnToolsVersion = 8.1;
@@ -3290,7 +3219,6 @@
 				6E9F28EE1D7C903E002B7C7A /* OpenStackSummitTV */,
 				6E65D2031E4F78D100F8F582 /* OpenStackSummitTVService */,
 				6E75586C1E58C62B003B6844 /* OpenStackSummit macOS */,
-				6E5145491E5F1298007FA666 /* SpotlightImporter */,
 			);
 		};
 /* End PBXProject section */
@@ -3454,13 +3382,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6E5145481E5F1298007FA666 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6E65D2021E4F78D100F8F582 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3509,7 +3430,6 @@
 				6E31EC8C1E5B5B1F000E5BAC /* PersonCollectionViewItem.xib in Resources */,
 				6E31ECA11E5B8549000E5BAC /* Videos.storyboard in Resources */,
 				6E31EC9D1E5B852A000E5BAC /* Events.storyboard in Resources */,
-				6E5145581E5F1298007FA666 /* SpotlightImporter.mdimporter in Resources */,
 				6E31EC931E5B7362000E5BAC /* VideoCollectionViewItem.xib in Resources */,
 				6E7558741E58C62B003B6844 /* Assets.xcassets in Resources */,
 				6E31EC9F1E5B8538000E5BAC /* Venues.storyboard in Resources */,
@@ -4406,16 +4326,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6E5145461E5F1298007FA666 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6E5145531E5F1298007FA666 /* MySpotlightImporter.m in Sources */,
-				6E51454E1E5F1298007FA666 /* main.c in Sources */,
-				6E5145501E5F1298007FA666 /* GetMetadataForFile.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6E65D2001E4F78D100F8F582 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4721,11 +4631,6 @@
 			isa = PBXTargetDependency;
 			target = 6E0B5EB21D77C8950005F6CE /* CoreSummit watchOS */;
 			targetProxy = 6E28872F1D77E6A5009B8E62 /* PBXContainerItemProxy */;
-		};
-		6E5145571E5F1298007FA666 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6E5145491E5F1298007FA666 /* SpotlightImporter */;
-			targetProxy = 6E5145561E5F1298007FA666 /* PBXContainerItemProxy */;
 		};
 		6E65D20D1E4F78D200F8F582 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5360,86 +5265,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.CoreSummitTests;
 				PRODUCT_NAME = CoreSummitTests;
 				SDKROOT = appletvos;
-			};
-			name = Beta;
-		};
-		6E5145591E5F1298007FA666 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 775U6X6R5M;
-				INFOPLIST_FILE = SpotlightImporter/Info.plist;
-				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.SpotlightImporter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = mdimporter;
-			};
-			name = Debug;
-		};
-		6E51455A1E5F1298007FA666 /* Mocked */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 775U6X6R5M;
-				INFOPLIST_FILE = SpotlightImporter/Info.plist;
-				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.SpotlightImporter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = mdimporter;
-			};
-			name = Mocked;
-		};
-		6E51455B1E5F1298007FA666 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 775U6X6R5M;
-				INFOPLIST_FILE = SpotlightImporter/Info.plist;
-				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.SpotlightImporter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = mdimporter;
-			};
-			name = Release;
-		};
-		6E51455C1E5F1298007FA666 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 775U6X6R5M;
-				INFOPLIST_FILE = SpotlightImporter/Info.plist;
-				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
-				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.SpotlightImporter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Beta;
 		};
@@ -6354,16 +6179,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		6E51455D1E5F1298007FA666 /* Build configuration list for PBXNativeTarget "SpotlightImporter" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E5145591E5F1298007FA666 /* Debug */,
-				6E51455A1E5F1298007FA666 /* Mocked */,
-				6E51455B1E5F1298007FA666 /* Release */,
-				6E51455C1E5F1298007FA666 /* Beta */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 		6E65D2131E4F78D200F8F582 /* Build configuration list for PBXNativeTarget "OpenStackSummitTVService" */ = {
 			isa = XCConfigurationList;
