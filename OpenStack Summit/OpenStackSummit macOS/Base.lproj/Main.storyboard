@@ -744,12 +744,28 @@
                     </window>
                     <connections>
                         <outlet property="contentSegmentedControl" destination="84L-gP-hwv" id="brQ-VU-nzG"/>
-                        <outlet property="toggleSidebarToolbarItem" destination="qfD-B4-zwX" id="H0l-wI-qtl"/>
+                        <segue destination="Zep-O2-c8I" kind="relationship" relationship="window.shadowedContentViewController" id="rss-Og-qM6"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-694" y="135"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="n3a-QK-4Lo">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" showSeguePresentationStyle="single" id="Zep-O2-c8I" customClass="MainViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="f0h-2s-al2">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                    <connections>
+                        <segue destination="n80-Qh-adB" kind="show" identifier="showPreferences" id="adT-Ns-sL4"/>
+                    </connections>
+                </viewController>
+                <customObject id="bL2-fH-3G1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-694" y="816"/>
         </scene>
         <!--Preferences Window Controller-->
         <scene sceneID="vL6-Yh-Vvb">
@@ -766,7 +782,7 @@
                 </windowController>
                 <customObject id="X4K-Jf-ZkY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="254" y="-108"/>
+            <point key="canvasLocation" x="253" y="-101"/>
         </scene>
         <!--Preferences-->
         <scene sceneID="BR6-eb-aAr">
@@ -1105,4 +1121,7 @@
         <image name="NSUser" width="32" height="32"/>
         <image name="SidebarCalendar" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="adT-Ns-sL4"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -190,6 +190,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         userActivity.title = eventDetail.name
         userActivity.webpageURL = eventDetail.webpageURL
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
+        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         
         self.userActivity = userActivity
     }

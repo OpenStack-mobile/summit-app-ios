@@ -30,5 +30,10 @@
 	<string>NSApplication</string>
 	<key>SummitEnvironment</key>
 	<string>$(CORESUMMIT_ENVIRONMENT)</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>org.openstack.summit.viewScreen</string>
+		<string>org.openstack.summit.viewSummit</string>
+	</array>
 </dict>
 </plist>

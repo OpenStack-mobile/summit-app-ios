@@ -16,8 +16,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Properties
     
-    private var preferencesWindowController: NSWindowController?
-    
     lazy var mainWindowController: MainWindowController = NSApp.windows.firstMatching({ $0.windowController is MainWindowController })!.windowController as! MainWindowController
     
     // MARK: - NSApplicationDelegate
@@ -40,17 +38,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         //try! Store.shared.clear()
         //#endif
         
-        // Show preferences
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-        
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            
-            if try! Summit.find(SummitManager.shared.summit.value, context: Store.shared.managedObjectContext) == nil {
-                
-                self?.showPreferences()
-            }
-        }
     }
 
     func applicationWillTerminate(notification: NSNotification) {
@@ -73,16 +61,38 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return false
     }
     
-    // MARK: - Actions
-    
-    @IBAction func showPreferences(sender: AnyObject? = nil) {
+    func application(application: NSApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]) -> Void) -> Bool {
         
-        preferencesWindowController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateControllerWithIdentifier("Preferences") as? NSWindowController
+        print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo ?? [:])")
         
-        preferencesWindowController?.showWindow(sender)
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            
+            // parse URL
+            guard let url = userActivity.webpageURL
+                else { return false }
+            
+            guard mainWindowController.openWebURL(url)
+                else { NSWorkspace.sharedWorkspace().openURL(url); return false }
+            
+        } else if userActivity.activityType == AppActivity.view.rawValue {
+            
+            guard let typeString = userActivity.userInfo?[AppActivityUserInfo.type.rawValue] as? String,
+                let dataType = AppActivitySummitDataType(rawValue: typeString),
+                let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
+                else { return false }
+            
+            return mainWindowController.view(dataType, identifier: identifier)
+            
+        } else if userActivity.activityType == AppActivity.screen.rawValue {
+            
+            guard let screenString = userActivity.userInfo?[AppActivityUserInfo.screen.rawValue] as? String,
+                let screen = AppActivityScreen(rawValue: screenString)
+                else { return false }
+            
+            mainWindowController.view(screen)
+        }
         
-        preferencesWindowController?.window?.makeKeyAndOrderFront(sender)
+        return false
     }
 }
 
