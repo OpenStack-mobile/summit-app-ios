@@ -86,6 +86,16 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         userActivity?.resignCurrent()
     }
     
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
+                        AppActivityUserInfo.identifier.rawValue: self.contentIdentifier]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
+    }
+    
     // MARK: - Actions
     
     @IBAction func playVideo(sender: NSButton) {

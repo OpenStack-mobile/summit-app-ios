@@ -66,6 +66,19 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         userActivity?.resignCurrent()
     }
     
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        if case let .speaker(speaker) = profile {
+            
+            let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
+                            AppActivityUserInfo.identifier.rawValue: speaker]
+            
+            userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject: AnyObject])
+        }
+        
+        super.updateUserActivityState(userActivity)
+    }
+    
     // MARK: - Actions
     
     @IBAction func share(sender: NSButton) {
