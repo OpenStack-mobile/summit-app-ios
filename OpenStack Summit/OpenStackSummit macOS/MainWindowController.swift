@@ -42,7 +42,7 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
     
     private var contentViewControllers = [Content: NSViewController]()
     
-    private var childContentWindowControllers = [ChildContent: NSWindowController]()
+    private var childContentWindowControllers = Set<NSWindowController>()
     
     // MARK: - Loading
     
@@ -158,12 +158,14 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         filter()
     }
     
-    private func show(childContent childContent: ChildContent) {
+    private func show<T: Unique>(childContent contentType: T.Type, identifier: Identifier) {
         
         let windowController: NSWindowController
         
         // try to get existing window
-        if let existingController = self.childContentWindowControllers[childContent] {
+        if let existingController = childContentWindowControllers
+            .firstMatching({ ($0 as? ContentController)?.contentIdentifier == identifier
+                && ($0 as? ContentController)?.dynamicType.Content == contentType }) {
             
             windowController = existingController
             
@@ -313,34 +315,4 @@ extension MainWindowController {
         
         init() { self = .events }
     }
-}
-
-private struct ChildContent: Hashable {
-    
-    enum Content: String {
-        
-        case event
-        case speaker
-    }
-    
-    let content: Content
-    
-    let identifier: Identifier
-    
-    let hashValue: Int
-    
-    init(content: Content, identifier: Identifier) {
-        
-        self.content = content
-        self.identifier = identifier
-        
-        // more efficient and simple hash than computed
-        self.hashValue = "\(content)\(identifier)".hashValue
-    }
-}
-
-private func == (lhs: ChildContent, rhs: ChildContent) -> Bool {
-    
-    return lhs.content == rhs.content
-        && lhs.content == rhs.content
 }

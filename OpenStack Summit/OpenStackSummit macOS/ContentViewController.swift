@@ -10,5 +10,7 @@ import CoreSummit
 
 protocol ContentController: class {
     
+    associatedtype Content = Unique
+    
     var contentIdentifier: Identifier { get set }
 }
