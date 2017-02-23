@@ -139,10 +139,10 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
                 
                 // set user activity for handoff
                 let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+                 userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 userActivity.title = self.title
                 userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
-                userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 
                 userActivity.becomeCurrent()
                 

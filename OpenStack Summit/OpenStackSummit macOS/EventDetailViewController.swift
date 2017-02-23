@@ -184,10 +184,11 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         userActivity.title = eventDetail.name
         userActivity.webpageURL = eventDetail.webpageURL
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.contentIdentifier]
-        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
+        
         
         self.userActivity = userActivity
     }
