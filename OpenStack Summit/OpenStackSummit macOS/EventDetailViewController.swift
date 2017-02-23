@@ -53,7 +53,7 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
     
     // MARK: - Properties
     
-    var event: Identifier? {
+    var event: Identifier! {
         
         didSet { didSetEvent() }
     }
@@ -184,6 +184,14 @@ final class EventDetailViewController: NSViewController, NSTableViewDataSource, 
         self.speakersButton.title = "\(event.speakers.count) speakers"
         
         self.reviewsView.hidden = true
+        
+        // set user activity for handoff
+        let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+        userActivity.title = eventDetail.name
+        userActivity.webpageURL = eventDetail.webpageURL
+        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
+        
+        self.userActivity = userActivity
     }
     
     func addToCalendar() {

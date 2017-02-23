@@ -48,6 +48,12 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     
     // MARK: - Loading
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        shareButton.sendActionOn(.LeftMouseDown)
+    }
+    
     override func viewDidAppear() {
         super.viewDidAppear()
         

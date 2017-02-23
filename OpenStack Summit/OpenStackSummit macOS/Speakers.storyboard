@@ -401,6 +401,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                         <outlet property="locationLabel" destination="sfH-FK-ZwD" id="olB-ZU-luB"/>
                         <outlet property="locationView" destination="Haa-oH-eUb" id="B2U-vs-hEw"/>
                         <outlet property="nameLabel" destination="5St-im-zVu" id="fN4-ro-U49"/>
+                        <outlet property="shareButton" destination="qiB-Ym-3OC" id="iHs-CA-vdv"/>
                         <outlet property="titleLabel" destination="8xI-a2-vyX" id="SRZ-gK-pw4"/>
                         <outlet property="twitterLabel" destination="7VB-l9-EGA" id="o4W-1Y-KcL"/>
                         <outlet property="twitterView" destination="xUG-ly-6X0" id="5p8-aY-jxy"/>
