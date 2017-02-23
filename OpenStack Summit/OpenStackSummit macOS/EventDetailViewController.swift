@@ -355,7 +355,7 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             let speakersViewController = segue.destinationController as! SpeakersTableViewController
             
-            let eventID = NSNumber(longLong: Int64(eventDetail.id))
+            let eventID = NSNumber(longLong: Int64(eventDetail.identifier))
             
             speakersViewController.predicate = NSPredicate(format: "presentationModerator.event.id CONTAINS %@ OR presentationSpeaker.event.id CONTAINS %@", eventID, eventID)
             
