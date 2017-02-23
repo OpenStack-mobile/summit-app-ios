@@ -26,26 +26,8 @@ final class SpeakersTableViewController: TableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // set user activity for handoff
-        let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
-        userActivity.title = "Speakers"
-        userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
-        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
-        userActivity.becomeCurrent()
-        
-        self.userActivity = userActivity
-        
+                
         configureView()
-    }
-    
-    override func updateUserActivityState(userActivity: NSUserActivity) {
-        
-        let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
-        
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
-        
-        super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions
