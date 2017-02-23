@@ -38,6 +38,7 @@ final class VenuesViewController: RevealTabStripViewController {
             userActivity.title = "Venues"
             userActivity.webpageURL = NSURL(string: summit.webpageURL + "/travel")
             userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
+            userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
             userActivity.becomeCurrent()
             
             self.userActivity = userActivity

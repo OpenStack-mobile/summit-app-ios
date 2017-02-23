@@ -296,6 +296,7 @@ final class MemberProfileDetailViewController: UIViewController, IndicatorInfoPr
                 userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
                 
                 userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: identifier]
+                userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
                 
                 userActivity.becomeCurrent()
                 
