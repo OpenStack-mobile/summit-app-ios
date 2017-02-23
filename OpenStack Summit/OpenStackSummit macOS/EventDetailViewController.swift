@@ -13,7 +13,7 @@ import CoreSummit
 import EventKit
 
 @objc(OSSEventDetailViewController)
-final class EventDetailViewController: NSViewController, ContentController, MessageEnabledViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate  {
+final class EventDetailViewController: NSViewController, ContentController, MessageEnabledViewController, NSTableViewDataSource, NSTableViewDelegate, NSSharingServicePickerDelegate, NSSharingServiceDelegate, NSTextViewDelegate  {
     
     static let contentType: Any.Type = Event.self
     
@@ -32,6 +32,8 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
     @IBOutlet private(set) weak var descriptionView: NSView!
     
     @IBOutlet private(set) weak var descriptionLabel: NSTextField!
+    
+    @IBOutlet private(set) weak var descriptionTextView: NSTextView!
     
     @IBOutlet private(set) weak var locationView: NSView!
     
@@ -159,6 +161,8 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
         
         self.playVideoButton.hidden = event.video == nil
         
+        self.descriptionTextView.string = ""
+        
         let htmlString = event.eventDescription
         
         if let data = htmlString.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
@@ -171,6 +175,8 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             attributedString.addAttribute(NSFontAttributeName, value: NSFont.systemFontOfSize(14), range: range)
             
             self.descriptionLabel.attributedStringValue = attributedString
+            
+            self.descriptionTextView.textStorage?.appendAttributedString(attributedString)
             
         } else {
             
@@ -274,6 +280,16 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
                 
             catch { showErrorMessage(error) }
         }
+    }
+    
+    // MARK: - NSTextFieldDelegate
+    
+    func textView(textView: NSTextView, clickedOnLink link: AnyObject, atIndex charIndex: Int) -> Bool {
+        
+        guard let url = link as? NSURL
+            else { return false }
+        
+        return AppDelegate.shared.mainWindowController.openWebURL(url)
     }
     
     // MARK: - NSSharingServicePickerDelegate

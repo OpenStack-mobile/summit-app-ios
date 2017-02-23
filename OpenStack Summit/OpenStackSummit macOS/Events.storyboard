@@ -350,7 +350,6 @@ Room 1</string>
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="800" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
-                        <value key="minSize" type="size" width="800" height="600"/>
                     </window>
                     <connections>
                         <segue destination="EJa-na-JbP" kind="relationship" relationship="window.shadowedContentViewController" id="FIn-Xl-Udb"/>
@@ -515,25 +514,72 @@ Room 1</string>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" verticalCompressionResistancePriority="500" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mlx-Fu-aQL">
+                                    <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="750" verticalClippingResistancePriority="750" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="14F-eQ-A8V">
                                         <rect key="frame" x="0.0" y="160" width="800" height="101"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IOo-oB-gJh">
-                                                <rect key="frame" x="14" y="8" width="772" height="85"/>
-                                                <textFieldCell key="cell" controlSize="mini" truncatesLastVisibleLine="YES" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="war-bm-F8f">
-                                                    <font key="font" metaFont="system"/>
-                                                    <string key="title">Description:
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="MXF-GN-YgN">
+                                                <rect key="frame" x="16" y="8" width="768" height="85"/>
+                                                <subviews>
+                                                    <textField hidden="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Jb-cE-um3">
+                                                        <rect key="frame" x="-2" y="0.0" width="772" height="85"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="400" id="i9p-Rd-kwn"/>
+                                                        </constraints>
+                                                        <textFieldCell key="cell" controlSize="mini" truncatesLastVisibleLine="YES" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="bxb-Kx-m1K">
+                                                            <font key="font" metaFont="system"/>
+                                                            <string key="title">Description:
 Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </string>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gP5-U6-P2b">
+                                                        <rect key="frame" x="0.0" y="0.0" width="768" height="85"/>
+                                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="leA-0r-SVB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="768" height="85"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" spellingCorrection="YES" id="MjI-Qj-KJ7">
+                                                                    <rect key="frame" x="0.0" y="-0.5" width="768" height="85"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                    <size key="minSize" width="768" height="85"/>
+                                                                    <size key="maxSize" width="10000000" height="10000000"/>
+                                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="EJa-na-JbP" id="qGq-49-nSL"/>
+                                                                    </connections>
+                                                                </textView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </clipView>
+                                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ldO-bx-Naj">
+                                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="V7i-Y3-iBQ">
+                                                            <rect key="frame" x="752" y="0.0" width="16" height="85"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                    </scrollView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="2Jb-cE-um3" secondAttribute="bottom" id="4p2-mu-0yX"/>
+                                                    <constraint firstItem="2Jb-cE-um3" firstAttribute="top" secondItem="MXF-GN-YgN" secondAttribute="top" id="C8I-Wn-9fw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2Jb-cE-um3" secondAttribute="trailing" id="QEf-eg-zVC"/>
+                                                    <constraint firstItem="2Jb-cE-um3" firstAttribute="leading" secondItem="MXF-GN-YgN" secondAttribute="leading" id="c6q-9m-kgq"/>
+                                                    <constraint firstItem="gP5-U6-P2b" firstAttribute="top" secondItem="MXF-GN-YgN" secondAttribute="top" id="i1i-1P-ZX0"/>
+                                                    <constraint firstItem="gP5-U6-P2b" firstAttribute="leading" secondItem="MXF-GN-YgN" secondAttribute="leading" id="iCJ-7V-nBp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gP5-U6-P2b" secondAttribute="trailing" id="mWP-u0-72i"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gP5-U6-P2b" secondAttribute="bottom" id="spj-Up-SQw"/>
+                                                </constraints>
+                                            </customView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="IOo-oB-gJh" firstAttribute="top" secondItem="Mlx-Fu-aQL" secondAttribute="top" constant="8" id="bhL-nV-ybT"/>
-                                            <constraint firstAttribute="bottom" secondItem="IOo-oB-gJh" secondAttribute="bottom" constant="8" id="eoJ-MX-rVl"/>
-                                            <constraint firstAttribute="trailing" secondItem="IOo-oB-gJh" secondAttribute="trailing" constant="16" id="gsg-34-1FG"/>
-                                            <constraint firstItem="IOo-oB-gJh" firstAttribute="leading" secondItem="Mlx-Fu-aQL" secondAttribute="leading" constant="16" id="ncc-K6-cxS"/>
+                                            <constraint firstItem="MXF-GN-YgN" firstAttribute="leading" secondItem="14F-eQ-A8V" secondAttribute="leading" constant="16" id="QtC-x7-mb2"/>
+                                            <constraint firstItem="MXF-GN-YgN" firstAttribute="top" secondItem="14F-eQ-A8V" secondAttribute="top" constant="8" id="blx-Rv-gIY"/>
+                                            <constraint firstAttribute="bottom" secondItem="MXF-GN-YgN" secondAttribute="bottom" constant="8" id="uB8-lJ-Ekk"/>
+                                            <constraint firstAttribute="trailing" secondItem="MXF-GN-YgN" secondAttribute="trailing" constant="16" id="yHp-S7-WTY"/>
                                         </constraints>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
@@ -745,7 +791,7 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
-                                    <real value="1000"/>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -780,8 +826,9 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
                     </view>
                     <connections>
                         <outlet property="dateTimeLabel" destination="0aV-5Z-wYa" id="kDh-Si-0Tu"/>
-                        <outlet property="descriptionLabel" destination="IOo-oB-gJh" id="esM-w9-Q6g"/>
-                        <outlet property="descriptionView" destination="Mlx-Fu-aQL" id="76m-WH-f4v"/>
+                        <outlet property="descriptionLabel" destination="2Jb-cE-um3" id="QSw-Dq-Z8K"/>
+                        <outlet property="descriptionTextView" destination="MjI-Qj-KJ7" id="rY1-rQ-QUz"/>
+                        <outlet property="descriptionView" destination="14F-eQ-A8V" id="A6q-fr-SUG"/>
                         <outlet property="levelButton" destination="rL2-SZ-ggo" id="Kzz-11-QKJ"/>
                         <outlet property="levelView" destination="1Rn-ur-dFL" id="uvh-je-SPO"/>
                         <outlet property="locationButton" destination="hxz-wF-7iB" id="w5O-eF-ySI"/>
