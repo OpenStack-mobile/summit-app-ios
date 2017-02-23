@@ -698,7 +698,6 @@
 		6EF12C4F1D1497C100814AD0 /* RevealTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */; };
 		6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */; };
 		6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C511D1497E100814AD0 /* UIView+Border.swift */; };
-		6EF12C551D14997C00814AD0 /* ScheduleableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C541D14997C00814AD0 /* ScheduleableView.swift */; };
 		6EF12C571D14999E00814AD0 /* MessageEnabledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */; };
 		6EF12C591D1499BA00814AD0 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C581D1499BA00814AD0 /* SweetAlert.swift */; };
 		6EF12C5F1D149B4B00814AD0 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C5E1D149B4B00814AD0 /* Define.swift */; };
@@ -1323,7 +1322,6 @@
 		6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealTabStripViewController.swift; sourceTree = "<group>"; };
 		6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		6EF12C511D1497E100814AD0 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
-		6EF12C541D14997C00814AD0 /* ScheduleableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleableView.swift; sourceTree = "<group>"; };
 		6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageEnabledViewController.swift; sourceTree = "<group>"; };
 		6EF12C581D1499BA00814AD0 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		6EF12C5E1D149B4B00814AD0 /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
@@ -2221,7 +2219,6 @@
 				9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */,
 				6EF12C501D1497E100814AD0 /* UIColor+HexString.swift */,
 				6EF12C511D1497E100814AD0 /* UIView+Border.swift */,
-				6EF12C541D14997C00814AD0 /* ScheduleableView.swift */,
 				6EF12C581D1499BA00814AD0 /* SweetAlert.swift */,
 				6EFC964E1D22DC320081B3E8 /* TrackTableViewCell.swift */,
 				6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */,
@@ -3309,7 +3306,6 @@
 				6E2537EB1D19B203003E3400 /* ScheduleView.swift in Sources */,
 				6ECBAF841E517185000A1758 /* FavoriteEventsViewController.swift in Sources */,
 				6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */,
-				6EF12C551D14997C00814AD0 /* ScheduleableView.swift in Sources */,
 				6E313C1E1D41302C005132DA /* VenueRoomDetailViewController.swift in Sources */,
 				6E57DDC71E4AD22100783BA6 /* PresentPopover.swift in Sources */,
 				6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */,

@@ -49,7 +49,7 @@ extension EventViewController {
         }
     }
     
-    func contextMenu(for event: EventDetail, scheduleableView: ScheduleableView? = nil) -> ContextMenu {
+    func contextMenu(for event: EventDetail) -> ContextMenu {
         
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
@@ -88,16 +88,7 @@ extension EventViewController {
         
         if isAttendee && eventRequestInProgress == false {
             
-            let title: String
-            
-            if scheduled {
-                
-                title = "Confirmed"
-                
-            } else {
-                
-                title = event.rsvp.isEmpty ? "Confirm" : "RSVP"
-            }
+            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
             
             let image = scheduled ? "ContextMenuScheduleRemove" : "ContextMenuScheduleAdd"
             
@@ -105,23 +96,7 @@ extension EventViewController {
                 
                 guard let controller = self else { return }
                 
-                controller.toggleScheduledStatus(for: event, scheduleableView: scheduleableView)
-                
-                didComplete(true)
-                }))
-            
-            actions.append(scheduleEvent)
-        }
-        
-        if canAddToCalendar() {
-            
-            let image = "ContextMenuCalendarAdd"
-            
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: { UIImage(named: image)! }, title: "Add to Calendar", handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                controller.addToCalendar(event)
+                controller.toggleScheduledStatus(for: event)
                 
                 didComplete(true)
                 }))
@@ -133,9 +108,9 @@ extension EventViewController {
         
         if Store.shared.isLoggedIn {
             
-            let title = isFavorite ? "Saved" : "Save"
+            let title = isFavorite ? "Remove from Favorites" : "Add to Favorites"
             
-            let image = isFavorite ? "ContextMenuSaved" : "ContextMenuSave"
+            let image = "ContextMenuSave"
             
             let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
@@ -149,10 +124,29 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
+        if canAddToCalendar() {
+            
+            let image = "ContextMenuCalendarAdd"
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: { UIImage(named: image)! }, title: "Save to Calendar", handler: .background({ [weak self] (didComplete) in
+                
+                guard let controller = self else { return }
+                
+                controller.addToCalendar(event)
+                
+                didComplete(true)
+            }))
+            
+            actions.append(scheduleEvent)
+        }
+        
         return ContextMenu(actions: actions, shareItems: [message, url], systemActions: false)
     }
     
-    func toggleScheduledStatus(for event: EventDetail, scheduleableView: ScheduleableView? = nil) {
+    func toggleScheduledStatus(for event: EventDetail) {
+        
+        guard let attendee = Store.shared.authenticatedMember?.attendeeRole
+            else { return }
         
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
@@ -160,8 +154,23 @@ extension EventViewController {
         
         eventRequestInProgress = true
         
-        // update view
-        scheduleableView?.scheduled = !scheduled
+        func setScheduled(newValue: Bool) {
+            
+            // update model
+            if let managedObject = try! EventManagedObject.find(event.identifier, context: Store.shared.managedObjectContext) {
+                
+                if newValue {
+                    
+                    attendee.schedule.insert(managedObject)
+                    
+                } else {
+                    
+                    attendee.schedule.remove(managedObject)
+                }
+            }
+        }
+        
+        setScheduled(!scheduled)
         
         let completion: ErrorType? -> () = { [weak self] (response) in
             
@@ -176,7 +185,7 @@ extension EventViewController {
                 case let .Some(error):
                     
                     // restore original value
-                    scheduleableView?.scheduled = scheduled
+                    setScheduled(scheduled)
                     
                     // show error
                     controller.showErrorMessage(error)
@@ -204,6 +213,24 @@ extension EventViewController {
         
         eventRequestInProgress = true
         
+        func setFavorite(newValue: Bool) {
+            
+            // update model
+            if let managedObject = try! EventManagedObject.find(event.identifier, context: Store.shared.managedObjectContext) {
+                
+                if newValue {
+                    
+                    Store.shared.authenticatedMember?.favoriteEvents.insert(managedObject)
+                    
+                } else {
+                    
+                    Store.shared.authenticatedMember?.favoriteEvents.remove(managedObject)
+                }
+            }
+        }
+        
+        setFavorite(!isFavorite)
+        
         Store.shared.favorite(!isFavorite, event: event.identifier, summit: event.summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -218,6 +245,9 @@ extension EventViewController {
                     
                     // show error
                     controller.showErrorMessage(error)
+                    
+                    // restore old value
+                    setFavorite(isFavorite)
                     
                 case .None: break
                 }
