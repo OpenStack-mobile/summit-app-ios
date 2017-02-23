@@ -24,14 +24,10 @@ final class VenuesViewController: RevealTabStripViewController {
         
         navigationItem.title = "VENUES"
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
-        if let realmSummit = try! Store.shared.managedObjectContext.managedObjects(SummitManagedObject.self).first {
+        if let summitManagedObject = self.currentSummit {
             
-            let summit = Summit(managedObject: realmSummit)
+            let summit = Summit(managedObject: summitManagedObject)
             
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
@@ -45,12 +41,25 @@ final class VenuesViewController: RevealTabStripViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        userActivity?.becomeCurrent()
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if #available(iOS 9.0, *) {
-            userActivity?.resignCurrent()
-        }
+        userActivity?.resignCurrent()
+    }
+    
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
     }
     
     // MARK: - PagerTabStripViewControllerDelegate

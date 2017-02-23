@@ -32,9 +32,16 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if #available(iOS 9.0, *) {
-            userActivity?.resignCurrent()
-        }
+        userActivity?.resignCurrent()
+    }
+    
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions

@@ -108,6 +108,16 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
+                        AppActivityUserInfo.identifier.rawValue: self.event]
+        
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        
+        super.updateUserActivityState(userActivity)
+    }
+    
     // MARK: - Actions
     
     @IBAction func playVideo(sender: UIButton) {
@@ -199,8 +209,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
         userActivity.title = eventDetail.name
         userActivity.webpageURL = eventDetail.webpageURL
-        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
+        userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue, AppActivityUserInfo.identifier.rawValue: self.event]
         
         self.userActivity = userActivity
     }

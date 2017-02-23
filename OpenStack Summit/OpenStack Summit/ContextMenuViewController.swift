@@ -91,12 +91,8 @@ extension UIViewController {
             if contextMenu.systemActions == false {
                 
                 activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,
-                                                                UIActivityTypeAddToReadingList]
-                
-                if #available(iOS 9, *) {
-                    
-                    activityViewController.excludedActivityTypes?.append(UIActivityTypeOpenInIBooks)
-                }
+                                                                UIActivityTypeAddToReadingList,
+                                                                UIActivityTypeOpenInIBooks]
             }
             
             menuViewController = activityViewController

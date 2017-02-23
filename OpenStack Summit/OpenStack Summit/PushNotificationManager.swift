@@ -88,10 +88,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             replyAction.activationMode = .Background
             replyAction.authenticationRequired = true
             replyAction.destructive = false
-            
-            if #available(iOS 9.0, *) {
-                replyAction.behavior = .TextInput
-            }
+            replyAction.behavior = .TextInput
             
             let notificationCategory = UIMutableUserNotificationCategory()
             notificationCategory.identifier = TeamMessageNotificationAction.category.rawValue
@@ -251,8 +248,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 // mark message as read
                 unreadTeamMessages.value.remove(messageIdentifier)
                 
-                if #available(iOS 9.0, *),
-                let replyText = response[UIUserNotificationActionResponseTypedTextKey] as? String {
+                if let replyText = response[UIUserNotificationActionResponseTypedTextKey] as? String {
                     
                     Store.shared.send(replyText, to: team, completion: { [weak self] (response) in
                         
