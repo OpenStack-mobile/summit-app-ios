@@ -70,7 +70,7 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
                 
-        let pastSummits = 7 ... 7
+        let pastSummits = 6 ... 7
         
         for summitID in pastSummits {
             
@@ -86,6 +86,7 @@ final class StoreTests: XCTestCase {
                     
                 case let .Value(summit):
                     
+                    XCTAssert(summit.speakers.isEmpty == false, "No Events")
                     XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
                     
                     dump(summit, "Summit" + "\(summitID)" + "Dump.txt")
