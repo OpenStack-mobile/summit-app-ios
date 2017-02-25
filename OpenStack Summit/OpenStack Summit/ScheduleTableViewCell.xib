@@ -16,24 +16,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scheduleTableViewCell" rowHeight="139" id="FOV-ah-xHz" customClass="ScheduleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scheduleTableViewCell" rowHeight="141" id="FOV-ah-xHz" customClass="ScheduleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="141"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FOV-ah-xHz" id="wVn-YC-DWt">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
+                <rect key="frame" x="0.0" y="0.0" width="337" height="140.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b3C-cW-2I6">
-                        <rect key="frame" x="16" y="16" width="239" height="104"/>
+                        <rect key="frame" x="16" y="16" width="256" height="104"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00 am - 10:00 pm / Marriot" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cl6-B2-KWb">
-                                <rect key="frame" x="0.0" y="0.0" width="239" height="18"/>
+                                <rect key="frame" x="0.0" y="0.0" width="256" height="18"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzc-Wq-1zk">
-                                <rect key="frame" x="0.0" y="26" width="239" height="46.5"/>
+                                <rect key="frame" x="0.0" y="26" width="256" height="46.5"/>
                                 <string key="text">Event Name
 Multiline</string>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
@@ -41,21 +41,18 @@ Multiline</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYa-v4-def">
-                                <rect key="frame" x="0.0" y="80.5" width="239" height="23.5"/>
+                                <rect key="frame" x="0.0" y="80.5" width="256" height="23.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgb-RE-0ux">
-                        <rect key="frame" x="263" y="0.0" width="57" height="138.5"/>
-                    </button>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sVC-d8-P8p">
-                        <rect key="frame" x="263" y="16" width="41" height="106.5"/>
+                        <rect key="frame" x="280" y="16" width="41" height="108.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ContextMenuSaved" translatesAutoresizingMaskIntoConstraints="NO" id="SQp-xp-HYF">
-                                <rect key="frame" x="0.0" y="43.5" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="44.5" width="20" height="20"/>
                                 <color key="tintColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="20" id="R0l-Zg-XYo"/>
@@ -63,15 +60,16 @@ Multiline</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKT-Io-tdX">
-                                <rect key="frame" x="28" y="0.0" width="1" height="106.5"/>
+                                <rect key="frame" x="28" y="0.0" width="1" height="108.5"/>
                                 <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="SMy-rW-WQJ"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell-context-menu" translatesAutoresizingMaskIntoConstraints="NO" id="hvt-5v-Yhq">
-                                <rect key="frame" x="37" y="44.5" width="4" height="18"/>
+                                <rect key="frame" x="37" y="45.5" width="4" height="18"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="4" id="AlN-a6-gIu"/>
                                     <constraint firstAttribute="width" secondItem="hvt-5v-Yhq" secondAttribute="height" multiplier="2:9" id="U6X-FC-DDo"/>
                                 </constraints>
                             </imageView>
@@ -81,6 +79,9 @@ Multiline</string>
                             <constraint firstItem="wKT-Io-tdX" firstAttribute="top" secondItem="sVC-d8-P8p" secondAttribute="top" id="x5a-1s-rLd"/>
                         </constraints>
                     </stackView>
+                    <button contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgb-RE-0ux">
+                        <rect key="frame" x="280" y="0.0" width="57" height="140.5"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sVC-d8-P8p" firstAttribute="leading" secondItem="b3C-cW-2I6" secondAttribute="trailing" constant="8" id="30L-nb-X37"/>
@@ -104,7 +105,7 @@ Multiline</string>
                 <outlet property="statusImageView" destination="SQp-xp-HYF" id="sNo-Um-aDF"/>
                 <outlet property="trackLabel" destination="DYa-v4-def" id="EdR-eN-RPR"/>
             </connections>
-            <point key="canvasLocation" x="616" y="383"/>
+            <point key="canvasLocation" x="624.5" y="383.5"/>
         </tableViewCell>
     </objects>
     <resources>

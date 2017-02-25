@@ -124,9 +124,11 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             // fetch wireless networks
             
-            let today = NSDate()
-            
-            let summitActive = today.mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
+            #if DEBUG
+            let summitActive = true // always show for debug builds
+            #else
+            let summitActive = NSDate().mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
+            #endif
             
             if summitActive {
                 
