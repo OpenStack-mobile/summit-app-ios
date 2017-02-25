@@ -788,7 +788,6 @@
 		6EA6FD371D958512009B66B0 /* DetailImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */; };
 		6EA737611E47984400700F64 /* VideoSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA737601E47984400700F64 /* VideoSearchResultsViewController.swift */; };
 		6EA737651E47B4BE00700F64 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA737641E47B4BE00700F64 /* VideoCell.swift */; };
-		6EA983D51E5E7DA900D5BB55 /* SharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA983D41E5E7DA900D5BB55 /* SharingService.swift */; };
 		6EA983CA1E5E030400D5BB55 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983BF1E5E030400D5BB55 /* OpenSans-Bold.ttf */; };
 		6EA983CB1E5E030400D5BB55 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C01E5E030400D5BB55 /* OpenSans-BoldItalic.ttf */; };
 		6EA983CC1E5E030400D5BB55 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C11E5E030400D5BB55 /* OpenSans-ExtraBold.ttf */; };
@@ -799,6 +798,7 @@
 		6EA983D11E5E030400D5BB55 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C61E5E030400D5BB55 /* OpenSans-Regular.ttf */; };
 		6EA983D21E5E030400D5BB55 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C71E5E030400D5BB55 /* OpenSans-Semibold.ttf */; };
 		6EA983D31E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C81E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf */; };
+		6EA983D51E5E7DA900D5BB55 /* SharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA983D41E5E7DA900D5BB55 /* SharingService.swift */; };
 		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
 		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB1FDE71E1A9C280048045D /* TeamInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */; };
@@ -994,6 +994,11 @@
 		6EFC99C51D21CAE7009FD0DA /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */; };
 		6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C61D21DBE5009FD0DA /* Event.storyboard */; };
 		6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */; };
+		6EFE54F31E612C7A005EAB86 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */; };
+		6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; };
+		6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; };
+		6EFE54F61E612C7A005EAB86 /* AeroGearOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */; };
+		6EFE54F71E612C7A005EAB86 /* XCDYouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */; };
 		9D4DC7FE1D5D2B660015D49A /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */; };
 		9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */; };
 		9D6AADAF1DBE57FA0057888E /* VenueRoomDataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AADAD1DBE56CB0057888E /* VenueRoomDataUpdate.swift */; };
@@ -1538,7 +1543,6 @@
 		6EA6FD361D958512009B66B0 /* DetailImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailImageTableViewCell.xib; sourceTree = "<group>"; };
 		6EA737601E47984400700F64 /* VideoSearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSearchResultsViewController.swift; sourceTree = "<group>"; };
 		6EA737641E47B4BE00700F64 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
-		6EA983D41E5E7DA900D5BB55 /* SharingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingService.swift; sourceTree = "<group>"; };
 		6EA983BF1E5E030400D5BB55 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		6EA983C01E5E030400D5BB55 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		6EA983C11E5E030400D5BB55 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -1549,6 +1553,7 @@
 		6EA983C61E5E030400D5BB55 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		6EA983C71E5E030400D5BB55 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		6EA983C81E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		6EA983D41E5E7DA900D5BB55 /* SharingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingService.swift; sourceTree = "<group>"; };
 		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
 		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitation.swift; sourceTree = "<group>"; };
@@ -1674,6 +1679,11 @@
 		6EFC99C41D21CAE7009FD0DA /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		6EFC99C61D21DBE5009FD0DA /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearHttp.framework; sourceTree = "<group>"; };
+		6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearOAuth2.framework; sourceTree = "<group>"; };
+		6EFE54EB1E612BDD005EAB86 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
+		6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftFoundation.framework; sourceTree = "<group>"; };
+		6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCDYouTubeKit.framework; sourceTree = "<group>"; };
 		9D1CE1051DA43DCF0064B3B1 /* VenueFloor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloor.swift; sourceTree = "<group>"; };
 		9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloorJSON.swift; sourceTree = "<group>"; };
 		9D4DC7FD1D5D2B660015D49A /* CopyableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
@@ -1797,6 +1807,11 @@
 			files = (
 				6E11E4F81E5A122300EBA211 /* MapKit.framework in Frameworks */,
 				6E75588D1E58D0F8003B6844 /* CoreSummit.framework in Frameworks */,
+				6EFE54F31E612C7A005EAB86 /* SwiftFoundation.framework in Frameworks */,
+				6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */,
+				6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */,
+				6EFE54F61E612C7A005EAB86 /* AeroGearOAuth2.framework in Frameworks */,
+				6EFE54F71E612C7A005EAB86 /* XCDYouTubeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1889,7 +1904,6 @@
 			isa = PBXGroup;
 			children = (
 				6EDE52161D42D08200DF4BEA /* Vendor */,
-				6EDE521C1D42D46900DF4BEA /* System Frameworks */,
 				6EFC99B61D2170E8009FD0DA /* Objective-C */,
 				6E104D311D1061AC00541E84 /* AppDelegate.swift */,
 				6EF12C671D149CA600814AD0 /* R.generated.swift */,
@@ -2317,8 +2331,9 @@
 		6E65D2051E4F78D100F8F582 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6E11E4F71E5A122300EBA211 /* MapKit.framework */,
-				6E65D2061E4F78D100F8F582 /* TVServices.framework */,
+				6EDE521C1D42D46900DF4BEA /* iOS */,
+				6EFE54E11E612B6C005EAB86 /* macOS */,
+				6EFE54E21E612B71005EAB86 /* tvOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2447,16 +2462,17 @@
 		6E75586E1E58C62B003B6844 /* OpenStackSummit macOS */ = {
 			isa = PBXGroup;
 			children = (
-				6E11E4F61E5A120400EBA211 /* OpenStackSummit.entitlements */,
+				6EFE54E41E612BDD005EAB86 /* Frameworks */,
 				6E7558C91E595742003B6844 /* Objective-C */,
 				6E75586F1E58C62B003B6844 /* AppDelegate.swift */,
+				6E11E4F61E5A120400EBA211 /* OpenStackSummit.entitlements */,
+				6E7558781E58C62B003B6844 /* Info.plist */,
 				6E7558731E58C62B003B6844 /* Assets.xcassets */,
 				6E7558751E58C62B003B6844 /* Main.storyboard */,
 				6E31EC9C1E5B852A000E5BAC /* Events.storyboard */,
 				6E31EC9E1E5B8538000E5BAC /* Venues.storyboard */,
 				6E31EC9A1E5B8521000E5BAC /* Speakers.storyboard */,
 				6E31ECA01E5B8549000E5BAC /* Videos.storyboard */,
-				6E7558781E58C62B003B6844 /* Info.plist */,
 				6E7451041E5AB4880061E418 /* View */,
 				6E3B74531E5A274A008A1BB2 /* Controller */,
 			);
@@ -2645,7 +2661,7 @@
 			path = ../../Vendor;
 			sourceTree = "<group>";
 		};
-		6EDE521C1D42D46900DF4BEA /* System Frameworks */ = {
+		6EDE521C1D42D46900DF4BEA /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				6EDE52311D42D50000DF4BEA /* libz.tbd */,
@@ -2663,8 +2679,7 @@
 				6EDE521D1D42D47A00DF4BEA /* CoreData.framework */,
 				6EDE521A1D42D46400DF4BEA /* AVFoundation.framework */,
 			);
-			name = "System Frameworks";
-			path = ..;
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		6EE208ED1D7A13CC004A772A /* Speakers */ = {
@@ -2784,6 +2799,35 @@
 				6E5AE1331E27E163004D9A26 /* MessageTableViewCell.m */,
 			);
 			name = "Objective-C";
+			sourceTree = "<group>";
+		};
+		6EFE54E11E612B6C005EAB86 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				6E11E4F71E5A122300EBA211 /* MapKit.framework */,
+			);
+			name = macOS;
+			sourceTree = "<group>";
+		};
+		6EFE54E21E612B71005EAB86 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				6E65D2061E4F78D100F8F582 /* TVServices.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		6EFE54E41E612BDD005EAB86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */,
+				6EFE54EB1E612BDD005EAB86 /* JSON.framework */,
+				6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */,
+				6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */,
+				6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */,
+			);
+			name = Frameworks;
+			path = ../../Carthage/Build/Mac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3073,7 +3117,6 @@
 				6E75586B1E58C62B003B6844 /* Resources */,
 				6E75587F1E58C9E7003B6844 /* Increment Build */,
 				6E75588F1E58D0F9003B6844 /* Embed Frameworks */,
-				6E7558D11E5965F4003B6844 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3559,25 +3602,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n\n#  update_build_number.sh\n#  Usage: `update_build_number.sh [branch]`\n#  Run this script after the 'Copy Bundle Resources' build phase\n#  Ref: http://tgoode.com/2014/06/05/sensible-way-increment-bundle-version-cfbundleversion-xcode/\n\nif [ $TRAVIS == \"true\" ]\nthen echo \"Updating build number to TRAVISCI.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion TRAVISCI\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nelse branch=${1:-'develop'}\nbuildNumber=$(expr $(git rev-list $branch --count) - $(git rev-list HEAD..$branch --count))\necho \"Updating build number to $buildNumber using branch '$branch'.\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi";
-		};
-		6E7558D11E5965F4003B6844 /* Copy Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/Mac/SwiftFoundation.framework",
-				"$(SRCROOT)/../Carthage/Build/Mac/JSON.framework",
-				"$(SRCROOT)/../Carthage/Build/Mac/AeroGearHttp.framework",
-				"$(SRCROOT)/../Carthage/Build/Mac/AeroGearOAuth2.framework",
-				"$(SRCROOT)/../Carthage/Build/Mac/XCDYouTubeKit.framework",
-			);
-			name = "Copy Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		6E9392711DB48C1F0021905B /* Copy Mocked Data */ = {
 			isa = PBXShellScriptBuildPhase;
