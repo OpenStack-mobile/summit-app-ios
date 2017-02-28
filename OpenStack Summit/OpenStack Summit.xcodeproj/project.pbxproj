@@ -537,6 +537,7 @@
 		6E9F28F71D7C903E002B7C7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F51D7C903E002B7C7A /* Main.storyboard */; };
 		6E9F28F91D7C903E002B7C7A /* TVAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */; };
 		6E9FBCFB1D933F1B0005234F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E779E4D1D2581AE00A184A0 /* SWRevealViewController.m */; };
+		6EA056B01E60CFFD00979C52 /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA056AF1E60CFFD00979C52 /* NotificationDetailViewController.swift */; };
 		6EA159881E25217A007FB9E6 /* AddTeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA159871E25217A007FB9E6 /* AddTeamMemberViewController.swift */; };
 		6EA38A701DCB059400B703CE /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25291F1D591C2D00173B1F /* DataUpdate.swift */; };
 		6EA38A741DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */; };
@@ -1220,6 +1221,7 @@
 		6E9F28F61D7C903E002B7C7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E9F28F81D7C903E002B7C7A /* TVAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TVAssets.xcassets; sourceTree = "<group>"; };
 		6E9F28FA1D7C903E002B7C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EA056AF1E60CFFD00979C52 /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
 		6EA159871E25217A007FB9E6 /* AddTeamMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTeamMemberViewController.swift; sourceTree = "<group>"; };
 		6EA1F0891D660B550064C338 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EA38A731DCB1BF900B703CE /* SummitDataUpdateManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitDataUpdateManagedObject.swift; sourceTree = "<group>"; };
@@ -2286,6 +2288,7 @@
 				6EF147F01D13585C00D5EEF9 /* SpeakerListViewController.swift */,
 				6EEED0281E3A48AF00795B3D /* InboxViewController.swift */,
 				6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */,
+				6EA056AF1E60CFFD00979C52 /* NotificationDetailViewController.swift */,
 				6EDA4ABD1DFA1CCF00ADF96D /* TeamsViewController.swift */,
 				6EDA4ABF1DFA1CEB00ADF96D /* TeamMessagesViewController.swift */,
 				6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */,
@@ -3299,6 +3302,7 @@
 				6EF12C681D149CA600814AD0 /* R.generated.swift in Sources */,
 				6EF3A8911E470BEC00CD85EF /* CollectionViewController.swift in Sources */,
 				6EEED02B1E3A494400795B3D /* NotificationsViewController.swift in Sources */,
+				6EA056B01E60CFFD00979C52 /* NotificationDetailViewController.swift in Sources */,
 				6E4241A01E1ED4C90017E555 /* LoadingTableViewCell.swift in Sources */,
 				6E42419D1E1EB3690017E555 /* TeamInvitationsViewController.swift in Sources */,
 				6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */,
