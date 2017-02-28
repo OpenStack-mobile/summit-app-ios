@@ -154,7 +154,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     
                 } else if teamMessageAlertFilter != teamMessageNotification.team {
                     
-                    //SweetAlert().showAlert(alertTitle, subTitle: alertBody, style: .None)
+                    SweetAlert().showAlert(alertTitle, subTitle: alertBody, style: .None)
                 }
             }
             
@@ -205,9 +205,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 
             } else {
                 
-                //let alertTitle = generalNotification.event?.title ?? "Notification"
+                let alertTitle = generalNotification.event?.title ?? "Notification"
                 
-                //SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
+                SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
             }
             
         } else {

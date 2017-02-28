@@ -111,13 +111,13 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         return Notification(managedObject: managedObject)
     }
     
-    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: NotificationTableViewCell, at indexPath: NSIndexPath) {
         
         let notification = self[indexPath]
         
-        cell.textLabel!.text = notification.body
+        cell.notificationLabel.text = notification.body
         
-        cell.detailTextLabel!.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
         
         if let _ = notification.event {
             
@@ -169,27 +169,37 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         return UITableViewCellEditingStyle(rawValue: 3)!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        guard tableView.editing == false else { return }
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        let notification = self[indexPath]
-        
-        guard let event = notification.event else { return }
-        
-        let eventDetailViewController = R.storyboard.event.eventDetailViewController()!
-        
-        eventDetailViewController.event = event
-        
-        self.showViewController(eventDetailViewController, sender: self)
-    }
-    
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Notifications")
     }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.notificationsViewController.showNotification.identifier:
+            
+            let notification = self[tableView.indexPathForSelectedRow!]
+            
+            let notificationViewController = segue.destinationViewController as! NotificationDetailViewController
+            
+            notificationViewController.notification = notification
+            
+        default: fatalError()
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+final class NotificationTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var notificationLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
 }
