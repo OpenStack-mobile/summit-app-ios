@@ -22,9 +22,9 @@ final class NotificationDetailViewController: UITableViewController {
         
         let dateFormatter = NSDateFormatter()
         
-        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.dateStyle = .LongStyle
         
-        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.timeStyle = .MediumStyle
         
         return dateFormatter
     }()
@@ -60,7 +60,10 @@ final class NotificationDetailViewController: UITableViewController {
         
         let text = notification.body
         
-        data.append([.text(text), .date(date)])
+        data.append([.date(date), .text(text)])
+                
+        // mark notification as read
+        PushNotificationManager.shared.unreadNotifications.value.remove(notification.identifier)
     }
     
     // MARK: - UITableViewDataSource
@@ -106,6 +109,25 @@ final class NotificationDetailViewController: UITableViewController {
             cell.textLabel!.text = text
             
             return cell
+        }
+    }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.notificationDetailViewController.showNotificationEvent.identifier:
+            
+            guard let event = self.notification?.event
+                else { fatalError("No event for notification") }
+            
+            let eventViewController = segue.destinationViewController as! EventDetailViewController
+            
+            eventViewController.event = event
+            
+        default: fatalError()
         }
     }
 }

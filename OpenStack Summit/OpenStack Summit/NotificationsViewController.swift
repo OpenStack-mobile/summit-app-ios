@@ -22,18 +22,30 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         dateFormatter.dateStyle = .ShortStyle
         
-        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.timeStyle = .MediumStyle
         
         return dateFormatter
     }()
     
+    private var unreadNotificationsObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = self.unreadNotificationsObserver {
+            
+            PushNotificationManager.shared.unreadNotifications.remove(observer)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications.observe(unreadNotificationsChanged)
         
         configureView()
     }
@@ -117,16 +129,26 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         cell.notificationLabel.text = notification.body
         
-        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+        let unread = PushNotificationManager.shared.unreadNotifications.value.contains(notification.identifier)
         
-        if let _ = notification.event {
-            
-            cell.accessoryType = .DisclosureIndicator
-            
-        } else {
-            
-            cell.accessoryType = .None
-        }
+        cell.notificationLabel.font = unread ? UIFont.boldSystemFontOfSize(17) : UIFont.systemFontOfSize(17)
+        
+        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+    }
+    
+    private func unreadNotificationsChanged(newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
+        
+        let managedObjects = (self.fetchedResultsController.fetchedObjects ?? []) as! [NotificationManagedObject]
+        
+        let changedNotifications = managedObjects.filter({ newValue.contains($0.identifier) })
+        
+        let indexPaths = changedNotifications.map { fetchedResultsController.indexPathForObject($0)! }
+        
+        tableView.beginUpdates()
+        
+        tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .None)
+        
+        tableView.endUpdates()
     }
     
     // MARK: - UITableViewDataSource
@@ -136,11 +158,6 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationCell)!
         
         configure(cell: cell, at: indexPath)
-        
-        let notification = self[indexPath]
-        
-        // mark notification as read
-        PushNotificationManager.shared.unreadNotifications.value.remove(notification.identifier)
         
         return cell
     }
@@ -177,6 +194,18 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     }
     
     // MARK: - Segue
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        switch identifier {
+            
+        case R.segue.notificationsViewController.showNotification.identifier:
+            
+            return editing == false
+            
+        default: fatalError()
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

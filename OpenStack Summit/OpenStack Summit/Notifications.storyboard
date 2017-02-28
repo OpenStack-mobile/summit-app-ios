@@ -25,7 +25,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="10:00 am, April 24, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSN-ug-ahm">
-                                            <rect key="frame" x="16" y="29" width="137.5" height="15"/>
+                                            <rect key="frame" x="16" y="29" width="138" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -73,6 +73,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="NOTIFICATIONS" id="Fzx-LB-7C3">
+                        <barButtonItem key="backBarButtonItem" title=" " id="VQd-he-rWf"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="1xQ-Q7-tnc">
                             <connections>
                                 <action selector="toggleEdit:" destination="YWj-qx-9pe" id="Wgx-CL-gdG"/>
@@ -112,7 +113,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="fIA-B0-gN9" kind="showDetail" identifier="showNotificationEvent" id="7ZC-UD-RoI"/>
+                                    <segue destination="fIA-B0-gN9" kind="push" identifier="showNotificationEvent" id="7ZC-UD-RoI"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationDetailDateCell" textLabel="LOK-hp-b5C" style="IBUITableViewCellStyleDefault" id="YcR-lW-Qij">
@@ -156,7 +157,9 @@
                             <outlet property="delegate" destination="pqZ-y5-AzL" id="SQa-qY-sOR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="NOTIFICATION" id="yAJ-Ao-X2b"/>
+                    <navigationItem key="navigationItem" title="NOTIFICATION" id="yAJ-Ao-X2b">
+                        <barButtonItem key="backBarButtonItem" title=" " id="HPz-SL-Oay"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ked-8P-PWr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -166,7 +169,9 @@
         <!--Event-->
         <scene sceneID="X0N-z3-Xgf">
             <objects>
-                <viewControllerPlaceholder storyboardName="Event" id="fIA-B0-gN9" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Event" id="fIA-B0-gN9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rXR-ii-SXp"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ore-6K-vOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1952" y="-36"/>
