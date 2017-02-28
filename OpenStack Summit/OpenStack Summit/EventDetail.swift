@@ -39,6 +39,7 @@ public struct EventDetail: CoreDataDecodable {
     public let averageFeedback: Double
     public let video: Video?
     public let rsvp: String
+    public let externalRSVP: Bool
     
     public let webpageURL: NSURL
     
@@ -61,6 +62,7 @@ public struct EventDetail: CoreDataDecodable {
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
         self.rsvp = event.rsvp ?? ""
+        self.externalRSVP = event.externalRSVP
         
         self.venue = event.location?.identifier
         
