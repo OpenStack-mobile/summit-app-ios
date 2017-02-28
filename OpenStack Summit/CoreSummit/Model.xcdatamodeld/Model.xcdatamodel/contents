@@ -20,6 +20,7 @@
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="externalRSVP" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="rsvp" optional="YES" attributeType="String" syncable="YES"/>
@@ -287,7 +288,7 @@
     <elements>
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="405"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="420"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="30"/>
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="150"/>
         <element name="Group" positionX="-9" positionY="135" width="128" height="150"/>

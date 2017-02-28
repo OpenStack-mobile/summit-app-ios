@@ -25,7 +25,8 @@ final class JSONTests: XCTestCase {
             guard let summit = Summit(JSONValue: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
             
-            XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+            XCTAssert(summit.schedule.isEmpty == false, "No Events")
+            XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
         }
     }
     

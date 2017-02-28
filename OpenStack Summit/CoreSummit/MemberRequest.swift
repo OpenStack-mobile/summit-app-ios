@@ -107,6 +107,10 @@ public struct MemberResponse {
         
         public let type: EventType
         
+        public let rsvp: String?
+        
+        public let externalRSVP: Bool
+        
         public let sponsors: [Company]
         
         public let tags: [Tag]
@@ -116,8 +120,6 @@ public struct MemberResponse {
         public let presentation: Presentation
         
         public let videos: [Video]
-        
-        public let rsvp: String?
         
         public let groups: [Group]
     }

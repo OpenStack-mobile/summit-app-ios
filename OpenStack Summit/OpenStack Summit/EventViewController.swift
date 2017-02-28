@@ -144,11 +144,20 @@ extension EventViewController {
     }
     
     func toggleScheduledStatus(for event: EventDetail) {
+                
+        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
+        
+        let rsvpURL = NSURL(string: event.rsvp)
+        
+        // just open RSVP link
+        guard rsvpURL == nil || event.externalRSVP else {
+            
+            UIApplication.sharedApplication().openURL(rsvpURL!)
+            return
+        }
         
         guard let attendee = Store.shared.authenticatedMember?.attendeeRole
             else { return }
-        
-        let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         guard eventRequestInProgress == false else { return }
         
@@ -190,7 +199,12 @@ extension EventViewController {
                     // show error
                     controller.showErrorMessage(error)
                     
-                case .None: break
+                case .None:
+                    
+                    if let url = rsvpURL {
+                        
+                        UIApplication.sharedApplication().openURL(url)
+                    }
                 }
             }
         }
