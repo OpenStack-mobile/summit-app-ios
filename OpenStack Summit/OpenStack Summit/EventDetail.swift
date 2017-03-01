@@ -38,6 +38,7 @@ public struct EventDetail: CoreDataDecodable {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
+    public let willRecord: Bool
     public let rsvp: String
     public let externalRSVP: Bool
     
@@ -63,6 +64,7 @@ public struct EventDetail: CoreDataDecodable {
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
         self.rsvp = event.rsvp ?? ""
         self.externalRSVP = event.externalRSVP
+        self.willRecord = event.willRecord
         
         self.venue = event.location?.identifier
         
