@@ -35,6 +35,8 @@ public struct Event: Named {
     public var rsvp: String?
     
     public var externalRSVP: Bool
+    
+    public var willRecord: Bool
         
     public var sponsors: Set<Identifier>
     
@@ -73,4 +75,5 @@ public func == (lhs: Event, rhs: Event) -> Bool {
         && lhs.rsvp == rhs.rsvp
         && lhs.groups == rhs.groups
         && lhs.externalRSVP == rhs.externalRSVP
+        && lhs.willRecord == rhs.willRecord
 }
