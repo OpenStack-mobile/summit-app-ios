@@ -29,7 +29,7 @@ public struct EventDetail: CoreDataDecodable {
     public let eventType: String
     public let trackGroupColor: String
     
-    public let venue: Identifier?
+    public let venue: Location?
     public let eventDescription: String
     public let tags: String
     public let speakers: [SpeakerDetail]
@@ -64,7 +64,15 @@ public struct EventDetail: CoreDataDecodable {
         self.rsvp = event.rsvp ?? ""
         self.externalRSVP = event.externalRSVP
         
-        self.venue = event.location?.identifier
+        
+        if let locationManagedObject = event.location {
+            
+            self.venue = Location(managedObject: locationManagedObject)
+            
+        } else {
+            
+            self.venue = nil
+        }
         
         self.finished = event.end.compare(NSDate()) == .OrderedAscending
         self.eventDescription = event.descriptionText ?? ""

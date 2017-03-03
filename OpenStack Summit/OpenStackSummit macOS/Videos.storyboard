@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="YMV-7e-eRk">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Videos-->
+        <scene sceneID="hqi-Nu-eeX">
+            <objects>
+                <viewController title="Videos" storyboardIdentifier="Videos" showSeguePresentationStyle="single" id="YMV-7e-eRk" customClass="VideosViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Dop-KM-2XV">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="due-lu-l50">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASz-yc-DTK">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                        <clipView key="contentView" drawsBackground="NO" id="mLl-VY-CjI">
+                                            <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <collectionView selectable="YES" id="wYL-7Z-rye">
+                                                    <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="NJc-6I-jPz">
+                                                        <size key="itemSize" width="324" height="221"/>
+                                                    </collectionViewFlowLayout>
+                                                    <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="YMV-7e-eRk" id="S1u-NR-c3J"/>
+                                                        <outlet property="delegate" destination="YMV-7e-eRk" id="Gbh-g4-mOH"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="CHr-zP-RDQ">
+                                            <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Mc1-KZ-Sjb">
+                                            <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ASz-yc-DTK" firstAttribute="leading" secondItem="due-lu-l50" secondAttribute="leading" id="2b2-1u-ixI"/>
+                                    <constraint firstAttribute="bottom" secondItem="ASz-yc-DTK" secondAttribute="bottom" id="HMB-jP-A6d"/>
+                                    <constraint firstItem="ASz-yc-DTK" firstAttribute="top" secondItem="due-lu-l50" secondAttribute="top" id="pqz-WJ-G4z"/>
+                                    <constraint firstAttribute="trailing" secondItem="ASz-yc-DTK" secondAttribute="trailing" id="rN4-f7-gTP"/>
+                                </constraints>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="due-lu-l50" firstAttribute="leading" secondItem="Dop-KM-2XV" secondAttribute="leading" id="2Go-RA-rQh"/>
+                            <constraint firstAttribute="bottom" secondItem="due-lu-l50" secondAttribute="bottom" id="EPI-Kp-aUP"/>
+                            <constraint firstAttribute="trailing" secondItem="due-lu-l50" secondAttribute="trailing" id="LKa-P5-pit"/>
+                            <constraint firstItem="due-lu-l50" firstAttribute="top" secondItem="Dop-KM-2XV" secondAttribute="top" id="iaz-o2-Oeq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="wYL-7Z-rye" id="ad8-jc-fhM"/>
+                    </connections>
+                </viewController>
+                <customObject id="KD6-Oe-FuP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885" y="2662"/>
+        </scene>
+    </scenes>
+</document>

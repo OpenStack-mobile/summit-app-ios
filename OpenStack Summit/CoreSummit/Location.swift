@@ -31,6 +31,14 @@ public enum Location: Unique {
         case let .room(room): return room.identifier
         }
     }
+    
+    public var venue: Identifier {
+        
+        switch self {
+        case let .venue(venue): return venue.identifier
+        case let .room(room): return room.venue
+        }
+    }
 }
 
 // MARK: - Equatable

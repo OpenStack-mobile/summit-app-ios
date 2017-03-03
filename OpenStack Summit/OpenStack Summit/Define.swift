@@ -16,7 +16,7 @@ public let AppVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVers
 /// Build of the app.
 public let AppBuild = Int(NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String)!
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(OSX)
     
 /// The app's environment.
 let AppEnvironment: Environment = {
@@ -36,3 +36,4 @@ let AppEnvironment: Environment = {
     let AppEnvironment = Environment.Staging
     #endif
 #endif
+
