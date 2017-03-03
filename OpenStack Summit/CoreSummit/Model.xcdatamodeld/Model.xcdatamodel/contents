@@ -26,6 +26,7 @@
         <attribute name="rsvp" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="socialDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="willRecord" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendee" inverseName="schedule" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="eventType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventType" inverseName="events" inverseEntity="EventType" syncable="YES"/>
         <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="favoriteEvents" inverseEntity="Member" syncable="YES"/>
@@ -288,7 +289,7 @@
     <elements>
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="420"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="435"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="30"/>
         <element name="Feedback" positionX="-9" positionY="135" width="128" height="150"/>
         <element name="Group" positionX="-9" positionY="135" width="128" height="150"/>

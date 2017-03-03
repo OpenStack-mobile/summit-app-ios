@@ -111,6 +111,8 @@ public struct MemberResponse {
         
         public let externalRSVP: Bool
         
+        public let willRecord: Bool
+        
         public let sponsors: [Company]
         
         public let tags: [Tag]
@@ -179,6 +181,8 @@ public func == (lhs: MemberResponse.Event, rhs: MemberResponse.Event) -> Bool {
         && lhs.videos == rhs.videos
         && lhs.rsvp == rhs.rsvp
         && lhs.groups == rhs.groups
+        && lhs.externalRSVP == rhs.externalRSVP
+        && lhs.willRecord == rhs.willRecord
 }
 
 public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool {

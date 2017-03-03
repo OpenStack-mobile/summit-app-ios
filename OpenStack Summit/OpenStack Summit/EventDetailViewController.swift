@@ -185,6 +185,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             self.data.append(.actions)
         }
         
+        if eventDetail.video != nil {
+            
+            self.data.append(.video)
+        }
+        
         self.data.append(.description)
         
         if eventDetail.location.isEmpty == false {
@@ -397,6 +402,31 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 return cell
                 
+            case .video:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
+                
+                guard let video = self.eventDetail?.video
+                    else { fatalError("Event has no video") }
+                
+                cell.videoImageView.image = nil
+                cell.playButton.hidden = true
+                cell.activityIndicator.hidden = false
+                cell.activityIndicator.startAnimating()
+                
+                guard let thumbnailURL = NSURL(youtubeThumbnail: video.youtube)
+                    else { return cell }
+                
+                cell.videoImageView.hnk_setImageFromURL(thumbnailURL, success: { (image) in
+                    
+                    cell.playButton.hidden = false
+                    cell.activityIndicator.hidden = true
+                    cell.activityIndicator.stopAnimating()
+                    cell.videoImageView.image = image
+                })
+                
+                return cell
+                
             case .description:
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDescriptionTableViewCell, forIndexPath: indexPath)!
@@ -408,7 +438,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 // video
                 
-                cell.playButton.hidden = eventDetail.video == nil
+                cell.playButton.hidden = eventDetail.willRecord == false
                 
                 // description text
                 
@@ -456,39 +486,26 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
             case .actions:
                 
-                let cell: EventDetailActionsTableViewCell
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsCell, forIndexPath: indexPath)!
                 
-                if canAddFeedback(for: eventDetail) {
-                    
-                    cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsACell, forIndexPath: indexPath)!
-                    
-                } else {
-                    
-                    cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsBCell, forIndexPath: indexPath)!
-                }
+                let canRate = canAddFeedback(for: eventDetail)
                 
                 let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
                 
                 let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
                 
+                // rate button
+                cell.rateButton.hidden = canRate == false
+                
+                // save button
                 cell.saveButton.actionLabel.text = isFavorite ? "Saved" : "Save"
                 
-                let saveImage = isFavorite ? "EventButtonSaved" : "EventButtonSave"
+                cell.saveButton.actionImageView.image = isFavorite ? R.image.eventButtonSaved()! : R.image.eventButtonSave()!
                 
-                cell.saveButton.actionImageView.image = UIImage(named: saveImage)!
+                // confirm button
+                cell.confirmButton.actionLabel.text = didConfirm ? "Confirmed" : "Confirm"
                 
-                if eventDetail.rsvp.isEmpty {
-                    
-                    cell.confirmButton.actionLabel.text = didConfirm ? "Confirmed" : "Confirm"
-                    
-                } else {
-                    
-                    cell.confirmButton.actionLabel.text = didConfirm ? "RSVP'd" : "RSVP"
-                }
-                
-                let scheduleImage = didConfirm ? "EventButtonScheduleRemove" : "EventButtonScheduleAdd"
-                
-                cell.confirmButton.actionImageView.image = UIImage(named: scheduleImage)!
+                cell.confirmButton.actionImageView.image = didConfirm ? R.image.eventButtonScheduleRemove()! : R.image.eventButtonScheduleAdd()!
                 
                 return cell
             }
@@ -633,8 +650,9 @@ private extension EventDetailViewController {
     enum Detail {
         
         case title
-        case description
         case actions
+        case video
+        case description
         case location
         case level
     }
@@ -642,73 +660,79 @@ private extension EventDetailViewController {
 
 final class EventDetailActionButton: Button {
     
-    @IBOutlet weak var actionImageView: UIImageView!
-    
-    @IBOutlet weak var actionLabel: UILabel!
+    @IBOutlet private(set) weak var actionImageView: UIImageView!
+    @IBOutlet private(set) weak var actionLabel: UILabel!
 }
 
 final class EventDetailHeader: UIView {
     
     static let height: CGFloat = 60.0
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet private(set) weak var label: UILabel!
 }
 
 final class EventDetailFeedbackHeader: UIView {
     
     static let height: CGFloat = 60.0
     
-    @IBOutlet weak var reviewsLabel: UILabel!
-    @IBOutlet weak var averageRatingView: CosmosView!
-    @IBOutlet weak var averageRatingLabel: UILabel!
-    @IBOutlet weak var averageRatingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var reviewsLabel: UILabel!
+    @IBOutlet private(set) weak var averageRatingView: CosmosView!
+    @IBOutlet private(set) weak var averageRatingLabel: UILabel!
+    @IBOutlet private(set) weak var averageRatingActivityIndicator: UIActivityIndicatorView!
 }
 
 final class EventDetailTitleTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var trackLabel: UILabel!
-    @IBOutlet weak var trackLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabelHeightConstraint: NSLayoutConstraint!
+}
+
+final class EventDetailVideoTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var videoImageView: UIImageView!
+    @IBOutlet private(set) weak var playButton: UIButton!
+    @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
 }
 
 final class EventDetailDescriptionTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var eventDayLabel: UILabel!
-    @IBOutlet weak var eventTimeLabel: UILabel!
-    @IBOutlet weak var playButton: Button!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var sponsorsLabel: UILabel!
-    @IBOutlet weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var eventDayLabel: UILabel!
+    @IBOutlet private(set) weak var eventTimeLabel: UILabel!
+    @IBOutlet private(set) weak var playButton: Button!
+    @IBOutlet private(set) weak var descriptionTextView: UITextView!
+    @IBOutlet private(set) weak var sponsorsLabel: UILabel!
+    @IBOutlet private(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
 }
 
 final class EventDetailTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var sectionLabel: UILabel!
+    @IBOutlet private(set) weak var sectionLabel: UILabel!
     
-    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet private(set) weak var valueLabel: UILabel!
 }
 
 final class EventDetailActionsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var saveButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var saveButton: EventDetailActionButton!
     
-    @IBOutlet weak var confirmButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var confirmButton: EventDetailActionButton!
     
-    @IBOutlet weak var rateButton: EventDetailActionButton?
+    @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
 }
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var memberImageView: UIImageView!
+    @IBOutlet private(set) weak var memberImageView: UIImageView!
     
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
     
-    @IBOutlet weak var reviewLabel: UILabel!
+    @IBOutlet private(set) weak var reviewLabel: UILabel!
     
-    @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet private(set) weak var ratingView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
