@@ -367,33 +367,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let index = indexPath.row
         let event = dayEvents[index]
         
-        // set text
-        cell.nameLabel.text = event.name
-        cell.dateTimeLabel.text = event.dateTime
-        cell.trackLabel.text = event.track
-        cell.trackLabel.hidden = event.track.isEmpty
-        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
-        
-        // set image
-        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
-        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
-        
-        if isScheduled {
-            
-            cell.statusImageView.hidden = false
-            cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
-            
-        } else if isFavorite {
-            
-            cell.statusImageView.hidden = false
-            cell.statusImageView.image = R.image.contextMenuSaved()!
-            
-        } else {
-            
-            cell.statusImageView.hidden = true
-            cell.statusImageView.image = nil
-            
-        }
+        cell.eventTitle = event.name
+        cell.eventType = event.eventType
+        cell.time = event.time
+        cell.location = event.location
+        cell.sponsors = event.sponsors
+        cell.track = event.track
+        cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        cell.trackGroupColor = UIColor(hexString: event.trackGroupColor)
         
         // configure button
         cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), forControlEvents: .TouchUpInside)

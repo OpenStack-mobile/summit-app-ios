@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C6F-44-PrG">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSComputer" id="5KH-g7-fd0"/>
+                </imageView>
+                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="5wB-iz-qor">
+                    <rect key="frame" x="42" y="42" width="16" height="16"/>
+                </progressIndicator>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="C6F-44-PrG" secondAttribute="bottom" id="2P1-xI-l4e"/>
+                <constraint firstItem="C6F-44-PrG" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ShK-pD-Pjm"/>
+                <constraint firstItem="C6F-44-PrG" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="UgG-NX-UMw"/>
+                <constraint firstItem="5wB-iz-qor" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="iUA-OB-QHX"/>
+                <constraint firstItem="5wB-iz-qor" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="rKu-5J-DPy"/>
+                <constraint firstAttribute="trailing" secondItem="C6F-44-PrG" secondAttribute="trailing" id="wrO-Gy-orY"/>
+            </constraints>
+            <point key="canvasLocation" x="118" y="158"/>
+        </customView>
+        <collectionViewItem id="cBo-3j-9XH" customClass="VenueImageCollectionViewItem" customModule="OpenStackSummit" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="5wB-iz-qor" id="I8k-70-diX"/>
+                <outlet property="imageView" destination="C6F-44-PrG" id="MuV-a9-jca"/>
+                <outlet property="sourceItemView" destination="c22-O7-iKe" id="s9x-iR-atI"/>
+                <outlet property="view" destination="c22-O7-iKe" id="z0b-XX-QyQ"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+    <resources>
+        <image name="NSComputer" width="32" height="32"/>
+    </resources>
+</document>
