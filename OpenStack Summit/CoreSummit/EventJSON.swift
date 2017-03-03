@@ -12,7 +12,7 @@ internal extension Event {
     
     enum JSONKey: String {
         
-        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups, rsvp_external
+        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups, rsvp_external, to_record
     }
 }
 
@@ -47,6 +47,7 @@ extension Event: JSONParametrizedDecodable {
         self.sponsors = Set(sponsors)
         self.presentation = presentation
         self.externalRSVP = JSONObject[JSONKey.rsvp_external.rawValue]?.rawValue as? Bool ?? false
+        self.willRecord = JSONObject[JSONKey.to_record.rawValue]?.rawValue as? Bool ?? false
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
             
@@ -139,6 +140,7 @@ extension MemberResponse.Event: JSONDecodable {
         self.presentation = presentation
         self.groups = groups
         self.externalRSVP = JSONObject[JSONKey.rsvp_external.rawValue]?.rawValue as? Bool ?? false
+        self.willRecord = JSONObject[JSONKey.to_record.rawValue]?.rawValue as? Bool ?? false
         
         if let doubleValue = averageFeedbackJSON.rawValue as? Double {
             

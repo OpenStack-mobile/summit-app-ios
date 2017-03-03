@@ -6,7 +6,11 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import UIKit
+#if os(iOS) || os(tvOS)
+    import UIKit
+#elseif os(OSX)
+    import AppKit
+#endif
 
 protocol MessageEnabledViewController: class {
 
@@ -72,5 +76,28 @@ extension MessageEnabledViewController {
         viewController.showErrorAlert(message)
     }
 }
+    
+#elseif os(OSX)
+    
+extension MessageEnabledViewController {
 
+    func showInfoMessage(title: String, message: String) {
+        
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = .Informational
+        alert.runModal()
+    }
+    
+    func showErrorMessage(error: ErrorType,
+                          fileName: String = #file,
+                          lineNumber: Int = #line) {
+        
+        NSApp.presentError(error as NSError)
+        
+        print("Error at \(fileName):\(lineNumber)\n\(error)")
+    }
+}
+    
 #endif

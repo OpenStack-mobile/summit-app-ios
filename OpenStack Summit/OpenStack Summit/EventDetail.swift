@@ -29,7 +29,7 @@ public struct EventDetail: CoreDataDecodable {
     public let eventType: String
     public let trackGroupColor: String
     
-    public let venue: Identifier?
+    public let venue: Location?
     public let eventDescription: String
     public let tags: String
     public let speakers: [SpeakerDetail]
@@ -38,6 +38,7 @@ public struct EventDetail: CoreDataDecodable {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
+    public let willRecord: Bool
     public let rsvp: String
     public let externalRSVP: Bool
     
@@ -63,8 +64,17 @@ public struct EventDetail: CoreDataDecodable {
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
         self.rsvp = event.rsvp ?? ""
         self.externalRSVP = event.externalRSVP
+        self.willRecord = event.willRecord
         
-        self.venue = event.location?.identifier
+        
+        if let locationManagedObject = event.location {
+            
+            self.venue = Location(managedObject: locationManagedObject)
+            
+        } else {
+            
+            self.venue = nil
+        }
         
         self.finished = event.end.compare(NSDate()) == .OrderedAscending
         self.eventDescription = event.descriptionText ?? ""

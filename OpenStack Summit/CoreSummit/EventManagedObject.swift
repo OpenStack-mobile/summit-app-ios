@@ -30,6 +30,8 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var externalRSVP: Bool
     
+    @NSManaged public var willRecord: Bool
+    
     @NSManaged public var track: TrackManagedObject?
     
     @NSManaged public var eventType: EventTypeManagedObject
@@ -66,6 +68,7 @@ extension Event: CoreDataDecodable {
         self.averageFeedback = managedObject.averageFeedback
         self.rsvp = managedObject.rsvp
         self.externalRSVP = managedObject.externalRSVP
+        self.willRecord = managedObject.willRecord
         self.track = managedObject.track?.identifier
         self.type = managedObject.eventType.identifier
         self.sponsors = managedObject.sponsors.identifiers
@@ -92,6 +95,7 @@ extension Event: CoreDataEncodable {
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
         managedObject.externalRSVP = externalRSVP
+        managedObject.willRecord = willRecord
         managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
@@ -123,6 +127,7 @@ extension MemberResponse.Event: CoreDataEncodable {
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
         managedObject.externalRSVP = externalRSVP
+        managedObject.willRecord = willRecord
         managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
