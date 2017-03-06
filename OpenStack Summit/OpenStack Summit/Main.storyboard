@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aED-a0-oD6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aED-a0-oD6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,9 +12,8 @@
         <!--Navigation Controller-->
         <scene sceneID="csW-HI-qPJ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yaV-JP-cpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="aED-a0-oD6" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="28o-9F-Sa0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="28o-9F-Sa0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -23,6 +21,7 @@
                         <segue destination="AVr-0z-NbI" kind="relationship" relationship="rootViewController" id="mFV-JN-QXZ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yaV-JP-cpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-22" y="385"/>
         </scene>
@@ -127,11 +126,17 @@
                                             <action selector="login:" destination="AVr-0z-NbI" eventType="touchUpInside" id="HXB-4g-1Hm"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="WdF-Gb-aDw">
+                                        <rect key="frame" x="169" y="51" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Ge6-hl-sol" secondAttribute="trailing" constant="20" id="ABG-by-Bhs"/>
                                     <constraint firstItem="Ge6-hl-sol" firstAttribute="leading" secondItem="fDc-Q1-oct" secondAttribute="leading" constant="20" id="CCu-T6-6ly"/>
+                                    <constraint firstItem="WdF-Gb-aDw" firstAttribute="centerX" secondItem="fDc-Q1-oct" secondAttribute="centerX" id="Esi-gI-Xid"/>
+                                    <constraint firstItem="WdF-Gb-aDw" firstAttribute="centerY" secondItem="fDc-Q1-oct" secondAttribute="centerY" id="Meo-0M-FDs"/>
                                     <constraint firstItem="Ge6-hl-sol" firstAttribute="top" secondItem="fDc-Q1-oct" secondAttribute="top" constant="20" id="OQC-GH-t8z"/>
                                     <constraint firstAttribute="trailing" secondItem="GeV-KC-TN4" secondAttribute="trailing" constant="20" id="Tzt-ZL-eWu"/>
                                     <constraint firstItem="GeV-KC-TN4" firstAttribute="top" secondItem="Ge6-hl-sol" secondAttribute="bottom" constant="8" id="V9x-xs-YXU"/>
@@ -158,9 +163,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="Meu-Q5-hfb"/>
                     <connections>
-                        <outlet property="activityIndicatorView" destination="frF-zg-TjI" id="CLz-7Z-Lc5"/>
+                        <outlet property="dataLoadedActivityIndicatorView" destination="WdF-Gb-aDw" id="tX2-bb-alu"/>
                         <outlet property="guestButton" destination="GeV-KC-TN4" id="hj6-lp-cAe"/>
                         <outlet property="loginButton" destination="Ge6-hl-sol" id="ZTd-ev-eKb"/>
+                        <outlet property="summitActivityIndicatorView" destination="frF-zg-TjI" id="593-8G-3Et"/>
                         <outlet property="summitDateLabel" destination="hYL-yB-6Eb" id="cDh-xj-k5u"/>
                         <outlet property="summitNameLabel" destination="C8S-77-hZ6" id="w1P-ha-HHD"/>
                         <outlet property="summitView" destination="Jq3-r8-xIB" id="kMy-HR-QTF"/>
