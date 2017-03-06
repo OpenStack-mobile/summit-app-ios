@@ -557,7 +557,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 guard let venue = eventDetail.venue
                     else { return }
                 
-                showLocationDetail(venue)
+                showLocationDetail(venue.identifier)
                 
             case .level:
                 
