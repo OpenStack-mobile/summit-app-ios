@@ -14,21 +14,28 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet private(set) weak var summitActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet weak var guestButton: UIButton!
+    @IBOutlet private(set) weak var summitView: UIView!
     
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var summitDateLabel: UILabel!
     
-    @IBOutlet weak var summitView: UIView!
+    @IBOutlet private(set) weak var summitNameLabel: UILabel!
     
-    @IBOutlet weak var summitDateLabel: UILabel!
+    @IBOutlet private(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet weak var summitNameLabel: UILabel!
+    @IBOutlet private(set) weak var loginButton: UIButton!
+    
+    @IBOutlet private(set) weak var guestButton: UIButton!
     
     // MARK: - Properties
     
     private(set) var willTransition = false
+    
+    private var state: State = .loadingSummits {
+        
+        didSet { configureView() }
+    }
     
     private var summit: SummitsResponse.Summit?
     
@@ -57,6 +64,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
         return .LightContent
     }
     
@@ -79,17 +87,51 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private func configureView() {
         
-        self.guestButton.hidden = Store.shared.isLoggedIn
-        self.loginButton.hidden = Store.shared.isLoggedIn
-        self.guestButton.enabled = SummitManager.shared.summit.value > 0
-        self.loginButton.enabled = SummitManager.shared.summit.value > 0
-        
-        self.summitView.hidden = self.summit == nil
-        self.activityIndicatorView.hidden = self.summit != nil
-        
-        if let summit = self.summit {
+        switch state {
             
-            self.activityIndicatorView.stopAnimating()
+        case .loadingSummits:
+            
+            self.summitView.hidden = true
+            self.summitActivityIndicatorView.hidden = false
+            self.summitActivityIndicatorView.startAnimating()
+            
+            self.guestButton.hidden = true
+            self.loginButton.hidden = true
+            
+            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.stopAnimating()
+            
+        case .loadingData:
+            
+            assert(self.summit != nil, "Invalid State")
+            
+            self.summitView.hidden = false
+            self.summitActivityIndicatorView.hidden = true
+            self.summitActivityIndicatorView.stopAnimating()
+            
+            self.guestButton.hidden = true
+            self.loginButton.hidden = true
+            
+            self.dataLoadedActivityIndicatorView.hidden = false
+            self.dataLoadedActivityIndicatorView.startAnimating()
+            
+        case .dataLoaded:
+            
+            assert(self.isDataLoaded, "Invalid State")
+            
+            self.summitView.hidden = false
+            self.summitActivityIndicatorView.hidden = true
+            self.summitActivityIndicatorView.stopAnimating()
+            
+            self.guestButton.hidden = false
+            self.loginButton.hidden = false
+            
+            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.stopAnimating()
+        }
+        
+        // show current summit info
+        if let summit = self.summit {
             
             self.summitNameLabel.text = summit.name
             
@@ -102,10 +144,6 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
             
             self.summitDateLabel.text = stringDateFrom + stringDateTo
-            
-        } else {
-            
-            self.activityIndicatorView.startAnimating()
         }
     }
     
@@ -156,6 +194,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private func loadSummits() {
         
+        state = .loadingSummits
+        
+        print("Will load summits")
+        
         Store.shared.summits { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -176,6 +218,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     guard let latestSummit = page.items.last
                         else { fatalError("No summits") }
                     
+                    print("Loaded \(page.total) summits")
+                    
                     controller.summit = latestSummit
                     
                     if SummitManager.shared.summit.value == 0 {
@@ -183,9 +227,59 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                         SummitManager.shared.summit.value = latestSummit.identifier
                     }
                     
-                    controller.configureView()
+                    controller.loadData()
                 }
             }
         }
+    }
+    
+    private func loadData() {
+        
+        guard isDataLoaded == false
+            else { state = .dataLoaded; return }
+        
+        state = .loadingData
+        
+        let summitID = SummitManager.shared.summit.value
+        
+        print("Will load summit \(summitID)")
+        
+        Store.shared.summit(summitID) { (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                
+                guard let controller = self else { return }
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    print("Error loading summit \(summitID): \(error)")
+                    
+                    // try again
+                    controller.loadData()
+                    
+                case let .Value(summit):
+                    
+                    assert(controller.isDataLoaded)
+                    
+                    print("Loaded \(summit.name) summit")
+                    
+                    controller.state = .dataLoaded
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+private extension LaunchScreenViewController {
+    
+    enum State {
+        
+        case loadingSummits
+        case loadingData
+        case dataLoaded
     }
 }
