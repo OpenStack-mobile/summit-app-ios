@@ -11,6 +11,7 @@ import CoreData
 import UIKit
 import SwiftFoundation
 import CoreSummit
+import JGProgressHUD
 
 final class TeamInvitationsViewController: UITableViewController, PagingTableViewController {
     
@@ -21,6 +22,8 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     var completion: ((TeamInvitationsViewController) -> ())?
     
     lazy var pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     private lazy var dateFormatter: NSDateFormatter = {
         
@@ -83,7 +86,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
                 
                 if let error = response {
                     
-                    controller.hideActivityIndicator()
+                    controller.dismissActivityIndicator()
                     
                     controller.showErrorMessage(error)
                     
@@ -95,7 +98,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
                             
                             guard let controller = self else { return }
                             
-                            controller.hideActivityIndicator()
+                            controller.dismissActivityIndicator()
                             
                             switch response {
                                 
@@ -124,7 +127,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 if let error = response {
                     

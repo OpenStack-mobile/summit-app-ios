@@ -1,7 +1,7 @@
 github "OpenStack-Mobile/SwiftFoundation" "Swift.2.2"
 github "OpenStack-Mobile/aerogear-ios-http" "master"
 github "OpenStack-Mobile/aerogear-ios-oauth2" "openstack"
-github "OpenStack-Mobile/SwiftSpinner" "OpenStack"
+github "JonasGessner/JGProgressHUD"
 github "OpenStack-Mobile/XLPagerTabStrip" "master"
 github "OpenStack-Mobile/SWRevealViewController" "master"
 github "OpenStack-Mobile/R.swift.Library" "OpenStack"

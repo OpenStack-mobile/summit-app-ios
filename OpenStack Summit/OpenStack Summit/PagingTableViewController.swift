@@ -15,7 +15,7 @@
 import Foundation
 import CoreSummit
 
-protocol PagingTableViewController: class, UITableViewDataSource, UITableViewDelegate, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+protocol PagingTableViewController: class, UITableViewDataSource, UITableViewDelegate, ActivityViewController, MessageEnabledViewController {
     
     associatedtype Item
     
@@ -44,7 +44,7 @@ extension PagingTableViewController {
     
     func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
         
-        hideActivityIndicator()
+        dismissActivityIndicator(animated: true)
         
         #if os(iOS)
         refreshControl?.endRefreshing()

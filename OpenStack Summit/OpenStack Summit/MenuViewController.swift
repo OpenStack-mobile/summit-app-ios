@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import SwiftSpinner
 import AeroGearOAuth2
 import CoreSummit
 import Crashlytics
+import JGProgressHUD
 
-final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActivityIndicatorProtocol, SWRevealViewControllerDelegate, MessageEnabledViewController {
+final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityViewController, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -39,6 +39,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     private var unreadNotificationsObserver: Int?
     private var unreadTeamMessagesObserver: Int?
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Accessors
     
@@ -179,7 +181,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             login()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.hideActivityIndicator()
+                self.dismissActivityIndicator()
             }
         } else {
             logout()
@@ -396,7 +398,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 
                 controller.hideMenu()
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     
@@ -444,7 +446,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         navigateToHome()
         reloadMenu()
         hideMenu()
-        hideActivityIndicator()
+        dismissActivityIndicator()
     }
     
     // MARK: - SWRevealViewControllerDelegate
@@ -504,7 +506,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         navigateToHome()
         reloadMenu()
         hideMenu()
-        hideActivityIndicator()
+        dismissActivityIndicator()
         
         showInfoMessage("Session expired", message: "Your session expired, please log in again using your credentials")
     }

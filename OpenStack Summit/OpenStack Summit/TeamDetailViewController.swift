@@ -11,8 +11,9 @@ import UIKit
 import CoreData
 import CoreSummit
 import SwiftFoundation
+import JGProgressHUD
 
-final class TeamDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate, MessageEnabledViewController, ShowActivityIndicatorProtocol {
+final class TeamDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate, MessageEnabledViewController, ActivityViewController {
     
     // MARK: - IB Outlets
     
@@ -41,6 +42,8 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
         
         return formatter
     }()
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Loading
     
@@ -359,7 +362,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                     
                     guard let controller = self else { return }
                     
-                    controller.hideActivityIndicator()
+                    controller.dismissActivityIndicator()
                     
                     if let error = response {
                         
@@ -406,7 +409,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                         
                         guard let controller = self else { return }
                         
-                        controller.hideActivityIndicator()
+                        controller.dismissActivityIndicator()
                         
                         if let error = response {
                             
@@ -439,7 +442,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                     
                     guard let controller = self else { return }
                     
-                    controller.hideActivityIndicator()
+                    controller.dismissActivityIndicator()
                     
                     if let error = response {
                         
@@ -474,7 +477,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
                         
                         guard let controller = self else { return }
                         
-                        controller.hideActivityIndicator()
+                        controller.dismissActivityIndicator()
                         
                         if let error = response {
                             

@@ -44,13 +44,14 @@ final class InboxViewController: RevealTabStripViewController, RevealViewControl
         
         childViewControllers.append(notificationsVC)
         
-        /*
+        #if DEBUG
         if Store.shared.authenticatedMember != nil {
             
             let teamsVC = R.storyboard.teams.initialViewController()!
             
             childViewControllers.append(teamsVC)
-        }*/
+        }
+        #endif
         
         return childViewControllers
     }

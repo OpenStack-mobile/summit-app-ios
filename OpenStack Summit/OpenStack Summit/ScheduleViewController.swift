@@ -12,8 +12,9 @@ import AFHorizontalDayPicker
 import CoreSummit
 import CoreData
 import EventKit
+import JGProgressHUD
 
-class ScheduleViewController: UIViewController, EventViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ScheduleViewController: UIViewController, EventViewController, MessageEnabledViewController, ActivityViewController, AFHorizontalDayPickerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     typealias DateFilter = EventManagedObject.DateFilter
     
@@ -26,6 +27,8 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     final var eventRequestInProgress = false
     
     final lazy var eventStore: EKEventStore = EKEventStore()
+    
+    final lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     final private(set) var summitTimeZoneOffset: Int = 0
     
@@ -179,7 +182,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     

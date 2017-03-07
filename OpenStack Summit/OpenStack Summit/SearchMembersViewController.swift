@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftFoundation
 import CoreSummit
+import JGProgressHUD
 
 final class SearchMembersViewController: UITableViewController, UISearchBarDelegate, PagingTableViewController {
     
@@ -35,6 +36,8 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
     private(set) var scope: Scope = .firstName
     
     lazy var pageController: PageController<Member> = PageController(fetch: self.fetch)
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Loading
     

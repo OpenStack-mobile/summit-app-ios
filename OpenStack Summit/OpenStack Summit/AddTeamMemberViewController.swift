@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import SwiftFoundation
 import CoreSummit
+import JGProgressHUD
 
-final class AddTeamMemberViewController: UITableViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol {
+final class AddTeamMemberViewController: UITableViewController, MessageEnabledViewController, ActivityViewController {
     
     // MARK: - IB Outlets
     
@@ -45,6 +46,8 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     private var teamCache: Team!
     
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -74,7 +77,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     

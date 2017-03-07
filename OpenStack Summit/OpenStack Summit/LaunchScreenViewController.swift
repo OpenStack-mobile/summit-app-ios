@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class LaunchScreenViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol {
+final class LaunchScreenViewController: UIViewController, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -116,6 +116,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         // load summit
         if isDataLoaded == false {
             
+            /*
             let summit = SummitManager.shared.summit.value
             
             self.showActivityIndicator()
@@ -126,7 +127,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     guard let controller = self else { return }
                     
-                    controller.hideActivityIndicator()
+                    controller.dismissActivityIndicator()
                     
                     switch response {
                         
@@ -141,7 +142,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 }
             }
             
-            return
+            return */
         }
         
         let revealViewController = AppDelegate.shared.revealViewController
