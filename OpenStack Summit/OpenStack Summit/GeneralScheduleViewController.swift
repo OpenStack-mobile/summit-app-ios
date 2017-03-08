@@ -9,11 +9,10 @@
 
 import UIKit
 import XLPagerTabStrip
-import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
 
-final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
+final class GeneralScheduleViewController: ScheduleViewController, RevealViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -21,16 +20,77 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     
     @IBOutlet weak var retryButton: UIButton!
     
+    // MARK: - Properties
+    
+    private(set) var filterButton: UIBarButtonItem!
+    
+    private(set) var activeFilterIndicator = false {
+        
+        didSet {
+            
+            filterButton?.tintColor = activeFilterIndicator ? UIColor(hexString: "#F8E71C") : UIColor.whiteColor()
+            navigationController?.toolbar.barTintColor = UIColor(hexString: "#F8E71C")
+            navigationController?.toolbar.translucent = false
+            navigationController?.setToolbarHidden(!activeFilterIndicator, animated: !activeFilterIndicator)
+        }
+    }
+    
+    private var filterObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = filterObserver { FilterManager.shared.filter.remove(observer) }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addMenuButton()
+        
+        navigationItem.title = "EVENTS"
+        
+        filterButton = UIBarButtonItem()
+        filterButton.target = self
+        filterButton.action = #selector(showFilters)
+        filterButton.image = R.image.filter()!
+        
+        navigationItem.rightBarButtonItem = filterButton
+        
+        let message = UIBarButtonItem()
+        message.title = "CLEAR ACTIVE FILTERS"
+        message.style = .Plain
+        message.target = self
+        message.action = #selector(clearFilters)
+        message.tintColor = UIColor(hexString: "#4A4A4A")
+        message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(15)], forState: .Normal)
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: #selector(clearFilters))
+        
+        let clear = UIBarButtonItem()
+        clear.target = self
+        clear.action = #selector(clearFilters)
+        clear.image = UIImage(named: "cancel")
+        clear.tintColor = UIColor.blackColor()
+        
+        toolbarItems = [message, spacer, clear]
+        
+        filterObserver = FilterManager.shared.filter.observe(filterChanged)
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        activeFilterIndicator = FilterManager.shared.filter.value.hasActiveFilters()
         
         userActivity?.becomeCurrent()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        navigationController?.toolbarHidden = true
         
         userActivity?.resignCurrent()
     }
@@ -45,6 +105,26 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
     }
     
     // MARK: - Actions
+    
+    @IBAction func showFilters(sender: UIBarButtonItem) {
+        
+        guard isDataLoaded else {
+            
+            showInfoMessage("Info", message: "No summit data available")
+            return
+        }
+        
+        let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
+        let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
+        navigationController.modalPresentationStyle = .FormSheet
+        
+        self.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    @IBAction func clearFilters(sender: UIBarButtonItem) {
+        
+        FilterManager.shared.filter.value.clearActiveFilters()
+    }
     
     @IBAction func retryButtonPressed(sender: UIButton) {
         
@@ -132,6 +212,16 @@ final class GeneralScheduleViewController: ScheduleViewController, IndicatorInfo
         let events = try! EventManagedObject.filter(filter, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func filterChanged(filter: ScheduleFilter, oldValue: ScheduleFilter) {
+        
+        if self.navigationController?.topViewController === self {
+            
+            self.activeFilterIndicator = filter.hasActiveFilters()
+        }
     }
     
     // MARK: - IndicatorInfoProvider

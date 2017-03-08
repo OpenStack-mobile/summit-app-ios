@@ -29,7 +29,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
         
-    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.eventsViewController)
+    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.generalScheduleViewController)
     
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
     
@@ -321,12 +321,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             
             self.menuViewController.showEvents()
             
-            let _ = self.menuViewController.eventsViewController.generalScheduleViewController.view
-            let _ = self.menuViewController.eventsViewController.view
+            let _ = self.menuViewController.generalScheduleViewController.view
             
             let eventDetailVC = R.storyboard.event.eventDetailViewController()!
             eventDetailVC.event = identifier
-            self.menuViewController.eventsViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
+            self.menuViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
             
         case .speaker:
             
