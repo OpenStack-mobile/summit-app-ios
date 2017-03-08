@@ -11,8 +11,9 @@ import CoreData
 import UIKit
 import SwiftFoundation
 import CoreSummit
+import JGProgressHUD
 
-final class CreateTeamViewController: UITableViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class CreateTeamViewController: UITableViewController, ActivityViewController, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -23,6 +24,8 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
     // MARK: - Properties
     
     var completion: (done: (CreateTeamViewController) -> (), cancel: (CreateTeamViewController) -> ())?
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Actions
     
@@ -45,7 +48,7 @@ final class CreateTeamViewController: UITableViewController, ShowActivityIndicat
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     

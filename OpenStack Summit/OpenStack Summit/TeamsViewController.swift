@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 import CoreSummit
 import XLPagerTabStrip
+import JGProgressHUD
 
 final class TeamsViewController: UITableViewController, PagingTableViewController, IndicatorInfoProvider, ContextMenuViewController {
     
@@ -53,6 +54,8 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
     }()
     
     private var unreadTeamMessagesObserver: Int?
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Loading
     

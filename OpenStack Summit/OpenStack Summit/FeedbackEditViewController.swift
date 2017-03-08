@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import SwiftSpinner
 import Cosmos
 import CoreSummit
+import JGProgressHUD
 
-final class FeedbackEditViewController: UIViewController, UITextViewDelegate, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class FeedbackEditViewController: UIViewController, UITextViewDelegate, ActivityViewController, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -27,6 +27,8 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     private var eventCache: Event!
     
     private let placeHolderText = "Add your review (up to 500 characters)"
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Accessors
     
@@ -134,7 +136,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     

@@ -8,10 +8,9 @@
 
 import XLPagerTabStrip
 import KTCenterFlowLayout
-import SwiftSpinner
 import CoreSummit
 
-final class EventsViewController: RevealTabStripViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class EventsViewController: RevealTabStripViewController, MessageEnabledViewController {
     
     // MARK: - Properties
     

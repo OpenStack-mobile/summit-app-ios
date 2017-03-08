@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreSummit
+import JGProgressHUD
 
-final class MemberOrderConfirmViewController: UIViewController, RevealViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+final class MemberOrderConfirmViewController: UIViewController, RevealViewController, MessageEnabledViewController, ActivityViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - IB Outlets
     
@@ -24,6 +25,8 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
     private var attendees = [NonConfirmedAttendee]()
     
     private var orderNumber: String!
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Loading
     
@@ -87,7 +90,7 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
             
             guard let controller = self else { return }
             
-            defer { controller.hideActivityIndicator() }
+            defer { controller.dismissActivityIndicator() }
             
             switch response {
                 
@@ -151,7 +154,7 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     

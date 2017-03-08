@@ -62,7 +62,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     
@@ -111,7 +111,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         cell.dateLabel!.stringValue = stringDateFrom + stringDateTo
     }
     
-    // MARK: - ShowActivityIndicatorProtocol
+    // MARK: - ActivityViewController
     
     func showActivityIndicator() {
         
@@ -121,7 +121,7 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         activityIndicator.startAnimation(nil)
     }
     
-    func hideActivityIndicator() {
+    func dismissActivityIndicator(animated animated: Bool = true) {
         
         refreshButton.hidden = false
         tableView.hidden = false

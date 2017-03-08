@@ -9,8 +9,9 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
+import JGProgressHUD
 
-final class SpeakerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RevealViewController, ShowActivityIndicatorProtocol, IndicatorInfoProvider {
+final class SpeakerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RevealViewController, ActivityViewController, IndicatorInfoProvider {
     
     // MARK: - IB Outlets
     
@@ -25,6 +26,8 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
     private(set) var page = 1
     
     private(set) var objectsPerPage = 10
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Loading
     

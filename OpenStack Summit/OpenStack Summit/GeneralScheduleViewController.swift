@@ -9,7 +9,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
 

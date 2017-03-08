@@ -10,13 +10,13 @@ import UIKit
 import Haneke
 import Cosmos
 import AHKActionSheet
-import SwiftSpinner
 import SwiftFoundation
 import CoreSummit
 import XCDYouTubeKit
 import EventKit
+import JGProgressHUD
     
-final class EventDetailViewController: UITableViewController, EventViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController, TextViewController, ContextMenuViewController {
+final class EventDetailViewController: UITableViewController, EventViewController, ActivityViewController, MessageEnabledViewController, TextViewController, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
@@ -31,6 +31,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     var eventRequestInProgress = false
     
     lazy var eventStore: EKEventStore = EKEventStore()
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Private Properties
     
