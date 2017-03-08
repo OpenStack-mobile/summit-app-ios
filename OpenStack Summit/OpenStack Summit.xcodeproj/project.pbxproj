@@ -3681,7 +3681,6 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/Haneke.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/SWRevealViewController.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/XLPagerTabStrip.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/SwiftSpinner.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/AeroGearHttp.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/AeroGearOAuth2.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/AFHorizontalDayPicker.framework",
@@ -3693,7 +3692,6 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/AMTagListView.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MLPAutoCompleteTextField.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/ImageSlideshow.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/Bolts.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/XCDYouTubeKit.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/SlackTextViewController.framework",
 			);
