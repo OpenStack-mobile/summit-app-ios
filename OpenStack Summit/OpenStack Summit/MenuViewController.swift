@@ -33,9 +33,9 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     // MARK: - Properties
     
     // Menu VCs
-    let eventsViewController = EventsViewController()
-    let venuesViewController = VenuesViewController()
-    let speakersViewController = R.storyboard.people.speakerListViewController()!
+    lazy var generalScheduleViewController: GeneralScheduleViewController = R.storyboard.schedule.generalScheduleViewController()!
+    lazy var venuesViewController: VenuesViewController = VenuesViewController()
+    lazy var speakersViewController: SpeakerListViewController = R.storyboard.people.speakerListViewController()!
     
     private var unreadNotificationsObserver: Int?
     private var unreadTeamMessagesObserver: Int?
@@ -308,7 +308,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         highlight(.Events)
         
-        show(eventsViewController)
+        show(generalScheduleViewController)
     }
     
     func showVenues() {
