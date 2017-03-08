@@ -3686,7 +3686,7 @@
 				"$(SRCROOT)/../Carthage/Build/iOS/AeroGearOAuth2.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/AFHorizontalDayPicker.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/KTCenterFlowLayout.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/SwiftSpinner.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/JGProgressHUD.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/MTDates.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/Cosmos.framework",
 				"$(SRCROOT)/../Carthage/Build/iOS/AHKActionSheet.framework",
