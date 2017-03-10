@@ -20,7 +20,12 @@ final class MyProfileViewController: RevealTabStripViewController {
     // MARK: - Loading
     
     override func viewDidLoad() {
+        
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        
         super.viewDidLoad()
+        
+        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
         
         title = "MY SUMMIT"
         
@@ -33,12 +38,10 @@ final class MyProfileViewController: RevealTabStripViewController {
         
         let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
         let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
-        let feedbackGivenListViewController = R.storyboard.feedback.feedbackGivenListViewController()!
         let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
         
         var childViewControllers = [personalScheduleViewController,
                                     memberProfileDetailViewController,
-                                    feedbackGivenListViewController,
                                     favoriteEventsViewController]
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
