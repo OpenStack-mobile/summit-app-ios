@@ -1,5 +1,5 @@
 //
-//  SpeakerListViewController.swift
+//  SpeakerViewController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 6/16/16.
@@ -9,25 +9,10 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
+import CoreData
 import JGProgressHUD
 
-final class SpeakerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RevealViewController, ActivityViewController, IndicatorInfoProvider {
-    
-    // MARK: - IB Outlets
-    
-    @IBOutlet weak var peopleListView: PeopleListView!
-    
-    // MARK: - Properties
-    
-    private(set) var people = [Speaker]()
-    
-    private(set) var loadedAll = false
-    
-    private(set) var page = 1
-    
-    private(set) var objectsPerPage = 10
-    
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+final class SpeakerViewController: TableViewController, RevealViewController, IndicatorInfoProvider {
     
     // MARK: - Loading
     
@@ -39,9 +24,18 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         addMenuButton()
         
         // setup table view
-        peopleListView.tableView.registerNib(R.nib.peopleTableViewCell)
-        peopleListView.tableView.delegate = self
-        peopleListView.tableView.dataSource = self
+        self.tableView.registerNib(R.nib.peopleTableViewCell)
+        self.tableView.estimatedRowHeight = 96
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // configure fetched results controller
+        self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
+                                                                   delegate: self,
+                                                                   sortDescriptors: Speaker.ManagedObject.sortDescriptors,
+                                                                   sectionNameKeyPath: Speaker.ManagedObject.Property.firstName.rawValue,
+                                                                   context: Store.shared.managedObjectContext)
+        
+        try! self.fetchedResultsController.performFetch()
         
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
@@ -57,10 +51,7 @@ final class SpeakerListViewController: UIViewController, UITableViewDataSource, 
         super.viewWillAppear(animated)
         
         // reset Table View
-        peopleListView.tableView.setContentOffset(CGPointZero, animated: false)
-        
-        // load cached data
-        loadData()
+        self.tableView.setContentOffset(CGPointZero, animated: false)
     }
     
     override func updateUserActivityState(userActivity: NSUserActivity) {
