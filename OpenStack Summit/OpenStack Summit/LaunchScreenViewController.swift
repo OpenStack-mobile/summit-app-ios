@@ -133,7 +133,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         // show current summit info
         if let summit = self.summit {
             
-            self.summitNameLabel.text = summit.name
+            self.summitNameLabel.text = summit.name.uppercaseString
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
