@@ -13,6 +13,14 @@ import SwiftFoundation
 
 final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoProvider {
     
+    // MARK: - Loading
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        canShareEvents = false
+    }
+    
     // MARK: - Methods
     
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {

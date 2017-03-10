@@ -399,6 +399,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 // track
                 cell.trackLabel.text = eventDetail.track
+                cell.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
                 cell.trackLabelHeightConstraint.constant = eventDetail.track.isEmpty ? 0 : 30
                 cell.trackLabel.updateConstraints()
                 

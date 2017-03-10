@@ -49,7 +49,7 @@ extension EventViewController {
         }
     }
     
-    func contextMenu(for event: EventDetail) -> ContextMenu {
+    func contextMenu(for event: EventDetail, share: Bool = true) -> ContextMenu {
         
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
@@ -64,9 +64,7 @@ extension EventViewController {
         
         if canAddFeedback(for: event) {
             
-            let image = "ContextMenuRate"
-            
-            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { UIImage(named: image)! }, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
                 
                 guard let controller = viewController else { return }
                 
@@ -88,11 +86,13 @@ extension EventViewController {
         
         if isAttendee && eventRequestInProgress == false {
             
-            let title = scheduled ? "Remove from Schedule" : "Add to Schedule"
+            let newValue = scheduled == false
             
-            let image = scheduled ? "ContextMenuScheduleRemove" : "ContextMenuScheduleAdd"
+            let title = newValue ? "Going" : "Not Going"
             
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
+            let image = newValue ? R.image.contextMenuScheduleAdd()! : R.image.contextMenuScheduleRemove()!
+            
+            let scheduleEvent = ContextMenu.Action(activityType: "Event.Schedule", image: { image }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -108,11 +108,13 @@ extension EventViewController {
         
         if Store.shared.isLoggedIn {
             
-            let title = isFavorite ? "Remove from Favorites" : "Add to Favorites"
+            let newValue = isFavorite == false
             
-            let image = "ContextMenuSave"
+            let title = newValue ? "Save" : "Unsave"
             
-            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { UIImage(named: image)! }, title: title, handler: .background({ [weak self] (didComplete) in
+            let image = newValue ? R.image.contextMenuSave()! : R.image.contextMenuSaved()!
+            
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { image }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -124,6 +126,7 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
+        /*
         if canAddToCalendar() {
             
             let image = "ContextMenuCalendarAdd"
@@ -138,9 +141,11 @@ extension EventViewController {
             }))
             
             actions.append(scheduleEvent)
-        }
+        }*/
         
-        return ContextMenu(actions: actions, shareItems: [message, url], systemActions: false)
+        let shareItems = share ? [message, url] : []
+        
+        return ContextMenu(actions: actions, shareItems: shareItems, systemActions: false)
     }
     
     func toggleScheduledStatus(for event: EventDetail) {
