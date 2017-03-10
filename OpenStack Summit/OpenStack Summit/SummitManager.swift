@@ -6,6 +6,12 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
+    import UIKit
+#elseif os(OSX)
+    import AppKit
+#endif
+
 import Foundation
 import CoreSummit
 
