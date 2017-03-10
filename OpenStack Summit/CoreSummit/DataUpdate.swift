@@ -53,12 +53,15 @@ public extension DataUpdate {
         case SummitTicketType
         case SummitVenue
         case SummitVenueRoom
+        case SummitAirport
+        case SummitHotel
+        case SummitAbstractLocation
+        case SummitVenueFloor
         case PresentationCategory
         case PresentationCategoryGroup
         case SummitLocationMap
         case SummitLocationImage
         case Summit
-        case SummitVenueFloor
         case PresentationLink
         case PresentationVideo
         case PresentationSlide
