@@ -1,5 +1,5 @@
 //
-//  SpeakerViewController.swift
+//  SpeakersViewController.swift
 //  OpenStack Summit
 //
 //  Created by Alsey Coleman Miller on 6/16/16.
@@ -12,7 +12,7 @@ import CoreSummit
 import CoreData
 import JGProgressHUD
 
-final class SpeakerViewController: TableViewController, RevealViewController, IndicatorInfoProvider {
+final class SpeakersViewController: TableViewController, RevealViewController, IndicatorInfoProvider {
     
     // MARK: - Loading
     
@@ -35,6 +35,7 @@ final class SpeakerViewController: TableViewController, RevealViewController, In
                                                                    sectionNameKeyPath: Speaker.ManagedObject.Property.firstName.rawValue,
                                                                    context: Store.shared.managedObjectContext)
         
+        self.fetchedResultsController.fetchRequest.fetchBatchSize = 30
         try! self.fetchedResultsController.performFetch()
         
         // set user activity for handoff
@@ -50,7 +51,7 @@ final class SpeakerViewController: TableViewController, RevealViewController, In
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // reset Table View
+        // reset table View
         self.tableView.setContentOffset(CGPointZero, animated: false)
     }
     
@@ -63,52 +64,27 @@ final class SpeakerViewController: TableViewController, RevealViewController, In
         super.updateUserActivityState(userActivity)
     }
     
-    // MARK: - Methods
-    
-    /// Reloads the list of speakers from cache.
-    @IBAction func loadData(sender: AnyObject? = nil) {
-                
-        let speakers = try! Speaker.filter(page: page, objectsPerPage: objectsPerPage, summit: self.currentSummit?.identifier, context: Store.shared.managedObjectContext)
-        
-        people.appendContentsOf(speakers)
-        loadedAll = speakers.count < objectsPerPage
-        page += 1
-        
-        peopleListView.tableView.reloadData()
-    }
-    
     // MARK: - Private Methods
+    
+    private subscript (indexPath: NSIndexPath) -> Speaker {
+        
+        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speaker.ManagedObject
+        
+        return Speaker(managedObject: managedObject)
+    }
     
     private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
         
-        let row = indexPath.row
-        
-        let person = people[indexPath.row]
+        let person = self[indexPath]
         
         cell.name = person.name
         cell.title = person.title
         cell.pictureURL = person.pictureURL
-        
-        /// fetch more
-        if row == (people.count - 1) && loadedAll == false {
-            
-            loadData()
-        }
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return people.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
         
@@ -119,13 +95,23 @@ final class SpeakerViewController: TableViewController, RevealViewController, In
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let person = people[indexPath.row]
+        let person = self[indexPath]
         
         let memberProfileVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: person))
         
         showViewController(memberProfileVC, sender: self)
+    }
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        
+        return UILocalizedIndexedCollation.currentCollation().sectionIndexTitles
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        
+        return 0
     }
     
     // MARK: - IndicatorInfoProvider
