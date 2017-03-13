@@ -318,14 +318,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         let feedback = feedbackList[indexPath.row]
         
-        cell.nameLabel.text = feedback.member.name
         cell.ratingView.rating = Double(feedback.rate)
         cell.reviewLabel.text = feedback.review
         cell.dateLabel.text = feedback.date
-        
-        // set member image
-        let placeholderImage = R.image.genericUserAvatar()!
-        cell.memberImageView.hnk_setImageFromURL(NSURL(string: feedback.member.pictureURL)!, placeholder: placeholderImage)
     }
     
     private func configureAverageRatingView() {
@@ -727,10 +722,6 @@ final class EventDetailActionsTableViewCell: UITableViewCell {
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var memberImageView: UIImageView!
-    
-    @IBOutlet private(set) weak var nameLabel: UILabel!
-    
     @IBOutlet private(set) weak var dateLabel: UILabel!
     
     @IBOutlet private(set) weak var reviewLabel: UILabel!
@@ -741,7 +732,5 @@ final class EventDetailFeedbackTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.ratingView.settings.updateOnTouch = false
-        self.memberImageView.layer.masksToBounds = true
-        self.memberImageView.layer.cornerRadius = CGRectGetWidth(self.memberImageView.bounds) / 2
     }
 }
