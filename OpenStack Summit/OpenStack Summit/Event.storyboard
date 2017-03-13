@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="SnY-ae-Z8a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="SnY-ae-Z8a">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -565,27 +565,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="eAY-f1-CEf">
-                                            <rect key="frame" x="16" y="16" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="eAY-f1-CEf" secondAttribute="height" id="7nY-oR-KFj"/>
-                                                <constraint firstAttribute="height" constant="50" id="Kx4-4W-40w"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alsey Miller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04r-x8-8YO">
-                                            <rect key="frame" x="82" y="16" width="83" height="18"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="99 years ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YT4-VH-XAh">
-                                            <rect key="frame" x="173" y="16" width="84" height="18"/>
+                                            <rect key="frame" x="16" y="16" width="84" height="18"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HD-tw-UUc" customClass="CosmosView" customModule="Cosmos">
-                                            <rect key="frame" x="82" y="42" width="154" height="16"/>
+                                            <rect key="frame" x="16" y="42" width="154" height="16"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -614,7 +601,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="lorem ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bA-N1-WTU">
-                                            <rect key="frame" x="82" y="66" width="230" height="42"/>
+                                            <rect key="frame" x="16" y="66" width="296" height="42"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -629,28 +616,21 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="5bA-N1-WTU" firstAttribute="top" secondItem="6HD-tw-UUc" secondAttribute="bottom" constant="8" id="2wU-H9-9bs"/>
-                                        <constraint firstItem="04r-x8-8YO" firstAttribute="leading" secondItem="eAY-f1-CEf" secondAttribute="trailing" constant="16" id="67n-Xf-DEf"/>
                                         <constraint firstItem="YT4-VH-XAh" firstAttribute="top" secondItem="dhg-Zn-Lop" secondAttribute="top" constant="16" id="Bsa-2W-NVa"/>
+                                        <constraint firstItem="5bA-N1-WTU" firstAttribute="leading" secondItem="dhg-Zn-Lop" secondAttribute="leading" constant="16" id="GFw-hD-Snc"/>
                                         <constraint firstAttribute="trailing" secondItem="odj-hE-rIH" secondAttribute="trailing" id="LCj-Nc-C3W"/>
+                                        <constraint firstItem="6HD-tw-UUc" firstAttribute="leading" secondItem="dhg-Zn-Lop" secondAttribute="leading" constant="16" id="Lqu-J1-yRS"/>
                                         <constraint firstAttribute="bottom" secondItem="5bA-N1-WTU" secondAttribute="bottom" constant="16" id="N22-kV-VvV"/>
-                                        <constraint firstItem="04r-x8-8YO" firstAttribute="top" secondItem="dhg-Zn-Lop" secondAttribute="top" constant="16" id="NwM-p7-IsP"/>
-                                        <constraint firstItem="6HD-tw-UUc" firstAttribute="leading" secondItem="eAY-f1-CEf" secondAttribute="trailing" constant="16" id="Sqs-hu-QXg"/>
-                                        <constraint firstItem="6HD-tw-UUc" firstAttribute="top" secondItem="04r-x8-8YO" secondAttribute="bottom" constant="8" id="Two-kt-Zoi"/>
+                                        <constraint firstItem="6HD-tw-UUc" firstAttribute="top" secondItem="YT4-VH-XAh" secondAttribute="bottom" constant="8" id="Y4u-tt-reV"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YT4-VH-XAh" secondAttribute="trailing" constant="8" id="au8-qj-afB"/>
-                                        <constraint firstItem="eAY-f1-CEf" firstAttribute="top" secondItem="dhg-Zn-Lop" secondAttribute="top" constant="16" id="dKV-S3-Gp0"/>
-                                        <constraint firstItem="6HD-tw-UUc" firstAttribute="leading" secondItem="04r-x8-8YO" secondAttribute="leading" id="fHJ-Pq-Sa1"/>
-                                        <constraint firstItem="5bA-N1-WTU" firstAttribute="leading" secondItem="04r-x8-8YO" secondAttribute="leading" id="fpj-VO-oHr"/>
+                                        <constraint firstItem="YT4-VH-XAh" firstAttribute="leading" secondItem="dhg-Zn-Lop" secondAttribute="leading" constant="16" id="bHb-Qk-Kn9"/>
                                         <constraint firstItem="odj-hE-rIH" firstAttribute="leading" secondItem="dhg-Zn-Lop" secondAttribute="leading" id="g24-Xq-syg"/>
                                         <constraint firstAttribute="bottom" secondItem="odj-hE-rIH" secondAttribute="bottom" id="hV1-mS-801"/>
                                         <constraint firstAttribute="trailing" secondItem="5bA-N1-WTU" secondAttribute="trailing" constant="8" id="lIt-W7-nTs"/>
-                                        <constraint firstItem="eAY-f1-CEf" firstAttribute="leading" secondItem="dhg-Zn-Lop" secondAttribute="leading" constant="16" id="vgs-BV-LSW"/>
-                                        <constraint firstItem="YT4-VH-XAh" firstAttribute="leading" secondItem="04r-x8-8YO" secondAttribute="trailing" constant="8" id="ycY-DE-RfB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateLabel" destination="YT4-VH-XAh" id="O0I-ev-7Br"/>
-                                    <outlet property="memberImageView" destination="eAY-f1-CEf" id="HXO-sS-Z80"/>
-                                    <outlet property="nameLabel" destination="04r-x8-8YO" id="Vg8-cF-emI"/>
                                     <outlet property="ratingView" destination="6HD-tw-UUc" id="RR6-ZR-sOL"/>
                                     <outlet property="reviewLabel" destination="5bA-N1-WTU" id="9eC-OM-gNK"/>
                                 </connections>
