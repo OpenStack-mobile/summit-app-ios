@@ -95,8 +95,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             self.summitActivityIndicatorView.hidden = false
             self.summitActivityIndicatorView.startAnimating()
             
-            self.guestButton.hidden = true
-            self.loginButton.hidden = true
+            self.guestButton.hidden = self.isDataLoaded == false
+            self.loginButton.hidden = self.isDataLoaded == false
             
             self.dataLoadedActivityIndicatorView.hidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
