@@ -48,13 +48,6 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         self.userActivity = userActivity
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // reset table View
-        self.tableView.setContentOffset(CGPointZero, animated: false)
-    }
-    
     override func updateUserActivityState(userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
