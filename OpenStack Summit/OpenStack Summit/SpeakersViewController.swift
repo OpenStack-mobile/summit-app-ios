@@ -32,7 +32,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
                                                                    delegate: self,
                                                                    sortDescriptors: Speaker.ManagedObject.sortDescriptors,
-                                                                   sectionNameKeyPath: Speaker.ManagedObject.Property.firstName.rawValue,
+                                                                   sectionNameKeyPath: Speaker.ManagedObject.Property.addressBookSectionName.rawValue,
                                                                    context: Store.shared.managedObjectContext)
         
         self.fetchedResultsController.fetchRequest.fetchBatchSize = 30
@@ -106,12 +106,14 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         
-        return UILocalizedIndexedCollation.currentCollation().sectionIndexTitles
+        return self.fetchedResultsController.sectionIndexTitles
     }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    // MARK: - NSFetchedResultsControllerDataSource
+    
+    func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
         
-        return 0
+        return sectionName
     }
     
     // MARK: - IndicatorInfoProvider
