@@ -106,7 +106,7 @@ extension EventViewController {
         
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
-        if Store.shared.isLoggedIn {
+        if Store.shared.isLoggedIn && eventRequestInProgress == false {
             
             let newValue = isFavorite == false
             
@@ -152,7 +152,7 @@ extension EventViewController {
                 
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
-        let rsvpURL = NSURL(string: event.rsvp)
+        let rsvpURL = event.rsvp.isEmpty ? nil : NSURL(string: event.rsvp)
         
         // just open RSVP link
         guard rsvpURL == nil || event.externalRSVP else {
