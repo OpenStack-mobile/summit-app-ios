@@ -36,13 +36,19 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
-        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
-        let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
+        var childViewControllers = [UIViewController]()
         
-        var childViewControllers = [personalScheduleViewController,
-                                    memberProfileDetailViewController,
-                                    favoriteEventsViewController]
+        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
+        childViewControllers.append(memberProfileDetailViewController)
+        
+        if Store.shared.isLoggedInAndConfirmedAttendee {
+            
+            let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
+            childViewControllers.append(personalScheduleViewController)
+        }
+        
+        let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
+        childViewControllers.append(favoriteEventsViewController)
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             

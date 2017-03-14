@@ -11,7 +11,82 @@ import XLPagerTabStrip
 import Haneke
 import CoreSummit
 
-final class MemberProfileDetailViewController: UIViewController, IndicatorInfoProvider, ContextMenuViewController {
+final class MemberProfileDetailViewController: UITableViewController, IndicatorInfoProvider, ContextMenuViewController {
+    
+    // MARK: - Properties
+    
+    var profile: MemberProfileIdentifier = .currentUser {
+        
+        didSet { configureView() }
+    }
+    
+    private(set) var contextMenu = ContextMenu()
+    
+    // MARK: - Private Properties
+    
+    private var data = [Data]()
+    
+    // MARK: - Loading
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addContextMenuBarButtonItem()
+        
+        configureView()
+        
+        tableView.tableFooterView = UIView()
+    }
+    
+    
+    // MARK: - Private Methods
+    
+    private func configureView() {
+        
+        // fetch profile
+        
+        let
+        
+        data = []
+        
+        data.append(.name(name: <#T##String#>, title: <#T##String#>, image: <#T##NSURL#>))
+    }
+    
+    // MARK: - IndicatorInfoProvider
+    
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
+        return IndicatorInfo(title: "Profile")
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    
+}
+
+// MARK: - Supporting Types
+
+private extension MemberProfileDetailViewController {
+    
+    enum Data {
+        
+        case name(name: String, title: String, image: NSURL)
+        case attendeeTicket(confirmed: Bool)
+        case links([(Link, String)])
+        case biography(NSAttributedString)
+    }
+    
+    enum Link {
+        
+        case twitter
+        case irc
+        case linkedIn
+    }
+}
+
+// MARK: - Legacy
+
+final class OldMemberProfileDetailViewController: UIViewController, IndicatorInfoProvider, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
