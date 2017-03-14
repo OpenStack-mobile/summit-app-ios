@@ -28,6 +28,21 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
         return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard let sections = self.fetchedResultsController.sections
+            else { return nil }
+        
+        return sections[section].name
+    }
+    
+    #if os(iOS)
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        
+        return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
+    }
+    #endif
+    
     // MARK: - NSFetchedResultsControllerDelegate
     
     final func controllerWillChangeContent(controller: NSFetchedResultsController) {
