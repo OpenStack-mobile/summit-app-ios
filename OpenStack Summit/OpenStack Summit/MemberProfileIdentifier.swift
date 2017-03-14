@@ -8,7 +8,7 @@
 
 import CoreSummit
 
-/// Data type Used the configure the member profile-related View Controllers.
+/// Data type used the configure the member profile-related View Controllers.
 public enum MemberProfileIdentifier {
     
     case currentUser

@@ -13,6 +13,10 @@ import CoreSummit
 
 final class MemberProfileDetailViewController: UITableViewController, IndicatorInfoProvider, ContextMenuViewController {
     
+    // MARK: - IB Outlets
+    
+    @IBOutlet private(set) var headerView: MemberProfileDetailHeaderView!
+    
     // MARK: - Properties
     
     var profile: MemberProfileIdentifier = .currentUser {
@@ -35,9 +39,40 @@ final class MemberProfileDetailViewController: UITableViewController, IndicatorI
         
         configureView()
         
+        tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // handoff
+        self.userActivity?.becomeCurrent()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // handoff
+        self.userActivity?.resignCurrent()
+    }
+    
+    override func updateUserActivityState(userActivity: NSUserActivity) {
+        
+        switch profile {
+            
+        case let .speaker(identifier):
+            
+            let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
+                            AppActivityUserInfo.identifier.rawValue: identifier]
+            
+            userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+            
+        default: break
+        }
+        
+        super.updateUserActivityState(userActivity)
+    }
     
     // MARK: - Private Methods
     
@@ -45,11 +80,85 @@ final class MemberProfileDetailViewController: UITableViewController, IndicatorI
         
         // fetch profile
         
-        let
+        switch profile {
+            
+        case .currentUser:
+            
+            if let currentMember = Store.shared.authenticatedMember {
+                
+                if let speakerRole = currentMember.speakerRole {
+                    
+                    let speaker = Speaker(managedObject: speakerRole)
+                    
+                    configureView(with: speaker)
+                    
+                } else {
+                    
+                    let member = Member(managedObject: currentMember)
+                    
+                    configureView(with: member)
+                }
+                
+            } else {
+                
+                fatalError("Cannot show current user, not logged in")
+            }
+            
+        case let .speaker(identifier):
+            
+            guard let speaker = try! Speaker.find(identifier, context: Store.shared.managedObjectContext)
+               else { fatalError("Invalid identfier: \(profile)") }
+            
+            configureView(with: speaker)
+            
+        case let .member(identifier):
+            
+            guard let member = try! Member.find(identifier, context: Store.shared.managedObjectContext)
+                else { fatalError("Invalid identfier: \(profile)") }
+            
+            configureView(with: member)
+        }
+    }
+    
+    private func configureView<T: Person>(with person: T) {
+        
+        // configure header
+        
+        headerView.nameLabel.text = person.name
+        headerView.titleLabel.text = person.title ?? ""
+        
+        // configure cells
         
         data = []
         
         data.append(.name(name: <#T##String#>, title: <#T##String#>, image: <#T##NSURL#>))
+        
+        tableView.reloadData()
+        
+        // set context menu
+        
+        // set user activity for handoff
+        
+        if let speaker = person as? Speaker,
+            let summitManagedObject = self.currentSummit {
+            
+            let summit = Summit(managedObject: summitManagedObject)
+            
+            let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
+            userActivity.title = speaker.name
+            userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
+            
+            userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
+            userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
+            
+            self.userActivity = userActivity
+            
+            userActivity.becomeCurrent()
+            
+        } else {
+            
+            self.userActivity = nil
+        }
     }
     
     // MARK: - IndicatorInfoProvider
@@ -61,7 +170,33 @@ final class MemberProfileDetailViewController: UITableViewController, IndicatorI
     
     // MARK: - UITableViewDataSource
     
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return data.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let data = self.data[indexPath.row]
+        
+        switch data {
+            
+        case let .name(name, title, image):
+            
+        case let .attendeeTicket(confirmed):
+            
+        case let .links(links):
+            
+        case let .biography(text):
+            
+            
+        }
+    }
 }
 
 // MARK: - Supporting Types
@@ -70,7 +205,7 @@ private extension MemberProfileDetailViewController {
     
     enum Data {
         
-        case name(name: String, title: String, image: NSURL)
+        case name(name: String, title: String, image: String)
         case attendeeTicket(confirmed: Bool)
         case links([(Link, String)])
         case biography(NSAttributedString)
@@ -82,6 +217,15 @@ private extension MemberProfileDetailViewController {
         case irc
         case linkedIn
     }
+}
+
+final class MemberProfileDetailHeaderView: UIView {
+    
+    @IBOutlet private(set) weak var imageView: UIImageView!
+    
+    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
+    
+    @IBOutlet private(set) weak var titleLabel: CopyableLabel!
 }
 
 // MARK: - Legacy
