@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Speakers-->
+        <!--SPEAKERS-->
         <scene sceneID="2wy-IL-Qjh">
             <objects>
-                <tableViewController storyboardIdentifier="SpeakersViewController" title="Speakers" id="bd3-k1-gGp" customClass="SpeakersViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SpeakersViewController" title="SPEAKERS" id="bd3-k1-gGp" customClass="SpeakersViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="7FC-X2-Vyg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,6 +21,9 @@
                             <outlet property="delegate" destination="bd3-k1-gGp" id="CI0-wv-EoH"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="SPEAKERS" id="HjV-OH-wbq">
+                        <barButtonItem key="backBarButtonItem" title=" " id="WB9-aM-bBe"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMR-tl-fOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
