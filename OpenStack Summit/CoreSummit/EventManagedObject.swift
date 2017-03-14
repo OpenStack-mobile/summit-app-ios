@@ -165,7 +165,6 @@ public extension EventManagedObject {
     static func filter(date: DateFilter,
                        tracks: [Identifier]?,
                        trackGroups: [Identifier]?,
-                       tags: [String]?,
                        levels: [String]?,
                        venues: [Identifier]?,
                        summit: Identifier,
@@ -212,24 +211,6 @@ public extension EventManagedObject {
             let levelsPredicate = NSPredicate(format: "presentation.level IN %@", levels)
             
             predicates.append(levelsPredicate)
-        }
-        
-        if let tags = tags where tags.isEmpty == false {
-            
-            let tagPredicates = tags.map { NSPredicate(format: "ANY tags.name ==[c] %@", $0) }
-            
-            let predicate: NSPredicate
-            
-            if tagPredicates.count > 1 {
-                
-                predicate = NSCompoundPredicate(orPredicateWithSubpredicates: tagPredicates)
-                
-            } else {
-                
-                predicate = predicates[0]
-            }
-            
-            predicates.append(predicate)
         }
         
         if let venues = venues where venues.isEmpty == false {

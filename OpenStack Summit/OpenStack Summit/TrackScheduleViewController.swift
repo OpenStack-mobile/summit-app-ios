@@ -46,13 +46,12 @@ final class TrackScheduleViewController: ScheduleViewController {
         
         let tracks = [self.track.identifier]
         let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
-        let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
         let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
         
-        let events = try! EventManagedObject.filter(date, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(date, tracks: tracks, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -73,11 +72,10 @@ final class TrackScheduleViewController: ScheduleViewController {
         
         let tracks = [self.track.identifier]
         let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
-        let tags = scheduleFilter.selections[FilterSectionType.Tag]?.rawValue as? [String]
         let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
         let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
         
-        let events = try! EventManagedObject.filter(filter, tracks: tracks, trackGroups: trackGroups, tags: tags, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(filter, tracks: tracks, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
     }

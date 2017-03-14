@@ -11,7 +11,7 @@ import CoreData
 
 enum FilterSectionType {
     
-    case ActiveTalks, Track, TrackGroup, Tag, Level, Venue
+    case ActiveTalks, Track, TrackGroup, Level, Venue
 }
 
 struct FilterSection: Equatable {
@@ -195,7 +195,6 @@ struct ScheduleFilter: Equatable {
         selections[FilterSectionType.ActiveTalks] = .names([])
         selections[FilterSectionType.TrackGroup] = .identifiers([])
         selections[FilterSectionType.Level] = .names([])
-        selections[FilterSectionType.Tag] = .names([])
         selections[FilterSectionType.Venue] = .identifiers([])
     }
     

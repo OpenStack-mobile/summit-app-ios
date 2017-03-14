@@ -16,5 +16,7 @@ func SetAppearance() {
     UINavigationBar.appearance().tintColor = UIColor.whiteColor()
     UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 17)!]
     
+    UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 17)!], forState: .Normal)
+    
     UISearchBar.appearance().tintColor = UIColor(hexString: "#214065")
 }
