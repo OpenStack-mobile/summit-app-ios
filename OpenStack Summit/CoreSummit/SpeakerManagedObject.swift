@@ -15,6 +15,8 @@ public final class SpeakerManagedObject: Entity {
     
     @NSManaged public var lastName: String
     
+    @NSManaged public var addressBookSectionName: String
+    
     @NSManaged public var title: String?
     
     @NSManaged public var pictureURL: String
@@ -55,6 +57,7 @@ extension Speaker: CoreDataEncodable {
         
         managedObject.firstName = firstName
         managedObject.lastName = lastName
+        managedObject.addressBookSectionName = addressBookSectionName
         managedObject.title = title
         managedObject.pictureURL = pictureURL
         managedObject.twitter = twitter
@@ -73,19 +76,24 @@ public extension SpeakerManagedObject {
     
     public enum Property: String {
         
-        case firstName, lastName, title, pictureURL, twitter, irc, biography, member
+        case id, firstName, lastName, addressBookSectionName, title, pictureURL, twitter, irc, biography, member
     }
     
     static var sortDescriptors: [NSSortDescriptor] {
         
-        return [NSSortDescriptor(key: "firstName", ascending: true),
-                NSSortDescriptor(key: "lastName", ascending: true)]
+        return [NSSortDescriptor(key: Property.addressBookSectionName.rawValue, ascending: true),
+                NSSortDescriptor(key: Property.firstName.rawValue, ascending: true),
+                NSSortDescriptor(key: Property.lastName.rawValue, ascending: true),
+                NSSortDescriptor(key: Property.id.rawValue, ascending: true)]
     }
 }
 
 public extension Speaker {
     
-    static func filter(searchTerm: String = "", page: Int, objectsPerPage: Int, summit: Identifier? = nil, context: NSManagedObjectContext) throws -> [Speaker] {
+    static func filter(searchTerm: String = "",
+                       page: Int, objectsPerPage: Int,
+                       summit: Identifier? = nil,
+                       context: NSManagedObjectContext) throws -> [Speaker] {
         
         var predicates = [NSPredicate]()
         

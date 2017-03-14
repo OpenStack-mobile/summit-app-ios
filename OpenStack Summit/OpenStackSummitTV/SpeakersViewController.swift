@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
+@objc(OSSTVSpeakersViewController)
 final class SpeakersViewController: UINavigationController {
     
     // MARK: - Loading

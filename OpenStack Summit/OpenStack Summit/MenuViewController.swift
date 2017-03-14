@@ -35,7 +35,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     // Menu VCs
     lazy var generalScheduleViewController: GeneralScheduleViewController = R.storyboard.schedule.generalScheduleViewController()!
     lazy var venuesViewController: VenuesViewController = VenuesViewController()
-    lazy var speakersViewController: SpeakerListViewController = R.storyboard.people.speakerListViewController()!
+    lazy var speakersViewController: SpeakersViewController = R.storyboard.people.speakersViewController()!
     
     private var unreadNotificationsObserver: Int?
     private var unreadTeamMessagesObserver: Int?

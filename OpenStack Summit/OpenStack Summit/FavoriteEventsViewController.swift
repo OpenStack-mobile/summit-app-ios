@@ -62,6 +62,6 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
-        return IndicatorInfo(title: "Favorites")
+        return IndicatorInfo(title: "Watch List")
     }
 }
