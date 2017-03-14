@@ -23,10 +23,6 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     @IBOutlet weak var dismissButton: UIBarButtonItem!
     @IBOutlet weak var filtersTableView: UITableView!
     @IBOutlet weak var filtersTableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tagListViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tagTextView: MLPAutoCompleteTextField!
-    @IBOutlet weak var tagListView: AMTagListView!
-    @IBOutlet weak var clearTagsButton: UIButton!
     
     // MARK: - Private Properties
     
@@ -61,14 +57,6 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         // https://github.com/mac-cain13/R.swift/issues/144
         //filtersTableView.registerNibForHeaderFooterView(R.nib.tableViewHeaderView)
         
-        clearTagsButton.layer.cornerRadius = 10
-        tagListView.delegate = self
-        AMTagView.appearance().tagColor = UIColor(red: 33/255, green: 64/255, blue: 101/255, alpha: 1.0)
-        AMTagView.appearance().innerTagColor = UIColor(red: 53/255, green: 84/255, blue: 121/255, alpha: 1.0)
-        tagTextView.autoCompleteTableBackgroundColor = UIColor.whiteColor()
-        tagTextView.autoCompleteDelegate = self
-        tagTextView.autoCompleteDataSource = self
-        
         navigationItem.title = "FILTER"
         
         updateUI()
@@ -79,13 +67,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: #selector(AMTagListView.removeTag(_:)),
-            name: AMTagViewNotification,
-            object: nil)
-        
+
         FilterManager.shared.filter.value.updateSections()
     }
     
@@ -106,25 +88,12 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
             self.navigationController!.setViewControllers([], animated: false)
         }
     }
-    
-    @IBAction func willClearAllTags(sender: AnyObject) {
         
-        FilterManager.shared.filter.value.selections[FilterSectionType.Tag]?.removeAll()
-        tagListView.removeAllTags()
-        resizeTagList(tagListView.contentSize.height)
-        tagTextView.text = ""
-    }
-    
     // MARK: - Private Methods
     
     private func updateUI() {
         
         self.reloadFilters()
-        
-        for tag in FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.rawValue as! [String] {
-            
-            self.addTag(tag)
-        }
     }
     
     @inline(__always)
@@ -139,27 +108,6 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         filtersTableViewHeightConstraint.constant = cellHeight * CGFloat(totalItemCount)
         filtersTableViewHeightConstraint.constant += headerHeight * (CGFloat(scheduleFilter.filterSections.count) - 2)
         filtersTableViewHeightConstraint.constant += extraPadding * 4 * (CGFloat(scheduleFilter.filterSections.count) - (activeTalksItemCount == 0 ? 1 : 0)) - (activeTalksItemCount == 0 ? 0 : extraPadding * 2)
-    }
-    
-    @inline(__always)
-    private func addTag(tag: String) {
-        
-        tagListView.addTag(tag)
-        resizeTagList(tagListView.contentSize.height)
-    }
-    
-    @inline(__always)
-    private func removeAllTags() {
-        
-        FilterManager.shared.filter.value.selections[FilterSectionType.Tag]?.removeAll()
-        tagListView.removeAllTags()
-    }
-    
-    @inline(__always)
-    private func resizeTagList(height: CGFloat) {
-        
-        tagListViewHeightConstraint.constant = height
-        tagListView.updateConstraints()
     }
     
     private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
@@ -231,7 +179,7 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         
         switch filterSection.type {
             
-        case .Tag, .Track, .TrackGroup, .Venue:
+        case .Track, .TrackGroup, .Venue:
             
             if isItemSelected(filterSection.type, id: filterItem.identifier) {
                 
@@ -337,70 +285,5 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
         let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
         
         toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
-    }
-    
-    // MARK: - Notifications
-    
-    @objc private func removeTag(notification: NSNotification) {
-        
-        func removeTag(tag: String) {
-            
-            let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            
-            if escapedTag == "" {
-                
-                return
-            }
-            
-            let index = FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.rawValue.indexOf { $0 as! String == escapedTag }
-            FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.removeAtIndex(index!)
-        }
-        
-        let tagView = notification.object as! AMTagView
-        removeTag(tagView.tagText!)
-        tagListView.removeTag(tagView)
-        resizeTagList(tagListView.contentSize.height)
-    }
-    
-    // MARK: - MLPAutoCompleteTextFieldDataSource
-    
-    func autoCompleteTextField(textField: MLPAutoCompleteTextField!, possibleCompletionsForString string: String!) -> [AnyObject]!  {
-        
-        guard string.isEmpty == false else { return [] }
-        
-        var tags: [Tag]!
-        
-        dispatch_sync(dispatch_get_main_queue()) {
-            
-            tags = try! Tag.search(string, context: Store.shared.managedObjectContext)
-        }
-        
-        return Array(
-            Set(tags.map { $0.name.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) }) // unique values trimming tags
-            ).sort()
-    }
-    
-    func autoCompleteTextField(textField: MLPAutoCompleteTextField!, didSelectAutoCompleteString selectedString: String!, withAutoCompleteObject selectedObject: MLPAutoCompletionObject!, forRowAtIndexPath indexPath: NSIndexPath!) {
-        
-        func addTag(tag: String) -> Bool {
-            
-            let escapedTag = tag.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            
-            if (escapedTag == "" || FilterManager.shared.filter.value.selections[FilterSectionType.Tag]?.rawValue.indexOf{ $0 as! String == escapedTag } != nil) {
-                
-                return false
-            }
-            
-            FilterManager.shared.filter.value.selections[FilterSectionType.Tag]!.append(escapedTag)
-            
-            return true
-        }
-
-        if addTag(selectedString) {
-            
-            tagListView.addTag(selectedString)
-            tagTextView.text = ""
-            resizeTagList(tagListView.contentSize.height)
-        }
     }
 }
