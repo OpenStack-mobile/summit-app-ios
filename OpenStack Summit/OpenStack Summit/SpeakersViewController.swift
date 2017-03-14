@@ -23,7 +23,6 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         addMenuButton()
         
         // setup table view
-        self.tableView.registerNib(R.nib.peopleTableViewCell)
         self.tableView.estimatedRowHeight = 96
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
