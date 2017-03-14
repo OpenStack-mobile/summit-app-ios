@@ -36,10 +36,12 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
         return sections[section].name
     }
     
+    #if os(iOS)
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         
         return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
     }
+    #endif
     
     // MARK: - NSFetchedResultsControllerDelegate
     
