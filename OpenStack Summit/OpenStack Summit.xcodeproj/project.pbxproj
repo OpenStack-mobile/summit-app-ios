@@ -102,6 +102,7 @@
 		6E0B5F671D77D4DF0005F6CE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */; };
 		6E0B5F691D77D4DF0005F6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */; };
 		6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */; };
+		6E0D3D7B1DC09B7C00EEB8A7 /* SummitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D3D7A1DC09B7C00EEB8A7 /* SummitsViewController.swift */; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
 		6E10A4F41D1066E9008CBD0C /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1228,6 +1229,7 @@
 		6E0B5F661D77D4DF0005F6CE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E0B5F6A1D77D4DF0005F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0D3D7A1DC09B7C00EEB8A7 /* SummitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsViewController.swift; sourceTree = "<group>"; };
 		6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -2739,6 +2741,7 @@
 				6EB699E31D3412B00095474D /* Protocols */,
 				6E49054C1D2ED21300D56870 /* AboutViewController.swift */,
 				6E2F49B11E4274E8001083AD /* LaunchScreenViewController.swift */,
+				6E0D3D7A1DC09B7C00EEB8A7 /* SummitsViewController.swift */,
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
@@ -3946,6 +3949,7 @@
 				6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */,
 				6E8220EF1E48D0670025FE58 /* PagingTableViewController.swift in Sources */,
 				6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */,
+				6E0D3D7B1DC09B7C00EEB8A7 /* SummitsViewController.swift in Sources */,
 				6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */,
 				6E066D9B1D356764005A8D2D /* FeedbackDetail.swift in Sources */,
 				6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */,

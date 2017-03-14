@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aED-a0-oD6">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -42,24 +42,24 @@
                         <viewControllerLayoutGuide type="bottom" id="xcU-XA-VjV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EFE-Qh-WGT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="frF-zg-TjI">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <rect key="frame" x="141.5" y="265.5" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jq3-r8-xIB">
-                                <rect key="frame" x="0.0" y="291" width="375" height="86"/>
+                                <rect key="frame" x="0.0" y="245.5" width="320" height="77"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COLUMBIA, SC" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8S-77-hZ6">
-                                        <rect key="frame" x="20" y="34" width="335" height="44"/>
+                                        <rect key="frame" x="20" y="31.5" width="280" height="37.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="32"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 24 - 25, 1995" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYL-yB-6Eb">
-                                        <rect key="frame" x="20" y="8" width="335" height="18"/>
+                                        <rect key="frame" x="20" y="8" width="280" height="15.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -77,25 +77,35 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0m-29-s0K">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="227"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summit-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hje-NR-jtt">
-                                        <rect key="frame" x="57" y="54" width="262" height="160"/>
+                                        <rect key="frame" x="49" y="46" width="223.5" height="136"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxS-dg-se7">
+                                        <rect key="frame" x="48.5" y="46" width="223.5" height="136"/>
+                                        <connections>
+                                            <segue destination="He9-0n-Hpb" kind="presentation" identifier="showSummits" modalPresentationStyle="formSheet" id="scj-bP-kOo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="zxS-dg-se7" firstAttribute="centerY" secondItem="hje-NR-jtt" secondAttribute="centerY" id="6Rg-AK-jkS"/>
+                                    <constraint firstItem="zxS-dg-se7" firstAttribute="height" secondItem="hje-NR-jtt" secondAttribute="height" id="ACm-Bj-FeU"/>
                                     <constraint firstItem="hje-NR-jtt" firstAttribute="width" secondItem="i0m-29-s0K" secondAttribute="width" multiplier="0.7" id="Ceg-2n-y7V"/>
                                     <constraint firstItem="hje-NR-jtt" firstAttribute="centerY" secondItem="i0m-29-s0K" secondAttribute="centerY" id="GvW-pL-zv7"/>
+                                    <constraint firstItem="zxS-dg-se7" firstAttribute="centerX" secondItem="hje-NR-jtt" secondAttribute="centerX" id="Loi-ZW-q3m"/>
                                     <constraint firstItem="hje-NR-jtt" firstAttribute="height" secondItem="i0m-29-s0K" secondAttribute="height" multiplier="0.6" id="P8c-TM-i4y"/>
                                     <constraint firstItem="hje-NR-jtt" firstAttribute="centerX" secondItem="i0m-29-s0K" secondAttribute="centerX" id="RVF-0N-Rdc"/>
+                                    <constraint firstItem="zxS-dg-se7" firstAttribute="width" secondItem="hje-NR-jtt" secondAttribute="width" id="acX-pF-ayg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDc-Q1-oct">
-                                <rect key="frame" x="0.0" y="529" width="375" height="138"/>
+                                <rect key="frame" x="0.0" y="430" width="320" height="138"/>
                                 <subviews>
                                     <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeV-KC-TN4" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="73" width="335" height="45"/>
+                                        <rect key="frame" x="20" y="73" width="280" height="45"/>
                                         <color key="backgroundColor" red="0.078431372549019607" green="0.14901960784313725" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="pX7-jM-FgI"/>
@@ -120,7 +130,7 @@
                                         </connections>
                                     </button>
                                     <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ge6-hl-sol" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="20" width="335" height="45"/>
+                                        <rect key="frame" x="20" y="20" width="280" height="45"/>
                                         <color key="backgroundColor" red="0.18823529411764706" green="0.45098039215686275" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Qqw-5Z-iKy"/>
@@ -145,7 +155,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="WdF-Gb-aDw">
-                                        <rect key="frame" x="169" y="51" width="37" height="37"/>
+                                        <rect key="frame" x="141.5" y="51" width="37" height="37"/>
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -188,11 +198,90 @@
                         <outlet property="summitDateLabel" destination="hYL-yB-6Eb" id="cDh-xj-k5u"/>
                         <outlet property="summitNameLabel" destination="C8S-77-hZ6" id="w1P-ha-HHD"/>
                         <outlet property="summitView" destination="Jq3-r8-xIB" id="kMy-HR-QTF"/>
+                        <outlet property="summitsButton" destination="zxS-dg-se7" id="bAR-Pi-9yM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wlu-QN-bFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="920.79999999999995" y="385.45727136431788"/>
+        </scene>
+        <!--Summit-->
+        <scene sceneID="DVL-Am-LhS">
+            <objects>
+                <tableViewController storyboardIdentifier="SummitsViewController" id="wlj-s0-dZZ" customClass="SummitsViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DLd-hn-cPv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="SummitCell" textLabel="qeO-0b-pDR" detailTextLabel="1bi-Gm-esc" style="IBUITableViewCellStyleSubtitle" id="pIn-eV-vFD">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pIn-eV-vFD" id="YXj-WF-qGx">
+                                    <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Barcelona, Spain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qeO-0b-pDR">
+                                            <rect key="frame" x="15" y="4" width="128" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="October 26, 2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1bi-Gm-esc">
+                                            <rect key="frame" x="15" y="25" width="100" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wlj-s0-dZZ" id="bBf-ML-IZD"/>
+                            <outlet property="delegate" destination="wlj-s0-dZZ" id="Ymq-Wx-Czw"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Summit" id="fWA-zz-xNf">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Oj7-sB-R5d">
+                            <connections>
+                                <action selector="done:" destination="wlj-s0-dZZ" id="9fC-Pk-bQg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="wix-gQ-NWM">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="wlj-s0-dZZ" eventType="valueChanged" id="MaW-iQ-RSN"/>
+                        </connections>
+                    </refreshControl>
+                    <connections>
+                        <outlet property="doneButton" destination="Oj7-sB-R5d" id="5sB-5P-aPw"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0eY-Ch-fsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1948" y="-361"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BlU-6x-MgF">
+            <objects>
+                <navigationController id="He9-0n-Hpb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ros-Je-w7d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wlj-s0-dZZ" kind="relationship" relationship="rootViewController" id="nnU-EI-fB7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="01n-Hq-QLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="921" y="-361"/>
         </scene>
     </scenes>
     <resources>

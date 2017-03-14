@@ -28,6 +28,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     @IBOutlet private(set) weak var guestButton: UIButton!
     
+    @IBOutlet private(set) weak var summitsButton: UIButton!
+    
     // MARK: - Properties
     
     private(set) var willTransition = false
@@ -44,7 +46,13 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configureView()
+        self.summitsButton.enabled = AppEnvironment == .Staging
+        
+        configureView()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         if Store.shared.isLoggedIn {
             
@@ -268,6 +276,22 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     controller.state = .dataLoaded
                 }
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.launchScreenViewController.showSummits.identifier:
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            
+            let summitsViewController = navigationController.topViewController as! SummitsViewController
+            
+            summitsViewController.didFinish = { [weak self] in $0.dismissViewControllerAnimated(true) { self?.loadSummits() } }
+            
+        default: fatalError()
         }
     }
 }
