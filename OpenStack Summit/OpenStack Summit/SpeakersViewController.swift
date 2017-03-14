@@ -20,6 +20,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         super.viewDidLoad()
         
         // setup navigation bar
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.title = "SPEAKERS"
         addMenuButton()
         
