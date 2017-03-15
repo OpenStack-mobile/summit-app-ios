@@ -71,8 +71,9 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         // setup table view
         tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView()
+        
+        configureView()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -80,6 +81,10 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // handoff
         self.userActivity?.becomeCurrent()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         configureView()
     }
@@ -290,6 +295,21 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             return cell
         }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        return headerView
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 128
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return UITableViewAutomaticDimension
     }
 }
 
