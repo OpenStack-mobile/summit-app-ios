@@ -15,11 +15,11 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
     
     // MARK: - Properties
     
-    let profile: MemberProfileIdentifier
+    let profile: PersonIdentifier
     
-    lazy var memberProfileDetailViewController: MemberProfileDetailViewController = {
+    lazy var memberProfileDetailViewController: PersonDetailViewController = {
         
-        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
+        let memberProfileDetailViewController = R.storyboard.member.personDetailViewController()!
         
         memberProfileDetailViewController.profile = self.profile
         
@@ -30,7 +30,7 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
     
     // MARK: - Initialization
     
-    init(profile: MemberProfileIdentifier = MemberProfileIdentifier()) {
+    init(profile: PersonIdentifier = PersonIdentifier()) {
         
         self.profile = profile
         

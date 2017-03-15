@@ -150,10 +150,12 @@ public extension EventDetail {
         
         public let irc: String?
         
+        public var linkedIn: String? { return nil }
+        
         public let biography: String?
         
         public let isModerator: Bool
-        
+                
         private init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier

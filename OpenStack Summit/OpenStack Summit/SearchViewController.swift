@@ -358,7 +358,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             let speaker = speakers[indexPath.row]
             
-            let memberProfileVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
+            let memberProfileVC = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
             
             showViewController(memberProfileVC, sender: self)
             

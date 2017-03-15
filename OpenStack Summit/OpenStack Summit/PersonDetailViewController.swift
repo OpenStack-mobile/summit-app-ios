@@ -28,14 +28,25 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         var items = [AnyObject]()
         
-        items.append(self.name)
+        items.append(self.headerView.nameLabel.text ?? "")
         
-        if let biographyText = self.bioTextView.attributedText {
+        for data in self.data {
             
-            items.append(biographyText)
+            switch data {
+                
+            case let .biography(biography):
+                
+                items.append(biography)
+                
+            case let .links(links):
+                
+                items += [links.twitter, links.irc, links.linkedIn]
+                
+            case .attendeeTicket: break
+            }
         }
         
-        items.append(self.pictureImageView.image!)
+        items.append(self.headerView.imageView.image!)
         
         if let url = self.userActivity?.webpageURL {
             
@@ -54,10 +65,12 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // setup navigation bar
         addContextMenuBarButtonItem()
         
-        configureView()
-        
+        // setup table view
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView()
     }
@@ -67,6 +80,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // handoff
         self.userActivity?.becomeCurrent()
+        
+        configureView()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -145,6 +160,13 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         headerView.nameLabel.text = person.name
         headerView.titleLabel.text = person.title ?? ""
+        headerView.titleLabel.hidden = (person.title ?? "").isEmpty
+        headerView.imageView.image = R.image.genericUserAvatar()!
+        
+        if let imageURL = NSURL(string: person.pictureURL) {
+            
+            headerView.imageView.hnk_setImageFromURL(imageURL)
+        }
         
         // configure cells
         

@@ -38,7 +38,7 @@ final class MyProfileViewController: RevealTabStripViewController {
         
         var childViewControllers = [UIViewController]()
         
-        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
+        let memberProfileDetailViewController = R.storyboard.member.personDetailViewController()!
         childViewControllers.append(memberProfileDetailViewController)
         
         if Store.shared.isLoggedInAndConfirmedAttendee {

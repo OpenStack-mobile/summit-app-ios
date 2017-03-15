@@ -572,7 +572,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let speaker = eventDetail.speakers[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier.speaker(speaker.identifier))
+            let memberViewController = MemberProfileViewController(profile: PersonIdentifier.speaker(speaker.identifier))
             
             self.showViewController(memberViewController, sender: self)
             
@@ -580,7 +580,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let feedback = feedbackList[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier(member: feedback.member))
+            let memberViewController = MemberProfileViewController(profile: PersonIdentifier(member: feedback.member))
             
             self.showViewController(memberViewController, sender: self)
         }

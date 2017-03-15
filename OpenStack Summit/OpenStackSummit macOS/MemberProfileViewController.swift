@@ -41,7 +41,7 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
     
     // MARK: - Properties
     
-    var profile: MemberProfileIdentifier = .currentUser {
+    var profile: PersonIdentifier = .currentUser {
         
         didSet { loadData() }
     }
