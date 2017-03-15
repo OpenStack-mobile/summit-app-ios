@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -428,7 +428,7 @@
             </objects>
             <point key="canvasLocation" x="194" y="1515"/>
         </scene>
-        <!--About-->
+        <!--ABOUT-->
         <scene sceneID="H0g-ht-ytK">
             <objects>
                 <tableViewController storyboardIdentifier="AboutViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f3D-Xb-lXH" customClass="AboutViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
@@ -438,8 +438,65 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutNameCell" rowHeight="175" id="3lx-TO-cwS" customClass="AboutNameCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="175"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3lx-TO-cwS" id="3gw-L9-PLB">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columbia, SC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myc-Ki-vnp" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="30" width="288" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 24-25, 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBO-b3-7fI" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="62" width="288" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 2.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6Q-qf-d5w" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="104" width="288" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build 9000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDY-kV-7Qm" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="129" width="288" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="top" secondItem="X6Q-qf-d5w" secondAttribute="bottom" constant="8" id="7Jz-nz-mqy"/>
+                                        <constraint firstAttribute="trailing" secondItem="X6Q-qf-d5w" secondAttribute="trailing" constant="16" id="8EA-Ws-vdm"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Myc-Ki-vnp" secondAttribute="trailing" constant="8" id="Hzf-YH-EbP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="UBO-b3-7fI" secondAttribute="trailing" constant="8" id="Isv-4u-ic4"/>
+                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="JaD-hF-hXS"/>
+                                        <constraint firstItem="UBO-b3-7fI" firstAttribute="top" secondItem="Myc-Ki-vnp" secondAttribute="bottom" constant="8" id="JmB-Kd-L6T"/>
+                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="top" secondItem="X6Q-qf-d5w" secondAttribute="bottom" constant="8" id="NZx-97-lmo"/>
+                                        <constraint firstItem="X6Q-qf-d5w" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leading" constant="16" id="QoZ-Ce-rqf"/>
+                                        <constraint firstItem="Myc-Ki-vnp" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="RYF-tX-rbe"/>
+                                        <constraint firstItem="X6Q-qf-d5w" firstAttribute="top" secondItem="UBO-b3-7fI" secondAttribute="bottom" constant="25" id="SZ5-fz-HAQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zDY-kV-7Qm" secondAttribute="trailing" constant="8" id="Tmd-RP-ftn"/>
+                                        <constraint firstItem="Myc-Ki-vnp" firstAttribute="top" secondItem="3gw-L9-PLB" secondAttribute="top" constant="30" id="WjK-LN-RXY"/>
+                                        <constraint firstItem="UBO-b3-7fI" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="aRD-7N-cjA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zDY-kV-7Qm" secondAttribute="bottom" constant="20" id="pKS-Ky-r9T"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.12723124027252197" green="0.25187474489212036" blue="0.39719080924987793" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="buildNumberLabel" destination="zDY-kV-7Qm" id="xEn-BT-Zpx"/>
+                                    <outlet property="buildVersionLabel" destination="X6Q-qf-d5w" id="DJi-fk-V9d"/>
+                                    <outlet property="dateLabel" destination="UBO-b3-7fI" id="ylN-Ob-OaS"/>
+                                    <outlet property="nameLabel" destination="Myc-Ki-vnp" id="oqK-02-CBN"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WirelessNetworkCell" rowHeight="46" id="Qbu-WP-gaU" customClass="WirelessNetworkCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="46"/>
+                                <rect key="frame" x="0.0" y="203" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qbu-WP-gaU" id="h4U-0s-luK">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -516,63 +573,6 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="PMv-Ui-qu4" id="B8V-0v-iwP"/>
                                     <outlet property="passwordLabel" destination="r2j-0M-X2P" id="hja-Di-Zo8"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutNameCell" rowHeight="175" id="3lx-TO-cwS" customClass="AboutNameCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="74" width="320" height="175"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3lx-TO-cwS" id="3gw-L9-PLB">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columbia, SC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myc-Ki-vnp" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="30" width="288" height="24"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 24-25, 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBO-b3-7fI" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="62" width="288" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 2.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6Q-qf-d5w" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="104" width="288" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build 9000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDY-kV-7Qm" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="129" width="288" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="top" secondItem="X6Q-qf-d5w" secondAttribute="bottom" constant="8" id="7Jz-nz-mqy"/>
-                                        <constraint firstAttribute="trailing" secondItem="X6Q-qf-d5w" secondAttribute="trailing" constant="16" id="8EA-Ws-vdm"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Myc-Ki-vnp" secondAttribute="trailing" constant="8" id="Hzf-YH-EbP"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="UBO-b3-7fI" secondAttribute="trailing" constant="8" id="Isv-4u-ic4"/>
-                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="JaD-hF-hXS"/>
-                                        <constraint firstItem="UBO-b3-7fI" firstAttribute="top" secondItem="Myc-Ki-vnp" secondAttribute="bottom" constant="8" id="JmB-Kd-L6T"/>
-                                        <constraint firstItem="zDY-kV-7Qm" firstAttribute="top" secondItem="X6Q-qf-d5w" secondAttribute="bottom" constant="8" id="NZx-97-lmo"/>
-                                        <constraint firstItem="X6Q-qf-d5w" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leading" constant="16" id="QoZ-Ce-rqf"/>
-                                        <constraint firstItem="Myc-Ki-vnp" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="RYF-tX-rbe"/>
-                                        <constraint firstItem="X6Q-qf-d5w" firstAttribute="top" secondItem="UBO-b3-7fI" secondAttribute="bottom" constant="25" id="SZ5-fz-HAQ"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="zDY-kV-7Qm" secondAttribute="trailing" constant="8" id="Tmd-RP-ftn"/>
-                                        <constraint firstItem="Myc-Ki-vnp" firstAttribute="top" secondItem="3gw-L9-PLB" secondAttribute="top" constant="30" id="WjK-LN-RXY"/>
-                                        <constraint firstItem="UBO-b3-7fI" firstAttribute="leading" secondItem="3gw-L9-PLB" secondAttribute="leadingMargin" constant="8" id="aRD-7N-cjA"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="zDY-kV-7Qm" secondAttribute="bottom" constant="20" id="pKS-Ky-r9T"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.12723124027252197" green="0.25187474489212036" blue="0.39719080924987793" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="buildNumberLabel" destination="zDY-kV-7Qm" id="xEn-BT-Zpx"/>
-                                    <outlet property="buildVersionLabel" destination="X6Q-qf-d5w" id="DJi-fk-V9d"/>
-                                    <outlet property="dateLabel" destination="UBO-b3-7fI" id="ylN-Ob-OaS"/>
-                                    <outlet property="nameLabel" destination="Myc-Ki-vnp" id="oqK-02-CBN"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutLinksCell" rowHeight="208" id="XAa-2G-uHD">
@@ -676,7 +676,7 @@
                             <outlet property="delegate" destination="f3D-Xb-lXH" id="Uxt-Hp-Y9j"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="About" id="zLd-Il-xQa"/>
+                    <navigationItem key="navigationItem" title="ABOUT" id="zLd-Il-xQa"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
