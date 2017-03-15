@@ -23,9 +23,7 @@ final class PeopleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = contentView.backgroundColor
-        selectedBackgroundView = bgColorView
+        
     }
     
     // MARK: - Selection
@@ -62,6 +60,7 @@ final class PeopleTableViewCell: UITableViewCell {
         }
         set {
             titleLabel.text = newValue
+            titleLabel.hidden = (newValue ?? "").isEmpty
         }
     }
     

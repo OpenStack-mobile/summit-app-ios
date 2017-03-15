@@ -112,7 +112,6 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         sections = []
         
-        var aboutCells = [AboutCell]()
         
         if let summitManagedObject = self.currentSummit {
             
@@ -120,7 +119,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             summitCache = summit
             
-            aboutCells.append(.name)
+            sections.append(.name)
             
             // fetch wireless networks
             
@@ -154,6 +153,8 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             userActivity?.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
         }
+        
+        var aboutCells = [AboutCell]()
         
         aboutCells += [.links, .description]
         
@@ -220,6 +221,8 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         switch section {
             
+        case .name: return 1
+            
         case let .wirelessNetworks(networks): return networks.count
             
         case let .about(cells): return cells.count
@@ -231,6 +234,14 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         let section = sections[indexPath.section]
         
         switch section {
+        
+        case .name:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, forIndexPath: indexPath)!
+            
+            configure(cell: cell)
+            
+            return cell
             
         case let .wirelessNetworks(networks):
             
@@ -247,15 +258,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             let data = aboutCells[indexPath.row]
             
             switch data {
-                
-            case .name:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutNameCell, forIndexPath: indexPath)!
-                
-                configure(cell: cell)
-                
-                return cell
-                
+            
             case .links:
                 
                 return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.aboutLinksCell, forIndexPath: indexPath)!
@@ -275,8 +278,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         switch section {
         case .wirelessNetworks: return 90
-        case .about: return 0
-            
+        case .name, .about: return 0
         }
     }
     
@@ -286,7 +288,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         switch section {
         case .wirelessNetworks: return wirelessNetworksHeaderView
-        case .about: return nil
+        case .name, .about: return nil
         }
     }
     
@@ -296,7 +298,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         switch section {
         case .wirelessNetworks: return 30
-        case .about: return 0
+        case .name, .about: return 0
         }
     }
     
@@ -306,7 +308,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         switch section {
         case .wirelessNetworks: return wirelessNetworksFooterView
-        case .about: return nil
+        case .name, .about: return nil
         }
     }
     
@@ -330,13 +332,13 @@ private extension AboutViewController {
     
     enum Section {
         
+        case name
         case wirelessNetworks([WirelessNetwork])
         case about([AboutCell])
     }
     
     enum AboutCell {
         
-        case name
         case links
         case description
     }
