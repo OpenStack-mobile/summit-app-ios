@@ -11,20 +11,39 @@ import XLPagerTabStrip
 import Haneke
 import CoreSummit
 
-final class MemberProfileDetailViewController: UITableViewController, IndicatorInfoProvider, ContextMenuViewController {
+final class PersonDetailViewController: UITableViewController, IndicatorInfoProvider, ContextMenuViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) var headerView: MemberProfileDetailHeaderView!
+    @IBOutlet private(set) var headerView: PersonDetailHeaderView!
     
     // MARK: - Properties
     
-    var profile: MemberProfileIdentifier = .currentUser {
+    var profile: PersonIdentifier = .currentUser {
         
         didSet { configureView() }
     }
     
-    private(set) var contextMenu = ContextMenu()
+    var contextMenu: ContextMenu {
+        
+        var items = [AnyObject]()
+        
+        items.append(self.name)
+        
+        if let biographyText = self.bioTextView.attributedText {
+            
+            items.append(biographyText)
+        }
+        
+        items.append(self.pictureImageView.image!)
+        
+        if let url = self.userActivity?.webpageURL {
+            
+            items.append(url)
+        }
+        
+        return ContextMenu(actions: [], shareItems: items, systemActions: true)
+    }
     
     // MARK: - Private Properties
     
@@ -131,13 +150,39 @@ final class MemberProfileDetailViewController: UITableViewController, IndicatorI
         
         data = []
         
-        data.append(.name(name: <#T##String#>, title: <#T##String#>, image: <#T##NSURL#>))
+        switch profile {
+        case .currentUser:
+            
+            let isConfirmed = Store.shared.isLoggedInAndConfirmedAttendee
+            
+            data.append(.attendeeTicket(confirmed: isConfirmed))
+            
+        default: break
+        }
+        
+        let links = Links(twitter: person.twitter ?? "", irc: person.irc ?? "", linkedIn: person.linkedIn ?? "")
+        
+        if links.isEmpty == false {
+            
+            data.append(.links(links))
+        }
+        
+        if let biography = person.biography,
+            let data = biography.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+            let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
+            
+            let range = NSMakeRange(0, attributedString.length)
+            
+            attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: range)
+            
+            self.data.append(.biography(attributedString))
+        }
         
         tableView.reloadData()
         
-        // set context menu
-        
         // set user activity for handoff
+        
+        let personURL: NSURL?
         
         if let speaker = person as? Speaker,
             let summitManagedObject = self.currentSummit {
@@ -146,7 +191,8 @@ final class MemberProfileDetailViewController: UITableViewController, IndicatorI
             
             let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
             userActivity.title = speaker.name
-            userActivity.webpageURL = NSURL(string: speaker.toWebpageURL(summit))
+            personURL = NSURL(string: speaker.toWebpageURL(summit))
+            userActivity.webpageURL = personURL
             
             userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
@@ -186,46 +232,125 @@ final class MemberProfileDetailViewController: UITableViewController, IndicatorI
         
         switch data {
             
-        case let .name(name, title, image):
-            
         case let .attendeeTicket(confirmed):
+            
+            if confirmed {
+                
+                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailConfirmedAttendeeCell)!
+                
+            } else {
+                
+                return tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailNonConfirmedAttendeeCell)!
+            }
             
         case let .links(links):
             
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailLinksCell)!
+            
+            cell.twitterView.hidden = links.twitter.isEmpty
+            cell.twitterView.label.text = links.twitter
+            
+            cell.ircView.hidden = links.irc.isEmpty
+            cell.ircView.label.text = links.irc
+            
+            cell.linkedInView.hidden = links.linkedIn.isEmpty
+            cell.linkedInView.label.text = links.linkedIn
+            
+            return cell
+            
         case let .biography(text):
             
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailDescriptionCell)!
             
+            cell.textView.attributedText = text
+            
+            return cell
         }
     }
 }
 
 // MARK: - Supporting Types
 
-private extension MemberProfileDetailViewController {
+private extension PersonDetailViewController {
     
     enum Data {
         
-        case name(name: String, title: String, image: String)
         case attendeeTicket(confirmed: Bool)
-        case links([(Link, String)])
+        case links(Links)
         case biography(NSAttributedString)
     }
     
-    enum Link {
+    struct Links {
         
-        case twitter
-        case irc
-        case linkedIn
+        var twitter: String
+        var irc: String
+        var linkedIn: String
+        
+        var isEmpty: Bool {
+            
+            return twitter.isEmpty
+                && irc.isEmpty
+                && linkedIn.isEmpty
+        }
     }
 }
 
-final class MemberProfileDetailHeaderView: UIView {
+/// Data type used the configure the member profile-related View Controllers.
+public enum PersonIdentifier {
+    
+    case currentUser
+    case speaker(Identifier)
+    case member(Identifier)
+    
+    public init() {
+        
+        self = .currentUser
+    }
+    
+    public init(speaker: Speaker) {
+        
+        self = .speaker(speaker.identifier)
+    }
+    
+    public init(member: Member) {
+        
+        self = .member(member.identifier)
+    }
+}
+
+final class PersonDetailHeaderView: UIView {
     
     @IBOutlet private(set) weak var imageView: UIImageView!
     
     @IBOutlet private(set) weak var nameLabel: CopyableLabel!
     
     @IBOutlet private(set) weak var titleLabel: CopyableLabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = imageView.frame.width / 2
+    }
+}
+
+final class PersonDetailLinksTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var twitterView: PersonDetailLinkView!
+    
+    @IBOutlet private(set) weak var ircView: PersonDetailLinkView!
+    
+    @IBOutlet private(set) weak var linkedInView: PersonDetailLinkView!
+}
+
+final class PersonDetailLinkView: UIStackView {
+    
+    @IBOutlet private(set) weak var label: CopyableLabel!
+}
+
+final class PersonDetailDescriptionTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var textView: UITextView!
 }
 
 // MARK: - Legacy
@@ -256,7 +381,7 @@ final class OldMemberProfileDetailViewController: UIViewController, IndicatorInf
     
     // MARK: - Properties
     
-    var profile: MemberProfileIdentifier = .currentUser
+    var profile: PersonIdentifier = .currentUser
     
     var contextMenu: ContextMenu {
         
