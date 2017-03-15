@@ -285,6 +285,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailDescriptionCell)!
             
             cell.textView.attributedText = text
+            cell.textView.textContainerInset = UIEdgeInsetsZero
+            cell.textView.sizeToFit()
             
             return cell
         }
