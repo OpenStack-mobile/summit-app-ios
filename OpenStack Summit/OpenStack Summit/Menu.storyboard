@@ -505,26 +505,26 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-fP-7cq">
                                             <rect key="frame" x="16" y="0.0" width="140" height="45"/>
                                             <subviews>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PMv-Ui-qu4" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="36" y="13" width="104" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetwork" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-yK-Wah">
-                                                    <rect key="frame" x="0.0" y="8" width="28" height="28"/>
+                                                    <rect key="frame" x="0.0" y="13.5" width="18" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="28" id="jPd-Sh-Acb"/>
+                                                        <constraint firstAttribute="height" constant="18" id="jPd-Sh-Acb"/>
                                                         <constraint firstAttribute="width" secondItem="vaO-yK-Wah" secondAttribute="height" id="ld9-Ai-rS7"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PMv-Ui-qu4" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="14" width="114" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="PMv-Ui-qu4" firstAttribute="centerY" secondItem="vaO-yK-Wah" secondAttribute="centerY" id="He4-r2-CAI"/>
                                                 <constraint firstItem="PMv-Ui-qu4" firstAttribute="leading" secondItem="vaO-yK-Wah" secondAttribute="trailing" constant="8" id="Tmz-l6-ARt"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vaO-yK-Wah" secondAttribute="bottom" constant="8" id="Vjk-AS-oZz"/>
-                                                <constraint firstItem="vaO-yK-Wah" firstAttribute="top" secondItem="Q7c-fP-7cq" secondAttribute="top" constant="8" id="iLE-3k-OoO"/>
+                                                <constraint firstItem="PMv-Ui-qu4" firstAttribute="centerY" secondItem="Q7c-fP-7cq" secondAttribute="centerY" id="fVR-RB-qz1"/>
                                                 <constraint firstAttribute="trailing" secondItem="PMv-Ui-qu4" secondAttribute="trailing" id="llV-6I-9J4"/>
                                                 <constraint firstItem="vaO-yK-Wah" firstAttribute="leading" secondItem="Q7c-fP-7cq" secondAttribute="leading" id="z3E-Un-3nH"/>
                                             </constraints>
@@ -532,27 +532,27 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcl-Ae-dHg">
                                             <rect key="frame" x="164" y="0.0" width="140" height="45"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetworkPassword" translatesAutoresizingMaskIntoConstraints="NO" id="qB3-zT-c2p">
+                                                    <rect key="frame" x="0.0" y="14" width="15" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="qB3-zT-c2p" secondAttribute="height" id="jRq-Jy-5jt"/>
+                                                        <constraint firstAttribute="height" constant="15" id="nI0-xa-jGB"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="r2j-0M-X2P" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="36" y="13" width="104" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="23" y="14" width="117" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetworkPassword" translatesAutoresizingMaskIntoConstraints="NO" id="qB3-zT-c2p">
-                                                    <rect key="frame" x="0.0" y="8" width="28" height="28"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="qB3-zT-c2p" secondAttribute="height" id="jRq-Jy-5jt"/>
-                                                        <constraint firstAttribute="height" constant="28" id="nI0-xa-jGB"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="r2j-0M-X2P" secondAttribute="trailing" id="CAc-f0-8Ze"/>
                                                 <constraint firstItem="qB3-zT-c2p" firstAttribute="leading" secondItem="Tcl-Ae-dHg" secondAttribute="leading" id="KmY-dm-do9"/>
-                                                <constraint firstItem="r2j-0M-X2P" firstAttribute="centerY" secondItem="qB3-zT-c2p" secondAttribute="centerY" id="caP-aR-tsl"/>
+                                                <constraint firstItem="r2j-0M-X2P" firstAttribute="centerY" secondItem="qB3-zT-c2p" secondAttribute="centerY" constant="1" id="caP-aR-tsl"/>
+                                                <constraint firstItem="r2j-0M-X2P" firstAttribute="centerY" secondItem="Tcl-Ae-dHg" secondAttribute="centerY" id="k3X-cm-pkn"/>
                                                 <constraint firstItem="r2j-0M-X2P" firstAttribute="leading" secondItem="qB3-zT-c2p" secondAttribute="trailing" constant="8" id="n2g-NC-xeD"/>
-                                                <constraint firstItem="qB3-zT-c2p" firstAttribute="top" secondItem="Tcl-Ae-dHg" secondAttribute="top" constant="8" id="s65-7H-XhZ"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qB3-zT-c2p" secondAttribute="bottom" constant="8" id="stp-4q-TRa"/>
                                             </constraints>
                                         </view>
@@ -582,7 +582,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="207"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EF9-MN-Goa">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EF9-MN-Goa">
                                             <rect key="frame" x="67" y="20" width="186" height="36"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                             <state key="normal" title="OpenStack Website">
@@ -592,7 +592,7 @@
                                                 <action selector="showLink:" destination="f3D-Xb-lXH" eventType="touchUpInside" id="wXK-Y7-8Mg"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yN5-ej-0DQ">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yN5-ej-0DQ">
                                             <rect key="frame" x="80" y="64" width="160" height="36"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                             <state key="normal" title="Code of Conduct">
@@ -602,7 +602,7 @@
                                                 <action selector="showLink:" destination="f3D-Xb-lXH" eventType="touchUpInside" id="Mg9-p1-Ze8"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6X-np-7qO">
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6X-np-7qO">
                                             <rect key="frame" x="101" y="108" width="119" height="36"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                             <state key="normal" title="App Support">
@@ -612,7 +612,7 @@
                                                 <action selector="showLink:" destination="f3D-Xb-lXH" eventType="touchUpInside" id="zVp-mn-pcM"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KE7-ok-Cq0">
+                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KE7-ok-Cq0">
                                             <rect key="frame" x="81" y="152" width="159" height="36"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                             <state key="normal" title="General Inquiries">
@@ -644,13 +644,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="285"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-kI-xaq">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Must-Attend OpenStack Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYl-kI-xaq">
                                             <rect key="frame" x="8" y="8" width="304" height="19.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-iW-mpM">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-iW-mpM">
                                             <rect key="frame" x="16" y="35.5" width="288" height="234"/>
                                             <string key="text">The OpenStack Summit is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -696,8 +696,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Availible Networks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05i-lg-zTr">
-                            <rect key="frame" x="50" y="49" width="140" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Networks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05i-lg-zTr">
+                            <rect key="frame" x="48" y="49" width="145" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -718,12 +718,12 @@
                     <color key="backgroundColor" red="0.075067676599999994" green="0.1470116377" blue="0.2424912155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="193" y="3033"/>
+            <point key="canvasLocation" x="191.25" y="3032.7464788732395"/>
         </scene>
     </scenes>
     <resources>
-        <image name="WirelessNetwork" width="13" height="9"/>
-        <image name="WirelessNetworkPassword" width="9" height="11"/>
+        <image name="WirelessNetwork" width="18" height="13"/>
+        <image name="WirelessNetworkPassword" width="12" height="15"/>
         <image name="about" width="29" height="29"/>
         <image name="arrow" width="9" height="14"/>
         <image name="events" width="26" height="26"/>
