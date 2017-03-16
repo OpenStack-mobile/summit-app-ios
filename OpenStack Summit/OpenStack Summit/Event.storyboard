@@ -350,10 +350,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04m-7R-xvH" userLabel="Play Button" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="252" y="13" width="48" height="34"/>
+                                                    <rect key="frame" x="252" y="15.5" width="48" height="29"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play2" translatesAutoresizingMaskIntoConstraints="NO" id="tEg-DK-ALl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="34"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="29"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </imageView>
                                                     </subviews>
@@ -642,7 +642,9 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="EVENTS" id="M4k-Jf-UhB"/>
+                    <navigationItem key="navigationItem" title="EVENTS" id="M4k-Jf-UhB">
+                        <barButtonItem key="backBarButtonItem" title=" " id="vea-KH-WPs"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
