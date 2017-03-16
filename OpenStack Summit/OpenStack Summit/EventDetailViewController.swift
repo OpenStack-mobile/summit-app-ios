@@ -131,10 +131,14 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBAction func favoriteAction(sender: UIButton) {
         
+        guard eventRequestInProgress == false else { return }
+        
         self.toggleFavorite(for: eventDetail)
     }
     
-    @IBAction func confirmAction(sender: UIButton) {
+    @IBAction func scheduleAction(sender: UIButton) {
+        
+        guard eventRequestInProgress == false else { return }
         
         self.toggleScheduledStatus(for: eventDetail)
     }

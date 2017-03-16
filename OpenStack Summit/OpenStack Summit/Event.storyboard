@@ -484,6 +484,7 @@
                                                     <state key="normal" title="Rate" image="EventButtonRate">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <state key="highlighted" image="EventButtonRateActive"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="color">
                                                             <color key="value" red="0.18823529411764706" green="0.45098039215686275" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
@@ -516,7 +517,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="confirmAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="B7h-Bo-lCE"/>
+                                                        <action selector="scheduleAction:" destination="SnY-ae-Z8a" eventType="touchDown" id="2Wj-Qn-Ufe"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTd-Ix-Da9" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
@@ -539,7 +540,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="favoriteAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="wCH-rE-c4b"/>
+                                                        <action selector="favoriteAction:" destination="SnY-ae-Z8a" eventType="touchDown" id="rGQ-F4-pcZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -691,6 +692,7 @@
     </scenes>
     <resources>
         <image name="EventButtonRate" width="18" height="17"/>
+        <image name="EventButtonRateActive" width="18" height="17"/>
         <image name="EventButtonSchedule" width="17" height="17"/>
         <image name="EventButtonScheduleActive" width="17" height="17"/>
         <image name="EventButtonWatch" width="14" height="17"/>
