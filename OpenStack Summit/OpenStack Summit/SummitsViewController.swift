@@ -51,6 +51,12 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
         configureView()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.view.bringSubviewToFront(progressHUD)
+    }
+    
     // MARK: - Actions
     
     @IBAction func refresh(sender: AnyObject? = nil) {
