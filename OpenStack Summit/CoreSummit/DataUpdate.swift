@@ -100,6 +100,7 @@ public extension DataUpdate {
 
 public extension Store {
     
+    /// Processes the data update, but does not save the context.
     func process(dataUpdate: DataUpdate, summit: Identifier) -> Bool {
         
         let context = privateQueueManagedObjectContext
@@ -153,8 +154,6 @@ public extension Store {
                     
                     attendeeRole.schedule.insert(eventManagedObject)
                     
-                    try context.validateAndSave()
-                    
                     return true
                     
                 case .Delete:
@@ -166,8 +165,6 @@ public extension Store {
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
                         attendeeRole.schedule.remove(eventManagedObject)
-                        
-                        try context.validateAndSave()
                     }
                     
                     return true
@@ -196,8 +193,6 @@ public extension Store {
                     
                     member.favoriteEvents.insert(eventManagedObject)
                     
-                    try context.save()
-                    
                     return true
                     
                 case .Delete:
@@ -209,8 +204,6 @@ public extension Store {
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
                         member.favoriteEvents.remove(eventManagedObject)
-                        
-                        try context.save()
                     }
                     
                     return true
@@ -234,8 +227,6 @@ public extension Store {
                 if let foundEntity = try type.find(identifier, context: context) {
                     
                     context.deleteObject(foundEntity)
-                    
-                    try context.validateAndSave()
                 }
                 
                 return true
@@ -268,16 +259,12 @@ public extension Store {
                 // add to authenticated member's group events
                 member.groupEvents.insert(managedObject)
                 
-                try context.validateAndSave()
-                
                 return true
                 
             default:
                 
                 // insert or update
                 try entity.write(context, summit: summit)
-                
-                try context.validateAndSave()
                 
                 return true
             }
