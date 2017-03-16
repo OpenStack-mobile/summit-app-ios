@@ -15,16 +15,22 @@ final class CopyableLabel: UILabel {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        initialize()
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        initialize()
+        setup()
     }
     
-    func initialize() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        userInteractionEnabled = true
+    }
+    
+    private func setup() {
         
         userInteractionEnabled = true
         addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(CopyableLabel.showMenu(_:))))
@@ -60,6 +66,15 @@ final class CopyableLabel: UILabel {
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
         
-        return action == #selector(NSObject.copy)
+        switch action {
+            
+        case #selector(UIResponderStandardEditActions.copy):
+            
+            return true
+            
+        default:
+            
+            return false
+        }
     }
 }
