@@ -20,8 +20,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - IB Outlets
     
+    @IBOutlet private(set) var titleHeader: EventDetailTitleHeader!
     @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
-    
     @IBOutlet private(set) var speakersHeader: EventDetailHeader!
     
     // MARK: - Properties
@@ -180,12 +180,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.eventCache = Event(managedObject: eventManagedObject)
         self.eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        self.data = [.title]
-        
-        if Store.shared.isLoggedIn {
-            
-            self.data.append(.actions)
-        }
+        self.data = []
         
         if eventDetail.video != nil {
             
@@ -203,6 +198,23 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             data.append(.level)
         }
+        
+        // configure title header
+        
+        titleHeader.titleLabel.text = eventDetail.name
+        titleHeader.trackLabel.text = eventDetail.track
+        titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .whiteColor()
+        titleHeader.trackLabel.hidden = eventDetail.track.isEmpty
+        
+        let canRate = canAddFeedback(for: eventDetail)
+        let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
+        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
+        
+        titleHeader.rateButton.hidden = canRate == false
+        titleHeader.scheduleButton.highlighted = didConfirm
+        titleHeader.favoriteButton.highlighted = isFavorite
+        
+        // action buttons
         
         // get all reviews for this event
         let reviews = try! context.managedObjects(FeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
@@ -385,21 +397,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             switch detail {
                 
-            case .title:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailTitleTableViewCell, forIndexPath: indexPath)!
-                
-                // title
-                cell.titleLabel.text = eventDetail.name
-                
-                // track
-                cell.trackLabel.text = eventDetail.track
-                cell.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
-                cell.trackLabelHeightConstraint.constant = eventDetail.track.isEmpty ? 0 : 30
-                cell.trackLabel.updateConstraints()
-                
-                return cell
-                
             case .video:
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailVideoTableViewCell, forIndexPath: indexPath)!
@@ -479,31 +476,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 cell.sectionLabel.text = "LEVEL"
                 cell.valueLabel.text = eventDetail.level
-                
-                return cell
-                
-            case .actions:
-                
-                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailActionsCell, forIndexPath: indexPath)!
-                
-                let canRate = canAddFeedback(for: eventDetail)
-                
-                let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
-                
-                let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
-                
-                // rate button
-                cell.rateButton.hidden = canRate == false
-                
-                // save button
-                cell.saveButton.actionLabel.text = isFavorite ? "Saved" : "Save"
-                
-                cell.saveButton.actionImageView.image = isFavorite ? R.image.eventButtonSaved()! : R.image.eventButtonSave()!
-                
-                // confirm button
-                cell.confirmButton.actionLabel.text = didConfirm ? "Confirmed" : "Confirm"
-                
-                cell.confirmButton.actionImageView.image = didConfirm ? R.image.eventButtonScheduleRemove()! : R.image.eventButtonScheduleAdd()!
                 
                 return cell
             }
@@ -591,7 +563,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return 0
+        case .details: return EventDetailTitleHeader.estimatedHeight
         case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
         case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
@@ -602,7 +574,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return 0
+        case .details: return UITableViewAutomaticDimension
         case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
         case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
@@ -614,7 +586,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
             
-        case .details: return nil
+        case .details: return titleHeader
         case .speakers: return eventDetail.speakers.isEmpty ? nil : speakersHeader
         case .feedback: return shouldShowReviews ? feedBackHeader : nil
         }
@@ -647,8 +619,6 @@ private extension EventDetailViewController {
     
     enum Detail {
         
-        case title
-        case actions
         case video
         case description
         case location
@@ -658,8 +628,19 @@ private extension EventDetailViewController {
 
 final class EventDetailActionButton: Button {
     
-    @IBOutlet private(set) weak var actionImageView: UIImageView!
-    @IBOutlet private(set) weak var actionLabel: UILabel!
+    
+}
+
+final class EventDetailTitleHeader: UIView {
+    
+    static let estimatedHeight: CGFloat = 200.0
+    
+    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var trackLabel: UILabel!
+    
+    @IBOutlet private(set) weak var favoriteButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var scheduleButton: EventDetailActionButton!
+    @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
 }
 
 final class EventDetailHeader: UIView {
@@ -677,13 +658,6 @@ final class EventDetailFeedbackHeader: UIView {
     @IBOutlet private(set) weak var averageRatingView: CosmosView!
     @IBOutlet private(set) weak var averageRatingLabel: UILabel!
     @IBOutlet private(set) weak var averageRatingActivityIndicator: UIActivityIndicatorView!
-}
-
-final class EventDetailTitleTableViewCell: UITableViewCell {
-    
-    @IBOutlet private(set) weak var titleLabel: UILabel!
-    @IBOutlet private(set) weak var trackLabel: UILabel!
-    @IBOutlet private(set) weak var trackLabelHeightConstraint: NSLayoutConstraint!
 }
 
 final class EventDetailVideoTableViewCell: UITableViewCell {
@@ -709,15 +683,6 @@ final class EventDetailTableViewCell: UITableViewCell {
     @IBOutlet private(set) weak var sectionLabel: UILabel!
     
     @IBOutlet private(set) weak var valueLabel: UILabel!
-}
-
-final class EventDetailActionsTableViewCell: UITableViewCell {
-    
-    @IBOutlet private(set) weak var saveButton: EventDetailActionButton!
-    
-    @IBOutlet private(set) weak var confirmButton: EventDetailActionButton!
-    
-    @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
 }
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {

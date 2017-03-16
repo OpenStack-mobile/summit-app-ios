@@ -9,44 +9,60 @@
 import Foundation
 import UIKit
 
+/// Customizable button.
 @IBDesignable class Button: UIButton {
     
     // MARK: - Properties
     
     @IBInspectable var cornerRadius: CGFloat = 0.0 {
         
-        didSet {
-            
-            layer.cornerRadius = self.cornerRadius
-            
-            layer.masksToBounds = cornerRadius > 0.0
-        }
+        didSet { configureView() }
     }
     
-    @IBInspectable var color: UIColor?
+    @IBInspectable var color: UIColor? {
+        
+        didSet { configureView() }
+    }
     
-    @IBInspectable var selectedColor: UIColor?
-    
-    // MARK: - Methods
+    @IBInspectable var selectedColor: UIColor? {
+        
+        didSet { configureView() }
+    }
     
     override var highlighted: Bool {
         
-        didSet {
+        didSet { configureView() }
+    }
+    
+    // MARK: - Loading
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        configureView()
+    }
+    
+    // MARK: - Methods
+    
+    private func configureView() {
+        
+        // cornerRadius
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = cornerRadius > 0.0
+        
+        // background color
+        let defaultColor = self.color ?? self.backgroundColor ?? .clearColor()
+        let selectedColor = self.selectedColor ?? defaultColor
+        
+        if highlighted {
             
-            let defaultColor = self.color ?? self.backgroundColor ?? .clearColor()
+            self.backgroundColor = selectedColor
             
-            let selectedColor = self.selectedColor ?? defaultColor
+        } else {
             
-            if highlighted {
-                
-                self.backgroundColor = selectedColor
-                
-            } else {
-                
-                self.backgroundColor = defaultColor
-            }
-            
-            setNeedsDisplay()
+            self.backgroundColor = defaultColor
         }
+        
+        setNeedsDisplay()
     }
 }
