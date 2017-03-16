@@ -391,7 +391,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         } else if isFavorite {
             
             cell.statusImageView.hidden = false
-            cell.statusImageView.image = R.image.contextMenuSaved()!
+            cell.statusImageView.image = R.image.contextMenuWatchListAdd()!
             
         } else {
             
