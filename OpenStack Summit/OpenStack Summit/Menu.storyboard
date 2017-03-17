@@ -89,61 +89,61 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhA-QB-4RU" userLabel="Events Button">
-                                                <rect key="frame" x="22" y="17" width="290" height="40"/>
+                                                <rect key="frame" x="22" y="24" width="123" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="EVENTS" image="events"/>
+                                                <state key="normal" title="EVENTS" image="Events"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="8en-lX-jSg"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zak-3i-NtK" userLabel="Venues Button">
-                                                <rect key="frame" x="24" y="67" width="288" height="40"/>
+                                                <rect key="frame" x="25" y="74" width="121" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="21" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="VENUES" image="venues"/>
+                                                <state key="normal" title="VENUES" image="Venues"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Het-tS-kh0"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7my-lK-e1A" userLabel="People or Speakers Button">
-                                                <rect key="frame" x="20" y="117" width="292" height="40"/>
+                                                <rect key="frame" x="21" y="125" width="146" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="SPEAKERS" image="people"/>
+                                                <state key="normal" title="SPEAKERS" image="Speakers"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="vbe-Gc-6CM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UM-eh-Q5r">
-                                                <rect key="frame" x="20" y="165" width="292" height="40"/>
+                                                <rect key="frame" x="22" y="173" width="104" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="INBOX" image="about"/>
+                                                <state key="normal" title="INBOX" image="Inbox"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="rfy-uJ-Ogj"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbZ-RL-hoW" userLabel="My Profile Button">
-                                                <rect key="frame" x="22" y="261" width="400" height="40"/>
+                                                <rect key="frame" x="22" y="269" width="158" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="MY SUMMIT" image="my-profile"/>
+                                                <state key="normal" title="MY SUMMIT" image="MySummit"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Lbq-cM-Ad2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrl-Me-5MB" userLabel="About Button">
-                                                <rect key="frame" x="20" y="213" width="400" height="40"/>
+                                                <rect key="frame" x="22" y="219" width="125" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="ABOUT" image="about"/>
+                                                <state key="normal" title="ABOUT" image="About"/>
                                                 <connections>
                                                     <action selector="toggleMenuSelection:" destination="UXc-g0-j1x" eventType="touchUpInside" id="Rpa-rB-CVT"/>
                                                 </connections>
@@ -506,7 +506,7 @@
                                             <rect key="frame" x="16" y="0.0" width="140" height="45"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WirelessNetwork" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-yK-Wah">
-                                                    <rect key="frame" x="0.0" y="13.5" width="18" height="18"/>
+                                                    <rect key="frame" x="0.0" y="14" width="18" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="jPd-Sh-Acb"/>
                                                         <constraint firstAttribute="width" secondItem="vaO-yK-Wah" secondAttribute="height" id="ld9-Ai-rS7"/>
@@ -722,16 +722,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="About" width="22" height="22"/>
+        <image name="Events" width="21" height="23"/>
+        <image name="Inbox" width="21" height="18"/>
+        <image name="MySummit" width="22" height="22"/>
+        <image name="Speakers" width="23" height="23"/>
+        <image name="Venues" width="14" height="21"/>
         <image name="WirelessNetwork" width="18" height="13"/>
         <image name="WirelessNetworkPassword" width="12" height="15"/>
-        <image name="about" width="29" height="29"/>
         <image name="arrow" width="9" height="14"/>
-        <image name="events" width="26" height="26"/>
         <image name="generic-user-avatar" width="122" height="122"/>
         <image name="menu" width="20" height="16"/>
-        <image name="my-profile" width="26" height="26"/>
-        <image name="people" width="29" height="29"/>
         <image name="summit-logo" width="335" height="135"/>
-        <image name="venues" width="21" height="27"/>
     </resources>
 </document>
