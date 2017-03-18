@@ -9,6 +9,14 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+        <array key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--EVENTS-->
         <scene sceneID="JKu-1V-nph">
@@ -20,231 +28,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailTitleTableViewCell" rowHeight="127" id="uGT-3k-mt6" customClass="EventDetailTitleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="127"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uGT-3k-mt6" id="WF8-UM-5Tw">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgm-5C-23d" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="20" width="280" height="53"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLH-lM-hPM" userLabel="Track" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="81" width="280" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="TDr-b0-wDx" userLabel="Track Label Height Constraint"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.12941176470588234" green="0.25098039215686274" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="dLH-lM-hPM" firstAttribute="leading" secondItem="WF8-UM-5Tw" secondAttribute="leading" constant="20" id="H4g-Rk-jQQ"/>
-                                        <constraint firstItem="Rgm-5C-23d" firstAttribute="top" secondItem="WF8-UM-5Tw" secondAttribute="top" constant="20" id="LFC-iB-2xa"/>
-                                        <constraint firstItem="dLH-lM-hPM" firstAttribute="top" secondItem="Rgm-5C-23d" secondAttribute="bottom" constant="8" id="XIG-dF-XNh"/>
-                                        <constraint firstItem="Rgm-5C-23d" firstAttribute="leading" secondItem="WF8-UM-5Tw" secondAttribute="leading" constant="20" id="juR-Dg-Ddo"/>
-                                        <constraint firstAttribute="trailing" secondItem="dLH-lM-hPM" secondAttribute="trailing" constant="20" id="jvN-Ck-jG8"/>
-                                        <constraint firstAttribute="bottom" secondItem="dLH-lM-hPM" secondAttribute="bottom" constant="16" id="pNw-xt-MLp"/>
-                                        <constraint firstAttribute="trailing" secondItem="Rgm-5C-23d" secondAttribute="trailing" constant="20" id="wEs-oe-3lD"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="titleLabel" destination="Rgm-5C-23d" id="dyk-sx-ujH"/>
-                                    <outlet property="trackLabel" destination="dLH-lM-hPM" id="PIJ-z4-yza"/>
-                                    <outlet property="trackLabelHeightConstraint" destination="TDr-b0-wDx" id="3dI-mi-sfb"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailActionsCell" rowHeight="51" id="Big-Nh-rkD" customClass="EventDetailActionsTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="155" width="320" height="51"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Big-Nh-rkD" id="48t-0V-0XI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9LM-7x-arF">
-                                            <rect key="frame" x="16" y="8" width="288" height="30"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6b-Dj-6i2" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90.5" height="30"/>
-                                                    <subviews>
-                                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twv-ja-wlP">
-                                                            <rect key="frame" x="17.5" y="5" width="55.5" height="20"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonSave" translatesAutoresizingMaskIntoConstraints="NO" id="VBJ-14-Wf0">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="VBJ-14-Wf0" secondAttribute="height" multiplier="1:1" id="ZbN-16-2rG"/>
-                                                                        <constraint firstAttribute="width" constant="20" id="bfP-im-wxI"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgF-X6-f8d">
-                                                                    <rect key="frame" x="28" y="0.0" width="27.5" height="20"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstItem="VBJ-14-Wf0" firstAttribute="top" secondItem="twv-ja-wlP" secondAttribute="top" id="6rH-Wn-mX4"/>
-                                                                <constraint firstItem="RgF-X6-f8d" firstAttribute="top" secondItem="twv-ja-wlP" secondAttribute="top" id="E6i-X6-EL3"/>
-                                                                <constraint firstAttribute="bottom" secondItem="RgF-X6-f8d" secondAttribute="bottom" id="M39-st-6b8"/>
-                                                                <constraint firstItem="VBJ-14-Wf0" firstAttribute="leading" secondItem="twv-ja-wlP" secondAttribute="leading" id="Tie-bv-s6v"/>
-                                                                <constraint firstAttribute="bottom" secondItem="VBJ-14-Wf0" secondAttribute="bottom" id="WRf-nz-ofG"/>
-                                                                <constraint firstItem="RgF-X6-f8d" firstAttribute="leading" secondItem="VBJ-14-Wf0" secondAttribute="trailing" constant="8" id="ngJ-y2-sWb"/>
-                                                                <constraint firstAttribute="trailing" secondItem="RgF-X6-f8d" secondAttribute="trailing" id="pNl-o4-4qt"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.19021242860000001" green="0.452250123" blue="0.61040174960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="twv-ja-wlP" firstAttribute="centerY" secondItem="f6b-Dj-6i2" secondAttribute="centerY" id="I3d-uh-j1c"/>
-                                                        <constraint firstAttribute="height" constant="30" id="MBy-us-jVe"/>
-                                                        <constraint firstItem="twv-ja-wlP" firstAttribute="centerX" secondItem="f6b-Dj-6i2" secondAttribute="centerX" id="Sth-fv-meL"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="favoriteAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="ler-Mn-IMA"/>
-                                                        <outlet property="actionImageView" destination="VBJ-14-Wf0" id="6ef-WO-6nC"/>
-                                                        <outlet property="actionLabel" destination="RgF-X6-f8d" id="G49-Ll-W8q"/>
-                                                    </connections>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puL-j3-vTR" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="98.5" y="0.0" width="91" height="30"/>
-                                                    <subviews>
-                                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-AX-JvZ">
-                                                            <rect key="frame" x="8.5" y="5" width="73.5" height="20"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonCalendarAdd" translatesAutoresizingMaskIntoConstraints="NO" id="VJ2-Rc-tZd">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="VJ2-Rc-tZd" secondAttribute="height" multiplier="1:1" id="0eP-BT-d6D"/>
-                                                                        <constraint firstAttribute="width" constant="20" id="na4-m7-inH"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hpp-26-vLJ">
-                                                                    <rect key="frame" x="28" y="0.0" width="45.5" height="20"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="VJ2-Rc-tZd" secondAttribute="bottom" id="00o-2V-mZV"/>
-                                                                <constraint firstItem="Hpp-26-vLJ" firstAttribute="leading" secondItem="VJ2-Rc-tZd" secondAttribute="trailing" constant="8" id="CSg-gf-0Sc"/>
-                                                                <constraint firstItem="VJ2-Rc-tZd" firstAttribute="leading" secondItem="eFD-AX-JvZ" secondAttribute="leading" id="LWE-j5-QYN"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Hpp-26-vLJ" secondAttribute="bottom" id="Sg2-bT-AKP"/>
-                                                                <constraint firstItem="VJ2-Rc-tZd" firstAttribute="top" secondItem="eFD-AX-JvZ" secondAttribute="top" id="Vz5-Bp-Bck"/>
-                                                                <constraint firstItem="Hpp-26-vLJ" firstAttribute="top" secondItem="eFD-AX-JvZ" secondAttribute="top" id="i1d-sx-RPP"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Hpp-26-vLJ" secondAttribute="trailing" id="i4Z-lY-jbk"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.19021242860000001" green="0.452250123" blue="0.61040174960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="eFD-AX-JvZ" firstAttribute="centerX" secondItem="puL-j3-vTR" secondAttribute="centerX" id="0hs-1Z-hmj"/>
-                                                        <constraint firstAttribute="height" constant="30" id="9m9-KM-5g9"/>
-                                                        <constraint firstItem="eFD-AX-JvZ" firstAttribute="centerY" secondItem="puL-j3-vTR" secondAttribute="centerY" id="UyK-mg-FfY"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="confirmAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="dOH-Kf-yAX"/>
-                                                        <outlet property="actionImageView" destination="VJ2-Rc-tZd" id="q9h-re-Cgf"/>
-                                                        <outlet property="actionLabel" destination="Hpp-26-vLJ" id="eFn-Ye-kvd"/>
-                                                    </connections>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXa-l9-m24" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="197.5" y="0.0" width="90.5" height="30"/>
-                                                    <subviews>
-                                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JJB-VW-Xa2">
-                                                            <rect key="frame" x="17.5" y="5" width="54" height="20"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventButtonRate" translatesAutoresizingMaskIntoConstraints="NO" id="pLz-6R-5Of">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="pLz-6R-5Of" secondAttribute="height" multiplier="1:1" id="39J-7O-OR2"/>
-                                                                        <constraint firstAttribute="width" constant="20" id="vhi-yG-Dmm"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xie-KK-epv">
-                                                                    <rect key="frame" x="28" y="0.0" width="26" height="20"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="xie-KK-epv" secondAttribute="trailing" id="9AO-i5-LZB"/>
-                                                                <constraint firstAttribute="bottom" secondItem="xie-KK-epv" secondAttribute="bottom" id="CTN-uL-K2s"/>
-                                                                <constraint firstItem="pLz-6R-5Of" firstAttribute="leading" secondItem="JJB-VW-Xa2" secondAttribute="leading" id="at7-Qp-V4H"/>
-                                                                <constraint firstItem="pLz-6R-5Of" firstAttribute="top" secondItem="JJB-VW-Xa2" secondAttribute="top" id="geK-ZN-klj"/>
-                                                                <constraint firstAttribute="bottom" secondItem="pLz-6R-5Of" secondAttribute="bottom" id="hm8-r1-L7i"/>
-                                                                <constraint firstItem="xie-KK-epv" firstAttribute="top" secondItem="JJB-VW-Xa2" secondAttribute="top" id="r6v-75-5DC"/>
-                                                                <constraint firstItem="xie-KK-epv" firstAttribute="leading" secondItem="pLz-6R-5Of" secondAttribute="trailing" constant="8" id="zff-cz-16l"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.19021242860000001" green="0.452250123" blue="0.61040174960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="5Ew-G8-lB9"/>
-                                                        <constraint firstItem="JJB-VW-Xa2" firstAttribute="centerY" secondItem="yXa-l9-m24" secondAttribute="centerY" id="ZrW-js-5EC"/>
-                                                        <constraint firstItem="JJB-VW-Xa2" firstAttribute="centerX" secondItem="yXa-l9-m24" secondAttribute="centerX" id="sB0-P8-VZv"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="rateAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="9H6-bE-9xq"/>
-                                                        <outlet property="actionImageView" destination="pLz-6R-5Of" id="hf5-ko-42U"/>
-                                                        <outlet property="actionLabel" destination="xie-KK-epv" id="kuk-rp-u2G"/>
-                                                    </connections>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="9LM-7x-arF" firstAttribute="centerX" secondItem="48t-0V-0XI" secondAttribute="centerX" id="59P-s5-iNo"/>
-                                        <constraint firstAttribute="bottom" secondItem="9LM-7x-arF" secondAttribute="bottom" constant="8" id="9Hj-Mw-QXr"/>
-                                        <constraint firstAttribute="trailing" secondItem="9LM-7x-arF" secondAttribute="trailing" constant="16" id="AbV-Le-cTC"/>
-                                        <constraint firstItem="9LM-7x-arF" firstAttribute="leading" secondItem="48t-0V-0XI" secondAttribute="leading" constant="16" id="Bex-yI-u8g"/>
-                                        <constraint firstItem="9LM-7x-arF" firstAttribute="top" secondItem="48t-0V-0XI" secondAttribute="top" constant="8" id="Dv7-p0-FGd"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="confirmButton" destination="puL-j3-vTR" id="dcH-a3-BCO"/>
-                                    <outlet property="rateButton" destination="yXa-l9-m24" id="3Zu-Ji-cl1"/>
-                                    <outlet property="saveButton" destination="f6b-Dj-6i2" id="noI-q8-Wxt"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailVideoTableViewCell" rowHeight="182" id="Uva-DG-Oxs" customClass="EventDetailVideoTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="206" width="320" height="182"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailVideoTableViewCell" rowHeight="202" id="Uva-DG-Oxs" customClass="EventDetailVideoTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="202"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uva-DG-Oxs" id="m31-zn-iRV">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="182"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="202"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKh-ar-iaY" userLabel="Play Button" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
@@ -305,7 +93,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDescriptionTableViewCell" rowHeight="169" id="KT2-cw-qaQ" customClass="EventDetailDescriptionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="388" width="320" height="169"/>
+                                <rect key="frame" x="0.0" y="230" width="320" height="169"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT2-cw-qaQ" id="vdo-rN-wnx">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
@@ -350,10 +138,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04m-7R-xvH" userLabel="Play Button" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="252" y="13" width="48" height="34"/>
+                                                    <rect key="frame" x="268" y="13" width="32" height="34"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play2" translatesAutoresizingMaskIntoConstraints="NO" id="tEg-DK-ALl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="34"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </imageView>
                                                     </subviews>
@@ -407,7 +195,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailTableViewCell" rowHeight="100" id="Gie-OQ-Gj2" customClass="EventDetailTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="557" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="399" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gie-OQ-Gj2" id="rdi-aY-oEn">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
@@ -484,11 +272,11 @@
                                     <outlet property="valueLabel" destination="kTl-ng-8Uk" id="UKD-SE-K6F"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="102" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="657" width="320" height="102"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="speakerTableViewCell" rowHeight="87" id="Xz4-Sc-pHU" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="499" width="320" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xz4-Sc-pHU" id="D2t-on-rtc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-kZ-vid" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
@@ -504,7 +292,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="ddf-Fn-RET">
-                                            <rect key="frame" x="16" y="26" width="50" height="50"/>
+                                            <rect key="frame" x="16" y="19" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="Hmx-Xr-AmX"/>
                                                 <constraint firstAttribute="width" secondItem="ddf-Fn-RET" secondAttribute="height" multiplier="1:1" id="jS1-0U-Pz8"/>
@@ -517,10 +305,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wf-qP-1X3" userLabel="Accessory View">
-                                            <rect key="frame" x="286" y="0.0" width="34" height="102"/>
+                                            <rect key="frame" x="286" y="0.0" width="34" height="87"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="O5t-B2-lou">
-                                                    <rect key="frame" x="13" y="44" width="9" height="14"/>
+                                                    <rect key="frame" x="13" y="36.5" width="9" height="14"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -559,7 +347,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailFeedbackTableViewCell" rowHeight="124" id="Lri-qs-u8H" customClass="EventDetailFeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="759" width="320" height="124"/>
+                                <rect key="frame" x="0.0" y="586" width="320" height="124"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lri-qs-u8H" id="dhg-Zn-Lop">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
@@ -642,7 +430,9 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="EVENTS" id="M4k-Jf-UhB"/>
+                    <navigationItem key="navigationItem" title="EVENTS" id="M4k-Jf-UhB">
+                        <barButtonItem key="backBarButtonItem" title=" " id="vea-KH-WPs"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -650,9 +440,144 @@
                     <connections>
                         <outlet property="feedBackHeader" destination="wAF-09-BCg" id="jQC-2X-qZw"/>
                         <outlet property="speakersHeader" destination="LdI-q1-rd1" id="JWF-PE-SLZ"/>
+                        <outlet property="titleHeader" destination="ZZ0-fM-ig7" id="2qW-Nc-p6V"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qs0-pl-Ccz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="ZZ0-fM-ig7" customClass="EventDetailTitleHeader" customModule="OpenStackSummit" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="212"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OTu-1p-7i2">
+                            <rect key="frame" x="15" y="40" width="290" height="122.5"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EvU-ad-cf6">
+                                    <rect key="frame" x="0.0" y="0.0" width="290" height="57.5"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgm-5C-23d" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="27.5"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLH-lM-hPM" userLabel="Track" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="35.5" width="290" height="22"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FET-XF-DJx">
+                                    <rect key="frame" x="0.0" y="87.5" width="290" height="35"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="9LM-7x-arF">
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="35"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHq-I5-oVn" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="95.5" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="2pZ-pX-wIE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                                    <state key="normal" title="Rate" image="EventButtonRate">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="EventButtonRateActive"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                            <color key="value" red="0.18823529411764706" green="0.45098039215686275" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                            <color key="value" red="0.31372549019607843" green="0.60784313725490191" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="rateAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="8IL-VC-9Ts"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czs-tP-hWr" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
+                                                    <rect key="frame" x="97.5" y="0.0" width="95" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="MDd-hu-Ci1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                                    <state key="normal" title="Schedule" image="EventButtonSchedule">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="EventButtonScheduleActive"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                            <color key="value" red="0.18823529411764706" green="0.45098039215686275" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                            <color key="value" red="0.31372549019607843" green="0.60784313725490191" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="scheduleAction:" destination="SnY-ae-Z8a" eventType="touchDown" id="2Wj-Qn-Ufe"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTd-Ix-Da9" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
+                                                    <rect key="frame" x="194.5" y="0.0" width="95.5" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="Ppc-CQ-XNI"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                                    <state key="normal" title="Watch Later" image="EventButtonWatch">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="EventButtonWatchActive"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                            <color key="value" red="0.18823529411764706" green="0.45098039215686275" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                            <color key="value" red="0.31372549019607843" green="0.60784313725490191" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="favoriteAction:" destination="SnY-ae-Z8a" eventType="touchDown" id="rGQ-F4-pcZ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="9LM-7x-arF" secondAttribute="trailing" id="bAQ-Ca-2AP"/>
+                                        <constraint firstItem="9LM-7x-arF" firstAttribute="leading" secondItem="FET-XF-DJx" secondAttribute="leading" id="gQb-3k-k5y"/>
+                                        <constraint firstAttribute="bottom" secondItem="9LM-7x-arF" secondAttribute="bottom" id="sQO-gL-u6e"/>
+                                        <constraint firstItem="9LM-7x-arF" firstAttribute="top" secondItem="FET-XF-DJx" secondAttribute="top" id="uTh-Dm-B7U"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="OTu-1p-7i2" firstAttribute="leading" secondItem="ZZ0-fM-ig7" secondAttribute="leading" constant="15" id="2lB-Bo-6iJ"/>
+                        <constraint firstAttribute="trailing" secondItem="OTu-1p-7i2" secondAttribute="trailing" constant="15" id="3hc-CY-5dn"/>
+                        <constraint firstItem="OTu-1p-7i2" firstAttribute="top" secondItem="ZZ0-fM-ig7" secondAttribute="top" constant="40" id="GGG-kr-oL6"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OTu-1p-7i2" secondAttribute="bottom" constant="40" id="sqz-Io-uFL"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="favoriteButton" destination="kTd-Ix-Da9" id="1da-Eo-GMx"/>
+                        <outlet property="rateButton" destination="YHq-I5-oVn" id="U4M-bV-nuK"/>
+                        <outlet property="scheduleButton" destination="Czs-tP-hWr" id="eLt-5f-PMp"/>
+                        <outlet property="titleLabel" destination="Rgm-5C-23d" id="dBJ-39-SMu"/>
+                        <outlet property="trackLabel" destination="dLH-lM-hPM" id="bBw-Gr-MUa"/>
+                    </connections>
+                </view>
                 <view contentMode="scaleToFill" id="LdI-q1-rd1" customClass="EventDetailHeader" customModule="OpenStackSummit" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -663,12 +588,22 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eP0-S3-ZYu" userLabel="Separator View">
+                            <rect key="frame" x="0.0" y="58" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="RE5-CU-0Hw"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="ZNU-wi-PBB" firstAttribute="leading" secondItem="LdI-q1-rd1" secondAttribute="leading" constant="16" id="Rtg-Iu-bmS"/>
                         <constraint firstAttribute="bottom" secondItem="ZNU-wi-PBB" secondAttribute="bottom" constant="8" id="TyS-dt-dWn"/>
                         <constraint firstAttribute="trailing" secondItem="ZNU-wi-PBB" secondAttribute="trailing" constant="16" id="WNb-Xw-Yev"/>
+                        <constraint firstAttribute="bottom" secondItem="eP0-S3-ZYu" secondAttribute="bottom" id="nHm-0Y-z7M"/>
+                        <constraint firstAttribute="trailing" secondItem="eP0-S3-ZYu" secondAttribute="trailing" id="nxU-0C-4ci"/>
+                        <constraint firstItem="eP0-S3-ZYu" firstAttribute="leading" secondItem="LdI-q1-rd1" secondAttribute="leading" id="un5-L7-8vq"/>
                     </constraints>
                     <connections>
                         <outlet property="label" destination="ZNU-wi-PBB" id="YvD-jj-e0j"/>
@@ -756,13 +691,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EventButtonCalendarAdd" width="23" height="25"/>
-        <image name="EventButtonRate" width="27" height="26"/>
-        <image name="EventButtonSave" width="26" height="23"/>
+        <image name="EventButtonRate" width="18" height="17"/>
+        <image name="EventButtonRateActive" width="18" height="17"/>
+        <image name="EventButtonSchedule" width="17" height="17"/>
+        <image name="EventButtonScheduleActive" width="17" height="17"/>
+        <image name="EventButtonWatch" width="14" height="17"/>
+        <image name="EventButtonWatchActive" width="14" height="17"/>
         <image name="arrow" width="9" height="14"/>
         <image name="generic-user-avatar" width="122" height="122"/>
         <image name="play" width="60" height="60"/>
-        <image name="play2" width="48" height="29"/>
+        <image name="play2" width="32" height="19"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

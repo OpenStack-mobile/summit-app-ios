@@ -123,6 +123,10 @@ public final class DataUpdatePoller {
                 
                 if dataUpdates.isEmpty == false {
                     
+                    let context = store.privateQueueManagedObjectContext
+                    
+                    try! context.performErrorBlockAndWait { try context.validateAndSave() }
+                    
                     log?("Processed \(dataUpdates.count) data updates")
                 }
             }

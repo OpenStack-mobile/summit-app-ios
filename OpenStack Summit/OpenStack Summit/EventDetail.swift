@@ -31,6 +31,7 @@ public struct EventDetail: CoreDataDecodable {
     
     public let venue: Location?
     public let eventDescription: String
+    public let socialDescription: String
     public let tags: String
     public let speakers: [SpeakerDetail]
     public let finished: Bool
@@ -78,6 +79,7 @@ public struct EventDetail: CoreDataDecodable {
         
         self.finished = event.end.compare(NSDate()) == .OrderedAscending
         self.eventDescription = event.descriptionText ?? ""
+        self.socialDescription = event.socialDescription ?? ""
         self.allowFeedback = event.allowFeedback
         self.averageFeedback = event.averageFeedback
         

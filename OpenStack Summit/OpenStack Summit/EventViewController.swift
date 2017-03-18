@@ -88,7 +88,7 @@ extension EventViewController {
             
             let newValue = scheduled == false
             
-            let title = newValue ? "Going" : "Not Going"
+            let title = newValue ? "Schedule" : "Unshedule"
             
             let image = newValue ? R.image.contextMenuScheduleAdd()! : R.image.contextMenuScheduleRemove()!
             
@@ -110,11 +110,9 @@ extension EventViewController {
             
             let newValue = isFavorite == false
             
-            let title = newValue ? "Save" : "Unsave"
+            let title = newValue ? "Watch Later" : "Don’t Watch Later"
             
-            let image = newValue ? R.image.contextMenuSave()! : R.image.contextMenuSaved()!
-            
-            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { image }, title: title, handler: .background({ [weak self] (didComplete) in
+            let favoriteEvent = ContextMenu.Action(activityType: "Event.Favorite", image: { R.image.contextMenuWatchListAdd()! }, title: title, handler: .background({ [weak self] (didComplete) in
                 
                 guard let controller = self else { return }
                 
@@ -143,9 +141,14 @@ extension EventViewController {
             actions.append(scheduleEvent)
         }*/
         
-        let shareItems = share ? [message, url] : []
+        var shareItems = [message, url]
         
-        return ContextMenu(actions: actions, shareItems: shareItems, systemActions: false)
+        if event.socialDescription.isEmpty {
+            
+            shareItems.append(event.socialDescription)
+        }
+        
+        return ContextMenu(actions: actions, shareItems: share ? shareItems : [], systemActions: false)
     }
     
     func toggleScheduledStatus(for event: EventDetail) {
