@@ -408,6 +408,7 @@
 		6E4C1F521E72EE7700DBBC9F /* DataUpdates11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4C1F501E72EE7700DBBC9F /* DataUpdates11.json */; };
 		6E4C1F531E72EE7700DBBC9F /* DataUpdates11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4C1F501E72EE7700DBBC9F /* DataUpdates11.json */; };
 		6E4C1F541E72EE8E00DBBC9F /* DataUpdates11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E4C1F501E72EE7700DBBC9F /* DataUpdates11.json */; };
+		6E4D837F1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D837E1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift */; };
 		6E4E24601E23477F00F7F3FB /* TeamDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */; };
 		6E4E24621E24258D00F7F3FB /* SearchMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4E24611E24258D00F7F3FB /* SearchMembersViewController.swift */; };
 		6E5054971E5D583600AD75FF /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5054961E5D583600AD75FF /* ImageCell.swift */; };
@@ -937,7 +938,7 @@
 		6EF147F31D1358B400D5EEF9 /* People.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF147F21D1358B400D5EEF9 /* People.storyboard */; };
 		6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */; };
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
-		6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */; };
+		6EF2FB371D52476E00BF9EDE /* OldMemberOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB361D52476E00BF9EDE /* OldMemberOrderConfirmViewController.swift */; };
 		6EF2FB391D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */; };
 		6EF3A88A1E4675E800CD85EF /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF3A8891E4675E800CD85EF /* Videos.storyboard */; };
 		6EF3A88C1E46760500CD85EF /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF3A88B1E46760500CD85EF /* VideosViewController.swift */; };
@@ -1402,6 +1403,7 @@
 		6E49054E1D2ED6BD00D56870 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		6E4905501D2EE04F00D56870 /* EventDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 		6E4C1F501E72EE7700DBBC9F /* DataUpdates11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates11.json; sourceTree = "<group>"; };
+		6E4D837E1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeConfirmViewController.swift; sourceTree = "<group>"; };
 		6E4E245F1E23477F00F7F3FB /* TeamDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailViewController.swift; sourceTree = "<group>"; };
 		6E4E24611E24258D00F7F3FB /* SearchMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMembersViewController.swift; sourceTree = "<group>"; };
 		6E5054961E5D583600AD75FF /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
@@ -1639,7 +1641,7 @@
 		6EF147F21D1358B400D5EEF9 /* People.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = People.storyboard; sourceTree = "<group>"; };
 		6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
-		6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
+		6EF2FB361D52476E00BF9EDE /* OldMemberOrderConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldMemberOrderConfirmViewController.swift; sourceTree = "<group>"; };
 		6EF2FB381D524BCC00BF9EDE /* AttendeesForTicketOrderRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeesForTicketOrderRequest.swift; sourceTree = "<group>"; };
 		6EF3A8891E4675E800CD85EF /* Videos.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Videos.storyboard; sourceTree = "<group>"; };
 		6EF3A88B1E46760500CD85EF /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
@@ -2742,7 +2744,6 @@
 				6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */,
 				6E1BB01C1D36F1D000F9F95F /* FeedbackEditViewController.swift */,
 				6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */,
-				6EF2FB361D52476E00BF9EDE /* MemberOrderConfirmViewController.swift */,
 				6EFC99BE1D218280009FD0DA /* MenuViewController.swift */,
 				6EFC6E641D2300260087057A /* VenuesViewController.swift */,
 				6E313C171D4123AE005132DA /* VenueListViewController.swift */,
@@ -2755,6 +2756,8 @@
 				6ECBAF831E517185000A1758 /* FavoriteEventsViewController.swift */,
 				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
 				6EB7525F1D18AF2800BC294D /* PersonDetailViewController.swift */,
+				6E4D837E1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift */,
+				6EF2FB361D52476E00BF9EDE /* OldMemberOrderConfirmViewController.swift */,
 				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakersViewController.swift */,
 				6EEED0281E3A48AF00795B3D /* InboxViewController.swift */,
@@ -3999,8 +4002,9 @@
 				6E6FD17F1D7A1CA2003D13D7 /* AppSecrets.swift in Sources */,
 				6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
-				6EF2FB371D52476E00BF9EDE /* MemberOrderConfirmViewController.swift in Sources */,
+				6EF2FB371D52476E00BF9EDE /* OldMemberOrderConfirmViewController.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
+				6E4D837F1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift in Sources */,
 				6E49054F1D2ED6BD00D56870 /* Appearance.swift in Sources */,
 				6E96BFDE1D27175A009524C7 /* GeneralScheduleViewController.swift in Sources */,
 				6EDE52101D429B8200DF4BEA /* HanekeInputSource.swift in Sources */,

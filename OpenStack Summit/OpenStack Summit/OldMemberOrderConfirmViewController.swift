@@ -10,7 +10,7 @@ import UIKit
 import CoreSummit
 import JGProgressHUD
 
-final class MemberOrderConfirmViewController: UIViewController, RevealViewController, MessageEnabledViewController, ActivityViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+final class OldMemberOrderConfirmViewController: UIViewController, RevealViewController, MessageEnabledViewController, ActivityViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - IB Outlets
     
@@ -35,13 +35,13 @@ final class MemberOrderConfirmViewController: UIViewController, RevealViewContro
         
         orderNumberText.delegate = self
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(MemberOrderConfirmViewController.resignOnTap(_:)))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(resignOnTap(_:)))
         singleTap.numberOfTapsRequired = 1
         singleTap.numberOfTouchesRequired = 1
         view.addGestureRecognizer(singleTap)
         
         menuButton.target = self
-        menuButton.action = #selector(MemberOrderConfirmViewController.menuButtonPressed(_:))
+        menuButton.action = #selector(menuButtonPressed(_:))
         
         self.title = "MY PROFILE"
     }
