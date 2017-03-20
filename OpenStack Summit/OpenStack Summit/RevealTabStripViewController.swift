@@ -22,7 +22,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailiableWidth = false
         settings.style.buttonBarBackgroundColor = UIColor(hexString: "#14273D")
         settings.style.selectedBarBackgroundColor = UIColor(hexString: "#14273D")!
-        settings.style.buttonBarHeight = 88
+        settings.style.buttonBarHeight = settings.style.buttonBarHeight ?? 88
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) in
             
