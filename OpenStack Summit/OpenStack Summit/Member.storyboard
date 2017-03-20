@@ -125,149 +125,6 @@
             </objects>
             <point key="canvasLocation" x="-232.5" y="-705.63380281690138"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="KBv-RI-HC1">
-            <objects>
-                <viewController storyboardIdentifier="OldMemberOrderConfirmViewController" id="2Y3-fI-L3f" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="T1b-Kg-1rW"/>
-                        <viewControllerLayoutGuide type="bottom" id="8KD-c6-Lyc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pZE-rF-cxu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhK-mb-3q8">
-                                <rect key="frame" x="0.0" y="20" width="320" height="680"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihF-VG-iqp" userLabel="Header">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticket Order Confirm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DpG-sF-tVq" userLabel="Header Label">
-                                                <rect key="frame" x="28" y="33" width="264" height="21"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.078431372550000003" green="0.1529411765" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="DpG-sF-tVq" firstAttribute="centerY" secondItem="ihF-VG-iqp" secondAttribute="centerY" id="K2a-bq-svj"/>
-                                            <constraint firstAttribute="height" constant="88" id="XBb-sg-nLJ"/>
-                                            <constraint firstItem="DpG-sF-tVq" firstAttribute="trailing" secondItem="ihF-VG-iqp" secondAttribute="trailingMargin" constant="-20" id="hQx-nZ-ouT"/>
-                                            <constraint firstItem="DpG-sF-tVq" firstAttribute="leading" secondItem="ihF-VG-iqp" secondAttribute="leadingMargin" constant="20" id="hgk-eG-ufu"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiH-af-3ab" userLabel="Notice Message">
-                                        <rect key="frame" x="0.0" y="88" width="320" height="55"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to add your Eventbrite order #!" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="M90-1s-fY8" userLabel="Eventbrite Notice Label">
-                                                <rect key="frame" x="12" y="19" width="297" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.97254901959999995" green="0.90588235289999997" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="M90-1s-fY8" firstAttribute="centerY" secondItem="OiH-af-3ab" secondAttribute="centerY" id="RMo-8p-Ji5"/>
-                                            <constraint firstAttribute="height" constant="55" id="dhZ-xw-Pai"/>
-                                            <constraint firstItem="M90-1s-fY8" firstAttribute="centerX" secondItem="OiH-af-3ab" secondAttribute="centerX" id="gHG-id-j0O"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you a summit attendee?" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu2-gc-iwc">
-                                        <rect key="frame" x="20" y="163" width="280" height="20"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add your order # to unlock features only available for registered summit attendees" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M44-0Y-FO0">
-                                        <rect key="frame" x="20" y="193" width="280" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Order #" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gSY-tj-KxR">
-                                        <rect key="frame" x="20" y="267" width="280" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multiple tickets are assigned to provided order #. Please pick your name from the list to finish confirmation process" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aY-df-Ai2">
-                                        <rect key="frame" x="20" y="317" width="280" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.12941176469999999" green="0.25098039220000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v89-iB-azx">
-                                        <rect key="frame" x="0.0" y="361" width="320" height="216"/>
-                                    </pickerView>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIS-IJ-oLi">
-                                        <rect key="frame" x="91" y="585" width="138" height="30"/>
-                                        <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="YgV-Yh-xNj"/>
-                                            <constraint firstAttribute="width" constant="138" id="rHM-KE-b9a"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Confirm">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="confirmButtonPressed:" destination="2Y3-fI-L3f" eventType="touchDown" id="jeI-hU-twf"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="OiH-af-3ab" firstAttribute="top" secondItem="ihF-VG-iqp" secondAttribute="bottom" id="0kB-2W-lOk"/>
-                                    <constraint firstItem="gSY-tj-KxR" firstAttribute="top" secondItem="M44-0Y-FO0" secondAttribute="bottom" constant="20" id="1rD-9W-Vrp"/>
-                                    <constraint firstItem="aIS-IJ-oLi" firstAttribute="centerX" secondItem="ZhK-mb-3q8" secondAttribute="centerX" id="2mx-L6-mBW"/>
-                                    <constraint firstItem="v89-iB-azx" firstAttribute="top" secondItem="8aY-df-Ai2" secondAttribute="bottom" constant="-10" id="4eT-eH-Dfk"/>
-                                    <constraint firstItem="v89-iB-azx" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" id="7x3-Xg-z8t"/>
-                                    <constraint firstItem="ihF-VG-iqp" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" id="CXX-Fh-WWp"/>
-                                    <constraint firstItem="aIS-IJ-oLi" firstAttribute="bottom" secondItem="ZhK-mb-3q8" secondAttribute="bottom" constant="20" id="Kef-xi-6MT"/>
-                                    <constraint firstItem="OiH-af-3ab" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" id="LsR-9d-qfg"/>
-                                    <constraint firstItem="M44-0Y-FO0" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" constant="20" id="RKk-nX-EVP"/>
-                                    <constraint firstItem="OiH-af-3ab" firstAttribute="trailing" secondItem="ZhK-mb-3q8" secondAttribute="trailing" id="VEa-u1-YPd"/>
-                                    <constraint firstItem="Iu2-gc-iwc" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" constant="20" id="Y0M-vA-DhX"/>
-                                    <constraint firstItem="gSY-tj-KxR" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" constant="20" id="YqG-Ar-7HD"/>
-                                    <constraint firstItem="ihF-VG-iqp" firstAttribute="top" secondItem="ZhK-mb-3q8" secondAttribute="top" id="Zpg-Ih-VgX"/>
-                                    <constraint firstItem="OiH-af-3ab" firstAttribute="width" secondItem="ZhK-mb-3q8" secondAttribute="width" id="i6a-46-ksU"/>
-                                    <constraint firstItem="gSY-tj-KxR" firstAttribute="trailing" secondItem="ZhK-mb-3q8" secondAttribute="trailing" constant="-20" id="kqE-65-0Qa"/>
-                                    <constraint firstItem="M44-0Y-FO0" firstAttribute="trailing" secondItem="ZhK-mb-3q8" secondAttribute="trailing" constant="-20" id="m6G-kW-kcw"/>
-                                    <constraint firstItem="aIS-IJ-oLi" firstAttribute="top" secondItem="v89-iB-azx" secondAttribute="bottom" constant="8" symbolic="YES" id="obK-mv-DWO"/>
-                                    <constraint firstItem="Iu2-gc-iwc" firstAttribute="top" secondItem="OiH-af-3ab" secondAttribute="bottom" constant="20" id="omH-0l-QpY"/>
-                                    <constraint firstItem="8aY-df-Ai2" firstAttribute="top" secondItem="gSY-tj-KxR" secondAttribute="bottom" constant="20" id="pod-LE-Fcq"/>
-                                    <constraint firstItem="8aY-df-Ai2" firstAttribute="leading" secondItem="ZhK-mb-3q8" secondAttribute="leading" constant="20" id="rWr-7d-XLj"/>
-                                    <constraint firstItem="8aY-df-Ai2" firstAttribute="trailing" secondItem="ZhK-mb-3q8" secondAttribute="trailing" constant="-20" id="rkM-hD-2j8"/>
-                                    <constraint firstItem="v89-iB-azx" firstAttribute="trailing" secondItem="ZhK-mb-3q8" secondAttribute="trailing" id="tH7-C5-30Z"/>
-                                    <constraint firstItem="ihF-VG-iqp" firstAttribute="width" secondItem="ZhK-mb-3q8" secondAttribute="width" id="teA-qP-3Qp"/>
-                                    <constraint firstItem="M44-0Y-FO0" firstAttribute="top" secondItem="Iu2-gc-iwc" secondAttribute="bottom" constant="10" id="ucy-G1-lRW"/>
-                                    <constraint firstItem="Iu2-gc-iwc" firstAttribute="trailing" secondItem="ZhK-mb-3q8" secondAttribute="trailing" constant="-20" id="upI-TF-h50"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="ZhK-mb-3q8" firstAttribute="trailing" secondItem="pZE-rF-cxu" secondAttribute="trailing" id="2dh-t8-TPr"/>
-                            <constraint firstItem="ZhK-mb-3q8" firstAttribute="bottom" secondItem="8KD-c6-Lyc" secondAttribute="top" id="iRN-fw-TRx"/>
-                            <constraint firstItem="ZhK-mb-3q8" firstAttribute="top" secondItem="T1b-Kg-1rW" secondAttribute="bottom" id="mUC-CW-Z1A"/>
-                            <constraint firstItem="ZhK-mb-3q8" firstAttribute="leading" secondItem="pZE-rF-cxu" secondAttribute="leading" id="qVV-lR-myZ"/>
-                        </constraints>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="700"/>
-                    <connections>
-                        <outlet property="confirmButton" destination="aIS-IJ-oLi" id="McZ-It-wkj"/>
-                        <outlet property="multipleAttendeesMatchingLabel" destination="8aY-df-Ai2" id="2h2-Ki-wVk"/>
-                        <outlet property="orderNumberText" destination="gSY-tj-KxR" id="NiZ-vo-kU8"/>
-                        <outlet property="personPicker" destination="v89-iB-azx" id="j5q-Ad-bIs"/>
-                        <outlet property="scrollView" destination="ZhK-mb-3q8" id="KRN-Va-6Pk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fa8-r5-1AD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="866" y="42"/>
-        </scene>
         <!--Person Detail View Controller-->
         <scene sceneID="gGV-vO-vwV">
             <objects>
@@ -656,7 +513,7 @@
                                     <outlet property="pickerView" destination="4OJ-r4-aGt" id="Hjg-a2-xVW"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AttendeeConfirmActionTableViewCell" rowHeight="91" id="qoQ-vQ-jUd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AttendeeConfirmActionTableViewCell" rowHeight="91" id="qoQ-vQ-jUd" customClass="AttendeeConfirmActionTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="571" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qoQ-vQ-jUd" id="OJY-JG-t6j">
@@ -726,6 +583,9 @@
                                         <constraint firstAttribute="trailing" secondItem="AgP-xj-qvY" secondAttribute="trailing" constant="15" id="yDF-hh-HHN"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="confirmButton" destination="hp7-TQ-l6S" id="jGi-AI-Qgz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

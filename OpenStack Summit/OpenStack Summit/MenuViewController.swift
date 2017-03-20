@@ -356,7 +356,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                 
             } else {
                 
-                let memberOrderConfirmViewController = R.storyboard.member.memberOrderConfirmViewController()!
+                let memberOrderConfirmViewController = R.storyboard.member.attendeeConfirmViewController()!
                 
                 show(memberOrderConfirmViewController)
             }

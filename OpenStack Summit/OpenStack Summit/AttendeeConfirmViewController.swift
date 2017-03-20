@@ -31,9 +31,15 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         didSet { configureView() }
     }
     
-    private var selectedAttendee: NonConfirmedAttendee?
+    private var selectedAttendee: NonConfirmedAttendee? {
+        
+        didSet { updateActionButtons() }
+    }
     
-    private var orderNumber = ""
+    private var orderNumber = "" {
+        
+        didSet { updateActionButtons() }
+    }
     
     // MARK: - Loading
     
@@ -64,7 +70,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
         case .nameSelection:
             
-            selectAttendeeFromOrderList()
+            selectAttendee()
         }
     }
     
@@ -82,14 +88,23 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         cells = [inputCell, .action]
         
         tableView.reloadData()
+        
+        updateActionButtons()
     }
     
-    private func configure() {
+    @inline(__always)
+    private func updateActionButtons() {
         
-        
+        // update UI
+        if let actionButtonsCellIndex = cells.indexOf(.action) {
+            
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: actionButtonsCellIndex, inSection: 0)], withRowAnimation: .None)
+        }
     }
     
     private func orderConfirm() {
+        
+        assert(orderNumber.isEmpty == false, "No order number set")
         
         self.showActivityIndicator()
         
@@ -97,11 +112,11 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
             guard let controller = self else { return }
             
-            defer { controller.dismissActivityIndicator() }
-            
             switch response {
                 
             case let .Error(error):
+                
+                controller.dismissActivityIndicator()
                 
                 let code = (error as NSError).code
                 
@@ -122,32 +137,41 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                 
             case let .Value(attendees):
                 
+                controller.selectedAttendee = nil
                 controller.attendees = attendees
                 
                 if (attendees.count == 0) {
+                    
+                    controller.dismissActivityIndicator()
                     
                     controller.showInfoMessage("Info", message: "Order wasn\'t found. Please verify that you provided correct order # and try again.");
                 }
                 else if (attendees.count == 1) {
                     
-                    controller.selectAttendeeFromOrderList(0)
+                    controller.selectedAttendee = attendees[0]
+                    
+                    controller.selectAttendee()
                 }
                 else if (attendees.count > 1) {
                     
+                    controller.dismissActivityIndicator()
+                    
+                    controller.input = .nameSelection
                 }
-                
-                controller.showAttendeesSelector(attendees.count > 0)
             }
         }
     }
     
-    private func selectAttendeeFromOrderList(index: Int) {
+    private func selectAttendee() {
+        
+        guard let selectedAttendee = self.selectedAttendee
+            else { fatalError("No attendee selected") }
         
         showActivityIndicator()
         
         let summit = SummitManager.shared.summit.value
         
-        Store.shared.selectAttendee(from: orderNumber, externalAttendee: nonConfirmedSummitAttendee.identifier, summit: summit) { [weak self] (response) in
+        Store.shared.selectAttendee(from: orderNumber, externalAttendee: selectedAttendee.identifier, summit: summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
@@ -233,6 +257,21 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.attendeeConfirmActionTableViewCell)!
             
+            let confirmEnabled: Bool
+            
+            switch input {
+                
+            case .orderNumber:
+                
+                confirmEnabled = orderNumber.isEmpty == false
+                
+            case .nameSelection:
+                
+                confirmEnabled = selectedAttendee != nil
+            }
+            
+            cell.confirmButton.enabled = confirmEnabled
+            
             return cell
         }
     }
@@ -243,7 +282,11 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         
         textField.resignFirstResponder()
         
-        if (textField.text ?? "").isEmpty == false {
+        let text = textField.text ?? ""
+        
+        self.orderNumber = text
+        
+        if text.isEmpty == false {
             
             self.orderConfirm()
         }
@@ -265,7 +308,12 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
+        return attendees.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
+        return attendees[row].name
     }
     
     // MARK: - UIPickerViewDelegate
@@ -302,5 +350,10 @@ final class AttendeeConfirmOrderTableViewCell: UITableViewCell {
 final class AttendeeConfirmSelectionTableViewCell: UITableViewCell {
     
     @IBOutlet private(set) weak var pickerView: UIPickerView!
+}
+
+final class AttendeeConfirmActionTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var confirmButton: Button!
 }
 
