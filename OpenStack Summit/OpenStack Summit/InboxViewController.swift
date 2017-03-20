@@ -53,6 +53,12 @@ final class InboxViewController: RevealTabStripViewController, RevealViewControl
         }
         #endif
         
+        if childViewControllers.count == 1 {
+            
+            // hide tabs
+            settings.style.buttonBarHeight = 0
+        }
+        
         return childViewControllers
     }
 }
