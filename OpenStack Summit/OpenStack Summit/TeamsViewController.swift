@@ -90,6 +90,12 @@ final class TeamsViewController: UITableViewController, PagingTableViewControlle
         refresh()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.view.bringSubviewToFront(progressHUD)
+    }
+    
     // MARK: - Actions
     
     @IBAction func refresh(sender: AnyObject? = nil) {
