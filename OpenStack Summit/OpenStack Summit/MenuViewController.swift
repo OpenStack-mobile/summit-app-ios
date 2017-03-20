@@ -346,21 +346,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
     private func showMyProfile() {
         
-        if Store.shared.isLoggedIn {
-            
-            if Store.shared.isLoggedInAndConfirmedAttendee {
-                
-                let myProfileViewController = MyProfileViewController()
-                
-                show(myProfileViewController)
-                
-            } else {
-                
-                let memberOrderConfirmViewController = R.storyboard.member.attendeeConfirmViewController()!
-                
-                show(memberOrderConfirmViewController)
-            }
-        }
+        guard Store.shared.isLoggedIn else { return }
+        
+        let myProfileViewController = MyProfileViewController()
+        
+        show(myProfileViewController)
     }
     
     private func show(viewController: UIViewController) {

@@ -46,10 +46,18 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // setup table view
         tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         
+        // add tap gesture recognizer for keyboard dismiss
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(resignTap))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tapGestureRecognizer.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        // update UI
         configureView()
     }
     
@@ -74,6 +82,11 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         }
     }
     
+    @IBAction func resignTap(sender: AnyObject? = nil) {
+        
+        self.resignResponder(view)
+    }
+    
     // MARK: - Methods
     
     private func configureView() {
@@ -90,6 +103,13 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         tableView.reloadData()
         
         updateActionButtons()
+    }
+    
+    private func resignResponder(view: UIView) {
+        
+        view.resignFirstResponder()
+        
+        view.subviews.forEach { resignResponder($0) }
     }
     
     @inline(__always)

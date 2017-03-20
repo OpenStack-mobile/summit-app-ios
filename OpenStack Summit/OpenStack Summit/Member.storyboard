@@ -135,7 +135,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PersonDetailNonConfirmedAttendeeCell" id="VtA-dH-8eT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PersonDetailNonConfirmedAttendeeCell" id="VtA-dH-8eT">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VtA-dH-8eT" id="tdW-hc-rwy">
@@ -438,10 +438,10 @@
                                                     </constraints>
                                                 </view>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insert your Order #" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U7S-8d-62z">
-                                                    <rect key="frame" x="8" y="9" width="304" height="24"/>
+                                                    <rect key="frame" x="15" y="9" width="290" height="24"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="2AE-JK-G41" id="rUJ-Sj-f6E"/>
                                                     </connections>
@@ -451,8 +451,8 @@
                                             <constraints>
                                                 <constraint firstItem="U7S-8d-62z" firstAttribute="top" secondItem="sct-Ir-0Vo" secondAttribute="bottom" constant="8" id="5I2-I0-TFi"/>
                                                 <constraint firstAttribute="trailing" secondItem="XfS-c0-A77" secondAttribute="trailing" id="6RN-qO-2hw"/>
-                                                <constraint firstAttribute="trailing" secondItem="U7S-8d-62z" secondAttribute="trailing" constant="8" id="6xM-d5-3mq"/>
-                                                <constraint firstItem="U7S-8d-62z" firstAttribute="leading" secondItem="OnF-Y6-hAK" secondAttribute="leading" constant="8" id="8ST-5f-d87"/>
+                                                <constraint firstAttribute="trailing" secondItem="U7S-8d-62z" secondAttribute="trailing" constant="15" id="6xM-d5-3mq"/>
+                                                <constraint firstItem="U7S-8d-62z" firstAttribute="leading" secondItem="OnF-Y6-hAK" secondAttribute="leading" constant="15" id="8ST-5f-d87"/>
                                                 <constraint firstItem="XfS-c0-A77" firstAttribute="leading" secondItem="OnF-Y6-hAK" secondAttribute="leading" id="A1F-Jh-kDM"/>
                                                 <constraint firstAttribute="bottom" secondItem="XfS-c0-A77" secondAttribute="bottom" id="CJO-Q6-LVw"/>
                                                 <constraint firstItem="U7S-8d-62z" firstAttribute="centerY" secondItem="OnF-Y6-hAK" secondAttribute="centerY" id="FI1-vs-Sh2"/>
