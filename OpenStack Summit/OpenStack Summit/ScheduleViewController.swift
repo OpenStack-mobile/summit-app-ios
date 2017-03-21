@@ -24,8 +24,6 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - Properties
     
-    final var canShareEvents: Bool = true
-    
     final var eventRequestInProgress = false
     
     final lazy var eventStore: EKEventStore = EKEventStore()
@@ -147,7 +145,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        let contextMenu = self.contextMenu(for: eventDetail, share: canShareEvents)
+        let contextMenu = self.contextMenu(for: eventDetail)
         
         self.show(contextMenu: contextMenu, sender: .view(sender))
     }

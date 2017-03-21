@@ -18,7 +18,7 @@ final class PersonalScheduleViewController: ScheduleViewController, IndicatorInf
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        canShareEvents = false
+        
     }
     
     // MARK: - Methods
