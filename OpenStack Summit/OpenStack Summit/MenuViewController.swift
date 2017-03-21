@@ -372,6 +372,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         showActivityIndicator()
         
+        Preference.goingToSummit = false
+        
         Store.shared.login(summit, loginCallback: {
             
             // return from SafariVC
@@ -403,12 +405,33 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                     
                     if Store.shared.isLoggedInAndConfirmedAttendee {
                         
+                        Preference.goingToSummit = true
+                        
                         // reload schedule
                         controller.showEvents()
                        
                     } else {
                         
-                        controller.toggleMenuSelection(controller.myProfileButton)
+                        // show a popup asking user if they are going to the summit
+                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
+                        
+                        alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
+                            
+                            Preference.goingToSummit = false
+                            
+                            controller.showMyProfile()
+                        })
+                        
+                        alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
+                            
+                            Preference.goingToSummit = true
+                            
+                            let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
+                            
+                            controller.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                        })
+                        
+                        controller.presentViewController(alert, animated: true) { }
                     }
                     
                     // log user email

@@ -415,8 +415,8 @@
         <!--Navigation Controller-->
         <scene sceneID="pBm-YR-L83">
             <objects>
-                <navigationController modalPresentationStyle="formSheet" id="Bx2-Xl-SQH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="M6f-4l-g34">
+                <navigationController storyboardIdentifier="attendeeConfirmNavigationController" modalPresentationStyle="formSheet" id="Bx2-Xl-SQH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M6f-4l-g34">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

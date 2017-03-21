@@ -73,6 +73,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         
+        // configure UI
         configureView()
     }
     
