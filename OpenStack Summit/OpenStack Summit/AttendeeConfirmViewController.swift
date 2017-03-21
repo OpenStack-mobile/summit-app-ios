@@ -36,7 +36,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         didSet { updateActionButtons() }
     }
     
-    private var orderNumber = "" {
+    private var orderNumber: Int? {
         
         didSet { updateActionButtons() }
     }
@@ -69,6 +69,8 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     }
     
     @IBAction func addOrder(sender: AnyObject? = nil) {
+        
+        self.resignResponder(view)
         
         switch input {
             
@@ -124,11 +126,14 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     private func orderConfirm() {
         
-        assert(orderNumber.isEmpty == false, "No order number set")
+        guard let orderNumber = self.orderNumber
+            else { fatalError("No order number set") }
+        
+        let summit = SummitManager.shared.summit.value
         
         self.showActivityIndicator()
         
-        Store.shared.attendees(for: orderNumber) { [weak self] (response) in
+        Store.shared.attendees(for: orderNumber, summit: summit) { [weak self] (response) in
             
             guard let controller = self else { return }
             
@@ -184,14 +189,15 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     private func selectAttendee() {
         
-        guard let selectedAttendee = self.selectedAttendee
+        guard let selectedAttendee = self.selectedAttendee,
+            let orderNumber = self.orderNumber
             else { fatalError("No attendee selected") }
         
         showActivityIndicator()
         
         let summit = SummitManager.shared.summit.value
         
-        Store.shared.selectAttendee(from: orderNumber, externalAttendee: selectedAttendee.identifier, summit: summit) { [weak self] (response) in
+        Store.shared.confirmAttendee(for: orderNumber, externalAttendee: selectedAttendee.identifier, summit: summit) { [weak self] (response) in
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
@@ -283,7 +289,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                 
             case .orderNumber:
                 
-                confirmEnabled = orderNumber.isEmpty == false
+                confirmEnabled = orderNumber != nil
                 
             case .nameSelection:
                 
@@ -302,21 +308,26 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         
         textField.resignFirstResponder()
         
-        let text = textField.text ?? ""
-        
-        self.orderNumber = text
-        
-        if text.isEmpty == false {
+        if self.orderNumber != nil {
             
             self.orderConfirm()
+            
+            return false
         }
         
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
-        self.orderNumber = textField.text ?? ""
+        let newString = (textField.text ?? "" as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        
+        guard let orderNumer = Int(newString)
+            else { return newString.isEmpty }
+        
+        self.orderNumber = orderNumer
+        
+        return true
     }
     
     // MARK: - UIPickerViewDataSource
