@@ -395,4 +395,13 @@ final class PersonDetailLinkView: UIStackView {
 final class PersonDetailDescriptionTableViewCell: UITableViewCell {
     
     @IBOutlet private(set) weak var textView: UITextView!
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        var inset = self.separatorInset
+        inset.right = self.bounds.size.width - inset.left
+        self.separatorInset = inset
+    }
 }
