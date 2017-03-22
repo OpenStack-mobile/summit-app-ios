@@ -48,7 +48,7 @@ final class MyProfileViewController: RevealTabStripViewController {
             
             let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
             speakerPresentationsViewController.speaker = speaker.identifier
-            childViewControllers.append(speakerPresentationsViewController)
+            childViewControllers.insert(speakerPresentationsViewController, atIndex: 0)
         }
         
         return childViewControllers
