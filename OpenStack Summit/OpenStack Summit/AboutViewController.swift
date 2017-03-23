@@ -181,15 +181,22 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         cell.nameLabel.text = summit.name
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
-        dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
-        
-        dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
-        
-        cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
+        if let datesLabel = self.summitCache!.datesLabel {
+            
+            cell.dateLabel.text = datesLabel
+        }
+        else {
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
+            dateFormatter.dateFormat = "MMMM dd-"
+            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+            
+            dateFormatter.dateFormat = "dd, yyyy"
+            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+            
+            cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
+        }
         
         cell.buildVersionLabel.text = "Version \(AppVersion)"
         cell.buildNumberLabel.text = "Build \(AppBuild)"
