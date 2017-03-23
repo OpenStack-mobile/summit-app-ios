@@ -49,7 +49,7 @@ extension EventViewController {
         }
     }
     
-    func contextMenu(for event: EventDetail, share: Bool = true) -> ContextMenu {
+    func contextMenu(for event: EventDetail) -> ContextMenu {
         
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
@@ -124,31 +124,14 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
-        /*
-        if canAddToCalendar() {
-            
-            let image = "ContextMenuCalendarAdd"
-            
-            let scheduleEvent = ContextMenu.Action(activityType: "Event.AddToCalendar", image: { UIImage(named: image)! }, title: "Save to Calendar", handler: .background({ [weak self] (didComplete) in
-                
-                guard let controller = self else { return }
-                
-                controller.addToCalendar(event)
-                
-                didComplete(true)
-            }))
-            
-            actions.append(scheduleEvent)
-        }*/
-        
         var shareItems = [message, url]
         
-        if event.socialDescription.isEmpty {
+        if event.socialDescription.isEmpty == false {
             
             shareItems.append(event.socialDescription)
         }
         
-        return ContextMenu(actions: actions, shareItems: share ? shareItems : [], systemActions: false)
+        return ContextMenu(actions: actions, shareItems: shareItems, systemActions: false)
     }
     
     func toggleScheduledStatus(for event: EventDetail) {
