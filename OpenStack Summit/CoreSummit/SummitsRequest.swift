@@ -63,6 +63,8 @@ public extension SummitsResponse {
         
         public let timeZone: TimeZone
         
+        public let datesLabel: String?
+        
         public let start: Date
         
         public let end: Date
@@ -87,6 +89,8 @@ public extension SummitsResponse {
             self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
             self.timeZone = timeZone
             self.active = active
+            
+            self.datesLabel = JSONObject[JSONKey.dates_label.rawValue]?.rawValue as? String
         }
     }
 }
@@ -96,6 +100,7 @@ public func == (lhs: SummitsResponse.Summit, rhs: SummitsResponse.Summit) -> Boo
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.timeZone == rhs.timeZone
+        && lhs.datesLabel == rhs.datesLabel
         && lhs.start == rhs.start
         && lhs.end == rhs.end
         && lhs.active == rhs.active
