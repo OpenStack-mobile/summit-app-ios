@@ -17,6 +17,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     @IBOutlet private(set) var headerView: PersonDetailHeaderView!
     
+    @IBOutlet private(set) var nonConfirmedWarningButton: UIButton!
+    
     // MARK: - Properties
     
     var profile: PersonIdentifier = .currentUser {
@@ -59,6 +61,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     // MARK: - Private Properties
     
     private var data = [Data]()
+    
+    private var showNonConfirmedWarning = false
     
     // MARK: - Loading
     
@@ -179,13 +183,18 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         data = []
         
         switch profile {
+            
         case .currentUser:
             
             let isConfirmed = Store.shared.isLoggedInAndConfirmedAttendee
             
             data.append(.attendeeTicket(confirmed: isConfirmed))
             
-        default: break
+            showNonConfirmedWarning = Preference.goingToSummit && isConfirmed == false
+            
+        default:
+            
+            showNonConfirmedWarning = false
         }
         
         let links = Links(twitter: person.twitter ?? "", irc: person.irc ?? "", linkedIn: person.linkedIn ?? "")
@@ -312,6 +321,21 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         return UITableViewAutomaticDimension
     }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        return showNonConfirmedWarning ? nonConfirmedWarningButton : nil
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        
+        return showNonConfirmedWarning ? 44 : 0
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return showNonConfirmedWarning ? 44 : 0
+    }
 }
 
 // MARK: - Supporting Types
@@ -398,7 +422,6 @@ final class PersonDetailDescriptionTableViewCell: UITableViewCell {
     @IBOutlet private(set) weak var textView: UITextView!
     
     override func layoutSubviews() {
-        
         super.layoutSubviews()
         
         var inset = self.separatorInset
