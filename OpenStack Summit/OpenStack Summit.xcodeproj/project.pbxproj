@@ -867,6 +867,10 @@
 		6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
 		6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC417E71D76B60000E5888C /* ShowVideo.swift */; };
 		6EC6A7261D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */; };
+		6EC8CB311E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
+		6EC8CB321E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
+		6EC8CB331E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
+		6EC8CB341E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
 		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
 		6ECA1CD01D4EC09400806924 /* MemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */; };
 		6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
@@ -1587,6 +1591,7 @@
 		6EC151B51E43BBEC00416E5D /* AllSummits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllSummits.json; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
+		6EC8CB301E8572710028270F /* DataUpdates12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates12.json; sourceTree = "<group>"; };
 		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD11D4EC46C00806924 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -1985,6 +1990,7 @@
 				6E82210D1E48E9D70025FE58 /* DataUpdates9.json */,
 				6E4885DB1E563807002C87D2 /* DataUpdates10.json */,
 				6E4C1F501E72EE7700DBBC9F /* DataUpdates11.json */,
+				6EC8CB301E8572710028270F /* DataUpdates12.json */,
 				6E020FB91D6B55D200DF2BCD /* Member1.json */,
 				6E586FBE1DC29083001DE605 /* Member2.json */,
 				6E931FE81E5164ED00762B74 /* Member3.json */,
@@ -3272,6 +3278,7 @@
 				6E0B5F2B1D77C8AB0005F6CE /* Member1.json in Resources */,
 				6EE74DE91DBF8E5800616BEA /* DataUpdates6.json in Resources */,
 				6E8221101E48E9D70025FE58 /* DataUpdates9.json in Resources */,
+				6EC8CB341E8572710028270F /* DataUpdates12.json in Resources */,
 				6E2827D91E57740B009B784A /* Feedback.json in Resources */,
 				6E4C1F531E72EE7700DBBC9F /* DataUpdates11.json in Resources */,
 				6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */,
@@ -3362,6 +3369,7 @@
 				6E020FBA1D6B55D200DF2BCD /* Member1.json in Resources */,
 				9D6AADAA1DBE4E570057888E /* DataUpdates6.json in Resources */,
 				6E82210E1E48E9D70025FE58 /* DataUpdates9.json in Resources */,
+				6EC8CB311E8572710028270F /* DataUpdates12.json in Resources */,
 				6E2827D71E57740B009B784A /* Feedback.json in Resources */,
 				6E4C1F541E72EE8E00DBBC9F /* DataUpdates11.json in Resources */,
 				6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */,
@@ -3396,6 +3404,7 @@
 				6E29241E1D7AF8CC00D14F0A /* Member1.json in Resources */,
 				6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */,
 				6E82210F1E48E9D70025FE58 /* DataUpdates9.json in Resources */,
+				6EC8CB331E8572710028270F /* DataUpdates12.json in Resources */,
 				6E2827D81E57740B009B784A /* Feedback.json in Resources */,
 				6E4C1F521E72EE7700DBBC9F /* DataUpdates11.json in Resources */,
 				6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */,
@@ -3443,6 +3452,7 @@
 				6E7558551E58C4A7003B6844 /* DataUpdates3.json in Resources */,
 				6E7558561E58C4A7003B6844 /* DataUpdates4.json in Resources */,
 				6E7558571E58C4A7003B6844 /* DataUpdates10.json in Resources */,
+				6EC8CB321E8572710028270F /* DataUpdates12.json in Resources */,
 				6E7558581E58C4A7003B6844 /* Member3.json in Resources */,
 				6E7558591E58C4A7003B6844 /* ListMembers.json in Resources */,
 				6E75585A1E58C4A7003B6844 /* Member2.json in Resources */,
