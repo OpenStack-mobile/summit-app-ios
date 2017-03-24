@@ -16,6 +16,8 @@ public struct Summit: Named, Equatable {
     
     public var timeZone: String
     
+    public var datesLabel: String?
+    
     public var start: Date
     
     public var end: Date
@@ -56,6 +58,7 @@ public func == (lhs: Summit, rhs: Summit) -> Bool {
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.timeZone == rhs.timeZone
+        && lhs.datesLabel == rhs.datesLabel
         && lhs.start == rhs.start
         && lhs.end == rhs.end
         && lhs.active == rhs.active

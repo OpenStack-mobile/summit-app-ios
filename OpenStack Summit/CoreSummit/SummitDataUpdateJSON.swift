@@ -54,6 +54,8 @@ extension SummitDataUpdate: JSONDecodable {
         
         // optional values
         
+        self.datesLabel = JSONObject[JSONKey.dates_label.rawValue]?.rawValue as? String
+        
         if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
             
             self.startShowingVenues = Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
