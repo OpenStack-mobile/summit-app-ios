@@ -143,15 +143,22 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
             self.summitNameLabel.text = summit.name.uppercaseString
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
-            dateFormatter.dateFormat = "MMMM d-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
-            
-            dateFormatter.dateFormat = "d, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
-            
-            self.summitDateLabel.text = stringDateFrom + stringDateTo
+            if let datesLabel = summit.datesLabel {
+                
+                self.summitDateLabel.text = datesLabel
+            }
+            else {
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+                dateFormatter.dateFormat = "MMMM d-"
+                let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+                
+                dateFormatter.dateFormat = "d, yyyy"
+                let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+                
+                self.summitDateLabel.text = stringDateFrom + stringDateTo
+            }
         }
     }
     

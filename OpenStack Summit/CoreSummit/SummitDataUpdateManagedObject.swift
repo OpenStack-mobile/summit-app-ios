@@ -25,6 +25,7 @@ extension SummitDataUpdate: Updatable {
         
         managedObject.name = name
         managedObject.timeZone = timeZone
+        managedObject.datesLabel = datesLabel
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.webpageURL = webpageURL

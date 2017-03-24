@@ -19,6 +19,8 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var timeZone: String
     
+    @NSManaged public var datesLabel: String?
+    
     @NSManaged public var start: NSDate
     
     @NSManaged public var end: NSDate
@@ -57,6 +59,7 @@ extension Summit: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.name = managedObject.name
         self.timeZone = managedObject.timeZone
+        self.datesLabel = managedObject.datesLabel
         self.start = Date(foundation: managedObject.start)
         self.end = Date(foundation: managedObject.end)
         self.webpageURL = managedObject.webpageURL
@@ -100,6 +103,7 @@ extension Summit: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.timeZone = timeZone
+        managedObject.datesLabel = datesLabel
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.defaultStart = defaultStart?.toFoundation()
