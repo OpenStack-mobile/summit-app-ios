@@ -357,9 +357,10 @@
                             <outlet property="delegate" destination="CUh-ep-Cu4" id="xYg-Wr-vcV"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="headerView" destination="JB1-XX-F3r" id="QsF-vJ-djR"/>
-                        <outlet property="nonConfirmedWarningButton" destination="pEr-di-JKz" id="gDS-7F-GTt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnr-e1-1JR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,19 +411,6 @@
                         <outlet property="titleLabel" destination="bkM-BZ-dCD" id="7Fz-80-Twl"/>
                     </connections>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pEr-di-JKz">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.97674423460000004" green="0.8329637647" blue="0.21844774480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                    <state key="normal" title="Don't forget to add your EventBrite Order #" image="messageWarning">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <segue destination="Bx2-Xl-SQH" kind="presentation" identifier="showAttendeeConfirmFromWarning" id="B2j-uH-XaT"/>
-                    </connections>
-                </button>
             </objects>
             <point key="canvasLocation" x="866.25" y="-706.69014084507046"/>
         </scene>
@@ -459,7 +447,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eventbrite Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTQ-T9-iuG">
-                                            <rect key="frame" x="91.5" y="40" width="137.5" height="23.5"/>
+                                            <rect key="frame" x="92" y="40" width="137.5" height="23.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -659,9 +647,5 @@
         <image name="ProfileWeb" width="14" height="15"/>
         <image name="arrow" width="9" height="14"/>
         <image name="generic-user-avatar" width="122" height="122"/>
-        <image name="messageWarning" width="16" height="16"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Myd-UR-Dgf"/>
-    </inferredMetricsTieBreakers>
 </document>

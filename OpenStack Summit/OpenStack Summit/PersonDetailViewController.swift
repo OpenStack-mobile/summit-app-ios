@@ -17,8 +17,6 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     @IBOutlet private(set) var headerView: PersonDetailHeaderView!
     
-    @IBOutlet private(set) var nonConfirmedWarningButton: UIButton!
-    
     // MARK: - Properties
     
     var profile: PersonIdentifier = .currentUser {
@@ -77,6 +75,9 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         
+        // setup toolbar
+        setupToolbar()
+        
         // configure UI
         configureView()
     }
@@ -86,11 +87,15 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // handoff
         self.userActivity?.becomeCurrent()
+        
+        // toolbar
+        self.navigationController?.setToolbarHidden(!showNonConfirmedWarning, animated: animated)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        // setup after animation finished to prevent lag
         configureView()
     }
     
@@ -99,6 +104,9 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // handoff
         self.userActivity?.resignCurrent()
+        
+        // toolbar
+        self.navigationController?.setToolbarHidden(true, animated: animated)
     }
     
     override func updateUserActivityState(userActivity: NSUserActivity) {
@@ -116,6 +124,13 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
         
         super.updateUserActivityState(userActivity)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func nonConfirmedWarningTapped(sender: AnyObject? = nil) {
+        
+        self.performSegueWithIdentifier(R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
     }
     
     // MARK: - Private Methods
@@ -244,6 +259,30 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
     }
     
+    private func setupToolbar() {
+        
+        navigationController?.toolbar.barTintColor = UIColor(hexString: "#FAD438")!
+        navigationController?.toolbar.translucent = false
+        
+        let action = #selector(nonConfirmedWarningTapped)
+        
+        let imageBarButtonItem = UIBarButtonItem()
+        imageBarButtonItem.target = self
+        imageBarButtonItem.action = action
+        imageBarButtonItem.image = R.image.messageWarning()!
+        imageBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
+        
+        let textBarButtonItem = UIBarButtonItem()
+        textBarButtonItem.title = "Don't forget to add your EventBrite Order #"
+        textBarButtonItem.style = .Plain
+        textBarButtonItem.target = self
+        textBarButtonItem.action = action
+        textBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
+        textBarButtonItem.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans", size: 13)!], forState: .Normal)
+        
+        toolbarItems = [imageBarButtonItem, textBarButtonItem]
+    }
+    
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -320,21 +359,6 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return UITableViewAutomaticDimension
-    }
-    
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        return showNonConfirmedWarning ? nonConfirmedWarningButton : nil
-    }
-    
-    override func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        
-        return showNonConfirmedWarning ? 44 : 0
-    }
-    
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        
-        return showNonConfirmedWarning ? 44 : 0
     }
 }
 

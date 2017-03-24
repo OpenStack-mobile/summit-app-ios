@@ -348,6 +348,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         guard Store.shared.isLoggedIn else { return }
         
+        highlight(.MyProfile)
+        
         let myProfileViewController = MyProfileViewController()
         
         show(myProfileViewController)
