@@ -330,7 +330,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .member(teamMember):
             
-            let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
+            let memberProfileDetailVC = R.storyboard.member.personDetailViewController()!
             
             memberProfileDetailVC.profile = .member(teamMember.member.identifier)
             
@@ -338,7 +338,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .owner(member):
             
-            let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
+            let memberProfileDetailVC = R.storyboard.member.personDetailViewController()!
             
             memberProfileDetailVC.profile = .member(member.identifier)
             
@@ -346,7 +346,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
         case let .invitation(invitation):
             
-            let memberProfileDetailVC = R.storyboard.member.memberProfileDetailViewController()!
+            let memberProfileDetailVC = R.storyboard.member.personDetailViewController()!
             
             memberProfileDetailVC.profile = .member(invitation.invitee.identifier)
             

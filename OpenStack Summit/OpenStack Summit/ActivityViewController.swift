@@ -35,6 +35,8 @@ extension ActivityViewController {
         view.userInteractionEnabled = false
         
         progressHUD.showInView(view)
+        
+        view.bringSubviewToFront(progressHUD)
     }
     
     func dismissActivityIndicator(animated animated: Bool = true) {
