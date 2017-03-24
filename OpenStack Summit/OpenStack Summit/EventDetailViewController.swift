@@ -133,6 +133,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         guard eventRequestInProgress == false else { return }
         
+        guard Store.shared.isLoggedIn
+            else { showErrorAlert("Login to use this function"); return }
+        
         self.toggleFavorite(for: eventDetail)
     }
     
@@ -140,10 +143,16 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         guard eventRequestInProgress == false else { return }
         
+        guard Store.shared.isLoggedInAndConfirmedAttendee
+            else { showErrorAlert("Only attendees can use this function. Enter your EventBrite order number in my summit if you are an attendee."); return }
+        
         self.toggleScheduledStatus(for: eventDetail)
     }
     
     @IBAction func rateAction(sender: UIButton) {
+        
+        guard Store.shared.isLoggedIn
+            else { showErrorAlert("Login to use this function"); return }
         
         let feedbackViewController = R.storyboard.feedback.feedbackEditViewController()!
         
@@ -210,11 +219,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .whiteColor()
         titleHeader.trackLabel.hidden = eventDetail.track.isEmpty
         
-        let canRate = canAddFeedback(for: eventDetail)
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
         
-        titleHeader.rateButton.hidden = canRate == false
         titleHeader.scheduleButton.highlighted = didConfirm
         titleHeader.favoriteButton.highlighted = isFavorite
         
@@ -548,7 +555,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let speaker = eventDetail.speakers[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier.speaker(speaker.identifier))
+            let memberViewController = MemberProfileViewController(profile: PersonIdentifier.speaker(speaker.identifier))
             
             self.showViewController(memberViewController, sender: self)
             
@@ -556,7 +563,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let feedback = feedbackList[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier(member: feedback.member))
+            let memberViewController = MemberProfileViewController(profile: PersonIdentifier(member: feedback.member))
             
             self.showViewController(memberViewController, sender: self)
         }

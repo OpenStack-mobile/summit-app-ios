@@ -90,7 +90,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         
         let person = self[indexPath]
         
-        let memberProfileVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: person))
+        let memberProfileVC = MemberProfileViewController(profile: PersonIdentifier(speaker: person))
         
         showViewController(memberProfileVC, sender: self)
     }

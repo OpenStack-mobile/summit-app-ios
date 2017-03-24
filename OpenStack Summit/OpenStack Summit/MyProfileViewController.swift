@@ -38,7 +38,7 @@ final class MyProfileViewController: RevealTabStripViewController {
         
         let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
         let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
-        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
+        let memberProfileDetailViewController = R.storyboard.member.personDetailViewController()!
         
         var childViewControllers = [personalScheduleViewController,
                                     favoriteEventsViewController,
@@ -48,7 +48,7 @@ final class MyProfileViewController: RevealTabStripViewController {
             
             let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
             speakerPresentationsViewController.speaker = speaker.identifier
-            childViewControllers.append(speakerPresentationsViewController)
+            childViewControllers.insert(speakerPresentationsViewController, atIndex: 0)
         }
         
         return childViewControllers
