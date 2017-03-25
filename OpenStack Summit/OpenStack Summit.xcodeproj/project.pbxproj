@@ -459,6 +459,8 @@
 		6E6964391D84993300BA576E /* VenueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6964381D84993300BA576E /* VenueDetail.storyboard */; };
 		6E69643B1D849D0000BA576E /* VenueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */; };
 		6E6AB19E1D650B8C00E940BE /* YouTubeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */; };
+		6E6D75911E86222F00D30BA8 /* TableViewHeaderViewLight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E6D75901E86222F00D30BA8 /* TableViewHeaderViewLight.xib */; };
+		6E6D75931E86260300D30BA8 /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6D75921E86260300D30BA8 /* GeneralScheduleFilterViewController.swift */; };
 		6E6FD17A1D7A1A24003D13D7 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
 		6E6FD17B1D7A1A24003D13D7 /* Staging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1781D7A1A20003D13D7 /* Staging.swift */; };
 		6E6FD17C1D7A1A24003D13D7 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FD1761D7A1A15003D13D7 /* Production.swift */; };
@@ -799,8 +801,6 @@
 		6EA983D21E5E030400D5BB55 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C71E5E030400D5BB55 /* OpenSans-Semibold.ttf */; };
 		6EA983D31E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA983C81E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf */; };
 		6EA983D51E5E7DA900D5BB55 /* SharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA983D41E5E7DA900D5BB55 /* SharingService.swift */; };
-		6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */; };
-		6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */; };
 		6EB1FDE71E1A9C280048045D /* TeamInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */; };
 		6EB1FDE81E1A9C280048045D /* TeamInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */; };
 		6EB1FDE91E1A9C280048045D /* TeamInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */; };
@@ -817,7 +817,7 @@
 		6EB1FE011E1D6BB90048045D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1FDFF1E1D6BB90048045D /* PageController.swift */; };
 		6EB2951A1DA97B230021C846 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB295161DA97B0B0021C846 /* Crashlytics.framework */; };
 		6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */; };
-		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */; };
+		6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */; };
 		6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */; };
 		6EB3EA111D1B520B000BA5A4 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */; };
 		6EB54E701D85FC570027350D /* Images.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB54E6F1D85FC570027350D /* Images.storyboard */; };
@@ -867,7 +867,7 @@
 		6EC8CB321E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
 		6EC8CB331E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
 		6EC8CB341E8572710028270F /* DataUpdates12.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8CB301E8572710028270F /* DataUpdates12.json */; };
-		6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */; };
+		6EC979B61D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC979B51D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift */; };
 		6ECA1CD01D4EC09400806924 /* MemberRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */; };
 		6ECA1CD21D4EC46C00806924 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD11D4EC46C00806924 /* Session.swift */; };
 		6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */; };
@@ -1446,6 +1446,8 @@
 		6E6964381D84993300BA576E /* VenueDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VenueDetail.storyboard; sourceTree = "<group>"; };
 		6E69643A1D849D0000BA576E /* VenueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewController.swift; sourceTree = "<group>"; };
 		6E6AB19D1D650B8C00E940BE /* YouTubeThumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeThumbnail.swift; sourceTree = "<group>"; };
+		6E6D75901E86222F00D30BA8 /* TableViewHeaderViewLight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderViewLight.xib; sourceTree = "<group>"; };
+		6E6D75921E86260300D30BA8 /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6E6FD1761D7A1A15003D13D7 /* Production.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		6E6FD1781D7A1A20003D13D7 /* Staging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staging.swift; sourceTree = "<group>"; };
 		6E6FD17E1D7A1CA2003D13D7 /* AppSecrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift; sourceTree = "<group>"; };
@@ -1552,8 +1554,6 @@
 		6EA983C71E5E030400D5BB55 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		6EA983C81E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		6EA983D41E5E7DA900D5BB55 /* SharingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingService.swift; sourceTree = "<group>"; };
-		6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterTableViewCell.swift; sourceTree = "<group>"; };
-		6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralScheduleFilterTableViewCell.xib; sourceTree = "<group>"; };
 		6EB1FDE61E1A9C280048045D /* TeamInvitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitation.swift; sourceTree = "<group>"; };
 		6EB1FDEA1E1AB1A20048045D /* TeamInvitationManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitationManagedObject.swift; sourceTree = "<group>"; };
 		6EB1FDEE1E1AF9F50048045D /* TeamInvitationJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInvitationJSON.swift; sourceTree = "<group>"; };
@@ -1561,7 +1561,7 @@
 		6EB1FDFF1E1D6BB90048045D /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		6EB295161DA97B0B0021C846 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
-		6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderView.xib; sourceTree = "<group>"; };
+		6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeaderViewDark.xib; sourceTree = "<group>"; };
 		6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackTableViewCell.xib; sourceTree = "<group>"; };
 		6EB54E6F1D85FC570027350D /* Images.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Images.storyboard; sourceTree = "<group>"; };
@@ -1586,7 +1586,7 @@
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC8CB301E8572710028270F /* DataUpdates12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates12.json; sourceTree = "<group>"; };
-		6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
+		6EC979B51D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDGeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD11D4EC46C00806924 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -2702,10 +2702,9 @@
 				6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */,
 				6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */,
 				6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */,
-				6EAEF7CB1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift */,
-				6EAEF7CC1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib */,
 				6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */,
-				6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderView.xib */,
+				6E6D75901E86222F00D30BA8 /* TableViewHeaderViewLight.xib */,
+				6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */,
 				6EB3EA0B1D1B5158000BA5A4 /* FeedbackTableViewCell.swift */,
 				6EB3EA0C1D1B5158000BA5A4 /* FeedbackTableViewCell.xib */,
 				6E2538251D1A14E1003E3400 /* ScheduleTableViewCell.swift */,
@@ -2736,7 +2735,8 @@
 				6EF12C4E1D1497C100814AD0 /* RevealTabStripViewController.swift */,
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
-				6EC979B51D394EEE00444F0F /* GeneralScheduleFilterViewController.swift */,
+				6E6D75921E86260300D30BA8 /* GeneralScheduleFilterViewController.swift */,
+				6EC979B51D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift */,
 				6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */,
 				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
 				6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */,
@@ -3318,7 +3318,6 @@
 				6EA983D01E5E030400D5BB55 /* OpenSans-LightItalic.ttf in Resources */,
 				6E2537E81D19B1C4003E3400 /* Schedule.storyboard in Resources */,
 				6EA983CD1E5E030400D5BB55 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
-				6EAEF7CE1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.xib in Resources */,
 				6E2537EC1D19B203003E3400 /* ScheduleView.xib in Resources */,
 				6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */,
 				6EA983CB1E5E030400D5BB55 /* OpenSans-BoldItalic.ttf in Resources */,
@@ -3332,7 +3331,7 @@
 				6E2538281D1A14E1003E3400 /* ScheduleTableViewCell.xib in Resources */,
 				6EB3EA101D1B5158000BA5A4 /* FeedbackTableViewCell.xib in Resources */,
 				6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */,
-				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderView.xib in Resources */,
+				6EB3EA0E1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib in Resources */,
 				6EA983CC1E5E030400D5BB55 /* OpenSans-ExtraBold.ttf in Resources */,
 				6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */,
 				6EA983D31E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf in Resources */,
@@ -3343,6 +3342,7 @@
 				6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */,
 				6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */,
 				6E24FDE41D47CE290005EB14 /* GoogleMaps.bundle in Resources */,
+				6E6D75911E86222F00D30BA8 /* TableViewHeaderViewLight.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3937,7 +3937,6 @@
 				6E25384D1D1AF5C1003E3400 /* BackBarButtonItem.swift in Sources */,
 				6E3E8C251D47D68100A29003 /* NSDate+MTDates.m in Sources */,
 				6EB752641D18B77300BC294D /* ErrorAlert.swift in Sources */,
-				6EAEF7CD1D2C67A700079995 /* GeneralScheduleFilterTableViewCell.swift in Sources */,
 				6EDA4AC01DFA1CEB00ADF96D /* TeamMessagesViewController.swift in Sources */,
 				6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */,
 				6E8220EF1E48D0670025FE58 /* PagingTableViewController.swift in Sources */,
@@ -3945,7 +3944,7 @@
 				6E0D3D7B1DC09B7C00EEB8A7 /* SummitsViewController.swift in Sources */,
 				6E313C1C1D4127C2005132DA /* InternalVenueListTableViewCell.swift in Sources */,
 				6E066D9B1D356764005A8D2D /* FeedbackDetail.swift in Sources */,
-				6EC979B61D394EEE00444F0F /* GeneralScheduleFilterViewController.swift in Sources */,
+				6EC979B61D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift in Sources */,
 				6ED1B1201D9B0F0000084B03 /* SummitActivityHandling.swift in Sources */,
 				6ED1B11E1D9B0CFF00084B03 /* TextViewController.swift in Sources */,
 				6EC417E81D76B60000E5888C /* ShowVideo.swift in Sources */,
@@ -3966,6 +3965,7 @@
 				6EEED02B1E3A494400795B3D /* NotificationsViewController.swift in Sources */,
 				6EA056B01E60CFFD00979C52 /* NotificationDetailViewController.swift in Sources */,
 				6E4241A01E1ED4C90017E555 /* LoadingTableViewCell.swift in Sources */,
+				6E6D75931E86260300D30BA8 /* GeneralScheduleFilterViewController.swift in Sources */,
 				6E42419D1E1EB3690017E555 /* TeamInvitationsViewController.swift in Sources */,
 				6E4905511D2EE04F00D56870 /* EventDetail.swift in Sources */,
 				6EF12C521D1497E100814AD0 /* UIColor+HexString.swift in Sources */,
