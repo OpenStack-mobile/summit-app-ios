@@ -104,9 +104,6 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Ac
         if rate == 0 {
             validationErrorText = "You must provide a rate using stars at the top"
         }
-        else if review.isEmpty {
-            validationErrorText = "You must provide a review"
-        }
         else if review.characters.count > 500 {
             validationErrorText = "Review exceeded 500 characters limit"
         }
