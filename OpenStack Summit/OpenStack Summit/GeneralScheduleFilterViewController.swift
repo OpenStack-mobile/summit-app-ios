@@ -33,6 +33,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 60
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
         
         // https://github.com/mac-cain13/R.swift/issues/144
         tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)

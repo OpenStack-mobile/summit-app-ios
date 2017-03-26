@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
+        <array key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
         </array>
     </customFonts>
     <scenes>
@@ -51,7 +51,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mkm-qf-L6h">
-                                            <rect key="frame" x="15" y="8" width="125" height="31.5"/>
+                                            <rect key="frame" x="15" y="8" width="123" height="31.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rf-Ch-fJJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="16" height="31.5"/>
@@ -78,8 +78,8 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx4-rD-dpj">
-                                                    <rect key="frame" x="31" y="0.0" width="94" height="31.5"/>
-                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                                    <rect key="frame" x="31" y="0.0" width="92" height="31.5"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -87,13 +87,13 @@
                                         </stackView>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AYT-KC-QzZ">
                                             <rect key="frame" x="476" y="8.5" width="51" height="31"/>
-                                            <color key="onTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="onTintColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="filterChanged:" destination="qDI-9M-9Pb" eventType="valueChanged" id="6dX-Md-wbm"/>
                                             </connections>
                                         </switch>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="AYT-KC-QzZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mkm-qf-L6h" secondAttribute="trailing" constant="15" id="J6l-Vm-kyR"/>
                                         <constraint firstItem="mkm-qf-L6h" firstAttribute="leading" secondItem="6DW-0f-X6x" secondAttribute="leading" constant="15" id="ZJS-NQ-jRw"/>
