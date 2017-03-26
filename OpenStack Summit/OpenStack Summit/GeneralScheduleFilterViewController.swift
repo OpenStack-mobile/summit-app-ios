@@ -68,7 +68,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         }
     }
     
-    @IBAction func dissmis(sender: AnyObject? = nil) {
+    @IBAction func dismiss(sender: AnyObject? = nil) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -130,7 +130,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             filters.append(Section(category: .trackGroup, items: items))
         }
         
-        if let venuesSection = scheduleFilter.allFilters[.trackGroup] {
+        if let venuesSection = scheduleFilter.allFilters[.venue] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
             let identifiers = venuesSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
@@ -141,7 +141,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             
             let items = venues.map { Item(filter: .venue($0.identifier), enabled: scheduleFilter.activeFilters.contains(.venue($0.identifier)), name: $0.name, color: nil) }
             
-            filters.append(Section(category: .trackGroup, items: items))
+            filters.append(Section(category: .venue, items: items))
         }
     }
     
@@ -162,12 +162,12 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         if let colorHex = item.color,
             let color = UIColor(hexString: colorHex) {
             
-            cell.circleView.hidden = false
+            cell.circleContainerView.hidden = false
             cell.circleView.backgroundColor = color
             
         } else {
             
-            cell.circleView.hidden = true
+            cell.circleContainerView.hidden = true
             cell.circleView.backgroundColor = .clearColor()
         }
     }
@@ -244,6 +244,7 @@ private extension GeneralScheduleFilterViewController {
 final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
     @IBOutlet private(set) weak var circleView: UIView!
+    @IBOutlet private(set) weak var circleContainerView: UIView!
     @IBOutlet private(set) weak var nameLabel: UILabel!
     @IBOutlet private(set) weak var enabledSwitch: UISwitch!
 }

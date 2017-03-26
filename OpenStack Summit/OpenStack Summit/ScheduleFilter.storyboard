@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="28" width="540" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lrY-wn-njr" id="6DW-0f-X6x">
-                                    <rect key="frame" x="0.0" y="0.0" width="540" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="47.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mkm-qf-L6h">
@@ -88,6 +88,9 @@
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AYT-KC-QzZ">
                                             <rect key="frame" x="476" y="8.5" width="51" height="31"/>
                                             <color key="onTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="filterChanged:" destination="qDI-9M-9Pb" eventType="valueChanged" id="6dX-Md-wbm"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,6 +104,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="circleContainerView" destination="5Rf-Ch-fJJ" id="UsE-mS-yfJ"/>
                                     <outlet property="circleView" destination="irE-Mm-bKF" id="9p8-ca-EsS"/>
                                     <outlet property="enabledSwitch" destination="AYT-KC-QzZ" id="Slm-gP-csI"/>
                                     <outlet property="nameLabel" destination="lx4-rD-dpj" id="2G5-Jf-E2o"/>
@@ -116,6 +120,9 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="dB4-HS-IS6"/>
                         <barButtonItem key="leftBarButtonItem" image="close" id="tPM-Pn-QyQ">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="dismiss:" destination="qDI-9M-9Pb" id="Q9A-xL-ga4"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

@@ -33,7 +33,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y9z-Z3-QsV" secondAttribute="trailing" constant="16" id="BrX-vl-GVo"/>
                 <constraint firstItem="y9z-Z3-QsV" firstAttribute="top" secondItem="jiU-9N-9do" secondAttribute="top" constant="30" id="JUs-bi-UaL"/>
@@ -45,6 +44,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="titleLabel" destination="y9z-Z3-QsV" id="lhL-yN-A3f"/>
             </connections>
