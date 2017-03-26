@@ -188,9 +188,11 @@ struct ScheduleFilter: Equatable {
 
 func == (lhs: ScheduleFilter, rhs: ScheduleFilter) -> Bool {
     
+    let lhsFilters = lhs.allFilters.values.reduce([Filter](), combine: { $0.0 + $0.1 })
+    let rhsFilters = rhs.allFilters.values.reduce([Filter](), combine: { $0.0 + $0.1 })
+    
     return lhs.activeFilters == rhs.activeFilters
-        && lhs.allFilters.keys == rhs.allFilters.keys
-        && lhs.allFilters.values == rhs.allFilters.values
+        && lhsFilters == rhsFilters
         && lhs.didChangeActiveTalks == rhs.didChangeActiveTalks
 }
 
@@ -212,7 +214,7 @@ final class FilterManager {
     private init() {
         
         // update sections from Core Data
-        filter.value.updateSections()
+        filter.value.update()
         
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
         
@@ -227,16 +229,16 @@ final class FilterManager {
     
     @objc private func timerUpdate(sender: NSTimer) {
         
-        filter.value.updateActiveTalksSelections()
+        filter.value.updateActiveTalks()
     }
     
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         
-        self.filter.value.updateSections()
+        self.filter.value.update()
     }
     
     private func currentSummitChanged(summit: Identifier, oldValue: Identifier) {
         
-        self.filter.value.updateSections()
+        self.filter.value.update()
     }
 }
