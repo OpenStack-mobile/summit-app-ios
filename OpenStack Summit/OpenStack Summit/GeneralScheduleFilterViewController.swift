@@ -27,13 +27,32 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         
         // https://github.com/mac-cain13/R.swift/issues/144
         tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)
+        
+        // observe filter
+        filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.configureView() }
+        
+        //  setup UI
+        configureView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        FilterManager.shared.filter.value.updateSections()
     }
     
     // MARK: - Actions
     
     @IBAction func filterChanged(sender: UISwitch) {
         
+        let scheduleFilter = FilterManager.shared.filter.value
         
+        
+    }
+    
+    @IBAction func dissmis(sender: AnyObject? = nil) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - Private Methods

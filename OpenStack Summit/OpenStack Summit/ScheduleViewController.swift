@@ -218,7 +218,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let today = NSDate()
         
-        let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
+        let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
         
         self.availableDates = self.scheduleAvailableDates(from: shoudHidePastTalks ? today : self.startDate, to: self.endDate)
         
@@ -277,7 +277,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             
             let today = NSDate()
             
-            let shoudHidePastTalks = scheduleFilter.shoudHidePastTalks()
+            let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
             
             let dailyScheduleStartDate: NSDate
             

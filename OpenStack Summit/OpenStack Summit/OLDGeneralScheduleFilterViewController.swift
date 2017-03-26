@@ -65,7 +65,6 @@ final class OLDGeneralScheduleFilterViewController: UIViewController, UITableVie
     }
 
     override func viewWillAppear(animated: Bool) {
-        
         super.viewWillAppear(animated)
 
         FilterManager.shared.filter.value.updateSections()
