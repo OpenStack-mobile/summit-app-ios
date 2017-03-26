@@ -82,7 +82,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        activeFilterIndicator = FilterManager.shared.filter.value.hasActiveFilters()
+        activeFilterIndicator = FilterManager.shared.filter.value.active
         
         userActivity?.becomeCurrent()
     }
@@ -123,7 +123,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     @IBAction func clearFilters(sender: UIBarButtonItem) {
         
-        FilterManager.shared.filter.value.clearActiveFilters()
+        FilterManager.shared.filter.value.clear()
     }
     
     @IBAction func retryButtonPressed(sender: UIButton) {
@@ -176,14 +176,23 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
         
-        let tracks = scheduleFilter.selections[FilterSectionType.Track]?.rawValue as? [Int]
-        let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
-        let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
-        let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
+        var trackGroups = [Identifier]()
+        var venues = [Identifier]()
+        var levels = [String]()
+        
+        for filter in scheduleFilter.activeFilters {
+            
+            switch filter {
+            case let .trackGroup(identifier): trackGroups.append(identifier)
+            case let .venue(identifier): venues.append(identifier)
+            case let .level(name): levels.append(name)
+            case .activeTalks: break
+            }
+        }
         
         let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
         
-        let events = try! EventManagedObject.filter(date, tracks: tracks, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         var activeDates: [NSDate] = []
         for event in events {
@@ -202,12 +211,21 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
         
-        let tracks = scheduleFilter.selections[FilterSectionType.Track]?.rawValue as? [Int]
-        let trackGroups = scheduleFilter.selections[FilterSectionType.TrackGroup]?.rawValue as? [Int]
-        let levels = scheduleFilter.selections[FilterSectionType.Level]?.rawValue as? [String]
-        let venues = scheduleFilter.selections[FilterSectionType.Venue]?.rawValue as? [Int]
+        var trackGroups = [Identifier]()
+        var venues = [Identifier]()
+        var levels = [String]()
         
-        let events = try! EventManagedObject.filter(filter, tracks: tracks, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
+        for filter in scheduleFilter.activeFilters {
+            
+            switch filter {
+            case let .trackGroup(identifier): trackGroups.append(identifier)
+            case let .venue(identifier): venues.append(identifier)
+            case let .level(name): levels.append(name)
+            case .activeTalks: break
+            }
+        }
+        
+        let events = try! EventManagedObject.filter(filter, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: events)
     }
@@ -218,7 +236,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         
         if self.navigationController?.topViewController === self {
             
-            self.activeFilterIndicator = filter.hasActiveFilters()
+            self.activeFilterIndicator = filter.active
         }
     }
     
