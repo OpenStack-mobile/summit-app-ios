@@ -12,10 +12,10 @@ import CoreData
 
 enum FilterCategory {
     
-    /// Hide Past Talks
+    /// ACTIVE TALKS
     case activeTalks
     
-    /// SUMMIT CATEGORY
+    /// CATEGORIES
     case trackGroup
     
     /// LEVEL
@@ -27,7 +27,9 @@ enum FilterCategory {
 
 enum Filter {
     
+    /// Hide Past Talks
     case activeTalks
+    
     case trackGroup(Identifier)
     case level(String)
     case venue(Identifier)
@@ -173,6 +175,17 @@ struct ScheduleFilter: Equatable {
         guard validFilter else { return false }
         
         activeFilters.insert(newFilter)
+        
+        return true
+    }
+    
+    mutating func disable(filter filter: Filter) -> Bool {
+        
+        let validFilter = allFilters.values.contains { $0.contains(filter) }
+        
+        guard validFilter && activeFilters.contains(filter) else { return false }
+        
+        activeFilters.remove(filter)
         
         return true
     }
