@@ -32,7 +32,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - Properties
     
-    private(set) var willTransition = false
+    private(set) var willTransition = false  {
+        
+        didSet { configureView() }
+    }
     
     private var state: State = .loadingSummits {
         
@@ -51,8 +54,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         configureView()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if Store.shared.isLoggedIn {
             
@@ -103,8 +106,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             self.summitActivityIndicatorView.hidden = false
             self.summitActivityIndicatorView.startAnimating()
             
-            self.guestButton.hidden = self.isDataLoaded == false
-            self.loginButton.hidden = self.isDataLoaded == false
+            self.guestButton.hidden = self.isDataLoaded == false || self.willTransition
+            self.loginButton.hidden = self.isDataLoaded == false || self.willTransition
             
             self.dataLoadedActivityIndicatorView.hidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
