@@ -1585,7 +1585,6 @@
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
 		6EC8CB301E8572710028270F /* DataUpdates12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates12.json; sourceTree = "<group>"; };
-		6EC979B51D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDGeneralScheduleFilterViewController.swift; sourceTree = "<group>"; };
 		6ECA1CCF1D4EC09400806924 /* MemberRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRequest.swift; sourceTree = "<group>"; };
 		6ECA1CD11D4EC46C00806924 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		6ECA1CD51D514E5600806924 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -2735,7 +2734,6 @@
 				6E2538231D1A1049003E3400 /* ScheduleViewController.swift */,
 				6E96BFDD1D27175A009524C7 /* GeneralScheduleViewController.swift */,
 				6E6D75921E86260300D30BA8 /* GeneralScheduleFilterViewController.swift */,
-				6EC979B51D394EEE00444F0F /* OLDGeneralScheduleFilterViewController.swift */,
 				6E9B22D31D3FE33500D25271 /* TrackScheduleViewController.swift */,
 				6E2537E51D19B0E5003E3400 /* SpeakerPresentationsViewController.swift */,
 				6E9B22D51D400B8A00D25271 /* LevelScheduleViewController.swift */,
