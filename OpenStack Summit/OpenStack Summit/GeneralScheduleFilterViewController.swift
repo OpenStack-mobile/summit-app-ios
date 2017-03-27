@@ -1,41 +1,20 @@
 //
-//  GeneralScheduleViewController.swift
-//  OpenStackSummit
+//  GeneralScheduleFilterViewController.swift
+//  OpenStack Summit
 //
-//  Created by Claudio on 8/27/15.
-//  Copyright © 2015 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 3/24/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
 import UIKit
-import MLPAutoCompleteTextField
-import AMTagListView
+import SwiftFoundation
 import CoreSummit
 
-protocol GeneralScheduleFilterViewControllerDelegate: class {
+final class GeneralScheduleFilterViewController: UITableViewController {
     
-    func scheduleFilterController(controller: GeneralScheduleFilterViewController, didUpdateFilter filter: ScheduleFilter)
-}
-
-final class GeneralScheduleFilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource {
+    // MARK: - Properties
     
-    // MARK: - IB Outlets
-    
-    @IBOutlet weak var dismissButton: UIBarButtonItem!
-    @IBOutlet weak var filtersTableView: UITableView!
-    @IBOutlet weak var filtersTableViewHeightConstraint: NSLayoutConstraint!
-    
-    // MARK: - Private Properties
-    
-    private let headerHeight: CGFloat = 40
-    private let cellHeight: CGFloat = 45
-    private let extraPadding: CGFloat = 5
-    private var filteredTags = [String]()
-    
-    private var activeTalksItemCount: Int { return FilterManager.shared.filter.value.filterSections[0].items.count }
-    private var trackGroupItemCount: Int { return FilterManager.shared.filter.value.filterSections[1].items.count }
-    private var levelItemCount: Int { return FilterManager.shared.filter.value.filterSections[2].items.count }
-    private var venuesItemCount: Int { return FilterManager.shared.filter.value.filterSections[3].items.count }
-    private var totalItemCount: Int { return activeTalksItemCount + trackGroupItemCount + levelItemCount + venuesItemCount }
+    private var filters = [Section]()
     
     private var filterObserver: Int?
     
@@ -47,243 +26,226 @@ final class GeneralScheduleFilterViewController: UIViewController, UITableViewDe
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        filtersTableView.registerNib(R.nib.generalScheduleFilterTableViewCell)
-
-        let nib = UINib(nibName: "TableViewHeaderView", bundle: nil)
-        filtersTableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableViewHeaderView")
+        // setup table view
+        tableView.estimatedRowHeight = 48
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 60
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
+        
         // https://github.com/mac-cain13/R.swift/issues/144
-        //filtersTableView.registerNibForHeaderFooterView(R.nib.tableViewHeaderView)
+        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)
         
-        navigationItem.title = "FILTER"
+        // observe filter
+        filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.configureView() }
         
-        updateUI()
-        
-        filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.updateUI() }
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        
-        super.viewWillAppear(animated)
-
-        FilterManager.shared.filter.value.updateSections()
+        //  setup UI
+        configureView()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        super.viewWillDisappear(animated)
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        FilterManager.shared.filter.value.update()
     }
     
     // MARK: - Actions
     
-    @IBAction func dissmisButtonPressed(sender: AnyObject) {
+    @IBAction func filterChanged(sender: UISwitch) {
         
-        let presentingViewController = navigationController!.presentingViewController!
+        let buttonOrigin = sender.convertPoint(.zero, toView: tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
+        let filter = self[indexPath].filter
         
-        presentingViewController.dismissViewControllerAnimated(true) {
-            self.navigationController!.setViewControllers([], animated: false)
+        if sender.on {
+            
+            FilterManager.shared.filter.value.enable(filter: filter)
+            
+        } else {
+            
+            FilterManager.shared.filter.value.disable(filter: filter)
         }
     }
-        
-    // MARK: - Private Methods
     
-    private func updateUI() {
+    @IBAction func dismiss(sender: AnyObject? = nil) {
         
-        self.reloadFilters()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @inline(__always)
-    private func reloadFilters() {
+    // MARK: - Private Methods
+    
+    private func configureView() {
         
         let scheduleFilter = FilterManager.shared.filter.value
         
-        filtersTableView.delegate = self
-        filtersTableView.dataSource = self
-        filtersTableView.reloadData()
+        let context = Store.shared.managedObjectContext
         
-        filtersTableViewHeightConstraint.constant = cellHeight * CGFloat(totalItemCount)
-        filtersTableViewHeightConstraint.constant += headerHeight * (CGFloat(scheduleFilter.filterSections.count) - 2)
-        filtersTableViewHeightConstraint.constant += extraPadding * 4 * (CGFloat(scheduleFilter.filterSections.count) - (activeTalksItemCount == 0 ? 1 : 0)) - (activeTalksItemCount == 0 ? 0 : extraPadding * 2)
-    }
-    
-    private func isItemSelected(filterSectionType: FilterSectionType, id: Int) -> Bool {
+        // load table data from current schedule filter
+        filters = []
         
-        if let filterSelectionsForType = FilterManager.shared.filter.value.selections[filterSectionType]?.rawValue as? [Int] {
+        func identifier(for filter: Filter) -> Identifier {
             
-            for selectedId in filterSelectionsForType {
-                
-                if id == selectedId{
-                    
-                    return true
-                }
+            switch filter {
+            case let .trackGroup(identifier): return identifier
+            case let .venue(identifier): return identifier
+            case .activeTalks, .level: fatalError("Invalid filter: \(filter)")
             }
         }
         
-        return false
-    }
-    
-    private func isItemSelected(filterSectionType: FilterSectionType, name: String) -> Bool {
-        
-        if let filterSelectionsForType = FilterManager.shared.filter.value.selections[filterSectionType]?.rawValue as? [String] {
+        func name(for filter: Filter) -> String {
             
-            for selectedName in filterSelectionsForType {
-                
-                if name == selectedName {
-                    
-                    return true
-                }
+            switch filter {
+            case .activeTalks: return "Hide Past Talks"
+            case let .level(level): return level
+            case .trackGroup, .venue: fatalError("Invalid filter: \(filter)")
             }
         }
-        return false
-    }
-    
-    private func configure(cell cell: GeneralScheduleFilterTableViewCell, at indexPath: NSIndexPath, filterSection: FilterSection) {
         
-        let index = indexPath.row
-        let filterItem = filterSection.items[index]
-        
-        cell.name = filterItem.name
-        
-        if filterSection.type != FilterSectionType.Level && filterSection.type != FilterSectionType.ActiveTalks {
+        if let activeTalksSection = scheduleFilter.allFilters[.activeTalks] {
             
-            cell.isOptionSelected = isItemSelected(filterSection.type, id: filterItem.identifier)
-        }
-        else {
+            let items = activeTalksSection.map { Item(filter: $0, enabled: scheduleFilter.activeFilters.contains($0), name: name(for: $0), color: nil) }
             
-            cell.isOptionSelected = isItemSelected(filterSection.type, name: filterItem.name)
+            filters.append(Section(category: .activeTalks, items: items))
         }
         
-        if filterSection.type == FilterSectionType.TrackGroup {
+        if let levelsSection = scheduleFilter.allFilters[.level] {
             
-            let trackGroup = try! TrackGroup.find(filterSection.items[indexPath.row].identifier, context: Store.shared.managedObjectContext)
-            cell.circleColor = UIColor(hexString: trackGroup!.color)
+            let items = levelsSection.map { Item(filter: $0, enabled: scheduleFilter.activeFilters.contains($0), name: name(for: $0), color: nil) }
+            
+            filters.append(Section(category: .level, items: items))
         }
         
-        if index == 0 {
+        if let trackGroupsSection = scheduleFilter.allFilters[.trackGroup] {
             
-            cell.addTopExtraPadding()
+            // fetch from CoreData because it caches fetch request results and is more efficient
+            let identifiers = trackGroupsSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
+            
+            let predicate = NSPredicate(format: "id IN %@", identifiers)
+            
+            let trackGroups = try! context.managedObjects(TrackGroup.self, predicate: predicate, sortDescriptors: TrackGroup.ManagedObject.sortDescriptors)
+            
+            let items = trackGroups.map { Item(filter: .trackGroup($0.identifier), enabled: scheduleFilter.activeFilters.contains(.trackGroup($0.identifier)), name: $0.name, color: $0.color) }
+            
+            filters.append(Section(category: .trackGroup, items: items))
         }
-        else if index == filterSection.items.count - 1 {
+        
+        if let venuesSection = scheduleFilter.allFilters[.venue] {
             
-            cell.addBottomExtraPadding()
+            // fetch from CoreData because it caches fetch request results and is more efficient
+            let identifiers = venuesSection.map { NSNumber(longLong: Int64(identifier(for: $0))) }
+            
+            let predicate = NSPredicate(format: "id IN %@", identifiers)
+            
+            let venues = try! context.managedObjects(Venue.self, predicate: predicate, sortDescriptors: Venue.ManagedObject.sortDescriptors)
+            
+            let items = venues.map { Item(filter: .venue($0.identifier), enabled: scheduleFilter.activeFilters.contains(.venue($0.identifier)), name: $0.name, color: nil) }
+            
+            filters.append(Section(category: .venue, items: items))
         }
     }
     
-    func toggleSelection(cell cell: GeneralScheduleFilterTableViewCell, filterSection: FilterSection, index: Int) {
+    private subscript (indexPath: NSIndexPath) -> Item {
         
-        let filterItem = filterSection.items[index]
+        let section = self.filters[indexPath.section]
         
-        switch filterSection.type {
+        return section.items[indexPath.row]
+    }
+    
+    private func configure(cell cell: GeneralScheduleFilterTableViewCell, at indexPath: NSIndexPath) {
+        
+        let item = self[indexPath]
+        
+        cell.nameLabel.text = item.name
+        cell.enabledSwitch.on = item.enabled
+        
+        if let colorHex = item.color,
+            let color = UIColor(hexString: colorHex) {
             
-        case .Track, .TrackGroup, .Venue:
+            cell.circleContainerView.hidden = false
+            cell.circleView.backgroundColor = color
             
-            if isItemSelected(filterSection.type, id: filterItem.identifier) {
-                
-                let index = FilterManager.shared.filter.value.selections[filterSection.type]!.rawValue.indexOf { $0 as! Int == filterItem.identifier }
-                FilterManager.shared.filter.value.selections[filterSection.type]!.removeAtIndex(index!)
-                cell.isOptionSelected = false
-            }
-            else {
-                
-                FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.identifier)
-                cell.isOptionSelected = true
-            }
+        } else {
             
-        case .Level, .ActiveTalks:
-            
-            if isItemSelected(filterSection.type, name: filterItem.name) {
-                
-                let index = FilterManager.shared.filter.value.selections[filterSection.type]!.rawValue.indexOf { $0 as! String == filterItem.name }
-                FilterManager.shared.filter.value.selections[filterSection.type]!.removeAtIndex(index!)
-                cell.isOptionSelected = false
-            }
-            else {
-                
-                FilterManager.shared.filter.value.selections[filterSection.type]!.append(filterItem.name)
-                cell.isOptionSelected = true
-            }
+            cell.circleContainerView.hidden = true
+            cell.circleView.backgroundColor = .clearColor()
         }
+    }
+    
+    private func configure(header headerView: TableViewHeaderView, for section: Int) {
+        
+        let filterCategory = self.filters[section].category
+        
+        let title: String
+        
+        switch filterCategory {
+        case .activeTalks: title = "ACTIVE TALKS"
+        case .trackGroup: title = "CATEGORIES"
+        case .level: title = "LEVELS"
+        case .venue: title = "VENUES"
+        }
+        
+        headerView.titleLabel.text = title
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return FilterManager.shared.filter.value.filterSections.count
+        return filters.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let filterSection = FilterManager.shared.filter.value.filterSections[section]
+        let section = self.filters[section]
         
-        switch filterSection.type {
-            
-        case .ActiveTalks: return activeTalksItemCount
-            
-        case .TrackGroup: return trackGroupItemCount
-            
-        case .Level: return levelItemCount
-            
-        case .Venue: return venuesItemCount
-            
-        default: return 0
-        }
+        return section.items.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell)!
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell, forIndexPath: indexPath)!
         
-        let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
-        
-        configure(cell: cell, at: indexPath, filterSection: filterSection)
+        configure(cell: cell, at: indexPath)
         
         return cell
     }
     
-    // MARK: - UITableViewDelegate
-    
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let filterSection = FilterManager.shared.filter.value.filterSections[section]
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.resuseIdentifier) as! TableViewHeaderView
         
-        return filterSection.type != FilterSectionType.ActiveTalks ? headerHeight : 0
+        configure(header: headerView, for: section)
+        
+        return headerView
+    }
+}
+
+// MARK: - Supporting Types
+
+private extension GeneralScheduleFilterViewController {
+    
+    struct Section {
+        
+        let category: FilterCategory
+        let items: [Item]
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    /// Item for each cell, to improve performance.
+    struct Item {
         
-        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewHeaderView")
-        
-        let filterSection = FilterManager.shared.filter.value.filterSections[section]
-        
-        let header = cell as! TableViewHeaderView
-        header.titleLabel.text = filterSection.name
-        
-        return cell
+        let filter: Filter
+        let enabled: Bool
+        let name: String
+        let color: String?
     }
+}
+
+final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
-        
-        if indexPath.row == 0 || indexPath.row == filterSection.items.count - 1 {
-            
-            return cellHeight + extraPadding * 2
-        }
-        return cellHeight
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
-        
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! GeneralScheduleFilterTableViewCell
-        
-        let filterSection = FilterManager.shared.filter.value.filterSections[indexPath.section]
-        
-        toggleSelection(cell: cell, filterSection: filterSection, index: indexPath.row)
-    }
+    @IBOutlet private(set) weak var circleView: UIView!
+    @IBOutlet private(set) weak var circleContainerView: UIView!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var enabledSwitch: UISwitch!
 }
