@@ -99,8 +99,6 @@ final class EventDatesViewController: UITableViewController {
     
     private func updateUI() {
         
-        tableView.reloadData()
-        
         switch state {
             
         case .loading:
@@ -114,13 +112,17 @@ final class EventDatesViewController: UITableViewController {
             // show alert
             showErrorAlert((error as NSError).localizedDescription, okHandler: { self.loadData() })
             
-        case let .summit(_, _, name):
+        case let .summit(_, _, name, timeZone):
             
             self.title = name
+            
+            NSDate.mt_setTimeZone(timeZone)
             
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: .None)
             self.performSegueWithIdentifier("showDayEvents", sender: self)
         }
+        
+        tableView.reloadData()
     }
     
     // MARK: - UITableViewDataSource
@@ -132,20 +134,20 @@ final class EventDatesViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard case let .summit(start, end, _) = state
+        guard case let .summit(start, end, _, _) = state
             else { return 0 }
         
-        return end.toFoundation().mt_daysSinceDate(start.toFoundation())
+        return end.mt_daysSinceDate(start)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("EventDayTableViewCell")!
         
-        guard case let .summit(start, _, _) = state
+        guard case let .summit(start, _, _, _) = state
             else { fatalError("Invalid state") }
         
-        let date = start.toFoundation().mt_dateDaysAfter(indexPath.row)
+        let date = start.mt_dateDaysAfter(indexPath.row)
         
         cell.textLabel?.text = EventDatesViewController.dateFormatter.stringFromDate(date)
         
@@ -205,12 +207,12 @@ final class EventDatesViewController: UITableViewController {
             
         case "showDayEvents":
             
-            guard case let .summit(start, _, _) = state
+            guard case let .summit(start, _, _, _) = state
                 else { fatalError("Invalid state") }
             
             let indexPath = tableView.indexPathForSelectedRow!
             
-            let selectedDate = start.toFoundation().mt_dateDaysAfter(indexPath.row)
+            let selectedDate = start.mt_dateDaysAfter(indexPath.row)
             
             let endDate = selectedDate.mt_endOfCurrentDay()
             
@@ -239,11 +241,17 @@ extension EventDatesViewController {
         
         case loading
         case error(ErrorType)
-        case summit(Date, Date, String)
+        case summit(start: NSDate, end: NSDate, name: String, timeZone: NSTimeZone)
         
         init(summit: Summit) {
             
-            self = .summit(summit.start, summit.end, summit.name)
+            let start = summit.start.toFoundation().mt_startOfCurrentDay()
+            
+            let end = summit.end.toFoundation().mt_dateDaysAfter(1)
+            
+            let timeZone = NSTimeZone(name: summit.timeZone)!
+            
+            self = .summit(start: start, end: end, name: summit.name, timeZone: timeZone)
         }
     }
 }

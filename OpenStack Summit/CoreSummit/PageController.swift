@@ -17,18 +17,25 @@ public final class PageController<Item> {
     
     public var fetch: (page: Int, perPage: Int, response: (ErrorValue<Page<Item>>) -> ()) -> ()
     
+    public var cached: (() -> [Item])?
+    
     public var callback = PageControllerCallback<Item>()
     
     public let operationQueue: NSOperationQueue
     
     public private(set) var pages = [Page<Item>]() {
         
-        didSet { updateItems() }
+        didSet { updateItems(oldValue) }
     }
     
     public private(set) var items = [PageControllerData<Item>]()
     
     public private(set) var isLoading: Bool = false
+    
+    public var cacheLoaded: Bool {
+        
+        return pages.isEmpty && items.isEmpty == false
+    }
     
     // MARK: - Initialization
     
@@ -79,6 +86,13 @@ public final class PageController<Item> {
                     controller.callback.didLoadNextPage(.Error(error))
                     
                 case let .Value(value):
+                    
+                    if controller.cacheLoaded {
+                        
+                        controller.items = []
+                        
+                        controller.callback.reloadData()
+                    }
                     
                     let previousCount = controller.items.count
                     
@@ -132,13 +146,29 @@ public final class PageController<Item> {
     // MARK: - Private Methods
     
     @inline(__always)
-    private func updateItems() {
+    private func updateItems(oldValue: [Page<Item>]) {
         
-        items = pages.reduce([Item](), combine: { $0.0 + $0.1.items }).map({ .item($0) })
-        
-        if dataLoaded == false && items.isEmpty == false {
+        // reset if loaded from cache previously
+        if oldValue.isEmpty && items.isEmpty == false {
             
-            items.append(.loading)
+            items = []
+        }
+        
+        // load from cache
+        if pages.isEmpty {
+            
+            items = cached?().map { .item($0) } ?? []
+            
+        } else {
+            
+            // get items from pages
+            
+            items = pages.reduce([Item](), combine: { $0.0 + $0.1.items }).map({ .item($0) })
+            
+            if dataLoaded == false && items.isEmpty == false {
+                
+                items.append(.loading)
+            }
         }
     }
 }

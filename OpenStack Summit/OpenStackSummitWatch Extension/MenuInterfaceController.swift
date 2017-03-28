@@ -113,11 +113,15 @@ final class MenuInterfaceController: WKInterfaceController {
                 
                 print("Error loading summit: ", error)
                 
-                controller.presentAlertControllerWithTitle("Error", message: (error as NSError).localizedDescription, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "Try again", style: WKAlertActionStyle.Cancel, handler: {
-                    
-                    // attempt to reload data
-                    controller.loadData()
-                    
+                controller.presentAlertControllerWithTitle("Could not load summit data",
+                    message: (error as NSError).localizedFailureReason ?? (error as NSError).localizedDescription,
+                    preferredStyle:
+                    .Alert,
+                    actions: [WKAlertAction(title: "Try again", style:
+                        .Cancel, handler: {
+                            
+                            // attempt to reload data
+                            controller.loadData()
                 })])
                 
             case let .Value(summit):

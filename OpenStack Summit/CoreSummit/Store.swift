@@ -138,6 +138,11 @@ public final class Store {
         
         // manually send notification
         NSNotificationCenter.defaultCenter().postNotificationName(NSManagedObjectContextObjectsDidChangeNotification, object: self.managedObjectContext, userInfo: [:])
+        
+        #if os(iOS)
+        // logout
+        self.logout()
+        #endif
     }
     
     // MARK: - Internal / Private Methods
@@ -173,6 +178,28 @@ public final class Store {
         
         let hasPasscode = deviceHasPasscode
         
+        var scopes = ["openid",
+                      "profile",
+                      "offline_access",
+                      "\(environment.configuration.serverURL)/me/read",
+                      "\(environment.configuration.serverURL)/summits/read",
+                      "\(environment.configuration.serverURL)/summits/write",
+                      "\(environment.configuration.serverURL)/summits/read-external-orders",
+                      "\(environment.configuration.serverURL)/summits/confirm-external-orders",
+                      "\(environment.configuration.serverURL)/me/summits/events/favorites/add",
+                      "\(environment.configuration.serverURL)/me/summits/events/favorites/delete"]
+        
+        #if DEBUG
+            
+            let teamScopes = ["\(environment.configuration.serverURL)/teams/read",
+                              "\(environment.configuration.serverURL)/teams/write",
+                              "\(environment.configuration.serverURL)/members/invitations/read",
+                              "\(environment.configuration.serverURL)/members/invitations/write"]
+            
+            scopes.appendContentsOf(teamScopes)
+            
+        #endif
+        
         var config = Config(
             base: environment.configuration.authenticationURL,
             authzEndpoint: "oauth2/auth",
@@ -183,19 +210,7 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["openid",
-                "profile",
-                "offline_access",
-                "\(environment.configuration.serverURL)/me/read",
-                "\(environment.configuration.serverURL)/summits/read",
-                "\(environment.configuration.serverURL)/summits/write",
-                "\(environment.configuration.serverURL)/summits/read-external-orders",
-                "\(environment.configuration.serverURL)/summits/confirm-external-orders",
-                "\(environment.configuration.serverURL)/teams/read",
-                "\(environment.configuration.serverURL)/teams/write",
-                "\(environment.configuration.serverURL)/members/invitations/read",
-                "\(environment.configuration.serverURL)/members/invitations/write"
-            ],
+            scopes: scopes,
             clientSecret: environment.configuration.openID.secret,
             isWebView: true
         )

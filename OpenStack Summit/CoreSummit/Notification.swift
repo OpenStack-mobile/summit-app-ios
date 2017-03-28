@@ -68,7 +68,7 @@ public extension Notification {
         case group = "GROUP"
     }
     
-    public enum Topic: RawRepresentable, Equatable {
+    public enum Topic: RawRepresentable, Equatable, Hashable {
         
         case summit(Identifier)
         case team(Identifier)
@@ -207,6 +207,11 @@ public extension Notification {
             }
             
             return stringValue
+        }
+        
+        public var hashValue: Int {
+            
+            return rawValue.hashValue
         }
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import WatchKit
 
 public final class ImageCache {
     
@@ -105,38 +104,55 @@ public extension ImageCache {
     }
 }
 
-// MARK: - WatchKit Extensions
-
-/// The WatchKit Interface type supports image caching.
-public protocol ImageCacheInterface: class {
+public protocol ImageCacheView: class, Hashable {
     
     func loadCached(url: NSURL, placeholder: UIImage?, cache: ImageCache, completion: (ImageCache.Response -> ())?)
     
+    #if os(watchOS)
     func setImage(image: UIImage?)
+    #else
+    var image: UIImage? { get set }
+    #endif
     
     func setImageData(imageData: NSData?)
 }
 
-public extension ImageCacheInterface {
+private var InProgressCache = [Int: NSURL]()
+
+public extension ImageCacheView {
     
     public func loadCached(url: NSURL, placeholder: UIImage? = nil, cache: ImageCache = ImageCache.shared, completion: (ImageCache.Response -> ())? = nil) {
         
         // set placeholder
         if let placeholder = placeholder {
             
-            setImage(placeholder)
+            #if os(watchOS)
+            self.setImage(placeholder)
+            #else
+            self.image = placeholder
+            #endif
         }
+        
+        let hash = self.hashValue
+        
+        InProgressCache[hash] = url
         
         // load data
         cache.load(url) { [weak self] (response) in
             
-            guard let interface = self else { return }
+            guard let view = self else { return }
+            
+            // make sure image view hasnt been reused
+            guard InProgressCache[hash] == url else { return }
+            
+            // remove from cache
+            InProgressCache[hash] = nil
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
                 if case let .Data(data) = response {
                     
-                    interface.setImageData(data)
+                    view.setImageData(data)
                 }
                 
                 // forward completion block
@@ -146,9 +162,17 @@ public extension ImageCacheInterface {
     }
 }
 
-extension WKInterfaceImage: ImageCacheInterface { }
+// MARK: - WatchKit Extensions
 
-extension WKInterfaceGroup: ImageCacheInterface {
+#if os(watchOS)
+    
+import WatchKit
+    
+/// The WatchKit Interface type supports image caching.
+
+extension WKInterfaceImage: ImageCacheView { }
+
+extension WKInterfaceGroup: ImageCacheView {
     
     public func setImage(image: UIImage?) {
         
@@ -161,7 +185,7 @@ extension WKInterfaceGroup: ImageCacheInterface {
     }
 }
 
-extension WKInterfaceMovie: ImageCacheInterface {
+extension WKInterfaceMovie: ImageCacheView {
     
     public func setImage(image: UIImage?) {
         
@@ -195,3 +219,24 @@ extension WKInterfaceMovie: ImageCacheInterface {
         setPosterImage(watchImage)
     }
 }
+
+#elseif os(OSX)
+
+import AppKit
+
+extension NSImageView: ImageCacheView {
+    
+    public func setImageData(imageData: NSData?) {
+        
+        if let data = imageData {
+            
+            self.image = NSImage(data: data)
+            
+        } else {
+            
+             self.image = nil
+        }
+    }
+}
+
+#endif

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16A313a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="8EI-WX-Fsx">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8EI-WX-Fsx">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Speakers-->
         <scene sceneID="0l9-rN-4rZ">
             <objects>
-                <navigationController storyboardIdentifier="SpeakersNavigationController" title="Speakers" id="8EI-WX-Fsx" customClass="SpeakersViewController" customModule="OpenStackSummitTV" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SpeakersNavigationController" title="Speakers" id="8EI-WX-Fsx" customClass="OSSTVSpeakersViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Speakers" id="Zl2-WI-c7E"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tz1-p7-NPH">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
@@ -28,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpeakerTableViewCell" rowHeight="150" id="o0N-5b-zJC" customClass="SpeakerTableViewCell" customModule="OpenStackSummitTV" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="54" width="1920" height="150"/>
+                                <rect key="frame" x="0.0" y="40" width="1920" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o0N-5b-zJC" id="fGn-XV-VvP">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="150"/>
@@ -47,17 +52,17 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alsey Coleman Miller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Sk-F7-xB7">
                                                     <rect key="frame" x="0.0" y="0.0" width="1690" height="46"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKP-Pe-1lL">
                                                     <rect key="frame" x="0.0" y="74" width="1690" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="aKP-Pe-1lL" secondAttribute="trailing" id="4QU-lQ-FDN"/>
                                                 <constraint firstItem="aKP-Pe-1lL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9Sk-F7-xB7" secondAttribute="bottom" constant="20" id="4ke-oy-3Ya"/>
@@ -108,4 +113,9 @@
     <resources>
         <image name="generic-user-avatar" width="122" height="122"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <nil key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

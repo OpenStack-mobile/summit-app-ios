@@ -18,10 +18,7 @@ final class CoreDataTests: XCTestCase {
         
         for summitID in SummitJSONIdentifiers {
             
-            let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-            managedObjectContext.undoManager = nil
-            managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel.summitModel)
-            try! managedObjectContext.persistentStoreCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+            let context = testContext()
                         
             // load test data
             let testJSON = loadJSON("Summit\(summitID)")
@@ -32,8 +29,15 @@ final class CoreDataTests: XCTestCase {
             // decode
             var managedObject: SummitManagedObject!
             
-            do { managedObject = try summit.save(managedObjectContext) }
+            do {
                 
+                // cache
+                managedObject = try summit.save(context)
+                
+                // persist and validate
+                try context.save()
+            }
+            
             catch { XCTFail("\(error)"); return }
             
             let decodedSummit = Summit(managedObject: managedObject)
@@ -46,10 +50,7 @@ final class CoreDataTests: XCTestCase {
         
         for memberID in MemberJSONIdentifiers {
             
-            let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-            managedObjectContext.undoManager = nil
-            managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel.summitModel)
-            try! managedObjectContext.persistentStoreCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+            let context = testContext()
             
             // load test data
             let testJSON = loadJSON("Member\(memberID)")
@@ -58,9 +59,41 @@ final class CoreDataTests: XCTestCase {
                 else { XCTFail("Could not decode from JSON"); return }
             
             // cache in CoreData
-            do { let _ = try member.save(managedObjectContext) }
+            do { let _ = try member.save(context) }
                 
             catch { XCTFail("\(error)"); return }
         }
+    }
+    
+    func testValidationError() {
+        
+        // recover from NSDetailedErrors
+        
+        let context = testContext()
+        
+        let model = context.persistentStoreCoordinator!.managedObjectModel
+        
+        let eventEntity = model[EventManagedObject.self]!
+        
+        let _ = try! context.findOrCreate(eventEntity, resourceID: 1, identifierProperty: Entity.identifierProperty)
+        
+        do { try context.validateAndSave() }
+        
+        catch { XCTFail("\(error)") }
+    }
+}
+
+// MARK: - Utilitites
+
+private extension CoreDataTests {
+    
+    func testContext() -> NSManagedObjectContext {
+        
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        managedObjectContext.undoManager = nil
+        managedObjectContext.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel.summitModel)
+        try! managedObjectContext.persistentStoreCoordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+        
+        return managedObjectContext
     }
 }

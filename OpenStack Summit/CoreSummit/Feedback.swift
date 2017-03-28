@@ -8,7 +8,7 @@
 
 import struct SwiftFoundation.Date
 
-public protocol Feedback: Unique {
+public protocol FeedbackProtocol: Unique {
     
     var identifier: Identifier { get }
     
@@ -21,66 +21,22 @@ public protocol Feedback: Unique {
     var event: Identifier { get }
 }
 
-public struct Review: Feedback {
+public struct Feedback: FeedbackProtocol {
     
     public let identifier: Identifier
     
-    public var rate: Int
+    public let rate: Int
     
-    public var review: String
+    public let review: String
     
-    public var date: Date
+    public let date: Date
     
-    public var event: Identifier
+    public let event: Identifier
     
-    public var owner: Owner
-    
-    public struct Owner {
-        
-        public let member: Identifier
-        
-        public let attendee: Identifier?
-        
-        public let firstName: String
-        
-        public let lastName: String
-    }
+    public let member: Member
 }
 
-public func == (lhs: Review, rhs: Review) -> Bool {
-    
-    return lhs.identifier == rhs.identifier
-        && lhs.rate == rhs.rate
-        && lhs.review == rhs.review
-        && lhs.date == rhs.date
-        && lhs.event == lhs.event
-        && lhs.owner == lhs.owner
-}
-
-public func == (lhs: Review.Owner, rhs: Review.Owner) -> Bool {
-    
-    return lhs.member == rhs.member
-        && lhs.attendee == rhs.attendee
-        && lhs.firstName == rhs.firstName
-        && lhs.lastName == rhs.lastName
-}
-
-public struct MemberFeedback: Feedback {
-    
-    public let identifier: Identifier
-    
-    public var rate: Int
-    
-    public var review: String
-    
-    public var date: Date
-    
-    public var event: Identifier
-    
-    public let member: Identifier
-}
-
-public func == (lhs: MemberFeedback, rhs: MemberFeedback) -> Bool {
+public func == (lhs: Feedback, rhs: Feedback) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.rate == rhs.rate

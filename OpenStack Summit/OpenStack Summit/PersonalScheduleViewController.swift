@@ -13,6 +13,14 @@ import SwiftFoundation
 
 final class PersonalScheduleViewController: ScheduleViewController, IndicatorInfoProvider {
     
+    // MARK: - Loading
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+    
     // MARK: - Methods
     
     override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftFoundation
 import CoreSummit
 
 @UIApplicationMain
@@ -20,9 +21,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // print app info
         print("Launching OpenStack Summit (tvOS) v\(AppVersion) Build \(AppBuild)")
         print("Using Environment: \(AppEnvironment.rawValue)")
-        
-        // always nuke cache
-        try! Store.shared.clear()
         
         // set appearance
         SetAppearance()
@@ -52,6 +50,31 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        
+        return open(url: url)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func open(url url: NSURL) -> Bool {
+        
+        print("App should open URL: \(url)")
+        
+        switch url.scheme ?? "" {
+            
+        case ServiceURL.scheme:
+            
+            guard let serviceURL = ServiceURL(url: url),
+                let video = try! Video.find(serviceURL.identifier, context: Store.shared.managedObjectContext)
+                else { return false }
+            
+            self.window!.rootViewController!.play(video: video)
+            
+            return true
+            
+        default: return false
+        }
+    }
 }
 

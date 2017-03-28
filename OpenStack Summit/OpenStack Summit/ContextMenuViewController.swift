@@ -21,7 +21,7 @@ extension ContextMenuViewController {
         guard let viewController = self as? UIViewController
             else { fatalError("\(self) is not a view controller") }
         
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(UIViewController.showContextMenu))
+        let barButtonItem = UIBarButtonItem(image: R.image.contextMenu(), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UIViewController.showControllerContextMenu))
         
         viewController.navigationItem.rightBarButtonItem = barButtonItem
     }
@@ -29,20 +29,28 @@ extension ContextMenuViewController {
 
 private extension UIViewController {
     
-    @objc func showContextMenu(sender: UIBarButtonItem) {
+    @objc func showControllerContextMenu(sender: UIBarButtonItem) {
         
         guard let contextMenuViewController = self as? ContextMenuViewController
             else { fatalError("\(self) is not a ContextMenuViewController") }
         
-        let menu = contextMenuViewController.contextMenu
+        let contextMenu = contextMenuViewController.contextMenu
+        
+        self.show(contextMenu: contextMenu, sender: .barButtonItem(sender))
+    }
+}
+
+extension UIViewController {
+    
+    func show(contextMenu contextMenu: ContextMenu, sender: PopoverPresentingView) {
         
         let menuViewController: UIViewController
         
-        if menu.shareItems.isEmpty {
+        if contextMenu.shareItems.isEmpty {
             
             let alertViewController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             
-            menu.actions.forEach { (action) in
+            contextMenu.actions.forEach { (action) in
                 
                 let action = UIAlertAction(title: action.title, style: .Default, handler: { [weak self] _ in
                 
@@ -55,9 +63,7 @@ private extension UIViewController {
                             self?.dismissViewControllerAnimated(true, completion: nil)
                         }
                         
-                        viewController.popoverPresentationController?.barButtonItem = sender
-                        
-                        self?.presentViewController(viewController, animated: true, completion: nil)
+                        self?.present(viewController: viewController, sender: sender)
                         
                     case let .background(handler):
                         
@@ -78,14 +84,21 @@ private extension UIViewController {
             
             var activites = [UIActivity]()
             
-            activites += menu.actions.map { ContextMenuActionActivity(action: $0) }
+            activites += contextMenu.actions.map { ContextMenuActionActivity(action: $0) }
             
-            menuViewController = UIActivityViewController(activityItems: menu.shareItems, applicationActivities: activites)
+            let activityViewController = UIActivityViewController(activityItems: contextMenu.shareItems, applicationActivities: activites)
+            
+            if contextMenu.systemActions == false {
+                
+                activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,
+                                                                UIActivityTypeAddToReadingList,
+                                                                UIActivityTypeOpenInIBooks]
+            }
+            
+            menuViewController = activityViewController
         }
         
-        menuViewController.popoverPresentationController?.barButtonItem = sender
-        
-        presentViewController(menuViewController, animated: true, completion: nil)
+        self.present(viewController: menuViewController, sender: sender)
     }
 }
 
@@ -94,6 +107,8 @@ struct ContextMenu {
     var actions = [Action]()
     
     var shareItems = [AnyObject]()
+    
+    var systemActions = true
 }
 
 extension ContextMenu {

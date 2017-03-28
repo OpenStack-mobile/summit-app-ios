@@ -41,6 +41,7 @@ public extension NSManagedObjectContext {
     }
 }
 
+@available(OSX 10.12, *)
 public extension NSFetchedResultsController {
     
     convenience init<T: CoreDataDecodable>(_ decodable: T.Type, delegate: NSFetchedResultsControllerDelegate? = nil, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], sectionNameKeyPath: String? = nil, context: NSManagedObjectContext) {

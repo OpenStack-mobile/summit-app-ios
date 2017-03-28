@@ -11,12 +11,13 @@ import UIKit
 import CoreData
 import CoreSummit
 import XLPagerTabStrip
+import JGProgressHUD
 
-final class TeamsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider, MessageEnabledViewController, ShowActivityIndicatorProtocol, ContextMenuViewController {
+final class TeamsViewController: UITableViewController, PagingTableViewController, IndicatorInfoProvider, ContextMenuViewController {
     
     // MARK: - Properties
     
-    private lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
+    lazy var pageController = PageController<Team>(fetch: { Store.shared.teams(page: $0.0, perPage: $0.1, completion: $0.2) })
     
     lazy var contextMenu: ContextMenu = {
         
@@ -49,10 +50,22 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
             return navigationController
             }))
         
-        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [])
+        return ContextMenu(actions: [createTeam, viewInvitations], shareItems: [], systemActions: false)
     }()
     
+    private var unreadTeamMessagesObserver: Int?
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = unreadTeamMessagesObserver {
+            
+            PushNotificationManager.shared.unreadTeamMessages.remove(observer)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +82,18 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         
         pageController.callback.didLoadNextPage = { [weak self] in self?.didLoadNextPage($0) }
         
+        pageController.cached = { [weak self] in self?.loadFromCache() ?? [] }
+        
+        unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
+            .observe { [weak self] _ in self?.tableView.reloadData() }
+        
         refresh()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.view.bringSubviewToFront(progressHUD)
     }
     
     // MARK: - Actions
@@ -81,60 +105,22 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
     
     // MARK: - Private Methods
     
-    private func willLoadData() {
+    private func loadFromCache() -> [Team] {
         
-        if pageController.pages.isEmpty {
-            
-            showActivityIndicator()
-        }
-    }
-    
-    private func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
-        
-        self.hideActivityIndicator()
-        
-        self.refreshControl?.endRefreshing()
-        
-        switch response {
-            
-        case let .Error(error):
-            
-            showErrorMessage(error as NSError)
-            
-        case let .Value(changes):
-            
-            tableView.beginUpdates()
-            
-            for change in changes {
-                
-                let indexPath = NSIndexPath(forRow: change.index, inSection: 0)
-                
-                switch change.change {
-                    
-                case .delete:
-                    
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .insert:
-                    
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                    
-                case .update:
-                    
-                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                }
-            }
-            
-            tableView.endUpdates()
-        }
+        return try! Team.all(Store.shared.managedObjectContext)
     }
     
     @inline(__always)
-    private func configure(cell cell: UITableViewCell, with team: Team) {
+    private func configure(cell cell: TeamCell, with team: Team) {
         
-        cell.textLabel!.text = team.name
+        cell.nameLabel.text = team.name
         
-        cell.detailTextLabel!.text = team.descriptionText
+        cell.descriptionLabel.text = team.descriptionText
+        
+        let unreadCount = try! PushNotificationManager.shared.unreadMessages(in: team.identifier, context: Store.shared.managedObjectContext)
+        
+        cell.unreadView.hidden = unreadCount == 0
+        cell.unreadLabel.text = "\(unreadCount)"
     }
     
     // MARK: - IndicatorInfoProvider
@@ -211,4 +197,17 @@ final class TeamsViewController: UITableViewController, NSFetchedResultsControll
         default: fatalError("Unknown segue: \(segue)")
         }
     }
+}
+
+// MARK: - Supporting Types
+
+final class TeamCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var unreadView: UIView!
+    
+    @IBOutlet weak var unreadLabel: UILabel!
 }

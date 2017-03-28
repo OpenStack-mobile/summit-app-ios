@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import SwiftSpinner
 import Cosmos
 import CoreSummit
+import JGProgressHUD
 
-final class FeedbackEditViewController: UIViewController, UITextViewDelegate, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class FeedbackEditViewController: UIViewController, UITextViewDelegate, ActivityViewController, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -27,6 +27,8 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
     private var eventCache: Event!
     
     private let placeHolderText = "Add your review (up to 500 characters)"
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Accessors
     
@@ -102,9 +104,6 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
         if rate == 0 {
             validationErrorText = "You must provide a rate using stars at the top"
         }
-        else if review.isEmpty {
-            validationErrorText = "You must provide a review"
-        }
         else if review.characters.count > 500 {
             validationErrorText = "Review exceeded 500 characters limit"
         }
@@ -134,7 +133,7 @@ final class FeedbackEditViewController: UIViewController, UITextViewDelegate, Sh
                 
                 guard let controller = self else { return }
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     

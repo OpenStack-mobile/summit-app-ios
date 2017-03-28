@@ -12,7 +12,7 @@ import CoreSummit
 import Haneke
 import CoreData
 
-final class SpeakerSearchResultsViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
+final class SpeakerSearchResultsViewController: TableViewController, UISearchResultsUpdating {
     
     // MARK: - Properties
         
@@ -26,8 +26,6 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
             filterChanged()
         }
     }
-    
-    private var fetchedResultsController: NSFetchedResultsController!
     
     // MARK: - Loading
     
@@ -72,7 +70,14 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
             predicate = predicates.first
         }
         
-        self.fetchedResultsController = NSFetchedResultsController(Speaker.self, delegate: self, predicate: predicate, sortDescriptors: SpeakerManagedObject.sortDescriptors, sectionNameKeyPath: nil, context: Store.shared.managedObjectContext)
+        self.fetchedResultsController = NSFetchedResultsController(Speaker.self,
+                                                                   delegate: self,
+                                                                   predicate: predicate,
+                                                                   sortDescriptors: SpeakerManagedObject.sortDescriptors,
+                                                                   sectionNameKeyPath: nil,
+                                                                   context: Store.shared.managedObjectContext)
+        
+        self.fetchedResultsController.fetchRequest.fetchBatchSize = 20
         
         try! self.fetchedResultsController.performFetch()
         
@@ -108,16 +113,6 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.fetchedResultsController?.fetchedObjects?.count ?? 0
-    }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(SpeakerTableViewCell.identifier, forIndexPath: indexPath) as! SpeakerTableViewCell
@@ -125,49 +120,6 @@ final class SpeakerSearchResultsViewController: UITableViewController, UISearchR
         configure(cell: cell, at: indexPath)
         
         return cell
-    }
-    
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        
-        self.tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        
-        self.tableView.endUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
-        switch type {
-        case .Insert:
-            
-            if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-            }
-        case .Delete:
-            
-            if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-            }
-        case .Update:
-            if let updateIndexPath = indexPath,
-                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) as? SpeakerTableViewCell {
-                
-                self.configure(cell: cell, at: updateIndexPath)
-            }
-        case .Move:
-            
-            if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-            }
-            
-            if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-            }
-        }
     }
     
     // MARK: - Segue

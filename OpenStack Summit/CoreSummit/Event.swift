@@ -31,6 +31,12 @@ public struct Event: Named {
     public var averageFeedback: Double
     
     public var type: Identifier
+    
+    public var rsvp: String?
+    
+    public var externalRSVP: Bool
+    
+    public var willRecord: Bool
         
     public var sponsors: Set<Identifier>
     
@@ -41,8 +47,6 @@ public struct Event: Named {
     public var presentation: Presentation
     
     public var videos: Set<Video>
-    
-    public var rsvp: String?
     
     public var groups: Set<Group>
 }
@@ -70,4 +74,6 @@ public func == (lhs: Event, rhs: Event) -> Bool {
         && lhs.videos == rhs.videos
         && lhs.rsvp == rhs.rsvp
         && lhs.groups == rhs.groups
+        && lhs.externalRSVP == rhs.externalRSVP
+        && lhs.willRecord == rhs.willRecord
 }

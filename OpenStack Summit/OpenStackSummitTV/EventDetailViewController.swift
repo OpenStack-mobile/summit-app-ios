@@ -168,7 +168,7 @@ final class EventDetailViewController: UITableViewController {
             
         case .video:
             
-            self.playVideo(eventDetail.video!)
+            self.play(video: eventDetail.video!)
             
         default: break
         }

@@ -7,16 +7,21 @@
 //
 
 import Foundation
+import SwiftFoundation
 import CoreSummit
 
 public struct EventDetail: CoreDataDecodable {
     
     // MARK: - Properties
     
-    public let id: Identifier
+    public let identifier: Identifier
     public let name: String
     public let summit: Identifier
+    public let start: Date
+    public let end: Date
+    public let timeZone: String
     public let dateTime: String
+    public let day: String
     public let time: String
     public let location: String
     public let track: String
@@ -24,8 +29,9 @@ public struct EventDetail: CoreDataDecodable {
     public let eventType: String
     public let trackGroupColor: String
     
-    public let venue: Identifier?
+    public let venue: Location?
     public let eventDescription: String
+    public let socialDescription: String
     public let tags: String
     public let speakers: [SpeakerDetail]
     public let finished: Bool
@@ -33,7 +39,9 @@ public struct EventDetail: CoreDataDecodable {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
+    public let willRecord: Bool
     public let rsvp: String
+    public let externalRSVP: Bool
     
     public let webpageURL: NSURL
     
@@ -41,22 +49,37 @@ public struct EventDetail: CoreDataDecodable {
     
     public init(managedObject event: EventManagedObject) {
         
-        self.id = event.identifier
+        self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
+        self.start = Date(foundation: event.start)
+        self.end = Date(foundation: event.end)
+        self.timeZone = event.summit.timeZone
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)
+        self.day = ScheduleItem.getDay(event)
         self.time = ScheduleItem.getTime(event)
         self.track = ScheduleItem.getTrack(event)
         self.sponsors = ScheduleItem.getSponsors(event)
         self.trackGroupColor = ScheduleItem.getTrackGroupColor(event)
         self.rsvp = event.rsvp ?? ""
+        self.externalRSVP = event.externalRSVP
+        self.willRecord = event.willRecord
         
-        self.venue = event.location?.identifier
+        
+        if let locationManagedObject = event.location {
+            
+            self.venue = Location(managedObject: locationManagedObject)
+            
+        } else {
+            
+            self.venue = nil
+        }
         
         self.finished = event.end.compare(NSDate()) == .OrderedAscending
         self.eventDescription = event.descriptionText ?? ""
+        self.socialDescription = event.socialDescription ?? ""
         self.allowFeedback = event.allowFeedback
         self.averageFeedback = event.averageFeedback
         
@@ -103,7 +126,7 @@ public struct EventDetail: CoreDataDecodable {
         let webpageURLString = Event(managedObject: event).toWebpageURL(summit)
         
         guard let webpageURL = NSURL(string: webpageURLString)
-            else { fatalError("Invalid URLL \(webpageURLString)") }
+            else { fatalError("Invalid URL \(webpageURLString)") }
         
         self.webpageURL = webpageURL
     }
@@ -129,10 +152,12 @@ public extension EventDetail {
         
         public let irc: String?
         
+        public var linkedIn: String? { return nil }
+        
         public let biography: String?
         
         public let isModerator: Bool
-        
+                
         private init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier

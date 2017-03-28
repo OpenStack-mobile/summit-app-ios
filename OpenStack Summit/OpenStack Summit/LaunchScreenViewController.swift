@@ -10,25 +10,37 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class LaunchScreenViewController: UIViewController, MessageEnabledViewController, ShowActivityIndicatorProtocol {
+final class LaunchScreenViewController: UIViewController, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet private(set) weak var summitActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet weak var guestButton: UIButton!
+    @IBOutlet private(set) weak var summitView: UIView!
     
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private(set) weak var summitDateLabel: UILabel!
     
-    @IBOutlet weak var summitView: UIView!
+    @IBOutlet private(set) weak var summitNameLabel: UILabel!
     
-    @IBOutlet weak var summitDateLabel: UILabel!
+    @IBOutlet private(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet weak var summitNameLabel: UILabel!
+    @IBOutlet private(set) weak var loginButton: UIButton!
+    
+    @IBOutlet private(set) weak var guestButton: UIButton!
+    
+    @IBOutlet private(set) weak var summitsButton: UIButton!
     
     // MARK: - Properties
     
-    private(set) var willTransition = false
+    private(set) var willTransition = false  {
+        
+        didSet { configureView() }
+    }
+    
+    private var state: State = .loadingSummits {
+        
+        didSet { configureView() }
+    }
     
     private var summit: SummitsResponse.Summit?
     
@@ -37,7 +49,13 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configureView()
+        self.summitsButton.enabled = AppEnvironment == .Staging
+        
+        configureView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if Store.shared.isLoggedIn {
             
@@ -57,6 +75,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
         return .LightContent
     }
     
@@ -79,32 +98,70 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     private func configureView() {
         
-        self.guestButton.hidden = Store.shared.isLoggedIn
-        self.loginButton.hidden = Store.shared.isLoggedIn
-        self.loginButton.enabled = SummitManager.shared.summit.value > 0
+        switch state {
+            
+        case .loadingSummits:
+            
+            self.summitView.hidden = true
+            self.summitActivityIndicatorView.hidden = false
+            self.summitActivityIndicatorView.startAnimating()
+            
+            self.guestButton.hidden = self.isDataLoaded == false || self.willTransition
+            self.loginButton.hidden = self.isDataLoaded == false || self.willTransition
+            
+            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.stopAnimating()
+            
+        case .loadingData:
+            
+            assert(self.summit != nil, "Invalid State")
+            
+            self.summitView.hidden = false
+            self.summitActivityIndicatorView.hidden = true
+            self.summitActivityIndicatorView.stopAnimating()
+            
+            self.guestButton.hidden = true
+            self.loginButton.hidden = true
+            
+            self.dataLoadedActivityIndicatorView.hidden = false
+            self.dataLoadedActivityIndicatorView.startAnimating()
+            
+        case .dataLoaded:
+            
+            assert(self.isDataLoaded, "Invalid State")
+            
+            self.summitView.hidden = false
+            self.summitActivityIndicatorView.hidden = true
+            self.summitActivityIndicatorView.stopAnimating()
+            
+            self.guestButton.hidden = false
+            self.loginButton.hidden = false
+            
+            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.stopAnimating()
+        }
         
-        self.summitView.hidden = self.summit == nil
-        self.activityIndicatorView.hidden = self.summit != nil
-        
+        // show current summit info
         if let summit = self.summit {
             
-            self.activityIndicatorView.stopAnimating()
+            self.summitNameLabel.text = summit.name.uppercaseString
             
-            self.summitNameLabel.text = summit.name
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
-            dateFormatter.dateFormat = "MMMM dd-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
-            
-            dateFormatter.dateFormat = "dd, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
-            
-            self.summitDateLabel.text = stringDateFrom + stringDateTo
-            
-        } else {
-            
-            self.activityIndicatorView.startAnimating()
+            if let datesLabel = summit.datesLabel {
+                
+                self.summitDateLabel.text = datesLabel
+            }
+            else {
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+                dateFormatter.dateFormat = "MMMM d-"
+                let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+                
+                dateFormatter.dateFormat = "d, yyyy"
+                let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+                
+                self.summitDateLabel.text = stringDateFrom + stringDateTo
+            }
         }
     }
     
@@ -115,6 +172,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         // load summit
         if isDataLoaded == false {
             
+            /*
             let summit = SummitManager.shared.summit.value
             
             self.showActivityIndicator()
@@ -125,7 +183,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     
                     guard let controller = self else { return }
                     
-                    controller.hideActivityIndicator()
+                    controller.dismissActivityIndicator()
                     
                     switch response {
                         
@@ -140,7 +198,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 }
             }
             
-            return
+            return */
         }
         
         let revealViewController = AppDelegate.shared.revealViewController
@@ -153,6 +211,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     }
     
     private func loadSummits() {
+        
+        state = .loadingSummits
+        
+        print("Will load summits")
         
         Store.shared.summits { [weak self] (response) in
             
@@ -174,6 +236,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     guard let latestSummit = page.items.last
                         else { fatalError("No summits") }
                     
+                    print("Loaded \(page.total) summits")
+                    
                     controller.summit = latestSummit
                     
                     if SummitManager.shared.summit.value == 0 {
@@ -181,9 +245,75 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                         SummitManager.shared.summit.value = latestSummit.identifier
                     }
                     
-                    controller.configureView()
+                    controller.loadData()
                 }
             }
         }
+    }
+    
+    private func loadData() {
+        
+        guard isDataLoaded == false
+            else { state = .dataLoaded; return }
+        
+        state = .loadingData
+        
+        let summitID = SummitManager.shared.summit.value
+        
+        print("Will load summit \(summitID)")
+        
+        Store.shared.summit(summitID) { (response) in
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                
+                guard let controller = self else { return }
+                
+                switch response {
+                    
+                case let .Error(error):
+                    
+                    print("Error loading summit \(summitID): \(error)")
+                    
+                    // try again
+                    controller.loadData()
+                    
+                case let .Value(summit):
+                    
+                    assert(controller.isDataLoaded)
+                    
+                    print("Loaded \(summit.name) summit")
+                    
+                    controller.state = .dataLoaded
+                }
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.launchScreenViewController.showSummits.identifier:
+            
+            let navigationController = segue.destinationViewController as! UINavigationController
+            
+            let summitsViewController = navigationController.topViewController as! SummitsViewController
+            
+            summitsViewController.didFinish = { [weak self] in $0.dismissViewControllerAnimated(true) { self?.loadSummits() } }
+            
+        default: fatalError()
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+private extension LaunchScreenViewController {
+    
+    enum State {
+        
+        case loadingSummits
+        case loadingData
+        case dataLoaded
     }
 }

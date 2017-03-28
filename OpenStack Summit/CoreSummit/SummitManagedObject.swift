@@ -19,6 +19,8 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var timeZone: String
     
+    @NSManaged public var datesLabel: String?
+    
     @NSManaged public var start: NSDate
     
     @NSManaged public var end: NSDate
@@ -46,6 +48,8 @@ public final class SummitManagedObject: Entity {
     @NSManaged public var eventTypes: Set<EventTypeManagedObject>
     
     @NSManaged public var schedule: Set<EventManagedObject>
+    
+    @NSManaged public var wirelessNetworks: Set<WirelessNetworkManagedObject>
 }
 
 extension Summit: CoreDataDecodable {
@@ -55,6 +59,7 @@ extension Summit: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.name = managedObject.name
         self.timeZone = managedObject.timeZone
+        self.datesLabel = managedObject.datesLabel
         self.start = Date(foundation: managedObject.start)
         self.end = Date(foundation: managedObject.end)
         self.webpageURL = managedObject.webpageURL
@@ -86,6 +91,7 @@ extension Summit: CoreDataDecodable {
         self.trackGroups = TrackGroup.from(managedObjects: managedObject.trackGroups)
         self.eventTypes = EventType.from(managedObjects: managedObject.eventTypes)
         self.schedule = Event.from(managedObjects: managedObject.schedule)
+        self.wirelessNetworks = WirelessNetwork.from(managedObjects: managedObject.wirelessNetworks)
     }
 }
 
@@ -97,6 +103,7 @@ extension Summit: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.timeZone = timeZone
+        managedObject.datesLabel = datesLabel
         managedObject.start = start.toFoundation()
         managedObject.end = end.toFoundation()
         managedObject.defaultStart = defaultStart?.toFoundation()
@@ -111,6 +118,7 @@ extension Summit: CoreDataEncodable {
         managedObject.trackGroups = try context.relationshipFault(trackGroups)
         managedObject.eventTypes = try context.relationshipFault(eventTypes)
         managedObject.schedule = try context.relationshipFault(schedule)
+        managedObject.wirelessNetworks = try context.relationshipFault(wirelessNetworks)
         
         managedObject.didCache()
         

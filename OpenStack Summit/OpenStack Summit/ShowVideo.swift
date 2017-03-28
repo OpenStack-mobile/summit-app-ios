@@ -24,6 +24,7 @@ extension UIViewController {
         userActivity.webpageURL = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube)
         
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.video.rawValue, AppActivityUserInfo.identifier.rawValue: video.identifier]
+        userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
         
         userActivity.becomeCurrent()
         userActivity.needsSave = true

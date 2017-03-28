@@ -16,7 +16,7 @@ import CoreData
 
 // MARK: - Model Extensions
 
-@available(iOS 9.0, *)
+
 protocol CoreSpotlightSearchable: AppActivitySummitData {
     
     static var itemContentType: String { get }
@@ -28,13 +28,13 @@ protocol CoreSpotlightSearchable: AppActivitySummitData {
     func toSearchableItem() -> CSSearchableItem
 }
 
-@available(iOS 9.0, *)
+
 extension CoreSpotlightSearchable where Self: CoreSummit.Unique {
     
     var searchIdentifier: String { return Self.activityDataType.rawValue + "/" + "\(identifier)" }
 }
 
-@available(iOS 9.0, *)
+
 extension Event: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
@@ -63,7 +63,7 @@ extension Event: CoreSpotlightSearchable {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension Speaker: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
@@ -90,7 +90,7 @@ extension Speaker: CoreSpotlightSearchable {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension Video: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeVideo as String }
@@ -116,7 +116,7 @@ extension Video: CoreSpotlightSearchable {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension Venue: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
@@ -146,7 +146,7 @@ extension Venue: CoreSpotlightSearchable {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension VenueRoom: CoreSpotlightSearchable {
     
     static var itemContentType: String { return kUTTypeText as String }
@@ -175,7 +175,7 @@ extension VenueRoom: CoreSpotlightSearchable {
 // MARK: - Controller
 
 /// Updates the CoreSpotlight index from Realm changes.
-@available(iOS 9.0, *)
+
 final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
     
     static let shared = SpotlightController()
@@ -237,7 +237,10 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
                 .reduce(to: CoreSpotlightSearchableManagedObject.self)
                 .map { $0.toSearchable().toSearchableItem() }
             
-            spotlightIndex.indexSearchableItems(searchableItems, completionHandler: completionHandler)
+            if searchableItems.isEmpty == false {
+                
+                spotlightIndex.indexSearchableItems(searchableItems, completionHandler: completionHandler)
+            }
         }
         
         // delete items
@@ -248,18 +251,21 @@ final class SpotlightController: NSObject, NSFetchedResultsControllerDelegate {
                 .reduce(to: CoreSpotlightSearchableManagedObject.self)
                 .map { $0.toSearchable().searchIdentifier }
             
-            spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
+            if searchableItems.isEmpty == false {
+                
+                spotlightIndex.deleteSearchableItemsWithIdentifiers(searchableItems, completionHandler: completionHandler)
+            }
         }
     }
 }
 
-@available(iOS 9.0, *)
+
 protocol CoreSpotlightSearchableManagedObject: class {
     
     func toSearchable() -> CoreSpotlightSearchable
 }
 
-@available(iOS 9.0, *)
+
 extension EventManagedObject: CoreSpotlightSearchableManagedObject {
     
     func toSearchable() -> CoreSpotlightSearchable {
@@ -268,7 +274,7 @@ extension EventManagedObject: CoreSpotlightSearchableManagedObject {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension SpeakerManagedObject: CoreSpotlightSearchableManagedObject {
     
     func toSearchable() -> CoreSpotlightSearchable {
@@ -277,7 +283,7 @@ extension SpeakerManagedObject: CoreSpotlightSearchableManagedObject {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension VideoManagedObject: CoreSpotlightSearchableManagedObject {
     
     func toSearchable() -> CoreSpotlightSearchable {
@@ -286,7 +292,7 @@ extension VideoManagedObject: CoreSpotlightSearchableManagedObject {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension VenueManagedObject: CoreSpotlightSearchableManagedObject {
     
     func toSearchable() -> CoreSpotlightSearchable {
@@ -295,7 +301,7 @@ extension VenueManagedObject: CoreSpotlightSearchableManagedObject {
     }
 }
 
-@available(iOS 9.0, *)
+
 extension VenueRoomManagedObject: CoreSpotlightSearchableManagedObject {
     
     func toSearchable() -> CoreSpotlightSearchable {

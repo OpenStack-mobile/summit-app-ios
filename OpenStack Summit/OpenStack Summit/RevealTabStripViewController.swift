@@ -18,11 +18,11 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         
         settings.style.buttonBarItemFont = UIFont.systemFontOfSize(17)
-        settings.style.buttonBarItemBackgroundColor = UIColor(hexaString: "#14273D")
+        settings.style.buttonBarItemBackgroundColor = UIColor(hexString: "#14273D")
         settings.style.buttonBarItemsShouldFillAvailiableWidth = false
-        settings.style.buttonBarBackgroundColor = UIColor(hexaString: "#14273D")
-        settings.style.selectedBarBackgroundColor = UIColor(hexaString: "#14273D")
-        settings.style.buttonBarHeight = 88
+        settings.style.buttonBarBackgroundColor = UIColor(hexString: "#14273D")
+        settings.style.selectedBarBackgroundColor = UIColor(hexString: "#14273D")!
+        settings.style.buttonBarHeight = settings.style.buttonBarHeight ?? 88
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) in
             
@@ -49,7 +49,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         
         edgesForExtendedLayout = UIRectEdge.Top
         
-        view.backgroundColor = UIColor(hexaString: "#E5E5E5")
+        view.backgroundColor = UIColor(hexString: "#E5E5E5")
         
         reloadBarButtonItems()
     }

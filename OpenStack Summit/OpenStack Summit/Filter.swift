@@ -6,160 +6,51 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+import SwiftFoundation
 import CoreSummit
 import CoreData
 
-enum FilterSectionType {
+enum FilterCategory {
     
-    case ActiveTalks, Track, TrackGroup, Tag, Level, Venue
+    /// ACTIVE TALKS
+    case activeTalks
+    
+    /// CATEGORIES
+    case trackGroup
+    
+    /// LEVEL
+    case level
+    
+    /// VENUE
+    case venue
 }
 
-struct FilterSection: Equatable {
-    var type: FilterSectionType
-    var name: String
-    var items: [FilterSectionItem]
+enum Filter {
     
-    private init(type: FilterSectionType, name: String, items: [FilterSectionItem] = []) {
-        
-        self.type = type
-        self.name = name
-        self.items = items
-    }
+    /// Hide Past Talks
+    case activeTalks
+    
+    case trackGroup(Identifier)
+    case level(String)
+    case venue(Identifier)
 }
 
-func == (lhs: FilterSection, rhs: FilterSection) -> Bool {
+extension Filter: Hashable {
     
-    return lhs.type == rhs.type
-        && lhs.name == rhs.name
-        && lhs.items == rhs.items
-}
-
-struct FilterSectionItem: Unique, Named, Equatable {
-    
-    let identifier: Identifier
-    let name: String
-}
-
-func == (lhs: FilterSectionItem, rhs: FilterSectionItem) -> Bool {
-    
-    return lhs.identifier == rhs.identifier
-        && lhs.name == rhs.name
-}
-
-enum FilterSelection: RawRepresentable, Equatable {
-    
-    case identifiers([Identifier])
-    case names([String])
-    
-    init?(rawValue: [AnyObject]) {
+    var hashValue: Int {
         
-        if let identifiers = (rawValue as? [NSNumber]) as? [Int] {
-            
-            self = .identifiers(identifiers)
-            return
-        }
-        
-        if let names = rawValue as? [NSString] {
-            
-            self = .names(names.map { String($0) })
-            return
-        }
-        
-        return nil
-    }
-    
-    var rawValue: [AnyObject] {
-        
-        switch self {
-        case let .identifiers(rawValue): return rawValue as [NSNumber]
-        case let .names(rawValue): return rawValue as [NSString]
-        }
-    }
-    
-    var isEmpty: Bool {
-        
-        return rawValue.isEmpty
-    }
-    
-    mutating func removeAll() {
-        
-        switch self {
-        case .identifiers: self = .identifiers([])
-        case .names: self = .names([])
-        }
-    }
-    
-    mutating func removeAtIndex(index: Int) {
-        
-        switch self {
-        case var .identifiers(rawValue):
-            
-            rawValue.removeAtIndex(index)
-            self = .identifiers(rawValue)
-            
-        case var .names(rawValue):
-            
-            rawValue.removeAtIndex(index)
-            self = .names(rawValue)
-        }
-    }
-    
-    mutating func append(newElement: Identifier) {
-        
-        switch self {
-        case var .identifiers(rawValue):
-            
-            rawValue.append(newElement)
-            self = .identifiers(rawValue)
-            
-        default: fatalError("Appending invalid type")
-        }
-    }
-    
-    mutating func append(newElement: String) {
-        
-        switch self {
-        case var .names(rawValue):
-            
-            rawValue.append(newElement)
-            self = .names(rawValue)
-            
-        default: fatalError("Appending invalid type")
-        }
-    }
-    
-    /// Updates the current filter selection by removing selections that are not availible anymore.
-    ///
-    /// - Parameter newItems: All the possible selections this `FilterSelection` can support. 
-    /// If an item is currently selected and not avalible in the new list of selections then it will be removed.
-    ///
-    /// - Note: The `newItems` case must match the case of the `FilterSelection`. Otherwise, an exception is thrown.
-    mutating func update(newItems: FilterSelection) {
-        
-        switch (self, newItems) {
-    
-        case (let .identifiers(existing), let .identifiers(new)):
-            
-            let filteredSelection = existing.filter { new.contains($0) }
-            
-            self = .identifiers(filteredSelection)
-            
-        case (let .names(existing), let .names(new)):
-            
-            let filteredSelection = existing.filter { new.contains($0) }
-            
-            self = .names(filteredSelection)
-            
-        default: fatalError("New items type mismatch, can only filter with the same type of FilterSelection")
-        }
+        return "\(self)".hashValue
     }
 }
 
-func == (lhs: FilterSelection, rhs: FilterSelection) -> Bool {
+func == (lhs: Filter, rhs: Filter) -> Bool {
     
     switch (lhs, rhs) {
-    case let (.identifiers(lhsValues), .identifiers(rhsValues)): return lhsValues == rhsValues
-    case let (.names(lhsValues), .names(rhsValues)): return lhsValues == rhsValues
+        
+    case (.activeTalks, .activeTalks): return true
+    case let (.trackGroup(lhsValue), .trackGroup(rhsValue)): return lhsValue == rhsValue
+    case let (.level(lhsValue), .level(rhsValue)): return lhsValue == rhsValue
+    case let (.venue(lhsValue), .venue(rhsValue)): return lhsValue == rhsValue
     default: return false
     }
 }
@@ -168,99 +59,82 @@ struct ScheduleFilter: Equatable {
     
     // MARK: - Properties
     
-    var selections = [FilterSectionType: FilterSelection]() {
+    /// Filters that have been enabled
+    private(set) var activeFilters = Set<Filter>() {
         
         didSet {
-            
-            var oldFilter = self
-            oldFilter.selections = oldValue
-            let wasHidingPastTalks = oldFilter.shoudHidePastTalks()
-            
-            if shoudHidePastTalks() != wasHidingPastTalks {
+            if oldValue.contains(.activeTalks) != activeFilters.contains(.activeTalks) {
                 
                 didChangeActiveTalks = true
             }
         }
     }
-    var filterSections = [FilterSection]()
+    
+    /// All possible filters
+    private(set) var allFilters = [FilterCategory: [Filter]]()
     
     /// Whether a selection has been made in the `Active Talks` filters.
     private(set) var didChangeActiveTalks = false
     
-    // MARK: - Initialization
-    
-    init() {
-        
-        // setup empty selections
-        selections[FilterSectionType.ActiveTalks] = .names([])
-        selections[FilterSectionType.TrackGroup] = .identifiers([])
-        selections[FilterSectionType.Level] = .names([])
-        selections[FilterSectionType.Tag] = .names([])
-        selections[FilterSectionType.Venue] = .identifiers([])
-    }
-    
     // MARK: - Methods
     
-    /// Updates the filter sections.
+    /// Updates the filter categories.
     /// Removes selections from deleted filters.
-    mutating func updateSections() {
+    mutating func update() {
         
-        filterSections = []
+        // reset valid filters
+        allFilters.removeAll()
         
+        // fetch current summit
         let context = Store.shared.managedObjectContext
         let summitID = SummitManager.shared.summit.value
         guard let summit = try! SummitManagedObject.find(summitID, context: context)
-            else { return }
+            else { activeFilters.removeAll(); return }
         
-        let summitTrackGroups = try! TrackGroup.scheduled(for: summitID, context: context)
-        let levels = try! Set(context.managedObjects(PresentationManagedObject).map({ $0.level ?? "" })).filter({ $0 != "" }).sort()
+        // fetch data
+        let trackGroups = try! TrackGroup.scheduled(for: summitID, context: context)
+        let levels = try! Set(context.managedObjects(PresentationManagedObject.self, predicate: NSPredicate(format: "event.summit == %@", summit))
+            .map({ $0.level ?? "" }))
+            .filter({ $0 != "" })
+            .sort()
         let venues = try! context.managedObjects(Venue.self, predicate: NSPredicate(format: "summit == %@", summit), sortDescriptors: VenueManagedObject.sortDescriptors)
         
-        var filterSection: FilterSection
-        
-        filterSection = FilterSection(type: .ActiveTalks, name: "ACTIVE TALKS")
-        let activeTalksFilters = ["Hide Past Talks"]
+        // populate filter categories
         
         let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
-        
         let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
         let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
         let now = NSDate()
         
         if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
-            filterSection.items = activeTalksFilters.map { FilterSectionItem(identifier: 0, name: $0) }
+            allFilters[.activeTalks] = [.activeTalks]
         }
-        else {
+        
+        if trackGroups.isEmpty == false {
             
-            filterSection.items = []
+            allFilters[.trackGroup] = trackGroups.map { .trackGroup($0.identifier) }
         }
         
-        filterSections.append(filterSection)
+        if levels.isEmpty == false {
+            
+            allFilters[.level] = levels.map { .level($0) }
+        }
         
-        filterSection = FilterSection(type: .TrackGroup, name: "SUMMIT CATEGORY")
-        filterSection.items = summitTrackGroups.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
-        selections[FilterSectionType.TrackGroup]?.update(.identifiers(summitTrackGroups.identifiers))
+        if venues.isEmpty == false {
+            
+            allFilters[.venue] = venues.map { .venue($0.identifier) }
+        }
         
-        filterSections.append(filterSection)
+        // remove invalid active filters
+        activeFilters = Set(activeFilters.filter { (filter) in allFilters.values.contains { $0.contains(filter) } })
         
-        filterSection = FilterSection(type: .Level, name: "LEVEL")
-        filterSection.items = levels.map { FilterSectionItem(identifier: 0, name: $0) }
-        selections[FilterSectionType.Level]?.update(.names(levels))
-        
-        filterSections.append(filterSection)
-        
-        filterSection = FilterSection(type: .Venue, name: "VENUE")
-        filterSection.items = venues.map { FilterSectionItem(identifier: $0.identifier, name: $0.name) }
-        selections[FilterSectionType.Venue]?.update(.identifiers(venues.identifiers))
-        
-        filterSections.append(filterSection)
-        
-        updateActiveTalksSelections()
+        // automatically activate "Active Talks" filter if conditions apply.
+        updateActiveTalks()
     }
     
-    /// Updates the active talks selections
-    mutating func updateActiveTalksSelections() {
+    /// Updates the active talks selection.
+    mutating func updateActiveTalks() {
         
         let context = Store.shared.managedObjectContext
         let summitID = SummitManager.shared.summit.value
@@ -268,7 +142,6 @@ struct ScheduleFilter: Equatable {
             else { return }
         
         let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
-        
         let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
         let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
         let now = NSDate()
@@ -279,60 +152,59 @@ struct ScheduleFilter: Equatable {
             if didChangeActiveTalks == false {
                 
                 // start hiding active talks
-                selections[FilterSectionType.ActiveTalks] = .names(["Hide Past Talks"])
+                activeFilters.insert(.activeTalks)
             }
         }
         else {
             
             // reset active talks selections if the summit has finished (or hasnt started)
-            selections[FilterSectionType.ActiveTalks] = .names([])
+            activeFilters.remove(.activeTalks)
         }
     }
     
-    func areAllSelectedForType(type: FilterSectionType) -> Bool {
-        if (filterSections.count == 0) {
-            return false
-        }
-        let filterSection = filterSections.filter() { $0.type == type }.first!
-        return filterSection.items.count == selections[type]?.rawValue.count
+    mutating func clear() {
+        
+        activeFilters.removeAll()
     }
     
-    func hasActiveFilters() -> Bool {
+    mutating func enable(filter newFilter: Filter) -> Bool {
         
-        for values in selections.values {
-            
-            if values.rawValue.count > 0 {
-                
-                return true
-            }
-        }
+        let validFilter = allFilters.values.contains { $0.contains(newFilter) }
         
-        return false
+        guard validFilter else { return false }
+        
+        activeFilters.insert(newFilter)
+        
+        return true
     }
     
-    mutating func clearActiveFilters() {
-        for key in selections.keys {
-            selections[key]?.removeAll()
-        }
+    mutating func disable(filter filter: Filter) -> Bool {
+        
+        let validFilter = allFilters.values.contains { $0.contains(filter) }
+        
+        guard validFilter && activeFilters.contains(filter) else { return false }
+        
+        activeFilters.remove(filter)
+        
+        return true
     }
     
-    func shoudHidePastTalks() -> Bool {
-        var hidePastTalks = false
+    // MARK: - Accessors
+    
+    /// Whether the schedule filter has active filters.
+    var active: Bool {
         
-        if let activeTalks = selections[FilterSectionType.ActiveTalks]?.rawValue as? [String] {
-            if activeTalks.contains("Hide Past Talks") {
-                hidePastTalks = true
-            }
-        }
-        
-        return hidePastTalks
+        return activeFilters.isEmpty == false
     }
 }
 
 func == (lhs: ScheduleFilter, rhs: ScheduleFilter) -> Bool {
     
-    return lhs.selections == rhs.selections
-        && lhs.filterSections == rhs.filterSections
+    let lhsFilters = lhs.allFilters.values.reduce([Filter](), combine: { $0.0 + $0.1 })
+    let rhsFilters = rhs.allFilters.values.reduce([Filter](), combine: { $0.0 + $0.1 })
+    
+    return lhs.activeFilters == rhs.activeFilters
+        && lhsFilters == rhsFilters
         && lhs.didChangeActiveTalks == rhs.didChangeActiveTalks
 }
 
@@ -353,8 +225,8 @@ final class FilterManager {
     
     private init() {
         
-        // update sections from Realm
-        filter.value.updateSections()
+        // update sections from Core Data
+        filter.value.update()
         
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
         
@@ -369,16 +241,16 @@ final class FilterManager {
     
     @objc private func timerUpdate(sender: NSTimer) {
         
-        filter.value.updateActiveTalksSelections()
+        filter.value.updateActiveTalks()
     }
     
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         
-        self.filter.value.updateSections()
+        self.filter.value.update()
     }
     
     private func currentSummitChanged(summit: Identifier, oldValue: Identifier) {
         
-        self.filter.value.updateSections()
+        self.filter.value.update()
     }
 }

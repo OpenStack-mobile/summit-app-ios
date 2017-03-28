@@ -12,11 +12,9 @@ import CoreData
 import CoreSummit
 import XLPagerTabStrip
 
-final class NotificationsViewController: UITableViewController, NSFetchedResultsControllerDelegate, IndicatorInfoProvider {
+final class NotificationsViewController: TableViewController, IndicatorInfoProvider {
     
     // MARK: - Properties
-    
-    private var fetchedResultsController: NSFetchedResultsController!
     
     private lazy var dateFormatter: NSDateFormatter = {
        
@@ -24,18 +22,30 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         
         dateFormatter.dateStyle = .ShortStyle
         
-        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.timeStyle = .MediumStyle
         
         return dateFormatter
     }()
     
+    private var unreadNotificationsObserver: Int?
+    
     // MARK: - Loading
+    
+    deinit {
+        
+        if let observer = self.unreadNotificationsObserver {
+            
+            PushNotificationManager.shared.unreadNotifications.remove(observer)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications.observe(unreadNotificationsChanged)
         
         configureView()
     }
@@ -113,26 +123,35 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         return Notification(managedObject: managedObject)
     }
     
-    private func configure(cell cell: UITableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: NotificationTableViewCell, at indexPath: NSIndexPath) {
         
         let notification = self[indexPath]
         
-        cell.textLabel!.text = notification.body
+        cell.notificationLabel.text = notification.body
         
-        cell.detailTextLabel!.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+        let unread = PushNotificationManager.shared.unreadNotifications.value.contains(notification.identifier)
+        
+        cell.notificationLabel.font = unread ? UIFont.boldSystemFontOfSize(17) : UIFont.systemFontOfSize(17)
+        
+        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+    }
+    
+    private func unreadNotificationsChanged(newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
+        
+        let managedObjects = (self.fetchedResultsController.fetchedObjects ?? []) as! [NotificationManagedObject]
+        
+        let changedNotifications = managedObjects.filter({ newValue.contains($0.identifier) })
+        
+        let indexPaths = changedNotifications.map { fetchedResultsController.indexPathForObject($0)! }
+        
+        tableView.beginUpdates()
+        
+        tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .None)
+        
+        tableView.endUpdates()
     }
     
     // MARK: - UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return self.fetchedResultsController.sections?.count ?? 0
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -167,69 +186,49 @@ final class NotificationsViewController: UITableViewController, NSFetchedResults
         return UITableViewCellEditingStyle(rawValue: 3)!
     }
     
-    // MARK: - NSFetchedResultsControllerDelegate
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        
-        self.tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        
-        self.tableView.endUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
-        switch type {
-        case .Insert:
-            
-            if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-            }
-        case .Delete:
-            
-            if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-            }
-        case .Update:
-            if let updateIndexPath = indexPath,
-                let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath) {
-                
-                self.configure(cell: cell, at: updateIndexPath)
-            }
-        case .Move:
-            
-            if let deleteIndexPath = indexPath {
-                self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-            }
-            
-            if let insertIndexPath = newIndexPath {
-                self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-            }
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        
-        switch type {
-            
-        case .Insert:
-            
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
-            
-        case .Delete:
-            
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
-            
-        default: break
-        }
-    }
-    
     // MARK: - IndicatorInfoProvider
     
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Notifications")
     }
+    
+    // MARK: - Segue
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        switch identifier {
+            
+        case R.segue.notificationsViewController.showNotification.identifier:
+            
+            return editing == false
+            
+        default: fatalError()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        switch segue.identifier! {
+            
+        case R.segue.notificationsViewController.showNotification.identifier:
+            
+            let notification = self[tableView.indexPathForSelectedRow!]
+            
+            let notificationViewController = segue.destinationViewController as! NotificationDetailViewController
+            
+            notificationViewController.notification = notification
+            
+        default: fatalError()
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+final class NotificationTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var notificationLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
 }

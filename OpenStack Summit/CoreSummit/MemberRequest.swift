@@ -37,7 +37,7 @@ public extension Store {
                 
                 try member.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success
@@ -78,7 +78,9 @@ public struct MemberResponse {
         
         public let groups: [Group]
         
-        public let feedback: [MemberFeedback]
+        public let feedback: [Feedback]
+        
+        public let favoriteEvents: [Identifier]
     }
     
     public struct Event: Named {
@@ -105,6 +107,12 @@ public struct MemberResponse {
         
         public let type: EventType
         
+        public let rsvp: String?
+        
+        public let externalRSVP: Bool
+        
+        public let willRecord: Bool
+        
         public let sponsors: [Company]
         
         public let tags: [Tag]
@@ -114,8 +122,6 @@ public struct MemberResponse {
         public let presentation: Presentation
         
         public let videos: [Video]
-        
-        public let rsvp: String?
         
         public let groups: [Group]
     }
@@ -127,6 +133,21 @@ public struct MemberResponse {
         public let name: String
         
         public let groups: [TrackGroup]
+    }
+    
+    public struct Feedback: FeedbackProtocol {
+        
+        public let identifier: Identifier
+        
+        public let rate: Int
+        
+        public let review: String
+        
+        public let date: Date
+        
+        public let event: Identifier
+        
+        public let member: Identifier
     }
     
     public typealias Presentation = PresentationDataUpdate
@@ -160,6 +181,8 @@ public func == (lhs: MemberResponse.Event, rhs: MemberResponse.Event) -> Bool {
         && lhs.videos == rhs.videos
         && lhs.rsvp == rhs.rsvp
         && lhs.groups == rhs.groups
+        && lhs.externalRSVP == rhs.externalRSVP
+        && lhs.willRecord == rhs.willRecord
 }
 
 public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool {
@@ -176,6 +199,7 @@ public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool 
         && lhs.groups == rhs.groups
         && lhs.groupEvents == rhs.groupEvents
         && lhs.feedback == rhs.feedback
+        && lhs.favoriteEvents == rhs.favoriteEvents
 }
 
 public func == (lhs: MemberResponse.Track, rhs: MemberResponse.Track) -> Bool {
@@ -183,4 +207,14 @@ public func == (lhs: MemberResponse.Track, rhs: MemberResponse.Track) -> Bool {
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.groups == rhs.groups
+}
+
+public func == (lhs: MemberResponse.Feedback, rhs: MemberResponse.Feedback) -> Bool {
+    
+    return lhs.identifier == rhs.identifier
+        && lhs.rate == rhs.rate
+        && lhs.review == rhs.review
+        && lhs.date == rhs.date
+        && lhs.event == lhs.event
+        && lhs.member == lhs.member
 }

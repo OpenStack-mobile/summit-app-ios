@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10117" systemVersion="16B2553a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="MXg-Ox-HXh">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MXg-Ox-HXh">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Events-->
@@ -12,7 +17,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sl-xQ-8Be" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="-1122"/>
+            <point key="canvasLocation" x="-24" y="-1024"/>
         </scene>
         <!--Venues-->
         <scene sceneID="kEb-Mo-Faa">
@@ -22,32 +27,58 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAp-J1-vkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-38" y="-965"/>
+            <point key="canvasLocation" x="-20" y="-901"/>
         </scene>
         <!--Speakers-->
         <scene sceneID="GJa-Pk-Zkf">
             <objects>
                 <viewControllerPlaceholder storyboardName="Speakers" id="hsv-f5-hCX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="K9t-Ca-pf1"/>
+                    <tabBarItem key="tabBarItem" title="Speakers" id="K9t-Ca-pf1"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v67-Bb-A5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-32.5" y="-879"/>
+            <point key="canvasLocation" x="-4" y="-778"/>
+        </scene>
+        <!--Videos-->
+        <scene sceneID="Xg3-zC-StZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Videos" id="1YJ-nr-3ur" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Videos" id="Nmx-gN-1ab"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c8c-1K-9kx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-26" y="-1160"/>
         </scene>
         <!--Summits-->
         <scene sceneID="Tsz-cB-SnQ">
             <objects>
                 <tableViewController id="Vk1-XG-8TI" customClass="OSSTVSummitsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="6zG-jg-kH8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="40" sectionFooterHeight="40" id="6zG-jg-kH8">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" id="fxZ-Ej-0mJ">
-                                <rect key="frame" x="0.0" y="199" width="1880" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummitTableViewCell" textLabel="UOO-W6-5T4" detailTextLabel="YqW-vz-X8b" style="IBUITableViewCellStyleSubtitle" id="fxZ-Ej-0mJ">
+                                <rect key="frame" x="0.0" y="40" width="1920" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fxZ-Ej-0mJ" id="CcZ-JY-kOD">
-                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Lima, Peru" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UOO-W6-5T4">
+                                            <rect key="frame" x="20" y="4" width="176" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="April 24-25, 2016" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YqW-vz-X8b">
+                                            <rect key="frame" x="20" y="50" width="292" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -88,12 +119,13 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="nGB-EG-VQT">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="dNH-La-dHF"/>
-                        <segue destination="wTD-oI-ERk" kind="relationship" relationship="viewControllers" id="ykk-Me-Z25"/>
-                        <segue destination="hsv-f5-hCX" kind="relationship" relationship="viewControllers" id="csR-Tw-bOb"/>
+                        <segue destination="1YJ-nr-3ur" kind="relationship" relationship="viewControllers" id="X3F-ax-o1u"/>
+                        <segue destination="bLQ-ek-K4m" kind="relationship" relationship="viewControllers" id="LA9-nM-Hkl"/>
+                        <segue destination="wTD-oI-ERk" kind="relationship" relationship="viewControllers" id="igP-Uj-khS"/>
+                        <segue destination="hsv-f5-hCX" kind="relationship" relationship="viewControllers" id="tag-5u-ZZB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTo-uj-EgU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -101,4 +133,9 @@
             <point key="canvasLocation" x="-1438" y="-587"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <nil key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

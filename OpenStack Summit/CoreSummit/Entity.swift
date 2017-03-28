@@ -93,6 +93,33 @@ public extension Entity {
         
         return try context.findOrCreate(entity, resourceID: resourceID, identifierProperty: self.identifierProperty, returnsObjectsAsFaults: returnsObjectsAsFaults, includesSubentities: includesSubentities)
     }
+    
+    static func filter(predicate: NSPredicate? = nil,
+                       sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
+                       fetchLimit: Int? = nil,
+                       returnsObjectsAsFaults: Bool = true,
+                       includesSubentities: Bool = true,
+                       context: NSManagedObjectContext) throws -> [Entity] {
+        
+        let entity = self.entity(in: context)
+        
+        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        
+        if let limit = fetchLimit {
+            
+            fetchRequest.fetchLimit = limit
+        }
+        
+        fetchRequest.includesSubentities = includesSubentities
+        
+        fetchRequest.returnsObjectsAsFaults = returnsObjectsAsFaults
+        
+        fetchRequest.predicate = predicate
+        
+        fetchRequest.sortDescriptors = sort
+        
+        return try context.executeFetchRequest(fetchRequest) as! [Entity]
+    }
 }
 
 public extension Fault where Value: CoreDataDecodable, Value.ManagedObject: Entity {
@@ -122,13 +149,39 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
     @inline(__always)
     static func find(identifier: Identifier,
                      context: NSManagedObjectContext,
-                     returnsObjectsAsFaults: Bool = true,
                      includesSubentities: Bool = true) throws -> Self? {
         
-        guard let managedObject = try ManagedObject.find(identifier, context: context, returnsObjectsAsFaults: returnsObjectsAsFaults,includesSubentities: includesSubentities)
+        guard let managedObject = try ManagedObject.find(identifier,
+                                                         context: context,
+                                                         returnsObjectsAsFaults: false,
+                                                         includesSubentities: includesSubentities)
             else { return nil }
         
         return Self.init(managedObject: managedObject)
+    }
+    
+    static func filter(predicate: NSPredicate,
+                       sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
+                       fetchLimit: Int? = nil,
+                       context: NSManagedObjectContext) throws -> [Self] {
+        
+        let managedObjects = try ManagedObject.filter(predicate,
+                                                      sort: sort,
+                                                      fetchLimit: fetchLimit,
+                                                      returnsObjectsAsFaults: false,
+                                                      includesSubentities: true,
+                                                      context: context) as! [ManagedObject]
+        
+        return Self.from(managedObjects: managedObjects)
+    }
+    
+    static func all(context: NSManagedObjectContext) throws -> [Self] {
+        
+        let managedObjects = try ManagedObject.filter(returnsObjectsAsFaults: false,
+                                                      includesSubentities: true,
+                                                      context: context) as! [ManagedObject]
+        
+        return Self.from(managedObjects: managedObjects)
     }
 }
 

@@ -45,7 +45,7 @@ public extension Store {
                 
                 try message.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success

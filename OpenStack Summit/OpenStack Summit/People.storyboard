@@ -1,46 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2553a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sWJ-Ue-nbn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bd3-k1-gGp">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+        <array key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Speaker List View Controller-->
-        <scene sceneID="Od4-8f-BIf">
+        <!--SPEAKERS-->
+        <scene sceneID="2wy-IL-Qjh">
             <objects>
-                <viewController storyboardIdentifier="SpeakerListViewController" id="sWJ-Ue-nbn" customClass="SpeakerListViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5x5-DE-5IQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="7Py-XE-TdC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GR6-Ch-a0i">
+                <tableViewController storyboardIdentifier="SpeakersViewController" title="SPEAKERS" id="bd3-k1-gGp" customClass="SpeakersViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" id="7FC-X2-Vyg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWI-s2-9Wq" customClass="PeopleListView" customModule="OpenStackSummit" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="QWI-s2-9Wq" firstAttribute="leading" secondItem="GR6-Ch-a0i" secondAttribute="leading" id="Gk8-H0-pnM"/>
-                            <constraint firstItem="7Py-XE-TdC" firstAttribute="top" secondItem="QWI-s2-9Wq" secondAttribute="bottom" id="Kwl-nr-0Ji"/>
-                            <constraint firstAttribute="trailing" secondItem="QWI-s2-9Wq" secondAttribute="trailing" id="YaW-A0-3eL"/>
-                            <constraint firstItem="QWI-s2-9Wq" firstAttribute="top" secondItem="5x5-DE-5IQ" secondAttribute="bottom" id="vVq-w6-Yg3"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="peopleListView" destination="QWI-s2-9Wq" id="fIz-8G-VkU"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TZq-0h-hGL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="peopleTableViewCell" rowHeight="109" id="v7x-hs-H04" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v7x-hs-H04" id="y1U-b1-5Vf">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="nVB-zZ-sSm">
+                                            <rect key="frame" x="15" y="24.5" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="ZPJ-kp-nWi"/>
+                                                <constraint firstAttribute="width" constant="60" id="uYy-2s-1BC"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uJf-tN-YuK">
+                                            <rect key="frame" x="91" y="18" width="213" height="72.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9c-HY-8Jj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGi-bY-NCO">
+                                                    <rect key="frame" x="0.0" y="31.5" width="213" height="41"/>
+                                                    <string key="text">Multiline Title
+iOS Developer</string>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uJf-tN-YuK" firstAttribute="leading" secondItem="nVB-zZ-sSm" secondAttribute="trailing" constant="16" id="5Qt-7E-80f"/>
+                                        <constraint firstItem="uJf-tN-YuK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y1U-b1-5Vf" secondAttribute="top" constant="16" id="KDn-2C-XAa"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nVB-zZ-sSm" secondAttribute="bottom" constant="15" id="KFg-r4-d5Z"/>
+                                        <constraint firstItem="nVB-zZ-sSm" firstAttribute="leading" secondItem="y1U-b1-5Vf" secondAttribute="leading" constant="15" id="LtB-Po-YuU"/>
+                                        <constraint firstItem="nVB-zZ-sSm" firstAttribute="centerY" secondItem="y1U-b1-5Vf" secondAttribute="centerY" id="RNC-dV-lYs"/>
+                                        <constraint firstAttribute="trailing" secondItem="uJf-tN-YuK" secondAttribute="trailing" constant="16" id="Vd7-w6-Jdg"/>
+                                        <constraint firstItem="uJf-tN-YuK" firstAttribute="centerY" secondItem="y1U-b1-5Vf" secondAttribute="centerY" id="Xtg-j9-4p0"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="l9c-HY-8Jj" id="gNb-id-e6s"/>
+                                    <outlet property="pictureImageView" destination="nVB-zZ-sSm" id="Eh3-1l-2Q3"/>
+                                    <outlet property="titleLabel" destination="rGi-bY-NCO" id="B1N-ss-Vws"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bd3-k1-gGp" id="MEH-qK-lVy"/>
+                            <outlet property="delegate" destination="bd3-k1-gGp" id="CI0-wv-EoH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="SPEAKERS" id="HjV-OH-wbq">
+                        <barButtonItem key="backBarButtonItem" title=" " id="WB9-aM-bBe"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zMR-tl-fOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3367" y="288"/>
+            <point key="canvasLocation" x="3373.125" y="164.78873239436621"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="generic-user-avatar" width="122" height="122"/>
+    </resources>
 </document>

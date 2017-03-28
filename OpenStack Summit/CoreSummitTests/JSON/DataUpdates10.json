@@ -1,0 +1,92 @@
+{
+	"id": 713616,
+	"entity_id": 16636,
+	"class_name": "MyFavorite",
+	"created": 1487079852,
+	"type": "INSERT",
+	"entity": {
+		"id": 16636,
+		"title": "Big Data at Banco Santander",
+		"description": "<p> <span class=\"s1\">Cloud is one of the pillars to support our Digital transformation. We decided to use Openstack as a technology enabler to build our Private Cloud capabilities, and to support Big Data and Real Time Analytics uses cases. Good engineering work has being done to adapt our Openstack Cloud to support these Big Data use cases. We have received some recognition for our Corporate Strategy in this area and Openstack has helped us to support it.</span></p>",
+		"social_description": null,
+		"start_date": 1477380000,
+		"end_date": 1477380600,
+		"location_id": 207,
+		"summit_id": 7,
+		"type_id": 86,
+		"class_name": "Presentation",
+		"allow_feedback": true,
+		"avg_feedback_rate": 0,
+		"is_published": true,
+		"head_count": 0,
+		"rsvp_link": null,
+		"track_id": 91,
+		"level": "N/A",
+		"moderator_speaker_id": 0,
+		"problem_addressed": null,
+		"attendees_expected_learnt": null,
+		"sponsors": [
+
+		],
+		"tags": [
+
+		],
+		"speakers": [
+			{
+				"id": 10852,
+				"first_name": "Luis",
+				"last_name": "Enriquez",
+				"title": "Head of Architecture, Santander Group",
+				"bio": "<p class=\"p1\"><span class=\"s1\">As Lead Architect and IT Consultant for many years, Luis has been helping Banking and Insurance companies to design, implement and deploy application architectures and platforms to develop and run business critical systems. </span><span class=\"s1\">Since he joined Santander Group, he is leading the “Serenity” project, a new architecture introducing Cloud, BigData, APIs and Agile &amp; DevOps to boost digital transformation into the banks, bringing new technical capabilities to the business. </span>Given his background as consultant, he is highly customer-oriented and focused in delivering value.</p>",
+				"irc": null,
+				"twitter": null,
+				"presentations": [
+					16636
+				],
+				"moderated_presentations": [
+
+				],
+				"pic": "https://devbranch.openstack.org/profile_images/speakers/10852"
+			},
+			{
+				"id": 10867,
+				"first_name": "Juan Antonio",
+				"last_name": "de la Fuente",
+				"title": "Cloud Engineering Director, Produban",
+				"bio": "<p>.</p>",
+				"irc": null,
+				"twitter": null,
+				"presentations": [
+					16636
+				],
+				"moderated_presentations": [
+
+				],
+				"pic": "https://devbranch.openstack.org/profile_images/speakers/10867",
+				"gender": "Male",
+				"member_id": 75041
+			}
+		],
+		"slides": [
+
+		],
+		"links": [
+
+		],
+		"videos": [
+			{
+				"id": 33202,
+				"name": "Big Data at Banco Santander",
+				"description": null,
+				"display_on_site": true,
+				"featured": true,
+				"order": 0,
+				"presentation_id": 16636,
+				"youtube_id": "3FFTetNKBXg",
+				"data_uploaded": 1477389814,
+				"highlighted": true,
+				"views": 1526
+			}
+		]
+	}
+}

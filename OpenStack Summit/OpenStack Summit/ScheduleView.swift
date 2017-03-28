@@ -36,27 +36,27 @@ final class ScheduleView: UIView {
         
         NSBundle.mainBundle().loadNibNamed("ScheduleView", owner: self, options: nil)
         
-        dayPicker.backgroundColor = UIColor(hexaString: "#E5E5E5")
+        dayPicker.backgroundColor = UIColor(hexString: "#E5E5E5")
         
-        dayPicker.dayNumberActiveColor = UIColor(hexaString: "#4A4A4A")
-        dayPicker.dayNumberInactiveColor = UIColor(hexaString: "#9B9B9B")
-        dayPicker.dayNumberSelectedColor = UIColor(hexaString: "#FFFFFF")
+        dayPicker.dayNumberActiveColor = UIColor(hexString: "#4A4A4A")
+        dayPicker.dayNumberInactiveColor = UIColor(hexString: "#9B9B9B")
+        dayPicker.dayNumberSelectedColor = UIColor(hexString: "#FFFFFF")
         
         dayPicker.dayNumberActiveFont = UIFont.systemFontOfSize(13)
         dayPicker.dayNumberInactiveFont = UIFont.systemFontOfSize(13)
         dayPicker.dayNumberSelectedFont = UIFont.systemFontOfSize(13)
         
-        dayPicker.dayNameActiveColor = UIColor(hexaString: "#4A4A4A")
-        dayPicker.dayNameInactiveColor = UIColor(hexaString: "#9B9B9B")
-        dayPicker.dayNameSelectedColor = UIColor(hexaString: "#FFFFFF")
+        dayPicker.dayNameActiveColor = UIColor(hexString: "#4A4A4A")
+        dayPicker.dayNameInactiveColor = UIColor(hexString: "#9B9B9B")
+        dayPicker.dayNameSelectedColor = UIColor(hexString: "#FFFFFF")
         
         dayPicker.dayNameActiveFont = UIFont.systemFontOfSize(13)
         dayPicker.dayNameInactiveFont = UIFont.systemFontOfSize(13)
         dayPicker.dayNameSelectedFont = UIFont.systemFontOfSize(13)
         
-        dayPicker.backgroundActiveColor = UIColor(hexaString: "#E5E5E5")
-        dayPicker.backgroundInactiveColor = UIColor(hexaString: "#E5E5E5")
-        dayPicker.backgroundSelectedColor = UIColor(hexaString: "#4A4A4A")
+        dayPicker.backgroundActiveColor = UIColor(hexString: "#E5E5E5")
+        dayPicker.backgroundInactiveColor = UIColor(hexString: "#E5E5E5")
+        dayPicker.backgroundSelectedColor = UIColor(hexString: "#4A4A4A")
         
         addSubview(self.view)
     }

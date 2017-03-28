@@ -22,9 +22,12 @@ final class MyProfileViewController: RevealTabStripViewController {
     override func viewDidLoad() {
         
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        
         super.viewDidLoad()
+        
         buttonBarView.collectionViewLayout = KTCenterFlowLayout()
-        navigationController?.navigationBar.topItem?.title = "MY SUMMIT"
+        
+        title = "MY SUMMIT"
         
         reloadPagerTabStripView()
     }
@@ -34,18 +37,18 @@ final class MyProfileViewController: RevealTabStripViewController {
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
-        let memberProfileDetailViewController = R.storyboard.member.memberProfileDetailViewController()!
-        let feedbackGivenListViewController = R.storyboard.feedback.feedbackGivenListViewController()!
+        let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
+        let memberProfileDetailViewController = R.storyboard.member.personDetailViewController()!
         
         var childViewControllers = [personalScheduleViewController,
-                                    memberProfileDetailViewController,
-                                    feedbackGivenListViewController]
+                                    favoriteEventsViewController,
+                                    memberProfileDetailViewController]
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
             let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
             speakerPresentationsViewController.speaker = speaker.identifier
-            childViewControllers.append(speakerPresentationsViewController)
+            childViewControllers.insert(speakerPresentationsViewController, atIndex: 0)
         }
         
         return childViewControllers

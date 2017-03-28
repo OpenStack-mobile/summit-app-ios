@@ -44,11 +44,19 @@ final class InboxViewController: RevealTabStripViewController, RevealViewControl
         
         childViewControllers.append(notificationsVC)
         
+        #if DEBUG
         if Store.shared.authenticatedMember != nil {
             
             let teamsVC = R.storyboard.teams.initialViewController()!
             
             childViewControllers.append(teamsVC)
+        }
+        #endif
+        
+        if childViewControllers.count == 1 {
+            
+            // hide tabs
+            settings.style.buttonBarHeight = 0
         }
         
         return childViewControllers

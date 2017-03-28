@@ -8,10 +8,9 @@
 
 import XLPagerTabStrip
 import KTCenterFlowLayout
-import SwiftSpinner
 import CoreSummit
 
-final class EventsViewController: RevealTabStripViewController, ShowActivityIndicatorProtocol, MessageEnabledViewController {
+final class EventsViewController: RevealTabStripViewController, MessageEnabledViewController {
     
     // MARK: - Properties
     
@@ -26,8 +25,8 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         
         didSet {
             
-            filterButton?.tintColor = activeFilterIndicator ? UIColor(hexaString: "#F8E71C") : UIColor.whiteColor()
-            navigationController?.toolbar.barTintColor = UIColor(hexaString: "#F8E71C")
+            filterButton?.tintColor = activeFilterIndicator ? UIColor(hexString: "#F8E71C") : UIColor.whiteColor()
+            navigationController?.toolbar.barTintColor = UIColor(hexString: "#F8E71C")
             navigationController?.toolbar.translucent = false
             navigationController?.setToolbarHidden(!activeFilterIndicator, animated: !activeFilterIndicator)
         }
@@ -61,7 +60,7 @@ final class EventsViewController: RevealTabStripViewController, ShowActivityIndi
         message.style = .Plain
         message.target = self
         message.action = #selector(EventsViewController.clearFilters(_:))
-        message.tintColor = UIColor(hexaString: "#4A4A4A")
+        message.tintColor = UIColor(hexString: "#4A4A4A")
         message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(15)], forState: .Normal)
 
         let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: #selector(EventsViewController.clearFilters(_:)))

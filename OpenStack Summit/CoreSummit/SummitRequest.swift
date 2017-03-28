@@ -31,7 +31,7 @@ public extension Store {
             
             managedObject.initialDataLoad = NSDate()
             
-            try context.save()
+            try context.validateAndSave()
         }
     
         completion(.Value(summit))
@@ -75,7 +75,7 @@ public extension Store {
                 
                 managedObject.initialDataLoad = NSDate()
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success

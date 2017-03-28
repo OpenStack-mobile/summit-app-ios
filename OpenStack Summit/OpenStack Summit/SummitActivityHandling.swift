@@ -56,6 +56,8 @@ extension SummitActivityHandling {
     }
 }
 
+#if os(iOS)
+
 // MARK: - View Controller
 
 protocol SummitActivityHandlingViewController: class, SummitActivityHandling {
@@ -109,3 +111,5 @@ extension SummitActivityHandlingViewController {
         AppDelegate.shared.view(screen)
     }
 }
+
+#endif

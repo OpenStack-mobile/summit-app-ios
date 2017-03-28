@@ -3,153 +3,35 @@
 	"first_name": "Jimmy",
 	"last_name": "McArthur",
 	"gender": "Male",
-	"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+	"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. When I'm not working, I enjoy taking cooking and life lessons from my 6 year old daughter.</p>",
 	"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
 	"irc": "jamesmcarthur",
 	"twitter": "jimmymcarthur",
+	"state": "TX",
+	"country": "US",
 	"pic": "https://devbranch.openstack.org/profile_images/members/1395",
-	"groups_events": [
+	"affiliations": [
 		{
-			"id": 17451,
-			"title": "test group event #1",
-			"description": "<p>test group event #1</p>",
-			"social_description": "test group event #1",
-			"start_date": 1477299600,
-			"end_date": 1477305900,
-			"location_id": 0,
-			"summit_id": 7,
-			"class_name": "SummitEvent",
-			"allow_feedback": false,
-			"avg_feedback_rate": 0,
-			"is_published": true,
-			"head_count": 0,
-			"rsvp_link": null,
-			"sponsors": [
-
-			],
-			"tags": [
-
-			],
-			"type": {
-				"id": 111,
-				"name": "Groups Events",
-				"color": "#f0f0ee",
-				"black_out_times": false
-			},
-			"track": {
-				"id": 65,
-				"name": "Cultural & Organizational Change",
-				"description": "As the OpenStack community and ecosystem have matured, it's clear that people and processes are at the heart of cloud transformation, and technology is no longer the barrier. Join us to learn from organizations who have successfully navigated organizational change to gain agility, speed to market and developer satisfaction. ",
-				"code": "COG",
-				"track_groups": [
-					{
-						"id": 14,
-						"name": "Business & Strategy",
-						"color": "#E79837",
-						"description": "<p>IT leaders building their cloud business case are facing unique requirements to move faster and control costs within the bounds of industry regulations and business realities. In this track, we'll discuss how OpenStack is meeting enterprise IT technical requirements and cover topics relevant to planning your cloud strategy, including culture change, cost management, vendor strategy and recruiting. We'll also cover important emerging technology shifts such as Network Functions Virtualization and the growing use of cloud services in the telecom and carrier space.</p>",
-						"tracks": [
-							57,
-							58,
-							59,
-							60,
-							61,
-							62,
-							65,
-							67
-						]
-					}
-				]
-			},
-			"groups": [
-				{
-					"id": 2,
-					"title": "Administrators",
-					"description": null,
-					"code": "administrators"
-				},
-				{
-					"id": 5,
-					"title": "Foundation Members",
-					"description": null,
-					"code": "foundation-members"
-				},
-				{
-					"id": 6,
-					"title": "Foundation Staff",
-					"description": null,
-					"code": "foundation-staff"
-				}
-			]
-		}
-	],
-	"attendee": {
-		"id": 5966,
-		"summit_hall_checked_in": false,
-		"summit_hall_checked_in_date": null,
-		"shared_contact_info": true,
-		"member_id": 1395,
-		"schedule": [
-			15404,
-			16625,
-			15195,
-			16638,
-			15170,
-			15318,
-			16894,
-			16637,
-			16628,
-			15621,
-			17324,
-			16889,
-			17377,
-			16870,
-			15177,
-			17300,
-			17303,
-			17317,
-			17362,
-			17363,
-			17365,
-			17364,
-			15714,
-			16636
-		],
-		"tickets": [
-			14
-		]
-	},
-	"speaker": {
-		"id": 1,
-		"first_name": "Jimmy",
-		"last_name": "McArthur",
-		"title": "Senior Software Development Manager",
-		"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack.&nbsp;</p>",
-		"irc": "jimmymcarthur",
-		"twitter": "jamesmcarthur",
-		"presentations": {
-			"2": 16645
-		},
-		"moderated_presentations": [
-
-		],
-		"pic": "https://devbranch.openstack.org/profile_images/speakers/1"
-	},
-	"feedback": [
-		{
-			"id": 458,
-			"rate": 4,
-			"note": "Everything is awesome!",
-			"created_date": 1485333904,
-			"event_id": 16889,
-			"member_id": 1395
+			"id": 61747,
+			"start_date": 1064361600,
+			"end_date": 1448841600,
+			"owner_id": 1395,
+			"is_current": true,
+			"organization": {
+				"id": 195,
+				"name": "Tipit"
+			}
 		},
 		{
-			"id": 459,
-			"rate": 4,
-			"note": "Awesome!",
-			"created_date": 1485334038,
-			"event_id": 17300,
-			"member_id": 1395
+			"id": 96572,
+			"start_date": 1448928000,
+			"end_date": null,
+			"owner_id": 1395,
+			"is_current": true,
+			"organization": {
+				"id": 3,
+				"name": "OpenStack Foundation"
+			}
 		}
 	],
 	"groups": [
@@ -225,5 +107,189 @@
 			"description": null,
 			"code": "survey-testers"
 		}
+	],
+	"groups_events": [
+		{
+			"id": 18577,
+			"title": "Test event for \"fresh CESPIN test group\" ",
+			"description": "<p>Need to see if cespin+2 can see this.</p>",
+			"social_description": "test social",
+			"start_date": 1477208700,
+			"end_date": 1477217700,
+			"summit_id": 7,
+			"class_name": "SummitGroupEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": 0,
+			"is_published": true,
+			"head_count": 19,
+			"rsvp_link": null,
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"type": {
+				"id": 116,
+				"name": "Groups Events",
+				"color": "#f0f0ee",
+				"black_out_times": false
+			},
+			"location": {
+				"id": 177,
+				"name": "Born",
+				"description": null,
+				"location_type": "Internal",
+				"order": 0,
+				"class_name": "SummitVenueRoom",
+				"venue_id": 162,
+				"floor_id": 8,
+				"capacity": 16
+			},
+			"track": {
+				"id": 71,
+				"name": "Architectural Decisions",
+				"description": "If you are a cloud architect or involved in planning your cloud srategy, this track will discuss popular reference architectures, configuration options, workload optimiziation, and architecture show and tell, where experienced users will share their architectures and experiences.\t\t\t\t",
+				"code": "AD",
+				"track_groups": [
+					{
+						"id": 15,
+						"name": "Architecture & Operations",
+						"color": "#00cbea",
+						"description": "<p>The architecture &amp; operations conference is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.</p>",
+						"tracks": [
+							71,
+							68,
+							72,
+							73,
+							74,
+							75,
+							76,
+							77,
+							78,
+							69,
+							70
+						]
+					}
+				]
+			},
+			"groups": [
+				{
+					"id": 47,
+					"title": "fresh CESPIN test group",
+					"description": null,
+					"code": "fresh-cespin-test-group"
+				}
+			]
+		}
+	],
+	"team_memberships": [
+		{
+			"id": 1,
+			"member_id": 1395,
+			"permission": "ADMIN",
+			"team": {
+				"id": 1,
+				"name": "test team",
+				"description": "this is the description of my team",
+				"owner_id": 1395,
+				"created_at": 1487107244,
+				"updated_at": 1487107244,
+				"members": [
+					{
+						"id": 1,
+						"team_id": 1,
+						"permission": "ADMIN",
+						"member": {
+							"id": 1395,
+							"first_name": "Jimmy",
+							"last_name": "McArthur",
+							"gender": "Male",
+							"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. When I'm not working, I enjoy taking cooking and life lessons from my 6 year old daughter.</p>",
+							"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+							"irc": "jamesmcarthur",
+							"twitter": "jimmymcarthur",
+							"state": "TX",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+							"groups": [
+								1,
+								2,
+								4,
+								5,
+								8,
+								30,
+								32,
+								31,
+								14,
+								9,
+								38,
+								45
+							],
+							"affiliations": [
+								{
+									"id": 61747,
+									"start_date": 1064361600,
+									"end_date": 1448841600,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								},
+								{
+									"id": 96572,
+									"start_date": 1448928000,
+									"end_date": null,
+									"owner_id": 1395,
+									"is_current": true,
+									"organization": {
+										"id": 3,
+										"name": "OpenStack Foundation"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	],
+	"favorite_summit_events": [
+		17300
+	],
+	"attendee": {
+		"id": 5966,
+		"summit_hall_checked_in": false,
+		"summit_hall_checked_in_date": null,
+		"shared_contact_info": true,
+		"member_id": 1395,
+		"schedule": [
+			16889,
+			17300
+		],
+		"tickets": [
+			14
+		]
+	},
+	"speaker": {
+		"id": 1,
+		"first_name": "Jimmy",
+		"last_name": "McArthur",
+		"title": "Senior Software Development Manager",
+		"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack.&nbsp;</p>",
+		"irc": "jimmymcarthur",
+		"twitter": "jamesmcarthur",
+		"presentations": {
+			"2": 16645
+		},
+		"moderated_presentations": [
+
+		],
+		"pic": "https://devbranch.openstack.org/profile_images/speakers/1"
+	},
+	"feedback": [
+
 	]
 }

@@ -1,5 +1,7 @@
 # OpenStack Foundation Summit App
 
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=589d42c2ac95bf01009695f6&branch=develop&build=latest)](https://dashboard.buddybuild.com/apps/589d42c2ac95bf01009695f6/build/latest?branch=develop)
+
 The official app for the OpenStack Summit. ([iTunes](https://itunes.apple.com/us/app/openstack-foundation-summit/id1071261846?mt=8))
 
 Supports iOS, watchOS and tvOS.
@@ -18,7 +20,7 @@ Supports iOS, watchOS and tvOS.
 	```
 	CoreSummit/Staging.swift.xctemplate -> CoreSummit/Staging.swift
 	CoreSummit/Production.swift.xctemplate -> CoreSummit/Production.swift
-	OpenStack Summit/AppConsumerKey.swift.xctemplate -> OpenStack Summit/AppConsumerKey.swift
+	OpenStack Summit/AppSecrets.swift.xctemplate -> OpenStack Summit/AppSecrets.swift
 	```
 
 3. Generate .entitlements out of sample entitlements files
@@ -27,6 +29,8 @@ Supports iOS, watchOS and tvOS.
 	Debug.entitlements.xctemplate -> Debug.entitlements
 	Beta.entitlements.xctemplate -> Beta.entitlements
 	Release.entitlements.xctemplate -> Release.entitlements
+	OpenStackSummitTV.entitlements.xctemplate -> OpenStackSummitTV.entitlements
+	OpenStackSummitTVService.entitlements.xctemplate -> OpenStackSummitTVService.entitlements
 	```
 
 4. Add Firebase configuration files

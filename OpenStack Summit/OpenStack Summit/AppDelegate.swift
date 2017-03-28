@@ -29,7 +29,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
         
-    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.eventsViewController)
+    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.generalScheduleViewController)
     
     lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
     
@@ -58,8 +58,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         #endif
         
         // setup data poller
-        #if !MOCKED
+        #if DEBUG
         DataUpdatePoller.shared.log = { print("DataUpdatePoller: " + $0) }
+        #endif
+        #if !MOCKED
         DataUpdatePoller.shared.start()
         #endif
         
@@ -70,24 +72,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         SetAppearance()
         
         // Core Spotlight
-        if #available(iOS 9.0, *) {
+        if CSSearchableIndex.isIndexingAvailable() {
             
-            if CSSearchableIndex.isIndexingAvailable() {
-                
-                SpotlightController.shared.log = { print("SpotlightController: " + $0) }
-            }
+            SpotlightController.shared.log = { print("SpotlightController: " + $0) }
         }
         
         // Setup Notification Manager
+        #if DEBUG
         PushNotificationManager.shared.log = { print("PushNotificationManager: " + $0) }
+        #endif
         PushNotificationManager.shared.setupNotifications(application)
         PushNotificationManager.shared.reloadSubscriptions()
+        PushNotificationManager.shared.updateAppBadge()
         
         // setup FireBase
         FIRApp.configure()
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
-        
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
         // Add observer for InstanceID token refresh callback.
         NSNotificationCenter.defaultCenter().addObserver(self,
@@ -116,9 +116,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        
-        // yeah, this code is correct. It should delete notification badge when entering app
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -228,26 +225,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             return true
         }
         
-        print("Continue activity \(userActivity.activityType)")
+        print("Continue activity \(userActivity.activityType)\n\(userActivity.userInfo?.description ?? "")")
         
-        if #available(iOS 9.0, *) {
+        if userActivity.activityType == CSSearchableItemActionType {
             
-            if userActivity.activityType == CSSearchableItemActionType {
-                
-                guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-                    let searchURL = NSURL(string: searchIdentifierString)
-                    where searchURL.pathComponents?.count == 2
-                    else { return false }
-                
-                let searchTypeString = searchURL.pathComponents![0]
-                let identifierString = searchURL.pathComponents![1]
-                
-                guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
-                    let identifier = Int(identifierString)
-                    else { return false }
-                
-                return self.view(dataType, identifier: identifier)
-            }
+            guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                let searchURL = NSURL(string: searchIdentifierString)
+                where searchURL.pathComponents?.count == 2
+                else { return false }
+            
+            let searchTypeString = searchURL.pathComponents![0]
+            let identifierString = searchURL.pathComponents![1]
+            
+            guard let dataType = AppActivitySummitDataType(rawValue: searchTypeString),
+                let identifier = Int(identifierString)
+                else { return false }
+            
+            return self.view(dataType, identifier: identifier)
         }
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
@@ -327,12 +321,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             
             self.menuViewController.showEvents()
             
-            let _ = self.menuViewController.eventsViewController.generalScheduleViewController.view
-            let _ = self.menuViewController.eventsViewController.view
+            let _ = self.menuViewController.generalScheduleViewController.view
             
             let eventDetailVC = R.storyboard.event.eventDetailViewController()!
             eventDetailVC.event = identifier
-            self.menuViewController.eventsViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
+            self.menuViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
             
         case .speaker:
             

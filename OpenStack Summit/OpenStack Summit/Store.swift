@@ -35,12 +35,24 @@ extension Store {
     
     static let fileURL: NSURL = {
         
-        let cacheURL = try! NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.CachesDirectory,
-                                                                           inDomain: NSSearchPathDomainMask.UserDomainMask,
-                                                                           appropriateForURL: nil,
-                                                                           create: false)
+        let fileManager = NSFileManager.defaultManager()
         
-        let fileURL = cacheURL.URLByAppendingPathComponent("data.sqlite")!
+        #if os(iOS) || os(watchOS) || os(OSX)
+        let folderURL = try! fileManager.URLForDirectory(NSSearchPathDirectory.CachesDirectory,
+                                                         inDomain: NSSearchPathDomainMask.UserDomainMask,
+                                                         appropriateForURL: nil,
+                                                         create: false)
+        #elseif os(tvOS)
+            
+        let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppGroup)!
+            
+        let folderURL = containerURL
+            .URLByAppendingPathComponent("Library", isDirectory: true)!
+            .URLByAppendingPathComponent("Caches", isDirectory: true)!
+            
+        #endif
+        
+        let fileURL = folderURL.URLByAppendingPathComponent("data.sqlite", isDirectory: false)!
         
         return fileURL
     }()
@@ -90,25 +102,32 @@ extension Store {
     #if os(watchOS)
     var cache: Summit? {
         
-        struct Static {
-            static var summit: Summit?
+        get {
+            
+            if let summit = summitCache {
+                
+                return summit
+                
+            } else {
+                
+                guard let results = try? self.managedObjectContext.managedObjects(SummitManagedObject.self),
+                    let managedObject = results.first
+                    else { return nil }
+                
+                summitCache = Summit(managedObject: managedObject)
+                
+                return summitCache
+            }
         }
         
-        if let summit = Static.summit {
+        set {
             
-            return summit
-            
-        } else {
-            
-            guard let results = try? self.managedObjectContext.managedObjects(SummitManagedObject.self),
-                let managedObject = results.first
-                else { return nil }
-            
-            Static.summit = Summit(managedObject: managedObject)
-            
-            return Static.summit
+            summitCache = newValue
         }
     }
     #endif
 }
 
+#if os(watchOS)
+private var summitCache: Summit?
+#endif

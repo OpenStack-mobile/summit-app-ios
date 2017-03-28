@@ -36,7 +36,9 @@ public final class MemberManagedObject: Entity {
     
     @NSManaged public var groupEvents: Set<EventManagedObject>
     
-    @NSManaged public var feedback: Set<MemberFeedbackManagedObject>
+    @NSManaged public var feedback: Set<FeedbackManagedObject>
+    
+    @NSManaged public var favoriteEvents: Set<EventManagedObject>
 }
 
 // MARK: - Encoding
@@ -55,8 +57,9 @@ extension Member: CoreDataDecodable {
         self.biography = managedObject.biography
         self.gender = managedObject.gender
         self.groups = Group.from(managedObjects: managedObject.groups)
-        self.groupEvents = managedObject.groups.identifiers
-        self.feedback = MemberFeedback.from(managedObjects: managedObject.feedback)
+        self.feedback = managedObject.feedback.identifiers
+        self.groupEvents = managedObject.groupEvents.identifiers
+        self.favoriteEvents = managedObject.favoriteEvents.identifiers
         
         if let managedObject = managedObject.speakerRole {
             
@@ -104,7 +107,7 @@ extension Member: CoreDataEncodable {
             managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         }
                 
-        // dont touch group events, feedback
+        // dont touch group events, favorites, feedback
         
         managedObject.didCache()
         
@@ -130,8 +133,9 @@ extension MemberResponse.Member: CoreDataEncodable {
         managedObject.speakerRole = try context.relationshipFault(speakerRole)
         managedObject.attendeeRole = try context.relationshipFault(attendeeRole)
         managedObject.groups = try context.relationshipFault(Set(groups))
-        managedObject.groupEvents = try context.relationshipFault(Set(groupEvents))
         managedObject.feedback = try context.relationshipFault(Set(feedback))
+        managedObject.groupEvents = try context.relationshipFault(Set(groupEvents))
+        managedObject.favoriteEvents = try context.relationshipFault(Set(favoriteEvents))
         
         managedObject.didCache()
         
@@ -143,12 +147,25 @@ extension MemberResponse.Member: CoreDataEncodable {
 
 public extension MemberManagedObject {
     
-    func feedback(for event: Identifier) -> MemberFeedbackManagedObject? {
+    @inline(__always)
+    func isScheduled(event event: Identifier) -> Bool {
+        
+        return attendeeRole?.schedule.contains({ $0.identifier == event }) ?? false
+    }
+    
+    @inline(__always)
+    func isFavorite(event event: Identifier) -> Bool {
+        
+        return favoriteEvents.contains { $0.identifier == event }
+    }
+    
+    @inline(__always)
+    func feedback(for event: Identifier) -> FeedbackManagedObject? {
         
         return feedback.firstMatching({ $0.event.identifier == event})
     }
     
-    var givenFeedback: [MemberFeedbackManagedObject] {
+    var givenFeedback: [FeedbackManagedObject] {
         
         return feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
     }
@@ -184,12 +201,9 @@ public extension Store {
         return authenticatedMember?.attendeeRole != nil
     }
     
+    @inline(__always)
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
         
-        guard let loggedInMember = self.authenticatedMember
-            where self.isLoggedInAndConfirmedAttendee
-            else { return false }
-        
-        return loggedInMember.attendeeRole?.schedule.contains({ $0.identifier == eventID }) ?? false
+        return self.authenticatedMember?.attendeeRole?.schedule.contains({ $0.identifier == eventID }) ?? false
     }
 }

@@ -44,6 +44,7 @@ public extension DataUpdate {
         
         case WipeData
         case MySchedule
+        case MyFavorite
         case Presentation
         case SummitEvent
         case SummitType
@@ -52,23 +53,28 @@ public extension DataUpdate {
         case SummitTicketType
         case SummitVenue
         case SummitVenueRoom
+        case SummitAirport
+        case SummitHotel
+        case SummitAbstractLocation
+        case SummitVenueFloor
         case PresentationCategory
         case PresentationCategoryGroup
+        case PrivatePresentationCategoryGroup
         case SummitLocationMap
         case SummitLocationImage
         case Summit
-        case SummitVenueFloor
         case PresentationLink
         case PresentationVideo
         case PresentationSlide
         case SponsorFromEvent
         case SummitGroupEvent
+        case SummitWIFIConnection
         
         internal var type: Updatable.Type? {
             
             switch self {
             case .WipeData: return nil
-            case .MySchedule: return CoreSummit.EventDataUpdate.self
+            case .MySchedule, .MyFavorite: return CoreSummit.EventDataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
             case .Presentation: return CoreSummit.EventDataUpdate.self
             case .SummitEvent: return CoreSummit.EventDataUpdate.self
@@ -81,8 +87,9 @@ public extension DataUpdate {
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
             case .SummitVenueRoom: return CoreSummit.VenueRoomDataUpdate.self
             case .PresentationCategory: return CoreSummit.Track.self
-            case .PresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
+            case .PresentationCategoryGroup, .PrivatePresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
+            case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
             
             default: return nil
             }
@@ -94,6 +101,7 @@ public extension DataUpdate {
 
 public extension Store {
     
+    /// Processes the data update, but does not save the context.
     func process(dataUpdate: DataUpdate, summit: Identifier) -> Bool {
         
         let context = privateQueueManagedObjectContext
@@ -147,8 +155,6 @@ public extension Store {
                     
                     attendeeRole.schedule.insert(eventManagedObject)
                     
-                    try context.save()
-                    
                     return true
                     
                 case .Delete:
@@ -160,8 +166,45 @@ public extension Store {
                     if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
                         attendeeRole.schedule.remove(eventManagedObject)
+                    }
+                    
+                    return true
+                    
+                default: return false
+                }
+            }
+            
+            // add or remove to my favorites
+            guard dataUpdate.className != .MyFavorite else {
+                
+                // should only get for authenticated requests
+                guard let member = authenticatedMember
+                    else { return false }
+                
+                switch dataUpdate.operation {
+                    
+                case .Insert:
+                    
+                    guard let entityJSON = dataUpdate.entity,
+                        case let .JSON(jsonObject) = entityJSON,
+                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        else { return false }
+                    
+                    let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
+                    
+                    member.favoriteEvents.insert(eventManagedObject)
+                    
+                    return true
+                    
+                case .Delete:
+                    
+                    guard let entityID = dataUpdate.entity,
+                        case let .Identifier(identifier) = entityID
+                        else { return false }
+                    
+                    if let eventManagedObject = try EventManagedObject.find(identifier, context: context) {
                         
-                        try context.save()
+                        member.favoriteEvents.remove(eventManagedObject)
                     }
                     
                     return true
@@ -185,8 +228,6 @@ public extension Store {
                 if let foundEntity = try type.find(identifier, context: context) {
                     
                     context.deleteObject(foundEntity)
-                    
-                    try context.save()
                 }
                 
                 return true
@@ -219,16 +260,12 @@ public extension Store {
                 // add to authenticated member's group events
                 member.groupEvents.insert(managedObject)
                 
-                try context.save()
-                
                 return true
                 
             default:
                 
                 // insert or update
                 try entity.write(context, summit: summit)
-                
-                try context.save()
                 
                 return true
             }
@@ -276,3 +313,4 @@ extension Track: Updatable { }
 extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }
 extension GroupEventDataUpdate: Updatable { }
+extension WirelessNetwork: Updatable { }

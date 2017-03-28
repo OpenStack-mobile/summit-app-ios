@@ -1,1 +1,35 @@
-[{"id":478285,"entity_id":143,"class_name":"SummitVenueRoom","created":1477299809,"type":"UPDATE","entity":{"id":143,"name":"Room 021","description":null,"location_type":"Internal","order":0,"class_name":"SummitVenueRoom","venue_id":112,"capacity":560,"floor":{"id":5,"name":"P0","description":"P0","number":1,"venue_id":112,"image":"https:\/\/devbranch.openstack.org\/assets\/summits\/7\/locations\/112\/floors\/CCIB-1-P0-Forum.jpg","rooms":[143,144,145,182,183,207]}}}]
+[
+	{
+		"id": 478285,
+		"entity_id": 143,
+		"class_name": "SummitVenueRoom",
+		"created": 1477299809,
+		"type": "UPDATE",
+		"entity": {
+			"id": 143,
+			"name": "Room 021",
+			"description": null,
+			"location_type": "Internal",
+			"order": 0,
+			"class_name": "SummitVenueRoom",
+			"venue_id": 112,
+			"capacity": 560,
+			"floor": {
+				"id": 5,
+				"name": "P0",
+				"description": "P0",
+				"number": 1,
+				"venue_id": 112,
+				"image": "https://devbranch.openstack.org/assets/summits/7/locations/112/floors/CCIB-1-P0-Forum.jpg",
+				"rooms": [
+					143,
+					144,
+					145,
+					182,
+					183,
+					207
+				]
+			}
+		}
+	}
+]

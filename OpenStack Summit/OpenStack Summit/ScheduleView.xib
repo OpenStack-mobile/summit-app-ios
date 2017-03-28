@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduleView" customModule="OpenStackSummit" customModuleProvider="target">
             <connections>
@@ -36,11 +38,13 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GXx-g3-Qpp">
                     <rect key="frame" x="0.0" y="52" width="320" height="516"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No events for current day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UD-xN-OK6">
-                    <rect key="frame" x="63" y="274" width="195" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no added events so far." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UD-xN-OK6">
+                    <rect key="frame" x="30" y="252" width="261" height="65.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="24"/>
+                    <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0e-J9-8kd">
@@ -60,14 +64,16 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="BrO-92-FB5" secondAttribute="bottom" id="0ud-k0-dfZ"/>
+                <constraint firstItem="7UD-xN-OK6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="219-cc-UhH"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="5dW-zO-rIF"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6qi-ef-EsC"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8xh-VM-201"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="Q0e-J9-8kd" secondAttribute="trailing" id="D1C-Kz-Lzn"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="Lnr-dn-VRU"/>
+                <constraint firstItem="7UD-xN-OK6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NCh-lu-Rm4"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="Q0e-J9-8kd" secondAttribute="bottom" id="OY5-Io-kY5"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="Q0e-J9-8kd" secondAttribute="trailing" id="OnT-C4-F9R"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VIB-Qb-xBv"/>
@@ -75,12 +81,11 @@
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="Q0e-J9-8kd" secondAttribute="bottom" id="gCa-td-BQf"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="leading" secondItem="Q0e-J9-8kd" secondAttribute="trailing" id="gXE-IN-9Vs"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kcz-XP-jhS"/>
+                <constraint firstItem="7UD-xN-OK6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="m14-Cr-pqU"/>
                 <constraint firstItem="GXx-g3-Qpp" firstAttribute="top" secondItem="Q0e-J9-8kd" secondAttribute="bottom" id="mkW-gG-xKm"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oDo-px-ivP"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oax-sw-ShK"/>
                 <constraint firstItem="Q0e-J9-8kd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oiz-WW-0ym"/>
-                <constraint firstItem="7UD-xN-OK6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerYWithinMargins" id="tqu-8p-qMd"/>
-                <constraint firstItem="7UD-xN-OK6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerXWithinMargins" id="uFw-47-oSA"/>
                 <constraint firstItem="BrO-92-FB5" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="zzU-YO-hNf"/>
             </constraints>
             <point key="canvasLocation" x="506" y="296"/>

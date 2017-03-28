@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView wantsLayer="YES" id="dHY-ex-pKO">
+            <rect key="frame" x="0.0" y="0.0" width="166" height="191"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gfu-ga-hU1">
+                    <rect key="frame" x="6" y="8" width="154" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Alsey Coleman Miller" usesSingleLineMode="YES" id="Rdt-Z7-Qb9">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <box boxType="custom" borderType="none" borderWidth="0.0" cornerRadius="75" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="2fB-T4-RC4">
+                    <rect key="frame" x="8" y="33" width="150" height="150"/>
+                    <view key="contentView" id="Ipl-9N-htO">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gbx-KZ-L7S">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="2xw-uj-iZ4"/>
+                                    <constraint firstAttribute="width" secondItem="gbx-KZ-L7S" secondAttribute="height" multiplier="1:1" id="pjH-6Y-dk2"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="generic-user-avatar" id="BVS-E0-3Kf"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="gbx-KZ-L7S" firstAttribute="top" secondItem="Ipl-9N-htO" secondAttribute="top" id="FSy-k2-6Wk"/>
+                            <constraint firstAttribute="trailing" secondItem="gbx-KZ-L7S" secondAttribute="trailing" id="JuI-c0-wuM"/>
+                            <constraint firstItem="gbx-KZ-L7S" firstAttribute="leading" secondItem="Ipl-9N-htO" secondAttribute="leading" id="bXt-h6-9cf"/>
+                            <constraint firstAttribute="bottom" secondItem="gbx-KZ-L7S" secondAttribute="bottom" id="idq-zg-T0i"/>
+                        </constraints>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="2fB-T4-RC4" secondAttribute="height" multiplier="1:1" id="wuw-at-IgG"/>
+                    </constraints>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Gfu-ga-hU1" secondAttribute="bottom" constant="8" id="4hB-gu-wMk"/>
+                <constraint firstAttribute="trailing" secondItem="Gfu-ga-hU1" secondAttribute="trailing" constant="8" id="FVz-gS-b7x"/>
+                <constraint firstItem="2fB-T4-RC4" firstAttribute="top" secondItem="dHY-ex-pKO" secondAttribute="top" constant="8" id="ldv-te-iBn"/>
+                <constraint firstItem="Gfu-ga-hU1" firstAttribute="top" secondItem="2fB-T4-RC4" secondAttribute="bottom" constant="8" id="uwN-v2-x4X"/>
+                <constraint firstItem="Gfu-ga-hU1" firstAttribute="leading" secondItem="dHY-ex-pKO" secondAttribute="leading" constant="8" id="zbL-hg-uv7"/>
+                <constraint firstAttribute="trailing" secondItem="2fB-T4-RC4" secondAttribute="trailing" constant="8" id="zi8-CC-uUa"/>
+                <constraint firstItem="2fB-T4-RC4" firstAttribute="leading" secondItem="dHY-ex-pKO" secondAttribute="leading" constant="8" id="znh-Ib-cB8"/>
+            </constraints>
+            <point key="canvasLocation" x="-125" y="-135.5"/>
+        </customView>
+        <collectionViewItem id="4Zm-ir-5qs" customClass="ImageCollectionViewItem" customModule="OpenStackSummit" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="gbx-KZ-L7S" id="Hrk-2S-z4D"/>
+                <outlet property="sourceItemView" destination="dHY-ex-pKO" id="UCl-ZW-khA"/>
+                <outlet property="textField" destination="Gfu-ga-hU1" id="AaF-7f-lnt"/>
+                <outlet property="view" destination="dHY-ex-pKO" id="T7e-ZL-s4w"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+    <resources>
+        <image name="generic-user-avatar" width="245" height="245"/>
+    </resources>
+</document>

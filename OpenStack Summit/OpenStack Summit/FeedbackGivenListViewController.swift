@@ -49,7 +49,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         
         let feedback = feedbackList[indexPath.row]
         cell.eventName = feedback.eventName
-        cell.owner = feedback.owner
+        cell.owner = feedback.member.name
         cell.rate = Double(feedback.rate)
         cell.review = feedback.review
         cell.date = feedback.date

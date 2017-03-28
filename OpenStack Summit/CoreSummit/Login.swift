@@ -24,7 +24,7 @@ public extension Store {
                 
                 context.deleteObject(member)
                 
-                try context.save()
+                try context.validateAndSave()
             }
         }
         

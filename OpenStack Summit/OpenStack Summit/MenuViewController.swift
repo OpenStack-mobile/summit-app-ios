@@ -7,22 +7,16 @@
 //
 
 import UIKit
-import SwiftSpinner
 import AeroGearOAuth2
 import CoreSummit
 import Crashlytics
+import JGProgressHUD
 
-final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActivityIndicatorProtocol, SWRevealViewControllerDelegate, MessageEnabledViewController {
-    
-    // MARK: - Properties
-    
-    // Menu VCs
-    let eventsViewController = EventsViewController()
-    let venuesViewController = VenuesViewController()
-    let speakersViewController = R.storyboard.people.speakerListViewController()!
+final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityViewController, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
+    @IBOutlet weak var searchTextView: UITextField!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
@@ -33,8 +27,20 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     @IBOutlet weak var myProfileButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
     @IBOutlet weak var inboxButton: UIButton!
+    @IBOutlet weak var inboxCounterView: UIView!
+    @IBOutlet weak var inboxCounterLabel: UILabel!
     
-    @IBOutlet weak var searchTextView: UITextField!
+    // MARK: - Properties
+    
+    // Menu VCs
+    lazy var generalScheduleViewController: GeneralScheduleViewController = R.storyboard.schedule.generalScheduleViewController()!
+    lazy var venuesViewController: VenuesViewController = VenuesViewController()
+    lazy var speakersViewController: SpeakersViewController = R.storyboard.people.speakersViewController()!
+    
+    private var unreadNotificationsObserver: Int?
+    private var unreadTeamMessagesObserver: Int?
+    
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
     
     // MARK: - Accessors
     
@@ -85,6 +91,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
     
     deinit {
         
+        if let observer = unreadTeamMessagesObserver {
+            
+            PushNotificationManager.shared.unreadTeamMessages.remove(observer)
+        }
+        
+        if let observer = unreadNotificationsObserver {
+            
+            PushNotificationManager.shared.unreadNotifications.remove(observer)
+        }
+        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -105,6 +121,12 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             selector: #selector(MenuViewController.revokedAccess(_:)),
             name: OAuth2Module.revokeNotification,
             object: nil)
+        
+        // observe unread notifications
+        unreadTeamMessagesObserver = PushNotificationManager.shared.unreadTeamMessages
+            .observe { [weak self] _ in self?.reloadInboxCounter() }
+        unreadNotificationsObserver = PushNotificationManager.shared.unreadNotifications
+            .observe { [weak self] _ in self?.reloadInboxCounter() }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -112,6 +134,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         self.showUserProfile()
         self.reloadMenu()
+        self.reloadInboxCounter()
     }
     
     // MARK: - Actions
@@ -158,7 +181,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
             login()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.hideActivityIndicator()
+                self.dismissActivityIndicator()
             }
         } else {
             logout()
@@ -229,8 +252,19 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         myProfileButton.hidden = hasAccess(to: .MyProfile) == false
     }
     
+    private func reloadInboxCounter() {
+        
+        let unreadCount = PushNotificationManager.shared.unreadCount
+        
+        inboxCounterView.hidden = unreadCount == 0
+        inboxCounterLabel.text = "\(unreadCount)"
+    }
+    
+    // MARK: Navigation
+    
     @inline(__always)
     private func navigateToHome() {
+        
         toggleMenuSelection(eventsButton)
     }
     
@@ -263,8 +297,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         }
     }
     
-    // MARK: Navigation
-    
     func showSpeakers() {
         
         highlight(.People)
@@ -276,7 +308,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         highlight(.Events)
         
-        show(eventsViewController)
+        show(generalScheduleViewController)
     }
     
     func showVenues() {
@@ -314,21 +346,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
     private func showMyProfile() {
         
-        if Store.shared.isLoggedIn {
-            
-            if Store.shared.isLoggedInAndConfirmedAttendee {
-                
-                let myProfileViewController = MyProfileViewController()
-                
-                show(myProfileViewController)
-                
-            } else {
-                
-                let memberOrderConfirmViewController = R.storyboard.member.memberOrderConfirmViewController()!
-                
-                show(memberOrderConfirmViewController)
-            }
-        }
+        guard Store.shared.isLoggedIn else { return }
+        
+        highlight(.MyProfile)
+        
+        let myProfileViewController = MyProfileViewController()
+        
+        show(myProfileViewController)
     }
     
     private func show(viewController: UIViewController) {
@@ -350,6 +374,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         
         showActivityIndicator()
         
+        Preference.goingToSummit = false
+        
         Store.shared.login(summit, loginCallback: {
             
             // return from SafariVC
@@ -366,7 +392,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                 
                 controller.hideMenu()
                 
-                controller.hideActivityIndicator()
+                controller.dismissActivityIndicator()
                 
                 switch response {
                     
@@ -381,12 +407,33 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
                     
                     if Store.shared.isLoggedInAndConfirmedAttendee {
                         
+                        Preference.goingToSummit = true
+                        
                         // reload schedule
                         controller.showEvents()
                        
                     } else {
                         
-                        controller.toggleMenuSelection(controller.myProfileButton)
+                        // show a popup asking user if they are going to the summit
+                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
+                        
+                        alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
+                            
+                            Preference.goingToSummit = false
+                            
+                            controller.showMyProfile()
+                        })
+                        
+                        alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
+                            
+                            Preference.goingToSummit = true
+                            
+                            let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
+                            
+                            controller.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                        })
+                        
+                        controller.presentViewController(alert, animated: true) { }
                     }
                     
                     // log user email
@@ -414,7 +461,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         navigateToHome()
         reloadMenu()
         hideMenu()
-        hideActivityIndicator()
+        dismissActivityIndicator()
     }
     
     // MARK: - SWRevealViewControllerDelegate
@@ -474,7 +521,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ShowActiv
         navigateToHome()
         reloadMenu()
         hideMenu()
-        hideActivityIndicator()
+        dismissActivityIndicator()
         
         showInfoMessage("Session expired", message: "Your session expired, please log in again using your credentials")
     }

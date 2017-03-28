@@ -25,6 +25,13 @@ public struct Speaker: Person {
     public var biography: String?
 }
 
+// MARK: - Person
+
+public extension Speaker {
+    
+    var linkedIn: String? { return nil }
+}
+
 // MARK: - Equatable
 
 public func == (lhs: Speaker, rhs: Speaker) -> Bool {

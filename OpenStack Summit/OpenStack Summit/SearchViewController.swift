@@ -13,7 +13,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
     
     // MARK: - IB Outlets
 
-    @IBOutlet weak var speakersTableView: PeopleListView!
+    @IBOutlet weak var speakersTableView: UITableView!
     @IBOutlet weak var tracksTableView: UITableView!
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var searchTermTextView: UITextField!
@@ -60,13 +60,13 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         eventsTableView.estimatedRowHeight = 100
         eventsTableView.rowHeight = UITableViewAutomaticDimension
         
-        speakersTableView.tableView.registerNib(R.nib.peopleTableViewCell)
+        speakersTableView.registerNib(R.nib.peopleTableViewCell)
         searchTermTextView.delegate = self
         
         //hack: if I don't add this constraint, width for table goes out of margins and height doesn't work well
-        let tableWidthConstraint = NSLayoutConstraint(item: speakersTableView.tableView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+        let tableWidthConstraint = NSLayoutConstraint(item: speakersTableView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
         speakersTableView.addConstraint(tableWidthConstraint)
-        let tableHeightConstraint = NSLayoutConstraint(item: speakersTableView.tableView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+        let tableHeightConstraint = NSLayoutConstraint(item: speakersTableView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
         speakersTableView.addConstraint(tableHeightConstraint)
         
         navigationItem.title = "SEARCH"
@@ -89,7 +89,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         let indexPath = eventsTableView.indexPathForCell(cell)!
         let event = events[indexPath.row]
         
-        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
+        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         if isOperationOngoing {
             return
@@ -100,9 +100,9 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         // remove
         if isScheduled {
             
-            cell.scheduled = false
+            cell.statusImageView.hidden = true
             
-            Store.shared.removeEventFromSchedule(event.summit, event: event.id) { [weak self] (response) in
+            Store.shared.removeEventFromSchedule(event.summit, event: event.identifier) { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -114,7 +114,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                         
                     case let .Some(error):
                         
-                        cell.scheduled = true
+                        cell.statusImageView.hidden = false
                         
                         controller.showErrorMessage(error)
                         
@@ -127,9 +127,9 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         // add
         else {
             
-            cell.scheduled = true
+            cell.statusImageView.hidden = false
             
-            Store.shared.addEventToSchedule(event.summit, event: event.id)  { [weak self] (response) in
+            Store.shared.addEventToSchedule(event.summit, event: event.identifier)  { [weak self] (response) in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
@@ -141,7 +141,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
                         
                     case let .Some(error):
                         
-                        cell.scheduled = false
+                        cell.statusImageView.hidden = true
                         
                         controller.showErrorMessage(error as NSError)
                         
@@ -211,20 +211,14 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         
         let index = indexPath.row
         let event = events[index]
-        cell.eventTitle = event.name
-        cell.eventType = event.eventType
-        cell.time = event.time
-        cell.location = event.location
-        cell.sponsors = event.sponsors
-        cell.track = event.track
-        cell.scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.id)
-        cell.isScheduledStatusVisible = Store.shared.isLoggedInAndConfirmedAttendee
-        cell.trackGroupColor = event.trackGroupColor != "" ? UIColor(hexaString: event.trackGroupColor) : nil
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.layoutSubviews()
         
-        cell.scheduleButton.addTarget(self, action: #selector(SearchViewController.toggleScheduledStatus(_:)), forControlEvents: .TouchUpInside)
+        cell.nameLabel.text = event.name
+        cell.dateTimeLabel.text = event.dateTime
+        cell.trackLabel.text = event.track
+        cell.trackLabel.hidden = event.track.isEmpty
+        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? .blackColor()
+        cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
+        cell.statusImageView.hidden = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
     }
     
     private func configure(cell cell: TrackTableViewCell, at indexPath: NSIndexPath) {
@@ -271,11 +265,11 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     private func reloadSpeakers() {
-        speakersTableView.tableView.delegate = self
-        speakersTableView.tableView.dataSource = self
-        speakersTableView.tableView.reloadData()
+        speakersTableView.delegate = self
+        speakersTableView.dataSource = self
+        speakersTableView.reloadData()
         speakersTableView.layoutIfNeeded()
-        setupTable(speakersTableView.tableView, withRowCount: speakersTableView.tableView.numberOfRowsInSection(0), withMinSize: 60, withConstraint: speakersTableViewHeightConstraint)
+        setupTable(speakersTableView, withRowCount: speakersTableView.numberOfRowsInSection(0), withMinSize: 60, withConstraint: speakersTableViewHeightConstraint)
         speakersTableView.updateConstraintsIfNeeded()
     }
     
@@ -302,7 +296,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
         case eventsTableView: return events.count
         case tracksTableView: return tracks.count
-        case speakersTableView.tableView: return speakers.count
+        case speakersTableView: return speakers.count
             
         default: fatalError("Invalid table view: \(tableView)")
         }
@@ -324,7 +318,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             configure(cell: cell, at: indexPath)
             return cell
             
-        case speakersTableView.tableView:
+        case speakersTableView:
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
             configure(cell: cell, at: indexPath)
@@ -346,7 +340,7 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             let eventVC = R.storyboard.event.eventDetailViewController()!
             
-            eventVC.event = event.id
+            eventVC.event = event.identifier
             
             showViewController(eventVC, sender: self)
             
@@ -360,11 +354,11 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
             
             self.showViewController(trackScheduleVC, sender: self)
             
-        case speakersTableView.tableView:
+        case speakersTableView:
             
             let speaker = speakers[indexPath.row]
             
-            let memberProfileVC = MemberProfileViewController(profile: MemberProfileIdentifier(speaker: speaker))
+            let memberProfileVC = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
             
             showViewController(memberProfileVC, sender: self)
             

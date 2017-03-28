@@ -1,0 +1,31 @@
+{
+	"created": 1464886196,
+	"class_name": "SummitAirport",
+	"id": 380106,
+	"entity_id": 113,
+	"entity": {
+		"city": "Barcelona",
+		"country": "ES",
+		"description": null,
+		"lat": "41.300612812133",
+		"name": "Barcelona–El Prat Airport",
+		"address_2": null,
+		"lng": "2.0831905173828",
+		"class_name": "SummitAirport",
+		"id": 113,
+		"location_type": "None",
+		"address_1": "08820 El Prat de Llobregat",
+		"zip_code": null,
+		"capacity": 0,
+		"maps": [
+
+		],
+		"airport_type": "International",
+		"order": 2,
+		"images": [
+
+		],
+		"state": null
+	},
+	"type": "INSERT"
+}

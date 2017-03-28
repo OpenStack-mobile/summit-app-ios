@@ -8,23 +8,23 @@
 
 import SwiftFoundation
 
-enum FeedbackJSONKey: String {
+extension Feedback: JSONDecodable {
     
-    case id, event_id, rate, note, created_date, member_id, owner_id, owner, attendee_id, first_name, last_name
-}
-
-extension Review: JSONDecodable {
+    private enum JSONKey: String {
+        
+        case id, event_id, rate, note, created_date, owner
+    }
     
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[FeedbackJSONKey.id.rawValue]?.rawValue as? Int,
-            let rate = JSONObject[FeedbackJSONKey.rate.rawValue]?.rawValue as? Int,
-            let review = JSONObject[FeedbackJSONKey.note.rawValue]?.rawValue as? String,
-            let createdDate = JSONObject[FeedbackJSONKey.created_date.rawValue]?.rawValue as? Int,
-            let event = JSONObject[FeedbackJSONKey.event_id.rawValue]?.rawValue as? Int,
-            let ownerJSON = JSONObject[FeedbackJSONKey.owner.rawValue],
-            let owner = Owner(JSONValue: ownerJSON)
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let rate = JSONObject[JSONKey.rate.rawValue]?.rawValue as? Int,
+            let review = JSONObject[JSONKey.note.rawValue]?.rawValue as? String,
+            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.rawValue as? Int,
+            let event = JSONObject[JSONKey.event_id.rawValue]?.rawValue as? Int,
+            let memberJSON = JSONObject[JSONKey.owner.rawValue],
+            let member = Member(JSONValue: memberJSON)
             else { return nil }
         
         self.identifier = identifier
@@ -32,38 +32,26 @@ extension Review: JSONDecodable {
         self.review = review
         self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event
-        self.owner = owner
-    }
-}
-
-extension Review.Owner: JSONDecodable {
-    
-    public init?(JSONValue: JSON.Value) {
-        
-        guard let JSONObject = JSONValue.objectValue,
-            let member = JSONObject[FeedbackJSONKey.id.rawValue]?.rawValue as? Int,
-            let firstName = JSONObject[FeedbackJSONKey.first_name.rawValue]?.rawValue as? String,
-            let lastName = JSONObject[FeedbackJSONKey.last_name.rawValue]?.rawValue as? String
-            else { return nil }
-        
         self.member = member
-        self.firstName = firstName
-        self.lastName = lastName
-        self.attendee = JSONObject[FeedbackJSONKey.attendee_id.rawValue]?.rawValue as? Int
     }
 }
 
-extension MemberFeedback: JSONDecodable {
+extension MemberResponse.Feedback: JSONDecodable {
+    
+    private enum JSONKey: String {
+        
+        case id, event_id, rate, note, created_date, owner_id
+    }
     
     public init?(JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[FeedbackJSONKey.id.rawValue]?.rawValue as? Int,
-            let rate = JSONObject[FeedbackJSONKey.rate.rawValue]?.rawValue as? Int,
-            let review = JSONObject[FeedbackJSONKey.note.rawValue]?.rawValue as? String,
-            let createdDate = JSONObject[FeedbackJSONKey.created_date.rawValue]?.rawValue as? Int,
-            let event = JSONObject[FeedbackJSONKey.event_id.rawValue]?.rawValue as? Int,
-            let member = JSONObject[FeedbackJSONKey.member_id.rawValue]?.rawValue as? Int
+            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let rate = JSONObject[JSONKey.rate.rawValue]?.rawValue as? Int,
+            let review = JSONObject[JSONKey.note.rawValue]?.rawValue as? String,
+            let createdDate = JSONObject[JSONKey.created_date.rawValue]?.rawValue as? Int,
+            let event = JSONObject[JSONKey.event_id.rawValue]?.rawValue as? Int,
+            let member = JSONObject[JSONKey.owner_id.rawValue]?.rawValue as? Int
             else { return nil }
         
         self.identifier = identifier

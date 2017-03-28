@@ -8,6 +8,9 @@
 
 import UIKit
 
-public class TableViewHeaderView: UITableViewHeaderFooterView {
+final class TableViewHeaderView: UITableViewHeaderFooterView {
+    
+    static let resuseIdentifier = "TableViewHeaderView"
+    
     @IBOutlet weak var titleLabel: UILabel!
 }

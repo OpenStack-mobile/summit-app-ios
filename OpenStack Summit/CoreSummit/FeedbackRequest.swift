@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func feedback(summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Review>>) -> ()) {
+    func feedback(summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Feedback>>) -> ()) {
         
         let URI = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
         
@@ -29,7 +29,7 @@ public extension Store {
                 else { completion(.Error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<Review>(JSONValue: json)
+                let page = Page<Feedback>(JSONValue: json)
                 else { completion(.Error(Error.InvalidResponse)); return }
             
             // cache
@@ -41,7 +41,7 @@ public extension Store {
                 
                 try page.items.save(context)
                 
-                try context.save()
+                try context.validateAndSave()
             }
             
             // success
@@ -91,9 +91,9 @@ public extension Store {
                 if let managedObject = try EventManagedObject.find(event, context: context) {
                     
                     managedObject.averageFeedback = averageFeedback
+                    
+                    try context.validateAndSave()
                 }
-                
-                try context.save()
             }
             
             // success
@@ -126,15 +126,17 @@ public extension Store {
             // create new feedback in cache
             try! context.performErrorBlockAndWait {
                 
-                if let member = try self.authenticatedMember(context) {
+                if let memberManagedObject = try self.authenticatedMember(context) {
                     
-                    let feedback = MemberFeedback(identifier: identifier, rate: rate, review: review, date: Date(), event: event, member: member.identifier)
+                    let member = Member(managedObject: memberManagedObject)
+                    
+                    let feedback = Feedback(identifier: identifier, rate: rate, review: review, date: Date(), event: event, member: member)
                     
                     let managedObject = try feedback.save(context)
                     
-                    member.feedback.insert(managedObject)
+                    memberManagedObject.feedback.insert(managedObject)
                     
-                    try context.save()
+                    try context.validateAndSave()
                 }
             }
             

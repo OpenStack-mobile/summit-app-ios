@@ -12,7 +12,7 @@ private extension Member {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee, feedback
+        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee, feedback, favorite_summit_events
     }
 }
 
@@ -25,16 +25,13 @@ extension Member: JSONDecodable {
                 ?? JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
-            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
-            let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
-            let groups = Group.fromJSON(groupsJSONArray)
+            let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String
             else { return nil }
         
         self.identifier = memberID
         self.firstName = firstName
         self.lastName = lastName
         self.pictureURL = pictureURL
-        self.groups = Set(groups)
         
         // optional
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
@@ -55,10 +52,23 @@ extension Member: JSONDecodable {
             self.speakerRole = nil
         }
         
+        if let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue {
+            
+            guard let groups = Group.fromJSON(groupsJSONArray)
+                else { return nil }
+            
+            self.groups = Set(groups)
+            
+        } else {
+            
+            self.groups = []
+        }
+        
         // not in this JSON response
+        self.attendeeRole = nil
         self.feedback = []
         self.groupEvents = []
-        self.attendeeRole = nil
+        self.favoriteEvents = []
     }
 }
 
@@ -78,7 +88,9 @@ extension MemberResponse.Member: JSONDecodable {
             let groupEventsJSONArray = JSONObject[JSONKey.groups_events.rawValue]?.arrayValue,
             let groupEvents = MemberResponse.Event.fromJSON(groupEventsJSONArray),
             let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
-            let feedback = MemberFeedback.fromJSON(feedbackJSONArray)
+            let feedback = MemberResponse.Feedback.fromJSON(feedbackJSONArray),
+            let favoriteEventsJSONArray = JSONObject[JSONKey.favorite_summit_events.rawValue]?.arrayValue,
+            let favoriteEvents = Identifier.fromJSON(favoriteEventsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -88,6 +100,7 @@ extension MemberResponse.Member: JSONDecodable {
         self.groups = groups
         self.groupEvents = groupEvents
         self.feedback = feedback
+        self.favoriteEvents = favoriteEvents
         
         // optional
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String

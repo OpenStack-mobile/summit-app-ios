@@ -13,7 +13,13 @@ import XCDYouTubeKit
 
 extension UIViewController {
     
-    func playVideo(video: Video) {
+    func play(video video: Video) {
+        
+        // add to recently played
+        
+        Preferences.shared.addRecentlyPlayed(video.identifier)
+        
+        // load video
         
         XCDYouTubeClient.defaultClient().getVideoWithIdentifier(video.youtube) { [weak self] (youtubeVideo, error) in
             

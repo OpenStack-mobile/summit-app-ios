@@ -6,8 +6,13 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
+    import UIKit
+#elseif os(OSX)
+    import AppKit
+#endif
+
 import Foundation
-import UIKit
 import CoreSummit
 
 /// Manages the current summit being displayed in the UI

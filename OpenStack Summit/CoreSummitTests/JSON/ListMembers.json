@@ -1,0 +1,117 @@
+{
+	"total": 1,
+	"per_page": 5,
+	"current_page": 1,
+	"last_page": 1,
+	"data": [
+		{
+			"id": 1395,
+			"first_name": "Jimmy",
+			"last_name": "McArthur",
+			"gender": "Super Mega Attack Helicopter",
+			"bio": "<p>I'm the Senior Software Development Manager with the OpenStack Foundation. I've been working on the Foundation web properties for the last three years at Tipit, prior to my employment with OpenStack. </p>",
+			"linked_in": "http://www.linkedin.com/in/jimmymcarthur/",
+			"irc": "jamesmcarthur",
+			"twitter": "jimmymcarthur",
+			"pic": "https://devbranch.openstack.org/profile_images/members/1395",
+			"affiliations": [
+				{
+					"id": 61747,
+					"start_date": 1064361600,
+					"end_date": 1448841600,
+					"owner_id": 1395,
+					"is_current": true,
+					"organization": {
+						"id": 195,
+						"name": "Tipit"
+					}
+				},
+				{
+					"id": 96572,
+					"start_date": 1448928000,
+					"end_date": null,
+					"owner_id": 1395,
+					"is_current": true,
+					"organization": {
+						"id": 3,
+						"name": "OpenStack Foundation"
+					}
+				}
+			],
+			"groups": [
+				{
+					"id": 1,
+					"title": "Content Authors",
+					"description": null,
+					"code": "content-authors"
+				},
+				{
+					"id": 2,
+					"title": "Administrators",
+					"description": null,
+					"code": "administrators"
+				},
+				{
+					"id": 4,
+					"title": "Users",
+					"description": null,
+					"code": "users"
+				},
+				{
+					"id": 5,
+					"title": "Foundation Members",
+					"description": null,
+					"code": "foundation-members"
+				},
+				{
+					"id": 8,
+					"title": "Speakers",
+					"description": null,
+					"code": "speakers"
+				},
+				{
+					"id": 30,
+					"title": "News Managers",
+					"description": "News Manager",
+					"code": "news-managers"
+				},
+				{
+					"id": 32,
+					"title": "oauth2 server admin",
+					"description": "OpenstackID OAUTH2 Server Administrators",
+					"code": "oauth2-server-admin"
+				},
+				{
+					"id": 31,
+					"title": "openstackid server admin",
+					"description": "OpenstackID Administrators",
+					"code": "openstackid-server-admin"
+				},
+				{
+					"id": 14,
+					"title": "OpenStack Foundation Staff",
+					"description": null,
+					"code": "openstack-foundation-staff"
+				},
+				{
+					"id": 9,
+					"title": "Track Chairs",
+					"description": null,
+					"code": "track-chairs"
+				},
+				{
+					"id": 38,
+					"title": "Working Groups",
+					"description": "Working Group list for Barcelona Summit",
+					"code": "working-groups"
+				},
+				{
+					"id": 45,
+					"title": "Survey Testers",
+					"description": null,
+					"code": "survey-testers"
+				}
+			]
+		}
+	]
+}

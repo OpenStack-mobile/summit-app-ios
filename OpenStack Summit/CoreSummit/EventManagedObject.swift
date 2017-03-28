@@ -28,6 +28,10 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var rsvp: String?
     
+    @NSManaged public var externalRSVP: Bool
+    
+    @NSManaged public var willRecord: Bool
+    
     @NSManaged public var track: TrackManagedObject?
     
     @NSManaged public var eventType: EventTypeManagedObject
@@ -63,6 +67,8 @@ extension Event: CoreDataDecodable {
         self.allowFeedback = managedObject.allowFeedback
         self.averageFeedback = managedObject.averageFeedback
         self.rsvp = managedObject.rsvp
+        self.externalRSVP = managedObject.externalRSVP
+        self.willRecord = managedObject.willRecord
         self.track = managedObject.track?.identifier
         self.type = managedObject.eventType.identifier
         self.sponsors = managedObject.sponsors.identifiers
@@ -88,6 +94,8 @@ extension Event: CoreDataEncodable {
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
+        managedObject.externalRSVP = externalRSVP
+        managedObject.willRecord = willRecord
         managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
@@ -118,6 +126,8 @@ extension MemberResponse.Event: CoreDataEncodable {
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
+        managedObject.externalRSVP = externalRSVP
+        managedObject.willRecord = willRecord
         managedObject.summit = try context.relationshipFault(summit)
         managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
@@ -155,7 +165,6 @@ public extension EventManagedObject {
     static func filter(date: DateFilter,
                        tracks: [Identifier]?,
                        trackGroups: [Identifier]?,
-                       tags: [String]?,
                        levels: [String]?,
                        venues: [Identifier]?,
                        summit: Identifier,
@@ -202,24 +211,6 @@ public extension EventManagedObject {
             let levelsPredicate = NSPredicate(format: "presentation.level IN %@", levels)
             
             predicates.append(levelsPredicate)
-        }
-        
-        if let tags = tags where tags.isEmpty == false {
-            
-            let tagPredicates = tags.map { NSPredicate(format: "ANY tags.name ==[c] %@", $0) }
-            
-            let predicate: NSPredicate
-            
-            if tagPredicates.count > 1 {
-                
-                predicate = NSCompoundPredicate(orPredicateWithSubpredicates: tagPredicates)
-                
-            } else {
-                
-                predicate = predicates[0]
-            }
-            
-            predicates.append(predicate)
         }
         
         if let venues = venues where venues.isEmpty == false {

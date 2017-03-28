@@ -8,7 +8,6 @@
 
 import UIKit
 import XLPagerTabStrip
-import SwiftSpinner
 import CoreSummit
 
 final class SpeakerPresentationsViewController: ScheduleViewController, IndicatorInfoProvider {

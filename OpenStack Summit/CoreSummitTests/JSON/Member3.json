@@ -1,0 +1,294 @@
+{
+	"id": 58157,
+	"first_name": "Clint",
+	"last_name": "Espinoza",
+	"gender": "Prefer not to say",
+	"bio": null,
+	"linked_in": null,
+	"irc": null,
+	"twitter": null,
+	"state": "Tx",
+	"country": "US",
+	"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+	"affiliations": [
+		{
+			"id": 92170,
+			"start_date": 1457913600,
+			"end_date": 1459382400,
+			"owner_id": 58157,
+			"is_current": false,
+			"organization": {
+				"id": 8724,
+				"name": "*independent user - Unaffiliated"
+			}
+		},
+		{
+			"id": 103284,
+			"start_date": 1470873600,
+			"end_date": null,
+			"owner_id": 58157,
+			"is_current": true,
+			"organization": {
+				"id": 195,
+				"name": "Tipit"
+			}
+		}
+	],
+	"groups": [
+		{
+			"id": 5,
+			"title": "Foundation Members",
+			"description": null,
+			"code": "foundation-members"
+		},
+		{
+			"id": 4,
+			"title": "Users",
+			"description": null,
+			"code": "users"
+		},
+		{
+			"id": 2,
+			"title": "Administrators",
+			"description": null,
+			"code": "administrators"
+		},
+		{
+			"id": 9,
+			"title": "Track Chairs",
+			"description": null,
+			"code": "track-chairs"
+		},
+		{
+			"id": 47,
+			"title": "fresh CESPIN test group",
+			"description": null,
+			"code": "fresh-cespin-test-group"
+		},
+		{
+			"id": 48,
+			"title": "Tuesday CESPIN test group",
+			"description": null,
+			"code": "tuesday-cespin-test-group"
+		},
+		{
+			"id": 49,
+			"title": "Tuesday CESPIN test group #2",
+			"description": null,
+			"code": "tuesday-cespin-test-group-#2"
+		}
+	],
+	"groups_events": [
+		{
+			"id": 18577,
+			"title": "Test event for \"fresh CESPIN test group\" ",
+			"description": "<p>Need to see if cespin+2 can see this.</p>",
+			"social_description": "test social",
+			"start_date": 1477208700,
+			"end_date": 1477217700,
+			"summit_id": 7,
+			"class_name": "SummitGroupEvent",
+			"allow_feedback": false,
+			"avg_feedback_rate": 0,
+			"is_published": true,
+			"head_count": 19,
+			"rsvp_link": null,
+			"sponsors": [
+
+			],
+			"tags": [
+
+			],
+			"type": {
+				"id": 116,
+				"name": "Groups Events",
+				"color": "#f0f0ee",
+				"black_out_times": false
+			},
+			"location": {
+				"id": 177,
+				"name": "Born",
+				"description": null,
+				"location_type": "Internal",
+				"order": 0,
+				"class_name": "SummitVenueRoom",
+				"venue_id": 162,
+				"floor_id": 8,
+				"capacity": 16
+			},
+			"track": {
+				"id": 71,
+				"name": "Architectural Decisions",
+				"description": "If you are a cloud architect or involved in planning your cloud srategy, this track will discuss popular reference architectures, configuration options, workload optimiziation, and architecture show and tell, where experienced users will share their architectures and experiences.\t\t\t\t",
+				"code": "AD",
+				"track_groups": [
+					{
+						"id": 15,
+						"name": "Architecture & Operations",
+						"color": "#00cbea",
+						"description": "<p>The architecture &amp; operations conference is designed for cloud architects, operators and system administrators who are building or running OpenStack clouds. Featuring stories from the trenches, best practices, tools and industry-specific considerations, you'll hear directy from your peers and walk away with practical knowledge.</p>",
+						"tracks": [
+							71,
+							68,
+							72,
+							73,
+							74,
+							75,
+							76,
+							77,
+							78,
+							69,
+							70
+						]
+					}
+				]
+			},
+			"groups": [
+				{
+					"id": 47,
+					"title": "fresh CESPIN test group",
+					"description": null,
+					"code": "fresh-cespin-test-group"
+				}
+			]
+		}
+	],
+	"team_memberships": [
+		{
+			"id": 2,
+			"member_id": 58157,
+			"permission": "ADMIN",
+			"team": {
+				"id": 2,
+				"name": "cespin team",
+				"description": "This is a test team. ",
+				"owner_id": 58157,
+				"created_at": 1487171376,
+				"updated_at": 1487171376,
+				"members": [
+					{
+						"id": 2,
+						"team_id": 2,
+						"permission": "ADMIN",
+						"member": {
+							"id": 58157,
+							"first_name": "Clint",
+							"last_name": "Espinoza",
+							"gender": "Prefer not to say",
+							"bio": null,
+							"linked_in": null,
+							"irc": null,
+							"twitter": null,
+							"state": "Tx",
+							"country": "US",
+							"pic": "https://devbranch.openstack.org/profile_images/members/58157",
+							"groups": [
+								5,
+								4,
+								2,
+								9,
+								47,
+								48,
+								49
+							],
+							"affiliations": [
+								{
+									"id": 92170,
+									"start_date": 1457913600,
+									"end_date": 1459382400,
+									"owner_id": 58157,
+									"is_current": false,
+									"organization": {
+										"id": 8724,
+										"name": "*independent user - Unaffiliated"
+									}
+								},
+								{
+									"id": 103284,
+									"start_date": 1470873600,
+									"end_date": null,
+									"owner_id": 58157,
+									"is_current": true,
+									"organization": {
+										"id": 195,
+										"name": "Tipit"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	],
+	"favorite_summit_events": [
+
+	],
+	"attendee": {
+		"id": 6765,
+		"summit_hall_checked_in": false,
+		"summit_hall_checked_in_date": null,
+		"shared_contact_info": false,
+		"member_id": 58157,
+		"schedule": [
+			16811,
+			16840,
+			16636,
+			16625,
+			15419,
+			16887,
+			16772,
+			15805,
+			16637,
+			16628,
+			16848,
+			16645,
+			17280,
+			16629,
+			17276,
+			16630,
+			17383,
+			17294,
+			17295,
+			17296,
+			17298,
+			17299,
+			17373,
+			15374,
+			16626,
+			15170,
+			17361,
+			17327,
+			17302,
+			17156,
+			17144,
+			17188,
+			17128,
+			17322,
+			17317,
+			17325,
+			16865,
+			17326,
+			16985,
+			16873,
+			17013,
+			16846,
+			16886,
+			16888,
+			17397
+		],
+		"tickets": [
+			14
+		]
+	},
+	"feedback": [
+		{
+			"id": 343,
+			"rate": 5,
+			"note": "Great session seeing OpenStack in action.",
+			"created_date": 1477480498,
+			"event_id": 16636,
+			"owner_id": 58157
+		}
+	]
+}

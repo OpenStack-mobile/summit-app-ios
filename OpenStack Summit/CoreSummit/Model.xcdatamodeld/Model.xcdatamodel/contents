@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16C67" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Attendee" representedClassName=".AttendeeManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -20,13 +20,16 @@
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="externalRSVP" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="rsvp" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="socialDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="willRecord" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendee" inverseName="schedule" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="eventType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventType" inverseName="events" inverseEntity="EventType" syncable="YES"/>
+        <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="favoriteEvents" inverseEntity="Member" syncable="YES"/>
         <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feedback" inverseName="event" inverseEntity="Feedback" syncable="YES"/>
         <relationship name="groupMembers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="groupEvents" inverseEntity="Member" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="events" inverseEntity="Group" syncable="YES"/>
@@ -48,13 +51,14 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="eventType" inverseEntity="Event" syncable="YES"/>
         <relationship name="summits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summit" inverseName="eventTypes" inverseEntity="Summit" syncable="YES"/>
     </entity>
-    <entity name="Feedback" representedClassName=".FeedbackManagedObject" isAbstract="YES" syncable="YES">
+    <entity name="Feedback" representedClassName=".FeedbackManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="rate" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="review" attributeType="String" syncable="YES"/>
         <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="feedback" inverseEntity="Event" syncable="YES"/>
+        <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="feedback" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName=".GroupManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -92,7 +96,8 @@
         <attribute name="pictureURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendeeRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Attendee" inverseName="member" inverseEntity="Attendee" syncable="YES"/>
-        <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MemberFeedback" inverseName="member" inverseEntity="MemberFeedback" syncable="YES"/>
+        <relationship name="favoriteEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="favorites" inverseEntity="Event" syncable="YES"/>
+        <relationship name="feedback" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feedback" inverseName="member" inverseEntity="Feedback" syncable="YES"/>
         <relationship name="groupEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="groupMembers" inverseEntity="Event" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
         <relationship name="recievedInvites" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamInvitation" inverseName="invitee" inverseEntity="TeamInvitation" syncable="YES"/>
@@ -101,9 +106,6 @@
         <relationship name="speakerRole" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Speaker" inverseName="memberSpeakerRole" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="teamMembership" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TeamMember" inverseName="member" inverseEntity="TeamMember" syncable="YES"/>
         <relationship name="teamOwner" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Team" inverseName="owner" inverseEntity="Team" syncable="YES"/>
-    </entity>
-    <entity name="MemberFeedback" representedClassName=".MemberFeedbackManagedObject" parentEntity="Feedback" syncable="YES">
-        <relationship name="member" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="feedback" inverseEntity="Member" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName=".NotificationManagedObject" syncable="YES">
         <attribute name="body" attributeType="String" syncable="YES"/>
@@ -123,13 +125,8 @@
         <relationship name="moderator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationSpeaker" inverseEntity="Speaker" syncable="YES"/>
         <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="presentationModerator" inverseEntity="Speaker" syncable="YES"/>
     </entity>
-    <entity name="Review" representedClassName=".ReviewManagedObject" parentEntity="Feedback" syncable="YES">
-        <attribute name="attendee" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="firstName" attributeType="String" syncable="YES"/>
-        <attribute name="lastName" attributeType="String" syncable="YES"/>
-        <attribute name="member" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
-    </entity>
     <entity name="Speaker" representedClassName=".SpeakerManagedObject" syncable="YES">
+        <attribute name="addressBookSectionName" attributeType="String" syncable="YES"/>
         <attribute name="biography" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="firstName" attributeType="String" syncable="YES"/>
@@ -147,6 +144,7 @@
     <entity name="Summit" representedClassName=".SummitManagedObject" syncable="YES">
         <attribute name="active" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="datesLabel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="defaultStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="end" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -165,6 +163,7 @@
         <relationship name="ticketTypes" toMany="YES" deletionRule="Cascade" destinationEntity="TicketType" inverseName="summits" inverseEntity="TicketType" syncable="YES"/>
         <relationship name="trackGroups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TrackGroup" inverseName="summits" inverseEntity="TrackGroup" syncable="YES"/>
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Track" inverseName="summits" inverseEntity="Track" syncable="YES"/>
+        <relationship name="wirelessNetworks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WirelessNetwork" inverseName="summit" inverseEntity="WirelessNetwork" syncable="YES"/>
     </entity>
     <entity name="SummitType" representedClassName=".SummitTypeManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -281,21 +280,28 @@
         <attribute name="youtube" attributeType="String" syncable="YES"/>
         <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="videos" inverseEntity="Event" syncable="YES"/>
     </entity>
+    <entity name="WirelessNetwork" representedClassName=".WirelessNetworkManagedObject" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="password" attributeType="String" syncable="YES"/>
+        <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="wirelessNetworks" inverseEntity="Summit" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Attendee" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="Company" positionX="-36" positionY="18" width="128" height="120"/>
-        <element name="Event" positionX="-54" positionY="0" width="128" height="30"/>
+        <element name="Event" positionX="-54" positionY="0" width="128" height="435"/>
         <element name="EventType" positionX="-18" positionY="81" width="128" height="30"/>
-        <element name="Feedback" positionX="-9" positionY="135" width="128" height="135"/>
+        <element name="Feedback" positionX="-9" positionY="135" width="128" height="150"/>
         <element name="Group" positionX="-9" positionY="135" width="128" height="150"/>
         <element name="Image" positionX="9" positionY="171" width="128" height="30"/>
         <element name="Location" positionX="-18" positionY="108" width="128" height="135"/>
-        <element name="Member" positionX="0" positionY="144" width="128" height="345"/>
-        <element name="MemberFeedback" positionX="9" positionY="153" width="128" height="60"/>
+        <element name="Member" positionX="0" positionY="144" width="128" height="360"/>
+        <element name="Notification" positionX="-9" positionY="135" width="128" height="30"/>
         <element name="Presentation" positionX="-9" positionY="126" width="128" height="135"/>
-        <element name="Review" positionX="0" positionY="144" width="128" height="105"/>
-        <element name="Speaker" positionX="-27" positionY="108" width="128" height="240"/>
-        <element name="Summit" positionX="-63" positionY="-18" width="128" height="30"/>
+        <element name="Speaker" positionX="-27" positionY="108" width="128" height="255"/>
+        <element name="Summit" positionX="-63" positionY="-18" width="128" height="375"/>
         <element name="SummitType" positionX="0" positionY="99" width="128" height="105"/>
         <element name="Tag" positionX="18" positionY="117" width="128" height="105"/>
         <element name="Team" positionX="27" positionY="171" width="128" height="195"/>
@@ -309,6 +315,6 @@
         <element name="VenueFloor" positionX="27" positionY="180" width="128" height="165"/>
         <element name="VenueRoom" positionX="-27" positionY="99" width="128" height="90"/>
         <element name="Video" positionX="0" positionY="126" width="128" height="165"/>
-        <element name="Notification" positionX="-9" positionY="135" width="128" height="30"/>
+        <element name="WirelessNetwork" positionX="-9" positionY="135" width="128" height="135"/>
     </elements>
 </model>

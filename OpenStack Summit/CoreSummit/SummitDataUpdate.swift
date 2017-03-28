@@ -22,6 +22,8 @@ public struct SummitDataUpdate: Named {
     
     public let timeZone: String // should be `TimeZone` but would require Realm Schema migration
     
+    public let datesLabel: String?
+    
     public let start: Date
     
     public let end: Date
@@ -45,6 +47,7 @@ public func == (lhs: Summit.DataUpdate, rhs: Summit.DataUpdate) -> Bool {
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.timeZone == rhs.timeZone
+        && lhs.datesLabel == rhs.datesLabel
         && lhs.start == rhs.start
         && lhs.end == rhs.end
         && lhs.active == rhs.active

@@ -12,7 +12,7 @@ public extension Summit {
     
     enum JSONKey: String {
         
-        case id, name, start_date, end_date, schedule_start_date, time_zone, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp, page_url
+        case id, name, start_date, end_date, schedule_start_date, time_zone, dates_label, logo, active, start_showing_venues_date, sponsors, summit_types, ticket_types, event_types, tracks, track_groups, locations, speakers, schedule, timestamp, page_url, wifi_connections
     }
 }
 
@@ -44,7 +44,9 @@ extension Summit: JSONDecodable {
             let events = Event.fromJSON(eventsJSONArray, parameters: identifier),
             let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
             let eventTypes = EventType.fromJSON(eventTypesJSONArray),
-            let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String
+            let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String,
+            let wirelessNetworksJSONArray = JSONObject[JSONKey.wifi_connections.rawValue]?.arrayValue,
+            let wirelessNetworks = WirelessNetwork.fromJSON(wirelessNetworksJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -52,6 +54,8 @@ extension Summit: JSONDecodable {
         self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
         self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone.name
+        self.webpageURL = webpageURL
+        self.active = active
         self.ticketTypes = Set(ticketTypes)
         self.tracks = Set(tracks)
         self.trackGroups = Set(trackGroups)
@@ -59,8 +63,7 @@ extension Summit: JSONDecodable {
         self.eventTypes = Set(eventTypes)
         self.speakers = Set(speakers)
         self.sponsors = Set(sponsors)
-        self.webpageURL = webpageURL
-        self.active = active
+        self.wirelessNetworks = Set(wirelessNetworks)
         
         // filter venues (we have to ignore other types of venues)
         self.locations = Set(locations.filter({
@@ -74,6 +77,8 @@ extension Summit: JSONDecodable {
         }))
         
         // optional values
+        
+        self.datesLabel = JSONObject[JSONKey.dates_label.rawValue]?.rawValue as? String
         
         if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
             

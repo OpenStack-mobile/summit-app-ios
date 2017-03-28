@@ -10,9 +10,9 @@ import XCTest
 import SwiftFoundation
 @testable import CoreSummit
 
-let SummitJSONIdentifiers = 7 ... 7
+let SummitJSONIdentifiers = [6, 7, 22]
 
-let MemberJSONIdentifiers = 1 ... 2
+let MemberJSONIdentifiers = 1 ... 3
 
 final class JSONTests: XCTestCase {
     
@@ -25,7 +25,8 @@ final class JSONTests: XCTestCase {
             guard let summit = Summit(JSONValue: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
             
-            XCTAssert(summit.speakers.isEmpty == false, "No Speakers parsed")
+            XCTAssert(summit.schedule.isEmpty == false, "No Events")
+            XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
         }
     }
     
@@ -48,6 +49,26 @@ final class JSONTests: XCTestCase {
             else { XCTFail("Could not decode from JSON"); return }
         
         XCTAssert(reponse.page.items.isEmpty == false, "No summits parsed")
+    }
+    
+    func testListMembers() {
+        
+        let testJSON = loadJSON("ListMembers")
+        
+        guard let page = Page<Member>(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(page.items.isEmpty == false, "No members parsed")
+    }
+    
+    func testFeedback() {
+        
+        let testJSON = loadJSON("Feedback")
+        
+        guard let page = Page<Feedback>(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(page.items.isEmpty == false, "No feedback parsed")
     }
     
     func testDataUpdates1() {
@@ -185,6 +206,67 @@ final class JSONTests: XCTestCase {
         guard let dataUpdateEntity = dataUpdates.first?.entity,
             case let .JSON(entityJSON) = dataUpdateEntity,
             let _ = GroupEventDataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates9() {
+        
+        let testJSON = loadJSON("DataUpdates9")
+        
+        guard let jsonArray = testJSON.arrayValue,
+            let dataUpdates = DataUpdate.fromJSON(jsonArray)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        XCTAssert(dataUpdates.isEmpty == false, "No DataUpdate parsed")
+        XCTAssert(dataUpdates.count == 2, "\(dataUpdates.count) DataUpdate. Should be 2")
+        
+        for dataUpdate in dataUpdates {
+            
+            guard let dataUpdateEntity = dataUpdate.entity,
+                case let .JSON(entityJSON) = dataUpdateEntity
+                where dataUpdate.className == .SummitWIFIConnection
+                else { continue }
+            
+            guard let _ = WirelessNetwork(JSONValue: .Object(entityJSON))
+                else { XCTFail("Could not decode from JSON"); return }
+        }
+    }
+    
+    func testDataUpdates10() {
+        
+        let testJSON = loadJSON("DataUpdates10")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON)
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        guard let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity
+            where dataUpdate.className == .MyFavorite
+            else { XCTFail("Could not decode from JSON"); return }
+        
+        guard let _ = EventDataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates11() {
+        
+        let testJSON = loadJSON("DataUpdates11")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = Venue(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates12() {
+        
+        let testJSON = loadJSON("DataUpdates12")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = TrackGroupDataUpdate(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
 }

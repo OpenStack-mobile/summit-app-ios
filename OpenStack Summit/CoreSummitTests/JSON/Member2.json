@@ -1,471 +1,151 @@
 {
-	"id": 11624,
+	"id": 13867,
 	"first_name": "Sebastian",
 	"last_name": "Marcet",
 	"gender": "Male",
-	"bio": "<p><span><span>I started working as a developer back in 2002 programming for PocketPC and Handeld mobile devices. And since then, I move out from technology to technology &nbsp;( C++, &nbsp;COM,&nbsp;</span></span>Java, .NET, PHP, Ruby, Android and so )</p>\r\n<p><span><span>trying to improving my knowledge on several fronts.</span></span></p>\r\n<p><span><span>Currently I am working for Tipit , and in charge of OpenstackID development and&nbsp;</span></span></p>\r\n<p><span><span>www.openstack.org web development among other tasks.</span></span></p>\r\n<p><span>https://github.com/smarcet</span></p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
-	"linked_in": null,
+	"bio": null,
+	"linked_in": "http://www.linkedin.com/in/smarcet",
 	"irc": null,
 	"twitter": null,
-	"pic": "http://www.openstack.org/profile_images/members/11624",
-	"groups_events": [
+	"state": "BA",
+	"country": "AR",
+	"pic": "https://devbranch.openstack.org/profile_images/members/13867",
+	"affiliations": [
 		{
-			"id": 17504,
-			"title": "Tipit party",
-			"description": "<p>Tipit party</p>",
-			"social_description": "Tipit party",
-			"start_date": 1477204200,
-			"end_date": 1477206900,
-			"summit_id": 7,
-			"class_name": "SummitEvent",
-			"allow_feedback": false,
-			"avg_feedback_rate": 0,
-			"is_published": true,
-			"head_count": 0,
-			"rsvp_link": null,
-			"sponsors": [
-
-			],
-			"tags": [
-				{
-					"id": 3580,
-					"tag": "Party"
-				}
-			],
-			"type": {
-				"id": 112,
-				"name": "Groups Events",
-				"color": "#f0f0ee",
-				"black_out_times": false
-			},
-			"location": {
-				"id": 175,
-				"name": "Gràcia",
-				"description": null,
-				"location_type": "Internal",
-				"order": 0,
-				"class_name": "SummitVenueRoom",
-				"venue_id": 162,
-				"floor_id": 8,
-				"capacity": 40
-			},
-			"track": {
-				"id": 79,
-				"name": "Big Data",
-				"description": "Big Data collection and analysis is a common use case for OpenStack infrastruture. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.\t\t\t\t",
-				"code": "BD",
-				"track_groups": [
-					{
-						"id": 16,
-						"name": "Developers",
-						"color": "#9aa0b5",
-						"description": "<p>The developers conference will cover developing cloud applications, making the most of containers, delivering valuable services like big data analytics, as well as presentations and help getting started for upstream contributors.</p>",
-						"tracks": [
-							79,
-							80,
-							81,
-							82,
-							83,
-							88
-						]
-					}
-				]
-			},
-			"groups": [
-				{
-					"id": 6,
-					"title": "Foundation Staff",
-					"description": null,
-					"code": "foundation-staff"
-				},
-				{
-					"id": 5,
-					"title": "Foundation Members",
-					"description": null,
-					"code": "foundation-members"
-				}
-			]
+			"id": 54354,
+			"start_date": 1349049600,
+			"end_date": null,
+			"owner_id": 13867,
+			"is_current": true,
+			"organization": {
+				"id": 195,
+				"name": "Tipit"
+			}
 		},
 		{
-			"id": 17503,
-			"title": "Foundation Staff Party update",
-			"description": "<p>Foundation Staff Party</p>",
-			"social_description": "Foundation Staff Party",
-			"start_date": 1477508460,
-			"end_date": 1477510200,
-			"summit_id": 7,
-			"class_name": "SummitEvent",
-			"allow_feedback": false,
-			"avg_feedback_rate": 0,
-			"is_published": true,
-			"head_count": 0,
-			"rsvp_link": null,
-			"sponsors": [
-
-			],
-			"tags": [
-				{
-					"id": 3580,
-					"tag": "Party"
-				}
-			],
-			"type": {
-				"id": 112,
-				"name": "Groups Events",
-				"color": "#f0f0ee",
-				"black_out_times": false
-			},
-			"location": {
-				"id": 129,
-				"name": "Hilton Diagonal Mar",
-				"description": "<p><span>This contemporary hotel is a 7-minute walk from the beach and 4.1 km from La Sagrada Familia.</span><span> </span><span class=\"_dgc kd-hc\" data-ved=\"0ahUKEwie7YjWt8bOAhUK4mMKHcmTAPAQ3E0IwgEwDg\"><span class=\"_I5e\"><br><br>All rooms offer upscale decor and custom-designed beds, plus flat-screen TVs, minibars, coffeemakers and paid WiFi. Executive rooms offer free WiFi and access to the Executive Lounge’s free breakfast and evening appetizers. Suites add separate living areas.</span><span class=\"_I5e\"><br><br>Breakfast is available (fee), and there’s a restaurant serving Mediterranean/Catalan cuisine, as well as a chic bar and a cafe. There's also a fitness center, a seasonal outdoor pool, a children's pool and saunas. Additional amenities include a ballroom, 15 meeting rooms and a business center.</span></span></p>",
-				"location_type": "Internal",
-				"order": 16,
-				"class_name": "SummitVenue",
-				"address_1": "Carrer del Taulat, 262-264",
-				"address_2": null,
-				"zip_code": "08019",
-				"city": " Barcelona",
-				"state": null,
-				"country": "ES",
-				"lng": "2.2176587",
-				"lat": "41.4088636",
-				"is_main": false,
-				"maps": [
-
-				],
-				"images": [
-					{
-						"id": 26,
-						"name": "Hilton",
-						"description": null,
-						"class_name": "SummitLocationImage",
-						"location_id": 129,
-						"order": 1,
-						"image_url": "http://www.openstack.org/assets/summits/7/locations/129/images/hilton-diagonal-mar-barcelona-21.jpg"
-					}
-				],
-				"rooms": [
-					{
-						"id": 130,
-						"name": "Ballroom C",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 1,
-						"capacity": 102
-					},
-					{
-						"id": 141,
-						"name": "Ballroom A",
-						"description": null,
-						"location_type": "None",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 1,
-						"capacity": 234
-					},
-					{
-						"id": 142,
-						"name": "Ballroom B",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 1,
-						"capacity": 102
-					},
-					{
-						"id": 150,
-						"name": "Marmara",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 24
-					},
-					{
-						"id": 151,
-						"name": "Adriatic",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 24
-					},
-					{
-						"id": 152,
-						"name": "Baltic",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 24
-					},
-					{
-						"id": 153,
-						"name": "Bering",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 24
-					},
-					{
-						"id": 154,
-						"name": "Albora A",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 155,
-						"name": "Albora B",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 156,
-						"name": "Coral",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 157,
-						"name": "Mediterrani A",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 158,
-						"name": "Mediterrani B",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 159,
-						"name": "Barenz",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 160,
-						"name": "Egea",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 2,
-						"capacity": 12
-					},
-					{
-						"id": 161,
-						"name": "Timor",
-						"description": null,
-						"location_type": "Internal",
-						"order": 0,
-						"class_name": "SummitVenueRoom",
-						"venue_id": 129,
-						"floor_id": 1,
-						"capacity": 12
-					}
-				],
-				"floors": [
-					{
-						"id": 1,
-						"name": "P0",
-						"description": "P0",
-						"number": 0,
-						"venue_id": 129,
-						"image": "http://www.openstack.org/assets/summits/7/locations/129/floors/Hilton-P0.jpg",
-						"rooms": [
-							130,
-							141,
-							142,
-							161
-						]
-					},
-					{
-						"id": 2,
-						"name": "P1",
-						"description": "P1",
-						"number": 1,
-						"venue_id": 129,
-						"image": "http://www.openstack.org/assets/summits/7/locations/129/floors/Hilton-P1.jpg",
-						"rooms": [
-							150,
-							151,
-							152,
-							153,
-							154,
-							155,
-							156,
-							157,
-							158,
-							159,
-							160
-						]
-					},
-					{
-						"id": 3,
-						"name": "P2",
-						"description": "P2",
-						"number": 2,
-						"venue_id": 129,
-						"image": null
-					}
-				]
-			},
-			"track": {
-				"id": 56,
-				"name": "Community Building",
-				"description": "OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.\t\t\t\t",
-				"code": "I",
-				"track_groups": [
-					{
-						"id": 13,
-						"name": "Community Collaboration",
-						"color": "#5244c0",
-						"description": "<p>Community Collaobration brings together the upstream developers, operators and various working groups under the User Committee to plan the future of the software and collaborate around various community initiatives. The Design Summit allows the upstream developer community to discuss requirements for the next software release, debate the implementation details and connect with other community members about cross-project issues. The Ops Summit gives people who are already running OpenStack clouds a place to congregate, swap best practices and give feedback in the development process. In other sessions, organizing bodies, such as ambassadors, user groups, User Committee and associated working groups, and those who are helping evangelize OpenStack around the world have an opportunitiy to join new groups, participate in working sessions, share learnings and collaborate in real-time. None of these are classic conference track with speakers and presentations, but instead collaborative group working sessions.</p>",
-						"tracks": [
-							56,
-							86,
-							87
-						]
-					}
-				]
-			},
-			"groups": [
-				{
-					"id": 17,
-					"title": "Board of Directors",
-					"description": null,
-					"code": "board-of-directors"
-				},
-				{
-					"id": 6,
-					"title": "Foundation Staff",
-					"description": null,
-					"code": "foundation-staff"
-				},
-				{
-					"id": 11,
-					"title": "Training Admins",
-					"description": null,
-					"code": "training-admins"
-				}
-			]
+			"id": 54514,
+			"start_date": 1388448000,
+			"end_date": null,
+			"owner_id": 13867,
+			"is_current": true,
+			"organization": {
+				"id": 3,
+				"name": "OpenStack Foundation"
+			}
 		}
-	],
-	"speaker": {
-		"id": 9,
-		"first_name": "Sebastian",
-		"last_name": "Marcet",
-		"title": "Senior Software Enginner",
-		"bio": "<p><span><span>I started working as a developer back in 2002 programming for PocketPC and Handeld mobile devices. And since then, I move out from technology to technology &nbsp;( C++, &nbsp;COM,&nbsp;</span></span>Java, .NET, PHP, Ruby, Android and so )</p>\r\n<p><span><span>trying to improving my knowledge on several fronts.</span></span></p>\r\n<p><span><span>Currently I am working for Tipit , and in charge of OpenstackID development and&nbsp;</span></span></p>\r\n<p><span><span>www.openstack.org web development among other tasks.</span></span></p>\r\n<p><span>https://github.com/smarcet</span></p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
-		"irc": "smarcet",
-		"twitter": "smarcet",
-		"presentations": {
-			"1": 16645
-		},
-		"moderated_presentations": [
-
-		],
-		"pic": "http://www.openstack.org/profile_images/speakers/9"
-	},
-	"feedback": [
-
 	],
 	"groups": [
 		{
-			"id": 2,
-			"title": "Administrators",
-			"description": null,
-			"code": "administrators"
+			"id": 29,
+			"title": "Community Members",
+			"description": "Community Members",
+			"code": "community-members"
+		}
+	],
+	"groups_events": [
+
+	],
+	"team_memberships": [
+
+	],
+	"favorite_summit_events": [
+
+	],
+	"attendee": {
+		"id": 6832,
+		"summit_hall_checked_in": false,
+		"summit_hall_checked_in_date": null,
+		"shared_contact_info": false,
+		"member_id": 13867,
+		"schedule": [
+			16888,
+			17415,
+			16840,
+			16870,
+			17300,
+			16842,
+			16919,
+			17297,
+			16846,
+			15418,
+			17373,
+			15568,
+			17265,
+			15358,
+			15584,
+			16823,
+			16774,
+			16781,
+			16627,
+			16786,
+			17312,
+			17052,
+			15185,
+			16929,
+			16910,
+			16980,
+			15652,
+			17119,
+			17069,
+			16985,
+			17374,
+			16889,
+			16638,
+			17326,
+			16636
+		],
+		"tickets": [
+			14
+		]
+	},
+	"feedback": [
+		{
+			"id": 149,
+			"rate": 5,
+			"note": "\"great presentation\"",
+			"created_date": 1477363390,
+			"event_id": 17300,
+			"owner_id": 13867
 		},
 		{
-			"id": 28,
-			"title": "Preview",
-			"description": null,
-			"code": "preview"
+			"id": 217,
+			"rate": 4,
+			"note": "\"good\"",
+			"created_date": 1477398795,
+			"event_id": 16636,
+			"owner_id": 13867
 		},
 		{
-			"id": 5,
-			"title": "Foundation Members",
-			"description": null,
-			"code": "foundation-members"
+			"id": 218,
+			"rate": 4,
+			"note": "\"interesting\"",
+			"created_date": 1477398831,
+			"event_id": 17295,
+			"owner_id": 13867
 		},
 		{
-			"id": 30,
-			"title": "News Managers",
-			"description": "News Manager",
-			"code": "news-managers"
+			"id": 219,
+			"rate": 4,
+			"note": "\"interesting\"",
+			"created_date": 1477398872,
+			"event_id": 17296,
+			"owner_id": 13867
 		},
 		{
-			"id": 31,
-			"title": "openstackid server admin",
-			"description": "OpenstackID Administrators",
-			"code": "openstackid-server-admin"
+			"id": 238,
+			"rate": 5,
+			"note": "\"great presentation\"",
+			"created_date": 1477449319,
+			"event_id": 16637,
+			"owner_id": 13867
 		},
 		{
-			"id": 32,
-			"title": "oauth2 server admin",
-			"description": "OpenstackID OAUTH2 Server Administrators",
-			"code": "oauth2-server-admin"
-		},
-		{
-			"id": 8,
-			"title": "Speakers",
-			"description": null,
-			"code": "speakers"
-		},
-		{
-			"id": 38,
-			"title": "Working Groups",
-			"description": "Working Group list for Barcelona Summit",
-			"code": "working-groups"
+			"id": 419,
+			"rate": 3,
+			"note": "\".\"",
+			"created_date": 1477580255,
+			"event_id": 17256,
+			"owner_id": 13867
 		}
 	]
 }
