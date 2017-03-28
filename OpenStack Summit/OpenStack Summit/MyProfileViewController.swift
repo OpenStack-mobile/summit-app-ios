@@ -25,7 +25,10 @@ final class MyProfileViewController: RevealTabStripViewController {
         
         super.viewDidLoad()
         
-        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            
+            buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        }
         
         title = "MY SUMMIT"
         
