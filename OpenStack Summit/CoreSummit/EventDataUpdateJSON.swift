@@ -94,5 +94,19 @@ extension EventDataUpdate: JSONDecodable {
             
             self.videos = []
         }
+        
+        if let attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String {
+            
+            self.attachment = attachment
+            
+        } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
+            let slides = String.fromJSON(slidesJSONArray) {
+            
+            self.attachment = slides.first
+            
+        } else {
+            
+            self.attachment = nil
+        }
     }
 }
