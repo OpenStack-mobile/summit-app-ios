@@ -135,6 +135,13 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.performSegueWithIdentifier(R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
     }
     
+    // MARK: - Actions
+    
+    @IBAction func refresh(sender: AnyObject? = nil) {
+        
+        configureView()
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {

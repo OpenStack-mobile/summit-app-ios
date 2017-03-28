@@ -17,6 +17,10 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     override var forwardChildBarButtonItems: Bool { return true }
     
+    lazy var personalScheduleViewController: PersonalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
+    lazy var favoriteEventsViewController: FavoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
+    lazy var personDetailViewController: PersonDetailViewController = R.storyboard.member.personDetailViewController()!
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -35,17 +39,22 @@ final class MyProfileViewController: RevealTabStripViewController {
         reloadPagerTabStripView()
     }
     
+    // MARK: - Methods
+    
+    func showProfileDetail() {
+        
+        let _ = self.view
+        
+        moveToViewController(personDetailViewController, animated: true)
+    }
+    
     // MARK: - PagerTabStripViewControllerDataSource
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
-        let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
-        let memberProfileDetailViewController = R.storyboard.member.personDetailViewController()!
-        
         var childViewControllers = [personalScheduleViewController,
                                     favoriteEventsViewController,
-                                    memberProfileDetailViewController]
+                                    personDetailViewController]
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
