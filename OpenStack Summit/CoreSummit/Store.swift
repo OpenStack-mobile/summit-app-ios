@@ -179,7 +179,6 @@ public final class Store {
         let hasPasscode = deviceHasPasscode
         
         var scopes = ["openid",
-                      "profile",
                       "offline_access",
                       "\(environment.configuration.serverURL)/me/read",
                       "\(environment.configuration.serverURL)/summits/read",
@@ -193,6 +192,7 @@ public final class Store {
             
             let teamScopes = ["\(environment.configuration.serverURL)/teams/read",
                               "\(environment.configuration.serverURL)/teams/write",
+                              "\(environment.configuration.serverURL)/members/read",
                               "\(environment.configuration.serverURL)/members/invitations/read",
                               "\(environment.configuration.serverURL)/members/invitations/write"]
             
@@ -225,9 +225,7 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(environment.configuration.serverURL)/summits/read",
-                "\(environment.configuration.serverURL)/members/read"
-            ],
+            scopes: ["\(environment.configuration.serverURL)/summits/read"],
             clientSecret: environment.configuration.serviceAccount.secret
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)
