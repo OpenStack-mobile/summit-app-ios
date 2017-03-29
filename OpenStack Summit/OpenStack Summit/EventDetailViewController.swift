@@ -1,4 +1,4 @@
-//
+    //
 //  EventDetailViewController.swift
 //  OpenStackSummit
 //
@@ -22,7 +22,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBOutlet private(set) var titleHeader: EventDetailTitleHeader!
     @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
-    @IBOutlet private(set) var speakersHeader: EventDetailHeader!
     
     // MARK: - Properties
     
@@ -57,9 +56,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         addContextMenuBarButtonItem()
         
-        // setup tableview
+        // setup table view
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 60
+        // must be set later, or else will trigger datasource methods with nil `self.eventDetail`
+        defer { tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 20)) }
+        // https://github.com/mac-cain13/R.swift/issues/144
+        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)
         
         // entityController 
         entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
@@ -94,7 +99,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         // update UI
         self.updateUI()
-        tableView.tableFooterView = UIView()
         
         // dont continue if no connectivity
         guard Reachability.connected else { return }
@@ -171,6 +175,14 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         UIApplication.sharedApplication().openURL(url)
     }
     
+    @IBAction func showAttachment(sender: AnyObject? = nil) {
+        
+        guard let url = NSURL(string: eventDetail.attachment)
+            else { return }
+        
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
     // MARK: - Private Methods
     
     private func updateUI() {
@@ -201,6 +213,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
         
         self.data.append(.description)
+        
+        if eventDetail.attachment.isEmpty == false {
+            
+            data.append(.attachment)
+        }
         
         if eventDetail.location.isEmpty == false {
             
@@ -444,11 +461,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 // video
                 
-                cell.playButton.hidden = eventDetail.willRecord == false
+                cell.willRecordImageView.hidden = eventDetail.willRecord == false
                 
                 // description text
                 
-                let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
+                let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: OpenSans; font-size: 13\">%@</span>", eventDetail.eventDescription)
                 if let data = eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
                     let attrStr = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
                     
@@ -460,11 +477,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 }
                 
                 cell.descriptionTextView.textContainerInset = UIEdgeInsetsZero
-                
                 cell.descriptionTextView.delegate = self
                 
                 // sponsors
-                
                 cell.sponsorsLabel.text = eventDetail.sponsors
                 cell.sponsorsLabelHeightConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 30
                 cell.sponsorsLabelSeparationConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 8
@@ -487,6 +502,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 cell.sectionLabel.text = "LEVEL"
                 cell.valueLabel.text = eventDetail.level
+                
+                return cell
+                
+            case .attachment:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, forIndexPath: indexPath)!
                 
                 return cell
             }
@@ -575,7 +596,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
         case .details: return EventDetailTitleHeader.estimatedHeight
-        case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
+        case .speakers: return eventDetail.speakers.isEmpty ? 0 : 60
         case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
     }
@@ -586,7 +607,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
         case .details: return UITableViewAutomaticDimension
-        case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
+        case .speakers: return eventDetail.speakers.isEmpty ? 0 : UITableViewAutomaticDimension
         case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
         }
     }
@@ -597,9 +618,24 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
             
-        case .details: return titleHeader
-        case .speakers: return eventDetail.speakers.isEmpty ? nil : speakersHeader
-        case .feedback: return shouldShowReviews ? feedBackHeader : nil
+        case .details:
+            
+            return titleHeader
+            
+        case .feedback:
+            
+            return shouldShowReviews ? feedBackHeader : nil
+            
+        case .speakers:
+            
+            guard eventDetail.speakers.isEmpty == false
+                else { return nil }
+            
+            let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.resuseIdentifier) as! TableViewHeaderView
+            
+            headerView.titleLabel.text = "SPEAKERS"
+            
+            return headerView
         }
     }
     
@@ -632,6 +668,7 @@ private extension EventDetailViewController {
         
         case video
         case description
+        case attachment
         case location
         case level
     }
@@ -652,13 +689,6 @@ final class EventDetailTitleHeader: UIView {
     @IBOutlet private(set) weak var favoriteButton: EventDetailActionButton!
     @IBOutlet private(set) weak var scheduleButton: EventDetailActionButton!
     @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
-}
-
-final class EventDetailHeader: UIView {
-    
-    static let height: CGFloat = 60.0
-    
-    @IBOutlet private(set) weak var label: UILabel!
 }
 
 final class EventDetailFeedbackHeader: UIView {
@@ -682,7 +712,7 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
     
     @IBOutlet private(set) weak var eventDayLabel: UILabel!
     @IBOutlet private(set) weak var eventTimeLabel: UILabel!
-    @IBOutlet private(set) weak var playButton: Button!
+    @IBOutlet private(set) weak var willRecordImageView: UIImageView!
     @IBOutlet private(set) weak var descriptionTextView: UITextView!
     @IBOutlet private(set) weak var sponsorsLabel: UILabel!
     @IBOutlet private(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!

@@ -37,6 +37,8 @@ public struct Event: Named {
     public var externalRSVP: Bool
     
     public var willRecord: Bool
+    
+    public var attachment: String?
         
     public var sponsors: Set<Identifier>
     

@@ -33,6 +33,8 @@ extension EventDataUpdate: Updatable {
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
+        managedObject.attachment = attachment
+        
         managedObject.track = try context.relationshipFault(track)
         managedObject.eventType = try context.relationshipFault(type)
         managedObject.sponsors = try context.relationshipFault(sponsors)
