@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2553a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Feedback Edit View Controller-->
+        <!--View Controller-->
         <scene sceneID="v0u-vc-82a">
             <objects>
-                <viewController storyboardIdentifier="FeedbackEditViewController" id="dxH-BK-An5" customClass="FeedbackEditViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dxH-BK-An5" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BjZ-pz-aoG"/>
                         <viewControllerLayoutGuide type="bottom" id="V8N-jX-8nH"/>
@@ -127,6 +135,133 @@
             </objects>
             <point key="canvasLocation" x="2713" y="2158"/>
         </scene>
+        <!--RATE-->
+        <scene sceneID="9ZE-hY-QGZ">
+            <objects>
+                <viewController storyboardIdentifier="FeedbackViewController" id="JW6-QW-e3i" customClass="FeedbackViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C0v-ZJ-RdD"/>
+                        <viewControllerLayoutGuide type="bottom" id="QaS-N7-5zQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NO2-UM-x5e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="whq-0x-Thp" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="15" y="498" width="290" height="50"/>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.45098039220000002" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7Xl-LW-Rev"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                                <state key="normal" title="SEND">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                        <color key="value" red="0.31372549020000001" green="0.60784313729999995" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.18823529410000001" green="0.45098039220000002" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esp-Ns-aqW">
+                                <rect key="frame" x="36" y="84" width="248" height="23.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ji2-Yl-DuT" customClass="CosmosView" customModule="Cosmos">
+                                <rect key="frame" x="45" y="122.5" width="230" height="46"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="a3l-Eu-vXz"/>
+                                    <constraint firstAttribute="width" constant="230" id="xIL-VN-Ua2"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="46"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                        <color key="value" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                        <color key="value" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueK-GZ-1TZ">
+                                <rect key="frame" x="0.0" y="198.5" width="320" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Fh0-Rv-gO9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ueK-GZ-1TZ" firstAttribute="leading" secondItem="NO2-UM-x5e" secondAttribute="leading" id="Eme-tl-XIO"/>
+                            <constraint firstItem="Esp-Ns-aqW" firstAttribute="leading" secondItem="NO2-UM-x5e" secondAttribute="leadingMargin" constant="20" id="FOH-ad-42m"/>
+                            <constraint firstItem="QaS-N7-5zQ" firstAttribute="top" secondItem="whq-0x-Thp" secondAttribute="bottom" constant="20" id="P4d-QK-Las"/>
+                            <constraint firstItem="Esp-Ns-aqW" firstAttribute="top" secondItem="C0v-ZJ-RdD" secondAttribute="bottom" constant="20" id="YVh-yh-dcs"/>
+                            <constraint firstAttribute="trailing" secondItem="ueK-GZ-1TZ" secondAttribute="trailing" id="cwp-co-SoW"/>
+                            <constraint firstItem="Ji2-Yl-DuT" firstAttribute="top" secondItem="Esp-Ns-aqW" secondAttribute="bottom" constant="15" id="czO-vH-pC8"/>
+                            <constraint firstItem="Ji2-Yl-DuT" firstAttribute="centerX" secondItem="NO2-UM-x5e" secondAttribute="centerX" id="ee3-Lj-kjC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Esp-Ns-aqW" secondAttribute="trailing" constant="20" id="h63-tY-i1w"/>
+                            <constraint firstItem="whq-0x-Thp" firstAttribute="leading" secondItem="NO2-UM-x5e" secondAttribute="leading" constant="15" id="jko-G3-rZ3"/>
+                            <constraint firstAttribute="trailing" secondItem="whq-0x-Thp" secondAttribute="trailing" constant="15" id="qbr-xL-3zf"/>
+                            <constraint firstItem="ueK-GZ-1TZ" firstAttribute="top" secondItem="Ji2-Yl-DuT" secondAttribute="bottom" constant="30" id="tEL-eG-0nq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="RATE" id="peJ-4G-Gnk">
+                        <barButtonItem key="backBarButtonItem" title=" " id="UYU-b2-vl0"/>
+                        <barButtonItem key="leftBarButtonItem" image="close" style="plain" id="GRY-hK-pdD"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7iA-pZ-l03" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3712.5" y="2159.1549295774648"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="RbE-An-zZG">
+            <objects>
+                <tableViewController id="K73-bM-GMJ" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1aO-GS-0X0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CZ4-6d-9vP">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CZ4-6d-9vP" id="9TQ-5S-O6k">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="K73-bM-GMJ" id="PDf-g7-Eob"/>
+                            <outlet property="delegate" destination="K73-bM-GMJ" id="5gw-Ur-LHl"/>
+                        </connections>
+                    </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lrl-mp-yNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4445" y="2164"/>
+        </scene>
         <!--Feedback Given List View Controller-->
         <scene sceneID="HL5-hI-6zx">
             <objects>
@@ -144,10 +279,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="feedbackTableViewCell" id="CAp-W7-SEB" customClass="FeedbackTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="90"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CAp-W7-SEB" id="Bbc-kJ-zbE">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -171,4 +306,7 @@
             <point key="canvasLocation" x="2693" y="-294"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="close" width="17" height="17"/>
+    </resources>
 </document>
