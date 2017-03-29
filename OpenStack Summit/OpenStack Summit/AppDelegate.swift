@@ -48,6 +48,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // setup Google Maps
         GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
         
+        // setup BuddyBuild SDK
+        BuddyBuildSDK.setup()
+        
         // initialize Store
         let _ = Store.shared
         

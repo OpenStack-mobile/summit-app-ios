@@ -938,6 +938,11 @@
 		6EF147F31D1358B400D5EEF9 /* People.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF147F21D1358B400D5EEF9 /* People.storyboard */; };
 		6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */; };
 		6EF1C84D1D148C3C0060BF45 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */; };
+		6EF24DF31E8BF2800081D939 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF24DF21E8BF2630081D939 /* BuddyBuildSDK.framework */; };
+		6EF24DF51E8BFC2D0081D939 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF24DF41E8BFC2D0081D939 /* CoreTelephony.framework */; };
+		6EF24DF71E8BFC370081D939 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF24DF61E8BFC370081D939 /* AssetsLibrary.framework */; };
+		6EF24DF91E8BFC470081D939 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF24DF81E8BFC470081D939 /* CoreMedia.framework */; };
+		6EF24DFB1E8BFC580081D939 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF24DFA1E8BFC580081D939 /* CoreVideo.framework */; };
 		6EF2FB391D524BCC00BF9EDE /* TicketOrderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FB381D524BCC00BF9EDE /* TicketOrderRequest.swift */; };
 		6EF3A88A1E4675E800CD85EF /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF3A8891E4675E800CD85EF /* Videos.storyboard */; };
 		6EF3A88C1E46760500CD85EF /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF3A88B1E46760500CD85EF /* VideosViewController.swift */; };
@@ -1639,6 +1644,11 @@
 		6EF147F21D1358B400D5EEF9 /* People.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = People.storyboard; sourceTree = "<group>"; };
 		6EF1C8481D148C3C0060BF45 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		6EF1C8491D148C3C0060BF45 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
+		6EF24DF21E8BF2630081D939 /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
+		6EF24DF41E8BFC2D0081D939 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6EF24DF61E8BFC370081D939 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		6EF24DF81E8BFC470081D939 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		6EF24DFA1E8BFC580081D939 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		6EF2FB381D524BCC00BF9EDE /* TicketOrderRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketOrderRequest.swift; sourceTree = "<group>"; };
 		6EF3A8891E4675E800CD85EF /* Videos.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Videos.storyboard; sourceTree = "<group>"; };
 		6EF3A88B1E46760500CD85EF /* VideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
@@ -1711,10 +1721,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */,
+				6EDE522A1D42D4C700DF4BEA /* QuartzCore.framework in Frameworks */,
+				6EF24DFB1E8BFC580081D939 /* CoreVideo.framework in Frameworks */,
+				6EDE521B1D42D46400DF4BEA /* AVFoundation.framework in Frameworks */,
+				6EF24DF91E8BFC470081D939 /* CoreMedia.framework in Frameworks */,
+				6EDE52271D42D4C700DF4BEA /* CoreText.framework in Frameworks */,
+				6EF24DF71E8BFC370081D939 /* AssetsLibrary.framework in Frameworks */,
+				6EF24DF51E8BFC2D0081D939 /* CoreTelephony.framework in Frameworks */,
 				6E2D18601E29431C0095508A /* GoogleInterchangeUtilities.framework in Frameworks */,
 				6EDE52361D42D52D00DF4BEA /* Accelerate.framework in Frameworks */,
 				6E2D18621E29431C0095508A /* GoogleToolboxForMac.framework in Frameworks */,
-				6EDE52341D42D50D00DF4BEA /* SystemConfiguration.framework in Frameworks */,
 				6E2D185D1E29431C0095508A /* FirebaseCore.framework in Frameworks */,
 				6E2D18611E29431C0095508A /* GoogleSymbolUtilities.framework in Frameworks */,
 				6E2D185E1E29431C0095508A /* FirebaseInstanceID.framework in Frameworks */,
@@ -1726,14 +1743,12 @@
 				6EDE52251D42D4C700DF4BEA /* CoreGraphics.framework in Frameworks */,
 				6E2D185C1E29431C0095508A /* FirebaseAnalytics.framework in Frameworks */,
 				6EDE52261D42D4C700DF4BEA /* CoreLocation.framework in Frameworks */,
-				6EDE52271D42D4C700DF4BEA /* CoreText.framework in Frameworks */,
 				6EDE52281D42D4C700DF4BEA /* GLKit.framework in Frameworks */,
 				6EDE52291D42D4C700DF4BEA /* OpenGLES.framework in Frameworks */,
-				6EDE522A1D42D4C700DF4BEA /* QuartzCore.framework in Frameworks */,
 				6EDE521E1D42D47A00DF4BEA /* CoreData.framework in Frameworks */,
-				6EDE521B1D42D46400DF4BEA /* AVFoundation.framework in Frameworks */,
 				6EDE52191D42D09D00DF4BEA /* GoogleMaps.framework in Frameworks */,
 				6E10A5061D1066E9008CBD0C /* CoreSummit.framework in Frameworks */,
+				6EF24DF31E8BF2800081D939 /* BuddyBuildSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2634,6 +2649,7 @@
 		6EDE52161D42D08200DF4BEA /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				6EF24DF21E8BF2630081D939 /* BuddyBuildSDK.framework */,
 				6E2D18551E29431C0095508A /* FirebaseAnalytics.framework */,
 				6E2D18561E29431C0095508A /* FirebaseCore.framework */,
 				6E2D18571E29431C0095508A /* FirebaseInstanceID.framework */,
@@ -2653,6 +2669,10 @@
 		6EDE521C1D42D46900DF4BEA /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6EF24DFA1E8BFC580081D939 /* CoreVideo.framework */,
+				6EF24DF81E8BFC470081D939 /* CoreMedia.framework */,
+				6EF24DF61E8BFC370081D939 /* AssetsLibrary.framework */,
+				6EF24DF41E8BFC2D0081D939 /* CoreTelephony.framework */,
 				6EDE52311D42D50000DF4BEA /* libz.tbd */,
 				6EDE522F1D42D4F600DF4BEA /* libicucore.tbd */,
 				6EDE522D1D42D4EB00DF4BEA /* libc++.tbd */,
@@ -5060,7 +5080,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.openstack.ios.summit$BUNDLE_ID_SUFFIX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenStack Summit/OpenStackSummit-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Vendor/Firebase;
 			};
 			name = Debug;
