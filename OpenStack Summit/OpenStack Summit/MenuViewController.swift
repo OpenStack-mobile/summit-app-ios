@@ -344,7 +344,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(searchViewController)
     }
         
-    private func showMyProfile(showDetail showDetail: Bool = false) {
+    private func showMyProfile() {
         
         guard Store.shared.isLoggedIn else { return }
         
@@ -353,11 +353,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         let myProfileViewController = MyProfileViewController()
         
         show(myProfileViewController)
-        
-        if showDetail {
-            
-            myProfileViewController.showProfileDetail()
-        }
     }
     
     private func show(viewController: UIViewController) {
@@ -419,7 +414,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                        
                     } else {
                         
-                        controller.showMyProfile(showDetail: true)
+                        controller.showMyProfile()
                         
                         let revealViewController = AppDelegate.shared.revealViewController
                         
@@ -437,7 +432,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                             
                             let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
                             
-                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile(showDetail: true) }
+                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile() }
                         })
                         
                         revealViewController.presentViewController(alert, animated: true) { }
