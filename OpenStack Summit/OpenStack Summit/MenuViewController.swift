@@ -344,7 +344,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(searchViewController)
     }
         
-    private func showMyProfile() {
+    private func showMyProfile(showDetail showDetail: Bool = false) {
         
         guard Store.shared.isLoggedIn else { return }
         
@@ -353,6 +353,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         let myProfileViewController = MyProfileViewController()
         
         show(myProfileViewController)
+        
+        if showDetail {
+            
+            myProfileViewController.showProfileDetail()
+        }
     }
     
     private func show(viewController: UIViewController) {
@@ -414,14 +419,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                        
                     } else {
                         
+                        controller.showMyProfile(showDetail: true)
+                        
+                        let revealViewController = AppDelegate.shared.revealViewController
+                        
                         // show a popup asking user if they are going to the summit
                         let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
                         
                         alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
                             
                             Preference.goingToSummit = false
-                            
-                            controller.showMyProfile()
                         })
                         
                         alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
@@ -430,10 +437,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                             
                             let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
                             
-                            controller.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile(showDetail: true) }
                         })
                         
-                        controller.presentViewController(alert, animated: true) { }
+                        revealViewController.presentViewController(alert, animated: true) { }
                     }
                     
                     // log user email
