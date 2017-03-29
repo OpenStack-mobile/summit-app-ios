@@ -19,10 +19,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECTION TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9z-Z3-QsV">
-                    <rect key="frame" x="16" y="30" width="91" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECTION TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9z-Z3-QsV">
+                    <rect key="frame" x="15" y="30" width="91" height="18"/>
                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="13"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOI-ex-kSZ" userLabel="Separator View">
@@ -39,7 +39,7 @@
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="y9z-Z3-QsV" secondAttribute="bottom" constant="10" id="PR7-EG-vAS"/>
                 <constraint firstAttribute="trailing" secondItem="jOI-ex-kSZ" secondAttribute="trailing" id="SFx-dq-Tbe"/>
                 <constraint firstItem="jOI-ex-kSZ" firstAttribute="leading" secondItem="jiU-9N-9do" secondAttribute="leading" id="SWK-nN-xvc"/>
-                <constraint firstItem="y9z-Z3-QsV" firstAttribute="leading" secondItem="jiU-9N-9do" secondAttribute="leading" constant="16" id="jSp-oZ-6If"/>
+                <constraint firstItem="y9z-Z3-QsV" firstAttribute="leading" secondItem="jiU-9N-9do" secondAttribute="leading" constant="15" id="jSp-oZ-6If"/>
                 <constraint firstAttribute="bottom" secondItem="jOI-ex-kSZ" secondAttribute="bottom" id="jZ5-Jr-JIb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
