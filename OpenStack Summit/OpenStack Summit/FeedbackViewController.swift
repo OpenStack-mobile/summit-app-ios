@@ -32,10 +32,12 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     var completion: (FeedbackViewController -> ())?
     
-    var content: Content! {
+    var event: Identifier = 0 {
         
-        didSet { if isViewLoaded() { configureView() } }
+         didSet { if isViewLoaded() { configureView() } }
     }
+    
+    private var mode: Mode = .new
     
     private let placeHolderText = "Write a Review..."
     
@@ -55,8 +57,6 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        assert(content != nil)
         
         self.ratingView.rating = 0
         
@@ -116,10 +116,10 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         showActivityIndicator()
         
         let summit = SummitManager.shared.summit.value
-        
-        switch self.content! {
+                
+        switch mode {
             
-        case let .new(event):
+        case .new:
             
             Store.shared.addFeedback(summit, event: event, rate: rate, review: review) { [weak self] (response) in
                 
@@ -142,10 +142,28 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
                 }
             }
             
+        case .edit:
             
-        case let .edit(feedback):
-            
-            break
+            Store.shared.editFeedback(summit, event: event, rate: rate, review: review)  { [weak self] (error) in
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    
+                    guard let controller = self else { return }
+                    
+                    controller.dismissActivityIndicator()
+                    
+                    switch error {
+                        
+                    case let .Some(error):
+                        
+                        controller.showErrorMessage(error)
+                        
+                    case .None:
+                        
+                        controller.close()
+                    }
+                }
+            }
         }
     }
     
@@ -153,27 +171,26 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     private func configureView() {
         
-        switch self.content! {
+        if let feedbackManagedObject = Store.shared.authenticatedMember?.feedback(for: self.event) {
             
-        case let .new(eventID):
-            
-            guard let eventManagedObject = try! EventManagedObject.find(eventID, context: Store.shared.managedObjectContext)
-                else { fatalError("Invalid event \(eventID)") }
-            
-            let event = Event(managedObject: eventManagedObject)
-            
-            configureView(with: event)
-            
-        case let .edit(feedbackID):
-            
-            guard let feedbackManagedObject = try! FeedbackManagedObject.find(feedbackID, context: Store.shared.managedObjectContext)
-                else { fatalError("Invalid feedback \(feedbackID)") }
+            mode = .edit
             
             let feedback = Feedback(managedObject: feedbackManagedObject)
             
             let event = Event(managedObject: feedbackManagedObject.event)
             
             configureView(with: event, feedback: feedback)
+            
+        } else {
+            
+            mode = .new
+            
+            guard let eventManagedObject = try! EventManagedObject.find(self.event, context: Store.shared.managedObjectContext)
+                else { fatalError("Invalid event \(self.event)") }
+            
+            let event = Event(managedObject: eventManagedObject)
+            
+            configureView(with: event)
         }
     }
     
@@ -259,9 +276,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
 
 extension FeedbackViewController {
     
-    enum Content {
+    enum Mode {
         
-        case new(event: Identifier)
-        case edit(feedback: Identifier)
+        case new
+        case edit
     }
 }

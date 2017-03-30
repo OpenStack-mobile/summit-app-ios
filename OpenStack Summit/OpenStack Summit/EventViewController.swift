@@ -114,20 +114,11 @@ extension EventViewController {
     
     func feedbackController(for event: EventDetail, rating: Int? = nil, completion: (FeedbackViewController -> ())? = nil) -> UINavigationController {
         
-        let eventID = event.identifier
-        
         let feedbackViewController = R.storyboard.feedback.feedbackViewController()!
         
         feedbackViewController.completion = completion
         
-        if let previousFeedbackID = Store.shared.authenticatedMember?.feedback(for: eventID)?.identifier {
-            
-            feedbackViewController.content = .edit(feedback: previousFeedbackID)
-            
-        } else {
-            
-            feedbackViewController.content = .new(event: eventID)
-        }
+        feedbackViewController.event = event.identifier
         
         if let rating = rating {
             

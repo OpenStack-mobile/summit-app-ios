@@ -589,9 +589,13 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let feedback = feedbackList[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: PersonIdentifier(member: feedback.member))
+            guard feedback.member.identifier == Store.shared.authenticatedMember?.identifier
+                && canAddFeedback(for: eventDetail)
+                else { return }
             
-            self.showViewController(memberViewController, sender: self)
+            let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
+            
+            self.presentViewController(viewController, animated: true, completion: nil)
         }
     }
     
