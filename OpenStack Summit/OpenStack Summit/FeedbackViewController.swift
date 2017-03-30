@@ -240,9 +240,11 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     @objc private func keyboardDidShow(notification: NSNotification) {
         
         let userInfo: NSDictionary = notification.userInfo!
-        let keyboardSize = userInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue.size
+        var keyboardRect = userInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue
+        keyboardRect = view.convertRect(keyboardRect, fromView: nil)
         
-        bottomViewHeightConstraint.constant = keyboardSize.height
+        let visibleHeight = self.view.frame.size.height - keyboardRect.size.height
+        bottomViewHeightConstraint.constant = visibleHeight
         view.updateConstraints()
     }
     
