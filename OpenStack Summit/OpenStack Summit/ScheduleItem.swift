@@ -153,6 +153,12 @@ internal extension ScheduleItem {
     @inline(__always)
     static func getTrackGroupColor(event: EventManagedObject) -> String {
         
-        return event.track?.groups.first?.color ?? ""
+        guard let track = event.track
+            where track.groups.isEmpty == false
+            else { return "" }
+        
+        let trackGroups = track.groups.sort { $0.0.id < $0.1.id }
+        
+        return trackGroups[0].color
     }
 }
