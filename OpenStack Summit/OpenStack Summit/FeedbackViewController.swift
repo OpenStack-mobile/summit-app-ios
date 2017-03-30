@@ -84,9 +84,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         
         // get new values
         
-        let rate = Int(self.ratingView.rating)
+        let rate = Int(ratingView.rating)
         
-        let review = self.reviewTextView.text
+        let review = reviewTextView.text != placeHolderText ? reviewTextView.text : ""
         
         // validate
         
