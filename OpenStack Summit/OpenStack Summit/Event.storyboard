@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
         <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
         </array>
@@ -466,6 +469,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1100"/>
                     <connections>
+                        <outlet property="emptyFeedbackView" destination="2du-QY-cZ4" id="Uut-7f-Bam"/>
                         <outlet property="feedBackHeader" destination="wAF-09-BCg" id="jQC-2X-qZw"/>
                         <outlet property="titleHeader" destination="ZZ0-fM-ig7" id="2qW-Nc-p6V"/>
                     </connections>
@@ -610,7 +614,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="I8l-E2-m9Q">
-                            <rect key="frame" x="201" y="32" width="20" height="20"/>
+                            <rect key="frame" x="201.5" y="32" width="20" height="20"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 REVIEWS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqD-sa-FyG">
                             <rect key="frame" x="20" y="28" width="95" height="24"/>
@@ -625,7 +629,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNU-Ei-sIC" customClass="CosmosView" customModule="Cosmos">
-                            <rect key="frame" x="158" y="31" width="105" height="21"/>
+                            <rect key="frame" x="158.5" y="31" width="105" height="21"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -681,6 +685,86 @@
                         <outlet property="averageRatingView" destination="NNU-Ei-sIC" id="Wvj-Bc-KIX"/>
                         <outlet property="reviewsLabel" destination="IqD-sa-FyG" id="wYu-D0-cwd"/>
                     </connections>
+                </view>
+                <view contentMode="scaleToFill" id="2du-QY-cZ4">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPR-rc-lJ2">
+                            <rect key="frame" x="20" y="87" width="280" height="41"/>
+                            <string key="text">There are no reviews so far.
+Be the first to rate this event.</string>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc7-Wa-3Nh" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
+                            <rect key="frame" x="15" y="172" width="290" height="50"/>
+                            <color key="backgroundColor" red="0.18823529410000001" green="0.45098039220000002" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="aFg-kG-GwT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                            <state key="normal" title="RATE">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                    <color key="value" red="0.31372549020000001" green="0.60784313729999995" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                    <color key="value" red="0.18823529410000001" green="0.45098039220000002" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="rateAction:" destination="SnY-ae-Z8a" eventType="touchUpInside" id="6Le-Ak-aIJ"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ys3-KD-ClV">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVIEWS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="812-nT-EKc">
+                                    <rect key="frame" x="15" y="30" width="55" height="18"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="13"/>
+                                    <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arv-21-v6N" userLabel="Separator View">
+                                    <rect key="frame" x="0.0" y="58" width="320" height="1"/>
+                                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="jpp-as-Bhz"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="arv-21-v6N" secondAttribute="bottom" id="1KX-Ze-jU8"/>
+                                <constraint firstItem="812-nT-EKc" firstAttribute="top" secondItem="Ys3-KD-ClV" secondAttribute="top" constant="30" id="2VT-wd-U6l"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="812-nT-EKc" secondAttribute="trailing" constant="16" id="2iW-9L-TDz"/>
+                                <constraint firstAttribute="trailing" secondItem="arv-21-v6N" secondAttribute="trailing" id="EDv-X9-ibE"/>
+                                <constraint firstAttribute="height" constant="59" id="NGB-F2-d8A"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="812-nT-EKc" secondAttribute="bottom" constant="10" id="Z2w-SN-wGS"/>
+                                <constraint firstItem="812-nT-EKc" firstAttribute="leading" secondItem="Ys3-KD-ClV" secondAttribute="leading" constant="15" id="bij-Gh-WYe"/>
+                                <constraint firstItem="arv-21-v6N" firstAttribute="leading" secondItem="Ys3-KD-ClV" secondAttribute="leading" id="pbQ-9J-toZ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Ys3-KD-ClV" firstAttribute="leading" secondItem="2du-QY-cZ4" secondAttribute="leading" id="8xh-Xw-Pj3"/>
+                        <constraint firstItem="Ys3-KD-ClV" firstAttribute="top" secondItem="2du-QY-cZ4" secondAttribute="top" id="DGt-S6-RG4"/>
+                        <constraint firstAttribute="trailing" secondItem="Ys3-KD-ClV" secondAttribute="trailing" id="DVX-0p-acK"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kc7-Wa-3Nh" secondAttribute="bottom" constant="20" id="TlI-6K-qF2"/>
+                        <constraint firstAttribute="trailing" secondItem="mPR-rc-lJ2" secondAttribute="trailing" constant="20" id="Z1D-8i-RP5"/>
+                        <constraint firstAttribute="trailing" secondItem="kc7-Wa-3Nh" secondAttribute="trailing" constant="15" id="ahE-Hb-khi"/>
+                        <constraint firstItem="kc7-Wa-3Nh" firstAttribute="leading" secondItem="2du-QY-cZ4" secondAttribute="leading" constant="15" id="lip-tV-1xJ"/>
+                        <constraint firstItem="mPR-rc-lJ2" firstAttribute="leading" secondItem="2du-QY-cZ4" secondAttribute="leading" constant="20" id="oAS-B2-reZ"/>
+                        <constraint firstItem="mPR-rc-lJ2" firstAttribute="top" secondItem="Ys3-KD-ClV" secondAttribute="bottom" constant="40" id="rHk-V3-teq"/>
+                        <constraint firstItem="kc7-Wa-3Nh" firstAttribute="top" secondItem="mPR-rc-lJ2" secondAttribute="bottom" constant="30" id="ukg-hw-br8"/>
+                    </constraints>
                 </view>
             </objects>
             <point key="canvasLocation" x="1022" y="1042"/>
