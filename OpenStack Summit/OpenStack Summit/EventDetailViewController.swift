@@ -158,8 +158,14 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         guard Store.shared.isLoggedIn
             else { showErrorAlert("Login to use this function"); return }
         
-        guard eventDetail.start < Date()
-            else { showErrorAlert("Can only rate after event has started."); return }
+        guard eventDetail.allowFeedback
+            else { showErrorAlert("Feedback is not enabled for this event."); return }
+        
+        if AppEnvironment != .Staging {
+            
+            guard  eventDetail.start < Date()
+                else { showErrorAlert("Can only rate after event has started."); return }
+        }
         
         let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
         

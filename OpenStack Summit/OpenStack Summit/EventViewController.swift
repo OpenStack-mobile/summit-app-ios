@@ -25,7 +25,9 @@ extension EventViewController {
     func canAddFeedback(for event: EventDetail) -> Bool {
         
         // Can give feedback after event started
-        return Store.shared.isLoggedIn && event.start < Date()
+        return Store.shared.isLoggedIn
+            && event.allowFeedback
+            && event.start < Date()
     }
     
     func canAddToCalendar() -> Bool {
