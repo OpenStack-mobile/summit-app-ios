@@ -158,13 +158,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         guard Store.shared.isLoggedIn
             else { showErrorAlert("Login to use this function"); return }
         
-        let feedbackViewController = R.storyboard.feedback.feedbackEditViewController()!
+        guard eventDetail.start < Date()
+            else { showErrorAlert("Can only rate after event has started."); return }
         
-        feedbackViewController.event = event
+        let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
         
-        feedbackViewController.rate = 0
-        
-        self.showViewController(feedbackViewController, sender: self)
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     @IBAction func rsvp(sender: AnyObject? = nil) {
