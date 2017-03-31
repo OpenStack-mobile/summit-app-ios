@@ -12,7 +12,7 @@ public extension Affiliation {
     
     enum JSONKey: String {
         
-        case id, start_date, end_date, is_current, organization
+        case id, owner, start_date, end_date, is_current, organization
     }
 }
 
@@ -24,12 +24,15 @@ extension Affiliation: JSONDecodable {
             let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
             let isCurrent = JSONObject[JSONKey.is_current.rawValue]?.rawValue as? Bool,
             let organizationJSON = JSONObject[JSONKey.organization.rawValue],
-            let organization = AffiliationOrganization(JSONValue: organizationJSON)
+            let organization = AffiliationOrganization(JSONValue: organizationJSON),
+            let memberJSON = JSONObject[JSONKey.owner.rawValue],
+            let member = Member(JSONValue: memberJSON)
             else { return nil }
         
         self.identifier = identifier
         self.isCurrent = isCurrent
         self.organization = organization
+        self.member = member
         
         // optional values
         

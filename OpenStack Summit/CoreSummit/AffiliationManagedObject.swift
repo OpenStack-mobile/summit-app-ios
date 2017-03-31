@@ -11,6 +11,8 @@ import SwiftFoundation
 
 public final class AffiliationManagedObject: Entity {
     
+    @NSManaged public var member: MemberManagedObject
+    
     @NSManaged public var start: NSDate?
     
     @NSManaged public var end: NSDate?
@@ -26,6 +28,7 @@ extension Affiliation: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.isCurrent = managedObject.isCurrent
+        self.member =  Member(managedObject: managedObject.member)
         self.organization = AffiliationOrganization(managedObject: managedObject.organization)
         
         if let startDate = managedObject.start {
@@ -57,6 +60,7 @@ extension Affiliation: CoreDataEncodable {
         managedObject.start = start?.toFoundation()
         managedObject.end = end?.toFoundation()
         managedObject.isCurrent = isCurrent
+        managedObject.member = try context.relationshipFault(member)
         managedObject.organization = try context.relationshipFault(organization)
         
         managedObject.didCache()

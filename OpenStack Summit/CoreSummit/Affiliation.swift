@@ -12,6 +12,8 @@ public struct Affiliation: Unique, Equatable {
     
     public let identifier: Identifier
     
+    public var member: Member
+    
     public var start: Date?
     
     public var end: Date?
@@ -26,6 +28,7 @@ public struct Affiliation: Unique, Equatable {
 public func == (lhs: Affiliation, rhs: Affiliation) -> Bool {
     
     return lhs.identifier == rhs.identifier
+        && lhs.member == rhs.member
         && lhs.start == rhs.start
         && lhs.end == rhs.end
         && lhs.isCurrent == rhs.isCurrent
