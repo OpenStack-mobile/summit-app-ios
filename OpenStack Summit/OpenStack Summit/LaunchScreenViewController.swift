@@ -245,6 +245,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                         SummitManager.shared.summit.value = latestSummit.identifier
                     }
                     
+                    switch AppEnvironment {
+                        
+                    case .Staging:
+                        
+                        break
+                        
+                    case .Production:
+                        
+                        SummitManager.shared.summit.value = latestSummit.identifier
+                    }
+                    
                     controller.loadData()
                 }
             }
