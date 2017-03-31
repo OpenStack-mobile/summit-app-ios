@@ -28,7 +28,7 @@ extension Affiliation: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.isCurrent = managedObject.isCurrent
-        self.member =  Member(managedObject: managedObject.member)
+        self.member =  managedObject.member.identifier
         self.organization = AffiliationOrganization(managedObject: managedObject.organization)
         
         if let startDate = managedObject.start {

@@ -8,11 +8,11 @@
 
 import struct SwiftFoundation.Date
 
-public struct Affiliation: Unique, Equatable {
+public struct Affiliation: Unique {
     
     public let identifier: Identifier
     
-    public var member: Member
+    public var member: Identifier
     
     public var start: Date?
     

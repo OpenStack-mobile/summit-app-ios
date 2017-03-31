@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-public struct AffiliationOrganization: Named, Equatable {
+public struct AffiliationOrganization: Named {
     
     public let identifier: Identifier
     

@@ -12,7 +12,7 @@ public extension Speaker {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, email, title, bio, irc, twitter, pic
+        case id, first_name, last_name, email, title, bio, irc, twitter, pic, affiliations
     }
 }
 
@@ -37,5 +37,17 @@ extension Speaker: JSONDecodable {
         self.biography = JSONObject[JSONKey.bio.rawValue]?.rawValue as? String
         self.irc = JSONObject[JSONKey.irc.rawValue]?.rawValue as? String
         self.twitter = JSONObject[JSONKey.twitter.rawValue]?.rawValue as? String
+        
+        if let affiliationsJSONArray = JSONObject[JSONKey.affiliations.rawValue]?.arrayValue {
+            
+            guard let affiliations = Affiliation.fromJSON(affiliationsJSONArray)
+                else { return nil }
+            
+            self.affiliations = Set(affiliations)
+            
+        } else {
+            
+            self.affiliations = []
+        }
     }
 }
