@@ -24,19 +24,10 @@ extension EventViewController {
     
     func canAddFeedback(for event: EventDetail) -> Bool {
         
-        // Can give feedback after event started, and if there is no feedback for that user
-        
-        let eventID = NSNumber(longLong: Int64(event.identifier))
-        
-        let context = Store.shared.managedObjectContext
-        
-        guard let member = Store.shared.authenticatedMember
-            else { return false }
-        
-        let predicate = NSPredicate(format: "event.id == %@ AND member == %@", eventID, member)
-        
-        return event.start < Date()
-            && (try! context.count(FeedbackManagedObject.self, predicate: predicate)) == 0
+        // Can give feedback after event started
+        return Store.shared.isLoggedIn
+            && event.allowFeedback
+            && event.start < Date()
     }
     
     func canAddToCalendar() -> Bool {
@@ -51,9 +42,6 @@ extension EventViewController {
     
     func contextMenu(for event: EventDetail) -> ContextMenu {
         
-        guard let viewController = self as? UIViewController
-            else { fatalError("\(self) is not a view controller") }
-        
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         let message = "Check out this #OpenStack session I’m attending at the #OpenStackSummit!"
@@ -64,19 +52,9 @@ extension EventViewController {
         
         if canAddFeedback(for: event) {
             
-            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .background({ [weak viewController] (didComplete) in
+            let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
                 
-                guard let controller = viewController else { return }
-                
-                let feedbackVC = R.storyboard.feedback.feedbackEditViewController()!
-                
-                feedbackVC.event = event.identifier
-                
-                feedbackVC.rate = 0
-                
-                controller.showViewController(feedbackVC, sender: self)
-                
-                didComplete(true)
+                return self!.feedbackController(for: event) { _ in didComplete(true) }
                 }))
             
             actions.append(rate)
@@ -134,8 +112,30 @@ extension EventViewController {
         return ContextMenu(actions: actions, shareItems: shareItems, systemActions: false)
     }
     
+    func feedbackController(for event: EventDetail, rating: Int? = nil, completion: (FeedbackViewController -> ())? = nil) -> UINavigationController {
+        
+        let feedbackViewController = R.storyboard.feedback.feedbackViewController()!
+        
+        feedbackViewController.completion = completion
+        
+        feedbackViewController.event = event.identifier
+        
+        if let rating = rating {
+            
+            let _ = feedbackViewController.view
+            
+            feedbackViewController.ratingView.rating = Double(rating)
+        }
+        
+        let navigationController = UINavigationController(rootViewController: feedbackViewController)
+        
+        navigationController.modalPresentationStyle = .FormSheet
+        
+        return navigationController
+    }
+    
     func toggleScheduledStatus(for event: EventDetail) {
-                
+        
         let scheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
         
         let rsvpURL = event.rsvp.isEmpty ? nil : NSURL(string: event.rsvp)

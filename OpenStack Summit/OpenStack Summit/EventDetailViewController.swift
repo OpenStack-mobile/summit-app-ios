@@ -22,16 +22,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBOutlet private(set) var titleHeader: EventDetailTitleHeader!
     @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
+    @IBOutlet private(set) var emptyFeedbackView: UIView!
     
     // MARK: - Properties
     
     var event: Identifier!
-    
     var eventRequestInProgress = false
-    
     lazy var eventStore: EKEventStore = EKEventStore()
-    
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Private Properties
     
@@ -40,14 +39,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     private var data = [Detail]()
     private var entityController: EntityController<Event>!
     
-    private var shouldShowReviews = false
+    private var reviewsVisibility: ReviewsVisibility = .none
     private var loadingFeedback = false
     private var loadingAverageRating = false
     private var feedbackList = [FeedbackDetail]()
     private var loadedAllFeedback = false
     private var currentFeedbackPage: Page<Feedback>?
-    
-    var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Loading
     
@@ -158,13 +155,18 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         guard Store.shared.isLoggedIn
             else { showErrorAlert("Login to use this function"); return }
         
-        let feedbackViewController = R.storyboard.feedback.feedbackEditViewController()!
+        guard eventDetail.allowFeedback
+            else { showErrorAlert("Feedback is not enabled for this event."); return }
         
-        feedbackViewController.event = event
+        if AppEnvironment != .Staging {
+            
+            guard  eventDetail.start < Date()
+                else { showErrorAlert("Can only rate after event has started."); return }
+        }
         
-        feedbackViewController.rate = 0
+        let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
         
-        self.showViewController(feedbackViewController, sender: self)
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     @IBAction func rsvp(sender: AnyObject? = nil) {
@@ -247,7 +249,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // get all reviews for this event
         let reviews = try! context.managedObjects(FeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        shouldShowReviews = eventCache.start < Date() && reviews.isEmpty == false
+        // can give feedback
+        if reviews.isEmpty {
+            
+            reviewsVisibility = canAddFeedback(for: eventDetail) ? .showEmpty : .none
+            
+        } else {
+            
+            reviewsVisibility = .showReviews
+        }
         
         feedbackList = reviews.map { FeedbackDetail(managedObject: $0) }
         
@@ -409,7 +419,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         switch section {
         case .details: return data.count
         case .speakers: return eventDetail.speakers.count
-        case .feedback: return shouldShowReviews ? feedbackList.count : 0
+        case .feedback: return reviewsVisibility == .showReviews ? feedbackList.count : 0
         }
     }
     
@@ -584,9 +594,13 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let feedback = feedbackList[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: PersonIdentifier(member: feedback.member))
+            guard feedback.member.identifier == Store.shared.authenticatedMember?.identifier
+                && canAddFeedback(for: eventDetail)
+                else { return }
             
-            self.showViewController(memberViewController, sender: self)
+            let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
+            
+            self.presentViewController(viewController, animated: true, completion: nil)
         }
     }
     
@@ -595,9 +609,22 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return EventDetailTitleHeader.estimatedHeight
-        case .speakers: return eventDetail.speakers.isEmpty ? 0 : 60
-        case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
+            
+        case .details:
+            
+            return EventDetailTitleHeader.estimatedHeight
+            
+        case .speakers:
+            
+            return eventDetail.speakers.isEmpty ? 0 : 60
+            
+        case .feedback:
+            
+            switch reviewsVisibility {
+            case .none: return 0
+            case .showEmpty: return 250
+            case .showReviews: return EventDetailFeedbackHeader.height
+            }
         }
     }
     
@@ -606,9 +633,22 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return UITableViewAutomaticDimension
-        case .speakers: return eventDetail.speakers.isEmpty ? 0 : UITableViewAutomaticDimension
-        case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
+            
+        case .details:
+            
+            return UITableViewAutomaticDimension
+            
+        case .speakers:
+            
+            return eventDetail.speakers.isEmpty ? 0 : UITableViewAutomaticDimension
+            
+        case .feedback:
+            
+            switch reviewsVisibility {
+            case .none: return 0
+            case .showEmpty: return UITableViewAutomaticDimension
+            case .showReviews: return EventDetailFeedbackHeader.height
+            }
         }
     }
     
@@ -624,7 +664,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
         case .feedback:
             
-            return shouldShowReviews ? feedBackHeader : nil
+            switch reviewsVisibility {
+            case .none: return nil
+            case .showEmpty: return emptyFeedbackView
+            case .showReviews: return feedBackHeader
+            }
             
         case .speakers:
             
@@ -671,6 +715,13 @@ private extension EventDetailViewController {
         case attachment
         case location
         case level
+    }
+    
+    enum ReviewsVisibility {
+        
+        case none
+        case showReviews
+        case showEmpty
     }
 }
 
