@@ -59,6 +59,7 @@ public extension DataUpdate {
         case SummitVenueFloor
         case PresentationCategory
         case PresentationCategoryGroup
+        case PrivatePresentationCategoryGroup
         case SummitLocationMap
         case SummitLocationImage
         case Summit
@@ -86,7 +87,7 @@ public extension DataUpdate {
             case .SummitVenueFloor: return CoreSummit.VenueFloor.self
             case .SummitVenueRoom: return CoreSummit.VenueRoomDataUpdate.self
             case .PresentationCategory: return CoreSummit.Track.self
-            case .PresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
+            case .PresentationCategoryGroup, .PrivatePresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
             case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
             

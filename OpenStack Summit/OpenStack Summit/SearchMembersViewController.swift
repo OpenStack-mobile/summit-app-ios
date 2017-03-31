@@ -204,7 +204,7 @@ final class SearchMembersViewController: UITableViewController, UISearchBarDeleg
             
             guard case let .item(member) = data else { fatalError("Invalid cell") }
             
-            let memberProfileDetailViewController = segue.destinationViewController as! MemberProfileDetailViewController
+            let memberProfileDetailViewController = segue.destinationViewController as! PersonDetailViewController
             
             memberProfileDetailViewController.profile = .member(member.identifier)
             

@@ -1,0 +1,24 @@
+{
+  "created":1490192472,
+  "class_name":"PrivatePresentationCategoryGroup",
+  "id":741623,
+  "entity_id":51,
+  "entity":{
+    "name":"Sponsored Sessions (1)",
+    "description":null,
+    "tracks":[
+      {
+        "name":"Sponsored Sessions",
+        "code":"SS",
+        "id":144,
+        "track_groups":[
+          51
+        ],
+        "description":null
+      }
+    ],
+    "id":51,
+    "color":"#f0f0ee"
+  },
+  "type":"INSERT"
+}

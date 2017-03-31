@@ -20,6 +20,8 @@ public protocol Person: Named {
     
     var irc: String? { get }
     
+    var linkedIn: String? { get }
+    
     var biography: String? { get }
 }
 

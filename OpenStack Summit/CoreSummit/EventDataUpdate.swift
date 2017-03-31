@@ -42,6 +42,8 @@ public struct EventDataUpdate: Named {
     public let videos: Set<Video>
     
     public let rsvp: String?
+    
+    public let attachment: String?
 }
 
 // MARK: - Equatable

@@ -42,7 +42,7 @@ public struct EventDetail: CoreDataDecodable {
     public let willRecord: Bool
     public let rsvp: String
     public let externalRSVP: Bool
-    
+    public let attachment: String
     public let webpageURL: NSURL
     
     // MARK: - Initialization
@@ -66,7 +66,7 @@ public struct EventDetail: CoreDataDecodable {
         self.rsvp = event.rsvp ?? ""
         self.externalRSVP = event.externalRSVP
         self.willRecord = event.willRecord
-        
+        self.attachment = event.attachment ?? ""
         
         if let locationManagedObject = event.location {
             
@@ -152,10 +152,12 @@ public extension EventDetail {
         
         public let irc: String?
         
+        public var linkedIn: String? { return nil }
+        
         public let biography: String?
         
         public let isModerator: Bool
-        
+                
         private init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier

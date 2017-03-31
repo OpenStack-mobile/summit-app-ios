@@ -107,6 +107,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSForegroundColorAttributeName: UIColor(white: 1, alpha: 0.5)])
         searchTextView.delegate = self
         
         // setup reveal VC
@@ -346,21 +347,13 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
     private func showMyProfile() {
         
-        if Store.shared.isLoggedIn {
-            
-            if Store.shared.isLoggedInAndConfirmedAttendee {
-                
-                let myProfileViewController = MyProfileViewController()
-                
-                show(myProfileViewController)
-                
-            } else {
-                
-                let memberOrderConfirmViewController = R.storyboard.member.memberOrderConfirmViewController()!
-                
-                show(memberOrderConfirmViewController)
-            }
-        }
+        guard Store.shared.isLoggedIn else { return }
+        
+        highlight(.MyProfile)
+        
+        let myProfileViewController = MyProfileViewController()
+        
+        show(myProfileViewController)
     }
     
     private func show(viewController: UIViewController) {
@@ -381,6 +374,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             else { showInfoMessage("Info", message: "Summit data is required to log in."); return }
         
         showActivityIndicator()
+        
+        Preference.goingToSummit = false
         
         Store.shared.login(summit, loginCallback: {
             
@@ -413,12 +408,35 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                     
                     if Store.shared.isLoggedInAndConfirmedAttendee {
                         
+                        Preference.goingToSummit = true
+                        
                         // reload schedule
                         controller.showEvents()
                        
                     } else {
                         
-                        controller.toggleMenuSelection(controller.myProfileButton)
+                        controller.showMyProfile()
+                        
+                        let revealViewController = AppDelegate.shared.revealViewController
+                        
+                        // show a popup asking user if they are going to the summit
+                        let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
+                        
+                        alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
+                            
+                            Preference.goingToSummit = false
+                        })
+                        
+                        alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
+                            
+                            Preference.goingToSummit = true
+                            
+                            let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
+                            
+                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                        })
+                        
+                        revealViewController.presentViewController(alert, animated: true) { }
                     }
                     
                     // log user email

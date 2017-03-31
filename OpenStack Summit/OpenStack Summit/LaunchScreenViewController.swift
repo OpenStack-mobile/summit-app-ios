@@ -32,7 +32,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - Properties
     
-    private(set) var willTransition = false
+    private(set) var willTransition = false  {
+        
+        didSet { configureView() }
+    }
     
     private var state: State = .loadingSummits {
         
@@ -51,8 +54,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         configureView()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if Store.shared.isLoggedIn {
             
@@ -103,8 +106,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             self.summitActivityIndicatorView.hidden = false
             self.summitActivityIndicatorView.startAnimating()
             
-            self.guestButton.hidden = self.isDataLoaded == false
-            self.loginButton.hidden = self.isDataLoaded == false
+            self.guestButton.hidden = self.isDataLoaded == false || self.willTransition
+            self.loginButton.hidden = self.isDataLoaded == false || self.willTransition
             
             self.dataLoadedActivityIndicatorView.hidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
@@ -143,15 +146,22 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             
             self.summitNameLabel.text = summit.name.uppercaseString
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
-            dateFormatter.dateFormat = "MMMM d-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
-            
-            dateFormatter.dateFormat = "d, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
-            
-            self.summitDateLabel.text = stringDateFrom + stringDateTo
+            if let datesLabel = summit.datesLabel {
+                
+                self.summitDateLabel.text = datesLabel
+            }
+            else {
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+                dateFormatter.dateFormat = "MMMM d-"
+                let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+                
+                dateFormatter.dateFormat = "d, yyyy"
+                let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+                
+                self.summitDateLabel.text = stringDateFrom + stringDateTo
+            }
         }
     }
     
@@ -231,6 +241,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                     controller.summit = latestSummit
                     
                     if SummitManager.shared.summit.value == 0 {
+                        
+                        SummitManager.shared.summit.value = latestSummit.identifier
+                    }
+                    
+                    switch AppEnvironment {
+                        
+                    case .Staging:
+                        
+                        break
+                        
+                    case .Production:
                         
                         SummitManager.shared.summit.value = latestSummit.identifier
                     }

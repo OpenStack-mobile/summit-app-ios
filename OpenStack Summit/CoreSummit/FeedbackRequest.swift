@@ -143,4 +143,42 @@ public extension Store {
             completion(.Value(identifier))
         }
     }
+    
+    func editFeedback(summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorType?) -> ()) {
+        
+        let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
+        
+        let URL = environment.configuration.serverURL + URI
+        
+        let http = self.createHTTP(.OpenIDJSON)
+        
+        var jsonDictionary = [String: AnyObject]()
+        jsonDictionary["rate"] = rate
+        jsonDictionary["note"] = review
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.PUT(URL, parameters: jsonDictionary) { (responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(error!); return }
+            
+            // create new feedback in cache
+            try! context.performErrorBlockAndWait {
+                
+                if let member = try self.authenticatedMember(context),
+                    let feedback = member.feedback(for: event) {
+                    
+                    feedback.rate = Int16(rate)
+                    
+                    feedback.review = review
+                    
+                    try context.save()
+                }
+            }
+            
+            completion(nil)
+        }
+    }
 }

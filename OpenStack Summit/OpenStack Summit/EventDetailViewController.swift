@@ -1,4 +1,4 @@
-//
+    //
 //  EventDetailViewController.swift
 //  OpenStackSummit
 //
@@ -22,17 +22,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     @IBOutlet private(set) var titleHeader: EventDetailTitleHeader!
     @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
-    @IBOutlet private(set) var speakersHeader: EventDetailHeader!
+    @IBOutlet private(set) var emptyFeedbackView: UIView!
     
     // MARK: - Properties
     
     var event: Identifier!
-    
     var eventRequestInProgress = false
-    
     lazy var eventStore: EKEventStore = EKEventStore()
-    
     lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Private Properties
     
@@ -41,14 +39,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     private var data = [Detail]()
     private var entityController: EntityController<Event>!
     
-    private var shouldShowReviews = false
+    private var reviewsVisibility: ReviewsVisibility = .none
     private var loadingFeedback = false
     private var loadingAverageRating = false
     private var feedbackList = [FeedbackDetail]()
     private var loadedAllFeedback = false
     private var currentFeedbackPage: Page<Feedback>?
-    
-    var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Loading
     
@@ -57,9 +53,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         addContextMenuBarButtonItem()
         
-        // setup tableview
+        // setup table view
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 60
+        // must be set later, or else will trigger datasource methods with nil `self.eventDetail`
+        defer { tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 20)) }
+        // https://github.com/mac-cain13/R.swift/issues/144
+        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)
         
         // entityController 
         entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
@@ -94,7 +96,6 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         // update UI
         self.updateUI()
-        tableView.tableFooterView = UIView()
         
         // dont continue if no connectivity
         guard Reachability.connected else { return }
@@ -133,6 +134,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         guard eventRequestInProgress == false else { return }
         
+        guard Store.shared.isLoggedIn
+            else { showErrorAlert("Login to use this function"); return }
+        
         self.toggleFavorite(for: eventDetail)
     }
     
@@ -140,23 +144,42 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         guard eventRequestInProgress == false else { return }
         
+        guard Store.shared.isLoggedInAndConfirmedAttendee
+            else { showErrorAlert("Only attendees can use this function. Enter your EventBrite order number in my summit if you are an attendee."); return }
+        
         self.toggleScheduledStatus(for: eventDetail)
     }
     
     @IBAction func rateAction(sender: UIButton) {
         
-        let feedbackViewController = R.storyboard.feedback.feedbackEditViewController()!
+        guard Store.shared.isLoggedIn
+            else { showErrorAlert("Login to use this function"); return }
         
-        feedbackViewController.event = event
+        guard eventDetail.allowFeedback
+            else { showErrorAlert("Feedback is not enabled for this event."); return }
         
-        feedbackViewController.rate = 0
+        if AppEnvironment != .Staging {
+            
+            guard  eventDetail.start < Date()
+                else { showErrorAlert("Can only rate after event has started."); return }
+        }
         
-        self.showViewController(feedbackViewController, sender: self)
+        let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
+        
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     @IBAction func rsvp(sender: AnyObject? = nil) {
         
         guard let url = NSURL(string: eventDetail.rsvp)
+            else { return }
+        
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    @IBAction func showAttachment(sender: AnyObject? = nil) {
+        
+        guard let url = NSURL(string: eventDetail.attachment)
             else { return }
         
         UIApplication.sharedApplication().openURL(url)
@@ -193,6 +216,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         self.data.append(.description)
         
+        if eventDetail.attachment.isEmpty == false {
+            
+            data.append(.attachment)
+        }
+        
         if eventDetail.location.isEmpty == false {
             
             data.append(.location)
@@ -210,11 +238,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .whiteColor()
         titleHeader.trackLabel.hidden = eventDetail.track.isEmpty
         
-        let canRate = canAddFeedback(for: eventDetail)
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
         
-        titleHeader.rateButton.hidden = canRate == false
         titleHeader.scheduleButton.highlighted = didConfirm
         titleHeader.favoriteButton.highlighted = isFavorite
         
@@ -223,7 +249,15 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // get all reviews for this event
         let reviews = try! context.managedObjects(FeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
-        shouldShowReviews = eventCache.start < Date() && reviews.isEmpty == false
+        // can give feedback
+        if reviews.isEmpty {
+            
+            reviewsVisibility = canAddFeedback(for: eventDetail) ? .showEmpty : .none
+            
+        } else {
+            
+            reviewsVisibility = .showReviews
+        }
         
         feedbackList = reviews.map { FeedbackDetail(managedObject: $0) }
         
@@ -385,7 +419,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         switch section {
         case .details: return data.count
         case .speakers: return eventDetail.speakers.count
-        case .feedback: return shouldShowReviews ? feedbackList.count : 0
+        case .feedback: return reviewsVisibility == .showReviews ? feedbackList.count : 0
         }
     }
     
@@ -437,11 +471,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 // video
                 
-                cell.playButton.hidden = eventDetail.willRecord == false
+                cell.willRecordImageView.hidden = eventDetail.willRecord == false
                 
                 // description text
                 
-                let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: Arial; font-size: 13\">%@</span>", eventDetail.eventDescription)
+                let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: OpenSans; font-size: 13\">%@</span>", eventDetail.eventDescription)
                 if let data = eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
                     let attrStr = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
                     
@@ -453,11 +487,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 }
                 
                 cell.descriptionTextView.textContainerInset = UIEdgeInsetsZero
-                
                 cell.descriptionTextView.delegate = self
                 
                 // sponsors
-                
                 cell.sponsorsLabel.text = eventDetail.sponsors
                 cell.sponsorsLabelHeightConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 30
                 cell.sponsorsLabelSeparationConstraint.constant = eventDetail.sponsors.isEmpty ? 0 : 8
@@ -480,6 +512,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 cell.sectionLabel.text = "LEVEL"
                 cell.valueLabel.text = eventDetail.level
+                
+                return cell
+                
+            case .attachment:
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, forIndexPath: indexPath)!
                 
                 return cell
             }
@@ -548,7 +586,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let speaker = eventDetail.speakers[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier.speaker(speaker.identifier))
+            let memberViewController = MemberProfileViewController(profile: PersonIdentifier.speaker(speaker.identifier))
             
             self.showViewController(memberViewController, sender: self)
             
@@ -556,9 +594,13 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
             let feedback = feedbackList[indexPath.row]
             
-            let memberViewController = MemberProfileViewController(profile: MemberProfileIdentifier(member: feedback.member))
+            guard feedback.member.identifier == Store.shared.authenticatedMember?.identifier
+                && canAddFeedback(for: eventDetail)
+                else { return }
             
-            self.showViewController(memberViewController, sender: self)
+            let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
+            
+            self.presentViewController(viewController, animated: true, completion: nil)
         }
     }
     
@@ -567,9 +609,22 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return EventDetailTitleHeader.estimatedHeight
-        case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
-        case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
+            
+        case .details:
+            
+            return EventDetailTitleHeader.estimatedHeight
+            
+        case .speakers:
+            
+            return eventDetail.speakers.isEmpty ? 0 : 60
+            
+        case .feedback:
+            
+            switch reviewsVisibility {
+            case .none: return 0
+            case .showEmpty: return 250
+            case .showReviews: return EventDetailFeedbackHeader.height
+            }
         }
     }
     
@@ -578,9 +633,22 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         let section = Section(rawValue: section)!
         
         switch section {
-        case .details: return UITableViewAutomaticDimension
-        case .speakers: return eventDetail.speakers.isEmpty ? 0 : EventDetailHeader.height
-        case .feedback: return shouldShowReviews ? EventDetailFeedbackHeader.height : 0
+            
+        case .details:
+            
+            return UITableViewAutomaticDimension
+            
+        case .speakers:
+            
+            return eventDetail.speakers.isEmpty ? 0 : UITableViewAutomaticDimension
+            
+        case .feedback:
+            
+            switch reviewsVisibility {
+            case .none: return 0
+            case .showEmpty: return UITableViewAutomaticDimension
+            case .showReviews: return EventDetailFeedbackHeader.height
+            }
         }
     }
     
@@ -590,9 +658,28 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         switch section {
             
-        case .details: return titleHeader
-        case .speakers: return eventDetail.speakers.isEmpty ? nil : speakersHeader
-        case .feedback: return shouldShowReviews ? feedBackHeader : nil
+        case .details:
+            
+            return titleHeader
+            
+        case .feedback:
+            
+            switch reviewsVisibility {
+            case .none: return nil
+            case .showEmpty: return emptyFeedbackView
+            case .showReviews: return feedBackHeader
+            }
+            
+        case .speakers:
+            
+            guard eventDetail.speakers.isEmpty == false
+                else { return nil }
+            
+            let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.resuseIdentifier) as! TableViewHeaderView
+            
+            headerView.titleLabel.text = "SPEAKERS"
+            
+            return headerView
         }
     }
     
@@ -625,8 +712,16 @@ private extension EventDetailViewController {
         
         case video
         case description
+        case attachment
         case location
         case level
+    }
+    
+    enum ReviewsVisibility {
+        
+        case none
+        case showReviews
+        case showEmpty
     }
 }
 
@@ -645,13 +740,6 @@ final class EventDetailTitleHeader: UIView {
     @IBOutlet private(set) weak var favoriteButton: EventDetailActionButton!
     @IBOutlet private(set) weak var scheduleButton: EventDetailActionButton!
     @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
-}
-
-final class EventDetailHeader: UIView {
-    
-    static let height: CGFloat = 60.0
-    
-    @IBOutlet private(set) weak var label: UILabel!
 }
 
 final class EventDetailFeedbackHeader: UIView {
@@ -675,7 +763,7 @@ final class EventDetailDescriptionTableViewCell: UITableViewCell {
     
     @IBOutlet private(set) weak var eventDayLabel: UILabel!
     @IBOutlet private(set) weak var eventTimeLabel: UILabel!
-    @IBOutlet private(set) weak var playButton: Button!
+    @IBOutlet private(set) weak var willRecordImageView: UIImageView!
     @IBOutlet private(set) weak var descriptionTextView: UITextView!
     @IBOutlet private(set) weak var sponsorsLabel: UILabel!
     @IBOutlet private(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
