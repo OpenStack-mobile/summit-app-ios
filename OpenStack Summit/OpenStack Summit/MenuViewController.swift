@@ -107,6 +107,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSForegroundColorAttributeName: UIColor(white: 1, alpha: 0.5)])
         searchTextView.delegate = self
         
         // setup reveal VC
