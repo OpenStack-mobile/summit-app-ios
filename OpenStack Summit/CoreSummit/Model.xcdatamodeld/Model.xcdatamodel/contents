@@ -8,7 +8,7 @@
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="member" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="affiliations" inverseEntity="Member" syncable="YES"/>
         <relationship name="organization" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AffiliationOrganization" inverseName="affiliations" inverseEntity="AffiliationOrganization" syncable="YES"/>
-        <relationship name="speaker" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speaker" inverseName="affiliations" inverseEntity="Speaker" syncable="YES"/>
+        <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speaker" inverseName="affiliations" inverseEntity="Speaker" syncable="YES"/>
     </entity>
     <entity name="AffiliationOrganization" representedClassName=".AffiliationOrganizationManagedObject" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -153,7 +153,7 @@
         <attribute name="pictureURL" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="affiliations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Affiliation" inverseName="speaker" inverseEntity="Affiliation" syncable="YES"/>
+        <relationship name="affiliations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Affiliation" inverseName="speakers" inverseEntity="Affiliation" syncable="YES"/>
         <relationship name="memberSpeakerRole" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Member" inverseName="speakerRole" inverseEntity="Member" syncable="YES"/>
         <relationship name="presentationModerator" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Presentation" inverseName="speakers" inverseEntity="Presentation" syncable="YES"/>
         <relationship name="presentationSpeaker" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Presentation" inverseName="moderator" inverseEntity="Presentation" syncable="YES"/>
