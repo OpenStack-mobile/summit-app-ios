@@ -107,15 +107,15 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             let entity = section.entity
             
-            let items: [Item]
+            let results: (items: [Item], extend: Extend)
             
             switch entity {
-            case .event: items = self.search(ScheduleItem.self, searchTerm: searchTerm, all: true)
-            case .speaker: items = self.search(Speaker.self, searchTerm: searchTerm, all: true)
-            case .track: items = self.search(Track.self, searchTerm: searchTerm, all: true)
+            case .event: results = try! self.search(ScheduleItem.self, searchTerm: searchTerm, all: true)
+            case .speaker: results = try! self.search(Speaker.self, searchTerm: searchTerm, all: true)
+            case .track: results = try! self.search(Track.self, searchTerm: searchTerm, all: true)
             }
             
-            let searchResult = SearchResult(entity: entity, items: items, all: true)
+            let searchResult = SearchResult(entity: entity, items: results.items, extend: results.extend)
             
             self.data = .entity(searchResult)
         }
@@ -135,21 +135,21 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             var sections = [SearchResult]()
             
-            func search<T: SearchViewControllerItem>(type: T.Type, entity: Entity) {
+            func search<T: SearchViewControllerItem>(type: T.Type, entity: Entity) throws {
                 
-                let items = self.search(type, searchTerm: searchTerm, all: false)
+                let (items, extend) = try self.search(type, searchTerm: searchTerm, all: false)
                 
                 guard items.isEmpty == false else { return }
                 
-                let searchResults = SearchResult(entity: entity, items: items, all: false)
+                let searchResults = SearchResult(entity: entity, items: items, extend: extend)
                 
                 sections.append(searchResults)
             }
             
             // populate sections
-            search(ScheduleItem.self, entity: .event)
-            search(Speaker.self, entity: .speaker)
-            search(Track.self, entity: .track)
+            try! search(ScheduleItem.self, entity: .event)
+            try! search(Speaker.self, entity: .speaker)
+            try! search(Track.self, entity: .track)
             
             data = .all(sections)
         }
@@ -158,9 +158,14 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     private func configureView() {
         
         tableView.reloadData()
+        
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
+            
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+        }
     }
     
-    private func search<T: SearchViewControllerItem>(type: T.Type, searchTerm: String, all: Bool) -> [Item] {
+    private func search<T: SearchViewControllerItem>(type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
         
         let context = Store.shared.managedObjectContext
         
@@ -170,9 +175,31 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         let predicate = type.predicate(for: searchTerm, summit: summit)
         
-        let results = try! context.managedObjects(type, predicate: predicate, limit: limit)
+        let results = try context.managedObjects(type, predicate: predicate, limit: limit)
         
-        return results.map { $0.toItem() }
+        let items = results.map { $0.toItem() }
+        
+        let extend: Extend
+        
+        if all {
+            
+            extend = .all
+            
+        } else {
+            
+            let allCount = try context.count(T.ManagedObject.self, predicate: predicate)
+            
+            if allCount > results.count {
+                
+                extend = .entity
+                
+            } else {
+                
+                extend = .none
+            }
+        }
+        
+        return (items, extend)
     }
     
     private subscript(indexPath: NSIndexPath) -> Item {
@@ -253,7 +280,12 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
-        self.searchTerm = searchBar.text ?? ""
+        let text = searchBar.text ?? ""
+        
+        if self.searchTerm != text {
+            
+            self.searchTerm = text
+        }
         
         searchBar.endEditing(true)
     }
@@ -324,7 +356,12 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         headerView.titleLabel.text = sectionTitle
         
-        let buttonText = section.all ? "Show All Results" : "See All"
+        let buttonText: String
+        
+        switch section.extend {
+        case .none, .all: buttonText = "Show All Results"
+        case .entity: buttonText = "See All"
+        }
         
         headerView.moreButton.setTitle(buttonText, forState: .Normal)
         
@@ -334,6 +371,8 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         }
         
         headerView.moreButton.tag = sectionIndex
+        
+        headerView.moreButton.hidden = section.extend == .none
         
         return headerView
     }
@@ -351,7 +390,7 @@ private extension SearchViewController {
     struct SearchResult {
         let entity: Entity
         let items: [Item]
-        let all: Bool
+        let extend: Extend
     }
     
     enum Data {
@@ -375,9 +414,11 @@ private extension SearchViewController {
         case track(Track)
     }
     
-    enum SeeMore {
+    enum Extend {
         
         case none
+        case entity
+        case all
     }
 }
 
