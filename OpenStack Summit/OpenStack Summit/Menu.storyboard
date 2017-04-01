@@ -271,10 +271,10 @@
             </objects>
             <point key="canvasLocation" x="191.25" y="470.07042253521126"/>
         </scene>
-        <!--Search View Controller-->
+        <!--View Controller-->
         <scene sceneID="gu9-km-v08">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" automaticallyAdjustsScrollViewInsets="NO" id="lwv-YH-cuL" customClass="SearchViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lwv-YH-cuL" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i3N-Cc-pM6"/>
                         <viewControllerLayoutGuide type="bottom" id="UdQ-ah-dW5"/>
@@ -475,6 +475,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKi-Jl-Bsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="194" y="1515"/>
+        </scene>
+        <!--SEARCH-->
+        <scene sceneID="WTD-qi-fZW">
+            <objects>
+                <tableViewController storyboardIdentifier="SearchViewController" id="WWd-xg-vZy" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gkI-T6-mYo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Hoj-9M-z7m">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="bTX-Am-h18">
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTX-Am-h18" id="nd2-S3-QyR">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Result Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOh-BJ-hhH">
+                                            <rect key="frame" x="15" y="15" width="290" height="13.5"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="hOh-BJ-hhH" secondAttribute="bottom" constant="15" id="EhT-p8-LpG"/>
+                                        <constraint firstItem="hOh-BJ-hhH" firstAttribute="top" secondItem="nd2-S3-QyR" secondAttribute="top" constant="15" id="K1d-De-ITF"/>
+                                        <constraint firstItem="hOh-BJ-hhH" firstAttribute="leading" secondItem="nd2-S3-QyR" secondAttribute="leading" constant="15" id="itH-t7-VoI"/>
+                                        <constraint firstAttribute="trailing" secondItem="hOh-BJ-hhH" secondAttribute="trailing" constant="15" id="rdu-PO-Idf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WWd-xg-vZy" id="2U7-ls-9GD"/>
+                            <outlet property="delegate" destination="WWd-xg-vZy" id="QPY-xB-6gn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="SEARCH" id="QrY-5l-mlQ"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lbw-B8-YiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="NyL-Yl-hiJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="1365" y="1217"/>
         </scene>
         <!--ABOUT-->
         <scene sceneID="H0g-ht-ytK">

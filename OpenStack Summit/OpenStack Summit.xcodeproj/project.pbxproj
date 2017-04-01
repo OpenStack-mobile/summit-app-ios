@@ -857,6 +857,9 @@
 		6EBC583E1E4CBFE000F5DD68 /* MessageEnabledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF12C561D14999E00814AD0 /* MessageEnabledViewController.swift */; };
 		6EBCB4891DDE10B800727130 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41EFE31DCDD8E400733E04 /* Store.swift */; };
 		6EBE00351D7CB6870091DDEB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE00341D7CB6870091DDEB /* EventsViewController.swift */; };
+		6EC0E4C81E8F0FB800757CDD /* SearchTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC0E4C71E8F0FB800757CDD /* SearchTableViewHeaderView.xib */; };
+		6EC0E4CA1E8F0FC300757CDD /* SearchTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC0E4C91E8F0FC300757CDD /* SearchTableViewHeaderView.swift */; };
+		6EC0E4CC1E8F166B00757CDD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC0E4CB1E8F166B00757CDD /* SearchViewController.swift */; };
 		6EC151B61E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
 		6EC151B71E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
 		6EC151B81E43BBEC00416E5D /* AllSummits.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC151B51E43BBEC00416E5D /* AllSummits.json */; };
@@ -995,7 +998,6 @@
 		6EFC99BF1D218280009FD0DA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99BE1D218280009FD0DA /* MenuViewController.swift */; };
 		6EFC99C11D2198DF009FD0DA /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C01D2198DF009FD0DA /* Menu.storyboard */; };
 		6EFC99C71D21DBE5009FD0DA /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFC99C61D21DBE5009FD0DA /* Event.storyboard */; };
-		6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */; };
 		6EFE54F31E612C7A005EAB86 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */; };
 		6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; };
 		6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; };
@@ -1609,6 +1611,9 @@
 		6EBC49021E1394FE0077806B /* TeamMessageJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMessageJSON.swift; sourceTree = "<group>"; };
 		6EBC49061E1398F10077806B /* ListMembersRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListMembersRequest.swift; sourceTree = "<group>"; };
 		6EBE00341D7CB6870091DDEB /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		6EC0E4C71E8F0FB800757CDD /* SearchTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewHeaderView.xib; sourceTree = "<group>"; };
+		6EC0E4C91E8F0FC300757CDD /* SearchTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewHeaderView.swift; sourceTree = "<group>"; };
+		6EC0E4CB1E8F166B00757CDD /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6EC151B51E43BBEC00416E5D /* AllSummits.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllSummits.json; sourceTree = "<group>"; };
 		6EC417E71D76B60000E5888C /* ShowVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerDetailInterfaceController.swift; sourceTree = "<group>"; };
@@ -1703,7 +1708,7 @@
 		6EFC99BE1D218280009FD0DA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6EFC99C01D2198DF009FD0DA /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		6EFC99C61D21DBE5009FD0DA /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
-		6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		6EFC99C81D21DFE1009FD0DA /* OLDSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDSearchViewController.swift; sourceTree = "<group>"; };
 		6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearHttp.framework; sourceTree = "<group>"; };
 		6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearOAuth2.framework; sourceTree = "<group>"; };
 		6EFE54EB1E612BDD005EAB86 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
@@ -2756,6 +2761,8 @@
 				6ED1D13D1D30577C00B4D64C /* LevelTableViewCell.swift */,
 				6E313C191D4127C2005132DA /* VenueListTableViewCell.swift */,
 				6E313C1A1D4127C2005132DA /* InternalVenueListTableViewCell.swift */,
+				6EC0E4C91E8F0FC300757CDD /* SearchTableViewHeaderView.swift */,
+				6EC0E4C71E8F0FB800757CDD /* SearchTableViewHeaderView.xib */,
 				6EB3EA091D1B5158000BA5A4 /* TableViewHeaderView.swift */,
 				6E6D75901E86222F00D30BA8 /* TableViewHeaderViewLight.xib */,
 				6EB3EA0A1D1B5158000BA5A4 /* TableViewHeaderViewDark.xib */,
@@ -2809,7 +2816,8 @@
 				6EB7525D1D188B1200BC294D /* MemberProfileViewController.swift */,
 				6EB7525F1D18AF2800BC294D /* PersonDetailViewController.swift */,
 				6E4D837E1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift */,
-				6EFC99C81D21DFE1009FD0DA /* SearchViewController.swift */,
+				6EC0E4CB1E8F166B00757CDD /* SearchViewController.swift */,
+				6EFC99C81D21DFE1009FD0DA /* OLDSearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakersViewController.swift */,
 				6EEED0281E3A48AF00795B3D /* InboxViewController.swift */,
 				6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */,
@@ -3388,6 +3396,7 @@
 				6EA983CC1E5E030400D5BB55 /* OpenSans-ExtraBold.ttf in Resources */,
 				6E4241A21E1ED4D60017E555 /* LoadingTableViewCell.xib in Resources */,
 				6EA983D31E5E030400D5BB55 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				6EC0E4C81E8F0FB800757CDD /* SearchTableViewHeaderView.xib in Resources */,
 				6EDA4AC11DFA7ED800ADF96D /* Teams.storyboard in Resources */,
 				6EA983CF1E5E030400D5BB55 /* OpenSans-Light.ttf in Resources */,
 				6EB699E71D3416AF0095474D /* ScheduleFilter.storyboard in Resources */,
@@ -4031,10 +4040,10 @@
 				6ECBAF841E517185000A1758 /* FavoriteEventsViewController.swift in Sources */,
 				6E9B22D61D400B8A00D25271 /* LevelScheduleViewController.swift in Sources */,
 				6E313C1E1D41302C005132DA /* VenueRoomDetailViewController.swift in Sources */,
+				6EC0E4CC1E8F166B00757CDD /* SearchViewController.swift in Sources */,
 				6E57DDC71E4AD22100783BA6 /* PresentPopover.swift in Sources */,
 				6E10A5A81D106AD5008CBD0C /* ScheduleItem.swift in Sources */,
 				6E49054D1D2ED21300D56870 /* AboutViewController.swift in Sources */,
-				6EFC99C91D21DFE1009FD0DA /* SearchViewController.swift in Sources */,
 				6EB3EA0D1D1B5158000BA5A4 /* TableViewHeaderView.swift in Sources */,
 				6ECA1CD61D514E5600806924 /* MyProfileViewController.swift in Sources */,
 				6EF12C531D1497E100814AD0 /* UIView+Border.swift in Sources */,
@@ -4059,6 +4068,7 @@
 				6E4E24601E23477F00F7F3FB /* TeamDetailViewController.swift in Sources */,
 				6EFC964F1D22DC320081B3E8 /* TrackTableViewCell.swift in Sources */,
 				6E6FD17F1D7A1CA2003D13D7 /* AppSecrets.swift in Sources */,
+				6EC0E4CA1E8F0FC300757CDD /* SearchTableViewHeaderView.swift in Sources */,
 				6EDA4ABE1DFA1CCF00ADF96D /* TeamsViewController.swift in Sources */,
 				6EF1C84C1D148C3C0060BF45 /* PeopleTableViewCell.swift in Sources */,
 				6EB7525E1D188B1200BC294D /* MemberProfileViewController.swift in Sources */,
