@@ -84,7 +84,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
+    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [ManagedObject] {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
@@ -93,6 +93,8 @@ public extension NSManagedObjectContext {
         fetchRequest.predicate = predicate
         
         fetchRequest.sortDescriptors = sortDescriptors
+        
+        fetchRequest.fetchLimit = limit
         
         return try self.executeFetchRequest(fetchRequest) as! [ManagedObject]
     }
