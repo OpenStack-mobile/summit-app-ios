@@ -87,7 +87,7 @@
                                         <rect key="frame" x="83" y="30" width="222" height="48"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jimmy Mcarthur" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Is-LK-cIs" userLabel="Name Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="148.5" height="26"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="149" height="26"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="19"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -479,8 +479,8 @@
         <!--SEARCH-->
         <scene sceneID="WTD-qi-fZW">
             <objects>
-                <tableViewController storyboardIdentifier="SearchViewController" id="WWd-xg-vZy" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gkI-T6-mYo">
+                <tableViewController storyboardIdentifier="SearchViewController" id="WWd-xg-vZy" customClass="SearchViewController" customModule="OpenStackSummit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="gkI-T6-mYo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -488,17 +488,20 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="WWd-xg-vZy" id="HNX-nL-0iE"/>
+                            </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="bTX-Am-h18">
-                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultTableViewCell" rowHeight="53" id="bTX-Am-h18" customClass="SearchResultTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="320" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTX-Am-h18" id="nd2-S3-QyR">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Result Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOh-BJ-hhH">
-                                            <rect key="frame" x="15" y="15" width="290" height="13.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Result Value" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOh-BJ-hhH">
+                                            <rect key="frame" x="15" y="15" width="297" height="23"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -508,9 +511,62 @@
                                         <constraint firstAttribute="bottom" secondItem="hOh-BJ-hhH" secondAttribute="bottom" constant="15" id="EhT-p8-LpG"/>
                                         <constraint firstItem="hOh-BJ-hhH" firstAttribute="top" secondItem="nd2-S3-QyR" secondAttribute="top" constant="15" id="K1d-De-ITF"/>
                                         <constraint firstItem="hOh-BJ-hhH" firstAttribute="leading" secondItem="nd2-S3-QyR" secondAttribute="leading" constant="15" id="itH-t7-VoI"/>
-                                        <constraint firstAttribute="trailing" secondItem="hOh-BJ-hhH" secondAttribute="trailing" constant="15" id="rdu-PO-Idf"/>
+                                        <constraint firstAttribute="trailing" secondItem="hOh-BJ-hhH" secondAttribute="trailing" constant="8" id="rdu-PO-Idf"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="itemLabel" destination="hOh-BJ-hhH" id="HvQ-uT-6CI"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="peopleTableViewCell" rowHeight="109" id="qQb-jq-6YF" customClass="PeopleTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="125" width="320" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qQb-jq-6YF" id="5nD-75-u2o">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic-user-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cy8-51-cSb">
+                                            <rect key="frame" x="15" y="25" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="8dn-hb-fvK"/>
+                                                <constraint firstAttribute="height" constant="60" id="UeU-B8-Qgr"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mm5-qU-yF3">
+                                            <rect key="frame" x="91" y="18.5" width="213" height="72.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFP-fW-tpJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="213" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Rw-8J-6yN">
+                                                    <rect key="frame" x="0.0" y="31.5" width="213" height="41"/>
+                                                    <string key="text">Multiline Title
+iOS Developer</string>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mm5-qU-yF3" firstAttribute="centerY" secondItem="5nD-75-u2o" secondAttribute="centerY" id="4RX-Qc-TfF"/>
+                                        <constraint firstItem="cy8-51-cSb" firstAttribute="leading" secondItem="5nD-75-u2o" secondAttribute="leading" constant="15" id="BCc-5F-UJf"/>
+                                        <constraint firstAttribute="trailing" secondItem="mm5-qU-yF3" secondAttribute="trailing" constant="16" id="Eob-iw-PGw"/>
+                                        <constraint firstItem="cy8-51-cSb" firstAttribute="centerY" secondItem="5nD-75-u2o" secondAttribute="centerY" id="Gn0-wa-6da"/>
+                                        <constraint firstItem="mm5-qU-yF3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5nD-75-u2o" secondAttribute="top" constant="16" id="MfA-fM-OBZ"/>
+                                        <constraint firstItem="mm5-qU-yF3" firstAttribute="leading" secondItem="cy8-51-cSb" secondAttribute="trailing" constant="16" id="gJ4-hB-CZj"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cy8-51-cSb" secondAttribute="bottom" constant="15" id="i9f-wM-LPL"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="KFP-fW-tpJ" id="aTh-Qc-DAM"/>
+                                    <outlet property="pictureImageView" destination="cy8-51-cSb" id="GFX-DJ-TrH"/>
+                                    <outlet property="titleLabel" destination="3Rw-8J-6yN" id="enT-Tl-1b9"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -520,6 +576,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="SEARCH" id="QrY-5l-mlQ"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Hoj-9M-z7m" id="QyM-LY-7fG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lbw-B8-YiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="NyL-Yl-hiJ">
@@ -528,7 +587,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1365" y="1217"/>
+            <point key="canvasLocation" x="1365" y="1216.9014084507041"/>
         </scene>
         <!--ABOUT-->
         <scene sceneID="H0g-ht-ytK">

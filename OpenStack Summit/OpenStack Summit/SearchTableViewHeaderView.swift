@@ -10,7 +10,7 @@ import UIKit
 
 final class SearchTableViewHeaderView: UITableViewHeaderFooterView {
     
-    static let resuseIdentifier = "SearchTableViewHeaderView"
+    static let reuseIdentifier = "SearchTableViewHeaderView"
     
     @IBOutlet private(set) weak var titleLabel: UILabel!
     
