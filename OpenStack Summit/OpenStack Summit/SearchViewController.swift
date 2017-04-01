@@ -61,6 +61,8 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
         tableView.registerNib(R.nib.scheduleTableViewCell)
+        // https://github.com/mac-cain13/R.swift/issues/144
+        tableView.registerNib(R.nib.searchTableViewHeaderView(), forHeaderFooterViewReuseIdentifier: SearchTableViewHeaderView.reuseIdentifier)
         
         // execute search
         searchTermChanged()
@@ -113,7 +115,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             case .track: items = self.search(Track.self, searchTerm: searchTerm, all: true)
             }
             
-            let searchResult = SearchResult(entity: entity, items: items)
+            let searchResult = SearchResult(entity: entity, items: items, all: true)
             
             self.data = .entity(searchResult)
         }
@@ -139,7 +141,7 @@ final class SearchViewController: UITableViewController, EventViewController, Re
                 
                 guard items.isEmpty == false else { return }
                 
-                let searchResults = SearchResult(entity: entity, items: items)
+                let searchResults = SearchResult(entity: entity, items: items, all: false)
                 
                 sections.append(searchResults)
             }
@@ -252,6 +254,8 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
         self.searchTerm = searchBar.text ?? ""
+        
+        searchBar.endEditing(true)
     }
     
     // MARK: - UITableViewDataSource
@@ -320,10 +324,16 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         headerView.titleLabel.text = sectionTitle
         
+        let buttonText = section.all ? "Show All Results" : "See All"
+        
+        headerView.moreButton.setTitle(buttonText, forState: .Normal)
+        
         if headerView.moreButton.allTargets().isEmpty {
             
             headerView.moreButton.addTarget(self, action: #selector(showMore), forControlEvents: .TouchUpInside)
         }
+        
+        headerView.moreButton.tag = sectionIndex
         
         return headerView
     }
@@ -341,6 +351,7 @@ private extension SearchViewController {
     struct SearchResult {
         let entity: Entity
         let items: [Item]
+        let all: Bool
     }
     
     enum Data {
@@ -362,6 +373,11 @@ private extension SearchViewController {
         case event(ScheduleItem)
         case speaker(Speaker)
         case track(Track)
+    }
+    
+    enum SeeMore {
+        
+        case none
     }
 }
 
