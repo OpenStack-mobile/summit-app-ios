@@ -36,7 +36,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
         
         // https://github.com/mac-cain13/R.swift/issues/144
-        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)
+        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         // observe filter
         filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.configureView() }
@@ -214,7 +214,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.resuseIdentifier) as! TableViewHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
         
         configure(header: headerView, for: section)
         

@@ -61,7 +61,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // must be set later, or else will trigger datasource methods with nil `self.eventDetail`
         defer { tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 20)) }
         // https://github.com/mac-cain13/R.swift/issues/144
-        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.resuseIdentifier)
+        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         // entityController 
         entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
@@ -675,7 +675,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             guard eventDetail.speakers.isEmpty == false
                 else { return nil }
             
-            let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.resuseIdentifier) as! TableViewHeaderView
+            let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
             
             headerView.titleLabel.text = "SPEAKERS"
             

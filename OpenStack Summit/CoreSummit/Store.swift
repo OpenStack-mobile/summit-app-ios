@@ -188,17 +188,15 @@ public final class Store {
                       "\(environment.configuration.serverURL)/me/summits/events/favorites/add",
                       "\(environment.configuration.serverURL)/me/summits/events/favorites/delete"]
         
-        #if DEBUG
+        if environment == .Staging {
             
             let teamScopes = ["\(environment.configuration.serverURL)/teams/read",
                               "\(environment.configuration.serverURL)/teams/write",
-                              "\(environment.configuration.serverURL)/members/read",
                               "\(environment.configuration.serverURL)/members/invitations/read",
                               "\(environment.configuration.serverURL)/members/invitations/write"]
             
             scopes.appendContentsOf(teamScopes)
-            
-        #endif
+        }
         
         var config = Config(
             base: environment.configuration.authenticationURL,
@@ -225,7 +223,8 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(environment.configuration.serverURL)/summits/read"],
+            scopes: ["\(environment.configuration.serverURL)/summits/read",
+                "\(environment.configuration.serverURL)/members/read"],
             clientSecret: environment.configuration.serviceAccount.secret
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)

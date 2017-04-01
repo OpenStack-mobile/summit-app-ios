@@ -10,7 +10,7 @@ import UIKit
 
 final class TableViewHeaderView: UITableViewHeaderFooterView {
     
-    static let resuseIdentifier = "TableViewHeaderView"
+    static let reuseIdentifier = "TableViewHeaderView"
     
     @IBOutlet private(set) weak var titleLabel: UILabel!
 }
