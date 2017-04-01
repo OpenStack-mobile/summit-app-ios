@@ -1708,7 +1708,6 @@
 		6EFC99BE1D218280009FD0DA /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6EFC99C01D2198DF009FD0DA /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		6EFC99C61D21DBE5009FD0DA /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
-		6EFC99C81D21DFE1009FD0DA /* OLDSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDSearchViewController.swift; sourceTree = "<group>"; };
 		6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearHttp.framework; sourceTree = "<group>"; };
 		6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AeroGearOAuth2.framework; sourceTree = "<group>"; };
 		6EFE54EB1E612BDD005EAB86 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
@@ -2817,7 +2816,6 @@
 				6EB7525F1D18AF2800BC294D /* PersonDetailViewController.swift */,
 				6E4D837E1E7CBD5700736BE9 /* AttendeeConfirmViewController.swift */,
 				6EC0E4CB1E8F166B00757CDD /* SearchViewController.swift */,
-				6EFC99C81D21DFE1009FD0DA /* OLDSearchViewController.swift */,
 				6EF147F01D13585C00D5EEF9 /* SpeakersViewController.swift */,
 				6EEED0281E3A48AF00795B3D /* InboxViewController.swift */,
 				6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */,

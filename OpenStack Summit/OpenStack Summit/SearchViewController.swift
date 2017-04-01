@@ -19,6 +19,10 @@ final class SearchViewController: UITableViewController, EventViewController, Re
     
     @IBOutlet private(set) weak var searchBar: UISearchBar!
     
+    @IBOutlet private(set) var emptyView: UIView!
+    
+    @IBOutlet private(set) weak var emptyLabel: UILabel!
+    
     // MARK: - Properties
     
     let fetchLimitPerEntity = 5
@@ -59,7 +63,6 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 60
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView()
         tableView.registerNib(R.nib.scheduleTableViewCell)
         // https://github.com/mac-cain13/R.swift/issues/144
         tableView.registerNib(R.nib.searchTableViewHeaderView(), forHeaderFooterViewReuseIdentifier: SearchTableViewHeaderView.reuseIdentifier)
@@ -107,17 +110,24 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             
             let entity = section.entity
             
-            let results: (items: [Item], extend: Extend)
+            let result: (items: [Item], extend: Extend)
             
             switch entity {
-            case .event: results = try! self.search(ScheduleItem.self, searchTerm: searchTerm, all: true)
-            case .speaker: results = try! self.search(Speaker.self, searchTerm: searchTerm, all: true)
-            case .track: results = try! self.search(Track.self, searchTerm: searchTerm, all: true)
+            case .event: result = try! self.search(ScheduleItem.self, searchTerm: searchTerm, all: true)
+            case .speaker: result = try! self.search(Speaker.self, searchTerm: searchTerm, all: true)
+            case .track: result = try! self.search(Track.self, searchTerm: searchTerm, all: true)
             }
             
-            let searchResult = SearchResult(entity: entity, items: results.items, extend: results.extend)
-            
-            self.data = .entity(searchResult)
+            if result.items.isEmpty {
+                
+                self.data = .none
+                
+            } else {
+                
+                let searchResult = SearchResult(entity: entity, items: result.items, extend: result.extend)
+                
+                self.data = .entity(searchResult)
+            }
         }
     }
     
@@ -151,7 +161,14 @@ final class SearchViewController: UITableViewController, EventViewController, Re
             try! search(Speaker.self, entity: .speaker)
             try! search(Track.self, entity: .track)
             
-            data = .all(sections)
+            if sections.isEmpty {
+                
+                data = .none
+                
+            } else {
+                
+                data = .all(sections)
+            }
         }
     }
     
@@ -159,10 +176,28 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         
         tableView.reloadData()
         
+        // scroll to top
         if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
             
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: false)
         }
+        
+        let tableFooterView: UIView
+        
+        // configure footer view
+        switch data {
+            
+        case .all, .entity:
+            
+            tableFooterView = UIView()
+            
+        case .none:
+            
+            emptyLabel.text = searchTerm.isEmpty ? "Type to search" : "No results"
+            tableFooterView = emptyView
+        }
+        
+        tableView.tableFooterView = tableFooterView
     }
     
     private func search<T: SearchViewControllerItem>(type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
@@ -375,6 +410,40 @@ final class SearchViewController: UITableViewController, EventViewController, Re
         headerView.moreButton.hidden = section.extend == .none
         
         return headerView
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let item = self[indexPath]
+        
+        switch item {
+            
+        case let .event(event):
+            
+            let eventDetailViewController = R.storyboard.event.eventDetailViewController()!
+            
+            eventDetailViewController.event = event.identifier
+            
+            showViewController(eventDetailViewController, sender: self)
+            
+        case let .speaker(speaker):
+            
+            let memberProfileViewController = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
+            
+            showViewController(memberProfileViewController, sender: self)
+            
+        case let .track(track):
+            
+            let trackScheduleViewController = R.storyboard.schedule.trackScheduleViewController()!
+            
+            trackScheduleViewController.track = track
+            
+            showViewController(trackScheduleViewController, sender: self)
+        }
     }
 }
 
