@@ -107,6 +107,12 @@
 		6E0FD0B11E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
 		6E0FD0B21E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
 		6E0FD0B31E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
+		6E0FD0B51E92E57F000C6DBA /* SwiftFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E0FD0B71E92E57F000C6DBA /* JSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E0FD0B91E92E57F000C6DBA /* AeroGearHttp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E0FD0BB1E92E57F000C6DBA /* AeroGearOAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E0FD0BC1E92E57F000C6DBA /* XCDYouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */; };
+		6E0FD0BD1E92E57F000C6DBA /* XCDYouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E104D321D1061AC00541E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E104D311D1061AC00541E84 /* AppDelegate.swift */; };
 		6E104D391D1061AC00541E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E104D381D1061AC00541E84 /* Assets.xcassets */; };
 		6E10A4F41D1066E9008CBD0C /* CoreSummit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E10A4F31D1066E9008CBD0C /* CoreSummit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1030,7 +1036,6 @@
 		6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; };
 		6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; };
 		6EFE54F61E612C7A005EAB86 /* AeroGearOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E71E612BDD005EAB86 /* AeroGearOAuth2.framework */; };
-		6EFE54F71E612C7A005EAB86 /* XCDYouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */; };
 		9D4B1C251E84B05D00F98ECB /* AffiliationOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */; };
 		9D4B1C261E84B05E00F98ECB /* AffiliationOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */; };
 		9D4B1C271E84B05E00F98ECB /* AffiliationOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */; };
@@ -1244,7 +1249,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6E0FD0B91E92E57F000C6DBA /* AeroGearHttp.framework in Embed Frameworks */,
+				6E0FD0BD1E92E57F000C6DBA /* XCDYouTubeKit.framework in Embed Frameworks */,
 				6E75588E1E58D0F8003B6844 /* CoreSummit.framework in Embed Frameworks */,
+				6E0FD0B51E92E57F000C6DBA /* SwiftFoundation.framework in Embed Frameworks */,
+				6E0FD0B71E92E57F000C6DBA /* JSON.framework in Embed Frameworks */,
+				6E0FD0BB1E92E57F000C6DBA /* AeroGearOAuth2.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1884,9 +1894,9 @@
 				6E75588D1E58D0F8003B6844 /* CoreSummit.framework in Frameworks */,
 				6EFE54F31E612C7A005EAB86 /* SwiftFoundation.framework in Frameworks */,
 				6EFE54F41E612C7A005EAB86 /* JSON.framework in Frameworks */,
+				6E0FD0BC1E92E57F000C6DBA /* XCDYouTubeKit.framework in Frameworks */,
 				6EFE54F51E612C7A005EAB86 /* AeroGearHttp.framework in Frameworks */,
 				6EFE54F61E612C7A005EAB86 /* AeroGearOAuth2.framework in Frameworks */,
-				6EFE54F71E612C7A005EAB86 /* XCDYouTubeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
