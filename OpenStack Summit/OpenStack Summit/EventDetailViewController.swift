@@ -247,7 +247,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // action buttons
         
         // get all reviews for this event
-        let reviews = try! context.managedObjects(FeedbackManagedObject.self, predicate: NSPredicate(format: "event == %@", eventManagedObject), sortDescriptors: FeedbackManagedObject.sortDescriptors)
+        let reviews = try! context.managedObjects(FeedbackManagedObject.self, predicate: "event.id" == event, sortDescriptors: FeedbackManagedObject.sortDescriptors)
         
         // can give feedback
         if reviews.isEmpty {

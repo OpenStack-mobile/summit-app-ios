@@ -39,6 +39,14 @@ public extension NSManagedObjectContext {
         
         return T.from(managedObjects: results)
     }
+    
+    @inline(__always)
+    func managedObjects<T: CoreDataDecodable>(decodableType: T.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [T] {
+        
+        let results = try self.managedObjects(decodableType.ManagedObject.self, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
+        
+        return T.from(managedObjects: results)
+    }
 }
 
 @available(OSX 10.12, *)
