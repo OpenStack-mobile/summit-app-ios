@@ -37,6 +37,8 @@ public struct Member: Named {
     public let groups: Set<Group>
     
     public let feedback: Set<Identifier>
+    
+    public let affiliations: Set<Affiliation>
 }
 
 // MARK: - Equatable
@@ -55,6 +57,7 @@ public func == (lhs: Member, rhs: Member) -> Bool {
         && lhs.groups == rhs.groups
         && lhs.groupEvents == rhs.groupEvents
         && lhs.favoriteEvents == rhs.favoriteEvents
+        && lhs.affiliations == rhs.affiliations
 }
 
 // MARK: - Extensions

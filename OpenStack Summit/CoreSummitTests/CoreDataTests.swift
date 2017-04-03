@@ -42,6 +42,10 @@ final class CoreDataTests: XCTestCase {
             
             let decodedSummit = Summit(managedObject: managedObject)
             
+            dump(summit, "CoreDataTests" + "Summit" + "\(summitID)" + "Dump.txt")
+            
+            dump(decodedSummit, "CoreDataTests" + "Decoded" + "Summit" + "\(summitID)" + "Dump.txt")
+            
             XCTAssert(summit == decodedSummit, "Original summit \(summitID) must equal decoded summit")
         }
     }
