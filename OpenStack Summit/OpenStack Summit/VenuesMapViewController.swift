@@ -39,9 +39,15 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     private func updateUI() {
         
         /// get Internal Venues with Coordinates
-        let venues = try! Store.shared.managedObjectContext
-            .managedObjects(VenueListItem)
-            .filter { $0.isInternal && $0.location != nil }
+        
+        let summit = SummitManager.shared.summit.value
+        
+        let predicate: Predicate = "summit.id" == summit
+            &&& "locationType" == Venue.LocationType.Internal.rawValue
+            &&& .keyPath("latitude") != .value(.null)
+            &&& .keyPath("longitude") != .value(.null)
+        
+        let venues = try! VenueListItem.filter(predicate, context: Store.shared.managedObjectContext)
         
         var bounds = GMSCoordinateBounds()
         

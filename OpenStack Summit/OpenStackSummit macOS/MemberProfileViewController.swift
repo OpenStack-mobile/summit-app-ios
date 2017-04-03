@@ -254,3 +254,28 @@ final class MemberProfileViewController: NSViewController, NSSharingServicePicke
         sharingService.subject = nameLabel.stringValue
     }
 }
+
+// MARK: - Supporting Types
+
+/// Data type used the configure the member profile-related View Controllers.
+public enum PersonIdentifier {
+    
+    case currentUser
+    case speaker(Identifier)
+    case member(Identifier)
+    
+    public init() {
+        
+        self = .currentUser
+    }
+    
+    public init(speaker: Speaker) {
+        
+        self = .speaker(speaker.identifier)
+    }
+    
+    public init(member: Member) {
+        
+        self = .member(member.identifier)
+    }
+}

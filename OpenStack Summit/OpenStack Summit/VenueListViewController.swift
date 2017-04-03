@@ -37,10 +37,13 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        let venues = try! Store.shared.managedObjectContext.managedObjects(VenueListItem)
+        let summit = SummitManager.shared.summit.value
+        
+        let venues = try! VenueListItem.filter("summit.id" == summit, context: Store.shared.managedObjectContext)
         
         internalVenueList = venues.filter({ $0.isInternal == true })
         externalVenueList = venues.filter({ $0.isInternal == false })
+        
         tableView.reloadData()
     }
     
