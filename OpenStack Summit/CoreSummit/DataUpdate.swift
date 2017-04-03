@@ -47,6 +47,7 @@ public extension DataUpdate {
         case MyFavorite
         case Presentation
         case SummitEvent
+        case SummitEventWithFile
         case SummitType
         case SummitEventType
         case PresentationSpeaker
@@ -77,7 +78,7 @@ public extension DataUpdate {
             case .MySchedule, .MyFavorite: return CoreSummit.EventDataUpdate.self
             case .Summit: return CoreSummit.Summit.DataUpdate.self
             case .Presentation: return CoreSummit.EventDataUpdate.self
-            case .SummitEvent: return CoreSummit.EventDataUpdate.self
+            case .SummitEvent, .SummitEventWithFile: return CoreSummit.EventDataUpdate.self
             case .SummitGroupEvent: return CoreSummit.GroupEventDataUpdate.self
             case .SummitType: return CoreSummit.SummitType.self
             case .SummitEventType: return CoreSummit.EventType.self
