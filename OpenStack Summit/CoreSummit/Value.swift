@@ -120,6 +120,10 @@ extension Int64: PredicateValue {
     public var predicateValue: Value { return .int64(self) }
 }
 
+extension Int: PredicateValue {
+    public var predicateValue: Value { return .int64(Int64(self)) }
+}
+
 extension Float: PredicateValue {
     public var predicateValue: Value { return .float(self) }
 }

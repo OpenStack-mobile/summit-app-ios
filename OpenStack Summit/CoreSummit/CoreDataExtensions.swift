@@ -98,6 +98,12 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
+    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
+        
+        return try managedObjects(managedObjectType, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
+    }
+    
+    @inline(__always)
     func count<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil) throws -> Int {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
