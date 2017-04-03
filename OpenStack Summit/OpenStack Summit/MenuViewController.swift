@@ -337,7 +337,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(teamsViewController)
     }
     
-    private func showSearch(for term: String) {
+    func showSearch(for term: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
         searchViewController.searchTerm = term

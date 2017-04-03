@@ -183,7 +183,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         if let sourceApplication = sourceApplication {
             
-            options["UIApplicationOpenURLOptionsSourceApplicationKey"] = sourceApplication
+            options[UIApplicationOpenURLOptionsSourceApplicationKey] = sourceApplication
         }
         
         return self.application(application, openURL: url, options: options)
@@ -191,7 +191,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         
-        if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] as? String {
+        if let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String {
             
             let bundleID = NSBundle.mainBundle().bundleIdentifier
             
@@ -360,6 +360,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         case .speakers: self.menuViewController.showSpeakers()
         case .about: self.menuViewController.showAbout()
         }
+    }
+    
+    func search(searchTerm: String) {
+        
+        self.menuViewController.showSearch(for: searchTerm)
     }
 }
 
