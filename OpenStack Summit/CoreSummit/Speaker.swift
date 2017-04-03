@@ -23,6 +23,8 @@ public struct Speaker: Person {
     public var irc: String?
     
     public var biography: String?
+    
+    public var affiliations: Set<Affiliation>
 }
 
 // MARK: - Person
@@ -44,4 +46,5 @@ public func == (lhs: Speaker, rhs: Speaker) -> Bool {
         && lhs.twitter == rhs.twitter
         && lhs.irc == rhs.irc
         && lhs.biography == rhs.biography
+        && lhs.affiliations == rhs.affiliations
 }

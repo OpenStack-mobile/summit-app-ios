@@ -27,6 +27,8 @@ public final class SpeakerManagedObject: Entity {
     
     @NSManaged public var biography: String?
     
+    @NSManaged public var affiliations: Set<AffiliationManagedObject>
+    
     // Inverse Relationships
     
     @NSManaged public var summits: Set<SummitManagedObject>
@@ -46,6 +48,7 @@ extension Speaker: CoreDataDecodable {
         self.twitter = managedObject.twitter
         self.irc = managedObject.irc
         self.biography = managedObject.biography
+        self.affiliations = Affiliation.from(managedObjects: managedObject.affiliations)
     }
 }
 
@@ -63,6 +66,7 @@ extension Speaker: CoreDataEncodable {
         managedObject.twitter = twitter
         managedObject.irc = irc
         managedObject.biography = biography
+        managedObject.affiliations = try context.relationshipFault(affiliations)
         
         managedObject.didCache()
         

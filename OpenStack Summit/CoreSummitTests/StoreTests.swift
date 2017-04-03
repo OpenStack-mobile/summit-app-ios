@@ -32,7 +32,7 @@ final class StoreTests: XCTestCase {
                 
                 XCTAssert(value.items.isEmpty == false, "No summits")
                 
-                dump(value, "AllSummitsDump.txt")
+                dump(value, "StoreTestsAllSummitsDump.txt")
             }
             
             expectation.fulfill()
@@ -57,7 +57,7 @@ final class StoreTests: XCTestCase {
                 
             case let .Value(summit):
                                 
-                dump(summit, "CurrentSummitDump.txt")
+                dump(summit, "StoreTestsCurrentSummitDump.txt")
             }
             
             expectation.fulfill()
@@ -66,13 +66,11 @@ final class StoreTests: XCTestCase {
         waitForExpectationsWithTimeout(60, handler: nil)
     }
     
-    func testPastSummitsRequest() {
+    func testSummitRequest() {
         
         let store = try! createStore()
-                
-        let pastSummits = 6 ... 7
         
-        for summitID in pastSummits {
+        for summitID in SummitJSONIdentifiers {
             
             let expectation = expectationWithDescription("API Request")
             
@@ -89,7 +87,7 @@ final class StoreTests: XCTestCase {
                     XCTAssert(summit.speakers.isEmpty == false, "No Events")
                     XCTAssert(summit.speakers.isEmpty == false, "No Speakers")
                     
-                    dump(summit, "Summit" + "\(summitID)" + "Dump.txt")
+                    dump(summit, "StoreTestsSummit" + "\(summitID)" + "Dump.txt")
                 }
                 
                 expectation.fulfill()

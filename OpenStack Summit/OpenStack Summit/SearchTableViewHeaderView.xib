@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
+        <array key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lTd-2U-MgU" customClass="SearchTableViewHeaderView" customModule="OpenStackSummit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECTION TITLE" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlC-ZD-Qd1">
+                    <rect key="frame" x="15" y="15" width="91" height="22"/>
+                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="13"/>
+                    <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afn-sD-ykx" customClass="Button" customModule="OpenStackSummit" customModuleProvider="target">
+                    <rect key="frame" x="250" y="14" width="55" height="22"/>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                    <state key="normal" title="Show All">
+                        <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWu-Ou-fPy" userLabel="Separator View">
+                    <rect key="frame" x="0.0" y="51" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="eab-Xp-C8I"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LUq-6l-3GK" userLabel="Separator View">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="F9s-xk-jFE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="dlC-ZD-Qd1" firstAttribute="leading" secondItem="lTd-2U-MgU" secondAttribute="leading" constant="15" id="BeE-AI-qea"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dlC-ZD-Qd1" secondAttribute="bottom" constant="15" id="EIm-8y-VDA"/>
+                <constraint firstAttribute="trailing" secondItem="kWu-Ou-fPy" secondAttribute="trailing" id="EXC-ea-bYa"/>
+                <constraint firstItem="LUq-6l-3GK" firstAttribute="top" secondItem="lTd-2U-MgU" secondAttribute="top" id="K5P-Hy-ALS"/>
+                <constraint firstItem="LUq-6l-3GK" firstAttribute="leading" secondItem="lTd-2U-MgU" secondAttribute="leading" id="LD5-sz-pjM"/>
+                <constraint firstItem="afn-sD-ykx" firstAttribute="height" secondItem="dlC-ZD-Qd1" secondAttribute="height" id="VJa-si-86g"/>
+                <constraint firstAttribute="trailing" secondItem="LUq-6l-3GK" secondAttribute="trailing" id="VK6-51-xnA"/>
+                <constraint firstItem="dlC-ZD-Qd1" firstAttribute="top" secondItem="lTd-2U-MgU" secondAttribute="top" constant="15" id="Wng-Ki-lF1"/>
+                <constraint firstAttribute="bottom" secondItem="kWu-Ou-fPy" secondAttribute="bottom" id="YxN-1K-tjn"/>
+                <constraint firstItem="kWu-Ou-fPy" firstAttribute="top" secondItem="afn-sD-ykx" secondAttribute="bottom" constant="15" id="bcb-lp-kSL"/>
+                <constraint firstItem="afn-sD-ykx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dlC-ZD-Qd1" secondAttribute="trailing" constant="15" id="cPe-FY-fM2"/>
+                <constraint firstAttribute="trailing" secondItem="afn-sD-ykx" secondAttribute="trailing" constant="15" id="oXd-hC-J4d"/>
+                <constraint firstItem="kWu-Ou-fPy" firstAttribute="leading" secondItem="lTd-2U-MgU" secondAttribute="leading" id="uSq-Dm-4wR"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="contentView.backgroundColor">
+                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="moreButton" destination="afn-sD-ykx" id="tqv-JA-XjI"/>
+                <outlet property="titleLabel" destination="dlC-ZD-Qd1" id="uiG-G7-VfN"/>
+            </connections>
+            <point key="canvasLocation" x="-1183" y="-428"/>
+        </view>
+    </objects>
+</document>

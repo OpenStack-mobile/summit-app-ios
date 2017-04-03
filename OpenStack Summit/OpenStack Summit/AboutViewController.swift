@@ -112,7 +112,6 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         
         sections = []
         
-        
         if let summitManagedObject = self.currentSummit {
             
             let summit = Summit(managedObject: summitManagedObject)
@@ -131,11 +130,9 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             if summitActive {
                 
-                let predicate = NSPredicate(format: "summit == %@", summitManagedObject)
-                
                 let sort = [NSSortDescriptor(key: "name", ascending: true)]
                 
-                let wirelessNetworks = try! WirelessNetwork.filter(predicate, sort: sort, context: Store.shared.managedObjectContext)
+                let wirelessNetworks = try! WirelessNetwork.filter(("summit.id" == summit.identifier).toFoundation(), sort: sort, context: Store.shared.managedObjectContext)
                 
                 if wirelessNetworks.isEmpty == false {
                     
