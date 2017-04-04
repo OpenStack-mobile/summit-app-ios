@@ -14,6 +14,8 @@ protocol SummitActivityHandling {
     func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool
     
     func view(screen: AppActivityScreen)
+    
+    func search(searchTerm: String)
 }
 
 extension SummitActivityHandling {
@@ -21,6 +23,17 @@ extension SummitActivityHandling {
     /// Opens URL of universal domain.
     func openWebURL(url: NSURL) -> Bool {
         
+        // perform search
+        if url.pathComponents?.last == "global-search",
+            let urlComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false),
+            let searchQuery = urlComponents.queryItems?.firstMatching({ $0.name == "t" && ($0.value ?? "").isEmpty == false }),
+            let searchTerm = searchQuery.value {
+            
+            self.search(searchTerm)
+            return true
+        }
+        
+        // show data
         guard let components = url.pathComponents
             where components.count >= 6
             else { return false }
@@ -109,6 +122,11 @@ extension SummitActivityHandlingViewController {
     func view(screen: AppActivityScreen) {
         
         AppDelegate.shared.view(screen)
+    }
+    
+    func search(searchTerm: String) {
+        
+        AppDelegate.shared.search(searchTerm)
     }
 }
 
