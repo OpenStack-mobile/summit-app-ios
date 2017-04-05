@@ -171,7 +171,9 @@ extension EventViewController {
         
         setScheduledLocally(newValue)
         
-        func setScheduledOnServer(request: , success: () -> ()) {
+        typealias EventRequestRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
+        
+        func setScheduledOnServer(request: EventRequestRequest, success: () -> ()) {
             
             let completion: ErrorType? -> () = { [weak self] (response) in
                 
@@ -199,75 +201,45 @@ extension EventViewController {
                 }
             }
             
-            if newValue {
-                
-                Store.shared.addEventToSchedule(event.summit, event: event.identifier, completion: completion)
-                
-            } else {
-                
-                Store.shared.removeEventFromSchedule(event.summit, event: event.identifier, completion: completion)
-            }
+            request(summit: event.summit, event: event.identifier, completion: completion)
         }
         
         // different action based on conditions
         switch (newValue, rsvpURL, externalRSVP) {
             
-        case (_, nil, true):
+        case let (newValue, .None, externalRSVP):
             
-            // should never happen, external RSVP should always have RSVP urls
-            fallthrough
-            
-        case (_, nil, false):
+            assert(externalRSVP == false, "External RSVP should always have RSVP urls")
             
             // add / remove from schedule
-            setScheduledOnServer() { }
             
-        case let (true, .Some(url), true):
+            let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
+            
+            setScheduledOnServer(request) { }
+            
+        case let (newValue, .Some(url), true):
             
             // rsvp_external (boolean) if true, then before redirect to WEBView, mobile app should add the event to my schedule calling API ( this is only for attendees)
+            
+            // When event has external RSVP, clicking unRSVP button pings unSCHEDULE endpoint.
+            // In this case, we do redirect to RSVP link (so, external RSVP redirects both when doing RSVP and unRSVP)
+            
+            let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
+            
             // add to schedule and open RSVP link
-            setScheduledOnServer() { UIApplication.sharedApplication().openURL(url) }
+            setScheduledOnServer(request) { UIApplication.sharedApplication().openURL(url) }
             
         case let (true, .Some(url), false):
             
             // just open RSVP link
             UIApplication.sharedApplication().openURL(url)
             
-        case let (false, .Some(url), false):
+        case (false, .Some, false):
             
             // When event has internal RSVP, clicking unRSVP button needs to ping the unRSVP endpoint 
-            // (replacing the unSCHEDULE call since its done automatically by the server). I
+            // (replacing the unSCHEDULE call since its done automatically by the server).
             // In this case, we dont need to redirect to RSVP link.
-            Store.shared.removeRSVP(event.summit, event: event.identifier) { [weak self] (response) in
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    
-                    guard let controller = self else { return }
-                    
-                    controller.eventRequestInProgress = false
-                    
-                    switch response {
-                        
-                    case let .Some(error):
-                        
-                        // restore original value
-                        setScheduledLocally(scheduled)
-                        
-                        // show error
-                        controller.showErrorMessage(error)
-                        
-                    case .None:
-                        
-                        break
-                    }
-                }
-            }
-            
-        case let (false, .Some(url), true):
-            
-            // When event has external RSVP, clicking unRSVP button pings unSCHEDULE endpoint. 
-            // In this case, we do redirect to RSVP link (so, external RSVP redirects both when doing RSVP and unRSVP)
-            
+            setScheduledOnServer(Store.shared.removeRSVP) { }
         }
     }
     
