@@ -18,7 +18,7 @@ public final class DataUpdatePoller {
     
     // MARK: - Properties
     
-    public var pollingInterval: Double = 30
+    public var pollingInterval: Double = 60
     
     public var log: ((String) -> ())?
     
