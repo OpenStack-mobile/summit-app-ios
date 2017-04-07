@@ -28,6 +28,11 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         var items = [AnyObject]()
         
+        if let url = self.userActivity?.webpageURL {
+            
+            items.append(url)
+        }
+        
         items.append(self.headerView.nameLabel.text ?? "")
         
         for data in self.data {
@@ -47,11 +52,6 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
         
         items.append(self.headerView.imageView.image!)
-        
-        if let url = self.userActivity?.webpageURL {
-            
-            items.append(url)
-        }
         
         return ContextMenu(actions: [], shareItems: items, systemActions: true)
     }
