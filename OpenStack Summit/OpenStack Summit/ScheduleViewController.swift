@@ -372,7 +372,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         // set text
         cell.nameLabel.text = event.name
-        cell.dateTimeLabel.text = event.dateTime
+        cell.dateTimeLabel.text = event.location.isEmpty ? event.time : event.time + " / " + event.location
         cell.trackLabel.text = event.track
         cell.trackLabel.hidden = event.track.isEmpty
         cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
