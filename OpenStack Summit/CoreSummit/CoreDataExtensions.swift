@@ -120,7 +120,7 @@ public extension NSManagedObjectContext {
     }
     
     /// Save and attempt to recover from validation errors
-    func validateAndSave() throws {
+    func validateAndSave(fileName: String = #file, _ lineNumber: Int = #line) throws {
         
         do { try save() }
         
@@ -136,11 +136,11 @@ public extension NSManagedObjectContext {
             invalidObjects.forEach { self.deleteObject($0) }
             
             #if DEBUG
-            print("CoreData validation error: \(error)")
+            print("CoreData validation error at \(fileName):\(lineNumber)\n\(error)")
             #endif
             
             // try to save again (and catch more validation errors)
-            try validateAndSave()
+            try validateAndSave(fileName, lineNumber)
         }
     }
 }

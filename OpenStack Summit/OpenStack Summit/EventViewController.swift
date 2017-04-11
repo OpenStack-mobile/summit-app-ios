@@ -102,7 +102,7 @@ extension EventViewController {
             actions.append(favoriteEvent)
         }
         
-        var shareItems = [message, url]
+        var shareItems = [url, message]
         
         if event.socialDescription.isEmpty == false {
             
