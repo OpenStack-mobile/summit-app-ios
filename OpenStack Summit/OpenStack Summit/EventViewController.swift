@@ -169,11 +169,9 @@ extension EventViewController {
             }
         }
         
-        setScheduledLocally(newValue)
-        
         typealias EventRequestRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
         
-        func setScheduledOnServer(request: EventRequestRequest, success: () -> ()) {
+        func setScheduledOnServer(request: EventRequestRequest, updateCache: Bool = false, success: () -> ()) {
             
             let completion: ErrorType? -> () = { [weak self] (response) in
                 
@@ -187,8 +185,11 @@ extension EventViewController {
                         
                     case let .Some(error):
                         
-                        // restore original value
-                        setScheduledLocally(scheduled)
+                        if updateCache {
+                            
+                            // restore original value
+                            setScheduledLocally(scheduled)
+                        }
                         
                         // show error
                         controller.showErrorMessage(error)
@@ -199,6 +200,12 @@ extension EventViewController {
                         success()
                     }
                 }
+            }
+            
+            // set new value immediately in cache
+            if updateCache {
+                
+                setScheduledLocally(newValue)
             }
             
             request(summit: event.summit, event: event.identifier, completion: completion)
@@ -215,7 +222,8 @@ extension EventViewController {
             
             let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
             
-            setScheduledOnServer(request) { }
+            // update cache immediately and add to schedule
+            setScheduledOnServer(request, updateCache: true) { }
             
         case let (newValue, .Some(url), true):
             
@@ -226,8 +234,8 @@ extension EventViewController {
             
             let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
             
-            // add to schedule and open RSVP link
-            setScheduledOnServer(request) { UIApplication.sharedApplication().openURL(url) }
+            // update cache immediately, add to schedule and open RSVP link
+            setScheduledOnServer(request, updateCache: true) { UIApplication.sharedApplication().openURL(url) }
             
         case let (true, .Some(url), false):
             
