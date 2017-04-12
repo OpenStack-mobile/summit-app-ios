@@ -20,9 +20,9 @@ public struct Event: Named {
     
     public var socialDescription: String?
     
-    public var start: Date
+    public var start: SwiftFoundation.Date
     
-    public var end: Date
+    public var end: SwiftFoundation.Date
         
     public var track: Identifier?
     

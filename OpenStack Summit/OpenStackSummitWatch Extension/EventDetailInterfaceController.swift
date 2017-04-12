@@ -50,14 +50,14 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private var event: Event!
+    fileprivate var event: Event!
     
-    private var eventDetail: EventDetail!
+    fileprivate var eventDetail: EventDetail!
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let event = (context as? Context<Event>)?.value
             else { fatalError("Invalid context") }
@@ -76,7 +76,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: eventDetail.identifier]
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: eventDetail.webpageURL)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: eventDetail.webpageURL)
     }
     
     override func didDeactivate() {
@@ -88,7 +88,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func showSpeakers(sender: AnyObject? = nil) {
+    @IBAction func showSpeakers(_ sender: AnyObject? = nil) {
         
         if eventDetail.speakers.count == 1 {
             
@@ -102,7 +102,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         }
     }
     
-    @IBAction func showLocation(sender: AnyObject? = nil) {
+    @IBAction func showLocation(_ sender: AnyObject? = nil) {
         
         guard let summit = Store.shared.cache,
             let locationID = event.location
@@ -116,7 +116,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         nameLabel.setText(eventDetail.name)
         dateLabel.setText(eventDetail.dateTime)
@@ -146,8 +146,8 @@ final class EventDetailInterfaceController: WKInterfaceController {
         levelSeparator.setHidden(eventDetail.level.isEmpty)
         
         if let descriptionText = eventDetail.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.data(using: String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             descriptionLabel.setText(attributedString.string)
             
@@ -159,7 +159,7 @@ final class EventDetailInterfaceController: WKInterfaceController {
         }
         
         if let video = eventDetail.video,
-            let url = NSURL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg") {
+            let url = URL(string: "https://img.youtube.com/vi/" + video.youtube + "/default.jpg") {
             
             moviePlayer.setHidden(false)
             moviePlayer.loadCached(url)

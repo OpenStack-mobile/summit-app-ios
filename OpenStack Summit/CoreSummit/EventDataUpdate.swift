@@ -19,9 +19,9 @@ public struct EventDataUpdate: Named {
     
     public let socialDescription: String?
     
-    public let start: Date
+    public let start: SwiftFoundation.Date
     
-    public let end: Date
+    public let end: SwiftFoundation.Date
     
     public let track: Identifier?
     

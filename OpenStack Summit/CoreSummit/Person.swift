@@ -39,7 +39,7 @@ public extension Person {
         guard let firstLetter = self.name.characters.first
             else { return unknownLetter }
         
-        let uppercaseLetter = String(firstLetter).uppercaseString
+        let uppercaseLetter = String(firstLetter).uppercased()
         
         return Self.addressBookSections.contains(uppercaseLetter) ? uppercaseLetter : unknownLetter
     }

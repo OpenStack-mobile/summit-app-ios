@@ -30,7 +30,7 @@ extension TeamMessage: JSONDecodable {
         
         self.identifier = identifier
         self.body = body
-        self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
         self.team = .identifier(teamIdentifier)
         self.from = .identifier(fromMemberIdentifier)
     }

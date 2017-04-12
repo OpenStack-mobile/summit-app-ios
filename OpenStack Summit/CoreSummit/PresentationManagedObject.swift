@@ -33,7 +33,7 @@ extension Presentation: CoreDataDecodable {
 
 extension Presentation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> PresentationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> PresentationManagedObject {
         
         let managedObject = try cached(context)
         

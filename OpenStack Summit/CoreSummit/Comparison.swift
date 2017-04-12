@@ -98,7 +98,7 @@ extension Comparision: CustomStringConvertible {
         let type = self.type.rawValue
         
         let options = self.options.isEmpty ? "" : "[" + self.options
-            .sort({ $0.0.rawValue < $0.1.rawValue })
+            .sorted(by: { $0.0.rawValue < $0.1.rawValue })
             .reduce("") { $0.0 + $0.1.rawValue }
             + "]"
         
@@ -214,21 +214,21 @@ public func != <T: PredicateValue>(lhs: String, rhs: T) -> Predicate {
 // Extensions for KeyPath comparisions
 public extension String {
     
-    func compare(type: Comparision.Operator, _ rhs: Expression) -> Predicate {
+    func compare(_ type: Comparision.Operator, _ rhs: Expression) -> Predicate {
         
         let comparision = Comparision(expression: (.keyPath(self), rhs), type: type)
         
         return .comparison(comparision)
     }
     
-    func compare(type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
+    func compare(_ type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
         
         let comparision = Comparision(expression: (.keyPath(self), rhs), type: type, options: options)
         
         return .comparison(comparision)
     }
     
-    func compare(modifier: Comparision.Modifier, _ type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
+    func compare(_ modifier: Comparision.Modifier, _ type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
         
         let comparision = Comparision(expression: (.keyPath(self), rhs), type: type, modifier: modifier, options: options)
         
@@ -257,7 +257,7 @@ public extension String {
         return .comparison(comparision)
     }
     
-    func `in` <Value: PredicateValue> (collection: [Value], options: Set<Comparision.Option> = []) -> Predicate {
+    func `in` <Value: PredicateValue> (_ collection: [Value], options: Set<Comparision.Option> = []) -> Predicate {
         
         let values = collection.map { $0.predicateValue }
         

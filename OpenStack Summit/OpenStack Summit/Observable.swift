@@ -23,9 +23,9 @@ public final class Observable<Value: Equatable> {
     
     // MARK: - Private Properties
     
-    private var observers = [Observer<Value>]()
+    fileprivate var observers = [Observer<Value>]()
     
-    private var nextID = 1
+    fileprivate var nextID = 1
     
     // MARK: - Initialization
     
@@ -36,7 +36,7 @@ public final class Observable<Value: Equatable> {
     
     // MARK: - Methods
     
-    public func observe(observer: (new: Value, old: Value) -> ()) -> Int {
+    public func observe(_ observer: (new: Value, old: Value) -> ()) -> Int {
         
         let identifier = nextID
         
@@ -52,18 +52,18 @@ public final class Observable<Value: Equatable> {
         return identifier
     }
     
-    public func remove(observer: Int) -> Bool {
+    public func remove(_ observer: Int) -> Bool {
         
-        guard let index = observers.indexOf({ $0.identifier == observer })
+        guard let index = observers.index(where: { $0.identifier == observer })
             else { return false }
         
-        observers.removeAtIndex(index)
+        observers.remove(at: index)
         
         return true
     }
 }
 
-public extension Observable where Value: NilLiteralConvertible {
+public extension Observable where Value: ExpressibleByNilLiteral {
     
     convenience init() { self.init(nil) }
 }

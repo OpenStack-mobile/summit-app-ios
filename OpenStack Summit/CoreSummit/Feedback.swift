@@ -16,7 +16,7 @@ public protocol FeedbackProtocol: Unique {
     
     var review: String { get }
     
-    var date: Date { get }
+    var date: SwiftFoundation.Date { get }
     
     var event: Identifier { get }
 }
@@ -29,7 +29,7 @@ public struct Feedback: FeedbackProtocol {
     
     public let review: String
     
-    public let date: Date
+    public let date: SwiftFoundation.Date
     
     public let event: Identifier
     

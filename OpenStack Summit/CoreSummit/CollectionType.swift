@@ -6,12 +6,12 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public extension CollectionType {
+public extension Collection {
     
     @inline(__always)
-    func firstMatching(@noescape predicate: (Self.Generator.Element) throws -> Bool) rethrows -> Self.Generator.Element? {
+    func firstMatching(@noescape predicate: (Self.Iterator.Element) throws -> Bool) rethrows -> Self.Iterator.Element? {
         
-        guard let index = try self.indexOf(predicate)
+        guard let index = try self.index(where: predicate)
             else { return nil }
         
         return self[index]

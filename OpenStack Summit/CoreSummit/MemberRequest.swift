@@ -18,7 +18,7 @@ public extension Store {
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
@@ -26,11 +26,11 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let member = MemberResponse.Member(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -41,7 +41,7 @@ public extension Store {
             }
             
             // success
-            completion(.Value(member))
+            completion(.value(member))
         })
     }
 }
@@ -95,9 +95,9 @@ public struct MemberResponse {
         
         public let socialDescription: String?
         
-        public let start: Date
+        public let start: SwiftFoundation.Date
         
-        public let end: Date
+        public let end: SwiftFoundation.Date
         
         public let summit: Identifier
         
@@ -147,7 +147,7 @@ public struct MemberResponse {
         
         public let review: String
         
-        public let date: Date
+        public let date: SwiftFoundation.Date
         
         public let event: Identifier
         

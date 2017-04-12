@@ -23,17 +23,17 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+    override func scheduleAvailableDates(from startDate: Foundation.Date, to endDate: Foundation.Date) -> [Foundation.Date] {
         
         guard let member = Store.shared.authenticatedMember
             else { return [] }
         
         let events = member.favoriteEvents
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
-                && Date(foundation: $0.end) <= Date(foundation: endDate) })
-            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
+            .filter({ SwiftFoundation.Date(foundation: $0.start) >= SwiftFoundation.Date(foundation: startDate)
+                && SwiftFoundation.Date(foundation: $0.end) <= SwiftFoundation.Date(foundation: endDate) })
+            .sort({ SwiftFoundation.Date(foundation: $0.0.start) < SwiftFoundation.Date(foundation: $0.1.start) })
         
-        var activeDates: [NSDate] = []
+        var activeDates: [Foundation.Date] = []
         for event in events {
             let timeZone = NSTimeZone(name: event.summit.timeZone)!
             let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
@@ -45,22 +45,22 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
         return activeDates
     }
     
-    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
+    override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
         guard let member = Store.shared.authenticatedMember
             else { return [] }
         
         let events = member.favoriteEvents
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
-                && Date(foundation: $0.end) <= Date(foundation: endDate) })
-            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
+            .filter({ SwiftFoundation.Date(foundation: $0.start) >= SwiftFoundation.Date(foundation: startDate)
+                && SwiftFoundation.Date(foundation: $0.end) <= SwiftFoundation.Date(foundation: endDate) })
+            .sort({ SwiftFoundation.Date(foundation: $0.0.start) < SwiftFoundation.Date(foundation: $0.1.start) })
         
         return ScheduleItem.from(managedObjects: events)
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Watch List")
     }

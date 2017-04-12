@@ -27,13 +27,13 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         let summit = SummitManager.shared.summit.value
         
         let events = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, summit: summit, context: Store.shared.managedObjectContext)
         
-        var activeDates: [NSDate] = []
+        var activeDates: [Date] = []
         for event in events {
             let timeZone = NSTimeZone(name: event.summit.timeZone)!
             let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
@@ -45,7 +45,7 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
         return activeDates
     }
     
-    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
+    override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
         let summit = SummitManager.shared.summit.value
         
@@ -56,7 +56,7 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Sessions")
     }

@@ -46,21 +46,21 @@ extension Expression: CustomStringConvertible {
 
 public extension Expression {
     
-    func compare(type: Comparision.Operator, _ rhs: Expression) -> Predicate {
+    func compare(_ type: Comparision.Operator, _ rhs: Expression) -> Predicate {
         
         let comparision = Comparision(expression: (self, rhs), type: type)
         
         return .comparison(comparision)
     }
     
-    func compare(type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
+    func compare(_ type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
         
         let comparision = Comparision(expression: (self, rhs), type: type, options: options)
         
         return .comparison(comparision)
     }
     
-    func compare(modifier: Comparision.Modifier, _ type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
+    func compare(_ modifier: Comparision.Modifier, _ type: Comparision.Operator, _ options: Set<Comparision.Option>, _ rhs: Expression) -> Predicate {
         
         let comparision = Comparision(expression: (self, rhs), type: type, modifier: modifier, options: options)
         

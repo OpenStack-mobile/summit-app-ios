@@ -22,14 +22,14 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         WKInterfaceDevice.currentDevice().playHaptic(WKHapticType.Click) // haptic only for debugging
         #endif
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(complicationServerActiveComplicationsDidChange), name: CLKComplicationServerActiveComplicationsDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(complicationServerActiveComplicationsDidChange), name: NSNotification.Name.CLKComplicationServerActiveComplicationsDidChange, object: self)
     }
     
     static func reloadComplications() {
         if let complications: [CLKComplication] = CLKComplicationServer.sharedInstance().activeComplications {
             if complications.count > 0 {
                 for complication in complications {
-                    CLKComplicationServer.sharedInstance().reloadTimelineForComplication(complication)
+                    CLKComplicationServer.sharedInstance().reloadTimeline(for: complication)
                     print("Reloading complication \(complication.description)...")
                 }
                 #if DEBUG
@@ -41,35 +41,35 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - CLKComplicationDataSource
     
-    func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
+    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         
         if Store.shared.cache != nil {
             
-            handler([.Backward, .Forward])
+            handler([.backward, .forward])
             
         } else {
             
-            handler(.None)
+            handler(CLKComplicationTimeTravelDirections())
         }
     }
     
-    func getPrivacyBehaviorForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
+    func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
         
-        handler(.ShowOnLockScreen)
+        handler(.showOnLockScreen)
     }
     
-    func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
+    func getNextRequestedUpdateDate(handler: @escaping (Date?) -> Void) {
         
-        let entry = self.entry(for: Date())
+        let entry = self.entry(for: SwiftFoundation.Date())
         
-        let date: NSDate
+        let date: Foundation.Date
         
         switch entry {
             
         case .none:
             
             // Update hourly by default
-            date = NSDate(timeIntervalSinceNow: 60*60)
+            date = Foundation.Date(timeIntervalSinceNow: 60*60)
             
         case let .multiple(_, _, end, _):
             
@@ -87,31 +87,31 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(date)
     }
     
-    func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
+    func getPlaceholderTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         
         let template = self.template(for: complication, with: .none)
         handler(template)
     }
         
-    func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimelineEntry?) -> Void) {
+    func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         
-        let entry = self.entry(for: Date())
+        let entry = self.entry(for: SwiftFoundation.Date())
         
         print("Current timeline entry: \(entry)")
         
         let template = self.template(for: complication, with: entry)
         
-        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start?.toFoundation() ?? NSDate(), complicationTemplate: template)
+        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start?.toFoundation() ?? Foundation.Date(), complicationTemplate: template)
         
         handler(complicationEntry)
     }
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, beforeDate: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(for complication: CLKComplication, before beforeDate: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         
         guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        let date = Date(foundation: beforeDate)
+        let date = SwiftFoundation.Date(foundation: beforeDate)
         
         let dates = summit.dates(before: date, limit: limit)
         
@@ -126,12 +126,12 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(complicationEntries)
     }
     
-    func getTimelineEntriesForComplication(complication: CLKComplication, afterDate: NSDate, limit: Int, withHandler handler: ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(for complication: CLKComplication, after afterDate: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         
         guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        let date = Date(foundation: afterDate)
+        let date = SwiftFoundation.Date(foundation: afterDate)
         
         let dates = summit.dates(after: date, limit: limit)
         
@@ -146,7 +146,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(complicationEntries)
     }
     
-    func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
+    func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
         let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start.toFoundation()
         
@@ -155,7 +155,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(date)
     }
     
-    func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
+    func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
         let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.end.toFoundation()
         
@@ -166,11 +166,11 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Private Methods
     
-    private func template(for complication: CLKComplication, with entry: TimelineEntry) -> CLKComplicationTemplate {
+    fileprivate func template(for complication: CLKComplication, with entry: TimelineEntry) -> CLKComplicationTemplate {
         
         switch complication.family {
             
-        case .UtilitarianLarge:
+        case .utilitarianLarge:
             
             let complicationTemplate = CLKComplicationTemplateUtilitarianLargeFlat()
             
@@ -183,19 +183,19 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             case let .multiple(events, start, end, timeZone):
                 
                 struct Static {
-                    static let dateFormatter: NSDateFormatter = {
-                        let formatter = NSDateFormatter()
-                        formatter.dateStyle = .NoStyle
-                        formatter.timeStyle = .ShortStyle
+                    static let dateFormatter: DateFormatter = {
+                        let formatter = DateFormatter()
+                        formatter.dateStyle = .none
+                        formatter.timeStyle = .short
                         return formatter
                     }()
                 }
                 
-                Static.dateFormatter.timeZone = NSTimeZone(name: timeZone)
+                Static.dateFormatter.timeZone = TimeZone(identifier: timeZone)
                 
-                let startDateText = Static.dateFormatter.stringFromDate(start.toFoundation())
+                let startDateText = Static.dateFormatter.string(from: start.toFoundation())
                 
-                let endDateText = Static.dateFormatter.stringFromDate(end.toFoundation())
+                let endDateText = Static.dateFormatter.string(from: end.toFoundation())
                 
                 textProvider.text = "\(startDateText) - \(endDateText) \(events) events"
                 
@@ -208,7 +208,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
             
             return complicationTemplate
             
-        case .ModularLarge:
+        case .modularLarge:
             
             switch entry {
                 
@@ -226,7 +226,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
                 
-                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(startDate: start.toFoundation(), endDate: end.toFoundation(), timeZone: NSTimeZone(name: timeZone))
+                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(start: start.toFoundation(), end: end.toFoundation(), timeZone: TimeZone(identifier: timeZone))
                 
                 complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "\(count) events")
                 
@@ -236,7 +236,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeStandardBody()
                 
-                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(startDate: event.start.toFoundation(), endDate: event.end.toFoundation(), timeZone: NSTimeZone(name: event.timeZone))
+                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(start: event.start.toFoundation(), end: event.end.toFoundation(), timeZone: TimeZone(identifier: event.timeZone))
                 
                 complicationTemplate.body1TextProvider = CLKSimpleTextProvider(text: event.name)
                 
@@ -249,7 +249,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         }
     }
     
-    private func entry(for date: Date) -> TimelineEntry {
+    fileprivate func entry(for date: SwiftFoundation.Date) -> TimelineEntry {
         
         guard let summit = Store.shared.cache
             else { return .none }
@@ -287,7 +287,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Notifications
     
-    @objc private func complicationServerActiveComplicationsDidChange(notification: NSNotification) {
+    @objc fileprivate func complicationServerActiveComplicationsDidChange(_ notification: Notification) {
         
         ComplicationController.reloadComplications()
     }
@@ -301,12 +301,12 @@ extension ComplicationController {
         case none
         
         /// Multiple Events, with the date of the earliest one and time zone.
-        case multiple(Int, Date, Date, String)
+        case multiple(Int, SwiftFoundation.Date, SwiftFoundation.Date, String)
         
         /// A single event
         case event(EventDetail)
         
-        var start: Date? {
+        var start: SwiftFoundation.Date? {
             
             switch self {
             case .none: return nil
@@ -320,8 +320,8 @@ extension ComplicationController {
         
         let identifier: Identifier
         let name: String
-        let start: Date
-        let end: Date
+        let start: SwiftFoundation.Date
+        let end: SwiftFoundation.Date
         let location: String
         let timeZone: String
         

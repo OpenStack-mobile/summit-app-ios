@@ -37,16 +37,16 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // load static menu table view
         
         tableView.setNumberOfRows(menuItems.count, withRowType: MenuCellController.identifier)
         
-        for (index, menuItem) in menuItems.enumerate() {
+        for (index, menuItem) in menuItems.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! MenuCellController
+            let cell = tableView.rowController(at: index) as! MenuCellController
             
             cell.menuLabel.setText(menuItem.name)
             cell.imageView.setImageNamed(menuItem.image)
@@ -54,7 +54,7 @@ final class MenuInterfaceController: WKInterfaceController {
         
         // configure activity indicator
         loadingImageView.setImageNamed("Activity")
-        loadingImageView.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+        loadingImageView.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
     }
     
     override func willActivate() {
@@ -72,16 +72,16 @@ final class MenuInterfaceController: WKInterfaceController {
     
     // MARK: - Table View Selection
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         
         let menuItem = menuItems[rowIndex]
         
-        self.pushControllerWithName(menuItem.controller, context: nil)
+        self.pushController(withName: menuItem.controller, context: nil)
     }
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         tableView.setHidden(Store.shared.cache == nil)
         loadingImageView.setHidden(Store.shared.cache != nil)
@@ -99,7 +99,7 @@ final class MenuInterfaceController: WKInterfaceController {
         }
     }
     
-    private func loadData() {
+    fileprivate func loadData() {
         
         print("Loading Summit data")
         

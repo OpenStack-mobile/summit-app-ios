@@ -28,7 +28,7 @@ extension TicketType: CoreDataDecodable {
 
 extension TicketType: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TicketTypeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TicketTypeManagedObject {
         
         let managedObject = try cached(context)
         

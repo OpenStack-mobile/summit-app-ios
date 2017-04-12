@@ -33,7 +33,7 @@ extension TeamMember: CoreDataDecodable {
 
 extension TeamMember: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamMemberManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamMemberManagedObject {
         
         let managedObject = try cached(context)
         

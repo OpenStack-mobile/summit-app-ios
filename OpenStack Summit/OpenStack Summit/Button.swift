@@ -29,7 +29,7 @@ import UIKit
         didSet { configureView() }
     }
     
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         
         didSet { configureView() }
     }
@@ -44,17 +44,17 @@ import UIKit
     
     // MARK: - Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         // cornerRadius
         layer.cornerRadius = cornerRadius
         layer.masksToBounds = cornerRadius > 0.0
         
         // background color
-        let defaultColor = self.color ?? self.backgroundColor ?? .clearColor()
+        let defaultColor = self.color ?? self.backgroundColor ?? .clear
         let selectedColor = self.selectedColor ?? defaultColor
         
-        if highlighted {
+        if isHighlighted {
             
             self.backgroundColor = selectedColor
             

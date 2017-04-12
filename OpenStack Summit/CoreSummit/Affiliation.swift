@@ -14,9 +14,9 @@ public struct Affiliation: Unique {
     
     public var member: Identifier
     
-    public var start: Date?
+    public var start: SwiftFoundation.Date?
     
-    public var end: Date?
+    public var end: SwiftFoundation.Date?
     
     public var isCurrent: Bool
     

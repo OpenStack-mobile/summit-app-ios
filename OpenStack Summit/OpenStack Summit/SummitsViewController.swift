@@ -18,7 +18,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) weak var doneButton: UIBarButtonItem!
+    @IBOutlet fileprivate(set) weak var doneButton: UIBarButtonItem!
     
     // MARK: - Properties
     
@@ -29,7 +29,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     lazy var pageController: PageController<Summit> = PageController(fetch: Store.shared.summits)
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
@@ -54,34 +54,34 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.view.bringSubviewToFront(progressHUD)
+        self.view.bringSubview(toFront: progressHUD)
     }
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
     
-    @IBAction func done(sender: AnyObject? = nil) {
+    @IBAction func done(_ sender: AnyObject? = nil) {
         
         self.didFinish?(self)
     }
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         self.navigationItem.rightBarButtonItem = didFinish != nil ? doneButton : nil
     }
     
-    private func configure(cell cell: UITableViewCell, with summit: Summit) {
+    fileprivate func configure(cell: UITableViewCell, with summit: Summit) {
         
         cell.textLabel!.text = summit.name
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
         let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
         
@@ -97,17 +97,17 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return pageController.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.pageController.items[indexPath.row]
         
@@ -127,7 +127,7 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
             
-            cell.activityIndicator.hidden = false
+            cell.activityIndicator.isHidden = false
             
             cell.activityIndicator.startAnimating()
             
@@ -137,9 +137,9 @@ final class SummitsViewController: UITableViewController, PagingTableViewControl
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let data = self.pageController.items[indexPath.row]
         

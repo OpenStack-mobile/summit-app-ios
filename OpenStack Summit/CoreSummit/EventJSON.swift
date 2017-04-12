@@ -39,8 +39,8 @@ extension Event: JSONParametrizedDecodable {
         self.identifier = identifier
         self.summit = summit
         self.name = title
-        self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
-        self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
+        self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
         self.tags = Set(tags)
         self.allowFeedback = allowFeedback
@@ -67,7 +67,8 @@ extension Event: JSONParametrizedDecodable {
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int where track > 0 {
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int,
+            track > 0 {
             
             self.track = track
             
@@ -76,8 +77,8 @@ extension Event: JSONParametrizedDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
-            where location > 0 {
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int,
+            location > 0 {
             
             self.location = location
             
@@ -119,7 +120,7 @@ extension Event: JSONParametrizedDecodable {
 
 extension MemberResponse.Event: JSONDecodable {
     
-    private typealias JSONKey = Event.JSONKey
+    fileprivate typealias JSONKey = Event.JSONKey
     
     public init?(JSONValue: JSON.Value) {
         
@@ -145,8 +146,8 @@ extension MemberResponse.Event: JSONDecodable {
         self.identifier = identifier
         self.summit = summit
         self.name = title
-        self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
-        self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
+        self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
         self.tags = tags
         self.allowFeedback = allowFeedback

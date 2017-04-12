@@ -28,7 +28,7 @@ extension SummitType: CoreDataDecodable {
 
 extension SummitType: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> SummitTypeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> SummitTypeManagedObject {
         
         let managedObject = try cached(context)
         

@@ -46,25 +46,25 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         self.userActivity = userActivity
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.speakers.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Private Methods
     
-    private subscript (indexPath: NSIndexPath) -> Speaker {
+    fileprivate subscript (indexPath: IndexPath) -> Speaker {
         
         let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speaker.ManagedObject
         
         return Speaker(managedObject: managedObject)
     }
     
-    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         let person = self[indexPath]
         
@@ -75,7 +75,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell)!
         
@@ -86,7 +86,7 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let person = self[indexPath]
         
@@ -95,21 +95,21 @@ final class SpeakersViewController: TableViewController, RevealViewController, I
         showViewController(memberProfileVC, sender: self)
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
         return self.fetchedResultsController.sectionIndexTitles
     }
     
     // MARK: - NSFetchedResultsControllerDataSource
     
-    func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
+    func controller(_ controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
         
         return sectionName
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Speakers")
     }

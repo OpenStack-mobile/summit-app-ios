@@ -12,13 +12,13 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func feedback(summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Feedback>>) -> ()) {
+    func feedback(_ summit: Identifier, event: Identifier, page: Int, objectsPerPage: Int, completion: (ErrorValue<Page<Feedback>>) -> ()) {
         
         let URI = "/api/v1/summits/\(summit)/events/\(event)/feedback?expand=owner&page=\(page)&per_page=\(objectsPerPage)"
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let context = privateQueueManagedObjectContext
         
@@ -26,11 +26,11 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let page = Page<Feedback>(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -45,17 +45,17 @@ public extension Store {
             }
             
             // success
-            completion(.Value(page))
+            completion(.value(page))
         }
     }
     
-    func averageFeedback(summit: Identifier, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
+    func averageFeedback(_ summit: Identifier, event: Identifier, completion: (ErrorValue<Double>) -> ()) {
         
         let URI = "/api/v1/summits/\(summit)/events/\(event)/published?fields=id,avg_feedback_rate&relations=none"
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let context = privateQueueManagedObjectContext
         
@@ -63,12 +63,12 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let averageFeedbackJSON = jsonObject[Event.JSONKey.avg_feedback_rate.rawValue]
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             let averageFeedback: Double
             
@@ -82,7 +82,7 @@ public extension Store {
                 
             } else {
                 
-                completion(.Error(Error.InvalidResponse)); return
+                completion(.error(Error.invalidResponse)); return
             }
                         
             // update cache
@@ -97,17 +97,17 @@ public extension Store {
             }
             
             // success
-            completion(.Value(averageFeedback))
+            completion(.value(averageFeedback))
         }
     }
     
-    func addFeedback(summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
+    func addFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorValue<Identifier>) -> ()) {
         
         let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         var jsonDictionary = [String: AnyObject]()
         jsonDictionary["rate"] = rate
@@ -119,7 +119,7 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             let identifier = Int(responseObject as! String)!
             
@@ -130,7 +130,7 @@ public extension Store {
                     
                     let member = Member(managedObject: memberManagedObject)
                     
-                    let feedback = Feedback(identifier: identifier, rate: rate, review: review, date: Date(), event: event, member: member)
+                    let feedback = Feedback(identifier: identifier, rate: rate, review: review, date: SwiftFoundation.Date(), event: event, member: member)
                     
                     let managedObject = try feedback.save(context)
                     
@@ -140,17 +140,17 @@ public extension Store {
                 }
             }
             
-            completion(.Value(identifier))
+            completion(.value(identifier))
         }
     }
     
-    func editFeedback(summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorType?) -> ()) {
+    func editFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorProtocol?) -> ()) {
         
         let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         var jsonDictionary = [String: AnyObject]()
         jsonDictionary["rate"] = rate

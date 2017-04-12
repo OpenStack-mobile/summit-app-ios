@@ -33,7 +33,7 @@ public struct EventDetail {
     public let level: String
     public let averageFeedback: Double
     public let video: Video?
-    public let webpageURL: NSURL
+    public let webpageURL: Foundation.URL
     
     // MARK: - Initialization
     
@@ -100,7 +100,7 @@ public struct EventDetail {
 
 internal extension EventDetail {
     
-    static func getSponsors(event: Event, summit: Summit) -> String {
+    static func getSponsors(_ event: Event, summit: Summit) -> String {
         
         guard event.sponsors.isEmpty == false
             else { return "" }
@@ -116,12 +116,12 @@ internal extension EventDetail {
         return sponsors
     }
     
-    static func getTime(event: Event, summit: Summit) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
+    static func getTime(_ event: Event, summit: Summit) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "hh:mm a"
-        dateFormatter.AMSymbol = "am"
-        dateFormatter.PMSymbol = "pm"
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
         let stringDateFrom = dateFormatter.stringFromDate(event.start.toFoundation())
         
         dateFormatter.dateFormat = "hh:mm a"
@@ -130,12 +130,12 @@ internal extension EventDetail {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getDateTime(event: Event, summit: Summit) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: summit.timeZone);
+    static func getDateTime(_ event: Event, summit: Summit) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(name: summit.timeZone);
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
-        dateFormatter.AMSymbol = "am"
-        dateFormatter.PMSymbol = "pm"
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
         let stringDateFrom = dateFormatter.stringFromDate(event.start.toFoundation())
         
         dateFormatter.dateFormat = "hh:mm a"
@@ -144,7 +144,7 @@ internal extension EventDetail {
         return "\(stringDateFrom) / \(stringDateTo)"
     }
     
-    static func getLocation(event: Event, summit: Summit) -> String {
+    static func getLocation(_ event: Event, summit: Summit) -> String {
         
         guard let locationID = event.location
             where locationID != 0
@@ -168,7 +168,7 @@ internal extension EventDetail {
         }
     }
     
-    static func getTrack(event: Event, summit: Summit) -> String {
+    static func getTrack(_ event: Event, summit: Summit) -> String {
         
         guard let trackID = event.track
             else { return "" }
@@ -176,7 +176,7 @@ internal extension EventDetail {
         return summit.tracks.firstMatching({ $0.identifier == trackID })!.name
     }
     
-    static func getTrackGroupColor(event: Event, summit: Summit) -> String {
+    static func getTrackGroupColor(_ event: Event, summit: Summit) -> String {
         
         guard let trackID = event.track,
             let track = summit.tracks.firstMatching({ $0.identifier == trackID }),

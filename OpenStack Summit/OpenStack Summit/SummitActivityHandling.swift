@@ -11,21 +11,21 @@ import CoreSummit
 
 protocol SummitActivityHandling {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool
+    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool
     
-    func view(screen: AppActivityScreen)
+    func view(_ screen: AppActivityScreen)
     
-    func search(searchTerm: String)
+    func search(_ searchTerm: String)
 }
 
 extension SummitActivityHandling {
     
     /// Opens URL of universal domain.
-    func openWebURL(url: NSURL) -> Bool {
+    func openWebURL(_ url: Foundation.URL) -> Bool {
         
         // perform search
         if url.pathComponents?.last == "global-search",
-            let urlComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: false),
+            let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
             let searchQuery = urlComponents.queryItems?.firstMatching({ $0.name == "t" && ($0.value ?? "").isEmpty == false }),
             let searchTerm = searchQuery.value {
             
@@ -51,7 +51,7 @@ extension SummitActivityHandling {
     }
     
     /// Opens URL of custom scheme.
-    func openSchemeURL(url: NSURL) -> Bool {
+    func openSchemeURL(_ url: Foundation.URL) -> Bool {
         
         guard let typeString = url.host, let components = url.pathComponents
             where components.count >= 2
@@ -75,16 +75,16 @@ extension SummitActivityHandling {
 
 protocol SummitActivityHandlingViewController: class, SummitActivityHandling {
     
-    func showViewController(vc: UIViewController, sender: AnyObject?)
+    func showViewController(_ vc: UIViewController, sender: AnyObject?)
     
-    func playVideo(video: Video)
+    func playVideo(_ video: Video)
     
-    func showLocationDetail(location: Identifier)
+    func showLocationDetail(_ location: Identifier)
 }
 
 extension SummitActivityHandlingViewController {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
         let context = Store.shared.managedObjectContext
         
@@ -119,12 +119,12 @@ extension SummitActivityHandlingViewController {
         return true
     }
     
-    func view(screen: AppActivityScreen) {
+    func view(_ screen: AppActivityScreen) {
         
         AppDelegate.shared.view(screen)
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         AppDelegate.shared.search(searchTerm)
     }

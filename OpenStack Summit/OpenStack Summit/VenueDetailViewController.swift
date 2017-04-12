@@ -26,7 +26,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: - Accessors
     
-    private(set) var name: String {
+    fileprivate(set) var name: String {
         get {
             return nameLabel.text ?? ""
         }
@@ -35,7 +35,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
 
-    private(set) var location: String  {
+    fileprivate(set) var location: String  {
         get {
             return locationLabel.text ?? ""
         }
@@ -44,7 +44,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    private(set) var images = [String]() {
+    fileprivate(set) var images = [String]() {
         didSet {
             var imageInputs: [HanekeInputSource] = []		
             
@@ -63,7 +63,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    private(set) var maps = [String]() {
+    fileprivate(set) var maps = [String]() {
        didSet {
             var imageInputs: [HanekeInputSource] = []
         
@@ -93,10 +93,10 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagesSlideshow.contentScaleMode = .ScaleAspectFill
-        mapsSlideshow.contentScaleMode = .ScaleAspectFill
+        imagesSlideshow.contentScaleMode = .scaleAspectFill
+        mapsSlideshow.contentScaleMode = .scaleAspectFill
         
-        mapView.myLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         mapView.delegate = self
         
         navigationItem.title = "VENUE"
@@ -106,7 +106,7 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: - Action
     
-    @IBAction func openInFullScreen(sender: UITapGestureRecognizer) {
+    @IBAction func openInFullScreen(_ sender: UITapGestureRecognizer) {
         let slideshow = sender.view as! ImageSlideshow
         
         let ctr = FullScreenSlideshowViewController()
@@ -118,26 +118,26 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
         ctr.inputs = slideshow.images
         self.transitionDelegate = ZoomAnimatedTransitioningDelegate.init(slideshowView: slideshow, slideshowController: ctr)
         ctr.transitioningDelegate = self.transitionDelegate!
-        self.presentViewController(ctr, animated: true, completion: nil)
+        self.present(ctr, animated: true, completion: nil)
         
-        ctr.closeButton.setImage(UIImage(named: "close"), forState: .Normal)
+        ctr.closeButton.setImage(UIImage(named: "close"), for: UIControlState())
     }
     
-    @IBAction func navigateToVenueLocationDetail(sender: UITapGestureRecognizer) {
+    @IBAction func navigateToVenueLocationDetail(_ sender: UITapGestureRecognizer) {
         
-        if !arrowImageView.hidden {
+        if !arrowImageView.isHidden {
             
             let venueLocationDetailVC = R.storyboard.venue.venueLocationDetailViewController()!
             
             venueLocationDetailVC.venue = venue
             
-            self.showViewController(venueLocationDetailVC, sender: self)
+            self.show(venueLocationDetailVC, sender: self)
         }
     }
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         assert(self.venue != nil, "No venue set")
         
@@ -170,31 +170,31 @@ final class VenueDetailViewController: UIViewController, GMSMapViewDelegate {
             bounds = bounds.includingCoordinate(marker.position)
             mapView.selectedMarker = marker
             
-            let update = GMSCameraUpdate.fitBounds(bounds)
+            let update = GMSCameraUpdate.fit(bounds)
             mapView.moveCamera(update)
-            mapView.animateToZoom(mapView.camera.zoom - 6)
+            mapView.animate(toZoom: mapView.camera.zoom - 6)
         }
     }
     
     @inline(__always)
-    func toggleMap(visible: Bool) {
-        mapView.hidden = !visible
+    func toggleMap(_ visible: Bool) {
+        mapView.isHidden = !visible
     }
     
     @inline(__always)
-    func toggleMapsGallery(visible: Bool) {
-        mapsSlideshow.hidden = !visible
+    func toggleMapsGallery(_ visible: Bool) {
+        mapsSlideshow.isHidden = !visible
     }
     
     @inline(__always)
-    func toggleImagesGallery(visible: Bool) {
-        imagesSlideshow.hidden = !visible
+    func toggleImagesGallery(_ visible: Bool) {
+        imagesSlideshow.isHidden = !visible
         imagesSlideshowHeightConstraint.constant = visible ? 220 : 0
         imagesSlideshow.updateConstraints()
     }
     
     @inline(__always)
-    func toggleMapNavigation(visible: Bool) {
-        arrowImageView.hidden = !visible
+    func toggleMapNavigation(_ visible: Bool) {
+        arrowImageView.isHidden = !visible
     }
 }

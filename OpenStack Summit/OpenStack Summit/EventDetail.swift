@@ -17,8 +17,8 @@ public struct EventDetail: CoreDataDecodable {
     public let identifier: Identifier
     public let name: String
     public let summit: Identifier
-    public let start: Date
-    public let end: Date
+    public let start: SwiftFoundation.Date
+    public let end: SwiftFoundation.Date
     public let timeZone: String
     public let dateTime: String
     public let day: String
@@ -43,7 +43,7 @@ public struct EventDetail: CoreDataDecodable {
     public let rsvp: String
     public let externalRSVP: Bool
     public let attachment: String
-    public let webpageURL: NSURL
+    public let webpageURL: Foundation.URL
     
     // MARK: - Initialization
     
@@ -158,7 +158,7 @@ public extension EventDetail {
         
         public let isModerator: Bool
                 
-        private init(speaker: Speaker, isModerator: Bool = false) {
+        fileprivate init(speaker: Speaker, isModerator: Bool = false) {
             
             self.identifier = speaker.identifier
             self.firstName = speaker.firstName

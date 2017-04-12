@@ -16,15 +16,15 @@ final class NotificationDetailViewController: UITableViewController {
     
     var notification: Notification!
     
-    private var data = [[Data]]()
+    fileprivate var data = [[Data]]()
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    fileprivate lazy var dateFormatter: DateFormatter = {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
-        dateFormatter.dateStyle = .LongStyle
+        dateFormatter.dateStyle = .long
         
-        dateFormatter.timeStyle = .MediumStyle
+        dateFormatter.timeStyle = .medium
         
         return dateFormatter
     }()
@@ -42,9 +42,9 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
-        assert(isViewLoaded(), "View must be loaded")
+        assert(isViewLoaded, "View must be loaded")
         
         assert(self.notification != nil, "\(self) not configured with notification")
         
@@ -68,19 +68,19 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return data.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = data[section]
         
         return section.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = self.data[indexPath.section][indexPath.row]
         
@@ -114,7 +114,7 @@ final class NotificationDetailViewController: UITableViewController {
     
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -123,7 +123,7 @@ final class NotificationDetailViewController: UITableViewController {
             guard let event = self.notification?.event
                 else { fatalError("No event for notification") }
             
-            let eventViewController = segue.destinationViewController as! EventDetailViewController
+            let eventViewController = segue.destination as! EventDetailViewController
             
             eventViewController.event = event
             

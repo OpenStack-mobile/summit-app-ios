@@ -33,7 +33,7 @@ public func < <T: Unique> (lhs: T, rhs: T) -> Bool {
 
 // MARK: - Extensions
 
-public extension CollectionType where Generator.Element: Unique {
+public extension Collection where Iterator.Element: Unique {
     
     var identifiers: [Identifier] {
         
@@ -41,7 +41,7 @@ public extension CollectionType where Generator.Element: Unique {
     }
     
     @inline(__always)
-    func with(identifier: Identifier) -> Self.Generator.Element? {
+    func with(_ identifier: Identifier) -> Self.Iterator.Element? {
         
         return firstMatching { $0.identifier == identifier }
     }

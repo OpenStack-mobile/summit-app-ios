@@ -24,15 +24,15 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var speakers = [Speaker]() {
+    fileprivate(set) var speakers = [Speaker]() {
         
         didSet { updateUI() }
     }
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // disable speaker search for selected speakers
         if let speakers = (context as? Context<[Speaker]>)?.value {
@@ -59,9 +59,9 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func search(sender: WKInterfaceButton) {
+    @IBAction func search(_ sender: WKInterfaceButton) {
         
-        presentTextInputControllerWithSuggestionsForLanguage({ self.autosuggestions(for: $0) }, allowedInputMode: .Plain) { (input) in
+        presentTextInputControllerWithSuggestions(forLanguage: { self.autosuggestions(for: $0) }, allowedInputMode: .plain) { (input) in
             
             guard let inputText = input as? [String]
                 else { return }
@@ -84,7 +84,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         let speaker = speakers[rowIndex]
         
@@ -93,7 +93,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         emptyLabel.setHidden(speakers.isEmpty == false)
         
@@ -109,7 +109,7 @@ final class SpeakersInterfaceController: WKInterfaceController {
     }
     
     /// Provide suggestions for the following language (e.g. `en-US`).
-    private func autosuggestions(for language: String) -> [String] {
+    fileprivate func autosuggestions(for language: String) -> [String] {
         
         #if DEBUG
         return ["Zhao", "Ben"]

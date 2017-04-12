@@ -18,7 +18,7 @@ final class StoreTests: XCTestCase {
         
         let store = try! createStore()
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(withDescription: "API Request")
         
         store.summits() { (response) in
             
@@ -38,14 +38,14 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(withTimeout: 60, handler: nil)
     }
     
     func testCurrentSummitRequest() {
         
         let store = try! createStore()
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(withDescription: "API Request")
         
         store.summit() { (response) in
             
@@ -63,7 +63,7 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(withTimeout: 60, handler: nil)
     }
     
     func testSummitRequest() {
@@ -72,7 +72,7 @@ final class StoreTests: XCTestCase {
         
         for summitID in SummitJSONIdentifiers {
             
-            let expectation = expectationWithDescription("API Request")
+            let expectation = self.expectation(withDescription: "API Request")
             
             store.summit(summitID) { (response) in
                 
@@ -93,7 +93,7 @@ final class StoreTests: XCTestCase {
                 expectation.fulfill()
             }
             
-            waitForExpectationsWithTimeout(60, handler: nil)
+            waitForExpectations(withTimeout: 60, handler: nil)
         }
     }
     
@@ -103,9 +103,9 @@ final class StoreTests: XCTestCase {
         
         let summitID = 7  // Barcelona
         
-        let date = Date() - (60*60*24*30) // last month
+        let date = SwiftFoundation.Date() - (60*60*24*30) // last month
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(withDescription: "API Request")
         
         store.dataUpdates(summitID, from: date, limit: 100) { (response) in
             
@@ -123,7 +123,7 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(withTimeout: 60, handler: nil)
     }
     
     func testFeedbackRequest() {
@@ -134,7 +134,7 @@ final class StoreTests: XCTestCase {
         
         let event = 16638 // Upstream University - Day 1
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(withDescription: "API Request")
         
         store.feedback(summit, event: event, page: 1, objectsPerPage: 10) { (response) in
             
@@ -155,14 +155,14 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(withTimeout: 60, handler: nil)
     }
     
     func testListMembersRequest() {
         
         let store = try! createStore()
         
-        let expectation = expectationWithDescription("API Request")
+        let expectation = self.expectation(withDescription: "API Request")
         
         store.members(MemberListRequest.Filter(value: "Jimmy", property: .firstName)) { (response) in
             
@@ -183,6 +183,6 @@ final class StoreTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(60, handler: nil)
+        waitForExpectations(withTimeout: 60, handler: nil)
     }
 }

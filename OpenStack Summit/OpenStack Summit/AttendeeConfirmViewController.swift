@@ -17,26 +17,26 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     // MARK: - Properties
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    private var input: Input = .orderNumber {
+    fileprivate var input: Input = .orderNumber {
         
         didSet { configureView() }
     }
     
-    private var cells = [Cell]()
+    fileprivate var cells = [Cell]()
     
-    private var attendees = [NonConfirmedAttendee]() {
+    fileprivate var attendees = [NonConfirmedAttendee]() {
         
         didSet { configureView() }
     }
     
-    private var selectedAttendee: NonConfirmedAttendee? {
+    fileprivate var selectedAttendee: NonConfirmedAttendee? {
         
         didSet { updateActionButtons() }
     }
     
-    private var orderNumber: Int? {
+    fileprivate var orderNumber: Int? {
         
         didSet { updateActionButtons() }
     }
@@ -63,12 +63,12 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     // MARK: - Actions
     
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addOrder(sender: AnyObject? = nil) {
+    @IBAction func addOrder(_ sender: AnyObject? = nil) {
         
         self.resignResponder(view)
         
@@ -84,14 +84,14 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         }
     }
     
-    @IBAction func resignTap(sender: AnyObject? = nil) {
+    @IBAction func resignTap(_ sender: AnyObject? = nil) {
         
         self.resignResponder(view)
     }
     
     // MARK: - Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         let inputCell: Cell
         
@@ -107,7 +107,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         updateActionButtons()
     }
     
-    private func resignResponder(view: UIView) {
+    fileprivate func resignResponder(_ view: UIView) {
         
         view.resignFirstResponder()
         
@@ -115,16 +115,16 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     }
     
     @inline(__always)
-    private func updateActionButtons() {
+    fileprivate func updateActionButtons() {
         
         // update UI
-        if let actionButtonsCellIndex = cells.indexOf(.action) {
+        if let actionButtonsCellIndex = cells.index(of: .action) {
             
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: actionButtonsCellIndex, inSection: 0)], withRowAnimation: .None)
+            tableView.reloadRows(at: [IndexPath(row: actionButtonsCellIndex, section: 0)], with: .none)
         }
     }
     
-    private func orderConfirm() {
+    fileprivate func orderConfirm() {
         
         guard let orderNumber = self.orderNumber
             else { fatalError("No order number set") }
@@ -187,7 +187,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         }
     }
     
-    private func selectAttendee() {
+    fileprivate func selectAttendee() {
         
         guard let selectedAttendee = self.selectedAttendee,
             let orderNumber = self.orderNumber
@@ -199,7 +199,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         
         Store.shared.confirmAttendee(for: orderNumber, externalAttendee: selectedAttendee.identifier, summit: summit) { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.mainQueue().addOperationWithBlock {
                 
                 guard let controller = self else { return }
                 
@@ -251,17 +251,17 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return cells.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.cells[indexPath.row]
         
@@ -296,7 +296,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
                 confirmEnabled = selectedAttendee != nil
             }
             
-            cell.confirmButton.enabled = confirmEnabled
+            cell.confirmButton.isEnabled = confirmEnabled
             
             return cell
         }
@@ -304,7 +304,7 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     // MARK: - UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         
@@ -318,9 +318,9 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
         return true
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let newString = (textField.text ?? "" as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        let newString = (textField.text ?? "" as NSString).replacingCharacters(in: range, with: string)
         
         guard let orderNumer = Int(newString)
             else { return newString.isEmpty }
@@ -332,24 +332,24 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         return attendees.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return attendees[row].name
     }
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         self.selectedAttendee = attendees[row]
     }
@@ -375,16 +375,16 @@ private extension AttendeeConfirmViewController {
 
 final class AttendeeConfirmOrderTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var textField: UITextField!
+    @IBOutlet fileprivate(set) weak var textField: UITextField!
 }
 
 final class AttendeeConfirmSelectionTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var pickerView: UIPickerView!
+    @IBOutlet fileprivate(set) weak var pickerView: UIPickerView!
 }
 
 final class AttendeeConfirmActionTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var confirmButton: Button!
+    @IBOutlet fileprivate(set) weak var confirmButton: Button!
 }
 

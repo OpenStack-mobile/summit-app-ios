@@ -20,22 +20,22 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var events = [Event]()
+    fileprivate(set) var events = [Event]()
     
-    private static let dateFormatter: NSDateFormatter = {
+    fileprivate static let dateFormatter: DateFormatter = {
        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: Store.shared.cache!.timeZone)
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(name: Store.shared.cache!.timeZone)
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
         
         return dateFormatter
     }()
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         events = (context as? Context<[Event]?>)?.value ?? Store.shared.cache!.schedule.sort()
         
@@ -49,7 +49,7 @@ final class EventsInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/summit-schedule"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue], webpageURL: URL(string: summit.webpageURL + "/summit-schedule"))
         }
     }
     
@@ -62,7 +62,7 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         // configure cells
         
@@ -84,7 +84,7 @@ final class EventsInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         let event = events[rowIndex]
         

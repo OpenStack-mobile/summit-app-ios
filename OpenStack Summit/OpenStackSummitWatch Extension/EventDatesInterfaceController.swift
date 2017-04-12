@@ -20,11 +20,11 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var dates = [NSDate]()
+    fileprivate(set) var dates = [Date]()
     
-    private static let dateFormatter: NSDateFormatter = {
+    fileprivate static let dateFormatter: DateFormatter = {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "MMMM d"
         
@@ -33,8 +33,8 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -55,7 +55,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         // load dates
         
@@ -63,7 +63,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         let dayCount = summit.end.toFoundation().mt_daysSinceDate(summit.start.toFoundation())
         
-        self.dates = [NSDate]()
+        self.dates = [Date]()
         
         for index in 0 ..< dayCount {
             
@@ -76,11 +76,11 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         tableView.setNumberOfRows(dates.count, withRowType: LabelCellController.identifier)
         
-        for (index, date) in dates.enumerate() {
+        for (index, date) in dates.enumerated() {
             
-            let cell = tableView.rowControllerAtIndex(index) as! LabelCellController
+            let cell = tableView.rowController(at: index) as! LabelCellController
             
-            let dateText = EventDatesInterfaceController.dateFormatter.stringFromDate(date)
+            let dateText = EventDatesInterfaceController.dateFormatter.string(from: date)
             
             cell.textLabel.setText(dateText)
         }
@@ -88,7 +88,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         // get value for selected row
         
@@ -96,8 +96,8 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         // get events for date
         
-        let startDate = selectedDate.mt_startOfCurrentDay()
-        let endDate = selectedDate.mt_endOfCurrentDay()
+        let startDate = (selectedDate as NSDate).mt_startOfCurrentDay()
+        let endDate = (selectedDate as NSDate).mt_endOfCurrentDay()
         
         let events = Store.shared.cache?.schedule.filter({
             

@@ -38,9 +38,9 @@ final class EventFiltersInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func search(sender: AnyObject? = nil) {
+    @IBAction func search(_ sender: AnyObject? = nil) {
         
-        presentTextInputControllerWithSuggestionsForLanguage({ self.autosuggestions(for: $0) }, allowedInputMode: .Plain) { (input) in
+        presentTextInputControllerWithSuggestions(forLanguage: { self.autosuggestions(for: $0) }, allowedInputMode: .plain) { (input) in
             
             guard let inputText = input as? [String]
                 else { return }
@@ -66,7 +66,7 @@ final class EventFiltersInterfaceController: WKInterfaceController {
     // MARK: - Private Methods
     
     /// Provide suggestions for the following language (e.g. `en-US`).
-    private func autosuggestions(for language: String) -> [String] {
+    fileprivate func autosuggestions(for language: String) -> [String] {
         
         #if DEBUG
             return ["WAN", "OpenStack"]

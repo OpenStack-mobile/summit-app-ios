@@ -16,18 +16,18 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - Properties
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    fileprivate lazy var dateFormatter: DateFormatter = {
        
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         
-        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.dateStyle = .short
         
-        dateFormatter.timeStyle = .MediumStyle
+        dateFormatter.timeStyle = .medium
         
         return dateFormatter
     }()
     
-    private var unreadNotificationsObserver: Int?
+    fileprivate var unreadNotificationsObserver: Int?
     
     // MARK: - Loading
     
@@ -50,13 +50,13 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        self.navigationController?.setToolbarHidden(!self.editing, animated: animated)
+        self.navigationController?.setToolbarHidden(!self.isEditing, animated: animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.navigationController?.setToolbarHidden(true, animated: animated)
@@ -64,16 +64,16 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - Actions
     
-    @IBAction func toggleEdit(sender: UIBarButtonItem) {
+    @IBAction func toggleEdit(_ sender: UIBarButtonItem) {
         
-        let willEdit = !self.editing
+        let willEdit = !self.isEditing
         
         self.setEditing(willEdit, animated: true)
         
         self.navigationController?.setToolbarHidden(!willEdit, animated: true)
     }
     
-    @IBAction func deleteItems(sender: UIBarButtonItem) {
+    @IBAction func deleteItems(_ sender: UIBarButtonItem) {
         
         let selectedIndexPaths = self.tableView.indexPathsForSelectedRows ?? []
         
@@ -91,16 +91,16 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         }
     }
     
-    @IBAction func markAll(sender: UIBarButtonItem) {
+    @IBAction func markAll(_ sender: UIBarButtonItem) {
         
-        let indexPaths = (self.fetchedResultsController.fetchedObjects ?? []).map { self.fetchedResultsController.indexPathForObject($0) }
+        let indexPaths = (self.fetchedResultsController.fetchedObjects ?? []).map { self.fetchedResultsController.indexPath(forObject: $0) }
         
-        indexPaths.forEach { self.tableView.selectRowAtIndexPath($0, animated: true, scrollPosition: .None) }
+        indexPaths.forEach { self.tableView.selectRow(at: $0, animated: true, scrollPosition: .none) }
     }
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         let sort = [NSSortDescriptor(key: "channel", ascending: true), NSSortDescriptor(key: "id", ascending: false)]
         
@@ -116,14 +116,14 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         self.tableView.reloadData()
     }
     
-    private subscript (indexPath: NSIndexPath) -> Notification {
+    fileprivate subscript (indexPath: IndexPath) -> Notification {
         
         let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Notification.ManagedObject
         
         return Notification(managedObject: managedObject)
     }
     
-    private func configure(cell cell: NotificationTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: NotificationTableViewCell, at indexPath: IndexPath) {
         
         let notification = self[indexPath]
         
@@ -136,7 +136,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
     }
     
-    private func unreadNotificationsChanged(newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
+    fileprivate func unreadNotificationsChanged(_ newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
         
         let managedObjects = (self.fetchedResultsController.fetchedObjects ?? []) as! [NotificationManagedObject]
         
@@ -153,7 +153,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.notificationCell)!
         
@@ -162,7 +162,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         guard let channelString = self.fetchedResultsController.sections?[section].name,
             let channel = Notification.Channel(rawValue: channelString)
@@ -181,33 +181,33 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         
         return UITableViewCellEditingStyle(rawValue: 3)!
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Notifications")
     }
     
     // MARK: - Segue
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
         switch identifier {
             
         case R.segue.notificationsViewController.showNotification.identifier:
             
-            return editing == false
+            return isEditing == false
             
         default: fatalError()
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
@@ -215,7 +215,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
             
             let notification = self[tableView.indexPathForSelectedRow!]
             
-            let notificationViewController = segue.destinationViewController as! NotificationDetailViewController
+            let notificationViewController = segue.destination as! NotificationDetailViewController
             
             notificationViewController.notification = notification
             

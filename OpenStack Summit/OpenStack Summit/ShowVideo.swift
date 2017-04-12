@@ -13,7 +13,7 @@ import CoreSummit
 
 extension UIViewController {
     
-    func playVideo(video: Video) {
+    func playVideo(_ video: Video) {
         
         let videoPlayer = XCDYouTubeVideoPlayerViewController(videoIdentifier: video.youtube)
         self.presentMoviePlayerViewControllerAnimated(videoPlayer)
@@ -21,7 +21,7 @@ extension UIViewController {
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
         
-        userActivity.webpageURL = NSURL(string: "https://www.youtube.com/watch?v=" + video.youtube)
+        userActivity.webpageURL = URL(string: "https://www.youtube.com/watch?v=" + video.youtube)
         
         userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.video.rawValue, AppActivityUserInfo.identifier.rawValue: video.identifier]
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.type.rawValue, AppActivityUserInfo.identifier.rawValue]
@@ -31,7 +31,7 @@ extension UIViewController {
         
         // listen to when the video stops playing
         var observer: AnyObject!
-        observer = NSNotificationCenter.defaultCenter().addObserverForName(MPMoviePlayerPlaybackDidFinishNotification, object: videoPlayer.moviePlayer, queue: nil) { (notification) in
+        observer = NotificationCenter.defaultCenter().addObserverForName(NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: videoPlayer.moviePlayer, queue: nil) { (notification) in
             
             userActivity.invalidate()
             

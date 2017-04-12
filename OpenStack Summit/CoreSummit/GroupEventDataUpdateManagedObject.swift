@@ -12,7 +12,7 @@ import SwiftFoundation
 
 extension GroupEventDataUpdate: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> EventManagedObject {
         
         let managedObject = try cached(context)
         

@@ -13,13 +13,13 @@ import SwiftFoundation
 extension SummitDataUpdate: Updatable {
     
     @inline(__always)
-    static func find(identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
+    static func find(_ identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
         
         return try SummitManagedObject.find(identifier, context: context)
     }
     
     /// update current summit with Data Update
-    func write(context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
+    func write(_ context: NSManagedObjectContext, summit: SummitManagedObject) throws -> Entity {
         
         let managedObject = summit
         

@@ -22,9 +22,9 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - Properties
     
-    private var summitCache: Summit?
+    fileprivate var summitCache: Summit?
     
-    private var sections = [Section]()
+    fileprivate var sections = [Section]()
     
     // MARK: - Loading
     
@@ -40,7 +40,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         // set user activity for handoff
         let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
         userActivity.title = "About the Summit"
-        userActivity.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)
+        userActivity.webpageURL = URL(string: AppEnvironment.configuration.webpageURL)
         userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
         self.userActivity = userActivity
@@ -49,30 +49,30 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         userActivity?.becomeCurrent()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions
     
-    @IBAction func showLink(sender: UIButton) {
+    @IBAction func showLink(_ sender: UIButton) {
         
         let link = Link(rawValue: sender.tag)!
         
@@ -80,13 +80,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
         case .openStackWebsite:
             
-            let url = NSURL(string: "https://openstack.org")!
+            let url = URL(string: "https://openstack.org")!
             
             open(url: url)
             
         case .codeOfConduct:
             
-            let url = NSURL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
+            let url = URL(string: "https://www.openstack.org/summit/barcelona-2016/code-of-conduct")!
             
             open(url: url)
             
@@ -106,7 +106,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         // setup sections
         
@@ -125,7 +125,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             #if DEBUG
             let summitActive = true // always show for debug builds
             #else
-            let summitActive = NSDate().mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
+            let summitActive = Date().mt_isBetweenDate(summitManagedObject.start, andDate: summitManagedObject.end)
             #endif
             
             if summitActive {
@@ -142,13 +142,13 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             
             // setup handoff
             
-            userActivity?.webpageURL = NSURL(string: summit.webpageURL)!
+            userActivity?.webpageURL = URL(string: summit.webpageURL)!
             
         } else {
             
             summitCache = nil
             
-            userActivity?.webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
+            userActivity?.webpageURL = URL(string: AppEnvironment.configuration.webpageURL)!
         }
         
         var aboutCells = [AboutCell]()
@@ -163,7 +163,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(cell cell: WirelessNetworkCell, with network: WirelessNetwork) {
+    fileprivate func configure(cell: WirelessNetworkCell, with network: WirelessNetwork) {
         
         cell.nameLabel.text = network.name
         
@@ -171,7 +171,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func configure(cell cell: AboutNameCell) {
+    fileprivate func configure(cell: AboutNameCell) {
         
         guard let summit = self.summitCache
             else { fatalError("No summit cache") }
@@ -184,8 +184,8 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
         else {
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeZone = NSTimeZone(name: summit.timeZone)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(name: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
             let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
             
@@ -200,11 +200,11 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     }
     
     @inline(__always)
-    private func open(url url: NSURL) {
+    fileprivate func open(url: URL) {
         
-        if UIApplication.sharedApplication().canOpenURL(url) {
+        if UIApplication.shared.canOpenURL(url) {
             
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
             
         } else {
             
@@ -214,12 +214,12 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return sections.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection index: Int) -> Int {
         
         let section = sections[index]
         
@@ -233,7 +233,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let section = sections[indexPath.section]
         
@@ -276,7 +276,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection index: Int) -> CGFloat {
         
         let section = sections[index]
         
@@ -286,7 +286,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection index: Int) -> UIView? {
         
         let section = sections[index]
         
@@ -296,7 +296,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection index: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection index: Int) -> CGFloat {
         
         let section = sections[index]
         
@@ -306,7 +306,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
         }
     }
     
-    override func tableView(tableView: UITableView, viewForFooterInSection index: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForFooterInSection index: Int) -> UIView? {
         
         let section = sections[index]
         
@@ -318,9 +318,9 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
-        dismissViewControllerAnimated(true) {
+        dismiss(animated: true) {
             
             if let error = error {
                 

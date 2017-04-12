@@ -13,7 +13,7 @@ import SwiftFoundation
 public final class SummitManagedObject: Entity {
     
     /// The date this summit was fetched from the server.
-    @NSManaged public var initialDataLoad: NSDate?
+    @NSManaged public var initialDataLoad: Foundation.Date?
     
     @NSManaged public var name: String
     
@@ -21,17 +21,17 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var datesLabel: String?
     
-    @NSManaged public var start: NSDate
+    @NSManaged public var start: Foundation.Date
     
-    @NSManaged public var end: NSDate
+    @NSManaged public var end: Foundation.Date
     
-    @NSManaged public var defaultStart: NSDate?
+    @NSManaged public var defaultStart: Foundation.Date?
     
     @NSManaged public var webpageURL: String
     
     @NSManaged public var active: Bool
     
-    @NSManaged public var startShowingVenues: NSDate?
+    @NSManaged public var startShowingVenues: Foundation.Date?
     
     @NSManaged public var sponsors: Set<CompanyManagedObject>
     
@@ -60,14 +60,14 @@ extension Summit: CoreDataDecodable {
         self.name = managedObject.name
         self.timeZone = managedObject.timeZone
         self.datesLabel = managedObject.datesLabel
-        self.start = Date(foundation: managedObject.start)
-        self.end = Date(foundation: managedObject.end)
+        self.start = SwiftFoundation.Date(foundation: managedObject.start)
+        self.end = SwiftFoundation.Date(foundation: managedObject.end)
         self.webpageURL = managedObject.webpageURL
         self.active = managedObject.active
         
         if let startShowingVenues = managedObject.startShowingVenues {
             
-            self.startShowingVenues = Date(foundation: startShowingVenues)
+            self.startShowingVenues = SwiftFoundation.Date(foundation: startShowingVenues)
             
         } else {
             
@@ -76,7 +76,7 @@ extension Summit: CoreDataDecodable {
         
         if let defaultStart = managedObject.defaultStart {
             
-            self.defaultStart = Date(foundation: defaultStart)
+            self.defaultStart = SwiftFoundation.Date(foundation: defaultStart)
             
         } else {
             
@@ -97,7 +97,7 @@ extension Summit: CoreDataDecodable {
 
 extension Summit: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> SummitManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> SummitManagedObject {
         
         let managedObject = try cached(context)
         

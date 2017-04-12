@@ -20,9 +20,9 @@ public struct TeamInvitation: Unique {
     
     public let permission: TeamPermission
     
-    public let created: Date
+    public let created: SwiftFoundation.Date
     
-    public var updated: Date
+    public var updated: SwiftFoundation.Date
     
     public var accepted: Bool
 }

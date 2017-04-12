@@ -24,13 +24,13 @@ public struct SummitDataUpdate: Named {
     
     public let datesLabel: String?
     
-    public let start: Date
+    public let start: SwiftFoundation.Date
     
-    public let end: Date
+    public let end: SwiftFoundation.Date
     
     public let active: Bool
     
-    public let startShowingVenues: Date?
+    public let startShowingVenues: SwiftFoundation.Date?
     
     public let ticketTypes: Set<TicketType>
     

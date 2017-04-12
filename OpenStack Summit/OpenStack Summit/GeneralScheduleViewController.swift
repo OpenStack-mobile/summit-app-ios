@@ -22,20 +22,20 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     // MARK: - Properties
     
-    private(set) var filterButton: UIBarButtonItem!
+    fileprivate(set) var filterButton: UIBarButtonItem!
     
-    private(set) var activeFilterIndicator = false {
+    fileprivate(set) var activeFilterIndicator = false {
         
         didSet {
             
-            filterButton?.tintColor = activeFilterIndicator ? UIColor(hexString: "#F8E71C") : UIColor.whiteColor()
+            filterButton?.tintColor = activeFilterIndicator ? UIColor(hexString: "#F8E71C") : UIColor.white
             navigationController?.toolbar.barTintColor = UIColor(hexString: "#F8E71C")
-            navigationController?.toolbar.translucent = false
+            navigationController?.toolbar.isTranslucent = false
             navigationController?.setToolbarHidden(!activeFilterIndicator, animated: !activeFilterIndicator)
         }
     }
     
-    private var filterObserver: Int?
+    fileprivate var filterObserver: Int?
     
     // MARK: - Loading
     
@@ -60,26 +60,26 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         
         let message = UIBarButtonItem()
         message.title = "CLEAR ACTIVE FILTERS"
-        message.style = .Plain
+        message.style = .plain
         message.target = self
         message.action = #selector(clearFilters)
         message.tintColor = UIColor(hexString: "#4A4A4A")
-        message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(15)], forState: .Normal)
+        message.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 15)], for: UIControlState())
         
-        let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: #selector(clearFilters))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: #selector(clearFilters))
         
         let clear = UIBarButtonItem()
         clear.target = self
         clear.action = #selector(clearFilters)
         clear.image = R.image.cancel()!
-        clear.tintColor = UIColor.blackColor()
+        clear.tintColor = UIColor.black
         
         toolbarItems = [message, spacer, clear]
         
         filterObserver = FilterManager.shared.filter.observe(filterChanged)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         activeFilterIndicator = FilterManager.shared.filter.value.active
@@ -87,26 +87,26 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         userActivity?.becomeCurrent()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.toolbarHidden = true
+        navigationController?.isToolbarHidden = true
         
         userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntries(from: userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions
     
-    @IBAction func showFilters(sender: UIBarButtonItem) {
+    @IBAction func showFilters(_ sender: UIBarButtonItem) {
         
         guard isDataLoaded else {
             
@@ -116,31 +116,31 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         
         let generalScheduleFilterViewController = R.storyboard.scheduleFilter.generalScheduleFilterViewController()!
         let navigationController = UINavigationController(rootViewController: generalScheduleFilterViewController)
-        navigationController.modalPresentationStyle = .FormSheet
+        navigationController.modalPresentationStyle = .formSheet
         
-        self.presentViewController(navigationController, animated: true, completion: nil)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
-    @IBAction func clearFilters(sender: UIBarButtonItem) {
+    @IBAction func clearFilters(_ sender: UIBarButtonItem) {
         
         FilterManager.shared.filter.value.clear()
     }
     
-    @IBAction func retryButtonPressed(sender: UIButton) {
+    @IBAction func retryButtonPressed(_ sender: UIButton) {
         
         loadData()
     }
     
     // MARK: - Methods
     
-    override func toggleEventList(show: Bool) {
+    override func toggleEventList(_ show: Bool) {
         
-        scheduleView!.hidden = !show
+        scheduleView!.isHidden = !show
     }
     
-    override func toggleNoConnectivityMessage(show: Bool) {
+    override func toggleNoConnectivityMessage(_ show: Bool) {
         
-        noConnectivityView!.hidden = !show
+        noConnectivityView!.isHidden = !show
     }
     
     internal override func loadData() {
@@ -158,7 +158,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
             // set user activity for handoff
             let userActivity = NSUserActivity(activityType: AppActivity.screen.rawValue)
             userActivity.title = "Summit Schedule"
-            userActivity.webpageURL = NSURL(string: summit.webpageURL + "/summit-schedule")
+            userActivity.webpageURL = Foundation.URL(string: summit.webpageURL + "/summit-schedule")
             userActivity.userInfo = [AppActivityUserInfo.screen.rawValue: AppActivityScreen.events.rawValue]
             userActivity.requiredUserInfoKeys = [AppActivityUserInfo.screen.rawValue]
             
@@ -171,7 +171,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         super.loadData()
     }
     
-    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+    override func scheduleAvailableDates(from startDate: Foundation.Date, to endDate: Foundation.Date) -> [Foundation.Date] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
@@ -190,11 +190,11 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
             }
         }
         
-        let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
+        let date = DateFilter.interval(start: SwiftFoundation.Date(foundation: startDate), end: SwiftFoundation.Date(foundation: endDate))
         
         let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
-        var activeDates: [NSDate] = []
+        var activeDates: [Foundation.Date] = []
         for event in events {
             let timeZone = NSTimeZone(name: event.summit.timeZone)!
             let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
@@ -206,7 +206,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
         return activeDates
     }
     
-    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
+    override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
@@ -232,7 +232,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     // MARK: - Private Methods
     
-    private func filterChanged(filter: ScheduleFilter, oldValue: ScheduleFilter) {
+    fileprivate func filterChanged(_ filter: ScheduleFilter, oldValue: ScheduleFilter) {
         
         if self.navigationController?.topViewController === self {
             
@@ -242,7 +242,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Schedule")
     }

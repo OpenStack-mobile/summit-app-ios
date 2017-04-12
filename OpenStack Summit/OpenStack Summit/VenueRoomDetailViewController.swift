@@ -23,7 +23,7 @@ final class VenueRoomDetailViewController: UIViewController {
     
     // MARK: - Accessors
     
-    private(set) var name: String {
+    fileprivate(set) var name: String {
         get {
             return nameLabel.text ?? ""
         }
@@ -32,7 +32,7 @@ final class VenueRoomDetailViewController: UIViewController {
         }
     }
     
-    private(set) var capacity: Int {
+    fileprivate(set) var capacity: Int {
         get {
             return Int(capacityLabel.text!) ?? 0
         }
@@ -41,13 +41,13 @@ final class VenueRoomDetailViewController: UIViewController {
         }
     }
     
-    private(set) var pictureURL: String = "" {
+    fileprivate(set) var pictureURL: String = "" {
         
         didSet {
             
             let picUrlInternal = pictureURL
             if (!picUrlInternal.isEmpty) {
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!)
+                pictureImageView.hnk_setImageFromURL(URL(string: picUrlInternal)!)
             }
             else {
                 pictureImageView.image = nil
@@ -65,7 +65,7 @@ final class VenueRoomDetailViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         guard let venueRoom = try! VenueRoom.find(self.venueRoom, context: Store.shared.managedObjectContext)
             else { fatalError("Invalid identifier \(self.venueRoom!)") }

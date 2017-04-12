@@ -38,8 +38,8 @@ extension GroupEventDataUpdate: JSONDecodable {
         self.identifier = identifier
         self.summit = summit
         self.name = title
-        self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
-        self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
+        self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
         self.allowFeedback = allowFeedback
         self.presentation = presentation
@@ -65,8 +65,7 @@ extension GroupEventDataUpdate: JSONDecodable {
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int
-            where track > 0 {
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int, track > 0 {
             
             self.track = track
             
@@ -75,8 +74,7 @@ extension GroupEventDataUpdate: JSONDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int
-            where location > 0 {
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int, location > 0 {
             
             self.location = location
             

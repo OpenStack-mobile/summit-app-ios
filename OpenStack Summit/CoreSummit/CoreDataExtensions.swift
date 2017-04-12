@@ -13,13 +13,13 @@ public extension NSManagedObjectContext {
     
     /// Wraps the block to allow for error throwing.
     @available(OSX 10.7, *)
-    func performErrorBlockAndWait<T>(block: () throws -> T) throws -> T {
+    func performErrorBlockAndWait<T>(_ block: () throws -> T) throws -> T {
         
-        var blockError: ErrorType?
+        var blockError: ErrorProtocol?
         
         var value: T!
         
-        self.performBlockAndWait {
+        self.performAndWait {
             
             do { value = try block() }
             
@@ -37,7 +37,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func find<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T? {
+    func find<T: NSManagedObject, V: AnyObject>(_ entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T? {
         
         // get cached resource...
         
@@ -51,15 +51,15 @@ public extension NSManagedObjectContext {
         
         // create predicate
         
-        fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicateModifier.DirectPredicateModifier, type: NSPredicateOperatorType.EqualToPredicateOperatorType, options: NSComparisonPredicateOptions.NormalizedPredicateOption)
+        fetchRequest.predicate = NSComparisonPredicate(leftExpression: NSExpression(forKeyPath: identifierProperty), rightExpression: NSExpression(forConstantValue: resourceID), modifier: NSComparisonPredicate.Modifier.direct, type: NSComparisonPredicate.Operator.equalTo, options: NSComparisonPredicate.Options.normalized)
         
         // fetch
         
-        return try self.executeFetchRequest(fetchRequest).first as! T?
+        return try self.fetch(fetchRequest).first as! T?
     }
     
     @inline(__always)
-    func findOrCreate<T: NSManagedObject, V: AnyObject>(entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T {
+    func findOrCreate<T: NSManagedObject, V: AnyObject>(_ entity: NSEntityDescription, resourceID: V, identifierProperty: String, returnsObjectsAsFaults: Bool = true, includesSubentities: Bool = true) throws -> T {
         
         let resource: T
         
@@ -72,7 +72,7 @@ public extension NSManagedObjectContext {
         else {
             
             // create a new entity
-            let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: self)
+            let newManagedObject = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: self)
             
             // set resource ID
             (newManagedObject).setValue(resourceID, forKey: identifierProperty)
@@ -84,7 +84,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [ManagedObject] {
+    func managedObjects<ManagedObject: NSManagedObject>(_ managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [ManagedObject] {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
@@ -96,31 +96,31 @@ public extension NSManagedObjectContext {
         
         fetchRequest.fetchLimit = limit
         
-        return try self.executeFetchRequest(fetchRequest) as! [ManagedObject]
+        return try self.fetch(fetchRequest) as! [ManagedObject]
     }
     
     @inline(__always)
-    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
+    func managedObjects<ManagedObject: NSManagedObject>(_ managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
         
         return try managedObjects(managedObjectType, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
     }
     
     @inline(__always)
-    func count<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil) throws -> Int {
+    func count<ManagedObject: NSManagedObject>(_ managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil) throws -> Int {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
         let fetchRequest = NSFetchRequest(entityName: entity.name!)
         
-        fetchRequest.resultType = .CountResultType
+        fetchRequest.resultType = .countResultType
         
         fetchRequest.predicate = predicate
         
-        return (try self.executeFetchRequest(fetchRequest) as! [NSNumber]).first!.integerValue
+        return (try self.fetch(fetchRequest) as! [NSNumber]).first!.intValue
     }
     
     /// Save and attempt to recover from validation errors
-    func validateAndSave(fileName: String = #file, _ lineNumber: Int = #line) throws {
+    func validateAndSave(_ fileName: String = #file, _ lineNumber: Int = #line) throws {
         
         do { try save() }
         
@@ -133,7 +133,7 @@ public extension NSManagedObjectContext {
                 else { throw error }
             
             // delete invalid objects
-            invalidObjects.forEach { self.deleteObject($0) }
+            invalidObjects.forEach { self.delete($0) }
             
             #if DEBUG
             print("CoreData validation error at \(fileName):\(lineNumber)\n\(error)")

@@ -16,7 +16,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     // MARK: - Properties
     
     var mapView: GMSMapView!
-    private(set) var dictionary = [GMSMarker: Int]()
+    fileprivate(set) var dictionary = [GMSMarker: Int]()
     
     // MARK: - Loading
     
@@ -24,11 +24,11 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
         super.viewDidLoad()
         mapView = GMSMapView(frame: self.view.bounds)
         mapView.delegate = self
-        mapView.myLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         view = mapView
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.updateUI()
@@ -36,7 +36,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         /// get Internal Venues with Coordinates
         
@@ -67,14 +67,14 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
             dictionary[marker] = venue.identifier
         }
         
-        let update = GMSCameraUpdate.fitBounds(bounds)
+        let update = GMSCameraUpdate.fit(bounds)
         mapView.moveCamera(update)
-        mapView.animateToZoom(mapView.camera.zoom - 1)
+        mapView.animate(toZoom: mapView.camera.zoom - 1)
     }
     
     // MARK: - GMSMapViewDelegate
     
-    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
         guard let venue = dictionary[marker]
             else { return false }
@@ -86,7 +86,7 @@ final class VenuesMapViewController: UIViewController, GMSMapViewDelegate, Indic
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Map")
     }
 }

@@ -37,7 +37,7 @@ extension Affiliation: JSONDecodable {
         
         if let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int {
             
-            self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
+            self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
             
         } else {
             
@@ -46,7 +46,7 @@ extension Affiliation: JSONDecodable {
 
         if let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int {
             
-            self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+            self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
             
         } else {
             

@@ -28,7 +28,7 @@ final class InboxViewController: RevealTabStripViewController, RevealViewControl
         addMenuButton()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         reloadPagerTabStripView()
@@ -36,7 +36,7 @@ final class InboxViewController: RevealTabStripViewController, RevealViewControl
     
     // MARK: - RevealTabStripViewController
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         var childViewControllers = [UIViewController]()
         

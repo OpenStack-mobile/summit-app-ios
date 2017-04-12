@@ -29,7 +29,7 @@ protocol PagingTableViewController: class, UITableViewDataSource, UITableViewDel
     
     func willLoadData()
     
-    func didLoadNextPage(response: ErrorValue<[PageControllerChange]>)
+    func didLoadNextPage(_ response: ErrorValue<[PageControllerChange]>)
 }
 
 extension PagingTableViewController {
@@ -42,7 +42,7 @@ extension PagingTableViewController {
         }
     }
     
-    func didLoadNextPage(response: ErrorValue<[PageControllerChange]>) {
+    func didLoadNextPage(_ response: ErrorValue<[PageControllerChange]>) {
         
         dismissActivityIndicator(animated: true)
         

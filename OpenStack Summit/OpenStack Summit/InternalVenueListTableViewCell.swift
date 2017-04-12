@@ -12,9 +12,9 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
     
     // MARK: - IB Outlets
     
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var addressLabel: UILabel!
-    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var addressLabel: UILabel!
+    @IBOutlet fileprivate weak var backgroundImageView: UIImageView!
     
     // MARK: - Accessors
     
@@ -42,7 +42,7 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
                     let picUrl = backgroundImageURL
                 #endif
                 
-                backgroundImageView.hnk_setImageFromURL(NSURL(string: picUrl)!)
+                backgroundImageView.hnk_setImageFromURL(URL(string: picUrl)!)
             }
         }
     }
@@ -52,6 +52,6 @@ final class InternalVenueListTableViewCell: UITableViewCell, VenueListTableViewC
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.contentMode = .scaleAspectFill
     }
 }

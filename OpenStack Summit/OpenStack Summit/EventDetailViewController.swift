@@ -20,31 +20,31 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) var titleHeader: EventDetailTitleHeader!
-    @IBOutlet private(set) var feedBackHeader: EventDetailFeedbackHeader!
-    @IBOutlet private(set) var emptyFeedbackView: UIView!
+    @IBOutlet fileprivate(set) var titleHeader: EventDetailTitleHeader!
+    @IBOutlet fileprivate(set) var feedBackHeader: EventDetailFeedbackHeader!
+    @IBOutlet fileprivate(set) var emptyFeedbackView: UIView!
     
     // MARK: - Properties
     
     var event: Identifier!
     var eventRequestInProgress = false
     lazy var eventStore: EKEventStore = EKEventStore()
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     var contextMenu: ContextMenu { return contextMenu(for: eventDetail) }
     
     // MARK: - Private Properties
     
-    private var eventCache: Event!
-    private var eventDetail: EventDetail!
-    private var data = [Detail]()
-    private var entityController: EntityController<Event>!
+    fileprivate var eventCache: Event!
+    fileprivate var eventDetail: EventDetail!
+    fileprivate var data = [Detail]()
+    fileprivate var entityController: EntityController<Event>!
     
-    private var reviewsVisibility: ReviewsVisibility = .none
-    private var loadingFeedback = false
-    private var loadingAverageRating = false
-    private var feedbackList = [FeedbackDetail]()
-    private var loadedAllFeedback = false
-    private var currentFeedbackPage: Page<Feedback>?
+    fileprivate var reviewsVisibility: ReviewsVisibility = .none
+    fileprivate var loadingFeedback = false
+    fileprivate var loadingAverageRating = false
+    fileprivate var feedbackList = [FeedbackDetail]()
+    fileprivate var loadedAllFeedback = false
+    fileprivate var currentFeedbackPage: Page<Feedback>?
     
     // MARK: - Loading
     
@@ -61,7 +61,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         // must be set later, or else will trigger datasource methods with nil `self.eventDetail`
         defer { tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 20)) }
         // https://github.com/mac-cain13/R.swift/issues/144
-        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
+        tableView.register(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         // entityController 
         entityController = EntityController(identifier: event, entity: EventManagedObject.self, context: Store.shared.managedObjectContext)
@@ -88,7 +88,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.updateUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // handoff
@@ -105,32 +105,32 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         loadFeedback()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.userActivity?.resignCurrent()
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.event.rawValue,
                         AppActivityUserInfo.identifier.rawValue: self.event]
         
-        userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+        userActivity.addUserInfoEntriesFromDictionary(userInfo as [AnyHashable: Any])
         
         super.updateUserActivityState(userActivity)
     }
     
     // MARK: - Actions
     
-    @IBAction func playVideo(sender: UIButton) {
+    @IBAction func playVideo(_ sender: UIButton) {
         
         assert(eventDetail.video != nil, "No video")
         
         self.playVideo(eventDetail.video!)
     }
     
-    @IBAction func favoriteAction(sender: UIButton) {
+    @IBAction func favoriteAction(_ sender: UIButton) {
         
         guard eventRequestInProgress == false else { return }
         
@@ -140,7 +140,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.toggleFavorite(for: eventDetail)
     }
     
-    @IBAction func scheduleAction(sender: UIButton) {
+    @IBAction func scheduleAction(_ sender: UIButton) {
         
         guard eventRequestInProgress == false else { return }
         
@@ -150,7 +150,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.toggleScheduledStatus(for: eventDetail)
     }
     
-    @IBAction func rateAction(sender: UIButton) {
+    @IBAction func rateAction(_ sender: UIButton) {
         
         guard Store.shared.isLoggedIn
             else { showErrorAlert("Login to use this function"); return }
@@ -158,33 +158,33 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         guard eventDetail.allowFeedback
             else { showErrorAlert("Feedback is not enabled for this event."); return }
         
-        guard eventDetail.start < Date()
+        guard eventDetail.start < SwiftFoundation.Date()
             else { showErrorAlert("Can only rate after event has started."); return }
         
-        let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
+        let viewController = self.feedbackController(for: eventDetail) { $0.dismiss(animated: true, completion: nil) }
         
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
-    @IBAction func rsvp(sender: AnyObject? = nil) {
+    @IBAction func rsvp(_ sender: AnyObject? = nil) {
         
-        guard let url = NSURL(string: eventDetail.rsvp)
+        guard let url = Foundation.URL(string: eventDetail.rsvp)
             else { return }
         
-        UIApplication.sharedApplication().openURL(url)
+        UIApplication.shared.openURL(url)
     }
     
-    @IBAction func showAttachment(sender: AnyObject? = nil) {
+    @IBAction func showAttachment(_ sender: AnyObject? = nil) {
         
-        guard let url = NSURL(string: eventDetail.attachment)
+        guard let url = Foundation.URL(string: eventDetail.attachment)
             else { return }
         
-        UIApplication.sharedApplication().openURL(url)
+        UIApplication.shared.openURL(url)
     }
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         guard let event = self.event
             else { fatalError("No identifier set") }
@@ -197,7 +197,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             self.view.userInteractionEnabled = false
             self.navigationItem.rightBarButtonItems = []
             showErrorAlert("The event has been deleted.",
-                           okHandler: { self.navigationController?.popToRootViewControllerAnimated(true) })
+                           okHandler: { self.navigationController?.popToRootViewController(animated: true) })
             return
         }
         
@@ -232,8 +232,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         titleHeader.titleLabel.text = eventDetail.name
         titleHeader.trackLabel.text = eventDetail.track
-        titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .whiteColor()
-        titleHeader.trackLabel.hidden = eventDetail.track.isEmpty
+        titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .white
+        titleHeader.trackLabel.isHidden = eventDetail.track.isEmpty
         
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
@@ -275,7 +275,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         self.userActivity = userActivity
     }
     
-    private func loadFeedback() {
+    fileprivate func loadFeedback() {
         
         guard loadingFeedback == false && loadedAllFeedback == false
             else { return }
@@ -288,7 +288,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         Store.shared.feedback(self.eventDetail.summit, event: self.event, page: nextPage, objectsPerPage: 5) { [weak self] (response) in
             
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 
                 guard let controller = self else { return }
                 
@@ -312,7 +312,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    private func loadAverageRating() {
+    fileprivate func loadAverageRating() {
         
         guard loadingAverageRating == false
             else { return }
@@ -325,7 +325,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         
         Store.shared.averageFeedback(summit, event: event) { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -345,7 +345,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: PeopleTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.speakers.rawValue, "\(indexPath.section) is not speaker section")
         
@@ -355,11 +355,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         cell.pictureURL = speaker.pictureURL
         cell.isModerator = speaker.isModerator
         
-        cell.layoutMargins = UIEdgeInsetsZero
-        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.separatorInset = UIEdgeInsets.zero
     }
     
-    private func configure(cell cell: EventDetailFeedbackTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: EventDetailFeedbackTableViewCell, at indexPath: IndexPath) {
         
         assert(indexPath.section == Section.feedback.rawValue, "\(indexPath.section) is not feedback section")
         
@@ -370,13 +370,13 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         cell.dateLabel.text = feedback.date
     }
     
-    private func configureAverageRatingView() {
+    fileprivate func configureAverageRatingView() {
         
-        feedBackHeader.averageRatingLabel.hidden = loadingAverageRating
-        feedBackHeader.averageRatingView.hidden = loadingAverageRating
+        feedBackHeader.averageRatingLabel.isHidden = loadingAverageRating
+        feedBackHeader.averageRatingView.isHidden = loadingAverageRating
         feedBackHeader.averageRatingLabel.text = "\(eventCache.averageFeedback)"
         feedBackHeader.averageRatingView.rating = eventCache.averageFeedback
-        feedBackHeader.averageRatingActivityIndicator.hidden = loadingAverageRating == false
+        feedBackHeader.averageRatingActivityIndicator.isHidden = loadingAverageRating == false
         
         if loadingFeedback {
             
@@ -388,7 +388,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    private func configureReviewCountView() {
+    fileprivate func configureReviewCountView() {
         
         if loadingFeedback {
             
@@ -408,12 +408,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return Section.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = Section(rawValue: section)!
         
@@ -424,7 +424,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let section = Section(rawValue: indexPath.section)!
         
@@ -444,11 +444,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     else { fatalError("Event has no video") }
                 
                 cell.videoImageView.image = nil
-                cell.playButton.hidden = true
-                cell.activityIndicator.hidden = false
+                cell.playButton.isHidden = true
+                cell.activityIndicator.isHidden = false
                 cell.activityIndicator.startAnimating()
                 
-                guard let thumbnailURL = NSURL(youtubeThumbnail: video.youtube)
+                guard let thumbnailURL = Foundation.URL(youtubeThumbnail: video.youtube)
                     else { return cell }
                 
                 cell.videoImageView.hnk_setImageFromURL(thumbnailURL, success: { (image) in
@@ -472,12 +472,12 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 // video
                 
-                cell.willRecordImageView.hidden = eventDetail.willRecord == false
+                cell.willRecordImageView.isHidden = eventDetail.willRecord == false
                 
                 // description text
                 
                 let eventDescriptionHTML = String(format:"<style>p:last-of-type { display:compact }</style><span style=\"font-family: OpenSans; font-size: 13\">%@</span>", eventDetail.eventDescription)
-                if let data = eventDescriptionHTML.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+                if let data = eventDescriptionHTML.data(using: String.Encoding.unicode, allowLossyConversion: false),
                     let attrStr = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
                     
                     cell.descriptionTextView.attributedText = attrStr
@@ -487,7 +487,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                     cell.descriptionTextView.text = ""
                 }
                 
-                cell.descriptionTextView.textContainerInset = UIEdgeInsetsZero
+                cell.descriptionTextView.textContainerInset = UIEdgeInsets.zero
                 cell.descriptionTextView.delegate = self
                 
                 // sponsors
@@ -551,9 +551,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let section = Section(rawValue: indexPath.section)!
         
@@ -578,7 +578,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 levelScheduleViewController.level = eventDetail.level
                 
-                self.showViewController(levelScheduleViewController, sender: self)
+                self.show(levelScheduleViewController, sender: self)
                 
             default: break
             }
@@ -599,13 +599,13 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 && canAddFeedback(for: eventDetail)
                 else { return }
             
-            let viewController = self.feedbackController(for: eventDetail) { $0.dismissViewControllerAnimated(true, completion: nil) }
+            let viewController = self.feedbackController(for: eventDetail) { $0.dismiss(animated: true, completion: nil) }
             
-            self.presentViewController(viewController, animated: true, completion: nil)
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         
         let section = Section(rawValue: section)!
         
@@ -629,7 +629,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         let section = Section(rawValue: section)!
         
@@ -653,7 +653,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let section = Section(rawValue: section)!
         
@@ -676,7 +676,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             guard eventDetail.speakers.isEmpty == false
                 else { return nil }
             
-            let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
             
             headerView.titleLabel.text = "SPEAKERS"
             
@@ -687,7 +687,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
     // MARK: - UITextViewDelegate
     
     // Swift Protocol extensions are not visible to ObjC, need to place implementation here and not in extension
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
         guard self.openWebURL(URL)
             else { return true }
@@ -735,56 +735,56 @@ final class EventDetailTitleHeader: UIView {
     
     static let estimatedHeight: CGFloat = 200.0
     
-    @IBOutlet private(set) weak var titleLabel: UILabel!
-    @IBOutlet private(set) weak var trackLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var trackLabel: UILabel!
     
-    @IBOutlet private(set) weak var favoriteButton: EventDetailActionButton!
-    @IBOutlet private(set) weak var scheduleButton: EventDetailActionButton!
-    @IBOutlet private(set) weak var rateButton: EventDetailActionButton!
+    @IBOutlet fileprivate(set) weak var favoriteButton: EventDetailActionButton!
+    @IBOutlet fileprivate(set) weak var scheduleButton: EventDetailActionButton!
+    @IBOutlet fileprivate(set) weak var rateButton: EventDetailActionButton!
 }
 
 final class EventDetailFeedbackHeader: UIView {
     
     static let height: CGFloat = 60.0
     
-    @IBOutlet private(set) weak var reviewsLabel: UILabel!
-    @IBOutlet private(set) weak var averageRatingView: CosmosView!
-    @IBOutlet private(set) weak var averageRatingLabel: UILabel!
-    @IBOutlet private(set) weak var averageRatingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate(set) weak var reviewsLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var averageRatingView: CosmosView!
+    @IBOutlet fileprivate(set) weak var averageRatingLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var averageRatingActivityIndicator: UIActivityIndicatorView!
 }
 
 final class EventDetailVideoTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var videoImageView: UIImageView!
-    @IBOutlet private(set) weak var playButton: UIButton!
-    @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate(set) weak var videoImageView: UIImageView!
+    @IBOutlet fileprivate(set) weak var playButton: UIButton!
+    @IBOutlet fileprivate(set) weak var activityIndicator: UIActivityIndicatorView!
 }
 
 final class EventDetailDescriptionTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var eventDayLabel: UILabel!
-    @IBOutlet private(set) weak var eventTimeLabel: UILabel!
-    @IBOutlet private(set) weak var willRecordImageView: UIImageView!
-    @IBOutlet private(set) weak var descriptionTextView: UITextView!
-    @IBOutlet private(set) weak var sponsorsLabel: UILabel!
-    @IBOutlet private(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private(set) weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate(set) weak var eventDayLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var eventTimeLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var willRecordImageView: UIImageView!
+    @IBOutlet fileprivate(set) weak var descriptionTextView: UITextView!
+    @IBOutlet fileprivate(set) weak var sponsorsLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var sponsorsLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate(set) weak var sponsorsLabelSeparationConstraint: NSLayoutConstraint!
 }
 
 final class EventDetailTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var sectionLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var sectionLabel: UILabel!
     
-    @IBOutlet private(set) weak var valueLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var valueLabel: UILabel!
 }
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var dateLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var dateLabel: UILabel!
     
-    @IBOutlet private(set) weak var reviewLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var reviewLabel: UILabel!
     
-    @IBOutlet private(set) weak var ratingView: CosmosView!
+    @IBOutlet fileprivate(set) weak var ratingView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

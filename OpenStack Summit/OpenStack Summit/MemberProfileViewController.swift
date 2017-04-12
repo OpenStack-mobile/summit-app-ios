@@ -74,7 +74,7 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
         addContextMenuBarButtonItem()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         reloadPagerTabStripView()
@@ -82,7 +82,7 @@ final class MemberProfileViewController: RevealTabStripViewController, ContextMe
     
     // MARK: - RevealTabStripViewController
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         var childViewControllers = [UIViewController]()
         

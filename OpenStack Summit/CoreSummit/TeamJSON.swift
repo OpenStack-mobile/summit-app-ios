@@ -34,8 +34,8 @@ extension Team: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.created = Date(timeIntervalSince1970: TimeInterval(created))
-        self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
+        self.updated = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(updated))
         self.owner = owner
         self.members = Set(members)
         

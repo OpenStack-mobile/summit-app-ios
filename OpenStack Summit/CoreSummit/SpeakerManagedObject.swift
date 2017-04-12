@@ -54,7 +54,7 @@ extension Speaker: CoreDataDecodable {
 
 extension Speaker: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> SpeakerManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> SpeakerManagedObject {
         
         let managedObject = try cached(context)
         
@@ -94,7 +94,7 @@ public extension SpeakerManagedObject {
 
 public extension Speaker {
     
-    static func filter(searchTerm: String = "",
+    static func filter(_ searchTerm: String = "",
                        page: Int, objectsPerPage: Int,
                        summit: Identifier? = nil,
                        context: NSManagedObjectContext) throws -> [Speaker] {

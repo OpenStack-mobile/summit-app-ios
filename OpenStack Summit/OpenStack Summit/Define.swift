@@ -11,10 +11,10 @@ import enum CoreSummit.Environment
 import protocol CoreSummit.Configuration
 
 /// Version of the app.
-public let AppVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
+public let AppVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 
 /// Build of the app.
-public let AppBuild = Int(NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String)!
+public let AppBuild = Int(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)!
 
 #if os(iOS) || os(tvOS) || os(OSX)
     

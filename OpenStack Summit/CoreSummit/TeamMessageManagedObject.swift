@@ -14,7 +14,7 @@ public final class TeamMessageManagedObject: Entity {
         
     @NSManaged public var body: String
     
-    @NSManaged public var created: NSDate
+    @NSManaged public var created: Foundation.Date
     
     @NSManaged public var team: TeamManagedObject
     
@@ -29,7 +29,7 @@ extension TeamMessage: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.body = managedObject.body
-        self.created = Date(foundation: managedObject.created)
+        self.created = SwiftFoundation.Date(foundation: managedObject.created)
         self.from = Fault<Member>(managedObject: managedObject.from)
         self.team = Fault<Team>(managedObject: managedObject.team)
     }
@@ -37,7 +37,7 @@ extension TeamMessage: CoreDataDecodable {
 
 extension TeamMessage: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamMessageManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamMessageManagedObject {
         
         let managedObject = try cached(context)
         

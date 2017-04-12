@@ -24,25 +24,25 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     // Alerts for messages belonging to this team will be excluded.
     public var teamMessageAlertFilter: Identifier?
     
-    private var summitObserver: Int!
+    fileprivate var summitObserver: Int!
     
-    private var teamsFetchedResultsController: NSFetchedResultsController?
+    fileprivate var teamsFetchedResultsController: NSFetchedResultsController?
     
-    private var teams: Set<Identifier> {
+    fileprivate var teams: Set<Identifier> {
         
         return (teamsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
-    private var eventsFetchedResultsController: NSFetchedResultsController?
+    fileprivate var eventsFetchedResultsController: NSFetchedResultsController?
     
-    private var events: Set<Identifier> {
+    fileprivate var events: Set<Identifier> {
         
         return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
-    private(set) var subscribedTopics = Set<Notification.Topic>()
+    fileprivate(set) var subscribedTopics = Set<Notification.Topic>()
     
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
+    fileprivate let userDefaults = UserDefaults.standard
     
     var unreadCount: Int { return unreadNotifications.value.count + unreadTeamMessages.value.count }
     
@@ -56,10 +56,10 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         SummitManager.shared.summit.remove(summitObserver)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    private init(store: Store = Store.shared) {
+    fileprivate init(store: Store = Store.shared) {
         
         self.store = store
         
@@ -76,7 +76,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - Methods
     
-    public func setupNotifications(application: UIApplication) {
+    public func setupNotifications(_ application: UIApplication) {
         
         var notificationCategories = Set<UIMutableUserNotificationCategory>()
         
@@ -85,32 +85,32 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             let replyAction = UIMutableUserNotificationAction()
             replyAction.identifier = TeamMessageNotificationAction.reply.rawValue
             replyAction.title = "Reply"
-            replyAction.activationMode = .Background
-            replyAction.authenticationRequired = true
-            replyAction.destructive = false
-            replyAction.behavior = .TextInput
+            replyAction.activationMode = .background
+            replyAction.isAuthenticationRequired = true
+            replyAction.isDestructive = false
+            replyAction.behavior = .textInput
             
             let notificationCategory = UIMutableUserNotificationCategory()
             notificationCategory.identifier = TeamMessageNotificationAction.category.rawValue
-            notificationCategory.setActions([replyAction], forContext: .Default)
-            notificationCategory.setActions([replyAction], forContext: .Minimal)
+            notificationCategory.setActions([replyAction], for: .default)
+            notificationCategory.setActions([replyAction], for: .minimal)
             notificationCategories.insert(notificationCategory)
         }
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: notificationCategories)
+        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: notificationCategories)
         
         application.registerUserNotificationSettings(settings)
         
         application.registerForRemoteNotifications()
     }
     
-    public func process(pushNotification: [String: String]) {
+    public func process(_ pushNotification: [String: String]) {
         
         let notification: PushNotification?
         
-        let backgroundState = UIApplication.sharedApplication().applicationState == .Background
+        let backgroundState = UIApplication.shared.applicationState == .background
         
         let context = store.privateQueueManagedObjectContext
         
@@ -147,10 +147,10 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue, UserNotificationUserInfo.identifier.rawValue : teamMessage.identifier]
                     userNotification.alertTitle = alertTitle
                     userNotification.alertBody = alertBody
-                    userNotification.fireDate = NSDate()
+                    userNotification.fireDate = Foundation.Date()
                     userNotification.category = TeamMessageNotificationAction.category.rawValue
                     
-                    UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+                    UIApplication.shared.scheduleLocalNotification(userNotification)
                     
                 } else if teamMessageAlertFilter != teamMessageNotification.team {
                     
@@ -198,10 +198,10 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
                 userNotification.alertTitle = generalNotification.event?.title
                 userNotification.alertBody = generalNotification.body
-                userNotification.fireDate = NSDate()
+                userNotification.fireDate = Foundation.Date()
                 userNotification.category = UserNotificationCategory.generalNotification.rawValue
                 
-                UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
+                UIApplication.shared.scheduleLocalNotification(userNotification)
                 
             } else {
                 
@@ -298,7 +298,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    private func subscribe(to topic: Notification.Topic) {
+    fileprivate func subscribe(to topic: Notification.Topic) {
         
         FIRMessaging.messaging().subscribeToTopic(topic.rawValue)
         
@@ -308,7 +308,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    private func unsubscribe(from topic: Notification.Topic) {
+    fileprivate func unsubscribe(from topic: Notification.Topic) {
         
         FIRMessaging.messaging().unsubscribeFromTopic(topic.rawValue)
         
@@ -318,14 +318,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     }
     
     @inline(__always)
-    private func unsubscribeAll() {
+    fileprivate func unsubscribeAll() {
         
         log?("Will unsubscribe from all topics")
         
         subscribedTopics.forEach { unsubscribe(from: $0) }
     }
     
-    private func startObservingTeams() {
+    fileprivate func startObservingTeams() {
         
         // fetch member's teams
         
@@ -346,7 +346,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         teams.forEach { subscribe(to: .team($0)) }
     }
     
-    private func startObservingUser() {
+    fileprivate func startObservingUser() {
         
         let member = self.store.authenticatedMember
         
@@ -380,14 +380,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         }
     }
     
-    private func summitChanged(newValue: Identifier, oldValue: Identifier) {
+    fileprivate func summitChanged(_ newValue: Identifier, oldValue: Identifier) {
         
         unsubscribe(from: .summit(oldValue))
         subscribe(to: .summit(newValue))
     }
     
     @inline(__always)
-    private func initUnreadNotifications(preferenceKey: PreferenceKey) -> Observable<Set<Identifier>> {
+    fileprivate func initUnreadNotifications(_ preferenceKey: PreferenceKey) -> Observable<Set<Identifier>> {
         
         let storedValue = userDefaults.objectForKey(preferenceKey.rawValue) as? [Int] ?? []
         
@@ -398,7 +398,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         return observable
     }
     
-    private func unreadNotificationsChanged(new newValue: Set<Identifier>, old oldValue: Set<Identifier>, key preferenceKey: PreferenceKey) {
+    fileprivate func unreadNotificationsChanged(new newValue: Set<Identifier>, old oldValue: Set<Identifier>, key preferenceKey: PreferenceKey) {
         
         userDefaults.setObject(Array(newValue), forKey: preferenceKey.rawValue)
         userDefaults.synchronize()
@@ -409,11 +409,11 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     @inline(__always)
     public func updateAppBadge() {
         
-        UIApplication.sharedApplication().applicationIconBadgeNumber = unreadCount
+        UIApplication.shared.applicationIconBadgeNumber = unreadCount
     }
     
     @inline(__always)
-    private func resetUnreadNotifications() {
+    fileprivate func resetUnreadNotifications() {
         
         unreadNotifications.value = []
         unreadTeamMessages.value = []
@@ -434,14 +434,14 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     // MARK: - FIRMessagingDelegate
     
-    public func applicationReceivedRemoteMessage(remoteMessage: FIRMessagingRemoteMessage) {
+    public func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
         
         process(remoteMessage.appData as! [String: String])
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    public func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         let identifier = (anObject as! Entity).identifier
         
@@ -462,29 +462,29 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         switch type {
             
-        case .Insert: subscribe(to: topic)
+        case .insert: subscribe(to: topic)
             
-        case .Delete: unsubscribe(from: topic)
+        case .delete: unsubscribe(from: topic)
             
-        case .Move, .Update: break
+        case .move, .update: break
         }
     }
     
     // MARK: - Notifications
     
-    @objc private func loggedIn(notification: NSNotification) {
+    @objc fileprivate func loggedIn(_ notification: Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
     }
     
-    @objc private func loggedOut(notification: NSNotification) {
+    @objc fileprivate func loggedOut(_ notification: Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
     }
     
-    @objc private func forcedLoggedOut(notification: NSNotification) {
+    @objc fileprivate func forcedLoggedOut(_ notification: Notification) {
         
         resetUnreadNotifications()
         reloadSubscriptions()
@@ -535,14 +535,14 @@ public protocol PushNotification {
     
     var body: String { get }
     
-    var created: Date { get }
+    var created: SwiftFoundation.Date { get }
     
     init?(pushNotification: [String: String])
 }
 
 public struct TeamMessageNotification: PushNotification {
     
-    private enum Key: String {
+    fileprivate enum Key: String {
         
         case from, id, type, body, from_id, from_first_name, from_last_name, created_at
     }
@@ -553,7 +553,7 @@ public struct TeamMessageNotification: PushNotification {
     
     public let body: String
     
-    public let created: Date
+    public let created: SwiftFoundation.Date
     
     public let team: Identifier
     
@@ -582,7 +582,7 @@ public struct TeamMessageNotification: PushNotification {
         self.identifier = identifier
         self.team = team
         self.body = body
-        self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
         self.from = (fromID, fromFirstName, fromLastName)
     }
 }
@@ -601,7 +601,7 @@ public extension TeamMessage {
 
 public struct GeneralNotification: PushNotification {
     
-    private enum Key: String {
+    fileprivate enum Key: String {
         
         case from, id, type, body, summit_id, channel, created_at, event_id, title
     }
@@ -612,7 +612,7 @@ public struct GeneralNotification: PushNotification {
     
     public let body: String
     
-    public let created: Date
+    public let created: SwiftFoundation.Date
     
     public let from: Notification.Topic
     
@@ -643,7 +643,7 @@ public struct GeneralNotification: PushNotification {
         self.identifier = identifier
         self.from = topic
         self.body = body
-        self.created = Date(timeIntervalSince1970: TimeInterval(created))
+        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
         self.summit = summitID
         self.channel = channel
         

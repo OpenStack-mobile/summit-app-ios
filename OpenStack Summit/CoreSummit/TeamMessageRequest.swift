@@ -12,13 +12,13 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func send(message: String, to team: Identifier, priority: TeamMessage.Priority = .normal, completion: (ErrorValue<TeamMessage>) -> ()) {
+    func send(_ message: String, to team: Identifier, priority: TeamMessage.Priority = .normal, completion: (ErrorValue<TeamMessage>) -> ()) {
         
         let uri = "/api/v1/teams/\(team)/messages"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
@@ -31,14 +31,14 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let identifier = jsonObject["id"]?.rawValue as? Int
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
-            let message = TeamMessage(identifier: identifier, team: .identifier(team), body: message, created: Date(), from: .identifier(member))
+            let message = TeamMessage(identifier: identifier, team: .identifier(team), body: message, created: SwiftFoundation.Date(), from: .identifier(member))
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -49,7 +49,7 @@ public extension Store {
             }
             
             // success
-            completion(.Value(message))
+            completion(.value(message))
         }
     }
 }

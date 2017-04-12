@@ -12,7 +12,7 @@ import SwiftFoundation
 
 public final class NotificationManagedObject: Entity {
     
-    @NSManaged public var created: NSDate
+    @NSManaged public var created: Foundation.Date
     
     @NSManaged public var body: String
     
@@ -33,7 +33,7 @@ extension Notification: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.body = managedObject.body
-        self.created = Date(foundation: managedObject.created)
+        self.created = SwiftFoundation.Date(foundation: managedObject.created)
         self.from = Topic(rawValue: managedObject.from)!
         self.channel = Channel(rawValue: managedObject.channel)!
         self.summit = managedObject.summit.identifier
@@ -43,7 +43,7 @@ extension Notification: CoreDataDecodable {
 
 extension Notification: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> NotificationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> NotificationManagedObject {
         
         let managedObject = try cached(context)
         

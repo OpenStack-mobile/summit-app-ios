@@ -18,9 +18,9 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var socialDescription: String?
     
-    @NSManaged public var start: NSDate
+    @NSManaged public var start: Foundation.Date
     
-    @NSManaged public var end: NSDate
+    @NSManaged public var end: Foundation.Date
     
     @NSManaged public var allowFeedback: Bool
     
@@ -64,8 +64,8 @@ extension Event: CoreDataDecodable {
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.socialDescription = managedObject.socialDescription
-        self.start = Date(foundation: managedObject.start)
-        self.end = Date(foundation: managedObject.end)
+        self.start = SwiftFoundation.Date(foundation: managedObject.start)
+        self.end = SwiftFoundation.Date(foundation: managedObject.end)
         self.allowFeedback = managedObject.allowFeedback
         self.averageFeedback = managedObject.averageFeedback
         self.rsvp = managedObject.rsvp
@@ -85,7 +85,7 @@ extension Event: CoreDataDecodable {
 
 extension Event: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> EventManagedObject {
         
         let managedObject = try cached(context)
         
@@ -119,7 +119,7 @@ extension Event: CoreDataEncodable {
 
 extension MemberResponse.Event: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> EventManagedObject {
         
         let managedObject = try cached(context)
         
@@ -162,14 +162,14 @@ public extension EventManagedObject {
                 NSSortDescriptor(key: "name", ascending: true)]
     }
     
-    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [EventManagedObject] {
+    static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
         let predicate = NSPredicate(format: "name CONTAINS [c] %@ or ANY presentation.speakers.firstName CONTAINS [c] %@ or ANY presentation.speakers.lastName CONTAINS [c] %@ or presentation.level CONTAINS [c] %@ or ANY tags.name CONTAINS [c] %@ or eventType.name CONTAINS [c] %@", searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm)
         
         return try context.managedObjects(self, predicate: predicate, sortDescriptors: self.sortDescriptors)
     }
     
-    static func filter(date: DateFilter,
+    static func filter(_ date: DateFilter,
                        tracks: [Identifier]?,
                        trackGroups: [Identifier]?,
                        levels: [String]?,
@@ -188,7 +188,7 @@ public extension EventManagedObject {
             
         case .now:
             
-            let now = NSDate()
+            let now = Foundation.Date()
             
             datePredicate = NSPredicate(format: "start <= %@ AND end >= %@", now, now)
             
@@ -199,28 +199,28 @@ public extension EventManagedObject {
         
         var predicates = [summitPredicate, datePredicate]
         
-        if let trackGroups = trackGroups where trackGroups.isEmpty == false {
+        if let trackGroups = trackGroups, trackGroups.isEmpty == false {
             
             let trackGroupPredicate = NSPredicate(format: "ANY track.groups.id IN %@", trackGroups)
             
             predicates.append(trackGroupPredicate)
         }
         
-        if let tracks = tracks where tracks.isEmpty == false {
+        if let tracks = tracks, tracks.isEmpty == false {
             
             let tracksPredicate = NSPredicate(format: "track.id IN %@", tracks)
             
             predicates.append(tracksPredicate)
         }
         
-        if let levels = levels where levels.isEmpty == false {
+        if let levels = levels, levels.isEmpty == false {
             
             let levelsPredicate = NSPredicate(format: "presentation.level IN %@", levels)
             
             predicates.append(levelsPredicate)
         }
         
-        if let venues = venues where venues.isEmpty == false {
+        if let venues = venues, venues.isEmpty == false {
             
             // get all rooms for the specified venue
             let venueRooms = try context.managedObjects(VenueRoomManagedObject.self, predicate: NSPredicate(format: "venue.id IN %@", venues))
@@ -237,7 +237,7 @@ public extension EventManagedObject {
         return try context.managedObjects(EventManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors)
     }
     
-    static func speakerPresentations(speaker: Identifier, startDate: NSDate, endDate: NSDate, summit: Identifier, context: NSManagedObjectContext) throws -> [EventManagedObject] {
+    static func speakerPresentations(_ speaker: Identifier, startDate: Foundation.Date, endDate: Foundation.Date, summit: Identifier, context: NSManagedObjectContext) throws -> [EventManagedObject] {
         
         guard let speaker = try SpeakerManagedObject.find(speaker, context: context),
             let summit = try SummitManagedObject.find(summit, context: context)
@@ -256,6 +256,6 @@ public extension EventManagedObject {
     public enum DateFilter {
         
         case now
-        case interval(start: Date, end: Date)
+        case interval(start: SwiftFoundation.Date, end: SwiftFoundation.Date)
     }
 }

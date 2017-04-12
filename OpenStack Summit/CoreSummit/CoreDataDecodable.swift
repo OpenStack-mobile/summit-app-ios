@@ -20,12 +20,12 @@ public protocol CoreDataDecodable {
 public extension NSManagedObjectContext {
     
     /// Executes a fetch request and returns ```CoreDataDecodable``` types.
-    func fetch<T: CoreDataDecodable>(fetchRequest: NSFetchRequest) throws -> [T] {
+    func fetch<T: CoreDataDecodable>(_ fetchRequest: NSFetchRequest) throws -> [T] {
         
-        guard fetchRequest.resultType == .ManagedObjectResultType
+        guard fetchRequest.resultType == NSFetchRequestResultType()
             else { fatalError("Method only supports fetch requests with NSFetchRequestManagedObjectResultType") }
         
-        let managedObjects = try self.executeFetchRequest(fetchRequest) as! [T.ManagedObject]
+        let managedObjects = try self.fetch(fetchRequest) as! [T.ManagedObject]
         
         let decodables = managedObjects.map { T.init(managedObject: $0) }
         
@@ -33,7 +33,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<T: CoreDataDecodable>(decodableType: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [T] {
+    func managedObjects<T: CoreDataDecodable>(_ decodableType: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [T] {
         
         let results = try self.managedObjects(decodableType.ManagedObject.self, predicate: predicate, sortDescriptors: sortDescriptors, limit: limit)
         
@@ -41,7 +41,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<T: CoreDataDecodable>(decodableType: T.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [T] {
+    func managedObjects<T: CoreDataDecodable>(_ decodableType: T.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [T] {
         
         let results = try self.managedObjects(decodableType.ManagedObject.self, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
         
@@ -72,7 +72,7 @@ public extension NSFetchedResultsController {
 
 public extension CoreDataDecodable {
     
-    static func from<C: CollectionType where C.Generator.Element == ManagedObject>(managedObjects managedObjects: C) -> [Self] {
+    static func from<C: Collection where C.Iterator.Element == ManagedObject>(managedObjects: C) -> [Self] {
         
         return managedObjects.map { self.init(managedObject: $0) }
     }
@@ -80,7 +80,7 @@ public extension CoreDataDecodable {
 
 public extension CoreDataDecodable where Self: Hashable {
     
-    static func from(managedObjects managedObjects: Set<ManagedObject>) -> Set<Self> {
+    static func from(managedObjects: Set<ManagedObject>) -> Set<Self> {
         
         return Set(managedObjects.map({ self.init(managedObject: $0) }))
     }

@@ -11,21 +11,21 @@ import ImageSlideshow
 
 public final class HanekeInputSource: InputSource {
     
-    public let url: NSURL
+    public let url: URL
     
-    public init(url: NSURL) {
+    public init(url: URL) {
         self.url = url
     }
     
     public init?(urlString: String) {
         
-        guard let url = NSURL(string: urlString)
+        guard let url = URL(string: urlString)
             else { return nil }
         
         self.url = url
     }
     
-    @objc public func setToImageView(imageView: UIImageView) {
+    @objc public func setToImageView(_ imageView: UIImageView) {
         imageView.hnk_setImageFromURL(url, format: Format<UIImage>(name: "original"))
     }
 }

@@ -33,7 +33,7 @@ extension Group: CoreDataDecodable {
 
 extension Group: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> GroupManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> GroupManagedObject {
         
         let managedObject = try cached(context)
         

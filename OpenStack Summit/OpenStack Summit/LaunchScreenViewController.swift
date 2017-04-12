@@ -14,35 +14,35 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) weak var summitActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet fileprivate(set) weak var summitActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet private(set) weak var summitView: UIView!
+    @IBOutlet fileprivate(set) weak var summitView: UIView!
     
-    @IBOutlet private(set) weak var summitDateLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var summitDateLabel: UILabel!
     
-    @IBOutlet private(set) weak var summitNameLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var summitNameLabel: UILabel!
     
-    @IBOutlet private(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet fileprivate(set) weak var dataLoadedActivityIndicatorView: UIActivityIndicatorView!
     
-    @IBOutlet private(set) weak var loginButton: UIButton!
+    @IBOutlet fileprivate(set) weak var loginButton: UIButton!
     
-    @IBOutlet private(set) weak var guestButton: UIButton!
+    @IBOutlet fileprivate(set) weak var guestButton: UIButton!
     
-    @IBOutlet private(set) weak var summitsButton: UIButton!
+    @IBOutlet fileprivate(set) weak var summitsButton: UIButton!
     
     // MARK: - Properties
     
-    private(set) var willTransition = false  {
+    fileprivate(set) var willTransition = false  {
         
         didSet { configureView() }
     }
     
-    private var state: State = .loadingSummits {
+    fileprivate var state: State = .loadingSummits {
         
         didSet { configureView() }
     }
     
-    private var summit: SummitsResponse.Summit?
+    fileprivate var summit: SummitsResponse.Summit?
     
     // MARK: - Loading
     
@@ -54,16 +54,16 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if Store.shared.isLoggedIn {
             
             self.willTransition = true
             
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             
-            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
                 
                 self?.showRevealController()
             }
@@ -74,14 +74,14 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         
-        return .LightContent
+        return .lightContent
     }
     
     // MARK: - Actions
     
-    @IBAction func login(sender: UIButton) {
+    @IBAction func login(_ sender: UIButton) {
         
         showRevealController(sender) {
             
@@ -89,55 +89,55 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    @IBAction func continueAsGuest(sender: UIButton) {
+    @IBAction func continueAsGuest(_ sender: UIButton) {
         
         showRevealController(sender)
     }
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         switch state {
             
         case .loadingSummits:
             
-            self.summitView.hidden = true
-            self.summitActivityIndicatorView.hidden = false
+            self.summitView.isHidden = true
+            self.summitActivityIndicatorView.isHidden = false
             self.summitActivityIndicatorView.startAnimating()
             
-            self.guestButton.hidden = self.isDataLoaded == false || self.willTransition
-            self.loginButton.hidden = self.isDataLoaded == false || self.willTransition
+            self.guestButton.isHidden = self.isDataLoaded == false || self.willTransition
+            self.loginButton.isHidden = self.isDataLoaded == false || self.willTransition
             
-            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.isHidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
             
         case .loadingData:
             
             assert(self.summit != nil, "Invalid State")
             
-            self.summitView.hidden = false
-            self.summitActivityIndicatorView.hidden = true
+            self.summitView.isHidden = false
+            self.summitActivityIndicatorView.isHidden = true
             self.summitActivityIndicatorView.stopAnimating()
             
-            self.guestButton.hidden = true
-            self.loginButton.hidden = true
+            self.guestButton.isHidden = true
+            self.loginButton.isHidden = true
             
-            self.dataLoadedActivityIndicatorView.hidden = false
+            self.dataLoadedActivityIndicatorView.isHidden = false
             self.dataLoadedActivityIndicatorView.startAnimating()
             
         case .dataLoaded:
             
             assert(self.isDataLoaded, "Invalid State")
             
-            self.summitView.hidden = false
-            self.summitActivityIndicatorView.hidden = true
+            self.summitView.isHidden = false
+            self.summitActivityIndicatorView.isHidden = true
             self.summitActivityIndicatorView.stopAnimating()
             
-            self.guestButton.hidden = false
-            self.loginButton.hidden = false
+            self.guestButton.isHidden = false
+            self.loginButton.isHidden = false
             
-            self.dataLoadedActivityIndicatorView.hidden = true
+            self.dataLoadedActivityIndicatorView.isHidden = true
             self.dataLoadedActivityIndicatorView.stopAnimating()
         }
         
@@ -152,8 +152,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             }
             else {
                 
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
                 dateFormatter.dateFormat = "MMMM d-"
                 let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
                 
@@ -165,7 +165,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    func showRevealController(sender: AnyObject? = nil, completion: (() -> ())? = nil) {
+    func showRevealController(_ sender: AnyObject? = nil, completion: (() -> ())? = nil) {
         
         self.willTransition = true
         
@@ -203,14 +203,14 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         let revealViewController = AppDelegate.shared.revealViewController
         
-        self.showViewController(revealViewController, sender: sender)
+        self.show(revealViewController, sender: sender)
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) { self.willTransition = false; completion?() }
+        DispatchQueue.main.asyncAfter(deadline: delayTime) { self.willTransition = false; completion?() }
     }
     
-    private func loadSummits() {
+    fileprivate func loadSummits() {
         
         state = .loadingSummits
         
@@ -218,7 +218,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         Store.shared.summits { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.mainQueue().addOperationWithBlock {
                 
                 guard let controller = self else { return }
                 
@@ -262,7 +262,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    private func loadData() {
+    fileprivate func loadData() {
         
         guard isDataLoaded == false
             else { state = .dataLoaded; return }
@@ -275,7 +275,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         Store.shared.summit(summitID) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -300,17 +300,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
             
         case R.segue.launchScreenViewController.showSummits.identifier:
             
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             
             let summitsViewController = navigationController.topViewController as! SummitsViewController
             
-            summitsViewController.didFinish = { [weak self] in $0.dismissViewControllerAnimated(true) { self?.loadSummits() } }
+            summitsViewController.didFinish = { [weak self] in $0.dismiss(animated: true) { self?.loadSummits() } }
             
         default: fatalError()
         }

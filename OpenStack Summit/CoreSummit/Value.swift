@@ -13,8 +13,8 @@ public enum Value {
     
     case null
     case string(String)
-    case data(Data)
-    case date(Date)
+    case data(SwiftFoundation.Data)
+    case date(SwiftFoundation.Date)
     case bool(Bool)
     case int16(Int16)
     case int32(Int32)
@@ -68,7 +68,7 @@ extension Value: CustomStringConvertible {
             
             var text = "{"
             
-            for (index, value) in values.enumerate() {
+            for (index, value) in values.enumerated() {
                 
                 text += value.description
                 
@@ -96,11 +96,11 @@ extension String: PredicateValue {
     public var predicateValue: Value { return .string(self) }
 }
 
-extension Data: PredicateValue {
+extension SwiftFoundation.Data: PredicateValue {
     public var predicateValue: Value { return .data(self) }
 }
 
-extension Date: PredicateValue {
+extension SwiftFoundation.Date: PredicateValue {
     public var predicateValue: Value { return .date(self) }
 }
 

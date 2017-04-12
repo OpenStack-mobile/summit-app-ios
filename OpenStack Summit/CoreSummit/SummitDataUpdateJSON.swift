@@ -34,8 +34,8 @@ extension SummitDataUpdate: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
-        self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
+        self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone.name // should store entire timeZone struct and not just name, but Realm doesnt
         self.ticketTypes = Set(ticketTypes)
         self.webpageURL = webpageURL
@@ -58,7 +58,7 @@ extension SummitDataUpdate: JSONDecodable {
         
         if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
             
-            self.startShowingVenues = Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
+            self.startShowingVenues = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
             
         } else {
             

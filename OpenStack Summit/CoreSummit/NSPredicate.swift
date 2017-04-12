@@ -40,11 +40,11 @@ public extension Compound {
 
 public extension Compound.Logical​Type {
     
-    func toFoundation() -> NSCompoundPredicateType {
+    func toFoundation() -> NSCompoundPredicate.LogicalType {
         switch self {
-        case .and: return .AndPredicateType
-        case .or: return .OrPredicateType
-        case .not: return .NotPredicateType
+        case .and: return .and
+        case .or: return .or
+        case .not: return .not
         }
     }
 }
@@ -57,11 +57,11 @@ public extension Comparision {
         
         self.options.forEach { rawOptions = rawOptions | $0.toFoundation().rawValue }
         
-        let options = NSComparisonPredicateOptions(rawValue: rawOptions)
+        let options = NSComparisonPredicate.Options(rawValue: rawOptions)
         
         return NSComparisonPredicate(leftExpression: expression.left.toFoundation(),
                                      rightExpression: expression.right.toFoundation(),
-                                     modifier: modifier?.toFoundation() ?? .DirectPredicateModifier,
+                                     modifier: modifier?.toFoundation() ?? .direct,
                                      type: type.toFoundation(),
                                      options: options)
     }
@@ -69,49 +69,49 @@ public extension Comparision {
 
 public extension Comparision.Modifier {
     
-    func toFoundation() -> NSComparisonPredicateModifier {
+    func toFoundation() -> NSComparisonPredicate.Modifier {
         
         switch self {
-        case .all: return .AllPredicateModifier
-        case .any: return .AnyPredicateModifier
+        case .all: return .all
+        case .any: return .any
         }
     }
 }
 
 public extension Comparision.Operator {
     
-    func toFoundation() -> NSPredicateOperatorType {
+    func toFoundation() -> NSComparisonPredicate.Operator {
         
         switch self {
-        case .lessThan:             return .LessThanPredicateOperatorType
-        case .lessThanOrEqualTo:    return .LessThanOrEqualToPredicateOperatorType
-        case .greaterThan:          return .GreaterThanPredicateOperatorType
-        case .greaterThanOrEqualTo: return .GreaterThanOrEqualToPredicateOperatorType
-        case .equalTo:              return .EqualToPredicateOperatorType
-        case .notEqualTo:           return .NotEqualToPredicateOperatorType
-        case .matches:              return .MatchesPredicateOperatorType
-        case .like:                 return .LikePredicateOperatorType
-        case .beginsWith:           return .BeginsWithPredicateOperatorType
-        case .endsWith:             return .EndsWithPredicateOperatorType
-        case .`in`:                 return .InPredicateOperatorType
-        case .contains:             return .ContainsPredicateOperatorType
-        case .between:              return .BetweenPredicateOperatorType
+        case .lessThan:             return .lessThan
+        case .lessThanOrEqualTo:    return .lessThanOrEqualTo
+        case .greaterThan:          return .greaterThan
+        case .greaterThanOrEqualTo: return .greaterThanOrEqualTo
+        case .equalTo:              return .equalTo
+        case .notEqualTo:           return .notEqualTo
+        case .matches:              return .matches
+        case .like:                 return .like
+        case .beginsWith:           return .beginsWith
+        case .endsWith:             return .endsWith
+        case .`in`:                 return .in
+        case .contains:             return .contains
+        case .between:              return .between
         }
     }
 }
 
 public extension Comparision.Option {
     
-    func toFoundation() -> NSComparisonPredicateOptions {
+    func toFoundation() -> NSComparisonPredicate.Options {
         
         /// `NSLocale​Sensitive​Predicate​Option` is not availible in Swift for some reason.
         /// Lack of Swift annotation it seems.
         
         switch self {
-        case .caseInsensitive: return .CaseInsensitivePredicateOption
-        case .diacriticInsensitive: return .DiacriticInsensitivePredicateOption
-        case .normalized: return .NormalizedPredicateOption
-        case .localeSensitive: return NSComparisonPredicateOptions(rawValue: 0x08)
+        case .caseInsensitive: return .caseInsensitive
+        case .diacriticInsensitive: return .diacriticInsensitive
+        case .normalized: return .normalized
+        case .localeSensitive: return NSComparisonPredicate.Options(rawValue: 0x08)
         }
     }
 }
@@ -136,12 +136,12 @@ public extension Value {
         case let .string(value):    return value as NSString
         case let .data(value):      return value.toFoundation()
         case let .date(value):      return value.toFoundation()
-        case let .bool(value):      return NSNumber(bool: value)
-        case let .int16(value):     return NSNumber(short: value)
-        case let .int32(value):     return NSNumber(int: value)
-        case let .int64(value):     return NSNumber(longLong: value)
-        case let .float(value):     return NSNumber(float: value)
-        case let .double(value):    return NSNumber(double: value)
+        case let .bool(value):      return NSNumber(value: value as Bool)
+        case let .int16(value):     return NSNumber(value: value as Int16)
+        case let .int32(value):     return NSNumber(value: value as Int32)
+        case let .int64(value):     return NSNumber(value: value as Int64)
+        case let .float(value):     return NSNumber(value: value as Float)
+        case let .double(value):    return NSNumber(value: value as Double)
         case let .collection(value): return value.map({ $0.toFoundation() ?? NSNull() }) as NSArray
         }
     }

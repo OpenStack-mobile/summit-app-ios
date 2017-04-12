@@ -37,7 +37,7 @@ extension EventType: CoreDataDecodable {
 
 extension EventType: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> EventTypeManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> EventTypeManagedObject {
         
         let managedObject = try cached(context)
         

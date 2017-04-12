@@ -82,7 +82,7 @@ extension Compound: CustomStringConvertible {
         
         var text = ""
         
-        for (index, predicate) in subpredicates.enumerate() {
+        for (index, predicate) in subpredicates.enumerated() {
             
             let showType: Bool
             

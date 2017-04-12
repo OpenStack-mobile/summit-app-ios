@@ -43,8 +43,8 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -56,7 +56,7 @@ final class VenuesInterfaceController: WKInterfaceController {
         /// set user activity
         if let summit = Store.shared.cache {
             
-            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: NSURL(string: summit.webpageURL + "/travel"))
+            updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.venues.rawValue], webpageURL: URL(string: summit.webpageURL + "/travel"))
         }
     }
     
@@ -69,7 +69,7 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - Segue
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         let venue = venues[rowIndex]
         
@@ -78,7 +78,7 @@ final class VenuesInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         tableView.setNumberOfRows(venues.count, withRowType: VenueCellController.identifier)
         

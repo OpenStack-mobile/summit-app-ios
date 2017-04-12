@@ -14,9 +14,9 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - Properties
     
-    private var filters = [Section]()
+    fileprivate var filters = [Section]()
     
-    private var filterObserver: Int?
+    fileprivate var filterObserver: Int?
     
     // MARK: - Loading
     
@@ -36,7 +36,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 30))
         
         // https://github.com/mac-cain13/R.swift/issues/144
-        tableView.registerNib(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
+        tableView.register(R.nib.tableViewHeaderViewLight(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         // observe filter
         filterObserver = FilterManager.shared.filter.observe { [weak self] _ in self?.configureView() }
@@ -45,7 +45,7 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         FilterManager.shared.filter.value.update()
@@ -53,13 +53,13 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func filterChanged(sender: UISwitch) {
+    @IBAction func filterChanged(_ sender: UISwitch) {
         
-        let buttonOrigin = sender.convertPoint(.zero, toView: tableView)
-        let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
+        let buttonOrigin = sender.convert(.zero, to: tableView)
+        let indexPath = tableView.indexPathForRow(at: buttonOrigin)!
         let filter = self[indexPath].filter
         
-        if sender.on {
+        if sender.isOn {
             
             FilterManager.shared.filter.value.enable(filter: filter)
             
@@ -69,14 +69,14 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         }
     }
     
-    @IBAction func dismiss(sender: AnyObject? = nil) {
+    @IBAction func dismiss(_ sender: AnyObject? = nil) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         let scheduleFilter = FilterManager.shared.filter.value
         
@@ -146,34 +146,34 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         }
     }
     
-    private subscript (indexPath: NSIndexPath) -> Item {
+    fileprivate subscript (indexPath: IndexPath) -> Item {
         
         let section = self.filters[indexPath.section]
         
         return section.items[indexPath.row]
     }
     
-    private func configure(cell cell: GeneralScheduleFilterTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: GeneralScheduleFilterTableViewCell, at indexPath: IndexPath) {
         
         let item = self[indexPath]
         
         cell.nameLabel.text = item.name
-        cell.enabledSwitch.on = item.enabled
+        cell.enabledSwitch.isOn = item.enabled
         
         if let colorHex = item.color,
             let color = UIColor(hexString: colorHex) {
             
-            cell.circleContainerView.hidden = false
+            cell.circleContainerView.isHidden = false
             cell.circleView.backgroundColor = color
             
         } else {
             
-            cell.circleContainerView.hidden = true
-            cell.circleView.backgroundColor = .clearColor()
+            cell.circleContainerView.isHidden = true
+            cell.circleView.backgroundColor = .clear
         }
     }
     
-    private func configure(header headerView: TableViewHeaderView, for section: Int) {
+    fileprivate func configure(header headerView: TableViewHeaderView, for section: Int) {
         
         let filterCategory = self.filters[section].category
         
@@ -191,19 +191,19 @@ final class GeneralScheduleFilterViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return filters.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let section = self.filters[section]
         
         return section.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.generalScheduleFilterTableViewCell, forIndexPath: indexPath)!
         
@@ -212,9 +212,9 @@ final class GeneralScheduleFilterViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
         
         configure(header: headerView, for: section)
         
@@ -244,8 +244,8 @@ private extension GeneralScheduleFilterViewController {
 
 final class GeneralScheduleFilterTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var circleView: UIView!
-    @IBOutlet private(set) weak var circleContainerView: UIView!
-    @IBOutlet private(set) weak var nameLabel: UILabel!
-    @IBOutlet private(set) weak var enabledSwitch: UISwitch!
+    @IBOutlet fileprivate(set) weak var circleView: UIView!
+    @IBOutlet fileprivate(set) weak var circleContainerView: UIView!
+    @IBOutlet fileprivate(set) weak var nameLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var enabledSwitch: UISwitch!
 }

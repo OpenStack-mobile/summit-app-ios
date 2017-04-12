@@ -13,9 +13,9 @@ public final class AffiliationManagedObject: Entity {
     
     @NSManaged public var member: MemberManagedObject
     
-    @NSManaged public var start: NSDate?
+    @NSManaged public var start: Foundation.Date?
     
-    @NSManaged public var end: NSDate?
+    @NSManaged public var end: Foundation.Date?
     
     @NSManaged public var isCurrent: Bool
     
@@ -33,7 +33,7 @@ extension Affiliation: CoreDataDecodable {
         
         if let startDate = managedObject.start {
             
-            self.start = Date(foundation: startDate)
+            self.start = SwiftFoundation.Date(foundation: startDate)
             
         } else {
             
@@ -42,7 +42,7 @@ extension Affiliation: CoreDataDecodable {
         
         if let endDate = managedObject.end {
             
-            self.end = Date(foundation: endDate)
+            self.end = SwiftFoundation.Date(foundation: endDate)
             
         } else {
             
@@ -53,7 +53,7 @@ extension Affiliation: CoreDataDecodable {
 
 extension Affiliation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> AffiliationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> AffiliationManagedObject {
         
         let managedObject = try cached(context)
 

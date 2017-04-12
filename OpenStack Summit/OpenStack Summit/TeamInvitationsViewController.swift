@@ -23,13 +23,13 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     lazy var pageController = PageController<Invitation>(fetch: { Store.shared.invitations($0.0, perPage: $0.1, filter: .pending, completion: $0.2) })
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    fileprivate lazy var dateFormatter: DateFormatter = {
         
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .ShortStyle
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
         return formatter
     }()
     
@@ -53,19 +53,19 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         pageController.refresh()
     }
         
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
         self.completion?(self)
     }
     
     // MARK: - Private Methods
     
-    private func configure(cell cell: TeamInvitationTableViewCell, with invitation: Invitation) {
+    fileprivate func configure(cell: TeamInvitationTableViewCell, with invitation: Invitation) {
         
         cell.teamLabel.text = invitation.team.name
         
@@ -74,13 +74,13 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         cell.dateLabel.text = dateFormatter.stringFromDate(invitation.created.toFoundation())
     }
     
-    private func accept(invitation: Invitation) {
+    fileprivate func accept(_ invitation: Invitation) {
         
         showActivityIndicator()
         
         Store.shared.accept(invitation: invitation.identifier) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -117,13 +117,13 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         }
     }
     
-    private func decline(invitation: Invitation) {
+    fileprivate func decline(_ invitation: Invitation) {
         
         showActivityIndicator()
         
         Store.shared.decline(invitation: invitation.identifier) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -143,17 +143,17 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return pageController.items.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = pageController.items[indexPath.row]
         
@@ -173,7 +173,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.loadingTableViewCell, forIndexPath: indexPath)!
             
-            cell.activityIndicator.hidden = false
+            cell.activityIndicator.isHidden = false
             
             cell.activityIndicator.startAnimating()
             
@@ -183,7 +183,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let data = pageController.items[indexPath.row]
         

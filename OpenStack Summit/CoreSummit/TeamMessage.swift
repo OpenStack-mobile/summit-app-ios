@@ -16,7 +16,7 @@ public struct TeamMessage: Unique {
     
     public let body: String
     
-    public let created: Date
+    public let created: SwiftFoundation.Date
     
     public let from: Fault<Member>
 }

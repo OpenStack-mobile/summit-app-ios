@@ -16,9 +16,9 @@ public struct Team: Named {
     
     public var descriptionText: String?
     
-    public var created: Date
+    public var created: SwiftFoundation.Date
     
-    public var updated: Date
+    public var updated: SwiftFoundation.Date
     
     public var owner: Member
     

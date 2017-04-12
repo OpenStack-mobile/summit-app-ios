@@ -27,9 +27,9 @@ final class PredicateTests: XCTestCase {
     class Event: NSObject {
         var id: Int
         var name: String
-        var start: NSDate
+        var start: Foundation.Date
         var speakers: Set<Person>
-        init(id: Int, name: String, start: NSDate, speakers: Set<Person>) {
+        init(id: Int, name: String, start: Foundation.Date, speakers: Set<Person>) {
             self.id = id
             self.name = name
             self.start = start
@@ -91,9 +91,9 @@ final class PredicateTests: XCTestCase {
     
     func testPredicate4() {
         
-        let events = [Event(id: 100, name: "Awesome Event", start: NSDate(timeIntervalSince1970: 0.0), speakers: [Person(id: 1, name: "Alsey Coleman Miller")])]
+        let events = [Event(id: 100, name: "Awesome Event", start: Foundation.Date(timeIntervalSince1970: 0.0), speakers: [Person(id: 1, name: "Alsey Coleman Miller")])]
         
-        let now = Date()
+        let now = SwiftFoundation.Date()
         
         let identifiers: [Int64] = [100, 200, 300]
         

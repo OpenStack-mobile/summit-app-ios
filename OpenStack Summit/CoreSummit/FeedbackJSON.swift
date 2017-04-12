@@ -10,7 +10,7 @@ import SwiftFoundation
 
 extension Feedback: JSONDecodable {
     
-    private enum JSONKey: String {
+    fileprivate enum JSONKey: String {
         
         case id, event_id, rate, note, created_date, owner
     }
@@ -30,7 +30,7 @@ extension Feedback: JSONDecodable {
         self.identifier = identifier
         self.rate = rate
         self.review = review
-        self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
+        self.date = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event
         self.member = member
     }
@@ -38,7 +38,7 @@ extension Feedback: JSONDecodable {
 
 extension MemberResponse.Feedback: JSONDecodable {
     
-    private enum JSONKey: String {
+    fileprivate enum JSONKey: String {
         
         case id, event_id, rate, note, created_date, owner_id
     }
@@ -57,7 +57,7 @@ extension MemberResponse.Feedback: JSONDecodable {
         self.identifier = identifier
         self.rate = rate
         self.review = review
-        self.date = Date(timeIntervalSince1970: TimeInterval(createdDate))
+        self.date = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(createdDate))
         self.event = event
         self.member = member
     }

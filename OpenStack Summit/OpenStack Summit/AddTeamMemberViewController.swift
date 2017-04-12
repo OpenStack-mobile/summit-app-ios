@@ -16,37 +16,37 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - IB Outlets
     
-    @IBOutlet private weak var selectedMemberCell: SelectTeamMemberTableViewCell!
+    @IBOutlet fileprivate weak var selectedMemberCell: SelectTeamMemberTableViewCell!
     
-    @IBOutlet private weak var adminPermissionCell: UITableViewCell!
+    @IBOutlet fileprivate weak var adminPermissionCell: UITableViewCell!
     
-    @IBOutlet private weak var readPermissionCell: UITableViewCell!
+    @IBOutlet fileprivate weak var readPermissionCell: UITableViewCell!
     
-    @IBOutlet private weak var writePermissionCell: UITableViewCell!
+    @IBOutlet fileprivate weak var writePermissionCell: UITableViewCell!
     
-    @IBOutlet private weak var doneBarButtonItem: UIBarButtonItem!
+    @IBOutlet fileprivate weak var doneBarButtonItem: UIBarButtonItem!
     
     // MARK: - Properties
     
     var team: Identifier!
     
-    private(set) var permission: TeamPermission? {
+    fileprivate(set) var permission: TeamPermission? {
         
-        didSet { if isViewLoaded() { configureView() } }
+        didSet { if isViewLoaded { configureView() } }
     }
     
-    private(set) var member: Member? {
+    fileprivate(set) var member: Member? {
         
-        didSet { if isViewLoaded() { configureView() } }
+        didSet { if isViewLoaded { configureView() } }
     }
     
-    private lazy var permissionCells: [UITableViewCell] = [self.adminPermissionCell,
+    fileprivate lazy var permissionCells: [UITableViewCell] = [self.adminPermissionCell,
                                                            self.readPermissionCell,
                                                            self.writePermissionCell]
     
-    private var teamCache: Team!
+    fileprivate var teamCache: Team!
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
@@ -58,12 +58,12 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - Actions
     
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func done(sender: AnyObject? = nil) {
+    @IBAction func done(_ sender: AnyObject? = nil) {
         
         guard let permission = self.permission,
             let member = self.member
@@ -73,7 +73,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         
         Store.shared.add(member: member.identifier, to: team, permission: permission) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
                 guard let controller = self else { return }
                 
@@ -95,7 +95,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         guard let team = try! Team.find(self.team, context: Store.shared.managedObjectContext)
             else { fatalError("Team not present") }
@@ -106,7 +106,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         
         if let selectedMember = self.member {
             
-            self.selectedMemberCell.selectMemberLabel.hidden = true
+            self.selectedMemberCell.selectMemberLabel.isHidden = true
             self.selectedMemberCell.nameLabel.text = selectedMember.name
             self.selectedMemberCell.titleLabel.text = selectedMember.title ?? selectedMember.twitter ?? selectedMember.irc
             self.selectedMemberCell.pictureURL = selectedMember.pictureURL
@@ -122,7 +122,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         
         // configure permission cells
         
-        permissionCells.forEach { $0.accessoryType = .None }
+        permissionCells.forEach { $0.accessoryType = .none }
         
         if let selectedPermission = self.permission {
             
@@ -135,7 +135,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         self.doneBarButtonItem.enabled = self.member != nil && self.permission != nil
     }
     
-    private func cell(for permission: TeamPermission) -> UITableViewCell {
+    fileprivate func cell(for permission: TeamPermission) -> UITableViewCell {
         
         switch permission {
         case .admin: return adminPermissionCell
@@ -144,7 +144,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
         }
     }
     
-    private func permission(for cell: UITableViewCell) -> TeamPermission {
+    fileprivate func permission(for cell: UITableViewCell) -> TeamPermission {
         
         switch cell {
         case adminPermissionCell: return .admin
@@ -156,23 +156,23 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
     
     // MARK: - SearchMembersViewControllerDelegate
     
-    private func searchMembersViewController(searchMembersViewController: SearchMembersViewController, didSelect member: Member) {
+    fileprivate func searchMembersViewController(_ searchMembersViewController: SearchMembersViewController, didSelect member: Member) {
         
         guard teamCache.permission(for: member.identifier) == nil
             else { return }
         
         self.member = member
         
-        self.navigationController!.popViewControllerAnimated(true)
+        self.navigationController!.popViewController(animated: true)
     }
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let cell = tableView.cellForRowAtIndexPath(indexPath)
+        guard let cell = tableView.cellForRow(at: indexPath)
             else { return }
         
         let section = Section(rawValue: indexPath.section)!
@@ -187,7 +187,7 @@ final class AddTeamMemberViewController: UITableViewController, MessageEnabledVi
             
             searchMembersViewController.selectedMember = { [weak self] in self?.searchMembersViewController($0.0, didSelect: $0.1) }
             
-            self.showViewController(searchMembersViewController, sender: self)
+            self.show(searchMembersViewController, sender: self)
             
         case .permission:
             
@@ -211,10 +211,10 @@ private extension AddTeamMemberViewController {
 
 final class SelectTeamMemberTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var nameLabel : UILabel!
-    @IBOutlet private(set) weak var titleLabel : UILabel!
-    @IBOutlet private weak var pictureImageView: UIImageView!
-    @IBOutlet private(set) weak var selectMemberLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var nameLabel : UILabel!
+    @IBOutlet fileprivate(set) weak var titleLabel : UILabel!
+    @IBOutlet fileprivate weak var pictureImageView: UIImageView!
+    @IBOutlet fileprivate(set) weak var selectMemberLabel: UILabel!
     
     var pictureURL: String = "" {
         
@@ -222,11 +222,11 @@ final class SelectTeamMemberTableViewCell: UITableViewCell {
             
             let picUrlInternal: String
             
-            picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            picUrlInternal = pictureURL.replacingOccurrences(of: "https", with: "http", options: NSString.CompareOptions.literal, range: nil)
             
             if (!picUrlInternal.isEmpty) {
                 let placeholder = R.image.genericUserAvatar()!
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!, placeholder: placeholder)
+                pictureImageView.hnk_setImageFromURL(Foundation.URL(string: picUrlInternal)!, placeholder: placeholder)
             }
             else {
                 pictureImageView.image = R.image.genericUserAvatar()!

@@ -13,10 +13,10 @@ final class PeopleTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
     
-    @IBOutlet private weak var moderatorLabel: UILabel!
-    @IBOutlet private weak var nameLabel : UILabel!
-    @IBOutlet private weak var titleLabel : UILabel!
-    @IBOutlet private weak var pictureImageView: UIImageView!
+    @IBOutlet fileprivate weak var moderatorLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel : UILabel!
+    @IBOutlet fileprivate weak var titleLabel : UILabel!
+    @IBOutlet fileprivate weak var pictureImageView: UIImageView!
     
     // MARK: - Loading
     
@@ -28,7 +28,7 @@ final class PeopleTableViewCell: UITableViewCell {
     
     // MARK: - Selection
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -38,10 +38,10 @@ final class PeopleTableViewCell: UITableViewCell {
     
     var isModerator: Bool {
         get {
-            return !moderatorLabel.hidden
+            return !moderatorLabel.isHidden
         }
         set {
-            moderatorLabel.hidden = !newValue
+            moderatorLabel.isHidden = !newValue
         }
     }
     
@@ -60,7 +60,7 @@ final class PeopleTableViewCell: UITableViewCell {
         }
         set {
             titleLabel.text = newValue
-            titleLabel.hidden = (newValue ?? "").isEmpty
+            titleLabel.isHidden = (newValue ?? "").isEmpty
         }
     }
     
@@ -70,11 +70,11 @@ final class PeopleTableViewCell: UITableViewCell {
             
             let picUrlInternal: String
             
-            picUrlInternal = pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            picUrlInternal = pictureURL.replacingOccurrences(of: "https", with: "http", options: NSString.CompareOptions.literal, range: nil)
             
             if (!picUrlInternal.isEmpty) {
                 let placeholder = R.image.genericUserAvatar()!
-                pictureImageView.hnk_setImageFromURL(NSURL(string: picUrlInternal)!, placeholder: placeholder)
+                pictureImageView.hnk_setImageFromURL(URL(string: picUrlInternal)!, placeholder: placeholder)
             }
             else {
                 pictureImageView.image = R.image.genericUserAvatar()!

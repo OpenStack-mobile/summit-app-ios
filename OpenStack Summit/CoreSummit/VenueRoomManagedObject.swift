@@ -24,7 +24,7 @@ extension VenueRoom: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.name = managedObject.name
-        self.capacity = managedObject.capacity?.integerValue
+        self.capacity = managedObject.capacity?.intValue
         self.descriptionText = managedObject.descriptionText
         self.venue = managedObject.venue.identifier
         self.floor = managedObject.floor?.identifier
@@ -33,13 +33,13 @@ extension VenueRoom: CoreDataDecodable {
 
 extension VenueRoom: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> VenueRoomManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> VenueRoomManagedObject {
         
         let managedObject = try cached(context)
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.capacity = capacity != nil ? NSNumber(int: Int32(capacity!)) : nil
+        managedObject.capacity = capacity != nil ? NSNumber(value: Int32(capacity!) as Int32) : nil
         managedObject.venue = try context.relationshipFault(venue)
         managedObject.floor = try context.relationshipFault(floor)
         

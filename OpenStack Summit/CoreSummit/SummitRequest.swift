@@ -37,7 +37,7 @@ public extension Store {
         completion(.Value(summit))
     }
     #else
-    func summit(identifier: Identifier? = nil, completion: ErrorValue<Summit> -> ()) {
+    func summit(_ identifier: Identifier? = nil, completion: (ErrorValue<Summit>) -> ()) {
         
         let summitID: String
         
@@ -52,7 +52,7 @@ public extension Store {
         
         let URI = "/api/v1/summits/\(summitID)?expand=schedule"
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let url = environment.configuration.serverURL + URI
         
@@ -62,24 +62,24 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let summit = Summit(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
                 let managedObject = try summit.save(context)
                 
-                managedObject.initialDataLoad = NSDate()
+                managedObject.initialDataLoad = Foundation.Date()
                 
                 try context.validateAndSave()
             }
             
             // success
-            completion(.Value(summit))
+            completion(.value(summit))
         }
     }
     #endif

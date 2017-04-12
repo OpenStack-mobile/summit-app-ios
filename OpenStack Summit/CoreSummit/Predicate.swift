@@ -50,7 +50,7 @@ public protocol PredicateEvaluatable {
     func evaluate(with predicate: Predicate) throws -> Bool
 }
 
-extension SequenceType where Generator.Element: PredicateEvaluatable {
+extension Sequence where Iterator.Element: PredicateEvaluatable {
     
     func evaluate(with predicate: Predicate) throws -> Bool {
         

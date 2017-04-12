@@ -43,7 +43,7 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     // MARK: - Private Methods
     
-    private func updateButtonBarViewLayout() {
+    fileprivate func updateButtonBarViewLayout() {
         
         if collectionViewFlowLayout == nil {
             
@@ -62,7 +62,7 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDataSource
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         var childViewControllers: [UIViewController] = [personDetailViewController]
         

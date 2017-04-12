@@ -18,38 +18,38 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
     
-    @IBOutlet private(set) weak var ratingView: CosmosView!
+    @IBOutlet fileprivate(set) weak var ratingView: CosmosView!
     
-    @IBOutlet private(set) weak var reviewTextView: UITextView!
+    @IBOutlet fileprivate(set) weak var reviewTextView: UITextView!
     
-    @IBOutlet private(set) weak var sendButton: Button!
+    @IBOutlet fileprivate(set) weak var sendButton: Button!
     
-    @IBOutlet private(set) weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate(set) weak var bottomViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     
-    var completion: (FeedbackViewController -> ())?
+    var completion: ((FeedbackViewController) -> ())?
     
     var event: Identifier = 0 {
         
-         didSet { if isViewLoaded() { configureView() } }
+         didSet { if isViewLoaded { configureView() } }
     }
     
-    private var mode: Mode = .new
+    fileprivate var mode: Mode = .new
     
-    private let placeHolderText = "Write a Review..."
+    fileprivate let placeHolderText = "Write a Review..."
     
-    private let minimumBottomSpace: CGFloat = 100
+    fileprivate let minimumBottomSpace: CGFloat = 100
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Loading
     
     deinit {
         
-        if isViewLoaded() {
+        if isViewLoaded {
             
             unregisterKeyboardNotifications()
         }
@@ -65,19 +65,19 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         registerKeyboardNotifications()
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         
-        return [.Portrait]
+        return [.portrait]
     }
     
     // MARK: - Actions
     
-    @IBAction func close(sender: AnyObject? = nil) {
+    @IBAction func close(_ sender: AnyObject? = nil) {
         
         completion?(self)
     }
     
-    @IBAction func send(sender: AnyObject? = nil) {
+    @IBAction func send(_ sender: AnyObject? = nil) {
         
         guard Reachability.connected
             else { showErrorMessage(Error.reachability); return }
@@ -123,7 +123,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
             
             Store.shared.addFeedback(summit, event: event, rate: rate, review: review) { [weak self] (response) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.mainQueue().addOperationWithBlock {
                     
                     guard let controller = self else { return }
                     
@@ -146,7 +146,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
             
             Store.shared.editFeedback(summit, event: event, rate: rate, review: review)  { [weak self] (error) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.mainQueue().addOperationWithBlock {
                     
                     guard let controller = self else { return }
                     
@@ -169,7 +169,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         if let feedbackManagedObject = Store.shared.authenticatedMember?.feedback(for: self.event) {
             
@@ -194,7 +194,7 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         }
     }
     
-    private func configureView(with event: Event, feedback: Feedback? = nil) {
+    fileprivate func configureView(with event: Event, feedback: Feedback? = nil) {
         
         self.titleLabel.text = event.name
         
@@ -205,9 +205,9 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - UITextViewDelegate
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
-        reviewTextView.textColor = UIColor.blackColor()
+        reviewTextView.textColor = UIColor.black
         
         if reviewTextView.text == placeHolderText  {
             reviewTextView.text = ""
@@ -216,17 +216,17 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
         return true
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
         if reviewTextView.text == "" {
             reviewTextView.text = placeHolderText
-            reviewTextView.textColor = UIColor.lightGrayColor()
+            reviewTextView.textColor = UIColor.lightGray
         }
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text.characters.count == 1 {
-            if let _ = text.rangeOfCharacterFromSet(.newlineCharacterSet(), options: .BackwardsSearch) {
+            if let _ = text.rangeOfCharacter(from: .newlines, options: .backwards) {
                 textView.resignFirstResponder()
                 return false
             }
@@ -236,36 +236,36 @@ final class FeedbackViewController: UIViewController, MessageEnabledViewControll
     
     // MARK: - Notifications
     
-    @objc private func registerKeyboardNotifications() {
+    @objc fileprivate func registerKeyboardNotifications() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(keyboardDidShow),
-                                                         name: UIKeyboardDidShowNotification,
+                                                         name: NSNotification.Name.UIKeyboardDidShow,
                                                          object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(keyboardWillHide),
-                                                         name: UIKeyboardWillHideNotification,
+                                                         name: NSNotification.Name.UIKeyboardWillHide,
                                                          object: nil)
     }
     
-    @objc private func unregisterKeyboardNotifications() {
+    @objc fileprivate func unregisterKeyboardNotifications() {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func keyboardDidShow(notification: NSNotification) {
+    @objc fileprivate func keyboardDidShow(_ notification: Notification) {
         
         let userInfo: NSDictionary = notification.userInfo!
-        var keyboardRect = userInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue
-        keyboardRect = view.convertRect(keyboardRect, fromView: nil)
+        var keyboardRect = userInfo.object(forKey: UIKeyboardFrameBeginUserInfoKey)!.cgRectValue
+        keyboardRect = view.convert(keyboardRect, from: nil)
         
         let visibleHeight = self.view.frame.size.height - keyboardRect.size.height
         bottomViewHeightConstraint.constant = visibleHeight
         view.updateConstraints()
     }
     
-    @objc private func keyboardWillHide(notification: NSNotification) {
+    @objc fileprivate func keyboardWillHide(_ notification: Notification) {
         
         bottomViewHeightConstraint.constant = minimumBottomSpace
         view.updateConstraints()

@@ -8,12 +8,12 @@
 
 import Foundation
 
-public extension NSURL {
+public extension URL {
     
     /// Initializes an URL for the thumbnail of a YouTube video based on its ID.
     convenience init?(youtubeThumbnail identifier: String) {
         
-        self.init(string: "https://img.youtube.com/vi/" + identifier + "/maxresdefault.jpg")
+        (self as NSURL).init(string: "https://img.youtube.com/vi/" + identifier + "/maxresdefault.jpg")
     }
 }
 

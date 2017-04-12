@@ -42,7 +42,7 @@ extension Video: CoreDataDecodable {
 
 extension Video: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> VideoManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> VideoManagedObject {
         
         let managedObject = try cached(context)
         

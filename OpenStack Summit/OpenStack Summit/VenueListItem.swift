@@ -79,7 +79,7 @@ public func == (lhs: VenueListItem, rhs: VenueListItem) -> Bool {
 
 private extension VenueListItem {
     
-    static func getAddress(venue: VenueManagedObject) -> String {
+    static func getAddress(_ venue: VenueManagedObject) -> String {
         
         var fullAddress = venue.address ?? ""
         

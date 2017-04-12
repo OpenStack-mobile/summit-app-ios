@@ -12,5 +12,5 @@ final class TableViewHeaderView: UITableViewHeaderFooterView {
     
     static let reuseIdentifier = "TableViewHeaderView"
     
-    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
 }

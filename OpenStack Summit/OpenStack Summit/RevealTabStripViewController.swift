@@ -17,7 +17,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         
-        settings.style.buttonBarItemFont = UIFont.systemFontOfSize(17)
+        settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 17)
         settings.style.buttonBarItemBackgroundColor = UIColor(hexString: "#14273D")
         settings.style.buttonBarItemsShouldFillAvailiableWidth = false
         settings.style.buttonBarBackgroundColor = UIColor(hexString: "#14273D")
@@ -29,7 +29,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             
             oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
-            newCell?.label.textColor = .whiteColor()
+            newCell?.label.textColor = .white
         }
         
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         
         setBlankBackBarButtonItem()
         
-        edgesForExtendedLayout = UIRectEdge.Top
+        edgesForExtendedLayout = UIRectEdge.top
         
         view.backgroundColor = UIColor(hexString: "#E5E5E5")
         
@@ -56,7 +56,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - Private Methods
     
-    private func reloadBarButtonItems() {
+    fileprivate func reloadBarButtonItems() {
         
         guard forwardChildBarButtonItems else { return }
         
@@ -69,7 +69,7 @@ class RevealTabStripViewController: ButtonBarPagerTabStripViewController {
         self.toolbarItems = topChild.toolbarItems
     }
     
-    override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
+    override func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
         
         super.pagerTabStripViewController(pagerTabStripViewController, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: progressPercentage, indexWasChanged: indexWasChanged)
         

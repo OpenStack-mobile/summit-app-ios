@@ -13,7 +13,7 @@ import CoreSummit
 extension UIViewController {
     
     /// Shows the approriate Venue detail VC for the specified venue.
-    func showLocationDetail(location: Identifier) {
+    func showLocationDetail(_ location: Identifier) {
         
         let venue: Identifier
         
@@ -34,6 +34,6 @@ extension UIViewController {
         
         venueDetailVC.venue = venue
         
-        self.showViewController(venueDetailVC, sender: self)
+        self.show(venueDetailVC, sender: self)
     }
 }

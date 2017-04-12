@@ -14,33 +14,33 @@
 
 protocol MessageEnabledViewController: class {
 
-    func showInfoMessage(title: String, message: String)
+    func showInfoMessage(_ title: String, message: String)
     
-    func showErrorMessage(error: ErrorType, fileName: String, lineNumber: Int)
+    func showErrorMessage(_ error: ErrorProtocol, fileName: String, lineNumber: Int)
 }
 
 #if os(iOS) || os(tvOS)
 
 extension MessageEnabledViewController {
     
-    func showInfoMessage(title: String, message: String) {
+    func showInfoMessage(_ title: String, message: String) {
         
         guard let viewController = self as? UIViewController
             else { fatalError("Not a view controller") }
         
         let alert = UIAlertController(title: title,
                                       message: message,
-                                      preferredStyle: .Alert)
+                                      preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: { (UIAlertAction) -> () in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: { (UIAlertAction) -> () in
             
-            alert.dismissViewControllerAnimated(true, completion: nil)
+            alert.dismiss(animated: true, completion: nil)
         }))
         
-        viewController.presentViewController(alert, animated: true, completion: nil)
+        viewController.present(alert, animated: true, completion: nil)
     }
     
-    func showErrorMessage(error: ErrorType,
+    func showErrorMessage(_ error: ErrorProtocol,
                           fileName: String = #file,
                           lineNumber: Int = #line) {
         

@@ -86,7 +86,7 @@ extension Member: CoreDataDecodable {
 
 extension Member: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> MemberManagedObject {
         
         let managedObject = try cached(context)
         
@@ -121,7 +121,7 @@ extension Member: CoreDataEncodable {
 
 extension MemberResponse.Member: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> MemberManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> MemberManagedObject {
         
         let managedObject = try cached(context)
         
@@ -153,13 +153,13 @@ extension MemberResponse.Member: CoreDataEncodable {
 public extension MemberManagedObject {
     
     @inline(__always)
-    func isScheduled(event event: Identifier) -> Bool {
+    func isScheduled(event: Identifier) -> Bool {
         
-        return attendeeRole?.schedule.contains({ $0.identifier == event }) ?? false
+        return attendeeRole?.schedule.contains(where: { $0.identifier == event }) ?? false
     }
     
     @inline(__always)
-    func isFavorite(event event: Identifier) -> Bool {
+    func isFavorite(event: Identifier) -> Bool {
         
         return favoriteEvents.contains { $0.identifier == event }
     }
@@ -172,7 +172,7 @@ public extension MemberManagedObject {
     
     var givenFeedback: [FeedbackManagedObject] {
         
-        return feedback.sort { Date(foundation: $0.0.date) < Date(foundation: $0.1.date) } ?? []
+        return feedback.sorted { SwiftFoundation.Date(foundation: $0.0.date) < SwiftFoundation.Date(foundation: $0.1.date) } ?? []
     }
 }
 
@@ -187,7 +187,7 @@ public extension Store {
     }
     
     /// The member that is logged in.
-    internal func authenticatedMember(context: NSManagedObjectContext) throws -> MemberManagedObject? {
+    internal func authenticatedMember(_ context: NSManagedObjectContext) throws -> MemberManagedObject? {
         
         guard let memberID = session.member,
             let member = try MemberManagedObject.find(memberID, context: context)
@@ -209,6 +209,6 @@ public extension Store {
     @inline(__always)
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
         
-        return self.authenticatedMember?.attendeeRole?.schedule.contains({ $0.identifier == eventID }) ?? false
+        return self.authenticatedMember?.attendeeRole?.schedule.contains(where: { $0.identifier == eventID }) ?? false
     }
 }

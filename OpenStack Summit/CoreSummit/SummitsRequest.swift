@@ -12,11 +12,11 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func summits(page: Int = 1, objectsPerPage: Int = 30, completion: ErrorValue<Page<SummitsResponse.Summit>> -> ()) {
+    func summits(_ page: Int = 1, objectsPerPage: Int = 30, completion: (ErrorValue<Page<SummitsResponse.Summit>>) -> ()) {
         
         let URI = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let url = environment.configuration.serverURL + URI
         
@@ -24,14 +24,14 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let response = SummitsResponse(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             // success
-            completion(.Value(response.page))
+            completion(.value(response.page))
         }
     }
 }
@@ -65,9 +65,9 @@ public extension SummitsResponse {
         
         public let datesLabel: String?
         
-        public let start: Date
+        public let start: SwiftFoundation.Date
         
-        public let end: Date
+        public let end: SwiftFoundation.Date
         
         public let active: Bool
         
@@ -85,8 +85,8 @@ public extension SummitsResponse {
             
             self.identifier = identifier
             self.name = name
-            self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
-            self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+            self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
+            self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
             self.timeZone = timeZone
             self.active = active
             

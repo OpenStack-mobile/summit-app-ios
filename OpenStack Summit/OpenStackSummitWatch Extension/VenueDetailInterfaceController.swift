@@ -48,7 +48,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var location: Location!
+    fileprivate(set) var location: Location!
     
     lazy var venue: Venue = {
         
@@ -67,8 +67,8 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let location = (context as? Context<Location>)?.value
             else { fatalError("Invalid context") }
@@ -93,7 +93,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: type.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: location.identifier]
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: nil)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: nil)
     }
     
     override func didDeactivate() {
@@ -105,19 +105,19 @@ final class VenueDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func showVenueImages(sender: AnyObject? = nil) {
+    @IBAction func showVenueImages(_ sender: AnyObject? = nil) {
         
         showImages(venue.images.sort())
     }
     
-    @IBAction func showMapImages(sender: AnyObject? = nil) {
+    @IBAction func showMapImages(_ sender: AnyObject? = nil) {
         
         showImages(venue.maps.sort())
     }
         
     // MARK: - Private Methods
     
-    private func showImages(images: [Image]) {
+    fileprivate func showImages(_ images: [Image]) {
         
         let names = [String](count: images.count, repeatedValue: ImageInterfaceController.identifier)
         
@@ -126,7 +126,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         presentControllerWithNames(names, contexts: contexts)
     }
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         switch location! {
             
@@ -140,7 +140,7 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         }
     }
     
-    private func configureView(for venue: Venue, room: VenueRoom? = nil) {
+    fileprivate func configureView(for venue: Venue, room: VenueRoom? = nil) {
         
         let name: String = room == nil ? venue.name : venue.name + " - " + room!.name
         
@@ -153,8 +153,8 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         descriptionSeparator.setHidden(venue.descriptionText == nil)
         
         if let descriptionText = venue.descriptionText,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.dataUsingEncoding(String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             descriptionLabel.setText(attributedString.string)
             descriptionLabel.setHidden(false)
@@ -185,11 +185,11 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         // set images
         if let image = venue.images.first,
-            let imageURL = NSURL(string: image.url) {
+            let imageURL = URL(string: image.url) {
             
             // show activity indicator
             imagesActivityIndicator.setImageNamed("Activity")
-            imagesActivityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+            imagesActivityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
             imagesActivityIndicator.setHidden(false)
             imagesView.setHidden(true)
             
@@ -218,11 +218,11 @@ final class VenueDetailInterfaceController: WKInterfaceController {
         
         // set map images
         if let image = venue.maps.first,
-            let imageURL = NSURL(string: image.url) {
+            let imageURL = URL(string: image.url) {
             
             // show activity indicator
             mapImagesActivityIndicator.setImageNamed("Activity")
-            mapImagesActivityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+            mapImagesActivityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
             mapImagesActivityIndicator.setHidden(false)
             mapImagesView.setHidden(true)
             

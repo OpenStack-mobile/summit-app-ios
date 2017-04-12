@@ -60,7 +60,7 @@ struct ScheduleFilter: Equatable {
     // MARK: - Properties
     
     /// Filters that have been enabled
-    private(set) var activeFilters = Set<Filter>() {
+    fileprivate(set) var activeFilters = Set<Filter>() {
         
         didSet {
             if oldValue.contains(.activeTalks) != activeFilters.contains(.activeTalks) {
@@ -71,10 +71,10 @@ struct ScheduleFilter: Equatable {
     }
     
     /// All possible filters
-    private(set) var allFilters = [FilterCategory: [Filter]]()
+    fileprivate(set) var allFilters = [FilterCategory: [Filter]]()
     
     /// Whether a selection has been made in the `Active Talks` filters.
-    private(set) var didChangeActiveTalks = false
+    fileprivate(set) var didChangeActiveTalks = false
     
     // MARK: - Methods
     
@@ -101,10 +101,10 @@ struct ScheduleFilter: Equatable {
         
         // populate filter categories
         
-        let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        let summitTimeZoneOffset = TimeZone(name: summit.timeZone)!.secondsFromGMT
         let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
         let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-        let now = NSDate()
+        let now = Foundation.Date()
         
         if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
@@ -141,10 +141,10 @@ struct ScheduleFilter: Equatable {
         guard let summit = try! SummitManagedObject.find(summitID, context: context)
             else { return }
         
-        let summitTimeZoneOffset = NSTimeZone(name: summit.timeZone)!.secondsFromGMT
+        let summitTimeZoneOffset = TimeZone(name: summit.timeZone)!.secondsFromGMT
         let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
         let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-        let now = NSDate()
+        let now = Foundation.Date()
         
         if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
@@ -180,7 +180,7 @@ struct ScheduleFilter: Equatable {
         return true
     }
     
-    mutating func disable(filter filter: Filter) -> Bool {
+    mutating func disable(filter: Filter) -> Bool {
         
         let validFilter = allFilters.values.contains { $0.contains(filter) }
         
@@ -202,8 +202,8 @@ struct ScheduleFilter: Equatable {
 
 func == (lhs: ScheduleFilter, rhs: ScheduleFilter) -> Bool {
     
-    let lhsFilters = lhs.allFilters.values.reduce([Filter](), combine: { $0.0 + $0.1 })
-    let rhsFilters = rhs.allFilters.values.reduce([Filter](), combine: { $0.0 + $0.1 })
+    let lhsFilters = lhs.allFilters.values.reduce([Filter](), { $0.0 + $0.1 })
+    let rhsFilters = rhs.allFilters.values.reduce([Filter](), { $0.0 + $0.1 })
     
     return lhs.activeFilters == rhs.activeFilters
         && lhsFilters == rhsFilters
@@ -218,40 +218,40 @@ final class FilterManager {
     
     var filter = Observable(ScheduleFilter())
     
-    private var timer: NSTimer!
+    fileprivate var timer: Timer!
     
     deinit {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    private init() {
+    fileprivate init() {
         
         // update sections from Core Data
         filter.value.update()
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(managedObjectContextObjectsDidChange),
-            name: NSManagedObjectContextObjectsDidChangeNotification,
+            name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
             object: Store.shared.managedObjectContext)
         
         SummitManager.shared.summit.observe(currentSummitChanged)
     }
     
-    @objc private func timerUpdate(sender: NSTimer) {
+    @objc fileprivate func timerUpdate(_ sender: Timer) {
         
         filter.value.updateActiveTalks()
     }
     
-    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
+    @objc fileprivate func managedObjectContextObjectsDidChange(_ notification: Notification) {
         
         self.filter.value.update()
     }
     
-    private func currentSummitChanged(summit: Identifier, oldValue: Identifier) {
+    fileprivate func currentSummitChanged(_ summit: Identifier, oldValue: Identifier) {
         
         self.filter.value.update()
     }

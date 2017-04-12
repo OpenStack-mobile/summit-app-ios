@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func addEventToSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+    func addEventToSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (ErrorProtocol?) -> ()) {
         
         let summitID: String
         
@@ -29,7 +29,7 @@ public extension Store {
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
         let context = privateQueueManagedObjectContext
         
@@ -55,7 +55,7 @@ public extension Store {
         })
     }
     
-    func removeEventFromSchedule(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+    func removeEventFromSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (ErrorProtocol?) -> ()) {
         
         let summitID: String
         
@@ -72,7 +72,7 @@ public extension Store {
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
         let context = privateQueueManagedObjectContext
         
@@ -98,7 +98,7 @@ public extension Store {
         })
     }
     
-    func removeRSVP(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+    func removeRSVP(_ summit: Identifier? = nil, event: Identifier, completion: (ErrorProtocol?) -> ()) {
         
         let summitID: String
         
@@ -115,7 +115,7 @@ public extension Store {
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        let http = self.createHTTP(.openIDGetFormUrlEncoded)
         
         let context = privateQueueManagedObjectContext
         

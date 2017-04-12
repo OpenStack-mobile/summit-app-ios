@@ -31,7 +31,7 @@ final class TrackScheduleViewController: ScheduleViewController {
         self.scheduleView.tableView.contentInset = UIEdgeInsetsMake(0, 0, 88, 0);
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         trackLabel.text = track.name
@@ -39,7 +39,7 @@ final class TrackScheduleViewController: ScheduleViewController {
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: NSDate, to endDate: NSDate) -> [NSDate] {
+    override func scheduleAvailableDates(from startDate: Foundation.Date, to endDate: Foundation.Date) -> [Foundation.Date] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
@@ -59,11 +59,11 @@ final class TrackScheduleViewController: ScheduleViewController {
             }
         }
         
-        let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
+        let date = DateFilter.interval(start: SwiftFoundation.Date(foundation: startDate), end: SwiftFoundation.Date(foundation: endDate))
         
         let events = try! EventManagedObject.filter(date, tracks: tracks, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
-        var activeDates: [NSDate] = []
+        var activeDates: [Foundation.Date] = []
         for event in events {
             let timeZone = NSTimeZone(name: event.summit.timeZone)!
             let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
@@ -75,7 +75,7 @@ final class TrackScheduleViewController: ScheduleViewController {
         return activeDates
     }
     
-    override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
+    override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value

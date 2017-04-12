@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func members(filter: MemberListRequest.Filter? = nil,
+    func members(_ filter: MemberListRequest.Filter? = nil,
                  sort: MemberListRequest.SortDescriptor? = nil,
                  page: Int = 1,
                  perPage: Int = 10,
@@ -22,7 +22,7 @@ public extension Store {
         
         let url = request.toURL(environment.configuration.serverURL)
         
-        let http = self.createHTTP(.ServiceAccount)
+        let http = self.createHTTP(.serviceAccount)
         
         let context = privateQueueManagedObjectContext
         
@@ -30,11 +30,11 @@ public extension Store {
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let page = Page<Member>(JSONValue: json)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
@@ -45,7 +45,7 @@ public extension Store {
             }
             
             // success
-            completion(.Value(page))
+            completion(.value(page))
         }
     }
 }
@@ -62,31 +62,31 @@ public struct MemberListRequest {
     
     public var sort: SortDescriptor?
     
-    public func toURL(serverURL: String) -> String {
+    public func toURL(_ serverURL: String) -> String {
         
-        let urlComponents = NSURLComponents(string: serverURL + "/api/v1/members")!
+        let urlComponents = URLComponents(string: serverURL + "/api/v1/members")!
         
-        var queryItems = [NSURLQueryItem]()
+        var queryItems = [URLQueryItem]()
         
-        queryItems.append(NSURLQueryItem(name: "page", value: "\(page)"))
-        queryItems.append(NSURLQueryItem(name: "per_page", value: "\(perPage)"))
-        queryItems.append(NSURLQueryItem(name: "expand", value: "groups"))
+        queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
+        queryItems.append(URLQueryItem(name: "per_page", value: "\(perPage)"))
+        queryItems.append(URLQueryItem(name: "expand", value: "groups"))
         
         if let filter = filter {
             
             let queryValueString = filter.property.rawValue + filter.filterOperator.rawValue + filter.value
             
-            queryItems.append(NSURLQueryItem(name: "filter", value: queryValueString))
+            queryItems.append(URLQueryItem(name: "filter", value: queryValueString))
         }
         
         if let sort = sort {
             
-            queryItems.append(NSURLQueryItem(name: "sort", value: sort.rawValue))
+            queryItems.append(URLQueryItem(name: "sort", value: sort.rawValue))
         }
         
         urlComponents.queryItems = queryItems
         
-        return urlComponents.URL!.absoluteString!
+        return urlComponents.url!.absoluteString!
     }
 }
 

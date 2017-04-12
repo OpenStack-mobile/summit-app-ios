@@ -31,16 +31,16 @@ extension DataUpdate: JSONDecodable {
         
         self.identifier = identifier
         self.operation = operation
-        self.date = Date(timeIntervalSince1970: TimeInterval(created))
+        self.date = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
         self.className = className
         
         if let entityJSON = JSONObject[JSONKey.entity.rawValue]?.objectValue {
             
-            self.entity = .JSON(entityJSON)
+            self.entity = .json(entityJSON)
             
         } else if let entityID = JSONObject[JSONKey.entity_id.rawValue]?.rawValue as? Int {
             
-            self.entity = .Identifier(entityID)
+            self.entity = .identifier(entityID)
             
         } else {
             

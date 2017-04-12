@@ -31,7 +31,7 @@ extension Company: CoreDataDecodable {
 
 extension Company: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> CompanyManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> CompanyManagedObject {
         
         let managedObject = try cached(context)
         

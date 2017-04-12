@@ -37,7 +37,7 @@ extension WirelessNetwork: CoreDataDecodable {
 
 extension WirelessNetwork: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> WirelessNetworkManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> WirelessNetworkManagedObject {
         
         let managedObject = try cached(context)
         

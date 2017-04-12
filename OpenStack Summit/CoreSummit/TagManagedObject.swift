@@ -27,7 +27,7 @@ extension Tag: CoreDataDecodable {
 
 extension Tag: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TagManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TagManagedObject {
         
         let managedObject = try cached(context)
         
@@ -51,7 +51,7 @@ public extension TagManagedObject {
 
 public extension Tag {
     
-    static func search(searchTerm: String, context: NSManagedObjectContext) throws -> [Tag] {
+    static func search(_ searchTerm: String, context: NSManagedObjectContext) throws -> [Tag] {
         
         let predicate = NSPredicate(format: "name CONTAINS[c] %@", searchTerm)
         

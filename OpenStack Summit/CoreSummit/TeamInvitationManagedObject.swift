@@ -12,9 +12,9 @@ import SwiftFoundation
 
 public final class TeamInvitationManagedObject: Entity {
     
-    @NSManaged public var created: NSDate
+    @NSManaged public var created: Foundation.Date
     
-    @NSManaged public var updatedDate: NSDate
+    @NSManaged public var updatedDate: Foundation.Date
     
     @NSManaged public var permission: String
     
@@ -34,8 +34,8 @@ extension TeamInvitation: CoreDataDecodable {
     public init(managedObject: TeamInvitationManagedObject) {
         
         self.identifier = managedObject.identifier
-        self.created = Date(foundation: managedObject.created)
-        self.updated = Date(foundation: managedObject.updatedDate)
+        self.created = SwiftFoundation.Date(foundation: managedObject.created)
+        self.updated = SwiftFoundation.Date(foundation: managedObject.updatedDate)
         self.accepted = managedObject.accepted
         self.permission = TeamPermission(rawValue: managedObject.permission)!
         self.invitee = Member(managedObject: managedObject.invitee)
@@ -46,7 +46,7 @@ extension TeamInvitation: CoreDataDecodable {
 
 extension TeamInvitation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
         
         let managedObject = try cached(context)
         
@@ -66,7 +66,7 @@ extension TeamInvitation: CoreDataEncodable {
 
 extension ListTeamInvitations.Response.Invitation: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TeamInvitationManagedObject {
         
         let managedObject = try cached(context)
         

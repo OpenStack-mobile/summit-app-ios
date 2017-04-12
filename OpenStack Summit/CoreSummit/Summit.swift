@@ -18,12 +18,12 @@ public struct Summit: Named, Equatable {
     
     public var datesLabel: String?
     
-    public var start: Date
+    public var start: SwiftFoundation.Date
     
-    public var end: Date
+    public var end: SwiftFoundation.Date
     
     /// Default start date for the Summit.
-    public var defaultStart: Date?
+    public var defaultStart: SwiftFoundation.Date?
     
     public var active: Bool
     
@@ -33,7 +33,7 @@ public struct Summit: Named, Equatable {
     
     public var speakers: Set<Speaker>
     
-    public var startShowingVenues: Date?
+    public var startShowingVenues: SwiftFoundation.Date?
     
     public var ticketTypes: Set<TicketType>
     

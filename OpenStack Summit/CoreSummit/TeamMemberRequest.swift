@@ -18,31 +18,31 @@ public extension Store {
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         http.POST(url, parameters: ["permission": permission.rawValue]) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let identifier = jsonObject["id"]?.rawValue as? Int
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
             // success
-            completion(.Value(identifier))
+            completion(.value(identifier))
         }
     }
     
-    func remove(member identifier: Identifier, from team: Identifier, completion: (ErrorType?) -> ()) {
+    func remove(member identifier: Identifier, from team: Identifier, completion: (ErrorProtocol?) -> ()) {
         
         let uri = "/api/v1/teams/\(team)/members/\(identifier)"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         
@@ -57,7 +57,7 @@ public extension Store {
                 
                 if let managedObject = try TeamMemberManagedObject.find(identifier, context: context) {
                     
-                    context.deleteObject(managedObject)
+                    context.delete(managedObject)
                     
                     try context.validateAndSave()
                 }

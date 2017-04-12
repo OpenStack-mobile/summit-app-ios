@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func dataUpdates(summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, latestDataUpdate: Identifier, limit: Int = 100, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -30,7 +30,7 @@ public extension Store {
         dataUpdates(URI, completion: completion)
     }
     
-    func dataUpdates(summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, from date: SwiftFoundation.Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -53,25 +53,25 @@ public extension Store {
 
 private extension Store {
     
-    func dataUpdates(URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ URI: String, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let URL = environment.configuration.serverURL + URI
         
-        let http = self.isLoggedIn ? self.createHTTP(.OpenIDJSON) : self.createHTTP(.ServiceAccount)
+        let http = self.isLoggedIn ? self.createHTTP(.openIDJSON) : self.createHTTP(.serviceAccount)
         
         http.GET(URL) { (responseObject, error) in
             
             // forward error
             guard error == nil
-                else { completion(.Error(error!)); return }
+                else { completion(.error(error!)); return }
             
             // parse
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonArray = json.arrayValue,
                 let dataUpdates = DataUpdate.fromJSON(jsonArray)
-                else { completion(.Error(Error.InvalidResponse)); return }
+                else { completion(.error(Error.invalidResponse)); return }
             
-            completion(.Value(dataUpdates))
+            completion(.value(dataUpdates))
         }
     }
 }

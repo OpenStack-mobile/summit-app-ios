@@ -15,7 +15,7 @@ protocol TextViewController: class, UITextViewDelegate, SummitActivityHandlingVi
 
 extension TextViewController {
     
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    func textView(_ textView: UITextView, shouldInteractWithURL URL: Foundation.URL, inRange characterRange: NSRange) -> Bool {
         
         guard self.openWebURL(URL)
             else { return true }

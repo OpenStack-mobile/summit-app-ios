@@ -23,7 +23,7 @@ import FirebaseMessaging
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandling {
     
-    static var shared: AppDelegate { return unsafeBitCast(UIApplication.sharedApplication().delegate!, AppDelegate.self) }
+    static var shared: AppDelegate { return unsafeBitCast(UIApplication.shared.delegate!, to: AppDelegate.self) }
 
     var window: UIWindow?
     
@@ -33,7 +33,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     lazy var launchScreenViewController: LaunchScreenViewController = (self.window!.rootViewController as! UINavigationController).viewControllers.first as! LaunchScreenViewController
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // print app info
         print("Launching OpenStack Summit v\(AppVersion) Build \(AppBuild)")
@@ -91,7 +91,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         FIRMessaging.messaging().remoteMessageDelegate = PushNotificationManager.shared
         
         // Add observer for InstanceID token refresh callback.
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
                                                          selector: #selector(self.tokenRefreshNotification),
                                                          name: kFIRInstanceIDTokenRefreshNotification,
                                                          object: nil)
@@ -101,12 +101,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
@@ -115,34 +115,34 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         #endif
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         connectToFcm()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         print("APNs token retrieved: \(deviceToken)")
         
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
     }
     
     // HACK: implemented old delegate to make notifications work as is on iOS 10
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         // Print message ID.
         if let messageID = userInfo["gcm.message_id"] {
@@ -155,7 +155,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         PushNotificationManager.shared.process(userInfo as! [String: String])
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         
@@ -169,50 +169,50 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         PushNotificationManager.shared.process(userInfo as! [String: String])
         
-        completionHandler(.NewData)
+        completionHandler(.newData)
     }
     
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
         
         PushNotificationManager.shared.handleNotification(action: identifier, for: notification, with: responseInfo as! [String: AnyObject], completion: completionHandler)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
         var options = [String : AnyObject]()
         
         if let sourceApplication = sourceApplication {
             
-            options[UIApplicationOpenURLOptionsSourceApplicationKey] = sourceApplication
+            options[UIApplicationOpenURLOptionsKey.sourceApplication] = sourceApplication
         }
         
-        return self.application(application, openURL: url, options: options)
+        return self.application(application, open: url, options: options)
     }
     
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         
-        if let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String {
+        if let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String {
             
-            let bundleID = NSBundle.mainBundle().bundleIdentifier
+            let bundleID = Bundle.main.bundleIdentifier
             
             if sourceApplication == bundleID || sourceApplication == "com.apple.SafariViewService" {
                 
-                let notification = NSNotification(name: AGAppLaunchedWithURLNotification, object: nil, userInfo: [UIApplicationLaunchOptionsURLKey:url])
-                NSNotificationCenter.defaultCenter().postNotification(notification)
+                let notification = Notification(name: AGAppLaunchedWithURLNotification, object: nil, userInfo: [UIApplicationLaunchOptionsKey.url:url])
+                NotificationCenter.default.post(notification)
                 
                 return true
             }
         }
         
         // HACK: async is needed in case app was not already opened
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             return self.openSchemeURL(url)
         }
         
         return false
     }
     
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         
         /// force view load
         let _ = self.revealViewController.view
@@ -222,7 +222,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController
             && self.launchScreenViewController.willTransition == false {
             
-            self.launchScreenViewController.showRevealController() { self.application(application, continueUserActivity: userActivity, restorationHandler: restorationHandler) }
+            self.launchScreenViewController.showRevealController() { self.application(application, continue: userActivity, restorationHandler: restorationHandler) }
             return true
         }
         
@@ -231,8 +231,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         if userActivity.activityType == CSSearchableItemActionType {
             
             guard let searchIdentifierString = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
-                let searchURL = NSURL(string: searchIdentifierString)
-                where searchURL.pathComponents?.count == 2
+                let searchURL = Foundation.URL(string: searchIdentifierString),
+                searchURL.pathComponents?.count == 2
                 else { return false }
             
             let searchTypeString = searchURL.pathComponents![0]
@@ -252,7 +252,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 else { return false }
             
             guard openWebURL(url)
-                else { UIApplication.sharedApplication().openURL(url); return false }
+                else { UIApplication.shared.openURL(url); return false }
             
         } else if userActivity.activityType == AppActivity.view.rawValue {
             
@@ -277,7 +277,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - Methods
     
-    private func connectToFcm() {
+    fileprivate func connectToFcm() {
         // Won't connect since there is no token
         guard FIRInstanceID.instanceID().token() != nil else {
             return;
@@ -286,7 +286,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Disconnect previous FCM connection if it exists.
         FIRMessaging.messaging().disconnect()
         
-        FIRMessaging.messaging().connectWithCompletion { (error) in
+        FIRMessaging.messaging().connect { (error) in
             if error != nil {
                 print("Unable to connect with FCM. \(error)")
             } else {
@@ -297,7 +297,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - Notifications
     
-    func tokenRefreshNotification(notification: NSNotification) {
+    func tokenRefreshNotification(_ notification: Notification) {
         
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             
@@ -310,7 +310,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - SummitActivityHandling
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
         // find in cache
         guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
@@ -326,7 +326,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             
             let eventDetailVC = R.storyboard.event.eventDetailViewController()!
             eventDetailVC.event = identifier
-            self.menuViewController.generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
+            self.menuViewController.generalScheduleViewController.show(eventDetailVC, sender: nil)
             
         case .speaker:
             
@@ -351,7 +351,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         return true
     }
     
-    func view(screen: AppActivityScreen) {
+    func view(_ screen: AppActivityScreen) {
         
         switch screen {
             
@@ -362,7 +362,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         }
     }
     
-    func search(searchTerm: String) {
+    func search(_ searchTerm: String) {
         
         self.menuViewController.showSearch(for: searchTerm)
     }

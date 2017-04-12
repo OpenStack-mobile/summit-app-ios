@@ -11,13 +11,13 @@ import CoreData
 
 public extension Store {
     
-    func favorite(isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: (ErrorType?) -> ()) {
+    func favorite(_ isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: (ErrorProtocol?) -> ()) {
         
         let uri = "/api/v1/summits/\(summit)/members/me/favorites/\(event)"
         
         let url = environment.configuration.serverURL + uri
         
-        let http = self.createHTTP(.OpenIDJSON)
+        let http = self.createHTTP(.openIDJSON)
         
         let context = privateQueueManagedObjectContext
         

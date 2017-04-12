@@ -12,7 +12,7 @@ final class SearchTableViewHeaderView: UITableViewHeaderFooterView {
     
     static let reuseIdentifier = "SearchTableViewHeaderView"
     
-    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet fileprivate(set) weak var titleLabel: UILabel!
     
-    @IBOutlet private(set) weak var moreButton: Button!
+    @IBOutlet fileprivate(set) weak var moreButton: Button!
 }

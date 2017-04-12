@@ -46,14 +46,14 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var speaker: Speaker!
+    fileprivate(set) var speaker: Speaker!
     
-    private lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier) ?? false }) ?? []
+    fileprivate lazy var events: [Event] = Store.shared.cache?.schedule.filter({ $0.presentation.speakers.contains(self.speaker.identifier) ?? false }) ?? []
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let speaker = (context as? Context<Speaker>)?.value
             else { fatalError("Invalid context") }
@@ -71,9 +71,9 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         let activityUserInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
                                 AppActivityUserInfo.identifier.rawValue: speaker.identifier]
         
-        let webpageURL = NSURL(string: speaker.toWebpageURL(Store.shared.cache!))!
+        let webpageURL = URL(string: speaker.toWebpageURL(Store.shared.cache!))!
         
-        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [NSObject : AnyObject], webpageURL: webpageURL)
+        updateUserActivity(AppActivity.view.rawValue, userInfo: activityUserInfo as [AnyHashable: Any], webpageURL: webpageURL)
     }
     
     override func didDeactivate() {
@@ -85,7 +85,7 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func showEvents(sender: AnyObject? = nil) {
+    @IBAction func showEvents(_ sender: AnyObject? = nil) {
         
         if events.count == 1 {
             
@@ -101,14 +101,14 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
     
     // MARK: - Private Functions
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         nameLabel.setText(speaker.name)
         
         titleLabel.setText(speaker.title)
         titleLabel.setHidden(speaker.title == nil)
         
-        if let url = NSURL(string: speaker.pictureURL) {
+        if let url = URL(string: speaker.pictureURL) {
             
             imageView.loadCached(url)
         }
@@ -130,8 +130,8 @@ final class SpeakerDetailInterfaceController: WKInterfaceController {
         biographySeparator.setHidden(speaker.biography == nil)
         
         if let descriptionText = speaker.biography,
-            let data = descriptionText.dataUsingEncoding(NSUTF8StringEncoding),
-            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil) {
+            let data = descriptionText.dataUsingEncoding(String.Encoding.utf8),
+            let attributedString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:String.Encoding.utf8], documentAttributes: nil) {
             
             biographyLabel.setText(attributedString.string)
             

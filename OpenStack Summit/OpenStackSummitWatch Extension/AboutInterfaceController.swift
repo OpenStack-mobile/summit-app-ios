@@ -22,8 +22,8 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         updateUI()
     }
@@ -32,15 +32,15 @@ final class AboutInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        let webpageURL: NSURL
+        let webpageURL: Foundation.URL
         
         if let summit = Store.shared.cache {
             
-             webpageURL = NSURL(string: summit.webpageURL)!
+             webpageURL = Foundation.URL(string: summit.webpageURL)!
             
         } else {
             
-            webpageURL = NSURL(string: AppEnvironment.configuration.webpageURL)!
+            webpageURL = Foundation.URL(string: AppEnvironment.configuration.webpageURL)!
         }
         
         updateUserActivity(AppActivity.screen.rawValue, userInfo: [AppActivityUserInfo.screen.rawValue: AppActivityScreen.about.rawValue], webpageURL: webpageURL)
@@ -55,7 +55,7 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - Actions
     
-    @IBAction func refreshData(sender: AnyObject? = nil) {
+    @IBAction func refreshData(_ sender: AnyObject? = nil) {
         
         try! Store.shared.clear()
         
@@ -66,7 +66,7 @@ final class AboutInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
         // set summit info
         

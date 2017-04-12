@@ -15,7 +15,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - IB Outlets
     
-    @IBOutlet private(set) var headerView: PersonDetailHeaderView!
+    @IBOutlet fileprivate(set) var headerView: PersonDetailHeaderView!
     
     // MARK: - Properties
     
@@ -58,11 +58,11 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - Private Properties
     
-    private var loadingTableView = false
+    fileprivate var loadingTableView = false
     
-    private var data = [Data]()
+    fileprivate var data = [Data]()
     
-    private var showNonConfirmedWarning = false
+    fileprivate var showNonConfirmedWarning = false
     
     // MARK: - Loading
     
@@ -84,7 +84,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         configureView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // handoff
@@ -94,14 +94,14 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.navigationController?.setToolbarHidden(!showNonConfirmedWarning, animated: animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // setup after animation finished to prevent lag
         configureView()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // handoff
@@ -111,7 +111,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.navigationController?.setToolbarHidden(true, animated: animated)
     }
     
-    override func updateUserActivityState(userActivity: NSUserActivity) {
+    override func updateUserActivityState(_ userActivity: NSUserActivity) {
         
         switch profile {
             
@@ -120,7 +120,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             let userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue,
                             AppActivityUserInfo.identifier.rawValue: identifier]
             
-            userActivity.addUserInfoEntriesFromDictionary(userInfo as [NSObject : AnyObject])
+            userActivity.addUserInfoEntriesFromDictionary(userInfo as [AnyHashable: Any])
             
         default: break
         }
@@ -130,21 +130,21 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     
     // MARK: - Actions
     
-    @IBAction func nonConfirmedWarningTapped(sender: AnyObject? = nil) {
+    @IBAction func nonConfirmedWarningTapped(_ sender: AnyObject? = nil) {
         
         self.performSegueWithIdentifier(R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
     }
     
     // MARK: - Actions
     
-    @IBAction func refresh(sender: AnyObject? = nil) {
+    @IBAction func refresh(_ sender: AnyObject? = nil) {
         
         configureView()
     }
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         // fetch profile
         
@@ -188,7 +188,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
     }
     
-    private func configureView<T: Person>(with person: T) {
+    fileprivate func configureView<T: Person>(with person: T) {
         
         // configure header
         
@@ -197,7 +197,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         headerView.titleLabel.hidden = (person.title ?? "").isEmpty
         headerView.imageView.image = R.image.genericUserAvatar()!
         
-        if let imageURL = NSURL(string: person.pictureURL) {
+        if let imageURL = URL(string: person.pictureURL) {
             
             headerView.imageView.hnk_setImageFromURL(imageURL)
         }
@@ -231,7 +231,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
         
         if let biography = person.biography,
-            let data = biography.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false),
+            let data = biography.dataUsingEncoding(String.Encoding.unicode, allowLossyConversion: false),
             let attributedString = try? NSMutableAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) {
             
             let range = NSMakeRange(0, attributedString.length)
@@ -247,7 +247,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // set user activity for handoff
         
-        let personURL: NSURL?
+        let personURL: URL?
         
         if let speaker = person as? Speaker,
             let summitManagedObject = self.currentSummit {
@@ -256,7 +256,7 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             let userActivity = NSUserActivity(activityType: AppActivity.view.rawValue)
             userActivity.title = speaker.name
-            personURL = NSURL(string: speaker.toWebpageURL(summit))
+            personURL = URL(string: speaker.toWebpageURL(summit))
             userActivity.webpageURL = personURL
             
             userActivity.userInfo = [AppActivityUserInfo.type.rawValue: AppActivitySummitDataType.speaker.rawValue, AppActivityUserInfo.identifier.rawValue: speaker.identifier]
@@ -272,10 +272,10 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         }
     }
     
-    private func setupToolbar() {
+    fileprivate func setupToolbar() {
         
         navigationController?.toolbar.barTintColor = UIColor(hexString: "#FAD438")!
-        navigationController?.toolbar.translucent = false
+        navigationController?.toolbar.isTranslucent = false
         
         let action = #selector(nonConfirmedWarningTapped)
         
@@ -287,35 +287,35 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         let textBarButtonItem = UIBarButtonItem()
         textBarButtonItem.title = "Don't forget to add your EventBrite Order #"
-        textBarButtonItem.style = .Plain
+        textBarButtonItem.style = .plain
         textBarButtonItem.target = self
         textBarButtonItem.action = action
         textBarButtonItem.tintColor = UIColor(hexString: "#4A4A4A")
-        textBarButtonItem.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans", size: 13)!], forState: .Normal)
+        textBarButtonItem.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans", size: 13)!], for: UIControlState())
         
         toolbarItems = [imageBarButtonItem, textBarButtonItem]
     }
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Profile")
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // WebKit or UIKit is causing the tableview cell to refresh without reloading.
         // http://stackoverflow.com/questions/23926541/how-can-initializing-nsattributedstring-in-tableviewheightforrowatindexpath-be
@@ -343,13 +343,13 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailLinksCell)!
             
-            cell.twitterView.hidden = links.twitter.isEmpty
+            cell.twitterView.isHidden = links.twitter.isEmpty
             cell.twitterView.label.text = links.twitter
             
-            cell.ircView.hidden = links.irc.isEmpty
+            cell.ircView.isHidden = links.irc.isEmpty
             cell.ircView.label.text = links.irc
             
-            cell.linkedInView.hidden = links.linkedIn.isEmpty
+            cell.linkedInView.isHidden = links.linkedIn.isEmpty
             cell.linkedInView.label.text = links.linkedIn
             
             return cell
@@ -359,24 +359,24 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.personDetailDescriptionCell)!
             
             cell.textView.attributedText = text
-            cell.textView.textContainerInset = UIEdgeInsetsZero
+            cell.textView.textContainerInset = UIEdgeInsets.zero
             cell.textView.sizeToFit()
             
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         return headerView
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         
         return 128
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return UITableViewAutomaticDimension
     }
@@ -433,11 +433,11 @@ public enum PersonIdentifier {
 
 final class PersonDetailHeaderView: UIView {
     
-    @IBOutlet private(set) weak var imageView: UIImageView!
+    @IBOutlet fileprivate(set) weak var imageView: UIImageView!
     
-    @IBOutlet private(set) weak var nameLabel: CopyableLabel!
+    @IBOutlet fileprivate(set) weak var nameLabel: CopyableLabel!
     
-    @IBOutlet private(set) weak var titleLabel: CopyableLabel!
+    @IBOutlet fileprivate(set) weak var titleLabel: CopyableLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -449,21 +449,21 @@ final class PersonDetailHeaderView: UIView {
 
 final class PersonDetailLinksTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var twitterView: PersonDetailLinkView!
+    @IBOutlet fileprivate(set) weak var twitterView: PersonDetailLinkView!
     
-    @IBOutlet private(set) weak var ircView: PersonDetailLinkView!
+    @IBOutlet fileprivate(set) weak var ircView: PersonDetailLinkView!
     
-    @IBOutlet private(set) weak var linkedInView: PersonDetailLinkView!
+    @IBOutlet fileprivate(set) weak var linkedInView: PersonDetailLinkView!
 }
 
 final class PersonDetailLinkView: UIStackView {
     
-    @IBOutlet private(set) weak var label: CopyableLabel!
+    @IBOutlet fileprivate(set) weak var label: CopyableLabel!
 }
 
 final class PersonDetailDescriptionTableViewCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var textView: UITextView!
+    @IBOutlet fileprivate(set) weak var textView: UITextView!
     
     override func layoutSubviews() {
         super.layoutSubviews()

@@ -22,7 +22,7 @@ public extension Store {
             
             if let member = try self.authenticatedMember(context) {
                 
-                context.deleteObject(member)
+                context.delete(member)
                 
                 try context.validateAndSave()
             }
@@ -30,11 +30,11 @@ public extension Store {
         
         session.clear()
         
-        NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedOut.rawValue, object: self)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: Notification.LoggedOut.rawValue), object: self)
     }
     
     /// Login via OAuth with OpenStack ID
-    func login(summit: Identifier, loginCallback: () -> (), completion: (ErrorType?) -> ()) {
+    func login(_ summit: Identifier, loginCallback: () -> (), completion: (ErrorProtocol?) -> ()) {
                 
         oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             
@@ -47,18 +47,18 @@ public extension Store {
                 
                 switch response {
                     
-                case let .Error(error):
+                case let .error(error):
                     
                     completion(error)
                     
-                case let .Value(member):
+                case let .value(member):
                     
                     self.session.name = member.name
                     self.session.member = member.identifier
                     
                     completion(nil)
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(Notification.LoggedIn.rawValue, object: self)
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: Notification.LoggedIn.rawValue), object: self)
                 }
             }
         }

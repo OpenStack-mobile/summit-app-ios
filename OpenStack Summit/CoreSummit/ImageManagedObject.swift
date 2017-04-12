@@ -25,7 +25,7 @@ extension Image: CoreDataDecodable {
 
 extension Image: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> ImageManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> ImageManagedObject {
         
         let managedObject = try cached(context)
         

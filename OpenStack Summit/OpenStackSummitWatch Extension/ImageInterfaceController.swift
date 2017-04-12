@@ -22,12 +22,12 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - Properties
     
-    private(set) var image: Image!
+    fileprivate(set) var image: Image!
     
     // MARK: - Loading
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         guard let image = (context as? Context<Image>)?.value
             else { fatalError("Invalid context") }
@@ -41,7 +41,7 @@ final class ImageInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        if let imageURL = NSURL(string: image.url) {
+        if let imageURL = URL(string: image.url) {
             
             updateUserActivity(NSUserActivityTypeBrowsingWeb, userInfo: nil, webpageURL: imageURL)
         }
@@ -56,14 +56,14 @@ final class ImageInterfaceController: WKInterfaceController {
     
     // MARK: - Private Methods
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         
-        guard let imageURL = NSURL(string: image.url)
+        guard let imageURL = URL(string: image.url)
             else { return }
         
         // show activity indicator
         activityIndicator.setImageNamed("Activity")
-        activityIndicator.startAnimatingWithImagesInRange(NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
+        activityIndicator.startAnimatingWithImages(in: NSRange(location: 0, length: 30), duration: 1.0, repeatCount: 0)
         activityIndicator.setHidden(false)
         imageView.setHidden(true)
         

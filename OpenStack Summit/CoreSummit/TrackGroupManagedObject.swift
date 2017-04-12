@@ -36,7 +36,7 @@ extension TrackGroup: CoreDataDecodable {
 
 extension TrackGroup: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
         
         let managedObject = try cached(context)
         
@@ -71,9 +71,9 @@ public extension TrackGroup {
         
         let events = try context.managedObjects(EventManagedObject.self, predicate: NSPredicate(format: "track != nil AND summit == %@", summitManagedObject))
         
-        var groups = events.reduce([TrackGroupManagedObject](), combine: { $0.0 + Array($0.1.track!.groups) })
+        var groups = events.reduce([TrackGroupManagedObject](), { $0.0 + Array($0.1.track!.groups) })
                 
-        groups = (Set(groups) as NSSet).sortedArrayUsingDescriptors(ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
+        groups = (Set(groups) as NSSet).sortedArray(using: ManagedObject.sortDescriptors) as! [TrackGroupManagedObject]
         
         return TrackGroup.from(managedObjects: groups)
     }

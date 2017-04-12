@@ -25,16 +25,16 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
     
     var completion: (done: (CreateTeamViewController) -> (), cancel: (CreateTeamViewController) -> ())?
     
-    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .Dark)
+    lazy var progressHUD: JGProgressHUD = JGProgressHUD(style: .dark)
     
     // MARK: - Actions
     
-    @IBAction func cancel(sender: AnyObject? = nil) {
+    @IBAction func cancel(_ sender: AnyObject? = nil) {
         
         self.completion?.cancel(self)
     }
     
-    @IBAction func done(sender: AnyObject? = nil) {
+    @IBAction func done(_ sender: AnyObject? = nil) {
         
         let name = self.nameTextField.text ?? ""
         
@@ -44,7 +44,7 @@ final class CreateTeamViewController: UITableViewController, ActivityViewControl
         
         Store.shared.create(team: name, description: description) { (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+            OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                 
                 guard let controller = self else { return }
                 

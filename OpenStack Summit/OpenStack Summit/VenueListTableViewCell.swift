@@ -18,8 +18,8 @@ final class VenueListTableViewCell: UITableViewCell, VenueListTableViewCellProto
     
     // MARK: - IB Outlets
     
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var addressLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var addressLabel: UILabel!
     
     // MARK: - Accessors
     

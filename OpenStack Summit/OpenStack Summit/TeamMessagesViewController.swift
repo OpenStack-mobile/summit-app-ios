@@ -19,16 +19,16 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     var team: Identifier! {
         
-        didSet { if isViewLoaded() { configureView() } }
+        didSet { if isViewLoaded { configureView() } }
     }
     
     // MARK: - Properties
     
-    private(set) var sending = false
+    fileprivate(set) var sending = false
     
-    private var fetchedResultsController: NSFetchedResultsController!
+    fileprivate var fetchedResultsController: NSFetchedResultsController!
     
-    private lazy var placeholderMemberImage = R.image.genericUserAvatar()!
+    fileprivate lazy var placeholderMemberImage = R.image.genericUserAvatar()!
     
     // MARK: - Loading
     
@@ -43,25 +43,25 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         registerNotifications()
         
         self.shouldScrollToBottomAfterKeyboardShows = false
-        self.inverted = true
+        self.isInverted = true
         self.textInputbar.autoHideRightButton = true
         self.textInputbar.maxCharCount = 256
-        self.textInputbar.counterStyle = .Split
-        self.textInputbar.counterPosition = .Top
+        self.textInputbar.counterStyle = .split
+        self.textInputbar.counterPosition = .top
         self.textView.placeholder = "Message"
-        self.tableView!.separatorStyle = .None
-        self.tableView!.registerClass(MessageTableViewCell.classForCoder(), forCellReuseIdentifier: MessengerCellIdentifier)
+        self.tableView!.separatorStyle = .none
+        self.tableView!.register(MessageTableViewCell.classForCoder(), forCellReuseIdentifier: MessengerCellIdentifier)
         
         configureView()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         PushNotificationManager.shared.teamMessageAlertFilter = team
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         PushNotificationManager.shared.teamMessageAlertFilter = nil
@@ -69,7 +69,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     // MARK: - Private Methods
     
-    private func configureView() {
+    fileprivate func configureView() {
         
         guard let teamManagedObject = try! TeamManagedObject.find(team, context: Store.shared.managedObjectContext)
             else { fatalError("Team not in cache") }
@@ -92,20 +92,20 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         self.tableView!.reloadData()
     }
     
-    private subscript (indexPath: NSIndexPath) -> TeamMessage {
+    fileprivate subscript (indexPath: IndexPath) -> TeamMessage {
         
         let managedObject = self.fetchedResultsController!.objectAtIndexPath(indexPath) as! TeamMessageManagedObject
         
         return TeamMessage(managedObject: managedObject)
     }
     
-    private subscript (data indexPath: NSIndexPath) -> (name: String, body: String, image: NSURL?) {
+    fileprivate subscript (data indexPath: IndexPath) -> (name: String, body: String, image: URL?) {
         
         let message = self[indexPath]
         
         let name: String
         
-        let imageURL: NSURL?
+        let imageURL: URL?
         
         switch message.from {
             
@@ -119,15 +119,15 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
             
             name = member.name
             
-            imageURL = NSURL(string: member.pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSStringCompareOptions.LiteralSearch, range: nil))
+            imageURL = URL(string: member.pictureURL.stringByReplacingOccurrencesOfString("https", withString: "http", options: NSString.CompareOptions.LiteralSearch, range: nil))
         }
         
         return (name, message.body, imageURL)
     }
     
-    private func configure(cell cell: MessageTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: MessageTableViewCell, at indexPath: IndexPath) {
         
-        let managedObject = self.fetchedResultsController.objectAtIndexPath(indexPath)
+        let managedObject = self.fetchedResultsController.object(at: indexPath)
         
         let messageData = self[data: indexPath]
         
@@ -143,7 +143,7 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
             
             Shared.imageCache.fetch(URL: url, failure: nil, success: { [weak self] (image) in
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                OperationQueue.mainQueue().addOperationWithBlock { [weak self] in
                     
                     guard let controller = self else { return }
                     
@@ -162,41 +162,41 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         cell.transform = self.tableView!.transform
     }
     
-    @objc private func textInputbarDidMove(notification: NSNotification) {
+    @objc fileprivate func textInputbarDidMove(_ notification: Notification) {
         
         
     }
     
     // MARK: Notifications
     
-    private func registerNotifications() {
+    fileprivate func registerNotifications() {
         
-        NSNotificationCenter.defaultCenter().addObserver(self.tableView!, selector: #selector(UITableView.reloadData), name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(textInputbarDidMove), name: SLKTextInputbarDidMoveNotification, object: nil)
+        NotificationCenter.default.addObserver(self.tableView!, selector: #selector(UITableView.reloadData), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textInputbarDidMove), name: SLKTextInputbarDidMoveNotification, object: nil)
     }
     
-    private func stopNotifications() {
+    fileprivate func stopNotifications() {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        NSNotificationCenter.defaultCenter().removeObserver(self.tableView!)
+        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self.tableView!)
     }
     
     // MARK: - Overriden Methods
     
-    override class func tableViewStyleForCoder(decoder: NSCoder) -> UITableViewStyle {
+    override class func tableViewStyle(for decoder: NSCoder) -> UITableViewStyle {
         
-        return .Plain
+        return .plain
     }
     
     override func ignoreTextInputbarAdjustment() -> Bool {
         return super.ignoreTextInputbarAdjustment()
     }
     
-    override func forceTextInputbarAdjustmentForResponder(responder: UIResponder?) -> Bool {
+    override func forceTextInputbarAdjustment(for responder: UIResponder?) -> Bool {
         
         guard let _ = responder as? UIAlertController else {
             // On iOS 9, returning YES helps keeping the input view visible when the keyboard if presented from another app when using multi-tasking on iPad.
-            return UIDevice.currentDevice().userInterfaceIdiom == .Pad
+            return UIDevice.current.userInterfaceIdiom == .pad
         }
         return true
     }
@@ -206,13 +206,13 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         return sending == false
     }
     
-    override func didPressRightButton(sender: AnyObject?) {
+    override func didPressRightButton(_ sender: AnyObject?) {
         
         self.sending = true
         
         Store.shared.send(self.textView.text, to: team) { [weak self] (response) in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.mainQueue().addOperationWithBlock {
                 
                 guard let controller = self else { return }
                 
@@ -234,19 +234,19 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(MessengerCellIdentifier, forIndexPath: indexPath) as! MessageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MessengerCellIdentifier, for: indexPath) as! MessageTableViewCell
         
         configure(cell: cell, at: indexPath)
         
@@ -258,18 +258,18 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let messageData = self[data: indexPath]
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = .ByWordWrapping
-        paragraphStyle.alignment = .Left
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .left
         
         let pointSize = MessageTableViewCell.defaultFontSize()
         
         let attributes = [
-            NSFontAttributeName : UIFont.systemFontOfSize(pointSize),
+            NSFontAttributeName : UIFont.systemFont(ofSize: pointSize),
             NSParagraphStyleAttributeName : paragraphStyle
         ]
         
@@ -297,43 +297,43 @@ final class TeamMessagesViewController: SLKTextViewController, NSFetchedResultsC
     
     // MARK: - NSFetchedResultsControllerDelegate
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.tableView!.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         self.tableView!.endUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
-        case .Insert:
+        case .insert:
             
             if let insertIndexPath = newIndexPath {
-                self.tableView!.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                self.tableView!.insertRows(at: [insertIndexPath], with: .fade)
             }
-        case .Delete:
+        case .delete:
             
             if let deleteIndexPath = indexPath {
-                self.tableView!.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                self.tableView!.deleteRows(at: [deleteIndexPath], with: .fade)
             }
-        case .Update:
+        case .update:
             if let updateIndexPath = indexPath,
-                let cell = self.tableView!.cellForRowAtIndexPath(updateIndexPath) as! MessageTableViewCell? {
+                let cell = self.tableView!.cellForRow(at: updateIndexPath) as! MessageTableViewCell? {
                 
                 self.configure(cell: cell, at: updateIndexPath)
             }
-        case .Move:
+        case .move:
             
             if let deleteIndexPath = indexPath {
-                self.tableView!.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                self.tableView!.deleteRows(at: [deleteIndexPath], with: .fade)
             }
             
             if let insertIndexPath = newIndexPath {
-                self.tableView!.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                self.tableView!.insertRows(at: [insertIndexPath], with: .fade)
             }
         }
     }

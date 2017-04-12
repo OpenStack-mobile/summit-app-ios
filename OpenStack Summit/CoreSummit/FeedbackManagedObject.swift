@@ -10,17 +10,17 @@ import Foundation
 import CoreData
 import SwiftFoundation
 
-public class FeedbackManagedObject: Entity {
+open class FeedbackManagedObject: Entity {
     
-    @NSManaged public var rate: Int16
+    @NSManaged open var rate: Int16
     
-    @NSManaged public var review: String
+    @NSManaged open var review: String
     
-    @NSManaged public var date: NSDate
+    @NSManaged open var date: Foundation.Date
     
-    @NSManaged public var event: EventManagedObject
+    @NSManaged open var event: EventManagedObject
     
-    @NSManaged public var member: MemberManagedObject
+    @NSManaged open var member: MemberManagedObject
 }
 
 // MARK: - Encoding
@@ -32,7 +32,7 @@ extension Feedback: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.rate = Int(managedObject.rate)
         self.review = managedObject.review
-        self.date = Date(foundation: managedObject.date)
+        self.date = SwiftFoundation.Date(foundation: managedObject.date)
         self.event = managedObject.event.identifier
         self.member = Member(managedObject: managedObject.member)
     }
@@ -40,7 +40,7 @@ extension Feedback: CoreDataDecodable {
 
 extension Feedback: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> FeedbackManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> FeedbackManagedObject {
         
         let managedObject = try cached(context)
         
@@ -58,7 +58,7 @@ extension Feedback: CoreDataEncodable {
 
 extension MemberResponse.Feedback: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> FeedbackManagedObject {
+    public func save(_ context: NSManagedObjectContext) throws -> FeedbackManagedObject {
         
         let managedObject = try cached(context)
         

@@ -51,8 +51,8 @@ extension Summit: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
-        self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
+        self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
         self.timeZone = timeZone.name
         self.webpageURL = webpageURL
         self.active = active
@@ -82,7 +82,7 @@ extension Summit: JSONDecodable {
         
         if let startShowingVenuesDate = JSONObject[JSONKey.start_showing_venues_date.rawValue]?.rawValue as? Int {
             
-            self.startShowingVenues = Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
+            self.startShowingVenues = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startShowingVenuesDate))
             
         } else {
             
@@ -91,7 +91,7 @@ extension Summit: JSONDecodable {
         
         if let scheduleStartDate = JSONObject[JSONKey.schedule_start_date.rawValue]?.rawValue as? Int {
             
-            self.defaultStart = Date(timeIntervalSince1970: TimeInterval(scheduleStartDate))
+            self.defaultStart = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(scheduleStartDate))
             
         } else {
             

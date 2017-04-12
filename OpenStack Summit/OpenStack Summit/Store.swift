@@ -57,7 +57,7 @@ extension Store {
         return fileURL
     }()
     
-    static func createPersistentStore(coordinator: NSPersistentStoreCoordinator) throws -> NSPersistentStore {
+    static func createPersistentStore(_ coordinator: NSPersistentStoreCoordinator) throws -> NSPersistentStore {
         
         func createStore() throws -> NSPersistentStore {
             
@@ -83,7 +83,7 @@ extension Store {
         return store
     }
     
-    static func deletePersistentStore(store: (NSPersistentStoreCoordinator, NSPersistentStore)? = nil) throws {
+    static func deletePersistentStore(_ store: (NSPersistentStoreCoordinator, NSPersistentStore)? = nil) throws {
         
         let url = self.fileURL
         

@@ -18,7 +18,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - Properties
     
-    private(set) var feedbackList = [FeedbackDetail]()
+    fileprivate(set) var feedbackList = [FeedbackDetail]()
     
     // MARK: - Loading
     
@@ -37,7 +37,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - Private Methods
     
-    private func reloadData() {
+    fileprivate func reloadData() {
         
         // Get Logged Member Given Feedback
         feedbackList = (Store.shared.authenticatedMember?.givenFeedback ?? []).map { FeedbackDetail(managedObject: $0) }
@@ -45,7 +45,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         tableView.reloadData()
     }
     
-    private func configure(cell cell: FeedbackTableViewCell, at indexPath: NSIndexPath) {
+    fileprivate func configure(cell: FeedbackTableViewCell, at indexPath: IndexPath) {
         
         let feedback = feedbackList[indexPath.row]
         cell.eventName = feedback.eventName
@@ -54,23 +54,23 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
         cell.review = feedback.review
         cell.date = feedback.date
         
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return feedbackList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.feedbackTableViewCell)!
         
@@ -81,7 +81,7 @@ final class FeedbackGivenListViewController: UIViewController, UITableViewDelega
     
     // MARK: - IndicatorInfoProvider
     
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         return IndicatorInfo(title: "Reviews")
     }

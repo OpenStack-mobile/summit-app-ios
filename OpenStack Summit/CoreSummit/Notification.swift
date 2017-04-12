@@ -14,7 +14,7 @@ public struct Notification: Unique {
     
     public let body: String
     
-    public let created: Date
+    public let created: SwiftFoundation.Date
     
     public let from: Topic
     
@@ -89,7 +89,7 @@ public extension Notification {
             }
         }
         
-        private enum Prefix: String {
+        fileprivate enum Prefix: String {
             
             case summit, member, event, team, attendees, speakers, everyone
             
@@ -114,11 +114,11 @@ public extension Notification {
                 static var prefixRegularExpressions = [Prefix: NSRegularExpression]()
             }
             
-            func parseIdentifier(prefix: Prefix) -> Identifier? {
+            func parseIdentifier(_ prefix: Prefix) -> Identifier? {
                 
                 let prefixString = "/topics/" + prefix.rawValue + "_"
                 
-                guard rawValue.containsString(prefixString) else { return nil }
+                guard rawValue.contains(prefixString) else { return nil }
                 
                 // get regex
                 
@@ -137,16 +137,15 @@ public extension Notification {
                 
                 // run regex
                 
-                guard let match = regularExpression.firstMatchInString(rawValue, options: [], range: NSMakeRange(0, (rawValue as NSString).length))
-                    where match.numberOfRanges == 2
+                guard let match = regularExpression.firstMatch(in: rawValue, options: [], range: NSMakeRange(0, (rawValue as NSString).length)), match.numberOfRanges == 2
                     else { return nil }
                 
-                let matchString = (rawValue as NSString).substringWithRange(match.range)
+                let matchString = (rawValue as NSString).substring(with: match.range)
                 
                 guard matchString == rawValue
                     else { return nil }
                 
-                let captureGroup = (rawValue as NSString).substringWithRange(match.rangeAtIndex(1))
+                let captureGroup = (rawValue as NSString).substring(with: match.rangeAt(1))
                 
                 guard let identifier = Int(captureGroup)
                     else { return nil }
@@ -156,7 +155,7 @@ public extension Notification {
             
             func parseCollection() -> Topic? {
                 
-                let prefixString = rawValue.stringByReplacingOccurrencesOfString("/topics/", withString: "")
+                let prefixString = rawValue.replacingOccurrences(of: "/topics/", with: "")
                 
                 guard let prefix = Prefix(rawValue: prefixString)
                     else { return nil }

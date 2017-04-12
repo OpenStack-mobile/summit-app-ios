@@ -38,8 +38,8 @@ extension TeamInvitation: JSONDecodable {
         self.invitee = invitee
         self.inviter = inviter
         self.permission = permission
-        self.created = Date(timeIntervalSince1970: TimeInterval(created))
-        self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
+        self.updated = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(updated))
         self.accepted = accepted
     }
 }
@@ -70,8 +70,8 @@ extension ListTeamInvitations.Response.Invitation: JSONDecodable {
         self.invitee = invitee
         self.inviter = inviter
         self.permission = permission
-        self.created = Date(timeIntervalSince1970: TimeInterval(created))
-        self.updated = Date(timeIntervalSince1970: TimeInterval(updated))
+        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
+        self.updated = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(updated))
         self.accepted = accepted
     }
 }
