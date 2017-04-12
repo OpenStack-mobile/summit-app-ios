@@ -144,10 +144,6 @@ extension EventViewController {
         
         let newValue = !scheduled
         
-        guard eventRequestInProgress == false else { return }
-        
-        eventRequestInProgress = true
-        
         // different action based on conditions
         switch (newValue, rsvpURL, externalRSVP) {
             
@@ -249,6 +245,8 @@ extension EventViewController {
             
             self.setScheduledLocally(cacheValue, for: event.identifier)
         }
+        
+        eventRequestInProgress = true
         
         // make API request
         request(summit: event.summit, event: event.identifier, completion: completion)
