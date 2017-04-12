@@ -107,6 +107,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchTextView.attributedPlaceholder = NSAttributedString(string: "Type to search...", attributes: [NSForegroundColorAttributeName: UIColor(white: 1, alpha: 0.5)])
         searchTextView.delegate = self
         
         // setup reveal VC
@@ -336,7 +337,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(teamsViewController)
     }
     
-    private func showSearch(for term: String) {
+    func showSearch(for term: String) {
         
         let searchViewController = R.storyboard.menu.searchViewController()!
         searchViewController.searchTerm = term
@@ -414,14 +415,16 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                        
                     } else {
                         
+                        controller.showMyProfile()
+                        
+                        let revealViewController = AppDelegate.shared.revealViewController
+                        
                         // show a popup asking user if they are going to the summit
                         let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
                         
                         alert.addAction(UIAlertAction(title: "No", style: .Default) { (action) in
                             
                             Preference.goingToSummit = false
-                            
-                            controller.showMyProfile()
                         })
                         
                         alert.addAction(UIAlertAction(title: "Yes", style: .Default) { (action) in
@@ -430,10 +433,10 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                             
                             let viewController = R.storyboard.member.attendeeConfirmNavigationController()!
                             
-                            controller.presentViewController(viewController, animated: true) { controller.showMyProfile() }
+                            revealViewController.presentViewController(viewController, animated: true) { controller.showMyProfile() }
                         })
                         
-                        controller.presentViewController(alert, animated: true) { }
+                        revealViewController.presentViewController(alert, animated: true) { }
                     }
                     
                     // log user email

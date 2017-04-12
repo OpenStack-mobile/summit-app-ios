@@ -175,6 +175,21 @@ public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
         return Self.from(managedObjects: managedObjects)
     }
     
+    static func filter(predicate: Predicate,
+                       sort: [NSSortDescriptor] = [NSSortDescriptor(key: Entity.identifierProperty, ascending: true)],
+                       fetchLimit: Int? = nil,
+                       context: NSManagedObjectContext) throws -> [Self] {
+        
+        let managedObjects = try ManagedObject.filter(predicate.toFoundation(),
+                                                      sort: sort,
+                                                      fetchLimit: fetchLimit,
+                                                      returnsObjectsAsFaults: false,
+                                                      includesSubentities: true,
+                                                      context: context) as! [ManagedObject]
+        
+        return Self.from(managedObjects: managedObjects)
+    }
+    
     static func all(context: NSManagedObjectContext) throws -> [Self] {
         
         let managedObjects = try ManagedObject.filter(returnsObjectsAsFaults: false,

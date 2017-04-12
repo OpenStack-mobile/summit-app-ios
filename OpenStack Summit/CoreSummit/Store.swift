@@ -178,8 +178,7 @@ public final class Store {
         
         let hasPasscode = deviceHasPasscode
         
-        var scopes = ["openid",
-                      "profile",
+        var openIDScopes = ["openid",
                       "offline_access",
                       "\(environment.configuration.serverURL)/me/read",
                       "\(environment.configuration.serverURL)/summits/read",
@@ -189,16 +188,20 @@ public final class Store {
                       "\(environment.configuration.serverURL)/me/summits/events/favorites/add",
                       "\(environment.configuration.serverURL)/me/summits/events/favorites/delete"]
         
-        #if DEBUG
+        var serviceAccountScopes = ["\(environment.configuration.serverURL)/summits/read"]
+        
+        if environment == .Staging {
             
-            let teamScopes = ["\(environment.configuration.serverURL)/teams/read",
+            // openID staging scopes
+            
+            openIDScopes += ["\(environment.configuration.serverURL)/teams/read",
                               "\(environment.configuration.serverURL)/teams/write",
                               "\(environment.configuration.serverURL)/members/invitations/read",
                               "\(environment.configuration.serverURL)/members/invitations/write"]
             
-            scopes.appendContentsOf(teamScopes)
-            
-        #endif
+            // service account staging scopes
+            serviceAccountScopes += ["\(environment.configuration.serverURL)/members/read"]
+        }
         
         var config = Config(
             base: environment.configuration.authenticationURL,
@@ -210,7 +213,7 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isOpenIDConnect: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: scopes,
+            scopes: openIDScopes,
             clientSecret: environment.configuration.openID.secret,
             isWebView: true
         )
@@ -225,9 +228,7 @@ public final class Store {
             revokeTokenEndpoint: "oauth2/token/revoke",
             isServiceAccount: true,
             userInfoEndpoint: "api/v1/users/info",
-            scopes: ["\(environment.configuration.serverURL)/summits/read",
-                "\(environment.configuration.serverURL)/members/read"
-            ],
+            scopes: serviceAccountScopes,
             clientSecret: environment.configuration.serviceAccount.secret
         )
         oauthModuleServiceAccount = createOAuthModule(config, hasPasscode: hasPasscode)

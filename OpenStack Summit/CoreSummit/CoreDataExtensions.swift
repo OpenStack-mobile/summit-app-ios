@@ -84,7 +84,7 @@ public extension NSManagedObjectContext {
     }
     
     @inline(__always)
-    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
+    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], limit: Int = 0) throws -> [ManagedObject] {
         
         let entity = self.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
         
@@ -94,7 +94,15 @@ public extension NSManagedObjectContext {
         
         fetchRequest.sortDescriptors = sortDescriptors
         
+        fetchRequest.fetchLimit = limit
+        
         return try self.executeFetchRequest(fetchRequest) as! [ManagedObject]
+    }
+    
+    @inline(__always)
+    func managedObjects<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
+        
+        return try managedObjects(managedObjectType, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
     }
     
     @inline(__always)
@@ -112,7 +120,7 @@ public extension NSManagedObjectContext {
     }
     
     /// Save and attempt to recover from validation errors
-    func validateAndSave() throws {
+    func validateAndSave(fileName: String = #file, _ lineNumber: Int = #line) throws {
         
         do { try save() }
         
@@ -128,11 +136,11 @@ public extension NSManagedObjectContext {
             invalidObjects.forEach { self.deleteObject($0) }
             
             #if DEBUG
-            print("CoreData validation error: \(error)")
+            print("CoreData validation error at \(fileName):\(lineNumber)\n\(error)")
             #endif
             
             // try to save again (and catch more validation errors)
-            try validateAndSave()
+            try validateAndSave(fileName, lineNumber)
         }
     }
 }

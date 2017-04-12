@@ -17,39 +17,66 @@ final class MyProfileViewController: RevealTabStripViewController {
     
     override var forwardChildBarButtonItems: Bool { return true }
     
+    lazy var personalScheduleViewController: PersonalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
+    lazy var favoriteEventsViewController: FavoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
+    lazy var personDetailViewController: PersonDetailViewController = R.storyboard.member.personDetailViewController()!
+    
+    var collectionViewFlowLayout: UICollectionViewLayout!
+    
     // MARK: - Loading
     
     override func viewDidLoad() {
         
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        
         super.viewDidLoad()
-        
-        buttonBarView.collectionViewLayout = KTCenterFlowLayout()
         
         title = "MY SUMMIT"
         
         reloadPagerTabStripView()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        updateButtonBarViewLayout()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func updateButtonBarViewLayout() {
+        
+        if collectionViewFlowLayout == nil {
+            
+            collectionViewFlowLayout = buttonBarView.collectionViewLayout
+        }
+        
+        if Store.shared.authenticatedMember?.speakerRole != nil && self.view.frame.width <= 320 {
+            
+            buttonBarView.collectionViewLayout = collectionViewFlowLayout
+            
+        } else {
+            
+            buttonBarView.collectionViewLayout = KTCenterFlowLayout()
+        }
+    }
+    
     // MARK: - PagerTabStripViewControllerDataSource
     
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let personalScheduleViewController = R.storyboard.schedule.personalScheduleViewController()!
-        let favoriteEventsViewController = R.storyboard.schedule.favoriteEventsViewController()!
-        let memberProfileDetailViewController = R.storyboard.member.personDetailViewController()!
-        
-        var childViewControllers = [personalScheduleViewController,
-                                    favoriteEventsViewController,
-                                    memberProfileDetailViewController]
+        var childViewControllers: [UIViewController] = [personDetailViewController]
         
         if let speaker = Store.shared.authenticatedMember?.speakerRole {
             
             let speakerPresentationsViewController = R.storyboard.schedule.speakerPresentationsViewController()!
             speakerPresentationsViewController.speaker = speaker.identifier
-            childViewControllers.insert(speakerPresentationsViewController, atIndex: 0)
+            childViewControllers.append(speakerPresentationsViewController)
         }
+        
+        childViewControllers += [personalScheduleViewController,
+                                 favoriteEventsViewController]
+        
+        updateButtonBarViewLayout()
         
         return childViewControllers
     }

@@ -21,10 +21,6 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     private(set) var internalVenueList = [VenueListItem]()
     private(set) var externalVenueList = [VenueListItem]()
     
-    // MARK: - Private Properties
-    
-    private let tableViewHeaderCellIdentifier = "tableViewHeaderCell"
-    
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -32,7 +28,7 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNib(UINib(nibName: "TableViewHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: tableViewHeaderCellIdentifier)
+        tableView.registerNib(R.nib.tableViewHeaderViewDark(), forHeaderFooterViewReuseIdentifier: TableViewHeaderView.reuseIdentifier)
         
         reloadData()
     }
@@ -41,10 +37,13 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     
     private func reloadData() {
         
-        let venues = try! Store.shared.managedObjectContext.managedObjects(VenueListItem)
+        let summit = SummitManager.shared.summit.value
+        
+        let venues = try! VenueListItem.filter("summit.id" == summit, context: Store.shared.managedObjectContext)
         
         internalVenueList = venues.filter({ $0.isInternal == true })
         externalVenueList = venues.filter({ $0.isInternal == false })
+        
         tableView.reloadData()
     }
     
@@ -136,12 +135,16 @@ final class VenueListViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         if section == VenueListSectionType.External.rawValue {
-            let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier(tableViewHeaderCellIdentifier)
-            let header = cell as! TableViewHeaderView
-            header.titleLabel.text = "EXTERNAL VENUES"
-            return cell
+            
+            let headerView = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier(TableViewHeaderView.reuseIdentifier) as! TableViewHeaderView
+            
+            headerView.titleLabel.text = "EXTERNAL VENUES"
+            
+            return headerView
         }
+        
         return nil
     }
     

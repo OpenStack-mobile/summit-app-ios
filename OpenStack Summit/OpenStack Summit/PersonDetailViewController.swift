@@ -28,6 +28,11 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         var items = [AnyObject]()
         
+        if let url = self.userActivity?.webpageURL {
+            
+            items.append(url)
+        }
+        
         items.append(self.headerView.nameLabel.text ?? "")
         
         for data in self.data {
@@ -48,15 +53,12 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         items.append(self.headerView.imageView.image!)
         
-        if let url = self.userActivity?.webpageURL {
-            
-            items.append(url)
-        }
-        
         return ContextMenu(actions: [], shareItems: items, systemActions: true)
     }
     
     // MARK: - Private Properties
+    
+    private var loadingTableView = false
     
     private var data = [Data]()
     
@@ -133,6 +135,13 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         self.performSegueWithIdentifier(R.segue.personDetailViewController.showAttendeeConfirm, sender: self)
     }
     
+    // MARK: - Actions
+    
+    @IBAction func refresh(sender: AnyObject? = nil) {
+        
+        configureView()
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {
@@ -195,6 +204,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
         
         // configure cells
         
+        loadingTableView = true
+        
         data = []
         
         switch profile {
@@ -229,6 +240,8 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
             
             self.data.append(.biography(attributedString))
         }
+        
+        loadingTableView = false
         
         tableView.reloadData()
         
@@ -303,6 +316,13 @@ final class PersonDetailViewController: UITableViewController, IndicatorInfoProv
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // WebKit or UIKit is causing the tableview cell to refresh without reloading.
+        // http://stackoverflow.com/questions/23926541/how-can-initializing-nsattributedstring-in-tableviewheightforrowatindexpath-be
+        guard loadingTableView == false else {
+            
+            return UITableViewCell()
+        }
         
         let data = self.data[indexPath.row]
         

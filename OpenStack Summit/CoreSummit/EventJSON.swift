@@ -12,7 +12,7 @@ internal extension Event {
     
     enum JSONKey: String {
         
-        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups, rsvp_external, to_record
+        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups, rsvp_external, to_record, attachment, slides
     }
 }
 
@@ -96,6 +96,20 @@ extension Event: JSONParametrizedDecodable {
         } else {
             
             self.videos = []
+        }
+        
+        if let attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String {
+            
+            self.attachment = attachment
+            
+        } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
+            let slides = String.fromJSON(slidesJSONArray) {
+            
+            self.attachment = slides.first
+            
+        } else {
+            
+            self.attachment = nil
         }
         
         // should never come in this JSON response
@@ -194,6 +208,20 @@ extension MemberResponse.Event: JSONDecodable {
         } else {
             
             self.videos = []
+        }
+        
+        if let attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String {
+            
+            self.attachment = attachment
+            
+        } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
+            let slides = String.fromJSON(slidesJSONArray) {
+            
+            self.attachment = slides.first
+            
+        } else {
+            
+            self.attachment = nil
         }
     }
 }

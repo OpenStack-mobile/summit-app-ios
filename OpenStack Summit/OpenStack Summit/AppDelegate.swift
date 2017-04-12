@@ -28,10 +28,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     var window: UIWindow?
     
     lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
-        
-    lazy var navigationController: UINavigationController = UINavigationController(rootViewController: self.menuViewController.generalScheduleViewController)
     
-    lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: self.navigationController)
+    lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: UINavigationController(rootViewController: self.menuViewController.generalScheduleViewController))
     
     lazy var launchScreenViewController: LaunchScreenViewController = (self.window!.rootViewController as! UINavigationController).viewControllers.first as! LaunchScreenViewController
 
@@ -49,6 +47,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         // setup Google Maps
         GMSServices.provideAPIKey(AppConsumerKey(AppEnvironment).googleMaps)
+        
+        // setup BuddyBuild SDK
+        BuddyBuildSDK.setup()
         
         // initialize Store
         let _ = Store.shared
@@ -182,7 +183,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         if let sourceApplication = sourceApplication {
             
-            options["UIApplicationOpenURLOptionsSourceApplicationKey"] = sourceApplication
+            options[UIApplicationOpenURLOptionsSourceApplicationKey] = sourceApplication
         }
         
         return self.application(application, openURL: url, options: options)
@@ -190,7 +191,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         
-        if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] as? String {
+        if let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String {
             
             let bundleID = NSBundle.mainBundle().bundleIdentifier
             
@@ -216,7 +217,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         /// force view load
         let _ = self.revealViewController.view
         let _ = self.menuViewController.view
-        let _ = self.navigationController.view
+        let _ = self.revealViewController.frontViewController.view
         
         if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController
             && self.launchScreenViewController.willTransition == false {
@@ -359,6 +360,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         case .speakers: self.menuViewController.showSpeakers()
         case .about: self.menuViewController.showAbout()
         }
+    }
+    
+    func search(searchTerm: String) {
+        
+        self.menuViewController.showSearch(for: searchTerm)
     }
 }
 

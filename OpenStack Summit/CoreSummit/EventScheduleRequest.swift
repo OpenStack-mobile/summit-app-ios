@@ -47,7 +47,7 @@ public extension Store {
                     
                     attendee.schedule.insert(eventManagedObject)
                     
-                    try context.validateAndSave()
+                    try context.save()
                 }
             }
             
@@ -90,7 +90,50 @@ public extension Store {
                     
                     attendee.schedule.remove(eventManagedObject)
                     
-                    try context.validateAndSave()
+                    try context.save()
+                }
+            }
+            
+            completion(nil)
+        })
+    }
+    
+    func removeRSVP(summit: Identifier? = nil, event: Identifier, completion: (ErrorType?) -> ()) {
+        
+        let summitID: String
+        
+        if let identifier = summit {
+            
+            summitID = "\(identifier)"
+            
+        } else {
+            
+            summitID = "current"
+        }
+        
+        let URI = "/api/v1/summits/\(summitID)/attendees/me/schedule/\(event)/rsvp"
+        
+        let URL = environment.configuration.serverURL + URI
+        
+        let http = self.createHTTP(.OpenIDGetFormUrlEncoded)
+        
+        let context = privateQueueManagedObjectContext
+        
+        http.DELETE(URL, parameters: nil, completionHandler: {(responseObject, error) in
+            
+            // forward error
+            guard error == nil
+                else { completion(error!); return }
+            
+            // cache
+            try! context.performErrorBlockAndWait {
+                
+                if let attendee = try self.authenticatedMember(context)?.attendeeRole,
+                    let eventManagedObject = try EventManagedObject.find(event, context: context) {
+                    
+                    attendee.schedule.remove(eventManagedObject)
+                    
+                    try context.save()
                 }
             }
             

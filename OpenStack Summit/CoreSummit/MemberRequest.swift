@@ -81,6 +81,8 @@ public struct MemberResponse {
         public let feedback: [Feedback]
         
         public let favoriteEvents: [Identifier]
+        
+        public let affiliations: [Affiliation]
     }
     
     public struct Event: Named {
@@ -112,6 +114,8 @@ public struct MemberResponse {
         public let externalRSVP: Bool
         
         public let willRecord: Bool
+        
+        public let attachment: String?
         
         public let sponsors: [Company]
         
@@ -200,6 +204,7 @@ public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool 
         && lhs.groupEvents == rhs.groupEvents
         && lhs.feedback == rhs.feedback
         && lhs.favoriteEvents == rhs.favoriteEvents
+        && lhs.affiliations == rhs.affiliations
 }
 
 public func == (lhs: MemberResponse.Track, rhs: MemberResponse.Track) -> Bool {

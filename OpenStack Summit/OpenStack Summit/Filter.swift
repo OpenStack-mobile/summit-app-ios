@@ -93,7 +93,7 @@ struct ScheduleFilter: Equatable {
         
         // fetch data
         let trackGroups = try! TrackGroup.scheduled(for: summitID, context: context)
-        let levels = try! Set(context.managedObjects(PresentationManagedObject.self, predicate: NSPredicate(format: "event.summit == %@", summit))
+        let levels = try! Set(context.managedObjects(PresentationManagedObject.self, predicate: "event.summit.id" == summitID)
             .map({ $0.level ?? "" }))
             .filter({ $0 != "" })
             .sort()
@@ -151,8 +151,10 @@ struct ScheduleFilter: Equatable {
             // dont want to override selection
             if didChangeActiveTalks == false {
                 
+                // During summit time jump to NOW as default, overriding Summit start date logic
+                
                 // start hiding active talks
-                activeFilters.insert(.activeTalks)
+                //activeFilters.insert(.activeTalks)
             }
         }
         else {

@@ -1,52 +1,55 @@
 //
 //  SearchViewController.swift
-//  OpenStackSummit
+//  OpenStack Summit
 //
-//  Created by Claudio on 10/22/15.
-//  Copyright © 2015 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 3/31/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import CoreData
+import EventKit
+import SwiftFoundation
 import CoreSummit
 
-final class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, RevealViewController, MessageEnabledViewController {
+final class SearchViewController: UITableViewController, EventViewController, RevealViewController, UISearchBarDelegate {
     
     // MARK: - IB Outlets
-
-    @IBOutlet weak var speakersTableView: UITableView!
-    @IBOutlet weak var tracksTableView: UITableView!
-    @IBOutlet weak var eventsTableView: UITableView!
-    @IBOutlet weak var searchTermTextView: UITextField!
-    @IBOutlet weak var eventsTableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tracksTableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var speakersTableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet private(set) weak var searchBar: UISearchBar!
+    
+    @IBOutlet private(set) var emptyView: UIView!
+    
+    @IBOutlet private(set) weak var emptyLabel: UILabel!
     
     // MARK: - Properties
-
+    
+    let fetchLimitPerEntity = 5
+    
     var searchTerm: String = "" {
         
         didSet {
             
-            guard isViewLoaded() else { return }
+            let _ = self.view
             
-            if searchTermTextView.text != searchTerm {
+            if searchBar.text != searchTerm {
                 
-                searchTermTextView.text = searchTerm
+                searchBar.text = searchTerm
             }
+            
+            searchTermChanged()
         }
     }
     
-    // MARK: - Private Properties
+    private var data: Data = .none {
+        
+        didSet { configureView() }
+    }
     
-    private var events = [ScheduleItem]()
-    private var tracks = [Track]()
-    private var speakers = [Speaker]()
-    private let objectsPerPage = 1000
-    private var pageSpeakers = 1
-    private var loadedAllSpeakers = false
-    private var loadingSpeakers = false
-    private var isOperationOngoing = false
+    var eventRequestInProgress = false
+    
+    lazy var eventStore: EKEventStore = EKEventStore()
     
     // MARK: - Loading
     
@@ -56,313 +59,473 @@ final class SearchViewController: UIViewController, UITableViewDelegate, UITable
         addMenuButton()
         
         // setup table view
-        eventsTableView.registerNib(R.nib.scheduleTableViewCell)
-        eventsTableView.estimatedRowHeight = 100
-        eventsTableView.rowHeight = UITableViewAutomaticDimension
-        
-        speakersTableView.registerNib(R.nib.peopleTableViewCell)
-        searchTermTextView.delegate = self
-        
-        //hack: if I don't add this constraint, width for table goes out of margins and height doesn't work well
-        let tableWidthConstraint = NSLayoutConstraint(item: speakersTableView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
-        speakersTableView.addConstraint(tableWidthConstraint)
-        let tableHeightConstraint = NSLayoutConstraint(item: speakersTableView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: speakersTableView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
-        speakersTableView.addConstraint(tableHeightConstraint)
-        
-        navigationItem.title = "SEARCH"
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 60
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.registerNib(R.nib.scheduleTableViewCell)
+        // https://github.com/mac-cain13/R.swift/issues/144
+        tableView.registerNib(R.nib.searchTableViewHeaderView(), forHeaderFooterViewReuseIdentifier: SearchTableViewHeaderView.reuseIdentifier)
         
         // execute search
-        if searchTerm.isEmpty == false {
-            
-            self.search()
-        }
+        searchTermChanged()
     }
     
     // MARK: - Actions
     
-    /// Called by button in cell
-    @IBAction func toggleScheduledStatus(sender: UIButton) {
+    @IBAction func showEventContextMenu(sender: UIButton) {
         
-        let button = sender
-        let view = button.superview!
-        let cell = view.superview as! ScheduleTableViewCell
-        let indexPath = eventsTableView.indexPathForCell(cell)!
-        let event = events[indexPath.row]
+        let buttonOrigin = sender.convertPoint(.zero, toView: tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(buttonOrigin)!
+        let item = self[indexPath]
         
-        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
+        guard case let .event(scheduleItem) = item
+            else { fatalError("Invalid item \(item) for cell at index path \(indexPath)") }
         
-        if isOperationOngoing {
-            return
-        }
+        guard let eventManagedObject = try! EventManagedObject.find(scheduleItem.identifier, context: Store.shared.managedObjectContext)
+            else { fatalError("Invalid event \(scheduleItem.identifier)") }
         
-        isOperationOngoing = true
+        let eventDetail = EventDetail(managedObject: eventManagedObject)
         
-        // remove
-        if isScheduled {
+        let contextMenu = self.contextMenu(for: eventDetail)
+        
+        self.show(contextMenu: contextMenu, sender: .view(sender))
+    }
+    
+    @IBAction func showMore(sender: Button) {
+        
+        switch self.data {
             
-            cell.statusImageView.hidden = true
+        case .none:
             
-            Store.shared.removeEventFromSchedule(event.summit, event: event.identifier) { [weak self] (response) in
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    guard let controller = self else { return }
-                    
-                    controller.isOperationOngoing = false
-                    
-                    switch response {
-                        
-                    case let .Some(error):
-                        
-                        cell.statusImageView.hidden = false
-                        
-                        controller.showErrorMessage(error)
-                        
-                    case .None: break
-                    }
-                }
+            break
+            
+        case .entity:
+            
+            self.searchTermChanged()
+            
+        case let .all(sections):
+            
+            let section = sections[sender.tag]
+            
+            let entity = section.entity
+            
+            let result: (items: [Item], extend: Extend)
+            
+            switch entity {
+            case .event: result = try! self.search(ScheduleItem.self, searchTerm: searchTerm, all: true)
+            case .speaker: result = try! self.search(Speaker.self, searchTerm: searchTerm, all: true)
+            case .track: result = try! self.search(Track.self, searchTerm: searchTerm, all: true)
             }
-        }
-        
-        // add
-        else {
             
-            cell.statusImageView.hidden = false
-            
-            Store.shared.addEventToSchedule(event.summit, event: event.identifier)  { [weak self] (response) in
+            if result.items.isEmpty {
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    guard let controller = self else { return }
-                    
-                    controller.isOperationOngoing = false
-                    
-                    switch response {
-                        
-                    case let .Some(error):
-                        
-                        cell.statusImageView.hidden = true
-                        
-                        controller.showErrorMessage(error as NSError)
-                        
-                    case .None: break
-                    }
-                }
+                self.data = .none
+                
+            } else {
+                
+                let searchResult = SearchResult(entity: entity, items: result.items, extend: result.extend)
+                
+                self.data = .entity(searchResult)
             }
         }
     }
     
     // MARK: - Private Methods
     
-    private func search() {
+    private func searchTermChanged() {
         
-        loadedAllSpeakers = false
-        pageSpeakers = 1
-        speakers.removeAll()
+        if searchTerm.isEmpty {
+            
+            data = .none
+            
+        } else {
+            
+            // fetch all items
+            
+            var sections = [SearchResult]()
+            
+            func search<T: SearchViewControllerItem>(type: T.Type, entity: Entity) throws {
+                
+                let (items, extend) = try self.search(type, searchTerm: searchTerm, all: false)
+                
+                guard items.isEmpty == false else { return }
+                
+                let searchResults = SearchResult(entity: entity, items: items, extend: extend)
+                
+                sections.append(searchResults)
+            }
+            
+            // populate sections
+            try! search(ScheduleItem.self, entity: .event)
+            try! search(Speaker.self, entity: .speaker)
+            try! search(Track.self, entity: .track)
+            
+            if sections.isEmpty {
+                
+                data = .none
+                
+            } else {
+                
+                data = .all(sections)
+            }
+        }
+    }
+    
+    private func configureView() {
+        
+        tableView.reloadData()
+        
+        // scroll to top
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
+            
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+        }
+        
+        let tableFooterView: UIView
+        
+        // configure footer view
+        switch data {
+            
+        case .all, .entity:
+            
+            tableFooterView = UIView()
+            
+        case .none:
+            
+            emptyLabel.text = searchTerm.isEmpty ? "Type to search" : "No results"
+            tableFooterView = emptyView
+        }
+        
+        tableView.tableFooterView = tableFooterView
+    }
+    
+    private func search<T: SearchViewControllerItem>(type: T.Type, searchTerm: String, all: Bool) throws -> ([Item], Extend) {
         
         let context = Store.shared.managedObjectContext
         
-        events = try! ScheduleItem.search(searchTerm, context: context)
-        reloadEvents()
-        tracks = try! Track.search(searchTerm, context: context)
-        reloadTracks()
+        let summit = SummitManager.shared.summit.value
         
-        getSpeakers()
+        let limit = all ? 0 : fetchLimitPerEntity
+        
+        let predicate = type.predicate(for: searchTerm, summit: summit)
+        
+        let results = try context.managedObjects(type, predicate: predicate, limit: limit)
+        
+        let items = results.map { $0.toItem() }
+        
+        let extend: Extend
+        
+        if all {
+            
+            extend = .all
+            
+        } else {
+            
+            let allCount = try context.count(T.ManagedObject.self, predicate: predicate)
+            
+            if allCount > results.count {
+                
+                extend = .entity
+                
+            } else {
+                
+                extend = .none
+            }
+        }
+        
+        return (items, extend)
     }
     
-    private func setupTable(tableView: UITableView, withRowCount count: Int, withMinSize minSize:Int, withConstraint constraint: NSLayoutConstraint) {
-        if count > 0 {
-            constraint.constant = count <= 4 ? max(CGFloat(minSize), tableView.contentSize.height) : 290
-            tableView.backgroundView = nil
+    private subscript(indexPath: NSIndexPath) -> Item {
+        
+        let section: SearchResult
+        
+        switch data {
+        case .none: fatalError("No items")
+        case let .all(sections): section = sections[indexPath.section]
+        case let .entity(entitySection): section = entitySection
         }
-        else {
-            constraint.constant = 40
-            let label = UILabel()
-            label.text = " No results"
-            label.sizeToFit()
-            tableView.backgroundView = label
-        }
-        tableView.frame.size.height = constraint.constant
+        
+        let item = section.items[indexPath.row]
+        
+        return item
     }
     
-    // MARK: Fetch Data / Requests
-    
-    private func getSpeakers() {
+    private subscript(section index: Int) -> SearchResult {
         
-        if loadingSpeakers || loadedAllSpeakers {
-            return
+        let section: SearchResult
+        
+        switch data {
+        case .none: fatalError("No items")
+        case let .all(sections): section = sections[index]
+        case let .entity(entitySection): section = entitySection
         }
         
-        loadingSpeakers = true
-        
-        let speakersPage = try! Speaker.filter(searchTerm, page: pageSpeakers, objectsPerPage: objectsPerPage, context: Store.shared.managedObjectContext)
-        
-        defer { self.loadingSpeakers = false }
-        
-        self.speakers.appendContentsOf(speakersPage)
-        self.reloadSpeakers()
-        self.loadedAllSpeakers = speakersPage.count < self.objectsPerPage
-        self.pageSpeakers += 1
+        return section
     }
     
-    // MARK: Configure Table View Cells
-    
-    private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: ScheduleTableViewCell, with event: ScheduleItem) {
         
-        let index = indexPath.row
-        let event = events[index]
-        
+        // set text
         cell.nameLabel.text = event.name
         cell.dateTimeLabel.text = event.dateTime
         cell.trackLabel.text = event.track
         cell.trackLabel.hidden = event.track.isEmpty
-        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? .blackColor()
-        cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
-        cell.statusImageView.hidden = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
+        cell.trackLabel.textColor = UIColor(hexString: event.trackGroupColor) ?? UIColor(hexString: "#9B9B9B")
+        
+        // set image
+        let isScheduled = Store.shared.isEventScheduledByLoggedMember(event: event.identifier)
+        let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
+        
+        if isScheduled {
+            
+            cell.statusImageView.hidden = false
+            cell.statusImageView.image = R.image.contextMenuScheduleAdd()!
+            
+        } else if isFavorite {
+            
+            cell.statusImageView.hidden = false
+            cell.statusImageView.image = R.image.contextMenuWatchListAdd()!
+            
+        } else {
+            
+            cell.statusImageView.hidden = true
+            cell.statusImageView.image = nil
+            
+        }
+        
+        // configure button
+        cell.contextMenuButton.addTarget(self, action: #selector(showEventContextMenu), forControlEvents: .TouchUpInside)
     }
     
-    private func configure(cell cell: TrackTableViewCell, at indexPath: NSIndexPath) {
+    private func configure(cell cell: PeopleTableViewCell, with speaker: Speaker) {
         
-        let index = indexPath.row
-        let track = tracks[index]
-        cell.nameLabel.text = track.name
-    }
-    
-    private func configure(cell cell: PeopleTableViewCell, at indexPath: NSIndexPath) {
-        
-        let index = indexPath.row
-        
-        let speaker = speakers[index]
         cell.name = speaker.name
         cell.title = speaker.title
         cell.pictureURL = speaker.pictureURL
+    }
+    
+    private func configure(cell cell: SearchResultTableViewCell, with track: Track) {
         
-        /// fetch more
-        if (index == (speakers.count-1) && !loadedAllSpeakers) {
-            
-            getSpeakers()
-        }
+        cell.itemLabel.text = track.name
     }
     
-    // MARK: Reload Table Views
+    // MARK: - UISearchBarDelegate
     
-    private func reloadEvents() {
-        eventsTableView.delegate = self
-        eventsTableView.dataSource = self
-        eventsTableView.reloadData()
-        eventsTableView.layoutIfNeeded()
-        setupTable(eventsTableView, withRowCount: eventsTableView.numberOfRowsInSection(0), withMinSize: 130, withConstraint: eventsTableViewHeightConstraint)
-        eventsTableView.updateConstraintsIfNeeded()
-    }
-
-    private func reloadTracks() {
-        tracksTableView.delegate = self
-        tracksTableView.dataSource = self
-        tracksTableView.reloadData()
-        tracksTableView.layoutIfNeeded()
-        setupTable(tracksTableView, withRowCount: tracksTableView.numberOfRowsInSection(0), withMinSize: 50, withConstraint: tracksTableViewHeightConstraint)
-        tracksTableView.updateConstraintsIfNeeded()
-    }
-
-    private func reloadSpeakers() {
-        speakersTableView.delegate = self
-        speakersTableView.dataSource = self
-        speakersTableView.reloadData()
-        speakersTableView.layoutIfNeeded()
-        setupTable(speakersTableView, withRowCount: speakersTableView.numberOfRowsInSection(0), withMinSize: 60, withConstraint: speakersTableViewHeightConstraint)
-        speakersTableView.updateConstraintsIfNeeded()
-    }
-    
-    // MARK: - UITextFieldDelegate
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
-        searchTermTextView.resignFirstResponder()
+        let text = searchBar.text ?? ""
         
-        if let text = searchTermTextView.text where text.isEmpty == false {
+        if self.searchTerm != text {
             
             self.searchTerm = text
-            self.search()
         }
         
-        return true
+        searchBar.endEditing(true)
     }
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        switch tableView {
-            
-        case eventsTableView: return events.count
-        case tracksTableView: return tracks.count
-        case speakersTableView: return speakers.count
-            
-        default: fatalError("Invalid table view: \(tableView)")
+        switch data {
+        case .none: return 0
+        case let .all(sections): return sections.count
+        case .entity: return 1
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
         
-        switch tableView {
+        let section = self[section: sectionIndex]
+        
+        return section.items.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let item = self[indexPath]
+        
+        switch item {
             
-        case eventsTableView:
+        case let .event(event):
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.scheduleTableViewCell, forIndexPath: indexPath)!
-            configure(cell: cell, at: indexPath)
+            
+            configure(cell: cell, with: event)
+            
             return cell
             
-        case tracksTableView:
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.trackTableViewCell, forIndexPath: indexPath)!
-            configure(cell: cell, at: indexPath)
-            return cell
-            
-        case speakersTableView:
+        case let .speaker(speaker):
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.peopleTableViewCell, forIndexPath: indexPath)!
-            configure(cell: cell, at: indexPath)
+            
+            configure(cell: cell, with: speaker)
+            
             return cell
             
-        default: fatalError("Invalid table view: \(tableView)")
+        case let .track(track):
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.searchResultTableViewCell, forIndexPath: indexPath)!
+            
+            configure(cell: cell, with: track)
+            
+            return cell
         }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
+        
+        let section = self[section: sectionIndex]
+        
+        let sectionTitle: String
+        
+        switch section.entity {
+        case .event: sectionTitle = "EVENTS"
+        case .speaker: sectionTitle = "SPEAKERS"
+        case .track: sectionTitle = "TRACKS"
+        }
+        
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(SearchTableViewHeaderView.reuseIdentifier) as! SearchTableViewHeaderView
+        
+        headerView.titleLabel.text = sectionTitle
+        
+        let buttonText: String
+        
+        switch section.extend {
+        case .none, .all: buttonText = "Show All Results"
+        case .entity: buttonText = "See All"
+        }
+        
+        headerView.moreButton.setTitle(buttonText, forState: .Normal)
+        
+        if headerView.moreButton.allTargets().isEmpty {
+            
+            headerView.moreButton.addTarget(self, action: #selector(showMore), forControlEvents: .TouchUpInside)
+        }
+        
+        headerView.moreButton.tag = sectionIndex
+        
+        headerView.moreButton.hidden = section.extend == .none
+        
+        return headerView
     }
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        switch tableView {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let item = self[indexPath]
+        
+        switch item {
             
-        case eventsTableView:
+        case let .event(event):
             
-            let event = events[indexPath.row]
+            let eventDetailViewController = R.storyboard.event.eventDetailViewController()!
             
-            let eventVC = R.storyboard.event.eventDetailViewController()!
+            eventDetailViewController.event = event.identifier
             
-            eventVC.event = event.identifier
+            showViewController(eventDetailViewController, sender: self)
             
-            showViewController(eventVC, sender: self)
+        case let .speaker(speaker):
             
-        case tracksTableView:
+            let memberProfileViewController = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
             
-            let track = tracks[indexPath.row]
+            showViewController(memberProfileViewController, sender: self)
             
-            let trackScheduleVC = R.storyboard.schedule.trackScheduleViewController()!
+        case let .track(track):
             
-            trackScheduleVC.track = track
+            let trackScheduleViewController = R.storyboard.schedule.trackScheduleViewController()!
             
-            self.showViewController(trackScheduleVC, sender: self)
+            trackScheduleViewController.track = track
             
-        case speakersTableView:
-            
-            let speaker = speakers[indexPath.row]
-            
-            let memberProfileVC = MemberProfileViewController(profile: PersonIdentifier(speaker: speaker))
-            
-            showViewController(memberProfileVC, sender: self)
-            
-        default: fatalError("Invalid table view: \(tableView)")
+            showViewController(trackScheduleViewController, sender: self)
         }
     }
 }
+
+// MARK: - Supporting Types
+
+final class SearchResultTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var itemLabel: UILabel!
+}
+
+private extension SearchViewController {
+    
+    struct SearchResult {
+        let entity: Entity
+        let items: [Item]
+        let extend: Extend
+    }
+    
+    enum Data {
+        
+        case none
+        case all([SearchResult])
+        case entity(SearchResult)
+    }
+    
+    enum Entity {
+        
+        case event
+        case speaker
+        case track
+    }
+    
+    enum Item {
+        
+        case event(ScheduleItem)
+        case speaker(Speaker)
+        case track(Track)
+    }
+    
+    enum Extend {
+        
+        case none
+        case entity
+        case all
+    }
+}
+
+private protocol SearchViewControllerItem: CoreDataDecodable {
+    
+    func toItem() -> SearchViewController.Item
+    
+    static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate
+}
+
+extension ScheduleItem: SearchViewControllerItem {
+    
+    private func toItem() -> SearchViewController.Item { return .event(self) }
+    
+    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+        
+        return NSPredicate(format: "summit.id == %@ AND (name CONTAINS[c] %@ OR sponsors.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm)
+    }
+}
+
+extension Speaker: SearchViewControllerItem {
+    
+    private func toItem() -> SearchViewController.Item { return .speaker(self) }
+    
+    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+        
+        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR firstName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm, searchTerm)
+    }
+}
+
+extension Track: SearchViewControllerItem {
+    
+    private func toItem() -> SearchViewController.Item { return .track(self) }
+    
+    private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
+        
+        return NSPredicate(format: "summits.id CONTAINS %@ AND name CONTAINS[c] %@", NSNumber(longLong: Int64(summit)), searchTerm)
+    }
+}
+
+

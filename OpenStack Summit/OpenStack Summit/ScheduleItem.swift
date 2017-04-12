@@ -9,6 +9,7 @@
 import Foundation
 import CoreSummit
 import CoreData
+import struct SwiftFoundation.Date
 
 public struct ScheduleItem: CoreDataDecodable {
     
@@ -17,6 +18,8 @@ public struct ScheduleItem: CoreDataDecodable {
     public let identifier: Identifier
     public let name: String
     public let summit: Identifier
+    public let start: Date
+    public let end: Date
     public let dateTime: String
     public let time: String
     public let location: String
@@ -32,6 +35,8 @@ public struct ScheduleItem: CoreDataDecodable {
         self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
+        self.start = Date(foundation: event.start)
+        self.end = Date(foundation: event.end)
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)
@@ -153,6 +158,12 @@ internal extension ScheduleItem {
     @inline(__always)
     static func getTrackGroupColor(event: EventManagedObject) -> String {
         
-        return event.track?.groups.first?.color ?? ""
+        guard let track = event.track
+            where track.groups.isEmpty == false
+            else { return "" }
+        
+        let trackGroups = track.groups.sort { $0.0.id < $0.1.id }
+        
+        return trackGroups[0].color
     }
 }

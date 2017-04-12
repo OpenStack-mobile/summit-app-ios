@@ -285,6 +285,11 @@ final class MainWindowController: NSWindowController, SearchableController, NSSe
         }
     }
     
+    func search(searchTerm: String) {
+        
+        self.searchTerm = searchTerm
+    }
+    
     // MARK: - Notifications
     
     @objc private func windowWillClose(notification: NSNotification) {

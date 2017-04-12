@@ -90,8 +90,7 @@ extension UIViewController {
             
             if contextMenu.systemActions == false {
                 
-                activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,
-                                                                UIActivityTypeAddToReadingList,
+                activityViewController.excludedActivityTypes = [UIActivityTypeAddToReadingList,
                                                                 UIActivityTypeOpenInIBooks]
             }
             
@@ -130,6 +129,8 @@ extension ContextMenu {
         }
     }
 }
+
+// MARK: - UIActivity
 
 @objc final class ContextMenuActionActivity: UIActivity {
     
@@ -233,6 +234,64 @@ final class OpenInSafariActivity: UIActivity {
         let completed = UIApplication.sharedApplication().openURL(self.url)
         
         self.activityDidFinish(completed)
+    }
+    
+    private func url(from activityItems: [AnyObject]) -> NSURL? {
+        
+        return activityItems.firstMatching({ (item) in
+            
+            if let url = item as? NSURL where UIApplication.sharedApplication().canOpenURL(url) {
+                
+                return true
+                
+            } else {
+                
+                return false
+            }
+            
+        }) as! NSURL?
+    }
+}
+
+final class CopyLinkActivity: UIActivity {
+    
+    private var url: NSURL!
+    
+    override class func activityCategory() -> UIActivityCategory {
+        
+        return .Action
+    }
+    
+    override func activityType() -> String? {
+        
+        return "\(self.dynamicType)"
+    }
+    
+    override func activityTitle() -> String? {
+        
+        return "Copy Link"
+    }
+    
+    override func activityImage() -> UIImage? {
+        
+        return R.image.openInSafariActivity()!
+    }
+    
+    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+        
+        return url(from: activityItems) != nil
+    }
+    
+    override func prepareWithActivityItems(activityItems: [AnyObject]) {
+        
+        self.url = url(from: activityItems)!
+    }
+    
+    override func performActivity() {
+        
+        UIPasteboard.generalPasteboard().string = self.url.absoluteString ?? ""
+        
+        self.activityDidFinish(true)
     }
     
     private func url(from activityItems: [AnyObject]) -> NSURL? {

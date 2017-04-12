@@ -19,28 +19,7 @@ protocol MessageEnabledViewController: class {
     func showErrorMessage(error: ErrorType, fileName: String, lineNumber: Int)
 }
 
-#if os(iOS)
-
-extension MessageEnabledViewController {
-    
-    func showInfoMessage(title: String, message: String) {
-        SweetAlert().showAlert(title, subTitle: message, style: AlertStyle.Warning)
-    }
-    
-    func showErrorMessage(error: ErrorType,
-                          fileName: String = #file,
-                          lineNumber: Int = #line) {
-        
-        let nsError = (error as NSError)
-        var message = nsError.localizedDescription
-        message += "\n\nDomain: \(nsError.domain)\nCode: \(nsError.code)"
-        SweetAlert().showAlert("Something failed", subTitle: message, style: AlertStyle.Error)
-        
-        print("Error at \(fileName):\(lineNumber)\n\(error)")
-    }
-}
-
-#elseif os(tvOS)
+#if os(iOS) || os(tvOS)
 
 extension MessageEnabledViewController {
     
@@ -53,7 +32,7 @@ extension MessageEnabledViewController {
                                       message: message,
                                       preferredStyle: .Alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: { (UIAlertAction) -> Void in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default, handler: { (UIAlertAction) -> () in
             
             alert.dismissViewControllerAnimated(true, completion: nil)
         }))
@@ -65,15 +44,19 @@ extension MessageEnabledViewController {
                           fileName: String = #file,
                           lineNumber: Int = #line) {
         
-        guard let viewController = self as? UIViewController
-            else { fatalError("Not a view controller") }
-        
         let nsError = (error as NSError)
         let message = nsError.localizedDescription
         
         print("Error at \(fileName):\(lineNumber)\n\(error)")
         
-        viewController.showErrorAlert(message)
+        if AppEnvironment == .Staging {
+            
+            showInfoMessage(NSLocalizedString("Error", comment: "Error"), message: message)
+        }
+        else {
+            
+            showInfoMessage(NSLocalizedString("We're sorry, there was an error.", comment: "Friendly error alert title"), message: "It has been reported to our dev team.")
+        }
     }
 }
     

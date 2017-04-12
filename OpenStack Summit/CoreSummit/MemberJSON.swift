@@ -12,7 +12,7 @@ private extension Member {
     
     enum JSONKey: String {
         
-        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee, feedback, favorite_summit_events
+        case id, first_name, last_name, gender, title, bio, irc, twitter, linked_in, member_id, pic, speaker, schedule, groups_events, groups, attendee, feedback, favorite_summit_events, affiliations
     }
 }
 
@@ -62,6 +62,18 @@ extension Member: JSONDecodable {
         } else {
             
             self.groups = []
+        }
+        
+        if let affiliationsJSONArray = JSONObject[JSONKey.affiliations.rawValue]?.arrayValue {
+            
+            guard let affiliations = Affiliation.fromJSON(affiliationsJSONArray)
+                else { return nil }
+            
+            self.affiliations = Set(affiliations)
+            
+        } else {
+            
+            self.affiliations = []
         }
         
         // not in this JSON response
@@ -131,6 +143,18 @@ extension MemberResponse.Member: JSONDecodable {
         } else {
             
             self.attendeeRole = nil
+        }
+        
+        if let affiliationsJSONArray = JSONObject[JSONKey.affiliations.rawValue]?.arrayValue {
+            
+            guard let affiliations = Affiliation.fromJSON(affiliationsJSONArray)
+                else { return nil }
+            
+            self.affiliations = affiliations
+            
+        } else {
+            
+            self.affiliations = []
         }
     }
 }

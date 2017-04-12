@@ -39,6 +39,8 @@ public final class MemberManagedObject: Entity {
     @NSManaged public var feedback: Set<FeedbackManagedObject>
     
     @NSManaged public var favoriteEvents: Set<EventManagedObject>
+    
+    @NSManaged public var affiliations: Set<AffiliationManagedObject>
 }
 
 // MARK: - Encoding
@@ -60,6 +62,7 @@ extension Member: CoreDataDecodable {
         self.feedback = managedObject.feedback.identifiers
         self.groupEvents = managedObject.groupEvents.identifiers
         self.favoriteEvents = managedObject.favoriteEvents.identifiers
+        self.affiliations = Affiliation.from(managedObjects: managedObject.affiliations)
         
         if let managedObject = managedObject.speakerRole {
             
@@ -96,6 +99,7 @@ extension Member: CoreDataEncodable {
         managedObject.biography = biography
         managedObject.gender = gender
         managedObject.groups = try context.relationshipFault(groups)
+        managedObject.affiliations = try context.relationshipFault(affiliations)
         
         if speakerRole != nil {
             
@@ -136,6 +140,7 @@ extension MemberResponse.Member: CoreDataEncodable {
         managedObject.feedback = try context.relationshipFault(Set(feedback))
         managedObject.groupEvents = try context.relationshipFault(Set(groupEvents))
         managedObject.favoriteEvents = try context.relationshipFault(Set(favoriteEvents))
+        managedObject.affiliations = try context.relationshipFault(Set(affiliations))
         
         managedObject.didCache()
         
