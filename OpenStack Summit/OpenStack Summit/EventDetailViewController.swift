@@ -396,7 +396,11 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
             
         } else {
             
-            let reviewCount = currentFeedbackPage?.total ?? 0
+            let cacheReviewCount = feedbackList.count
+            
+            let serverReviewCount = currentFeedbackPage?.total ?? 0
+            
+            let reviewCount = serverReviewCount > cacheReviewCount ? serverReviewCount : cacheReviewCount
             
             feedBackHeader.reviewsLabel.text = "\(reviewCount) Reviews"
         }

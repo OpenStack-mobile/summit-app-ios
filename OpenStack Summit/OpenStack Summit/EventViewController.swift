@@ -140,37 +140,76 @@ extension EventViewController {
         
         let rsvpURL = event.rsvp.isEmpty ? nil : NSURL(string: event.rsvp)
         
-        // just open RSVP link
-        guard rsvpURL == nil || event.externalRSVP else {
+        let externalRSVP = event.externalRSVP
+        
+        let newValue = !scheduled
+        
+        // different action based on conditions
+        switch (newValue, rsvpURL, externalRSVP) {
             
-            UIApplication.sharedApplication().openURL(rsvpURL!)
-            return
+        // non-RSVP
+        case let (newValue, .None, externalRSVP):
+            
+            assert(externalRSVP == false, "External RSVP should always have RSVP urls")
+            
+            // add / remove from schedule
+            
+            let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
+            
+            // update cache immediately and add to schedule
+            setScheduledOnServer(request, for: event, cacheValue: newValue) { }
+            
+        // external RSVP
+        case let (newValue, .Some(url), true):
+            
+            // rsvp_external (boolean) if true, then before redirect to WEBView, mobile app should add the event to my schedule calling API ( this is only for attendees)
+            
+            // When event has external RSVP, clicking unRSVP button pings unSCHEDULE endpoint.
+            // In this case, we do redirect to RSVP link (so, external RSVP redirects both when doing RSVP and unRSVP)
+            
+            let request = newValue ? Store.shared.addEventToSchedule : Store.shared.removeEventFromSchedule
+            
+            // update cache immediately, add to schedule and open RSVP link
+            setScheduledOnServer(request, for: event, cacheValue: newValue) { UIApplication.sharedApplication().openURL(url) }
+            
+        // internal RSVPing
+        case let (true, .Some(url), false):
+            
+            // just open RSVP link
+            UIApplication.sharedApplication().openURL(url)
+          
+        // internal unRSVPing
+        case (false, .Some, false):
+            
+            // When event has internal RSVP, clicking unRSVP button needs to ping the unRSVP endpoint 
+            // (replacing the unSCHEDULE call since its done automatically by the server).
+            // In this case, we dont need to redirect to RSVP link.
+            setScheduledOnServer(Store.shared.removeRSVP, for: event) { }
         }
+    }
+    
+    private func setScheduledLocally(value: Bool, for event: Identifier) {
         
         guard let attendee = Store.shared.authenticatedMember?.attendeeRole
             else { return }
         
-        guard eventRequestInProgress == false else { return }
-        
-        eventRequestInProgress = true
-        
-        func setScheduled(newValue: Bool) {
+        // update model
+        if let managedObject = try! EventManagedObject.find(event, context: Store.shared.managedObjectContext) {
             
-            // update model
-            if let managedObject = try! EventManagedObject.find(event.identifier, context: Store.shared.managedObjectContext) {
+            if value {
                 
-                if newValue {
-                    
-                    attendee.schedule.insert(managedObject)
-                    
-                } else {
-                    
-                    attendee.schedule.remove(managedObject)
-                }
+                attendee.schedule.insert(managedObject)
+                
+            } else {
+                
+                attendee.schedule.remove(managedObject)
             }
         }
-        
-        setScheduled(!scheduled)
+    }
+    
+    private typealias EventRequest = (summit: Identifier?, event: Identifier, completion: (ErrorType?) -> ()) -> ()
+    
+    private func setScheduledOnServer(request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: () -> ()) {
         
         let completion: ErrorType? -> () = { [weak self] (response) in
             
@@ -185,29 +224,32 @@ extension EventViewController {
                 case let .Some(error):
                     
                     // restore original value
-                    setScheduled(scheduled)
+                    if let cacheValue = cacheValue {
+                        
+                        controller.setScheduledLocally(!cacheValue, for: event.identifier)
+                    }
                     
                     // show error
                     controller.showErrorMessage(error)
                     
                 case .None:
                     
-                    if let url = rsvpURL {
-                        
-                        UIApplication.sharedApplication().openURL(url)
-                    }
+                    // handle success
+                    success()
                 }
             }
         }
         
-        if scheduled {
+        // set new value immediately in cache
+        if let cacheValue = cacheValue {
             
-            Store.shared.removeEventFromSchedule(event.summit, event: event.identifier, completion: completion)
-            
-        } else {
-            
-            Store.shared.addEventToSchedule(event.summit, event: event.identifier, completion: completion)
+            self.setScheduledLocally(cacheValue, for: event.identifier)
         }
+        
+        eventRequestInProgress = true
+        
+        // make API request
+        request(summit: event.summit, event: event.identifier, completion: completion)
     }
     
     func toggleFavorite(for event: EventDetail) {
