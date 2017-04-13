@@ -92,7 +92,7 @@ public extension Store {
                     
                     managedObject.averageFeedback = averageFeedback
                     
-                    try context.validateAndSave()
+                    try context.save()
                 }
             }
             
