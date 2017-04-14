@@ -8,12 +8,12 @@
 
 import Foundation
 
-public extension SummitDataUpdate {
+extension Summit.DataUpdate {
     
     typealias JSONKey = Summit.JSONKey
 }
 
-extension SummitDataUpdate: JSONDecodable {
+extension Summit.DataUpdate: JSONDecodable {
     
     public init?(json JSONValue: JSON.Value) {
         

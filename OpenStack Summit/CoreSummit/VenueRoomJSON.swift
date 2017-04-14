@@ -8,7 +8,7 @@
 
 import JSON
 
-public extension VenueRoom {
+internal extension VenueRoom {
     
     static var JSONClassName: String { return "SummitVenueRoom" }
     

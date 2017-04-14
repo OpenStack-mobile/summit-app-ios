@@ -155,19 +155,19 @@ public extension MemberManagedObject {
     @inline(__always)
     func isScheduled(event: Identifier) -> Bool {
         
-        return attendeeRole?.schedule.contains(where: { $0.identifier == event }) ?? false
+        return attendeeRole?.schedule.contains(where: { $0.id == event }) ?? false
     }
     
     @inline(__always)
     func isFavorite(event: Identifier) -> Bool {
         
-        return favoriteEvents.contains(where: { $0.identifier == event })
+        return favoriteEvents.contains(where: { $0.id == event })
     }
     
     @inline(__always)
     func feedback(for event: Identifier) -> FeedbackManagedObject? {
         
-        return feedback.first(where: { $0.event.identifier == event})
+        return feedback.first(where: { $0.event.id == event })
     }
 }
 
@@ -204,6 +204,6 @@ public extension Store {
     @inline(__always)
     func isEventScheduledByLoggedMember(event eventID: Identifier) -> Bool {
         
-        return self.authenticatedMember?.attendeeRole?.schedule.contains(where: { $0.identifier == eventID }) ?? false
+        return self.authenticatedMember?.attendeeRole?.schedule.contains(where: { $0.id == eventID }) ?? false
     }
 }

@@ -6,9 +6,9 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
+import JSON
 
-public extension VenueRoom.DataUpdate {
+internal extension VenueRoom.DataUpdate {
     
     typealias JSONKey = VenueRoom.JSONKey
 }
@@ -34,6 +34,14 @@ extension VenueRoom.DataUpdate: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String
-        self.capacity = JSONObject[JSONKey.Capacity.rawValue]?.integerValue
+        
+        if let capacity = JSONObject[JSONKey.Capacity.rawValue]?.integerValue {
+            
+            self.capacity = Int(capacity)
+            
+        } else {
+            
+            self.capacity = nil
+        }
     }
 }
