@@ -25,7 +25,7 @@ extension TrackGroup: JSONDecodable {
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
             let color = JSONObject[JSONKey.color.rawValue]?.rawValue as? String,
             let tracksJSONArray = JSONObject[JSONKey.tracks.rawValue]?.arrayValue,
-            let tracks = Int.from(json: tracksJSONArray)
+            let tracks = Identifier.from(json: tracksJSONArray)
             else { return nil }
         
         self.identifier = identifier

@@ -6,14 +6,14 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
+import JSON
 
-public extension PresentationDataUpdate {
+public extension Presentation.DataUpdate {
     
     typealias JSONKey = Presentation.JSONKey
 }
 
-extension PresentationDataUpdate: JSONDecodable {
+extension Presentation.DataUpdate: JSONDecodable {
     
     public init?(json JSONValue: JSON.Value) {
         

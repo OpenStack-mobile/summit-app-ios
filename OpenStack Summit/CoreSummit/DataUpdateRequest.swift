@@ -66,7 +66,7 @@ private extension Store {
                 else { completion(.error(error!)); return }
             
             // parse
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let jsonArray = json.arrayValue,
                 let dataUpdates = DataUpdate.from(json: jsonArray)
                 else { completion(.error(Error.invalidResponse)); return }

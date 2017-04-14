@@ -28,7 +28,7 @@ public extension Store {
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let page = Page<Feedback>(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
@@ -65,7 +65,7 @@ public extension Store {
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let averageFeedbackJSON = jsonObject[Event.JSONKey.avg_feedback_rate.rawValue]
                 else { completion(.error(Error.invalidResponse)); return }

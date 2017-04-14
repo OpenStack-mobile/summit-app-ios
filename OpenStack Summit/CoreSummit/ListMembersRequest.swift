@@ -17,7 +17,7 @@ public extension Store {
                  sort: MemberListRequest.SortDescriptor? = nil,
                  page: Int = 1,
                  perPage: Int = 10,
-                 completion: (ErrorValue<Page<Member>>) -> ()) {
+                 completion: @escaping (ErrorValue<Page<Member>>) -> ()) {
         
         let request = MemberListRequest(page: page, perPage: perPage, filter: filter, sort: sort)
         
@@ -27,20 +27,20 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let page = Page<Member>(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try page.items.save(context)
+                let _ = try page.items.save(context)
                 
                 try context.validateAndSave()
             }
@@ -65,7 +65,7 @@ public struct MemberListRequest {
     
     public func toURL(_ serverURL: String) -> String {
         
-        let urlComponents = URLComponents(string: serverURL + "/api/v1/members")!
+        var urlComponents = URLComponents(string: serverURL + "/api/v1/members")!
         
         var queryItems = [URLQueryItem]()
         
@@ -87,7 +87,7 @@ public struct MemberListRequest {
         
         urlComponents.queryItems = queryItems
         
-        return urlComponents.url!.absoluteString!
+        return urlComponents.url!.absoluteString
     }
 }
 

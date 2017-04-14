@@ -29,7 +29,7 @@ extension VenueFloor: JSONDecodable {
         
         self.identifier = identifier
         self.name = name
-        self.number = number
+        self.number = Int(number)
         self.venue = venueIdentifier
         
         // optional
@@ -37,7 +37,7 @@ extension VenueFloor: JSONDecodable {
         
         if let roomsJSONArray = JSONObject[JSONKey.rooms.rawValue]?.arrayValue {
             
-            guard let rooms = Int.from(json: roomsJSONArray)
+            guard let rooms = Identifier.from(json: roomsJSONArray)
                 else { return nil }
             
             self.rooms = Set(rooms)

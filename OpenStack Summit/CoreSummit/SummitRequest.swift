@@ -19,7 +19,7 @@ public extension Store {
     
         let JSONString = try! String(contentsOfFile: resourcePath)
     
-        let json = JSON.Value(string: JSONString)!
+        let json = try? JSON.Value(string: JSONString)!
     
         let summit = Summit(json: json)!
         

@@ -8,12 +8,12 @@
 
 import Foundation
 
-public extension VenueRoomDataUpdate {
+public extension VenueRoom.DataUpdate {
     
     typealias JSONKey = VenueRoom.JSONKey
 }
 
-extension VenueRoomDataUpdate: JSONDecodable {
+extension VenueRoom.DataUpdate: JSONDecodable {
     
     public init?(json JSONValue: JSON.Value) {
         

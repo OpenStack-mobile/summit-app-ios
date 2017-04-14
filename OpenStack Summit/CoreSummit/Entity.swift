@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 /// Base CoreData Entity `NSManagedObject` subclass for CoreSummit.
 open class Entity: NSManagedObject {
@@ -101,7 +102,7 @@ public extension Entity {
         
         let entity = self.entity(in: context)
         
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        let fetchRequest = NSFetchRequest<Entity>(entityName: entity.name!)
         
         if let limit = fetchLimit {
             
@@ -116,7 +117,7 @@ public extension Entity {
         
         fetchRequest.sortDescriptors = sort
         
-        return try context.fetch(fetchRequest) as! [Entity]
+        return try context.fetch(fetchRequest)
     }
 }
 
@@ -132,14 +133,14 @@ public extension Fault where Value: CoreDataDecodable, Value.ManagedObject: Enti
             
         } else {
             
-            self = .identifier(managedObject.identifier)
+            self = .identifier(managedObject.id)
         }
     }
 }
 
 public extension Collection where Iterator.Element: Entity {
     
-    var identifiers: Set<Identifier> { return Set(self.map({ Int($0.id) })) }
+    var identifiers: Set<Identifier> { return Set(self.map({ $0.id })) }
 }
 
 public extension CoreDataDecodable where Self: Unique, ManagedObject: Entity {
@@ -273,7 +274,8 @@ internal extension NSManagedObjectContext {
     
     /// Returns managed object for fault value type.
     @inline(__always)
-    func relationshipFault<Encodable: Unique where Encodable: CoreDataEncodable, Encodable.ManagedObject: Entity>(_ fault: Fault<Encodable>) throws -> Encodable.ManagedObject {
+    func relationshipFault<Encodable: Unique>(_ fault: Fault<Encodable>) throws -> Encodable.ManagedObject
+        where Encodable: CoreDataEncodable, Encodable.ManagedObject: Entity {
         
         switch fault {
             

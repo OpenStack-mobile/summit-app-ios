@@ -38,6 +38,15 @@ extension VenueRoom: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String
-        self.capacity = JSONObject[JSONKey.Capacity.rawValue]?.integerValue
+        
+        if let capacity = JSONObject[JSONKey.Capacity.rawValue]?.integerValue {
+            
+            self.capacity = Int(capacity)
+            
+        } else {
+            
+            self.capacity = nil
+        }
+        
     }
 }

@@ -34,6 +34,6 @@ extension TimeZone: JSONDecodable {
         self.longitude = longitude
         self.comments = comments
         self.name = name
-        self.offset = offset
+        self.offset = Int(offset)
     }
 }

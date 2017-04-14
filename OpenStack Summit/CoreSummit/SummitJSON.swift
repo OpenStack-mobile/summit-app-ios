@@ -41,7 +41,7 @@ extension Summit: JSONDecodable {
             let trackGroupsJSONArray = JSONObject[JSONKey.track_groups.rawValue]?.arrayValue,
             let trackGroups = TrackGroup.from(json: trackGroupsJSONArray),
             let eventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let events = Event.from(json: eventsJSONArray, parameters: identifier),
+            let events = Event.from(json: eventsJSONArray, summit: identifier),
             let eventTypesJSONArray = JSONObject[JSONKey.event_types.rawValue]?.arrayValue,
             let eventTypes = EventType.from(json: eventTypesJSONArray),
             let webpageURL = JSONObject[JSONKey.page_url.rawValue]?.rawValue as? String,

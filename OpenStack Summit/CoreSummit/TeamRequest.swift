@@ -37,7 +37,7 @@ public extension Store {
                 else { completion(.error(error!)); return }
             
             // parse
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
                 let identifier = jsonObject["id"]?.integerValue
                 else { completion(.error(Error.invalidResponse)); return }
@@ -125,7 +125,7 @@ public extension Store {
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let entity = Team(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
@@ -198,7 +198,7 @@ public extension Store {
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
+            guard let json = try? JSON.Value(string: responseObject as! String),
                 let page = Page<Team>(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
