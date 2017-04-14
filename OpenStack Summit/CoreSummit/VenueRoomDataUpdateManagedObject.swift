@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension VenueRoomDataUpdate: CoreDataEncodable {
+extension VenueRoom.DataUpdate: CoreDataEncodable {
     
     public func save(_ context: NSManagedObjectContext) throws -> VenueRoomManagedObject {
         

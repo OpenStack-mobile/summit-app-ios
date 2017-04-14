@@ -28,7 +28,7 @@ internal func dump(_ dumpable: Any, _ outputFileName: String) -> String {
     
     dump(dumpable, to: &dumpString)
     
-    let stringData = dumpString.toUTF8Data().toFoundation()
+    let stringData = dumpString.toUTF8Data()
     
     try? stringData.write(to: Foundation.URL(fileURLWithPath: outputDirectory + outputFileName), options: [.atomic])
     

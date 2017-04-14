@@ -59,7 +59,7 @@ extension Event: CoreDataDecodable {
     
     public init(managedObject: EventManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.summit = managedObject.summit.identifier
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
@@ -92,8 +92,8 @@ extension Event: CoreDataEncodable {
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.socialDescription = socialDescription
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
@@ -126,8 +126,8 @@ extension MemberResponse.Event: CoreDataEncodable {
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.socialDescription = socialDescription
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp
@@ -194,7 +194,7 @@ public extension EventManagedObject {
             
         case let .interval(start, end):
             
-            datePredicate = NSPredicate(format: "end >= %@ AND end <= %@", start.toFoundation(), end.toFoundation())
+            datePredicate = NSPredicate(format: "end >= %@ AND end <= %@", start, end)
         }
         
         var predicates = [summitPredicate, datePredicate]

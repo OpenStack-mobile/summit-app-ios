@@ -155,10 +155,10 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = TimeZone(name: summit.timeZone.name)
                 dateFormatter.dateFormat = "MMMM d-"
-                let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+                let stringDateFrom = dateFormatter.stringFromDate(summit.start)
                 
                 dateFormatter.dateFormat = "d, yyyy"
-                let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+                let stringDateTo = dateFormatter.stringFromDate(summit.end)
                 
                 self.summitDateLabel.text = stringDateFrom + stringDateTo
             }

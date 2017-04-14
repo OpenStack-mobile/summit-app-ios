@@ -24,7 +24,7 @@ extension Company: CoreDataDecodable {
     
     public init(managedObject: CompanyManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
     }
 }

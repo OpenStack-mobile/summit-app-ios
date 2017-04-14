@@ -9,10 +9,11 @@
 import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func summits(_ page: Int = 1, objectsPerPage: Int = 30, completion: (ErrorValue<Page<SummitsResponse.Summit>>) -> ()) {
+    func summits(_ page: Int = 1, objectsPerPage: Int = 30, completion: @escaping (ErrorValue<Page<SummitsResponse.Summit>>) -> ()) {
         
         let URI = "/api/v1/summits?page=\(page)&per_page=\(objectsPerPage)"
         
@@ -20,7 +21,7 @@ public extension Store {
         
         let url = environment.configuration.serverURL + URI
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil

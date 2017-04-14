@@ -27,7 +27,7 @@ extension WirelessNetwork: CoreDataDecodable {
     
     public init(managedObject: WirelessNetworkManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.password = managedObject.password
         self.descriptionText = managedObject.descriptionText

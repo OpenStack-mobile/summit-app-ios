@@ -26,7 +26,7 @@ extension Affiliation: CoreDataDecodable {
     
     public init(managedObject: AffiliationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.isCurrent = managedObject.isCurrent
         self.member =  managedObject.member.identifier
         self.organization = AffiliationOrganization(managedObject: managedObject.organization)
@@ -57,8 +57,8 @@ extension Affiliation: CoreDataEncodable {
         
         let managedObject = try cached(context)
 
-        managedObject.start = start?.toFoundation()
-        managedObject.end = end?.toFoundation()
+        managedObject.start = start?
+        managedObject.end = end?
         managedObject.isCurrent = isCurrent
         managedObject.member = try context.relationshipFault(member)
         managedObject.organization = try context.relationshipFault(organization)

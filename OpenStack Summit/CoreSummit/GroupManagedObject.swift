@@ -24,7 +24,7 @@ extension Group: CoreDataDecodable {
     
     public init(managedObject: GroupManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.title = managedObject.title
         self.descriptionText = managedObject.descriptionText
         self.code = managedObject.code

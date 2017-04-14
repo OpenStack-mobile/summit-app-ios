@@ -6,7 +6,8 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
+import struct Foundation.Date
+import JSON
 
 public extension DataUpdate {
     

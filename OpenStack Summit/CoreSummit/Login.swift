@@ -34,7 +34,7 @@ public extension Store {
     }
     
     /// Login via OAuth with OpenStack ID
-    func login(_ summit: Identifier, loginCallback: () -> (), completion: (ErrorProtocol?) -> ()) {
+    func login(_ summit: Identifier, loginCallback: () -> (), completion: (Swift.Error?) -> ()) {
                 
         oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
             

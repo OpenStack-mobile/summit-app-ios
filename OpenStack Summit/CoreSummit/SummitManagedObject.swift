@@ -56,7 +56,7 @@ extension Summit: CoreDataDecodable {
     
     public init(managedObject: SummitManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.timeZone = managedObject.timeZone
         self.datesLabel = managedObject.datesLabel
@@ -104,12 +104,12 @@ extension Summit: CoreDataEncodable {
         managedObject.name = name
         managedObject.timeZone = timeZone
         managedObject.datesLabel = datesLabel
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
-        managedObject.defaultStart = defaultStart?.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
+        managedObject.defaultStart = defaultStart?
         managedObject.webpageURL = webpageURL
         managedObject.active = active
-        managedObject.startShowingVenues = startShowingVenues?.toFoundation()
+        managedObject.startShowingVenues = startShowingVenues?
         managedObject.sponsors = try context.relationshipFault(sponsors)
         managedObject.speakers = try context.relationshipFault(speakers)
         managedObject.ticketTypes = try context.relationshipFault(ticketTypes)

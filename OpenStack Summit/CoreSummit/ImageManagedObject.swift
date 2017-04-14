@@ -18,7 +18,7 @@ extension Image: CoreDataDecodable {
     
     public init(managedObject: ImageManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.url = managedObject.url
     }
 }

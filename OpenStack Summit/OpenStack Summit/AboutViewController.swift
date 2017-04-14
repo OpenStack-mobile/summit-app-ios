@@ -132,7 +132,7 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
                 
                 let sort = [NSSortDescriptor(key: "name", ascending: true)]
                 
-                let wirelessNetworks = try! WirelessNetwork.filter(("summit.id" == summit.identifier).toFoundation(), sort: sort, context: Store.shared.managedObjectContext)
+                let wirelessNetworks = try! WirelessNetwork.filter(("summit.id" == summit.identifier), sort: sort, context: Store.shared.managedObjectContext)
                 
                 if wirelessNetworks.isEmpty == false {
                     
@@ -187,10 +187,10 @@ final class AboutViewController: UITableViewController, RevealViewController, Em
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(name: summit.timeZone)
             dateFormatter.dateFormat = "MMMM dd-"
-            let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+            let stringDateFrom = dateFormatter.stringFromDate(summit.start)
             
             dateFormatter.dateFormat = "dd, yyyy"
-            let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+            let stringDateTo = dateFormatter.stringFromDate(summit.end)
             
             cell.dateLabel.text = "\(stringDateFrom)\(stringDateTo)"
         }

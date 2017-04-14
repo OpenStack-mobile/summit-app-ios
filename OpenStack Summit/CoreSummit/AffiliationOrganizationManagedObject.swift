@@ -17,7 +17,7 @@ extension AffiliationOrganization: CoreDataDecodable {
     
     public init(managedObject: AffiliationOrganizationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
     }
 }

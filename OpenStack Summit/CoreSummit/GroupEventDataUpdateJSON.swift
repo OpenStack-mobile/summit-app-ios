@@ -6,7 +6,8 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import Foundation
+import struct Foundation.Date
+import JSON
 
 private extension GroupEventDataUpdate {
     
@@ -29,10 +30,10 @@ extension GroupEventDataUpdate: JSONDecodable {
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.from(json: sponsorsJSONArray),
-            let presentation = PresentationDataUpdate(json: JSONValue),
+            let presentation = Presentation.DataUpdate(json: JSONValue),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue],
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
-            let groups = Int.from(json: groupsJSONArray)
+            let groups = Identifier.from(json: groupsJSONArray)
             else { return nil }
         
         self.identifier = identifier

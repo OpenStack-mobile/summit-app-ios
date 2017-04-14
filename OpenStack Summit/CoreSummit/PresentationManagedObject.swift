@@ -24,7 +24,7 @@ extension Presentation: CoreDataDecodable {
     
     public init(managedObject: PresentationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.level = managedObject.level != nil ? Level(rawValue: managedObject.level!) : nil
         self.moderator = managedObject.moderator?.identifier
         self.speakers = managedObject.speakers.identifiers

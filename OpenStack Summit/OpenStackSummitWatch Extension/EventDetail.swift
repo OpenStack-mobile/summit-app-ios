@@ -122,10 +122,10 @@ internal extension EventDetail {
         dateFormatter.dateFormat = "hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start.toFoundation())
+        let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end.toFoundation())
+        let stringDateTo = dateFormatter.stringFromDate(event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }
@@ -136,10 +136,10 @@ internal extension EventDetail {
         dateFormatter.dateFormat = "EEEE dd MMMM hh:mm a"
         dateFormatter.amSymbol = "am"
         dateFormatter.pmSymbol = "pm"
-        let stringDateFrom = dateFormatter.stringFromDate(event.start.toFoundation())
+        let stringDateFrom = dateFormatter.stringFromDate(event.start)
         
         dateFormatter.dateFormat = "hh:mm a"
-        let stringDateTo = dateFormatter.stringFromDate(event.end.toFoundation())
+        let stringDateTo = dateFormatter.stringFromDate(event.end)
         
         return "\(stringDateFrom) / \(stringDateTo)"
     }

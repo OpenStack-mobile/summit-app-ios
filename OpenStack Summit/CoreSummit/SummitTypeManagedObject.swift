@@ -20,7 +20,7 @@ extension SummitType: CoreDataDecodable {
     
     public init(managedObject: SummitTypeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.color = managedObject.color
     }

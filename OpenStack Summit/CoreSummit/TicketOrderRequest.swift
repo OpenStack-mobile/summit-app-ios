@@ -40,7 +40,7 @@ public extension Store {
         })
     }
     
-    func confirmAttendee(for ticketOrder: Int, externalAttendee: Identifier, summit: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func confirmAttendee(for ticketOrder: Int, externalAttendee: Identifier, summit: Identifier, completion: (Swift.Error?) -> ()) {
         
         let URI = "/api/v1/summits/\(summit)/external-orders/\(ticketOrder)/external-attendees/\(externalAttendee)/confirm"
         

@@ -29,7 +29,7 @@ extension Feedback: CoreDataDecodable {
     
     public init(managedObject: FeedbackManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.rate = Int(managedObject.rate)
         self.review = managedObject.review
         self.date = Date(foundation: managedObject.date)
@@ -46,7 +46,7 @@ extension Feedback: CoreDataEncodable {
         
         managedObject.rate = Int16(rate)
         managedObject.review = review
-        managedObject.date = date.toFoundation()
+        managedObject.date = date
         managedObject.event = try context.relationshipFault(event)
         managedObject.member = try context.relationshipFault(member)
         
@@ -64,7 +64,7 @@ extension MemberResponse.Feedback: CoreDataEncodable {
         
         managedObject.rate = Int16(rate)
         managedObject.review = review
-        managedObject.date = date.toFoundation()
+        managedObject.date = date
         managedObject.event = try context.relationshipFault(event)
         managedObject.member = try context.relationshipFault(member)
         

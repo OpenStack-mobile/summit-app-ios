@@ -42,7 +42,7 @@ extension Venue: CoreDataDecodable {
     
     public init(managedObject: VenueManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.type = ClassName(rawValue: managedObject.venueType)!

@@ -22,7 +22,7 @@ extension VenueRoom: CoreDataDecodable {
     
     public init(managedObject: VenueRoomManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.capacity = managedObject.capacity?.intValue
         self.descriptionText = managedObject.descriptionText

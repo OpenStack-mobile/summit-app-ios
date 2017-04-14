@@ -61,13 +61,13 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         let summit = Store.shared.cache!
         
-        let dayCount = summit.end.toFoundation().mt_daysSinceDate(summit.start.toFoundation())
+        let dayCount = summit.end.mt_daysSinceDate(summit.start)
         
         self.dates = [Date]()
         
         for index in 0 ..< dayCount {
             
-            let date = summit.start.toFoundation().mt_dateDaysAfter(index)
+            let date = summit.start.mt_dateDaysAfter(index)
             
             dates.append(date)
         }
@@ -101,7 +101,7 @@ final class EventDatesInterfaceController: WKInterfaceController {
         
         let events = Store.shared.cache?.schedule.filter({
             
-            return $0.start.toFoundation().mt_isBetweenDate(startDate, andDate: endDate)
+            return $0.start.mt_isBetweenDate(startDate, andDate: endDate)
         })
         
         return Context(events)

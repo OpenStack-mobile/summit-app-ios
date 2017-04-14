@@ -74,12 +74,12 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         case let .multiple(_, _, end, _):
             
             // when current timeframe ends
-            date = end.toFoundation()
+            date = end
             
         case let .event(event):
             
             // when current event ends
-            date = event.end.toFoundation()
+            date = event.end
         }
         
         print("Next complication update date: \(date)")
@@ -101,7 +101,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let template = self.template(for: complication, with: entry)
         
-        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start?.toFoundation() ?? Foundation.Date(), complicationTemplate: template)
+        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start? ?? Foundation.Date(), complicationTemplate: template)
         
         handler(complicationEntry)
     }
@@ -119,9 +119,9 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         print("Requesting \(limit) entries before \(beforeDate))")
         
-        entries.forEach { print($0.0.toFoundation().description, $0.1) }
+        entries.forEach { print($0.0.description, $0.1) }
         
-        let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
+        let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0, complicationTemplate: self.template(for: complication, with: $0.1)) }
         
         handler(complicationEntries)
     }
@@ -139,16 +139,16 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         print("Requesting \(limit) entries after \(afterDate))")
         
-        entries.forEach { print($0.0.toFoundation().description, $0.1) }
+        entries.forEach { print($0.0.description, $0.1) }
         
-        let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0.toFoundation(), complicationTemplate: self.template(for: complication, with: $0.1)) }
+        let complicationEntries = entries.map { CLKComplicationTimelineEntry(date: $0.0, complicationTemplate: self.template(for: complication, with: $0.1)) }
         
         handler(complicationEntries)
     }
     
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start.toFoundation()
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start < $0.1.start }).first?.start
         
         print("Timeline Start Date: \(date)")
         
@@ -157,7 +157,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
         
-        let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.end.toFoundation()
+        let date = Store.shared.cache?.schedule.sort({ $0.0.start > $0.1.start }).first?.end
         
         print("Timeline End Date: \(date)")
         
@@ -193,9 +193,9 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 Static.dateFormatter.timeZone = TimeZone(identifier: timeZone)
                 
-                let startDateText = Static.dateFormatter.string(from: start.toFoundation())
+                let startDateText = Static.dateFormatter.string(from: start)
                 
-                let endDateText = Static.dateFormatter.string(from: end.toFoundation())
+                let endDateText = Static.dateFormatter.string(from: end)
                 
                 textProvider.text = "\(startDateText) - \(endDateText) \(events) events"
                 
@@ -226,7 +226,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeTallBody()
                 
-                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(start: start.toFoundation(), end: end.toFoundation(), timeZone: TimeZone(identifier: timeZone))
+                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(start: start, end: end, timeZone: TimeZone(identifier: timeZone))
                 
                 complicationTemplate.bodyTextProvider = CLKSimpleTextProvider(text: "\(count) events")
                 
@@ -236,7 +236,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
                 
                 let complicationTemplate = CLKComplicationTemplateModularLargeStandardBody()
                 
-                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(start: event.start.toFoundation(), end: event.end.toFoundation(), timeZone: TimeZone(identifier: event.timeZone))
+                complicationTemplate.headerTextProvider = CLKTimeIntervalTextProvider(start: event.start, end: event.end, timeZone: TimeZone(identifier: event.timeZone))
                 
                 complicationTemplate.body1TextProvider = CLKSimpleTextProvider(text: event.name)
                 

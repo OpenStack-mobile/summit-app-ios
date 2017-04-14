@@ -264,8 +264,8 @@ final class EventDetailViewController: NSViewController, ContentController, Mess
             
             calendarEvent.calendar = calendar
             calendarEvent.title = event.name
-            calendarEvent.startDate = event.start.toFoundation()
-            calendarEvent.endDate = event.end.toFoundation()
+            calendarEvent.startDate = event.start
+            calendarEvent.endDate = event.end
             calendarEvent.timeZone = NSTimeZone(name: event.timeZone)
             calendarEvent.URL = event.webpageURL
             calendarEvent.location = event.location

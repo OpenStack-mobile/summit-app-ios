@@ -40,7 +40,7 @@ extension Speaker: CoreDataDecodable {
     
     public init(managedObject: SpeakerManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
         self.title = managedObject.title

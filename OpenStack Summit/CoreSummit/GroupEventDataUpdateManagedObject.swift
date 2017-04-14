@@ -19,8 +19,8 @@ extension GroupEventDataUpdate: CoreDataEncodable {
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.socialDescription = socialDescription
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp

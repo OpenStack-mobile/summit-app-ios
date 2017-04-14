@@ -26,7 +26,7 @@ extension Track: CoreDataDecodable {
     
     public init(managedObject: TrackManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.groups = managedObject.groups.identifiers
     }

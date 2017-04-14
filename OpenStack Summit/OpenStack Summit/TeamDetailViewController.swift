@@ -250,7 +250,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             cell.textLabel!.text = "Created"
             
-            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.string(from: created.toFoundation())
+            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.string(from: created)
             
             return cell
             
@@ -260,7 +260,7 @@ final class TeamDetailViewController: UITableViewController, NSFetchedResultsCon
             
             cell.textLabel!.text = "Last Modified"
             
-            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.string(from: updated.toFoundation())
+            cell.detailTextLabel!.text = TeamDetailViewController.dateFormatter.string(from: updated)
             
             return cell
             

@@ -37,7 +37,7 @@ extension Team: CoreDataDecodable {
     
     public init(managedObject: TeamManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.created = Date(foundation: managedObject.created)
         self.updated = Date(foundation: managedObject.updatedDate)
@@ -56,8 +56,8 @@ extension Team: CoreDataEncodable {
         
         managedObject.name = name
         managedObject.descriptionText = descriptionText
-        managedObject.created = created.toFoundation()
-        managedObject.updatedDate = updated.toFoundation()
+        managedObject.created = created
+        managedObject.updatedDate = updated
         
         // delete previous team members and owner, to not have nil inverse relationships
         managedObject.members.forEach { context.delete($0) }

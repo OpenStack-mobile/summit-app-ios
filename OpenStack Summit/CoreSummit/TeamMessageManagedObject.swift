@@ -27,7 +27,7 @@ extension TeamMessage: CoreDataDecodable {
     
     public init(managedObject: TeamMessageManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.body = managedObject.body
         self.created = Date(foundation: managedObject.created)
         self.from = Fault<Member>(managedObject: managedObject.from)
@@ -42,7 +42,7 @@ extension TeamMessage: CoreDataEncodable {
         let managedObject = try cached(context)
         
         managedObject.body = body
-        managedObject.created = created.toFoundation()
+        managedObject.created = created
         managedObject.from = try context.relationshipFault(from)
         managedObject.team = try context.relationshipFault(team)
         

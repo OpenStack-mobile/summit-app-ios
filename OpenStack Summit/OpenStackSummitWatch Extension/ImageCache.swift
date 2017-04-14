@@ -98,7 +98,7 @@ public extension ImageCache {
     
     public enum Response {
         
-        case error(ErrorProtocol)
+        case error(Swift.Error)
         case noData(URLResponse)
         case data(Foundation.Data)
     }

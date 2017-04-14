@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension TrackGroupDataUpdate: CoreDataEncodable {
+extension TrackGroup.DataUpdate: CoreDataEncodable {
     
     public func save(_ context: NSManagedObjectContext) throws -> TrackGroupManagedObject {
         

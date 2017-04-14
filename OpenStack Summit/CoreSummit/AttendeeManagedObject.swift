@@ -22,7 +22,7 @@ extension Attendee: CoreDataDecodable {
     
     public init(managedObject: AttendeeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.member = managedObject.member.identifier
         self.tickets = managedObject.tickets.identifiers
         self.schedule = managedObject.schedule.identifiers

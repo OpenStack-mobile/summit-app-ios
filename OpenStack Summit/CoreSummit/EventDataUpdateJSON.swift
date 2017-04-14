@@ -6,14 +6,15 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
+import struct Foundation.Date
+import JSON
 
-private extension EventDataUpdate {
+private extension Event.DataUpdate {
     
     typealias JSONKey = Event.JSONKey
 }
 
-extension EventDataUpdate: JSONDecodable {
+extension Event.DataUpdate: JSONDecodable {
     
     public init?(json JSONValue: JSON.Value) {
         
@@ -28,10 +29,7 @@ extension EventDataUpdate: JSONDecodable {
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
             let sponsors = Company.from(json: sponsorsJSONArray),
-            /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
-            /* let speakers = PresentationSpeaker.from(json: speakersJSONArray), */
-            /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.integerValue */
-            let presentation = PresentationDataUpdate(json: JSONValue),
+            let presentation = Presentation.DataUpdate(json: JSONValue),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         

@@ -72,7 +72,7 @@ final class EventsInterfaceController: WKInterfaceController {
             
             let cell = tableView.rowControllerAtIndex(index) as! EventCellController
             
-            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start.toFoundation())
+            let dateText = EventsInterfaceController.dateFormatter.stringFromDate(event.start)
             let locationText = EventDetail.getLocation(event, summit: Store.shared.cache!)
             
             cell.nameLabel.setText(event.name)

@@ -136,11 +136,11 @@ public final class DataUpdatePoller {
         
         if let latestDataUpdate = storage.latestDataUpdate {
             
-            store.dataUpdates(summit.identifier, latestDataUpdate: latestDataUpdate) { process(response: $0) }
+            store.dataUpdates(summit.id, latestDataUpdate: latestDataUpdate) { process(response: $0) }
             
         } else {
             
-            store.dataUpdates(summit.identifier, from: Date(foundation: summit.initialDataLoad ?? Foundation.Date())) { process(response: $0) }
+            store.dataUpdates(summit.id, from: Date(foundation: summit.initialDataLoad ?? Foundation.Date())) { process(response: $0) }
         }
     }
 }

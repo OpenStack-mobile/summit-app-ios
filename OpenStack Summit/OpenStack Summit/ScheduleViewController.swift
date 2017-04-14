@@ -223,8 +223,8 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         self.summitTimeZoneOffset = timeZone.secondsFromGMT
         
-        self.startDate = summit.start.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
-        self.endDate = summit.end.toFoundation().mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
+        self.startDate = summit.start.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
+        self.endDate = summit.end.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
         
         let today = Foundation.Date()
         
@@ -240,7 +240,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let oldSelectedDate = self.selectedDate
         
-        if  let defaultStart = summit.defaultStart?.toFoundation(),
+        if  let defaultStart = summit.defaultStart?,
             let defaultDay = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(defaultStart) })
             where summitActive == false && self.didSelectDate == false {
             

@@ -28,7 +28,7 @@ extension VenueFloor: CoreDataDecodable {
     
     public init(managedObject: VenueFloorManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.number = Int(managedObject.number)

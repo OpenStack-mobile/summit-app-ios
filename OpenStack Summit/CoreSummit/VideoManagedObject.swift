@@ -31,7 +31,7 @@ extension Video: CoreDataDecodable {
     
     public init(managedObject: VideoManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.displayOnSite = managedObject.displayOnSite

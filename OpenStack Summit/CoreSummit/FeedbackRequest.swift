@@ -144,7 +144,7 @@ public extension Store {
         }
     }
     
-    func editFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: (ErrorProtocol?) -> ()) {
+    func editFeedback(_ summit: Identifier, event: Identifier, rate: Int, review: String, completion: (Swift.Error?) -> ()) {
         
         let URI = "/api/v2/summits/\(summit)/events/\(event)/feedback"
         

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension PresentationDataUpdate: CoreDataEncodable {
+extension Presentation.DataUpdate: CoreDataEncodable {
     
     public func save(_ context: NSManagedObjectContext) throws -> PresentationManagedObject {
         

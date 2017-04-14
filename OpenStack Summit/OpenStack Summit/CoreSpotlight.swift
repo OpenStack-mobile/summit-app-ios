@@ -46,8 +46,8 @@ extension Event: CoreSpotlightSearchable {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: self.dynamicType.itemContentType)
         
         attributeSet.displayName = name
-        attributeSet.startDate = start.toFoundation()
-        attributeSet.endDate = end.toFoundation()
+        attributeSet.startDate = start
+        attributeSet.endDate = end
         
         let tags = self.tags.map { $0.name }
         attributeSet.keywords = tags

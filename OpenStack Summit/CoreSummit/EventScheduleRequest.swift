@@ -12,7 +12,7 @@ import AeroGearOAuth2
 
 public extension Store {
     
-    func addEventToSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func addEventToSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -55,7 +55,7 @@ public extension Store {
         })
     }
     
-    func removeEventFromSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func removeEventFromSchedule(_ summit: Identifier? = nil, event: Identifier, completion: (Swift.Error?) -> ()) {
         
         let summitID: String
         
@@ -98,7 +98,7 @@ public extension Store {
         })
     }
     
-    func removeRSVP(_ summit: Identifier? = nil, event: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func removeRSVP(_ summit: Identifier? = nil, event: Identifier, completion: (Swift.Error?) -> ()) {
         
         let summitID: String
         

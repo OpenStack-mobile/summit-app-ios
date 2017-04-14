@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import Foundation
 
-extension SummitDataUpdate: Updatable {
+extension Summit.DataUpdate: Updatable {
     
     @inline(__always)
     static func find(_ identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
@@ -26,11 +26,11 @@ extension SummitDataUpdate: Updatable {
         managedObject.name = name
         managedObject.timeZone = timeZone
         managedObject.datesLabel = datesLabel
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.webpageURL = webpageURL
         managedObject.active = active
-        managedObject.startShowingVenues = startShowingVenues?.toFoundation()
+        managedObject.startShowingVenues = startShowingVenues
         managedObject.ticketTypes = try context.relationshipFault(ticketTypes)
         managedObject.locations = try context.relationshipFault(locations)
         

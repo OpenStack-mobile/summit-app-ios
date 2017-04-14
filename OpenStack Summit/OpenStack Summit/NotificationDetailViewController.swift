@@ -56,7 +56,7 @@ final class NotificationDetailViewController: UITableViewController {
             data.append([.event(event)])
         }
         
-        let date = dateFormatter.stringFromDate(notification.created.toFoundation())
+        let date = dateFormatter.stringFromDate(notification.created)
         
         let text = notification.body
         

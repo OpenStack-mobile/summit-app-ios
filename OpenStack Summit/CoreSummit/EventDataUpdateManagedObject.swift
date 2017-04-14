@@ -8,9 +8,8 @@
 
 import Foundation
 import CoreData
-import Foundation
 
-extension EventDataUpdate: Updatable {
+extension Event.DataUpdate: Updatable {
     
     @inline(__always)
     static func find(_ identifier: Identifier, context: NSManagedObjectContext) throws -> Entity? {
@@ -28,8 +27,8 @@ extension EventDataUpdate: Updatable {
         managedObject.name = name
         managedObject.descriptionText = descriptionText
         managedObject.socialDescription = socialDescription
-        managedObject.start = start.toFoundation()
-        managedObject.end = end.toFoundation()
+        managedObject.start = start
+        managedObject.end = end
         managedObject.allowFeedback = allowFeedback
         managedObject.averageFeedback = averageFeedback
         managedObject.rsvp = rsvp

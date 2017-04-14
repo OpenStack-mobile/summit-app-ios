@@ -11,7 +11,7 @@ import CoreData
 
 public extension Store {
     
-    func accept(invitation identifier: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func accept(invitation identifier: Identifier, completion: (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/members/me/team-invitations/\(identifier)"
         
@@ -41,7 +41,7 @@ public extension Store {
         }
     }
     
-    func decline(invitation identifier: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func decline(invitation identifier: Identifier, completion: (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/members/me/team-invitations/\(identifier)"
         

@@ -6,14 +6,14 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
+import JSON
 
-public extension TrackGroupDataUpdate {
+extension TrackGroup.DataUpdate {
     
     typealias JSONKey = TrackGroup.JSONKey
 }
 
-extension TrackGroupDataUpdate: JSONDecodable {
+extension TrackGroup.DataUpdate: JSONDecodable {
     
     public init?(json JSONValue: JSON.Value) {
         

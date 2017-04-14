@@ -71,7 +71,7 @@ final class TeamInvitationsViewController: UITableViewController, PagingTableVie
         
         cell.inviterLabel.text = "Invited by: " + invitation.inviter.name
         
-        cell.dateLabel.text = dateFormatter.stringFromDate(invitation.created.toFoundation())
+        cell.dateLabel.text = dateFormatter.stringFromDate(invitation.created)
     }
     
     fileprivate func accept(_ invitation: Invitation) {

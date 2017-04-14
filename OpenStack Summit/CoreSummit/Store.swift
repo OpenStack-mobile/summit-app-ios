@@ -71,8 +71,8 @@ public final class Store {
     public init(environment: Environment,
                  session: SessionStorage,
                  contextConcurrencyType: NSManagedObjectContextConcurrencyType = .mainQueueConcurrencyType,
-                 createPersistentStore: (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
-                 deletePersistentStore: (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
+                 createPersistentStore: @escaping (NSPersistentStoreCoordinator) throws -> NSPersistentStore,
+                 deletePersistentStore: @escaping (NSPersistentStoreCoordinator, NSPersistentStore) throws -> ()) throws {
         
         // store values
         self.environment = environment
@@ -275,14 +275,14 @@ public final class Store {
 // MARK: - Supporting Types
 
 /// Convenience function for adding a block to the main queue.
-internal func mainQueue(_ block: () -> ()) {
+internal func mainQueue(_ block: @escaping () -> ()) {
     
     OperationQueue.main.addOperation(block)
 }
 
 public extension Store {
     
-    public enum Error: ErrorProtocol {
+    public enum Error: Swift.Error {
         
         /// The server returned a status code indicating an error.
         case errorStatusCode(Int)

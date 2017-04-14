@@ -31,7 +31,7 @@ extension Notification: CoreDataDecodable {
     
     public init(managedObject: NotificationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.body = managedObject.body
         self.created = Date(foundation: managedObject.created)
         self.from = Topic(rawValue: managedObject.from)!
@@ -47,7 +47,7 @@ extension Notification: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
-        managedObject.created = created.toFoundation()
+        managedObject.created = created
         managedObject.body = body
         managedObject.from = from.rawValue
         managedObject.channel = channel.rawValue

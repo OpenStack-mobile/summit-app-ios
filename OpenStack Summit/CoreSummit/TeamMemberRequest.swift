@@ -36,7 +36,7 @@ public extension Store {
         }
     }
     
-    func remove(member identifier: Identifier, from team: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func remove(member identifier: Identifier, from team: Identifier, completion: (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(team)/members/\(identifier)"
         

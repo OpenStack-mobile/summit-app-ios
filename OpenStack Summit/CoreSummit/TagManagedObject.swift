@@ -20,7 +20,7 @@ extension Tag: CoreDataDecodable {
     
     public init(managedObject: TagManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
     }
 }

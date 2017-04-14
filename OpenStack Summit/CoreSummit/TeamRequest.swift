@@ -63,7 +63,7 @@ public extension Store {
         }
     }
     
-    func update(team identifier: Identifier, name: String, description: String? = nil, completion: (ErrorProtocol?) -> ()) {
+    func update(team identifier: Identifier, name: String, description: String? = nil, completion: (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)"
         
@@ -142,7 +142,7 @@ public extension Store {
         }
     }
     
-    func delete(team identifier: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func delete(team identifier: Identifier, completion: (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/teams/\(identifier)"
         

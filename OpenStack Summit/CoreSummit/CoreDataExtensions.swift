@@ -15,7 +15,7 @@ public extension NSManagedObjectContext {
     @available(OSX 10.7, *)
     func performErrorBlockAndWait<T>(_ block: () throws -> T) throws -> T {
         
-        var blockError: ErrorProtocol?
+        var blockError: Swift.Error?
         
         var value: T!
         
@@ -102,7 +102,7 @@ public extension NSManagedObjectContext {
     @inline(__always)
     func managedObjects<ManagedObject: NSManagedObject>(_ managedObjectType: ManagedObject.Type, predicate: Predicate, sortDescriptors: [NSSortDescriptor] = []) throws -> [ManagedObject] {
         
-        return try managedObjects(managedObjectType, predicate: predicate.toFoundation(), sortDescriptors: sortDescriptors)
+        return try managedObjects(managedObjectType, predicate: predicate, sortDescriptors: sortDescriptors)
     }
     
     @inline(__always)

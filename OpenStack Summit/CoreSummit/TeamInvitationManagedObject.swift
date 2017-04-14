@@ -33,7 +33,7 @@ extension TeamInvitation: CoreDataDecodable {
     
     public init(managedObject: TeamInvitationManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.created = Date(foundation: managedObject.created)
         self.updated = Date(foundation: managedObject.updatedDate)
         self.accepted = managedObject.accepted
@@ -50,8 +50,8 @@ extension TeamInvitation: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
-        managedObject.created = created.toFoundation()
-        managedObject.updatedDate = updated.toFoundation()
+        managedObject.created = created
+        managedObject.updatedDate = updated
         managedObject.accepted = accepted
         managedObject.permission = permission.rawValue
         managedObject.invitee = try context.relationshipFault(invitee)
@@ -70,8 +70,8 @@ extension ListTeamInvitations.Response.Invitation: CoreDataEncodable {
         
         let managedObject = try cached(context)
         
-        managedObject.created = created.toFoundation()
-        managedObject.updatedDate = updated.toFoundation()
+        managedObject.created = created
+        managedObject.updatedDate = updated
         managedObject.accepted = accepted
         managedObject.permission = permission.rawValue
         managedObject.invitee = try context.relationshipFault(invitee)

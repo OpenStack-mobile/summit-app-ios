@@ -20,7 +20,7 @@ extension TicketType: CoreDataDecodable {
     
     public init(managedObject: TicketTypeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
     }

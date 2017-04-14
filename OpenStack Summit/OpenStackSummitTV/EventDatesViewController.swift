@@ -245,9 +245,9 @@ extension EventDatesViewController {
         
         init(summit: Summit) {
             
-            let start = summit.start.toFoundation().mt_startOfCurrentDay()
+            let start = summit.start.mt_startOfCurrentDay()
             
-            let end = summit.end.toFoundation().mt_dateDaysAfter(1)
+            let end = summit.end.mt_dateDaysAfter(1)
             
             let timeZone = NSTimeZone(name: summit.timeZone)!
             

@@ -11,7 +11,7 @@ import CoreData
 
 public extension Store {
     
-    func favorite(_ isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: (ErrorProtocol?) -> ()) {
+    func favorite(_ isFavorite: Bool = true, event: Identifier, summit: Identifier, completion: (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/summits/\(summit)/members/me/favorites/\(event)"
         

@@ -211,7 +211,7 @@ extension EventViewController {
     
     fileprivate func setScheduledOnServer(_ request: EventRequest, for event: EventDetail, cacheValue: Bool? = nil, success: () -> ()) {
         
-        let completion: (ErrorProtocol?) -> () = { [weak self] (response) in
+        let completion: (Swift.Error?) -> () = { [weak self] (response) in
             
             OperationQueue.main.addOperation {
                 
@@ -355,8 +355,8 @@ extension EventViewController {
             
             calendarEvent.calendar = calendar
             calendarEvent.title = event.name
-            calendarEvent.startDate = event.start.toFoundation()
-            calendarEvent.endDate = event.end.toFoundation()
+            calendarEvent.startDate = event.start
+            calendarEvent.endDate = event.end
             calendarEvent.timeZone = TimeZone(identifier: event.timeZone)
             calendarEvent.url = event.webpageURL
             calendarEvent.location = event.location

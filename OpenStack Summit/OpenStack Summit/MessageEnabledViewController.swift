@@ -16,7 +16,7 @@ protocol MessageEnabledViewController: class {
 
     func showInfoMessage(_ title: String, message: String)
     
-    func showErrorMessage(_ error: ErrorProtocol, fileName: String, lineNumber: Int)
+    func showErrorMessage(_ error: Swift.Error, fileName: String, lineNumber: Int)
 }
 
 #if os(iOS) || os(tvOS)
@@ -40,7 +40,7 @@ extension MessageEnabledViewController {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    func showErrorMessage(_ error: ErrorProtocol,
+    func showErrorMessage(_ error: Swift.Error,
                           fileName: String = #file,
                           lineNumber: Int = #line) {
         

@@ -103,10 +103,10 @@ final class SummitsViewController: NSViewController, PagingTableViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: summit.timeZone.name)
         dateFormatter.dateFormat = "MMMM dd-"
-        let stringDateFrom = dateFormatter.stringFromDate(summit.start.toFoundation())
+        let stringDateFrom = dateFormatter.stringFromDate(summit.start)
         
         dateFormatter.dateFormat = "dd, yyyy"
-        let stringDateTo = dateFormatter.stringFromDate(summit.end.toFoundation())
+        let stringDateTo = dateFormatter.stringFromDate(summit.end)
         
         cell.dateLabel!.stringValue = stringDateFrom + stringDateTo
     }

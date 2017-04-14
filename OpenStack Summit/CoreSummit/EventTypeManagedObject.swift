@@ -28,7 +28,7 @@ extension EventType: CoreDataDecodable {
     
     public init(managedObject: EventTypeManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.name = managedObject.name
         self.color = managedObject.color
         self.blackOutTimes = managedObject.blackOutTimes

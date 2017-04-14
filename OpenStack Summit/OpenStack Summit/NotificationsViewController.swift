@@ -133,7 +133,7 @@ final class NotificationsViewController: TableViewController, IndicatorInfoProvi
         
         cell.notificationLabel.font = unread ? UIFont.boldSystemFontOfSize(17) : UIFont.systemFontOfSize(17)
         
-        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created.toFoundation())
+        cell.dateLabel.text = self.dateFormatter.stringFromDate(notification.created)
     }
     
     fileprivate func unreadNotificationsChanged(_ newValue: Set<Identifier>, _ oldValue: Set<Identifier>) {
