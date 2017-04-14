@@ -14,7 +14,7 @@ public extension String {
     public func toOpenStackEncoding() -> String? {
         
         guard let cString = self.cString(using: String.Encoding.nonLossyASCII),
-            let encoded = String(CString: cString, encoding: String.Encoding.utf8)
+            let encoded = String(cString: cString, encoding: String.Encoding.utf8)
             else { return nil }
         
         return encoded
@@ -23,7 +23,7 @@ public extension String {
     public init?(openStackEncoded string: String) {
         
         guard let cString = string.cString(using: String.Encoding.utf8),
-            let encoded = String(CString: cString, encoding: String.Encoding.nonLossyASCII)
+            let encoded = String(cString: cString, encoding: String.Encoding.nonLossyASCII)
             else { return nil }
         
         self = encoded

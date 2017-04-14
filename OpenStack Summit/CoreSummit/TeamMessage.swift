@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public struct TeamMessage: Unique {
     
@@ -16,7 +16,7 @@ public struct TeamMessage: Unique {
     
     public let body: String
     
-    public let created: SwiftFoundation.Date
+    public let created: Date
     
     public let from: Fault<Member>
 }

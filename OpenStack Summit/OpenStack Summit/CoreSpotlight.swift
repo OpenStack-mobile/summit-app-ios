@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 import CoreSpotlight
 import MobileCoreServices
 import CoreSummit

@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 @testable import CoreSummit
 
 internal func loadJSON(_ filename: String) -> JSON.Value {

@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import CoreData
 
 public extension Store {

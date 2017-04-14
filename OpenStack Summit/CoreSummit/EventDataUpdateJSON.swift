@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 private extension EventDataUpdate {
     
@@ -15,30 +15,30 @@ private extension EventDataUpdate {
 
 extension EventDataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let title = JSONObject[JSONKey.title.rawValue]?.rawValue as? String,
-            let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-            let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
-            let eventType = JSONObject[JSONKey.type_id.rawValue]?.rawValue as? Int,
+            let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+            let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
+            let eventType = JSONObject[JSONKey.type_id.rawValue]?.integerValue,
             let tagsJSONArray = JSONObject[JSONKey.tags.rawValue]?.arrayValue,
-            let tags = Tag.fromJSON(tagsJSONArray),
+            let tags = Tag.from(json: tagsJSONArray),
             let allowFeedback = JSONObject[JSONKey.allow_feedback.rawValue]?.rawValue as? Bool,
             let sponsorsJSONArray = JSONObject[JSONKey.sponsors.rawValue]?.arrayValue,
-            let sponsors = Company.fromJSON(sponsorsJSONArray),
+            let sponsors = Company.from(json: sponsorsJSONArray),
             /* let speakersJSONArray = JSONObject[JSONKey.speakers.rawValue]?.arrayValue, */
-            /* let speakers = PresentationSpeaker.fromJSON(speakersJSONArray), */
-            /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int */
-            let presentation = PresentationDataUpdate(JSONValue: JSONValue),
+            /* let speakers = PresentationSpeaker.from(json: speakersJSONArray), */
+            /* let trackIdentifier = JSONObject[JSONKey.track_id.rawValue]?.integerValue */
+            let presentation = PresentationDataUpdate(json: JSONValue),
             let averageFeedbackJSON = JSONObject[JSONKey.avg_feedback_rate.rawValue]
             else { return nil }
         
         self.identifier = identifier
         self.name = title
-        self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
-        self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
+        self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
+        self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
         self.type = eventType
         self.tags = Set(tags)
         self.allowFeedback = allowFeedback
@@ -63,7 +63,7 @@ extension EventDataUpdate: JSONDecodable {
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
         
-        if let track = JSONObject[JSONKey.track_id.rawValue]?.rawValue as? Int,
+        if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue,
             track > 0 {
             
             self.track = track
@@ -73,7 +73,7 @@ extension EventDataUpdate: JSONDecodable {
             self.track = nil
         }
         
-        if let location = JSONObject[JSONKey.location_id.rawValue]?.rawValue as? Int,
+        if let location = JSONObject[JSONKey.location_id.rawValue]?.integerValue,
             location > 0 {
             
             self.location = location
@@ -85,7 +85,7 @@ extension EventDataUpdate: JSONDecodable {
         
         if let videosJSONArray = JSONObject[JSONKey.videos.rawValue]?.arrayValue {
             
-            guard let videos = Video.fromJSON(videosJSONArray)
+            guard let videos = Video.from(json: videosJSONArray)
                 else { return nil }
             
             self.videos = Set(videos)
@@ -100,7 +100,7 @@ extension EventDataUpdate: JSONDecodable {
             self.attachment = attachment
             
         } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
-            let slides = String.fromJSON(slidesJSONArray) {
+            let slides = String.from(json: slidesJSONArray) {
             
             self.attachment = slides.first
             

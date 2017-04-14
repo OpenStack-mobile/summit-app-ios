@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -39,7 +39,7 @@ public extension Store {
             // parse
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
-                let identifier = jsonObject["id"]?.rawValue as? Int
+                let identifier = jsonObject["id"]?.integerValue
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache
@@ -51,7 +51,7 @@ public extension Store {
                 // create team and cache
                 let owner = Member(managedObject: memberManagedObject)
                 
-                let team = Team(identifier: identifier, name: name, descriptionText: description, created: SwiftFoundation.Date(), updated: SwiftFoundation.Date(), owner: owner, members: [], invitations: [])
+                let team = Team(identifier: identifier, name: name, descriptionText: description, created: Date(), updated: Date(), owner: owner, members: [], invitations: [])
                 
                 try team.save(context)
                 
@@ -126,7 +126,7 @@ public extension Store {
                 else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let entity = Team(JSONValue: json)
+                let entity = Team(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache
@@ -199,7 +199,7 @@ public extension Store {
                 else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<Team>(JSONValue: json)
+                let page = Page<Team>(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import CoreData
 
 public struct DataUpdate {
@@ -149,7 +149,7 @@ public extension Store {
                     
                     guard let entityJSON = dataUpdate.entity,
                         case let .JSON(jsonObject) = entityJSON,
-                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        let event = EventDataUpdate.init(json: .Object(jsonObject))
                         else { return false }
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
@@ -188,7 +188,7 @@ public extension Store {
                     
                     guard let entityJSON = dataUpdate.entity,
                         case let .JSON(jsonObject) = entityJSON,
-                        let event = EventDataUpdate.init(JSONValue: .Object(jsonObject))
+                        let event = EventDataUpdate.init(json: .Object(jsonObject))
                         else { return false }
                     
                     let eventManagedObject = try event.write(context, summit: summit) as! EventManagedObject
@@ -237,7 +237,7 @@ public extension Store {
             // parse JSON
             guard let entityJSON = dataUpdate.entity,
                 case let .JSON(jsonObject) = entityJSON,
-                let entity = type.init(JSONValue: .Object(jsonObject))
+                let entity = type.init(json: .Object(jsonObject))
                 else { return false }
             
             switch dataUpdate.className {

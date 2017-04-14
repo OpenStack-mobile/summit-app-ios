@@ -6,9 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import Foundation
-
-import SwiftFoundation
+import JSON
 
 public enum LocationJSONKey: String {
     
@@ -17,7 +15,7 @@ public enum LocationJSONKey: String {
 
 extension Location: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let className = JSONValue.objectValue?[LocationJSONKey.class_name.rawValue]?.rawValue as? String
             else { return nil }
@@ -26,7 +24,7 @@ extension Location: JSONDecodable {
             
         case VenueRoom.JSONClassName:
             
-            if let room = VenueRoom(JSONValue: JSONValue) {
+            if let room = VenueRoom(json: JSONValue) {
                 
                 self = .room(room)
                 
@@ -37,7 +35,7 @@ extension Location: JSONDecodable {
             
         default:
             
-            if let venue = Venue(JSONValue: JSONValue) {
+            if let venue = Venue(json: JSONValue) {
                 
                 self = .venue(venue)
                 

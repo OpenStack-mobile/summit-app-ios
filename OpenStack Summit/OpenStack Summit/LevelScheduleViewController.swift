@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class LevelScheduleViewController: ScheduleViewController {
@@ -47,7 +47,7 @@ final class LevelScheduleViewController: ScheduleViewController {
             }
         }
         
-        let date = DateFilter.interval(start: SwiftFoundation.Date(foundation: startDate), end: SwiftFoundation.Date(foundation: endDate))
+        let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
         
         let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         

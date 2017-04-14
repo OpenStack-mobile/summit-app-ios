@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import EventKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 protocol EventViewController: class, MessageEnabledViewController {
@@ -27,7 +27,7 @@ extension EventViewController {
         // Can give feedback after event started
         return Store.shared.isLoggedIn
             && event.allowFeedback
-            && event.start < SwiftFoundation.Date()
+            && event.start < Date()
     }
     
     func canAddToCalendar() -> Bool {

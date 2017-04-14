@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public struct Team: Named {
     
@@ -16,9 +16,9 @@ public struct Team: Named {
     
     public var descriptionText: String?
     
-    public var created: SwiftFoundation.Date
+    public var created: Date
     
-    public var updated: SwiftFoundation.Date
+    public var updated: Date
     
     public var owner: Member
     

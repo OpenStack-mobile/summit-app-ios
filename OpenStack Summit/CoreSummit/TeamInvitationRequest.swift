@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import CoreData
 
 public extension Store {
@@ -92,7 +92,7 @@ public extension Store {
                 else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let response = ListTeamInvitations.Response(JSONValue: json)
+                let response = ListTeamInvitations.Response(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache
@@ -163,9 +163,9 @@ public struct ListTeamInvitations {
             
             public let permission: TeamPermission
             
-            public let created: SwiftFoundation.Date
+            public let created: Date
             
-            public let updated: SwiftFoundation.Date
+            public let updated: Date
             
             public let accepted: Bool
         }

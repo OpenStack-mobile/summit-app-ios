@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -32,7 +32,7 @@ public extension Store {
             guard let attendeesJSONArray = json.objectValue?["attendees"]?.arrayValue
                 else { completion(.value([])); return }
             
-            guard let attendees = NonConfirmedAttendee.fromJSON(attendeesJSONArray)
+            guard let attendees = NonConfirmedAttendee.from(json: attendeesJSONArray)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // success

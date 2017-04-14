@@ -9,7 +9,7 @@
 
 import UIKit
 import XLPagerTabStrip
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class GeneralScheduleViewController: ScheduleViewController, RevealViewController, IndicatorInfoProvider {
@@ -190,7 +190,7 @@ final class GeneralScheduleViewController: ScheduleViewController, RevealViewCon
             }
         }
         
-        let date = DateFilter.interval(start: SwiftFoundation.Date(foundation: startDate), end: SwiftFoundation.Date(foundation: endDate))
+        let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
         
         let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 
 public final class PageController<Item> {
     

@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class SummitManagedObject: Entity {
     
@@ -60,14 +60,14 @@ extension Summit: CoreDataDecodable {
         self.name = managedObject.name
         self.timeZone = managedObject.timeZone
         self.datesLabel = managedObject.datesLabel
-        self.start = SwiftFoundation.Date(foundation: managedObject.start)
-        self.end = SwiftFoundation.Date(foundation: managedObject.end)
+        self.start = Date(foundation: managedObject.start)
+        self.end = Date(foundation: managedObject.end)
         self.webpageURL = managedObject.webpageURL
         self.active = managedObject.active
         
         if let startShowingVenues = managedObject.startShowingVenues {
             
-            self.startShowingVenues = SwiftFoundation.Date(foundation: startShowingVenues)
+            self.startShowingVenues = Date(foundation: startShowingVenues)
             
         } else {
             
@@ -76,7 +76,7 @@ extension Summit: CoreDataDecodable {
         
         if let defaultStart = managedObject.defaultStart {
             
-            self.defaultStart = SwiftFoundation.Date(foundation: defaultStart)
+            self.defaultStart = Date(foundation: defaultStart)
             
         } else {
             

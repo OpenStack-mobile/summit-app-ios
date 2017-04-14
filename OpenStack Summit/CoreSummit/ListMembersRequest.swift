@@ -6,9 +6,10 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
@@ -33,7 +34,7 @@ public extension Store {
                 else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let page = Page<Member>(JSONValue: json)
+                let page = Page<Member>(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -30,7 +30,7 @@ public extension Store {
         dataUpdates(URI, completion: completion)
     }
     
-    func dataUpdates(_ summit: Identifier? = nil, from date: SwiftFoundation.Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
+    func dataUpdates(_ summit: Identifier? = nil, from date: Date, limit: Int = 50, completion: (ErrorValue<[DataUpdate]>) -> ()) {
         
         let summitID: String
         
@@ -68,7 +68,7 @@ private extension Store {
             // parse
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonArray = json.arrayValue,
-                let dataUpdates = DataUpdate.fromJSON(jsonArray)
+                let dataUpdates = DataUpdate.from(json: jsonArray)
                 else { completion(.error(Error.invalidResponse)); return }
             
             completion(.value(dataUpdates))

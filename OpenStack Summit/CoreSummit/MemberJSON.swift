@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 private extension Member {
     
@@ -18,11 +18,11 @@ private extension Member {
 
 extension Member: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let memberID = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int
-                ?? JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let memberID = JSONObject[JSONKey.member_id.rawValue]?.integerValue
+                ?? JSONObject[JSONKey.id.rawValue]?.integerValue,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String
@@ -42,7 +42,7 @@ extension Member: JSONDecodable {
         
         if let speakerJSON = JSONObject[JSONKey.speaker.rawValue] {
             
-            guard let speaker = Speaker(JSONValue: speakerJSON)
+            guard let speaker = Speaker(json: speakerJSON)
                 else { return nil }
             
             self.speakerRole = speaker
@@ -54,7 +54,7 @@ extension Member: JSONDecodable {
         
         if let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue {
             
-            guard let groups = Group.fromJSON(groupsJSONArray)
+            guard let groups = Group.from(json: groupsJSONArray)
                 else { return nil }
             
             self.groups = Set(groups)
@@ -66,7 +66,7 @@ extension Member: JSONDecodable {
         
         if let affiliationsJSONArray = JSONObject[JSONKey.affiliations.rawValue]?.arrayValue {
             
-            guard let affiliations = Affiliation.fromJSON(affiliationsJSONArray)
+            guard let affiliations = Affiliation.from(json: affiliationsJSONArray)
                 else { return nil }
             
             self.affiliations = Set(affiliations)
@@ -88,21 +88,21 @@ extension MemberResponse.Member: JSONDecodable {
     
     fileprivate typealias JSONKey = Member.JSONKey
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String,
             let pictureURL = JSONObject[JSONKey.pic.rawValue]?.rawValue as? String,
             let groupsJSONArray = JSONObject[JSONKey.groups.rawValue]?.arrayValue,
-            let groups = Group.fromJSON(groupsJSONArray),
+            let groups = Group.from(json: groupsJSONArray),
             let groupEventsJSONArray = JSONObject[JSONKey.groups_events.rawValue]?.arrayValue,
-            let groupEvents = MemberResponse.Event.fromJSON(groupEventsJSONArray),
+            let groupEvents = MemberResponse.Event.from(json: groupEventsJSONArray),
             let feedbackJSONArray = JSONObject[JSONKey.feedback.rawValue]?.arrayValue,
-            let feedback = MemberResponse.Feedback.fromJSON(feedbackJSONArray),
+            let feedback = MemberResponse.Feedback.from(json: feedbackJSONArray),
             let favoriteEventsJSONArray = JSONObject[JSONKey.favorite_summit_events.rawValue]?.arrayValue,
-            let favoriteEvents = Identifier.fromJSON(favoriteEventsJSONArray)
+            let favoriteEvents = Identifier.from(json: favoriteEventsJSONArray)
             else { return nil }
         
         self.identifier = identifier
@@ -123,7 +123,7 @@ extension MemberResponse.Member: JSONDecodable {
         
         if let speakerJSON = JSONObject[JSONKey.speaker.rawValue] {
             
-            guard let speaker = Speaker(JSONValue: speakerJSON)
+            guard let speaker = Speaker(json: speakerJSON)
                 else { return nil }
             
             self.speakerRole = speaker
@@ -135,7 +135,7 @@ extension MemberResponse.Member: JSONDecodable {
         
         if let attendeeJSON = JSONObject[JSONKey.attendee.rawValue] {
             
-            guard let attendee = Attendee(JSONValue: attendeeJSON)
+            guard let attendee = Attendee(json: attendeeJSON)
                 else { return nil }
             
             self.attendeeRole = attendee
@@ -147,7 +147,7 @@ extension MemberResponse.Member: JSONDecodable {
         
         if let affiliationsJSONArray = JSONObject[JSONKey.affiliations.rawValue]?.arrayValue {
             
-            guard let affiliations = Affiliation.fromJSON(affiliationsJSONArray)
+            guard let affiliations = Affiliation.from(json: affiliationsJSONArray)
                 else { return nil }
             
             self.affiliations = affiliations

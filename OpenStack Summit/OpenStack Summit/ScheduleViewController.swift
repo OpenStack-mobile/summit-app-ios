@@ -6,7 +6,7 @@
 //  Copyright © 2015 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import UIKit
 import AFHorizontalDayPicker
 import CoreSummit
@@ -290,7 +290,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             dailyScheduleStartDate = startDate
         }
         
-        self.dayEvents = self.scheduledEvents(.interval(start: SwiftFoundation.Date(foundation: dailyScheduleStartDate), end: SwiftFoundation.Date(foundation: endDate)))
+        self.dayEvents = self.scheduledEvents(.interval(start: Date(foundation: dailyScheduleStartDate), end: Date(foundation: endDate)))
         
         // reload table view
         
@@ -415,7 +415,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     @inline(__always)
     fileprivate func nowEventIndex() -> Int? {
         
-        let now = SwiftFoundation.Date()
+        let now = Date()
         
         return self.dayEvents.index(where: { $0.end >= now && $0.track != "General" })
     }

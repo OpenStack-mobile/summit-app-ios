@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 open class FeedbackManagedObject: Entity {
     
@@ -32,7 +32,7 @@ extension Feedback: CoreDataDecodable {
         self.identifier = managedObject.identifier
         self.rate = Int(managedObject.rate)
         self.review = managedObject.review
-        self.date = SwiftFoundation.Date(foundation: managedObject.date)
+        self.date = Date(foundation: managedObject.date)
         self.event = managedObject.event.identifier
         self.member = Member(managedObject: managedObject.member)
     }

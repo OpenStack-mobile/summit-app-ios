@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class MemberManagedObject: Entity {
     
@@ -49,7 +49,7 @@ extension Member: CoreDataDecodable {
     
     public init(managedObject: MemberManagedObject) {
         
-        self.identifier = managedObject.identifier
+        self.identifier = managedObject.id
         self.firstName = managedObject.firstName
         self.lastName = managedObject.lastName
         self.pictureURL = managedObject.pictureURL
@@ -161,18 +161,13 @@ public extension MemberManagedObject {
     @inline(__always)
     func isFavorite(event: Identifier) -> Bool {
         
-        return favoriteEvents.contains { $0.identifier == event }
+        return favoriteEvents.contains(where: { $0.identifier == event })
     }
     
     @inline(__always)
     func feedback(for event: Identifier) -> FeedbackManagedObject? {
         
-        return feedback.firstMatching({ $0.event.identifier == event})
-    }
-    
-    var givenFeedback: [FeedbackManagedObject] {
-        
-        return feedback.sorted { SwiftFoundation.Date(foundation: $0.0.date) < SwiftFoundation.Date(foundation: $0.1.date) } ?? []
+        return feedback.first(where: { $0.event.identifier == event})
     }
 }
 

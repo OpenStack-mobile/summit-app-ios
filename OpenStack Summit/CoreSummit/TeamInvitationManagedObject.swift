@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class TeamInvitationManagedObject: Entity {
     
@@ -34,8 +34,8 @@ extension TeamInvitation: CoreDataDecodable {
     public init(managedObject: TeamInvitationManagedObject) {
         
         self.identifier = managedObject.identifier
-        self.created = SwiftFoundation.Date(foundation: managedObject.created)
-        self.updated = SwiftFoundation.Date(foundation: managedObject.updatedDate)
+        self.created = Date(foundation: managedObject.created)
+        self.updated = Date(foundation: managedObject.updatedDate)
         self.accepted = managedObject.accepted
         self.permission = TeamPermission(rawValue: managedObject.permission)!
         self.invitee = Member(managedObject: managedObject.invitee)

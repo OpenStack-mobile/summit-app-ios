@@ -6,9 +6,10 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     #if MOCKED
@@ -20,7 +21,7 @@ public extension Store {
     
         let json = JSON.Value(string: JSONString)!
     
-        let summit = Summit(JSONValue: json)!
+        let summit = Summit(json: json)!
         
         let context = self.privateQueueManagedObjectContext
         
@@ -37,7 +38,7 @@ public extension Store {
         completion(.Value(summit))
     }
     #else
-    func summit(_ identifier: Identifier? = nil, completion: (ErrorValue<Summit>) -> ()) {
+    func summit(_ identifier: Identifier? = nil, completion: @escaping (ErrorValue<Summit>) -> ()) {
         
         let summitID: String
         
@@ -58,14 +59,14 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(url) { (responseObject, error) in
+        http.request(method: .get, path: url) { (responseObject, error) in
             
             // forward error
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let summit = Summit(JSONValue: json)
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let summit = Summit(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public extension DataUpdate {
     
@@ -18,11 +18,11 @@ public extension DataUpdate {
 
 extension DataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let created = JSONObject[JSONKey.created.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let created = JSONObject[JSONKey.created.rawValue]?.integerValue,
             let classNameString = JSONObject[JSONKey.class_name.rawValue]?.rawValue as? String,
             let className = ClassName(rawValue: classNameString),
             let typeString = JSONObject[JSONKey.type.rawValue]?.rawValue as? String,
@@ -31,14 +31,14 @@ extension DataUpdate: JSONDecodable {
         
         self.identifier = identifier
         self.operation = operation
-        self.date = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
+        self.date = Date(timeIntervalSince1970: TimeInterval(created))
         self.className = className
         
         if let entityJSON = JSONObject[JSONKey.entity.rawValue]?.objectValue {
             
             self.entity = .json(entityJSON)
             
-        } else if let entityID = JSONObject[JSONKey.entity_id.rawValue]?.rawValue as? Int {
+        } else if let entityID = JSONObject[JSONKey.entity_id.rawValue]?.integerValue {
             
             self.entity = .identifier(entityID)
             

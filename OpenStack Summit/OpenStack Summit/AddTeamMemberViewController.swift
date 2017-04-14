@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import JGProgressHUD
 

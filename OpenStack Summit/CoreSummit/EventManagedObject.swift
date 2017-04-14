@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class EventManagedObject: Entity {
     
@@ -64,8 +64,8 @@ extension Event: CoreDataDecodable {
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.socialDescription = managedObject.socialDescription
-        self.start = SwiftFoundation.Date(foundation: managedObject.start)
-        self.end = SwiftFoundation.Date(foundation: managedObject.end)
+        self.start = Date(foundation: managedObject.start)
+        self.end = Date(foundation: managedObject.end)
         self.allowFeedback = managedObject.allowFeedback
         self.averageFeedback = managedObject.averageFeedback
         self.rsvp = managedObject.rsvp
@@ -256,6 +256,6 @@ public extension EventManagedObject {
     public enum DateFilter {
         
         case now
-        case interval(start: SwiftFoundation.Date, end: SwiftFoundation.Date)
+        case interval(start: Date, end: Date)
     }
 }

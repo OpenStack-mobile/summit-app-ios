@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 
 #if os(iOS)
 import Crashlytics
@@ -140,7 +140,7 @@ public final class DataUpdatePoller {
             
         } else {
             
-            store.dataUpdates(summit.identifier, from: SwiftFoundation.Date(foundation: summit.initialDataLoad ?? Foundation.Date())) { process(response: $0) }
+            store.dataUpdates(summit.identifier, from: Date(foundation: summit.initialDataLoad ?? Foundation.Date())) { process(response: $0) }
         }
     }
 }

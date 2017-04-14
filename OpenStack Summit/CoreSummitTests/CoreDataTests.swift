@@ -9,7 +9,7 @@
 import XCTest
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 @testable import CoreSummit
 
 final class CoreDataTests: XCTestCase {
@@ -23,7 +23,7 @@ final class CoreDataTests: XCTestCase {
             // load test data
             let testJSON = loadJSON("Summit\(summitID)")
             
-            guard let summit = Summit(JSONValue: testJSON)
+            guard let summit = Summit(json: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
             
             // decode
@@ -59,7 +59,7 @@ final class CoreDataTests: XCTestCase {
             // load test data
             let testJSON = loadJSON("Member\(memberID)")
             
-            guard let member = MemberResponse.Member(JSONValue: testJSON)
+            guard let member = MemberResponse.Member(json: testJSON)
                 else { XCTFail("Could not decode from JSON"); return }
             
             // cache in CoreData

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 /// Represents a relationship fault.
 public enum Fault<Value: Unique>: Unique {

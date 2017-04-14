@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public struct Event: Named {
     
@@ -20,9 +20,9 @@ public struct Event: Named {
     
     public var socialDescription: String?
     
-    public var start: SwiftFoundation.Date
+    public var start: Date
     
-    public var end: SwiftFoundation.Date
+    public var end: Date
         
     public var track: Identifier?
     

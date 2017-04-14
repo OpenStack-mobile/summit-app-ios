@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public protocol FeedbackProtocol: Unique {
     
@@ -16,7 +16,7 @@ public protocol FeedbackProtocol: Unique {
     
     var review: String { get }
     
-    var date: SwiftFoundation.Date { get }
+    var date: Date { get }
     
     var event: Identifier { get }
 }
@@ -29,7 +29,7 @@ public struct Feedback: FeedbackProtocol {
     
     public let review: String
     
-    public let date: SwiftFoundation.Date
+    public let date: Date
     
     public let event: Identifier
     

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class GeneralScheduleFilterViewController: UITableViewController {

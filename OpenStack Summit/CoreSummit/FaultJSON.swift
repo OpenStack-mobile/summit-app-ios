@@ -6,19 +6,19 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Fault where Value: JSONDecodable {
     
-    init?(JSONValue: JSON.Value) {
+    init?(json: JSON.Value) {
         
-        if let identifier = JSONValue.rawValue as? Int {
+        if let identifier = json.integerValue {
             
             self = .identifier(identifier)
             
         } else {
             
-            guard let decodable = Value.init(JSONValue: JSONValue)
+            guard let decodable = Value.init(json: json)
                 else { return nil }
             
             self = .value(decodable)

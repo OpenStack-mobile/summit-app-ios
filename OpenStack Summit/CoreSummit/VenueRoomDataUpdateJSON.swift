@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public extension VenueRoomDataUpdate {
     
@@ -15,16 +15,16 @@ public extension VenueRoomDataUpdate {
 
 extension VenueRoomDataUpdate: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
             let classNameString = JSONObject[LocationJSONKey.class_name.rawValue]?.rawValue as? String,
-            let identifier = JSONObject[LocationJSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[LocationJSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[LocationJSONKey.name.rawValue]?.rawValue as? String,
-            let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.rawValue as? Int,
+            let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.integerValue,
             let floorJSON = JSONObject[JSONKey.floor.rawValue],
-            let floor = VenueFloor(JSONValue: floorJSON)
-            where classNameString == VenueRoom.JSONClassName
+            let floor = VenueFloor(json: floorJSON),
+            classNameString == VenueRoom.JSONClassName
             else { return nil }
         
         self.identifier = identifier
@@ -34,6 +34,6 @@ extension VenueRoomDataUpdate: JSONDecodable {
         
         // optional
         self.descriptionText = JSONObject[LocationJSONKey.description.rawValue]?.rawValue as? String
-        self.capacity = JSONObject[JSONKey.Capacity.rawValue]?.rawValue as? Int
+        self.capacity = JSONObject[JSONKey.Capacity.rawValue]?.integerValue
     }
 }

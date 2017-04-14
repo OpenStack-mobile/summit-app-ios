@@ -9,7 +9,7 @@
 import Foundation
 import CoreSummit
 import CoreData
-import struct SwiftFoundation.Date
+import struct Date
 
 public struct ScheduleItem: CoreDataDecodable {
     
@@ -18,8 +18,8 @@ public struct ScheduleItem: CoreDataDecodable {
     public let identifier: Identifier
     public let name: String
     public let summit: Identifier
-    public let start: SwiftFoundation.Date
-    public let end: SwiftFoundation.Date
+    public let start: Date
+    public let end: Date
     public let dateTime: String
     public let time: String
     public let location: String

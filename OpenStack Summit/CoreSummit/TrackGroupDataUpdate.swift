@@ -6,23 +6,26 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-/// The `DataUpdate` version of a `TrackGroup`.
-public struct TrackGroupDataUpdate: Named {
+public extension TrackGroup {
     
-    public let identifier: Identifier
-    
-    public let name: String
-    
-    public let descriptionText: String?
-    
-    public let color: String
-    
-    public let tracks: Set<Track>
+    /// The `DataUpdate` version of a `TrackGroup`.
+    public struct DataUpdate: Named {
+        
+        public let identifier: Identifier
+        
+        public let name: String
+        
+        public let descriptionText: String?
+        
+        public let color: String
+        
+        public let tracks: Set<Track>
+    }
 }
 
 // MARK: - Equatable
 
-public func == (lhs: TrackGroupDataUpdate, rhs: TrackGroupDataUpdate) -> Bool {
+public func == (lhs: TrackGroup.DataUpdate, rhs: TrackGroup.DataUpdate) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name

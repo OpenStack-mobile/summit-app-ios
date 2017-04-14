@@ -8,7 +8,7 @@
 
 import WatchKit
 import ClockKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class ComplicationController: NSObject, CLKComplicationDataSource {
@@ -60,7 +60,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getNextRequestedUpdateDate(handler: @escaping (Date?) -> Void) {
         
-        let entry = self.entry(for: SwiftFoundation.Date())
+        let entry = self.entry(for: Date())
         
         let date: Foundation.Date
         
@@ -95,7 +95,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         
-        let entry = self.entry(for: SwiftFoundation.Date())
+        let entry = self.entry(for: Date())
         
         print("Current timeline entry: \(entry)")
         
@@ -111,7 +111,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        let date = SwiftFoundation.Date(foundation: beforeDate)
+        let date = Date(foundation: beforeDate)
         
         let dates = summit.dates(before: date, limit: limit)
         
@@ -131,7 +131,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        let date = SwiftFoundation.Date(foundation: afterDate)
+        let date = Date(foundation: afterDate)
         
         let dates = summit.dates(after: date, limit: limit)
         
@@ -249,7 +249,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         }
     }
     
-    fileprivate func entry(for date: SwiftFoundation.Date) -> TimelineEntry {
+    fileprivate func entry(for date: Date) -> TimelineEntry {
         
         guard let summit = Store.shared.cache
             else { return .none }
@@ -301,12 +301,12 @@ extension ComplicationController {
         case none
         
         /// Multiple Events, with the date of the earliest one and time zone.
-        case multiple(Int, SwiftFoundation.Date, SwiftFoundation.Date, String)
+        case multiple(Int, Date, Date, String)
         
         /// A single event
         case event(EventDetail)
         
-        var start: SwiftFoundation.Date? {
+        var start: Date? {
             
             switch self {
             case .none: return nil
@@ -320,8 +320,8 @@ extension ComplicationController {
         
         let identifier: Identifier
         let name: String
-        let start: SwiftFoundation.Date
-        let end: SwiftFoundation.Date
+        let start: Date
+        let end: Date
         let location: String
         let timeZone: String
         

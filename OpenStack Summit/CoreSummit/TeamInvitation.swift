@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public struct TeamInvitation: Unique {
     
@@ -20,9 +20,9 @@ public struct TeamInvitation: Unique {
     
     public let permission: TeamPermission
     
-    public let created: SwiftFoundation.Date
+    public let created: Date
     
-    public var updated: SwiftFoundation.Date
+    public var updated: Date
     
     public var accepted: Bool
 }

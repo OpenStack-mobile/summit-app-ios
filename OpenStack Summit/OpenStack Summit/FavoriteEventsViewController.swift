@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import CoreSummit
-import SwiftFoundation
+import Foundation
 
 final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoProvider {
     
@@ -29,9 +29,9 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
             else { return [] }
         
         let events = member.favoriteEvents
-            .filter({ SwiftFoundation.Date(foundation: $0.start) >= SwiftFoundation.Date(foundation: startDate)
-                && SwiftFoundation.Date(foundation: $0.end) <= SwiftFoundation.Date(foundation: endDate) })
-            .sort({ SwiftFoundation.Date(foundation: $0.0.start) < SwiftFoundation.Date(foundation: $0.1.start) })
+            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
+                && Date(foundation: $0.end) <= Date(foundation: endDate) })
+            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
         
         var activeDates: [Foundation.Date] = []
         for event in events {
@@ -51,9 +51,9 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
             else { return [] }
         
         let events = member.favoriteEvents
-            .filter({ SwiftFoundation.Date(foundation: $0.start) >= SwiftFoundation.Date(foundation: startDate)
-                && SwiftFoundation.Date(foundation: $0.end) <= SwiftFoundation.Date(foundation: endDate) })
-            .sort({ SwiftFoundation.Date(foundation: $0.0.start) < SwiftFoundation.Date(foundation: $0.1.start) })
+            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
+                && Date(foundation: $0.end) <= Date(foundation: endDate) })
+            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
         
         return ScheduleItem.from(managedObjects: events)
     }

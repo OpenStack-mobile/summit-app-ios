@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class TeamMessageManagedObject: Entity {
         
@@ -29,7 +29,7 @@ extension TeamMessage: CoreDataDecodable {
         
         self.identifier = managedObject.identifier
         self.body = managedObject.body
-        self.created = SwiftFoundation.Date(foundation: managedObject.created)
+        self.created = Date(foundation: managedObject.created)
         self.from = Fault<Member>(managedObject: managedObject.from)
         self.team = Fault<Team>(managedObject: managedObject.team)
     }

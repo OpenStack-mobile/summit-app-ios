@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 
 extension GroupEventDataUpdate: CoreDataEncodable {
     

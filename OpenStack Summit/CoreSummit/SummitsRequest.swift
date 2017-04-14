@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -27,7 +27,7 @@ public extension Store {
                 else { completion(.error(error!)); return }
             
             guard let json = JSON.Value(string: responseObject as! String),
-                let response = SummitsResponse(JSONValue: json)
+                let response = SummitsResponse(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // success
@@ -42,9 +42,9 @@ public struct SummitsResponse: JSONDecodable {
     
     public let page: Page<Summit>
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
-        guard let page = Page<Summit>(JSONValue: JSONValue)
+        guard let page = Page<Summit>(json: JSONValue)
             else { return nil }
         
         self.page = page
@@ -65,28 +65,28 @@ public extension SummitsResponse {
         
         public let datesLabel: String?
         
-        public let start: SwiftFoundation.Date
+        public let start: Date
         
-        public let end: SwiftFoundation.Date
+        public let end: Date
         
         public let active: Bool
         
-        public init?(JSONValue: JSON.Value) {
+        public init?(json JSONValue: JSON.Value) {
             
             guard let JSONObject = JSONValue.objectValue,
-                let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+                let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
                 let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-                let startDate = JSONObject[JSONKey.start_date.rawValue]?.rawValue as? Int,
-                let endDate = JSONObject[JSONKey.end_date.rawValue]?.rawValue as? Int,
+                let startDate = JSONObject[JSONKey.start_date.rawValue]?.integerValue,
+                let endDate = JSONObject[JSONKey.end_date.rawValue]?.integerValue,
                 let timeZoneJSON = JSONObject[JSONKey.time_zone.rawValue],
-                let timeZone = TimeZone(JSONValue: timeZoneJSON),
+                let timeZone = TimeZone(json: timeZoneJSON),
                 let active = JSONObject[JSONKey.active.rawValue]?.rawValue as? Bool
                 else { return nil }
             
             self.identifier = identifier
             self.name = name
-            self.start = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(startDate))
-            self.end = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(endDate))
+            self.start = Date(timeIntervalSince1970: TimeInterval(startDate))
+            self.end = Date(timeIntervalSince1970: TimeInterval(endDate))
             self.timeZone = timeZone
             self.active = active
             

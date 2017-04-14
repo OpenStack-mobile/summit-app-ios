@@ -9,7 +9,7 @@
 import XCTest
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 @testable import CoreSummit
 
 final class StoreTests: XCTestCase {
@@ -103,7 +103,7 @@ final class StoreTests: XCTestCase {
         
         let summitID = 7  // Barcelona
         
-        let date = SwiftFoundation.Date() - (60*60*24*30) // last month
+        let date = Date() - (60*60*24*30) // last month
         
         let expectation = self.expectation(withDescription: "API Request")
         

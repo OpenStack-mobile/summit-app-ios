@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import EventKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class SearchViewController: UITableViewController, EventViewController, RevealViewController, UISearchBarDelegate {

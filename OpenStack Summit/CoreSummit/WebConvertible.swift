@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 /// A type which can export a URL to open the summit data on the website.
 public protocol WebConvertible: Unique {

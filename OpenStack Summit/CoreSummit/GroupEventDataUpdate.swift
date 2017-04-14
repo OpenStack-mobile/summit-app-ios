@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 
 public struct GroupEventDataUpdate: Named {
     
@@ -20,9 +20,9 @@ public struct GroupEventDataUpdate: Named {
     
     public let socialDescription: String?
     
-    public let start: SwiftFoundation.Date
+    public let start: Date
     
-    public let end: SwiftFoundation.Date
+    public let end: Date
     
     public let track: Identifier?
     
@@ -38,7 +38,7 @@ public struct GroupEventDataUpdate: Named {
     
     public let location: Identifier?
     
-    public let presentation: PresentationDataUpdate
+    public let presentation: Presentation.DataUpdate
     
     public let videos: Set<Video>
     

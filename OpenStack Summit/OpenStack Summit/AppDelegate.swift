@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 import CoreSpotlight
-import SwiftFoundation
+import Foundation
 import CoreSummit
 //import GoogleMaps
 import var AeroGearOAuth2.AGAppLaunchedWithURLNotification

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
 
@@ -28,7 +28,7 @@ public extension Store {
             
             guard let json = JSON.Value(string: responseObject as! String),
                 let jsonObject = json.objectValue,
-                let identifier = jsonObject["id"]?.rawValue as? Int
+                let identifier = jsonObject["id"]?.integerValue
                 else { completion(.error(Error.invalidResponse)); return }
             
             // success

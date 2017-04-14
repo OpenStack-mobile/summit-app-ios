@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import UIKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import Cosmos
 import JGProgressHUD

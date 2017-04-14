@@ -10,7 +10,7 @@ import UIKit
 import Haneke
 import Cosmos
 import AHKActionSheet
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import XCDYouTubeKit
 import EventKit
@@ -158,7 +158,7 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         guard eventDetail.allowFeedback
             else { showErrorAlert("Feedback is not enabled for this event."); return }
         
-        guard eventDetail.start < SwiftFoundation.Date()
+        guard eventDetail.start < Date()
             else { showErrorAlert("Can only rate after event has started."); return }
         
         let viewController = self.feedbackController(for: eventDetail) { $0.dismiss(animated: true, completion: nil) }

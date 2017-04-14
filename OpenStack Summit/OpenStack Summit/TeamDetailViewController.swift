@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CoreSummit
-import SwiftFoundation
+import Foundation
 import JGProgressHUD
 
 final class TeamDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextFieldDelegate, MessageEnabledViewController, ActivityViewController {
@@ -530,8 +530,8 @@ private extension TeamDetailViewController {
     enum Cell {
         
         case description(String?)
-        case created(SwiftFoundation.Date)
-        case updated(SwiftFoundation.Date)
+        case created(Date)
+        case updated(Date)
         case owner(Member)
         case member(TeamMember)
         case invitation(TeamInvitation)

@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension VenueFloor {
     
@@ -18,13 +18,13 @@ public extension VenueFloor {
 
 extension VenueFloor: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
             let name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String,
-            let number = JSONObject[JSONKey.number.rawValue]?.rawValue as? Int,
-            let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.rawValue as? Int
+            let number = JSONObject[JSONKey.number.rawValue]?.integerValue,
+            let venueIdentifier = JSONObject[JSONKey.venue_id.rawValue]?.integerValue
             else { return nil }
         
         self.identifier = identifier
@@ -37,7 +37,7 @@ extension VenueFloor: JSONDecodable {
         
         if let roomsJSONArray = JSONObject[JSONKey.rooms.rawValue]?.arrayValue {
             
-            guard let rooms = Int.fromJSON(roomsJSONArray)
+            guard let rooms = Int.from(json: roomsJSONArray)
                 else { return nil }
             
             self.rooms = Set(rooms)

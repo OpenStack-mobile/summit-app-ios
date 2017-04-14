@@ -38,9 +38,7 @@ public extension NSManagedObjectModel {
 public extension Entity {
     
     static var identifierProperty: String { return "id" }
-    
-    var identifier: Int { return Int(self.id) }
-    
+        
     func didCache() {
         
         self.cached = Date()

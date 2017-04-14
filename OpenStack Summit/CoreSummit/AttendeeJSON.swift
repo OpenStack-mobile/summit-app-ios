@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension Attendee {
     
@@ -18,15 +18,15 @@ public extension Attendee {
 
 extension Attendee: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.id.rawValue]?.rawValue as? Int,
-            let member = JSONObject[JSONKey.member_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.id.rawValue]?.integerValue,
+            let member = JSONObject[JSONKey.member_id.rawValue]?.integerValue,
             let scheduledEventsJSONArray = JSONObject[JSONKey.schedule.rawValue]?.arrayValue,
-            let scheduledEvents = Identifier.fromJSON(scheduledEventsJSONArray),
+            let scheduledEvents = Identifier.from(json: scheduledEventsJSONArray),
             let ticketsJSONArray = JSONObject[JSONKey.tickets.rawValue]?.arrayValue,
-            let tickets = Identifier.fromJSON(ticketsJSONArray)
+            let tickets = Identifier.from(json: ticketsJSONArray)
             else { return nil }
         
         self.identifier = identifier

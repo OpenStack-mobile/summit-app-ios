@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import struct Foundation.Date
 
 public struct Notification: Unique {
     
@@ -14,7 +14,7 @@ public struct Notification: Unique {
     
     public let body: String
     
-    public let created: SwiftFoundation.Date
+    public let created: Date
     
     public let from: Topic
     
@@ -147,7 +147,7 @@ public extension Notification {
                 
                 let captureGroup = (rawValue as NSString).substring(with: match.rangeAt(1))
                 
-                guard let identifier = Int(captureGroup)
+                guard let identifier = Identifier(captureGroup)
                     else { return nil }
                 
                 return identifier

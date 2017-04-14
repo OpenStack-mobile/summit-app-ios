@@ -7,7 +7,7 @@
 //
 
 import WatchKit
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 final class AboutInterfaceController: WKInterfaceController {

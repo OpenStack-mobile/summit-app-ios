@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import SwiftFoundation
+import Foundation
 import CoreSummit
 import FirebaseCore
 import FirebaseMessaging
@@ -535,7 +535,7 @@ public protocol PushNotification {
     
     var body: String { get }
     
-    var created: SwiftFoundation.Date { get }
+    var created: Date { get }
     
     init?(pushNotification: [String: String])
 }
@@ -553,7 +553,7 @@ public struct TeamMessageNotification: PushNotification {
     
     public let body: String
     
-    public let created: SwiftFoundation.Date
+    public let created: Date
     
     public let team: Identifier
     
@@ -582,7 +582,7 @@ public struct TeamMessageNotification: PushNotification {
         self.identifier = identifier
         self.team = team
         self.body = body
-        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
+        self.created = Date(timeIntervalSince1970: TimeInterval(created))
         self.from = (fromID, fromFirstName, fromLastName)
     }
 }
@@ -612,7 +612,7 @@ public struct GeneralNotification: PushNotification {
     
     public let body: String
     
-    public let created: SwiftFoundation.Date
+    public let created: Date
     
     public let from: Notification.Topic
     
@@ -643,7 +643,7 @@ public struct GeneralNotification: PushNotification {
         self.identifier = identifier
         self.from = topic
         self.body = body
-        self.created = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(created))
+        self.created = Date(timeIntervalSince1970: TimeInterval(created))
         self.summit = summitID
         self.channel = channel
         

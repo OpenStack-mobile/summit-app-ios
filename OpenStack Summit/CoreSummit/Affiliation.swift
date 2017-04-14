@@ -6,7 +6,7 @@
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public struct Affiliation: Unique {
     
@@ -14,9 +14,9 @@ public struct Affiliation: Unique {
     
     public var member: Identifier
     
-    public var start: SwiftFoundation.Date?
+    public var start: Date?
     
-    public var end: SwiftFoundation.Date?
+    public var end: Date?
     
     public var isCurrent: Bool
     

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftFoundation
+import Foundation
 import CoreSummit
 
 public struct EventDetail: CoreDataDecodable {
@@ -17,8 +17,8 @@ public struct EventDetail: CoreDataDecodable {
     public let identifier: Identifier
     public let name: String
     public let summit: Identifier
-    public let start: SwiftFoundation.Date
-    public let end: SwiftFoundation.Date
+    public let start: Date
+    public let end: Date
     public let timeZone: String
     public let dateTime: String
     public let day: String

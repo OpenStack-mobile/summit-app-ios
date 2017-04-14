@@ -103,10 +103,6 @@
 		6E0B5F691D77D4DF0005F6CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */; };
 		6E0B5F6D1D77D4DF0005F6CE /* OpenStackSummitWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6E0B5F4F1D77D4DE0005F6CE /* OpenStackSummitWatch.app */; };
 		6E0D3D7B1DC09B7C00EEB8A7 /* SummitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D3D7A1DC09B7C00EEB8A7 /* SummitsViewController.swift */; };
-		6E0FD0B01E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
-		6E0FD0B11E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
-		6E0FD0B21E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
-		6E0FD0B31E92A7DB000C6DBA /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */; };
 		6E0FD0B51E92E57F000C6DBA /* SwiftFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E0FD0B71E92E57F000C6DBA /* JSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54EB1E612BDD005EAB86 /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E0FD0B91E92E57F000C6DBA /* AeroGearHttp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFE54E51E612BDD005EAB86 /* AeroGearHttp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -919,30 +915,6 @@
 		6EE74DEB1DBF8E5A00616BEA /* DataUpdates5.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E35086E1D9AE4900055801C /* DataUpdates5.json */; };
 		6EE74DEC1DBF8E5A00616BEA /* DataUpdates6.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */; };
 		6EE74DED1DBF8E5A00616BEA /* DataUpdates7.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */; };
-		6EE9544E1E92A0BC006B1330 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954481E92A0BC006B1330 /* Predicate.swift */; };
-		6EE9544F1E92A0BC006B1330 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954481E92A0BC006B1330 /* Predicate.swift */; };
-		6EE954501E92A0BC006B1330 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954481E92A0BC006B1330 /* Predicate.swift */; };
-		6EE954511E92A0BC006B1330 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954481E92A0BC006B1330 /* Predicate.swift */; };
-		6EE954521E92A0BC006B1330 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954491E92A0BC006B1330 /* Compound.swift */; };
-		6EE954531E92A0BC006B1330 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954491E92A0BC006B1330 /* Compound.swift */; };
-		6EE954541E92A0BC006B1330 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954491E92A0BC006B1330 /* Compound.swift */; };
-		6EE954551E92A0BC006B1330 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE954491E92A0BC006B1330 /* Compound.swift */; };
-		6EE954561E92A0BC006B1330 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544A1E92A0BC006B1330 /* Comparison.swift */; };
-		6EE954571E92A0BC006B1330 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544A1E92A0BC006B1330 /* Comparison.swift */; };
-		6EE954581E92A0BC006B1330 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544A1E92A0BC006B1330 /* Comparison.swift */; };
-		6EE954591E92A0BC006B1330 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544A1E92A0BC006B1330 /* Comparison.swift */; };
-		6EE9545A1E92A0BC006B1330 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544B1E92A0BC006B1330 /* Expression.swift */; };
-		6EE9545B1E92A0BC006B1330 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544B1E92A0BC006B1330 /* Expression.swift */; };
-		6EE9545C1E92A0BC006B1330 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544B1E92A0BC006B1330 /* Expression.swift */; };
-		6EE9545D1E92A0BC006B1330 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544B1E92A0BC006B1330 /* Expression.swift */; };
-		6EE9545E1E92A0BC006B1330 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544C1E92A0BC006B1330 /* Value.swift */; };
-		6EE9545F1E92A0BC006B1330 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544C1E92A0BC006B1330 /* Value.swift */; };
-		6EE954601E92A0BC006B1330 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544C1E92A0BC006B1330 /* Value.swift */; };
-		6EE954611E92A0BC006B1330 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544C1E92A0BC006B1330 /* Value.swift */; };
-		6EE954621E92A0BC006B1330 /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544D1E92A0BC006B1330 /* NSPredicate.swift */; };
-		6EE954631E92A0BC006B1330 /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544D1E92A0BC006B1330 /* NSPredicate.swift */; };
-		6EE954641E92A0BC006B1330 /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544D1E92A0BC006B1330 /* NSPredicate.swift */; };
-		6EE954651E92A0BC006B1330 /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE9544D1E92A0BC006B1330 /* NSPredicate.swift */; };
 		6EEBAEA41D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
 		6EEBAEA51D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
 		6EEBAEA61D8CD6530067B228 /* DataUpdates4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */; };
@@ -1295,7 +1267,6 @@
 		6E0B5F681D77D4DF0005F6CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E0B5F6A1D77D4DF0005F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E0D3D7A1DC09B7C00EEB8A7 /* SummitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummitsViewController.swift; sourceTree = "<group>"; };
-		6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateTests.swift; sourceTree = "<group>"; };
 		6E104D2E1D1061AC00541E84 /* OpenStackSummit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStackSummit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E104D311D1061AC00541E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E104D381D1061AC00541E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1689,12 +1660,6 @@
 		6EDE52351D42D52D00DF4BEA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6EDF8C121D247DB300D8DD27 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		6EE74DE71DBF8E4B00616BEA /* DataUpdates7.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DataUpdates7.json; sourceTree = "<group>"; };
-		6EE954481E92A0BC006B1330 /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
-		6EE954491E92A0BC006B1330 /* Compound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compound.swift; sourceTree = "<group>"; };
-		6EE9544A1E92A0BC006B1330 /* Comparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
-		6EE9544B1E92A0BC006B1330 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
-		6EE9544C1E92A0BC006B1330 /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
-		6EE9544D1E92A0BC006B1330 /* NSPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		6EEBAEA31D8CD6530067B228 /* DataUpdates4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates4.json; sourceTree = "<group>"; };
 		6EEED0281E3A48AF00795B3D /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		6EEED02A1E3A494400795B3D /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -2037,7 +2002,6 @@
 				6E323D1D1D77189500E8C9B3 /* WebConvertible.swift */,
 				6E25291F1D591C2D00173B1F /* DataUpdate.swift */,
 				6EB1FDFF1E1D6BB90048045D /* PageController.swift */,
-				6EE954471E92A092006B1330 /* Predicate */,
 				6E74FAF01D7C992A0018633D /* Swift Extensions */,
 				6E10A5B01D106D85008CBD0C /* Requests */,
 				6E10A5A01D10678E008CBD0C /* Model */,
@@ -2054,7 +2018,6 @@
 				6E10A5151D106741008CBD0C /* JSON */,
 				6E10A50F1D10672D008CBD0C /* JSONTests.swift */,
 				6E10A5101D10672D008CBD0C /* CoreDataTests.swift */,
-				6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */,
 				6E52FCBA1D130553006A7302 /* StoreTests.swift */,
 				6E10A5111D10672D008CBD0C /* TestUtilities.swift */,
 				6E10A5031D1066E9008CBD0C /* Info.plist */,
@@ -2785,19 +2748,6 @@
 				6EC6A7251D79FAA100F137F7 /* SpeakerDetailInterfaceController.swift */,
 			);
 			name = Speakers;
-			sourceTree = "<group>";
-		};
-		6EE954471E92A092006B1330 /* Predicate */ = {
-			isa = PBXGroup;
-			children = (
-				6EE954481E92A0BC006B1330 /* Predicate.swift */,
-				6EE954491E92A0BC006B1330 /* Compound.swift */,
-				6EE9544A1E92A0BC006B1330 /* Comparison.swift */,
-				6EE9544B1E92A0BC006B1330 /* Expression.swift */,
-				6EE9544C1E92A0BC006B1330 /* Value.swift */,
-				6EE9544D1E92A0BC006B1330 /* NSPredicate.swift */,
-			);
-			name = Predicate;
 			sourceTree = "<group>";
 		};
 		6EEED02F1E3A60E900795B3D /* Beta */ = {
@@ -3871,7 +3821,6 @@
 				6E0B5EBF1D77C8950005F6CE /* ImageJSON.swift in Sources */,
 				6E3D4D011E12D44A00D542CD /* TeamMember.swift in Sources */,
 				6E8220F91E48E1BD0025FE58 /* WirelessNetworkJSON.swift in Sources */,
-				6EE9545D1E92A0BC006B1330 /* Expression.swift in Sources */,
 				6E0B5EC01D77C8950005F6CE /* EventTypeJSON.swift in Sources */,
 				6EF4F8811DC9296100D31A99 /* VenueFloorManagedObject.swift in Sources */,
 				6E982E451E15A93800ECB76E /* TeamMessageRequest.swift in Sources */,
@@ -3909,7 +3858,6 @@
 				6E8220FE1E48E2BA0025FE58 /* WirelessNetworkManagedObject.swift in Sources */,
 				6E0B5EDA1D77C8950005F6CE /* TrackJSON.swift in Sources */,
 				6E1BCFF41E37A61200059E94 /* MemberRequest.swift in Sources */,
-				6EE954591E92A0BC006B1330 /* Comparison.swift in Sources */,
 				6EF4F87D1DC928D700D31A99 /* ImageManagedObject.swift in Sources */,
 				6E0B5EDB1D77C8950005F6CE /* FeedbackJSON.swift in Sources */,
 				6E0B5EDD1D77C8950005F6CE /* LocationJSON.swift in Sources */,
@@ -3965,9 +3913,7 @@
 				6E7847F31DC9224700B8AD05 /* LocationManagedObject.swift in Sources */,
 				6E919B4B1E39C1B700FBF910 /* GroupEventDataUpdate.swift in Sources */,
 				6E0B5EF91D77C8950005F6CE /* TimeZoneJSON.swift in Sources */,
-				6EE954511E92A0BC006B1330 /* Predicate.swift in Sources */,
 				6EBC49011E13902A0077806B /* TeamMemberJSON.swift in Sources */,
-				6EE954611E92A0BC006B1330 /* Value.swift in Sources */,
 				6E982E411E15A92F00ECB76E /* TeamMemberRequest.swift in Sources */,
 				6EA38A861DCB1D8100B703CE /* VenueRoomDataUpdateManagedObject.swift in Sources */,
 				6EA38A701DCB059400B703CE /* DataUpdate.swift in Sources */,
@@ -3985,7 +3931,6 @@
 				6E919B531E39C8E300FBF910 /* GroupEventDataUpdateManagedObject.swift in Sources */,
 				6E2D9FE81DC9A5B90015C588 /* TrackGroupManagedObject.swift in Sources */,
 				6EF4F8591DC8C7D600D31A99 /* CompanyManagedObject.swift in Sources */,
-				6EE954551E92A0BC006B1330 /* Compound.swift in Sources */,
 				6EB1FDF51E1C073E0048045D /* TeamInvitationRequest.swift in Sources */,
 				6EBC49051E1394FE0077806B /* TeamMessageJSON.swift in Sources */,
 				9DABFF911DA6A74C00B3101A /* VenueFloor.swift in Sources */,
@@ -3999,7 +3944,6 @@
 				6E0B5F0C1D77C8950005F6CE /* TimeZone.swift in Sources */,
 				6E0B5F0E1D77C8950005F6CE /* Track.swift in Sources */,
 				6E0B5F101D77C8950005F6CE /* Image.swift in Sources */,
-				6EE954651E92A0BC006B1330 /* NSPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4010,7 +3954,6 @@
 				6E574B6C1DCB2DFB00AE4837 /* CoreDataTests.swift in Sources */,
 				6E0B5F241D77C8AB0005F6CE /* TestUtilities.swift in Sources */,
 				6E0B5F251D77C8AB0005F6CE /* JSONTests.swift in Sources */,
-				6E0FD0B31E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E0B5F261D77C8AB0005F6CE /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4191,7 +4134,6 @@
 				6E2D9FD21DC98E330015C588 /* PresentationManagedObject.swift in Sources */,
 				6EBC49071E1398F10077806B /* ListMembersRequest.swift in Sources */,
 				9D4B1C3E1E8563B200F98ECB /* AffiliationManagedObject.swift in Sources */,
-				6EE954561E92A0BC006B1330 /* Comparison.swift in Sources */,
 				6E730B921DA2E40A005E486B /* Page.swift in Sources */,
 				6EF4F86F1DC920B800D31A99 /* EventTypeManagedObject.swift in Sources */,
 				6E10A5911D10675D008CBD0C /* Tag.swift in Sources */,
@@ -4204,12 +4146,10 @@
 				6E570A341D6771CF00189992 /* EventDataUpdate.swift in Sources */,
 				9DABFF941DA6A75B00B3101A /* VenueFloorJSON.swift in Sources */,
 				6E10A5731D10675D008CBD0C /* Speaker.swift in Sources */,
-				6EE9545E1E92A0BC006B1330 /* Value.swift in Sources */,
 				6E10A58B1D10675D008CBD0C /* Summit.swift in Sources */,
 				6E2D9FEE1DC9B0F50015C588 /* VideoManagedObject.swift in Sources */,
 				9D4B1C391E85635200F98ECB /* AffiliationOrganizationManagedObject.swift in Sources */,
 				6E10A5931D10675D008CBD0C /* TicketType.swift in Sources */,
-				6EE9545A1E92A0BC006B1330 /* Expression.swift in Sources */,
 				6E10A5901D10675D008CBD0C /* SummitTypeJSON.swift in Sources */,
 				6E982E3B1E158DC800ECB76E /* TeamRequest.swift in Sources */,
 				6E10A59F1D10675D008CBD0C /* VenueRoomJSON.swift in Sources */,
@@ -4244,7 +4184,6 @@
 				6EF2FB391D524BCC00BF9EDE /* TicketOrderRequest.swift in Sources */,
 				6E10A58E1D10675D008CBD0C /* SummitJSON.swift in Sources */,
 				6E2D9FDE1DC9A5730015C588 /* SummitTypeManagedObject.swift in Sources */,
-				6EE954521E92A0BC006B1330 /* Compound.swift in Sources */,
 				6E6FD17A1D7A1A24003D13D7 /* Production.swift in Sources */,
 				6E99B8AA1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */,
 				6E8220F21E48E0E50025FE58 /* WirelessNetwork.swift in Sources */,
@@ -4295,7 +4234,6 @@
 				6E93D4431D9AECA500E3302A /* TrackGroupDataUpdate.swift in Sources */,
 				6EA38A7C1DCB1D5E00B703CE /* TrackGroupDataUpdateManagedObject.swift in Sources */,
 				6E066D9D1D356A2F005A8D2D /* FeedbackRequest.swift in Sources */,
-				6EE9544E1E92A0BC006B1330 /* Predicate.swift in Sources */,
 				6EA38A801DCB1D7100B703CE /* PresentationDataUpdateManagedObject.swift in Sources */,
 				6EEED03D1E3BCB5E00795B3D /* NotificationManagedObject.swift in Sources */,
 				6E10A5611D10675D008CBD0C /* EventJSON.swift in Sources */,
@@ -4311,7 +4249,6 @@
 				6E10A5951D10675D008CBD0C /* TimeZone.swift in Sources */,
 				6E10A5971D10675D008CBD0C /* Track.swift in Sources */,
 				6E10A5661D10675D008CBD0C /* Image.swift in Sources */,
-				6EE954621E92A0BC006B1330 /* NSPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4322,7 +4259,6 @@
 				6E574B6E1DCB2DFD00AE4837 /* CoreDataTests.swift in Sources */,
 				6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */,
 				6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */,
-				6E0FD0B01E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4336,7 +4272,6 @@
 				6E1BCFF21E37A61000059E94 /* MemberRequest.swift in Sources */,
 				6E2923A71D7AF8C900D14F0A /* NonConfirmedAttendee.swift in Sources */,
 				6E3D4D041E12D45400D542CD /* TeamMessage.swift in Sources */,
-				6EE9545C1E92A0BC006B1330 /* Expression.swift in Sources */,
 				6E2923A81D7AF8C900D14F0A /* Event.swift in Sources */,
 				6E2923A91D7AF8C900D14F0A /* VenueRoom.swift in Sources */,
 				6E2923AB1D7AF8C900D14F0A /* CollectionType.swift in Sources */,
@@ -4351,7 +4286,6 @@
 				6E8D109A1DF87F3B00A0BBDC /* Team.swift in Sources */,
 				6E959E1A1DF61557002981FD /* TeamManagedObject.swift in Sources */,
 				6E7847F21DC9224700B8AD05 /* LocationManagedObject.swift in Sources */,
-				6EE954601E92A0BC006B1330 /* Value.swift in Sources */,
 				6E2923B21D7AF8C900D14F0A /* ImageJSON.swift in Sources */,
 				6E2923B31D7AF8C900D14F0A /* EventTypeJSON.swift in Sources */,
 				6E2923B41D7AF8C900D14F0A /* NonConfirmedAttendeeJSON.swift in Sources */,
@@ -4380,7 +4314,6 @@
 				6E2923BD1D7AF8C900D14F0A /* Tag.swift in Sources */,
 				6E2923BE1D7AF8C900D14F0A /* Member.swift in Sources */,
 				6E2923BF1D7AF8C900D14F0A /* MemberJSON.swift in Sources */,
-				6EE954501E92A0BC006B1330 /* Predicate.swift in Sources */,
 				6E2923C01D7AF8C900D14F0A /* EventDataUpdate.swift in Sources */,
 				9DABFF951DA6A75C00B3101A /* VenueFloorJSON.swift in Sources */,
 				6EEED03A1E3BB9FA00795B3D /* Notification.swift in Sources */,
@@ -4427,7 +4360,6 @@
 				6E730B961DA2F0CB005E486B /* PageJSON.swift in Sources */,
 				6E5D05C71D8CBC9500451639 /* SummitDataUpdate.swift in Sources */,
 				6EB1FDF01E1AF9F50048045D /* TeamInvitationJSON.swift in Sources */,
-				6EE954581E92A0BC006B1330 /* Comparison.swift in Sources */,
 				6E2D9FD31DC98E330015C588 /* PresentationManagedObject.swift in Sources */,
 				6E2923DF1D7AF8C900D14F0A /* VenueJSON.swift in Sources */,
 				6E61796C1DE7920E00EED286 /* SummitsRequest.swift in Sources */,
@@ -4468,7 +4400,6 @@
 				6E2D9FE31DC9A5960015C588 /* TicketTypeManagedObject.swift in Sources */,
 				6E2923F91D7AF8C900D14F0A /* Location.swift in Sources */,
 				6E2923FB1D7AF8C900D14F0A /* DataUpdateRequest.swift in Sources */,
-				6EE954541E92A0BC006B1330 /* Compound.swift in Sources */,
 				6E1C8ACF1E4EBE6400BE8BC9 /* FavoriteEventRequest.swift in Sources */,
 				6E2923FC1D7AF8C900D14F0A /* Environment.swift in Sources */,
 				6EF4F85C1DC8CAEC00D31A99 /* EventManagedObject.swift in Sources */,
@@ -4485,7 +4416,6 @@
 				6E2D9FFB1DC9D4320015C588 /* FeedbackManagedObject.swift in Sources */,
 				6EF4F87C1DC928D700D31A99 /* ImageManagedObject.swift in Sources */,
 				6E2924051D7AF8C900D14F0A /* Image.swift in Sources */,
-				6EE954641E92A0BC006B1330 /* NSPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4496,7 +4426,6 @@
 				6E574B6D1DCB2DFC00AE4837 /* CoreDataTests.swift in Sources */,
 				6E2924171D7AF8CC00D14F0A /* TestUtilities.swift in Sources */,
 				6E2924181D7AF8CC00D14F0A /* JSONTests.swift in Sources */,
-				6E0FD0B21E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E2924191D7AF8CC00D14F0A /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4555,7 +4484,6 @@
 				6E7557C51E58C48C003B6844 /* PresentationManagedObject.swift in Sources */,
 				6E7557C61E58C48C003B6844 /* ListMembersRequest.swift in Sources */,
 				9D4B1C3F1E8563B200F98ECB /* AffiliationManagedObject.swift in Sources */,
-				6EE954571E92A0BC006B1330 /* Comparison.swift in Sources */,
 				6E7557C71E58C48C003B6844 /* Page.swift in Sources */,
 				6E7557C81E58C48C003B6844 /* EventTypeManagedObject.swift in Sources */,
 				6E7557C91E58C48C003B6844 /* Tag.swift in Sources */,
@@ -4568,12 +4496,10 @@
 				6E7557D01E58C48C003B6844 /* EventDataUpdate.swift in Sources */,
 				6E7557D11E58C48C003B6844 /* VenueFloorJSON.swift in Sources */,
 				6E7557D21E58C48C003B6844 /* Speaker.swift in Sources */,
-				6EE9545F1E92A0BC006B1330 /* Value.swift in Sources */,
 				6E7557D31E58C48C003B6844 /* Summit.swift in Sources */,
 				6E7557D41E58C48C003B6844 /* VideoManagedObject.swift in Sources */,
 				9D4B1C3A1E85635200F98ECB /* AffiliationOrganizationManagedObject.swift in Sources */,
 				6E7557D51E58C48C003B6844 /* TicketType.swift in Sources */,
-				6EE9545B1E92A0BC006B1330 /* Expression.swift in Sources */,
 				6E7557D61E58C48C003B6844 /* SummitTypeJSON.swift in Sources */,
 				6E7557D71E58C48C003B6844 /* TeamRequest.swift in Sources */,
 				6E7557D81E58C48C003B6844 /* VenueRoomJSON.swift in Sources */,
@@ -4608,7 +4534,6 @@
 				6E7557F41E58C48C003B6844 /* TicketOrderRequest.swift in Sources */,
 				6E7557F51E58C48C003B6844 /* SummitJSON.swift in Sources */,
 				6E7557F61E58C48C003B6844 /* SummitTypeManagedObject.swift in Sources */,
-				6EE954531E92A0BC006B1330 /* Compound.swift in Sources */,
 				6E7557F71E58C48C003B6844 /* Production.swift in Sources */,
 				6E7557F81E58C48C003B6844 /* Model.xcdatamodeld in Sources */,
 				6E7557F91E58C48C003B6844 /* WirelessNetwork.swift in Sources */,
@@ -4659,7 +4584,6 @@
 				6E7558261E58C48C003B6844 /* TrackGroupDataUpdate.swift in Sources */,
 				6E7558271E58C48C003B6844 /* TrackGroupDataUpdateManagedObject.swift in Sources */,
 				6E7558281E58C48C003B6844 /* FeedbackRequest.swift in Sources */,
-				6EE9544F1E92A0BC006B1330 /* Predicate.swift in Sources */,
 				6E7558291E58C48C003B6844 /* PresentationDataUpdateManagedObject.swift in Sources */,
 				6E75582A1E58C48C003B6844 /* NotificationManagedObject.swift in Sources */,
 				6E75582B1E58C48C003B6844 /* EventJSON.swift in Sources */,
@@ -4675,7 +4599,6 @@
 				6E7558341E58C48C003B6844 /* TimeZone.swift in Sources */,
 				6E7558351E58C48C003B6844 /* Track.swift in Sources */,
 				6E7558361E58C48C003B6844 /* Image.swift in Sources */,
-				6EE954631E92A0BC006B1330 /* NSPredicate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4686,7 +4609,6 @@
 				6E7558491E58C4A7003B6844 /* CoreDataTests.swift in Sources */,
 				6E75584A1E58C4A7003B6844 /* TestUtilities.swift in Sources */,
 				6E75584B1E58C4A7003B6844 /* JSONTests.swift in Sources */,
-				6E0FD0B11E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E75584C1E58C4A7003B6844 /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

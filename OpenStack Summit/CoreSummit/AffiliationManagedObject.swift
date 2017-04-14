@@ -7,7 +7,7 @@
 //
 
 import CoreData
-import SwiftFoundation
+import Foundation
 
 public final class AffiliationManagedObject: Entity {
     
@@ -33,7 +33,7 @@ extension Affiliation: CoreDataDecodable {
         
         if let startDate = managedObject.start {
             
-            self.start = SwiftFoundation.Date(foundation: startDate)
+            self.start = Date(foundation: startDate)
             
         } else {
             
@@ -42,7 +42,7 @@ extension Affiliation: CoreDataDecodable {
         
         if let endDate = managedObject.end {
             
-            self.end = SwiftFoundation.Date(foundation: endDate)
+            self.end = Date(foundation: endDate)
             
         } else {
             

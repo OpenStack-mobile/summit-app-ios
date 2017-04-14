@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import JSON
 
 public extension NonConfirmedAttendee {
     
@@ -18,10 +18,10 @@ public extension NonConfirmedAttendee {
 
 extension NonConfirmedAttendee: JSONDecodable {
     
-    public init?(JSONValue: JSON.Value) {
+    public init?(json JSONValue: JSON.Value) {
         
         guard let JSONObject = JSONValue.objectValue,
-            let identifier = JSONObject[JSONKey.external_id.rawValue]?.rawValue as? Int,
+            let identifier = JSONObject[JSONKey.external_id.rawValue]?.integerValue,
             let firstName = JSONObject[JSONKey.first_name.rawValue]?.rawValue as? String,
             let lastName = JSONObject[JSONKey.last_name.rawValue]?.rawValue as? String
             else { return nil }

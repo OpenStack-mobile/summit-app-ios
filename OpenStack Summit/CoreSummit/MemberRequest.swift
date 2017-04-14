@@ -6,13 +6,14 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import SwiftFoundation
+import Foundation
 import AeroGearHttp
 import AeroGearOAuth2
+import JSON
 
 public extension Store {
     
-    func currentMember(for summit: Identifier, completion: (ErrorValue<MemberResponse.Member>) -> ()) {
+    func currentMember(for summit: Identifier, completion: @escaping (ErrorValue<MemberResponse.Member>) -> ()) {
         
         let URI = "/api/v1/summits/\(summit)/members/me?expand=attendee,speaker,feedback,groups"
         
@@ -22,20 +23,20 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        http.GET(URL, parameters: nil, completionHandler: { (responseObject, error) in
+        http.request(method: .get, path: URL, parameters: nil, completionHandler: { (responseObject, error) in
             
             // forward error
             guard error == nil
                 else { completion(.error(error!)); return }
             
-            guard let json = JSON.Value(string: responseObject as! String),
-                let member = MemberResponse.Member(JSONValue: json)
+            guard let json = try? JSON.Value(string: responseObject as! String),
+                let member = MemberResponse.Member(json: json)
                 else { completion(.error(Error.invalidResponse)); return }
             
             // cache
             try! context.performErrorBlockAndWait {
                 
-                try member.save(context)
+                let _ = try member.save(context)
                 
                 try context.validateAndSave()
             }
@@ -95,9 +96,9 @@ public struct MemberResponse {
         
         public let socialDescription: String?
         
-        public let start: SwiftFoundation.Date
+        public let start: Date
         
-        public let end: SwiftFoundation.Date
+        public let end: Date
         
         public let summit: Identifier
         
@@ -147,14 +148,14 @@ public struct MemberResponse {
         
         public let review: String
         
-        public let date: SwiftFoundation.Date
+        public let date: Date
         
         public let event: Identifier
         
         public let member: Identifier
     }
     
-    public typealias Presentation = PresentationDataUpdate
+    public typealias Presentation = CoreSummit.Presentation.DataUpdate
 }
 
 public extension MemberResponse.Member {

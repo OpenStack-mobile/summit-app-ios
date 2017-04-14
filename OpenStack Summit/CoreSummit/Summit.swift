@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
+import struct Foundation.Date
 
 public struct Summit: Named, Equatable {
     
@@ -18,12 +18,12 @@ public struct Summit: Named, Equatable {
     
     public var datesLabel: String?
     
-    public var start: SwiftFoundation.Date
+    public var start: Date
     
-    public var end: SwiftFoundation.Date
+    public var end: Date
     
     /// Default start date for the Summit.
-    public var defaultStart: SwiftFoundation.Date?
+    public var defaultStart: Date?
     
     public var active: Bool
     
@@ -33,7 +33,7 @@ public struct Summit: Named, Equatable {
     
     public var speakers: Set<Speaker>
     
-    public var startShowingVenues: SwiftFoundation.Date?
+    public var startShowingVenues: Date?
     
     public var ticketTypes: Set<TicketType>
     
