@@ -66,7 +66,12 @@ extension EventViewController {
             
             let newValue = scheduled == false
             
-            let title = newValue ? "Schedule" : "Unschedule"
+            var title = newValue ? "Schedule" : "Unschedule"
+            
+            if !event.rsvp.isEmpty {
+                
+                title = newValue ? "RSVP" : "unRSVP"
+            }
             
             let image = newValue ? R.image.contextMenuScheduleAdd()! : R.image.contextMenuScheduleRemove()!
             

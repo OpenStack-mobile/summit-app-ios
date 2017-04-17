@@ -235,6 +235,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .whiteColor()
         titleHeader.trackLabel.hidden = eventDetail.track.isEmpty
         
+        titleHeader.scheduleButton.setTitle(eventDetail.rsvp.isEmpty ? "Schedule" : "RSVP", forState: .Normal)
+        
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
         
