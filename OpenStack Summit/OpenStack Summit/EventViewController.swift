@@ -89,7 +89,7 @@ extension EventViewController {
         
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
-        if Store.shared.isLoggedIn && eventRequestInProgress == false {
+        if Store.shared.isLoggedIn && event.willRecord && eventRequestInProgress == false {
             
             let newValue = isFavorite == false
             

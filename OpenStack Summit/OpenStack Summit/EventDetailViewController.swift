@@ -243,6 +243,8 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.scheduleButton.highlighted = didConfirm
         titleHeader.favoriteButton.highlighted = isFavorite
         
+        titleHeader.favoriteButton.hidden = !eventDetail.willRecord
+
         // action buttons
         
         // get all reviews for this event
