@@ -139,7 +139,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         self.nowSelected = false
         
         // only show alert when now button is tapped
-        if nowEventIndex() == nil && sender == self.scheduleView.nowButton {
+        if nowEventIndex() == nil && sender != nil {
             
             showInfoMessage("", message: "All presentations are finished for today."); return
         }
