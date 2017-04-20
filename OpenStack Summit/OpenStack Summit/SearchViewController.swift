@@ -514,7 +514,7 @@ extension Speaker: SearchViewControllerItem {
     
     private static func predicate(for searchTerm: String, summit: Identifier) -> NSPredicate {
         
-        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR firstName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm, searchTerm)
+        return NSPredicate(format: "summits.id CONTAINS %@ AND (firstName CONTAINS[c] %@ OR lastName CONTAINS[c] %@ OR affiliations.organization.name CONTAINS[c] %@)", NSNumber(longLong: Int64(summit)), searchTerm, searchTerm, searchTerm)
     }
 }
 
