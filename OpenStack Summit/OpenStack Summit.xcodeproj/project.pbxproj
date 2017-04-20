@@ -1074,6 +1074,10 @@
 		9DABFF941DA6A75B00B3101A /* VenueFloorJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */; };
 		9DABFF951DA6A75C00B3101A /* VenueFloorJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */; };
 		9DABFF961DA6A75E00B3101A /* VenueFloorJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */; };
+		9DEF130D1EA67153001798D4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF130C1EA67153001798D4 /* Level.swift */; };
+		9DEF130E1EA67153001798D4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF130C1EA67153001798D4 /* Level.swift */; };
+		9DEF130F1EA67153001798D4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF130C1EA67153001798D4 /* Level.swift */; };
+		9DEF13101EA67153001798D4 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF130C1EA67153001798D4 /* Level.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1770,6 +1774,7 @@
 		9D6AADA81DBE4ABE0057888E /* DataUpdates6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates6.json; sourceTree = "<group>"; };
 		9D6AADAB1DBE563A0057888E /* VenueRoomDataUpdateJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDataUpdateJSON.swift; sourceTree = "<group>"; };
 		9D6AADAD1DBE56CB0057888E /* VenueRoomDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueRoomDataUpdate.swift; sourceTree = "<group>"; };
+		9DEF130C1EA67153001798D4 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2107,6 +2112,7 @@
 				6E10A52B1D10675C008CBD0C /* NonConfirmedAttendee.swift */,
 				6E10A52D1D10675C008CBD0C /* Person.swift */,
 				6E10A52E1D10675C008CBD0C /* Presentation.swift */,
+				9DEF130C1EA67153001798D4 /* Level.swift */,
 				6E10A5301D10675C008CBD0C /* Speaker.swift */,
 				6E10A5481D10675C008CBD0C /* Summit.swift */,
 				6E10A5491D10675C008CBD0C /* Attendee.swift */,
@@ -3980,6 +3986,7 @@
 				6EE954551E92A0BC006B1330 /* Compound.swift in Sources */,
 				6EB1FDF51E1C073E0048045D /* TeamInvitationRequest.swift in Sources */,
 				6EBC49051E1394FE0077806B /* TeamMessageJSON.swift in Sources */,
+				9DEF13101EA67153001798D4 /* Level.swift in Sources */,
 				9DABFF911DA6A74C00B3101A /* VenueFloor.swift in Sources */,
 				6E0B5F0A1D77C8950005F6CE /* Video.swift in Sources */,
 				6E1BCFF11E37A5FE00059E94 /* MemberJSON.swift in Sources */,
@@ -4169,6 +4176,7 @@
 				6EF4F86B1DC8D1D300D31A99 /* CoreDataDecodable.swift in Sources */,
 				6E10A58C1D10675D008CBD0C /* Attendee.swift in Sources */,
 				6EFC6E691D2322E70087057A /* EventScheduleRequest.swift in Sources */,
+				9DEF130D1EA67153001798D4 /* Level.swift in Sources */,
 				6E10A55F1D10675D008CBD0C /* ErrorValue.swift in Sources */,
 				6E570A361D67753D00189992 /* PresentationDataUpdate.swift in Sources */,
 				9D6AADB21DBE58030057888E /* VenueRoomDataUpdateJSON.swift in Sources */,
@@ -4401,6 +4409,7 @@
 				6E2923D21D7AF8C900D14F0A /* Configuration.swift in Sources */,
 				6E2923D31D7AF8C900D14F0A /* EventType.swift in Sources */,
 				6E2923D41D7AF8C900D14F0A /* Venue.swift in Sources */,
+				9DEF130F1EA67153001798D4 /* Level.swift in Sources */,
 				6E2923D51D7AF8C900D14F0A /* TicketTypeJSON.swift in Sources */,
 				6E2923D61D7AF8C900D14F0A /* TicketOrderRequest.swift in Sources */,
 				6E99B8AB1DC7D68F009CE28D /* Model.xcdatamodeld in Sources */,
@@ -4533,6 +4542,7 @@
 				6E7557B81E58C48C003B6844 /* CoreDataDecodable.swift in Sources */,
 				6E7557B91E58C48C003B6844 /* Attendee.swift in Sources */,
 				6E7557BA1E58C48C003B6844 /* EventScheduleRequest.swift in Sources */,
+				9DEF130E1EA67153001798D4 /* Level.swift in Sources */,
 				6E7557BB1E58C48C003B6844 /* ErrorValue.swift in Sources */,
 				6E7557BC1E58C48C003B6844 /* PresentationDataUpdate.swift in Sources */,
 				6E7557BD1E58C48C003B6844 /* VenueRoomDataUpdateJSON.swift in Sources */,
