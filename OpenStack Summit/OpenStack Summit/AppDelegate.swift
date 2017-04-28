@@ -167,7 +167,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
         
-        PushNotificationManager.shared.process(userInfo as! [String: String])
+        var notification = userInfo
+        notification.removeValueForKey("aps")
+        
+        if let notification = notification as? [String: String] {
+            PushNotificationManager.shared.process(notification)
+        }
         
         completionHandler(.NewData)
     }

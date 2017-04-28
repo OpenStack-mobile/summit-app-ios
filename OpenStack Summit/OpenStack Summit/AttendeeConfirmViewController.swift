@@ -277,6 +277,8 @@ final class AttendeeConfirmViewController: UITableViewController, MessageEnabled
             
             let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.attendeeConfirmSelectionTableViewCell)!
             
+            cell.pickerView.reloadAllComponents()
+            
             return cell
             
         case .action:
