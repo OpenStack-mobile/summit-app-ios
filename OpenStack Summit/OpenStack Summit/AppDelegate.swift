@@ -170,7 +170,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         var notification = userInfo
         notification.removeValueForKey("aps")
         
-        PushNotificationManager.shared.process(notification as! [String: String])
+        if let notification = notification as? [String: String] {
+            PushNotificationManager.shared.process(notification)
+        }
         
         completionHandler(.NewData)
     }
