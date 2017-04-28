@@ -1762,6 +1762,7 @@
 		6EFE54EB1E612BDD005EAB86 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6EFE54EF1E612BDD005EAB86 /* SwiftFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftFoundation.framework; sourceTree = "<group>"; };
 		6EFE54F11E612BDD005EAB86 /* XCDYouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCDYouTubeKit.framework; sourceTree = "<group>"; };
+		9D13D0A51EB39C3D00991DD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D1CE1051DA43DCF0064B3B1 /* VenueFloor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloor.swift; sourceTree = "<group>"; };
 		9D1CE1071DA48BB60064B3B1 /* VenueFloorJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueFloorJSON.swift; sourceTree = "<group>"; };
 		9D4B1C231E84B01F00F98ECB /* AffiliationOrganization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffiliationOrganization.swift; sourceTree = "<group>"; };
@@ -2015,9 +2016,9 @@
 				6E9B22D71D40171800D25271 /* Venue.storyboard */,
 				6E8D109C1DF8957100A0BBDC /* Teams.storyboard */,
 				6EEED02C1E3A4DAD00795B3D /* Notifications.storyboard */,
+				6ED495821D792F7800749940 /* Debug.entitlements */,
 				6E5BE4191D76996600E323D3 /* Beta.entitlements */,
 				6ED495811D792F7800749940 /* Release.entitlements */,
-				6ED495821D792F7800749940 /* Debug.entitlements */,
 				6E104D3D1D1061AC00541E84 /* Info.plist */,
 				6E5DEDB51E2D300C00F45602 /* GoogleServices */,
 				6EF147ED1D1357A100D5EEF9 /* Controller */,
@@ -2409,8 +2410,9 @@
 		6E5DEDB51E2D300C00F45602 /* GoogleServices */ = {
 			isa = PBXGroup;
 			children = (
-				6EEED02F1E3A60E900795B3D /* Beta */,
 				6E5DEDB61E2D300C00F45602 /* Debug */,
+				6EEED02F1E3A60E900795B3D /* Beta */,
+				9D13D0A41EB39C3D00991DD2 /* Release */,
 			);
 			path = GoogleServices;
 			sourceTree = SOURCE_ROOT;
@@ -2941,6 +2943,14 @@
 			);
 			name = Frameworks;
 			path = ../../Carthage/Build/Mac;
+			sourceTree = "<group>";
+		};
+		9D13D0A41EB39C3D00991DD2 /* Release */ = {
+			isa = PBXGroup;
+			children = (
+				9D13D0A51EB39C3D00991DD2 /* GoogleService-Info.plist */,
+			);
+			path = Release;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
