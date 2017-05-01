@@ -17,15 +17,21 @@ public extension Store {
         
         let context = privateQueueManagedObjectContext
         
-        // remove member from cache
+        // remove member-specific data from cache
         try! context.performErrorBlockAndWait {
             
+            // delete member
             if let member = try self.authenticatedMember(context) {
                 
                 context.deleteObject(member)
-                
-                try context.validateAndSave()
             }
+            
+            // delete all notifications except 'EVERYBODY' type
+            let notifications = try context.managedObjects(NotificationManagedObject.self, predicate: "channel" != CoreSummit.Notification.Channel.everyone.rawValue)
+            
+            notifications.forEach { context.deleteObject($0) }
+            
+            try context.validateAndSave()
         }
         
         session.clear()
