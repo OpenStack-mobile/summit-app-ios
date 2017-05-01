@@ -106,7 +106,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         application.registerForRemoteNotifications()
     }
     
-    public func process(pushNotification: [String: String]) {
+    public func process(pushNotification: [String: AnyObject]) {
         
         let notification: PushNotification?
         
@@ -436,7 +436,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     
     public func applicationReceivedRemoteMessage(remoteMessage: FIRMessagingRemoteMessage) {
         
-        process(remoteMessage.appData as! [String: String])
+        process(remoteMessage.appData as! [String: AnyObject])
     }
     
     // MARK: - NSFetchedResultsControllerDelegate
@@ -537,7 +537,7 @@ public protocol PushNotification {
     
     var created: Date { get }
     
-    init?(pushNotification: [String: String])
+    init?(pushNotification: [String: AnyObject])
 }
 
 public struct TeamMessageNotification: PushNotification {
@@ -559,23 +559,23 @@ public struct TeamMessageNotification: PushNotification {
     
     public let from: (idenfitier: Identifier, firstName: String, lastName: String)
     
-    public init?(pushNotification: [String: String]) {
+    public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.to.rawValue],
+        guard let topicString = pushNotification[Key.to.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
-            let typeString = pushNotification[Key.type.rawValue],
+            let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),
             case let .team(team) = topic,
-            let identifierString = pushNotification[Key.id.rawValue],
+            let identifierString = pushNotification[Key.id.rawValue] as? String,
             let identifier = Int(identifierString),
-            let encodedBody = pushNotification[Key.body.rawValue],
+            let encodedBody = pushNotification[Key.body.rawValue] as? String,
             let body = String(openStackEncoded: encodedBody),
-            let createdString = pushNotification[Key.created_at.rawValue],
+            let createdString = pushNotification[Key.created_at.rawValue] as? String,
             let created = Int(createdString),
-            let fromIDString = pushNotification[Key.from_id.rawValue],
+            let fromIDString = pushNotification[Key.from_id.rawValue] as? String,
             let fromID = Int(fromIDString),
-            let fromFirstName = pushNotification[Key.from_first_name.rawValue],
-            let fromLastName = pushNotification[Key.from_last_name.rawValue]
+            let fromFirstName = pushNotification[Key.from_first_name.rawValue] as? String,
+            let fromLastName = pushNotification[Key.from_last_name.rawValue] as? String
             where type == self.dynamicType.type
             else { return nil }
         
@@ -622,20 +622,20 @@ public struct GeneralNotification: PushNotification {
     
     public let event: (identifier: Identifier, title: String)?
     
-    public init?(pushNotification: [String: String]) {
+    public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.to.rawValue],
+        guard let topicString = pushNotification[Key.to.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
-            let typeString = pushNotification[Key.type.rawValue],
+            let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),
-            let identifierString = pushNotification[Key.id.rawValue],
+            let identifierString = pushNotification[Key.id.rawValue] as? String,
             let identifier = Int(identifierString),
-            let body = pushNotification[Key.body.rawValue],
-            let createdString = pushNotification[Key.created_at.rawValue],
+            let body = pushNotification[Key.body.rawValue] as? String,
+            let createdString = pushNotification[Key.created_at.rawValue] as? String,
             let created = Int(createdString),
-            let summitIDString = pushNotification[Key.summit_id.rawValue],
+            let summitIDString = pushNotification[Key.summit_id.rawValue] as? String,
             let summitID = Int(summitIDString),
-            let channelString = pushNotification[Key.channel.rawValue],
+            let channelString = pushNotification[Key.channel.rawValue] as? String,
             let channel = Notification.Channel(rawValue: channelString)
             where type == self.dynamicType.type
             else { return nil }
@@ -651,9 +651,9 @@ public struct GeneralNotification: PushNotification {
             
         case .event:
             
-            guard let eventIDString = pushNotification[Key.event_id.rawValue],
+            guard let eventIDString = pushNotification[Key.event_id.rawValue] as? String,
                 let eventID = Int(eventIDString),
-                let eventTitle = pushNotification[Key.title.rawValue]
+                let eventTitle = pushNotification[Key.title.rawValue] as? String
                 else { return nil }
             
             self.event = (eventID, eventTitle)
