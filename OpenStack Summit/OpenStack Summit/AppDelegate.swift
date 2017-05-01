@@ -152,7 +152,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
         
-        PushNotificationManager.shared.process(userInfo as! [String: String])
+        PushNotificationManager.shared.process(userInfo as! [String: AnyObject])
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -170,8 +170,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         var notification = userInfo
         notification.removeValueForKey("aps")
         
-        if let notification = notification as? [String: String] {
-            PushNotificationManager.shared.process(notification)
+        if let notificationDictionary = notification as? [String: AnyObject] {
+            PushNotificationManager.shared.process(notificationDictionary)
         }
         
         completionHandler(.NewData)
