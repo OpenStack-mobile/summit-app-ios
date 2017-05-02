@@ -167,11 +167,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Print full message.
         print("Recieved remote notification: \(userInfo)")
         
-        var notification = userInfo
-        notification.removeValueForKey("aps")
-        
-        if let notificationDictionary = notification as? [String: AnyObject] {
-            PushNotificationManager.shared.process(notificationDictionary)
+        // Process only Firebase data messages
+        if userInfo.indexForKey("aps") == nil {
+            
+            if let notificationDictionary = userInfo as? [String: AnyObject] {
+                
+                PushNotificationManager.shared.process(notificationDictionary)
+            }
         }
         
         completionHandler(.NewData)
