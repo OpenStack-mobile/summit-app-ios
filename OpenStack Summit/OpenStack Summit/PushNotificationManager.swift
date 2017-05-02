@@ -544,7 +544,7 @@ public struct TeamMessageNotification: PushNotification {
     
     private enum Key: String {
         
-        case to, id, type, body, from_id, from_first_name, from_last_name, created_at
+        case from, id, type, body, from_id, from_first_name, from_last_name, created_at
     }
     
     public static let type = PushNotificationType.team
@@ -561,7 +561,7 @@ public struct TeamMessageNotification: PushNotification {
     
     public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.to.rawValue] as? String,
+        guard let topicString = pushNotification[Key.from.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
             let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),
@@ -603,7 +603,7 @@ public struct GeneralNotification: PushNotification {
     
     private enum Key: String {
         
-        case to, id, type, body, summit_id, channel, created_at, event_id, title
+        case from, id, type, body, summit_id, channel, created_at, event_id, title
     }
     
     public static let type = PushNotificationType.notification
@@ -624,7 +624,7 @@ public struct GeneralNotification: PushNotification {
     
     public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.to.rawValue] as? String,
+        guard let topicString = pushNotification[Key.from.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
             let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),
