@@ -116,7 +116,7 @@ public extension Notification {
             
             func parseIdentifier(prefix: Prefix) -> Identifier? {
                 
-                let prefixString = "/topics/" + prefix.rawValue + "_"
+                let prefixString = "/topics/ios_" + prefix.rawValue + "_"
                 
                 guard rawValue.containsString(prefixString) else { return nil }
                 
