@@ -141,40 +141,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
     }
     
-    // HACK: implemented old delegate to make notifications work as is on iOS 10
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
+        // called when push notification tapped
+        print("Tapped on remote notification: \(userInfo)")
         
-        // Print full message.
-        print("Recieved remote notification: \(userInfo)")
+        let notificationDictionary = userInfo as! [String: AnyObject]
         
-        PushNotificationManager.shared.process(userInfo as! [String: AnyObject])
-    }
-    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print("Recieved remote notification: \(userInfo)")
-        
-        var notification = userInfo
-        notification.removeValueForKey("aps")
-        
-        if let notificationDictionary = notification as? [String: AnyObject] {
-            PushNotificationManager.shared.process(notificationDictionary)
-        }
-        
-        completionHandler(.NewData)
+        PushNotificationManager.shared.process(notificationDictionary)
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {

@@ -24,6 +24,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     // Alerts for messages belonging to this team will be excluded.
     public var teamMessageAlertFilter: Identifier?
     
+    /// Identifier for push notification recently opened
+    public var openedPushNotification: Identifier?
+    
     private var summitObserver: Int!
     
     private var teamsFetchedResultsController: NSFetchedResultsController?
@@ -187,27 +190,19 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
-            // set as unread
-            unreadNotifications.value.insert(generalNotification.identifier)
-            
-            // show notification
-            
-            if backgroundState {
+            if openedPushNotification != generalNotification.identifier {
                 
-                let userNotification = UILocalNotification()
-                userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
-                userNotification.alertTitle = generalNotification.event?.title
-                userNotification.alertBody = generalNotification.body
-                userNotification.fireDate = NSDate()
-                userNotification.category = UserNotificationCategory.generalNotification.rawValue
+                // set as unread
+                unreadNotifications.value.insert(generalNotification.identifier)
                 
-                UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
-                
-            } else {
-                
-                let alertTitle = generalNotification.event?.title ?? "Notification"
-                
-                SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
+                // show notification if new
+                if backgroundState == false
+                    && generalNotification.created >= (Date() - 60) {
+                    
+                    let alertTitle = generalNotification.event?.title ?? "Notification"
+                    
+                    SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
+                }
             }
             
         } else {
@@ -425,11 +420,10 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let unreadTeamMessages = Array(self.unreadTeamMessages.value)
         
-        let teamID = NSNumber(longLong: Int64(team))
+        //NSPredicate(format: "team.id == %@ AND id IN %@", NSNumber(longLong: Int64(team)), unreadTeamMessages)
+        let predicate: CoreSummit.Predicate = "team.id" == Int64(team) &&& "id".`in`(unreadTeamMessages)
         
-        let predicate = NSPredicate(format: "team.id == %@ AND id IN %@", teamID, unreadTeamMessages)
-        
-        return try context.count(TeamMessageManagedObject.self, predicate: predicate)
+        return try context.count(TeamMessageManagedObject.self, predicate: predicate.toFoundation())
     }
     
     // MARK: - FIRMessagingDelegate
