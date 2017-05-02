@@ -110,9 +110,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        #if !DEBUG
         FIRMessaging.messaging().disconnect()
-        #endif
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -141,14 +139,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> ()) {
         
         // called when push notification tapped
         print("Tapped on remote notification: \(userInfo)")
         
-        let notificationDictionary = userInfo as! [String: AnyObject]
+        PushNotificationManager.shared.openedPushNotification = userInfo["gcm.message_id"] as? Identifier
         
-        PushNotificationManager.shared.process(notificationDictionary)
+        fetchCompletionHandler(.NoData)
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
