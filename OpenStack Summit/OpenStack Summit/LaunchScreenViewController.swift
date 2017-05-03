@@ -59,13 +59,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         if Store.shared.isLoggedIn {
             
+            guard self.willTransition == false else { return }
+            
             self.willTransition = true
             
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             
             dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
                 
-                self?.showRevealController()
+                guard let controller = self else { return }
+                
+                controller.showRevealController()
             }
             
         } else {
@@ -97,6 +101,8 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     // MARK: - Private Methods
     
     private func configureView() {
+        
+        let _ = view
         
         switch state {
             

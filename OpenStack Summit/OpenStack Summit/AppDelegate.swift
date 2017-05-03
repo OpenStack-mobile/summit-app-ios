@@ -153,6 +153,33 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             print("Tapped on remote notification: \(userInfo)")
             
             PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+            
+            // redirect to inbox
+            
+            
+            /// force view load
+            let _ = self.revealViewController.view
+            let _ = self.menuViewController.view
+            let _ = self.revealViewController.frontViewController.view
+            let _ = self.launchScreenViewController.view
+            
+            if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController {
+                
+                if self.launchScreenViewController.willTransition {
+                    
+                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+                    
+                    dispatch_after(delayTime, dispatch_get_main_queue()) { self.menuViewController.showInbox() }
+                    
+                } else {
+                    
+                    self.launchScreenViewController.showRevealController() { self.menuViewController.showInbox() }
+                }
+                
+            } else {
+                
+                menuViewController.showInbox()
+            }
         }
         
         fetchCompletionHandler(.NoData)
