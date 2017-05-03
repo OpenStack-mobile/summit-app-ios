@@ -59,7 +59,6 @@ public extension Store {
                     
                 case let .Value(member):
                     
-                    self.session.name = member.name
                     self.session.member = member.identifier
                     
                     completion(nil)
