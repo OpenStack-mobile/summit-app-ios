@@ -106,7 +106,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         application.registerForRemoteNotifications()
     }
     
-    public func process(pushNotification: [String: AnyObject]) {
+    public func process(pushNotification: [String: AnyObject], unread: Bool = true) {
         
         let notification: PushNotification?
         
@@ -162,6 +162,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             notification = generalNotification
             
+            guard try! NotificationManagedObject.find(generalNotification.identifier, context: context) == nil
+                else { return } // already cached
+            
             guard try! SummitManagedObject.find(generalNotification.summit, context: context) != nil else {
                 
                 log?("Invalid summit in push notification: \(generalNotification)")
@@ -187,27 +190,19 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
-            // set as unread
-            unreadNotifications.value.insert(generalNotification.identifier)
-            
-            // show notification
-            
-            if backgroundState {
+            if unread {
                 
-                let userNotification = UILocalNotification()
-                userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
-                userNotification.alertTitle = generalNotification.event?.title
-                userNotification.alertBody = generalNotification.body
-                userNotification.fireDate = NSDate()
-                userNotification.category = UserNotificationCategory.generalNotification.rawValue
+                // set as unread
+                unreadNotifications.value.insert(generalNotification.identifier)
                 
-                UIApplication.sharedApplication().scheduleLocalNotification(userNotification)
-                
-            } else {
-                
-                let alertTitle = generalNotification.event?.title ?? "Notification"
-                
-                SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
+                // show notification if new
+                if backgroundState == false
+                    && generalNotification.created >= (Date() - 60) {
+                    
+                    let alertTitle = generalNotification.event?.title ?? "Notification"
+                    
+                    SweetAlert().showAlert(alertTitle, subTitle: generalNotification.body, style: .None)
+                }
             }
             
         } else {
@@ -425,11 +420,10 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let unreadTeamMessages = Array(self.unreadTeamMessages.value)
         
-        let teamID = NSNumber(longLong: Int64(team))
+        //NSPredicate(format: "team.id == %@ AND id IN %@", NSNumber(longLong: Int64(team)), unreadTeamMessages)
+        let predicate: CoreSummit.Predicate = "team.id" == Int64(team) &&& "id".`in`(unreadTeamMessages)
         
-        let predicate = NSPredicate(format: "team.id == %@ AND id IN %@", teamID, unreadTeamMessages)
-        
-        return try context.count(TeamMessageManagedObject.self, predicate: predicate)
+        return try context.count(TeamMessageManagedObject.self, predicate: predicate.toFoundation())
     }
     
     // MARK: - FIRMessagingDelegate
@@ -544,7 +538,7 @@ public struct TeamMessageNotification: PushNotification {
     
     private enum Key: String {
         
-        case to, id, type, body, from_id, from_first_name, from_last_name, created_at
+        case from, id, type, body, from_id, from_first_name, from_last_name, created_at
     }
     
     public static let type = PushNotificationType.team
@@ -561,7 +555,7 @@ public struct TeamMessageNotification: PushNotification {
     
     public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.to.rawValue] as? String,
+        guard let topicString = pushNotification[Key.from.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
             let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),
@@ -603,7 +597,7 @@ public struct GeneralNotification: PushNotification {
     
     private enum Key: String {
         
-        case to, id, type, body, summit_id, channel, created_at, event_id, title
+        case from, to, id, type, body, summit_id, channel, created_at, event_id, title
     }
     
     public static let type = PushNotificationType.notification
@@ -624,7 +618,7 @@ public struct GeneralNotification: PushNotification {
     
     public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.to.rawValue] as? String,
+        guard let topicString = pushNotification[Key.from.rawValue] as? String ?? pushNotification[Key.to.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
             let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),

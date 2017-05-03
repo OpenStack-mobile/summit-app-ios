@@ -116,7 +116,7 @@ public extension Notification {
             
             func parseIdentifier(prefix: Prefix) -> Identifier? {
                 
-                let prefixString = "/topics/" + prefix.rawValue + "_"
+                let prefixString = "/topics/" + "ios_" + prefix.rawValue + "_"
                 
                 guard rawValue.containsString(prefixString) else { return nil }
                 
@@ -156,7 +156,7 @@ public extension Notification {
             
             func parseCollection() -> Topic? {
                 
-                let prefixString = rawValue.stringByReplacingOccurrencesOfString("/topics/", withString: "")
+                let prefixString = rawValue.stringByReplacingOccurrencesOfString("/topics/ios_", withString: "")
                 
                 guard let prefix = Prefix(rawValue: prefixString)
                     else { return nil }
@@ -199,7 +199,7 @@ public extension Notification {
         
         public var rawValue: String {
             
-            var stringValue = "/topics/" + Prefix(self).rawValue
+            var stringValue = "/topics/ios_" + Prefix(self).rawValue
             
             if let identifier = self.identifier {
                 
