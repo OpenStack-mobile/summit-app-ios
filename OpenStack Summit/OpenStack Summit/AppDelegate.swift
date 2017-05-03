@@ -136,15 +136,24 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         print("APNs token retrieved: \(deviceToken)")
         
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> ()) {
         
-        // called when push notification tapped
-        print("Tapped on remote notification: \(userInfo)")
-        
-        PushNotificationManager.shared.openedPushNotification = userInfo["gcm.message_id"] as? Identifier
+        // app was just brought from background to foreground
+        if application.applicationState == .Active {
+            
+            // called when push notification received in foreground
+            print("Recieved remote notification: \(userInfo)")
+            
+        } else {
+            
+            // called when push notification tapped
+            print("Tapped on remote notification: \(userInfo)")
+            
+            PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+        }
         
         fetchCompletionHandler(.NoData)
     }

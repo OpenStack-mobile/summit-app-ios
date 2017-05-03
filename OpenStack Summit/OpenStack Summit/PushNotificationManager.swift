@@ -24,9 +24,6 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
     // Alerts for messages belonging to this team will be excluded.
     public var teamMessageAlertFilter: Identifier?
     
-    /// Identifier for push notification recently opened
-    public var openedPushNotification: Identifier?
-    
     private var summitObserver: Int!
     
     private var teamsFetchedResultsController: NSFetchedResultsController?
@@ -109,7 +106,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         application.registerForRemoteNotifications()
     }
     
-    public func process(pushNotification: [String: AnyObject]) {
+    public func process(pushNotification: [String: AnyObject], unread: Bool = true) {
         
         let notification: PushNotification?
         
@@ -165,6 +162,9 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
             
             notification = generalNotification
             
+            guard try! NotificationManagedObject.find(generalNotification.identifier, context: context) == nil
+                else { return } // already cached
+            
             guard try! SummitManagedObject.find(generalNotification.summit, context: context) != nil else {
                 
                 log?("Invalid summit in push notification: \(generalNotification)")
@@ -190,7 +190,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 try! context.save()
             }
             
-            if openedPushNotification != generalNotification.identifier {
+            if unread {
                 
                 // set as unread
                 unreadNotifications.value.insert(generalNotification.identifier)
@@ -597,7 +597,7 @@ public struct GeneralNotification: PushNotification {
     
     private enum Key: String {
         
-        case from, id, type, body, summit_id, channel, created_at, event_id, title
+        case from, to, id, type, body, summit_id, channel, created_at, event_id, title
     }
     
     public static let type = PushNotificationType.notification
@@ -618,7 +618,7 @@ public struct GeneralNotification: PushNotification {
     
     public init?(pushNotification: [String: AnyObject]) {
         
-        guard let topicString = pushNotification[Key.from.rawValue] as? String,
+        guard let topicString = pushNotification[Key.from.rawValue] as? String ?? pushNotification[Key.to.rawValue] as? String,
             let topic = Notification.Topic(rawValue: topicString),
             let typeString = pushNotification[Key.type.rawValue] as? String,
             let type = PushNotificationType(rawValue: typeString),
