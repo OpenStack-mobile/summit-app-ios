@@ -197,7 +197,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 
                 // show notification if new
                 if backgroundState == false
-                    && generalNotification.created >= (Date() - 60) {
+                    && generalNotification.created >= (Date() - 60 * 10) {
                     
                     let alertTitle = generalNotification.event?.title ?? "Notification"
                     
