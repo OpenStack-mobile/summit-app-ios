@@ -153,6 +153,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             print("Tapped on remote notification: \(userInfo)")
             
             PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+            
+            // redirect to inbox
+            menuViewController.showInbox()
         }
         
         fetchCompletionHandler(.NoData)
