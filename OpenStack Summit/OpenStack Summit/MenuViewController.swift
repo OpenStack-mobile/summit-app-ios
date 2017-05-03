@@ -217,8 +217,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     private func highlight(item: MenuItem) {
         
-        let _ = self.view
-        
         unselectMenuItems()
         
         switch item {
