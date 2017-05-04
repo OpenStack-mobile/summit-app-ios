@@ -260,6 +260,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         let unreadCount = PushNotificationManager.shared.unreadCount
         
         inboxCounterView.hidden = unreadCount == 0
+        inboxCounterView.layer.cornerRadius = inboxCounterView.frame.size.width / 2
         inboxCounterLabel.text = "\(unreadCount)"
     }
     
