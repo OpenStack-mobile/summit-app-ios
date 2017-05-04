@@ -7,9 +7,7 @@
 //
 
 public protocol PresentationMaterial: Named {
-    
-    var name: String { get }
-    
+        
     var descriptionText: String? { get }
     
     var displayOnSite: Bool { get }

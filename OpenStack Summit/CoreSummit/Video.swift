@@ -6,7 +6,9 @@
 //  Copyright © 2016 OpenStack. All rights reserved.
 //
 
-public struct Video: PresentationMaterial, Equatable {
+import struct SwiftFoundation.Date
+
+public struct Video: PresentationMaterial {
     
     public let identifier: Identifier
     
@@ -17,8 +19,18 @@ public struct Video: PresentationMaterial, Equatable {
     public var displayOnSite: Bool
     
     public var featured: Bool
+    
+    public var highlighted: Bool
         
     public var youtube: String
+    
+    public var dataUploaded: Date
+    
+    public var order: Int
+    
+    public var views: Int
+    
+    public var event: Identifier
 }
 
 // MARK: - Equatable
@@ -31,4 +43,9 @@ public func == (lhs: Video, rhs: Video) -> Bool {
         && lhs.displayOnSite == rhs.displayOnSite
         && lhs.featured == rhs.featured
         && lhs.youtube == rhs.youtube
+        && lhs.highlighted == rhs.highlighted
+        && lhs.dataUploaded == rhs.dataUploaded
+        && lhs.order == rhs.order
+        && lhs.views == rhs.views
+        && lhs.event == rhs.event
 }
