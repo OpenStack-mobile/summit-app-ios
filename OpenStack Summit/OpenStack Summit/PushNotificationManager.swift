@@ -40,6 +40,13 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         return (eventsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
     }
     
+    private var notificationsFetchedResultsController: NSFetchedResultsController!
+    
+    private var notifications: Set<Identifier> {
+        
+        return (notificationsFetchedResultsController?.fetchedObjects as? [Entity] ?? []).identifiers
+    }
+    
     private(set) var subscribedTopics = Set<Notification.Topic>()
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -72,6 +79,12 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loggedOut), name: Store.Notification.LoggedOut.rawValue, object: self.store)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(forcedLoggedOut), name: Store.Notification.ForcedLoggedOut.rawValue, object: self.store)
+        
+        self.notificationsFetchedResultsController = NSFetchedResultsController.init(Notification.self,
+                                                                                delegate: self,
+                                                                                context: Store.shared.managedObjectContext)
+        
+        try! self.notificationsFetchedResultsController.performFetch()
     }
     
     // MARK: - Methods
@@ -423,7 +436,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         //NSPredicate(format: "team.id == %@ AND id IN %@", NSNumber(longLong: Int64(team)), unreadTeamMessages)
         let predicate: CoreSummit.Predicate = "team.id" == Int64(team) &&& "id".`in`(unreadTeamMessages)
         
-        return try context.count(TeamMessageManagedObject.self, predicate: predicate.toFoundation())
+        return try context.count(TeamMessageManagedObject.self, predicate: predicate)
     }
     
     // MARK: - FIRMessagingDelegate
@@ -439,28 +452,51 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
         
         let identifier = (anObject as! Entity).identifier
         
-        let topic: Notification.Topic
-        
-        if controller === teamsFetchedResultsController {
+        if controller == teamsFetchedResultsController
+            || controller == eventsFetchedResultsController {
             
-            topic = .team(identifier)
+            let topic: Notification.Topic
             
-        } else if controller == eventsFetchedResultsController {
+            if controller === teamsFetchedResultsController {
+                
+                topic = .team(identifier)
+                
+            } else if controller == eventsFetchedResultsController {
+                
+                topic = .event(identifier)
+                
+            } else {
+                
+                fatalError("Unknown fetched results controller \(controller)")
+            }
             
-            topic = .event(identifier)
+            switch type {
+                
+            case .Insert: subscribe(to: topic)
+                
+            case .Delete: unsubscribe(from: topic)
+                
+            case .Move, .Update: break
+            }
+            
+        } else if controller == notificationsFetchedResultsController {
+            
+            switch type {
+                
+            case .Delete:
+                
+                // remove unread notification from set since it was deleted
+                if unreadNotifications.value.contains(identifier) {
+                    
+                    unreadNotifications.value.remove(identifier)
+                }
+                
+            case .Insert, .Move, .Update: break
+            }
             
         } else {
             
             fatalError("Unknown fetched results controller \(controller)")
-        }
-        
-        switch type {
-            
-        case .Insert: subscribe(to: topic)
-            
-        case .Delete: unsubscribe(from: topic)
-            
-        case .Move, .Update: break
         }
     }
     
