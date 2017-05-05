@@ -1,12 +1,12 @@
 //
-//  PresentationSlide.swift
+//  Slide.swift
 //  OpenStack Summit
 //
 //  Created by Gabriel Horacio Cutrini on 4/28/17.
 //  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-public struct PresentationSlide: PresentationMaterial, Equatable {
+public struct Slide: PresentationMaterial {
     
     public let identifier: Identifier
     
@@ -21,11 +21,13 @@ public struct PresentationSlide: PresentationMaterial, Equatable {
     public var order: Int
     
     public var link: String
+    
+    public var event: Identifier
 }
 
 // MARK: - Equatable
 
-public func == (lhs: PresentationSlide, rhs: PresentationSlide) -> Bool {
+public func == (lhs: Slide, rhs: Slide) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
@@ -34,4 +36,5 @@ public func == (lhs: PresentationSlide, rhs: PresentationSlide) -> Bool {
         && lhs.featured == rhs.featured
         && lhs.order == rhs.order
         && lhs.link == rhs.link
+        && lhs.event == rhs.event
 }

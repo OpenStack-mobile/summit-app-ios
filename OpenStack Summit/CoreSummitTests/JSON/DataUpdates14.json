@@ -1,0 +1,17 @@
+{
+	"id": 742714,
+	"entity_id": 36849,
+	"class_name": "PresentationSlide",
+	"created": 1493970043,
+	"type": "INSERT",
+	"entity": {
+		"id": 36849,
+		"name": "Slide 1",
+		"description": "<p>Have you ever been curious as to how much of a workload the OpenStack control plane can handle before needing to scale horizontally?  Based on the load how will the API performance adjust?  How much overhead will load on the OpenStack API’s add to my application deployment timeline?  What behavior should I look for to determine its time to add more control plane resources?</p>\n<p><span style=\"font-size: 12.0pt;\">These are just a few questions I have been asked and/or have come to my mind while operating OpenStack clouds.  While performing API benchmarking can be measured in so many different ways, it does feel like a good idea to have some high level frame of reference.  I will start off stating that there are about a million ways to measure performance.  Your approach may differ from what I have done and that is actually expected.  The tests conducted are meant to provide a starting reference for you to possibly build upon</span>.</p>",
+		"display_on_site": false,
+		"featured": false,
+		"order": 3,
+		"presentation_id": 17459,
+		"link": "colemancda.github.io"
+	}
+}

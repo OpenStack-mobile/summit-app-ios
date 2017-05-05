@@ -1,22 +1,22 @@
 //
-//  VideoJSON.swift
+//  SlideJSON.swift
 //  OpenStack Summit
 //
-//  Created by Alsey Coleman Miller on 8/16/16.
-//  Copyright © 2016 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 5/5/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
 import SwiftFoundation
 
-public extension Video {
+public extension Slide {
     
     enum JSONKey: String {
         
-        case id, name, description, display_on_site, featured, presentation_id, youtube_id, data_uploaded, highlighted, views, order
+        case id, name, description, display_on_site, featured, order, presentation_id, link
     }
 }
 
-extension Video: JSONDecodable {
+extension Slide: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
@@ -25,22 +25,16 @@ extension Video: JSONDecodable {
             let featured = JSONObject[JSONKey.featured.rawValue]?.rawValue as? Bool,
             let displayOnSite = JSONObject[JSONKey.display_on_site.rawValue]?.rawValue as? Bool,
             let presentation = JSONObject[JSONKey.presentation_id.rawValue]?.rawValue as? Identifier,
-            let youtube = JSONObject[JSONKey.youtube_id.rawValue]?.rawValue as? String,
-            let dataUploaded = JSONObject[JSONKey.data_uploaded.rawValue]?.rawValue as? Int,
-            let highlighted = JSONObject[JSONKey.highlighted.rawValue]?.rawValue as? Bool,
-            let views = JSONObject[JSONKey.views.rawValue]?.rawValue as? Int,
-            let order = JSONObject[JSONKey.order.rawValue]?.rawValue as? Int
+            let order = JSONObject[JSONKey.order.rawValue]?.rawValue as? Int,
+            let link = JSONObject[JSONKey.link.rawValue]?.rawValue as? String
             else { return nil }
         
         self.identifier = identifier
         self.featured = featured
         self.displayOnSite = displayOnSite
         self.event = presentation
-        self.youtube = youtube
-        self.dataUploaded = Date(timeIntervalSince1970: TimeInterval(dataUploaded))
-        self.highlighted = highlighted
-        self.views = views
         self.order = order
+        self.link = link
         
         // optional
         self.name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String ?? ""

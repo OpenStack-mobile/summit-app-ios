@@ -1,16 +1,15 @@
 //
-//  VideoManagedObject.swift
+//  LinkManagedObject.swift
 //  OpenStack Summit
 //
-//  Created by Alsey Coleman Miller on 11/2/16.
-//  Copyright © 2016 OpenStack. All rights reserved.
+//  Created by Alsey Coleman Miller on 5/5/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
 import Foundation
 import CoreData
-import struct SwiftFoundation.Date
 
-public final class VideoManagedObject: Entity {
+public final class LinkManagedObject: Entity {
     
     @NSManaged public var name: String
     
@@ -20,40 +19,31 @@ public final class VideoManagedObject: Entity {
     
     @NSManaged public var featured: Bool
     
-    @NSManaged public var youtube: String
-    
     @NSManaged public var order: Int64
     
-    @NSManaged public var views: Int64
-    
-    @NSManaged public var highlighted: Bool
-    
-    @NSManaged public var dataUploaded: NSDate
+    @NSManaged public var link: String
     
     @NSManaged public var event: EventManagedObject
 }
 
-extension Video: CoreDataDecodable {
+extension Link: CoreDataDecodable {
     
-    public init(managedObject: VideoManagedObject) {
+    public init(managedObject: LinkManagedObject) {
         
         self.identifier = managedObject.identifier
         self.name = managedObject.name
         self.descriptionText = managedObject.descriptionText
         self.displayOnSite = managedObject.displayOnSite
         self.featured = managedObject.featured
-        self.youtube = managedObject.youtube
+        self.link = managedObject.link
         self.event = managedObject.event.identifier
         self.order = Int(managedObject.order)
-        self.views = Int(managedObject.views)
-        self.highlighted = managedObject.highlighted
-        self.dataUploaded = Date(foundation: managedObject.dataUploaded)
     }
 }
 
-extension Video: CoreDataEncodable {
+extension Link: CoreDataEncodable {
     
-    public func save(context: NSManagedObjectContext) throws -> VideoManagedObject {
+    public func save(context: NSManagedObjectContext) throws -> LinkManagedObject {
         
         let managedObject = try cached(context)
         
@@ -61,11 +51,8 @@ extension Video: CoreDataEncodable {
         managedObject.descriptionText = descriptionText
         managedObject.displayOnSite = displayOnSite
         managedObject.featured = featured
-        managedObject.youtube = youtube
+        managedObject.link = link
         managedObject.order = Int64(order)
-        managedObject.views = Int64(views)
-        managedObject.highlighted = highlighted
-        managedObject.dataUploaded = dataUploaded.toFoundation()
         managedObject.event = try context.relationshipFault(event)
         
         managedObject.didCache()

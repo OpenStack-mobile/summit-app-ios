@@ -1,0 +1,20 @@
+{
+	"id": 742698,
+	"entity_id": 36845,
+	"class_name": "PresentationVideo",
+	"created": 1493912955,
+	"type": "INSERT",
+	"entity": {
+		"id": 36845,
+		"name": null,
+		"description": "<p>OpenstackId Workshop</p>",
+		"display_on_site": false,
+		"featured": false,
+		"order": 1,
+		"presentation_id": 18632,
+		"youtube_id": "5EWnmg3OUsk",
+		"data_uploaded": 1493930955,
+		"highlighted": false,
+		"views": 0
+	}
+}
