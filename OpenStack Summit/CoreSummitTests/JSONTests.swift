@@ -280,4 +280,15 @@ final class JSONTests: XCTestCase {
             let _ = Video(JSONValue: .Object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
+    
+    func testDataUpdates14() {
+        
+        let testJSON = loadJSON("DataUpdates14")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = Slide(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
 }

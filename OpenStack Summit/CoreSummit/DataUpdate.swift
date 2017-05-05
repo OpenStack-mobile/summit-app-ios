@@ -92,7 +92,8 @@ public extension DataUpdate {
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
             case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
             case .PresentationVideo: return CoreSummit.Video.self
-            
+            case .PresentationSlide: return CoreSummit.Slide.self
+                
             default: return nil
             }
         }
@@ -317,3 +318,4 @@ extension Image: Updatable { }
 extension GroupEventDataUpdate: Updatable { }
 extension WirelessNetwork: Updatable { }
 extension Video: Updatable { }
+extension Slide: Updatable { }
