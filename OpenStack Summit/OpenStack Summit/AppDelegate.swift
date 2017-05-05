@@ -110,9 +110,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        #if !DEBUG
         FIRMessaging.messaging().disconnect()
-        #endif
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -138,43 +136,53 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
         
         print("APNs token retrieved: \(deviceToken)")
         
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .Sandbox)
     }
     
-    // HACK: implemented old delegate to make notifications work as is on iOS 10
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> ()) {
         
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
+        // app was just brought from background to foreground
+        if application.applicationState == .Active {
+            
+            // called when push notification received in foreground
+            print("Recieved remote notification: \(userInfo)")
+            
+        } else {
+            
+            // called when push notification tapped
+            print("Tapped on remote notification: \(userInfo)")
+            
+            PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
+            
+            // redirect to inbox
+            
+            
+            /// force view load
+            let _ = self.revealViewController.view
+            let _ = self.menuViewController.view
+            let _ = self.revealViewController.frontViewController.view
+            let _ = self.launchScreenViewController.view
+            
+            if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController {
+                
+                if self.launchScreenViewController.willTransition {
+                    
+                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+                    
+                    dispatch_after(delayTime, dispatch_get_main_queue()) { self.menuViewController.showInbox() }
+                    
+                } else {
+                    
+                    self.launchScreenViewController.showRevealController() { self.menuViewController.showInbox() }
+                }
+                
+            } else {
+                
+                menuViewController.showInbox()
+            }
         }
         
-        // Print full message.
-        print("Recieved remote notification: \(userInfo)")
-        
-        PushNotificationManager.shared.process(userInfo as! [String: String])
-    }
-    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        
-        // Print message ID.
-        if let messageID = userInfo["gcm.message_id"] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print("Recieved remote notification: \(userInfo)")
-        
-        var notification = userInfo
-        notification.removeValueForKey("aps")
-        
-        if let notification = notification as? [String: String] {
-            PushNotificationManager.shared.process(notification)
-        }
-        
-        completionHandler(.NewData)
+        fetchCompletionHandler(.NoData)
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, withResponseInfo responseInfo: [NSObject : AnyObject], completionHandler: () -> Void) {

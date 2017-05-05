@@ -108,15 +108,19 @@ public extension Notification {
             }
         }
         
-        public init?(rawValue: String) {
+        private static func parse(string: String, with prefix: String) -> Notification.Topic? {
+            
+            let rawValue = string
+            
+            let topicPrefixString = prefix
             
             struct Cache {
-                static var prefixRegularExpressions = [Prefix: NSRegularExpression]()
+                static var prefixRegularExpressions = [String: [Prefix: NSRegularExpression]]()
             }
             
             func parseIdentifier(prefix: Prefix) -> Identifier? {
                 
-                let prefixString = "/topics/" + prefix.rawValue + "_"
+                let prefixString = topicPrefixString + prefix.rawValue + "_"
                 
                 guard rawValue.containsString(prefixString) else { return nil }
                 
@@ -124,7 +128,21 @@ public extension Notification {
                 
                 let regularExpression: NSRegularExpression
                 
-                if let cached = Cache.prefixRegularExpressions[prefix] {
+                let regularExpressionsForPrefix: [Prefix: NSRegularExpression]
+                
+                if let cached = Cache.prefixRegularExpressions[topicPrefixString] {
+                    
+                    regularExpressionsForPrefix = cached
+                    
+                } else {
+                    
+                    regularExpressionsForPrefix = [Prefix: NSRegularExpression]()
+                    
+                    // create new cache for prefix
+                    Cache.prefixRegularExpressions[topicPrefixString] = regularExpressionsForPrefix
+                }
+                
+                if let cached = regularExpressionsForPrefix[prefix] {
                     
                     regularExpression = cached
                     
@@ -132,7 +150,8 @@ public extension Notification {
                     
                     regularExpression = try! NSRegularExpression(pattern: prefixString + "(\\d+)", options: [])
                     
-                    Cache.prefixRegularExpressions[prefix] = regularExpression
+                    // add to cache
+                    Cache.prefixRegularExpressions[topicPrefixString]![prefix] = regularExpression
                 }
                 
                 // run regex
@@ -156,7 +175,7 @@ public extension Notification {
             
             func parseCollection() -> Topic? {
                 
-                let prefixString = rawValue.stringByReplacingOccurrencesOfString("/topics/", withString: "")
+                let prefixString = rawValue.stringByReplacingOccurrencesOfString(topicPrefixString, withString: "")
                 
                 guard let prefix = Prefix(rawValue: prefixString)
                     else { return nil }
@@ -173,23 +192,35 @@ public extension Notification {
             
             if let collectionTopic = parseCollection() {
                 
-                self = collectionTopic
+                return collectionTopic
                 
             } else if let identifier = parseIdentifier(.summit) {
                 
-                self = .summit(identifier)
+                return .summit(identifier)
                 
             } else if let identifier = parseIdentifier(.member) {
                 
-                self = .member(identifier)
+                return .member(identifier)
                 
             } else if let identifier = parseIdentifier(.event) {
                 
-                self = .event(identifier)
+                return .event(identifier)
                 
             } else if let identifier = parseIdentifier(.team) {
                 
-                self = .team(identifier)
+                return .team(identifier)
+                
+            } else {
+                
+                return nil
+            }
+        }
+        
+        public init?(rawValue: String) {
+            
+            if let topic = Topic.parse(rawValue, with: "/topics/ios_") ?? Topic.parse(rawValue, with: "/topics/") {
+                
+                self = topic
                 
             } else {
                 
@@ -199,7 +230,7 @@ public extension Notification {
         
         public var rawValue: String {
             
-            var stringValue = "/topics/" + Prefix(self).rawValue
+            var stringValue = "/topics/ios_" + Prefix(self).rawValue
             
             if let identifier = self.identifier {
                 

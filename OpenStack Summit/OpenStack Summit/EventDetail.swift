@@ -66,7 +66,7 @@ public struct EventDetail: CoreDataDecodable {
         self.rsvp = event.rsvp ?? ""
         self.externalRSVP = event.externalRSVP
         self.willRecord = event.willRecord
-        self.attachment = event.attachment ?? ""
+        self.attachment = event.attachment ?? Slide.from(managedObjects: event.slides).ordered().first?.link ?? ""
         
         if let locationManagedObject = event.location {
             

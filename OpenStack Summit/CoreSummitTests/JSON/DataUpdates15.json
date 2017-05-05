@@ -1,0 +1,17 @@
+{
+	"id": 742715,
+	"entity_id": 33694,
+	"class_name": "PresentationLink",
+	"created": 1493974522,
+	"type": "UPDATE",
+	"entity": {
+		"id": 33694,
+		"name": "Blog entry",
+		"description": null,
+		"display_on_site": true,
+		"featured": false,
+		"order": 1,
+		"presentation_id": 17459,
+		"link": "https://osic.org/blogs/pushing-boundaries-openstack-%E2%80%93-wait-what-are-they-again"
+	}
+}

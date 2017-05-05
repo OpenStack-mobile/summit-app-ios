@@ -91,7 +91,10 @@ public extension DataUpdate {
             case .PresentationCategoryGroup, .PrivatePresentationCategoryGroup: return CoreSummit.TrackGroupDataUpdate.self
             case .SummitLocationMap, .SummitLocationImage: return CoreSummit.Image.self
             case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
-            
+            case .PresentationVideo: return CoreSummit.Video.self
+            case .PresentationSlide: return CoreSummit.Slide.self
+            case .PresentationLink: return CoreSummit.Link.self
+                
             default: return nil
             }
         }
@@ -315,3 +318,6 @@ extension TrackGroupDataUpdate: Updatable { }
 extension Image: Updatable { }
 extension GroupEventDataUpdate: Updatable { }
 extension WirelessNetwork: Updatable { }
+extension Video: Updatable { }
+extension Slide: Updatable { }
+extension Link: Updatable { }

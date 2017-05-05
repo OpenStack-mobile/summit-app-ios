@@ -524,6 +524,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, forIndexPath: indexPath)!
                 
+                let title = eventDetail.eventType == "Presentation" ? "Download slides" : "Download attachment"
+                cell.downloadButton.setTitle(title, forState: .Normal)
+                
                 return cell
             }
             
@@ -780,6 +783,11 @@ final class EventDetailTableViewCell: UITableViewCell {
     @IBOutlet private(set) weak var sectionLabel: UILabel!
     
     @IBOutlet private(set) weak var valueLabel: UILabel!
+}
+
+final class EventDetailDownloadAttachmentTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var downloadButton: UIButton!
 }
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {

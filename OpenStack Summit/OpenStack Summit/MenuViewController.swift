@@ -217,6 +217,8 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     private func highlight(item: MenuItem) {
         
+        let _ = self.view
+        
         unselectMenuItems()
         
         switch item {
@@ -258,6 +260,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         let unreadCount = PushNotificationManager.shared.unreadCount
         
         inboxCounterView.hidden = unreadCount == 0
+        inboxCounterView.layer.cornerRadius = inboxCounterView.frame.size.width / 2
         inboxCounterLabel.text = "\(unreadCount)"
     }
     
@@ -285,11 +288,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                 name = currentMember.name
                 pictureURL = currentMember.pictureURL
             }
-            
-        } else if Store.shared.isLoggedIn {
-            
-            name = Store.shared.session.name ?? ""
-            pictureURL = ""
             
         } else {
             

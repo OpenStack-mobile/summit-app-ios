@@ -40,6 +40,37 @@ final class NotificationDetailViewController: UITableViewController {
         configureView()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func deleteAction(sender: UIBarButtonItem) {
+        
+        let context = Store.shared.privateQueueManagedObjectContext
+        
+        let identifier = self.notification.identifier
+        
+        func closeViewController() {
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock { [weak self] in
+                
+                guard let controller = self else { return }
+                
+                controller.navigationController?.popViewControllerAnimated(true)
+            }
+        }
+                
+        context.performBlock {
+            
+            guard let notificationManagedObject = try! NotificationManagedObject.find(identifier, context: context)
+                else { closeViewController(); return }
+            
+            context.deleteObject(notificationManagedObject)
+            
+            try! context.save()
+            
+            closeViewController()
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func configureView() {

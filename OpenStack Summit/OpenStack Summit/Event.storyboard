@@ -180,7 +180,7 @@
                                     <outlet property="willRecordImageView" destination="tEg-DK-ALl" id="k4g-M0-9r5"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDownloadAttachmentTableViewCell" rowHeight="52" id="JrI-iK-fzM">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailDownloadAttachmentTableViewCell" rowHeight="52" id="JrI-iK-fzM" customClass="EventDetailDownloadAttachmentTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="417" width="320" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JrI-iK-fzM" id="Eba-wQ-OPJ">
@@ -224,6 +224,9 @@
                                         <constraint firstItem="N32-5O-2A8" firstAttribute="top" secondItem="Eba-wQ-OPJ" secondAttribute="top" id="zZz-Us-Kwz"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="downloadButton" destination="jpM-DJ-szI" id="h0k-vi-iEU"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventDetailTableViewCell" rowHeight="113" id="Gie-OQ-Gj2" customClass="EventDetailTableViewCell" customModule="OpenStackSummit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="469" width="320" height="113"/>
@@ -480,19 +483,19 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="OTu-1p-7i2">
-                            <rect key="frame" x="15" y="40" width="290" height="123"/>
+                            <rect key="frame" x="15" y="40" width="290" height="122.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EvU-ad-cf6">
-                                    <rect key="frame" x="0.0" y="0.0" width="290" height="58"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="290" height="57.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgm-5C-23d" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="290" height="28"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="27.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLH-lM-hPM" userLabel="Track" customClass="CopyableLabel" customModule="OpenStackSummit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="36" width="290" height="22"/>
+                                            <rect key="frame" x="0.0" y="35.5" width="290" height="22"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -500,13 +503,13 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FET-XF-DJx">
-                                    <rect key="frame" x="0.0" y="88" width="290" height="35"/>
+                                    <rect key="frame" x="0.0" y="87.5" width="290" height="35"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="9LM-7x-arF">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="35"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHq-I5-oVn" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="95" height="35"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="95.5" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="2pZ-pX-wIE"/>
                                                     </constraints>
@@ -529,7 +532,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czs-tP-hWr" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="97" y="0.0" width="96" height="35"/>
+                                                    <rect key="frame" x="97.5" y="0.0" width="95" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="MDd-hu-Ci1"/>
                                                     </constraints>
@@ -552,7 +555,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTd-Ix-Da9" customClass="EventDetailActionButton" customModule="OpenStackSummit" customModuleProvider="target">
-                                                    <rect key="frame" x="195" y="0.0" width="95" height="35"/>
+                                                    <rect key="frame" x="194.5" y="0.0" width="95.5" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="Ppc-CQ-XNI"/>
                                                     </constraints>
