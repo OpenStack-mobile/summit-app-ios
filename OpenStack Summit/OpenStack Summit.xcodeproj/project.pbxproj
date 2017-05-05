@@ -176,6 +176,10 @@
 		6E1651921D845E5000574CE5 /* Venues.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1651911D845E4F00574CE5 /* Venues.storyboard */; };
 		6E1651941D84628200574CE5 /* VenueDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1651931D84628200574CE5 /* VenueDirectoryViewController.swift */; };
 		6E1651981D84639300574CE5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1651951D8462AE00574CE5 /* MapKit.framework */; };
+		6E172D771EBCCBE000C9CAF3 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55B5201EBCCB2C003AAFE6 /* ModelTests.swift */; };
+		6E172D781EBCCBE100C9CAF3 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55B5201EBCCB2C003AAFE6 /* ModelTests.swift */; };
+		6E172D791EBCCBE200C9CAF3 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55B5201EBCCB2C003AAFE6 /* ModelTests.swift */; };
+		6E172D7A1EBCCBE300C9CAF3 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E55B5201EBCCB2C003AAFE6 /* ModelTests.swift */; };
 		6E1748B51D37FDFA00C0F25D /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1748B41D37FDFA00C0F25D /* Feedback.storyboard */; };
 		6E1748B71D37FE0D00C0F25D /* FeedbackGivenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1748B61D37FE0D00C0F25D /* FeedbackGivenListViewController.swift */; };
 		6E1949331DCBB3E000A00603 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10A5281D10675C008CBD0C /* Member.swift */; };
@@ -1539,6 +1543,7 @@
 		6E55B50D1EBCBD46003AAFE6 /* LinkManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkManagedObject.swift; sourceTree = "<group>"; };
 		6E55B5121EBCBF2D003AAFE6 /* DataUpdates15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates15.json; sourceTree = "<group>"; };
 		6E55B51B1EBCC68E003AAFE6 /* DataUpdates16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates16.json; sourceTree = "<group>"; };
+		6E55B5201EBCCB2C003AAFE6 /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		6E570A301D676A3800189992 /* DataUpdates2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataUpdates2.json; sourceTree = "<group>"; };
 		6E570A331D6771CF00189992 /* EventDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataUpdate.swift; sourceTree = "<group>"; };
 		6E570A351D67753D00189992 /* PresentationDataUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDataUpdate.swift; sourceTree = "<group>"; };
@@ -2114,6 +2119,7 @@
 			children = (
 				6E10A5151D106741008CBD0C /* JSON */,
 				6E10A50F1D10672D008CBD0C /* JSONTests.swift */,
+				6E55B5201EBCCB2C003AAFE6 /* ModelTests.swift */,
 				6E10A5101D10672D008CBD0C /* CoreDataTests.swift */,
 				6E0FD0AF1E92A7DB000C6DBA /* PredicateTests.swift */,
 				6E52FCBA1D130553006A7302 /* StoreTests.swift */,
@@ -4108,6 +4114,7 @@
 				6E574B6C1DCB2DFB00AE4837 /* CoreDataTests.swift in Sources */,
 				6E0B5F241D77C8AB0005F6CE /* TestUtilities.swift in Sources */,
 				6E0B5F251D77C8AB0005F6CE /* JSONTests.swift in Sources */,
+				6E172D7A1EBCCBE300C9CAF3 /* ModelTests.swift in Sources */,
 				6E0FD0B31E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E0B5F261D77C8AB0005F6CE /* StoreTests.swift in Sources */,
 			);
@@ -4428,6 +4435,7 @@
 				6E574B6E1DCB2DFD00AE4837 /* CoreDataTests.swift in Sources */,
 				6E10A5141D10672D008CBD0C /* TestUtilities.swift in Sources */,
 				6E10A5121D10672D008CBD0C /* JSONTests.swift in Sources */,
+				6E172D771EBCCBE000C9CAF3 /* ModelTests.swift in Sources */,
 				6E0FD0B01E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E52FCBB1D130553006A7302 /* StoreTests.swift in Sources */,
 			);
@@ -4610,6 +4618,7 @@
 				6E574B6D1DCB2DFC00AE4837 /* CoreDataTests.swift in Sources */,
 				6E2924171D7AF8CC00D14F0A /* TestUtilities.swift in Sources */,
 				6E2924181D7AF8CC00D14F0A /* JSONTests.swift in Sources */,
+				6E172D791EBCCBE200C9CAF3 /* ModelTests.swift in Sources */,
 				6E0FD0B21E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E2924191D7AF8CC00D14F0A /* StoreTests.swift in Sources */,
 			);
@@ -4808,6 +4817,7 @@
 				6E7558491E58C4A7003B6844 /* CoreDataTests.swift in Sources */,
 				6E75584A1E58C4A7003B6844 /* TestUtilities.swift in Sources */,
 				6E75584B1E58C4A7003B6844 /* JSONTests.swift in Sources */,
+				6E172D781EBCCBE100C9CAF3 /* ModelTests.swift in Sources */,
 				6E0FD0B11E92A7DB000C6DBA /* PredicateTests.swift in Sources */,
 				6E75584C1E58C4A7003B6844 /* StoreTests.swift in Sources */,
 			);
