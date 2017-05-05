@@ -111,6 +111,18 @@ extension Event: JSONParametrizedDecodable {
             self.slides = []
         }
         
+        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+            
+            guard let links = Link.fromJSON(linksJSONArray)
+                else { return nil }
+            
+            self.links = Set(links)
+            
+        } else {
+            
+            self.links = []
+        }
+        
         // should never come in this JSON response
         self.groups = []
     }
@@ -220,6 +232,18 @@ extension MemberResponse.Event: JSONDecodable {
         } else {
             
             self.slides = []
+        }
+        
+        if let linksJSONArray = JSONObject[JSONKey.links.rawValue]?.arrayValue {
+            
+            guard let links = Link.fromJSON(linksJSONArray)
+                else { return nil }
+            
+            self.links = links
+            
+        } else {
+            
+            self.links = []
         }
     }
 }

@@ -52,7 +52,7 @@ public struct Event: Named {
     
     public var slides: Set<Slide>
     
-    //public var links: Set<Link>
+    public var links: Set<Link>
     
     public var groups: Set<Group>
 }
@@ -83,5 +83,5 @@ public func == (lhs: Event, rhs: Event) -> Bool {
         && lhs.externalRSVP == rhs.externalRSVP
         && lhs.willRecord == rhs.willRecord
         && lhs.slides == rhs.slides
-        //&& lhs.links == rhs.links
+        && lhs.links == rhs.links
 }

@@ -129,6 +129,8 @@ public struct MemberResponse {
         
         public let slides: [Slide]
         
+        public let links: [Link]
+        
         public let groups: [Group]
     }
     
@@ -190,6 +192,7 @@ public func == (lhs: MemberResponse.Event, rhs: MemberResponse.Event) -> Bool {
         && lhs.externalRSVP == rhs.externalRSVP
         && lhs.willRecord == rhs.willRecord
         && lhs.slides == rhs.slides
+        && lhs.links == rhs.links
 }
 
 public func == (lhs: MemberResponse.Member, rhs: MemberResponse.Member) -> Bool {

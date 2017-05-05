@@ -93,6 +93,7 @@ public extension DataUpdate {
             case .SummitWIFIConnection: return CoreSummit.WirelessNetwork.self
             case .PresentationVideo: return CoreSummit.Video.self
             case .PresentationSlide: return CoreSummit.Slide.self
+            case .PresentationLink: return CoreSummit.Link.self
                 
             default: return nil
             }
@@ -319,3 +320,4 @@ extension GroupEventDataUpdate: Updatable { }
 extension WirelessNetwork: Updatable { }
 extension Video: Updatable { }
 extension Slide: Updatable { }
+extension Link: Updatable { }

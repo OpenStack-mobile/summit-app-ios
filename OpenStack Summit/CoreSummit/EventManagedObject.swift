@@ -50,6 +50,8 @@ public final class EventManagedObject: Entity {
     
     @NSManaged public var slides: Set<SlideManagedObject>
     
+    @NSManaged public var links: Set<LinkManagedObject>
+    
     @NSManaged public var groups: Set<GroupManagedObject>
     
     @NSManaged public var summit: SummitManagedObject
@@ -82,6 +84,7 @@ extension Event: CoreDataDecodable {
         self.presentation = Presentation(managedObject: managedObject.presentation)
         self.videos = Video.from(managedObjects: managedObject.videos)
         self.slides = Slide.from(managedObjects: managedObject.slides)
+        self.links = Link.from(managedObjects: managedObject.links)
         self.groups = Group.from(managedObjects: managedObject.groups)
     }
 }
@@ -113,6 +116,7 @@ extension Event: CoreDataEncodable {
         managedObject.presentation = try context.relationshipFault(presentation)
         managedObject.videos = try context.relationshipFault(videos)
         managedObject.slides = try context.relationshipFault(slides)
+        managedObject.links = try context.relationshipFault(links)
         managedObject.groups = try context.relationshipFault(groups)
         
         managedObject.didCache()
@@ -148,6 +152,7 @@ extension MemberResponse.Event: CoreDataEncodable {
         managedObject.presentation = try context.relationshipFault(presentation)
         managedObject.videos = try context.relationshipFault(Set(videos))
         managedObject.slides = try context.relationshipFault(Set(slides))
+        managedObject.links = try context.relationshipFault(Set(links))
         managedObject.groups = try context.relationshipFault(Set(groups))
         
         managedObject.didCache()
