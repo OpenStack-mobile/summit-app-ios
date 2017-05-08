@@ -12,7 +12,7 @@ import CoreSummit
 import Crashlytics
 import JGProgressHUD
 
-final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityViewController, SWRevealViewControllerDelegate, MessageEnabledViewController {
+final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityViewController, SWRevealViewControllerDelegate, MessageEnabledViewController, SummitActivityHandlingViewController {
     
     // MARK: - IB Outlets
     
@@ -334,14 +334,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         show(teamsViewController)
     }
-    
-    func showSearch(for term: String) {
-        
-        let searchViewController = R.storyboard.menu.searchViewController()!
-        searchViewController.searchTerm = term
-        
-        show(searchViewController)
-    }
         
     private func showMyProfile() {
         
@@ -356,7 +348,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     private func show(viewController: UIViewController) {
         
-        let revealViewController = AppDelegate.shared.revealViewController
+        let revealViewController = self.revealViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         
         revealViewController.pushFrontViewController(navigationController, animated: true)
@@ -415,7 +407,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                         
                         controller.showMyProfile()
                         
-                        let revealViewController = AppDelegate.shared.revealViewController
+                        let revealViewController = controller.revealViewController()
                         
                         // show a popup asking user if they are going to the summit
                         let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
@@ -505,10 +497,73 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             let sanitizedTerm = term.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
             
             // show Search VC
-            showSearch(for: sanitizedTerm)
+            search(sanitizedTerm)
         }
         
         return true
+    }
+    
+    // MARK: - SummitActivityHandlingViewController
+    
+    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+        
+        // find in cache
+        guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
+            else { return false }
+        
+        switch data {
+            
+        case .event:
+            
+            showEvents()
+            
+            let _ = generalScheduleViewController.view
+            
+            let eventDetailVC = R.storyboard.event.eventDetailViewController()!
+            eventDetailVC.event = identifier
+            generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
+            
+        case .speaker:
+            
+            showSpeakers()
+            
+            let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
+            speakersViewController.showViewController(memberProfileVC, sender: nil)
+            
+        case .video:
+            
+            let video = Video(managedObject: managedObject as! VideoManagedObject)
+            
+            self.playVideo(video)
+            
+        case .venue, .venueRoom:
+            
+            showVenues()
+            
+            venuesViewController.showLocationDetail(identifier)
+        }
+        
+        return true
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        switch screen {
+            
+        case .venues: showVenues()
+        case .events: showEvents()
+        case .speakers: showSpeakers()
+        case .about: showAbout()
+        case .inbox: showInbox()
+        }
+    }
+    
+    func search(searchTerm: String) {
+        
+        let searchViewController = R.storyboard.menu.searchViewController()!
+        searchViewController.searchTerm = searchTerm
+        
+        show(searchViewController)
     }
     
     // MARK: - Notifications

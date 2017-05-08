@@ -62,6 +62,7 @@ enum AppActivityScreen: String {
     case events
     case speakers
     case about
+    case inbox
 }
 
 // MARK: - Model Extensions
