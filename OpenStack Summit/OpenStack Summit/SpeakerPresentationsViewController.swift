@@ -47,9 +47,12 @@ final class SpeakerPresentationsViewController: ScheduleViewController, Indicato
     
     override func scheduledEvents(filter: DateFilter) -> [ScheduleItem] {
         
+        guard case .interval(let interval) = filter
+            else { return [] }
+        
         let summit = SummitManager.shared.summit.value
         
-        let managedObjects = try! EventManagedObject.speakerPresentations(speaker, startDate: startDate, endDate: endDate, summit: summit, context: Store.shared.managedObjectContext)
+        let managedObjects = try! EventManagedObject.speakerPresentations(speaker, startDate: interval.start.toFoundation(), endDate: interval.end.toFoundation(), summit: summit, context: Store.shared.managedObjectContext)
         
         return ScheduleItem.from(managedObjects: managedObjects)
     }
