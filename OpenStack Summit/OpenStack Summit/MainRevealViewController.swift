@@ -8,10 +8,15 @@
 
 import Foundation
 import UIKit
+import typealias CoreSummit.Identifier
 
-final class MainRevealViewController: SWRevealViewController {
+final class MainRevealViewController: SWRevealViewController, SummitActivityHandling {
     
-    let menuViewController: MenuViewController
+    // MARK: - Properties
+    
+    private(set) var menuViewController: MenuViewController!
+    
+    // MARK: - Initialization
     
     init() {
         
@@ -23,6 +28,29 @@ final class MainRevealViewController: SWRevealViewController {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        super.init(coder: aDecoder)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    // MARK: - SummitActivityHandling
+    
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        frontViewController.show(data, identifier: identifier)
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        menuViewController.view(screen)
+    }
+    
+    func search(searchTerm: String) {
+        
+        menuViewController.search(searchTerm)
     }
 }

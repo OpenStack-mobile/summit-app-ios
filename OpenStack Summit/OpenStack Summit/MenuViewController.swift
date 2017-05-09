@@ -12,7 +12,7 @@ import CoreSummit
 import Crashlytics
 import JGProgressHUD
 
-final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityViewController, SWRevealViewControllerDelegate, MessageEnabledViewController, SummitActivityHandlingViewController {
+final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityViewController, SWRevealViewControllerDelegate, MessageEnabledViewController {
     
     // MARK: - IB Outlets
     
@@ -503,53 +503,11 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         return true
     }
     
-    // MARK: - SummitActivityHandlingViewController
-    
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
-        
-        // find in cache
-        guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
-            else { return false }
-        
-        switch data {
-            
-        case .event:
-            
-            showEvents()
-            
-            let _ = generalScheduleViewController.view
-            
-            let eventDetailVC = R.storyboard.event.eventDetailViewController()!
-            eventDetailVC.event = identifier
-            generalScheduleViewController.showViewController(eventDetailVC, sender: nil)
-            
-        case .speaker:
-            
-            showSpeakers()
-            
-            let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
-            speakersViewController.showViewController(memberProfileVC, sender: nil)
-            
-        case .video:
-            
-            let video = Video(managedObject: managedObject as! VideoManagedObject)
-            
-            self.playVideo(video)
-            
-        case .venue, .venueRoom:
-            
-            showVenues()
-            
-            venuesViewController.showLocationDetail(identifier)
-        }
-        
-        return true
-    }
+    // MARK: - SummitActivityHandling
     
     func view(screen: AppActivityScreen) {
         
         switch screen {
-            
         case .venues: showVenues()
         case .events: showEvents()
         case .speakers: showSpeakers()
