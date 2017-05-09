@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class LaunchScreenViewController: UIViewController, MessageEnabledViewController {
+final class LaunchScreenViewController: UIViewController, MessageEnabledViewController, SummitActivityHandlingViewController {
     
     // MARK: - IB Outlets
     
@@ -67,7 +67,6 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         if Store.shared.isLoggedIn {
             
             showRevealController()
-            
         }
     }
     
@@ -265,6 +264,25 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             }
         }
     }
+    
+    // MARK: - SummitActivityHandlingViewController
+    
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        showRevealController(self) { $0.view(data, identifier: identifier) }
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        showRevealController(self) { $0.view(screen) }
+    }
+    
+    func search(searchTerm: String) {
+        
+        showRevealController(self) { $0.search(searchTerm) }
+    }
+    
+    // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

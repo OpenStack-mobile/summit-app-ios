@@ -10,19 +10,19 @@ import Foundation
 import UIKit
 import typealias CoreSummit.Identifier
 
-final class MainRevealViewController: SWRevealViewController, SummitActivityHandling {
+final class MainRevealViewController: SWRevealViewController, SummitActivityHandlingViewController {
     
     // MARK: - Properties
     
-    private(set) var menuViewController: MenuViewController!
+    var menuViewController: MenuViewController { return rearViewController as! MenuViewController }
     
     // MARK: - Initialization
     
     init() {
         
-        self.menuViewController = R.storyboard.menu.menuViewController()!
+        let menuViewController = R.storyboard.menu.menuViewController()!
         
-        let frontViewController = UINavigationController(rootViewController: self.menuViewController.generalScheduleViewController)
+        let frontViewController = UINavigationController(rootViewController: menuViewController.generalScheduleViewController)
         
         super.init(rearViewController: menuViewController, frontViewController: frontViewController)
     }
@@ -41,6 +41,15 @@ final class MainRevealViewController: SWRevealViewController, SummitActivityHand
     
     func view(data: AppActivitySummitDataType, identifier: Identifier) {
         
+        // change to menu item section first
+        switch data {
+        case .event: menuViewController.showEvents()
+        case .speaker: menuViewController.showSpeakers()
+        case .venue, .venueRoom: menuViewController.showVenues()
+        case .video: break
+        }
+        
+        // show detail view controller
         frontViewController.show(data, identifier: identifier)
     }
     

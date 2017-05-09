@@ -289,7 +289,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func view(data: AppActivitySummitDataType, identifier: Identifier)  {
         
-        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandling
+        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
         return topViewController.view(data, identifier: identifier)
@@ -297,7 +297,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func view(screen: AppActivityScreen) {
         
-        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandling
+        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
         topViewController.view(screen)
@@ -305,7 +305,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func search(searchTerm: String) {
         
-        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandling
+        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
         topViewController.search(searchTerm)
