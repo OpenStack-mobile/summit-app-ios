@@ -123,6 +123,9 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         guard let today = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(now) })
             else { return }
         
+        guard let _ = nowEventIndex()
+            else { showErrorAlert("All presentations are finished for today."); return }
+        
         (self.scheduleView.dayPicker.valueForKey("daysCollectionView") as! UICollectionView).reloadData()
         
         self.nowSelected = true
@@ -393,6 +396,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         self.loadData()
     }
     
+    @inline(__always)
+    private func nowEventIndex() -> Int? {
+        
+        let now = Date()
+        
+        return self.dayEvents.indexOf({ $0.end >= now && $0.track != "General" })
+    }
+    
     // MARK: - AFHorizontalDayPickerDelegate
     
     func horizontalDayPicker(picker: AFHorizontalDayPicker, widthForItemWithDate date: NSDate) -> CGFloat {
@@ -417,10 +428,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             
             if nowSelected {
                 
-                let now = Date()
-                
-                guard let currentEventIndex = self.dayEvents.indexOf({ $0.end >= now })
-                    else { fatalError("Cannot jump to current event for NOW/n\(NSDate())\n\(dayEvents)") }
+                let currentEventIndex = nowEventIndex() ?? 0
                 
                 indexPath = NSIndexPath(forRow: currentEventIndex, inSection: 0)
                 
