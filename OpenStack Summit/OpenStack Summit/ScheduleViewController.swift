@@ -123,13 +123,13 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         guard let today = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(now) })
             else { return }
         
-        self.selectedDate = today
-        
-        self.didSelectDate = true
+        (self.scheduleView.dayPicker.valueForKey("daysCollectionView") as! UICollectionView).reloadData()
         
         self.nowSelected = true
+                
+        self.selectedDate = today
         
-        self.loadData()
+        self.nowSelected = false
     }
     
     @IBAction func showEventContextMenu(sender: UIButton) {
@@ -230,8 +230,6 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let oldSelectedDate = self.selectedDate
         
-        let oldNowSelected = self.nowSelected
-        
         if let defaultStart = summit.defaultStart?.toFoundation(),
             let defaultDay = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(defaultStart) })
             where summitActive == false && self.didSelectDate == false {
@@ -246,8 +244,6 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             
             self.selectedDate = oldSelectedDate
         }
-        
-        self.nowSelected = oldNowSelected
         
         reloadSchedule()
     }
@@ -264,34 +260,27 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         // fetch new events
         
-        if nowSelected {
+        let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
+        
+        let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
+        
+        let today = NSDate()
+        
+        let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
+        
+        let dailyScheduleStartDate: NSDate
+        
+        if shoudHidePastTalks {
             
-            self.dayEvents = self.scheduledEvents(.now)
+            dailyScheduleStartDate = startDate.mt_isAfter(today) ? startDate : today
             
         } else {
             
-            let offsetLocalTimeZone = NSTimeZone.localTimeZone().secondsFromGMT
-            
-            let startDate = self.selectedDate.mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-            let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSecondsAfter(offsetLocalTimeZone - self.summitTimeZoneOffset)
-            
-            let today = NSDate()
-            
-            let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
-            
-            let dailyScheduleStartDate: NSDate
-            
-            if shoudHidePastTalks {
-                
-                dailyScheduleStartDate = startDate.mt_isAfter(today) ? startDate : today
-                
-            } else {
-                
-                dailyScheduleStartDate = startDate
-            }
-            
-            self.dayEvents = self.scheduledEvents(.interval(start: Date(foundation: dailyScheduleStartDate), end: Date(foundation: endDate)))
+            dailyScheduleStartDate = startDate
         }
+        
+        self.dayEvents = self.scheduledEvents(.interval(start: Date(foundation: dailyScheduleStartDate), end: Date(foundation: endDate)))
         
         // reload table view
         
@@ -359,12 +348,6 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    @inline(__always)
-    private func eventExists(id: Identifier) -> Bool {
-        
-        return try! EventManagedObject.find(id, context: Store.shared.managedObjectContext) != nil
-    }
-    
     private func configure(cell cell: ScheduleTableViewCell, at indexPath: NSIndexPath) {
         
         let index = indexPath.row
@@ -426,13 +409,28 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         self.didSelectDate = true
         
-        self.nowSelected = false
-        
         reloadSchedule()
         
         if dayEvents.isEmpty == false {
             
-            self.scheduleView.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+            let indexPath: NSIndexPath
+            
+            if nowSelected {
+                
+                let now = Date()
+                
+                guard let currentEventIndex = self.dayEvents.indexOf({ $0.end >= now })
+                    else { fatalError("Cannot jump to current event for NOW/n\(NSDate())\n\(dayEvents)") }
+                
+                indexPath = NSIndexPath(forRow: currentEventIndex, inSection: 0)
+                
+            } else {
+                
+                // scroll to top
+                indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            }
+            
+            self.scheduleView.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
         }
     }
     

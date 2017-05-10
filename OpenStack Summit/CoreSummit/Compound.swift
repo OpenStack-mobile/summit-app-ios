@@ -133,7 +133,6 @@ infix operator ||| {
 
 public func &&& (lhs: Predicate, rhs: Predicate) -> Predicate {
     
-    let value = true && false
     return .compound(.and([lhs, rhs]))
 }
 
