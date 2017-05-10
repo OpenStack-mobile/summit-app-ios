@@ -116,23 +116,30 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - Actions
     
-    @IBAction func nowTapped(sender: UIButton) {
+    @IBAction func nowTapped(sender: AnyObject? = nil) {
         
         let now = NSDate()
         
         guard let today = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(now) })
             else { return }
         
-        guard let _ = nowEventIndex()
-            else { showErrorAlert("All presentations are finished for today."); return }
-        
         (self.scheduleView.dayPicker.valueForKey("daysCollectionView") as! UICollectionView).reloadData()
         
         self.nowSelected = true
+        
+        let oldSelectedDate = self.selectedDate
+        
+        if oldSelectedDate != today {
+            
+            reloadSchedule()
+        }
                 
         self.selectedDate = today
         
         self.nowSelected = false
+        
+        guard let _ = nowEventIndex()
+            else { showInfoMessage("", message: "All presentations are finished for today."); return }
     }
     
     @IBAction func showEventContextMenu(sender: UIButton) {
@@ -233,7 +240,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         
         let oldSelectedDate = self.selectedDate
         
-        if let defaultStart = summit.defaultStart?.toFoundation(),
+        if  let defaultStart = summit.defaultStart?.toFoundation(),
             let defaultDay = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(defaultStart) })
             where summitActive == false && self.didSelectDate == false {
             
@@ -290,6 +297,15 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         if oldSchedule.isEmpty {
             
             tableView.reloadData()
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                
+                // jump to NOW
+                if self.scheduleView.nowButtonEnabled {
+                    
+                    self.nowTapped()
+                }
+            }
             
         } else {
             

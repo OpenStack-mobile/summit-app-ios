@@ -151,8 +151,10 @@ struct ScheduleFilter: Equatable {
             // dont want to override selection
             if didChangeActiveTalks == false {
                 
+                // During summit time jump to NOW as default, overriding Summit start date logic
+                
                 // start hiding active talks
-                activeFilters.insert(.activeTalks)
+                //activeFilters.insert(.activeTalks)
             }
         }
         else {
