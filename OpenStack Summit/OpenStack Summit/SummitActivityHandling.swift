@@ -47,7 +47,12 @@ extension SummitActivityHandling {
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        return self.view(dataType, identifier: identifier)
+        guard self.canView(dataType, identifier: identifier)
+            else { return false }
+        
+        self.view(dataType, identifier: identifier)
+        
+        return true
     }
     
     /// Opens URL of custom scheme.
@@ -65,7 +70,21 @@ extension SummitActivityHandling {
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        return self.view(dataType, identifier: identifier)
+        guard self.canView(dataType, identifier: identifier)
+            else { return false }
+        
+        self.view(dataType, identifier: identifier)
+        
+        return true
+    }
+    
+    func canView(data: AppActivitySummitDataType, identifier: Identifier) -> Bool {
+        
+        // find in cache
+        guard let _ = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
+            else { return false }
+        
+        return true
     }
 }
 
@@ -73,7 +92,9 @@ extension SummitActivityHandling {
 
 // MARK: - View Controller
 
-protocol SummitActivityHandlingViewController: class, SummitActivityHandling {
+protocol SummitActivityHandlingViewController: class, SummitActivityHandling { }
+
+extension SummitActivityHandlingViewController {
     
     func showViewController(_ vc: UIViewController, sender: AnyObject?)
     
@@ -81,16 +102,10 @@ protocol SummitActivityHandlingViewController: class, SummitActivityHandling {
     
     func showLocationDetail(_ location: Identifier)
 }
-
-extension SummitActivityHandlingViewController {
     
     func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
         let context = Store.shared.managedObjectContext
-        
-        // find in cache
-        guard let managedObject = try! data.managedObject.find(identifier, context: context)
-            else { return false }
         
         switch data {
             
@@ -107,7 +122,9 @@ extension SummitActivityHandlingViewController {
             
         case .video:
             
-            let video = Video(managedObject: managedObject as! VideoManagedObject)
+            // find in cache
+            guard let video = try! Video.find(identifier, context: context)
+                else { return }
             
             self.playVideo(video)
             

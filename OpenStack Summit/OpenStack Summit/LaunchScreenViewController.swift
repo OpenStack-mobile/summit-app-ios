@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class LaunchScreenViewController: UIViewController, MessageEnabledViewController {
+final class LaunchScreenViewController: UIViewController, MessageEnabledViewController, SummitActivityHandlingViewController {
     
     // MARK: - IB Outlets
     
@@ -59,8 +59,6 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         if Store.shared.isLoggedIn {
             
-            guard self.willTransition == false else { return }
-            
             self.willTransition = true
             
             let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -87,10 +85,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     @IBAction func login(_ sender: UIButton) {
         
-        showRevealController(sender) {
-            
-            AppDelegate.shared.menuViewController.login(sender)
-        }
+        showRevealController(sender) { $0.menuViewController.login(sender) }
     }
     
     @IBAction func continueAsGuest(_ sender: UIButton) {

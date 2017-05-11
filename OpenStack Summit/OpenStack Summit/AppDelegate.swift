@@ -26,12 +26,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     static var shared: AppDelegate { return unsafeBitCast(UIApplication.shared.delegate!, to: AppDelegate.self) }
 
     var window: UIWindow?
-    
-    lazy var menuViewController: MenuViewController = R.storyboard.menu.menuViewController()!
-    
-    lazy var revealViewController: SWRevealViewController = SWRevealViewController(rearViewController: self.menuViewController, frontViewController: UINavigationController(rootViewController: self.menuViewController.generalScheduleViewController))
-    
-    lazy var launchScreenViewController: LaunchScreenViewController = (self.window!.rootViewController as! UINavigationController).viewControllers.first as! LaunchScreenViewController
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -156,31 +150,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
             PushNotificationManager.shared.process(userInfo as! [String: AnyObject], unread: false)
             
             // redirect to inbox
-            
-            
-            /// force view load
-            let _ = self.revealViewController.view
-            let _ = self.menuViewController.view
-            let _ = self.revealViewController.frontViewController.view
-            let _ = self.launchScreenViewController.view
-            
-            if self.launchScreenViewController.navigationController?.topViewController == self.launchScreenViewController {
-                
-                if self.launchScreenViewController.willTransition {
-                    
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
-                    
-                    dispatch_after(delayTime, dispatch_get_main_queue()) { self.menuViewController.showInbox() }
-                    
-                } else {
-                    
-                    self.launchScreenViewController.showRevealController() { self.menuViewController.showInbox() }
-                }
-                
-            } else {
-                
-                menuViewController.showInbox()
-            }
+            self.view(.inbox)
         }
         
         fetchCompletionHandler(.NoData)
@@ -256,7 +226,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 let identifier = Int(identifierString)
                 else { return false }
             
-            return self.view(dataType, identifier: identifier)
+            guard self.canView(dataType, identifier: identifier)
+                else { return false }
+            
+            self.view(dataType, identifier: identifier)
         }
         
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
@@ -275,7 +248,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
                 let identifier = userActivity.userInfo?[AppActivityUserInfo.identifier.rawValue] as? Int
                 else { return false }
             
-            return self.view(dataType, identifier: identifier)
+            guard self.canView(dataType, identifier: identifier)
+                else { return false }
+            
+            self.view(dataType, identifier: identifier)
             
         } else if userActivity.activityType == AppActivity.screen.rawValue {
             
@@ -326,9 +302,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
         
-        // find in cache
-        guard let managedObject = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
-            else { return false }
+        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
+            else { fatalError("Visible view controller doesn't support deep linking") }
         
         switch data {
             
@@ -367,18 +342,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     func view(_ screen: AppActivityScreen) {
         
-        switch screen {
-            
-        case .venues: self.menuViewController.showVenues()
-        case .events: self.menuViewController.showEvents()
-        case .speakers: self.menuViewController.showSpeakers()
-        case .about: self.menuViewController.showAbout()
-        }
+        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
+            else { fatalError("Visible view controller doesn't support deep linking") }
+        
+        topViewController.view(screen)
     }
     
     func search(_ searchTerm: String) {
         
-        self.menuViewController.showSearch(for: searchTerm)
+        guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
+            else { fatalError("Visible view controller doesn't support deep linking") }
+        
+        topViewController.search(searchTerm)
     }
 }
 

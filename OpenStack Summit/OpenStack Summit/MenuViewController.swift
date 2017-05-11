@@ -334,14 +334,6 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         
         show(teamsViewController)
     }
-    
-    func showSearch(for term: String) {
-        
-        let searchViewController = R.storyboard.menu.searchViewController()!
-        searchViewController.searchTerm = term
-        
-        show(searchViewController)
-    }
         
     fileprivate func showMyProfile() {
         
@@ -356,7 +348,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
     
     fileprivate func show(_ viewController: UIViewController) {
         
-        let revealViewController = AppDelegate.shared.revealViewController
+        let revealViewController = self.revealViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         
         revealViewController.pushFrontViewController(navigationController, animated: true)
@@ -415,7 +407,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
                         
                         controller.showMyProfile()
                         
-                        let revealViewController = AppDelegate.shared.revealViewController
+                        let revealViewController = controller.revealViewController()
                         
                         // show a popup asking user if they are going to the summit
                         let alert = UIAlertController(title: "Eventbrite Order", message: "Are you a summit attendee?", preferredStyle: .Alert)
@@ -505,10 +497,31 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
             let sanitizedTerm = term.trimmingCharacters(in: .whitespacesAndNewlines)
             
             // show Search VC
-            showSearch(for: sanitizedTerm)
+            search(sanitizedTerm)
         }
         
         return true
+    }
+    
+    // MARK: - SummitActivityHandling
+    
+    func view(screen: AppActivityScreen) {
+        
+        switch screen {
+        case .venues: showVenues()
+        case .events: showEvents()
+        case .speakers: showSpeakers()
+        case .about: showAbout()
+        case .inbox: showInbox()
+        }
+    }
+    
+    func search(searchTerm: String) {
+        
+        let searchViewController = R.storyboard.menu.searchViewController()!
+        searchViewController.searchTerm = searchTerm
+        
+        show(searchViewController)
     }
     
     // MARK: - Notifications
