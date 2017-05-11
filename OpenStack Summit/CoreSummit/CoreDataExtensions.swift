@@ -8,12 +8,13 @@
 
 import Foundation
 import CoreData
+import Predicate
 
 public extension NSManagedObjectContext {
     
     /// Wraps the block to allow for error throwing.
     @available(OSX 10.7, *)
-    func performErrorBlockAndWait<T>(_ block: () throws -> T) throws -> T {
+    func performErrorBlockAndWait<T>(_ block: @escaping () throws -> T) throws -> T {
         
         var blockError: Swift.Error?
         
@@ -41,7 +42,7 @@ public extension NSManagedObjectContext {
         
         // get cached resource...
         
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        let fetchRequest = NSFetchRequest<T>(entityName: entity.name!)
         
         fetchRequest.fetchLimit = 1
         
@@ -55,7 +56,7 @@ public extension NSManagedObjectContext {
         
         // fetch
         
-        return try self.fetch(fetchRequest).first as! T?
+        return try self.fetch(fetchRequest).first
     }
     
     @inline(__always)
@@ -153,7 +154,7 @@ public extension NSManagedObjectModel {
         
         let className = NSStringFromClass(managedObjectType)
         
-        return self.entities.firstMatching { $0.managedObjectClassName == className }
+        return self.entities.first { $0.managedObjectClassName == className }
     }
 }
 

@@ -42,14 +42,14 @@ public final class UserDefaultsSessionStorage: SessionStorage {
     
     public var member: Identifier? {
         
-        get { return (userDefaults.object(forKey: Key.member.rawValue) as? NSNumber)?.intValue }
+        get { return (userDefaults.object(forKey: Key.member.rawValue) as? NSNumber)?.int64Value }
         
         set {
             
             guard let member = newValue
                 else { userDefaults.removeObject(forKey: Key.member.rawValue); return }
             
-            userDefaults.set(NSNumber(value: member as Int), forKey: Key.member.rawValue)
+            userDefaults.set(NSNumber(value: member), forKey: Key.member.rawValue)
             
             userDefaults.synchronize()
         }

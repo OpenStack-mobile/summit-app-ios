@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Foundation
+import JSON
 
 #if os(iOS)
 import Crashlytics
@@ -173,7 +173,7 @@ public final class UserDefaultsDataUpdatePollerStorage: DataUpdatePollerStorage 
     
     public var latestDataUpdate: Identifier? {
         
-        get { return userDefaults.object(forKey: Key.LatestDataUpdate.rawValue) as? Int }
+        get { return userDefaults.object(forKey: Key.LatestDataUpdate.rawValue) as? Identifier }
         
         set {
             

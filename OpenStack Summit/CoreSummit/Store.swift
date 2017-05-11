@@ -116,11 +116,11 @@ public final class Store {
     public var deviceHasPasscode: Bool {
         
         let secret = "Device has passcode set?".data(using: String.Encoding.utf8, allowLossyConversion: false)
-        let attributes = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String: secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly]
+        let attributes = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: "LocalDeviceServices", kSecAttrAccount as String:"NoAccount", kSecValueData as String: secret!, kSecAttrAccessible as String:kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly] as [String : Any]
         
-        let status = SecItemAdd(attributes, nil)
+        let status = SecItemAdd(attributes as CFDictionary, nil)
         if status == 0 {
-            SecItemDelete(attributes)
+            SecItemDelete(attributes as CFDictionary)
             return true
         }
         return false
@@ -149,7 +149,7 @@ public final class Store {
     
     /// Convenience function for adding a block to the request queue.
     @inline(__always)
-    internal func newRequest(_ block: () -> ()) {
+    internal func newRequest(_ block: @escaping () -> ()) {
         
         self.requestQueue.addOperation(block)
     }
@@ -164,7 +164,7 @@ public final class Store {
             http.authzModule = oauthModuleOpenID
         }
         else if (type == .openIDJSON) {
-            http = Http(responseSerializer: StringResponseSerializer(), requestSerializer: JsonRequestSerializer())
+            http = Http(requestSerializer: JsonRequestSerializer(), responseSerializer: StringResponseSerializer())
             http.authzModule = oauthModuleOpenID
         }
         else {
@@ -297,11 +297,11 @@ public extension Store {
 
 public extension Store {
     
-    public enum Notification: String {
+    public struct Notification {
         
-        case LoggedIn           = "CoreSummit.Store.Notification.LoggedIn"
-        case LoggedOut          = "CoreSummit.Store.Notification.LoggedOut"
-        case ForcedLoggedOut    = "CoreSummit.Store.Notification.ForcedLoggedOut"
+        public static let loggedIn = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.LoggedIn")
+        public static let loggedOut = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.LoggedOut")
+        public static let forcedLoggedOut = Foundation.Notification.Name(rawValue: "CoreSummit.Store.Notification.ForcedLoggedOut")
     }
 }
 

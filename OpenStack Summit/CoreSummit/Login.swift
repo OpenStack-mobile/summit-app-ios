@@ -30,13 +30,13 @@ public extension Store {
         
         session.clear()
         
-        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: Notification.LoggedOut.rawValue), object: self)
+        NotificationCenter.default.post(name: Store.Notification.loggedOut, object: self)
     }
     
     /// Login via OAuth with OpenStack ID
-    func login(_ summit: Identifier, loginCallback: () -> (), completion: (Swift.Error?) -> ()) {
-                
-        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIDClaim?, error: NSError?) in // [1]
+    func login(_ summit: Identifier, loginCallback: @escaping () -> (), completion: @escaping (Swift.Error?) -> ()) {
+        
+        oauthModuleOpenID.login { (accessToken: AnyObject?, claims: OpenIdClaim?, error: NSError?) in // [1]
             
             guard error == nil
                 else { completion(error!) ; return }
@@ -58,7 +58,7 @@ public extension Store {
                     
                     completion(nil)
                     
-                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: Notification.LoggedIn.rawValue), object: self)
+                    NotificationCenter.default.post(name: Store.Notification.loggedIn, object: self)
                 }
             }
         }
