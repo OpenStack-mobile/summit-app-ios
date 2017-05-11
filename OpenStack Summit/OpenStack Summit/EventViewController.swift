@@ -25,8 +25,7 @@ extension EventViewController {
     func canAddFeedback(for event: EventDetail) -> Bool {
         
         // Can give feedback after event started
-        return Store.shared.isLoggedIn
-            && event.allowFeedback
+        return event.allowFeedback
             && event.start < Date()
     }
     
@@ -50,7 +49,7 @@ extension EventViewController {
         
         var actions: [ContextMenu.Action] = []
         
-        if canAddFeedback(for: event) {
+        if Store.shared.isLoggedIn && canAddFeedback(for: event) {
             
             let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
                 
