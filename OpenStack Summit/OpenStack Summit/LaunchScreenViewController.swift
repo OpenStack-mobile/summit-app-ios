@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreSummit
 
-final class LaunchScreenViewController: UIViewController, MessageEnabledViewController {
+final class LaunchScreenViewController: UIViewController, MessageEnabledViewController, SummitActivityHandlingViewController {
     
     // MARK: - IB Outlets
     
@@ -32,7 +32,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - Properties
     
-    private(set) var willTransition = false  {
+    private var willTransition = false  {
         
         didSet { configureView() }
     }
@@ -51,30 +51,22 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         
         self.summitsButton.enabled = AppEnvironment == .Staging
         
-        configureView()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
         if Store.shared.isLoggedIn {
             
-            guard self.willTransition == false else { return }
-            
             self.willTransition = true
-            
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-            
-            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-                
-                guard let controller = self else { return }
-                
-                controller.showRevealController()
-            }
             
         } else {
             
             self.loadSummits()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Store.shared.isLoggedIn {
+            
+            showRevealController()
         }
     }
     
@@ -87,10 +79,7 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     @IBAction func login(sender: UIButton) {
         
-        showRevealController(sender) {
-            
-            AppDelegate.shared.menuViewController.login(sender)
-        }
+        showRevealController(sender) { $0.menuViewController.login(sender) }
     }
     
     @IBAction func continueAsGuest(sender: UIButton) {
@@ -171,49 +160,19 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    func showRevealController(sender: AnyObject? = nil, completion: (() -> ())? = nil) {
+    private func showRevealController(sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
         
         self.willTransition = true
         
-        // load summit
-        if isDataLoaded == false {
-            
-            /*
-            let summit = SummitManager.shared.summit.value
-            
-            self.showActivityIndicator()
-            
-            Store.shared.summit(summit) { [weak self] (response) in
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    
-                    guard let controller = self else { return }
-                    
-                    controller.dismissActivityIndicator()
-                    
-                    switch response {
-                        
-                    case let .Error(error):
-                        
-                        controller.showErrorMessage(error)
-                        
-                    case .Value:
-                        
-                        controller.showRevealController(sender, completion: completion)
-                    }
-                }
-            }
-            
-            return */
-        }
-        
-        let revealViewController = AppDelegate.shared.revealViewController
+        let revealViewController = MainRevealViewController()
         
         self.showViewController(revealViewController, sender: sender)
         
+        self.willTransition = false;
+        
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
         
-        dispatch_after(delayTime, dispatch_get_main_queue()) { self.willTransition = false; completion?() }
+        dispatch_after(delayTime, dispatch_get_main_queue()) { completion?(revealViewController) }
     }
     
     private func loadSummits() {
@@ -305,6 +264,25 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
             }
         }
     }
+    
+    // MARK: - SummitActivityHandlingViewController
+    
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        showRevealController(self) { $0.view(data, identifier: identifier) }
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        showRevealController(self) { $0.view(screen) }
+    }
+    
+    func search(searchTerm: String) {
+        
+        showRevealController(self) { $0.search(searchTerm) }
+    }
+    
+    // MARK: - Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

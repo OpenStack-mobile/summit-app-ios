@@ -11,7 +11,7 @@ import CoreSummit
 
 protocol SummitActivityHandling {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool
+    func view(data: AppActivitySummitDataType, identifier: Identifier)
     
     func view(screen: AppActivityScreen)
     
@@ -47,7 +47,12 @@ extension SummitActivityHandling {
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        return self.view(dataType, identifier: identifier)
+        guard self.canView(dataType, identifier: identifier)
+            else { return false }
+        
+        self.view(dataType, identifier: identifier)
+        
+        return true
     }
     
     /// Opens URL of custom scheme.
@@ -65,7 +70,21 @@ extension SummitActivityHandling {
         
         let dataType = AppActivitySummitDataType(webPathComponent: type)
         
-        return self.view(dataType, identifier: identifier)
+        guard self.canView(dataType, identifier: identifier)
+            else { return false }
+        
+        self.view(dataType, identifier: identifier)
+        
+        return true
+    }
+    
+    func canView(data: AppActivitySummitDataType, identifier: Identifier) -> Bool {
+        
+        // find in cache
+        guard let _ = try! data.managedObject.find(identifier, context: Store.shared.managedObjectContext)
+            else { return false }
+        
+        return true
     }
 }
 
@@ -73,24 +92,34 @@ extension SummitActivityHandling {
 
 // MARK: - View Controller
 
-protocol SummitActivityHandlingViewController: class, SummitActivityHandling {
-    
-    func showViewController(vc: UIViewController, sender: AnyObject?)
-    
-    func playVideo(video: Video)
-    
-    func showLocationDetail(location: Identifier)
-}
+protocol SummitActivityHandlingViewController: class, SummitActivityHandling { }
 
 extension SummitActivityHandlingViewController {
     
-    func view(data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        guard let viewController = self as? UIViewController
+            else { fatalError() }
+        
+        viewController.show(data, identifier: identifier)
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        AppDelegate.shared.view(screen)
+    }
+    
+    func search(searchTerm: String) {
+        
+        AppDelegate.shared.search(searchTerm)
+    }
+}
+    
+extension UIViewController {
+    
+    func show(data: AppActivitySummitDataType, identifier: Identifier) {
         
         let context = Store.shared.managedObjectContext
-        
-        // find in cache
-        guard let managedObject = try! data.managedObject.find(identifier, context: context)
-            else { return false }
         
         switch data {
             
@@ -107,7 +136,9 @@ extension SummitActivityHandlingViewController {
             
         case .video:
             
-            let video = Video(managedObject: managedObject as! VideoManagedObject)
+            // find in cache
+            guard let video = try! Video.find(identifier, context: context)
+                else { return }
             
             self.playVideo(video)
             
@@ -115,18 +146,6 @@ extension SummitActivityHandlingViewController {
             
             self.showLocationDetail(identifier)
         }
-        
-        return true
-    }
-    
-    func view(screen: AppActivityScreen) {
-        
-        AppDelegate.shared.view(screen)
-    }
-    
-    func search(searchTerm: String) {
-        
-        AppDelegate.shared.search(searchTerm)
     }
 }
 
