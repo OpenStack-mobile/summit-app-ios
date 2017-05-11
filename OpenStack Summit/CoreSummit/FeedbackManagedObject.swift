@@ -16,7 +16,7 @@ open class FeedbackManagedObject: Entity {
     
     @NSManaged open var review: String
     
-    @NSManaged open var date: Foundation.Date
+    @NSManaged open var date: Date
     
     @NSManaged open var event: EventManagedObject
     
@@ -32,8 +32,8 @@ extension Feedback: CoreDataDecodable {
         self.identifier = managedObject.id
         self.rate = Int(managedObject.rate)
         self.review = managedObject.review
-        self.date = Date(foundation: managedObject.date)
-        self.event = managedObject.event.identifier
+        self.date = managedObject.date
+        self.event = managedObject.event.id
         self.member = Member(managedObject: managedObject.member)
     }
 }

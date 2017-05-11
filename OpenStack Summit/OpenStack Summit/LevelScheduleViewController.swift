@@ -28,7 +28,7 @@ final class LevelScheduleViewController: ScheduleViewController {
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: Foundation.Date, to endDate: Foundation.Date) -> [Foundation.Date] {
+    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         let scheduleFilter = FilterManager.shared.filter.value
         let summit = SummitManager.shared.summit.value
@@ -47,11 +47,11 @@ final class LevelScheduleViewController: ScheduleViewController {
             }
         }
         
-        let date = DateFilter.interval(start: Date(foundation: startDate), end: Date(foundation: endDate))
+        let date = DateFilter.interval(start: startDate, end: endDate)
         
         let events = try! EventManagedObject.filter(date, tracks: nil, trackGroups: trackGroups, levels: levels, venues: venues, summit: summit, context: Store.shared.managedObjectContext)
         
-        var activeDates: [Foundation.Date] = []
+        var activeDates: [Date] = []
         for event in events {
             let timeZone = NSTimeZone(name: event.summit.timeZone)!
             let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()

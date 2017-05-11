@@ -9,7 +9,7 @@
 import Foundation
 import CoreSummit
 import CoreData
-import struct Date
+import struct Foundation.Date
 
 public struct ScheduleItem: CoreDataDecodable {
     
@@ -35,8 +35,8 @@ public struct ScheduleItem: CoreDataDecodable {
         self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
-        self.start = Date(foundation: event.start)
-        self.end = Date(foundation: event.end)
+        self.start = event.start
+        self.end = event.end
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)
         self.dateTime = ScheduleItem.getDateTime(event)
@@ -121,7 +121,7 @@ internal extension ScheduleItem {
         
         // only show after date
         guard let startShowingVenues = event.summit.startShowingVenues
-            where Foundation.Date().mt_isAfter(startShowingVenues)
+            where Date().mt_isAfter(startShowingVenues)
             else { return "" }
         
         var location = ""

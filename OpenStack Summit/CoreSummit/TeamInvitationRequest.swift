@@ -11,7 +11,7 @@ import CoreData
 
 public extension Store {
     
-    func accept(invitation identifier: Identifier, completion: (Swift.Error?) -> ()) {
+    func accept(invitation identifier: Identifier, completion: @escaping (Swift.Error?) -> ()) {
         
         let uri = "/api/v1/members/me/team-invitations/\(identifier)"
         

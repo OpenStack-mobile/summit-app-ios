@@ -12,9 +12,9 @@ import Foundation
 
 public final class TeamInvitationManagedObject: Entity {
     
-    @NSManaged public var created: Foundation.Date
+    @NSManaged public var created: Date
     
-    @NSManaged public var updatedDate: Foundation.Date
+    @NSManaged public var updatedDate: Date
     
     @NSManaged public var permission: String
     
@@ -34,13 +34,13 @@ extension TeamInvitation: CoreDataDecodable {
     public init(managedObject: TeamInvitationManagedObject) {
         
         self.identifier = managedObject.id
-        self.created = Date(foundation: managedObject.created)
-        self.updated = Date(foundation: managedObject.updatedDate)
+        self.created = managedObject.created
+        self.updated = managedObject.updatedDate
         self.accepted = managedObject.accepted
         self.permission = TeamPermission(rawValue: managedObject.permission)!
         self.invitee = Member(managedObject: managedObject.invitee)
         self.inviter = Member(managedObject: managedObject.inviter)
-        self.team = managedObject.team.identifier
+        self.team = managedObject.team.id
     }
 }
 

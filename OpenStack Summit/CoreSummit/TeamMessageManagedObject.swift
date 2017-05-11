@@ -14,7 +14,7 @@ public final class TeamMessageManagedObject: Entity {
         
     @NSManaged public var body: String
     
-    @NSManaged public var created: Foundation.Date
+    @NSManaged public var created: Date
     
     @NSManaged public var team: TeamManagedObject
     
@@ -29,7 +29,7 @@ extension TeamMessage: CoreDataDecodable {
         
         self.identifier = managedObject.id
         self.body = managedObject.body
-        self.created = Date(foundation: managedObject.created)
+        self.created = managedObject.created
         self.from = Fault<Member>(managedObject: managedObject.from)
         self.team = Fault<Team>(managedObject: managedObject.team)
     }

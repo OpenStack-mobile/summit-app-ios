@@ -26,7 +26,7 @@ extension TeamMember: CoreDataDecodable {
         
         self.identifier = managedObject.id
         self.permission = TeamPermission(rawValue: managedObject.permission)!
-        self.team = managedObject.team.identifier
+        self.team = managedObject.team.id
         self.member = Member(managedObject: managedObject.member)
     }
 }

@@ -42,7 +42,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - Accessors
     
-    var startDate: Foundation.Date! {
+    var startDate: Date! {
         get {
             return scheduleView.dayPicker.startDate
         }
@@ -52,7 +52,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    var endDate: Foundation.Date! {
+    var endDate: Date! {
         get {
             return scheduleView.dayPicker.endDate
         }
@@ -62,7 +62,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    var selectedDate: Foundation.Date! {
+    var selectedDate: Date! {
         get {
             return scheduleView.dayPicker.selectedDate
         }
@@ -71,7 +71,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         }
     }
     
-    var availableDates: [Foundation.Date]! {
+    var availableDates: [Date]! {
         get {
             return scheduleView.activeDates
         }
@@ -118,7 +118,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     @IBAction func nowTapped(_ sender: AnyObject? = nil) {
         
-        let now = Foundation.Date()
+        let now = Date()
         
         guard let today = self.availableDates.firstMatching({ $0.mt_isWithinSameDay(now) })
             else { return }
@@ -166,7 +166,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     func toggleNoConnectivityMessage(_ show: Bool) {} // override
     
-    func scheduleAvailableDates(from startDate: Foundation.Date, to endDate: Foundation.Date) -> [Foundation.Date] {
+    func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         fatalError("You must override this method")
     }
@@ -219,14 +219,14 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
                 
         let timeZone = TimeZone(name: summit.timeZone)!
         
-        Foundation.Date.mt_setTimeZone(timeZone)
+        Date.mt_setTimeZone(timeZone)
         
         self.summitTimeZoneOffset = timeZone.secondsFromGMT
         
         self.startDate = summit.start.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_startOfCurrentDay()
         self.endDate = summit.end.mt_dateSecondsAfter(self.summitTimeZoneOffset).mt_dateDaysAfter(1)
         
-        let today = Foundation.Date()
+        let today = Date()
         
         let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
         
@@ -275,11 +275,11 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         let startDate = self.selectedDate.mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)
         let endDate = self.selectedDate.mt_endOfCurrentDay().mt_dateSeconds(after: offsetLocalTimeZone - self.summitTimeZoneOffset)
         
-        let today = Foundation.Date()
+        let today = Date()
         
         let shoudHidePastTalks = scheduleFilter.activeFilters.contains(.activeTalks)
         
-        let dailyScheduleStartDate: Foundation.Date
+        let dailyScheduleStartDate: Date
         
         if shoudHidePastTalks {
             
@@ -290,7 +290,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
             dailyScheduleStartDate = startDate
         }
         
-        self.dayEvents = self.scheduledEvents(.interval(start: Date(foundation: dailyScheduleStartDate), end: Date(foundation: endDate)))
+        self.dayEvents = self.scheduledEvents(.interval(start: dailyScheduleStartDate, end: endDate))
         
         // reload table view
         
@@ -422,7 +422,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
     
     // MARK: - AFHorizontalDayPickerDelegate
     
-    func horizontalDayPicker(_ picker: AFHorizontalDayPicker, widthForItemWith date: Foundation.Date) -> CGFloat {
+    func horizontalDayPicker(_ picker: AFHorizontalDayPicker, widthForItemWith date: Date) -> CGFloat {
         
         return scheduleView.horizontalDayPicker(picker, widthForItemWithDate: date)
     }
@@ -432,7 +432,7 @@ class ScheduleViewController: UIViewController, EventViewController, MessageEnab
         return scheduleView.horizontalDayPicker(picker, requestCustomizedCellFromCell: cell)
     }
     
-    func horizontalDayPicker(_ picker: AFHorizontalDayPicker, didSelect date: Foundation.Date) {
+    func horizontalDayPicker(_ picker: AFHorizontalDayPicker, didSelect date: Date) {
         
         self.didSelectDate = true
         

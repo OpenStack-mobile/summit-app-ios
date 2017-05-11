@@ -13,7 +13,7 @@ import Foundation
 public final class SummitManagedObject: Entity {
     
     /// The date this summit was fetched from the server.
-    @NSManaged public var initialDataLoad: Foundation.Date?
+    @NSManaged public var initialDataLoad: Date?
     
     @NSManaged public var name: String
     
@@ -21,17 +21,17 @@ public final class SummitManagedObject: Entity {
     
     @NSManaged public var datesLabel: String?
     
-    @NSManaged public var start: Foundation.Date
+    @NSManaged public var start: Date
     
-    @NSManaged public var end: Foundation.Date
+    @NSManaged public var end: Date
     
-    @NSManaged public var defaultStart: Foundation.Date?
+    @NSManaged public var defaultStart: Date?
     
     @NSManaged public var webpageURL: String
     
     @NSManaged public var active: Bool
     
-    @NSManaged public var startShowingVenues: Foundation.Date?
+    @NSManaged public var startShowingVenues: Date?
     
     @NSManaged public var sponsors: Set<CompanyManagedObject>
     
@@ -60,14 +60,14 @@ extension Summit: CoreDataDecodable {
         self.name = managedObject.name
         self.timeZone = managedObject.timeZone
         self.datesLabel = managedObject.datesLabel
-        self.start = Date(foundation: managedObject.start)
-        self.end = Date(foundation: managedObject.end)
+        self.start = managedObject.start
+        self.end = managedObject.end
         self.webpageURL = managedObject.webpageURL
         self.active = managedObject.active
         
         if let startShowingVenues = managedObject.startShowingVenues {
             
-            self.startShowingVenues = Date(foundation: startShowingVenues)
+            self.startShowingVenues = startShowingVenues
             
         } else {
             
@@ -76,7 +76,7 @@ extension Summit: CoreDataDecodable {
         
         if let defaultStart = managedObject.defaultStart {
             
-            self.defaultStart = Date(foundation: defaultStart)
+            self.defaultStart = defaultStart
             
         } else {
             
@@ -106,10 +106,10 @@ extension Summit: CoreDataEncodable {
         managedObject.datesLabel = datesLabel
         managedObject.start = start
         managedObject.end = end
-        managedObject.defaultStart = defaultStart?
+        managedObject.defaultStart = defaultStart
         managedObject.webpageURL = webpageURL
         managedObject.active = active
-        managedObject.startShowingVenues = startShowingVenues?
+        managedObject.startShowingVenues = startShowingVenues
         managedObject.sponsors = try context.relationshipFault(sponsors)
         managedObject.speakers = try context.relationshipFault(speakers)
         managedObject.ticketTypes = try context.relationshipFault(ticketTypes)

@@ -26,8 +26,8 @@ extension VenueRoom: CoreDataDecodable {
         self.name = managedObject.name
         self.capacity = managedObject.capacity?.intValue
         self.descriptionText = managedObject.descriptionText
-        self.venue = managedObject.venue.identifier
-        self.floor = managedObject.floor?.identifier
+        self.venue = managedObject.venue.id
+        self.floor = managedObject.floor?.id
     }
 }
 

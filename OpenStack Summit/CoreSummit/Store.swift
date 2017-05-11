@@ -267,7 +267,7 @@ public final class Store {
         
         self.session.clear()
         
-        let notification = Foundation.Notification(name: Notification.ForcedLoggedOut.rawValue, object:self, userInfo:nil)
+        let notification = Foundation.Notification(name: Store.Notification.forcedLoggedOut, object: self, userInfo: nil)
         NotificationCenter.default.post(notification)
     }
 }

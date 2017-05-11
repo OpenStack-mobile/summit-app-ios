@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import Foundation
 
 public final class TeamManagedObject: Entity {
     
@@ -16,9 +15,9 @@ public final class TeamManagedObject: Entity {
     
     @NSManaged public var descriptionText: String?
     
-    @NSManaged public var created: Foundation.Date
+    @NSManaged public var created: Date
     
-    @NSManaged public var updatedDate: Foundation.Date
+    @NSManaged public var updatedDate: Date
     
     @NSManaged public var owner: MemberManagedObject
     
@@ -39,8 +38,8 @@ extension Team: CoreDataDecodable {
         
         self.identifier = managedObject.id
         self.name = managedObject.name
-        self.created = Date(foundation: managedObject.created)
-        self.updated = Date(foundation: managedObject.updatedDate)
+        self.created = managedObject.created
+        self.updated = managedObject.updatedDate
         self.descriptionText = managedObject.descriptionText
         self.owner = Member(managedObject: managedObject.owner)
         self.members = TeamMember.from(managedObjects: managedObject.members)

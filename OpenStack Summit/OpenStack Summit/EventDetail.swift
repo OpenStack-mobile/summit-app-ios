@@ -52,8 +52,8 @@ public struct EventDetail: CoreDataDecodable {
         self.identifier = event.identifier
         self.name = event.name
         self.summit = event.summit.identifier
-        self.start = Date(foundation: event.start)
-        self.end = Date(foundation: event.end)
+        self.start = event.start
+        self.end = event.end
         self.timeZone = event.summit.timeZone
         self.eventType = event.eventType.name
         self.location = ScheduleItem.getLocation(event)

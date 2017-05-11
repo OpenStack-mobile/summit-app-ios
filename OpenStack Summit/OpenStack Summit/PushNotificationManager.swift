@@ -147,7 +147,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                     userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: Notification.Topic.team(teamMessage.team.identifier).rawValue, UserNotificationUserInfo.identifier.rawValue : teamMessage.identifier]
                     userNotification.alertTitle = alertTitle
                     userNotification.alertBody = alertBody
-                    userNotification.fireDate = Foundation.Date()
+                    userNotification.fireDate = Date()
                     userNotification.category = TeamMessageNotificationAction.category.rawValue
                     
                     UIApplication.shared.scheduleLocalNotification(userNotification)
@@ -198,7 +198,7 @@ public final class PushNotificationManager: NSObject, NSFetchedResultsController
                 userNotification.userInfo = [UserNotificationUserInfo.topic.rawValue: generalNotification.from.rawValue, UserNotificationUserInfo.identifier.rawValue : generalNotification.identifier]
                 userNotification.alertTitle = generalNotification.event?.title
                 userNotification.alertBody = generalNotification.body
-                userNotification.fireDate = Foundation.Date()
+                userNotification.fireDate = Date()
                 userNotification.category = UserNotificationCategory.generalNotification.rawValue
                 
                 UIApplication.shared.scheduleLocalNotification(userNotification)

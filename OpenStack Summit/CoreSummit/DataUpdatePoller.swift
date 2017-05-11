@@ -88,7 +88,7 @@ public final class DataUpdatePoller {
                 
                 for update in dataUpdates {
                     
-                    if store.process(update, summit: summit.identifier) == false {
+                    if store.process(dataUpdate: update, summit: summit.id) == false {
                         
                         // could not process update
                         
@@ -99,7 +99,7 @@ public final class DataUpdatePoller {
                             if let updateEntity = update.entity,
                                 case let .json(jsonObject) = updateEntity {
                                 
-                                let jsonString = JSON.Value.object(jsonObject).toString()!
+                                let jsonString = try! JSON.Value.object(jsonObject).toString(options: .prettyPrint)
                                 
                                 errorUserInfo["JSON"] = jsonString
                             }
@@ -140,7 +140,7 @@ public final class DataUpdatePoller {
             
         } else {
             
-            store.dataUpdates(summit.id, from: Date(foundation: summit.initialDataLoad ?? Foundation.Date())) { process(response: $0) }
+            store.dataUpdates(summit.id, from: summit.initialDataLoad ?? Date()) { process(response: $0) }
         }
     }
 }

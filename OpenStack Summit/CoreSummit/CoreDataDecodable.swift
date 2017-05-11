@@ -50,6 +50,7 @@ public extension NSManagedObjectContext {
     }
 }
 
+/* Swift 3 compile error
 @available(OSX 10.12, *)
 public extension NSFetchedResultsController {
     
@@ -72,12 +73,39 @@ public extension NSFetchedResultsController {
         fetchRequest.sortDescriptors = sortDescriptors
         
         self.init(fetchRequest: fetchRequest as! NSFetchRequest<_>,
-                  managedObjectContext: context,
-                  sectionNameKeyPath: sectionNameKeyPath,
-                  cacheName: nil)
+                  managedObjectContext: context, sectionNameKeyPath: sectionNameKeyPath, cacheName: nil)
         
         self.delegate = delegate
     }
+}
+ */
+
+public func NSFetchedResultsController <T: CoreDataDecodable>
+    (_ decodable: T.Type,
+     delegate: NSFetchedResultsControllerDelegate? = nil,
+     predicate: NSPredicate? = nil,
+     sortDescriptors: [NSSortDescriptor] = [],
+     sectionNameKeyPath: String? = nil,
+     context: NSManagedObjectContext) -> NSFetchedResultsController<T.ManagedObject> {
+    
+    let managedObjectType = T.ManagedObject.self
+    
+    let entity = context.persistentStoreCoordinator!.managedObjectModel[managedObjectType]!
+    
+    let fetchRequest = NSFetchRequest<T.ManagedObject>(entityName: entity.name!)
+    
+    fetchRequest.predicate = predicate
+    
+    fetchRequest.sortDescriptors = sortDescriptors
+    
+    let fetchedResultsController = CoreData.NSFetchedResultsController.init(fetchRequest: fetchRequest,
+                                                                            managedObjectContext: context,
+                                                                            sectionNameKeyPath: sectionNameKeyPath,
+                                                                            cacheName: nil)
+    
+    fetchedResultsController.delegate = delegate
+    
+    return fetchedResultsController
 }
 
 public extension CoreDataDecodable {

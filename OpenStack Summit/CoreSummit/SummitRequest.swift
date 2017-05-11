@@ -74,7 +74,7 @@ public extension Store {
                 
                 let managedObject = try summit.save(context)
                 
-                managedObject.initialDataLoad = Foundation.Date()
+                managedObject.initialDataLoad = Date()
                 
                 try context.validateAndSave()
             }

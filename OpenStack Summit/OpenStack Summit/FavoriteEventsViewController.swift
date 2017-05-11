@@ -23,17 +23,16 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
     
     // MARK: - Methods
     
-    override func scheduleAvailableDates(from startDate: Foundation.Date, to endDate: Foundation.Date) -> [Foundation.Date] {
+    override func scheduleAvailableDates(from startDate: Date, to endDate: Date) -> [Date] {
         
         guard let member = Store.shared.authenticatedMember
             else { return [] }
         
         let events = member.favoriteEvents
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
-                && Date(foundation: $0.end) <= Date(foundation: endDate) })
-            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
+            .filter({ $0.start >= startDate && $0.end <= endDate) })
+            .sort({ $0.0.start < $0.1.start })
         
-        var activeDates: [Foundation.Date] = []
+        var activeDates: [Date] = []
         for event in events {
             let timeZone = NSTimeZone(name: event.summit.timeZone)!
             let startDate = event.start.mt_dateSecondsAfter(timeZone.secondsFromGMT).mt_startOfCurrentDay()
@@ -51,9 +50,9 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
             else { return [] }
         
         let events = member.favoriteEvents
-            .filter({ Date(foundation: $0.start) >= Date(foundation: startDate)
-                && Date(foundation: $0.end) <= Date(foundation: endDate) })
-            .sort({ Date(foundation: $0.0.start) < Date(foundation: $0.1.start) })
+            .filter({ $0.start) >= startDate)
+                && $0.end) <= endDate) })
+            .sort({ $0.0.start) < $0.1.start) })
         
         return ScheduleItem.from(managedObjects: events)
     }

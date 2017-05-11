@@ -104,7 +104,7 @@ struct ScheduleFilter: Equatable {
         let summitTimeZoneOffset = TimeZone(name: summit.timeZone)!.secondsFromGMT
         let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
         let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-        let now = Foundation.Date()
+        let now = Date()
         
         if now.mt_isBetweenDate(startDate, andDate: endDate) {
             
@@ -144,7 +144,7 @@ struct ScheduleFilter: Equatable {
         let summitTimeZoneOffset = TimeZone(name: summit.timeZone)!.secondsFromGMT
         let startDate = summit.start.mt_dateSecondsAfter(summitTimeZoneOffset).mt_startOfCurrentDay()
         let endDate = summit.end.mt_dateSecondsAfter(summitTimeZoneOffset).mt_dateDaysAfter(1)
-        let now = Foundation.Date()
+        let now = Date()
         
         if now.mt_isBetweenDate(startDate, andDate: endDate) {
             

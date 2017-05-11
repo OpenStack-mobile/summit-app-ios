@@ -13,9 +13,9 @@ public final class AffiliationManagedObject: Entity {
     
     @NSManaged public var member: MemberManagedObject
     
-    @NSManaged public var start: Foundation.Date?
+    @NSManaged public var start: Date?
     
-    @NSManaged public var end: Foundation.Date?
+    @NSManaged public var end: Date?
     
     @NSManaged public var isCurrent: Bool
     
@@ -28,12 +28,12 @@ extension Affiliation: CoreDataDecodable {
         
         self.identifier = managedObject.id
         self.isCurrent = managedObject.isCurrent
-        self.member =  managedObject.member.identifier
+        self.member =  managedObject.member.id
         self.organization = AffiliationOrganization(managedObject: managedObject.organization)
         
         if let startDate = managedObject.start {
             
-            self.start = Date(foundation: startDate)
+            self.start = startDate
             
         } else {
             
@@ -42,7 +42,7 @@ extension Affiliation: CoreDataDecodable {
         
         if let endDate = managedObject.end {
             
-            self.end = Date(foundation: endDate)
+            self.end = endDate
             
         } else {
             

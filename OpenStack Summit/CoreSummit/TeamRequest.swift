@@ -96,7 +96,7 @@ public extension Store {
                     
                     managedObject.descriptionText = description
                     
-                    managedObject.updatedDate = Foundation.Date()
+                    managedObject.updatedDate = Date()
                     
                     managedObject.didCache()
                     

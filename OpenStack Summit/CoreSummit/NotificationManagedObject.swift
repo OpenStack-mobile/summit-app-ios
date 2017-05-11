@@ -12,7 +12,7 @@ import Foundation
 
 public final class NotificationManagedObject: Entity {
     
-    @NSManaged public var created: Foundation.Date
+    @NSManaged public var created: Date
     
     @NSManaged public var body: String
     
@@ -33,11 +33,11 @@ extension Notification: CoreDataDecodable {
         
         self.identifier = managedObject.id
         self.body = managedObject.body
-        self.created = Date(foundation: managedObject.created)
+        self.created = managedObject.created
         self.from = Topic(rawValue: managedObject.from)!
         self.channel = Channel(rawValue: managedObject.channel)!
-        self.summit = managedObject.summit.identifier
-        self.event = managedObject.event?.identifier
+        self.summit = managedObject.summit.id
+        self.event = managedObject.event?.id
     }
 }
 

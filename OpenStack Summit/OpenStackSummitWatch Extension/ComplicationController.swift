@@ -62,14 +62,14 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let entry = self.entry(for: Date())
         
-        let date: Foundation.Date
+        let date: Date
         
         switch entry {
             
         case .none:
             
             // Update hourly by default
-            date = Foundation.Date(timeIntervalSinceNow: 60*60)
+            date = Date(timeIntervalSinceNow: 60*60)
             
         case let .multiple(_, _, end, _):
             
@@ -101,7 +101,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         
         let template = self.template(for: complication, with: entry)
         
-        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start? ?? Foundation.Date(), complicationTemplate: template)
+        let complicationEntry = CLKComplicationTimelineEntry(date: entry.start? ?? Date(), complicationTemplate: template)
         
         handler(complicationEntry)
     }
@@ -111,7 +111,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        let date = Date(foundation: beforeDate)
+        let date = beforeDate
         
         let dates = summit.dates(before: date, limit: limit)
         
@@ -131,7 +131,7 @@ final class ComplicationController: NSObject, CLKComplicationDataSource {
         guard let summit = Store.shared.cache
             else { handler(nil); return }
         
-        let date = Date(foundation: afterDate)
+        let date = afterDate
         
         let dates = summit.dates(after: date, limit: limit)
         
