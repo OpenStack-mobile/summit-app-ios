@@ -120,6 +120,12 @@ public extension NSManagedObjectContext {
         return (try self.fetch(fetchRequest) as! [NSNumber]).first!.intValue
     }
     
+    @inline(__always)
+    func count<ManagedObject: NSManagedObject>(managedObjectType: ManagedObject.Type, predicate: CoreSummit.Predicate) throws -> Int {
+        
+        return try count(managedObjectType, predicate: predicate.toFoundation())
+    }
+    
     /// Save and attempt to recover from validation errors
     func validateAndSave(_ fileName: String = #file, _ lineNumber: Int = #line) throws {
         

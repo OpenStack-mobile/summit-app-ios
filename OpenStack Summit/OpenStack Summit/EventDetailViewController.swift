@@ -235,12 +235,16 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
         titleHeader.trackLabel.textColor = UIColor(hexString: eventDetail.trackGroupColor) ?? .white
         titleHeader.trackLabel.isHidden = eventDetail.track.isEmpty
         
+        titleHeader.scheduleButton.setTitle(eventDetail.rsvp.isEmpty ? "Schedule" : "RSVP", forState: .Normal)
+        
         let didConfirm = Store.shared.isEventScheduledByLoggedMember(event: event)
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event) ?? false
         
         titleHeader.scheduleButton.highlighted = didConfirm
         titleHeader.favoriteButton.highlighted = isFavorite
         
+        titleHeader.favoriteButton.hidden = !eventDetail.willRecord
+
         // action buttons
         
         // get all reviews for this event
@@ -520,6 +524,9 @@ final class EventDetailViewController: UITableViewController, EventViewControlle
                 
                 let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.eventDetailDownloadAttachmentTableViewCell, forIndexPath: indexPath)!
                 
+                let title = eventDetail.eventType == "Presentation" ? "Download slides" : "Download attachment"
+                cell.downloadButton.setTitle(title, forState: .Normal)
+                
                 return cell
             }
             
@@ -776,6 +783,11 @@ final class EventDetailTableViewCell: UITableViewCell {
     @IBOutlet fileprivate(set) weak var sectionLabel: UILabel!
     
     @IBOutlet fileprivate(set) weak var valueLabel: UILabel!
+}
+
+final class EventDetailDownloadAttachmentTableViewCell: UITableViewCell {
+    
+    @IBOutlet private(set) weak var downloadButton: UIButton!
 }
 
 final class EventDetailFeedbackTableViewCell: UITableViewCell {

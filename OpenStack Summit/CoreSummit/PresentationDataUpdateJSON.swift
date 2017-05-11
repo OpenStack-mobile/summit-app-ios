@@ -36,7 +36,7 @@ extension Presentation.DataUpdate: JSONDecodable {
         
         if let levelString = JSONObject[JSONKey.level.rawValue]?.rawValue as? String {
             
-            guard let level = Presentation.Level(rawValue: levelString)
+            guard let level = Level(rawValue: levelString)
                 else { return nil }
             
             self.level = level

@@ -12,7 +12,7 @@ public extension Video {
     
     enum JSONKey: String {
         
-        case id, name, description, display_on_site, featured, presentation_id, youtube_id
+        case id, name, description, display_on_site, featured, presentation_id, youtube_id, data_uploaded, highlighted, views, order
     }
 }
 
@@ -30,11 +30,17 @@ extension Video: JSONDecodable {
             else { return nil }
         
         self.identifier = identifier
-        self.name = name
         self.featured = featured
         self.displayOnSite = displayOnSite
-        //self.presentation = presentation
+        self.event = presentation
         self.youtube = youtube
+        self.dataUploaded = Date(timeIntervalSince1970: TimeInterval(dataUploaded))
+        self.highlighted = highlighted
+        self.views = views
+        self.order = order
+        
+        // optional
+        self.name = JSONObject[JSONKey.name.rawValue]?.rawValue as? String ?? ""
         
         if let descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String,
             descriptionText.isEmpty == false {

@@ -9,9 +9,6 @@
 /// Provides the storage for session values
 public protocol SessionStorage {
     
-    /// The name of the authenticated user.
-    var name: String? { get set }
-    
     /// The authenticated member.
     var member: Identifier?  { get set }
     
@@ -24,7 +21,6 @@ public extension SessionStorage {
     /// Resets the session storage.
     mutating func clear() {
         
-        self.name = nil
         self.member = nil
     }
 }
@@ -80,7 +76,6 @@ public final class UserDefaultsSessionStorage: SessionStorage {
     fileprivate enum Key: String {
         
         case member = "CoreSummit.UserDefaultsSessionStorage.Key.Member"
-        case name = "CoreSummit.UserDefaultsSessionStorage.Key.Name"
         case hadPasscode = "CoreSummit.UserDefaultsSessionStorage.Key.HadPasscode"
     }
 }

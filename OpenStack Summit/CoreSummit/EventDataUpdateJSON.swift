@@ -60,6 +60,7 @@ extension Event.DataUpdate: JSONDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
         
         if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue,
             track > 0 {
@@ -93,18 +94,23 @@ extension Event.DataUpdate: JSONDecodable {
             self.videos = []
         }
         
-        if let attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String {
+        if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            self.attachment = attachment
+            guard let slides = Slide.fromJSON(slidesJSONArray)
+                else { return nil }
+            
+            self.slides = Set(slides)
+            
+        } else {
             
         } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
             let slides = String.from(json: slidesJSONArray) {
             
-            self.attachment = slides.first
+            self.links = Set(links)
             
         } else {
             
-            self.attachment = nil
+            self.links = []
         }
     }
 }

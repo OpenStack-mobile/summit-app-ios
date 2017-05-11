@@ -17,19 +17,6 @@ public struct Presentation: Unique, Equatable {
     public var speakers: Set<Identifier>
 }
 
-// MARK: - Supporting Types
-
-public extension Presentation {
-    
-    public enum Level: String {
-        
-        case Beginner
-        case Intermediate
-        case Advanced
-        case NotApplicable = "N/A"
-    }
-}
-
 // MARK: - Equatable
 
 public func == (lhs: Presentation, rhs: Presentation) -> Bool {

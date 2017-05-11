@@ -117,7 +117,7 @@ final class StoreTests: XCTestCase {
                 
             case let .value(value):
                 
-                XCTAssert(value.isEmpty == false)
+                break
             }
             
             expectation.fulfill()

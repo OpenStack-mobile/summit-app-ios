@@ -94,9 +94,11 @@ struct ScheduleFilter: Equatable {
         // fetch data
         let trackGroups = try! TrackGroup.scheduled(for: summitID, context: context)
         let levels = try! Set(context.managedObjects(PresentationManagedObject.self, predicate: "event.summit.id" == summitID)
-            .map({ $0.level ?? "" }))
-            .filter({ $0 != "" })
-            .sort()
+            .flatMap { $0.level })
+            .flatMap { Level(rawValue: $0) }
+            .sort { (lhs: Level, rhs: Level) -> Bool in lhs < rhs }
+            .map { $0.rawValue }
+        
         let venues = try! context.managedObjects(Venue.self, predicate: NSPredicate(format: "summit == %@", summit), sortDescriptors: VenueManagedObject.sortDescriptors)
         
         // populate filter categories

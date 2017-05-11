@@ -12,7 +12,7 @@ internal extension Event {
     
     enum JSONKey: String {
         
-        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups, rsvp_external, to_record, attachment, slides
+        case id, summit_id, title, description, social_description, start_date, end_date, allow_feedback, avg_feedback_rate, type_id, type, sponsors, speakers, location_id, location, tags, track_id, track, videos, rsvp_link, groups, rsvp_external, to_record, attachment, slides, links
     }
 }
 
@@ -65,6 +65,7 @@ public extension Event {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
         
         if let track = JSONObject[JSONKey.track_id.rawValue]?.integerValue,
             track > 0 {
@@ -98,18 +99,23 @@ public extension Event {
             self.videos = []
         }
         
-        if let attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String {
+        if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            self.attachment = attachment
+            guard let slides = Slide.fromJSON(slidesJSONArray)
+                else { return nil }
+            
+            self.slides = Set(slides)
+            
+        } else {
             
         } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
             let slides = String.from(json: slidesJSONArray) {
             
-            self.attachment = slides.first
+            self.links = Set(links)
             
         } else {
             
-            self.attachment = nil
+            self.links = []
         }
         
         // should never come in this JSON response
@@ -173,6 +179,7 @@ extension MemberResponse.Event: JSONDecodable {
         self.descriptionText = JSONObject[JSONKey.description.rawValue]?.rawValue as? String
         self.socialDescription = JSONObject[JSONKey.social_description.rawValue]?.rawValue as? String
         self.rsvp = JSONObject[JSONKey.rsvp_link.rawValue]?.rawValue as? String
+        self.attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String
         
         if let trackJSON = JSONObject[JSONKey.track.rawValue] {
             
@@ -210,18 +217,23 @@ extension MemberResponse.Event: JSONDecodable {
             self.videos = []
         }
         
-        if let attachment = JSONObject[JSONKey.attachment.rawValue]?.rawValue as? String {
+        if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue {
             
-            self.attachment = attachment
+            guard let slides = Slide.fromJSON(slidesJSONArray)
+                else { return nil }
+            
+            self.slides = slides
+            
+        } else {
             
         } else if let slidesJSONArray = JSONObject[JSONKey.slides.rawValue]?.arrayValue,
             let slides = String.from(json: slidesJSONArray) {
             
-            self.attachment = slides.first
+            self.links = links
             
         } else {
             
-            self.attachment = nil
+            self.links = []
         }
     }
 }

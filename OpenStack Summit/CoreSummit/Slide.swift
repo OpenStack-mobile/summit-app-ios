@@ -1,14 +1,12 @@
 //
-//  Video.swift
+//  Slide.swift
 //  OpenStack Summit
 //
-//  Created by Alsey Coleman Miller on 8/16/16.
-//  Copyright © 2016 OpenStack. All rights reserved.
+//  Created by Gabriel Horacio Cutrini on 4/28/17.
+//  Copyright © 2017 OpenStack. All rights reserved.
 //
 
-import struct SwiftFoundation.Date
-
-public struct Video: PresentationMaterial {
+public struct Slide: PresentationMaterial {
     
     public let identifier: Identifier
     
@@ -20,32 +18,23 @@ public struct Video: PresentationMaterial {
     
     public var featured: Bool
     
-    public var highlighted: Bool
-        
-    public var youtube: String
-    
-    public var dataUploaded: Date
-    
     public var order: Int
     
-    public var views: Int
+    public var link: String
     
     public var event: Identifier
 }
 
 // MARK: - Equatable
 
-public func == (lhs: Video, rhs: Video) -> Bool {
+public func == (lhs: Slide, rhs: Slide) -> Bool {
     
     return lhs.identifier == rhs.identifier
         && lhs.name == rhs.name
         && lhs.descriptionText == rhs.descriptionText
         && lhs.displayOnSite == rhs.displayOnSite
         && lhs.featured == rhs.featured
-        && lhs.youtube == rhs.youtube
-        && lhs.highlighted == rhs.highlighted
-        && lhs.dataUploaded == rhs.dataUploaded
         && lhs.order == rhs.order
-        && lhs.views == rhs.views
+        && lhs.link == rhs.link
         && lhs.event == rhs.event
 }

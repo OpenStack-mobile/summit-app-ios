@@ -46,7 +46,8 @@ final class FavoriteEventsViewController: ScheduleViewController, IndicatorInfoP
     
     override func scheduledEvents(_ filter: DateFilter) -> [ScheduleItem] {
         
-        guard let member = Store.shared.authenticatedMember
+        guard let member = Store.shared.authenticatedMember,
+            case .interval(let interval) = filter
             else { return [] }
         
         let events = member.favoriteEvents

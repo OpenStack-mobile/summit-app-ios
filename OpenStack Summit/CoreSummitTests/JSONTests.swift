@@ -269,4 +269,48 @@ final class JSONTests: XCTestCase {
             let _ = TrackGroup.DataUpdate(json: .object(entityJSON))
             else { XCTFail("Could not decode from JSON"); return }
     }
+    
+    func testDataUpdates13() {
+        
+        let testJSON = loadJSON("DataUpdates13")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = Video(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates14() {
+        
+        let testJSON = loadJSON("DataUpdates14")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = Slide(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates15() {
+        
+        let testJSON = loadJSON("DataUpdates15")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = Link(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
+    
+    func testDataUpdates16() {
+        
+        let testJSON = loadJSON("DataUpdates16")
+        
+        guard let dataUpdate = DataUpdate(JSONValue: testJSON),
+            let dataUpdateEntity = dataUpdate.entity,
+            case let .JSON(entityJSON) = dataUpdateEntity,
+            let _ = EventDataUpdate(JSONValue: .Object(entityJSON))
+            else { XCTFail("Could not decode from JSON"); return }
+    }
 }

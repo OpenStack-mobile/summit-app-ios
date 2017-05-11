@@ -1,0 +1,148 @@
+{
+	"id": 742717,
+	"entity_id": 17459,
+	"class_name": "Presentation",
+	"created": 1493977032,
+	"type": "UPDATE",
+	"entity": {
+		"id": 17459,
+		"title": "Pushing the Boundaries of OpenStack – Wait, what are they again?",
+		"description": "<p>Have you ever been curious as to how much of a workload the OpenStack control plane can handle before needing to scale horizontally?  Based on the load how will the API performance adjust?  How much overhead will load on the OpenStack API’s add to my application deployment timeline?  What behavior should I look for to determine its time to add more control plane resources?</p>\n<p><span style=\"font-size: 12.0pt;\">These are just a few questions I have been asked and/or have come to my mind while operating OpenStack clouds.  While performing API benchmarking can be measured in so many different ways, it does feel like a good idea to have some high level frame of reference.  I will start off stating that there are about a million ways to measure performance.  Your approach may differ from what I have done and that is actually expected.  The tests conducted are meant to provide a starting reference for you to possibly build upon</span>.</p>\n<p> </p>\n<p>Test</p>",
+		"social_description": "Test the boundaries of OpenStack by conducting a series of test against the OpenStack API's.",
+		"start_date": 1494526800,
+		"end_date": 1494529200,
+		"location_id": 260,
+		"summit_id": 22,
+		"type_id": 101,
+		"class_name": "Presentation",
+		"allow_feedback": true,
+		"avg_feedback_rate": 0,
+		"is_published": true,
+		"head_count": 0,
+		"rsvp_link": null,
+		"rsvp_external": false,
+		"track_id": 113,
+		"level": "Intermediate",
+		"moderator_speaker_id": 0,
+		"problem_addressed": null,
+		"attendees_expected_learnt": "<ul><li>Learn how to create OpenStack API test scripts</li>\n<li>Determined what metrics matter the most</li>\n<li>Possible tools you can use to run your tests</li>\n<li>Finally share my results from the tests run earlier</li>\n</ul>",
+		"to_record": false,
+		"sponsors": [
+
+		],
+		"tags": [
+			{
+				"id": 3353,
+				"tag": "Architect"
+			},
+			{
+				"id": 12,
+				"tag": "Enterprise"
+			},
+			{
+				"id": 976,
+				"tag": "Ops"
+			},
+			{
+				"id": 1339,
+				"tag": "infra"
+			},
+			{
+				"id": 1069,
+				"tag": "operator"
+			}
+		],
+		"speakers": [
+			{
+				"id": 513,
+				"first_name": "Walter",
+				"last_name": "Bentley",
+				"title": "Senior Technical Marketing Engineer",
+				"bio": "<p><span style=\"font-family: 'Helvetica Neue'; font-size: 14px;\">Walter Bentley is a Rackspace Private Cloud Technical Marketing Engineer and author with a diverse background in production systems administration and solutions architecture. He has more than 15 years of experience in sectors such as online marketing, financial, insurance, aviation, the food industry, education and now in technology. In the past, he was typically the requestor, consumer and advisor to companies tin the use of technologies such as OpenStack. Today he&rsquo;s an OpenStack promoter and cloud educator. In his current role, Walter helps customers build, design and deploy private clouds built on OpenStack. That includes professional services engagements around operating OpenStack clouds and DevOps engagements creating playbooks/roles with Ansible. He presents and speaks regularly at OpenStack Summits, AnsibleFest and other technology conferences, plus webinars, blog posts and technical reviews. His first book, &lsquo;OpenStack Administration with Ansible&rsquo; was released in 2016.</span></p>",
+				"irc": null,
+				"twitter": "djstayflypro",
+				"presentations": {
+					"7": 7062,
+					"8": 7069,
+					"10": 10869,
+					"11": 14651,
+					"12": 14888,
+					"13": 15185,
+					"14": 15188,
+					"15": 15427,
+					"16": 17459,
+					"17": 17471,
+					"18": 17612
+				},
+				"moderated_presentations": [
+
+				],
+				"pic": "https://www.openstack.org/profile_images/speakers/513",
+				"gender": "Male",
+				"member_id": 20015,
+				"affiliations": [
+					{
+						"id": 64482,
+						"start_date": 1404172800,
+						"end_date": null,
+						"owner_id": 20015,
+						"is_current": true,
+						"organization": {
+							"id": 1,
+							"name": "Rackspace"
+						}
+					}
+				]
+			}
+		],
+		"slides": [
+			{
+				"id": 36849,
+				"name": "Slide 1",
+				"description": "<p>Have you ever been curious as to how much of a workload the OpenStack control plane can handle before needing to scale horizontally?  Based on the load how will the API performance adjust?  How much overhead will load on the OpenStack API’s add to my application deployment timeline?  What behavior should I look for to determine its time to add more control plane resources?</p>\n<p><span style=\"font-size: 12.0pt;\">These are just a few questions I have been asked and/or have come to my mind while operating OpenStack clouds.  While performing API benchmarking can be measured in so many different ways, it does feel like a good idea to have some high level frame of reference.  I will start off stating that there are about a million ways to measure performance.  Your approach may differ from what I have done and that is actually expected.  The tests conducted are meant to provide a starting reference for you to possibly build upon</span>.</p>",
+				"display_on_site": false,
+				"featured": false,
+				"order": 3,
+				"presentation_id": 17459,
+				"link": "colemancda.github.io"
+			}
+		],
+		"links": [
+			{
+				"id": 33694,
+				"name": "Blog entry",
+				"description": null,
+				"display_on_site": true,
+				"featured": false,
+				"order": 1,
+				"presentation_id": 17459,
+				"link": "https://osic.org/blogs/pushing-boundaries-openstack-%E2%80%93-wait-what-are-they-again"
+			},
+			{
+				"id": 33695,
+				"name": "http://blog.rackspace.com/openstack-api-benchmarking-and-scaling-3-test-cases",
+				"description": null,
+				"display_on_site": false,
+				"featured": false,
+				"order": 2,
+				"presentation_id": 17459,
+				"link": "http://blog.rackspace.com/openstack-api-benchmarking-and-scaling-3-test-cases"
+			}
+		],
+		"videos": [
+			{
+				"id": 36850,
+				"name": "Test video",
+				"description": "<p>Have you ever been curious as to how much of a workload the OpenStack control plane can handle before needing to scale horizontally?  Based on the load how will the API performance adjust?  How much overhead will load on the OpenStack API’s add to my application deployment timeline?  What behavior should I look for to determine its time to add more control plane resources?</p>\n<p><span style=\"font-size: 12.0pt;\">These are just a few questions I have been asked and/or have come to my mind while operating OpenStack clouds.  While performing API benchmarking can be measured in so many different ways, it does feel like a good idea to have some high level frame of reference.  I will start off stating that there are about a million ways to measure performance.  Your approach may differ from what I have done and that is actually expected.  The tests conducted are meant to provide a starting reference for you to possibly build upon</span>.</p>",
+				"display_on_site": true,
+				"featured": true,
+				"order": 4,
+				"presentation_id": 17459,
+				"youtube_id": "2S5W0ZGfYek",
+				"data_uploaded": 1493993083,
+				"highlighted": true,
+				"views": 0
+			}
+		]
+	}
+}

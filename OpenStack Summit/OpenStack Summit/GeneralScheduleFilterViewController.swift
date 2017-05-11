@@ -110,13 +110,6 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             filters.append(Section(category: .activeTalks, items: items))
         }
         
-        if let levelsSection = scheduleFilter.allFilters[.level] {
-            
-            let items = levelsSection.map { Item(filter: $0, enabled: scheduleFilter.activeFilters.contains($0), name: name(for: $0), color: nil) }
-            
-            filters.append(Section(category: .level, items: items))
-        }
-        
         if let trackGroupsSection = scheduleFilter.allFilters[.trackGroup] {
             
             // fetch from CoreData because it caches fetch request results and is more efficient
@@ -129,6 +122,13 @@ final class GeneralScheduleFilterViewController: UITableViewController {
             let items = trackGroups.map { Item(filter: .trackGroup($0.identifier), enabled: scheduleFilter.activeFilters.contains(.trackGroup($0.identifier)), name: $0.name, color: $0.color) }
             
             filters.append(Section(category: .trackGroup, items: items))
+        }
+        
+        if let levelsSection = scheduleFilter.allFilters[.level] {
+            
+            let items = levelsSection.map { Item(filter: $0, enabled: scheduleFilter.activeFilters.contains($0), name: name(for: $0), color: nil) }
+            
+            filters.append(Section(category: .level, items: items))
         }
         
         if let venuesSection = scheduleFilter.allFilters[.venue] {

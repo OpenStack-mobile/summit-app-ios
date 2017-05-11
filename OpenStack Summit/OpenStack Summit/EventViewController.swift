@@ -25,8 +25,7 @@ extension EventViewController {
     func canAddFeedback(for event: EventDetail) -> Bool {
         
         // Can give feedback after event started
-        return Store.shared.isLoggedIn
-            && event.allowFeedback
+        return event.allowFeedback
             && event.start < Date()
     }
     
@@ -50,7 +49,7 @@ extension EventViewController {
         
         var actions: [ContextMenu.Action] = []
         
-        if canAddFeedback(for: event) {
+        if Store.shared.isLoggedIn && canAddFeedback(for: event) {
             
             let rate = ContextMenu.Action(activityType: "Event.Rate", image: { R.image.contextMenuRate()! }, title: "Rate", handler: .modal({ [weak self] (didComplete) -> UIViewController in
                 
@@ -66,7 +65,12 @@ extension EventViewController {
             
             let newValue = scheduled == false
             
-            let title = newValue ? "Schedule" : "Unschedule"
+            var title = newValue ? "Schedule" : "Unschedule"
+            
+            if !event.rsvp.isEmpty {
+                
+                title = newValue ? "RSVP" : "unRSVP"
+            }
             
             let image = newValue ? R.image.contextMenuScheduleAdd()! : R.image.contextMenuScheduleRemove()!
             
@@ -84,7 +88,7 @@ extension EventViewController {
         
         let isFavorite = Store.shared.authenticatedMember?.isFavorite(event: event.identifier) ?? false
         
-        if Store.shared.isLoggedIn && eventRequestInProgress == false {
+        if Store.shared.isLoggedIn && event.willRecord && eventRequestInProgress == false {
             
             let newValue = isFavorite == false
             

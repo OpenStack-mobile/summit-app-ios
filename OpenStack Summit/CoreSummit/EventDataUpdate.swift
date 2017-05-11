@@ -69,4 +69,7 @@ public func == (lhs: Event.DataUpdate, rhs: Event.DataUpdate) -> Bool {
         && lhs.presentation == rhs.presentation
         && lhs.videos == rhs.videos
         && lhs.rsvp == rhs.rsvp
+        && lhs.attachment == rhs.attachment
+        && lhs.slides == rhs.slides
+        && lhs.links == rhs.links
 }
