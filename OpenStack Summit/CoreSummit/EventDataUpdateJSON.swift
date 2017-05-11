@@ -47,7 +47,7 @@ extension Event.DataUpdate: JSONDecodable {
             
             self.averageFeedback = doubleValue
             
-        } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+        } else if let integerValue = averageFeedbackJSON.integerValue {
             
             self.averageFeedback = Double(integerValue)
             

@@ -77,7 +77,7 @@ public extension Store {
                 
                 averageFeedback = doubleValue
                 
-            } else if let integerValue = averageFeedbackJSON.rawValue as? Int {
+            } else if let integerValue = averageFeedbackJSON.integerValue {
                 
                 averageFeedback = Double(integerValue)
                 
