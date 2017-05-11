@@ -335,7 +335,7 @@ final class MenuViewController: UIViewController, UITextFieldDelegate, ActivityV
         show(teamsViewController)
     }
         
-    fileprivate func showMyProfile() {
+    private func showMyProfile() {
         
         guard Store.shared.isLoggedIn else { return }
         

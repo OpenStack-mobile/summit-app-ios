@@ -300,44 +300,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, SummitActivityHandl
     
     // MARK: - SummitActivityHandling
     
-    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+    func view(data: AppActivitySummitDataType, identifier: Identifier)  {
         
         guard let topViewController = (self.window?.rootViewController as? UINavigationController)?.topViewController as? SummitActivityHandlingViewController
             else { fatalError("Visible view controller doesn't support deep linking") }
         
-        switch data {
-            
-        case .event:
-            
-            self.menuViewController.showEvents()
-            
-            let _ = self.menuViewController.generalScheduleViewController.view
-            
-            let eventDetailVC = R.storyboard.event.eventDetailViewController()!
-            eventDetailVC.event = identifier
-            self.menuViewController.generalScheduleViewController.show(eventDetailVC, sender: nil)
-            
-        case .speaker:
-            
-            self.menuViewController.showSpeakers()
-            
-            let memberProfileVC = MemberProfileViewController(profile: .speaker(identifier))
-            self.menuViewController.speakersViewController.showViewController(memberProfileVC, sender: nil)
-            
-        case .video:
-            
-            let video = Video(managedObject: managedObject as! VideoManagedObject)
-            
-            self.window?.rootViewController?.playVideo(video)
-            
-        case .venue, .venueRoom:
-            
-            self.menuViewController.showVenues()
-            
-            self.menuViewController.venuesViewController.showLocationDetail(identifier)
-        }
-        
-        return true
+        return topViewController.view(data, identifier: identifier)
     }
     
     func view(_ screen: AppActivityScreen) {

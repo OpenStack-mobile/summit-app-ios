@@ -11,9 +11,9 @@ import CoreSummit
 
 protocol SummitActivityHandling {
     
-    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool
+    func view(data: AppActivitySummitDataType, identifier: Identifier)
     
-    func view(_ screen: AppActivityScreen)
+    func view(screen: AppActivityScreen)
     
     func search(_ searchTerm: String)
 }
@@ -96,14 +96,28 @@ protocol SummitActivityHandlingViewController: class, SummitActivityHandling { }
 
 extension SummitActivityHandlingViewController {
     
-    func showViewController(_ vc: UIViewController, sender: AnyObject?)
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        guard let viewController = self as? UIViewController
+            else { fatalError() }
+        
+        viewController.show(data, identifier: identifier)
+    }
     
-    func playVideo(_ video: Video)
+    func view(screen: AppActivityScreen) {
+        
+        AppDelegate.shared.view(screen)
+    }
     
-    func showLocationDetail(_ location: Identifier)
+    func search(searchTerm: String) {
+        
+        AppDelegate.shared.search(searchTerm)
+    }
 }
     
-    func view(_ data: AppActivitySummitDataType, identifier: Identifier) -> Bool  {
+extension UIViewController {
+    
+    func show(data: AppActivitySummitDataType, identifier: Identifier) {
         
         let context = Store.shared.managedObjectContext
         
@@ -132,8 +146,6 @@ extension SummitActivityHandlingViewController {
             
             self.showLocationDetail(identifier)
         }
-        
-        return true
     }
     
     func view(_ screen: AppActivityScreen) {

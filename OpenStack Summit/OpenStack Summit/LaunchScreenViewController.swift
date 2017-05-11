@@ -32,17 +32,17 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
     
     // MARK: - Properties
     
-    fileprivate(set) var willTransition = false  {
+    private var willTransition = false  {
         
         didSet { configureView() }
     }
     
-    fileprivate var state: State = .loadingSummits {
+    private var state: State = .loadingSummits {
         
         didSet { configureView() }
     }
     
-    fileprivate var summit: SummitsResponse.Summit?
+    private var summit: SummitsResponse.Summit?
     
     // MARK: - Loading
     
@@ -76,7 +76,16 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override var preferredStatusBarStyle : UIStatusBarStyle {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Store.shared.isLoggedIn {
+            
+            showRevealController()
+        }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
         
         return .lightContent
     }
@@ -166,49 +175,19 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    func showRevealController(_ sender: AnyObject? = nil, completion: (() -> ())? = nil) {
+    private func showRevealController(sender: AnyObject? = nil, completion: ((MainRevealViewController) -> ())? = nil) {
         
         self.willTransition = true
         
-        // load summit
-        if isDataLoaded == false {
-            
-            /*
-            let summit = SummitManager.shared.summit.value
-            
-            self.showActivityIndicator()
-            
-            Store.shared.summit(summit) { [weak self] (response) in
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    
-                    guard let controller = self else { return }
-                    
-                    controller.dismissActivityIndicator()
-                    
-                    switch response {
-                        
-                    case let .error(error):
-                        
-                        controller.showErrorMessage(error)
-                        
-                    case .Value:
-                        
-                        controller.showRevealController(sender, completion: completion)
-                    }
-                }
-            }
-            
-            return */
-        }
+        let revealViewController = MainRevealViewController()
         
-        let revealViewController = AppDelegate.shared.revealViewController
+        self.showViewController(revealViewController, sender: sender)
         
-        self.show(revealViewController, sender: sender)
+        self.willTransition = false;
         
-        let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
         
-        DispatchQueue.main.asyncAfter(deadline: delayTime) { self.willTransition = false; completion?() }
+        dispatch_after(delayTime, dispatch_get_main_queue()) { completion?(revealViewController) }
     }
     
     fileprivate func loadSummits() {
@@ -301,7 +280,26 @@ final class LaunchScreenViewController: UIViewController, MessageEnabledViewCont
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // MARK: - SummitActivityHandlingViewController
+    
+    func view(data: AppActivitySummitDataType, identifier: Identifier) {
+        
+        showRevealController(self) { $0.view(data, identifier: identifier) }
+    }
+    
+    func view(screen: AppActivityScreen) {
+        
+        showRevealController(self) { $0.view(screen) }
+    }
+    
+    func search(searchTerm: String) {
+        
+        showRevealController(self) { $0.search(searchTerm) }
+    }
+    
+    // MARK: - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         switch segue.identifier! {
             
